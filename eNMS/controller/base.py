@@ -406,7 +406,8 @@ class BaseController:
     def count_models(self):
         return {
             "counters": {
-                instance_type: count(instance_type) for instance_type in dashboard_properties
+                instance_type: count(instance_type)
+                for instance_type in dashboard_properties
             },
             "properties": {
                 instance_type: Counter(

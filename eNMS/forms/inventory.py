@@ -14,7 +14,6 @@ from eNMS.forms import BaseForm, configure_relationships
 from eNMS.forms.fields import MultipleInstanceField
 from eNMS.properties import private_properties
 from eNMS.properties.objects import (
-    device_icons,
     pool_link_properties,
     pool_device_properties,
 )
@@ -80,7 +79,19 @@ class DeviceForm(ObjectForm):
     template = "object"
     form_type = HiddenField(default="device")
     id = HiddenField()
-    icon = SelectField("Icon", choices=tuple(device_icons.items()))
+    icon = SelectField(
+        "Icon",
+        choices=(
+            ("antenna", "Antenna"),
+            ("firewall", "Firewall"),
+            ("host", "Host"),
+            ("optical_switch", "Optical switch"),
+            ("regenerator", "Regenerator"),
+            ("router", "Router"),
+            ("server", "Server"),
+            ("switch", "Switch"),
+        ),
+    )
     ip_address = StringField("IP address")
     port = IntegerField("Port", default=22)
     operating_system = StringField("Operating System")

@@ -13,6 +13,17 @@
     },
     "subtype": {
       "visible": false
+    },
+    "property1": {
+      "data": "property1",
+      "title": "Property 1",
+      "search": "text",
+      "visible": false
+    },
+    "property2": {
+      "data": "property2",
+      "title": "Property 2",
+      "visible": false
     }
   },
   "link": {

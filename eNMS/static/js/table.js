@@ -21,12 +21,20 @@ let waitForSearch = false;
 
 export function initTable(type, instance, runtime, id) {
   let columns = models[type].columns;
-  columns.forEach((property) => {
-    if (tableProperties[type]) {
-      Object.assign(property, tableProperties[type][property.data] || {});
-    }
-    property.name = property.data;
+  let ColumnsIndex = {};
+  columns.forEach((column, i) => {
+    ColumnsIndex[column.data] = i;
   });
+  if (tableProperties[type]) {
+    for (let [property, values] of Object.entries(tableProperties[type])) {
+      if (property in ColumnsIndex) {
+        Object.assign(columns[ColumnsIndex[property]], values);
+      } else {
+        columns.splice(-1, 0, values);
+      }
+    }
+  }
+  columns.forEach((column) => column.name = column.data);
   // eslint-disable-next-line new-cap
   tables[type] = $(id ? `#${id}` : "#table").DataTable({
     serverSide: true,

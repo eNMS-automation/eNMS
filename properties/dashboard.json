@@ -6,7 +6,9 @@
      "icon",
      "operating_system",
      "os_version",
-     "port"
+     "port",
+     "property1",
+     "property2"
   ],
   "link":[ 
      "model",

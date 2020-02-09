@@ -2,10 +2,6 @@ from werkzeug.datastructures import ImmutableMultiDict
 
 from eNMS import app
 from eNMS.database.functions import delete_all, fetch, fetch_all
-from eNMS.properties.objects import (
-    pool_link_properties,
-    pool_device_properties,
-)
 
 from tests.conftest import check_pages
 

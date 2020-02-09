@@ -20,7 +20,6 @@ export const models = {};
 let waitForSearch = false;
 
 export function initTable(type, instance, runtime, id) {
-  console.log(type, instance, runtime, id)
   // eslint-disable-next-line new-cap
   let columns = models[type].columns;
   columns.forEach((property) => {
@@ -395,26 +394,28 @@ models.configuration = class Configuration extends models.device {
   static get columns() {
     let columns = super.columns;
     columns.pop();
-    columns.forEach((column) => column.visible = column.data === "name");
-    columns.push(...[
-      {
-        data: "configuration",
-        title: "Configuration",
-        search: "text",
-        width: "80%",
-      },
-      {
-        data: "operational_data",
-        title: "Operational Data",
-        search: "text",
-        width: "80%",
-        visible: false,
-      },
-      {
-        data: "buttons",
-        width: "90px",
-      }
-    ]);
+    columns.forEach((column) => (column.visible = column.data === "name"));
+    columns.push(
+      ...[
+        {
+          data: "configuration",
+          title: "Configuration",
+          search: "text",
+          width: "80%",
+        },
+        {
+          data: "operational_data",
+          title: "Operational Data",
+          search: "text",
+          width: "80%",
+          visible: false,
+        },
+        {
+          data: "buttons",
+          width: "90px",
+        },
+      ]
+    );
     return columns;
   }
 

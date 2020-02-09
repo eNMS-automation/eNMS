@@ -8,7 +8,14 @@ viewType: false
 vis: false
 */
 
-import { call, configureNamespace, notify, serializeForm, showTypePanel, openPanel } from "./base.js";
+import {
+  call,
+  configureNamespace,
+  notify,
+  serializeForm,
+  showTypePanel,
+  openPanel,
+} from "./base.js";
 import { showConnectionPanel, showDeviceData } from "./inventory.js";
 import { initTable } from "./table.js";
 

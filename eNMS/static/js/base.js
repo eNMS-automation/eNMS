@@ -195,7 +195,16 @@ export function createTooltips() {
   });
 }
 
-export function openPanel({ name, title, id, callback, type, duplicate, content, size }) {
+export function openPanel({
+  name,
+  title,
+  id,
+  callback,
+  type,
+  duplicate,
+  content,
+  size,
+}) {
   const panelId = id ? `${name}-${id}` : name;
   if ($(`#${panelId}`).length) {
     $(`#${panelId}`).css("zIndex", ++topZ);

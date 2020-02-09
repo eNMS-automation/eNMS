@@ -18,7 +18,7 @@ from eNMS.database import Session
 from eNMS.database.functions import fetch, handle_exception
 from eNMS.forms import form_actions, form_classes, form_postprocessing, form_templates
 from eNMS.forms.administration import LoginForm
-from eNMS.properties.diagram import type_to_diagram_properties
+from eNMS.settings import dashboard_properties
 
 
 blueprint = Blueprint("blueprint", __name__, template_folder="../templates")
@@ -87,7 +87,7 @@ def logout():
 def dashboard():
     return render_template(
         f"dashboard.html",
-        **{"endpoint": "dashboard", "properties": type_to_diagram_properties},
+        **{"endpoint": "dashboard", "properties": dashboard_properties},
     )
 
 

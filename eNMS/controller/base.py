@@ -45,10 +45,6 @@ from eNMS.database.functions import (
 from eNMS.models import models, model_properties, relationships
 from eNMS.properties import private_properties, property_names
 from eNMS.properties.database import import_classes
-from eNMS.properties.diagram import (
-    device_diagram_properties,
-    type_to_diagram_properties,
-)
 from eNMS.properties.objects import (
     device_properties,
     pool_device_properties,
@@ -266,9 +262,6 @@ class BaseController:
         device_properties.extend(list(custom_properties))
         pool_device_properties.extend(list(public_custom_properties))
         model_properties["device"].extend(list(public_custom_properties))
-        device_diagram_properties.extend(
-            list(p for p, v in custom_properties.items() if v["add_to_dashboard"])
-        )
         private_properties.extend(
             list(p for p, v in custom_properties.items() if v.get("private", False))
         )
@@ -417,7 +410,7 @@ class BaseController:
             },
             "properties": {
                 instance_type: Counter(
-                    str(getattr(instance, type_to_diagram_properties[instance_type][0]))
+                    str(getattr(instance, dashboard_properties[instance_type][0]))
                     for instance in fetch_all(instance_type)
                 )
                 for instance_type in dashboard_properties

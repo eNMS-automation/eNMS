@@ -1,7 +1,7 @@
 {% extends "base_site.html" %} {% block stylesheets %} {{ super() }}
 <link href="{{ url_for('static', filename='css/table.css') }}" rel="stylesheet" />
 {% endblock stylesheets %} {% block content %}
-<form id="search-{{ type }}-form" method="post">
+<form id="search-{{ type }}-form">
   <nav
     id="controls-{{ type }}"
     class="navbar navbar-default nav-controls"

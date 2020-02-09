@@ -22,22 +22,6 @@ export let editors = {};
 export let userIsActive = true;
 let topZ = 1000;
 
-const panelSize = {
-  excel_import: "400 150",
-  excel_export: "400 150",
-  git: "900 200",
-  logs: "800 500",
-  pool_objects: "700 550",
-  table: "800 500",
-  service_results: "1200 700",
-  server: "600 250",
-  ssh: "700 200",
-  task: "900 600",
-  user: "600 300",
-  view: "700 300",
-  workflow_results: "1200 700",
-};
-
 export function detectUserInactivity() {
   let timer;
   window.onload = resetTimer;

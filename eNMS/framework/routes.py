@@ -57,7 +57,7 @@ def login():
 def monitor_requests(function):
     @wraps(function)
     def decorated_function(*args, **kwargs):
-        path, method = request.path[1:], request.method
+        path, method = request.path, request.method
         if not current_user.is_authenticated:
             client_address = request.environ.get(
                 "HTTP_X_FORWARDED_FOR", request.environ["REMOTE_ADDR"]
@@ -71,8 +71,7 @@ def monitor_requests(function):
             )
             return redirect(url_for("blueprint.route", page="login"))
         else:
-            endpoint = path if method == "GET" else path.split("/")[0]
-            print(request.path, endpoint, app.rbac["endpoints"][method])
+            endpoint = path if method == "GET" else f"/{path.split('/')[1]}"
             if endpoint not in app.rbac["endpoints"][method]:
                 if method == "GET":
                     return render_template("error.html", error=404), 404

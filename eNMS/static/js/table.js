@@ -110,29 +110,7 @@ export function initTable(type, instance, runtime, id) {
               e.stopPropagation();
             });
           if (data.search == "text") {
-            createTooltip({
-              persistent: true,
-              name: elementId,
-              target: `#${elementId}-search`,
-              container: `.right_column`,
-              position: {
-                my: "center-top",
-                at: "center-bottom",
-              },
-              content: `
-              <div class="modal-body">
-                <select
-                  id="${data.data}_filter"
-                  name="${data.data}_filter"
-                  class="form-control search-select"
-                  style="width: 100%; height: 30px; margin-top: 15px"
-                >
-                  <option value="inclusion">Inclusion</option>
-                  <option value="equality">Equality</option>
-                  <option value="regex">Regular Expression</option>
-                </select>
-              </div>`,
-            });
+
           }
         });
       $(`#controls-${type}`).html(models[type].controls);
@@ -279,6 +257,35 @@ class Base {
     };
   }
 
+  static createfilteringTooltips(type, columns) {
+    columns.forEach((column) => {
+      const elementId = `${type}_filtering-${column.data}`;
+      createTooltip({
+        persistent: true,
+        name: elementId,
+        target: `#${elementId}-search`,
+        container: `.right_column`,
+        position: {
+          my: "center-top",
+          at: "center-bottom",
+        },
+        content: `
+        <div class="modal-body">
+          <select
+            id="${column.data}_filter"
+            name="${column.data}_filter"
+            class="form-control search-select"
+            style="width: 100%; height: 30px; margin-top: 15px"
+          >
+            <option value="inclusion">Inclusion</option>
+            <option value="equality">Equality</option>
+            <option value="regex">Regular Expression</option>
+          </select>
+        </div>`,
+      });
+    })
+  }
+
   static postProcessing(table, columns, type) {
     createTooltip({
       autoshow: true,
@@ -294,6 +301,7 @@ class Base {
       url: `../form/${type}_filtering`,
       title: "Relationship-based Filtering",
     });
+    Base.createfilteringTooltips(type, columns);
     createTooltips();
     columns.forEach((column) => {
       const visible = "visible" in column ? column.visible : true;
@@ -311,6 +319,7 @@ class Base {
         );
       });
       table.ajax.reload(null, false);
+      Base.createfilteringTooltips(type, columns);
     });
     table.columns.adjust();
   }

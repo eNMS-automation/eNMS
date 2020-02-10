@@ -57,6 +57,7 @@ def login():
 def monitor_requests(function):
     @wraps(function)
     def decorated_function(*args, **kwargs):
+        path, method = request.path[1:], request.method
         if not current_user.is_authenticated:
             client_address = request.environ.get(
                 "HTTP_X_FORWARDED_FOR", request.environ["REMOTE_ADDR"]
@@ -70,7 +71,19 @@ def monitor_requests(function):
             )
             return redirect(url_for("blueprint.route", page="login"))
         else:
-            print(request.method, request.path)
+            endpoint = path if method == "GET" else path.split("/")[0]
+            print(request.path, endpoint, app.rbac["endpoints"][method])
+            if endpoint not in app.rbac["endpoints"][method]:
+                if method == "GET":
+                    return render_template("error.html", error=404), 404
+                else:
+                    return jsonify({"alert": "Invalid POST request."})
+            forbidden_endpoints = app.rbac["groups"][current_user.group][method]
+            if any(url == endpoint for url in forbidden_endpoints):
+                if method == "GET":
+                    return render_template("error.html", error=403), 403
+                else:
+                    return jsonify({"alert": "Error 403 Forbidden."})
             return function(*args, **kwargs)
 
     return decorated_function
@@ -166,10 +179,6 @@ def get_requests_sink(_):
 @monitor_requests
 def route(page):
     endpoint, *args = page.split("/")
-    if any(url == endpoint for url in app.rbac["groups"][current_user.group]["POST"]):
-        return jsonify({"alert": "Error 403 Forbidden."})
-    if endpoint not in app.rbac["endpoints"]["POST"]:
-        return jsonify({"alert": "Invalid POST request."})
     form_type = request.form.get("form_type")
     if endpoint in app.json_endpoints:
         result = getattr(app, endpoint)(*args, **request.json)
@@ -177,7 +186,9 @@ def route(page):
         form = form_classes[form_type](request.form)
         if not form.validate_on_submit():
             return jsonify({"invalid_form": True, **{"errors": form.errors}})
-        result = getattr(app, endpoint)(*args, **form_postprocessing(form, request.form))
+        result = getattr(app, endpoint)(
+            *args, **form_postprocessing(form, request.form)
+        )
     else:
         result = getattr(app, endpoint)(*args)
     try:

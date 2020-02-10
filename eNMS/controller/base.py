@@ -157,9 +157,7 @@ class BaseController:
 
     def load_custom_properties(self):
         for model, properties in custom_properties.items():
-            property_names.update(
-                {k: v["pretty_name"] for k, v in properties.items()}
-            )
+            property_names.update({k: v["pretty_name"] for k, v in properties.items()})
             model_properties[model].extend(list(properties))
             private_properties.extend(
                 list(p for p, v in properties.items() if v.get("private", False))

@@ -53,7 +53,7 @@ class AdministrationController(BaseController):
                             "name": name,
                             "password": password,
                             "email": json_response["attributes"].get("mail", ""),
-                            "permissions": ["Admin"],
+                            "group": "Read Only",
                         },
                     )
         elif kwargs["authentication_method"] == "TACACS":

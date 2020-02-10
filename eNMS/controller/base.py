@@ -72,7 +72,6 @@ class BaseController:
     ]
 
     json_endpoints = [
-        "get_configuration_context",
         "multiselect_filtering",
         "save_settings",
         "table_filtering",
@@ -104,7 +103,6 @@ class BaseController:
         "get",
         "get_all",
         "get_cluster_status",
-        "get_configuration_context",
         "get_device_network_data",
         "get_device_logs",
         "get_exported_services",
@@ -219,7 +217,7 @@ class BaseController:
         )
 
     def create_admin_user(self) -> None:
-        admin = factory("user", **{"name": "admin"})
+        admin = factory("user", **{"name": "admin", "group": "Admin"})
         if not admin.password:
             admin.password = "admin"
 

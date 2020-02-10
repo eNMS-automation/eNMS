@@ -65,9 +65,6 @@ class InventoryController(BaseController):
             "server_addr": self.settings["app"]["address"],
         }
 
-    def get_configuration_context(self, device_id, **kwargs):
-        return "test"
-
     def get_device_logs(self, device_id):
         device_logs = [
             log.name

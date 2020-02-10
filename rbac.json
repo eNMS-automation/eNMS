@@ -1,7 +1,10 @@
 {
-  "Admin": {},
+  "Admin": {
+    "POST": []
+  },
   "Read Only": {
     "POST": [
+      "save_settings",
       "update\\/\\w+"
     ]
   }

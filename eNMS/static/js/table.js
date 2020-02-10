@@ -1016,6 +1016,7 @@ models.user = class User extends Base {
     return [
       { data: "name", title: "Username", search: "text" },
       { data: "email", title: "Email Address", search: "text" },
+      { data: "group", title: "Permission Group", search: "text" },
       { data: "buttons", width: "130px" },
     ];
   }

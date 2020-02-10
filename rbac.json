@@ -1,21 +1,21 @@
 {
   "endpoints": {
     "GET": [
-        "/dashboard",
-        "/login",
-        "/table/changelog",
-        "/table/device",
-        "/table/event",
-        "/table/pool",
-        "/table/link",
-        "/table/run",
-        "/table/server",
-        "/table/service",
-        "/table/task",
-        "/table/user",
-        "/view/network",
-        "/view/site",
-        "/workflow_builder"
+        "dashboard",
+        "login",
+        "table/changelog",
+        "table/device",
+        "table/event",
+        "table/pool",
+        "table/link",
+        "table/run",
+        "table/server",
+        "table/service",
+        "table/task",
+        "table/user",
+        "view/network",
+        "view/site",
+        "workflow_builder"
     ],
     "POST": [
       "add_edge",

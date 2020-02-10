@@ -70,6 +70,7 @@ def monitor_requests(function):
             )
             return redirect(url_for("blueprint.route", page="login"))
         else:
+            print(request.method, request.path)
             return function(*args, **kwargs)
 
     return decorated_function

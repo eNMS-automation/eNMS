@@ -10,6 +10,7 @@ from wtforms import (
 from wtforms.validators import InputRequired
 from wtforms.widgets import TextArea
 
+from eNMS import app
 from eNMS.forms import BaseForm, configure_relationships
 from eNMS.properties.database import import_classes
 from eNMS.settings import rbac
@@ -94,7 +95,7 @@ class UserForm(BaseForm):
     name = StringField("Name", [InputRequired()])
     password = PasswordField("Password")
     email = StringField("Email")
-    group = SelectField("Permissions", choices=[(g, g) for g in rbac])
+    group = SelectField("Permissions", choices=[(g, g) for g in app.rbac["groups"]])
 
 
 class ChangelogForm(BaseForm):

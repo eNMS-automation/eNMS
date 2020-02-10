@@ -46,104 +46,18 @@ from eNMS.models import models, model_properties, relationships
 from eNMS.properties import private_properties, property_names
 from eNMS.properties.database import import_classes
 from eNMS.controller.syslog import SyslogServer
-from eNMS.settings import custom_properties, dashboard_properties
+from eNMS.settings import custom_properties, dashboard_properties, rbac
 
 
 class BaseController:
 
     log_severity = {"error": error, "info": info, "warning": warning}
 
-    get_endpoints = [
-        "/dashboard",
-        "/login",
-        "/table/changelog",
-        "/table/device",
-        "/table/event",
-        "/table/pool",
-        "/table/link",
-        "/table/run",
-        "/table/server",
-        "/table/service",
-        "/table/task",
-        "/table/user",
-        "/view/network",
-        "/view/site",
-        "/workflow_builder",
-    ]
-
     json_endpoints = [
         "multiselect_filtering",
         "save_settings",
         "table_filtering",
         "view_filtering",
-    ]
-
-    form_endpoints = [
-        "add_edge",
-        "add_service_to_workflow",
-        "copy_service_in_workflow",
-        "calendar_init",
-        "clear_results",
-        "clear_configurations",
-        "compare",
-        "connection",
-        "counters",
-        "count_models",
-        "create_label",
-        "database_deletion",
-        "delete_edge",
-        "delete_instance",
-        "delete_label",
-        "delete_node",
-        "duplicate_workflow",
-        "export_service",
-        "export_topology",
-        "delete_file",
-        "edit_file",
-        "get",
-        "get_all",
-        "get_cluster_status",
-        "get_device_network_data",
-        "get_device_logs",
-        "get_exported_services",
-        "get_git_content",
-        "get_migration_folders",
-        "get_service_logs",
-        "get_properties",
-        "get_result",
-        "get_runtimes",
-        "get_view_topology",
-        "get_service_state",
-        "get_session_log",
-        "get_top_level_workflows",
-        "get_tree_files",
-        "get_workflow_results",
-        "get_workflow_services",
-        "handoffssh",
-        "import_service",
-        "import_topology",
-        "migration_export",
-        "migration_import",
-        "reset_status",
-        "run_service",
-        "save_file",
-        "save_parameters",
-        "save_pool_objects",
-        "save_positions",
-        "scan_cluster",
-        "scan_playbook_folder",
-        "scheduler",
-        "skip_services",
-        "stop_workflow",
-        "switch_menu",
-        "scheduler_action",
-        "task_action",
-        "topology_import",
-        "update",
-        "update_parameters",
-        "update_pool",
-        "update_all_pools",
-        "upload_files",
     ]
 
     rest_endpoints = [
@@ -155,6 +69,7 @@ class BaseController:
 
     def __init__(self):
         self.settings = settings
+        self.rbac = rbac
         self.table_properties = table_properties
         self.path = Path.cwd()
         self.custom_properties = self.load_custom_properties()

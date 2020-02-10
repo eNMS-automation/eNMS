@@ -11,7 +11,6 @@ from flask import (
 from flask_login import current_user, login_user, logout_user
 from functools import wraps
 from logging import info
-from re import search
 from werkzeug.wrappers import Response
 
 from eNMS import app
@@ -19,7 +18,7 @@ from eNMS.database import Session
 from eNMS.database.functions import fetch, handle_exception
 from eNMS.forms import form_actions, form_classes, form_postprocessing, form_templates
 from eNMS.forms.administration import LoginForm
-from eNMS.settings import dashboard_properties, rbac
+from eNMS.settings import dashboard_properties
 
 
 blueprint = Blueprint("blueprint", __name__, template_folder="../templates")
@@ -165,21 +164,21 @@ def get_requests_sink(_):
 @blueprint.route("/<path:page>", methods=["POST"])
 @monitor_requests
 def route(page):
-    if any(search(url, page) for url in rbac[current_user.group]["POST"]):
+    endpoint, *args = page.split("/")
+    if any(url == endpoint for url in app.rbac["groups"][current_user.group]["POST"]):
         return jsonify({"alert": "Error 403 Forbidden."})
-    f, *args = page.split("/")
-    if f not in app.json_endpoints + app.form_endpoints:
+    if endpoint not in app.rbac["endpoints"]["POST"]:
         return jsonify({"alert": "Invalid POST request."})
     form_type = request.form.get("form_type")
-    if f in app.json_endpoints:
-        result = getattr(app, f)(*args, **request.json)
+    if endpoint in app.json_endpoints:
+        result = getattr(app, endpoint)(*args, **request.json)
     elif form_type:
         form = form_classes[form_type](request.form)
         if not form.validate_on_submit():
             return jsonify({"invalid_form": True, **{"errors": form.errors}})
-        result = getattr(app, f)(*args, **form_postprocessing(form, request.form))
+        result = getattr(app, endpoint)(*args, **form_postprocessing(form, request.form))
     else:
-        result = getattr(app, f)(*args)
+        result = getattr(app, endpoint)(*args)
     try:
         Session.commit()
         return jsonify(result)

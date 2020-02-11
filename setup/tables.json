@@ -1,0 +1,160 @@
+{
+  "custom": {
+    "device": {
+       "property1": {
+          "pretty_name": "Property 1",
+          "type": "string",
+          "default": "10.145.14.1",
+          "is_address": true
+       },
+       "property2": {
+          "pretty_name": "Property 2",
+          "type": "integer",
+          "default": 4,
+          "private": true
+       }
+    }
+  },
+  "dashboard": { 
+    "device":[ 
+       "model",
+       "vendor",
+       "subtype",
+       "icon",
+       "operating_system",
+       "os_version",
+       "port",
+       "property1",
+       "property2"
+    ],
+    "link":[ 
+       "model",
+       "vendor",
+       "subtype",
+       "icon",
+       "location"
+    ],
+    "service":[ 
+       "vendor",
+       "operating_system",
+       "creator",
+       "send_notification",
+       "send_notification_method",
+       "multiprocessing",
+       "max_processes",
+       "number_of_retries",
+       "time_between_retries"
+    ],
+    "workflow":[ 
+       "vendor",
+       "operating_system",
+       "creator",
+       "send_notification",
+       "send_notification_method",
+       "multiprocessing",
+       "max_processes",
+       "number_of_retries",
+       "time_between_retries"
+    ],
+    "user":[ 
+       "name"
+    ],
+    "task":[ 
+       "status",
+       "periodic",
+       "frequency",
+       "frequency_unit",
+       "crontab_expression",
+       "service_name"
+    ]
+  },
+  "tables": {
+    "configuration": {
+      "configuration": {
+        "visible": true
+      }
+    },
+    "device": {
+      "description": {
+        "visible": false
+      },
+      "location": {
+        "visible": false
+      },
+      "subtype": {
+        "visible": false
+      },
+      "property1": {
+        "data": "property1",
+        "title": "Property 1",
+        "search": "text",
+        "visible": false
+      }
+    },
+    "link": {
+      "description": {
+        "visible": false
+      },
+      "subtype": {
+        "visible": false
+      }
+    },
+    "pool": {
+      "last_modified": {
+        "visible": false
+      }
+    },
+    "service": {
+      "last_modified": {
+        "visible": false
+      },
+      "name": {
+        "width": "600px"
+      },
+      "operating_system": {
+        "visible": false
+      },
+      "vendor": {
+        "visible": false
+      }
+    },
+    "task": {
+      "scheduling_mode": {
+        "visible": false
+      }
+    }
+  },
+  "pools": { 
+    "device":[ 
+       "name",
+       "description",
+       "subtype",
+       "model",
+       "location",
+       "vendor",
+       "icon",
+       "operating_system",
+       "os_version",
+       "netmiko_driver",
+       "napalm_driver",
+       "ip_address",
+       "port",
+       "longitude",
+       "latitude",
+       "configuration",
+       "operational_data",
+       "property1"
+    ],
+    "link":[ 
+       "name",
+       "description",
+       "subtype",
+       "model",
+       "location",
+       "vendor",
+       "color",
+       "source_name",
+       "destination_name"
+    ]
+  }
+}

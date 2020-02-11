@@ -13,9 +13,11 @@ from ruamel import yaml
 from tarfile import open as open_tar
 from time import ctime
 from traceback import format_exc
+from datetime import datetime
 
 from eNMS.controller.base import BaseController
 from eNMS.database import Session
+from eNMS.models import models
 from eNMS.database.functions import delete_all, export, factory, fetch, fetch_all
 from eNMS.models import relationships
 
@@ -67,6 +69,20 @@ class AdministrationController(BaseController):
 
     def database_deletion(self, **kwargs):
         delete_all(*kwargs["deletion_types"])
+
+    def result_log_deletion(self, **kwargs):
+        date_time_object = datetime.strptime(kwargs["date_time"], "%d/%m/%Y %H:%M:%S")
+        date_time_string = date_time_object.strftime("%Y-%m-%d %H:%M:%S.%f")
+        for model in kwargs["deletion_types"]:
+            if model == "result":
+                field_name = "runtime"
+            elif model == "changelog":
+                field_name = "time"
+            session_query = Session.query(models[model]).filter(
+                getattr(models[model], field_name) < date_time_string
+            )
+            session_query.delete(synchronize_session=False)
+            Session.commit()
 
     def get_cluster_status(self):
         return [server.status for server in fetch_all("server")]

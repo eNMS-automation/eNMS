@@ -125,7 +125,19 @@ function databaseDeletion() {
     form: "database_deletion-form",
     callback: function(result) {
       notify("Deletion done.", "success", 5);
-      $("#deletion-form").remove();
+      $("#database_deletion").remove();
+    },
+  });
+}
+
+function resultLogDeletion() {
+  notify("Starting to delete...", "success", 5);
+  call({
+    url: "/result_log_deletion",
+    form: "result_log_deletion-form",
+    callback: function(result) {
+      notify("Deletion done.", "success", 5);
+      $("#result_log_deletion").remove();
     },
   });
 }
@@ -312,6 +324,7 @@ configureNamespace("administration", [
   importService,
   migrationsExport,
   migrationsImport,
+  resultLogDeletion,
   saveSettings,
   saveFile,
   scanCluster,

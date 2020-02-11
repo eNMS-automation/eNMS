@@ -33,7 +33,6 @@ def configure_login_manager():
 def configure_context_processor(flask_app):
     @flask_app.context_processor
     def inject_properties():
-        print(rbac["groups"][getattr(current_user, "group", "Read Only")])
         return {
             "property_types": property_types,
             "form_properties": form_properties,

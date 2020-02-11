@@ -205,6 +205,7 @@
   "groups": {
     "Admin": {
       "menu": {
+        "bar": [],
         "category": [],
         "page": []
       },
@@ -213,6 +214,7 @@
     },
     "Read Only": {
       "menu": {
+        "bar": ["Admin", "Settings", "Files"],
         "category": ["Admin"],
         "page": ["Events"]
       },

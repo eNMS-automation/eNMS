@@ -188,6 +188,7 @@
                     &nbsp;Docs
                   </a>
                 </li>
+                {% if "Files" not in rbac["menu"]["bar"] %}
                 <li class="nav-item">
                   <a
                     onclick="eNMS.administration.displayFiles()"
@@ -201,6 +202,8 @@
                     &nbsp;Files
                   </a>
                 </li>
+                {% endif %}
+                {% if "Settings" not in rbac["menu"]["bar"] %}
                 <li class="nav-item">
                   <a
                     onclick="eNMS.administration.showSettings()"
@@ -214,6 +217,8 @@
                     &nbsp;Settings
                   </a>
                 </li>
+                {% endif %}
+                {% if "Admin" not in rbac["menu"]["bar"] %}
                 <li class="nav-item">
                   <a
                     onclick="eNMS.base.openPanel({name: 'administration'})"
@@ -227,6 +232,7 @@
                     &nbsp;Admin
                   </a>
                 </li>
+                {% endif %}
               </ul>
             </nav>
           </div>

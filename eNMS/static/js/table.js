@@ -268,7 +268,7 @@ class Base {
         persistent: true,
         name: elementId,
         target: `#${elementId}-search`,
-        container: `.right_column`,
+        container: `#tooltip-frame`,
         position: {
           my: "center-top",
           at: "center-bottom",

@@ -217,7 +217,9 @@
                 {% endif %} {% if "Admin" not in rbac["menu"]["bar"] %}
                 <li class="nav-item">
                   <a
-                    onclick="eNMS.base.openPanel({name: 'administration'})"
+                    onclick="eNMS.base.openPanel({
+                      name: 'administration', title: 'Administration Panel', size: 'auto'
+                      })"
                     style="cursor:pointer"
                   >
                     <img

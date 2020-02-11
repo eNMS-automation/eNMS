@@ -47,7 +47,7 @@ def configure_context_processor(flask_app):
                 if hasattr(service_class, "pretty_name")
             },
             "settings": app.settings,
-            "table_properties": app.properties["table"],
+            "table_properties": app.properties["tables"],
             "user": current_user.serialized if current_user.is_authenticated else None,
             "version": app.version,
         }

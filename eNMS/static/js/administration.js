@@ -134,6 +134,8 @@ function resultLogDeletion() {
   notify("Starting to delete...", "success", 5);
   call({
     url: "/result_log_deletion",
+    title: "Results & Logs Deletion",
+    size: "auto",
     form: "result_log_deletion-form",
     callback: function(result) {
       notify("Deletion done.", "success", 5);

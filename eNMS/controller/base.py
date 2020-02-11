@@ -156,7 +156,7 @@ class BaseController:
         self.update_database_configurations_from_git()
 
     def load_custom_properties(self):
-        for model, properties in app.properties["custom"].items():
+        for model, properties in self.properties["custom"].items():
             property_names.update({k: v["pretty_name"] for k, v in properties.items()})
             model_properties[model].extend(list(properties))
             private_properties.extend(

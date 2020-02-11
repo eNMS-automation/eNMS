@@ -3,6 +3,7 @@ from sqlalchemy import Boolean, Float, ForeignKey, Integer
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.orm import backref, relationship
 
+from eNMS import app
 from eNMS.database.dialect import Column, LargeString, SmallString
 from eNMS.database.functions import fetch, fetch_all
 from eNMS.database.associations import (
@@ -68,7 +69,7 @@ CustomDevice = type(
                 }[values["type"]],
                 default=values["default"],
             )
-            for property, values in properties["custom"]["device"].items()
+            for property, values in app.properties["custom"]["device"].items()
         },
     },
 )

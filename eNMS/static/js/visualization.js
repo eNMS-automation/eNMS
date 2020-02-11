@@ -207,6 +207,7 @@ function linkToEdge(link) {
 function showPoolView(poolId) {
   jsPanel.create({
     id: `pool-view-${poolId}`,
+    container: ".right_column",
     theme: "none",
     border: "medium",
     headerTitle: "Site view",

@@ -12,6 +12,7 @@ from wtforms.widgets import TextArea
 
 from eNMS.forms import BaseForm, configure_relationships
 from eNMS.properties.database import import_classes
+from eNMS.forms.fields import DateField
 
 
 class SettingsForm(BaseForm):
@@ -36,12 +37,22 @@ class UploadFilesForm(BaseForm):
 
 
 class DatabaseDeletionForm(BaseForm):
-    action = "databaseDeletion"
+    action = "eNMS.administration.databaseDeletion"
     form_type = HiddenField(default="database_deletion")
     deletion_choices = [(p, p) for p in import_classes]
     deletion_types = SelectMultipleField(
         "Instances to delete", choices=deletion_choices
     )
+
+
+class ResultLogDeletionForm(BaseForm):
+    action = "eNMS.administration.resultLogDeletion"
+    form_type = HiddenField(default="result_log_deletion")
+    deletion_types = SelectMultipleField(
+        "Instances do delete",
+        choices=[("result", "result"), ("changelog", "changelog")],
+    )
+    date_time = DateField(label="Delete Records before")
 
 
 class InstanceDeletionForm(BaseForm):

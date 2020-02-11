@@ -17,6 +17,7 @@ field_conversion = {
     "json": loads,
     "list": str,
     "str": str,
+    "date": str,
 }
 
 property_names = {}

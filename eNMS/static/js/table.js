@@ -39,8 +39,8 @@ export function initTable(type, instance, runtime, id) {
   columns.forEach((column) => {
     if (visibleColumns) column.visible = visibleColumns.includes(column.data);
     column.name = column.data;
-  })
-  
+  });
+
   // eslint-disable-next-line new-cap
   tables[type] = $(id ? `#${id}` : "#table").DataTable({
     serverSide: true,

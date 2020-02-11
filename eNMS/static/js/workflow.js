@@ -269,7 +269,7 @@ export const switchToWorkflow = function(path, arrow) {
       callback: function(result) {
         workflow = result.service;
         localStorage.setItem("path", path);
-        localStorage.setItem("workflow", JSON.stringify(workflow));
+        if (workflow) localStorage.setItem("workflow", JSON.stringify(workflow));
         displayWorkflow(result);
       },
     });
@@ -788,7 +788,8 @@ export function getServiceState(id, first) {
       if (first || result.state.status == "Running") {
         colorService(id, "#89CFF0");
         localStorage.setItem("path", id);
-        localStorage.setItem("workflow", JSON.stringify(result.service));
+        if (result.service)
+          localStorage.setItem("workflow", JSON.stringify(result.service));
         setTimeout(() => getServiceState(id), 300);
       } else {
         colorService(id, "#D2E5FF");

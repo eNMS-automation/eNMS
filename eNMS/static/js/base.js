@@ -63,32 +63,18 @@ $.ajaxSetup({
   },
 });
 
-const loadScript = (source, beforeEl, async = true, defer = true) => {
-  return new Promise((resolve, reject) => {
-    let script = document.createElement("script");
-    const prior = beforeEl || document.getElementsByTagName("script")[0];
-    script.async = async;
-    script.defer = defer;
-
-    function onloadHander(_, isAbort) {
-      if (isAbort || !script.readyState || /loaded|complete/.test(script.readyState)) {
-        script.onload = null;
-        script.onreadystatechange = null;
-        script = undefined;
-
-        if (isAbort) {
-          reject();
-        } else {
-          resolve();
-        }
-      }
+function loadScript(url) {
+  let script = document.createElement('script');
+  script.onload = function () {
+    try {
+      job(id);
+    } catch (e) {
+      notify("Failed to load script", "error", 5);
     }
-    script.onload = onloadHander;
-    script.onreadystatechange = onloadHander;
-    script.src = source;
-    prior.parentNode.insertBefore(script, prior);
-  });
-};
+  };
+  script.src = url;
+  document.head.appendChild(script);
+}
 
 export function openUrl(url) {
   let win = window.open(url, "_blank");
@@ -476,13 +462,7 @@ export function showTypePanel(type, id, mode) {
         }
       }
       if (type.includes("service")) {
-        loadScript(`../static/js/services/${type}.js`).then(() => {
-          try {
-            job(id);
-          } catch (e) {
-            notify("Failed to load script", "error", 5);
-          }
-        });
+        loadScript(`../static/js/services/${type}.js`);
       }
     },
     type: type,

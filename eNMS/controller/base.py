@@ -31,7 +31,7 @@ from sys import path as sys_path
 from tacacs_plus.client import TACACSClient
 from uuid import getnode
 
-from eNMS.settings import settings, table_properties
+from eNMS.setup import settings, properties
 from eNMS.database import Base, DIALECT, engine, Session
 from eNMS.database.events import configure_events
 from eNMS.database.functions import (
@@ -46,7 +46,7 @@ from eNMS.models import models, model_properties, relationships
 from eNMS.properties import private_properties, property_names
 from eNMS.properties.database import import_classes
 from eNMS.controller.syslog import SyslogServer
-from eNMS.settings import custom_properties, dashboard_properties, rbac
+from eNMS.setup import properties, rbac
 
 
 class BaseController:
@@ -70,9 +70,9 @@ class BaseController:
     def __init__(self):
         self.settings = settings
         self.rbac = rbac
-        self.table_properties = table_properties
+        self.properties = properties
+        self.load_custom_properties()
         self.path = Path.cwd()
-        self.custom_properties = self.load_custom_properties()
         self.init_scheduler()
         if settings["tacacs"]["active"]:
             self.init_tacacs_client()
@@ -156,13 +156,12 @@ class BaseController:
         self.update_database_configurations_from_git()
 
     def load_custom_properties(self):
-        for model, properties in custom_properties.items():
+        for model, properties in app.properties["custom"].items():
             property_names.update({k: v["pretty_name"] for k, v in properties.items()})
             model_properties[model].extend(list(properties))
             private_properties.extend(
                 list(p for p, v in properties.items() if v.get("private", False))
             )
-        return custom_properties
 
     def init_logs(self):
         log_level = self.settings["app"]["log_level"].upper()
@@ -304,14 +303,14 @@ class BaseController:
         return {
             "counters": {
                 instance_type: count(instance_type)
-                for instance_type in dashboard_properties
+                for instance_type in properties["dashboard"]
             },
             "properties": {
                 instance_type: Counter(
-                    str(getattr(instance, dashboard_properties[instance_type][0]))
+                    str(getattr(instance, properties["dashboard"][instance_type][0]))
                     for instance in fetch_all(instance_type)
                 )
-                for instance_type in dashboard_properties
+                for instance_type in properties["dashboard"]
             },
         }
 

@@ -2,7 +2,7 @@ from sqlalchemy import Column as SQLA_Column, PickleType, String, Text
 from sqlalchemy.dialects.mysql.base import MSMediumBlob
 from sqlalchemy.ext.mutable import MutableDict, MutableList
 
-from eNMS.settings import settings
+from eNMS.setup import settings
 from eNMS.database import DIALECT
 
 

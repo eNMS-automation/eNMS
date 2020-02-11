@@ -12,7 +12,7 @@ from eNMS.framework.rest import configure_rest_api
 from eNMS.framework.routes import blueprint
 from eNMS.models import models, property_types, relationships
 from eNMS.properties import property_names
-from eNMS.settings import rbac
+from eNMS.setup import rbac
 
 
 def register_extensions(flask_app):
@@ -47,7 +47,7 @@ def configure_context_processor(flask_app):
                 if hasattr(service_class, "pretty_name")
             },
             "settings": app.settings,
-            "table_properties": app.table_properties,
+            "table_properties": app.properties["table"],
             "user": current_user.serialized if current_user.is_authenticated else None,
             "version": app.version,
         }

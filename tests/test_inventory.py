@@ -2,7 +2,7 @@ from werkzeug.datastructures import ImmutableMultiDict
 
 from eNMS import app
 from eNMS.database.functions import delete_all, fetch, fetch_all
-from eNMS.settings import pool_properties
+from eNMS.setup import properties["pool"]
 
 from tests.conftest import check_pages
 
@@ -120,10 +120,10 @@ pool2 = {
 
 
 def create_pool(pool: dict) -> dict:
-    for property in pool_properties["device"]:
+    for property in properties["pool"]["device"]:
         if f"device_{property}_match" not in pool:
             pool[f"device_{property}_match"] = "inclusion"
-    for property in pool_properties["link"]:
+    for property in properties["pool"]["link"]:
         if f"link_{property}_match" not in pool:
             pool[f"link_{property}_match"] = "inclusion"
     return pool

@@ -303,13 +303,13 @@ class Base {
     });
     Base.createfilteringTooltips(type, columns);
     createTooltips();
+    const visibleColumns = localStorage.getItem(`table/${type}`).split(",");
+    console.log(visibleColumns)
     columns.forEach((column) => {
-      const visible = "visible" in column ? column.visible : true;
-      $("#column-display")
-        .selectpicker()
-        .append(new Option(column.title || column.data, column.data, visible, visible))
-        .selectpicker("refresh");
+      const visible = visibleColumns ? visibleColumns.includes(column.name) : "visible" in column ? column.visible : true;
+      $("#column-display").append(new Option(column.title || column.data, column.data, visible, visible)) 
     });
+    $("#column-display").selectpicker("refresh");
     $("#column-display").on("change", function() {
       columns.forEach((col) => {
         table.column(`${col.name}:name`).visible(
@@ -320,6 +320,7 @@ class Base {
       });
       table.ajax.reload(null, false);
       Base.createfilteringTooltips(type, columns);
+      localStorage.setItem(`table/${type}`, $(this).val());
     });
     table.columns.adjust();
   }

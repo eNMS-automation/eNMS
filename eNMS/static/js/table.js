@@ -34,7 +34,13 @@ export function initTable(type, instance, runtime, id) {
       }
     }
   }
-  columns.forEach((column) => column.name = column.data);
+  let visibleColumns = localStorage.getItem(`table/${type}`);
+  if (visibleColumns) visibleColumns = visibleColumns.split(",");
+  columns.forEach((column) => {
+    if (visibleColumns) column.visible = visibleColumns.includes(column.data);
+    column.name = column.data;
+  })
+  
   // eslint-disable-next-line new-cap
   tables[type] = $(id ? `#${id}` : "#table").DataTable({
     serverSide: true,
@@ -110,7 +116,6 @@ export function initTable(type, instance, runtime, id) {
               e.stopPropagation();
             });
           if (data.search == "text") {
-
           }
         });
       $(`#controls-${type}`).html(models[type].controls);
@@ -283,7 +288,7 @@ class Base {
           </select>
         </div>`,
       });
-    })
+    });
   }
 
   static postProcessing(table, columns, type) {
@@ -303,11 +308,16 @@ class Base {
     });
     Base.createfilteringTooltips(type, columns);
     createTooltips();
-    const visibleColumns = localStorage.getItem(`table/${type}`).split(",");
-    console.log(visibleColumns)
+    const visibleColumns = localStorage.getItem(`table/${type}`);
     columns.forEach((column) => {
-      const visible = visibleColumns ? visibleColumns.includes(column.name) : "visible" in column ? column.visible : true;
-      $("#column-display").append(new Option(column.title || column.data, column.data, visible, visible)) 
+      const visible = visibleColumns
+        ? visibleColumns.split(",").includes(column.name)
+        : "visible" in column
+        ? column.visible
+        : true;
+      $("#column-display").append(
+        new Option(column.title || column.data, column.data, visible, visible)
+      );
     });
     $("#column-display").selectpicker("refresh");
     $("#column-display").on("change", function() {
@@ -492,7 +502,7 @@ models.configuration = class Configuration extends models.device {
 models.link = class Link extends Base {
   static get columns() {
     return [
-      { data: "name", title: "Name", search: "text"  },
+      { data: "name", title: "Name", search: "text" },
       { data: "description", title: "Description", search: "text" },
       { data: "subtype", title: "Subtype", search: "text" },
       { data: "model", title: "Model", search: "text" },

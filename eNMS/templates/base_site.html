@@ -101,23 +101,21 @@
       <div id="sidebar-menu" class="hidden-print main_menu">
         <div class="menu_section">
           <ul class="nav side-menu">
-            {% for label, category in menu.items() %}
-              {% if label not in rbac["menu"]["category"] %}
-                <li>
-                  <a
-                    ><i class="fa fa-{{ category['icon'] }}"></i>{{ label }}
-                    <span class="fa fa-chevron-down"></span>
-                  </a>
-                  <ul class="nav child_menu">
-                    {% for page, url in category["pages"].items() %}
-                      {% if page not in rbac["menu"]["page"] %}
-                        <li><a href="{{ url }}">{{ page }}</a></li>
-                      {% endif %}
-                    {% endfor %}
-                  </ul>
-                </li>
-              {% endif %}
-            {% endfor %}
+            {% for label, category in menu.items() %} {% if label not in
+            rbac["menu"]["category"] %}
+            <li>
+              <a
+                ><i class="fa fa-{{ category['icon'] }}"></i>{{ label }}
+                <span class="fa fa-chevron-down"></span>
+              </a>
+              <ul class="nav child_menu">
+                {% for page, url in category["pages"].items() %} {% if page not in
+                rbac["menu"]["page"] %}
+                <li><a href="{{ url }}">{{ page }}</a></li>
+                {% endif %} {% endfor %}
+              </ul>
+            </li>
+            {% endif %} {% endfor %}
           </ul>
         </div>
       </div>
@@ -202,8 +200,7 @@
                     &nbsp;Files
                   </a>
                 </li>
-                {% endif %}
-                {% if "Settings" not in rbac["menu"]["bar"] %}
+                {% endif %} {% if "Settings" not in rbac["menu"]["bar"] %}
                 <li class="nav-item">
                   <a
                     onclick="eNMS.administration.showSettings()"
@@ -217,8 +214,7 @@
                     &nbsp;Settings
                   </a>
                 </li>
-                {% endif %}
-                {% if "Admin" not in rbac["menu"]["bar"] %}
+                {% endif %} {% if "Admin" not in rbac["menu"]["bar"] %}
                 <li class="nav-item">
                   <a
                     onclick="eNMS.base.openPanel({name: 'administration'})"

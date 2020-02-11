@@ -1,4 +1,52 @@
 {
+  "menu": {
+    "Home": {
+      "icon": "fa-fa-home", 
+      "pages": {
+        "Dashboard": "/dashboard",
+        "Changelog": "/table/changelog",
+        "Sessions": "/table/session"
+      }
+    },
+    "Admin": {
+      "icon": "fa-fa-users", 
+      "pages": {
+        "Users": "/table/user",
+        "Servers": "/table/server"
+      }
+    },
+    "Inventory": {
+      "icon": "fa-fa-database", 
+      "pages": {
+        "Devices": "/table/device",
+        "Configurations": "/table/configuration",
+        "Links": "/table/link",
+        "Pools": "/table/pool"
+      }
+    },
+    "Visualization": {
+      "icon": "fa-fa-map-marker", 
+      "pages": {
+        "Network": "/view/network",
+        "Sites": "/view/site"
+      }
+    },
+    "Automation": {
+      "icon": "fa-fa-map-marker", 
+      "pages": {
+        "Services": "/table/service",
+        "Workflow Builder": "/workflow_builder",
+        "Results": "/table/run"
+      }
+    },
+    "Scheduling": {
+      "icon": "fa-fa-map-marker", 
+      "pages": {
+        "Tasks": "/table/task",
+        "Events": "/table/event"
+      }
+    }
+  },
   "endpoints": {
     "GET": [
       "/dashboard",

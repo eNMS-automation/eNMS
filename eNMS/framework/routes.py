@@ -82,7 +82,6 @@ def monitor_requests(function):
                 if method == "GET":
                     return render_template("error.html", error=403), 403
                 else:
-                    print(endpoint)
                     return jsonify({"alert": "Error 403 Forbidden."})
             return function(*args, **kwargs)
 

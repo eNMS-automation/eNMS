@@ -10,7 +10,6 @@ job: false
 jsPanel: false
 moment: false
 page: false
-Promise: false
 relations: false
 relationships: false
 */
@@ -64,8 +63,8 @@ $.ajaxSetup({
 });
 
 function loadScript(url, id) {
-  let script = document.createElement('script');
-  script.onload = function () {
+  let script = document.createElement("script");
+  script.onload = function() {
     try {
       job(id);
     } catch (e) {

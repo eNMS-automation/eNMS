@@ -31,7 +31,6 @@ from sys import path as sys_path
 from tacacs_plus.client import TACACSClient
 from uuid import getnode
 
-from eNMS.setup import settings, properties
 from eNMS.database import Base, DIALECT, engine, Session
 from eNMS.database.events import configure_events
 from eNMS.database.functions import (
@@ -46,7 +45,7 @@ from eNMS.models import models, model_properties, relationships
 from eNMS.properties import private_properties, property_names
 from eNMS.properties.database import import_classes
 from eNMS.controller.syslog import SyslogServer
-from eNMS.setup import properties, rbac
+from eNMS.setup import settings, properties, rbac
 
 
 class BaseController:
@@ -156,11 +155,11 @@ class BaseController:
         self.update_database_configurations_from_git()
 
     def load_custom_properties(self):
-        for model, properties in self.properties["custom"].items():
-            property_names.update({k: v["pretty_name"] for k, v in properties.items()})
-            model_properties[model].extend(list(properties))
+        for model, values in self.properties["custom"].items():
+            property_names.update({k: v["pretty_name"] for k, v in values.items()})
+            model_properties[model].extend(list(values))
             private_properties.extend(
-                list(p for p, v in properties.items() if v.get("private", False))
+                list(p for p, v in values.items() if v.get("private", False))
             )
 
     def init_logs(self):
@@ -327,7 +326,6 @@ class BaseController:
             if not value:
                 continue
             filter = kwargs["form"].get(f"{property}_filter")
-            print(value, kwargs["form"])
             if value in ("bool-true", "bool-false"):
                 constraint = getattr(model, property) == (value == "bool-true")
             elif filter == "equality":

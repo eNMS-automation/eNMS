@@ -2,7 +2,7 @@ from werkzeug.datastructures import ImmutableMultiDict
 
 from eNMS import app
 from eNMS.database.functions import delete_all, fetch, fetch_all
-from eNMS.setup import properties["pool"]
+from eNMS.setup import properties
 
 from tests.conftest import check_pages
 

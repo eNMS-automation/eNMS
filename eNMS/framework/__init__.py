@@ -33,12 +33,13 @@ def configure_login_manager():
 def configure_context_processor(flask_app):
     @flask_app.context_processor
     def inject_properties():
+        print(rbac["groups"][getattr(current_user, "group", "Read Only")])
         return {
             "property_types": property_types,
             "form_properties": form_properties,
             "menu": rbac["menu"],
             "names": property_names,
-            "settings": app.settings,
+            "rbac": rbac["groups"][getattr(current_user, "group", "Read Only")],
             "relations": list(set(chain.from_iterable(relationships.values()))),
             "relationships": relationships,
             "service_types": {
@@ -46,6 +47,7 @@ def configure_context_processor(flask_app):
                 for service, service_class in sorted(models.items())
                 if hasattr(service_class, "pretty_name")
             },
+            "settings": app.settings,
             "table_properties": app.table_properties,
             "user": current_user.serialized if current_user.is_authenticated else None,
             "version": app.version,

@@ -102,17 +102,21 @@
         <div class="menu_section">
           <ul class="nav side-menu">
             {% for label, category in menu.items() %}
-              <li>
-                <a
-                  ><i class="fa fa-{{ category['icon'] }}"></i>{{ label }}
-                  <span class="fa fa-chevron-down"></span>
-                </a>
-                <ul class="nav child_menu">
-                  {% for page, url in category["pages"].items() %}
-                    <li><a href="{{ url }}">{{ page }}</a></li>
-                  {% endfor %}
-                </ul>
-              </li>
+              {% if label not in rbac["menu"]["category"] %}
+                <li>
+                  <a
+                    ><i class="fa fa-{{ category['icon'] }}"></i>{{ label }}
+                    <span class="fa fa-chevron-down"></span>
+                  </a>
+                  <ul class="nav child_menu">
+                    {% for page, url in category["pages"].items() %}
+                      {% if page not in rbac["menu"]["page"] %}
+                        <li><a href="{{ url }}">{{ page }}</a></li>
+                      {% endif %}
+                    {% endfor %}
+                  </ul>
+                </li>
+              {% endif %}
             {% endfor %}
           </ul>
         </div>

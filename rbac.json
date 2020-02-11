@@ -204,10 +204,18 @@
   },
   "groups": {
     "Admin": {
+      "menu": {
+        "category": [],
+        "page": []
+      },
       "GET": [],
       "POST": []
     },
     "Read Only": {
+      "menu": {
+        "category": ["Admin"],
+        "page": ["Events"]
+      },
       "GET": [
         "/form/workflow_service"
       ],

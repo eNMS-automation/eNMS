@@ -74,6 +74,7 @@
       "/form/generic_file_transfer_service",
       "/form/import_service",
       "/form/instance_deletion",
+      "/form/link",
       "/form/logs",
       "/form/mail_notification_service",
       "/form/mattermost_notification_service",

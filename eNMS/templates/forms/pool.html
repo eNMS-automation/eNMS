@@ -5,7 +5,7 @@
     method="post"
     autocomplete="off"
   >
-    {{ form.csrf_token() }} {{ form.form_type() }} {{ form.id(id='pool-id',
+    {{ form.hidden_tag() }} {{ form.id(id='pool-id',
     class="add-id") }}
     <div class="form-group">
       <label>Name</label>

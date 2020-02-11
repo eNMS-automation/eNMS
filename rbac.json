@@ -112,7 +112,6 @@
       "/form/workflow",
       "/form/workflow_edge",
       "/form/workflow_label",
-      "/form/workflow_service",
       "/login",
       "/logout",
       "/table/changelog",
@@ -219,9 +218,7 @@
         "category": ["Admin"],
         "page": ["Events"]
       },
-      "GET": [
-        "/form/workflow_service"
-      ],
+      "GET": [],
       "POST": [
         "/add_edge",
         "/add_service_to_workflow",

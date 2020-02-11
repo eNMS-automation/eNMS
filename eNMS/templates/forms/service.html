@@ -4,8 +4,9 @@
   method="post"
   autocomplete="off"
 >
-  {{ form.csrf_token() }} {{ form.form_type(value=form_type) }} {{ form.id(id=form_type
+  {{ form.form_type(value=form_type) }} {{ form.id(id=form_type
   + '-id', class="add-id") }}
+  {{ form.hidden_tag() }}
   <input type="hidden" id="original" name="original" class="add-id" />
   <div style="padding:20px">
     <center>

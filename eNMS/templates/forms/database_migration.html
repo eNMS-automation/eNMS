@@ -4,7 +4,7 @@
   method="post"
   autocomplete="off"
 >
-  {{ form.csrf_token() }} {{ form.form_type() }}
+  {{ form.hidden_tag() }}
   <div class="modal-body">
     <div>
       <label>Empty Database before Import</label>

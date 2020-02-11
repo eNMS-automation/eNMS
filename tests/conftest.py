@@ -22,6 +22,7 @@ def user_client():
     with warnings.catch_warnings():
         warnings.simplefilter("ignore")
         app = create_app("test")
+        print(app.config)
         app_context = app.app_context()
         app_context.push()
         Session.close()

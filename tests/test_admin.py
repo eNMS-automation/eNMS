@@ -28,7 +28,7 @@ def test_user_management(user_client):
             "form_type": "user",
             "name": user,
             "email": f"{user}@test.com",
-            "permissions": ["Admin"],
+            "group": "Admin",
             "password": user,
         }
         user_client.post("/update/user", data=dict_user)

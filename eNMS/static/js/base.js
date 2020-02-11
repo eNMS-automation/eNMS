@@ -63,7 +63,7 @@ $.ajaxSetup({
   },
 });
 
-function loadScript(url) {
+function loadScript(url, id) {
   let script = document.createElement('script');
   script.onload = function () {
     try {
@@ -462,7 +462,7 @@ export function showTypePanel(type, id, mode) {
         }
       }
       if (type.includes("service")) {
-        loadScript(`../static/js/services/${type}.js`);
+        loadScript(`../static/js/services/${type}.js`, id);
       }
     },
     type: type,

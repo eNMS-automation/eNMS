@@ -3,7 +3,6 @@ from sqlalchemy import Boolean, Float, ForeignKey, Integer
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.orm import backref, relationship
 
-from eNMS import app
 from eNMS.database.dialect import Column, LargeString, SmallString
 from eNMS.database.functions import fetch, fetch_all
 from eNMS.database.associations import (

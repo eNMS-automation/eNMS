@@ -788,8 +788,9 @@ export function getServiceState(id, first) {
       if (first || result.state.status == "Running") {
         colorService(id, "#89CFF0");
         localStorage.setItem("path", id);
-        if (result.service)
+        if (result.service) {
           localStorage.setItem("workflow", JSON.stringify(result.service));
+        }
         setTimeout(() => getServiceState(id), 300);
       } else {
         colorService(id, "#D2E5FF");

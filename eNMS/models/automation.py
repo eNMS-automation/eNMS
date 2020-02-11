@@ -27,7 +27,13 @@ from xml.parsers.expat import ExpatError
 
 from eNMS import app
 from eNMS.database import Session
-from eNMS.database.dialect import Column, LargeString, MutableDict, MutableList, SmallString
+from eNMS.database.dialect import (
+    Column,
+    LargeString,
+    MutableDict,
+    MutableList,
+    SmallString,
+)
 from eNMS.database.associations import (
     run_pool_table,
     run_device_table,

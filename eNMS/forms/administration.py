@@ -14,7 +14,6 @@ from eNMS import app
 from eNMS.forms import BaseForm, configure_relationships
 from eNMS.forms.fields import DateField
 from eNMS.properties.database import import_classes
-from eNMS.settings import rbac
 
 
 class SettingsForm(BaseForm):

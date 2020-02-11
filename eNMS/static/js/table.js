@@ -115,8 +115,6 @@ export function initTable(type, instance, runtime, id) {
             .on("click", function(e) {
               e.stopPropagation();
             });
-          if (data.search == "text") {
-          }
         });
       $(`#controls-${type}`).html(models[type].controls);
       models[type].postProcessing(this.api(), columns, type);
@@ -264,6 +262,7 @@ class Base {
 
   static createfilteringTooltips(type, columns) {
     columns.forEach((column) => {
+      if (column.search != "text") return;
       const elementId = `${type}_filtering-${column.data}`;
       createTooltip({
         persistent: true,

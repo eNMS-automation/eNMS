@@ -12,6 +12,7 @@ from eNMS.framework.rest import configure_rest_api
 from eNMS.framework.routes import blueprint
 from eNMS.models import models, property_types, relationships
 from eNMS.properties import property_names
+from eNMS.settings import rbac
 
 
 def register_extensions(flask_app):
@@ -35,6 +36,7 @@ def configure_context_processor(flask_app):
         return {
             "property_types": property_types,
             "form_properties": form_properties,
+            "menu": rbac["menu"],
             "names": property_names,
             "settings": app.settings,
             "relations": list(set(chain.from_iterable(relationships.values()))),

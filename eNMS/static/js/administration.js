@@ -106,9 +106,9 @@ function databaseDeletion() {
 
 // eslint-disable-next-line
 function resultLogDeletion() {
-  alertify.notify("Starting to delete...", "success", 5);
+  notify("Starting to delete...", "success", 5);
   fCall("/result_log_deletion", "result_log_deletion-form", function(result) {
-    alertify.notify("Deletion done.", "success", 5);
+    notify("Deletion done.", "success", 5);
     $("#result_log_deletion").remove();
   });
 }

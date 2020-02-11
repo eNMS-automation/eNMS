@@ -171,7 +171,6 @@ class AdministrationController(BaseController):
     def export_service(self, service_id):
         service = fetch("service", id=service_id)
         path = Path(self.path / "files" / "services" / service.filename)
-        path.mkdir(parents=True, exist_ok=True)
         services = service.deep_services if service.type == "workflow" else [service]
         services = [service.to_dict(export=True) for service in services]
         for service_dict in services:

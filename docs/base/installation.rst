@@ -2,7 +2,7 @@
 Installation
 ============
 
-eNMS is designed to run on a **Unix server** with Python **3.8+**.
+eNMS is designed to run on a **Unix server** with Python **3.6+**.
 
 First steps
 -----------

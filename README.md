@@ -129,7 +129,7 @@ ___
 - A _[podcast about eNMS and network automation](https://www.pythonpodcast.com/enms-network-automation-episode-232/)_
 
 ## Quick Install
-    Install python 3.8+ (earlier versions not supported)
+    Install python 3.6+ (earlier versions not supported)
     git clone https://github.com/afourmy/eNMS.git
     cd eNMS
     pip3 install -r requirements.txt

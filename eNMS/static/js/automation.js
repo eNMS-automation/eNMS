@@ -169,7 +169,7 @@ export const showRuntimePanel = function(type, service, runtime, displayTable) {
       openPanel({
         name: panelType,
         title: `${type} - ${service.name}`,
-        id: panelId,
+        id: service.id,
         callback: function() {
           $(`#runtimes-${panelId}`).empty();
           runtimes.forEach((runtime) => {
@@ -196,10 +196,10 @@ export const showRuntimePanel = function(type, service, runtime, displayTable) {
 };
 
 function displayLogs(service, runtime, change) {
-  const content = document.getElementById(`content-logs-${service.id}`);
+  const content = document.getElementById(`service-logs-${service.id}`);
   let editor;
   if (change) {
-    editor = $(`#content-logs-${service.id}`).data("CodeMirrorInstance");
+    editor = $(`#service-logs-${service.id}`).data("CodeMirrorInstance");
     editor.setValue("");
   } else {
     // eslint-disable-next-line new-cap
@@ -212,7 +212,7 @@ function displayLogs(service, runtime, change) {
       extraKeys: { "Ctrl-F": "findPersistent" },
       scrollbarStyle: "overlay",
     });
-    $(`#content-logs-${service.id}`).data("CodeMirrorInstance", editor);
+    $(`#service-logs-${service.id}`).data("CodeMirrorInstance", editor);
     editor.setSize("100%", "100%");
   }
   $(`#runtimes-logs-${service.id}`).on("change", function() {
@@ -225,10 +225,10 @@ function displayResultsTree(service, runtime) {
   call({
     url: `/get_workflow_results/${service.id}/${runtime}`,
     callback: function(data) {
-      $(`#result-tree-tree-${service.id}`)
+      $(`#result-tree-${service.id}`)
         .jstree("destroy")
         .empty();
-      let tree = $(`#result-tree-tree-${service.id}`).jstree({
+      let tree = $(`#result-tree-${service.id}`).jstree({
         core: {
           animation: 100,
           themes: { stripes: true },
@@ -303,12 +303,12 @@ function displayResultsTable(service, runtime) {
     "result",
     service,
     runtime || currentRuntime,
-    `table-result-table-${service.id}`
+    service.id
   );
 }
 
 function refreshLogs(service, runtime, editor, first, wasRefreshed) {
-  if (!$(`#logs-logs-${service.id}`).length) return;
+  if (!$(`#service-logs-${service.id}`).length) return;
   call({
     url: `/get_service_logs/${service.id}/${runtime}`,
     callback: function(result) {
@@ -320,7 +320,7 @@ function refreshLogs(service, runtime, editor, first, wasRefreshed) {
           1000
         );
       } else if (wasRefreshed) {
-        $(`#logs-logs-${service.id}`).remove();
+        $(`#service-logs-${service.id}`).remove();
         showRuntimePanel("results", service, runtime);
       }
     },

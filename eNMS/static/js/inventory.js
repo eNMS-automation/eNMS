@@ -282,7 +282,7 @@ function showDeviceResultsPanel(device) {
     id: device.id,
     title: `Results - ${device.name}`,
     callback: function() {
-      initTable("result", device, null, `table-result-${device.id}`);
+      initTable("result", device, null, `table-${device.id}`);
     },
   });
 }

@@ -250,7 +250,6 @@
         "/import_topology",
         "/migration_export",
         "/migration_import",
-        "/multiselect_filtering",
         "/reset_status",
         "/run_service",
         "/save_file",

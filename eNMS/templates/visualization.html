@@ -69,7 +69,6 @@
 {% endif %} {% endblock content %} {% block javascripts %} {{ super()}}
 <script>
   let viewType = "{{ view_type }}";
-  console.log(viewType);
 </script>
 <script src="{{ url_for('static', filename='lib/leaflet/leaflet.min.js') }}"></script>
 <script src="{{ url_for('static', filename='lib/leaflet-markercluster/leaflet.markercluster.min.js') }}"></script>

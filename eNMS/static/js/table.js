@@ -40,9 +40,8 @@ export function initTable(type, instance, runtime, id) {
     if (visibleColumns) column.visible = visibleColumns.includes(column.data);
     column.name = column.data;
   });
-
   // eslint-disable-next-line new-cap
-  tables[type] = $(id ? `#${id}` : "#table").DataTable({
+  tables[type] = $(id ? `#table-${type}-${id}` : `#table-${type}`).DataTable({
     serverSide: true,
     orderCellsTop: true,
     autoWidth: false,
@@ -116,7 +115,7 @@ export function initTable(type, instance, runtime, id) {
               e.stopPropagation();
             });
         });
-      $(`#controls-${type}`).html(models[type].controls);
+      $(id ? `#controls-${type}-${id}` : `#controls-${type}`).html(models[type].controls);
       models[type].postProcessing(this.api(), columns, type);
     },
     ajax: {

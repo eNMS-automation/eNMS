@@ -39,8 +39,8 @@ td.dt-center {
   margin-right: 25px;
 }
 
-#tooltip-frame {
+#tooltip-overlay {
   position: absolute;
   height: 50%;
-  width: 90%;
+  width: 98%;
 }

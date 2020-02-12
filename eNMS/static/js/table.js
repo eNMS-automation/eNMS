@@ -268,7 +268,7 @@ class Base {
         persistent: true,
         name: elementId,
         target: `#${elementId}-search`,
-        container: `#tooltip-frame`,
+        container: `#tooltip-overlay`,
         position: {
           my: "center-top",
           at: "center-bottom",

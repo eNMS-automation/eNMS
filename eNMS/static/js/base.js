@@ -303,6 +303,11 @@ export function showDeletionPanel(instance) {
 }
 
 export function preprocessForm(panel, id, type, duplicate) {
+  if (type) {
+    panel.querySelectorAll(".add-type").forEach((el) => {
+      $(el).prop("id", `${$(el).attr("id")}-${type}`);
+    });
+  }
   panel.querySelectorAll(".add-id").forEach((el) => {
     if (duplicate) {
       const property =

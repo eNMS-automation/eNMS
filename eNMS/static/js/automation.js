@@ -168,6 +168,7 @@ export const showRuntimePanel = function(type, service, runtime, displayTable) {
       }
       openPanel({
         name: panelType,
+        type: "result",
         title: `${type} - ${service.name}`,
         id: service.id,
         callback: function() {

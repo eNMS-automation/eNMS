@@ -40,8 +40,9 @@ export function initTable(type, instance, runtime, id) {
     if (visibleColumns) column.visible = visibleColumns.includes(column.data);
     column.name = column.data;
   });
+  const postfix = id ? `-${id}` : "";
   // eslint-disable-next-line new-cap
-  tables[type] = $(id ? `#table-${type}-${id}` : `#table-${type}`).DataTable({
+  tables[type] = $(`#table-${type}${postfix}`).DataTable({
     serverSide: true,
     orderCellsTop: true,
     autoWidth: false,
@@ -115,7 +116,7 @@ export function initTable(type, instance, runtime, id) {
               e.stopPropagation();
             });
         });
-      $(id ? `#controls-${type}-${id}` : `#controls-${type}`).html(models[type].controls);
+      $(`#controls-${type}${postfix}`).html(models[type].controls);
       models[type].postProcessing(this.api(), columns, type);
     },
     ajax: {
@@ -123,9 +124,7 @@ export function initTable(type, instance, runtime, id) {
       type: "POST",
       contentType: "application/json",
       data: (d) => {
-        const form = $(`#${type}_filtering`).length
-          ? `#${type}_filtering-form`
-          : `#search-${type}-form`;
+        const form = `#search-form-${type}${postfix}`;
         d.form = serializeForm(form);
         d.instance = instance;
         d.columns = columns;

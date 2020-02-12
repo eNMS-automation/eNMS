@@ -321,6 +321,7 @@ class BaseController:
 
     def build_filtering_constraints(self, obj_type, **kwargs):
         model, constraints = models[obj_type], []
+        print(kwargs["form"])
         for property in model_properties[obj_type]:
             value = kwargs["form"].get(property)
             if not value:

@@ -31,7 +31,6 @@ from tacacs_plus.client import TACACSClient
 from uuid import getnode
 
 from eNMS.scheduler import SchedulerFactory
-from eNMS.settings import settings
 from eNMS.database import Base, DIALECT, engine, Session
 from eNMS.database.events import configure_events
 from eNMS.database.functions import (

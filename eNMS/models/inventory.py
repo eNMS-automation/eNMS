@@ -1,4 +1,4 @@
-from re import search
+from re import search, sub
 from sqlalchemy import Boolean, Float, ForeignKey, Integer
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.orm import backref, relationship
@@ -121,6 +121,7 @@ class Device(CustomDevice):
         context = int(kwargs["form"].get("context-lines", 0))
         for property in ("configuration", "operational_data"):
             data = kwargs["form"].get(property)
+            regex_match = kwargs["form"].get(f"{property}_filter") == "regex"
             if not data:
                 properties[property] = ""
             else:
@@ -128,7 +129,7 @@ class Device(CustomDevice):
                 content, visited = getattr(self, property).splitlines(), set()
                 for (index, line) in enumerate(content):
                     match_lines, merge = [], index - context - 1 in visited
-                    if data not in line:
+                    if not search(data, line) if regex_match else data not in line:
                         continue
                     for i in range(-context, context + 1):
                         if index + i < 0 or index + i > len(content) - 1:
@@ -137,11 +138,14 @@ class Device(CustomDevice):
                             merge = True
                             continue
                         visited.add(index + i)
-                        line = (
-                            content[index + i]
-                            .strip()
-                            .replace(data, f"<mark>{data}</mark>")
-                        )
+                        if regex_match:
+                            line = sub(data, r"<mark>\g<0></mark>", content[index + i])
+                        else:
+                            line = (
+                                content[index + i]
+                                .strip()
+                                .replace(data, f"<mark>{data}</mark>")
+                            )
                         match_lines.append(f"<b>L{index + i + 1}:</b> {line}")
                     if merge:
                         result[-1] += f"<br>{'<br>'.join(match_lines)}"

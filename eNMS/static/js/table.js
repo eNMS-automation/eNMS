@@ -132,7 +132,6 @@ export function initTable(type, instance, runtime, id) {
         if (runtime) {
           d.runtime = $(`#runtimes-${instance.id}`).val() || runtime;
         }
-        if (models[type].filteringData) models[type].filteringData(d);
         return JSON.stringify(d);
       },
       dataSrc: function(result) {
@@ -454,14 +453,6 @@ models.configuration = class Configuration extends models.device {
     $("#slider").on("change", function() {
       refreshTable("configuration");
     });
-  }
-
-  static filteringData(data) {
-    const dataType = $("#data-type").prop("checked")
-      ? "operational_data"
-      : "configuration";
-    const filter = $("#search-type").prop("checked") ? "regex" : "inclusion";
-    data.form[`${dataType}_filter`] = filter;
   }
 
   static get controls() {

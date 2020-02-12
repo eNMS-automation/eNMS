@@ -10,14 +10,12 @@ vis: false
 
 import {
   call,
-  configureNamespace,
+  createTooltip,
   notify,
   serializeForm,
   showTypePanel,
-  openPanel,
 } from "./base.js";
 import { showConnectionPanel, showDeviceData } from "./inventory.js";
-import { initTable } from "./table.js";
 
 const layers = {
   osm: "http://{s}.tile.osm.org/{z}/{x}/{y}.png",
@@ -302,15 +300,20 @@ export function initView() {
     Connect: (d) => showConnectionPanel(d),
     Configuration: (d) => showDeviceData(d),
   });
-}
-
-function filterViewPanel(type) {
-  openPanel({
-    name: "table",
-    type: "device",
-    callback: function() {
-      initTable("device");
+  const type = "device";
+  createTooltip({
+    autoshow: true,
+    persistent: true,
+    name: `${type}_filtering`,
+    target: `#${type}-filtering`,
+    container: ".right_column",
+    position: {
+      my: "center-top",
+      at: "center-bottom",
+      offsetY: 18,
     },
+    url: `../form/${type}_filtering`,
+    title: "Relationship-based Filtering",
   });
 }
 
@@ -330,5 +333,3 @@ export function filterView(type) {
     },
   });
 }
-
-configureNamespace("visualization", [filterViewPanel]);

@@ -313,7 +313,7 @@ export function initView() {
         offsetY: 18,
       },
       url: `../form/${type}_filtering`,
-      title: "View Filtering",
+      title: `${type.charAt(0).toUpperCase() + type.slice(1)} Filtering`,
     });
   }
 }

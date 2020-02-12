@@ -620,7 +620,8 @@ export function notify(...args) {
     "alerts",
     JSON.stringify([...alerts, [...args, moment().format("MMMM Do YYYY, h:mm:ss a")]])
   );
-  $("#alert-number").text(alerts.length + 1);
+  const alert = alerts.length + 1 > 99 ? "99+" : alerts.length + 1;
+  $("#alert-number").text(alert);
   alertify.notify(...args);
 }
 

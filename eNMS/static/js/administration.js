@@ -89,6 +89,8 @@ function migrationsImport() {
 function showImportServicePanel() {
   openPanel({
     name: "import_service",
+    title: "Import Service",
+    size: "600 300",
     callback: () => {
       call({
         url: "/get_exported_services",

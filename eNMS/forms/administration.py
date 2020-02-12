@@ -92,7 +92,7 @@ class DatabaseMigrationsForm(BaseForm):
 
 
 class ImportService(BaseForm):
-    action = "importService"
+    action = "eNMS.administration.importService"
     form_type = HiddenField(default="import_service")
     service = SelectField("Service", choices=())
 

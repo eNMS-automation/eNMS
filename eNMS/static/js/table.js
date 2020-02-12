@@ -358,7 +358,7 @@ models.device = class Device extends Base {
       super.createNewButton("device"),
       ` <button type="button" class="btn btn-primary"
       onclick="eNMS.inventory.showImportTopologyPanel()"
-      data-tooltip="Export"><span class="glyphicon glyphicon-download">
+      data-tooltip="Import"><span class="glyphicon glyphicon-download">
       </span></button>
       <button type="button" class="btn btn-primary"
         onclick="eNMS.base.openPanel({name: 'excel_export'})"
@@ -764,7 +764,7 @@ models.service = class Service extends Base {
         <li>
           <button type="button" class="btn btn-sm btn-primary"
           onclick="eNMS.automation.exportService('${this.id}')" data-tooltip="Export"
-            ><span class="glyphicon glyphicon-download"></span
+            ><span class="glyphicon glyphicon-upload"></span
           ></button>
         </li>
         <li>

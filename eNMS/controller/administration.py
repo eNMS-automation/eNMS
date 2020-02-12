@@ -173,7 +173,7 @@ class AdministrationController(BaseController):
                 name=service_name,
                 import_export_types=["service", "workflow_edge"],
             )
-        rmtree(path / service_name)
+        rmtree(path / service_name, ignore_errors=True)
         return status
 
     def migration_export(self, **kwargs):
@@ -187,6 +187,7 @@ class AdministrationController(BaseController):
     def export_service(self, service_id):
         service = fetch("service", id=service_id)
         path = Path(self.path / "files" / "services" / service.filename)
+        path.mkdir(parents=True, exist_ok=True)
         services = service.deep_services if service.type == "workflow" else [service]
         services = [service.to_dict(export=True) for service in services]
         for service_dict in services:
@@ -204,7 +205,7 @@ class AdministrationController(BaseController):
         rmtree(path, ignore_errors=True)
 
     def get_exported_services(self):
-        return listdir(self.path / "files" / "services")
+        return [f for f in listdir(self.path / "files" / "services") if ".tgz" in f]
 
     def save_settings(self, **settings):
         self.settings = settings

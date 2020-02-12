@@ -300,12 +300,7 @@ function displayResultsTable(service, runtime) {
   $(`#runtimes-result-${service.id}`).on("change", function() {
     tables[`result-${service.id}`].ajax.reload(null, false);
   });
-  initTable(
-    "result",
-    service,
-    runtime || currentRuntime,
-    service.id
-  );
+  initTable("result", service, runtime || currentRuntime, service.id);
 }
 
 function refreshLogs(service, runtime, editor, first, wasRefreshed) {

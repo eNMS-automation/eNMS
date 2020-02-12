@@ -300,21 +300,22 @@ export function initView() {
     Connect: (d) => showConnectionPanel(d),
     Configuration: (d) => showDeviceData(d),
   });
-  const type = "device";
-  createTooltip({
-    autoshow: true,
-    persistent: true,
-    name: `${type}_filtering`,
-    target: `#${type}-filtering`,
-    container: ".right_column",
-    position: {
-      my: "center-top",
-      at: "center-bottom",
-      offsetY: 18,
-    },
-    url: `../form/${type}_filtering`,
-    title: "Relationship-based Filtering",
-  });
+  for (let type of ["device", "link"]) {
+    createTooltip({
+      autoshow: true,
+      persistent: true,
+      name: `${type}_filtering`,
+      target: `#${type}-filtering`,
+      container: ".right_column",
+      position: {
+        my: "center-top",
+        at: "center-bottom",
+        offsetY: 18,
+      },
+      url: `../form/${type}_filtering`,
+      title: "View Filtering",
+    });
+  }
 }
 
 export function filterView(type) {

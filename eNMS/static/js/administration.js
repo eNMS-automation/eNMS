@@ -246,6 +246,7 @@ function showFileUploadPanel(folder) {
 function displayFiles() {
   openPanel({
     name: "files",
+    title: "Files",
     callback: function() {
       $("#files-tree").jstree({
         core: {

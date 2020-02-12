@@ -208,6 +208,7 @@ export function openPanel({
     },
     position: "center-top 0 10",
     headerTitle: title,
+    maximizedMargin: 10,
     dragit: {
       opacity: 0.6,
       containment: 0,

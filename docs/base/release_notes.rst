@@ -12,18 +12,15 @@ You will need to add your CUSTOM properties to that file if you want them to app
 - Same with dashboard properties and pool properties
 - New Column visibility feature
 - New Configuration Management Mechanism
+- RBAC
+- Refactoring of the search system: next to the input, old "Advanced Search" button now dedicated
+to relationship. Everything is now persisted in the DOM.
 
 MIGRATION:
 - In netmiko configuration backup service, rename:
   * "configuration" -> "configuration_command"
   * "operational_data" -> "operational_data_command"
-- Moved the following "optional" requirements to a dedicated files called "requirements_optional.txt":
-ansible
-ldap3
-pyats
-pynetbox
-slackclient>=1.3,<2
-tacacs_plus
+- Moved ansible, pyats to a dedicated file called "requirements_optional.txt":
 
 Version 3.19
 ------------

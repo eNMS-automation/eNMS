@@ -1,13 +1,22 @@
 from datetime import datetime
-from flask import request
+from flask import request, make_response
 from flask_restful import abort, Api, Resource
 from logging import info
 from uuid import getnode
+from os import getenv
+from base64 import urlsafe_b64decode
+import json
+from uuid import uuid4
 
 from eNMS import app
 from eNMS.database import Session
 from eNMS.database.functions import delete, factory, fetch
 from eNMS.framework.extensions import auth, csrf
+from eNMS.scheduler.scheduling import custom_serialize
+
+INTERNAL_API_KEY = getenv(
+    "INTERNAL_API_KEY", uuid4()
+)  # Allow a default to exist that cannot be matched
 
 
 def create_app_resources():
@@ -185,6 +194,42 @@ class Topology(Resource):
             return "Topology Export successfully executed."
 
 
+class Scheduler(Resource):
+    def post(self, action):
+        data = request.get_json(force=True)
+        try:
+            if not check_internal_api_token():
+                return make_response(
+                    (
+                        {
+                            "description": "Not authorized for API access."
+                            " Invalid API key supplied."
+                        },
+                        401,
+                    )
+                )
+            result = getattr(app.scheduler, action)(**data)
+            if result is not None:
+                return result
+            else:
+                return make_response(({"description": "Job or result not found"}, 404))
+        except Exception as error:
+            return make_response(({"description": str(error)}, 404))
+
+
+def check_internal_api_token():
+    """
+    Originally added for the internal Scheduler REST API, this will look for REST API
+    access based on a custom HTTP header that includes an API key.
+    """
+    header = request.headers.get("x-internal-rest-api-key")
+    if not header:
+        return False
+    # This supports api_token:<token> or just <token>
+    token = urlsafe_b64decode(header.split(":")[-1]).decode("utf-8")
+    return token == INTERNAL_API_KEY
+
+
 def configure_rest_api(flask_app):
     api = Api(flask_app, decorators=[csrf.exempt])
     for endpoint, resource in create_app_resources().items():
@@ -199,3 +244,12 @@ def configure_rest_api(flask_app):
     api.add_resource(GetResult, "/rest/result/<string:name>/<string:runtime>")
     api.add_resource(Migrate, "/rest/migrate/<string:direction>")
     api.add_resource(Topology, "/rest/topology/<string:direction>")
+    api.add_resource(Scheduler, f"/rest/scheduler/<string:action>")
+
+    # This will add some additional serialization support for classes that do not
+    # work as well with the default json.dumps() serialization behavior.
+    @api.representation("application/json")
+    def output_json(data, code, headers=None):
+        resp = make_response(json.dumps(data, default=custom_serialize), code)
+        resp.headers.extend(headers or {})
+        return resp

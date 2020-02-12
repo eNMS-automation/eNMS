@@ -1,4 +1,3 @@
-from apscheduler.schedulers.background import BackgroundScheduler
 from collections import Counter
 from datetime import datetime
 from difflib import SequenceMatcher
@@ -31,6 +30,7 @@ from sys import path as sys_path
 from tacacs_plus.client import TACACSClient
 from uuid import getnode
 
+from eNMS.scheduler import SchedulerFactory
 from eNMS.settings import settings
 from eNMS.database import Base, DIALECT, engine, Session
 from eNMS.database.events import configure_events
@@ -298,21 +298,7 @@ class BaseController:
             )
 
     def init_scheduler(self):
-        self.scheduler = BackgroundScheduler(
-            {
-                "apscheduler.jobstores.default": {
-                    "type": "sqlalchemy",
-                    "url": "sqlite:///jobs.sqlite",
-                },
-                "apscheduler.executors.default": {
-                    "class": "apscheduler.executors.pool:ThreadPoolExecutor",
-                    "max_workers": "50",
-                },
-                "apscheduler.job_defaults.misfire_grace_time": "5",
-                "apscheduler.job_defaults.coalesce": "true",
-                "apscheduler.job_defaults.max_instances": "3",
-            }
-        )
+        self.scheduler = SchedulerFactory.create_scheduler(self)
         self.scheduler.start()
 
     def init_forms(self):

@@ -193,6 +193,14 @@ Section ``Requests``
     - ``connect`` (default: ``2``)
     - ``backoff_factor`` (default: ``0.5``)
 
+Section ``Scheduler``
+*********************
+
+- ``apscheduler.*`` - see APScheduler documentation
+- ``scheduler_http_port`` (default: 5005) - proxy port for `primary` application running with APScheduler -
+  only used if ``WSGI_DELEGATE_SCHEDULING`` environment variable is set
+
+
 Section ``Slack``
 *****************
 
@@ -233,6 +241,10 @@ the ``active`` variable to ``true``, provide an address and export
 - ``UNSEAL_VAULT_KEY3``
 - ``UNSEAL_VAULT_KEY4``
 - ``UNSEAL_VAULT_KEY5``
+- ``INTERNAL_API_KEY`` - sent as a custom HTTP header for the internal scheduling REST API usage (optional)
+- ``WSGI_DELEGATE_SCHEDULING`` - if defined in the environment, the application use the REST API to "delegate" (proxy)
+  scheduling calls to another, primary scheduler using the internal scheduling REST API - this is experimental and
+  used for scaling purposes
 
 Section ``View``
 ****************

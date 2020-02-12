@@ -93,6 +93,9 @@ class AbstractBase(Base):
             result[property] = value
         return result
 
+    def table_properties(self, **_):
+        return self.get_properties()
+
     def duplicate(self, **kwargs):
         properties = {
             k: v for (k, v) in self.get_properties().items() if k not in ("id", "name")

@@ -17,7 +17,6 @@ import {
   call,
   configureNamespace,
   copyToClipboard,
-  fCall,
   notify,
   openPanel,
   showTypePanel,
@@ -265,11 +264,14 @@ export const switchToWorkflow = function(path, arrow) {
     $("#right-arrow").addClass("disabled");
   }
   if (page == "workflow_builder") {
-    call(`/get_service_state/${path}/latest`, function(result) {
-      workflow = result.service;
-      localStorage.setItem("path", path);
-      localStorage.setItem("workflow", JSON.stringify(workflow));
-      displayWorkflow(result);
+    call({
+      url: `/get_service_state/${path}/latest`,
+      callback: function(result) {
+        workflow = result.service;
+        localStorage.setItem("path", path);
+        if (workflow) localStorage.setItem("workflow", JSON.stringify(workflow));
+        displayWorkflow(result);
+      },
     });
   } else {
     $("#workflow-filtering").val(path);
@@ -298,8 +300,11 @@ export function processWorkflowData(instance, id) {
           displayWorkflow({ service: instance, runtimes: [] });
         }
       } else {
-        call(`/add_service_to_workflow/${workflow.id}/${instance.id}`, function() {
-          updateWorkflowService(instance);
+        call({
+          url: `/add_service_to_workflow/${workflow.id}/${instance.id}`,
+          callback: function() {
+            updateWorkflowService(instance);
+          },
         });
       }
     }
@@ -318,12 +323,14 @@ function addServicesToWorkflow() {
   const selection = $("#service-tree").jstree("get_checked", true);
   if (!selection.length) notify("Nothing selected.", "error", 5);
   $("#services").val(selection.map((n) => n.data.id));
-  fCall(`/copy_service_in_workflow/${workflow.id}`, "add-services-form", function(
-    result
-  ) {
-    workflow.last_modified = result.update_time;
-    $("#add_services").remove();
-    result.services.map(updateWorkflowService);
+  call({
+    url: `/copy_service_in_workflow/${workflow.id}`,
+    form: "add-services-form",
+    callback: function(result) {
+      workflow.last_modified = result.update_time;
+      $("#add_services").remove();
+      result.services.map(updateWorkflowService);
+    },
   });
 }
 
@@ -333,67 +340,85 @@ function deleteNode(id) {
     deleteLabel(node);
   } else {
     workflow.services = workflow.services.filter((n) => n.id != id);
-    call(`/delete_node/${workflow.id}/${id}`, function(result) {
-      workflow.last_modified = result.update_time;
-      notify(
-        `'${result.service.scoped_name}' deleted from the workflow.`,
-        "success",
-        5
-      );
+    call({
+      url: `/delete_node/${workflow.id}/${id}`,
+      callback: function(result) {
+        workflow.last_modified = result.update_time;
+        notify(
+          `'${result.service.scoped_name}' deleted from the workflow.`,
+          "success",
+          5
+        );
+      },
     });
   }
 }
 
 function deleteLabel(label, noNotification) {
   nodes.remove(label.id);
-  call(`/delete_label/${workflow.id}/${label.id}`, function(updateTime) {
-    delete workflow.labels[label.id];
-    workflow.last_modified = updateTime;
-    if (!noNotification) notify("Label removed.", "success", 5);
+  call({
+    url: `/delete_label/${workflow.id}/${label.id}`,
+    callback: function(updateTime) {
+      delete workflow.labels[label.id];
+      workflow.last_modified = updateTime;
+      if (!noNotification) notify("Label removed.", "success", 5);
+    },
   });
 }
 
 function saveEdge(edge) {
   const param = `${workflow.id}/${edge.subtype}/${edge.from}/${edge.to}`;
-  call(`/add_edge/${param}`, function(result) {
-    workflow.last_modified = result.update_time;
-    edges.add(edgeToEdge(result.edge));
-    graph.addEdgeMode();
+  call({
+    url: `/add_edge/${param}`,
+    callback: function(result) {
+      workflow.last_modified = result.update_time;
+      edges.add(edgeToEdge(result.edge));
+      graph.addEdgeMode();
+    },
   });
 }
 
 function deleteEdge(edgeId) {
   workflow.edges = workflow.edges.filter((e) => e.id != edgeId);
-  call(`/delete_edge/${workflow.id}/${edgeId}`, (updateTime) => {
-    workflow.last_modified = updateTime;
+  call({
+    url: `/delete_edge/${workflow.id}/${edgeId}`,
+    callback: (updateTime) => {
+      workflow.last_modified = updateTime;
+    },
   });
 }
 
 function stopWorkflow() {
-  call(`/stop_workflow/${currentRuntime}`, (result) => {
-    if (!result) {
-      notify("The workflow is not currently running.", "error", 5);
-    } else {
-      notify("Workflow will stop after current service...", "success", 5);
-    }
+  call({
+    url: `/stop_workflow/${currentRuntime}`,
+    callback: (result) => {
+      if (!result) {
+        notify("The workflow is not currently running.", "error", 5);
+      } else {
+        notify("Workflow will stop after current service...", "success", 5);
+      }
+    },
   });
 }
 
 function skipServices() {
   const selectedNodes = graph.getSelectedNodes().filter((x) => !isNaN(x));
   if (!selectedNodes.length) return;
-  call(`/skip_services/${workflow.id}/${selectedNodes.join("-")}`, (result) => {
-    workflow.last_modified = result.update_time;
-    workflow.services.forEach((service) => {
-      if (selectedNodes.includes(service.id)) {
-        service.skip = result.skip === "skip";
-        nodes.update({
-          id: service.id,
-          color: result.skip === "skip" ? "#D3D3D3" : "#D2E5FF",
-        });
-      }
-    });
-    notify(`Services ${result.skip}ped.`, "success", 5);
+  call({
+    url: `/skip_services/${workflow.id}/${selectedNodes.join("-")}`,
+    callback: (result) => {
+      workflow.last_modified = result.update_time;
+      workflow.services.forEach((service) => {
+        if (selectedNodes.includes(service.id)) {
+          service.skip = result.skip === "skip";
+          nodes.update({
+            id: service.id,
+            color: result.skip === "skip" ? "#D3D3D3" : "#D2E5FF",
+          });
+        }
+      });
+      notify(`Services ${result.skip}ped.`, "success", 5);
+    },
   });
 }
 
@@ -568,7 +593,7 @@ function savePositions() {
 function addServicePanel() {
   openPanel({
     name: "add_services",
-    processing: function() {
+    callback: function() {
       $("#service-tree").jstree({
         core: {
           animation: 200,
@@ -606,11 +631,14 @@ function createNew(mode) {
   if (mode == "create_workflow") {
     showTypePanel("workflow");
   } else if (mode == "duplicate_workflow") {
-    call(`/duplicate_workflow/${workflow.id}`, function(instance) {
-      $("#current-workflow").append(
-        `<option value="${instance.id}">${instance.name}</option>`
-      );
-      switchToWorkflow(instance.id);
+    call({
+      url: `/duplicate_workflow/${workflow.id}`,
+      callback: function(instance) {
+        $("#current-workflow").append(
+          `<option value="${instance.id}">${instance.name}</option>`
+        );
+        switchToWorkflow(instance.id);
+      },
     });
   } else {
     showTypePanel($("#service-type").val());
@@ -671,21 +699,25 @@ function createLabel() {
     ? [mousePosition.x, mousePosition.y]
     : [0, 0];
   const params = `${workflow.id}/${pos[0]}/${pos[1]}`;
-  fCall(`/create_label/${params}`, "workflow_label-form", function(result) {
-    if (currLabel) {
-      deleteLabel(currLabel, true);
-      currLabel = null;
-    }
-    drawLabel(result.id, result);
-    $("#workflow_label").remove();
-    notify("Label created.", "success", 5);
+  call({
+    url: `/create_label/${params}`,
+    form: "workflow_label-form",
+    callback: function(result) {
+      if (currLabel) {
+        deleteLabel(currLabel, true);
+        currLabel = null;
+      }
+      drawLabel(result.id, result);
+      $("#workflow_label").remove();
+      notify("Label created.", "success", 5);
+    },
   });
 }
 
 function editLabel(label) {
   openPanel({
     name: "workflow_label",
-    processing: () => {
+    callback: () => {
       $("#text").val(label.label);
       $("#alignment")
         .val(label.font.align)
@@ -709,30 +741,37 @@ function showRestartWorkflowPanel(workflow, service) {
     name: "restart_workflow",
     title: `Restart Workflow '${workflow.name}' from '${service.name}'`,
     id: workflow.id,
-    processing: function() {
+    callback: function() {
       $("#start_services").append(new Option(service.name, service.id));
       $("#start_services")
         .val(service.id)
         .trigger("change");
-      call(`/get_runtimes/service/${workflow.id}`, function(runtimes) {
-        runtimes.forEach((runtime) => {
-          $("#restart_runtime").append(
-            $("<option></option>")
-              .attr("value", runtime[0])
-              .text(runtime[1])
-          );
-        });
-        $("#restart_runtime").val(runtimes[runtimes.length - 1]);
-        $("#restart_runtime").selectpicker("refresh");
+      call({
+        url: `/get_runtimes/service/${workflow.id}`,
+        callback: function(runtimes) {
+          runtimes.forEach((runtime) => {
+            $("#restart_runtime").append(
+              $("<option></option>")
+                .attr("value", runtime[0])
+                .text(runtime[1])
+            );
+          });
+          $("#restart_runtime").val(runtimes[runtimes.length - 1]);
+          $("#restart_runtime").selectpicker("refresh");
+        },
       });
     },
   });
 }
 
 function restartWorkflow() {
-  fCall(`/run_service/${currentPath}`, `restart_workflow-form`, function(result) {
-    $(`#restart_workflow-${workflow.id}`).remove();
-    runLogic(result);
+  call({
+    url: `/run_service/${currentPath}`,
+    form: `restart_workflow-form`,
+    function(result) {
+      $(`#restart_workflow-${workflow.id}`).remove();
+      runLogic(result);
+    },
   });
 }
 
@@ -743,15 +782,20 @@ function colorService(id, color) {
 }
 
 export function getServiceState(id, first) {
-  call(`/get_service_state/${id}`, function(result) {
-    if (first || result.state.status == "Running") {
-      colorService(id, "#89CFF0");
-      localStorage.setItem("path", id);
-      localStorage.setItem("workflow", JSON.stringify(result.service));
-      setTimeout(() => getServiceState(id), 300);
-    } else {
-      colorService(id, "#D2E5FF");
-    }
+  call({
+    url: `/get_service_state/${id}`,
+    callback: function(result) {
+      if (first || result.state.status == "Running") {
+        colorService(id, "#89CFF0");
+        localStorage.setItem("path", id);
+        if (result.service) {
+          localStorage.setItem("workflow", JSON.stringify(result.service));
+        }
+        setTimeout(() => getServiceState(id), 300);
+      } else {
+        colorService(id, "#D2E5FF");
+      }
+    },
   });
 }
 
@@ -826,14 +870,17 @@ function getWorkflowState(periodic, notification) {
   const runtime = $("#current-runtime").val();
   const url = runtime ? `/${runtime}` : "";
   if (userIsActive && workflow && workflow.id) {
-    call(`/get_service_state/${currentPath}${url}`, function(result) {
-      if (result.service.id != workflow.id) return;
-      currentRuntime = result.runtime;
-      if (result.service.last_modified !== workflow.last_modified) {
-        displayWorkflow(result);
-      } else {
-        displayWorkflowState(result);
-      }
+    call({
+      url: `/get_service_state/${currentPath}${url}`,
+      callback: function(result) {
+        if (result.service.id != workflow.id) return;
+        currentRuntime = result.runtime;
+        if (result.service.last_modified !== workflow.last_modified) {
+          displayWorkflow(result);
+        } else {
+          displayWorkflowState(result);
+        }
+      },
     });
   }
   if (periodic) setTimeout(() => getWorkflowState(true), 4000);
@@ -846,38 +893,37 @@ export function initWorkflowBuilder() {
   $("#edge-type").on("change", function() {
     switchMode(this.value);
   });
-  call("/get_top_level_workflows", function(workflows) {
-    workflows.sort((a, b) => a.name.localeCompare(b.name));
-    for (let i = 0; i < workflows.length; i++) {
-      $("#current-workflow").append(
-        `<option value="${workflows[i].id}">${workflows[i].name}</option>`
-      );
-    }
-    if (workflow) {
-      if (currentPath) {
-        $("#current-workflow").val(currentPath.split(">")[0]);
-      } else {
-        currentPath = $("#current-workflow").val();
-      }
-      switchToWorkflow(currentPath);
-    } else {
-      workflow = $("#current-workflow").val();
-      if (workflow) {
-        switchToWorkflow(workflow);
-      } else {
-        notify(
-          `You must create a workflow in the
-        'Workflow management' page first.`,
-          "error",
-          5
+  call({
+    url: "/get_top_level_workflows",
+    callback: function(workflows) {
+      workflows.sort((a, b) => a.name.localeCompare(b.name));
+      for (let i = 0; i < workflows.length; i++) {
+        $("#current-workflow").append(
+          `<option value="${workflows[i].id}">${workflows[i].name}</option>`
         );
       }
-    }
-    $("#current-workflow,#current-runtimes").selectpicker({
-      liveSearch: true,
-    });
-    $("#edge-type").selectpicker();
-    getWorkflowState(true);
+      if (workflow) {
+        $("#current-workflow").val(currentPath.split(">")[0]);
+        switchToWorkflow(currentPath);
+      } else {
+        workflow = $("#current-workflow").val();
+        if (workflow) {
+          switchToWorkflow(workflow);
+        } else {
+          notify(
+            `You must create a workflow in the
+          'Workflow management' page first.`,
+            "error",
+            5
+          );
+        }
+      }
+      $("#current-workflow,#current-runtimes").selectpicker({
+        liveSearch: true,
+      });
+      $("#edge-type").selectpicker();
+      getWorkflowState(true);
+    },
   });
   $("#network").contextMenu({
     menuSelector: "#contextMenu",

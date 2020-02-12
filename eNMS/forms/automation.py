@@ -269,8 +269,8 @@ class ResultForm(BaseForm):
 
 
 class ResultTableForm(BaseForm):
-    template = "result_table"
-    form_type = HiddenField(default="result_table")
+    template = "table"
+    form_type = HiddenField(default="table")
     runtimes = NoValidationSelectField("Runtime", choices=())
 
 

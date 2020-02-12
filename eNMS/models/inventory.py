@@ -9,7 +9,6 @@ from eNMS.database.functions import fetch, fetch_all
 from eNMS.database.associations import (
     pool_device_table,
     pool_link_table,
-    pool_user_table,
     run_pool_table,
     run_device_table,
     service_device_table,
@@ -18,7 +17,7 @@ from eNMS.database.associations import (
     task_pool_table,
 )
 from eNMS.database.base import AbstractBase
-from eNMS.properties.objects import pool_link_properties, pool_device_properties
+from eNMS.setup import properties
 
 
 class Object(AbstractBase):
@@ -70,7 +69,7 @@ CustomDevice = type(
                 }[values["type"]],
                 default=values["default"],
             )
-            for property, values in app.custom_properties.items()
+            for property, values in app.properties["custom"]["device"].items()
         },
     },
 )
@@ -95,12 +94,8 @@ class Device(CustomDevice):
     enable_password = Column(SmallString)
     netmiko_driver = Column(SmallString, default="cisco_ios")
     napalm_driver = Column(SmallString, default="ios")
-    configuration = Column(
-        LargeString, info={"dont_track_changes": True, "model_properties": False}
-    )
-    operational_data = Column(
-        LargeString, info={"dont_track_changes": True, "model_properties": False}
-    )
+    configuration = Column(LargeString, info={"dont_track_changes": True})
+    operational_data = Column(LargeString, info={"dont_track_changes": True})
     last_failure = Column(SmallString, default="Never")
     last_status = Column(SmallString, default="Never")
     last_update = Column(SmallString, default="Never")
@@ -120,6 +115,42 @@ class Device(CustomDevice):
     sessions = relationship(
         "Session", back_populates="device", cascade="all, delete-orphan"
     )
+
+    def table_properties(self, **kwargs):
+        properties = super().get_properties()
+        context = int(kwargs["form"].get("context-lines", 0))
+        for property in ("configuration", "operational_data"):
+            data = kwargs["form"].get(property)
+            if not data:
+                properties[property] = ""
+            else:
+                result = []
+                content, visited = getattr(self, property).splitlines(), set()
+                for (index, line) in enumerate(content):
+                    match_lines, merge = [], index - context - 1 in visited
+                    if data not in line:
+                        continue
+                    for i in range(-context, context + 1):
+                        if index + i < 0 or index + i > len(content) - 1:
+                            continue
+                        if index + i in visited:
+                            merge = True
+                            continue
+                        visited.add(index + i)
+                        line = (
+                            content[index + i]
+                            .strip()
+                            .replace(data, f"<mark>{data}</mark>")
+                        )
+                        match_lines.append(f"<b>L{index + i + 1}:</b> {line}")
+                    if merge:
+                        result[-1] += f"<br>{'<br>'.join(match_lines)}"
+                    else:
+                        result.append("<br>".join(match_lines))
+                properties[property] = "".join(
+                    f"<pre style='text-align: left'>{match}</pre>" for match in result
+                )
+        return properties
 
     @property
     def view_properties(self):
@@ -204,19 +235,19 @@ AbstractPool = type(
         **{
             **{
                 f"device_{property}": Column(LargeString, default="")
-                for property in pool_device_properties
+                for property in properties["pool"]["device"]
             },
             **{
                 f"device_{property}_match": Column(SmallString, default="inclusion")
-                for property in pool_device_properties
+                for property in properties["pool"]["device"]
             },
             **{
                 f"link_{property}": Column(LargeString, default="")
-                for property in pool_link_properties
+                for property in properties["pool"]["link"]
             },
             **{
                 f"link_{property}_match": Column(SmallString, default="inclusion")
-                for property in pool_link_properties
+                for property in properties["pool"]["link"]
             },
         },
     },
@@ -245,7 +276,6 @@ class Pool(AbstractPool):
     )
     runs = relationship("Run", secondary=run_pool_table, back_populates="pools")
     tasks = relationship("Task", secondary=task_pool_table, back_populates="pools")
-    users = relationship("User", secondary=pool_user_table, back_populates="pools")
     never_update = Column(Boolean, default=False)
 
     def update(self, **kwargs):
@@ -266,13 +296,11 @@ class Pool(AbstractPool):
             return bool(search(pool_value, object_value))
 
     def object_match(self, obj):
-        properties = (
-            pool_device_properties
-            if obj.class_type == "device"
-            else pool_link_properties
-        )
         operator = all if self.operator == "all" else any
-        return operator(self.property_match(obj, property) for property in properties)
+        return operator(
+            self.property_match(obj, property)
+            for property in properties["pool"][obj.class_type]
+        )
 
     def compute_pool(self):
         if self.never_update:

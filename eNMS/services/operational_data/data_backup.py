@@ -23,8 +23,8 @@ class DataBackupService(ConnectionService):
     fast_cli = Column(Boolean, default=False)
     timeout = Column(Integer, default=10.0)
     global_delay_factor = Column(Float, default=1.0)
-    configuration = Column(LargeString)
-    operational_data = Column(MutableList)
+    configuration_command = Column(LargeString)
+    operational_data_command = Column(MutableList)
     replacements = Column(MutableList)
 
     __mapper_args__ = {"polymorphic_identity": "data_backup_service"}
@@ -37,7 +37,7 @@ class DataBackupService(ConnectionService):
             netmiko_connection = run.netmiko_connection(device)
             run.log("info", "Fetching Operational Data", device)
             for data in ("configuration", "operational_data"):
-                value = run.sub(getattr(self, data), locals())
+                value = run.sub(getattr(self, f"{data}_command"), locals())
                 if data == "configuration":
                     result = netmiko_connection.send_command(value)
                     for r in self.replacements:
@@ -76,22 +76,22 @@ class ReplacementForm(FlaskForm):
 
 
 class OperationalDataForm(FlaskForm):
-    command = StringField("Result of this Command stored as Operational Data")
-    prefix = StringField("Label for this Command (Prefix)")
+    command = StringField("Operational Data Command")
+    prefix = StringField("Label")
 
 
 class DataBackupForm(NetmikoForm):
     form_type = HiddenField(default="data_backup_service")
-    configuration = StringField("Result of this Command stored as Configuration")
-    operational_data = FieldList(FormField(OperationalDataForm), min_entries=3)
+    configuration_command = StringField("Command to retrieve the configuration")
+    operational_data_command = FieldList(FormField(OperationalDataForm), min_entries=3)
     replacements = FieldList(FormField(ReplacementForm), min_entries=3)
     groups = {
         "Create Configuration File": {
-            "commands": ["configuration"],
+            "commands": ["configuration_command"],
             "default": "expanded",
         },
         "Create Operational Data File": {
-            "commands": ["operational_data"],
+            "commands": ["operational_data_command"],
             "default": "expanded",
         },
         "Search Response & Replace": {

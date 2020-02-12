@@ -45,114 +45,19 @@ from eNMS.database.functions import (
 from eNMS.models import models, model_properties, relationships
 from eNMS.properties import private_properties, property_names
 from eNMS.properties.database import import_classes
-from eNMS.properties.diagram import (
-    device_diagram_properties,
-    diagram_classes,
-    type_to_diagram_properties,
-)
-from eNMS.properties.objects import (
-    device_properties,
-    pool_device_properties,
-)
 from eNMS.controller.syslog import SyslogServer
+from eNMS.setup import settings, properties, rbac
 
 
 class BaseController:
 
     log_severity = {"error": error, "info": info, "warning": warning}
 
-    get_endpoints = [
-        "/dashboard",
-        "/login",
-        "/table/changelog",
-        "/table/device",
-        "/table/event",
-        "/table/pool",
-        "/table/link",
-        "/table/run",
-        "/table/server",
-        "/table/service",
-        "/table/task",
-        "/table/user",
-        "/view/network",
-        "/view/site",
-        "/workflow_builder",
-    ]
-
     json_endpoints = [
         "multiselect_filtering",
         "save_settings",
         "table_filtering",
         "view_filtering",
-    ]
-
-    form_endpoints = [
-        "add_edge",
-        "add_service_to_workflow",
-        "copy_service_in_workflow",
-        "calendar_init",
-        "clear_results",
-        "clear_configurations",
-        "compare",
-        "connection",
-        "counters",
-        "count_models",
-        "create_label",
-        "database_deletion",
-        "delete_edge",
-        "delete_instance",
-        "delete_label",
-        "delete_node",
-        "duplicate_workflow",
-        "export_service",
-        "export_topology",
-        "delete_file",
-        "edit_file",
-        "get",
-        "get_all",
-        "get_cluster_status",
-        "get_device_network_data",
-        "get_device_logs",
-        "get_exported_services",
-        "get_git_content",
-        "get_migration_folders",
-        "get_service_logs",
-        "get_properties",
-        "get_result",
-        "get_runtimes",
-        "get_view_topology",
-        "get_service_state",
-        "get_session_log",
-        "get_top_level_workflows",
-        "get_tree_files",
-        "get_workflow_results",
-        "get_workflow_services",
-        "handoffssh",
-        "import_service",
-        "import_topology",
-        "migration_export",
-        "migration_import",
-        "reset_status",
-        "result_log_deletion",
-        "run_service",
-        "save_file",
-        "save_parameters",
-        "save_pool_objects",
-        "save_positions",
-        "scan_cluster",
-        "scan_playbook_folder",
-        "scheduler",
-        "skip_services",
-        "stop_workflow",
-        "switch_menu",
-        "scheduler_action",
-        "task_action",
-        "topology_import",
-        "update",
-        "update_parameters",
-        "update_pool",
-        "update_all_pools",
-        "upload_files",
     ]
 
     rest_endpoints = [
@@ -164,8 +69,10 @@ class BaseController:
 
     def __init__(self):
         self.settings = settings
+        self.rbac = rbac
+        self.properties = properties
+        self.load_custom_properties()
         self.path = Path.cwd()
-        self.custom_properties = self.load_custom_properties()
         self.init_scheduler()
         if settings["tacacs"]["active"]:
             self.init_tacacs_client()
@@ -225,7 +132,7 @@ class BaseController:
         )
 
     def create_admin_user(self) -> None:
-        admin = factory("user", **{"name": "admin"})
+        admin = factory("user", **{"name": "admin", "group": "Admin"})
         if not admin.password:
             admin.password = "admin"
 
@@ -249,28 +156,12 @@ class BaseController:
         self.update_database_configurations_from_git()
 
     def load_custom_properties(self):
-        filepath = self.settings["paths"]["custom_properties"]
-        if not filepath:
-            custom_properties = {}
-        else:
-            with open(filepath, "r") as properties:
-                custom_properties = yaml.load(properties)
-        property_names.update(
-            {k: v["pretty_name"] for k, v in custom_properties.items()}
-        )
-        public_custom_properties = {
-            k: v for k, v in custom_properties.items() if not v.get("private", False)
-        }
-        device_properties.extend(list(custom_properties))
-        pool_device_properties.extend(list(public_custom_properties))
-        model_properties["device"].extend(list(public_custom_properties))
-        device_diagram_properties.extend(
-            list(p for p, v in custom_properties.items() if v["add_to_dashboard"])
-        )
-        private_properties.extend(
-            list(p for p, v in custom_properties.items() if v.get("private", False))
-        )
-        return custom_properties
+        for model, values in self.properties["custom"].items():
+            property_names.update({k: v["pretty_name"] for k, v in values.items()})
+            model_properties[model].extend(list(values))
+            private_properties.extend(
+                list(p for p, v in values.items() if v.get("private", False))
+            )
 
     def init_logs(self):
         log_level = self.settings["app"]["log_level"].upper()
@@ -397,14 +288,15 @@ class BaseController:
     def count_models(self):
         return {
             "counters": {
-                instance_type: count(instance_type) for instance_type in diagram_classes
+                instance_type: count(instance_type)
+                for instance_type in properties["dashboard"]
             },
             "properties": {
                 instance_type: Counter(
-                    str(getattr(instance, type_to_diagram_properties[instance_type][0]))
+                    str(getattr(instance, properties["dashboard"][instance_type][0]))
                     for instance in fetch_all(instance_type)
                 )
-                for instance_type in diagram_classes
+                for instance_type in properties["dashboard"]
             },
         }
 
@@ -467,7 +359,6 @@ class BaseController:
 
     def table_filtering(self, table, **kwargs):
         model = models[table]
-        operator = and_ if kwargs["form"].get("operator", "all") == "all" else or_
         ordering = getattr(
             getattr(
                 model,
@@ -500,7 +391,7 @@ class BaseController:
                     constraints.append(~models["service"].workflows.any())
         if table == "run":
             constraints.append(models["run"].parent_runtime == models["run"].runtime)
-        result = Session.query(model).filter(operator(*constraints))
+        result = Session.query(model).filter(and_(*constraints))
         if ordering:
             result = result.order_by(ordering())
         return {
@@ -508,7 +399,7 @@ class BaseController:
             "recordsTotal": Session.query(func.count(model.id)).scalar(),
             "recordsFiltered": get_query_count(result),
             "data": [
-                obj.get_properties()
+                obj.table_properties(**kwargs)
                 for obj in result.limit(int(kwargs["length"]))
                 .offset(int(kwargs["start"]))
                 .all()

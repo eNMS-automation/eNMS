@@ -173,7 +173,6 @@ Section ``paths``
 *****************
 
 - ``custom_code`` (default: ``""``)
-- ``custom_properties`` (default: ``""``) Path 
 - ``custom_services`` (default: ``""``) Path to a folder that contains :ref:`Custom Services`.
 - ``playbooks`` (default: ``""``)
 

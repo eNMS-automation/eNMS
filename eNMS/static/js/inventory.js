@@ -3,10 +3,16 @@ global
 CodeMirror: false
 settings: true
 echarts: false
-initSelect: false
 */
 
-import { call, configureNamespace, fCall, notify, openPanel, openUrl } from "./base.js";
+import {
+  call,
+  configureNamespace,
+  initSelect,
+  notify,
+  openPanel,
+  openUrl,
+} from "./base.js";
 import { initTable, tables } from "./table.js";
 
 function drawDiagrams(diagram, result) {
@@ -54,8 +60,9 @@ export function showConnectionPanel(device) {
   openPanel({
     name: "device_connection",
     title: `Connect to ${device.name}`,
+    size: "auto",
     id: device.id,
-    processing: () => {
+    callback: () => {
       $(`#custom-credentials-${device.id}`).change(function() {
         $(`#credentials-fields-${device.id}`).show();
       });
@@ -78,64 +85,82 @@ export function initDashboard() {
     workflow: "vendor",
     task: "status",
   };
-  call("/count_models", function(result) {
-    for (const type of Object.keys(defaultProperties)) {
-      $(`#count-${type}`).text(result.counters[type]);
-    }
-    for (const [type, objects] of Object.entries(result.properties)) {
-      const diagram = echarts.init(document.getElementById(type));
-      drawDiagrams(diagram, parseData(objects));
-      diagrams[type] = diagram;
-    }
+  call({
+    url: "/count_models",
+    callback: function(result) {
+      for (const type of Object.keys(defaultProperties)) {
+        $(`#count-${type}`).text(result.counters[type]);
+      }
+      for (const [type, objects] of Object.entries(result.properties)) {
+        const diagram = echarts.init(document.getElementById(type));
+        drawDiagrams(diagram, parseData(objects));
+        diagrams[type] = diagram;
+      }
+    },
   });
 
   $.each(defaultProperties, function(type) {
     $(`#${type}-properties`)
       .selectpicker()
       .on("change", function() {
-        call(`/counters/${this.value}/${type}`, function(objects) {
-          drawDiagrams(diagrams[type], parseData(objects));
+        call({
+          url: `/counters/${this.value}/${type}`,
+          callback: function(objects) {
+            drawDiagrams(diagrams[type], parseData(objects));
+          },
         });
       });
   });
 }
 
 function sshConnection(id) {
-  fCall(`/connection/${id}`, `connection-parameters-form-${id}`, function(result) {
-    let url = settings.app.address;
-    if (!url) {
-      url = `${window.location.protocol}//${window.location.hostname}`;
-    }
-    const link = result.redirection
-      ? `${url}/terminal${result.port}/`
-      : `${url}:${result.port}`;
-    setTimeout(function() {
-      openUrl(link);
-    }, 300);
-    const message = `Click here to connect to ${result.device}.`;
-    notify(`<a target='_blank' href='${link}'>${message}</a>`, "success", 15);
-    const warning = `Don't forget to turn off the pop-up blocker !`;
-    notify(warning, "error", 15);
-    $(`#connection-${id}`).remove();
+  call({
+    url: `/connection/${id}`,
+    form: `connection-parameters-form-${id}`,
+    callback: function(result) {
+      let url = settings.app.address;
+      if (!url) {
+        url = `${window.location.protocol}//${window.location.hostname}`;
+      }
+      const link = result.redirection
+        ? `${url}/terminal${result.port}/`
+        : `${url}:${result.port}`;
+      setTimeout(function() {
+        openUrl(link);
+      }, 300);
+      const message = `Click here to connect to ${result.device}.`;
+      notify(`<a target='_blank' href='${link}'>${message}</a>`, "success", 15);
+      const warning = `Don't forget to turn off the pop-up blocker !`;
+      notify(warning, "error", 15);
+      $(`#connection-${id}`).remove();
+    },
   });
 }
 
 // eslint-disable-next-line
 function handOffSSHConnection(id) {
-  fCall(`/handoffssh/${id}`, `connection-parameters-form-${id}`, function(result) {
-    let loc = window.location;
-    const link = `${result.username}@${loc.hostname}:${result.port}`;
-    const message = `Click here to connect to ${result.device_name}.`;
-    notify(`<a href='ssh://${link}'>${message}</a>`, "success", 15);
+  call({
+    url: `/handoffssh/${id}`,
+    form: `connection-parameters-form-${id}`,
+    callback: function(result) {
+      let loc = window.location;
+      const link = `${result.username}@${loc.hostname}:${result.port}`;
+      const message = `Click here to connect to ${result.device_name}.`;
+      notify(`<a href='ssh://${link}'>${message}</a>`, "success", 15);
+    },
   });
 }
 
 // eslint-disable-next-line
 function savePoolObjects(id) {
-  fCall(`/save_pool_objects/${id}`, `pool-objects-form-${id}`, function() {
-    tables["pool"].ajax.reload(null, false);
-    notify("Changes saved.", "success", 5);
-    $(`#pool_objects-${id}`).remove();
+  call({
+    url: `/save_pool_objects/${id}`,
+    form: `pool-objects-form-${id}`,
+    callback: function() {
+      tables["pool"].ajax.reload(null, false);
+      notify("Changes saved.", "success", 5);
+      $(`#pool_objects-${id}`).remove();
+    },
   });
 }
 
@@ -144,21 +169,24 @@ function showPoolObjectsPanel(id) {
     name: "pool_objects",
     title: "Pool Objects",
     id: id,
-    processing: function() {
-      call(`/get/pool/${id}`, function(pool) {
-        if (pool.devices.length > 1000 || pool.links.length > 1000) {
-          notify("Too many objects to display.", "error", 5);
-        } else {
-          for (const type of ["device", "link"]) {
-            initSelect($(`#${type}s-${id}`), type, `pool_objects-${id}`);
-            pool[`${type}s`].forEach((o) => {
-              $(`#${type}s-${id}`).append(new Option(o.name, o.id));
-            });
-            $(`#${type}s-${id}`)
-              .val(pool[`${type}s`].map((n) => n.id))
-              .trigger("change");
+    callback: function() {
+      call({
+        url: `/get/pool/${id}`,
+        callback: function(pool) {
+          if (pool.devices.length > 1000 || pool.links.length > 1000) {
+            notify("Too many objects to display.", "error", 5);
+          } else {
+            for (const type of ["device", "link"]) {
+              initSelect($(`#${type}s-${id}`), type, `pool_objects-${id}`);
+              pool[`${type}s`].forEach((o) => {
+                $(`#${type}s-${id}`).append(new Option(o.name, o.id));
+              });
+              $(`#${type}s-${id}`)
+                .val(pool[`${type}s`].map((n) => n.id))
+                .trigger("change");
+            }
           }
-        }
+        },
       });
     },
   });
@@ -167,82 +195,94 @@ function showPoolObjectsPanel(id) {
 function updatePools(pool) {
   notify("Update starting...", "success", 5);
   const endpoint = pool ? `/update_pool/${pool}` : "/update_all_pools";
-  call(endpoint, function() {
-    tables["pool"].ajax.reload(null, false);
-    notify("Update successful.", "success", 5);
+  call({
+    url: endpoint,
+    callback: function() {
+      tables["pool"].ajax.reload(null, false);
+      notify("Update successful.", "success", 5);
+    },
   });
 }
 
 export const showDeviceData = function(device) {
-  call(`/get_device_network_data/${device.id}`, (result) => {
-    if (!result.configuration && !result.operational_data) {
-      notify("No data stored.", "error", 5);
-    } else {
-      openPanel({
-        name: "device_data",
-        title: `Device Data - ${device.name}`,
-        id: device.id,
-        processing: function() {
-          const content = document.getElementById(`content-${device.id}`);
-          // eslint-disable-next-line new-cap
-          const editor = CodeMirror(content, {
-            lineWrapping: true,
-            lineNumbers: true,
-            readOnly: true,
-            theme: "cobalt",
-            extraKeys: { "Ctrl-F": "findPersistent" },
-            scrollbarStyle: "overlay",
-          });
-          editor.setSize("100%", "100%");
-          $(`#data_type-${device.id}`)
-            .on("change", function() {
-              editor.setValue(result[this.value]);
-            })
-            .change();
-        },
-      });
-    }
+  call({
+    url: `/get_device_network_data/${device.id}`,
+    callback: (result) => {
+      if (!result.configuration && !result.operational_data) {
+        notify("No data stored.", "error", 5);
+      } else {
+        openPanel({
+          name: "device_data",
+          title: `Device Data - ${device.name}`,
+          id: device.id,
+          callback: function() {
+            const content = document.getElementById(`content-${device.id}`);
+            // eslint-disable-next-line new-cap
+            const editor = CodeMirror(content, {
+              lineWrapping: true,
+              lineNumbers: true,
+              readOnly: true,
+              theme: "cobalt",
+              mode: null,
+              extraKeys: { "Ctrl-F": "findPersistent" },
+              scrollbarStyle: "overlay",
+            });
+            editor.setSize("100%", "100%");
+            $(`#data_type-${device.id}`)
+              .on("change", function() {
+                editor.setValue(result[this.value]);
+              })
+              .change();
+          },
+        });
+      }
+    },
   });
 };
 
 function showSessionLog(sessionId) {
-  call(`/get_session_log/${sessionId}`, (log) => {
-    if (!log) {
-      notify(
-        "No log stored (e.g device unreachable or authentication error).",
-        "error",
-        5
-      );
-    } else {
-      openPanel({
-        name: "display",
-        title: "Session log",
-        id: sessionId,
-        processing: function() {
-          const content = document.getElementById(`content-${sessionId}`);
-          // eslint-disable-next-line new-cap
-          const editor = CodeMirror(content, {
-            lineWrapping: true,
-            lineNumbers: true,
-            readOnly: true,
-            theme: "cobalt",
-            extraKeys: { "Ctrl-F": "findPersistent" },
-            scrollbarStyle: "overlay",
-          });
-          editor.setSize("100%", "100%");
-          editor.setValue(log);
-        },
-      });
-    }
+  call({
+    url: `/get_session_log/${sessionId}`,
+    callback: (log) => {
+      if (!log) {
+        notify(
+          "No log stored (e.g device unreachable or authentication error).",
+          "error",
+          5
+        );
+      } else {
+        openPanel({
+          name: "display",
+          title: "Session log",
+          id: sessionId,
+          callback: function() {
+            const content = document.getElementById(`content-${sessionId}`);
+            // eslint-disable-next-line new-cap
+            const editor = CodeMirror(content, {
+              lineWrapping: true,
+              lineNumbers: true,
+              readOnly: true,
+              theme: "cobalt",
+              mode: null,
+              extraKeys: { "Ctrl-F": "findPersistent" },
+              scrollbarStyle: "overlay",
+            });
+            editor.setSize("100%", "100%");
+            editor.setValue(log);
+          },
+        });
+      }
+    },
   });
 }
 
 function showDeviceResultsPanel(device) {
   openPanel({
-    name: "result_table",
+    name: "table",
+    id: device.id,
     title: `Results - ${device.name}`,
-    processing: function() {
-      initTable("result", device, null, "table-result");
+    callback: function() {
+      initTable("result", device, null, `table-result-${device.id}`);
     },
   });
 }
@@ -251,7 +291,7 @@ function showImportTopologyPanel() {
   openPanel({
     name: "excel_import",
     title: "Import Topology as an Excel file",
-    processing: () => {
+    callback: () => {
       document.getElementById("file").onchange = function() {
         importTopology();
       };
@@ -261,8 +301,12 @@ function showImportTopologyPanel() {
 
 function exportTopology() {
   notify("Topology export starting...", "success", 5);
-  fCall("/export_topology", "excel_export-form", function() {
-    notify("Topology successfully exported.", "success", 5);
+  call({
+    url: "/export_topology",
+    form: "excel_export-form",
+    callback: function() {
+      notify("Topology successfully exported.", "success", 5);
+    },
   });
 }
 
@@ -281,7 +325,6 @@ function importTopology() {
       notify(result, "success", 5);
     },
   });
-  $("#file")[0].value = "";
 }
 
 configureNamespace("inventory", [

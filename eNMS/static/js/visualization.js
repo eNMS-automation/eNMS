@@ -8,8 +8,16 @@ viewType: false
 vis: false
 */
 
-import { call, notify, serializeForm, showTypePanel } from "./base.js";
+import {
+  call,
+  configureNamespace,
+  notify,
+  serializeForm,
+  showTypePanel,
+  openPanel,
+} from "./base.js";
 import { showConnectionPanel, showDeviceData } from "./inventory.js";
+import { initTable } from "./table.js";
 
 const layers = {
   osm: "http://{s}.tile.osm.org/{z}/{x}/{y}.png",
@@ -151,18 +159,24 @@ function updateView(withCluster) {
   deleteAll();
   clustered = withCluster;
   if (viewType == "network") {
-    call("/get_view_topology", function(topology) {
-      topology.devices.map((d) => createNode(d, "device"));
-      topology.links.map(createLink);
+    call({
+      url: "/get_view_topology",
+      callback: function(topology) {
+        topology.devices.map((d) => createNode(d, "device"));
+        topology.links.map(createLink);
+      },
     });
   } else {
     $(".menu").hide();
-    call("/get_all/pool", function(pools) {
-      for (let i = 0; i < pools.length; i++) {
-        if (pools[i].longitude) {
-          createNode(pools[i], "site");
+    call({
+      url: "/get_all/pool",
+      callback: function(pools) {
+        for (let i = 0; i < pools.length; i++) {
+          if (pools[i].longitude) {
+            createNode(pools[i], "site");
+          }
         }
-      }
+      },
     });
     $(".geo-menu").show();
   }
@@ -193,6 +207,7 @@ function linkToEdge(link) {
 function showPoolView(poolId) {
   jsPanel.create({
     id: `pool-view-${poolId}`,
+    container: ".right_column",
     theme: "none",
     border: "medium",
     headerTitle: "Site view",
@@ -206,15 +221,18 @@ function showPoolView(poolId) {
       containment: [5, 5, 5, 5],
     },
   });
-  call(`/get/pool/${poolId}`, function(pool) {
-    $(`#network-${poolId}`).contextMenu({
-      menuSelector: "#contextMenu",
-      menuSelected: function(invokedOn, selectedMenu) {
-        const row = selectedMenu.text();
-        action[row](selected);
-      },
-    });
-    displayPool(poolId, pool.devices, pool.links);
+  call({
+    url: `/get/pool/${poolId}`,
+    callback: function(pool) {
+      $(`#network-${poolId}`).contextMenu({
+        menuSelector: "#contextMenu",
+        menuSelected: function(invokedOn, selectedMenu) {
+          const row = selectedMenu.text();
+          action[row](selected);
+        },
+      });
+      displayPool(poolId, pool.devices, pool.links);
+    },
   });
 }
 
@@ -286,12 +304,20 @@ export function initView() {
   });
 }
 
+function filterViewPanel(type) {
+  openPanel({
+    name: "table",
+    type: "device",
+    callback: function() {
+      initTable("device");
+    },
+  });
+}
+
 export function filterView(type) {
-  $.ajax({
-    type: "POST",
+  call({
     url: `/view_filtering/${type}`,
-    contentType: "application/json",
-    data: JSON.stringify({ form: serializeForm(`#${type}_filtering-form`) }),
+    data: { form: serializeForm(`#${type}_filtering-form`) },
     success: function(results) {
       if (type == "device") {
         deleteAllDevices();
@@ -304,3 +330,5 @@ export function filterView(type) {
     },
   });
 }
+
+configureNamespace("visualization", [filterViewPanel]);

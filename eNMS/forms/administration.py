@@ -10,9 +10,10 @@ from wtforms import (
 from wtforms.validators import InputRequired
 from wtforms.widgets import TextArea
 
+from eNMS import app
 from eNMS.forms import BaseForm, configure_relationships
-from eNMS.properties.database import import_classes
 from eNMS.forms.fields import DateField
+from eNMS.properties.database import import_classes
 
 
 class SettingsForm(BaseForm):
@@ -104,13 +105,7 @@ class UserForm(BaseForm):
     name = StringField("Name", [InputRequired()])
     password = PasswordField("Password")
     email = StringField("Email")
-    permission_choices = [
-        ("Admin", "Admin"),
-        ("Connect to device", "Connect to device"),
-        ("View", "View"),
-        ("Edit", "Edit"),
-    ]
-    permissions = SelectMultipleField("Permissions", choices=permission_choices)
+    group = SelectField("Permissions", choices=[(g, g) for g in app.rbac["groups"]])
 
 
 class ChangelogForm(BaseForm):

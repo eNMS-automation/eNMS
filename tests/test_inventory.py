@@ -2,25 +2,20 @@ from werkzeug.datastructures import ImmutableMultiDict
 
 from eNMS import app
 from eNMS.database.functions import delete_all, fetch, fetch_all
-from eNMS.properties.objects import (
-    device_icons,
-    pool_link_properties,
-    pool_device_properties,
-)
+from eNMS.setup import properties
 
 from tests.conftest import check_pages
 
 
-def define_device(icon: str, description: str) -> ImmutableMultiDict:
+def define_device(number: str, description: str) -> ImmutableMultiDict:
     return ImmutableMultiDict(
         [
             ("form_type", "device"),
-            ("name", icon + description),
+            ("name", f"description-{number}"),
             ("description", description),
             ("location", "paris"),
             ("vendor", "Cisco"),
-            ("icon", icon),
-            ("ip_address", icon + description),
+            ("icon", "router"),
             ("operating_system", "IOS"),
             ("os_version", "1.4.4.2"),
             ("longitude", "12"),
@@ -34,7 +29,7 @@ def define_link(source: int, destination: int) -> ImmutableMultiDict:
     return ImmutableMultiDict(
         [
             ("form_type", "link"),
-            ("name", f"{source} to {destination}"),
+            ("name", f"{source} too {destination}"),
             ("description", "description"),
             ("location", "Los Angeles"),
             ("vendor", "Juniper"),
@@ -47,16 +42,16 @@ def define_link(source: int, destination: int) -> ImmutableMultiDict:
 @check_pages("table/device", "table/link", "view/network")
 def test_manual_object_creation(user_client):
     delete_all("device", "link")
-    for icon in device_icons:
+    for number in range(10):
         for description in ("desc1", "desc2"):
-            obj_dict = define_device(icon, description)
+            obj_dict = define_device(number, description)
             user_client.post("/update/device", data=obj_dict)
     devices = fetch_all("device")
     for source in devices[:3]:
         for destination in devices[:3]:
             obj_dict = define_link(source.id, destination.id)
             user_client.post("/update/link", data=obj_dict)
-    assert len(fetch_all("device")) == 16
+    assert len(fetch_all("device")) == 10
     assert len(fetch_all("link")) == 9
 
 
@@ -125,10 +120,10 @@ pool2 = {
 
 
 def create_pool(pool: dict) -> dict:
-    for property in pool_device_properties:
+    for property in properties["pool"]["device"]:
         if f"device_{property}_match" not in pool:
             pool[f"device_{property}_match"] = "inclusion"
-    for property in pool_link_properties:
+    for property in properties["pool"]["link"]:
         if f"link_{property}_match" not in pool:
             pool[f"link_{property}_match"] = "inclusion"
     return pool

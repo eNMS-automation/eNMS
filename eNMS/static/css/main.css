@@ -750,10 +750,18 @@ We cannot use 100% because main_frame is not set to 100%
 
 /* Cross-browser control alignment in the middle */
 .nav-controls {
+  border-radius: 10px;
   margin: auto;
   padding: 7px 7px;
   margin-bottom: 5px;
   width: intrinsic;
   width: -moz-max-content;
   width: -webkit-max-content;
+}
+
+.glyphicon-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }

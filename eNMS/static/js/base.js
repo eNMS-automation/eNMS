@@ -10,7 +10,6 @@ job: false
 jsPanel: false
 moment: false
 page: false
-Promise: false
 relations: false
 relationships: false
 */
@@ -21,38 +20,6 @@ import { creationMode, processWorkflowData, workflow } from "./workflow.js";
 export let editors = {};
 export let userIsActive = true;
 let topZ = 1000;
-
-const panelSize = {
-  alerts_table: "900 600",
-  calendar: "1200 650",
-  compare: "auto 700",
-  database_deletion: "700 400",
-  database_migration: "700 300",
-  device_connection: "400 auto",
-  device_results: "1200 700",
-  display: "600 600",
-  display_configuration: "1200 800",
-  event_filtering: "700 400",
-  excel_import: "400 150",
-  excel_export: "400 150",
-  git: "900 200",
-  instance_deletion: "400 130",
-  link_filtering: "700 600",
-  logs: "800 500",
-  pool: "800 600",
-  pool_filtering: "1000 700",
-  pool_objects: "700 550",
-  result_table: "800 500",
-  service_results: "1200 700",
-  server: "600 250",
-  server_filtering: "700 450",
-  ssh: "700 200",
-  task: "900 600",
-  task_filtering: "900 650",
-  user: "600 300",
-  view: "700 300",
-  workflow_results: "1200 700",
-};
 
 export function detectUserInactivity() {
   let timer;
@@ -95,32 +62,18 @@ $.ajaxSetup({
   },
 });
 
-const loadScript = (source, beforeEl, async = true, defer = true) => {
-  return new Promise((resolve, reject) => {
-    let script = document.createElement("script");
-    const prior = beforeEl || document.getElementsByTagName("script")[0];
-    script.async = async;
-    script.defer = defer;
-
-    function onloadHander(_, isAbort) {
-      if (isAbort || !script.readyState || /loaded|complete/.test(script.readyState)) {
-        script.onload = null;
-        script.onreadystatechange = null;
-        script = undefined;
-
-        if (isAbort) {
-          reject();
-        } else {
-          resolve();
-        }
-      }
+function loadScript(url, id) {
+  let script = document.createElement("script");
+  script.onload = function() {
+    try {
+      job(id);
+    } catch (e) {
+      notify("Failed to load script", "error", 5);
     }
-    script.onload = onloadHander;
-    script.onreadystatechange = onloadHander;
-    script.src = source;
-    prior.parentNode.insertBefore(script, prior);
-  });
-};
+  };
+  script.src = url;
+  document.head.appendChild(script);
+}
 
 export function openUrl(url) {
   let win = window.open(url, "_blank");
@@ -149,26 +102,25 @@ function processResults(callback, results) {
   }
 }
 
-export const call = function(url, callback) {
-  $.ajax({
+export const call = function({ url, data, form, callback }) {
+  let params = {
     type: "POST",
     url: url,
     success: function(results) {
       processResults(callback, results);
     },
-  });
+  };
+  if (data) {
+    Object.assign(params, {
+      data: JSON.stringify(data),
+      contentType: "application/json",
+      dataType: "json",
+    });
+  } else if (form) {
+    params.data = $(`[id="${form}"]`).serialize();
+  }
+  $.ajax(params);
 };
-
-export function fCall(url, form, callback) {
-  $.ajax({
-    type: "POST",
-    url: url,
-    data: $(`[id="${form}"]`).serialize(),
-    success: function(results) {
-      processResults(callback, results);
-    },
-  });
-}
 
 export function serializeForm(form) {
   const data = JSON.parse(JSON.stringify($(form).serializeArray()));
@@ -185,20 +137,23 @@ export function serializeForm(form) {
 }
 
 export const deleteInstance = function(type, id) {
-  call(`/delete_instance/${type}/${id}`, function(result) {
-    $(`#instance_deletion-${id}`).remove();
-    if (type.includes("service") || type == "workflow") {
-      type = "service";
-      if (localStorage.getItem("path").includes(id)) {
-        localStorage.removeItem("path");
+  call({
+    url: `/delete_instance/${type}/${id}`,
+    callback: function(result) {
+      $(`#instance_deletion-${id}`).remove();
+      if (type.includes("service") || type == "workflow") {
+        type = "service";
+        if (localStorage.getItem("path").includes(id)) {
+          localStorage.removeItem("path");
+        }
       }
-    }
-    tables[type]
-      .row($(`#${id}`))
-      .remove()
-      .draw(false);
-    const name = result.name ? `'${result.name}'` : "";
-    notify(`${type.toUpperCase()} ${name} deleted.`, "error", 5);
+      tables[type]
+        .row($(`#${id}`))
+        .remove()
+        .draw(false);
+      const name = result.name ? `'${result.name}'` : "";
+      notify(`${type.toUpperCase()} ${name} deleted.`, "error", 5);
+    },
   });
 };
 
@@ -225,7 +180,16 @@ export function createTooltips() {
   });
 }
 
-export function openPanel({ name, title, id, processing, type, duplicate, content }) {
+export function openPanel({
+  name,
+  title,
+  id,
+  callback,
+  type,
+  duplicate,
+  content,
+  size,
+}) {
   const panelId = id ? `${name}-${id}` : name;
   if ($(`#${panelId}`).length) {
     $(`#${panelId}`).css("zIndex", ++topZ);
@@ -238,7 +202,7 @@ export function openPanel({ name, title, id, processing, type, duplicate, conten
     theme: panelThemes[name] || "light filledlight",
     headerLogo: "../static/img/logo.png",
     contentOverflow: "hidden scroll",
-    contentSize: panelSize[name] || {
+    contentSize: size || {
       width: () => window.innerWidth * 0.5,
       height: () => window.innerHeight * 0.75,
     },
@@ -261,24 +225,83 @@ export function openPanel({ name, title, id, processing, type, duplicate, conten
         panel.content.innerHTML = this.responseText;
         preprocessForm(panel, id, type, duplicate);
         configureForm(name, id, panelId);
-        if (processing) processing(panel);
+        if (callback) callback(panel);
       },
     };
   }
   jsPanel.create(kwargs);
-  if (processing && content) processing(content);
+  if (callback && content) callback(content);
+}
+
+export function createTooltip({
+  name,
+  target,
+  container,
+  url,
+  persistent,
+  position,
+  autoshow,
+  title,
+  content,
+  callback,
+}) {
+  if ($(target).length) {
+    let kwargs = {
+      autoshow: autoshow,
+      id: `tooltip-${name}`,
+      container: container,
+      contentSize: "auto",
+      connector: true,
+      delay: 0,
+      mode: "sticky",
+      position: position,
+      target: target,
+      ttipEvent: "click",
+      theme: "light",
+    };
+    if (content) {
+      kwargs.content = content;
+    } else {
+      kwargs.contentAjax = {
+        url: url,
+        done: function(panel) {
+          panel.content.innerHTML = this.responseText;
+          preprocessForm(panel);
+          configureForm(name);
+          if (callback) callback(panel);
+        },
+      };
+    }
+    if (title) {
+      Object.assign(kwargs, { headerTitle: title, headerControls: "closeonly" });
+    } else {
+      kwargs.header = false;
+    }
+    if (persistent) {
+      kwargs.onbeforeclose = function() {
+        $(this).hide();
+      };
+    }
+    jsPanel.tooltip.create(kwargs);
+    if (persistent) {
+      $(target).on("click", function() {
+        $(`#tooltip-${name}`).show();
+      });
+    }
+  }
 }
 
 export function showDeletionPanel(instance) {
   openPanel({
     name: "instance_deletion",
     title: `Delete ${instance.name}`,
+    size: "auto",
     id: instance.id,
     type: instance.type,
   });
 }
 
-function preprocessForm(panel, id, type, duplicate) {
+export function preprocessForm(panel, id, type, duplicate) {
   panel.querySelectorAll(".add-id").forEach((el) => {
     if (duplicate) {
       const property =
@@ -302,7 +325,7 @@ function preprocessForm(panel, id, type, duplicate) {
   });
 }
 
-function initSelect(el, model, parentId, single) {
+export function initSelect(el, model, parentId, single) {
   el.select2({
     multiple: !single,
     closeOnSelect: single ? true : false,
@@ -414,16 +437,19 @@ export function showTypePanel(type, id, mode) {
   openPanel({
     name: type,
     id: id,
-    processing: function(panel) {
+    callback: function(panel) {
       if (type == "workflow" || type.includes("service")) {
         showServicePanel(type, id, mode);
       }
       if (id) {
         const properties = type === "pool" ? "_properties" : "";
-        call(`/get${properties}/${type}/${id}`, function(instance) {
-          const action = mode ? mode.toUpperCase() : "EDIT";
-          panel.setHeaderTitle(`${action} ${type} - ${instance.name}`);
-          processInstance(type, instance);
+        call({
+          url: `/get${properties}/${type}/${id}`,
+          callback: function(instance) {
+            const action = mode ? mode.toUpperCase() : "EDIT";
+            panel.setHeaderTitle(`${action} ${type} - ${instance.name}`);
+            processInstance(type, instance);
+          },
         });
       } else {
         panel.setHeaderTitle(`Create a New ${type}`);
@@ -435,13 +461,7 @@ export function showTypePanel(type, id, mode) {
         }
       }
       if (type.includes("service")) {
-        loadScript(`../static/js/services/${type}.js`).then(() => {
-          try {
-            job(id);
-          } catch (e) {
-            notify("Failed to load script", "error", 5);
-          }
-        });
+        loadScript(`../static/js/services/${type}.js`, id);
       }
     },
     type: type,
@@ -503,10 +523,10 @@ export function processData(type, id) {
     $(id ? `#${type}-workflows-${id}` : `#${type}-workflows`).prop("disabled", false);
     if (id) $(`#${type}-shared-${id}`).prop("disabled", false);
   }
-  fCall(
-    `/update/${type}`,
-    id ? `edit-${type}-form-${id}` : `edit-${type}-form`,
-    (instance) => {
+  call({
+    url: `/update/${type}`,
+    form: id ? `edit-${type}-form-${id}` : `edit-${type}-form`,
+    callback: (instance) => {
       const tableType =
         type.includes("service") || type == "workflow" ? "service" : type;
       if (page.includes("table")) tables[tableType].ajax.reload(null, false);
@@ -519,8 +539,8 @@ export function processData(type, id) {
         "success",
         5
       );
-    }
-  );
+    },
+  });
 }
 
 (function($, jstree, undefined) {
@@ -607,7 +627,7 @@ export function notify(...args) {
 function showAllAlerts() {
   openPanel({
     name: "alerts_table",
-    processing: () => {
+    callback: () => {
       $("#alerts-table")
         // eslint-disable-next-line new-cap
         .DataTable({
@@ -652,9 +672,10 @@ function getAlerts(preview) {
             style="background: #${color}; pointer-events: none; margin: 2px 6px"
           >
           <a style="word-wrap: break-word; color: #FFFFFF">
-            <span class="time" style="font-size: ${fontSize}">
-              ${alert[3]}</span><span>${alert[0]}
-            </span>
+          <span class="time" style="font-size: ${fontSize}">
+            ${alert[3]}
+          </span>
+          <span>${alert[0]}</span>
           </a>
         </li>`;
       } else {

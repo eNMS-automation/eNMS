@@ -34,7 +34,7 @@ Advanced Search
   you can choose between 3 types of match:
 
     - ``Any``: match if related to at least one of the selected objects.
-    - ``Not related to any``: match if not related to any of the selected objects.
+    - ``Unrelated``: match if not related to any of the selected objects.
     - ``None``: match if the are no related objects.
 
 - **Standard properties**: You can filter based on inclusion, equality or a regular expression.

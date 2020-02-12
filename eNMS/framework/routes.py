@@ -18,7 +18,7 @@ from eNMS.database import Session
 from eNMS.database.functions import fetch, handle_exception
 from eNMS.forms import form_actions, form_classes, form_postprocessing, form_templates
 from eNMS.forms.administration import LoginForm
-from eNMS.properties.diagram import type_to_diagram_properties
+from eNMS.setup import properties
 
 
 blueprint = Blueprint("blueprint", __name__, template_folder="../templates")
@@ -57,6 +57,7 @@ def login():
 def monitor_requests(function):
     @wraps(function)
     def decorated_function(*args, **kwargs):
+        path, method = request.path, request.method
         if not current_user.is_authenticated:
             client_address = request.environ.get(
                 "HTTP_X_FORWARDED_FOR", request.environ["REMOTE_ADDR"]
@@ -70,6 +71,18 @@ def monitor_requests(function):
             )
             return redirect(url_for("blueprint.route", page="login"))
         else:
+            endpoint = path if method == "GET" else f"/{path.split('/')[1]}"
+            if endpoint not in app.rbac["endpoints"][method]:
+                if method == "GET":
+                    return render_template("error.html", error=404), 404
+                else:
+                    return jsonify({"alert": "Invalid POST request."})
+            forbidden_endpoints = app.rbac["groups"][current_user.group][method]
+            if any(url == endpoint for url in forbidden_endpoints):
+                if method == "GET":
+                    return render_template("error.html", error=403), 403
+                else:
+                    return jsonify({"alert": "Error 403 Forbidden."})
             return function(*args, **kwargs)
 
     return decorated_function
@@ -87,7 +100,7 @@ def logout():
 def dashboard():
     return render_template(
         f"dashboard.html",
-        **{"endpoint": "dashboard", "properties": type_to_diagram_properties},
+        **{"endpoint": "dashboard", "properties": properties["dashboard"]},
     )
 
 
@@ -164,19 +177,19 @@ def get_requests_sink(_):
 @blueprint.route("/<path:page>", methods=["POST"])
 @monitor_requests
 def route(page):
-    f, *args = page.split("/")
-    if f not in app.json_endpoints + app.form_endpoints:
-        return jsonify({"alert": "Invalid POST request."})
+    endpoint, *args = page.split("/")
     form_type = request.form.get("form_type")
-    if f in app.json_endpoints:
-        result = getattr(app, f)(*args, **request.json)
+    if endpoint in app.json_endpoints:
+        result = getattr(app, endpoint)(*args, **request.json)
     elif form_type:
         form = form_classes[form_type](request.form)
         if not form.validate_on_submit():
             return jsonify({"invalid_form": True, **{"errors": form.errors}})
-        result = getattr(app, f)(*args, **form_postprocessing(form, request.form))
+        result = getattr(app, endpoint)(
+            *args, **form_postprocessing(form, request.form)
+        )
     else:
-        result = getattr(app, f)(*args)
+        result = getattr(app, endpoint)(*args)
     try:
         Session.commit()
         return jsonify(result)

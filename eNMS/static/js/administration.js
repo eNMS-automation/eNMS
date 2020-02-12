@@ -6,18 +6,16 @@ Dropzone: false
 JSONEditor: false
 */
 
-import { call, configureNamespace, editors, fCall, notify, openPanel } from "./base.js";
+import { call, configureNamespace, editors, notify, openPanel } from "./base.js";
 import { tables } from "./table.js";
 
 let settingsEditor;
 
 function saveSettings() {
-  $.ajax({
-    type: "POST",
+  call({
     url: "/save_settings",
-    contentType: "application/json",
-    data: JSON.stringify(settingsEditor.get()),
-    success: function() {
+    data: settingsEditor.get(),
+    callback: function() {
       settings = settingsEditor.get();
       $("#settings").remove();
       notify("Settings saved.", "success", 5);
@@ -29,37 +27,49 @@ function showSettings() {
   openPanel({
     name: "settings",
     title: "Settings",
-    processing: function() {
+    callback: function() {
       settingsEditor = new JSONEditor(document.getElementById("content"), {}, settings);
     },
   });
 }
 
 function getClusterStatus() {
-  call("/get_cluster_status", function() {
-    tables["server"].ajax.reload(null, false);
-    setTimeout(getClusterStatus, 15000);
+  call({
+    url: "/get_cluster_status",
+    callback: function() {
+      tables["server"].ajax.reload(null, false);
+      setTimeout(getClusterStatus, 15000);
+    },
   });
 }
 
 function migrationsExport() {
   notify("Export initiated.", "success", 5);
-  fCall("/migration_export", "migration-form", function() {
-    notify("Export successful.", "success", 5);
+  call({
+    url: "/migration_export",
+    form: "migration-form",
+    callback: function() {
+      notify("Export successful.", "success", 5);
+    },
   });
 }
 
 function showMigrationPanel() {
   openPanel({
     name: "database_migration",
-    processing: () => {
-      call("/get_migration_folders", function(folders) {
-        let list = document.getElementById("versions");
-        folders.forEach((item) => {
-          let option = document.createElement("option");
-          option.textContent = option.value = item;
-          list.appendChild(option);
-        });
+    title: "Database Migration",
+    size: "auto",
+    callback: () => {
+      call({
+        url: "/get_migration_folders",
+        callback: function(folders) {
+          let list = document.getElementById("versions");
+          folders.forEach((item) => {
+            let option = document.createElement("option");
+            option.textContent = option.value = item;
+            list.appendChild(option);
+          });
+        },
       });
     },
   });
@@ -67,106 +77,141 @@ function showMigrationPanel() {
 
 function migrationsImport() {
   notify("Import initiated.", "success", 5);
-  fCall("/migration_import", "migration-form", function(result) {
-    notify(result, "success", 5);
+  call({
+    url: "/migration_import",
+    form: "migration-form",
+    callback: function(result) {
+      notify(result, "success", 5);
+    },
   });
 }
 
 function showImportServicePanel() {
   openPanel({
     name: "import_service",
-    processing: () => {
-      call("/get_exported_services", function(services) {
-        let list = document.getElementById("service");
-        services.forEach((item) => {
-          let option = document.createElement("option");
-          option.textContent = option.value = item;
-          list.appendChild(option);
-        });
-        $("#service").selectpicker("refresh");
+    callback: () => {
+      call({
+        url: "/get_exported_services",
+        callback: function(services) {
+          let list = document.getElementById("service");
+          services.forEach((item) => {
+            let option = document.createElement("option");
+            option.textContent = option.value = item;
+            list.appendChild(option);
+          });
+          $("#service").selectpicker("refresh");
+        },
       });
     },
   });
 }
 
 function importService() {
-  call(`/import_service/${$("#service").val()}`, function(result) {
-    notify("Import successful.", "success", 5);
-    $("#import_service").remove();
+  call({
+    url: `/import_service/${$("#service").val()}`,
+    title: "Import Service",
+    callback: function(result) {
+      notify("Import successful.", "success", 5);
+      $("#import_service").remove();
+    },
   });
 }
 
 function databaseDeletion() {
   notify("Starting to delete...", "success", 5);
-  fCall("/database_deletion", "database_deletion-form", function(result) {
-    notify("Deletion done.", "success", 5);
-    $("#database_deletion").remove();
+  call({
+    url: "/database_deletion",
+    title: "Database Deletion",
+    form: "database_deletion-form",
+    callback: function(result) {
+      notify("Deletion done.", "success", 5);
+      $("#database_deletion").remove();
+    },
   });
 }
 
-// eslint-disable-next-line
 function resultLogDeletion() {
   notify("Starting to delete...", "success", 5);
-  fCall("/result_log_deletion", "result_log_deletion-form", function(result) {
-    notify("Deletion done.", "success", 5);
-    $("#result_log_deletion").remove();
+  call({
+    url: "/result_log_deletion",
+    form: "result_log_deletion-form",
+    callback: function(result) {
+      notify("Deletion done.", "success", 5);
+      $("#result_log_deletion").remove();
+    },
   });
 }
 
 function getGitContent() {
-  call("/get_git_content", function(result) {
-    notify("Action successful.", "success", 5);
+  call({
+    url: "/get_git_content",
+    callback: function(result) {
+      notify("Action successful.", "success", 5);
+    },
   });
 }
 
 function scanCluster() {
   notify("Scan started.", "success", 5);
-  call("/scan_cluster", function(cluster) {
-    notify("Scan completed.", "success", 5);
+  call({
+    url: "/scan_cluster",
+    callback: function(cluster) {
+      notify("Scan completed.", "success", 5);
+    },
   });
 }
 
 function deleteFile(file) {
-  call(`/delete_file/${file.data.path.replace(/\//g, ">")}`, function() {
-    $("#files-tree")
-      .jstree()
-      .delete_node(file.id);
-    notify(`File ${file.data.name} successfully deleted.`, "success", 5);
+  call({
+    url: `/delete_file/${file.data.path.replace(/\//g, ">")}`,
+    callback: function() {
+      $("#files-tree")
+        .jstree()
+        .delete_node(file.id);
+      notify(`File ${file.data.name} successfully deleted.`, "success", 5);
+    },
   });
 }
 
 function editFile(file) {
   const filepath = file.data.path.replace(/\//g, ">");
-  call(`/edit_file/${filepath}`, function(content) {
-    openPanel({
-      name: "file",
-      title: `Edit ${file.data.path}`,
-      id: filepath,
-      processing: () => {
-        const display = document.getElementById(`file_content-${filepath}`);
-        // eslint-disable-next-line new-cap
-        let fileEditor = (editors[filepath] = CodeMirror.fromTextArea(display, {
-          lineWrapping: true,
-          lineNumbers: true,
-          theme: "cobalt",
-          matchBrackets: true,
-          mode: "python",
-          extraKeys: { "Ctrl-F": "findPersistent" },
-          scrollbarStyle: "overlay",
-        }));
-        fileEditor.setSize("100%", "100%");
-        fileEditor.setValue(content);
-        fileEditor.refresh();
-      },
-    });
+  call({
+    url: `/edit_file/${filepath}`,
+    callback: function(content) {
+      openPanel({
+        name: "file",
+        title: `Edit ${file.data.path}`,
+        id: filepath,
+        callback: () => {
+          const display = document.getElementById(`file_content-${filepath}`);
+          // eslint-disable-next-line new-cap
+          let fileEditor = (editors[filepath] = CodeMirror.fromTextArea(display, {
+            lineWrapping: true,
+            lineNumbers: true,
+            theme: "cobalt",
+            matchBrackets: true,
+            mode: "python",
+            extraKeys: { "Ctrl-F": "findPersistent" },
+            scrollbarStyle: "overlay",
+          }));
+          fileEditor.setSize("100%", "100%");
+          fileEditor.setValue(content);
+          fileEditor.refresh();
+        },
+      });
+    },
   });
 }
 
 function saveFile(file) {
   $(`[id="file_content-${file}"]`).text(editors[file].getValue());
-  fCall(`/save_file/${file}`, `file-content-form-${file}`, function() {
-    notify("File successfully saved.", "success", 5);
-    $(`[id="file-${file}"`).remove();
+  call({
+    url: `/save_file/${file}`,
+    form: `file-content-form-${file}`,
+    callback: function() {
+      notify("File successfully saved.", "success", 5);
+      $(`[id="file-${file}"`).remove();
+    },
   });
 }
 
@@ -180,7 +225,7 @@ function showFileUploadPanel(folder) {
     name: "upload_files",
     title: `Upload files to ${folder}`,
     id: path,
-    processing: () => {
+    callback: () => {
       const element = document.getElementById(`dropzone-${path}`);
       let dropzone = new Dropzone(element, {
         url: "/upload_files",
@@ -199,7 +244,7 @@ function showFileUploadPanel(folder) {
 function displayFiles() {
   openPanel({
     name: "files",
-    processing: function() {
+    callback: function() {
       $("#files-tree").jstree({
         core: {
           animation: 200,
@@ -254,9 +299,7 @@ function displayFiles() {
                 <div style="position: absolute; top: 0px; right: 50px">
                 <button type="button"
                 class="btn btn-xs btn-primary"
-                onclick="eNMS.administration.showFileUploadPanel(
-                  '${node.data.path}'
-                )"
+                onclick="eNMS.administration.showFileUploadPanel('${node.data.path}')"
               >
                 <span class="glyphicon glyphicon-plus"></span>
               </button>

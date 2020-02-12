@@ -13,7 +13,6 @@ import {
   call,
   cantorPairing,
   configureNamespace,
-  fCall,
   notify,
   openPanel,
   showTypePanel,
@@ -41,19 +40,22 @@ function compare(type) {
       name: "compare",
       title: `Compare ${type}s`,
       id: cantorId,
-      processing: () => {
-        call(`/compare/${type}/${v1}/${v2}`, (result) => {
-          $(`#content-${cantorId}`).append(
-            diffview.buildView({
-              baseTextLines: result.first,
-              newTextLines: result.second,
-              opcodes: result.opcodes,
-              baseTextName: "V1",
-              newTextName: "V2",
-              contextSize: null,
-              viewType: 0,
-            })
-          );
+      callback: () => {
+        call({
+          url: `/compare/${type}/${v1}/${v2}`,
+          callback: (result) => {
+            $(`#content-${cantorId}`).append(
+              diffview.buildView({
+                baseTextLines: result.first,
+                newTextLines: result.second,
+                opcodes: result.opcodes,
+                baseTextName: "V1",
+                newTextName: "V2",
+                contextSize: null,
+                viewType: 0,
+              })
+            );
+          },
         });
       },
     });
@@ -110,32 +112,35 @@ function showResult(id) {
     name: "result",
     title: "Result",
     id: id,
-    processing: function() {
-      call(`/get_result/${id}`, (result) => {
-        const jsonResult = result;
-        const options = {
-          mode: "view",
-          modes: ["code", "view"],
-          onModeChange: function(newMode) {
-            editor.set(newMode == "code" ? result : jsonResult);
-          },
-          onEvent(node, event) {
-            if (event.type === "click") {
-              let path = node.path.map((key) =>
-                typeof key == "string" ? `"${key}"` : key
-              );
-              $(`#result-path-${id}`).val(`results[${path.join("][")}]`);
-            }
-          },
-        };
-        let editor = new JSONEditor(
-          document.getElementById(`content-${id}`),
-          options,
-          jsonResult
-        );
-        document.querySelectorAll(".jsoneditor-string").forEach((el) => {
-          el.innerText = el.innerText.replace(/(?:\\n)/g, "\n");
-        });
+    callback: function() {
+      call({
+        url: `/get_result/${id}`,
+        callback: (result) => {
+          const jsonResult = result;
+          const options = {
+            mode: "view",
+            modes: ["code", "view"],
+            onModeChange: function(newMode) {
+              editor.set(newMode == "code" ? result : jsonResult);
+            },
+            onEvent(node, event) {
+              if (event.type === "click") {
+                let path = node.path.map((key) =>
+                  typeof key == "string" ? `"${key}"` : key
+                );
+                $(`#result-path-${id}`).val(`results[${path.join("][")}]`);
+              }
+            },
+          };
+          let editor = new JSONEditor(
+            document.getElementById(`content-${id}`),
+            options,
+            jsonResult
+          );
+          document.querySelectorAll(".jsoneditor-string").forEach((el) => {
+            el.innerText = el.innerText.replace(/(?:\\n)/g, "\n");
+          });
+        },
       });
     },
   });
@@ -153,37 +158,40 @@ export const showRuntimePanel = function(type, service, runtime, displayTable) {
       ? "logs"
       : service.type == "workflow" && !displayTable
       ? "tree"
-      : "result_table";
+      : "table";
   const panelId = `${panelType}-${service.id}`;
-  call(`/get_runtimes/${type}/${service.id}`, (runtimes) => {
-    if (!runtime && !runtimes.length) {
-      return notify(`No ${type} yet.`, "error", 5);
-    }
-    openPanel({
-      name: panelType,
-      title: `${type} - ${service.name}`,
-      id: panelId,
-      processing: function() {
-        $(`#runtimes-${panelId}`).empty();
-        runtimes.forEach((runtime) => {
-          $(`#runtimes-${panelId}`).append(
-            $("<option></option>")
-              .attr("value", runtime[0])
-              .text(runtime[1])
-          );
-        });
-        if (!runtime || runtime == "normal") {
-          runtime = runtimes[runtimes.length - 1][0];
-        }
-        $(`#runtimes-${panelId}`)
-          .val(runtime)
-          .selectpicker("refresh");
-        $(`#runtimes-${panelId}`).on("change", function() {
-          displayFunction(service, this.value, true);
-        });
-        displayFunction(service, runtime);
-      },
-    });
+  call({
+    url: `/get_runtimes/${type}/${service.id}`,
+    callback: (runtimes) => {
+      if (!runtime && !runtimes.length) {
+        return notify(`No ${type} yet.`, "error", 5);
+      }
+      openPanel({
+        name: panelType,
+        title: `${type} - ${service.name}`,
+        id: panelId,
+        callback: function() {
+          $(`#runtimes-${panelId}`).empty();
+          runtimes.forEach((runtime) => {
+            $(`#runtimes-${panelId}`).append(
+              $("<option></option>")
+                .attr("value", runtime[0])
+                .text(runtime[1])
+            );
+          });
+          if (!runtime || runtime == "normal") {
+            runtime = runtimes[runtimes.length - 1][0];
+          }
+          $(`#runtimes-${panelId}`)
+            .val(runtime)
+            .selectpicker("refresh");
+          $(`#runtimes-${panelId}`).on("change", function() {
+            displayFunction(service, this.value, true);
+          });
+          displayFunction(service, runtime);
+        },
+      });
+    },
   });
 };
 
@@ -214,77 +222,80 @@ function displayLogs(service, runtime, change) {
 }
 
 function displayResultsTree(service, runtime) {
-  call(`/get_workflow_results/${service.id}/${runtime}`, function(data) {
-    $(`#result-tree-tree-${service.id}`)
-      .jstree("destroy")
-      .empty();
-    let tree = $(`#result-tree-tree-${service.id}`).jstree({
-      core: {
-        animation: 100,
-        themes: { stripes: true },
-        data: data,
-      },
-      plugins: ["html_row", "types", "wholerow"],
-      types: {
-        default: {
-          icon: "glyphicon glyphicon-file",
+  call({
+    url: `/get_workflow_results/${service.id}/${runtime}`,
+    callback: function(data) {
+      $(`#result-tree-tree-${service.id}`)
+        .jstree("destroy")
+        .empty();
+      let tree = $(`#result-tree-tree-${service.id}`).jstree({
+        core: {
+          animation: 100,
+          themes: { stripes: true },
+          data: data,
         },
-        workflow: {
-          icon: "fa fa-sitemap",
+        plugins: ["html_row", "types", "wholerow"],
+        types: {
+          default: {
+            icon: "glyphicon glyphicon-file",
+          },
+          workflow: {
+            icon: "fa fa-sitemap",
+          },
         },
-      },
-      html_row: {
-        default: function(el, node) {
-          if (!node) return;
-          const data = JSON.stringify(node.data.properties);
-          let progressSummary;
-          if (node.data.progress) {
-            progressSummary = `
-              <div style="position: absolute; top: 0px; right: 200px">
-                <span style="color: #32cd32">
-                  ${node.data.progress.success} passed
-                </span> -
-                <span style="color: #FF6666">
-                  ${node.data.progress.failure} failed
-                </span>
+        html_row: {
+          default: function(el, node) {
+            if (!node) return;
+            const data = JSON.stringify(node.data.properties);
+            let progressSummary;
+            if (node.data.progress) {
+              progressSummary = `
+                <div style="position: absolute; top: 0px; right: 200px">
+                  <span style="color: #32cd32">
+                    ${node.data.progress.success} passed
+                  </span> -
+                  <span style="color: #FF6666">
+                    ${node.data.progress.failure} failed
+                  </span>
+                </div>
+              `;
+            } else {
+              progressSummary = "";
+            }
+            $(el).find("a").append(`
+              ${progressSummary}
+              <div style="position: absolute; top: 0px; right: 50px">
+                <button type="button"
+                  class="btn btn-xs btn-primary"
+                  onclick='eNMS.automation.showRuntimePanel(
+                    "logs", ${data}, "${runtime}"
+                  )'><span class="glyphicon glyphicon-list"></span>
+                </button>
+                <button type="button"
+                  class="btn btn-xs btn-primary"
+                  onclick='eNMS.automation.showRuntimePanel(
+                    "results", ${data}, "${runtime}", true
+                  )'>
+                  <span class="glyphicon glyphicon-list-alt"></span>
+                </button>
               </div>
-            `;
-          } else {
-            progressSummary = "";
-          }
-          $(el).find("a").append(`
-            ${progressSummary}
-            <div style="position: absolute; top: 0px; right: 50px">
-              <button type="button"
-                class="btn btn-xs btn-primary"
-                onclick='eNMS.automation.showRuntimePanel(
-                  "logs", ${data}, "${runtime}"
-                )'><span class="glyphicon glyphicon-list"></span>
-              </button>
-              <button type="button"
-                class="btn btn-xs btn-primary"
-                onclick='eNMS.automation.showRuntimePanel(
-                  "results", ${data}, "${runtime}", true
-                )'>
-                <span class="glyphicon glyphicon-list-alt"></span>
-              </button>
-            </div>
-          `);
+            `);
+          },
         },
-      },
-    });
-    tree.bind("loaded.jstree", function() {
-      tree.jstree("open_all");
-    });
-    tree.unbind("dblclick.jstree").bind("dblclick.jstree", function(event) {
-      const service = tree.jstree().get_node(event.target);
-      showRuntimePanel("results", service.data.properties, runtime, true);
-    });
+      });
+      tree.bind("loaded.jstree", function() {
+        tree.jstree("open_all");
+      });
+      tree.unbind("dblclick.jstree").bind("dblclick.jstree", function(event) {
+        const service = tree.jstree().get_node(event.target);
+        showRuntimePanel("results", service.data.properties, runtime, true);
+      });
+    },
   });
 }
 
 function displayResultsTable(service, runtime) {
-  $("#result_table").remove();
+  $("#table_result").remove();
   $(`#runtimes-result-${service.id}`).on("change", function() {
     tables[`result-${service.id}`].ajax.reload(null, false);
   });
@@ -292,37 +303,47 @@ function displayResultsTable(service, runtime) {
     "result",
     service,
     runtime || currentRuntime,
-    `table-result-result_table-${service.id}`
+    `table-result-table-${service.id}`
   );
 }
 
 function refreshLogs(service, runtime, editor, first, wasRefreshed) {
   if (!$(`#logs-logs-${service.id}`).length) return;
-  call(`/get_service_logs/${service.id}/${runtime}`, function(result) {
-    editor.setValue(result.logs);
-    editor.setCursor(editor.lineCount(), 0);
-    if (first || result.refresh) {
-      setTimeout(
-        () => refreshLogs(service, runtime, editor, false, result.refresh),
-        1000
-      );
-    } else if (wasRefreshed) {
-      $(`#logs-logs-${service.id}`).remove();
-      showRuntimePanel("results", service, runtime);
-    }
+  call({
+    url: `/get_service_logs/${service.id}/${runtime}`,
+    callback: function(result) {
+      editor.setValue(result.logs);
+      editor.setCursor(editor.lineCount(), 0);
+      if (first || result.refresh) {
+        setTimeout(
+          () => refreshLogs(service, runtime, editor, false, result.refresh),
+          1000
+        );
+      } else if (wasRefreshed) {
+        $(`#logs-logs-${service.id}`).remove();
+        showRuntimePanel("results", service, runtime);
+      }
+    },
   });
 }
 
 export const normalRun = function(id) {
-  call(`/run_service/${id}`, function(result) {
-    runLogic(result);
+  call({
+    url: `/run_service/${id}`,
+    callback: function(result) {
+      runLogic(result);
+    },
   });
 };
 
 function parameterizedRun(type, id) {
-  fCall(`/run_service/${id}`, `edit-${type}-form-${id}`, function(result) {
-    $(`#${type}-${id}`).remove();
-    runLogic(result);
+  call({
+    url: `/run_service/${id}`,
+    form: `edit-${type}-form-${id}`,
+    callback: function(result) {
+      $(`#${type}-${id}`).remove();
+      runLogic(result);
+    },
   });
 }
 
@@ -338,26 +359,35 @@ export function runLogic(result) {
 }
 
 function exportService(id) {
-  call(`/export_service/${id}`, () => {
-    notify("Export successful.", "success", 5);
+  call({
+    url: `/export_service/${id}`,
+    callback: () => {
+      notify("Export successful.", "success", 5);
+    },
   });
 }
 
 function pauseTask(id) {
-  call(`/task_action/pause/${id}`, function(result) {
-    $(`#pause-resume-${id}`)
-      .attr("onclick", `eNMS.automation.resumeTask('${id}')`)
-      .text("Resume");
-    notify("Task paused.", "success", 5);
+  call({
+    url: `/task_action/pause/${id}`,
+    callback: function(result) {
+      $(`#pause-resume-${id}`)
+        .attr("onclick", `eNMS.automation.resumeTask('${id}')`)
+        .text("Resume");
+      notify("Task paused.", "success", 5);
+    },
   });
 }
 
 function resumeTask(id) {
-  call(`/task_action/resume/${id}`, function() {
-    $(`#pause-resume-${id}`)
-      .attr("onclick", `eNMS.automation.pauseTask('${id}')`)
-      .text("Pause");
-    notify("Task resumed.", "success", 5);
+  call({
+    url: `/task_action/resume/${id}`,
+    callback: function() {
+      $(`#pause-resume-${id}`)
+        .attr("onclick", `eNMS.automation.pauseTask('${id}')`)
+        .text("Pause");
+      notify("Task resumed.", "success", 5);
+    },
   });
 }
 
@@ -369,48 +399,55 @@ function field(name, type, id) {
 function displayCalendar(calendarType) {
   openPanel({
     name: "calendar",
+    title: `Calendar - ${calendarType}`,
     id: calendarType,
-    processing: () => {
-      call(`/calendar_init/${calendarType}`, function(tasks) {
-        let events = [];
-        for (const [name, properties] of Object.entries(tasks)) {
-          if (properties.service === undefined) continue;
-          events.push({
-            title: name,
-            id: properties.id,
-            description: properties.description,
-            start: new Date(...properties.start),
-            runtime: properties.runtime,
-            service: properties.service,
+    callback: () => {
+      call({
+        url: `/calendar_init/${calendarType}`,
+        callback: function(tasks) {
+          let events = [];
+          for (const [name, properties] of Object.entries(tasks)) {
+            if (properties.service === undefined) continue;
+            events.push({
+              title: name,
+              id: properties.id,
+              description: properties.description,
+              start: new Date(...properties.start),
+              runtime: properties.runtime,
+              service: properties.service,
+            });
+          }
+          $("#calendar").fullCalendar({
+            height: 600,
+            header: {
+              left: "prev,next today",
+              center: "title",
+              right: "month,agendaWeek,agendaDay,listMonth",
+            },
+            selectable: true,
+            selectHelper: true,
+            eventClick: function(e) {
+              if (calendarType == "task") {
+                showTypePanel("task", e.id);
+              } else {
+                showRuntimePanel("results", e.service, e.runtime);
+              }
+            },
+            editable: true,
+            events: events,
           });
-        }
-        $("#calendar").fullCalendar({
-          height: 600,
-          header: {
-            left: "prev,next today",
-            center: "title",
-            right: "month,agendaWeek,agendaDay,listMonth",
-          },
-          selectable: true,
-          selectHelper: true,
-          eventClick: function(e) {
-            if (calendarType == "task") {
-              showTypePanel("task", e.id);
-            } else {
-              showRuntimePanel("results", e.service, e.runtime);
-            }
-          },
-          editable: true,
-          events: events,
-        });
+        },
       });
     },
   });
 }
 
 function schedulerAction(action) {
-  call(`/scheduler_action/${action}`, function() {
-    notify(`Scheduler ${action}d.`, "success", 5);
+  call({
+    url: `/scheduler_action/${action}`,
+    callback: function() {
+      notify(`Scheduler ${action}d.`, "success", 5);
+    },
   });
 }
 

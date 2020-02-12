@@ -5,9 +5,8 @@
 /* Cross-browser compatibility for width: fit-content needed 
 intrinsic (Safari) - moz (Firefox) - webkit (Chrome) */
 .controls {
-  display: none;
   z-index: 3;
-  top: 15px;
+  top: 75px;
   position: absolute;
   width: intrinsic;
   width: -moz-max-content;

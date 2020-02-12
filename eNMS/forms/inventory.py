@@ -13,26 +13,21 @@ from eNMS import app
 from eNMS.forms import BaseForm, configure_relationships
 from eNMS.forms.fields import MultipleInstanceField
 from eNMS.properties import private_properties
-from eNMS.properties.objects import (
-    device_icons,
-    pool_link_properties,
-    pool_device_properties,
-)
 
 
 def configure_device_form(cls):
-    for property in app.custom_properties:
+    for property in app.properties["custom"]["device"]:
         field = PasswordField if property in private_properties else StringField
         setattr(cls, property, field())
     return cls
 
 
 def configure_pool_form(cls):
-    cls.device_properties = pool_device_properties
-    cls.link_properties = pool_link_properties
+    cls.device_properties = app.properties["pool"]["device"]
+    cls.link_properties = app.properties["pool"]["link"]
     for cls_name, properties in (
-        ("device", pool_device_properties),
-        ("link", pool_link_properties),
+        ("device", app.properties["pool"]["device"]),
+        ("link", app.properties["pool"]["link"]),
     ):
         for property in properties:
             match_field = f"{cls_name}_{property}_match"
@@ -56,7 +51,7 @@ class DeviceConnectionForm(BaseForm):
     form_type = HiddenField(default="device_connection")
     address_choices = [("ip_address", "IP address"), ("name", "Name")] + [
         (property, values["pretty_name"])
-        for property, values in app.custom_properties.items()
+        for property, values in app.properties["custom"]["device"].items()
         if values.get("is_address", False)
     ]
     address = SelectField(choices=address_choices)
@@ -80,7 +75,19 @@ class DeviceForm(ObjectForm):
     template = "object"
     form_type = HiddenField(default="device")
     id = HiddenField()
-    icon = SelectField("Icon", choices=tuple(device_icons.items()))
+    icon = SelectField(
+        "Icon",
+        choices=(
+            ("antenna", "Antenna"),
+            ("firewall", "Firewall"),
+            ("host", "Host"),
+            ("optical_switch", "Optical switch"),
+            ("regenerator", "Regenerator"),
+            ("router", "Router"),
+            ("server", "Server"),
+            ("switch", "Switch"),
+        ),
+    )
     ip_address = StringField("IP address")
     port = IntegerField("Port", default=22)
     operating_system = StringField("Operating System")

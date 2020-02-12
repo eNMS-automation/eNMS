@@ -4,7 +4,7 @@
     class="form-horizontal form-label-left add-id"
     method="post"
   >
-    {{ form.csrf_token() }} {{ form.form_type() }}
+    {{ form.hidden_tag() }}
     <label>Property used for the connection:</label>
     {{ form.address(class="form-control add-id") }}<br />
     <div class="item">
@@ -38,25 +38,25 @@
       <label>
         <input
           type="radio"
-          checked=""
-          value="user"
-          id="user-credentials"
+          value="device"
+          id="device-credentials"
           name="credentials"
           class="add-id"
+          checked
         />
-        Authentication with user credentials
+        Authentication with device credentials
       </label>
     </div>
     <div class="radio">
       <label>
         <input
           type="radio"
-          value="device"
-          id="device-credentials"
+          value="user"
+          id="user-credentials"
           name="credentials"
           class="add-id"
         />
-        Authentication with device credentials
+        Authentication with user credentials
       </label>
     </div>
     <div class="radio">

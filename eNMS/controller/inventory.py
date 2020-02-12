@@ -120,7 +120,13 @@ class InventoryController(BaseController):
         for obj_type in ("device", "link"):
             sheet = workbook.add_sheet(obj_type)
             for index, property in enumerate(model_properties[obj_type]):
-                if property in ("id", "source_id", "destination_id"):
+                if property in (
+                    "id",
+                    "source_id",
+                    "destination_id",
+                    "configuration",
+                    "operational_data",
+                ):
                     continue
                 sheet.write(0, index, property)
                 for obj_index, obj in enumerate(fetch_all(obj_type), 1):
@@ -141,7 +147,7 @@ class InventoryController(BaseController):
                 for index, property in enumerate(properties):
                     if not property:
                         continue
-                    func = field_conversion[property_types[property]]
+                    func = field_conversion[property_types.get(property, "str")]
                     values[property] = func(sheet.row_values(row_index)[index])
                 try:
                     factory(obj_type, **values).serialized

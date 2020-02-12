@@ -142,7 +142,7 @@ class AutomationController(BaseController):
 
     def get_top_level_workflows(self):
         return [
-            workflow.get_properties()
+            workflow.base_properties
             for workflow in fetch_all("workflow")
             if not workflow.workflows
         ]

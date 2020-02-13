@@ -50,6 +50,8 @@
   "endpoints": {
     "GET": [
       "/dashboard",
+      "/download_file",
+      "/download_output",
       "/form/add_services",
       "/form/administration",
       "/form/ansible_playbook_service",
@@ -136,6 +138,7 @@
       "/table/user",
       "/view/network",
       "/view/site",
+      "/view_service_results",
       "/workflow_builder"
     ],
     "POST": [

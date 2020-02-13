@@ -71,7 +71,10 @@ def monitor_requests(function):
             )
             return redirect(url_for("blueprint.route", page="login"))
         else:
-            endpoint = path if method == "GET" else f"/{path.split('/')[1]}"
+            if "download" in path or method == "POST":
+                endpoint = f"/{path.split('/')[1]}"
+            else:
+                endpoint = path 
             if endpoint not in app.rbac["endpoints"][method]:
                 if method == "GET":
                     return render_template("error.html", error=404), 404

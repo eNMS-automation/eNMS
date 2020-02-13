@@ -1,6 +1,6 @@
 from glob import glob
-from logging import info
 from os.path import split
+from pathlib import Path
 from paramiko import SSHClient, AutoAddPolicy
 from sqlalchemy import Boolean, ForeignKey, Integer
 from wtforms import BooleanField, HiddenField, IntegerField, SelectField
@@ -38,7 +38,6 @@ class GenericFileTransferService(Service):
             ssh_client.load_system_host_keys()
         source = run.sub(run.source_file, locals())
         destination = run.sub(run.destination_file, locals())
-        run.log("info", f"Transferring file {source}", device)
         success, result = True, f"File {source} transferred successfully"
         ssh_client.connect(
             device.ip_address,
@@ -46,7 +45,6 @@ class GenericFileTransferService(Service):
             password=device.password,
             look_for_keys=run.look_for_keys,
         )
-
         if run.source_file_includes_globbing:
             glob_source_file_list = glob(source, recursive=False)
             if not glob_source_file_list:
@@ -55,14 +53,38 @@ class GenericFileTransferService(Service):
             else:
                 pairs = []
                 for glob_source in glob_source_file_list:
+                    if Path(glob_source).is_dir():
+                        run.log(
+                            "warn",
+                            (
+                                f"Skipping glob transfer of directory"
+                                f"{glob_source} to {destination}"
+                            ),
+                            device,
+                        )
+                        continue
                     path, filename = split(glob_source)
                     if destination[-1] != "/":
                         destination = destination + "/"
                     glob_destination = destination + filename
                     pairs.append((glob_source, glob_destination))
-                info(f"Preparing to transfer glob file {glob_source}")
+                run.log(
+                    "info",
+                    (
+                        f"Transferring glob file(s)"
+                        f"{glob_source_file_list} to {destination}"
+                    ),
+                    device,
+                )
                 run.transfer_file(ssh_client, pairs)
+        elif not Path(source).is_file():
+            success = False
+            result = (
+                f"Source file {source} does not exist, is a directory,"
+                " or you forgot to enable globbing"
+            )
         else:
+            run.log("info", f"Transferring file {source} to {destination}", device)
             run.transfer_file(ssh_client, [(source, destination)])
         ssh_client.close()
         return {"success": success, "result": result}

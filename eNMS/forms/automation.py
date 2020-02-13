@@ -75,7 +75,7 @@ class ServiceForm(BaseForm):
     )
     result_postprocessing = CodeField(widget=TextArea(), render_kw={"rows": 8})
     multiprocessing = BooleanField("Multiprocessing")
-    max_processes = IntegerField("Maximum number of processes", default=50)
+    max_processes = IntegerField("Maximum number of processes", default=15)
     conversion_method = SelectField(
         choices=(
             ("none", "No conversion"),

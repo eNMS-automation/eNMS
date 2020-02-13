@@ -82,7 +82,7 @@ The list of targets will be the union of all devices coming from these propertie
     to actual devices from the inventory.
 
 - ``Multiprocessing`` Run on devices **in parallel** instead of **sequentially**.
-- ``Maximum Number of Processes`` (default: ``5``)
+- ``Maximum Number of Processes`` (default: ``15``)
 
 Iteration
 """""""""

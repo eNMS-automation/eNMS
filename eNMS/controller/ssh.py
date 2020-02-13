@@ -9,6 +9,7 @@ from paramiko import (
     SSHClient,
     Transport,
     WarningPolicy,
+    ssh_exception,
 )
 from pathlib import Path
 from socket import AF_INET, socket, SOCK_STREAM, SOL_SOCKET, SO_REUSEADDR
@@ -26,7 +27,7 @@ class Client(SSHClient):
         self.load_system_host_keys()
         self.set_missing_host_key_policy(WarningPolicy)
         self.connect(
-            hostname=hostname, username=username, password=password,
+            hostname=hostname, username=username, password=password, timeout=3,
         )
         self.shell = self.invoke_shell()
 
@@ -67,13 +68,15 @@ class Server(ServerInterface):
 class SshConnection:
     def __init__(self, hostname, username, password, session_id, uuid, port):
         self.client = Client(hostname, username, password)
-        self.server = Server(port, uuid)
         path = Path.cwd() / "logs" / "ssh_sessions"
         path.mkdir(parents=True, exist_ok=True)
         self.logger = getLogger(hostname)
         if not self.logger.handlers:
             filehandler = FileHandler(filename=path / f"{hostname}.log")
             self.logger.addHandler(filehandler)
+
+    def start_session(self, session_id, uuid, port):
+        self.server = Server(port, uuid)
         Thread(target=self.receive_data, args=(session_id,)).start()
         Thread(target=self.send_data).start()
 
@@ -96,11 +99,14 @@ class SshConnection:
         Session.commit()
 
     def send_data(self):
-        while not self.client.shell.closed:
+        while True:
             data = self.server.channel.recv(512)
             if not data:
                 break
-            self.client.shell.send(data)
-            sleep(0.1)
-        self.client.shell.close()
-        self.server.transport.close()
+            try:
+                self.client.shell.send(data)
+                sleep(0.1)
+            except ssh_exception.socket.error:
+                self.client.shell.close()
+                self.server.transport.close()
+                break

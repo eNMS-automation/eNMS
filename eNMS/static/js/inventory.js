@@ -144,10 +144,6 @@ function handOffSSHConnection(id) {
     form: `connection-parameters-form-${id}`,
     callback: function(result) {
       let loc = window.location;
-      let url = settings.app.address;
-      if (!url) {
-        url = `${window.location.protocol}//${window.location.host}`;
-      }
       if (result.hasOwnProperty("error")) {
         notify(`Error: ${result.error}`, "error", 10)
       } else {

@@ -2,6 +2,12 @@
 Release Notes
 =============
 
+Version 3.20.1
+--------------
+
+- Update Generic File Transfer Service
+- Fix runtime display bug in results window
+
 Version 3.20
 ------------
 

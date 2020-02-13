@@ -93,12 +93,12 @@ class InventoryController(BaseController):
         )
         Session.commit()
         try:
-            ssh_conn = SshConnection(
+            ssh_connection = SshConnection(
                 device.ip_address, *credentials, session.id, uuid, port
             )
             Thread(
-                target=SshConnection.start_session,
-                args=(ssh_conn, session.id, uuid, port),
+                target=ssh_connection.start_session,
+                args=(session.id, uuid, port),
             ).start()
             return {
                 "port": port,
@@ -106,8 +106,8 @@ class InventoryController(BaseController):
                 "device_name": device.name,
                 "device_ip": device.ip_address,
                 }
-        except Exception as e:
-            return {"error": e.args}
+        except Exception as exc:
+            return {"error": exc.args}
 
     def get_device_network_data(self, device_id):
         device = fetch("device", id=device_id)

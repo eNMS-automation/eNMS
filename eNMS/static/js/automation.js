@@ -316,7 +316,7 @@ function refreshLogs(service, runtime, editor, first, wasRefreshed) {
           1000
         );
       } else if (wasRefreshed) {
-        $(`#service-logs-${service.id}`).remove();
+        $(`#logs-${service.id}`).remove();
         showRuntimePanel("results", service, runtime);
       }
     },

@@ -144,10 +144,18 @@ function handOffSSHConnection(id) {
     form: `connection-parameters-form-${id}`,
     callback: function(result) {
       let loc = window.location;
-      const link = `${result.username}@${loc.hostname}:${result.port}`;
-      const message = `Click here to connect to ${result.device_name}.`;
-      notify(`<a href='ssh://${link}'>${message}</a>`, "success", 15);
-    },
+      let url = settings.app.address;
+      if (!url) {
+        url = `${window.location.protocol}//${window.location.host}`;
+      }
+      if (result.hasOwnProperty("error")) {
+        notify(`Error: ${result.error}`, "error", 10)
+      } else {
+        const link = `${result.username}@${loc.hostname}:${result.port}`;
+        const message = `Click here to connect to ${result.device_name}.`;
+        notify(`<a href='ssh://${link}'>${message}</a>`, "success", 15);
+      }
+    }
   });
 }
 

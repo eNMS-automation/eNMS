@@ -10,6 +10,7 @@ from xlrd import open_workbook
 from xlrd.biffh import XLRDError
 from xlwt import Workbook
 
+
 from eNMS.controller.base import BaseController
 from eNMS.controller.ssh import SshConnection
 from eNMS.database import Session
@@ -94,16 +95,25 @@ class InventoryController(BaseController):
             device=device.id,
         )
         Session.commit()
-        Thread(
-            target=SshConnection,
-            args=(device.ip_address, *credentials, session.id, uuid, port),
-        ).start()
-        return {
-            "port": port,
-            "username": uuid,
-            "device_name": device.name,
-            "device_ip": device.ip_address,
-        }
+        try:
+            ssh_conn = SshConnection(device.ip_address, *credentials, session.id, uuid, port)
+        except Exception as e:
+            ssh_conn = e
+        if isinstance(ssh_conn, SshConnection):
+            Thread(
+                target=SshConnection.start_session,
+                args=(ssh_conn, session.id, uuid, port),
+                  ).start()
+            return {
+                "port": port,
+                "username": uuid,
+                "device_name": device.name,
+                "device_ip": device.ip_address,
+            }
+        else:
+            return {
+                "error": ssh_conn.args
+            }
 
     def get_device_network_data(self, device_id):
         device = fetch("device", id=device_id)

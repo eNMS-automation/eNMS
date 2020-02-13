@@ -139,20 +139,20 @@ function sshConnection(id) {
 
 // eslint-disable-next-line
 function handOffSSHConnection(id) {
-  notify("Starting SSH connection to the device...", "success", 3)
+  notify("Starting SSH connection to the device...", "success", 3);
   call({
     url: `/handoffssh/${id}`,
     form: `connection-parameters-form-${id}`,
     callback: function(result) {
       let loc = window.location;
       if (result.hasOwnProperty("error")) {
-        notify(`Error: ${result.error}`, "error", 10)
+        notify(`Error: ${result.error}`, "error", 10);
       } else {
         const link = `${result.username}@${loc.hostname}:${result.port}`;
         const message = `Click here to connect to ${result.device_name}.`;
         notify(`<a href='ssh://${link}'>${message}</a>`, "success", 15);
       }
-    }
+    },
   });
 }
 

@@ -15,6 +15,8 @@ def test_authentication(base_client):
 
 def test_urls(user_client):
     for page in app.rbac["endpoints"]["GET"]:
+        if "download" in page:
+            continue
         r = user_client.get(page, follow_redirects=True)
         assert r.status_code == 200
     r = user_client.get("/logout", follow_redirects=True)

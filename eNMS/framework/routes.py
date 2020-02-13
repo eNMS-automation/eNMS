@@ -74,7 +74,7 @@ def monitor_requests(function):
             if "download" in path or method == "POST":
                 endpoint = f"/{path.split('/')[1]}"
             else:
-                endpoint = path 
+                endpoint = path
             if endpoint not in app.rbac["endpoints"][method]:
                 if method == "GET":
                     return render_template("error.html", error=404), 404
@@ -154,9 +154,7 @@ def view_service_results(id):
 @monitor_requests
 def download_output(id):
     data = fetch("data", id=id)
-    filename = f"{data.device_name}-\
-                {data.command}-\
-                {app.strip_all(data.runtime)}"
+    filename = f"{data.device_name}-{data.command}-{app.strip_all(data.runtime)}"
     return Response(
         (f"{line}\n" for line in data.output.splitlines()),
         mimetype="text/plain",

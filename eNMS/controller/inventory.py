@@ -97,15 +97,14 @@ class InventoryController(BaseController):
                 device.ip_address, *credentials, session.id, uuid, port
             )
             Thread(
-                target=ssh_connection.start_session,
-                args=(session.id, uuid, port),
+                target=ssh_connection.start_session, args=(session.id, uuid, port),
             ).start()
             return {
                 "port": port,
                 "username": uuid,
                 "device_name": device.name,
                 "device_ip": device.ip_address,
-                }
+            }
         except Exception as exc:
             return {"error": exc.args}
 

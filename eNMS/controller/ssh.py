@@ -9,7 +9,6 @@ from paramiko import (
     SSHClient,
     Transport,
     WarningPolicy,
-    ssh_exception,
 )
 from pathlib import Path
 from socket import AF_INET, socket, SOCK_STREAM, SOL_SOCKET, SO_REUSEADDR

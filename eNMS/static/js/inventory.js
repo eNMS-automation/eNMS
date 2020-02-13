@@ -139,6 +139,7 @@ function sshConnection(id) {
 
 // eslint-disable-next-line
 function handOffSSHConnection(id) {
+  notify("Starting SSH connection to the device...", "success", 3)
   call({
     url: `/handoffssh/${id}`,
     form: `connection-parameters-form-${id}`,

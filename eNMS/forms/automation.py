@@ -40,7 +40,9 @@ class ServiceForm(BaseForm):
     devices = MultipleInstanceField("Devices")
     pools = MultipleInstanceField("Pools")
     workflows = MultipleInstanceField("Workflows")
-    waiting_time = IntegerField("Time to Wait before next service is started (in seconds)", default=0)
+    waiting_time = IntegerField(
+        "Time to Wait before next service is started (in seconds)", default=0
+    )
     send_notification = BooleanField("Send a notification")
     send_notification_method = SelectField(
         "Notification Method",

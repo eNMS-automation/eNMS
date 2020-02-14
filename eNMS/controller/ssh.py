@@ -99,14 +99,14 @@ class SshConnection:
         Session.commit()
 
     def send_data(self):
-        while True:
+        while not self.client.shell.closed:
             data = self.server.channel.recv(512)
             if not data:
-                break
+                break   
             try:
                 self.client.shell.send(data)
-                sleep(0.1)
-            except ssh_exception.socket.error:
-                self.client.shell.close()
-                self.server.transport.close()
+            except OSError:
                 break
+            sleep(0.1)
+        self.client.shell.close()
+        self.server.transport.close()

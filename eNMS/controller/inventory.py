@@ -108,7 +108,7 @@ class InventoryController(BaseController):
                 "username": uuid,
                 "device_name": device.name,
                 "device_ip": device.ip_address,
-                }
+            }
         except Exception as e:
             return {"error": e.args}
 

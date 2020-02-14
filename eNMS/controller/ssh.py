@@ -102,7 +102,7 @@ class SshConnection:
         while not self.client.shell.closed:
             data = self.server.channel.recv(512)
             if not data:
-                break   
+                break
             try:
                 self.client.shell.send(data)
             except OSError:

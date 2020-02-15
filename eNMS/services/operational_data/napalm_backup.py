@@ -21,8 +21,8 @@ class NapalmBackupService(ConnectionService):
     use_device_driver = Column(Boolean, default=True)
     timeout = Column(Integer, default=60)
     optional_args = Column(MutableDict)
-    configuration = Column(MutableList)
-    operational_data = Column(MutableList)
+    configuration_getters = Column(MutableList)
+    operational_data_getters = Column(MutableList)
     replacements = Column(MutableList)
 
     __mapper_args__ = {"polymorphic_identity": "napalm_backup_service"}
@@ -34,7 +34,7 @@ class NapalmBackupService(ConnectionService):
             device.last_runtime = datetime.now()
             napalm_connection = run.napalm_connection(device)
             run.log("info", "Fetching Operational Data", device)
-            for data_type in ("configuration", "operational_data"):
+            for data_type in ("configuration_getters", "operational_data_getters"):
                 result = {}
                 for getter in getattr(run, data_type):
                     try:
@@ -71,7 +71,7 @@ class ReplacementForm(FlaskForm):
 
 class NapalmBackupForm(NapalmForm):
     form_type = HiddenField(default="napalm_backup_service")
-    configuration = SelectMultipleField(
+    configuration_getters = SelectMultipleField(
         choices=(
             ("get_arp_table", "ARP table"),
             ("get_interfaces_counters", "Interfaces counters"),
@@ -96,7 +96,7 @@ class NapalmBackupForm(NapalmForm):
             ("is_alive", "Is alive"),
         )
     )
-    operational_data = SelectMultipleField(
+    operational_data_getters = SelectMultipleField(
         choices=(
             ("get_arp_table", "ARP table"),
             ("get_interfaces_counters", "Interfaces counters"),
@@ -124,11 +124,11 @@ class NapalmBackupForm(NapalmForm):
     replacements = FieldList(FormField(ReplacementForm), min_entries=3)
     groups = {
         "Create Configuration File": {
-            "commands": ["configuration"],
+            "commands": ["configuration_getters"],
             "default": "expanded",
         },
         "Create Operational Data File": {
-            "commands": ["operational_data"],
+            "commands": ["operational_data_getters"],
             "default": "expanded",
         },
         "Search Response & Replace": {

@@ -14,7 +14,7 @@ First steps
  cd eNMS
 
  # install the requirements:
- pip install -r requirements/requirements.txt
+ pip install -r build/requirements/requirements.txt
 
  # set the FLASK_APP environment variable
  export FLASK_APP=app.py

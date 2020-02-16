@@ -7,6 +7,9 @@ Version 3.20.1
 
 - Update Generic File Transfer Service
 - Fix runtime display bug in results window
+- Refactor LDAP authentication
+- LDAP as first option if the LDAP authentication is active in settings
+- Fix timing issue in SSH Desktop session mechanism
 
 Version 3.20
 ------------

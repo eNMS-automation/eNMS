@@ -737,7 +737,7 @@ models.service = class Service extends Base {
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-success"
-          onclick="eNMS.base.showTypePanel('{self.type}', '${this.id}', 'run')"
+          onclick="eNMS.base.showTypePanel('${this.type}', '${this.id}', 'run')"
           data-tooltip="Parameterized Run"
             ><span class="glyphicon glyphicon-play-circle"></span
           ></button>

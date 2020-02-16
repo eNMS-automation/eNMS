@@ -7,10 +7,13 @@ Version 3.20.1
 
 - Update Generic File Transfer Service
 - Fix runtime display bug in results window
+- Fix file download and parameterized run bugs.
 - Refactor LDAP authentication
 - LDAP as first option if the LDAP authentication is active in settings
 - Fix timing issue in SSH Desktop session mechanism
-- Remove unique constrant for link names.
+- Remove unique constraint for link names.
+- Hash user passwords with argon2 by default. Add option to not hash user passwords in settings.
+- Move linting and requirements in dedicated /build folder.
 
 Version 3.20
 ------------

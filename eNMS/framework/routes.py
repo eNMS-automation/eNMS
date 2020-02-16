@@ -166,10 +166,9 @@ def get_requests_sink(_):
 @monitor_requests
 def route(page):
     endpoint, *args = page.split("/")
-    print(endpoint, app.rbac["endpoints"]["POST"])
-    if endpoint not in app.rbac["endpoints"]["POST"]:
+    if f"/{endpoint}" not in app.rbac["endpoints"]["POST"]:
         return jsonify({"alert": "Invalid POST request."})
-    if endpoint in app.rbac["groups"][current_user.group]["POST"]:
+    if f"/{endpoint}" in app.rbac["groups"][current_user.group]["POST"]:
         return jsonify({"alert": "Error 403 Forbidden."})
     form_type = request.form.get("form_type")
     if endpoint in app.json_endpoints:

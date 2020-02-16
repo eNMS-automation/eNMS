@@ -102,7 +102,10 @@ class SshConnection:
             data = self.server.channel.recv(512)
             if not data:
                 break
-            self.client.shell.send(data)
+            try:
+                self.client.shell.send(data)
+            except OSError:
+                break
             sleep(0.1)
         self.client.shell.close()
         self.server.transport.close()

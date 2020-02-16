@@ -46,15 +46,9 @@ class AdministrationController(BaseController):
                 json_response = loads(connection.response_to_json())["entries"][0]
                 if not json_response:
                     return
-                group = (
-                    "Admin"
-                    if any(
-                        group in s
-                        for group in self.settings["ldap"]["admin_group"].split(",")
-                        for s in json_response["attributes"]["memberOf"]
-                    )
-                    else "Read Only"
-                )
+                admin_groups = set(self.settings["ldap"]["admin_group"].split(","))
+                user_groups = set(json_response["attributes"]["memberOf"])
+                group = "Admin" if admin_groups & user_groups else "Read Only"
                 user = factory(
                     "user",
                     **{

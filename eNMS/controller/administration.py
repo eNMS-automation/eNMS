@@ -1,3 +1,4 @@
+from passlib.hash import argon2
 from copy import deepcopy
 from flask_login import current_user
 from ipaddress import IPv4Network
@@ -27,7 +28,9 @@ class AdministrationController(BaseController):
         name, password = kwargs["name"], kwargs["password"]
         if kwargs["authentication_method"] == "Local User":
             user = fetch("user", allow_none=True, name=name)
-            return user if user and password == user.password else False
+            hash = self.settings["security"]["hash_user_passwords"]
+            verify = argon2.verify if hash else str.__eq__
+            return user if user and verify(password, user.password) else False
         elif kwargs["authentication_method"] == "LDAP Domain":
             with Connection(
                 self.ldap_client,

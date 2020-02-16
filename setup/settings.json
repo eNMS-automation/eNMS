@@ -7,6 +7,9 @@
     "log_level": "debug",
     "git_repository": ""
   },
+  "security": {
+    "hash_user_passwords": true
+  },
   "cluster": {
     "active": false,
     "id": true,

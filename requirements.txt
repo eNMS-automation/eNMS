@@ -1,4 +1,5 @@
 apscheduler
+argon2-cffi
 dicttoxml
 flask
 flask_httpauth
@@ -12,6 +13,7 @@ jinja2
 ldap3
 napalm
 netmiko
+passlib
 pathlib
 pynetbox
 ruamel.yaml

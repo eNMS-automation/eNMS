@@ -1,7 +1,9 @@
 from datetime import datetime
 from flask_login import UserMixin
+from passlib.hash import argon2
 from sqlalchemy import Boolean, Integer
 
+from eNMS import app
 from eNMS.database.dialect import Column, MutableList, LargeString, SmallString
 from eNMS.database.base import AbstractBase
 
@@ -27,6 +29,11 @@ class User(AbstractBase, UserMixin):
     password = Column(SmallString)
     group = Column(SmallString)
     small_menu = Column(Boolean, default=False, info={"dont_track_changes": True})
+
+    def update(self, **kwargs):
+        if app.settings["security"]["hash_user_passwords"] and "password" in kwargs:
+            kwargs["password"] = argon2.hash(kwargs["password"])
+        super().update(**kwargs)
 
     @property
     def is_admin(self):

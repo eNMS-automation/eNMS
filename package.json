@@ -3,8 +3,8 @@
   "version": "3.20.0",
   "description": "A enterprise-grade vendor-agnostic network automation platform.",
   "scripts": {
-    "prettier": "prettier --config tests/linting/.prettierrc --ignore-path tests/linting/.prettierignore --write eNMS/**/*",
-    "lint": "eslint --config tests/linting/.eslintrc --ignore-path tests/linting/.eslintignore ."
+    "prettier": "prettier --config build/linting/.prettierrc --ignore-path build/linting/.prettierignore --write eNMS/**/*",
+    "lint": "eslint --config build/linting/.eslintrc --ignore-path build/linting/.eslintignore ."
   },
   "engines": {
     "node": "12.11.1"

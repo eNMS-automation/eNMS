@@ -12,7 +12,7 @@ matrix:
         - pip install -r build/requirements/requirements_dev.txt
       script:
         - black --check --verbose .
-        - flake8 --config tests/linting/.flake8 .
+        - flake8 --config build/linting/.flake8 .
         - coverage run --source=./eNMS -m pytest
       after_success:
         - coveralls

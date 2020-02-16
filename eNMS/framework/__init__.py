@@ -1,3 +1,4 @@
+from passlib.hash import argon2
 from flask import Flask, jsonify, make_response, render_template
 from flask_login import current_user
 from itertools import chain
@@ -64,6 +65,11 @@ def configure_errors(flask_app):
 
 
 def configure_authentication():
+    @auth.verify_password
+    def verify_password(username, password):
+        user = fetch("user", name=username)
+        return argon2.verify(password, user.password)
+
     @auth.get_password
     def get_password(username):
         return getattr(fetch("user", name=username), "password", False)

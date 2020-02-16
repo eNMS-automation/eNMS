@@ -62,7 +62,7 @@ def factory(cls_name, **kwargs):
         instance = fetch(cls_name, id=instance_id)
     elif "name" in kwargs:
         instance = fetch(cls_name, allow_none=True, name=kwargs["name"])
-    if instance:
+    if instance and models[cls_name].name.unique:
         if kwargs.get("must_be_new"):
             raise Exception(f"There already is a {cls_name} with the same name.")
         else:

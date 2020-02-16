@@ -26,7 +26,6 @@ class Object(AbstractBase):
     type = Column(SmallString)
     __mapper_args__ = {"polymorphic_identity": "object", "polymorphic_on": type}
     id = Column(Integer, primary_key=True)
-    name = Column(SmallString, unique=True)
     last_modified = Column(SmallString, info={"dont_track_changes": True})
     subtype = Column(SmallString)
     description = Column(SmallString)
@@ -82,6 +81,7 @@ class Device(CustomDevice):
     class_type = "device"
     parent_type = "custom_device"
     id = Column(Integer, ForeignKey(CustomDevice.id), primary_key=True)
+    name = Column(SmallString, unique=True)
     icon = Column(SmallString, default="router")
     operating_system = Column(SmallString)
     os_version = Column(SmallString)
@@ -178,6 +178,7 @@ class Link(Object):
     class_type = "link"
     parent_type = "object"
     id = Column(Integer, ForeignKey("object.id"), primary_key=True)
+    name = Column(SmallString)
     color = Column(SmallString, default="#000000")
     source_id = Column(Integer, ForeignKey("device.id"))
     destination_id = Column(Integer, ForeignKey("device.id"))

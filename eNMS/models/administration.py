@@ -21,8 +21,8 @@ class User(AbstractBase, UserMixin):
 
     __tablename__ = type = "user"
     id = Column(Integer, primary_key=True)
+    name = Column(SmallString, unique=True)
     email = Column(SmallString)
-    name = Column(SmallString)
     permissions = Column(MutableList)
     password = Column(SmallString)
     group = Column(SmallString)

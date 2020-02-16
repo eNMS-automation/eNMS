@@ -10,6 +10,7 @@ Version 3.20.1
 - Refactor LDAP authentication
 - LDAP as first option if the LDAP authentication is active in settings
 - Fix timing issue in SSH Desktop session mechanism
+- Remove unique constrant for link names.
 
 Version 3.20
 ------------

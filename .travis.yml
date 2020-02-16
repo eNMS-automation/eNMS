@@ -9,7 +9,7 @@ matrix:
       python:
         - 3.8
       install:
-        - pip install -r requirements_dev.txt
+        - pip install -r requirements/requirements_dev.txt
       script:
         - black --check --verbose .
         - flake8 --config tests/linting/.flake8 .

@@ -8,7 +8,14 @@ viewType: false
 vis: false
 */
 
-import { call, createTooltip, notify, serializeForm, showTypePanel } from "./base.js";
+import {
+  call,
+  configureNamespace,
+  createTooltip,
+  notify,
+  serializeForm,
+  showTypePanel,
+} from "./base.js";
 import { showConnectionPanel, showDeviceData } from "./inventory.js";
 
 const layers = {
@@ -328,3 +335,5 @@ export function filterView(type) {
     },
   });
 }
+
+configureNamespace("visualization", [showPoolView]);

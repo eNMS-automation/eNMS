@@ -266,7 +266,7 @@ class BaseController:
     def get_all(self, instance_type):
         return [instance.get_properties() for instance in fetch_all(instance_type)]
 
-    def update(self, instance_type, **kwargs):
+    def update(self, type, **kwargs):
         try:
             must_be_new = kwargs.get("id") == ""
             for arg in ("name", "scoped_name"):
@@ -274,16 +274,16 @@ class BaseController:
                     kwargs[arg] = kwargs[arg].strip()
             kwargs["last_modified"] = self.get_time()
             kwargs["creator"] = kwargs["user"] = getattr(current_user, "name", "admin")
-            instance = factory(instance_type, must_be_new=must_be_new, **kwargs)
+            instance = factory(type, must_be_new=must_be_new, **kwargs)
             if kwargs.get("original"):
-                fetch(instance_type, id=kwargs["original"]).duplicate(clone=instance)
+                fetch(type, id=kwargs["original"]).duplicate(clone=instance)
             Session.flush()
             return instance.serialized
         except Exception as exc:
             Session.rollback()
             if isinstance(exc, IntegrityError):
                 return {
-                    "alert": (f"There already is a {instance_type} with the same name")
+                    "alert": f"There is already a {type} with the same parameters."
                 }
             return {"alert": str(exc)}
 

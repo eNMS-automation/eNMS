@@ -68,7 +68,9 @@ def configure_authentication():
     @auth.verify_password
     def verify_password(username, password):
         user = fetch("user", name=username)
-        return argon2.verify(password, user.password)
+        hash = app.settings["security"]["hash_user_passwords"]
+        verify = argon2.verify if hash else str.__eq__
+        return verify(password, user.password)
 
     @auth.get_password
     def get_password(username):

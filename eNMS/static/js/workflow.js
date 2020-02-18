@@ -853,7 +853,7 @@ function displayWorkflowState(result) {
 function resetDisplay() {
   $("#progressbar").hide();
   workflow.services.forEach((service) => {
-    if (ends.has(service.id)) return;
+    if (ends.has(service.id) || !nodes) return;
     nodes.update({
       id: service.id,
       label: getServiceLabel(service),

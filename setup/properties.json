@@ -70,64 +70,64 @@
   },
   "tables":{ 
      "device":[
-      { data: "name", title: "Name", search: "text" },
-      { data: "description", title: "Description", search: "text", visible: false },
-      { data: "subtype", title: "Subtype", search: "text", visible: false },
-      { data: "model", title: "Model", search: "text" },
-      { data: "location", title: "Location", search: "text", visible: false },
-      { data: "vendor", title: "Vendor", search: "text" },
-      { data: "operating_system", title: "Operating System", search: "text" },
-      { data: "os_version", title: "OS Version", search: "text" },
-      { data: "ip_address", title: "IP Address", search: "text" },
-      { data: "port", title: "Port", search: "text", visible: false },
-      "property1":{ 
+      { "data": "name", "title": "Name", "search": "text" },
+      { "data": "description", "title": "Description", "search": "text", "visible": false },
+      { "data": "subtype", "title": "Subtype", "search": "text", "visible": false },
+      { "data": "model", "title": "Model", "search": "text" },
+      { "data": "location", "title": "Location", "search": "text", "visible": false },
+      { "data": "vendor", "title": "Vendor", "search": "text" },
+      { "data": "operating_system", "title": "Operating System", "search": "text" },
+      { "data": "os_version", "title": "OS Version", "search": "text" },
+      { "data": "ip_address", "title": "IP Address", "search": "text" },
+      { "data": "port", "title": "Port", "search": "text", "visible": false },
+      { 
          "data":"property1",
          "title":"Property 1",
          "search":"text",
          "visible":false
       },
-      { data: "buttons", width: "230px" }
+      { "data": "buttons", "width": "230px" }
     ],
       "configuration": [
-         { data: "name", title: "Name", search: "text" },
-         { data: "description", title: "Description", search: "text", visible: false },
-         { data: "subtype", title: "Subtype", search: "text", visible: false },
-         { data: "model", title: "Model", search: "text", visible: false },
-         { data: "location", title: "Location", search: "text", visible: false },
-         { data: "vendor", title: "Vendor", search: "text", visible: false },
-         { data: "operating_system", title: "Operating System", search: "text", visible: false },
-         { data: "os_version", title: "OS Version", search: "text", visible: false },
-         { data: "ip_address", title: "IP Address", search: "text", visible: false },
-         { data: "port", title: "Port", search: "text", visible: false },
+         { "data": "name", "title": "Name", "search": "text" },
+         { "data": "description", "title": "Description", "search": "text", "visible": false },
+         { "data": "subtype", "title": "Subtype", "search": "text", "visible": false },
+         { "data": "model", "title": "Model", "search": "text", "visible": false },
+         { "data": "location", "title": "Location", "search": "text", "visible": false },
+         { "data": "vendor", "title": "Vendor", "search": "text", "visible": false },
+         { "data": "operating_system", "title": "Operating System", "search": "text", "visible": false },
+         { "data": "os_version", "title": "OS Version", "search": "text", "visible": false },
+         { "data": "ip_address", "title": "IP Address", "search": "text", "visible": false },
+         { "data": "port", "title": "Port", "search": "text", "visible": false },
          {
-            data: "configuration",
-            title: "Configuration",
-            search: "text",
-            width: "80%",
-            visible: true
+            "data": "configuration",
+            "title": "Configuration",
+            "search": "text",
+            "width": "80%",
+            "visible": true
           },
           {
-            data: "operational_data",
-            title: "Operational Data",
-            search: "text",
-            width: "80%",
-            visible: false,
+            "data": "operational_data",
+            "title": "Operational Data",
+            "search": "text",
+            "width": "80%",
+            "visible": false
           },
           {
-            data: "buttons",
-            width: "90px",
+            "data": "buttons",
+            "width": "90px"
           }
        ],
      "link":[
-      { data: "name", title: "Name", search: "text" },
-      { data: "description", title: "Description", search: "text", visible: false },
-      { data: "subtype", title: "Subtype", search: "text", visible: false },
-      { data: "model", title: "Model", search: "text" },
-      { data: "location", title: "Location", search: "text" },
-      { data: "vendor", title: "Vendor", search: "text" },
-      { data: "source_name", title: "Source", search: "text" },
-      { data: "destination_name", title: "Destination", search: "text" },
-      { data: "buttons", width: "130px" },
+      { "data": "name", "title": "Name", "search": "text" },
+      { "data": "description", "title": "Description", "search": "text", "visible": false },
+      { "data": "subtype", "title": "Subtype", "search": "text", "visible": false },
+      { "data": "model", "title": "Model", "search": "text" },
+      { "data": "location", "title": "Location", "search": "text" },
+      { "data": "vendor", "title": "Vendor", "search": "text" },
+      { "data": "source_name", "title": "Source", "search": "text" },
+      { "data": "destination_name", "title": "Destination", "search": "text" },
+      { "data": "buttons", "width": "130px" }
     ],
      "pool": [
       {"data": "name", "title": "Name", "search": "text" },
@@ -149,117 +149,117 @@
     ],
      "service": [
       {
-        data: "serviceName",
-        width: "600px",
-        title: "Name",
-        search: "text",
-        className: "dt-body-left"
+        "data": "serviceName",
+        "width": "600px",
+        "title": "Name",
+        "search": "text",
+        "className": "dt-body-left"
       },
-      { data: "lastModified", title: "Last Modified", search: "text", visible: false },
-      { data: "type", title: "Type", search: "text" },
-      { data: "vendor", title: "Vendor", search: "text", visible: false },
-      { data: "operating_system", title: "Operating System", search: "text", visible: false },
-      { data: "creator", title: "Creator", search: "text" },
-      { data: "status", title: "Status", search: "text", width: "60px" },
-      { data: "buttons", width: "260px" }
+      { "data": "lastModified", "title": "Last Modified", "search": "text", "visible": false },
+      { "data": "type", "title": "Type", "search": "text" },
+      { "data": "vendor", "title": "Vendor", "search": "text", "visible": false },
+      { "data": "operating_system", "title": "Operating System", "search": "text", "visible": false },
+      { "data": "creator", "title": "Creator", "search": "text" },
+      { "data": "status", "title": "Status", "search": "text", "width": "60px" },
+      { "data": "buttons", "width": "260px" }
     ],
     "run": [
-      { data: "runtime", title: "Runtime", search: "text", width: "200px" },
-      { data: "duration", title: "Duration", search: "text", width: "100px" },
-      { data: "service_name", title: "Service", search: "text" },
-      { data: "status", title: "Status", search: "text", width: "100px" },
-      { data: "progress", title: "Progress", width: "150px" },
-      { data: "buttons", width: "90px" },
+      { "data": "runtime", "title": "Runtime", "search": "text", "width": "200px" },
+      { "data": "duration", "title": "Duration", "search": "text", "width": "100px" },
+      { "data": "service_name", "title": "Service", "search": "text" },
+      { "data": "status", "title": "Status", "search": "text", "width": "100px" },
+      { "data": "progress", "title": "Progress", "width": "150px" },
+      { "data": "buttons", "width": "90px" }
     ],
     "result": [
-      { data: "runtime", title: "Runtime", search: "text" },
-      { data: "duration", title: "Duration", search: "text" },
-      { data: "device_name", title: "Device", search: "text" },
+      { "data": "runtime", "title": "Runtime", "search": "text" },
+      { "data": "duration", "title": "Duration", "search": "text" },
+      { "data": "device_name", "title": "Device", "search": "text" },
       {
-        data: "status",
-        title: "Status",
-        search: "text",
-        width: "80px"
+        "data": "status",
+        "title": "Status",
+        "search": "text",
+        "width": "80px"
       },
-      { data: "buttons" },
+      { "data": "buttons" },
       {
-        data: "v1",
-        title: "V1"
+        "data": "v1",
+        "title": "V1"
       },
       {
-        data: "v2",
-        title: "V2"
-      },
+        "data": "v2",
+        "title": "V2"
+      }
     ],
      "task": [
-      { data: "name", title: "Name", search: "text" },
-      { data: "service_name", title: "Service", search: "text" },
-      { data: "status", title: "Status", search: "text", width: "100px" },
+      { "data": "name", "title": "Name", "search": "text" },
+      { "data": "service_name", "title": "Service", "search": "text" },
+      { "data": "status", "title": "Status", "search": "text", "width": "100px" },
       {
-        data: "scheduling_mode",
-        title: "Scheduling",
-        search: "text",
-        width: "100px",
-        visible: false
+        "data": "scheduling_mode",
+        "title": "Scheduling",
+        "search": "text",
+        "width": "100px",
+        "visible": false
       },
       {
-        data: "periodicity",
-        title: "Periodicity",
-        search: "text",
-        width: "100px"
+        "data": "periodicity",
+        "title": "Periodicity",
+        "search": "text",
+        "width": "100px"
       },
       {
-        data: "next_run_time",
-        title: "Next run time",
-        search: "text",
-        width: "150px"
+        "data": "next_run_time",
+        "title": "Next run time",
+        "search": "text",
+        "width": "150px"
       },
       {
-        data: "time_before_next_run",
-        title: "Time left",
-        search: "text",
-        width: "150px"
+        "data": "time_before_next_run",
+        "title": "Time left",
+        "search": "text",
+        "width": "150px"
       },
-      { data: "buttons", width: "200px" }
+      { "data": "buttons", "width": "200px" }
     ],
     "user": [
-      { data: "name", title: "Username", search: "text" },
-      { data: "email", title: "Email Address", search: "text" },
-      { data: "group", title: "Permission Group", search: "text" },
-      { data: "buttons", width: "130px" },
+      { "data": "name", "title": "Username", "search": "text" },
+      { "data": "email", "title": "Email Address", "search": "text" },
+      { "data": "group", "title": "Permission Group", "search": "text" },
+      { "data": "buttons", "width": "130px" }
     ],
     "server": [
-      { data: "name", title: "Username", search: "text" },
-      { data: "description", title: "Description", search: "text" },
-      { data: "ip_address", title: "IP address", search: "text" },
-      { data: "weight", title: "Weight", search: "text" },
-      { data: "status", title: "Status", search: "text" },
-      { data: "buttons", width: "120px" },
+      { "data": "name", "title": "Username", "search": "text" },
+      { "data": "description", "title": "Description", "search": "text" },
+      { "data": "ip_address", "title": "IP address", "search": "text" },
+      { "data": "weight", "title": "Weight", "search": "text" },
+      { "data": "status", "title": "Status", "search": "text" },
+      { "data": "buttons", "width": "120px" }
     ],
     "changelog": [
-      { data: "time", title: "Time", search: "text", width: "200px" },
-      { data: "user", title: "User", search: "text", width: "100px" },
-      { data: "severity", title: "Severity", search: "text", width: "80px" },
+      { "data": "time", "title": "Time", "search": "text", "width": "200px" },
+      { "data": "user", "title": "User", "search": "text", "width": "100px" },
+      { "data": "severity", "title": "Severity", "search": "text", "width": "80px" },
       {
-        data: "content",
-        title: "Content",
-        search: "text",
-        className: "dt-body-left",
-      },
+        "data": "content",
+        "title": "Content",
+        "search": "text",
+        "className": "dt-body-left"
+      }
     ],
     "session": [
-      { data: "timestamp", title: "Timestamp", search: "text", width: "200px" },
-      { data: "device_name", title: "Device", search: "text", width: "150px" },
-      { data: "user", title: "User", search: "text", width: "100px" },
-      { data: "name", title: "Session UUID", search: "text", width: "300px" },
-      { data: "buttons", width: "40px" },
+      { "data": "timestamp", "title": "Timestamp", "search": "text", "width": "200px" },
+      { "data": "device_name", "title": "Device", "search": "text", "width": "150px" },
+      { "data": "user", "title": "User", "search": "text", "width": "100px" },
+      { "data": "name", "title": "Session UUID", "search": "text", "width": "300px" },
+      { "data": "buttons", "width": "40px" }
     ],
     "event": [
-      { data: "name", title: "Name", search: "text" },
-      { data: "service_name", title: "Service", search: "text" },
-      { data: "log_source", title: "Log", search: "text" },
-      { data: "log_content", title: "Content", search: "text" },
-      { data: "buttons", width: "120px" },
+      { "data": "name", "title": "Name", "search": "text" },
+      { "data": "service_name", "title": "Service", "search": "text" },
+      { "data": "log_source", "title": "Log", "search": "text" },
+      { "data": "log_content", "title": "Content", "search": "text" },
+      { "data": "buttons", "width": "120px" }
     ]
   },
   "pool":{ 

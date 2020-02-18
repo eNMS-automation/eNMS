@@ -282,9 +282,7 @@ class BaseController:
         except Exception as exc:
             Session.rollback()
             if isinstance(exc, IntegrityError):
-                return {
-                    "alert": f"There is already a {type} with the same parameters."
-                }
+                return {"alert": f"There is already a {type} with the same parameters."}
             return {"alert": str(exc)}
 
     def log(self, severity, content):

@@ -196,9 +196,7 @@ class Link(Object):
     )
     destination_name = association_proxy("destination", "name")
     pools = relationship("Pool", secondary=pool_link_table, back_populates="links")
-    __table_args__ = (
-        UniqueConstraint(name, source_id, destination_id),
-    )
+    __table_args__ = (UniqueConstraint(name, source_id, destination_id),)
 
     def __init__(self, **kwargs):
         self.update(**kwargs)

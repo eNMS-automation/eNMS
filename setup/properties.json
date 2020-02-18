@@ -99,11 +99,24 @@
            "visible":false
         }
      },
-     "pool":{ 
-        "last_modified":{ 
-           "visible":false
-        }
-     },
+     "pool": [
+      {"data": "name", "title": "Name", "search": "text" },
+      {
+         "data": "lastModified",
+         "title": "Last modified",
+         "search": "text",
+         "width": "150px"
+       },
+      { "data": "description", "title": "Description", "search": "text" },
+      {
+        "data": "never_update",
+        "title": "Never update",
+        "search": "bool",
+        "width": "100px"
+      },
+      { "data": "objectNumber", "title": "Object Count", "width": "150px" },
+      { "data": "buttons", "width": "250px" }
+    ],
      "service":{ 
         "last_modified":{ 
            "visible":false

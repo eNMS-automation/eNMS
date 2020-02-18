@@ -20,20 +20,7 @@ export const models = {};
 let waitForSearch = false;
 
 export function initTable(type, instance, runtime, id) {
-  let columns = models[type].columns;
-  let ColumnsIndex = {};
-  columns.forEach((column, i) => {
-    ColumnsIndex[column.data] = i;
-  });
-  if (tableProperties[type]) {
-    for (let [property, values] of Object.entries(tableProperties[type])) {
-      if (property in ColumnsIndex) {
-        Object.assign(columns[ColumnsIndex[property]], values);
-      } else {
-        columns.splice(-1, 0, values);
-      }
-    }
-  }
+  let columns = tableProperties[type];
   let visibleColumns = localStorage.getItem(`table/${type}`);
   if (visibleColumns) visibleColumns = visibleColumns.split(",");
   columns.forEach((column) => {
@@ -245,16 +232,8 @@ class Base {
       </li>`;
   }
 
-  static get lastModifiedColumn() {
-    return {
-      data: "last_modified",
-      title: "Last modified",
-      search: "text",
-      render: function(_, __, instance) {
-        return instance.last_modified.slice(0, -7);
-      },
-      width: "150px",
-    };
+  get lastModified() {
+    return this.last_modified.slice(0, -7);
   }
 
   static createfilteringTooltips(type, columns) {
@@ -538,21 +517,6 @@ models.link = class Link extends Base {
 };
 
 models.pool = class Pool extends Base {
-  static get columns() {
-    return [
-      { data: "name", title: "Name", search: "text" },
-      super.lastModifiedColumn,
-      { data: "description", title: "Description", search: "text" },
-      {
-        data: "never_update",
-        title: "Never update",
-        search: "bool",
-        width: "100px",
-      },
-      { data: "objectNumber", title: "Object Count", width: "150px" },
-      { data: "buttons", width: "250px" },
-    ];
-  }
 
   get objectNumber() {
     return `${this.device_number} devices - ${this.link_number} links`;

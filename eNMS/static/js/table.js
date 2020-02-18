@@ -312,21 +312,6 @@ class Base {
 }
 
 models.device = class Device extends Base {
-  static get columns() {
-    return [
-      { data: "name", title: "Name", search: "text" },
-      { data: "description", title: "Description", search: "text" },
-      { data: "subtype", title: "Subtype", search: "text" },
-      { data: "model", title: "Model", search: "text" },
-      { data: "location", title: "Location", search: "text" },
-      { data: "vendor", title: "Vendor", search: "text" },
-      { data: "operating_system", title: "Operating System", search: "text" },
-      { data: "os_version", title: "OS Version", search: "text" },
-      { data: "ip_address", title: "IP Address", search: "text" },
-      { data: "port", title: "Port", search: "text", visible: false },
-      { data: "buttons", width: "230px" },
-    ];
-  }
 
   static get controls() {
     return [
@@ -394,34 +379,6 @@ models.configuration = class Configuration extends models.device {
     return "device";
   }
 
-  static get columns() {
-    let columns = super.columns;
-    columns.pop();
-    columns.forEach((column) => (column.visible = column.data === "name"));
-    columns.push(
-      ...[
-        {
-          data: "configuration",
-          title: "Configuration",
-          search: "text",
-          width: "80%",
-        },
-        {
-          data: "operational_data",
-          title: "Operational Data",
-          search: "text",
-          width: "80%",
-          visible: false,
-        },
-        {
-          data: "buttons",
-          width: "90px",
-        },
-      ]
-    );
-    return columns;
-  }
-
   static postProcessing(...args) {
     super.postProcessing(...args);
     $("#slider").bootstrapSlider({
@@ -467,19 +424,6 @@ models.configuration = class Configuration extends models.device {
 };
 
 models.link = class Link extends Base {
-  static get columns() {
-    return [
-      { data: "name", title: "Name", search: "text" },
-      { data: "description", title: "Description", search: "text" },
-      { data: "subtype", title: "Subtype", search: "text" },
-      { data: "model", title: "Model", search: "text" },
-      { data: "location", title: "Location", search: "text" },
-      { data: "vendor", title: "Vendor", search: "text" },
-      { data: "source_name", title: "Source", search: "text" },
-      { data: "destination_name", title: "Destination", search: "text" },
-      { data: "buttons", width: "130px" },
-    ];
-  }
 
   static get controls() {
     return [
@@ -588,30 +532,14 @@ models.pool = class Pool extends Base {
 };
 
 models.service = class Service extends Base {
-  static get columns() {
-    return [
-      {
-        data: "name",
-        title: "Name",
-        search: "text",
-        className: "dt-body-left",
-        render: function(_, __, instance) {
-          return instance.type === "workflow"
-            ? `<b><a href="#" onclick="eNMS.workflow.switchToWorkflow(
-              '${instance.id}')">${instance.scoped_name}</a></b>`
-            : $("#parent-filtering").val() == "true"
-            ? instance.scoped_name
-            : instance.name;
-        },
-      },
-      super.lastModifiedColumn,
-      { data: "type", title: "Type", search: "text" },
-      { data: "vendor", title: "Vendor", search: "text" },
-      { data: "operating_system", title: "Operating System", search: "text" },
-      { data: "creator", title: "Creator", search: "text" },
-      { data: "status", title: "Status", search: "text", width: "60px" },
-      { data: "buttons", width: "260px" },
-    ];
+
+  get serviceName() {
+    return this.type === "workflow"
+    ? `<b><a href="#" onclick="eNMS.workflow.switchToWorkflow(
+      '${this.id}')">${this.scoped_name}</a></b>`
+    : $("#parent-filtering").val() == "true"
+    ? this.scoped_name
+    : this.name;
   }
 
   static get controls() {
@@ -747,17 +675,6 @@ models.run = class Run extends Base {
     this.service = JSON.stringify(this.service_properties).replace(/"/g, "'");
   }
 
-  static get columns() {
-    return [
-      { data: "runtime", title: "Runtime", search: "text", width: "200px" },
-      { data: "duration", title: "Duration", search: "text", width: "100px" },
-      { data: "service_name", title: "Service", search: "text" },
-      { data: "status", title: "Status", search: "text", width: "100px" },
-      { data: "progress", title: "Progress", width: "150px" },
-      { data: "buttons", width: "90px" },
-    ];
-  }
-
   static get controls() {
     return [
       super.columnDisplay(),
@@ -800,43 +717,23 @@ models.result = class Result extends Base {
     super(properties, ["service_name", "device_name"]);
   }
 
-  static get columns() {
-    return [
-      { data: "runtime", title: "Runtime", search: "text" },
-      { data: "duration", title: "Duration", search: "text" },
-      { data: "device_name", title: "Device", search: "text" },
-      {
-        data: "success",
-        title: "Success",
-        render: function(_, __, instance) {
-          const btn = instance.success ? "success" : "danger";
-          const label = instance.success ? "Success" : "Failure";
-          return `
-            <button
-              type="button"
-              class="btn btn-${btn} btn-sm"
-              style="width:100%">${label}
-            </button>`;
-        },
-        search: "text",
-        width: "80px",
-      },
-      { data: "buttons" },
-      {
-        data: "version_1",
-        title: "V1",
-        render: function(_, __, instance) {
-          return `<input type="radio" name="v1" value="${instance.id}">`;
-        },
-      },
-      {
-        data: "version_2",
-        title: "V2",
-        render: function(_, __, instance) {
-          return `<input type="radio" name="v2" value="${instance.id}">`;
-        },
-      },
-    ];
+  get status() {
+    const btn = this.success ? "success" : "danger";
+    const label = this.success ? "Success" : "Failure";
+    return `
+      <button
+        type="button"
+        class="btn btn-${btn} btn-sm"
+        style="width:100%">${label}
+      </button>`;
+  }
+
+  get v1() {
+    return `<input type="radio" name="v1" value="${instance.id}">`;
+  }
+
+  get v2() {
+    return `<input type="radio" name="v2" value="${instance.id}">`;
   }
 
   static get controls() {
@@ -879,44 +776,13 @@ models.result = class Result extends Base {
 };
 
 models.task = class Task extends Base {
-  static get columns() {
-    return [
-      { data: "name", title: "Name", search: "text" },
-      { data: "service_name", title: "Service", search: "text" },
-      { data: "status", title: "Status", search: "text", width: "100px" },
-      {
-        data: "scheduling_mode",
-        title: "Scheduling",
-        search: "text",
-        width: "100px",
-      },
-      {
-        data: "periodicity",
-        title: "Periodicity",
-        search: "text",
-        render: function(_, __, instance) {
-          if (instance.scheduling_mode == "standard") {
-            return `${instance.frequency} ${instance.frequency_unit}`;
-          } else {
-            return instance.crontab_expression;
-          }
-        },
-        width: "100px",
-      },
-      {
-        data: "next_run_time",
-        title: "Next run time",
-        search: "text",
-        width: "150px",
-      },
-      {
-        data: "time_before_next_run",
-        title: "Time left",
-        search: "text",
-        width: "150px",
-      },
-      { data: "buttons", width: "200px" },
-    ];
+
+  get periodicity() {
+    if (this.scheduling_mode == "standard") {
+      return `${this.frequency} ${this.frequency_unit}`;
+    } else {
+      return this.crontab_expression;
+    }
   }
 
   static get controls() {
@@ -984,14 +850,6 @@ models.task = class Task extends Base {
 };
 
 models.user = class User extends Base {
-  static get columns() {
-    return [
-      { data: "name", title: "Username", search: "text" },
-      { data: "email", title: "Email Address", search: "text" },
-      { data: "group", title: "Permission Group", search: "text" },
-      { data: "buttons", width: "130px" },
-    ];
-  }
 
   static get controls() {
     return [
@@ -1030,16 +888,6 @@ models.user = class User extends Base {
 };
 
 models.server = class Server extends Base {
-  static get columns() {
-    return [
-      { data: "name", title: "Username", search: "text" },
-      { data: "description", title: "Description", search: "text" },
-      { data: "ip_address", title: "IP address", search: "text" },
-      { data: "weight", title: "Weight", search: "text" },
-      { data: "status", title: "Status", search: "text" },
-      { data: "buttons", width: "120px" },
-    ];
-  }
 
   static get controls() {
     return [
@@ -1078,19 +926,6 @@ models.server = class Server extends Base {
 };
 
 models.changelog = class Changelog extends Base {
-  static get columns() {
-    return [
-      { data: "time", title: "Time", search: "text", width: "200px" },
-      { data: "user", title: "User", search: "text", width: "100px" },
-      { data: "severity", title: "Severity", search: "text", width: "80px" },
-      {
-        data: "content",
-        title: "Content",
-        search: "text",
-        className: "dt-body-left",
-      },
-    ];
-  }
 
   static get controls() {
     return [
@@ -1102,15 +937,6 @@ models.changelog = class Changelog extends Base {
 };
 
 models.session = class Session extends Base {
-  static get columns() {
-    return [
-      { data: "timestamp", title: "Timestamp", search: "text", width: "200px" },
-      { data: "device_name", title: "Device", search: "text", width: "150px" },
-      { data: "user", title: "User", search: "text", width: "100px" },
-      { data: "name", title: "Session UUID", search: "text", width: "300px" },
-      { data: "buttons", width: "40px" },
-    ];
-  }
 
   static get controls() {
     return [super.columnDisplay(), super.refreshTableButton("session")];
@@ -1132,15 +958,6 @@ models.session = class Session extends Base {
 };
 
 models.event = class Event extends Base {
-  static get columns() {
-    return [
-      { data: "name", title: "Name", search: "text" },
-      { data: "service_name", title: "Service", search: "text" },
-      { data: "log_source", title: "Log", search: "text" },
-      { data: "log_content", title: "Content", search: "text" },
-      { data: "buttons", width: "120px" },
-    ];
-  }
 
   static get controls() {
     return [

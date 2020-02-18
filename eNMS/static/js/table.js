@@ -312,7 +312,6 @@ class Base {
 }
 
 models.device = class Device extends Base {
-
   static get controls() {
     return [
       super.columnDisplay(),
@@ -424,7 +423,6 @@ models.configuration = class Configuration extends models.device {
 };
 
 models.link = class Link extends Base {
-
   static get controls() {
     return [
       super.columnDisplay(),
@@ -461,7 +459,6 @@ models.link = class Link extends Base {
 };
 
 models.pool = class Pool extends Base {
-
   get objectNumber() {
     return `${this.device_number} devices - ${this.link_number} links`;
   }
@@ -532,14 +529,13 @@ models.pool = class Pool extends Base {
 };
 
 models.service = class Service extends Base {
-
   get serviceName() {
     return this.type === "workflow"
-    ? `<b><a href="#" onclick="eNMS.workflow.switchToWorkflow(
+      ? `<b><a href="#" onclick="eNMS.workflow.switchToWorkflow(
       '${this.id}')">${this.scoped_name}</a></b>`
-    : $("#parent-filtering").val() == "true"
-    ? this.scoped_name
-    : this.name;
+      : $("#parent-filtering").val() == "true"
+      ? this.scoped_name
+      : this.name;
   }
 
   static get controls() {
@@ -729,11 +725,11 @@ models.result = class Result extends Base {
   }
 
   get v1() {
-    return `<input type="radio" name="v1" value="${instance.id}">`;
+    return `<input type="radio" name="v1" value="${this.id}">`;
   }
 
   get v2() {
-    return `<input type="radio" name="v2" value="${instance.id}">`;
+    return `<input type="radio" name="v2" value="${this.id}">`;
   }
 
   static get controls() {
@@ -776,7 +772,6 @@ models.result = class Result extends Base {
 };
 
 models.task = class Task extends Base {
-
   get periodicity() {
     if (this.scheduling_mode == "standard") {
       return `${this.frequency} ${this.frequency_unit}`;
@@ -850,7 +845,6 @@ models.task = class Task extends Base {
 };
 
 models.user = class User extends Base {
-
   static get controls() {
     return [
       super.columnDisplay(),
@@ -888,7 +882,6 @@ models.user = class User extends Base {
 };
 
 models.server = class Server extends Base {
-
   static get controls() {
     return [
       super.columnDisplay(),
@@ -926,7 +919,6 @@ models.server = class Server extends Base {
 };
 
 models.changelog = class Changelog extends Base {
-
   static get controls() {
     return [
       super.columnDisplay(),
@@ -937,7 +929,6 @@ models.changelog = class Changelog extends Base {
 };
 
 models.session = class Session extends Base {
-
   static get controls() {
     return [super.columnDisplay(), super.refreshTableButton("session")];
   }
@@ -958,7 +949,6 @@ models.session = class Session extends Base {
 };
 
 models.event = class Event extends Base {
-
   static get controls() {
     return [
       super.columnDisplay(),

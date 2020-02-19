@@ -36,7 +36,8 @@ class NetmikoValidationService(ConnectionService):
         command = run.sub(run.command, locals())
         run.log("info", f"Sending '{command}' with Netmiko", device)
         expect_string = run.sub(run.expect_string, locals())
-        netmiko_connection.session_log.truncate(0)
+        if hasattr(netmiko_connection, "session_log"):
+            netmiko_connection.session_log.truncate(0)
         try:
             result = netmiko_connection.send_command(
                 command,
@@ -51,7 +52,11 @@ class NetmikoValidationService(ConnectionService):
             return {
                 "command": command,
                 "error": format_exc(),
-                "result": netmiko_connection.session_log.getvalue().decode(),
+                "result": (
+                    netmiko_connection.session_log.getvalue().decode()
+                    if hasattr(netmiko_connection, "session_log")
+                    else "No results available after exception. Driver does not support session_log"
+                ),
                 "success": False,
             }
         return {"command": command, "result": result}

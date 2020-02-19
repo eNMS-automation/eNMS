@@ -2,8 +2,3 @@
 - name: Simple playbook
   gather_facts: false
   connection: local
-
-- debug:
-    msg:
-    - "Message 1"
-    - "Message 2"

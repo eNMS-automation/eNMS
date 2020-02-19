@@ -53,9 +53,10 @@ class AnsiblePlaybookService(Service):
             command.extend(["-i", device.ip_address + ","])
         command.append(run.sub(run.playbook_path, locals()))
         password = extra_args.get("password")
+        full_command = " ".join(command + arguments)
         if password:
-            safe_command = " ".join(command + arguments).replace(password, "*" * 10)
-        run.log("info", f"Sending Ansible playbook: {safe_command}", device)
+            full_command.replace(password, "*" * 10)
+        run.log("info", f"Sending Ansible playbook: {full_command}", device)
         try:
             result = check_output(
                 command + arguments, cwd=app.path / "files" / "playbooks"
@@ -64,7 +65,7 @@ class AnsiblePlaybookService(Service):
             result = "\n".join(format_exc().splitlines())
             if password:
                 result = result.replace(password, "*" * 10)
-            results = {"success": False, "result": result}
+            results = {"success": False, "result": result, "command": full_command}
             exit_code = search(r"exit status (\d+)", result)
             if exit_code:
                 results["exit_code"] = self.exit_codes[exit_code.group(1)]
@@ -73,7 +74,7 @@ class AnsiblePlaybookService(Service):
             result = result.decode("utf-8")
         except AttributeError:
             pass
-        return {"command": safe_command, "result": result}
+        return {"command": full_command, "result": result}
 
 
 class AnsiblePlaybookForm(ServiceForm):

@@ -902,7 +902,7 @@ export function initWorkflowBuilder() {
           `<option value="${workflows[i].id}">${workflows[i].name}</option>`
         );
       }
-      if (workflow) {
+      if (workflow && currentPath) {
         $("#current-workflow").val(currentPath.split(">")[0]);
         switchToWorkflow(currentPath);
       } else {

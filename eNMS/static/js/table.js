@@ -20,7 +20,6 @@ export const models = {};
 let waitForSearch = false;
 
 export function initTable(type, instance, runtime, id) {
-  
   let columns = tableProperties[type];
   let visibleColumns = localStorage.getItem(`table/${type}`);
   if (visibleColumns) visibleColumns = visibleColumns.split(",");
@@ -772,6 +771,12 @@ models.result = class Result extends Base {
     ];
   }
 };
+
+models.device_result = class DeviceResult extends models.result {
+  static get modelFiltering() {
+    return "result";
+  }
+}
 
 models.task = class Task extends Base {
   get periodicity() {

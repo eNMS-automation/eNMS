@@ -410,6 +410,40 @@
             "title":"V2"
          }
       ],
+      "device_result":[ 
+         { 
+            "data":"runtime",
+            "title":"Runtime",
+            "search":"text"
+         },
+         { 
+            "data":"duration",
+            "title":"Duration",
+            "search":"text"
+         },
+         { 
+            "data":"service_name",
+            "title":"Service",
+            "search":"text"
+         },
+         { 
+            "data":"status",
+            "title":"Status",
+            "search":"text",
+            "width":"80px"
+         },
+         { 
+            "data":"buttons"
+         },
+         { 
+            "data":"v1",
+            "title":"V1"
+         },
+         { 
+            "data":"v2",
+            "title":"V2"
+         }
+      ],
       "task":[ 
          { 
             "data":"name",

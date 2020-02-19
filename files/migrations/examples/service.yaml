@@ -90,7 +90,6 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
-  status: Idle
   time_between_retries: 10
   type: swiss_army_knife_service
   validation_method: none
@@ -191,7 +190,6 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
-  status: Idle
   time_between_retries: 10
   type: swiss_army_knife_service
   validation_method: none
@@ -237,7 +235,6 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
-  status: Idle
   time_between_retries: 10
   type: swiss_army_knife_service
   validation_method: none
@@ -284,7 +281,6 @@
   skip: true
   skip_query: ''
   skip_value: 'True'
-  status: Idle
   time_between_retries: 10
   type: swiss_army_knife_service
   validation_method: none
@@ -345,7 +341,6 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
-  status: Idle
   string1: cisco
   string2: s2
   time_between_retries: 10
@@ -404,7 +399,6 @@
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
-  status: Idle
   time_between_retries: 10
   type: configure_bgp_service
   validation_method: none
@@ -412,6 +406,7 @@
   vrf_name: configure_BGP_test
   waiting_time: 100
 - close_connection: false
+  configuration_getters: []
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -444,16 +439,12 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
+  operational_data_getters: []
   optional_args: {}
   pools: []
   positions:
     'Regression Workflow 9: Operational Data Backup': [-259, 351]
-  regex_pattern_1: ''
-  regex_pattern_2: ''
-  regex_pattern_3: ''
-  regex_replace_1: ''
-  regex_replace_2: ''
-  regex_replace_3: ''
+  replacements: []
   result_postprocessing: ''
   run_method: per_device
   scoped_name: Configuration Backup (NAPALM)
@@ -464,7 +455,6 @@
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
-  status: Idle
   time_between_retries: 10
   timeout: 60
   type: napalm_backup_service
@@ -527,7 +517,6 @@
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
-  status: Idle
   strip_command: false
   strip_prompt: false
   time_between_retries: 10
@@ -596,13 +585,13 @@
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
-  status: Idle
   strip_command: true
   strip_prompt: true
   time_between_retries: 10
   timeout: 3.0
   type: netmiko_validation_service
   use_device_driver: true
+  use_genie: false
   validation_method: text
   vendor: Arista
   waiting_time: 0
@@ -662,7 +651,6 @@
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
-  status: Idle
   strip_command: false
   strip_prompt: false
   time_between_retries: 10
@@ -729,13 +717,13 @@
   skip_query: ''
   skip_value: 'True'
   start_new_connection: true
-  status: Idle
   strip_command: true
   strip_prompt: true
   time_between_retries: 1
   timeout: 3.0
   type: netmiko_validation_service
   use_device_driver: true
+  use_genie: false
   validation_method: text
   vendor: Arista
   waiting_time: 0
@@ -849,7 +837,6 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
-  status: Idle
   time_between_retries: 10
   timeout: 15
   type: rest_call_service
@@ -909,7 +896,6 @@
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
-  status: Idle
   time_between_retries: 10
   timeout: 1
   type: napalm_getters_service
@@ -967,7 +953,6 @@
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
-  status: Idle
   time_between_retries: 10
   timeout: 1
   type: napalm_getters_service
@@ -1025,7 +1010,6 @@
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
-  status: Idle
   time_between_retries: 10
   timeout: 60
   type: napalm_getters_service
@@ -1082,7 +1066,6 @@
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
-  status: Idle
   time_between_retries: 10
   timeout: 60
   type: napalm_getters_service
@@ -1132,7 +1115,6 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
-  status: Idle
   time_between_retries: 10
   type: swiss_army_knife_service
   validation_method: none
@@ -1188,7 +1170,6 @@
     \ Devices\", [\"Atlanta\", \"Austin\"] if device.name == \"Austin\" else [\"Washington\"\
     ], device=device.name)\r\n\r\n# Interfaces 2\r\nset_var('Interfaces 2', ['Loopback333',\
     \ 'Loopback334'])\r\nsave_result(True, {})"
-  status: Idle
   time_between_retries: 10
   type: python_snippet_service
   validation_method: none
@@ -1252,13 +1233,13 @@
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
-  status: Idle
   strip_command: true
   strip_prompt: true
   time_between_retries: 10
   timeout: 3.0
   type: netmiko_validation_service
   use_device_driver: true
+  use_genie: false
   validation_method: text
   vendor: Arista
   waiting_time: 0
@@ -1549,13 +1530,13 @@
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
-  status: Idle
   strip_command: true
   strip_prompt: true
   time_between_retries: 10
   timeout: 10.0
   type: netmiko_validation_service
   use_device_driver: true
+  use_genie: false
   validation_method: text
   vendor: ''
   waiting_time: 0
@@ -1616,13 +1597,13 @@
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
-  status: Idle
   strip_command: true
   strip_prompt: true
   time_between_retries: 10
   timeout: 10.0
   type: netmiko_validation_service
   use_device_driver: true
+  use_genie: false
   validation_method: text
   vendor: ''
   waiting_time: 0
@@ -1684,7 +1665,6 @@
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
-  status: Idle
   time_between_retries: 10
   timeout: 10
   type: netmiko_prompts_service
@@ -1750,7 +1730,6 @@
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
-  status: Idle
   time_between_retries: 10
   timeout: 10
   type: netmiko_prompts_service
@@ -1803,7 +1782,6 @@
   source_code: "set_var(\"global_variable\", value=1050)\r\nset_var(\"variable\",\
     \ \"variable_in_variables\", section=\"variables\")\r\nsave_result(success=True,\
     \ result={})"
-  status: Idle
   time_between_retries: 10
   type: python_snippet_service
   validation_method: none
@@ -1857,7 +1835,6 @@
     ] if device.name == \"Chicago\" else [\"Cleveland\", \"Washington\"]\r\nset_var(\"\
     iteration_device\", devices, section=\"pools\", device=device.name)\r\nsave_result(success=True,\
     \ result={})"
-  status: Idle
   time_between_retries: 10
   type: python_snippet_service
   validation_method: none
@@ -1918,13 +1895,13 @@
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
-  status: Idle
   strip_command: true
   strip_prompt: true
   time_between_retries: 10
   timeout: 1.0
   type: netmiko_validation_service
   use_device_driver: true
+  use_genie: false
   validation_method: text
   vendor: ''
   waiting_time: 0
@@ -1983,13 +1960,13 @@
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
-  status: Idle
   strip_command: true
   strip_prompt: true
   time_between_retries: 10
   timeout: 10.0
   type: netmiko_validation_service
   use_device_driver: true
+  use_genie: false
   validation_method: text
   vendor: ''
   waiting_time: 0
@@ -2048,13 +2025,13 @@
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
-  status: Idle
   strip_command: true
   strip_prompt: true
   time_between_retries: 10
   timeout: 10.0
   type: netmiko_validation_service
   use_device_driver: true
+  use_genie: false
   validation_method: text
   vendor: ''
   waiting_time: 0
@@ -2111,7 +2088,6 @@
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
-  status: Idle
   time_between_retries: 10
   timeout: 1
   type: napalm_getters_service
@@ -2171,7 +2147,6 @@
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
-  status: Idle
   time_between_retries: 10
   timeout: 60
   type: napalm_getters_service
@@ -2233,7 +2208,6 @@
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
-  status: Idle
   time_between_retries: 10
   timeout: 60
   type: napalm_getters_service
@@ -2293,7 +2267,6 @@
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
-  status: Idle
   time_between_retries: 10
   timeout: 60
   type: napalm_getters_service
@@ -2353,7 +2326,6 @@
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
-  status: Idle
   time_between_retries: 10
   timeout: 60
   type: napalm_getters_service
@@ -2397,7 +2369,7 @@
   playbook_path: /media/sf_VM/eNMS/files/playbooks/arista_show_version.yml
   pools: []
   positions:
-    'Regression Workflow 6: Ansible with Validation': [-466, 154]
+    'Regression Workflow 6: Ansible with Validation': [-107, 153]
     'Regression Workflow B: Napalm getters validation': [-30, 126]
   result_postprocessing: ''
   run_method: per_device
@@ -2408,7 +2380,6 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
-  status: Idle
   time_between_retries: 10
   type: ansible_playbook_service
   validation_method: dict_included
@@ -2460,7 +2431,6 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
-  status: Idle
   time_between_retries: 10
   type: ansible_playbook_service
   validation_method: text
@@ -2512,7 +2482,6 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
-  status: Idle
   time_between_retries: 10
   type: ansible_playbook_service
   validation_method: dict_included
@@ -2573,13 +2542,13 @@
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
-  status: Idle
   strip_command: true
   strip_prompt: true
   time_between_retries: 10
   timeout: 10.0
   type: netmiko_validation_service
   use_device_driver: true
+  use_genie: false
   validation_method: text
   vendor: ''
   waiting_time: 0
@@ -2638,13 +2607,13 @@
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
-  status: Idle
   strip_command: true
   strip_prompt: true
   time_between_retries: 10
   timeout: 3.0
   type: netmiko_validation_service
   use_device_driver: true
+  use_genie: false
   validation_method: text
   vendor: Arista
   waiting_time: 0
@@ -2703,13 +2672,13 @@
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
-  status: Idle
   strip_command: true
   strip_prompt: true
   time_between_retries: 10
   timeout: 3.0
   type: netmiko_validation_service
   use_device_driver: true
+  use_genie: false
   validation_method: text
   vendor: Arista
   waiting_time: 0
@@ -2768,13 +2737,13 @@
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
-  status: Idle
   strip_command: true
   strip_prompt: true
   time_between_retries: 10
   timeout: 3.0
   type: netmiko_validation_service
   use_device_driver: true
+  use_genie: false
   validation_method: text
   vendor: Arista
   waiting_time: 0
@@ -2929,7 +2898,6 @@
   source_code: "set_var(\"list\", [1, 2], device=device.name)\r\nset_var(\"dict\"\
     , {\"a\": [\"o\", True, 4]}, device=device.name)\r\nsave_result(success=True,\
     \ result={})"
-  status: Idle
   time_between_retries: 10
   type: python_snippet_service
   validation_method: none
@@ -3214,7 +3182,6 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
-  status: Idle
   time_between_retries: 10
   timeout: 15
   type: rest_call_service
@@ -3277,7 +3244,6 @@
     \ get_result(\"netmiko_check_vrf_napalm\", device=device.name, workflow=\"Regression\
     \ Workflow 5: VRF creation and deletion with Napalm\"),\r\n}\r\nsave_result(success=True,\
     \ result=result)"
-  status: Idle
   time_between_retries: 10
   type: python_snippet_service
   validation_method: none
@@ -3340,13 +3306,13 @@
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
-  status: Idle
   strip_command: true
   strip_prompt: true
   time_between_retries: 10
   timeout: 10.0
   type: netmiko_validation_service
   use_device_driver: true
+  use_genie: false
   validation_method: text
   vendor: ''
   waiting_time: 0
@@ -3401,7 +3367,6 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
-  status: Idle
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -3492,7 +3457,6 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
-  status: Idle
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -3556,7 +3520,6 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
-  status: Idle
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -3619,7 +3582,6 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
-  status: Idle
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -3725,7 +3687,6 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
-  status: Idle
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -3790,7 +3751,6 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
-  status: Idle
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -3848,7 +3808,6 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
-  status: Idle
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -3904,7 +3863,6 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
-  status: Idle
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -3980,7 +3938,6 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
-  status: Idle
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -4077,7 +4034,6 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
-  status: Idle
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -4122,7 +4078,7 @@
         \ dictionary (JSON conversion).\r\nCheck that the results contains the following\
         \ dictionary (dict inclusion):\r\n{\"host\":\"{{device.ip_address}}\",\"unreachable\"\
         :0,\"use_ssl\":true}\r\n"
-      positions: [-393, 247]
+      positions: [-52, 249]
     cb3b0740-411a-4138-a54d-31a133413526:
       alignment: left
       content: "This workflow :\r\n- uses the Ansible Playbook Service to run playbooks\r\
@@ -4130,7 +4086,7 @@
         \ conversion)\r\n- uses the \"Text with regular expression\" and \"dictionary\
         \ inclusion\" mechanisms to validate the result."
       positions: [-438, -117]
-  last_modified: '2019-10-26 11:00:48.098357'
+  last_modified: '2020-02-19 05:16:59.299435'
   mail_recipient: ''
   max_processes: 5
   maximum_runs: 1
@@ -4151,12 +4107,12 @@
       Validation] Ansible Workflow: Arista show version', '[Regression Workflow 6:
       Ansible with Validation] Ansible Workflow: Arista show configuration (regex
       match)', '[Regression Workflow 6: Ansible with Validation] Ansible Workflow:
-      Arista show configuration (dict match)']
+      Arista show configuration (dict match)', '[Regression Workflow 6: Ansible with
+      Validation] Simple Playbook']
   shared: false
   skip: false
   skip_query: ''
   skip_value: 'True'
-  status: Idle
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -4220,7 +4176,6 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
-  status: Idle
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -4309,7 +4264,6 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
-  status: Idle
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -4374,7 +4328,6 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
-  status: Idle
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -4429,7 +4382,6 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
-  status: Idle
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -4486,7 +4438,6 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
-  status: Idle
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -4546,7 +4497,6 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
-  status: Idle
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -4607,13 +4557,13 @@
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
-  status: Idle
   strip_command: true
   strip_prompt: true
   time_between_retries: 2
   timeout: 10.0
   type: netmiko_validation_service
   use_device_driver: true
+  use_genie: false
   validation_method: text
   vendor: ''
   waiting_time: 0
@@ -4671,13 +4621,13 @@
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
-  status: Idle
   strip_command: true
   strip_prompt: true
   time_between_retries: 10
   timeout: 10.0
   type: netmiko_validation_service
   use_device_driver: true
+  use_genie: false
   validation_method: none
   vendor: ''
   waiting_time: 0
@@ -4740,7 +4690,6 @@
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
-  status: Idle
   time_between_retries: 10
   timeout: 10
   type: data_backup_service
@@ -4796,7 +4745,6 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
-  status: Idle
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -4848,7 +4796,6 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
-  status: Idle
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -4900,7 +4847,6 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
-  status: Idle
   time_between_retries: 10
   timeout: 15
   type: rest_call_service
@@ -4956,7 +4902,6 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
-  status: Idle
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -5009,7 +4954,6 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
-  status: Idle
   time_between_retries: 10
   timeout: 15
   type: rest_call_service
@@ -5063,7 +5007,6 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
-  status: Idle
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -5125,13 +5068,13 @@
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
-  status: Idle
   strip_command: true
   strip_prompt: true
   time_between_retries: 10
   timeout: 10.0
   type: netmiko_validation_service
   use_device_driver: true
+  use_genie: false
   validation_method: none
   vendor: ''
   waiting_time: 0
@@ -5191,13 +5134,13 @@
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
-  status: Idle
   strip_command: true
   strip_prompt: true
   time_between_retries: 10
   timeout: 10.0
   type: netmiko_validation_service
   use_device_driver: true
+  use_genie: false
   validation_method: none
   vendor: ''
   waiting_time: 0
@@ -5257,13 +5200,13 @@
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
-  status: Idle
   strip_command: true
   strip_prompt: true
   time_between_retries: 10
   timeout: 10.0
   type: netmiko_validation_service
   use_device_driver: true
+  use_genie: false
   validation_method: none
   vendor: ''
   waiting_time: 0
@@ -5334,7 +5277,6 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
-  status: Idle
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -5386,7 +5328,6 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
-  status: Idle
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -5438,7 +5379,6 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
-  status: Idle
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -5501,13 +5441,63 @@
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
-  status: Idle
   strip_command: true
   strip_prompt: true
   time_between_retries: 10
   timeout: 10.0
   type: netmiko_validation_service
   use_device_driver: true
+  use_genie: false
   validation_method: text
+  vendor: ''
+  waiting_time: 0
+- arguments: ''
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  devices: []
+  dict_match: {}
+  display_only_failed_nodes: false
+  events: []
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2020-02-19 05:09:22.996758'
+  mail_recipient: ''
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Regression Workflow 6: Ansible with Validation] Simple Playbook'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  options: {}
+  pass_device_properties: false
+  playbook_path: /media/sf_shared/eNMS/files/playbooks/simple_playbook.yml
+  pools: []
+  positions:
+    'Regression Workflow 6: Ansible with Validation': [-536, 192]
+  result_postprocessing: ''
+  run_method: per_device
+  scoped_name: Simple Playbook
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: false
+  skip_query: ''
+  skip_value: 'True'
+  time_between_retries: 10
+  type: ansible_playbook_service
+  validation_method: none
   vendor: ''
   waiting_time: 0

@@ -183,9 +183,6 @@
     Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow of Workflow]
     Regression Workflow B: Napalm getters validation'}
 - {destination: '[Regression Workflow 6: Ansible with Validation] Ansible Workflow:
-    Arista show version', label: success, source: '[Shared] Start', subtype: success,
-  type: workflow_edge, workflow: 'Regression Workflow 6: Ansible with Validation'}
-- {destination: '[Regression Workflow 6: Ansible with Validation] Ansible Workflow:
     Arista show configuration (regex match)', label: success, source: '[Regression
     Workflow 6: Ansible with Validation] Ansible Workflow: Arista show version', subtype: success,
   type: workflow_edge, workflow: 'Regression Workflow 6: Ansible with Validation'}
@@ -527,3 +524,10 @@
 - {destination: '[Shared] End', label: failure, source: '[Regression Workflow H: shared
     service in multiple subworkflows] Subworkflow 2', subtype: failure, type: workflow_edge,
   workflow: 'Regression Workflow H: shared service in multiple subworkflows'}
+- {destination: '[Regression Workflow 6: Ansible with Validation] Simple Playbook',
+  label: success, source: '[Shared] Start', subtype: success, type: workflow_edge,
+  workflow: 'Regression Workflow 6: Ansible with Validation'}
+- {destination: '[Regression Workflow 6: Ansible with Validation] Ansible Workflow:
+    Arista show version', label: failure, source: '[Regression Workflow 6: Ansible
+    with Validation] Simple Playbook', subtype: failure, type: workflow_edge, workflow: 'Regression
+    Workflow 6: Ansible with Validation'}

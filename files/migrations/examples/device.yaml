@@ -1,6 +1,6 @@
 - description: Jackson
   icon: router
-  ip_address: 192.168.1.85
+  ip_address: 192.168.56.51
   last_duration: ''
   last_failure: Never
   last_modified: ''
@@ -17,6 +17,7 @@
   operating_system: IOS
   os_version: 15.5(3)M
   port: 22
+  property1: 10.145.14.1
   subtype: ''
   tasks: []
   type: device
@@ -41,6 +42,7 @@
   operating_system: IOS
   os_version: 15.5(3)M
   port: 22
+  property1: 10.145.14.1
   subtype: ''
   tasks: []
   type: device
@@ -65,6 +67,7 @@
   operating_system: eos
   os_version: 15.5(3)M
   port: 22
+  property1: 10.145.14.1
   subtype: ''
   tasks: []
   type: device
@@ -72,7 +75,7 @@
   vendor: Arista
 - description: Washington
   icon: router
-  ip_address: 192.168.105.5
+  ip_address: 192.168.56.50
   last_duration: 9.353403s
   last_failure: '2019-11-19 14:37:19.623351'
   last_modified: ''
@@ -89,6 +92,7 @@
   operating_system: eos
   os_version: 15.5(3)M
   port: 22
+  property1: 10.145.14.1
   subtype: ''
   tasks: []
   type: device
@@ -113,6 +117,7 @@
   operating_system: IOS
   os_version: 15.5(3)M
   port: 22
+  property1: 10.145.14.1
   subtype: ''
   tasks: []
   type: device
@@ -137,6 +142,7 @@
   operating_system: IOS
   os_version: 15.5(3)M
   port: 22
+  property1: 10.145.14.1
   subtype: ''
   tasks: []
   type: device
@@ -161,6 +167,7 @@
   operating_system: IOS
   os_version: 15.5(3)M
   port: 22
+  property1: 10.145.14.1
   subtype: ''
   tasks: []
   type: device
@@ -185,6 +192,7 @@
   operating_system: IOS-XR
   os_version: 5.1.X
   port: 22
+  property1: 10.145.14.1
   subtype: ''
   tasks: []
   type: device
@@ -209,6 +217,7 @@
   operating_system: IOS-XR
   os_version: 5.1.X
   port: 22
+  property1: 10.145.14.1
   subtype: ''
   tasks: []
   type: device
@@ -233,6 +242,7 @@
   operating_system: IOS-XR
   os_version: 5.1.X
   port: 22
+  property1: 10.145.14.1
   subtype: ''
   tasks: []
   type: device
@@ -257,6 +267,7 @@
   operating_system: IOS-XR
   os_version: 5.1.X
   port: 22
+  property1: 10.145.14.1
   subtype: ''
   tasks: []
   type: device
@@ -281,6 +292,7 @@
   operating_system: IOS-XR
   os_version: 5.1.X
   port: 22
+  property1: 10.145.14.1
   subtype: ''
   tasks: []
   type: device
@@ -305,6 +317,7 @@
   operating_system: IOS-XR
   os_version: 5.1.X
   port: 22
+  property1: 10.145.14.1
   subtype: ''
   tasks: []
   type: device
@@ -329,6 +342,7 @@
   operating_system: IOS-XR
   os_version: 5.1.X
   port: 22
+  property1: 10.145.14.1
   subtype: ''
   tasks: []
   type: device
@@ -353,6 +367,7 @@
   operating_system: IOS-XR
   os_version: 5.1.X
   port: 22
+  property1: 10.145.14.1
   subtype: ''
   tasks: []
   type: device
@@ -377,6 +392,7 @@
   operating_system: Junos
   os_version: 17.2R1.13
   port: 22
+  property1: 10.145.14.1
   subtype: ''
   tasks: []
   type: device
@@ -401,6 +417,7 @@
   operating_system: Junos
   os_version: 17.2R1.13
   port: 22
+  property1: 10.145.14.1
   subtype: ''
   tasks: []
   type: device
@@ -425,6 +442,7 @@
   operating_system: Junos
   os_version: 17.2R1.13
   port: 22
+  property1: 10.145.14.1
   subtype: ''
   tasks: []
   type: device
@@ -449,6 +467,7 @@
   operating_system: Junos
   os_version: 17.2R1.13
   port: 22
+  property1: 10.145.14.1
   subtype: ''
   tasks: []
   type: device
@@ -473,6 +492,7 @@
   operating_system: Junos
   os_version: 17.2R1.13
   port: 22
+  property1: 10.145.14.1
   subtype: ''
   tasks: []
   type: device
@@ -497,6 +517,7 @@
   operating_system: Junos
   os_version: 17.2R1.13
   port: 22
+  property1: 10.145.14.1
   subtype: ''
   tasks: []
   type: device
@@ -521,6 +542,7 @@
   operating_system: Junos
   os_version: 17.2R1.13
   port: 22
+  property1: 10.145.14.1
   subtype: ''
   tasks: []
   type: device
@@ -545,6 +567,7 @@
   operating_system: Junos
   os_version: 17.2R1.13
   port: 22
+  property1: 10.145.14.1
   subtype: ''
   tasks: []
   type: device
@@ -569,6 +592,7 @@
   operating_system: Junos
   os_version: 17.2R1.13
   port: 22
+  property1: 10.145.14.1
   subtype: ''
   tasks: []
   type: device
@@ -593,6 +617,7 @@
   operating_system: Junos
   os_version: 17.2R1.13
   port: 22
+  property1: 10.145.14.1
   subtype: ''
   tasks: []
   type: device
@@ -617,6 +642,7 @@
   operating_system: IOS-XE
   os_version: '3.6.5E '
   port: 22
+  property1: 10.145.14.1
   subtype: ''
   tasks: []
   type: device
@@ -641,6 +667,7 @@
   operating_system: IOS-XE
   os_version: '3.6.5E '
   port: 22
+  property1: 10.145.14.1
   subtype: ''
   tasks: []
   type: device
@@ -665,6 +692,7 @@
   operating_system: IOS-XE
   os_version: '3.6.5E '
   port: 22
+  property1: 10.145.14.1
   subtype: ''
   tasks: []
   type: device

@@ -285,9 +285,10 @@ function showDeviceResultsPanel(device) {
   openPanel({
     name: "table",
     id: device.id,
+    type: "result",
     title: `Results - ${device.name}`,
     callback: function() {
-      initTable("result", device, null, `table-${device.id}`);
+      initTable("result", device, null, device.id);
     },
   });
 }

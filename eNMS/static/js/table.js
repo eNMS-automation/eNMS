@@ -20,6 +20,7 @@ export const models = {};
 let waitForSearch = false;
 
 export function initTable(type, instance, runtime, id) {
+  
   let columns = tableProperties[type];
   let visibleColumns = localStorage.getItem(`table/${type}`);
   if (visibleColumns) visibleColumns = visibleColumns.split(",");
@@ -28,6 +29,7 @@ export function initTable(type, instance, runtime, id) {
     column.name = column.data;
   });
   const postfix = id ? `-${id}` : "";
+  console.log($(`#table-${type}${postfix}`).length)
   // eslint-disable-next-line new-cap
   tables[type] = $(`#table-${type}${postfix}`).DataTable({
     serverSide: true,

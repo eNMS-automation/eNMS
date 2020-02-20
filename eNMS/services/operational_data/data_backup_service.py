@@ -83,8 +83,8 @@ class OperationalDataForm(FlaskForm):
 class DataBackupForm(NetmikoForm):
     form_type = HiddenField(default="data_backup_service")
     configuration = StringField("Result of this Command stored as Configuration")
-    operational_data = FieldList(FormField(OperationalDataForm), min_entries=3)
-    replacements = FieldList(FormField(ReplacementForm), min_entries=3)
+    operational_data = FieldList(FormField(OperationalDataForm), min_entries=12)
+    replacements = FieldList(FormField(ReplacementForm), min_entries=12)
     groups = {
         "Create Configuration File": {
             "commands": ["configuration"],

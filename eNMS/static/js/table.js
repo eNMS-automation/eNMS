@@ -544,7 +544,7 @@ models.service = class Service extends Base {
       '${this.id}')">${this.scoped_name}</a></b>`
       : $("#parent-filtering").val() == "true"
       ? this.scoped_name
-      : this.name;
+      : this.fullName;
   }
 
   static get controls() {

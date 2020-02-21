@@ -390,24 +390,29 @@
          { 
             "data":"device_name",
             "title":"Device",
-            "search":"text"
+            "search":"text",
+            "orderable": false
          },
          { 
             "data":"status",
             "title":"Status",
             "search":"text",
-            "width":"80px"
+            "width":"80px",
+            "orderable": false
          },
          { 
-            "data":"buttons"
+            "data":"buttons",
+            "orderable": false
          },
          { 
             "data":"v1",
-            "title":"V1"
+            "title":"V1",
+            "orderable": false
          },
          { 
             "data":"v2",
-            "title":"V2"
+            "title":"V2",
+            "orderable": false
          }
       ],
       "device_result":[ 
@@ -424,24 +429,29 @@
          { 
             "data":"service_name",
             "title":"Service",
-            "search":"text"
+            "search":"text",
+            "orderable": false
          },
          { 
             "data":"status",
             "title":"Status",
             "search":"text",
-            "width":"80px"
+            "width":"80px",
+            "orderable": false
          },
          { 
-            "data":"buttons"
+            "data":"buttons",
+            "orderable": false
          },
          { 
             "data":"v1",
-            "title":"V1"
+            "title":"V1",
+            "orderable": false
          },
          { 
             "data":"v2",
-            "title":"V2"
+            "title":"V2",
+            "orderable": false
          }
       ],
       "task":[ 

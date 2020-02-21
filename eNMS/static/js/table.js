@@ -13,7 +13,6 @@ import {
   userIsActive,
 } from "./base.js";
 import { loadServiceTypes } from "./automation.js";
-import { filterView } from "./visualization.js";
 
 export let tables = {};
 export const models = {};
@@ -135,11 +134,7 @@ export function initTable(type, instance, runtime, id) {
 }
 
 function filterTable(formType) {
-  if (page.includes("table")) {
-    tables[formType].page(0).ajax.reload(null, false);
-  } else {
-    filterView(formType);
-  }
+  tables[formType].page(0).ajax.reload(null, false);
   notify("Filter applied.", "success", 5);
 }
 

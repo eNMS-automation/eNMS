@@ -320,21 +320,26 @@ export function initView() {
   }
 }
 
-export function filterView(type) {
-  call({
-    url: `/view_filtering/${type}`,
-    data: { form: serializeForm(`#${type}_filtering-form`) },
-    success: function(results) {
-      if (type == "device") {
-        deleteAllDevices();
-        results.map((d) => createNode(d, "device"));
-      } else {
-        deleteAllLinks();
-        results.map(createLink);
-      }
-      notify("Filter applied.", "success", 5);
-    },
-  });
+function filterView() {
+  for (const type of ["device", "link"]) {
+    console.log(serializeForm(`#filtering-form`));
+    /*
+    call({
+      url: `/view_filtering/${type}`,
+      data: { form: serializeForm(`#filtering-form`) },
+      success: function(results) {
+        if (type == "device") {
+          deleteAllDevices();
+          results.map((d) => createNode(d, "device"));
+        } else {
+          deleteAllLinks();
+          results.map(createLink);
+        }
+        notify("Filter applied.", "success", 5);
+      },
+    });
+    */
+  }
 }
 
-configureNamespace("visualization", [showPoolView]);
+configureNamespace("visualization", [showPoolView, filterView]);

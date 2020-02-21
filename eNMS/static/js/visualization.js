@@ -307,7 +307,7 @@ export function initView() {
       persistent: true,
       name: `${type}_filtering`,
       target: `#${type}-filtering`,
-      container: ".right_column",
+      container: "#filtering-form",
       size: "500 400",
       position: {
         my: "center-top",

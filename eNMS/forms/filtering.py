@@ -14,6 +14,7 @@ def filtering_form_generator():
                 continue
             relations[model] = MultipleInstanceField(model)
             relationships[f"{form_type}_filtering"][model] = relation
+            relationships[f"{form_type}_relation_filtering"][model] = relation
         relation_form = {
             "template": "filtering",
             "properties": sorted(relations),

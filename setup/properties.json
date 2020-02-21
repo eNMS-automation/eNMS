@@ -378,7 +378,8 @@
          {
             "data":"creator",
             "title":"User",
-            "search":"text"
+            "search":"text",
+            "width": "120px"
          },
          { 
             "data":"status",

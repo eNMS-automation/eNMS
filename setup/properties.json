@@ -453,7 +453,8 @@
          { 
             "data":"service_name",
             "title":"Service",
-            "search":"text"
+            "search":"text",
+            "orderable": false
          },
          { 
             "data":"status",
@@ -472,23 +473,27 @@
             "data":"periodicity",
             "title":"Periodicity",
             "search":"text",
-            "width":"100px"
+            "width":"100px",
+            "orderable": false
          },
          { 
             "data":"next_run_time",
             "title":"Next run time",
             "search":"text",
-            "width":"150px"
+            "width":"150px",
+            "orderable": false
          },
          { 
             "data":"time_before_next_run",
             "title":"Time left",
             "search":"text",
-            "width":"150px"
+            "width":"150px",
+            "orderable": false
          },
          { 
             "data":"buttons",
-            "width":"200px"
+            "width":"200px",
+            "orderable": false
          }
       ],
       "user":[ 
@@ -509,7 +514,8 @@
          },
          { 
             "data":"buttons",
-            "width":"130px"
+            "width":"130px",
+            "orderable": false
          }
       ],
       "server":[ 
@@ -521,7 +527,8 @@
          { 
             "data":"description",
             "title":"Description",
-            "search":"text"
+            "search":"text",
+            "orderable": false
          },
          { 
             "data":"ip_address",
@@ -540,7 +547,8 @@
          },
          { 
             "data":"buttons",
-            "width":"130px"
+            "width":"130px",
+            "orderable": false
          }
       ],
       "changelog":[ 
@@ -554,19 +562,22 @@
             "data":"user",
             "title":"User",
             "search":"text",
-            "width":"100px"
+            "width":"100px",
+            "orderable": false
          },
          { 
             "data":"severity",
             "title":"Severity",
             "search":"text",
-            "width":"80px"
+            "width":"80px",
+            "orderable": false
          },
          { 
             "data":"content",
             "title":"Content",
             "search":"text",
-            "className":"dt-body-left"
+            "className":"dt-body-left",
+            "orderable": false
          }
       ],
       "session":[ 
@@ -580,23 +591,27 @@
             "data":"device_name",
             "title":"Device",
             "search":"text",
-            "width":"150px"
+            "width":"150px",
+            "orderable": false
          },
          { 
             "data":"user",
             "title":"User",
             "search":"text",
-            "width":"100px"
+            "width":"100px",
+            "orderable": false
          },
          { 
             "data":"name",
             "title":"Session UUID",
             "search":"text",
-            "width":"300px"
+            "width":"300px",
+            "orderable": false
          },
          { 
             "data":"buttons",
-            "width":"40px"
+            "width":"40px",
+            "orderable": false
          }
       ],
       "event":[ 
@@ -608,21 +623,25 @@
          { 
             "data":"service_name",
             "title":"Service",
-            "search":"text"
+            "search":"text",
+            "orderable": false
          },
          { 
             "data":"log_source",
             "title":"Log",
-            "search":"text"
+            "search":"text",
+            "orderable": false
          },
          { 
             "data":"log_content",
             "title":"Content",
-            "search":"text"
+            "search":"text",
+            "orderable": false
          },
          { 
             "data":"buttons",
-            "width":"120px"
+            "width":"120px",
+            "orderable": false
          }
       ]
    },

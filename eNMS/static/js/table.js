@@ -28,7 +28,6 @@ export function initTable(type, instance, runtime, id) {
     column.name = column.data;
   });
   const postfix = id ? `-${id}` : "";
-  console.log($(`#table-${type}${postfix}`).length);
   // eslint-disable-next-line new-cap
   tables[type] = $(`#table-${type}${postfix}`).DataTable({
     serverSide: true,

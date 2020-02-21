@@ -242,19 +242,19 @@ AbstractPool = type(
         **{
             **{
                 f"device_{property}": Column(LargeString, default="")
-                for property in properties["pool"]["device"]
+                for property in properties["filtering"]["device"]
             },
             **{
                 f"device_{property}_match": Column(SmallString, default="inclusion")
-                for property in properties["pool"]["device"]
+                for property in properties["filtering"]["device"]
             },
             **{
                 f"link_{property}": Column(LargeString, default="")
-                for property in properties["pool"]["link"]
+                for property in properties["filtering"]["link"]
             },
             **{
                 f"link_{property}_match": Column(SmallString, default="inclusion")
-                for property in properties["pool"]["link"]
+                for property in properties["filtering"]["link"]
             },
         },
     },
@@ -306,7 +306,7 @@ class Pool(AbstractPool):
         operator = all if self.operator == "all" else any
         return operator(
             self.property_match(obj, property)
-            for property in properties["pool"][obj.class_type]
+            for property in properties["filtering"][obj.class_type]
         )
 
     def compute_pool(self):

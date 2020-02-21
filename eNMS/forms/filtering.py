@@ -4,12 +4,12 @@ from wtforms import HiddenField, SelectField, StringField
 from eNMS import app
 from eNMS.forms import BaseForm
 from eNMS.forms.fields import MultipleInstanceField
-from eNMS.models import model_properties, relationships
+from eNMS.models import models, relationships
 
 
 def filtering_form_generator():
-    for form_type in ("device", "link"):
-        properties, relations = app.properties["filtering"][form_type], {}
+    for form_type in models:
+        properties, relations = app.properties["filtering"].get(form_type, []), {}
         for model, relation in relationships[form_type].items():
             if model in ("edges", "results"):
                 continue

@@ -1,6 +1,5 @@
 /*
 global
-page: false
 tableProperties: false
 */
 

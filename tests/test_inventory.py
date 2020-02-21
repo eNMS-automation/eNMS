@@ -120,10 +120,10 @@ pool2 = {
 
 
 def create_pool(pool: dict) -> dict:
-    for property in properties["pool"]["device"]:
+    for property in properties["filtering"]["device"]:
         if f"device_{property}_match" not in pool:
             pool[f"device_{property}_match"] = "inclusion"
-    for property in properties["pool"]["link"]:
+    for property in properties["filtering"]["link"]:
         if f"link_{property}_match" not in pool:
             pool[f"link_{property}_match"] = "inclusion"
     return pool

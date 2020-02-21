@@ -1,4 +1,4 @@
-from wtforms import HiddenField, SelectField
+from wtforms import HiddenField, SelectField, StringField
 
 from eNMS.forms import BaseForm
 from eNMS.forms.fields import MultipleInstanceField
@@ -13,13 +13,10 @@ def filtering_form_generator():
                 continue
             relations[model] = MultipleInstanceField(model)
             relationships[f"{form_type}_filtering"][model] = relation
-        type(
-            f"{form_type.capitalize()}FilteringForm",
-            (BaseForm,),
-            {
+            form = {
                 "template": "filtering",
                 "properties": sorted(relations),
-                "form_type": HiddenField(default=f"{form_type}_filtering"),
+                "form_type": HiddenField(default=f"{form_type}_relation_filtering"),
                 **{
                     **relations,
                     **{
@@ -33,8 +30,24 @@ def filtering_form_generator():
                         for relation in relations
                     },
                 },
+            }
+        type(f"{form_type}RelationshipFilteringForm", (BaseForm,), form)
+        form.update({
+            "form_type": HiddenField(default=f"{form_type}_filtering"),
+            "properties": sorted(properties) + sorted(relations),
+            **{property: StringField() for property in properties},
+            **{
+                f"{property}_filter": SelectField(
+                    choices=(
+                        ("inclusion", "Inclusion"),
+                        ("equality", "Equality"),
+                        ("regex", "Regular Expression"),
+                    )
+                )
+                for property in properties
             },
-        )
+        })
+        type(f"{form_type}FilteringForm", (BaseForm,), form)
 
 
 filtering_form_generator()

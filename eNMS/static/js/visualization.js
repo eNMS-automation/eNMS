@@ -308,10 +308,11 @@ export function initView() {
       name: `${type}_filtering`,
       target: `#${type}-filtering`,
       container: ".right_column",
+      size: "500 400",
       position: {
         my: "center-top",
         at: "center-bottom",
-        offsetY: 18,
+        offsetY: 10,
       },
       url: `../form/${type}_filtering`,
       title: `${type.charAt(0).toUpperCase() + type.slice(1)} Filtering`,

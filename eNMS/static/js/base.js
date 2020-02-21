@@ -245,13 +245,14 @@ export function createTooltip({
   title,
   content,
   callback,
+  size,
 }) {
   if ($(target).length) {
     let kwargs = {
       autoshow: autoshow,
       id: `tooltip-${name}`,
       container: container,
-      contentSize: "auto",
+      contentSize: size || "auto",
       connector: true,
       delay: 0,
       mode: "sticky",

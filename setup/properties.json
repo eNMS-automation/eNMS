@@ -297,7 +297,7 @@
       ],
       "service":[ 
          { 
-            "data":"serviceName",
+            "data":"name",
             "width":"600px",
             "title":"Name",
             "search":"text",

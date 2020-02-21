@@ -531,7 +531,15 @@ models.pool = class Pool extends Base {
 };
 
 models.service = class Service extends Base {
-  get serviceName() {
+
+  constructor(properties) {
+    const fullName = properties.name;
+    delete properties.name;
+    super(properties);
+    this.fullName = fullName;
+  }
+
+  get name() {
     return this.type === "workflow"
       ? `<b><a href="#" onclick="eNMS.workflow.switchToWorkflow(
       '${this.id}')">${this.scoped_name}</a></b>`

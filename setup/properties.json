@@ -375,6 +375,11 @@
             "search":"text",
             "orderable": false
          },
+         {
+            "data":"creator",
+            "title":"User",
+            "search":"text"
+         },
          { 
             "data":"status",
             "title":"Status",

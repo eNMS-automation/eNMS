@@ -375,7 +375,7 @@ models.configuration = class Configuration extends models.device {
       value: 0,
       ticks: [...Array(6).keys()],
       formatter: (value) => `Lines of context: ${value}`,
-      tooltip: "always"
+      tooltip: "always",
     });
     $("#slider").on("change", function() {
       refreshTable("configuration");
@@ -521,7 +521,6 @@ models.pool = class Pool extends Base {
 };
 
 models.service = class Service extends Base {
-
   constructor(properties) {
     const fullName = properties.name;
     delete properties.name;

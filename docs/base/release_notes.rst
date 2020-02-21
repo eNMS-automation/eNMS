@@ -14,6 +14,14 @@ Version 3.20.1
 - Remove unique constraint for link names.
 - Hash user passwords with argon2 by default. Add option to not hash user passwords in settings.
 - Move linting and requirements in dedicated /build folder.
+- Renamed key "pool" with "filtering" in properties.json
+- Fix Service table filtering
+- Fix object filtering from the network visualization page
+- Fix Ansible service safe command bug and add regression test
+- Remove column ordering for association proxy and all columns where ordering isn't useful
+- Fixed workflow builder display when the path stored in local storage no longer exists
+- Add service column in device results table
+- Add result log deletion endpoint in RBAC
 
 Version 3.20
 ------------

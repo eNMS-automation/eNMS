@@ -23,11 +23,11 @@ def configure_device_form(cls):
 
 
 def configure_pool_form(cls):
-    cls.device_properties = app.properties["pool"]["device"]
-    cls.link_properties = app.properties["pool"]["link"]
+    cls.device_properties = app.properties["filtering"]["device"]
+    cls.link_properties = app.properties["filtering"]["link"]
     for cls_name, properties in (
-        ("device", app.properties["pool"]["device"]),
-        ("link", app.properties["pool"]["link"]),
+        ("device", app.properties["filtering"]["device"]),
+        ("link", app.properties["filtering"]["link"]),
     ):
         for property in properties:
             match_field = f"{cls_name}_{property}_match"

@@ -324,7 +324,7 @@ function filterView() {
   const data = {
     device: { form: serializeForm(`#device-filtering-form`) },
     link: { form: serializeForm(`#link-filtering-form`) },
-  }
+  };
   call({
     url: "/view_filtering",
     data: data,

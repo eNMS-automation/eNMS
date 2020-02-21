@@ -55,23 +55,21 @@
 <form id="device-filtering-form" class="overlay"></form>
 <form id="link-filtering-form" class="overlay"></form>
 <nav class="navbar navbar-default controls nav-controls" role="navigation">
-  
-    <button type="button" id="device-filtering" class="btn btn-primary btn-search">
-      <span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp;Device
-    </button>
-    <button type="button" id="link-filtering" class="btn btn-primary btn-search">
-      <span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp;Link
-    </button>
-    <button
-      type="button" 
-      class="btn btn-info"
-      data-tooltip="Refresh"
-      type="button"
-      onclick="eNMS.visualization.filterView()"
-    >
-      <span class="glyphicon glyphicon-refresh"></span>
-    </button>
-  
+  <button type="button" id="device-filtering" class="btn btn-primary btn-search">
+    <span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp;Device
+  </button>
+  <button type="button" id="link-filtering" class="btn btn-primary btn-search">
+    <span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp;Link
+  </button>
+  <button
+    type="button"
+    class="btn btn-info"
+    data-tooltip="Refresh"
+    type="button"
+    onclick="eNMS.visualization.filterView()"
+  >
+    <span class="glyphicon glyphicon-refresh"></span>
+  </button>
 </nav>
 {% endif %} {% endblock content %} {% block javascripts %} {{ super()}}
 <script>

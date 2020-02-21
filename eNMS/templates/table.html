@@ -2,7 +2,7 @@
 <link href="{{ url_for('static', filename='css/table.css') }}" rel="stylesheet" />
 {% endblock stylesheets %} {% block content %}
 <form id="search-form-{{ type }}">
-  <div id="tooltip-overlay"></div>
+  <div id="tooltip-overlay" class="overlay"></div>
   <nav
     id="controls-{{ type }}"
     class="navbar navbar-default nav-controls"

@@ -307,7 +307,7 @@ export function initView() {
       persistent: true,
       name: `${type}_filtering`,
       target: `#${type}-filtering`,
-      container: "#filtering-form",
+      container: `#${type}-filtering-form`,
       size: "500 400",
       position: {
         my: "center-top",
@@ -321,24 +321,25 @@ export function initView() {
 }
 
 function filterView() {
-  for (const type of ["device", "link"]) {
-    console.log(serializeForm(`#filtering-form`));
-    /*
-    call({
-      url: `/view_filtering/${type}`,
-      data: { form: serializeForm(`#filtering-form`) },
-      success: function(results) {
-        if (type == "device") {
-          deleteAllDevices();
-          results.map((d) => createNode(d, "device"));
-        } else {
-          deleteAllLinks();
-          results.map(createLink);
-        }
-        notify("Filter applied.", "success", 5);
-      },
-    });
-    */
+  data = {
+    device: { form: serializeForm(`#device-filtering-form`) },
+    link: { form: serializeForm(`#link-filtering-form`) },
+  }
+  console.log(data)
+  call({
+    url: "/view_filtering",
+    data: data,
+    success: function(results) {
+      if (type == "device") {
+        deleteAllDevices();
+        results.map((d) => createNode(d, "device"));
+      } else {
+        deleteAllLinks();
+        results.map(createLink);
+      }
+      notify("Filter applied.", "success", 5);
+    },
+  });
   }
 }
 

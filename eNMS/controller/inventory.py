@@ -209,7 +209,7 @@ class InventoryController(BaseController):
             "links": [d.view_properties for d in fetch_all("link")],
         }
 
-    def view_filtering(self, obj_type, **kwargs):
+    def view_filtering(self, **kwargs):
         constraints = self.build_filtering_constraints(obj_type, **kwargs)
         result = Session.query(models[obj_type]).filter(and_(*constraints))
         return [d.view_properties for d in result.all()]

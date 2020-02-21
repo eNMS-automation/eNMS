@@ -765,3 +765,10 @@ We cannot use 100% because main_frame is not set to 100%
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+/* For tooltips positioning with target key */
+.overlay {
+  position: absolute;
+  height: 50%;
+  width: 98%;
+}

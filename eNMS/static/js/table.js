@@ -232,10 +232,6 @@ class Base {
       </li>`;
   }
 
-  get lastModified() {
-    return this.last_modified.slice(0, -7);
-  }
-
   static createfilteringTooltips(type, columns) {
     columns.forEach((column) => {
       if (column.search != "text") return;

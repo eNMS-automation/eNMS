@@ -79,7 +79,8 @@
             "data":"description",
             "title":"Description",
             "search":"text",
-            "visible":false
+            "visible":false,
+            "orderable": false
          },
          { 
             "data":"subtype",
@@ -132,7 +133,8 @@
          },
          { 
             "data":"buttons",
-            "width":"230px"
+            "width":"230px",
+            "orderable": false
          }
       ],
       "configuration":[ 
@@ -145,7 +147,8 @@
             "data":"description",
             "title":"Description",
             "search":"text",
-            "visible":false
+            "visible":false,
+            "orderable": false
          },
          { 
             "data":"subtype",
@@ -200,18 +203,21 @@
             "title":"Configuration",
             "search":"text",
             "width":"80%",
-            "visible":true
+            "visible":true,
+            "orderable": false
          },
          { 
             "data":"operational_data",
             "title":"Operational Data",
             "search":"text",
             "width":"80%",
-            "visible":false
+            "visible":false,
+            "orderable": false
          },
          { 
             "data":"buttons",
-            "width":"90px"
+            "width":"90px",
+            "orderable": false
          }
       ],
       "link":[ 
@@ -224,7 +230,8 @@
             "data":"description",
             "title":"Description",
             "search":"text",
-            "visible":false
+            "visible":false,
+            "orderable": false
          },
          { 
             "data":"subtype",
@@ -250,16 +257,19 @@
          { 
             "data":"source_name",
             "title":"Source",
-            "search":"text"
+            "search":"text",
+            "orderable": false
          },
          { 
             "data":"destination_name",
             "title":"Destination",
-            "search":"text"
+            "search":"text",
+            "orderable": false
          },
          { 
             "data":"buttons",
-            "width":"130px"
+            "width":"130px",
+            "orderable": false
          }
       ],
       "pool":[ 
@@ -269,7 +279,7 @@
             "search":"text"
          },
          { 
-            "data":"lastModified",
+            "data":"last_modified",
             "title":"Last modified",
             "search":"text",
             "width":"150px"
@@ -277,7 +287,8 @@
          { 
             "data":"description",
             "title":"Description",
-            "search":"text"
+            "search":"text",
+            "orderable": false
          },
          { 
             "data":"never_update",
@@ -288,11 +299,13 @@
          { 
             "data":"objectNumber",
             "title":"Object Count",
-            "width":"150px"
+            "width":"150px",
+            "orderable": false
          },
          { 
             "data":"buttons",
-            "width":"250px"
+            "width":"250px",
+            "orderable": false
          }
       ],
       "service":[ 
@@ -304,7 +317,7 @@
             "className":"dt-body-left"
          },
          { 
-            "data":"lastModified",
+            "data":"last_modified",
             "title":"Last Modified",
             "search":"text",
             "visible":false
@@ -339,7 +352,8 @@
          },
          { 
             "data":"buttons",
-            "width":"260px"
+            "width":"260px",
+            "orderable": false
          }
       ],
       "run":[ 
@@ -358,7 +372,8 @@
          { 
             "data":"service_name",
             "title":"Service",
-            "search":"text"
+            "search":"text",
+            "orderable": false
          },
          { 
             "data":"status",
@@ -369,11 +384,13 @@
          { 
             "data":"progress",
             "title":"Progress",
-            "width":"150px"
+            "width":"150px",
+            "orderable": false
          },
          { 
             "data":"buttons",
-            "width":"90px"
+            "width":"90px",
+            "orderable": false
          }
       ],
       "result":[ 

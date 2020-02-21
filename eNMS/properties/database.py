@@ -17,6 +17,7 @@ dont_migrate = {
         "id",
         "sources",
         "destinations",
+        "status",
         "tasks",
         "workflows",
         "tasks",

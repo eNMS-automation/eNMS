@@ -108,7 +108,7 @@ class Service(AbstractBase):
     negative_logic = Column(Boolean, default=False)
     delete_spaces_before_matching = Column(Boolean, default=False)
     run_method = Column(SmallString, default="per_device")
-    model_properties = ["status"]
+    status = Column(SmallString, default="Idle")
 
     def __init__(self, **kwargs):
         kwargs.pop("status", None)
@@ -134,10 +134,6 @@ class Service(AbstractBase):
         if workflow:
             workflow.services.append(service)
         return service
-
-    @property
-    def status(self):
-        return "Running" if app.service_db[self.id]["runs"] else "Idle"
 
     @property
     def filename(self):
@@ -409,6 +405,7 @@ class Run(AbstractBase):
         start = datetime.now().replace(microsecond=0)
         try:
             app.service_db[self.service.id]["runs"] += 1
+            self.service.status = "Running"
             Session.commit()
             results = self.device_run(payload)
         except Exception:
@@ -430,6 +427,8 @@ class Run(AbstractBase):
             if self.send_notification:
                 results = self.notify(results)
             app.service_db[self.service.id]["runs"] -= 1
+            if not app.service_db[self.id]["runs"]:
+                self.service.status = "Idle"
             results["duration"] = self.duration = str(
                 datetime.now().replace(microsecond=0) - start
             )

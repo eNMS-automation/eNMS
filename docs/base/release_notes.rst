@@ -22,6 +22,7 @@ Version 3.20.1
 - Fixed workflow builder display when the path stored in local storage no longer exists
 - Add service column in device results table
 - Add result log deletion endpoint in RBAC
+- Fix bug dictionary displayed in the UI in the results
 
 Version 3.20
 ------------

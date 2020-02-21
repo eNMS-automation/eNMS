@@ -261,7 +261,7 @@ class Base {
     createTooltip({
       autoshow: true,
       persistent: true,
-      name: `${type}_filtering`,
+      name: `${type}_relation_filtering`,
       target: "#advanced-search",
       container: `#controls-${type}`,
       position: {
@@ -269,7 +269,7 @@ class Base {
         at: "center-bottom",
         offsetY: 18,
       },
-      url: `../form/${type}_filtering`,
+      url: `../form/${type}_relation_filtering`,
       title: "Relationship-based Filtering",
     });
     Base.createfilteringTooltips(type, columns);

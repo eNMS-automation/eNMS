@@ -1,3 +1,4 @@
+from copy import deepcopy
 from wtforms import HiddenField, SelectField, StringField
 
 from eNMS.forms import BaseForm
@@ -13,25 +14,26 @@ def filtering_form_generator():
                 continue
             relations[model] = MultipleInstanceField(model)
             relationships[f"{form_type}_filtering"][model] = relation
-            form = {
-                "template": "filtering",
-                "properties": sorted(relations),
-                "form_type": HiddenField(default=f"{form_type}_relation_filtering"),
+        relation_form = {
+            "template": "filtering",
+            "properties": sorted(relations),
+            "form_type": HiddenField(default=f"{form_type}_relation_filtering"),
+            **{
+                **relations,
                 **{
-                    **relations,
-                    **{
-                        f"{relation}_filter": SelectField(
-                            choices=(
-                                ("any", "Any"),
-                                ("not_any", "Unrelated"),
-                                ("none", "None"),
-                            )
+                    f"{relation}_filter": SelectField(
+                        choices=(
+                            ("any", "Any"),
+                            ("not_any", "Unrelated"),
+                            ("none", "None"),
                         )
-                        for relation in relations
-                    },
+                    )
+                    for relation in relations
                 },
-            }
-        type(f"{form_type}RelationshipFilteringForm", (BaseForm,), form)
+            },
+        }
+        type(f"{form_type}RelationshipFilteringForm", (BaseForm,), relation_form)
+        form = deepcopy(relation_form)
         form.update({
             "form_type": HiddenField(default=f"{form_type}_filtering"),
             "properties": sorted(properties) + sorted(relations),

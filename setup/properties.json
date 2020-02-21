@@ -360,6 +360,11 @@
             "title":"Service",
             "search":"text"
          },
+         {
+            "data":"creator",
+            "title":"User",
+            "search":"text"
+         },
          { 
             "data":"status",
             "title":"Status",

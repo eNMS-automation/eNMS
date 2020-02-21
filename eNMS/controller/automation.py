@@ -247,7 +247,7 @@ class AutomationController(BaseController):
             color = "32CD32" if all(run.success for run in runs) else "FF6666"
             result = {
                 "runtime": min(run.runtime for run in runs),
-                "data": {"properties": service.get_properties(), **data},
+                "data": {"properties": service.base_properties, **data},
                 "text": service.scoped_name,
                 "a_attr": {"style": f"color: #{color};width: 100%"},
             }

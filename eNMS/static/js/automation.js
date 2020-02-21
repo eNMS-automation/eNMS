@@ -247,6 +247,7 @@ function displayResultsTree(service, runtime) {
         html_row: {
           default: function(el, node) {
             if (!node) return;
+            console.log(node.data)
             const data = JSON.stringify(node.data.properties);
             let progressSummary;
             if (node.data.progress) {

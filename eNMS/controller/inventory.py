@@ -210,6 +210,12 @@ class InventoryController(BaseController):
         }
 
     def view_filtering(self, **kwargs):
-        constraints = self.build_filtering_constraints(obj_type, **kwargs)
-        result = Session.query(models[obj_type]).filter(and_(*constraints))
-        return [d.view_properties for d in result.all()]
+        return {
+            obj_type: [
+                d.view_properties
+                for d in Session.query(models[obj_type])
+                .filter(and_(*self.build_filtering_constraints(obj_type, **form)))
+                .all()
+            ]
+            for obj_type, form in kwargs.items()
+        }

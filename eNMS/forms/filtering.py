@@ -35,21 +35,23 @@ def filtering_form_generator():
         }
         type(f"{form_type}RelationshipFilteringForm", (BaseForm,), relation_form)
         form = deepcopy(relation_form)
-        form.update({
-            "form_type": HiddenField(default=f"{form_type}_filtering"),
-            "properties": sorted(properties) + sorted(relations),
-            **{property: StringField() for property in properties},
-            **{
-                f"{property}_filter": SelectField(
-                    choices=(
-                        ("inclusion", "Inclusion"),
-                        ("equality", "Equality"),
-                        ("regex", "Regular Expression"),
+        form.update(
+            {
+                "form_type": HiddenField(default=f"{form_type}_filtering"),
+                "properties": sorted(properties) + sorted(relations),
+                **{property: StringField() for property in properties},
+                **{
+                    f"{property}_filter": SelectField(
+                        choices=(
+                            ("inclusion", "Inclusion"),
+                            ("equality", "Equality"),
+                            ("regex", "Regular Expression"),
+                        )
                     )
-                )
-                for property in properties
-            },
-        })
+                    for property in properties
+                },
+            }
+        )
         type(f"{form_type}FilteringForm", (BaseForm,), form)
 
 

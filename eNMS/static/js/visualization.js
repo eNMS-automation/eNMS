@@ -321,26 +321,20 @@ export function initView() {
 }
 
 function filterView() {
-  data = {
+  const data = {
     device: { form: serializeForm(`#device-filtering-form`) },
     link: { form: serializeForm(`#link-filtering-form`) },
   }
-  console.log(data)
   call({
     url: "/view_filtering",
     data: data,
-    success: function(results) {
-      if (type == "device") {
-        deleteAllDevices();
-        results.map((d) => createNode(d, "device"));
-      } else {
-        deleteAllLinks();
-        results.map(createLink);
-      }
+    callback: function(results) {
+      deleteAll();
+      results.device.map((d) => createNode(d, "device"));
+      results.link.map(createLink);
       notify("Filter applied.", "success", 5);
     },
   });
-  }
 }
 
 configureNamespace("visualization", [showPoolView, filterView]);

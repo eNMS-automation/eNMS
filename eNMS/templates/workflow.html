@@ -212,12 +212,15 @@
   <li class="menu-entry node-selection workflow-selection">
     <a tabindex="-1" href="#">Enter Workflow</a>
   </li>
-  <li class="menu-entry divider node-selection">&nbsp</li>
-  <li class="menu-entry node-selection">
-    <a tabindex="-1" href="#">Top-level Result</a>
-  </li>
-  <li class="menu-entry node-selection">
-    <a tabindex="-1" href="#">Per-device Result</a>
+  <li class="dropdown-submenu menu-entry node-selection">
+    <a class="menu-submenu menu-layer" tabindex="-1" href="#"
+      >Reference<span class="caret-right"></span
+    ></a>
+    <ul class="dropdown-menu">
+      <li><a tabindex="-1" href="#">Service Name</a></li>
+      <li><a tabindex="-1" href="#">Top-level Result</a></li>
+      <li><a tabindex="-1" href="#">Per-device Result</a></li>
+    </ul>
   </li>
   <li class="menu-entry divider node-selection">&nbsp</li>
   <li class="menu-entry node-selection"><a tabindex="-1" href="#">Run</a></li>

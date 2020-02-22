@@ -536,16 +536,14 @@ class Run(AbstractBase):
 
     def run_service_job(self, payload, device):
         args = (device,) if device else ()
-        retries = self.number_of_retries + 1
-        total_retries = 0
+        retries, total_retries = self.number_of_retries + 1, 0
         while retries > 0 and total_retries < 1000:
             retries -= 1
             total_retries += 1
             try:
                 if retries:
-                    self.log(
-                        "error", f"RETRY n°{self.number_of_retries-retries+2}", device
-                    )
+                    retry = self.number_of_retries - retries + 2
+                    self.log("error", f"RETRY n°{retry}", device)
                 results = self.service.job(self, payload, *args)
                 if device and (
                     getattr(self, "close_connection", False)
@@ -837,7 +835,7 @@ class Run(AbstractBase):
 
         return recursive_search(self)
 
-    def python_code_kwargs(_self, **locals):  # noqa: N805
+    def global_variables(_self, **locals):  # noqa: N805
         return {
             "settings": app.settings,
             "devices": _self.devices,
@@ -851,7 +849,7 @@ class Run(AbstractBase):
         }
 
     def eval(_self, query, function="eval", **locals):  # noqa: N805
-        exec_variables = _self.python_code_kwargs(**locals)
+        exec_variables = _self.global_variables(**locals)
         results = builtins[function](query, exec_variables)
         return results, exec_variables
 

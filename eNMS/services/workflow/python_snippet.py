@@ -37,7 +37,7 @@ class PythonSnippetService(Service):
             "__builtins__": __builtins__,
             "results": results,
             "save_result": save_result,
-            **run.python_code_kwargs(**locals()),
+            **run.global_variables(**locals()),
         }
 
         try:

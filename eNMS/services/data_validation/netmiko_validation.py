@@ -41,7 +41,7 @@ class NetmikoValidationService(ConnectionService):
             result = netmiko_connection.send_command(
                 command,
                 delay_factor=run.delay_factor,
-                expect_string=run.expect_string or None,
+                expect_string=expect_string or None,
                 auto_find_prompt=run.auto_find_prompt,
                 strip_prompt=run.strip_prompt,
                 strip_command=run.strip_command,

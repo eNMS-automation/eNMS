@@ -52,6 +52,7 @@
     'Regression Workflow F: Workflow of Workflows': [-882, 246]
     'Regression Workflow G: run methods (BFS)': [-438, 172]
     'Regression Workflow H: shared service in multiple subworkflows': [258, 233]
+    'Regression Workflow I: Iteration Targets Advanced': [-200, -10]
     Workflow with device and value iteration: [0, 0]
     Workflow with iteration target subworkflows: [-118, 4]
     Workflow with iteration targets: [0, 0]
@@ -149,6 +150,7 @@
     'Regression Workflow F: Workflow of Workflows': [-807, 243]
     'Regression Workflow G: run methods (BFS)': [649, 182]
     'Regression Workflow H: shared service in multiple subworkflows': [777, -47]
+    'Regression Workflow I: Iteration Targets Advanced': [500, 0]
     T: !!python/tuple [500, 0]
     TEST: !!python/tuple [500, 0]
     TEST2: !!python/tuple [500, 0]
@@ -1144,7 +1146,7 @@
   max_processes: 5
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression Workflow F: Workflow of Workflows] Modify Payload for Iteration'
+  name: '[Regression Workflow E: Iteration Targets] Modify Payload for Iteration'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -3742,11 +3744,11 @@
   send_notification_method: mail
   services: ['[Shared] Start', '[Shared] End', '[Regression Workflow F: Workflow of
       Workflows] Regression Workflow 5: VRF creation and deletion with Napalm', '[Regression
-      Workflow F: Workflow of Workflows] Modify Payload for Iteration', '[Regression
-      Workflow F: Workflow of Workflows] Regression Workflow F S2: Access Variables
-      from Parent Workflow', '[Regression Workflow F: Workflow of Workflows] Regression
-      Workflow F S1: Subworkflow of Workflow', '[Regression Workflow F: Workflow of
-      Workflows] Show interfaces with Netmiko', '[Shared] NAPALM: Get interfaces']
+      Workflow E: Iteration Targets] Modify Payload for Iteration', '[Regression Workflow
+      F: Workflow of Workflows] Regression Workflow F S2: Access Variables from Parent
+      Workflow', '[Regression Workflow F: Workflow of Workflows] Regression Workflow
+      F S1: Subworkflow of Workflow', '[Regression Workflow F: Workflow of Workflows]
+      Show interfaces with Netmiko', '[Shared] NAPALM: Get interfaces']
   shared: false
   skip: false
   skip_query: ''
@@ -4254,12 +4256,12 @@
   scoped_name: 'Regression Workflow E: Iteration Targets'
   send_notification: false
   send_notification_method: mail
-  services: ['[Shared] Start', '[Shared] End', '[Regression Workflow F: Workflow of
-      Workflows] Modify Payload for Iteration', '[Regression Workflow E: Iteration
-      Targets] Iteration Target Workflow - Test 2', '[Regression Workflow E: Iteration
-      Targets] Iteration Targets Workflow - Test 1', '[Regression Workflow E: Iteration
-      Targets] Iteration Target Workflow - Test 3', '[Regression Workflow E: Iteration
-      Targets] Iteration Targets Workflow - Test 4']
+  services: ['[Shared] Start', '[Shared] End', '[Regression Workflow E: Iteration
+      Targets] Modify Payload for Iteration', '[Regression Workflow E: Iteration Targets]
+      Iteration Target Workflow - Test 2', '[Regression Workflow E: Iteration Targets]
+      Iteration Targets Workflow - Test 1', '[Regression Workflow E: Iteration Targets]
+      Iteration Target Workflow - Test 3', '[Regression Workflow E: Iteration Targets]
+      Iteration Targets Workflow - Test 4']
   shared: false
   skip: false
   skip_query: ''
@@ -5498,6 +5500,169 @@
   skip_value: 'True'
   time_between_retries: 10
   type: ansible_playbook_service
+  validation_method: none
+  vendor: ''
+  waiting_time: 0
+- close_connection: false
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  devices: [Washington]
+  dict_match: {}
+  display_only_failed_nodes: false
+  events: []
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  labels: {}
+  last_modified: '2020-02-22 09:59:37.325165'
+  mail_recipient: ''
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: 'Regression Workflow I: Iteration Targets Advanced'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions: {}
+  result_postprocessing: ''
+  run_method: per_device
+  scoped_name: 'Regression Workflow I: Iteration Targets Advanced'
+  send_notification: false
+  send_notification_method: mail
+  services: ['[Shared] Start', '[Shared] End', '[Regression Workflow I: Iteration
+      Targets Advanced] Set Variables for Iteration', '[Regression Workflow I: Iteration
+      Targets Advanced] Show VRF with iteration']
+  shared: false
+  skip: false
+  skip_query: ''
+  skip_value: 'True'
+  time_between_retries: 10
+  type: workflow
+  validation_method: none
+  vendor: ''
+  waiting_time: 0
+- content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  devices: []
+  dict_match: {}
+  display_only_failed_nodes: false
+  events: []
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2020-02-22 09:57:19.634575'
+  mail_recipient: ''
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Regression Workflow I: Iteration Targets Advanced] Set Variables for Iteration'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions:
+    'Regression Workflow I: Iteration Targets Advanced': [132, -202]
+  result_postprocessing: ''
+  run_method: per_device
+  scoped_name: Set Variables for Iteration
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: false
+  skip_query: ''
+  skip_value: 'True'
+  source_code: "results[\"success\"] = True\r\nresults[\"result\"] = {\r\n  \"dict_iteration\"\
+    : {\r\n    \"variable1\": {\"command\": \"test\"},\r\n    \"variable2\": {\"command\"\
+    : \"test2\"}\r\n  }\r\n}"
+  time_between_retries: 10
+  type: python_snippet_service
+  validation_method: none
+  vendor: ''
+  waiting_time: 0
+- auto_find_prompt: true
+  close_connection: false
+  command: show vrf {{command_dict["command"]}}
+  config_mode: false
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credentials: device
+  custom_username: ''
+  delay_factor: 1.0
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  devices: []
+  dict_match: {}
+  display_only_failed_nodes: false
+  driver: arista_eos
+  enable_mode: true
+  events: []
+  expect_string: ''
+  fast_cli: true
+  global_delay_factor: 1.0
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: get_result("Set Variables for Iteration")["result"]["dict_iteration"]
+  iteration_variable_name: command_dict
+  last_modified: '2020-02-22 09:59:31.523443'
+  mail_recipient: ''
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Regression Workflow I: Iteration Targets Advanced] Show VRF with iteration'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions:
+    'Regression Workflow I: Iteration Targets Advanced': [135, 100]
+  result_postprocessing: ''
+  run_method: per_device
+  scoped_name: Show VRF with iteration
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: false
+  skip_query: ''
+  skip_value: 'True'
+  start_new_connection: false
+  strip_command: true
+  strip_prompt: true
+  time_between_retries: 10
+  timeout: 10.0
+  type: netmiko_validation_service
+  use_device_driver: true
+  use_genie: false
   validation_method: none
   vendor: ''
   waiting_time: 0

@@ -217,6 +217,7 @@ class Base {
   }
 
   get deleteInstanceButton() {
+    console.log(this.instance)
     return `
       <li>
         <button type="button" class="btn btn-sm btn-danger"
@@ -439,12 +440,7 @@ models.link = class Link extends Base {
             ><span class="glyphicon glyphicon-duplicate"></span
           ></button>
         </li>
-        <li>
-          <button type="button" class="btn btn-sm btn-danger"
-          onclick="eNMS.base.showDeletionPanel(${this.instance})" data-tooltip="Delete"
-            ><span class="glyphicon glyphicon-trash"></span
-          ></button>
-        </li>
+        ${this.deleteInstanceButton}
       </ul>`;
   }
 };
@@ -508,12 +504,7 @@ models.pool = class Pool extends Base {
             ><span class="glyphicon glyphicon-duplicate"></span
           ></button>
         </li>
-        <li>
-          <button type="button" class="btn btn-sm btn-danger"
-          onclick="eNMS.base.showDeletionPanel(${this.instance})" data-tooltip="Delete"
-            ><span class="glyphicon glyphicon-trash"></span
-          ></button>
-        </li>
+        ${this.deleteInstanceButton}
       </ul>
     `;
   }
@@ -642,12 +633,7 @@ models.service = class Service extends Base {
             ><span class="glyphicon glyphicon-upload"></span
           ></button>
         </li>
-        <li>
-          <button type="button" class="btn btn-sm btn-danger"
-          onclick="eNMS.base.showDeletionPanel(${this.instance})" data-tooltip="Delete"
-            ><span class="glyphicon glyphicon-trash"></span
-          ></button>
-        </li>
+        ${this.deleteInstanceButton}
       </ul>
     `;
   }
@@ -837,12 +823,7 @@ models.task = class Task extends Base {
             ><span class="glyphicon glyphicon-pause"></span
           ></button>
         </li>
-        <li>
-          <button type="button" class="btn btn-sm btn-danger"
-          onclick="eNMS.base.showDeletionPanel(${this.instance})" data-tooltip="Delete"
-            ><span class="glyphicon glyphicon-trash"></span
-          ></button>
-        </li>
+        ${this.deleteInstanceButton}
       </ul>`,
     ];
   }
@@ -874,12 +855,7 @@ models.user = class User extends Base {
             ><span class="glyphicon glyphicon-duplicate"></span
           ></button>
         </li>
-        <li>
-          <button type="button" class="btn btn-sm btn-danger"
-          onclick="eNMS.base.showDeletionPanel(${this.instance})" data-tooltip="Delete"
-            ><span class="glyphicon glyphicon-trash"></span
-          ></button>
-        </li>
+        ${this.deleteInstanceButton}
       </ul>`,
     ];
   }
@@ -911,12 +887,7 @@ models.server = class Server extends Base {
             ><span class="glyphicon glyphicon-duplicate"></span
           ></button>
         </li>
-        <li>
-          <button type="button" class="btn btn-sm btn-danger"
-          onclick="eNMS.base.showDeletionPanel(${this.instance})" data-tooltip="Delete"
-            ><span class="glyphicon glyphicon-trash"></span
-          ></button>
-        </li>
+        ${this.deleteInstanceButton}
       </ul>`,
     ];
   }

@@ -602,7 +602,12 @@ class Run(AbstractBase):
                 if not isinstance(targets, dict):
                     targets = dict(zip(map(str, targets), targets))
                 for target_name, target_value in targets.items():
-                    self.payload_helper(payload, self.iteration_variable_name, target_value)
+                    self.payload_helper(
+                        payload,
+                        self.iteration_variable_name,
+                        target_value,
+                        device=getattr(device, "name", None),
+                    )
                     targets_results[target_name] = self.run_service_job(payload, device)
                 results.update(
                     {
@@ -788,7 +793,14 @@ class Run(AbstractBase):
                     getattr(scp, self.direction)(source, destination)
 
     def payload_helper(
-        self, payload, name, value=None, device=None, section=None, operation="set"
+        self,
+        payload,
+        name,
+        value=None,
+        device=None,
+        section=None,
+        operation="set",
+        allow_none=False,
     ):
         payload = payload.setdefault("variables", {})
         if device:
@@ -802,9 +814,9 @@ class Run(AbstractBase):
             else:
                 getattr(payload[name], operation)(value)
         else:
-            if name not in payload:
+            if name not in payload and not allow_none:
                 raise Exception(f"Payload Editor: {name} not found in {payload}.")
-            return payload[name]
+            return payload.get(name)
 
     def get_var(self, payload, name, device=None, **kwargs):
         return self.payload_helper(payload, name, device=device, **kwargs)
@@ -839,17 +851,27 @@ class Run(AbstractBase):
         return recursive_search(self)
 
     def global_variables(_self, **locals):  # noqa: N805
-        return {
+        payload, device = locals.get("payload", {}), locals.get("device")
+        variables = {
             "settings": app.settings,
             "devices": _self.devices,
-            "get_var": partial(_self.get_var, locals.get("payload", {})),
+            "get_var": partial(_self.get_var, payload),
             "get_result": _self.get_result,
             "log": _self.log,
             "workflow": _self.workflow,
-            "set_var": partial(_self.payload_helper, locals.get("payload", {})),
-            "parent_device": _self.parent_device or locals.get("device"),
+            "set_var": partial(_self.payload_helper, payload),
+            "parent_device": _self.parent_device or device,
             **locals,
         }
+        iteration_value = _self.get_var(
+            payload,
+            _self.iteration_variable_name,
+            getattr(device, "name", None),
+            allow_none=True,
+        )
+        if iteration_value:
+            variables[_self.iteration_variable_name] = iteration_value
+        return variables
 
     def eval(_self, query, function="eval", **locals):  # noqa: N805
         exec_variables = _self.global_variables(**locals)

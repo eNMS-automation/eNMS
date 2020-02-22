@@ -23,6 +23,8 @@ Version 3.20.1
 - Add service column in device results table
 - Add result log deletion endpoint in RBAC
 - Fix bug dictionary displayed in the UI in the results
+- Add all service reference in submenu in workflow builder
+- Add entry to copy service name as reference.
 
 Version 3.20
 ------------

@@ -652,6 +652,7 @@ Object.assign(action, {
   "Add to Workflow": addServicePanel,
   "Stop Workflow": () => stopWorkflow(),
   Delete: deleteSelection,
+  "Service Name": (service) => copyToClipboard(service.name),
   "Top-level Result": getResultLink,
   "Per-device Result": (node) => getResultLink(node, true),
   "Create 'Success' edge": () => switchMode("success"),

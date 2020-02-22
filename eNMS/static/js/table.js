@@ -152,7 +152,7 @@ class Base {
     Object.assign(this, properties);
     let instanceProperties = {
       id: this.id,
-      name: this.name,
+      name: this.dbName || this.name,
       type: this.type,
     };
     if (derivedProperties) {
@@ -217,7 +217,6 @@ class Base {
   }
 
   get deleteInstanceButton() {
-    console.log(this.instance)
     return `
       <li>
         <button type="button" class="btn btn-sm btn-danger"
@@ -512,19 +511,19 @@ models.pool = class Pool extends Base {
 
 models.service = class Service extends Base {
   constructor(properties) {
-    const fullName = properties.name;
+    const dbName = properties.name;
     delete properties.name;
     super(properties);
-    this.fullName = fullName;
+    this.dbName = dbName;
   }
 
   get name() {
     return this.type === "workflow"
       ? `<b><a href="#" onclick="eNMS.workflow.switchToWorkflow(
-      '${this.id}')">${this.scoped_name}</a></b>`
+      ${this.id})">${this.scoped_name}</a></b>`
       : $("#parent-filtering").val() == "true"
       ? this.scoped_name
-      : this.fullName;
+      : this.dbName;
   }
 
   static get controls() {

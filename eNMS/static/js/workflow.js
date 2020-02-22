@@ -916,7 +916,7 @@ export function initWorkflowBuilder() {
   });
   $("#network").contextMenu({
     menuSelector: "#contextMenu",
-    menuSelected: function(invokedOn, selectedMenu) {
+    menuSelected: function(selectedMenu) {
       const row = selectedMenu.text();
       action[row](selectedObject);
     },

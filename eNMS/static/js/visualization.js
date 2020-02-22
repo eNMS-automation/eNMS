@@ -225,7 +225,7 @@ function showPoolView(poolId) {
     callback: function(pool) {
       $(`#network-${poolId}`).contextMenu({
         menuSelector: "#contextMenu",
-        menuSelected: function(invokedOn, selectedMenu) {
+        menuSelected: function(selectedMenu) {
           const row = selectedMenu.text();
           action[row](selected);
         },

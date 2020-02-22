@@ -585,7 +585,6 @@ export function copyToClipboard(text, isId) {
           return;
         }
         const $menu = $(settings.menuSelector)
-          .data("invokedOn", $(e.target))
           .show()
           .css({
             position: "absolute",
@@ -595,13 +594,22 @@ export function copyToClipboard(text, isId) {
           .off("click")
           .on("click", "a", function(e) {
             $menu.hide();
-            const $invokedOn = $menu.data("invokedOn");
             const $selectedMenu = $(e.target);
-            settings.menuSelected.call(this, $invokedOn, $selectedMenu);
+            settings.menuSelected.call(this, $selectedMenu);
           });
         return false;
       });
+      $(".dropdown-submenu a.menu-submenu").on("click", function(e) {
+        const isHidden = $(this).next("ul").is(":hidden");
+        $(".dropdown-submenu a.menu-submenu").next("ul").hide();
+        $(this)
+          .next("ul")
+          .toggle(isHidden);
+        e.stopPropagation();
+        e.preventDefault();
+      });
       $("body").click(function() {
+        $(".dropdown-menu").hide();
         $(settings.menuSelector).hide();
       });
     });
@@ -724,14 +732,6 @@ export function createAlerts() {
     </li>
   `);
 }
-
-$(".dropdown-submenu a.menu-submenu").on("click", function(e) {
-  $(this)
-    .next("ul")
-    .toggle();
-  e.stopPropagation();
-  e.preventDefault();
-});
 
 export function configureNamespace(namespace, functions) {
   eNMS[namespace] = {};

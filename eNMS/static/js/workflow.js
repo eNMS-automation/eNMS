@@ -422,17 +422,6 @@ function skipServices() {
   });
 }
 
-function formatServiceTitle(service) {
-  let title = `
-    <b>Type</b>: ${service.type}<br>
-    <b>Name</b>: ${service.name}<br>
-  `;
-  if (service.description) {
-    title += `<b>Description</b>: ${service.description}`;
-  }
-  return title;
-}
-
 function getServiceLabel(service) {
   if (ends.has(service.id)) {
     return service.scoped_name;
@@ -467,7 +456,6 @@ function serviceToNode(service) {
     label: getServiceLabel(service),
     name: service.scoped_name,
     type: service.type,
-    title: formatServiceTitle(service),
     x: service.positions[workflow.name] ? service.positions[workflow.name][0] : 0,
     y: service.positions[workflow.name] ? service.positions[workflow.name][1] : 0,
   };

@@ -27,6 +27,7 @@ Version 3.20.1
 - Add entry to copy service name as reference.
 - Add new feature to accept a dictionary in iteration values. When a dictionary is used, the keys are used as the 
 name of the iteration step in the results.
+- Iteration variable are now referred to as global variable, e.g {{variable}} instead of {{get_var("variable")}} previously.
 
 Version 3.20
 ------------

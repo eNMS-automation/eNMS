@@ -598,9 +598,12 @@ class Run(AbstractBase):
                     payload.update(old_result["payload"])
             if self.service.iteration_values:
                 targets_results = {}
-                for target in self.eval(self.service.iteration_values, **locals())[0]:
-                    self.payload_helper(payload, self.iteration_variable_name, target)
-                    targets_results[str(target)] = self.run_service_job(payload, device)
+                targets = self.eval(self.service.iteration_values, **locals())[0]
+                if not isinstance(targets, dict):
+                    targets = dict(zip(map(str, targets), targets))
+                for target_name, target_value in targets.items():
+                    self.payload_helper(payload, self.iteration_variable_name, target_value)
+                    targets_results[target_name] = self.run_service_job(payload, device)
                 results.update(
                     {
                         "result": targets_results,

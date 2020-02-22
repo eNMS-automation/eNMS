@@ -25,6 +25,8 @@ Version 3.20.1
 - Fix bug dictionary displayed in the UI in the results
 - Add all service reference in submenu in workflow builder
 - Add entry to copy service name as reference.
+- Add new feature to accept a dictionary in iteration values. When a dictionary is used, the keys are used as the 
+name of the iteration step in the results.
 
 Version 3.20
 ------------

@@ -201,7 +201,7 @@ class Topology(Resource):
 
 class Sink(Resource):
     def get(self, **_):
-        abort(404, message="The requested endpoint does not exist.")
+        abort(404, message=f"The requested {request.method} endpoint does not exist.")
 
     post = put = patch = delete = get
 

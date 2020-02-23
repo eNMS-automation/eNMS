@@ -1,6 +1,7 @@
 from datetime import datetime
 from flask import request
 from flask_restful import abort, Api, Resource
+from functools import wraps
 from logging import info
 from uuid import getnode
 
@@ -8,6 +9,16 @@ from eNMS import app
 from eNMS.database import Session
 from eNMS.database.functions import delete, factory, fetch
 from eNMS.framework.extensions import auth, csrf
+
+
+def catch_exceptions(func):
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        try:
+            return func(*args, **kwargs)
+        except Exception as exc:
+            return abort(500, message=str(exc))
+    return wrapper
 
 
 def create_app_resources():
@@ -20,13 +31,13 @@ def create_app_resources():
             return f"Endpoint {ep} successfully executed."
 
         endpoints[endpoint] = type(
-            endpoint, (Resource,), {"decorators": [auth.login_required], "post": post}
+            endpoint, (Resource,), {"decorators": [auth.login_required, catch_exceptions], "post": post}
         )
     return endpoints
 
 
 class CreatePool(Resource):
-    decorators = [auth.login_required]
+    decorators = [auth.login_required, catch_exceptions]
 
     def post(self):
         data = request.get_json(force=True)
@@ -56,7 +67,7 @@ class Heartbeat(Resource):
 
 
 class Query(Resource):
-    decorators = [auth.login_required]
+    decorators = [auth.login_required, catch_exceptions]
 
     def get(self, cls):
         try:
@@ -67,7 +78,7 @@ class Query(Resource):
 
 
 class GetInstance(Resource):
-    decorators = [auth.login_required]
+    decorators = [auth.login_required, catch_exceptions]
 
     def get(self, cls, name):
         try:
@@ -84,14 +95,14 @@ class GetInstance(Resource):
 
 
 class GetConfiguration(Resource):
-    decorators = [auth.login_required]
+    decorators = [auth.login_required, catch_exceptions]
 
     def get(self, name):
         return fetch("device", name=name).configuration
 
 
 class GetResult(Resource):
-    decorators = [auth.login_required]
+    decorators = [auth.login_required, catch_exceptions]
 
     def get(self, name, runtime):
         service = fetch("service", name=name)
@@ -99,7 +110,7 @@ class GetResult(Resource):
 
 
 class UpdateInstance(Resource):
-    decorators = [auth.login_required]
+    decorators = [auth.login_required, catch_exceptions]
 
     def post(self, cls):
         try:
@@ -113,7 +124,7 @@ class UpdateInstance(Resource):
 
 
 class Migrate(Resource):
-    decorators = [auth.login_required]
+    decorators = [auth.login_required, catch_exceptions]
 
     def post(self, direction):
         kwargs = request.get_json(force=True)
@@ -121,7 +132,7 @@ class Migrate(Resource):
 
 
 class RunService(Resource):
-    decorators = [auth.login_required]
+    decorators = [auth.login_required, catch_exceptions]
 
     def post(self):
         try:
@@ -170,7 +181,7 @@ class RunService(Resource):
 
 
 class Topology(Resource):
-    decorators = [auth.login_required]
+    decorators = [auth.login_required, catch_exceptions]
 
     def post(self, direction):
         if direction == "import":

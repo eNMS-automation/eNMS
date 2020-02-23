@@ -18,6 +18,7 @@ def catch_exceptions(func):
             return func(*args, **kwargs)
         except Exception as exc:
             return abort(500, message=str(exc))
+
     return wrapper
 
 
@@ -31,7 +32,9 @@ def create_app_resources():
             return f"Endpoint {ep} successfully executed."
 
         endpoints[endpoint] = type(
-            endpoint, (Resource,), {"decorators": [auth.login_required, catch_exceptions], "post": post}
+            endpoint,
+            (Resource,),
+            {"decorators": [auth.login_required, catch_exceptions], "post": post},
         )
     return endpoints
 
@@ -196,6 +199,13 @@ class Topology(Resource):
             return "Topology Export successfully executed."
 
 
+class Sink(Resource):
+    def get(self, **_):
+        abort(404, message="The requested endpoint does not exist.")
+
+    post = put = patch = delete = get
+
+
 def configure_rest_api(flask_app):
     api = Api(flask_app, decorators=[csrf.exempt])
     for endpoint, resource in create_app_resources().items():
@@ -210,3 +220,4 @@ def configure_rest_api(flask_app):
     api.add_resource(GetResult, "/rest/result/<string:name>/<string:runtime>")
     api.add_resource(Migrate, "/rest/migrate/<string:direction>")
     api.add_resource(Topology, "/rest/topology/<string:direction>")
+    api.add_resource(Sink, "/rest/<path:path>")

@@ -46,10 +46,10 @@ class Workflow(Service):
         old_name = self.name
         super().set_name(name)
         for service in self.services:
-            if service.shared:
-                continue
-            service.set_name()
-            service.positions[self.name] = service.positions.pop(old_name, (0, 0))
+            if not service.shared:
+                service.set_name()
+            if old_name in service.positions:
+                service.positions[self.name] = service.positions[old_name]
 
     def duplicate(self, workflow=None, clone=None):
         if not clone:

@@ -30,29 +30,36 @@
   pools: []
   positions:
     Iteration Services Test Workflow: ['-359', '-163']
-    'Regression Workflow 1: Netmiko with validation and retries': [-432, -14]
-    'Regression Workflow 2: Separate Failure - Success paths': [-424, 53]
-    'Regression Workflow 3: Napalm getters (postprocessing)': [-412, 74]
-    'Regression Workflow 4: VRF creation and deletion with Netmiko': [-483, -109]
+    'Regression Workflow 1: Netmiko with validation and retries': [-385, 11]
+    'Regression Workflow 2: Separate Failure - Success paths': [-327, -20]
+    'Regression Workflow 3: Napalm getters (postprocessing)': [-316, 80]
+    'Regression Workflow 4: VRF creation and deletion with Netmiko': !!python/tuple [
+      0, 0]
     'Regression Workflow 5: VRF creation and deletion with Napalm': !!python/tuple [
       0, 0]
-    'Regression Workflow 6: Ansible with Validation': [-651, -26]
+    'Regression Workflow 6: Ansible with Validation': !!python/tuple [0, 0]
     'Regression Workflow 7: Payload Extraction & Validation': !!python/tuple [0, 0]
     'Regression Workflow 8: Payload Extraction with Operations': !!python/tuple [
       0, 0]
-    'Regression Workflow 9: Operational Data Backup': [-712, 159]
-    'Regression Workflow A: get_var, set_var, get_result': [-630, -54]
+    'Regression Workflow 9: Operational Data Backup': !!python/tuple [0, 0]
+    'Regression Workflow A: get_var, set_var, get_result': !!python/tuple [0, 0]
     'Regression Workflow B: Napalm getters validation': !!python/tuple [0, 0]
-    'Regression Workflow C: Advanced multiprocessing': [-638, -8]
-    'Regression Workflow D: Prompts': [-219, 32]
-    'Regression Workflow E: Iteration Targets': [-431, -65]
+    'Regression Workflow C: Advanced multiprocessing': !!python/tuple [0, 0]
+    'Regression Workflow D: Prompts': !!python/tuple [0, 0]
+    'Regression Workflow E: Iteration Targets': !!python/tuple [0, 0]
     'Regression Workflow F S1: Subworkflow of Workflow': !!python/tuple [0, 0]
     'Regression Workflow F S2: Access Variables from Parent Workflow': !!python/tuple [
       0, 0]
-    'Regression Workflow F: Workflow of Workflows': [-882, 246]
-    'Regression Workflow G: run methods (BFS)': [-438, 172]
-    'Regression Workflow H: shared service in multiple subworkflows': [258, 233]
-    'Regression Workflow I: Iteration Targets Advanced': [-200, -10]
+    'Regression Workflow F: Workflow of Workflows': !!python/tuple [0, 0]
+    'Regression Workflow G: run methods (BFS)': !!python/tuple [0, 0]
+    'Regression Workflow H: shared service in multiple subworkflows': !!python/tuple [
+      0, 0]
+    'Regression Workflow I: Iteration Targets Advanced': !!python/tuple [0, 0]
+    Subworkflow 1: !!python/tuple [0, 0]
+    Subworkflow 2: !!python/tuple [0, 0]
+    Workflow  in device by device mode: !!python/tuple [0, 0]
+    Workflow in service by service mode (workflow targets): !!python/tuple [0, 0]
+    Workflow in service targets mode: !!python/tuple [0, 0]
     Workflow with device and value iteration: [0, 0]
     Workflow with iteration target subworkflows: [-118, 4]
     Workflow with iteration targets: [0, 0]
@@ -128,32 +135,39 @@
   pools: []
   positions:
     Iteration Services Test Workflow: ['-9', '294']
-    'Regression Workflow 1: Netmiko with validation and retries': [69, -3]
-    'Regression Workflow 2: Separate Failure - Success paths': [735, 286]
-    'Regression Workflow 3: Napalm getters (postprocessing)': [676, 108]
-    'Regression Workflow 4: VRF creation and deletion with Netmiko': [-530, 107]
+    'Regression Workflow 1: Netmiko with validation and retries': [115, 3]
+    'Regression Workflow 2: Separate Failure - Success paths': [737, 276]
+    'Regression Workflow 3: Napalm getters (postprocessing)': [703, 150]
+    'Regression Workflow 4: VRF creation and deletion with Netmiko': !!python/tuple [
+      0, 0]
     'Regression Workflow 5: VRF creation and deletion with Napalm': !!python/tuple [
       0, 0]
-    'Regression Workflow 6: Ansible with Validation': [600, 4]
+    'Regression Workflow 6: Ansible with Validation': !!python/tuple [0, 0]
     'Regression Workflow 7: Payload Extraction & Validation': !!python/tuple [0, 0]
     'Regression Workflow 8: Payload Extraction with Operations': !!python/tuple [
       0, 0]
-    'Regression Workflow 9: Operational Data Backup': [469, 69]
-    'Regression Workflow A: get_var, set_var, get_result': [-609, 21]
+    'Regression Workflow 9: Operational Data Backup': !!python/tuple [0, 0]
+    'Regression Workflow A: get_var, set_var, get_result': !!python/tuple [0, 0]
     'Regression Workflow B: Napalm getters validation': !!python/tuple [0, 0]
-    'Regression Workflow C: Advanced multiprocessing': [619, -40]
-    'Regression Workflow D: Prompts': [651, 0]
-    'Regression Workflow E: Iteration Targets': [-432, 24]
+    'Regression Workflow C: Advanced multiprocessing': !!python/tuple [0, 0]
+    'Regression Workflow D: Prompts': !!python/tuple [0, 0]
+    'Regression Workflow E: Iteration Targets': !!python/tuple [0, 0]
     'Regression Workflow F S1: Subworkflow of Workflow': !!python/tuple [0, 0]
     'Regression Workflow F S2: Access Variables from Parent Workflow': !!python/tuple [
       0, 0]
-    'Regression Workflow F: Workflow of Workflows': [-807, 243]
-    'Regression Workflow G: run methods (BFS)': [649, 182]
-    'Regression Workflow H: shared service in multiple subworkflows': [777, -47]
-    'Regression Workflow I: Iteration Targets Advanced': [500, 0]
+    'Regression Workflow F: Workflow of Workflows': !!python/tuple [0, 0]
+    'Regression Workflow G: run methods (BFS)': !!python/tuple [0, 0]
+    'Regression Workflow H: shared service in multiple subworkflows': !!python/tuple [
+      0, 0]
+    'Regression Workflow I: Iteration Targets Advanced': !!python/tuple [0, 0]
+    Subworkflow 1: !!python/tuple [0, 0]
+    Subworkflow 2: !!python/tuple [0, 0]
     T: !!python/tuple [500, 0]
     TEST: !!python/tuple [500, 0]
     TEST2: !!python/tuple [500, 0]
+    Workflow  in device by device mode: !!python/tuple [0, 0]
+    Workflow in service by service mode (workflow targets): !!python/tuple [0, 0]
+    Workflow in service targets mode: !!python/tuple [0, 0]
     Workflow with device and value iteration: [500, 0]
     Workflow with iteration target subworkflows: [617, 0]
     Workflow with iteration targets: [500, 0]
@@ -3558,7 +3572,7 @@
         \ of both get_facts\r\nand get_interfaces to compute its success value.\r\n\
         Prerequisite edges are used to ensure the order in which services are run."
       positions: [385, 283]
-  last_modified: '2020-01-03 07:32:09.918913'
+  last_modified: '2020-02-23 09:44:37.562782'
   mail_recipient: ''
   max_processes: 5
   maximum_runs: 1
@@ -3785,7 +3799,7 @@
         \nThe router will take the upward path, the dummy devices the downward path.\r\
         \nBoth path rejoin at the end.\r\nTo be tested both with and without multiprocessing."
       positions: [185, 37]
-  last_modified: '2019-10-31 01:14:45.926629'
+  last_modified: '2020-02-23 09:44:33.028494'
   mail_recipient: ''
   max_processes: 5
   maximum_runs: 1
@@ -4476,7 +4490,7 @@
         \ to check for the string \"NOVRF\".\r\nThere is no such VRF configured so\
         \ the service is expected to fail.\r\nRetry twice with 2 seconds between retries."
       positions: [-147, -217]
-  last_modified: '2019-12-17 02:59:33.573592'
+  last_modified: '2020-02-23 09:44:26.466126'
   mail_recipient: ''
   max_processes: 50
   maximum_runs: 1

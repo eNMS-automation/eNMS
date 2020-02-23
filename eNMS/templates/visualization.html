@@ -13,6 +13,8 @@
   rel="stylesheet"
 />
 {% endblock stylesheets %} {% block content %}
+<form id="device-filtering-form" class="overlay"></form>
+<form id="link-filtering-form" class="overlay"></form>
 <ul id="contextMenu" class="dropdown-menu" role="menu">
   <li class="menu dropdown-submenu geo-menu">
     <a class="menu-submenu menu-layer" tabindex="-1" href="#"
@@ -52,8 +54,6 @@
 </ul>
 <div id="map"></div>
 {% if view_type == "network" %}
-<form id="device-filtering-form" class="overlay"></form>
-<form id="link-filtering-form" class="overlay"></form>
 <nav class="navbar navbar-default controls nav-controls" role="navigation">
   <button type="button" id="device-filtering" class="btn btn-primary btn-search">
     <span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp;Device

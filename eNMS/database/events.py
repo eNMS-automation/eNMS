@@ -9,9 +9,9 @@ from eNMS.properties import private_properties
 
 
 @event.listens_for(Base, "mapper_configured", propagate=True)
-def model_inspection(mapper, cls):
-    name = cls.__tablename__
-    for col in inspect(cls).columns:
+def model_inspection(mapper, model):
+    name = model.__tablename__
+    for col in inspect(model).columns:
         if not col.info.get("model_properties", True):
             continue
         model_properties[name].append(col.key)
@@ -27,19 +27,18 @@ def model_inspection(mapper, cls):
             }.get(type(col.type), "str")
             if col.key not in property_types:
                 property_types[col.key] = column_type
-    for descriptor in inspect(cls).all_orm_descriptors:
+    for descriptor in inspect(model).all_orm_descriptors:
         if descriptor.extension_type is ASSOCIATION_PROXY:
             property = (
                 descriptor.info.get("name")
                 or f"{descriptor.target_collection}_{descriptor.value_attr}"
             )
             model_properties[name].append(property)
-    if hasattr(cls, "parent_type"):
-        model_properties[name].extend(model_properties[cls.parent_type])
+    if hasattr(model, "parent_type"):
+        model_properties[name].extend(model_properties[model.parent_type])
     if "service" in name and name != "service":
         model_properties[name].extend(model_properties["service"])
-    model = {name: cls, name.lower(): cls}
-    models.update(model)
+    models.update({name: model, name.lower(): model})
     model_properties[name] = list(set(model_properties[name]))
     for relation in mapper.relationships:
         if getattr(relation.mapper.class_, "private", False):

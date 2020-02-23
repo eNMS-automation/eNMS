@@ -28,9 +28,12 @@ Version 3.20.1
 - Add new feature to accept a dictionary in iteration values. When a dictionary is used, the keys are used as the 
 name of the iteration step in the results.
 - Iteration variable are now referred to as global variable,
-e.g {{variable}} instead of {{get_var("variable")}} previously.
 - Catch all exceptions in rest api to return proper error 500 (device not found for get configuration, etc)
 
+MIGRATION:
+All iteration variable became GLOBAL VARIABLE, which means that you need to use
+{{variable}} instead of {{get_var("variable")}} previously
+All services that use iteration variables must be updated in the migration files.
 
 Version 3.20
 ------------

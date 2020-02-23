@@ -609,7 +609,7 @@ export function copyToClipboard(text, isId) {
         e.preventDefault();
       });
       $("body").click(function() {
-        $(".dropdown-menu").hide();
+        $(".dropdown-submenu a.menu-submenu").next("ul").hide();
         $(settings.menuSelector).hide();
       });
     });

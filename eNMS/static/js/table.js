@@ -101,7 +101,7 @@ export function initTable(type, instance, runtime, id) {
               e.stopPropagation();
             });
         });
-      $(`#controls-${tableId}`).html(models[type].controls);
+      $(`#controls-${tableId}`).html(models[type].controls(tableId));
       models[type].postProcessing(this.api(), columns, type);
     },
     ajax: {
@@ -150,7 +150,7 @@ function refreshTablePeriodically(tableType, interval, first) {
 }
 
 class Base {
-  constructor({properties, tableId, derivedProperties}) {
+  constructor({ properties, tableId, derivedProperties }) {
     this.tableId = tableId;
     Object.assign(this, properties);
     let instanceProperties = {
@@ -305,7 +305,7 @@ class Base {
 }
 
 models.device = class Device extends Base {
-  static get controls() {
+  static controls() {
     return [
       super.columnDisplay(),
       super.createNewButton("device"),
@@ -384,7 +384,7 @@ models.configuration = class Configuration extends models.device {
     });
   }
 
-  static get controls() {
+  static controls() {
     return [
       super.columnDisplay(),
       `<input
@@ -417,7 +417,7 @@ models.configuration = class Configuration extends models.device {
 };
 
 models.link = class Link extends Base {
-  static get controls() {
+  static controls() {
     return [
       super.columnDisplay(),
       super.createNewButton("link"),
@@ -452,7 +452,7 @@ models.pool = class Pool extends Base {
     return `${this.device_number} devices - ${this.link_number} links`;
   }
 
-  static get controls() {
+  static controls() {
     return [
       super.columnDisplay(),
       super.createNewButton("pool"),
@@ -529,7 +529,7 @@ models.service = class Service extends Base {
       : this.dbName;
   }
 
-  static get controls() {
+  static controls() {
     return [
       super.columnDisplay(),
       `
@@ -657,7 +657,7 @@ models.run = class Run extends Base {
     this.service = JSON.stringify(this.service_properties).replace(/"/g, "'");
   }
 
-  static get controls() {
+  static controls() {
     return [
       super.columnDisplay(),
       super.searchTableButton(),
@@ -694,9 +694,13 @@ models.run = class Run extends Base {
 };
 
 models.result = class Result extends Base {
-  constructor({properties, tableId}) {
+  constructor({ properties, tableId }) {
     delete properties.result;
-    super({properties: properties, tableId: tableId, derivedProperties: ["service_name", "device_name"]});
+    super({
+      properties: properties,
+      tableId: tableId,
+      derivedProperties: ["service_name", "device_name"],
+    });
   }
 
   get status() {
@@ -711,18 +715,18 @@ models.result = class Result extends Base {
   }
 
   get v1() {
-    return `<input type="radio" name="v1" value="${this.id}">`;
+    return `<input type="radio" name="v1-${this.tableId}" value="${this.id}">`;
   }
 
   get v2() {
-    return `<input type="radio" name="v2" value="${this.id}">`;
+    return `<input type="radio" name="v2-${this.tableId}" value="${this.id}">`;
   }
 
-  static get controls() {
+  static controls(tableId) {
     return [
       `<button
         class="btn btn-info"
-        onclick="eNMS.automation.compare('result')"
+        onclick="eNMS.automation.compare('result', '${tableId}')"
         data-tooltip="Compare"
         type="button"
       >
@@ -772,7 +776,7 @@ models.task = class Task extends Base {
     }
   }
 
-  static get controls() {
+  static controls() {
     return [
       super.columnDisplay(),
       super.createNewButton("task"),
@@ -832,7 +836,7 @@ models.task = class Task extends Base {
 };
 
 models.user = class User extends Base {
-  static get controls() {
+  static controls() {
     return [
       super.columnDisplay(),
       super.createNewButton("user"),
@@ -864,7 +868,7 @@ models.user = class User extends Base {
 };
 
 models.server = class Server extends Base {
-  static get controls() {
+  static controls() {
     return [
       super.columnDisplay(),
       super.createNewButton("server"),
@@ -896,7 +900,7 @@ models.server = class Server extends Base {
 };
 
 models.changelog = class Changelog extends Base {
-  static get controls() {
+  static controls() {
     return [
       super.columnDisplay(),
       super.createNewButton("changelog"),
@@ -906,7 +910,7 @@ models.changelog = class Changelog extends Base {
 };
 
 models.session = class Session extends Base {
-  static get controls() {
+  static controls() {
     return [super.columnDisplay(), super.refreshTableButton("session")];
   }
 
@@ -926,7 +930,7 @@ models.session = class Session extends Base {
 };
 
 models.event = class Event extends Base {
-  static get controls() {
+  static controls() {
     return [
       super.columnDisplay(),
       super.createNewButton("event"),

@@ -31,9 +31,9 @@ function openServicePanel() {
   showTypePanel($("#service-type").val());
 }
 
-function compare(type) {
-  const v1 = $("input[name=v1]:checked").val();
-  const v2 = $("input[name=v2]:checked").val();
+function compare(type, tableId) {
+  const v1 = $(`input[name=v1-${tableId}]:checked`).val();
+  const v2 = $(`input[name=v2-${tableId}]:checked`).val();
   if (v1 && v2) {
     const cantorId = cantorPairing(parseInt(v1), parseInt(v2));
     openPanel({

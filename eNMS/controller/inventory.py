@@ -157,8 +157,8 @@ class InventoryController(BaseController):
                     values[property] = func(sheet.row_values(row_index)[index])
                 try:
                     factory(obj_type, **values).serialized
-                except Exception as e:
-                    info(f"{str(values)} could not be imported ({str(e)})")
+                except Exception as exc:
+                    info(f"{str(values)} could not be imported ({str(exc)})")
                     status = "Partial import (see logs)."
             Session.commit()
         for pool in fetch_all("pool"):

@@ -44,8 +44,8 @@ class NapalmBackupService(ConnectionService):
                                 r["pattern"], r["replace_with"], output, flags=M,
                             )
                         result[getter] = output
-                    except Exception as e:
-                        result[getter] = f"{getter} failed because of {e}"
+                    except Exception as exc:
+                        result[getter] = f"{getter} failed because of {exc}"
                 result = app.str_dict(result)
                 setattr(device, data_type, result)
                 with open(path / data_type, "w") as file:
@@ -56,11 +56,11 @@ class NapalmBackupService(ConnectionService):
             )
             device.last_update = str(device.last_runtime)
             run.generate_yaml_file(path, device)
-        except Exception as e:
+        except Exception as exc:
             device.last_status = "Failure"
             device.last_failure = str(device.last_runtime)
             run.generate_yaml_file(path, device)
-            return {"success": False, "result": str(e)}
+            return {"success": False, "result": str(exc)}
         return {"success": True}
 
 

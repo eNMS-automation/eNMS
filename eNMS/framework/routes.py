@@ -39,8 +39,8 @@ def login():
                 return redirect(url_for("blueprint.route", page="dashboard"))
             else:
                 abort(403)
-        except Exception as e:
-            info(f"Authentication failed ({str(e)})")
+        except Exception as exc:
+            info(f"Authentication failed ({str(exc)})")
             abort(403)
     if not current_user.is_authenticated:
         login_form = LoginForm(request.form)

@@ -163,8 +163,8 @@ class RunService(Resource):
                     errors.append(f"No pool with the name '{pool_name}'")
             if errors:
                 return {"errors": errors}
-        except Exception as e:
-            info(f"REST API run_service endpoint failed ({str(e)})")
+        except Exception as exc:
+            info(f"REST API run_service endpoint failed ({str(exc)})")
             return str(e)
         if devices or pools:
             data.update({"devices": devices, "pools": pools})

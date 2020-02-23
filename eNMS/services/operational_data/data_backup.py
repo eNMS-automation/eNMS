@@ -62,11 +62,11 @@ class DataBackupService(ConnectionService):
             )
             device.last_update = str(device.last_runtime)
             run.generate_yaml_file(path, device)
-        except Exception as e:
+        except Exception as exc:
             device.last_status = "Failure"
             device.last_failure = str(device.last_runtime)
             run.generate_yaml_file(path, device)
-            return {"success": False, "result": str(e)}
+            return {"success": False, "result": str(exc)}
         return {"success": True}
 
 

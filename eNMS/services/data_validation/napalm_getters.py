@@ -26,8 +26,8 @@ class NapalmGettersService(ConnectionService):
         for getter in run.getters:
             try:
                 result[getter] = getattr(napalm_connection, getter)()
-            except Exception as e:
-                result[getter] = f"{getter} failed because of {e}"
+            except Exception as exc:
+                result[getter] = f"{getter} failed because of {exc}"
         return {"result": result}
 
 

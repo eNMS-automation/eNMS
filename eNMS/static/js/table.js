@@ -25,9 +25,9 @@ export function initTable(type, instance, runtime, id) {
     if (visibleColumns) column.visible = visibleColumns.includes(column.data);
     column.name = column.data;
   });
-  const postfix = id ? `-${id}` : "";
+  const tableId = `${type}${id ? `-${id}` : ""}`;
   // eslint-disable-next-line new-cap
-  tables[type] = $(`#table-${type}${postfix}`).DataTable({
+  tables[type] = $(`#table-${tableId}`).DataTable({
     serverSide: true,
     orderCellsTop: true,
     autoWidth: false,
@@ -101,7 +101,7 @@ export function initTable(type, instance, runtime, id) {
               e.stopPropagation();
             });
         });
-      $(`#controls-${type}${postfix}`).html(models[type].controls);
+      $(`#controls-${tableId}`).html(models[type].controls);
       models[type].postProcessing(this.api(), columns, type);
     },
     ajax: {
@@ -109,7 +109,7 @@ export function initTable(type, instance, runtime, id) {
       type: "POST",
       contentType: "application/json",
       data: (d) => {
-        const form = `#search-form-${type}${postfix}`;
+        const form = `#search-form-${tableId}`;
         d.form = serializeForm(form);
         d.instance = instance;
         d.columns = columns;
@@ -120,7 +120,9 @@ export function initTable(type, instance, runtime, id) {
         return JSON.stringify(d);
       },
       dataSrc: function(result) {
-        return result.data.map((instance) => new models[type](instance));
+        return result.data.map(
+          (instance) => new models[type]({ properties: instance, tableId: tableId })
+        );
       },
     },
   });
@@ -148,7 +150,8 @@ function refreshTablePeriodically(tableType, interval, first) {
 }
 
 class Base {
-  constructor(properties, derivedProperties) {
+  constructor({properties, tableId, derivedProperties}) {
+    this.tableId = tableId;
     Object.assign(this, properties);
     let instanceProperties = {
       id: this.id,
@@ -510,10 +513,10 @@ models.pool = class Pool extends Base {
 };
 
 models.service = class Service extends Base {
-  constructor(properties) {
-    const dbName = properties.name;
-    delete properties.name;
-    super(properties);
+  constructor(kwargs) {
+    const dbName = kwargs.properties.name;
+    delete kwargs.properties.name;
+    super(kwargs);
     this.dbName = dbName;
   }
 
@@ -649,8 +652,8 @@ models.service = class Service extends Base {
 };
 
 models.run = class Run extends Base {
-  constructor(properties) {
-    super(properties);
+  constructor(kwargs) {
+    super(kwargs);
     this.service = JSON.stringify(this.service_properties).replace(/"/g, "'");
   }
 
@@ -691,9 +694,9 @@ models.run = class Run extends Base {
 };
 
 models.result = class Result extends Base {
-  constructor(properties) {
+  constructor({properties, tableId}) {
     delete properties.result;
-    super(properties, ["service_name", "device_name"]);
+    super({properties: properties, tableId: tableId, derivedProperties: ["service_name", "device_name"]});
   }
 
   get status() {

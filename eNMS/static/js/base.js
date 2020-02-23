@@ -600,8 +600,12 @@ export function copyToClipboard(text, isId) {
         return false;
       });
       $(".dropdown-submenu a.menu-submenu").on("click", function(e) {
-        const isHidden = $(this).next("ul").is(":hidden");
-        $(".dropdown-submenu a.menu-submenu").next("ul").hide();
+        const isHidden = $(this)
+          .next("ul")
+          .is(":hidden");
+        $(".dropdown-submenu a.menu-submenu")
+          .next("ul")
+          .hide();
         $(this)
           .next("ul")
           .toggle(isHidden);
@@ -609,7 +613,9 @@ export function copyToClipboard(text, isId) {
         e.preventDefault();
       });
       $("body").click(function() {
-        $(".dropdown-submenu a.menu-submenu").next("ul").hide();
+        $(".dropdown-submenu a.menu-submenu")
+          .next("ul")
+          .hide();
         $(settings.menuSelector).hide();
       });
     });

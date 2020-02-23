@@ -33,28 +33,26 @@
     'Regression Workflow 1: Netmiko with validation and retries': [-385, 11]
     'Regression Workflow 2: Separate Failure - Success paths': [-327, -20]
     'Regression Workflow 3: Napalm getters (postprocessing)': [-316, 80]
-    'Regression Workflow 4: VRF creation and deletion with Netmiko': !!python/tuple [
-      0, 0]
+    'Regression Workflow 4: VRF creation and deletion with Netmiko': [-383, -95]
     'Regression Workflow 5: VRF creation and deletion with Napalm': !!python/tuple [
       0, 0]
-    'Regression Workflow 6: Ansible with Validation': !!python/tuple [0, 0]
+    'Regression Workflow 6: Ansible with Validation': [-557, -5]
     'Regression Workflow 7: Payload Extraction & Validation': !!python/tuple [0, 0]
     'Regression Workflow 8: Payload Extraction with Operations': !!python/tuple [
       0, 0]
-    'Regression Workflow 9: Operational Data Backup': !!python/tuple [0, 0]
-    'Regression Workflow A: get_var, set_var, get_result': !!python/tuple [0, 0]
+    'Regression Workflow 9: Operational Data Backup': [-648, 121]
+    'Regression Workflow A: get_var, set_var, get_result': [-506, -55]
     'Regression Workflow B: Napalm getters validation': !!python/tuple [0, 0]
-    'Regression Workflow C: Advanced multiprocessing': !!python/tuple [0, 0]
-    'Regression Workflow D: Prompts': !!python/tuple [0, 0]
-    'Regression Workflow E: Iteration Targets': !!python/tuple [0, 0]
+    'Regression Workflow C: Advanced multiprocessing': [-492, -39]
+    'Regression Workflow D: Prompts': [-167, 49]
+    'Regression Workflow E: Iteration Targets': [-342, -252]
     'Regression Workflow F S1: Subworkflow of Workflow': !!python/tuple [0, 0]
     'Regression Workflow F S2: Access Variables from Parent Workflow': !!python/tuple [
       0, 0]
-    'Regression Workflow F: Workflow of Workflows': !!python/tuple [0, 0]
-    'Regression Workflow G: run methods (BFS)': !!python/tuple [0, 0]
-    'Regression Workflow H: shared service in multiple subworkflows': !!python/tuple [
-      0, 0]
-    'Regression Workflow I: Iteration Targets Advanced': !!python/tuple [0, 0]
+    'Regression Workflow F: Workflow of Workflows': [-965, 194]
+    'Regression Workflow G: run methods (BFS)': [-404, 147]
+    'Regression Workflow H: shared service in multiple subworkflows': [55, 266]
+    'Regression Workflow I: Iteration Targets Advanced': [-131, -24]
     Subworkflow 1: !!python/tuple [0, 0]
     Subworkflow 2: !!python/tuple [0, 0]
     Workflow  in device by device mode: !!python/tuple [0, 0]
@@ -138,28 +136,26 @@
     'Regression Workflow 1: Netmiko with validation and retries': [115, 3]
     'Regression Workflow 2: Separate Failure - Success paths': [737, 276]
     'Regression Workflow 3: Napalm getters (postprocessing)': [703, 150]
-    'Regression Workflow 4: VRF creation and deletion with Netmiko': !!python/tuple [
-      0, 0]
+    'Regression Workflow 4: VRF creation and deletion with Netmiko': [-383, 167]
     'Regression Workflow 5: VRF creation and deletion with Napalm': !!python/tuple [
       0, 0]
-    'Regression Workflow 6: Ansible with Validation': !!python/tuple [0, 0]
+    'Regression Workflow 6: Ansible with Validation': [567, -24]
     'Regression Workflow 7: Payload Extraction & Validation': !!python/tuple [0, 0]
     'Regression Workflow 8: Payload Extraction with Operations': !!python/tuple [
       0, 0]
-    'Regression Workflow 9: Operational Data Backup': !!python/tuple [0, 0]
-    'Regression Workflow A: get_var, set_var, get_result': !!python/tuple [0, 0]
+    'Regression Workflow 9: Operational Data Backup': [290, 314]
+    'Regression Workflow A: get_var, set_var, get_result': [-528, 25]
     'Regression Workflow B: Napalm getters validation': !!python/tuple [0, 0]
-    'Regression Workflow C: Advanced multiprocessing': !!python/tuple [0, 0]
-    'Regression Workflow D: Prompts': !!python/tuple [0, 0]
-    'Regression Workflow E: Iteration Targets': !!python/tuple [0, 0]
+    'Regression Workflow C: Advanced multiprocessing': [505, -10]
+    'Regression Workflow D: Prompts': [608, 90]
+    'Regression Workflow E: Iteration Targets': [-334, 29]
     'Regression Workflow F S1: Subworkflow of Workflow': !!python/tuple [0, 0]
     'Regression Workflow F S2: Access Variables from Parent Workflow': !!python/tuple [
       0, 0]
-    'Regression Workflow F: Workflow of Workflows': !!python/tuple [0, 0]
-    'Regression Workflow G: run methods (BFS)': !!python/tuple [0, 0]
-    'Regression Workflow H: shared service in multiple subworkflows': !!python/tuple [
-      0, 0]
-    'Regression Workflow I: Iteration Targets Advanced': !!python/tuple [0, 0]
+    'Regression Workflow F: Workflow of Workflows': [-934, 289]
+    'Regression Workflow G: run methods (BFS)': [638, 130]
+    'Regression Workflow H: shared service in multiple subworkflows': [688, -88]
+    'Regression Workflow I: Iteration Targets Advanced': [350, -6]
     Subworkflow 1: !!python/tuple [0, 0]
     Subworkflow 2: !!python/tuple [0, 0]
     T: !!python/tuple [500, 0]
@@ -522,7 +518,7 @@
   operating_system: eos
   pools: []
   positions:
-    'Regression Workflow 4: VRF creation and deletion with Netmiko': [-4, -120]
+    'Regression Workflow 4: VRF creation and deletion with Netmiko': [-38, -86]
   result_postprocessing: ''
   run_method: per_device
   scoped_name: netmiko_create_vrf_test
@@ -720,7 +716,7 @@
   pools: []
   positions:
     'Regression Workflow 2: Separate Failure - Success paths': [-194, 225]
-    'Regression Workflow 4: VRF creation and deletion with Netmiko': [-35, 151]
+    'Regression Workflow 4: VRF creation and deletion with Netmiko': [-10, 157]
     'Regression Workflow 5: VRF creation and deletion with Napalm': ['0', '150']
     iteration_devices_workflow: ['337', '-145']
   result_postprocessing: ''
@@ -3357,7 +3353,7 @@
       content: "This workflow calls netmiko and napalm backup services.\r\nThe devices\
         \ must be defined in the service, not in the workflow."
       positions: [-280, 128]
-  last_modified: '2019-12-17 09:30:36.173471'
+  last_modified: '2020-02-23 09:53:09.761384'
   mail_recipient: ''
   max_processes: 5
   maximum_runs: 1
@@ -3425,7 +3421,7 @@
         \ the cache connection should be closed.\r\nExpected log:\r\n- Regression\
         \ Workflow 4: VRF creation and deletion with Netmiko - DEVICE Washington :\
         \ Closed netmiko connection"
-      positions: [-50, 6]
+      positions: [-61, 38]
     a7458a18-4812-498e-857d-b885237a6525:
       alignment: left
       content: "This service is configured with \"Start New Connection\".\r\nIt should\
@@ -3445,8 +3441,8 @@
       content: "Test:\r\n- with and without multiprocessing\r\n- devices defned as\
         \ a combination of devices and pools.\r\nThe workflow is running on \"Austin\"\
         \ as a device and \"Washington\", as a pool."
-      positions: [51, -208]
-  last_modified: '2020-01-03 07:32:57.286420'
+      positions: [39, -176]
+  last_modified: '2020-02-23 09:52:58.936918'
   mail_recipient: ''
   max_processes: 5
   maximum_runs: 1
@@ -3739,7 +3735,7 @@
       content: "Adds per-device loopbacks and derived devices,\r\nto be used for workflow\
         \ iteration and to check that\r\nvariables can be accessed from within a subworkflow."
       positions: [-822, 25]
-  last_modified: '2019-11-06 07:31:05.526000'
+  last_modified: '2020-02-23 09:54:05.864866'
   mail_recipient: antoine.fourmy@gmail.com
   max_processes: 5
   maximum_runs: 1
@@ -3855,7 +3851,7 @@
         For Test Netmiko Prompt Service, it is set to 2: it should run\r\nonce more\
         \ after the REST service.\r\n"
       positions: [145, -168]
-  last_modified: '2019-10-24 22:42:28.694641'
+  last_modified: '2020-02-23 09:53:37.837312'
   mail_recipient: ''
   max_processes: 5
   maximum_runs: 1
@@ -3918,7 +3914,7 @@
         \nThis workflow uses \"set_var\" to modify the payload, and get_var to\r\n\
         retrieve a variable.\r\nIt also uses \"get_result\" to retrieve the result\
         \ of a previously run job."
-      positions: ['-92', '-34']
+      positions: [-92, -34]
     d98b7c19-9d7b-4ddf-bada-2c47e492dbef:
       alignment: left
       content: "Set a variable called \"iteration_device\" that we will use in the\
@@ -3926,7 +3922,7 @@
         , \"Cincinnati\"] if device.name == \"Chicago\" else [\"Cleveland\", \"Washington\"\
         ]\r\nset_var(\"iteration_device\", devices, section=\"pools\", device=device.name)"
       positions: [103, -224]
-  last_modified: '2019-12-04 08:26:26.548250'
+  last_modified: '2020-02-23 09:53:20.871760'
   mail_recipient: ''
   max_processes: 5
   maximum_runs: 1
@@ -4102,7 +4098,7 @@
         \ conversion)\r\n- uses the \"Text with regular expression\" and \"dictionary\
         \ inclusion\" mechanisms to validate the result."
       positions: [-438, -117]
-  last_modified: '2020-02-19 05:16:59.299435'
+  last_modified: '2020-02-23 09:53:04.306014'
   mail_recipient: ''
   max_processes: 5
   maximum_runs: 1
@@ -4163,11 +4159,11 @@
         \ processes).\r\nWashington is expected to pass the \"show version\" service,\
         \ but will\r\nstill reach the end through the upward path, so all 17 devices\
         \ must\r\nreach the \"End\" service."
-      positions: ['-98', '-39']
+      positions: [-98, -39]
     d36009d8-ce3a-4ce6-8766-5dc3241d777b:
       content: The service "Napalm configure BGP" is configured to be skipped.
       positions: [329, -230]
-  last_modified: '2019-11-18 05:08:47.889395'
+  last_modified: '2020-02-23 09:53:31.596720'
   mail_recipient: ''
   max_processes: 10
   maximum_runs: 1
@@ -4253,7 +4249,7 @@
         \nwith the iteration set to [\"Washington\", \"Atlanta\"].\r\nCredentials\
         \ must be updated after a database drop."
       positions: [-99, 196]
-  last_modified: '2019-11-04 15:44:41.065109'
+  last_modified: '2020-02-23 09:53:53.573228'
   mail_recipient: ''
   max_processes: 5
   maximum_runs: 1
@@ -4734,7 +4730,7 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels: {}
-  last_modified: '2019-12-05 04:53:43.995497'
+  last_modified: '2020-02-23 09:55:00.069139'
   mail_recipient: ''
   max_processes: 50
   maximum_runs: 1
@@ -4905,7 +4901,7 @@
   operating_system: ''
   pools: []
   positions:
-    'Regression Workflow G: run methods (BFS)': [126, -207]
+    'Regression Workflow G: run methods (BFS)': [123, -96]
   result_postprocessing: ''
   run_method: per_service_with_workflow_targets
   scoped_name: Workflow in service by service mode (workflow targets)
@@ -5269,7 +5265,7 @@
         \ still reach end through the failure edge,\r\nso the top-level workflow should\
         \ be a success."
       positions: [580, 192]
-  last_modified: '2019-12-17 03:15:25.040630'
+  last_modified: '2020-02-23 09:54:32.781588'
   mail_recipient: ''
   max_processes: 50
   maximum_runs: 1
@@ -5538,7 +5534,7 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels: {}
-  last_modified: '2020-02-22 09:59:37.325165'
+  last_modified: '2020-02-23 09:54:38.030762'
   mail_recipient: ''
   max_processes: 15
   maximum_runs: 1

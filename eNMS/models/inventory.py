@@ -43,12 +43,17 @@ class Object(AbstractBase):
                 continue
             match = pool.object_match(self)
             relation, number = f"{self.class_type}s", f"{self.class_type}_number"
-            if match and self not in pool.devices:
+            if match and self not in getattr(pool, relation):
                 getattr(pool, relation).append(self)
                 setattr(pool, number, getattr(pool, number) + 1)
-            if self in pool.devices and not match:
+            if self in getattr(pool, relation) and not match:
                 getattr(pool, relation).remove(self)
                 setattr(pool, number, getattr(pool, number) - 1)
+
+    def delete(self):
+        number = f"{self.class_type}_number"
+        for pool in self.pools:
+            setattr(pool, number, getattr(pool, number) - 1)
 
 
 CustomDevice = type(

@@ -165,7 +165,7 @@ class RunService(Resource):
                 return {"errors": errors}
         except Exception as exc:
             info(f"REST API run_service endpoint failed ({str(exc)})")
-            return str(e)
+            return str(exc)
         if devices or pools:
             data.update({"devices": devices, "pools": pools})
         data["runtime"] = runtime = app.get_time()

@@ -209,7 +209,7 @@ class CustomSearch(Resource):
             'order': [{'column': 0, 'dir': 'asc'}],  # needed by table_filtering
             'start': 0,  # needed by table_filtering
             'length': rest_body['maximum_return_records'],  # number of records to return
-            'form': rest_body['search_critera'],
+            'form': rest_body['search_criteria'],
             'no_html': True,
         }
         collected_data = app.table_filtering("device", **kwargs)['data']

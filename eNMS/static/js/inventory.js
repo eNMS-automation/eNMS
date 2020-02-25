@@ -235,7 +235,6 @@ export const showDeviceData = function(device) {
             editor.setSize("100%", "100%");
             $(`#data_type-${device.id}`)
               .on("change", function() {
-                console.log("test")
                 editor.setValue(result[this.value]);
                 editor.refresh();
               })

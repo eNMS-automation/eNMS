@@ -60,7 +60,7 @@ export function initTable(type, instance, runtime, id) {
                 style="font-family:Arial, FontAwesome;
                 height: 30px; margin-top: 5px"
               >
-              <span class="input-group-btn" style="width: 10px;">
+              <span class="input-group-btn" style="width: 10px">
                 <button
                   id="${elementId}-search"
                   class="btn btn-default pull-right"

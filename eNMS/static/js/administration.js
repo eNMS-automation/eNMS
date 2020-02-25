@@ -315,6 +315,9 @@ function displayFiles() {
           },
         },
       });
+      $("#files-tree").on('ready.jstree', function () {
+        $(this).off("click.jstree", ".jstree-anchor");
+      })
     },
   });
 }

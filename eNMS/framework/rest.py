@@ -198,7 +198,45 @@ class Topology(Resource):
             app.export_topology(**request.get_json(force=True))
             return "Topology Export successfully executed."
 
+class CustomSearch(Resource):
+    decorators = [auth.login_required]
 
+    def get(self):
+        rest_body = request.get_json(force=True)
+        kwargs = {
+            'draw': 1,
+            'columns': [{'data': 'name'}],  # needed by table_filtering
+            'order': [{'column': 0, 'dir': 'asc'}],  # needed by table_filtering
+            'start': 0,  # needed by table_filtering
+            'length': rest_body['maximum_return_records'],  # number of records to return
+            'form': rest_body['search_critera'],
+            'no_html': True,
+        }
+        collected_data = app.table_filtering("device", **kwargs)['data']
+
+        if 'matches' in rest_body['columns']:  # changes key from configurtion to matches to full configuraion can also be passed if desired
+            for obj in collected_data:
+                obj['matches'] = obj['configuration']
+                obj.pop('configuration')
+
+        if 'configuration' in rest_body['columns']:   # reaquire full configuration if desired
+            for obj in collected_data:
+                obj['configuration'] = fetch("device", name=obj['name']).configuration
+
+        if 'operational_data' in rest_body['columns']:
+            for obj in collected_data:
+                obj['operational_data'] = fetch("device", name=obj['name']).operational_data
+
+        desired_data = []  # create list of dictionaries with only requested data
+        for obj in collected_data:
+            desired_dict = {}
+            for obj2 in rest_body["columns"]:
+                desired_dict[obj2] = obj[obj2]
+            desired_data.append(desired_dict)
+
+        return desired_data
+    
+    
 class Sink(Resource):
     def get(self, **_):
         abort(404, message=f"The requested {request.method} endpoint does not exist.")
@@ -217,6 +255,7 @@ def configure_rest_api(flask_app):
     api.add_resource(UpdateInstance, "/rest/instance/<string:cls>")
     api.add_resource(GetInstance, "/rest/instance/<string:cls>/<string:name>")
     api.add_resource(GetConfiguration, "/rest/configuration/<string:name>")
+    api.add_resource(CustomSearch, "/rest/custom_search")
     api.add_resource(GetResult, "/rest/result/<string:name>/<string:runtime>")
     api.add_resource(Migrate, "/rest/migrate/<string:direction>")
     api.add_resource(Topology, "/rest/topology/<string:direction>")

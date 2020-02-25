@@ -453,6 +453,16 @@ class BaseController:
         server.sendmail(sender, recipients.split(","), message.as_string())
         server.close()
 
+    def contains_set(self, input):
+        if isinstance(input, set):
+            return True
+        elif isinstance(input, list):
+            return any(self.contains_set(x) for x in input)
+        elif isinstance(input, dict):
+            return any(self.contains_set(x) for x in input.values())
+        else:
+            return False
+
     def str_dict(self, input, depth=0):
         tab = "\t" * depth
         if isinstance(input, list):

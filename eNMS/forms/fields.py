@@ -13,6 +13,8 @@ from wtforms import (
 )
 from wtforms.validators import ValidationError
 
+from eNMS import app
+
 
 class DateField(StringField):
     pass
@@ -56,6 +58,8 @@ class DictField(StringField):
             raise ValidationError("Invalid dictionary syntax.")
         if not isinstance(result, dict):
             raise ValidationError("This field only accepts dictionaries.")
+        if app.contains_set(result):
+            raise ValidationError("Sets are not allowed.")
         return True
 
 

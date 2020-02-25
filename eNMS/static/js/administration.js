@@ -277,35 +277,38 @@ function displayFiles() {
                   ${node.data.modified}
                 </div>
                 <div style="position: absolute; top: 0px; right: 50px">
-                  <button type="button"
+                  <button
+                    type="button"
                     class="btn btn-xs btn-primary"
                     onclick='eNMS.administration.editFile(${data})'
                   >
                     <span class="glyphicon glyphicon-edit"></span>
                   </button>
-                  <button type="button"
-                  class="btn btn-xs btn-info"
-                  onclick="location.href='/download_file/${node.data.path}'"
+                  <button
+                    type="button"
+                    class="btn btn-xs btn-info"
+                    onclick="location.href='/download_file/${node.data.path}'"
                   >
-                  <span class="glyphicon glyphicon-download"></span>
+                    <span class="glyphicon glyphicon-download"></span>
                   </button>
-                  <button type="button"
+                  <button
+                    type="button"
                     class="btn btn-xs btn-danger"
                     onclick='eNMS.administration.deleteFile(${data})'
                   >
                     <span class="glyphicon glyphicon-trash"></span>
                   </button>
                 </div>
-                `);
+              `);
             } else {
               $(el).find("a").append(`
                 <div style="position: absolute; top: 0px; right: 50px">
-                <button type="button"
-                class="btn btn-xs btn-primary"
-                onclick="eNMS.administration.showFileUploadPanel('${node.data.path}')"
-              >
-                <span class="glyphicon glyphicon-plus"></span>
-              </button>
+                  <button type="button"
+                    class="btn btn-xs btn-primary"
+                    onclick="eNMS.administration.showFileUploadPanel('${node.data.path}')"
+                  >
+                    <span class="glyphicon glyphicon-plus"></span>
+                  </button>
                 </div>
                 `);
             }

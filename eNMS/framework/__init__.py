@@ -24,7 +24,7 @@ def register_extensions(flask_app):
 def configure_login_manager():
     @login_manager.user_loader
     def user_loader(id):
-        return fetch("user", allow_none=True, id=id)
+        return fetch("user", allow_none=True, id=int(id))
 
     @login_manager.request_loader
     def request_loader(request):

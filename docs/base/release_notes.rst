@@ -32,6 +32,8 @@ name of the iteration step in the results.
 - Fix bug position of shared services resetted after renaming workflow
 - Fix refresh issue in configuration / operational data panel
 - Fix upload of files from file management panel
+- Forbid sets in the initial payload
+- Fix user authentication when running a service
 
 MIGRATION:
 All iteration variable became GLOBAL VARIABLE, which means that you need to use

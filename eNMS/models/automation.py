@@ -714,16 +714,16 @@ class Run(AbstractBase):
         return results
 
     def get_credentials(self, device):
-        return (
-            app.get_user_credentials()
-            if self.credentials == "user"
-            else (device.username, device.password)
-            if self.credentials == "device"
-            else (
+        if self.credentials == "device":
+            return device.username, device.password
+        elif self.credentials == "user":
+            user = fetch("user", name=self.creator)
+            return user.name, user.password
+        else:
+            return (
                 self.sub(self.service.custom_username, locals()),
                 self.sub(self.service.custom_password, locals()),
             )
-        )
 
     def convert_result(self, result):
         if self.conversion_method == "none" or "result" not in result:

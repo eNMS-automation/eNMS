@@ -49,7 +49,7 @@ class InventoryController(BaseController):
             login, pwd = (
                 (device.username, device.password)
                 if kwargs["credentials"] == "device"
-                else self.get_user_credentials()
+                else (current_user.name, current_user.password)
                 if kwargs["credentials"] == "user"
                 else (kwargs["username"], kwargs["password"])
             )
@@ -79,7 +79,7 @@ class InventoryController(BaseController):
         credentials = (
             (device.username, device.password)
             if kwargs["credentials"] == "device"
-            else self.get_user_credentials()
+            else (current_user.name, current_user.password)
             if kwargs["credentials"] == "user"
             else (kwargs["username"], kwargs["password"])
         )

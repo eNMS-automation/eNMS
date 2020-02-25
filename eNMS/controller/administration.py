@@ -69,9 +69,6 @@ class AdministrationController(BaseController):
         Session.commit()
         return user
 
-    def get_user_credentials(self):
-        return (current_user.name, current_user.password)
-
     def database_deletion(self, **kwargs):
         delete_all(*kwargs["deletion_types"])
 

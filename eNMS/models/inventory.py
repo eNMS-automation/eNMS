@@ -145,21 +145,45 @@ class Device(CustomDevice):
                             continue
                         visited.add(index + i)
                         if regex_match:
-                            line = sub(data, r"<mark>\g<0></mark>", content[index + i])
+                            if not kwargs.get("no_html"):
+                                line = sub(data, r"<mark>\g<0></mark>", content[index + i])
+                            else:
+                                line = sub(data, r"\g<0>", content[index + i])
                         else:
-                            line = (
-                                content[index + i]
-                                .strip()
-                                .replace(data, f"<mark>{data}</mark>")
-                            )
-                        match_lines.append(f"<b>L{index + i + 1}:</b> {line}")
+                            if not kwargs.get("no_html"):
+                                line = (
+                                    content[index + i]
+                                    .strip()
+                                    .replace(data, f"<mark>{data}</mark>")
+                                )
+                            else:
+                                line = (
+                                    content[index + i]
+                                    .strip()
+                                )
+                        if not kwargs.get("no_html"):
+                            match_lines.append(f"<b>L{index + i + 1}:</b> {line}")
+                        else:
+                            match_lines.append(f"Line{index + i + 1}: {line},")
                     if merge:
-                        result[-1] += f"<br>{'<br>'.join(match_lines)}"
+                        if not kwargs.get("no_html"):
+                            result[-1] += f"<br>{'<br>'.join(match_lines)}"
+                        else:
+                            result[-1] += f"{''.join(match_lines)}"
                     else:
-                        result.append("<br>".join(match_lines))
-                properties[property] = "".join(
-                    f"<pre style='text-align: left'>{match}</pre>" for match in result
-                )
+                        if not kwargs.get("no_html"):
+                            result.append("<br>".join(match_lines))
+                        else:
+                            result.append("".join(match_lines))
+                if not kwargs.get("no_html"):
+                    properties[property] = "".join(
+                        f"<pre style='text-align: left'>{match}</pre>" for match in result
+                        )
+                else:
+                    properties[property] = list(
+                        "".join(
+                        f"{match}" for match in result
+                        ).split(","))[:-1]
         return properties
 
     @property

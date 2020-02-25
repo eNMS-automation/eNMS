@@ -417,9 +417,9 @@
             "orderable": false
          },
          { 
-            "data":"status",
+            "data":"success",
             "title":"Status",
-            "search":"text",
+            "search":"bool",
             "width":"80px",
             "orderable": false
          },
@@ -456,7 +456,7 @@
             "orderable": false
          },
          { 
-            "data":"status",
+            "data":"success",
             "title":"Status",
             "search":"text",
             "width":"80px",

@@ -695,17 +695,20 @@ models.run = class Run extends Base {
 
 models.result = class Result extends Base {
   constructor({ properties, tableId }) {
+    const status = properties.success;
+    delete properties.success;
     delete properties.result;
     super({
       properties: properties,
       tableId: tableId,
       derivedProperties: ["service_name", "device_name"],
     });
+    this.status = status;
   }
 
-  get status() {
-    const btn = this.success ? "success" : "danger";
-    const label = this.success ? "Success" : "Failure";
+  get success() {
+    const btn = this.status ? "success" : "danger";
+    const label = this.status ? "Success" : "Failure";
     return `
       <button
         type="button"
@@ -732,6 +735,7 @@ models.result = class Result extends Base {
       >
         <span class="glyphicon glyphicon-adjust"></span>
       </button>`,
+      super.refreshTableButton("result"),
     ];
   }
 

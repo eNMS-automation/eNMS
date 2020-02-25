@@ -30,6 +30,8 @@ name of the iteration step in the results.
 - Iteration variable are now referred to as global variable,
 - Catch all exceptions in rest api to return proper error 500 (device not found for get configuration, etc)
 - Fix bug position of shared services resetted after renaming workflow
+- Fix refresh issue in configuration / operational data panel
+- Fix upload of files from file management panel
 
 MIGRATION:
 All iteration variable became GLOBAL VARIABLE, which means that you need to use

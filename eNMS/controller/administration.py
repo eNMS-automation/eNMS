@@ -1,6 +1,5 @@
 from passlib.hash import argon2
 from copy import deepcopy
-from flask_login import current_user
 from ipaddress import IPv4Network
 from json import loads
 from logging import info

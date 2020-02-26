@@ -305,7 +305,9 @@ function displayFiles() {
                 <div style="position: absolute; top: 0px; right: 50px">
                   <button type="button"
                     class="btn btn-xs btn-primary"
-                    onclick="eNMS.administration.showFileUploadPanel('${node.data.path}')"
+                    onclick="eNMS.administration.showFileUploadPanel(
+                      '${node.data.path}'
+                    )"
                   >
                     <span class="glyphicon glyphicon-plus"></span>
                   </button>
@@ -315,9 +317,9 @@ function displayFiles() {
           },
         },
       });
-      $("#files-tree").on('ready.jstree', function () {
+      $("#files-tree").on("ready.jstree", function() {
         $(this).off("click.jstree", ".jstree-anchor");
-      })
+      });
     },
   });
 }

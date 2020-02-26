@@ -53,6 +53,7 @@
     'Regression Workflow G: run methods (BFS)': [-404, 147]
     'Regression Workflow H: shared service in multiple subworkflows': [55, 266]
     'Regression Workflow I: Iteration Targets Advanced': [-131, -24]
+    'Regression Workflow J: Workflow and Subworkflow Iteration': [0, 0]
     Subworkflow 1: !!python/tuple [0, 0]
     Subworkflow 2: !!python/tuple [0, 0]
     Workflow  in device by device mode: !!python/tuple [0, 0]
@@ -76,6 +77,8 @@
     '[Regression Workflow H: shared service in multiple subworkflows] Subworkflow 1': [
       -118, 0]
     '[Regression Workflow H: shared service in multiple subworkflows] Subworkflow 2': [
+      0, 0]
+    '[Regression Workflow J: Workflow and Subworkflow Iteration] Subworkflow Iteration': [
       0, 0]
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow 7: Payload Extraction & Validation'
@@ -156,6 +159,7 @@
     'Regression Workflow G: run methods (BFS)': [638, 130]
     'Regression Workflow H: shared service in multiple subworkflows': [688, -88]
     'Regression Workflow I: Iteration Targets Advanced': [350, -6]
+    'Regression Workflow J: Workflow and Subworkflow Iteration': [500, 0]
     Subworkflow 1: !!python/tuple [0, 0]
     Subworkflow 2: !!python/tuple [0, 0]
     T: !!python/tuple [500, 0]
@@ -182,6 +186,8 @@
     '[Regression Workflow H: shared service in multiple subworkflows] Subworkflow 1': [
       610, 4]
     '[Regression Workflow H: shared service in multiple subworkflows] Subworkflow 2': [
+      500, 0]
+    '[Regression Workflow J: Workflow and Subworkflow Iteration] Subworkflow Iteration': [
       500, 0]
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow 7: Payload Extraction & Validation'
@@ -1156,7 +1162,7 @@
   max_processes: 5
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression Workflow F: Workflow of Workflows] Modify Payload for Iteration'
+  name: '[Regression Workflow E: Iteration Targets] Modify Payload for Iteration'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -3752,11 +3758,11 @@
   send_notification_method: mail
   services: ['[Shared] Start', '[Shared] End', '[Regression Workflow F: Workflow of
       Workflows] Regression Workflow 5: VRF creation and deletion with Napalm', '[Regression
-      Workflow F: Workflow of Workflows] Modify Payload for Iteration', '[Regression
-      Workflow F: Workflow of Workflows] Regression Workflow F S2: Access Variables
-      from Parent Workflow', '[Regression Workflow F: Workflow of Workflows] Regression
-      Workflow F S1: Subworkflow of Workflow', '[Regression Workflow F: Workflow of
-      Workflows] Show interfaces with Netmiko', '[Shared] NAPALM: Get interfaces']
+      Workflow E: Iteration Targets] Modify Payload for Iteration', '[Regression Workflow
+      F: Workflow of Workflows] Regression Workflow F S2: Access Variables from Parent
+      Workflow', '[Regression Workflow F: Workflow of Workflows] Regression Workflow
+      F S1: Subworkflow of Workflow', '[Regression Workflow F: Workflow of Workflows]
+      Show interfaces with Netmiko', '[Shared] NAPALM: Get interfaces']
   shared: false
   skip: false
   skip_query: ''
@@ -4264,12 +4270,12 @@
   scoped_name: 'Regression Workflow E: Iteration Targets'
   send_notification: false
   send_notification_method: mail
-  services: ['[Shared] Start', '[Shared] End', '[Regression Workflow F: Workflow of
-      Workflows] Modify Payload for Iteration', '[Regression Workflow E: Iteration
-      Targets] Iteration Target Workflow - Test 2', '[Regression Workflow E: Iteration
-      Targets] Iteration Targets Workflow - Test 1', '[Regression Workflow E: Iteration
-      Targets] Iteration Target Workflow - Test 3', '[Regression Workflow E: Iteration
-      Targets] Iteration Targets Workflow - Test 4']
+  services: ['[Shared] Start', '[Shared] End', '[Regression Workflow E: Iteration
+      Targets] Modify Payload for Iteration', '[Regression Workflow E: Iteration Targets]
+      Iteration Target Workflow - Test 2', '[Regression Workflow E: Iteration Targets]
+      Iteration Targets Workflow - Test 1', '[Regression Workflow E: Iteration Targets]
+      Iteration Target Workflow - Test 3', '[Regression Workflow E: Iteration Targets]
+      Iteration Targets Workflow - Test 4']
   shared: false
   skip: false
   skip_query: ''
@@ -5671,6 +5677,204 @@
   type: netmiko_validation_service
   use_device_driver: true
   use_genie: false
+  validation_method: none
+  vendor: ''
+  waiting_time: 0
+- close_connection: false
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  devices: [Washington]
+  dict_match: {}
+  display_only_failed_nodes: false
+  events: []
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: '["A", "B", "C"]'
+  iteration_variable_name: top_level_iteration
+  labels: {}
+  last_modified: '2020-02-26 07:04:35.332250'
+  mail_recipient: ''
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: 'Regression Workflow J: Workflow and Subworkflow Iteration'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions: {}
+  result_postprocessing: ''
+  run_method: per_device
+  scoped_name: 'Regression Workflow J: Workflow and Subworkflow Iteration'
+  send_notification: false
+  send_notification_method: mail
+  services: ['[Shared] Start', '[Shared] End', '[Regression Workflow J: Workflow and
+      Subworkflow Iteration] Test Iteration', '[Regression Workflow J: Workflow and
+      Subworkflow Iteration] Subworkflow Iteration']
+  shared: false
+  skip: false
+  skip_query: ''
+  skip_value: 'True'
+  time_between_retries: 10
+  type: workflow
+  validation_method: none
+  vendor: ''
+  waiting_time: 0
+- content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  devices: []
+  dict_match: {}
+  display_only_failed_nodes: false
+  events: []
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2020-02-26 07:05:41.355569'
+  mail_recipient: ''
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Regression Workflow J: Workflow and Subworkflow Iteration] Test Iteration'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions:
+    'Regression Workflow J: Workflow and Subworkflow Iteration': [226, -76]
+  result_postprocessing: ''
+  run_method: per_device
+  scoped_name: Test Iteration
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: false
+  skip_query: ''
+  skip_value: 'True'
+  source_code: "result={\"top_level\": top_level_iteration}\r\nresults[\"result\"\
+    ] = result\r\nresults[\"success\"] = True"
+  time_between_retries: 10
+  type: python_snippet_service
+  validation_method: none
+  vendor: ''
+  waiting_time: 0
+- close_connection: false
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  devices: []
+  dict_match: {}
+  display_only_failed_nodes: false
+  events: []
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: '[1, 2, 3]'
+  iteration_variable_name: subworkflow_iteration
+  labels: {}
+  last_modified: '2020-02-26 07:05:57.893725'
+  mail_recipient: ''
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Regression Workflow J: Workflow and Subworkflow Iteration] Subworkflow Iteration'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions:
+    'Regression Workflow J: Workflow and Subworkflow Iteration': [218, 171]
+  result_postprocessing: ''
+  run_method: per_device
+  scoped_name: Subworkflow Iteration
+  send_notification: false
+  send_notification_method: mail
+  services: ['[Shared] Start', '[Shared] End', '[[Regression Workflow J: Workflow
+      and Subworkflow Iteration] Subworkflow Iteration] Test Iteration']
+  shared: false
+  skip: false
+  skip_query: ''
+  skip_value: 'True'
+  time_between_retries: 10
+  type: workflow
+  validation_method: none
+  vendor: ''
+  waiting_time: 0
+- content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  devices: []
+  dict_match: {}
+  display_only_failed_nodes: false
+  events: []
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2020-02-26 07:05:54.058757'
+  mail_recipient: ''
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[[Regression Workflow J: Workflow and Subworkflow Iteration] Subworkflow
+    Iteration] Test Iteration'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions:
+    '[Regression Workflow J: Workflow and Subworkflow Iteration] Subworkflow Iteration': [
+      231, -87]
+  result_postprocessing: ''
+  run_method: per_device
+  scoped_name: Test Iteration
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: false
+  skip_query: ''
+  skip_value: 'True'
+  source_code: "result={\"top_level\": top_level_iteration, \"subworkflow\": subworkflow_iteration}\r\
+    \nresults[\"success\"] = True\r\nresults[\"result\"] = result\r\n"
+  time_between_retries: 10
+  type: python_snippet_service
   validation_method: none
   vendor: ''
   waiting_time: 0

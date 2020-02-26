@@ -198,28 +198,28 @@ class Topology(Resource):
             app.export_topology(**request.get_json(force=True))
             return "Topology Export successfully executed."
 
-class CustomSearch(Resource):
+class Search(Resource):
     decorators = [auth.login_required]
 
-    def get(self):
+    def post(self):
         rest_body = request.get_json(force=True)
         kwargs = {
             'draw': 1,
-            'columns': [{'data': 'name'}],  # needed by table_filtering
-            'order': [{'column': 0, 'dir': 'asc'}],  # needed by table_filtering
-            'start': 0,  # needed by table_filtering
-            'length': rest_body['maximum_return_records'],  # number of records to return
+            'columns': [{'data': 'name'}],
+            'order': [{'column': 0, 'dir': 'asc'}],
+            'start': 0,
+            'length': rest_body['maximum_return_records'],
             'form': rest_body['search_criteria'],
             'no_html': True,
         }
-        collected_data = app.table_filtering("device", **kwargs)['data']
+        collected_data = app.filtering("device", **kwargs)['data']
 
-        if 'matches' in rest_body['columns']:  # changes key from configurtion to matches to full configuraion can also be passed if desired
+        if 'matches' in rest_body['columns']:
             for obj in collected_data:
                 obj['matches'] = obj['configuration']
                 obj.pop('configuration')
 
-        if 'configuration' in rest_body['columns']:   # reaquire full configuration if desired
+        if 'configuration' in rest_body['columns']:
             for obj in collected_data:
                 obj['configuration'] = fetch("device", name=obj['name']).configuration
 
@@ -255,7 +255,7 @@ def configure_rest_api(flask_app):
     api.add_resource(UpdateInstance, "/rest/instance/<string:cls>")
     api.add_resource(GetInstance, "/rest/instance/<string:cls>/<string:name>")
     api.add_resource(GetConfiguration, "/rest/configuration/<string:name>")
-    api.add_resource(CustomSearch, "/rest/custom_search")
+    api.add_resource(Search, "/rest/search")
     api.add_resource(GetResult, "/rest/result/<string:name>/<string:runtime>")
     api.add_resource(Migrate, "/rest/migrate/<string:direction>")
     api.add_resource(Topology, "/rest/topology/<string:direction>")

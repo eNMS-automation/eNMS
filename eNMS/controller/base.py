@@ -55,7 +55,7 @@ class BaseController:
     json_endpoints = [
         "multiselect_filtering",
         "save_settings",
-        "table_filtering",
+        "filtering",
         "view_filtering",
     ]
 
@@ -319,8 +319,7 @@ class BaseController:
 
     def build_filtering_constraints(self, obj_type, **kwargs):
         model, constraints = models[obj_type], []
-        properties = [p["data"] for p in self.properties["tables"][obj_type]]
-        for property in properties:
+        for property in model_properties[obj_type]:
             value = kwargs["form"].get(property)
             if not value:
                 continue
@@ -369,7 +368,7 @@ class BaseController:
             "total_count": results.count(),
         }
 
-    def table_filtering(self, table, **kwargs):
+    def filtering(self, table, **kwargs):
         model = models[table]
         ordering = getattr(
             getattr(

@@ -82,7 +82,7 @@ Request
 .. code-block:: python
   :caption: **POST** Request
 
-  /rest/custom_search
+  /rest/search
 
 Payload
 *******
@@ -100,7 +100,7 @@ Payload
   {
     "columns": ["name", "matches", "ip_address"],
     "maximum_return_records": 3,
-    "search_critera": {"configuration_filter": "regex", "configuration": "link-"}
+    "search_criteria": {"configuration_filter": "regex", "configuration": "link-"}
   }
 
 

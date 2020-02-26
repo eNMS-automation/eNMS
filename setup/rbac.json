@@ -202,7 +202,7 @@
       "/stop_workflow",
       "/switch_menu",
       "/scheduler_action",
-      "/table_filtering",
+      "/filtering",
       "/task_action",
       "/topology_import",
       "/update",

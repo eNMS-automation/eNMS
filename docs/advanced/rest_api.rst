@@ -87,17 +87,16 @@ Request
 Payload
 *******
 
-- ``columns`` - List of device attributes that will become keys in dictionary response
+- ``type`` - Type of object to search (device, link, ...)
+- ``columns`` - List of attributes that will become keys in dictionary response
 - ``maximum_return_records`` - Interger indicating the maximum number of records to return
 - ``search_criteria`` - Dictionary requiring two key/value pairs to define a single search parameter
-
-
-
 
 .. code-block:: python
   :caption: Example
 
   {
+    "type": device,
     "columns": ["name", "matches", "ip_address"],
     "maximum_return_records": 3,
     "search_criteria": {"configuration_filter": "regex", "configuration": "link-"}

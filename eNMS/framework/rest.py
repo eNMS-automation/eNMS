@@ -213,7 +213,7 @@ class Search(Resource):
             "form": rest_body["search_criteria"],
             "rest_api_request": True,
         }
-        return app.filtering("device", **kwargs)["data"]
+        return app.filtering(rest_body["type"], **kwargs)["data"]
 
 
 class Sink(Resource):

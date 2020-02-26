@@ -123,9 +123,18 @@ class Device(CustomDevice):
     )
 
     def table_properties(self, **kwargs):
+        print(kwargs)
         properties = super().get_properties()
         context = int(kwargs["form"].get("context-lines", 0))
+        columns = [c["data"] for c in kwargs["columns"]]
+        rest_api_request = kwargs.get("rest_api_request")
+        print(rest_api_request, columns)
         for property in ("configuration", "operational_data"):
+            if rest_api_request:
+                if property in columns:
+                    properties[property] = getattr(self, property)
+                if "matches" not in columns:
+                    continue
             data = kwargs["form"].get(property)
             regex_match = kwargs["form"].get(f"{property}_filter") == "regex"
             if not data:
@@ -145,45 +154,36 @@ class Device(CustomDevice):
                             continue
                         visited.add(index + i)
                         if regex_match:
-                            if not kwargs.get("no_html"):
-                                line = sub(data, r"<mark>\g<0></mark>", content[index + i])
-                            else:
+                            if rest_api_request:
                                 line = sub(data, r"\g<0>", content[index + i])
-                        else:
-                            if not kwargs.get("no_html"):
-                                line = (
-                                    content[index + i]
-                                    .strip()
-                                    .replace(data, f"<mark>{data}</mark>")
-                                )
                             else:
-                                line = (
-                                    content[index + i]
-                                    .strip()
-                                )
-                        if not kwargs.get("no_html"):
-                            match_lines.append(f"<b>L{index + i + 1}:</b> {line}")
+                                sub(data, r"<mark>\g<0></mark>", content[index + i])
                         else:
+                            line = content[index + i].strip()
+                            if not rest_api_request:
+                                line = line.replace(data, f"<mark>{data}</mark>")
+                        if rest_api_request:
                             match_lines.append(f"Line{index + i + 1}: {line},")
+                        else:
+                            match_lines.append(f"<b>L{index + i + 1}:</b> {line}")
                     if merge:
-                        if not kwargs.get("no_html"):
-                            result[-1] += f"<br>{'<br>'.join(match_lines)}"
-                        else:
+                        if rest_api_request:
                             result[-1] += f"{''.join(match_lines)}"
-                    else:
-                        if not kwargs.get("no_html"):
-                            result.append("<br>".join(match_lines))
                         else:
-                            result.append("".join(match_lines))
-                if not kwargs.get("no_html"):
-                    properties[property] = "".join(
-                        f"<pre style='text-align: left'>{match}</pre>" for match in result
-                        )
+                            result[-1] += f"<br>{'<br>'.join(match_lines)}"
+                    else:
+                        join_string = "" if rest_api_request else "<br>"
+                        result.append(join_string.join(match_lines))
+                if rest_api_request:
+                    properties["matches"] = list(
+                        "".join(f"{match}" for match in result).split(",")
+                    )[:-1]
                 else:
-                    properties[property] = list(
-                        "".join(
-                        f"{match}" for match in result
-                        ).split(","))[:-1]
+                    properties[property] = "".join(
+                        f"<pre style='text-align: left'>{match}</pre>"
+                        for match in result
+                    )
+
         return properties
 
     @property

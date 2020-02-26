@@ -151,14 +151,15 @@ class Device(CustomDevice):
                             merge = True
                             continue
                         visited.add(index + i)
-                        if regex_match:
-                            sub(data, r"<mark>\g<0></mark>", content[index + i])
-                        else:
-                            line = content[index + i].strip().replace(data, f"<mark>{data}</mark>")
-                        full_line = f"<b>L{index + i + 1}:</b> {line}"
+                        line = content[index + i].strip()
                         if rest_api_request:
-                            full_line =sub(r"</?mark>|</?b>", "", full_line)
-                        match_lines.append(full_line)
+                            match_lines.append(f"L{index + i + 1}: {line}")
+                            continue
+                        if regex_match:
+                            sub(data, r"<mark>\g<0></mark>", line)
+                        else:
+                            line = line.replace(data, f"<mark>{data}</mark>")
+                        match_lines.append(f"<b>L{index + i + 1}:</b> {line}")
                     if rest_api_request:
                         result.extend(match_lines)
                     else:

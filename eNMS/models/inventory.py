@@ -131,10 +131,9 @@ class Device(CustomDevice):
         print(rest_api_request, columns)
         for property in ("configuration", "operational_data"):
             if rest_api_request:
-                if property in columns:
-                    properties[property] = getattr(self, property)
-                if "matches" not in columns:
+                if property not in columns or "matches" not in columns:
                     continue
+                properties[property] = getattr(self, property)
             data = kwargs["form"].get(property)
             regex_match = kwargs["form"].get(f"{property}_filter") == "regex"
             if not data:
@@ -175,7 +174,7 @@ class Device(CustomDevice):
                         join_string = "" if rest_api_request else "<br>"
                         result.append(join_string.join(match_lines))
                 if rest_api_request:
-                    properties["matches"] = list(
+                    properties[f"{property}_matches"] = list(
                         "".join(f"{match}" for match in result).split(",")
                     )[:-1]
                 else:

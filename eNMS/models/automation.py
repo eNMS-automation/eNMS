@@ -863,14 +863,13 @@ class Run(AbstractBase):
             "parent_device": _self.parent_device or device,
             **locals,
         }
-        iteration_value = _self.get_var(
-            payload,
-            _self.iteration_variable_name,
-            getattr(device, "name", None),
-            allow_none=True,
+        if "variables" not in payload:
+            return variables
+        variables.update(
+            {k: v for k, v in payload["variables"].items() if k != "devices"}
         )
-        if iteration_value:
-            variables[_self.iteration_variable_name] = iteration_value
+        if "devices" in payload["variables"] and device:
+            variables.update(payload["variables"]["devices"].get(device.name, {}))
         return variables
 
     def eval(_self, query, function="eval", **locals):  # noqa: N805

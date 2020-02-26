@@ -34,6 +34,8 @@ name of the iteration step in the results.
 - Fix upload of files from file management panel
 - Forbid sets in the initial payload
 - Fix user authentication when running a service
+- Fix filtering tooltip in result table (no target found)
+- Fix filtering per result type (success / failure) in result table
 
 MIGRATION:
 All iteration variable became GLOBAL VARIABLE, which means that you need to use

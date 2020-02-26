@@ -43,7 +43,7 @@ class PythonSnippetService(Service):
         try:
             exec(code_object, globals)
         except SystemExit:
-            pass  # Clean exit from middle of snippet
+            pass
         except Exception as exc:
             lineno = traceback.extract_tb(exc.__traceback__)[-1][1]
             run.log("info", f"Execution error(line {lineno}): {str(exc)}")

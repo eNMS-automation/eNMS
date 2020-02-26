@@ -369,7 +369,6 @@ class BaseController:
         }
 
     def filtering(self, table, **kwargs):
-        print(kwargs["columns"])
         model = models[table]
         ordering = getattr(
             getattr(

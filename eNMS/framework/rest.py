@@ -206,7 +206,7 @@ class Search(Resource):
         rest_body = request.get_json(force=True)
         kwargs = {
             "draw": 1,
-            "columns": [{"data": column for column in rest_body["columns"]}],
+            "columns": [{"data": column} for column in rest_body["columns"]],
             "order": [{"column": 0, "dir": "asc"}],
             "start": 0,
             "length": rest_body["maximum_return_records"],

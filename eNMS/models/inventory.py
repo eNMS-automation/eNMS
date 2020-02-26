@@ -123,11 +123,11 @@ class Device(CustomDevice):
     )
 
     def table_properties(self, **kwargs):
-        print(kwargs)
-        properties = super().get_properties()
-        context = int(kwargs["form"].get("context-lines", 0))
         columns = [c["data"] for c in kwargs["columns"]]
+        properties = super().get_properties(include=columns)
+        context = int(kwargs["form"].get("context-lines", 0))
         rest_api_request = kwargs.get("rest_api_request")
+        print("matches" in columns)
         print(rest_api_request, columns)
         for property in ("configuration", "operational_data"):
             if rest_api_request:
@@ -183,7 +183,6 @@ class Device(CustomDevice):
                         f"<pre style='text-align: left'>{match}</pre>"
                         for match in result
                     )
-
         return properties
 
     @property

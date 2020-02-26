@@ -152,30 +152,22 @@ class Device(CustomDevice):
                             continue
                         visited.add(index + i)
                         if regex_match:
-                            if rest_api_request:
-                                line = sub(data, r"\g<0>", content[index + i])
-                            else:
-                                sub(data, r"<mark>\g<0></mark>", content[index + i])
+                            sub(data, r"<mark>\g<0></mark>", content[index + i])
                         else:
-                            line = content[index + i].strip()
-                            if not rest_api_request:
-                                line = line.replace(data, f"<mark>{data}</mark>")
+                            line = content[index + i].strip().replace(data, f"<mark>{data}</mark>")
+                        full_line = f"<b>L{index + i + 1}:</b> {line}"
                         if rest_api_request:
-                            match_lines.append(f"Line{index + i + 1}: {line},")
-                        else:
-                            match_lines.append(f"<b>L{index + i + 1}:</b> {line}")
-                    if merge:
-                        if rest_api_request:
-                            result[-1] += f"{''.join(match_lines)}"
-                        else:
-                            result[-1] += f"<br>{'<br>'.join(match_lines)}"
+                            full_line =sub(r"</?mark>|</?b>", "", full_line)
+                        match_lines.append(full_line)
+                    if rest_api_request:
+                        result.extend(match_lines)
                     else:
-                        join_string = "" if rest_api_request else "<br>"
-                        result.append(join_string.join(match_lines))
+                        if merge:
+                            result[-1] += f"<br>{'<br>'.join(match_lines)}"
+                        else:
+                            result.append("<br>".join(match_lines))
                 if rest_api_request:
-                    properties[f"{property}_matches"] = list(
-                        "".join(f"{match}" for match in result).split(",")
-                    )[:-1]
+                    properties[f"{property}_matches"] = result
                 else:
                     properties[property] = "".join(
                         f"<pre style='text-align: left'>{match}</pre>"

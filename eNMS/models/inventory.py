@@ -124,11 +124,10 @@ class Device(CustomDevice):
 
     def table_properties(self, **kwargs):
         columns = [c["data"] for c in kwargs["columns"]]
-        properties = super().get_properties(include=columns)
-        context = int(kwargs["form"].get("context-lines", 0))
         rest_api_request = kwargs.get("rest_api_request")
-        print("matches" in columns)
-        print(rest_api_request, columns)
+        include_properties = columns if rest_api_request else None
+        properties = super().get_properties(include=include_properties)
+        context = int(kwargs["form"].get("context-lines", 0))
         for property in ("configuration", "operational_data"):
             if rest_api_request:
                 if property not in columns or "matches" not in columns:

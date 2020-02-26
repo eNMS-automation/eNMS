@@ -1768,7 +1768,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2019-12-04 08:24:31.142435'
+  last_modified: '2020-02-26 06:48:21.758699'
   mail_recipient: ''
   max_processes: 50
   maximum_runs: 1
@@ -1792,8 +1792,7 @@
   skip_query: ''
   skip_value: 'True'
   source_code: "set_var(\"global_variable\", value=1050)\r\nset_var(\"variable\",\
-    \ \"variable_in_variables\", section=\"variables\")\r\nsave_result(success=True,\
-    \ result={})"
+    \ \"variable_in_variables\")\r\nsave_result(success=True, result={})"
   time_between_retries: 10
   type: python_snippet_service
   validation_method: none
@@ -1818,7 +1817,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2019-10-04 00:20:10.984436'
+  last_modified: '2020-02-26 06:51:04.539344'
   mail_recipient: ''
   max_processes: 50
   maximum_runs: 1
@@ -1843,10 +1842,9 @@
   skip_value: 'True'
   source_code: "set_var(\"variable1\", 999, device=device.name)\r\nset_var(\"variable2\"\
     , \"1000\", device=device.name, section=\"variables\")\r\nset_var(\"iteration_simple\"\
-    , \"192.168.105.5\", section=\"pools\")\r\ndevices = [\"Boston\", \"Cincinnati\"\
-    ] if device.name == \"Chicago\" else [\"Cleveland\", \"Washington\"]\r\nset_var(\"\
-    iteration_device\", devices, section=\"pools\", device=device.name)\r\nsave_result(success=True,\
-    \ result={})"
+    , \"192.168.56.50\")\r\ndevices = [\"Boston\", \"Cincinnati\"] if device.name\
+    \ == \"Chicago\" else [\"Cleveland\", \"Washington\"]\r\nset_var(\"iteration_device\"\
+    , devices, device=device.name)\r\nsave_result(success=True, result={})"
   time_between_retries: 10
   type: python_snippet_service
   validation_method: none
@@ -1854,7 +1852,7 @@
   waiting_time: 0
 - auto_find_prompt: true
   close_connection: false
-  command: show vrf {{get_var("iteration_simple", section="pools")}}
+  command: show vrf {{iteration_simple}}
   config_mode: false
   content_match: ''
   content_match_regex: false
@@ -1879,11 +1877,11 @@
   include_device_results: true
   include_link_in_summary: false
   initial_payload: {}
-  iteration_devices: get_var("iteration_device", section="pools", device=parent_device.name)
+  iteration_devices: get_var("iteration_device", device=parent_device.name)
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2019-10-21 21:10:14.657271'
+  last_modified: '2020-02-26 06:48:40.762497'
   mail_recipient: ''
   max_processes: 50
   maximum_runs: 1
@@ -1944,11 +1942,11 @@
   include_device_results: true
   include_link_in_summary: false
   initial_payload: {}
-  iteration_devices: get_var("iteration_simple", section="pools")
+  iteration_devices: '[get_var("iteration_simple")]'
   iteration_devices_property: ip_address
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2019-07-31 13:25:41.095217'
+  last_modified: '2020-02-26 06:50:26.306070'
   mail_recipient: ''
   max_processes: 50
   maximum_runs: 1
@@ -1984,7 +1982,7 @@
   waiting_time: 0
 - auto_find_prompt: true
   close_connection: false
-  command: show vrf {{get_result("Payload editor, with device")["duration"]}}
+  command: show vrf {{get_result("Modify payload (per device)")["duration"]}}
   config_mode: false
   content_match: ''
   content_match_regex: false
@@ -2013,7 +2011,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2019-10-21 21:55:59.995214'
+  last_modified: '2020-02-26 06:52:17.300164'
   mail_recipient: ''
   max_processes: 50
   maximum_runs: 1

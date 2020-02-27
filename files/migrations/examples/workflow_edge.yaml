@@ -229,8 +229,8 @@
   source: '[Regression Workflow C: Advanced multiprocessing] napalm_configure_bgp_1',
   subtype: prerequisite, type: workflow_edge, workflow: 'Regression Workflow C: Advanced
     multiprocessing'}
-- {destination: '[Regression Workflow F: Workflow of Workflows] Modify Payload for
-    Iteration', label: success, source: '[Shared] Start', subtype: success, type: workflow_edge,
+- {destination: '[Regression Workflow E: Iteration Targets] Modify Payload for Iteration',
+  label: success, source: '[Shared] Start', subtype: success, type: workflow_edge,
   workflow: 'Regression Workflow E: Iteration Targets'}
 - {destination: '[Regression Workflow E: Iteration Targets] Iteration Target Workflow
     - Test 2', label: success, source: '[Regression Workflow E: Iteration Targets]
@@ -318,8 +318,8 @@
     variable from snippet', label: success, source: '[Shared] Start', subtype: success,
   type: workflow_edge, workflow: '[Regression Workflow F: Workflow of Workflows] Regression
     Workflow F S2: Access Variables from Parent Workflow'}
-- {destination: '[Regression Workflow F: Workflow of Workflows] Modify Payload for
-    Iteration', label: success, source: '[Shared] Start', subtype: success, type: workflow_edge,
+- {destination: '[Regression Workflow E: Iteration Targets] Modify Payload for Iteration',
+  label: success, source: '[Shared] Start', subtype: success, type: workflow_edge,
   workflow: 'Regression Workflow F: Workflow of Workflows'}
 - {destination: '[[Regression Workflow F: Workflow of Workflows] Regression Workflow
     F S2: Access Variables from Parent Workflow] Variable Access Subworkflow: Access
@@ -367,7 +367,7 @@
     with validation and retries] Check VRF (NOVRF) exists', subtype: success, type: workflow_edge,
   workflow: 'Regression Workflow 1: Netmiko with validation and retries'}
 - {destination: '[Regression Workflow E: Iteration Targets] Iteration Targets Workflow
-    - Test 1', label: success, source: '[Regression Workflow F: Workflow of Workflows]
+    - Test 1', label: success, source: '[Regression Workflow E: Iteration Targets]
     Modify Payload for Iteration', subtype: success, type: workflow_edge, workflow: 'Regression
     Workflow E: Iteration Targets'}
 - {destination: '[Shared] End', label: success, source: '[Regression Workflow D: Prompts]
@@ -402,7 +402,7 @@
     of Workflows] Regression Workflow F S1: Subworkflow of Workflow', subtype: success,
   type: workflow_edge, workflow: 'Regression Workflow F: Workflow of Workflows'}
 - {destination: '[Regression Workflow F: Workflow of Workflows] Show interfaces with
-    Netmiko', label: success, source: '[Regression Workflow F: Workflow of Workflows]
+    Netmiko', label: success, source: '[Regression Workflow E: Iteration Targets]
     Modify Payload for Iteration', subtype: success, type: workflow_edge, workflow: 'Regression
     Workflow F: Workflow of Workflows'}
 - {destination: '[Regression Workflow F: Workflow of Workflows] Regression Workflow

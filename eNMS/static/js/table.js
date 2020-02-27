@@ -105,7 +105,7 @@ export function initTable(type, instance, runtime, id) {
       models[type].postProcessing(this.api(), columns, type);
     },
     ajax: {
-      url: `/table_filtering/${models[type].modelFiltering || type}`,
+      url: `/filtering/${models[type].modelFiltering || type}`,
       type: "POST",
       contentType: "application/json",
       data: (d) => {

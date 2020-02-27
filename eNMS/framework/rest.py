@@ -199,6 +199,23 @@ class Topology(Resource):
             return "Topology Export successfully executed."
 
 
+class Search(Resource):
+    decorators = [auth.login_required]
+
+    def post(self):
+        rest_body = request.get_json(force=True)
+        kwargs = {
+            "draw": 1,
+            "columns": [{"data": column} for column in rest_body["columns"]],
+            "order": [{"column": 0, "dir": "asc"}],
+            "start": 0,
+            "length": rest_body["maximum_return_records"],
+            "form": rest_body["search_criteria"],
+            "rest_api_request": True,
+        }
+        return app.filtering(rest_body["type"], **kwargs)["data"]
+
+
 class Sink(Resource):
     def get(self, **_):
         abort(404, message=f"The requested {request.method} endpoint does not exist.")
@@ -217,6 +234,7 @@ def configure_rest_api(flask_app):
     api.add_resource(UpdateInstance, "/rest/instance/<string:cls>")
     api.add_resource(GetInstance, "/rest/instance/<string:cls>/<string:name>")
     api.add_resource(GetConfiguration, "/rest/configuration/<string:name>")
+    api.add_resource(Search, "/rest/search")
     api.add_resource(GetResult, "/rest/result/<string:name>/<string:runtime>")
     api.add_resource(Migrate, "/rest/migrate/<string:direction>")
     api.add_resource(Topology, "/rest/topology/<string:direction>")

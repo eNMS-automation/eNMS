@@ -123,9 +123,16 @@ class Device(CustomDevice):
     )
 
     def table_properties(self, **kwargs):
-        properties = super().get_properties()
+        columns = [c["data"] for c in kwargs["columns"]]
+        rest_api_request = kwargs.get("rest_api_request")
+        include_properties = columns if rest_api_request else None
+        properties = super().get_properties(include=include_properties)
         context = int(kwargs["form"].get("context-lines", 0))
         for property in ("configuration", "operational_data"):
+            if rest_api_request:
+                if property not in columns or "matches" not in columns:
+                    continue
+                properties[property] = getattr(self, property)
             data = kwargs["form"].get(property)
             regex_match = kwargs["form"].get(f"{property}_filter") == "regex"
             if not data:
@@ -144,22 +151,29 @@ class Device(CustomDevice):
                             merge = True
                             continue
                         visited.add(index + i)
+                        line = content[index + i].strip()
+                        if rest_api_request:
+                            match_lines.append(f"L{index + i + 1}: {line}")
+                            continue
                         if regex_match:
-                            line = sub(data, r"<mark>\g<0></mark>", content[index + i])
+                            sub(data, r"<mark>\g<0></mark>", line)
                         else:
-                            line = (
-                                content[index + i]
-                                .strip()
-                                .replace(data, f"<mark>{data}</mark>")
-                            )
+                            line = line.replace(data, f"<mark>{data}</mark>")
                         match_lines.append(f"<b>L{index + i + 1}:</b> {line}")
-                    if merge:
-                        result[-1] += f"<br>{'<br>'.join(match_lines)}"
+                    if rest_api_request:
+                        result.extend(match_lines)
                     else:
-                        result.append("<br>".join(match_lines))
-                properties[property] = "".join(
-                    f"<pre style='text-align: left'>{match}</pre>" for match in result
-                )
+                        if merge:
+                            result[-1] += f"<br>{'<br>'.join(match_lines)}"
+                        else:
+                            result.append("<br>".join(match_lines))
+                if rest_api_request:
+                    properties[f"{property}_matches"] = result
+                else:
+                    properties[property] = "".join(
+                        f"<pre style='text-align: left'>{match}</pre>"
+                        for match in result
+                    )
         return properties
 
     @property

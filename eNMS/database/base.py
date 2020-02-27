@@ -97,8 +97,10 @@ class AbstractBase(Base):
             result[property] = value
         return result
 
-    def table_properties(self, **_):
-        return self.get_properties()
+    def table_properties(self, **kwargs):
+        rest_api = kwargs.get("rest_api_request")
+        columns = [c["data"] for c in kwargs["columns"]] if rest_api else None
+        return self.get_properties(include=columns)
 
     def duplicate(self, **kwargs):
         properties = {

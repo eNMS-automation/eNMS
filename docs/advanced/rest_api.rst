@@ -73,6 +73,55 @@ Note:
 - For Postman use the type "raw" for entering key/value pairs into the body. Body must also be formatted as application/JSON.
 - Extra form data parameters passed in the body of the POST are available to that service or workflow in payload["rest_data"][your_key_name1] and payload["rest_data"][your_key_name2], and they can be accessed within a Service Instance UI form as {{payload["rest_data"][your_key_name].
 
+Device Search with Config RegEX Matching
+-------------------------------------------
+
+Request
+*******
+
+.. code-block:: python
+  :caption: **POST** Request
+
+  /rest/search
+
+Payload
+*******
+
+- ``type`` - Type of object to search (device, link, ...)
+- ``columns`` - List of attributes that will become keys in dictionary response
+- ``maximum_return_records`` - Interger indicating the maximum number of records to return
+- ``search_criteria`` - Dictionary requiring two key/value pairs to define a single search parameter
+
+.. code-block:: python
+  :caption: Example
+
+  {
+    "type": device,
+    "columns": ["name", "matches", "ip_address"],
+    "maximum_return_records": 3,
+    "search_criteria": {"configuration_filter": "regex", "configuration": "link-"}
+  }
+
+.. code-block:: python
+  :caption: Example
+
+  {
+    "type": "link",
+      "columns": ["name", "source_name"],
+      "maximum_return_records": 3,
+      "search_criteria": {"name_filter": "inclusion", "name": "i"}
+  }
+
+Note:
+
+- Possible ``columns`` (or attributes) include: name, description, subtype, model, location, vendor, operating_system, os_version, ip_address, port, configuration, operational_data. Other custom_properties maybe available in your enviroment.
+- Special ``columns``  "matches" is derived from a RegEX match "configuration", which returns the line where a regex was found
+- The example above will search for configurations using the regex of "link-".
+- Note the use of configuration attribute is used twice to define a single parameter in ``search_criteria``. Additional pairs can be added to ``search_criteria`` to further refine the search.
+- Note in the above example that the attribute used to serach on is not required in ``search_criteria``.
+- (attribute)_filter: options include "regex", "inclusion", "exclusion".
+
+
 Retrieve or delete an instance
 ------------------------------
 

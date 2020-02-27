@@ -55,7 +55,7 @@ class BaseController:
     json_endpoints = [
         "multiselect_filtering",
         "save_settings",
-        "table_filtering",
+        "filtering",
         "view_filtering",
     ]
 
@@ -368,7 +368,7 @@ class BaseController:
             "total_count": results.count(),
         }
 
-    def table_filtering(self, table, **kwargs):
+    def filtering(self, table, **kwargs):
         model = models[table]
         ordering = getattr(
             getattr(

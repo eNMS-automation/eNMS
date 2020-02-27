@@ -294,14 +294,14 @@ function showConfigurationHistory(device) {
           style="width:100%"
         >
           <thead>
-            <tr>
-              <th>Datetime</th>
-              <th>Type</th>
-              <th style="word-wrap: break-word">Content</th>
-            </tr>
           </thead>
           <tbody>
-
+            <tr>
+              <td>1</td>
+              <td>2</td>
+              <td><input type="radio" name="v2-${device.id}" value="${device.id}"></input></td>
+              <td><input type="radio" name="v2-${device.id}" value="${device.id}"></input></td>
+            </tr>
           </tbody>
         </table>
       <div>
@@ -310,7 +310,12 @@ function showConfigurationHistory(device) {
       $(`#configuration-table-${device.id}`)
         // eslint-disable-next-line new-cap
         .DataTable({
-          columns: [{ width: "200px" }, { width: "60px" }, null],
+          columns: [
+            { width: "80%", title: "Datetime" },
+            { width: "60px", title: "Show" },
+            { width: "30px", title: "V1" },
+            { width: "30px", title: "V2" },
+          ],
         })
         .order([0, "desc"])
         .draw();

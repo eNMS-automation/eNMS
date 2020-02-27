@@ -537,12 +537,12 @@ class Run(AbstractBase):
     def run_service_job(self, payload, device):
         args = (device,) if device else ()
         retries, total_retries = self.number_of_retries + 1, 0
-        while retries > 0 and total_retries < 1000:
+        while retries and total_retries < 1000:
             retries -= 1
             total_retries += 1
             try:
-                if retries:
-                    retry = self.number_of_retries - retries + 2
+                if self.number_of_retries - retries:
+                    retry = self.number_of_retries - retries
                     self.log("error", f"RETRY n°{retry}", device)
                 results = self.service.job(self, payload, *args)
                 if device and (
@@ -570,7 +570,7 @@ class Run(AbstractBase):
             except Exception as exc:
                 self.log("error", str(exc), device)
                 result = chr(10).join(format_exc().splitlines())
-                return {"success": False, "result": result}
+                results = {"success": False, "result": result}
         return results
 
     def get_results(self, payload, device=None):

@@ -121,9 +121,13 @@ class InventoryController(BaseController):
 
     def get_git_configuration(self, hash):
         tree = Repo(self.path / "network_data").commit(hash).tree
-        config = tree / "Washington" / "configuration"
-        with BytesIO(config.data_stream.read()) as f:
-            return f.read().decode('utf-8')
+        configuration_file = tree / "Washington" / "configuration"
+        operational_data_file = tree / "Washington" / "operational_data"
+        with BytesIO(configuration_file.data_stream.read()) as f:
+            configuration = f.read().decode('utf-8')
+        with BytesIO(operational_data_file.data_stream.read()) as f:
+            operational_data = f.read().decode('utf-8')
+        return {"Configuration": configuration, "Operational Data": operational_data}
 
     def get_device_network_data(self, device_id):
         device = fetch("device", id=device_id)

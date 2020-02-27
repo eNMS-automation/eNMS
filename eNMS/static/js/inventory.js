@@ -282,12 +282,37 @@ function showSessionLog(sessionId) {
   });
 }
 
-function showGitConfiguration(commitHash) {
+function showGitConfiguration(commit) {
   call({
-    url: `/get_git_configuration/${commitHash}`,
-    callback: (configuration) => {
-      console.log(configuration);
-    }
+    url: `/get_git_configuration/${commit.hash}`,
+    callback: (result) => {
+      console.log(result)
+      openPanel({
+        name: "device_data",
+        title: commit.date,
+        id: commit.hash,
+        callback: function() {
+          const content = document.getElementById(`content-${commit.hash}`);
+          // eslint-disable-next-line new-cap
+          const editor = CodeMirror(content, {
+            lineWrapping: true,
+            lineNumbers: true,
+            readOnly: true,
+            theme: "cobalt",
+            mode: null,
+            extraKeys: { "Ctrl-F": "findPersistent" },
+            scrollbarStyle: "overlay",
+          });
+          editor.setSize("100%", "100%");
+          $(`#data_type-${commit.hash}`)
+            .on("change", function() {
+              editor.setValue(result[this.value]);
+              editor.refresh();
+            })
+            .change();
+        },
+      });
+    },
   });
 }
 
@@ -298,7 +323,8 @@ function showConfigurationHistory(device) {
       if (!commits.length) {
         notify("No configuration stored.", "error", 5);
       } else {
-        commits = commits.map((commit) => `
+        commits = commits.map(
+          (commit) => `
             <tr>
             <td>${commit.date}</td>
             <td>${commit.hash}</td>
@@ -306,15 +332,22 @@ function showConfigurationHistory(device) {
               <button
                 type="button"
                 class="btn btn-sm btn-info"
-                onclick="eNMS.inventory.showGitConfiguration('${commit.hash}')"
+                onclick="eNMS.inventory.showGitConfiguration(
+                  ${JSON.stringify(commit).replace(/"/g, "'")}
+                )"
                 data-tooltip="Configuration"
               >
                 <span class="glyphicon glyphicon-cog"></span>
               </button>
             </td>
-            <td><input type="radio" name="v1-${device.id}" value="${device.id}"></input></td>
-            <td><input type="radio" name="v2-${device.id}" value="${device.id}"></input></td>
-          </tr>`);
+            <td><input type="radio" name="v1-${device.id}" value="${
+            device.id
+          }"></input></td>
+            <td><input type="radio" name="v2-${device.id}" value="${
+            device.id
+          }"></input></td>
+          </tr>`
+        );
         openPanel({
           name: "display",
           title: "Configuration",

@@ -76,12 +76,12 @@
 - description: Washington
   icon: router
   ip_address: 192.168.56.50
-  last_duration: 9.353403s
-  last_failure: '2019-11-19 14:37:19.623351'
+  last_duration: 9.242875s
+  last_failure: '2020-02-27 12:24:00.051018'
   last_modified: ''
-  last_runtime: '2019-12-17 09:30:50.349595'
+  last_runtime: '2020-02-27 12:29:03.915193'
   last_status: Success
-  last_update: '2019-12-17 09:30:50.349595'
+  last_update: '2020-02-27 12:29:03.915193'
   latitude: '38.89511'
   location: Washington
   longitude: '-77.03637'

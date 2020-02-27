@@ -1,6 +1,7 @@
 from collections import Counter
 from flask_login import current_user
 from git import Repo
+from io import BytesIO
 from logging import info
 from sqlalchemy import and_
 from subprocess import Popen
@@ -117,6 +118,12 @@ class InventoryController(BaseController):
             {"hash": str(commit), "date": commit.committed_datetime}
             for commit in list(repo.iter_commits(paths=config_path))
         ]
+
+    def get_git_configuration(self, hash):
+        tree = Repo(self.path / "network_data").commit(hash).tree
+        config = tree / "Washington" / "configuration"
+        with BytesIO(config.data_stream.read()) as f:
+            return f.read().decode('utf-8')
 
     def get_device_network_data(self, device_id):
         device = fetch("device", id=device_id)

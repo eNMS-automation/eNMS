@@ -282,6 +282,15 @@ function showSessionLog(sessionId) {
   });
 }
 
+function showGitConfiguration(commitHash) {
+  call({
+    url: `/get_git_configuration/${commitHash}`,
+    callback: (configuration) => {
+      console.log(configuration);
+    }
+  });
+}
+
 function showConfigurationHistory(device) {
   call({
     url: `/get_configuration_history/${device.id}`,
@@ -294,11 +303,14 @@ function showConfigurationHistory(device) {
             <td>${commit.date}</td>
             <td>${commit.hash}</td>
             <td>
-              <button type="button" class="btn btn-sm btn-info"
-              onclick="eNMS.inventory.showDeviceData(${commit})"
-              data-tooltip="Network Data"
-                ><span class="glyphicon glyphicon-cog"></span
-              ></button>
+              <button
+                type="button"
+                class="btn btn-sm btn-info"
+                onclick="eNMS.inventory.showGitConfiguration('${commit.hash}')"
+                data-tooltip="Configuration"
+              >
+                <span class="glyphicon glyphicon-cog"></span>
+              </button>
             </td>
             <td><input type="radio" name="v1-${device.id}" value="${device.id}"></input></td>
             <td><input type="radio" name="v2-${device.id}" value="${device.id}"></input></td>
@@ -326,7 +338,7 @@ function showConfigurationHistory(device) {
               // eslint-disable-next-line new-cap
               .DataTable({
                 columns: [
-                  { width: "300px", title: "Datetime" },
+                  { width: "250px", title: "Datetime" },
                   { title: "Commit Hash" },
                   { width: "35px", className: "dt-center" },
                   { width: "30px", title: "V1", className: "dt-center" },
@@ -405,6 +417,7 @@ configureNamespace("inventory", [
   showConfigurationHistory,
   showDeviceData,
   showDeviceResultsPanel,
+  showGitConfiguration,
   showImportTopologyPanel,
   showSessionLog,
 ]);

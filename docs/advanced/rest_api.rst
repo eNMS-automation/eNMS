@@ -102,6 +102,15 @@ Payload
     "search_criteria": {"configuration_filter": "regex", "configuration": "link-"}
   }
 
+.. code-block:: python
+  :caption: Example
+
+  {
+    "type": "link",
+      "columns": ["name", "source_name"],
+      "maximum_return_records": 3,
+      "search_criteria": {"name_filter": "inclusion", "name": "i"}
+  }
 
 Note:
 

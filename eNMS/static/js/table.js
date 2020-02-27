@@ -407,6 +407,13 @@ models.configuration = class Configuration extends models.device {
           ></button>
         </li>
         <li>
+          <button type="button" class="btn btn-sm btn-info"
+          onclick="eNMS.inventory.showConfigurationHistory(${this.instance})"
+          data-tooltip="Configuration History"
+            ><span class="glyphicon glyphicon-adjust"></span
+          ></button>
+        </li>
+        <li>
           <button type="button" class="btn btn-sm btn-primary"
           onclick="eNMS.base.showTypePanel('device', '${this.id}')" data-tooltip="Edit"
             ><span class="glyphicon glyphicon-edit"></span

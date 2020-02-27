@@ -282,6 +282,42 @@ function showSessionLog(sessionId) {
   });
 }
 
+function showConfigurationHistory(device) {
+  openPanel({
+    name: "display",
+    title: "Configuration",
+    content: `
+      <div class="modal-body">
+        <table 
+          id="configuration-table-${device.id}"
+          class="table table-striped table-bordered table-hover wrap"
+          style="width:100%"
+        >
+          <thead>
+            <tr>
+              <th>Datetime</th>
+              <th>Type</th>
+              <th style="word-wrap: break-word">Content</th>
+            </tr>
+          </thead>
+          <tbody>
+
+          </tbody>
+        </table>
+      <div>
+    `,
+    callback: () => {
+      $(`#configuration-table-${device.id}`)
+        // eslint-disable-next-line new-cap
+        .DataTable({
+          columns: [{ width: "200px" }, { width: "60px" }, null],
+        })
+        .order([0, "desc"])
+        .draw();
+    },
+  });
+}
+
 function showDeviceResultsPanel(device) {
   openPanel({
     name: "table",
@@ -342,6 +378,7 @@ configureNamespace("inventory", [
   savePoolObjects,
   showPoolObjectsPanel,
   updatePools,
+  showConfigurationHistory,
   showDeviceData,
   showDeviceResultsPanel,
   showImportTopologyPanel,

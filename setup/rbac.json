@@ -166,6 +166,7 @@
       "/get",
       "/get_all",
       "/get_cluster_status",
+      "/get_configuration_history",
       "/get_device_network_data",
       "/get_device_logs",
       "/get_exported_services",

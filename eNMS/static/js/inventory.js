@@ -283,42 +283,61 @@ function showSessionLog(sessionId) {
 }
 
 function showConfigurationHistory(device) {
-  openPanel({
-    name: "display",
-    title: "Configuration",
-    content: `
-      <div class="modal-body">
-        <table 
-          id="configuration-table-${device.id}"
-          class="table table-striped table-bordered table-hover wrap"
-          style="width:100%"
-        >
-          <thead>
-          </thead>
-          <tbody>
+  call({
+    url: `/get_configuration_history/${device.id}`,
+    callback: (commits) => {
+      if (!commits.length) {
+        notify("No configuration stored.", "error", 5);
+      } else {
+        commits = commits.map((commit) => `
             <tr>
-              <td>1</td>
-              <td>2</td>
-              <td><input type="radio" name="v2-${device.id}" value="${device.id}"></input></td>
-              <td><input type="radio" name="v2-${device.id}" value="${device.id}"></input></td>
-            </tr>
-          </tbody>
-        </table>
-      <div>
-    `,
-    callback: () => {
-      $(`#configuration-table-${device.id}`)
-        // eslint-disable-next-line new-cap
-        .DataTable({
-          columns: [
-            { width: "80%", title: "Datetime" },
-            { width: "60px", title: "Show" },
-            { width: "30px", title: "V1" },
-            { width: "30px", title: "V2" },
-          ],
-        })
-        .order([0, "desc"])
-        .draw();
+            <td>${commit.date}</td>
+            <td>${commit.hash}</td>
+            <td>
+              <button type="button" class="btn btn-sm btn-info"
+              onclick="eNMS.inventory.showDeviceData(${commit})"
+              data-tooltip="Network Data"
+                ><span class="glyphicon glyphicon-cog"></span
+              ></button>
+            </td>
+            <td><input type="radio" name="v1-${device.id}" value="${device.id}"></input></td>
+            <td><input type="radio" name="v2-${device.id}" value="${device.id}"></input></td>
+          </tr>`);
+        openPanel({
+          name: "display",
+          title: "Configuration",
+          content: `
+            <div class="modal-body">
+              <table 
+                id="configuration-table-${device.id}"
+                class="table table-striped table-bordered table-hover wrap"
+                style="width:100%"
+              >
+                <thead>
+                </thead>
+                <tbody>
+                ${commits.join("")}
+                </tbody>
+              </table>
+            <div>
+          `,
+          callback: () => {
+            $(`#configuration-table-${device.id}`)
+              // eslint-disable-next-line new-cap
+              .DataTable({
+                columns: [
+                  { width: "300px", title: "Datetime" },
+                  { title: "Commit Hash" },
+                  { width: "35px", className: "dt-center" },
+                  { width: "30px", title: "V1", className: "dt-center" },
+                  { width: "30px", title: "V2", className: "dt-center" },
+                ],
+              })
+              .order([0, "desc"])
+              .draw();
+          },
+        });
+      }
     },
   });
 }

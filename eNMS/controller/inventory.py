@@ -1,5 +1,6 @@
 from collections import Counter
 from flask_login import current_user
+from git import Repo
 from logging import info
 from sqlalchemy import and_
 from subprocess import Popen
@@ -107,6 +108,15 @@ class InventoryController(BaseController):
             }
         except Exception as exc:
             return {"error": exc.args}
+
+    def get_configuration_history(self, device_id):
+        device = fetch("device", id=device_id)
+        repo = Repo(self.path / "network_data")
+        config_path = self.path / "network_data" / device.name / "configuration"
+        return [
+            {"hash": str(commit), "date": commit.committed_datetime}
+            for commit in list(repo.iter_commits(paths=config_path))
+        ]
 
     def get_device_network_data(self, device_id):
         device = fetch("device", id=device_id)

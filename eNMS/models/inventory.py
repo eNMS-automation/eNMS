@@ -130,9 +130,10 @@ class Device(CustomDevice):
         context = int(kwargs["form"].get("context-lines", 0))
         for property in ("configuration", "operational_data"):
             if rest_api_request:
-                if property not in columns or "matches" not in columns:
+                if property in columns:
+                    properties[property] = getattr(self, property)
+                if f"{property}_matches" not in columns:
                     continue
-                properties[property] = getattr(self, property)
             data = kwargs["form"].get(property)
             regex_match = kwargs["form"].get(f"{property}_filter") == "regex"
             if not data:

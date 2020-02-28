@@ -6,18 +6,13 @@ CodeMirror: false
 (function(CodeMirror) {
   "use strict";
 
-  CodeMirror.defineMode("logs", function(conf, parserConf) {
-    let stringPrefixes = new RegExp("^(([rbuf]|(br)|(fr))?('{3}|\"{3}|['\"]))", "i");
+  CodeMirror.defineMode("logs", function() {
     let external = {
-      startState: function(basecolumn) {
+      startState: function() {
         return {
-          tokenize: function(stream, state) {
-            if (stream.eatSpace()) return null;
+          tokenize: function(stream) {
             if (stream.match(/\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}\.\d{6}/)) {
               return "number";
-            }
-            if (stream.match(stringPrefixes)) {
-              return state.tokenize(stream, state);
             }
             if (stream.match(/DEVICE.*\s:\s/)) return "comment";
             if (stream.match(/SERVICE.*?\s[-|:]\s/)) return "variable-2";
@@ -35,17 +30,13 @@ CodeMirror: false
     return external;
   });
 
-  CodeMirror.defineMode("network", function(conf, parserConf) {
-    let stringPrefixes = new RegExp("^(([rbuf]|(br)|(fr))?('{3}|\"{3}|['\"]))", "i");
+  CodeMirror.defineMode("network", function() {
     let external = {
-      startState: function(basecolumn) {
+      startState: function() {
         return {
-          tokenize: function(stream, state) {
-            if (stream.eatSpace()) return null;
-            if (stream.match(stringPrefixes)) {
-              return state.tokenize(stream, state);
-            }
-            if (stream.match(/.*/)) return "comment";
+          tokenize: function(stream) {
+            if (stream.match(/interface/)) return "keyword";
+            if (stream.match(/^(?!.*\.$)((1?\d?\d|25[0-5]|2[0-4]\d)(\.|\/\d{2}|$)){4}/)) return "variable-2";
             stream.next();
           },
         };

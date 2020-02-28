@@ -221,6 +221,7 @@ export const showDeviceData = function(device) {
           title: `Device Data - ${device.name}`,
           id: device.id,
           callback: function() {
+            $(`#data-type-${device.id}`).bootstrapToggle();
             const content = document.getElementById(`content-${device.id}`);
             // eslint-disable-next-line new-cap
             const editor = CodeMirror(content, {
@@ -291,6 +292,7 @@ function showGitConfiguration(commit) {
         title: commit.date,
         id: commit.hash,
         callback: function() {
+          $(`#data-type-${commit.hash}`).bootstrapToggle();
           const content = document.getElementById(`content-${commit.hash}`);
           // eslint-disable-next-line new-cap
           const editor = CodeMirror(content, {
@@ -303,7 +305,7 @@ function showGitConfiguration(commit) {
             scrollbarStyle: "overlay",
           });
           editor.setSize("100%", "100%");
-          $(`#data_type-${commit.hash}`)
+          $(`#data-type-${commit.hash}`)
             .on("change", function() {
               editor.setValue(result[this.value]);
               editor.refresh();

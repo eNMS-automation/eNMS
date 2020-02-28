@@ -35,8 +35,14 @@ CodeMirror: false
       startState: function() {
         return {
           tokenize: function(stream) {
-            if (stream.match(/interface/)) return "keyword";
-            if (stream.match(/^(?!.*\.$)((1?\d?\d|25[0-5]|2[0-4]\d)(\.|\/\d{2}|$)){4}/)) return "variable-2";
+            if (stream.match(/no shutdown/i)) return "string";
+            if (stream.match(/shutdown/i)) return "error";
+            if (
+              stream.match(/^(?!.*\.$)((1?\d?\d|25[0-5]|2[0-4]\d)(\.|\/\d{2}|$)){4}/) ||
+              stream.match(/^[0-9a-f]{1,2}([.:-])(?:[0-9a-f]{1,2}\1){4}[0-9a-f]{1,2}$/)
+            ) {
+              return "variable-2";
+            }
             stream.next();
           },
         };

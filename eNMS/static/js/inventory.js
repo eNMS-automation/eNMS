@@ -286,7 +286,6 @@ function showGitConfiguration(commit) {
   call({
     url: `/get_git_configuration/${commit.hash}`,
     callback: (result) => {
-      console.log(result)
       openPanel({
         name: "device_data",
         title: commit.date,

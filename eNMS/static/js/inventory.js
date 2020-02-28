@@ -246,36 +246,70 @@ function showSessionLog(sessionId) {
 }
 
 function downloadNetworkData(id) {
-  const editor = $(`#content-${id}`).data("CodeMirrorInstance");
-  console.log(editor.getValue());
+  call({
+    type: "GET",
+    url: `/download_output/${id}`,
+    data: $(`#content-${id}`).data("CodeMirrorInstance").getValue()
+  });
 }
 
 function displayConfiguration(id, result) {
-  $(`#data-type-${id}`).bootstrapToggle({
-    off: "Configuration",
-    on: "Operational Data",
-    width: "150px",
+  openPanel({
+    name: "device_data",
+    content: `
+      <div class="modal-body">
+        <nav
+          class="navbar navbar-default nav-controls"
+          role="navigation"
+        >
+          <input
+            id="data-type-${id}"
+            type="checkbox"
+            data-onstyle="info"
+            data-offstyle="primary"
+          >
+          <button
+            type="button"
+            class="btn btn-primary"
+            style="margin-left: 10px"
+            onclick="location.href='/download_output/${id}"
+          >
+            <span class="glyphicon glyphicon-download"></span>
+          </button>
+        </nav>
+        <hr>
+        <div id="content-${id}"></div>
+      </div>`,
+    title: `Configuration`,
+    id: id,
+    callback: function() {
+      $(`#data-type-${id}`).bootstrapToggle({
+        off: "Configuration",
+        on: "Operational Data",
+        width: "150px",
+      });
+      const content = document.getElementById(`content-${id}`);
+      // eslint-disable-next-line new-cap
+      const editor = CodeMirror(content, {
+        lineWrapping: true,
+        lineNumbers: true,
+        readOnly: true,
+        theme: "cobalt",
+        mode: "network",
+        extraKeys: { "Ctrl-F": "findPersistent" },
+        scrollbarStyle: "overlay",
+      });
+      $(`#content-${id}`).data("CodeMirrorInstance", editor);
+      editor.setSize("100%", "100%");
+      $(`#data-type-${id}`)
+        .on("change", function() {
+          const value = $(this).prop("checked") ? "data" : "configuration";
+          editor.setValue(result[value]);
+          editor.refresh();
+        })
+        .change();
+    },
   });
-  const content = document.getElementById(`content-${id}`);
-  // eslint-disable-next-line new-cap
-  const editor = CodeMirror(content, {
-    lineWrapping: true,
-    lineNumbers: true,
-    readOnly: true,
-    theme: "cobalt",
-    mode: "network",
-    extraKeys: { "Ctrl-F": "findPersistent" },
-    scrollbarStyle: "overlay",
-  });
-  $(`#content-${id}`).data("CodeMirrorInstance", editor);
-  editor.setSize("100%", "100%");
-  $(`#data-type-${id}`)
-    .on("change", function() {
-      const value = $(this).prop("checked") ? "data" : "configuration";
-      editor.setValue(result[value]);
-      editor.refresh();
-    })
-    .change();
 }
 
 export const showDeviceData = function(device) {
@@ -285,14 +319,7 @@ export const showDeviceData = function(device) {
       if (!result.configuration && !result.operational_data) {
         notify("No data stored.", "error", 5);
       } else {
-        openPanel({
-          name: "device_data",
-          title: `Device Data - ${device.name}`,
-          id: device.id,
-          callback: function() {
-            displayConfiguration(device.id, result);
-          },
-        });
+        displayConfiguration(device.id, result);
       }
     },
   });
@@ -302,14 +329,7 @@ function showGitConfiguration(commit) {
   call({
     url: `/get_git_configuration/${commit.hash}`,
     callback: (result) => {
-      openPanel({
-        name: "device_data",
-        title: commit.date,
-        id: commit.hash,
-        callback: function() {
-          displayConfiguration(commit.hash, result);
-        },
-      });
+      displayConfiguration(commit.hash, result);
     },
   });
 }

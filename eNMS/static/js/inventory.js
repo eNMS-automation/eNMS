@@ -209,44 +209,6 @@ function updatePools(pool) {
   });
 }
 
-export const showDeviceData = function(device) {
-  call({
-    url: `/get_device_network_data/${device.id}`,
-    callback: (result) => {
-      if (!result.configuration && !result.operational_data) {
-        notify("No data stored.", "error", 5);
-      } else {
-        openPanel({
-          name: "device_data",
-          title: `Device Data - ${device.name}`,
-          id: device.id,
-          callback: function() {
-            $(`#data-type-${device.id}`).bootstrapToggle();
-            const content = document.getElementById(`content-${device.id}`);
-            // eslint-disable-next-line new-cap
-            const editor = CodeMirror(content, {
-              lineWrapping: true,
-              lineNumbers: true,
-              readOnly: true,
-              theme: "cobalt",
-              mode: "network",
-              extraKeys: { "Ctrl-F": "findPersistent" },
-              scrollbarStyle: "overlay",
-            });
-            editor.setSize("100%", "100%");
-            $(`#data_type-${device.id}`)
-              .on("change", function() {
-                editor.setValue(result[this.value]);
-                editor.refresh();
-              })
-              .change();
-          },
-        });
-      }
-    },
-  });
-};
-
 function showSessionLog(sessionId) {
   call({
     url: `/get_session_log/${sessionId}`,
@@ -283,6 +245,48 @@ function showSessionLog(sessionId) {
   });
 }
 
+export const showDeviceData = function(device) {
+  call({
+    url: `/get_device_network_data/${device.id}`,
+    callback: (result) => {
+      if (!result.configuration && !result.operational_data) {
+        notify("No data stored.", "error", 5);
+      } else {
+        openPanel({
+          name: "device_data",
+          title: `Device Data - ${device.name}`,
+          id: device.id,
+          callback: function() {
+            $(`#data-type-${device.id}`).bootstrapToggle({
+              off: "Configuration",
+              on: "Operational Data"
+            });
+            const content = document.getElementById(`content-${device.id}`);
+            // eslint-disable-next-line new-cap
+            const editor = CodeMirror(content, {
+              lineWrapping: true,
+              lineNumbers: true,
+              readOnly: true,
+              theme: "cobalt",
+              mode: "network",
+              extraKeys: { "Ctrl-F": "findPersistent" },
+              scrollbarStyle: "overlay",
+            });
+            editor.setSize("100%", "100%");
+            $(`#data-type-${device.id}`)
+              .on("change", function() {
+                const value = $(this).prop("checked") ? "data" : "configuration";
+                editor.setValue(result[value]);
+                editor.refresh();
+              })
+              .change();
+          },
+        });
+      }
+    },
+  });
+};
+
 function showGitConfiguration(commit) {
   call({
     url: `/get_git_configuration/${commit.hash}`,
@@ -292,22 +296,26 @@ function showGitConfiguration(commit) {
         title: commit.date,
         id: commit.hash,
         callback: function() {
-          $(`#data-type-${commit.hash}`).bootstrapToggle();
+          $(`#data-type-${commit.hash}`).bootstrapToggle({
+            off: "Configuration",
+            on: "Operational Data"
+          });
           const content = document.getElementById(`content-${commit.hash}`);
           // eslint-disable-next-line new-cap
           const editor = CodeMirror(content, {
             lineWrapping: true,
             lineNumbers: true,
             readOnly: true,
-            theme: "network",
-            mode: null,
+            theme: "cobalt",
+            mode: "network",
             extraKeys: { "Ctrl-F": "findPersistent" },
             scrollbarStyle: "overlay",
           });
           editor.setSize("100%", "100%");
           $(`#data-type-${commit.hash}`)
-            .on("change", function() {
-              editor.setValue(result[this.value]);
+            on("change", function() {
+              const value = $(this).prop("checked") ? "data" : "configuration";
+              editor.setValue(result[value]);
               editor.refresh();
             })
             .change();

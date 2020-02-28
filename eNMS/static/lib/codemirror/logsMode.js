@@ -34,4 +34,26 @@ CodeMirror: false
     };
     return external;
   });
+
+  CodeMirror.defineMode("network", function(conf, parserConf) {
+    let stringPrefixes = new RegExp("^(([rbuf]|(br)|(fr))?('{3}|\"{3}|['\"]))", "i");
+    let external = {
+      startState: function(basecolumn) {
+        return {
+          tokenize: function(stream, state) {
+            if (stream.eatSpace()) return null;
+            if (stream.match(stringPrefixes)) {
+              return state.tokenize(stream, state);
+            }
+            if (stream.match(/.*/)) return "comment";
+            stream.next();
+          },
+        };
+      },
+      token: function(stream, state) {
+        return state.tokenize(stream, state);
+      },
+    };
+    return external;
+  });
 })(CodeMirror);

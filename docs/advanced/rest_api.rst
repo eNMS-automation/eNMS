@@ -96,7 +96,7 @@ Payload
   :caption: Example
 
   {
-    "type": device,
+    "type": "device",
     "columns": ["name", "matches", "ip_address"],
     "maximum_return_records": 3,
     "search_criteria": {"configuration_filter": "regex", "configuration": "link-"}

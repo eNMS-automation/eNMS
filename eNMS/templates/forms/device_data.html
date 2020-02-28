@@ -4,6 +4,13 @@
     role="navigation"
   >
     {{ form.data_type(class="form-control add-id required no-search") }}
+    <button
+      type="button"
+      class="btn btn-primary"
+      onclick="eNMS.inventory.downloadNetworkData()"
+    >
+      <span class="glyphicon glyphicon-download"></span>
+    </button>
   </nav>
   <hr>
   <div id="content" class="add-id"></div>

@@ -245,10 +245,16 @@ function showSessionLog(sessionId) {
   });
 }
 
+function downloadNetworkData(id) {
+  const editor = $(`#content-${id}`).data("CodeMirrorInstance");
+  console.log(editor.getValue());
+}
+
 function displayConfiguration(id, result) {
   $(`#data-type-${id}`).bootstrapToggle({
     off: "Configuration",
-    on: "Operational Data"
+    on: "Operational Data",
+    width: "150px",
   });
   const content = document.getElementById(`content-${id}`);
   // eslint-disable-next-line new-cap
@@ -261,6 +267,7 @@ function displayConfiguration(id, result) {
     extraKeys: { "Ctrl-F": "findPersistent" },
     scrollbarStyle: "overlay",
   });
+  $(`#content-${id}`).data("CodeMirrorInstance", editor);
   editor.setSize("100%", "100%");
   $(`#data-type-${id}`)
     .on("change", function() {
@@ -431,6 +438,7 @@ function importTopology() {
 }
 
 configureNamespace("inventory", [
+  downloadNetworkData,
   exportTopology,
   handOffSSHConnection,
   showConnectionPanel,

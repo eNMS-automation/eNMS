@@ -269,10 +269,10 @@ function displayConfiguration(id, result) {
             data-offstyle="primary"
           >
           <button
+            id="download-${id}"
             type="button"
             class="btn btn-primary"
             style="margin-left: 10px"
-            onclick="location.href='/download_output/${id}"
           >
             <span class="glyphicon glyphicon-download"></span>
           </button>
@@ -303,7 +303,10 @@ function displayConfiguration(id, result) {
       editor.setSize("100%", "100%");
       $(`#data-type-${id}`)
         .on("change", function() {
-          const value = $(this).prop("checked") ? "data" : "configuration";
+
+          const value = $(this).prop("checked") ? "operational_data" : "configuration";
+          console.log(`location.href='/download_output/${value}/${id}'`)
+          $(`#download-${id}`).attr("onclick", `location.href='/download_output/${value}/${id}'`);
           editor.setValue(result[value]);
           editor.refresh();
         })

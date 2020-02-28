@@ -127,11 +127,11 @@ class InventoryController(BaseController):
             configuration = f.read().decode('utf-8')
         with BytesIO(operational_data_file.data_stream.read()) as f:
             operational_data = f.read().decode('utf-8')
-        return {"configuration": configuration, "data": operational_data}
+        return {"configuration": configuration, "operational_data": operational_data}
 
     def get_device_network_data(self, device_id):
         device = fetch("device", id=device_id)
-        return {"configuration": device.configuration, "data": device.operational_data}
+        return {"configuration": device.configuration, "operational_data": device.operational_data}
 
     def get_session_log(self, session_id):
         return fetch("session", id=session_id).content

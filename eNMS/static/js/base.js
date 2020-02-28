@@ -102,9 +102,9 @@ function processResults(callback, results) {
   }
 }
 
-export const call = function({ url, data, form, callback, type }) {
+export const call = function({ url, data, form, callback }) {
   let params = {
-    type: type || "POST",
+    type: "POST",
     url: url,
     success: function(results) {
       processResults(callback, results);

@@ -245,6 +245,32 @@ function showSessionLog(sessionId) {
   });
 }
 
+function displayConfiguration(id, result) {
+  $(`#data-type-${id}`).bootstrapToggle({
+    off: "Configuration",
+    on: "Operational Data"
+  });
+  const content = document.getElementById(`content-${id}`);
+  // eslint-disable-next-line new-cap
+  const editor = CodeMirror(content, {
+    lineWrapping: true,
+    lineNumbers: true,
+    readOnly: true,
+    theme: "cobalt",
+    mode: "network",
+    extraKeys: { "Ctrl-F": "findPersistent" },
+    scrollbarStyle: "overlay",
+  });
+  editor.setSize("100%", "100%");
+  $(`#data-type-${id}`)
+    .on("change", function() {
+      const value = $(this).prop("checked") ? "data" : "configuration";
+      editor.setValue(result[value]);
+      editor.refresh();
+    })
+    .change();
+}
+
 export const showDeviceData = function(device) {
   call({
     url: `/get_device_network_data/${device.id}`,
@@ -257,29 +283,7 @@ export const showDeviceData = function(device) {
           title: `Device Data - ${device.name}`,
           id: device.id,
           callback: function() {
-            $(`#data-type-${device.id}`).bootstrapToggle({
-              off: "Configuration",
-              on: "Operational Data"
-            });
-            const content = document.getElementById(`content-${device.id}`);
-            // eslint-disable-next-line new-cap
-            const editor = CodeMirror(content, {
-              lineWrapping: true,
-              lineNumbers: true,
-              readOnly: true,
-              theme: "cobalt",
-              mode: "network",
-              extraKeys: { "Ctrl-F": "findPersistent" },
-              scrollbarStyle: "overlay",
-            });
-            editor.setSize("100%", "100%");
-            $(`#data-type-${device.id}`)
-              .on("change", function() {
-                const value = $(this).prop("checked") ? "data" : "configuration";
-                editor.setValue(result[value]);
-                editor.refresh();
-              })
-              .change();
+            displayConfiguration(device.id, result);
           },
         });
       }
@@ -296,29 +300,7 @@ function showGitConfiguration(commit) {
         title: commit.date,
         id: commit.hash,
         callback: function() {
-          $(`#data-type-${commit.hash}`).bootstrapToggle({
-            off: "Configuration",
-            on: "Operational Data"
-          });
-          const content = document.getElementById(`content-${commit.hash}`);
-          // eslint-disable-next-line new-cap
-          const editor = CodeMirror(content, {
-            lineWrapping: true,
-            lineNumbers: true,
-            readOnly: true,
-            theme: "cobalt",
-            mode: "network",
-            extraKeys: { "Ctrl-F": "findPersistent" },
-            scrollbarStyle: "overlay",
-          });
-          editor.setSize("100%", "100%");
-          $(`#data-type-${commit.hash}`)
-            on("change", function() {
-              const value = $(this).prop("checked") ? "data" : "configuration";
-              editor.setValue(result[value]);
-              editor.refresh();
-            })
-            .change();
+          displayConfiguration(commit.hash, result);
         },
       });
     },

@@ -44,17 +44,8 @@ function compare(type, tableId) {
         call({
           url: `/compare/${type}/${v1}/${v2}`,
           callback: (result) => {
-            $(`#content-${cantorId}`).append(
-              diffview.buildView({
-                baseTextLines: result.first,
-                newTextLines: result.second,
-                opcodes: result.opcodes,
-                baseTextName: "V1",
-                newTextName: "V2",
-                contextSize: null,
-                viewType: 0,
-              })
-            );
+            let diff2htmlUi = new Diff2HtmlUI({diff: result});
+            diff2htmlUi.draw(`#content-${cantorId}`, {inputFormat: 'json', matching: 'lines'});
           },
         });
       },

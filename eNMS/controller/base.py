@@ -1,7 +1,7 @@
 from apscheduler.schedulers.background import BackgroundScheduler
 from collections import Counter
 from datetime import datetime
-from difflib import SequenceMatcher
+from difflib import unified_diff
 from email.mime.application import MIMEApplication
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
@@ -314,8 +314,8 @@ class BaseController:
     def compare(self, type, result1, result2):
         first = self.str_dict(getattr(fetch(type, id=result1), "result")).splitlines()
         second = self.str_dict(getattr(fetch(type, id=result2), "result")).splitlines()
-        opcodes = SequenceMatcher(None, first, second).get_opcodes()
-        return {"first": first, "second": second, "opcodes": opcodes}
+
+        return "\n".join(unified_diff(first, second, fromfile='before.py', tofile='after.py', n=10, lineterm=''))
 
     def build_filtering_constraints(self, obj_type, **kwargs):
         model, constraints = models[obj_type], []

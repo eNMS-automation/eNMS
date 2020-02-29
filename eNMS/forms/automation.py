@@ -292,10 +292,6 @@ class CalendarForm(BaseForm):
     form_type = HiddenField(default="calendar")
 
 
-class CompareForm(DisplayForm):
-    form_type = HiddenField(default="compare")
-
-
 class DisplayConfigurationForm(DisplayForm):
     form_type = HiddenField(default="display_configuration")
 

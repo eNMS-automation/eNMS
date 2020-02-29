@@ -39,18 +39,44 @@ function compare(type, tableId) {
     openPanel({
       name: "compare",
       title: `Compare ${type}s`,
-      size: "600 auto",
       id: cantorId,
+      size: "700 500",
+      content: `
+        <nav
+          class="navbar navbar-default nav-controls"
+          role="navigation"
+          style="margin-top: 5px"
+        >
+          <input
+            id="diff-type-${cantorId}"
+            type="checkbox"
+            data-onstyle="info"
+            data-offstyle="primary"
+          >
+        </nav>
+        <div class="modal-body">
+          <div id="content-${cantorId}" style="height:100%"></div>
+        </div>`,
       callback: () => {
+        $(`#diff-type-${cantorId}`).bootstrapToggle({
+          on: "Side by side",
+          off: "Line by line",
+          width: "150px",
+        });
         call({
           url: `/compare/${type}/${v1}/${v2}`,
           callback: (result) => {
             let diff2htmlUi = new Diff2HtmlUI({ diff: result });
-            diff2htmlUi.draw(`#content-${cantorId}`, {
-              inputFormat: "json",
-              matching: "lines",
-            });
-            $(".d2h-file-header").hide();
+            $(`#diff-type-${cantorId}`)
+              .on("change", function() {
+                diff2htmlUi.draw(`#content-${cantorId}`, {
+                  outputFormat: $(this).prop("checked")
+                    ? "side-by-side"
+                    : "line-by-line",
+                });
+                $(".d2h-file-header").hide();
+              })
+              .change();
           },
         });
       },

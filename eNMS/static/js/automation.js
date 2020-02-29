@@ -34,7 +34,11 @@ function openServicePanel() {
 function compare(type, id) {
   const v1 = $(`input[name=v1-${id}]:checked`).val();
   const v2 = $(`input[name=v2-${id}]:checked`).val();
-  if (v1 && v2) {
+  if (!v1 || !v2) {
+    notify("Select two versions to compare first.", "error", 5);
+  } else if (v1 == v2) {
+    notify("You must select two distinct versions.", "error", 5);
+  } else {
     const cantorId = cantorPairing(parseInt(v1), parseInt(v2));
     openPanel({
       name: "compare",
@@ -70,6 +74,8 @@ function compare(type, id) {
             $(`#diff-type-${cantorId}`)
               .on("change", function() {
                 diff2htmlUi.draw(`#content-${cantorId}`, {
+                  matching: 'lines',
+                  drawFileList: true,
                   outputFormat: $(this).prop("checked")
                     ? "side-by-side"
                     : "line-by-line",
@@ -81,8 +87,6 @@ function compare(type, id) {
         });
       },
     });
-  } else {
-    notify("Select two versions to compare first.", "error", 5);
   }
 }
 

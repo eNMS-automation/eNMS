@@ -318,8 +318,15 @@ class BaseController:
         else:
             first = self.get_git_configuration(v1)["configuration"]
             second = self.get_git_configuration(v2)["configuration"]
-        print(first, second)
-        return "\n".join(unified_diff(first.splitlines(), second.splitlines(), fromfile="", tofile="", lineterm=""))
+        return "\n".join(
+            unified_diff(
+                first.splitlines(),
+                second.splitlines(),
+                fromfile="-",
+                tofile="-",
+                lineterm="",
+            )
+        )
 
     def build_filtering_constraints(self, obj_type, **kwargs):
         model, constraints = models[obj_type], []

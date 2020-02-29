@@ -249,7 +249,9 @@ function downloadNetworkData(id) {
   call({
     type: "GET",
     url: `/download_output/${id}`,
-    data: $(`#content-${id}`).data("CodeMirrorInstance").getValue()
+    data: $(`#content-${id}`)
+      .data("CodeMirrorInstance")
+      .getValue(),
   });
 }
 
@@ -303,10 +305,12 @@ function displayConfiguration(id, result) {
       editor.setSize("100%", "100%");
       $(`#data-type-${id}`)
         .on("change", function() {
-
           const value = $(this).prop("checked") ? "operational_data" : "configuration";
-          console.log(`location.href='/download_output/${value}/${id}'`)
-          $(`#download-${id}`).attr("onclick", `location.href='/download_output/${value}/${id}'`);
+          console.log(`location.href='/download_output/${value}/${id}'`);
+          $(`#download-${id}`).attr(
+            "onclick",
+            `location.href='/download_output/${value}/${id}'`
+          );
           editor.setValue(result[value]);
           editor.refresh();
         })

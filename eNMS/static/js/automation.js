@@ -39,13 +39,18 @@ function compare(type, tableId) {
     openPanel({
       name: "compare",
       title: `Compare ${type}s`,
+      size: "600 auto",
       id: cantorId,
       callback: () => {
         call({
           url: `/compare/${type}/${v1}/${v2}`,
           callback: (result) => {
-            let diff2htmlUi = new Diff2HtmlUI({diff: result});
-            diff2htmlUi.draw(`#content-${cantorId}`, {inputFormat: 'json', matching: 'lines'});
+            let diff2htmlUi = new Diff2HtmlUI({ diff: result });
+            diff2htmlUi.draw(`#content-${cantorId}`, {
+              inputFormat: "json",
+              matching: "lines",
+            });
+            $(".d2h-file-header").hide();
           },
         });
       },

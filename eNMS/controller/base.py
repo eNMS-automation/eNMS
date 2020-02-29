@@ -312,10 +312,15 @@ class BaseController:
         }
 
     def compare(self, type, result1, result2):
-        first = self.str_dict(getattr(fetch(type, id=result1), "result")).splitlines()
-        second = self.str_dict(getattr(fetch(type, id=result2), "result")).splitlines()
-
-        return "\n".join(unified_diff(first, second, fromfile='before.py', tofile='after.py', n=10, lineterm=''))
+        return "\n".join(
+            unified_diff(
+                self.str_dict(getattr(fetch(type, id=result1), "result")).splitlines(),
+                self.str_dict(getattr(fetch(type, id=result2), "result")).splitlines(),
+                fromfile="-",
+                tofile="-",
+                lineterm="",
+            )
+        )
 
     def build_filtering_constraints(self, obj_type, **kwargs):
         model, constraints = models[obj_type], []

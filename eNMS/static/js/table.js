@@ -408,8 +408,8 @@ models.configuration = class Configuration extends models.device {
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-info"
-          onclick="eNMS.inventory.showConfigurationHistory(${this.instance})"
-          data-tooltip="Configuration History"
+          onclick="eNMS.inventory.showGitHistory(${this.instance})"
+          data-tooltip="Historic"
             ><span class="glyphicon glyphicon-adjust"></span
           ></button>
         </li>

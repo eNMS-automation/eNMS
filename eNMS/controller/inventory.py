@@ -110,14 +110,17 @@ class InventoryController(BaseController):
         except Exception as exc:
             return {"error": exc.args}
 
-    def get_configuration_history(self, device_id):
+    def get_git_history(self, device_id):
         device = fetch("device", id=device_id)
         repo = Repo(self.path / "network_data")
-        config_path = self.path / "network_data" / device.name / "configuration"
-        return [
-            {"hash": str(commit), "date": commit.committed_datetime}
-            for commit in list(repo.iter_commits(paths=config_path))
-        ]
+        path = self.path / "network_data" / device.name
+        return {
+            data_type: [
+                {"hash": str(commit), "date": commit.committed_datetime}
+                for commit in list(repo.iter_commits(paths=path / data_type))
+            ]
+            for data_type in ("configuration", "operational_data")
+        }
 
     def get_git_configuration(self, hash):
         tree = Repo(self.path / "network_data").commit(hash).tree

@@ -340,38 +340,13 @@ function showGitConfiguration(commit) {
   });
 }
 
-function showConfigurationHistory(device) {
+function showGitHistory(device) {
   call({
-    url: `/get_configuration_history/${device.id}`,
+    url: `/get_git_history/${device.id}`,
     callback: (commits) => {
-      if (!commits.length) {
-        notify("No configuration stored.", "error", 5);
+      if (!commits.configuration.length && !commits.operational_data.length) {
+        notify("No data stored.", "error", 5);
       } else {
-        commits = commits.map(
-          (commit) => `
-            <tr>
-            <td>${commit.date}</td>
-            <td>${commit.hash}</td>
-            <td>
-              <button
-                type="button"
-                class="btn btn-sm btn-info"
-                onclick="eNMS.inventory.showGitConfiguration(
-                  ${JSON.stringify(commit).replace(/"/g, "'")}
-                )"
-                data-tooltip="Configuration"
-              >
-                <span class="glyphicon glyphicon-cog"></span>
-              </button>
-            </td>
-            <td><input type="radio" name="v1-${device.id}" value="${
-            commit.hash
-          }"></input></td>
-            <td><input type="radio" name="v2-${device.id}" value="${
-            commit.hash
-          }"></input></td>
-          </tr>`
-        );
         openPanel({
           name: "display",
           title: "Configuration",
@@ -389,6 +364,12 @@ function showConfigurationHistory(device) {
               >
                 <span class="glyphicon glyphicon-adjust"></span>
               </button>
+              <input
+                id="data-type-${device.id}"
+                type="checkbox"
+                data-onstyle="info"
+                data-offstyle="primary"
+              >
             </nav>
             <div class="modal-body">
               <table 
@@ -396,16 +377,18 @@ function showConfigurationHistory(device) {
                 class="table table-striped table-bordered table-hover wrap"
                 style="width:100%"
               >
-                <thead>
-                </thead>
-                <tbody>
-                ${commits.join("")}
-                </tbody>
+                <thead></thead>
+                <tbody></tbody>
               </table>
             <div>
           `,
           callback: () => {
-            $(`#configuration-table-${device.id}`)
+            $(`#data-type-${device.id}`).bootstrapToggle({
+              on: "Operational Data",
+              off: "Configuration",
+              width: "120px",
+            });
+            let table = $(`#configuration-table-${device.id}`)
               // eslint-disable-next-line new-cap
               .DataTable({
                 columns: [
@@ -418,6 +401,36 @@ function showConfigurationHistory(device) {
               })
               .order([0, "desc"])
               .draw();
+            $(`#data-type-${device.id}`)
+              .on("change", function() {
+                table.clear();
+                const data = $(this).prop("checked") ? "operational_data" : "configuration";
+                commits[data].forEach((commit) => {
+                  table.row.add([
+                    `${commit.date}`,
+                    `${commit.hash}`,
+                    `<button
+                      type="button"
+                      class="btn btn-sm btn-info"
+                      onclick="eNMS.inventory.showGitConfiguration(
+                        ${JSON.stringify(commit).replace(/"/g, "'")}
+                      )"
+                      data-tooltip="Configuration"
+                    >
+                      <span class="glyphicon glyphicon-cog"></span>
+                    </button>`,
+                    `<input type="radio" name="v1-${device.id}" value="${
+                    commit.hash
+                    }"></input>`,
+                    `<input type="radio" name="v2-${device.id}" value="${
+                      commit.hash
+                    }"></input>`
+                  ])
+                });
+              table.draw(false);
+              })
+              .change();
+
           },
         });
       }
@@ -486,7 +499,7 @@ configureNamespace("inventory", [
   savePoolObjects,
   showPoolObjectsPanel,
   updatePools,
-  showConfigurationHistory,
+  showGitHistory,
   showDeviceData,
   showDeviceResultsPanel,
   showGitConfiguration,

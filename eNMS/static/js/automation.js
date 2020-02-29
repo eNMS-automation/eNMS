@@ -65,7 +65,7 @@ function compare(type, id) {
         $(`#diff-type-${cantorId}`).bootstrapToggle({
           on: "Side by side",
           off: "Line by line",
-          width: "150px",
+          width: "120px",
         });
         call({
           url: `/compare/${type}/${v1}/${v2}`,

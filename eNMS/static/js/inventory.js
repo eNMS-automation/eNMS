@@ -365,10 +365,10 @@ function showConfigurationHistory(device) {
               </button>
             </td>
             <td><input type="radio" name="v1-${device.id}" value="${
-            device.id
+            commit.hash
           }"></input></td>
             <td><input type="radio" name="v2-${device.id}" value="${
-            device.id
+            commit.hash
           }"></input></td>
           </tr>`
         );
@@ -376,6 +376,20 @@ function showConfigurationHistory(device) {
           name: "display",
           title: "Configuration",
           content: `
+            <nav
+              class="navbar navbar-default nav-controls"
+              role="navigation"
+              style="margin-top: 5px"
+            >
+              <button
+                class="btn btn-info"
+                onclick="eNMS.automation.compare('configuration', ${device.id})"
+                data-tooltip="Compare"
+                type="button"
+              >
+                <span class="glyphicon glyphicon-adjust"></span>
+              </button>
+            </nav>
             <div class="modal-body">
               <table 
                 id="configuration-table-${device.id}"

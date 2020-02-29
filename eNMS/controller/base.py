@@ -311,16 +311,15 @@ class BaseController:
             },
         }
 
-    def compare(self, type, result1, result2):
-        return "\n".join(
-            unified_diff(
-                self.str_dict(getattr(fetch(type, id=result1), "result")).splitlines(),
-                self.str_dict(getattr(fetch(type, id=result2), "result")).splitlines(),
-                fromfile="-",
-                tofile="-",
-                lineterm="",
-            )
-        )
+    def compare(self, type, v1, v2):
+        if type == "result":
+            first = self.str_dict(getattr(fetch(type, id=v1), "result"))
+            second = self.str_dict(getattr(fetch(type, id=v2), "result"))
+        else:
+            first = self.get_git_configuration(v1)["configuration"]
+            second = self.get_git_configuration(v2)["configuration"]
+        print(first, second)
+        return "\n".join(unified_diff(first.splitlines(), second.splitlines(), fromfile="", tofile="", lineterm=""))
 
     def build_filtering_constraints(self, obj_type, **kwargs):
         model, constraints = models[obj_type], []

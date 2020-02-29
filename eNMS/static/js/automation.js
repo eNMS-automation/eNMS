@@ -2,7 +2,7 @@
 global
 action: true
 CodeMirror: false
-diffview: false
+Diff2HtmlUI: false
 JSONEditor: false
 jsPanel: false
 page: false

@@ -316,7 +316,7 @@ export class Table {
       });
     }
     row.instance = JSON.stringify(row.instanceProperties).replace(/"/g, "'");
-    row.buttons = this.buttons(row);
+    if (this.buttons) row.buttons = this.buttons(row);
     return row
   }
 }
@@ -869,8 +869,8 @@ tables.task = class TaskTable extends Table {
   }
 };
 
-models.user = class User extends Base {
-  static controls() {
+tables.user = class UserTable extends Table {
+  get controls() {
     return [
       this.columnDisplay(),
       this.createNewButton("user"),
@@ -878,31 +878,31 @@ models.user = class User extends Base {
     ];
   }
 
-  get buttons() {
+  buttons(row) {
     return [
       `
       <ul class="pagination pagination-lg" style="margin: 0px;">
         <li>
           <button type="button" class="btn btn-sm btn-primary"
-          onclick="eNMS.base.showTypePanel('user', '${this.id}')" data-tooltip="Edit"
+          onclick="eNMS.base.showTypePanel('user', '${row.id}')" data-tooltip="Edit"
             ><span class="glyphicon glyphicon-edit"></span
           ></button>
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-primary"
-          onclick="eNMS.base.showTypePanel('user', '${this.id}', 'duplicate')"
+          onclick="eNMS.base.showTypePanel('user', '${row.id}', 'duplicate')"
           data-tooltip="Duplicate"
             ><span class="glyphicon glyphicon-duplicate"></span
           ></button>
         </li>
-        ${this.deleteInstanceButton}
+        ${this.deleteInstanceButton(row)}
       </ul>`,
     ];
   }
 };
 
-models.server = class Server extends Base {
-  static controls() {
+tables.server = class ServerTable extends Table {
+  get controls() {
     return [
       this.columnDisplay(),
       this.createNewButton("server"),
@@ -910,31 +910,31 @@ models.server = class Server extends Base {
     ];
   }
 
-  get buttons() {
+  buttons(row) {
     return [
       `
       <ul class="pagination pagination-lg" style="margin: 0px;">
         <li>
           <button type="button" class="btn btn-sm btn-primary"
-          onclick="eNMS.base.showTypePanel('server', '${this.id}')" data-tooltip="Edit"
+          onclick="eNMS.base.showTypePanel('server', '${row.id}')" data-tooltip="Edit"
             ><span class="glyphicon glyphicon-edit"></span
           ></button>
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-primary"
-          onclick="eNMS.base.showTypePanel('server', '${this.id}', 'duplicate')"
+          onclick="eNMS.base.showTypePanel('server', '${row.id}', 'duplicate')"
           data-tooltip="Duplicate"
             ><span class="glyphicon glyphicon-duplicate"></span
           ></button>
         </li>
-        ${this.deleteInstanceButton}
+        ${this.deleteInstanceButton(row)}
       </ul>`,
     ];
   }
 };
 
-models.changelog = class Changelog extends Base {
-  static controls() {
+tables.changelog = class ChangelogTable extends Table {
+  get controls() {
     return [
       this.columnDisplay(),
       this.createNewButton("changelog"),

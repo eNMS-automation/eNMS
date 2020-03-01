@@ -36,7 +36,7 @@ function refreshTablePeriodically(id, interval, first) {
 export class Table {
 
   constructor(type, instance, runtime, id) {
-    let table = this
+    let self = this;
     this.type = type
     let columns = tableProperties[type];
     let visibleColumns = localStorage.getItem(`table/${type}`);
@@ -113,7 +113,7 @@ export class Table {
                 if (waitForSearch) return;
                 waitForSearch = true;
                 setTimeout(function() {
-                  this.page(0).ajax.reload(null, false);
+                  self.table.page(0).ajax.reload(null, false);
                   waitForSearch = false;
                 }, 800);
               })
@@ -121,11 +121,11 @@ export class Table {
                 e.stopPropagation();
               });
           });
-        $(`#controls-${table.id}`).html(table.controls);
-        table.postProcessing(columns, type);
+        $(`#controls-${self.id}`).html(self.controls);
+        self.postProcessing(columns, type);
       },
       ajax: {
-        url: `/filtering/${models[type].modelFiltering || type}`,
+        url: `/filtering/${self.modelFiltering || type}`,
         type: "POST",
         contentType: "application/json",
         data: (d) => {
@@ -141,7 +141,7 @@ export class Table {
         },
         dataSrc: function(result) {
           return result.data.map(
-            (instance) => new models[type]({ properties: instance, tableId: table.id })
+            (instance) => self.addRow({ properties: instance, tableId: self.id })
           );
         },
       },
@@ -292,6 +292,33 @@ export class Table {
         <span class="glyphicon glyphicon-refresh"></span>
       </button>`;
   }
+
+  deleteInstanceButton(row) {
+    return `
+      <li>
+        <button type="button" class="btn btn-sm btn-danger"
+        onclick="eNMS.base.showDeletionPanel(${row.instance})" data-tooltip="Delete"
+          ><span class="glyphicon glyphicon-trash"></span
+        ></button>
+      </li>`;
+  }
+
+  addRow({ properties, tableId, derivedProperties }) {
+    let row = {tableId: tableId, ...properties};
+    row.instanceProperties = {
+      id: row.id,
+      name: row.dbName || row.name,
+      type: row.type,
+    };
+    if (derivedProperties) {
+      derivedProperties.forEach((property) => {
+        row.instanceProperties[property] = row[property];
+      });
+    }
+    row.instance = JSON.stringify(row.instanceProperties).replace(/"/g, "'");
+    row.buttons = this.buttons(row);
+    return row
+  }
 }
 
 tables.device = class DeviceTable extends Table {
@@ -314,80 +341,54 @@ tables.device = class DeviceTable extends Table {
     ];
   }
 
-};
-
-class Base {
-  constructor({ properties, tableId, derivedProperties }) {
-    this.tableId = tableId;
-    Object.assign(this, properties);
-    let instanceProperties = {
-      id: this.id,
-      name: this.dbName || this.name,
-      type: this.type,
-    };
-    if (derivedProperties) {
-      derivedProperties.forEach((property) => {
-        instanceProperties[property] = this[property];
-      });
-    }
-    this.instance = JSON.stringify(instanceProperties).replace(/"/g, "'");
-  }
-
-  get deleteInstanceButton() {
-    return `
-      <li>
-        <button type="button" class="btn btn-sm btn-danger"
-        onclick="eNMS.base.showDeletionPanel(${this.instance})" data-tooltip="Delete"
-          ><span class="glyphicon glyphicon-trash"></span
-        ></button>
-      </li>`;
-  }
-}
-
-models.device = class Device extends Base {
-  get buttons() {
+  buttons(row) {
     return `
       <ul class="pagination pagination-lg" style="margin: 0px; width: 230px">
         <li>
           <button type="button" class="btn btn-sm btn-dark"
-          onclick="eNMS.inventory.showConnectionPanel(${this.instance})"
+          onclick="eNMS.inventory.showConnectionPanel(${row.instance})"
           data-tooltip="Connection"
             ><span class="glyphicon glyphicon-console"></span
           ></button>
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-info"
-          onclick="eNMS.inventory.showDeviceData(${this.instance})"
+          onclick="eNMS.inventory.showDeviceData(${row.instance})"
           data-tooltip="Network Data"
             ><span class="glyphicon glyphicon-cog"></span
           ></button>
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-info"
-          onclick="eNMS.inventory.showDeviceResultsPanel(${this.instance})"
+          onclick="eNMS.inventory.showDeviceResultsPanel(${row.instance})"
           data-tooltip="Results"
             ><span class="glyphicon glyphicon-list-alt"></span
           ></button>
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-primary"
-          onclick="eNMS.base.showTypePanel('device', '${this.id}')" data-tooltip="Edit"
+          onclick="eNMS.base.showTypePanel('device', '${row.id}')" data-tooltip="Edit"
             ><span class="glyphicon glyphicon-edit"></span
           ></button>
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-primary"
-          onclick="eNMS.base.showTypePanel('device', '${this.id}', 'duplicate')"
+          onclick="eNMS.base.showTypePanel('device', '${row.id}', 'duplicate')"
           data-tooltip="Duplicate"
             ><span class="glyphicon glyphicon-duplicate"></span
           ></button>
         </li>
-        ${this.deleteInstanceButton}
+        ${this.deleteInstanceButton(row)}
       </ul>`;
   }
+
 };
 
-models.configuration = class Configuration extends models.device {
+class Base {
+
+}
+
+models.configuration = class Configuration extends Base {
   static get modelFiltering() {
     return "device";
   }

@@ -792,27 +792,30 @@ tables.result = class ResultTable extends Table {
   }
 };
 
-models.device_result = class DeviceResultTable extends tables.result {
+tables.device_result = class DeviceResultTable extends tables.result {
   get modelFiltering() {
     return "result";
   }
 };
 
-models.task = class Task extends Base {
-  get periodicity() {
-    if (this.scheduling_mode == "standard") {
-      return `${this.frequency} ${this.frequency_unit}`;
+tables.task = class TaskTable extends Table {
+
+  addRow(kwargs) {
+    let row = super.addRow(kwargs);
+    if (row.scheduling_mode == "standard") {
+      row.periodicity = `${row.frequency} ${row.frequency_unit}`;
     } else {
-      return this.crontab_expression;
+      row.periodicity = row.crontab_expression;
     }
+    return row
   }
 
-  static controls() {
+  get controls() {
     return [
-      super.columnDisplay(),
-      super.createNewButton("task"),
-      super.searchTableButton("task"),
-      super.refreshTableButton("task"),
+      this.columnDisplay(),
+      this.createNewButton("task"),
+      this.searchTableButton("task"),
+      this.refreshTableButton("task"),
       ` <button
         class="btn btn-info"
         onclick="eNMS.automation.displayCalendar('task')"
@@ -832,35 +835,35 @@ models.task = class Task extends Base {
     ];
   }
 
-  get buttons() {
-    const state = this.is_active ? ["disabled", "active"] : ["active", "disabled"];
+  buttons(row) {
+    const state = row.is_active ? ["disabled", "active"] : ["active", "disabled"];
     return [
       `<ul class="pagination pagination-lg" style="margin: 0px;">
         <li>
           <button type="button" class="btn btn-sm btn-primary"
-          onclick="eNMS.base.showTypePanel('task', '${this.id}')" data-tooltip="Edit"
+          onclick="eNMS.base.showTypePanel('task', '${row.id}')" data-tooltip="Edit"
             ><span class="glyphicon glyphicon-edit"></span
           ></button>
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-primary"
-          onclick="eNMS.base.showTypePanel('task', '${this.id}', 'duplicate')"
+          onclick="eNMS.base.showTypePanel('task', '${row.id}', 'duplicate')"
           data-tooltip="Duplicate">
           <span class="glyphicon glyphicon-duplicate"></span></button>
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-success ${state[0]}" ${state[0]}
-          onclick="eNMS.automation.resumeTask('${this.id}')" data-tooltip="Play"
+          onclick="eNMS.automation.resumeTask('${row.id}')" data-tooltip="Play"
             ><span class="glyphicon glyphicon-play"></span
           ></button>
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-danger ${state[1]}" ${state[1]}
-          onclick="eNMS.automation.pauseTask('${this.id}')" data-tooltip="Pause"
+          onclick="eNMS.automation.pauseTask('${row.id}')" data-tooltip="Pause"
             ><span class="glyphicon glyphicon-pause"></span
           ></button>
         </li>
-        ${this.deleteInstanceButton}
+        ${this.deleteInstanceButton(row)}
       </ul>`,
     ];
   }
@@ -869,9 +872,9 @@ models.task = class Task extends Base {
 models.user = class User extends Base {
   static controls() {
     return [
-      super.columnDisplay(),
-      super.createNewButton("user"),
-      super.refreshTableButton("user"),
+      this.columnDisplay(),
+      this.createNewButton("user"),
+      this.refreshTableButton("user"),
     ];
   }
 
@@ -901,9 +904,9 @@ models.user = class User extends Base {
 models.server = class Server extends Base {
   static controls() {
     return [
-      super.columnDisplay(),
-      super.createNewButton("server"),
-      super.refreshTableButton("server"),
+      this.columnDisplay(),
+      this.createNewButton("server"),
+      this.refreshTableButton("server"),
     ];
   }
 
@@ -933,16 +936,16 @@ models.server = class Server extends Base {
 models.changelog = class Changelog extends Base {
   static controls() {
     return [
-      super.columnDisplay(),
-      super.createNewButton("changelog"),
-      super.refreshTableButton("changelog"),
+      this.columnDisplay(),
+      this.createNewButton("changelog"),
+      this.refreshTableButton("changelog"),
     ];
   }
 };
 
 models.session = class Session extends Base {
   static controls() {
-    return [super.columnDisplay(), super.refreshTableButton("session")];
+    return [this.columnDisplay(), this.refreshTableButton("session")];
   }
 
   get buttons() {
@@ -963,9 +966,9 @@ models.session = class Session extends Base {
 models.event = class Event extends Base {
   static controls() {
     return [
-      super.columnDisplay(),
-      super.createNewButton("event"),
-      super.refreshTableButton("event"),
+      this.columnDisplay(),
+      this.createNewButton("event"),
+      this.refreshTableButton("event"),
     ];
   }
 

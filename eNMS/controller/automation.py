@@ -354,7 +354,7 @@ class AutomationController(BaseController):
             state = self.run_db.get(runtime) or fetch("run", runtime=runtime).state
         return {
             "service": service.to_dict(include=["services", "edges"]),
-            "runtimes": [(r.parent_runtime, r.creator) for r in runs],
+            "runtimes": list(set((r.parent_runtime, r.creator) for r in runs)),
             "state": state,
             "runtime": runtime,
         }

@@ -545,26 +545,25 @@ tables.pool = class PoolTable extends Table {
   }
 };
 
-models.service = class Service extends Base {
-  constructor(kwargs) {
+tables.service = class ServiceTable extends Table {
+
+  addRow(kwargs) {
     const dbName = kwargs.properties.name;
     delete kwargs.properties.name;
-    super(kwargs);
-    this.dbName = dbName;
-  }
-
-  get name() {
-    return this.type === "workflow"
+    let row = super.addRow(kwargs)
+    row.dbName = dbName;
+    row.name = row.type === "workflow"
       ? `<b><a href="#" onclick="eNMS.workflow.switchToWorkflow(
-      ${this.id})">${this.scoped_name}</a></b>`
+      ${row.id})">${row.scoped_name}</a></b>`
       : $("#parent-filtering").val() == "true"
-      ? this.scoped_name
-      : this.dbName;
+      ? row.scoped_name
+      : row.dbName;
+    return row
   }
 
-  static controls() {
+  get controls() {
     return [
-      super.columnDisplay(),
+      this.columnDisplay(),
       `
       <input type="hidden" id="workflow-filtering" name="workflow-filtering">
       <button
@@ -582,7 +581,7 @@ models.service = class Service extends Base {
         </select>
       </button>
       </input>
-      ${super.searchTableButton('service')}
+      ${this.searchTableButton('service')}
       <button
         class="btn btn-info"
         onclick="eNMS.table.refreshTable('service', true)"
@@ -626,30 +625,30 @@ models.service = class Service extends Base {
     ];
   }
 
-  get buttons() {
+  buttons(row) {
     return `
       <ul class="pagination pagination-lg" style="margin: 0px; width: 270px">
         <li>
           <button type="button" class="btn btn-sm btn-info"
-          onclick="eNMS.automation.showRuntimePanel('results', ${this.instance})"
+          onclick="eNMS.automation.showRuntimePanel('results', ${row.instance})"
           data-tooltip="Results"><span class="glyphicon glyphicon-list-alt">
           </span></button>
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-info"
-          onclick="eNMS.automation.showRuntimePanel('logs', ${this.instance})"
+          onclick="eNMS.automation.showRuntimePanel('logs', ${row.instance})"
           data-tooltip="Logs"><span class="glyphicon glyphicon-list"></span
           ></button>
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-success"
-          onclick="eNMS.automation.normalRun('${this.id}')" data-tooltip="Run"
+          onclick="eNMS.automation.normalRun('${row.id}')" data-tooltip="Run"
             ><span class="glyphicon glyphicon-play"></span
           ></button>
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-success"
-          onclick="eNMS.base.showTypePanel('${this.type}', '${this.id}', 'run')"
+          onclick="eNMS.base.showTypePanel('${row.type}', '${row.id}', 'run')"
           data-tooltip="Parameterized Run"
             ><span class="glyphicon glyphicon-play-circle"></span
           ></button>
@@ -658,28 +657,29 @@ models.service = class Service extends Base {
           <button
             type="button"
             class="btn btn-sm btn-primary"
-            onclick="eNMS.base.showTypePanel('${this.type}', '${this.id}')"
+            onclick="eNMS.base.showTypePanel('${row.type}', '${row.id}')"
             data-tooltip="Edit"
           ><span class="glyphicon glyphicon-edit"></span></button>
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-primary"
-          onclick="eNMS.automation.exportService('${this.id}')" data-tooltip="Export"
+          onclick="eNMS.automation.exportService('${row.id}')" data-tooltip="Export"
             ><span class="glyphicon glyphicon-upload"></span
           ></button>
         </li>
-        ${this.deleteInstanceButton}
+        ${this.deleteInstanceButton(row)}
       </ul>
     `;
   }
 
-  static postProcessing(...args) {
+  postProcessing(...args) {
+    let self = this;
     super.postProcessing(...args);
     loadServiceTypes();
     $("#parent-filtering")
       .selectpicker()
       .on("change", function() {
-        this.page(0).ajax.reload(null, false);
+        self.table.page(0).ajax.reload(null, false);
       });
   }
 };

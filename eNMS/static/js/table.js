@@ -194,11 +194,11 @@ class Base {
         <span class="glyphicon glyphicon-plus"></span>
       </button>`;
   }
-
-  static searchTableButton() {
+searchTableButton
+  static searchTableButton(type) {
     return `
       <button
-        id="advanced-search"
+        id="advanced-search-${type}"
         class="btn btn-info"
         data-tooltip="Advanced Search"
         type="button"
@@ -260,20 +260,22 @@ class Base {
   }
 
   static postProcessing(table, columns, type) {
-    createTooltip({
-      autoshow: true,
-      persistent: true,
-      name: `${type}_relation_filtering`,
-      target: "#advanced-search",
-      container: `#controls-${type}`,
-      position: {
-        my: "center-top",
-        at: "center-bottom",
-        offsetY: 18,
-      },
-      url: `../form/${type}_relation_filtering`,
-      title: "Relationship-based Filtering",
-    });
+    if ($(`#advanced-search-${type}`).length) {
+      createTooltip({
+        autoshow: true,
+        persistent: true,
+        name: `${type}_relation_filtering`,
+        target: `#advanced-search-${type}`,
+        container: `#controls-${type}`,
+        position: {
+          my: "center-top",
+          at: "center-bottom",
+          offsetY: 18,
+        },
+        url: `../form/${type}_relation_filtering`,
+        title: "Relationship-based Filtering",
+      });
+    }
     Base.createfilteringTooltips(type, columns);
     createTooltips();
     const visibleColumns = localStorage.getItem(`table/${type}`);
@@ -319,7 +321,7 @@ models.device = class Device extends Base {
       >
         <span class="glyphicon glyphicon-upload"></span>
       </button>`,
-      super.searchTableButton(),
+      super.searchTableButton("device"),
       super.refreshTableButton("device"),
     ];
   }
@@ -428,7 +430,7 @@ models.link = class Link extends Base {
     return [
       super.columnDisplay(),
       super.createNewButton("link"),
-      super.searchTableButton(),
+      super.searchTableButton("link"),
       super.refreshTableButton("link"),
     ];
   }
@@ -471,7 +473,7 @@ models.pool = class Pool extends Base {
       >
         <span class="glyphicon glyphicon-flash"></span>
       </button>`,
-      super.searchTableButton(),
+      super.searchTableButton("pool"),
       super.refreshTableButton("pool"),
     ];
   }
@@ -556,7 +558,7 @@ models.service = class Service extends Base {
         </select>
       </button>
       </input>
-      ${super.searchTableButton()}
+      ${super.searchTableButton('service')}
       <button
         class="btn btn-info"
         onclick="eNMS.table.refreshTable('service', true)"
@@ -667,7 +669,7 @@ models.run = class Run extends Base {
   static controls() {
     return [
       super.columnDisplay(),
-      super.searchTableButton(),
+      super.searchTableButton('run'),
       super.refreshTableButton("run"),
       ` <button
         class="btn btn-info"
@@ -791,7 +793,7 @@ models.task = class Task extends Base {
     return [
       super.columnDisplay(),
       super.createNewButton("task"),
-      super.searchTableButton(),
+      super.searchTableButton("task"),
       super.refreshTableButton("task"),
       ` <button
         class="btn btn-info"

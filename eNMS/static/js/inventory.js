@@ -404,7 +404,9 @@ function showGitHistory(device) {
             $(`#data-type-${device.id}`)
               .on("change", function() {
                 table.clear();
-                const data = $(this).prop("checked") ? "operational_data" : "configuration";
+                const data = $(this).prop("checked")
+                  ? "operational_data"
+                  : "configuration";
                 commits[data].forEach((commit) => {
                   table.row.add([
                     `${commit.date}`,
@@ -419,18 +421,13 @@ function showGitHistory(device) {
                     >
                       <span class="glyphicon glyphicon-cog"></span>
                     </button>`,
-                    `<input type="radio" name="v1-${device.id}" value="${
-                    commit.hash
-                    }"></input>`,
-                    `<input type="radio" name="v2-${device.id}" value="${
-                      commit.hash
-                    }"></input>`
-                  ])
+                    `<input type="radio" name="v1-${device.id}" value="${commit.hash}"></input>`,
+                    `<input type="radio" name="v2-${device.id}" value="${commit.hash}"></input>`,
+                  ]);
                 });
-              table.draw(false);
+                table.draw(false);
               })
               .change();
-
           },
         });
       }

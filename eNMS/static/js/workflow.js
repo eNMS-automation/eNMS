@@ -796,7 +796,7 @@ export function getServiceState(id, first) {
 
 function displayWorkflowState(result) {
   resetDisplay();
-  updateRuntimes(result.runtimes)
+  updateRuntimes(result.runtimes);
   if (!nodes || !edges || !result.state || !result.state.progress) return;
   if (result.state.services) {
     $.each(result.state.services, (path, state) => {
@@ -869,7 +869,7 @@ function getWorkflowState(periodic, notification) {
     call({
       url: `/get_service_state/${currentPath}${url}`,
       callback: function(result) {
-        console.log(result)
+        console.log(result);
         if (result.service.id != workflow.id) return;
         currentRuntime = result.runtime;
         if (result.service.last_modified !== workflow.last_modified) {

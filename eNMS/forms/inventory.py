@@ -16,9 +16,9 @@ from eNMS.properties import private_properties
 
 
 def configure_device_form(cls):
-    for property in app.properties["custom"]["device"]:
+    for property, values in app.properties["custom"]["device"].items():
         field = PasswordField if property in private_properties else StringField
-        setattr(cls, property, field())
+        setattr(cls, property, field(values["pretty_name"]))
     return cls
 
 

@@ -361,7 +361,6 @@ class AutomationController(BaseController):
         skip = not all(service.skip for service in services)
         for service in services:
             service.skip = skip
-
         workflow.last_modified = self.get_time()
         return {
             "skip": "skip" if skip else "unskip",

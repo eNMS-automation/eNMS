@@ -442,38 +442,40 @@ tables.configuration = class ConfigurationTable extends Table {
 
 };
 
-class Base {}
+tables.link = class LinkTable extends Table {
 
-models.link = class Link extends Base {
-  static controls() {
+  get controls() {
     return [
-      super.columnDisplay(),
-      super.createNewButton("link"),
-      super.searchTableButton("link"),
-      super.refreshTableButton("link"),
+      this.columnDisplay(),
+      this.createNewButton("link"),
+      this.searchTableButton("link"),
+      this.refreshTableButton("link"),
     ];
   }
 
-  get buttons() {
+  buttons(row) {
     return `
       <ul class="pagination pagination-lg" style="margin: 0px; width: 120px">
         <li>
           <button type="button" class="btn btn-sm btn-primary"
-          onclick="eNMS.base.showTypePanel('link', '${this.id}')" data-tooltip="Edit"
+          onclick="eNMS.base.showTypePanel('link', '${row.id}')" data-tooltip="Edit"
             ><span class="glyphicon glyphicon-edit"></span
           ></button>
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-primary"
-          onclick="eNMS.base.showTypePanel('link', '${this.id}', 'duplicate')"
+          onclick="eNMS.base.showTypePanel('link', '${row.id}', 'duplicate')"
           data-tooltip="Duplicate"
             ><span class="glyphicon glyphicon-duplicate"></span
           ></button>
         </li>
-        ${this.deleteInstanceButton}
+        ${this.deleteInstanceButton(row)}
       </ul>`;
   }
-};
+
+}
+
+class Base {}
 
 models.pool = class Pool extends Base {
   get objectNumber() {

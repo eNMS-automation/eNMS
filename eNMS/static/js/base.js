@@ -14,7 +14,7 @@ relations: false
 relationships: false
 */
 
-import { tables } from "./table.js";
+import { tableInstances } from "./table.js";
 import { creationMode, processWorkflowData, workflow } from "./workflow.js";
 
 export let editors = {};
@@ -147,7 +147,7 @@ export const deleteInstance = function(type, id) {
           localStorage.removeItem("path");
         }
       }
-      tables[type]
+      tableInstances[type]
         .row($(`#${id}`))
         .remove()
         .draw(false);

@@ -943,18 +943,18 @@ tables.changelog = class ChangelogTable extends Table {
   }
 };
 
-models.session = class Session extends Base {
-  static controls() {
+tables.session = class SessionTable extends Table {
+  get controls() {
     return [this.columnDisplay(), this.refreshTableButton("session")];
   }
 
-  get buttons() {
+  buttons(row) {
     return [
       `
       <ul class="pagination pagination-lg" style="margin: 0px;">
         <li>
           <button type="button" class="btn btn-sm btn-info"
-          onclick="eNMS.inventory.showSessionLog(${this.id})" data-tooltip="Session Log"
+          onclick="eNMS.inventory.showSessionLog(${row.id})" data-tooltip="Session Log"
             ><span class="glyphicon glyphicon-list"></span
           ></button>
         </li>
@@ -963,8 +963,8 @@ models.session = class Session extends Base {
   }
 };
 
-models.event = class Event extends Base {
-  static controls() {
+tables.event = class EventTable extends Table {
+  get controls() {
     return [
       this.columnDisplay(),
       this.createNewButton("event"),
@@ -972,7 +972,7 @@ models.event = class Event extends Base {
     ];
   }
 
-  get buttons() {
+  buttons(row) {
     return [
       `
       <ul class="pagination pagination-lg" style="margin: 0px; width: 150px">
@@ -988,7 +988,7 @@ models.event = class Event extends Base {
           data-tooltip="Duplicate">
           <span class="glyphicon glyphicon-duplicate"></span></button>
         </li>
-        ${this.deleteInstanceButton}
+        ${this.deleteInstanceButton(row)}
       </ul>
     `,
     ];

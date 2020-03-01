@@ -122,7 +122,7 @@ export class Table {
               });
           });
         $(`#controls-${table.id}`).html(table.controls);
-        models[type].postProcessing(this.api(), columns, type);
+        table.postProcessing(columns, type);
       },
       ajax: {
         url: `/filtering/${models[type].modelFiltering || type}`,
@@ -153,6 +153,83 @@ export class Table {
     if (["run", "service", "task", "workflow"].includes(type)) {
       refreshTablePeriodically(this.id, 3000, true);
     }
+  }
+
+  postProcessing(columns, type) {
+    let self = this;
+    if ($(`#advanced-search-${type}`).length) {
+      createTooltip({
+        autoshow: true,
+        persistent: true,
+        name: `${type}_relation_filtering`,
+        target: `#advanced-search-${type}`,
+        container: `#controls-${type}`,
+        position: {
+          my: "center-top",
+          at: "center-bottom",
+          offsetY: 18,
+        },
+        url: `../form/${type}_relation_filtering`,
+        title: "Relationship-based Filtering",
+      });
+    }
+    this.createfilteringTooltips(type, columns);
+    createTooltips();
+    const visibleColumns = localStorage.getItem(`table/${type}`);
+    columns.forEach((column) => {
+      const visible = visibleColumns
+        ? visibleColumns.split(",").includes(column.name)
+        : "visible" in column
+        ? column.visible
+        : true;
+      $("#column-display").append(
+        new Option(column.title || column.data, column.data, visible, visible)
+      );
+    });
+    $("#column-display").selectpicker("refresh");
+    $("#column-display").on("change", function() {
+      columns.forEach((col) => {
+        self.table.column(`${col.name}:name`).visible(
+          $(this)
+            .val()
+            .includes(col.data)
+        );
+      });
+      self.table.ajax.reload(null, false);
+      self.createfilteringTooltips(type, columns);
+      localStorage.setItem(`table/${type}`, $(this).val());
+    });
+    self.table.columns.adjust();
+  }
+
+  createfilteringTooltips(type, columns) {
+    columns.forEach((column) => {
+      if (column.search != "text") return;
+      const elementId = `${type}_filtering-${column.data}`;
+      createTooltip({
+        persistent: true,
+        name: elementId,
+        target: `#${elementId}-search`,
+        container: `#tooltip-overlay`,
+        position: {
+          my: "center-top",
+          at: "center-bottom",
+        },
+        content: `
+        <div class="modal-body">
+          <select
+            id="${column.data}_filter"
+            name="${column.data}_filter"
+            class="form-control search-select"
+            style="width: 100%; height: 30px; margin-top: 15px"
+          >
+            <option value="inclusion">Inclusion</option>
+            <option value="equality">Equality</option>
+            <option value="regex">Regular Expression</option>
+          </select>
+        </div>`,
+      });
+    });
   }
 
   columnDisplay() {
@@ -265,104 +342,9 @@ class Base {
         ></button>
       </li>`;
   }
-
-  static createfilteringTooltips(type, columns) {
-    columns.forEach((column) => {
-      if (column.search != "text") return;
-      const elementId = `${type}_filtering-${column.data}`;
-      createTooltip({
-        persistent: true,
-        name: elementId,
-        target: `#${elementId}-search`,
-        container: `#tooltip-overlay`,
-        position: {
-          my: "center-top",
-          at: "center-bottom",
-        },
-        content: `
-        <div class="modal-body">
-          <select
-            id="${column.data}_filter"
-            name="${column.data}_filter"
-            class="form-control search-select"
-            style="width: 100%; height: 30px; margin-top: 15px"
-          >
-            <option value="inclusion">Inclusion</option>
-            <option value="equality">Equality</option>
-            <option value="regex">Regular Expression</option>
-          </select>
-        </div>`,
-      });
-    });
-  }
-
-  static postProcessing(table, columns, type) {
-    if ($(`#advanced-search-${type}`).length) {
-      createTooltip({
-        autoshow: true,
-        persistent: true,
-        name: `${type}_relation_filtering`,
-        target: `#advanced-search-${type}`,
-        container: `#controls-${type}`,
-        position: {
-          my: "center-top",
-          at: "center-bottom",
-          offsetY: 18,
-        },
-        url: `../form/${type}_relation_filtering`,
-        title: "Relationship-based Filtering",
-      });
-    }
-    Base.createfilteringTooltips(type, columns);
-    createTooltips();
-    const visibleColumns = localStorage.getItem(`table/${type}`);
-    columns.forEach((column) => {
-      const visible = visibleColumns
-        ? visibleColumns.split(",").includes(column.name)
-        : "visible" in column
-        ? column.visible
-        : true;
-      $("#column-display").append(
-        new Option(column.title || column.data, column.data, visible, visible)
-      );
-    });
-    $("#column-display").selectpicker("refresh");
-    $("#column-display").on("change", function() {
-      columns.forEach((col) => {
-        table.column(`${col.name}:name`).visible(
-          $(this)
-            .val()
-            .includes(col.data)
-        );
-      });
-      table.ajax.reload(null, false);
-      Base.createfilteringTooltips(type, columns);
-      localStorage.setItem(`table/${type}`, $(this).val());
-    });
-    table.columns.adjust();
-  }
 }
 
 models.device = class Device extends Base {
-  static controls() {
-    return [
-      super.columnDisplay(),
-      super.createNewButton("device"),
-      ` <button type="button" class="btn btn-primary"
-      onclick="eNMS.inventory.showImportTopologyPanel()"
-      data-tooltip="Import"><span class="glyphicon glyphicon-download">
-      </span></button>
-      <button type="button" class="btn btn-primary"
-        onclick="eNMS.base.openPanel({name: 'excel_export'})"
-        data-tooltip="Export"
-      >
-        <span class="glyphicon glyphicon-upload"></span>
-      </button>`,
-      super.searchTableButton("device"),
-      super.refreshTableButton("device"),
-    ];
-  }
-
   get buttons() {
     return `
       <ul class="pagination pagination-lg" style="margin: 0px; width: 230px">

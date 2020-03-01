@@ -14,22 +14,23 @@ import {
 import { loadServiceTypes } from "./automation.js";
 
 export let tables = {};
+export let tableInstances = {};
 export const models = {};
 let waitForSearch = false;
 
-function filterTable(formType) {
-  tables[formType].page(0).ajax.reload(null, false);
+function filterTable(id) {
+  tableInstances[id].page(0).ajax.reload(null, false);
   notify("Filter applied.", "success", 5);
 }
 
-export const refreshTable = function(tableType, displayNotification) {
-  tables[tableType].ajax.reload(null, false);
+export const refreshTable = function(id, displayNotification) {
+  tableInstances[id].ajax.reload(null, false);
   if (displayNotification) notify("Table refreshed.", "success", 5);
 };
 
-function refreshTablePeriodically(tableType, interval, first) {
-  if (userIsActive && !first) refreshTable(tableType, false);
-  setTimeout(() => refreshTablePeriodically(tableType, interval), interval);
+function refreshTablePeriodically(id, interval, first) {
+  if (userIsActive && !first) refreshTable(id, false);
+  setTimeout(() => refreshTablePeriodically(id, interval), interval);
 }
 
 export class Table {
@@ -44,9 +45,9 @@ export class Table {
       if (visibleColumns) column.visible = visibleColumns.includes(column.data);
       column.name = column.data;
     });
-    const tableId = `${type}${id ? `-${id}` : ""}`;
+    this.id = `${type}${id ? `-${id}` : ""}`;
     // eslint-disable-next-line new-cap
-    this.table = $(`#table-${tableId}`).DataTable({
+    this.table = tableInstances[this.id] = $(`#table-${this.id}`).DataTable({
       serverSide: true,
       orderCellsTop: true,
       autoWidth: false,
@@ -61,7 +62,6 @@ export class Table {
       columns: columns,
       columnDefs: [{ className: "dt-center", targets: "_all" }],
       initComplete: function() {
-        console.log(this)
         this.api()
           .columns()
           .every(function(index) {
@@ -121,7 +121,7 @@ export class Table {
                 e.stopPropagation();
               });
           });
-        $(`#controls-${tableId}`).html(table.controls(tableId));
+        $(`#controls-${table.id}`).html(table.controls);
         models[type].postProcessing(this.api(), columns, type);
       },
       ajax: {
@@ -129,7 +129,7 @@ export class Table {
         type: "POST",
         contentType: "application/json",
         data: (d) => {
-          const form = `#search-form-${tableId}`;
+          const form = `#search-form-${this.id}`;
           d.form = serializeForm(form);
           d.instance = instance;
           d.columns = columns;
@@ -141,7 +141,7 @@ export class Table {
         },
         dataSrc: function(result) {
           return result.data.map(
-            (instance) => new models[type]({ properties: instance, tableId: tableId })
+            (instance) => new models[type]({ properties: instance, tableId: table.id })
           );
         },
       },
@@ -151,7 +151,7 @@ export class Table {
       this.table.order([0, "desc"]).draw();
     }
     if (["run", "service", "task", "workflow"].includes(type)) {
-      refreshTablePeriodically(type, 3000, true);
+      refreshTablePeriodically(this.id, 3000, true);
     }
   }
 
@@ -208,7 +208,7 @@ export class Table {
     return `
       <button
         class="btn btn-info"
-        onclick="eNMS.table.refreshTable('${this.type}', true)"
+        onclick="eNMS.table.refreshTable('${this.id}', true)"
         data-tooltip="Refresh"
         type="button"
       >
@@ -218,7 +218,7 @@ export class Table {
 }
 
 tables.device = class DeviceTable extends Table {
-  controls() {
+  get controls() {
     return [
       this.columnDisplay(),
       this.createNewButton("device"),

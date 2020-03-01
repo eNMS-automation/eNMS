@@ -869,7 +869,6 @@ function getWorkflowState(periodic, notification) {
     call({
       url: `/get_service_state/${currentPath}${url}`,
       callback: function(result) {
-        console.log(result);
         if (result.service.id != workflow.id) return;
         currentRuntime = result.runtime;
         if (result.service.last_modified !== workflow.last_modified) {

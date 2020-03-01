@@ -384,16 +384,12 @@ tables.device = class DeviceTable extends Table {
 
 };
 
-class Base {
-
-}
-
-models.configuration = class Configuration extends Base {
-  static get modelFiltering() {
+tables.configuration = class ConfigurationTable extends Table {
+  get modelFiltering() {
     return "device";
   }
 
-  static postProcessing(...args) {
+  postProcessing(...args) {
     super.postProcessing(...args);
     $("#slider").bootstrapSlider({
       value: 0,
@@ -406,9 +402,9 @@ models.configuration = class Configuration extends Base {
     });
   }
 
-  static controls() {
+  get controls() {
     return [
-      super.columnDisplay(),
+      this.columnDisplay(),
       `<input
         name="context-lines"
         id="slider"
@@ -418,32 +414,35 @@ models.configuration = class Configuration extends Base {
     ];
   }
 
-  get buttons() {
+  buttons(row) {
     return `
       <ul class="pagination pagination-lg" style="margin: 0px">
         <li>
           <button type="button" class="btn btn-sm btn-info"
-          onclick="eNMS.inventory.showDeviceData(${this.instance})"
+          onclick="eNMS.inventory.showDeviceData(${row.instance})"
           data-tooltip="Network Data"
             ><span class="glyphicon glyphicon-cog"></span
           ></button>
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-info"
-          onclick="eNMS.inventory.showGitHistory(${this.instance})"
+          onclick="eNMS.inventory.showGitHistory(${row.instance})"
           data-tooltip="Historic"
             ><span class="glyphicon glyphicon-adjust"></span
           ></button>
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-primary"
-          onclick="eNMS.base.showTypePanel('device', '${this.id}')" data-tooltip="Edit"
+          onclick="eNMS.base.showTypePanel('device', '${row.id}')" data-tooltip="Edit"
             ><span class="glyphicon glyphicon-edit"></span
           ></button>
         </li>
       </ul>`;
   }
+
 };
+
+class Base {}
 
 models.link = class Link extends Base {
   static controls() {

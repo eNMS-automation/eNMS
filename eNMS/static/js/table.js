@@ -37,15 +37,15 @@ export class Table {
 
   constructor(type, instance, runtime, id) {
     let self = this;
-    this.type = type
-    let columns = tableProperties[type];
-    let visibleColumns = localStorage.getItem(`table/${type}`);
+    this.type = type;
+    this.columns = tableProperties[this.type];
+    let visibleColumns = localStorage.getItem(`table/${this.type}`);
     if (visibleColumns) visibleColumns = visibleColumns.split(",");
-    columns.forEach((column) => {
+    this.columns.forEach((column) => {
       if (visibleColumns) column.visible = visibleColumns.includes(column.data);
       column.name = column.data;
     });
-    this.id = `${type}${id ? `-${id}` : ""}`;
+    this.id = `${this.type}${id ? `-${id}` : ""}`;
     // eslint-disable-next-line new-cap
     this.table = tableInstances[this.id] = $(`#table-${this.id}`).DataTable({
       serverSide: true,
@@ -59,15 +59,15 @@ export class Table {
         createTooltips();
       },
       sDom: "tilp",
-      columns: columns,
+      columns: this.columns,
       columnDefs: [{ className: "dt-center", targets: "_all" }],
       initComplete: function() {
         this.api()
           .columns()
           .every(function(index) {
-            const data = columns[index];
+            const data = self.columns[index];
             let element;
-            const elementId = `${type}_filtering-${data.data}`;
+            const elementId = `${self.type}_filtering-${data.data}`;
             if (data.search == "text") {
               element = `
               <div class="input-group" style="width:100%">
@@ -122,18 +122,18 @@ export class Table {
               });
           });
         $(`#controls-${self.id}`).html(self.controls);
-        self.postProcessing(columns, type);
+        self.postProcessing();
       },
       ajax: {
-        url: `/filtering/${self.modelFiltering || type}`,
+        url: `/filtering/${self.modelFiltering || self.type}`,
         type: "POST",
         contentType: "application/json",
         data: (d) => {
           const form = `#search-form-${this.id}`;
           d.form = serializeForm(form);
           d.instance = instance;
-          d.columns = columns;
-          d.type = type;
+          d.columns = self.columns;
+          d.type = self.type;
           if (runtime) {
             d.runtime = $(`#runtimes-${instance.id}`).val() || runtime;
           }
@@ -147,36 +147,36 @@ export class Table {
       },
     });
     $(window).resize(this.table.columns.adjust);
-    if (["changelog", "run", "result"].includes(type)) {
+    if (["changelog", "run", "result"].includes(this.type)) {
       this.table.order([0, "desc"]).draw();
     }
-    if (["run", "service", "task", "workflow"].includes(type)) {
+    if (["run", "service", "task", "workflow"].includes(this.type)) {
       refreshTablePeriodically(this.id, 3000, true);
     }
   }
 
-  postProcessing(columns, type) {
+  postProcessing() {
     let self = this;
-    if ($(`#advanced-search-${type}`).length) {
+    if ($(`#advanced-search-${this.type}`).length) {
       createTooltip({
         autoshow: true,
         persistent: true,
-        name: `${type}_relation_filtering`,
-        target: `#advanced-search-${type}`,
-        container: `#controls-${type}`,
+        name: `${this.type}_relation_filtering`,
+        target: `#advanced-search-${this.type}`,
+        container: `#controls-${this.type}`,
         position: {
           my: "center-top",
           at: "center-bottom",
           offsetY: 18,
         },
-        url: `../form/${type}_relation_filtering`,
+        url: `../form/${this.type}_relation_filtering`,
         title: "Relationship-based Filtering",
       });
     }
-    this.createfilteringTooltips(type, columns);
+    this.createfilteringTooltips();
     createTooltips();
-    const visibleColumns = localStorage.getItem(`table/${type}`);
-    columns.forEach((column) => {
+    const visibleColumns = localStorage.getItem(`table/${this.type}`);
+    this.columns.forEach((column) => {
       const visible = visibleColumns
         ? visibleColumns.split(",").includes(column.name)
         : "visible" in column
@@ -188,7 +188,7 @@ export class Table {
     });
     $("#column-display").selectpicker("refresh");
     $("#column-display").on("change", function() {
-      columns.forEach((col) => {
+      self.columns.forEach((col) => {
         self.table.column(`${col.name}:name`).visible(
           $(this)
             .val()
@@ -196,16 +196,16 @@ export class Table {
         );
       });
       self.table.ajax.reload(null, false);
-      self.createfilteringTooltips(type, columns);
-      localStorage.setItem(`table/${type}`, $(this).val());
+      self.createfilteringTooltips();
+      localStorage.setItem(`table/${self.type}`, $(this).val());
     });
     self.table.columns.adjust();
   }
 
-  createfilteringTooltips(type, columns) {
-    columns.forEach((column) => {
+  createfilteringTooltips() {
+    this.columns.forEach((column) => {
       if (column.search != "text") return;
-      const elementId = `${type}_filtering-${column.data}`;
+      const elementId = `${this.type}_filtering-${column.data}`;
       createTooltip({
         persistent: true,
         name: elementId,
@@ -322,6 +322,7 @@ export class Table {
 }
 
 tables.device = class DeviceTable extends Table {
+
   get controls() {
     return [
       this.columnDisplay(),

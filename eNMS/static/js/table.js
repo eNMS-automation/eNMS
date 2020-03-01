@@ -591,37 +591,36 @@ tables.service = class ServiceTable extends Table {
         <span class="glyphicon glyphicon-refresh"></span>
       </button>
       <a
-      id="left-arrow"
-      class="btn btn-info disabled"
-      onclick="action['Backward']()"
-      type="button"
-    >
-      <span class="glyphicon glyphicon-chevron-left"></span>
-    </a>
-    <a
-      id="right-arrow"
-      class="btn btn-info disabled"
-      onclick="action['Forward']()"
-      type="button"
-    >
-      <span class="glyphicon glyphicon-chevron-right"></span>
-    </a>
-    <button
-    class="btn btn-primary"
-    onclick="eNMS.automation.openServicePanel()"
-    data-tooltip="New"
-    type="button"
-  >
-    <span class="glyphicon glyphicon-plus"></span>
-  </button>
-  <button
-    style="background:transparent; border:none; 
-    color:transparent; width: 200px;"
-    type="button"
-  >
-    <select id="service-type" class="form-control"></select>
-  </button>
-    `,
+        id="left-arrow"
+        class="btn btn-info disabled"
+        onclick="action['Backward']()"
+        type="button"
+      >
+        <span class="glyphicon glyphicon-chevron-left"></span>
+      </a>
+      <a
+        id="right-arrow"
+        class="btn btn-info disabled"
+        onclick="action['Forward']()"
+        type="button"
+      >
+        <span class="glyphicon glyphicon-chevron-right"></span>
+      </a>
+      <button
+        class="btn btn-primary"
+        onclick="eNMS.automation.openServicePanel()"
+        data-tooltip="New"
+        type="button"
+      >
+        <span class="glyphicon glyphicon-plus"></span>
+      </button>
+      <button
+        style="background:transparent; border:none; 
+        color:transparent; width: 200px;"
+        type="button"
+      >
+        <select id="service-type" class="form-control"></select>
+      </button>`,
     ];
   }
 
@@ -684,13 +683,15 @@ tables.service = class ServiceTable extends Table {
   }
 };
 
-models.run = class Run extends Base {
-  constructor(kwargs) {
-    super(kwargs);
-    this.service = JSON.stringify(this.service_properties).replace(/"/g, "'");
+tables.run = class RunTable extends Table {
+
+  addRow(kwargs) {
+    let row = super.addRow(kwargs);
+    row.service = JSON.stringify(row.service_properties).replace(/"/g, "'");
+    return row
   }
 
-  static controls() {
+  get controls() {
     return [
       super.columnDisplay(),
       super.searchTableButton('run'),
@@ -706,25 +707,26 @@ models.run = class Run extends Base {
     ];
   }
 
-  get buttons() {
+  buttons(row) {
     return [
       `<ul class="pagination pagination-lg" style="margin: 0px; width: 100px">
         <li>
           <button type="button" class="btn btn-sm btn-info"
-          onclick="eNMS.automation.showRuntimePanel('logs', ${this.service},
-          '${this.runtime}')" data-tooltip="Logs">
+          onclick="eNMS.automation.showRuntimePanel('logs', ${row.service},
+          '${row.runtime}')" data-tooltip="Logs">
           <span class="glyphicon glyphicon-list"></span></button>
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-info"
-          onclick="eNMS.automation.showRuntimePanel('results', ${this.service},
-          '${this.runtime}')" data-tooltip="Results">
+          onclick="eNMS.automation.showRuntimePanel('results', ${row.service},
+          '${row.runtime}')" data-tooltip="Results">
           <span class="glyphicon glyphicon-list-alt"></span></button>
         </li>
       </ul>`,
     ];
   }
 };
+
 
 models.result = class Result extends Base {
   constructor({ properties, tableId }) {

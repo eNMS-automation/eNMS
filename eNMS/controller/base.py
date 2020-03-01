@@ -226,8 +226,8 @@ class BaseController:
                 spec = spec_from_file_location(str(file).split("/")[-1][:-3], str(file))
                 try:
                     spec.loader.exec_module(module_from_spec(spec))
-                except InvalidRequestError as e:
-                    error(f"Error loading custom service '{file}' ({str(e)})")
+                except InvalidRequestError as exc:
+                    error(f"Error loading custom service '{file}' ({str(exc)})")
 
     def init_ldap_client(self):
         self.ldap_client = Server(self.settings["ldap"]["server"], get_info=ALL)

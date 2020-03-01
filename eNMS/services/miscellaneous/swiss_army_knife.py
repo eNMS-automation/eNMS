@@ -50,8 +50,8 @@ class SwissArmyKnifeService(Service):
             repo.remotes.origin.pull()
             repo.git.add(A=True)
             repo.git.commit(m="Automatic commit (configurations)")
-        except GitCommandError as e:
-            info(f"Git commit failed ({str(e)}")
+        except GitCommandError as exc:
+            info(f"Git commit failed ({str(exc)}")
         repo.remotes.origin.push()
         return {"success": True}
 

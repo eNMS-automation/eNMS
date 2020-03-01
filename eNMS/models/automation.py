@@ -735,12 +735,12 @@ class Run(AbstractBase):
                 result["result"] = loads(result["result"])
             elif self.conversion_method == "xml":
                 result["result"] = parse(result["result"])
-        except (ExpatError, JSONDecodeError) as e:
+        except (ExpatError, JSONDecodeError) as exc:
             result = {
                 "success": False,
                 "text_response": result,
                 "error": f"Conversion to {self.conversion_method} failed",
-                "exception": str(e),
+                "exception": str(exc),
             }
         return result
 

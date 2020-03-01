@@ -356,20 +356,21 @@ function showGitHistory(device) {
               role="navigation"
               style="margin-top: 5px"
             >
-              <button
-                class="btn btn-info"
-                onclick="eNMS.automation.compare('configuration', ${device.id})"
-                data-tooltip="Compare"
-                type="button"
-              >
-                <span class="glyphicon glyphicon-adjust"></span>
-              </button>
               <input
                 id="data-type-${device.id}"
                 type="checkbox"
                 data-onstyle="info"
                 data-offstyle="primary"
               >
+              <button
+                class="btn btn-info"
+                onclick="eNMS.automation.compare('configuration', ${device.id})"
+                data-tooltip="Compare"
+                type="button"
+                style="margin-left:10px"
+              >
+                <span class="glyphicon glyphicon-adjust"></span>
+              </button>
             </nav>
             <div class="modal-body">
               <table 
@@ -380,13 +381,12 @@ function showGitHistory(device) {
                 <thead></thead>
                 <tbody></tbody>
               </table>
-            <div>
-          `,
+            <div>`,
           callback: () => {
             $(`#data-type-${device.id}`).bootstrapToggle({
               on: "Operational Data",
               off: "Configuration",
-              width: "120px",
+              width: "150px",
             });
             let table = $(`#configuration-table-${device.id}`)
               // eslint-disable-next-line new-cap

@@ -89,7 +89,7 @@ let mousePosition;
 let currLabel;
 let triggerMenu;
 
-export function displayWorkflow(workflowData) {
+export function displayWorkflow(workflowData, runtime) {
   workflow = workflowData.service;
   nodes = new vis.DataSet(workflow.services.map(serviceToNode));
   edges = new vis.DataSet(workflow.edges.map(edgeToEdge));
@@ -137,7 +137,7 @@ export function displayWorkflow(workflowData) {
     } else if (node.type == "label") {
       editLabel(node);
     } else if (node.type == "workflow") {
-      switchToWorkflow(`${currentPath}>${node.id}`);
+      switchToWorkflow(`${currentPath}>${node.id}`, null, $("#current-runtime").val());
     } else {
       showTypePanel(node.type, node.id);
     }
@@ -150,7 +150,7 @@ export function displayWorkflow(workflowData) {
       `<option value='${runtime[0]}'>${runtime[0]} (run by ${runtime[1]})</option>`
     );
   });
-  $("#current-runtime").val("latest");
+  $("#current-runtime").val(runtime || "latest");
   $("#current-workflow").val(currentPath.split(">")[0]);
   $("#current-runtime,#current-workflow").selectpicker("refresh");
   graph.on("dragEnd", (event) => {
@@ -239,7 +239,7 @@ const rectangleSelection = (container, network, nodes) => {
   });
 };
 
-export const switchToWorkflow = function(path, arrow) {
+export const switchToWorkflow = function(path, arrow, runtime) {
   if (typeof path === "undefined") return;
   if (path.toString().includes(">")) {
     $("#up-arrow").removeClass("disabled");
@@ -265,12 +265,12 @@ export const switchToWorkflow = function(path, arrow) {
   }
   if (page == "workflow_builder") {
     call({
-      url: `/get_service_state/${path}/latest`,
+      url: `/get_service_state/${path}/${runtime || "latest"}`,
       callback: function(result) {
         workflow = result.service;
         localStorage.setItem("path", path);
         if (workflow) localStorage.setItem("workflow", JSON.stringify(workflow));
-        displayWorkflow(result);
+        displayWorkflow(result, runtime);
       },
     });
   } else {

@@ -17,7 +17,7 @@ import {
   openPanel,
   showTypePanel,
 } from "./base.js";
-import { Table, tables } from "./table.js";
+import { tables, tableInstances } from "./table.js";
 import {
   arrowHistory,
   arrowPointer,
@@ -322,11 +322,7 @@ function displayResultsTree(service, runtime) {
 }
 
 function displayResultsTable(service, runtime) {
-  $("#table_result").remove();
-  $(`#runtimes-result-${service.id}`).on("change", function() {
-    tables[`result-${service.id}`].ajax.reload(null, false);
-  });
-  new Table("result", service, runtime || currentRuntime, service.id);
+  new tables.result("result", service, runtime || currentRuntime, service.id);
 }
 
 function refreshLogs(service, runtime, editor, first, wasRefreshed) {

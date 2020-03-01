@@ -688,6 +688,7 @@ tables.run = class RunTable extends Table {
   addRow(kwargs) {
     let row = super.addRow(kwargs);
     row.service = JSON.stringify(row.service_properties).replace(/"/g, "'");
+    row.buttons = this.buttons(row);
     return row
   }
 
@@ -727,44 +728,35 @@ tables.run = class RunTable extends Table {
   }
 };
 
+tables.result = class ResultTable extends Table {
 
-models.result = class Result extends Base {
-  constructor({ properties, tableId }) {
+  addRow({ properties, tableId }) {
+    console.log(this.id)
     const status = properties.success;
     delete properties.success;
     delete properties.result;
-    super({
+    let row = super.addRow({
       properties: properties,
       tableId: tableId,
       derivedProperties: ["service_name", "device_name"],
     });
-    this.status = status;
-  }
-
-  get success() {
-    const btn = this.status ? "success" : "danger";
-    const label = this.status ? "Success" : "Failure";
-    return `
+    row.status = status;
+    row.success = `
       <button
         type="button"
-        class="btn btn-${btn} btn-sm"
-        style="width:100%">${label}
+        class="btn btn-${status ? "success" : "danger"} btn-sm"
+        style="width:100%">${status ? "Success" : "Failure"}
       </button>`;
+    row.v1 = `<input type="radio" name="v1-${tableId}" value="${row.id}">`;
+    row.v2 = `<input type="radio" name="v2-${tableId}" value="${row.id}">`;
+    return row
   }
 
-  get v1() {
-    return `<input type="radio" name="v1-${this.tableId}" value="${this.id}">`;
-  }
-
-  get v2() {
-    return `<input type="radio" name="v2-${this.tableId}" value="${this.id}">`;
-  }
-
-  static controls(tableId) {
+  get controls() {
     return [
       `<button
         class="btn btn-info"
-        onclick="eNMS.automation.compare('result', '${tableId}')"
+        onclick="eNMS.automation.compare('result', '${this.id}')"
         data-tooltip="Compare"
         type="button"
       >
@@ -774,34 +766,34 @@ models.result = class Result extends Base {
     ];
   }
 
-  get buttons() {
+  buttons(row) {
     return [
       `
     <ul class="pagination pagination-lg" style="margin: 0px; width: 90px">
       <li>
-          <button type="button" class="btn btn-sm btn-info"
-          onclick="eNMS.automation.showResult('${this.id}')"
-          data-tooltip="Results"><span class="glyphicon glyphicon-list-alt">
-          </span></button>
+        <button type="button" class="btn btn-sm btn-info"
+        onclick="eNMS.automation.showResult('${row.id}')"
+        data-tooltip="Results"><span class="glyphicon glyphicon-list-alt">
+        </span></button>
       </li>
       <li>
-          <button
-            type="button"
-            id="btn-result-${this.id}"
-            class="btn btn-sm btn-info"
-            onclick="eNMS.automation.copyClipboard(
-              'btn-result-${this.id}', ${this.instance}
-            )"
-            data-tooltip="Copy to clipboard"
-          ><span class="glyphicon glyphicon-copy"></span></button>
+        <button
+          type="button"
+          id="btn-result-${row.id}"
+          class="btn btn-sm btn-info"
+          onclick="eNMS.automation.copyClipboard(
+            'btn-result-${row.id}', ${row.instance}
+          )"
+          data-tooltip="Copy to clipboard"
+        ><span class="glyphicon glyphicon-copy"></span></button>
       </li>
     </ul>`,
     ];
   }
 };
 
-models.device_result = class DeviceResult extends models.result {
-  static get modelFiltering() {
+models.device_result = class DeviceResultTable extends tables.result {
+  get modelFiltering() {
     return "result";
   }
 };

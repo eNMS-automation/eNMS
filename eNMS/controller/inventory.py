@@ -221,6 +221,7 @@ class InventoryController(BaseController):
                 objects = objectify(obj_type, kwargs[f"{obj_type}s"])
             setattr(pool, f"{obj_type}_number", len(objects))
             setattr(pool, f"{obj_type}s", objects)
+        pool.last_modified = self.get_time()
         return pool.serialized
 
     def update_pool(self, pool_id):

@@ -169,8 +169,7 @@ class AutomationController(BaseController):
                         },
                         "type": "category",
                     }
-                ]
-                + [
+                ] + [
                     {
                         "data": {"id": "shared"},
                         "id": "shared",
@@ -183,8 +182,7 @@ class AutomationController(BaseController):
                         },
                         "type": "category",
                     }
-                ]
-                + sorted(
+                ] + sorted(
                     (
                         {
                             "data": {"id": workflow.id},

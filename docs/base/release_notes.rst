@@ -8,6 +8,7 @@ Version 3.20.2
 - Keep selected runtime when entering a subworkflow.
 - When running a workflow, add runtime to runtime list in workflow builder and select it.
 - Workflow Refresh button now updates the list in the runtime dropdown.
+- Create dedicated category for shared services in "Add services to workflow" tree.
 
 Version 3.20.1
 --------------

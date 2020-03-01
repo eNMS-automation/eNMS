@@ -375,7 +375,13 @@ export function runLogic(result) {
   if (page == "workflow_builder" && workflow) {
     if (result.service.id != workflow.id) {
       getServiceState(result.service.id, true);
-    }
+    } else {
+      $("#current-runtime").append(
+        `<option value='${result.runtime}'>
+          ${result.runtime} (run by ${result.user})
+        </option>`
+      ).val(result.runtime).selectpicker("refresh");
+    };
   }
   $(`#${result.service.type}-${result.service.id}`).remove();
 }

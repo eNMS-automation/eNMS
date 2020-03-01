@@ -311,7 +311,7 @@ class AutomationController(BaseController):
             )
         else:
             service.run(runtime=runtime)
-        return {"service": service.serialized, "runtime": runtime}
+        return {"service": service.serialized, "runtime": runtime, "user": current_user.name}
 
     def save_positions(self, workflow_id):
         now, old_position = self.get_time(), None
@@ -354,7 +354,7 @@ class AutomationController(BaseController):
             state = self.run_db.get(runtime) or fetch("run", runtime=runtime).state
         return {
             "service": service.to_dict(include=["services", "edges"]),
-            "runtimes": list(set((r.parent_runtime, r.creator) for r in runs)),
+            "runtimes": sorted(set((r.parent_runtime, r.creator) for r in runs)),
             "state": state,
             "runtime": runtime,
         }

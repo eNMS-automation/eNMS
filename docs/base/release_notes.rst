@@ -2,6 +2,11 @@
 Release Notes
 =============
 
+Version 3.20.2
+--------------
+
+- Keep selected runtime when entering a subworkflow.
+
 Version 3.20.1
 --------------
 

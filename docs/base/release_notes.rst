@@ -6,6 +6,7 @@ Version 3.20.2
 --------------
 
 - Keep selected runtime when entering a subworkflow.
+- When running a workflow, add runtime to runtime list in workflow builder and select it.
 
 Version 3.20.1
 --------------

@@ -155,36 +155,53 @@ class AutomationController(BaseController):
     def get_workflow_services(self, id, node):
         parents = list(self.get_parent_workflows(fetch("workflow", id=id)))
         if node == "all":
-            return [
-                {
-                    "data": {"id": "standalone"},
-                    "id": "standalone",
-                    "text": "Standalone services",
-                    "children": True,
-                    "state": {"disabled": True},
-                    "a_attr": {
-                        "class": "no_checkbox",
-                        "style": "color: #000000; width: 100%",
-                    },
-                    "type": "category",
-                }
-            ] + sorted(
-                (
+            return (
+                [
                     {
-                        "data": {"id": workflow.id},
-                        "text": workflow.name,
+                        "data": {"id": "standalone"},
+                        "id": "standalone",
+                        "text": "Standalone services",
                         "children": True,
-                        "type": "workflow",
-                        "state": {"disabled": workflow in parents},
+                        "state": {"disabled": True},
                         "a_attr": {
-                            "class": "no_checkbox" if workflow in parents else "",
-                            "style": "color: #6666FF; width: 100%",
+                            "class": "no_checkbox",
+                            "style": "color: #000000; width: 100%",
                         },
+                        "type": "category",
                     }
-                    for workflow in fetch_all("workflow")
-                    if not workflow.workflows
-                ),
-                key=itemgetter("text"),
+                ]
+                + [
+                    {
+                        "data": {"id": "shared"},
+                        "id": "shared",
+                        "text": "Shared services",
+                        "children": True,
+                        "state": {"disabled": True},
+                        "a_attr": {
+                            "class": "no_checkbox",
+                            "style": "color: #FF1694; width: 100%",
+                        },
+                        "type": "category",
+                    }
+                ]
+                + sorted(
+                    (
+                        {
+                            "data": {"id": workflow.id},
+                            "text": workflow.name,
+                            "children": True,
+                            "type": "workflow",
+                            "state": {"disabled": workflow in parents},
+                            "a_attr": {
+                                "class": "no_checkbox" if workflow in parents else "",
+                                "style": "color: #6666FF; width: 100%",
+                            },
+                        }
+                        for workflow in fetch_all("workflow")
+                        if not workflow.workflows
+                    ),
+                    key=itemgetter("text"),
+                )
             )
         elif node == "standalone":
             return sorted(
@@ -192,16 +209,23 @@ class AutomationController(BaseController):
                     {
                         "data": {"id": service.id},
                         "text": service.scoped_name,
-                        "a_attr": {
-                            "style": (
-                                f"color: #{'FF1694' if service.shared else '6666FF'};"
-                                "width: 100%"
-                            ),
-                        },
+                        "a_attr": {"style": ("color: #6666FF;" "width: 100%")},
                     }
                     for service in fetch_all("service")
-                    if (not service.workflows and service.type != "workflow")
-                    or service.shared
+                    if not service.workflows and service.type != "workflow"
+                ),
+                key=itemgetter("text"),
+            )
+        elif node == "shared":
+            return sorted(
+                (
+                    {
+                        "data": {"id": service.id},
+                        "text": service.scoped_name,
+                        "a_attr": {"style": ("color: #FF1694;" "width: 100%")},
+                    }
+                    for service in fetch_all("service")
+                    if service.shared
                 ),
                 key=itemgetter("text"),
             )
@@ -311,7 +335,11 @@ class AutomationController(BaseController):
             )
         else:
             service.run(runtime=runtime)
-        return {"service": service.serialized, "runtime": runtime, "user": current_user.name}
+        return {
+            "service": service.serialized,
+            "runtime": runtime,
+            "user": current_user.name,
+        }
 
     def save_positions(self, workflow_id):
         now, old_position = self.get_time(), None

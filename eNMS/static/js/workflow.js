@@ -89,7 +89,7 @@ let mousePosition;
 let currLabel;
 let triggerMenu;
 
-export function displayWorkflow(workflowData, runtime) {
+export function displayWorkflow(workflowData) {
   workflow = workflowData.service;
   nodes = new vis.DataSet(workflow.services.map(serviceToNode));
   edges = new vis.DataSet(workflow.edges.map(edgeToEdge));
@@ -142,23 +142,29 @@ export function displayWorkflow(workflowData, runtime) {
       showTypePanel(node.type, node.id);
     }
   });
-  $("#current-runtime").empty();
-  $("#current-runtime").append("<option value='normal'>Normal Display</option>");
-  $("#current-runtime").append("<option value='latest'>Latest Runtime</option>");
-  workflowData.runtimes.forEach((runtime) => {
-    $("#current-runtime").append(
-      `<option value='${runtime[0]}'>${runtime[0]} (run by ${runtime[1]})</option>`
-    );
-  });
-  $("#current-runtime").val(runtime || "latest");
+  updateRuntimes(workflowData.runtimes);
   $("#current-workflow").val(currentPath.split(">")[0]);
-  $("#current-runtime,#current-workflow").selectpicker("refresh");
+  $("#current-workflow").selectpicker("refresh");
   graph.on("dragEnd", (event) => {
     if (graph.getNodeAt(event.pointer.DOM)) savePositions();
   });
   displayWorkflowState(workflowData);
   rectangleSelection($("#network"), graph, nodes);
   switchMode(currentMode, true);
+}
+
+function updateRuntimes(runtimes) {
+  const currentRuntime = $("#current-runtime").val();
+  $("#current-runtime").empty();
+  $("#current-runtime").append("<option value='normal'>Normal Display</option>");
+  $("#current-runtime").append("<option value='latest'>Latest Runtime</option>");
+  runtimes.forEach((r) => {
+    $("#current-runtime").append(
+      `<option value='${r[0]}'>${r[0]} (run by ${r[1]})</option>`
+    );
+  });
+  $("#current-runtime").val(currentRuntime || "latest");
+  $("#current-runtime").selectpicker("refresh");
 }
 
 const rectangleSelection = (container, network, nodes) => {
@@ -270,7 +276,7 @@ export const switchToWorkflow = function(path, arrow, runtime) {
         workflow = result.service;
         localStorage.setItem("path", path);
         if (workflow) localStorage.setItem("workflow", JSON.stringify(workflow));
-        displayWorkflow(result, runtime);
+        displayWorkflow(result);
       },
     });
   } else {
@@ -790,6 +796,7 @@ export function getServiceState(id, first) {
 
 function displayWorkflowState(result) {
   resetDisplay();
+  updateRuntimes(result.runtimes)
   if (!nodes || !edges || !result.state || !result.state.progress) return;
   if (result.state.services) {
     $.each(result.state.services, (path, state) => {
@@ -862,6 +869,7 @@ function getWorkflowState(periodic, notification) {
     call({
       url: `/get_service_state/${currentPath}${url}`,
       callback: function(result) {
+        console.log(result)
         if (result.service.id != workflow.id) return;
         currentRuntime = result.runtime;
         if (result.service.last_modified !== workflow.last_modified) {

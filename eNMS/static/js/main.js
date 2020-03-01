@@ -8,7 +8,7 @@ user: false
 
 import { call, createTooltips, detectUserInactivity } from "./base.js";
 import { initDashboard } from "./inventory.js";
-import { initTable, tables } from "./table.js";
+import { tables } from "./table.js";
 import { initView } from "./visualization.js";
 import { initWorkflowBuilder } from "./workflow.js";
 
@@ -127,9 +127,6 @@ function initSidebar() {
 
 $(document).ready(function() {
   NProgress.start();
-  $(window).resize(() => {
-    Object.keys(tables).forEach((table) => tables[table].columns.adjust());
-  });
   const alerts = localStorage.getItem("alerts");
   if (!alerts) {
     localStorage.setItem("alerts", "[]");
@@ -139,7 +136,8 @@ $(document).ready(function() {
   }
   initSidebar();
   if (page.includes("table")) {
-    initTable(page.split("/")[1]);
+    const type = page.split("/")[1];
+    new tables[type](type);
   } else if (page == "workflow_builder") {
     initWorkflowBuilder();
   } else if (page.includes("view")) {

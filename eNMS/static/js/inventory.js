@@ -13,7 +13,7 @@ import {
   openPanel,
   openUrl,
 } from "./base.js";
-import { initTable, tables } from "./table.js";
+import { tables } from "./table.js";
 
 function drawDiagrams(diagram, result) {
   const options = {
@@ -442,7 +442,7 @@ function showDeviceResultsPanel(device) {
     type: "device_result",
     title: `Results - ${device.name}`,
     callback: function() {
-      initTable("device_result", device, null, device.id);
+      new Table("device_result", device, null, device.id);
     },
   });
 }

@@ -17,123 +17,6 @@ export let tables = {};
 export const models = {};
 let waitForSearch = false;
 
-export function initTable(type, instance, runtime, id) {
-  let columns = tableProperties[type];
-  let visibleColumns = localStorage.getItem(`table/${type}`);
-  if (visibleColumns) visibleColumns = visibleColumns.split(",");
-  columns.forEach((column) => {
-    if (visibleColumns) column.visible = visibleColumns.includes(column.data);
-    column.name = column.data;
-  });
-  const tableId = `${type}${id ? `-${id}` : ""}`;
-  // eslint-disable-next-line new-cap
-  tables[type] = $(`#table-${tableId}`).DataTable({
-    serverSide: true,
-    orderCellsTop: true,
-    autoWidth: false,
-    scrollX: true,
-    drawCallback: function() {
-      $(".paginate_button > a").on("focus", function() {
-        $(this).blur();
-      });
-      createTooltips();
-    },
-    sDom: "tilp",
-    columns: columns,
-    columnDefs: [{ className: "dt-center", targets: "_all" }],
-    initComplete: function() {
-      this.api()
-        .columns()
-        .every(function(index) {
-          const data = columns[index];
-          let element;
-          const elementId = `${type}_filtering-${data.data}`;
-          if (data.search == "text") {
-            element = `
-            <div class="input-group" style="width:100%">
-              <input
-                id="${elementId}"
-                name="${data.data}"
-                type="text"
-                placeholder="&#xF002;"
-                class="form-control"
-                style="font-family:Arial, FontAwesome;
-                height: 30px; margin-top: 5px"
-              >
-              <span class="input-group-btn" style="width: 10px">
-                <button
-                  id="${elementId}-search"
-                  class="btn btn-default pull-right"
-                  type="button"
-                  style="height: 30px; margin-top: 5px">
-                    <span
-                      class="glyphicon glyphicon-center glyphicon-menu-down"
-                      aria-hidden="true"
-                      style="font-size: 10px">
-                    </span>
-                </button>
-              </span>
-            </div>`;
-          } else if (data.search == "bool") {
-            element = `
-              <select
-                id="${elementId}"
-                name="${data.data}"
-                class="form-control"
-                style="width: 100%; height: 30px; margin-top: 5px"
-              >
-                <option value="">Any</option>
-                <option value="bool-true">True</option>
-                <option value="bool-false">False</option>
-              </select>`;
-          }
-          $(element)
-            .appendTo($(this.header()))
-            .on("keyup", function() {
-              if (waitForSearch) return;
-              waitForSearch = true;
-              setTimeout(function() {
-                tables[type].page(0).ajax.reload(null, false);
-                waitForSearch = false;
-              }, 800);
-            })
-            .on("click", function(e) {
-              e.stopPropagation();
-            });
-        });
-      $(`#controls-${tableId}`).html(models[type].controls(tableId));
-      models[type].postProcessing(this.api(), columns, type);
-    },
-    ajax: {
-      url: `/filtering/${models[type].modelFiltering || type}`,
-      type: "POST",
-      contentType: "application/json",
-      data: (d) => {
-        const form = `#search-form-${tableId}`;
-        d.form = serializeForm(form);
-        d.instance = instance;
-        d.columns = columns;
-        d.type = type;
-        if (runtime) {
-          d.runtime = $(`#runtimes-${instance.id}`).val() || runtime;
-        }
-        return JSON.stringify(d);
-      },
-      dataSrc: function(result) {
-        return result.data.map(
-          (instance) => new models[type]({ properties: instance, tableId: tableId })
-        );
-      },
-    },
-  });
-  if (["changelog", "run", "result"].includes(type)) {
-    tables[type].order([0, "desc"]).draw();
-  }
-  if (["run", "service", "task", "workflow"].includes(type)) {
-    refreshTablePeriodically(type, 3000, true);
-  }
-}
-
 function filterTable(formType) {
   tables[formType].page(0).ajax.reload(null, false);
   notify("Filter applied.", "success", 5);
@@ -149,24 +32,130 @@ function refreshTablePeriodically(tableType, interval, first) {
   setTimeout(() => refreshTablePeriodically(tableType, interval), interval);
 }
 
-class Base {
-  constructor({ properties, tableId, derivedProperties }) {
-    this.tableId = tableId;
-    Object.assign(this, properties);
-    let instanceProperties = {
-      id: this.id,
-      name: this.dbName || this.name,
-      type: this.type,
-    };
-    if (derivedProperties) {
-      derivedProperties.forEach((property) => {
-        instanceProperties[property] = this[property];
-      });
+export class Table {
+
+  constructor(type, instance, runtime, id) {
+    let table = this
+    this.type = type
+    let columns = tableProperties[type];
+    let visibleColumns = localStorage.getItem(`table/${type}`);
+    if (visibleColumns) visibleColumns = visibleColumns.split(",");
+    columns.forEach((column) => {
+      if (visibleColumns) column.visible = visibleColumns.includes(column.data);
+      column.name = column.data;
+    });
+    const tableId = `${type}${id ? `-${id}` : ""}`;
+    // eslint-disable-next-line new-cap
+    this.table = $(`#table-${tableId}`).DataTable({
+      serverSide: true,
+      orderCellsTop: true,
+      autoWidth: false,
+      scrollX: true,
+      drawCallback: function() {
+        $(".paginate_button > a").on("focus", function() {
+          $(this).blur();
+        });
+        createTooltips();
+      },
+      sDom: "tilp",
+      columns: columns,
+      columnDefs: [{ className: "dt-center", targets: "_all" }],
+      initComplete: function() {
+        console.log(this)
+        this.api()
+          .columns()
+          .every(function(index) {
+            const data = columns[index];
+            let element;
+            const elementId = `${type}_filtering-${data.data}`;
+            if (data.search == "text") {
+              element = `
+              <div class="input-group" style="width:100%">
+                <input
+                  id="${elementId}"
+                  name="${data.data}"
+                  type="text"
+                  placeholder="&#xF002;"
+                  class="form-control search-input"
+                  style="font-family:Arial, FontAwesome;
+                  height: 30px; margin-top: 5px"
+                >
+                <span class="input-group-btn" style="width: 10px">
+                  <button
+                    id="${elementId}-search"
+                    class="btn btn-default pull-right"
+                    type="button"
+                    style="height: 30px; margin-top: 5px">
+                      <span
+                        class="glyphicon glyphicon-center glyphicon-menu-down"
+                        aria-hidden="true"
+                        style="font-size: 10px">
+                      </span>
+                  </button>
+                </span>
+              </div>`;
+            } else if (data.search == "bool") {
+              element = `
+                <select
+                  id="${elementId}"
+                  name="${data.data}"
+                  class="form-control search-list"
+                  style="width: 100%; height: 30px; margin-top: 5px"
+                >
+                  <option value="">Any</option>
+                  <option value="bool-true">True</option>
+                  <option value="bool-false">False</option>
+                </select>`;
+            }
+            $(element)
+              .appendTo($(this.header()))
+              .on("keyup", function() {
+                if (waitForSearch) return;
+                waitForSearch = true;
+                setTimeout(function() {
+                  this.page(0).ajax.reload(null, false);
+                  waitForSearch = false;
+                }, 800);
+              })
+              .on("click", function(e) {
+                e.stopPropagation();
+              });
+          });
+        $(`#controls-${tableId}`).html(table.controls(tableId));
+        models[type].postProcessing(this.api(), columns, type);
+      },
+      ajax: {
+        url: `/filtering/${models[type].modelFiltering || type}`,
+        type: "POST",
+        contentType: "application/json",
+        data: (d) => {
+          const form = `#search-form-${tableId}`;
+          d.form = serializeForm(form);
+          d.instance = instance;
+          d.columns = columns;
+          d.type = type;
+          if (runtime) {
+            d.runtime = $(`#runtimes-${instance.id}`).val() || runtime;
+          }
+          return JSON.stringify(d);
+        },
+        dataSrc: function(result) {
+          return result.data.map(
+            (instance) => new models[type]({ properties: instance, tableId: tableId })
+          );
+        },
+      },
+    });
+    $(window).resize(this.table.columns.adjust);
+    if (["changelog", "run", "result"].includes(type)) {
+      this.table.order([0, "desc"]).draw();
     }
-    this.instance = JSON.stringify(instanceProperties).replace(/"/g, "'");
+    if (["run", "service", "task", "workflow"].includes(type)) {
+      refreshTablePeriodically(type, 3000, true);
+    }
   }
 
-  static columnDisplay() {
+  columnDisplay() {
     return `
       <button
         style="background:transparent; border:none; 
@@ -183,40 +172,88 @@ class Base {
       </button>`;
   }
 
-  static createNewButton(type) {
+  createNewButton() {
     return `
       <button
         class="btn btn-primary"
-        onclick="eNMS.base.showTypePanel('${type}')"
+        onclick="eNMS.base.showTypePanel('${this.type}')"
         data-tooltip="New"
         type="button"
       >
         <span class="glyphicon glyphicon-plus"></span>
       </button>`;
   }
-searchTableButton
-  static searchTableButton(type) {
+
+  searchTableButton() {
     return `
       <button
-        id="advanced-search-${type}"
+        id="advanced-search-${this.type}"
         class="btn btn-info"
         data-tooltip="Advanced Search"
         type="button"
       >
         <span class="glyphicon glyphicon-search"></span>
+      </button>
+      <button
+        class="btn btn-info"
+        onclick="eNMS.table.clearSearch()"
+        data-tooltip="Clear Search"
+        type="button"
+      >
+        <span class="glyphicon glyphicon-remove"></span>
       </button>`;
   }
 
-  static refreshTableButton(type) {
+  refreshTableButton() {
     return `
       <button
         class="btn btn-info"
-        onclick="eNMS.table.refreshTable('${type}', true)"
+        onclick="eNMS.table.refreshTable('${this.type}', true)"
         data-tooltip="Refresh"
         type="button"
       >
         <span class="glyphicon glyphicon-refresh"></span>
       </button>`;
+  }
+}
+
+tables.device = class DeviceTable extends Table {
+  controls() {
+    return [
+      this.columnDisplay(),
+      this.createNewButton("device"),
+      ` <button type="button" class="btn btn-primary"
+      onclick="eNMS.inventory.showImportTopologyPanel()"
+      data-tooltip="Import"><span class="glyphicon glyphicon-download">
+      </span></button>
+      <button type="button" class="btn btn-primary"
+        onclick="eNMS.base.openPanel({name: 'excel_export'})"
+        data-tooltip="Export"
+      >
+        <span class="glyphicon glyphicon-upload"></span>
+      </button>`,
+      this.searchTableButton("device"),
+      this.refreshTableButton("device"),
+    ];
+  }
+
+};
+
+class Base {
+  constructor({ properties, tableId, derivedProperties }) {
+    this.tableId = tableId;
+    Object.assign(this, properties);
+    let instanceProperties = {
+      id: this.id,
+      name: this.dbName || this.name,
+      type: this.type,
+    };
+    if (derivedProperties) {
+      derivedProperties.forEach((property) => {
+        instanceProperties[property] = this[property];
+      });
+    }
+    this.instance = JSON.stringify(instanceProperties).replace(/"/g, "'");
   }
 
   get deleteInstanceButton() {
@@ -655,7 +692,7 @@ models.service = class Service extends Base {
     $("#parent-filtering")
       .selectpicker()
       .on("change", function() {
-        tables["service"].page(0).ajax.reload(null, false);
+        this.page(0).ajax.reload(null, false);
       });
   }
 };

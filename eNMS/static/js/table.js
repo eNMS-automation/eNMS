@@ -477,15 +477,18 @@ tables.link = class LinkTable extends Table {
 
 class Base {}
 
-models.pool = class Pool extends Base {
-  get objectNumber() {
-    return `${this.device_number} devices - ${this.link_number} links`;
+tables.pool = class PoolTable extends Table {
+
+  addRow(properties) {
+    let row = super.addRow(properties);
+    row.objectNumber = `${row.device_number} devices - ${row.link_number} links`;
+    return row
   }
 
-  static controls() {
+  get controls() {
     return [
-      super.columnDisplay(),
-      super.createNewButton("pool"),
+      this.columnDisplay(),
+      this.createNewButton("pool"),
       ` <button
         class="btn btn-primary"
         onclick="eNMS.inventory.updatePools()"
@@ -494,17 +497,17 @@ models.pool = class Pool extends Base {
       >
         <span class="glyphicon glyphicon-flash"></span>
       </button>`,
-      super.searchTableButton("pool"),
-      super.refreshTableButton("pool"),
+      this.searchTableButton("pool"),
+      this.refreshTableButton("pool"),
     ];
   }
 
-  get buttons() {
+  buttons(row) {
     return `
       <ul class="pagination pagination-lg" style="margin: 0px; width: 230px">
         <li>
           <button type="button" class="btn btn-sm btn-info"
-          onclick="eNMS.visualization.showPoolView('${this.id}')"
+          onclick="eNMS.visualization.showPoolView('${row.id}')"
           data-tooltip="Internal View">
           <span class="glyphicon glyphicon-eye-open"></span></button>
         </li>
@@ -512,31 +515,31 @@ models.pool = class Pool extends Base {
           <button
             type="button"
             class="btn btn-sm btn-primary"
-            onclick="eNMS.inventory.showPoolObjectsPanel('${this.id}')"
+            onclick="eNMS.inventory.showPoolObjectsPanel('${row.id}')"
             data-tooltip="Pool Objects"
           ><span class="glyphicon glyphicon-wrench"></span
           ></button>
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-primary"
-          onclick="eNMS.inventory.updatePools('${this.id}')"
+          onclick="eNMS.inventory.updatePools('${row.id}')"
           data-tooltip="Update"><span class="glyphicon glyphicon-refresh">
           </span></button>
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-primary"
-          onclick="eNMS.base.showTypePanel('pool', '${this.id}')" data-tooltip="Edit"
+          onclick="eNMS.base.showTypePanel('pool', '${row.id}')" data-tooltip="Edit"
             ><span class="glyphicon glyphicon-edit"></span
           ></button>
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-primary"
-          onclick="eNMS.base.showTypePanel('pool', '${this.id}', 'duplicate')"
+          onclick="eNMS.base.showTypePanel('pool', '${row.id}', 'duplicate')"
           data-tooltip="Duplicate"
             ><span class="glyphicon glyphicon-duplicate"></span
           ></button>
         </li>
-        ${this.deleteInstanceButton}
+        ${this.deleteInstanceButton(row)}
       </ul>
     `;
   }

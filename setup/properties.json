@@ -134,7 +134,8 @@
          { 
             "data":"buttons",
             "width":"230px",
-            "orderable": false
+            "orderable": false,
+            "export": false
          }
       ],
       "configuration":[ 
@@ -217,7 +218,8 @@
          { 
             "data":"buttons",
             "width":"130px",
-            "orderable": false
+            "orderable": false,
+            "export": false
          }
       ],
       "link":[ 
@@ -269,7 +271,8 @@
          { 
             "data":"buttons",
             "width":"130px",
-            "orderable": false
+            "orderable": false,
+            "export": false
          }
       ],
       "pool":[ 
@@ -305,7 +308,8 @@
          { 
             "data":"buttons",
             "width":"250px",
-            "orderable": false
+            "orderable": false,
+            "export": false
          }
       ],
       "service":[ 
@@ -353,7 +357,8 @@
          { 
             "data":"buttons",
             "width":"260px",
-            "orderable": false
+            "orderable": false,
+            "export": false
          }
       ],
       "run":[ 
@@ -396,7 +401,8 @@
          { 
             "data":"buttons",
             "width":"90px",
-            "orderable": false
+            "orderable": false,
+            "export": false
          }
       ],
       "result":[ 
@@ -425,7 +431,8 @@
          },
          { 
             "data":"buttons",
-            "orderable": false
+            "orderable": false,
+            "export": false
          },
          { 
             "data":"v1",
@@ -464,7 +471,8 @@
          },
          { 
             "data":"buttons",
-            "orderable": false
+            "orderable": false,
+            "export": false
          },
          { 
             "data":"v1",
@@ -526,7 +534,8 @@
          { 
             "data":"buttons",
             "width":"200px",
-            "orderable": false
+            "orderable": false,
+            "export": false
          }
       ],
       "user":[ 
@@ -548,7 +557,8 @@
          { 
             "data":"buttons",
             "width":"130px",
-            "orderable": false
+            "orderable": false,
+            "export": false
          }
       ],
       "server":[ 
@@ -581,7 +591,8 @@
          { 
             "data":"buttons",
             "width":"130px",
-            "orderable": false
+            "orderable": false,
+            "export": false
          }
       ],
       "changelog":[ 
@@ -644,7 +655,8 @@
          { 
             "data":"buttons",
             "width":"40px",
-            "orderable": false
+            "orderable": false,
+            "export": false
          }
       ],
       "event":[ 
@@ -674,7 +686,8 @@
          { 
             "data":"buttons",
             "width":"120px",
-            "orderable": false
+            "orderable": false,
+            "export": false
          }
       ]
    },

@@ -129,8 +129,11 @@ export class Table {
           return JSON.stringify(d);
         },
         dataSrc: function(result) {
-          console.log(result.full_result)
-          if (self.csvExport) self.exportTable(result.full_result);
+          console.log(self.csvExport);
+          if (self.csvExport) {
+            self.exportTable(result.full_result);
+            self.csvExport = false;
+          }
           return result.data.map((instance) =>
             self.addRow({ properties: instance, tableId: self.id })
           );
@@ -147,7 +150,21 @@ export class Table {
   }
 
   exportTable(result) {
-    result = result.map(instance => Object.values(instance));
+    const visibleColumns = this.columns
+      .filter((column) => {
+        const isExportable = typeof column.export === "undefined" || column.export;
+        const visibleColumn = this.table.column(`${column.name}:name`).visible();
+        return isExportable && visibleColumn;
+      })
+      .map((column) => column.name);
+    result = result.map((instance) => {
+      Object.keys(instance).forEach((key) => {
+        if (!visibleColumns.includes(key)) delete instance[key];
+      });
+      return visibleColumns.map((column) => instance[column]);
+    });
+    console.log(result)
+    /*
     let csvContent = "data:text/csv;charset=utf-8," + result.map(e => e.join(",")).join("\n");
     let encodedUri = encodeURI(csvContent);
     let link = document.createElement("a");
@@ -155,6 +172,7 @@ export class Table {
     link.setAttribute("download", "my_data.csv");
     document.body.appendChild(link);
     link.click();
+    */
   }
 
   postProcessing() {
@@ -744,7 +762,6 @@ tables.run = class RunTable extends Table {
 
 tables.result = class ResultTable extends Table {
   addRow({ properties, tableId }) {
-    console.log(this.id);
     const status = properties.success;
     delete properties.success;
     delete properties.result;

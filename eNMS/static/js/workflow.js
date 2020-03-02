@@ -22,7 +22,7 @@ import {
   showTypePanel,
   userIsActive,
 } from "./base.js";
-import { tables } from "./table.js";
+import { clearSearch, tableInstances } from "./table.js";
 
 export let arrowHistory = [""];
 export let arrowPointer = page == "workflow_builder" ? -1 : 0;
@@ -245,6 +245,11 @@ const rectangleSelection = (container, network, nodes) => {
   });
 };
 
+function filterWorkflowTable(tableId, path) {
+  clearSearch(tableId);
+  switchToWorkflow(path);
+}
+
 export const switchToWorkflow = function(path, arrow, runtime) {
   if (typeof path === "undefined") return;
   if (path.toString().includes(">")) {
@@ -281,7 +286,7 @@ export const switchToWorkflow = function(path, arrow, runtime) {
     });
   } else {
     $("#workflow-filtering").val(path);
-    tables["service"].page(0).ajax.reload(null, false);
+    tableInstances["service"].page(0).ajax.reload(null, false);
   }
 };
 
@@ -933,6 +938,7 @@ export function initWorkflowBuilder() {
 configureNamespace("workflow", [
   addServicesToWorkflow,
   createLabel,
+  filterWorkflowTable,
   getWorkflowState,
   restartWorkflow,
   switchMode,

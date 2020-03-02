@@ -258,7 +258,7 @@ export class Table {
       </button>
       <button
         class="btn btn-info"
-        onclick="eNMS.table.clearSearch('${this.id}')"
+        onclick="eNMS.table.clearSearch('${this.id}', true)"
         data-tooltip="Clear Search"
         type="button"
       >
@@ -539,8 +539,8 @@ tables.service = class ServiceTable extends Table {
     let row = super.addRow(kwargs)
     row.dbName = dbName;
     row.name = row.type === "workflow"
-      ? `<b><a href="#" onclick="eNMS.workflow.switchToWorkflow(
-      ${row.id})">${row.scoped_name}</a></b>`
+      ? `<b><a href="#" onclick="eNMS.workflow.filterWorkflowTable(
+      '${this.id}', ${row.id})">${row.scoped_name}</a></b>`
       : $("#parent-filtering").val() == "true"
       ? row.scoped_name
       : row.dbName;
@@ -981,18 +981,18 @@ tables.event = class EventTable extends Table {
   }
 };
 
-export const clearSearch = function(tableId) {
+export const clearSearch = function(tableId, notification) {
   $(`.search-input-${tableId},.search-list-${tableId}`).val("");
   $(".search-relation-dd").val("any").selectpicker("refresh");
   $(".search-relation").val([]).trigger("change");
   $(`.search-select-${tableId}`).val("inclusion");
   refreshTable(tableId);
-  notify("Search parameters cleared.", "success", 5);
+  if (notification) notify("Search parameters cleared.", "success", 5);
 }
 
-export const refreshTable = function(tableId, displayNotification) {
+export const refreshTable = function(tableId, notification) {
   tableInstances[tableId].ajax.reload(null, false);
-  if (displayNotification) notify("Table refreshed.", "success", 5);
+  if (notification) notify("Table refreshed.", "success", 5);
 };
 
 function refreshTablePeriodically(tableId, interval, first) {

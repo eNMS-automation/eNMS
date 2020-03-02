@@ -18,21 +18,6 @@ export let tableInstances = {};
 export const models = {};
 let waitForSearch = false;
 
-function filterTable(id) {
-  tableInstances[id].page(0).ajax.reload(null, false);
-  notify("Filter applied.", "success", 5);
-}
-
-export const refreshTable = function(id, displayNotification) {
-  tableInstances[id].ajax.reload(null, false);
-  if (displayNotification) notify("Table refreshed.", "success", 5);
-};
-
-function refreshTablePeriodically(id, interval, first) {
-  if (userIsActive && !first) refreshTable(id, false);
-  setTimeout(() => refreshTablePeriodically(id, interval), interval);
-}
-
 export class Table {
 
   constructor(type, instance, runtime, id) {
@@ -76,7 +61,7 @@ export class Table {
                   name="${data.data}"
                   type="text"
                   placeholder="&#xF002;"
-                  class="form-control search-input"
+                  class="form-control search-input-${self.id}"
                   style="font-family:Arial, FontAwesome;
                   height: 30px; margin-top: 5px"
                 >
@@ -99,7 +84,7 @@ export class Table {
                 <select
                   id="${elementId}"
                   name="${data.data}"
-                  class="form-control search-list"
+                  class="form-control search-list-${self.id}"
                   style="width: 100%; height: 30px; margin-top: 5px"
                 >
                   <option value="">Any</option>
@@ -220,7 +205,7 @@ export class Table {
           <select
             id="${column.data}_filter"
             name="${column.data}_filter"
-            class="form-control search-select"
+            class="form-control search-select-${this.id}"
             style="width: 100%; height: 30px; margin-top: 15px"
           >
             <option value="inclusion">Inclusion</option>
@@ -273,7 +258,7 @@ export class Table {
       </button>
       <button
         class="btn btn-info"
-        onclick="eNMS.table.clearSearch()"
+        onclick="eNMS.table.clearSearch('${this.id}')"
         data-tooltip="Clear Search"
         type="button"
       >
@@ -996,4 +981,23 @@ tables.event = class EventTable extends Table {
   }
 };
 
-configureNamespace("table", [filterTable, refreshTable, refreshTablePeriodically]);
+export const clearSearch = function(tableId) {
+  $(`.search-input-${tableId},.search-list-${tableId}`).val("");
+  $(".search-relation-dd").val("any").selectpicker("refresh");
+  $(".search-relation").val([]).trigger("change");
+  $(`.search-select-${tableId}`).val("inclusion");
+  refreshTable(tableId);
+  notify("Search parameters cleared.", "success", 5);
+}
+
+export const refreshTable = function(tableId, displayNotification) {
+  tableInstances[tableId].ajax.reload(null, false);
+  if (displayNotification) notify("Table refreshed.", "success", 5);
+};
+
+function refreshTablePeriodically(tableId, interval, first) {
+  if (userIsActive && !first) refreshTable(tableId, false);
+  setTimeout(() => refreshTablePeriodically(tableId, interval), interval);
+}
+
+configureNamespace("table", [clearSearch, refreshTable]);

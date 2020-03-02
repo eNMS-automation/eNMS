@@ -157,6 +157,22 @@ export const deleteInstance = function(type, id) {
   });
 };
 
+export function downloadFile(name, content, type) {
+  let link = document.createElement("a");
+  link.setAttribute(
+    "href",
+    window.URL.createObjectURL(
+      new Blob([content], {
+        type: type == "csv" ? "text/csv" : "text/plain",
+      })
+    )
+  );
+  link.setAttribute("download", `${name}_${new Date().toLocaleString("en-US")}.${type}`);
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+}
+
 export function createTooltips() {
   $("[data-tooltip]").each(function() {
     jsPanel.tooltip.create({

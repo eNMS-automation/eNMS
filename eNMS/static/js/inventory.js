@@ -8,6 +8,7 @@ echarts: false
 import {
   call,
   configureNamespace,
+  downloadFile,
   initSelect,
   notify,
   openPanel,
@@ -246,28 +247,13 @@ function showSessionLog(sessionId) {
 }
 
 function downloadNetworkData(id) {
-  const name = $(`#data-type-${id}`).prop("checked")
-    ? "operational_data"
-    : "configuration";
-  let link = document.createElement("a");
-  link.setAttribute(
-    "href",
-    window.URL.createObjectURL(
-      new Blob(
-        [
-          $(`#content-${id}`)
-            .data("CodeMirrorInstance")
-            .getValue(),
-        ],
-        {
-          type: "text/plain",
-        }
-      )
-    )
+  downloadFile(
+    $(`#data-type-${id}`).prop("checked") ? "operational_data" : "configuration",
+    $(`#content-${id}`)
+      .data("CodeMirrorInstance")
+      .getValue(),
+    "txt"
   );
-  link.setAttribute("download", `${name}_${new Date().toLocaleString("en-US")}.txt`);
-  document.body.appendChild(link);
-  link.click();
 }
 
 function displayConfiguration(id, result) {

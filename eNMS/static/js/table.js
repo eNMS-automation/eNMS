@@ -7,6 +7,7 @@ import {
   configureNamespace,
   createTooltip,
   createTooltips,
+  downloadFile,
   notify,
   serializeForm,
   userIsActive,
@@ -129,7 +130,6 @@ export class Table {
           return JSON.stringify(d);
         },
         dataSrc: function(result) {
-          console.log(self.csvExport);
           if (self.csvExport) {
             self.exportTable(result.full_result);
             self.csvExport = false;
@@ -163,21 +163,11 @@ export class Table {
       });
       return visibleColumns.map((column) => instance[column]);
     });
-    let link = document.createElement("a");
-    link.setAttribute(
-      "href",
-      window.URL.createObjectURL(
-        new Blob([[visibleColumns, ...result].map((e) => e.join(",")).join("\n")], {
-          type: "text/csv",
-        })
-      )
+    downloadFile(
+      this.type,
+      [visibleColumns, ...result].map((e) => e.join(",")).join("\n"),
+      "csv",
     );
-    link.setAttribute(
-      "download",
-      `${this.type}_${new Date().toLocaleString("en-US")}.csv`
-    );
-    document.body.appendChild(link);
-    link.click();
   }
 
   postProcessing() {

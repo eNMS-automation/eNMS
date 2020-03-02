@@ -74,7 +74,7 @@ function compare(type, id) {
             $(`#diff-type-${cantorId}`)
               .on("change", function() {
                 diff2htmlUi.draw(`#content-${cantorId}`, {
-                  matching: 'lines',
+                  matching: "lines",
                   drawFileList: true,
                   outputFormat: $(this).prop("checked")
                     ? "side-by-side"
@@ -372,12 +372,15 @@ export function runLogic(result) {
     if (result.service.id != workflow.id) {
       getServiceState(result.service.id, true);
     } else {
-      $("#current-runtime").append(
-        `<option value='${result.runtime}'>
+      $("#current-runtime")
+        .append(
+          `<option value='${result.runtime}'>
           ${result.runtime} (run by ${result.user})
         </option>`
-      ).val(result.runtime).selectpicker("refresh");
-    };
+        )
+        .val(result.runtime)
+        .selectpicker("refresh");
+    }
   }
   $(`#${result.service.type}-${result.service.id}`).remove();
 }

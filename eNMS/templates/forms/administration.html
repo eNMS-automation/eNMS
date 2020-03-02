@@ -60,4 +60,30 @@
       Delete Results/Logs
     </button>
   </nav>
+  <div class="x_title">
+    <h4 class="text-center">Inventory</h4>
+  </div>
+  <br />
+  <nav
+    class="navbar navbar-default nav-controls"
+    style="margin-top: 5px"
+    role="navigation"
+  >
+    <button
+      class="btn btn-primary btn-file"
+      onclick="eNMS.inventory.showImportTopologyPanel()"
+    >
+      Excel Import
+    </button>
+    <button
+      class="btn btn-primary btn-file"
+      onclick="eNMS.base.openPanel({
+        title: 'Export Inventory',
+        name: 'excel_export',
+        size: '400 200'
+      })"
+    >
+      Excel Export
+    </button>
+  </nav>
 </div>

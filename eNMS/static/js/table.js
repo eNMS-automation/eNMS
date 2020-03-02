@@ -19,7 +19,6 @@ export const models = {};
 let waitForSearch = false;
 
 export class Table {
-
   constructor(type, instance, runtime, id) {
     let self = this;
     this.type = type;
@@ -125,8 +124,8 @@ export class Table {
           return JSON.stringify(d);
         },
         dataSrc: function(result) {
-          return result.data.map(
-            (instance) => self.addRow({ properties: instance, tableId: self.id })
+          return result.data.map((instance) =>
+            self.addRow({ properties: instance, tableId: self.id })
           );
         },
       },
@@ -289,7 +288,7 @@ export class Table {
   }
 
   addRow({ properties, tableId, derivedProperties }) {
-    let row = {tableId: tableId, ...properties};
+    let row = { tableId: tableId, ...properties };
     row.instanceProperties = {
       id: row.id,
       name: row.dbName || row.name,
@@ -302,26 +301,15 @@ export class Table {
     }
     row.instance = JSON.stringify(row.instanceProperties).replace(/"/g, "'");
     if (this.buttons) row.buttons = this.buttons(row);
-    return row
+    return row;
   }
 }
 
 tables.device = class DeviceTable extends Table {
-
   get controls() {
     return [
       this.columnDisplay(),
       this.createNewButton("device"),
-      ` <button type="button" class="btn btn-primary"
-      onclick="eNMS.inventory.showImportTopologyPanel()"
-      data-tooltip="Import"><span class="glyphicon glyphicon-download">
-      </span></button>
-      <button type="button" class="btn btn-primary"
-        onclick="eNMS.base.openPanel({name: 'excel_export'})"
-        data-tooltip="Export"
-      >
-        <span class="glyphicon glyphicon-upload"></span>
-      </button>`,
       this.searchTableButton("device"),
       this.refreshTableButton("device"),
     ];
@@ -367,7 +355,6 @@ tables.device = class DeviceTable extends Table {
         ${this.deleteInstanceButton(row)}
       </ul>`;
   }
-
 };
 
 tables.configuration = class ConfigurationTable extends Table {
@@ -425,11 +412,9 @@ tables.configuration = class ConfigurationTable extends Table {
         </li>
       </ul>`;
   }
-
 };
 
 tables.link = class LinkTable extends Table {
-
   get controls() {
     return [
       this.columnDisplay(),
@@ -458,17 +443,15 @@ tables.link = class LinkTable extends Table {
         ${this.deleteInstanceButton(row)}
       </ul>`;
   }
-
-}
+};
 
 class Base {}
 
 tables.pool = class PoolTable extends Table {
-
   addRow(properties) {
     let row = super.addRow(properties);
     row.objectNumber = `${row.device_number} devices - ${row.link_number} links`;
-    return row
+    return row;
   }
 
   get controls() {
@@ -532,19 +515,19 @@ tables.pool = class PoolTable extends Table {
 };
 
 tables.service = class ServiceTable extends Table {
-
   addRow(kwargs) {
     const dbName = kwargs.properties.name;
     delete kwargs.properties.name;
-    let row = super.addRow(kwargs)
+    let row = super.addRow(kwargs);
     row.dbName = dbName;
-    row.name = row.type === "workflow"
-      ? `<b><a href="#" onclick="eNMS.workflow.filterWorkflowTable(
+    row.name =
+      row.type === "workflow"
+        ? `<b><a href="#" onclick="eNMS.workflow.filterWorkflowTable(
       '${this.id}', ${row.id})">${row.scoped_name}</a></b>`
-      : $("#parent-filtering").val() == "true"
-      ? row.scoped_name
-      : row.dbName;
-    return row
+        : $("#parent-filtering").val() == "true"
+        ? row.scoped_name
+        : row.dbName;
+    return row;
   }
 
   get controls() {
@@ -567,7 +550,7 @@ tables.service = class ServiceTable extends Table {
         </select>
       </button>
       </input>
-      ${this.searchTableButton('service')}
+      ${this.searchTableButton("service")}
       <button
         class="btn btn-info"
         onclick="eNMS.table.refreshTable('service', true)"
@@ -670,18 +653,17 @@ tables.service = class ServiceTable extends Table {
 };
 
 tables.run = class RunTable extends Table {
-
   addRow(kwargs) {
     let row = super.addRow(kwargs);
     row.service = JSON.stringify(row.service_properties).replace(/"/g, "'");
     row.buttons = this.buttons(row);
-    return row
+    return row;
   }
 
   get controls() {
     return [
       super.columnDisplay(),
-      super.searchTableButton('run'),
+      super.searchTableButton("run"),
       super.refreshTableButton("run"),
       ` <button
         class="btn btn-info"
@@ -715,9 +697,8 @@ tables.run = class RunTable extends Table {
 };
 
 tables.result = class ResultTable extends Table {
-
   addRow({ properties, tableId }) {
-    console.log(this.id)
+    console.log(this.id);
     const status = properties.success;
     delete properties.success;
     delete properties.result;
@@ -735,7 +716,7 @@ tables.result = class ResultTable extends Table {
       </button>`;
     row.v1 = `<input type="radio" name="v1-${tableId}" value="${row.id}">`;
     row.v2 = `<input type="radio" name="v2-${tableId}" value="${row.id}">`;
-    return row
+    return row;
   }
 
   get controls() {
@@ -785,7 +766,6 @@ tables.device_result = class DeviceResultTable extends tables.result {
 };
 
 tables.task = class TaskTable extends Table {
-
   addRow(kwargs) {
     let row = super.addRow(kwargs);
     if (row.scheduling_mode == "standard") {
@@ -793,7 +773,7 @@ tables.task = class TaskTable extends Table {
     } else {
       row.periodicity = row.crontab_expression;
     }
-    return row
+    return row;
   }
 
   get controls() {
@@ -983,12 +963,16 @@ tables.event = class EventTable extends Table {
 
 export const clearSearch = function(tableId, notification) {
   $(`.search-input-${tableId},.search-list-${tableId}`).val("");
-  $(".search-relation-dd").val("any").selectpicker("refresh");
-  $(".search-relation").val([]).trigger("change");
+  $(".search-relation-dd")
+    .val("any")
+    .selectpicker("refresh");
+  $(".search-relation")
+    .val([])
+    .trigger("change");
   $(`.search-select-${tableId}`).val("inclusion");
   refreshTable(tableId);
   if (notification) notify("Search parameters cleared.", "success", 5);
-}
+};
 
 export const refreshTable = function(tableId, notification) {
   tableInstances[tableId].ajax.reload(null, false);

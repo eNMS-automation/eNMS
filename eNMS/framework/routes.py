@@ -138,20 +138,6 @@ def view_service_results(id):
     return f"<pre>{app.str_dict(result)}</pre>"
 
 
-@blueprint.route("/download_output/<data_type>/<id>")
-@monitor_requests
-def download_output(data_type, id):
-    if id.isdigit():
-        output = getattr(fetch("device", id=id), data_type)
-    else:
-        output = app.get_git_configuration(id)[data_type]
-    return Response(
-        (f"{line}\n" for line in output.splitlines()),
-        mimetype="text/plain",
-        headers={"Content-Disposition": f"attachment;filename={data_type}.txt"},
-    )
-
-
 @blueprint.route("/download_file/<path:path>")
 @monitor_requests
 def download_file(path):

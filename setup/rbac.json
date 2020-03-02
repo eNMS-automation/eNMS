@@ -51,7 +51,6 @@
     "GET": [
       "/dashboard",
       "/download_file",
-      "/download_output",
       "/form/add_services",
       "/form/administration",
       "/form/ansible_playbook_service",

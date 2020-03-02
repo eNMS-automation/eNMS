@@ -321,10 +321,6 @@ function displayConfiguration(id, result) {
       $(`#data-type-${id}`)
         .on("change", function() {
           const value = $(this).prop("checked") ? "operational_data" : "configuration";
-          $(`#download-${id}`).attr(
-            "onclick",
-            `location.href='/download_output/${value}/${id}'`
-          );
           editor.setValue(result[value]);
           editor.refresh();
         })

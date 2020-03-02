@@ -246,13 +246,28 @@ function showSessionLog(sessionId) {
 }
 
 function downloadNetworkData(id) {
-  call({
-    type: "GET",
-    url: `/download_output/${id}`,
-    data: $(`#content-${id}`)
-      .data("CodeMirrorInstance")
-      .getValue(),
-  });
+  const name = $(`#data-type-${id}`).prop("checked")
+    ? "operational_data"
+    : "configuration";
+  let link = document.createElement("a");
+  link.setAttribute(
+    "href",
+    window.URL.createObjectURL(
+      new Blob(
+        [
+          $(`#content-${id}`)
+            .data("CodeMirrorInstance")
+            .getValue(),
+        ],
+        {
+          type: "text/plain",
+        }
+      )
+    )
+  );
+  link.setAttribute("download", `${name}_${new Date().toLocaleString("en-US")}.txt`);
+  document.body.appendChild(link);
+  link.click();
 }
 
 function displayConfiguration(id, result) {
@@ -271,7 +286,7 @@ function displayConfiguration(id, result) {
             data-offstyle="primary"
           >
           <button
-            id="download-${id}"
+            onclick="eNMS.inventory.downloadNetworkData(${id})"
             type="button"
             class="btn btn-primary"
             style="margin-left: 10px"

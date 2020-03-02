@@ -174,7 +174,7 @@ export class Table {
     );
     link.setAttribute(
       "download",
-      `${this.type}_${new Date().toLocaleDateString("en-US")}.csv`
+      `${this.type}_${new Date().toLocaleString("en-US")}.csv`
     );
     document.body.appendChild(link);
     link.click();

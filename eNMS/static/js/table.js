@@ -456,6 +456,7 @@ tables.link = class LinkTable extends Table {
     return [
       this.columnDisplay(),
       this.createNewButton(),
+      this.exportTableButton(),
       this.searchTableButton(),
       this.clearSearchButton(),
       this.refreshTableButton(),
@@ -496,6 +497,7 @@ tables.pool = class PoolTable extends Table {
     return [
       this.columnDisplay(),
       this.createNewButton(),
+      this.exportTableButton(),
       ` <button
         class="btn btn-primary"
         onclick="eNMS.inventory.updatePools()"
@@ -588,9 +590,10 @@ tables.service = class ServiceTable extends Table {
           <option value="false">Display all services</option>
         </select>
       </button>
-      </input>
-      ${this.searchTableButton()}
-      ${this.clearSearchButton()}
+      </input>`,
+      this.searchTableButton(),
+      this.clearSearchButton(),
+      `
       <button
         class="btn btn-info"
         onclick="eNMS.table.refreshTable('service', true)"
@@ -614,7 +617,9 @@ tables.service = class ServiceTable extends Table {
         type="button"
       >
         <span class="glyphicon glyphicon-chevron-right"></span>
-      </a>
+      </a>`,
+      this.exportTableButton(),
+      `
       <button
         class="btn btn-primary"
         onclick="eNMS.automation.openServicePanel()"
@@ -883,6 +888,7 @@ tables.user = class UserTable extends Table {
     return [
       this.columnDisplay(),
       this.createNewButton(),
+      this.exportTableButton(),
       this.clearSearchButton(),
       this.refreshTableButton(),
     ];
@@ -916,6 +922,7 @@ tables.server = class ServerTable extends Table {
     return [
       this.columnDisplay(),
       this.createNewButton(),
+      this.exportTableButton(),
       this.clearSearchButton(),
       this.refreshTableButton(),
     ];
@@ -949,6 +956,7 @@ tables.changelog = class ChangelogTable extends Table {
     return [
       this.columnDisplay(),
       this.createNewButton(),
+      this.exportTableButton(),
       this.clearSearchButton(),
       this.refreshTableButton(),
     ];
@@ -980,6 +988,7 @@ tables.event = class EventTable extends Table {
     return [
       this.columnDisplay(),
       this.createNewButton(),
+      this.exportTableButton(),
       this.clearSearchButton(),
       this.refreshTableButton(),
     ];

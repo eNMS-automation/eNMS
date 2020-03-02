@@ -21,6 +21,8 @@ let waitForSearch = false;
 export class Table {
   constructor(type, instance, runtime, id) {
     let self = this;
+    this.instance = instance;
+    this.runtime = runtime;
     this.type = type;
     this.columns = tableProperties[this.type];
     let visibleColumns = localStorage.getItem(`table/${this.type}`);
@@ -109,25 +111,12 @@ export class Table {
         self.postProcessing();
       },
       ajax: {
-        url: `/filtering/${self.modelFiltering || self.type}`,
-        type: "POST",
-        contentType: "application/json",
-        data: (d) => {
-          const form = `#search-form-${this.id}`;
-          d.form = serializeForm(form);
-          d.instance = instance;
-          d.columns = self.columns;
-          d.type = self.type;
-          if (runtime) {
-            d.runtime = $(`#runtimes-${instance.id}`).val() || runtime;
-          }
-          return JSON.stringify(d);
-        },
         dataSrc: function(result) {
           return result.data.map((instance) =>
             self.addRow({ properties: instance, tableId: self.id })
           );
         },
+        ...this.request
       },
     });
     $(window).resize(this.table.columns.adjust);
@@ -136,6 +125,26 @@ export class Table {
     }
     if (["run", "service", "task", "workflow"].includes(this.type)) {
       refreshTablePeriodically(this.id, 3000, true);
+    }
+  }
+
+  get request() {
+    return {
+      url: `/filtering/${this.modelFiltering || this.type}`,
+      type: "POST",
+      contentType: "application/json",
+      data: (d) => {
+        Object.assign(d, {
+          form: serializeForm(`#search-form-${this.id}`),
+          instance: this.instance,
+          columns: this.columns,
+          type: this.type,
+        });
+        if (this.runtime) {
+          d.runtime = $(`#runtimes-${this.instance.id}`).val() || this.runtime;
+        }
+        return JSON.stringify(d);
+      },
     }
   }
 
@@ -238,6 +247,18 @@ export class Table {
       <button
         class="btn btn-primary"
         onclick="eNMS.base.showTypePanel('${this.type}')"
+        data-tooltip="New"
+        type="button"
+      >
+        <span class="glyphicon glyphicon-plus"></span>
+      </button>`;
+  }
+
+  exportButton() {
+    return `
+      <button
+        class="btn btn-primary"
+        onclick="eNMS.base.export('${this.id}')"
         data-tooltip="New"
         type="button"
       >

@@ -11,6 +11,7 @@ Version 3.20.2
 - Create dedicated category for shared services in "Add services to workflow" tree.
 - Implement "Clear all filters" mechanism for all tables
 - When display workflow services in service table, all search input resetted (otherwise nothing was displayed)
+- Add download buttons for configuration and operational data
 
 Version 3.20.1
 --------------

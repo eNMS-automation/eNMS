@@ -121,6 +121,7 @@ export class Table {
             instance: this.instance,
             columns: this.columns,
             type: this.type,
+            export: self.csvExport,
           });
           if (this.runtime) {
             d.runtime = $(`#runtimes-${this.instance.id}`).val() || this.runtime;
@@ -128,6 +129,8 @@ export class Table {
           return JSON.stringify(d);
         },
         dataSrc: function(result) {
+          console.log(result.full_result)
+          if (self.csvExport) self.exportTable(result.full_result);
           return result.data.map((instance) =>
             self.addRow({ properties: instance, tableId: self.id })
           );
@@ -141,6 +144,17 @@ export class Table {
     if (["run", "service", "task", "workflow"].includes(this.type)) {
       refreshTablePeriodically(this.id, 3000, true);
     }
+  }
+
+  exportTable(result) {
+    result = result.map(instance => Object.values(instance));
+    let csvContent = "data:text/csv;charset=utf-8," + result.map(e => e.join(",")).join("\n");
+    let encodedUri = encodeURI(csvContent);
+    let link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", "my_data.csv");
+    document.body.appendChild(link);
+    link.click();
   }
 
   postProcessing() {
@@ -254,10 +268,10 @@ export class Table {
       <button
         class="btn btn-primary"
         onclick="eNMS.table.exportTable('${this.id}')"
-        data-tooltip="New"
+        data-tooltip="Export as .CSV"
         type="button"
       >
-        <span class="glyphicon glyphicon-plus"></span>
+        <span class="glyphicon glyphicon-upload"></span>
       </button>`;
   }
 
@@ -330,6 +344,7 @@ tables.device = class DeviceTable extends Table {
     return [
       this.columnDisplay(),
       this.createNewButton(),
+      this.exportTableButton(),
       this.searchTableButton(),
       this.clearSearchButton(),
       this.refreshTableButton(),
@@ -1007,7 +1022,9 @@ export const clearSearch = function(tableId, notification) {
 };
 
 function exportTable(tableId) {
-  console.log(tableInstances[tableId]);
+  let table = tableInstances[tableId];
+  table.csvExport = true;
+  refreshTable(tableId);
 }
 
 export const refreshTable = function(tableId, notification) {

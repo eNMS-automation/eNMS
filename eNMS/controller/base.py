@@ -416,7 +416,7 @@ class BaseController:
         result = Session.query(model).filter(and_(*constraints))
         if ordering:
             result = result.order_by(ordering())
-        return {
+        table_result = {
             "draw": int(kwargs["draw"]),
             "recordsTotal": Session.query(func.count(model.id)).scalar(),
             "recordsFiltered": get_query_count(result),
@@ -427,6 +427,11 @@ class BaseController:
                 .all()
             ],
         }
+        if kwargs.get("export"):
+            table_result["full_result"] = [
+                obj.table_properties(**kwargs) for obj in result.all()
+            ]
+        return table_result
 
     def allowed_file(self, name, allowed_modules):
         allowed_syntax = "." in name

@@ -286,7 +286,7 @@ export const switchToWorkflow = function(path, arrow, runtime) {
     });
   } else {
     $("#workflow-filtering").val(path);
-    tableInstances["service"].page(0).ajax.reload(null, false);
+    tableInstances["service"].table.page(0).ajax.reload(null, false);
   }
 };
 

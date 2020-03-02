@@ -32,8 +32,9 @@ export class Table {
       column.name = column.data;
     });
     this.id = `${this.type}${id ? `-${id}` : ""}`;
+    tableInstances[this.id] = this;
     // eslint-disable-next-line new-cap
-    this.table = tableInstances[this.id] = $(`#table-${this.id}`).DataTable({
+    this.table = $(`#table-${this.id}`).DataTable({
       serverSide: true,
       orderCellsTop: true,
       autoWidth: false,
@@ -111,12 +112,26 @@ export class Table {
         self.postProcessing();
       },
       ajax: {
+        url: `/filtering/${this.modelFiltering || this.type}`,
+        type: "POST",
+        contentType: "application/json",
+        data: (d) => {
+          Object.assign(d, {
+            form: serializeForm(`#search-form-${this.id}`),
+            instance: this.instance,
+            columns: this.columns,
+            type: this.type,
+          });
+          if (this.runtime) {
+            d.runtime = $(`#runtimes-${this.instance.id}`).val() || this.runtime;
+          }
+          return JSON.stringify(d);
+        },
         dataSrc: function(result) {
           return result.data.map((instance) =>
             self.addRow({ properties: instance, tableId: self.id })
           );
         },
-        ...this.request
       },
     });
     $(window).resize(this.table.columns.adjust);
@@ -125,26 +140,6 @@ export class Table {
     }
     if (["run", "service", "task", "workflow"].includes(this.type)) {
       refreshTablePeriodically(this.id, 3000, true);
-    }
-  }
-
-  get request() {
-    return {
-      url: `/filtering/${this.modelFiltering || this.type}`,
-      type: "POST",
-      contentType: "application/json",
-      data: (d) => {
-        Object.assign(d, {
-          form: serializeForm(`#search-form-${this.id}`),
-          instance: this.instance,
-          columns: this.columns,
-          type: this.type,
-        });
-        if (this.runtime) {
-          d.runtime = $(`#runtimes-${this.instance.id}`).val() || this.runtime;
-        }
-        return JSON.stringify(d);
-      },
     }
   }
 
@@ -254,11 +249,11 @@ export class Table {
       </button>`;
   }
 
-  exportButton() {
+  exportTableButton() {
     return `
       <button
         class="btn btn-primary"
-        onclick="eNMS.base.export('${this.id}')"
+        onclick="eNMS.table.exportTable('${this.id}')"
         data-tooltip="New"
         type="button"
       >
@@ -1011,8 +1006,12 @@ export const clearSearch = function(tableId, notification) {
   if (notification) notify("Search parameters cleared.", "success", 5);
 };
 
+function exportTable(tableId) {
+  console.log(tableInstances[tableId]);
+}
+
 export const refreshTable = function(tableId, notification) {
-  tableInstances[tableId].ajax.reload(null, false);
+  tableInstances[tableId].table.ajax.reload(null, false);
   if (notification) notify("Table refreshed.", "success", 5);
 };
 
@@ -1021,4 +1020,4 @@ function refreshTablePeriodically(tableId, interval, first) {
   setTimeout(() => refreshTablePeriodically(tableId, interval), interval);
 }
 
-configureNamespace("table", [clearSearch, refreshTable]);
+configureNamespace("table", [clearSearch, exportTable, refreshTable]);

@@ -147,7 +147,7 @@ export const deleteInstance = function(type, id) {
           localStorage.removeItem("path");
         }
       }
-      tableInstances[type]
+      tableInstances[type].table
         .row($(`#${id}`))
         .remove()
         .draw(false);

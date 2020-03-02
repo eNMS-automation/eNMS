@@ -254,15 +254,19 @@ export class Table {
         type="button"
       >
         <span class="glyphicon glyphicon-search"></span>
-      </button>
+      </button>`;
+  }
+
+  clearSearchButton() {
+    return `
       <button
         class="btn btn-info"
         onclick="eNMS.table.clearSearch('${this.id}', true)"
         data-tooltip="Clear Search"
         type="button"
       >
-        <span class="glyphicon glyphicon-remove"></span>
-      </button>`;
+      <span class="glyphicon glyphicon-remove"></span>
+    </button>`;
   }
 
   refreshTableButton() {
@@ -309,9 +313,10 @@ tables.device = class DeviceTable extends Table {
   get controls() {
     return [
       this.columnDisplay(),
-      this.createNewButton("device"),
-      this.searchTableButton("device"),
-      this.refreshTableButton("device"),
+      this.createNewButton(),
+      this.searchTableButton(),
+      this.clearSearchButton(),
+      this.refreshTableButton(),
     ];
   }
 
@@ -384,6 +389,7 @@ tables.configuration = class ConfigurationTable extends Table {
         class="slider"
         style="width: 200px"
       >`,
+      this.clearSearchButton(),
     ];
   }
 
@@ -418,9 +424,10 @@ tables.link = class LinkTable extends Table {
   get controls() {
     return [
       this.columnDisplay(),
-      this.createNewButton("link"),
-      this.searchTableButton("link"),
-      this.refreshTableButton("link"),
+      this.createNewButton(),
+      this.searchTableButton(),
+      this.clearSearchButton(),
+      this.refreshTableButton(),
     ];
   }
 
@@ -457,7 +464,7 @@ tables.pool = class PoolTable extends Table {
   get controls() {
     return [
       this.columnDisplay(),
-      this.createNewButton("pool"),
+      this.createNewButton(),
       ` <button
         class="btn btn-primary"
         onclick="eNMS.inventory.updatePools()"
@@ -466,8 +473,9 @@ tables.pool = class PoolTable extends Table {
       >
         <span class="glyphicon glyphicon-flash"></span>
       </button>`,
-      this.searchTableButton("pool"),
-      this.refreshTableButton("pool"),
+      this.searchTableButton(),
+      this.clearSearchButton(),
+      this.refreshTableButton(),
     ];
   }
 
@@ -550,7 +558,8 @@ tables.service = class ServiceTable extends Table {
         </select>
       </button>
       </input>
-      ${this.searchTableButton("service")}
+      ${this.searchTableButton()}
+      ${this.clearSearchButton()}
       <button
         class="btn btn-info"
         onclick="eNMS.table.refreshTable('service', true)"
@@ -662,9 +671,10 @@ tables.run = class RunTable extends Table {
 
   get controls() {
     return [
-      super.columnDisplay(),
-      super.searchTableButton("run"),
-      super.refreshTableButton("run"),
+      this.columnDisplay(),
+      this.searchTableButton(),
+      this.clearSearchButton(),
+      this.refreshTableButton(),
       ` <button
         class="btn btn-info"
         onclick="eNMS.automation.displayCalendar('run')"
@@ -729,7 +739,8 @@ tables.result = class ResultTable extends Table {
       >
         <span class="glyphicon glyphicon-adjust"></span>
       </button>`,
-      super.refreshTableButton("result"),
+      this.refreshTableButton(),
+      this.clearSearchButton(),
     ];
   }
 
@@ -779,9 +790,10 @@ tables.task = class TaskTable extends Table {
   get controls() {
     return [
       this.columnDisplay(),
-      this.createNewButton("task"),
-      this.searchTableButton("task"),
-      this.refreshTableButton("task"),
+      this.createNewButton(),
+      this.searchTableButton(),
+      this.clearSearchButton(),
+      this.refreshTableButton(),
       ` <button
         class="btn btn-info"
         onclick="eNMS.automation.displayCalendar('task')"
@@ -839,8 +851,9 @@ tables.user = class UserTable extends Table {
   get controls() {
     return [
       this.columnDisplay(),
-      this.createNewButton("user"),
-      this.refreshTableButton("user"),
+      this.createNewButton(),
+      this.clearSearchButton(),
+      this.refreshTableButton(),
     ];
   }
 
@@ -871,8 +884,9 @@ tables.server = class ServerTable extends Table {
   get controls() {
     return [
       this.columnDisplay(),
-      this.createNewButton("server"),
-      this.refreshTableButton("server"),
+      this.createNewButton(),
+      this.clearSearchButton(),
+      this.refreshTableButton(),
     ];
   }
 
@@ -903,8 +917,9 @@ tables.changelog = class ChangelogTable extends Table {
   get controls() {
     return [
       this.columnDisplay(),
-      this.createNewButton("changelog"),
-      this.refreshTableButton("changelog"),
+      this.createNewButton(),
+      this.clearSearchButton(),
+      this.refreshTableButton(),
     ];
   }
 };
@@ -933,8 +948,9 @@ tables.event = class EventTable extends Table {
   get controls() {
     return [
       this.columnDisplay(),
-      this.createNewButton("event"),
-      this.refreshTableButton("event"),
+      this.createNewButton(),
+      this.clearSearchButton(),
+      this.refreshTableButton(),
     ];
   }
 

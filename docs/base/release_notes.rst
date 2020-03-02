@@ -12,7 +12,7 @@ Version 3.20.2
 - Implement "Clear all filters" mechanism for all tables
 - When display workflow services in service table, all search input resetted (otherwise nothing was displayed)
 - Add download buttons for configuration and operational data
-- Add button in all tables to export search result as CSV file.
+- Add button in tables to export search result as CSV file.
 
 Version 3.20.1
 --------------

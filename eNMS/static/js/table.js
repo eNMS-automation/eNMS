@@ -163,16 +163,21 @@ export class Table {
       });
       return visibleColumns.map((column) => instance[column]);
     });
-    console.log(result)
-    /*
-    let csvContent = "data:text/csv;charset=utf-8," + result.map(e => e.join(",")).join("\n");
-    let encodedUri = encodeURI(csvContent);
     let link = document.createElement("a");
-    link.setAttribute("href", encodedUri);
-    link.setAttribute("download", "my_data.csv");
+    link.setAttribute(
+      "href",
+      window.URL.createObjectURL(
+        new Blob([[visibleColumns, ...result].map((e) => e.join(",")).join("\n")], {
+          type: "text/csv",
+        })
+      )
+    );
+    link.setAttribute(
+      "download",
+      `${this.type}_${new Date().toLocaleDateString("en-US")}.csv`
+    );
     document.body.appendChild(link);
     link.click();
-    */
   }
 
   postProcessing() {

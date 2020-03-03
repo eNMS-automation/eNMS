@@ -81,6 +81,7 @@ class Service(AbstractBase):
     pools = relationship(
         "Pool", secondary=service_pool_table, back_populates="services"
     )
+    update_pools = Column(Boolean, default=False)
     send_notification = Column(Boolean, default=False)
     send_notification_method = Column(SmallString, default="mail")
     notification_header = Column(LargeString, default="")
@@ -366,6 +367,8 @@ class Run(AbstractBase):
                 )
             devices |= set(self.service.devices)
             for pool in self.service.pools:
+                if self.update_pools:
+                    pool.compute_pool()
                 devices |= set(pool.devices)
         return list(devices)
 

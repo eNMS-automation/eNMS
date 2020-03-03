@@ -39,6 +39,7 @@ class ServiceForm(BaseForm):
     )
     devices = MultipleInstanceField("Devices")
     pools = MultipleInstanceField("Pools")
+    update_pools = BooleanField("Update pools before running")
     workflows = MultipleInstanceField("Workflows")
     waiting_time = IntegerField(
         "Time to Wait before next service is started (in seconds)", default=0

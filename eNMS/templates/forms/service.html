@@ -369,6 +369,18 @@
                 <div class="form-group">
                   {{ form.pools(id=form_type + '-pools', class="form-control add-id") }}
                 </div>
+                <fieldset>
+                  <div class="item">
+                    <input
+                      id="{{ form_type }}-update_pools"
+                      name="update_pools"
+                      type="checkbox"
+                      class="add-id"
+                      value="y"
+                    />
+                    <label>Update pools before running</label>
+                  </div>
+                </fieldset>
                 <label>Device Query (define targets from a python query)</label>
                 <div class="form-group">
                   {{ form.device_query(id=form_type + '-device_query',

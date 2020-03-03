@@ -27,13 +27,6 @@ from xml.parsers.expat import ExpatError
 
 from eNMS import app
 from eNMS.database import Session
-from eNMS.database.dialect import (
-    Column,
-    LargeString,
-    MutableDict,
-    MutableList,
-    SmallString,
-)
 from eNMS.database.associations import (
     run_pool_table,
     run_device_table,
@@ -42,13 +35,21 @@ from eNMS.database.associations import (
     service_workflow_table,
 )
 from eNMS.database.base import AbstractBase
-from eNMS.database.functions import factory, fetch
+from eNMS.database.dialect import (
+    Column,
+    LargeString,
+    MutableDict,
+    MutableList,
+    SmallString,
+)
+from eNMS.database.functions import factory, fetch, set_custom_properties
 from eNMS.models import models
 from eNMS.models.inventory import Device  # noqa: F401
 from eNMS.models.scheduling import Task  # noqa: F401
 from eNMS.models.administration import User  # noqa: F401
 
 
+@set_custom_properties
 class Service(AbstractBase):
 
     __tablename__ = "service"

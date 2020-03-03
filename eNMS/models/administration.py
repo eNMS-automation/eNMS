@@ -4,10 +4,12 @@ from passlib.hash import argon2
 from sqlalchemy import Boolean, Integer
 
 from eNMS import app
-from eNMS.database.dialect import Column, MutableList, LargeString, SmallString
 from eNMS.database.base import AbstractBase
+from eNMS.database.dialect import Column, MutableList, LargeString, SmallString
+from eNMS.database.functions import set_custom_properties
 
 
+@set_custom_properties
 class Server(AbstractBase):
 
     __tablename__ = type = "server"
@@ -19,6 +21,7 @@ class Server(AbstractBase):
     status = Column(SmallString, default="down")
 
 
+@set_custom_properties
 class User(AbstractBase, UserMixin):
 
     __tablename__ = type = "user"
@@ -43,6 +46,7 @@ class User(AbstractBase, UserMixin):
         return self.is_admin or permission in self.permissions
 
 
+@set_custom_properties
 class Changelog(AbstractBase):
 
     __tablename__ = "changelog"

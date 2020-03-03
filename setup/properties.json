@@ -16,10 +16,16 @@
       },
       "link":{ 
          "property1":{ 
-            "pretty_name":"Property 1",
+            "pretty_name":"Custom Property",
             "type":"string",
-            "default":"10.145.14.1",
-            "is_address":true
+            "default":"CP"
+         }
+      },
+      "changelog":{ 
+         "property1":{ 
+            "pretty_name":"Custom Property",
+            "type":"string",
+            "default":"CP"
          }
       }
    },

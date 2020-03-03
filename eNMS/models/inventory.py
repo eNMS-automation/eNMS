@@ -5,8 +5,6 @@ from sqlalchemy.orm import backref, relationship
 from sqlalchemy.schema import UniqueConstraint
 
 from eNMS import app
-from eNMS.database.dialect import Column, LargeString, SmallString
-from eNMS.database.functions import fetch, fetch_all, set_custom_properties
 from eNMS.database.associations import (
     pool_device_table,
     pool_link_table,
@@ -18,6 +16,8 @@ from eNMS.database.associations import (
     task_pool_table,
 )
 from eNMS.database.base import AbstractBase
+from eNMS.database.dialect import Column, LargeString, SmallString
+from eNMS.database.functions import fetch, fetch_all, set_custom_properties
 from eNMS.setup import properties
 
 
@@ -241,6 +241,7 @@ def set_pool_properties(Pool):
 
 
 @set_pool_properties
+@set_custom_properties
 class Pool(AbstractBase):
 
     __tablename__ = type = "pool"

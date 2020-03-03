@@ -81,7 +81,7 @@ def handle_exception(exc):
 
 
 def set_custom_properties(cls):
-    for property, values in properties["custom"][cls.__tablename__].items():
+    for property, values in properties["custom"].get(cls.__tablename__, {}).items():
         setattr(
             cls,
             property,

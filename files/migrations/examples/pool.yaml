@@ -66,7 +66,7 @@
     link21, link22, link23, link24, link25, link26, link27]
   longitude: '0.0'
   name: All objects
-  never_update: false
+  manually_defined: false
   operator: all
   tasks: []
   type: pool
@@ -136,7 +136,7 @@
   links: []
   longitude: '0.0'
   name: Devices only
-  never_update: false
+  manually_defined: false
   operator: all
   tasks: []
   type: pool
@@ -205,7 +205,7 @@
     link21, link22, link23, link24, link25, link26, link27]
   longitude: '0.0'
   name: Links only
-  never_update: false
+  manually_defined: false
   operator: all
   tasks: []
   type: pool
@@ -275,7 +275,7 @@
     link21, link22, link23, link24, link25, link26, link27]
   longitude: '-122.43'
   name: Datacenter San Francisco
-  never_update: false
+  manually_defined: false
   operator: all
   tasks: []
   type: pool
@@ -346,7 +346,7 @@
     link21, link22, link23, link24, link25, link26, link27]
   longitude: '-74.0'
   name: Datacenter New York
-  never_update: false
+  manually_defined: false
   operator: all
   tasks: []
   type: pool
@@ -416,7 +416,7 @@
     link21, link22, link23, link24, link25, link26, link27]
   longitude: '-87.62'
   name: Datacenter Chicago
-  never_update: false
+  manually_defined: false
   operator: all
   tasks: []
   type: pool
@@ -485,7 +485,7 @@
     link21, link22, link23, link24, link25, link26, link27]
   longitude: '0.0'
   name: Washington
-  never_update: false
+  manually_defined: false
   operator: all
   tasks: []
   type: pool

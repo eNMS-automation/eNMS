@@ -39,7 +39,7 @@ class Object(AbstractBase):
         if kwargs.get("dont_update_pools", False):
             return
         for pool in fetch_all("pool"):
-            if pool.never_update:
+            if pool.manually_defined:
                 continue
             match = pool.object_match(self)
             relation, number = f"{self.class_type}s", f"{self.class_type}_number"
@@ -303,7 +303,7 @@ class Pool(AbstractPool):
     )
     runs = relationship("Run", secondary=run_pool_table, back_populates="pools")
     tasks = relationship("Task", secondary=task_pool_table, back_populates="pools")
-    never_update = Column(Boolean, default=False)
+    manually_defined = Column(Boolean, default=False)
 
     def update(self, **kwargs):
         super().update(**kwargs)
@@ -330,7 +330,7 @@ class Pool(AbstractPool):
         )
 
     def compute_pool(self):
-        if self.never_update:
+        if self.manually_defined:
             return
         self.devices = list(filter(self.object_match, fetch_all("device")))
         self.device_number = len(self.devices)

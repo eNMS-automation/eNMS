@@ -110,9 +110,9 @@ Pool recalculation
 
 A pool is automatically updated by eNMS:
 
-- after being created (as long as its 'never update' flag is not set)
+- after being created (as long as its 'manually defined' flag is not set)
 
-All pools are updated (as long as their 'never update' flag is not set):
+All pools are updated (as long as their 'manually defined' flag is not set):
 
 - when eNMS starts, or restarts
 - when a device is manually added to the inventory
@@ -125,7 +125,7 @@ Pools are manually updated:
 - when you click on the update button of a pool in pool management
 - when you click on the "update all pools" in pool management
 
-Manual definition and "Never Update" option
+Manual definition and "Manually Defined" option
 -------------------------------------------
 
 By default, the devices and links within a pool are determined based on the pool properties.
@@ -139,7 +139,7 @@ There are two ways to manually select the objects of a pool:
    :alt: Manual definition of a pool
    :align: center
 
-.. note:: Pools with manually selected objects need to have the 'Never Update' checkbox selected.
+.. note:: Pools with manually selected objects need to have the 'Manually Defined' checkbox selected.
   This prevents manually selected pools from being re-calculated based on pool criteria.
   If the user wants to run against a pool that has some criteria specified as well as some manually
   specified devices, it is advised to have 2 pools-one with the criteria

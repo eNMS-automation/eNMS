@@ -294,8 +294,8 @@
             "orderable": false
          },
          { 
-            "data":"never_update",
-            "title":"Never update",
+            "data":"manually_defined",
+            "title":"Manually defined",
             "search":"bool",
             "width":"100px"
          },

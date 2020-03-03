@@ -55,7 +55,7 @@
   links: []
   longitude: 0.0
   name: All objects
-  never_update: false
+  manually_defined: false
   operator: all
   tasks: []
   users: []
@@ -116,7 +116,7 @@
   links: []
   longitude: 0.0
   name: Devices only
-  never_update: false
+  manually_defined: false
   operator: all
   tasks: []
   users: []
@@ -177,7 +177,7 @@
   links: []
   longitude: 0.0
   name: Links only
-  never_update: false
+  manually_defined: false
   operator: all
   tasks: []
   users: []

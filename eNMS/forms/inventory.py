@@ -138,7 +138,7 @@ class PoolForm(BaseForm):
             ("any", "Match if any property matches"),
         ),
     )
-    never_update = BooleanField("Never update (for manually selected pools)")
+    manually_defined = BooleanField("Manually defined (won't be automatically updated)")
 
 
 class PoolObjectsForm(BaseForm):

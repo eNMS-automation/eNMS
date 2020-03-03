@@ -54,7 +54,7 @@ class CreatePool(Resource):
                 "links": [
                     fetch("link", name=name).id for name in data.get("links", "")
                 ],
-                "never_update": True,
+                "manually_defined": True,
             },
         )
         Session.commit()

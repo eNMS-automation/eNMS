@@ -17,6 +17,11 @@ Version 3.20.2
 - Fix progress display for service in run once mode in workflow builder
 - Multiline field for skip / device query
 - Add "Maximum number of retries" property to prevent infinite loop (hardcoded before)
+- Add "All" option in relationship filtering (filter object with relation to All)
+- Rename "never_update" with "manually_defined"
+
+MIGRATION:
+In pools, "never_update" -> "manually_defined"
 
 Version 3.20.1
 --------------

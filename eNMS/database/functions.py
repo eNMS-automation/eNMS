@@ -1,7 +1,9 @@
 from re import search
-from sqlalchemy import func
+from sqlalchemy import Boolean, Float, func, Integer
 
+from eNMS.setup import properties
 from eNMS.database import Session
+from eNMS.database.dialect import Column, LargeString
 from eNMS.models import models
 
 
@@ -76,3 +78,21 @@ def handle_exception(exc):
         return f"There already is a {match.group(1)} with the same {match.group(2)}."
     else:
         return exc
+
+
+def set_custom_properties(cls):
+    for property, values in properties["custom"][cls.__tablename__].items():
+        setattr(
+            cls,
+            property,
+            Column(
+                {
+                    "boolean": Boolean,
+                    "float": Float,
+                    "integer": Integer,
+                    "string": LargeString,
+                }[values["type"]],
+                default=values["default"],
+            ),
+        )
+    return cls

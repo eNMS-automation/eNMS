@@ -6,7 +6,7 @@ from sqlalchemy.schema import UniqueConstraint
 
 from eNMS import app
 from eNMS.database.dialect import Column, LargeString, SmallString
-from eNMS.database.functions import fetch, fetch_all
+from eNMS.database.functions import fetch, fetch_all, set_custom_properties
 from eNMS.database.associations import (
     pool_device_table,
     pool_link_table,
@@ -56,37 +56,14 @@ class Object(AbstractBase):
             setattr(pool, number, getattr(pool, number) - 1)
 
 
-CustomDevice = type(
-    "CustomDevice",
-    (Object,),
-    {
-        "__tablename__": "custom_device",
-        "__mapper_args__": {"polymorphic_identity": "custom_device"},
-        "parent_type": "object",
-        "id": Column(Integer, ForeignKey("object.id"), primary_key=True),
-        **{
-            property: Column(
-                {
-                    "boolean": Boolean,
-                    "float": Float,
-                    "integer": Integer,
-                    "string": LargeString,
-                }[values["type"]],
-                default=values["default"],
-            )
-            for property, values in app.properties["custom"]["device"].items()
-        },
-    },
-)
-
-
-class Device(CustomDevice):
+@set_custom_properties
+class Device(Object):
 
     __tablename__ = "device"
     __mapper_args__ = {"polymorphic_identity": "device"}
     class_type = "device"
-    parent_type = "custom_device"
-    id = Column(Integer, ForeignKey(CustomDevice.id), primary_key=True)
+    parent_type = "object"
+    id = Column(Integer, ForeignKey(Object.id), primary_key=True)
     name = Column(SmallString, unique=True)
     icon = Column(SmallString, default="router")
     operating_system = Column(SmallString)
@@ -192,6 +169,7 @@ class Device(CustomDevice):
         return f"{self.name} ({self.model})" if self.model else self.name
 
 
+@set_custom_properties
 class Link(Object):
 
     __tablename__ = "link"

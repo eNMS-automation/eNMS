@@ -19,6 +19,8 @@ Version 3.20.2
 - Add "Maximum number of retries" property to prevent infinite loop (hardcoded before)
 - Add "All" option in relationship filtering (filter object with relation to All)
 - Rename "never_update" with "manually_defined"
+- Set focus on name field when creating a new instance
+- New property in service panel (targets section): Update pools before running.
 
 MIGRATION:
 In pools, "never_update" -> "manually_defined"

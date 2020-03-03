@@ -484,7 +484,8 @@ class Run(AbstractBase):
 
     def device_run(self, payload):
         self.devices = self.compute_devices(payload)
-        self.run_state["progress"]["device"]["total"] += len(self.devices)
+        if self.run_method != "once":
+            self.run_state["progress"]["device"]["total"] += len(self.devices)
         if self.iteration_devices and not self.parent_device:
             if not self.workflow:
                 return {

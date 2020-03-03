@@ -799,7 +799,7 @@ function displayWorkflowState(result) {
       const progress = state.progress.device;
       colorService(
         id,
-        progress.skipped == progress.total
+        progress.total && progress.skipped == progress.total
           ? "#D3D3D3"
           : state.success === true
           ? "#32cd32"

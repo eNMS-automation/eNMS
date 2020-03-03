@@ -13,6 +13,14 @@
             "default":4,
             "private":true
          }
+      },
+      "link":{ 
+         "property1":{ 
+            "pretty_name":"Property 1",
+            "type":"string",
+            "default":"10.145.14.1",
+            "is_address":true
+         }
       }
    },
    "dashboard":{ 
@@ -267,6 +275,12 @@
             "title":"Destination",
             "search":"text",
             "orderable": false
+         },
+         { 
+            "data":"property1",
+            "title":"Property 1",
+            "search":"text",
+            "visible":false
          },
          { 
             "data":"buttons",

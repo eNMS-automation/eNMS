@@ -59,9 +59,8 @@ class Object(AbstractBase):
 @set_custom_properties
 class Device(Object):
 
-    __tablename__ = "device"
+    __tablename__ = class_type = "device"
     __mapper_args__ = {"polymorphic_identity": "device"}
-    class_type = "device"
     parent_type = "object"
     id = Column(Integer, ForeignKey(Object.id), primary_key=True)
     name = Column(SmallString, unique=True)
@@ -172,9 +171,8 @@ class Device(Object):
 @set_custom_properties
 class Link(Object):
 
-    __tablename__ = "link"
+    __tablename__ = class_type = "link"
     __mapper_args__ = {"polymorphic_identity": "link"}
-    class_type = "link"
     parent_type = "object"
     id = Column(Integer, ForeignKey("object.id"), primary_key=True)
     name = Column(SmallString)
@@ -229,41 +227,24 @@ class Link(Object):
         super().update(**kwargs)
 
 
-AbstractPool = type(
-    "AbstractPool",
-    (AbstractBase,),
-    {
-        "__tablename__": "abstract_pool",
-        "type": "pool",
-        "__mapper_args__": {"polymorphic_identity": "abstract_pool"},
-        "id": Column(Integer, primary_key=True),
-        **{
-            **{
-                f"device_{property}": Column(LargeString, default="")
-                for property in properties["filtering"]["device"]
-            },
-            **{
-                f"device_{property}_match": Column(SmallString, default="inclusion")
-                for property in properties["filtering"]["device"]
-            },
-            **{
-                f"link_{property}": Column(LargeString, default="")
-                for property in properties["filtering"]["link"]
-            },
-            **{
-                f"link_{property}_match": Column(SmallString, default="inclusion")
-                for property in properties["filtering"]["link"]
-            },
-        },
-    },
-)
+def set_pool_properties(Pool):
+    for property in properties["filtering"]["device"]:
+        setattr(
+            Pool,
+            f"device_{property}", Column(LargeString, default=""),
+        )
+        setattr(Pool, f"device_{property}_match", Column(SmallString, default="inclusion"))
+    for property in properties["filtering"]["link"]:
+        setattr(Pool, f"link_{property}", Column(LargeString, default=""))
+        setattr(Pool, f"link_{property}_match", Column(SmallString, default="inclusion"))
+    return Pool
 
 
-class Pool(AbstractPool):
+@set_pool_properties
+class Pool(AbstractBase):
 
-    __tablename__ = "pool"
-    parent_type = "abstract_pool"
-    id = Column(Integer, ForeignKey("abstract_pool.id"), primary_key=True)
+    __tablename__ = type = "pool"
+    id = Column(Integer, primary_key=True)
     name = Column(SmallString, unique=True)
     last_modified = Column(SmallString, info={"dont_track_changes": True})
     description = Column(SmallString)

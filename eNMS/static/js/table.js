@@ -48,6 +48,7 @@ export function initTable(type, instance, runtime, id) {
           const data = columns[index];
           let element;
           const elementId = `${type}_filtering-${data.data}`;
+          let updateTableEvent = "keyup";
           if (data.search == "text") {
             element = `
             <div class="input-group" style="width:100%">
@@ -86,10 +87,11 @@ export function initTable(type, instance, runtime, id) {
                 <option value="bool-true">True</option>
                 <option value="bool-false">False</option>
               </select>`;
+              updateTableEvent = "change";
           }
           $(element)
             .appendTo($(this.header()))
-            .on("keyup", function() {
+            .on(updateTableEvent, function() {
               if (waitForSearch) return;
               waitForSearch = true;
               setTimeout(function() {

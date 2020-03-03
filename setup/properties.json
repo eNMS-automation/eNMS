@@ -21,30 +21,11 @@
             "default":"CP"
          }
       },
-      "changelog":{ 
-         "property1":{ 
-            "pretty_name":"Custom Property",
-            "type":"string",
-            "default":"CP"
-         }
-      },
       "pool":{ 
          "property1":{ 
             "pretty_name":"Custom Property",
             "type":"string",
             "default":"CP"
-         }
-      },
-      "service":{ 
-         "property1":{ 
-            "pretty_name":"Custom Property 1",
-            "type":"string",
-            "default":"CP1"
-         },
-         "property2":{ 
-            "pretty_name":"Custom Property 2",
-            "type":"string",
-            "default":"CP2"
          }
       }
    },

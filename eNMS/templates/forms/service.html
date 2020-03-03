@@ -236,6 +236,50 @@
               </div>
             </div>
           </div>
+          {% if form.custom_properties %}
+          <div class="panel" style="border-color: #000; position: relative">
+            <a
+              class="doc-link"
+              style="position: absolute; top: 10px; right: 10px"
+              href="automation/services.html#workflow-parameters"
+              target="_blank"
+              ><i
+                class="glyphicon glyphicon-info-sign fa-2x"
+                style="cursor: pointer"
+              ></i
+            ></a>
+            <a
+              class="panel-heading collapsed"
+              style="background-color:#ddd;"
+              role="tab"
+              id="heading-step1-2"
+              data-toggle="collapse"
+              href="#collapse-step1-2"
+              aria-expanded="false"
+              aria-controls="collapse-step1-2"
+            >
+              <h4 class="panel-title" style="color:#000;">
+                Custom Properties
+              </h4>
+            </a>
+            <div
+              id="collapse-step1-2"
+              class="panel-collapse collapse in"
+              role="tabpanel"
+              aria-labelledby="heading-step1-2"
+            >
+              <div class="panel-body" style="background-color:#fafafa;">
+                {% for property, values in form.custom_properties.items() %}
+                <label>{{ values["pretty_name"] }}</label>
+                <div class="form-group">
+                  {{ form[property](id="pool-" + property, class="form-control add-id")
+                  }}
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+          {% endif %}
         </div>
       </div>
       <div id="step-2">

@@ -13,6 +13,8 @@ Version 3.20.2
 - When display workflow services in service table, all search input resetted (otherwise nothing was displayed)
 - Add download buttons for configuration and operational data
 - Add button in tables to export search result as CSV file.
+- When duplicating top-level workflow, display edit panel
+- Fix progress display for service in run once mode in workflow builder
 
 Version 3.20.1
 --------------

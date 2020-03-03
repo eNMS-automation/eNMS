@@ -33,7 +33,7 @@ class ServiceForm(BaseForm):
     shared = BooleanField("Shared Service")
     scoped_name = StringField("Scoped Name", [InputRequired()])
     description = StringField("Description")
-    device_query = PythonField("Device Query")
+    device_query = PythonField("Device Query", widget=TextArea(), render_kw={"rows": 2})
     device_query_property = SelectField(
         "Query Property Type", choices=(("name", "Name"), ("ip_address", "IP address"))
     )
@@ -57,7 +57,9 @@ class ServiceForm(BaseForm):
     time_between_retries = IntegerField("Time between retries (in seconds)", default=10)
     maximum_runs = IntegerField("Maximum number of runs", default=1)
     skip = BooleanField("Skip")
-    skip_query = PythonField("Skip Query (Python)")
+    skip_query = PythonField(
+        "Skip Query (Python)", widget=TextArea(), render_kw={"rows": 2}
+    )
     skip_value = SelectField(
         "Skip Value", choices=(("True", "True"), ("False", "False"),),
     )

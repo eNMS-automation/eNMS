@@ -167,7 +167,10 @@ export function downloadFile(name, content, type) {
       })
     )
   );
-  link.setAttribute("download", `${name}_${new Date().toLocaleString("en-US")}.${type}`);
+  link.setAttribute(
+    "download",
+    `${name}_${new Date().toLocaleString("en-US")}.${type}`
+  );
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
@@ -552,7 +555,8 @@ function processData(type, id) {
     callback: (instance) => {
       const tableType =
         type.includes("service") || type == "workflow" ? "service" : type;
-      if (page.includes("table")) tableInstances[tableType].table.ajax.reload(null, false);
+      if (page.includes("table"))
+        tableInstances[tableType].table.ajax.reload(null, false);
       $(id ? `#${type}-${id}` : `#${type}`).remove();
       if (page == "workflow_builder") processWorkflowData(instance, id);
       notify(

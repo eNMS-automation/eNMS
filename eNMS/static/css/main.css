@@ -43,6 +43,24 @@ body {
   width: calc(100% - 230px);
 }
 
+/* Don't display menu under 800 px */
+@media (max-width: 1000px) {
+  .left_column {
+    width: 0px;
+    display: none;
+  }
+
+  .nav-sm .right_column {
+    left: 0px;
+    width: 100%;
+  }
+
+  .nav-md .right_column {
+    left: 0px;
+    width: 100%;
+  }
+}
+
 .main_frame {
   background: #ffffff;
   width: 100%;

@@ -166,7 +166,7 @@ export class Table {
     downloadFile(
       this.type,
       [visibleColumns, ...result].map((e) => e.join(",")).join("\n"),
-      "csv",
+      "csv"
     );
   }
 

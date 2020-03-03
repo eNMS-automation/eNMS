@@ -486,8 +486,11 @@ export function showTypePanel(type, id, mode) {
             .trigger("change");
         }
       }
-      if (type.includes("service")) {
+      if (type.includes("service") || type == "workflow") {
+        $(`#${type}-scoped_name`).focus();
         loadScript(`../static/js/services/${type}.js`, id);
+      } else {
+        $(`#${type}-name`).focus();
       }
     },
     type: type,

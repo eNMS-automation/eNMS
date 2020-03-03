@@ -2,13 +2,14 @@ from collections import defaultdict
 from flask import request
 from flask_login import current_user
 from flask_wtf import FlaskForm
+from wtforms import PasswordField, StringField
 from wtforms.fields.core import UnboundField
 from wtforms.form import FormMeta
 
+from eNMS import app
 from eNMS.forms.fields import field_types, InstanceField, MultipleInstanceField
 from eNMS.models import property_types, relationships
-from eNMS.properties import field_conversion, property_names
-
+from eNMS.properties import field_conversion, private_properties, property_names
 
 form_actions = {}
 form_classes = {}
@@ -89,4 +90,12 @@ def configure_relationships(cls):
         field_type = "object-list" if relation["list"] else "object"
         form_properties[form_type][related_model] = {"type": field_type}
         setattr(cls, related_model, field())
+    return cls
+
+
+def set_custom_properties(cls):
+    cls.custom_properties = app.properties["custom"][cls.form_type.kwargs["default"]]
+    for property, values in cls.custom_properties.items():
+        field = PasswordField if property in private_properties else StringField
+        setattr(cls, property, field(values["pretty_name"]))
     return cls

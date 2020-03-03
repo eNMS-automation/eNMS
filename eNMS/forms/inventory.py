@@ -10,16 +10,8 @@ from wtforms.validators import InputRequired
 from wtforms.widgets import TextArea
 
 from eNMS import app
-from eNMS.forms import BaseForm, configure_relationships
+from eNMS.forms import BaseForm, configure_relationships, set_custom_properties
 from eNMS.forms.fields import MultipleInstanceField
-from eNMS.properties import private_properties
-
-
-def configure_device_form(cls):
-    for property, values in app.properties["custom"]["device"].items():
-        field = PasswordField if property in private_properties else StringField
-        setattr(cls, property, field(values["pretty_name"]))
-    return cls
 
 
 def configure_pool_form(cls):
@@ -69,7 +61,7 @@ class ObjectForm(BaseForm):
     model = StringField("Model")
 
 
-@configure_device_form
+@set_custom_properties
 @configure_relationships
 class DeviceForm(ObjectForm):
     template = "object"
@@ -114,6 +106,7 @@ class DeviceDataForm(BaseForm):
     )
 
 
+@set_custom_properties
 @configure_relationships
 class LinkForm(ObjectForm):
     template = "object"
@@ -122,6 +115,7 @@ class LinkForm(ObjectForm):
     color = StringField("Color")
 
 
+@set_custom_properties
 @configure_pool_form
 class PoolForm(BaseForm):
     template = "pool"

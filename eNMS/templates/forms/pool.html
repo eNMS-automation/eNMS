@@ -104,6 +104,33 @@
           {% endfor %}
         </tbody>
       </table>
+      <div class="x_title">
+        <h3>Custom Properties</h3>
+      </div>
+      <table
+        class="table table-striped table-bordered dt-responsive nowrap"
+        cellspacing="0"
+        width="100%"
+      >
+        <thead>
+          <tr>
+            <th>Custom Property</th>
+            <th>Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for property, values in form.custom_properties.items() %}
+          <tr>
+            <td>
+              {{ values["pretty_name"] }}
+            </td>
+            <td>
+              {{ form[property](id="pool-" + property, class="form-control add-id") }}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
       <center>
         <button
           type="button"

@@ -317,6 +317,7 @@ class AddServiceForm(BaseForm):
             ("shallow", "Shallow Copy (creates a reference to the service)"),
         ),
     )
+    search = StringField()
 
 
 class WorkflowLabelForm(BaseForm):

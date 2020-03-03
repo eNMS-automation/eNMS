@@ -170,7 +170,7 @@ def route(page):
             *args, **form_postprocessing(form, request.form)
         )
     else:
-        result = getattr(app, endpoint)(*args)
+        result = getattr(app, endpoint)(*args, **request.form)
     try:
         Session.commit()
         return jsonify(result)

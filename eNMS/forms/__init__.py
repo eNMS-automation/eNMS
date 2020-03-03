@@ -94,7 +94,9 @@ def configure_relationships(cls):
 
 
 def set_custom_properties(cls):
-    cls.custom_properties = app.properties["custom"].get(cls.form_type.kwargs["default"], {})
+    cls.custom_properties = app.properties["custom"].get(
+        cls.form_type.kwargs["default"], {}
+    )
     for property, values in cls.custom_properties.items():
         field = PasswordField if property in private_properties else StringField
         setattr(cls, property, field(values["pretty_name"]))

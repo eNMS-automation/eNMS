@@ -602,9 +602,16 @@ function addServicePanel() {
             type: "POST",
           },
         },
-        plugins: ["checkbox", "types", "wholerow"],
+        plugins: ["checkbox", "search", "types", "wholerow"],
         checkbox: {
           three_state: false,
+        },
+        search: {
+          show_only_matches: true,
+          ajax: {
+            type: "POST",
+            url: "/search_workflow_services",
+          },
         },
         types: {
           category: {
@@ -617,6 +624,15 @@ function addServicePanel() {
             icon: "fa fa-sitemap",
           },
         },
+      });
+      let timer = false;
+      $("#add-services-search").keyup(function(event) {
+        if (timer) clearTimeout(timer);
+        timer = setTimeout(function() {
+          $("#service-tree")
+            .jstree(true)
+            .search($("#add-services-search").val());
+        }, 500);
       });
     },
   });

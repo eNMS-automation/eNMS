@@ -17,6 +17,9 @@
       </button>
     </center>
     {{ form.mode(class="form-control required no-search") }}
+    <br /><br />
+    {{ form.search(id="add-services-search", class="form-control", placeholder="Search")
+    }}
     <hr />
     <div id="service-tree" class="add-id" style="height: 500px"></div>
     <input type="hidden" name="services" id="services" />

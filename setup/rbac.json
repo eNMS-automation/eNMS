@@ -183,6 +183,7 @@
       "/get_tree_files",
       "/get_workflow_results",
       "/get_workflow_services",
+      "/search_workflow_services",
       "/handoffssh",
       "/import_service",
       "/import_topology",

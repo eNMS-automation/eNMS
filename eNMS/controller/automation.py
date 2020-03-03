@@ -187,6 +187,7 @@ class AutomationController(BaseController):
                 + sorted(
                     (
                         {
+                            "id": workflow.name,
                             "data": {"id": workflow.id},
                             "text": workflow.name,
                             "children": True,
@@ -207,6 +208,7 @@ class AutomationController(BaseController):
             return sorted(
                 (
                     {
+                        "id": service.name,
                         "data": {"id": service.id},
                         "text": service.scoped_name,
                         "a_attr": {"style": ("color: #6666FF;" "width: 100%")},
@@ -220,6 +222,7 @@ class AutomationController(BaseController):
             return sorted(
                 (
                     {
+                        "id": service.name,
                         "data": {"id": service.id},
                         "text": service.scoped_name,
                         "a_attr": {"style": ("color: #FF1694;" "width: 100%")},
@@ -233,6 +236,7 @@ class AutomationController(BaseController):
             return sorted(
                 (
                     {
+                        "id": service.name,
                         "data": {"id": service.id},
                         "text": service.scoped_name,
                         "children": service.type == "workflow",
@@ -251,6 +255,20 @@ class AutomationController(BaseController):
                 ),
                 key=itemgetter("text"),
             )
+
+    def search_workflow_services(self, *args, **kwargs):
+        return [
+            "standalone",
+            "shared",
+            *[
+                workflow.name
+                for workflow in fetch_all("workflow")
+                if any(
+                    kwargs["str"].lower() in service.scoped_name.lower()
+                    for service in workflow.services
+                )
+            ],
+        ]
 
     def get_workflow_results(self, workflow, runtime):
         state = fetch("run", parent_runtime=runtime).result().result["state"]

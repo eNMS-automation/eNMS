@@ -552,7 +552,7 @@ export function processData(type, id) {
     callback: (instance) => {
       const tableType =
         type.includes("service") || type == "workflow" ? "service" : type;
-      if (page.includes("table")) tables[tableType].ajax.reload(null, false);
+      if (page.includes("table")) tableInstances[tableType].table.ajax.reload(null, false);
       $(id ? `#${type}-${id}` : `#${type}`).remove();
       if (page == "workflow_builder") processWorkflowData(instance, id);
       notify(

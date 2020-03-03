@@ -143,7 +143,7 @@ export function displayWorkflow(workflowData) {
     }
   });
   updateRuntimes(workflowData.runtimes);
-  $("#current-workflow").val(currentPath.split(">")[0]);
+  $("#current-workflow").val(`${currentPath}`.split(">")[0]);
   $("#current-workflow").selectpicker("refresh");
   graph.on("dragEnd", (event) => {
     if (graph.getNodeAt(event.pointer.DOM)) savePositions();
@@ -291,7 +291,16 @@ export const switchToWorkflow = function(path, arrow, runtime) {
 };
 
 export function processWorkflowData(instance, id) {
-  if (!instance.type) {
+  if (["create_workflow", "duplicate_workflow"].includes(creationMode)) {
+    $("#current-workflow").append(
+      `<option value="${instance.id}">${instance.name}</option>`
+    );
+    $("#current-workflow")
+      .val(instance.id)
+      .trigger("change");
+    creationMode = null;
+    switchToWorkflow(instance.id);
+  } else if (!instance.type) {
     edges.update(edgeToEdge(instance));
   } else if (instance.type.includes("service") || instance.type == "workflow") {
     if (id) {
@@ -300,24 +309,12 @@ export function processWorkflowData(instance, id) {
       let serviceIndex = workflow.services.findIndex((s) => s.id == instance.id);
       workflow.services[serviceIndex] = instance;
     } else {
-      if (creationMode == "create_workflow") {
-        if (instance.type === "workflow" && !id) {
-          $("#current-workflow").append(
-            `<option value="${instance.id}">${instance.name}</option>`
-          );
-          $("#current-workflow")
-            .val(instance.id)
-            .trigger("change");
-          displayWorkflow({ service: instance, runtimes: [] });
-        }
-      } else {
-        call({
-          url: `/add_service_to_workflow/${workflow.id}/${instance.id}`,
-          callback: function() {
-            updateWorkflowService(instance);
-          },
-        });
-      }
+      call({
+        url: `/add_service_to_workflow/${workflow.id}/${instance.id}`,
+        callback: function() {
+          updateWorkflowService(instance);
+        },
+      });
     }
     drawIterationEdge(instance);
   }
@@ -630,15 +627,7 @@ function createNew(mode) {
   if (mode == "create_workflow") {
     showTypePanel("workflow");
   } else if (mode == "duplicate_workflow") {
-    call({
-      url: `/duplicate_workflow/${workflow.id}`,
-      callback: function(instance) {
-        $("#current-workflow").append(
-          `<option value="${instance.id}">${instance.name}</option>`
-        );
-        switchToWorkflow(instance.id);
-      },
-    });
+    showTypePanel("workflow", workflow.id, "duplicate");
   } else {
     showTypePanel($("#service-type").val());
   }

@@ -541,7 +541,7 @@ function processInstance(type, instance) {
   }
 }
 
-export function processData(type, id) {
+function processData(type, id) {
   if (type.includes("service") || type == "workflow") {
     $(id ? `#${type}-workflows-${id}` : `#${type}-workflows`).prop("disabled", false);
     if (id) $(`#${type}-shared-${id}`).prop("disabled", false);

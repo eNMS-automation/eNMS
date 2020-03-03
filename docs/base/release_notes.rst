@@ -15,6 +15,8 @@ Version 3.20.2
 - Add button in tables to export search result as CSV file.
 - When duplicating top-level workflow, display edit panel
 - Fix progress display for service in run once mode in workflow builder
+- Multiline field for skip / device query
+- Add "Maximum number of retries" property to prevent infinite loop (hardcoded before)
 
 Version 3.20.1
 --------------

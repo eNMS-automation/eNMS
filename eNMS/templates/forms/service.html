@@ -147,7 +147,7 @@
                   {{ form.initial_payload(id=form_type + '-initial_payload',
                   class="form-control add-id") }}
                 </div>
-                <label>Number of retries</label>
+                <label>Initial Number of Retries</label>
                 <div class="form-group">
                   {{ form.number_of_retries(id=form_type + '-number_of_retries',
                   class="form-control add-id") }}
@@ -155,6 +155,11 @@
                 <label>Time between retries (in seconds)</label>
                 <div class="form-group">
                   {{ form.time_between_retries(id=form_type + '-time_between_retries',
+                  class="form-control add-id") }}
+                </div>
+                <label>Maximum number of retries (loop prevention mechanism)</label>
+                <div class="form-group">
+                  {{ form.max_number_of_retries(id=form_type + '-max_number_of_retries',
                   class="form-control add-id") }}
                 </div>
               </div>

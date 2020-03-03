@@ -62,6 +62,7 @@ class Service(AbstractBase):
     description = Column(SmallString)
     number_of_retries = Column(Integer, default=0)
     time_between_retries = Column(Integer, default=10)
+    max_number_of_retries = Column(Integer, default=100)
     positions = Column(MutableDict, info={"dont_track_changes": True})
     tasks = relationship("Task", back_populates="service", cascade="all,delete")
     events = relationship("Event", back_populates="service", cascade="all,delete")
@@ -538,7 +539,7 @@ class Run(AbstractBase):
     def run_service_job(self, payload, device):
         args = (device,) if device else ()
         retries, total_retries = self.number_of_retries + 1, 0
-        while retries and total_retries < 1000:
+        while retries and total_retries < self.max_number_of_retries:
             retries -= 1
             total_retries += 1
             try:

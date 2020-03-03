@@ -55,6 +55,7 @@ class ServiceForm(BaseForm):
     mail_recipient = StringField("Mail Recipients (separated by comma)")
     number_of_retries = IntegerField("Number of retries", default=0)
     time_between_retries = IntegerField("Time between retries (in seconds)", default=10)
+    max_number_of_retries = IntegerField("Maximum number of retries", default=100)
     maximum_runs = IntegerField("Maximum number of runs", default=1)
     skip = BooleanField("Skip")
     skip_query = PythonField(

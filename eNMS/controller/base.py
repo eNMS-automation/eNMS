@@ -353,8 +353,9 @@ class BaseController:
             elif not relation_ids:
                 continue
             elif relation_properties["list"]:
-                constraint = getattr(model, related_model).any(
-                    models[relation_properties["model"]].id.in_(relation_ids)
+                constraint = (and_ if filter == "all" else or_)(
+                    getattr(model, related_model).any(id=relation_id)
+                    for relation_id in relation_ids
                 )
                 if filter == "not_any":
                     constraint = ~constraint

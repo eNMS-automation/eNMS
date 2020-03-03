@@ -34,6 +34,7 @@ Advanced Search
   you can choose between 3 types of match:
 
     - ``Any``: match if related to at least one of the selected objects.
+    - ``All``: match if related to all selected objects.
     - ``Unrelated``: match if not related to any of the selected objects.
     - ``None``: match if the are no related objects.
 

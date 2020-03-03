@@ -26,6 +26,7 @@ def filtering_form_generator():
                     f"{relation}_filter": SelectField(
                         choices=(
                             ("any", "Any"),
+                            ("all", "All"),
                             ("not_any", "Unrelated"),
                             ("none", "None"),
                         )

@@ -3,7 +3,6 @@ from re import search
 from sqlalchemy import Boolean, ForeignKey, Integer
 from subprocess import check_output
 from traceback import format_exc
-from wtforms import HiddenField
 
 from eNMS import app
 from eNMS.database.dialect import Column, MutableDict, SmallString
@@ -11,6 +10,7 @@ from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import (
     BooleanField,
     DictField,
+    HiddenField,
     SelectField,
     StringField,
 )

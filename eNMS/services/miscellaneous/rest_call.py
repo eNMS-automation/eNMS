@@ -2,18 +2,16 @@ from json import dumps
 from requests.auth import HTTPBasicAuth
 from sqlalchemy import Boolean, ForeignKey, Integer
 from sqlalchemy.types import JSON
-from wtforms import (
-    BooleanField,
-    HiddenField,
-    IntegerField,
-    PasswordField,
-)
 
 from eNMS import app
 from eNMS.database.dialect import Column, LargeString, SmallString
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import (
+    BooleanField,
     DictField,
+    HiddenField,
+    IntegerField,
+    PasswordField,
     SelectField,
     StringField,
 )

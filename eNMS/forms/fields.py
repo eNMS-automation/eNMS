@@ -5,6 +5,7 @@ from wtforms import (
     BooleanField as WtformsBooleanField,
     FieldList as WtformsFieldList,
     FloatField as WtformsFloatField,
+    HiddenField as WtformsHiddenField,
     IntegerField as WtformsIntegerField,
     PasswordField as WtformsPasswordField,
     SelectField as WtformsSelectField,
@@ -14,6 +15,10 @@ from wtforms import (
 from wtforms.validators import ValidationError
 
 from eNMS import app
+
+
+class HiddenField(WtformsHiddenField):
+    type = "hidden"
 
 
 class StringField(WtformsStringField):

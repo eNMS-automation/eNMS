@@ -8,15 +8,6 @@
 # SQL Alchemy Column types
 from sqlalchemy import Boolean, Float, ForeignKey, Integer
 
-# WTForms Fields
-from wtforms import (
-    BooleanField,
-    FloatField,
-    HiddenField,
-    IntegerField,
-    SelectMultipleField,
-)
-
 # WTForms Field Validators
 from wtforms.validators import (
     Email,
@@ -33,7 +24,16 @@ from wtforms.validators import (
 
 from eNMS.database.dialect import Column, MutableDict, MutableList, SmallString
 from eNMS.forms.automation import ServiceForm
-from eNMS.forms.fields import DictField, SelectField, StringField
+from eNMS.forms.fields import (
+    BooleanField,
+    DictField,
+    FloatField,
+    HiddenField,
+    IntegerField,
+    SelectMultipleField,
+    SelectField,
+    StringField,
+)
 from eNMS.models.automation import Service
 
 

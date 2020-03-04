@@ -1,8 +1,7 @@
-from wtforms import BooleanField, HiddenField, IntegerField
 from wtforms.validators import InputRequired
 
 from eNMS.forms import BaseForm, configure_relationships, set_custom_properties
-from eNMS.forms.fields import DictField, SelectField, StringField
+from eNMS.forms.fields import BooleanField, DictField, HiddenField, IntegerField, SelectField, StringField
 
 
 def configure_form(cls):

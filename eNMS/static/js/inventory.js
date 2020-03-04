@@ -438,7 +438,7 @@ function showDeviceResultsPanel(device) {
     type: "device_result",
     title: `Results - ${device.name}`,
     callback: function() {
-      new Table("device_result", device, null, device.id);
+      new tables["device_result"]("device_result", device, null, device.id);
     },
   });
 }

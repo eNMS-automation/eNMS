@@ -18,6 +18,7 @@ from eNMS import app
 
 class StringField(WtformsStringField):
     type = "str"
+
     def __init__(self, *args, **kwargs):
         if "type" in kwargs:
             self.type = kwargs.pop("type")
@@ -60,14 +61,23 @@ class MultipleInstanceField(WtformsSelectMultipleField):
 class PasswordField(WtformsPasswordField):
     type = "str"
 
+    def __init__(self, *args, **kwargs):
+        self.color = kwargs.pop("substitution", False)
+        super().__init__(*args, **kwargs)
+
+    def __call__(self, *args, **kwargs):
+        if self.color:
+            kwargs["style"] = "background-color: #e8f0f7"
+        return super().__call__(*args, **kwargs)
+
 
 class DictField(StringField):
     type = "dict"
+
     def __init__(self, *args, **kwargs):
         kwargs["default"] = kwargs.get("default", "{}")
         self.json_only = kwargs.pop("json_only", False)
         super().__init__(*args, **kwargs)
-        
 
     def pre_validate(self, form):
         invalid_dict, invalid_json = False, False
@@ -92,6 +102,7 @@ class DictField(StringField):
 
 class InstanceField(SelectField):
     type = "object"
+
     def __init__(self, *args, **kwargs):
         kwargs["coerce"] = int
         super().__init__(*args, **kwargs)
@@ -103,6 +114,7 @@ class InstanceField(SelectField):
 
 class MultipleInstanceField(WtformsSelectMultipleField):
     type = "object-list"
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.choices = ()
@@ -111,27 +123,13 @@ class MultipleInstanceField(WtformsSelectMultipleField):
         pass
 
 
-class SubstitutionField(StringField):
-    type="str"
-    def __call__(self, *args, **kwargs):
-        kwargs["style"] = "background-color: #e8f0f7"
-        return super().__call__(*args, **kwargs)
-
-
-class PasswordSubstitutionField(WtformsPasswordField):
-    type="str"
-    def __call__(self, *args, **kwargs):
-        kwargs["style"] = "background-color: #e8f0f7"
-        return super().__call__(*args, **kwargs)
-
-
 class NoValidationSelectField(SelectField):
     type = "list"
+
     def pre_validate(self, form):
         pass
 
 
 class NoValidationSelectMultipleField(WtformsSelectMultipleField):
-
     def pre_validate(self, form):
         pass

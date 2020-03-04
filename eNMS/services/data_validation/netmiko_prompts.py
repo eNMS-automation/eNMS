@@ -3,7 +3,7 @@ from traceback import format_exc
 from wtforms import HiddenField
 
 from eNMS.database.dialect import Column, LargeString, SmallString
-from eNMS.forms.fields import SubstitutionField
+from eNMS.forms.fields import StringField
 from eNMS.forms.automation import NetmikoForm
 from eNMS.models.automation import ConnectionService
 
@@ -70,13 +70,13 @@ class NetmikoPromptsService(ConnectionService):
 
 class NetmikoPromptsForm(NetmikoForm):
     form_type = HiddenField(default="netmiko_prompts_service")
-    command = SubstitutionField()
-    confirmation1 = SubstitutionField()
-    response1 = SubstitutionField()
-    confirmation2 = SubstitutionField()
-    response2 = SubstitutionField()
-    confirmation3 = SubstitutionField()
-    response3 = SubstitutionField()
+    command = StringField()
+    confirmation1 = StringField(substitution=True)
+    response1 = StringField(substitution=True)
+    confirmation2 = StringField(substitution=True)
+    response2 = StringField(substitution=True)
+    confirmation3 = StringField(substitution=True)
+    response3 = StringField(substitution=True)
     groups = {
         "Main Parameters": {
             "commands": [

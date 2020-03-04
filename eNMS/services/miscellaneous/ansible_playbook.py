@@ -11,7 +11,7 @@ from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import (
     DictField,
     NoValidationSelectField,
-    SubstitutionField,
+    StringField,
 )
 from eNMS.models.automation import Service
 
@@ -80,9 +80,11 @@ class AnsiblePlaybookService(Service):
 class AnsiblePlaybookForm(ServiceForm):
     form_type = HiddenField(default="ansible_playbook_service")
     playbook_path = NoValidationSelectField("Playbook Path", choices=())
-    arguments = SubstitutionField("Arguments (Ansible command line options)")
+    arguments = StringField("Arguments (Ansible command line options)", substitution=True)
     pass_device_properties = BooleanField(
         "Pass Device Inventory Properties (to be used "
         "in the playbook as {{name}} or {{ip_address}})"
     )
-    options = DictField("Options (passed to ansible as -e extra args)", substitution=True)
+    options = DictField(
+        "Options (passed to ansible as -e extra args)", substitution=True
+    )

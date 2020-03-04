@@ -7,7 +7,7 @@ from wtforms.widgets import TextArea
 from eNMS import app
 from eNMS.database.dialect import Column, LargeString, SmallString
 from eNMS.forms.automation import ServiceForm
-from eNMS.forms.fields import SubstitutionField
+from eNMS.forms.fields import StringField
 from eNMS.models.automation import Service
 
 
@@ -36,5 +36,5 @@ class MattermostNotificationService(Service):
 
 class MattermostNotificationForm(ServiceForm):
     form_type = HiddenField(default="mattermost_notification_service")
-    channel = SubstitutionField()
-    body = SubstitutionField(widget=TextArea(), render_kw={"rows": 5})
+    channel = StringField(substitution=True)
+    body = StringField(widget=TextArea(), render_kw={"rows": 5}, substitution=True)

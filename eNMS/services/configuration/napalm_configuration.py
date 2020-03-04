@@ -3,7 +3,7 @@ from wtforms import HiddenField
 from wtforms.widgets import TextArea
 
 from eNMS.database.dialect import Column, LargeString, MutableDict, SmallString
-from eNMS.forms.fields import SelectField, SubstitutionField
+from eNMS.forms.fields import SelectField, StringField
 from eNMS.forms.automation import NapalmForm
 from eNMS.models.automation import ConnectionService
 
@@ -40,7 +40,7 @@ class NapalmConfigurationForm(NapalmForm):
             ("load_replace_candidate", "Load replace"),
         )
     )
-    content = SubstitutionField(widget=TextArea(), render_kw={"rows": 5})
+    content = StringField(widget=TextArea(), render_kw={"rows": 5}, substitution=True)
     groups = {
         "Main Parameters": {"commands": ["action", "content"], "default": "expanded"},
         **NapalmForm.groups,

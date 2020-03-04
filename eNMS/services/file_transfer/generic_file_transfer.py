@@ -8,7 +8,7 @@ from wtforms.validators import InputRequired
 
 from eNMS.database.dialect import Column, SmallString
 from eNMS.forms.automation import ServiceForm
-from eNMS.forms.fields import SelectField, SubstitutionField
+from eNMS.forms.fields import SelectField, StringField
 from eNMS.models.automation import Service
 
 
@@ -94,8 +94,8 @@ class GenericFileTransferForm(ServiceForm):
     form_type = HiddenField(default="generic_file_transfer_service")
     direction = SelectField(choices=(("get", "Get"), ("put", "Put")))
     protocol = SelectField(choices=(("scp", "SCP"), ("sftp", "SFTP")))
-    source_file = SubstitutionField(validators=[InputRequired()])
-    destination_file = SubstitutionField(validators=[InputRequired()])
+    source_file = StringField(validators=[InputRequired()], substitution=True)
+    destination_file = StringField(validators=[InputRequired()], substitution=True)
     missing_host_key_policy = BooleanField()
     load_known_host_keys = BooleanField()
     look_for_keys = BooleanField()

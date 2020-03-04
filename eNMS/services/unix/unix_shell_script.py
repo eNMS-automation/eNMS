@@ -10,7 +10,7 @@ from wtforms.widgets import TextArea
 from eNMS import app
 from eNMS.database.dialect import Column, LargeString, SmallString
 from eNMS.forms.automation import NetmikoForm
-from eNMS.forms.fields import SelectField, StringField, SubstitutionField
+from eNMS.forms.fields import SelectField, StringField, StringField
 from eNMS.models.automation import Service
 
 
@@ -99,7 +99,7 @@ class UnixShellScriptForm(NetmikoForm):
     timeout = IntegerField(default=10)
     delay_factor = FloatField(default=1.0)
     global_delay_factor = FloatField(default=1.0)
-    expect_string = SubstitutionField()
+    expect_string = StringField(substitution=True)
     auto_find_prompt = BooleanField(default=True)
     strip_prompt = BooleanField(default=True)
     strip_command = BooleanField(default=True)

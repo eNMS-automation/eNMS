@@ -3,7 +3,7 @@ from traceback import format_exc
 from wtforms import BooleanField, HiddenField
 
 from eNMS.database.dialect import Column, LargeString, SmallString
-from eNMS.forms.fields import SubstitutionField
+from eNMS.forms.fields import StringField
 from eNMS.forms.automation import NetmikoForm
 from eNMS.models.automation import ConnectionService
 
@@ -59,8 +59,8 @@ class NetmikoValidationService(ConnectionService):
 
 class NetmikoValidationForm(NetmikoForm):
     form_type = HiddenField(default="netmiko_validation_service")
-    command = SubstitutionField()
-    expect_string = SubstitutionField()
+    command = StringField(substitution=True)
+    expect_string = StringField(substitution=True)
     auto_find_prompt = BooleanField(default=True)
     strip_prompt = BooleanField(default=True)
     strip_command = BooleanField(default=True)

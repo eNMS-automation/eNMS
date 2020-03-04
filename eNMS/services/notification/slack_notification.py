@@ -7,7 +7,7 @@ from wtforms.widgets import TextArea
 from eNMS import app
 from eNMS.database.dialect import Column, LargeString, SmallString
 from eNMS.forms.automation import ServiceForm
-from eNMS.forms.fields import SubstitutionField
+from eNMS.forms.fields import StringField
 from eNMS.models.automation import Service
 
 
@@ -34,6 +34,6 @@ class SlackNotificationService(Service):
 
 class SlackNotificationForm(ServiceForm):
     form_type = HiddenField(default="slack_notification_service")
-    channel = SubstitutionField()
+    channel = StringField(substitution=True)
     token = StringField()
-    body = SubstitutionField(widget=TextArea(), render_kw={"rows": 5})
+    body = StringField(widget=TextArea(), render_kw={"rows": 5}, substitution=True)

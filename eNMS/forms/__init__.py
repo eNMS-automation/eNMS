@@ -28,12 +28,17 @@ class MetaForm(FormMeta):
         form_actions[form_type] = getattr(form, "action", None)
         properties = {}
         for field_name, field in attrs.items():
-            if not isinstance(field, UnboundField) or not hasattr(field.field_class, "type"):
+            if not isinstance(field, UnboundField) or not hasattr(
+                field.field_class, "type"
+            ):
                 continue
             field_type = field.kwargs.pop("type", None)
             if not field_type:
                 field_type = field.field_class.type
-            properties[field_name] = {"type": field_type, "model": field.kwargs.pop("model", None)}
+            properties[field_name] = {
+                "type": field_type,
+                "model": field.kwargs.pop("model", None),
+            }
         property_names.update(
             {
                 field_name: field.args[0]

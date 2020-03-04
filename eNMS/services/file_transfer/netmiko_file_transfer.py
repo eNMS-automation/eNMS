@@ -4,7 +4,7 @@ from wtforms import BooleanField, HiddenField
 from wtforms.validators import InputRequired
 
 from eNMS.database.dialect import Column, SmallString
-from eNMS.forms.fields import SelectField, StringField, SubstitutionField
+from eNMS.forms.fields import SelectField, StringField
 from eNMS.forms.automation import NetmikoForm
 from eNMS.models.automation import ConnectionService
 
@@ -52,8 +52,8 @@ class NetmikoFileTransferService(ConnectionService):
 
 class NetmikoFileTransferForm(NetmikoForm):
     form_type = HiddenField(default="netmiko_file_transfer_service")
-    source_file = SubstitutionField(validators=[InputRequired()])
-    destination_file = SubstitutionField(validators=[InputRequired()])
+    source_file = StringField(validators=[InputRequired()], substitution=True)
+    destination_file = StringField(validators=[InputRequired()], substitution=True)
     file_system = StringField()
     direction = SelectField(choices=(("put", "Upload"), ("get", "Download")))
     disable_md5 = BooleanField()

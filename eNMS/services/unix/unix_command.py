@@ -4,7 +4,7 @@ from wtforms import HiddenField
 
 from eNMS.database.dialect import Column, SmallString
 from eNMS.forms.automation import ServiceForm
-from eNMS.forms.fields import SubstitutionField
+from eNMS.forms.fields import StringField
 from eNMS.models.automation import Service
 
 
@@ -25,4 +25,4 @@ class UnixCommandService(Service):
 
 class UnixCommandForm(ServiceForm):
     form_type = HiddenField(default="unix_command_service")
-    command = SubstitutionField()
+    command = StringField(substitution=True)

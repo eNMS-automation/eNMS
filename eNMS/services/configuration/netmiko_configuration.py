@@ -3,7 +3,7 @@ from wtforms import BooleanField, HiddenField, StringField
 from wtforms.widgets import TextArea
 
 from eNMS.database.dialect import Column, LargeString, SmallString
-from eNMS.forms.fields import SubstitutionField
+from eNMS.forms.fields import StringField
 from eNMS.forms.automation import NetmikoForm
 from eNMS.models.automation import ConnectionService
 
@@ -51,7 +51,7 @@ class NetmikoConfigurationService(ConnectionService):
 class NetmikoConfigurationForm(NetmikoForm):
     form_type = HiddenField(default="netmiko_configuration_service")
     config_mode = BooleanField("Config mode", default=True)
-    content = SubstitutionField(widget=TextArea(), render_kw={"rows": 5})
+    content = StringField(widget=TextArea(), render_kw={"rows": 5}, substitution=True)
     commit_configuration = BooleanField()
     exit_config_mode = BooleanField(default=True)
     strip_prompt = BooleanField()

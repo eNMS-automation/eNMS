@@ -2,7 +2,7 @@ from sqlalchemy import Boolean, ForeignKey, Integer
 from wtforms import HiddenField, IntegerField, StringField
 
 from eNMS.database.dialect import Column, MutableDict, SmallString
-from eNMS.forms.fields import SubstitutionField
+from eNMS.forms.fields import StringField
 from eNMS.forms.automation import NapalmForm
 from eNMS.models.automation import ConnectionService
 
@@ -42,8 +42,8 @@ class NapalmTracerouteService(ConnectionService):
 
 class NapalmTracerouteForm(NapalmForm):
     form_type = HiddenField(default="napalm_traceroute_service")
-    destination_ip = SubstitutionField()
-    source_ip = SubstitutionField()
+    destination_ip = StringField(substitution=True)
+    source_ip = StringField(substitution=True)
     timeout = IntegerField(default=2)
     ttl = IntegerField(default=255)
     vrf = StringField()

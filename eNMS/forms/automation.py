@@ -1,23 +1,20 @@
 from ast import parse
-from wtforms import (
-    BooleanField,
-    FloatField,
-    HiddenField,
-    IntegerField,
-)
+from wtforms import HiddenField
 from wtforms.validators import InputRequired
 from wtforms.widgets import TextArea
 
 from eNMS import app
 from eNMS.forms import BaseForm, set_custom_properties
 from eNMS.forms.fields import (
+    BooleanField,
+    FloatField,
+    IntegerField,
     StringField,
     DictField,
     MultipleInstanceField,
     NoValidationSelectField,
-    PasswordSubstitutionField,
+    PasswordField,
     SelectField,
-    SubstitutionField,
 )
 
 
@@ -31,7 +28,9 @@ class ServiceForm(BaseForm):
     shared = BooleanField("Shared Service")
     scoped_name = StringField("Scoped Name", [InputRequired()])
     description = StringField("Description")
-    device_query = StringField("Device Query", python=True, widget=TextArea(), render_kw={"rows": 2})
+    device_query = StringField(
+        "Device Query", python=True, widget=TextArea(), render_kw={"rows": 2}
+    )
     device_query_property = SelectField(
         "Query Property Type", choices=(("name", "Name"), ("ip_address", "IP address"))
     )
@@ -75,7 +74,9 @@ class ServiceForm(BaseForm):
         "Iteration Devices Property",
         choices=(("name", "Name"), ("ip_address", "IP address")),
     )
-    result_postprocessing = StringField(type="code", widget=TextArea(), render_kw={"rows": 8})
+    result_postprocessing = StringField(
+        type="code", widget=TextArea(), render_kw={"rows": 8}
+    )
     multiprocessing = BooleanField("Multiprocessing")
     max_processes = IntegerField("Maximum number of processes", default=15)
     conversion_method = SelectField(
@@ -95,8 +96,8 @@ class ServiceForm(BaseForm):
             ("dict_equal", "Validation by dictionary equality"),
         ),
     )
-    content_match = SubstitutionField(
-        "Content Match", widget=TextArea(), render_kw={"rows": 8}
+    content_match = StringField(
+        "Content Match", widget=TextArea(), render_kw={"rows": 8}, substitution=True
     )
     content_match_regex = BooleanField("Match content with Regular Expression")
     dict_match = DictField("Dictionary to Match Against", substitution=True)
@@ -172,8 +173,8 @@ class ConnectionForm(ServiceForm):
             ("custom", "Custom Credentials"),
         ),
     )
-    custom_username = SubstitutionField("Custom Username")
-    custom_password = PasswordSubstitutionField("Custom Password")
+    custom_username = StringField("Custom Username", substitution=True)
+    custom_password = PasswordField("Custom Password", substitution=True)
     start_new_connection = BooleanField("Start New Connection")
     close_connection = BooleanField("Close Connection")
     group = {

@@ -16,7 +16,6 @@ from eNMS.forms.fields import (
     DictField,
     SelectField,
     StringField,
-    SubstitutionField,
 )
 from eNMS.models.automation import Service
 
@@ -80,7 +79,7 @@ class RestCallForm(ServiceForm):
             ("PATCH", "PATCH"),
         )
     )
-    rest_url = SubstitutionField()
+    rest_url = StringField(substitution=True)
     payload = DictField(json_only=True, substitution=True)
     params = DictField(substitution=True)
     headers = DictField(substitution=True)

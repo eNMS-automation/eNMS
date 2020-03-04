@@ -289,11 +289,6 @@ class TreeForm(BaseForm):
     runtimes = SelectField("Runtime", choices=(), validation=False)
 
 
-class CalendarForm(BaseForm):
-    template = "calendar"
-    form_type = HiddenField(default="calendar")
-
-
 class DisplayConfigurationForm(DisplayForm):
     form_type = HiddenField(default="display_configuration")
 

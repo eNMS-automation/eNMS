@@ -425,9 +425,12 @@ function field(name, type, id) {
 
 function displayCalendar(calendarType) {
   openPanel({
-    name: "calendar",
     title: `Calendar - ${calendarType}`,
     id: calendarType,
+    content: `
+      <div class="modal-body">
+        <div id="calendar" style="height: 500px"></div>
+      </div>`,
     callback: () => {
       call({
         url: `/calendar_init/${calendarType}`,

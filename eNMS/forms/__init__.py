@@ -2,12 +2,12 @@ from collections import defaultdict
 from flask import request
 from flask_login import current_user
 from flask_wtf import FlaskForm
-from wtforms import HiddenField
 from wtforms.fields.core import UnboundField
 from wtforms.form import FormMeta
 
 from eNMS import app
 from eNMS.forms.fields import (
+    HiddenField,
     InstanceField,
     MultipleInstanceField,
     PasswordField,

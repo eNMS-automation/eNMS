@@ -1,5 +1,4 @@
 from ast import parse
-from wtforms import HiddenField
 from wtforms.validators import InputRequired
 from wtforms.widgets import TextArea
 
@@ -8,6 +7,7 @@ from eNMS.forms import BaseForm, set_custom_properties
 from eNMS.forms.fields import (
     BooleanField,
     FloatField,
+    HiddenField,
     IntegerField,
     StringField,
     DictField,

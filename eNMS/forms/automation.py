@@ -278,22 +278,13 @@ class ResultTableForm(BaseForm):
     runtimes = SelectField("Runtime", choices=(), validation=False)
 
 
-class DisplayForm(BaseForm):
-    template = "display"
-    form_type = HiddenField(default="display")
-
-
 class TreeForm(BaseForm):
     template = "tree"
     form_type = HiddenField(default="tree")
     runtimes = SelectField("Runtime", choices=(), validation=False)
 
 
-class DisplayConfigurationForm(DisplayForm):
-    form_type = HiddenField(default="display_configuration")
-
-
-class FileForm(DisplayForm):
+class FileForm(BaseForm):
     template = "file"
     form_type = HiddenField(default="file")
     file_content = StringField(widget=TextArea(), render_kw={"rows": 8})

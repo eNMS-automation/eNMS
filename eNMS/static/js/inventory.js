@@ -222,7 +222,7 @@ function showSessionLog(sessionId) {
         );
       } else {
         openPanel({
-          name: "display",
+          content: `<div id="content" class="add-id" style="height:100%"></div>`,
           title: "Session log",
           id: sessionId,
           callback: function() {
@@ -345,7 +345,7 @@ function showGitHistory(device) {
         notify("No data stored.", "error", 5);
       } else {
         openPanel({
-          name: "display",
+          content: `<div id="content" class="add-id" style="height:100%"></div>`,
           title: "Configuration",
           content: `
             <nav

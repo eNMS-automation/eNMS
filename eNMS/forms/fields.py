@@ -49,6 +49,11 @@ class FloatField(WtformsFloatField):
 class SelectField(WtformsSelectField):
     type = "list"
 
+    def __init__(self, *args, **kwargs):
+        if not kwargs.pop("validation", True):
+            self.pre_validate = lambda *a, **kw: None
+        super().__init__(*args, **kwargs)
+
 
 class FieldList(WtformsFieldList):
     type = "field-list"
@@ -118,13 +123,6 @@ class MultipleInstanceField(WtformsSelectMultipleField):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.choices = ()
-
-    def pre_validate(self, form):
-        pass
-
-
-class NoValidationSelectField(SelectField):
-    type = "list"
 
     def pre_validate(self, form):
         pass

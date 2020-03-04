@@ -3,14 +3,15 @@ from re import search
 from sqlalchemy import Boolean, ForeignKey, Integer
 from subprocess import check_output
 from traceback import format_exc
-from wtforms import BooleanField, HiddenField
+from wtforms import HiddenField
 
 from eNMS import app
 from eNMS.database.dialect import Column, MutableDict, SmallString
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import (
+    BooleanField,
     DictField,
-    NoValidationSelectField,
+    SelectField,
     StringField,
 )
 from eNMS.models.automation import Service
@@ -79,7 +80,7 @@ class AnsiblePlaybookService(Service):
 
 class AnsiblePlaybookForm(ServiceForm):
     form_type = HiddenField(default="ansible_playbook_service")
-    playbook_path = NoValidationSelectField("Playbook Path", choices=())
+    playbook_path = SelectField("Playbook Path", choices=(), validation=False)
     arguments = StringField("Arguments (Ansible command line options)", substitution=True)
     pass_device_properties = BooleanField(
         "Pass Device Inventory Properties (to be used "

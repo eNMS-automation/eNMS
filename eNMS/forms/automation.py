@@ -12,7 +12,6 @@ from eNMS.forms.fields import (
     StringField,
     DictField,
     MultipleInstanceField,
-    NoValidationSelectField,
     PasswordField,
     SelectField,
 )
@@ -258,14 +257,14 @@ class RestartWorkflowForm(BaseForm):
     action = "eNMS.workflow.restartWorkflow"
     form_type = HiddenField(default="restart_workflow")
     start_services = MultipleInstanceField("Services", model="service")
-    restart_runtime = NoValidationSelectField("Restart Runtime", choices=())
+    restart_runtime = SelectField("Restart Runtime", choices=(), validation=False)
     restart_from_top_level_workflow = BooleanField(default=True)
 
 
 class LogsForm(BaseForm):
     template = "logs"
     form_type = HiddenField(default="logs")
-    runtimes = NoValidationSelectField("Runtime", choices=())
+    runtimes = SelectField("Runtime", choices=(), validation=False)
 
 
 class ResultForm(BaseForm):
@@ -276,7 +275,7 @@ class ResultForm(BaseForm):
 class ResultTableForm(BaseForm):
     template = "table"
     form_type = HiddenField(default="table")
-    runtimes = NoValidationSelectField("Runtime", choices=())
+    runtimes = SelectField("Runtime", choices=(), validation=False)
 
 
 class DisplayForm(BaseForm):
@@ -287,7 +286,7 @@ class DisplayForm(BaseForm):
 class TreeForm(BaseForm):
     template = "tree"
     form_type = HiddenField(default="tree")
-    runtimes = NoValidationSelectField("Runtime", choices=())
+    runtimes = SelectField("Runtime", choices=(), validation=False)
 
 
 class CalendarForm(BaseForm):

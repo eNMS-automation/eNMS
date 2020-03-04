@@ -97,13 +97,13 @@ export class Table {
             }
             $(element)
               .appendTo($(this.header()))
-              .on("keyup", function() {
+              .on("keyup change", function() {
                 if (waitForSearch) return;
                 waitForSearch = true;
                 setTimeout(function() {
                   self.table.page(0).ajax.reload(null, false);
                   waitForSearch = false;
-                }, 800);
+                }, 500);
               })
               .on("click", function(e) {
                 e.stopPropagation();

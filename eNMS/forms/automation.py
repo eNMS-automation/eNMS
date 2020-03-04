@@ -4,8 +4,6 @@ from wtforms import (
     FloatField,
     HiddenField,
     IntegerField,
-    SelectField,
-    StringField,
 )
 from wtforms.validators import InputRequired
 from wtforms.widgets import TextArea
@@ -13,12 +11,13 @@ from wtforms.widgets import TextArea
 from eNMS import app
 from eNMS.forms import BaseForm, set_custom_properties
 from eNMS.forms.fields import (
-    CustomStringField,
+    StringField,
     DictField,
     DictSubstitutionField,
     MultipleInstanceField,
     NoValidationSelectField,
     PasswordSubstitutionField,
+    SelectField,
     SubstitutionField,
 )
 
@@ -33,7 +32,7 @@ class ServiceForm(BaseForm):
     shared = BooleanField("Shared Service")
     scoped_name = StringField("Scoped Name", [InputRequired()])
     description = StringField("Description")
-    device_query = CustomStringField("Device Query", python=True, widget=TextArea(), render_kw={"rows": 2})
+    device_query = StringField("Device Query", python=True, widget=TextArea(), render_kw={"rows": 2})
     device_query_property = SelectField(
         "Query Property Type", choices=(("name", "Name"), ("ip_address", "IP address"))
     )
@@ -59,7 +58,7 @@ class ServiceForm(BaseForm):
     max_number_of_retries = IntegerField("Maximum number of retries", default=100)
     maximum_runs = IntegerField("Maximum number of runs", default=1)
     skip = BooleanField("Skip")
-    skip_query = CustomStringField(
+    skip_query = StringField(
         "Skip Query (Python)", python=True, widget=TextArea(), render_kw={"rows": 2}
     )
     skip_value = SelectField(
@@ -68,16 +67,16 @@ class ServiceForm(BaseForm):
     vendor = StringField("Vendor")
     operating_system = StringField("Operating System")
     initial_payload = DictField()
-    iteration_values = CustomStringField("Iteration Values", python=True)
+    iteration_values = StringField("Iteration Values", python=True)
     iteration_variable_name = StringField(
         "Iteration Variable Name", default="iteration_value"
     )
-    iteration_devices = CustomStringField("Iteration Devices", python=True)
+    iteration_devices = StringField("Iteration Devices", python=True)
     iteration_devices_property = SelectField(
         "Iteration Devices Property",
         choices=(("name", "Name"), ("ip_address", "IP address")),
     )
-    result_postprocessing = CustomStringField(type="code", widget=TextArea(), render_kw={"rows": 8})
+    result_postprocessing = StringField(type="code", widget=TextArea(), render_kw={"rows": 8})
     multiprocessing = BooleanField("Multiprocessing")
     max_processes = IntegerField("Maximum number of processes", default=15)
     conversion_method = SelectField(

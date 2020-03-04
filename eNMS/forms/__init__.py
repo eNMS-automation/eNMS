@@ -2,7 +2,7 @@ from collections import defaultdict
 from flask import request
 from flask_login import current_user
 from flask_wtf import FlaskForm
-from wtforms import PasswordField, StringField
+from wtforms import HiddenField, PasswordField, StringField
 from wtforms.fields.core import UnboundField
 from wtforms.form import FormMeta
 
@@ -26,14 +26,15 @@ class MetaForm(FormMeta):
         form_classes[form_type] = form
         form_templates[form_type] = getattr(form, "template", "base")
         form_actions[form_type] = getattr(form, "action", None)
-        properties = {
-            field_name: {
-                "type": field.kwargs.get("type", "str"),
-                "model": field.kwargs.pop("model", None),
-            }
-            for field_name, field in attrs.items()
-            if isinstance(field, UnboundField)
-        }
+        properties = {}
+        for field_name, field in attrs.items():
+            if not isinstance(field, UnboundField) or not hasattr(field.field_class, "type"):
+                continue
+            print(field.field_class)
+            field_type = field.kwargs.pop("type", None)
+            if not field_type:
+                field_type = field.field_class.type
+            properties[field_name] = {"type": field_type, "model": field.kwargs.pop("model", None)}
         property_names.update(
             {
                 field_name: field.args[0]

@@ -1,7 +1,7 @@
 from collections import defaultdict
 from sqlalchemy import Boolean, ForeignKey, Integer
 from sqlalchemy.orm import backref, relationship
-from wtforms import BooleanField, HiddenField, SelectField
+from wtforms import BooleanField, HiddenField
 
 from eNMS.database import Session
 from eNMS.database.base import AbstractBase
@@ -9,6 +9,7 @@ from eNMS.database.dialect import Column, MutableDict, SmallString
 from eNMS.database.functions import delete, factory, fetch
 from eNMS.database.associations import service_workflow_table
 from eNMS.forms.automation import ServiceForm
+from eNMS.forms.fields import SelectField
 from eNMS.models.automation import Service
 
 

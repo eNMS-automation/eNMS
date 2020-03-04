@@ -7,8 +7,8 @@ from wtforms import (
     FloatField,
     IntegerField,
     PasswordField,
-    SelectField,
-    StringField,
+    SelectField as WtformsSelectField,
+    StringField as WtformsStringField,
     SelectMultipleField,
 )
 from wtforms.validators import ValidationError
@@ -16,9 +16,11 @@ from wtforms.validators import ValidationError
 from eNMS import app
 
 
-class CustomStringField(StringField):
+class StringField(WtformsStringField):
+    type = "str"
     def __init__(self, *args, **kwargs):
-        self.type = kwargs.pop("type", "str")
+        if "type" in kwargs:
+            self.type = kwargs.pop("type")
         if kwargs.pop("substitution", False):
             self.color = "E8F0F7"
         elif kwargs.pop("python", False):
@@ -31,11 +33,17 @@ class CustomStringField(StringField):
         return super().__call__(*args, **kwargs)
 
 
+class SelectField(WtformsSelectField):
+    type = "list"
+
+
 class DictField(StringField):
+    type = "dict"
     def __init__(self, *args, **kwargs):
         kwargs["default"] = kwargs.get("default", "{}")
         self.json_only = kwargs.pop("json_only", False)
         super().__init__(*args, **kwargs)
+        
 
     def pre_validate(self, form):
         invalid_dict, invalid_json = False, False
@@ -65,6 +73,7 @@ class DictSubstitutionField(DictField):
 
 
 class InstanceField(SelectField):
+    type = "object"
     def __init__(self, *args, **kwargs):
         kwargs["coerce"] = int
         super().__init__(*args, **kwargs)
@@ -75,6 +84,7 @@ class InstanceField(SelectField):
 
 
 class MultipleInstanceField(SelectMultipleField):
+    type = "object-list"
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.choices = ()
@@ -84,31 +94,33 @@ class MultipleInstanceField(SelectMultipleField):
 
 
 class SubstitutionField(StringField):
+    type="str"
     def __call__(self, *args, **kwargs):
         kwargs["style"] = "background-color: #e8f0f7"
         return super().__call__(*args, **kwargs)
 
 
 class PasswordSubstitutionField(PasswordField):
+    type="str"
     def __call__(self, *args, **kwargs):
         kwargs["style"] = "background-color: #e8f0f7"
         return super().__call__(*args, **kwargs)
 
 
 class NoValidationSelectField(SelectField):
+    type = "list"
     def pre_validate(self, form):
         pass
 
 
 class NoValidationSelectMultipleField(SelectMultipleField):
+    type = "multiselect"
     def pre_validate(self, form):
         pass
 
 
 field_types = {
     BooleanField: "bool",
-    DictField: "dict",
-    DictSubstitutionField: "dict",
     FieldList: "field-list",
     FloatField: "float",
     InstanceField: "object",

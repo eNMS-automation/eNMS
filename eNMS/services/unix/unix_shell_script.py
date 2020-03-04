@@ -1,10 +1,8 @@
 from sqlalchemy import Boolean, Float, ForeignKey, Integer
 from wtforms import (
     HiddenField,
-    StringField,
     BooleanField,
     IntegerField,
-    SelectField,
     FloatField,
 )
 from wtforms.widgets import TextArea
@@ -12,7 +10,7 @@ from wtforms.widgets import TextArea
 from eNMS import app
 from eNMS.database.dialect import Column, LargeString, SmallString
 from eNMS.forms.automation import NetmikoForm
-from eNMS.forms.fields import SubstitutionField
+from eNMS.forms.fields import SelectField, StringField, SubstitutionField
 from eNMS.models.automation import Service
 
 

@@ -7,8 +7,6 @@ from wtforms import (
     HiddenField,
     IntegerField,
     PasswordField,
-    SelectField,
-    StringField,
 )
 
 from eNMS import app
@@ -16,6 +14,8 @@ from eNMS.database.dialect import Column, LargeString, SmallString
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import (
     DictSubstitutionField,
+    SelectField,
+    StringField,
     SubstitutionField,
 )
 from eNMS.models.automation import Service

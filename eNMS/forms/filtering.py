@@ -1,9 +1,9 @@
 from copy import deepcopy
-from wtforms import HiddenField, SelectField, StringField
+from wtforms import HiddenField
 
 from eNMS import app
 from eNMS.forms import BaseForm
-from eNMS.forms.fields import MultipleInstanceField
+from eNMS.forms.fields import MultipleInstanceField, SelectField, StringField
 from eNMS.models import models, relationships
 
 

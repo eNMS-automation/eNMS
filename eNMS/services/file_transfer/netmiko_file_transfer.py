@@ -1,10 +1,10 @@
 from netmiko import file_transfer
 from sqlalchemy import Boolean, Float, ForeignKey, Integer
-from wtforms import BooleanField, HiddenField, SelectField, StringField
+from wtforms import BooleanField, HiddenField
 from wtforms.validators import InputRequired
 
 from eNMS.database.dialect import Column, SmallString
-from eNMS.forms.fields import SubstitutionField
+from eNMS.forms.fields import SelectField, StringField, SubstitutionField
 from eNMS.forms.automation import NetmikoForm
 from eNMS.models.automation import ConnectionService
 

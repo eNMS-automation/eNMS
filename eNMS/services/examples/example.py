@@ -15,8 +15,6 @@ from wtforms import (
     HiddenField,
     IntegerField,
     SelectMultipleField,
-    SelectField,
-    StringField,
 )
 
 # WTForms Field Validators
@@ -35,7 +33,7 @@ from wtforms.validators import (
 
 from eNMS.database.dialect import Column, MutableDict, MutableList, SmallString
 from eNMS.forms.automation import ServiceForm
-from eNMS.forms.fields import DictField
+from eNMS.forms.fields import DictField, SelectField, StringField
 from eNMS.models.automation import Service
 
 

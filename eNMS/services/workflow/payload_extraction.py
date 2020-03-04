@@ -2,11 +2,12 @@ from io import StringIO
 from re import findall
 from sqlalchemy import ForeignKey, Integer
 from textfsm import TextFSM
-from wtforms import HiddenField, SelectField, StringField
+from wtforms import HiddenField
 from wtforms.widgets import TextArea
 
 from eNMS.database.dialect import Column, LargeString, SmallString
 from eNMS.forms.automation import ServiceForm
+from eNMS.forms.fields import SelectField, StringField
 from eNMS.models.automation import Service
 
 

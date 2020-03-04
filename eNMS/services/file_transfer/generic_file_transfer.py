@@ -3,12 +3,12 @@ from os.path import split
 from pathlib import Path
 from paramiko import SSHClient, AutoAddPolicy
 from sqlalchemy import Boolean, ForeignKey, Integer
-from wtforms import BooleanField, HiddenField, IntegerField, SelectField
+from wtforms import BooleanField, HiddenField, IntegerField
 from wtforms.validators import InputRequired
 
 from eNMS.database.dialect import Column, SmallString
 from eNMS.forms.automation import ServiceForm
-from eNMS.forms.fields import SubstitutionField
+from eNMS.forms.fields import SelectField, SubstitutionField
 from eNMS.models.automation import Service
 
 

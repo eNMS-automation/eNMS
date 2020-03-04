@@ -1,10 +1,11 @@
 from socket import error, gaierror, socket, timeout
 from subprocess import check_output
 from sqlalchemy import ForeignKey, Integer
-from wtforms import HiddenField, IntegerField, SelectField, StringField
+from wtforms import HiddenField, IntegerField
 
 from eNMS.database.dialect import Column, SmallString
 from eNMS.forms.automation import ServiceForm
+from eNMS.forms.fields import SelectField, StringField
 from eNMS.models.automation import Service
 
 

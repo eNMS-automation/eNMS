@@ -4,12 +4,12 @@ from logging import info
 from pathlib import Path
 from requests import get
 from sqlalchemy import ForeignKey, Integer
-from wtforms import HiddenField
 
 from eNMS import app
 from eNMS.database.dialect import Column
 from eNMS.database.functions import factory, fetch_all
 from eNMS.forms.automation import ServiceForm
+from eNMS.forms.fields import HiddenField
 from eNMS.models.automation import Service
 
 

@@ -81,7 +81,9 @@ class AnsiblePlaybookService(Service):
 class AnsiblePlaybookForm(ServiceForm):
     form_type = HiddenField(default="ansible_playbook_service")
     playbook_path = SelectField("Playbook Path", choices=(), validation=False)
-    arguments = StringField("Arguments (Ansible command line options)", substitution=True)
+    arguments = StringField(
+        "Arguments (Ansible command line options)", substitution=True
+    )
     pass_device_properties = BooleanField(
         "Pass Device Inventory Properties (to be used "
         "in the playbook as {{name}} or {{ip_address}})"

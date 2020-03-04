@@ -7,7 +7,13 @@ from wtforms.validators import InputRequired
 
 from eNMS.database.dialect import Column, SmallString
 from eNMS.forms.automation import ServiceForm
-from eNMS.forms.fields import BooleanField, HiddenField, IntegerField, SelectField, StringField
+from eNMS.forms.fields import (
+    BooleanField,
+    HiddenField,
+    IntegerField,
+    SelectField,
+    StringField,
+)
 from eNMS.models.automation import Service
 
 

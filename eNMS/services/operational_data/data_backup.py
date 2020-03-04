@@ -3,10 +3,11 @@ from flask_wtf import FlaskForm
 from pathlib import Path
 from re import M, sub
 from sqlalchemy import Boolean, Float, ForeignKey, Integer
-from wtforms import FieldList, FormField, HiddenField, StringField
+from wtforms import FormField
 
 from eNMS.database.dialect import Column, MutableList, LargeString, SmallString
 from eNMS.forms.automation import NetmikoForm
+from eNMS.forms.fields import FieldList, HiddenField, StringField
 from eNMS.models.automation import ConnectionService
 
 

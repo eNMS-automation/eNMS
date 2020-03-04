@@ -4,7 +4,14 @@ from wtforms.widgets import TextArea
 
 from eNMS import app
 from eNMS.forms import BaseForm, configure_relationships, set_custom_properties
-from eNMS.forms.fields import BooleanField, IntegerField, PasswordField, StringField, SelectField, SelectMultipleField
+from eNMS.forms.fields import (
+    BooleanField,
+    IntegerField,
+    PasswordField,
+    StringField,
+    SelectField,
+    SelectMultipleField,
+)
 from eNMS.properties.database import import_classes
 
 

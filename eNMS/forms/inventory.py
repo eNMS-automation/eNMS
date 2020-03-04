@@ -3,7 +3,15 @@ from wtforms.widgets import TextArea
 
 from eNMS import app
 from eNMS.forms import BaseForm, configure_relationships, set_custom_properties
-from eNMS.forms.fields import BooleanField, HiddenField, IntegerField, MultipleInstanceField, PasswordField, SelectField, StringField
+from eNMS.forms.fields import (
+    BooleanField,
+    HiddenField,
+    IntegerField,
+    MultipleInstanceField,
+    PasswordField,
+    SelectField,
+    StringField,
+)
 
 
 def configure_pool_form(cls):

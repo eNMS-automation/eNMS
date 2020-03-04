@@ -1,11 +1,10 @@
 import traceback
 from sqlalchemy import ForeignKey, Integer
-from wtforms import HiddenField
 from wtforms.widgets import TextArea
 
 from eNMS.database.dialect import Column, LargeString
 from eNMS.forms.automation import ServiceForm
-from eNMS.forms.fields import StringField
+from eNMS.forms.fields import HiddenField, StringField
 from eNMS.models.automation import Service
 
 

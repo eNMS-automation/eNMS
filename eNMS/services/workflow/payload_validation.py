@@ -1,8 +1,8 @@
 from sqlalchemy import ForeignKey, Integer
-from wtforms import HiddenField, StringField
 
 from eNMS.database.dialect import Column, SmallString
 from eNMS.forms.automation import ServiceForm
+from eNMS.forms.fields import HiddenField, StringField
 from eNMS.models.automation import Service
 
 

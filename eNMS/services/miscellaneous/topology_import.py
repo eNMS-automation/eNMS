@@ -1,12 +1,11 @@
 from pynetbox import api as netbox_api
 from requests import get as http_get
 from sqlalchemy import ForeignKey, Integer
-from wtforms import HiddenField, PasswordField
 
 from eNMS.database.dialect import Column, SmallString
 from eNMS.database.functions import factory
 from eNMS.forms.automation import ServiceForm
-from eNMS.forms.fields import SelectField, StringField
+from eNMS.forms.fields import HiddenField, PasswordField, SelectField, StringField
 from eNMS.models.automation import Service
 
 

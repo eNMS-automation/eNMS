@@ -82,7 +82,7 @@ class RestCallForm(ServiceForm):
         )
     )
     rest_url = SubstitutionField()
-    payload = JsonSubstitutionField()
+    payload = DictSubstitutionField(json_only=True)
     params = DictSubstitutionField()
     headers = DictSubstitutionField()
     verify_ssl_certificate = BooleanField("Verify SSL Certificate")

@@ -20,43 +20,27 @@ class DateField(StringField):
     pass
 
 
-class JsonField(StringField):
-    def __init__(self, *args, **kwargs):
-        kwargs["default"] = kwargs.get("default", "{}")
-        super().__init__(*args, **kwargs)
-
-    def pre_validate(self, form):
-        try:
-            loads(self.data)
-        except JSONDecodeError:
-            raise ValidationError("This field contains invalid JSON.")
-        return True
-
-
-class JsonSubstitutionField(JsonField):
-    def __call__(self, *args, **kwargs):
-        kwargs["style"] = "background-color: #e8f0f7"
-        return super().__call__(*args, **kwargs)
-
-
 class DictField(StringField):
     def __init__(self, *args, **kwargs):
         kwargs["default"] = kwargs.get("default", "{}")
+        self.json_only = kwargs.pop("json_only", False)
         super().__init__(*args, **kwargs)
 
     def pre_validate(self, form):
         invalid_dict, invalid_json = False, False
         try:
-            result = literal_eval(self.data)
-        except Exception:
-            invalid_dict = True
-        try:
             result = loads(self.data)
         except Exception:
             invalid_json = True
+        if self.json_only and invalid_json:
+            raise ValidationError("Invalid json syntax.")
+        try:
+            result = literal_eval(self.data)
+        except Exception:
+            invalid_dict = True
         if invalid_dict and invalid_json:
             raise ValidationError("Invalid dictionary syntax.")
-        if not isinstance(result, dict):
+        if not isinstance(result, dict) and not self.json_only:
             raise ValidationError("This field only accepts dictionaries.")
         if app.contains_set(result):
             raise ValidationError("Sets are not allowed.")
@@ -130,8 +114,6 @@ field_types = {
     FloatField: "float",
     InstanceField: "object",
     IntegerField: "integer",
-    JsonField: "json",
-    JsonSubstitutionField: "json",
     MultipleInstanceField: "object-list",
     NoValidationSelectMultipleField: "multiselect",
     NoValidationSelectField: "list",

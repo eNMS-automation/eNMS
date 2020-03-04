@@ -507,7 +507,7 @@ function updateProperty(instance, el, property, value, type) {
   }
   if (propertyType.includes("bool")) {
     el.prop("checked", value);
-  } else if (propertyType.includes("dict") || propertyType == "json") {
+  } else if (propertyType.includes("dict")) {
     el.val(value ? JSON.stringify(value) : "{}");
   } else if (["list", "multiselect"].includes(propertyType)) {
     try {

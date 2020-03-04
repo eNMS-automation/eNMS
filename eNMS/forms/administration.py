@@ -12,7 +12,7 @@ from wtforms.widgets import TextArea
 
 from eNMS import app
 from eNMS.forms import BaseForm, configure_relationships, set_custom_properties
-from eNMS.forms.fields import DateField
+from eNMS.forms.fields import CustomStringField
 from eNMS.properties.database import import_classes
 
 
@@ -53,7 +53,7 @@ class ResultLogDeletionForm(BaseForm):
         "Instances do delete",
         choices=[("result", "result"), ("changelog", "changelog")],
     )
-    date_time = DateField(label="Delete Records before")
+    date_time = CustomStringField(type="date", label="Delete Records before")
 
 
 class InstanceDeletionForm(BaseForm):

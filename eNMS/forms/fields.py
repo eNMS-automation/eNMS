@@ -22,10 +22,6 @@ class CustomStringField(StringField):
         super().__init__(*args, **kwargs)
 
 
-class DateField(StringField):
-    pass
-
-
 class DictField(StringField):
     def __init__(self, *args, **kwargs):
         kwargs["default"] = kwargs.get("default", "{}")
@@ -108,7 +104,6 @@ class NoValidationSelectMultipleField(SelectMultipleField):
 
 field_types = {
     BooleanField: "bool",
-    DateField: "date",
     DictField: "dict",
     DictSubstitutionField: "dict",
     FieldList: "field-list",

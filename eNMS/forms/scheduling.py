@@ -2,7 +2,7 @@ from wtforms import BooleanField, HiddenField, IntegerField, SelectField, String
 from wtforms.validators import InputRequired
 
 from eNMS.forms import BaseForm, configure_relationships, set_custom_properties
-from eNMS.forms.fields import DateField, DictField
+from eNMS.forms.fields import CustomStringField, DictField
 
 
 def configure_form(cls):
@@ -35,8 +35,8 @@ class TaskForm(BaseForm):
     )
     name = StringField("Name", [InputRequired()])
     description = StringField("Description")
-    start_date = DateField("Start Date")
-    end_date = DateField("End Date")
+    start_date = CustomStringField("Start Date", type="date")
+    end_date = CustomStringField("End Date", type="date")
     frequency = IntegerField("Frequency", default=0)
     frequency_unit = SelectField(
         "Frequency Unit",

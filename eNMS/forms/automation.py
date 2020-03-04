@@ -19,7 +19,6 @@ from eNMS.forms.fields import (
     MultipleInstanceField,
     NoValidationSelectField,
     PasswordSubstitutionField,
-    PythonField,
     SubstitutionField,
 )
 
@@ -34,7 +33,7 @@ class ServiceForm(BaseForm):
     shared = BooleanField("Shared Service")
     scoped_name = StringField("Scoped Name", [InputRequired()])
     description = StringField("Description")
-    device_query = PythonField("Device Query", widget=TextArea(), render_kw={"rows": 2})
+    device_query = CustomStringField("Device Query", python=True, widget=TextArea(), render_kw={"rows": 2})
     device_query_property = SelectField(
         "Query Property Type", choices=(("name", "Name"), ("ip_address", "IP address"))
     )
@@ -60,8 +59,8 @@ class ServiceForm(BaseForm):
     max_number_of_retries = IntegerField("Maximum number of retries", default=100)
     maximum_runs = IntegerField("Maximum number of runs", default=1)
     skip = BooleanField("Skip")
-    skip_query = PythonField(
-        "Skip Query (Python)", widget=TextArea(), render_kw={"rows": 2}
+    skip_query = CustomStringField(
+        "Skip Query (Python)", python=True, widget=TextArea(), render_kw={"rows": 2}
     )
     skip_value = SelectField(
         "Skip Value", choices=(("True", "True"), ("False", "False"),),
@@ -69,11 +68,11 @@ class ServiceForm(BaseForm):
     vendor = StringField("Vendor")
     operating_system = StringField("Operating System")
     initial_payload = DictField()
-    iteration_values = PythonField("Iteration Values")
+    iteration_values = CustomStringField("Iteration Values", python=True)
     iteration_variable_name = StringField(
         "Iteration Variable Name", default="iteration_value"
     )
-    iteration_devices = PythonField("Iteration Devices")
+    iteration_devices = CustomStringField("Iteration Devices", python=True)
     iteration_devices_property = SelectField(
         "Iteration Devices Property",
         choices=(("name", "Name"), ("ip_address", "IP address")),

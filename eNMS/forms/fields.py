@@ -19,7 +19,16 @@ from eNMS import app
 class CustomStringField(StringField):
     def __init__(self, *args, **kwargs):
         self.type = kwargs.pop("type", "str")
+        if kwargs.pop("substitution", False):
+            self.color = "E8F0F7"
+        elif kwargs.pop("python", False):
+            self.color = "FFE8F6"
         super().__init__(*args, **kwargs)
+
+    def __call__(self, *args, **kwargs):
+        if hasattr(self, "color"):
+            kwargs["style"] = f"background-color: #{self.color}"
+        return super().__call__(*args, **kwargs)
 
 
 class DictField(StringField):
@@ -80,12 +89,6 @@ class SubstitutionField(StringField):
         return super().__call__(*args, **kwargs)
 
 
-class PythonField(StringField):
-    def __call__(self, *args, **kwargs):
-        kwargs["style"] = "background-color: #FFE8F6"
-        return super().__call__(*args, **kwargs)
-
-
 class PasswordSubstitutionField(PasswordField):
     def __call__(self, *args, **kwargs):
         kwargs["style"] = "background-color: #e8f0f7"
@@ -115,7 +118,6 @@ field_types = {
     NoValidationSelectField: "list",
     PasswordField: "str",
     PasswordSubstitutionField: "str",
-    PythonField: "str",
     SelectField: "list",
     SelectMultipleField: "multiselect",
     StringField: "str",

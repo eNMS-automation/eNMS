@@ -16,6 +16,12 @@ from wtforms.validators import ValidationError
 from eNMS import app
 
 
+class CustomStringField(StringField):
+    def __init__(self, *args, **kwargs):
+        self.type = kwargs.pop("type", "str")
+        super().__init__(*args, **kwargs)
+
+
 class DateField(StringField):
     pass
 
@@ -84,10 +90,6 @@ class PythonField(StringField):
         return super().__call__(*args, **kwargs)
 
 
-class CodeField(StringField):
-    pass
-
-
 class PasswordSubstitutionField(PasswordField):
     def __call__(self, *args, **kwargs):
         kwargs["style"] = "background-color: #e8f0f7"
@@ -106,7 +108,6 @@ class NoValidationSelectMultipleField(SelectMultipleField):
 
 field_types = {
     BooleanField: "bool",
-    CodeField: "code",
     DateField: "date",
     DictField: "dict",
     DictSubstitutionField: "dict",

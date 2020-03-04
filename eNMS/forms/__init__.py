@@ -7,7 +7,7 @@ from wtforms.fields.core import UnboundField
 from wtforms.form import FormMeta
 
 from eNMS import app
-from eNMS.forms.fields import field_types, InstanceField, MultipleInstanceField
+from eNMS.forms.fields import InstanceField, MultipleInstanceField
 from eNMS.models import property_types, relationships
 from eNMS.properties import field_conversion, private_properties, property_names
 
@@ -28,11 +28,11 @@ class MetaForm(FormMeta):
         form_actions[form_type] = getattr(form, "action", None)
         properties = {
             field_name: {
-                "type": field_types[field.field_class],
+                "type": field.kwargs.get("type", "str"),
                 "model": field.kwargs.pop("model", None),
             }
             for field_name, field in attrs.items()
-            if isinstance(field, UnboundField) and field.field_class in field_types
+            if isinstance(field, UnboundField)
         }
         property_names.update(
             {

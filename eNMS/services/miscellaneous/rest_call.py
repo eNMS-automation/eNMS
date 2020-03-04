@@ -16,7 +16,6 @@ from eNMS.database.dialect import Column, LargeString, SmallString
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import (
     DictSubstitutionField,
-    JsonSubstitutionField,
     SubstitutionField,
 )
 from eNMS.models.automation import Service

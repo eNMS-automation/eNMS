@@ -13,7 +13,7 @@ from wtforms.widgets import TextArea
 from eNMS import app
 from eNMS.forms import BaseForm, set_custom_properties
 from eNMS.forms.fields import (
-    CodeField,
+    CustomStringField,
     DictField,
     DictSubstitutionField,
     MultipleInstanceField,
@@ -78,7 +78,7 @@ class ServiceForm(BaseForm):
         "Iteration Devices Property",
         choices=(("name", "Name"), ("ip_address", "IP address")),
     )
-    result_postprocessing = CodeField(widget=TextArea(), render_kw={"rows": 8})
+    result_postprocessing = CustomStringField(type="code", widget=TextArea(), render_kw={"rows": 8})
     multiprocessing = BooleanField("Multiprocessing")
     max_processes = IntegerField("Maximum number of processes", default=15)
     conversion_method = SelectField(

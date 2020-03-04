@@ -139,7 +139,7 @@ class RunService(Resource):
 
     def post(self):
         try:
-            errors, data = [], request.get_json(force=True)
+            errors, data = [], {"trigger": "REST", **request.get_json(force=True)}
             devices, pools = [], []
             service = fetch("service", name=data["name"])
             handle_asynchronously = data.get("async", False)

@@ -309,6 +309,7 @@ class AutomationController(BaseController):
         run_kwargs = {
             key: kwargs.pop(key)
             for key in (
+                "trigger",
                 "creator",
                 "restart_path",
                 "start_services",

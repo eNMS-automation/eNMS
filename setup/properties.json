@@ -406,6 +406,12 @@
             "search":"text",
             "width": "120px"
          },
+         {
+            "data":"trigger",
+            "title":"Trigger",
+            "search":"text",
+            "width": "100px"
+         },
          { 
             "data":"status",
             "title":"Status",

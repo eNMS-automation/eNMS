@@ -21,6 +21,8 @@ Version 3.20.2
 - Rename "never_update" with "manually_defined"
 - Set focus on name field when creating a new instance
 - New property in service panel (targets section): Update pools before running.
+- Extend the custom properties to all classes including services (displayed in an accordion in first tab).
+- Add new search mechanism in the "Add services to workflow" panel
 
 MIGRATION:
 In pools, "never_update" -> "manually_defined"

@@ -226,6 +226,7 @@ class Run(AbstractBase):
     status = Column(SmallString, default="Running")
     runtime = Column(SmallString)
     duration = Column(SmallString)
+    trigger = Column(SmallString, default="UI")
     parent_id = Column(Integer, ForeignKey("run.id"))
     parent = relationship(
         "Run", remote_side=[id], foreign_keys="Run.parent_id", back_populates="children"

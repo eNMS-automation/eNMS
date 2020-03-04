@@ -151,7 +151,7 @@ export function displayWorkflow(workflowData) {
     );
   });
   $("#current-runtime").val("latest");
-  $("#current-workflow").val(currentPath.split(">")[0]);
+  $("#current-workflow").val(`${currentPath}`.split(">")[0]);
   $("#current-runtime,#current-workflow").selectpicker("refresh");
   graph.on("dragEnd", (event) => {
     if (graph.getNodeAt(event.pointer.DOM)) savePositions();

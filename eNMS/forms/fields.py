@@ -66,12 +66,6 @@ class DictField(StringField):
         return True
 
 
-class DictSubstitutionField(DictField):
-    def __call__(self, *args, **kwargs):
-        kwargs["style"] = "background-color: #e8f0f7"
-        return super().__call__(*args, **kwargs)
-
-
 class InstanceField(SelectField):
     type = "object"
     def __init__(self, *args, **kwargs):

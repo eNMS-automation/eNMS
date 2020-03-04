@@ -30,7 +30,6 @@ class MetaForm(FormMeta):
         for field_name, field in attrs.items():
             if not isinstance(field, UnboundField) or not hasattr(field.field_class, "type"):
                 continue
-            print(field.field_class)
             field_type = field.kwargs.pop("type", None)
             if not field_type:
                 field_type = field.field_class.type

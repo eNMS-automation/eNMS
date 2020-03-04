@@ -9,7 +9,7 @@ from eNMS import app
 from eNMS.database.dialect import Column, MutableDict, SmallString
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import (
-    DictSubstitutionField,
+    DictField,
     NoValidationSelectField,
     SubstitutionField,
 )
@@ -85,4 +85,4 @@ class AnsiblePlaybookForm(ServiceForm):
         "Pass Device Inventory Properties (to be used "
         "in the playbook as {{name}} or {{ip_address}})"
     )
-    options = DictSubstitutionField("Options (passed to ansible as -e extra args)")
+    options = DictField("Options (passed to ansible as -e extra args)", substitution=True)

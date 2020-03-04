@@ -13,7 +13,7 @@ from eNMS import app
 from eNMS.database.dialect import Column, LargeString, SmallString
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import (
-    DictSubstitutionField,
+    DictField,
     SelectField,
     StringField,
     SubstitutionField,
@@ -81,9 +81,9 @@ class RestCallForm(ServiceForm):
         )
     )
     rest_url = SubstitutionField()
-    payload = DictSubstitutionField(json_only=True)
-    params = DictSubstitutionField()
-    headers = DictSubstitutionField()
+    payload = DictField(json_only=True, substitution=True)
+    params = DictField(substitution=True)
+    headers = DictField(substitution=True)
     verify_ssl_certificate = BooleanField("Verify SSL Certificate")
     timeout = IntegerField(default=15)
     username = StringField()

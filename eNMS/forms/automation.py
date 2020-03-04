@@ -13,7 +13,6 @@ from eNMS.forms import BaseForm, set_custom_properties
 from eNMS.forms.fields import (
     StringField,
     DictField,
-    DictSubstitutionField,
     MultipleInstanceField,
     NoValidationSelectField,
     PasswordSubstitutionField,
@@ -100,7 +99,7 @@ class ServiceForm(BaseForm):
         "Content Match", widget=TextArea(), render_kw={"rows": 8}
     )
     content_match_regex = BooleanField("Match content with Regular Expression")
-    dict_match = DictSubstitutionField("Dictionary to Match Against")
+    dict_match = DictField("Dictionary to Match Against", substitution=True)
     negative_logic = BooleanField("Negative logic")
     delete_spaces_before_matching = BooleanField("Delete Spaces before Matching")
     run_method = SelectField(

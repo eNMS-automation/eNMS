@@ -126,8 +126,3 @@ class MultipleInstanceField(WtformsSelectMultipleField):
 
     def pre_validate(self, form):
         pass
-
-
-class NoValidationSelectMultipleField(WtformsSelectMultipleField):
-    def pre_validate(self, form):
-        pass

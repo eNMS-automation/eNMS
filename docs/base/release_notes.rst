@@ -23,9 +23,17 @@ Version 3.20.2
 - New property in service panel (targets section): Update pools before running.
 - Extend the custom properties to all classes including services (displayed in an accordion in first tab).
 - Add new search mechanism in the "Add services to workflow" panel
+- Add new "Trigger" property for runs to know if they were started from the UI or REST API
+- Refactor form fields
 
 MIGRATION:
 In pools, "never_update" -> "manually_defined"
+
+CUSTOM SERVICES FILE MIGRATION:
+Fields are no longer imported from wtforms. All of them are now imported from eNMS.forms.fields
+Some of them have been removed:
+- substitution and python query are now a keyword
+- no validation is a keyword too
 
 Version 3.20.1
 --------------

@@ -2,7 +2,12 @@ from copy import deepcopy
 
 from eNMS import app
 from eNMS.forms import BaseForm
-from eNMS.forms.fields import HiddenField, MultipleInstanceField, SelectField, StringField
+from eNMS.forms.fields import (
+    HiddenField,
+    MultipleInstanceField,
+    SelectField,
+    StringField,
+)
 from eNMS.models import models, relationships
 
 

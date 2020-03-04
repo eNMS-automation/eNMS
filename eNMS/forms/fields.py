@@ -60,12 +60,12 @@ class SelectField(WtformsSelectField):
         super().__init__(*args, **kwargs)
 
 
+class SelectMultipleField(WtformsSelectMultipleField):
+    type = "multiselect"
+
+
 class FieldList(WtformsFieldList):
     type = "field-list"
-
-
-class MultipleInstanceField(WtformsSelectMultipleField):
-    type = "multiselect"
 
 
 class PasswordField(WtformsPasswordField):

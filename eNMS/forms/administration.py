@@ -55,11 +55,6 @@ class ResultLogDeletionForm(BaseForm):
     date_time = StringField(type="date", label="Delete Records before")
 
 
-class InstanceDeletionForm(BaseForm):
-    template = "instance_deletion"
-    form_type = HiddenField(default="instance_deletion")
-
-
 @set_custom_properties
 class ServerForm(BaseForm):
     template = "object"

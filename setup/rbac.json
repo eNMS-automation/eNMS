@@ -72,7 +72,6 @@
       "/form/files",
       "/form/generic_file_transfer_service",
       "/form/import_service",
-      "/form/instance_deletion",
       "/form/link",
       "/form/link_filtering",
       "/form/logs",

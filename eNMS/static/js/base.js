@@ -315,10 +315,24 @@ export function createTooltip({
 export function showDeletionPanel(instance) {
   openPanel({
     name: "instance_deletion",
+    content: `
+      <div class="modal-body">
+        Are you sure you want to permanently remove this item ?
+      </div>
+      <div class="modal-footer">
+        <center>
+          <button
+            type="button"
+            class="btn btn-danger"
+            onclick="eNMS.base.deleteInstance('${instance.type}', ${instance.id})"
+          >
+            Delete
+          </button>
+        </center>
+      </div><br>`,
     title: `Delete ${instance.name}`,
     size: "auto",
     id: instance.id,
-    type: instance.type,
   });
 }
 

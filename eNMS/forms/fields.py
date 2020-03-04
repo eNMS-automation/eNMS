@@ -2,14 +2,14 @@ from ast import literal_eval
 from json import loads
 from json.decoder import JSONDecodeError
 from wtforms import (
-    BooleanField,
-    FieldList,
-    FloatField,
-    IntegerField,
-    PasswordField,
+    BooleanField as WtformsBooleanField,
+    FieldList as WtformsFieldList,
+    FloatField as WtformsFloatField,
+    IntegerField as WtformsIntegerField,
+    PasswordField as WtformsPasswordField,
     SelectField as WtformsSelectField,
     StringField as WtformsStringField,
-    SelectMultipleField,
+    SelectMultipleField as WtformsSelectMultipleField,
 )
 from wtforms.validators import ValidationError
 
@@ -33,8 +33,32 @@ class StringField(WtformsStringField):
         return super().__call__(*args, **kwargs)
 
 
+class BooleanField(WtformsBooleanField):
+    type = "bool"
+
+
+class IntegerField(WtformsIntegerField):
+    type = "integer"
+
+
+class FloatField(WtformsFloatField):
+    type = "float"
+
+
 class SelectField(WtformsSelectField):
     type = "list"
+
+
+class FieldList(WtformsFieldList):
+    type = "field-list"
+
+
+class MultipleInstanceField(WtformsSelectMultipleField):
+    type = "multiselect"
+
+
+class PasswordField(WtformsPasswordField):
+    type = "str"
 
 
 class DictField(StringField):
@@ -77,7 +101,7 @@ class InstanceField(SelectField):
         pass
 
 
-class MultipleInstanceField(SelectMultipleField):
+class MultipleInstanceField(WtformsSelectMultipleField):
     type = "object-list"
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -94,7 +118,7 @@ class SubstitutionField(StringField):
         return super().__call__(*args, **kwargs)
 
 
-class PasswordSubstitutionField(PasswordField):
+class PasswordSubstitutionField(WtformsPasswordField):
     type="str"
     def __call__(self, *args, **kwargs):
         kwargs["style"] = "background-color: #e8f0f7"
@@ -107,25 +131,7 @@ class NoValidationSelectField(SelectField):
         pass
 
 
-class NoValidationSelectMultipleField(SelectMultipleField):
-    type = "multiselect"
+class NoValidationSelectMultipleField(WtformsSelectMultipleField):
+
     def pre_validate(self, form):
         pass
-
-
-field_types = {
-    BooleanField: "bool",
-    FieldList: "field-list",
-    FloatField: "float",
-    InstanceField: "object",
-    IntegerField: "integer",
-    MultipleInstanceField: "object-list",
-    NoValidationSelectMultipleField: "multiselect",
-    NoValidationSelectField: "list",
-    PasswordField: "str",
-    PasswordSubstitutionField: "str",
-    SelectField: "list",
-    SelectMultipleField: "multiselect",
-    StringField: "str",
-    SubstitutionField: "str",
-}

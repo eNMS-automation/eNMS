@@ -96,6 +96,7 @@ class Service(AbstractBase):
     iteration_devices = Column(LargeString)
     iteration_devices_property = Column(SmallString, default="ip_address")
     result_postprocessing = Column(LargeString)
+    log_level = Column(Integer, default=0)
     runs = relationship("Run", back_populates="service", cascade="all, delete-orphan")
     maximum_runs = Column(Integer, default=1)
     multiprocessing = Column(Boolean, default=False)

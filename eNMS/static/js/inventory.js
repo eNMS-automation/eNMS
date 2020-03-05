@@ -257,7 +257,7 @@ function downloadNetworkData(id) {
   );
 }
 
-function displayConfiguration(id, result) {
+function displayConfiguration(id, result, datetime) {
   openPanel({
     name: "device_data",
     content: `
@@ -281,10 +281,12 @@ function displayConfiguration(id, result) {
             <span class="glyphicon glyphicon-download"></span>
           </button>
         </nav>
-        <hr>
+        <div class="x_title">
+          <h4 class="text-center" style="color:#FFF">${datetime}</h4>
+        </div>
         <div id="content-${id}"></div>
       </div>`,
-    title: `Configuration`,
+    title: "Network Data",
     id: id,
     callback: function() {
       $(`#data-type-${id}`).bootstrapToggle({
@@ -323,7 +325,7 @@ export const showDeviceData = function(device) {
       if (!result.configuration && !result.operational_data) {
         notify("No data stored.", "error", 5);
       } else {
-        displayConfiguration(device.id, result);
+        displayConfiguration(device.id, result, device.last_runtime);
       }
     },
   });
@@ -333,7 +335,7 @@ function showGitConfiguration(commit) {
   call({
     url: `/get_git_configuration/${commit.hash}`,
     callback: (result) => {
-      displayConfiguration(commit.hash, result);
+      displayConfiguration(commit.hash, result, commit.date);
     },
   });
 }

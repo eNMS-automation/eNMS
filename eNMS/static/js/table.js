@@ -407,6 +407,15 @@ tables.device = class DeviceTable extends Table {
 };
 
 tables.configuration = class ConfigurationTable extends Table {
+
+  addRow(kwargs) {
+    let row = super.addRow({
+      derivedProperties: ["last_runtime", "device_name"],
+      ...kwargs
+    });
+    return row;
+  }
+
   get modelFiltering() {
     return "device";
   }

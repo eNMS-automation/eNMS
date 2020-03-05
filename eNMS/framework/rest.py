@@ -73,11 +73,8 @@ class Query(Resource):
     decorators = [auth.login_required, catch_exceptions]
 
     def get(self, cls):
-        try:
-            results = fetch(cls, all_matches=True, **request.args.to_dict())
-            return [result.get_properties(exclude=["positions"]) for result in results]
-        except Exception:
-            return abort(404, message=f"There are no such {cls}s.")
+        results = fetch(cls, all_matches=True, **request.args.to_dict())
+        return [result.get_properties(exclude=["positions"]) for result in results]
 
 
 class GetInstance(Resource):
@@ -200,7 +197,7 @@ class Topology(Resource):
 
 
 class Search(Resource):
-    decorators = [auth.login_required]
+    decorators = [auth.login_required, catch_exceptions]
 
     def post(self):
         rest_body = request.get_json(force=True)

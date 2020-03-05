@@ -631,15 +631,16 @@ class Run(AbstractBase):
             self.run_state["progress"]["device"][status] += 1
             self.run_state["summary"][status].append(device.name)
             self.create_result(results, device)
-        Session.commit()
         self.log("info", "FINISHED", device)
         if self.waiting_time:
             self.log("info", f"SLEEP {self.waiting_time} seconds...", device)
             sleep(self.waiting_time)
+        Session.commit()
         return results
 
     def log(self, severity, content, device=None):
-        if not self.log_level or severity not in app.log_levels[self.log_level - 1 :]:
+        log_level = int(self.log_level)
+        if not log_level or severity not in app.log_levels[log_level - 1 :]:
             return
         log = f"{app.get_time()} - {severity} - SERVICE {self.service.scoped_name}"
         if device:

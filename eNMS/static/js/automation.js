@@ -201,8 +201,55 @@ export const showRuntimePanel = function(type, service, runtime, displayTable) {
       if (!runtime && !runtimes.length) {
         return notify(`No ${type} yet.`, "error", 5);
       }
+      let content;
+      if (panelType == "logs") {
+        content = `
+        <div class="modal-body">
+          <select
+            id="runtimes-${panelId}"
+            name="runtimes"
+            class="form-control"
+          ></select>
+          <hr>
+          <div id="service-${panelId}"></div>
+        </div>`
+      } else if (panelType == "tree") {
+        content = `
+        <div class="modal-body">
+          <select
+            id="runtimes-${panelId}"
+            name="runtimes"
+            class="form-control"
+          ></select>
+          <hr>
+          <div id="result-${panelId}" style="height: 500px"></div>
+        </div>`;
+      } else {
+        content = `
+        <div class="modal-body">
+          <div id="tooltip-overlay" class="overlay"></div>
+          <form
+            id="search-form-result-${service.id}"
+            class="form-horizontal form-label-left"
+            method="post"
+          >
+            <nav
+              id="controls-result-${service.id}"
+              class="navbar navbar-default nav-controls"
+              role="navigation"
+            ></nav>
+            <table
+              id="table-result-${service.id}"
+              class="table table-striped table-bordered table-hover"
+              cellspacing="0"
+              width="100%"
+            ></table>
+          </form>
+        </div>`;
+      }
       openPanel({
         name: panelType,
+        content: content,
         type: "result",
         title: `${type} - ${service.name}`,
         id: service.id,

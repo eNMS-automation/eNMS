@@ -12,7 +12,7 @@ from eNMS.forms.fields import (
     SelectField,
     SelectMultipleField,
 )
-from eNMS.properties.database import import_classes
+from eNMS.database.properties import import_classes
 
 
 class SettingsForm(BaseForm):

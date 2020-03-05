@@ -18,7 +18,7 @@ from eNMS.controller.ssh import SshConnection
 from eNMS.database import Session
 from eNMS.database.functions import delete_all, factory, fetch, fetch_all, objectify
 from eNMS.models import models, model_properties, property_types
-from eNMS.properties import field_conversion
+from eNMS.database.properties import field_conversion
 
 
 class InventoryController(BaseController):

@@ -5,7 +5,7 @@ from sqlalchemy.types import JSON
 
 from eNMS.database import Base
 from eNMS.models import model_properties, models, property_types, relationships
-from eNMS.properties import private_properties
+from eNMS.database.properties import private_properties
 
 
 @event.listens_for(Base, "mapper_configured", propagate=True)

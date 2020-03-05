@@ -12,7 +12,7 @@ from eNMS.framework.extensions import auth, csrf, login_manager
 from eNMS.framework.rest import configure_rest_api
 from eNMS.framework.routes import blueprint
 from eNMS.models import models, property_types, relationships
-from eNMS.properties import property_names
+from eNMS.database.properties import property_names
 from eNMS.setup import rbac
 
 

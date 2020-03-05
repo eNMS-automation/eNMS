@@ -42,8 +42,8 @@ from eNMS.database.functions import (
     get_query_count,
 )
 from eNMS.models import models, model_properties, relationships
-from eNMS.properties import private_properties, property_names
-from eNMS.properties.database import import_classes
+from eNMS.database.properties import private_properties, property_names
+from eNMS.database.properties import import_classes
 from eNMS.controller.syslog import SyslogServer
 from eNMS.setup import settings, properties, rbac
 

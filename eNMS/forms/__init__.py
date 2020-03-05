@@ -14,7 +14,11 @@ from eNMS.forms.fields import (
     StringField,
 )
 from eNMS.models import property_types, relationships
-from eNMS.properties import field_conversion, private_properties, property_names
+from eNMS.database.properties import (
+    field_conversion,
+    private_properties,
+    property_names,
+)
 
 form_actions = {}
 form_classes = {}

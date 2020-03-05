@@ -5,8 +5,8 @@ from eNMS.database import Base
 from eNMS.database.dialect import Column, LargeString
 from eNMS.database.functions import factory, fetch, objectify
 from eNMS.models import model_properties, property_types, relationships
-from eNMS.properties import dont_serialize, private_properties
-from eNMS.properties.database import dont_migrate
+from eNMS.database.properties import dont_serialize, private_properties
+from eNMS.database.properties import dont_migrate
 
 
 class AbstractBase(Base):

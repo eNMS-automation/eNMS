@@ -33,9 +33,7 @@ private_properties = [
 
 dont_serialize = {"device": ["configuration", "operational_data"]}
 
-
 import_classes = ["user", "device", "link", "pool", "service", "workflow_edge", "task"]
-
 
 dont_migrate = {
     "device": [

@@ -444,6 +444,10 @@ function showServicePanel(type, id, mode) {
   typeInput.val(type).prop("disabled", true);
   $(id ? `#${type}-name-${id}` : `#${type}-name`).prop("disabled", true);
   if (id) {
+    if (mode == "duplicate") {
+      console.log(`${type}-shared-${id}`);
+      $(`#${type}-shared-${id}`).prop("checked", false);
+    }
     $(`#${type}-shared-${id}`).prop("disabled", true);
     if (mode == "duplicate" && type == "workflow") {
       $(`#original-${id}`).val(id);
@@ -472,6 +476,13 @@ function showServicePanel(type, id, mode) {
   }
 }
 
+function configureServicePanel(type, id, mode) {
+  if (mode == "duplicate") {
+    $(`#${type}-shared-${id}`).prop("checked", false);
+    $(`#${type}-workflows-${id}`).val([workflow.id]).trigger("change");
+  }
+}
+
 export function showTypePanel(type, id, mode) {
   openPanel({
     name: type,
@@ -488,6 +499,9 @@ export function showTypePanel(type, id, mode) {
             const action = mode ? mode.toUpperCase() : "EDIT";
             panel.setHeaderTitle(`${action} ${type} - ${instance.name}`);
             processInstance(type, instance);
+            if (type.includes("service") || type == "workflow") {
+              configureServicePanel(type, id, mode);
+            }
           },
         });
       } else {

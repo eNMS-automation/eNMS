@@ -8,6 +8,7 @@ Version 3.20.2
 - Keep selected runtime when entering a subworkflow.
 - When running a workflow, add runtime to runtime list in workflow builder and select it.
 - Workflow Refresh button now updates the list in the runtime dropdown.
+- Duplicating a shared service from the workflow builder now creates a NON SHARED deep copy in the current workflow only.
 - Create dedicated category for shared services in "Add services to workflow" tree.
 - Implement "Clear all filters" mechanism for all tables
 - When display workflow services in service table, all search input resetted (otherwise nothing was displayed)

@@ -136,6 +136,15 @@ function copyClipboard(elementId, result) {
 function showResult(id) {
   openPanel({
     name: "result",
+    content: `
+      <input
+        id="result-path-${id}"
+        type="text"
+        class="form-control"
+        style="height:5%"
+        value="results"
+      >
+      <div id="content-${id}" style="height:95%"></div>`,
     title: "Result",
     id: id,
     callback: function() {

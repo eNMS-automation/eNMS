@@ -261,29 +261,6 @@ class RestartWorkflowForm(BaseForm):
     restart_from_top_level_workflow = BooleanField(default=True)
 
 
-class LogsForm(BaseForm):
-    template = "logs"
-    form_type = HiddenField(default="logs")
-    runtimes = SelectField("Runtime", choices=(), validation=False)
-
-
-class ResultForm(BaseForm):
-    template = "result"
-    form_type = HiddenField(default="result")
-
-
-class ResultTableForm(BaseForm):
-    template = "table"
-    form_type = HiddenField(default="table")
-    runtimes = SelectField("Runtime", choices=(), validation=False)
-
-
-class TreeForm(BaseForm):
-    template = "tree"
-    form_type = HiddenField(default="tree")
-    runtimes = SelectField("Runtime", choices=(), validation=False)
-
-
 class FileForm(BaseForm):
     template = "file"
     form_type = HiddenField(default="file")

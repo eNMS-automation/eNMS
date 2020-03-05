@@ -262,7 +262,10 @@ export const showRuntimePanel = function(type, service, runtime, displayTable) {
                 .text(runtime[1])
             );
           });
-          if (!runtime || runtime == "normal") {
+          if (!runtime && page == "workflow_builder") {
+            runtime = $("#current-runtime").val();
+          }
+          if (!runtime || ["normal", "latest"].includes(runtime)) {
             runtime = runtimes[runtimes.length - 1][0];
           }
           $(`#runtimes-${panelId}`)

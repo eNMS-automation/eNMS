@@ -32,6 +32,7 @@ Version 3.20.2
 - Ability to download config
 - Syntax highlight option: ability to highlight certain keywords based on regular expression match,
 defined in eNMS/static/lib/codemirror/logsMode. Can be customized.
+- New logging property to configure log level for a service or disable logging.
 
 MIGRATION:
 In pools, "never_update" -> "manually_defined"

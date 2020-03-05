@@ -640,7 +640,7 @@ class Run(AbstractBase):
 
     def log(self, severity, content, device=None):
         log_level = int(self.log_level)
-        if not log_level or severity not in app.log_levels[log_level - 1 :]:
+        if not log_level or severity not in app.log_levels[log_level - 1:]:
             return
         log = f"{app.get_time()} - {severity} - SERVICE {self.service.scoped_name}"
         if device:

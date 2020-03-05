@@ -16,8 +16,10 @@ def catch_exceptions(func):
     def wrapper(*args, **kwargs):
         try:
             return func(*args, **kwargs)
+        except LookupError as exc:
+            abort(404, message=str(exc))
         except Exception as exc:
-            return abort(500, message=str(exc))
+            abort(500, message=str(exc))
 
     return wrapper
 
@@ -81,12 +83,9 @@ class GetInstance(Resource):
     decorators = [auth.login_required, catch_exceptions]
 
     def get(self, cls, name):
-        try:
-            return fetch(cls, name=name).to_dict(
-                relation_names_only=True, exclude=["positions"]
-            )
-        except Exception:
-            return abort(404, message=f"{cls} {name} not found.")
+        return fetch(cls, name=name).to_dict(
+            relation_names_only=True, exclude=["positions"]
+        )
 
     def delete(self, cls, name):
         result = delete(cls, name=name)
@@ -113,14 +112,11 @@ class UpdateInstance(Resource):
     decorators = [auth.login_required, catch_exceptions]
 
     def post(self, cls):
-        try:
-            data = request.get_json(force=True)
-            object_data = app.objectify(cls, data)
-            result = factory(cls, **object_data).serialized
-            Session.commit()
-            return result
-        except Exception as exc:
-            return abort(500, message=f"Update failed ({exc})")
+        data = request.get_json(force=True)
+        object_data = app.objectify(cls, data)
+        result = factory(cls, **object_data).serialized
+        Session.commit()
+        return result
 
 
 class Migrate(Resource):
@@ -135,34 +131,30 @@ class RunService(Resource):
     decorators = [auth.login_required, catch_exceptions]
 
     def post(self):
-        try:
-            errors, data = [], request.get_json(force=True)
-            devices, pools = [], []
-            service = fetch("service", name=data["name"])
-            handle_asynchronously = data.get("async", False)
-            for device_name in data.get("devices", ""):
-                device = fetch("device", name=device_name)
-                if device:
-                    devices.append(device.id)
-                else:
-                    errors.append(f"No device with the name '{device_name}'")
-            for device_ip in data.get("ip_addresses", ""):
-                device = fetch("device", ip_address=device_ip)
-                if device:
-                    devices.append(device.id)
-                else:
-                    errors.append(f"No device with the IP address '{device_ip}'")
-            for pool_name in data.get("pools", ""):
-                pool = fetch("pool", name=pool_name)
-                if pool:
-                    pools.append(pool.id)
-                else:
-                    errors.append(f"No pool with the name '{pool_name}'")
-            if errors:
-                return {"errors": errors}
-        except Exception as exc:
-            info(f"REST API run_service endpoint failed ({str(exc)})")
-            return str(exc)
+        errors, data = [], request.get_json(force=True)
+        devices, pools = [], []
+        service = fetch("service", name=data["name"])
+        handle_asynchronously = data.get("async", False)
+        for device_name in data.get("devices", ""):
+            device = fetch("device", name=device_name)
+            if device:
+                devices.append(device.id)
+            else:
+                errors.append(f"No device with the name '{device_name}'")
+        for device_ip in data.get("ip_addresses", ""):
+            device = fetch("device", ip_address=device_ip)
+            if device:
+                devices.append(device.id)
+            else:
+                errors.append(f"No device with the IP address '{device_ip}'")
+        for pool_name in data.get("pools", ""):
+            pool = fetch("pool", name=pool_name)
+            if pool:
+                pools.append(pool.id)
+            else:
+                errors.append(f"No pool with the name '{pool_name}'")
+        if errors:
+            return {"errors": errors}
         if devices or pools:
             data.update({"devices": devices, "pools": pools})
         data["runtime"] = runtime = app.get_time()

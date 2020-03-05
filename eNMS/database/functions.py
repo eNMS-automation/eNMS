@@ -11,7 +11,7 @@ def fetch(model, allow_none=False, all_matches=False, **kwargs):
     if result or allow_none:
         return result
     else:
-        raise Exception(
+        raise LookupError(
             f"There is no {model} in the database "
             f"with the following characteristics: {kwargs}"
         )

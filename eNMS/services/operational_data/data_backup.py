@@ -47,7 +47,7 @@ class DataBackupService(ConnectionService):
                     result = []
                     for command_dict in value:
                         command = command_dict["command"]
-                        title = '-' * len(command)
+                        title = "*" * len(command)
                         header = f"\n{' ' * 30}{command.upper()}\n{' ' * 30}{title}"
                         command_result = [f"{header}\n\n"]
                         for line in netmiko_connection.send_command(

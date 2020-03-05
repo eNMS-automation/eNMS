@@ -2,7 +2,6 @@ from datetime import datetime
 from flask import request
 from flask_restful import abort, Api, Resource
 from functools import wraps
-from logging import info
 from uuid import getnode
 
 from eNMS import app

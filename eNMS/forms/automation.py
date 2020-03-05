@@ -74,8 +74,8 @@ class ServiceForm(BaseForm):
         choices=(("name", "Name"), ("ip_address", "IP address")),
     )
     result_postprocessing = CodeField(widget=TextArea(), render_kw={"rows": 8})
-    logging = SelectField(
-        "Logging", choices=(("name", "Name"), ("ip_address", "IP address")),
+    log_level = NoValidationSelectField(
+        "Logging", choices=((0, "Disable logging"), *enumerate(app.log_levels, 1)),
     )
     multiprocessing = BooleanField("Multiprocessing")
     max_processes = IntegerField("Maximum number of processes", default=15)

@@ -50,6 +50,8 @@ from eNMS.setup import settings, properties, rbac
 
 class BaseController:
 
+    log_levels = ["info", "warning", "error", "critical"]
+
     log_severity = {
         "critical": critical,
         "error": error,

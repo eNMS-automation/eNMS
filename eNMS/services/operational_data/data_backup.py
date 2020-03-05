@@ -44,16 +44,20 @@ class DataBackupService(ConnectionService):
                     for r in self.replacements:
                         result = sub(r["pattern"], r["replace_with"], result, flags=M)
                 else:
-                    result = f"\n\n".join(
-                        f"{cmd['command']}\n"
-                        + "\n".join(
-                            f"{cmd['prefix']} - {line}" if cmd["prefix"] else line
-                            for line in netmiko_connection.send_command(
-                                cmd["command"]
-                            ).splitlines()
-                        )
-                        for cmd in value
-                    )
+                    result = []
+                    for command_dict in value:
+                        command = command_dict["command"]
+                        title = '-' * len(command)
+                        header = f"\n{' ' * 30}{command.upper()}\n{' ' * 30}{title}"
+                        command_result = [f"{header}\n\n"]
+                        for line in netmiko_connection.send_command(
+                            command
+                        ).splitlines():
+                            if command_dict["prefix"]:
+                                line = f"{command_dict['prefix']} - {line}"
+                            command_result.append(line)
+                        result.append("\n".join(command_result))
+                    result = f"\n\n".join(result)
                 setattr(device, data, result)
                 with open(path / data, "w") as file:
                     file.write(result)

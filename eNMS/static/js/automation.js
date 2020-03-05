@@ -293,7 +293,6 @@ function displayLogs(service, runtime, change) {
       theme: "cobalt",
       mode: "logs",
       extraKeys: { "Ctrl-F": "findPersistent" },
-      scrollbarStyle: "overlay",
     });
     $(`#service-logs-${service.id}`).data("CodeMirrorInstance", editor);
     editor.setSize("100%", "100%");

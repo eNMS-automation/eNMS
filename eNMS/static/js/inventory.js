@@ -236,7 +236,6 @@ function showSessionLog(sessionId) {
               theme: "cobalt",
               mode: "network",
               extraKeys: { "Ctrl-F": "findPersistent" },
-              scrollbarStyle: "overlay",
             });
             editor.setSize("100%", "100%");
             editor.setValue(log);
@@ -303,7 +302,6 @@ function displayConfiguration(id, result, datetime) {
         theme: "cobalt",
         mode: "network",
         extraKeys: { "Ctrl-F": "findPersistent" },
-        scrollbarStyle: "overlay",
       });
       $(`#content-${id}`).data("CodeMirrorInstance", editor);
       editor.setSize("100%", "100%");

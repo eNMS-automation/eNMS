@@ -410,7 +410,7 @@ tables.configuration = class ConfigurationTable extends Table {
 
   addRow(kwargs) {
     let row = super.addRow({
-      derivedProperties: ["last_runtime", "device_name"],
+      derivedProperties: ["last_runtime"],
       ...kwargs
     });
     return row;

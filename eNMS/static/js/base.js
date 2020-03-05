@@ -423,7 +423,6 @@ export function configureForm(form, id, panelId) {
         extraKeys: { "Ctrl-F": "findPersistent" },
         matchBrackets: true,
         mode: "python",
-        scrollbarStyle: "overlay",
       });
       editor.on("change", () => editor.save());
       if (!editors[id]) editors[id] = {};

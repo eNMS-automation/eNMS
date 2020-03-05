@@ -191,10 +191,8 @@ function editFile(file) {
             lineWrapping: true,
             lineNumbers: true,
             theme: "cobalt",
-            matchBrackets: true,
             mode: "python",
             extraKeys: { "Ctrl-F": "findPersistent" },
-            scrollbarStyle: "overlay",
           }));
           fileEditor.setSize("100%", "100%");
           fileEditor.setValue(content);

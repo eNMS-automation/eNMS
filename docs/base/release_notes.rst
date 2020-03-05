@@ -25,6 +25,7 @@ Version 3.20.2
 - Add new search mechanism in the "Add services to workflow" panel
 - Add new "Trigger" property for runs to know if they were started from the UI or REST API
 - Refactor form fields
+- Add time-stamp of when the configuration / oper data displayed was collected
 
 MIGRATION:
 In pools, "never_update" -> "manually_defined"

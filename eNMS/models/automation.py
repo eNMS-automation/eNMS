@@ -99,6 +99,7 @@ class Service(AbstractBase):
     iteration_devices = Column(LargeString)
     iteration_devices_property = Column(SmallString, default="ip_address")
     result_postprocessing = Column(LargeString)
+    log_level = Column(Integer, default=1)
     runs = relationship("Run", back_populates="service", cascade="all, delete-orphan")
     maximum_runs = Column(Integer, default=1)
     multiprocessing = Column(Boolean, default=False)
@@ -638,6 +639,9 @@ class Run(AbstractBase):
         return results
 
     def log(self, severity, content, device=None):
+        log_level = self.service.log_level
+        if not log_level or severity not in app.log_levels[log_level - 1 :]:
+            return
         log = f"{app.get_time()} - {severity} - SERVICE {self.service.scoped_name}"
         if device:
             log += f" - DEVICE {device if isinstance(device, str) else device.name}"

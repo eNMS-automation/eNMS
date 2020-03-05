@@ -13,7 +13,7 @@ from importlib import import_module
 from importlib.util import module_from_spec, spec_from_file_location
 from json import load
 from ldap3 import ALL, Server
-from logging import basicConfig, error, info, StreamHandler, warning
+from logging import basicConfig, critical, error, info, StreamHandler, warning
 from logging.handlers import RotatingFileHandler
 from os import environ, scandir
 from os.path import exists
@@ -50,7 +50,14 @@ from eNMS.setup import settings, properties, rbac
 
 class BaseController:
 
-    log_severity = {"error": error, "info": info, "warning": warning}
+    log_levels = ["info", "warning", "error", "critical"]
+
+    log_severity = {
+        "critical": critical,
+        "error": error,
+        "info": info,
+        "warning": warning,
+    }
 
     json_endpoints = [
         "multiselect_filtering",

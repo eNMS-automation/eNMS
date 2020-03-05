@@ -76,6 +76,11 @@ class ServiceForm(BaseForm):
     result_postprocessing = StringField(
         type="code", widget=TextArea(), render_kw={"rows": 8}
     )
+    log_level = SelectField(
+        "Logging",
+        choices=((0, "Disable logging"), *enumerate(app.log_levels, 1)),
+        validation=False,
+    )
     multiprocessing = BooleanField("Multiprocessing")
     max_processes = IntegerField("Maximum number of processes", default=15)
     conversion_method = SelectField(

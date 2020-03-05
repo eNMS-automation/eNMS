@@ -157,7 +157,15 @@ class Device(Object):
     def view_properties(self):
         return {
             property: getattr(self, property)
-            for property in ("id", "type", "name", "icon", "latitude", "longitude")
+            for property in (
+                "id",
+                "type",
+                "name",
+                "icon",
+                "latitude",
+                "longitude",
+                "last_runtime",
+            )
         }
 
     @property

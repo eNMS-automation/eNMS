@@ -26,6 +26,11 @@ Version 3.20.2
 - Add new "Trigger" property for runs to know if they were started from the UI or REST API
 - Refactor form fields
 - Add time-stamp of when the configuration / oper data displayed was collected
+- Ability to display config older config from GIT
+- Ability to compare currently displayed config/data to any point in time in the past.
+- Ability to download config
+- Syntax highlight option: ability to highlight certain keywords based on regular expression match,
+defined in eNMS/static/lib/codemirror/logsMode. Can be customized.
 
 MIGRATION:
 In pools, "never_update" -> "manually_defined"

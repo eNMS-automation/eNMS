@@ -436,7 +436,7 @@ class Run(AbstractBase):
             results["logs"] = app.run_logs.pop(self.runtime, [])
             if self.runtime == self.parent_runtime:
                 self.state = results["state"] = app.run_db.pop(self.runtime)
-                # self.close_remaining_connections()
+                self.close_remaining_connections()
             if self.task and not self.task.frequency:
                 self.task.is_active = False
             results["properties"] = {

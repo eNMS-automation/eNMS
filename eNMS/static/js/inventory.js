@@ -437,6 +437,27 @@ function showGitHistory(device) {
 function showDeviceResultsPanel(device) {
   openPanel({
     name: "table",
+    content: `
+      <div class="modal-body">
+        <div id="tooltip-overlay" class="overlay"></div>
+        <form
+          id="search-form-device_result-${device.id}"
+          class="form-horizontal form-label-left"
+          method="post"
+        >
+          <nav
+            id="controls-device_result-${device.id}"
+            class="navbar navbar-default nav-controls"
+            role="navigation"
+          ></nav>
+          <table
+            id="table-device_result-${device.id}"
+            class="table table-striped table-bordered table-hover"
+            cellspacing="0"
+            width="100%"
+          ></table>
+        </form>
+      </div>`,
     id: device.id,
     type: "device_result",
     title: `Results - ${device.name}`,

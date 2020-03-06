@@ -449,7 +449,12 @@ class Run(AbstractBase):
                 "run": self.properties,
                 "service": self.service.get_properties(exclude=["positions"]),
             }
-            self.create_result(results)
+            if (
+                self.runtime == self.parent_runtime
+                or len(self.devices) > 1
+                or self.run_method == "once"
+            ):
+                self.create_result(results)
             Session.commit()
         return results
 
@@ -646,7 +651,7 @@ class Run(AbstractBase):
         if device:
             log += f" - DEVICE {device if isinstance(device, str) else device.name}"
         log += f" : {content}"
-        app.run_logs[self.runtime].append(log)
+        app.run_logs[self.parent_runtime].append(log)
 
     def build_notification(self, results):
         notification = {

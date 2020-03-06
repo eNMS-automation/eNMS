@@ -33,9 +33,11 @@ Version 3.20.2
 - Syntax highlight option: ability to highlight certain keywords based on regular expression match,
 defined in eNMS/static/lib/codemirror/logsMode. Can be customized.
 - New logging property to configure log level for a service or disable logging.
+- Removed payload validation service
 
 MIGRATION:
 In pools, "never_update" -> "manually_defined"
+Remove ALL payload validation service, no longer needed.
 
 CUSTOM SERVICES FILE MIGRATION:
 Fields are no longer imported from wtforms. All of them are now imported from eNMS.forms.fields

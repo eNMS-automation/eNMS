@@ -19,7 +19,7 @@ from slackclient import SlackClient
 from sqlalchemy import Boolean, ForeignKey, Integer
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.orm import relationship
-from threading import currentThread, enumerate, Thread
+from threading import Thread
 from time import sleep
 from traceback import format_exc
 from xmltodict import parse

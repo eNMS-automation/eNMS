@@ -414,7 +414,7 @@ class Run(AbstractBase):
             app.service_db[self.service.id]["runs"] += 1
             self.service.status = "Running"
             Session.commit()
-            results = self.device_run(payload)
+            results = {"runtime": self.runtime, **self.device_run(payload)}
         except Exception:
             result = (
                 f"Running {self.service.type} '{self.service.name}'"
@@ -502,7 +502,6 @@ class Run(AbstractBase):
         elif self.run_method != "per_device":
             return self.get_results(payload)
         else:
-
             if self.multiprocessing and len(self.devices) > 1:
                 results = []
                 processes = min(len(self.devices), self.max_processes)
@@ -591,7 +590,7 @@ class Run(AbstractBase):
                 "result": "skipped",
                 "success": self.skip_value == "True",
             }
-        results = {"runtime": app.get_time(), "logs": []}
+        results = {"logs": []}
         try:
             if self.restart_run and self.service.type == "workflow":
                 old_result = self.restart_run.result(
@@ -630,7 +629,8 @@ class Run(AbstractBase):
             status = "success" if results["success"] else "failure"
             self.run_state["progress"]["device"][status] += 1
             self.run_state["summary"][status].append(device.name)
-            self.create_result(results, device)
+            
+            self.create_result({"runtime": app.get_time(), **results}, device)
         self.log("info", "FINISHED", device)
         if self.waiting_time:
             self.log("info", f"SLEEP {self.waiting_time} seconds...", device)

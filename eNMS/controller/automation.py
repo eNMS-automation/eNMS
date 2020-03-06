@@ -345,7 +345,7 @@ class AutomationController(BaseController):
         kwargs["runtime"] = runtime = self.get_time()
         if kwargs.get("asynchronous", True):
             self.scheduler.add_job(
-                id=self.get_time(),
+                id=runtime,
                 func=self.run,
                 run_date=datetime.now(),
                 args=[service_id],

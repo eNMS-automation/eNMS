@@ -444,10 +444,10 @@ class Run(AbstractBase):
                 "service": self.service.get_properties(exclude=["positions"]),
             }
             if (
-                self.runtime == self.parent_runtime	
-                or len(self.devices) > 1	
-                or self.run_method == "once"	
-            ):	
+                self.runtime == self.parent_runtime
+                or len(self.devices) > 1
+                or self.run_method == "once"
+            ):
                 self.create_result(results)
             Session.commit()
         return results

@@ -1001,13 +1001,14 @@ class Run(AbstractBase):
                 self.disconnect(library, device, connection)
 
     def close_remaining_connections(self):
+        threads = []
         for library in ("netmiko", "napalm"):
             for connection in app.connections_cache[library][self.runtime].items():
-                Thread(target=self.disconnect, args=(library, *connection)).start()
-        current_thread = currentThread()
-        for thread in enumerate():
-            if thread != current_thread:
-                thread.join()
+                thread = Thread(target=self.disconnect, args=(library, *connection))
+                thread.start()
+                threads.append(thread)
+        for thread in threads:
+            thread.join()
 
     def disconnect(self, library, device, connection):
         try:

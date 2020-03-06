@@ -23,7 +23,7 @@ class AutomationController(BaseController):
     connections_cache = {"napalm": defaultdict(dict), "netmiko": defaultdict(dict)}
     service_db = defaultdict(lambda: {"runs": 0})
     run_db = defaultdict(dict)
-    run_logs = defaultdict(list)
+    run_logs = defaultdict(lambda: defaultdict(list))
 
     def stop_workflow(self, runtime):
         run = fetch("run", allow_none=True, runtime=runtime)
@@ -123,10 +123,14 @@ class AutomationController(BaseController):
         return workflow.duplicate().serialized
 
     def get_service_logs(self, service, runtime):
-        run = fetch("run", allow_none=True, parent_runtime=runtime, service_id=service)
-        result = run.result() if run else None
-        logs = result["logs"] if result else self.run_logs.get(runtime, [])
-        return {"logs": "\n".join(logs), "refresh": not bool(result)}
+        log_instance = fetch(
+            "service_log", allow_none=True, runtime=runtime, service_id=service
+        )
+        if log_instance:
+            log = log_instance.content
+        else:
+            log = "\n".join(self.run_logs[runtime].get(service, []))
+        return {"logs": log, "refresh": not log_instance}
 
     def get_runtimes(self, type, id):
         runs = fetch("run", allow_none=True, all_matches=True, service_id=id)

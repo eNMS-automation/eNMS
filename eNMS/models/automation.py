@@ -212,6 +212,18 @@ class Result(AbstractBase):
         self.parent_runtime = self.run.parent_runtime
 
 
+class ServiceLog(AbstractBase):
+
+    __tablename__ = type = "service_log"
+    private = True
+    dont_track_changes = True
+    id = Column(Integer, primary_key=True)
+    content = Column(LargeString)
+    runtime = Column(SmallString)
+    service_id = Column(Integer, ForeignKey("service.id"))
+    service = relationship("Service", foreign_keys="ServiceLog.service_id")
+
+
 class Run(AbstractBase):
 
     __tablename__ = type = "run"
@@ -439,7 +451,6 @@ class Run(AbstractBase):
             results["duration"] = self.duration = str(
                 datetime.now().replace(microsecond=0) - start
             )
-            results["logs"] = app.run_logs.pop(self.runtime, [])
             if self.runtime == self.parent_runtime:
                 self.state = results["state"] = app.run_db.pop(self.runtime)
                 self.close_remaining_connections()
@@ -539,6 +550,14 @@ class Run(AbstractBase):
             result_kw["parent_device"] = self.parent_device_id
         if device:
             result_kw["device"] = device.id
+        if self.parent_runtime == self.runtime and not device:
+            for service_id, log in app.run_logs.pop(self.runtime, {}).items():
+                factory(
+                    "service_log",
+                    runtime=self.runtime,
+                    service=service_id,
+                    content="\n".join(log),
+                )
         factory("result", **result_kw)
 
     def run_service_job(self, payload, device):
@@ -634,7 +653,7 @@ class Run(AbstractBase):
             status = "success" if results["success"] else "failure"
             self.run_state["progress"]["device"][status] += 1
             self.run_state["summary"][status].append(device.name)
-            
+
             self.create_result({"runtime": app.get_time(), **results}, device)
         self.log("info", "FINISHED", device)
         if self.waiting_time:
@@ -651,7 +670,7 @@ class Run(AbstractBase):
         if device:
             log += f" - DEVICE {device if isinstance(device, str) else device.name}"
         log += f" : {content}"
-        app.run_logs[self.parent_runtime].append(log)
+        app.run_logs[self.parent_runtime][self.service_id].append(log)
 
     def build_notification(self, results):
         notification = {

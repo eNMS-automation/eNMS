@@ -498,7 +498,9 @@ class Run(AbstractBase):
             ]
             return {"success": all(results), "runtime": self.runtime}
         elif self.run_method != "per_device":
-            return self.get_results(payload)
+            result = self.get_results(payload)
+            result["runtime"] = self.runtime
+            return result
         else:
 
             if self.multiprocessing and len(self.devices) > 1:

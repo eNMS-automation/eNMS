@@ -530,7 +530,10 @@ class Run(AbstractBase):
                 pool.close()
                 pool.join()
             else:
-                results = [self.get_results(payload, device) for device in self.devices]
+                results = [
+                    self.get_results(payload, device, commit=False)
+                    for device in self.devices
+                ]
             return {
                 "success": all(result["success"] for result in results),
                 "runtime": self.runtime,
@@ -599,7 +602,7 @@ class Run(AbstractBase):
                 results = {"success": False, "result": result}
         return results
 
-    def get_results(self, payload, device=None):
+    def get_results(self, payload, device=None, commit=True):
         self.log("info", "STARTING", device)
         start = datetime.now().replace(microsecond=0)
         skip_service = False
@@ -659,7 +662,8 @@ class Run(AbstractBase):
         if self.waiting_time:
             self.log("info", f"SLEEP {self.waiting_time} seconds...", device)
             sleep(self.waiting_time)
-        Session.commit()
+        if commit:
+            Session.commit()
         return results
 
     def log(self, severity, content, device=None):

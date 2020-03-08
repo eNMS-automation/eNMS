@@ -1008,8 +1008,12 @@ class Run(AbstractBase):
     def close_remaining_connections(self):
         threads = []
         for library in ("netmiko", "napalm"):
-            for connection in app.connections_cache[library][self.runtime].items():
-                thread = Thread(target=self.disconnect, args=(library, *connection))
+            devices = list(app.connections_cache[library][self.runtime])
+            for device in devices:
+                connection = app.connections_cache[library][self.runtime][device]
+                thread = Thread(
+                    target=self.disconnect, args=(library, device, connection)
+                )
                 thread.start()
                 threads.append(thread)
         for thread in threads:

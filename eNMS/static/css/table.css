@@ -6,7 +6,6 @@ td span {
 .dataTables_length {
   width: 40%;
   float: left;
-  z-index: 99999;
 }
 
 /* Align center for "No data available in table" when empty table */

@@ -564,6 +564,8 @@ class Run(AbstractBase):
                     pass
                 if results["success"] and self.validation_method != "none":
                     self.validate_result(results, payload, device)
+                if self.negative_logic:
+                    results["success"] = not results["success"]
                 if results["success"]:
                     return results
                 elif retries:
@@ -763,8 +765,7 @@ class Run(AbstractBase):
         else:
             match = self.sub(self.dict_match, locals())
             success = self.match_dictionary(results["result"], match)
-        results["success"] = not success if self.negative_logic else success
-        results.update({"match": match, "negative_logic": self.negative_logic})
+        results.update({"match": match, "success": success})
 
     def match_dictionary(self, result, match, first=True):
         if self.validation_method == "dict_equal":

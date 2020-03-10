@@ -787,6 +787,6 @@ We cannot use 100% because main_frame is not set to 100%
 /* For tooltips positioning with target key */
 .overlay {
   position: absolute;
-  height: 50%;
+  height: 20%;
   width: 98%;
 }

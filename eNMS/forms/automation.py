@@ -79,6 +79,7 @@ class ServiceForm(BaseForm):
     log_level = SelectField(
         "Logging",
         choices=((0, "Disable logging"), *enumerate(app.log_levels, 1)),
+        default=1,
         validation=False,
     )
     multiprocessing = BooleanField("Multiprocessing")

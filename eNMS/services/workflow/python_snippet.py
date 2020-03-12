@@ -45,8 +45,8 @@ class PythonSnippetService(Service):
         except SystemExit:
             pass
         except Exception as exc:
-            lineno = traceback.extract_tb(exc.__traceback__)[-1][1]
-            run.log("info", f"Execution error(line {lineno}): {str(exc)}")
+            line_number = traceback.extract_tb(exc.__traceback__)[-1][1]
+            run.log("info", f"Execution error(line {line_number}): {str(exc)}")
             return {
                 "success": False,
                 "result": {"step": "execute", "error": str(exc), "result": results},

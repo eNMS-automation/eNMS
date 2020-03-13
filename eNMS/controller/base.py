@@ -413,25 +413,7 @@ class BaseController:
             )
             if kwargs.get("runtime"):
                 constraints.append(models["result"].parent_runtime == kwargs["runtime"])
-        if table == "service":
-            workflow_id = kwargs["form"].get("workflow-filtering")
-            if workflow_id:
-                constraints.extend(
-                    [
-                        models["service"].workflows.any(
-                            models["workflow"].id == int(workflow_id)
-                        ),
-                        ~or_(
-                            models["service"].scoped_name == name
-                            for name in ("Start", "End")
-                        ),
-                    ]
-                )
-            else:
-                if kwargs["form"].get("parent-filtering", "true") == "true":
-                    constraints.append(~models["service"].workflows.any())
-        if table == "run":
-            constraints.append(models["run"].parent_runtime == models["run"].runtime)
+        constraints.extend(models[table].filtering_constraints(**kwargs))
         result = Session.query(model).filter(and_(*constraints))
         if ordering:
             result = result.order_by(ordering())

@@ -16,7 +16,7 @@ from re import compile, search
 from requests import post
 from scp import SCPClient
 from slackclient import SlackClient
-from sqlalchemy import Boolean, ForeignKey, Integer
+from sqlalchemy import Boolean, ForeignKey, Integer, or_
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.orm import relationship
 from threading import Thread
@@ -124,6 +124,23 @@ class Service(AbstractBase):
         if kwargs["scoped_name"] != self.scoped_name:
             self.set_name(kwargs["scoped_name"])
         super().update(**kwargs)
+
+    @classmethod
+    def filtering_constraints(cls, **kwargs):
+        workflow_id = kwargs["form"].get("workflow-filtering")
+        if workflow_id:
+            return [
+                models["service"].workflows.any(
+                    models["workflow"].id == int(workflow_id)
+                ),
+                ~or_(
+                    models["service"].scoped_name == name for name in ("Start", "End")
+                ),
+            ]
+
+        else:
+            if kwargs["form"].get("parent-filtering", "true") == "true":
+                return [~models["service"].workflows.any()]
 
     def duplicate(self, workflow=None):
         for i in range(10):
@@ -289,6 +306,10 @@ class Run(AbstractBase):
                     self.start_services = [path_ids[workflow_index + 1]]
         if not self.start_services:
             self.start_services = [fetch("service", scoped_name="Start").id]
+
+    @classmethod
+    def filtering_constraints(cls, **_):
+        return [cls.parent_runtime == cls.runtime]
 
     @property
     def name(self):

@@ -44,6 +44,10 @@ class AbstractBase(Base):
         else:
             super().__setattr__(property, value)
 
+    @classmethod
+    def filtering_constraints(cls, **_):
+        return []
+
     @property
     def ui_name(self):
         return self.name

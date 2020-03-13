@@ -212,7 +212,7 @@ export const showRuntimePanel = function(type, service, runtime, displayTable) {
           ></select>
           <hr>
           <div id="service-${panelId}"></div>
-        </div>`
+        </div>`;
       } else if (panelType == "tree") {
         content = `
         <div class="modal-body">

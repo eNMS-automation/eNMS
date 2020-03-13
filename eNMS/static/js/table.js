@@ -19,7 +19,7 @@ export let tableInstances = {};
 export const models = {};
 let waitForSearch = false;
 
-$.fn.dataTable.ext.errMode = 'throw';
+$.fn.dataTable.ext.errMode = 'none';
 
 export class Table {
   constructor(type, instance, runtime, id) {
@@ -37,29 +37,30 @@ export class Table {
     this.id = `${this.type}${id ? `-${id}` : ""}`;
     tableInstances[this.id] = this;
     // eslint-disable-next-line new-cap
-    this.table = $(`#table-${this.id}`).DataTable({
-      serverSide: true,
-      orderCellsTop: true,
-      autoWidth: false,
-      scrollX: true,
-      drawCallback: function() {
-        $(".paginate_button > a").on("focus", function() {
-          $(this).blur();
-        });
-        createTooltips();
-      },
-      sDom: "tilp",
-      columns: this.columns,
-      columnDefs: [{ className: "dt-center", targets: "_all" }],
-      initComplete: function() {
-        this.api()
-          .columns()
-          .every(function(index) {
-            const data = self.columns[index];
-            let element;
-            const elementId = `${self.type}_filtering-${data.data}`;
-            if (data.search == "text") {
-              element = `
+    this.table = $(`#table-${this.id}`)
+      .DataTable({
+        serverSide: true,
+        orderCellsTop: true,
+        autoWidth: false,
+        scrollX: true,
+        drawCallback: function() {
+          $(".paginate_button > a").on("focus", function() {
+            $(this).blur();
+          });
+          createTooltips();
+        },
+        sDom: "tilp",
+        columns: this.columns,
+        columnDefs: [{ className: "dt-center", targets: "_all" }],
+        initComplete: function() {
+          this.api()
+            .columns()
+            .every(function(index) {
+              const data = self.columns[index];
+              let element;
+              const elementId = `${self.type}_filtering-${data.data}`;
+              if (data.search == "text") {
+                element = `
               <div class="input-group" style="width:100%">
                 <input
                   id="${elementId}"
@@ -84,8 +85,8 @@ export class Table {
                   </button>
                 </span>
               </div>`;
-            } else if (data.search == "bool") {
-              element = `
+              } else if (data.search == "bool") {
+                element = `
                 <select
                   id="${elementId}"
                   name="${data.data}"
@@ -96,52 +97,56 @@ export class Table {
                   <option value="bool-true">True</option>
                   <option value="bool-false">False</option>
                 </select>`;
+              }
+              $(element)
+                .appendTo($(this.header()))
+                .on("keyup change", function() {
+                  if (waitForSearch) return;
+                  waitForSearch = true;
+                  setTimeout(function() {
+                    self.table.page(0).ajax.reload(null, false);
+                    waitForSearch = false;
+                  }, 500);
+                })
+                .on("click", function(e) {
+                  e.stopPropagation();
+                });
+            });
+          $(`#controls-${self.id}`).html(self.controls);
+          self.postProcessing();
+        },
+        ajax: {
+          url: `/filtering/${this.modelFiltering || this.type}`,
+          type: "POST",
+          contentType: "application/json",
+          data: (d) => {
+            Object.assign(d, {
+              form: serializeForm(`#search-form-${this.id}`),
+              instance: this.instance,
+              columns: this.columns,
+              type: this.type,
+              export: self.csvExport,
+            });
+            if (this.runtime) {
+              d.runtime = $(`#runtimes-${this.instance.id}`).val() || this.runtime;
             }
-            $(element)
-              .appendTo($(this.header()))
-              .on("keyup change", function() {
-                if (waitForSearch) return;
-                waitForSearch = true;
-                setTimeout(function() {
-                  self.table.page(0).ajax.reload(null, false);
-                  waitForSearch = false;
-                }, 500);
-              })
-              .on("click", function(e) {
-                e.stopPropagation();
-              });
-          });
-        $(`#controls-${self.id}`).html(self.controls);
-        self.postProcessing();
-      },
-      ajax: {
-        url: `/filtering/${this.modelFiltering || this.type}`,
-        type: "POST",
-        contentType: "application/json",
-        data: (d) => {
-          Object.assign(d, {
-            form: serializeForm(`#search-form-${this.id}`),
-            instance: this.instance,
-            columns: this.columns,
-            type: this.type,
-            export: self.csvExport,
-          });
-          if (this.runtime) {
-            d.runtime = $(`#runtimes-${this.instance.id}`).val() || this.runtime;
-          }
-          return JSON.stringify(d);
+            return JSON.stringify(d);
+          },
+          dataSrc: function(result) {
+            if (result.error) {
+              notify(result.error, "error", 5);
+              return [];
+            }
+            if (self.csvExport) {
+              self.exportTable(result.full_result);
+              self.csvExport = false;
+            }
+            return result.data.map((instance) =>
+              self.addRow({ properties: instance, tableId: self.id })
+            );
+          },
         },
-        dataSrc: function(result) {
-          if (self.csvExport) {
-            self.exportTable(result.full_result);
-            self.csvExport = false;
-          }
-          return result.data.map((instance) =>
-            self.addRow({ properties: instance, tableId: self.id })
-          );
-        },
-      },
-    });
+      });
     $(window).resize(this.table.columns.adjust);
     if (["changelog", "run", "result"].includes(this.type)) {
       this.table.order([0, "desc"]).draw();
@@ -409,11 +414,10 @@ tables.device = class DeviceTable extends Table {
 };
 
 tables.configuration = class ConfigurationTable extends Table {
-
   addRow(kwargs) {
     let row = super.addRow({
       derivedProperties: ["last_runtime"],
-      ...kwargs
+      ...kwargs,
     });
     return row;
   }

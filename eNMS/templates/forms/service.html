@@ -328,8 +328,9 @@
               aria-labelledby="heading-{{ group_id }}"
             >
               <div class="panel-body" style="background-color:#fafafa;">
-                {% for field_name in group.commands %} {% if field_name == "run_method" or field_name == "form_type"
-                %} {% elif form[field_name].type == "BooleanField" %}
+                {% for field_name in group.commands %} {% if field_name == "run_method"
+                or field_name == "form_type" %} {% elif form[field_name].type ==
+                "BooleanField" %}
                 <fieldset>
                   <div class="item">
                     {% if form[field_name].default %} {{

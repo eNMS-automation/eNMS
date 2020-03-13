@@ -479,7 +479,9 @@ function showServicePanel(type, id, mode) {
 function configureServicePanel(type, id, mode) {
   if (mode == "duplicate") {
     $(`#${type}-shared-${id}`).prop("checked", false);
-    $(`#${type}-workflows-${id}`).val([workflow.id]).trigger("change");
+    $(`#${type}-workflows-${id}`)
+      .val([workflow.id])
+      .trigger("change");
   }
 }
 

@@ -18,6 +18,7 @@ from logging.handlers import RotatingFileHandler
 from os import environ, scandir
 from os.path import exists
 from pathlib import Path
+from re import compile, error as InvalidRegexException
 from requests import Session as RequestSession
 from requests.adapters import HTTPAdapter
 from requests.packages.urllib3.util.retry import Retry
@@ -349,6 +350,7 @@ class BaseController:
             elif not filter or filter == "inclusion" or DIALECT == "sqlite":
                 constraint = getattr(model, property).contains(value)
             else:
+                compile(value)
                 regex_operator = "regexp" if DIALECT == "mysql" else "~"
                 constraint = getattr(model, property).op(regex_operator)(value)
             constraints.append(constraint)
@@ -398,7 +400,10 @@ class BaseController:
             kwargs["order"][0]["dir"],
             None,
         )
-        constraints = self.build_filtering_constraints(table, **kwargs)
+        try:
+            constraints = self.build_filtering_constraints(table, **kwargs)
+        except InvalidRegexException:
+            return {"error": "Invalid regular expression as search parameter."}
         if table == "result":
             constraints.append(
                 getattr(

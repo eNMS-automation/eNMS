@@ -34,6 +34,7 @@ Version 3.20.2
 defined in eNMS/static/lib/codemirror/logsMode. Can be customized.
 - New logging property to configure log level for a service or disable logging.
 - Removed payload validation service
+- Fix bug when typing invalid regex for table search (eg "(" )
 
 MIGRATION:
 In pools, "never_update" -> "manually_defined"

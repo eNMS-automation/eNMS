@@ -19,6 +19,8 @@ export let tableInstances = {};
 export const models = {};
 let waitForSearch = false;
 
+$.fn.dataTable.ext.errMode = 'throw';
+
 export class Table {
   constructor(type, instance, runtime, id) {
     let self = this;

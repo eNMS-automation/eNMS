@@ -404,15 +404,6 @@ class BaseController:
             constraints = self.build_filtering_constraints(table, **kwargs)
         except InvalidRegexException:
             return {"error": "Invalid regular expression as search parameter."}
-        if table == "result":
-            constraints.append(
-                getattr(
-                    models["result"],
-                    "device" if kwargs["instance"]["type"] == "device" else "service",
-                ).has(id=kwargs["instance"]["id"])
-            )
-            if kwargs.get("runtime"):
-                constraints.append(models["result"].parent_runtime == kwargs["runtime"])
         constraints.extend(models[table].filtering_constraints(**kwargs))
         result = Session.query(model).filter(and_(*constraints))
         if ordering:

@@ -228,6 +228,17 @@ class Result(AbstractBase):
         super().__init__(**kwargs)
         self.parent_runtime = self.run.parent_runtime
 
+    @classmethod
+    def filtering_constraints(cls, **kwargs):
+        constraints = [
+            getattr(
+                models["result"],
+                "device" if kwargs["instance"]["type"] == "device" else "service",
+            ).has(id=kwargs["instance"]["id"])
+        ]
+        if kwargs.get("runtime"):
+            constraints.append(models["result"].parent_runtime == kwargs["runtime"])
+        return constraints
 
 class ServiceLog(AbstractBase):
 

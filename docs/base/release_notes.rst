@@ -35,6 +35,7 @@ defined in eNMS/static/lib/codemirror/logsMode. Can be customized.
 - New logging property to configure log level for a service or disable logging.
 - Removed payload validation service
 - Fix bug when typing invalid regex for table search (eg "(" )
+- Dont display Start / End services in service table
 
 MIGRATION:
 In pools, "never_update" -> "manually_defined"

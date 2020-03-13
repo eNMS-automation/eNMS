@@ -239,6 +239,7 @@ class Result(AbstractBase):
             constraints.append(models["result"].parent_runtime == kwargs["runtime"])
         return constraints
 
+
 class ServiceLog(AbstractBase):
 
     __tablename__ = type = "service_log"

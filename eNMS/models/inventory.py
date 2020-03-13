@@ -119,7 +119,11 @@ class Device(Object):
                 content, visited = getattr(self, property).splitlines(), set()
                 for (index, line) in enumerate(content):
                     match_lines, merge = [], index - context - 1 in visited
-                    if not search(data, line) if regex_match else data.lower() not in line.lower():
+                    if (
+                        not search(data, line)
+                        if regex_match
+                        else data.lower() not in line.lower()
+                    ):
                         continue
                     for i in range(-context, context + 1):
                         if index + i < 0 or index + i > len(content) - 1:

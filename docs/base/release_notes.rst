@@ -36,6 +36,7 @@ defined in eNMS/static/lib/codemirror/logsMode. Can be customized.
 - Removed payload validation service
 - Fix bug when typing invalid regex for table search (eg "(" )
 - Dont display Start / End services in service table
+- Make configuration search case-insensitive for inclusion ("Search" REST endpoint + UI)
 
 MIGRATION:
 In pools, "never_update" -> "manually_defined"

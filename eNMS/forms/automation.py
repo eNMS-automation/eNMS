@@ -1,4 +1,3 @@
-from ast import parse
 from wtforms.validators import InputRequired
 from wtforms.widgets import TextArea
 
@@ -74,7 +73,7 @@ class ServiceForm(BaseForm):
         choices=(("name", "Name"), ("ip_address", "IP address")),
     )
     result_postprocessing = StringField(
-        type="code", widget=TextArea(), render_kw={"rows": 8}
+        type="code", python=True, widget=TextArea(), render_kw={"rows": 8}
     )
     log_level = SelectField(
         "Logging",
@@ -115,12 +114,6 @@ class ServiceForm(BaseForm):
             ("once", "Run the service once"),
         ),
     )
-    query_fields = [
-        "device_query",
-        "skip_query",
-        "iteration_values",
-        "result_postprocessing",
-    ]
 
     def validate(self):
         valid_form = super().validate()
@@ -133,20 +126,6 @@ class ServiceForm(BaseForm):
             self.mail_recipient.errors.append(
                 "Please add at least one recipient for the mail notification."
             )
-        bracket_error = False
-        for query_field in self.query_fields:
-            field = getattr(self, query_field)
-            try:
-                parse(field.data)
-            except Exception as exc:
-                bracket_error = True
-                field.errors.append(f"Wrong python expression ({exc}).")
-            if "{{" in field.data and "}}" in field.data:
-                bracket_error = True
-                field.errors.append(
-                    "You cannot use variable substitution "
-                    "in a field expecting a python expression."
-                )
         conversion_validation_mismatch = (
             self.conversion_method.data == "text"
             and "dict" in self.validation_method.data
@@ -162,7 +141,6 @@ class ServiceForm(BaseForm):
         return (
             valid_form
             and not no_recipient_error
-            and not bracket_error
             and not conversion_validation_mismatch
         )
 

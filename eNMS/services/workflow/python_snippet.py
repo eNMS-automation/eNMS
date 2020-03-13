@@ -65,6 +65,7 @@ class PythonSnippetForm(ServiceForm):
     form_type = HiddenField(default="python_snippet_service")
     source_code = StringField(
         type="code",
+        python=True,
         widget=TextArea(),
         render_kw={"rows": 15},
         default="""
@@ -82,4 +83,3 @@ result = {}
 results["success"] = True
 results["result"] = result""",
     )
-    query_fields = ServiceForm.query_fields

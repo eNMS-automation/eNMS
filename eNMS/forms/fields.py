@@ -1,4 +1,4 @@
-from ast import literal_eval
+from ast import literal_eval, parse
 from json import loads
 from json.decoder import JSONDecodeError
 from wtforms import (
@@ -25,11 +25,12 @@ class StringField(WtformsStringField):
     type = "str"
 
     def __init__(self, *args, **kwargs):
+        self.python = kwargs.pop("python", False)
         if "type" in kwargs:
             self.type = kwargs.pop("type")
         if kwargs.pop("substitution", False):
             self.color = "E8F0F7"
-        elif kwargs.pop("python", False):
+        elif self.python:
             self.color = "FFE8F6"
         super().__init__(*args, **kwargs)
 
@@ -37,6 +38,14 @@ class StringField(WtformsStringField):
         if hasattr(self, "color"):
             kwargs["style"] = f"background-color: #{self.color}"
         return super().__call__(*args, **kwargs)
+
+    def pre_validate(self, form):
+        if self.python:
+            try:
+                parse(self.data)
+            except Exception as exc:
+                raise ValidationError(f"Wrong python expression ({exc}).")
+        return True
 
 
 class BooleanField(WtformsBooleanField):

@@ -21,5 +21,4 @@ class PayloadValidationService(Service):
 
 class PayloadValidationForm(ServiceForm):
     form_type = HiddenField(default="payload_validation_service")
-    query = StringField("Python Query")
-    query_fields = ServiceForm.query_fields + ["query"]
+    query = StringField("Python Query", python=True)

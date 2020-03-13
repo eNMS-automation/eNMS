@@ -87,7 +87,7 @@ operation_choices = (
 class PayloadExtractionForm(ServiceForm):
     form_type = HiddenField(default="payload_extraction_service")
     variable1 = StringField("Variable Name")
-    query1 = StringField("Python Extraction Query")
+    query1 = StringField("Python Extraction Query", python=True)
     match_type1 = SelectField("Post Processing", choices=match_choices)
     match1 = StringField(
         "Regular Expression / TextFSM Template Text",
@@ -96,7 +96,7 @@ class PayloadExtractionForm(ServiceForm):
     )
     operation1 = SelectField("Operation", choices=operation_choices)
     variable2 = StringField("Variable Name")
-    query2 = StringField("Python Extraction Query")
+    query2 = StringField("Python Extraction Query", python=True)
     match_type2 = SelectField("Post Processing", choices=match_choices)
     match2 = StringField(
         "Regular Expression / TextFSM Template Text",
@@ -105,7 +105,7 @@ class PayloadExtractionForm(ServiceForm):
     )
     operation2 = SelectField("Operation", choices=operation_choices)
     variable3 = StringField("Variable Name")
-    query3 = StringField("Python Extraction Query")
+    query3 = StringField("Python Extraction Query", python=True)
     match_type3 = SelectField("Post Processing", choices=match_choices)
     match3 = StringField(
         "Regular Expression / TextFSM Template Text",
@@ -127,4 +127,3 @@ class PayloadExtractionForm(ServiceForm):
             "default": "expanded",
         },
     }
-    query_fields = ServiceForm.query_fields + [f"query{i}" for i in range(1, 4)]

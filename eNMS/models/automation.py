@@ -127,20 +127,19 @@ class Service(AbstractBase):
 
     @classmethod
     def filtering_constraints(cls, **kwargs):
-        workflow_id = kwargs["form"].get("workflow-filtering")
+        workflow_id, constraints = kwargs["form"].get("workflow-filtering"), []
         if workflow_id:
-            return [
+            constraints.append(
                 models["service"].workflows.any(
                     models["workflow"].id == int(workflow_id)
                 ),
                 ~or_(
                     models["service"].scoped_name == name for name in ("Start", "End")
                 ),
-            ]
-
-        else:
-            if kwargs["form"].get("parent-filtering", "true") == "true":
-                return [~models["service"].workflows.any()]
+            )
+        elif kwargs["form"].get("parent-filtering", "true") == "true":
+            constraints.append(~models["service"].workflows.any())
+        return constraints
 
     def duplicate(self, workflow=None):
         for i in range(10):

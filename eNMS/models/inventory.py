@@ -119,7 +119,7 @@ class Device(Object):
                 content, visited = getattr(self, property).splitlines(), set()
                 for (index, line) in enumerate(content):
                     match_lines, merge = [], index - context - 1 in visited
-                    if not search(data, line) if regex_match else data not in line:
+                    if not search(data, line) if regex_match else data.lower() not in line.lower():
                         continue
                     for i in range(-context, context + 1):
                         if index + i < 0 or index + i > len(content) - 1:
@@ -132,10 +132,7 @@ class Device(Object):
                         if rest_api_request:
                             match_lines.append(f"L{index + i + 1}: {line}")
                             continue
-                        if regex_match:
-                            sub(data, r"<mark>\g<0></mark>", line)
-                        else:
-                            line = line.replace(data, f"<mark>{data}</mark>")
+                        line = sub(f"(?i){data}", r"<mark>\g<0></mark>", line)
                         match_lines.append(f"<b>L{index + i + 1}:</b> {line}")
                     if rest_api_request:
                         result.extend(match_lines)

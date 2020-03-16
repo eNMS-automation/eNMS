@@ -129,14 +129,14 @@ class Service(AbstractBase):
     def filtering_constraints(cls, **kwargs):
         workflow_id, constraints = kwargs["form"].get("workflow-filtering"), []
         if workflow_id:
-            constraints.append(
+            constraints.extend([
                 models["service"].workflows.any(
                     models["workflow"].id == int(workflow_id)
                 ),
                 ~or_(
                     models["service"].scoped_name == name for name in ("Start", "End")
                 ),
-            )
+            ])
         elif kwargs["form"].get("parent-filtering", "true") == "true":
             constraints.append(~models["service"].workflows.any())
         return constraints

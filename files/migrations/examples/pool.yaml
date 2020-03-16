@@ -65,9 +65,10 @@
     link11, link12, link13, link14, link15, link16, link17, link18, link19, link20,
     link21, link22, link23, link24, link25, link26, link27]
   longitude: '0.0'
-  name: All objects
   manually_defined: false
+  name: All objects
   operator: all
+  property1: CP
   tasks: []
   type: pool
 - description: Devices only
@@ -135,9 +136,10 @@
   link_vendor_match: inclusion
   links: []
   longitude: '0.0'
-  name: Devices only
   manually_defined: false
+  name: Devices only
   operator: all
+  property1: CP
   tasks: []
   type: pool
 - description: Links only
@@ -204,9 +206,10 @@
     link11, link12, link13, link14, link15, link16, link17, link18, link19, link20,
     link21, link22, link23, link24, link25, link26, link27]
   longitude: '0.0'
-  name: Links only
   manually_defined: false
+  name: Links only
   operator: all
+  property1: CP
   tasks: []
   type: pool
 - description: Datacenter San Francisco
@@ -274,9 +277,10 @@
     link11, link12, link13, link14, link15, link16, link17, link18, link19, link20,
     link21, link22, link23, link24, link25, link26, link27]
   longitude: '-122.43'
-  name: Datacenter San Francisco
   manually_defined: false
+  name: Datacenter San Francisco
   operator: all
+  property1: CP
   tasks: []
   type: pool
 - description: Datacenter New York
@@ -345,9 +349,10 @@
     link11, link12, link13, link14, link15, link16, link17, link18, link19, link20,
     link21, link22, link23, link24, link25, link26, link27]
   longitude: '-74.0'
-  name: Datacenter New York
   manually_defined: false
+  name: Datacenter New York
   operator: all
+  property1: CP
   tasks: []
   type: pool
 - description: Datacenter Chicago
@@ -415,9 +420,10 @@
     link11, link12, link13, link14, link15, link16, link17, link18, link19, link20,
     link21, link22, link23, link24, link25, link26, link27]
   longitude: '-87.62'
-  name: Datacenter Chicago
   manually_defined: false
+  name: Datacenter Chicago
   operator: all
+  property1: CP
   tasks: []
   type: pool
 - description: ''
@@ -484,8 +490,9 @@
     link11, link12, link13, link14, link15, link16, link17, link18, link19, link20,
     link21, link22, link23, link24, link25, link26, link27]
   longitude: '0.0'
-  name: Washington
   manually_defined: false
+  name: Washington
   operator: all
+  property1: CP
   tasks: []
   type: pool

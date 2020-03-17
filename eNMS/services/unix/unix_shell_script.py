@@ -11,7 +11,6 @@ from eNMS.forms.fields import (
     IntegerField,
     SelectField,
     StringField,
-    StringField,
 )
 from eNMS.models.automation import Service
 

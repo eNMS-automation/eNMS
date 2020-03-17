@@ -1,10 +1,9 @@
 from re import search, sub
-from sqlalchemy import Boolean, Float, ForeignKey, Integer
+from sqlalchemy import Boolean, ForeignKey, Integer
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.orm import backref, relationship
 from sqlalchemy.schema import UniqueConstraint
 
-from eNMS import app
 from eNMS.database.associations import (
     pool_device_table,
     pool_link_table,

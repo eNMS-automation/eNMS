@@ -1,6 +1,5 @@
 from ast import literal_eval, parse
 from json import loads
-from json.decoder import JSONDecodeError
 from wtforms import (
     BooleanField as WtformsBooleanField,
     FieldList as WtformsFieldList,

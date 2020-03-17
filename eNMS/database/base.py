@@ -2,7 +2,6 @@ from sqlalchemy.ext.mutable import MutableDict, MutableList
 
 from eNMS import app
 from eNMS.database import Base
-from eNMS.database.dialect import Column, LargeString
 from eNMS.database.functions import factory, fetch, objectify
 from eNMS.models import model_properties, property_types, relationships
 from eNMS.database.properties import dont_serialize, private_properties

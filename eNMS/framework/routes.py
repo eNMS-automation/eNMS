@@ -11,7 +11,6 @@ from flask import (
 from flask_login import current_user, login_user, logout_user
 from functools import wraps
 from logging import info
-from werkzeug.wrappers import Response
 
 from eNMS import app
 from eNMS.database import Session

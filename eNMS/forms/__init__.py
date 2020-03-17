@@ -7,7 +7,6 @@ from wtforms.form import FormMeta
 
 from eNMS import app
 from eNMS.forms.fields import (
-    HiddenField,
     InstanceField,
     MultipleInstanceField,
     PasswordField,

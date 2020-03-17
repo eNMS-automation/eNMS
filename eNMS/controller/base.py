@@ -18,7 +18,7 @@ from logging.handlers import RotatingFileHandler
 from os import environ, scandir
 from os.path import exists
 from pathlib import Path
-from re import compile, error as InvalidRegexException
+from re import compile, error as regex_error
 from requests import Session as RequestSession
 from requests.adapters import HTTPAdapter
 from requests.packages.urllib3.util.retry import Retry
@@ -402,7 +402,7 @@ class BaseController:
         )
         try:
             constraints = self.build_filtering_constraints(table, **kwargs)
-        except InvalidRegexException:
+        except regex_error:
             return {"error": "Invalid regular expression as search parameter."}
         constraints.extend(models[table].filtering_constraints(**kwargs))
         result = Session.query(model).filter(and_(*constraints))

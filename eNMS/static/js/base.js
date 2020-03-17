@@ -688,13 +688,15 @@ export function copyToClipboard(text, isId) {
 })(jQuery, window);
 
 export function notify(...args) {
-  const alerts = JSON.parse(localStorage.getItem("alerts"));
-  localStorage.setItem(
-    "alerts",
-    JSON.stringify([...alerts, [...args, moment().format("MMMM Do YYYY, h:mm:ss a")]])
-  );
-  const alert = alerts.length + 1 > 99 ? "99+" : alerts.length + 1;
-  $("#alert-number").text(alert);
+  if (args.length == 4) {
+    const alerts = JSON.parse(localStorage.getItem("alerts"));
+    localStorage.setItem(
+      "alerts",
+      JSON.stringify([...alerts, [...args, moment().format("MMMM Do YYYY, h:mm:ss a")]])
+    );
+    const alert = alerts.length + 1 > 99 ? "99+" : alerts.length + 1;
+    $("#alert-number").text(alert);
+  }
   alertify.notify(...args);
 }
 

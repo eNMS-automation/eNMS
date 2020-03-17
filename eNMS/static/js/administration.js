@@ -18,7 +18,7 @@ function saveSettings() {
     callback: function() {
       settings = settingsEditor.get();
       $("#settings").remove();
-      notify("Settings saved.", "success", 5);
+      notify("Settings saved.", "success", 5, true);
     },
   });
 }
@@ -44,12 +44,12 @@ function getClusterStatus() {
 }
 
 function migrationsExport() {
-  notify("Export initiated.", "success", 5);
+  notify("Migration Export initiated.", "success", 5, true);
   call({
     url: "/migration_export",
     form: "migration-form",
     callback: function() {
-      notify("Export successful.", "success", 5);
+      notify("Migration Export successful.", "success", 5, true);
     },
   });
 }
@@ -76,12 +76,12 @@ function showMigrationPanel() {
 }
 
 function migrationsImport() {
-  notify("Import initiated.", "success", 5);
+  notify("Inventory Import initiated.", "success", 5, true);
   call({
     url: "/migration_import",
     form: "migration-form",
     callback: function(result) {
-      notify(result, "success", 5);
+      notify(result, "success", 5, true);
     },
   });
 }
@@ -113,20 +113,20 @@ function importService() {
     url: `/import_service/${$("#service").val()}`,
     title: "Import Service",
     callback: function(result) {
-      notify("Import successful.", "success", 5);
+      notify("Service Import successful.", "success", 5, true);
       $("#import_service").remove();
     },
   });
 }
 
 function databaseDeletion() {
-  notify("Starting to delete...", "success", 5);
+  notify("Starting Database Deletion", "success", 5, true);
   call({
     url: "/database_deletion",
     title: "Database Deletion",
     form: "database_deletion-form",
     callback: function() {
-      notify("Deletion done.", "success", 5);
+      notify("Database Deletion done.", "success", 5, true);
       $("#database_deletion").remove();
     },
   });

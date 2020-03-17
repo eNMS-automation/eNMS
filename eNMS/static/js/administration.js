@@ -133,12 +133,12 @@ function databaseDeletion() {
 }
 
 function resultLogDeletion() {
-  notify("Starting to delete...", "success", 5);
+  notify("Log Deletion initiated...", "success", 5, true);
   call({
     url: "/result_log_deletion",
     form: "result_log_deletion-form",
     callback: function() {
-      notify("Deletion done.", "success", 5);
+      notify("Log Deletion done.", "success", 5, true);
       $("#result_log_deletion").remove();
     },
   });
@@ -148,17 +148,17 @@ function getGitContent() {
   call({
     url: "/get_git_content",
     callback: function() {
-      notify("Action successful.", "success", 5);
+      notify("Successfully pulled content from git.", "success", 5, true);
     },
   });
 }
 
 function scanCluster() {
-  notify("Scan started.", "success", 5);
+  notify("Cluster Scan initiated...", "success", 5, true);
   call({
     url: "/scan_cluster",
     callback: function() {
-      notify("Scan completed.", "success", 5);
+      notify("Cluster Scan completed.", "success", 5, true);
     },
   });
 }
@@ -170,7 +170,7 @@ function deleteFile(file) {
       $("#files-tree")
         .jstree()
         .delete_node(file.id);
-      notify(`File ${file.data.name} successfully deleted.`, "success", 5);
+      notify(`File ${file.data.name} successfully deleted.`, "success", 5, true);
     },
   });
 }
@@ -209,7 +209,7 @@ function saveFile(file) {
     url: `/save_file/${file}`,
     form: `file-content-form-${file}`,
     callback: function() {
-      notify("File successfully saved.", "success", 5);
+      notify(`File ${file} successfully saved.`, "success", 5, true);
       $(`[id="file-${file}"`).remove();
     },
   });
@@ -234,7 +234,7 @@ function showFileUploadPanel(folder) {
       $(`[id="dropzone-submit-${path}"]`).click(function() {
         $(`[id="folder-${path}"]`).val(folder);
         dropzone.processQueue();
-        notify("File successfully uploaded.", "success", 5);
+        notify("Files successfully uploaded.", "success", 5, true);
         $(`[id="upload_files-${path}"]`).remove();
       });
     },

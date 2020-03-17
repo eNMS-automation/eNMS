@@ -89,7 +89,7 @@ function processResults(callback, results) {
     notify("HTTP Error 403 – Forbidden", "error", 5);
   } else if (results && results.alert) {
     if (Array.isArray(results.alert)) {
-      results.alert.map((e) => notify(e, "error", 5));
+      results.alert.map((e) => notify(e, "error", 5, true));
     } else {
       notify(results.alert, "error", 5);
     }
@@ -152,7 +152,7 @@ export const deleteInstance = function(type, id) {
         .remove()
         .draw(false);
       const name = result.name ? `'${result.name}'` : "";
-      notify(`${type.toUpperCase()} ${name} deleted.`, "error", 5);
+      notify(`${type.toUpperCase()} ${name} deleted.`, "error", 5, true);
     },
   });
 };
@@ -596,7 +596,8 @@ function processData(type, id) {
           id ? "updated" : "created"
         }.`,
         "success",
-        5
+        5,
+        true
       );
     },
   });

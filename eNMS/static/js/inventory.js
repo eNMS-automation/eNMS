@@ -130,7 +130,7 @@ function sshConnection(id) {
         openUrl(link);
       }, 300);
       const message = `Click here to connect to ${result.device}.`;
-      notify(`<a target='_blank' href='${link}'>${message}</a>`, "success", 15);
+      notify(`<a target='_blank' href='${link}'>${message}</a>`, "success", 15, true);
       const warning = `Don't forget to turn off the pop-up blocker !`;
       notify(warning, "error", 15);
       $(`#connection-${id}`).remove();
@@ -140,18 +140,18 @@ function sshConnection(id) {
 
 // eslint-disable-next-line
 function handOffSSHConnection(id) {
-  notify("Starting SSH connection to the device...", "success", 3);
+  notify("Starting SSH connection to the device...", "success", 3, true);
   call({
     url: `/handoffssh/${id}`,
     form: `connection-parameters-form-${id}`,
     callback: function(result) {
       let loc = window.location;
       if (result.hasOwnProperty("error")) {
-        notify(`Error: ${result.error}`, "error", 10);
+        notify(`Error: ${result.error}`, "error", 10, true);
       } else {
         const link = `${result.username}@${loc.hostname}:${result.port}`;
         const message = `Click here to connect to ${result.device_name}.`;
-        notify(`<a href='ssh://${link}'>${message}</a>`, "success", 15);
+        notify(`<a href='ssh://${link}'>${message}</a>`, "success", 15, true);
       }
     },
   });
@@ -164,7 +164,7 @@ function savePoolObjects(id) {
     form: `pool-objects-form-${id}`,
     callback: function() {
       tables["pool"].ajax.reload(null, false);
-      notify("Changes saved.", "success", 5);
+      notify("Changes to pool saved.", "success", 5, true);
       $(`#pool_objects-${id}`).remove();
     },
   });
@@ -199,13 +199,13 @@ function showPoolObjectsPanel(id) {
 }
 
 function updatePools(pool) {
-  notify("Update starting...", "success", 5);
+  notify("Pool Update initiated...", "success", 5, true);
   const endpoint = pool ? `/update_pool/${pool}` : "/update_all_pools";
   call({
     url: endpoint,
     callback: function() {
       tables["pool"].ajax.reload(null, false);
-      notify("Update successful.", "success", 5);
+      notify("Pool Update successful.", "success", 5, true);
     },
   });
 }
@@ -218,7 +218,8 @@ function showSessionLog(sessionId) {
         notify(
           "No log stored (e.g device unreachable or authentication error).",
           "error",
-          5
+          5,
+          true
         );
       } else {
         openPanel({
@@ -480,18 +481,18 @@ function showImportTopologyPanel() {
 }
 
 function exportTopology() {
-  notify("Topology export starting...", "success", 5);
+  notify("Topology export starting...", "success", 5, true);
   call({
     url: "/export_topology",
     form: "excel_export-form",
     callback: function() {
-      notify("Topology successfully exported.", "success", 5);
+      notify("Topology successfully exported.", "success", 5, true);
     },
   });
 }
 
 function importTopology() {
-  notify("Topology import: starting...", "success", 5);
+  notify("Topology import: starting...", "success", 5, true);
   const formData = new FormData($("#import-form")[0]);
   $.ajax({
     type: "POST",
@@ -502,7 +503,7 @@ function importTopology() {
     processData: false,
     async: true,
     success: function(result) {
-      notify(result, "success", 5);
+      notify(result, "success", 5, true);
     },
   });
 }

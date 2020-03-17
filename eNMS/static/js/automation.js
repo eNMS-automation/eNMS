@@ -425,7 +425,7 @@ function parameterizedRun(type, id) {
 
 export function runLogic(result) {
   showRuntimePanel("logs", result.service, result.runtime);
-  notify(`Service '${result.service.name}' started.`, "success", 5);
+  notify(`Service '${result.service.name}' started.`, "success", 5, true);
   if (page == "workflow_builder" && workflow) {
     if (result.service.id != workflow.id) {
       getServiceState(result.service.id, true);
@@ -447,7 +447,7 @@ function exportService(id) {
   call({
     url: `/export_service/${id}`,
     callback: () => {
-      notify("Export successful.", "success", 5);
+      notify("Service Export successful.", "success", 5, true);
     },
   });
 }
@@ -534,7 +534,7 @@ function schedulerAction(action) {
   call({
     url: `/scheduler_action/${action}`,
     callback: function() {
-      notify(`Scheduler ${action}d.`, "success", 5);
+      notify(`Scheduler ${action}d.`, "success", 5, true);
     },
   });
 }

@@ -125,7 +125,7 @@ function databaseDeletion() {
     url: "/database_deletion",
     title: "Database Deletion",
     form: "database_deletion-form",
-    callback: function(result) {
+    callback: function() {
       notify("Deletion done.", "success", 5);
       $("#database_deletion").remove();
     },
@@ -137,7 +137,7 @@ function resultLogDeletion() {
   call({
     url: "/result_log_deletion",
     form: "result_log_deletion-form",
-    callback: function(result) {
+    callback: function() {
       notify("Deletion done.", "success", 5);
       $("#result_log_deletion").remove();
     },
@@ -147,7 +147,7 @@ function resultLogDeletion() {
 function getGitContent() {
   call({
     url: "/get_git_content",
-    callback: function(result) {
+    callback: function() {
       notify("Action successful.", "success", 5);
     },
   });
@@ -157,7 +157,7 @@ function scanCluster() {
   notify("Scan started.", "success", 5);
   call({
     url: "/scan_cluster",
-    callback: function(cluster) {
+    callback: function() {
       notify("Scan completed.", "success", 5);
     },
   });

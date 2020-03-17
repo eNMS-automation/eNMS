@@ -421,8 +421,16 @@ function showGitHistory(device) {
                     >
                       <span class="glyphicon glyphicon-cog"></span>
                     </button>`,
-                    `<input type="radio" name="v1-${device.id}" value="${commit.hash}"></input>`,
-                    `<input type="radio" name="v2-${device.id}" value="${commit.hash}"></input>`,
+                    `<input
+                      type="radio"
+                      name="v1-${device.id}"
+                      value="${commit.hash}">
+                    </input>`,
+                    `<input
+                      type="radio"
+                      name="v2-${device.id}"
+                      value="${commit.hash}">
+                    </input>`,
                   ]);
                 });
                 table.draw(false);
@@ -463,6 +471,7 @@ function showDeviceResultsPanel(device) {
     type: "device_result",
     title: `Results - ${device.name}`,
     callback: function() {
+      // eslint-disable-next-line new-cap
       new tables["device_result"]("device_result", device, null, device.id);
     },
   });

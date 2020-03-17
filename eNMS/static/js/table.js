@@ -511,8 +511,6 @@ tables.link = class LinkTable extends Table {
   }
 };
 
-class Base {}
-
 tables.pool = class PoolTable extends Table {
   addRow(properties) {
     let row = super.addRow(properties);

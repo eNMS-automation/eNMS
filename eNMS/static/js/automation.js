@@ -17,7 +17,7 @@ import {
   openPanel,
   showTypePanel,
 } from "./base.js";
-import { tables, tableInstances } from "./table.js";
+import { tables } from "./table.js";
 import {
   arrowHistory,
   arrowPointer,
@@ -380,6 +380,7 @@ function displayResultsTree(service, runtime) {
 }
 
 function displayResultsTable(service, runtime) {
+  // eslint-disable-next-line new-cap
   new tables.result("result", service, runtime || currentRuntime, service.id);
 }
 

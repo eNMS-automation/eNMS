@@ -139,9 +139,7 @@ class ServiceForm(BaseForm):
                 " these do not match."
             )
         return (
-            valid_form
-            and not no_recipient_error
-            and not conversion_validation_mismatch
+            valid_form and not no_recipient_error and not conversion_validation_mismatch
         )
 
 

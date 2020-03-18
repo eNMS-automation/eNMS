@@ -24,6 +24,14 @@
     "small_string_length": 255,
     "large_string_length": 32768
   },
+  "help": {
+    "locations": [
+      {
+        "folder": "/eNMS/static/help/",
+        "url_path": "/static/help"
+      }
+    ]
+  },
   "ssh": {
     "port_redirection": false,
     "bypass_key_prompt": true,

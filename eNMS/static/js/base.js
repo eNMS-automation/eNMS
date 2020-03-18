@@ -180,6 +180,46 @@ export function createTooltips() {
   });
 }
 
+export const setupContextSensitiveHelp = function(panel, name, type, id) {
+  // Originally tried passing the 'ajax' and 'contentAjax' options inside showHelpPanel.
+  // This did not work for me originally so used some fallback code to use xhr directly.
+  // @TODO: try again later with contentAjax was
+  // Original:
+  //  $(".context-help").each(function(index, elem) {
+  //      $(elem).on('click', function() {
+  //        showHelpPanel(elem, $(elem).attr("help_url"), $(elem).attr("for"));
+  //      });
+  //  });
+  $(".context-help").each(function(index, elem) {
+    let xhr = null;
+    // By convention, 'elem' will be now be an icon but will have similar attributes
+    // to its nearby 'label.'
+    let helpUrl = $(elem).attr("help_url") || "no_help_found.html";
+    let labelFor = $(elem).attr("for");
+    xhr = $.ajax({
+      url: `${helpUrl}`,
+      xhrFields: { withCredentials: true },
+    })
+      .done(function(data) {
+        xhr = null;
+        $(elem).on("click", function() {
+          showHelpPanel(elem, type, labelFor, data);
+        });
+      })
+      .fail(function(err) {
+        xhr = null;
+        notify(`Failed to load help at $(help_url)`, "error", 5);
+      });
+    setTimeout(function() {
+      if (xhr) {
+        xhr.abort();
+        xhr = null;
+      }
+    }, 3500);
+    return $.when(xhr).then(elem);
+  });
+};
+
 export function openPanel({
   name,
   title,
@@ -226,6 +266,7 @@ export function openPanel({
         panel.content.innerHTML = this.responseText;
         preprocessForm(panel, id, type, duplicate);
         configureForm(name, id, panelId);
+        setupContextSensitiveHelp(panel, name, type, id);
         if (callback) callback(panel);
       },
     };
@@ -681,6 +722,126 @@ function showAllAlerts() {
   });
 }
 
+const copyToClipboardButton = `<img data-placement="top" data-toggle="tooltip"
+   title="Copy to Clipboard" class="copy_to_clipboard" src="/static/help/clippy.svg"
+   width="15" alt="Copy to clipboard"/>`;
+
+const showCopiedMessage = function(element, message) {
+  let original = $(element).attr("data-original-title");
+  $(element)
+    .attr("data-original-title", message)
+    .tooltip("show");
+  setTimeout(function() {
+    $(element)
+      .attr("data-original-title", message)
+      .tooltip("hide");
+    $(element).attr("data-original-title", original);
+  }, 3000);
+};
+
+const formatCodeBlock = function(elem) {
+  let helpTarget = $(elem).attr("help-target");
+  let copyToTargetButton = `<img data-placement="top" data-toggle="tooltip"
+    title="Copy to Target" class="copy_to_target" src="/static/help/clippy.svg"
+    width="15" alt="Copy to target"/>`;
+  let copyClipboardHtml = `<div>${
+    helpTarget ? copyToTargetButton : ""
+  } ${copyToClipboardButton}</div>`;
+  // eslint-disable-next-line new-cap
+  let cm = CodeMirror(
+    function(elt) {
+      $(elem.parentNode).prepend(copyClipboardHtml);
+      let parent = elem.parentNode;
+      parent.replaceChild(elt, elem);
+      let copyToClipboardImage = $(parent)
+        .find(".copy_to_clipboard")
+        .get(0);
+      $(copyToClipboardImage).tooltip();
+      $(copyToClipboardImage).on("click", function(elem) {
+        copyToClipboard(cm.getValue());
+        showCopiedMessage(copyToClipboardImage, "Copied to clipboard!");
+      });
+      if (helpTarget) {
+        let copyToTargetImage = $(parent)
+          .find(".copy_to_target")
+          .get(0);
+        $(copyToTargetImage).tooltip();
+        $(copyToTargetImage).on("click", function(elem) {
+          let realTarget = $(`#${helpTarget}`).first();
+          if (realTarget) {
+            $(realTarget).val(cm.getValue());
+          }
+          showCopiedMessage(copyToTargetImage, "Copied to target!");
+        });
+      }
+      $(parent)
+        .find(".CodeMirror")
+        .css("height", "fit-content");
+    },
+    {
+      value: ($(elem).text() || "").trim(),
+      lineWrapping: true,
+      lineNumbers: true,
+      readOnly: false,
+      mode: { name: $(elem).attr("language") || "javascript", json: true },
+    }
+  );
+
+  let highlight = $(elem).attr("highlight");
+  if (highlight) {
+    let cursor = cm.getSearchCursor(new RegExp(highlight));
+    while (cursor.findNext()) {
+      cm.markText(cursor.from(), cursor.to(), { className: "highlight" });
+    }
+  }
+};
+
+const reformatCodeBlocks = function(element, type, targetName) {
+  $(element)
+    .find("code")
+    .each(function(index, elem) {
+      let realTarget = $(`[id^="${type}-${targetName}"]`)
+        .first()
+        .attr("id");
+      $(elem).attr("help-target", realTarget);
+      formatCodeBlock(elem);
+    });
+};
+
+function showHelpPanel(
+  elem,
+  type,
+  parameterName,
+  initialContent,
+  title = "Help Panel"
+) {
+  $(`[id^="context-help-panel"]`).each((index, elem) => {
+    elem.close();
+  });
+  jsPanel.create({
+    container: ".right_column",
+    id: `context-help-panel-${parameterName || "unknown"}`,
+    selector: "body",
+    position: "center right 0 50",
+    headerTitle: title,
+    maximizedMargin: 10,
+    theme: "light filledlight",
+    border: "2px solid #2A3F52",
+    headerLogo: "../static/img/logo.png",
+    contentOverflow: "hidden scroll",
+    contentSize: {
+      width: () => Math.min(window.innerWidth * 0.6, 750),
+    },
+    dragit: {
+      opacity: 0.6,
+    },
+    content: initialContent,
+    callback: function(panel) {
+      reformatCodeBlocks(panel, type, parameterName);
+    },
+  });
+}
+
 function getAlerts(preview) {
   let alerts = JSON.parse(localStorage.getItem("alerts")).reverse();
   if (preview) alerts = alerts.splice(0, 4);
@@ -786,4 +947,5 @@ configureNamespace("base", [
   showDeletionPanel,
   openPanel,
   showTypePanel,
+  showHelpPanel,
 ]);

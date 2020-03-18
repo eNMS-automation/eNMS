@@ -1,0 +1,85 @@
+.body-help-example {
+  height: 100%;
+  width: 100%;
+  padding: 1px;
+  margin: 1;
+  background: #fafafa;
+  color: #73879c;
+  font-family: "Helvetica Neue", Roboto, Arial, "Droid Sans", sans-serif;
+  font-size: 14px;
+}
+
+.context_help_section {
+  background: #fafafa;
+  color: #73879c;
+  font-family: "Helvetica Neue", Roboto, Arial, "Droid Sans", sans-serif;
+  position: relative;
+  border: 1px;
+  margin-top: 4px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 4px;
+  max-width: 650px;
+  padding: 2px;
+  height: auto;
+}
+
+.context-help: {
+  text-decoration-line: underline;
+}
+
+.context_help_summary {
+  position: relative;
+  height: auto;
+  margin-top: 4px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 4px;
+  padding: 4px;
+}
+
+.context_help_example .context_help_tip {
+  position: relative;
+  height: auto;
+  margin-top: 0px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 0px;
+  padding: 4px;
+  background-color: #c4c4c4;
+}
+
+.snippet {
+  font-style: normal;
+  font-size: small;
+  margin-top: 0px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 0px;
+  padding: 0px;
+  height: auto;
+  width: auto;
+}
+
+.CodeMirror-help {
+  font-size: small;
+  line-height: 1;
+  height: fit-content !important;
+}
+
+.highlight {
+  background-color: #ffff00;
+}
+
+.copy_to_clipboard {
+  margin: 0px;
+  float: right;
+  text-align: right;
+  transform: scale(-1, 1);
+}
+
+.copy_to_target {
+  margin: 0px;
+  float: left;
+  text-align: left;
+}

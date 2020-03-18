@@ -129,18 +129,25 @@ def workflow_builder():
     return render_template(f"workflow.html", endpoint="workflow_builder")
 
 
-@blueprint.route("/form/<form_type>")
+@blueprint.route("/forms/<form_type>")
 @monitor_requests
 def form(form_type):
     return render_template(
         f"forms/{form_templates.get(form_type, 'base')}.html",
         **{
-            "endpoint": f"form/{form_type}",
+            "endpoint": f"forms/{form_type}",
             "action": form_actions.get(form_type),
             "form": form_classes[form_type](request.form),
             "form_type": form_type,
         },
     )
+
+
+@blueprint.route("/help/<path:path>")
+@monitor_requests
+def help(path):
+    print(f"help/{path}.html")
+    return render_template(f"help/{path}.html")
 
 
 @blueprint.route("/view_service_results/<int:id>")

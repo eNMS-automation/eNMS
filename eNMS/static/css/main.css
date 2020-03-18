@@ -772,3 +772,13 @@ We cannot use 100% because main_frame is not set to 100%
   height: 20%;
   width: 98%;
 }
+
+/* For context-sensitive help */
+.icon-button {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  outline: none;
+  border: 0;
+  background: transparent;
+}

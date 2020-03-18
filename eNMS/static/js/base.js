@@ -181,42 +181,16 @@ export function createTooltips() {
 }
 
 export const setupContextSensitiveHelp = function(panel, name, type, id) {
-  // Originally tried passing the 'ajax' and 'contentAjax' options inside showHelpPanel.
-  // This did not work for me originally so used some fallback code to use xhr directly.
-  // @TODO: try again later with contentAjax was
-  // Original:
-  //  $(".context-help").each(function(index, elem) {
-  //      $(elem).on('click', function() {
-  //        showHelpPanel(elem, $(elem).attr("help_url"), $(elem).attr("for"));
-  //      });
-  //  });
-  $(".context-help").each(function(index, elem) {
-    let xhr = null;
-    // By convention, 'elem' will be now be an icon but will have similar attributes
-    // to its nearby 'label.'
-    let helpUrl = $(elem).attr("help_url") || "no_help_found.html";
-    let labelFor = $(elem).attr("for");
-    xhr = $.ajax({
-      url: `${helpUrl}`,
-      xhrFields: { withCredentials: true },
-    })
-      .done(function(data) {
-        xhr = null;
-        $(elem).on("click", function() {
-          showHelpPanel(elem, type, labelFor, data);
-        });
-      })
-      .fail(function(err) {
-        xhr = null;
-        notify(`Failed to load help at $(help_url)`, "error", 5);
+  $(".context-help").each(function() {
+    $(this).on("click", function() {
+      openPanel({
+        name: "tooltip",
+        url: `../help/${$(this).attr("data-url")}`,
+        callback: function() {
+          console.log("test")
+        },
       });
-    setTimeout(function() {
-      if (xhr) {
-        xhr.abort();
-        xhr = null;
-      }
-    }, 3500);
-    return $.when(xhr).then(elem);
+    })
   });
 };
 
@@ -229,6 +203,7 @@ export function openPanel({
   duplicate,
   content,
   size,
+  url,
 }) {
   const panelId = id ? `${name}-${id}` : name;
   if ($(`#${panelId}`).length) {
@@ -261,7 +236,7 @@ export function openPanel({
     kwargs.content = content;
   } else {
     kwargs.contentAjax = {
-      url: `../form/${name}`,
+      url: url || `../forms/${name}`,
       done: function(panel) {
         panel.content.innerHTML = this.responseText;
         preprocessForm(panel, id, type, duplicate);

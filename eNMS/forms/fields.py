@@ -42,6 +42,7 @@ class JsonSubstitutionField(JsonField):
 class DictField(StringField):
     def __init__(self, *args, **kwargs):
         kwargs["default"] = kwargs.get("default", "{}")
+        self.help = kwargs.pop("help", None)
         super().__init__(*args, **kwargs)
 
     def pre_validate(self, form):

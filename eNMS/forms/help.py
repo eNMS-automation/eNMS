@@ -4,7 +4,7 @@ import posixpath
 from pathlib import Path
 from flask_wtf import FlaskForm
 
-from wtforms import HiddenField, Label
+from wtforms import HiddenField, Label, FieldList
 from wtforms.meta import DefaultMeta
 from wtforms.form import Form
 from wtforms.widgets.core import HTMLString, html_params
@@ -206,9 +206,10 @@ class MetaFormHelpRenderer(DefaultMeta):
         Replace the default field.label with an alternate, help-rendering
         HelpLabel instance.
         """
-        help_url = self._has_help(form, bound_field)
-        if help_url:
-            bound_field.label = HelpLabel(
-                bound_field.id, bound_field.label.text, help_url
-            )
+        if not isinstance(bound_field, FieldList):
+            help_url = self._has_help(form, bound_field)
+            if help_url:
+                bound_field.label = HelpLabel(
+                    bound_field.id, bound_field.label.text, help_url
+                )
         return bound_field

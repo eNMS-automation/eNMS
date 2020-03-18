@@ -6,7 +6,6 @@ from wtforms.fields.core import UnboundField
 from wtforms.form import FormMeta
 
 from eNMS.forms.fields import field_types, InstanceField, MultipleInstanceField
-from eNMS.forms.help import MetaFormHelpRenderer
 from eNMS.models import property_types, relationships
 from eNMS.properties import field_conversion, property_names
 
@@ -57,14 +56,6 @@ class MetaForm(FormMeta):
                 form.service_fields.extend(form_properties[base_form_type])
             form_properties[form_type].update(form_properties[base_form_type])
         return form
-
-    def __init__(cls, *args, **kwargs):  # noqa: N805
-        if cls._wtforms_meta is None:
-            bases = [MetaFormHelpRenderer]
-            for mro_class in cls.__mro__:
-                if "Meta" in mro_class.__dict__:
-                    bases.append(mro_class.Meta)
-            cls._wtforms_meta = type("Meta", tuple(bases), {})
 
 
 class BaseForm(FlaskForm, metaclass=MetaForm):

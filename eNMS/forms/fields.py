@@ -8,12 +8,30 @@ from wtforms import (
     IntegerField,
     PasswordField,
     SelectField,
-    StringField,
+    StringField as WtformStringField,
     SelectMultipleField,
 )
 from wtforms.validators import ValidationError
+from wtforms.widgets.core import HTMLString
 
 from eNMS import app
+
+
+class StringField(WtformStringField):
+    def __call__(self, *args, **kwargs):
+        output = super().__call__(*args, **kwargs)
+        if hasattr(self, "help"):
+            return HTMLString(f"""
+                <div>
+                  <label>{self.label}</label>
+                  <button class="icon-button context-help" data-url="{self.help}" type="button">
+                    <span class="glyphicon glyphicon-info-sign"></span>
+                  </button>
+                </div>
+                <div class="form-group">{output}</div>"""
+            )
+        else:
+            return output
 
 
 class DateField(StringField):

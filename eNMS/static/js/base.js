@@ -180,20 +180,6 @@ export function createTooltips() {
   });
 }
 
-export const setupContextSensitiveHelp = function(panel, name, type, id) {
-  $(".context-help").each(function() {
-    $(this).on("click", function() {
-      openPanel({
-        name: "tooltip",
-        url: `../help/${$(this).attr("data-url")}`,
-        callback: function() {
-          console.log("test")
-        },
-      });
-    })
-  });
-};
-
 export function openPanel({
   name,
   title,
@@ -241,7 +227,6 @@ export function openPanel({
         panel.content.innerHTML = this.responseText;
         preprocessForm(panel, id, type, duplicate);
         configureForm(name, id, panelId);
-        setupContextSensitiveHelp(panel, name, type, id);
         if (callback) callback(panel);
       },
     };
@@ -345,6 +330,17 @@ export function preprocessForm(panel, id, type, duplicate) {
   });
   panel.querySelectorAll(".doc-link").forEach((el) => {
     $(el).attr("href", `${settings.app.documentation_url}${$(el).attr("href")}`);
+  });
+  panel.querySelectorAll(".context-help").forEach((el) => {
+    $(el).on("click", function() {
+      openPanel({
+        name: "tooltip",
+        url: `../help/${$(el).attr("data-url")}`,
+        callback: function() {
+          console.log("test")
+        },
+      });
+    })
   });
 }
 

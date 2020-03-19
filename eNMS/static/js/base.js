@@ -222,7 +222,7 @@ export function openPanel({
     kwargs.content = content;
   } else {
     kwargs.contentAjax = {
-      url: url || `../forms/${name}`,
+      url: url || `../form/${name}`,
       done: function(panel) {
         panel.content.innerHTML = this.responseText;
         preprocessForm(panel, id, type, duplicate);

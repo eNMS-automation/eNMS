@@ -21,7 +21,8 @@ class StringField(WtformStringField):
     def __call__(self, *args, **kwargs):
         output = super().__call__(*args, **kwargs)
         if hasattr(self, "help"):
-            return HTMLString(f"""
+            return HTMLString(
+                f"""
                 <div>
                   <label>{self.label}</label>
                   <button

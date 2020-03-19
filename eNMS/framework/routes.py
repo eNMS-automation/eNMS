@@ -19,7 +19,6 @@ from eNMS.database.functions import fetch, handle_exception
 from eNMS.forms import form_actions, form_classes, form_postprocessing, form_templates
 from eNMS.forms.administration import LoginForm
 from eNMS.setup import properties
-from pathlib import Path
 
 blueprint = Blueprint("blueprint", __name__, template_folder="../templates")
 
@@ -117,7 +116,7 @@ def workflow_builder():
     return render_template(f"workflow.html", endpoint="workflow_builder")
 
 
-@blueprint.route("/forms/<form_type>")
+@blueprint.route("/form/<form_type>")
 @monitor_requests
 def form(form_type):
     return render_template(
@@ -134,7 +133,6 @@ def form(form_type):
 @blueprint.route("/help/<path:path>")
 @monitor_requests
 def help(path):
-    print(f"help/{path}.html")
     return render_template(f"help/{path}.html")
 
 

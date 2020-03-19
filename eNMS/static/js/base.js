@@ -335,13 +335,21 @@ export function preprocessForm(panel, id, type, duplicate) {
     $(el).on("click", function() {
       openPanel({
         name: "tooltip",
+        size: "600px auto",
         url: `../help/${$(el).attr("data-url")}`,
-        callback: function() {
-          console.log("test")
+        callback: function(helpPanel) {
+          helpPanel.querySelectorAll(".help-snippet").forEach((el) => {
+            const editor = CodeMirror.fromTextArea(el, {
+              lineNumbers: true,
+              readOnly: true,
+            });
+            editor.setSize("100%", "fit-content");
+          });
         },
       });
-    })
+    });
   });
+
 }
 
 export function initSelect(el, model, parentId, single) {
@@ -693,126 +701,6 @@ function showAllAlerts() {
   });
 }
 
-const copyToClipboardButton = `<img data-placement="top" data-toggle="tooltip"
-   title="Copy to Clipboard" class="copy_to_clipboard" src="/static/help/clippy.svg"
-   width="15" alt="Copy to clipboard"/>`;
-
-const showCopiedMessage = function(element, message) {
-  let original = $(element).attr("data-original-title");
-  $(element)
-    .attr("data-original-title", message)
-    .tooltip("show");
-  setTimeout(function() {
-    $(element)
-      .attr("data-original-title", message)
-      .tooltip("hide");
-    $(element).attr("data-original-title", original);
-  }, 3000);
-};
-
-const formatCodeBlock = function(elem) {
-  let helpTarget = $(elem).attr("help-target");
-  let copyToTargetButton = `<img data-placement="top" data-toggle="tooltip"
-    title="Copy to Target" class="copy_to_target" src="/static/help/clippy.svg"
-    width="15" alt="Copy to target"/>`;
-  let copyClipboardHtml = `<div>${
-    helpTarget ? copyToTargetButton : ""
-  } ${copyToClipboardButton}</div>`;
-  // eslint-disable-next-line new-cap
-  let cm = CodeMirror(
-    function(elt) {
-      $(elem.parentNode).prepend(copyClipboardHtml);
-      let parent = elem.parentNode;
-      parent.replaceChild(elt, elem);
-      let copyToClipboardImage = $(parent)
-        .find(".copy_to_clipboard")
-        .get(0);
-      $(copyToClipboardImage).tooltip();
-      $(copyToClipboardImage).on("click", function(elem) {
-        copyToClipboard(cm.getValue());
-        showCopiedMessage(copyToClipboardImage, "Copied to clipboard!");
-      });
-      if (helpTarget) {
-        let copyToTargetImage = $(parent)
-          .find(".copy_to_target")
-          .get(0);
-        $(copyToTargetImage).tooltip();
-        $(copyToTargetImage).on("click", function(elem) {
-          let realTarget = $(`#${helpTarget}`).first();
-          if (realTarget) {
-            $(realTarget).val(cm.getValue());
-          }
-          showCopiedMessage(copyToTargetImage, "Copied to target!");
-        });
-      }
-      $(parent)
-        .find(".CodeMirror")
-        .css("height", "fit-content");
-    },
-    {
-      value: ($(elem).text() || "").trim(),
-      lineWrapping: true,
-      lineNumbers: true,
-      readOnly: false,
-      mode: { name: $(elem).attr("language") || "javascript", json: true },
-    }
-  );
-
-  let highlight = $(elem).attr("highlight");
-  if (highlight) {
-    let cursor = cm.getSearchCursor(new RegExp(highlight));
-    while (cursor.findNext()) {
-      cm.markText(cursor.from(), cursor.to(), { className: "highlight" });
-    }
-  }
-};
-
-const reformatCodeBlocks = function(element, type, targetName) {
-  $(element)
-    .find("code")
-    .each(function(index, elem) {
-      let realTarget = $(`[id^="${type}-${targetName}"]`)
-        .first()
-        .attr("id");
-      $(elem).attr("help-target", realTarget);
-      formatCodeBlock(elem);
-    });
-};
-
-function showHelpPanel(
-  elem,
-  type,
-  parameterName,
-  initialContent,
-  title = "Help Panel"
-) {
-  $(`[id^="context-help-panel"]`).each((index, elem) => {
-    elem.close();
-  });
-  jsPanel.create({
-    container: ".right_column",
-    id: `context-help-panel-${parameterName || "unknown"}`,
-    selector: "body",
-    position: "center right 0 50",
-    headerTitle: title,
-    maximizedMargin: 10,
-    theme: "light filledlight",
-    border: "2px solid #2A3F52",
-    headerLogo: "../static/img/logo.png",
-    contentOverflow: "hidden scroll",
-    contentSize: {
-      width: () => Math.min(window.innerWidth * 0.6, 750),
-    },
-    dragit: {
-      opacity: 0.6,
-    },
-    content: initialContent,
-    callback: function(panel) {
-      reformatCodeBlocks(panel, type, parameterName);
-    },
-  });
-}
-
 function getAlerts(preview) {
   let alerts = JSON.parse(localStorage.getItem("alerts")).reverse();
   if (preview) alerts = alerts.splice(0, 4);
@@ -918,5 +806,4 @@ configureNamespace("base", [
   showDeletionPanel,
   openPanel,
   showTypePanel,
-  showHelpPanel,
 ]);

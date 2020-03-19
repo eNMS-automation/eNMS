@@ -23,17 +23,6 @@ from pathlib import Path
 import os
 
 blueprint = Blueprint("blueprint", __name__, template_folder="../templates")
-help_blueprints = [
-    Blueprint(
-        f"{x['route']}",
-        __name__,
-        root_path=Path.cwd(),
-        static_folder=os.path.normpath(x["folder"][1:]),
-        static_url_path=x["folder"],
-    )
-    for x in app.settings.get("help", {}).get("locations", [])
-    if ("route" in x.keys()) and ("folder" in x.keys())
-]
 
 
 @blueprint.route("/")

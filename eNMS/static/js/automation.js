@@ -468,8 +468,8 @@ export function loadServiceTypes() {
 export function deleteCorruptedEdges() {
   call({
     url: "/delete_corrupted_edges",
-    callback: function(nb) {
-      notify(`${nb} Corrupted edges successfully deleted`, "success", 5);
+    callback: function(number) {
+      notify(`${number} Corrupted edges successfully deleted.`, "success", 5);
     },
   });
 }

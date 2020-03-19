@@ -115,6 +115,7 @@ class AutomationController(BaseController):
             services = edge.workflow.services
             if edge.source not in services or edge.destination not in services:
                 Session.delete(edge)
+                number_of_corrupted_edges += 1
         return number_of_corrupted_edges
 
     def delete_edge(self, workflow_id, edge_id):

@@ -93,6 +93,9 @@ class AutomationController(BaseController):
         workflow.labels[label_id] = label
         return {"id": label_id, **label}
 
+    def delete_corrupted_edges(self):
+        return 3
+
     def delete_edge(self, workflow_id, edge_id):
         delete("workflow_edge", id=edge_id)
         now = self.get_time()

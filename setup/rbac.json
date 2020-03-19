@@ -154,6 +154,7 @@
       "/count_models",
       "/create_label",
       "/database_deletion",
+      "/delete_corrupted_edges",
       "/delete_edge",
       "/delete_instance",
       "/delete_label",

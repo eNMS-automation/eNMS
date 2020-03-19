@@ -24,7 +24,13 @@ class StringField(WtformStringField):
             return HTMLString(f"""
                 <div>
                   <label>{self.label}</label>
-                  <button class="icon-button context-help" data-url="{self.help}" type="button">
+                  <button
+                    class="icon-button context-help"
+                    data-id="{self.id}"
+                    data-title="{self.label.text}"
+                    data-url="{self.help}"
+                    type="button"
+                  >
                     <span class="glyphicon glyphicon-info-sign"></span>
                   </button>
                 </div>

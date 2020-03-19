@@ -334,7 +334,8 @@ export function preprocessForm(panel, id, type, duplicate) {
   panel.querySelectorAll(".context-help").forEach((el) => {
     $(el).on("click", function() {
       openPanel({
-        name: "tooltip",
+        name: `help-${$(el).attr("data-id")}`,
+        title: $(el).attr("data-title"),
         size: "600px auto",
         url: `../help/${$(el).attr("data-url")}`,
         callback: function(helpPanel) {
@@ -349,7 +350,6 @@ export function preprocessForm(panel, id, type, duplicate) {
       });
     });
   });
-
 }
 
 export function initSelect(el, model, parentId, single) {

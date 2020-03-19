@@ -95,17 +95,17 @@
               aria-labelledby="heading-step1"
             >
               <div class="panel-body" style="background-color:#fafafa;">
-                {{ form.scoped_name.label(class_="readonly-when-run") }}
+                {{ form.scoped_name.label() }}
                 <div class="form-group">
                   {{ form.scoped_name(id=form_type + '-scoped_name', class="form-control
                   readonly-when-run add-id required") }}
                 </div>
-                {{ form.name.label(class_="readonly-when-run") }}
+                {{ form.name.label() }}
                 <div class="form-group">
                   {{ form.name(id=form_type + '-name', class="form-control
                   readonly-when-run add-id required") }}
                 </div>
-                {{ form.type.label(class_="readonly-when-run") }}
+                {{ form.type.label() }}
                 <div class="form-group">
                   {{ form.type(id=form_type + '-class', class="form-control
                   readonly-when-run add-id") }}
@@ -127,17 +127,17 @@
                   {{ form.workflows(id=form_type + '-workflows', class="form-control
                   add-id") }}
                 </div>
-                {{ form.description.label(class_="readonly-when-run") }}
+                {{ form.description.label() }}
                 <div class="form-group">
                   {{ form.description(id=form_type + '-description', class="form-control
                   readonly-when-run add-id") }}
                 </div>
-                {{ form.vendor.label(class_="readonly-when-run") }}
+                {{ form.vendor.label() }}
                 <div class="form-group">
                   {{ form.vendor(id=form_type + '-vendor', class="form-control
                   readonly-when-run add-id") }}
                 </div>
-                {{ form.operating_system.label(class_="readonly-when-run") }}
+                {{ form.operating_system.label() }}
                 <div class="form-group">
                   {{ form.operating_system(id=form_type + '-operating_system',
                   class="form-control readonly-when-run add-id") }}
@@ -146,17 +146,17 @@
                   {{ form.initial_payload(id=form_type + '-initial_payload',
                   class="form-control add-id") }}
                 </div>
-                {{ form.number_of_retries.label(class_="readonly-when-run") }}
+                {{ form.number_of_retries.label() }}
                 <div class="form-group">
                   {{ form.number_of_retries(id=form_type + '-number_of_retries',
                   class="form-control add-id") }}
                 </div>
-                {{ form.time_between_retries.label(class_="readonly-when-run") }}
+                {{ form.time_between_retries.label() }}
                 <div class="form-group">
                   {{ form.time_between_retries(id=form_type + '-time_between_retries',
                   class="form-control add-id") }}
                 </div>
-                {{ form.log_level.label(class_="readonly-when-run") }}
+                {{ form.log_level.label() }}
                 <div class="form-group">
                   {{ form.log_level(id=form_type + '-log_level', class="form-control
                   add-id") }}
@@ -205,25 +205,25 @@
                       type="checkbox"
                       value="y"
                     />
-                    {{ form.skip.label(class_="readonly-when-run") }}
+                    {{ form.skip.label() }}
                   </div>
                 </fieldset>
-                {{ form.skip_query.label(class_="readonly-when-run") }}
+                {{ form.skip_query.label() }}
                 <div class="form-group">
                   {{ form.skip_query(id=form_type + '-skip_query', class="form-control
                   readonly-when-run add-id") }}
                 </div>
-                {{ form.skip_value.label(class_="readonly-when-run") }}
+                {{ form.skip_value.label() }}
                 <div class="form-group">
                   {{ form.skip_value(id=form_type + '-skip_value', class="form-control
                   readonly-when-run add-id") }}
                 </div>
-                {{ form.maximum_runs.label(class_="readonly-when-run") }}
+                {{ form.maximum_runs.label() }}
                 <div class="form-group">
                   {{ form.maximum_runs(id=form_type + '-maximum_runs',
                   class="form-control readonly-when-run add-id") }}
                 </div>
-                {{ form.waiting_time.label(class_="readonly-when-run") }}
+                {{ form.waiting_time.label() }}
                 <div class="form-group">
                   {{ form.waiting_time(id=form_type + '-waiting_time',
                   class="form-control readonly-when-run add-id") }}
@@ -350,26 +350,26 @@
               aria-labelledby="heading-step3"
             >
               <div class="panel-body" style="background-color:#fafafa;">
-                {{ form.run_method.label(class_="readonly-when-run") }}
+                {{ form.run_method.label() }}
                 <div class="form-group">
                   {{ form.run_method(id=form_type + '-run_method', class="form-control
                   add-id no-search") }}
                 </div>
-                {{ form.devices.label(class_="readonly-when-run") }}
+                {{ form.devices.label() }}
                 <div class="form-group">
                   {{ form.devices(id=form_type + '-devices', class="form-control
                   add-id") }}
                 </div>
-                {{ form.pools.label(class_="readonly-when-run") }}
+                {{ form.pools.label() }}
                 <div class="form-group">
                   {{ form.pools(id=form_type + '-pools', class="form-control add-id") }}
                 </div>
-                {{ form.device_query.label(class_="readonly-when-run") }}
+                {{ form.device_query.label() }}
                 <div class="form-group">
                   {{ form.device_query(id=form_type + '-device_query',
                   class="form-control add-id") }}
                 </div>
-                {{ form.device_query_property.label(class_="readonly-when-run") }}
+                {{ form.device_query_property.label() }}
                 <div class="form-group">
                   {{ form.device_query_property(id=form_type + '-device_query_property',
                   class="form-control add-id") }}
@@ -383,10 +383,10 @@
                       type="checkbox"
                       value="y"
                     />
-                    {{ form.multiprocessing.label(class_="readonly-when-run") }}
+                    {{ form.multiprocessing.label() }}
                   </div>
                 </fieldset>
-                {{ form.max_processes.label(class_="readonly-when-run") }}
+                {{ form.max_processes.label() }}
                 <div class="form-group">
                   {{ form.max_processes(id=form_type + '-max_processes',
                   class="form-control add-id") }}
@@ -426,22 +426,22 @@
               aria-labelledby="heading-step3-2"
             >
               <div class="panel-body" style="background-color:#fafafa;">
-                {{ form.iteration_devices.label(class_="readonly-when-run") }}
+                {{ form.iteration_devices.label() }}
                 <div class="form-group">
                   {{ form.iteration_devices(id=form_type + '-iteration_devices',
                   class="form-control add-id") }}
                 </div>
-                {{ form.iteration_devices_property.label(class_="readonly-when-run") }}
+                {{ form.iteration_devices_property.label() }}
                 <div class="form-group">
                   {{ form.iteration_devices_property(id=form_type +
                   '-iteration_devices_property', class="form-control add-id") }}
                 </div>
-                {{ form.iteration_values.label(class_="readonly-when-run") }}
+                {{ form.iteration_values.label() }}
                 <div class="form-group">
                   {{ form.iteration_values(id=form_type + '-iteration_values',
                   class="form-control add-id") }}
                 </div>
-                {{ form.iteration_variable_name.label(class_="readonly-when-run") }}
+                {{ form.iteration_variable_name.label() }}
                 <div class="form-group">
                   {{ form.iteration_variable_name(id=form_type +
                   '-iteration_variable_name', class="form-control add-id") }}
@@ -529,17 +529,17 @@
               aria-labelledby="heading-step4-2"
             >
               <div class="panel-body" style="background-color:#fafafa;">
-                {{ form.conversion_method.label(class_="readonly-when-run") }}
+                {{ form.conversion_method.label() }}
                 <div class="form-group">
                   {{ form.conversion_method(id=form_type + '-conversion_method',
                   class="form-control add-id") }}
                 </div>
-                {{ form.validation_method.label(class_="readonly-when-run") }}
+                {{ form.validation_method.label() }}
                 <div class="form-group">
                   {{ form.validation_method(id=form_type + '-validation_method',
                   class="form-control add-id") }}
                 </div>
-                {{ form.content_match.label(class_="readonly-when-run") }}
+                {{ form.content_match.label() }}
                 <div class="form-group">
                   {{ form.content_match(id=form_type + '-content_match',
                   class="form-control add-id") }}
@@ -556,7 +556,7 @@
                     <label>"Content Match" is a regular expression</label>
                   </div>
                 </fieldset>
-                {{ form.dict_match.label(class_="readonly-when-run") }}
+                {{ form.dict_match.label() }}
                 <div class="form-group">
                   {{ form.dict_match(id=form_type + '-dict_match', class="form-control
                   add-id") }}
@@ -571,7 +571,7 @@
                       value="y"
                     />
                     {{
-                    form.delete_spaces_before_matching.label(class_="readonly-when-run")
+                    form.delete_spaces_before_matching.label()
                     }}
                   </div>
                 </fieldset>
@@ -584,7 +584,7 @@
                       type="checkbox"
                       value="y"
                     />
-                    {{ form.negative_logic.label(class_="readonly-when-run") }}
+                    {{ form.negative_logic.label() }}
                   </div>
                 </fieldset>
               </div>
@@ -631,7 +631,7 @@
                       class="add-id"
                       value="y"
                     />
-                    {{ form.send_notification.label(class_="readonly-when-run") }}
+                    {{ form.send_notification.label() }}
                   </div>
                 </fieldset>
                 <label>Send Notification Method</label>
@@ -639,7 +639,7 @@
                   {{ form.send_notification_method(id=form_type +
                   '-send_notification_method', class="form-control add-id") }}
                 </div>
-                {{ form.notification_header.label(class_="readonly-when-run") }}
+                {{ form.notification_header.label() }}
                 <div class="form-group">
                   {{ form.notification_header(id=form_type + '-notification_header',
                   class="form-control add-id") }}
@@ -653,7 +653,7 @@
                       type="checkbox"
                       value="y"
                     />
-                    {{ form.include_device_results.label(class_="readonly-when-run") }}
+                    {{ form.include_device_results.label() }}
                   </div>
                 </fieldset>
                 <fieldset>
@@ -665,10 +665,10 @@
                       type="checkbox"
                       value="y"
                     />
-                    {{ form.include_link_in_summary.label(class_="readonly-when-run") }}
+                    {{ form.include_link_in_summary.label() }}
                   </div>
                 </fieldset>
-                {{ form.mail_recipient.label(class_="readonly-when-run") }}
+                {{ form.mail_recipient.label() }}
                 <div class="form-group">
                   {{ form.mail_recipient(id=form_type + '-mail_recipient',
                   class="form-control add-id") }}
@@ -682,7 +682,7 @@
                       type="checkbox"
                       value="y"
                     />
-                    {{ form.display_only_failed_nodes.label(class_="readonly-when-run")
+                    {{ form.display_only_failed_nodes.label()
                     }}
                   </div>
                 </fieldset>

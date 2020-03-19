@@ -1,35 +1,22 @@
 <div class="modal-body">
-  <section>
-    <div>
-      <p>
-        The <b>initial_payload</b> parameter provides a starting data that can be
-        referenced later by service(s). This parameter is a dictionary with key/value
-        pairs. This parameter is always present and will default to "<b>{ }</b>".
-      </p>
-      <p>
-        Important note: only one <b>initial_payload</b> matters - the one selected on the
-        service or workflow being run. Inside of a workflow, an
-        <b>initial_payload</b> defined on a service that is part of that workflow will
-        have no effect when running the enclosing workflow.
-      </p>
-    </div>
-    <div class="context_help_tip">
-      Alternatives to using <b>initial_payload</b>:
-      <ul>
-        <li>
-          In some cases, using a REST Service to lookup values can offers some design
-          advantages.
-        </li>
-        <li>...</li>
-      </ul>
-    </div>
-    <div class="context_help_example">
-    <textarea class="help-snippet" style="height: fit-content">
+  <div>
+    <p>
+      The <b>initial_payload</b> parameter provides a starting data that can be
+      referenced later by service(s). This parameter is a dictionary with key/value
+      pairs. This parameter is always present and will default to "<b>{ }</b>".
+    </p>
+    <p>
+      Important note: only one <b>initial_payload</b> matters - the one selected on the
+      service or workflow being run. Inside of a workflow, an
+      <b>initial_payload</b> defined on a service that is part of that workflow will
+      have no effect when running the enclosing workflow.
+    </p>
+  </div>
+  <textarea class="help-snippet" style="height: fit-content">
 {
   "rest_url": "https://www.example.com/",
   "current_version": "1.0.3",
   "new_version": "2.0.1"
-}</textarea>
-    </div>
-  </section>
+}</textarea
+  >
 </div>

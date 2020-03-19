@@ -208,6 +208,7 @@ export function openPanel({
   duplicate,
   content,
   size,
+  url,
 }) {
   const panelId = id ? `${name}-${id}` : name;
   if ($(`#${panelId}`).length) {
@@ -240,7 +241,7 @@ export function openPanel({
     kwargs.content = content;
   } else {
     kwargs.contentAjax = {
-      url: `../form/${name}`,
+      url: url || `../form/${name}`,
       done: function(panel) {
         panel.content.innerHTML = this.responseText;
         preprocessForm(panel, id, type, duplicate);
@@ -362,6 +363,25 @@ export function preprocessForm(panel, id, type, duplicate) {
   });
   panel.querySelectorAll(".doc-link").forEach((el) => {
     $(el).attr("href", `${settings.app.documentation_url}${$(el).attr("href")}`);
+  });
+  panel.querySelectorAll(".context-help").forEach((el) => {
+    $(el).on("click", function() {
+      openPanel({
+        name: `help-${$(el).attr("data-id")}`,
+        title: $(el).attr("data-title"),
+        size: "600px auto",
+        url: `../help/${$(el).attr("data-url")}`,
+        callback: function(helpPanel) {
+          helpPanel.querySelectorAll(".help-snippet").forEach((el) => {
+            const editor = CodeMirror.fromTextArea(el, {
+              lineNumbers: true,
+              readOnly: true,
+            });
+            editor.setSize("100%", "fit-content");
+          });
+        },
+      });
+    });
   });
 }
 

@@ -95,17 +95,17 @@
               aria-labelledby="heading-step1"
             >
               <div class="panel-body" style="background-color:#fafafa;">
-                <label class="readonly-when-run">Name</label>
+                {{ form.scoped_name.label() }}
                 <div class="form-group">
                   {{ form.scoped_name(id=form_type + '-scoped_name', class="form-control
                   readonly-when-run add-id required") }}
                 </div>
-                <label class="readonly-when-run">Fully Qualified Name</label>
+                {{ form.name.label() }}
                 <div class="form-group">
                   {{ form.name(id=form_type + '-name', class="form-control
                   readonly-when-run add-id required") }}
                 </div>
-                <label class="readonly-when-run">Type</label>
+                {{ form.type.label() }}
                 <div class="form-group">
                   {{ form.type(id=form_type + '-class', class="form-control
                   readonly-when-run add-id") }}
@@ -127,32 +127,31 @@
                   {{ form.workflows(id=form_type + '-workflows', class="form-control
                   add-id") }}
                 </div>
-                <label class="readonly-when-run">Description</label>
+                {{ form.description.label() }}
                 <div class="form-group">
                   {{ form.description(id=form_type + '-description', class="form-control
                   readonly-when-run add-id") }}
                 </div>
-                <label class="readonly-when-run">Vendor</label>
+                {{ form.vendor.label() }}
                 <div class="form-group">
                   {{ form.vendor(id=form_type + '-vendor', class="form-control
                   readonly-when-run add-id") }}
                 </div>
-                <label class="readonly-when-run">Operating System</label>
+                {{ form.operating_system.label() }}
                 <div class="form-group">
                   {{ form.operating_system(id=form_type + '-operating_system',
                   class="form-control readonly-when-run add-id") }}
                 </div>
-                <label>Initial Payload</label>
                 <div class="form-group">
                   {{ form.initial_payload(id=form_type + '-initial_payload',
                   class="form-control add-id") }}
                 </div>
-                <label>Initial Number of Retries</label>
+                {{ form.number_of_retries.label() }}
                 <div class="form-group">
                   {{ form.number_of_retries(id=form_type + '-number_of_retries',
                   class="form-control add-id") }}
                 </div>
-                <label>Time between retries (in seconds)</label>
+                {{ form.time_between_retries.label() }}
                 <div class="form-group">
                   {{ form.time_between_retries(id=form_type + '-time_between_retries',
                   class="form-control add-id") }}
@@ -162,7 +161,7 @@
                   {{ form.max_number_of_retries(id=form_type + '-max_number_of_retries',
                   class="form-control add-id") }}
                 </div>
-                <label>Log Level</label>
+                {{ form.log_level.label() }}
                 <div class="form-group">
                   {{ form.log_level(id=form_type + '-log_level', class="form-control
                   add-id") }}
@@ -211,29 +210,25 @@
                       type="checkbox"
                       value="y"
                     />
-                    <label class="readonly-when-run"
-                      >Skip this Service Regardless</label
-                    >
+                    {{ form.skip.label() }}
                   </div>
                 </fieldset>
-                <label class="readonly-when-run">Skip Service If True</label>
+                {{ form.skip_query.label() }}
                 <div class="form-group">
                   {{ form.skip_query(id=form_type + '-skip_query', class="form-control
                   readonly-when-run add-id") }}
                 </div>
-                <label class="readonly-when-run">Skip Success Value</label>
+                {{ form.skip_value.label() }}
                 <div class="form-group">
                   {{ form.skip_value(id=form_type + '-skip_value', class="form-control
                   readonly-when-run add-id") }}
                 </div>
-                <label class="readonly-when-run">Maximum number of runs</label>
+                {{ form.maximum_runs.label() }}
                 <div class="form-group">
                   {{ form.maximum_runs(id=form_type + '-maximum_runs',
                   class="form-control readonly-when-run add-id") }}
                 </div>
-                <label class="readonly-when-run"
-                  >Time to Wait before next service is started (in seconds)</label
-                >
+                {{ form.waiting_time.label() }}
                 <div class="form-group">
                   {{ form.waiting_time(id=form_type + '-waiting_time',
                   class="form-control readonly-when-run add-id") }}
@@ -405,20 +400,21 @@
               aria-labelledby="heading-step3"
             >
               <div class="panel-body" style="background-color:#fafafa;">
-                <label for="run_method">Run method</label>
+                {{ form.run_method.label() }}
                 <div class="form-group">
                   {{ form.run_method(id=form_type + '-run_method', class="form-control
                   add-id no-search") }}
                 </div>
-                <label for="devices">Devices</label>
+                {{ form.devices.label() }}
                 <div class="form-group">
                   {{ form.devices(id=form_type + '-devices', class="form-control
                   add-id") }}
                 </div>
-                <label for="pools">Pools</label>
+                {{ form.pools.label() }}
                 <div class="form-group">
                   {{ form.pools(id=form_type + '-pools', class="form-control add-id") }}
                 </div>
+<<<<<<< HEAD
                 <fieldset>
                   <div class="item">
                     <input
@@ -432,11 +428,14 @@
                   </div>
                 </fieldset>
                 <label>Device Query (define targets from a python query)</label>
+=======
+                {{ form.device_query.label() }}
+>>>>>>> stephan1373-context_sensitive_help
                 <div class="form-group">
                   {{ form.device_query(id=form_type + '-device_query',
                   class="form-control add-id") }}
                 </div>
-                <label>Query Property Type</label>
+                {{ form.device_query_property.label() }}
                 <div class="form-group">
                   {{ form.device_query_property(id=form_type + '-device_query_property',
                   class="form-control add-id") }}
@@ -450,10 +449,10 @@
                       type="checkbox"
                       value="y"
                     />
-                    <label>Multiprocessing</label>
+                    {{ form.multiprocessing.label() }}
                   </div>
                 </fieldset>
-                <label>Maximum number of processes</label>
+                {{ form.max_processes.label() }}
                 <div class="form-group">
                   {{ form.max_processes(id=form_type + '-max_processes',
                   class="form-control add-id") }}
@@ -493,24 +492,22 @@
               aria-labelledby="heading-step3-2"
             >
               <div class="panel-body" style="background-color:#fafafa;">
-                <label>Iteration devices</label>
+                {{ form.iteration_devices.label() }}
                 <div class="form-group">
                   {{ form.iteration_devices(id=form_type + '-iteration_devices',
                   class="form-control add-id") }}
                 </div>
-                <label>Iteration Devices Property</label>
+                {{ form.iteration_devices_property.label() }}
                 <div class="form-group">
                   {{ form.iteration_devices_property(id=form_type +
                   '-iteration_devices_property', class="form-control add-id") }}
                 </div>
-                <label
-                  >Iteration values: run service for each value (python query)</label
-                >
+                {{ form.iteration_values.label() }}
                 <div class="form-group">
                   {{ form.iteration_values(id=form_type + '-iteration_values',
                   class="form-control add-id") }}
                 </div>
-                <label>Iteration Variable Name</label>
+                {{ form.iteration_variable_name.label() }}
                 <div class="form-group">
                   {{ form.iteration_variable_name(id=form_type +
                   '-iteration_variable_name', class="form-control add-id") }}
@@ -598,17 +595,17 @@
               aria-labelledby="heading-step4-2"
             >
               <div class="panel-body" style="background-color:#fafafa;">
-                <label>Conversion Method</label>
+                {{ form.conversion_method.label() }}
                 <div class="form-group">
                   {{ form.conversion_method(id=form_type + '-conversion_method',
                   class="form-control add-id") }}
                 </div>
-                <label>Validation Method</label>
+                {{ form.validation_method.label() }}
                 <div class="form-group">
                   {{ form.validation_method(id=form_type + '-validation_method',
                   class="form-control add-id") }}
                 </div>
-                <label>Content Match</label>
+                {{ form.content_match.label() }}
                 <div class="form-group">
                   {{ form.content_match(id=form_type + '-content_match',
                   class="form-control add-id") }}
@@ -625,7 +622,7 @@
                     <label>"Content Match" is a regular expression</label>
                   </div>
                 </fieldset>
-                <label>Dictionary Match</label>
+                {{ form.dict_match.label() }}
                 <div class="form-group">
                   {{ form.dict_match(id=form_type + '-dict_match', class="form-control
                   add-id") }}
@@ -639,7 +636,7 @@
                       type="checkbox"
                       value="y"
                     />
-                    <label>Delete spaces before matching</label>
+                    {{ form.delete_spaces_before_matching.label() }}
                   </div>
                 </fieldset>
                 <fieldset>
@@ -651,7 +648,7 @@
                       type="checkbox"
                       value="y"
                     />
-                    <label>Negative Logic</label>
+                    {{ form.negative_logic.label() }}
                   </div>
                 </fieldset>
               </div>
@@ -698,7 +695,7 @@
                       class="add-id"
                       value="y"
                     />
-                    <label>Send notification</label>
+                    {{ form.send_notification.label() }}
                   </div>
                 </fieldset>
                 <label>Send Notification Method</label>
@@ -706,7 +703,7 @@
                   {{ form.send_notification_method(id=form_type +
                   '-send_notification_method', class="form-control add-id") }}
                 </div>
-                <label>Notification Header</label>
+                {{ form.notification_header.label() }}
                 <div class="form-group">
                   {{ form.notification_header(id=form_type + '-notification_header',
                   class="form-control add-id") }}
@@ -720,7 +717,7 @@
                       type="checkbox"
                       value="y"
                     />
-                    <label>Include Device Results</label>
+                    {{ form.include_device_results.label() }}
                   </div>
                 </fieldset>
                 <fieldset>
@@ -732,10 +729,10 @@
                       type="checkbox"
                       value="y"
                     />
-                    <label>Include Result Link in Summary</label>
+                    {{ form.include_link_in_summary.label() }}
                   </div>
                 </fieldset>
-                <label>Mail Recipients (separated by comma)</label>
+                {{ form.mail_recipient.label() }}
                 <div class="form-group">
                   {{ form.mail_recipient(id=form_type + '-mail_recipient',
                   class="form-control add-id") }}
@@ -749,7 +746,7 @@
                       type="checkbox"
                       value="y"
                     />
-                    <label>Display only failed nodes</label>
+                    {{ form.display_only_failed_nodes.label() }}
                   </div>
                 </fieldset>
               </div>

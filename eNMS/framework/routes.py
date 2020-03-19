@@ -19,7 +19,6 @@ from eNMS.forms import form_actions, form_classes, form_postprocessing, form_tem
 from eNMS.forms.administration import LoginForm
 from eNMS.setup import properties
 
-
 blueprint = Blueprint("blueprint", __name__, template_folder="../templates")
 
 
@@ -122,12 +121,18 @@ def form(form_type):
     return render_template(
         f"forms/{form_templates.get(form_type, 'base')}.html",
         **{
-            "endpoint": f"form/{form_type}",
+            "endpoint": f"forms/{form_type}",
             "action": form_actions.get(form_type),
             "form": form_classes[form_type](request.form),
             "form_type": form_type,
         },
     )
+
+
+@blueprint.route("/help/<path:path>")
+@monitor_requests
+def help(path):
+    return render_template(f"help/{path}.html")
 
 
 @blueprint.route("/view_service_results/<int:id>")

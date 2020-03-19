@@ -62,8 +62,8 @@ class ServiceForm(BaseForm):
     )
     vendor = StringField("Vendor")
     operating_system = StringField("Operating System")
-    initial_payload = DictField()
     iteration_values = StringField("Iteration Values", python=True)
+    initial_payload = DictField(help="common/initial_payload")
     iteration_variable_name = StringField(
         "Iteration Variable Name", default="iteration_value"
     )

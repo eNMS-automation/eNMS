@@ -93,6 +93,31 @@ class AutomationController(BaseController):
         workflow.labels[label_id] = label
         return {"id": label_id, **label}
 
+    def delete_corrupted_edges(self):
+        edges, duplicated_edges = fetch_all("workflow_edge"), defaultdict(list)
+        for edge in edges:
+            duplicated_edges[
+                (
+                    edge.source.name,
+                    edge.destination.name,
+                    edge.workflow.name,
+                    edge.subtype,
+                )
+            ].append(edge)
+        number_of_corrupted_edges = 0
+        for duplicates in duplicated_edges.values():
+            if len(duplicates) == 1:
+                continue
+            for duplicate in duplicates[1:]:
+                Session.delete(duplicate)
+                number_of_corrupted_edges += 1
+        for edge in edges:
+            services = edge.workflow.services
+            if edge.source not in services or edge.destination not in services:
+                Session.delete(edge)
+                number_of_corrupted_edges += 1
+        return number_of_corrupted_edges
+
     def delete_edge(self, workflow_id, edge_id):
         delete("workflow_edge", id=edge_id)
         now = self.get_time()

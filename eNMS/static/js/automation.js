@@ -558,9 +558,19 @@ export function loadServiceTypes() {
   $("#service-type").selectpicker("refresh");
 }
 
+export function deleteCorruptedEdges() {
+  call({
+    url: "/delete_corrupted_edges",
+    callback: function(number) {
+      notify(`${number} Corrupted edges successfully deleted.`, "success", 5);
+    },
+  });
+}
+
 configureNamespace("automation", [
   compare,
   copyClipboard,
+  deleteCorruptedEdges,
   displayCalendar,
   exportService,
   field,

@@ -85,6 +85,9 @@ name of the iteration step in the results.
 - Fix filtering per result type (success / failure) in result table
 - Fix retry numbering
 - Add Search REST endpoint
+- Add context sensitive help mechanism
+- Add keyword so that the "log" function in a service can log to the application log (+ create log object)
+- Add timestamp for session logs
 
 MIGRATION:
 All iteration variable became GLOBAL VARIABLE, which means that you need to use

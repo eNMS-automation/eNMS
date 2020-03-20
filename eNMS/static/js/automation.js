@@ -332,14 +332,14 @@ function displayResultsTree(service, runtime) {
           default: function(el, node) {
             if (!node) return;
             const data = JSON.stringify(node.data.properties);
-            console.log(node.data)
             let progressSummary;
             if (node.data.progress) {
               progressSummary = `
-                <div style="position: absolute; top: 0px; right: 200px">
+                <div style="position: absolute; top: 0px; right: 160px">
                   <span style="color: #32cd32">
                     ${node.data.progress.success} passed
-                  </span> -
+                  </span>
+                  <span style="color: #000000">-</span>
                   <span style="color: #FF6666">
                     ${node.data.progress.failure} failed
                   </span>

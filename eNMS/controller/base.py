@@ -11,7 +11,7 @@ from git import Repo
 from importlib import import_module
 from importlib.util import module_from_spec, spec_from_file_location
 from json import load
-from logging import basicConfig, error, info, StreamHandler
+from logging import basicConfig, getLogger, error, info, root, StreamHandler
 from logging.handlers import RotatingFileHandler
 from os import environ, scandir
 from os.path import exists
@@ -174,7 +174,7 @@ class BaseController:
             )
 
     def init_logs(self):
-        log_level = self.settings["app"]["log_level"].upper()
+        log_level = self.settings["logging"]["log_level"].upper()
         folder = self.path / "logs"
         folder.mkdir(parents=True, exist_ok=True)
         basicConfig(
@@ -188,6 +188,10 @@ class BaseController:
                 StreamHandler(),
             ],
         )
+        for logger, log_level in self.settings["logging"]["loggers"].items():
+            info(f"Changing {logger} log level to '{log_level}'")
+            log_level = getattr(import_module("logging"), log_level.upper())
+            getLogger(logger).setLevel(log_level)
 
     def init_connection_pools(self):
         self.request_session = RequestSession()

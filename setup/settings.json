@@ -4,8 +4,14 @@
     "config_mode": "debug",
     "create_examples": true,
     "documentation_url": "https://enms.readthedocs.io/en/latest/",
-    "log_level": "debug",
     "git_repository": "git@github.com:afourmy/gitpython-test.git"
+  },
+  "logging": {
+    "log_level": "debug",
+    "loggers": {
+      "requests": "info",
+      "urllib3": "info"
+    }
   },
   "security": {
     "hash_user_passwords": true

@@ -38,10 +38,19 @@ defined in eNMS/static/lib/codemirror/logsMode. Can be customized.
 - Dont display Start / End services in service table
 - Make configuration search case-insensitive for inclusion ("Search" REST endpoint + UI)
 - Use log level of top-level workflow for all services.
+- Add context sensitive help mechanism
+- Add keyword so that the "log" function in a service can log to the application log (+ create log object)
+- Add timestamp for session logs
+- Add device result counter in result tree window
+- Move to optional_requirements file and catch import error of all optional libraries:
+ansible, hvac, ldap3, pyats, pynetbox, slackclient>=1.3,<2, tacacs_plus
+- In settings.json, new "logs" section to configure the log level of the application,
+as well as the log level of all loggers.
 
 MIGRATION:
 In pools, "never_update" -> "manually_defined"
 Remove ALL payload validation service, no longer needed.
+In settings.json, the log level is no longer in the "section" but in a dedicated "logging" section.
 
 CUSTOM SERVICES FILE MIGRATION:
 Fields are no longer imported from wtforms. All of them are now imported from eNMS.forms.fields
@@ -85,12 +94,6 @@ name of the iteration step in the results.
 - Fix filtering per result type (success / failure) in result table
 - Fix retry numbering
 - Add Search REST endpoint
-- Add context sensitive help mechanism
-- Add keyword so that the "log" function in a service can log to the application log (+ create log object)
-- Add timestamp for session logs
-- Add device result counter in result tree window
-- Move to optional_requirements file and catch import error of all optional libraries:
-ansible, hvac, ldap3, pyats, pynetbox, slackclient>=1.3,<2, tacacs_plus
 
 MIGRATION:
 All iteration variable became GLOBAL VARIABLE, which means that you need to use

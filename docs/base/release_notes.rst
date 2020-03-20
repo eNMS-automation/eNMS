@@ -46,11 +46,14 @@ defined in eNMS/static/lib/codemirror/logsMode. Can be customized.
 ansible, hvac, ldap3, pyats, pynetbox, slackclient>=1.3,<2, tacacs_plus
 - In settings.json, new "logs" section to configure the log level of the application,
 as well as the log level of all loggers.
+Besides, the security logs (opening/closing netmiko/napalm connections, sending commands) are configured from there,
+including using a syslog handler with custom address facility.
 
 MIGRATION:
 In pools, "never_update" -> "manually_defined"
 Remove ALL payload validation service, no longer needed.
 In settings.json, the log level is no longer in the "section" but in a dedicated "logging" section.
+In settings.json, configure Syslog Handler (Security logs).
 
 CUSTOM SERVICES FILE MIGRATION:
 Fields are no longer imported from wtforms. All of them are now imported from eNMS.forms.fields

@@ -11,7 +11,7 @@ from git import Repo
 from importlib import import_module
 from importlib.util import module_from_spec, spec_from_file_location
 from json import load
-from logging import basicConfig, critical, error, info, StreamHandler, warning
+from logging import basicConfig, error, info, StreamHandler
 from logging.handlers import RotatingFileHandler
 from os import environ, scandir
 from os.path import exists
@@ -62,13 +62,6 @@ from eNMS.setup import settings, properties, rbac
 class BaseController:
 
     log_levels = ["info", "warning", "error", "critical"]
-
-    log_severity = {
-        "critical": critical,
-        "error": error,
-        "info": info,
-        "warning": warning,
-    }
 
     json_endpoints = [
         "multiselect_filtering",
@@ -312,7 +305,7 @@ class BaseController:
                 "user": getattr(current_user, "name", "admin"),
             },
         )
-        self.log_severity[severity](content)
+        getattr(import_module("logging"), severity)(content)
 
     def count_models(self):
         return {

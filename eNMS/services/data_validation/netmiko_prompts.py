@@ -42,7 +42,7 @@ class NetmikoPromptsService(ConnectionService):
                 break
             command = run.sub(send_string, locals())
             commands.append(command)
-            run.log("info", f"Sending '{command}' with Netmiko", device)
+            run.log("info", f"Sending '{command}' with Netmiko", device, security=True)
             confirmation = run.sub(expect_string, locals())
             try:
                 result = netmiko_connection.send_command_timing(

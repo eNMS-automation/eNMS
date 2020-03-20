@@ -6,7 +6,7 @@ from functools import partial
 from io import BytesIO
 from json import dumps, loads
 from json.decoder import JSONDecodeError
-from logging import warning
+from logging import getLogger, warning
 from multiprocessing.pool import ThreadPool
 from napalm import get_network_driver
 from netmiko import ConnectHandler
@@ -708,16 +708,18 @@ class Run(AbstractBase):
             Session.commit()
         return results
 
-    def log(self, severity, content, device=None, app_log=False):
+    def log(self, severity, content, device=None, app_log=False, security=False):
         log_level = int(self.original.log_level)
         if not log_level or severity not in app.log_levels[log_level - 1 :]:
             return
-        log = f"{app.get_time()} - {severity} - SERVICE {self.service.scoped_name}"
+        log = f"{app.get_time()} - USER {self.creator} - {severity} - SERVICE {self.service.scoped_name}"
         if device:
             log += f" - DEVICE {device if isinstance(device, str) else device.name}"
         log += f" : {content}"
         if app_log:
-            app.log(severity, content)
+            app.log(severity, log)
+        if security:
+            getattr(getLogger("security"), severity)(log)
         app.run_logs[self.parent_runtime][self.service_id].append(log)
 
     def build_notification(self, results):

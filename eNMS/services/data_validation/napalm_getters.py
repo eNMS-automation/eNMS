@@ -22,7 +22,7 @@ class NapalmGettersService(ConnectionService):
 
     def job(self, run, payload, device):
         napalm_connection, result = run.napalm_connection(device), {}
-        run.log("info", f"Fetching NAPALM getters ({', '.join(run.getters)})", device)
+        run.log("info", f"Fetching NAPALM getters ({', '.join(run.getters)})", device, security=True)
         for getter in run.getters:
             try:
                 result[getter] = getattr(napalm_connection, getter)()

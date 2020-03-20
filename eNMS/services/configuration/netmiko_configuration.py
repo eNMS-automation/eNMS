@@ -33,7 +33,7 @@ class NetmikoConfigurationService(ConnectionService):
     def job(self, run, payload, device):
         netmiko_connection = run.netmiko_connection(device)
         config = run.sub(run.content, locals())
-        run.log("info", "Pushing Configuration with Netmiko", device)
+        run.log("info", "Pushing Configuration with Netmiko", device, security=True)
         netmiko_connection.send_config_set(
             config.splitlines(),
             delay_factor=run.delay_factor,

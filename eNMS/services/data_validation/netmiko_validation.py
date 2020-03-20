@@ -34,10 +34,7 @@ class NetmikoValidationService(ConnectionService):
         netmiko_connection = run.netmiko_connection(device)
         command = run.sub(run.command, locals())
         run.log(
-            "info",
-            f"USER {run.creator} sending CMD '{command}' with Netmiko",
-            device,
-            security=True,
+            "info", f"sending CMD '{command}' with Netmiko", device, security=True,
         )
         expect_string = run.sub(run.expect_string, locals())
         netmiko_connection.session_log.truncate(0)

@@ -28,7 +28,7 @@ from xml.parsers.expat import ExpatError
 try:
     from slackclient import SlackClient
 except ImportError as exc:
-    warning(f"Couldn't import slackclient module ({exc})")
+    print(f"Couldn't import slackclient module ({exc})")
 
 from eNMS import app
 from eNMS.database import Session

@@ -17,7 +17,7 @@ from datetime import datetime
 try:
     from ldap3 import Connection, NTLM, SUBTREE
 except ImportError as exc:
-    warning(f"Couldn't import ldap3 module ({exc})")
+    print(f"Couldn't import ldap3 module ({exc})")
 
 from eNMS.controller.base import BaseController
 from eNMS.database import Session

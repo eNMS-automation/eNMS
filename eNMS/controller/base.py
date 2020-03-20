@@ -32,15 +32,15 @@ from uuid import getnode
 try:
     from hvac import Client as VaultClient
 except ImportError as exc:
-    warning(f"Couldn't import hvac module ({exc})")
+    print(f"Couldn't import hvac module ({exc})")
 try:
     from ldap3 import ALL, Server
 except ImportError as exc:
-    warning(f"Couldn't import ldap3 module ({exc})")
+    print(f"Couldn't import ldap3 module ({exc})")
 try:
     from tacacs_plus.client import TACACSClient
 except ImportError as exc:
-    warning(f"Couldn't import tacacs_plus module ({exc})")
+    print(f"Couldn't import tacacs_plus module ({exc})")
 
 from eNMS.database import Base, DIALECT, engine, Session
 from eNMS.database.events import configure_events

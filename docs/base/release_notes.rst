@@ -48,6 +48,7 @@ ansible, hvac, ldap3, pyats, pynetbox, slackclient>=1.3,<2, tacacs_plus
 as well as the log level of all loggers.
 Besides, the security logs (opening/closing netmiko/napalm connections, sending commands) are configured from there,
 including using a syslog handler with custom address facility.
+- Fix Napalm BGP example service
 
 MIGRATION:
 In pools, "never_update" -> "manually_defined"

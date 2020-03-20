@@ -45,16 +45,23 @@ class DataBackupService(ConnectionService):
                         result = sub(r["pattern"], r["replace_with"], result, flags=M)
                 else:
                     result = []
-                    for command_dict in value:
-                        command = command_dict["command"]
-                        title = "*" * len(command)
-                        header = f"\n{' ' * 30}{command.upper()}\n{' ' * 30}{title}"
+                    for cmd_dict in value:
+                        command, prefix = cmd_dict["command"], prefix
+                        if not command:
+                            continue
+                        title = f"CMD '{command.upper()}'"
+                        if prefix:
+                            title += f" [{prefix}]"
+                        header = (
+                            f"\n{' ' * 30}{title}\n"
+                            f"{' ' * 30}{'*' * len(title)}"
+                        )
                         command_result = [f"{header}\n\n"]
                         for line in netmiko_connection.send_command(
                             command
                         ).splitlines():
-                            if command_dict["prefix"]:
-                                line = f"{command_dict['prefix']} - {line}"
+                            if prefix:
+                                line = f"{cmd_dict['prefix']} - {line}"
                             command_result.append(line)
                         result.append("\n".join(command_result))
                     result = f"\n\n".join(result)

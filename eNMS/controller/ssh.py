@@ -1,4 +1,4 @@
-from logging import getLogger, FileHandler
+from logging import getLogger, FileHandler, Formatter
 from paramiko import (
     AUTH_FAILED,
     AUTH_SUCCESSFUL,
@@ -71,8 +71,10 @@ class SshConnection:
         path.mkdir(parents=True, exist_ok=True)
         self.logger = getLogger(hostname)
         if not self.logger.handlers:
-            filehandler = FileHandler(filename=path / f"{hostname}.log")
-            self.logger.addHandler(filehandler)
+            file_handler = FileHandler(filename=path / f"{hostname}.log")
+            formatter = Formatter("%(asctime)s %(levelname)-8s %(message)s")
+            file_handler.setFormatter(formatter)
+            self.logger.addHandler(file_handler)
 
     def start_session(self, session_id, uuid, port):
         self.server = Server(port, uuid)

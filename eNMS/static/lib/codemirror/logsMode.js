@@ -16,6 +16,7 @@ CodeMirror: false
             }
             if (stream.match(/DEVICE.*\s:\s/)) return "comment";
             if (stream.match(/SERVICE.*?\s[-|:]\s/)) return "variable-2";
+            if (stream.match(/USER.*?\s-\s/)) return "keyword";
             if (stream.match(/warning/)) return "keyword";
             if (stream.match(/debug|info/)) return "string";
             if (stream.match(/error|critical/)) return "error";

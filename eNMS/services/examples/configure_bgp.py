@@ -1,6 +1,6 @@
 from sqlalchemy import ForeignKey, Integer
 
-from eNMS.database.dialect import Column, SmallString
+from eNMS.database.dialect import Column, MutableDict, SmallString
 from eNMS.forms.automation import NapalmForm
 from eNMS.forms.fields import HiddenField, IntegerField, StringField
 
@@ -19,7 +19,10 @@ class ConfigureBgpService(ConnectionService):
     neighbor_ip = Column(SmallString)
     remote_as = Column(Integer, default=0)
     vrf_name = Column(SmallString)
+    optional_args = Column(MutableDict)
     driver = "ios"
+    use_device_driver = True
+    timeout = 1
 
     __mapper_args__ = {"polymorphic_identity": "configure_bgp_service"}
 

@@ -2,7 +2,7 @@ from passlib.hash import argon2
 from copy import deepcopy
 from ipaddress import IPv4Network
 from json import loads
-from logging import info, warning
+from logging import info
 from os import listdir, makedirs, remove
 from os.path import exists, getmtime
 from pathlib import Path
@@ -13,11 +13,12 @@ from tarfile import open as open_tar
 from time import ctime
 from traceback import format_exc
 from datetime import datetime
+from warnings import warn
 
 try:
     from ldap3 import Connection, NTLM, SUBTREE
 except ImportError as exc:
-    print(f"Couldn't import ldap3 module ({exc})")
+    warn(f"Couldn't import ldap3 module ({exc})")
 
 from eNMS.controller.base import BaseController
 from eNMS.database import Session

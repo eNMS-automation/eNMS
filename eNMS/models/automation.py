@@ -6,7 +6,7 @@ from functools import partial
 from io import BytesIO
 from json import dumps, loads
 from json.decoder import JSONDecodeError
-from logging import getLogger, warning
+from logging import getLogger
 from multiprocessing.pool import ThreadPool
 from napalm import get_network_driver
 from netmiko import ConnectHandler
@@ -22,13 +22,14 @@ from sqlalchemy.orm import relationship
 from threading import Thread
 from time import sleep
 from traceback import format_exc
+from warnings import warn
 from xmltodict import parse
 from xml.parsers.expat import ExpatError
 
 try:
     from slackclient import SlackClient
 except ImportError as exc:
-    print(f"Couldn't import slackclient module ({exc})")
+    warn(f"Couldn't import slackclient module ({exc})")
 
 from eNMS import app
 from eNMS.database import Session

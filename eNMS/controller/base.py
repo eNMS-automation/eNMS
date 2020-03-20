@@ -11,7 +11,7 @@ from git import Repo
 from importlib import import_module
 from importlib.util import module_from_spec, spec_from_file_location
 from json import load
-from logging import basicConfig, getLogger, error, info, root, StreamHandler
+from logging import basicConfig, getLogger, error, info, StreamHandler
 from logging.handlers import RotatingFileHandler, SysLogHandler
 from os import environ, scandir
 from os.path import exists
@@ -28,19 +28,20 @@ from sqlalchemy.exc import IntegrityError, InvalidRequestError
 from sqlalchemy.orm import configure_mappers
 from sys import path as sys_path
 from uuid import getnode
+from warnings import warn
 
 try:
     from hvac import Client as VaultClient
 except ImportError as exc:
-    print(f"Couldn't import hvac module ({exc})")
+    warn(f"Couldn't import hvac module ({exc})")
 try:
     from ldap3 import ALL, Server
 except ImportError as exc:
-    print(f"Couldn't import ldap3 module ({exc})")
+    warn(f"Couldn't import ldap3 module ({exc})")
 try:
     from tacacs_plus.client import TACACSClient
 except ImportError as exc:
-    print(f"Couldn't import tacacs_plus module ({exc})")
+    warn(f"Couldn't import tacacs_plus module ({exc})")
 
 from eNMS.database import Base, DIALECT, engine, Session
 from eNMS.database.events import configure_events

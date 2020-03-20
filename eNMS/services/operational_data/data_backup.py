@@ -53,8 +53,7 @@ class DataBackupService(ConnectionService):
                         if prefix:
                             title += f" [{prefix}]"
                         header = (
-                            f"\n{' ' * 30}{title}\n"
-                            f"{' ' * 30}{'*' * len(title)}"
+                            f"\n{' ' * 30}{title}\n" f"{' ' * 30}{'*' * len(title)}"
                         )
                         command_result = [f"{header}\n\n"]
                         for line in netmiko_connection.send_command(

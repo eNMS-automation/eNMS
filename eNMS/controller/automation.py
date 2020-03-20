@@ -302,7 +302,7 @@ class AutomationController(BaseController):
     def get_workflow_results(self, workflow, runtime):
         state = fetch("run", parent_runtime=runtime).result().result["state"]
 
-        def rec(service):
+        def rec(service, path=None):
             runs = fetch(
                 "run",
                 parent_runtime=runtime,
@@ -312,7 +312,11 @@ class AutomationController(BaseController):
             )
             if service.scoped_name in ("Start", "End") or not runs:
                 return
-            progress = state["services"][service.id].get("progress")
+            if not path:
+                path = str(service.id)
+                progress = state["progress"]
+            else:
+                progress = state["services"][path].get("progress")
             track_progress = progress and progress["device"]["total"]
             data = {"progress": progress["device"]} if track_progress else {}
             color = "32CD32" if all(run.success for run in runs) else "FF6666"
@@ -324,7 +328,7 @@ class AutomationController(BaseController):
             }
             if service.type == "workflow":
                 children = sorted(
-                    filter(None, (rec(child) for child in service.services)),
+                    filter(None, (rec(child, f"{path}>{child.id}") for child in service.services)),
                     key=itemgetter("runtime"),
                 )
                 return {"children": children, **result}

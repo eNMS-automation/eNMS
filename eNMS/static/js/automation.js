@@ -332,6 +332,7 @@ function displayResultsTree(service, runtime) {
           default: function(el, node) {
             if (!node) return;
             const data = JSON.stringify(node.data.properties);
+            console.log(node.data)
             let progressSummary;
             if (node.data.progress) {
               progressSummary = `

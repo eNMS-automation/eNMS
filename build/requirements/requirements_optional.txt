@@ -1,2 +1,7 @@
 ansible
+hvac
+ldap3
 pyats
+pynetbox
+slackclient>=1.3,<2
+tacacs_plus

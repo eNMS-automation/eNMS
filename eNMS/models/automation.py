@@ -6,6 +6,7 @@ from functools import partial
 from io import BytesIO
 from json import dumps, loads
 from json.decoder import JSONDecodeError
+from logging import warning
 from multiprocessing.pool import ThreadPool
 from napalm import get_network_driver
 from netmiko import ConnectHandler
@@ -15,7 +16,6 @@ from ruamel import yaml
 from re import compile, search
 from requests import post
 from scp import SCPClient
-from slackclient import SlackClient
 from sqlalchemy import Boolean, ForeignKey, Integer, or_
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.orm import relationship
@@ -24,6 +24,11 @@ from time import sleep
 from traceback import format_exc
 from xmltodict import parse
 from xml.parsers.expat import ExpatError
+
+try:
+    from slackclient import SlackClient
+except ImportError as exc:
+    warning(f"Couldn't import slackclient module ({exc})")
 
 from eNMS import app
 from eNMS.database import Session

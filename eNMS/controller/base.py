@@ -8,11 +8,9 @@ from email.mime.text import MIMEText
 from email.utils import formatdate
 from flask_login import current_user
 from git import Repo
-from hvac import Client as VaultClient
 from importlib import import_module
 from importlib.util import module_from_spec, spec_from_file_location
 from json import load
-from ldap3 import ALL, Server
 from logging import basicConfig, critical, error, info, StreamHandler, warning
 from logging.handlers import RotatingFileHandler
 from os import environ, scandir
@@ -29,8 +27,20 @@ from sqlalchemy import and_, func, or_
 from sqlalchemy.exc import IntegrityError, InvalidRequestError
 from sqlalchemy.orm import configure_mappers
 from sys import path as sys_path
-from tacacs_plus.client import TACACSClient
 from uuid import getnode
+
+try:
+    from hvac import Client as VaultClient
+except ImportError as exc:
+    warning(f"Couldn't import hvac module ({exc})")
+try:
+    from ldap3 import ALL, Server
+except ImportError as exc:
+    warning(f"Couldn't import ldap3 module ({exc})")
+try:
+    from tacacs_plus.client import TACACSClient
+except ImportError as exc:
+    warning(f"Couldn't import tacacs_plus module ({exc})")
 
 from eNMS.database import Base, DIALECT, engine, Session
 from eNMS.database.events import configure_events

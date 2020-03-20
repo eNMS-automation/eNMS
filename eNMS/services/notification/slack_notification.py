@@ -1,7 +1,12 @@
+from logging import warning
 from os import environ
-from slackclient import SlackClient
 from sqlalchemy import ForeignKey, Integer
 from wtforms.widgets import TextArea
+
+try:
+    from slackclient import SlackClient
+except ImportError as exc:
+    warning(f"Couldn't import slackclient module ({exc})")
 
 from eNMS import app
 from eNMS.database.dialect import Column, LargeString, SmallString

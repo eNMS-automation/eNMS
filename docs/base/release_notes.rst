@@ -88,6 +88,9 @@ name of the iteration step in the results.
 - Add context sensitive help mechanism
 - Add keyword so that the "log" function in a service can log to the application log (+ create log object)
 - Add timestamp for session logs
+- Add device result counter in result tree window
+- Move to optional_requirements file and catch import error of all optional libraries:
+ansible, hvac, ldap3, pyats, pynetbox, slackclient>=1.3,<2, tacacs_plus
 
 MIGRATION:
 All iteration variable became GLOBAL VARIABLE, which means that you need to use

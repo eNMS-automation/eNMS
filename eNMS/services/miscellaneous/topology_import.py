@@ -1,6 +1,11 @@
-from pynetbox import api as netbox_api
+from logging import warning
 from requests import get as http_get
 from sqlalchemy import ForeignKey, Integer
+
+try:
+    from pynetbox import api as netbox_api
+except ImportError as exc:
+    warning(f"Couldn't import pynetbox module ({exc})")
 
 from eNMS.database.dialect import Column, SmallString
 from eNMS.database.functions import factory

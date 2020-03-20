@@ -46,7 +46,7 @@ class DataBackupService(ConnectionService):
                 else:
                     result = []
                     for cmd_dict in value:
-                        command, prefix = cmd_dict["command"], prefix
+                        command, prefix = cmd_dict["command"], cmd_dict["prefix"]
                         if not command:
                             continue
                         title = f"CMD '{command.upper()}'"
@@ -61,7 +61,7 @@ class DataBackupService(ConnectionService):
                             command
                         ).splitlines():
                             if prefix:
-                                line = f"{cmd_dict['prefix']} - {line}"
+                                line = f"{prefix} - {line}"
                             command_result.append(line)
                         result.append("\n".join(command_result))
                     result = f"\n\n".join(result)

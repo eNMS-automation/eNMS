@@ -328,7 +328,13 @@ class AutomationController(BaseController):
             }
             if service.type == "workflow":
                 children = sorted(
-                    filter(None, (rec(child, f"{path}>{child.id}") for child in service.services)),
+                    filter(
+                        None,
+                        (
+                            rec(child, f"{path}>{child.id}")
+                            for child in service.services
+                        ),
+                    ),
                     key=itemgetter("runtime"),
                 )
                 return {"children": children, **result}

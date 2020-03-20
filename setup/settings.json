@@ -11,6 +11,11 @@
     "loggers": {
       "requests": "info",
       "urllib3": "info"
+    },
+    "security": {
+      "syslog": false,
+      "address": "/dev/log",
+      "facility": "local0"
     }
   },
   "security": {

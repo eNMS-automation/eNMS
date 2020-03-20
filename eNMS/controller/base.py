@@ -12,7 +12,7 @@ from importlib import import_module
 from importlib.util import module_from_spec, spec_from_file_location
 from json import load
 from logging import basicConfig, getLogger, error, info, root, StreamHandler
-from logging.handlers import RotatingFileHandler
+from logging.handlers import RotatingFileHandler, SysLogHandler
 from os import environ, scandir
 from os.path import exists
 from pathlib import Path
@@ -177,14 +177,13 @@ class BaseController:
         log_level = self.settings["logging"]["log_level"].upper()
         folder = self.path / "logs"
         folder.mkdir(parents=True, exist_ok=True)
+        rotation_settings = {"maxBytes": 20_000_000, "backupCount": 10}
         basicConfig(
             level=getattr(import_module("logging"), log_level),
             format="%(asctime)s %(levelname)-8s %(message)s",
             datefmt="%m-%d-%Y %H:%M:%S",
             handlers=[
-                RotatingFileHandler(
-                    folder / "enms.log", maxBytes=20_000_000, backupCount=10
-                ),
+                RotatingFileHandler(folder / "enms.log", **rotation_settings),
                 StreamHandler(),
             ],
         )
@@ -192,6 +191,13 @@ class BaseController:
             info(f"Changing {logger} log level to '{log_level}'")
             log_level = getattr(import_module("logging"), log_level.upper())
             getLogger(logger).setLevel(log_level)
+        secure_logger = getLogger("security")
+        security = self.settings["logging"]["security"]
+        secure_logger.addHandler(
+            SysLogHandler(address=security["address"], facility=security["facility"])
+            if security["syslog"]
+            else RotatingFileHandler(folder / "security.log", **rotation_settings)
+        )
 
     def init_connection_pools(self):
         self.request_session = RequestSession()

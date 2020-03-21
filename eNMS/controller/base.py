@@ -54,7 +54,6 @@ from eNMS.database.functions import (
 )
 from eNMS.models import models, model_properties, relationships
 from eNMS.database.properties import private_properties, property_names
-from eNMS.database.properties import import_classes
 from eNMS.controller.syslog import SyslogServer
 from eNMS.setup import settings, properties, rbac
 
@@ -111,12 +110,12 @@ class BaseController:
             db.session.commit()
             if self.settings["app"]["create_examples"]:
                 self.migration_import(
-                    name="examples", import_export_types=import_classes
+                    name="examples", import_export_types=db.import_classes
                 )
                 self.update_credentials()
             else:
                 self.migration_import(
-                    name="default", import_export_types=import_classes
+                    name="default", import_export_types=db.import_classes
                 )
             self.get_git_content()
             db.session.commit()

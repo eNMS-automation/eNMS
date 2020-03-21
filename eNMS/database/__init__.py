@@ -22,13 +22,58 @@ from eNMS.setup import settings
 
 
 class Database:
+
+    dont_migrate = {
+        "device": [
+            "id",
+            "configuration",
+            "operational_data",
+            "services",
+            "source",
+            "destination",
+            "pools",
+        ],
+        "link": ["id", "pools"],
+        "pool": ["id", "services"],
+        "service": [
+            "id",
+            "sources",
+            "destinations",
+            "status",
+            "tasks",
+            "workflows",
+            "tasks",
+            "edges",
+        ],
+        "task": [
+            "id",
+            "service_name",
+            "next_run_time",
+            "is_active",
+            "time_before_next_run",
+            "status",
+        ],
+        "user": ["id", "pools"],
+        "workflow_edge": ["id", "source_id", "destination_id", "workflow_id"],
+    }
+
+    import_classes = [
+        "user",
+        "device",
+        "link",
+        "pool",
+        "service",
+        "workflow_edge",
+        "task",
+    ]
+
+    dont_serialize = {"device": ["configuration", "operational_data"]}
+
     def __init__(self):
         self.database_url = settings["database"]["url"]
         self.dialect = self.database_url.split(":")[0]
         self.engine = self.configure_engine()
-        self.session = scoped_session(
-            sessionmaker(autoflush=False, bind=self.engine)
-        )
+        self.session = scoped_session(sessionmaker(autoflush=False, bind=self.engine))
         self.base = declarative_base()
         self.configure_associations()
         self.configure_events()

@@ -4,8 +4,7 @@ from eNMS import app
 from eNMS.database import db
 from eNMS.database.functions import factory, fetch, objectify
 from eNMS.models import model_properties, property_types, relationships
-from eNMS.database.properties import dont_serialize, private_properties
-from eNMS.database.properties import dont_migrate
+from eNMS.database.properties import private_properties
 
 
 class AbstractBase(db.base):
@@ -75,14 +74,14 @@ class AbstractBase(db.base):
 
     def get_properties(self, export=False, exclude=None, include=None):
         result = {}
-        no_migrate = dont_migrate.get(self.type, dont_migrate["service"])
+        no_migrate = db.dont_migrate.get(self.type, db.dont_migrate["service"])
         properties = list(model_properties[self.type])
         if not export:
             properties.extend(getattr(self, "model_properties", []))
         for property in properties:
             if not hasattr(self, property):
                 continue
-            if property in dont_serialize.get(self.type, []):
+            if property in db.dont_serialize.get(self.type, []):
                 continue
             if property in private_properties:
                 continue
@@ -117,7 +116,7 @@ class AbstractBase(db.base):
         self, export=False, relation_names_only=False, exclude=None, include=None
     ):
         properties = self.get_properties(export, exclude=exclude)
-        no_migrate = dont_migrate.get(self.type, dont_migrate["service"])
+        no_migrate = db.dont_migrate.get(self.type, db.dont_migrate["service"])
         for property, relation in relationships[self.type].items():
             if include and property not in include or exclude and property in exclude:
                 continue

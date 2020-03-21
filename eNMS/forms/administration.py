@@ -2,6 +2,7 @@ from wtforms.validators import InputRequired
 from wtforms.widgets import TextArea
 
 from eNMS import app
+from eNMS.database import db
 from eNMS.forms import BaseForm, configure_relationships, set_custom_properties
 from eNMS.forms.fields import (
     BooleanField,
@@ -12,7 +13,6 @@ from eNMS.forms.fields import (
     SelectField,
     SelectMultipleField,
 )
-from eNMS.database.properties import import_classes
 
 
 class SettingsForm(BaseForm):
@@ -39,7 +39,7 @@ class UploadFilesForm(BaseForm):
 class DatabaseDeletionForm(BaseForm):
     action = "eNMS.administration.databaseDeletion"
     form_type = HiddenField(default="database_deletion")
-    deletion_choices = [(p, p) for p in import_classes]
+    deletion_choices = [(p, p) for p in db.import_classes]
     deletion_types = SelectMultipleField(
         "Instances to delete", choices=deletion_choices
     )
@@ -80,7 +80,7 @@ class DatabaseMigrationsForm(BaseForm):
     skip_update_pools_after_import = BooleanField(
         "Skip the Pool update after Import", default="checked"
     )
-    export_choices = [(p, p) for p in import_classes]
+    export_choices = [(p, p) for p in db.import_classes]
     import_export_types = SelectMultipleField(
         "Instances to migrate", choices=export_choices
     )

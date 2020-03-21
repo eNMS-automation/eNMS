@@ -1,1 +1,1 @@
-from eNMS.framework import web_app as app
+from eNMS.web_app import web_app as app

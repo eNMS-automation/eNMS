@@ -1,6 +1,5 @@
 from eNMS import app
 from eNMS.database import db
-from eNMS.database.functions import factory, fetch, objectify
 from eNMS.models import model_properties, property_types, relationships
 
 
@@ -59,9 +58,9 @@ class AbstractBase(db.base):
             property_type = property_types.get(property, None)
             if property in relation:
                 if relation[property]["list"]:
-                    value = objectify(relation[property]["model"], value)
+                    value = db.objectify(relation[property]["model"], value)
                 else:
-                    value = fetch(relation[property]["model"], id=value)
+                    value = db.fetch(relation[property]["model"], id=value)
             if property_type == "bool":
                 value = value not in (False, "false")
             setattr(self, property, value)
@@ -106,7 +105,7 @@ class AbstractBase(db.base):
         properties = {
             k: v for (k, v) in self.get_properties().items() if k not in ("id", "name")
         }
-        instance = factory(self.type, **{**properties, **kwargs})
+        instance = db.factory(self.type, **{**properties, **kwargs})
         return instance
 
     def to_dict(

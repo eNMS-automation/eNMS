@@ -1,5 +1,5 @@
 from eNMS import app
-from eNMS.database.functions import fetch, fetch_all
+from eNMS.database import db
 
 from tests.conftest import check_pages
 
@@ -34,7 +34,7 @@ def test_user_management(user_client):
             "password": user,
         }
         user_client.post("/update/user", data=dict_user)
-    assert len(fetch_all("user")) == 4
-    user1 = fetch("user", name="user1")
+    assert len(db.fetch_all("user")) == 4
+    user1 = db.fetch("user", name="user1")
     user_client.post("/delete_instance/user/{}".format(user1.id))
-    assert len(fetch_all("user")) == 3
+    assert len(db.fetch_all("user")) == 3

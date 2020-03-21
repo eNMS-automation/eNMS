@@ -17,7 +17,6 @@ from threading import Event, Thread
 from time import sleep
 
 from eNMS.database import db
-from eNMS.database.functions import fetch
 
 
 class Client(SSHClient):
@@ -82,7 +81,7 @@ class SshConnection:
         Thread(target=self.send_data).start()
 
     def receive_data(self, session_id):
-        log, session = "", fetch("session", id=session_id)
+        log, session = "", db.fetch("session", id=session_id)
         while not self.client.shell.closed:
             response = self.client.shell.recv(1024)
             if not response:

@@ -4,7 +4,6 @@ from sqlalchemy.orm import backref, relationship
 
 from eNMS.database import db
 from eNMS.models.base import AbstractBase
-from eNMS.database.functions import delete, factory, fetch
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import BooleanField, HiddenField, SelectField
 from eNMS.models.automation import Service
@@ -28,8 +27,8 @@ class Workflow(Service):
     __mapper_args__ = {"polymorphic_identity": "workflow"}
 
     def __init__(self, **kwargs):
-        start = fetch("service", scoped_name="Start")
-        end = fetch("service", scoped_name="End")
+        start = db.fetch("service", scoped_name="Start")
+        end = db.fetch("service", scoped_name="End")
         self.services.extend([start, end])
         super().__init__(**kwargs)
         if self.name not in end.positions:
@@ -68,7 +67,7 @@ class Workflow(Service):
         db.session.commit()
         for edge in self.edges:
             clone.edges.append(
-                factory(
+                db.factory(
                     "workflow_edge",
                     **{
                         "workflow": clone.id,
@@ -101,9 +100,9 @@ class Workflow(Service):
 
     def tracking_bfs(self, run, payload):
         number_of_runs = defaultdict(int)
-        start = fetch("service", scoped_name="Start")
-        end = fetch("service", scoped_name="End")
-        services = [fetch("service", id=id) for id in run.start_services]
+        start = db.fetch("service", scoped_name="Start")
+        end = db.fetch("service", scoped_name="End")
+        services = [db.fetch("service", id=id) for id in run.start_services]
         visited, success, targets = set(), False, defaultdict(set)
         restart_run = run.restart_run
         for service in services:
@@ -130,7 +129,7 @@ class Workflow(Service):
             else:
                 kwargs = {
                     "devices": [
-                        fetch("device", name=name).id for name in targets[service.name]
+                        db.fetch("device", name=name).id for name in targets[service.name]
                     ],
                     "service": service.id,
                     "workflow": self.id,
@@ -140,7 +139,7 @@ class Workflow(Service):
                 }
                 if run.parent_device_id:
                     kwargs["parent_device"] = run.parent_device_id
-                service_run = factory("run", **kwargs)
+                service_run = db.factory("run", **kwargs)
                 results = service_run.run(payload)
             if service.run_method in ("once", "per_service_with_service_targets"):
                 edge_type = "success" if results["success"] else "failure"
@@ -177,9 +176,9 @@ class Workflow(Service):
 
     def standard_bfs(self, run, payload, device=None):
         number_of_runs = defaultdict(int)
-        start = fetch("service", scoped_name="Start")
-        end = fetch("service", scoped_name="End")
-        services = [fetch("service", id=id) for id in run.start_services]
+        start = db.fetch("service", scoped_name="Start")
+        end = db.fetch("service", scoped_name="End")
+        services = [db.fetch("service", id=id) for id in run.start_services]
         restart_run = run.restart_run
         visited = set()
         while services:
@@ -207,7 +206,7 @@ class Workflow(Service):
                     kwargs["parent_device"] = run.parent_device_id
                 if device:
                     kwargs["devices"] = [device.id]
-                service_run = factory("run", **kwargs)
+                service_run = db.factory("run", **kwargs)
                 results = service_run.run(payload)
             if not device:
                 status = "success" if results["success"] else "failure"

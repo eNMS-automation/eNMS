@@ -34,84 +34,76 @@ except ImportError as exc:
 from eNMS import app
 from eNMS.database import db
 from eNMS.models.base import AbstractBase
-from eNMS.database.dialect import (
-    Column,
-    LargeString,
-    MutableDict,
-    MutableList,
-    SmallString,
-)
-from eNMS.database.functions import factory, fetch, set_custom_properties
 from eNMS.models import models
 from eNMS.models.inventory import Device  # noqa: F401
 from eNMS.models.scheduling import Task  # noqa: F401
 from eNMS.models.administration import User  # noqa: F401
 
 
-@set_custom_properties
+@db.set_custom_properties
 class Service(AbstractBase):
 
     __tablename__ = "service"
-    type = Column(SmallString)
+    type = db.Column(db.SmallString)
     __mapper_args__ = {"polymorphic_identity": "service", "polymorphic_on": type}
-    id = Column(Integer, primary_key=True)
-    name = Column(SmallString, unique=True)
-    shared = Column(Boolean, default=False)
-    scoped_name = Column(SmallString)
-    last_modified = Column(SmallString, info={"dont_track_changes": True})
-    description = Column(SmallString)
-    number_of_retries = Column(Integer, default=0)
-    time_between_retries = Column(Integer, default=10)
-    max_number_of_retries = Column(Integer, default=100)
-    positions = Column(MutableDict, info={"dont_track_changes": True})
+    id = db.Column(Integer, primary_key=True)
+    name = db.Column(db.SmallString, unique=True)
+    shared = db.Column(Boolean, default=False)
+    scoped_name = db.Column(db.SmallString)
+    last_modified = db.Column(db.SmallString, info={"dont_track_changes": True})
+    description = db.Column(db.SmallString)
+    number_of_retries = db.Column(Integer, default=0)
+    time_between_retries = db.Column(Integer, default=10)
+    max_number_of_retries = db.Column(Integer, default=100)
+    positions = db.Column(db.Dict, info={"dont_track_changes": True})
     tasks = relationship("Task", back_populates="service", cascade="all,delete")
     events = relationship("Event", back_populates="service", cascade="all,delete")
-    vendor = Column(SmallString)
-    operating_system = Column(SmallString)
-    waiting_time = Column(Integer, default=0)
-    creator = Column(SmallString, default="admin")
+    vendor = db.Column(db.SmallString)
+    operating_system = db.Column(db.SmallString)
+    waiting_time = db.Column(Integer, default=0)
+    creator = db.Column(db.SmallString, default="admin")
     workflows = relationship(
         "Workflow", secondary=db.service_workflow_table, back_populates="services"
     )
-    device_query = Column(LargeString)
-    device_query_property = Column(SmallString, default="ip_address")
+    device_query = db.Column(db.LargeString)
+    device_query_property = db.Column(db.SmallString, default="ip_address")
     devices = relationship(
         "Device", secondary=db.service_device_table, back_populates="services"
     )
     pools = relationship(
         "Pool", secondary=db.service_pool_table, back_populates="services"
     )
-    update_pools = Column(Boolean, default=False)
-    send_notification = Column(Boolean, default=False)
-    send_notification_method = Column(SmallString, default="mail")
-    notification_header = Column(LargeString, default="")
-    display_only_failed_nodes = Column(Boolean, default=True)
-    include_device_results = Column(Boolean, default=True)
-    include_link_in_summary = Column(Boolean, default=True)
-    mail_recipient = Column(SmallString)
-    initial_payload = Column(MutableDict)
-    skip = Column(Boolean, default=False)
-    skip_query = Column(LargeString)
-    skip_value = Column(SmallString, default="True")
-    iteration_values = Column(LargeString)
-    iteration_variable_name = Column(SmallString, default="iteration_value")
-    iteration_devices = Column(LargeString)
-    iteration_devices_property = Column(SmallString, default="ip_address")
-    result_postprocessing = Column(LargeString)
-    log_level = Column(Integer, default=1)
+    update_pools = db.Column(Boolean, default=False)
+    send_notification = db.Column(Boolean, default=False)
+    send_notification_method = db.Column(db.SmallString, default="mail")
+    notification_header = db.Column(db.LargeString, default="")
+    display_only_failed_nodes = db.Column(Boolean, default=True)
+    include_device_results = db.Column(Boolean, default=True)
+    include_link_in_summary = db.Column(Boolean, default=True)
+    mail_recipient = db.Column(db.SmallString)
+    initial_payload = db.Column(db.Dict)
+    skip = db.Column(Boolean, default=False)
+    skip_query = db.Column(db.LargeString)
+    skip_value = db.Column(db.SmallString, default="True")
+    iteration_values = db.Column(db.LargeString)
+    iteration_variable_name = db.Column(db.SmallString, default="iteration_value")
+    iteration_devices = db.Column(db.LargeString)
+    iteration_devices_property = db.Column(db.SmallString, default="ip_address")
+    result_postprocessing = db.Column(db.LargeString)
+    log_level = db.Column(Integer, default=1)
     runs = relationship("Run", back_populates="service", cascade="all, delete-orphan")
-    maximum_runs = Column(Integer, default=1)
-    multiprocessing = Column(Boolean, default=False)
-    max_processes = Column(Integer, default=5)
-    conversion_method = Column(SmallString, default="none")
-    validation_method = Column(SmallString, default="none")
-    content_match = Column(LargeString, default="")
-    content_match_regex = Column(Boolean, default=False)
-    dict_match = Column(MutableDict)
-    negative_logic = Column(Boolean, default=False)
-    delete_spaces_before_matching = Column(Boolean, default=False)
-    run_method = Column(SmallString, default="per_device")
-    status = Column(SmallString, default="Idle")
+    maximum_runs = db.Column(Integer, default=1)
+    multiprocessing = db.Column(Boolean, default=False)
+    max_processes = db.Column(Integer, default=5)
+    conversion_method = db.Column(db.SmallString, default="none")
+    validation_method = db.Column(db.SmallString, default="none")
+    content_match = db.Column(db.LargeString, default="")
+    content_match_regex = db.Column(Boolean, default=False)
+    dict_match = db.Column(db.Dict)
+    negative_logic = db.Column(Boolean, default=False)
+    delete_spaces_before_matching = db.Column(Boolean, default=False)
+    run_method = db.Column(db.SmallString, default="per_device")
+    status = db.Column(db.SmallString, default="Idle")
 
     def __init__(self, **kwargs):
         kwargs.pop("status", None)
@@ -148,7 +140,7 @@ class Service(AbstractBase):
             number = f" ({i})" if i else ""
             scoped_name = f"{self.scoped_name}{number}"
             name = f"[{workflow.name}] {scoped_name}" if workflow else scoped_name
-            if not fetch("service", allow_none=True, name=name):
+            if not db.fetch("service", allow_none=True, name=name):
                 service = super().duplicate(
                     name=name, scoped_name=scoped_name, shared=False
                 )
@@ -179,13 +171,13 @@ class Service(AbstractBase):
 class ConnectionService(Service):
 
     __tablename__ = "connection_service"
-    id = Column(Integer, ForeignKey("service.id"), primary_key=True)
+    id = db.Column(Integer, ForeignKey("service.id"), primary_key=True)
     parent_type = "service"
-    credentials = Column(SmallString, default="device")
-    custom_username = Column(SmallString)
-    custom_password = Column(SmallString)
-    start_new_connection = Column(Boolean, default=False)
-    close_connection = Column(Boolean, default=False)
+    credentials = db.Column(db.SmallString, default="device")
+    custom_username = db.Column(db.SmallString)
+    custom_password = db.Column(db.SmallString)
+    start_new_connection = db.Column(Boolean, default=False)
+    close_connection = db.Column(Boolean, default=False)
     __mapper_args__ = {"polymorphic_identity": "connection_service"}
 
 
@@ -194,26 +186,26 @@ class Result(AbstractBase):
     __tablename__ = type = "result"
     private = True
     dont_track_changes = True
-    id = Column(Integer, primary_key=True)
-    success = Column(Boolean, default=False)
-    runtime = Column(SmallString)
-    duration = Column(SmallString)
-    result = Column(MutableDict)
-    run_id = Column(Integer, ForeignKey("run.id"))
+    id = db.Column(Integer, primary_key=True)
+    success = db.Column(Boolean, default=False)
+    runtime = db.Column(db.SmallString)
+    duration = db.Column(db.SmallString)
+    result = db.Column(db.Dict)
+    run_id = db.Column(Integer, ForeignKey("run.id"))
     run = relationship("Run", back_populates="results", foreign_keys="Result.run_id")
-    parent_runtime = Column(SmallString)
-    parent_device_id = Column(Integer, ForeignKey("device.id"))
+    parent_runtime = db.Column(db.SmallString)
+    parent_device_id = db.Column(Integer, ForeignKey("device.id"))
     parent_device = relationship("Device", uselist=False, foreign_keys=parent_device_id)
     parent_device_name = association_proxy("parent_device", "name")
-    device_id = Column(Integer, ForeignKey("device.id"))
+    device_id = db.Column(Integer, ForeignKey("device.id"))
     device = relationship("Device", uselist=False, foreign_keys=device_id)
     device_name = association_proxy("device", "name")
-    service_id = Column(Integer, ForeignKey("service.id"))
+    service_id = db.Column(Integer, ForeignKey("service.id"))
     service = relationship("Service", foreign_keys="Result.service_id")
     service_name = association_proxy(
         "service", "scoped_name", info={"name": "service_name"}
     )
-    workflow_id = Column(Integer, ForeignKey("workflow.id", ondelete="cascade"))
+    workflow_id = db.Column(Integer, ForeignKey("workflow.id", ondelete="cascade"))
     workflow = relationship("Workflow", foreign_keys="Result.workflow_id")
     workflow_name = association_proxy(
         "workflow", "scoped_name", info={"name": "workflow_name"}
@@ -247,10 +239,10 @@ class ServiceLog(AbstractBase):
     __tablename__ = type = "service_log"
     private = True
     dont_track_changes = True
-    id = Column(Integer, primary_key=True)
-    content = Column(LargeString)
-    runtime = Column(SmallString)
-    service_id = Column(Integer, ForeignKey("service.id"))
+    id = db.Column(Integer, primary_key=True)
+    content = db.Column(db.LargeString)
+    runtime = db.Column(db.SmallString)
+    service_id = db.Column(Integer, ForeignKey("service.id"))
     service = relationship("Service", foreign_keys="ServiceLog.service_id")
 
 
@@ -258,46 +250,46 @@ class Run(AbstractBase):
 
     __tablename__ = type = "run"
     private = True
-    id = Column(Integer, primary_key=True)
-    restart_path = Column(SmallString)
-    restart_run_id = Column(Integer, ForeignKey("run.id"))
+    id = db.Column(Integer, primary_key=True)
+    restart_path = db.Column(db.SmallString)
+    restart_run_id = db.Column(Integer, ForeignKey("run.id"))
     restart_run = relationship("Run", uselist=False, foreign_keys=restart_run_id)
-    start_services = Column(MutableList)
-    creator = Column(SmallString, default="admin")
-    properties = Column(MutableDict)
-    success = Column(Boolean, default=False)
-    status = Column(SmallString, default="Running")
-    runtime = Column(SmallString)
-    duration = Column(SmallString)
-    trigger = Column(SmallString, default="UI")
-    parent_id = Column(Integer, ForeignKey("run.id"))
+    start_services = db.Column(db.List)
+    creator = db.Column(db.SmallString, default="admin")
+    properties = db.Column(db.Dict)
+    success = db.Column(Boolean, default=False)
+    status = db.Column(db.SmallString, default="Running")
+    runtime = db.Column(db.SmallString)
+    duration = db.Column(db.SmallString)
+    trigger = db.Column(db.SmallString, default="UI")
+    parent_id = db.Column(Integer, ForeignKey("run.id"))
     parent = relationship(
         "Run", remote_side=[id], foreign_keys="Run.parent_id", back_populates="children"
     )
     children = relationship("Run", foreign_keys="Run.parent_id")
-    parent_runtime = Column(SmallString)
-    path = Column(SmallString)
-    parent_device_id = Column(Integer, ForeignKey("device.id"))
+    parent_runtime = db.Column(db.SmallString)
+    path = db.Column(db.SmallString)
+    parent_device_id = db.Column(Integer, ForeignKey("device.id"))
     parent_device = relationship("Device", foreign_keys="Run.parent_device_id")
     devices = relationship(
         "Device", secondary=db.run_device_table, back_populates="runs"
     )
     pools = relationship("Pool", secondary=db.run_pool_table, back_populates="runs")
-    service_id = Column(Integer, ForeignKey("service.id"))
+    service_id = db.Column(Integer, ForeignKey("service.id"))
     service = relationship(
         "Service", back_populates="runs", foreign_keys="Run.service_id"
     )
     service_name = association_proxy(
         "service", "scoped_name", info={"name": "service_name"}
     )
-    workflow_id = Column(Integer, ForeignKey("workflow.id", ondelete="cascade"))
+    workflow_id = db.Column(Integer, ForeignKey("workflow.id", ondelete="cascade"))
     workflow = relationship("Workflow", foreign_keys="Run.workflow_id")
     workflow_name = association_proxy(
         "workflow", "scoped_name", info={"name": "workflow_name"}
     )
-    task_id = Column(Integer, ForeignKey("task.id", ondelete="SET NULL"))
+    task_id = db.Column(Integer, ForeignKey("task.id", ondelete="SET NULL"))
     task = relationship("Task", foreign_keys="Run.task_id")
-    state = Column(MutableDict, info={"dont_track_changes": True})
+    state = db.Column(db.Dict, info={"dont_track_changes": True})
     results = relationship("Result", back_populates="run", cascade="all, delete-orphan")
     model_properties = ["progress", "service_properties"]
 
@@ -320,7 +312,7 @@ class Run(AbstractBase):
                 elif workflow_index < len(path_ids) - 2:
                     self.start_services = [path_ids[workflow_index + 1]]
         if not self.start_services:
-            self.start_services = [fetch("service", scoped_name="Start").id]
+            self.start_services = [db.fetch("service", scoped_name="Start").id]
 
     @classmethod
     def filtering_constraints(cls, **_):
@@ -396,7 +388,7 @@ class Run(AbstractBase):
         if isinstance(values, str):
             values = [values]
         for value in values:
-            device = fetch("device", allow_none=True, **{property: value})
+            device = db.fetch("device", allow_none=True, **{property: value})
             if device:
                 devices.add(device)
             else:
@@ -508,8 +500,8 @@ class Run(AbstractBase):
     @staticmethod
     def get_device_result(args):
         device_id, runtime, payload, results = args
-        device = fetch("device", id=device_id)
-        run = fetch("run", runtime=runtime)
+        device = db.fetch("device", id=device_id)
+        run = db.fetch("run", runtime=runtime)
         results.append(run.get_results(payload, device))
 
     def device_iteration(self, payload, device):
@@ -518,7 +510,7 @@ class Run(AbstractBase):
             self.service.iteration_devices_property,
             **locals(),
         )
-        derived_run = factory(
+        derived_run = db.factory(
             "run",
             **{
                 "service": self.service.id,
@@ -591,13 +583,13 @@ class Run(AbstractBase):
             result_kw["device"] = device.id
         if self.parent_runtime == self.runtime and not device:
             for service_id, log in app.run_logs.pop(self.runtime, {}).items():
-                factory(
+                db.factory(
                     "service_log",
                     runtime=self.runtime,
                     service=service_id,
                     content="\n".join(log),
                 )
-        factory("result", **result_kw)
+        db.factory("result", **result_kw)
 
     def run_service_job(self, payload, device):
         args = (device,) if device else ()
@@ -747,7 +739,7 @@ class Run(AbstractBase):
         if self.include_device_results:
             file_content["Device Results"] = {}
             for device in self.devices:
-                device_result = fetch(
+                device_result = db.fetch(
                     "result",
                     service_id=self.service_id,
                     parent_runtime=self.parent_runtime,
@@ -796,7 +788,7 @@ class Run(AbstractBase):
         if self.credentials == "device":
             return device.username, device.password
         elif self.credentials == "user":
-            user = fetch("user", name=self.creator)
+            user = db.fetch("user", name=self.creator)
             return user.name, user.password
         else:
             return (
@@ -1112,4 +1104,3 @@ class Run(AbstractBase):
         }
         with open(path / "data.yml", "w") as file:
             yaml.dump(data, file, default_flow_style=False)
-                                                                                                                                                                                                                                       

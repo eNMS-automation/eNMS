@@ -8,7 +8,6 @@ except ImportError as exc:
     warn(f"Couldn't import pynetbox module ({exc})")
 
 from eNMS.database import db
-from eNMS.database.functions import factory
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import HiddenField, PasswordField, SelectField, StringField
 from eNMS.models.automation import Service
@@ -40,7 +39,7 @@ class TopologyImportService(Service):
         nb = netbox_api(self.netbox_address, self.netbox_token)
         for device in nb.dcim.devices.all():
             device_ip = device.primary_ip4 or device.primary_ip6
-            factory(
+            db.factory(
                 "device",
                 **{
                     "name": device.name,
@@ -84,7 +83,7 @@ class TopologyImportService(Service):
             for interface in link["ipInterface"]:
                 if interface["snmpPrimary"] == "P":
                     devices[device]["ip_address"] = interface["ipAddress"]
-                    factory("device", **devices[device])
+                    db.factory("device", **devices[device])
 
     def query_librenms(self):
         devices = http_get(
@@ -92,7 +91,7 @@ class TopologyImportService(Service):
             headers={"X-Auth-Token": self.librenms_token},
         ).json()["devices"]
         for device in devices:
-            factory(
+            db.factory(
                 "device",
                 **{
                     "name": device["hostname"],

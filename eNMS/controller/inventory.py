@@ -16,7 +16,6 @@ from xlwt import Workbook
 from eNMS.controller.base import BaseController
 from eNMS.controller.ssh import SshConnection
 from eNMS.database import db
-from eNMS.database.functions import delete_all, factory, fetch, fetch_all, objectify
 from eNMS.models import models, model_properties, property_types
 
 
@@ -31,7 +30,7 @@ class InventoryController(BaseController):
         return start + self.ssh_port % (end - start)
 
     def connection(self, device_id, **kwargs):
-        device = fetch("device", id=device_id)
+        device = db.fetch("device", id=device_id)
         cmd = [str(self.path / "files" / "apps" / "gotty"), "-w"]
         port, protocol = self.get_ssh_port(), kwargs["protocol"]
         address = getattr(device, kwargs["address"])
@@ -70,13 +69,13 @@ class InventoryController(BaseController):
     def get_device_logs(self, device_id):
         device_logs = [
             log.name
-            for log in fetch_all("log")
-            if log.source == fetch("device", id=device_id).ip_address
+            for log in db.fetch_all("log")
+            if log.source == db.fetch("device", id=device_id).ip_address
         ]
         return "\n".join(device_logs)
 
     def handoffssh(self, id, **kwargs):
-        device = fetch("device", id=id)
+        device = db.fetch("device", id=id)
         credentials = (
             (device.username, device.password)
             if kwargs["credentials"] == "device"
@@ -85,7 +84,7 @@ class InventoryController(BaseController):
             else (kwargs["username"], kwargs["password"])
         )
         uuid, port = str(uuid4()), self.get_ssh_port()
-        session = factory(
+        session = db.factory(
             "session",
             name=uuid,
             user=current_user.name,
@@ -110,7 +109,7 @@ class InventoryController(BaseController):
             return {"error": exc.args}
 
     def get_git_history(self, device_id):
-        device = fetch("device", id=device_id)
+        device = db.fetch("device", id=device_id)
         repo = Repo(self.path / "network_data")
         path = self.path / "network_data" / device.name
         return {
@@ -132,17 +131,17 @@ class InventoryController(BaseController):
         return {"configuration": configuration, "operational_data": operational_data}
 
     def get_device_network_data(self, device_id):
-        device = fetch("device", id=device_id)
+        device = db.fetch("device", id=device_id)
         return {
             "configuration": device.configuration,
             "operational_data": device.operational_data,
         }
 
     def get_session_log(self, session_id):
-        return fetch("session", id=session_id).content
+        return db.fetch("session", id=session_id).content
 
     def counters(self, property, type):
-        return Counter(str(getattr(instance, property)) for instance in fetch_all(type))
+        return Counter(str(getattr(instance, property)) for instance in db.fetch_all(type))
 
     def export_topology(self, **kwargs):
         workbook = Workbook()
@@ -161,7 +160,7 @@ class InventoryController(BaseController):
                 ):
                     continue
                 sheet.write(0, index, property)
-                for obj_index, obj in enumerate(fetch_all(obj_type), 1):
+                for obj_index, obj in enumerate(db.fetch_all(obj_type), 1):
                     sheet.write(obj_index, index, getattr(obj, property))
         workbook.save(self.path / "files" / "spreadsheets" / filename)
 
@@ -182,12 +181,12 @@ class InventoryController(BaseController):
                     func = db.field_conversion[property_types.get(property, "str")]
                     values[property] = func(sheet.row_values(row_index)[index])
                 try:
-                    factory(obj_type, **values).serialized
+                    db.factory(obj_type, **values).serialized
                 except Exception as exc:
                     info(f"{str(values)} could not be imported ({str(exc)})")
                     status = "Partial import (see logs)."
             db.session.commit()
-        for pool in fetch_all("pool"):
+        for pool in db.fetch_all("pool"):
             pool.compute_pool()
         self.log("info", status)
         return status
@@ -195,7 +194,7 @@ class InventoryController(BaseController):
     def import_topology(self, **kwargs):
         file = kwargs["file"]
         if kwargs["replace"]:
-            delete_all("device")
+            db.delete_all("device")
             db.session.commit()
         if self.allowed_file(secure_filename(file.filename), {"xls", "xlsx"}):
             result = self.topology_import(file)
@@ -203,13 +202,13 @@ class InventoryController(BaseController):
         return result
 
     def save_pool_objects(self, pool_id, **kwargs):
-        pool = fetch("pool", id=pool_id)
+        pool = db.fetch("pool", id=pool_id)
         for obj_type in ("device", "link"):
             string_objects = kwargs[f"string_{obj_type}s"]
             if string_objects:
                 objects = []
                 for name in [obj.strip() for obj in string_objects.split(",")]:
-                    obj = fetch(obj_type, allow_none=True, name=name)
+                    obj = db.fetch(obj_type, allow_none=True, name=name)
                     if not obj:
                         return {
                             "alert": f"{obj_type.capitalize()} '{name}' does not exist."
@@ -217,23 +216,23 @@ class InventoryController(BaseController):
                     if obj not in objects:
                         objects.append(obj)
             else:
-                objects = objectify(obj_type, kwargs[f"{obj_type}s"])
+                objects = db.objectify(obj_type, kwargs[f"{obj_type}s"])
             setattr(pool, f"{obj_type}_number", len(objects))
             setattr(pool, f"{obj_type}s", objects)
         pool.last_modified = self.get_time()
         return pool.serialized
 
     def update_pool(self, pool_id):
-        fetch("pool", id=int(pool_id)).compute_pool()
+        db.fetch("pool", id=int(pool_id)).compute_pool()
 
     def update_all_pools(self):
-        for pool in fetch_all("pool"):
+        for pool in db.fetch_all("pool"):
             pool.compute_pool()
 
     def get_view_topology(self):
         return {
-            "devices": [d.view_properties for d in fetch_all("device")],
-            "links": [d.view_properties for d in fetch_all("link")],
+            "devices": [d.view_properties for d in db.fetch_all("device")],
+            "links": [d.view_properties for d in db.fetch_all("link")],
         }
 
     def view_filtering(self, **kwargs):

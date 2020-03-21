@@ -7,7 +7,6 @@ from sqlalchemy import ForeignKey, Integer
 
 from eNMS import app
 from eNMS.database import db
-from eNMS.database.functions import factory, fetch_all
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import HiddenField
 from eNMS.models.automation import Service
@@ -32,8 +31,8 @@ class SwissArmyKnifeService(Service):
 
     def cluster_monitoring(self, run, payload):
         protocol = app.settings["cluster"]["scan_protocol"]
-        for instance in fetch_all("instance"):
-            factory(
+        for instance in db.fetch_all("instance"):
+            db.factory(
                 "instance",
                 **get(
                     f"{protocol}://{instance.ip_address}/rest/is_alive",

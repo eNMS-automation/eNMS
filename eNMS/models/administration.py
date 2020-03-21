@@ -6,10 +6,9 @@ from sqlalchemy import Boolean, Integer
 from eNMS import app
 from eNMS.database import db
 from eNMS.models.base import AbstractBase
-from eNMS.database.functions import set_custom_properties
 
 
-@set_custom_properties
+@db.set_custom_properties
 class Server(AbstractBase):
 
     __tablename__ = type = "server"
@@ -21,7 +20,7 @@ class Server(AbstractBase):
     status = db.Column(db.SmallString, default="down")
 
 
-@set_custom_properties
+@db.set_custom_properties
 class User(AbstractBase, UserMixin):
 
     __tablename__ = type = "user"
@@ -46,7 +45,7 @@ class User(AbstractBase, UserMixin):
         return self.is_admin or permission in self.permissions
 
 
-@set_custom_properties
+@db.set_custom_properties
 class Changelog(AbstractBase):
 
     __tablename__ = "changelog"

@@ -6,7 +6,6 @@ from sqlalchemy.schema import UniqueConstraint
 
 from eNMS.models.base import AbstractBase
 from eNMS.database import db
-from eNMS.database.functions import fetch, fetch_all, set_custom_properties
 from eNMS.setup import properties
 
 
@@ -27,7 +26,7 @@ class Object(AbstractBase):
         super().update(**kwargs)
         if kwargs.get("dont_update_pools", False):
             return
-        for pool in fetch_all("pool"):
+        for pool in db.fetch_all("pool"):
             if pool.manually_defined:
                 continue
             match = pool.object_match(self)
@@ -45,7 +44,7 @@ class Object(AbstractBase):
             setattr(pool, number, getattr(pool, number) - 1)
 
 
-@set_custom_properties
+@db.set_custom_properties
 class Device(Object):
 
     __tablename__ = class_type = "device"
@@ -170,7 +169,7 @@ class Device(Object):
         return f"{self.name} ({self.model})" if self.model else self.name
 
 
-@set_custom_properties
+@db.set_custom_properties
 class Link(Object):
 
     __tablename__ = class_type = "link"
@@ -219,8 +218,8 @@ class Link(Object):
 
     def update(self, **kwargs):
         if "source_name" in kwargs:
-            kwargs["source"] = fetch("device", name=kwargs.pop("source_name")).id
-            kwargs["destination"] = fetch(
+            kwargs["source"] = db.fetch("device", name=kwargs.pop("source_name")).id
+            kwargs["destination"] = db.fetch(
                 "device", name=kwargs.pop("destination_name")
             ).id
         kwargs.update(
@@ -235,18 +234,22 @@ def set_pool_properties(Pool):
             Pool, f"device_{property}", db.Column(db.LargeString, default=""),
         )
         setattr(
-            Pool, f"device_{property}_match", db.Column(db.SmallString, default="inclusion")
+            Pool,
+            f"device_{property}_match",
+            db.Column(db.SmallString, default="inclusion"),
         )
     for property in properties["filtering"]["link"]:
         setattr(Pool, f"link_{property}", db.Column(db.LargeString, default=""))
         setattr(
-            Pool, f"link_{property}_match", db.Column(db.SmallString, default="inclusion")
+            Pool,
+            f"link_{property}_match",
+            db.Column(db.SmallString, default="inclusion"),
         )
     return Pool
 
 
 @set_pool_properties
-@set_custom_properties
+@db.set_custom_properties
 class Pool(AbstractBase):
 
     __tablename__ = type = "pool"
@@ -297,9 +300,9 @@ class Pool(AbstractBase):
     def compute_pool(self):
         if self.manually_defined:
             return
-        self.devices = list(filter(self.object_match, fetch_all("device")))
+        self.devices = list(filter(self.object_match, db.fetch_all("device")))
         self.device_number = len(self.devices)
-        self.links = list(filter(self.object_match, fetch_all("link")))
+        self.links = list(filter(self.object_match, db.fetch_all("link")))
         self.link_number = len(self.links)
 
 

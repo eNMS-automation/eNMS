@@ -1,7 +1,7 @@
 from socketserver import BaseRequestHandler, UDPServer
 from threading import Thread
 
-from eNMS.database.functions import fetch, fetch_all
+from eNMS.database import db
 
 
 class SyslogServer:
@@ -21,10 +21,10 @@ class SyslogServer:
 class SyslogUDPHandler(BaseRequestHandler):
     def handle(self):
         address = self.client_address[0]
-        device = fetch("device", allow_none=True, ip_address=address)
+        device = db.fetch("device", allow_none=True, ip_address=address)
         properties = {
             "source": device.name if device else address,
             "content": str(bytes.decode(self.request[0].strip())),
         }
-        for event in fetch_all("event"):
+        for event in db.fetch_all("event"):
             event.match_log(**properties)

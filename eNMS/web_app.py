@@ -26,7 +26,6 @@ from uuid import getnode
 
 from eNMS import app
 from eNMS.database import db
-from eNMS.database.functions import delete, factory, fetch, handle_exception
 from eNMS.forms import (
     form_actions,
     form_classes,
@@ -114,11 +113,11 @@ class WebApplication(Flask):
 
         @login_manager.user_loader
         def user_loader(id):
-            return fetch("user", allow_none=True, id=int(id))
+            return db.fetch("user", allow_none=True, id=int(id))
 
         @login_manager.request_loader
         def request_loader(request):
-            return fetch("user", allow_none=True, name=request.form.get("name"))
+            return db.fetch("user", allow_none=True, name=request.form.get("name"))
 
     def configure_context_processor(self):
         @self.context_processor
@@ -156,14 +155,14 @@ class WebApplication(Flask):
     def configure_authentication(self):
         @self.auth.verify_password
         def verify_password(username, password):
-            user = fetch("user", name=username)
+            user = db.fetch("user", name=username)
             hash = app.settings["security"]["hash_user_passwords"]
             verify = argon2.verify if hash else str.__eq__
             return verify(password, user.password)
 
         @self.auth.get_password
         def get_password(username):
-            return getattr(fetch("user", name=username), "password", False)
+            return getattr(db.fetch("user", name=username), "password", False)
 
         @self.auth.error_handler
         def unauthorized():
@@ -255,7 +254,7 @@ class WebApplication(Flask):
         @blueprint.route("/view_service_results/<int:id>")
         @self.monitor_requests
         def view_service_results(id):
-            result = fetch("run", id=id).result().result
+            result = db.fetch("run", id=id).result().result
             return f"<pre>{app.str_dict(result)}</pre>"
 
         @blueprint.route("/download_file/<path:path>")
@@ -297,7 +296,12 @@ class WebApplication(Flask):
                 db.session.rollback()
                 if app.settings["app"]["config_mode"] == "debug":
                     raise
-                return jsonify({"alert": handle_exception(str(exc))})
+                match = search("UNIQUE constraint failed: (\w+).(\w+)", str(exc))
+                if match:
+                    result = f"There already is a {match.group(1)} with the same {match.group(2)}."
+                else:
+                    result = str(exc)
+                return jsonify({"alert": result})
 
         self.register_blueprint(blueprint)
 
@@ -308,7 +312,7 @@ class WebApplication(Flask):
         def cli_fetch(table, name):
             echo(
                 app.str_dict(
-                    fetch(table, name=name).get_properties(exclude=["positions"])
+                    db.fetch(table, name=name).get_properties(exclude=["positions"])
                 )
             )
 
@@ -316,7 +320,7 @@ class WebApplication(Flask):
         @argument("table")
         @argument("properties")
         def update(table, properties):
-            result = factory(table, **loads(properties)).get_properties(
+            result = db.factory(table, **loads(properties)).get_properties(
                 exclude=["positions"]
             )
             db.session.commit()
@@ -326,7 +330,7 @@ class WebApplication(Flask):
         @argument("table")
         @argument("name")
         def cli_delete(table, name):
-            device = delete(table, name=name)
+            device = db.delete(table, name=name)
             db.session.commit()
             echo(app.str_dict(device))
 
@@ -336,10 +340,10 @@ class WebApplication(Flask):
         @option("--payload")
         def start(name, devices, payload):
             devices_list = devices.split(",") if devices else []
-            devices_list = [fetch("device", name=name).id for name in devices_list]
+            devices_list = [db.fetch("device", name=name).id for name in devices_list]
             payload_dict = loads(payload) if payload else {}
             payload_dict["devices"] = devices_list
-            service = fetch("service", name=name)
+            service = db.fetch("service", name=name)
             results = app.run(service.id, **payload_dict)
             db.session.commit()
             echo(app.str_dict(results))
@@ -353,16 +357,16 @@ class WebApplication(Flask):
 
             def post(self):
                 data = request.get_json(force=True)
-                factory(
+                db.factory(
                     "pool",
                     **{
                         "name": data["name"],
                         "devices": [
-                            fetch("device", name=name).id
+                            db.fetch("device", name=name).id
                             for name in data.get("devices", "")
                         ],
                         "links": [
-                            fetch("link", name=name).id
+                            db.fetch("link", name=name).id
                             for name in data.get("links", "")
                         ],
                         "manually_defined": True,
@@ -382,7 +386,7 @@ class WebApplication(Flask):
             decorators = [self.auth.login_required, self.catch_exceptions]
 
             def get(self, cls):
-                results = fetch(cls, all_matches=True, **request.args.to_dict())
+                results = db.fetch(cls, all_matches=True, **request.args.to_dict())
                 return [
                     result.get_properties(exclude=["positions"]) for result in results
                 ]
@@ -391,12 +395,12 @@ class WebApplication(Flask):
             decorators = [self.auth.login_required, self.catch_exceptions]
 
             def get(self, cls, name):
-                return fetch(cls, name=name).to_dict(
+                return db.fetch(cls, name=name).to_dict(
                     relation_names_only=True, exclude=["positions"]
                 )
 
             def delete(self, cls, name):
-                result = delete(cls, name=name)
+                result = db.delete(cls, name=name)
                 db.session.commit()
                 return result
 
@@ -404,22 +408,22 @@ class WebApplication(Flask):
             decorators = [self.auth.login_required, self.catch_exceptions]
 
             def get(self, name):
-                return fetch("device", name=name).configuration
+                return db.fetch("device", name=name).configuration
 
         class GetResult(Resource):
             decorators = [self.auth.login_required, self.catch_exceptions]
 
             def get(self, name, runtime):
-                service = fetch("service", name=name)
-                return fetch("result", service_id=service.id, runtime=runtime).result
+                service = db.fetch("service", name=name)
+                return db.fetch("result", service_id=service.id, runtime=runtime).result
 
         class UpdateInstance(Resource):
             decorators = [self.auth.login_required, self.catch_exceptions]
 
             def post(self, cls):
                 data = request.get_json(force=True)
-                object_data = app.objectify(cls, data)
-                result = factory(cls, **object_data).serialized
+                object_data = app.db.objectify(cls, data)
+                result = db.factory(cls, **object_data).serialized
                 db.session.commit()
                 return result
 
@@ -436,22 +440,22 @@ class WebApplication(Flask):
             def post(self):
                 errors, data = [], {"trigger": "REST", **request.get_json(force=True)}
                 devices, pools = [], []
-                service = fetch("service", name=data["name"])
+                service = db.fetch("service", name=data["name"])
                 handle_asynchronously = data.get("async", False)
                 for device_name in data.get("devices", ""):
-                    device = fetch("device", name=device_name)
+                    device = db.fetch("device", name=device_name)
                     if device:
                         devices.append(device.id)
                     else:
                         errors.append(f"No device with the name '{device_name}'")
                 for device_ip in data.get("ip_addresses", ""):
-                    device = fetch("device", ip_address=device_ip)
+                    device = db.fetch("device", ip_address=device_ip)
                     if device:
                         devices.append(device.id)
                     else:
                         errors.append(f"No device with the IP address '{device_ip}'")
                 for pool_name in data.get("pools", ""):
-                    pool = fetch("pool", name=pool_name)
+                    pool = db.fetch("pool", name=pool_name)
                     if pool:
                         pools.append(pool.id)
                     else:

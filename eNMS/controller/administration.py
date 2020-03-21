@@ -23,7 +23,6 @@ except ImportError as exc:
 from eNMS.controller.base import BaseController
 from eNMS.database import db
 from eNMS.models import models
-from eNMS.database.functions import delete_all, export, factory, fetch, fetch_all
 from eNMS.models import relationships
 
 
@@ -31,7 +30,7 @@ class AdministrationController(BaseController):
     def authenticate_user(self, **kwargs):
         name, password = kwargs["name"], kwargs["password"]
         if kwargs["authentication_method"] == "Local User":
-            user = fetch("user", allow_none=True, name=name)
+            user = db.fetch("user", allow_none=True, name=name)
             hash = self.settings["security"]["hash_user_passwords"]
             verify = argon2.verify if hash else str.__eq__
             return user if user and verify(password, user.password) else False
@@ -58,7 +57,7 @@ class AdministrationController(BaseController):
                     for admin_group in self.settings["ldap"]["admin_group"].split(",")
                     for user_group in json_response["attributes"]["memberOf"]
                 )
-                user = factory(
+                user = db.factory(
                     "user",
                     **{
                         "name": name,
@@ -69,12 +68,12 @@ class AdministrationController(BaseController):
                 )
         elif kwargs["authentication_method"] == "TACACS":
             if self.tacacs_client.authenticate(name, password).valid:
-                user = factory("user", **{"name": name, "password": password})
+                user = db.factory("user", **{"name": name, "password": password})
         db.session.commit()
         return user
 
     def database_deletion(self, **kwargs):
-        delete_all(*kwargs["deletion_types"])
+        db.delete_all(*kwargs["deletion_types"])
 
     def result_log_deletion(self, **kwargs):
         date_time_object = datetime.strptime(kwargs["date_time"], "%d/%m/%Y %H:%M:%S")
@@ -91,7 +90,7 @@ class AdministrationController(BaseController):
             db.session.commit()
 
     def get_cluster_status(self):
-        return [server.status for server in fetch_all("server")]
+        return [server.status for server in db.fetch_all("server")]
 
     def get_migration_folders(self):
         return listdir(self.path / "files" / "migrations")
@@ -102,10 +101,10 @@ class AdministrationController(BaseController):
                 continue
             elif relation["list"]:
                 obj[property] = [
-                    fetch(relation["model"], name=name).id for name in obj[property]
+                    db.fetch(relation["model"], name=name).id for name in obj[property]
                 ]
             else:
-                obj[property] = fetch(relation["model"], name=obj[property]).id
+                obj[property] = db.fetch(relation["model"], name=obj[property]).id
         return obj
 
     def migration_import(self, folder="migrations", **kwargs):
@@ -115,7 +114,7 @@ class AdministrationController(BaseController):
         )
         if kwargs.get("empty_database_before_import", False):
             for model in models:
-                delete_all(model)
+                db.delete_all(model)
                 db.session.commit()
         workflow_edges, workflow_services = [], {}
         folder_path = self.path / "files" / folder / kwargs["name"]
@@ -135,8 +134,8 @@ class AdministrationController(BaseController):
                     if instance_type == "workflow":
                         workflow_services[instance["name"]] = instance.pop("services")
                     try:
-                        instance = self.objectify(instance_type, instance)
-                        factory(
+                        instance = self.db.objectify(instance_type, instance)
+                        db.factory(
                             instance_type, **{"dont_update_pools": True, **instance}
                         )
                         db.session.commit()
@@ -148,20 +147,20 @@ class AdministrationController(BaseController):
                         status = "Partial import (see logs)."
         try:
             for name, services in workflow_services.items():
-                workflow = fetch("workflow", name=name)
+                workflow = db.fetch("workflow", name=name)
                 workflow.services = [
-                    fetch("service", name=service_name) for service_name in services
+                    db.fetch("service", name=service_name) for service_name in services
                 ]
             db.session.commit()
             for edge in workflow_edges:
                 for property in ("source", "destination", "workflow"):
-                    edge[property] = fetch("service", name=edge[property]).id
-                factory("workflow_edge", **edge)
+                    edge[property] = db.fetch("service", name=edge[property]).id
+                db.factory("workflow_edge", **edge)
                 db.session.commit()
-            for service in fetch_all("service"):
+            for service in db.fetch_all("service"):
                 service.set_name()
             if not skip_update_pools_after_import:
-                for pool in fetch_all("pool"):
+                for pool in db.fetch_all("pool"):
                     pool.compute_pool()
             self.log("info", status)
         except Exception:
@@ -188,10 +187,10 @@ class AdministrationController(BaseController):
             if not exists(path):
                 makedirs(path)
             with open(path / f"{cls_name}.yaml", "w") as migration_file:
-                yaml.dump(export(cls_name), migration_file)
+                yaml.dump(db.export(cls_name), migration_file)
 
     def export_service(self, service_id):
-        service = fetch("service", id=service_id)
+        service = db.fetch("service", id=service_id)
         path = Path(self.path / "files" / "services" / service.filename)
         path.mkdir(parents=True, exist_ok=True)
         services = service.deep_services if service.type == "workflow" else [service]
@@ -226,7 +225,7 @@ class AdministrationController(BaseController):
                 ).json()
                 if self.settings["cluster"]["id"] != server.pop("cluster_id"):
                     continue
-                factory("server", **{**server, **{"ip_address": str(ip_address)}})
+                db.factory("server", **{**server, **{"ip_address": str(ip_address)}})
             except ConnectionError:
                 continue
 

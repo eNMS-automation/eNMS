@@ -9,10 +9,9 @@ from sqlalchemy.orm import relationship
 from eNMS import app
 from eNMS.database import db
 from eNMS.models.base import AbstractBase
-from eNMS.database.functions import set_custom_properties
 
 
-@set_custom_properties
+@db.set_custom_properties
 class Task(AbstractBase):
 
     __tablename__ = type = "task"
@@ -160,7 +159,7 @@ class Task(AbstractBase):
             app.scheduler.reschedule_job(default.pop("id"), **trigger)
 
 
-@set_custom_properties
+@db.set_custom_properties
 class Event(AbstractBase):
 
     __tablename__ = type = "event"

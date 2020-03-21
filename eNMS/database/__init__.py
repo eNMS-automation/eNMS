@@ -1,5 +1,6 @@
 from ast import literal_eval
 from json import loads
+from re import search
 from sqlalchemy import (
     Boolean,
     Column,
@@ -7,6 +8,7 @@ from sqlalchemy import (
     event,
     ForeignKey,
     Float,
+    func,
     inspect,
     Integer,
     PickleType,
@@ -23,7 +25,8 @@ from sqlalchemy.types import JSON
 from sqlalchemy.orm.collections import InstrumentedList
 
 from eNMS.models import model_properties, models, property_types, relationships
-from eNMS.setup import settings
+from eNMS.setup import properties, settings
+from eNMS.models import models
 
 
 class Database:
@@ -312,6 +315,86 @@ class Database:
             Column("pool_id", Integer, ForeignKey("pool.id")),
             Column("link_id", Integer, ForeignKey("link.id")),
         )
+
+    def fetch(self, model, allow_none=False, all_matches=False, **kwargs):
+        query = self.session.query(models[model]).filter_by(**kwargs)
+        result = query.all() if all_matches else query.first()
+        if result or allow_none:
+            return result
+        else:
+            raise LookupError(
+                f"There is no {model} in the database "
+                f"with the following characteristics: {kwargs}"
+            )
+
+
+    def fetch_all(self, model, **kwargs):
+        return self.fetch(model, allow_none=True, all_matches=True, **kwargs)
+
+
+    def count(self, model, **kwargs):
+        return self.session.query(func.count(models[model].id)).filter_by(**kwargs).scalar()
+
+    def get_query_count(self, query):
+        count_query = query.statement.with_only_columns([func.count()]).order_by(None)
+        return query.session.execute(count_query).scalar()
+
+
+    def objectify(self, model, object_list):
+        return [self.fetch(model, id=object_id) for object_id in object_list]
+
+
+    def delete(self, model, allow_none=False, **kwargs):
+        instance = self.session.query(models[model]).filter_by(**kwargs).first()
+        if allow_none and not instance:
+            return None
+        instance.delete()
+        serialized_instance = instance.serialized
+        self.session.delete(instance)
+        return serialized_instance
+
+
+    def delete_all(self, *models):
+        for model in models:
+            for instance in self.fetch_all(model):
+                self.delete(model, id=instance.id)
+
+
+    def export(self, model):
+        return [instance.to_dict(export=True) for instance in self.fetch_all(model)]
+
+
+    def factory(self, cls_name, **kwargs):
+        if set("/\\'" + '"') & set(kwargs.get("name", "") + kwargs.get("scoped_name", "")):
+            raise Exception("Names cannot contain a slash or a quote.")
+        instance, instance_id = None, kwargs.pop("id", 0)
+        if instance_id:
+            instance = self.fetch(cls_name, id=instance_id)
+        elif "name" in kwargs:
+            instance = self.fetch(cls_name, allow_none=True, name=kwargs["name"])
+        if instance and not kwargs.get("must_be_new"):
+            instance.update(**kwargs)
+        else:
+            instance = models[cls_name](**kwargs)
+            self.session.add(instance)
+        return instance
+
+    def set_custom_properties(self, cls):
+        for property, values in properties["custom"].get(cls.__tablename__, {}).items():
+            setattr(
+                cls,
+                property,
+                self.Column(
+                    {
+                        "boolean": Boolean,
+                        "float": Float,
+                        "integer": Integer,
+                        "string": self.LargeString,
+                    }[values["type"]],
+                    default=values["default"],
+                ),
+            )
+        return cls
 
 
 db = Database()

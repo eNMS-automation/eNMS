@@ -44,14 +44,6 @@ except ImportError as exc:
     warn(f"Couldn't import tacacs_plus module ({exc})")
 
 from eNMS.database import db
-from eNMS.database.functions import (
-    count,
-    delete,
-    factory,
-    fetch,
-    fetch_all,
-    get_query_count,
-)
 from eNMS.models import models, model_properties, relationships
 from eNMS.controller.syslog import SyslogServer
 from eNMS.setup import settings, properties, rbac
@@ -105,7 +97,7 @@ class BaseController:
         db.configure_application_events(self)
         self.init_forms()
         self.clean_database()
-        if not fetch("user", allow_none=True, name="admin"):
+        if not db.fetch("user", allow_none=True, name="admin"):
             self.configure_server_id()
             self.create_admin_user()
             db.session.commit()
@@ -122,7 +114,7 @@ class BaseController:
             db.session.commit()
 
     def clean_database(self):
-        for run in fetch("run", all_matches=True, allow_none=True, status="Running"):
+        for run in db.fetch("run", all_matches=True, allow_none=True, status="Running"):
             run.status = "Aborted (app reload)"
         db.session.commit()
 
@@ -131,7 +123,7 @@ class BaseController:
             self.version = load(package_file)["version"]
 
     def configure_server_id(self):
-        factory(
+        db.factory(
             "server",
             **{
                 "name": str(getnode()),
@@ -142,7 +134,7 @@ class BaseController:
         )
 
     def create_admin_user(self) -> None:
-        admin = factory("user", **{"name": "admin", "group": "Admin"})
+        admin = db.factory("user", **{"name": "admin", "group": "Admin"})
         if not admin.password:
             admin.update(password="admin")
 
@@ -276,16 +268,16 @@ class BaseController:
         self.__dict__.update(**kwargs)
 
     def delete_instance(self, instance_type, instance_id):
-        return delete(instance_type, id=instance_id)
+        return db.delete(instance_type, id=instance_id)
 
     def get(self, instance_type, id):
-        return fetch(instance_type, id=id).serialized
+        return db.fetch(instance_type, id=id).serialized
 
     def get_properties(self, instance_type, id):
-        return fetch(instance_type, id=id).get_properties()
+        return db.fetch(instance_type, id=id).get_properties()
 
     def get_all(self, instance_type):
-        return [instance.get_properties() for instance in fetch_all(instance_type)]
+        return [instance.get_properties() for instance in db.fetch_all(instance_type)]
 
     def update(self, type, **kwargs):
         try:
@@ -295,9 +287,9 @@ class BaseController:
                     kwargs[arg] = kwargs[arg].strip()
             kwargs["last_modified"] = self.get_time()
             kwargs["creator"] = kwargs["user"] = getattr(current_user, "name", "admin")
-            instance = factory(type, must_be_new=must_be_new, **kwargs)
+            instance = db.factory(type, must_be_new=must_be_new, **kwargs)
             if kwargs.get("original"):
-                fetch(type, id=kwargs["original"]).duplicate(clone=instance)
+                db.fetch(type, id=kwargs["original"]).duplicate(clone=instance)
             db.session.flush()
             return instance.serialized
         except Exception as exc:
@@ -307,7 +299,7 @@ class BaseController:
             return {"alert": str(exc)}
 
     def log(self, severity, content):
-        factory(
+        db.factory(
             "changelog",
             **{
                 "severity": severity,
@@ -320,13 +312,13 @@ class BaseController:
     def count_models(self):
         return {
             "counters": {
-                instance_type: count(instance_type)
+                instance_type: db.count(instance_type)
                 for instance_type in properties["dashboard"]
             },
             "properties": {
                 instance_type: Counter(
                     str(getattr(instance, properties["dashboard"][instance_type][0]))
-                    for instance in fetch_all(instance_type)
+                    for instance in db.fetch_all(instance_type)
                 )
                 for instance_type in properties["dashboard"]
             },
@@ -334,8 +326,8 @@ class BaseController:
 
     def compare(self, type, v1, v2):
         if type == "result":
-            first = self.str_dict(getattr(fetch(type, id=v1), "result"))
-            second = self.str_dict(getattr(fetch(type, id=v2), "result"))
+            first = self.str_dict(getattr(db.fetch(type, id=v1), "result"))
+            second = self.str_dict(getattr(db.fetch(type, id=v2), "result"))
         else:
             first = self.get_git_configuration(v1)["configuration"]
             second = self.get_git_configuration(v2)["configuration"]
@@ -426,7 +418,7 @@ class BaseController:
         table_result = {
             "draw": int(kwargs["draw"]),
             "recordsTotal": db.session.query(func.count(model.id)).scalar(),
-            "recordsFiltered": get_query_count(result),
+            "recordsFiltered": db.get_query_count(result),
             "data": [
                 obj.table_properties(**kwargs)
                 for obj in result.limit(int(kwargs["length"]))
@@ -505,12 +497,12 @@ class BaseController:
         return input.translate(str.maketrans("", "", f"{punctuation} "))
 
     def switch_menu(self, user_id):
-        user = fetch("user", id=user_id)
+        user = db.fetch("user", id=user_id)
         user.small_menu = not user.small_menu
 
     def update_database_configurations_from_git(self):
         for dir in scandir(self.path / "network_data"):
-            device = fetch("device", allow_none=True, name=dir.name)
+            device = db.fetch("device", allow_none=True, name=dir.name)
             if not device:
                 continue
             with open(Path(dir.path) / "data.yml") as data:
@@ -523,6 +515,6 @@ class BaseController:
                 with open(filepath) as file:
                     setattr(device, data, file.read())
         db.session.commit()
-        for pool in fetch_all("pool"):
+        for pool in db.fetch_all("pool"):
             if pool.device_configuration or pool.device_operational_data:
                 pool.compute_pool()

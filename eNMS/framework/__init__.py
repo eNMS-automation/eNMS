@@ -22,9 +22,20 @@ class WebApplication(Flask):
 
     def __init__(self, mode=None):
         super().__init__(__name__, static_folder=app.path / "eNMS" / "static")
+        self.update_config(mode)
+        self.register_extensions()
+        self.configure_login_manager()
+        self.configure_cli()
+        self.configure_context_processor()
+        configure_rest_api(self)
+        self.configure_errors()
+        self.configure_authentication()
+        self.configure_routes()
+        self.register_blueprint(blueprint)
+
+    def update_config(self, mode):
         mode = (mode or app.settings["app"]["config_mode"]).lower()
         self.config.update({
-            "MODE": mode,
             "DEBUG": mode != "production",
             "SECRET_KEY": environ.get("SECRET_KEY", "get-a-real-key"),
             "WTF_CSRF_TIME_LIMIT": None,
@@ -32,14 +43,6 @@ class WebApplication(Flask):
             "MAX_CONTENT_LENGTH": 20 * 1024 * 1024,
             "WTF_CSRF_ENABLED": mode != "test",
         })
-        self.register_extensions()
-        self.configure_login_manager()
-        self.configure_cli()
-        self.configure_context_processor()
-        #self.configure_rest_api()
-        self.configure_errors()
-        self.configure_authentication()
-        self.register_blueprint(blueprint)
 
     def register_extensions(self):
         csrf.init_app(self)

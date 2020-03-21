@@ -1,4 +1,3 @@
-
 from collections import defaultdict
 from flask import request
 from flask_login import current_user

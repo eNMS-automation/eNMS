@@ -10,10 +10,14 @@ from sqlalchemy import (
     inspect,
     Integer,
     PickleType,
+    String,
     Table,
+    Text,
 )
+from sqlalchemy.dialects.mysql.base import MSMediumBlob
 from sqlalchemy.ext.associationproxy import ASSOCIATION_PROXY
 from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.ext.mutable import MutableDict, MutableList
 from sqlalchemy.orm import scoped_session, sessionmaker
 from sqlalchemy.types import JSON
 from sqlalchemy.orm.collections import InstrumentedList
@@ -82,6 +86,7 @@ class Database:
     def __init__(self):
         self.database_url = settings["database"]["url"]
         self.dialect = self.database_url.split(":")[0]
+        self.configure_columns()
         self.engine = self.configure_engine()
         self.session = scoped_session(sessionmaker(autoflush=False, bind=self.engine))
         self.base = declarative_base()
@@ -119,6 +124,32 @@ class Database:
                 }
             )
         return create_engine(self.database_url, **engine_parameters)
+
+    def configure_columns(self):
+        class CustomPickleType(PickleType):
+            if self.dialect == "mysql":
+                impl = MSMediumBlob
+
+        self.Dict = MutableDict.as_mutable(CustomPickleType)
+        self.List = MutableList.as_mutable(CustomPickleType)
+        self.LargeString = Text(settings["database"]["large_string_length"])
+        self.SmallString = String(settings["database"]["small_string_length"])
+
+        default_ctypes = {
+            MutableDict: {},
+            MutableList: [],
+            LargeString: "",
+            SmallString: "",
+            Text: "",
+        }
+
+        class CustomColumn(Column):
+            def __init__(self, ctype, *args, **kwargs):
+                if "default" not in kwargs and ctype in default_ctypes:
+                    kwargs["default"] = default_ctypes[ctype]
+                super().__init__(ctype, *args, **kwargs)
+
+        self.Column = CustomColumn
 
     def configure_events(self):
         @event.listens_for(self.base, "mapper_configured", propagate=True)

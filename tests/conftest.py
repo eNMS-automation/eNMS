@@ -1,7 +1,7 @@
 from pytest import fixture
 
 from eNMS.database import Session
-from eNMS.framework import create_app
+from eNMS.web_app import WebApplication
 
 import warnings
 
@@ -10,7 +10,7 @@ import warnings
 def base_client():
     with warnings.catch_warnings():
         warnings.simplefilter("ignore")
-        app = create_app("test")
+        app = WebApplication("test")
         app_context = app.app_context()
         app_context.push()
         Session.close()
@@ -21,7 +21,7 @@ def base_client():
 def user_client():
     with warnings.catch_warnings():
         warnings.simplefilter("ignore")
-        app = create_app("test")
+        app = WebApplication("test")
         app_context = app.app_context()
         app_context.push()
         Session.close()

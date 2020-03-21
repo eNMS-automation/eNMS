@@ -13,7 +13,9 @@ from flask import (
     send_file,
     url_for,
 )
-from flask_login import current_user, login_user, logout_user
+from flask_httpauth import HTTPBasicAuth
+from flask_login import current_user, LoginManager, login_user, logout_user
+from flask_wtf.csrf import CSRFProtect
 from functools import wraps
 from itertools import chain
 from logging import info
@@ -30,8 +32,7 @@ from eNMS.forms import (
     form_templates,
 )
 from eNMS.forms.administration import LoginForm
-from eNMS.framework.extensions import auth, csrf, login_manager
-from eNMS.framework.rest import configure_rest_api
+#from eNMS.framework.rest import configure_rest_api
 from eNMS.models import models, property_types, relationships
 from eNMS.database.properties import property_names
 from eNMS.setup import properties, rbac
@@ -45,7 +46,7 @@ class WebApplication(Flask):
         self.configure_login_manager()
         self.configure_cli()
         self.configure_context_processor()
-        configure_rest_api(self)
+        #configure_rest_api(self)
         self.configure_errors()
         self.configure_authentication()
         self.configure_routes()
@@ -220,8 +221,9 @@ class WebApplication(Flask):
         )
 
     def register_extensions(self):
-        csrf.init_app(self)
-        login_manager.init_app(self)
+        self.auth = HTTPBasicAuth()
+        self.csrf = CSRFProtect()
+        self.csrf.init_app(self)
 
     def configure_cli(self):
         @self.cli.command(name="fetch")
@@ -267,6 +269,10 @@ class WebApplication(Flask):
             echo(app.str_dict(results))
 
     def configure_login_manager(self):
+        login_manager = LoginManager()
+        login_manager.session_protection = "strong"
+        login_manager.init_app(self)
+
         @login_manager.user_loader
         def user_loader(id):
             return fetch("user", allow_none=True, id=int(id))
@@ -309,18 +315,18 @@ class WebApplication(Flask):
             return render_template("error.html", error=404), 404
 
     def configure_authentication(self):
-        @auth.verify_password
+        @self.auth.verify_password
         def verify_password(username, password):
             user = fetch("user", name=username)
             hash = app.settings["security"]["hash_user_passwords"]
             verify = argon2.verify if hash else str.__eq__
             return verify(password, user.password)
 
-        @auth.get_password
+        @self.auth.get_password
         def get_password(username):
             return getattr(fetch("user", name=username), "password", False)
 
-        @auth.error_handler
+        @self.auth.error_handler
         def unauthorized():
             return make_response(jsonify({"message": "Wrong credentials."}), 401)
 

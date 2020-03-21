@@ -7,7 +7,6 @@ from uuid import getnode
 from eNMS import app
 from eNMS.database import Session
 from eNMS.database.functions import delete, factory, fetch
-from eNMS.framework.extensions import auth, csrf
 
 
 def catch_exceptions(func):

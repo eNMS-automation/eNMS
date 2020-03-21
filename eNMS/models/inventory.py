@@ -82,8 +82,12 @@ class Device(Object):
         back_populates="devices",
         cascade="all,delete",
     )
-    tasks = relationship("Task", secondary=db.task_device_table, back_populates="devices")
-    pools = relationship("Pool", secondary=db.pool_device_table, back_populates="devices")
+    tasks = relationship(
+        "Task", secondary=db.task_device_table, back_populates="devices"
+    )
+    pools = relationship(
+        "Pool", secondary=db.pool_device_table, back_populates="devices"
+    )
     sessions = relationship(
         "Session", back_populates="device", cascade="all, delete-orphan"
     )

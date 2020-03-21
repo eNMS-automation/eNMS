@@ -1,4 +1,15 @@
-from sqlalchemy import Boolean, Column, create_engine, event, ForeignKey, Float, inspect, Integer, PickleType, Table
+from sqlalchemy import (
+    Boolean,
+    Column,
+    create_engine,
+    event,
+    ForeignKey,
+    Float,
+    inspect,
+    Integer,
+    PickleType,
+    Table,
+)
 from sqlalchemy.ext.associationproxy import ASSOCIATION_PROXY
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import scoped_session, sessionmaker
@@ -9,13 +20,15 @@ from eNMS.database.properties import private_properties
 from eNMS.models import model_properties, models, property_types, relationships
 from eNMS.setup import settings
 
-class Database:
 
+class Database:
     def __init__(self):
         self.database_url = settings["database"]["url"]
         self.dialect = self.database_url.split(":")[0]
         self.engine = self.configure_engine()
-        self.session = Session = scoped_session(sessionmaker(autoflush=False, bind=self.engine))
+        self.session = scoped_session(
+            sessionmaker(autoflush=False, bind=self.engine)
+        )
         self.base = declarative_base()
         self.configure_associations()
         self.configure_events()
@@ -113,7 +126,10 @@ class Database:
                     )
                 changelog.append(change)
             if changelog:
-                name, changes = getattr(target, "name", target.id), " | ".join(changelog)
+                name, changes = (
+                    getattr(target, "name", target.id),
+                    " | ".join(changelog),
+                )
                 app.log("info", f"UPDATE: {target.type} '{name}': ({changes})")
 
         if app.settings["vault"]["active"]:
@@ -193,5 +209,6 @@ class Database:
             Column("pool_id", Integer, ForeignKey("pool.id")),
             Column("link_id", Integer, ForeignKey("link.id")),
         )
+
 
 db = Database()

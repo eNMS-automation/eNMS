@@ -391,7 +391,9 @@ class BaseController:
 
     def multiselect_filtering(self, type, **params):
         model = models[type]
-        results = db.session.query(model).filter(model.name.contains(params.get("term")))
+        results = db.session.query(model).filter(
+            model.name.contains(params.get("term"))
+        )
         return {
             "items": [
                 {"text": result.ui_name, "id": str(result.id)}

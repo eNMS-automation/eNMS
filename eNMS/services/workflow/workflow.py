@@ -4,7 +4,6 @@ from sqlalchemy.orm import backref, relationship
 
 from eNMS.database import db
 from eNMS.models.base import AbstractBase
-from eNMS.database import db
 from eNMS.database.dialect import Column, MutableDict, SmallString
 from eNMS.database.functions import delete, factory, fetch
 from eNMS.forms.automation import ServiceForm

@@ -279,7 +279,9 @@ class Run(AbstractBase):
     path = Column(SmallString)
     parent_device_id = Column(Integer, ForeignKey("device.id"))
     parent_device = relationship("Device", foreign_keys="Run.parent_device_id")
-    devices = relationship("Device", secondary=db.run_device_table, back_populates="runs")
+    devices = relationship(
+        "Device", secondary=db.run_device_table, back_populates="runs"
+    )
     pools = relationship("Pool", secondary=db.run_pool_table, back_populates="runs")
     service_id = Column(Integer, ForeignKey("service.id"))
     service = relationship(

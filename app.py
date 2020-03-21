@@ -1,1 +1,1 @@
-from eNMS.web_app import web_app as app  # noqa: F401
+from eNMS.server import server as app  # noqa: F401

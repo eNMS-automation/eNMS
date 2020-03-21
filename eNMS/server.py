@@ -39,7 +39,7 @@ from eNMS.models import models, property_types, relationships
 from eNMS.setup import properties, rbac
 
 
-class WebApplication(Flask):
+class Server(Flask):
     def __init__(self, mode=None):
         super().__init__(__name__, static_folder=app.path / "eNMS" / "static")
         self.update_config(mode)
@@ -554,4 +554,4 @@ class WebApplication(Flask):
         api.add_resource(Sink, "/rest/<path:path>")
 
 
-web_app = WebApplication()
+server = Server()

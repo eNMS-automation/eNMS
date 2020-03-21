@@ -62,6 +62,13 @@ Some of them have been removed:
 - substitution and python query are now a keyword
 - no validation is a keyword too
 
+Imported via db:
+MutableList -> db.List
+MutableDict -> db.Dict
+Column -> db.Column
+SmallString -> db.SmallString
+LargeString -> db.LargeString
+
 Version 3.20.1
 --------------
 

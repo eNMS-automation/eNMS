@@ -212,6 +212,7 @@ class Sink(Resource):
 
 
 def configure_rest_api(flask_app):
+    api = Api(flask_app, decorators=[csrf.exempt])
     for endpoint, resource in create_app_resources().items():
         api.add_resource(resource, f"/rest/{endpoint}")
     api.add_resource(CreatePool, "/rest/create_pool")

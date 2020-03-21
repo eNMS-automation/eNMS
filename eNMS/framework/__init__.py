@@ -4,12 +4,12 @@ from passlib.hash import argon2
 from flask import Flask, jsonify, make_response, render_template
 from flask_login import current_user
 from itertools import chain
+from os import environ
 
 from eNMS import app
 from eNMS.database import Session
 from eNMS.database.functions import delete, factory, fetch
 from eNMS.forms import form_properties
-from eNMS.framework.config import config_mapper
 from eNMS.framework.extensions import auth, csrf, login_manager
 from eNMS.framework.rest import configure_rest_api
 from eNMS.framework.routes import blueprint
@@ -20,15 +20,23 @@ from eNMS.setup import rbac
 
 class WebApplication(Flask):
 
-    def __init__(self, config_mode=None):
+    def __init__(self, mode=None):
         super().__init__(__name__, static_folder=app.path / "eNMS" / "static")
-        config = config_mapper[config_mode or app.settings["app"]["config_mode"]]
-        self.config.from_object(config)
+        mode = (mode or app.settings["app"]["config_mode"]).lower()
+        self.config.update({
+            "MODE": mode,
+            "DEBUG": mode != "production",
+            "SECRET_KEY": environ.get("SECRET_KEY", "get-a-real-key"),
+            "WTF_CSRF_TIME_LIMIT": None,
+            "ERROR_404_HELP": False,
+            "MAX_CONTENT_LENGTH": 20 * 1024 * 1024,
+            "WTF_CSRF_ENABLED": mode != "test",
+        })
         self.register_extensions()
         self.configure_login_manager()
         self.configure_cli()
         self.configure_context_processor()
-        self.configure_rest_api()
+        #self.configure_rest_api()
         self.configure_errors()
         self.configure_authentication()
         self.register_blueprint(blueprint)
@@ -36,7 +44,6 @@ class WebApplication(Flask):
     def register_extensions(self):
         csrf.init_app(self)
         login_manager.init_app(self)
-        self.api = Api(self, decorators=[csrf.exempt])
 
     def configure_cli(self):
         @self.cli.command(name="fetch")

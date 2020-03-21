@@ -36,7 +36,6 @@ from eNMS.forms import (
 )
 from eNMS.forms.administration import LoginForm
 from eNMS.models import models, property_types, relationships
-from eNMS.database.properties import property_names
 from eNMS.setup import properties, rbac
 
 
@@ -128,7 +127,7 @@ class WebApplication(Flask):
                 "property_types": property_types,
                 "form_properties": form_properties,
                 "menu": rbac["menu"],
-                "names": property_names,
+                "names": app.property_names,
                 "rbac": rbac["groups"][getattr(current_user, "group", "Read Only")],
                 "relations": list(set(chain.from_iterable(relationships.values()))),
                 "relationships": relationships,

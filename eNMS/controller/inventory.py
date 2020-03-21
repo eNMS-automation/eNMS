@@ -18,7 +18,6 @@ from eNMS.controller.ssh import SshConnection
 from eNMS.database import db
 from eNMS.database.functions import delete_all, factory, fetch, fetch_all, objectify
 from eNMS.models import models, model_properties, property_types
-from eNMS.database.properties import field_conversion
 
 
 class InventoryController(BaseController):
@@ -180,7 +179,7 @@ class InventoryController(BaseController):
                 for index, property in enumerate(properties):
                     if not property:
                         continue
-                    func = field_conversion[property_types.get(property, "str")]
+                    func = db.field_conversion[property_types.get(property, "str")]
                     values[property] = func(sheet.row_values(row_index)[index])
                 try:
                     factory(obj_type, **values).serialized

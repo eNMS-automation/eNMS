@@ -4,7 +4,6 @@ from eNMS import app
 from eNMS.database import db
 from eNMS.database.functions import factory, fetch, objectify
 from eNMS.models import model_properties, property_types, relationships
-from eNMS.database.properties import private_properties
 
 
 class AbstractBase(db.base):
@@ -21,7 +20,7 @@ class AbstractBase(db.base):
         return self.name
 
     def __getattribute__(self, property):
-        if property in private_properties and app.settings["vault"]["active"]:
+        if property in db.private_properties and app.settings["vault"]["active"]:
             path = f"secret/data/{self.__tablename__}/{self.name}/{property}"
             data = app.vault_client.read(path)
             return data["data"]["data"][property] if data else ""
@@ -29,7 +28,7 @@ class AbstractBase(db.base):
             return super().__getattribute__(property)
 
     def __setattr__(self, property, value):
-        if property in private_properties:
+        if property in db.private_properties:
             if not value:
                 return
             if app.settings["vault"]["active"]:
@@ -83,7 +82,7 @@ class AbstractBase(db.base):
                 continue
             if property in db.dont_serialize.get(self.type, []):
                 continue
-            if property in private_properties:
+            if property in db.private_properties:
                 continue
             if include and property not in include or exclude and property in exclude:
                 continue

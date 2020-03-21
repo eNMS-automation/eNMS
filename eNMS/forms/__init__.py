@@ -1,3 +1,4 @@
+
 from collections import defaultdict
 from flask import request
 from flask_login import current_user
@@ -6,6 +7,7 @@ from wtforms.fields.core import UnboundField
 from wtforms.form import FormMeta
 
 from eNMS import app
+from eNMS.database import db
 from eNMS.forms.fields import (
     InstanceField,
     MultipleInstanceField,
@@ -13,11 +15,6 @@ from eNMS.forms.fields import (
     StringField,
 )
 from eNMS.models import property_types, relationships
-from eNMS.database.properties import (
-    field_conversion,
-    private_properties,
-    property_names,
-)
 
 form_actions = {}
 form_classes = {}
@@ -45,7 +42,7 @@ class MetaForm(FormMeta):
                 "type": field_type,
                 "model": field.kwargs.pop("model", None),
             }
-        property_names.update(
+        app.property_names.update(
             {
                 field_name: field.args[0]
                 for field_name, field in attrs.items()
@@ -89,8 +86,8 @@ def form_postprocessing(form, form_data):
                 data[property].append(properties)
         elif field["type"] == "bool":
             data[property] = property in form_data
-        elif field["type"] in field_conversion and property in data:
-            data[property] = field_conversion[field["type"]](form_data[property])
+        elif field["type"] in db.field_conversion and property in data:
+            data[property] = db.field_conversion[field["type"]](form_data[property])
     return data
 
 
@@ -109,6 +106,6 @@ def set_custom_properties(cls):
         cls.form_type.kwargs["default"], {}
     )
     for property, values in cls.custom_properties.items():
-        field = PasswordField if property in private_properties else StringField
+        field = PasswordField if property in db.private_properties else StringField
         setattr(cls, property, field(values["pretty_name"]))
     return cls

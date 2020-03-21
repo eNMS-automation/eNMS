@@ -53,7 +53,6 @@ from eNMS.database.functions import (
     get_query_count,
 )
 from eNMS.models import models, model_properties, relationships
-from eNMS.database.properties import private_properties, property_names
 from eNMS.controller.syslog import SyslogServer
 from eNMS.setup import settings, properties, rbac
 
@@ -75,6 +74,8 @@ class BaseController:
         "update_all_pools",
         "update_database_configurations_from_git",
     ]
+
+    property_names = {}
 
     def __init__(self):
         self.settings = settings
@@ -166,9 +167,9 @@ class BaseController:
 
     def load_custom_properties(self):
         for model, values in self.properties["custom"].items():
-            property_names.update({k: v["pretty_name"] for k, v in values.items()})
+            self.property_names.update({k: v["pretty_name"] for k, v in values.items()})
             model_properties[model].extend(list(values))
-            private_properties.extend(
+            db.private_properties.extend(
                 list(p for p, v in values.items() if v.get("private", False))
             )
 

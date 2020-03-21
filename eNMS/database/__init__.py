@@ -1,3 +1,5 @@
+from ast import literal_eval
+from json import loads
 from sqlalchemy import (
     Boolean,
     Column,
@@ -16,12 +18,20 @@ from sqlalchemy.orm import scoped_session, sessionmaker
 from sqlalchemy.types import JSON
 from sqlalchemy.orm.collections import InstrumentedList
 
-from eNMS.database.properties import private_properties
 from eNMS.models import model_properties, models, property_types, relationships
 from eNMS.setup import settings
 
 
 class Database:
+
+    private_properties = [
+        "password",
+        "enable_password",
+        "custom_password",
+        "netbox_token",
+        "librenms_token",
+        "opennms_password",
+    ]
 
     dont_migrate = {
         "device": [
@@ -77,6 +87,23 @@ class Database:
         self.base = declarative_base()
         self.configure_associations()
         self.configure_events()
+        self.field_conversion = {
+            "dict": self.dict_conversion,
+            "float": float,
+            "int": int,
+            "integer": int,
+            "json": loads,
+            "list": str,
+            "str": str,
+            "date": str,
+        }
+
+    @staticmethod
+    def dict_conversion(input):
+        try:
+            return literal_eval(input)
+        except Exception:
+            return loads(input)
 
     def configure_engine(self):
         engine_parameters = {
@@ -154,7 +181,7 @@ class Database:
                 if (
                     getattr(target, "dont_track_changes", False)
                     or getattr(state.class_, attr.key).info.get("dont_track_changes")
-                    or attr.key in private_properties
+                    or attr.key in self.private_properties
                     or not hist.has_changes()
                 ):
                     continue

@@ -4,9 +4,9 @@ from sqlalchemy.orm import backref, relationship
 
 from eNMS.database import db
 from eNMS.models.base import AbstractBase
+from eNMS.database import db
 from eNMS.database.dialect import Column, MutableDict, SmallString
 from eNMS.database.functions import delete, factory, fetch
-from eNMS.database.associations import service_workflow_table
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import BooleanField, HiddenField, SelectField
 from eNMS.models.automation import Service
@@ -21,7 +21,7 @@ class Workflow(Service):
     close_connection = Column(Boolean, default=False)
     labels = Column(MutableDict, info={"dont_track_changes": True})
     services = relationship(
-        "Service", secondary=service_workflow_table, back_populates="workflows"
+        "Service", secondary=db.service_workflow_table, back_populates="workflows"
     )
     edges = relationship(
         "WorkflowEdge", back_populates="workflow", cascade="all, delete-orphan"

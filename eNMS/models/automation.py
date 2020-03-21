@@ -33,13 +33,6 @@ except ImportError as exc:
 
 from eNMS import app
 from eNMS.database import db
-from eNMS.database.associations import (
-    run_pool_table,
-    run_device_table,
-    service_device_table,
-    service_pool_table,
-    service_workflow_table,
-)
 from eNMS.models.base import AbstractBase
 from eNMS.database.dialect import (
     Column,
@@ -78,15 +71,15 @@ class Service(AbstractBase):
     waiting_time = Column(Integer, default=0)
     creator = Column(SmallString, default="admin")
     workflows = relationship(
-        "Workflow", secondary=service_workflow_table, back_populates="services"
+        "Workflow", secondary=db.service_workflow_table, back_populates="services"
     )
     device_query = Column(LargeString)
     device_query_property = Column(SmallString, default="ip_address")
     devices = relationship(
-        "Device", secondary=service_device_table, back_populates="services"
+        "Device", secondary=db.service_device_table, back_populates="services"
     )
     pools = relationship(
-        "Pool", secondary=service_pool_table, back_populates="services"
+        "Pool", secondary=db.service_pool_table, back_populates="services"
     )
     update_pools = Column(Boolean, default=False)
     send_notification = Column(Boolean, default=False)
@@ -286,8 +279,8 @@ class Run(AbstractBase):
     path = Column(SmallString)
     parent_device_id = Column(Integer, ForeignKey("device.id"))
     parent_device = relationship("Device", foreign_keys="Run.parent_device_id")
-    devices = relationship("Device", secondary=run_device_table, back_populates="runs")
-    pools = relationship("Pool", secondary=run_pool_table, back_populates="runs")
+    devices = relationship("Device", secondary=db.run_device_table, back_populates="runs")
+    pools = relationship("Pool", secondary=db.run_pool_table, back_populates="runs")
     service_id = Column(Integer, ForeignKey("service.id"))
     service = relationship(
         "Service", back_populates="runs", foreign_keys="Run.service_id"

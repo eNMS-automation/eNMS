@@ -8,10 +8,6 @@ from sqlalchemy.orm import relationship
 
 from eNMS import app
 from eNMS.database import db
-from eNMS.database.associations import (
-    task_device_table,
-    task_pool_table,
-)
 from eNMS.models.base import AbstractBase
 from eNMS.database.dialect import Column, MutableDict, SmallString
 from eNMS.database.functions import set_custom_properties
@@ -36,9 +32,9 @@ class Task(AbstractBase):
     is_active = Column(Boolean, default=False)
     initial_payload = Column(MutableDict)
     devices = relationship(
-        "Device", secondary=task_device_table, back_populates="tasks"
+        "Device", secondary=db.task_device_table, back_populates="tasks"
     )
-    pools = relationship("Pool", secondary=task_pool_table, back_populates="tasks")
+    pools = relationship("Pool", secondary=db.task_pool_table, back_populates="tasks")
     service_id = Column(Integer, ForeignKey("service.id"))
     service = relationship("Service", back_populates="tasks")
     service_name = association_proxy("service", "name")

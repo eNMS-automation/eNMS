@@ -4,17 +4,8 @@ from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.orm import backref, relationship
 from sqlalchemy.schema import UniqueConstraint
 
-from eNMS.database.associations import (
-    pool_device_table,
-    pool_link_table,
-    run_pool_table,
-    run_device_table,
-    service_device_table,
-    service_pool_table,
-    task_device_table,
-    task_pool_table,
-)
 from eNMS.models.base import AbstractBase
+from eNMS.database import db
 from eNMS.database.dialect import Column, LargeString, SmallString
 from eNMS.database.functions import fetch, fetch_all, set_custom_properties
 from eNMS.setup import properties
@@ -83,16 +74,16 @@ class Device(Object):
     last_runtime = Column(SmallString)
     last_duration = Column(SmallString)
     services = relationship(
-        "Service", secondary=service_device_table, back_populates="devices"
+        "Service", secondary=db.service_device_table, back_populates="devices"
     )
     runs = relationship(
         "Run",
-        secondary=run_device_table,
+        secondary=db.run_device_table,
         back_populates="devices",
         cascade="all,delete",
     )
-    tasks = relationship("Task", secondary=task_device_table, back_populates="devices")
-    pools = relationship("Pool", secondary=pool_device_table, back_populates="devices")
+    tasks = relationship("Task", secondary=db.task_device_table, back_populates="devices")
+    pools = relationship("Pool", secondary=db.pool_device_table, back_populates="devices")
     sessions = relationship(
         "Session", back_populates="device", cascade="all, delete-orphan"
     )
@@ -199,7 +190,7 @@ class Link(Object):
         backref=backref("destination", cascade="all, delete-orphan"),
     )
     destination_name = association_proxy("destination", "name")
-    pools = relationship("Pool", secondary=pool_link_table, back_populates="links")
+    pools = relationship("Pool", secondary=db.pool_link_table, back_populates="links")
     __table_args__ = (UniqueConstraint(name, source_id, destination_id),)
 
     def __init__(self, **kwargs):
@@ -262,18 +253,18 @@ class Pool(AbstractBase):
     description = Column(SmallString)
     operator = Column(SmallString, default="all")
     devices = relationship(
-        "Device", secondary=pool_device_table, back_populates="pools"
+        "Device", secondary=db.pool_device_table, back_populates="pools"
     )
     device_number = Column(Integer, default=0)
-    links = relationship("Link", secondary=pool_link_table, back_populates="pools")
+    links = relationship("Link", secondary=db.pool_link_table, back_populates="pools")
     link_number = Column(Integer, default=0)
     latitude = Column(SmallString, default="0.0")
     longitude = Column(SmallString, default="0.0")
     services = relationship(
-        "Service", secondary=service_pool_table, back_populates="pools"
+        "Service", secondary=db.service_pool_table, back_populates="pools"
     )
-    runs = relationship("Run", secondary=run_pool_table, back_populates="pools")
-    tasks = relationship("Task", secondary=task_pool_table, back_populates="pools")
+    runs = relationship("Run", secondary=db.run_pool_table, back_populates="pools")
+    tasks = relationship("Task", secondary=db.task_pool_table, back_populates="pools")
     manually_defined = Column(Boolean, default=False)
 
     def update(self, **kwargs):

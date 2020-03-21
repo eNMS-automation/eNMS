@@ -129,7 +129,8 @@ class Workflow(Service):
             else:
                 kwargs = {
                     "devices": [
-                        db.fetch("device", name=name).id for name in targets[service.name]
+                        db.fetch("device", name=name).id
+                        for name in targets[service.name]
                     ],
                     "service": service.id,
                     "workflow": self.id,

@@ -263,10 +263,6 @@ class BaseController:
         )
         self.syslog_server.start()
 
-    def update_parameters(self, **kwargs):
-        db.session.query(models["parameters"]).one().update(**kwargs)
-        self.__dict__.update(**kwargs)
-
     def delete_instance(self, instance_type, instance_id):
         return db.delete(instance_type, id=instance_id)
 

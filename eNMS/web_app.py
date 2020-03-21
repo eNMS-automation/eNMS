@@ -22,6 +22,7 @@ from functools import wraps
 from itertools import chain
 from logging import info
 from os import environ
+from re import search
 from uuid import getnode
 
 from eNMS import app

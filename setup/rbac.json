@@ -198,7 +198,6 @@
       "/task_action",
       "/topology_import",
       "/update",
-      "/update_parameters",
       "/update_pool",
       "/update_all_pools",
       "/upload_files",
@@ -260,7 +259,6 @@
         "/task_action",
         "/topology_import",
         "/update",
-        "/update_parameters",
         "/update_pool",
         "/update_all_pools",
         "/upload_files"

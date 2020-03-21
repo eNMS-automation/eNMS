@@ -136,10 +136,10 @@ class Database:
         self.SmallString = String(settings["database"]["small_string_length"])
 
         default_ctypes = {
-            MutableDict: {},
-            MutableList: [],
-            LargeString: "",
-            SmallString: "",
+            self.Dict: {},
+            self.List: [],
+            self.LargeString: "",
+            self.SmallString: "",
             Text: "",
         }
 

@@ -7,7 +7,7 @@ try:
 except ImportError as exc:
     warn(f"Couldn't import pynetbox module ({exc})")
 
-from eNMS.database.dialect import Column, SmallString
+from eNMS.database import db
 from eNMS.database.functions import factory
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import HiddenField, PasswordField, SelectField, StringField
@@ -18,17 +18,17 @@ class TopologyImportService(Service):
 
     __tablename__ = "topology_import_service"
     pretty_name = "Topology Import"
-    id = Column(Integer, ForeignKey("service.id"), primary_key=True)
-    netbox_address = Column(SmallString)
-    netbox_token = Column(SmallString)
-    opennms_address = Column(SmallString)
-    opennms_devices = Column(SmallString)
-    opennms_login = Column(SmallString)
-    opennms_password = Column(SmallString)
-    librenms_address = Column(SmallString)
-    librenms_token = Column(SmallString)
+    id = db.Column(Integer, ForeignKey("service.id"), primary_key=True)
+    netbox_address = db.Column(db.SmallString)
+    netbox_token = db.Column(db.SmallString)
+    opennms_address = db.Column(db.SmallString)
+    opennms_devices = db.Column(db.SmallString)
+    opennms_login = db.Column(db.SmallString)
+    opennms_password = db.Column(db.SmallString)
+    librenms_address = db.Column(db.SmallString)
+    librenms_token = db.Column(db.SmallString)
 
-    import_type = Column(SmallString)
+    import_type = db.Column(db.SmallString)
 
     __mapper_args__ = {"polymorphic_identity": "topology_import_service"}
 

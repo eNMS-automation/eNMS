@@ -1,7 +1,7 @@
 from subprocess import check_output
 from sqlalchemy import ForeignKey, Integer
 
-from eNMS.database.dialect import Column, SmallString
+from eNMS.database import db
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import HiddenField, StringField
 from eNMS.models.automation import Service
@@ -11,8 +11,8 @@ class UnixCommandService(Service):
 
     __tablename__ = "unix_command_service"
     pretty_name = "Unix Command"
-    id = Column(Integer, ForeignKey("service.id"), primary_key=True)
-    command = Column(SmallString)
+    id = db.Column(Integer, ForeignKey("service.id"), primary_key=True)
+    command = db.Column(db.SmallString)
 
     __mapper_args__ = {"polymorphic_identity": "unix_command_service"}
 

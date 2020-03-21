@@ -9,7 +9,7 @@ except ImportError as exc:
     warn(f"Couldn't import slackclient module ({exc})")
 
 from eNMS import app
-from eNMS.database.dialect import Column, LargeString, SmallString
+from eNMS.database import db
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import HiddenField, StringField
 from eNMS.models.automation import Service
@@ -19,10 +19,10 @@ class SlackNotificationService(Service):
 
     __tablename__ = "slack_notification_service"
     pretty_name = "Slack Notification"
-    id = Column(Integer, ForeignKey("service.id"), primary_key=True)
-    channel = Column(SmallString)
-    token = Column(SmallString)
-    body = Column(LargeString, default="")
+    id = db.Column(Integer, ForeignKey("service.id"), primary_key=True)
+    channel = db.Column(db.SmallString)
+    token = db.Column(db.SmallString)
+    body = db.Column(db.LargeString, default="")
 
     __mapper_args__ = {"polymorphic_identity": "slack_notification_service"}
 

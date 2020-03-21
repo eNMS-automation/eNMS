@@ -4,7 +4,6 @@ from sqlalchemy.orm import backref, relationship
 
 from eNMS.database import db
 from eNMS.models.base import AbstractBase
-from eNMS.database.dialect import Column, MutableDict, SmallString
 from eNMS.database.functions import delete, factory, fetch
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import BooleanField, HiddenField, SelectField
@@ -16,9 +15,9 @@ class Workflow(Service):
     __tablename__ = "workflow"
     pretty_name = "Workflow"
     parent_type = "service"
-    id = Column(Integer, ForeignKey("service.id"), primary_key=True)
-    close_connection = Column(Boolean, default=False)
-    labels = Column(MutableDict, info={"dont_track_changes": True})
+    id = db.Column(Integer, ForeignKey("service.id"), primary_key=True)
+    close_connection = db.Column(Boolean, default=False)
+    labels = db.Column(db.Dict, info={"dont_track_changes": True})
     services = relationship(
         "Service", secondary=db.service_workflow_table, back_populates="workflows"
     )
@@ -248,24 +247,24 @@ class WorkflowForm(ServiceForm):
 class WorkflowEdge(AbstractBase):
 
     __tablename__ = type = "workflow_edge"
-    id = Column(Integer, primary_key=True)
-    label = Column(SmallString)
-    subtype = Column(SmallString)
-    source_id = Column(Integer, ForeignKey("service.id"))
+    id = db.Column(Integer, primary_key=True)
+    label = db.Column(db.SmallString)
+    subtype = db.Column(db.SmallString)
+    source_id = db.Column(Integer, ForeignKey("service.id"))
     source = relationship(
         "Service",
         primaryjoin="Service.id == WorkflowEdge.source_id",
         backref=backref("destinations", cascade="all, delete-orphan"),
         foreign_keys="WorkflowEdge.source_id",
     )
-    destination_id = Column(Integer, ForeignKey("service.id"))
+    destination_id = db.Column(Integer, ForeignKey("service.id"))
     destination = relationship(
         "Service",
         primaryjoin="Service.id == WorkflowEdge.destination_id",
         backref=backref("sources", cascade="all, delete-orphan"),
         foreign_keys="WorkflowEdge.destination_id",
     )
-    workflow_id = Column(Integer, ForeignKey("workflow.id"))
+    workflow_id = db.Column(Integer, ForeignKey("workflow.id"))
     workflow = relationship(
         "Workflow", back_populates="edges", foreign_keys="WorkflowEdge.workflow_id"
     )

@@ -1,6 +1,6 @@
 from sqlalchemy import ForeignKey, Integer
 
-from eNMS.database.dialect import Column, MutableDict, SmallString
+from eNMS.database import db
 from eNMS.forms.automation import NapalmForm
 from eNMS.forms.fields import HiddenField, IntegerField, StringField
 
@@ -12,14 +12,14 @@ class ConfigureBgpService(ConnectionService):
     __tablename__ = "configure_bgp_service"
     pretty_name = "Configure BGP"
     parent_type = "connection_service"
-    id = Column(Integer, ForeignKey("connection_service.id"), primary_key=True)
-    local_as = Column(Integer, default=0)
-    loopback = Column(SmallString)
-    loopback_ip = Column(SmallString)
-    neighbor_ip = Column(SmallString)
-    remote_as = Column(Integer, default=0)
-    vrf_name = Column(SmallString)
-    optional_args = Column(MutableDict)
+    id = db.Column(Integer, ForeignKey("connection_service.id"), primary_key=True)
+    local_as = db.Column(Integer, default=0)
+    loopback = db.Column(db.SmallString)
+    loopback_ip = db.Column(db.SmallString)
+    neighbor_ip = db.Column(db.SmallString)
+    remote_as = db.Column(Integer, default=0)
+    vrf_name = db.Column(db.SmallString)
+    optional_args = db.Column(db.Dict)
     driver = "ios"
     use_device_driver = True
     timeout = 1

@@ -2,7 +2,7 @@ from sqlalchemy import Boolean, Float, ForeignKey, Integer
 from wtforms.widgets import TextArea
 
 from eNMS import app
-from eNMS.database.dialect import Column, LargeString, SmallString
+from eNMS.database import db
 from eNMS.forms.automation import NetmikoForm
 from eNMS.forms.fields import (
     BooleanField,
@@ -19,19 +19,19 @@ class UnixShellScriptService(Service):
 
     __tablename__ = "unix_shell_script_service"
     pretty_name = "Unix Shell"
-    id = Column(Integer, ForeignKey("service.id"), primary_key=True)
-    source_code = Column(LargeString, default="")
-    enable_mode = Column(Boolean, default=False)
-    driver = Column(SmallString)
-    use_device_driver = Column(Boolean, default=True)
-    fast_cli = Column(Boolean, default=False)
-    timeout = Column(Integer, default=10.0)
-    delay_factor = Column(Float, default=1.0)
-    global_delay_factor = Column(Float, default=1.0)
-    expect_string = Column(SmallString)
-    auto_find_prompt = Column(Boolean, default=True)
-    strip_prompt = Column(Boolean, default=True)
-    strip_command = Column(Boolean, default=True)
+    id = db.Column(Integer, ForeignKey("service.id"), primary_key=True)
+    source_code = db.Column(db.LargeString, default="")
+    enable_mode = db.Column(Boolean, default=False)
+    driver = db.Column(db.SmallString)
+    use_device_driver = db.Column(Boolean, default=True)
+    fast_cli = db.Column(Boolean, default=False)
+    timeout = db.Column(Integer, default=10.0)
+    delay_factor = db.Column(Float, default=1.0)
+    global_delay_factor = db.Column(Float, default=1.0)
+    expect_string = db.Column(db.SmallString)
+    auto_find_prompt = db.Column(Boolean, default=True)
+    strip_prompt = db.Column(Boolean, default=True)
+    strip_command = db.Column(Boolean, default=True)
 
     __mapper_args__ = {"polymorphic_identity": "unix_shell_script_service"}
 

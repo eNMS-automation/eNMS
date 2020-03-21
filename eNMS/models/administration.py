@@ -4,8 +4,8 @@ from passlib.hash import argon2
 from sqlalchemy import Boolean, Integer
 
 from eNMS import app
+from eNMS.database import db
 from eNMS.models.base import AbstractBase
-from eNMS.database.dialect import Column, MutableList, LargeString, SmallString
 from eNMS.database.functions import set_custom_properties
 
 
@@ -13,25 +13,25 @@ from eNMS.database.functions import set_custom_properties
 class Server(AbstractBase):
 
     __tablename__ = type = "server"
-    id = Column(Integer, primary_key=True)
-    name = Column(SmallString, unique=True)
-    description = Column(SmallString)
-    ip_address = Column(SmallString)
-    weight = Column(Integer, default=1)
-    status = Column(SmallString, default="down")
+    id = db.Column(Integer, primary_key=True)
+    name = db.Column(db.SmallString, unique=True)
+    description = db.Column(db.SmallString)
+    ip_address = db.Column(db.SmallString)
+    weight = db.Column(Integer, default=1)
+    status = db.Column(db.SmallString, default="down")
 
 
 @set_custom_properties
 class User(AbstractBase, UserMixin):
 
     __tablename__ = type = "user"
-    id = Column(Integer, primary_key=True)
-    name = Column(SmallString, unique=True)
-    email = Column(SmallString)
-    permissions = Column(MutableList)
-    password = Column(SmallString)
-    group = Column(SmallString)
-    small_menu = Column(Boolean, default=False, info={"dont_track_changes": True})
+    id = db.Column(Integer, primary_key=True)
+    name = db.Column(db.SmallString, unique=True)
+    email = db.Column(db.SmallString)
+    permissions = db.Column(db.List)
+    password = db.Column(db.SmallString)
+    group = db.Column(db.SmallString)
+    small_menu = db.Column(Boolean, default=False, info={"dont_track_changes": True})
 
     def update(self, **kwargs):
         if app.settings["security"]["hash_user_passwords"] and "password" in kwargs:
@@ -50,13 +50,13 @@ class User(AbstractBase, UserMixin):
 class Changelog(AbstractBase):
 
     __tablename__ = "changelog"
-    type = Column(SmallString)
+    type = db.Column(db.SmallString)
     __mapper_args__ = {"polymorphic_identity": "changelog", "polymorphic_on": type}
-    id = Column(Integer, primary_key=True)
-    time = Column(SmallString)
-    content = Column(LargeString, default="")
-    severity = Column(SmallString, default="debug")
-    user = Column(SmallString, default="admin")
+    id = db.Column(Integer, primary_key=True)
+    time = db.Column(db.SmallString)
+    content = db.Column(db.LargeString, default="")
+    severity = db.Column(db.SmallString, default="debug")
+    user = db.Column(db.SmallString, default="admin")
 
     def update(self, **kwargs):
         kwargs["time"] = str(datetime.now())

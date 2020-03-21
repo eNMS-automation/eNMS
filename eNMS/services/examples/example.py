@@ -5,7 +5,7 @@
 # - A service class, which defines the service parameters stored in the database.
 # - A service form, which defines what is displayd in the GUI.
 
-# SQL Alchemy Column types
+# SQL Alchemy db.Column types
 from sqlalchemy import Boolean, Float, ForeignKey, Integer
 
 # WTForms Field Validators
@@ -22,7 +22,7 @@ from wtforms.validators import (
     ValidationError,
 )
 
-from eNMS.database.dialect import Column, MutableDict, MutableList, SmallString
+from eNMS.database import db
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import (
     BooleanField,
@@ -41,30 +41,30 @@ class ExampleService(Service):
 
     __tablename__ = "example_service"
     pretty_name = "Example"
-    id = Column(Integer, ForeignKey("service.id"), primary_key=True)
+    id = db.Column(Integer, ForeignKey("service.id"), primary_key=True)
     # The following fields will be stored in the database as:
     # - String
-    string1 = Column(SmallString)
-    string2 = Column(SmallString)
-    mail_address = Column(SmallString)
-    ip_address = Column(SmallString)
-    mac_address = Column(SmallString)
-    regex = Column(SmallString)
-    url = Column(SmallString)
-    exclusion_field = Column(SmallString)
+    string1 = db.Column(db.SmallString)
+    string2 = db.Column(db.SmallString)
+    mail_address = db.Column(db.SmallString)
+    ip_address = db.Column(db.SmallString)
+    mac_address = db.Column(db.SmallString)
+    regex = db.Column(db.SmallString)
+    url = db.Column(db.SmallString)
+    exclusion_field = db.Column(db.SmallString)
     # - Integer
-    an_integer = Column(Integer, default=0)
-    number_in_range = Column(Integer, default=5)
-    custom_integer = Column(Integer, default=0)
+    an_integer = db.Column(Integer, default=0)
+    number_in_range = db.Column(Integer, default=5)
+    custom_integer = db.Column(Integer, default=0)
     # - Float
-    a_float = Column(Float)
+    a_float = db.Column(Float)
     # - List
-    a_list = Column(MutableList)
+    a_list = db.Column(db.List)
     # - Dictionary
-    a_dict = Column(MutableDict)
+    a_dict = db.Column(db.Dict)
     # - Boolean
-    boolean1 = Column(Boolean, default=False)
-    boolean2 = Column(Boolean, default=False)
+    boolean1 = db.Column(Boolean, default=False)
+    boolean2 = db.Column(Boolean, default=False)
 
     __mapper_args__ = {"polymorphic_identity": "example_service"}
 

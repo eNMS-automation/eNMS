@@ -4,7 +4,7 @@ from sqlalchemy import Boolean, ForeignKey, Integer
 from sqlalchemy.types import JSON
 
 from eNMS import app
-from eNMS.database.dialect import Column, LargeString, SmallString
+from eNMS.database import db
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import (
     BooleanField,
@@ -22,16 +22,16 @@ class RestCallService(Service):
 
     __tablename__ = "rest_call_service"
     pretty_name = "REST Call"
-    id = Column(Integer, ForeignKey("service.id"), primary_key=True)
-    call_type = Column(SmallString)
-    rest_url = Column(LargeString, default="")
-    payload = Column(JSON, default={})
-    params = Column(JSON, default={})
-    headers = Column(JSON, default={})
-    verify_ssl_certificate = Column(Boolean, default=True)
-    timeout = Column(Integer, default=15)
-    username = Column(SmallString)
-    password = Column(SmallString)
+    id = db.Column(Integer, ForeignKey("service.id"), primary_key=True)
+    call_type = db.Column(db.SmallString)
+    rest_url = db.Column(db.LargeString, default="")
+    payload = db.Column(JSON, default={})
+    params = db.Column(JSON, default={})
+    headers = db.Column(JSON, default={})
+    verify_ssl_certificate = db.Column(Boolean, default=True)
+    timeout = db.Column(Integer, default=15)
+    username = db.Column(db.SmallString)
+    password = db.Column(db.SmallString)
 
     __mapper_args__ = {"polymorphic_identity": "rest_call_service"}
 

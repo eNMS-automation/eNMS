@@ -5,7 +5,7 @@ from re import M, sub
 from sqlalchemy import Boolean, Float, ForeignKey, Integer
 from wtforms import FormField
 
-from eNMS.database.dialect import Column, MutableList, LargeString, SmallString
+from eNMS.database import db
 from eNMS.forms.automation import NetmikoForm
 from eNMS.forms.fields import FieldList, HiddenField, StringField
 from eNMS.models.automation import ConnectionService
@@ -16,17 +16,17 @@ class DataBackupService(ConnectionService):
     __tablename__ = "data_backup_service"
     pretty_name = "Netmiko Operational Data Backup"
     parent_type = "connection_service"
-    id = Column(Integer, ForeignKey("connection_service.id"), primary_key=True)
-    enable_mode = Column(Boolean, default=True)
-    config_mode = Column(Boolean, default=False)
-    driver = Column(SmallString)
-    use_device_driver = Column(Boolean, default=True)
-    fast_cli = Column(Boolean, default=False)
-    timeout = Column(Integer, default=10.0)
-    global_delay_factor = Column(Float, default=1.0)
-    configuration_command = Column(LargeString)
-    operational_data_command = Column(MutableList)
-    replacements = Column(MutableList)
+    id = db.Column(Integer, ForeignKey("connection_service.id"), primary_key=True)
+    enable_mode = db.Column(Boolean, default=True)
+    config_mode = db.Column(Boolean, default=False)
+    driver = db.Column(db.SmallString)
+    use_device_driver = db.Column(Boolean, default=True)
+    fast_cli = db.Column(Boolean, default=False)
+    timeout = db.Column(Integer, default=10.0)
+    global_delay_factor = db.Column(Float, default=1.0)
+    configuration_command = db.Column(db.LargeString)
+    operational_data_command = db.Column(db.List)
+    replacements = db.Column(db.List)
 
     __mapper_args__ = {"polymorphic_identity": "data_backup_service"}
 

@@ -1,7 +1,7 @@
 from sqlalchemy import Boolean, Float, ForeignKey, Integer
 from traceback import format_exc
 
-from eNMS.database.dialect import Column, LargeString, SmallString
+from eNMS.database import db
 from eNMS.forms.fields import HiddenField, StringField
 from eNMS.forms.automation import NetmikoForm
 from eNMS.models.automation import ConnectionService
@@ -12,22 +12,22 @@ class NetmikoPromptsService(ConnectionService):
     __tablename__ = "netmiko_prompts_service"
     pretty_name = "Netmiko Prompts"
     parent_type = "connection_service"
-    id = Column(Integer, ForeignKey("connection_service.id"), primary_key=True)
-    enable_mode = Column(Boolean, default=True)
-    config_mode = Column(Boolean, default=False)
-    command = Column(SmallString)
-    confirmation1 = Column(LargeString, default="")
-    response1 = Column(SmallString)
-    confirmation2 = Column(LargeString, default="")
-    response2 = Column(SmallString)
-    confirmation3 = Column(LargeString, default="")
-    response3 = Column(SmallString)
-    driver = Column(SmallString)
-    use_device_driver = Column(Boolean, default=True)
-    fast_cli = Column(Boolean, default=False)
-    timeout = Column(Integer, default=10.0)
-    delay_factor = Column(Float, default=1.0)
-    global_delay_factor = Column(Float, default=1.0)
+    id = db.Column(Integer, ForeignKey("connection_service.id"), primary_key=True)
+    enable_mode = db.Column(Boolean, default=True)
+    config_mode = db.Column(Boolean, default=False)
+    command = db.Column(db.SmallString)
+    confirmation1 = db.Column(db.LargeString, default="")
+    response1 = db.Column(db.SmallString)
+    confirmation2 = db.Column(db.LargeString, default="")
+    response2 = db.Column(db.SmallString)
+    confirmation3 = db.Column(db.LargeString, default="")
+    response3 = db.Column(db.SmallString)
+    driver = db.Column(db.SmallString)
+    use_device_driver = db.Column(Boolean, default=True)
+    fast_cli = db.Column(Boolean, default=False)
+    timeout = db.Column(Integer, default=10.0)
+    delay_factor = db.Column(Float, default=1.0)
+    global_delay_factor = db.Column(Float, default=1.0)
 
     __mapper_args__ = {"polymorphic_identity": "netmiko_prompts_service"}
 

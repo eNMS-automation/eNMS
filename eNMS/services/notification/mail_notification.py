@@ -2,7 +2,7 @@ from sqlalchemy import ForeignKey, Integer
 from wtforms.widgets import TextArea
 
 from eNMS import app
-from eNMS.database.dialect import Column, LargeString, SmallString
+from eNMS.database import db
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import HiddenField, StringField
 from eNMS.models.automation import Service
@@ -12,11 +12,11 @@ class MailNotificationService(Service):
 
     __tablename__ = "mail_notification_service"
     pretty_name = "Mail Notification"
-    id = Column(Integer, ForeignKey("service.id"), primary_key=True)
-    title = Column(SmallString)
-    sender = Column(SmallString)
-    recipients = Column(SmallString)
-    body = Column(LargeString, default="")
+    id = db.Column(Integer, ForeignKey("service.id"), primary_key=True)
+    title = db.Column(db.SmallString)
+    sender = db.Column(db.SmallString)
+    recipients = db.Column(db.SmallString)
+    body = db.Column(db.LargeString, default="")
 
     __mapper_args__ = {"polymorphic_identity": "mail_notification_service"}
 

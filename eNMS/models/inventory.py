@@ -6,7 +6,6 @@ from sqlalchemy.schema import UniqueConstraint
 
 from eNMS.models.base import AbstractBase
 from eNMS.database import db
-from eNMS.database.dialect import Column, LargeString, SmallString
 from eNMS.database.functions import fetch, fetch_all, set_custom_properties
 from eNMS.setup import properties
 
@@ -14,15 +13,15 @@ from eNMS.setup import properties
 class Object(AbstractBase):
 
     __tablename__ = "object"
-    type = Column(SmallString)
+    type = db.Column(db.SmallString)
     __mapper_args__ = {"polymorphic_identity": "object", "polymorphic_on": type}
-    id = Column(Integer, primary_key=True)
-    last_modified = Column(SmallString, info={"dont_track_changes": True})
-    subtype = Column(SmallString)
-    description = Column(SmallString)
-    model = Column(SmallString)
-    location = Column(SmallString)
-    vendor = Column(SmallString)
+    id = db.Column(Integer, primary_key=True)
+    last_modified = db.Column(db.SmallString, info={"dont_track_changes": True})
+    subtype = db.Column(db.SmallString)
+    description = db.Column(db.SmallString)
+    model = db.Column(db.SmallString)
+    location = db.Column(db.SmallString)
+    vendor = db.Column(db.SmallString)
 
     def update(self, **kwargs):
         super().update(**kwargs)
@@ -52,27 +51,27 @@ class Device(Object):
     __tablename__ = class_type = "device"
     __mapper_args__ = {"polymorphic_identity": "device"}
     parent_type = "object"
-    id = Column(Integer, ForeignKey(Object.id), primary_key=True)
-    name = Column(SmallString, unique=True)
-    icon = Column(SmallString, default="router")
-    operating_system = Column(SmallString)
-    os_version = Column(SmallString)
-    ip_address = Column(SmallString)
-    longitude = Column(SmallString, default="0.0")
-    latitude = Column(SmallString, default="0.0")
-    port = Column(Integer, default=22)
-    username = Column(SmallString)
-    password = Column(SmallString)
-    enable_password = Column(SmallString)
-    netmiko_driver = Column(SmallString, default="cisco_ios")
-    napalm_driver = Column(SmallString, default="ios")
-    configuration = Column(LargeString, info={"dont_track_changes": True})
-    operational_data = Column(LargeString, info={"dont_track_changes": True})
-    last_failure = Column(SmallString, default="Never")
-    last_status = Column(SmallString, default="Never")
-    last_update = Column(SmallString, default="Never")
-    last_runtime = Column(SmallString)
-    last_duration = Column(SmallString)
+    id = db.Column(Integer, ForeignKey(Object.id), primary_key=True)
+    name = db.Column(db.SmallString, unique=True)
+    icon = db.Column(db.SmallString, default="router")
+    operating_system = db.Column(db.SmallString)
+    os_version = db.Column(db.SmallString)
+    ip_address = db.Column(db.SmallString)
+    longitude = db.Column(db.SmallString, default="0.0")
+    latitude = db.Column(db.SmallString, default="0.0")
+    port = db.Column(Integer, default=22)
+    username = db.Column(db.SmallString)
+    password = db.Column(db.SmallString)
+    enable_password = db.Column(db.SmallString)
+    netmiko_driver = db.Column(db.SmallString, default="cisco_ios")
+    napalm_driver = db.Column(db.SmallString, default="ios")
+    configuration = db.Column(db.LargeString, info={"dont_track_changes": True})
+    operational_data = db.Column(db.LargeString, info={"dont_track_changes": True})
+    last_failure = db.Column(db.SmallString, default="Never")
+    last_status = db.Column(db.SmallString, default="Never")
+    last_update = db.Column(db.SmallString, default="Never")
+    last_runtime = db.Column(db.SmallString)
+    last_duration = db.Column(db.SmallString)
     services = relationship(
         "Service", secondary=db.service_device_table, back_populates="devices"
     )
@@ -177,11 +176,11 @@ class Link(Object):
     __tablename__ = class_type = "link"
     __mapper_args__ = {"polymorphic_identity": "link"}
     parent_type = "object"
-    id = Column(Integer, ForeignKey("object.id"), primary_key=True)
-    name = Column(SmallString)
-    color = Column(SmallString, default="#000000")
-    source_id = Column(Integer, ForeignKey("device.id"))
-    destination_id = Column(Integer, ForeignKey("device.id"))
+    id = db.Column(Integer, ForeignKey("object.id"), primary_key=True)
+    name = db.Column(db.SmallString)
+    color = db.Column(db.SmallString, default="#000000")
+    source_id = db.Column(Integer, ForeignKey("device.id"))
+    destination_id = db.Column(Integer, ForeignKey("device.id"))
     source = relationship(
         Device,
         primaryjoin=source_id == Device.id,
@@ -233,15 +232,15 @@ class Link(Object):
 def set_pool_properties(Pool):
     for property in properties["filtering"]["device"]:
         setattr(
-            Pool, f"device_{property}", Column(LargeString, default=""),
+            Pool, f"device_{property}", db.Column(db.LargeString, default=""),
         )
         setattr(
-            Pool, f"device_{property}_match", Column(SmallString, default="inclusion")
+            Pool, f"device_{property}_match", db.Column(db.SmallString, default="inclusion")
         )
     for property in properties["filtering"]["link"]:
-        setattr(Pool, f"link_{property}", Column(LargeString, default=""))
+        setattr(Pool, f"link_{property}", db.Column(db.LargeString, default=""))
         setattr(
-            Pool, f"link_{property}_match", Column(SmallString, default="inclusion")
+            Pool, f"link_{property}_match", db.Column(db.SmallString, default="inclusion")
         )
     return Pool
 
@@ -251,25 +250,25 @@ def set_pool_properties(Pool):
 class Pool(AbstractBase):
 
     __tablename__ = type = "pool"
-    id = Column(Integer, primary_key=True)
-    name = Column(SmallString, unique=True)
-    last_modified = Column(SmallString, info={"dont_track_changes": True})
-    description = Column(SmallString)
-    operator = Column(SmallString, default="all")
+    id = db.Column(Integer, primary_key=True)
+    name = db.Column(db.SmallString, unique=True)
+    last_modified = db.Column(db.SmallString, info={"dont_track_changes": True})
+    description = db.Column(db.SmallString)
+    operator = db.Column(db.SmallString, default="all")
     devices = relationship(
         "Device", secondary=db.pool_device_table, back_populates="pools"
     )
-    device_number = Column(Integer, default=0)
+    device_number = db.Column(Integer, default=0)
     links = relationship("Link", secondary=db.pool_link_table, back_populates="pools")
-    link_number = Column(Integer, default=0)
-    latitude = Column(SmallString, default="0.0")
-    longitude = Column(SmallString, default="0.0")
+    link_number = db.Column(Integer, default=0)
+    latitude = db.Column(db.SmallString, default="0.0")
+    longitude = db.Column(db.SmallString, default="0.0")
     services = relationship(
         "Service", secondary=db.service_pool_table, back_populates="pools"
     )
     runs = relationship("Run", secondary=db.run_pool_table, back_populates="pools")
     tasks = relationship("Task", secondary=db.task_pool_table, back_populates="pools")
-    manually_defined = Column(Boolean, default=False)
+    manually_defined = db.Column(Boolean, default=False)
 
     def update(self, **kwargs):
         super().update(**kwargs)
@@ -308,12 +307,12 @@ class Session(AbstractBase):
 
     __tablename__ = type = "session"
     private = True
-    id = Column(Integer, primary_key=True)
-    name = Column(SmallString, unique=True)
-    timestamp = Column(SmallString)
-    user = Column(SmallString)
-    content = Column(LargeString, info={"dont_track_changes": True})
-    device_id = Column(Integer, ForeignKey("device.id"))
+    id = db.Column(Integer, primary_key=True)
+    name = db.Column(db.SmallString, unique=True)
+    timestamp = db.Column(db.SmallString)
+    user = db.Column(db.SmallString)
+    content = db.Column(db.LargeString, info={"dont_track_changes": True})
+    device_id = db.Column(Integer, ForeignKey("device.id"))
     device = relationship(
         "Device", back_populates="sessions", foreign_keys="Session.device_id"
     )

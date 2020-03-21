@@ -6,7 +6,7 @@ from sqlalchemy import Boolean, ForeignKey, Integer
 from wtforms import FormField
 
 from eNMS import app
-from eNMS.database.dialect import Column, MutableList, SmallString, MutableDict
+from eNMS.database import db
 from eNMS.forms.automation import NapalmForm
 from eNMS.forms.fields import HiddenField, StringField, SelectMultipleField, FieldList
 from eNMS.models.automation import ConnectionService
@@ -17,14 +17,14 @@ class NapalmBackupService(ConnectionService):
     __tablename__ = "napalm_backup_service"
     pretty_name = "NAPALM Operational Data Backup"
     parent_type = "connection_service"
-    id = Column(Integer, ForeignKey("connection_service.id"), primary_key=True)
-    driver = Column(SmallString)
-    use_device_driver = Column(Boolean, default=True)
-    timeout = Column(Integer, default=60)
-    optional_args = Column(MutableDict)
-    configuration_getters = Column(MutableList)
-    operational_data_getters = Column(MutableList)
-    replacements = Column(MutableList)
+    id = db.Column(Integer, ForeignKey("connection_service.id"), primary_key=True)
+    driver = db.Column(db.SmallString)
+    use_device_driver = db.Column(Boolean, default=True)
+    timeout = db.Column(Integer, default=60)
+    optional_args = db.Column(db.Dict)
+    configuration_getters = db.Column(db.List)
+    operational_data_getters = db.Column(db.List)
+    replacements = db.Column(db.List)
 
     __mapper_args__ = {"polymorphic_identity": "napalm_backup_service"}
 

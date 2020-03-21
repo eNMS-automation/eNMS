@@ -1,7 +1,7 @@
 from sqlalchemy import Boolean, ForeignKey, Integer
 from wtforms.widgets import TextArea
 
-from eNMS.database.dialect import Column, LargeString, MutableDict, SmallString
+from eNMS.database import db
 from eNMS.forms.fields import HiddenField, SelectField, StringField
 from eNMS.forms.automation import NapalmForm
 from eNMS.models.automation import ConnectionService
@@ -12,13 +12,13 @@ class NapalmConfigurationService(ConnectionService):
     __tablename__ = "napalm_configuration_service"
     pretty_name = "NAPALM Configuration"
     parent_type = "connection_service"
-    id = Column(Integer, ForeignKey("connection_service.id"), primary_key=True)
-    action = Column(SmallString)
-    content = Column(LargeString, default="")
-    driver = Column(SmallString)
-    use_device_driver = Column(Boolean, default=True)
-    timeout = Column(Integer, default=60)
-    optional_args = Column(MutableDict)
+    id = db.Column(Integer, ForeignKey("connection_service.id"), primary_key=True)
+    action = db.Column(db.SmallString)
+    content = db.Column(db.LargeString, default="")
+    driver = db.Column(db.SmallString)
+    use_device_driver = db.Column(Boolean, default=True)
+    timeout = db.Column(Integer, default=60)
+    optional_args = db.Column(db.Dict)
 
     __mapper_args__ = {"polymorphic_identity": "napalm_configuration_service"}
 

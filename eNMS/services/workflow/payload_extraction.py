@@ -4,7 +4,7 @@ from sqlalchemy import ForeignKey, Integer
 from textfsm import TextFSM
 from wtforms.widgets import TextArea
 
-from eNMS.database.dialect import Column, LargeString, SmallString
+from eNMS.database import db
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import HiddenField, SelectField, StringField
 from eNMS.models.automation import Service
@@ -14,22 +14,22 @@ class PayloadExtractionService(Service):
 
     __tablename__ = "payload_extraction_service"
     pretty_name = "Payload Extraction"
-    id = Column(Integer, ForeignKey("service.id"), primary_key=True)
-    variable1 = Column(SmallString)
-    query1 = Column(SmallString)
-    match_type1 = Column(SmallString, default="none")
-    match1 = Column(LargeString, default="")
-    operation1 = Column(SmallString, default="set")
-    variable2 = Column(SmallString)
-    query2 = Column(SmallString)
-    match_type2 = Column(SmallString, default="none")
-    match2 = Column(LargeString, default="")
-    operation2 = Column(SmallString, default="set")
-    variable3 = Column(SmallString)
-    query3 = Column(SmallString)
-    match_type3 = Column(SmallString, default="none")
-    match3 = Column(LargeString, default="")
-    operation3 = Column(SmallString, default="set")
+    id = db.Column(Integer, ForeignKey("service.id"), primary_key=True)
+    variable1 = db.Column(db.SmallString)
+    query1 = db.Column(db.SmallString)
+    match_type1 = db.Column(db.SmallString, default="none")
+    match1 = db.Column(db.LargeString, default="")
+    operation1 = db.Column(db.SmallString, default="set")
+    variable2 = db.Column(db.SmallString)
+    query2 = db.Column(db.SmallString)
+    match_type2 = db.Column(db.SmallString, default="none")
+    match2 = db.Column(db.LargeString, default="")
+    operation2 = db.Column(db.SmallString, default="set")
+    variable3 = db.Column(db.SmallString)
+    query3 = db.Column(db.SmallString)
+    match_type3 = db.Column(db.SmallString, default="none")
+    match3 = db.Column(db.LargeString, default="")
+    operation3 = db.Column(db.SmallString, default="set")
 
     __mapper_args__ = {"polymorphic_identity": "payload_extraction_service"}
 

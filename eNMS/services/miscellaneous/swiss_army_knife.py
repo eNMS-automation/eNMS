@@ -6,7 +6,7 @@ from requests import get
 from sqlalchemy import ForeignKey, Integer
 
 from eNMS import app
-from eNMS.database.dialect import Column
+from eNMS.database import db
 from eNMS.database.functions import factory, fetch_all
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import HiddenField
@@ -17,7 +17,7 @@ class SwissArmyKnifeService(Service):
 
     __tablename__ = "swiss_army_knife_service"
     pretty_name = "Swiss Army Knife"
-    id = Column(Integer, ForeignKey("service.id"), primary_key=True)
+    id = db.Column(Integer, ForeignKey("service.id"), primary_key=True)
 
     __mapper_args__ = {"polymorphic_identity": "swiss_army_knife_service"}
 

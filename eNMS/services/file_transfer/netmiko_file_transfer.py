@@ -2,7 +2,7 @@ from netmiko import file_transfer
 from sqlalchemy import Boolean, Float, ForeignKey, Integer
 from wtforms.validators import InputRequired
 
-from eNMS.database.dialect import Column, SmallString
+from eNMS.database import db
 from eNMS.forms.fields import BooleanField, HiddenField, SelectField, StringField
 from eNMS.forms.automation import NetmikoForm
 from eNMS.models.automation import ConnectionService
@@ -13,21 +13,21 @@ class NetmikoFileTransferService(ConnectionService):
     __tablename__ = "netmiko_file_transfer_service"
     pretty_name = "Netmiko File Transfer"
     parent_type = "connection_service"
-    id = Column(Integer, ForeignKey("connection_service.id"), primary_key=True)
-    enable_mode = Column(Boolean, default=True)
-    config_mode = Column(Boolean, default=False)
-    source_file = Column(SmallString)
-    destination_file = Column(SmallString)
-    direction = Column(SmallString)
-    disable_md5 = Column(Boolean, default=False)
-    driver = Column(SmallString)
-    use_device_driver = Column(Boolean, default=True)
-    file_system = Column(SmallString)
-    inline_transfer = Column(Boolean, default=False)
-    overwrite_file = Column(Boolean, default=False)
-    fast_cli = Column(Boolean, default=False)
-    timeout = Column(Integer, default=1)
-    global_delay_factor = Column(Float, default=1.0)
+    id = db.Column(Integer, ForeignKey("connection_service.id"), primary_key=True)
+    enable_mode = db.Column(Boolean, default=True)
+    config_mode = db.Column(Boolean, default=False)
+    source_file = db.Column(db.SmallString)
+    destination_file = db.Column(db.SmallString)
+    direction = db.Column(db.SmallString)
+    disable_md5 = db.Column(Boolean, default=False)
+    driver = db.Column(db.SmallString)
+    use_device_driver = db.Column(Boolean, default=True)
+    file_system = db.Column(db.SmallString)
+    inline_transfer = db.Column(Boolean, default=False)
+    overwrite_file = db.Column(Boolean, default=False)
+    fast_cli = db.Column(Boolean, default=False)
+    timeout = db.Column(Integer, default=1)
+    global_delay_factor = db.Column(Float, default=1.0)
 
     __mapper_args__ = {"polymorphic_identity": "netmiko_file_transfer_service"}
 

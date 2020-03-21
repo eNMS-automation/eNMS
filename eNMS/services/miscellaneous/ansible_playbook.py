@@ -5,7 +5,7 @@ from subprocess import check_output
 from traceback import format_exc
 
 from eNMS import app
-from eNMS.database.dialect import Column, MutableDict, SmallString
+from eNMS.database import db
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import (
     BooleanField,
@@ -21,11 +21,11 @@ class AnsiblePlaybookService(Service):
 
     __tablename__ = "ansible_playbook_service"
     pretty_name = "Ansible Playbook"
-    id = Column(Integer, ForeignKey("service.id"), primary_key=True)
-    playbook_path = Column(SmallString)
-    arguments = Column(SmallString)
-    options = Column(MutableDict)
-    pass_device_properties = Column(Boolean, default=False)
+    id = db.Column(Integer, ForeignKey("service.id"), primary_key=True)
+    playbook_path = db.Column(db.SmallString)
+    arguments = db.Column(db.SmallString)
+    options = db.Column(db.Dict)
+    pass_device_properties = db.Column(Boolean, default=False)
 
     exit_codes = {
         "0": "OK or no hosts matched",

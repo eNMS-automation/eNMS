@@ -9,7 +9,6 @@ from sqlalchemy.orm import relationship
 from eNMS import app
 from eNMS.database import db
 from eNMS.models.base import AbstractBase
-from eNMS.database.dialect import Column, MutableDict, SmallString
 from eNMS.database.functions import set_custom_properties
 
 
@@ -17,25 +16,25 @@ from eNMS.database.functions import set_custom_properties
 class Task(AbstractBase):
 
     __tablename__ = type = "task"
-    id = Column(Integer, primary_key=True)
-    aps_job_id = Column(SmallString)
-    name = Column(SmallString, unique=True)
-    description = Column(SmallString)
-    creation_time = Column(SmallString)
-    scheduling_mode = Column(SmallString, default="standard")
-    periodic = Column(Boolean)
-    frequency = Column(Integer)
-    frequency_unit = Column(SmallString, default="seconds")
-    start_date = Column(SmallString)
-    end_date = Column(SmallString)
-    crontab_expression = Column(SmallString)
-    is_active = Column(Boolean, default=False)
-    initial_payload = Column(MutableDict)
+    id = db.Column(Integer, primary_key=True)
+    aps_job_id = db.Column(db.SmallString)
+    name = db.Column(db.SmallString, unique=True)
+    description = db.Column(db.SmallString)
+    creation_time = db.Column(db.SmallString)
+    scheduling_mode = db.Column(db.SmallString, default="standard")
+    periodic = db.Column(Boolean)
+    frequency = db.Column(Integer)
+    frequency_unit = db.Column(db.SmallString, default="seconds")
+    start_date = db.Column(db.SmallString)
+    end_date = db.Column(db.SmallString)
+    crontab_expression = db.Column(db.SmallString)
+    is_active = db.Column(Boolean, default=False)
+    initial_payload = db.Column(db.Dict)
     devices = relationship(
         "Device", secondary=db.task_device_table, back_populates="tasks"
     )
     pools = relationship("Pool", secondary=db.task_pool_table, back_populates="tasks")
-    service_id = Column(Integer, ForeignKey("service.id"))
+    service_id = db.Column(Integer, ForeignKey("service.id"))
     service = relationship("Service", back_populates="tasks")
     service_name = association_proxy("service", "name")
     model_properties = ["next_run_time", "time_before_next_run", "status"]
@@ -165,13 +164,13 @@ class Task(AbstractBase):
 class Event(AbstractBase):
 
     __tablename__ = type = "event"
-    id = Column(Integer, primary_key=True)
-    name = Column(SmallString, unique=True)
-    log_source = Column(SmallString)
-    log_source_regex = Column(Boolean, default=False)
-    log_content = Column(SmallString)
-    log_content_regex = Column(Boolean, default=False)
-    service_id = Column(Integer, ForeignKey("service.id"))
+    id = db.Column(Integer, primary_key=True)
+    name = db.Column(db.SmallString, unique=True)
+    log_source = db.Column(db.SmallString)
+    log_source_regex = db.Column(Boolean, default=False)
+    log_content = db.Column(db.SmallString)
+    log_content_regex = db.Column(Boolean, default=False)
+    service_id = db.Column(Integer, ForeignKey("service.id"))
     service = relationship("Service", back_populates="events")
     service_name = association_proxy("service", "name")
 

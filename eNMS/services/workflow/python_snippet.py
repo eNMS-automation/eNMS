@@ -2,7 +2,7 @@ import traceback
 from sqlalchemy import ForeignKey, Integer
 from wtforms.widgets import TextArea
 
-from eNMS.database.dialect import Column, LargeString
+from eNMS.database import db
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import HiddenField, StringField
 from eNMS.models.automation import Service
@@ -13,8 +13,8 @@ class PythonSnippetService(Service):
     __tablename__ = "python_snippet_service"
     pretty_name = "Python Snippet"
 
-    id = Column(Integer, ForeignKey("service.id"), primary_key=True)
-    source_code = Column(LargeString)
+    id = db.Column(Integer, ForeignKey("service.id"), primary_key=True)
+    source_code = db.Column(db.LargeString)
 
     __mapper_args__ = {"polymorphic_identity": "python_snippet_service"}
 

@@ -4,7 +4,7 @@ from sqlalchemy import ForeignKey, Integer
 from wtforms.widgets import TextArea
 
 from eNMS import app
-from eNMS.database.dialect import Column, LargeString, SmallString
+from eNMS.database import db
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import HiddenField, StringField
 from eNMS.models.automation import Service
@@ -14,9 +14,9 @@ class MattermostNotificationService(Service):
 
     __tablename__ = "mattermost_notification_service"
     pretty_name = "Mattermost Notification"
-    id = Column(Integer, ForeignKey("service.id"), primary_key=True)
-    channel = Column(SmallString)
-    body = Column(LargeString, default="")
+    id = db.Column(Integer, ForeignKey("service.id"), primary_key=True)
+    channel = db.Column(db.SmallString)
+    body = db.Column(db.LargeString, default="")
 
     __mapper_args__ = {"polymorphic_identity": "mattermost_notification_service"}
 

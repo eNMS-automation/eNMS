@@ -5,7 +5,7 @@ from paramiko import SSHClient, AutoAddPolicy
 from sqlalchemy import Boolean, ForeignKey, Integer
 from wtforms.validators import InputRequired
 
-from eNMS.database.dialect import Column, SmallString
+from eNMS.database import db
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import (
     BooleanField,
@@ -21,17 +21,17 @@ class GenericFileTransferService(Service):
 
     __tablename__ = "generic_file_transfer_service"
     pretty_name = "Generic File Transfer"
-    id = Column(Integer, ForeignKey("service.id"), primary_key=True)
-    direction = Column(SmallString)
-    protocol = Column(SmallString)
-    source_file = Column(SmallString)
-    destination_file = Column(SmallString)
-    missing_host_key_policy = Column(Boolean, default=False)
-    load_known_host_keys = Column(Boolean, default=False)
-    look_for_keys = Column(Boolean, default=False)
-    source_file_includes_globbing = Column(Boolean, default=False)
-    max_transfer_size = Column(Integer, default=2 ** 30)
-    window_size = Column(Integer, default=2 ** 30)
+    id = db.Column(Integer, ForeignKey("service.id"), primary_key=True)
+    direction = db.Column(db.SmallString)
+    protocol = db.Column(db.SmallString)
+    source_file = db.Column(db.SmallString)
+    destination_file = db.Column(db.SmallString)
+    missing_host_key_policy = db.Column(Boolean, default=False)
+    load_known_host_keys = db.Column(Boolean, default=False)
+    look_for_keys = db.Column(Boolean, default=False)
+    source_file_includes_globbing = db.Column(Boolean, default=False)
+    max_transfer_size = db.Column(Integer, default=2 ** 30)
+    window_size = db.Column(Integer, default=2 ** 30)
 
     __mapper_args__ = {"polymorphic_identity": "generic_file_transfer_service"}
 

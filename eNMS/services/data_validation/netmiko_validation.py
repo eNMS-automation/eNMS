@@ -1,7 +1,7 @@
 from sqlalchemy import Boolean, Float, ForeignKey, Integer
 from traceback import format_exc
 
-from eNMS.database.dialect import Column, LargeString, SmallString
+from eNMS.database import db
 from eNMS.forms.fields import BooleanField, HiddenField, StringField
 from eNMS.forms.automation import NetmikoForm
 from eNMS.models.automation import ConnectionService
@@ -12,21 +12,21 @@ class NetmikoValidationService(ConnectionService):
     __tablename__ = "netmiko_validation_service"
     pretty_name = "Netmiko Validation"
     parent_type = "connection_service"
-    id = Column(Integer, ForeignKey("connection_service.id"), primary_key=True)
-    enable_mode = Column(Boolean, default=True)
-    config_mode = Column(Boolean, default=False)
-    command = Column(LargeString)
-    driver = Column(SmallString)
-    use_device_driver = Column(Boolean, default=True)
-    fast_cli = Column(Boolean, default=False)
-    timeout = Column(Float, default=10.0)
-    delay_factor = Column(Float, default=1.0)
-    global_delay_factor = Column(Float, default=1.0)
-    expect_string = Column(SmallString)
-    auto_find_prompt = Column(Boolean, default=True)
-    strip_prompt = Column(Boolean, default=True)
-    strip_command = Column(Boolean, default=True)
-    use_genie = Column(Boolean, default=False)
+    id = db.Column(Integer, ForeignKey("connection_service.id"), primary_key=True)
+    enable_mode = db.Column(Boolean, default=True)
+    config_mode = db.Column(Boolean, default=False)
+    command = db.Column(db.LargeString)
+    driver = db.Column(db.SmallString)
+    use_device_driver = db.Column(Boolean, default=True)
+    fast_cli = db.Column(Boolean, default=False)
+    timeout = db.Column(Float, default=10.0)
+    delay_factor = db.Column(Float, default=1.0)
+    global_delay_factor = db.Column(Float, default=1.0)
+    expect_string = db.Column(db.SmallString)
+    auto_find_prompt = db.Column(Boolean, default=True)
+    strip_prompt = db.Column(Boolean, default=True)
+    strip_command = db.Column(Boolean, default=True)
+    use_genie = db.Column(Boolean, default=False)
 
     __mapper_args__ = {"polymorphic_identity": "netmiko_validation_service"}
 

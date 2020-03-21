@@ -2,7 +2,7 @@ from socket import error, gaierror, socket, timeout
 from subprocess import check_output
 from sqlalchemy import ForeignKey, Integer
 
-from eNMS.database.dialect import Column, SmallString
+from eNMS.database import db
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import HiddenField, IntegerField, SelectField, StringField
 from eNMS.models.automation import Service
@@ -12,13 +12,13 @@ class PingService(Service):
 
     __tablename__ = "ping_service"
     pretty_name = "ICMP / TCP Ping"
-    id = Column(Integer, ForeignKey("service.id"), primary_key=True)
-    protocol = Column(SmallString)
-    ports = Column(SmallString)
-    count = Column(Integer, default=5)
-    timeout = Column(Integer, default=2)
-    ttl = Column(Integer, default=60)
-    packet_size = Column(Integer, default=56)
+    id = db.Column(Integer, ForeignKey("service.id"), primary_key=True)
+    protocol = db.Column(db.SmallString)
+    ports = db.Column(db.SmallString)
+    count = db.Column(Integer, default=5)
+    timeout = db.Column(Integer, default=2)
+    ttl = db.Column(Integer, default=60)
+    packet_size = db.Column(Integer, default=56)
 
     __mapper_args__ = {"polymorphic_identity": "ping_service"}
 

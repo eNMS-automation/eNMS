@@ -3,7 +3,6 @@ from sqlalchemy import Boolean, Float, func, Integer
 
 from eNMS.setup import properties
 from eNMS.database import db
-from eNMS.database.dialect import Column, LargeString
 from eNMS.models import models
 
 
@@ -85,12 +84,12 @@ def set_custom_properties(cls):
         setattr(
             cls,
             property,
-            Column(
+            db.Column(
                 {
                     "boolean": Boolean,
                     "float": Float,
                     "integer": Integer,
-                    "string": LargeString,
+                    "string": db.LargeString,
                 }[values["type"]],
                 default=values["default"],
             ),

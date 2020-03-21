@@ -33,7 +33,6 @@ from eNMS.forms import (
     form_templates,
 )
 from eNMS.forms.administration import LoginForm
-#from eNMS.framework.rest import configure_rest_api
 from eNMS.models import models, property_types, relationships
 from eNMS.database.properties import property_names
 from eNMS.setup import properties, rbac
@@ -67,7 +66,6 @@ class WebApplication(Flask):
 
     def configure_rest_api(self):
 
-
         api = Api(self, decorators=[self.csrf.exempt])
 
         class CreatePool(Resource):
@@ -80,17 +78,18 @@ class WebApplication(Flask):
                     **{
                         "name": data["name"],
                         "devices": [
-                            fetch("device", name=name).id for name in data.get("devices", "")
+                            fetch("device", name=name).id
+                            for name in data.get("devices", "")
                         ],
                         "links": [
-                            fetch("link", name=name).id for name in data.get("links", "")
+                            fetch("link", name=name).id
+                            for name in data.get("links", "")
                         ],
                         "manually_defined": True,
                     },
                 )
                 Session.commit()
                 return data
-
 
         class Heartbeat(Resource):
             def get(self):
@@ -99,14 +98,14 @@ class WebApplication(Flask):
                     "cluster_id": app.settings["cluster"]["id"],
                 }
 
-
         class Query(Resource):
             decorators = [self.auth.login_required, self.catch_exceptions]
 
             def get(self, cls):
                 results = fetch(cls, all_matches=True, **request.args.to_dict())
-                return [result.get_properties(exclude=["positions"]) for result in results]
-
+                return [
+                    result.get_properties(exclude=["positions"]) for result in results
+                ]
 
         class GetInstance(Resource):
             decorators = [self.auth.login_required, self.catch_exceptions]
@@ -121,13 +120,11 @@ class WebApplication(Flask):
                 Session.commit()
                 return result
 
-
         class GetConfiguration(Resource):
             decorators = [self.auth.login_required, self.catch_exceptions]
 
             def get(self, name):
                 return fetch("device", name=name).configuration
-
 
         class GetResult(Resource):
             decorators = [self.auth.login_required, self.catch_exceptions]
@@ -135,7 +132,6 @@ class WebApplication(Flask):
             def get(self, name, runtime):
                 service = fetch("service", name=name)
                 return fetch("result", service_id=service.id, runtime=runtime).result
-
 
         class UpdateInstance(Resource):
             decorators = [self.auth.login_required, self.catch_exceptions]
@@ -147,14 +143,12 @@ class WebApplication(Flask):
                 Session.commit()
                 return result
 
-
         class Migrate(Resource):
             decorators = [self.auth.login_required, self.catch_exceptions]
 
             def post(self, direction):
                 kwargs = request.get_json(force=True)
                 return getattr(app, f"migration_{direction}")(**kwargs)
-
 
         class RunService(Resource):
             decorators = [self.auth.login_required, self.catch_exceptions]
@@ -200,7 +194,6 @@ class WebApplication(Flask):
                 else:
                     return {**app.run(service.id, **data), "errors": errors}
 
-
         class Topology(Resource):
             decorators = [self.auth.login_required, self.catch_exceptions]
 
@@ -215,7 +208,6 @@ class WebApplication(Flask):
                 else:
                     app.export_topology(**request.get_json(force=True))
                     return "Topology Export successfully executed."
-
 
         class Search(Resource):
             decorators = [self.auth.login_required, self.catch_exceptions]
@@ -233,15 +225,33 @@ class WebApplication(Flask):
                 }
                 return app.filtering(rest_body["type"], **kwargs)["data"]
 
-
         class Sink(Resource):
             def get(self, **_):
-                abort(404, message=f"The requested {request.method} endpoint does not exist.")
+                abort(
+                    404,
+                    message=f"The requested {request.method} endpoint does not exist.",
+                )
 
             post = put = patch = delete = get
 
-        """ for endpoint, resource in create_app_resources().items():
-            api.add_resource(resource, f"/rest/{endpoint}") """
+        for endpoint in app.rest_endpoints:
+
+            def post(_, ep=endpoint):
+                getattr(app, ep)()
+                Session.commit()
+                return f"Endpoint {ep} successfully executed."
+
+            api.add_resource(
+                type(
+                    endpoint,
+                    (Resource,),
+                    {
+                        "decorators": [self.auth.login_required, self.catch_exceptions],
+                        "post": post,
+                    },
+                ),
+                f"/rest/{endpoint}",
+            )
         api.add_resource(CreatePool, "/rest/create_pool")
         api.add_resource(Heartbeat, "/rest/is_alive")
         api.add_resource(RunService, "/rest/run_service")

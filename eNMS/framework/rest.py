@@ -9,9 +9,6 @@ from eNMS.database import Session
 from eNMS.database.functions import delete, factory, fetch
 
 
-
-
-
 def create_app_resources():
     endpoints = {}
     for endpoint in app.rest_endpoints:

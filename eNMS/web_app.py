@@ -299,7 +299,10 @@ class WebApplication(Flask):
                     raise
                 match = search("UNIQUE constraint failed: (\w+).(\w+)", str(exc))
                 if match:
-                    result = f"There already is a {match.group(1)} with the same {match.group(2)}."
+                    result = (
+                        f"There already is a {match.group(1)} "
+                        f"with the same {match.group(2)}."
+                    )
                 else:
                     result = str(exc)
                 return jsonify({"alert": result})

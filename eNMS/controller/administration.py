@@ -134,7 +134,7 @@ class AdministrationController(BaseController):
                     if instance_type == "workflow":
                         workflow_services[instance["name"]] = instance.pop("services")
                     try:
-                        instance = self.db.objectify(instance_type, instance)
+                        instance = self.objectify(instance_type, instance)
                         db.factory(
                             instance_type, **{"dont_update_pools": True, **instance}
                         )

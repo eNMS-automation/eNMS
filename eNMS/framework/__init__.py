@@ -1,8 +1,19 @@
 from click import argument, echo, option
 from json import loads
 from passlib.hash import argon2
-from flask import abort, Blueprint, Flask, jsonify, make_response, redirect, render_template, request, url_for
-from flask_login import current_user
+from flask import (
+    abort,
+    Blueprint,
+    Flask,
+    jsonify,
+    make_response,
+    redirect,
+    render_template,
+    request,
+    send_file,
+    url_for,
+)
+from flask_login import current_user, login_user, logout_user
 from functools import wraps
 from itertools import chain
 from logging import info
@@ -11,7 +22,13 @@ from os import environ
 from eNMS import app
 from eNMS.database import Session
 from eNMS.database.functions import delete, factory, fetch, handle_exception
-from eNMS.forms import form_actions, form_classes, form_postprocessing, form_properties, form_templates
+from eNMS.forms import (
+    form_actions,
+    form_classes,
+    form_postprocessing,
+    form_properties,
+    form_templates,
+)
 from eNMS.forms.administration import LoginForm
 from eNMS.framework.extensions import auth, csrf, login_manager
 from eNMS.framework.rest import configure_rest_api
@@ -21,7 +38,6 @@ from eNMS.setup import properties, rbac
 
 
 class WebApplication(Flask):
-
     def __init__(self, mode=None):
         super().__init__(__name__, static_folder=app.path / "eNMS" / "static")
         self.update_config(mode)
@@ -73,6 +89,65 @@ class WebApplication(Flask):
                 f"dashboard.html",
                 **{"endpoint": "dashboard", "properties": properties["dashboard"]},
             )
+
+        @blueprint.route("/logout")
+        @self.monitor_requests
+        def logout():
+            logout_user()
+            return redirect(url_for("blueprint.route", page="login"))
+
+        @blueprint.route("/table/<table_type>")
+        @self.monitor_requests
+        def table(table_type):
+            return render_template(
+                f"table.html", **{"endpoint": f"table/{table_type}", "type": table_type}
+            )
+
+        @blueprint.route("/view/<view_type>")
+        @self.monitor_requests
+        def view(view_type):
+            return render_template(
+                f"visualization.html", **{"endpoint": "view", "view_type": view_type}
+            )
+
+        @blueprint.route("/workflow_builder")
+        @self.monitor_requests
+        def workflow_builder():
+            return render_template(f"workflow.html", endpoint="workflow_builder")
+
+        @blueprint.route("/form/<form_type>")
+        @self.monitor_requests
+        def form(form_type):
+            return render_template(
+                f"forms/{form_templates.get(form_type, 'base')}.html",
+                **{
+                    "endpoint": f"forms/{form_type}",
+                    "action": form_actions.get(form_type),
+                    "form": form_classes[form_type](request.form),
+                    "form_type": form_type,
+                },
+            )
+
+        @blueprint.route("/help/<path:path>")
+        @self.monitor_requests
+        def help(path):
+            return render_template(f"help/{path}.html")
+
+        @blueprint.route("/view_service_results/<int:id>")
+        @self.monitor_requests
+        def view_service_results(id):
+            result = fetch("run", id=id).result().result
+            return f"<pre>{app.str_dict(result)}</pre>"
+
+        @blueprint.route("/download_file/<path:path>")
+        @self.monitor_requests
+        def download_file(path):
+            return send_file(f"/{path}", as_attachment=True)
+
+        @blueprint.route("/<path:_>")
+        @self.monitor_requests
+        def get_requests_sink(_):
+            abort(404)
 
         @blueprint.route("/", methods=["POST"])
         @blueprint.route("/<path:page>", methods=["POST"])
@@ -133,14 +208,16 @@ class WebApplication(Flask):
 
     def update_config(self, mode):
         mode = (mode or app.settings["app"]["config_mode"]).lower()
-        self.config.update({
-            "DEBUG": mode != "production",
-            "SECRET_KEY": environ.get("SECRET_KEY", "get-a-real-key"),
-            "WTF_CSRF_TIME_LIMIT": None,
-            "ERROR_404_HELP": False,
-            "MAX_CONTENT_LENGTH": 20 * 1024 * 1024,
-            "WTF_CSRF_ENABLED": mode != "test",
-        })
+        self.config.update(
+            {
+                "DEBUG": mode != "production",
+                "SECRET_KEY": environ.get("SECRET_KEY", "get-a-real-key"),
+                "WTF_CSRF_TIME_LIMIT": None,
+                "ERROR_404_HELP": False,
+                "MAX_CONTENT_LENGTH": 20 * 1024 * 1024,
+                "WTF_CSRF_ENABLED": mode != "test",
+            }
+        )
 
     def register_extensions(self):
         csrf.init_app(self)
@@ -152,7 +229,9 @@ class WebApplication(Flask):
         @argument("name")
         def cli_fetch(table, name):
             echo(
-                app.str_dict(fetch(table, name=name).get_properties(exclude=["positions"]))
+                app.str_dict(
+                    fetch(table, name=name).get_properties(exclude=["positions"])
+                )
             )
 
         @self.cli.command()
@@ -196,7 +275,6 @@ class WebApplication(Flask):
         def request_loader(request):
             return fetch("user", allow_none=True, name=request.form.get("name"))
 
-
     def configure_context_processor(self):
         @self.context_processor
         def inject_properties():
@@ -215,10 +293,11 @@ class WebApplication(Flask):
                 },
                 "settings": app.settings,
                 "table_properties": app.properties["tables"],
-                "user": current_user.serialized if current_user.is_authenticated else None,
+                "user": current_user.serialized
+                if current_user.is_authenticated
+                else None,
                 "version": app.version,
             }
-
 
     def configure_errors(self):
         @self.errorhandler(403)
@@ -228,7 +307,6 @@ class WebApplication(Flask):
         @self.errorhandler(404)
         def not_found_error(error):
             return render_template("error.html", error=404), 404
-
 
     def configure_authentication(self):
         @auth.verify_password

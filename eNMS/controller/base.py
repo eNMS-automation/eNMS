@@ -44,7 +44,6 @@ except ImportError as exc:
     warn(f"Couldn't import tacacs_plus module ({exc})")
 
 from eNMS.database import db
-from eNMS.database.events import configure_events
 from eNMS.database.functions import (
     count,
     delete,
@@ -103,7 +102,7 @@ class BaseController:
         self.init_services()
         db.base.metadata.create_all(bind=db.engine)
         configure_mappers()
-        configure_events(self)
+        db.configure_application_events(self)
         self.init_forms()
         self.clean_database()
         if not fetch("user", allow_none=True, name="admin"):

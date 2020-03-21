@@ -1,3 +1,3 @@
-from eNMS.framework import create_app
+from eNMS.framework import WebApplication
 
-app = create_app()
+app = WebApplication()

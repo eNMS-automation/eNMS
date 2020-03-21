@@ -81,16 +81,17 @@ def configure_authentication():
         return make_response(jsonify({"message": "Wrong credentials."}), 401)
 
 
-def create_app(config_mode=None):
-    flask_app = Flask(__name__, static_folder=app.path / "eNMS" / "static")
-    config = config_mapper[config_mode or app.settings["app"]["config_mode"]]
-    flask_app.config.from_object(config)
-    register_extensions(flask_app)
-    configure_login_manager()
-    configure_cli(flask_app)
-    configure_context_processor(flask_app)
-    configure_rest_api(flask_app)
-    configure_errors(flask_app)
-    configure_authentication()
-    flask_app.register_blueprint(blueprint)
-    return flask_app
+class WebApplication(Flask):
+
+    def __init__(self, config_mode=None):
+        super().__init__(__name__, static_folder=app.path / "eNMS" / "static")
+        config = config_mapper[config_mode or app.settings["app"]["config_mode"]]
+        self.config.from_object(config)
+        register_extensions(flask_app)
+        configure_login_manager()
+        configure_cli(flask_app)
+        configure_context_processor(flask_app)
+        configure_rest_api(flask_app)
+        configure_errors(flask_app)
+        configure_authentication()
+        self.register_blueprint(blueprint)

@@ -3,7 +3,7 @@ from sqlalchemy import Boolean, ForeignKey, Integer
 from sqlalchemy.orm import backref, relationship
 
 from eNMS.database import Session
-from eNMS.database.base import AbstractBase
+from eNMS.models.base import AbstractBase
 from eNMS.database.dialect import Column, MutableDict, SmallString
 from eNMS.database.functions import delete, factory, fetch
 from eNMS.database.associations import service_workflow_table

@@ -14,7 +14,7 @@ from eNMS.database.associations import (
     task_device_table,
     task_pool_table,
 )
-from eNMS.database.base import AbstractBase
+from eNMS.models.base import AbstractBase
 from eNMS.database.dialect import Column, LargeString, SmallString
 from eNMS.database.functions import fetch, fetch_all, set_custom_properties
 from eNMS.setup import properties

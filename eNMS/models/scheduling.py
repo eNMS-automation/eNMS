@@ -12,7 +12,7 @@ from eNMS.database.associations import (
     task_device_table,
     task_pool_table,
 )
-from eNMS.database.base import AbstractBase
+from eNMS.models.base import AbstractBase
 from eNMS.database.dialect import Column, MutableDict, SmallString
 from eNMS.database.functions import set_custom_properties
 

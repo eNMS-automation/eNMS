@@ -40,7 +40,7 @@ from eNMS.database.associations import (
     service_pool_table,
     service_workflow_table,
 )
-from eNMS.database.base import AbstractBase
+from eNMS.models.base import AbstractBase
 from eNMS.database.dialect import (
     Column,
     LargeString,

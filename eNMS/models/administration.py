@@ -4,7 +4,7 @@ from passlib.hash import argon2
 from sqlalchemy import Boolean, Integer
 
 from eNMS import app
-from eNMS.database.base import AbstractBase
+from eNMS.models.base import AbstractBase
 from eNMS.database.dialect import Column, MutableList, LargeString, SmallString
 from eNMS.database.functions import set_custom_properties
 

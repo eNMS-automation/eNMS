@@ -1,7 +1,10 @@
-from sqlalchemy import Column, create_engine, ForeignKey, Integer, Table
+from sqlalchemy import Boolean, Column, create_engine, event, ForeignKey, Float, inspect, Integer, PickleType, Table
+from sqlalchemy.ext.associationproxy import ASSOCIATION_PROXY
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import scoped_session, sessionmaker
+from sqlalchemy.types import JSON
 
+from eNMS.models import model_properties, models, property_types, relationships
 from eNMS.setup import settings
 
 class Database:
@@ -13,6 +16,7 @@ class Database:
         self.session = Session = scoped_session(sessionmaker(autoflush=False, bind=self.engine))
         self.base = declarative_base()
         self.configure_associations()
+        self.configure_events()
 
     def configure_engine(self):
         engine_parameters = {
@@ -28,6 +32,48 @@ class Database:
                 }
             )
         return create_engine(self.database_url, **engine_parameters)
+
+    def configure_events(self):
+        @event.listens_for(self.base, "mapper_configured", propagate=True)
+        def model_inspection(mapper, model):
+            name = model.__tablename__
+            for col in inspect(model).columns:
+                if not col.info.get("model_properties", True):
+                    continue
+                model_properties[name].append(col.key)
+                if col.type == PickleType and isinstance(col.default.arg, list):
+                    property_types[col.key] = "list"
+                else:
+                    column_type = {
+                        Boolean: "bool",
+                        Integer: "int",
+                        Float: "float",
+                        JSON: "dict",
+                        PickleType: "dict",
+                    }.get(type(col.type), "str")
+                    if col.key not in property_types:
+                        property_types[col.key] = column_type
+            for descriptor in inspect(model).all_orm_descriptors:
+                if descriptor.extension_type is ASSOCIATION_PROXY:
+                    property = (
+                        descriptor.info.get("name")
+                        or f"{descriptor.target_collection}_{descriptor.value_attr}"
+                    )
+                    model_properties[name].append(property)
+            if hasattr(model, "parent_type"):
+                model_properties[name].extend(model_properties[model.parent_type])
+            if "service" in name and name != "service":
+                model_properties[name].extend(model_properties["service"])
+            models.update({name: model, name.lower(): model})
+            model_properties[name] = list(set(model_properties[name]))
+            for relation in mapper.relationships:
+                if getattr(relation.mapper.class_, "private", False):
+                    continue
+                property = str(relation).split(".")[1]
+                relationships[name][property] = {
+                    "model": relation.mapper.class_.__tablename__,
+                    "list": relation.uselist,
+                }
 
     def configure_associations(self):
 

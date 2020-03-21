@@ -1,4 +1,5 @@
 from click import argument, echo, option
+from datetime import datetime
 from json import loads
 from passlib.hash import argon2
 from flask import (
@@ -15,12 +16,13 @@ from flask import (
 )
 from flask_httpauth import HTTPBasicAuth
 from flask_login import current_user, LoginManager, login_user, logout_user
-from flask_restful import abort, Api, Resource
+from flask_restful import abort as rest_abort, Api, Resource
 from flask_wtf.csrf import CSRFProtect
 from functools import wraps
 from itertools import chain
 from logging import info
 from os import environ
+from uuid import getnode
 
 from eNMS import app
 from eNMS.database import Session
@@ -58,9 +60,9 @@ class WebApplication(Flask):
             try:
                 return func(*args, **kwargs)
             except LookupError as exc:
-                abort(404, message=str(exc))
+                rest_abort(404, message=str(exc))
             except Exception as exc:
-                abort(500, message=str(exc))
+                rest_abort(500, message=str(exc))
 
         return wrapper
 
@@ -227,7 +229,7 @@ class WebApplication(Flask):
 
         class Sink(Resource):
             def get(self, **_):
-                abort(
+                rest_abort(
                     404,
                     message=f"The requested {request.method} endpoint does not exist.",
                 )

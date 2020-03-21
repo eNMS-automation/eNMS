@@ -11,7 +11,6 @@ __pycache__/
 *.db-journal
 *.log
 *.log.*
-/eNMS/database.*
 
 # created by eNMS
 logs

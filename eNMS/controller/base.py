@@ -96,7 +96,7 @@ class BaseController:
         configure_mappers()
         db.configure_application_events(self)
         self.init_forms()
-        self.clean_database()
+        self.reset_run_status()
         if not db.fetch("user", allow_none=True, name="admin"):
             self.configure_server_id()
             self.create_admin_user()
@@ -113,7 +113,7 @@ class BaseController:
             self.get_git_content()
             db.session.commit()
 
-    def clean_database(self):
+    def reset_run_status(self):
         for run in db.fetch("run", all_matches=True, allow_none=True, status="Running"):
             run.status = "Aborted (app reload)"
         db.session.commit()

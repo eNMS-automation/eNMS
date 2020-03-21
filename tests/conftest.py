@@ -1,6 +1,6 @@
 from pytest import fixture
 
-from eNMS.database import Session
+from eNMS.database import db
 from eNMS.web_app import WebApplication
 
 import warnings
@@ -13,7 +13,7 @@ def base_client():
         app = WebApplication("test")
         app_context = app.app_context()
         app_context.push()
-        Session.close()
+        db.session.close()
         yield app.test_client()
 
 
@@ -24,7 +24,7 @@ def user_client():
         app = WebApplication("test")
         app_context = app.app_context()
         app_context.push()
-        Session.close()
+        db.session.close()
         client = app.test_client()
         with app.app_context():
             client.post(

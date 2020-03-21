@@ -3,11 +3,11 @@ from sqlalchemy.dialects.mysql.base import MSMediumBlob
 from sqlalchemy.ext.mutable import MutableDict, MutableList
 
 from eNMS.setup import settings
-from eNMS.database import DIALECT
+from eNMS.database import db
 
 
 class CustomPickleType(PickleType):
-    if DIALECT == "mysql":
+    if db.dialect == "mysql":
         impl = MSMediumBlob
 
 

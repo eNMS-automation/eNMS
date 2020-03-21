@@ -21,7 +21,7 @@ except ImportError as exc:
     warn(f"Couldn't import ldap3 module ({exc})")
 
 from eNMS.controller.base import BaseController
-from eNMS.database import Session
+from eNMS.database import db
 from eNMS.models import models
 from eNMS.database.functions import delete_all, export, factory, fetch, fetch_all
 from eNMS.models import relationships
@@ -70,7 +70,7 @@ class AdministrationController(BaseController):
         elif kwargs["authentication_method"] == "TACACS":
             if self.tacacs_client.authenticate(name, password).valid:
                 user = factory("user", **{"name": name, "password": password})
-        Session.commit()
+        db.session.commit()
         return user
 
     def database_deletion(self, **kwargs):
@@ -84,11 +84,11 @@ class AdministrationController(BaseController):
                 field_name = "runtime"
             elif model == "changelog":
                 field_name = "time"
-            session_query = Session.query(models[model]).filter(
+            session_query = db.session.query(models[model]).filter(
                 getattr(models[model], field_name) < date_time_string
             )
             session_query.delete(synchronize_session=False)
-            Session.commit()
+            db.session.commit()
 
     def get_cluster_status(self):
         return [server.status for server in fetch_all("server")]
@@ -116,7 +116,7 @@ class AdministrationController(BaseController):
         if kwargs.get("empty_database_before_import", False):
             for model in models:
                 delete_all(model)
-                Session.commit()
+                db.session.commit()
         workflow_edges, workflow_services = [], {}
         folder_path = self.path / "files" / folder / kwargs["name"]
         for model in models:
@@ -139,7 +139,7 @@ class AdministrationController(BaseController):
                         factory(
                             instance_type, **{"dont_update_pools": True, **instance}
                         )
-                        Session.commit()
+                        db.session.commit()
                     except Exception:
                         info(
                             f"{str(instance)} could not be imported :"
@@ -152,12 +152,12 @@ class AdministrationController(BaseController):
                 workflow.services = [
                     fetch("service", name=service_name) for service_name in services
                 ]
-            Session.commit()
+            db.session.commit()
             for edge in workflow_edges:
                 for property in ("source", "destination", "workflow"):
                     edge[property] = fetch("service", name=edge[property]).id
                 factory("workflow_edge", **edge)
-                Session.commit()
+                db.session.commit()
             for service in fetch_all("service"):
                 service.set_name()
             if not skip_update_pools_after_import:

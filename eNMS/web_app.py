@@ -25,7 +25,7 @@ from os import environ
 from uuid import getnode
 
 from eNMS import app
-from eNMS.database import Session
+from eNMS.database import db
 from eNMS.database.functions import delete, factory, fetch, handle_exception
 from eNMS.forms import (
     form_actions,
@@ -291,11 +291,11 @@ class WebApplication(Flask):
             else:
                 result = getattr(app, endpoint)(*args, **request.form)
             try:
-                Session.commit()
+                db.session.commit()
                 return jsonify(result)
             except Exception as exc:
                 raise exc
-                Session.rollback()
+                db.session.rollback()
                 if app.settings["app"]["config_mode"] == "debug":
                     raise
                 return jsonify({"alert": handle_exception(str(exc))})
@@ -320,7 +320,7 @@ class WebApplication(Flask):
             result = factory(table, **loads(properties)).get_properties(
                 exclude=["positions"]
             )
-            Session.commit()
+            db.session.commit()
             echo(app.str_dict(result))
 
         @self.cli.command(name="delete")
@@ -328,7 +328,7 @@ class WebApplication(Flask):
         @argument("name")
         def cli_delete(table, name):
             device = delete(table, name=name)
-            Session.commit()
+            db.session.commit()
             echo(app.str_dict(device))
 
         @self.cli.command(name="run_service")
@@ -342,7 +342,7 @@ class WebApplication(Flask):
             payload_dict["devices"] = devices_list
             service = fetch("service", name=name)
             results = app.run(service.id, **payload_dict)
-            Session.commit()
+            db.session.commit()
             echo(app.str_dict(results))
 
     def configure_rest_api(self):
@@ -369,7 +369,7 @@ class WebApplication(Flask):
                         "manually_defined": True,
                     },
                 )
-                Session.commit()
+                db.session.commit()
                 return data
 
         class Heartbeat(Resource):
@@ -398,7 +398,7 @@ class WebApplication(Flask):
 
             def delete(self, cls, name):
                 result = delete(cls, name=name)
-                Session.commit()
+                db.session.commit()
                 return result
 
         class GetConfiguration(Resource):
@@ -421,7 +421,7 @@ class WebApplication(Flask):
                 data = request.get_json(force=True)
                 object_data = app.objectify(cls, data)
                 result = factory(cls, **object_data).serialized
-                Session.commit()
+                db.session.commit()
                 return result
 
         class Migrate(Resource):
@@ -519,7 +519,7 @@ class WebApplication(Flask):
 
             def post(_, ep=endpoint):
                 getattr(app, ep)()
-                Session.commit()
+                db.session.commit()
                 return f"Endpoint {ep} successfully executed."
 
             api.add_resource(

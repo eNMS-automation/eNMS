@@ -7,7 +7,7 @@ from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy.orm import relationship
 
 from eNMS import app
-from eNMS.database import Session
+from eNMS.database import db
 from eNMS.database.associations import (
     task_device_table,
     task_pool_table,
@@ -59,7 +59,7 @@ class Task(AbstractBase):
     def delete(self):
         if app.scheduler.get_job(self.aps_job_id):
             app.scheduler.remove_job(self.aps_job_id)
-        Session.commit()
+        db.session.commit()
 
     @hybrid_property
     def status(self):
@@ -97,14 +97,14 @@ class Task(AbstractBase):
 
     def pause(self):
         self.is_active = False
-        Session.commit()
+        db.session.commit()
         app.scheduler.pause_job(self.aps_job_id)
 
     def resume(self):
         self.schedule()
         app.scheduler.resume_job(self.aps_job_id)
         self.is_active = True
-        Session.commit()
+        db.session.commit()
 
     def run_properties(self):
         properties = {"task": self.id, **self.initial_payload}

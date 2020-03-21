@@ -4,23 +4,28 @@ from sqlalchemy.orm import scoped_session, sessionmaker
 
 from eNMS.setup import settings
 
-DATABASE_URL = settings["database"]["url"]
-DIALECT = DATABASE_URL.split(":")[0]
+class Database:
 
-engine_parameters = {
-    "convert_unicode": True,
-    "pool_pre_ping": True,
-    "pool_recycle": 3600,
-}
+    def __init__(self):
+        self.database_url = settings["database"]["url"]
+        self.dialect = self.database_url.split(":")[0]
+        self.engine = self.configure_engine()
+        self.session = Session = scoped_session(sessionmaker(autoflush=False, bind=self.engine))
+        self.base = declarative_base()
 
-if DIALECT == "mysql":
-    engine_parameters.update(
-        {
-            "max_overflow": settings["database"]["max_overflow"],
-            "pool_size": settings["database"]["pool_size"],
+    def configure_engine(self):
+        engine_parameters = {
+            "convert_unicode": True,
+            "pool_pre_ping": True,
+            "pool_recycle": 3600,
         }
-    )
+        if self.dialect == "mysql":
+            engine_parameters.update(
+                {
+                    "max_overflow": settings["database"]["max_overflow"],
+                    "pool_size": settings["database"]["pool_size"],
+                }
+            )
+        return create_engine(self.database_url, **engine_parameters)
 
-engine = create_engine(DATABASE_URL, **engine_parameters)
-Session = scoped_session(sessionmaker(autoflush=False, bind=engine))
-Base = declarative_base()
+db = Database()

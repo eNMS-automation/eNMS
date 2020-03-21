@@ -32,7 +32,7 @@ except ImportError as exc:
     warn(f"Couldn't import slackclient module ({exc})")
 
 from eNMS import app
-from eNMS.database import Session
+from eNMS.database import db
 from eNMS.database.associations import (
     run_pool_table,
     run_device_table,
@@ -466,7 +466,7 @@ class Run(AbstractBase):
         try:
             app.service_db[self.service.id]["runs"] += 1
             self.service.status = "Running"
-            Session.commit()
+            db.session.commit()
             results = {"runtime": self.runtime, **self.device_run(payload)}
         except Exception:
             result = (
@@ -478,7 +478,7 @@ class Run(AbstractBase):
             self.log("error", result)
             results = {"success": False, "runtime": self.runtime, "result": result}
         finally:
-            Session.commit()
+            db.session.commit()
             results["summary"] = self.run_state.get("summary", None)
             self.status = "Aborted" if self.stop else "Completed"
             self.run_state["status"] = self.status
@@ -507,7 +507,7 @@ class Run(AbstractBase):
                 or self.run_method == "once"
             ):
                 self.create_result(results)
-            Session.commit()
+            db.session.commit()
         return results
 
     @staticmethod
@@ -706,7 +706,7 @@ class Run(AbstractBase):
             self.log("info", f"SLEEP {self.waiting_time} seconds...", device)
             sleep(self.waiting_time)
         if commit:
-            Session.commit()
+            db.session.commit()
         return results
 
     def log(self, severity, content, device=None, app_log=False, security=False):
@@ -916,7 +916,7 @@ class Run(AbstractBase):
         def recursive_search(run: "Run"):
             if not run:
                 return None
-            query = Session.query(models["run"]).filter(
+            query = db.session.query(models["run"]).filter(
                 models["run"].parent_runtime == run.parent_runtime
             )
             if workflow or self.workflow:

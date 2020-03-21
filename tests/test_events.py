@@ -1,7 +1,7 @@
 from werkzeug.datastructures import ImmutableMultiDict
 
 from eNMS import app
-from eNMS.database import Session
+from eNMS.database import db
 from eNMS.database.functions import fetch_all
 
 from tests.conftest import check_pages
@@ -47,5 +47,5 @@ def test_create_logs(user_client):
     number_of_logs = len(fetch_all("changelog"))
     for i in range(10):
         app.log("warning", str(i))
-        Session.commit()
+        db.session.commit()
     assert len(fetch_all("changelog")) == number_of_logs + 10

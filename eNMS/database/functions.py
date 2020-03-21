@@ -2,13 +2,13 @@ from re import search
 from sqlalchemy import Boolean, Float, func, Integer
 
 from eNMS.setup import properties
-from eNMS.database import Session
+from eNMS.database import db
 from eNMS.database.dialect import Column, LargeString
 from eNMS.models import models
 
 
 def fetch(model, allow_none=False, all_matches=False, **kwargs):
-    query = Session.query(models[model]).filter_by(**kwargs)
+    query = db.session.query(models[model]).filter_by(**kwargs)
     result = query.all() if all_matches else query.first()
     if result or allow_none:
         return result
@@ -24,7 +24,7 @@ def fetch_all(model, **kwargs):
 
 
 def count(model, **kwargs):
-    return Session.query(func.count(models[model].id)).filter_by(**kwargs).scalar()
+    return db.session.query(func.count(models[model].id)).filter_by(**kwargs).scalar()
 
 
 def get_query_count(query):
@@ -37,12 +37,12 @@ def objectify(model, object_list):
 
 
 def delete(model, allow_none=False, **kwargs):
-    instance = Session.query(models[model]).filter_by(**kwargs).first()
+    instance = db.session.query(models[model]).filter_by(**kwargs).first()
     if allow_none and not instance:
         return None
     instance.delete()
     serialized_instance = instance.serialized
-    Session.delete(instance)
+    db.session.delete(instance)
     return serialized_instance
 
 
@@ -68,7 +68,7 @@ def factory(cls_name, **kwargs):
         instance.update(**kwargs)
     else:
         instance = models[cls_name](**kwargs)
-        Session.add(instance)
+        db.session.add(instance)
     return instance
 
 

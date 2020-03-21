@@ -2,7 +2,7 @@ from collections import defaultdict
 from sqlalchemy import Boolean, ForeignKey, Integer
 from sqlalchemy.orm import backref, relationship
 
-from eNMS.database import Session
+from eNMS.database import db
 from eNMS.models.base import AbstractBase
 from eNMS.database.dialect import Column, MutableDict, SmallString
 from eNMS.database.functions import delete, factory, fetch
@@ -55,7 +55,7 @@ class Workflow(Service):
         if not clone:
             clone = super().duplicate(workflow)
         clone_services = {}
-        Session.commit()
+        db.session.commit()
         for service in self.services:
             if service.shared:
                 service_clone = service
@@ -67,7 +67,7 @@ class Workflow(Service):
                 self.name, (0, 0)
             )
             clone_services[service.id] = service_clone
-        Session.commit()
+        db.session.commit()
         for edge in self.edges:
             clone.edges.append(
                 factory(
@@ -80,7 +80,7 @@ class Workflow(Service):
                     },
                 )
             )
-            Session.commit()
+            db.session.commit()
         return clone
 
     @property
@@ -173,7 +173,7 @@ class Workflow(Service):
         run.run_state["progress"]["device"]["success"] = len(success_devices)
         run.run_state["progress"]["device"]["failure"] = len(failure_devices)
         run.run_state["summary"] = summary
-        Session.refresh(run)
+        db.session.refresh(run)
         run.restart_run = restart_run
         return {"payload": payload, "success": success}
 
@@ -222,7 +222,7 @@ class Workflow(Service):
                     run.edge_state[edge.id] += 1
                 else:
                     run.edge_state[edge.id] = "DONE"
-        Session.refresh(run)
+        db.session.refresh(run)
         run.restart_run = restart_run
         return {"payload": payload, "success": end in visited}
 

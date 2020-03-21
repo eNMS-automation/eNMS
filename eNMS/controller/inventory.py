@@ -15,7 +15,7 @@ from xlwt import Workbook
 
 from eNMS.controller.base import BaseController
 from eNMS.controller.ssh import SshConnection
-from eNMS.database import Session
+from eNMS.database import db
 from eNMS.database.functions import delete_all, factory, fetch, fetch_all, objectify
 from eNMS.models import models, model_properties, property_types
 from eNMS.database.properties import field_conversion
@@ -93,7 +93,7 @@ class InventoryController(BaseController):
             timestamp=self.get_time(),
             device=device.id,
         )
-        Session.commit()
+        db.session.commit()
         try:
             ssh_connection = SshConnection(
                 device.ip_address, *credentials, session.id, uuid, port
@@ -187,7 +187,7 @@ class InventoryController(BaseController):
                 except Exception as exc:
                     info(f"{str(values)} could not be imported ({str(exc)})")
                     status = "Partial import (see logs)."
-            Session.commit()
+            db.session.commit()
         for pool in fetch_all("pool"):
             pool.compute_pool()
         self.log("info", status)
@@ -197,7 +197,7 @@ class InventoryController(BaseController):
         file = kwargs["file"]
         if kwargs["replace"]:
             delete_all("device")
-            Session.commit()
+            db.session.commit()
         if self.allowed_file(secure_filename(file.filename), {"xls", "xlsx"}):
             result = self.topology_import(file)
         info("Inventory import: Done.")
@@ -241,7 +241,7 @@ class InventoryController(BaseController):
         return {
             obj_type: [
                 d.view_properties
-                for d in Session.query(models[obj_type])
+                for d in db.session.query(models[obj_type])
                 .filter(and_(*self.build_filtering_constraints(obj_type, **form)))
                 .all()
             ]

@@ -16,7 +16,7 @@ from string import printable
 from threading import Event, Thread
 from time import sleep
 
-from eNMS.database import Session
+from eNMS.database import db
 from eNMS.database.functions import fetch
 
 
@@ -97,7 +97,7 @@ class SshConnection:
                 session.content += parsed_log
                 log = ""
             sleep(0.1)
-        Session.commit()
+        db.session.commit()
 
     def send_data(self):
         while not self.client.shell.closed:

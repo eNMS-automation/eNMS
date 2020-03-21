@@ -3,12 +3,12 @@ from sqlalchemy.ext.associationproxy import ASSOCIATION_PROXY
 from sqlalchemy.orm.collections import InstrumentedList
 from sqlalchemy.types import JSON
 
-from eNMS.database import Base
+from eNMS.database import db
 from eNMS.models import model_properties, models, property_types, relationships
 from eNMS.database.properties import private_properties
 
 
-@event.listens_for(Base, "mapper_configured", propagate=True)
+@event.listens_for(db.base, "mapper_configured", propagate=True)
 def model_inspection(mapper, model):
     name = model.__tablename__
     for col in inspect(model).columns:
@@ -51,17 +51,17 @@ def model_inspection(mapper, model):
 
 
 def configure_events(app):
-    @event.listens_for(Base, "after_insert", propagate=True)
+    @event.listens_for(db.base, "after_insert", propagate=True)
     def log_instance_creation(mapper, connection, target):
         if hasattr(target, "name"):
             app.log("info", f"CREATION: {target.type} '{target.name}'")
 
-    @event.listens_for(Base, "before_delete", propagate=True)
+    @event.listens_for(db.base, "before_delete", propagate=True)
     def log_instance_deletion(mapper, connection, target):
         name = getattr(target, "name", target.id)
         app.log("info", f"DELETION: {target.type} '{name}'")
 
-    @event.listens_for(Base, "before_update", propagate=True)
+    @event.listens_for(db.base, "before_update", propagate=True)
     def log_instance_update(mapper, connection, target):
         state, changelog = inspect(target), []
         for attr in state.attrs:

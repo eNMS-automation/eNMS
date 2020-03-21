@@ -11,7 +11,7 @@ from re import search, sub
 from uuid import uuid4
 
 from eNMS.controller.base import BaseController
-from eNMS.database import Session
+from eNMS.database import db
 from eNMS.database.functions import delete, factory, fetch, fetch_all, objectify
 
 
@@ -42,7 +42,7 @@ class AutomationController(BaseController):
                 "destination": destination,
             },
         )
-        Session.commit()
+        db.session.commit()
         now = self.get_time()
         fetch("workflow", id=workflow_id).last_modified = now
         return {"edge": workflow_edge.serialized, "update_time": now}
@@ -71,7 +71,7 @@ class AutomationController(BaseController):
                 workflow.services.append(service)
             services.append(service)
         workflow.last_modified = self.get_time()
-        Session.commit()
+        db.session.commit()
         return {
             "services": [service.serialized for service in services],
             "update_time": workflow.last_modified,
@@ -81,7 +81,7 @@ class AutomationController(BaseController):
         for result in fetch(
             "run", all_matches=True, allow_none=True, service_id=service_id
         ):
-            Session.delete(result)
+            db.session.delete(result)
 
     def create_label(self, workflow_id, x, y, **kwargs):
         workflow, label_id = fetch("workflow", id=workflow_id), str(uuid4())
@@ -109,12 +109,12 @@ class AutomationController(BaseController):
             if len(duplicates) == 1:
                 continue
             for duplicate in duplicates[1:]:
-                Session.delete(duplicate)
+                db.session.delete(duplicate)
                 number_of_corrupted_edges += 1
         for edge in edges:
             services = edge.workflow.services
             if edge.source not in services or edge.destination not in services:
-                Session.delete(edge)
+                db.session.delete(edge)
                 number_of_corrupted_edges += 1
         return number_of_corrupted_edges
 

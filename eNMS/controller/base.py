@@ -43,7 +43,7 @@ try:
 except ImportError as exc:
     warn(f"Couldn't import tacacs_plus module ({exc})")
 
-from eNMS.database import Base, DIALECT, engine, Session
+from eNMS.database import db
 from eNMS.database.events import configure_events
 from eNMS.database.functions import (
     count,
@@ -101,7 +101,7 @@ class BaseController:
 
     def configure_database(self):
         self.init_services()
-        Base.metadata.create_all(bind=engine)
+        db.base.metadata.create_all(bind=db.engine)
         configure_mappers()
         configure_events(self)
         self.init_forms()
@@ -109,7 +109,7 @@ class BaseController:
         if not fetch("user", allow_none=True, name="admin"):
             self.configure_server_id()
             self.create_admin_user()
-            Session.commit()
+            db.session.commit()
             if self.settings["app"]["create_examples"]:
                 self.migration_import(
                     name="examples", import_export_types=import_classes
@@ -120,12 +120,12 @@ class BaseController:
                     name="default", import_export_types=import_classes
                 )
             self.get_git_content()
-            Session.commit()
+            db.session.commit()
 
     def clean_database(self):
         for run in fetch("run", all_matches=True, allow_none=True, status="Running"):
             run.status = "Aborted (app reload)"
-        Session.commit()
+        db.session.commit()
 
     def fetch_version(self):
         with open(self.path / "package.json") as package_file:
@@ -273,7 +273,7 @@ class BaseController:
         self.syslog_server.start()
 
     def update_parameters(self, **kwargs):
-        Session.query(models["parameters"]).one().update(**kwargs)
+        db.session.query(models["parameters"]).one().update(**kwargs)
         self.__dict__.update(**kwargs)
 
     def delete_instance(self, instance_type, instance_id):
@@ -299,10 +299,10 @@ class BaseController:
             instance = factory(type, must_be_new=must_be_new, **kwargs)
             if kwargs.get("original"):
                 fetch(type, id=kwargs["original"]).duplicate(clone=instance)
-            Session.flush()
+            db.session.flush()
             return instance.serialized
         except Exception as exc:
-            Session.rollback()
+            db.session.rollback()
             if isinstance(exc, IntegrityError):
                 return {"alert": f"There is already a {type} with the same parameters."}
             return {"alert": str(exc)}
@@ -361,11 +361,11 @@ class BaseController:
                 constraint = getattr(model, property) == (value == "bool-true")
             elif filter == "equality":
                 constraint = getattr(model, property) == value
-            elif not filter or filter == "inclusion" or DIALECT == "sqlite":
+            elif not filter or filter == "inclusion" or db.dialect == "sqlite":
                 constraint = getattr(model, property).contains(value)
             else:
                 compile(value)
-                regex_operator = "regexp" if DIALECT == "mysql" else "~"
+                regex_operator = "regexp" if db.dialect == "mysql" else "~"
                 constraint = getattr(model, property).op(regex_operator)(value)
             constraints.append(constraint)
         for related_model, relation_properties in relationships[obj_type].items():
@@ -392,7 +392,7 @@ class BaseController:
 
     def multiselect_filtering(self, type, **params):
         model = models[type]
-        results = Session.query(model).filter(model.name.contains(params.get("term")))
+        results = db.session.query(model).filter(model.name.contains(params.get("term")))
         return {
             "items": [
                 {"text": result.ui_name, "id": str(result.id)}
@@ -419,12 +419,12 @@ class BaseController:
         except regex_error:
             return {"error": "Invalid regular expression as search parameter."}
         constraints.extend(models[table].filtering_constraints(**kwargs))
-        result = Session.query(model).filter(and_(*constraints))
+        result = db.session.query(model).filter(and_(*constraints))
         if ordering:
             result = result.order_by(ordering())
         table_result = {
             "draw": int(kwargs["draw"]),
-            "recordsTotal": Session.query(func.count(model.id)).scalar(),
+            "recordsTotal": db.session.query(func.count(model.id)).scalar(),
             "recordsFiltered": get_query_count(result),
             "data": [
                 obj.table_properties(**kwargs)
@@ -521,7 +521,7 @@ class BaseController:
                     continue
                 with open(filepath) as file:
                     setattr(device, data, file.read())
-        Session.commit()
+        db.session.commit()
         for pool in fetch_all("pool"):
             if pool.device_configuration or pool.device_operational_data:
                 pool.compute_pool()

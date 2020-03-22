@@ -12,7 +12,6 @@ from wtforms import (
     SelectMultipleField as WtformsSelectMultipleField,
 )
 from wtforms.validators import ValidationError
-from wtforms.widgets.core import HTMLString
 
 from eNMS import app
 

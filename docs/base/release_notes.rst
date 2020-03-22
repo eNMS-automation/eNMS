@@ -49,6 +49,8 @@ as well as the log level of all loggers.
 Besides, the security logs (opening/closing netmiko/napalm connections, sending commands) are configured from there,
 including using a syslog handler with custom address facility.
 - Fix Napalm BGP example service
+- Fix 404 custom passwords logs from Vault
+- Encrypt and decrypt all data going in and out of the vault (b64 / Fernet)
 
 MIGRATION:
 In pools, "never_update" -> "manually_defined"

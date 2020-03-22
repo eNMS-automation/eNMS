@@ -9,8 +9,8 @@
          },
          "property2":{ 
             "pretty_name":"Property 2",
-            "type":"integer",
-            "default":4,
+            "type":"string",
+            "default":"test",
             "private":true
          }
       },

@@ -1,5 +1,7 @@
 from apscheduler.schedulers.background import BackgroundScheduler
+from base64 import b64decode, b64encode
 from collections import Counter
+from cryptography.fernet import Fernet
 from datetime import datetime
 from difflib import unified_diff
 from email.mime.application import MIMEApplication
@@ -75,6 +77,7 @@ class BaseController:
         self.properties = properties
         self.load_custom_properties()
         self.path = Path.cwd()
+        self.init_encryption()
         self.init_scheduler()
         if settings["tacacs"]["active"]:
             self.init_tacacs_client()
@@ -89,6 +92,13 @@ class BaseController:
         self.fetch_version()
         self.init_logs()
         self.init_connection_pools()
+
+    def init_encryption(self):
+        if environ.get("FERNET_KEY"):
+            fernet = Fernet(environ.get("FERNET_KEY"))
+            self.encrypt, self.decrypt = fernet.encrypt, fernet.decrypt
+        else:
+            self.encrypt, self.decrypt = b64encode, b64decode
 
     def configure_database(self):
         self.init_services()

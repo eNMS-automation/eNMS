@@ -17,10 +17,16 @@ class AbstractBase(db.base):
         return self.name
 
     def __getattribute__(self, property):
-        if property in db.private_properties and app.settings["vault"]["active"]:
-            path = f"secret/data/{self.__tablename__}/{self.name}/{property}"
-            data = app.vault_client.read(path)
-            return data["data"]["data"][property] if data else ""
+        if property in db.private_properties:
+            if app.settings["vault"]["active"]:
+                path = f"secret/data/{self.__tablename__}/{self.name}/{property}"
+                data = app.vault_client.read(path)
+                value = data["data"]["data"][property] if data else ""
+            else:
+                value = super().__getattribute__(property)
+            if not value:
+                return
+            return str(app.decrypt(value), "utf-8")
         else:
             return super().__getattribute__(property)
 
@@ -28,6 +34,7 @@ class AbstractBase(db.base):
         if property in db.private_properties:
             if not value:
                 return
+            value = app.encrypt(str.encode(value))
             if app.settings["vault"]["active"]:
                 app.vault_client.write(
                     f"secret/data/{self.__tablename__}/{self.name}/{property}",
@@ -75,11 +82,11 @@ class AbstractBase(db.base):
         if not export:
             properties.extend(getattr(self, "model_properties", []))
         for property in properties:
-            if not hasattr(self, property):
+            if property in db.private_properties:
                 continue
             if property in db.dont_serialize.get(self.type, []):
                 continue
-            if property in db.private_properties:
+            if not hasattr(self, property):
                 continue
             if include and property not in include or exclude and property in exclude:
                 continue

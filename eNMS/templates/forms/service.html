@@ -142,6 +142,7 @@
                   {{ form.operating_system(id=form_type + '-operating_system',
                   class="form-control readonly-when-run add-id") }}
                 </div>
+                {{ form.initial_payload.label(help="common/initial_payload") }}
                 <div class="form-group">
                   {{ form.initial_payload(id=form_type + '-initial_payload',
                   class="form-control add-id") }}
@@ -350,8 +351,15 @@
                   </div>
                   {% endif %} {% endfor %}
                 </fieldset>
-                {% endfor %} {% else %}
+                {% endfor %} {% else %} {% if form[field_name].render_kw and "help" in
+                form[field_name].render_kw %} {% set help = "{}/{}".format(form_type,
+                field_name) %}
+                <label help="{{ help }}" for="{{ field_name }}">
+                  {{ form[field_name].label }}
+                </label>
+                {% else %}
                 <label>{{ form[field_name].label }}</label>
+                {% endif %}
                 <div class="form-group">
                   {{ form[field_name](id="{}-{}".format(form_type, field_name),
                   class="form-control add-id") }}

@@ -364,13 +364,18 @@ export function preprocessForm(panel, id, type, duplicate) {
   panel.querySelectorAll(".doc-link").forEach((el) => {
     $(el).attr("href", `${settings.app.documentation_url}${$(el).attr("href")}`);
   });
-  panel.querySelectorAll(".context-help").forEach((el) => {
+  panel.querySelectorAll("[help]").forEach((el) => {
+    $(el).append(`
+      <button class="icon-button" type="button">
+        <span class="glyphicon glyphicon-info-sign"></span>
+      </button>
+    `);
     $(el).on("click", function() {
       openPanel({
-        name: `help-${$(el).attr("data-id")}`,
-        title: $(el).attr("data-title"),
+        name: `help-${$(el).attr("for")}`,
+        title: $(el).attr("for"),
         size: "600px auto",
-        url: `../help/${$(el).attr("data-url")}`,
+        url: `../help/${$(el).attr("help")}`,
         callback: function(helpPanel) {
           helpPanel.querySelectorAll(".help-snippet").forEach((el) => {
             const editor = CodeMirror.fromTextArea(el, {

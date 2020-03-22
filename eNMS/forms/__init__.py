@@ -65,6 +65,9 @@ class MetaForm(FormMeta):
             form_properties[form_type].update(form_properties[base_form_type])
         return form
 
+    def render_field(field, render_kw):
+        print("test")
+
 
 class BaseForm(FlaskForm, metaclass=MetaForm):
     pass

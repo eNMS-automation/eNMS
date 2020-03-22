@@ -25,7 +25,6 @@ class StringField(WtformsStringField):
     type = "str"
 
     def __init__(self, *args, **kwargs):
-        self.help = kwargs.pop("help", None)
         self.python = kwargs.pop("python", False)
         if "type" in kwargs:
             self.type = kwargs.pop("type")
@@ -38,26 +37,7 @@ class StringField(WtformsStringField):
     def __call__(self, *args, **kwargs):
         if hasattr(self, "color"):
             kwargs["style"] = f"background-color: #{self.color}"
-        output = super().__call__(*args, **kwargs)
-        if self.help:
-            return HTMLString(
-                f"""
-                <div>
-                  <label>{self.label}</label>
-                  <button
-                    class="icon-button context-help"
-                    data-id="{self.id}"
-                    data-title="{self.label.text}"
-                    data-url="{self.help}"
-                    type="button"
-                  >
-                    <span class="glyphicon glyphicon-info-sign"></span>
-                  </button>
-                </div>
-                <div class="form-group">{output}</div>"""
-            )
-        else:
-            return output
+        return super().__call__(*args, **kwargs)
 
     def pre_validate(self, form):
         if self.python:

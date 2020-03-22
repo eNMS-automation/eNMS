@@ -94,8 +94,9 @@ class BaseController:
         self.init_connection_pools()
 
     def init_encryption(self):
-        if environ.get("FERNET_KEY"):
-            fernet = Fernet(environ.get("FERNET_KEY"))
+        self.fernet_encryption = environ.get("FERNET_KEY")
+        if self.fernet_encryption:
+            fernet = Fernet(self.fernet_encryption)
             self.encrypt, self.decrypt = fernet.encrypt, fernet.decrypt
         else:
             self.encrypt, self.decrypt = b64encode, b64decode

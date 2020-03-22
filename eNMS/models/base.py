@@ -26,6 +26,8 @@ class AbstractBase(db.base):
                 value = super().__getattribute__(property)
             if not value:
                 return
+            if app.fernet_encryption and isinstance(value, str):
+                value = str.encode(value)
             return str(app.decrypt(value), "utf-8")
         else:
             return super().__getattribute__(property)

@@ -600,7 +600,6 @@ class Run(AbstractBase):
             retries -= 1
             total_retries += 1
             try:
-                results = {}
                 if self.number_of_retries - retries:
                     retry = self.number_of_retries - retries
                     self.log("error", f"RETRY n°{retry}", device)
@@ -610,7 +609,7 @@ class Run(AbstractBase):
                     )
                 except SystemExit:
                     pass
-                results.update(self.service.job(self, payload, *args))
+                results = self.service.job(self, payload, *args)
                 if device and (
                     getattr(self, "close_connection", False)
                     or self.runtime == self.parent_runtime
@@ -621,8 +620,10 @@ class Run(AbstractBase):
                     results["success"] = True
                 if (
                     self.postprocessing_type == "always"
-                    or self.postprocessing_type == "failure" and not results["success"]
-                    or self.postprocessing_type == "success" and results["success"]
+                    or self.postprocessing_type == "failure"
+                    and not results["success"]
+                    or self.postprocessing_type == "success"
+                    and results["success"]
                 ):
                     try:
                         _, exec_variables = self.eval(

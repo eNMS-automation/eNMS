@@ -55,6 +55,7 @@ including using a syslog handler with custom address facility.
 - No longer create / import duplicated edges of the same subtype.
 
 MIGRATION:
+In services, "result_postprocessing" -> "postprocessing"
 In pools, "never_update" -> "manually_defined"
 Remove ALL payload validation service, no longer needed.
 In settings.json, the log level is no longer in the "section" but in a dedicated "logging" section.

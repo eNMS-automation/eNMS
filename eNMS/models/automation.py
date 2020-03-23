@@ -89,7 +89,9 @@ class Service(AbstractBase):
     iteration_variable_name = db.Column(db.SmallString, default="iteration_value")
     iteration_devices = db.Column(db.LargeString)
     iteration_devices_property = db.Column(db.SmallString, default="ip_address")
-    result_postprocessing = db.Column(db.LargeString)
+    preprocessing = db.Column(db.LargeString)
+    postprocessing = db.Column(db.LargeString)
+    postprocessing_condition = db.Column(db.SmallString, default="always")
     log_level = db.Column(Integer, default=1)
     runs = relationship("Run", back_populates="service", cascade="all, delete-orphan")
     maximum_runs = db.Column(Integer, default=1)
@@ -612,7 +614,7 @@ class Run(AbstractBase):
                     results["success"] = True
                 try:
                     _, exec_variables = self.eval(
-                        self.service.result_postprocessing, function="exec", **locals()
+                        self.service.postprocessing, function="exec", **locals()
                     )
                     if isinstance(exec_variables.get("retries"), int):
                         retries = exec_variables["retries"]

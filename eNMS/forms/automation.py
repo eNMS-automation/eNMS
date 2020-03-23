@@ -72,7 +72,7 @@ class ServiceForm(BaseForm):
         "Iteration Devices Property",
         choices=(("name", "Name"), ("ip_address", "IP address")),
     )
-    result_postprocessing = StringField(
+    postprocessing = StringField(
         type="code", python=True, widget=TextArea(), render_kw={"rows": 8}
     )
     log_level = SelectField(

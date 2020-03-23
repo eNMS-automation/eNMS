@@ -1,6 +1,7 @@
 from collections import defaultdict
 from sqlalchemy import Boolean, ForeignKey, Integer
 from sqlalchemy.orm import backref, relationship
+from sqlalchemy.schema import UniqueConstraint
 
 from eNMS.database import db
 from eNMS.models.base import AbstractBase
@@ -267,6 +268,9 @@ class WorkflowEdge(AbstractBase):
     workflow_id = db.Column(Integer, ForeignKey("workflow.id"))
     workflow = relationship(
         "Workflow", back_populates="edges", foreign_keys="WorkflowEdge.workflow_id"
+    )
+    __table_args__ = (
+        UniqueConstraint(subtype, source_id, destination_id, workflow_id),
     )
 
     def __init__(self, **kwargs):

@@ -559,3 +559,15 @@
   type: workflow_edge, workflow: '[[Regression Workflow F: Workflow of Workflows]
     Regression Workflow F S1: Subworkflow of Workflow] Regression Workflow 8: Payload
     Extraction with Operations'}
+- {destination: '[Shared] End', label: success, source: '[[[Regression Workflow F:
+    Workflow of Workflows] Regression Workflow F S1: Subworkflow of Workflow] Regression
+    Workflow 8: Payload Extraction with Operations] Validation 2', subtype: success,
+  type: workflow_edge, workflow: '[[Regression Workflow F: Workflow of Workflows]
+    Regression Workflow F S1: Subworkflow of Workflow] Regression Workflow 8: Payload
+    Extraction with Operations'}
+- {destination: '[Shared] End', label: success, source: '[[[Regression Workflow F:
+    Workflow of Workflows] Regression Workflow F S1: Subworkflow of Workflow] Regression
+    Workflow 8: Payload Extraction with Operations] Validation 2', subtype: success,
+  type: workflow_edge, workflow: '[[Regression Workflow F: Workflow of Workflows]
+    Regression Workflow F S1: Subworkflow of Workflow] Regression Workflow 8: Payload
+    Extraction with Operations'}

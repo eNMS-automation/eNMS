@@ -154,7 +154,7 @@ class AdministrationController(BaseController):
             for edge in workflow_edges:
                 for property in ("source", "destination", "workflow"):
                     edge[property] = db.fetch("service", name=edge[property]).id
-                db.factory("workflow_edge", **edge)
+                self.update(edge.pop("type"), **edge)
                 db.session.commit()
             for service in db.fetch_all("service"):
                 service.set_name()

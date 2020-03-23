@@ -31,7 +31,7 @@ class AutomationController(BaseController):
             return True
 
     def add_edge(self, workflow_id, subtype, source, destination):
-        workflow_edge = db.factory(
+        workflow_edge = self.update(
             "workflow_edge",
             **{
                 "name": f"{workflow_id}-{subtype}:{source}->{destination}",
@@ -41,10 +41,12 @@ class AutomationController(BaseController):
                 "destination": destination,
             },
         )
+        if "alert" in workflow_edge:
+            return workflow_edge
         db.session.commit()
         now = self.get_time()
         db.fetch("workflow", id=workflow_id).last_modified = now
-        return {"edge": workflow_edge.serialized, "update_time": now}
+        return {"edge": workflow_edge, "update_time": now}
 
     def add_service_to_workflow(self, workflow, service):
         workflow = db.fetch("workflow", id=workflow)

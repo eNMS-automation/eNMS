@@ -426,7 +426,7 @@ class Server(Flask):
 
             def post(self, cls):
                 data = request.get_json(force=True)
-                object_data = app.db.objectify(cls, data)
+                object_data = db.objectify(cls, data)
                 result = db.factory(cls, **object_data).serialized
                 db.session.commit()
                 return result

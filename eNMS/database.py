@@ -250,69 +250,28 @@ class Database:
                 )
 
     def configure_associations(self):
-
-        self.service_device_table = Table(
-            "service_device_association",
-            self.base.metadata,
-            Column("device_id", Integer, ForeignKey("device.id")),
-            Column("service_id", Integer, ForeignKey("service.id")),
-        )
-
-        self.service_pool_table = Table(
-            "service_pool_association",
-            self.base.metadata,
-            Column("pool_id", Integer, ForeignKey("pool.id")),
-            Column("service_id", Integer, ForeignKey("service.id")),
-        )
-
-        self.run_device_table = Table(
-            "run_device_association",
-            self.base.metadata,
-            Column("device_id", Integer, ForeignKey("device.id")),
-            Column("run_id", Integer, ForeignKey("run.id", ondelete="cascade")),
-        )
-
-        self.run_pool_table = Table(
-            "run_pool_association",
-            self.base.metadata,
-            Column("pool_id", Integer, ForeignKey("pool.id")),
-            Column("run_id", Integer, ForeignKey("run.id", ondelete="cascade")),
-        )
-
-        self.task_device_table = Table(
-            "task_device_association",
-            self.base.metadata,
-            Column("device_id", Integer, ForeignKey("device.id")),
-            Column("task_id", Integer, ForeignKey("task.id")),
-        )
-
-        self.task_pool_table = Table(
-            "task_pool_association",
-            self.base.metadata,
-            Column("pool_id", Integer, ForeignKey("pool.id")),
-            Column("task_id", Integer, ForeignKey("task.id")),
-        )
-
-        self.service_workflow_table = Table(
-            "service_workflow_association",
-            self.base.metadata,
-            Column("service_id", Integer, ForeignKey("service.id")),
-            Column("workflow_id", Integer, ForeignKey("workflow.id")),
-        )
-
-        self.pool_device_table = Table(
-            "pool_device_association",
-            self.base.metadata,
-            Column("pool_id", Integer, ForeignKey("pool.id")),
-            Column("device_id", Integer, ForeignKey("device.id")),
-        )
-
-        self.pool_link_table = Table(
-            "pool_link_association",
-            self.base.metadata,
-            Column("pool_id", Integer, ForeignKey("pool.id")),
-            Column("link_id", Integer, ForeignKey("link.id")),
-        )
+        for modelA, modelB in (
+            ("service", "device"),
+            ("service", "pool"),
+            ("run", "device"),
+            ("run", "pool"),
+            ("task", "device"),
+            ("task", "pool"),
+            ("service", "workflow"),
+            ("pool", "device"),
+            ("pool", "link"),
+        ):
+            kw = {"ondelete": "cascade"} if modelA == "run" else {}
+            setattr(
+                self,
+                f"{modelA}_{modelB}_table",
+                Table(
+                    f"{modelA}_{modelB}_association",
+                    self.base.metadata,
+                    Column(f"{modelA}_id", Integer, ForeignKey(f"{modelA}.id", **kw)),
+                    Column(f"{modelB}_id", Integer, ForeignKey(f"{modelB}.id")),
+                ),
+            )
 
     def fetch(self, model, allow_none=False, all_matches=False, **kwargs):
         query = self.session.query(models[model]).filter_by(**kwargs)

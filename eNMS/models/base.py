@@ -1,3 +1,5 @@
+from sqlalchemy.ext.mutable import MutableDict, MutableList
+
 from eNMS import app
 from eNMS.database import db
 from eNMS.models import model_properties, property_types, relationships
@@ -96,9 +98,9 @@ class AbstractBase(db.base):
                 continue
             value = getattr(self, property)
             if export:
-                if isinstance(value, db.List):
+                if isinstance(value, MutableList):
                     value = list(value)
-                if isinstance(value, db.Dict):
+                if isinstance(value, MutableDict):
                     value = dict(value)
                 if value is None:
                     continue

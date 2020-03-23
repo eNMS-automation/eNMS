@@ -77,11 +77,11 @@
   icon: router
   ip_address: 192.168.56.50
   last_duration: 9.242875s
-  last_failure: '2020-03-13 05:14:32.448300'
+  last_failure: '2020-03-20 17:24:33.894329'
   last_modified: ''
-  last_runtime: '2020-03-13 05:14:32.448300'
+  last_runtime: '2020-03-20 17:24:33.894329'
   last_status: Failure
-  last_update: '2020-03-12 13:15:35.700590'
+  last_update: '2020-03-20 17:13:57.980400'
   latitude: '38.89511'
   location: Washington
   longitude: '-77.03637'

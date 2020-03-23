@@ -862,14 +862,22 @@ tables.task = class TaskTable extends Table {
       >
         <span class="glyphicon glyphicon-calendar"></span>
       </button>
-      <button type="button" class="btn btn-success"
-      onclick="eNMS.automation.schedulerAction('resume')" data-tooltip="Play"
-        ><span class="glyphicon glyphicon-play"></span
-      ></button>
-      <button type="button" class="btn btn-danger"
-      onclick="eNMS.automation.schedulerAction('pause')" data-tooltip="Pause"
-        ><span class="glyphicon glyphicon-pause"></span
-      ></button>`,
+      <button
+        type="button"
+        class="btn btn-success"
+        onclick="eNMS.automation.schedulerAction('resume')"
+        data-tooltip="Resume all tasks"
+      >
+        <span class="glyphicon glyphicon-play"></span>
+      </button>
+      <button
+        type="button"
+        class="btn btn-danger"
+        onclick="eNMS.automation.schedulerAction('pause')"
+        data-tooltip="Pause all tasks"
+      >
+        <span class="glyphicon glyphicon-pause"></span>
+      </button>`,
     ];
   }
 

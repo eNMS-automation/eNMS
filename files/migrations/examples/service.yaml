@@ -1257,7 +1257,7 @@
   max_processes: 5
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression Workflow F: Workflow of Workflows] Modify Payload for Iteration'
+  name: '[Regression Workflow E: Iteration Targets] Modify Payload for Iteration'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -3727,11 +3727,11 @@
   send_notification_method: mail
   services: ['[Shared] Start', '[Shared] End', '[Regression Workflow F: Workflow of
       Workflows] Regression Workflow 5: VRF creation and deletion with Napalm', '[Regression
-      Workflow F: Workflow of Workflows] Modify Payload for Iteration', '[Regression
-      Workflow F: Workflow of Workflows] Regression Workflow F S2: Access Variables
-      from Parent Workflow', '[Regression Workflow F: Workflow of Workflows] Regression
-      Workflow F S1: Subworkflow of Workflow', '[Regression Workflow F: Workflow of
-      Workflows] Show interfaces with Netmiko', '[Shared] NAPALM: Get interfaces']
+      Workflow E: Iteration Targets] Modify Payload for Iteration', '[Regression Workflow
+      F: Workflow of Workflows] Regression Workflow F S2: Access Variables from Parent
+      Workflow', '[Regression Workflow F: Workflow of Workflows] Regression Workflow
+      F S1: Subworkflow of Workflow', '[Regression Workflow F: Workflow of Workflows]
+      Show interfaces with Netmiko', '[Shared] NAPALM: Get interfaces']
   shared: false
   skip: false
   skip_query: ''
@@ -4274,12 +4274,12 @@
   scoped_name: 'Regression Workflow E: Iteration Targets'
   send_notification: false
   send_notification_method: mail
-  services: ['[Shared] Start', '[Shared] End', '[Regression Workflow F: Workflow of
-      Workflows] Modify Payload for Iteration', '[Regression Workflow E: Iteration
-      Targets] Iteration Target Workflow - Test 2', '[Regression Workflow E: Iteration
-      Targets] Iteration Targets Workflow - Test 1', '[Regression Workflow E: Iteration
-      Targets] Iteration Target Workflow - Test 3', '[Regression Workflow E: Iteration
-      Targets] Iteration Targets Workflow - Test 4']
+  services: ['[Shared] Start', '[Shared] End', '[Regression Workflow E: Iteration
+      Targets] Modify Payload for Iteration', '[Regression Workflow E: Iteration Targets]
+      Iteration Target Workflow - Test 2', '[Regression Workflow E: Iteration Targets]
+      Iteration Targets Workflow - Test 1', '[Regression Workflow E: Iteration Targets]
+      Iteration Target Workflow - Test 3', '[Regression Workflow E: Iteration Targets]
+      Iteration Targets Workflow - Test 4']
   shared: false
   skip: false
   skip_query: ''
@@ -6390,21 +6390,23 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels:
-    4554a1f6-7efd-4258-9f91-3ee6ff817ec5:
+    15b463f1-e8ba-4d61-a84f-cf39d1434533:
       alignment: left
       content: "Preprocessing: set a per-device variable \"device OS\" in payload\
         \ with set_var\r\nPython snippet: retrieves the variable with get_var and\
         \ adds it to the results\r\nPostprocessing: set to \"Failure only\" but the\
         \ service is a success,\r\nso doesn't run.\r\nThe variable \"BUG\" shouldn't\
-        \ be in the results."
-      positions: [-13, 231]
+        \ be in the results.\r\nThis service is also adding a FUNCTION and a CLASS\
+        \ in the payload with set_var :\r\n\r\ndef test():\r\n    return device.operating_system\r\
+        \n\r\nclass Test():\r\n    device = device.name"
+      positions: [-16, 269]
     78746f30-1c53-426d-b06d-ef43f572f09e:
       alignment: left
       content: "Test \"Run on failure\" post-processing\r\nby setting success to False.\r\
         \nPostprocessing set the variables \"should be there\":\r\nthis variable should\
         \ be in the results."
       positions: [529, -67]
-  last_modified: '2020-03-23 12:42:27.266007'
+  last_modified: '2020-03-23 17:14:32.171004'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -6421,7 +6423,7 @@
   postprocessing: ''
   postprocessing_type: always
   preprocessing: ''
-  run_method: per_device
+  run_method: per_service_with_workflow_targets
   scoped_name: 'Regression Workflow K: preprocessing and postprocessing'
   send_notification: false
   send_notification_method: mail
@@ -6457,7 +6459,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2020-03-23 12:26:11.062907'
+  last_modified: '2020-03-23 17:14:06.644918'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -6471,9 +6473,11 @@
   operating_system: ''
   pools: []
   positions:
-    'Regression Workflow K: preprocessing and postprocessing': [-23, 146]
-  postprocessing: results["postprocessing"] = f"Value set with postprocessing for
-    {device.name}"
+    'Regression Workflow K: preprocessing and postprocessing': [-26, 123]
+  postprocessing: "results[\"postprocessing\"] = f\"Value set with postprocessing\
+    \ for {device.name}\"\r\n\r\ndef test():\r\n  \treturn device.operating_system\r\
+    \n\r\nclass Test():\r\n  device = device.name\r\n\r\nset_var(\"func\", test, device=device.name)\r\
+    \nset_var(\"cls\", Test, device=device.name)\r\n"
   postprocessing_type: always
   preprocessing: set_var("test", device.operating_system, device=device.name)
   run_method: per_device
@@ -6511,7 +6515,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2020-03-23 12:23:59.869402'
+  last_modified: '2020-03-23 17:15:20.426341'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -6527,7 +6531,8 @@
   pools: []
   positions:
     'Regression Workflow K: preprocessing and postprocessing': [496, 28]
-  postprocessing: results["SHOULD BE THERE"] = "NO BUG"
+  postprocessing: "results[\"SHOULD BE THERE\"] = \"NO BUG\"\r\n\r\nresults[\"func_result\"\
+    ] = func()\r\nresults[\"cls_result\"] = cls().device"
   postprocessing_type: failure
   preprocessing: set_var("integer", 10)
   run_method: per_device

@@ -23,6 +23,7 @@ class AutomationController(BaseController):
     service_db = defaultdict(lambda: {"runs": 0})
     run_db = defaultdict(dict)
     run_logs = defaultdict(lambda: defaultdict(list))
+    run_callable = defaultdict(dict)
 
     def stop_workflow(self, runtime):
         run = db.fetch("run", allow_none=True, runtime=runtime)

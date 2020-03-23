@@ -499,6 +499,17 @@ class Run(AbstractBase):
             db.session.commit()
         return results
 
+    def make_results_json_compliant(self, results):
+        json_types = (int, str, bool, None.__class__)
+        def rec(value):
+            if isinstance(value, dict):
+                return {k: rec(v) for k, v in value.items()}
+            elif isinstance(value, list):
+                return list(map(rec, value))
+            else:
+                return value if isinstance(value, json_types) else str(value)
+        return rec(results)
+
     @staticmethod
     def get_device_result(args):
         device_id, runtime, payload, results = args

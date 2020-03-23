@@ -202,6 +202,11 @@
               aria-labelledby="heading-step1-2"
             >
               <div class="panel-body" style="background-color:#fafafa;">
+                {{ form.preprocessing.label() }}
+                <div class="form-group">
+                  {{ form.preprocessing(id=form_type + '-preprocessing',
+                  class="form-control add-id") }}
+                </div>
                 <fieldset>
                   <div class="item">
                     <input
@@ -560,6 +565,12 @@
               aria-labelledby="heading-step4"
             >
               <div class="panel-body" style="background-color:#fafafa;">
+                {{ form.postprocessing_type.label() }}
+                <div class="form-group">
+                  {{ form.postprocessing_type(id=form_type + '-postprocessing_type',
+                  class="form-control add-id") }}
+                </div>
+                {{ form.postprocessing.label() }}
                 <div class="form-group">
                   {{ form.postprocessing(id=form_type + '-postprocessing',
                   class="form-control add-id") }}

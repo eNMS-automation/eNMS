@@ -91,7 +91,7 @@ class Service(AbstractBase):
     iteration_devices_property = db.Column(db.SmallString, default="ip_address")
     preprocessing = db.Column(db.LargeString)
     postprocessing = db.Column(db.LargeString)
-    postprocessing_condition = db.Column(db.SmallString, default="always")
+    postprocessing_type = db.Column(db.SmallString, default="always")
     log_level = db.Column(Integer, default=1)
     runs = relationship("Run", back_populates="service", cascade="all, delete-orphan")
     maximum_runs = db.Column(Integer, default=1)
@@ -600,10 +600,17 @@ class Run(AbstractBase):
             retries -= 1
             total_retries += 1
             try:
+                results = {}
                 if self.number_of_retries - retries:
                     retry = self.number_of_retries - retries
                     self.log("error", f"RETRY n°{retry}", device)
-                results = self.service.job(self, payload, *args)
+                try:
+                    _, exec_variables = self.eval(
+                        self.service.preprocessing, function="exec", **locals()
+                    )
+                except SystemExit:
+                    pass
+                results.update(self.service.job(self, payload, *args))
                 if device and (
                     getattr(self, "close_connection", False)
                     or self.runtime == self.parent_runtime
@@ -612,14 +619,19 @@ class Run(AbstractBase):
                 self.convert_result(results)
                 if "success" not in results:
                     results["success"] = True
-                try:
-                    _, exec_variables = self.eval(
-                        self.service.postprocessing, function="exec", **locals()
-                    )
-                    if isinstance(exec_variables.get("retries"), int):
-                        retries = exec_variables["retries"]
-                except SystemExit:
-                    pass
+                if (
+                    self.postprocessing_type == "always"
+                    or self.postprocessing_type == "failure" and not results["success"]
+                    or self.postprocessing_type == "success" and results["success"]
+                ):
+                    try:
+                        _, exec_variables = self.eval(
+                            self.service.postprocessing, function="exec", **locals()
+                        )
+                        if isinstance(exec_variables.get("retries"), int):
+                            retries = exec_variables["retries"]
+                    except SystemExit:
+                        pass
                 if results["success"] and self.validation_method != "none":
                     self.validate_result(results, payload, device)
                 if self.negative_logic:

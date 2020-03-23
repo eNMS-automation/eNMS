@@ -72,8 +72,14 @@ class ServiceForm(BaseForm):
         "Iteration Devices Property",
         choices=(("name", "Name"), ("ip_address", "IP address")),
     )
-    postprocessing = StringField(
-        type="code", python=True, widget=TextArea(), render_kw={"rows": 8}
+    preprocessing = StringField(type="code", python=True, widget=TextArea())
+    postprocessing = StringField(type="code", python=True, widget=TextArea())
+    postprocessing_type = SelectField(
+        choices=(
+            ("always", "Always run"),
+            ("success", "Run on success only"),
+            ("failure", "Run on failure only"),
+        )
     )
     log_level = SelectField(
         "Logging",

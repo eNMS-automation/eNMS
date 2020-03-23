@@ -61,14 +61,13 @@ class AdministrationController(BaseController):
                     "user",
                     **{
                         "name": name,
-                        "password": password,
                         "email": json_response["attributes"].get("mail", ""),
                         "group": "Admin" if is_admin else "Read Only",
                     },
                 )
         elif kwargs["authentication_method"] == "TACACS":
             if self.tacacs_client.authenticate(name, password).valid:
-                user = db.factory("user", **{"name": name, "password": password})
+                user = db.factory("user", **{"name": name, "group": "Admin"})
         db.session.commit()
         return user
 

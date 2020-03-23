@@ -55,6 +55,10 @@ including using a syslog handler with custom address facility.
 - No longer create / import duplicated edges of the same subtype.
 - Add preprocessing code area for all services
 - all post processing mode: "run on success" / "run on failure" / "run all the time" selector
+- Support functions and classes with set_var / get_var 
+- Fix front end bug when displaying the results if they contain a python SET (invalid JSON):
+all non-JSON compliant types are now automatically converted to a string when saving the results in the
+database, and a warning is issue in the service logs.
 
 MIGRATION:
 In services, "result_postprocessing" -> "postprocessing"

@@ -168,7 +168,7 @@
     'Regression Workflow H: shared service in multiple subworkflows': [688, -88]
     'Regression Workflow I: Iteration Targets Advanced': [350, -6]
     'Regression Workflow J: Workflow and Subworkflow Iteration': [500, 0]
-    'Regression Workflow K: preprocessing and postprocessing': [713, -94]
+    'Regression Workflow K: preprocessing and postprocessing': [626, 203]
     Subworkflow 1: !!python/tuple [0, 0]
     Subworkflow 2: !!python/tuple [0, 0]
     T: !!python/tuple [500, 0]
@@ -6398,7 +6398,13 @@
         \ service is a success,\r\nso doesn't run.\r\nThe variable \"BUG\" shouldn't\
         \ be in the results."
       positions: [-13, 231]
-  last_modified: '2020-03-23 12:16:01.146568'
+    78746f30-1c53-426d-b06d-ef43f572f09e:
+      alignment: left
+      content: "Test \"Run on failure\" post-processing\r\nby setting success to False.\r\
+        \nPostprocessing set the variables \"should be there\":\r\nthis variable should\
+        \ be in the results."
+      positions: [529, -67]
+  last_modified: '2020-03-23 12:42:27.266007'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -6421,8 +6427,7 @@
   send_notification_method: mail
   services: ['[Shared] Start', '[Shared] End', '[Regression Workflow K: preprocessing
       and postprocessing] Preprocessing', '[Regression Workflow K: preprocessing and
-      postprocessing] Service preprocessing and postprocessing', '[Regression Workflow
-      K: preprocessing and postprocessing] Postprocessing']
+      postprocessing] Service preprocessing and postprocessing']
   shared: false
   skip: false
   skip_query: ''
@@ -6521,7 +6526,7 @@
   operating_system: ''
   pools: []
   positions:
-    'Regression Workflow K: preprocessing and postprocessing': [265, -54]
+    'Regression Workflow K: preprocessing and postprocessing': [496, 28]
   postprocessing: results["SHOULD BE THERE"] = "NO BUG"
   postprocessing_type: failure
   preprocessing: set_var("integer", 10)
@@ -6534,63 +6539,6 @@
   skip_query: ''
   skip_value: 'True'
   source_code: "results[\"integer\"] = 10 + integer\r\nresults[\"success\"] = False"
-  time_between_retries: 10
-  type: python_snippet_service
-  update_pools: false
-  validation_method: none
-  vendor: ''
-  waiting_time: 0
-- content_match: ''
-  content_match_regex: false
-  conversion_method: none
-  creator: admin
-  delete_spaces_before_matching: false
-  description: ''
-  device_query: ''
-  device_query_property: name
-  devices: []
-  dict_match: {}
-  display_only_failed_nodes: false
-  events: []
-  include_device_results: false
-  include_link_in_summary: false
-  initial_payload: {}
-  iteration_devices: ''
-  iteration_devices_property: name
-  iteration_values: ''
-  iteration_variable_name: iteration_value
-  last_modified: '2020-03-23 09:35:28.278410'
-  log_level: 1
-  mail_recipient: ''
-  max_number_of_retries: 100
-  max_processes: 15
-  maximum_runs: 1
-  multiprocessing: false
-  name: '[Regression Workflow K: preprocessing and postprocessing] Postprocessing'
-  negative_logic: false
-  notification_header: ''
-  number_of_retries: 0
-  operating_system: ''
-  pools: []
-  positions:
-    'Regression Workflow K: preprocessing and postprocessing': [615, 134]
-  postprocessing: ''
-  postprocessing_type: always
-  preprocessing: ''
-  run_method: per_device
-  scoped_name: Postprocessing
-  send_notification: false
-  send_notification_method: mail
-  shared: false
-  skip: false
-  skip_query: ''
-  skip_value: 'True'
-  source_code: "# Availble variables: device, results, run\r\n# Returning state:\r\
-    \n#    results[\"success\"] = True\r\n#    results[\"result\"] = <return data>\r\
-    \n# Logging: log(level, text)\r\n#    log(\"info\", \"My log message\")\r\n# Exit\
-    \ in the middle of the script:\r\n#    exit()\r\n#    Note: exit() is not required\
-    \ as the last line\r\n\r\nresult = {}\r\nresults[\"success\"] = True\r\nresults[\"\
-    result\"] = result"
   time_between_retries: 10
   type: python_snippet_service
   update_pools: false

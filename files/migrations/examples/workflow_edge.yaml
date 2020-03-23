@@ -566,10 +566,6 @@
     preprocessing and postprocessing', label: success, source: '[Regression Workflow
     K: preprocessing and postprocessing] Preprocessing', subtype: success, type: workflow_edge,
   workflow: 'Regression Workflow K: preprocessing and postprocessing'}
-- {destination: '[Regression Workflow K: preprocessing and postprocessing] Postprocessing',
-  label: success, source: '[Regression Workflow K: preprocessing and postprocessing]
-    Service preprocessing and postprocessing', subtype: success, type: workflow_edge,
-  workflow: 'Regression Workflow K: preprocessing and postprocessing'}
-- {destination: '[Shared] End', label: success, source: '[Regression Workflow K: preprocessing
-    and postprocessing] Postprocessing', subtype: success, type: workflow_edge, workflow: 'Regression
-    Workflow K: preprocessing and postprocessing'}
+- {destination: '[Shared] End', label: failure, source: '[Regression Workflow K: preprocessing
+    and postprocessing] Service preprocessing and postprocessing', subtype: failure,
+  type: workflow_edge, workflow: 'Regression Workflow K: preprocessing and postprocessing'}

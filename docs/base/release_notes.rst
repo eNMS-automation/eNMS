@@ -52,6 +52,7 @@ including using a syslog handler with custom address facility.
 - Fix 404 custom passwords logs from Vault
 - Encrypt and decrypt all data going in and out of the vault (b64 / Fernet)
 - No longer store user password when external authentication is used (LDAP/TACACS+)
+- No longer create / import duplicated edges of the same subtype.
 
 MIGRATION:
 In pools, "never_update" -> "manually_defined"

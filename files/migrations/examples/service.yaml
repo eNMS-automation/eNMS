@@ -168,7 +168,7 @@
     'Regression Workflow H: shared service in multiple subworkflows': [688, -88]
     'Regression Workflow I: Iteration Targets Advanced': [350, -6]
     'Regression Workflow J: Workflow and Subworkflow Iteration': [500, 0]
-    'Regression Workflow K: preprocessing and postprocessing': [626, 203]
+    'Regression Workflow K: preprocessing and postprocessing': [619, 353]
     Subworkflow 1: !!python/tuple [0, 0]
     Subworkflow 2: !!python/tuple [0, 0]
     T: !!python/tuple [500, 0]
@@ -6390,6 +6390,14 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels:
+    031755da-162e-475a-a798-29deb02cff55:
+      alignment: left
+      content: "Test \"Run on failure\" post-processing\r\nby setting success to False.\r\
+        \nPostprocessing set the variables \"should be there\":\r\nthis variable should\
+        \ be in the results.\r\n\r\nBesides, the results should contain:\r\n- func_result\
+        \ set to eos (Washington) / IOS (Chicago)\r\n- cls_result set to Washington\
+        \ / Chicago"
+      positions: [559, 16]
     15b463f1-e8ba-4d61-a84f-cf39d1434533:
       alignment: left
       content: "Preprocessing: set a per-device variable \"device OS\" in payload\
@@ -6400,13 +6408,7 @@
         \ in the payload with set_var :\r\n\r\ndef test():\r\n    return device.operating_system\r\
         \n\r\nclass Test():\r\n    device = device.name"
       positions: [-16, 269]
-    78746f30-1c53-426d-b06d-ef43f572f09e:
-      alignment: left
-      content: "Test \"Run on failure\" post-processing\r\nby setting success to False.\r\
-        \nPostprocessing set the variables \"should be there\":\r\nthis variable should\
-        \ be in the results."
-      positions: [529, -67]
-  last_modified: '2020-03-23 17:14:32.171004'
+  last_modified: '2020-03-23 18:00:56.849119'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -6530,7 +6532,7 @@
   operating_system: ''
   pools: []
   positions:
-    'Regression Workflow K: preprocessing and postprocessing': [496, 28]
+    'Regression Workflow K: preprocessing and postprocessing': [558, 152]
   postprocessing: "results[\"SHOULD BE THERE\"] = \"NO BUG\"\r\n\r\nresults[\"func_result\"\
     ] = func()\r\nresults[\"cls_result\"] = cls().device"
   postprocessing_type: failure

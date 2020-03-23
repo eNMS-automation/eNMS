@@ -91,7 +91,7 @@ class Service(AbstractBase):
     iteration_devices_property = db.Column(db.SmallString, default="ip_address")
     preprocessing = db.Column(db.LargeString)
     postprocessing = db.Column(db.LargeString)
-    postprocessing_type = db.Column(db.SmallString, default="always")
+    postprocessing_mode = db.Column(db.SmallString, default="always")
     log_level = db.Column(Integer, default=1)
     runs = relationship("Run", back_populates="service", cascade="all, delete-orphan")
     maximum_runs = db.Column(Integer, default=1)
@@ -633,10 +633,10 @@ class Run(AbstractBase):
                 if "success" not in results:
                     results["success"] = True
                 if (
-                    self.postprocessing_type == "always"
-                    or self.postprocessing_type == "failure"
+                    self.postprocessing_mode == "always"
+                    or self.postprocessing_mode == "failure"
                     and not results["success"]
-                    or self.postprocessing_type == "success"
+                    or self.postprocessing_mode == "success"
                     and results["success"]
                 ):
                     try:

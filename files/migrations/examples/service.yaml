@@ -94,7 +94,7 @@
     : [-604, 9]
     iteration_devices_workflow: ['-164', '15']
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   run_method: per_device
   scoped_name: Start
@@ -209,7 +209,7 @@
     : [-600, 63]
     iteration_devices_workflow: ['651', '20']
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   run_method: per_device
   scoped_name: End
@@ -259,7 +259,7 @@
   pools: []
   positions: {}
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   run_method: per_device
   scoped_name: cluster_monitoring
@@ -310,7 +310,7 @@
   positions:
     'Regression Workflow 9: Operational Data Backup': [207, 117]
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   run_method: once
   scoped_name: git_push_configurations
@@ -374,7 +374,7 @@
     'Regression Workflow 2: Separate Failure - Success paths': [741, 106]
     'Regression Workflow C: Advanced multiprocessing': [-266, -204]
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   regex: ''
   run_method: per_device
@@ -437,7 +437,7 @@
   positions:
     'Regression Workflow C: Advanced multiprocessing': [299, -170]
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   remote_as: 200
   run_method: per_device
@@ -498,7 +498,7 @@
   positions:
     'Regression Workflow 9: Operational Data Backup': [-259, 351]
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   replacements: []
   run_method: per_device
@@ -566,7 +566,7 @@
   positions:
     'Regression Workflow 4: VRF creation and deletion with Netmiko': [-38, -86]
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   run_method: per_device
   scoped_name: netmiko_create_vrf_test
@@ -639,7 +639,7 @@
     'Regression Workflow A: get_var, set_var, get_result': ['355', '-25']
     iteration_devices_workflow: ['414', '-154']
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   run_method: per_device
   scoped_name: netmiko_check_vrf_test
@@ -710,7 +710,7 @@
     'Regression Workflow 4: VRF creation and deletion with Netmiko': [476, 119]
     'Regression Workflow 5: VRF creation and deletion with Napalm': ['0', '50']
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   run_method: per_device
   scoped_name: netmiko_delete_vrf_test
@@ -781,7 +781,7 @@
     'Regression Workflow 5: VRF creation and deletion with Napalm': ['0', '150']
     iteration_devices_workflow: ['337', '-145']
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   run_method: per_device
   scoped_name: 'Netmiko: Check VRF (test) does not exist'
@@ -847,7 +847,7 @@
     '[Regression Workflow F: Workflow of Workflows] Regression Workflow 5: VRF creation and deletion with Napalm': [
       -374, -164]
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   run_method: per_device
   scoped_name: Create a VRF with NAPALM
@@ -911,7 +911,7 @@
     'Regression Workflow C: Advanced multiprocessing': [340, 109]
     'Regression Workflow D: Prompts': [405, -103]
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   rest_url: http://127.0.0.1:5000/rest/is_alive
   run_method: per_device
@@ -975,7 +975,7 @@
     'Regression Workflow A: get_var, set_var, get_result': ['39', '-32']
     'Regression Workflow F: Workflow of Workflows': [3, -51]
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   run_method: per_device
   scoped_name: 'NAPALM: Get Facts'
@@ -1037,7 +1037,7 @@
     'Regression Workflow 3: Napalm getters (postprocessing)': [-111, 213]
     'Regression Workflow F: Workflow of Workflows': [-336, 217]
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   run_method: per_device
   scoped_name: 'NAPALM: Get interfaces'
@@ -1099,7 +1099,7 @@
     'Regression Workflow F: Workflow of Workflows': [3, -51]
   postprocessing: "# Will change the IPv6 of the Management Interface to ::1\r\nresults[\"\
     result\"][\"get_interfaces_ip\"][\"Management1\"][\"ipv6\"] = \"::1\""
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   run_method: per_device
   scoped_name: get_interfaces_ip
@@ -1160,7 +1160,7 @@
     'Regression Workflow 3: Napalm getters (postprocessing)': [531, -9]
     'Regression Workflow F: Workflow of Workflows': [3, -51]
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   run_method: per_device
   scoped_name: get_config
@@ -1215,7 +1215,7 @@
     'Regression Workflow 3: Napalm getters (postprocessing)': [360, 210]
     'Regression Workflow F: Workflow of Workflows': [3, -51]
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   run_method: per_device
   scoped_name: process_payload1
@@ -1269,7 +1269,7 @@
     'Regression Workflow F: Workflow of Workflows': [-790, 110]
     Workflow with iteration target subworkflows: [283, -152]
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   run_method: per_device
   scoped_name: Modify Payload for Iteration
@@ -1342,7 +1342,7 @@
       of Workflow] Regression Workflow 7: Payload Extraction & Validation'
     : [49, -207]
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   run_method: per_device
   scoped_name: netmiko_show_ip_route
@@ -1417,7 +1417,7 @@
       of Workflow] Regression Workflow 7: Payload Extraction & Validation'
     : [130, -95]
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   query1: get_result("netmiko_show_ip_route", device.name)["success"]
   query2: get_result("netmiko_show_ip_route", device.name)["result"]
@@ -1481,7 +1481,7 @@
     '[Regression Workflow F: Workflow of Workflows] Regression Workflow 5: VRF creation and deletion with Napalm': [
       287, 136]
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   run_method: per_device
   scoped_name: Rollback Configuration with NAPALM
@@ -1551,7 +1551,7 @@
     '[Regression Workflow F: Workflow of Workflows] Regression Workflow 5: VRF creation and deletion with Napalm': [
       267, -146]
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   run_method: per_device
   scoped_name: Check VRF exists with Netmiko
@@ -1623,7 +1623,7 @@
       -348, 160]
     iteration_devices_workflow: ['245', '32']
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   run_method: per_device
   scoped_name: Check VRF is not configured with Netmiko
@@ -1693,7 +1693,7 @@
   positions:
     'Regression Workflow D: Prompts': [22, -74]
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   response1: show vrf b
   response2: show vrf c
@@ -1763,7 +1763,7 @@
   positions:
     'Regression Workflow D: Prompts': [350, 108]
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   response1: show vrf
   response2: ''
@@ -1821,7 +1821,7 @@
   positions:
     'Regression Workflow A: get_var, set_var, get_result': [-376, -138]
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   run_method: once
   scoped_name: Modify payload (no device)
@@ -1875,7 +1875,7 @@
   positions:
     'Regression Workflow A: get_var, set_var, get_result': [0, -144]
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   run_method: per_device
   scoped_name: Modify payload (per device)
@@ -1944,7 +1944,7 @@
   positions:
     'Regression Workflow A: get_var, set_var, get_result': [474, -11]
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   run_method: per_device
   scoped_name: Show vrf with payload helper
@@ -2014,7 +2014,7 @@
   positions:
     'Regression Workflow A: get_var, set_var, get_result': [425, 190]
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   run_method: per_device
   scoped_name: Show vrf with python query
@@ -2084,7 +2084,7 @@
   positions:
     'Regression Workflow A: get_var, set_var, get_result': [-445, 128]
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   run_method: per_device
   scoped_name: show runtime with get_result helper
@@ -2152,7 +2152,7 @@
       of Workflow] Regression Workflow B: Napalm getters validation'
     : [-405, -99]
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   run_method: per_device
   scoped_name: 'Getters Workflow: is alive'
@@ -2216,7 +2216,7 @@
       of Workflow] Regression Workflow B: Napalm getters validation'
     : [18, -122]
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   run_method: per_device
   scoped_name: 'Getters Workflow: get facts'
@@ -2282,7 +2282,7 @@
       of Workflow] Regression Workflow B: Napalm getters validation'
     : [581, 136]
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   run_method: per_device
   scoped_name: 'Getters Workflow: Interface IP'
@@ -2346,7 +2346,7 @@
       of Workflow] Regression Workflow B: Napalm getters validation'
     : [-45, 144]
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   run_method: per_device
   scoped_name: 'Getters Workflow: MAC address'
@@ -2410,7 +2410,7 @@
       of Workflow] Regression Workflow B: Napalm getters validation'
     : [535, -147]
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   run_method: per_device
   scoped_name: 'Getters Workflow: get facts failed match'
@@ -2470,7 +2470,7 @@
     'Regression Workflow 6: Ansible with Validation': [-107, 153]
     'Regression Workflow B: Napalm getters validation': [-30, 126]
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   run_method: per_device
   scoped_name: 'Ansible Workflow: Arista show version'
@@ -2526,7 +2526,7 @@
   positions:
     'Regression Workflow 6: Ansible with Validation': [179, -62]
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   run_method: per_device
   scoped_name: 'Ansible Workflow: Arista show configuration (regex match)'
@@ -2582,7 +2582,7 @@
   positions:
     'Regression Workflow 6: Ansible with Validation': [486, 173]
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   run_method: per_device
   scoped_name: 'Ansible Workflow: Arista show configuration (dict match)'
@@ -2646,7 +2646,7 @@
     'Regression Workflow C: Advanced multiprocessing': [-367, 143]
     'Regression Workflow F: Workflow of Workflows': [678, 52]
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   run_method: per_device
   scoped_name: Show version with multiprocessing
@@ -2716,7 +2716,7 @@
   positions:
     'Regression Workflow E: Iteration Targets': [240, -144]
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   run_method: per_device
   scoped_name: Iteration Targets Workflow - Test 1
@@ -2786,7 +2786,7 @@
   positions:
     'Regression Workflow E: Iteration Targets': [572, -4]
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   run_method: per_device
   scoped_name: Iteration Target Workflow - Test 2
@@ -2856,7 +2856,7 @@
   positions:
     'Regression Workflow E: Iteration Targets': [556, 123]
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   run_method: per_device
   scoped_name: Iteration Target Workflow - Test 3
@@ -2917,7 +2917,7 @@
       of Workflow] Regression Workflow 8: Payload Extraction with Operations'
     : [118, -243]
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   run_method: per_device
   scoped_name: 'Payload Workflow: Add initial variables'
@@ -2984,7 +2984,7 @@
       of Workflow] Regression Workflow 8: Payload Extraction with Operations'
     : [619, -236]
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   query1: 'get_result("Getters Workflow: Interface IP", device=device.name)["negative_logic"]'
   query2: 'get_result("Getters Workflow: Interface IP", device=device.name)["negative_logic"]'
@@ -3054,7 +3054,7 @@
       of Workflow] Regression Workflow 8: Payload Extraction with Operations'
     : [600, 70]
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   query1: get_result("Start")["state"]["completed"]
   query2: get_result("Start")["logs"]
@@ -3116,7 +3116,7 @@
   positions:
     'Regression Workflow E: Iteration Targets': [-135, 91]
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   rest_url: http://127.0.0.1:5000/rest/instance/device/{{get_var('iteration_value')}}
   run_method: per_device
@@ -3175,7 +3175,7 @@
     '[Regression Workflow F: Workflow of Workflows] Regression Workflow F S2: Access Variables from Parent Workflow': [
       240, -101]
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   run_method: per_device
   scoped_name: 'Variable Access Subworkflow: Access variable from snippet'
@@ -3250,7 +3250,7 @@
     '[Regression Workflow F: Workflow of Workflows] Regression Workflow F S2: Access Variables from Parent Workflow': [
       244, 113]
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   run_method: per_device
   scoped_name: 'Variable Access Subworkflow: Access variables for iteration'
@@ -3313,7 +3313,7 @@
   positions:
     'Regression Workflow F S1: Subworkflow of Workflow': [200, -205]
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   run_method: per_service_with_workflow_targets
   scoped_name: 'Regression Workflow 9: Operational Data Backup'
@@ -3407,7 +3407,7 @@
   positions:
     'Regression Workflow F: Workflow of Workflows': [-423, -31]
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   run_method: per_device
   scoped_name: 'Regression Workflow 4: VRF creation and deletion with Netmiko'
@@ -3472,7 +3472,7 @@
   positions:
     'Regression Workflow F: Workflow of Workflows': [152, 75]
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   run_method: per_device
   scoped_name: 'Regression Workflow 5: VRF creation and deletion with Napalm'
@@ -3543,7 +3543,7 @@
   positions:
     'Regression Workflow F: Workflow of Workflows': [464, 224]
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   run_method: per_device
   scoped_name: 'Regression Workflow 3: Napalm getters (postprocessing)'
@@ -3642,7 +3642,7 @@
     '[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow of Workflow': [
       134, -147]
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   run_method: per_device
   scoped_name: 'Regression Workflow 7: Payload Extraction & Validation'
@@ -3719,7 +3719,7 @@
   pools: []
   positions: {}
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   run_method: per_device
   scoped_name: 'Regression Workflow F: Workflow of Workflows'
@@ -3784,7 +3784,7 @@
   pools: []
   positions: {}
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   run_method: per_device
   scoped_name: 'Regression Workflow 2: Separate Failure - Success paths'
@@ -3845,7 +3845,7 @@
   pools: []
   positions: {}
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   run_method: per_device
   scoped_name: 'Regression Workflow D: Prompts'
@@ -3921,7 +3921,7 @@
   pools: []
   positions: {}
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   run_method: per_service_with_workflow_targets
   scoped_name: 'Regression Workflow A: get_var, set_var, get_result'
@@ -4018,7 +4018,7 @@
     '[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow of Workflow': [
       678, 11]
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   run_method: per_device
   scoped_name: 'Regression Workflow B: Napalm getters validation'
@@ -4107,7 +4107,7 @@
   pools: []
   positions: {}
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   run_method: per_device
   scoped_name: 'Regression Workflow 6: Ansible with Validation'
@@ -4177,7 +4177,7 @@
   pools: []
   positions: {}
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   run_method: per_device
   scoped_name: 'Regression Workflow C: Advanced multiprocessing'
@@ -4268,7 +4268,7 @@
   pools: []
   positions: {}
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   run_method: per_device
   scoped_name: 'Regression Workflow E: Iteration Targets'
@@ -4329,7 +4329,7 @@
     '[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow of Workflow': [
       135, 187]
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   run_method: per_device
   scoped_name: 'Regression Workflow 8: Payload Extraction with Operations'
@@ -4397,7 +4397,7 @@
   positions:
     'Regression Workflow F: Workflow of Workflows': [164, 375]
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   run_method: per_device
   scoped_name: 'Regression Workflow F S2: Access Variables from Parent Workflow'
@@ -4456,7 +4456,7 @@
   positions:
     'Regression Workflow F: Workflow of Workflows': [-655, 369]
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   run_method: per_device
   scoped_name: 'Regression Workflow F S1: Subworkflow of Workflow'
@@ -4525,7 +4525,7 @@
   pools: []
   positions: {}
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   run_method: per_service_with_service_targets
   scoped_name: 'Regression Workflow 1: Netmiko with validation and retries'
@@ -4591,7 +4591,7 @@
   positions:
     'Regression Workflow 1: Netmiko with validation and retries': [-142, -137]
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   run_method: per_device
   scoped_name: Check VRF (NOVRF) exists
@@ -4660,7 +4660,7 @@
   positions:
     'Regression Workflow F: Workflow of Workflows': [-408, 34]
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   run_method: per_device
   scoped_name: Show interfaces with Netmiko
@@ -4730,7 +4730,7 @@
   positions:
     'Regression Workflow 9: Operational Data Backup': [-284, -43]
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   replacements:
   - {pattern: '', replace_with: ''}
@@ -4789,7 +4789,7 @@
   pools: []
   positions: {}
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   run_method: per_device
   scoped_name: 'Regression Workflow G: run methods (BFS)'
@@ -4849,7 +4849,7 @@
   positions:
     'Regression Workflow G: run methods (BFS)': [-296, -98]
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   run_method: per_device
   scoped_name: Workflow  in device by device mode
@@ -4906,7 +4906,7 @@
   positions:
     'Regression Workflow G: run methods (BFS)': [-135, 189]
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   rest_url: ''
   run_method: per_device
@@ -4964,7 +4964,7 @@
   positions:
     'Regression Workflow G: run methods (BFS)': [123, -96]
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   run_method: per_service_with_workflow_targets
   scoped_name: Workflow in service by service mode (workflow targets)
@@ -5023,7 +5023,7 @@
   positions:
     'Regression Workflow G: run methods (BFS)': [254, 163]
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   rest_url: ''
   run_method: per_device
@@ -5080,7 +5080,7 @@
   positions:
     'Regression Workflow G: run methods (BFS)': [622, -89]
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   run_method: per_service_with_service_targets
   scoped_name: Workflow in service targets mode
@@ -5147,7 +5147,7 @@
     '[Regression Workflow G: run methods (BFS)] Workflow  in device by device mode': [
       248, -94]
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   run_method: per_device
   scoped_name: Validation show VRF
@@ -5218,7 +5218,7 @@
     '[Regression Workflow G: run methods (BFS)] Workflow in service by service mode (workflow targets)': [
       239, -108]
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   run_method: per_device
   scoped_name: Validation show VRF
@@ -5289,7 +5289,7 @@
     '[Regression Workflow G: run methods (BFS)] Workflow in service targets mode': [
       234, -86]
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   run_method: per_device
   scoped_name: Validation show VRF
@@ -5369,7 +5369,7 @@
   pools: []
   positions: {}
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   run_method: per_service_with_workflow_targets
   scoped_name: 'Regression Workflow H: shared service in multiple subworkflows'
@@ -5426,7 +5426,7 @@
   positions:
     'Regression Workflow H: shared service in multiple subworkflows': [-241, 197]
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   run_method: per_service_with_workflow_targets
   scoped_name: Subworkflow 1
@@ -5482,7 +5482,7 @@
   positions:
     'Regression Workflow H: shared service in multiple subworkflows': [548, 48]
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   run_method: per_service_with_workflow_targets
   scoped_name: Subworkflow 2
@@ -5550,7 +5550,7 @@
     '[Regression Workflow H: shared service in multiple subworkflows] Subworkflow 2': [
       243, -104]
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   run_method: per_device
   scoped_name: Shared Service for Regression Workflow H
@@ -5611,7 +5611,7 @@
   positions:
     'Regression Workflow 6: Ansible with Validation': [-536, 192]
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   run_method: per_device
   scoped_name: Simple Playbook
@@ -5663,7 +5663,7 @@
   pools: []
   positions: {}
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   run_method: per_device
   scoped_name: 'Regression Workflow I: Iteration Targets Advanced'
@@ -5717,7 +5717,7 @@
   positions:
     'Regression Workflow I: Iteration Targets Advanced': [132, -202]
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   run_method: per_device
   scoped_name: Set Variables for Iteration
@@ -5783,7 +5783,7 @@
   positions:
     'Regression Workflow I: Iteration Targets Advanced': [135, 100]
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   run_method: per_device
   scoped_name: Show VRF with iteration
@@ -5841,7 +5841,7 @@
   pools: []
   positions: {}
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   run_method: per_device
   scoped_name: 'Regression Workflow J: Workflow and Subworkflow Iteration'
@@ -5895,7 +5895,7 @@
   positions:
     'Regression Workflow J: Workflow and Subworkflow Iteration': [226, -76]
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   run_method: per_device
   scoped_name: Test Iteration
@@ -5950,7 +5950,7 @@
   positions:
     'Regression Workflow J: Workflow and Subworkflow Iteration': [218, 171]
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   run_method: per_device
   scoped_name: Subworkflow Iteration
@@ -6005,7 +6005,7 @@
     '[Regression Workflow J: Workflow and Subworkflow Iteration] Subworkflow Iteration': [
       231, -87]
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   run_method: per_device
   scoped_name: Test Iteration
@@ -6063,7 +6063,7 @@
       of Workflow] Regression Workflow 7: Payload Extraction & Validation'
     : [-338, -9]
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   run_method: per_device
   scoped_name: Validation dict via results
@@ -6121,7 +6121,7 @@
       of Workflow] Regression Workflow 7: Payload Extraction & Validation'
     : [-236, 214]
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   run_method: per_device
   scoped_name: Validate text via results
@@ -6180,7 +6180,7 @@
       of Workflow] Regression Workflow 7: Payload Extraction & Validation'
     : [679, -114]
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   run_method: per_device
   scoped_name: Validate dict via payload
@@ -6237,7 +6237,7 @@
       of Workflow] Regression Workflow 7: Payload Extraction & Validation'
     : [808, 157]
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   run_method: per_device
   scoped_name: Validate text via payload
@@ -6294,7 +6294,7 @@
       of Workflow] Regression Workflow 8: Payload Extraction with Operations'
     : [5, 75]
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   run_method: per_device
   scoped_name: Validation 1
@@ -6351,7 +6351,7 @@
       of Workflow] Regression Workflow 8: Payload Extraction with Operations'
     : [-461, 60]
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   run_method: per_device
   scoped_name: Validation 2
@@ -6423,7 +6423,7 @@
   pools: []
   positions: {}
   postprocessing: ''
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: ''
   run_method: per_service_with_workflow_targets
   scoped_name: 'Regression Workflow K: preprocessing and postprocessing'
@@ -6480,7 +6480,7 @@
     \ for {device.name}\"\r\n\r\ndef test():\r\n  \treturn device.operating_system\r\
     \n\r\nclass Test():\r\n  device = device.name\r\n\r\nset_var(\"func\", test, device=device.name)\r\
     \nset_var(\"cls\", Test, device=device.name)\r\n"
-  postprocessing_type: always
+  postprocessing_mode: always
   preprocessing: set_var("test", device.operating_system, device=device.name)
   run_method: per_device
   scoped_name: Preprocessing
@@ -6535,7 +6535,7 @@
     'Regression Workflow K: preprocessing and postprocessing': [558, 152]
   postprocessing: "results[\"SHOULD BE THERE\"] = \"NO BUG\"\r\n\r\nresults[\"func_result\"\
     ] = func()\r\nresults[\"cls_result\"] = cls().device"
-  postprocessing_type: failure
+  postprocessing_mode: failure
   preprocessing: set_var("integer", 10)
   run_method: per_device
   scoped_name: Service preprocessing and postprocessing

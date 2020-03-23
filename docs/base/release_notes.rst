@@ -53,6 +53,8 @@ including using a syslog handler with custom address facility.
 - Encrypt and decrypt all data going in and out of the vault (b64 / Fernet)
 - No longer store user password when external authentication is used (LDAP/TACACS+)
 - No longer create / import duplicated edges of the same subtype.
+- Add preprocessing code area for all services
+- all post processing mode: "run on success" / "run on failure" / "run all the time" selector
 
 MIGRATION:
 In services, "result_postprocessing" -> "postprocessing"

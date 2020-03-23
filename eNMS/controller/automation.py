@@ -258,7 +258,7 @@ class AutomationController(BaseController):
                         "a_attr": {"style": ("color: #FF1694;" "width: 100%")},
                     }
                     for service in db.fetch_all("service")
-                    if service.shared
+                    if service.shared and service.scoped_name not in ("Start", "End")
                 ),
                 key=itemgetter("text"),
             )

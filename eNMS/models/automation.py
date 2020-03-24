@@ -442,6 +442,8 @@ class Run(AbstractBase):
             },
             "summary": {"success": [], "failure": []},
         }
+        if self.subservice:
+            state["subservice"] = self.subservice.get_properties()
         if self.service.type == "workflow":
             state.update({"edges": defaultdict(int), "services": defaultdict(dict)})
             state["progress"]["service"] = {

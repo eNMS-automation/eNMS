@@ -88,10 +88,11 @@ export let creationMode;
 let mousePosition;
 let currLabel;
 let triggerMenu;
+let subservice;
 
 export function displayWorkflow(workflowData) {
-  console.log(workflowData)
   workflow = workflowData.service;
+  subservice = workflowData.state && workflowData.state.subservice;
   nodes = new vis.DataSet(workflow.services.map(serviceToNode));
   edges = new vis.DataSet(workflow.edges.map(edgeToEdge));
   workflow.services.map(drawIterationEdge);
@@ -144,8 +145,14 @@ export function displayWorkflow(workflowData) {
     }
   });
   updateRuntimes(workflowData.runtimes);
-  $("#current-workflow").val(`${currentPath}`.split(">")[0]);
-  $("#current-workflow").selectpicker("refresh");
+  if (!$(`#current-workflow option[value='${workflow.id}']`).length) {
+    $("#current-workflow").append(
+      `<option value="${workflow.id}">${workflow.scoped_name}</option>`
+    );
+  }
+  $("#current-workflow")
+    .val(workflow.id)
+    .selectpicker("refresh");
   graph.on("dragEnd", (event) => {
     if (graph.getNodeAt(event.pointer.DOM)) savePositions();
   });
@@ -438,7 +445,7 @@ function skipServices() {
 }
 
 function getServiceLabel(service) {
-  if (ends.has(service.id)) {
+  if (["Start", "End"].includes(service.scoped_name)) {
     return service.scoped_name;
   }
   let label =
@@ -446,17 +453,22 @@ function getServiceLabel(service) {
       ? `\n     ${service.scoped_name}     \n`
       : `${service.scoped_name}\n`;
   label += "—————\n";
-  label += service.type == "workflow" ? "Subworkflow" : serviceTypes[service.type];
+  if (service.scoped_name == "Subservice") {
+    label += subservice.scoped_name;
+  } else {
+    label += service.type == "workflow" ? "Subworkflow" : serviceTypes[service.type];
+  }
   return label;
 }
 
 function serviceToNode(service) {
-  const defaultService = ["Start", "End", "Subservice"].includes(service.scoped_name);
-  if (defaultService) ends.add(service.id);
+  const isSubservice = service.scoped_name == "Subservice";
+  const defaultService = ["Start", "End"].includes(service.scoped_name);
+  if (defaultService || isSubservice) ends.add(service.id);
   return {
     id: service.id,
     shape: service.type == "workflow" ? "ellipse" : defaultService ? "circle" : "box",
-    color: defaultService ? "pink" : "#D2E5FF",
+    color: defaultService ? "pink" : isSubservice ? "#E6ADD8" : "#D2E5FF",
     font: {
       size: 15,
       multi: "html",
@@ -464,7 +476,7 @@ function serviceToNode(service) {
       bold: { color: "#000000" },
     },
     shadow: {
-      enabled: !defaultService,
+      enabled: !defaultService && !isSubservice,
       color: service.shared ? "#FF1694" : "#6666FF",
       size: 15,
     },

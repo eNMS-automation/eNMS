@@ -110,6 +110,11 @@
                   {{ form.type(id=form_type + '-class', class="form-control
                   readonly-when-run add-id") }}
                 </div>
+                {{ form.superworkflow.label() }}
+                <div class="form-group">
+                  {{ form.superworkflow(id=form_type + '-superworkflow', class="form-control
+                  readonly-when-run add-id") }}
+                </div>
                 <fieldset class="readonly-when-run">
                   <div class="item">
                     <input

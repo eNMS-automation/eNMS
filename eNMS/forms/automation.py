@@ -10,6 +10,7 @@ from eNMS.forms.fields import (
     IntegerField,
     StringField,
     DictField,
+    InstanceField,
     MultipleInstanceField,
     PasswordField,
     SelectField,
@@ -36,6 +37,7 @@ class ServiceForm(BaseForm):
     pools = MultipleInstanceField("Pools")
     update_pools = BooleanField("Update pools before running")
     workflows = MultipleInstanceField("Workflows")
+    superworkflow = InstanceField("Superworkflow")
     waiting_time = IntegerField(
         "Time to Wait before next service is started (in seconds)", default=0
     )

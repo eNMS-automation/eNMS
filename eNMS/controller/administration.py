@@ -115,7 +115,7 @@ class AdministrationController(BaseController):
             for model in models:
                 db.delete_all(model)
                 db.session.commit()
-        workflow_edges, workflow_services = [], {}
+        workflow_edges, workflow_services, superworkflows = [], {}, {}
         folder_path = self.path / "files" / folder / kwargs["name"]
         for model in models:
             path = folder_path / f"{model}.yaml"
@@ -130,6 +130,8 @@ class AdministrationController(BaseController):
                     instance_type = (
                         instance.pop("type") if model == "service" else model
                     )
+                    if instance_type in ("service", "workflow") and "superworkflow" in instance:
+                        superworkflows[instance["name"]] = instance.pop("superworkflow")
                     if instance_type == "workflow":
                         workflow_services[instance["name"]] = instance.pop("services")
                     try:
@@ -150,6 +152,10 @@ class AdministrationController(BaseController):
                 workflow.services = [
                     db.fetch("service", name=service_name) for service_name in services
                 ]
+            db.session.commit()
+            for name, superworkflow in superworkflows.items():
+                service = db.fetch("service", name=name)
+                service.superworkflow = db.fetch("workflow", name=superworkflow)
             db.session.commit()
             for edge in workflow_edges:
                 for property in ("source", "destination", "workflow"):

@@ -6411,7 +6411,7 @@
         \ in the payload with set_var :\r\n\r\ndef test():\r\n    return device.operating_system\r\
         \n\r\nclass Test():\r\n    device = device.name"
       positions: [-16, 269]
-  last_modified: '2020-03-23 18:00:56.849119'
+  last_modified: '2020-03-24 08:16:31.502794'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -6439,6 +6439,7 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  superworkflow: 'Regression Workflow L: superworkflow'
   time_between_retries: 10
   type: workflow
   update_pools: false

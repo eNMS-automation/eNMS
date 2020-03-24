@@ -133,7 +133,8 @@ export function displayWorkflow(workflowData) {
   });
   graph.on("doubleClick", function(event) {
     event.event.preventDefault();
-    const node = nodes.get(this.getNodeAt(event.pointer.DOM));
+    let node = nodes.get(this.getNodeAt(event.pointer.DOM));
+    if (node.name == "Subservice") node = subservice;
     if (!node.id) {
       return;
     } else if (node.type == "label") {

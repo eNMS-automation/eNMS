@@ -279,8 +279,14 @@ export const switchToWorkflow = function(path, arrow, runtime) {
       url: `/get_service_state/${path}/${runtime || "latest"}`,
       callback: function(result) {
         workflow = result.service;
+        if (workflow && workflow.superworkflow) {
+          currentPath = `${workflow.superworkflow.id}>${path}`;
+          $("#up-arrow").removeClass("disabled");
+        }
         localStorage.setItem("path", path);
-        if (workflow) localStorage.setItem("workflow", JSON.stringify(workflow));
+        if (workflow) {
+          localStorage.setItem("workflow", JSON.stringify(workflow));
+        }
         displayWorkflow(result);
       },
     });

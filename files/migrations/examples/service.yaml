@@ -57,6 +57,7 @@
     'Regression Workflow I: Iteration Targets Advanced': [-131, -24]
     'Regression Workflow J: Workflow and Subworkflow Iteration': [0, 0]
     'Regression Workflow K: preprocessing and postprocessing': [-197, -37]
+    'Regression Workflow L: superworkflow': [0, 0]
     Subworkflow 1: !!python/tuple [0, 0]
     Subworkflow 2: !!python/tuple [0, 0]
     Workflow  in device by device mode: !!python/tuple [0, 0]
@@ -169,6 +170,7 @@
     'Regression Workflow I: Iteration Targets Advanced': [350, -6]
     'Regression Workflow J: Workflow and Subworkflow Iteration': [500, 0]
     'Regression Workflow K: preprocessing and postprocessing': [619, 353]
+    'Regression Workflow L: superworkflow': [500, 0]
     Subworkflow 1: !!python/tuple [0, 0]
     Subworkflow 2: !!python/tuple [0, 0]
     T: !!python/tuple [500, 0]
@@ -910,6 +912,7 @@
     'Regression Workflow A: get_var, set_var, get_result': [-10, 157]
     'Regression Workflow C: Advanced multiprocessing': [340, 109]
     'Regression Workflow D: Prompts': [405, -103]
+    'Regression Workflow L: superworkflow': [224, -100]
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -6548,6 +6551,111 @@
   source_code: "results[\"integer\"] = 10 + integer\r\nresults[\"success\"] = False"
   time_between_retries: 10
   type: python_snippet_service
+  update_pools: false
+  validation_method: none
+  vendor: ''
+  waiting_time: 0
+- content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  devices: []
+  dict_match: {}
+  display_only_failed_nodes: false
+  events: []
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2020-03-24 07:01:45.366014'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Shared] Subservice'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions:
+    'Regression Workflow L: superworkflow': [217, 99]
+  postprocessing: ''
+  postprocessing_mode: always
+  preprocessing: ''
+  run_method: per_device
+  scoped_name: Subservice
+  send_notification: false
+  send_notification_method: mail
+  shared: true
+  skip: false
+  skip_query: ''
+  skip_value: 'True'
+  time_between_retries: 10
+  type: swiss_army_knife_service
+  update_pools: false
+  validation_method: none
+  vendor: ''
+  waiting_time: 0
+- close_connection: false
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  devices: []
+  dict_match: {}
+  display_only_failed_nodes: false
+  events: []
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  labels: {}
+  last_modified: '2020-03-24 07:04:07.374810'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: 'Regression Workflow L: superworkflow'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions: {}
+  postprocessing: ''
+  postprocessing_mode: always
+  preprocessing: ''
+  run_method: per_device
+  scoped_name: 'Regression Workflow L: superworkflow'
+  send_notification: false
+  send_notification_method: mail
+  services: ['[Shared] Start', '[Shared] End', '[Shared] Subservice', '[Shared] REST
+      API: call *is_alive* endpoint']
+  shared: false
+  skip: false
+  skip_query: ''
+  skip_value: 'True'
+  time_between_retries: 10
+  type: workflow
   update_pools: false
   validation_method: none
   vendor: ''

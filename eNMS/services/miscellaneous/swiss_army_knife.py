@@ -29,6 +29,9 @@ class SwissArmyKnifeService(Service):
     def End(self, *args, **kwargs):  # noqa: N802
         return {"success": True}
 
+    def Subservice(self, *args, **kwargs):  # noqa: N802
+        return {"success": True}
+
     def cluster_monitoring(self, run, payload):
         protocol = app.settings["cluster"]["scan_protocol"]
         for instance in db.fetch_all("instance"):

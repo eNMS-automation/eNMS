@@ -444,7 +444,7 @@ function getServiceLabel(service) {
 }
 
 function serviceToNode(service) {
-  const defaultService = ["Start", "End"].includes(service.scoped_name);
+  const defaultService = ["Start", "End", "Subservice"].includes(service.scoped_name);
   if (defaultService) ends.add(service.id);
   return {
     id: service.id,

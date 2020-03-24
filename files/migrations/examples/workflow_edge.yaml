@@ -569,3 +569,11 @@
 - {destination: '[Shared] End', label: failure, source: '[Regression Workflow K: preprocessing
     and postprocessing] Service preprocessing and postprocessing', subtype: failure,
   type: workflow_edge, workflow: 'Regression Workflow K: preprocessing and postprocessing'}
+- {destination: '[Shared] REST API: call *is_alive* endpoint', label: success, source: '[Shared]
+    Start', subtype: success, type: workflow_edge, workflow: 'Regression Workflow
+    L: superworkflow'}
+- {destination: '[Shared] Subservice', label: success, source: '[Shared] REST API:
+    call *is_alive* endpoint', subtype: success, type: workflow_edge, workflow: 'Regression
+    Workflow L: superworkflow'}
+- {destination: '[Shared] End', label: success, source: '[Shared] Subservice', subtype: success,
+  type: workflow_edge, workflow: 'Regression Workflow L: superworkflow'}

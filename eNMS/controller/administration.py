@@ -130,7 +130,10 @@ class AdministrationController(BaseController):
                     instance_type = (
                         instance.pop("type") if model == "service" else model
                     )
-                    if instance_type in ("service", "workflow") and "superworkflow" in instance:
+                    if (
+                        instance_type in ("service", "workflow")
+                        and "superworkflow" in instance
+                    ):
                         superworkflows[instance["name"]] = instance.pop("superworkflow")
                     if instance_type == "workflow":
                         workflow_services[instance["name"]] = instance.pop("services")

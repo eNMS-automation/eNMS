@@ -198,7 +198,9 @@ class Workflow(Service):
                 results = {"result": "skipped", "success": True}
             else:
                 kwargs = {
-                    "service": service.id,
+                    "service": run.subservice.id
+                    if service.scoped_name == "Subservice"
+                    else service.id,
                     "workflow": self.id,
                     "restart_run": restart_run,
                     "parent": run,

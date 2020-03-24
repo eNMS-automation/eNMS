@@ -74,7 +74,9 @@ class Service(AbstractBase):
         "Pool", secondary=db.service_pool_table, back_populates="services"
     )
     superworkflow_id = db.Column(Integer, ForeignKey("service.id"))
-    superworkflow = relationship("Service", uselist=False, foreign_keys=superworkflow_id)
+    superworkflow = relationship(
+        "Service", uselist=False, foreign_keys=superworkflow_id
+    )
     update_pools = db.Column(Boolean, default=False)
     send_notification = db.Column(Boolean, default=False)
     send_notification_method = db.Column(db.SmallString, default="mail")
@@ -95,7 +97,12 @@ class Service(AbstractBase):
     postprocessing = db.Column(db.LargeString)
     postprocessing_mode = db.Column(db.SmallString, default="always")
     log_level = db.Column(Integer, default=1)
-    runs = relationship("Run", back_populates="service", cascade="all, delete-orphan")
+    runs = relationship(
+        "Run",
+        foreign_keys="[Run.service_id]",
+        back_populates="service",
+        cascade="all, delete-orphan",
+    )
     maximum_runs = db.Column(Integer, default=1)
     multiprocessing = db.Column(Boolean, default=False)
     max_processes = db.Column(Integer, default=5)
@@ -286,6 +293,8 @@ class Run(AbstractBase):
     service_name = association_proxy(
         "service", "scoped_name", info={"name": "service_name"}
     )
+    subservice_id = db.Column(Integer, ForeignKey("service.id"))
+    subservice = relationship("Service", foreign_keys="Run.subservice_id")
     workflow_id = db.Column(Integer, ForeignKey("workflow.id", ondelete="cascade"))
     workflow = relationship("Workflow", foreign_keys="Run.workflow_id")
     workflow_name = association_proxy(
@@ -497,7 +506,7 @@ class Run(AbstractBase):
                 or len(self.devices) > 1
                 or self.run_method == "once"
             ):
-                self.create_result(self.make_results_json_compliant(results))
+                self.create_result(results)
             db.session.commit()
         return results
 
@@ -546,11 +555,27 @@ class Run(AbstractBase):
         self.run_state["summary"][key].append(device.name)
         return success
 
+    def run_superworkflow(self, payload):
+        super_run = db.factory(
+            "run",
+            **{
+                "service": self.superworkflow.id,
+                "devices": [device.id for device in self.devices],
+                "subservice": self.service.id,
+                "restart_run": self.restart_run,
+                "parent": self,
+                "parent_runtime": self.parent_runtime,
+            },
+        )
+        return super_run.run(payload)["success"]
+
     def device_run(self, payload):
         self.devices = self.compute_devices(payload)
         if self.run_method != "once":
             self.run_state["progress"]["device"]["total"] += len(self.devices)
-        if self.iteration_devices and not self.parent_device:
+        if self.superworkflow and not self.workflow == self.superworkflow:
+            return {"success": self.run_superworkflow(payload), "runtime": self.runtime}
+        elif self.iteration_devices and not self.parent_device:
             if not self.workflow:
                 return {
                     "success": False,
@@ -587,6 +612,7 @@ class Run(AbstractBase):
 
     def create_result(self, results, device=None):
         self.success = results["success"]
+        results = self.make_results_json_compliant(results)
         result_kw = {
             "run": self,
             "result": results,

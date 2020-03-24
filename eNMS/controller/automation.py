@@ -302,7 +302,8 @@ class AutomationController(BaseController):
         ]
 
     def get_workflow_results(self, workflow, runtime):
-        state = db.fetch("run", parent_runtime=runtime).result().result["state"]
+        run = db.fetch("run", parent_runtime=runtime)
+        state = run.result().result["state"]
 
         def rec(service, path=None):
             runs = db.fetch(
@@ -329,21 +330,22 @@ class AutomationController(BaseController):
                 "a_attr": {"style": f"color: #{color};width: 100%"},
             }
             if service.type == "workflow":
-                children = sorted(
-                    filter(
-                        None,
-                        (
-                            rec(child, f"{path}>{child.id}")
-                            for child in service.services
-                        ),
-                    ),
-                    key=itemgetter("runtime"),
-                )
-                return {"children": children, **result}
+                children_results = []
+                for child in service.services:
+                    if child.scoped_name == "Subservice":
+                        for run in runs:
+                            if run.subservice:
+                                child = run.subservice
+                                break
+                    child_results = rec(child, f"{path}>{child.id}")
+                    if not child_results:
+                        continue
+                    children_results.append(child_results)
+                return {"children": sorted(children_results, key=itemgetter("runtime")), **result}
             else:
                 return result
 
-        return rec(db.fetch("workflow", id=workflow))
+        return rec(run.service)
 
     @staticmethod
     def run(service, **kwargs):
@@ -366,8 +368,12 @@ class AutomationController(BaseController):
         )
         if restart_run:
             run_kwargs["restart_run"] = restart_run
-        initial_payload = db.fetch("service", id=service).initial_payload
-        run = db.factory("run", service=service, **run_kwargs)
+        service = db.fetch("service", id=service)
+        if service.superworkflow:
+            run_kwargs["subservice"] = service.id
+            service = service.superworkflow
+        initial_payload = service.initial_payload
+        run = db.factory("run", service=service.id, **run_kwargs)
         run.properties = kwargs
         payload = {**initial_payload, **kwargs}
         return run.run(payload)

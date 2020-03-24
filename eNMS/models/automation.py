@@ -555,27 +555,11 @@ class Run(AbstractBase):
         self.run_state["summary"][key].append(device.name)
         return success
 
-    def run_superworkflow(self, payload):
-        super_run = db.factory(
-            "run",
-            **{
-                "service": self.superworkflow.id,
-                "devices": [device.id for device in self.devices],
-                "subservice": self.service.id,
-                "restart_run": self.restart_run,
-                "parent": self,
-                "parent_runtime": self.parent_runtime,
-            },
-        )
-        return super_run.run(payload)["success"]
-
     def device_run(self, payload):
         self.devices = self.compute_devices(payload)
         if self.run_method != "once":
             self.run_state["progress"]["device"]["total"] += len(self.devices)
-        if self.superworkflow and not self.workflow == self.superworkflow:
-            return {"success": self.run_superworkflow(payload), "runtime": self.runtime}
-        elif self.iteration_devices and not self.parent_device:
+        if self.iteration_devices and not self.parent_device:
             if not self.workflow:
                 return {
                     "success": False,

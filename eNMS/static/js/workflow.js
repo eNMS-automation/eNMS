@@ -90,6 +90,7 @@ let currLabel;
 let triggerMenu;
 
 export function displayWorkflow(workflowData) {
+  console.log(workflowData)
   workflow = workflowData.service;
   nodes = new vis.DataSet(workflow.services.map(serviceToNode));
   edges = new vis.DataSet(workflow.edges.map(edgeToEdge));

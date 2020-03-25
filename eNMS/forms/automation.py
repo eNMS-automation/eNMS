@@ -41,7 +41,7 @@ class ServiceForm(BaseForm):
     superworkflow_targets = SelectField(
         "Superworkflow Targets",
         choices=(
-            ("service", "Use targets from this service"),
+            ("subservice", "Use targets from this service"),
             ("superworkflow", "Use targets from the superworkflow"),
         ),
     )

@@ -250,7 +250,7 @@ class Database:
                 )
 
     def configure_associations(self):
-        for modelA, modelB in (
+        for model1, model2 in (
             ("service", "device"),
             ("service", "pool"),
             ("run", "device"),
@@ -261,15 +261,15 @@ class Database:
             ("pool", "device"),
             ("pool", "link"),
         ):
-            kw = {"ondelete": "cascade"} if modelA == "run" else {}
+            kw = {"ondelete": "cascade"} if model1 == "run" else {}
             setattr(
                 self,
-                f"{modelA}_{modelB}_table",
+                f"{model1}_{model2}_table",
                 Table(
-                    f"{modelA}_{modelB}_association",
+                    f"{model1}_{model2}_association",
                     self.base.metadata,
-                    Column(f"{modelA}_id", Integer, ForeignKey(f"{modelA}.id", **kw)),
-                    Column(f"{modelB}_id", Integer, ForeignKey(f"{modelB}.id")),
+                    Column(f"{model1}_id", Integer, ForeignKey(f"{model1}.id", **kw)),
+                    Column(f"{model2}_id", Integer, ForeignKey(f"{model2}.id")),
                 ),
             )
 

@@ -75,7 +75,7 @@ class Service(AbstractBase):
     )
     superworkflow_id = db.Column(Integer, ForeignKey("service.id"))
     superworkflow = relationship("Service", remote_side=[id])
-    superworkflow_targets = db.Column(db.SmallString, default="service")
+    superworkflow_targets = db.Column(db.SmallString, default="subservice")
     update_pools = db.Column(Boolean, default=False)
     send_notification = db.Column(Boolean, default=False)
     send_notification_method = db.Column(db.SmallString, default="mail")
@@ -410,18 +410,22 @@ class Run(AbstractBase):
         return devices
 
     def compute_devices(self, payload):
+        if self.subservice and self.subservice.superworkflow_targets == "subservice":
+            service = self.subservice
+        else:
+            service = self.service
         devices = set(self.devices)
         for pool in self.pools:
             devices |= set(pool.devices)
         if not devices:
-            if self.service.device_query:
+            if service.device_query:
                 devices |= self.compute_devices_from_query(
-                    self.service.device_query,
-                    self.service.device_query_property,
+                    service.device_query,
+                    service.device_query_property,
                     payload=payload,
                 )
-            devices |= set(self.service.devices)
-            for pool in self.service.pools:
+            devices |= set(service.devices)
+            for pool in service.pools:
                 if self.update_pools:
                     pool.compute_pool()
                 devices |= set(pool.devices)

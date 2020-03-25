@@ -153,40 +153,6 @@ class NetmikoValidationService(ConnectionService):
 class NetmikoValidationForm(NetmikoForm):
     form_type = HiddenField(default="netmiko_validation_service")
     command = SubstitutionField()
-
-    # Need to add javascript to let service editor choose a profile and
-    # populate each field from the chosen profile.
-    JUMPSERVER_DEFAULT_PROFILES = {
-        "Cisco Calvados": {
-            "jump_command": "admin",
-            "exit_command": "exit",
-            "expect_username_prompt": "Admin Username:",
-            "expect_password_prompt": "Password:",
-            "expect_prompt": "sysadmin-vm:.*#",
-        },
-    }
-
-    defaults = JUMPSERVER_DEFAULT_PROFILES["Cisco Calvados"]
-
-    use_jumpserver = BooleanField("Use Jump Server", default=False)
-    jump_command = SubstitutionField(
-        label="Command that jumps to device", default=defaults["jump_command"]
-    )
-    jump_username = SubstitutionField(label="Device username")
-    jump_password = PasswordSubstitutionField(label="Device password")
-    exit_command = SubstitutionField(
-        label="Command to exit device back to jump server",
-        default=defaults["exit_command"],
-    )
-    expect_username_prompt = SubstitutionField(
-        "Expected username prompt", default=defaults["expect_username_prompt"]
-    )
-    expect_password_prompt = SubstitutionField(
-        "Expected password prompt", default=defaults["expect_password_prompt"]
-    )
-    expect_prompt = SubstitutionField(
-        "Expected prompt after login", default=defaults["expect_prompt"]
-    )
     expect_string = SubstitutionField()
     auto_find_prompt = BooleanField(default=True)
     strip_prompt = BooleanField(default=True)
@@ -201,19 +167,6 @@ class NetmikoValidationForm(NetmikoForm):
                 "strip_prompt",
                 "strip_command",
                 "use_genie",
-            ],
-            "default": "hidden",
-        },
-        "Jump Server Parameters": {
-            "commands": [
-                "use_jumpserver",
-                "jump_command",
-                "expect_username_prompt",
-                "jump_username",
-                "expect_password_prompt",
-                "jump_password",
-                "expect_prompt",
-                "exit_command",
             ],
             "default": "hidden",
         },

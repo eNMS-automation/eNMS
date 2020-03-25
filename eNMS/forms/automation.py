@@ -216,7 +216,36 @@ class NetmikoForm(ConnectionForm):
         ),
         default=1.0,
     )
+    use_jumpserver = BooleanField("Use Jump Server", default=False)
+    jump_command = SubstitutionField(
+        label="Command that jumps to device", default="ssh jump_server_IP"
+    )
+    jump_username = SubstitutionField(label="Device username")
+    jump_password = PasswordSubstitutionField(label="Device password")
+    exit_command = SubstitutionField(
+        label="Command to exit device back to jump server", default="exit",
+    )
+    expect_username_prompt = SubstitutionField(
+        "Expected username prompt", default="username:"
+    )
+    expect_password_prompt = SubstitutionField(
+        "Expected password prompt", default="password"
+    )
+    expect_prompt = SubstitutionField("Expected prompt after login", default="admin.*$")
     groups = {
+        "Jump Server Parameters": {
+            "commands": [
+                "use_jumpserver",
+                "jump_command",
+                "expect_username_prompt",
+                "jump_username",
+                "expect_password_prompt",
+                "jump_password",
+                "expect_prompt",
+                "exit_command",
+            ],
+            "default": "hidden",
+        },
         "Netmiko Parameters": {
             "commands": [
                 "driver",

@@ -105,6 +105,7 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  superworkflow_targets: subservice
   time_between_retries: 10
   type: swiss_army_knife_service
   update_pools: false
@@ -221,6 +222,7 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  superworkflow_targets: subservice
   time_between_retries: 10
   type: swiss_army_knife_service
   update_pools: false
@@ -271,6 +273,7 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  superworkflow_targets: subservice
   time_between_retries: 10
   type: swiss_army_knife_service
   update_pools: false
@@ -322,6 +325,7 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  superworkflow_targets: subservice
   time_between_retries: 10
   type: swiss_army_knife_service
   update_pools: false
@@ -389,6 +393,7 @@
   skip_value: 'True'
   string1: cisco
   string2: s2
+  superworkflow_targets: subservice
   time_between_retries: 10
   type: example_service
   update_pools: false
@@ -451,6 +456,7 @@
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
+  superworkflow_targets: subservice
   time_between_retries: 10
   type: configure_bgp_service
   update_pools: false
@@ -512,6 +518,7 @@
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
+  superworkflow_targets: subservice
   time_between_retries: 10
   timeout: 60
   type: napalm_backup_service
@@ -581,6 +588,7 @@
   start_new_connection: false
   strip_command: false
   strip_prompt: false
+  superworkflow_targets: subservice
   time_between_retries: 10
   timeout: 3
   type: netmiko_configuration_service
@@ -654,6 +662,7 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
+  superworkflow_targets: subservice
   time_between_retries: 10
   timeout: 3.0
   type: netmiko_validation_service
@@ -725,6 +734,7 @@
   start_new_connection: false
   strip_command: false
   strip_prompt: false
+  superworkflow_targets: subservice
   time_between_retries: 10
   timeout: 3
   type: netmiko_configuration_service
@@ -796,6 +806,7 @@
   start_new_connection: true
   strip_command: true
   strip_prompt: true
+  superworkflow_targets: subservice
   time_between_retries: 1
   timeout: 3.0
   type: netmiko_validation_service
@@ -860,6 +871,7 @@
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
+  superworkflow_targets: subservice
   time_between_retries: 10
   timeout: 10
   type: napalm_configuration_service
@@ -925,6 +937,7 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  superworkflow_targets: subservice
   time_between_retries: 10
   timeout: 15
   type: rest_call_service
@@ -989,6 +1002,7 @@
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
+  superworkflow_targets: subservice
   time_between_retries: 10
   timeout: 1
   type: napalm_getters_service
@@ -1051,6 +1065,7 @@
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
+  superworkflow_targets: subservice
   time_between_retries: 10
   timeout: 1
   type: napalm_getters_service
@@ -1113,6 +1128,7 @@
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
+  superworkflow_targets: subservice
   time_between_retries: 10
   timeout: 60
   type: napalm_getters_service
@@ -1174,6 +1190,7 @@
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
+  superworkflow_targets: subservice
   time_between_retries: 10
   timeout: 60
   type: napalm_getters_service
@@ -1228,6 +1245,7 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  superworkflow_targets: subservice
   time_between_retries: 10
   type: swiss_army_knife_service
   update_pools: false
@@ -1288,6 +1306,7 @@
     \ Devices\", [\"Atlanta\", \"Austin\"] if device.name == \"Austin\" else [\"Washington\"\
     ], device=device.name)\r\n\r\n# Interfaces 2\r\nset_var('Interfaces 2', ['Loopback333',\
     \ 'Loopback334'])\r\nsave_result(True, {})"
+  superworkflow_targets: subservice
   time_between_retries: 10
   type: python_snippet_service
   update_pools: false
@@ -1358,6 +1377,7 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
+  superworkflow_targets: subservice
   time_between_retries: 10
   timeout: 3.0
   type: netmiko_validation_service
@@ -1433,6 +1453,7 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  superworkflow_targets: subservice
   time_between_retries: 10
   type: payload_extraction_service
   update_pools: false
@@ -1495,6 +1516,7 @@
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
+  superworkflow_targets: subservice
   time_between_retries: 10
   timeout: 60
   type: napalm_rollback_service
@@ -1567,6 +1589,7 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
+  superworkflow_targets: subservice
   time_between_retries: 10
   timeout: 10.0
   type: netmiko_validation_service
@@ -1639,6 +1662,7 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
+  superworkflow_targets: subservice
   time_between_retries: 10
   timeout: 10.0
   type: netmiko_validation_service
@@ -1710,6 +1734,7 @@
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
+  superworkflow_targets: subservice
   time_between_retries: 10
   timeout: 10
   type: netmiko_prompts_service
@@ -1780,6 +1805,7 @@
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
+  superworkflow_targets: subservice
   time_between_retries: 10
   timeout: 10
   type: netmiko_prompts_service
@@ -1836,6 +1862,7 @@
   skip_value: 'True'
   source_code: "set_var(\"global_variable\", value=1050)\r\nset_var(\"variable\",\
     \ \"variable_in_variables\")\r\nsave_result(success=True, result={})"
+  superworkflow_targets: subservice
   time_between_retries: 10
   type: python_snippet_service
   update_pools: false
@@ -1893,6 +1920,7 @@
     , \"192.168.56.50\")\r\ndevices = [\"Boston\", \"Cincinnati\"] if device.name\
     \ == \"Chicago\" else [\"Cleveland\", \"Washington\"]\r\nset_var(\"iteration_device\"\
     , devices, device=device.name)\r\nsave_result(success=True, result={})"
+  superworkflow_targets: subservice
   time_between_retries: 10
   type: python_snippet_service
   update_pools: false
@@ -1960,6 +1988,7 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
+  superworkflow_targets: subservice
   time_between_retries: 10
   timeout: 1.0
   type: netmiko_validation_service
@@ -2030,6 +2059,7 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
+  superworkflow_targets: subservice
   time_between_retries: 10
   timeout: 10.0
   type: netmiko_validation_service
@@ -2100,6 +2130,7 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
+  superworkflow_targets: subservice
   time_between_retries: 10
   timeout: 10.0
   type: netmiko_validation_service
@@ -2166,6 +2197,7 @@
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
+  superworkflow_targets: subservice
   time_between_retries: 10
   timeout: 1
   type: napalm_getters_service
@@ -2230,6 +2262,7 @@
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
+  superworkflow_targets: subservice
   time_between_retries: 10
   timeout: 60
   type: napalm_getters_service
@@ -2296,6 +2329,7 @@
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
+  superworkflow_targets: subservice
   time_between_retries: 10
   timeout: 60
   type: napalm_getters_service
@@ -2360,6 +2394,7 @@
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
+  superworkflow_targets: subservice
   time_between_retries: 10
   timeout: 60
   type: napalm_getters_service
@@ -2424,6 +2459,7 @@
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
+  superworkflow_targets: subservice
   time_between_retries: 10
   timeout: 60
   type: napalm_getters_service
@@ -2483,6 +2519,7 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  superworkflow_targets: subservice
   time_between_retries: 10
   type: ansible_playbook_service
   update_pools: false
@@ -2539,6 +2576,7 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  superworkflow_targets: subservice
   time_between_retries: 10
   type: ansible_playbook_service
   update_pools: false
@@ -2595,6 +2633,7 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  superworkflow_targets: subservice
   time_between_retries: 10
   type: ansible_playbook_service
   update_pools: false
@@ -2662,6 +2701,7 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
+  superworkflow_targets: subservice
   time_between_retries: 10
   timeout: 10.0
   type: netmiko_validation_service
@@ -2732,6 +2772,7 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
+  superworkflow_targets: subservice
   time_between_retries: 10
   timeout: 3.0
   type: netmiko_validation_service
@@ -2802,6 +2843,7 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
+  superworkflow_targets: subservice
   time_between_retries: 10
   timeout: 3.0
   type: netmiko_validation_service
@@ -2872,6 +2914,7 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
+  superworkflow_targets: subservice
   time_between_retries: 10
   timeout: 3.0
   type: netmiko_validation_service
@@ -2933,6 +2976,7 @@
   source_code: "set_var(\"list\", [1, 2], device=device.name)\r\nset_var(\"dict\"\
     , {\"a\": [\"o\", True, 4]}, device=device.name)\r\nsave_result(success=True,\
     \ result={})"
+  superworkflow_targets: subservice
   time_between_retries: 10
   type: python_snippet_service
   update_pools: false
@@ -3000,6 +3044,7 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  superworkflow_targets: subservice
   time_between_retries: 10
   type: payload_extraction_service
   update_pools: false
@@ -3070,6 +3115,7 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  superworkflow_targets: subservice
   time_between_retries: 10
   type: payload_extraction_service
   update_pools: false
@@ -3130,6 +3176,7 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  superworkflow_targets: subservice
   time_between_retries: 10
   timeout: 15
   type: rest_call_service
@@ -3197,6 +3244,7 @@
     \ get_result(\"netmiko_check_vrf_napalm\", device=device.name, workflow=\"Regression\
     \ Workflow 5: VRF creation and deletion with Napalm\"),\r\n}\r\nsave_result(success=True,\
     \ result=result)"
+  superworkflow_targets: subservice
   time_between_retries: 10
   type: python_snippet_service
   update_pools: false
@@ -3266,6 +3314,7 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
+  superworkflow_targets: subservice
   time_between_retries: 10
   timeout: 10.0
   type: netmiko_validation_service
@@ -3330,6 +3379,7 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  superworkflow_targets: subservice
   time_between_retries: 10
   type: workflow
   update_pools: false
@@ -3394,7 +3444,7 @@
         \ a combination of devices and pools.\r\nThe workflow is running on \"Austin\"\
         \ as a device and \"Washington\", as a pool."
       positions: [39, -176]
-  last_modified: '2020-02-23 09:52:58.936918'
+  last_modified: '2020-03-25 10:18:51.792053'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -3425,6 +3475,9 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  superworkflow: 'Regression Workflow L: superworkflow'
+  superworkflow_id: 101
+  superworkflow_targets: subservice
   time_between_retries: 10
   type: workflow
   update_pools: false
@@ -3493,6 +3546,7 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  superworkflow_targets: subservice
   time_between_retries: 10
   type: workflow
   update_pools: false
@@ -3560,6 +3614,7 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  superworkflow_targets: subservice
   time_between_retries: 10
   type: workflow
   update_pools: false
@@ -3670,6 +3725,7 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  superworkflow_targets: subservice
   time_between_retries: 10
   type: workflow
   update_pools: false
@@ -3739,6 +3795,7 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  superworkflow_targets: subservice
   time_between_retries: 10
   type: workflow
   update_pools: false
@@ -3801,6 +3858,7 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  superworkflow_targets: subservice
   time_between_retries: 10
   type: workflow
   update_pools: false
@@ -3861,6 +3919,7 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  superworkflow_targets: subservice
   time_between_retries: 10
   type: workflow
   update_pools: false
@@ -3941,6 +4000,7 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  superworkflow_targets: subservice
   time_between_retries: 10
   type: workflow
   update_pools: false
@@ -4042,6 +4102,7 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  superworkflow_targets: subservice
   time_between_retries: 10
   type: workflow
   update_pools: false
@@ -4126,6 +4187,7 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  superworkflow_targets: subservice
   time_between_retries: 10
   type: workflow
   update_pools: false
@@ -4194,6 +4256,7 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  superworkflow_targets: subservice
   time_between_retries: 10
   type: workflow
   update_pools: false
@@ -4287,6 +4350,7 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  superworkflow_targets: subservice
   time_between_retries: 10
   type: workflow
   update_pools: false
@@ -4356,6 +4420,7 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  superworkflow_targets: subservice
   time_between_retries: 10
   type: workflow
   update_pools: false
@@ -4415,6 +4480,7 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  superworkflow_targets: subservice
   time_between_retries: 10
   type: workflow
   update_pools: false
@@ -4476,6 +4542,7 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  superworkflow_targets: subservice
   time_between_retries: 10
   type: workflow
   update_pools: false
@@ -4540,6 +4607,7 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  superworkflow_targets: subservice
   time_between_retries: 10
   type: workflow
   update_pools: false
@@ -4607,6 +4675,7 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
+  superworkflow_targets: subservice
   time_between_retries: 2
   timeout: 10.0
   type: netmiko_validation_service
@@ -4676,6 +4745,7 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
+  superworkflow_targets: subservice
   time_between_retries: 10
   timeout: 10.0
   type: netmiko_validation_service
@@ -4748,6 +4818,7 @@
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
+  superworkflow_targets: subservice
   time_between_retries: 10
   timeout: 10
   type: data_backup_service
@@ -4808,6 +4879,7 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  superworkflow_targets: subservice
   time_between_retries: 10
   type: workflow
   update_pools: false
@@ -4864,6 +4936,7 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  superworkflow_targets: subservice
   time_between_retries: 10
   type: workflow
   update_pools: false
@@ -4920,6 +4993,7 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  superworkflow_targets: subservice
   time_between_retries: 10
   timeout: 15
   type: rest_call_service
@@ -4980,6 +5054,7 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  superworkflow_targets: subservice
   time_between_retries: 10
   type: workflow
   update_pools: false
@@ -5037,6 +5112,7 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  superworkflow_targets: subservice
   time_between_retries: 10
   timeout: 15
   type: rest_call_service
@@ -5095,6 +5171,7 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  superworkflow_targets: subservice
   time_between_retries: 10
   type: workflow
   update_pools: false
@@ -5163,6 +5240,7 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
+  superworkflow_targets: subservice
   time_between_retries: 10
   timeout: 10.0
   type: netmiko_validation_service
@@ -5234,6 +5312,7 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
+  superworkflow_targets: subservice
   time_between_retries: 10
   timeout: 10.0
   type: netmiko_validation_service
@@ -5305,6 +5384,7 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
+  superworkflow_targets: subservice
   time_between_retries: 10
   timeout: 10.0
   type: netmiko_validation_service
@@ -5385,6 +5465,7 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  superworkflow_targets: subservice
   time_between_retries: 10
   type: workflow
   update_pools: false
@@ -5441,6 +5522,7 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  superworkflow_targets: subservice
   time_between_retries: 10
   type: workflow
   update_pools: false
@@ -5497,6 +5579,7 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  superworkflow_targets: subservice
   time_between_retries: 10
   type: workflow
   update_pools: false
@@ -5566,6 +5649,7 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
+  superworkflow_targets: subservice
   time_between_retries: 10
   timeout: 10.0
   type: netmiko_validation_service
@@ -5624,6 +5708,7 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  superworkflow_targets: subservice
   time_between_retries: 10
   type: ansible_playbook_service
   update_pools: false
@@ -5679,6 +5764,7 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  superworkflow_targets: subservice
   time_between_retries: 10
   type: workflow
   update_pools: false
@@ -5733,6 +5819,7 @@
   source_code: "results[\"success\"] = True\r\nresults[\"result\"] = {\r\n  \"dict_iteration\"\
     : {\r\n    \"variable1\": {\"command\": \"test\"},\r\n    \"variable2\": {\"command\"\
     : \"test2\"}\r\n  }\r\n}"
+  superworkflow_targets: subservice
   time_between_retries: 10
   type: python_snippet_service
   update_pools: false
@@ -5799,6 +5886,7 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
+  superworkflow_targets: subservice
   time_between_retries: 10
   timeout: 10.0
   type: netmiko_validation_service
@@ -5857,6 +5945,7 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  superworkflow_targets: subservice
   time_between_retries: 10
   type: workflow
   update_pools: false
@@ -5910,6 +5999,7 @@
   skip_value: 'True'
   source_code: "result={\"top_level\": top_level_iteration}\r\nresults[\"result\"\
     ] = result\r\nresults[\"success\"] = True"
+  superworkflow_targets: subservice
   time_between_retries: 10
   type: python_snippet_service
   update_pools: false
@@ -5965,6 +6055,7 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  superworkflow_targets: subservice
   time_between_retries: 10
   type: workflow
   update_pools: false
@@ -6020,6 +6111,7 @@
   skip_value: 'True'
   source_code: "result={\"top_level\": top_level_iteration, \"subworkflow\": subworkflow_iteration}\r\
     \nresults[\"success\"] = True\r\nresults[\"result\"] = result\r\n"
+  superworkflow_targets: subservice
   time_between_retries: 10
   type: python_snippet_service
   update_pools: false
@@ -6079,6 +6171,7 @@
   source_code: "result = {}\r\nresults[\"success\"] = True\r\nresults[\"result\"]\
     \ = get_result(\"Payload Extraction\", device.name)[\"result\"][\"regex_variable\"\
     ]"
+  superworkflow_targets: subservice
   time_between_retries: 10
   type: python_snippet_service
   update_pools: false
@@ -6137,6 +6230,7 @@
   source_code: "result = {}\r\nresults[\"success\"] = True\r\nresults[\"result\"]\
     \ = get_result(\"Payload Extraction\", device.name)[\"result\"][\"textfsm_variable\"\
     ][\"value\"][0][1]"
+  superworkflow_targets: subservice
   time_between_retries: 10
   type: python_snippet_service
   update_pools: false
@@ -6195,6 +6289,7 @@
   skip_value: 'True'
   source_code: "result = {}\r\nresults[\"success\"] = True\r\nresults[\"result\"]\
     \ = get_var(\"regex_variable\", device=device.name)"
+  superworkflow_targets: subservice
   time_between_retries: 10
   type: python_snippet_service
   update_pools: false
@@ -6252,6 +6347,7 @@
   skip_value: 'True'
   source_code: "result = {}\r\nresults[\"success\"] = True\r\nresults[\"result\"]\
     \ = get_var(\"textfsm_variable\", device=device.name)[0][1]"
+  superworkflow_targets: subservice
   time_between_retries: 10
   type: python_snippet_service
   update_pools: false
@@ -6309,6 +6405,7 @@
   skip_value: 'True'
   source_code: "result = {}\r\nresults[\"success\"] = True\r\nresults[\"result\"]\
     \ = get_var(\"list\", device=device.name)"
+  superworkflow_targets: subservice
   time_between_retries: 10
   type: python_snippet_service
   update_pools: false
@@ -6366,6 +6463,7 @@
   skip_value: 'True'
   source_code: "result = {}\r\nresults[\"success\"] = True\r\nresults[\"result\"]\
     \ = get_var(\"dict\", device=device.name)"
+  superworkflow_targets: subservice
   time_between_retries: 10
   type: python_snippet_service
   update_pools: false
@@ -6411,7 +6509,7 @@
         \ in the payload with set_var :\r\n\r\ndef test():\r\n    return device.operating_system\r\
         \n\r\nclass Test():\r\n    device = device.name"
       positions: [-16, 269]
-  last_modified: '2020-03-24 08:16:31.502794'
+  last_modified: '2020-03-25 10:19:00.595922'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -6440,6 +6538,8 @@
   skip_query: ''
   skip_value: 'True'
   superworkflow: 'Regression Workflow L: superworkflow'
+  superworkflow_id: 101
+  superworkflow_targets: superworkflow
   time_between_retries: 10
   type: workflow
   update_pools: false
@@ -6496,6 +6596,7 @@
   skip_value: 'True'
   source_code: "result = {}\r\nresults[\"success\"] = True\r\nresults[\"result\"]\
     \ = test"
+  superworkflow_targets: subservice
   time_between_retries: 10
   type: python_snippet_service
   update_pools: false
@@ -6550,6 +6651,7 @@
   skip_query: ''
   skip_value: 'True'
   source_code: "results[\"integer\"] = 10 + integer\r\nresults[\"success\"] = False"
+  superworkflow_targets: subservice
   time_between_retries: 10
   type: python_snippet_service
   update_pools: false
@@ -6601,6 +6703,7 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  superworkflow_targets: subservice
   time_between_retries: 10
   type: swiss_army_knife_service
   update_pools: false
@@ -6616,7 +6719,7 @@
   description: ''
   device_query: ''
   device_query_property: name
-  devices: []
+  devices: [SanJose, SanDiego]
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -6628,7 +6731,7 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels: {}
-  last_modified: '2020-03-24 07:04:07.374810'
+  last_modified: '2020-03-25 10:19:08.926598'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -6655,6 +6758,7 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  superworkflow_targets: subservice
   time_between_retries: 10
   type: workflow
   update_pools: false

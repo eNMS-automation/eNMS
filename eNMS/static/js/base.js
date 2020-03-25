@@ -714,7 +714,6 @@ export function copyToClipboard(text, isId) {
 })(jQuery, window);
 
 export function notify(...args) {
-  console.log(args);
   if (args.length == 4) {
     const alerts = JSON.parse(localStorage.getItem("alerts"));
     localStorage.setItem(

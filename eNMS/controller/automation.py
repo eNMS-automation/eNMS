@@ -341,7 +341,10 @@ class AutomationController(BaseController):
                     if not child_results:
                         continue
                     children_results.append(child_results)
-                return {"children": sorted(children_results, key=itemgetter("runtime")), **result}
+                return {
+                    "children": sorted(children_results, key=itemgetter("runtime")),
+                    **result,
+                }
             else:
                 return result
 

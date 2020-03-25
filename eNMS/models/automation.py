@@ -74,9 +74,7 @@ class Service(AbstractBase):
         "Pool", secondary=db.service_pool_table, back_populates="services"
     )
     superworkflow_id = db.Column(Integer, ForeignKey("service.id"))
-    superworkflow = relationship(
-        "Service", uselist=False, foreign_keys=superworkflow_id
-    )
+    superworkflow = relationship("Service", remote_side=[id])
     update_pools = db.Column(Boolean, default=False)
     send_notification = db.Column(Boolean, default=False)
     send_notification_method = db.Column(db.SmallString, default="mail")

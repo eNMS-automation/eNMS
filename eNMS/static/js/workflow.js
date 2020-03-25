@@ -463,7 +463,7 @@ function getServiceLabel(service) {
       ? `\n     ${service.scoped_name}     \n`
       : `${service.scoped_name}\n`;
   label += "—————\n";
-  if (service.scoped_name == "Subservice") {
+  if (service.scoped_name == "Subservice" && currentSubservice) {
     label += currentSubservice.scoped_name;
   } else {
     label += service.type == "workflow" ? "Subworkflow" : serviceTypes[service.type];

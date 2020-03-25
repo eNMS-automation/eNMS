@@ -21,19 +21,24 @@
   device_napalm_driver_match: inclusion
   device_netmiko_driver: ''
   device_netmiko_driver_match: inclusion
+  device_number: 0
   device_operating_system: ''
   device_operating_system_match: inclusion
+  device_operational_data: ''
+  device_operational_data_match: inclusion
   device_os_version: ''
   device_os_version_match: inclusion
   device_port: ''
   device_port_match: inclusion
+  device_property1: ''
+  device_property1_match: inclusion
   device_subtype: ''
   device_subtype_match: inclusion
   device_vendor: ''
   device_vendor_match: inclusion
   devices: []
-  services: []
-  latitude: 0.0
+  last_modified: ''
+  latitude: '0.0'
   link_color: ''
   link_color_match: inclusion
   link_description: ''
@@ -46,6 +51,7 @@
   link_model_match: inclusion
   link_name: ''
   link_name_match: inclusion
+  link_number: 0
   link_source_name: ''
   link_source_name_match: inclusion
   link_subtype: ''
@@ -53,12 +59,13 @@
   link_vendor: ''
   link_vendor_match: inclusion
   links: []
-  longitude: 0.0
-  name: All objects
+  longitude: '0.0'
   manually_defined: false
+  name: All objects
   operator: all
+  property1: CP
   tasks: []
-  users: []
+  type: pool
 - description: Devices only
   device_configuration: ''
   device_configuration_match: inclusion
@@ -82,19 +89,24 @@
   device_napalm_driver_match: inclusion
   device_netmiko_driver: ''
   device_netmiko_driver_match: inclusion
+  device_number: 0
   device_operating_system: ''
   device_operating_system_match: inclusion
+  device_operational_data: ''
+  device_operational_data_match: inclusion
   device_os_version: ''
   device_os_version_match: inclusion
   device_port: ''
   device_port_match: inclusion
+  device_property1: ''
+  device_property1_match: inclusion
   device_subtype: ''
   device_subtype_match: inclusion
   device_vendor: ''
   device_vendor_match: inclusion
   devices: []
-  services: []
-  latitude: 0.0
+  last_modified: ''
+  latitude: '0.0'
   link_color: ''
   link_color_match: inclusion
   link_description: ''
@@ -107,6 +119,7 @@
   link_model_match: inclusion
   link_name: ^$
   link_name_match: regex
+  link_number: 0
   link_source_name: ''
   link_source_name_match: inclusion
   link_subtype: ''
@@ -114,12 +127,13 @@
   link_vendor: ''
   link_vendor_match: inclusion
   links: []
-  longitude: 0.0
-  name: Devices only
+  longitude: '0.0'
   manually_defined: false
+  name: Devices only
   operator: all
+  property1: CP
   tasks: []
-  users: []
+  type: pool
 - description: Links only
   device_configuration: ''
   device_configuration_match: inclusion
@@ -143,19 +157,24 @@
   device_napalm_driver_match: inclusion
   device_netmiko_driver: ''
   device_netmiko_driver_match: inclusion
+  device_number: 0
   device_operating_system: ''
   device_operating_system_match: inclusion
+  device_operational_data: ''
+  device_operational_data_match: inclusion
   device_os_version: ''
   device_os_version_match: inclusion
   device_port: ''
   device_port_match: inclusion
+  device_property1: ''
+  device_property1_match: inclusion
   device_subtype: ''
   device_subtype_match: inclusion
   device_vendor: ''
   device_vendor_match: inclusion
   devices: []
-  services: []
-  latitude: 0.0
+  last_modified: ''
+  latitude: '0.0'
   link_color: ''
   link_color_match: inclusion
   link_description: ''
@@ -168,6 +187,7 @@
   link_model_match: inclusion
   link_name: ''
   link_name_match: inclusion
+  link_number: 0
   link_source_name: ''
   link_source_name_match: inclusion
   link_subtype: ''
@@ -175,9 +195,10 @@
   link_vendor: ''
   link_vendor_match: inclusion
   links: []
-  longitude: 0.0
-  name: Links only
+  longitude: '0.0'
   manually_defined: false
+  name: Links only
   operator: all
+  property1: CP
   tasks: []
-  users: []
+  type: pool

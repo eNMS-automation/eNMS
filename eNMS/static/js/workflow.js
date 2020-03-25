@@ -891,7 +891,7 @@ function resetDisplay() {
   if (subservice) {
     nodes.update({
       id: subservice.id,
-      label: "Subservice"
+      label: "Subservice",
     });
   }
   workflow.services.forEach((service) => {

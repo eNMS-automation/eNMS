@@ -714,11 +714,15 @@ export function copyToClipboard(text, isId) {
 })(jQuery, window);
 
 export function notify(...args) {
+  console.log(args);
   if (args.length == 4) {
     const alerts = JSON.parse(localStorage.getItem("alerts"));
     localStorage.setItem(
       "alerts",
-      JSON.stringify([...alerts, [...args, moment().format("MMMM Do YYYY, h:mm:ss a")]])
+      JSON.stringify([
+        ...alerts,
+        [...args.slice(0, -1), moment().format("MMMM Do YYYY, h:mm:ss a")],
+      ])
     );
     const alert = alerts.length + 1 > 99 ? "99+" : alerts.length + 1;
     $("#alert-number").text(alert);

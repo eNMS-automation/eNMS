@@ -88,11 +88,13 @@ export let creationMode;
 let mousePosition;
 let currLabel;
 let triggerMenu;
+let currentSubservice;
 let subservice;
 
 export function displayWorkflow(workflowData) {
   workflow = workflowData.service;
-  subservice = workflowData.state && workflowData.state.subservice;
+  subservice = null;
+  currentSubservice = workflowData.state && workflowData.state.subservice;
   nodes = new vis.DataSet(workflow.services.map(serviceToNode));
   edges = new vis.DataSet(workflow.edges.map(edgeToEdge));
   workflow.services.map(drawIterationEdge);
@@ -134,7 +136,7 @@ export function displayWorkflow(workflowData) {
   graph.on("doubleClick", function(event) {
     event.event.preventDefault();
     let node = nodes.get(this.getNodeAt(event.pointer.DOM));
-    if (node.name == "Subservice") node = subservice;
+    if (node.name == "Subservice") node = currentSubservice;
     if (!node.id) {
       return;
     } else if (node.type == "label") {
@@ -145,7 +147,7 @@ export function displayWorkflow(workflowData) {
       showTypePanel(node.type, node.id);
     }
   });
-  updateRuntimes(workflowData.runtimes);
+  updateRuntimes(workflowData);
   if (!$(`#current-workflow option[value='${workflow.id}']`).length) {
     $("#current-workflow").append(
       `<option value="${workflow.id}">${workflow.scoped_name}</option>`
@@ -162,16 +164,23 @@ export function displayWorkflow(workflowData) {
   switchMode(currentMode, true);
 }
 
-function updateRuntimes(runtimes) {
+function updateRuntimes(result) {
+  currentSubservice = result.state && result.state.subservice;
   const currentRuntime = $("#current-runtime").val();
   $("#current-runtime").empty();
   $("#current-runtime").append("<option value='normal'>Normal Display</option>");
   $("#current-runtime").append("<option value='latest'>Latest Runtime</option>");
-  runtimes.forEach((r) => {
+  result.runtimes.forEach((r) => {
     $("#current-runtime").append(
       `<option value='${r[0]}'>${r[0]} (run by ${r[1]})</option>`
     );
   });
+  if (subservice && currentSubservice) {
+    nodes.update({
+      id: subservice.id,
+      label: getServiceLabel(subservice),
+    });
+  }
   $("#current-runtime").val(currentRuntime || "latest");
   $("#current-runtime").selectpicker("refresh");
 }
@@ -455,7 +464,7 @@ function getServiceLabel(service) {
       : `${service.scoped_name}\n`;
   label += "—————\n";
   if (service.scoped_name == "Subservice") {
-    label += subservice.scoped_name;
+    label += currentSubservice.scoped_name;
   } else {
     label += service.type == "workflow" ? "Subworkflow" : serviceTypes[service.type];
   }
@@ -464,6 +473,7 @@ function getServiceLabel(service) {
 
 function serviceToNode(service) {
   const isSubservice = service.scoped_name == "Subservice";
+  if (isSubservice) subservice = service;
   const defaultService = ["Start", "End"].includes(service.scoped_name);
   if (defaultService || isSubservice) ends.add(service.id);
   return {
@@ -826,7 +836,7 @@ export function getServiceState(id, first) {
 
 function displayWorkflowState(result) {
   resetDisplay();
-  updateRuntimes(result.runtimes);
+  updateRuntimes(result);
   if (!nodes || !edges || !result.state || !result.state.progress) return;
   if (result.state.services) {
     $.each(result.state.services, (path, state) => {
@@ -878,6 +888,12 @@ function displayWorkflowState(result) {
 
 function resetDisplay() {
   $("#progressbar").hide();
+  if (subservice) {
+    nodes.update({
+      id: subservice.id,
+      label: "Subservice"
+    });
+  }
   workflow.services.forEach((service) => {
     if (ends.has(service.id) || !nodes) return;
     nodes.update({

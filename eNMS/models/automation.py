@@ -75,6 +75,7 @@ class Service(AbstractBase):
     )
     superworkflow_id = db.Column(Integer, ForeignKey("service.id"))
     superworkflow = relationship("Service", remote_side=[id])
+    superworkflow_targets = db.Column(db.SmallString, default="service")
     update_pools = db.Column(Boolean, default=False)
     send_notification = db.Column(Boolean, default=False)
     send_notification_method = db.Column(db.SmallString, default="mail")

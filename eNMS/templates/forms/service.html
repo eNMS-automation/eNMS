@@ -110,11 +110,6 @@
                   {{ form.type(id=form_type + '-class', class="form-control
                   readonly-when-run add-id") }}
                 </div>
-                {{ form.superworkflow.label() }}
-                <div class="form-group">
-                  {{ form.superworkflow(id=form_type + '-superworkflow',
-                  class="form-control readonly-when-run add-id") }}
-                </div>
                 <fieldset class="readonly-when-run">
                   <div class="item">
                     <input
@@ -242,6 +237,16 @@
                 {{ form.waiting_time.label() }}
                 <div class="form-group">
                   {{ form.waiting_time(id=form_type + '-waiting_time',
+                  class="form-control readonly-when-run add-id") }}
+                </div>
+                {{ form.superworkflow.label() }}
+                <div class="form-group">
+                  {{ form.superworkflow(id=form_type + '-superworkflow',
+                  class="form-control readonly-when-run add-id") }}
+                </div>
+                {{ form.superworkflow_targets.label() }}
+                <div class="form-group">
+                  {{ form.superworkflow_targets(id=form_type + '-superworkflow_targets',
                   class="form-control readonly-when-run add-id") }}
                 </div>
               </div>

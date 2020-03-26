@@ -2,12 +2,13 @@ from collections import defaultdict
 from flask import request
 from flask_login import current_user
 from flask_wtf import FlaskForm
+from wtforms import PasswordField
 from wtforms.fields.core import UnboundField
 from wtforms.form import FormMeta
 
 from eNMS.forms.fields import field_types, InstanceField, MultipleInstanceField
 from eNMS.models import property_types, relationships
-from eNMS.properties import field_conversion, property_names
+from eNMS.properties import field_conversion, private_properties, property_names
 
 
 form_actions = {}
@@ -33,6 +34,12 @@ class MetaForm(FormMeta):
             for field_name, field in attrs.items()
             if isinstance(field, UnboundField) and field.field_class in field_types
         }
+        for field_name, field in attrs.items():
+            if not hasattr(field, "field_class"):
+                continue
+            password_field = issubclass(field.field_class, PasswordField)
+            if password_field and field_name not in private_properties:
+                private_properties.append(field_name)
         property_names.update(
             {
                 field_name: field.args[0]

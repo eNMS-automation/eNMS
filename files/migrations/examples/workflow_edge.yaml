@@ -577,3 +577,11 @@
     Workflow L: superworkflow'}
 - {destination: '[Shared] End', label: success, source: '[Shared] Subservice', subtype: success,
   type: workflow_edge, workflow: 'Regression Workflow L: superworkflow'}
+- {destination: '[Regression Workflow M: Unix command & shell, ping, jump server]
+    Unix command: ps -ef | grep test', label: success, source: '[Shared] Start', subtype: success,
+  type: workflow_edge, workflow: 'Regression Workflow M: Unix command & shell, ping,
+    jump server'}
+- {destination: '[Shared] End', label: success, source: '[Regression Workflow M: Unix
+    command & shell, ping, jump server] Unix command: ps -ef | grep test', subtype: success,
+  type: workflow_edge, workflow: 'Regression Workflow M: Unix command & shell, ping,
+    jump server'}

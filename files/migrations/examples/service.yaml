@@ -58,6 +58,7 @@
     'Regression Workflow J: Workflow and Subworkflow Iteration': [0, 0]
     'Regression Workflow K: preprocessing and postprocessing': [-197, -37]
     'Regression Workflow L: superworkflow': [0, 0]
+    'Regression Workflow M: Unix command & shell, ping, jump server': [-173, 27]
     Subworkflow 1: !!python/tuple [0, 0]
     Subworkflow 2: !!python/tuple [0, 0]
     Workflow  in device by device mode: !!python/tuple [0, 0]
@@ -172,6 +173,7 @@
     'Regression Workflow J: Workflow and Subworkflow Iteration': [500, 0]
     'Regression Workflow K: preprocessing and postprocessing': [619, 353]
     'Regression Workflow L: superworkflow': [500, 0]
+    'Regression Workflow M: Unix command & shell, ping, jump server': [500, 0]
     Subworkflow 1: !!python/tuple [0, 0]
     Subworkflow 2: !!python/tuple [0, 0]
     T: !!python/tuple [500, 0]
@@ -618,7 +620,11 @@
   driver: arista_eos
   enable_mode: true
   events: []
+  exit_command: ''
+  expect_password_prompt: ''
+  expect_prompt: ''
   expect_string: ''
+  expect_username_prompt: ''
   fast_cli: true
   global_delay_factor: 1.0
   include_device_results: true
@@ -628,6 +634,8 @@
   iteration_devices_property: ip_address
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jump_command: ''
+  jump_username: ''
   last_modified: '2019-10-10 09:46:36.865576'
   log_level: 1
   mail_recipient: ''
@@ -669,6 +677,7 @@
   update_pools: false
   use_device_driver: true
   use_genie: false
+  use_jumpserver: false
   validation_method: text
   vendor: Arista
   waiting_time: 0
@@ -764,7 +773,11 @@
   driver: arista_eos
   enable_mode: true
   events: []
+  exit_command: ''
+  expect_password_prompt: ''
+  expect_prompt: ''
   expect_string: ''
+  expect_username_prompt: ''
   fast_cli: true
   global_delay_factor: 1.0
   include_device_results: true
@@ -774,6 +787,8 @@
   iteration_devices_property: ip_address
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jump_command: ''
+  jump_username: ''
   last_modified: '2019-10-10 09:49:57.713796'
   log_level: 1
   mail_recipient: ''
@@ -813,6 +828,7 @@
   update_pools: false
   use_device_driver: true
   use_genie: false
+  use_jumpserver: false
   validation_method: text
   vendor: Arista
   waiting_time: 0
@@ -1334,7 +1350,11 @@
   driver: arista_eos
   enable_mode: true
   events: []
+  exit_command: ''
+  expect_password_prompt: ''
+  expect_prompt: ''
   expect_string: ''
+  expect_username_prompt: ''
   fast_cli: true
   global_delay_factor: 1.0
   include_device_results: true
@@ -1344,6 +1364,8 @@
   iteration_devices_property: ip_address
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jump_command: ''
+  jump_username: ''
   last_modified: '2019-10-10 13:42:39.673781'
   log_level: 1
   mail_recipient: antoine.fourmy@gmail.com
@@ -1384,6 +1406,7 @@
   update_pools: false
   use_device_driver: true
   use_genie: false
+  use_jumpserver: false
   validation_method: text
   vendor: Arista
   waiting_time: 0
@@ -1546,7 +1569,11 @@
   driver: arista_eos
   enable_mode: true
   events: []
+  exit_command: ''
+  expect_password_prompt: ''
+  expect_prompt: ''
   expect_string: ''
+  expect_username_prompt: ''
   fast_cli: true
   global_delay_factor: 1.0
   include_device_results: true
@@ -1556,6 +1583,8 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jump_command: ''
+  jump_username: ''
   last_modified: '2019-11-18 08:26:08.788541'
   log_level: 1
   mail_recipient: ''
@@ -1596,6 +1625,7 @@
   update_pools: false
   use_device_driver: true
   use_genie: false
+  use_jumpserver: false
   validation_method: text
   vendor: ''
   waiting_time: 0
@@ -1620,7 +1650,11 @@
   driver: arista_eos
   enable_mode: true
   events: []
+  exit_command: ''
+  expect_password_prompt: ''
+  expect_prompt: ''
   expect_string: ''
+  expect_username_prompt: ''
   fast_cli: true
   global_delay_factor: 1.0
   include_device_results: true
@@ -1630,6 +1664,8 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jump_command: ''
+  jump_username: ''
   last_modified: '2019-11-18 08:26:31.713881'
   log_level: 1
   mail_recipient: ''
@@ -1669,6 +1705,7 @@
   update_pools: false
   use_device_driver: true
   use_genie: false
+  use_jumpserver: false
   validation_method: text
   vendor: ''
   waiting_time: 0
@@ -1695,6 +1732,11 @@
   driver: a10
   enable_mode: true
   events: []
+  exit_command: ''
+  expect_password_prompt: ''
+  expect_prompt: ''
+  expect_string: ''
+  expect_username_prompt: ''
   fast_cli: false
   global_delay_factor: 1.0
   include_device_results: true
@@ -1704,6 +1746,8 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jump_command: ''
+  jump_username: ''
   last_modified: '2019-09-18 18:31:59.605812'
   log_level: 1
   mail_recipient: ''
@@ -1740,6 +1784,7 @@
   type: netmiko_prompts_service
   update_pools: false
   use_device_driver: true
+  use_jumpserver: false
   validation_method: text
   vendor: ''
   waiting_time: 0
@@ -1766,6 +1811,11 @@
   driver: a10
   enable_mode: true
   events: []
+  exit_command: ''
+  expect_password_prompt: ''
+  expect_prompt: ''
+  expect_string: ''
+  expect_username_prompt: ''
   fast_cli: false
   global_delay_factor: 1.0
   include_device_results: true
@@ -1775,6 +1825,8 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jump_command: ''
+  jump_username: ''
   last_modified: '2019-07-19 15:41:59.683776'
   log_level: 1
   mail_recipient: ''
@@ -1811,6 +1863,7 @@
   type: netmiko_prompts_service
   update_pools: false
   use_device_driver: true
+  use_jumpserver: false
   validation_method: text
   vendor: ''
   waiting_time: 0
@@ -1948,7 +2001,11 @@
   driver: arista_eos
   enable_mode: true
   events: []
+  exit_command: ''
+  expect_password_prompt: ''
+  expect_prompt: ''
   expect_string: ''
+  expect_username_prompt: ''
   fast_cli: true
   global_delay_factor: 1.0
   include_device_results: true
@@ -1958,6 +2015,8 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jump_command: ''
+  jump_username: ''
   last_modified: '2020-02-26 06:48:40.762497'
   log_level: 1
   mail_recipient: ''
@@ -1995,6 +2054,7 @@
   update_pools: false
   use_device_driver: true
   use_genie: false
+  use_jumpserver: false
   validation_method: text
   vendor: ''
   waiting_time: 0
@@ -2019,7 +2079,11 @@
   driver: a10
   enable_mode: true
   events: []
+  exit_command: ''
+  expect_password_prompt: ''
+  expect_prompt: ''
   expect_string: ''
+  expect_username_prompt: ''
   fast_cli: false
   global_delay_factor: 1.0
   include_device_results: true
@@ -2029,6 +2093,8 @@
   iteration_devices_property: ip_address
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jump_command: ''
+  jump_username: ''
   last_modified: '2020-02-26 06:50:26.306070'
   log_level: 1
   mail_recipient: ''
@@ -2066,6 +2132,7 @@
   update_pools: false
   use_device_driver: true
   use_genie: false
+  use_jumpserver: false
   validation_method: text
   vendor: ''
   waiting_time: 0
@@ -2090,7 +2157,11 @@
   driver: a10
   enable_mode: true
   events: []
+  exit_command: ''
+  expect_password_prompt: ''
+  expect_prompt: ''
   expect_string: ''
+  expect_username_prompt: ''
   fast_cli: false
   global_delay_factor: 1.0
   include_device_results: true
@@ -2100,6 +2171,8 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jump_command: ''
+  jump_username: ''
   last_modified: '2020-02-26 06:52:17.300164'
   log_level: 1
   mail_recipient: ''
@@ -2137,6 +2210,7 @@
   update_pools: false
   use_device_driver: true
   use_genie: false
+  use_jumpserver: false
   validation_method: text
   vendor: ''
   waiting_time: 0
@@ -2661,7 +2735,11 @@
   driver: a10
   enable_mode: true
   events: []
+  exit_command: ''
+  expect_password_prompt: ''
+  expect_prompt: ''
   expect_string: ''
+  expect_username_prompt: ''
   fast_cli: false
   global_delay_factor: 1.0
   include_device_results: true
@@ -2671,6 +2749,8 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jump_command: ''
+  jump_username: ''
   last_modified: '2019-08-13 20:58:22.190268'
   log_level: 1
   mail_recipient: ''
@@ -2708,6 +2788,7 @@
   update_pools: false
   use_device_driver: true
   use_genie: false
+  use_jumpserver: false
   validation_method: text
   vendor: ''
   waiting_time: 0
@@ -2732,7 +2813,11 @@
   driver: arista_eos
   enable_mode: true
   events: []
+  exit_command: ''
+  expect_password_prompt: ''
+  expect_prompt: ''
   expect_string: ''
+  expect_username_prompt: ''
   fast_cli: true
   global_delay_factor: 1.0
   include_device_results: true
@@ -2742,6 +2827,8 @@
   iteration_devices_property: name
   iteration_values: '["Loopback11","Loopback15"]'
   iteration_variable_name: non_default_iteration_value_name
+  jump_command: ''
+  jump_username: ''
   last_modified: '2019-12-09 12:28:55.349573'
   log_level: 1
   mail_recipient: ''
@@ -2779,6 +2866,7 @@
   update_pools: false
   use_device_driver: true
   use_genie: false
+  use_jumpserver: false
   validation_method: text
   vendor: Arista
   waiting_time: 0
@@ -2803,7 +2891,11 @@
   driver: arista_eos
   enable_mode: true
   events: []
+  exit_command: ''
+  expect_password_prompt: ''
+  expect_prompt: ''
   expect_string: ''
+  expect_username_prompt: ''
   fast_cli: true
   global_delay_factor: 1.0
   include_device_results: true
@@ -2813,6 +2905,8 @@
   iteration_devices_property: ip_address
   iteration_values: get_var('Interfaces 1', device=device.name)
   iteration_variable_name: iteration_value
+  jump_command: ''
+  jump_username: ''
   last_modified: '2019-10-04 14:55:17.403338'
   log_level: 1
   mail_recipient: ''
@@ -2850,6 +2944,7 @@
   update_pools: false
   use_device_driver: true
   use_genie: false
+  use_jumpserver: false
   validation_method: text
   vendor: Arista
   waiting_time: 0
@@ -2874,7 +2969,11 @@
   driver: arista_eos
   enable_mode: true
   events: []
+  exit_command: ''
+  expect_password_prompt: ''
+  expect_prompt: ''
   expect_string: ''
+  expect_username_prompt: ''
   fast_cli: true
   global_delay_factor: 1.0
   include_device_results: true
@@ -2884,6 +2983,8 @@
   iteration_devices_property: name
   iteration_values: get_var('Interfaces 2')
   iteration_variable_name: iteration_value
+  jump_command: ''
+  jump_username: ''
   last_modified: '2019-10-21 19:23:12.184550'
   log_level: 1
   mail_recipient: ''
@@ -2921,6 +3022,7 @@
   update_pools: false
   use_device_driver: true
   use_genie: false
+  use_jumpserver: false
   validation_method: text
   vendor: Arista
   waiting_time: 0
@@ -3272,7 +3374,11 @@
   driver: a10
   enable_mode: true
   events: []
+  exit_command: ''
+  expect_password_prompt: ''
+  expect_prompt: ''
   expect_string: ''
+  expect_username_prompt: ''
   fast_cli: false
   global_delay_factor: 1.0
   include_device_results: true
@@ -3282,6 +3388,8 @@
   iteration_devices_property: name
   iteration_values: 'get_result("NAPALM: Get interfaces", device=device.name)["result"]["get_interfaces"]'
   iteration_variable_name: iteration_value
+  jump_command: ''
+  jump_username: ''
   last_modified: '2019-10-10 23:22:44.432133'
   log_level: 1
   mail_recipient: ''
@@ -3321,6 +3429,7 @@
   update_pools: false
   use_device_driver: true
   use_genie: false
+  use_jumpserver: false
   validation_method: text
   vendor: ''
   waiting_time: 0
@@ -4635,7 +4744,11 @@
   driver: a10
   enable_mode: true
   events: []
+  exit_command: ''
+  expect_password_prompt: ''
+  expect_prompt: ''
   expect_string: ''
+  expect_username_prompt: ''
   fast_cli: false
   global_delay_factor: 1.0
   include_device_results: true
@@ -4645,6 +4758,8 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jump_command: ''
+  jump_username: ''
   last_modified: '2019-10-21 21:59:43.430409'
   log_level: 1
   mail_recipient: ''
@@ -4682,6 +4797,7 @@
   update_pools: false
   use_device_driver: true
   use_genie: false
+  use_jumpserver: false
   validation_method: text
   vendor: ''
   waiting_time: 0
@@ -4706,7 +4822,11 @@
   driver: a10
   enable_mode: true
   events: []
+  exit_command: ''
+  expect_password_prompt: ''
+  expect_prompt: ''
   expect_string: ''
+  expect_username_prompt: ''
   fast_cli: false
   global_delay_factor: 1.0
   include_device_results: true
@@ -4716,6 +4836,8 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jump_command: ''
+  jump_username: ''
   last_modified: '2019-10-05 10:15:25.968061'
   log_level: 1
   mail_recipient: ''
@@ -4752,6 +4874,7 @@
   update_pools: false
   use_device_driver: true
   use_genie: false
+  use_jumpserver: false
   validation_method: none
   vendor: ''
   waiting_time: 0
@@ -5199,7 +5322,11 @@
   driver: a10
   enable_mode: true
   events: []
+  exit_command: ''
+  expect_password_prompt: ''
+  expect_prompt: ''
   expect_string: ''
+  expect_username_prompt: ''
   fast_cli: false
   global_delay_factor: 1.0
   include_device_results: false
@@ -5209,6 +5336,8 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jump_command: ''
+  jump_username: ''
   last_modified: '2019-12-05 04:52:26.145384'
   log_level: 1
   mail_recipient: ''
@@ -5247,6 +5376,7 @@
   update_pools: false
   use_device_driver: true
   use_genie: false
+  use_jumpserver: false
   validation_method: none
   vendor: ''
   waiting_time: 0
@@ -5271,7 +5401,11 @@
   driver: a10
   enable_mode: true
   events: []
+  exit_command: ''
+  expect_password_prompt: ''
+  expect_prompt: ''
   expect_string: ''
+  expect_username_prompt: ''
   fast_cli: false
   global_delay_factor: 1.0
   include_device_results: false
@@ -5281,6 +5415,8 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jump_command: ''
+  jump_username: ''
   last_modified: '2019-12-05 04:52:44.909327'
   log_level: 1
   mail_recipient: ''
@@ -5319,6 +5455,7 @@
   update_pools: false
   use_device_driver: true
   use_genie: false
+  use_jumpserver: false
   validation_method: none
   vendor: ''
   waiting_time: 0
@@ -5343,7 +5480,11 @@
   driver: a10
   enable_mode: true
   events: []
+  exit_command: ''
+  expect_password_prompt: ''
+  expect_prompt: ''
   expect_string: ''
+  expect_username_prompt: ''
   fast_cli: false
   global_delay_factor: 1.0
   include_device_results: false
@@ -5353,6 +5494,8 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jump_command: ''
+  jump_username: ''
   last_modified: '2019-12-05 04:53:36.285402'
   log_level: 1
   mail_recipient: ''
@@ -5391,6 +5534,7 @@
   update_pools: false
   use_device_driver: true
   use_genie: false
+  use_jumpserver: false
   validation_method: none
   vendor: ''
   waiting_time: 0
@@ -5607,7 +5751,11 @@
   driver: a10
   enable_mode: true
   events: []
+  exit_command: ''
+  expect_password_prompt: ''
+  expect_prompt: ''
   expect_string: ''
+  expect_username_prompt: ''
   fast_cli: false
   global_delay_factor: 1.0
   include_device_results: false
@@ -5617,6 +5765,8 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jump_command: ''
+  jump_username: ''
   last_modified: '2019-12-16 16:46:16.211030'
   log_level: 1
   mail_recipient: ''
@@ -5656,6 +5806,7 @@
   update_pools: false
   use_device_driver: true
   use_genie: false
+  use_jumpserver: false
   validation_method: text
   vendor: ''
   waiting_time: 0
@@ -5847,7 +5998,11 @@
   driver: arista_eos
   enable_mode: true
   events: []
+  exit_command: ''
+  expect_password_prompt: ''
+  expect_prompt: ''
   expect_string: ''
+  expect_username_prompt: ''
   fast_cli: true
   global_delay_factor: 1.0
   include_device_results: false
@@ -5857,6 +6012,8 @@
   iteration_devices_property: name
   iteration_values: get_result("Set Variables for Iteration", device=device.name)["result"]["dict_iteration"]
   iteration_variable_name: command_dict
+  jump_command: ''
+  jump_username: ''
   last_modified: '2020-02-22 10:09:31.770582'
   log_level: 1
   mail_recipient: ''
@@ -5893,6 +6050,7 @@
   update_pools: false
   use_device_driver: true
   use_genie: false
+  use_jumpserver: false
   validation_method: none
   vendor: ''
   waiting_time: 0
@@ -6763,5 +6921,114 @@
   type: workflow
   update_pools: false
   validation_method: none
+  vendor: ''
+  waiting_time: 0
+- close_connection: false
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  devices: [Washington, LosAngeles]
+  dict_match: {}
+  display_only_failed_nodes: false
+  events: []
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  labels: {}
+  last_modified: '2020-03-26 13:00:26.639909'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: 'Regression Workflow M: Unix command & shell, ping, jump server'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions: {}
+  postprocessing: ''
+  postprocessing_mode: always
+  preprocessing: ''
+  run_method: per_device
+  scoped_name: 'Regression Workflow M: Unix command & shell, ping, jump server'
+  send_notification: false
+  send_notification_method: mail
+  services: ['[Shared] Start', '[Shared] End', '[Regression Workflow M: Unix command
+      & shell, ping, jump server] Unix command: ps -ef | grep test']
+  shared: false
+  skip: false
+  skip_query: ''
+  skip_value: 'True'
+  superworkflow_targets: subservice
+  time_between_retries: 10
+  type: workflow
+  update_pools: false
+  validation_method: none
+  vendor: ''
+  waiting_time: 0
+- command: ps -ef
+  content_match: python\d
+  content_match_regex: true
+  conversion_method: none
+  creator: admin
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  devices: []
+  dict_match: {}
+  display_only_failed_nodes: false
+  events: []
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2020-03-26 13:03:16.747858'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Regression Workflow M: Unix command & shell, ping, jump server] Unix command:
+    ps -ef | grep test'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions:
+    'Regression Workflow M: Unix command & shell, ping, jump server': [117, -75]
+  postprocessing: ''
+  postprocessing_mode: always
+  preprocessing: ''
+  run_method: per_device
+  scoped_name: 'Unix command: ps -ef | grep test'
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: false
+  skip_query: ''
+  skip_value: 'True'
+  superworkflow_targets: subservice
+  time_between_retries: 10
+  type: unix_command_service
+  update_pools: false
+  validation_method: text
   vendor: ''
   waiting_time: 0

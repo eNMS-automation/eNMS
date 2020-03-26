@@ -336,6 +336,9 @@ class Database:
 
     def set_custom_properties(self, cls):
         for property, values in properties["custom"].get(cls.__tablename__, {}).items():
+            is_private = values.get("private", False)
+            kwargs = {"default": values["default"]} if not is_private else {}
+            print(property, kwargs)
             setattr(
                 cls,
                 property,
@@ -346,7 +349,7 @@ class Database:
                         "integer": Integer,
                         "string": self.LargeString,
                     }[values["type"]],
-                    default=values.get("default", ""),
+                    **kwargs,
                 ),
             )
         return cls

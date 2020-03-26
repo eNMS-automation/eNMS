@@ -3,7 +3,7 @@ from traceback import format_exc
 from wtforms import BooleanField, HiddenField
 
 from eNMS.database.dialect import Column, LargeString, SmallString
-from eNMS.forms.fields import PasswordSubstitutionField, SubstitutionField
+from eNMS.forms.fields import SubstitutionField
 from eNMS.forms.automation import NetmikoForm
 from eNMS.models.automation import ConnectionService
 

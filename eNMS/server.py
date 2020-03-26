@@ -1,5 +1,5 @@
 from click import argument, echo, option
-from datetime import datetime
+from datetime import datetime, timedelta
 from json import loads
 from passlib.hash import argon2
 from flask import (
@@ -351,6 +351,20 @@ class Server(Flask):
             results = app.run(service.id, **payload_dict)
             db.session.commit()
             echo(app.str_dict(results))
+
+        @self.cli.command(name="delete-changelog")
+        @option(
+            "--keep-last-days",
+            default=15,
+            help="Number of days to keep in the changelog",
+        )
+        def remove_changelog(keep_last_days):
+            deletion_time = datetime.now() - timedelta(days=keep_last_days)
+            app.result_log_deletion(
+                date_time=deletion_time.strftime("%d/%m/%Y %H:%M:%S"),
+                deletion_types=["changelog"],
+            )
+            app.log("info", f"deleted all changelogs up until {deletion_time}")
 
     def configure_rest_api(self):
 

@@ -137,3 +137,16 @@ Examples:
  `flask run_service get_facts --devices Washington,Denver`
  `flask run_service get_facts --payload '{"a": "b"}'`
  `flask run_service get_facts --devices Washington,Denver --payload '{"a": "b"}'`
+
+Delete old entries in the changelog
+***********************************
+This command will purge the changelog and retain only the latest information (default is 15 days).
+
+General syntax: ``flask delete-changelog --keep-last-days num_days_to_keep``
+
+Examples:
+
+::
+
+`flask delete-changelog --keep-last-days 10`
+`flask delete-changelog`    // will use the default and retain only the last 15 days of changelogs

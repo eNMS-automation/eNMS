@@ -27,27 +27,36 @@ class NetmikoValidationService(ConnectionService):
     strip_prompt = db.Column(Boolean, default=True)
     strip_command = db.Column(Boolean, default=True)
     use_genie = db.Column(Boolean, default=False)
+    use_jumpserver = db.Column(Boolean, default=False)
+    jump_command = db.Column(db.SmallString)
+    jump_username = db.Column(db.SmallString)
+    jump_password = db.Column(db.SmallString)
+    exit_command = db.Column(db.SmallString)
+    expect_username_prompt = db.Column(db.SmallString)
+    expect_password_prompt = db.Column(db.SmallString)
+    expect_prompt = db.Column(db.SmallString)
 
     __mapper_args__ = {"polymorphic_identity": "netmiko_validation_service"}
 
     def job(self, run, payload, device):
         netmiko_connection = run.netmiko_connection(device)
-        command = run.sub(run.command, locals())
-        run.log(
-            "info", f"sending CMD '{command}' with Netmiko", device, security=True,
-        )
-        expect_string = run.sub(run.expect_string, locals())
-        netmiko_connection.session_log.truncate(0)
         try:
+            command = run.sub(run.command, locals())
+            prompt = run.enter_jump_server(netmiko_connection, device)
+            netmiko_connection.session_log.truncate(0)
+            run.log(
+                "info", f"sending CMD '{command}' with Netmiko", device, security=True
+            )
             result = netmiko_connection.send_command(
                 command,
                 delay_factor=run.delay_factor,
-                expect_string=expect_string or None,
+                expect_string=run.sub(run.expect_string, locals()) or None,
                 auto_find_prompt=run.auto_find_prompt,
                 strip_prompt=run.strip_prompt,
                 strip_command=run.strip_command,
                 use_genie=self.use_genie,
             )
+            run.exit_jump_server(netmiko_connection, prompt, device)
         except Exception:
             return {
                 "command": command,

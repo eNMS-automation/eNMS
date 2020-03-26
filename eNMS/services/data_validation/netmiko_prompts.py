@@ -28,42 +28,56 @@ class NetmikoPromptsService(ConnectionService):
     timeout = db.Column(Integer, default=10.0)
     delay_factor = db.Column(Float, default=1.0)
     global_delay_factor = db.Column(Float, default=1.0)
+    use_jumpserver = db.Column(Boolean, default=False)
+    jump_command = db.Column(db.SmallString)
+    jump_username = db.Column(db.SmallString)
+    jump_password = db.Column(db.SmallString)
+    exit_command = db.Column(db.SmallString)
+    expect_username_prompt = db.Column(db.SmallString)
+    expect_password_prompt = db.Column(db.SmallString)
+    expect_prompt = db.Column(db.SmallString)
+    expect_string = db.Column(db.SmallString)
 
     __mapper_args__ = {"polymorphic_identity": "netmiko_prompts_service"}
 
     def job(self, run, payload, device):
         netmiko_connection = run.netmiko_connection(device)
+        netmiko_connection.session_log.truncate(0)
         send_strings = (run.command, run.response1, run.response2, run.response3)
         expect_strings = (run.confirmation1, run.confirmation2, run.confirmation3, None)
-        commands = []
+        commands, confirmation = [], None
         results = {"commands": commands}
-        for send_string, expect_string in zip(send_strings, expect_strings):
-            if not send_string:
-                break
-            command = run.sub(send_string, locals())
-            commands.append(command)
-            run.log("info", f"Sending '{command}' with Netmiko", device, security=True)
-            confirmation = run.sub(expect_string, locals())
-            try:
+        try:
+            prompt = run.enter_jump_server(netmiko_connection, device)
+            for send_string, expect_string in zip(send_strings, expect_strings):
+                if not send_string:
+                    break
+                command = run.sub(send_string, locals())
+                commands.append(command)
+                run.log(
+                    "info", f"Sending '{command}' with Netmiko", device, security=True
+                )
+                confirmation = run.sub(expect_string, locals())
                 result = netmiko_connection.send_command_timing(
                     command, delay_factor=run.delay_factor
                 )
-            except Exception:
-                return {
-                    **results,
-                    **{
-                        "error": format_exc(),
-                        "result": netmiko_connection.session_log.getvalue().decode(),
-                        "match": confirmation,
-                        "success": False,
-                    },
-                }
-            results[command] = {"result": result, "match": confirmation}
-            if confirmation and confirmation not in result:
-                results.update(
-                    {"success": False, "result": result, "match": confirmation}
-                )
-                return results
+                results[command] = {"result": result, "match": confirmation}
+                if confirmation and confirmation not in result:
+                    results.update(
+                        {"success": False, "result": result, "match": confirmation}
+                    )
+                    return results
+            run.exit_jump_server(netmiko_connection, prompt, device)
+        except Exception:
+            return {
+                **results,
+                **{
+                    "error": format_exc(),
+                    "result": netmiko_connection.session_log.getvalue().decode(),
+                    "match": confirmation,
+                    "success": False,
+                },
+            }
         return {"commands": commands, "result": result}
 
 

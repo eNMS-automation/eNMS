@@ -2,6 +2,7 @@ from collections import defaultdict
 from flask import request
 from flask_login import current_user
 from flask_wtf import FlaskForm
+from wtforms import PasswordField
 from wtforms.fields.core import UnboundField
 from wtforms.form import FormMeta
 
@@ -41,15 +42,13 @@ class MetaForm(FormMeta):
                 "type": field_type,
                 "model": field.kwargs.pop("model", None),
             }
-        app.property_names.update(
-            {
-                field_name: field.args[0]
-                for field_name, field in attrs.items()
-                if isinstance(field, UnboundField)
-                and field.args
-                and isinstance(field.args[0], str)
-            }
-        )
+            if field.args and isinstance(field.args[0], str):
+                app.property_names[field_name] = field.args[0]
+            if (
+                issubclass(field.field_class, PasswordField)
+                and field_name not in db.private_properties
+            ):
+                db.private_properties.append(field_name)
         form_properties[form_type].update(properties)
         for property, value in properties.items():
             if property not in property_types and value["type"] != "field-list":

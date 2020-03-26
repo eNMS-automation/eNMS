@@ -26,29 +26,22 @@ class MetaForm(FormMeta):
         form_classes[form_type] = form
         form_templates[form_type] = getattr(form, "template", "base")
         form_actions[form_type] = getattr(form, "action", None)
-        properties = {
-            field_name: {
-                "type": field_types[field.field_class],
-                "model": field.kwargs.pop("model", None),
-            }
-            for field_name, field in attrs.items()
-            if isinstance(field, UnboundField) and field.field_class in field_types
-        }
+        properties = {}
         for field_name, field in attrs.items():
-            if not hasattr(field, "field_class"):
+            if not isinstance(field, UnboundField):
                 continue
-            password_field = issubclass(field.field_class, PasswordField)
-            if password_field and field_name not in private_properties:
+            if field.field_class in field_types:
+                properties[field_name] = {
+                    "type": field_types[field.field_class],
+                    "model": field.kwargs.pop("model", None),
+                }
+            if field.args and isinstance(field.args[0], str):
+                property_names[field_name] = field.args[0]
+            if (
+                issubclass(field.field_class, PasswordField)
+                and field_name not in private_properties
+            ):
                 private_properties.append(field_name)
-        property_names.update(
-            {
-                field_name: field.args[0]
-                for field_name, field in attrs.items()
-                if isinstance(field, UnboundField)
-                and field.args
-                and isinstance(field.args[0], str)
-            }
-        )
         form_properties[form_type].update(properties)
         for property, value in properties.items():
             if property not in property_types and value["type"] != "field-list":

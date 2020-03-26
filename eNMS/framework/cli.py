@@ -6,6 +6,7 @@ from eNMS.database import Session
 from eNMS.database.functions import delete, factory, fetch
 from datetime import datetime, timedelta
 
+
 def configure_cli(flask_app):
     @flask_app.cli.command(name="fetch")
     @argument("table")
@@ -48,13 +49,13 @@ def configure_cli(flask_app):
         echo(app.str_dict(results))
 
     @flask_app.cli.command(name="delete-changelog")
-    @option("--keep-last-days", default=15, help="Number of days to keep in the changelog")
+    @option(
+        "--keep-last-days", default=15, help="Number of days to keep in the changelog"
+    )
     def remove_changelog(keep_last_days):
-        """ removes changelog and keeps last 15 days if no other value provided """
-
         deletion_time = datetime.now() - timedelta(days=keep_last_days)
-        kwargs = {}
-        kwargs["date_time"] = deletion_time.strftime("%d/%m/%Y %H:%M:%S")
-        kwargs["deletion_types"] = ["changelog"]
-        app.result_log_deletion(**kwargs)
-        print(f"deleted all changelogs up until {deletion_time}")
+        app.result_log_deletion(
+            date_time=deletion_time.strftime("%d/%m/%Y %H:%M:%S"),
+            deletion_types=["changelog"],
+        )
+        app.log("info", f"deleted all changelogs up until {deletion_time}")

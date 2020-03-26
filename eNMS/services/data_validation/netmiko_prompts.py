@@ -44,111 +44,40 @@ class NetmikoPromptsService(ConnectionService):
     def job(self, run, payload, device):
         netmiko_connection = run.netmiko_connection(device)
         netmiko_connection.session_log.truncate(0)
-
-        if self.use_jumpserver:
-            jumpserver_prompt, error = self.enter_jumpserver(run, netmiko_connection)
-            if error:
-                return error
-
         send_strings = (run.command, run.response1, run.response2, run.response3)
         expect_strings = (run.confirmation1, run.confirmation2, run.confirmation3, None)
-        commands = []
+        commands, confirmation = [], None
         results = {"commands": commands}
-        for send_string, expect_string in zip(send_strings, expect_strings):
-            if not send_string:
-                break
-            command = run.sub(send_string, locals())
-            commands.append(command)
-            run.log("info", f"Sending '{command}' with Netmiko", device)
-            confirmation = run.sub(expect_string, locals())
-            try:
+        try:
+            prompt = run.enter_jump_server(netmiko_connection, device)
+            for send_string, expect_string in zip(send_strings, expect_strings):
+                if not send_string:
+                    break
+                command = run.sub(send_string, locals())
+                commands.append(command)
+                run.log("info", f"Sending '{command}' with Netmiko", device)
+                confirmation = run.sub(expect_string, locals())
                 result = netmiko_connection.send_command_timing(
                     command, delay_factor=run.delay_factor
                 )
-            except Exception:
-                return {
-                    **results,
-                    **{
-                        "error": format_exc(),
-                        "result": netmiko_connection.session_log.getvalue().decode(),
-                        "match": confirmation,
-                        "success": False,
-                    },
-                }
-            results[command] = {"result": result, "match": confirmation}
-            if confirmation and confirmation not in result:
-                results.update(
-                    {"success": False, "result": result, "match": confirmation}
-                )
-                return results
-
-        if self.use_jumpserver:
-            self.exit_jumpserver(run, netmiko_connection, jumpserver_prompt)
-
+                results[command] = {"result": result, "match": confirmation}
+                if confirmation and confirmation not in result:
+                    results.update(
+                        {"success": False, "result": result, "match": confirmation}
+                    )
+                    return results
+            run.exit_jump_server(netmiko_connection, prompt, device)
+        except Exception:
+            return {
+                **results,
+                **{
+                    "error": format_exc(),
+                    "result": netmiko_connection.session_log.getvalue().decode(),
+                    "match": confirmation,
+                    "success": False,
+                },
+            }
         return {"commands": commands, "result": result}
-
-    def enter_jumpserver(self, run, netmiko_connection):
-        jump_command = run.sub(run.jump_command, locals())
-        jump_username = run.sub(run.jump_username, locals())
-        jump_password = run.sub(run.jump_password, locals())
-        expect_username_prompt = run.sub(run.expect_username_prompt, locals())
-        expect_password_prompt = run.sub(run.expect_password_prompt, locals())
-        expect_prompt = run.sub(run.expect_prompt, locals())
-
-        if (
-            expect_username_prompt
-            and not jump_username
-            or expect_password_prompt
-            and not jump_password
-        ):
-            raise Exception(
-                "Jumpserver username/password is required when a username/password prompt is specified"
-            )
-
-        # Grab prompt from jumpserver for use after exit from device
-        netmiko_connection.find_prompt()
-        jumpserver_prompt = netmiko_connection.base_prompt
-
-        send_strings = (
-            text
-            for text in (jump_command, jump_username, jump_password)
-            if text not in (None, "")
-        )
-        expect_strings = (
-            text
-            for text in (expect_username_prompt, expect_password_prompt, expect_prompt)
-            if text not in (None, "")
-        )
-
-        for send_string, expect_string in zip(send_strings, expect_strings):
-            if not (send_string and expect_string):
-                return jumpserver_prompt, None
-            try:
-                netmiko_connection.send_command(
-                    send_string,
-                    expect_string=expect_string,
-                    auto_find_prompt=False,
-                    strip_prompt=False,
-                    strip_command=True,
-                    max_loops=150,  # 150 loops * .2 loop_delay = 30 second timeout
-                )
-            except Exception:
-                return (
-                    None,
-                    {
-                        "error": format_exc(),
-                        "result": (
-                            netmiko_connection.session_log.getvalue().decode()
-                            if hasattr(netmiko_connection, "session_log")
-                            else "No results available after exception. Driver does not support session_log"
-                        ),
-                        "message": f"Sent '{send_string}', waiting for '{expect_string}'",
-                        "success": False,
-                    },
-                )
-
-        return jumpserver_prompt, None
-
 
 
 class NetmikoPromptsForm(NetmikoForm):

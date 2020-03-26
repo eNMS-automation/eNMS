@@ -2,7 +2,7 @@
 Release Notes
 =============
 
-Version 3.20.2
+Version 3.21
 --------------
 
 - Keep selected runtime when entering a subworkflow.
@@ -59,6 +59,9 @@ including using a syslog handler with custom address facility.
 - Fix front end bug when displaying the results if they contain a python SET (invalid JSON):
 all non-JSON compliant types are now automatically converted to a string when saving the results in the
 database, and a warning is issue in the service logs.
+- Add superworkflow mechanism
+- Add jump server support
+- Add log deletion support from CLI interface
 
 MIGRATION:
 In services, "result_postprocessing" -> "postprocessing"

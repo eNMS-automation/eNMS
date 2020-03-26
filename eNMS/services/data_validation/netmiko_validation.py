@@ -70,8 +70,12 @@ class NetmikoValidationService(ConnectionService):
 class NetmikoValidationForm(NetmikoForm):
     form_type = HiddenField(default="netmiko_validation_service")
     command = StringField(substitution=True)
-    expect_string = StringField(substitution=True, render_kw={"help": True})
-    auto_find_prompt = BooleanField(default=True)
+    expect_string = StringField(
+        substitution=True, render_kw={"help": "netmiko/expect_string"}
+    )
+    auto_find_prompt = BooleanField(
+        default=True, render_kw={"help": "netmiko/auto_find_prompt"}
+    )
     strip_prompt = BooleanField(default=True)
     strip_command = BooleanField(default=True)
     use_genie = BooleanField(default=False)

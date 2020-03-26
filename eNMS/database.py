@@ -338,7 +338,6 @@ class Database:
         for property, values in properties["custom"].get(cls.__tablename__, {}).items():
             is_private = values.get("private", False)
             kwargs = {"default": values["default"]} if not is_private else {}
-            print(property, kwargs)
             setattr(
                 cls,
                 property,

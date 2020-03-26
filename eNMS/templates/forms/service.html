@@ -349,7 +349,14 @@
                     class="add-id", checked=True) }} {% else %} {{
                     form[field_name](id="{}-{}".format(form_type, field_name),
                     class="add-id") }} {% endif %}
+                    {% if form[field_name].render_kw and "help" in
+                    form[field_name].render_kw %}
+                    <label help="{{ form[field_name].render_kw['help'] }}" for="{{ field_name }}">
+                      {{ form[field_name].label }}
+                    </label>
+                    {% else %}
                     <label>{{ form[field_name].label }}</label>
+                    {% endif %}
                   </div>
                 </fieldset>
                 {% elif form[field_name].type == "FieldList" %} {% for entry in
@@ -367,9 +374,8 @@
                   {% endif %} {% endfor %}
                 </fieldset>
                 {% endfor %} {% else %} {% if form[field_name].render_kw and "help" in
-                form[field_name].render_kw %} {% set help = "{}/{}".format(form_type,
-                field_name) %}
-                <label help="{{ help }}" for="{{ field_name }}">
+                form[field_name].render_kw %}
+                <label help="{{ form[field_name].render_kw['help'] }}" for="{{ field_name }}">
                   {{ form[field_name].label }}
                 </label>
                 {% else %}

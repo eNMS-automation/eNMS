@@ -12,14 +12,15 @@ from eNMS.forms.fields import (
     SelectField,
     StringField,
 )
-from eNMS.models.automation import Service
+from eNMS.models.automation import ConnectionService
 
 
-class UnixShellScriptService(Service):
+class UnixShellScriptService(ConnectionService):
 
     __tablename__ = "unix_shell_script_service"
     pretty_name = "Unix Shell"
-    id = db.Column(Integer, ForeignKey("service.id"), primary_key=True)
+    parent_type = "connection_service"
+    id = db.Column(Integer, ForeignKey("connection_service.id"), primary_key=True)
     source_code = db.Column(db.LargeString, default="")
     enable_mode = db.Column(Boolean, default=False)
     driver = db.Column(db.SmallString)

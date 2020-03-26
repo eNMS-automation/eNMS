@@ -346,7 +346,7 @@ class Database:
                         "integer": Integer,
                         "string": self.LargeString,
                     }[values["type"]],
-                    default=values["default"],
+                    default=values.get("default", ""),
                 ),
             )
         return cls

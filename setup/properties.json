@@ -10,7 +10,6 @@
          "property2":{ 
             "pretty_name":"Property 2",
             "type":"string",
-            "default":"test",
             "private":true
          }
       },

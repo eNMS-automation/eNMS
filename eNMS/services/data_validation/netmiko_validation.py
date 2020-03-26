@@ -41,24 +41,21 @@ class NetmikoValidationService(ConnectionService):
 
     def job(self, run, payload, device):
         netmiko_connection = run.netmiko_connection(device)
-        if self.use_jumpserver:
-            prompt, error = run.enter_jump_server(netmiko_connection, locals())
-            if error:
-                return error
-        command = run.sub(run.command, locals())
-        run.log("info", f"Sending '{command}' with Netmiko", device)
-        expect_string = run.sub(run.expect_string, locals())
-        netmiko_connection.session_log.truncate(0)
         try:
+            command = run.sub(run.command, locals())
+            prompt = run.enter_jump_server(netmiko_connection, device)
+            netmiko_connection.session_log.truncate(0)
+            run.log("info", f"Sending '{command}' with Netmiko", device)
             result = netmiko_connection.send_command(
                 command,
                 delay_factor=run.delay_factor,
-                expect_string=expect_string or None,
+                expect_string=run.sub(run.expect_string, locals()) or None,
                 auto_find_prompt=run.auto_find_prompt,
                 strip_prompt=run.strip_prompt,
                 strip_command=run.strip_command,
                 use_genie=self.use_genie,
             )
+            run.exit_jump_server(netmiko_connection, prompt, device)
         except Exception:
             return {
                 "command": command,
@@ -66,8 +63,6 @@ class NetmikoValidationService(ConnectionService):
                 "result": netmiko_connection.session_log.getvalue().decode(),
                 "success": False,
             }
-        if self.use_jumpserver:
-            run.exit_jump_server(netmiko_connection, prompt, locals())
         return {"command": command, "result": result}
 
 

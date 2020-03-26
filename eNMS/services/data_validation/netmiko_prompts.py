@@ -149,17 +149,6 @@ class NetmikoPromptsService(ConnectionService):
 
         return jumpserver_prompt, None
 
-    def exit_jumpserver(self, run, netmiko_connection, jumpserver_prompt):
-        exit_command = run.sub(run.exit_command, locals())
-
-        # Send exit command, wait for device prompt
-        netmiko_connection.send_command(
-            exit_command,
-            expect_string=jumpserver_prompt or None,
-            auto_find_prompt=True,
-            strip_prompt=False,
-            strip_command=True,
-        )
 
 
 class NetmikoPromptsForm(NetmikoForm):

@@ -21,7 +21,7 @@
   device_napalm_driver_match: inclusion
   device_netmiko_driver: ''
   device_netmiko_driver_match: inclusion
-  device_number: 28
+  device_number: 29
   device_operating_system: ''
   device_operating_system_match: inclusion
   device_operational_data: ''
@@ -39,7 +39,7 @@
   devices: [Jackson, PaloAlto, Austin, Washington, Chicago, SanJose, SanDiego, Dallas,
     Philadelphia, LosAngeles, Detroit, Richmond, Atlanta, Boston, Houston, Baltimore,
     Cleveland, Columbus, Cincinnati, Cambridge, Minneapolis, NewYork, Sacramento,
-    SanFrancisco, Orange, Oakland, Denver, Aserver]
+    SanFrancisco, Orange, Oakland, Denver, Aserver, Server 2]
   last_modified: ''
   latitude: '0.0'
   link_color: ''
@@ -94,7 +94,7 @@
   device_napalm_driver_match: inclusion
   device_netmiko_driver: ''
   device_netmiko_driver_match: inclusion
-  device_number: 28
+  device_number: 29
   device_operating_system: ''
   device_operating_system_match: inclusion
   device_operational_data: ''
@@ -112,7 +112,7 @@
   devices: [Jackson, PaloAlto, Austin, Washington, Chicago, SanJose, SanDiego, Dallas,
     Philadelphia, LosAngeles, Detroit, Richmond, Atlanta, Boston, Houston, Baltimore,
     Cleveland, Columbus, Cincinnati, Cambridge, Minneapolis, NewYork, Sacramento,
-    SanFrancisco, Orange, Oakland, Denver, Aserver]
+    SanFrancisco, Orange, Oakland, Denver, Aserver, Server 2]
   last_modified: ''
   latitude: '0.0'
   link_color: ''
@@ -235,7 +235,7 @@
   device_napalm_driver_match: inclusion
   device_netmiko_driver: ''
   device_netmiko_driver_match: inclusion
-  device_number: 14
+  device_number: 15
   device_operating_system: ''
   device_operating_system_match: inclusion
   device_operational_data: ''
@@ -251,7 +251,7 @@
   device_vendor: ''
   device_vendor_match: inclusion
   devices: [SanJose, SanDiego, Philadelphia, LosAngeles, Detroit, Baltimore, Cleveland,
-    Cambridge, Minneapolis, NewYork, Sacramento, Orange, Denver, Aserver]
+    Cambridge, Minneapolis, NewYork, Sacramento, Orange, Denver, Aserver, Server 2]
   last_modified: ''
   latitude: '37.77'
   link_color: ''

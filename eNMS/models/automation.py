@@ -1030,6 +1030,50 @@ class Run(AbstractBase):
                 "error", f"Error while closing {library} connection ({exc})", device
             )
 
+    def enter_jump_server(self, connection, locals):
+        connection.find_prompt()
+        prompt, error = connection.base_prompt, None
+        commands = list(filter(None, [
+            self.sub(self.jump_command, locals),
+            self.sub(self.expect_username_prompt, locals),
+            self.sub(self.jump_username, locals),
+            self.sub(self.expect_password_prompt, locals),
+            self.sub(self.jump_password, locals),
+            self.sub(self.expect_prompt, locals),
+        ]))
+        for (send, expect) in zip(commands[::2], commands[1::2]):
+            if not send or not expect:
+                continue
+            try:
+                connection.send_command(
+                    send,
+                    expect_string=expect,
+                    auto_find_prompt=False,
+                    strip_prompt=False,
+                    strip_command=True,
+                    max_loops=150,
+                )
+            except Exception:
+                error = {
+                    "command": send,
+                    "error": format_exc(),
+                    "result": connection.session_log.getvalue().decode(),
+                    "message": f"Sent '{send}', waiting for '{expect}'",
+                    "success": False,
+                }
+                break
+        return prompt, error
+
+    def exit_jump_server(self, connection, prompt, locals):
+        exit_command = self.sub(self.exit_command, locals)
+        connection.send_command(
+            exit_command,
+            expect_string=prompt or None,
+            auto_find_prompt=True,
+            strip_prompt=False,
+            strip_command=True,
+        )
+
     def generate_yaml_file(self, path, device):
         data = {
             "last_failure": device.last_failure,

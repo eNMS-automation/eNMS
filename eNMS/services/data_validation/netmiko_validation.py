@@ -42,19 +42,9 @@ class NetmikoValidationService(ConnectionService):
     def job(self, run, payload, device):
         netmiko_connection = run.netmiko_connection(device)
         if self.use_jumpserver:
-            netmiko_connection.find_prompt()
-            prompt = netmiko_connection.base_prompt
-            commands = list(filter(None, [
-                run.sub(run.jump_command, locals()),
-                run.sub(run.expect_username_prompt, locals()),
-                run.sub(run.jump_username, locals()),
-                run.sub(run.expect_password_prompt, locals()),
-                run.sub(run.jump_password, locals()),
-                run.sub(run.expect_prompt, locals()),
-            ]))
-            result = self.enter_jump_server(run, netmiko_connection, commands)
-            if result:
-                return result
+            prompt, error = run.enter_jump_server(netmiko_connection, locals())
+            if error:
+                return error
         command = run.sub(run.command, locals())
         run.log("info", f"Sending '{command}' with Netmiko", device)
         expect_string = run.sub(run.expect_string, locals())
@@ -77,37 +67,8 @@ class NetmikoValidationService(ConnectionService):
                 "success": False,
             }
         if self.use_jumpserver:
-            exit_command = run.sub(run.exit_command, locals())
-            netmiko_connection.send_command(
-                exit_command,
-                expect_string=prompt or None,
-                auto_find_prompt=True,
-                strip_prompt=False,
-                strip_command=True,
-            )
+            run.exit_jump_server(netmiko_connection, prompt, locals())
         return {"command": command, "result": result}
-
-    def enter_jump_server(self, run, netmiko_connection, commands):
-        for (send, expect) in zip(commands[::2], commands[1::2]):
-            if not send or not expect:
-                continue
-            try:
-                netmiko_connection.send_command(
-                    send,
-                    expect_string=expect,
-                    auto_find_prompt=False,
-                    strip_prompt=False,
-                    strip_command=True,
-                    max_loops=150,
-                )
-            except Exception:
-                return {
-                    "command": send,
-                    "error": format_exc(),
-                    "result": netmiko_connection.session_log.getvalue().decode(),
-                    "message": f"Sent '{send}', waiting for '{expect}'",
-                    "success": False,
-                }
 
 
 class NetmikoValidationForm(NetmikoForm):

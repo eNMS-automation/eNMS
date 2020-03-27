@@ -858,6 +858,7 @@ class Run(AbstractBase):
     def global_variables(_self, **locals):  # noqa: N805
         payload, device = locals.get("payload", {}), locals.get("device")
         variables = {
+            "app": app,
             "settings": app.settings,
             "devices": _self.devices,
             "get_var": partial(_self.get_var, payload),

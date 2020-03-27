@@ -23,6 +23,7 @@ class UnixShellScriptService(ConnectionService):
     id = db.Column(Integer, ForeignKey("connection_service.id"), primary_key=True)
     source_code = db.Column(db.LargeString, default="")
     enable_mode = db.Column(Boolean, default=False)
+    config_mode = db.Column(Boolean, default=False)
     driver = db.Column(db.SmallString)
     use_device_driver = db.Column(Boolean, default=True)
     fast_cli = db.Column(Boolean, default=False)
@@ -78,6 +79,7 @@ class UnixShellScriptService(ConnectionService):
 class UnixShellScriptForm(NetmikoForm):
     form_type = HiddenField(default="unix_shell_script_service")
     enable_mode = BooleanField("Run as root using sudo")
+    config_mode = BooleanField("Config mode")
     source_code = StringField(
         widget=TextArea(),
         render_kw={"rows": 15},

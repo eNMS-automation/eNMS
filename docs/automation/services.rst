@@ -213,7 +213,7 @@ Variables
     - ``device`` (**optional**) The value is stored for a specific device.
     - ``section`` (**optional**) The value is stored in a specific "section".
 
-- ``app.send_email`` lets you send an email with optional attached file. It takes the following parameters:
+- ``send_email`` lets you send an email with optional attached file. It takes the following parameters:
 
   - ``title`` (mandatory, type ``string``)
   - ``content`` (mandatory, type ``string``)
@@ -226,7 +226,7 @@ Variables
 
   .. code::
 
-    app.send_email(
+    send_email(
         title,
         content,
         sender=sender,

@@ -696,10 +696,10 @@
   subtype: ''
   tasks: []
   type: device
-  username: minto
+  username: admin
   vendor: Cisco
-- description: Server 2
-  icon: antenna
+- description: Washington
+  icon: router
   ip_address: 192.168.56.103
   last_duration: ''
   last_failure: Never
@@ -707,19 +707,19 @@
   last_runtime: ''
   last_status: Never
   last_update: Never
-  latitude: '0.0'
-  location: ''
-  longitude: '0.0'
-  model: ''
+  latitude: '38.89511'
+  location: Washington
+  longitude: '-50.0'
+  model: linux
   name: Server 2
-  napalm_driver: ios
-  netmiko_driver: linux_ssh
+  napalm_driver: eos
+  netmiko_driver: linux
   operating_system: linux
-  os_version: linux
+  os_version: 15.5(3)M
   port: 22
   property1: ''
   subtype: ''
   tasks: []
   type: device
-  username: ''
-  vendor: ''
+  username: admin
+  vendor: linux

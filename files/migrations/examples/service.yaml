@@ -1294,7 +1294,7 @@
   max_processes: 5
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression Workflow F: Workflow of Workflows] Modify Payload for Iteration'
+  name: '[Regression Workflow E: Iteration Targets] Modify Payload for Iteration'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -3895,11 +3895,11 @@
   send_notification_method: mail
   services: ['[Shared] Start', '[Shared] End', '[Regression Workflow F: Workflow of
       Workflows] Regression Workflow 5: VRF creation and deletion with Napalm', '[Regression
-      Workflow F: Workflow of Workflows] Modify Payload for Iteration', '[Regression
-      Workflow F: Workflow of Workflows] Regression Workflow F S2: Access Variables
-      from Parent Workflow', '[Regression Workflow F: Workflow of Workflows] Regression
-      Workflow F S1: Subworkflow of Workflow', '[Regression Workflow F: Workflow of
-      Workflows] Show interfaces with Netmiko', '[Shared] NAPALM: Get interfaces']
+      Workflow E: Iteration Targets] Modify Payload for Iteration', '[Regression Workflow
+      F: Workflow of Workflows] Regression Workflow F S2: Access Variables from Parent
+      Workflow', '[Regression Workflow F: Workflow of Workflows] Regression Workflow
+      F S1: Subworkflow of Workflow', '[Regression Workflow F: Workflow of Workflows]
+      Show interfaces with Netmiko', '[Shared] NAPALM: Get interfaces']
   shared: false
   skip: false
   skip_query: ''
@@ -4449,12 +4449,12 @@
   scoped_name: 'Regression Workflow E: Iteration Targets'
   send_notification: false
   send_notification_method: mail
-  services: ['[Shared] Start', '[Shared] End', '[Regression Workflow F: Workflow of
-      Workflows] Modify Payload for Iteration', '[Regression Workflow E: Iteration
-      Targets] Iteration Target Workflow - Test 2', '[Regression Workflow E: Iteration
-      Targets] Iteration Targets Workflow - Test 1', '[Regression Workflow E: Iteration
-      Targets] Iteration Target Workflow - Test 3', '[Regression Workflow E: Iteration
-      Targets] Iteration Targets Workflow - Test 4']
+  services: ['[Shared] Start', '[Shared] End', '[Regression Workflow E: Iteration
+      Targets] Modify Payload for Iteration', '[Regression Workflow E: Iteration Targets]
+      Iteration Target Workflow - Test 2', '[Regression Workflow E: Iteration Targets]
+      Iteration Targets Workflow - Test 1', '[Regression Workflow E: Iteration Targets]
+      Iteration Target Workflow - Test 3', '[Regression Workflow E: Iteration Targets]
+      Iteration Targets Workflow - Test 4']
   shared: false
   skip: false
   skip_query: ''
@@ -7034,8 +7034,9 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- auto_find_prompt: true
+- auto_find_prompt: false
   close_connection: false
+  config_mode: false
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -7051,9 +7052,9 @@
   dict_match: {}
   display_only_failed_nodes: false
   driver: linux
-  enable_mode: false
+  enable_mode: true
   events: []
-  expect_string: ''
+  expect_string: root.*#
   fast_cli: false
   global_delay_factor: 1.0
   include_device_results: false
@@ -7063,7 +7064,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2020-03-26 13:24:05.392352'
+  last_modified: '2020-03-27 13:35:46.013905'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -7091,10 +7092,10 @@
   skip_query: ''
   skip_value: 'True'
   source_code: "#!/bin/bash\r\n# The following example shell script returns 0 for\
-    \ success; non-zero for failure\r\ndirectory_contents=`ping {{ device.ip_address\
-    \ }}`  # Needs privileged mode\r\nreturn_code=$?\r\nif [ $return_code -ne 0 ];\
-    \ then\r\n    exit $return_code  # Indicating Failure\r\nelse\r\n    echo -e \"\
-    $directory_contents\"\r\n    exit 0  # Indicating Success\r\nfi\r\n"
+    \ success; non-zero for failure\r\ndirectory_contents=`ls -al /bin`  # Needs privileged\
+    \ mode\r\nreturn_code=$?\r\nif [ $return_code -ne 0 ]; then\r\n    exit $return_code\
+    \  # Indicating Failure\r\nelse\r\n    echo -e \"$directory_contents\"\r\n   \
+    \ exit 0  # Indicating Success\r\nfi\r\n"
   start_new_connection: false
   strip_command: true
   strip_prompt: true
@@ -7103,7 +7104,7 @@
   timeout: 10
   type: unix_shell_script_service
   update_pools: false
-  use_device_driver: true
+  use_device_driver: false
   validation_method: none
   vendor: ''
   waiting_time: 0

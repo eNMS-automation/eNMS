@@ -590,7 +590,13 @@
     command & shell, ping, jump server] Ping Washington', subtype: success, type: workflow_edge,
   workflow: 'Regression Workflow M: Unix command & shell, ping, jump server'}
 - {destination: '[Regression Workflow M: Unix command & shell, ping, jump server]
-    Ping Washington', label: failure, source: '[Regression Workflow M: Unix command
-    & shell, ping, jump server] Unix shell: ping device from server 2', subtype: failure,
+    Ping Washington', label: success, source: '[Regression Workflow M: Unix command
+    & shell, ping, jump server] Unix shell: ping device from server 2', subtype: success,
   type: workflow_edge, workflow: 'Regression Workflow M: Unix command & shell, ping,
     jump server'}
+- {destination: '[Regression Workflow N: Topology Import (netbox, librenms, opennms)]
+    OpenNMS Import', label: success, source: '[Shared] Start', subtype: success, type: workflow_edge,
+  workflow: 'Regression Workflow N: Topology Import (netbox, librenms, opennms)'}
+- {destination: '[Shared] End', label: success, source: '[Regression Workflow N: Topology
+    Import (netbox, librenms, opennms)] OpenNMS Import', subtype: success, type: workflow_edge,
+  workflow: 'Regression Workflow N: Topology Import (netbox, librenms, opennms)'}

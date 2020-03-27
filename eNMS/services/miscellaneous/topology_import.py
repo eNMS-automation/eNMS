@@ -7,6 +7,7 @@ try:
 except ImportError as exc:
     warn(f"Couldn't import pynetbox module ({exc})")
 
+from eNMS import app
 from eNMS.database import db
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import HiddenField, PasswordField, SelectField, StringField
@@ -58,7 +59,7 @@ class TopologyImportService(Service):
         json_devices = http_get(
             self.opennms_devices,
             headers={"Accept": "application/json"},
-            auth=(self.opennms_login, self.opennms_password),
+            auth=(self.opennms_login, app.get_password(self.opennms_password)),
         ).json()["node"]
         devices = {
             device["id"]: {

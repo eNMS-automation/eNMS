@@ -59,6 +59,7 @@
     'Regression Workflow K: preprocessing and postprocessing': [-197, -37]
     'Regression Workflow L: superworkflow': [0, 0]
     'Regression Workflow M: Unix command & shell, ping, jump server': [-341, 17]
+    'Regression Workflow N: Topology Import (netbox, librenms, opennms)': [0, 0]
     Subworkflow 1: !!python/tuple [0, 0]
     Subworkflow 2: !!python/tuple [0, 0]
     Workflow  in device by device mode: !!python/tuple [0, 0]
@@ -174,6 +175,7 @@
     'Regression Workflow K: preprocessing and postprocessing': [619, 353]
     'Regression Workflow L: superworkflow': [500, 0]
     'Regression Workflow M: Unix command & shell, ping, jump server': [560, 9]
+    'Regression Workflow N: Topology Import (netbox, librenms, opennms)': [500, 0]
     Subworkflow 1: !!python/tuple [0, 0]
     Subworkflow 2: !!python/tuple [0, 0]
     T: !!python/tuple [500, 0]
@@ -6944,7 +6946,7 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels: {}
-  last_modified: '2020-03-27 13:41:29.694089'
+  last_modified: '2020-03-27 13:44:10.965985'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -7163,6 +7165,120 @@
   timeout: 2
   ttl: 60
   type: ping_service
+  update_pools: false
+  validation_method: none
+  vendor: ''
+  waiting_time: 0
+- close_connection: false
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  devices: []
+  dict_match: {}
+  display_only_failed_nodes: false
+  events: []
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  labels: {}
+  last_modified: '2020-03-27 15:00:33.680336'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: 'Regression Workflow N: Topology Import (netbox, librenms, opennms)'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions: {}
+  postprocessing: ''
+  postprocessing_mode: always
+  preprocessing: ''
+  run_method: per_service_with_service_targets
+  scoped_name: 'Regression Workflow N: Topology Import (netbox, librenms, opennms)'
+  send_notification: false
+  send_notification_method: mail
+  services: ['[Shared] Start', '[Shared] End', '[Regression Workflow N: Topology Import
+      (netbox, librenms, opennms)] OpenNMS Import']
+  shared: false
+  skip: false
+  skip_query: ''
+  skip_value: 'True'
+  superworkflow_targets: subservice
+  time_between_retries: 10
+  type: workflow
+  update_pools: false
+  validation_method: none
+  vendor: ''
+  waiting_time: 0
+- content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  devices: []
+  dict_match: {}
+  display_only_failed_nodes: false
+  events: []
+  import_type: opennms
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2020-03-27 15:00:28.449935'
+  librenms_address: http://librenms.example.com
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Regression Workflow N: Topology Import (netbox, librenms, opennms)] OpenNMS
+    Import'
+  negative_logic: false
+  netbox_address: http://0.0.0.0:8000
+  notification_header: ''
+  number_of_retries: 0
+  opennms_address: https://demo.opennms.org/opennms/rest
+  opennms_devices: https://demo.opennms.org/opennms/rest/nodes
+  opennms_login: demo
+  operating_system: ''
+  pools: []
+  positions:
+    'Regression Workflow N: Topology Import (netbox, librenms, opennms)': [231, -79]
+  postprocessing: ''
+  postprocessing_mode: always
+  preprocessing: ''
+  run_method: once
+  scoped_name: OpenNMS Import
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: false
+  skip_query: ''
+  skip_value: 'True'
+  superworkflow_targets: subservice
+  time_between_retries: 10
+  type: topology_import_service
   update_pools: false
   validation_method: none
   vendor: ''

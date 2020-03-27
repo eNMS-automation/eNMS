@@ -37,7 +37,7 @@ class TopologyImportService(Service):
         return {"success": True}
 
     def query_netbox(self):
-        nb = netbox_api(self.netbox_address, self.netbox_token)
+        nb = netbox_api(self.netbox_address, app.get_password(self.netbox_token))
         for device in nb.dcim.devices.all():
             device_ip = device.primary_ip4 or device.primary_ip6
             db.factory(
@@ -89,7 +89,7 @@ class TopologyImportService(Service):
     def query_librenms(self):
         devices = http_get(
             f"{self.librenms_address}/api/v0/devices",
-            headers={"X-Auth-Token": self.librenms_token},
+            headers={"X-Auth-Token": app.get_password(self.librenms_token)},
         ).json()["devices"]
         for device in devices:
             db.factory(

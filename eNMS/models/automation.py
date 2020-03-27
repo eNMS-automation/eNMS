@@ -1054,7 +1054,7 @@ class Run(AbstractBase):
             port=device.port,
             username=username,
             password=password,
-            secret=device.enable_password,
+            secret=app.get_password(device.enable_password),
             fast_cli=self.fast_cli,
             timeout=self.timeout,
             global_delay_factor=self.global_delay_factor,

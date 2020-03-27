@@ -47,9 +47,9 @@ class InventoryController(BaseController):
             cmd.extend(f"telnet {address}".split())
         elif "authentication" in kwargs:
             login, pwd = (
-                (device.username, device.password)
+                (device.username, self.get_password(device.password))
                 if kwargs["credentials"] == "device"
-                else (current_user.name, current_user.password)
+                else (current_user.name, self.get_password(current_user.password))
                 if kwargs["credentials"] == "user"
                 else (kwargs["username"], kwargs["password"])
             )
@@ -77,9 +77,9 @@ class InventoryController(BaseController):
     def handoffssh(self, id, **kwargs):
         device = db.fetch("device", id=id)
         credentials = (
-            (device.username, device.password)
+            (device.username, self.get_password(device.password))
             if kwargs["credentials"] == "device"
-            else (current_user.name, current_user.password)
+            else (current_user.name, self.get_password(current_user.password))
             if kwargs["credentials"] == "user"
             else (kwargs["username"], kwargs["password"])
         )

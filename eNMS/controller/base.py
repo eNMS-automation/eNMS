@@ -101,6 +101,13 @@ class BaseController:
         else:
             self.encrypt, self.decrypt = b64encode, b64decode
 
+    def get_password(self, password):
+        if not password:
+            return
+        if self.fernet_encryption and isinstance(password, str):
+            password = str.encode(password)
+        return str(self.decrypt(password), "utf-8")
+
     def configure_database(self):
         self.init_services()
         db.base.metadata.create_all(bind=db.engine)

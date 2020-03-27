@@ -44,7 +44,9 @@ class RestCallService(Service):
         }
         kwargs["verify"] = run.verify_ssl_certificate
         if self.username:
-            kwargs["auth"] = HTTPBasicAuth(self.username, self.password)
+            kwargs["auth"] = HTTPBasicAuth(
+                self.username, app.get_password(self.password)
+            )
         if run.call_type in ("POST", "PUT", "PATCH"):
             kwargs["data"] = dumps(run.sub(run.payload, locals()))
         call = getattr(app.request_session, run.call_type.lower())

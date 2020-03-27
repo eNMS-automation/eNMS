@@ -159,7 +159,7 @@ class Server(Flask):
             user = db.fetch("user", name=username)
             hash = app.settings["security"]["hash_user_passwords"]
             verify = argon2.verify if hash else str.__eq__
-            return verify(password, user.password)
+            return verify(password, app.get_password(user.password))
 
         @self.auth.get_password
         def get_password(username):

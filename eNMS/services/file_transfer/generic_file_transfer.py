@@ -5,6 +5,7 @@ from paramiko import SSHClient, AutoAddPolicy
 from sqlalchemy import Boolean, ForeignKey, Integer
 from wtforms.validators import InputRequired
 
+from eNMS import app
 from eNMS.database import db
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import (
@@ -47,7 +48,7 @@ class GenericFileTransferService(Service):
         ssh_client.connect(
             device.ip_address,
             username=device.username,
-            password=device.password,
+            password=app.get_password(device.password),
             look_for_keys=run.look_for_keys,
         )
         if run.source_file_includes_globbing:

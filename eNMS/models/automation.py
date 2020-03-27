@@ -833,10 +833,10 @@ class Run(AbstractBase):
 
     def get_credentials(self, device):
         if self.credentials == "device":
-            return device.username, device.password
+            return device.username, app.get_password(device.password)
         elif self.credentials == "user":
             user = db.fetch("user", name=self.creator)
-            return user.name, user.password
+            return user.name, app.get_password(user.password)
         else:
             return (
                 self.sub(self.service.custom_username, locals()),

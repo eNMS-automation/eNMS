@@ -33,7 +33,11 @@ class AdministrationController(BaseController):
             user = db.fetch("user", allow_none=True, name=name)
             hash = self.settings["security"]["hash_user_passwords"]
             verify = argon2.verify if hash else str.__eq__
-            return user if user and verify(password, user.password) else False
+            return (
+                user
+                if user and verify(password, self.get_password(user.password))
+                else False
+            )
         elif kwargs["authentication_method"] == "LDAP Domain":
             with Connection(
                 self.ldap_client,

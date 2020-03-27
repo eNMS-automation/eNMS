@@ -969,7 +969,7 @@ class Run(AbstractBase):
 
     @staticmethod
     def _import(module, *args, **kwargs):
-        if module in ("os", "subprocess", "sys"):
+        if module in app.settings["security"]["forbidden_python_libraries"]:
             raise ImportError(f"Module '{module}' is restricted.")
         return importlib_import(module, *args, **kwargs)
 

@@ -19,7 +19,13 @@
     }
   },
   "security": {
-    "hash_user_passwords": true
+    "hash_user_passwords": true,
+    "forbidden_python_libraries": [
+      "eNMS",
+      "os",
+      "subprocess",
+      "sys"
+    ]
   },
   "cluster": {
     "active": false,

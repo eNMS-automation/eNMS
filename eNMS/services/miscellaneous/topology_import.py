@@ -79,7 +79,7 @@ class TopologyImportService(Service):
             link = http_get(
                 f"{self.opennms_address}/nodes/{device}/ipinterfaces",
                 headers={"Accept": "application/json"},
-                auth=(self.opennms_login, self.opennms_password),
+                auth=(self.opennms_login, app.get_password(self.opennms_password)),
             ).json()
             for interface in link["ipInterface"]:
                 if interface["snmpPrimary"] == "P":

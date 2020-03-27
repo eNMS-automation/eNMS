@@ -3,6 +3,7 @@ from collections import defaultdict
 from copy import deepcopy
 from datetime import datetime
 from functools import partial
+from importlib import __import__ as importlib_import
 from io import BytesIO
 from json import dumps, loads
 from json.decoder import JSONDecodeError
@@ -966,9 +967,16 @@ class Run(AbstractBase):
 
         return recursive_search(self)
 
+    @staticmethod
+    def _import(module, *args, **kwargs):
+        if module in ("os", "subprocess", "sys"):
+            raise ImportError(f"Module '{module}' is restricted.")
+        return importlib_import(module, *args, **kwargs)
+
     def global_variables(_self, **locals):  # noqa: N805
         payload, device = locals.get("payload", {}), locals.get("device")
         variables = {
+            "__builtins__": {**builtins, "__import__": _self._import},
             "settings": app.settings,
             "devices": _self.devices,
             "get_var": partial(_self.get_var, payload),

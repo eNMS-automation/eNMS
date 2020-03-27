@@ -33,7 +33,6 @@ class PythonSnippetService(Service):
                 raise SystemExit()
 
         globals = {
-            "__builtins__": __builtins__,
             "results": results,
             "save_result": save_result,
             **run.global_variables(**locals()),

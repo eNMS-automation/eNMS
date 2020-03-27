@@ -587,6 +587,10 @@
   subtype: success, type: workflow_edge, workflow: 'Regression Workflow M: Unix command
     & shell, ping, jump server'}
 - {destination: '[Shared] End', label: success, source: '[Regression Workflow M: Unix
-    command & shell, ping, jump server] Unix shell: ping device from server 2', subtype: success,
+    command & shell, ping, jump server] Ping Washington', subtype: success, type: workflow_edge,
+  workflow: 'Regression Workflow M: Unix command & shell, ping, jump server'}
+- {destination: '[Regression Workflow M: Unix command & shell, ping, jump server]
+    Ping Washington', label: failure, source: '[Regression Workflow M: Unix command
+    & shell, ping, jump server] Unix shell: ping device from server 2', subtype: failure,
   type: workflow_edge, workflow: 'Regression Workflow M: Unix command & shell, ping,
     jump server'}

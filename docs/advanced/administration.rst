@@ -18,6 +18,28 @@ This changelog contains:
 - All runs: what services / workflows were run, when, who started them.
 - Various administration logs such as database migration, parameters update, etc.
 
+Custom properties
+-----------------
+
+Custom Properties
+-----------------
+
+You can extend the properties of a device with your own properties. Custom properties are read
+from the ``properties.json`` file in the ``setup`` folder.
+with the following variables:
+
+  - ``type`` (**mandatory**): ``string``, ``integer``, ``float``, and ``boolean``
+  - ``pretty_name`` (**optional**): Name of the property in the UI.
+  - ``default`` (**optional**): Default value.
+  - ``add_to_dashboard`` (**optional**): Whether the property should appear in the dashboard or not.
+  - ``private`` (**optional**): If ``true``, the value is considered sensitive: it will not be displayed in the UI,
+    will be encrypted in the database and stored in the Vault if a Vault has been set up.
+  - ``is_address`` (**optional**): Set to ``true`` if you want to property to be usable by GoTTY to
+    connect to network devices (e.g hostnames, IP adddresses, etc)
+
+.. note:: Custom properties must be defined once and for all before eNMS starts for the time,
+  as they are part of the database schema.
+
 Credentials
 -----------
 

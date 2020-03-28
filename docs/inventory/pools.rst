@@ -7,8 +7,7 @@ but also to target an automation task to a specific subset of devices.
 A pool is defined as a combination of values for the properties of an object (in the inventory).
 For each value, you can decide whether the match is based on inclusion, equality, or regular expression.
 
-If the properties of an inventory object matches the pool properties (``any of them``, or ``all of them``
-depending on your needs), the object will belong to the pool.
+If the properties of an inventory object matches the pool properties, the object will be added to the pool.
 
 Pool Management
 ---------------

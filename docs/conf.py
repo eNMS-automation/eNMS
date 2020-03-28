@@ -13,7 +13,7 @@ master_doc = "index"
 
 # General information about the project.
 project = u"eNMS"
-copyright = u"Antoine Fourmy"
+copyright = u"eNMS Automation"
 
 # The short X.Y version.
 version = "3.17.2"

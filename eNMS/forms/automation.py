@@ -219,7 +219,7 @@ class NetmikoForm(ConnectionForm):
     jump_username = StringField(label="Device username", substitution=True)
     jump_password = PasswordField(label="Device password", substitution=True)
     exit_command = StringField(
-        label="Command to exit device back to jump server",
+        label="Command to exit device back to original device",
         default="exit",
         substitution=True,
     )
@@ -233,7 +233,7 @@ class NetmikoForm(ConnectionForm):
         "Expected prompt after login", default="admin.*$", substitution=True
     )
     groups = {
-        "Jump Server Parameters": {
+        "Jump on connect Parameters": {
             "commands": [
                 "jump_on_connect",
                 "jump_command",

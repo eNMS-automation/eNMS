@@ -577,26 +577,32 @@
     Workflow L: superworkflow'}
 - {destination: '[Shared] End', label: success, source: '[Shared] Subservice', subtype: success,
   type: workflow_edge, workflow: 'Regression Workflow L: superworkflow'}
-- {destination: '[Regression Workflow M: Unix command & shell, ping, jump server]
-    Unix command: ps -ef | grep test', label: success, source: '[Shared] Start', subtype: success,
-  type: workflow_edge, workflow: 'Regression Workflow M: Unix command & shell, ping,
-    jump server'}
-- {destination: '[Regression Workflow M: Unix command & shell, ping, jump server]
-    Unix shell: ping device from server 2', label: success, source: '[Regression Workflow
-    M: Unix command & shell, ping, jump server] Unix command: ps -ef | grep test',
-  subtype: success, type: workflow_edge, workflow: 'Regression Workflow M: Unix command
-    & shell, ping, jump server'}
-- {destination: '[Shared] End', label: success, source: '[Regression Workflow M: Unix
-    command & shell, ping, jump server] Ping Washington', subtype: success, type: workflow_edge,
-  workflow: 'Regression Workflow M: Unix command & shell, ping, jump server'}
-- {destination: '[Regression Workflow M: Unix command & shell, ping, jump server]
-    Ping Washington', label: success, source: '[Regression Workflow M: Unix command
-    & shell, ping, jump server] Unix shell: ping device from server 2', subtype: success,
-  type: workflow_edge, workflow: 'Regression Workflow M: Unix command & shell, ping,
-    jump server'}
+- {destination: '[Regression Workflow M: Unix command & shell, ping, - jump on connect
+    - mechanism] Unix command: ps -ef | grep test', label: success, source: '[Shared]
+    Start', subtype: success, type: workflow_edge, workflow: 'Regression Workflow
+    M: Unix command & shell, ping, - jump on connect - mechanism'}
+- {destination: '[Regression Workflow M: Unix command & shell, ping, - jump on connect
+    - mechanism] Unix shell: ping device from server 2', label: success, source: '[Regression
+    Workflow M: Unix command & shell, ping, - jump on connect - mechanism] Unix command:
+    ps -ef | grep test', subtype: success, type: workflow_edge, workflow: 'Regression
+    Workflow M: Unix command & shell, ping, - jump on connect - mechanism'}
+- {destination: '[Regression Workflow M: Unix command & shell, ping, - jump on connect
+    - mechanism] Ping Washington', label: success, source: '[Regression Workflow M:
+    Unix command & shell, ping, - jump on connect - mechanism] Unix shell: ping device
+    from server 2', subtype: success, type: workflow_edge, workflow: 'Regression Workflow
+    M: Unix command & shell, ping, - jump on connect - mechanism'}
 - {destination: '[Regression Workflow N: Topology Import (netbox, librenms, opennms)]
     OpenNMS Import', label: success, source: '[Shared] Start', subtype: success, type: workflow_edge,
   workflow: 'Regression Workflow N: Topology Import (netbox, librenms, opennms)'}
 - {destination: '[Shared] End', label: success, source: '[Regression Workflow N: Topology
     Import (netbox, librenms, opennms)] OpenNMS Import', subtype: success, type: workflow_edge,
   workflow: 'Regression Workflow N: Topology Import (netbox, librenms, opennms)'}
+- {destination: '[Regression Workflow M: Unix command & shell, ping, - jump on connect
+    - mechanism] Validation: jump on server 2 from Washington', label: success, source: '[Regression
+    Workflow M: Unix command & shell, ping, - jump on connect - mechanism] Ping Washington',
+  subtype: success, type: workflow_edge, workflow: 'Regression Workflow M: Unix command
+    & shell, ping, - jump on connect - mechanism'}
+- {destination: '[Shared] End', label: success, source: '[Regression Workflow M: Unix
+    command & shell, ping, - jump on connect - mechanism] Validation: jump on server
+    2 from Washington', subtype: success, type: workflow_edge, workflow: 'Regression
+    Workflow M: Unix command & shell, ping, - jump on connect - mechanism'}

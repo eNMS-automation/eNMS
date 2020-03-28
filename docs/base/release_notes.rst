@@ -60,7 +60,7 @@ including using a syslog handler with custom address facility.
 all non-JSON compliant types are now automatically converted to a string when saving the results in the
 database, and a warning is issue in the service logs.
 - Add superworkflow mechanism
-- Add jump server support
+- Add jump on connect support
 - Add log deletion support from CLI interface
 - Forbid import of "os", "subprocess" and "sys" in a python code area in service panel
 (snippet, pre/postprocessing, etc)

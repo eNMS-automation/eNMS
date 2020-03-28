@@ -1162,7 +1162,7 @@ class Run(AbstractBase):
                     self.sub(self.expect_username_prompt, locals()),
                     self.sub(self.jump_username, locals()),
                     self.sub(self.expect_password_prompt, locals()),
-                    self.sub(self.jump_password, locals()),
+                    self.sub(app.get_password(self.jump_password), locals()),
                     self.sub(self.expect_prompt, locals()),
                 ],
             )

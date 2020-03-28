@@ -6,27 +6,6 @@
     "documentation_url": "https://enms.readthedocs.io/en/latest/",
     "git_repository": "git@github.com:afourmy/gitpython-test.git"
   },
-  "logging": {
-    "log_level": "debug",
-    "loggers": {
-      "requests": "info",
-      "urllib3": "info"
-    },
-    "security": {
-      "syslog": false,
-      "address": "/dev/log",
-      "facility": "local0"
-    }
-  },
-  "security": {
-    "hash_user_passwords": true,
-    "forbidden_python_libraries": [
-      "eNMS",
-      "os",
-      "subprocess",
-      "sys"
-    ]
-  },
   "cluster": {
     "active": false,
     "id": true,
@@ -41,23 +20,24 @@
     "small_string_length": 255,
     "large_string_length": 32768
   },
-  "ssh": {
-    "port_redirection": false,
-    "bypass_key_prompt": true,
-    "port": -1,
-    "start_port": 9000,
-    "end_port": 9100,
-    "enabled": {
-      "web": true,
-      "desktop": true
-    }
-  },
   "ldap": {
     "active": false,
     "server": "ldap://domain.ad.company.com",
     "userdn": "domain.ad.company.com",
     "basedn": "DC=domain,DC=ad,DC=company,DC=com",
     "admin_group": "eNMS.Users,network.Admins"
+  },
+  "logging": {
+    "log_level": "debug",
+    "loggers": {
+      "requests": "info",
+      "urllib3": "info"
+    },
+    "security": {
+      "syslog": false,
+      "address": "/dev/log",
+      "facility": "local0"
+    }
   },
   "mail": {
     "server": "smtp.googlemail.com",
@@ -90,8 +70,28 @@
       "backoff_factor": 0.5
     }
   },
+  "security": {
+    "hash_user_passwords": true,
+    "forbidden_python_libraries": [
+      "eNMS",
+      "os",
+      "subprocess",
+      "sys"
+    ]
+  },
   "slack": {
     "channel": ""
+  },
+  "ssh": {
+    "port_redirection": false,
+    "bypass_key_prompt": true,
+    "port": -1,
+    "start_port": 9000,
+    "end_port": 9100,
+    "enabled": {
+      "web": true,
+      "desktop": true
+    }
   },
   "syslog": {
     "active": false,

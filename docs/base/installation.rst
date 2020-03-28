@@ -65,7 +65,7 @@ This mechanism is disabled by default. To activate it, you need to:
 Settings
 -------------
 
-The settings is divided into:
+The settings are divided into:
 
 - Environment variables for all sensitive data (passwords, tokens, keys). Environment variables are exported
   from Unix with the ``export`` keyword: ``export VARIABLE_NAME=value``.
@@ -88,23 +88,14 @@ Section ``app``
 - ``git_repository`` (default: ``""``) Git is used as a version control system for device configurations: this variable
   is the address of the remote git repository where eNMS will push all device configurations.
 
-**Environment variables**
-
-- ``SECRET_KEY``: Secret key of the Flask application.
-
-Section ``logging``
+Section ``cluster``
 *******************
 
-- ``log_level`` (default: ``"debug"``) Gunicorn log level.
-- ``loggers`` (default: ``{"requests": "info", "urllib3": "info"}``) Change the default log levels of eNMS loggers. By default,
-eNMS will set the requests and urllib3 library to a log level of "info".
-
-Section ``security``
-********************
-
-- ``hash_user_passwords`` (default: ``true``) All user passwords are automatically hashed by default.
-- ``forbidden_python_libraries`` (default: ``["eNMS","os","subprocess","sys"]``) There are a number of places in the UI where the user
-is allowed to run custom python scripts. You can configure which python libraries cannot be imported for security reasons.
+- ``active`` (default: ``false``)
+- ``id`` (default: ``true``)
+- ``scan_subnet`` (default: ``"192.168.105.0/24"``)
+- ``scan_protocol`` (default: ``"http"``)
+- ``scan_timeout`` (default: ``0.05``)
 
 Section ``database``
 ********************
@@ -117,23 +108,6 @@ Section ``database``
 - ``max_overflow`` (default: ``10``) Maximum overflow size of the connection pool.
 - ``small_string_length`` (default: ``255``) Length of a small string in the database.
 - ``small_string_length`` (default: ``32768``) Length of a large string in the database.
-
-Section ``ssh``
-*****************
-
-- ``port_redirection`` (default: ``false``)
-- ``bypass_key_prompt`` (default: ``true``)
-- ``start_port`` (default: ``9000``)
-- ``end_port`` (default: ``91000``)
-
-Section ``cluster``
-*******************
-
-- ``active`` (default: ``false``)
-- ``id`` (default: ``true``)
-- ``scan_subnet`` (default: ``"192.168.105.0/24"``)
-- ``scan_protocol`` (default: ``"http"``)
-- ``scan_timeout`` (default: ``0.05``)
 
 Section ``ldap``
 ****************
@@ -155,6 +129,13 @@ LDAP/AD using the `ldap3` library, and if successful, that user gets added to eN
   due to password aging, that user needs to login to eNMS in order for the updated credentials to be replaced in Vault storage.
   In the event that services are already scheduled with User Credentials, these might fail if the credentials
   are not updated in eNMS.
+
+Section ``logging``
+*******************
+
+- ``log_level`` (default: ``"debug"``) Gunicorn log level.
+- ``loggers`` (default: ``{"requests": "info", "urllib3": "info"}``) Change the default log levels of eNMS loggers. By default,
+eNMS will set the requests and urllib3 library to a log level of "info".
 
 Section ``mail``
 ****************
@@ -179,7 +160,7 @@ Section ``paths``
 - ``custom_services`` (default: ``""``) Path to a folder that contains :ref:`Custom Services`.
 - ``playbooks`` (default: ``""``)
 
-Section ``Requests``
+Section ``requests``
 ********************
 
 - Pool
@@ -195,26 +176,41 @@ Section ``Requests``
     - ``connect`` (default: ``2``)
     - ``backoff_factor`` (default: ``0.5``)
 
-Section ``Slack``
+Section ``security``
+********************
+
+- ``hash_user_passwords`` (default: ``true``) All user passwords are automatically hashed by default.
+- ``forbidden_python_libraries`` (default: ``["eNMS","os","subprocess","sys"]``) There are a number of places in the UI where the user
+is allowed to run custom python scripts. You can configure which python libraries cannot be imported for security reasons.
+
+Section ``slack``
 *****************
 
 - ``channel`` (default: ``""``)
 
-Section ``Syslog``
+Section ``ssh``
+***************
+
+- ``port_redirection`` (default: ``false``)
+- ``bypass_key_prompt`` (default: ``true``)
+- ``start_port`` (default: ``9000``)
+- ``end_port`` (default: ``91000``)
+
+Section ``syslog``
 ******************
 
 - ``active`` (default: ``false``)
 - ``address`` (default: ``"0.0.0.0"``)
 - ``port`` (default: ``514``)
 
-Section ``TACACS``
+Section ``tacacs``
 ******************
 
 - ``active`` (default: ``false``)
 - ``address`` (default: ``""``)
 - ``port`` (default: ``514``)
 
-Section ``Vault``
+Section ``vault``
 *****************
 
 For eNMS to use a Vault to store all sensitive data (user and network credentials), you must set
@@ -236,7 +232,7 @@ the ``active`` variable to ``true``, provide an address and export
 - ``UNSEAL_VAULT_KEY4``
 - ``UNSEAL_VAULT_KEY5``
 
-Section ``View``
+Section ``view``
 ****************
 
 - ``longitude`` (default: ``-96.0``)
@@ -250,7 +246,7 @@ Private settings
 
 ::
 
-
-  - MAIL_PASSWORD=eNMS-user
+  - SECRET_KEY=secret_key
+  - MAIL_PASSWORD=mail_password
   - TACACS_PASSWORD=tacacs_password
-  - SLACK_TOKEN=SLACK_TOKEN
+  - SLACK_TOKEN=slack_token

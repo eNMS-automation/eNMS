@@ -9,8 +9,7 @@ A service is a Python script that performs an action. A service is defined by:
 
 eNMS comes with a number of "default" services based on network automation frameworks such as
 ``netmiko``, ``napalm`` and ``ansible``, but you are free to create your own services.
-Each service will return a python dictionary as a result. This dictionary will always contains
-a ``success`` boolean value that indicates whether it ran successfully or not.
+Each service must return a python dictionary as a result.
 
 All services are displayed in :guilabel:`Automation / Services`, where you can create new services and
 edit, duplicate, delete, and run existing ones.
@@ -36,9 +35,10 @@ Main Parameters
 
 - ``Name`` (**mandatory**) Must be unique.
 - ``Description`` / ``Vendor`` / ``Operating System`` Useful for filtering services in the table.
-- ``Number of retries`` (default: ``0``) Number of retry attempts when the service fails (per-device if the
-  service has device targets).
-- ``Time between retries (in seconds)`` (default: ``10``) Number of seconds between each attempt.
+- ``Number of retries`` (default: ``0``) Number of retry attempts when the service fails (if the service has device targets, this
+  is the number of retries for each device).
+- ``Time between retries (in seconds)`` (default: ``10``) Number of seconds to wait between each attempt.
+- ``Initial Payload`` User-defined dictionary that can be used anywhere in the service.
 
 .. note:: The retry will affect only the devices for which the service failed. Let's consider a service configured
 to run on 3 devices D1, D2, and D3 with 2 "retries". If it fails on D2 and D3 when the service runs for the first time,
@@ -50,17 +50,21 @@ Workflow Parameters
 
 This section contains the parameters that apply **when the service runs inside a workflow only**.
 
-- ``Skip this Service Regardless`` Always skip the service
-- ``Skip Service if True`` This fields expect a python code that will evaluates to either ``True``
-  or ``False``. The service will be skipped or not depending the result.
+- ``Preprocessing`` Section where you can write a python script that will run before the service is executed. If the service has
+  device targets, the code will be executed for each device independently, and a ``device`` global variable is available.
+- ``Skip`` If ticked, the service is skipped.
+- ``Skip Query`` This fields expect a python code that will evaluates to either ``True``
+  or ``False``. The service will be skipped if ``True`` and will run otherwise.
+- ``Skip Value`` Defines the success value of the service when skipped (in a workflow, the success value will define whether to follow the
+  success path (success edge) or the failure path (failure edge).
 - ``Maximum number of runs`` (default: ``1``) Number of time a service is allowed to run in a workflow (de
 - ``Waiting time (in seconds)`` (default: ``0``) Number of seconds to wait after the service is done running.
 
 Section ``Specific``
 ********************
 
-This section contains all parameters that are specific to the service type. For the "Netmiko Configuration"
-service that uses Netmiko to push a configuration, you will find Netmiko parameters (delay factor,
+This section contains all parameters that are specific to the service type. For instance, the "Netmiko Configuration"
+service that uses Netmiko to push a configuration will display Netmiko parameters (delay factor,
 timeout, etc) and a field to enter the configuration that you want to push.
 The content of this section is described for each service in the ``Default Services`` section of the docs.
 
@@ -73,6 +77,8 @@ Devices
 Most services are designed to run on devices from the inventory. There are three properties for selecting devices.
 The list of targets will be the union of all devices coming from these properties.
 
+- ``Run Method`` Defines whether the service should run once, or if it should run once per device. Most default services are designed
+  to run once per device.
 - ``Devices`` Direct selection by device names
 - ``Pools`` Direct selection from pools. The set of all devices from all selected pools will be used.
 - ``Device query`` and ``Query Property Type`` Programmatic selection with a python query

@@ -7,7 +7,7 @@ but also to target an automation task to a specific subset of devices.
 A pool is defined as a combination of values for the properties of an object (in the inventory).
 For each value, you can decide whether the match is based on inclusion, equality, or regular expression.
 
-If the properties of an inventory object matches the pool properties, the object will be added to the pool.
+If the properties of an inventory object matches the pool properties, the object will be automatically added to the pool.
 
 Pool Management
 ---------------
@@ -19,13 +19,11 @@ edited to manually select devices and links instead of using criteria based on p
    :alt: Pool Management
    :align: center
 
-Additionally, a logical view force-based layout of a pool is available using the ``Internal View`` button.
+Additionally, a logical view of a pool is available using the ``Internal View`` button.
 
 .. image:: /_static/inventory/pools/pool_visualization.png
    :alt: Pool Internal View
    :align: center
-
-.. note:: When you add a new device A whose properties are matched by pool B, A is automatically added to B.
 
 A first example
 ---------------

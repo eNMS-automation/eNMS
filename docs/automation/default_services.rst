@@ -167,7 +167,6 @@ An option allows inventory devices to be selected, such that the Ansible Playboo
 Configuration parameters for creating this service instance:
 
 - All Validation parameters (see above)
-- ``Has Device Targets`` If checked, indicates that the selected inventory devices should be passed to the playbook as its inventory using -i. Alternatively, if not checked, the ansible playbook can reference its own inventory internally using host: inventory_group and by providing an alternative inventory
 - ``playbook_path`` path and filename to the Ansible Playbook. For example, if the playbooks subdirectory is located inside the eNMS project directory:  playbooks/juniper_get_facts.yml
 - ``arguments`` ansible-playbook command line options, which are documented here: (https://docs.ansible.com/ansible/latest/cli/ansible-playbook.html)
 - ``options`` Additional --extra-vars to be passed to the playbook using the syntax {'key1':value1, 'key2': value2}.  All inventory properties are automatically passed to the playbook using --extra-vars (if pass_device_properties is selected below). These options are appended.
@@ -184,7 +183,6 @@ The output can be validated with a command / pattern mechanism, like the ``Netmi
 Configuration parameters for creating this service instance:
 
 - All Validation parameters (see above)
-- ``Has Device Targets`` If checked, indicates that the selected inventory devices will be made available for variable substitution in the URL and payload fields. For example, URL could be: /rest/get/{{device.ip_address}}
 - ``Type of call`` REST type operation to be performed: GET, POST, PUT, DELETE
 - ``URL`` URL to make the REST connection to
 - ``Payload`` The data to be sent in POST Or PUT operation
@@ -253,7 +251,6 @@ In the code, you can use the following variables / functions :
 Additionally, you can use all the variables and functions described in the "Advanced / Python code" section of the docs.
 
 Configuration parameters for creating this service instance:
-- ``Has Device Targets`` If checked, indicates that the selected inventory devices will be made available for variable substitution in the URL and payload fields. For example, URL could be: /rest/get/{{device.ip_address}}
 - ``Source code``: source code of the python script to run.
 
 Payload Extraction Service
@@ -262,7 +259,6 @@ Payload Extraction Service
 Extract some data from the payload with a python query, and optionally post-process the result with a regular expression or a TextFSM template.
 
 Configuration parameters for creating this service instance:
-- ``Has Device Targets`` If checked, indicates that the selected inventory devices will be made available for variable substitution in the URL and payload fields. For example, URL could be: /rest/get/{{device.ip_address}}
 - ``Variable1``: name of the resulting variable in the results.
 - ``Python Query1``: a python query to retrieve data from the payload.
 - ``Match Type1``: choose the type of post-processing: no post-processing, regular expression, or TextFSM template.
@@ -276,5 +272,4 @@ Extract some data from the payload, and validate it against a string or a dictio
 
 Configuration parameters for creating this service instance:
 - All Validation parameters (see above)
-- ``Has Device Targets`` If checked, indicates that the selected inventory devices will be made available for variable substitution in the URL and payload fields. For example, URL could be: /rest/get/{{device.ip_address}}
 - ``Python Query``: a python query to retrieve data from the payload.

@@ -28,16 +28,15 @@ First steps
 Production mode
 ---------------
 
-To start eNMS in production mode, you must change the value of the  "config_mode" in the settings.json file.
-In production mode, the secret key is not automatically set to a default value in case it is missing.
-Therefore, you must configure it yourself:
+To start eNMS in production mode, you must change the value of the  "config_mode" in the settings.json file, and set the secret
+key.
 
 ::
 
  # set the SECRET_KEY environment variable
  export SECRET_KEY=value-of-your-secret-key
 
-All credentials should be stored in a Hashicorp Vault: the settings variable ``active``
+All credentials should be stored in a Hashicorp Vault: the settings variable ``active`` under the ``vault`` section of the settings
 tells eNMS that a Vault has been setup and can be used.
 Follow the manufacturer's instructions and options for how to setup a Hashicorp Vault.
 
@@ -61,15 +60,6 @@ This mechanism is disabled by default. To activate it, you need to:
  export UNSEAL_VAULT_KEY2=key2
  etc
 
-You also have to tell eNMS the address of your database by setting the "DATABASE_URL" environment variable.
-
-::
-
- # set the DATABASE_URL environment variable
- export DATABASE_URL=database-address
-
-In case this environment variable is not set, eNMS will default to using a SQLite database.
-
 .. _Settings:
 
 Settings
@@ -77,7 +67,7 @@ Settings
 
 The settings is divided into:
 
-- Environment variables for all sensitive data (passwords, tokens, keys). Environment are export
+- Environment variables for all sensitive data (passwords, tokens, keys). Environment variables are exported
   from Unix with the ``export`` keyword: ``export VARIABLE_NAME=value``.
 - Public variables defined in the ``settings.json`` file, and later modifiable from the administration
   panel.
@@ -95,13 +85,26 @@ Section ``app``
   and workflows as an example of what you can do.
 - ``documentation_url`` (default: ``"https://enms.readthedocs.io/en/latest/"``) Can be changed if you want to host your
   own version of the documentation locally. Points to the online documentation by default.
-- ``log_level`` (default: ``"debug"``) Gunicorn log level.
 - ``git_repository`` (default: ``""``) Git is used as a version control system for device configurations: this variable
   is the address of the remote git repository where eNMS will push all device configurations.
 
 **Environment variables**
 
 - ``SECRET_KEY``: Secret key of the Flask application.
+
+Section ``logging``
+*******************
+
+- ``log_level`` (default: ``"debug"``) Gunicorn log level.
+- ``loggers`` (default: ``{"requests": "info", "urllib3": "info"}``) Change the default log levels of eNMS loggers. By default,
+eNMS will set the requests and urllib3 library to a log level of "info".
+
+Section ``security``
+********************
+
+- ``hash_user_passwords`` (default: ``true``) All user passwords are automatically hashed by default.
+- ``forbidden_python_libraries`` (default: ``["eNMS","os","subprocess","sys"]``) There are a number of places in the UI where the user
+is allowed to run custom python scripts. You can configure which python libraries cannot be imported for security reasons.
 
 Section ``database``
 ********************
@@ -115,7 +118,7 @@ Section ``database``
 - ``small_string_length`` (default: ``255``) Length of a small string in the database.
 - ``small_string_length`` (default: ``32768``) Length of a large string in the database.
 
-Section ``gotty``
+Section ``ssh``
 *****************
 
 - ``port_redirection`` (default: ``false``)

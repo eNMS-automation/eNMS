@@ -210,7 +210,7 @@ class NetmikoForm(ConnectionForm):
         ),
         default=1.0,
     )
-    use_jumpserver = BooleanField("Use Jump Server", default=False)
+    jump_on_connect = BooleanField("Jump on remote device on connect", default=False)
     jump_command = StringField(
         label="Command that jumps to device",
         default="ssh jump_server_IP",
@@ -235,7 +235,7 @@ class NetmikoForm(ConnectionForm):
     groups = {
         "Jump Server Parameters": {
             "commands": [
-                "use_jumpserver",
+                "jump_on_connect",
                 "jump_command",
                 "expect_username_prompt",
                 "jump_username",

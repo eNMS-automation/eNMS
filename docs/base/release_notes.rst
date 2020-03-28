@@ -85,6 +85,9 @@ Column -> db.Column
 SmallString -> db.SmallString
 LargeString -> db.LargeString
 
+Rename jump server variable:
+use_jumpserver -> jump_on_connect
+
 Version 3.20.1
 --------------
 

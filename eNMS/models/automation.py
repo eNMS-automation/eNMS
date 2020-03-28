@@ -1149,8 +1149,8 @@ class Run(AbstractBase):
                 "error", f"Error while closing {library} connection ({exc})", device
             )
 
-    def enter_jump_server(self, connection, device):
-        if not getattr(self, "use_jumpserver", False):
+    def enter_remote_device(self, connection, device):
+        if not getattr(self, "jump_on_connect", False):
             return
         connection.find_prompt()
         prompt = connection.base_prompt
@@ -1181,8 +1181,8 @@ class Run(AbstractBase):
             )
         return prompt
 
-    def exit_jump_server(self, connection, prompt, device):
-        if not getattr(self, "use_jumpserver", False):
+    def exit_remote_device(self, connection, prompt, device):
+        if not getattr(self, "jump_on_connect", False):
             return
         exit_command = self.sub(self.exit_command, locals())
         self.log("info", f"Exit jump server with '{exit_command}'", device)

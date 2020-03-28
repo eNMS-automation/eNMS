@@ -28,7 +28,7 @@ class NetmikoPromptsService(ConnectionService):
     timeout = db.Column(Integer, default=10.0)
     delay_factor = db.Column(Float, default=1.0)
     global_delay_factor = db.Column(Float, default=1.0)
-    use_jumpserver = db.Column(Boolean, default=False)
+    jump_on_connect = db.Column(Boolean, default=False)
     jump_command = db.Column(db.SmallString)
     jump_username = db.Column(db.SmallString)
     jump_password = db.Column(db.SmallString)
@@ -48,7 +48,7 @@ class NetmikoPromptsService(ConnectionService):
         commands, confirmation = [], None
         results = {"commands": commands}
         try:
-            prompt = run.enter_jump_server(netmiko_connection, device)
+            prompt = run.enter_remote_device(netmiko_connection, device)
             for send_string, expect_string in zip(send_strings, expect_strings):
                 if not send_string:
                     break
@@ -67,7 +67,7 @@ class NetmikoPromptsService(ConnectionService):
                         {"success": False, "result": result, "match": confirmation}
                     )
                     return results
-            run.exit_jump_server(netmiko_connection, prompt, device)
+            run.exit_remote_device(netmiko_connection, prompt, device)
         except Exception:
             return {
                 **results,

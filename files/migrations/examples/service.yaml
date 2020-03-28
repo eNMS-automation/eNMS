@@ -679,7 +679,7 @@
   update_pools: false
   use_device_driver: true
   use_genie: false
-  use_jumpserver: false
+  jump_on_connect: false
   validation_method: text
   vendor: Arista
   waiting_time: 0
@@ -830,7 +830,7 @@
   update_pools: false
   use_device_driver: true
   use_genie: false
-  use_jumpserver: false
+  jump_on_connect: false
   validation_method: text
   vendor: Arista
   waiting_time: 0
@@ -1408,7 +1408,7 @@
   update_pools: false
   use_device_driver: true
   use_genie: false
-  use_jumpserver: false
+  jump_on_connect: false
   validation_method: text
   vendor: Arista
   waiting_time: 0
@@ -1627,7 +1627,7 @@
   update_pools: false
   use_device_driver: true
   use_genie: false
-  use_jumpserver: false
+  jump_on_connect: false
   validation_method: text
   vendor: ''
   waiting_time: 0
@@ -1707,7 +1707,7 @@
   update_pools: false
   use_device_driver: true
   use_genie: false
-  use_jumpserver: false
+  jump_on_connect: false
   validation_method: text
   vendor: ''
   waiting_time: 0
@@ -1786,7 +1786,7 @@
   type: netmiko_prompts_service
   update_pools: false
   use_device_driver: true
-  use_jumpserver: false
+  jump_on_connect: false
   validation_method: text
   vendor: ''
   waiting_time: 0
@@ -1865,7 +1865,7 @@
   type: netmiko_prompts_service
   update_pools: false
   use_device_driver: true
-  use_jumpserver: false
+  jump_on_connect: false
   validation_method: text
   vendor: ''
   waiting_time: 0
@@ -2056,7 +2056,7 @@
   update_pools: false
   use_device_driver: true
   use_genie: false
-  use_jumpserver: false
+  jump_on_connect: false
   validation_method: text
   vendor: ''
   waiting_time: 0
@@ -2134,7 +2134,7 @@
   update_pools: false
   use_device_driver: true
   use_genie: false
-  use_jumpserver: false
+  jump_on_connect: false
   validation_method: text
   vendor: ''
   waiting_time: 0
@@ -2212,7 +2212,7 @@
   update_pools: false
   use_device_driver: true
   use_genie: false
-  use_jumpserver: false
+  jump_on_connect: false
   validation_method: text
   vendor: ''
   waiting_time: 0
@@ -2790,7 +2790,7 @@
   update_pools: false
   use_device_driver: true
   use_genie: false
-  use_jumpserver: false
+  jump_on_connect: false
   validation_method: text
   vendor: ''
   waiting_time: 0
@@ -2868,7 +2868,7 @@
   update_pools: false
   use_device_driver: true
   use_genie: false
-  use_jumpserver: false
+  jump_on_connect: false
   validation_method: text
   vendor: Arista
   waiting_time: 0
@@ -2946,7 +2946,7 @@
   update_pools: false
   use_device_driver: true
   use_genie: false
-  use_jumpserver: false
+  jump_on_connect: false
   validation_method: text
   vendor: Arista
   waiting_time: 0
@@ -3024,7 +3024,7 @@
   update_pools: false
   use_device_driver: true
   use_genie: false
-  use_jumpserver: false
+  jump_on_connect: false
   validation_method: text
   vendor: Arista
   waiting_time: 0
@@ -3431,7 +3431,7 @@
   update_pools: false
   use_device_driver: true
   use_genie: false
-  use_jumpserver: false
+  jump_on_connect: false
   validation_method: text
   vendor: ''
   waiting_time: 0
@@ -4799,7 +4799,7 @@
   update_pools: false
   use_device_driver: true
   use_genie: false
-  use_jumpserver: false
+  jump_on_connect: false
   validation_method: text
   vendor: ''
   waiting_time: 0
@@ -4876,7 +4876,7 @@
   update_pools: false
   use_device_driver: true
   use_genie: false
-  use_jumpserver: false
+  jump_on_connect: false
   validation_method: none
   vendor: ''
   waiting_time: 0
@@ -5378,7 +5378,7 @@
   update_pools: false
   use_device_driver: true
   use_genie: false
-  use_jumpserver: false
+  jump_on_connect: false
   validation_method: none
   vendor: ''
   waiting_time: 0
@@ -5457,7 +5457,7 @@
   update_pools: false
   use_device_driver: true
   use_genie: false
-  use_jumpserver: false
+  jump_on_connect: false
   validation_method: none
   vendor: ''
   waiting_time: 0
@@ -5536,7 +5536,7 @@
   update_pools: false
   use_device_driver: true
   use_genie: false
-  use_jumpserver: false
+  jump_on_connect: false
   validation_method: none
   vendor: ''
   waiting_time: 0
@@ -5808,7 +5808,7 @@
   update_pools: false
   use_device_driver: true
   use_genie: false
-  use_jumpserver: false
+  jump_on_connect: false
   validation_method: text
   vendor: ''
   waiting_time: 0
@@ -6052,7 +6052,7 @@
   update_pools: false
   use_device_driver: true
   use_genie: false
-  use_jumpserver: false
+  jump_on_connect: false
   validation_method: none
   vendor: ''
   waiting_time: 0

@@ -75,8 +75,6 @@ The settings are divided into:
 Section ``app``
 ***************
 
-**Public variables**
-
 - ``address`` (default: ``""``) The address is needed when eNMS needs to provide a link back to the application,
   which is the case with GoTTY and mail notifications. When left empty, eNMS will try to guess the URL. This might
   not work all the time depending on your environment (nginx configuration, proxy, ...)

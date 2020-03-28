@@ -7,11 +7,16 @@ The network topology can be created in two different ways:
 From the UI
 -----------
 
-By filling a form in :guilabel:`Inventory / Devices` and :guilabel:`Inventory / Links`.
+By filling a form in :guilabel:`Inventory / Devices` and :guilabel:`Inventory / Links` ("+" button)
+
+.. image:: /_static/inventory/creation/creation_form.png
+   :alt: Network Creation
+   :align: center
 
 .. note:: Some properties are mandatory:
- - Name: objects are uniquely defined by their name.
- - Source and destination: a link needs a source and a destination to be created.
+
+  - Name: objects are uniquely defined by their name.
+  - Source and destination: a link needs a source and a destination to be created.
 
 .. note:: In order to visualize the network topology on a map,
   devices must have geographical coordinates (longitude and latitude).
@@ -19,19 +24,21 @@ By filling a form in :guilabel:`Inventory / Devices` and :guilabel:`Inventory / 
 From an Excel spreadsheet
 -------------------------
 
-Objects can be created all at once by importing an Excel spreadsheet in :guilabel:`Admin / Administration`,
-section ``Topology Import``.
-You can find examples of such spreadsheets in ``files`` / ``spreadsheets``. Y
+The inventory can be imported from / exported to an Excel spreadsheet in the admin panel (see screenshot below),
+section ``Inventory``.
+You can find examples of such spreadsheets in ``files`` / ``spreadsheets``.
 
-.. note:: You can export an Excel spreadsheet containing the network topology by clicking on the ``Export`` button in the ``Topology Export`` column.
-.. note:: If an imported object already exists, its properties will be updated.
+.. image:: /_static/inventory/creation/inventory_import.png
+   :alt: Network Creation from Spreadsheet
+   :align: center
+
+.. note:: If you import an object that has already been created, its properties will be updated.
 
 Querying an external API
 ------------------------
 
 Another way to create your network is to query an external API: OpenNMS, Netbox, or LibreNMS.
-Check out the :ref:`Configuration` sections for each API, then click on the import button in the
-:guilabel:`Admin / Administration`, column "Topology Import".
+You can do that by creating a "Topology Import" service from the ``Services`` page.
 
 Custom properties
 -----------------

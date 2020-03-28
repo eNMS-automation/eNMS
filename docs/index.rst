@@ -4,7 +4,7 @@ What is eNMS
 
 eNMS is a vendor-agnostic NMS designed for building workflow-based network automation solutions.
 
-.. image:: /_static/base/features/workflow.png
+.. image:: /_static/base/workflow.png
    :alt: eNMS Introduction
    :align: center
 

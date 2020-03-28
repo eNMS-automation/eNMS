@@ -62,6 +62,6 @@ A site is a pool with a longitude and a latitude. The site view displays all sit
 
 Clicking on a site will open a panel where all pool devices and links are organized in a logical and visually pleasing fashion using a force-based algorithm.
 
-.. image:: /_static/inventory/network_visualization/site_view.png
+.. image:: /_static/base/site_view.png
    :alt: Site View
    :align: center

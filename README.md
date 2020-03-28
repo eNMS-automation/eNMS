@@ -66,7 +66,7 @@ A dashboard provides a graphical overview of your network with dynamic charts.
 
 Inventory                           |  Dashboard
 :----------------------------------:|:-----------------------------------:
-[![Inventory](docs/_static/base/features/inventory.png)](https://enms.readthedocs.io/en/develop/inventory/network_creation.html) |  [![Dashboard](docs/_static/base/features/dashboard.png)](https://enms.readthedocs.io/en/develop/inventory/network_creation.html)
+[![Inventory](docs/_static/base/inventory.png)](https://enms.readthedocs.io/en/develop/inventory/network_creation.html) |  [![Dashboard](docs/_static/base/dashboard.png)](https://enms.readthedocs.io/en/develop/inventory/network_creation.html)
 
 - Docs: _[Objects](https://enms.readthedocs.io/en/develop/inventory/network_creation.html)_
 
@@ -80,7 +80,7 @@ and displayed logically with a force-directed layout.
 
 Network View                                  |  Sites View
 :--------------------------------------------:|:-------------------------------:
-[![Geographical](docs/_static/inventory/network_visualization/network_view.png)](https://enms.readthedocs.io/en/develop/inventory/network_visualization.html) |  [![Logical](docs/_static/inventory/network_visualization/site_view.png)](https://enms.readthedocs.io/en/develop/inventory/network_visualization.html)
+[![Geographical](docs/_static/inventory/network_visualization/network_view.png)](https://enms.readthedocs.io/en/develop/inventory/network_visualization.html) |  [![Logical](docs/_static/base/site_view.png)](https://enms.readthedocs.io/en/develop/inventory/network_visualization.html)
 
 - Docs: _[Geographical View](https://enms.readthedocs.io/en/develop/inventory/network_visualization.html)_
 
@@ -90,7 +90,7 @@ eNMS comes with a number of "default services" leveraging libraries such as `ans
 
 Services can be combined into a workflow.
 
-[![Workflow Builder](docs/_static/base/features/workflow.png)](https://enms.readthedocs.io/en/develop/automation/workflows.html)
+[![Workflow Builder](docs/_static/base/workflow.png)](https://enms.readthedocs.io/en/develop/automation/workflows.html)
 
 - Docs: _[Workflow System](https://enms.readthedocs.io/en/develop/automation/workflows.html)_, _[Workflow Payload](https://enms.readthedocs.io/en/latest/workflows/workflow_payload.html)_
 
@@ -98,7 +98,7 @@ Services can be combined into a workflow.
 
 While services can be run directly and immediately from the UI, you can also schedule them to run at a later time, or periodically by defining a frequency or a CRON expression. All scheduled tasks are displayed in a calendar.
 
-[![Calendar](docs/_static/base/features/calendar.png)](https://enms.readthedocs.io/en/develop/automation/execution.html)
+[![Calendar](docs/_static/base/calendar.png)](https://enms.readthedocs.io/en/develop/automation/execution.html)
 
 Services can also be executed programmatically:
   - eNMS has a REST API and a CLI interface that can be used to create, update and delete any type of objects,

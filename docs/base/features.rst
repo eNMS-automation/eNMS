@@ -10,11 +10,11 @@ external Source of Truth (OpenNMS, LibreNMS, or Netbox).
 Once created, it is displayed in a sortable and searchable table.
 A dashboard provides a graphical overview of your network with dynamic charts.
 
-.. image:: /_static/base/features/inventory.png
+.. image:: /_static/base/inventory.png
    :alt: Inventory
    :align: center
 
-.. image:: /_static/base/features/dashboard.png
+.. image:: /_static/base/dashboard.png
    :alt: Dashboard
    :align: center
 
@@ -32,7 +32,7 @@ You can click on a device to display its properties, configuration, or start an 
 Colocated devices can be grouped into geographical sites (campus, dacacenter, ...),
 and displayed logically with a force-directed layout.
 
-.. image:: /_static/inventory/network_visualization/site_view.png
+.. image:: /_static/base/site_view.png
    :alt: Logical view
    :align: center
 
@@ -42,7 +42,7 @@ Workflows
 Services can be combined into a workflow.
 When a workflow is executed, its status is updated in real-time on the web UI.
 
-.. image:: /_static/base/features/workflow.png
+.. image:: /_static/base/workflow.png
   :alt: Workflow Builder
   :align: center
 
@@ -52,7 +52,7 @@ Event-driven automation
 While services can be run directly and immediately from the UI, you can also schedule them to run at a later time,
 or periodically by defining a frequency or a CRON expression. All scheduled tasks are displayed in a calendar.
 
-.. image:: /_static/base/features/calendar.png
+.. image:: /_static/base/calendar.png
   :alt: Calendar
   :align: center
 

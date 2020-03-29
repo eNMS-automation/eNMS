@@ -359,6 +359,14 @@ export class Table {
 }
 
 tables.device = class DeviceTable extends Table {
+  addRow(kwargs) {
+    let row = super.addRow({
+      derivedProperties: ["last_runtime"],
+      ...kwargs,
+    });
+    return row;
+  }
+
   get controls() {
     return [
       this.columnDisplay(),

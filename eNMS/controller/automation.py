@@ -27,8 +27,9 @@ class AutomationController(BaseController):
 
     def stop_workflow(self, runtime):
         run = db.fetch("run", allow_none=True, runtime=runtime)
-        self.run_stop[run.parent_runtime] = True
-        return True
+        if run and run.status == "Running":
+            self.run_stop[run.parent_runtime] = True
+            return True
 
     def add_edge(self, workflow_id, subtype, source, destination):
         workflow_edge = self.update(

@@ -743,7 +743,7 @@ class Run(AbstractBase):
             db.session.commit()
         return results
 
-    def log(self, severity, content, device=None, app_log=False, security=False):
+    def log(self, severity, content, device=None, app_log=False, logger=None):
         log_level = int(self.original.log_level)
         if not log_level or severity not in app.log_levels[log_level - 1 :]:
             return
@@ -756,8 +756,8 @@ class Run(AbstractBase):
         log += f" : {content}"
         if app_log:
             app.log(severity, log)
-        if security:
-            getattr(getLogger("security"), severity)(log)
+        if logger:
+            getattr(getLogger(logger), severity)(log)
         app.run_logs[self.parent_runtime][self.service_id].append(log)
 
     def build_notification(self, results):

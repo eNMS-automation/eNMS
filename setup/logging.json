@@ -19,12 +19,28 @@
       "class": "logging.handlers.RotatingFileHandler",
       "maxBytes": 20000000,
       "backupCount": 10
+    },
+    "security": { 
+      "level": "DEBUG",
+      "formatter": "standard",
+      "filename": "logs/security.log",
+      "class": "logging.handlers.RotatingFileHandler",
+      "maxBytes": 20000000,
+      "backupCount": 10
     }
   },
   "loggers": { 
     "": {
       "handlers": ["console", "rotation"],
       "level": "DEBUG"
+    },
+    "security": {
+      "handlers": ["security"],
+      "level": "DEBUG"
     }
-  } 
+  },
+  "external_loggers": {
+    "requests": "info",
+    "urllib3": "info"
+  }
 }

@@ -27,18 +27,6 @@
     "basedn": "DC=domain,DC=ad,DC=company,DC=com",
     "admin_group": "eNMS.Users,network.Admins"
   },
-  "logging": {
-    "log_level": "debug",
-    "loggers": {
-      "requests": "info",
-      "urllib3": "info"
-    },
-    "security": {
-      "syslog": false,
-      "address": "/dev/log",
-      "facility": "local0"
-    }
-  },
   "mail": {
     "server": "smtp.googlemail.com",
     "port": 587,

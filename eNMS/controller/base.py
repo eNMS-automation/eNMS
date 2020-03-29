@@ -185,22 +185,15 @@ class BaseController:
             )
 
     def init_logs(self):
-        log_level = self.settings["logging"]["log_level"].upper()
         folder = self.path / "logs"
         folder.mkdir(parents=True, exist_ok=True)
         with open(self.path / "setup" / "logging.json", "r") as logging_config:
-            dictConfig(load(logging_config))
-        for logger, log_level in self.settings["logging"]["loggers"].items():
+            logging_config = load(logging_config)
+        dictConfig(logging_config)
+        for logger, log_level in logging_config["external_loggers"].items():
             info(f"Changing {logger} log level to '{log_level}'")
             log_level = getattr(import_module("logging"), log_level.upper())
             getLogger(logger).setLevel(log_level)
-        """ secure_logger = getLogger("security")
-        security = self.settings["logging"]["security"]
-        secure_logger.addHandler(
-            SysLogHandler(address=security["address"], facility=security["facility"])
-            if security["syslog"]
-            else RotatingFileHandler(folder / "security.log")
-        ) """
 
     def init_connection_pools(self):
         self.request_session = RequestSession()

@@ -328,8 +328,8 @@ class BaseController:
             first = self.str_dict(getattr(db.fetch(type, id=v1), "result"))
             second = self.str_dict(getattr(db.fetch(type, id=v2), "result"))
         else:
-            first = self.get_git_configuration(v1)["configuration"]
-            second = self.get_git_configuration(v2)["configuration"]
+            first = self.get_git_network_data(v1)[type]
+            second = self.get_git_network_data(v2)[type]
         return "\n".join(
             unified_diff(
                 first.splitlines(),

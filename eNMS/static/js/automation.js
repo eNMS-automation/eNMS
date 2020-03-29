@@ -31,7 +31,8 @@ function openServicePanel() {
   showTypePanel($("#service-type").val());
 }
 
-function compare(type, id) {
+export function compare(type, id) {
+  console.log(type);
   const v1 = $(`input[name=v1-${id}]:checked`).val();
   const v2 = $(`input[name=v2-${id}]:checked`).val();
   if (!v1 || !v2) {
@@ -42,7 +43,7 @@ function compare(type, id) {
     const cantorId = cantorPairing(parseInt(v1), parseInt(v2));
     openPanel({
       name: "compare",
-      title: `Compare ${type}s`,
+      title: `Compare ${type}`,
       id: cantorId,
       size: "700 500",
       content: `

@@ -5,6 +5,7 @@ settings: true
 echarts: false
 */
 
+import { compare } from "./automation.js";
 import {
   call,
   configureNamespace,
@@ -332,7 +333,7 @@ export const showDeviceData = function(device) {
 
 function showGitConfiguration(commit) {
   call({
-    url: `/get_git_configuration/${commit.hash}`,
+    url: `/get_git_network_data/${commit.hash}`,
     callback: (result) => {
       displayConfiguration(commit.hash, result, commit.date);
     },
@@ -364,7 +365,7 @@ function showGitHistory(device) {
               >
               <button
                 class="btn btn-info"
-                onclick="eNMS.automation.compare('configuration', ${device.id})"
+                id="compare-${device.id}-btn"
                 data-tooltip="Compare"
                 type="button"
                 style="margin-left:10px"
@@ -407,6 +408,11 @@ function showGitHistory(device) {
                 const data = $(this).prop("checked")
                   ? "operational_data"
                   : "configuration";
+                $(`#compare-${device.id}-btn`)
+                  .unbind("click")
+                  .on("click", function() {
+                    compare(data, device.id);
+                  });
                 commits[data].forEach((commit) => {
                   table.row.add([
                     `${commit.date}`,

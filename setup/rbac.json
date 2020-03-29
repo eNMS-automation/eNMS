@@ -159,7 +159,7 @@
       "/get_device_network_data",
       "/get_device_logs",
       "/get_exported_services",
-      "/get_git_configuration",
+      "/get_git_network_data",
       "/get_git_content",
       "/get_migration_folders",
       "/get_service_logs",

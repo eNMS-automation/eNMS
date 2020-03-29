@@ -120,7 +120,7 @@ class InventoryController(BaseController):
             for data_type in ("configuration", "operational_data")
         }
 
-    def get_git_configuration(self, hash):
+    def get_git_network_data(self, hash):
         tree = Repo(self.path / "network_data").commit(hash).tree
         configuration_file = tree / "Washington" / "configuration"
         operational_data_file = tree / "Washington" / "operational_data"

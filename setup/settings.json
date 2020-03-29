@@ -28,6 +28,7 @@
     "admin_group": "eNMS.Users,network.Admins"
   },
   "logging": {
+    "log_level": "debug",
     "loggers": {
       "requests": "info",
       "urllib3": "info"

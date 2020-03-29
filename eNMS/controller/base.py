@@ -13,6 +13,7 @@ from git import Repo
 from importlib import import_module
 from importlib.util import module_from_spec, spec_from_file_location
 from json import load
+from logging.config import dictConfig
 from logging import basicConfig, getLogger, error, info, StreamHandler
 from logging.handlers import RotatingFileHandler, SysLogHandler
 from os import environ, scandir
@@ -187,27 +188,19 @@ class BaseController:
         log_level = self.settings["logging"]["log_level"].upper()
         folder = self.path / "logs"
         folder.mkdir(parents=True, exist_ok=True)
-        rotation_settings = {"maxBytes": 20_000_000, "backupCount": 10}
-        basicConfig(
-            level=getattr(import_module("logging"), log_level),
-            format="%(asctime)s %(levelname)-8s %(message)s",
-            datefmt="%m-%d-%Y %H:%M:%S",
-            handlers=[
-                RotatingFileHandler(folder / "enms.log", **rotation_settings),
-                StreamHandler(),
-            ],
-        )
+        with open(self.path / "setup" / "logging.json", "r") as logging_config:
+            dictConfig(load(logging_config))
         for logger, log_level in self.settings["logging"]["loggers"].items():
             info(f"Changing {logger} log level to '{log_level}'")
             log_level = getattr(import_module("logging"), log_level.upper())
             getLogger(logger).setLevel(log_level)
-        secure_logger = getLogger("security")
+        """ secure_logger = getLogger("security")
         security = self.settings["logging"]["security"]
         secure_logger.addHandler(
             SysLogHandler(address=security["address"], facility=security["facility"])
             if security["syslog"]
-            else RotatingFileHandler(folder / "security.log", **rotation_settings)
-        )
+            else RotatingFileHandler(folder / "security.log")
+        ) """
 
     def init_connection_pools(self):
         self.request_session = RequestSession()

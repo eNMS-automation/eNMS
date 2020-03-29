@@ -15,21 +15,16 @@
     "rotation": { 
       "level": "DEBUG",
       "formatter": "standard",
-      "dateformat": "%m-%d-%Y %H:%M:%S",
+      "filename": "logs/enms.log",
       "class": "logging.handlers.RotatingFileHandler",
       "maxBytes": 20000000,
+      "backupCount": 10
     }
   },
   "loggers": { 
     "": {
-      "handlers": ["default"],
-      "level": "WARNING",
-      "propagate": false
-    },
-    "__main__": {
-      "handlers": ["default"],
-      "level": "DEBUG",
-      "propagate": false
+      "handlers": ["console", "rotation"],
+      "level": "DEBUG"
     }
   } 
 }

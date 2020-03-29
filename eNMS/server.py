@@ -310,34 +310,6 @@ class Server(Flask):
         self.register_blueprint(blueprint)
 
     def configure_cli(self):
-        @self.cli.command(name="fetch")
-        @argument("table")
-        @argument("name")
-        def cli_fetch(table, name):
-            echo(
-                app.str_dict(
-                    db.fetch(table, name=name).get_properties(exclude=["positions"])
-                )
-            )
-
-        @self.cli.command()
-        @argument("table")
-        @argument("properties")
-        def update(table, properties):
-            result = db.factory(table, **loads(properties)).get_properties(
-                exclude=["positions"]
-            )
-            db.session.commit()
-            echo(app.str_dict(result))
-
-        @self.cli.command(name="delete")
-        @argument("table")
-        @argument("name")
-        def cli_delete(table, name):
-            device = db.delete(table, name=name)
-            db.session.commit()
-            echo(app.str_dict(device))
-
         @self.cli.command(name="run_service")
         @argument("name")
         @option("--devices")

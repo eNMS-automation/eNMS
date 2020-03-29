@@ -32,7 +32,6 @@ function openServicePanel() {
 }
 
 export function compare(type, id) {
-  console.log(type);
   const v1 = $(`input[name=v1-${id}]:checked`).val();
   const v2 = $(`input[name=v2-${id}]:checked`).val();
   if (!v1 || !v2) {

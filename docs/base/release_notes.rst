@@ -41,10 +41,6 @@ defined in eNMS/static/lib/codemirror/logsMode. Can be customized.
 - Add device result counter in result tree window
 - Move to optional_requirements file and catch import error of all optional libraries:
 ansible, hvac, ldap3, pyats, pynetbox, slackclient>=1.3,<2, tacacs_plus
-- In settings.json, new "logs" section to configure the log level of the application,
-as well as the log level of all loggers.
-Besides, the security logs (opening/closing netmiko/napalm connections, sending commands) are configured from there,
-including using a syslog handler with custom address facility.
 - Fix Napalm BGP example service
 - Fix 404 custom passwords logs from Vault
 - Encrypt and decrypt all data going in and out of the vault (b64 / Fernet)

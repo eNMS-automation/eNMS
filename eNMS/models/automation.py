@@ -978,6 +978,7 @@ class Run(AbstractBase):
         payload, device = locals.get("payload", {}), locals.get("device")
         variables = {
             "__builtins__": {**builtins, "__import__": _self._import},
+            "send_email": app.send_email,
             "settings": app.settings,
             "devices": _self.devices,
             "get_var": partial(_self.get_var, payload),

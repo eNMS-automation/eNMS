@@ -121,8 +121,10 @@ LDAP/AD using the `ldap3` library, and if successful, that user gets added to eN
 - ``admin_group`` (default: ``"eNMS.Users,network.Admins"``) string to match against 'memberOf' attributes of the
   matched user to determine if the user is allowed to log in.
 
-.. note:: Failure to match memberOf attribute output against LDAP_ADMIN_GROUP results in an 403 authentication error.
-  An LDAP user MUST be a member of one of the "LDAP_ADMIN_GROUP" groups to authenticate.
+.. note:: Failure to match memberOf attribute output against ``admin_group`` results in a valid ldap user
+  within the ``basedn`` being given default permissions (i.e., Read Only group).  They will still
+  be able to log in. If a memberOf attribute matches the ``admin_group``, they will be given
+  Admin permissions.
 .. note:: Because eNMS saves the user credentials for LDAP and TACACS+ into the Vault, if a user's credentials expire
   due to password aging, that user needs to login to eNMS in order for the updated credentials to be replaced in Vault storage.
   In the event that services are already scheduled with User Credentials, these might fail if the credentials

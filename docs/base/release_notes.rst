@@ -64,6 +64,13 @@ database, and a warning is issue in the service logs.
 - Add log deletion support from CLI interface
 - Forbid import of "os", "subprocess" and "sys" in a python code area in service panel
 (snippet, pre/postprocessing, etc)
+- Refactor logging configuration: all the logging are now configured from a file in setup: logging.json
+Besides, the log function in a workflow takes a new parameter "logger" where you can specify a logger name.
+This means you can first add your own loggers in logging.json, then log to them from a workflow.
+- Remove CLI fetch, update and delete endpoint (curl to be used instead if you need it from the VM)
+- Improve workflow stop mechanism: now hitting stop will try to stop ASAP, not just after the on-going
+service but also after the on-going device, or after the on-going retry (e.g many retries...).
+Besides stop should now work from subworkflow too.
 
 MIGRATION:
 In services, "result_postprocessing" -> "postprocessing"
@@ -124,13 +131,6 @@ name of the iteration step in the results.
 - Fix filtering per result type (success / failure) in result table
 - Fix retry numbering
 - Add Search REST endpoint
-- Refactor logging configuration: all the logging are now configured from a file in setup: logging.json
-Besides, the log function in a workflow takes a new parameter "logger" where you can specify a logger name.
-This means you can first add your own loggers in logging.json, then log to them from a workflow.
-- Remove CLI fetch, update and delete endpoint (curl to be used instead if you need it from the VM)
-- Improve workflow stop mechanism: now hitting stop will try to stop ASAP, not just after the on-going
-service but also after the on-going device, or after the on-going retry (e.g many retries...).
-Besides stop should now work from subworkflow too.
 
 MIGRATION:
 All iteration variable became GLOBAL VARIABLE, which means that you need to use

@@ -250,8 +250,9 @@ export function openPanel({
       },
     };
   }
-  jsPanel.create(kwargs);
+  const panel = jsPanel.create(kwargs);
   if (callback && content) callback(content);
+  $(panel).css({ top: `${50 + $(window).scrollTop()}px`, position: "absolute" });
 }
 
 export function createTooltip({

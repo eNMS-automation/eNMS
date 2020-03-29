@@ -5,13 +5,13 @@ Release Notes
 Version 3.21
 --------------
 
-- Keep selected runtime when entering a subworkflow.
-- When running a workflow, add runtime to runtime list in workflow builder and select it.
-- Workflow Refresh button now updates the list in the runtime dropdown.
+- When entering a subworkflow, the selected runtime is now preserved.
+- When running a workflow, the runtime is added to the runtime list in workflow builder and selected.
+- Workflow Refresh button now updates the list of runtimes in the workflow builder dropdown of runtimes.
 - Duplicating a shared service from the workflow builder now creates a NON SHARED deep copy in the current workflow only.
-- Create dedicated category for shared services in "Add services to workflow" tree.
-- Implement "Clear all filters" mechanism for all tables
-- When display workflow services in service table, all search input resetted (otherwise nothing was displayed)
+- Created dedicated category for shared services in "Add services to workflow" tree.
+- Implemented "Clear all filters" mechanism for all tables
+- When displaying workflow services in service table, all search input resetted (otherwise nothing was displayed)
 - Add download buttons for configuration and operational data
 - Add button in tables to export search result as CSV file.
 - When duplicating top-level workflow, display edit panel
@@ -33,7 +33,6 @@ Version 3.21
 - Syntax highlight option: ability to highlight certain keywords based on regular expression match,
 defined in eNMS/static/lib/codemirror/logsMode. Can be customized.
 - New logging property to configure log level for a service or disable logging.
-- Removed payload validation service
 - Fix bug when typing invalid regex for table search (eg "(" )
 - Dont display Start / End services in service table
 - Make configuration search case-insensitive for inclusion ("Search" REST endpoint + UI)

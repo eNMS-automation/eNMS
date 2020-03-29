@@ -2,8 +2,14 @@
 Release Notes
 =============
 
-Version 3.21
+Version 3.21.1
 --------------
+
+- Upgrade JS Panel to v4.10
+- Fix jspanel position on long pages with a scrollbar
+
+Version 3.21
+------------
 
 - When entering a subworkflow, the selected runtime is now preserved.
 - When running a workflow, the runtime is added to the runtime list in workflow builder and selected.

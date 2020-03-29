@@ -747,18 +747,16 @@ class Run(AbstractBase):
         log_level = int(self.original.log_level)
         if not log_level or severity not in app.log_levels[log_level - 1 :]:
             return
-        log = (
-            f"{app.get_time()} - {severity} - USER {self.creator}"
-            f" - SERVICE {self.service.scoped_name}"
-        )
+        log = f"USER {self.creator} - SERVICE {self.service.scoped_name}"
         if device:
             log += f" - DEVICE {device if isinstance(device, str) else device.name}"
         log += f" : {content}"
-        if app_log:
-            app.log(severity, log)
         if logger:
             getattr(getLogger(logger), severity)(log)
-        app.run_logs[self.parent_runtime][self.service_id].append(log)
+        if app_log:
+            app.log(severity, log)
+        full_log = f"{app.get_time()} - {severity} - {log}"
+        app.run_logs[self.parent_runtime][self.service_id].append(full_log)
 
     def build_notification(self, results):
         notification = {

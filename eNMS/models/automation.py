@@ -522,7 +522,7 @@ class Run(AbstractBase):
                 return {k: rec(v) for k, v in value.items()}
             elif isinstance(value, list):
                 return list(map(rec, value))
-            elif not isinstance(value, (int, str, bool, None.__class__)):
+            elif not isinstance(value, (int, str, bool, float, None.__class__)):
                 self.log("warning", f"Incompatible JSON value in results ({value})")
                 return str(value)
             else:

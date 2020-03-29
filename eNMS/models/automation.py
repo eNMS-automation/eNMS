@@ -486,7 +486,7 @@ class Run(AbstractBase):
         finally:
             db.session.commit()
             results["summary"] = self.run_state.get("summary", None)
-            self.status = "Aborted" if self.stop else "Completed"
+            self.status = "Aborted (STOP)" if self.stop else "Completed"
             self.run_state["status"] = self.status
             if self.run_state["success"] is not False:
                 self.success = self.run_state["success"] = results["success"]
@@ -629,6 +629,9 @@ class Run(AbstractBase):
         args = (device,) if device else ()
         retries, total_retries = self.number_of_retries + 1, 0
         while retries and total_retries < self.max_number_of_retries:
+            if self.stop:
+                self.log("error", f"ABORTING {device.name} (STOP)")
+                return {"success": False, "result": "Aborted (STOP)"}
             retries -= 1
             total_retries += 1
             try:

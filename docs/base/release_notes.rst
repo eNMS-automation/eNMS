@@ -124,6 +124,11 @@ name of the iteration step in the results.
 - Fix filtering per result type (success / failure) in result table
 - Fix retry numbering
 - Add Search REST endpoint
+- Refactor logging configuration: all the logging are now configured from a file in setup: logging.json
+Besides, the log function in a workflow takes a new parameter "logger" where you can specify a logger name.
+This means you can first add your own loggers in logging.json, then log to them from a workflow.
+- Remove CLI fetch, update and delete endpoint (curl to be used instead if you need it from the VM)
+- Improve workflow stop mechanism.
 
 MIGRATION:
 All iteration variable became GLOBAL VARIABLE, which means that you need to use

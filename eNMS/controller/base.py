@@ -133,7 +133,7 @@ class BaseController:
 
     def reset_run_status(self):
         for run in db.fetch("run", all_matches=True, allow_none=True, status="Running"):
-            run.status = "Aborted (app reload)"
+            run.status = "Aborted (RELOAD)"
         db.session.commit()
 
     def fetch_version(self):

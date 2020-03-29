@@ -14,8 +14,7 @@ from importlib import import_module
 from importlib.util import module_from_spec, spec_from_file_location
 from json import load
 from logging.config import dictConfig
-from logging import basicConfig, getLogger, error, info, StreamHandler
-from logging.handlers import RotatingFileHandler, SysLogHandler
+from logging import getLogger, error, info
 from os import environ, scandir
 from os.path import exists
 from pathlib import Path

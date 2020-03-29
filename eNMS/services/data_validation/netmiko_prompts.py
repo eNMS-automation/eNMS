@@ -55,7 +55,10 @@ class NetmikoPromptsService(ConnectionService):
                 command = run.sub(send_string, locals())
                 commands.append(command)
                 run.log(
-                    "info", f"Sending '{command}' with Netmiko", device, logger="security"
+                    "info",
+                    f"Sending '{command}' with Netmiko",
+                    device,
+                    logger="security",
                 )
                 confirmation = run.sub(expect_string, locals())
                 result = netmiko_connection.send_command_timing(

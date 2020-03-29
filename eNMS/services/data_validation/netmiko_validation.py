@@ -45,7 +45,10 @@ class NetmikoValidationService(ConnectionService):
             prompt = run.enter_remote_device(netmiko_connection, device)
             netmiko_connection.session_log.truncate(0)
             run.log(
-                "info", f"sending CMD '{command}' with Netmiko", device, logger="security"
+                "info",
+                f"sending CMD '{command}' with Netmiko",
+                device,
+                logger="security",
             )
             result = netmiko_connection.send_command(
                 command,

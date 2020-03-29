@@ -379,7 +379,7 @@ class Run(AbstractBase):
 
     @property
     def stop(self):
-        return self.run_state["status"] == "stop"
+        return app.run_stop[self.parent_runtime]
 
     @property
     def progress(self):

@@ -23,13 +23,12 @@ class AutomationController(BaseController):
     service_db = defaultdict(lambda: {"runs": 0})
     run_db = defaultdict(dict)
     run_logs = defaultdict(lambda: defaultdict(list))
-    run_callable = defaultdict(dict)
+    run_stop = defaultdict(bool)
 
     def stop_workflow(self, runtime):
         run = db.fetch("run", allow_none=True, runtime=runtime)
-        if run and run.run_state["status"] == "Running":
-            run.run_state["status"] = "stop"
-            return True
+        self.run_stop[run.parent_runtime] = True
+        return True
 
     def add_edge(self, workflow_id, subtype, source, destination):
         workflow_edge = self.update(

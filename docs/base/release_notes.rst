@@ -128,7 +128,9 @@ name of the iteration step in the results.
 Besides, the log function in a workflow takes a new parameter "logger" where you can specify a logger name.
 This means you can first add your own loggers in logging.json, then log to them from a workflow.
 - Remove CLI fetch, update and delete endpoint (curl to be used instead if you need it from the VM)
-- Improve workflow stop mechanism.
+- Improve workflow stop mechanism: now hitting stop will try to stop ASAP, not just after the on-going
+service but also after the on-going device, or after the on-going retry (e.g many retries...).
+Besides stop should now work from subworkflow too.
 
 MIGRATION:
 All iteration variable became GLOBAL VARIABLE, which means that you need to use

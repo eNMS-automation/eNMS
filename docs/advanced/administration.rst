@@ -111,36 +111,6 @@ CLI interface
 
 eNMS has a CLI interface with the following operations:
 
-Fetch an object from the database
-*********************************
-
-General syntax: ``flask fetch object_type object_name``
-Example:
-
-::
-
- flask fetch device Washington
-
-Modify the properties of an object
-**********************************
-
-General syntax: ``flask update object type 'object_properties'`` where `object_properties` is a JSON dictionary that contains the name of the object, and the properties to update.
-Example:
-
-::
-
- flask update device '{"name": "Aserver", "description": "test"}'
-
-Delete an object from the database
-**********************************
-
-General syntax: ``flask delete object_type object_name``
-Example:
-
-::
-
- `flask delete device Washington`
-
 Run a service
 *************
 

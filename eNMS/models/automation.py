@@ -1045,7 +1045,7 @@ class Run(AbstractBase):
         if connection:
             self.log("info", "Using cached Netmiko connection", device)
             return self.update_netmiko_connection(connection)
-        self.log("info", "OPENING Netmiko connection", device, security=True)
+        self.log("info", "OPENING Netmiko connection", device, logger="security")
         username, password = self.get_credentials(device)
         driver = device.netmiko_driver if self.use_device_driver else self.driver
         netmiko_connection = ConnectHandler(
@@ -1074,7 +1074,7 @@ class Run(AbstractBase):
         if connection:
             self.log("info", "Using cached NAPALM connection", device)
             return connection
-        self.log("info", "OPENING Napalm connection", device, security=True)
+        self.log("info", "OPENING Napalm connection", device, logger="security")
         username, password = self.get_credentials(device)
         optional_args = self.service.optional_args
         if not optional_args:

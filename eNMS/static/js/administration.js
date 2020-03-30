@@ -37,7 +37,7 @@ function getClusterStatus() {
   call({
     url: "/get_cluster_status",
     callback: function() {
-      tables["server"].ajax.reload(null, false);
+      tables.server.table.ajax.reload(null, false);
       setTimeout(getClusterStatus, 15000);
     },
   });

@@ -15,7 +15,7 @@ import {
   openPanel,
   openUrl,
 } from "./base.js";
-import { tables } from "./table.js";
+import { tables, tableInstances } from "./table.js";
 
 function drawDiagrams(diagram, result) {
   const options = {
@@ -164,7 +164,7 @@ function savePoolObjects(id) {
     url: `/save_pool_objects/${id}`,
     form: `pool-objects-form-${id}`,
     callback: function() {
-      tables["pool"].ajax.reload(null, false);
+      tableInstances.pool.table.ajax.reload(null, false);
       notify("Changes to pool saved.", "success", 5, true);
       $(`#pool_objects-${id}`).remove();
     },
@@ -205,7 +205,7 @@ function updatePools(pool) {
   call({
     url: endpoint,
     callback: function() {
-      tables["pool"].ajax.reload(null, false);
+      tableInstances.pool.table.ajax.reload(null, false);
       notify("Pool Update successful.", "success", 5, true);
     },
   });

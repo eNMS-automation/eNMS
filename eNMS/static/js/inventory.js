@@ -258,7 +258,7 @@ function downloadNetworkData(id) {
   );
 }
 
-function displayConfiguration(id, result, datetime) {
+function displayNetworkData(type, id, result, datetime) {
   openPanel({
     name: "device_data",
     content: `
@@ -267,11 +267,12 @@ function displayConfiguration(id, result, datetime) {
           class="navbar navbar-default nav-controls"
           role="navigation"
         >
-          <input
+          <input ${type == 'configuration' ? '' : 'checked'}
             id="data-type-${id}"
             type="checkbox"
             data-onstyle="info"
             data-offstyle="primary"
+            
           >
           <button
             onclick="eNMS.inventory.downloadNetworkData(${id})"
@@ -325,17 +326,20 @@ export const showDeviceData = function(device) {
       if (!result.configuration && !result.operational_data) {
         notify("No data stored.", "error", 5);
       } else {
-        displayConfiguration(device.id, result, device.last_runtime);
+        displayNetworkData("configuration", device.id, result, device.last_runtime);
       }
     },
   });
 };
 
-function showGitConfiguration(commit) {
+function showGitConfiguration(deviceId, commit) {
   call({
     url: `/get_git_network_data/${commit.hash}`,
     callback: (result) => {
-      displayConfiguration(commit.hash, result, commit.date);
+      const type = $(`#data-type-${deviceId}`).prop("checked")
+        ? "operational_data"
+        : "configuration";
+      displayNetworkData(type, commit.hash, result, commit.date);
     },
   });
 }
@@ -421,6 +425,7 @@ function showGitHistory(device) {
                       type="button"
                       class="btn btn-sm btn-info"
                       onclick="eNMS.inventory.showGitConfiguration(
+                        ${device.id},
                         ${JSON.stringify(commit).replace(/"/g, "'")}
                       )"
                       data-tooltip="Configuration"

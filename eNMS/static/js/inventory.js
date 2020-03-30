@@ -267,7 +267,7 @@ function displayNetworkData(type, id, result, datetime) {
           class="navbar navbar-default nav-controls"
           role="navigation"
         >
-          <input ${type == 'configuration' ? '' : 'checked'}
+          <input ${type == "configuration" ? "" : "checked"}
             id="data-type-${id}"
             type="checkbox"
             data-onstyle="info"

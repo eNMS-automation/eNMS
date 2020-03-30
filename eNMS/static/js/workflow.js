@@ -137,7 +137,7 @@ export function displayWorkflow(workflowData) {
     event.event.preventDefault();
     let node = nodes.get(this.getNodeAt(event.pointer.DOM));
     if (node.name == "Subservice") node = currentSubservice;
-    if (!node.id) {
+    if (!node || !node.id) {
       return;
     } else if (node.type == "label") {
       editLabel(node);

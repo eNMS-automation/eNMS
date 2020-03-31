@@ -77,7 +77,7 @@ Besides stop should now work from subworkflow too.
 MIGRATION:
 In services, "result_postprocessing" -> "postprocessing"
 In pools, "never_update" -> "manually_defined"
-Remove ALL payload validation service, no longer needed.
+use_jumpserver -> jump_on_connect
 In settings.json, the log level is no longer in the "section" but in a dedicated "logging" section.
 In settings.json, configure Syslog Handler (Security logs).
 
@@ -93,9 +93,6 @@ MutableDict -> db.Dict
 Column -> db.Column
 SmallString -> db.SmallString
 LargeString -> db.LargeString
-
-Rename jump server variable:
-use_jumpserver -> jump_on_connect
 
 Version 3.20.1
 --------------

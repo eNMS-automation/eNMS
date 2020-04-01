@@ -166,7 +166,6 @@ class InventoryController(BaseController):
                     value = getattr(obj, property)
                     if type(value) == bytes:
                         value = str(self.decrypt(value), "utf-8")
-                        print("OK"*500, value)
                     sheet.write(obj_index, index, value)
         workbook.save(self.path / "files" / "spreadsheets" / filename)
 

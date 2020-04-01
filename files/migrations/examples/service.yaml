@@ -1373,6 +1373,7 @@
   jump_command: ''
   jump_on_connect: false
   jump_username: ''
+  jump_password: "test"
   last_modified: '2019-10-10 13:42:39.673781'
   log_level: 1
   mail_recipient: antoine.fourmy@gmail.com

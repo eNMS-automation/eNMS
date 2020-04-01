@@ -163,7 +163,11 @@ class InventoryController(BaseController):
                     continue
                 sheet.write(0, index, property)
                 for obj_index, obj in enumerate(db.fetch_all(obj_type), 1):
-                    sheet.write(obj_index, index, str(getattr(obj, property)))
+                    value = getattr(obj, property)
+                    if type(value) == bytes:
+                        value = str(self.decrypt(value), "utf-8")
+                        print("OK"*500, value)
+                    sheet.write(obj_index, index, value)
         workbook.save(self.path / "files" / "spreadsheets" / filename)
 
     def topology_import(self, file):

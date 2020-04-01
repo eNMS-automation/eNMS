@@ -19,7 +19,7 @@ def update_property(project, property, value=None, types=None):
         / "eNMS"
         / "files"
         / "migrations"
-        / "verizon"
+        / project
     )
     for instance_type in types:
         with open(path / f"{instance_type}.yaml", "r") as migration_file:

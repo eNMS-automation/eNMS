@@ -136,7 +136,3 @@ ___
     export FLASK_APP=app.py
     flask run --host=0.0.0.0
     Log in (default credentials: admin / admin)
-
-## Contact
-
-For any feedback, advice, feature request, join us on the [Network to Code slack](http://networktocode.herokuapp.com "Network to Code slack"), channel **#enms**.

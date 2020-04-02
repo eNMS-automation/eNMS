@@ -4,8 +4,6 @@
 Contributing
 ============
 
-Contributions are welcome. If you want to contribute, you can join the #enms channel in the networktocode slack (http://networktocode.herokuapp.com/).
-
 For developers
 --------------
 

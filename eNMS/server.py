@@ -406,13 +406,7 @@ class Server(Flask):
             def get(self, name, runtime):
                 service = db.fetch("service", name=name)
                 run = db.fetch("run", service_id=service.id, runtime=runtime)
-                device_results, results = {}, {}
-                for result in run.results:
-                    if result.device:
-                        device_results[result.device.name] = result.result
-                    else:
-                        results.update(result.result)
-                return {**results, "devices": device_results}
+                return run.result().result
 
         class UpdateInstance(Resource):
             decorators = [self.auth.login_required, self.catch_exceptions]

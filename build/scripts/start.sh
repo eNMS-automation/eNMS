@@ -7,21 +7,11 @@ while [[ "$#" -gt 0 ]]; do case $1 in
 esac; done
 
 function start() {
-  if [[ -n "$path" ]]
-  then
-    cd $path
-  fi
-  if [[ -n "$unknown" ]]
-  then
-   echo "Unknown parameter detected $unknown"
-   exit 1
-  fi
+  if [[ -n "$path" ]]; then cd $path; fi
+  if [[ -n "$unknown" ]]; then echo "Unknown parameter$unknown"; exit 1; fi
   FLASK_APP="app.py"
   FLASK_DEBUG=1
-  if [ "$reload" = true ]
-  then
-    rm database.db
-  fi
+  if [ "$reload" = true ]; then rm database.db; fi
   gunicorn --config gunicorn.py app:app
 }
 

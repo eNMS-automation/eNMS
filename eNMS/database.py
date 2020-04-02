@@ -1,5 +1,6 @@
 from ast import literal_eval
 from json import loads
+from os import environ
 from sqlalchemy import (
     Boolean,
     Column,
@@ -85,7 +86,7 @@ class Database:
     dont_serialize = {"device": ["configuration", "operational_data"]}
 
     def __init__(self):
-        self.database_url = settings["database"]["url"]
+        self.database_url = environ.get("DATABASE_URL", "sqlite:///database.db")
         self.dialect = self.database_url.split(":")[0]
         self.configure_columns()
         self.engine = self.configure_engine()
@@ -124,6 +125,8 @@ class Database:
                     "pool_size": settings["database"]["pool_size"],
                 }
             )
+        elif self.dialect == "sqlite":
+            engine_parameters["connect_args"] = {"check_same_thread": False}
         return create_engine(self.database_url, **engine_parameters)
 
     def configure_columns(self):

@@ -2,6 +2,12 @@
 Release Notes
 =============
 
+Version 3.21.2
+--------------
+
+- Fix rest api update endpoint bug
+- Add device results to rest api get_result endpoint
+
 Version 3.21.1
 --------------
 

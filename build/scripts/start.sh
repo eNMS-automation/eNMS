@@ -15,27 +15,27 @@ function start() {
   export FLASK_APP="app.py"
   export FLASK_DEBUG=1
   if [ "$database" = "mysql" ]; then
-    export DATABASE_URL="mysql://root:password@localhost/enms";
+    export DATABASE_URL="mysql://admin:password@localhost/enms";
   elif [ "$database" = "pgsql" ]; then
-    export DATABASE_URL="postgresql://root:password@localhost:5432/enms"
+    export DATABASE_URL="postgresql://admin:password@localhost:5432/enms"
   fi
   if [ "$install" = true ]; then
     if [ "$database" = "mysql" ]; then
       sudo apt install -y mysql-server python3-mysqldb
       sudo pip3 install mysqlclient
-      sudo mysql -e "CREATE DATABASE enms;"
-      sudo mysql -e "set global max_connections = 2000;"
-      sudo mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';"
+      sudo mysql -u root --password=password -e 'CREATE DATABASE enms;'
+      sudo mysql -u root --password=password -e 'set global max_connections = 2000;'
+      sudo mysql -u root --password=password -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';"
     elif [ "$database" = "pgsql" ]; then
       sudo apt-get install -y postgresql libpq-dev
       sudo pip3 install psycopg2
       sudo -u postgres psql -c "CREATE DATABASE enms;"
-      sudo -u postgres psql -c "CREATE USER root WITH PASSWORD 'password';"
-      sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE enms TO root;"
+      sudo -u postgres psql -c "CREATE USER admin WITH PASSWORD 'password';"
+      sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE enms TO admin;"
     fi
   elif [ "$reload" = true ]; then
     if [ "$database" = "mysql" ]; then
-      sudo mysql -u root -p -e "DROP DATABASE enms;CREATE DATABASE enms;"
+      sudo mysql -u root --password=password -e "DROP DATABASE enms;CREATE DATABASE enms;"
     elif [ "$database" = "pgsql" ]; then
       sudo -u postgres psql -c "DROP DATABASE enms;CREATE DATABASE enms;"
     else
@@ -43,17 +43,18 @@ function start() {
     fi
   elif [ "$uninstall" = true ]; then
     if [ "$database" = "mysql" ]; then
-      sudo apt --purge remove mysql-server python3-mysqldb
+      sudo apt-get -y remove --purge "mysql*"
     elif [ "$database" = "pgsql" ]; then
       sudo apt-get --purge remove postgresql postgresql-client
       sudo rm -rf /var/lib/postgresql/
       sudo rm -rf /var/log/postgresql/
       sudo rm -rf /etc/postgresql/
     fi
-    sudo apt-get autoremove
-    sudo apt-get autoclean
+    sudo apt-get -y autoremove
+    sudo apt-get -y autoclean
+    exit 0
   fi
-  #gunicorn --config gunicorn.py app:app
+  gunicorn --config gunicorn.py app:app
 }
 
 start;

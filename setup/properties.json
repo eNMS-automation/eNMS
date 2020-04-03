@@ -10,6 +10,10 @@
          "property2":{ 
             "pretty_name":"Property 2",
             "type":"string",
+         },
+         "property3":{ 
+            "pretty_name":"Private property",
+            "type":"string",
             "private":true
          }
       },

@@ -9,10 +9,12 @@
          },
          "property2":{ 
             "pretty_name":"Property 2",
-            "type":"string",
+            "default": "CP",
+            "type":"string"
          },
          "property3":{ 
             "pretty_name":"Private property",
+            "default": "password",
             "type":"string",
             "private":true
          }

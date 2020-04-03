@@ -109,6 +109,7 @@ class BaseController:
         return str(self.decrypt(password), "utf-8")
 
     def configure_database(self):
+        self.settings["database"]["type"] = db.dialect
         self.init_services()
         db.base.metadata.create_all(bind=db.engine)
         configure_mappers()

@@ -2,6 +2,7 @@
 
 while [[ "$#" -gt 0 ]]; do case $1 in
   -i|--install) install=true; shift;;
+  -u|--uninstall) uninstall=true; shift;;
   -r|--reload) reload=true; shift;;
   -p|--path) path="$2"; shift;shift;;
   -d|--database) database="$2"; shift;shift;;
@@ -32,8 +33,7 @@ function start() {
       sudo -u postgres psql -c "CREATE USER root WITH PASSWORD 'password';"
       sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE enms TO root;"
     fi
-  fi
-  if [ "$reload" = true ]; then
+  elif [ "$reload" = true ]; then
     if [ "$database" = "mysql" ]; then
       sudo mysql -u root -p -e "DROP DATABASE enms;CREATE DATABASE enms;"
     elif [ "$database" = "pgsql" ]; then
@@ -41,8 +41,10 @@ function start() {
     else
       rm database.db
     fi
+  elif [ "$uninstall" = true ]; then
+    echo "test"
   fi
-  gunicorn --config gunicorn.py app:app
+  #gunicorn --config gunicorn.py app:app
 }
 
 start;

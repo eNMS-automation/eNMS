@@ -2,6 +2,11 @@
 Release Notes
 =============
 
+Version 3.22
+------------
+
+- Remove database url from settings. Configured via env variable DATABASE_URL
+
 Version 3.21.2
 --------------
 

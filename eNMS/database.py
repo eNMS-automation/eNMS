@@ -136,7 +136,10 @@ class Database:
 
         self.Dict = MutableDict.as_mutable(CustomPickleType)
         self.List = MutableList.as_mutable(CustomPickleType)
-        self.LargeString = Text(settings["database"]["large_string_length"])
+        if self.dialect == "postgresql":
+            self.LargeString = Text
+        else:
+            self.LargeString = Text(settings["database"]["large_string_length"])
         self.SmallString = String(settings["database"]["small_string_length"])
 
         default_ctypes = {

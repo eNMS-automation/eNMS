@@ -18,6 +18,8 @@ function start() {
     export DATABASE_URL="mysql://root:password@localhost/enms";
   elif [ "$database" = "pgsql" ]; then
     export DATABASE_URL="postgresql://root:password@localhost:5432/enms"
+  else
+    export DATABASE_URL="sqlite:///database.db"
   fi
   if [ "$install" = true ]; then
     if [ "$database" = "mysql" ]; then

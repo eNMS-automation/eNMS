@@ -15,9 +15,9 @@ function start() {
   export FLASK_APP="app.py"
   export FLASK_DEBUG=1
   if [ "$database" = "mysql" ]; then
-    export DATABASE_URL="mysql://admin:password@localhost/enms";
+    export DATABASE_URL="mysql://root:password@localhost/enms";
   elif [ "$database" = "pgsql" ]; then
-    export DATABASE_URL="postgresql://admin:password@localhost:5432/enms"
+    export DATABASE_URL="postgresql://root:password@localhost:5432/enms"
   fi
   if [ "$install" = true ]; then
     if [ "$database" = "mysql" ]; then
@@ -25,19 +25,19 @@ function start() {
       sudo pip3 install mysqlclient
       sudo mysql -u root --password=password -e 'CREATE DATABASE enms;'
       sudo mysql -u root --password=password -e 'set global max_connections = 2000;'
-      sudo mysql -u root --password=password -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';"
     elif [ "$database" = "pgsql" ]; then
       sudo apt-get install -y postgresql libpq-dev
       sudo pip3 install psycopg2
       sudo -u postgres psql -c "CREATE DATABASE enms;"
-      sudo -u postgres psql -c "CREATE USER admin WITH PASSWORD 'password';"
-      sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE enms TO admin;"
+      sudo -u postgres psql -c "CREATE USER root WITH PASSWORD 'password';"
+      sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE enms TO root;"
     fi
   elif [ "$reload" = true ]; then
     if [ "$database" = "mysql" ]; then
       sudo mysql -u root --password=password -e "DROP DATABASE enms;CREATE DATABASE enms;"
     elif [ "$database" = "pgsql" ]; then
-      sudo -u postgres psql -c "DROP DATABASE enms;CREATE DATABASE enms;"
+      sudo -u postgres psql -c "DROP DATABASE enms"
+      sudo -u postgres psql -c "CREATE DATABASE enms;"
     else
       rm database.db
     fi

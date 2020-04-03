@@ -42,7 +42,16 @@ function start() {
       rm database.db
     fi
   elif [ "$uninstall" = true ]; then
-    echo "test"
+    if [ "$database" = "mysql" ]; then
+      sudo apt --purge remove mysql-server python3-mysqldb
+    elif [ "$database" = "pgsql" ]; then
+      sudo apt-get --purge remove postgresql postgresql-client
+      sudo rm -rf /var/lib/postgresql/
+      sudo rm -rf /var/log/postgresql/
+      sudo rm -rf /etc/postgresql/
+    fi
+    sudo apt-get autoremove
+    sudo apt-get autoclean
   fi
   #gunicorn --config gunicorn.py app:app
 }

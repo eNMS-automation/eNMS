@@ -512,7 +512,7 @@ class Run(AbstractBase):
                 or len(self.devices) > 1
                 or self.run_method == "once"
             ):
-                self.create_result(results)
+                results = self.create_result(results)
             db.session.commit()
         return results
 
@@ -605,7 +605,6 @@ class Run(AbstractBase):
         results = self.make_results_json_compliant(results)
         result_kw = {
             "run": self,
-            "result": results,
             "service": self.service_id,
             "parent_runtime": self.parent_runtime,
         }
@@ -623,7 +622,12 @@ class Run(AbstractBase):
                     service=service_id,
                     content="\n".join(log),
                 )
-        db.factory("result", **result_kw)
+            if self.trigger == "REST":
+                results["devices"] = {}
+                for result in self.results:
+                    results["devices"][result.device.name] = result.result
+        result = db.factory("result", result=results, **result_kw)
+        return results
 
     def run_service_job(self, payload, device):
         args = (device,) if device else ()

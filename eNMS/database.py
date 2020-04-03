@@ -218,7 +218,8 @@ class Database:
             for attr in state.attrs:
                 hist = state.get_history(attr.key, True)
                 if (
-                    getattr(target, "dont_track_changes", False)
+                    getattr(target, "private", False)
+                    or getattr(target, "dont_track_changes", False)
                     or getattr(state.class_, attr.key).info.get("dont_track_changes")
                     or attr.key in self.private_properties
                     or not hist.has_changes()

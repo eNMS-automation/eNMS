@@ -1,6 +1,7 @@
 #!/bin/bash
 
 while [[ "$#" -gt 0 ]]; do case $1 in
+  -i|--install) install=true; shift;;
   -r|--reload) reload=true; shift;;
   -p|--path) path="$2"; shift;shift;;
   -d|--database) database="$2"; shift;shift;;
@@ -16,19 +17,28 @@ function start() {
   if [ "$database" = "mysql" ]; then
     DATABASE_URL="mysql://root:enms@localhost/enms";
   fi
+  if [ "$install" = true ]; then
+    if [ "$database" = "mysql" ]; then
+      sudo apt install -y mysql-server python3-mysqldb
+      sudo mysql -e 'CREATE DATABASE enms;'
+      sudo mysql -e 'set global max_connections = 2000;'
+      sudo mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'enms';"
+    elif [ "$database" = "pgsql" ]; then
+      sudo apt-get install -y postgresql libpq-dev
+      sudo -u postgres psql -c "CREATE DATABASE enms;"
+      sudo -u postgres psql -c "CREATE USER enms WITH PASSWORD 'password';"
+      sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE enms TO enms;"
+    fi
+  fi
   if [ "$reload" = true ]; then
     if [ "$database" = "mysql" ]; then
       sudo mysql -u root -p -e "DROP DATABASE enms;CREATE DATABASE enms;"
     else
-      rm database.db;
+      rm database.db
     fi
   fi
-  if [ "$create" = true ] && [ "$database" = "mysql" ]; then
-    sudo mysql -u root -p "enms" -e "CREATE DATABASE enms;"
-    sudo mysql -u root -p "enms" -e "set global max_connections = 2000;"
-    sudo mysql -u root -p "enms" -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'enms';"
-  fi
-  #gunicorn --config gunicorn.py app:app
+  if [ "$create" = true ]; then
+  gunicorn --config gunicorn.py app:app
 }
 
 start;

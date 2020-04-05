@@ -28,7 +28,7 @@ function start() {
       sudo mysql -u root --password=password -e 'CREATE DATABASE enms;'
       sudo mysql -u root --password=password -e 'set global max_connections = 2000;'
     elif [ "$database" = "pgsql" ]; then
-      sudo apt-get install -y postgresql libpq-dev
+      sudo apt-get install -y postgresql libpq-dev postgresql-client
       sudo pip3 install psycopg2
       sudo -u postgres psql -c "CREATE DATABASE enms;"
       sudo -u postgres psql -c "CREATE USER root WITH PASSWORD 'password';"
@@ -47,10 +47,7 @@ function start() {
     if [ "$database" = "mysql" ]; then
       sudo apt-get -y remove --purge "mysql*"
     elif [ "$database" = "pgsql" ]; then
-      sudo apt-get --purge remove postgresql postgresql-client
-      sudo rm -rf /var/lib/postgresql/
-      sudo rm -rf /var/log/postgresql/
-      sudo rm -rf /etc/postgresql/
+      sudo apt-get -y --purge remove postgresql\* libpq-dev
     fi
     sudo apt-get -y autoremove
     sudo apt-get -y autoclean

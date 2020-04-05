@@ -1,6 +1,6 @@
 from wtforms.validators import InputRequired
 
-from eNMS.forms import BaseForm, configure_relationships, set_custom_properties
+from eNMS.forms import BaseForm, configure_relationships
 from eNMS.forms.fields import (
     BooleanField,
     DictField,
@@ -20,7 +20,6 @@ def configure_form(cls):
 
 
 @configure_form
-@set_custom_properties
 @configure_relationships
 class EventForm(BaseForm):
     template = "event"
@@ -29,7 +28,6 @@ class EventForm(BaseForm):
     name = StringField("Name", [InputRequired()])
 
 
-@set_custom_properties
 @configure_relationships
 class TaskForm(BaseForm):
     template = "object"

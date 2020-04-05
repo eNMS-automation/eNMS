@@ -25,25 +25,24 @@ form_templates = {}
 
 class MetaForm(FormMeta):
     def __new__(cls, name, bases, attrs):
-        if name != "BaseForm":
-            form_type = attrs["form_type"].kwargs["default"]
-            cls.custom_properties = app.properties["custom"].get(form_type, {})
-            for property, values in cls.custom_properties.items():
-                if property in db.private_properties:
-                    field = PasswordField
-                else:
-                    field = {
-                        "boolean": BooleanField,
-                        "integer": IntegerField,
-                        "string": StringField
-                    }[values.get("type", "string")]
-                form_kw = {"default": values["default"]} if "default" in values else {}
-                field = field(values["pretty_name"], **form_kw)
-                setattr(cls, property, field)
-                attrs[property] = field
-        form = type.__new__(cls, name, bases, attrs)
         if name == "BaseForm":
-            return form
+            return type.__new__(cls, name, bases, attrs)
+        form_type = attrs["form_type"].kwargs["default"]
+        cls.custom_properties = app.properties["custom"].get(form_type, {})
+        for property, values in cls.custom_properties.items():
+            if property in db.private_properties:
+                field = PasswordField
+            else:
+                field = {
+                    "boolean": BooleanField,
+                    "integer": IntegerField,
+                    "string": StringField
+                }[values.get("type", "string")]
+            form_kw = {"default": values["default"]} if "default" in values else {}
+            field = field(values["pretty_name"], **form_kw)
+            setattr(cls, property, field)
+            attrs[property] = field
+        form = type.__new__(cls, name, bases, attrs)
         form_classes[form_type] = form
         form_templates[form_type] = getattr(form, "template", "base")
         form_actions[form_type] = getattr(form, "action", None)
@@ -112,9 +111,4 @@ def configure_relationships(cls):
         field_type = "object-list" if relation["list"] else "object"
         form_properties[form_type][related_model] = {"type": field_type}
         setattr(cls, related_model, field())
-    return cls
-
-
-def set_custom_properties(cls):
-
     return cls

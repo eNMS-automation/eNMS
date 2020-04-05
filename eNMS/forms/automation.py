@@ -2,7 +2,7 @@ from wtforms.validators import InputRequired
 from wtforms.widgets import TextArea
 
 from eNMS import app
-from eNMS.forms import BaseForm, set_custom_properties
+from eNMS.forms import BaseForm
 from eNMS.forms.fields import (
     BooleanField,
     FloatField,
@@ -17,7 +17,6 @@ from eNMS.forms.fields import (
 )
 
 
-@set_custom_properties
 class ServiceForm(BaseForm):
     template = "service"
     form_type = HiddenField(default="service")

@@ -32,6 +32,23 @@
             "type":"string",
             "default":"CP"
          }
+      },
+      "service": {
+         "definition": {
+            "pretty_name": "Definition",
+            "type": "string",
+            "default": "Definition"
+         },
+         "impacting": {
+            "pretty_name": "Impacting",
+            "type": "boolean",
+            "default": true
+         },
+         "completion_time": {
+            "pretty_name": "Completion time",
+            "type": "integer",
+            "default": 1
+         }
       }
    },
    "dashboard":{ 

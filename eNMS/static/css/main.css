@@ -533,6 +533,13 @@ button {
   width: 100%;
 }
 
+.form-control-bool {
+  width: 20px;
+  height: 20px;
+  margin-top: 8px !important;
+  margin-left: 15px !important;
+}
+
 .form-horizontal .control-label {
   padding-top: 8px;
 }

@@ -17,6 +17,11 @@
             "default": "password",
             "type":"string",
             "private":true
+         },
+         "reachable":{ 
+            "pretty_name":"Reachable",
+            "default": true,
+            "type":"boolean",
          }
       },
       "link":{ 

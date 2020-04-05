@@ -286,12 +286,24 @@
             >
               <div class="panel-body" style="background-color:#fafafa;">
                 {% for property, values in form.custom_properties.items() %}
+                {% if values["type"] == "boolean" %}
+                <fieldset>
+                  <div class="item">
+                    {% if form[property].default %} {{
+                    form[property](id="{}-{}".format(form_type, property),
+                    class="add-id", checked=True) }} {% else %} {{
+                    form[property](id="{}-{}".format(form_type, property),
+                    class="add-id") }} {% endif %}
+                    <label>{{ values["pretty_name"] }}</label>
+                  </div>
+                </fieldset>
+                {% else %}
                 <label>{{ values["pretty_name"] }}</label>
                 <div class="form-group">
-                  {{ form[property](id="service-" + property, class="form-control add-id")
-                  }}
+                  {{ form[property](id="{}-{}".format(form_type, property),
+                  class="form-control add-id") }}
                 </div>
-                {% endfor %}
+                {% endif %} {% endfor %}
               </div>
             </div>
           </div>

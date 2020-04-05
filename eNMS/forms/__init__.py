@@ -39,7 +39,7 @@ class MetaForm(FormMeta):
                 field = {
                     "boolean": BooleanField,
                     "integer": IntegerField,
-                    "string": StringField
+                    "string": StringField,
                 }[values.get("type", "string")]
             form_kw = {"default": values["default"]} if "default" in values else {}
             field = field(values["pretty_name"], **form_kw)
@@ -76,7 +76,11 @@ class MetaForm(FormMeta):
             base_form_type = base.form_type.kwargs["default"]
             form.custom_properties.update(base.custom_properties)
             if base_form_type == "service":
-                form.service_fields = list(properties)
+                form.service_fields = [
+                    property
+                    for property in properties
+                    if property not in form.custom_properties
+                ]
             if getattr(base, "abstract_service", False):
                 form.service_fields.extend(form_properties[base_form_type])
             form_properties[form_type].update(form_properties[base_form_type])

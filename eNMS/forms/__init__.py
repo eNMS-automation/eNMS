@@ -28,8 +28,11 @@ class MetaForm(FormMeta):
         if name == "BaseForm":
             return type.__new__(cls, name, bases, attrs)
         form_type = attrs["form_type"].kwargs["default"]
-        cls.custom_properties = app.properties["custom"].get(form_type, {})
-        for property, values in cls.custom_properties.items():
+        form = type.__new__(cls, name, bases, attrs)
+        if not hasattr(form, "custom_properties"):
+            form.custom_properties = {}
+        form.custom_properties.update(app.properties["custom"].get(form_type, {}))
+        for property, values in form.custom_properties.items():
             if property in db.private_properties:
                 field = PasswordField
             else:
@@ -40,9 +43,8 @@ class MetaForm(FormMeta):
                 }[values.get("type", "string")]
             form_kw = {"default": values["default"]} if "default" in values else {}
             field = field(values["pretty_name"], **form_kw)
-            setattr(cls, property, field)
+            setattr(form, property, field)
             attrs[property] = field
-        form = type.__new__(cls, name, bases, attrs)
         form_classes[form_type] = form
         form_templates[form_type] = getattr(form, "template", "base")
         form_actions[form_type] = getattr(form, "action", None)
@@ -72,6 +74,7 @@ class MetaForm(FormMeta):
             if not hasattr(base, "form_type"):
                 continue
             base_form_type = base.form_type.kwargs["default"]
+            form.custom_properties.update(base.custom_properties)
             if base_form_type == "service":
                 form.service_fields = list(properties)
             if getattr(base, "abstract_service", False):

@@ -285,15 +285,12 @@
               aria-labelledby="heading-step1-3"
             >
               <div class="panel-body" style="background-color:#fafafa;">
-                {% for property, values in form.custom_properties.items() %}
-                {% if values["type"] == "boolean" %}
+                {% for property, values in form.custom_properties.items() %} {% if
+                values["type"] == "boolean" %}
                 <fieldset>
                   <div class="item">
-                    {% if form[property].default %} {{
-                    form[property](id="{}-{}".format(form_type, property),
-                    class="add-id", checked=True) }} {% else %} {{
-                    form[property](id="{}-{}".format(form_type, property),
-                    class="add-id") }} {% endif %}
+                    {{ form[property](id="{}-{}".format(form_type, property),
+                    class="add-id", checked=form[property].default) }}
                     <label>{{ values["pretty_name"] }}</label>
                   </div>
                 </fieldset>

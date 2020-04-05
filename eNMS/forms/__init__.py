@@ -113,5 +113,6 @@ def set_custom_properties(cls):
                 "integer": IntegerField,
                 "string": StringField
             }[values.get("type", "string")]
-        setattr(cls, property, field(values["pretty_name"]))
+        form_kw = {"default": values["default"]} if "default" in values else {}
+        setattr(cls, property, field(values["pretty_name"], **form_kw))
     return cls

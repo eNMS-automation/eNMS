@@ -12,16 +12,16 @@
             "default": "CP",
             "type":"string"
          },
+         "reachable":{ 
+            "pretty_name":"Reachable",
+            "default": true,
+            "type":"boolean"
+         },
          "property3":{ 
             "pretty_name":"Private property",
             "default": "password",
             "type":"string",
             "private":true
-         },
-         "reachable":{ 
-            "pretty_name":"Reachable",
-            "default": true,
-            "type":"boolean"
          }
       },
       "link":{ 

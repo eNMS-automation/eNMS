@@ -21,7 +21,7 @@
          "reachable":{ 
             "pretty_name":"Reachable",
             "default": true,
-            "type":"boolean",
+            "type":"boolean"
          }
       },
       "link":{ 
@@ -41,7 +41,6 @@
       "service": {
          "definition": {
             "pretty_name": "Definition",
-            "type": "string",
             "default": "Definition"
          },
          "impacting": {

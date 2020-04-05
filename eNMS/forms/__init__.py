@@ -8,7 +8,9 @@ from wtforms.form import FormMeta
 from eNMS import app
 from eNMS.database import db
 from eNMS.forms.fields import (
+    BooleanField,
     InstanceField,
+    IntegerField,
     MultipleInstanceField,
     PasswordField,
     StringField,
@@ -103,6 +105,13 @@ def set_custom_properties(cls):
         cls.form_type.kwargs["default"], {}
     )
     for property, values in cls.custom_properties.items():
-        field = PasswordField if property in db.private_properties else StringField
+        if property in db.private_properties:
+            field = PasswordField
+        else:
+            field = {
+                "boolean": BooleanField,
+                "integer": IntegerField,
+                "string": StringField
+            }[values.get("type", "string")]
         setattr(cls, property, field(values["pretty_name"]))
     return cls

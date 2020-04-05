@@ -268,27 +268,27 @@
               class="panel-heading collapsed"
               style="background-color:#ddd;"
               role="tab"
-              id="heading-step1-2"
+              id="heading-step1-3"
               data-toggle="collapse"
-              href="#collapse-step1-2"
+              href="#collapse-step1-3"
               aria-expanded="false"
-              aria-controls="collapse-step1-2"
+              aria-controls="collapse-step1-3"
             >
               <h4 class="panel-title" style="color:#000;">
                 Custom Properties
               </h4>
             </a>
             <div
-              id="collapse-step1-2"
+              id="collapse-step1-3"
               class="panel-collapse collapse in"
               role="tabpanel"
-              aria-labelledby="heading-step1-2"
+              aria-labelledby="heading-step1-3"
             >
               <div class="panel-body" style="background-color:#fafafa;">
                 {% for property, values in form.custom_properties.items() %}
                 <label>{{ values["pretty_name"] }}</label>
                 <div class="form-group">
-                  {{ form[property](id="pool-" + property, class="form-control add-id")
+                  {{ form[property](id="service-" + property, class="form-control add-id")
                   }}
                 </div>
                 {% endfor %}

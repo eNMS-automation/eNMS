@@ -1036,7 +1036,7 @@ class Run(AbstractBase):
         try:
             if not hasattr(connection, "check_config_mode"):
                 self.log("error", f"Netmiko 'check_config_mode' method is missing.")
-                return
+                return connection
             mode = connection.check_config_mode()
             if mode and not self.config_mode:
                 connection.exit_config_mode()

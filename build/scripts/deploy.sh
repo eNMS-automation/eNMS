@@ -12,7 +12,16 @@ function utils() {
 }
 
 function show_help() {
-  echo help
+  help="
+    Usage: $(basename $0) [OPTIONS]
+
+    Options:
+      -p <path>                    Path to folder (default: current folder \$PWD)
+      -i <program>                 Install program (Vault, TACACS+, ...)
+      -u <program>                 Uninstall program
+      -h                           Help
+  "
+  echo "$help"
   exit 0
 }
 

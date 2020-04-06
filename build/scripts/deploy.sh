@@ -20,11 +20,11 @@ function install() {
 }
 
 function uninstall() {
-  if [ "$install" = "vault" ]; then
+  if [ "$uninstall" = "vault" ]; then
     sudo rm /usr/bin/vault && rm vault
-  elif [ "$install" = "mysql" ]; then
+  elif [ "$uninstall" = "mysql" ]; then
     sudo apt-get -y remove --purge "mysql*"
-  elif [ "$install" = "postgresql" ]; then
+  elif [ "$uninstall" = "postgresql" ]; then
     sudo apt-get -y --purge remove postgresql\* libpq-dev
   fi
   sudo apt-get -y autoremove

@@ -76,7 +76,7 @@ class Service(AbstractBase):
     )
     superworkflow_id = db.Column(Integer, ForeignKey("service.id"))
     superworkflow = relationship("Service", remote_side=[id])
-    superworkflow_targets = db.Column(db.SmallString, default="subservice")
+    superworkflow_targets = db.Column(db.SmallString, default="placeholder")
     update_pools = db.Column(Boolean, default=False)
     send_notification = db.Column(Boolean, default=False)
     send_notification_method = db.Column(db.SmallString, default="mail")
@@ -293,8 +293,8 @@ class Run(AbstractBase):
     service_name = association_proxy(
         "service", "scoped_name", info={"name": "service_name"}
     )
-    subservice_id = db.Column(Integer, ForeignKey("service.id"))
-    subservice = relationship("Service", foreign_keys="Run.subservice_id")
+    placeholder_id = db.Column(Integer, ForeignKey("service.id"))
+    placeholder = relationship("Service", foreign_keys="Run.placeholder_id")
     workflow_id = db.Column(Integer, ForeignKey("workflow.id", ondelete="cascade"))
     workflow = relationship("Workflow", foreign_keys="Run.workflow_id")
     workflow_name = association_proxy(
@@ -411,8 +411,8 @@ class Run(AbstractBase):
         return devices
 
     def compute_devices(self, payload):
-        if self.subservice and self.subservice.superworkflow_targets == "subservice":
-            service = self.subservice
+        if self.placeholder and self.placeholder.superworkflow_targets == "placeholder":
+            service = self.placeholder
         else:
             service = self.service
         devices = set(self.devices)
@@ -446,8 +446,8 @@ class Run(AbstractBase):
             },
             "summary": {"success": [], "failure": []},
         }
-        if self.subservice:
-            state["subservice"] = self.subservice.get_properties()
+        if self.placeholder:
+            state["placeholder"] = self.placeholder.get_properties()
         if self.service.type == "workflow":
             state.update({"edges": defaultdict(int), "services": defaultdict(dict)})
             state["progress"]["service"] = {

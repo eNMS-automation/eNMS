@@ -332,10 +332,10 @@ class AutomationController(BaseController):
             if service.type == "workflow":
                 children_results = []
                 for child in service.services:
-                    if child.scoped_name == "Subservice":
+                    if child.scoped_name == "Placeholder":
                         for run in runs:
-                            if run.subservice:
-                                child = run.subservice
+                            if run.placeholder:
+                                child = run.placeholder
                                 break
                     child_results = rec(child, f"{path}>{child.id}")
                     if not child_results:
@@ -373,7 +373,7 @@ class AutomationController(BaseController):
             run_kwargs["restart_run"] = restart_run
         service = db.fetch("service", id=service)
         if service.superworkflow:
-            run_kwargs["subservice"] = service.id
+            run_kwargs["placeholder"] = service.id
             service = service.superworkflow
         initial_payload = service.initial_payload
         run = db.factory("run", service=service.id, **run_kwargs)

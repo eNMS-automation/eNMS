@@ -13,7 +13,7 @@ Version 3.21.1
 
 - Upgrade JS Panel to v4.10
 - Fix jspanel position on long pages with a scrollbar
-- Fix subservice double-click bug
+- Fix placeholder double-click bug
 - Fix table display bug
 - Fix operational data display bug
 

@@ -88,13 +88,13 @@ export let creationMode;
 let mousePosition;
 let currLabel;
 let triggerMenu;
-let currentSubservice;
-let subservice;
+let currentPlaceholder;
+let placeholder;
 
 export function displayWorkflow(workflowData) {
   workflow = workflowData.service;
-  subservice = null;
-  currentSubservice = workflowData.state && workflowData.state.subservice;
+  placeholder = null;
+  currentPlaceholder = workflowData.state && workflowData.state.placeholder;
   nodes = new vis.DataSet(workflow.services.map(serviceToNode));
   edges = new vis.DataSet(workflow.edges.map(edgeToEdge));
   workflow.services.map(drawIterationEdge);
@@ -136,7 +136,7 @@ export function displayWorkflow(workflowData) {
   graph.on("doubleClick", function(event) {
     event.event.preventDefault();
     let node = nodes.get(this.getNodeAt(event.pointer.DOM));
-    if (node.name == "Subservice") node = currentSubservice;
+    if (node.name == "Placeholder") node = currentPlaceholder;
     if (!node || !node.id) {
       return;
     } else if (node.type == "label") {
@@ -165,7 +165,7 @@ export function displayWorkflow(workflowData) {
 }
 
 function updateRuntimes(result) {
-  currentSubservice = result.state && result.state.subservice;
+  currentPlaceholder = result.state && result.state.placeholder;
   const currentRuntime = $("#current-runtime").val();
   $("#current-runtime").empty();
   $("#current-runtime").append("<option value='normal'>Normal Display</option>");
@@ -175,10 +175,10 @@ function updateRuntimes(result) {
       `<option value='${r[0]}'>${r[0]} (run by ${r[1]})</option>`
     );
   });
-  if (subservice && currentSubservice) {
+  if (placeholder && currentPlaceholder) {
     nodes.update({
-      id: subservice.id,
-      label: getServiceLabel(subservice),
+      id: placeholder.id,
+      label: getServiceLabel(placeholder),
     });
   }
   $("#current-runtime").val(currentRuntime || "latest");
@@ -463,8 +463,8 @@ function getServiceLabel(service) {
       ? `\n     ${service.scoped_name}     \n`
       : `${service.scoped_name}\n`;
   label += "—————\n";
-  if (service.scoped_name == "Subservice" && currentSubservice) {
-    label += currentSubservice.scoped_name;
+  if (service.scoped_name == "Placeholder" && currentPlaceholder) {
+    label += currentPlaceholder.scoped_name;
   } else {
     label += service.type == "workflow" ? "Subworkflow" : serviceTypes[service.type];
   }
@@ -472,14 +472,14 @@ function getServiceLabel(service) {
 }
 
 function serviceToNode(service) {
-  const isSubservice = service.scoped_name == "Subservice";
-  if (isSubservice) subservice = service;
+  const isPlaceholder = service.scoped_name == "Placeholder";
+  if (isPlaceholder) placeholder = service;
   const defaultService = ["Start", "End"].includes(service.scoped_name);
-  if (defaultService || isSubservice) ends.add(service.id);
+  if (defaultService || isPlaceholder) ends.add(service.id);
   return {
     id: service.id,
     shape: service.type == "workflow" ? "ellipse" : defaultService ? "circle" : "box",
-    color: defaultService ? "pink" : isSubservice ? "#E6ADD8" : "#D2E5FF",
+    color: defaultService ? "pink" : isPlaceholder ? "#E6ADD8" : "#D2E5FF",
     font: {
       size: 15,
       multi: "html",
@@ -487,7 +487,7 @@ function serviceToNode(service) {
       bold: { color: "#000000" },
     },
     shadow: {
-      enabled: !defaultService && !isSubservice,
+      enabled: !defaultService && !isPlaceholder,
       color: service.shared ? "#FF1694" : "#6666FF",
       size: 15,
     },
@@ -888,10 +888,10 @@ function displayWorkflowState(result) {
 
 function resetDisplay() {
   $("#progressbar").hide();
-  if (subservice) {
+  if (placeholder) {
     nodes.update({
-      id: subservice.id,
-      label: "Subservice",
+      id: placeholder.id,
+      label: "Placeholder",
     });
   }
   workflow.services.forEach((service) => {

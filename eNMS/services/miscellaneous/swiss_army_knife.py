@@ -29,7 +29,7 @@ class SwissArmyKnifeService(Service):
     def End(self, *args, **kwargs):  # noqa: N802
         return {"success": True}
 
-    def Subservice(self, *args, **kwargs):  # noqa: N802
+    def Placeholder(self, *args, **kwargs):  # noqa: N802
         return {"success": True}
 
     def cluster_monitoring(self, run, payload):

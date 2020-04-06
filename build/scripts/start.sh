@@ -56,4 +56,4 @@ function start() {
   gunicorn --config gunicorn.py app:app
 }
 
-start;
+start

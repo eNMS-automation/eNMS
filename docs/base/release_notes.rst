@@ -7,6 +7,9 @@ Version 3.21.2
 
 - Fix rest api update endpoint bug
 - Add device results to rest api get_result endpoint
+- Rename subservice -> placeholder
+- Fix rendering of custom boolean properties
+- Fix custom properties accordion in service panel
 
 Version 3.21.1
 --------------

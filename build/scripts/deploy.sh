@@ -16,6 +16,10 @@ function install() {
     sudo -u postgres psql -c "CREATE DATABASE enms;"
     sudo -u postgres psql -c "CREATE USER root WITH PASSWORD 'password';"
     sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE enms TO root;"
+  elif [ "$install" = "enms" ]; then
+    sudo apt-get install -y python3-pip sshpass npm
+    pip3 install -r build/requirements/requirements_dev.txt requirements_optional.txt
+    sudo npm install -g prettier eslint eslint-config-google
   fi
 }
 

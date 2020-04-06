@@ -6,6 +6,7 @@ function install() {
     find . -iname "*zip" -exec unzip {} \;
     sudo ln -s ${path:-$PWD}/vault /usr/bin/vault
     sudo ln -s ${path:-$PWD}/consul /usr/bin/consul
+    nohup consul agent -dev &
   elif [ "$install" = "mysql" ]; then
     sudo apt install -y mysql-server python3-mysqldb
     sudo pip3 install mysqlclient
@@ -26,8 +27,9 @@ function install() {
 
 function uninstall() {
   if [ "$uninstall" = "vault" ]; then
+    consul leave
     sudo rm /usr/bin/{vault,consul}
-    rm vault consul
+    rm ${path:-$PWD}/{vault,consul}
   elif [ "$uninstall" = "mysql" ]; then
     sudo apt-get -y remove --purge "mysql*"
   elif [ "$uninstall" = "postgresql" ]; then

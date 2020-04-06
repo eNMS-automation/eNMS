@@ -1,11 +1,11 @@
 #!/bin/bash
 
 function utils() {
-  if [[ -n "$path" ]]; then cd $path; fi
+  cd ${path:-$PWD}
   if [ "$install" = "vault" ]; then
     sudo apt-get install -y unzip
     find . -iname "vault_*zip" -exec unzip {} \;
-    sudo ln -s $path/vault /usr/bin/vault
+    sudo ln -s ${path:-$PWD}/vault /usr/bin/vault
   elif [ "$uninstall" = "vault" ]; then
     sudo rm /usr/bin/vault && rm vault
   fi

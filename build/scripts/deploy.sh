@@ -1,37 +1,49 @@
 #!/bin/bash
 
-function utils() {
-  cd ${path:-$PWD}
-  if [ "$install" = "vault" ]; then
+function install() {
+  if [[ -n "$vault" ]]; then
     sudo apt-get install -y unzip
     find . -iname "vault_*zip" -exec unzip {} \;
     sudo ln -s ${path:-$PWD}/vault /usr/bin/vault
-  elif [ "$uninstall" = "vault" ]; then
+  fi
+}
+
+function uninstall() {
+  if [[ -n "$vault" ]]; then
     sudo rm /usr/bin/vault && rm vault
   fi
 }
 
-function show_help() {
-  help="
+function help() {
+  echo "
     Usage: $(basename $0) [OPTIONS]
 
     Options:
       -p <path>                    Path to folder (default: current folder \$PWD)
-      -i <program>                 Install program (Vault, TACACS+, ...)
-      -u <program>                 Uninstall program
+      -i | -u                      Install or uninstall programs.
+      -v                           Vault
       -h                           Help
   "
-  echo "$help"
   exit 0
 }
 
-while getopts h?u:i:p: opt; do
+while getopts h?p:uiv opt; do
     case "$opt" in
       p) path=$OPTARG;;
-      u) uninstall=$OPTARG;;
-      i) install=$OPTARG;;
-      h|\?) show_help;;
+      u) function=uninstall;;
+      i) function=install;;
+      v) vault=1;;
+      h|\?) help;;
     esac
 done
 
-utils
+function deploy() {
+  cd ${path:-$PWD}
+  if [ "$function" = "install" ]; then
+    install
+  elif [ "$function" = "uninstall" ]; then
+    uninstall
+  fi
+}
+
+deploy

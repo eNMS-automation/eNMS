@@ -1,7 +1,7 @@
 #!/bin/bash
 
 function install() {
-  if [[ -n "$vault" ]]; then
+  if [ "$vault" = true ]; then
     sudo apt-get install -y unzip
     find . -iname "vault_*zip" -exec unzip {} \;
     sudo ln -s ${path:-$PWD}/vault /usr/bin/vault
@@ -23,7 +23,7 @@ function install() {
 }
 
 function uninstall() {
-  if [[ -n "$vault" ]]; then
+  if [ "$vault" = true ]; then
     sudo rm /usr/bin/vault && rm vault
   fi
   if [[ -n "$database" ]]; then
@@ -43,10 +43,12 @@ function help() {
     Usage: $(basename $0) [OPTIONS]
 
     Options:
-      -p <path>                    Path to folder (default: current folder \$PWD)
-      -i | -u                      Install or uninstall programs.
-      -v                           Vault
+      -d <database>                Database (mysql | pgsql)
       -h                           Help
+      -i                           Install
+      -p <path>                    Path to folder (default: current folder \$PWD)
+      -u                           Uninstall
+      -v                           Vault
   "
   exit 0
 }
@@ -57,7 +59,7 @@ while getopts h?p:d:uiv opt; do
       i) function=install;;
       p) path=$OPTARG;;
       u) function=uninstall;;
-      v) vault=1;;
+      v) vault=true;;
       h|\?) help;;
     esac
 done

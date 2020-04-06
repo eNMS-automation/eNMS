@@ -1,15 +1,20 @@
 #!/bin/bash
 
-while [[ "$#" -gt 0 ]]; do case $1 in
-  -r|--reload) reload=true; shift;;
-  -p|--path) path="$2"; shift;shift;;
-  -d|--database) database="$2"; shift;shift;;
-  *) unknown=$1; shift; shift;;
-esac; done
+function help() {
+  echo "
+    Usage: $(basename $0) [OPTIONS]
+
+    Options:
+      -d <database>                Database (mysql | pgsql | sqlite) (default: sqlite)
+      -h                           Help
+      -p <path>                    Path to folder (default: current folder \$PWD)
+      -r                           Reload Database
+  "
+  exit 0
+}
 
 function start() {
   if [[ -n "$path" ]]; then cd $path; fi
-  if [[ -n "$unknown" ]]; then echo "Unknown parameter $unknown"; exit 1; fi
   export FLASK_APP="app.py"
   export FLASK_DEBUG=1
   if [ "$database" = "mysql" ]; then
@@ -19,7 +24,7 @@ function start() {
   else
     export DATABASE_URL="sqlite:///database.db"
   fi
-  elif [ "$reload" = true ]; then
+  if [ "$reload" = true ]; then
     if [ "$database" = "mysql" ]; then
       sudo mysql -u root --password=password -e "DROP DATABASE enms;CREATE DATABASE enms;"
     elif [ "$database" = "pgsql" ]; then
@@ -28,7 +33,18 @@ function start() {
     else
       rm database.db
     fi
+  fi
   gunicorn --config gunicorn.py app:app
 }
+
+while getopts h?d: opt; do
+    case "$opt" in
+      d) database=$OPTARG;;
+      i) function=install;;
+      p) path=$OPTARG;;
+      r) reload=true;;
+      h|\?) help;;
+    esac
+done
 
 start

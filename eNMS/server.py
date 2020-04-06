@@ -41,7 +41,8 @@ from eNMS.setup import properties, rbac
 
 class Server(Flask):
     def __init__(self, mode=None):
-        super().__init__(__name__, static_folder=app.path / "eNMS" / "static")
+        static_folder = str(app.path / "eNMS" / "static")
+        super().__init__(__name__, static_folder=static_folder)
         self.update_config(mode)
         self.register_extensions()
         self.configure_login_manager()

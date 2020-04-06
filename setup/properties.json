@@ -12,6 +12,16 @@
             "default": "CP",
             "type":"string"
          },
+         "reachable":{ 
+            "pretty_name":"Is Reachable",
+            "default": true,
+            "type":"boolean"
+         },
+         "down":{ 
+            "pretty_name":"Is Down",
+            "default": false,
+            "type":"boolean"
+         },
          "property3":{ 
             "pretty_name":"Private property",
             "default": "password",
@@ -31,6 +41,27 @@
             "pretty_name":"Custom Property",
             "type":"string",
             "default":"CP"
+         }
+      },
+      "service": {
+         "definition": {
+            "pretty_name": "Definition",
+            "default": "Definition"
+         },
+         "reserved": {
+            "pretty_name": "Reserved",
+            "type": "boolean",
+            "default": false
+         },
+         "impacting": {
+            "pretty_name": "Impacting",
+            "type": "boolean",
+            "default": true
+         },
+         "completion_time": {
+            "pretty_name": "Completion time",
+            "type": "integer",
+            "default": 1
          }
       }
    },

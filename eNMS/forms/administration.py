@@ -3,7 +3,7 @@ from wtforms.widgets import TextArea
 
 from eNMS import app
 from eNMS.database import db
-from eNMS.forms import BaseForm, configure_relationships, set_custom_properties
+from eNMS.forms import BaseForm, configure_relationships
 from eNMS.forms.fields import (
     BooleanField,
     HiddenField,
@@ -55,7 +55,6 @@ class ResultLogDeletionForm(BaseForm):
     date_time = StringField(type="date", label="Delete Records before")
 
 
-@set_custom_properties
 class ServerForm(BaseForm):
     template = "object"
     form_type = HiddenField(default="server")
@@ -92,7 +91,6 @@ class ImportService(BaseForm):
     service = SelectField("Service", choices=())
 
 
-@set_custom_properties
 @configure_relationships
 class UserForm(BaseForm):
     template = "object"
@@ -104,7 +102,6 @@ class UserForm(BaseForm):
     group = SelectField("Permissions", choices=[(g, g) for g in app.rbac["groups"]])
 
 
-@set_custom_properties
 class ChangelogForm(BaseForm):
     template = "object"
     form_type = HiddenField(default="changelog")

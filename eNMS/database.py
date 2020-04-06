@@ -355,7 +355,7 @@ class Database:
                         "float": Float,
                         "integer": Integer,
                         "string": self.LargeString,
-                    }[values["type"]],
+                    }[values.get("type", "string")],
                     **kwargs,
                 ),
             )

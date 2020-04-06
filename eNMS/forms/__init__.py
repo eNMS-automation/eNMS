@@ -8,7 +8,9 @@ from wtforms.form import FormMeta
 from eNMS import app
 from eNMS.database import db
 from eNMS.forms.fields import (
+    BooleanField,
     InstanceField,
+    IntegerField,
     MultipleInstanceField,
     PasswordField,
     StringField,
@@ -23,10 +25,26 @@ form_templates = {}
 
 class MetaForm(FormMeta):
     def __new__(cls, name, bases, attrs):
-        form = type.__new__(cls, name, bases, attrs)
         if name == "BaseForm":
-            return form
-        form_type = form.form_type.kwargs["default"]
+            return type.__new__(cls, name, bases, attrs)
+        form_type = attrs["form_type"].kwargs["default"]
+        form = type.__new__(cls, name, bases, attrs)
+        if not hasattr(form, "custom_properties"):
+            form.custom_properties = {}
+        form.custom_properties.update(app.properties["custom"].get(form_type, {}))
+        for property, values in form.custom_properties.items():
+            if property in db.private_properties:
+                field = PasswordField
+            else:
+                field = {
+                    "boolean": BooleanField,
+                    "integer": IntegerField,
+                    "string": StringField,
+                }[values.get("type", "string")]
+            form_kw = {"default": values["default"]} if "default" in values else {}
+            field = field(values["pretty_name"], **form_kw)
+            setattr(form, property, field)
+            attrs[property] = field
         form_classes[form_type] = form
         form_templates[form_type] = getattr(form, "template", "base")
         form_actions[form_type] = getattr(form, "action", None)
@@ -56,8 +74,13 @@ class MetaForm(FormMeta):
             if not hasattr(base, "form_type"):
                 continue
             base_form_type = base.form_type.kwargs["default"]
+            form.custom_properties.update(base.custom_properties)
             if base_form_type == "service":
-                form.service_fields = list(properties)
+                form.service_fields = [
+                    property
+                    for property in properties
+                    if property not in form.custom_properties
+                ]
             if getattr(base, "abstract_service", False):
                 form.service_fields.extend(form_properties[base_form_type])
             form_properties[form_type].update(form_properties[base_form_type])
@@ -95,14 +118,4 @@ def configure_relationships(cls):
         field_type = "object-list" if relation["list"] else "object"
         form_properties[form_type][related_model] = {"type": field_type}
         setattr(cls, related_model, field())
-    return cls
-
-
-def set_custom_properties(cls):
-    cls.custom_properties = app.properties["custom"].get(
-        cls.form_type.kwargs["default"], {}
-    )
-    for property, values in cls.custom_properties.items():
-        field = PasswordField if property in db.private_properties else StringField
-        setattr(cls, property, field(values["pretty_name"]))
     return cls

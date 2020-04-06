@@ -133,8 +133,8 @@ class Workflow(Service):
                         db.fetch("device", name=name).id
                         for name in targets[service.name]
                     ],
-                    "service": run.subservice.id
-                    if service.scoped_name == "Subservice"
+                    "service": run.placeholder.id
+                    if service.scoped_name == "Placeholder"
                     else service.id,
                     "workflow": self.id,
                     "restart_run": restart_run,
@@ -200,8 +200,8 @@ class Workflow(Service):
                 results = {"result": "skipped", "success": True}
             else:
                 kwargs = {
-                    "service": run.subservice.id
-                    if service.scoped_name == "Subservice"
+                    "service": run.placeholder.id
+                    if service.scoped_name == "Placeholder"
                     else service.id,
                     "workflow": self.id,
                     "restart_run": restart_run,

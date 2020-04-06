@@ -12,13 +12,16 @@ Version 3.21.2
 
 - Fix rest api update endpoint bug
 - Add device results to rest api get_result endpoint
+- Rename subservice -> placeholder
+- Fix rendering of custom boolean properties
+- Fix custom properties accordion in service panel
 
 Version 3.21.1
 --------------
 
 - Upgrade JS Panel to v4.10
 - Fix jspanel position on long pages with a scrollbar
-- Fix subservice double-click bug
+- Fix placeholder double-click bug
 - Fix table display bug
 - Fix operational data display bug
 

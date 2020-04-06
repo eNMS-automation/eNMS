@@ -572,10 +572,10 @@
 - {destination: '[Shared] REST API: call *is_alive* endpoint', label: success, source: '[Shared]
     Start', subtype: success, type: workflow_edge, workflow: 'Regression Workflow
     L: superworkflow'}
-- {destination: '[Shared] Subservice', label: success, source: '[Shared] REST API:
+- {destination: '[Shared] Placeholder', label: success, source: '[Shared] REST API:
     call *is_alive* endpoint', subtype: success, type: workflow_edge, workflow: 'Regression
     Workflow L: superworkflow'}
-- {destination: '[Shared] End', label: success, source: '[Shared] Subservice', subtype: success,
+- {destination: '[Shared] End', label: success, source: '[Shared] Placeholder', subtype: success,
   type: workflow_edge, workflow: 'Regression Workflow L: superworkflow'}
 - {destination: '[Regression Workflow M: Unix command & shell, ping, - jump on connect
     - mechanism] Unix command: ps -ef | grep test', label: success, source: '[Shared]

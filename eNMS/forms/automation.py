@@ -2,7 +2,7 @@ from wtforms.validators import InputRequired
 from wtforms.widgets import TextArea
 
 from eNMS import app
-from eNMS.forms import BaseForm, set_custom_properties
+from eNMS.forms import BaseForm
 from eNMS.forms.fields import (
     BooleanField,
     FloatField,
@@ -17,7 +17,6 @@ from eNMS.forms.fields import (
 )
 
 
-@set_custom_properties
 class ServiceForm(BaseForm):
     template = "service"
     form_type = HiddenField(default="service")
@@ -41,7 +40,7 @@ class ServiceForm(BaseForm):
     superworkflow_targets = SelectField(
         "Superworkflow Targets",
         choices=(
-            ("subservice", "Use targets from this service"),
+            ("placeholder", "Use targets from this service"),
             ("superworkflow", "Use targets from the superworkflow"),
         ),
     )

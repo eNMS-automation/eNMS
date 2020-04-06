@@ -16,13 +16,13 @@ function install() {
       }
 
       listener "tcp" {
-      address     = "127.0.0.1:8200"
-      tls_disable = 1
+        address     = "127.0.0.1:8200"
+        tls_disable = 1
       }
     '
     nohup vault server -config=<(echo "$config") &
-    export VAULT_ADDR=http://127.0.0.1:8200
-    echo vault operator init | head -n7
+    export VAULT_ADDR=http://127.0.0.1:8200 && sleep 10
+    echo $(vault operator init | head -n7)
   elif [ "$install" = "mysql" ]; then
     sudo apt install -y mysql-server python3-mysqldb
     sudo pip3 install mysqlclient
@@ -44,8 +44,9 @@ function install() {
 function uninstall() {
   if [ "$uninstall" = "vault" ]; then
     consul leave
+    kill $(ps aux | awk '/vault server/ {print $2}' | head -1)
     sudo rm /usr/bin/{vault,consul}
-    rm ${path:-$PWD}/{vault,consul}
+    rm ${path:-$PWD}/{vault,consul} nohup.out
   elif [ "$uninstall" = "mysql" ]; then
     sudo apt-get -y remove --purge "mysql*"
   elif [ "$uninstall" = "postgresql" ]; then

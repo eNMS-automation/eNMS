@@ -13,7 +13,7 @@ function help() {
   exit 0
 }
 
-function start() {
+function run() {
   if [[ -n "$path" ]]; then cd $path; fi
   export FLASK_APP="app.py"
   export FLASK_DEBUG=1
@@ -37,14 +37,15 @@ function start() {
   gunicorn --config gunicorn.py app:app
 }
 
-while getopts h?d: opt; do
+while getopts h?d:v: opt; do
     case "$opt" in
       d) database=$OPTARG;;
       i) function=install;;
       p) path=$OPTARG;;
       r) reload=true;;
+      v) vault=$OPTARG;;
       h|\?) help;;
     esac
 done
 
-start
+run

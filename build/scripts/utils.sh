@@ -1,8 +1,14 @@
 #!/bin/bash
 
-function install_vault() {
-  echo installing vault
-  
+function utils() {
+  if [[ -n "$path" ]]; then cd $path; fi
+  if [ "$install" = "vault" ]; then
+    sudo apt-get install -y unzip
+    find . -iname "vault_*zip" -exec unzip {} \;
+    cd /usr/bin && sudo ln -s $path/vault vault
+  elif [ "$uninstall" = "vault" ]; then
+    sudo rm /usr/bin/vault && rm vault
+  fi
 }
 
 function show_help() {
@@ -10,9 +16,13 @@ function show_help() {
   exit 0
 }
 
-while getopts h?i: opt; do
+while getopts h?u:i:p: opt; do
     case "$opt" in
-      i) if [ "$OPTARG" == "vault" ]; then install_vault; fi;;
+      p) path=$OPTARG;;
+      u) uninstall=$OPTARG;;
+      i) install=$OPTARG;;
       h|\?) show_help;;
     esac
 done
+
+utils

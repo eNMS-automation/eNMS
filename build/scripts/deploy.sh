@@ -3,8 +3,9 @@
 function install() {
   if [ "$install" = "vault" ]; then
     sudo apt-get install -y unzip
-    find . -iname "vault_*zip" -exec unzip {} \;
+    find . -iname "*zip" -exec unzip {} \;
     sudo ln -s ${path:-$PWD}/vault /usr/bin/vault
+    sudo ln -s ${path:-$PWD}/consul /usr/bin/consul
   elif [ "$install" = "mysql" ]; then
     sudo apt install -y mysql-server python3-mysqldb
     sudo pip3 install mysqlclient
@@ -25,7 +26,8 @@ function install() {
 
 function uninstall() {
   if [ "$uninstall" = "vault" ]; then
-    sudo rm /usr/bin/vault && rm vault
+    sudo rm /usr/bin/{vault,consul}
+    rm vault consul
   elif [ "$uninstall" = "mysql" ]; then
     sudo apt-get -y remove --purge "mysql*"
   elif [ "$uninstall" = "postgresql" ]; then
@@ -33,6 +35,16 @@ function uninstall() {
   fi
   sudo apt-get -y autoremove
   sudo apt-get -y autoclean
+}
+
+
+function deploy() {
+  cd ${path:-$PWD}
+  if [[ -n "$install" ]]; then
+    install
+  elif [[ -n "$uninstall" ]]; then
+    uninstall
+  fi
 }
 
 function help() {
@@ -62,14 +74,5 @@ while getopts h?p:i:u: opt; do
       h|\?) help;;
     esac
 done
-
-function deploy() {
-  cd ${path:-$PWD}
-  if [[ -n "$install" ]]; then
-    install
-  elif [[ -n "$uninstall" ]]; then
-    uninstall
-  fi
-}
 
 deploy

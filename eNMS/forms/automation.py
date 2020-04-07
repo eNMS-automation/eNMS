@@ -10,7 +10,6 @@ from eNMS.forms.fields import (
     IntegerField,
     StringField,
     DictField,
-    InstanceField,
     MultipleInstanceField,
     PasswordField,
     SelectField,

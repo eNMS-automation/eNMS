@@ -244,7 +244,7 @@ class Database:
                 )
                 app.log("info", f"UPDATE: {target.type} '{name}': ({changes})")
 
-        if app.settings["vault"]["active"]:
+        if app.use_vault:
 
             @event.listens_for(models["service"].name, "set", propagate=True)
             def vault_update(target, new_value, old_value, *_):

@@ -83,7 +83,7 @@ class BaseController:
             self.init_tacacs_client()
         if settings["ldap"]["active"]:
             self.init_ldap_client()
-        if settings["vault"]["active"]:
+        if self.use_vault:
             self.init_vault_client()
         if settings["syslog"]["active"]:
             self.init_syslog_server()
@@ -94,6 +94,7 @@ class BaseController:
         self.init_connection_pools()
 
     def init_encryption(self):
+        self.use_vault = environ.get("USE_VAULT")
         self.fernet_encryption = environ.get("FERNET_KEY")
         if self.fernet_encryption:
             fernet = Fernet(self.fernet_encryption)
@@ -255,9 +256,10 @@ class BaseController:
         )
 
     def init_vault_client(self):
+        vault_url = environ.get("VAULT_ADDR", "http://127.0.0.1:8200")
         self.vault_client = VaultClient()
         self.vault_client.token = environ.get("VAULT_TOKEN")
-        if self.vault_client.sys.is_sealed() and self.settings["vault"]["unseal"]:
+        if self.vault_client.sys.is_sealed() and environ.get("UNSEAL_VAULT"):
             keys = [environ.get(f"UNSEAL_VAULT_KEY{i}") for i in range(1, 6)]
             self.vault_client.sys.submit_unseal_keys(filter(None, keys))
 

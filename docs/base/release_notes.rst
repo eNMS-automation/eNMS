@@ -6,6 +6,7 @@ Version 3.22
 ------------
 
 - Remove database url from settings. Configured via env variable DATABASE_URL
+- Remove vault parameters from settings. Configure via env variables USE_VAULT and UNSEAL_VAULT
 
 Version 3.21.2
 --------------

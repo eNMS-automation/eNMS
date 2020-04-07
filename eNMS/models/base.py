@@ -20,7 +20,7 @@ class AbstractBase(db.base):
 
     def __getattribute__(self, property):
         if property in db.private_properties:
-            if app.settings["vault"]["active"]:
+            if app.use_vault:
                 path = f"secret/data/{self.__tablename__}/{self.name}/{property}"
                 data = app.vault_client.read(path)
                 value = data["data"]["data"][property] if data else ""
@@ -35,7 +35,7 @@ class AbstractBase(db.base):
             if not value:
                 return
             value = app.encrypt(str.encode(value))
-            if app.settings["vault"]["active"]:
+            if app.use_vault:
                 app.vault_client.write(
                     f"secret/data/{self.__tablename__}/{self.name}/{property}",
                     data={property: value},

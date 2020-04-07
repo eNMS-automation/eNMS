@@ -14,6 +14,7 @@ Version 3.21.2
 - Fix front-end alert deleting services and make it a success alert
 - Fix historical config / oper data comparison mechanism
 - Fix bug where superworkflow cannot be cleared from list after selection
+- Fix bug placeholder service deletion from workflow
 
 Version 3.21.1
 --------------

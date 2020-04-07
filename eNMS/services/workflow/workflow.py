@@ -6,7 +6,7 @@ from sqlalchemy.schema import UniqueConstraint
 from eNMS.database import db
 from eNMS.models.base import AbstractBase
 from eNMS.forms.automation import ServiceForm
-from eNMS.forms.fields import BooleanField, HiddenField, SelectField
+from eNMS.forms.fields import BooleanField, HiddenField, InstanceField, SelectField
 from eNMS.models.automation import Service
 
 
@@ -24,6 +24,11 @@ class Workflow(Service):
     edges = relationship(
         "WorkflowEdge", back_populates="workflow", cascade="all, delete-orphan"
     )
+    superworkflow_id = db.Column(Integer, ForeignKey("workflow.id"))
+    superworkflow = relationship(
+        "Workflow", remote_side=[id], foreign_keys="Workflow.superworkflow_id"
+    )
+    superworkflow_targets = db.Column(db.SmallString, default="placeholder")
 
     __mapper_args__ = {"polymorphic_identity": "workflow"}
 
@@ -245,6 +250,14 @@ class WorkflowForm(ServiceForm):
                 "per_service_with_service_targets",
                 "Run the workflow service by service using service targets",
             ),
+        ),
+    )
+    superworkflow = InstanceField("Superworkflow")
+    superworkflow_targets = SelectField(
+        "Superworkflow Targets",
+        choices=(
+            ("placeholder", "Use targets from this service"),
+            ("superworkflow", "Use targets from the superworkflow"),
         ),
     )
 

@@ -36,14 +36,6 @@ class ServiceForm(BaseForm):
     pools = MultipleInstanceField("Pools")
     update_pools = BooleanField("Update pools before running")
     workflows = MultipleInstanceField("Workflows")
-    superworkflow = InstanceField("Superworkflow")
-    superworkflow_targets = SelectField(
-        "Superworkflow Targets",
-        choices=(
-            ("placeholder", "Use targets from this service"),
-            ("superworkflow", "Use targets from the superworkflow"),
-        ),
-    )
     waiting_time = IntegerField(
         "Time to Wait before next service is started (in seconds)", default=0
     )

@@ -38,6 +38,10 @@ function install() {
     sudo apt-get install -y python3-pip sshpass npm
     for file in build/requirements/*; do pip3 install -r $file; done
     sudo npm install -g prettier eslint eslint-config-google
+  elif [ "$install" = "nginx" ]; then
+    sudo apt-get install -y nginx
+    sudo cp ${path:-$PWD}/build/nginx/enms.conf /etc/nginx/sites-enabled
+    sudo systemctl restart nginx
   fi
 }
 
@@ -51,6 +55,10 @@ function uninstall() {
     sudo apt-get -y remove --purge "mysql*"
   elif [ "$uninstall" = "postgresql" ]; then
     sudo apt-get -y --purge remove postgresql\* libpq-dev
+  elif [ "$uninstall" = "nginx" ]; then
+    sudo nginx -s stop
+    sudo apt-get -y remove --purge nginx
+    sudo rm /etc/nginx/sites-enabled/enms.conf
   fi
   sudo apt-get -y autoremove
   sudo apt-get -y autoclean

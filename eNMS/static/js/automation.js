@@ -31,9 +31,9 @@ function openServicePanel() {
   showTypePanel($("#service-type").val());
 }
 
-export function compare(type, id) {
-  const v1 = $(`input[name=v1-${id}]:checked`).val();
-  const v2 = $(`input[name=v2-${id}]:checked`).val();
+export function compare(type, device) {
+  const v1 = $(`input[name=v1-${device.id}]:checked`).val();
+  const v2 = $(`input[name=v2-${device.id}]:checked`).val();
   if (!v1 || !v2) {
     notify("Select two versions to compare first.", "error", 5);
   } else if (v1 == v2) {
@@ -68,11 +68,11 @@ export function compare(type, id) {
           width: "120px",
         });
         call({
-          url: `/compare/${type}/${v1}/${v2}`,
+          url: `/compare/${type}/${device.name}/${v1}/${v2}`,
           callback: (result) => {
             let diff2htmlUi = new Diff2HtmlUI({ diff: result });
             $(`#diff-type-${cantorId}`)
-              .on("change", function () {
+              .on("change", function() {
                 diff2htmlUi.draw(`#content-${cantorId}`, {
                   matching: "lines",
                   drawFileList: true,
@@ -147,7 +147,7 @@ function showResult(id) {
       <div id="content-${id}" style="height:95%"></div>`,
     title: "Result",
     id: id,
-    callback: function () {
+    callback: function() {
       call({
         url: `/get_result/${id}`,
         callback: (result) => {
@@ -155,7 +155,7 @@ function showResult(id) {
           const options = {
             mode: "view",
             modes: ["code", "view"],
-            onModeChange: function (newMode) {
+            onModeChange: function(newMode) {
               editor.set(newMode == "code" ? result : jsonResult);
             },
             onEvent(node, event) {
@@ -181,7 +181,7 @@ function showResult(id) {
   });
 }
 
-export const showRuntimePanel = function (type, service, runtime, displayTable) {
+export const showRuntimePanel = function(type, service, runtime, displayTable) {
   const displayFunction =
     type == "logs"
       ? displayLogs
@@ -253,11 +253,13 @@ export const showRuntimePanel = function (type, service, runtime, displayTable) 
         type: "result",
         title: `${type} - ${service.name}`,
         id: service.id,
-        callback: function () {
+        callback: function() {
           $(`#runtimes-${panelId}`).empty();
           runtimes.forEach((runtime) => {
             $(`#runtimes-${panelId}`).append(
-              $("<option></option>").attr("value", runtime[0]).text(runtime[1])
+              $("<option></option>")
+                .attr("value", runtime[0])
+                .text(runtime[1])
             );
           });
           if (!runtime && page == "workflow_builder") {
@@ -266,8 +268,10 @@ export const showRuntimePanel = function (type, service, runtime, displayTable) 
           if (!runtime || ["normal", "latest"].includes(runtime)) {
             runtime = runtimes[runtimes.length - 1][0];
           }
-          $(`#runtimes-${panelId}`).val(runtime).selectpicker("refresh");
-          $(`#runtimes-${panelId}`).on("change", function () {
+          $(`#runtimes-${panelId}`)
+            .val(runtime)
+            .selectpicker("refresh");
+          $(`#runtimes-${panelId}`).on("change", function() {
             displayFunction(service, this.value, true);
           });
           displayFunction(service, runtime);
@@ -296,7 +300,7 @@ function displayLogs(service, runtime, change) {
     $(`#service-logs-${service.id}`).data("CodeMirrorInstance", editor);
     editor.setSize("100%", "100%");
   }
-  $(`#runtimes-logs-${service.id}`).on("change", function () {
+  $(`#runtimes-logs-${service.id}`).on("change", function() {
     refreshLogs(service, this.value, editor);
   });
   refreshLogs(service, runtime, editor, true);
@@ -305,8 +309,10 @@ function displayLogs(service, runtime, change) {
 function displayResultsTree(service, runtime) {
   call({
     url: `/get_workflow_results/${service.id}/${runtime}`,
-    callback: function (data) {
-      $(`#result-tree-${service.id}`).jstree("destroy").empty();
+    callback: function(data) {
+      $(`#result-tree-${service.id}`)
+        .jstree("destroy")
+        .empty();
       let tree = $(`#result-tree-${service.id}`).jstree({
         core: {
           animation: 100,
@@ -323,7 +329,7 @@ function displayResultsTree(service, runtime) {
           },
         },
         html_row: {
-          default: function (el, node) {
+          default: function(el, node) {
             if (!node) return;
             const data = JSON.stringify(node.data.properties);
             let progressSummary;
@@ -363,10 +369,10 @@ function displayResultsTree(service, runtime) {
           },
         },
       });
-      tree.bind("loaded.jstree", function () {
+      tree.bind("loaded.jstree", function() {
         tree.jstree("open_all");
       });
-      tree.unbind("dblclick.jstree").bind("dblclick.jstree", function (event) {
+      tree.unbind("dblclick.jstree").bind("dblclick.jstree", function(event) {
         const service = tree.jstree().get_node(event.target);
         showRuntimePanel("results", service.data.properties, runtime, true);
       });
@@ -383,7 +389,7 @@ function refreshLogs(service, runtime, editor, first, wasRefreshed) {
   if (!$(`#service-logs-${service.id}`).length) return;
   call({
     url: `/get_service_logs/${service.id}/${runtime}`,
-    callback: function (result) {
+    callback: function(result) {
       editor.setValue(result.logs);
       editor.setCursor(editor.lineCount(), 0);
       if (first || result.refresh) {
@@ -399,10 +405,10 @@ function refreshLogs(service, runtime, editor, first, wasRefreshed) {
   });
 }
 
-export const normalRun = function (id) {
+export const normalRun = function(id) {
   call({
     url: `/run_service/${id}`,
-    callback: function (result) {
+    callback: function(result) {
       runLogic(result);
     },
   });
@@ -412,7 +418,7 @@ function parameterizedRun(type, id) {
   call({
     url: `/run_service/${id}`,
     form: `edit-${type}-form-${id}`,
-    callback: function (result) {
+    callback: function(result) {
       $(`#${type}-${id}`).remove();
       runLogic(result);
     },
@@ -451,7 +457,7 @@ function exportService(id) {
 function pauseTask(id) {
   call({
     url: `/task_action/pause/${id}`,
-    callback: function (result) {
+    callback: function(result) {
       $(`#pause-resume-${id}`)
         .attr("onclick", `eNMS.automation.resumeTask('${id}')`)
         .text("Resume");
@@ -463,7 +469,7 @@ function pauseTask(id) {
 function resumeTask(id) {
   call({
     url: `/task_action/resume/${id}`,
-    callback: function () {
+    callback: function() {
       $(`#pause-resume-${id}`)
         .attr("onclick", `eNMS.automation.pauseTask('${id}')`)
         .text("Pause");
@@ -488,7 +494,7 @@ function displayCalendar(calendarType) {
     callback: () => {
       call({
         url: `/calendar_init/${calendarType}`,
-        callback: function (tasks) {
+        callback: function(tasks) {
           let events = [];
           for (const [name, properties] of Object.entries(tasks)) {
             if (properties.service === undefined) continue;
@@ -510,7 +516,7 @@ function displayCalendar(calendarType) {
             },
             selectable: true,
             selectHelper: true,
-            eventClick: function (e) {
+            eventClick: function(e) {
               if (calendarType == "task") {
                 showTypePanel("task", e.id);
               } else {
@@ -529,7 +535,7 @@ function displayCalendar(calendarType) {
 function schedulerAction(action) {
   call({
     url: `/scheduler_action/${action}`,
-    callback: function () {
+    callback: function() {
       notify(`Scheduler ${action}d.`, "success", 5, true);
     },
   });
@@ -556,7 +562,7 @@ export function loadServiceTypes() {
 export function deleteCorruptedEdges() {
   call({
     url: "/delete_corrupted_edges",
-    callback: function (number) {
+    callback: function(number) {
       notify(`${number} Corrupted edges successfully deleted.`, "success", 5);
     },
   });

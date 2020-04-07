@@ -1,4 +1,5 @@
 - description: Jackson
+  down: false
   icon: router
   ip_address: 192.168.56.51
   last_duration: ''
@@ -18,12 +19,15 @@
   os_version: 15.5(3)M
   port: 22
   property1: 10.145.14.1
+  property2: CP
+  reachable: true
   subtype: ''
   tasks: []
   type: device
   username: cisco
   vendor: Cisco
 - description: PaloAlto
+  down: false
   icon: router
   ip_address: 192.168.1.86
   last_duration: ''
@@ -43,12 +47,15 @@
   os_version: 15.5(3)M
   port: 22
   property1: 10.145.14.1
+  property2: CP
+  reachable: true
   subtype: ''
   tasks: []
   type: device
   username: cisco
   vendor: Cisco
 - description: Austin
+  down: false
   icon: router
   ip_address: 192.168.105.9
   last_duration: ''
@@ -68,12 +75,15 @@
   os_version: 15.5(3)M
   port: 22
   property1: 10.145.14.1
+  property2: CP
+  reachable: true
   subtype: ''
   tasks: []
   type: device
   username: admin
   vendor: Arista
 - description: Washington
+  down: false
   icon: router
   ip_address: 192.168.56.50
   last_duration: 9.242875s
@@ -93,12 +103,15 @@
   os_version: 15.5(3)M
   port: 22
   property1: 10.145.14.1
+  property2: CP
+  reachable: true
   subtype: ''
   tasks: []
   type: device
   username: admin
   vendor: Arista
 - description: Chicago
+  down: false
   icon: router
   ip_address: 192.168.1.188
   last_duration: ''
@@ -118,12 +131,15 @@
   os_version: 15.5(3)M
   port: 22
   property1: 10.145.14.1
+  property2: CP
+  reachable: true
   subtype: ''
   tasks: []
   type: device
   username: cisco
   vendor: Cisco
 - description: SanJose
+  down: false
   icon: router
   ip_address: 192.168.1.187
   last_duration: ''
@@ -143,12 +159,15 @@
   os_version: 15.5(3)M
   port: 22
   property1: 10.145.14.1
+  property2: CP
+  reachable: true
   subtype: ''
   tasks: []
   type: device
   username: cisco
   vendor: Cisco
 - description: SanDiego
+  down: false
   icon: router
   ip_address: 10.0.0.12
   last_duration: ''
@@ -168,12 +187,15 @@
   os_version: 15.5(3)M
   port: 22
   property1: 10.145.14.1
+  property2: CP
+  reachable: true
   subtype: ''
   tasks: []
   type: device
   username: cisco
   vendor: Cisco
 - description: Dallas
+  down: false
   icon: router
   ip_address: 10.0.0.100
   last_duration: ''
@@ -193,12 +215,15 @@
   os_version: 5.1.X
   port: 22
   property1: 10.145.14.1
+  property2: CP
+  reachable: true
   subtype: ''
   tasks: []
   type: device
   username: cisco
   vendor: Cisco
 - description: Philadelphia
+  down: false
   icon: router
   ip_address: 10.0.0.101
   last_duration: ''
@@ -218,12 +243,15 @@
   os_version: 5.1.X
   port: 22
   property1: 10.145.14.1
+  property2: CP
+  reachable: true
   subtype: ''
   tasks: []
   type: device
   username: cisco
   vendor: Cisco
 - description: LosAngeles
+  down: false
   icon: optical_switch
   ip_address: 10.0.0.13
   last_duration: ''
@@ -243,12 +271,15 @@
   os_version: 5.1.X
   port: 22
   property1: 10.145.14.1
+  property2: CP
+  reachable: true
   subtype: ''
   tasks: []
   type: device
   username: cisco
   vendor: Cisco
 - description: Detroit
+  down: false
   icon: router
   ip_address: 10.0.0.14
   last_duration: ''
@@ -268,12 +299,15 @@
   os_version: 5.1.X
   port: 22
   property1: 10.145.14.1
+  property2: CP
+  reachable: true
   subtype: ''
   tasks: []
   type: device
   username: cisco
   vendor: Cisco
 - description: Richmond
+  down: false
   icon: router
   ip_address: 10.0.0.15
   last_duration: ''
@@ -293,12 +327,15 @@
   os_version: 5.1.X
   port: 22
   property1: 10.145.14.1
+  property2: CP
+  reachable: true
   subtype: ''
   tasks: []
   type: device
   username: cisco
   vendor: Cisco
 - description: Atlanta
+  down: false
   icon: router
   ip_address: 10.0.0.102
   last_duration: ''
@@ -318,12 +355,15 @@
   os_version: 5.1.X
   port: 22
   property1: 10.145.14.1
+  property2: CP
+  reachable: true
   subtype: ''
   tasks: []
   type: device
   username: cisco
   vendor: Cisco
 - description: Boston
+  down: false
   icon: router
   ip_address: 10.0.0.103
   last_duration: ''
@@ -343,12 +383,15 @@
   os_version: 5.1.X
   port: 22
   property1: 10.145.14.1
+  property2: CP
+  reachable: true
   subtype: ''
   tasks: []
   type: device
   username: cisco
   vendor: Cisco
 - description: Houston
+  down: false
   icon: router
   ip_address: 10.0.0.104
   last_duration: ''
@@ -368,12 +411,15 @@
   os_version: 5.1.X
   port: 22
   property1: 10.145.14.1
+  property2: CP
+  reachable: true
   subtype: ''
   tasks: []
   type: device
   username: cisco
   vendor: Cisco
 - description: Baltimore
+  down: false
   icon: router
   ip_address: 10.0.0.105
   last_duration: ''
@@ -393,12 +439,15 @@
   os_version: 17.2R1.13
   port: 22
   property1: 10.145.14.1
+  property2: CP
+  reachable: true
   subtype: ''
   tasks: []
   type: device
   username: cisco
   vendor: Juniper
 - description: Cleveland
+  down: false
   icon: router
   ip_address: 10.0.0.106
   last_duration: ''
@@ -418,12 +467,15 @@
   os_version: 17.2R1.13
   port: 22
   property1: 10.145.14.1
+  property2: CP
+  reachable: true
   subtype: ''
   tasks: []
   type: device
   username: cisco
   vendor: Juniper
 - description: Columbus
+  down: false
   icon: router
   ip_address: 10.0.0.107
   last_duration: ''
@@ -443,12 +495,15 @@
   os_version: 17.2R1.13
   port: 22
   property1: 10.145.14.1
+  property2: CP
+  reachable: true
   subtype: ''
   tasks: []
   type: device
   username: cisco
   vendor: Juniper
 - description: Cincinnati
+  down: false
   icon: router
   ip_address: 10.0.0.108
   last_duration: ''
@@ -468,12 +523,15 @@
   os_version: 17.2R1.13
   port: 22
   property1: 10.145.14.1
+  property2: CP
+  reachable: true
   subtype: ''
   tasks: []
   type: device
   username: cisco
   vendor: Juniper
 - description: Cambridge
+  down: false
   icon: router
   ip_address: 10.0.0.109
   last_duration: ''
@@ -493,12 +551,15 @@
   os_version: 17.2R1.13
   port: 22
   property1: 10.145.14.1
+  property2: CP
+  reachable: true
   subtype: ''
   tasks: []
   type: device
   username: cisco
   vendor: Juniper
 - description: Minneapolis
+  down: false
   icon: router
   ip_address: 10.0.0.110
   last_duration: ''
@@ -518,12 +579,15 @@
   os_version: 17.2R1.13
   port: 22
   property1: 10.145.14.1
+  property2: CP
+  reachable: true
   subtype: ''
   tasks: []
   type: device
   username: cisco
   vendor: Juniper
 - description: NewYork
+  down: false
   icon: router
   ip_address: 192.168.1.88
   last_duration: ''
@@ -543,12 +607,15 @@
   os_version: 17.2R1.13
   port: 22
   property1: 10.145.14.1
+  property2: CP
+  reachable: true
   subtype: ''
   tasks: []
   type: device
   username: cisco
   vendor: Juniper
 - description: Sacramento
+  down: false
   icon: router
   ip_address: 10.0.0.111
   last_duration: ''
@@ -568,12 +635,15 @@
   os_version: 17.2R1.13
   port: 22
   property1: 10.145.14.1
+  property2: CP
+  reachable: true
   subtype: ''
   tasks: []
   type: device
   username: cisco
   vendor: Juniper
 - description: SanFrancisco
+  down: false
   icon: router
   ip_address: 192.168.1.89
   last_duration: ''
@@ -593,12 +663,15 @@
   os_version: 17.2R1.13
   port: 22
   property1: 10.145.14.1
+  property2: CP
+  reachable: true
   subtype: ''
   tasks: []
   type: device
   username: cisco
   vendor: Juniper
 - description: Orange
+  down: false
   icon: router
   ip_address: 10.0.0.114
   last_duration: ''
@@ -618,12 +691,15 @@
   os_version: 17.2R1.13
   port: 22
   property1: 10.145.14.1
+  property2: CP
+  reachable: true
   subtype: ''
   tasks: []
   type: device
   username: cisco
   vendor: Juniper
 - description: Oakland
+  down: false
   icon: router
   ip_address: 10.0.0.112
   last_duration: ''
@@ -643,12 +719,15 @@
   os_version: '3.6.5E '
   port: 22
   property1: 10.145.14.1
+  property2: CP
+  reachable: true
   subtype: ''
   tasks: []
   type: device
   username: cisco
   vendor: Cisco
 - description: Denver
+  down: false
   icon: router
   ip_address: 10.0.0.113
   last_duration: ''
@@ -668,12 +747,15 @@
   os_version: '3.6.5E '
   port: 22
   property1: 10.145.14.1
+  property2: CP
+  reachable: true
   subtype: ''
   tasks: []
   type: device
   username: cisco
   vendor: Cisco
 - description: Denver
+  down: false
   icon: router
   ip_address: 127.0.0.1
   last_duration: ''
@@ -693,12 +775,15 @@
   os_version: '3.6.5E '
   port: 22
   property1: 10.145.14.1
+  property2: CP
+  reachable: true
   subtype: ''
   tasks: []
   type: device
   username: admin
   vendor: Cisco
 - description: Washington
+  down: false
   icon: router
   ip_address: 192.168.56.103
   last_duration: ''
@@ -718,6 +803,8 @@
   os_version: 15.5(3)M
   port: 22
   property1: ''
+  property2: CP
+  reachable: true
   subtype: ''
   tasks: []
   type: device

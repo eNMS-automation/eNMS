@@ -15,6 +15,13 @@ Version 3.21.2
 - Rename subservice -> placeholder
 - Fix rendering of custom boolean properties
 - Fix custom properties accordion in service panel
+- Fix service cascade deletion bug with service logs and placeholder
+- Fix front-end alert deleting services and make it a success alert
+- Fix historical config / oper data comparison mechanism
+- Fix bug where superworkflow cannot be cleared from list after selection
+- Fix bug placeholder service deletion from workflow
+- Make superworkflow a workflow property only. Remove superworkflow targets option.
+- Display only workflows in the superworkflow drop-down list.
 
 Version 3.21.1
 --------------

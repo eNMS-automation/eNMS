@@ -6,7 +6,7 @@ from sqlalchemy.schema import UniqueConstraint
 from eNMS.database import db
 from eNMS.models.base import AbstractBase
 from eNMS.forms.automation import ServiceForm
-from eNMS.forms.fields import BooleanField, HiddenField, SelectField
+from eNMS.forms.fields import BooleanField, HiddenField, InstanceField, SelectField
 from eNMS.models.automation import Service
 
 
@@ -23,6 +23,10 @@ class Workflow(Service):
     )
     edges = relationship(
         "WorkflowEdge", back_populates="workflow", cascade="all, delete-orphan"
+    )
+    superworkflow_id = db.Column(Integer, ForeignKey("workflow.id"))
+    superworkflow = relationship(
+        "Workflow", remote_side=[id], foreign_keys="Workflow.superworkflow_id"
     )
 
     __mapper_args__ = {"polymorphic_identity": "workflow"}
@@ -247,6 +251,7 @@ class WorkflowForm(ServiceForm):
             ),
         ),
     )
+    superworkflow = InstanceField("Superworkflow")
 
 
 class WorkflowEdge(AbstractBase):

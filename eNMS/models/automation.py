@@ -74,9 +74,6 @@ class Service(AbstractBase):
     pools = relationship(
         "Pool", secondary=db.service_pool_table, back_populates="services"
     )
-    superworkflow_id = db.Column(Integer, ForeignKey("service.id"))
-    superworkflow = relationship("Service", remote_side=[id])
-    superworkflow_targets = db.Column(db.SmallString, default="placeholder")
     update_pools = db.Column(Boolean, default=False)
     send_notification = db.Column(Boolean, default=False)
     send_notification_method = db.Column(db.SmallString, default="mail")
@@ -100,6 +97,12 @@ class Service(AbstractBase):
     runs = relationship(
         "Run",
         foreign_keys="[Run.service_id]",
+        back_populates="service",
+        cascade="all, delete-orphan",
+    )
+    logs = relationship(
+        "ServiceLog",
+        foreign_keys="[ServiceLog.service_id]",
         back_populates="service",
         cascade="all, delete-orphan",
     )
@@ -293,7 +296,7 @@ class Run(AbstractBase):
     service_name = association_proxy(
         "service", "scoped_name", info={"name": "service_name"}
     )
-    placeholder_id = db.Column(Integer, ForeignKey("service.id"))
+    placeholder_id = db.Column(Integer, ForeignKey("service.id", ondelete="SET NULL"))
     placeholder = relationship("Service", foreign_keys="Run.placeholder_id")
     workflow_id = db.Column(Integer, ForeignKey("workflow.id", ondelete="cascade"))
     workflow = relationship("Workflow", foreign_keys="Run.workflow_id")
@@ -411,10 +414,7 @@ class Run(AbstractBase):
         return devices
 
     def compute_devices(self, payload):
-        if self.placeholder and self.placeholder.superworkflow_targets == "placeholder":
-            service = self.placeholder
-        else:
-            service = self.service
+        service = self.placeholder or self.service
         devices = set(self.devices)
         for pool in self.pools:
             devices |= set(pool.devices)

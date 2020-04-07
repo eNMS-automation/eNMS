@@ -14,7 +14,7 @@
     "scan_timeout": 0.05
   },
   "database": {
-    "url": "sqlite:///database.db?check_same_thread=False",
+    "url": "mysql://root:password@localhost/enms",
     "max_overflow": 10,
     "pool_size": 1000,
     "small_string_length": 255,

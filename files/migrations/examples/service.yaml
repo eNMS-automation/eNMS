@@ -3592,7 +3592,6 @@
   skip_query: ''
   skip_value: 'True'
   superworkflow: 'Regression Workflow L: superworkflow'
-  superworkflow_id: 101
   superworkflow_targets: placeholder
   time_between_retries: 10
   type: workflow
@@ -6703,7 +6702,6 @@
   skip_query: ''
   skip_value: 'True'
   superworkflow: 'Regression Workflow L: superworkflow'
-  superworkflow_id: 101
   superworkflow_targets: superworkflow
   time_between_retries: 10
   type: workflow

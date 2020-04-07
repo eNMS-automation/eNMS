@@ -395,6 +395,8 @@ export function preprocessForm(panel, id, type, duplicate) {
 export function initSelect(el, model, parentId, single) {
   el.select2({
     multiple: !single,
+    allowClear: true,
+    placeholder: `Select ${single ? `a ${model}` : `${model}s`}`,
     closeOnSelect: single ? true : false,
     dropdownParent: parentId ? $(`#${parentId}`) : $(document.body),
     ajax: {

@@ -12,6 +12,7 @@ Version 3.21.2
 - Fix custom properties accordion in service panel
 - Fix service cascade deletion bug with service logs and placeholder
 - Fix front-end alert deleting services and make it a success alert
+- Fix historical config / oper data comparison mechanism
 
 Version 3.21.1
 --------------

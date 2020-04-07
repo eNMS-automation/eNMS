@@ -34,14 +34,27 @@ function run() {
       rm database.db
     fi
   fi
-  gunicorn --config gunicorn.py app:app
+  if [ "$vault" = true ]; then
+    export VAULT_ADDR=http://192.168.56.103:8200
+    export VAULT_TOKEN=s.wIc6FsTFPCh6OxACFWpJSosq
+    export UNSEAL_VAULT_KEY1=Us22h35pko4/k6AeQ915MTiob2hmPHfRYuCZ0dP4mTkZ
+    export UNSEAL_VAULT_KEY2=yZfgWgArNKdjeYJ9AK9vHTQ+h9txjhAlSjgDe23gQhk6
+    export UNSEAL_VAULT_KEY3=5LJFtYIgo9ab/kGt5ryT4DK6z1kwANYy3TXjIHyj4T2I
+  fi
+  if [ "$gunicorn" = true ]; then
+    gunicorn --config gunicorn.py app:app
+  else
+    flask run -h 0.0.0.0
+  fi
 }
 
-while getopts h?rp:d: opt; do
+while getopts h?rvgp:d: opt; do
     case "$opt" in
       d) database=$OPTARG;;
+      g) gunicorn=true;;
       p) path=$OPTARG;;
       r) reload=true;;
+      v) vault=true;;
       h|\?) help;;
     esac
 done

@@ -90,8 +90,8 @@
     "address": ""
   },
   "vault": {
-    "active": false,
-    "unseal": false
+    "active": true,
+    "unseal": true
   },
   "view": {
     "longitude": -96.0,

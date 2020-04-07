@@ -103,6 +103,12 @@ class Service(AbstractBase):
         back_populates="service",
         cascade="all, delete-orphan",
     )
+    logs = relationship(
+        "ServiceLog",
+        foreign_keys="[ServiceLog.service_id]",
+        back_populates="service",
+        cascade="all, delete-orphan",
+    )
     maximum_runs = db.Column(Integer, default=1)
     multiprocessing = db.Column(Boolean, default=False)
     max_processes = db.Column(Integer, default=5)
@@ -293,7 +299,7 @@ class Run(AbstractBase):
     service_name = association_proxy(
         "service", "scoped_name", info={"name": "service_name"}
     )
-    placeholder_id = db.Column(Integer, ForeignKey("service.id"))
+    placeholder_id = db.Column(Integer, ForeignKey("service.id", ondelete="SET NULL"))
     placeholder = relationship("Service", foreign_keys="Run.placeholder_id")
     workflow_id = db.Column(Integer, ForeignKey("workflow.id", ondelete="cascade"))
     workflow = relationship("Workflow", foreign_keys="Run.workflow_id")

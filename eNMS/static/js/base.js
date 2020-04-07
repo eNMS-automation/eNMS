@@ -153,7 +153,7 @@ export const deleteInstance = function(type, id) {
         .remove()
         .draw(false);
       const name = result.name ? `'${result.name}'` : "";
-      notify(`${type.toUpperCase()} ${name} deleted.`, "error", 5, true);
+      notify(`${type.toUpperCase()} ${name} deleted.`, "success", 5, true);
     },
   });
 };

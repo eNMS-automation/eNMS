@@ -37,13 +37,11 @@ function run() {
   gunicorn --config gunicorn.py app:app
 }
 
-while getopts h?d:v: opt; do
+while getopts h?rp:d: opt; do
     case "$opt" in
       d) database=$OPTARG;;
-      i) function=install;;
       p) path=$OPTARG;;
       r) reload=true;;
-      v) vault=$OPTARG;;
       h|\?) help;;
     esac
 done

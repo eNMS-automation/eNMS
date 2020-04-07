@@ -66,7 +66,7 @@ class AbstractBase(db.base):
             if property in relation:
                 if relation[property]["list"]:
                     value = db.objectify(relation[property]["model"], value)
-                else:
+                elif value:
                     value = db.fetch(relation[property]["model"], id=value)
             if property_type == "bool":
                 value = value not in (False, "false")

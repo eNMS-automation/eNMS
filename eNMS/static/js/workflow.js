@@ -475,7 +475,7 @@ function serviceToNode(service) {
   const isPlaceholder = service.scoped_name == "Placeholder";
   if (isPlaceholder) placeholder = service;
   const defaultService = ["Start", "End"].includes(service.scoped_name);
-  if (defaultService || isPlaceholder) ends.add(service.id);
+  if (defaultService) ends.add(service.id);
   return {
     id: service.id,
     shape: service.type == "workflow" ? "ellipse" : defaultService ? "circle" : "box",
@@ -888,19 +888,21 @@ function displayWorkflowState(result) {
 
 function resetDisplay() {
   $("#progressbar").hide();
-  if (placeholder) {
-    nodes.update({
-      id: placeholder.id,
-      label: "Placeholder",
-    });
-  }
   workflow.services.forEach((service) => {
-    if (ends.has(service.id) || !nodes) return;
-    nodes.update({
-      id: service.id,
-      label: getServiceLabel(service),
-      color: service.skip ? "#D3D3D3" : "#D2E5FF",
-    });
+    if (service.scoped_name == "Placeholder") {
+      nodes.update({
+        id: service.id,
+        label: "Placeholder",
+      });
+    } else if (ends.has(service.id) || !nodes) {
+      return;
+    } else {
+      nodes.update({
+        id: service.id,
+        label: getServiceLabel(service),
+        color: service.skip ? "#D3D3D3" : "#D2E5FF",
+      });
+    }
   });
   if (!edges) return;
   workflow.edges.forEach((edge) => {

@@ -28,7 +28,6 @@ class Workflow(Service):
     superworkflow = relationship(
         "Workflow", remote_side=[id], foreign_keys="Workflow.superworkflow_id"
     )
-    superworkflow_targets = db.Column(db.SmallString, default="placeholder")
 
     __mapper_args__ = {"polymorphic_identity": "workflow"}
 
@@ -253,13 +252,6 @@ class WorkflowForm(ServiceForm):
         ),
     )
     superworkflow = InstanceField("Superworkflow")
-    superworkflow_targets = SelectField(
-        "Superworkflow Targets",
-        choices=(
-            ("placeholder", "Use targets from this service"),
-            ("superworkflow", "Use targets from the superworkflow"),
-        ),
-    )
 
 
 class WorkflowEdge(AbstractBase):

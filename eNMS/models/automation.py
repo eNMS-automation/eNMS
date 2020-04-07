@@ -414,10 +414,7 @@ class Run(AbstractBase):
         return devices
 
     def compute_devices(self, payload):
-        if self.placeholder and self.placeholder.superworkflow_targets == "placeholder":
-            service = self.placeholder
-        else:
-            service = self.service
+        service = self.placeholder or self.service
         devices = set(self.devices)
         for pool in self.pools:
             devices |= set(pool.devices)

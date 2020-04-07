@@ -31,9 +31,9 @@ function openServicePanel() {
   showTypePanel($("#service-type").val());
 }
 
-export function compare(type, id) {
-  const v1 = $(`input[name=v1-${id}]:checked`).val();
-  const v2 = $(`input[name=v2-${id}]:checked`).val();
+export function compare(type, device) {
+  const v1 = $(`input[name=v1-${device.id}]:checked`).val();
+  const v2 = $(`input[name=v2-${device.id}]:checked`).val();
   if (!v1 || !v2) {
     notify("Select two versions to compare first.", "error", 5);
   } else if (v1 == v2) {
@@ -68,7 +68,7 @@ export function compare(type, id) {
           width: "120px",
         });
         call({
-          url: `/compare/${type}/${v1}/${v2}`,
+          url: `/compare/${type}/${device.name}/${v1}/${v2}`,
           callback: (result) => {
             let diff2htmlUi = new Diff2HtmlUI({ diff: result });
             $(`#diff-type-${cantorId}`)

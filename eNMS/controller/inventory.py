@@ -120,10 +120,10 @@ class InventoryController(BaseController):
             for data_type in ("configuration", "operational_data")
         }
 
-    def get_git_network_data(self, hash):
+    def get_git_network_data(self, device_name, hash):
         tree = Repo(self.path / "network_data").commit(hash).tree
-        configuration_file = tree / "Washington" / "configuration"
-        operational_data_file = tree / "Washington" / "operational_data"
+        configuration_file = tree / device_name / "configuration"
+        operational_data_file = tree / device_name / "operational_data"
         with BytesIO(configuration_file.data_stream.read()) as f:
             configuration = f.read().decode("utf-8")
         with BytesIO(operational_data_file.data_stream.read()) as f:

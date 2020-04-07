@@ -332,11 +332,11 @@ export const showDeviceData = function(device) {
   });
 };
 
-function showGitConfiguration(deviceId, commit) {
+function showGitConfiguration(device, commit) {
   call({
-    url: `/get_git_network_data/${commit.hash}`,
+    url: `/get_git_network_data/${device.name}/${commit.hash}`,
     callback: (result) => {
-      const type = $(`#data-type-${deviceId}`).prop("checked")
+      const type = $(`#data-type-${device.id}`).prop("checked")
         ? "operational_data"
         : "configuration";
       displayNetworkData(type, commit.hash, result, commit.date);
@@ -415,7 +415,7 @@ function showGitHistory(device) {
                 $(`#compare-${device.id}-btn`)
                   .unbind("click")
                   .on("click", function() {
-                    compare(data, device.id);
+                    compare(data, device);
                   });
                 commits[data].forEach((commit) => {
                   table.row.add([
@@ -425,7 +425,7 @@ function showGitHistory(device) {
                       type="button"
                       class="btn btn-sm btn-info"
                       onclick="eNMS.inventory.showGitConfiguration(
-                        ${device.id},
+                        ${JSON.stringify(device).replace(/"/g, "'")},
                         ${JSON.stringify(commit).replace(/"/g, "'")}
                       )"
                       data-tooltip="Configuration"

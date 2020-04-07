@@ -143,7 +143,8 @@ export const deleteInstance = function(type, id) {
       $(`#instance_deletion-${id}`).remove();
       if (type.includes("service") || type == "workflow") {
         type = "service";
-        if (localStorage.getItem("path").includes(id)) {
+        const path = localStorage.getItem("path");
+        if (path && path.includes(id)) {
           localStorage.removeItem("path");
         }
       }

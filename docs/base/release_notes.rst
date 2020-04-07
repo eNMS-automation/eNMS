@@ -15,6 +15,8 @@ Version 3.21.2
 - Fix historical config / oper data comparison mechanism
 - Fix bug where superworkflow cannot be cleared from list after selection
 - Fix bug placeholder service deletion from workflow
+- Make superworkflow a workflow property only. Remove superworkflow targets option.
+- Display only workflows in the superworkflow drop-down list.
 
 Version 3.21.1
 --------------

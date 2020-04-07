@@ -1,7 +1,9 @@
-- content_match: ''
+- completion_time: 1
+  content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
+  definition: Definition
   delete_spaces_before_matching: false
   description: Start point of a workflow
   device_query: ''
@@ -10,6 +12,7 @@
   dict_match: {}
   display_only_failed_nodes: true
   events: []
+  impacting: true
   include_device_results: true
   include_link_in_summary: true
   initial_payload: {}
@@ -101,6 +104,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: per_device
   scoped_name: Start
   send_notification: false
@@ -109,17 +113,18 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
-  superworkflow_targets: placeholder
   time_between_retries: 10
   type: swiss_army_knife_service
   update_pools: false
   validation_method: none
   vendor: ''
   waiting_time: 0
-- content_match: ''
+- completion_time: 1
+  content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
+  definition: Definition
   delete_spaces_before_matching: false
   description: End point of a workflow
   device_query: ''
@@ -128,6 +133,7 @@
   dict_match: {}
   display_only_failed_nodes: true
   events: []
+  impacting: true
   include_device_results: true
   include_link_in_summary: true
   initial_payload: {}
@@ -222,6 +228,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: per_device
   scoped_name: End
   send_notification: false
@@ -230,17 +237,18 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
-  superworkflow_targets: placeholder
   time_between_retries: 10
   type: swiss_army_knife_service
   update_pools: false
   validation_method: none
   vendor: ''
   waiting_time: 0
-- content_match: ''
+- completion_time: 1
+  content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
+  definition: Definition
   delete_spaces_before_matching: false
   description: Monitor eNMS cluster
   device_query: ''
@@ -249,6 +257,7 @@
   dict_match: {}
   display_only_failed_nodes: true
   events: []
+  impacting: true
   include_device_results: true
   include_link_in_summary: true
   initial_payload: {}
@@ -273,6 +282,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: per_device
   scoped_name: cluster_monitoring
   send_notification: false
@@ -281,17 +291,18 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
-  superworkflow_targets: placeholder
   time_between_retries: 10
   type: swiss_army_knife_service
   update_pools: false
   validation_method: none
   vendor: ''
   waiting_time: 0
-- content_match: ''
+- completion_time: 1
+  content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
+  definition: Definition
   delete_spaces_before_matching: false
   description: Push configurations to Git
   device_query: ''
@@ -300,6 +311,7 @@
   dict_match: {}
   display_only_failed_nodes: true
   events: []
+  impacting: true
   include_device_results: true
   include_link_in_summary: true
   initial_payload: {}
@@ -325,6 +337,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: once
   scoped_name: git_push_configurations
   send_notification: false
@@ -333,7 +346,6 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
-  superworkflow_targets: placeholder
   time_between_retries: 10
   type: swiss_army_knife_service
   update_pools: false
@@ -346,11 +358,13 @@
   an_integer: 10
   boolean1: true
   boolean2: false
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   custom_integer: 0
+  definition: Definition
   delete_spaces_before_matching: false
   description: Example
   device_query: ''
@@ -360,6 +374,7 @@
   display_only_failed_nodes: true
   events: []
   exclusion_field: d
+  impacting: true
   include_device_results: true
   include_link_in_summary: true
   initial_payload: {}
@@ -391,6 +406,7 @@
   postprocessing_mode: always
   preprocessing: ''
   regex: ''
+  reserved: false
   run_method: per_device
   scoped_name: Example Service (does nothing)
   send_notification: false
@@ -401,7 +417,6 @@
   skip_value: 'True'
   string1: cisco
   string2: s2
-  superworkflow_targets: placeholder
   time_between_retries: 10
   type: example_service
   update_pools: false
@@ -410,12 +425,14 @@
   vendor: ''
   waiting_time: 0
 - close_connection: false
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credentials: device
   custom_username: ''
+  definition: Definition
   delete_spaces_before_matching: false
   description: Configure BGP Peering with Napalm
   device_query: ''
@@ -424,6 +441,7 @@
   dict_match: {}
   display_only_failed_nodes: true
   events: []
+  impacting: true
   include_device_results: true
   include_link_in_summary: true
   initial_payload: {}
@@ -455,6 +473,7 @@
   postprocessing_mode: always
   preprocessing: ''
   remote_as: 200
+  reserved: false
   run_method: per_device
   scoped_name: napalm_configure_bgp_1
   send_notification: false
@@ -464,7 +483,6 @@
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
-  superworkflow_targets: placeholder
   time_between_retries: 10
   type: configure_bgp_service
   update_pools: false
@@ -473,6 +491,7 @@
   vrf_name: configure_BGP_test
   waiting_time: 100
 - close_connection: false
+  completion_time: 1
   configuration_getters: []
   content_match: ''
   content_match_regex: false
@@ -480,6 +499,7 @@
   creator: admin
   credentials: device
   custom_username: ''
+  definition: Definition
   delete_spaces_before_matching: false
   description: Configuration Backup using NAPALM
   device_query: ''
@@ -489,6 +509,7 @@
   display_only_failed_nodes: true
   driver: eos
   events: []
+  impacting: true
   include_device_results: true
   include_link_in_summary: true
   initial_payload: {}
@@ -517,6 +538,7 @@
   postprocessing_mode: always
   preprocessing: ''
   replacements: []
+  reserved: false
   run_method: per_device
   scoped_name: Configuration Backup (NAPALM)
   send_notification: false
@@ -526,7 +548,6 @@
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
-  superworkflow_targets: placeholder
   time_between_retries: 10
   timeout: 60
   type: napalm_backup_service
@@ -537,6 +558,7 @@
   waiting_time: 0
 - close_connection: false
   commit_configuration: false
+  completion_time: 1
   config_mode: false
   config_mode_command: ''
   content: vrf instance test
@@ -546,6 +568,7 @@
   creator: admin
   credentials: device
   custom_username: ''
+  definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
   description: Create a VRF "test" with Netmiko
@@ -560,6 +583,7 @@
   exit_config_mode: true
   fast_cli: true
   global_delay_factor: 1.0
+  impacting: true
   include_device_results: true
   include_link_in_summary: true
   initial_payload: {}
@@ -585,6 +609,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: per_device
   scoped_name: netmiko_create_vrf_test
   send_notification: false
@@ -596,7 +621,6 @@
   start_new_connection: false
   strip_command: false
   strip_prompt: false
-  superworkflow_targets: placeholder
   time_between_retries: 10
   timeout: 3
   type: netmiko_configuration_service
@@ -608,6 +632,7 @@
 - auto_find_prompt: true
   close_connection: true
   command: show vrf
+  completion_time: 1
   config_mode: false
   content_match: test
   content_match_regex: false
@@ -615,6 +640,7 @@
   creator: admin
   credentials: device
   custom_username: ''
+  definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
   description: Check that the vrf "test" is configured
@@ -633,6 +659,7 @@
   expect_username_prompt: ''
   fast_cli: true
   global_delay_factor: 1.0
+  impacting: true
   include_device_results: true
   include_link_in_summary: true
   initial_payload: {}
@@ -666,6 +693,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: per_device
   scoped_name: netmiko_check_vrf_test
   send_notification: false
@@ -677,7 +705,6 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
-  superworkflow_targets: placeholder
   time_between_retries: 10
   timeout: 3.0
   type: netmiko_validation_service
@@ -689,6 +716,7 @@
   waiting_time: 0
 - close_connection: false
   commit_configuration: false
+  completion_time: 1
   config_mode: false
   config_mode_command: ''
   content: no vrf instance test
@@ -698,6 +726,7 @@
   creator: admin
   credentials: device
   custom_username: ''
+  definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
   description: Delete VRF "test"
@@ -712,6 +741,7 @@
   exit_config_mode: true
   fast_cli: true
   global_delay_factor: 1.0
+  impacting: true
   include_device_results: true
   include_link_in_summary: true
   initial_payload: {}
@@ -738,6 +768,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: per_device
   scoped_name: netmiko_delete_vrf_test
   send_notification: false
@@ -749,7 +780,6 @@
   start_new_connection: false
   strip_command: false
   strip_prompt: false
-  superworkflow_targets: placeholder
   time_between_retries: 10
   timeout: 3
   type: netmiko_configuration_service
@@ -761,6 +791,7 @@
 - auto_find_prompt: true
   close_connection: false
   command: show vrf
+  completion_time: 1
   config_mode: false
   content_match: test
   content_match_regex: true
@@ -768,6 +799,7 @@
   creator: admin
   credentials: device
   custom_username: ''
+  definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
   description: Check that the vrf "test" is NOT configured
@@ -786,6 +818,7 @@
   expect_username_prompt: ''
   fast_cli: true
   global_delay_factor: 1.0
+  impacting: true
   include_device_results: true
   include_link_in_summary: true
   initial_payload: {}
@@ -817,6 +850,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: per_device
   scoped_name: 'Netmiko: Check VRF (test) does not exist'
   send_notification: false
@@ -828,7 +862,6 @@
   start_new_connection: true
   strip_command: true
   strip_prompt: true
-  superworkflow_targets: placeholder
   time_between_retries: 1
   timeout: 3.0
   type: netmiko_validation_service
@@ -840,6 +873,7 @@
   waiting_time: 0
 - action: load_merge_candidate
   close_connection: false
+  completion_time: 1
   content: "vrf instance napalm\r\n"
   content_match: ''
   content_match_regex: false
@@ -847,6 +881,7 @@
   creator: admin
   credentials: device
   custom_username: ''
+  definition: Definition
   delete_spaces_before_matching: false
   description: Create a VRF "test" with Napalm
   device_query: ''
@@ -856,6 +891,7 @@
   display_only_failed_nodes: true
   driver: eos
   events: []
+  impacting: true
   include_device_results: true
   include_link_in_summary: true
   initial_payload: {}
@@ -884,6 +920,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: per_device
   scoped_name: Create a VRF with NAPALM
   send_notification: false
@@ -893,7 +930,6 @@
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
-  superworkflow_targets: placeholder
   time_between_retries: 10
   timeout: 10
   type: napalm_configuration_service
@@ -903,10 +939,12 @@
   vendor: Arista
   waiting_time: 0
 - call_type: GET
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: text
   creator: admin
+  definition: Definition
   delete_spaces_before_matching: false
   description: Use REST call is_alive
   device_query: ''
@@ -916,6 +954,7 @@
   display_only_failed_nodes: true
   events: []
   headers: {}
+  impacting: true
   include_device_results: true
   include_link_in_summary: true
   initial_payload: {}
@@ -950,6 +989,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   rest_url: http://127.0.0.1:5000/rest/is_alive
   run_method: per_device
   scoped_name: 'REST API: call *is_alive* endpoint'
@@ -959,7 +999,6 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
-  superworkflow_targets: placeholder
   time_between_retries: 10
   timeout: 15
   type: rest_call_service
@@ -970,12 +1009,14 @@
   verify_ssl_certificate: true
   waiting_time: 0
 - close_connection: false
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credentials: device
   custom_username: ''
+  definition: Definition
   delete_spaces_before_matching: false
   description: 'Getter: get_facts'
   device_query: ''
@@ -986,6 +1027,7 @@
   driver: eos
   events: []
   getters: [get_facts]
+  impacting: true
   include_device_results: true
   include_link_in_summary: true
   initial_payload: {}
@@ -1015,6 +1057,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: per_device
   scoped_name: 'NAPALM: Get Facts'
   send_notification: false
@@ -1024,7 +1067,6 @@
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
-  superworkflow_targets: placeholder
   time_between_retries: 10
   timeout: 1
   type: napalm_getters_service
@@ -1034,12 +1076,14 @@
   vendor: ''
   waiting_time: 0
 - close_connection: false
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credentials: device
   custom_username: ''
+  definition: Definition
   delete_spaces_before_matching: false
   description: 'Getter: get_interfaces'
   device_query: ''
@@ -1050,6 +1094,7 @@
   driver: eos
   events: []
   getters: [get_interfaces]
+  impacting: true
   include_device_results: true
   include_link_in_summary: true
   initial_payload: {}
@@ -1078,6 +1123,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: per_device
   scoped_name: 'NAPALM: Get interfaces'
   send_notification: false
@@ -1087,7 +1133,6 @@
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
-  superworkflow_targets: placeholder
   time_between_retries: 10
   timeout: 1
   type: napalm_getters_service
@@ -1097,12 +1142,14 @@
   vendor: ''
   waiting_time: 0
 - close_connection: false
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credentials: device
   custom_username: ''
+  definition: Definition
   delete_spaces_before_matching: false
   description: 'Getter: get_interfaces_ip'
   device_query: ''
@@ -1113,6 +1160,7 @@
   driver: eos
   events: []
   getters: [get_interfaces_ip]
+  impacting: true
   include_device_results: true
   include_link_in_summary: true
   initial_payload: {}
@@ -1141,6 +1189,7 @@
     result\"][\"get_interfaces_ip\"][\"Management1\"][\"ipv6\"] = \"::1\""
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: per_device
   scoped_name: get_interfaces_ip
   send_notification: false
@@ -1150,7 +1199,6 @@
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
-  superworkflow_targets: placeholder
   time_between_retries: 10
   timeout: 60
   type: napalm_getters_service
@@ -1160,12 +1208,14 @@
   vendor: ''
   waiting_time: 0
 - close_connection: false
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credentials: device
   custom_username: ''
+  definition: Definition
   delete_spaces_before_matching: false
   description: 'Getter: get_config'
   device_query: ''
@@ -1176,6 +1226,7 @@
   driver: eos
   events: []
   getters: [get_config]
+  impacting: true
   include_device_results: true
   include_link_in_summary: true
   initial_payload: {}
@@ -1203,6 +1254,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: per_device
   scoped_name: get_config
   send_notification: false
@@ -1212,7 +1264,6 @@
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
-  superworkflow_targets: placeholder
   time_between_retries: 10
   timeout: 60
   type: napalm_getters_service
@@ -1221,10 +1272,12 @@
   validation_method: dict_included
   vendor: ''
   waiting_time: 0
-- content_match: ''
+- completion_time: 1
+  content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
+  definition: Definition
   delete_spaces_before_matching: false
   description: Process Payload in example workflow
   device_query: ''
@@ -1233,6 +1286,7 @@
   dict_match: {}
   display_only_failed_nodes: true
   events: []
+  impacting: true
   include_device_results: true
   include_link_in_summary: true
   initial_payload: {}
@@ -1259,6 +1313,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: per_device
   scoped_name: process_payload1
   send_notification: false
@@ -1267,17 +1322,18 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
-  superworkflow_targets: placeholder
   time_between_retries: 10
   type: swiss_army_knife_service
   update_pools: false
   validation_method: none
   vendor: ''
   waiting_time: 0
-- content_match: ''
+- completion_time: 1
+  content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
+  definition: Definition
   delete_spaces_before_matching: false
   description: Add devices to the payload
   device_query: ''
@@ -1286,6 +1342,7 @@
   dict_match: {}
   display_only_failed_nodes: true
   events: []
+  impacting: true
   include_device_results: true
   include_link_in_summary: true
   initial_payload: {}
@@ -1300,7 +1357,7 @@
   max_processes: 5
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression Workflow E: Iteration Targets] Modify Payload for Iteration'
+  name: '[Regression Workflow F: Workflow of Workflows] Modify Payload for Iteration'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -1314,6 +1371,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: per_device
   scoped_name: Modify Payload for Iteration
   send_notification: false
@@ -1328,7 +1386,6 @@
     \ Devices\", [\"Atlanta\", \"Austin\"] if device.name == \"Austin\" else [\"Washington\"\
     ], device=device.name)\r\n\r\n# Interfaces 2\r\nset_var('Interfaces 2', ['Loopback333',\
     \ 'Loopback334'])\r\nsave_result(True, {})"
-  superworkflow_targets: placeholder
   time_between_retries: 10
   type: python_snippet_service
   update_pools: false
@@ -1338,6 +1395,7 @@
 - auto_find_prompt: true
   close_connection: true
   command: show ip route
+  completion_time: 1
   config_mode: false
   content_match: ''
   content_match_regex: false
@@ -1345,6 +1403,7 @@
   creator: admin
   credentials: device
   custom_username: ''
+  definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
   description: Show IP route
@@ -1363,6 +1422,7 @@
   expect_username_prompt: ''
   fast_cli: true
   global_delay_factor: 1.0
+  impacting: true
   include_device_results: true
   include_link_in_summary: true
   initial_payload: {}
@@ -1373,7 +1433,6 @@
   jump_command: ''
   jump_on_connect: false
   jump_username: ''
-  jump_password: "test"
   last_modified: '2019-10-10 13:42:39.673781'
   log_level: 1
   mail_recipient: antoine.fourmy@gmail.com
@@ -1396,6 +1455,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: per_device
   scoped_name: netmiko_show_ip_route
   send_notification: true
@@ -1407,7 +1467,6 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
-  superworkflow_targets: placeholder
   time_between_retries: 10
   timeout: 3.0
   type: netmiko_validation_service
@@ -1417,10 +1476,12 @@
   validation_method: text
   vendor: Arista
   waiting_time: 0
-- content_match: ''
+- completion_time: 1
+  content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
+  definition: Definition
   delete_spaces_before_matching: false
   description: Payload Variables Extraction with Regex/TextFSM
   device_query: ''
@@ -1429,6 +1490,7 @@
   dict_match: {}
   display_only_failed_nodes: true
   events: []
+  impacting: true
   include_device_results: true
   include_link_in_summary: true
   initial_payload: {}
@@ -1475,6 +1537,7 @@
   query1: get_result("netmiko_show_ip_route", device.name)["success"]
   query2: get_result("netmiko_show_ip_route", device.name)["result"]
   query3: get_result("netmiko_show_ip_route", device=device.name)["result"]
+  reserved: false
   run_method: per_device
   scoped_name: Payload Extraction
   send_notification: false
@@ -1483,7 +1546,6 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
-  superworkflow_targets: placeholder
   time_between_retries: 10
   type: payload_extraction_service
   update_pools: false
@@ -1494,12 +1556,14 @@
   vendor: ''
   waiting_time: 0
 - close_connection: false
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credentials: device
   custom_username: ''
+  definition: Definition
   delete_spaces_before_matching: false
   description: ''
   device_query: ''
@@ -1509,6 +1573,7 @@
   display_only_failed_nodes: false
   driver: eos
   events: []
+  impacting: true
   include_device_results: true
   include_link_in_summary: true
   initial_payload: {}
@@ -1537,6 +1602,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: per_device
   scoped_name: Rollback Configuration with NAPALM
   send_notification: false
@@ -1546,7 +1612,6 @@
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
-  superworkflow_targets: placeholder
   time_between_retries: 10
   timeout: 60
   type: napalm_rollback_service
@@ -1558,6 +1623,7 @@
 - auto_find_prompt: true
   close_connection: false
   command: show vrf
+  completion_time: 1
   config_mode: false
   content_match: napalm
   content_match_regex: false
@@ -1565,6 +1631,7 @@
   creator: admin
   credentials: device
   custom_username: ''
+  definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
   description: ''
@@ -1583,6 +1650,7 @@
   expect_username_prompt: ''
   fast_cli: true
   global_delay_factor: 1.0
+  impacting: true
   include_device_results: true
   include_link_in_summary: true
   initial_payload: {}
@@ -1615,6 +1683,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: per_device
   scoped_name: Check VRF exists with Netmiko
   send_notification: false
@@ -1626,7 +1695,6 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
-  superworkflow_targets: placeholder
   time_between_retries: 10
   timeout: 10.0
   type: netmiko_validation_service
@@ -1639,6 +1707,7 @@
 - auto_find_prompt: true
   close_connection: false
   command: show vrf
+  completion_time: 1
   config_mode: false
   content_match: napalm
   content_match_regex: false
@@ -1646,6 +1715,7 @@
   creator: admin
   credentials: device
   custom_username: ''
+  definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
   description: ''
@@ -1664,6 +1734,7 @@
   expect_username_prompt: ''
   fast_cli: true
   global_delay_factor: 1.0
+  impacting: true
   include_device_results: true
   include_link_in_summary: true
   initial_payload: {}
@@ -1695,6 +1766,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: per_device
   scoped_name: Check VRF is not configured with Netmiko
   send_notification: false
@@ -1706,7 +1778,6 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
-  superworkflow_targets: placeholder
   time_between_retries: 10
   timeout: 10.0
   type: netmiko_validation_service
@@ -1718,6 +1789,7 @@
   waiting_time: 0
 - close_connection: false
   command: show vrf a
+  completion_time: 1
   config_mode: false
   confirmation1: Protocols
   confirmation2: Interfaces
@@ -1728,6 +1800,7 @@
   creator: admin
   credentials: device
   custom_username: ''
+  definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
   description: ''
@@ -1746,6 +1819,7 @@
   expect_username_prompt: ''
   fast_cli: false
   global_delay_factor: 1.0
+  impacting: true
   include_device_results: true
   include_link_in_summary: false
   initial_payload: {}
@@ -1774,6 +1848,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   response1: show vrf b
   response2: show vrf c
   response3: ''
@@ -1786,7 +1861,6 @@
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
-  superworkflow_targets: placeholder
   time_between_retries: 10
   timeout: 10
   type: netmiko_prompts_service
@@ -1797,6 +1871,7 @@
   waiting_time: 0
 - close_connection: false
   command: show vrf
+  completion_time: 1
   config_mode: false
   confirmation1: Protocols
   confirmation2: Interfaces
@@ -1807,6 +1882,7 @@
   creator: admin
   credentials: device
   custom_username: ''
+  definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
   description: ''
@@ -1825,6 +1901,7 @@
   expect_username_prompt: ''
   fast_cli: false
   global_delay_factor: 1.0
+  impacting: true
   include_device_results: true
   include_link_in_summary: false
   initial_payload: {}
@@ -1853,6 +1930,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   response1: show vrf
   response2: ''
   response3: ''
@@ -1865,7 +1943,6 @@
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
-  superworkflow_targets: placeholder
   time_between_retries: 10
   timeout: 10
   type: netmiko_prompts_service
@@ -1874,10 +1951,12 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- content_match: ''
+- completion_time: 1
+  content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
+  definition: Definition
   delete_spaces_before_matching: false
   description: ''
   device_query: ''
@@ -1886,6 +1965,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  impacting: true
   include_device_results: true
   include_link_in_summary: false
   initial_payload: {}
@@ -1912,6 +1992,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: once
   scoped_name: Modify payload (no device)
   send_notification: false
@@ -1922,17 +2003,18 @@
   skip_value: 'True'
   source_code: "set_var(\"global_variable\", value=1050)\r\nset_var(\"variable\",\
     \ \"variable_in_variables\")\r\nsave_result(success=True, result={})"
-  superworkflow_targets: placeholder
   time_between_retries: 10
   type: python_snippet_service
   update_pools: false
   validation_method: none
   vendor: ''
   waiting_time: 0
-- content_match: ''
+- completion_time: 1
+  content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
+  definition: Definition
   delete_spaces_before_matching: false
   description: ''
   device_query: ''
@@ -1941,6 +2023,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  impacting: true
   include_device_results: true
   include_link_in_summary: false
   initial_payload: {}
@@ -1967,6 +2050,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: per_device
   scoped_name: Modify payload (per device)
   send_notification: false
@@ -1980,7 +2064,6 @@
     , \"192.168.56.50\")\r\ndevices = [\"Boston\", \"Cincinnati\"] if device.name\
     \ == \"Chicago\" else [\"Cleveland\", \"Washington\"]\r\nset_var(\"iteration_device\"\
     , devices, device=device.name)\r\nsave_result(success=True, result={})"
-  superworkflow_targets: placeholder
   time_between_retries: 10
   type: python_snippet_service
   update_pools: false
@@ -1990,6 +2073,7 @@
 - auto_find_prompt: true
   close_connection: false
   command: show vrf {{iteration_simple}}
+  completion_time: 1
   config_mode: false
   content_match: ''
   content_match_regex: false
@@ -1997,6 +2081,7 @@
   creator: admin
   credentials: device
   custom_username: ''
+  definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
   description: ''
@@ -2015,6 +2100,7 @@
   expect_username_prompt: ''
   fast_cli: true
   global_delay_factor: 1.0
+  impacting: true
   include_device_results: true
   include_link_in_summary: false
   initial_payload: {}
@@ -2044,6 +2130,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: per_device
   scoped_name: Show vrf with payload helper
   send_notification: false
@@ -2055,7 +2142,6 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
-  superworkflow_targets: placeholder
   time_between_retries: 10
   timeout: 1.0
   type: netmiko_validation_service
@@ -2068,6 +2154,7 @@
 - auto_find_prompt: true
   close_connection: false
   command: show vrf test
+  completion_time: 1
   config_mode: false
   content_match: ''
   content_match_regex: false
@@ -2075,6 +2162,7 @@
   creator: admin
   credentials: device
   custom_username: ''
+  definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
   description: ''
@@ -2093,6 +2181,7 @@
   expect_username_prompt: ''
   fast_cli: false
   global_delay_factor: 1.0
+  impacting: true
   include_device_results: true
   include_link_in_summary: false
   initial_payload: {}
@@ -2122,6 +2211,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: per_device
   scoped_name: Show vrf with python query
   send_notification: false
@@ -2133,7 +2223,6 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
-  superworkflow_targets: placeholder
   time_between_retries: 10
   timeout: 10.0
   type: netmiko_validation_service
@@ -2146,6 +2235,7 @@
 - auto_find_prompt: true
   close_connection: false
   command: show vrf {{get_result("Modify payload (per device)")["duration"]}}
+  completion_time: 1
   config_mode: false
   content_match: ''
   content_match_regex: false
@@ -2153,6 +2243,7 @@
   creator: admin
   credentials: device
   custom_username: ''
+  definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
   description: ''
@@ -2171,6 +2262,7 @@
   expect_username_prompt: ''
   fast_cli: false
   global_delay_factor: 1.0
+  impacting: true
   include_device_results: true
   include_link_in_summary: false
   initial_payload: {}
@@ -2200,6 +2292,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: per_device
   scoped_name: show runtime with get_result helper
   send_notification: false
@@ -2211,7 +2304,6 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
-  superworkflow_targets: placeholder
   time_between_retries: 10
   timeout: 10.0
   type: netmiko_validation_service
@@ -2222,12 +2314,14 @@
   vendor: ''
   waiting_time: 0
 - close_connection: false
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credentials: device
   custom_username: ''
+  definition: Definition
   delete_spaces_before_matching: false
   description: ''
   device_query: ''
@@ -2239,6 +2333,7 @@
   driver: eos
   events: []
   getters: [is_alive]
+  impacting: true
   include_device_results: true
   include_link_in_summary: false
   initial_payload: {}
@@ -2269,6 +2364,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: per_device
   scoped_name: 'Getters Workflow: is alive'
   send_notification: false
@@ -2278,7 +2374,6 @@
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
-  superworkflow_targets: placeholder
   time_between_retries: 10
   timeout: 1
   type: napalm_getters_service
@@ -2288,12 +2383,14 @@
   vendor: ''
   waiting_time: 0
 - close_connection: false
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credentials: device
   custom_username: ''
+  definition: Definition
   delete_spaces_before_matching: false
   description: ''
   device_query: ''
@@ -2304,6 +2401,7 @@
   driver: eos
   events: []
   getters: [get_facts]
+  impacting: true
   include_device_results: true
   include_link_in_summary: false
   initial_payload: {}
@@ -2334,6 +2432,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: per_device
   scoped_name: 'Getters Workflow: get facts'
   send_notification: false
@@ -2343,7 +2442,6 @@
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
-  superworkflow_targets: placeholder
   time_between_retries: 10
   timeout: 60
   type: napalm_getters_service
@@ -2353,12 +2451,14 @@
   vendor: ''
   waiting_time: 0
 - close_connection: false
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credentials: device
   custom_username: ''
+  definition: Definition
   delete_spaces_before_matching: false
   description: ''
   device_query: ''
@@ -2370,6 +2470,7 @@
   driver: eos
   events: []
   getters: [get_interfaces_ip]
+  impacting: true
   include_device_results: true
   include_link_in_summary: false
   initial_payload: {}
@@ -2401,6 +2502,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: per_device
   scoped_name: 'Getters Workflow: Interface IP'
   send_notification: false
@@ -2410,7 +2512,6 @@
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
-  superworkflow_targets: placeholder
   time_between_retries: 10
   timeout: 60
   type: napalm_getters_service
@@ -2420,12 +2521,14 @@
   vendor: ''
   waiting_time: 0
 - close_connection: false
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credentials: device
   custom_username: ''
+  definition: Definition
   delete_spaces_before_matching: false
   description: ''
   device_query: ''
@@ -2436,6 +2539,7 @@
   driver: eos
   events: []
   getters: [get_mac_address_table]
+  impacting: true
   include_device_results: true
   include_link_in_summary: false
   initial_payload: {}
@@ -2466,6 +2570,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: per_device
   scoped_name: 'Getters Workflow: MAC address'
   send_notification: false
@@ -2475,7 +2580,6 @@
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
-  superworkflow_targets: placeholder
   time_between_retries: 10
   timeout: 60
   type: napalm_getters_service
@@ -2485,12 +2589,14 @@
   vendor: ''
   waiting_time: 0
 - close_connection: false
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
   credentials: device
   custom_username: ''
+  definition: Definition
   delete_spaces_before_matching: false
   description: ''
   device_query: ''
@@ -2501,6 +2607,7 @@
   driver: eos
   events: []
   getters: [get_facts]
+  impacting: true
   include_device_results: true
   include_link_in_summary: false
   initial_payload: {}
@@ -2531,6 +2638,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: per_device
   scoped_name: 'Getters Workflow: get facts failed match'
   send_notification: false
@@ -2540,7 +2648,6 @@
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
-  superworkflow_targets: placeholder
   time_between_retries: 10
   timeout: 60
   type: napalm_getters_service
@@ -2550,10 +2657,12 @@
   vendor: ''
   waiting_time: 0
 - arguments: ''
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: json
   creator: admin
+  definition: Definition
   delete_spaces_before_matching: false
   description: ''
   device_query: ''
@@ -2562,6 +2671,7 @@
   dict_match: {host: '{{device.ip_address}}', unreachable: 0, use_ssl: true}
   display_only_failed_nodes: false
   events: []
+  impacting: true
   include_device_results: true
   include_link_in_summary: false
   initial_payload: {}
@@ -2592,6 +2702,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: per_device
   scoped_name: 'Ansible Workflow: Arista show version'
   send_notification: false
@@ -2600,7 +2711,6 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
-  superworkflow_targets: placeholder
   time_between_retries: 10
   type: ansible_playbook_service
   update_pools: false
@@ -2608,10 +2718,12 @@
   vendor: ''
   waiting_time: 0
 - arguments: ''
+  completion_time: 1
   content_match: ip address\s.*/24
   content_match_regex: true
   conversion_method: text
   creator: admin
+  definition: Definition
   delete_spaces_before_matching: false
   description: ''
   device_query: ''
@@ -2620,6 +2732,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  impacting: true
   include_device_results: true
   include_link_in_summary: false
   initial_payload: {}
@@ -2649,6 +2762,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: per_device
   scoped_name: 'Ansible Workflow: Arista show configuration (regex match)'
   send_notification: false
@@ -2657,7 +2771,6 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
-  superworkflow_targets: placeholder
   time_between_retries: 10
   type: ansible_playbook_service
   update_pools: false
@@ -2665,10 +2778,12 @@
   vendor: ''
   waiting_time: 0
 - arguments: ''
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: json
   creator: admin
+  definition: Definition
   delete_spaces_before_matching: false
   description: ''
   device_query: ''
@@ -2677,6 +2792,7 @@
   dict_match: {action: debug, changed: false, failed: false}
   display_only_failed_nodes: false
   events: []
+  impacting: true
   include_device_results: true
   include_link_in_summary: false
   initial_payload: {}
@@ -2706,6 +2822,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: per_device
   scoped_name: 'Ansible Workflow: Arista show configuration (dict match)'
   send_notification: false
@@ -2714,7 +2831,6 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
-  superworkflow_targets: placeholder
   time_between_retries: 10
   type: ansible_playbook_service
   update_pools: false
@@ -2724,6 +2840,7 @@
 - auto_find_prompt: true
   close_connection: false
   command: show version
+  completion_time: 1
   config_mode: false
   content_match: ''
   content_match_regex: false
@@ -2731,6 +2848,7 @@
   creator: admin
   credentials: device
   custom_username: ''
+  definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
   description: ''
@@ -2749,6 +2867,7 @@
   expect_username_prompt: ''
   fast_cli: false
   global_delay_factor: 1.0
+  impacting: true
   include_device_results: true
   include_link_in_summary: false
   initial_payload: {}
@@ -2778,6 +2897,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: per_device
   scoped_name: Show version with multiprocessing
   send_notification: false
@@ -2789,7 +2909,6 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
-  superworkflow_targets: placeholder
   time_between_retries: 10
   timeout: 10.0
   type: netmiko_validation_service
@@ -2802,6 +2921,7 @@
 - auto_find_prompt: true
   close_connection: false
   command: show interface {{get_var('non_default_iteration_value_name')}}
+  completion_time: 1
   config_mode: false
   content_match: 255.255.255.255
   content_match_regex: false
@@ -2809,6 +2929,7 @@
   creator: admin
   credentials: device
   custom_username: ''
+  definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
   description: Check the iteration mechanism (interfaces)
@@ -2827,6 +2948,7 @@
   expect_username_prompt: ''
   fast_cli: true
   global_delay_factor: 1.0
+  impacting: true
   include_device_results: true
   include_link_in_summary: true
   initial_payload: {}
@@ -2856,6 +2978,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: per_device
   scoped_name: Iteration Targets Workflow - Test 1
   send_notification: false
@@ -2867,7 +2990,6 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
-  superworkflow_targets: placeholder
   time_between_retries: 10
   timeout: 3.0
   type: netmiko_validation_service
@@ -2880,6 +3002,7 @@
 - auto_find_prompt: true
   close_connection: false
   command: show interface {{get_var('iteration_value')}}
+  completion_time: 1
   config_mode: false
   content_match: 255.255.255.255
   content_match_regex: false
@@ -2887,6 +3010,7 @@
   creator: admin
   credentials: device
   custom_username: ''
+  definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
   description: Check the iteration mechanism (interfaces)
@@ -2905,6 +3029,7 @@
   expect_username_prompt: ''
   fast_cli: true
   global_delay_factor: 1.0
+  impacting: true
   include_device_results: true
   include_link_in_summary: true
   initial_payload: {}
@@ -2934,6 +3059,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: per_device
   scoped_name: Iteration Target Workflow - Test 2
   send_notification: false
@@ -2945,7 +3071,6 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
-  superworkflow_targets: placeholder
   time_between_retries: 10
   timeout: 3.0
   type: netmiko_validation_service
@@ -2958,6 +3083,7 @@
 - auto_find_prompt: true
   close_connection: false
   command: show interface {{get_var('iteration_value')}}
+  completion_time: 1
   config_mode: false
   content_match: 255.255.255.255
   content_match_regex: false
@@ -2965,6 +3091,7 @@
   creator: admin
   credentials: device
   custom_username: ''
+  definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
   description: Check the iteration mechanism (interfaces)
@@ -2983,6 +3110,7 @@
   expect_username_prompt: ''
   fast_cli: true
   global_delay_factor: 1.0
+  impacting: true
   include_device_results: true
   include_link_in_summary: true
   initial_payload: {}
@@ -3012,6 +3140,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: per_device
   scoped_name: Iteration Target Workflow - Test 3
   send_notification: false
@@ -3023,7 +3152,6 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
-  superworkflow_targets: placeholder
   time_between_retries: 10
   timeout: 3.0
   type: netmiko_validation_service
@@ -3033,10 +3161,12 @@
   validation_method: text
   vendor: Arista
   waiting_time: 0
-- content_match: ''
+- completion_time: 1
+  content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
+  definition: Definition
   delete_spaces_before_matching: false
   description: ''
   device_query: ''
@@ -3045,6 +3175,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  impacting: true
   include_device_results: true
   include_link_in_summary: false
   initial_payload: {}
@@ -3074,6 +3205,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: per_device
   scoped_name: 'Payload Workflow: Add initial variables'
   send_notification: false
@@ -3085,17 +3217,18 @@
   source_code: "set_var(\"list\", [1, 2], device=device.name)\r\nset_var(\"dict\"\
     , {\"a\": [\"o\", True, 4]}, device=device.name)\r\nsave_result(success=True,\
     \ result={})"
-  superworkflow_targets: placeholder
   time_between_retries: 10
   type: python_snippet_service
   update_pools: false
   validation_method: none
   vendor: ''
   waiting_time: 0
-- content_match: ''
+- completion_time: 1
+  content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
+  definition: Definition
   delete_spaces_before_matching: false
   description: ''
   device_query: ''
@@ -3104,6 +3237,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  impacting: true
   include_device_results: true
   include_link_in_summary: false
   initial_payload: {}
@@ -3145,6 +3279,7 @@
   query1: 'get_result("Getters Workflow: Interface IP", device=device.name)["negative_logic"]'
   query2: 'get_result("Getters Workflow: Interface IP", device=device.name)["negative_logic"]'
   query3: 'get_result("Getters Workflow: Interface IP", device=device.name)["match"]'
+  reserved: false
   run_method: per_device
   scoped_name: 'Payload Workflow: Extraction 1'
   send_notification: false
@@ -3153,7 +3288,6 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
-  superworkflow_targets: placeholder
   time_between_retries: 10
   type: payload_extraction_service
   update_pools: false
@@ -3163,10 +3297,12 @@
   variable3: dict
   vendor: ''
   waiting_time: 0
-- content_match: ''
+- completion_time: 1
+  content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
+  definition: Definition
   delete_spaces_before_matching: false
   description: ''
   device_query: ''
@@ -3175,6 +3311,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  impacting: true
   include_device_results: true
   include_link_in_summary: false
   initial_payload: {}
@@ -3216,6 +3353,7 @@
   query1: get_result("Start")["state"]["completed"]
   query2: get_result("Start")["logs"]
   query3: get_result("Start")["state"]
+  reserved: false
   run_method: per_device
   scoped_name: 'Payload Workflow: Extraction 2'
   send_notification: false
@@ -3224,7 +3362,6 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
-  superworkflow_targets: placeholder
   time_between_retries: 10
   type: payload_extraction_service
   update_pools: false
@@ -3235,10 +3372,12 @@
   vendor: ''
   waiting_time: 0
 - call_type: GET
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
+  definition: Definition
   delete_spaces_before_matching: false
   description: ''
   device_query: ''
@@ -3248,6 +3387,7 @@
   display_only_failed_nodes: false
   events: []
   headers: {}
+  impacting: true
   include_device_results: true
   include_link_in_summary: false
   initial_payload: {}
@@ -3276,6 +3416,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   rest_url: http://127.0.0.1:5000/rest/instance/device/{{get_var('iteration_value')}}
   run_method: per_device
   scoped_name: Iteration Targets Workflow - Test 4
@@ -3285,7 +3426,6 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
-  superworkflow_targets: placeholder
   time_between_retries: 10
   timeout: 15
   type: rest_call_service
@@ -3295,10 +3435,12 @@
   vendor: ''
   verify_ssl_certificate: false
   waiting_time: 0
-- content_match: ''
+- completion_time: 1
+  content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
+  definition: Definition
   delete_spaces_before_matching: false
   description: ''
   device_query: ''
@@ -3307,6 +3449,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  impacting: true
   include_device_results: true
   include_link_in_summary: false
   initial_payload: {}
@@ -3336,6 +3479,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: per_device
   scoped_name: 'Variable Access Subworkflow: Access variable from snippet'
   send_notification: false
@@ -3353,7 +3497,6 @@
     \ get_result(\"netmiko_check_vrf_napalm\", device=device.name, workflow=\"Regression\
     \ Workflow 5: VRF creation and deletion with Napalm\"),\r\n}\r\nsave_result(success=True,\
     \ result=result)"
-  superworkflow_targets: placeholder
   time_between_retries: 10
   type: python_snippet_service
   update_pools: false
@@ -3363,6 +3506,7 @@
 - auto_find_prompt: true
   close_connection: false
   command: show interface {{get_var('iteration_value')}}
+  completion_time: 1
   config_mode: false
   content_match: ''
   content_match_regex: false
@@ -3370,6 +3514,7 @@
   creator: admin
   credentials: device
   custom_username: ''
+  definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
   description: ''
@@ -3388,6 +3533,7 @@
   expect_username_prompt: ''
   fast_cli: false
   global_delay_factor: 1.0
+  impacting: true
   include_device_results: true
   include_link_in_summary: false
   initial_payload: {}
@@ -3419,6 +3565,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: per_device
   scoped_name: 'Variable Access Subworkflow: Access variables for iteration'
   send_notification: false
@@ -3430,7 +3577,6 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
-  superworkflow_targets: placeholder
   time_between_retries: 10
   timeout: 10.0
   type: netmiko_validation_service
@@ -3441,10 +3587,12 @@
   vendor: ''
   waiting_time: 0
 - close_connection: false
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
+  definition: Definition
   delete_spaces_before_matching: false
   description: Poll configuration and push to gitlab
   device_query: ''
@@ -3453,6 +3601,7 @@
   dict_match: {}
   display_only_failed_nodes: true
   events: []
+  impacting: true
   include_device_results: true
   include_link_in_summary: true
   initial_payload: {}
@@ -3483,6 +3632,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: per_service_with_workflow_targets
   scoped_name: 'Regression Workflow 9: Operational Data Backup'
   send_notification: false
@@ -3495,7 +3645,6 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
-  superworkflow_targets: placeholder
   time_between_retries: 10
   type: workflow
   update_pools: false
@@ -3503,10 +3652,12 @@
   vendor: ''
   waiting_time: 0
 - close_connection: false
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
+  definition: Definition
   delete_spaces_before_matching: false
   description: Create and delete a VRF with Netmiko
   device_query: ''
@@ -3515,6 +3666,7 @@
   dict_match: {}
   display_only_failed_nodes: true
   events: []
+  impacting: true
   include_device_results: true
   include_link_in_summary: true
   initial_payload: {}
@@ -3578,6 +3730,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: per_device
   scoped_name: 'Regression Workflow 4: VRF creation and deletion with Netmiko'
   send_notification: false
@@ -3592,7 +3745,7 @@
   skip_query: ''
   skip_value: 'True'
   superworkflow: 'Regression Workflow L: superworkflow'
-  superworkflow_targets: placeholder
+  superworkflow_id: 101
   time_between_retries: 10
   type: workflow
   update_pools: false
@@ -3600,10 +3753,12 @@
   vendor: ''
   waiting_time: 0
 - close_connection: false
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
+  definition: Definition
   delete_spaces_before_matching: false
   description: Create and delete a VRF with Napalm
   device_query: ''
@@ -3612,6 +3767,7 @@
   dict_match: {}
   display_only_failed_nodes: true
   events: []
+  impacting: true
   include_device_results: true
   include_link_in_summary: true
   initial_payload: {}
@@ -3645,6 +3801,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: per_device
   scoped_name: 'Regression Workflow 5: VRF creation and deletion with Napalm'
   send_notification: false
@@ -3661,7 +3818,6 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
-  superworkflow_targets: placeholder
   time_between_retries: 10
   type: workflow
   update_pools: false
@@ -3669,10 +3825,12 @@
   vendor: ''
   waiting_time: 0
 - close_connection: false
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
+  definition: Definition
   delete_spaces_before_matching: false
   description: REST call, Napalm getters, etc
   device_query: ''
@@ -3681,6 +3839,7 @@
   dict_match: {}
   display_only_failed_nodes: true
   events: []
+  impacting: true
   include_device_results: true
   include_link_in_summary: true
   initial_payload: {}
@@ -3717,6 +3876,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: per_device
   scoped_name: 'Regression Workflow 3: Napalm getters (postprocessing)'
   send_notification: false
@@ -3729,7 +3889,6 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
-  superworkflow_targets: placeholder
   time_between_retries: 10
   type: workflow
   update_pools: false
@@ -3737,10 +3896,12 @@
   vendor: ''
   waiting_time: 0
 - close_connection: false
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
+  definition: Definition
   delete_spaces_before_matching: false
   description: Test the payload extraction and validation mechanisms
   device_query: ''
@@ -3749,6 +3910,7 @@
   dict_match: {}
   display_only_failed_nodes: true
   events: []
+  impacting: true
   include_device_results: true
   include_link_in_summary: true
   initial_payload: {}
@@ -3817,6 +3979,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: per_device
   scoped_name: 'Regression Workflow 7: Payload Extraction & Validation'
   send_notification: false
@@ -3840,7 +4003,6 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
-  superworkflow_targets: placeholder
   time_between_retries: 10
   type: workflow
   update_pools: false
@@ -3848,10 +4010,12 @@
   vendor: ''
   waiting_time: 0
 - close_connection: false
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
+  definition: Definition
   delete_spaces_before_matching: false
   description: Test the inner workflow system
   device_query: ''
@@ -3860,6 +4024,7 @@
   dict_match: {}
   display_only_failed_nodes: true
   events: []
+  impacting: true
   include_device_results: true
   include_link_in_summary: true
   initial_payload: {}
@@ -3895,22 +4060,22 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: per_device
   scoped_name: 'Regression Workflow F: Workflow of Workflows'
   send_notification: true
   send_notification_method: mail
   services: ['[Shared] Start', '[Shared] End', '[Regression Workflow F: Workflow of
       Workflows] Regression Workflow 5: VRF creation and deletion with Napalm', '[Regression
-      Workflow E: Iteration Targets] Modify Payload for Iteration', '[Regression Workflow
-      F: Workflow of Workflows] Regression Workflow F S2: Access Variables from Parent
-      Workflow', '[Regression Workflow F: Workflow of Workflows] Regression Workflow
-      F S1: Subworkflow of Workflow', '[Regression Workflow F: Workflow of Workflows]
-      Show interfaces with Netmiko', '[Shared] NAPALM: Get interfaces']
+      Workflow F: Workflow of Workflows] Modify Payload for Iteration', '[Regression
+      Workflow F: Workflow of Workflows] Regression Workflow F S2: Access Variables
+      from Parent Workflow', '[Regression Workflow F: Workflow of Workflows] Regression
+      Workflow F S1: Subworkflow of Workflow', '[Regression Workflow F: Workflow of
+      Workflows] Show interfaces with Netmiko', '[Shared] NAPALM: Get interfaces']
   shared: false
   skip: false
   skip_query: ''
   skip_value: 'True'
-  superworkflow_targets: placeholder
   time_between_retries: 10
   type: workflow
   update_pools: false
@@ -3918,10 +4083,12 @@
   vendor: ''
   waiting_time: 0
 - close_connection: false
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
+  definition: Definition
   delete_spaces_before_matching: false
   description: Workflow with separate failure - success path
   device_query: ''
@@ -3930,6 +4097,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  impacting: true
   include_device_results: true
   include_link_in_summary: false
   initial_payload: {}
@@ -3961,6 +4129,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: per_device
   scoped_name: 'Regression Workflow 2: Separate Failure - Success paths'
   send_notification: false
@@ -3973,7 +4142,6 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
-  superworkflow_targets: placeholder
   time_between_retries: 10
   type: workflow
   update_pools: false
@@ -3981,10 +4149,12 @@
   vendor: ''
   waiting_time: 0
 - close_connection: false
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
+  definition: Definition
   delete_spaces_before_matching: false
   description: ''
   device_query: ''
@@ -3993,6 +4163,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  impacting: true
   include_device_results: true
   include_link_in_summary: false
   initial_payload: {}
@@ -4023,6 +4194,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: per_device
   scoped_name: 'Regression Workflow D: Prompts'
   send_notification: false
@@ -4034,7 +4206,6 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
-  superworkflow_targets: placeholder
   time_between_retries: 10
   type: workflow
   update_pools: false
@@ -4042,10 +4213,12 @@
   vendor: ''
   waiting_time: 0
 - close_connection: false
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
+  definition: Definition
   delete_spaces_before_matching: false
   description: ''
   device_query: ''
@@ -4054,6 +4227,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  impacting: true
   include_device_results: true
   include_link_in_summary: false
   initial_payload: {}
@@ -4100,6 +4274,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: per_service_with_workflow_targets
   scoped_name: 'Regression Workflow A: get_var, set_var, get_result'
   send_notification: false
@@ -4115,7 +4290,6 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
-  superworkflow_targets: placeholder
   time_between_retries: 10
   type: workflow
   update_pools: false
@@ -4123,10 +4297,12 @@
   vendor: ''
   waiting_time: 0
 - close_connection: false
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
+  definition: Definition
   delete_spaces_before_matching: false
   description: ''
   device_query: ''
@@ -4135,6 +4311,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  impacting: true
   include_device_results: true
   include_link_in_summary: false
   initial_payload: {}
@@ -4198,6 +4375,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: per_device
   scoped_name: 'Regression Workflow B: Napalm getters validation'
   send_notification: false
@@ -4217,7 +4395,6 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
-  superworkflow_targets: placeholder
   time_between_retries: 10
   type: workflow
   update_pools: false
@@ -4225,10 +4402,12 @@
   vendor: ''
   waiting_time: 0
 - close_connection: false
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
+  definition: Definition
   delete_spaces_before_matching: false
   description: ''
   device_query: ''
@@ -4237,6 +4416,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  impacting: true
   include_device_results: true
   include_link_in_summary: false
   initial_payload: {}
@@ -4288,6 +4468,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: per_device
   scoped_name: 'Regression Workflow 6: Ansible with Validation'
   send_notification: false
@@ -4302,7 +4483,6 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
-  superworkflow_targets: placeholder
   time_between_retries: 10
   type: workflow
   update_pools: false
@@ -4310,10 +4490,12 @@
   vendor: ''
   waiting_time: 0
 - close_connection: false
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
+  definition: Definition
   delete_spaces_before_matching: false
   description: ''
   device_query: ''
@@ -4324,6 +4506,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  impacting: true
   include_device_results: true
   include_link_in_summary: false
   initial_payload: {mode: LAB}
@@ -4359,6 +4542,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: per_device
   scoped_name: 'Regression Workflow C: Advanced multiprocessing'
   send_notification: false
@@ -4371,7 +4555,6 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
-  superworkflow_targets: placeholder
   time_between_retries: 10
   type: workflow
   update_pools: false
@@ -4379,10 +4562,12 @@
   vendor: ''
   waiting_time: 0
 - close_connection: false
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
+  definition: Definition
   delete_spaces_before_matching: false
   description: ''
   device_query: ''
@@ -4391,6 +4576,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  impacting: true
   include_device_results: true
   include_link_in_summary: false
   initial_payload: {}
@@ -4451,21 +4637,21 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: per_device
   scoped_name: 'Regression Workflow E: Iteration Targets'
   send_notification: false
   send_notification_method: mail
-  services: ['[Shared] Start', '[Shared] End', '[Regression Workflow E: Iteration
-      Targets] Modify Payload for Iteration', '[Regression Workflow E: Iteration Targets]
-      Iteration Target Workflow - Test 2', '[Regression Workflow E: Iteration Targets]
-      Iteration Targets Workflow - Test 1', '[Regression Workflow E: Iteration Targets]
-      Iteration Target Workflow - Test 3', '[Regression Workflow E: Iteration Targets]
-      Iteration Targets Workflow - Test 4']
+  services: ['[Shared] Start', '[Shared] End', '[Regression Workflow F: Workflow of
+      Workflows] Modify Payload for Iteration', '[Regression Workflow E: Iteration
+      Targets] Iteration Target Workflow - Test 2', '[Regression Workflow E: Iteration
+      Targets] Iteration Targets Workflow - Test 1', '[Regression Workflow E: Iteration
+      Targets] Iteration Target Workflow - Test 3', '[Regression Workflow E: Iteration
+      Targets] Iteration Targets Workflow - Test 4']
   shared: false
   skip: false
   skip_query: ''
   skip_value: 'True'
-  superworkflow_targets: placeholder
   time_between_retries: 10
   type: workflow
   update_pools: false
@@ -4473,10 +4659,12 @@
   vendor: ''
   waiting_time: 0
 - close_connection: false
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
+  definition: Definition
   delete_spaces_before_matching: false
   description: ''
   device_query: ''
@@ -4485,6 +4673,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  impacting: true
   include_device_results: true
   include_link_in_summary: false
   initial_payload: {}
@@ -4513,6 +4702,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: per_device
   scoped_name: 'Regression Workflow 8: Payload Extraction with Operations'
   send_notification: false
@@ -4535,7 +4725,6 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
-  superworkflow_targets: placeholder
   time_between_retries: 10
   type: workflow
   update_pools: false
@@ -4543,10 +4732,12 @@
   vendor: ''
   waiting_time: 0
 - close_connection: false
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
+  definition: Definition
   delete_spaces_before_matching: false
   description: ''
   device_query: ''
@@ -4555,6 +4746,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  impacting: true
   include_device_results: true
   include_link_in_summary: false
   initial_payload: {}
@@ -4582,6 +4774,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: per_device
   scoped_name: 'Regression Workflow F S2: Access Variables from Parent Workflow'
   send_notification: false
@@ -4595,7 +4788,6 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
-  superworkflow_targets: placeholder
   time_between_retries: 10
   type: workflow
   update_pools: false
@@ -4603,10 +4795,12 @@
   vendor: ''
   waiting_time: 0
 - close_connection: false
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
+  definition: Definition
   delete_spaces_before_matching: false
   description: ''
   device_query: ''
@@ -4615,6 +4809,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  impacting: true
   include_device_results: true
   include_link_in_summary: false
   initial_payload: {}
@@ -4642,6 +4837,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: per_device
   scoped_name: 'Regression Workflow F S1: Subworkflow of Workflow'
   send_notification: false
@@ -4657,7 +4853,6 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
-  superworkflow_targets: placeholder
   time_between_retries: 10
   type: workflow
   update_pools: false
@@ -4665,10 +4860,12 @@
   vendor: ''
   waiting_time: 0
 - close_connection: false
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
+  definition: Definition
   delete_spaces_before_matching: false
   description: ''
   device_query: ''
@@ -4677,6 +4874,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  impacting: true
   include_device_results: true
   include_link_in_summary: false
   initial_payload: {}
@@ -4712,6 +4910,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: per_service_with_service_targets
   scoped_name: 'Regression Workflow 1: Netmiko with validation and retries'
   send_notification: false
@@ -4722,7 +4921,6 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
-  superworkflow_targets: placeholder
   time_between_retries: 10
   type: workflow
   update_pools: false
@@ -4732,6 +4930,7 @@
 - auto_find_prompt: true
   close_connection: false
   command: show vrf
+  completion_time: 1
   config_mode: false
   content_match: NOVRF
   content_match_regex: false
@@ -4739,6 +4938,7 @@
   creator: admin
   credentials: device
   custom_username: ''
+  definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
   description: ''
@@ -4757,6 +4957,7 @@
   expect_username_prompt: ''
   fast_cli: false
   global_delay_factor: 1.0
+  impacting: true
   include_device_results: true
   include_link_in_summary: false
   initial_payload: {}
@@ -4786,6 +4987,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: per_device
   scoped_name: Check VRF (NOVRF) exists
   send_notification: false
@@ -4797,7 +4999,6 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
-  superworkflow_targets: placeholder
   time_between_retries: 2
   timeout: 10.0
   type: netmiko_validation_service
@@ -4810,6 +5011,7 @@
 - auto_find_prompt: true
   close_connection: false
   command: show interfaces
+  completion_time: 1
   config_mode: false
   content_match: ''
   content_match_regex: false
@@ -4817,6 +5019,7 @@
   creator: admin
   credentials: device
   custom_username: ''
+  definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
   description: ''
@@ -4835,6 +5038,7 @@
   expect_username_prompt: ''
   fast_cli: false
   global_delay_factor: 1.0
+  impacting: true
   include_device_results: true
   include_link_in_summary: false
   initial_payload: {}
@@ -4863,6 +5067,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: per_device
   scoped_name: Show interfaces with Netmiko
   send_notification: false
@@ -4874,7 +5079,6 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
-  superworkflow_targets: placeholder
   time_between_retries: 10
   timeout: 10.0
   type: netmiko_validation_service
@@ -4885,6 +5089,7 @@
   vendor: ''
   waiting_time: 0
 - close_connection: true
+  completion_time: 1
   config_mode: false
   configuration_command: show run
   content_match: ''
@@ -4893,6 +5098,7 @@
   creator: admin
   credentials: device
   custom_username: ''
+  definition: Definition
   delete_spaces_before_matching: false
   description: ''
   device_query: ''
@@ -4905,6 +5111,7 @@
   events: []
   fast_cli: false
   global_delay_factor: 1.0
+  impacting: true
   include_device_results: true
   include_link_in_summary: false
   initial_payload: {}
@@ -4938,6 +5145,7 @@
   - {pattern: '', replace_with: ''}
   - {pattern: '', replace_with: ''}
   - {pattern: '', replace_with: ''}
+  reserved: false
   run_method: per_device
   scoped_name: Retrieve Operational Data
   send_notification: false
@@ -4947,7 +5155,6 @@
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
-  superworkflow_targets: placeholder
   time_between_retries: 10
   timeout: 10
   type: data_backup_service
@@ -4957,10 +5164,12 @@
   vendor: ''
   waiting_time: 0
 - close_connection: false
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
+  definition: Definition
   delete_spaces_before_matching: false
   description: ''
   device_query: ''
@@ -4969,6 +5178,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  impacting: true
   include_device_results: false
   include_link_in_summary: false
   initial_payload: {}
@@ -4994,6 +5204,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: per_device
   scoped_name: 'Regression Workflow G: run methods (BFS)'
   send_notification: false
@@ -5008,7 +5219,6 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
-  superworkflow_targets: placeholder
   time_between_retries: 10
   type: workflow
   update_pools: false
@@ -5016,10 +5226,12 @@
   vendor: ''
   waiting_time: 0
 - close_connection: false
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
+  definition: Definition
   delete_spaces_before_matching: false
   description: ''
   device_query: ''
@@ -5028,6 +5240,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  impacting: true
   include_device_results: false
   include_link_in_summary: false
   initial_payload: {}
@@ -5055,6 +5268,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: per_device
   scoped_name: Workflow  in device by device mode
   send_notification: false
@@ -5065,7 +5279,6 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
-  superworkflow_targets: placeholder
   time_between_retries: 10
   type: workflow
   update_pools: false
@@ -5073,10 +5286,12 @@
   vendor: ''
   waiting_time: 0
 - call_type: GET
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
+  definition: Definition
   delete_spaces_before_matching: false
   description: ''
   device_query: ''
@@ -5086,6 +5301,7 @@
   display_only_failed_nodes: false
   events: []
   headers: {}
+  impacting: true
   include_device_results: false
   include_link_in_summary: false
   initial_payload: {}
@@ -5113,6 +5329,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   rest_url: ''
   run_method: per_device
   scoped_name: Service in run once mode
@@ -5122,7 +5339,6 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
-  superworkflow_targets: placeholder
   time_between_retries: 10
   timeout: 15
   type: rest_call_service
@@ -5133,10 +5349,12 @@
   verify_ssl_certificate: false
   waiting_time: 0
 - close_connection: false
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
+  definition: Definition
   delete_spaces_before_matching: false
   description: ''
   device_query: ''
@@ -5145,6 +5363,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  impacting: true
   include_device_results: false
   include_link_in_summary: false
   initial_payload: {}
@@ -5172,6 +5391,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: per_service_with_workflow_targets
   scoped_name: Workflow in service by service mode (workflow targets)
   send_notification: false
@@ -5183,7 +5403,6 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
-  superworkflow_targets: placeholder
   time_between_retries: 10
   type: workflow
   update_pools: false
@@ -5191,10 +5410,12 @@
   vendor: ''
   waiting_time: 0
 - call_type: GET
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
+  definition: Definition
   delete_spaces_before_matching: false
   description: ''
   device_query: ''
@@ -5204,6 +5425,7 @@
   display_only_failed_nodes: false
   events: []
   headers: {}
+  impacting: true
   include_device_results: false
   include_link_in_summary: false
   initial_payload: {}
@@ -5232,6 +5454,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   rest_url: ''
   run_method: per_device
   scoped_name: Service in Run once per device mode
@@ -5241,7 +5464,6 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
-  superworkflow_targets: placeholder
   time_between_retries: 10
   timeout: 15
   type: rest_call_service
@@ -5252,10 +5474,12 @@
   verify_ssl_certificate: false
   waiting_time: 0
 - close_connection: false
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
+  definition: Definition
   delete_spaces_before_matching: false
   description: ''
   device_query: ''
@@ -5264,6 +5488,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  impacting: true
   include_device_results: false
   include_link_in_summary: false
   initial_payload: {}
@@ -5290,6 +5515,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: per_service_with_service_targets
   scoped_name: Workflow in service targets mode
   send_notification: false
@@ -5300,7 +5526,6 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
-  superworkflow_targets: placeholder
   time_between_retries: 10
   type: workflow
   update_pools: false
@@ -5310,6 +5535,7 @@
 - auto_find_prompt: true
   close_connection: false
   command: ''
+  completion_time: 1
   config_mode: false
   content_match: ''
   content_match_regex: false
@@ -5317,6 +5543,7 @@
   creator: admin
   credentials: device
   custom_username: ''
+  definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
   description: ''
@@ -5335,6 +5562,7 @@
   expect_username_prompt: ''
   fast_cli: false
   global_delay_factor: 1.0
+  impacting: true
   include_device_results: false
   include_link_in_summary: false
   initial_payload: {}
@@ -5365,6 +5593,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: per_device
   scoped_name: Validation show VRF
   send_notification: false
@@ -5376,7 +5605,6 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
-  superworkflow_targets: placeholder
   time_between_retries: 10
   timeout: 10.0
   type: netmiko_validation_service
@@ -5389,6 +5617,7 @@
 - auto_find_prompt: true
   close_connection: false
   command: ''
+  completion_time: 1
   config_mode: false
   content_match: ''
   content_match_regex: false
@@ -5396,6 +5625,7 @@
   creator: admin
   credentials: device
   custom_username: ''
+  definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
   description: ''
@@ -5414,6 +5644,7 @@
   expect_username_prompt: ''
   fast_cli: false
   global_delay_factor: 1.0
+  impacting: true
   include_device_results: false
   include_link_in_summary: false
   initial_payload: {}
@@ -5444,6 +5675,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: per_device
   scoped_name: Validation show VRF
   send_notification: false
@@ -5455,7 +5687,6 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
-  superworkflow_targets: placeholder
   time_between_retries: 10
   timeout: 10.0
   type: netmiko_validation_service
@@ -5468,6 +5699,7 @@
 - auto_find_prompt: true
   close_connection: false
   command: ''
+  completion_time: 1
   config_mode: false
   content_match: ''
   content_match_regex: false
@@ -5475,6 +5707,7 @@
   creator: admin
   credentials: device
   custom_username: ''
+  definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
   description: ''
@@ -5493,6 +5726,7 @@
   expect_username_prompt: ''
   fast_cli: false
   global_delay_factor: 1.0
+  impacting: true
   include_device_results: false
   include_link_in_summary: false
   initial_payload: {}
@@ -5523,6 +5757,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: per_device
   scoped_name: Validation show VRF
   send_notification: false
@@ -5534,7 +5769,6 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
-  superworkflow_targets: placeholder
   time_between_retries: 10
   timeout: 10.0
   type: netmiko_validation_service
@@ -5545,10 +5779,12 @@
   vendor: ''
   waiting_time: 0
 - close_connection: false
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
+  definition: Definition
   delete_spaces_before_matching: false
   description: ''
   device_query: ''
@@ -5557,6 +5793,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  impacting: true
   include_device_results: false
   include_link_in_summary: false
   initial_payload: {}
@@ -5604,6 +5841,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: per_service_with_workflow_targets
   scoped_name: 'Regression Workflow H: shared service in multiple subworkflows'
   send_notification: false
@@ -5615,7 +5853,6 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
-  superworkflow_targets: placeholder
   time_between_retries: 10
   type: workflow
   update_pools: false
@@ -5623,10 +5860,12 @@
   vendor: ''
   waiting_time: 0
 - close_connection: false
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
+  definition: Definition
   delete_spaces_before_matching: false
   description: ''
   device_query: ''
@@ -5635,6 +5874,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  impacting: true
   include_device_results: false
   include_link_in_summary: false
   initial_payload: {}
@@ -5662,6 +5902,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: per_service_with_workflow_targets
   scoped_name: Subworkflow 1
   send_notification: false
@@ -5672,7 +5913,6 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
-  superworkflow_targets: placeholder
   time_between_retries: 10
   type: workflow
   update_pools: false
@@ -5680,10 +5920,12 @@
   vendor: ''
   waiting_time: 0
 - close_connection: false
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
+  definition: Definition
   delete_spaces_before_matching: false
   description: ''
   device_query: ''
@@ -5692,6 +5934,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  impacting: true
   include_device_results: false
   include_link_in_summary: false
   initial_payload: {}
@@ -5719,6 +5962,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: per_service_with_workflow_targets
   scoped_name: Subworkflow 2
   send_notification: false
@@ -5729,7 +5973,6 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
-  superworkflow_targets: placeholder
   time_between_retries: 10
   type: workflow
   update_pools: false
@@ -5739,6 +5982,7 @@
 - auto_find_prompt: true
   close_connection: false
   command: show vrf
+  completion_time: 1
   config_mode: false
   content_match: NOMATCH
   content_match_regex: false
@@ -5746,6 +5990,7 @@
   creator: admin
   credentials: device
   custom_username: ''
+  definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
   description: ''
@@ -5764,6 +6009,7 @@
   expect_username_prompt: ''
   fast_cli: false
   global_delay_factor: 1.0
+  impacting: true
   include_device_results: false
   include_link_in_summary: false
   initial_payload: {}
@@ -5795,6 +6041,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: per_device
   scoped_name: Shared Service for Regression Workflow H
   send_notification: false
@@ -5806,7 +6053,6 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
-  superworkflow_targets: placeholder
   time_between_retries: 10
   timeout: 10.0
   type: netmiko_validation_service
@@ -5817,10 +6063,12 @@
   vendor: ''
   waiting_time: 0
 - arguments: ''
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
+  definition: Definition
   delete_spaces_before_matching: false
   description: ''
   device_query: ''
@@ -5829,6 +6077,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  impacting: true
   include_device_results: false
   include_link_in_summary: false
   initial_payload: {}
@@ -5857,6 +6106,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: per_device
   scoped_name: Simple Playbook
   send_notification: false
@@ -5865,7 +6115,6 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
-  superworkflow_targets: placeholder
   time_between_retries: 10
   type: ansible_playbook_service
   update_pools: false
@@ -5873,10 +6122,12 @@
   vendor: ''
   waiting_time: 0
 - close_connection: false
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
+  definition: Definition
   delete_spaces_before_matching: false
   description: ''
   device_query: ''
@@ -5885,6 +6136,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  impacting: true
   include_device_results: false
   include_link_in_summary: false
   initial_payload: {}
@@ -5910,6 +6162,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: per_device
   scoped_name: 'Regression Workflow I: Iteration Targets Advanced'
   send_notification: false
@@ -5921,17 +6174,18 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
-  superworkflow_targets: placeholder
   time_between_retries: 10
   type: workflow
   update_pools: false
   validation_method: none
   vendor: ''
   waiting_time: 0
-- content_match: ''
+- completion_time: 1
+  content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
+  definition: Definition
   delete_spaces_before_matching: false
   description: ''
   device_query: ''
@@ -5940,6 +6194,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  impacting: true
   include_device_results: false
   include_link_in_summary: false
   initial_payload: {}
@@ -5965,6 +6220,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: per_device
   scoped_name: Set Variables for Iteration
   send_notification: false
@@ -5976,7 +6232,6 @@
   source_code: "results[\"success\"] = True\r\nresults[\"result\"] = {\r\n  \"dict_iteration\"\
     : {\r\n    \"variable1\": {\"command\": \"test\"},\r\n    \"variable2\": {\"command\"\
     : \"test2\"}\r\n  }\r\n}"
-  superworkflow_targets: placeholder
   time_between_retries: 10
   type: python_snippet_service
   update_pools: false
@@ -5986,6 +6241,7 @@
 - auto_find_prompt: true
   close_connection: false
   command: show vrf {{command_dict["command"]}}
+  completion_time: 1
   config_mode: false
   content_match: ''
   content_match_regex: false
@@ -5993,6 +6249,7 @@
   creator: admin
   credentials: device
   custom_username: ''
+  definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
   description: ''
@@ -6011,6 +6268,7 @@
   expect_username_prompt: ''
   fast_cli: true
   global_delay_factor: 1.0
+  impacting: true
   include_device_results: false
   include_link_in_summary: false
   initial_payload: {}
@@ -6039,6 +6297,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: per_device
   scoped_name: Show VRF with iteration
   send_notification: false
@@ -6050,7 +6309,6 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
-  superworkflow_targets: placeholder
   time_between_retries: 10
   timeout: 10.0
   type: netmiko_validation_service
@@ -6061,10 +6319,12 @@
   vendor: ''
   waiting_time: 0
 - close_connection: false
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
+  definition: Definition
   delete_spaces_before_matching: false
   description: ''
   device_query: ''
@@ -6073,6 +6333,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  impacting: true
   include_device_results: false
   include_link_in_summary: false
   initial_payload: {}
@@ -6098,6 +6359,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: per_device
   scoped_name: 'Regression Workflow J: Workflow and Subworkflow Iteration'
   send_notification: false
@@ -6109,17 +6371,18 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
-  superworkflow_targets: placeholder
   time_between_retries: 10
   type: workflow
   update_pools: false
   validation_method: none
   vendor: ''
   waiting_time: 0
-- content_match: ''
+- completion_time: 1
+  content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
+  definition: Definition
   delete_spaces_before_matching: false
   description: ''
   device_query: ''
@@ -6128,6 +6391,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  impacting: true
   include_device_results: false
   include_link_in_summary: false
   initial_payload: {}
@@ -6153,6 +6417,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: per_device
   scoped_name: Test Iteration
   send_notification: false
@@ -6163,7 +6428,6 @@
   skip_value: 'True'
   source_code: "result={\"top_level\": top_level_iteration}\r\nresults[\"result\"\
     ] = result\r\nresults[\"success\"] = True"
-  superworkflow_targets: placeholder
   time_between_retries: 10
   type: python_snippet_service
   update_pools: false
@@ -6171,10 +6435,12 @@
   vendor: ''
   waiting_time: 0
 - close_connection: false
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
+  definition: Definition
   delete_spaces_before_matching: false
   description: ''
   device_query: ''
@@ -6183,6 +6449,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  impacting: true
   include_device_results: false
   include_link_in_summary: false
   initial_payload: {}
@@ -6209,6 +6476,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: per_device
   scoped_name: Subworkflow Iteration
   send_notification: false
@@ -6219,17 +6487,18 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
-  superworkflow_targets: placeholder
   time_between_retries: 10
   type: workflow
   update_pools: false
   validation_method: none
   vendor: ''
   waiting_time: 0
-- content_match: ''
+- completion_time: 1
+  content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
+  definition: Definition
   delete_spaces_before_matching: false
   description: ''
   device_query: ''
@@ -6238,6 +6507,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  impacting: true
   include_device_results: false
   include_link_in_summary: false
   initial_payload: {}
@@ -6265,6 +6535,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: per_device
   scoped_name: Test Iteration
   send_notification: false
@@ -6275,17 +6546,18 @@
   skip_value: 'True'
   source_code: "result={\"top_level\": top_level_iteration, \"subworkflow\": subworkflow_iteration}\r\
     \nresults[\"success\"] = True\r\nresults[\"result\"] = result\r\n"
-  superworkflow_targets: placeholder
   time_between_retries: 10
   type: python_snippet_service
   update_pools: false
   validation_method: none
   vendor: ''
   waiting_time: 0
-- content_match: ''
+- completion_time: 1
+  content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
+  definition: Definition
   delete_spaces_before_matching: false
   description: ''
   device_query: ''
@@ -6295,6 +6567,7 @@
     value: [1.1.1.1, 2.2.2.2, 3.3.3.3, 11.11.11.11, 15.15.15.15]
   display_only_failed_nodes: false
   events: []
+  impacting: true
   include_device_results: false
   include_link_in_summary: false
   initial_payload: {}
@@ -6324,6 +6597,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: per_device
   scoped_name: Validation dict via results
   send_notification: false
@@ -6335,17 +6609,18 @@
   source_code: "result = {}\r\nresults[\"success\"] = True\r\nresults[\"result\"]\
     \ = get_result(\"Payload Extraction\", device.name)[\"result\"][\"regex_variable\"\
     ]"
-  superworkflow_targets: placeholder
   time_between_retries: 10
   type: python_snippet_service
   update_pools: false
   validation_method: dict_included
   vendor: ''
   waiting_time: 0
-- content_match: (\d\.){3}\d
+- completion_time: 1
+  content_match: (\d\.){3}\d
   content_match_regex: true
   conversion_method: none
   creator: admin
+  definition: Definition
   delete_spaces_before_matching: false
   description: ''
   device_query: ''
@@ -6354,6 +6629,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  impacting: true
   include_device_results: false
   include_link_in_summary: false
   initial_payload: {}
@@ -6383,6 +6659,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: per_device
   scoped_name: Validate text via results
   send_notification: false
@@ -6394,17 +6671,18 @@
   source_code: "result = {}\r\nresults[\"success\"] = True\r\nresults[\"result\"]\
     \ = get_result(\"Payload Extraction\", device.name)[\"result\"][\"textfsm_variable\"\
     ][\"value\"][0][1]"
-  superworkflow_targets: placeholder
   time_between_retries: 10
   type: python_snippet_service
   update_pools: false
   validation_method: text
   vendor: ''
   waiting_time: 0
-- content_match: ''
+- completion_time: 1
+  content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
+  definition: Definition
   delete_spaces_before_matching: false
   description: ''
   device_query: ''
@@ -6414,6 +6692,7 @@
     value: [1.1.1.1, 2.2.2.2, 3.3.3.3]
   display_only_failed_nodes: false
   events: []
+  impacting: true
   include_device_results: false
   include_link_in_summary: false
   initial_payload: {}
@@ -6443,6 +6722,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: per_device
   scoped_name: Validate dict via payload
   send_notification: false
@@ -6453,17 +6733,18 @@
   skip_value: 'True'
   source_code: "result = {}\r\nresults[\"success\"] = True\r\nresults[\"result\"]\
     \ = get_var(\"regex_variable\", device=device.name)"
-  superworkflow_targets: placeholder
   time_between_retries: 10
   type: python_snippet_service
   update_pools: false
   validation_method: dict_included
   vendor: ''
   waiting_time: 0
-- content_match: (\d\.){3}\d
+- completion_time: 1
+  content_match: (\d\.){3}\d
   content_match_regex: true
   conversion_method: none
   creator: admin
+  definition: Definition
   delete_spaces_before_matching: false
   description: ''
   device_query: ''
@@ -6472,6 +6753,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  impacting: true
   include_device_results: false
   include_link_in_summary: false
   initial_payload: {}
@@ -6501,6 +6783,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: per_device
   scoped_name: Validate text via payload
   send_notification: false
@@ -6511,17 +6794,18 @@
   skip_value: 'True'
   source_code: "result = {}\r\nresults[\"success\"] = True\r\nresults[\"result\"]\
     \ = get_var(\"textfsm_variable\", device=device.name)[0][1]"
-  superworkflow_targets: placeholder
   time_between_retries: 10
   type: python_snippet_service
   update_pools: false
   validation_method: text
   vendor: ''
   waiting_time: 0
-- content_match: \[1,2,False,1.*\]
+- completion_time: 1
+  content_match: \[1,2,False,1.*\]
   content_match_regex: true
   conversion_method: none
   creator: admin
+  definition: Definition
   delete_spaces_before_matching: true
   description: ''
   device_query: ''
@@ -6530,6 +6814,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  impacting: true
   include_device_results: false
   include_link_in_summary: false
   initial_payload: {}
@@ -6559,6 +6844,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: per_device
   scoped_name: Validation 1
   send_notification: false
@@ -6569,17 +6855,18 @@
   skip_value: 'True'
   source_code: "result = {}\r\nresults[\"success\"] = True\r\nresults[\"result\"]\
     \ = get_var(\"list\", device=device.name)"
-  superworkflow_targets: placeholder
   time_between_retries: 10
   type: python_snippet_service
   update_pools: false
   validation_method: text
   vendor: ''
   waiting_time: 0
-- content_match: '{"a": ["o", True, 4], "prefix_length": 24, "failed": 0}'
+- completion_time: 1
+  content_match: '{"a": ["o", True, 4], "prefix_length": 24, "failed": 0}'
   content_match_regex: false
   conversion_method: none
   creator: admin
+  definition: Definition
   delete_spaces_before_matching: false
   description: ''
   device_query: ''
@@ -6588,6 +6875,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  impacting: true
   include_device_results: false
   include_link_in_summary: false
   initial_payload: {}
@@ -6617,6 +6905,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: per_device
   scoped_name: Validation 2
   send_notification: false
@@ -6627,7 +6916,6 @@
   skip_value: 'True'
   source_code: "result = {}\r\nresults[\"success\"] = True\r\nresults[\"result\"]\
     \ = get_var(\"dict\", device=device.name)"
-  superworkflow_targets: placeholder
   time_between_retries: 10
   type: python_snippet_service
   update_pools: false
@@ -6635,10 +6923,12 @@
   vendor: ''
   waiting_time: 0
 - close_connection: false
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
+  definition: Definition
   delete_spaces_before_matching: false
   description: ''
   device_query: ''
@@ -6647,6 +6937,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  impacting: true
   include_device_results: false
   include_link_in_summary: false
   initial_payload: {}
@@ -6690,6 +6981,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: per_service_with_workflow_targets
   scoped_name: 'Regression Workflow K: preprocessing and postprocessing'
   send_notification: false
@@ -6702,17 +6994,19 @@
   skip_query: ''
   skip_value: 'True'
   superworkflow: 'Regression Workflow L: superworkflow'
-  superworkflow_targets: superworkflow
+  superworkflow_id: 101
   time_between_retries: 10
   type: workflow
   update_pools: false
   validation_method: none
   vendor: ''
   waiting_time: 0
-- content_match: ''
+- completion_time: 1
+  content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
+  definition: Definition
   delete_spaces_before_matching: false
   description: ''
   device_query: ''
@@ -6721,6 +7015,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  impacting: true
   include_device_results: false
   include_link_in_summary: false
   initial_payload: {}
@@ -6749,6 +7044,7 @@
     \nset_var(\"cls\", Test, device=device.name)\r\n"
   postprocessing_mode: always
   preprocessing: set_var("test", device.operating_system, device=device.name)
+  reserved: false
   run_method: per_device
   scoped_name: Preprocessing
   send_notification: false
@@ -6759,17 +7055,18 @@
   skip_value: 'True'
   source_code: "result = {}\r\nresults[\"success\"] = True\r\nresults[\"result\"]\
     \ = test"
-  superworkflow_targets: placeholder
   time_between_retries: 10
   type: python_snippet_service
   update_pools: false
   validation_method: none
   vendor: ''
   waiting_time: 0
-- content_match: ''
+- completion_time: 1
+  content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
+  definition: Definition
   delete_spaces_before_matching: false
   description: ''
   device_query: ''
@@ -6778,6 +7075,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  impacting: true
   include_device_results: false
   include_link_in_summary: false
   initial_payload: {}
@@ -6805,6 +7103,7 @@
     ] = func()\r\nresults[\"cls_result\"] = cls().device"
   postprocessing_mode: failure
   preprocessing: set_var("integer", 10)
+  reserved: false
   run_method: per_device
   scoped_name: Service preprocessing and postprocessing
   send_notification: false
@@ -6814,17 +7113,18 @@
   skip_query: ''
   skip_value: 'True'
   source_code: "results[\"integer\"] = 10 + integer\r\nresults[\"success\"] = False"
-  superworkflow_targets: placeholder
   time_between_retries: 10
   type: python_snippet_service
   update_pools: false
   validation_method: none
   vendor: ''
   waiting_time: 0
-- content_match: ''
+- completion_time: 1
+  content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
+  definition: Definition
   delete_spaces_before_matching: false
   description: ''
   device_query: ''
@@ -6833,6 +7133,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  impacting: true
   include_device_results: false
   include_link_in_summary: false
   initial_payload: {}
@@ -6858,6 +7159,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: per_device
   scoped_name: Placeholder
   send_notification: false
@@ -6866,7 +7168,6 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
-  superworkflow_targets: placeholder
   time_between_retries: 10
   type: swiss_army_knife_service
   update_pools: false
@@ -6874,10 +7175,12 @@
   vendor: ''
   waiting_time: 0
 - close_connection: false
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
+  definition: Definition
   delete_spaces_before_matching: false
   description: ''
   device_query: ''
@@ -6886,6 +7189,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  impacting: true
   include_device_results: false
   include_link_in_summary: false
   initial_payload: {}
@@ -6911,6 +7215,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: per_device
   scoped_name: 'Regression Workflow L: superworkflow'
   send_notification: false
@@ -6921,7 +7226,6 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
-  superworkflow_targets: placeholder
   time_between_retries: 10
   type: workflow
   update_pools: false
@@ -6929,10 +7233,12 @@
   vendor: ''
   waiting_time: 0
 - close_connection: false
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
+  definition: Definition
   delete_spaces_before_matching: false
   description: ''
   device_query: ''
@@ -6941,6 +7247,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  impacting: true
   include_device_results: false
   include_link_in_summary: false
   initial_payload: {}
@@ -6971,6 +7278,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: per_service_with_service_targets
   scoped_name: 'Regression Workflow M: Unix command & shell, ping, - jump on connect
     - mechanism'
@@ -6987,7 +7295,6 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
-  superworkflow_targets: placeholder
   time_between_retries: 10
   type: workflow
   update_pools: false
@@ -6995,10 +7302,12 @@
   vendor: ''
   waiting_time: 0
 - command: ps -ef
+  completion_time: 1
   content_match: python\d
   content_match_regex: true
   conversion_method: none
   creator: admin
+  definition: Definition
   delete_spaces_before_matching: false
   description: ''
   device_query: ''
@@ -7007,6 +7316,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  impacting: true
   include_device_results: false
   include_link_in_summary: false
   initial_payload: {}
@@ -7035,6 +7345,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: per_device
   scoped_name: 'Unix command: ps -ef | grep test'
   send_notification: false
@@ -7043,7 +7354,6 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
-  superworkflow_targets: placeholder
   time_between_retries: 10
   type: unix_command_service
   update_pools: false
@@ -7052,6 +7362,7 @@
   waiting_time: 0
 - auto_find_prompt: false
   close_connection: false
+  completion_time: 1
   config_mode: false
   content_match: ''
   content_match_regex: false
@@ -7059,6 +7370,7 @@
   creator: admin
   credentials: device
   custom_username: ''
+  definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
   description: ''
@@ -7073,6 +7385,7 @@
   expect_string: root.*#
   fast_cli: false
   global_delay_factor: 1.0
+  impacting: true
   include_device_results: false
   include_link_in_summary: false
   initial_payload: {}
@@ -7101,6 +7414,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: per_device
   scoped_name: 'Unix shell: ping device from server 2'
   send_notification: false
@@ -7117,7 +7431,6 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
-  superworkflow_targets: placeholder
   time_between_retries: 10
   timeout: 10
   type: unix_shell_script_service
@@ -7126,11 +7439,13 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- content_match: ''
+- completion_time: 1
+  content_match: ''
   content_match_regex: false
   conversion_method: none
   count: 5
   creator: admin
+  definition: Definition
   delete_spaces_before_matching: false
   description: ''
   device_query: ''
@@ -7139,6 +7454,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  impacting: true
   include_device_results: false
   include_link_in_summary: false
   initial_payload: {}
@@ -7170,6 +7486,7 @@
   postprocessing_mode: always
   preprocessing: ''
   protocol: ICMP
+  reserved: false
   run_method: per_device
   scoped_name: Ping Washington
   send_notification: false
@@ -7178,7 +7495,6 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
-  superworkflow_targets: placeholder
   time_between_retries: 10
   timeout: 2
   ttl: 60
@@ -7188,10 +7504,12 @@
   vendor: ''
   waiting_time: 0
 - close_connection: false
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
+  definition: Definition
   delete_spaces_before_matching: false
   description: ''
   device_query: ''
@@ -7200,6 +7518,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  impacting: true
   include_device_results: false
   include_link_in_summary: false
   initial_payload: {}
@@ -7225,6 +7544,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: per_service_with_service_targets
   scoped_name: 'Regression Workflow N: Topology Import (netbox, librenms, opennms)'
   send_notification: false
@@ -7235,17 +7555,18 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
-  superworkflow_targets: placeholder
   time_between_retries: 10
   type: workflow
   update_pools: false
   validation_method: none
   vendor: ''
   waiting_time: 0
-- content_match: ''
+- completion_time: 1
+  content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
+  definition: Definition
   delete_spaces_before_matching: false
   description: ''
   device_query: ''
@@ -7254,6 +7575,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  impacting: true
   import_type: opennms
   include_device_results: false
   include_link_in_summary: false
@@ -7286,6 +7608,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: once
   scoped_name: OpenNMS Import
   send_notification: false
@@ -7294,7 +7617,6 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
-  superworkflow_targets: placeholder
   time_between_retries: 10
   type: topology_import_service
   update_pools: false
@@ -7304,6 +7626,7 @@
 - auto_find_prompt: true
   close_connection: false
   command: ps -ef
+  completion_time: 1
   config_mode: false
   content_match: python\d
   content_match_regex: true
@@ -7311,6 +7634,7 @@
   creator: admin
   credentials: device
   custom_username: ''
+  definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
   description: ''
@@ -7329,6 +7653,7 @@
   expect_username_prompt: ''
   fast_cli: false
   global_delay_factor: 1.0
+  impacting: true
   include_device_results: false
   include_link_in_summary: false
   initial_payload: {}
@@ -7360,6 +7685,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: per_device
   scoped_name: 'Validation: jump on server 2 from Washington'
   send_notification: false
@@ -7371,7 +7697,6 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
-  superworkflow_targets: placeholder
   time_between_retries: 10
   timeout: 10.0
   type: netmiko_validation_service

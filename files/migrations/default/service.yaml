@@ -42,7 +42,6 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
-  superworkflow_targets: placeholder
   time_between_retries: 10
   type: swiss_army_knife_service
   update_pools: false
@@ -93,7 +92,6 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
-  superworkflow_targets: placeholder
   time_between_retries: 10
   type: swiss_army_knife_service
   update_pools: false
@@ -144,7 +142,6 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
-  superworkflow_targets: placeholder
   time_between_retries: 10
   type: swiss_army_knife_service
   update_pools: false
@@ -196,7 +193,6 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
-  superworkflow_targets: placeholder
   time_between_retries: 10
   type: swiss_army_knife_service
   update_pools: false
@@ -247,7 +243,6 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
-  superworkflow_targets: placeholder
   time_between_retries: 10
   type: swiss_army_knife_service
   update_pools: false

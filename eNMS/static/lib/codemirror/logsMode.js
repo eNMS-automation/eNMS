@@ -14,7 +14,7 @@ CodeMirror: false
             if (stream.match(/\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}\.\d{6}/)) {
               return "number";
             }
-            if (stream.match(/DEVICE.*\s:\s/)) return "comment";
+            if (stream.match(/DEVICE.*\s-\s/)) return "comment";
             if (stream.match(/SERVICE.*?\s[-|:]\s/)) return "variable-2";
             if (stream.match(/USER.*?\s-\s/)) return "keyword";
             if (stream.match(/warning/)) return "keyword";

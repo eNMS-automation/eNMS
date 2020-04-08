@@ -48,6 +48,8 @@ class NetmikoValidationService(ConnectionService):
                 "info",
                 f"sending CMD '{command}' with Netmiko",
                 device,
+                service=True,
+                user=True,
                 logger="security",
             )
             result = netmiko_connection.send_command(

@@ -297,13 +297,13 @@ class BaseController:
                 return {"alert": f"There is already a {type} with the same parameters."}
             return {"alert": str(exc)}
 
-    def log(self, severity, content):
+    def log(self, severity, content, user=None):
         db.factory(
             "changelog",
             **{
                 "severity": severity,
                 "content": content,
-                "user": getattr(current_user, "name", "admin"),
+                "user": user or getattr(current_user, "name", "admin"),
             },
         )
         getattr(import_module("logging"), severity)(content)

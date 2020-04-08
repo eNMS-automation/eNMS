@@ -412,7 +412,7 @@ function showGitHistory(device) {
                   : "configuration";
                 $(`#compare-${device.id}-btn`)
                   .unbind("click")
-                  .on("click", function() {
+                  .on("click", function () {
                     compare(data, device);
                   });
                 commits[data].forEach((commit) => {

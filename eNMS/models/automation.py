@@ -507,6 +507,7 @@ class Run(AbstractBase):
                 "run": self.properties,
                 "service": self.service.get_properties(exclude=["positions"]),
             }
+            results["trigger"] = self.trigger
             if (
                 self.runtime == self.parent_runtime
                 or len(self.devices) > 1

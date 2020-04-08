@@ -171,9 +171,7 @@ function updateRuntimes(result) {
   $("#current-runtime").append("<option value='normal'>Normal Display</option>");
   $("#current-runtime").append("<option value='latest'>Latest Runtime</option>");
   result.runtimes.forEach((r) => {
-    $("#current-runtime").append(
-      `<option value='${r[0]}'>${r[0]}</option>`
-    );
+    $("#current-runtime").append(`<option value='${r[0]}'>${r[0]}</option>`);
   });
   if (placeholder && currentPlaceholder) {
     nodes.update({

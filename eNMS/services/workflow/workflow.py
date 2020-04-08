@@ -24,7 +24,9 @@ class Workflow(Service):
     edges = relationship(
         "WorkflowEdge", back_populates="workflow", cascade="all, delete-orphan"
     )
-    superworkflow_id = db.Column(Integer, ForeignKey("workflow.id", ondelete="SET NULL"))
+    superworkflow_id = db.Column(
+        Integer, ForeignKey("workflow.id", ondelete="SET NULL")
+    )
     superworkflow = relationship(
         "Workflow", remote_side=[id], foreign_keys="Workflow.superworkflow_id"
     )

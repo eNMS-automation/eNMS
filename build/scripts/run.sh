@@ -38,10 +38,10 @@ function run() {
     export USE_VAULT=1
     export UNSEAL_VAULT=1
     export VAULT_ADDR=http://192.168.56.103:8200
-    export VAULT_TOKEN=s.wIc6FsTFPCh6OxACFWpJSosq
-    export UNSEAL_VAULT_KEY1=Us22h35pko4/k6AeQ915MTiob2hmPHfRYuCZ0dP4mTkZ
-    export UNSEAL_VAULT_KEY2=yZfgWgArNKdjeYJ9AK9vHTQ+h9txjhAlSjgDe23gQhk6
-    export UNSEAL_VAULT_KEY3=5LJFtYIgo9ab/kGt5ryT4DK6z1kwANYy3TXjIHyj4T2I
+    export VAULT_TOKEN=s.nxEFgvw0MINej8ESerFgChxv
+    export UNSEAL_VAULT_KEY1=PI9A7c1zCPa9hbASCwbok0vfnwUerYSuS95uuhXRBYmn
+    export UNSEAL_VAULT_KEY2=+aZzxLBLReCn/WWrWOE165GcdGCaPwu+sNvKxh+LnNe3
+    export UNSEAL_VAULT_KEY3=Xhvs0EhNWfZUwXAJfayoVdcrD0yKVob+j5sErrs+LEkw
   fi
   if [ "$gunicorn" = true ]; then
     gunicorn --config gunicorn.py app:app

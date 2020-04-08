@@ -256,9 +256,8 @@ class BaseController:
         )
 
     def init_vault_client(self):
-        vault_url = environ.get("VAULT_ADDR", "http://127.0.0.1:8200")
-        self.vault_client = VaultClient()
-        self.vault_client.token = environ.get("VAULT_TOKEN")
+        url = environ.get("VAULT_ADDR", "http://127.0.0.1:8200")
+        self.vault_client = VaultClient(url=url, token=environ.get("VAULT_TOKEN"))
         if self.vault_client.sys.is_sealed() and environ.get("UNSEAL_VAULT"):
             keys = [environ.get(f"UNSEAL_VAULT_KEY{i}") for i in range(1, 6)]
             self.vault_client.sys.submit_unseal_keys(filter(None, keys))

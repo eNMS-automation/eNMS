@@ -62,7 +62,7 @@ class Service(AbstractBase):
     vendor = db.Column(db.SmallString)
     operating_system = db.Column(db.SmallString)
     waiting_time = db.Column(Integer, default=0)
-    creator = db.Column(db.SmallString, default="admin")
+    creator = db.Column(db.SmallString, default="")
     workflows = relationship(
         "Workflow", secondary=db.service_workflow_table, back_populates="services"
     )
@@ -269,7 +269,7 @@ class Run(AbstractBase):
     restart_run_id = db.Column(Integer, ForeignKey("run.id"))
     restart_run = relationship("Run", uselist=False, foreign_keys=restart_run_id)
     start_services = db.Column(db.List)
-    creator = db.Column(db.SmallString, default="admin")
+    creator = db.Column(db.SmallString, default="")
     properties = db.Column(db.Dict)
     success = db.Column(Boolean, default=False)
     status = db.Column(db.SmallString, default="Running")
@@ -347,7 +347,10 @@ class Run(AbstractBase):
         return self.runtime != self.parent_runtime
 
     def __repr__(self):
-        return f"{self.runtime}: SERVICE '{self.service}' run by USER '{self.creator}'"
+        repr = f"{self.runtime}: SERVICE '{self.service}'"
+        if self.creator:
+            repr += f" run by USER '{self.creator}'"
+        return repr
 
     def __getattr__(self, key):
         if key in self.__dict__:
@@ -755,7 +758,7 @@ class Run(AbstractBase):
         log_level = int(self.original.log_level)
         if not log_level or severity not in app.log_levels[log_level - 1 :]:
             return
-        log = f"USER {self.creator} - SERVICE {self.service.scoped_name}"
+        log = f"SERVICE {self.service.scoped_name}"
         if device:
             log += f" - DEVICE {device if isinstance(device, str) else device.name}"
         if logger:

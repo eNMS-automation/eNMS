@@ -390,7 +390,7 @@ class AutomationController(BaseController):
             service_id = path_ids[-1]
         for property in ("user", "csrf_token", "form_type"):
             kwargs.pop(property, None)
-        kwargs["creator"] = getattr(current_user, "name", "admin")
+        kwargs["creator"] = getattr(current_user, "name", "")
         service = db.fetch("service", id=service_id)
         kwargs["runtime"] = runtime = self.get_time()
         if kwargs.get("asynchronous", True):

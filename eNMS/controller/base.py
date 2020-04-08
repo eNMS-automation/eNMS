@@ -285,7 +285,7 @@ class BaseController:
                 if arg in kwargs:
                     kwargs[arg] = kwargs[arg].strip()
             kwargs["last_modified"] = self.get_time()
-            kwargs["creator"] = kwargs["user"] = getattr(current_user, "name", "admin")
+            kwargs["creator"] = kwargs["user"] = getattr(current_user, "name", "")
             instance = db.factory(type, must_be_new=must_be_new, **kwargs)
             if kwargs.get("original"):
                 db.fetch(type, id=kwargs["original"]).duplicate(clone=instance)

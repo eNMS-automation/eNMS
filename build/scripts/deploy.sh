@@ -7,6 +7,19 @@ function install() {
     sudo ln -s ${path:-$PWD}/vault /usr/bin/vault
     sudo ln -s ${path:-$PWD}/consul /usr/bin/consul
     nohup consul agent -dev &
+    config='
+      disable_mlock = true
+
+      storage "consul" {
+        address = "127.0.0.1:8500"
+        path    = "vault/"
+      }
+
+      listener "tcp" {
+        address     = "0.0.0.0:8200"
+        tls_disable = 1
+      }
+    '
     nohup vault server -config=<(echo "$config") &
     export VAULT_ADDR=http://127.0.0.1:8200 && sleep 10
     echo $(vault operator init | head -n7)

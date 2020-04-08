@@ -754,14 +754,7 @@ class Run(AbstractBase):
         return results
 
     def log(
-        self,
-        severity,
-        content,
-        device=None,
-        service=False,
-        user=False,
-        app_log=False,
-        logger=None,
+        self, severity, content, device=None, app_log=False, logger=None,
     ):
         log_level = int(self.original.log_level)
         if not log_level or severity not in app.log_levels[log_level - 1 :]:

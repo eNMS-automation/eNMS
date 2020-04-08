@@ -372,7 +372,7 @@ class AutomationController(BaseController):
         if restart_run:
             run_kwargs["restart_run"] = restart_run
         service = db.fetch("service", id=service)
-        if service.superworkflow:
+        if service.type == "workflow" and service.superworkflow:
             run_kwargs["placeholder"] = service.id
             service = service.superworkflow
         initial_payload = service.initial_payload

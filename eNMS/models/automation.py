@@ -205,7 +205,7 @@ class Result(AbstractBase):
     runtime = db.Column(db.SmallString)
     duration = db.Column(db.SmallString)
     result = db.Column(db.Dict)
-    run_id = db.Column(Integer, ForeignKey("run.id"))
+    run_id = db.Column(Integer, ForeignKey("run.id", ondelete="cascade"))
     run = relationship("Run", back_populates="results", foreign_keys="Result.run_id")
     parent_runtime = db.Column(db.SmallString)
     parent_device_id = db.Column(Integer, ForeignKey("device.id"))
@@ -276,7 +276,7 @@ class Run(AbstractBase):
     runtime = db.Column(db.SmallString)
     duration = db.Column(db.SmallString)
     trigger = db.Column(db.SmallString, default="UI")
-    parent_id = db.Column(Integer, ForeignKey("run.id"))
+    parent_id = db.Column(Integer, ForeignKey("run.id", ondelete="cascade"))
     parent = relationship(
         "Run", remote_side=[id], foreign_keys="Run.parent_id", back_populates="children"
     )

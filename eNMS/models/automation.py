@@ -757,9 +757,9 @@ class Run(AbstractBase):
         log = f"USER {self.creator} - SERVICE {self.service.scoped_name}"
         if device:
             log += f" - DEVICE {device if isinstance(device, str) else device.name}"
-        log += f" : {content}"
         if logger:
-            getattr(getLogger(logger), severity)(log)
+            getattr(getLogger(logger), severity)(content)
+        log += f" : {content}"
         if app_log:
             app.log(severity, log)
         full_log = f"{app.get_time()} - {severity} - {log}"

@@ -347,10 +347,7 @@ class Run(AbstractBase):
         return self.runtime != self.parent_runtime
 
     def __repr__(self):
-        repr = f"{self.runtime}: SERVICE '{self.service}'"
-        if self.creator:
-            repr += f" run by USER '{self.creator}'"
-        return repr
+        return f"{self.runtime}: SERVICE '{self.service}'"
 
     def __getattr__(self, key):
         if key in self.__dict__:
@@ -809,7 +806,7 @@ class Run(AbstractBase):
                 filename = self.runtime.replace(".", "").replace(":", "")
                 status = "PASS" if results["success"] else "FAILED"
                 result = app.send_email(
-                    f"{status}: {self.service.name} run by {self.creator}",
+                    f"{status}: {self.service.name}",
                     app.str_dict(notification),
                     recipients=self.mail_recipient,
                     filename=f"results-{filename}.txt",

@@ -435,7 +435,7 @@ export function runLogic(result) {
       $("#current-runtime")
         .append(
           `<option value='${result.runtime}'>
-          ${result.runtime} (run by ${result.user})
+          ${result.runtime}
         </option>`
         )
         .val(result.runtime)

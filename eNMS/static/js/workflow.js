@@ -172,7 +172,7 @@ function updateRuntimes(result) {
   $("#current-runtime").append("<option value='latest'>Latest Runtime</option>");
   result.runtimes.forEach((r) => {
     $("#current-runtime").append(
-      `<option value='${r[0]}'>${r[0]} (run by ${r[1]})</option>`
+      `<option value='${r[0]}'>${r[0]}</option>`
     );
   });
   if (placeholder && currentPlaceholder) {

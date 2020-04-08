@@ -23,8 +23,8 @@ function install() {
     nohup vault server -config=<(echo "$config") &
     export VAULT_ADDR=http://127.0.0.1:8200 && sleep 10
     echo $(vault operator init | head -n7)
-    export VAULT_TOKEN=token
-    vault secrets enable -version=1 -path=secret kv
+    # export VAULT_TOKEN=token
+    # vault secrets enable -version=1 -path=secret kv
   elif [ "$install" = "mysql" ]; then
     sudo apt install -y mysql-server python3-mysqldb
     sudo pip3 install mysqlclient

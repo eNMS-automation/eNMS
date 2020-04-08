@@ -58,8 +58,6 @@ class NetmikoPromptsService(ConnectionService):
                     "info",
                     f"Sending '{command}' with Netmiko",
                     device,
-                    service=True,
-                    user=True,
                     logger="security",
                 )
                 confirmation = run.sub(expect_string, locals())

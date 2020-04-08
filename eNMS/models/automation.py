@@ -769,11 +769,8 @@ class Run(AbstractBase):
         if device:
             device_name = device if isinstance(device, str) else device.name
             content = f"DEVICE {device_name} - {content}"
-        logger_log = content
-        if user:
-            logger_log = f"USER {self.creator} - {logger_log}"
-        if service:
-            logger_log = f"SERVICE {self.service.scoped_name} - {logger_log}"
+        logger_log = f"USER {self.creator} - {content}"
+        logger_log = f"SERVICE {self.service.scoped_name} - {logger_log}"
         if logger:
             getattr(getLogger(logger), severity)(logger_log)
         if app_log:
@@ -1068,12 +1065,7 @@ class Run(AbstractBase):
             self.log("info", "Using cached Netmiko connection", device)
             return self.update_netmiko_connection(connection)
         self.log(
-            "info",
-            "OPENING Netmiko connection",
-            device,
-            service=True,
-            user=True,
-            logger="security",
+            "info", "OPENING Netmiko connection", device, logger="security",
         )
         username, password = self.get_credentials(device)
         driver = device.netmiko_driver if self.use_device_driver else self.driver
@@ -1104,12 +1096,7 @@ class Run(AbstractBase):
             self.log("info", "Using cached NAPALM connection", device)
             return connection
         self.log(
-            "info",
-            "OPENING Napalm connection",
-            device,
-            service=True,
-            user=True,
-            logger="security",
+            "info", "OPENING Napalm connection", device, logger="security",
         )
         username, password = self.get_credentials(device)
         optional_args = self.service.optional_args

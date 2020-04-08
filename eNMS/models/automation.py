@@ -312,6 +312,8 @@ class Run(AbstractBase):
     def __init__(self, **kwargs):
         self.runtime = kwargs.get("runtime") or app.get_time()
         super().__init__(**kwargs)
+        if not self.creator:
+            self.creator = self.parent.creator
         if not kwargs.get("parent_runtime"):
             self.parent_runtime = self.runtime
             self.restart_path = kwargs.get("restart_path")
@@ -767,14 +769,15 @@ class Run(AbstractBase):
         if device:
             device_name = device if isinstance(device, str) else device.name
             content = f"DEVICE {device_name} - {content}"
+        logger_log = content
         if user:
-            content = f"USER {self.creator} - {content}"
+            logger_log = f"USER {self.creator} - {logger_log}"
         if service:
-            content = f"SERVICE {self.service.scoped_name} - {content}"
+            logger_log = f"SERVICE {self.service.scoped_name} - {logger_log}"
         if logger:
-            getattr(getLogger(logger), severity)(content)
+            getattr(getLogger(logger), severity)(logger_log)
         if app_log:
-            app.log(severity, content, user=self.creator)
+            app.log(severity, logger_log, user=self.creator)
         run_log = f"{app.get_time()} - {severity} - {content}"
         app.run_logs[self.parent_runtime][self.service_id].append(run_log)
 

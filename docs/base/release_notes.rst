@@ -21,8 +21,13 @@ Version 3.21.2
 - Fix historical config / oper data comparison mechanism
 - Fix bug where superworkflow cannot be cleared from list after selection
 - Fix bug placeholder service deletion from workflow
-- Make superworkflow a workflow property only. Remove superworkflow targets option.
-- Display only workflows in the superworkflow drop-down list.
+- Make superworkflow a workflow property only. Remove superworkflow targets option
+- Display only workflows in the superworkflow drop-down list
+- Save alert when displaying python error as an alert
+- When using a custom logger, only the actual user content is logged
+- Update docs rest API
+- Improve log function (custom logger behavior / creator)
+- Fix superworkflow bug for standalone services
 
 Version 3.21.1
 --------------

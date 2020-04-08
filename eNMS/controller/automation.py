@@ -161,12 +161,7 @@ class AutomationController(BaseController):
 
     def get_runtimes(self, type, id):
         runs = db.fetch("run", allow_none=True, all_matches=True, service_id=id)
-        return sorted(
-            set(
-                (run.parent_runtime, f"{run.parent_runtime} (run by '{run.creator}')")
-                for run in runs
-            )
-        )
+        return sorted(set((run.parent_runtime, run.parent_runtime) for run in runs))
 
     def get_result(self, id):
         return db.fetch("result", id=id).result
@@ -372,7 +367,7 @@ class AutomationController(BaseController):
         if restart_run:
             run_kwargs["restart_run"] = restart_run
         service = db.fetch("service", id=service)
-        if service.superworkflow:
+        if service.type == "workflow" and service.superworkflow:
             run_kwargs["placeholder"] = service.id
             service = service.superworkflow
         initial_payload = service.initial_payload
@@ -390,7 +385,7 @@ class AutomationController(BaseController):
             service_id = path_ids[-1]
         for property in ("user", "csrf_token", "form_type"):
             kwargs.pop(property, None)
-        kwargs["creator"] = getattr(current_user, "name", "admin")
+        kwargs["creator"] = getattr(current_user, "name", "")
         service = db.fetch("service", id=service_id)
         kwargs["runtime"] = runtime = self.get_time()
         if kwargs.get("asynchronous", True):

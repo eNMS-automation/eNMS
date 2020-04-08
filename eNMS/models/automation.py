@@ -62,7 +62,7 @@ class Service(AbstractBase):
     vendor = db.Column(db.SmallString)
     operating_system = db.Column(db.SmallString)
     waiting_time = db.Column(Integer, default=0)
-    creator = db.Column(db.SmallString, default="admin")
+    creator = db.Column(db.SmallString, default="")
     workflows = relationship(
         "Workflow", secondary=db.service_workflow_table, back_populates="services"
     )
@@ -269,7 +269,7 @@ class Run(AbstractBase):
     restart_run_id = db.Column(Integer, ForeignKey("run.id"))
     restart_run = relationship("Run", uselist=False, foreign_keys=restart_run_id)
     start_services = db.Column(db.List)
-    creator = db.Column(db.SmallString, default="admin")
+    creator = db.Column(db.SmallString, default="")
     properties = db.Column(db.Dict)
     success = db.Column(Boolean, default=False)
     status = db.Column(db.SmallString, default="Running")
@@ -347,7 +347,7 @@ class Run(AbstractBase):
         return self.runtime != self.parent_runtime
 
     def __repr__(self):
-        return f"{self.runtime}: SERVICE '{self.service}' run by USER '{self.creator}'"
+        return f"{self.runtime}: SERVICE '{self.service}'"
 
     def __getattr__(self, key):
         if key in self.__dict__:
@@ -507,6 +507,7 @@ class Run(AbstractBase):
                 "run": self.properties,
                 "service": self.service.get_properties(exclude=["positions"]),
             }
+            results["trigger"] = self.trigger
             if (
                 self.runtime == self.parent_runtime
                 or len(self.devices) > 1
@@ -754,12 +755,12 @@ class Run(AbstractBase):
         log_level = int(self.original.log_level)
         if not log_level or severity not in app.log_levels[log_level - 1 :]:
             return
-        log = f"USER {self.creator} - SERVICE {self.service.scoped_name}"
+        log = f"SERVICE {self.service.scoped_name}"
         if device:
             log += f" - DEVICE {device if isinstance(device, str) else device.name}"
-        log += f" : {content}"
         if logger:
-            getattr(getLogger(logger), severity)(log)
+            getattr(getLogger(logger), severity)(content)
+        log += f" : {content}"
         if app_log:
             app.log(severity, log)
         full_log = f"{app.get_time()} - {severity} - {log}"
@@ -805,7 +806,7 @@ class Run(AbstractBase):
                 filename = self.runtime.replace(".", "").replace(":", "")
                 status = "PASS" if results["success"] else "FAILED"
                 result = app.send_email(
-                    f"{status}: {self.service.name} run by {self.creator}",
+                    f"{status}: {self.service.name}",
                     app.str_dict(notification),
                     recipients=self.mail_recipient,
                     filename=f"results-{filename}.txt",

@@ -98,6 +98,8 @@ def form_postprocessing(form, form_data):
     for property, field in form_properties[form_data.get("form_type")].items():
         if field["type"] in ("object-list", "multiselect"):
             data[property] = form_data.getlist(property)
+        elif field["type"] == "object":
+            data[property] = form_data.get(property)
         elif field["type"] == "field-list":
             data[property] = []
             for entry in getattr(form, property).entries:

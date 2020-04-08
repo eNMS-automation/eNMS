@@ -91,7 +91,7 @@ function processResults(callback, results) {
     if (Array.isArray(results.alert)) {
       results.alert.map((e) => notify(e, "error", 5, true));
     } else {
-      notify(results.alert, "error", 5);
+      notify(results.alert, "error", 5, true);
     }
   } else if (results && results.invalid_form) {
     for (const [field, error] of Object.entries(results.errors)) {

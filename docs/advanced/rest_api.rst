@@ -48,12 +48,12 @@ Payload
 - ``pools`` (default: ``[]``) Same as devices for pools.
 - ``ip_addresses`` (default: ``[]``) Same as devices for pools.
 - ``payload`` (default: ``{}``) Payload of the service.
-- ``async`` (default: ``False``)
+- ``async`` (default: ``false``) JSON boolean.
 
-  - ``False`` eNMS runs the service and responds to your request when the service is done running.
+  - ``false`` eNMS runs the service and responds to your request when the service is done running.
     The response will contain the result of the service, but the connection might time out
     if the service takes too much time to run.
-  - ``True`` eNMS runs the service in a different thread and immediately respond with the service ID.
+  - ``true`` eNMS runs the service in a different thread and immediately respond with the service ID.
 
 .. code-block:: python
   :caption: Example
@@ -63,7 +63,7 @@ Payload
     "devices": ["Washington"],
     "pools": ["Pool1", "Pool2"],
     "ip_addresses": ["127.0.0.1"],
-    "async": True,
+    "async": true,
     "payload": {"aid": "1-2-3", "user_identified_key": "user_identified_value"}
   }
 

@@ -19,6 +19,9 @@ Version 3.21.2
 - Display only workflows in the superworkflow drop-down list
 - Save alert when displaying python error as an alert
 - When using a custom logger, only the actual user content is logged
+- Update docs rest API
+- Improve log function (custom logger behavior / creator)
+- Fix superworkflow bug for standalone services
 
 Version 3.21.1
 --------------

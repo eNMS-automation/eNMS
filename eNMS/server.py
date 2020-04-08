@@ -430,8 +430,12 @@ class Server(Flask):
             decorators = [self.auth.login_required, self.catch_exceptions]
 
             def post(self):
-                errors, data = [], {"trigger": "REST", **request.get_json(force=True)}
-                devices, pools = [], []
+                data = {
+                    "trigger": "REST",
+                    "creator": request.authorization["username"],
+                    **request.get_json(force=True),
+                }
+                errors, devices, pools = [], [], []
                 service = db.fetch("service", name=data["name"])
                 handle_asynchronously = data.get("async", False)
                 for device_name in data.get("devices", ""):

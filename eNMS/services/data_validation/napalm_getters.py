@@ -26,6 +26,8 @@ class NapalmGettersService(ConnectionService):
             "info",
             f"Fetching NAPALM getters ({', '.join(run.getters)})",
             device,
+            service=True,
+            user=True,
             logger="security",
         )
         for getter in run.getters:

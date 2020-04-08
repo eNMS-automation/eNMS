@@ -15,7 +15,7 @@ def update_property(project, property, value=None, types=None):
         Path.cwd()
         / "Desktop"
         / "shared"
-        / "verizon"
+        / "project"
         / "eNMS"
         / "files"
         / "migrations"

@@ -312,6 +312,8 @@ class Run(AbstractBase):
     def __init__(self, **kwargs):
         self.runtime = kwargs.get("runtime") or app.get_time()
         super().__init__(**kwargs)
+        if not self.creator:
+            self.creator = self.parent.creator
         if not kwargs.get("parent_runtime"):
             self.parent_runtime = self.runtime
             self.restart_path = kwargs.get("restart_path")
@@ -751,20 +753,33 @@ class Run(AbstractBase):
             db.session.commit()
         return results
 
-    def log(self, severity, content, device=None, app_log=False, logger=None):
+    def log(
+        self,
+        severity,
+        content,
+        device=None,
+        service=False,
+        user=False,
+        app_log=False,
+        logger=None,
+    ):
         log_level = int(self.original.log_level)
         if not log_level or severity not in app.log_levels[log_level - 1 :]:
             return
-        log = f"SERVICE {self.service.scoped_name}"
         if device:
-            log += f" - DEVICE {device if isinstance(device, str) else device.name}"
+            device_name = device if isinstance(device, str) else device.name
+            content = f"DEVICE {device_name} - {content}"
+        logger_log = content
+        if user:
+            logger_log = f"USER {self.creator} - {logger_log}"
+        if service:
+            logger_log = f"SERVICE {self.service.scoped_name} - {logger_log}"
         if logger:
-            getattr(getLogger(logger), severity)(content)
-        log += f" : {content}"
+            getattr(getLogger(logger), severity)(logger_log)
         if app_log:
-            app.log(severity, log)
-        full_log = f"{app.get_time()} - {severity} - {log}"
-        app.run_logs[self.parent_runtime][self.service_id].append(full_log)
+            app.log(severity, logger_log, user=self.creator)
+        run_log = f"{app.get_time()} - {severity} - {content}"
+        app.run_logs[self.parent_runtime][self.service_id].append(run_log)
 
     def build_notification(self, results):
         notification = {
@@ -1052,7 +1067,14 @@ class Run(AbstractBase):
         if connection:
             self.log("info", "Using cached Netmiko connection", device)
             return self.update_netmiko_connection(connection)
-        self.log("info", "OPENING Netmiko connection", device, logger="security")
+        self.log(
+            "info",
+            "OPENING Netmiko connection",
+            device,
+            service=True,
+            user=True,
+            logger="security",
+        )
         username, password = self.get_credentials(device)
         driver = device.netmiko_driver if self.use_device_driver else self.driver
         netmiko_connection = ConnectHandler(
@@ -1081,7 +1103,14 @@ class Run(AbstractBase):
         if connection:
             self.log("info", "Using cached NAPALM connection", device)
             return connection
-        self.log("info", "OPENING Napalm connection", device, logger="security")
+        self.log(
+            "info",
+            "OPENING Napalm connection",
+            device,
+            service=True,
+            user=True,
+            logger="security",
+        )
         username, password = self.get_credentials(device)
         optional_args = self.service.optional_args
         if not optional_args:

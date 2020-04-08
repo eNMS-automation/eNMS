@@ -308,7 +308,7 @@ export function initView() {
       name: `${type}_filtering`,
       target: `#${type}-filtering`,
       container: `#${type}-filtering-form`,
-      size: "500 400",
+      size: "700 400",
       position: {
         my: "center-top",
         at: "center-bottom",

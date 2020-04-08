@@ -18,6 +18,7 @@ Version 3.21.2
 - Make superworkflow a workflow property only. Remove superworkflow targets option
 - Display only workflows in the superworkflow drop-down list
 - Save alert when displaying python error as an alert
+- When using a custom logger, only the actual user content is logged
 
 Version 3.21.1
 --------------

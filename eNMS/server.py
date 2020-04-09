@@ -2,6 +2,8 @@ from click import argument, echo, option
 from datetime import datetime, timedelta
 from json import loads
 from passlib.hash import argon2
+import os
+import pwd
 from flask import (
     abort,
     Blueprint,
@@ -319,27 +321,37 @@ class Server(Flask):
             devices_list = devices.split(",") if devices else []
             devices_list = [db.fetch("device", name=name).id for name in devices_list]
             payload_dict = loads(payload) if payload else {}
-            payload_dict["devices"] = devices_list
+            payload_dict.update(devices=devices_list,
+                                trigger="CLI",
+                                creator=pwd.getpwuid(os.getuid()).pw_name
+            )
             service = db.fetch("service", name=name)
             results = app.run(service.id, **payload_dict)
             db.session.commit()
             echo(app.str_dict(results))
 
-        @self.cli.command(name="delete-changelog")
+        @self.cli.command(name="delete_log")
         @option(
             "--keep-last-days",
             default=15,
-            help="Number of days to keep in the changelog",
+            help="Number of days to keep in the changelog.",
         )
-        def remove_changelog(keep_last_days):
+        @option(
+            "--log",
+            "-l",
+            required=True,
+            type=Choice(['changelog', 'result'], case_sensitive=True),
+            help="The table to delete the logs from.'"
+        )
+        def delete_log(keep_last_days, log):
             deletion_time = datetime.now() - timedelta(days=keep_last_days)
             app.result_log_deletion(
                 date_time=deletion_time.strftime("%d/%m/%Y %H:%M:%S"),
-                deletion_types=["changelog"],
+                deletion_types=[log],
             )
-            app.log("info", f"deleted all changelogs up until {deletion_time}")
+            app.log("info", f"deleted all logs in `{log}` up until {deletion_time}")
 
-    def configure_rest_api(self):
+def configure_rest_api(self):
 
         api = Api(self, decorators=[self.csrf.exempt])
 

@@ -101,7 +101,10 @@ class Task(AbstractBase):
         db.session.commit()
 
     def run_properties(self):
-        properties = {"task": self.id, **self.initial_payload}
+        properties = {"task": self.id,
+                      "trigger": "CRON",
+                      "creator": "Scheduler",
+                      **self.initial_payload}
         if self.devices:
             properties["devices"] = [device.id for device in self.devices]
         if self.pools:
@@ -113,7 +116,7 @@ class Task(AbstractBase):
             "id": self.aps_job_id,
             "func": app.run,
             "replace_existing": True,
-            "args": [self.service.id],
+            "args": [self.service_id],
             "kwargs": self.run_properties(),
         }
         if self.scheduling_mode == "cron":

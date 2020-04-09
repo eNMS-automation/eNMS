@@ -6,6 +6,7 @@ from json import load, dumps
 from os import environ
 from pathlib import Path
 from requests import post
+from requests.auth import HTTPBasicAuth
 from starlette.applications import Starlette
 from starlette.responses import JSONResponse
 
@@ -53,7 +54,7 @@ class Scheduler(Starlette):
             job_id = await request.json()
             if self.scheduler.get_job(job_id):
                 self.scheduler.remove_job(job_id)
-            return JSONResponse()
+            return JSONResponse(True)
 
         @self.route("/action", methods=["POST"])
         async def action(request):
@@ -61,14 +62,16 @@ class Scheduler(Starlette):
             if data["action"] == "resume":
                 self.schedule_task(data["task"])
             getattr(self.scheduler, f"{data['action']}_job")(data["job_id"])
+            return JSONResponse(True)
 
-        @self.route("/next_runtime/<task_id>", methods=["GET"])
+        @self.route("/next_runtime/{task_id}")
         async def next_runtime(request):
             job = self.scheduler.get_job(request.path_params["task_id"])
             if job and job.next_run_time:
-                return job.next_run_time.strftime("%Y-%m-%d %H:%M:%S")
+                return JSONResponse(job.next_run_time.strftime("%Y-%m-%d %H:%M:%S"))
+            return JSONResponse("Not Scheduled")
 
-        @self.route("/time_left/<task_id>", methods=["GET"])
+        @self.route("/time_left/{task_id}")
         async def time_left(request):
             job = self.scheduler.get_job(request.path_params["task_id"])
             if job and job.next_run_time:
@@ -76,7 +79,8 @@ class Scheduler(Starlette):
                 hours, remainder = divmod(delta.seconds, 3600)
                 minutes, seconds = divmod(remainder, 60)
                 days = f"{delta.days} days, " if delta.days else ""
-                return f"{days}{hours}h:{minutes}m:{seconds}s"
+                return JSONResponse(f"{days}{hours}h:{minutes}m:{seconds}s")
+            return JSONResponse("Not Scheduled")
 
     def schedule_task(self, task):
         default, trigger = self.scheduler_args(task)
@@ -87,13 +91,18 @@ class Scheduler(Starlette):
 
     @staticmethod
     def run_service(task_id):
-        post(f"{environ.get('ENMS_ADDR')}/run_task", data=dumps(task_id))
+        post(
+            f"{environ.get('ENMS_ADDR')}/run_task",
+            data=dumps(task_id),
+            auth=HTTPBasicAuth("admin", "admin"),
+        )
 
     def scheduler_args(self, task):
         default = {
             "replace_existing": True,
             "func": self.run_service,
             "id": task["aps_job_id"],
+            "args": [task["id"]],
         }
         if task["scheduling_mode"] == "cron":
             task["periodic"] = True

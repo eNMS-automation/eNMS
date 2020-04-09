@@ -60,14 +60,14 @@ class Task(AbstractBase):
     @property
     def next_run_time(self):
         try:
-            get(f"{scheduler['address']}/next_runtime/{self.aps_job_id}")
+            return get(f"{scheduler['address']}/next_runtime/{self.aps_job_id}").json()
         except ConnectionError:
             return "Scheduler Unreachable"
 
     @property
     def time_before_next_run(self):
         try:
-            get(f"{scheduler['address']}/time_left/{self.aps_job_id}")
+            return get(f"{scheduler['address']}/time_left/{self.aps_job_id}").json()
         except ConnectionError:
             return "Scheduler Unreachable"
 

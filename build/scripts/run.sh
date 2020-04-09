@@ -34,13 +34,6 @@ function run() {
       rm database.db
     fi
   fi
-  if [ "$vault" = true ]; then
-    export VAULT_ADDR=http://192.168.56.103:8200
-    export VAULT_TOKEN=s.nxEFgvw0MINej8ESerFgChxv
-    export UNSEAL_VAULT_KEY1=PI9A7c1zCPa9hbASCwbok0vfnwUerYSuS95uuhXRBYmn
-    export UNSEAL_VAULT_KEY2=+aZzxLBLReCn/WWrWOE165GcdGCaPwu+sNvKxh+LnNe3
-    export UNSEAL_VAULT_KEY3=Xhvs0EhNWfZUwXAJfayoVdcrD0yKVob+j5sErrs+LEkw
-  fi
   if [ "$gunicorn" = true ]; then
     gunicorn --config gunicorn.py app:app
   else
@@ -54,7 +47,6 @@ while getopts h?rvgp:d: opt; do
       g) gunicorn=true;;
       p) path=$OPTARG;;
       r) reload=true;;
-      v) vault=true;;
       h|\?) help;;
     esac
 done

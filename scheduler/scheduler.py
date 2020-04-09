@@ -1,3 +1,4 @@
+from apscheduler.jobstores.base import JobLookupError
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from apscheduler.triggers.cron import CronTrigger
 from datetime import datetime
@@ -53,18 +54,20 @@ class Scheduler(Starlette):
                 self.scheduler.reschedule_job(default.pop("id"), **trigger)
             return JSONResponse(True)
 
-        @self.route("/job/<job_id:int>", methods=["DELETE"])
+        @self.route("/job", methods=["DELETE"])
         async def delete(request):
             job_id = await request.json()
             if self.scheduler.get_job(job_id):
                 self.scheduler.remove_job(job_id)
             return JSONResponse()
 
-        @self.route("/job/<job_id>", methods=["POST"])
+        @self.route("/action", methods=["POST"])
         async def action(request):
-            action = f"{await request.json()}_job"
-            print(action, job_id)
-            getattr(self.scheduler, action)(request.path_params["job_id"])
+            data = await request.json()
+            try:
+                getattr(self.scheduler, data["action"])(data["job_id"])
+            except JobLookupError:
+                return JSONResponse({"alert": "This task no longer exists."})
 
     @staticmethod
     def run_service(task_id):

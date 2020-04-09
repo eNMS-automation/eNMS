@@ -1,4 +1,3 @@
-from apscheduler.jobstores.base import JobLookupError
 from collections import defaultdict
 from datetime import datetime
 from flask import request
@@ -474,10 +473,7 @@ class AutomationController(BaseController):
         getattr(self.scheduler, action)()
 
     def task_action(self, action, task_id):
-        try:
-            return getattr(db.fetch("task", id=task_id), action)()
-        except JobLookupError:
-            return {"alert": "This task no longer exists."}
+        return db.fetch("task", id=task_id).action(action)
 
     def scan_playbook_folder(self):
         path = Path(

@@ -351,7 +351,7 @@ class Server(Flask):
             )
             app.log("info", f"deleted all logs in `{log}` up until {deletion_time}")
 
-def configure_rest_api(self):
+    def configure_rest_api(self):
 
         api = Api(self, decorators=[self.csrf.exempt])
 

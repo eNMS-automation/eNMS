@@ -2,8 +2,7 @@ from click import argument, echo, option
 from datetime import datetime, timedelta
 from json import loads
 from passlib.hash import argon2
-import os
-import pwd
+import getpass
 from flask import (
     abort,
     Blueprint,
@@ -323,7 +322,7 @@ class Server(Flask):
             payload_dict = loads(payload) if payload else {}
             payload_dict.update(devices=devices_list,
                                 trigger="CLI",
-                                creator=pwd.getpwuid(os.getuid()).pw_name
+                                creator=getpass.getuser()
             )
             service = db.fetch("service", name=name)
             results = app.run(service.id, **payload_dict)

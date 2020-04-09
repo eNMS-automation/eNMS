@@ -23,6 +23,7 @@ from itertools import chain
 from logging import info
 from os import environ
 from re import search
+from threading import Thread
 from uuid import getnode
 
 from eNMS import app
@@ -462,14 +463,7 @@ class Server(Flask):
                     data.update({"devices": devices, "pools": pools})
                 data["runtime"] = runtime = app.get_time()
                 if handle_asynchronously:
-                    app.scheduler.add_job(
-                        id=runtime,
-                        func=app.run,
-                        run_date=datetime.now(),
-                        args=[service.id],
-                        kwargs=data,
-                        trigger="date",
-                    )
+                    Thread(target=self.run, args=(service.id,), kwargs=data).start()
                     return {"errors": errors, "runtime": runtime}
                 else:
                     return {**app.run(service.id, **data), "errors": errors}
@@ -478,20 +472,15 @@ class Server(Flask):
             decorators = [self.auth.login_required, self.catch_exceptions]
 
             def post(self):
+                task_id = request.get_json()
+                task = db.fetch("task", id=task_id)
                 data = {
                     "trigger": "Scheduled Task",
                     "creator": request.authorization["username"],
                     "runtime": app.get_time(),
-                    **request.get_json(force=True),
+                    "task": task_id,
                 }
-                app.scheduler.add_job(
-                    id=runtime,
-                    func=app.run,
-                    run_date=datetime.now(),
-                    args=[service.id],
-                    kwargs=data,
-                    trigger="date",
-                )
+                Thread(target=self.run, args=(task.service.id,), kwargs=data).start()
 
         class Topology(Resource):
             decorators = [self.auth.login_required, self.catch_exceptions]

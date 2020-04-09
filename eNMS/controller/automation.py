@@ -7,6 +7,7 @@ from netmiko.ssh_dispatcher import CLASS_MAPPER, FILE_TRANSFER_MAP
 from operator import itemgetter
 from pathlib import Path
 from re import search, sub
+from threading import Thread
 from uuid import uuid4
 
 from eNMS.controller.base import BaseController
@@ -385,14 +386,7 @@ class AutomationController(BaseController):
         service = db.fetch("service", id=service_id)
         kwargs["runtime"] = runtime = self.get_time()
         if kwargs.get("asynchronous", True):
-            self.scheduler.add_job(
-                id=runtime,
-                func=self.run,
-                run_date=datetime.now(),
-                args=[service_id],
-                kwargs=kwargs,
-                trigger="date",
-            )
+            Thread(target=self.run, args=(service_id,), kwargs=kwargs).start()
         else:
             service.run(runtime=runtime)
         return {

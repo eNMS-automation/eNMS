@@ -8,8 +8,7 @@ from starlette.responses import JSONResponse
 
 
 class Scheduler(Starlette):
-
-    def __init__(self, ):
+    def __init__(self):
         super().__init__()
         self.configure_scheduler()
         self.register_routes()
@@ -22,31 +21,38 @@ class Scheduler(Starlette):
 
     def configure_scheduler(self):
         with open(Path.cwd().parent / "setup" / "scheduler.json", "r") as file:
-            self.scheduler = AsyncIOScheduler(load(file)["config"])
+            self.settings = load(file)
+        self.scheduler = AsyncIOScheduler(self.settings["config"])
         self.scheduler.start()
 
     def register_routes(self):
-        @self.route("/add_job", methods=["POST"])
-        async def schedule(request):
-            self.scheduler.add_job(self.run_job, "interval", seconds=3)
+        @self.route("/schedule_job", methods=["POST"])
+        async def add(request):
+            task = await request.json()
+            default, trigger = self.scheduler_args(task)
+            if not self.scheduler.get_job(self.aps_job_id):
+                self.scheduler.add_job(**{**default, **trigger})
+            else:
+                self.scheduler.reschedule_job(default.pop("id"), **trigger)
             return JSONResponse(True)
 
         @self.route("/delete_job", methods=["POST"])
-        async def schedule(request):
-            data = await request.json()
-            return JSONResponse(True)
+        async def delete(request):
+            job_id = await request.json()
+            if self.scheduler.get_job(job_id):
+                self.scheduler.remove_job(job_id)
+            return JSONResponse()
 
-    def kwargs(self):
+    def run_service(self, task_id):
+        post(f"{self.settings['app']}/run_task", data=dumps(task_id))
+
+    def scheduler_args(self, task):
         default = {
-            "id": self.aps_job_id,
-            "func": app.run,
             "replace_existing": True,
-            "args": [self.service.id],
-            "kwargs": self.run_properties(),
         }
-        if self.scheduling_mode == "cron":
-            self.periodic = True
-            expression = self.crontab_expression.split()
+        if task["scheduling_mode"] == "cron":
+            task["periodic"] = True
+            expression = task["crontab_expression"].split()
             mapping = {
                 "0": "sun",
                 "1": "mon",
@@ -60,12 +66,12 @@ class Scheduler(Starlette):
             }
             expression[-1] = ",".join(mapping[day] for day in expression[-1].split(","))
             trigger = {"trigger": CronTrigger.from_crontab(" ".join(expression))}
-        elif self.frequency:
-            self.periodic = True
+        elif task["frequency"]:
+            task["periodic"] = True
             frequency_in_seconds = (
-                int(self.frequency)
+                int(task["frequency"])
                 * {"seconds": 1, "minutes": 60, "hours": 3600, "days": 86400}[
-                    self.frequency_unit
+                    task["frequency_unit"]
                 ]
             )
             trigger = {
@@ -75,16 +81,9 @@ class Scheduler(Starlette):
                 "seconds": frequency_in_seconds,
             }
         else:
-            self.periodic = False
+            task["periodic"] = False
             trigger = {"trigger": "date", "run_date": self.aps_date("start_date")}
         return default, trigger
-
-    def schedule(self):
-        default, trigger = self.kwargs()
-        if not self.get_job(self.aps_job_id):
-            self.add_job(**{**default, **trigger})
-        else:
-            self.reschedule_job(default.pop("id"), **trigger)
 
     @staticmethod
     def run_job():

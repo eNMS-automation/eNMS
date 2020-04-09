@@ -1,5 +1,6 @@
 {
-  "address": "0.0.0.0",
+  "app": "http://192.168.56.102:5000",
+  "address": "http://192.168.56.103:8000",
   "config": {
     "apscheduler.jobstores.default": {
         "type": "sqlalchemy",

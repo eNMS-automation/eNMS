@@ -1,5 +1,7 @@
 from datetime import datetime
+from json import dumps
 from re import search
+from requests import post
 from sqlalchemy import Boolean, case, ForeignKey, Integer
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.ext.hybrid import hybrid_property
@@ -8,6 +10,7 @@ from sqlalchemy.orm import relationship
 from eNMS import app
 from eNMS.database import db
 from eNMS.models.base import AbstractBase
+from eNMS.setup import scheduler
 
 
 @db.set_custom_properties
@@ -41,18 +44,9 @@ class Task(AbstractBase):
         super().update(**kwargs)
         self.creation_time = app.get_time()
         self.aps_job_id = kwargs.get("aps_job_id", self.creation_time)
-        if self.is_active:
-            self.schedule()
-
-    def update(self, **kwargs):
-        super().update(**kwargs)
-        if self.is_active:
-            self.schedule()
 
     def delete(self):
-        if app.scheduler.get_job(self.aps_job_id):
-            app.scheduler.remove_job(self.aps_job_id)
-        db.session.commit()
+        post(f"{scheduler['address']}/delete_job", data=dumps(self.aps_job_id))
 
     @hybrid_property
     def status(self):
@@ -100,12 +94,7 @@ class Task(AbstractBase):
         return properties
 
     def schedule(self):
-        if not app.scheduler.get_job(self.aps_job_id):
-            app.scheduler.add_job(**{**default, **trigger})
-        else:
-            app.scheduler.reschedule_job(default.pop("id"), **trigger)
-
-
+        post(f"{scheduler['address']}/schedule_job", data=dumps(task.get_properties()))
 
 
 @db.set_custom_properties

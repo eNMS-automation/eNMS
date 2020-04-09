@@ -704,7 +704,7 @@ class Run(AbstractBase):
                 "result": "skipped",
                 "success": self.skip_value == "True",
             }
-        results = {"logs": []}
+        results = {}
         try:
             if self.restart_run and self.service.type == "workflow":
                 old_result = self.restart_run.result(

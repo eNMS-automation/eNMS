@@ -43,15 +43,9 @@ class Scheduler(Starlette):
         self.scheduler.start()
 
     def register_routes(self):
-        @self.route("/schedule_job", methods=["POST"])
+        @self.route("/schedule", methods=["POST"])
         async def add(request):
-            task = await request.json()
-            print("tttt" * 200, task)
-            default, trigger = self.scheduler_args(task)
-            if not self.scheduler.get_job(task["aps_job_id"]):
-                self.scheduler.add_job(**{**default, **trigger})
-            else:
-                self.scheduler.reschedule_job(default.pop("id"), **trigger)
+            self.schedule_task(await request.json())
             return JSONResponse(True)
 
         @self.route("/job", methods=["DELETE"])
@@ -64,10 +58,35 @@ class Scheduler(Starlette):
         @self.route("/action", methods=["POST"])
         async def action(request):
             data = await request.json()
-            try:
-                getattr(self.scheduler, data["action"])(data["job_id"])
-            except JobLookupError:
-                return JSONResponse({"alert": "This task no longer exists."})
+            if data["action"] == "resume":
+                self.schedule_task(data["task"])
+            getattr(self.scheduler, f"{data['action']}_job")(data["job_id"])
+
+        @self.route("/next_runtime/<task_id>", methods=["GET"])
+        async def next_runtime(request):
+            job = app.scheduler.get_job(request.path_params["task_id"])
+            if job and job.next_run_time:
+                return job.next_run_time.strftime("%Y-%m-%d %H:%M:%S")
+            return None
+
+        @self.route("/time_left/<task_id>", methods=["GET"])
+        async def time_left(request):
+            post(f"{scheduler['address']}/time_before_next_run", data=dumps(self.get_properties()))
+            job = app.scheduler.get_job(self.aps_job_id)
+            if job and job.next_run_time:
+                delta = job.next_run_time.replace(tzinfo=None) - datetime.now()
+                hours, remainder = divmod(delta.seconds, 3600)
+                minutes, seconds = divmod(remainder, 60)
+                days = f"{delta.days} days, " if delta.days else ""
+                return f"{days}{hours}h:{minutes}m:{seconds}s"
+            return None
+
+    def schedule_task(self, task):
+        default, trigger = self.scheduler_args(task)
+        if not self.scheduler.get_job(task["aps_job_id"]):
+            self.scheduler.add_job(**{**default, **trigger})
+        else:
+            self.scheduler.reschedule_job(default.pop("id"), **trigger)
 
     @staticmethod
     def run_service(task_id):

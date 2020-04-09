@@ -1,7 +1,7 @@
 from datetime import datetime
 from json import dumps
 from re import search
-from requests import post
+from requests import get, post
 from sqlalchemy import Boolean, case, ForeignKey, Integer
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.ext.hybrid import hybrid_property
@@ -58,28 +58,24 @@ class Task(AbstractBase):
 
     @property
     def next_run_time(self):
-        job = app.scheduler.get_job(self.aps_job_id)
-        if job and job.next_run_time:
-            return job.next_run_time.strftime("%Y-%m-%d %H:%M:%S")
-        return None
+        get(f"{scheduler['address']}/next_runtime/{self.aps_job_id}")
 
     @property
     def time_before_next_run(self):
-        job = app.scheduler.get_job(self.aps_job_id)
-        if job and job.next_run_time:
-            delta = job.next_run_time.replace(tzinfo=None) - datetime.now()
-            hours, remainder = divmod(delta.seconds, 3600)
-            minutes, seconds = divmod(remainder, 60)
-            days = f"{delta.days} days, " if delta.days else ""
-            return f"{days}{hours}h:{minutes}m:{seconds}s"
-        return None
+        get(f"{scheduler['address']}/time_left/{self.aps_job_id}")
 
     def action(self, mode):
         self.is_active = mode == "resume"
         db.session.commit()
         post(
             f"{scheduler['address']}/action",
-            data=dumps({"action": mode, "job_id": self.aps_job_id}),
+            data=dumps(
+                {
+                    "action": mode,
+                    "job_id": self.aps_job_id,
+                    "task": self.get_properties(),
+                }
+            ),
         )
 
     def run_properties(self):

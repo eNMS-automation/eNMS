@@ -474,6 +474,25 @@ class Server(Flask):
                 else:
                     return {**app.run(service.id, **data), "errors": errors}
 
+        class RunTask(Resource):
+            decorators = [self.auth.login_required, self.catch_exceptions]
+
+            def post(self):
+                data = {
+                    "trigger": "Scheduled Task",
+                    "creator": request.authorization["username"],
+                    "runtime": app.get_time(),
+                    **request.get_json(force=True),
+                }
+                app.scheduler.add_job(
+                    id=runtime,
+                    func=app.run,
+                    run_date=datetime.now(),
+                    args=[service.id],
+                    kwargs=data,
+                    trigger="date",
+                )
+
         class Topology(Resource):
             decorators = [self.auth.login_required, self.catch_exceptions]
 
@@ -535,6 +554,7 @@ class Server(Flask):
         api.add_resource(CreatePool, "/rest/create_pool")
         api.add_resource(Heartbeat, "/rest/is_alive")
         api.add_resource(RunService, "/rest/run_service")
+        api.add_resource(RunTask, "/rest/run_task")
         api.add_resource(Query, "/rest/query/<string:cls>")
         api.add_resource(UpdateInstance, "/rest/instance/<string:cls>")
         api.add_resource(GetInstance, "/rest/instance/<string:cls>/<string:name>")

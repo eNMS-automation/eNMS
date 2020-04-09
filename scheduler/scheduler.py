@@ -92,7 +92,7 @@ class Scheduler(Starlette):
     @staticmethod
     def run_service(task_id):
         post(
-            f"{environ.get('ENMS_ADDR')}/run_task",
+            f"{environ.get('ENMS_ADDR')}/rest/run_task",
             data=dumps(task_id),
             auth=HTTPBasicAuth("admin", "admin"),
         )

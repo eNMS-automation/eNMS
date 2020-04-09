@@ -526,7 +526,7 @@ class Run(AbstractBase):
             elif isinstance(value, list):
                 return list(map(rec, value))
             elif not isinstance(value, (int, str, bool, float, None.__class__)):
-                self.log("warning", f"Incompatible JSON value in results ({value})")
+                self.log("info", f"Converting {value} to string in results")
                 return str(value)
             else:
                 return value

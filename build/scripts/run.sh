@@ -15,6 +15,11 @@ function help() {
 
 function run() {
   if [[ -n "$path" ]]; then cd $path; fi
+  if [ "$scheduler" = true ]; then
+    cd scheduler
+    uvicorn scheduler:scheduler --host 0.0.0.0
+    exit 0
+  fi
   export FLASK_APP="app.py"
   export FLASK_DEBUG=1
   if [ "$database" = "mysql" ]; then
@@ -41,12 +46,13 @@ function run() {
   fi
 }
 
-while getopts h?rvgp:d: opt; do
+while getopts h?grsvp:d: opt; do
     case "$opt" in
       d) database=$OPTARG;;
       g) gunicorn=true;;
       p) path=$OPTARG;;
       r) reload=true;;
+      s) scheduler=true;;
       h|\?) help;;
     esac
 done

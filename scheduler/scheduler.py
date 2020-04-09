@@ -26,7 +26,6 @@ class Scheduler(Starlette):
         @self.route("/delete_job", methods=["POST"])
         async def schedule(request):
             data = await request.json()
-            print(data)
             return JSONResponse(True)
 
     @staticmethod

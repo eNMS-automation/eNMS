@@ -526,7 +526,7 @@ class Run(AbstractBase):
             elif isinstance(value, list):
                 return list(map(rec, value))
             elif not isinstance(value, (int, str, bool, float, None.__class__)):
-                self.log("warning", f"Incompatible JSON value in results ({value})")
+                self.log("info", f"Converting {value} to string in results")
                 return str(value)
             else:
                 return value
@@ -704,7 +704,7 @@ class Run(AbstractBase):
                 "result": "skipped",
                 "success": self.skip_value == "True",
             }
-        results = {"logs": []}
+        results = {}
         try:
             if self.restart_run and self.service.type == "workflow":
                 old_result = self.restart_run.result(
@@ -754,22 +754,23 @@ class Run(AbstractBase):
         return results
 
     def log(
-        self, severity, content, device=None, app_log=False, logger=None,
+        self, severity, log, device=None, app_log=False, logger=None,
     ):
         log_level = int(self.original.log_level)
         if not log_level or severity not in app.log_levels[log_level - 1 :]:
             return
         if device:
             device_name = device if isinstance(device, str) else device.name
-            content = f"DEVICE {device_name} - {content}"
-        logger_log = f"USER {self.creator} - {content}"
-        logger_log = f"SERVICE {self.service.scoped_name} - {logger_log}"
+            log = f"DEVICE {device_name} - {log}"
+        log = f"USER {self.creator} - SERVICE {self.service.scoped_name} - {log}"
         if logger:
-            getattr(getLogger(logger), severity)(logger_log)
+            getattr(getLogger(logger), severity)(log)
         if app_log:
-            app.log(severity, logger_log, user=self.creator)
-        run_log = f"{app.get_time()} - {severity} - {content}"
+            app.log(severity, log, user=self.creator)
+        run_log = f"{app.get_time()} - {severity} - {log}"
         app.run_logs[self.parent_runtime][self.service_id].append(run_log)
+        if self.runtime != self.parent_runtime:
+            app.run_logs[self.parent_runtime][self.original.service_id].append(run_log)
 
     def build_notification(self, results):
         notification = {

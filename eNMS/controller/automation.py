@@ -234,7 +234,6 @@ class AutomationController(BaseController):
             return sorted(
                 (
                     {
-                        "id": service.name,
                         "data": {"id": service.id},
                         "text": service.scoped_name,
                         "a_attr": {"style": ("color: #6666FF;" "width: 100%")},
@@ -248,7 +247,6 @@ class AutomationController(BaseController):
             return sorted(
                 (
                     {
-                        "id": service.name,
                         "data": {"id": service.id},
                         "text": service.scoped_name,
                         "a_attr": {"style": ("color: #FF1694;" "width: 100%")},
@@ -262,7 +260,6 @@ class AutomationController(BaseController):
             return sorted(
                 (
                     {
-                        "id": service.name,
                         "data": {"id": service.id},
                         "text": service.scoped_name,
                         "children": service.type == "workflow",

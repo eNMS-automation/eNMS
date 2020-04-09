@@ -46,6 +46,11 @@ class Task(AbstractBase):
         self.creation_time = app.get_time()
         self.aps_job_id = kwargs.get("aps_job_id", self.creation_time)
 
+    def update(self, **kwargs):
+        super().update(**kwargs)
+        if self.is_active:
+            self.schedule()
+
     def delete(self):
         post(f"{scheduler['address']}/delete_job", data=dumps(self.aps_job_id))
 
@@ -94,7 +99,7 @@ class Task(AbstractBase):
         return properties
 
     def schedule(self):
-        post(f"{scheduler['address']}/schedule_job", data=dumps(self.get_properties()))
+        post(f"{scheduler['address']}/schedule", data=dumps(self.get_properties()))
 
 
 @db.set_custom_properties

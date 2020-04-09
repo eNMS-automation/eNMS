@@ -79,6 +79,7 @@ class BaseController:
         self.path = Path.cwd()
         self.init_encryption()
         self.init_scheduler()
+        self.use_vault = settings["vault"]["use_vault"]
         if settings["tacacs"]["active"]:
             self.init_tacacs_client()
         if settings["ldap"]["active"]:
@@ -94,7 +95,6 @@ class BaseController:
         self.init_connection_pools()
 
     def init_encryption(self):
-        self.use_vault = self.settings["vault"]["use_vault"]
         self.fernet_encryption = environ.get("FERNET_KEY")
         if self.fernet_encryption:
             fernet = Fernet(self.fernet_encryption)

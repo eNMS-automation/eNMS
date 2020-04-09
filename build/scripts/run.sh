@@ -17,7 +17,7 @@ function run() {
   if [[ -n "$path" ]]; then cd $path; fi
   if [ "$scheduler" = true ]; then
     cd scheduler
-    export ENMS_ADDRESS="http://192.168.56.102:5000"
+    export ENMS_ADDR="http://192.168.56.102:5000"
     uvicorn scheduler:scheduler --host 0.0.0.0
     exit 0
   fi

@@ -53,16 +53,18 @@ class Scheduler(Starlette):
                 self.scheduler.reschedule_job(default.pop("id"), **trigger)
             return JSONResponse(True)
 
-        @self.route("/delete_job", methods=["POST"])
+        @self.route("/job/<job_id:int>", methods=["DELETE"])
         async def delete(request):
             job_id = await request.json()
             if self.scheduler.get_job(job_id):
                 self.scheduler.remove_job(job_id)
             return JSONResponse()
 
-        @self.route("/resume_job", methods=["POST"])
-        async def delete(request):
-            self.scheduler.resume_job(await request.json())
+        @self.route("/job/<job_id>", methods=["POST"])
+        async def action(request):
+            action = f"{await request.json()}_job"
+            print(action, job_id)
+            getattr(self.scheduler, action)(request.path_params["job_id"])
 
     @staticmethod
     def run_service(task_id):
@@ -74,7 +76,9 @@ class Scheduler(Starlette):
             task["periodic"] = True
             expression = task["crontab_expression"].split()
 
-            expression[-1] = ",".join(self.mapping[day] for day in expression[-1].split(","))
+            expression[-1] = ",".join(
+                self.mapping[day] for day in expression[-1].split(",")
+            )
             trigger = {"trigger": CronTrigger.from_crontab(" ".join(expression))}
         elif task["frequency"]:
             task["periodic"] = True

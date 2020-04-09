@@ -77,13 +77,18 @@ class Task(AbstractBase):
     def pause(self):
         self.is_active = False
         db.session.commit()
-        app.scheduler.pause_job(self.aps_job_id)
+        post(
+            f"{scheduler['address']}/job",
+            data=dumps({"action": "pause", "job_id": self.aps_job_id}),
+        )
 
     def resume(self):
-        self.schedule()
-        # post(f"{scheduler['address']}/resume_job", data=dumps(self.aps_job_id))
         self.is_active = True
         db.session.commit()
+        post(
+            f"{scheduler['address']}/job",
+            data=dumps({"action": "resume", "job_id": self.aps_job_id}),
+        )
 
     def run_properties(self):
         properties = {"task": self.id, **self.initial_payload}

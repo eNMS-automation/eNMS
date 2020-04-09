@@ -2,6 +2,7 @@ from datetime import datetime
 from json import dumps
 from re import search
 from requests import get, post
+from requests.exceptions import ConnectionError
 from sqlalchemy import Boolean, case, ForeignKey, Integer
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.ext.hybrid import hybrid_property
@@ -58,11 +59,17 @@ class Task(AbstractBase):
 
     @property
     def next_run_time(self):
-        get(f"{scheduler['address']}/next_runtime/{self.aps_job_id}")
+        try:
+            get(f"{scheduler['address']}/next_runtime/{self.aps_job_id}")
+        except ConnectionError:
+            return "Scheduler Unreachable"
 
     @property
     def time_before_next_run(self):
-        get(f"{scheduler['address']}/time_left/{self.aps_job_id}")
+        try:
+            get(f"{scheduler['address']}/time_left/{self.aps_job_id}")
+        except ConnectionError:
+            return "Scheduler Unreachable"
 
     def action(self, mode):
         self.is_active = mode == "resume"

@@ -64,22 +64,19 @@ class Scheduler(Starlette):
 
         @self.route("/next_runtime/<task_id>", methods=["GET"])
         async def next_runtime(request):
-            job = app.scheduler.get_job(request.path_params["task_id"])
+            job = self.scheduler.get_job(request.path_params["task_id"])
             if job and job.next_run_time:
                 return job.next_run_time.strftime("%Y-%m-%d %H:%M:%S")
-            return None
 
         @self.route("/time_left/<task_id>", methods=["GET"])
         async def time_left(request):
-            post(f"{scheduler['address']}/time_before_next_run", data=dumps(self.get_properties()))
-            job = app.scheduler.get_job(self.aps_job_id)
+            job = self.scheduler.get_job(request.path_params["task_id"])
             if job and job.next_run_time:
                 delta = job.next_run_time.replace(tzinfo=None) - datetime.now()
                 hours, remainder = divmod(delta.seconds, 3600)
                 minutes, seconds = divmod(remainder, 60)
                 days = f"{delta.days} days, " if delta.days else ""
                 return f"{days}{hours}h:{minutes}m:{seconds}s"
-            return None
 
     def schedule_task(self, task):
         default, trigger = self.scheduler_args(task)
@@ -93,7 +90,11 @@ class Scheduler(Starlette):
         post(f"{environ.get('ENMS_ADDR')}/run_task", data=dumps(task_id))
 
     def scheduler_args(self, task):
-        default = {"replace_existing": True, "func": self.run_service}
+        default = {
+            "replace_existing": True,
+            "func": self.run_service,
+            "id": task["aps_job_id"],
+        }
         if task["scheduling_mode"] == "cron":
             task["periodic"] = True
             expression = task["crontab_expression"].split()

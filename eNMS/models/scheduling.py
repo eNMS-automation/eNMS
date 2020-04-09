@@ -81,7 +81,7 @@ class Task(AbstractBase):
 
     def resume(self):
         self.schedule()
-        app.scheduler.resume_job(self.aps_job_id)
+        # post(f"{scheduler['address']}/resume_job", data=dumps(self.aps_job_id))
         self.is_active = True
         db.session.commit()
 
@@ -94,7 +94,7 @@ class Task(AbstractBase):
         return properties
 
     def schedule(self):
-        post(f"{scheduler['address']}/schedule_job", data=dumps(task.get_properties()))
+        post(f"{scheduler['address']}/schedule_job", data=dumps(self.get_properties()))
 
 
 @db.set_custom_properties

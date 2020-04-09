@@ -1,23 +1,39 @@
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from apscheduler.triggers.cron import CronTrigger
 from datetime import datetime
-from json import load
+from json import load, dumps
+from os import environ
 from pathlib import Path
+from requests import post
 from starlette.applications import Starlette
 from starlette.responses import JSONResponse
 
 
 class Scheduler(Starlette):
+
+    mapping = {
+        "0": "sun",
+        "1": "mon",
+        "2": "tue",
+        "3": "wed",
+        "4": "thu",
+        "5": "fri",
+        "6": "sat",
+        "7": "sun",
+        "*": "*",
+    }
+
     def __init__(self):
         super().__init__()
         self.configure_scheduler()
         self.register_routes()
 
-    def aps_date(self, datetype):
-        date = getattr(self, datetype)
-        if date:
-            date = datetime.strptime(date, "%d/%m/%Y %H:%M:%S")
-            return datetime.strftime(date, "%Y-%m-%d %H:%M:%S")
+    @staticmethod
+    def aps_date(date):
+        if not date:
+            return
+        date = datetime.strptime(date, "%d/%m/%Y %H:%M:%S")
+        return datetime.strftime(date, "%Y-%m-%d %H:%M:%S")
 
     def configure_scheduler(self):
         with open(Path.cwd().parent / "setup" / "scheduler.json", "r") as file:
@@ -29,8 +45,9 @@ class Scheduler(Starlette):
         @self.route("/schedule_job", methods=["POST"])
         async def add(request):
             task = await request.json()
+            print("tttt" * 200, task)
             default, trigger = self.scheduler_args(task)
-            if not self.scheduler.get_job(self.aps_job_id):
+            if not self.scheduler.get_job(task["aps_job_id"]):
                 self.scheduler.add_job(**{**default, **trigger})
             else:
                 self.scheduler.reschedule_job(default.pop("id"), **trigger)
@@ -43,28 +60,21 @@ class Scheduler(Starlette):
                 self.scheduler.remove_job(job_id)
             return JSONResponse()
 
-    def run_service(self, task_id):
-        post(f"{self.settings['app']}/run_task", data=dumps(task_id))
+        @self.route("/resume_job", methods=["POST"])
+        async def delete(request):
+            self.scheduler.resume_job(await request.json())
+
+    @staticmethod
+    def run_service(task_id):
+        post(f"{environ.get('ENMS_ADDR')}/run_task", data=dumps(task_id))
 
     def scheduler_args(self, task):
-        default = {
-            "replace_existing": True,
-        }
+        default = {"replace_existing": True, "func": self.run_service}
         if task["scheduling_mode"] == "cron":
             task["periodic"] = True
             expression = task["crontab_expression"].split()
-            mapping = {
-                "0": "sun",
-                "1": "mon",
-                "2": "tue",
-                "3": "wed",
-                "4": "thu",
-                "5": "fri",
-                "6": "sat",
-                "7": "sun",
-                "*": "*",
-            }
-            expression[-1] = ",".join(mapping[day] for day in expression[-1].split(","))
+
+            expression[-1] = ",".join(self.mapping[day] for day in expression[-1].split(","))
             trigger = {"trigger": CronTrigger.from_crontab(" ".join(expression))}
         elif task["frequency"]:
             task["periodic"] = True
@@ -76,18 +86,14 @@ class Scheduler(Starlette):
             )
             trigger = {
                 "trigger": "interval",
-                "start_date": self.aps_date("start_date"),
-                "end_date": self.aps_date("end_date"),
+                "start_date": self.aps_date(task["start_date"]),
+                "end_date": self.aps_date(task["end_date"]),
                 "seconds": frequency_in_seconds,
             }
         else:
             task["periodic"] = False
-            trigger = {"trigger": "date", "run_date": self.aps_date("start_date")}
+            trigger = {"trigger": "date", "run_date": self.aps_date(task["start_date"])}
         return default, trigger
-
-    @staticmethod
-    def run_job():
-        print("test")
 
 
 scheduler = Scheduler()

@@ -79,8 +79,12 @@ class NetmikoValidationForm(NetmikoForm):
     auto_find_prompt = BooleanField(
         default=True, render_kw={"help": "netmiko/auto_find_prompt"}
     )
-    strip_prompt = BooleanField(default=True)
-    strip_command = BooleanField(default=True)
+    strip_prompt = BooleanField(
+        default=True, render_kw={"help": "netmiko/strip_prompt"}
+    )
+    strip_command = BooleanField(
+        default=True, render_kw={"help": "netmiko/strip_command"}
+    )
     use_genie = BooleanField(default=False)
     groups = {
         "Main Parameters": {"commands": ["command"], "default": "expanded"},

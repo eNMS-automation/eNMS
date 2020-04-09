@@ -1,4 +1,3 @@
-from apscheduler.schedulers.background import BackgroundScheduler
 from base64 import b64decode, b64encode
 from collections import Counter
 from cryptography.fernet import Fernet
@@ -78,7 +77,6 @@ class BaseController:
         self.load_custom_properties()
         self.path = Path.cwd()
         self.init_encryption()
-        self.init_scheduler()
         self.use_vault = settings["vault"]["use_vault"]
         if settings["tacacs"]["active"]:
             self.init_tacacs_client()
@@ -204,10 +202,6 @@ class BaseController:
                 f"{protocol}://",
                 HTTPAdapter(max_retries=retry, **self.settings["requests"]["pool"],),
             )
-
-    def init_scheduler(self):
-        self.scheduler = BackgroundScheduler(**scheduler)
-        self.scheduler.start()
 
     def init_forms(self):
         for file in (self.path / "eNMS" / "forms").glob("**/*.py"):

@@ -48,7 +48,7 @@ except ImportError as exc:
 from eNMS.database import db
 from eNMS.models import models, model_properties, relationships
 from eNMS.controller.syslog import SyslogServer
-from eNMS.setup import settings, properties, rbac
+from eNMS.setup import scheduler, settings, properties, rbac
 
 
 class BaseController:
@@ -206,21 +206,7 @@ class BaseController:
             )
 
     def init_scheduler(self):
-        self.scheduler = BackgroundScheduler(
-            {
-                "apscheduler.jobstores.default": {
-                    "type": "sqlalchemy",
-                    "url": "sqlite:///jobs.sqlite",
-                },
-                "apscheduler.executors.default": {
-                    "class": "apscheduler.executors.pool:ThreadPoolExecutor",
-                    "max_workers": "50",
-                },
-                "apscheduler.job_defaults.misfire_grace_time": "5",
-                "apscheduler.job_defaults.coalesce": "true",
-                "apscheduler.job_defaults.max_instances": "3",
-            }
-        )
+        self.scheduler = BackgroundScheduler(**scheduler)
         self.scheduler.start()
 
     def init_forms(self):

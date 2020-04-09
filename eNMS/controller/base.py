@@ -94,7 +94,7 @@ class BaseController:
         self.init_connection_pools()
 
     def init_encryption(self):
-        self.use_vault = environ.get("USE_VAULT")
+        self.use_vault = self.settings["vault"]["use_vault"]
         self.fernet_encryption = environ.get("FERNET_KEY")
         if self.fernet_encryption:
             fernet = Fernet(self.fernet_encryption)
@@ -258,7 +258,7 @@ class BaseController:
     def init_vault_client(self):
         url = environ.get("VAULT_ADDR", "http://127.0.0.1:8200")
         self.vault_client = VaultClient(url=url, token=environ.get("VAULT_TOKEN"))
-        if self.vault_client.sys.is_sealed() and environ.get("UNSEAL_VAULT"):
+        if self.vault_client.sys.is_sealed() and self.settings["vault"]["unseal_vault"]:
             keys = [environ.get(f"UNSEAL_VAULT_KEY{i}") for i in range(1, 6)]
             self.vault_client.sys.submit_unseal_keys(filter(None, keys))
 

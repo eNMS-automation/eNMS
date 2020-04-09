@@ -89,6 +89,10 @@
     "active": false,
     "address": ""
   },
+  "vault": {
+    "use_vault": false,
+    "unseal_vault": false
+  },
   "view": {
     "longitude": -96.0,
     "latitude": 33.0,

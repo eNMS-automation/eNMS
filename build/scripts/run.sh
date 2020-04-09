@@ -35,8 +35,6 @@ function run() {
     fi
   fi
   if [ "$vault" = true ]; then
-    export USE_VAULT=1
-    export UNSEAL_VAULT=1
     export VAULT_ADDR=http://192.168.56.103:8200
     export VAULT_TOKEN=s.nxEFgvw0MINej8ESerFgChxv
     export UNSEAL_VAULT_KEY1=PI9A7c1zCPa9hbASCwbok0vfnwUerYSuS95uuhXRBYmn

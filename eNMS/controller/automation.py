@@ -441,14 +441,8 @@ class AutomationController(BaseController):
         }
 
     def convert_date(self, date):
-        python_month = search(r".*-(\d{2})-.*", date).group(1)
-        month = "{:02}".format((int(python_month) - 1) % 12)
-        return [
-            int(i)
-            for i in sub(
-                r"(\d+)-(\d+)-(\d+) (\d+):(\d+).*", r"\1," + month + r",\3,\4,\5", date
-            ).split(",")
-        ]
+
+        return
 
     def calendar_init(self, type):
         results = {}
@@ -456,11 +450,19 @@ class AutomationController(BaseController):
             if getattr(instance, "workflow", None):
                 continue
             date = getattr(instance, "next_run_time" if type == "task" else "runtime")
-            if date:
-                results[instance.name] = {
-                    "start": self.convert_date(date),
-                    **instance.serialized,
-                }
+            python_month = search(r".*-(\d{2})-.*", date)
+            if not python_month:
+                continue
+            month = "{:02}".format((int(python_month.group(1)) - 1) % 12)
+            start = [
+                int(i)
+                for i in sub(
+                    r"(\d+)-(\d+)-(\d+) (\d+):(\d+).*",
+                    r"\1," + month + r",\3,\4,\5",
+                    date,
+                ).split(",")
+            ]
+            results[instance.name] = {"start": start, **instance.serialized}
         return results
 
     def scheduler_action(self, action):

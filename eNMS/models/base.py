@@ -81,7 +81,7 @@ class AbstractBase(db.base):
         properties = list(model_properties[self.type])
         if not export:
             properties.extend(getattr(self, "model_properties", []))
-        for property in properties:            
+        for property in properties:
             if property in db.private_properties:
                 continue
             if property in db.dont_serialize.get(self.type, []):
@@ -90,8 +90,9 @@ class AbstractBase(db.base):
                 continue
             if export and property in no_migrate:
                 continue
-            value = getattr(self, property, None)
-            if not value:
+            try:
+                value = getattr(self, property)
+            except AttributeError:
                 continue
             if export:
                 if isinstance(value, MutableList):

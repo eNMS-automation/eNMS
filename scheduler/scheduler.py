@@ -100,7 +100,7 @@ class Scheduler(Starlette):
                 "trigger": "interval",
                 "start_date": self.aps_date(task["start_date"]),
                 "end_date": self.aps_date(task["end_date"]),
-                "seconds": (int(task["frequency"]) * seconds[task["frequency_unit"]]),
+                "seconds": int(task["frequency"]) * self.seconds[task["frequency_unit"]],
             }
         else:
             trigger = {"trigger": "date", "run_date": self.aps_date(task["start_date"])}

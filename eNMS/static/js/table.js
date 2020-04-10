@@ -151,7 +151,7 @@ export class Table {
       this.table.order([0, "desc"]).draw();
     }
     if (["run", "service", "task", "workflow"].includes(this.type)) {
-      refreshTablePeriodically(this.id, 3000, true);
+      refreshTablePeriodically(this.id, 4000, true);
     }
   }
 

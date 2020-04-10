@@ -101,10 +101,12 @@ class Task(AbstractBase):
         db.session.commit()
 
     def run_properties(self):
-        properties = {"task": self.id,
-                      "trigger": "CRON",
-                      "creator": "Scheduler",
-                      **self.initial_payload}
+        properties = {
+            "task": self.id,
+            "trigger": "CRON",
+            "creator": "Scheduler",
+            **self.initial_payload,
+        }
         if self.devices:
             properties["devices"] = [device.id for device in self.devices]
         if self.pools:

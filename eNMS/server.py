@@ -1,4 +1,4 @@
-from click import argument, echo, option
+from click import argument, echo, option, Choice
 from datetime import datetime, timedelta
 from json import loads
 from passlib.hash import argon2
@@ -320,9 +320,8 @@ class Server(Flask):
             devices_list = devices.split(",") if devices else []
             devices_list = [db.fetch("device", name=name).id for name in devices_list]
             payload_dict = loads(payload) if payload else {}
-            payload_dict.update(devices=devices_list,
-                                trigger="CLI",
-                                creator=getpass.getuser()
+            payload_dict.update(
+                devices=devices_list, trigger="CLI", creator=getpass.getuser()
             )
             service = db.fetch("service", name=name)
             results = app.run(service.id, **payload_dict)
@@ -339,8 +338,8 @@ class Server(Flask):
             "--log",
             "-l",
             required=True,
-            type=Choice(['changelog', 'result'], case_sensitive=True),
-            help="The table to delete the logs from.'"
+            type=Choice(["changelog", "result"], case_sensitive=True),
+            help="The table to delete the logs from.'",
         )
         def delete_log(keep_last_days, log):
             deletion_time = datetime.now() - timedelta(days=keep_last_days)

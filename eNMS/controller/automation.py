@@ -1,5 +1,4 @@
 from collections import defaultdict
-from datetime import datetime
 from flask import request
 from flask_login import current_user
 from napalm._SUPPORTED_DRIVERS import SUPPORTED_DRIVERS

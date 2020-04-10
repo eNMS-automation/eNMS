@@ -1,4 +1,3 @@
-from datetime import datetime
 from re import search
 from requests import get, post
 from requests.exceptions import ConnectionError

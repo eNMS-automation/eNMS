@@ -91,11 +91,9 @@ class Scheduler(Starlette):
 
     @staticmethod
     def run_service(task_id):
-        post(
-            f"{environ.get('ENMS_ADDR')}/rest/run_task",
-            data=dumps(task_id),
-            auth=HTTPBasicAuth("admin", "admin"),
-        )
+        auth = HTTPBasicAuth(environ.get("ENMS_USER"), environ.get("ENMS_PASSWORD"))
+        run_task_url = f"{environ.get('ENMS_ADDR')}/rest/run_task"
+        post(run_task_url, data=dumps(task_id), auth=auth)
 
     def scheduler_args(self, task):
         default = {
@@ -107,7 +105,6 @@ class Scheduler(Starlette):
         if task["scheduling_mode"] == "cron":
             task["periodic"] = True
             expression = task["crontab_expression"].split()
-
             expression[-1] = ",".join(
                 self.mapping[day] for day in expression[-1].split(",")
             )

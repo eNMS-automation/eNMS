@@ -18,6 +18,8 @@ function run() {
   if [ "$scheduler" = true ]; then
     cd scheduler
     export ENMS_ADDR="http://192.168.56.102:5000"
+    export ENMS_USER="admin"
+    export ENMS_PASSWORD="admin"
     uvicorn scheduler:scheduler --host 0.0.0.0
     exit 0
   fi

@@ -463,7 +463,7 @@ class Server(Flask):
                     data.update({"devices": devices, "pools": pools})
                 data["runtime"] = runtime = app.get_time()
                 if handle_asynchronously:
-                    Thread(target=self.run, args=(service.id,), kwargs=data).start()
+                    Thread(target=app.run, args=(service.id,), kwargs=data).start()
                     return {"errors": errors, "runtime": runtime}
                 else:
                     return {**app.run(service.id, **data), "errors": errors}
@@ -475,7 +475,7 @@ class Server(Flask):
                 task_id = request.get_json()
                 task = db.fetch("task", id=task_id)
                 data = {
-                    "trigger": "Scheduled Task",
+                    "trigger": "Scheduler",
                     "creator": request.authorization["username"],
                     "runtime": app.get_time(),
                     "task": task_id,
@@ -485,7 +485,7 @@ class Server(Flask):
                     task["devices"] = [device.id for device in task.devices]
                 if task.pools:
                     task["pools"] = [pool.id for pool in task.pools]
-                Thread(target=self.run, args=(task.service.id,), kwargs=data).start()
+                Thread(target=app.run, args=(task.service.id,), kwargs=data).start()
 
         class Topology(Resource):
             decorators = [self.auth.login_required, self.catch_exceptions]

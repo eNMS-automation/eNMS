@@ -13,7 +13,7 @@ from starlette.responses import JSONResponse
 
 class Scheduler(Starlette):
 
-    mapping = {
+    days = {
         "0": "sun",
         "1": "mon",
         "2": "tue",
@@ -24,6 +24,8 @@ class Scheduler(Starlette):
         "7": "sun",
         "*": "*",
     }
+
+    seconds = {"seconds": 1, "minutes": 60, "hours": 3600, "days": 86400}
 
     def __init__(self):
         super().__init__()
@@ -90,22 +92,15 @@ class Scheduler(Starlette):
             "args": [task["id"]],
         }
         if task["scheduling_mode"] == "cron":
-            expression = task["crontab_expression"].split()
-            expression[-1] = ",".join(
-                self.mapping[day] for day in expression[-1].split(",")
-            )
-            trigger = {"trigger": CronTrigger.from_crontab(" ".join(expression))}
+            crontab = task["crontab_expression"].split()
+            crontab[-1] = ",".join(self.days[day] for day in crontab[-1].split(","))
+            trigger = {"trigger": CronTrigger.from_crontab(" ".join(crontab))}
         elif task["frequency"]:
             trigger = {
                 "trigger": "interval",
                 "start_date": self.aps_date(task["start_date"]),
                 "end_date": self.aps_date(task["end_date"]),
-                "seconds": (
-                int(task["frequency"])
-                * {"seconds": 1, "minutes": 60, "hours": 3600, "days": 86400}[
-                    task["frequency_unit"]
-                ]
-            ),
+                "seconds": (int(task["frequency"]) * seconds[task["frequency_unit"]]),
             }
         else:
             trigger = {"trigger": "date", "run_date": self.aps_date(task["start_date"])}

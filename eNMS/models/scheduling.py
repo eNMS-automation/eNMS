@@ -89,14 +89,6 @@ class Task(AbstractBase):
             ),
         )
 
-    def run_properties(self):
-        properties = {"task": self.id, **self.initial_payload}
-        if self.devices:
-            properties["devices"] = [device.id for device in self.devices]
-        if self.pools:
-            properties["pools"] = [pool.id for pool in self.pools]
-        return properties
-
     def schedule(self):
         post(f"{scheduler['address']}/schedule", data=dumps(self.get_properties()))
 

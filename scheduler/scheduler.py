@@ -113,6 +113,7 @@ class Scheduler(Starlette):
     def run_service(task_id):
         auth = HTTPBasicAuth(environ.get("ENMS_USER"), environ.get("ENMS_PASSWORD"))
         run_task_url = f"{environ.get('ENMS_ADDR')}/rest/run_task"
+        print(run_task_url, task_id)
         post(run_task_url, data=dumps(task_id), auth=auth)
 
 

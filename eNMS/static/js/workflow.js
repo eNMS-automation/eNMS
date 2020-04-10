@@ -370,6 +370,9 @@ function deleteNode(id) {
     deleteLabel(node);
   } else {
     workflow.services = workflow.services.filter((n) => n.id != id);
+    workflow.edges = workflow.edges.filter(
+      (e) => ![e.source_id, e.destination_id].includes(id)
+    );
     call({
       url: `/delete_node/${workflow.id}/${id}`,
       callback: function(result) {
@@ -409,7 +412,9 @@ function saveEdge(edge) {
 }
 
 function deleteEdge(edgeId) {
+  const edgeNumber = workflow.edges.length;
   workflow.edges = workflow.edges.filter((e) => e.id != edgeId);
+  if (workflow.edges.length == edgeNumber) return;
   call({
     url: `/delete_edge/${workflow.id}/${edgeId}`,
     callback: (updateTime) => {

@@ -111,7 +111,6 @@
       ],
       "task":[ 
          "status",
-         "periodic",
          "frequency",
          "frequency_unit",
          "crontab_expression",

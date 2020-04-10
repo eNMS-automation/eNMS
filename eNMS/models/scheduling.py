@@ -1,5 +1,4 @@
 from datetime import datetime
-from json import dumps
 from re import search
 from requests import get, post
 from requests.exceptions import ConnectionError
@@ -51,7 +50,7 @@ class Task(AbstractBase):
             self.schedule()
 
     def delete(self):
-        post(f"{scheduler['address']}/delete_job", data=dumps(self.aps_job_id))
+        post(f"{scheduler['address']}/delete_job", json=self.aps_job_id)
 
     @hybrid_property
     def status(self):
@@ -80,17 +79,15 @@ class Task(AbstractBase):
         db.session.commit()
         post(
             f"{scheduler['address']}/action",
-            data=dumps(
-                {
-                    "action": mode,
-                    "job_id": self.aps_job_id,
-                    "task": self.get_properties(),
-                }
-            ),
+            json={
+                "action": mode,
+                "job_id": self.aps_job_id,
+                "task": self.get_properties(),
+            },
         )
 
     def schedule(self):
-        post(f"{scheduler['address']}/schedule", data=dumps(self.get_properties()))
+        post(f"{scheduler['address']}/schedule", json=self.get_properties())
 
 
 @db.set_custom_properties

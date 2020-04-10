@@ -2,7 +2,7 @@ from apscheduler.jobstores.base import JobLookupError
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from apscheduler.triggers.cron import CronTrigger
 from datetime import datetime
-from json import load, dumps
+from json import load
 from os import environ
 from pathlib import Path
 from requests import post
@@ -100,7 +100,8 @@ class Scheduler(Starlette):
                 "trigger": "interval",
                 "start_date": self.aps_date(task["start_date"]),
                 "end_date": self.aps_date(task["end_date"]),
-                "seconds": int(task["frequency"]) * self.seconds[task["frequency_unit"]],
+                "seconds": int(task["frequency"])
+                * self.seconds[task["frequency_unit"]],
             }
         else:
             trigger = {"trigger": "date", "run_date": self.aps_date(task["start_date"])}
@@ -114,7 +115,7 @@ class Scheduler(Starlette):
         auth = HTTPBasicAuth(environ.get("ENMS_USER"), environ.get("ENMS_PASSWORD"))
         run_task_url = f"{environ.get('ENMS_ADDR')}/rest/run_task"
         print(run_task_url, task_id)
-        post(run_task_url, data=dumps(task_id), auth=auth)
+        post(run_task_url, json=task_id, auth=auth)
 
 
 scheduler = Scheduler()

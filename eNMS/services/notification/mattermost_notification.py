@@ -1,4 +1,3 @@
-from json import dumps
 from requests import post
 from sqlalchemy import ForeignKey, Integer
 from wtforms.widgets import TextArea
@@ -28,7 +27,7 @@ class MattermostNotificationService(Service):
         result = post(
             app.settings["mattermost"]["url"],
             verify=app.settings["mattermost"]["verify_certificate"],
-            data=dumps({"channel": channel, "text": run.sub(run.body, locals())}),
+            json={"channel": channel, "text": run.sub(run.body, locals())},
         )
         return {"success": True, "result": str(result)}
 

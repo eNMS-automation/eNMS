@@ -5,7 +5,7 @@ from datetime import datetime
 from functools import partial
 from importlib import __import__ as importlib_import
 from io import BytesIO
-from json import dumps, loads
+from json import loads
 from json.decoder import JSONDecodeError
 from logging import getLogger
 from multiprocessing.pool import ThreadPool
@@ -828,12 +828,10 @@ class Run(AbstractBase):
                 result = post(
                     app.settings["mattermost"]["url"],
                     verify=app.settings["mattermost"]["verify_certificate"],
-                    data=dumps(
-                        {
-                            "channel": app.settings["mattermost"]["channel"],
-                            "text": notification,
-                        }
-                    ),
+                    json={
+                        "channel": app.settings["mattermost"]["channel"],
+                        "text": notification,
+                    },
                 ).text
             results["notification"] = {"success": True, "result": result}
         except Exception:

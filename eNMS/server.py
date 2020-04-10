@@ -479,7 +479,7 @@ class Server(Flask):
                     "creator": request.authorization["username"],
                     "runtime": app.get_time(),
                     "task": task_id,
-                    **task.initial_payload
+                    **task.initial_payload,
                 }
                 if task.devices:
                     task["devices"] = [device.id for device in task.devices]

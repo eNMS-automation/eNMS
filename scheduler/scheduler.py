@@ -83,7 +83,32 @@ class Scheduler(Starlette):
             return JSONResponse("Not Scheduled")
 
     def schedule_task(self, task):
-        default, trigger = self.scheduler_args(task)
+        default = {
+            "replace_existing": True,
+            "func": self.run_service,
+            "id": task["aps_job_id"],
+            "args": [task["id"]],
+        }
+        if task["scheduling_mode"] == "cron":
+            expression = task["crontab_expression"].split()
+            expression[-1] = ",".join(
+                self.mapping[day] for day in expression[-1].split(",")
+            )
+            trigger = {"trigger": CronTrigger.from_crontab(" ".join(expression))}
+        elif task["frequency"]:
+            trigger = {
+                "trigger": "interval",
+                "start_date": self.aps_date(task["start_date"]),
+                "end_date": self.aps_date(task["end_date"]),
+                "seconds": (
+                int(task["frequency"])
+                * {"seconds": 1, "minutes": 60, "hours": 3600, "days": 86400}[
+                    task["frequency_unit"]
+                ]
+            ),
+            }
+        else:
+            trigger = {"trigger": "date", "run_date": self.aps_date(task["start_date"])}
         if not self.scheduler.get_job(task["aps_job_id"]):
             self.scheduler.add_job(**{**default, **trigger})
         else:
@@ -94,39 +119,6 @@ class Scheduler(Starlette):
         auth = HTTPBasicAuth(environ.get("ENMS_USER"), environ.get("ENMS_PASSWORD"))
         run_task_url = f"{environ.get('ENMS_ADDR')}/rest/run_task"
         post(run_task_url, data=dumps(task_id), auth=auth)
-
-    def scheduler_args(self, task):
-        default = {
-            "replace_existing": True,
-            "func": self.run_service,
-            "id": task["aps_job_id"],
-            "args": [task["id"]],
-        }
-        if task["scheduling_mode"] == "cron":
-            task["periodic"] = True
-            expression = task["crontab_expression"].split()
-            expression[-1] = ",".join(
-                self.mapping[day] for day in expression[-1].split(",")
-            )
-            trigger = {"trigger": CronTrigger.from_crontab(" ".join(expression))}
-        elif task["frequency"]:
-            task["periodic"] = True
-            frequency_in_seconds = (
-                int(task["frequency"])
-                * {"seconds": 1, "minutes": 60, "hours": 3600, "days": 86400}[
-                    task["frequency_unit"]
-                ]
-            )
-            trigger = {
-                "trigger": "interval",
-                "start_date": self.aps_date(task["start_date"]),
-                "end_date": self.aps_date(task["end_date"]),
-                "seconds": frequency_in_seconds,
-            }
-        else:
-            task["periodic"] = False
-            trigger = {"trigger": "date", "run_date": self.aps_date(task["start_date"])}
-        return default, trigger
 
 
 scheduler = Scheduler()

@@ -155,7 +155,7 @@ class AutomationController(BaseController):
         if log_instance:
             log = log_instance.content
         else:
-            log = "\n".join(self.run_logs[runtime].get(int(service), []))
+            log = "\n".join(self.log_queue(runtime, service, mode="get"))
         return {"logs": log, "refresh": not log_instance}
 
     def get_runtimes(self, type, id):

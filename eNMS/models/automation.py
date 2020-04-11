@@ -618,12 +618,14 @@ class Run(AbstractBase):
         if device:
             result_kw["device"] = device.id
         if self.parent_runtime == self.runtime and not device:
-            for service_id, log in app.run_logs.pop(self.runtime, {}).items():
+            services = list(app.run_logs.get(self.runtime, []))
+            for service_id in services:
+                logs = app.log_queue(self.runtime, service_id, mode="pop")
                 db.factory(
                     "service_log",
                     runtime=self.runtime,
                     service=service_id,
-                    content="\n".join(log),
+                    content="\n".join(logs),
                 )
             if self.trigger == "REST":
                 results["devices"] = {}
@@ -768,9 +770,9 @@ class Run(AbstractBase):
         if app_log:
             app.log(severity, log, user=self.creator)
         run_log = f"{app.get_time()} - {severity} - {log}"
-        app.add_log(self.parent_runtime, self.service_id, run_log)
+        app.log_queue(self.parent_runtime, self.service_id, run_log)
         if self.runtime != self.parent_runtime:
-            app.add_log(self.parent_runtime, self.original.service_id, run_log)
+            app.log_queue(self.parent_runtime, self.original.service_id, run_log)
 
     def build_notification(self, results):
         notification = {

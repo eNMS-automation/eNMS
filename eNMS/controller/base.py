@@ -254,17 +254,21 @@ class BaseController:
         )
         self.syslog_server.start()
 
-    def add_log(self, runtime, service, log):
+    def log_queue(self, runtime, service, log=None, mode="add"):
         if self.redis:
-            self.redis.lpush(f"{runtime}/{service}", log)
+            self.run_logs[runtime][int(service)] = None
+            if mode == "add":
+                log = self.redis.lpush(f"{runtime}/{service}", log)
+            elif mode in ("get", "pop"):
+                log = self.redis.lrange(f"{runtime}/{service}", 0, -1)
+            if mode == "pop":
+                self.redis.delete(f"{runtime}/{service}")
         else:
-            self.run_logs[runtime][service].append(log)
-
-    def get_log(self, runtime, service, pop=False):
-        if self.redis:
-            self.redis.lpush(f"{runtime}/{service}", log)
-        else:
-            self.run_logs[runtime][service].append(log)
+            if mode == "add":
+                return self.run_logs[runtime][int(service)].append(log)
+            else:
+                log = getattr(self.run_logs[runtime], mode)(int(service), [])
+        return log
 
     def delete_instance(self, instance_type, instance_id):
         return db.delete(instance_type, id=instance_id)

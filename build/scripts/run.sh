@@ -9,6 +9,7 @@ function help() {
       -h                           Help
       -p <path>                    Path to folder (default: current folder \$PWD)
       -r                           Reload Database
+      -q                           Use a redis queue
   "
   exit 0
 }
@@ -22,6 +23,9 @@ function run() {
     export ENMS_PASSWORD="admin"
     uvicorn scheduler:scheduler --host 0.0.0.0
     exit 0
+  fi
+  if [ "$redis" = true ]; then
+    export REDIS_ADDR="192.168.56.103"
   fi
   export FLASK_APP="app.py"
   export FLASK_DEBUG=1
@@ -55,6 +59,7 @@ while getopts h?grsvp:d: opt; do
       g) gunicorn=true;;
       p) path=$OPTARG;;
       r) reload=true;;
+      q) redis=true;;
       s) scheduler=true;;
       h|\?) help;;
     esac

@@ -44,6 +44,9 @@ function install() {
     sudo apt-get install -y nginx
     sudo cp ${path:-$PWD}/build/nginx/enms.conf /etc/nginx/sites-enabled
     sudo systemctl restart nginx
+  elif [ "$install" = "redis" ]; then
+    sudo apt-get install -y redis-server
+    sudo sed -i -e 's/bind 127.0.0.1 ::1/bind 0.0.0.0 ::0/g' /etc/redis/redis.conf
   fi
 }
 
@@ -61,6 +64,8 @@ function uninstall() {
     sudo nginx -s stop
     sudo apt-get -y remove --purge nginx
     sudo rm /etc/nginx/sites-enabled/enms.conf
+  elif [ "$uninstall" = "redis" ]; then
+    sudo apt-get -y remove redis-server
   fi
   sudo apt-get -y autoremove
   sudo apt-get -y autoclean
@@ -91,6 +96,7 @@ function help() {
       Vault
       eNMS (git, pip, requirements)
       Nginx
+      Redis
   "
   exit 0
 }

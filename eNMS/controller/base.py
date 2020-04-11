@@ -18,6 +18,7 @@ from os import environ, scandir
 from os.path import exists
 from pathlib import Path
 from re import compile, error as regex_error
+from redis import Redis
 from requests import Session as RequestSession
 from requests.adapters import HTTPAdapter
 from requests.packages.urllib3.util.retry import Retry
@@ -208,6 +209,10 @@ class BaseController:
             spec = spec_from_file_location(str(file).split("/")[-1][:-3], str(file))
             spec.loader.exec_module(module_from_spec(spec))
 
+    def init_redis(self):
+        host = environ.get("REDIS_ADDR")
+        self.redis = Redis(host=host, port=6379, db=0) if host else None
+
     def init_services(self):
         path_services = [self.path / "eNMS" / "services"]
         if self.settings["paths"]["custom_services"]:
@@ -247,6 +252,12 @@ class BaseController:
             self.settings["syslog"]["address"], self.settings["syslog"]["port"]
         )
         self.syslog_server.start()
+
+    def add_log(self, runtime, service, log):
+        if self.redis:
+            self.redis.lpush(f"{runtime}/{service}", log)
+        else:
+            self.run_logs[runtime][service].append(log)
 
     def delete_instance(self, instance_type, instance_id):
         return db.delete(instance_type, id=instance_id)
@@ -412,6 +423,9 @@ class BaseController:
                 obj.table_properties(**kwargs) for obj in result.all()
             ]
         return table_result
+
+    def add_log(self, log):
+        
 
     def allowed_file(self, name, allowed_modules):
         allowed_syntax = "." in name

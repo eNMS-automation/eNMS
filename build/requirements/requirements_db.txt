@@ -1,3 +1,2 @@
 mysqlclient
 psycopg2
-redis

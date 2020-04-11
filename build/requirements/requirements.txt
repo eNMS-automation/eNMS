@@ -12,6 +12,7 @@ napalm
 netmiko
 passlib
 pathlib
+redis
 ruamel.yaml
 sqlalchemy
 wtforms

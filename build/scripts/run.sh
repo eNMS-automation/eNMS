@@ -53,7 +53,7 @@ function run() {
   fi
 }
 
-while getopts h?grsvp:d: opt; do
+while getopts h?grqsvp:d: opt; do
     case "$opt" in
       d) database=$OPTARG;;
       g) gunicorn=true;;

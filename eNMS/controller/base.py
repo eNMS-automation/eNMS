@@ -91,6 +91,7 @@ class BaseController:
             sys_path.append(settings["paths"]["custom_code"])
         self.fetch_version()
         self.init_logs()
+        self.init_redis()
         self.init_connection_pools()
 
     def init_encryption(self):
@@ -254,6 +255,12 @@ class BaseController:
         self.syslog_server.start()
 
     def add_log(self, runtime, service, log):
+        if self.redis:
+            self.redis.lpush(f"{runtime}/{service}", log)
+        else:
+            self.run_logs[runtime][service].append(log)
+
+    def get_log(self, runtime, service, pop=False):
         if self.redis:
             self.redis.lpush(f"{runtime}/{service}", log)
         else:
@@ -423,9 +430,6 @@ class BaseController:
                 obj.table_properties(**kwargs) for obj in result.all()
             ]
         return table_result
-
-    def add_log(self, log):
-        
 
     def allowed_file(self, name, allowed_modules):
         allowed_syntax = "." in name

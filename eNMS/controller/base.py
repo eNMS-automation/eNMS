@@ -212,7 +212,11 @@ class BaseController:
 
     def init_redis(self):
         host = environ.get("REDIS_ADDR")
-        self.redis = Redis(host=host, port=6379, db=0) if host else None
+        self.redis = (
+            Redis(host=host, port=6379, db=0, charset="utf-8", decode_responses=True)
+            if host
+            else None
+        )
 
     def init_services(self):
         path_services = [self.path / "eNMS" / "services"]
@@ -260,7 +264,7 @@ class BaseController:
             if mode == "add":
                 log = self.redis.lpush(f"{runtime}/{service}", log)
             elif mode in ("get", "pop"):
-                log = self.redis.lrange(f"{runtime}/{service}", 0, -1)
+                log = self.redis.lrange(f"{runtime}/{service}", 0, -1)[::-1]
             if mode == "pop":
                 self.redis.delete(f"{runtime}/{service}")
         else:

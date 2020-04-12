@@ -55,6 +55,13 @@ class Scheduler(Starlette):
                 self.scheduler.remove_job(job_id)
             return JSONResponse(True)
 
+        @self.route("/next_runtime/{task_id}")
+        async def next_runtime(request):
+            job = self.scheduler.get_job(request.path_params["task_id"])
+            if job and job.next_run_time:
+                return JSONResponse(job.next_run_time.strftime("%Y-%m-%d %H:%M:%S"))
+            return JSONResponse("Not Scheduled")
+
         @self.route("/schedule", methods=["POST"])
         async def schedule(request):
             data = await request.json()
@@ -72,13 +79,6 @@ class Scheduler(Starlette):
                 except JobLookupError:
                     return JSONResponse({"alert": "There is no such job scheduled."})
 
-        @self.route("/next_runtime/{task_id}")
-        async def next_runtime(request):
-            job = self.scheduler.get_job(request.path_params["task_id"])
-            if job and job.next_run_time:
-                return JSONResponse(job.next_run_time.strftime("%Y-%m-%d %H:%M:%S"))
-            return JSONResponse("Not Scheduled")
-
         @self.route("/time_left/{task_id}")
         async def time_left(request):
             job = self.scheduler.get_job(request.path_params["task_id"])
@@ -89,6 +89,11 @@ class Scheduler(Starlette):
                 days = f"{delta.days} days, " if delta.days else ""
                 return JSONResponse(f"{days}{hours}h:{minutes}m:{seconds}s")
             return JSONResponse("Not Scheduled")
+
+    @staticmethod
+    def run_service(task_id):
+        auth = HTTPBasicAuth(environ.get("ENMS_USER"), environ.get("ENMS_PASSWORD"))
+        post(f"{environ.get('ENMS_ADDR')}/rest/run_task", json=task_id, auth=auth)
 
     def schedule_task(self, task):
         if task["scheduling_mode"] == "cron":
@@ -116,11 +121,6 @@ class Scheduler(Starlette):
         else:
             job = self.scheduler.reschedule_job(str(task["id"]), **trigger)
         return job.next_run_time > datetime.now(job.next_run_time.tzinfo)
-
-    @staticmethod
-    def run_service(task_id):
-        auth = HTTPBasicAuth(environ.get("ENMS_USER"), environ.get("ENMS_PASSWORD"))
-        post(f"{environ.get('ENMS_ADDR')}/rest/run_task", json=task_id, auth=auth)
 
 
 scheduler = Scheduler()

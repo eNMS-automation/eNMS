@@ -76,14 +76,14 @@ class Task(AbstractBase):
     def action(self, mode):
         self.is_active = mode == "resume"
         db.session.commit()
-        post(
+        return post(
             f"{scheduler['address']}/action",
             json={
                 "action": mode,
                 "job_id": self.aps_job_id,
                 "task": self.get_properties(),
             },
-        )
+        ).json()
 
     def schedule(self):
         post(f"{scheduler['address']}/schedule", json=self.get_properties())

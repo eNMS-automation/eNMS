@@ -455,7 +455,7 @@ function pauseTask(id) {
       $(`#pause-resume-${id}`)
         .attr("onclick", `eNMS.automation.resumeTask('${id}')`)
         .text("Resume");
-      notify("Task paused.", "success", 5);
+      notify(result.response, "success", 5);
     },
   });
 }
@@ -463,11 +463,11 @@ function pauseTask(id) {
 function resumeTask(id) {
   call({
     url: `/task_action/resume/${id}`,
-    callback: function () {
+    callback: function (result) {
       $(`#pause-resume-${id}`)
         .attr("onclick", `eNMS.automation.pauseTask('${id}')`)
         .text("Pause");
-      notify("Task resumed.", "success", 5);
+      notify(result.response, "success", 5);
     },
   });
 }

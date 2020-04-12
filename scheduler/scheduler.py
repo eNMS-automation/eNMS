@@ -65,8 +65,11 @@ class Scheduler(Starlette):
             data = await request.json()
             if data["action"] == "resume":
                 self.schedule_task(data["task"])
-            getattr(self.scheduler, f"{data['action']}_job")(data["job_id"])
-            return JSONResponse(True)
+            try:
+                getattr(self.scheduler, f"{data['action']}_job")(data["job_id"])
+                return JSONResponse({"response": f"Task {data['action']}d."})
+            except JobLookupError:
+                return JSONResponse({"alert": "There is no such job scheduled."})
 
         @self.route("/next_runtime/{task_id}")
         async def next_runtime(request):
@@ -115,8 +118,7 @@ class Scheduler(Starlette):
     @staticmethod
     def run_service(task_id):
         auth = HTTPBasicAuth(environ.get("ENMS_USER"), environ.get("ENMS_PASSWORD"))
-        run_task_url = f"{environ.get('ENMS_ADDR')}/rest/run_task"
-        post(run_task_url, json=task_id, auth=auth)
+        post(f"{environ.get('ENMS_ADDR')}/rest/run_task", json=task_id, auth=auth)
 
 
 scheduler = Scheduler()

@@ -260,13 +260,15 @@ class BaseController:
 
     def log_queue(self, runtime, service, log=None, mode="add"):
         if self.redis:
+            key = f"logs/{runtime}/{service}"
             self.run_logs[runtime][int(service)] = None
             if mode == "add":
-                log = self.redis.lpush(f"{runtime}/{service}", log)
+                log = self.redis.lpush(key, log)
             elif mode in ("get", "pop"):
-                log = self.redis.lrange(f"{runtime}/{service}", 0, -1)[::-1]
+                log = self.redis.lrange(key, 0, -1)[::-1]
             if mode == "pop":
-                self.redis.delete(f"{runtime}/{service}")
+                print("TTT"*100)
+                self.redis.delete(key)
         else:
             if mode == "add":
                 return self.run_logs[runtime][int(service)].append(log)

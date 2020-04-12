@@ -1,5 +1,8 @@
+from multiprocessing import cpu_count
+from os import environ
+
 bind = "0.0.0.0:5000"
-workers = 1
+workers = 2 * cpu_count() + 1 if environ.get("REDIS_ADDR") else 1
 accesslog = "-"
 loglevel = "debug"
 capture_output = True

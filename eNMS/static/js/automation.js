@@ -448,25 +448,14 @@ function exportService(id) {
   });
 }
 
-function pauseTask(id) {
+function taskAction(mode, id) {
+  
   call({
-    url: `/task_action/pause/${id}`,
+    url: `/task_action/${mode}/${id}`,
     callback: function (result) {
-      $(`#pause-resume-${id}`)
-        .attr("onclick", `eNMS.automation.resumeTask('${id}')`)
-        .text("Resume");
-      notify(result.response, "success", 5);
-    },
-  });
-}
-
-function resumeTask(id) {
-  call({
-    url: `/task_action/resume/${id}`,
-    callback: function (result) {
-      $(`#pause-resume-${id}`)
-        .attr("onclick", `eNMS.automation.pauseTask('${id}')`)
-        .text("Pause");
+      const inverseAction = mode == "resume" ? "pause" : "resume";
+      const action = `eNMS.automation.${inverseAction}Task('${id}')`
+      $(`#pause-resume-${id}`).attr("onclick", action);
       notify(result.response, "success", 5);
     },
   });
@@ -572,9 +561,8 @@ configureNamespace("automation", [
   normalRun,
   openServicePanel,
   parameterizedRun,
-  pauseTask,
-  resumeTask,
   schedulerAction,
   showResult,
   showRuntimePanel,
+  taskAction,
 ]);

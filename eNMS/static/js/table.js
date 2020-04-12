@@ -903,13 +903,13 @@ tables.task = class TaskTable extends Table {
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-success ${state[0]}" ${state[0]}
-          onclick="eNMS.automation.resumeTask('${row.id}')" data-tooltip="Play"
+          onclick="eNMS.automation.taskAction('resume', '${row.id}')" data-tooltip="Play"
             ><span class="glyphicon glyphicon-play"></span
           ></button>
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-danger ${state[1]}" ${state[1]}
-          onclick="eNMS.automation.pauseTask('${row.id}')" data-tooltip="Pause"
+          onclick="eNMS.automation.taskAction('pause', '${row.id}')" data-tooltip="Pause"
             ><span class="glyphicon glyphicon-pause"></span
           ></button>
         </li>

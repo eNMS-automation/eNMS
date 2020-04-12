@@ -69,10 +69,10 @@ class Task(AbstractBase):
         except ConnectionError:
             return "Scheduler Unreachable"
 
-    def schedule(self, mode=None):
+    def schedule(self, mode="schedule"):
         result = post(
             f"{scheduler['address']}/schedule",
-            json={"mode": mode, "task": self.get_properties()}
+            json={"mode": mode, "task": self.get_properties()},
         ).json()
         self.is_active = result.get("active", False)
         return result

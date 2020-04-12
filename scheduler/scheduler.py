@@ -48,10 +48,6 @@ class Scheduler(Starlette):
         self.scheduler.start()
 
     def register_routes(self):
-        @self.route("/schedule", methods=["POST"])
-        async def add(request):
-            return JSONResponse(self.schedule_task(await request.json()))
-
         @self.route("/job", methods=["DELETE"])
         async def delete(request):
             job_id = await request.json()
@@ -59,22 +55,22 @@ class Scheduler(Starlette):
                 self.scheduler.remove_job(job_id)
             return JSONResponse(True)
 
-        @self.route("/action", methods=["POST"])
-        async def action(request):
+        @self.route("/schedule", methods=["POST"])
+        async def schedule(request):
             data = await request.json()
-            if data["action"] == "resume":
-                if not self.schedule_task(data["task"]):
-                    return JSONResponse({"alert": f"Wrong scheduling parameters."})
-            try:
-                getattr(self.scheduler, f"{data['action']}_job")(data["task"]["id"])
-                return JSONResponse(
-                    {
-                        "response": f"Task {data['action']}d.",
-                        "active": data["action"] == "resume",
-                    }
-                )
-            except JobLookupError:
-                return JSONResponse({"alert": "There is no such job scheduled."})
+            if data["mode"] in ("resume", "schedule"):
+                result = self.schedule_task(data["task"])
+                if not result:
+                    return JSONResponse({"alert": f"Cannot schedule in the past."})
+                else:
+                    response = f"Task {data['mode']}d."
+                    return JSONResponse({"response": response, "active": True})
+            else:
+                try:
+                    self.scheduler.pause_job(data["task"]["id"])
+                    return JSONResponse({"response": f"Task {data['mode']}d.",})
+                except JobLookupError:
+                    return JSONResponse({"alert": "There is no such job scheduled."})
 
         @self.route("/next_runtime/{task_id}")
         async def next_runtime(request):
@@ -115,7 +111,7 @@ class Scheduler(Starlette):
                 replace_existing=True,
                 func=self.run_service,
                 args=[task["id"]],
-                **trigger
+                **trigger,
             )
         else:
             job = self.scheduler.reschedule_job(str(task["id"]), **trigger)

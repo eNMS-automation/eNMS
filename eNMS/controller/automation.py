@@ -465,8 +465,8 @@ class AutomationController(BaseController):
     def scheduler_action(self, action):
         getattr(self.scheduler, action)()
 
-    def task_action(self, action, task_id):
-        return db.fetch("task", id=task_id).action(action)
+    def task_action(self, mode, task_id):
+        return db.fetch("task", id=task_id).schedule(mode)
 
     def scan_playbook_folder(self):
         path = Path(

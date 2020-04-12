@@ -1,7 +1,9 @@
+from apscheduler.jobstores.base import JobLookupError
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from apscheduler.triggers.cron import CronTrigger
 from datetime import datetime
 from json import load
+from logging.config import dictConfig
 from os import environ
 from pathlib import Path
 from requests import post
@@ -28,6 +30,9 @@ class Scheduler(Starlette):
 
     def __init__(self):
         super().__init__()
+        with open(Path.cwd().parent / "setup" / "scheduler.json", "r") as file:
+            self.settings = load(file)
+        dictConfig(self.settings["logging"])
         self.configure_scheduler()
         self.register_routes()
 
@@ -39,8 +44,6 @@ class Scheduler(Starlette):
         return datetime.strftime(date, "%Y-%m-%d %H:%M:%S")
 
     def configure_scheduler(self):
-        with open(Path.cwd().parent / "setup" / "scheduler.json", "r") as file:
-            self.settings = load(file)
         self.scheduler = AsyncIOScheduler(self.settings["config"])
         self.scheduler.start()
 

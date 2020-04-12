@@ -92,11 +92,11 @@ function help() {
       -u <program>                 Uninstall
 
     Programs:
-      MySQL / PostgreSQL
-      Vault
-      eNMS (git, pip, requirements)
-      Nginx
-      Redis
+      mysql / postgresql
+      vault
+      enms (git, pip, requirements)
+      nginx
+      redis
   "
   exit 0
 }

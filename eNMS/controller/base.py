@@ -267,7 +267,6 @@ class BaseController:
             elif mode in ("get", "pop"):
                 log = self.redis.lrange(key, 0, -1)[::-1]
             if mode == "pop":
-                print("TTT"*100)
                 self.redis.delete(key)
         else:
             if mode == "add":

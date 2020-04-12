@@ -68,14 +68,13 @@ class Scheduler(Starlette):
             if data["mode"] in ("resume", "schedule"):
                 result = self.schedule_task(data["task"])
                 if not result:
-                    return JSONResponse({"alert": f"Cannot schedule in the past."})
+                    return JSONResponse({"alert": "Cannot schedule in the past."})
                 else:
-                    response = f"Task {data['mode']}d."
-                    return JSONResponse({"response": response, "active": True})
+                    return JSONResponse({"response": "Task resumed.", "active": True})
             else:
                 try:
                     self.scheduler.pause_job(data["task"]["id"])
-                    return JSONResponse({"response": f"Task {data['mode']}d.",})
+                    return JSONResponse({"response": "Task paused."})
                 except JobLookupError:
                     return JSONResponse({"alert": "There is no such job scheduled."})
 

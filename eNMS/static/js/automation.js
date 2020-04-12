@@ -449,12 +449,11 @@ function exportService(id) {
 }
 
 function taskAction(mode, id) {
-  
   call({
     url: `/task_action/${mode}/${id}`,
     callback: function (result) {
       const inverseAction = mode == "resume" ? "pause" : "resume";
-      const action = `eNMS.automation.${inverseAction}Task('${id}')`
+      const action = `eNMS.automation.${inverseAction}Task('${id}')`;
       $(`#pause-resume-${id}`).attr("onclick", action);
       notify(result.response, "success", 5);
     },

@@ -50,8 +50,7 @@ class Scheduler(Starlette):
     def register_routes(self):
         @self.route("/schedule", methods=["POST"])
         async def add(request):
-            self.schedule_task(await request.json())
-            return JSONResponse(True)
+            return JSONResponse(self.schedule_task(await request.json()))
 
         @self.route("/job", methods=["DELETE"])
         async def delete(request):
@@ -64,10 +63,16 @@ class Scheduler(Starlette):
         async def action(request):
             data = await request.json()
             if data["action"] == "resume":
-                self.schedule_task(data["task"])
+                if not self.schedule_task(data["task"]):
+                    return JSONResponse({"alert": f"Wrong scheduling parameters."})
             try:
-                getattr(self.scheduler, f"{data['action']}_job")(data["job_id"])
-                return JSONResponse({"response": f"Task {data['action']}d."})
+                getattr(self.scheduler, f"{data['action']}_job")(data["task"]["id"])
+                return JSONResponse(
+                    {
+                        "response": f"Task {data['action']}d.",
+                        "active": data["action"] == "resume",
+                    }
+                )
             except JobLookupError:
                 return JSONResponse({"alert": "There is no such job scheduled."})
 
@@ -90,12 +95,6 @@ class Scheduler(Starlette):
             return JSONResponse("Not Scheduled")
 
     def schedule_task(self, task):
-        default = {
-            "replace_existing": True,
-            "func": self.run_service,
-            "id": task["aps_job_id"],
-            "args": [task["id"]],
-        }
         if task["scheduling_mode"] == "cron":
             crontab = task["crontab_expression"].split()
             crontab[-1] = ",".join(self.days[day] for day in crontab[-1].split(","))
@@ -110,10 +109,17 @@ class Scheduler(Starlette):
             }
         else:
             trigger = {"trigger": "date", "run_date": self.aps_date(task["start_date"])}
-        if not self.scheduler.get_job(task["aps_job_id"]):
-            self.scheduler.add_job(**{**default, **trigger})
+        if not self.scheduler.get_job(task["id"]):
+            job = self.scheduler.add_job(
+                id=str(task["id"]),
+                replace_existing=True,
+                func=self.run_service,
+                args=[task["id"]],
+                **trigger
+            )
         else:
-            self.scheduler.reschedule_job(default.pop("id"), **trigger)
+            job = self.scheduler.reschedule_job(str(task["id"]), **trigger)
+        return job.next_run_time > datetime.now(job.next_run_time.tzinfo)
 
     @staticmethod
     def run_service(task_id):

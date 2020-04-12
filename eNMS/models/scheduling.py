@@ -17,10 +17,8 @@ class Task(AbstractBase):
 
     __tablename__ = type = "task"
     id = db.Column(Integer, primary_key=True)
-    aps_job_id = db.Column(db.SmallString)
     name = db.Column(db.SmallString, unique=True)
     description = db.Column(db.SmallString)
-    creation_time = db.Column(db.SmallString)
     scheduling_mode = db.Column(db.SmallString, default="standard")
     frequency = db.Column(Integer)
     frequency_unit = db.Column(db.SmallString, default="seconds")
@@ -40,8 +38,6 @@ class Task(AbstractBase):
 
     def __init__(self, **kwargs):
         super().update(**kwargs)
-        self.creation_time = app.get_time()
-        self.aps_job_id = kwargs.get("aps_job_id", self.creation_time)
 
     def update(self, **kwargs):
         super().update(**kwargs)
@@ -49,7 +45,7 @@ class Task(AbstractBase):
             self.schedule()
 
     def delete(self):
-        post(f"{scheduler['address']}/delete_job", json=self.aps_job_id)
+        post(f"{scheduler['address']}/delete_job", json=self.id)
 
     @hybrid_property
     def status(self):
@@ -62,31 +58,24 @@ class Task(AbstractBase):
     @property
     def next_run_time(self):
         try:
-            return get(f"{scheduler['address']}/next_runtime/{self.aps_job_id}").json()
+            return get(f"{scheduler['address']}/next_runtime/{self.id}").json()
         except ConnectionError:
             return "Scheduler Unreachable"
 
     @property
     def time_before_next_run(self):
         try:
-            return get(f"{scheduler['address']}/time_left/{self.aps_job_id}").json()
+            return get(f"{scheduler['address']}/time_left/{self.id}").json()
         except ConnectionError:
             return "Scheduler Unreachable"
 
-    def action(self, mode):
-        self.is_active = mode == "resume"
-        db.session.commit()
-        return post(
-            f"{scheduler['address']}/action",
-            json={
-                "action": mode,
-                "job_id": self.aps_job_id,
-                "task": self.get_properties(),
-            },
+    def schedule(self, mode=None):
+        result = post(
+            f"{scheduler['address']}/schedule",
+            json={"mode": mode, "task": self.get_properties()}
         ).json()
-
-    def schedule(self):
-        post(f"{scheduler['address']}/schedule", json=self.get_properties())
+        self.is_active = result.get("active", False)
+        return result
 
 
 @db.set_custom_properties

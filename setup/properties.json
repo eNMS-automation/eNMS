@@ -431,7 +431,7 @@
             "width":"100px"
          },
          { 
-            "data":"service_name",
+            "data":"start_service_name",
             "title":"Service",
             "search":"text",
             "orderable": false

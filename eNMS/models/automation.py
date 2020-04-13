@@ -298,6 +298,11 @@ class Run(AbstractBase):
     )
     placeholder_id = db.Column(Integer, ForeignKey("service.id", ondelete="SET NULL"))
     placeholder = relationship("Service", foreign_keys="Run.placeholder_id")
+    start_service_id = db.Column(Integer, ForeignKey("service.id", ondelete="SET NULL"))
+    start_service = relationship("Service", foreign_keys="Run.start_service_id")
+    start_service_name = association_proxy(
+        "start_service", "scoped_name", info={"name": "start_service_name"}
+    )
     workflow_id = db.Column(Integer, ForeignKey("workflow.id", ondelete="cascade"))
     workflow = relationship("Workflow", foreign_keys="Run.workflow_id")
     workflow_name = association_proxy(

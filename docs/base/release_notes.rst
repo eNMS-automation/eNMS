@@ -25,6 +25,7 @@ Version 3.21.2
 - Dont display private properties in parameterized run results
 - Add Ansible playbook service log to security logger
 - Update superworkflow initial payload with placeholder service initial payload
+- Dont update netmiko and napalm configuration / oper data backup if empty result / no commands
 
 Version 3.21.1
 --------------

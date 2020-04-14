@@ -64,6 +64,8 @@ class DataBackupService(ConnectionService):
                             command_result.append(line)
                         result.append("\n".join(command_result))
                     result = f"\n\n".join(result)
+                if not result:
+                    continue
                 setattr(device, data, result)
                 with open(path / data, "w") as file:
                     file.write(result)

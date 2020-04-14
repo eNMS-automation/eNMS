@@ -363,12 +363,16 @@ class AutomationController(BaseController):
         if restart_run:
             run_kwargs["restart_run"] = restart_run
         service = db.fetch("service", id=service)
+        initial_payload = service.initial_payload
         if service.type == "workflow" and service.superworkflow:
-            run_kwargs["placeholder"] = service.id
+            run_kwargs["placeholder"] = run_kwargs["start_service"] = service.id
             service = service.superworkflow
+            initial_payload.update(service.initial_payload)
+        else:
+            run_kwargs["start_service"] = service.id
         run = db.factory("run", service=service.id, **run_kwargs)
         run.properties = kwargs
-        return run.run({**service.initial_payload, **kwargs})
+        return run.run({**initial_payload, **kwargs})
 
     def run_service(self, path, **kwargs):
         path_ids = str(path).split(">")

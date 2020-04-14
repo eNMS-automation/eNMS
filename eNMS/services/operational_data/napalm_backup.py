@@ -47,6 +47,8 @@ class NapalmBackupService(ConnectionService):
                         result[getter] = output
                     except Exception as exc:
                         result[getter] = f"{getter} failed because of {exc}"
+                if not result:
+                    continue
                 result = app.str_dict(result)
                 setattr(device, data_type, result)
                 with open(path / data_type, "w") as file:

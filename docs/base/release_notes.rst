@@ -24,6 +24,7 @@ Version 3.21.2
 - Fix superworkflow bug for standalone services
 - Dont display private properties in parameterized run results
 - Add Ansible playbook service log to security logger
+- Update superworkflow initial payload with placeholder service initial payload
 
 Version 3.21.1
 --------------

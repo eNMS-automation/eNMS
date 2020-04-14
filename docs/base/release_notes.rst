@@ -22,6 +22,8 @@ Version 3.21.2
 - Update docs rest API
 - Improve log function (custom logger behavior / creator)
 - Fix superworkflow bug for standalone services
+- Dont display private properties in parameterized run results
+- Add Ansible playbook service log to security logger
 
 Version 3.21.1
 --------------

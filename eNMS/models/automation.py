@@ -511,7 +511,11 @@ class Run(AbstractBase):
             if self.task and not (self.task.frequency or self.task.crontab_expression):
                 self.task.is_active = False
             results["properties"] = {
-                "run": self.properties,
+                "run": {
+                    k: v
+                    for k, v in self.properties.items()
+                    if k not in db.private_properties
+                },
                 "service": self.service.get_properties(exclude=["positions"]),
             }
             results["trigger"] = self.trigger

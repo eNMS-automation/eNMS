@@ -94,21 +94,7 @@ Services can be combined into a workflow.
 
 - Docs: _[Workflow System](https://enms.readthedocs.io/en/develop/automation/workflows.html)_, _[Workflow Payload](https://enms.readthedocs.io/en/latest/workflows/workflow_payload.html)_
 
-## 5. Event-driven automation
-
-While services can be run directly and immediately from the UI, you can also schedule them to run at a later time, or periodically by defining a frequency or a CRON expression. All scheduled tasks are displayed in a calendar.
-
-[![Calendar](docs/_static/base/calendar.png)](https://enms.readthedocs.io/en/develop/automation/execution.html)
-
-Services can also be executed programmatically:
-  - eNMS has a REST API and a CLI interface that can be used to create, update and delete any type of objects,
-    but also to trigger the execution of a service.
-  - eNMS can be configured as a Syslog server, and rules can be created for syslog messages
-    to trigger the execution of a service.
-
-- Docs: _[Scheduling](https://enms.readthedocs.io/en/develop/automation/execution.html)_, _[REST API](https://enms.readthedocs.io/en/develop/advanced/rest_api.html)_
-
-## 6. Configuration Management
+## 5. Configuration Management
 
 eNMS can work as a network device configuration backup tool and replace
 Oxidized/Rancid with the following features:
@@ -123,6 +109,20 @@ Oxidized/Rancid with the following features:
 Search Configuration                          |  Compare History
 :--------------------------------------------:|:-------------------------------:
 [![Search](docs/_static/base/configuration_search.png)](https://enms.readthedocs.io/en/latest/advanced/configuration_management.html) |  [![Logical](docs/_static/base/configuration_history.png)](https://enms.readthedocs.io/en/latest/advanced/configuration_management.html)
+
+## 6. Event-driven automation
+
+While services can be run directly and immediately from the UI, you can also schedule them to run at a later time, or periodically by defining a frequency or a CRON expression. All scheduled tasks are displayed in a calendar.
+
+[![Calendar](docs/_static/base/calendar.png)](https://enms.readthedocs.io/en/develop/automation/execution.html)
+
+Services can also be executed programmatically:
+  - eNMS has a REST API and a CLI interface that can be used to create, update and delete any type of objects,
+    but also to trigger the execution of a service.
+  - eNMS can be configured as a Syslog server, and rules can be created for syslog messages
+    to trigger the execution of a service.
+
+- Docs: _[Scheduling](https://enms.readthedocs.io/en/develop/automation/execution.html)_, _[REST API](https://enms.readthedocs.io/en/develop/advanced/rest_api.html)_
 
 ___
 

@@ -1,5 +1,6 @@
 from apscheduler.triggers.cron import CronTrigger
 from datetime import datetime
+from flask_login import current_user
 from re import search
 from sqlalchemy import Boolean, case, ForeignKey, Integer
 from sqlalchemy.ext.associationproxy import association_proxy
@@ -101,7 +102,12 @@ class Task(AbstractBase):
         db.session.commit()
 
     def run_properties(self):
-        properties = {"task": self.id, **self.initial_payload}
+        properties = {
+            "task": self.id,
+            "trigger": "Scheduler",
+            "creator": current_user.name,
+            **self.initial_payload,
+        }
         if self.devices:
             properties["devices"] = [device.id for device in self.devices]
         if self.pools:
@@ -113,7 +119,7 @@ class Task(AbstractBase):
             "id": self.aps_job_id,
             "func": app.run,
             "replace_existing": True,
-            "args": [self.service.id],
+            "args": [self.service_id],
             "kwargs": self.run_properties(),
         }
         if self.scheduling_mode == "cron":

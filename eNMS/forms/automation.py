@@ -203,47 +203,47 @@ class NetmikoForm(ConnectionForm):
     jump_on_connect = BooleanField(
         "Jump to remote device on connect",
         default=False,
-        render_kw={"help": "netmiko/jump_on_connect"}
+        render_kw={"help": "netmiko/jump_on_connect"},
     )
     jump_command = StringField(
         label="Command that jumps to device",
         default="ssh jump_server_IP",
         substitution=True,
-        render_kw={"help": "netmiko/jump_command"}
+        render_kw={"help": "netmiko/jump_command"},
     )
     jump_username = StringField(
         label="Device username",
         substitution=True,
-        render_kw={"help": "netmiko/jump_username"}
+        render_kw={"help": "netmiko/jump_username"},
     )
     jump_password = PasswordField(
         label="Device password",
         substitution=True,
-        render_kw={"help": "netmiko/jump_password"}
+        render_kw={"help": "netmiko/jump_password"},
     )
     exit_command = StringField(
         label="Command to exit device back to original device",
         default="exit",
         substitution=True,
-        render_kw={"help": "netmiko/exit_command"}
+        render_kw={"help": "netmiko/exit_command"},
     )
     expect_username_prompt = StringField(
         "Expected username prompt",
         default="username:",
         substitution=True,
-        render_kw={"help": "netmiko/expect_username_prompt"}
+        render_kw={"help": "netmiko/expect_username_prompt"},
     )
     expect_password_prompt = StringField(
         "Expected password prompt",
         default="password",
         substitution=True,
-        render_kw={"help": "netmiko/expect_password_prompt"}
+        render_kw={"help": "netmiko/expect_password_prompt"},
     )
     expect_prompt = StringField(
         "Expected prompt after login",
         default="admin.*$",
         substitution=True,
-        render_kw={"help": "netmiko/expect_prompt"}
+        render_kw={"help": "netmiko/expect_prompt"},
     )
     groups = {
         "Jump on connect Parameters": {

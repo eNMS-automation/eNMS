@@ -106,9 +106,9 @@ Oxidized/Rancid with the following features:
   - Export all configurations to a remote Git repository (e.g. Gitlab)
   - View differences between various revisions of a configuration with a git-style differences
 
-Search Configuration                          |  Compare History
+Search Configuration                          |  Compare Configuration
 :--------------------------------------------:|:-------------------------------:
-[![Search](docs/_static/base/configuration_search.png)](https://enms.readthedocs.io/en/latest/advanced/configuration_management.html) |  [![Logical](docs/_static/base/configuration_history.png)](https://enms.readthedocs.io/en/latest/advanced/configuration_management.html)
+[![Search](docs/_static/base/configuration_search.png)](https://enms.readthedocs.io/en/latest/advanced/configuration_management.html) |  [![History](docs/_static/base/configuration_history.png)](https://enms.readthedocs.io/en/latest/advanced/configuration_management.html)
 
 ## 6. Event-driven automation
 

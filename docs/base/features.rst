@@ -60,11 +60,11 @@ Oxidized/Rancid with the following features:
   - View differences between various revisions of a configuration with a git-style differences
 
 .. image:: /_static/base/configuration_search.png
-   :alt: Inventory
+   :alt: Configuration Search
    :align: center
 
 .. image:: /_static/base/configuration_history.png
-   :alt: Dashboard
+   :alt: Configuration History
    :align: center
 
 Event-driven automation

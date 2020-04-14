@@ -334,7 +334,7 @@ class Server(Flask):
             "--log",
             "-l",
             required=True,
-            type=Choice(["changelog", "result"], case_sensitive=True),
+            type=Choice(("changelog", "result")),
             help="Type of logs",
         )
         def delete_log(keep_last_days, log):
@@ -343,7 +343,7 @@ class Server(Flask):
                 date_time=deletion_time.strftime("%d/%m/%Y %H:%M:%S"),
                 deletion_types=[log],
             )
-            app.log("info", f"deleted all logs in '{log}'' up until {deletion_time}")
+            app.log("info", f"deleted all logs in '{log}' up until {deletion_time}")
 
     def configure_rest_api(self):
 

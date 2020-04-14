@@ -73,5 +73,13 @@ Oxidized/Rancid with the following features:
   - Search for any text or regular-expression in all configurations.
   - Download device configuration to a local text file.
   - Use the REST API support to return a specified device’s configuration.
-  - Export all configurations to a remote Git repository (e.g. Gitlab) to view differences between various revisions
-    of a configuration.
+  - Export all configurations to a remote Git repository (e.g. Gitlab)
+  - View differences between various revisions of a configuration with a git-style differences
+
+.. image:: /_static/base/configuration_search.png
+   :alt: Inventory
+   :align: center
+
+.. image:: /_static/base/configuration_history.png
+   :alt: Dashboard
+   :align: center

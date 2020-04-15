@@ -29,6 +29,8 @@ from eNMS.models import relationships
 class AdministrationController(BaseController):
     def authenticate_user(self, **kwargs):
         name, password = kwargs["name"], kwargs["password"]
+        if not name or not password:
+            return False
         if kwargs["authentication_method"] == "Local User":
             user = db.fetch("user", allow_none=True, name=name)
             hash = self.settings["security"]["hash_user_passwords"]
@@ -58,12 +60,14 @@ class AdministrationController(BaseController):
                     for admin_group in self.settings["ldap"]["admin_group"].split(",")
                     for user_group in json_response["attributes"]["memberOf"]
                 )
+                if not is_admin:
+                    return False
                 user = db.factory(
                     "user",
                     **{
                         "name": name,
                         "email": json_response["attributes"].get("mail", ""),
-                        "group": "Admin" if is_admin else "Read Only",
+                        "group": "Admin",
                     },
                 )
         elif kwargs["authentication_method"] == "TACACS":

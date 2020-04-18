@@ -1,7 +1,7 @@
 from eNMS.controller.administration import AdministrationController
 from eNMS.controller.automation import AutomationController
 from eNMS.controller.inventory import InventoryController
-from eNMS.custom.controller import CustomController
+from eNMS.custom import CustomController
 
 
 class App(

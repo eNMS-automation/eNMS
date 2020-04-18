@@ -50,7 +50,10 @@
       "icon": "shield",
       "pages": {
         "Custom Page 1": "/custom_page/1",
-        "Custom Page 2": "/custom_page/2"
+        "Submenu": {
+          "Custom Page 2": "/custom_page/2",
+          "Custom Page 3": "/custom_page/3"
+        }
       }
     }
   },

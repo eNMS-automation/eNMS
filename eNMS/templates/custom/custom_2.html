@@ -1,14 +1,17 @@
-{% extends "base_site.html" %} {% block title %} Custom Page {{ page }} {% endblock title %}
-{% block stylesheets %} {{ super() }}
-{% endblock stylesheets %} {% block content %}
+{% extends "base_site.html" %} {% block title %} Custom Page {{ page }} {% endblock
+title %} {% block stylesheets %} {{ super() }} {% endblock stylesheets %} {% block
+content %}
 <nav class="navbar navbar-default nav-controls" role="navigation">
   <ul class="pagination pagination-lg" style="margin: 0px; width: 230px">
     <li>
-      <button type="button" class="btn btn-primary"
-      onclick="eNMS.custom.showCustomForm()"
-      data-tooltip="Tooltip"
-        ><span class="glyphicon glyphicon-equalizer"></span
-      ></button>
+      <button
+        type="button"
+        class="btn btn-primary"
+        onclick="eNMS.custom.showCustomForm()"
+        data-tooltip="Tooltip"
+      >
+        <span class="glyphicon glyphicon-equalizer"></span>
+      </button>
     </li>
   </ul>
 </nav>
@@ -18,12 +21,14 @@
       Example Form
     </legend>
     <div class="form-group" style="width: 60%; display: block; margin: 0 auto;">
-      <select id="properties" class="form-control">
-      </select>
+      <select id="properties" class="form-control"> </select>
     </div>
     <div style="height:550px;"></div>
   </fieldset>
 </div>
 {% endblock content %} {% block javascripts %} {{ super()}}
-<script type="module" src="{{ url_for('static', filename='js/custom/custom_2.js') }}"></script>
+<script
+  type="module"
+  src="{{ url_for('static', filename='js/custom/custom_2.js') }}"
+></script>
 {% endblock javascripts %}

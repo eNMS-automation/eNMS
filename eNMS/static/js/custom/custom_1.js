@@ -1,4 +1,3 @@
-
 import { tables } from "../table.js";
 
 $(document).ready(function() {

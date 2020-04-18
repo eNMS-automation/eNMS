@@ -310,7 +310,7 @@ class Server(Flask):
                 else:
                     result = str(exc)
                 return jsonify({"alert": result})
-        
+
         app.configure_customization(blueprint)
         self.register_blueprint(blueprint)
 

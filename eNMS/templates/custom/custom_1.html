@@ -1,4 +1,4 @@
-{% extends "base_site.html" %} {% block title %} Custom Page {% endblock title %}
+{% extends "base_site.html" %} {% block title %} Custom Page {{ page }} {% endblock title %}
 {% block stylesheets %} {{ super() }}
 <link href="{{ url_for('static', filename='css/table.css') }}" rel="stylesheet" />
 {% endblock stylesheets %} {% block content %}
@@ -18,5 +18,5 @@
   ></table>
 </form>
 {% endblock content %} {% block javascripts %} {{ super()}}
-<script type="module" src="{{ url_for('static', filename='js/custom.js') }}"></script>
+<script type="module" src="{{ url_for('static', filename='js/custom/custom_1.js') }}"></script>
 {% endblock javascripts %}

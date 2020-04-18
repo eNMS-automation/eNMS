@@ -311,7 +311,7 @@ class Server(Flask):
                     result = str(exc)
                 return jsonify({"alert": result})
 
-        app.configure_customization(blueprint)
+        app.set_custom_routes(blueprint)
         self.register_blueprint(blueprint)
 
     def configure_cli(self):

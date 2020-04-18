@@ -27,6 +27,7 @@ from re import search
 from uuid import getnode
 
 from eNMS import app
+from eNMS.custom.routes import configure_customization
 from eNMS.database import db
 from eNMS.forms import (
     form_actions,
@@ -51,6 +52,7 @@ class Server(Flask):
         self.configure_errors()
         self.configure_authentication()
         self.configure_routes()
+        configure_customization(self)
         self.configure_rest_api()
         self.configure_cli()
 

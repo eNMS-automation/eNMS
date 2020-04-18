@@ -45,6 +45,13 @@
         "Tasks": "/table/task",
         "Events": "/table/event"
       }
+    },
+    "Customize": {
+      "icon": "shield",
+      "pages": {
+        "Custom Page 1": "/custom_page/1",
+        "Custom Page 2": "/custom_page/2"
+      }
     }
   },
   "endpoints": {

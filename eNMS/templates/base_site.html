@@ -118,8 +118,8 @@
                 <li>
                   <a>{{ page }}<span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
-                    {% for subpage, url in data.items() %} {% if subpage not
-                    in rbac["menu"]["page"] %}
+                    {% for subpage, url in data.items() %} {% if subpage not in
+                    rbac["menu"]["page"] %}
                     <li><a href="{{ url }}">{{ subpage }}</a></li>
                     {% endif %} {% endfor %}
                   </ul>

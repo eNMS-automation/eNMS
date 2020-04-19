@@ -10,7 +10,6 @@ from eNMS.forms.fields import (
 )
 
 class CustomForm(BaseForm):
-    template = "device_connection"
     form_type = HiddenField(default="custom")
     address = SelectField(choices=[("ipv4", "IPv4"), ("ipv6", "IPv6")])
     connected_links = MultipleInstanceField("Links", model="link")

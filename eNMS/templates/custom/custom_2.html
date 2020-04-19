@@ -1,4 +1,4 @@
-{% extends "base_site.html" %} {% block title %} Custom Page {{ page }} {% endblock
+{% extends "base_site.html" %} {% block title %} Plugin {{ page }} {% endblock
 title %} {% block stylesheets %} {{ super() }} {% endblock stylesheets %} {% block
 content %}
 <nav class="navbar navbar-default nav-controls" role="navigation">
@@ -15,23 +15,54 @@ content %}
     </li>
   </ul>
 </nav>
+<br />
 <div class="col-md-12 col-sm-12 col-xs-12">
   <fieldset class="section">
     <legend align="center" class="section">
       Custom Form
     </legend>
-    <div class="form-group" style="width: 60%; display: block; margin: 0 auto;">
-      {% for field in form %} {% set id = "{}-{}".format(form.form_type.data,
-      field.name) %} {% set class = "form-control-bool" if field.type == "BooleanField"
-      else "form-control" %} {% if field.widget.input_type == 'hidden' %} {{
-      field(id=id, class=class) }} {% else %}
-      <label class="control-label col-md-3 col-sm-3 col-xs-12">{{ field.label }}</label>
-      <div class="col-md-9 col-sm-9 col-xs-12">
-        {{ field(id=id, class=class, checked=field.default) }}
+    <form
+      id="custom-form"
+      method="post"
+      autocomplete="off"
+    >
+      <div class="form-group" style="width: 60%; display: block; margin: 0 auto;">
+        {% for field in form %} {% set id = "{}-{}".format(form.form_type.data,
+        field.name) %} {% set class = "form-control-bool" if field.type == "BooleanField"
+        else "form-control" %} {% if field.widget.input_type == 'hidden' %} {{
+        field(id=id, class=class) }} {% else %}
+        <label class="control-label col-md-3 col-sm-3 col-xs-12">{{ field.label }}</label>
+        <div class="col-md-9 col-sm-9 col-xs-12">
+          {{ field(id=id, class=class, checked=field.default) }}
+        </div>
+        <br /><br /><br />
+        {% endif %} {% endfor %}
+        <center>
+          <button
+            type="button"
+            class="btn btn-primary"
+            onclick="eNMS.custom.autofillForm()"
+          >
+            Fill form programatically
+          </button>
+          <button
+            type="button"
+            class="btn btn-primary"
+            onclick="eNMS.custom.resetForm()"
+          >
+            Reset Form
+          </button>
+          <button
+            type="button"
+            class="btn btn-primary"
+            onclick="eNMS.custom.submitForm()"
+          >
+            Submit Form
+          </button>
+        </center>
+        <br />
       </div>
-      <br /><br />
-      {% endif %} {% endfor %}
-    </div>
+    </form>
   </fieldset>
 </div>
 {% endblock content %} {% block javascripts %} {{ super()}}

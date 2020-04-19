@@ -46,12 +46,12 @@
         "Events": "/table/event"
       }
     },
-    "Customize": {
+    "Plugins": {
       "icon": "shield",
       "pages": {
-        "Custom Page 1": "/custom_page/1",
+        "Plugin 1": "/plugin/1",
         "Submenu": {
-          "Custom Page 2": "/custom_page/2"
+          "Plugin 2": "/plugin/2"
         }
       }
     }

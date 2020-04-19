@@ -189,6 +189,7 @@
       "/migration_export",
       "/migration_import",
       "/multiselect_filtering",
+      "/process_form_data",
       "/reset_status",
       "/result_log_deletion",
       "/run_service",

@@ -16,9 +16,9 @@ function submitForm() {
   call({
     url: "/process_form_data",
     form: "custom-form",
-    callback: function(result) {
-      console.log(result)
-      notify("Form response.", "success", 5, true);
+    callback: function(routerId) {
+      $("#custom-router_id").val(routerId);
+      notify("Form successfully submitted.", "success", 5, true);
     },
   });
 }

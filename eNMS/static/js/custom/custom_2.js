@@ -8,7 +8,9 @@ function autofillForm() {
 }
 
 function resetForm() {
-  $("[id^='custom-']").val("").prop("checked", false);
+  $("[id^='custom-']")
+    .val("")
+    .prop("checked", false);
   notify("Values resetted programatically in JavaScript.", "success", 5);
 }
 

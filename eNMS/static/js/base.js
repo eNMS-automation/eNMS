@@ -49,7 +49,7 @@ const panelThemes = {
 };
 
 $.ajaxSetup({
-  beforeSend: function (xhr, settings) {
+  beforeSend: function(xhr, settings) {
     if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
       xhr.setRequestHeader("X-CSRFToken", csrf_token);
     }
@@ -57,14 +57,14 @@ $.ajaxSetup({
       document.body.style.cursor = "progress";
     }
   },
-  complete: function () {
+  complete: function() {
     document.body.style.cursor = "default";
   },
 });
 
 function loadScript(url, id) {
   let script = document.createElement("script");
-  script.onload = function () {
+  script.onload = function() {
     try {
       job(id);
     } catch (e) {
@@ -102,11 +102,11 @@ function processResults(callback, results) {
   }
 }
 
-export const call = function ({ url, data, form, callback }) {
+export const call = function({ url, data, form, callback }) {
   let params = {
     type: "POST",
     url: url,
-    success: function (results) {
+    success: function(results) {
       processResults(callback, results);
     },
   };
@@ -136,10 +136,10 @@ export function serializeForm(form) {
   return result;
 }
 
-export const deleteInstance = function (type, id) {
+export const deleteInstance = function(type, id) {
   call({
     url: `/delete_instance/${type}/${id}`,
-    callback: function (result) {
+    callback: function(result) {
       $(`#instance_deletion-${id}`).remove();
       if (type.includes("service") || type == "workflow") {
         type = "service";
@@ -178,9 +178,11 @@ export function downloadFile(name, content, type) {
 }
 
 export function createTooltips() {
-  $("[data-tooltip]").each(function () {
+  $("[data-tooltip]").each(function() {
     jsPanel.tooltip.create({
-      id: `tooltip-${$(this).attr("data-tooltip").replace(/\s/g, "")}`,
+      id: `tooltip-${$(this)
+        .attr("data-tooltip")
+        .replace(/\s/g, "")}`,
       content: `<p style="margin-right: 10px; margin-left: 10px; color: black">
         <b>${$(this).attr("data-tooltip")}</b></p>`,
       contentSize: "auto",
@@ -241,7 +243,7 @@ export function openPanel({
   } else {
     kwargs.contentAjax = {
       url: url || `../form/${name}`,
-      done: function (panel) {
+      done: function(panel) {
         panel.content.innerHTML = this.responseText;
         preprocessForm(panel, id, type, duplicate);
         configureForm(name, id, panelId);
@@ -286,7 +288,7 @@ export function createTooltip({
     } else {
       kwargs.contentAjax = {
         url: url,
-        done: function (panel) {
+        done: function(panel) {
           panel.content.innerHTML = this.responseText;
           preprocessForm(panel);
           configureForm(name);
@@ -300,13 +302,13 @@ export function createTooltip({
       kwargs.header = false;
     }
     if (persistent) {
-      kwargs.onbeforeclose = function () {
+      kwargs.onbeforeclose = function() {
         $(this).hide();
       };
     }
     jsPanel.tooltip.create(kwargs);
     if (persistent) {
-      $(target).on("click", function () {
+      $(target).on("click", function() {
         $(`#tooltip-${name}`).show();
       });
     }
@@ -369,13 +371,13 @@ export function preprocessForm(panel, id, type, duplicate) {
       <button class="icon-button" type="button">
         <span class="glyphicon glyphicon-info-sign"></span>
       </button>
-    `).on("click", function () {
+    `).on("click", function() {
       openPanel({
         name: `help-${$(el).attr("for")}`,
         title: $(el).attr("for"),
         size: "600px auto",
         url: `../help/${$(el).attr("help")}`,
-        callback: function (helpPanel) {
+        callback: function(helpPanel) {
           helpPanel.querySelectorAll(".help-snippet").forEach((el) => {
             const editor = CodeMirror.fromTextArea(el, {
               lineNumbers: true,
@@ -385,7 +387,7 @@ export function preprocessForm(panel, id, type, duplicate) {
           });
         },
       });
-    })
+    });
     $(el).append(button);
   });
 }
@@ -402,13 +404,13 @@ export function initSelect(el, model, parentId, single) {
       type: "POST",
       delay: 250,
       contentType: "application/json",
-      data: function (params) {
+      data: function(params) {
         return JSON.stringify({
           term: params.term || "",
           page: params.page || 1,
         });
       },
-      processResults: function (data, params) {
+      processResults: function(data, params) {
         params.page = params.page || 1;
         return {
           results: data.items,
@@ -484,8 +486,8 @@ function showServicePanel(type, id, mode) {
     enableAllSteps: true,
     keyNavigation: false,
     transitionEffect: "none",
-    onShowStep: function () {
-      Object.keys(editors[id]).forEach(function (field) {
+    onShowStep: function() {
+      Object.keys(editors[id]).forEach(function(field) {
         editors[id][field].refresh();
       });
     },
@@ -505,7 +507,9 @@ function showServicePanel(type, id, mode) {
 function configureServicePanel(type, id, mode) {
   if (mode == "duplicate") {
     $(`#${type}-shared-${id}`).prop("checked", false);
-    $(`#${type}-workflows-${id}`).val([workflow.id]).trigger("change");
+    $(`#${type}-workflows-${id}`)
+      .val([workflow.id])
+      .trigger("change");
   }
 }
 
@@ -513,7 +517,7 @@ export function showTypePanel(type, id, mode) {
   openPanel({
     name: type,
     id: id,
-    callback: function (panel) {
+    callback: function(panel) {
       if (type == "workflow" || type.includes("service")) {
         showServicePanel(type, id, mode);
       }
@@ -521,7 +525,7 @@ export function showTypePanel(type, id, mode) {
         const properties = type === "pool" ? "_properties" : "";
         call({
           url: `/get${properties}/${type}/${id}`,
-          callback: function (instance) {
+          callback: function(instance) {
             const action = mode ? mode.toUpperCase() : "EDIT";
             panel.setHeaderTitle(`${action} ${type} - ${instance.name}`);
             processInstance(type, instance);
@@ -534,7 +538,9 @@ export function showTypePanel(type, id, mode) {
         panel.setHeaderTitle(`Create a New ${type}`);
         if (page == "workflow_builder" && creationMode == "create_service") {
           $(`#${type}-workflows`).append(new Option(workflow.name, workflow.id));
-          $(`#${type}-workflows`).val(workflow.id).trigger("change");
+          $(`#${type}-workflows`)
+            .val(workflow.id)
+            .trigger("change");
         }
       }
       if (type.includes("service") || type == "workflow") {
@@ -572,7 +578,9 @@ function updateProperty(instance, el, property, value, type) {
     value.forEach((o) => el.append(new Option(o.name, o.id)));
     el.val(value.map((p) => p.id)).trigger("change");
   } else if (propertyType == "object") {
-    el.append(new Option(value.name, value.id)).val(value.id).trigger("change");
+    el.append(new Option(value.name, value.id))
+      .val(value.id)
+      .trigger("change");
   } else if (propertyType == "code") {
     const editor = editors[instance.id][property];
     if (editor) editor.setValue(value);
@@ -624,12 +632,12 @@ function processData(type, id) {
   });
 }
 
-(function ($, jstree, undefined) {
+(function($, jstree, undefined) {
   "use strict";
 
-  $.jstree.plugins.html_row = function (options, parent) {
+  $.jstree.plugins.html_row = function(options, parent) {
     // eslint-disable-next-line
-    this.redraw_node = function (nodeId, ...args) {
+    this.redraw_node = function(nodeId, ...args) {
       let el = parent.redraw_node.apply(this, [nodeId, ...args]);
       if (el) {
         let node = this._model.data[nodeId];
@@ -651,10 +659,10 @@ export function copyToClipboard(text, isId) {
   notify(`Copied to Clipboard: ${text}`, "success", 5);
 }
 
-(function ($, window) {
-  $.fn.contextMenu = function (settings) {
-    return this.each(function () {
-      $(this).on("contextmenu", function (e) {
+(function($, window) {
+  $.fn.contextMenu = function(settings) {
+    return this.each(function() {
+      $(this).on("contextmenu", function(e) {
         if (e.ctrlKey) {
           return;
         }
@@ -666,22 +674,30 @@ export function copyToClipboard(text, isId) {
             top: getMenuPosition(e.clientY, "height", "scrollTop"),
           })
           .off("click")
-          .on("click", "a", function (e) {
+          .on("click", "a", function(e) {
             $menu.hide();
             const $selectedMenu = $(e.target);
             settings.menuSelected.call(this, $selectedMenu);
           });
         return false;
       });
-      $(".dropdown-submenu a.menu-submenu").on("click", function (e) {
-        const isHidden = $(this).next("ul").is(":hidden");
-        $(".dropdown-submenu a.menu-submenu").next("ul").hide();
-        $(this).next("ul").toggle(isHidden);
+      $(".dropdown-submenu a.menu-submenu").on("click", function(e) {
+        const isHidden = $(this)
+          .next("ul")
+          .is(":hidden");
+        $(".dropdown-submenu a.menu-submenu")
+          .next("ul")
+          .hide();
+        $(this)
+          .next("ul")
+          .toggle(isHidden);
         e.stopPropagation();
         e.preventDefault();
       });
-      $("body").click(function () {
-        $(".dropdown-submenu a.menu-submenu").next("ul").hide();
+      $("body").click(function() {
+        $(".dropdown-submenu a.menu-submenu")
+          .next("ul")
+          .hide();
         $(settings.menuSelector).hide();
       });
     });

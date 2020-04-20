@@ -12,6 +12,7 @@ devices have been selected.
 - Add default port of 22 for TCP ping in ping service
 - Disable edit panel on double-click for start/end services of a workflow
 - Fix invalid request bug when pressing enter after searching the "add services to workflow" panel
+- Forbid "Start", "End" and "Placeholder" for service names
 
 Version 3.21.2
 --------------

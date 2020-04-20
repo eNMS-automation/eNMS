@@ -3,14 +3,14 @@ global
 CodeMirror: false
 */
 
-(function (CodeMirror) {
+(function(CodeMirror) {
   "use strict";
 
-  CodeMirror.defineMode("logs", function () {
+  CodeMirror.defineMode("logs", function() {
     let external = {
-      startState: function () {
+      startState: function() {
         return {
-          tokenize: function (stream) {
+          tokenize: function(stream) {
             if (stream.match(/\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}\.\d{6}/)) {
               return "number";
             }
@@ -24,18 +24,18 @@ CodeMirror: false
           },
         };
       },
-      token: function (stream, state) {
+      token: function(stream, state) {
         return state.tokenize(stream, state);
       },
     };
     return external;
   });
 
-  CodeMirror.defineMode("network", function () {
+  CodeMirror.defineMode("network", function() {
     let external = {
-      startState: function () {
+      startState: function() {
         return {
-          tokenize: function (stream) {
+          tokenize: function(stream) {
             if (stream.match(/no shutdown/i)) return "string";
             if (stream.match(/shutdown/i)) return "error";
             if (stream.match(/\s{30}\**/i)) return "keyword";
@@ -49,7 +49,7 @@ CodeMirror: false
           },
         };
       },
-      token: function (stream, state) {
+      token: function(stream, state) {
         return state.tokenize(stream, state);
       },
     };

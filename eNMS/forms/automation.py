@@ -131,6 +131,9 @@ class ServiceForm(BaseForm):
             self.mail_recipient.errors.append(
                 "Please add at least one recipient for the mail notification."
             )
+        forbidden_name_error = self.scoped_name.data in ("Start", "End", "Placeholder")
+        if forbidden_name_error:
+            self.name.errors.append("This name is not allowed.")
         conversion_validation_mismatch = (
             self.conversion_method.data == "text"
             and "dict" in self.validation_method.data
@@ -144,7 +147,10 @@ class ServiceForm(BaseForm):
                 " these do not match."
             )
         return (
-            valid_form and not no_recipient_error and not conversion_validation_mismatch
+            valid_form
+            and not no_recipient_error
+            and not conversion_validation_mismatch
+            and not forbidden_name_error
         )
 
 

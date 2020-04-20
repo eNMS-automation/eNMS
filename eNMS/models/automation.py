@@ -797,6 +797,7 @@ class Run(AbstractBase):
             "Service": f"{self.service.name} ({self.service.type})",
             "Runtime": self.runtime,
             "Status": "PASS" if results["success"] else "FAILED",
+            "Results": results["result"],
         }
         if self.notification_header:
             notification["Header"] = self.notification_header

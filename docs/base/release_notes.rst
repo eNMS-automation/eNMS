@@ -10,6 +10,7 @@ Version 3.21.3
 - Add error message in the logs when a service is run in per device mode but no
 devices have been selected.
 - Add default port of 22 for TCP ping in ping service
+- Fix invalid request bug when pressing enter after searching the "add services to workflow" panel
 
 Version 3.21.2
 --------------

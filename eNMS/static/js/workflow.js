@@ -136,7 +136,7 @@ export function displayWorkflow(workflowData) {
   graph.on("doubleClick", function(event) {
     event.event.preventDefault();
     let node = nodes.get(this.getNodeAt(event.pointer.DOM));
-    if (node.name == "Placeholder") node = currentPlaceholder;
+    if (["Placeholder", "Start", "End"].includes(node.name)) node = currentPlaceholder;
     if (!node || !node.id) {
       return;
     } else if (node.type == "label") {

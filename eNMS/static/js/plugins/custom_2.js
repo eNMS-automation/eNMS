@@ -1,4 +1,4 @@
-import { call, configureForm, configureNamespace, notify } from "../base.js";
+import { call, configureForm, configureNamespace, notify, openPanel } from "../base.js";
 
 function autofillForm() {
   $("#custom-router_id").val(36);
@@ -25,8 +25,27 @@ function submitForm() {
   });
 }
 
+function showFormPanel() {
+  openPanel({
+    name: "panel",
+    title: "Form in a Panel",
+    size: "600 auto",
+  });
+}
+
+function submitPanelForm() {
+  notify("Form submitted.", "success", 5);
+  $("#panel").remove();
+}
+
 $(document).ready(function() {
   configureForm("custom");
 });
 
-configureNamespace("plugins", [autofillForm, resetForm, submitForm]);
+configureNamespace("plugins", [
+  autofillForm,
+  resetForm,
+  showFormPanel,
+  submitForm,
+  submitPanelForm,
+]);

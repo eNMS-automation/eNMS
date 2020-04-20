@@ -20,3 +20,10 @@ class CustomForm(BaseForm):
     password = PasswordField("Password")
     router_id = IntegerField("Router ID")
     carry_customer_traffic = BooleanField("Carry Customer Traffic", default=False)
+
+
+class PanelForm(BaseForm):
+    form_type = HiddenField(default="panel")
+    action = "eNMS.plugins.submitPanelForm"
+    ip_address = StringField("IP address")
+    router_id = IntegerField("Router ID")

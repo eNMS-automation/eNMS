@@ -1,13 +1,13 @@
 {% extends "base_site.html" %} {% block title %} Plugin {{ page }} {% endblock title %}
 {% block stylesheets %} {{ super() }} {% endblock stylesheets %} {% block content %}
 <nav class="navbar navbar-default nav-controls" role="navigation">
-  <ul class="pagination pagination-lg" style="margin: 0px; width: 230px">
+  <ul class="pagination pagination-lg" style="margin: 0px;">
     <li>
       <button
         type="button"
         class="btn btn-primary"
-        onclick="eNMS.plugins.showCustomForm()"
-        data-tooltip="Tooltip"
+        onclick="eNMS.plugins.showFormPanel()"
+        data-tooltip="Display form in a panel"
       >
         <span class="glyphicon glyphicon-equalizer"></span>
       </button>

@@ -9,6 +9,7 @@ from eNMS.forms.fields import (
     StringField,
 )
 
+
 class CustomForm(BaseForm):
     form_type = HiddenField(default="custom")
     address = SelectField(choices=[("ipv4", "IPv4"), ("ipv6", "IPv6")])

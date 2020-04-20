@@ -7,6 +7,8 @@ Version 3.21.3
 
 - Add new plugins mechanism
 - Fix bug help panel open when clicking a field or label
+- Add error message in the logs when a service is run in per device mode but no
+devices have been selected.
 
 Version 3.21.2
 --------------

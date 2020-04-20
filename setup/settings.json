@@ -31,8 +31,8 @@
     "server": "smtp.googlemail.com",
     "port": 587,
     "use_tls": true,
-    "username": "antoine.fourmy@gmail.com",
-    "sender": "antoine.fourmy@gmail.com"
+    "username": "eNMS-user",
+    "sender": "eNMS@company.com"
   },
   "mattermost": {
     "url": "https://mattermost.company.com/hooks/i1phfh6fxjfwpy586bwqq5sk8w",

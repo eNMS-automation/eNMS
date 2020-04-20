@@ -6,7 +6,7 @@
       <button
         type="button"
         class="btn btn-primary"
-        onclick="eNMS.custom.showCustomForm()"
+        onclick="eNMS.plugins.showCustomForm()"
         data-tooltip="Tooltip"
       >
         <span class="glyphicon glyphicon-equalizer"></span>
@@ -38,21 +38,21 @@
           <button
             type="button"
             class="btn btn-primary"
-            onclick="eNMS.custom.autofillForm()"
+            onclick="eNMS.plugins.autofillForm()"
           >
             Fill form programatically
           </button>
           <button
             type="button"
             class="btn btn-primary"
-            onclick="eNMS.custom.resetForm()"
+            onclick="eNMS.plugins.resetForm()"
           >
             Reset Form
           </button>
           <button
             type="button"
             class="btn btn-primary"
-            onclick="eNMS.custom.submitForm()"
+            onclick="eNMS.plugins.submitForm()"
           >
             Submit Form
           </button>
@@ -65,6 +65,6 @@
 {% endblock content %} {% block javascripts %} {{ super()}}
 <script
   type="module"
-  src="{{ url_for('static', filename='js/custom/custom_2.js') }}"
+  src="{{ url_for('static', filename='js/plugins/custom_2.js') }}"
 ></script>
 {% endblock javascripts %}

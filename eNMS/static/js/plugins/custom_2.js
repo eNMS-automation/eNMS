@@ -29,4 +29,4 @@ $(document).ready(function() {
   configureForm("custom");
 });
 
-configureNamespace("custom", [autofillForm, resetForm, submitForm]);
+configureNamespace("plugins", [autofillForm, resetForm, submitForm]);

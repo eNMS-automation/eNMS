@@ -222,8 +222,7 @@ class BaseController:
         self.scheduler.start()
 
     def init_forms(self):
-        custom_path = self.path / "eNMS" / "custom" / "forms.py"
-        for file in [custom_path, *(self.path / "eNMS" / "forms").glob("**/*.py")]:
+        for file in (self.path / "eNMS" / "forms").glob("**/*.py"):
             spec = spec_from_file_location(str(file).split("/")[-1][:-3], str(file))
             spec.loader.exec_module(module_from_spec(spec))
 

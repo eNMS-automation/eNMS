@@ -27,7 +27,7 @@ from re import search
 from uuid import getnode
 
 from eNMS import app
-from eNMS.custom.routes import set_custom_routes
+from eNMS.plugins.routes import set_custom_routes
 from eNMS.database import db
 from eNMS.forms import (
     form_actions,

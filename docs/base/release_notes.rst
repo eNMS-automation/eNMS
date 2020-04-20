@@ -2,6 +2,12 @@
 Release Notes
 =============
 
+Version 3.21.3
+--------------
+
+- Add new plugins mechanism
+- Fix bug help panel open when clicking a field or label
+
 Version 3.21.2
 --------------
 

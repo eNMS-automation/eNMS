@@ -46,6 +46,27 @@ When a workflow is executed, its status is updated in real-time on the web UI.
   :alt: Workflow Builder
   :align: center
 
+Configuration Management
+------------------------
+
+eNMS can work as a network device configuration backup tool and replace
+Oxidized/Rancid with the following features:
+
+  - Poll network elements and store the latest configuration in the database.
+  - Search for any text or regular-expression in all configurations.
+  - Download device configuration to a local text file.
+  - Use the REST API support to return a specified device’s configuration.
+  - Export all configurations to a remote Git repository (e.g. Gitlab)
+  - View differences between various revisions of a configuration with a git-style differences
+
+.. image:: /_static/base/configuration_search.png
+   :alt: Configuration Search
+   :align: center
+
+.. image:: /_static/base/configuration_history.png
+   :alt: Configuration History
+   :align: center
+
 Event-driven automation
 -----------------------
 
@@ -62,16 +83,3 @@ Services can also be executed programmatically:
     but also to trigger the execution of a service.
   - eNMS can be configured as a Syslog server, and rules can be created for syslog messages
     to trigger the execution of a service.
-
-Configuration Management
-------------------------
-
-eNMS can work as a network device configuration backup tool and replace
-Oxidized/Rancid with the following features:
-
-  - Poll network elements and store the latest configuration in the database.
-  - Search for any text or regular-expression in all configurations.
-  - Download device configuration to a local text file.
-  - Use the REST API support to return a specified device’s configuration.
-  - Export all configurations to a remote Git repository (e.g. Gitlab) to view differences between various revisions
-    of a configuration.

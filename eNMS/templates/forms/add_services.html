@@ -3,6 +3,7 @@
   class="form-horizontal form-label-left"
   method="post"
   autocomplete="off"
+  onkeypress="return event.keyCode != 13;"
 >
   {{ form.hidden_tag() }}
   <div class="modal-body">

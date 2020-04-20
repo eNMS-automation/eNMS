@@ -461,10 +461,6 @@
 - {destination: '[Regression Workflow 6: Ansible with Validation] Simple Playbook',
   label: success, source: '[Shared] Start', subtype: success, type: workflow_edge,
   workflow: 'Regression Workflow 6: Ansible with Validation'}
-- {destination: '[Regression Workflow 6: Ansible with Validation] Ansible Workflow:
-    Arista show version', label: failure, source: '[Regression Workflow 6: Ansible
-    with Validation] Simple Playbook', subtype: failure, type: workflow_edge, workflow: 'Regression
-    Workflow 6: Ansible with Validation'}
 - {destination: '[Regression Workflow I: Iteration Targets Advanced] Set Variables
     for Iteration', label: success, source: '[Shared] Start', subtype: success, type: workflow_edge,
   workflow: 'Regression Workflow I: Iteration Targets Advanced'}
@@ -606,3 +602,7 @@
     command & shell, ping, - jump on connect - mechanism] Validation: jump on server
     2 from Washington', subtype: success, type: workflow_edge, workflow: 'Regression
     Workflow M: Unix command & shell, ping, - jump on connect - mechanism'}
+- {destination: '[Regression Workflow 6: Ansible with Validation] Ansible Workflow:
+    Arista show version', label: success, source: '[Regression Workflow 6: Ansible
+    with Validation] Simple Playbook', subtype: success, type: workflow_edge, workflow: 'Regression
+    Workflow 6: Ansible with Validation'}

@@ -367,12 +367,11 @@ export function preprocessForm(panel, id, type, duplicate) {
     $(el).attr("href", `${settings.app.documentation_url}${$(el).attr("href")}`);
   });
   panel.querySelectorAll("[help]").forEach((el) => {
-    $(el).append(`
+    const button = $(`
       <button class="icon-button" type="button">
         <span class="glyphicon glyphicon-info-sign"></span>
       </button>
-    `);
-    $(el).on("click", function() {
+    `).on("click", function() {
       openPanel({
         name: `help-${$(el).attr("for")}`,
         title: $(el).attr("for"),
@@ -389,6 +388,7 @@ export function preprocessForm(panel, id, type, duplicate) {
         },
       });
     });
+    $(el).append(button);
   });
 }
 

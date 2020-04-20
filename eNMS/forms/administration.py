@@ -69,7 +69,7 @@ class LoginForm(BaseForm):
     form_type = HiddenField(default="login")
     authentication_method = SelectField("Authentication Method", choices=())
     name = StringField("Name", [InputRequired()])
-    password = PasswordField("Password")
+    password = PasswordField("Password", [InputRequired()])
 
 
 class DatabaseMigrationsForm(BaseForm):

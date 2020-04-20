@@ -591,6 +591,17 @@ class Run(AbstractBase):
         elif self.run_method != "per_device":
             return self.get_results(payload)
         else:
+            if self.parent_runtime == self.runtime and not self.devices:
+                error = (
+                    "The service 'Run method' is set to 'Per device' mode, "
+                    "but no targets have been selected (in Step 3 > Targets)."
+                )
+                self.log("error", error)
+                return {
+                    "success": False,
+                    "runtime": self.runtime,
+                    "result": error,
+                }
             if self.multiprocessing and len(self.devices) > 1:
                 results = []
                 processes = min(len(self.devices), self.max_processes)
@@ -861,7 +872,7 @@ class Run(AbstractBase):
         else:
             return (
                 self.sub(self.service.custom_username, locals()),
-                self.sub(self.service.custom_password, locals()),
+                app.get_password(self.sub(self.service.custom_password, locals())),
             )
 
     def convert_result(self, result):

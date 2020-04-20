@@ -45,6 +45,15 @@
         "Tasks": "/table/task",
         "Events": "/table/event"
       }
+    },
+    "Plugins": {
+      "icon": "shield",
+      "pages": {
+        "Plugin 1": "/plugin/1",
+        "Submenu": {
+          "Plugin 2": "/plugin/2"
+        }
+      }
     }
   },
   "endpoints": {
@@ -180,6 +189,7 @@
       "/migration_export",
       "/migration_import",
       "/multiselect_filtering",
+      "/process_form_data",
       "/reset_status",
       "/result_log_deletion",
       "/run_service",

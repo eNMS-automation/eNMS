@@ -28,6 +28,7 @@ from threading import Thread
 from uuid import getnode
 
 from eNMS import app
+from eNMS.plugins.routes import set_custom_routes
 from eNMS.database import db
 from eNMS.forms import (
     form_actions,
@@ -159,6 +160,8 @@ class Server(Flask):
     def configure_authentication(self):
         @self.auth.verify_password
         def verify_password(username, password):
+            if not username or not password:
+                return False
             user = db.fetch("user", name=username)
             hash = app.settings["security"]["hash_user_passwords"]
             verify = argon2.verify if hash else str.__eq__
@@ -310,6 +313,7 @@ class Server(Flask):
                     result = str(exc)
                 return jsonify({"alert": result})
 
+        set_custom_routes(blueprint)
         self.register_blueprint(blueprint)
 
     def configure_cli(self):

@@ -29,6 +29,8 @@ from eNMS.models import relationships
 class AdministrationController(BaseController):
     def authenticate_user(self, **kwargs):
         name, password = kwargs["name"], kwargs["password"]
+        if not name or not password:
+            return False
         if kwargs["authentication_method"] == "Local User":
             user = db.fetch("user", allow_none=True, name=name)
             hash = self.settings["security"]["hash_user_passwords"]
@@ -51,24 +53,28 @@ class AdministrationController(BaseController):
                     attributes=["cn", "memberOf", "mail"],
                 )
                 json_response = loads(connection.response_to_json())["entries"][0]
-                if not json_response:
-                    return
-                is_admin = any(
-                    admin_group in user_group
-                    for admin_group in self.settings["ldap"]["admin_group"].split(",")
-                    for user_group in json_response["attributes"]["memberOf"]
-                )
-                user = db.factory(
-                    "user",
-                    **{
-                        "name": name,
-                        "email": json_response["attributes"].get("mail", ""),
-                        "group": "Admin" if is_admin else "Read Only",
-                    },
-                )
+            if not json_response:
+                return
+            is_admin = any(
+                admin_group in user_group
+                for admin_group in self.settings["ldap"]["admin_group"].split(",")
+                for user_group in json_response["attributes"]["memberOf"]
+            )
+            if not is_admin:
+                return False
+            user = db.factory(
+                "user",
+                **{
+                    "name": name,
+                    "email": json_response["attributes"].get("mail", ""),
+                    "group": "Admin",
+                },
+            )
         elif kwargs["authentication_method"] == "TACACS":
             if self.tacacs_client.authenticate(name, password).valid:
                 user = db.factory("user", **{"name": name, "group": "Admin"})
+            else:
+                return False
         db.session.commit()
         return user
 

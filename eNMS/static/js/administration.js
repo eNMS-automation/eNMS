@@ -47,7 +47,7 @@ function migrationsExport() {
   notify("Migration Export initiated.", "success", 5, true);
   call({
     url: "/migration_export",
-    form: "migration-form",
+    form: "custom",
     callback: function() {
       notify("Migration Export successful.", "success", 5, true);
     },

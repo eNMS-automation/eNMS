@@ -800,6 +800,8 @@ class Run(AbstractBase):
             "Runtime": self.runtime,
             "Status": "PASS" if results["success"] else "FAILED",
         }
+        if "result" in results:
+            notification["Results"] = results["result"]
         if self.notification_header:
             notification["Header"] = self.notification_header
         if self.include_link_in_summary:

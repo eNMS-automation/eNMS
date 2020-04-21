@@ -20,6 +20,7 @@ devices have been selected.
 - Disable edit panel on double-click for start/end services of a workflow
 - Fix invalid request bug when pressing enter after searching the "add services to workflow" panel
 - Forbid "Start", "End" and "Placeholder" for service names
+- Fix Result in mail notification for run once mode
 
 Version 3.21.2
 --------------

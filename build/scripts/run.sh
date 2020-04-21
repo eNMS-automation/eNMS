@@ -24,6 +24,10 @@ function run() {
     uvicorn scheduler:scheduler --host 0.0.0.0
     exit 0
   fi
+  if [ "$tacacs" = true ]; then
+    export TACACS_ADDR="192.168.56.104"
+    export TACACS_PASSWORD="admin"
+  fi
   if [ "$redis" = true ]; then
     export REDIS_ADDR="192.168.56.103"
   fi
@@ -53,7 +57,7 @@ function run() {
   fi
 }
 
-while getopts h?grqsvp:d: opt; do
+while getopts h?grqstvp:d: opt; do
     case "$opt" in
       d) database=$OPTARG;;
       g) gunicorn=true;;
@@ -61,6 +65,7 @@ while getopts h?grqsvp:d: opt; do
       r) reload=true;;
       q) redis=true;;
       s) scheduler=true;;
+      t) tacacs=true;;
       h|\?) help;;
     esac
 done

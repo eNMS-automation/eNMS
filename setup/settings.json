@@ -85,10 +85,6 @@
     "address": "0.0.0.0",
     "port": 514
   },
-  "tacacs": {
-    "active": false,
-    "address": ""
-  },
   "vault": {
     "use_vault": false,
     "unseal_vault": false

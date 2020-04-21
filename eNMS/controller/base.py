@@ -242,7 +242,7 @@ class BaseController:
 
     def init_tacacs_client(self):
         self.tacacs_client = TACACSClient(
-            self.settings["tacacs"]["address"], 49, environ.get("TACACS_PASSWORD")
+            environ.get("TACACS_ADDR"), 49, environ.get("TACACS_PASSWORD")
         )
 
     def init_vault_client(self):

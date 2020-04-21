@@ -56,6 +56,7 @@ function install() {
       }
     '
     echo "$user" | sudo tee -a /etc/tacacs+/tac_plus.conf
+    sudo systemctl restart tacacs_plus
   fi
 }
 

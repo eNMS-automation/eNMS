@@ -30,6 +30,7 @@ class User(AbstractBase, UserMixin):
     permissions = db.Column(db.List)
     password = db.Column(db.SmallString)
     group = db.Column(db.SmallString)
+    authentication = db.Column(db.SmallString, default="database")
     small_menu = db.Column(Boolean, default=False, info={"dont_track_changes": True})
 
     def update(self, **kwargs):

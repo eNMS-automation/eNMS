@@ -79,7 +79,8 @@ class BaseController:
         self.path = Path.cwd()
         self.init_encryption()
         self.use_vault = settings["vault"]["use_vault"]
-        if settings["tacacs"]["active"]:
+        self.use_tacacs = environ.get("USE_TACACS")
+        if self.use_tacacs:
             self.init_tacacs_client()
         if settings["ldap"]["active"]:
             self.init_ldap_client()

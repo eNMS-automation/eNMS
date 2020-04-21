@@ -200,7 +200,7 @@ class Server(Flask):
                 authentication_methods = []
                 if app.settings["ldap"]["active"]:
                     authentication_methods.append(("LDAP Domain",) * 2)
-                if app.settings["tacacs"]["active"]:
+                if app.use_tacacs:
                     authentication_methods.append(("TACACS",) * 2)
                 authentication_methods.append(("Local User",) * 2)
                 login_form.authentication_method.choices = authentication_methods

@@ -8,6 +8,7 @@ Version 3.22
 - Remove database url from settings. Configured via env variable DATABASE_URL
 - In Rest Call service and other rest calls with request, use "json" kw instead of "data"
 - Implement remote scheduler
+- Remove TACACS+ parameters from settings, use env variable instead
 
 Version 3.21.3
 --------------

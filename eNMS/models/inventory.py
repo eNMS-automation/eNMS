@@ -300,10 +300,17 @@ class Pool(AbstractBase):
     def compute_pool(self):
         if self.manually_defined:
             return
-        self.devices = list(filter(self.object_match, db.fetch_all("device")))
-        self.device_number = len(self.devices)
-        self.links = list(filter(self.object_match, db.fetch_all("link")))
-        self.link_number = len(self.links)
+        for object_type in ("device", "link"):
+            objects = (
+                list(filter(self.object_match, db.fetch_all(object_type)))
+                if any(
+                    getattr(self, f"{object_type}_{property}")
+                    for property in properties["filtering"][object_type]
+                )
+                else []
+            )
+            setattr(self, f"{object_type}s", objects)
+            setattr(self, f"{object_type}_number", len(objects))
 
 
 class Session(AbstractBase):

@@ -197,7 +197,6 @@ class AdministrationController(BaseController):
         return status
 
     def migration_export(self, **kwargs):
-        print(kwargs)
         for cls_name in kwargs["import_export_types"]:
             path = self.path / "files" / "migrations" / kwargs["name"]
             if not exists(path):

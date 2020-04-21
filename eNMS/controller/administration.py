@@ -31,52 +31,61 @@ class AdministrationController(BaseController):
         name, password = kwargs["name"], kwargs["password"]
         if not name or not password:
             return False
-        if kwargs["authentication_method"] == "Local User":
-            user = db.fetch("user", allow_none=True, name=name)
-            hash = self.settings["security"]["hash_user_passwords"]
-            verify = argon2.verify if hash else str.__eq__
-            user_password = self.get_password(user.password)
-            return user if user and verify(password, user_password) else False
-        elif kwargs["authentication_method"] == "LDAP Domain":
-            with Connection(
-                self.ldap_client,
-                user=f"{self.settings['ldap']['userdn']}\\{name}",
-                password=password,
-                auto_bind=True,
-                authentication=NTLM,
-            ) as connection:
-                connection.search(
-                    self.settings["ldap"]["basedn"],
-                    f"(&(objectClass=person)(samaccountname={name}))",
-                    search_scope=SUBTREE,
-                    get_operational_attributes=True,
-                    attributes=["cn", "memberOf", "mail"],
-                )
-                json_response = loads(connection.response_to_json())["entries"][0]
-            if not json_response:
-                return
-            is_admin = any(
-                admin_group in user_group
-                for admin_group in self.settings["ldap"]["admin_group"].split(",")
-                for user_group in json_response["attributes"]["memberOf"]
+        user = db.fetch("user", allow_none=True, name=name)
+        method = user.authentication if user else kwargs["authentication_method"]
+        return getattr(self, f"{method}_authentication")(user, name, password)
+
+    def database_authentication(self, user, name, password):
+        hash = self.settings["security"]["hash_user_passwords"]
+        verify = argon2.verify if hash else str.__eq__
+        user_password = self.get_password(user.password)
+        return user if user and verify(password, user_password) else False
+
+    def ldap_authentication(self, user, name, password):
+        with Connection(
+            self.ldap_client,
+            user=f"{self.settings['ldap']['userdn']}\\{name}",
+            password=password,
+            auto_bind=True,
+            authentication=NTLM,
+        ) as connection:
+            connection.search(
+                self.settings["ldap"]["basedn"],
+                f"(&(objectClass=person)(samaccountname={name}))",
+                search_scope=SUBTREE,
+                get_operational_attributes=True,
+                attributes=["cn", "memberOf", "mail"],
             )
-            if not is_admin:
-                return False
+            response = loads(connection.response_to_json())["entries"][0]
+        if not response:
+            return
+        if not any(
+            admin_group in user_group
+            for admin_group in self.settings["ldap"]["admin_group"].split(",")
+            for user_group in response["attributes"]["memberOf"]
+        ):
+            return False
+        if not user:
             user = db.factory(
                 "user",
-                **{
-                    "name": name,
-                    "email": json_response["attributes"].get("mail", ""),
-                    "group": "Admin",
-                },
+                authentication="ldap",
+                name=name,
+                email=response["attributes"].get("mail", ""),
+                group="Admin",
             )
-        elif kwargs["authentication_method"] == "TACACS":
-            if self.tacacs_client.authenticate(name, password).valid:
-                user = db.factory("user", **{"name": name, "group": "Admin"})
-            else:
-                return False
-        db.session.commit()
+            db.session.commit()
         return user
+
+    def tacacs_authentication(self, user, name, password):
+        if self.tacacs_client.authenticate(name, password).valid:
+            if not user:
+                user = db.factory(
+                    "user", authentication="tacacs", name=name, group="Admin"
+                )
+                db.session.commit()
+            return user
+        else:
+            return False
 
     def database_deletion(self, **kwargs):
         db.delete_all(*kwargs["deletion_types"])

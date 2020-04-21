@@ -199,10 +199,10 @@ class Server(Flask):
                 login_form = LoginForm(request.form)
                 authentication_methods = []
                 if app.settings["ldap"]["active"]:
-                    authentication_methods.append(("LDAP Domain",) * 2)
+                    authentication_methods.append(("ldap", "LDAP Domain"))
                 if app.use_tacacs:
-                    authentication_methods.append(("TACACS",) * 2)
-                authentication_methods.append(("Local User",) * 2)
+                    authentication_methods.append(("tacacs", "TACACS+"))
+                authentication_methods.append(("database", "Local User"))
                 login_form.authentication_method.choices = authentication_methods
                 return render_template("login.html", login_form=login_form)
             return redirect(url_for("blueprint.route", page="dashboard"))

@@ -1,0 +1,6 @@
+- email: ''
+  group: Admin
+  name: admin
+  permissions: []
+  small_menu: false
+  type: user

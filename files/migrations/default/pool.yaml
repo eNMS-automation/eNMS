@@ -15,8 +15,8 @@
   device_longitude_match: inclusion
   device_model: ''
   device_model_match: inclusion
-  device_name: ''
-  device_name_match: inclusion
+  device_name: .*
+  device_name_match: regex
   device_napalm_driver: ''
   device_napalm_driver_match: inclusion
   device_netmiko_driver: ''
@@ -37,7 +37,7 @@
   device_vendor: ''
   device_vendor_match: inclusion
   devices: []
-  last_modified: ''
+  last_modified: '2020-04-21 15:31:16.817813'
   latitude: '0.0'
   link_color: ''
   link_color_match: inclusion
@@ -49,8 +49,8 @@
   link_location_match: inclusion
   link_model: ''
   link_model_match: inclusion
-  link_name: ''
-  link_name_match: inclusion
+  link_name: .*
+  link_name_match: regex
   link_number: 0
   link_source_name: ''
   link_source_name_match: inclusion
@@ -83,8 +83,8 @@
   device_longitude_match: inclusion
   device_model: ''
   device_model_match: inclusion
-  device_name: ''
-  device_name_match: inclusion
+  device_name: .*
+  device_name_match: regex
   device_napalm_driver: ''
   device_napalm_driver_match: inclusion
   device_netmiko_driver: ''
@@ -105,7 +105,7 @@
   device_vendor: ''
   device_vendor_match: inclusion
   devices: []
-  last_modified: ''
+  last_modified: '2020-04-21 15:31:27.081485'
   latitude: '0.0'
   link_color: ''
   link_color_match: inclusion
@@ -117,8 +117,8 @@
   link_location_match: inclusion
   link_model: ''
   link_model_match: inclusion
-  link_name: ^$
-  link_name_match: regex
+  link_name: ''
+  link_name_match: inclusion
   link_number: 0
   link_source_name: ''
   link_source_name_match: inclusion
@@ -151,8 +151,8 @@
   device_longitude_match: inclusion
   device_model: ''
   device_model_match: inclusion
-  device_name: ^$
-  device_name_match: regex
+  device_name: ''
+  device_name_match: inclusion
   device_napalm_driver: ''
   device_napalm_driver_match: inclusion
   device_netmiko_driver: ''
@@ -173,7 +173,7 @@
   device_vendor: ''
   device_vendor_match: inclusion
   devices: []
-  last_modified: ''
+  last_modified: '2020-04-21 15:31:35.627741'
   latitude: '0.0'
   link_color: ''
   link_color_match: inclusion
@@ -185,8 +185,8 @@
   link_location_match: inclusion
   link_model: ''
   link_model_match: inclusion
-  link_name: ''
-  link_name_match: inclusion
+  link_name: .*
+  link_name_match: regex
   link_number: 0
   link_source_name: ''
   link_source_name_match: inclusion

@@ -1,7 +1,9 @@
-- content_match: ''
+- completion_time: 1
+  content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
+  definition: Definition
   delete_spaces_before_matching: false
   description: Start point of a workflow
   device_query: ''
@@ -10,6 +12,7 @@
   dict_match: {}
   display_only_failed_nodes: true
   events: []
+  impacting: true
   include_device_results: true
   include_link_in_summary: true
   initial_payload: {}
@@ -34,6 +37,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: per_device
   scoped_name: Start
   send_notification: false
@@ -48,10 +52,12 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- content_match: ''
+- completion_time: 1
+  content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
+  definition: Definition
   delete_spaces_before_matching: false
   description: End point of a workflow
   device_query: ''
@@ -60,6 +66,7 @@
   dict_match: {}
   display_only_failed_nodes: true
   events: []
+  impacting: true
   include_device_results: true
   include_link_in_summary: true
   initial_payload: {}
@@ -84,6 +91,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: per_device
   scoped_name: End
   send_notification: false
@@ -98,10 +106,12 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- content_match: ''
+- completion_time: 1
+  content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
+  definition: Definition
   delete_spaces_before_matching: false
   description: Monitor eNMS cluster
   device_query: ''
@@ -110,6 +120,7 @@
   dict_match: {}
   display_only_failed_nodes: true
   events: []
+  impacting: true
   include_device_results: true
   include_link_in_summary: true
   initial_payload: {}
@@ -134,6 +145,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: per_device
   scoped_name: cluster_monitoring
   send_notification: false
@@ -148,10 +160,12 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- content_match: ''
+- completion_time: 1
+  content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
+  definition: Definition
   delete_spaces_before_matching: false
   description: Push configurations to Gitlab
   device_query: ''
@@ -160,6 +174,7 @@
   dict_match: {}
   display_only_failed_nodes: true
   events: []
+  impacting: true
   include_device_results: true
   include_link_in_summary: true
   initial_payload: {}
@@ -185,6 +200,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: per_device
   scoped_name: git_push_configurations
   send_notification: false
@@ -199,10 +215,12 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- content_match: ''
+- completion_time: 1
+  content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
+  definition: Definition
   delete_spaces_before_matching: false
   description: ''
   device_query: ''
@@ -211,6 +229,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  impacting: true
   include_device_results: false
   include_link_in_summary: false
   initial_payload: {}
@@ -235,6 +254,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  reserved: false
   run_method: per_device
   scoped_name: Placeholder
   send_notification: false

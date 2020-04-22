@@ -21,7 +21,6 @@
   device_napalm_driver_match: inclusion
   device_netmiko_driver: ''
   device_netmiko_driver_match: inclusion
-  device_number: 29
   device_operating_system: ''
   device_operating_system_match: inclusion
   device_operational_data: ''
@@ -54,7 +53,6 @@
   link_model_match: inclusion
   link_name: .*
   link_name_match: regex
-  link_number: 28
   link_source_name: ''
   link_source_name_match: inclusion
   link_subtype: ''
@@ -94,7 +92,6 @@
   device_napalm_driver_match: inclusion
   device_netmiko_driver: ''
   device_netmiko_driver_match: inclusion
-  device_number: 29
   device_operating_system: ''
   device_operating_system_match: inclusion
   device_operational_data: ''
@@ -127,7 +124,6 @@
   link_model_match: inclusion
   link_name: ''
   link_name_match: inclusion
-  link_number: 0
   link_source_name: ''
   link_source_name_match: inclusion
   link_subtype: ''
@@ -165,7 +161,6 @@
   device_napalm_driver_match: inclusion
   device_netmiko_driver: ''
   device_netmiko_driver_match: inclusion
-  device_number: 0
   device_operating_system: ''
   device_operating_system_match: inclusion
   device_operational_data: ''
@@ -195,7 +190,6 @@
   link_model_match: inclusion
   link_name: .*
   link_name_match: regex
-  link_number: 28
   link_source_name: ''
   link_source_name_match: inclusion
   link_subtype: ''
@@ -235,7 +229,6 @@
   device_napalm_driver_match: inclusion
   device_netmiko_driver: ''
   device_netmiko_driver_match: inclusion
-  device_number: 15
   device_operating_system: ''
   device_operating_system_match: inclusion
   device_operational_data: ''
@@ -266,7 +259,6 @@
   link_model_match: inclusion
   link_name: ''
   link_name_match: inclusion
-  link_number: 0
   link_source_name: ''
   link_source_name_match: inclusion
   link_subtype: ''
@@ -304,7 +296,6 @@
   device_napalm_driver_match: inclusion
   device_netmiko_driver: ''
   device_netmiko_driver_match: inclusion
-  device_number: 18
   device_operating_system: ''
   device_operating_system_match: inclusion
   device_operational_data: ''
@@ -336,7 +327,6 @@
   link_model_match: inclusion
   link_name: ''
   link_name_match: inclusion
-  link_number: 0
   link_source_name: ''
   link_source_name_match: inclusion
   link_subtype: ''
@@ -374,7 +364,6 @@
   device_napalm_driver_match: inclusion
   device_netmiko_driver: ''
   device_netmiko_driver_match: inclusion
-  device_number: 12
   device_operating_system: ''
   device_operating_system_match: inclusion
   device_operational_data: ''
@@ -405,7 +394,6 @@
   link_model_match: inclusion
   link_name: ''
   link_name_match: inclusion
-  link_number: 0
   link_source_name: ''
   link_source_name_match: inclusion
   link_subtype: ''
@@ -443,7 +431,6 @@
   device_napalm_driver_match: inclusion
   device_netmiko_driver: ''
   device_netmiko_driver_match: inclusion
-  device_number: 1
   device_operating_system: ''
   device_operating_system_match: inclusion
   device_operational_data: ''
@@ -473,7 +460,6 @@
   link_model_match: inclusion
   link_name: ''
   link_name_match: inclusion
-  link_number: 0
   link_source_name: ''
   link_source_name_match: inclusion
   link_subtype: ''

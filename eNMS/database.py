@@ -50,7 +50,7 @@ class Database:
             "pools",
         ],
         "link": ["id", "pools"],
-        "pool": ["id", "services"],
+        "pool": ["id", "services", "device_number", "link_number"],
         "service": [
             "id",
             "sources",

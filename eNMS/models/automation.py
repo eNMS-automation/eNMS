@@ -873,8 +873,8 @@ class Run(AbstractBase):
             return user.name, app.get_password(user.password)
         else:
             return (
-                self.sub(self.service.custom_username, locals()),
-                app.get_password(self.sub(self.service.custom_password, locals())),
+                self.sub(self.custom_username, locals()),
+                app.get_password(self.sub(self.custom_password, locals())),
             )
 
     def convert_result(self, result):

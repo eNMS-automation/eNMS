@@ -42,6 +42,8 @@ class AdministrationController(BaseController):
         return user if user and verify(password, user_password) else False
 
     def ldap_authentication(self, user, name, password):
+        if not self.use_ldap:
+            return False
         with Connection(
             self.ldap_client,
             user=f"{self.settings['ldap']['userdn']}\\{name}",
@@ -77,7 +79,9 @@ class AdministrationController(BaseController):
         return user
 
     def tacacs_authentication(self, user, name, password):
-        if self.tacacs_client.authenticate(name, password).valid:
+        if not self.use_tacacs:
+            return False
+        elif self.tacacs_client.authenticate(name, password).valid:
             if not user:
                 user = db.factory(
                     "user", authentication="tacacs", name=name, group="Admin"

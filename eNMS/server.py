@@ -160,12 +160,10 @@ class Server(Flask):
     def configure_authentication(self):
         @self.auth.verify_password
         def verify_password(username, password):
-            if not username or not password:
+            user = db.fetch("user", name=username, allow_none=True)
+            if not user or not password:
                 return False
-            user = db.fetch("user", name=username)
-            hash = app.settings["security"]["hash_user_passwords"]
-            verify = argon2.verify if hash else str.__eq__
-            return verify(password, app.get_password(user.password))
+            return bool(app.authenticate_user(name=username, password=password))
 
         @self.auth.get_password
         def get_password(username):

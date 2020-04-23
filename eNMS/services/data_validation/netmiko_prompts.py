@@ -86,7 +86,7 @@ class NetmikoPromptsService(ConnectionService):
 
 class NetmikoPromptsForm(NetmikoForm):
     form_type = HiddenField(default="netmiko_prompts_service")
-    command = StringField()
+    command = StringField(substitution=True)
     confirmation1 = StringField(substitution=True)
     response1 = StringField(substitution=True)
     confirmation2 = StringField(substitution=True)

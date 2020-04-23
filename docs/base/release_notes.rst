@@ -19,6 +19,7 @@ devices have been selected.
 - Fix workflow results recursive display no path in results bug
 - Improve "Get Result" REST endpoint: returns 404 error if no run found, run status if a run is found but there are
 no results (e.g job still running), and the results if the job is done.
+- Remove wtforms email validator in example service following wtforms 2.3 release
 
 Version 3.21.2
 --------------

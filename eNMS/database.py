@@ -313,7 +313,10 @@ class Database:
         instance = self.session.query(models[model]).filter_by(**kwargs).first()
         if allow_none and not instance:
             return None
-        instance.delete()
+        try:
+            instance.delete()
+        except Exception as exc:
+            return {"alert": f"Unable to delete {instance.name} ({exc})."}
         serialized_instance = instance.serialized
         self.session.delete(instance)
         return serialized_instance

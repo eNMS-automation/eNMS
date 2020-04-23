@@ -57,14 +57,18 @@ class Task(AbstractBase):
     @property
     def next_run_time(self):
         try:
-            return get(f"{scheduler['address']}/next_runtime/{self.id}").json()
+            return get(
+                f"{scheduler['address']}/next_runtime/{self.id}", timeout=0.001
+            ).json()
         except ConnectionError:
             return "Scheduler Unreachable"
 
     @property
     def time_before_next_run(self):
         try:
-            return get(f"{scheduler['address']}/time_left/{self.id}").json()
+            return get(
+                f"{scheduler['address']}/time_left/{self.id}", timeout=0.001
+            ).json()
         except ConnectionError:
             return "Scheduler Unreachable"
 

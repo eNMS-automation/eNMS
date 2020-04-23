@@ -73,10 +73,13 @@ class Task(AbstractBase):
             return "Scheduler Unreachable"
 
     def schedule(self, mode="schedule"):
-        result = post(
-            f"{scheduler['address']}/schedule",
-            json={"mode": mode, "task": self.get_properties()},
-        ).json()
+        try:
+            result = post(
+                f"{scheduler['address']}/schedule",
+                json={"mode": mode, "task": self.get_properties()},
+            ).json()
+        except ConnectionError:
+            return {"alert": "Scheduler Unreachable: the task cannot be scheduled."}
         self.is_active = result.get("active", False)
         return result
 

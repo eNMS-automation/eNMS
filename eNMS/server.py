@@ -427,7 +427,7 @@ class Server(Flask):
                     result = run.result()
                     return {
                         "status": run.status,
-                        "result": result.result if result else "No results yet."
+                        "result": result.result if result else "No results yet.",
                     }
 
         class UpdateInstance(Resource):

@@ -311,7 +311,7 @@ class AutomationController(BaseController):
                 path = str(service.id)
                 progress = state["progress"]
             else:
-                progress = state["services"][path].get("progress")
+                progress = state["services"].get(path, {}).get("progress")
             track_progress = progress and progress["device"]["total"]
             data = {"progress": progress["device"]} if track_progress else {}
             color = "32CD32" if all(run.success for run in runs) else "FF6666"

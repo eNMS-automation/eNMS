@@ -2,6 +2,11 @@
 Release Notes
 =============
 
+Version 3.21.4
+--------------
+
+- Defer loading of device configuration and operational data column
+
 Version 3.21.3
 --------------
 

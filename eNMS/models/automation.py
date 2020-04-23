@@ -710,7 +710,6 @@ class Run(AbstractBase):
         return results
 
     def get_results(self, payload, device=None, commit=True):
-        print(device.__dict__)
         self.log("info", "STARTING", device)
         start = datetime.now().replace(microsecond=0)
         skip_service = False

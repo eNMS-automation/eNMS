@@ -22,6 +22,12 @@ devices have been selected.
 - Fix invalid request bug when pressing enter after searching the "add services to workflow" panel
 - Forbid "Start", "End" and "Placeholder" for service names
 - Fix Result in mail notification for run once mode
+- Make Netmiko prompt command service a substitution string in the UI
+- Fix wrong jump password when using a Vault
+- Fix workflow results recursive display no path in results bug
+- Improve "Get Result" REST endpoint: returns 404 error if no run found, run status if a run is found but there are
+no results (e.g job still running), and the results if the job is done.
+- Remove wtforms email validator in example service following wtforms 2.3 release
 
 Version 3.21.2
 --------------

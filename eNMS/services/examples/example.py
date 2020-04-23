@@ -10,7 +10,6 @@ from sqlalchemy import Boolean, Float, ForeignKey, Integer
 
 # WTForms Field Validators
 from wtforms.validators import (
-    Email,
     InputRequired,
     IPAddress,
     Length,
@@ -111,10 +110,8 @@ class ExampleForm(ServiceForm):
     # The "InputRequired" validator is used: this field is mandatory.
     string2 = StringField("String 2 (required)", [InputRequired()])
 
-    # The main address field uses two validators:
-    # - The input length must be comprised between 7 and 25 characters
-    # - The input syntax must match that of an email address.
-    mail_address = StringField("Mail address", [Length(min=7, max=25), Email()])
+    # The main address length must be comprised between 7 and 25 characters
+    mail_address = StringField("Mail address", [Length(min=7, max=25)])
 
     # This IP address validator will ensure the user input is a valid IPv4 address.
     # If it isn't, you can set the error message to be displayed in the GUI.

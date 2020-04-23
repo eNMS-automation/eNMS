@@ -415,9 +415,20 @@ class Server(Flask):
             decorators = [self.auth.login_required, self.catch_exceptions]
 
             def get(self, name, runtime):
-                service = db.fetch("service", name=name)
-                run = db.fetch("run", service_id=service.id, runtime=runtime)
-                return run.result().result
+                run = db.fetch(
+                    "run", service_name=name, runtime=runtime, allow_none=True
+                )
+                if not run:
+                    raise LookupError(
+                        "There are no results or on-going services "
+                        "for the requested service and runtime."
+                    )
+                else:
+                    result = run.result()
+                    return {
+                        "status": run.status,
+                        "result": result.result if result else "No results yet."
+                    }
 
         class UpdateInstance(Resource):
             decorators = [self.auth.login_required, self.catch_exceptions]

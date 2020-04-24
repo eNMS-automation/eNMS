@@ -1040,13 +1040,13 @@ tables.event = class EventTable extends Table {
       <ul class="pagination pagination-lg" style="margin: 0px; width: 150px">
         <li>
           <button type="button" class="btn btn-sm btn-primary"
-          onclick="eNMS.base.showTypePanel('event', '{self.id}')"
+          onclick="eNMS.base.showTypePanel('event', '${row.id}')"
           data-tooltip="Edit"><span class="glyphicon glyphicon-edit">
           </span></button>
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-primary"
-          onclick="eNMS.base.showTypePanel('event', '{self.id}', 'duplicate')"
+          onclick="eNMS.base.showTypePanel('event', '${row.id}', 'duplicate')"
           data-tooltip="Duplicate">
           <span class="glyphicon glyphicon-duplicate"></span></button>
         </li>

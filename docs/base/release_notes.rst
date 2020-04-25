@@ -11,6 +11,12 @@ Version 3.22
 - Remove TACACS+ parameters from settings, use env variable instead: USE_TACACS, TACACS_ADDR, TACACS_PASSWORD
 - Make REST API accept Tacacs and LDAP credentials
 
+Version 3.21.4
+--------------
+
+- Defer loading of device configuration and operational data column
+- Fix device results table comparison mechanism
+
 Version 3.21.3
 --------------
 

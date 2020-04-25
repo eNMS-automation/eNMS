@@ -1,7 +1,7 @@
 from re import search, sub
 from sqlalchemy import Boolean, ForeignKey, Integer
 from sqlalchemy.ext.associationproxy import association_proxy
-from sqlalchemy.orm import backref, relationship
+from sqlalchemy.orm import backref, deferred, relationship
 from sqlalchemy.schema import UniqueConstraint
 
 from eNMS.models.base import AbstractBase
@@ -64,8 +64,12 @@ class Device(Object):
     enable_password = db.Column(db.SmallString)
     netmiko_driver = db.Column(db.SmallString, default="cisco_ios")
     napalm_driver = db.Column(db.SmallString, default="ios")
-    configuration = db.Column(db.LargeString, info={"dont_track_changes": True})
-    operational_data = db.Column(db.LargeString, info={"dont_track_changes": True})
+    configuration = deferred(
+        db.Column(db.LargeString, info={"dont_track_changes": True})
+    )
+    operational_data = deferred(
+        db.Column(db.LargeString, info={"dont_track_changes": True})
+    )
     last_failure = db.Column(db.SmallString, default="Never")
     last_status = db.Column(db.SmallString, default="Never")
     last_update = db.Column(db.SmallString, default="Never")

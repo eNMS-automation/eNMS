@@ -31,9 +31,10 @@ function openServicePanel() {
   showTypePanel($("#service-type").val());
 }
 
-export function compare(type, device) {
-  const v1 = $(`input[name=v1-${device.id}]:checked`).val();
-  const v2 = $(`input[name=v2-${device.id}]:checked`).val();
+export function compare(type, instance) {
+  if (instance.type == "device" && type == "result") type = "device_result";
+  const v1 = $(`input[name=v1-${type}-${instance.id}]:checked`).val();
+  const v2 = $(`input[name=v2-${type}-${instance.id}]:checked`).val();
   if (!v1 || !v2) {
     notify("Select two versions to compare first.", "error", 5);
   } else if (v1 == v2) {
@@ -68,7 +69,7 @@ export function compare(type, device) {
           width: "120px",
         });
         call({
-          url: `/compare/${type}/${device.name}/${v1}/${v2}`,
+          url: `/compare/${type}/${instance.name}/${v1}/${v2}`,
           callback: (result) => {
             let diff2htmlUi = new Diff2HtmlUI({ diff: result });
             $(`#diff-type-${cantorId}`)
@@ -454,14 +455,26 @@ function exportService(id) {
   });
 }
 
-function taskAction(mode, id) {
+function pauseTask(id) {
   call({
-    url: `/task_action/${mode}/${id}`,
+    url: `/task_action/pause/${id}`,
     callback: function(result) {
-      const inverseAction = mode == "resume" ? "pause" : "resume";
-      const action = `eNMS.automation.${inverseAction}Task('${id}')`;
-      $(`#pause-resume-${id}`).attr("onclick", action);
-      notify(result.response, "success", 5);
+      $(`#pause-resume-${id}`)
+        .attr("onclick", `eNMS.automation.resumeTask('${id}')`)
+        .text("Resume");
+      notify("Task paused.", "success", 5);
+    },
+  });
+}
+
+function resumeTask(id) {
+  call({
+    url: `/task_action/resume/${id}`,
+    callback: function() {
+      $(`#pause-resume-${id}`)
+        .attr("onclick", `eNMS.automation.pauseTask('${id}')`)
+        .text("Pause");
+      notify("Task resumed.", "success", 5);
     },
   });
 }
@@ -566,8 +579,9 @@ configureNamespace("automation", [
   normalRun,
   openServicePanel,
   parameterizedRun,
+  pauseTask,
+  resumeTask,
   schedulerAction,
   showResult,
   showRuntimePanel,
-  taskAction,
 ]);

@@ -151,7 +151,7 @@ export class Table {
       this.table.order([0, "desc"]).draw();
     }
     if (["run", "service", "task", "workflow"].includes(this.type)) {
-      refreshTablePeriodically(this.id, 4000, true);
+      refreshTablePeriodically(this.id, 3000, true);
     }
   }
 
@@ -798,10 +798,11 @@ tables.result = class ResultTable extends Table {
   }
 
   get controls() {
+    const instance = JSON.stringify(this.instance).replace(/"/g, "'");
     return [
       `<button
         class="btn btn-info"
-        onclick="eNMS.automation.compare('result', '${this.id}')"
+        onclick="eNMS.automation.compare('result', ${instance})"
         data-tooltip="Compare"
         type="button"
       >
@@ -907,17 +908,13 @@ tables.task = class TaskTable extends Table {
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-success ${state[0]}" ${state[0]}
-          onclick="eNMS.automation.taskAction('resume', '${
-            row.id
-          }')" data-tooltip="Play"
+          onclick="eNMS.automation.resumeTask('${row.id}')" data-tooltip="Play"
             ><span class="glyphicon glyphicon-play"></span
           ></button>
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-danger ${state[1]}" ${state[1]}
-          onclick="eNMS.automation.taskAction('pause', '${
-            row.id
-          }')" data-tooltip="Pause"
+          onclick="eNMS.automation.pauseTask('${row.id}')" data-tooltip="Pause"
             ><span class="glyphicon glyphicon-pause"></span
           ></button>
         </li>
@@ -1044,13 +1041,13 @@ tables.event = class EventTable extends Table {
       <ul class="pagination pagination-lg" style="margin: 0px; width: 150px">
         <li>
           <button type="button" class="btn btn-sm btn-primary"
-          onclick="eNMS.base.showTypePanel('event', '{self.id}')"
+          onclick="eNMS.base.showTypePanel('event', '${row.id}')"
           data-tooltip="Edit"><span class="glyphicon glyphicon-edit">
           </span></button>
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-primary"
-          onclick="eNMS.base.showTypePanel('event', '{self.id}', 'duplicate')"
+          onclick="eNMS.base.showTypePanel('event', '${row.id}', 'duplicate')"
           data-tooltip="Duplicate">
           <span class="glyphicon glyphicon-duplicate"></span></button>
         </li>

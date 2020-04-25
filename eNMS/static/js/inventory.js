@@ -434,12 +434,12 @@ function showGitHistory(device) {
                     </button>`,
                     `<input
                       type="radio"
-                      name="v1-${device.id}"
+                      name="v1-${data}-${device.id}"
                       value="${commit.hash}">
                     </input>`,
                     `<input
                       type="radio"
-                      name="v2-${device.id}"
+                      name="v2-${data}-${device.id}"
                       value="${commit.hash}">
                     </input>`,
                   ]);

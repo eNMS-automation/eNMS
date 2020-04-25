@@ -839,6 +839,23 @@ tables.result = class ResultTable extends Table {
 };
 
 tables.device_result = class DeviceResultTable extends tables.result {
+
+  get controls() {
+    const device = JSON.stringify(this.instance).replace(/"/g, "'");
+    return [
+      `<button
+        class="btn btn-info"
+        onclick="eNMS.automation.compare('device_result', ${device})"
+        data-tooltip="Compare"
+        type="button"
+      >
+        <span class="glyphicon glyphicon-adjust"></span>
+      </button>`,
+      this.refreshTableButton(),
+      this.clearSearchButton(),
+    ];
+  }
+
   get modelFiltering() {
     return "result";
   }

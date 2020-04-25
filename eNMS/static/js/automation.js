@@ -32,8 +32,8 @@ function openServicePanel() {
 }
 
 export function compare(type, device) {
-  const v1 = $(`input[name=v1-${device.id}]:checked`).val();
-  const v2 = $(`input[name=v2-${device.id}]:checked`).val();
+  const v1 = $(`input[name=v1-${type}-${device.id}]:checked`).val();
+  const v2 = $(`input[name=v2-${type}-${device.id}]:checked`).val();
   if (!v1 || !v2) {
     notify("Select two versions to compare first.", "error", 5);
   } else if (v1 == v2) {

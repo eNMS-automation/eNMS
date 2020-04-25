@@ -1,7 +1,6 @@
 from click import argument, echo, option, Choice
 from datetime import datetime, timedelta
 from json import loads
-from passlib.hash import argon2
 from flask import (
     abort,
     Blueprint,

@@ -31,10 +31,11 @@ function openServicePanel() {
   showTypePanel($("#service-type").val());
 }
 
-export function compare(type, device) {
-  console.log(device)
-  const v1 = $(`input[name=v1-${type}-${device.id}]:checked`).val();
-  const v2 = $(`input[name=v2-${type}-${device.id}]:checked`).val();
+export function compare(type, instance) {
+  if (instance.type == "device" && type == "result") type = "device_result";
+  console.log($(`input[name=v1-${type}-${instance.id}]:checked`).length)
+  const v1 = $(`input[name=v1-${type}-${instance.id}]:checked`).val();
+  const v2 = $(`input[name=v2-${type}-${instance.id}]:checked`).val();
   if (!v1 || !v2) {
     notify("Select two versions to compare first.", "error", 5);
   } else if (v1 == v2) {
@@ -69,7 +70,7 @@ export function compare(type, device) {
           width: "120px",
         });
         call({
-          url: `/compare/${type}/${device.name}/${v1}/${v2}`,
+          url: `/compare/${type}/${instance.name}/${v1}/${v2}`,
           callback: (result) => {
             let diff2htmlUi = new Diff2HtmlUI({ diff: result });
             $(`#diff-type-${cantorId}`)

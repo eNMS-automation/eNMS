@@ -57,6 +57,8 @@ function install() {
     '
     echo "$user" | sudo tee -a /etc/tacacs+/tac_plus.conf
     sudo systemctl restart tacacs_plus
+  elif [ "$install" = "ldap" ]; then
+    sudo apt-get install slapd ldap-utils
   fi
 }
 
@@ -78,6 +80,8 @@ function uninstall() {
     sudo apt-get -y remove redis-server
   elif [ "$uninstall" = "tacacs+" ]; then
     sudo apt-get -y remove --purge tacacs+
+  elif [ "$uninstall" = "ldap" ]; then
+    sudo apt-get -y remove --purge slapd ldap-utils
   fi
   sudo apt-get -y autoremove
   sudo apt-get -y autoclean

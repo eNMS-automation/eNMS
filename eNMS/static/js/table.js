@@ -840,7 +840,6 @@ tables.result = class ResultTable extends Table {
 };
 
 tables.device_result = class DeviceResultTable extends tables.result {
-
   get modelFiltering() {
     return "result";
   }

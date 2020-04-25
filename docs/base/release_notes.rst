@@ -6,6 +6,7 @@ Version 3.21.4
 --------------
 
 - Defer loading of device configuration and operational data column
+- Fix device results table comparison mechanism
 
 Version 3.21.3
 --------------

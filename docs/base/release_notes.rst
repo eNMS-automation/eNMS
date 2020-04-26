@@ -9,7 +9,8 @@ Version 3.22
 - In Rest Call service and other rest calls with request, use "json" kw instead of "data"
 - Implement remote scheduler
 - Remove TACACS+ parameters from settings, use env variable instead: USE_TACACS, TACACS_ADDR, TACACS_PASSWORD
-- Make REST API accept Tacacs and LDAP credentials
+- Make REST API accept Tacacs and LDAP credentials (in the last version, if you were using TACACS+ or LDAP, you could authenticate
+in the UI but couldn't make calls to the REST API)
 
 Version 3.21.4
 --------------

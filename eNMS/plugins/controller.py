@@ -12,14 +12,14 @@ except ImportError as exc:
 
 
 class CustomController:
-    def ldap_authentication(self, name, password):
+    def ldap_authentication(self, user, name, password):
         if not hasattr(self, "ldap_server"):
-            self.ldap_server = Server(environ.get("LDAP_SERVER"))
+            self.ldap_server = Server(environ.get("LDAP_ADDR"))
         user = f"uid={name},dc=example,dc=com"
         success = Connection(self.ldap_server, user=user, password=password).bind()
-        return {"group": "admin", "name": name} if success else False
+        return {"group": "Admin", "name": name} if success else False
 
-    def tacacs_authentication(self, name, password):
+    def tacacs_authentication(self, user, name, password):
         if not hasattr(self, "tacacs_client"):
             TACACSClient(environ.get("TACACS_ADDR"), 49, environ.get("TACACS_PASSWORD"))
         success = self.tacacs_server.authenticate(name, password).valid

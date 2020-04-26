@@ -24,13 +24,12 @@ function run() {
     uvicorn scheduler:scheduler --host 0.0.0.0
     exit 0
   fi
-  if [ "$tacacs" = true ]; then
-    export TACACS_ADDR="192.168.56.104"
-    export TACACS_PASSWORD="testing123"
-  fi
   if [ "$redis" = true ]; then
     export REDIS_ADDR="192.168.56.103"
   fi
+  export LDAP_ADDR="192.168.56.104"
+  export TACACS_ADDR="192.168.56.104"
+  export TACACS_PASSWORD="testing123"
   export FLASK_APP="app.py"
   export FLASK_DEBUG=1
   if [ "$database" = "mysql" ]; then

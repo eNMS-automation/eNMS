@@ -19,12 +19,10 @@
     "small_string_length": 255,
     "large_string_length": 32768
   },
-  "ldap": {
-    "active": false,
-    "server": "ldap://domain.ad.company.com",
-    "userdn": "domain.ad.company.com",
-    "basedn": "DC=domain,DC=ad,DC=company,DC=com",
-    "admin_group": "eNMS.Users,network.Admins"
+  "authentication": {
+    "database": true,
+    "tacacs": true,
+    "ldap": true
   },
   "mail": {
     "server": "smtp.googlemail.com",

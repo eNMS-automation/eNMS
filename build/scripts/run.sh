@@ -25,7 +25,6 @@ function run() {
     exit 0
   fi
   if [ "$tacacs" = true ]; then
-    export USE_TACACS=1
     export TACACS_ADDR="192.168.56.104"
     export TACACS_PASSWORD="testing123"
   fi

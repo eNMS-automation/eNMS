@@ -194,13 +194,11 @@ class Server(Flask):
                     abort(403)
             if not current_user.is_authenticated:
                 login_form = LoginForm(request.form)
-                authentication_methods = []
-                if app.settings["ldap"]["active"]:
-                    authentication_methods.append(("ldap", "LDAP Domain"))
-                if app.use_tacacs:
-                    authentication_methods.append(("tacacs", "TACACS+"))
-                authentication_methods.append(("database", "Database"))
-                login_form.authentication_method.choices = authentication_methods
+                login_form.authentication_method.choices = [
+                    (method, method.capitalize())
+                    for method, active in app.settings["authentication"].items()
+                    if active
+                ]
                 return render_template("login.html", login_form=login_form)
             return redirect(url_for("blueprint.route", page="dashboard"))
 

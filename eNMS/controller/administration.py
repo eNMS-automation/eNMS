@@ -33,6 +33,8 @@ class AdministrationController(BaseController):
             return False
         user = db.fetch("user", allow_none=True, name=name)
         method = user.authentication if user else kwargs["authentication_method"]
+        if not self.settings["authentication"][method]:
+            return False
         return getattr(self, f"{method}_authentication")(user, name, password)
 
     def database_authentication(self, user, name, password):
@@ -42,8 +44,6 @@ class AdministrationController(BaseController):
         return user if user and verify(password, user_password) else False
 
     def ldap_authentication(self, user, name, password):
-        if not self.use_ldap:
-            return False
         ldap_user = self.get_ldap_user(name, password)
         if not ldap_user:
             return False
@@ -53,9 +53,7 @@ class AdministrationController(BaseController):
         return user
 
     def tacacs_authentication(self, user, name, password):
-        if not self.use_tacacs:
-            return False
-        elif self.tacacs_client.authenticate(name, password).valid:
+        if self.tacacs_client.authenticate(name, password).valid:
             if not user:
                 user = db.factory(
                     "user", authentication="tacacs", name=name, group="Admin"

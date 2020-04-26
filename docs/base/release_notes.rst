@@ -8,9 +8,11 @@ Version 3.22
 - Remove database url from settings. Configured via env variable DATABASE_URL
 - In Rest Call service and other rest calls with request, use "json" kw instead of "data"
 - Implement remote scheduler
-- Remove TACACS+ parameters from settings, use env variable instead: USE_TACACS, TACACS_ADDR, TACACS_PASSWORD
+- Remove TACACS+ parameters from settings, use env variable instead: TACACS_ADDR, TACACS_PASSWORD
 - Make REST API accept Tacacs and LDAP credentials (in the last version, if you were using TACACS+ or LDAP, you could authenticate
 in the UI but couldn't make calls to the REST API)
+- Remove LDAP parameters from settings. The LDAP authentication is in the custom controller, there is a default
+function that works with a standard LDAP installation, but you can customize however you want.
 
 Version 3.21.4
 --------------

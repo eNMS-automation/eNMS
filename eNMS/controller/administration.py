@@ -44,37 +44,11 @@ class AdministrationController(BaseController):
     def ldap_authentication(self, user, name, password):
         if not self.use_ldap:
             return False
-        with Connection(
-            self.ldap_client,
-            user=f"{self.settings['ldap']['userdn']}\\{name}",
-            password=password,
-            auto_bind=True,
-            authentication=NTLM,
-        ) as connection:
-            connection.search(
-                self.settings["ldap"]["basedn"],
-                f"(&(objectClass=person)(samaccountname={name}))",
-                search_scope=SUBTREE,
-                get_operational_attributes=True,
-                attributes=["cn", "memberOf", "mail"],
-            )
-            response = loads(connection.response_to_json())["entries"][0]
-        if not response:
-            return
-        if not any(
-            admin_group in user_group
-            for admin_group in self.settings["ldap"]["admin_group"].split(",")
-            for user_group in response["attributes"]["memberOf"]
-        ):
+        ldap_user = self.get_ldap_user(name, password)
+        if not ldap_user:
             return False
-        if not user:
-            user = db.factory(
-                "user",
-                authentication="ldap",
-                name=name,
-                email=response["attributes"].get("mail", ""),
-                group="Admin",
-            )
+        elif not user:
+            user = db.factory("user", authentication="ldap", **ldap_user)
             db.session.commit()
         return user
 

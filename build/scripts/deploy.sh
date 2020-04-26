@@ -59,8 +59,9 @@ function install() {
     sudo systemctl restart tacacs_plus
   elif [ "$install" = "ldap" ]; then
     sudo apt-get install -y slapd ldap-utils
-    sudo dpkg-reconfigure slapd # no, "example.com", "example", admin / admin, MDB, yes, yes
-    ldapadd -x -D cn=admin,dc=example,dc=com -W -f ${path:-$PWD}/tests/authentication/add_user.ldif
+    sudo dpkg-reconfigure slapd
+    # no, "example.com", "example", admin / admin, MDB, yes, yes
+    ldapadd -x -D cn=admin,dc=example,dc=com -W -f ${path:-$PWD}/tests/ldap/add_user.ldif
   fi
 }
 

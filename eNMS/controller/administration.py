@@ -49,17 +49,6 @@ class AdministrationController(BaseController):
                 db.session.commit()
             return user
 
-    def tacacs_authentication(self, user, name, password):
-        if self.tacacs_client.authenticate(name, password).valid:
-            if not user:
-                user = db.factory(
-                    "user", authentication="tacacs", name=name, group="Admin"
-                )
-                db.session.commit()
-            return user
-        else:
-            return False
-
     def database_deletion(self, **kwargs):
         db.delete_all(*kwargs["deletion_types"])
 

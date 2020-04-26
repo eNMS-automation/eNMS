@@ -36,14 +36,6 @@ try:
     from hvac import Client as VaultClient
 except ImportError as exc:
     warn(f"Couldn't import hvac module ({exc})")
-try:
-    from ldap3 import ALL, Server
-except ImportError as exc:
-    warn(f"Couldn't import ldap3 module ({exc})")
-try:
-    from tacacs_plus.client import TACACSClient
-except ImportError as exc:
-    warn(f"Couldn't import tacacs_plus module ({exc})")
 
 from eNMS.database import db
 from eNMS.models import models, model_properties, relationships
@@ -79,8 +71,6 @@ class BaseController:
         self.path = Path.cwd()
         self.init_encryption()
         self.use_vault = settings["vault"]["use_vault"]
-        if settings["authentication"]["tacacs"]:
-            self.init_tacacs_client()
         if self.use_vault:
             self.init_vault_client()
         if settings["syslog"]["active"]:
@@ -234,11 +224,6 @@ class BaseController:
                     spec.loader.exec_module(module_from_spec(spec))
                 except InvalidRequestError as exc:
                     error(f"Error loading custom service '{file}' ({str(exc)})")
-
-    def init_tacacs_client(self):
-        self.tacacs_client = TACACSClient(
-            environ.get("TACACS_ADDR"), 49, environ.get("TACACS_PASSWORD")
-        )
 
     def init_vault_client(self):
         url = environ.get("VAULT_ADDR", "http://127.0.0.1:8200")

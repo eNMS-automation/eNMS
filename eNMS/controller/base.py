@@ -81,8 +81,6 @@ class BaseController:
         self.use_vault = settings["vault"]["use_vault"]
         if settings["authentication"]["tacacs"]:
             self.init_tacacs_client()
-        if settings["authentication"]["ldap"]:
-            self.init_ldap_client()
         if self.use_vault:
             self.init_vault_client()
         if settings["syslog"]["active"]:
@@ -236,9 +234,6 @@ class BaseController:
                     spec.loader.exec_module(module_from_spec(spec))
                 except InvalidRequestError as exc:
                     error(f"Error loading custom service '{file}' ({str(exc)})")
-
-    def init_ldap_client(self):
-        self.ldap_client = Server(self.settings["ldap"]["server"], get_info=ALL)
 
     def init_tacacs_client(self):
         self.tacacs_client = TACACSClient(

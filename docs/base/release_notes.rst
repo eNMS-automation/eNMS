@@ -13,6 +13,7 @@ Version 3.22
 in the UI but couldn't make calls to the REST API)
 - Remove LDAP parameters from settings. The LDAP authentication is in the custom controller, there is a default
 function that works with a standard LDAP installation, but you can customize however you want.
+The LDAP server is now configured with the env variable LDAP_SERVER.
 
 Version 3.21.4
 --------------

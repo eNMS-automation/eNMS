@@ -16,7 +16,7 @@ from datetime import datetime
 from warnings import warn
 
 try:
-    from ldap3 import Connection, NTLM, SUBTREE
+    from ldap3 import Connection, Server
 except ImportError as exc:
     warn(f"Couldn't import ldap3 module ({exc})")
 
@@ -35,22 +35,19 @@ class AdministrationController(BaseController):
         method = user.authentication if user else kwargs["authentication_method"]
         if not self.settings["authentication"][method]:
             return False
-        return getattr(self, f"{method}_authentication")(user, name, password)
-
-    def database_authentication(self, user, name, password):
-        hash = self.settings["security"]["hash_user_passwords"]
-        verify = argon2.verify if hash else str.__eq__
-        user_password = self.get_password(user.password)
-        return user if user and verify(password, user_password) else False
-
-    def ldap_authentication(self, user, name, password):
-        ldap_user = self.get_ldap_user(name, password)
-        if not ldap_user:
-            return False
-        elif not user:
-            user = db.factory("user", authentication="ldap", **ldap_user)
-            db.session.commit()
-        return user
+        elif method == "database":
+            hash = self.settings["security"]["hash_user_passwords"]
+            verify = argon2.verify if hash else str.__eq__
+            user_password = self.get_password(user.password)
+            return user if user and verify(password, user_password) else False
+        else:
+            response = getattr(self, f"{method}_authentication")(user, name, password)
+            if not response:
+                return False
+            elif not user:
+                user = db.factory("user", authentication=method, **response)
+                db.session.commit()
+            return user
 
     def tacacs_authentication(self, user, name, password):
         if self.tacacs_client.authenticate(name, password).valid:

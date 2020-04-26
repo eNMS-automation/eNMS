@@ -1,7 +1,6 @@
 from passlib.hash import argon2
 from copy import deepcopy
 from ipaddress import IPv4Network
-from json import loads
 from logging import info
 from os import listdir, makedirs, remove
 from os.path import exists, getmtime
@@ -13,12 +12,6 @@ from tarfile import open as open_tar
 from time import ctime
 from traceback import format_exc
 from datetime import datetime
-from warnings import warn
-
-try:
-    from ldap3 import Connection, Server
-except ImportError as exc:
-    warn(f"Couldn't import ldap3 module ({exc})")
 
 from eNMS.controller.base import BaseController
 from eNMS.database import db

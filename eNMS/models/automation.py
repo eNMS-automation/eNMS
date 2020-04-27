@@ -838,7 +838,7 @@ class Run(AbstractBase):
                     f"{status}: {self.service.name}",
                     app.str_dict(notification),
                     recipients=self.mail_recipient,
-                    reply_to=run.replier,
+                    reply_to=self.reply_to,
                     filename=f"results-{filename}.txt",
                     file_content=app.str_dict(file_content),
                 )

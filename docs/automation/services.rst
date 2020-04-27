@@ -137,16 +137,21 @@ You can configure the following parameters:
 - ``Notification header`` A header displayed at the beginning of the notification.
 - ``Include Result Link in summary``: whether the notification contains a link to the results.
 - ``Mail recipients`` Must be a list of email addresses, separated by comma.
+- ``Reply to`` Must be a single email address
 - ``Display only failed nodes`` the notification will not include devices for which the service ran successfully.
 
 To set up the mail system, you must set the variable of the ``mail`` section in the settings.
-``server``, ``port``, ``use_tls``, ``username``, ``sender``, ``recipients``.
+``server``, ``port``, ``use_tls``, ``username``, ``sender``, ``reply_to``, ``recipients``.
 Besides, you must set the password via the ``MAIL_PASSWORD`` environment variable.
 
 The ``Mail Recipients`` parameter must be set for the mail system to work; the `Admin / Administration` panel parameter can
 also be overriden from Step2 of the Service Instance and Workflow configuration panels. For Mail notification, there is
 also an option in the Service Instance configuration to display only failed objects in the email summary versus seeing a
 list of all passed and failed objects.
+
+The ``Reply to`` must also be set for the system to work. This parameter can be overridden in Step2 of the Service Instance
+and Workflow configuration panels. The Mail Notification service will also use the system level reply address unless it is
+overriden. 
 
 In Mattermost, if the ``Mattermost Channel`` is not set, the default ``Town Square`` will be used.
 
@@ -225,6 +230,7 @@ Variables
   - ``content`` (mandatory, type ``string``)
   - ``sender`` (optional, type ``string``) Email address of the sender. Default to the sender address
     of eNMS settings.
+  - ``reply_to`` (optional, type ``string``) Email address to send replies to. 
   - ``recipients`` (optional, type ``string``) Mail addresses of the recipients, separated by comma.
     Default to the recipients addresses of eNMS settings.
   - ``filename`` (optional, type ``string``) Name of the attached file.
@@ -236,6 +242,7 @@ Variables
         title,
         content,
         sender=sender,
+        reply_to=reply_to,
         recipients=recipients,
         filename=filename,
         file_content=file_content

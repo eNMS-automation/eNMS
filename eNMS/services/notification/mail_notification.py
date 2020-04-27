@@ -16,6 +16,7 @@ class MailNotificationService(Service):
     title = db.Column(db.SmallString)
     sender = db.Column(db.SmallString)
     recipients = db.Column(db.SmallString)
+    replier = db.Column(db.SmallString, default="")
     body = db.Column(db.LargeString, default="")
 
     __mapper_args__ = {"polymorphic_identity": "mail_notification_service"}
@@ -26,6 +27,7 @@ class MailNotificationService(Service):
             run.sub(run.body, locals()),
             sender=run.sender,
             recipients=run.recipients,
+            reply_to=run.replier,
         )
         return {"success": True, "result": {}}
 
@@ -35,6 +37,7 @@ class MailNotificationForm(ServiceForm):
     title = StringField(substitution=True)
     sender = StringField()
     recipients = StringField()
+    replier = StringField("Reply-to Address")
     body = StringField(widget=TextArea(), render_kw={"rows": 5}, substitution=True)
 
     def validate(self):

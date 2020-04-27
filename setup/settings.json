@@ -32,7 +32,8 @@
     "port": 587,
     "use_tls": true,
     "username": "eNMS-user",
-    "sender": "eNMS@company.com"
+    "sender": "eNMS@company.com",
+    "reply_to": "reply_to@company.com",
   },
   "mattermost": {
     "url": "https://mattermost.company.com/hooks/i1phfh6fxjfwpy586bwqq5sk8w",

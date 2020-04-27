@@ -25,7 +25,7 @@ class CustomController:
                 environ.get("TACACS_ADDR"), 49, environ.get("TACACS_PASSWORD")
             )
         success = self.tacacs_client.authenticate(name, password).valid
-        return {"group": "admin", "name": name} if success else False
+        return {"group": "Admin", "name": name} if success else False
 
     def process_form_data(self, **data):
         return data["router_id"] * 2

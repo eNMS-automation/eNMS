@@ -450,7 +450,7 @@ class BaseController:
         file_content=None,
     ):
         sender = sender or self.settings["mail"]["sender"]
-        reply_to = reply__to or self.settings["mail"]["reply_to"]
+        reply_to = reply_to or self.settings["mail"]["reply_to"]
         message = MIMEMultipart()
         message["From"] = sender
         message["To"] = recipients

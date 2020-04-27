@@ -51,8 +51,8 @@ function install() {
     sudo apt-get install -y tacacs+
     user='
       user = admin {
-          name = "admin"
-          login = cleartext admin
+          name = "tacacs"
+          login = cleartext tacacs
       }
     '
     echo "$user" | sudo tee -a /etc/tacacs+/tac_plus.conf
@@ -61,7 +61,14 @@ function install() {
     sudo apt-get install -y slapd ldap-utils
     sudo dpkg-reconfigure slapd
     # no, "example.com", "example", admin / admin, MDB, yes, yes
-    ldapadd -x -D cn=admin,dc=example,dc=com -W -f ${path:-$PWD}/tests/ldap/add_user.ldif
+    user='
+      dn: uid=ldap,dc=example,dc=com
+      objectClass: inetOrgPerson
+      sn: ldap
+      cn: ldap
+      userPassword: ldap
+    '
+    echo "$user" | awk '{$1=$1};1' | ldapadd -x -D cn=admin,dc=example,dc=com -w admin
   fi
 }
 

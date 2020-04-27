@@ -1,5 +1,5 @@
-dn: uid=test5,dc=example,dc=com
+dn: uid=ldap,dc=example,dc=com
 objectClass: inetOrgPerson
-sn: test
-cn: test
-userPassword: test
+sn: ldap
+cn: ldap
+userPassword: ldap

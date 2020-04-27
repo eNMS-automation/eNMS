@@ -25,10 +25,10 @@ class AdministrationController(BaseController):
         if not name or not password:
             return False
         user = db.fetch("user", allow_none=True, name=name)
-        if not kwargs.get("authentication_method") or user:
-            return False
-        method = kwargs.get("authentication_method", user.authentication)
-        if not self.settings["authentication"][method]:
+        method = kwargs.get(
+            "authentication_method", getattr(user, "authentication", None)
+        )
+        if not method or not self.settings["authentication"].get(method):
             return False
         elif method == "database":
             hash = self.settings["security"]["hash_user_passwords"]

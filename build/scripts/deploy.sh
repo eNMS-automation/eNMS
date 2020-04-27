@@ -47,10 +47,10 @@ function install() {
   elif [ "$install" = "redis" ]; then
     sudo apt-get install -y redis-server
     sudo sed -i -e 's/bind 127.0.0.1 ::1/bind 0.0.0.0 ::0/g' /etc/redis/redis.conf
-  elif [ "$install" = "tacacs+" ]; then
+  elif [ "$install" = "tacacs" ]; then
     sudo apt-get install -y tacacs+
     user='
-      user = admin {
+      user = tacacs {
           name = "tacacs"
           login = cleartext tacacs
       }
@@ -88,7 +88,7 @@ function uninstall() {
     sudo rm /etc/nginx/sites-enabled/enms.conf
   elif [ "$uninstall" = "redis" ]; then
     sudo apt-get -y remove redis-server
-  elif [ "$uninstall" = "tacacs+" ]; then
+  elif [ "$uninstall" = "tacacs" ]; then
     sudo apt-get -y remove --purge tacacs+
   elif [ "$uninstall" = "ldap" ]; then
     sudo apt-get -y remove --purge slapd ldap-utils

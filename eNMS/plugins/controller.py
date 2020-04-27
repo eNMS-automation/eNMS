@@ -21,8 +21,10 @@ class CustomController:
 
     def tacacs_authentication(self, user, name, password):
         if not hasattr(self, "tacacs_client"):
-            TACACSClient(environ.get("TACACS_ADDR"), 49, environ.get("TACACS_PASSWORD"))
-        success = self.tacacs_server.authenticate(name, password).valid
+            self.tacacs_client = TACACSClient(
+                environ.get("TACACS_ADDR"), 49, environ.get("TACACS_PASSWORD")
+            )
+        success = self.tacacs_client.authenticate(name, password).valid
         return {"group": "admin", "name": name} if success else False
 
     def process_form_data(self, **data):

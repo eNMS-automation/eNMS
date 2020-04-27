@@ -49,18 +49,13 @@ function install() {
     sudo sed -i -e 's/bind 127.0.0.1 ::1/bind 0.0.0.0 ::0/g' /etc/redis/redis.conf
   elif [ "$install" = "tacacs" ]; then
     sudo apt-get install -y tacacs+
-    user='
-      user = tacacs {
-          name = "tacacs"
-          login = cleartext tacacs
-      }
-    '
+    user='user = tacacs { login = cleartext tacacs }'
     echo "$user" | sudo tee -a /etc/tacacs+/tac_plus.conf
     sudo systemctl restart tacacs_plus
   elif [ "$install" = "ldap" ]; then
     sudo apt-get install -y slapd ldap-utils
-    sudo dpkg-reconfigure slapd
     # no, "example.com", "example", admin / admin, MDB, yes, yes
+    sudo dpkg-reconfigure slapd
     user='
       dn: uid=ldap,dc=example,dc=com
       objectClass: inetOrgPerson

@@ -1,5 +1,0 @@
-dn: uid=ldap,dc=example,dc=com
-objectClass: inetOrgPerson
-sn: ldap
-cn: ldap
-userPassword: ldap

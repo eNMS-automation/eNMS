@@ -484,7 +484,7 @@ class Server(Flask):
                     return {**app.run(service.id, **data), "errors": errors}
 
         class RunTask(Resource):
-            decorators = [self.auth.login_required, self.catch_exceptions]
+            decorators = [self.auth.login_required, self.catch_exceptions_and_commit]
 
             def post(self):
                 task_id = request.get_json()

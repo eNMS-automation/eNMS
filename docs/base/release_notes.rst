@@ -9,6 +9,7 @@ Version 3.21.4
 - Fix device results table comparison mechanism
 - Add replier option in send mail mechanism
 - Fix REST asynchronous get result not committed bug
+- Rename "app_log" option to changelog in log function for services
 
 Version 3.21.3
 --------------

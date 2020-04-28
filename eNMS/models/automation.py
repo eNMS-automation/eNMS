@@ -775,7 +775,7 @@ class Run(AbstractBase):
         return results
 
     def log(
-        self, severity, log, device=None, app_log=False, logger=None,
+        self, severity, log, device=None, changelog=False, logger=None,
     ):
         log_level = int(self.original.log_level)
         if not log_level or severity not in app.log_levels[log_level - 1 :]:
@@ -786,7 +786,7 @@ class Run(AbstractBase):
         log = f"USER {self.creator} - SERVICE {self.service.scoped_name} - {log}"
         if logger:
             getattr(getLogger(logger), severity)(log)
-        if app_log:
+        if changelog:
             app.log(severity, log, user=self.creator)
         run_log = f"{app.get_time()} - {severity} - {log}"
         app.run_logs[self.parent_runtime][self.service_id].append(run_log)

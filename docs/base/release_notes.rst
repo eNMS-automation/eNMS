@@ -7,6 +7,8 @@ Version 3.21.4
 
 - Defer loading of device configuration and operational data column
 - Fix device results table comparison mechanism
+- Add replier option in send mail mechanism
+- Fix REST asynchronous get result not committed bug
 
 Version 3.21.3
 --------------

@@ -21,7 +21,6 @@ from flask_wtf.csrf import CSRFProtect
 from functools import wraps
 from getpass import getuser
 from itertools import chain
-from logging import info, error
 from os import environ
 from re import search
 from uuid import getnode
@@ -71,7 +70,7 @@ class Server(Flask):
                     db.session.commit()
                 except Exception as exc:
                     db.session.rollback()
-                    error(format_exc())
+                    app.log("error", format_exc())
                     rest_abort(500, message=str(exc))
 
         return wrapper
@@ -200,7 +199,7 @@ class Server(Flask):
                     else:
                         abort(403)
                 except Exception as exc:
-                    info(f"Authentication failed ({str(exc)})")
+                    app.log("error", f"Authentication failed ({exc})")
                     abort(403)
             if not current_user.is_authenticated:
                 login_form = LoginForm(request.form)

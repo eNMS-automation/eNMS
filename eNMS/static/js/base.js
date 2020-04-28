@@ -447,6 +447,7 @@ export function configureForm(form, id, panelId) {
         selectedTextFormat: "count > 3",
       });
     } else if (field.type == "json") {
+      console.log(field, el[0])
       let editor = new JSONEditor(el[0]);
       if (id) {
         if (!jsonEditors[id]) jsonEditors[id] = {};

@@ -10,7 +10,9 @@
       {% for field in form %} {% set id = "{}-{}".format(form_type, field.name) if
       "filtering" in form_type else field.name %} {% set class = "form-control-bool" if
       field.type == "BooleanField" else "form-control" %} {% if field.widget.input_type
-      == 'hidden' %} {{ field() }} {% else %}
+      == 'hidden' %} {{ field() }} {% elif field.type == "JsonField" %}
+        {{ field(id=id, class="form-control {}".format(class)) }}
+      {% else %}
       <label class="control-label col-md-3 col-sm-3 col-xs-12">{{ field.label }}</label>
       <div class="col-md-9 col-sm-9 col-xs-12">
         {{ field(id=id, class="form-control {}".format(class)) }}

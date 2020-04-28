@@ -25,7 +25,7 @@ function saveSettings() {
 
 function showSettings() {
   openPanel({
-    name: "settings",
+    name: "settings_panel",
     title: "Settings",
     size: "700px 600px",
     callback: function() {

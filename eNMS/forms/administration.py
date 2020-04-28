@@ -16,7 +16,8 @@ from eNMS.forms.fields import (
 
 
 class SettingsForm(BaseForm):
-    action = "eNMS.administration.saveSettings"
+    template = "settings"
+    write_changes = BooleanField("Write changes back to 'settings.json' file")
     form_type = HiddenField(default="settings")
 
 

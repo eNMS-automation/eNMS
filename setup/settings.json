@@ -1,100 +1,98 @@
 {
-  "settings": {
-    "app": {
-      "address": "test",
-      "config_mode": "debug",
-      "create_examples": true,
-      "documentation_url": "https://enms.readthedocs.io/en/latest/",
-      "git_repository": "git@github.com:afourmy/gitpython-test.git"
+  "app": {
+    "address": "test",
+    "config_mode": "debug",
+    "create_examples": true,
+    "documentation_url": "https://enms.readthedocs.io/en/latest/",
+    "git_repository": "git@github.com:afourmy/gitpython-test.git"
+  },
+  "authentication": {
+    "database": true,
+    "ldap": true,
+    "tacacs": true
+  },
+  "cluster": {
+    "active": false,
+    "id": true,
+    "scan_protocol": "http",
+    "scan_subnet": "192.168.105.0/24",
+    "scan_timeout": 0.05
+  },
+  "database": {
+    "large_string_length": 32768,
+    "max_overflow": 10,
+    "pool_size": 1000,
+    "small_string_length": 255
+  },
+  "mail": {
+    "port": 587,
+    "reply_to": "reply_to@company.com",
+    "sender": "eNMS@company.com",
+    "server": "smtp.googlemail.com",
+    "use_tls": true,
+    "username": "eNMS-user"
+  },
+  "mattermost": {
+    "channel": "",
+    "url": "https://mattermost.company.com/hooks/i1phfh6fxjfwpy586bwqq5sk8w",
+    "verify_certificate": true
+  },
+  "paths": {
+    "custom_code": "",
+    "custom_services": "",
+    "files": "",
+    "playbooks": ""
+  },
+  "requests": {
+    "pool": {
+      "pool_block": false,
+      "pool_connections": 10,
+      "pool_maxsize": 100
     },
-    "authentication": {
-      "database": true,
-      "ldap": true,
-      "tacacs": true
-    },
-    "cluster": {
-      "active": false,
-      "id": true,
-      "scan_protocol": "http",
-      "scan_subnet": "192.168.105.0/24",
-      "scan_timeout": 0.05
-    },
-    "database": {
-      "large_string_length": 32768,
-      "max_overflow": 10,
-      "pool_size": 1000,
-      "small_string_length": 255
-    },
-    "mail": {
-      "port": 587,
-      "reply_to": "reply_to@company.com",
-      "sender": "eNMS@company.com",
-      "server": "smtp.googlemail.com",
-      "use_tls": true,
-      "username": "eNMS-user"
-    },
-    "mattermost": {
-      "channel": "",
-      "url": "https://mattermost.company.com/hooks/i1phfh6fxjfwpy586bwqq5sk8w",
-      "verify_certificate": true
-    },
-    "paths": {
-      "custom_code": "",
-      "custom_services": "",
-      "files": "",
-      "playbooks": ""
-    },
-    "requests": {
-      "pool": {
-        "pool_block": false,
-        "pool_connections": 10,
-        "pool_maxsize": 100
-      },
-      "retries": {
-        "backoff_factor": 0.5,
-        "connect": 2,
-        "read": 2,
-        "total": 2
-      }
-    },
-    "security": {
-      "forbidden_python_libraries": [
-        "eNMS",
-        "os",
-        "subprocess",
-        "sys"
-      ],
-      "hash_user_passwords": true
-    },
-    "slack": {
-      "channel": ""
-    },
-    "ssh": {
-      "bypass_key_prompt": true,
-      "enabled": {
-        "desktop": true,
-        "web": true
-      },
-      "end_port": 9100,
-      "port": -1,
-      "port_redirection": false,
-      "start_port": 9000
-    },
-    "syslog": {
-      "active": false,
-      "address": "0.0.0.0",
-      "port": 514
-    },
-    "vault": {
-      "unseal_vault": false,
-      "use_vault": false
-    },
-    "view": {
-      "latitude": 33,
-      "longitude": -96,
-      "marker": "Image",
-      "tile_layer": "osm",
-      "zoom_level": 5
+    "retries": {
+      "backoff_factor": 0.5,
+      "connect": 2,
+      "read": 2,
+      "total": 2
     }
+  },
+  "security": {
+    "forbidden_python_libraries": [
+      "eNMS",
+      "os",
+      "subprocess",
+      "sys"
+    ],
+    "hash_user_passwords": true
+  },
+  "slack": {
+    "channel": ""
+  },
+  "ssh": {
+    "bypass_key_prompt": true,
+    "enabled": {
+      "desktop": true,
+      "web": true
+    },
+    "end_port": 9100,
+    "port": -1,
+    "port_redirection": false,
+    "start_port": 9000
+  },
+  "syslog": {
+    "active": false,
+    "address": "0.0.0.0",
+    "port": 514
+  },
+  "vault": {
+    "unseal_vault": false,
+    "use_vault": false
+  },
+  "view": {
+    "latitude": 33,
+    "longitude": -96,
+    "marker": "Image",
+    "tile_layer": "osm",
+    "zoom_level": 5
   }
 }

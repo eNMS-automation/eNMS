@@ -356,6 +356,11 @@ class Server(Flask):
             )
             app.log("info", f"deleted all logs in '{log}' up until {deletion_time}")
 
+        @self.cli.command(name="pull_git", help="Updates GIT content")
+        def pull_git():
+            app.get_git_content()
+            app.log("info", f"Git content update completed.")
+
     def configure_rest_api(self):
 
         api = Api(self, decorators=[self.csrf.exempt])

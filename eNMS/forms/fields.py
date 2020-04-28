@@ -13,6 +13,7 @@ from wtforms import (
     SelectMultipleField as WtformsSelectMultipleField,
 )
 from wtforms.validators import ValidationError
+from wtforms.widgets.core import HTMLString
 
 from eNMS import app
 
@@ -122,16 +123,8 @@ class DictField(StringField):
 class JsonField(WtformsField):
     type = "json"
 
-    def __init__(self, *args, **kwargs):
-        kwargs["default"] = kwargs.get("default", "{}")
-        super().__init__(*args, **kwargs)
-
-    def pre_validate(self, form):
-        try:
-            loads(self.data)
-        except Exception:
-            raise ValidationError("Invalid json syntax.")
-        return True
+    def __call__(self, **kwargs):
+        return HTMLString(f"""<div id="{kwargs['id']}"></div>""")
 
 
 class InstanceField(SelectField):

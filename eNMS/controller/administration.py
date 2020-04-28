@@ -194,12 +194,11 @@ class AdministrationController(BaseController):
     def get_exported_services(self):
         return [f for f in listdir(self.path / "files" / "services") if ".tgz" in f]
 
-    def save_settings(self, **settings):
-        write_changes = settings.pop("save")
-        self.settings = settings
-        if write_changes:
+    def save_settings(self, **kwargs):
+        self.settings = kwargs["settings"]
+        if kwargs["save"]:
             with open(self.path / "setup" / "settings.json", "w") as file:
-                dump(settings, file, indent=2)
+                dump(kwargs["settings"], file, indent=2)
 
     def scan_cluster(self, **kwargs):
         protocol = self.settings["cluster"]["scan_protocol"]

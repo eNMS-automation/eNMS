@@ -21,7 +21,7 @@ from flask_wtf.csrf import CSRFProtect
 from functools import wraps
 from getpass import getuser
 from itertools import chain
-from logging import info
+from logging import info, error
 from os import environ
 from re import search
 from uuid import getnode
@@ -39,6 +39,7 @@ from eNMS.forms import (
 from eNMS.forms.administration import LoginForm
 from eNMS.models import models, property_types, relationships
 from eNMS.setup import properties, rbac
+from traceback import format_exc
 
 
 class Server(Flask):
@@ -56,7 +57,7 @@ class Server(Flask):
         self.configure_cli()
 
     @staticmethod
-    def catch_exceptions(func):
+    def catch_exceptions_and_commit(func):
         @wraps(func)
         def wrapper(*args, **kwargs):
             try:
@@ -65,6 +66,12 @@ class Server(Flask):
                 rest_abort(404, message=str(exc))
             except Exception as exc:
                 rest_abort(500, message=str(exc))
+            finally:
+                try:
+                    db.session.commit()
+                except Exception:
+                    db.session.rollback()
+                    error(format_exc())
 
         return wrapper
 
@@ -354,7 +361,7 @@ class Server(Flask):
         api = Api(self, decorators=[self.csrf.exempt])
 
         class CreatePool(Resource):
-            decorators = [self.auth.login_required, self.catch_exceptions]
+            decorators = [self.auth.login_required, self.catch_exceptions_and_commit]
 
             def post(self):
                 data = request.get_json(force=True)
@@ -384,7 +391,7 @@ class Server(Flask):
                 }
 
         class Query(Resource):
-            decorators = [self.auth.login_required, self.catch_exceptions]
+            decorators = [self.auth.login_required, self.catch_exceptions_and_commit]
 
             def get(self, cls):
                 results = db.fetch(cls, all_matches=True, **request.args.to_dict())
@@ -393,7 +400,7 @@ class Server(Flask):
                 ]
 
         class GetInstance(Resource):
-            decorators = [self.auth.login_required, self.catch_exceptions]
+            decorators = [self.auth.login_required, self.catch_exceptions_and_commit]
 
             def get(self, cls, name):
                 return db.fetch(cls, name=name).to_dict(
@@ -406,13 +413,13 @@ class Server(Flask):
                 return result
 
         class GetConfiguration(Resource):
-            decorators = [self.auth.login_required, self.catch_exceptions]
+            decorators = [self.auth.login_required, self.catch_exceptions_and_commit]
 
             def get(self, name):
                 return db.fetch("device", name=name).configuration
 
         class GetResult(Resource):
-            decorators = [self.auth.login_required, self.catch_exceptions]
+            decorators = [self.auth.login_required, self.catch_exceptions_and_commit]
 
             def get(self, name, runtime):
                 run = db.fetch(
@@ -431,7 +438,7 @@ class Server(Flask):
                     }
 
         class UpdateInstance(Resource):
-            decorators = [self.auth.login_required, self.catch_exceptions]
+            decorators = [self.auth.login_required, self.catch_exceptions_and_commit]
 
             def post(self, cls):
                 data = request.get_json(force=True)
@@ -441,14 +448,14 @@ class Server(Flask):
                 return result
 
         class Migrate(Resource):
-            decorators = [self.auth.login_required, self.catch_exceptions]
+            decorators = [self.auth.login_required, self.catch_exceptions_and_commit]
 
             def post(self, direction):
                 kwargs = request.get_json(force=True)
                 return getattr(app, f"migration_{direction}")(**kwargs)
 
         class RunService(Resource):
-            decorators = [self.auth.login_required, self.catch_exceptions]
+            decorators = [self.auth.login_required, self.catch_exceptions_and_commit]
 
             def post(self):
                 data = {
@@ -496,7 +503,7 @@ class Server(Flask):
                     return {**app.run(service.id, **data), "errors": errors}
 
         class Topology(Resource):
-            decorators = [self.auth.login_required, self.catch_exceptions]
+            decorators = [self.auth.login_required, self.catch_exceptions_and_commit]
 
             def post(self, direction):
                 if direction == "import":
@@ -511,7 +518,7 @@ class Server(Flask):
                     return "Topology Export successfully executed."
 
         class Search(Resource):
-            decorators = [self.auth.login_required, self.catch_exceptions]
+            decorators = [self.auth.login_required, self.catch_exceptions_and_commit]
 
             def post(self):
                 rest_body = request.get_json(force=True)
@@ -547,7 +554,10 @@ class Server(Flask):
                     endpoint,
                     (Resource,),
                     {
-                        "decorators": [self.auth.login_required, self.catch_exceptions],
+                        "decorators": [
+                            self.auth.login_required,
+                            self.catch_exceptions_and_commit,
+                        ],
                         "post": post,
                     },
                 ),

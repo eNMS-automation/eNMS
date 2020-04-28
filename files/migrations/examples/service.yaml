@@ -3745,7 +3745,6 @@
   skip_query: ''
   skip_value: 'True'
   superworkflow: 'Regression Workflow L: superworkflow'
-  superworkflow_id: 101
   time_between_retries: 10
   type: workflow
   update_pools: false
@@ -6994,7 +6993,6 @@
   skip_query: ''
   skip_value: 'True'
   superworkflow: 'Regression Workflow L: superworkflow'
-  superworkflow_id: 101
   time_between_retries: 10
   type: workflow
   update_pools: false

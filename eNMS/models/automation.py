@@ -82,6 +82,7 @@ class Service(AbstractBase):
     include_device_results = db.Column(Boolean, default=True)
     include_link_in_summary = db.Column(Boolean, default=True)
     mail_recipient = db.Column(db.SmallString)
+    reply_to = db.Column(db.SmallString)
     initial_payload = db.Column(db.Dict)
     skip = db.Column(Boolean, default=False)
     skip_query = db.Column(db.LargeString)
@@ -837,6 +838,7 @@ class Run(AbstractBase):
                     f"{status}: {self.service.name}",
                     app.str_dict(notification),
                     recipients=self.mail_recipient,
+                    reply_to=self.reply_to,
                     filename=f"results-{filename}.txt",
                     file_content=app.str_dict(file_content),
                 )

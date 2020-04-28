@@ -69,9 +69,10 @@ class Server(Flask):
             finally:
                 try:
                     db.session.commit()
-                except Exception:
+                except Exception as exc:
                     db.session.rollback()
                     error(format_exc())
+                    rest_abort(500, message=str(exc))
 
         return wrapper
 
@@ -409,7 +410,6 @@ class Server(Flask):
 
             def delete(self, cls, name):
                 result = db.delete(cls, name=name)
-                db.session.commit()
                 return result
 
         class GetConfiguration(Resource):
@@ -546,7 +546,6 @@ class Server(Flask):
 
             def post(_, ep=endpoint):
                 getattr(app, ep)()
-                db.session.commit()
                 return f"Endpoint {ep} successfully executed."
 
             api.add_resource(

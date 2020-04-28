@@ -14,7 +14,7 @@ let settingsEditor;
 function saveSettings() {
   call({
     url: "/save_settings",
-    data: settingsEditor.get(),
+    data: { settings: settingsEditor.get(), save: true },
     callback: function() {
       settings = settingsEditor.get();
       $("#settings").remove();
@@ -27,6 +27,7 @@ function showSettings() {
   openPanel({
     name: "settings",
     title: "Settings",
+    size: "700px 600px",
     callback: function() {
       settingsEditor = new JSONEditor(document.getElementById("content"), {}, settings);
     },

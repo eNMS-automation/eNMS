@@ -1,6 +1,7 @@
 from passlib.hash import argon2
 from copy import deepcopy
 from ipaddress import IPv4Network
+from json import dump
 from logging import info
 from os import listdir, makedirs, remove
 from os.path import exists, getmtime
@@ -194,7 +195,11 @@ class AdministrationController(BaseController):
         return [f for f in listdir(self.path / "files" / "services") if ".tgz" in f]
 
     def save_settings(self, **settings):
+        write_changes = settings.pop("save")
         self.settings = settings
+        if write_changes:
+            with open(self.path / "setup" / "settings.json", "w") as file:
+                dump(settings, file, indent=2)
 
     def scan_cluster(self, **kwargs):
         protocol = self.settings["cluster"]["scan_protocol"]

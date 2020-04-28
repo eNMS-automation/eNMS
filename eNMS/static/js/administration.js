@@ -6,7 +6,7 @@ Dropzone: false
 JSONEditor: false
 */
 
-import { call, configureNamespace, editors, notify, openPanel } from "./base.js";
+import { call, configureNamespace, editors, jsonEditors, notify, openPanel } from "./base.js";
 import { tables } from "./table.js";
 
 let settingsEditor;
@@ -29,7 +29,7 @@ function showSettings() {
     title: "Settings",
     size: "700px 600px",
     callback: function() {
-      settingsEditor = new JSONEditor(document.getElementById("content"), {}, settings);
+      jsonEditors.settings.set(settings);
     },
   });
 }

@@ -8,6 +8,7 @@ from eNMS.forms.fields import (
     BooleanField,
     HiddenField,
     IntegerField,
+    JsonField,
     PasswordField,
     StringField,
     SelectField,
@@ -16,7 +17,7 @@ from eNMS.forms.fields import (
 
 
 class SettingsForm(BaseForm):
-    template = "settings"
+    settings = JsonField("Settings")
     write_changes = BooleanField("Write changes back to 'settings.json' file")
     form_type = HiddenField(default="settings")
 

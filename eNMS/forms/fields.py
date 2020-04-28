@@ -2,6 +2,7 @@ from ast import literal_eval, parse
 from json import loads
 from wtforms import (
     BooleanField as WtformsBooleanField,
+    Field as WtformsField,
     FieldList as WtformsFieldList,
     FloatField as WtformsFloatField,
     HiddenField as WtformsHiddenField,
@@ -115,6 +116,21 @@ class DictField(StringField):
             raise ValidationError("This field only accepts dictionaries.")
         if app.contains_set(result):
             raise ValidationError("Sets are not allowed.")
+        return True
+
+
+class JsonField(WtformsField):
+    type = "json"
+
+    def __init__(self, *args, **kwargs):
+        kwargs["default"] = kwargs.get("default", "{}")
+        super().__init__(*args, **kwargs)
+
+    def pre_validate(self, form):
+        try:
+            loads(self.data)
+        except Exception:
+            raise ValidationError("Invalid json syntax.")
         return True
 
 

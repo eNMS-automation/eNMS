@@ -82,6 +82,7 @@ class Service(AbstractBase):
     include_device_results = db.Column(Boolean, default=True)
     include_link_in_summary = db.Column(Boolean, default=True)
     mail_recipient = db.Column(db.SmallString)
+    reply_to = db.Column(db.SmallString)
     initial_payload = db.Column(db.Dict)
     skip = db.Column(Boolean, default=False)
     skip_query = db.Column(db.LargeString)
@@ -776,7 +777,7 @@ class Run(AbstractBase):
         return results
 
     def log(
-        self, severity, log, device=None, app_log=False, logger=None,
+        self, severity, log, device=None, changelog=False, logger=None,
     ):
         log_level = int(self.original.log_level)
         if not log_level or severity not in app.log_levels[log_level - 1 :]:
@@ -787,7 +788,7 @@ class Run(AbstractBase):
         log = f"USER {self.creator} - SERVICE {self.service.scoped_name} - {log}"
         if logger:
             getattr(getLogger(logger), severity)(log)
-        if app_log:
+        if changelog:
             app.log(severity, log, user=self.creator)
         run_log = f"{app.get_time()} - {severity} - {log}"
         app.log_queue(self.parent_runtime, self.service_id, run_log)
@@ -839,6 +840,7 @@ class Run(AbstractBase):
                     f"{status}: {self.service.name}",
                     app.str_dict(notification),
                     recipients=self.mail_recipient,
+                    reply_to=self.reply_to,
                     filename=f"results-{filename}.txt",
                     file_content=app.str_dict(file_content),
                 )

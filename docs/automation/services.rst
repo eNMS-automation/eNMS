@@ -227,6 +227,7 @@ Variables
     of eNMS settings.
   - ``recipients`` (optional, type ``string``) Mail addresses of the recipients, separated by comma.
     Default to the recipients addresses of eNMS settings.
+  - ``reply_to`` (optional, type ``string``) Single mail address for replies to notifications
   - ``filename`` (optional, type ``string``) Name of the attached file.
   - ``file_content`` (optional, type ``string``) Content of the attached file.
 
@@ -237,6 +238,7 @@ Variables
         content,
         sender=sender,
         recipients=recipients,
+        reply_to=reply_to,
         filename=filename,
         file_content=file_content
     )

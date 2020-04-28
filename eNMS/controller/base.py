@@ -433,16 +433,19 @@ class BaseController:
         subject,
         content,
         recipients="",
+        reply_to=None,
         sender=None,
         filename=None,
         file_content=None,
     ):
         sender = sender or self.settings["mail"]["sender"]
+        reply_to = reply_to or self.settings["mail"]["reply_to"]
         message = MIMEMultipart()
         message["From"] = sender
         message["To"] = recipients
         message["Date"] = formatdate(localtime=True)
         message["Subject"] = subject
+        message.add_header("reply-to", reply_to)
         message.attach(MIMEText(content))
         if filename:
             attached_file = MIMEApplication(file_content, Name=filename)

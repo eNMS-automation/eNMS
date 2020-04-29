@@ -32,7 +32,7 @@ function openServicePanel() {
 }
 
 export function compare(type, instance) {
-  if (instance.type == "device" && type == "result") type = "device_result";
+  const objectType = type.includes("result") ? "result" : type;
   const v1 = $(`input[name=v1-${type}-${instance.id}]:checked`).val();
   const v2 = $(`input[name=v2-${type}-${instance.id}]:checked`).val();
   if (!v1 || !v2) {
@@ -43,7 +43,7 @@ export function compare(type, instance) {
     const cantorId = cantorPairing(parseInt(v1), parseInt(v2));
     openPanel({
       name: "compare",
-      title: `Compare ${type}`,
+      title: `Compare ${objectType}`,
       id: cantorId,
       size: "700 500",
       content: `
@@ -69,7 +69,7 @@ export function compare(type, instance) {
           width: "120px",
         });
         call({
-          url: `/compare/${type}/${instance.name}/${v1}/${v2}`,
+          url: `/compare/${objectType}/${instance.name}/${v1}/${v2}`,
           callback: (result) => {
             let diff2htmlUi = new Diff2HtmlUI({ diff: result });
             $(`#diff-type-${cantorId}`)

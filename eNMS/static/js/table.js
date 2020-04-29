@@ -803,7 +803,7 @@ tables.result = class ResultTable extends Table {
     return [
       `<button
         class="btn btn-info"
-        onclick="eNMS.automation.compare('result', ${instance})"
+        onclick="eNMS.automation.compare('${this.type}', ${instance})"
         data-tooltip="Compare"
         type="button"
       >

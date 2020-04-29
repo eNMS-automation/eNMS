@@ -182,17 +182,17 @@ function showResult(id) {
   });
 }
 
-export const showRuntimePanel = function(type, service, runtime, displayTable) {
+export const showRuntimePanel = function(type, service, runtime, tableMode) {
   const displayFunction =
     type == "logs"
       ? displayLogs
-      : service.type == "workflow" && !displayTable
+      : service.type == "workflow" && !tableMode
       ? displayResultsTree
       : displayResultsTable;
   const panelType =
     type == "logs"
       ? "logs"
-      : service.type == "workflow" && !displayTable
+      : service.type == "workflow" && !tableMode
       ? "tree"
       : "table";
   const panelId = `${panelType}-${service.id}`;
@@ -273,9 +273,9 @@ export const showRuntimePanel = function(type, service, runtime, displayTable) {
             .val(runtime)
             .selectpicker("refresh");
           $(`#runtimes-${panelId}`).on("change", function() {
-            displayFunction(service, this.value, true);
+            displayFunction(service, this.value, true, tableMode);
           });
-          displayFunction(service, runtime);
+          displayFunction(service, runtime, null, tableMode);
         },
       });
     },
@@ -361,7 +361,7 @@ function displayResultsTree(service, runtime) {
                 <button type="button"
                   class="btn btn-xs btn-primary"
                   onclick='eNMS.automation.showRuntimePanel(
-                    "results", ${data}, "${runtime}", true
+                    "results", ${data}, "${runtime}", "partial"
                   )'>
                   <span class="glyphicon glyphicon-list-alt"></span>
                 </button>
@@ -381,9 +381,10 @@ function displayResultsTree(service, runtime) {
   });
 }
 
-function displayResultsTable(service, runtime) {
+function displayResultsTable(service, runtime, _, mode) {
   // eslint-disable-next-line new-cap
-  new tables.result("result", service, runtime || currentRuntime, service.id);
+  const resultTable = mode == "full" ? "fullResult" : "result"
+  new tables[resultTable]("result", service, runtime || currentRuntime, service.id);
 }
 
 function refreshLogs(service, runtime, editor, first, wasRefreshed) {

@@ -697,7 +697,7 @@ Object.assign(action, {
   "Restart Workflow from Here": (service) =>
     showRestartWorkflowPanel(workflow, service),
   "Workflow Results Tree": () => showRuntimePanel("results", workflow),
-  "Workflow Results Table": () => showRuntimePanel("results", workflow, null, "full"),
+  "Workflow Results Table": () => showRuntimePanel("results", workflow, null, "full_result"),
   "Workflow Logs": () => showRuntimePanel("logs", workflow),
   "Add to Workflow": addServicePanel,
   "Stop Workflow": () => stopWorkflow(),

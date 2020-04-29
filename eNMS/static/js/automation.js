@@ -182,17 +182,17 @@ function showResult(id) {
   });
 }
 
-export const showRuntimePanel = function(type, service, runtime, tableMode) {
+export const showRuntimePanel = function(type, service, runtime, table) {
   const displayFunction =
     type == "logs"
       ? displayLogs
-      : service.type == "workflow" && !tableMode
+      : service.type == "workflow" && !table
       ? displayResultsTree
       : displayResultsTable;
   const panelType =
     type == "logs"
       ? "logs"
-      : service.type == "workflow" && !tableMode
+      : service.type == "workflow" && !table
       ? "tree"
       : "table";
   const panelId = `${panelType}-${service.id}`;
@@ -230,17 +230,17 @@ export const showRuntimePanel = function(type, service, runtime, tableMode) {
         <div class="modal-body">
           <div id="tooltip-overlay" class="overlay"></div>
           <form
-            id="search-form-result-${service.id}"
+            id="search-form-${table}-${service.id}"
             class="form-horizontal form-label-left"
             method="post"
           >
             <nav
-              id="controls-result-${service.id}"
+              id="controls-${table}-${service.id}"
               class="navbar navbar-default nav-controls"
               role="navigation"
             ></nav>
             <table
-              id="table-result-${service.id}"
+              id="table-${table}-${service.id}"
               class="table table-striped table-bordered table-hover"
               cellspacing="0"
               width="100%"
@@ -273,9 +273,9 @@ export const showRuntimePanel = function(type, service, runtime, tableMode) {
             .val(runtime)
             .selectpicker("refresh");
           $(`#runtimes-${panelId}`).on("change", function() {
-            displayFunction(service, this.value, true, tableMode);
+            displayFunction(service, this.value, true, table);
           });
-          displayFunction(service, runtime, null, tableMode);
+          displayFunction(service, runtime, null, table);
         },
       });
     },
@@ -361,7 +361,7 @@ function displayResultsTree(service, runtime) {
                 <button type="button"
                   class="btn btn-xs btn-primary"
                   onclick='eNMS.automation.showRuntimePanel(
-                    "results", ${data}, "${runtime}", "partial"
+                    "results", ${data}, "${runtime}", "result"
                   )'>
                   <span class="glyphicon glyphicon-list-alt"></span>
                 </button>
@@ -381,10 +381,9 @@ function displayResultsTree(service, runtime) {
   });
 }
 
-function displayResultsTable(service, runtime, _, mode) {
+function displayResultsTable(service, runtime, _, table) {
   // eslint-disable-next-line new-cap
-  const resultTable = mode == "full" ? "full_result" : "result"
-  new tables[resultTable]("result", service, runtime || currentRuntime, service.id);
+  new tables[table](table, service, runtime || currentRuntime, service.id);
 }
 
 function refreshLogs(service, runtime, editor, first, wasRefreshed) {

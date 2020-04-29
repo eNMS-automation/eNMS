@@ -238,12 +238,14 @@ class Result(AbstractBase):
 
     @classmethod
     def filtering_constraints(cls, **kwargs):
-        constraints = [
-            getattr(
-                models["result"],
-                "device" if kwargs["instance"]["type"] == "device" else "service",
-            ).has(id=kwargs["instance"]["id"])
-        ]
+        constraints = []
+        if not kwargs.get("full_result"):
+            constraints.append(
+                getattr(
+                    models["result"],
+                    "device" if kwargs["instance"]["type"] == "device" else "service",
+                ).has(id=kwargs["instance"]["id"])
+            )
         if kwargs.get("runtime"):
             constraints.append(models["result"].parent_runtime == kwargs["runtime"])
         return constraints

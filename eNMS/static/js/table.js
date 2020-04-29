@@ -126,6 +126,7 @@ export class Table {
             type: this.type,
             export: self.csvExport,
           });
+          Object.assign(d, self.filteringData)
           if (this.runtime) {
             d.runtime = $(`#runtimes-${this.instance.id}`).val() || this.runtime;
           }
@@ -836,6 +837,17 @@ tables.result = class ResultTable extends Table {
       </li>
     </ul>`,
     ];
+  }
+};
+
+tables.full_result = class FullResultTable extends tables.result {
+
+  get filteringData() {
+    return {"full_result": true};
+  }
+
+  get modelFiltering() {
+    return "result";
   }
 };
 

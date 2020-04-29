@@ -383,7 +383,7 @@ function displayResultsTree(service, runtime) {
 
 function displayResultsTable(service, runtime, _, mode) {
   // eslint-disable-next-line new-cap
-  const resultTable = mode == "full" ? "fullResult" : "result"
+  const resultTable = mode == "full" ? "full_result" : "result"
   new tables[resultTable]("result", service, runtime || currentRuntime, service.id);
 }
 

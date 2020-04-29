@@ -162,6 +162,9 @@ class Task(AbstractBase):
         if not app.scheduler.get_job(self.aps_job_id):
             app.scheduler.add_job(**{**default, **trigger})
         else:
+            app.scheduler.modify_job(
+                default["id"], args=default["args"], kwargs=default["kwargs"]
+            )
             app.scheduler.reschedule_job(default.pop("id"), **trigger)
 
 

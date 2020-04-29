@@ -190,11 +190,7 @@ export const showRuntimePanel = function(type, service, runtime, table) {
       ? displayResultsTree
       : displayResultsTable;
   const panelType =
-    type == "logs"
-      ? "logs"
-      : service.type == "workflow" && !table
-      ? "tree"
-      : "table";
+    type == "logs" ? "logs" : service.type == "workflow" && !table ? "tree" : "table";
   const panelId = `${panelType}-${service.id}`;
   call({
     url: `/get_runtimes/${type}/${service.id}`,

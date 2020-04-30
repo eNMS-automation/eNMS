@@ -37,14 +37,15 @@ class User(AbstractBase, UserMixin):
     def update(self, **kwargs):
         if app.settings["security"]["hash_user_passwords"] and "password" in kwargs:
             kwargs["password"] = argon2.hash(kwargs["password"])
-        self.rbac = self.get_user_rbac()
         super().update(**kwargs)
+        self.rbac = self.compute_rbac()
 
-    def get_rbac(self):
+    def compute_rbac(self):
         rbac = defaultdict(list)
         for group in self.groups:
             for access, forbidden_list in app.rbac["groups"][group].items():
                 rbac[access].extend(forbidden_list)
+        return rbac
 
 
 @db.set_custom_properties

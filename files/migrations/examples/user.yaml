@@ -1,6 +1,5 @@
 - email: admin@admin.com
-  group: Admin
-  name: admin
-  permissions: [Admin]
+  groups: [Admin]
+  name: admin 
   small_menu: false
   type: user

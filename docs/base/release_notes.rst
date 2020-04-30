@@ -42,6 +42,10 @@ after:
       "post": []
     },
 
+Update migration files (user.yaml):
+
+group: Admin -> groups: [Admin]
+
 Version 3.21.3
 --------------
 

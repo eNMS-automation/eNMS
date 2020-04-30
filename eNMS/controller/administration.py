@@ -33,6 +33,8 @@ class AdministrationController(BaseController):
             return False
         if kwargs["authentication_method"] == "Local User":
             user = db.fetch("user", allow_none=True, name=name)
+            if not user:
+                return False
             hash = self.settings["security"]["hash_user_passwords"]
             verify = argon2.verify if hash else str.__eq__
             user_password = self.get_password(user.password)

@@ -203,7 +203,7 @@ class Server(Flask):
                 except Exception as exc:
                     success, log = False, f"Authentication error ({exc})"
                 finally:
-                    app.log("info" if success else "error", log, logger="security")
+                    app.log("info" if success else "warning", log, logger="security")
                     if success:
                         return redirect(url_for("blueprint.route", page="dashboard"))
                     else:

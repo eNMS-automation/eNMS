@@ -101,5 +101,17 @@
     "zoom_level": 5,
     "tile_layer": "osm",
     "marker": "Image"
+  },
+  "logging": {
+    "loggers": {
+      "security": {
+        "changelog": true,
+        "service_log": true
+      }
+    },
+    "external_loggers": {
+      "requests": "info",
+      "urllib3": "info"
+    }
   }
 }

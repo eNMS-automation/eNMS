@@ -106,7 +106,7 @@
         <div class="menu_section">
           <ul class="nav side-menu">
             {% for label, category in menu.items() %} {% if label not in
-            rbac["menu"]["category"] %}
+            rbac["category"] %}
             <li>
               <a
                 ><i class="fa fa-{{ category['icon'] }}"></i>{{ label }}
@@ -114,12 +114,12 @@
               </a>
               <ul class="nav child_menu">
                 {% for page, data in category["pages"].items() %} {% if page not in
-                rbac["menu"]["page"] %} {% if data is mapping %}
+                rbac["page"] %} {% if data is mapping %}
                 <li>
                   <a>{{ page }}<span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
                     {% for subpage, url in data.items() %} {% if subpage not in
-                    rbac["menu"]["page"] %}
+                    rbac["page"] %}
                     <li><a href="{{ url }}">{{ subpage }}</a></li>
                     {% endif %} {% endfor %}
                   </ul>
@@ -200,7 +200,7 @@
                     &nbsp;Docs
                   </a>
                 </li>
-                {% if "Files" not in rbac["menu"]["bar"] %}
+                {% if "Files" not in rbac["bar"] %}
                 <li class="nav-item">
                   <a
                     onclick="eNMS.administration.displayFiles()"
@@ -214,7 +214,7 @@
                     &nbsp;Files
                   </a>
                 </li>
-                {% endif %} {% if "Settings" not in rbac["menu"]["bar"] %}
+                {% endif %} {% if "Settings" not in rbac["bar"] %}
                 <li class="nav-item">
                   <a
                     onclick="eNMS.administration.showSettings()"
@@ -228,7 +228,7 @@
                     &nbsp;Settings
                   </a>
                 </li>
-                {% endif %} {% if "Admin" not in rbac["menu"]["bar"] %}
+                {% endif %} {% if "Admin" not in rbac["bar"] %}
                 <li class="nav-item">
                   <a
                     onclick="eNMS.base.openPanel({

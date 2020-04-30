@@ -137,7 +137,7 @@ class Server(Flask):
                 "form_properties": form_properties,
                 "menu": rbac["menu"],
                 "names": app.property_names,
-                "rbac": rbac["groups"][getattr(current_user, "group", "Read Only")],
+                "rbac": current_user.rbac,
                 "relations": list(set(chain.from_iterable(relationships.values()))),
                 "relationships": relationships,
                 "service_types": {

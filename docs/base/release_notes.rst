@@ -10,6 +10,11 @@ Version 3.21.4
 - Add replier option in send mail mechanism
 - Fix REST asynchronous get result not committed bug
 - Rename "app_log" option to changelog in log function for services
+- Fix comparison of device results
+- Add new entry in workflow RC menu "Workflow Results Table": contains all results for a given runtime,
+allowing for comparison of results same device / different service, same service / different device, etc.
+- Refactor logging mechanism. In settings.json, add new logging sections to configure whether the log
+for a given logger should also be logged as changelog or service log by default.
 
 Version 3.21.3
 --------------

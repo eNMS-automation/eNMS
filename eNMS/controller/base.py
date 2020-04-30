@@ -298,9 +298,9 @@ class BaseController:
             return {"alert": str(exc)}
 
     def log(self, severity, content, user=None, changelog=True, logger="root"):
+        logger_settings = self.settings["logging"]["loggers"].get(logger)
         if logger:
-            getattr(getLogger(logger), severity)(log)
-            logger_settings = self.settings["logging"]["loggers"].get(logger)
+            getattr(getLogger(logger), severity)(content)
         if changelog or logger and logger_settings.get("changelog"):
             db.factory(
                 "changelog",

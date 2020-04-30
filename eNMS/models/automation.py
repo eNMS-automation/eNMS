@@ -799,7 +799,9 @@ class Run(AbstractBase):
             run_log = f"{app.get_time()} - {severity} - {log}"
             app.run_logs[self.parent_runtime][self.service_id].append(run_log)
             if self.runtime != self.parent_runtime:
-                app.run_logs[self.parent_runtime][self.original.service_id].append(run_log)
+                app.run_logs[self.parent_runtime][self.original.service_id].append(
+                    run_log
+                )
 
     def build_notification(self, results):
         notification = {

@@ -191,17 +191,17 @@ class Server(Flask):
         @blueprint.route("/login", methods=["GET", "POST"])
         def login():
             if request.method == "POST":
-                kwargs = request.form.to_dict()
+                kwargs, success = request.form.to_dict(), False
                 username = kwargs["name"]
                 try:
                     user = app.authenticate_user(**kwargs)
                     if user:
                         login_user(user)
-                        success, log = True, f"User {username} logged in"
+                        success, log = True, f"User '{username}' logged in"
                     else:
-                        success, log = False, f"Authentication failed for {username}"
+                        log = f"Authentication failed for user '{username}''"
                 except Exception as exc:
-                    success, log = False, f"Authentication error ({exc})"
+                    log = f"Authentication error for user '{username}' ({exc})"
                 finally:
                     app.log("info" if success else "warning", log, logger="security")
                     if success:
@@ -231,6 +231,7 @@ class Server(Flask):
         @blueprint.route("/logout")
         @self.monitor_requests
         def logout():
+            app.log("info", f"User '{current_user.name}'' logging out", logger="security")
             logout_user()
             return redirect(url_for("blueprint.route", page="login"))
 

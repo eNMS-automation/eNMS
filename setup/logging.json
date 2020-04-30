@@ -40,8 +40,16 @@
       "level": "DEBUG"
     }
   },
-  "external_loggers": {
-    "requests": "info",
-    "urllib3": "info"
+  "eNMS": {
+    "loggers": {
+      "security": {
+        "changelog": true,
+        "service_log": true
+      }
+    },
+    "external_loggers": {
+      "requests": "info",
+      "urllib3": "info"
+    }
   }
 }

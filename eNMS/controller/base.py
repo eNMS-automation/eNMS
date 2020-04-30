@@ -189,7 +189,7 @@ class BaseController:
         with open(self.path / "setup" / "logging.json", "r") as logging_config:
             logging_config = load(logging_config)
         dictConfig(logging_config)
-        for logger, log_level in logging_config["external_loggers"].items():
+        for logger, log_level in logging_config["eNMS"]["external_loggers"].items():
             info(f"Changing {logger} log level to '{log_level}'")
             log_level = getattr(import_module("logging"), log_level.upper())
             getLogger(logger).setLevel(log_level)

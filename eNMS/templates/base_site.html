@@ -105,7 +105,7 @@
       <div id="sidebar-menu" class="hidden-print main_menu">
         <div class="menu_section">
           <ul class="nav side-menu">
-            {% for label, category in menu.items() %} {% if label not in
+            {% for label, category in menu.items() %} {% if label in
             rbac["category"] %}
             <li>
               <a
@@ -113,12 +113,12 @@
                 <span class="fa fa-chevron-down"></span>
               </a>
               <ul class="nav child_menu">
-                {% for page, data in category["pages"].items() %} {% if page not in
+                {% for page, data in category["pages"].items() %} {% if page in
                 rbac["page"] %} {% if data is mapping %}
                 <li>
                   <a>{{ page }}<span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
-                    {% for subpage, url in data.items() %} {% if subpage not in
+                    {% for subpage, url in data.items() %} {% if subpage in
                     rbac["page"] %}
                     <li><a href="{{ url }}">{{ subpage }}</a></li>
                     {% endif %} {% endfor %}

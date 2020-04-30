@@ -43,8 +43,8 @@ class User(AbstractBase, UserMixin):
     def compute_rbac(self):
         rbac = defaultdict(list)
         for group in self.groups:
-            for access, forbidden_list in app.rbac["groups"][group].items():
-                rbac[access].extend(forbidden_list)
+            for access, allowed_list in app.rbac["groups"][group].items():
+                rbac[access].extend(allowed_list)
         return rbac
 
 

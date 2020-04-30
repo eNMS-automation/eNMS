@@ -218,7 +218,11 @@
     "Admin": {
       "bar": ["Admin", "Settings", "Files"],
       "category": ["Home", "Admin", "Inventory", "Visualization", "Automation", "Scheduling", "Plugins"],
-      "page": [],
+      "page": [
+        "Dashboard",
+        "Changelog",
+        "Sessions"
+      ],
       "get": [
         "/dashboard",
         "/download_file",

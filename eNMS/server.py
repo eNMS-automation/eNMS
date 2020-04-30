@@ -132,6 +132,7 @@ class Server(Flask):
     def configure_context_processor(self):
         @self.context_processor
         def inject_properties():
+            print(current_user.rbac)
             return {
                 "property_types": property_types,
                 "form_properties": form_properties,
@@ -294,7 +295,7 @@ class Server(Flask):
             endpoint, *args = page.split("/")
             if f"/{endpoint}" not in app.rbac["endpoints"]["POST"]:
                 return jsonify({"alert": "Invalid POST request."})
-            if f"/{endpoint}" not in current_user.rbac("post"):
+            if f"/{endpoint}" not in current_user.rbac["post"]:
                 return jsonify({"alert": "Error 403 Forbidden."})
             form_type = request.form.get("form_type")
             if endpoint in app.json_endpoints:

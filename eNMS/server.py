@@ -92,7 +92,7 @@ class Server(Flask):
                 )
                 return redirect(url_for("blueprint.route", page="login"))
             else:
-                if request.method == "GET" and request.path in current_user.rbac["get"]:
+                if request.method == "GET" and request.path not in current_user.rbac["get"]:
                     return render_template("error.html", error=403), 403
                 return function(*args, **kwargs)
 
@@ -137,7 +137,7 @@ class Server(Flask):
                 "form_properties": form_properties,
                 "menu": rbac["menu"],
                 "names": app.property_names,
-                "rbac": current_user.rbac,
+                "rbac": getattr(current_user, "rbac", None),
                 "relations": list(set(chain.from_iterable(relationships.values()))),
                 "relationships": relationships,
                 "service_types": {
@@ -294,7 +294,7 @@ class Server(Flask):
             endpoint, *args = page.split("/")
             if f"/{endpoint}" not in app.rbac["endpoints"]["POST"]:
                 return jsonify({"alert": "Invalid POST request."})
-            if f"/{endpoint}" in current_user.rbac["post"]:
+            if f"/{endpoint}" not in current_user.rbac("post"):
                 return jsonify({"alert": "Error 403 Forbidden."})
             form_type = request.form.get("form_type")
             if endpoint in app.json_endpoints:

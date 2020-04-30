@@ -216,22 +216,18 @@
   },
   "groups": {
     "Admin": {
-      "menu": {
-        "bar": [],
-        "category": [],
-        "page": []
-      },
-      "GET": [],
-      "POST": []
+      "bar": [],
+      "category": [],
+      "page": [],
+      "get": [],
+      "post": []
     },
     "Read Only": {
-      "menu": {
-        "bar": ["Admin", "Settings", "Files"],
-        "category": ["Admin"],
-        "page": ["Events"]
-      },
-      "GET": [],
-      "POST": [
+      "bar": ["Admin", "Settings", "Files"],
+      "category": ["Admin"],
+      "page": ["Events"],
+      "get": [],
+      "post": [
         "/add_edge",
         "/add_service_to_workflow",
         "/copy_service_in_workflow",

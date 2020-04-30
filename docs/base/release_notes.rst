@@ -16,6 +16,32 @@ allowing for comparison of results same device / different service, same service
 - Refactor logging mechanism. In settings.json, add new logging sections to configure whether the log
 for a given logger should also be logged as changelog or service log by default.
 
+RBAC:
+
+Change of format in rbac.json
+
+before:
+
+    "Admin": {
+      "menu": {
+        "bar": [],
+        "category": [],
+        "page": []
+      },
+      "GET": [],
+      "POST": []
+    },
+
+after:
+
+    "Admin": {
+      "bar": [],
+      "category": [],
+      "page": [],
+      "get": [],
+      "post": []
+    },
+
 Version 3.21.3
 --------------
 

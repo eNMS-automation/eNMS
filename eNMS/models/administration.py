@@ -1,5 +1,7 @@
+from collections import defaultdict
 from datetime import datetime
 from flask_login import UserMixin
+from itertools import chain
 from passlib.hash import argon2
 from sqlalchemy import Boolean, Integer
 
@@ -27,22 +29,22 @@ class User(AbstractBase, UserMixin):
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.SmallString, unique=True)
     email = db.Column(db.SmallString)
-    permissions = db.Column(db.List)
     password = db.Column(db.SmallString)
-    group = db.Column(db.SmallString)
+    groups = db.Column(db.List)
+    rbac = db.Column(db.Dict)
     small_menu = db.Column(Boolean, default=False, info={"dont_track_changes": True})
 
     def update(self, **kwargs):
         if app.settings["security"]["hash_user_passwords"] and "password" in kwargs:
             kwargs["password"] = argon2.hash(kwargs["password"])
+        self.rbac = self.get_user_rbac()
         super().update(**kwargs)
 
-    @property
-    def is_admin(self):
-        return "Admin" in self.permissions
-
-    def allowed(self, permission):
-        return self.is_admin or permission in self.permissions
+    def get_rbac(self):
+        rbac = defaultdict(list)
+        for group in self.groups:
+            for access, forbidden_list in app.rbac["groups"][group].items():
+                rbac[access].extend(forbidden_list)
 
 
 @db.set_custom_properties

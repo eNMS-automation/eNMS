@@ -17,7 +17,7 @@ class MailNotificationService(Service):
     sender = db.Column(db.SmallString)
     recipients = db.Column(db.SmallString)
     replier = db.Column(db.SmallString, default="")
-    body = db.Column(db.LargeString, default="")
+    body = db.Column(db.LargeString)
 
     __mapper_args__ = {"polymorphic_identity": "mail_notification_service"}
 

@@ -22,7 +22,7 @@ class SlackNotificationService(Service):
     id = db.Column(Integer, ForeignKey("service.id"), primary_key=True)
     channel = db.Column(db.SmallString)
     token = db.Column(db.SmallString)
-    body = db.Column(db.LargeString, default="")
+    body = db.Column(db.LargeString)
 
     __mapper_args__ = {"polymorphic_identity": "slack_notification_service"}
 

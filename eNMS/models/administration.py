@@ -53,7 +53,7 @@ class Changelog(AbstractBase):
     __mapper_args__ = {"polymorphic_identity": "changelog", "polymorphic_on": type}
     id = db.Column(Integer, primary_key=True)
     time = db.Column(db.SmallString)
-    content = db.Column(db.LargeString, default="")
+    content = db.Column(db.LargeString)
     severity = db.Column(db.SmallString, default="debug")
     user = db.Column(db.SmallString, default="admin")
 

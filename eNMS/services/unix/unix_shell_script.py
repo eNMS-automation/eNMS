@@ -21,7 +21,7 @@ class UnixShellScriptService(ConnectionService):
     pretty_name = "Unix Shell"
     parent_type = "connection_service"
     id = db.Column(Integer, ForeignKey("connection_service.id"), primary_key=True)
-    source_code = db.Column(db.LargeString, default="")
+    source_code = db.Column(db.LargeString)
     enable_mode = db.Column(Boolean, default=False)
     config_mode = db.Column(Boolean, default=False)
     driver = db.Column(db.SmallString)

@@ -221,7 +221,23 @@
       "page": [
         "Dashboard",
         "Changelog",
-        "Sessions"
+        "Sessions",
+        "Users",
+        "Servers",
+        "Devices",
+        "Configurations",
+        "Links",
+        "Pools",
+        "Network",
+        "Sites",
+        "Services",
+        "Workflow Builder",
+        "Results",
+        "Tasks",
+        "Events",
+        "Plugin 1",
+        "Submenu",
+        "Plugin 2"
       ],
       "get": [
         "/dashboard",

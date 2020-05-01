@@ -132,7 +132,6 @@ class Server(Flask):
     def configure_context_processor(self):
         @self.context_processor
         def inject_properties():
-            print(current_user.rbac)
             return {
                 "property_types": property_types,
                 "form_properties": form_properties,

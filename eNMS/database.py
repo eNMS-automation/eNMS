@@ -76,6 +76,7 @@ class Database:
 
     import_classes = [
         "user",
+        "group",
         "device",
         "link",
         "pool",

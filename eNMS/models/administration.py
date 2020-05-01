@@ -34,6 +34,9 @@ class User(AbstractBase, UserMixin):
     groups = db.Column(db.List)
     rbac = db.Column(db.Dict)
     small_menu = db.Column(Boolean, default=False, info={"dont_track_changes": True})
+    groups = relationship(
+        "Group", secondary=db.user_group_table, back_populates="users"
+    )
 
     def update(self, **kwargs):
         if app.settings["security"]["hash_user_passwords"] and "password" in kwargs:
@@ -47,6 +50,23 @@ class User(AbstractBase, UserMixin):
             for access, allowed_list in app.rbac["groups"][group].items():
                 rbac[access].extend(allowed_list)
         return rbac
+
+
+@db.set_custom_properties
+class Group(AbstractBase):
+
+    __tablename__ = type = "group"
+    id = db.Column(Integer, primary_key=True)
+    name = db.Column(db.SmallString, unique=True)
+    email = db.Column(db.SmallString)
+    rbac = db.Column(db.Dict)
+    users = relationship(
+        "User", secondary=db.user_group_table, back_populates="groups"
+    )
+
+    def update(self, **kwargs):
+        super().update(**kwargs)
+        self.rbac = self.compute_rbac()
 
 
 @db.set_custom_properties
@@ -64,17 +84,3 @@ class Changelog(AbstractBase):
     def update(self, **kwargs):
         kwargs["time"] = str(datetime.now())
         super().update(**kwargs)
-
-
-@db.set_custom_properties
-class Group(AbstractBase):
-
-    __tablename__ = type = "group"
-    id = db.Column(Integer, primary_key=True)
-    name = db.Column(db.SmallString, unique=True)
-    email = db.Column(db.SmallString)
-    rbac = db.Column(db.Dict)
-
-    def update(self, **kwargs):
-        super().update(**kwargs)
-        self.rbac = self.compute_rbac()

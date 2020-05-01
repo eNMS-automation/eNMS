@@ -109,6 +109,7 @@ class GroupForm(BaseForm):
     form_type = HiddenField(default="group")
     id = HiddenField()
     name = StringField("Name", [InputRequired()])
+    rbac = JsonField("Settings")
     email = StringField("Email")
 
 

@@ -216,8 +216,20 @@
   },
   "groups": {
     "Admin": {
-      "bar": ["Admin", "Settings", "Files"],
-      "category": ["Home", "Admin", "Inventory", "Visualization", "Automation", "Scheduling", "Plugins"],
+      "bar": [
+        "Admin",
+        "Settings",
+        "Files"
+      ],
+      "category": [
+        "Home",
+        "Admin",
+        "Inventory",
+        "Visualization",
+        "Automation",
+        "Scheduling",
+        "Plugins"
+      ],
       "page": [
         "Dashboard",
         "Changelog",
@@ -239,7 +251,7 @@
         "Submenu",
         "Plugin 2"
       ],
-      "get": [
+      "GET": [
         "/dashboard",
         "/download_file",
         "/form/add_services",
@@ -320,7 +332,7 @@
         "/view_service_results",
         "/workflow_builder"
       ],
-      "post": [
+      "POST": [
         "/add_edge",
         "/add_service_to_workflow",
         "/copy_service_in_workflow",
@@ -398,9 +410,17 @@
     },
     "Read Only": {
       "bar": [],
-      "category": ["Home", "Admin", "Inventory", "Visualization", "Automation", "Scheduling", "Plugins"],
+      "category": [
+        "Home",
+        "Admin",
+        "Inventory",
+        "Visualization",
+        "Automation",
+        "Scheduling",
+        "Plugins"
+      ],
       "page": ["Events"],
-      "get": [
+      "GET": [
         "/dashboard",
         "/download_file",
         "/form/add_services",
@@ -472,7 +492,7 @@
         "/view_service_results",
         "/workflow_builder"
       ],
-      "post": [
+      "POST": [
         "/calendar_init",
         "/compare",
         "/counters",

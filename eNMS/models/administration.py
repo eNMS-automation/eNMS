@@ -39,6 +39,7 @@ class User(AbstractBase, UserMixin):
             kwargs["password"] = argon2.hash(kwargs["password"])
         super().update(**kwargs)
         self.rbac = self.compute_rbac()
+        print(self.rbac)
 
     def compute_rbac(self):
         rbac = defaultdict(list)

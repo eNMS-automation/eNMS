@@ -99,7 +99,8 @@ class UserForm(BaseForm):
     name = StringField("Name", [InputRequired()])
     password = PasswordField("Password")
     email = StringField("Email")
-    groups = SelectMultipleField("Permissions", choices=[(g, g) for g in app.rbac["groups"]])
+    group_choices = [(group, group) for group in app.rbac["groups"]]
+    groups = SelectMultipleField("Groups",  [InputRequired()], choices=group_choices)
 
 
 class ChangelogForm(BaseForm):

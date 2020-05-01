@@ -4,6 +4,7 @@ from flask_login import UserMixin
 from itertools import chain
 from passlib.hash import argon2
 from sqlalchemy import Boolean, Integer
+from sqlalchemy.orm import relationship
 
 from eNMS import app
 from eNMS.database import db
@@ -47,7 +48,7 @@ class User(AbstractBase, UserMixin):
     def compute_rbac(self):
         rbac = defaultdict(list)
         for group in self.groups:
-            for access, allowed_list in app.rbac["groups"][group].items():
+            for access, allowed_list in group.rbac.items():
                 rbac[access].extend(allowed_list)
         return rbac
 
@@ -63,10 +64,6 @@ class Group(AbstractBase):
     users = relationship(
         "User", secondary=db.user_group_table, back_populates="groups"
     )
-
-    def update(self, **kwargs):
-        super().update(**kwargs)
-        self.rbac = self.compute_rbac()
 
 
 @db.set_custom_properties

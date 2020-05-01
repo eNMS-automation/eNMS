@@ -17,9 +17,9 @@ from eNMS.forms.fields import (
 
 
 class SettingsForm(BaseForm):
+    form_type = HiddenField(default="settings_panel")
     settings = JsonField("Settings")
     write_changes = BooleanField("Write changes back to 'settings.json' file")
-    form_type = HiddenField(default="settings_panel")
 
 
 class AdminForm(BaseForm):
@@ -109,7 +109,7 @@ class GroupForm(BaseForm):
     form_type = HiddenField(default="group")
     id = HiddenField()
     name = StringField("Name", [InputRequired()])
-    rbac = JsonField("Settings")
+    rbac = JsonField("RBAC")
     email = StringField("Email")
 
 

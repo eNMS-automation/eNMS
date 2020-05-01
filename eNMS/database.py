@@ -260,6 +260,7 @@ class Database:
 
     def configure_associations(self):
         for model1, model2 in (
+            ("user", "group"),
             ("service", "device"),
             ("service", "pool"),
             ("run", "device"),

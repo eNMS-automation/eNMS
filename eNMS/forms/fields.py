@@ -13,6 +13,7 @@ from wtforms import (
     SelectMultipleField as WtformsSelectMultipleField,
 )
 from wtforms.validators import ValidationError
+from wtforms.widgets import html_params
 from wtforms.widgets.core import HTMLString
 
 from eNMS import app
@@ -124,7 +125,8 @@ class JsonField(WtformsField):
     type = "json"
 
     def __call__(self, **kwargs):
-        return HTMLString(f"""<div id="{kwargs['id']}"></div>""")
+        html_kwargs = {"id": kwargs["id"], "class_": "add-id"}
+        return HTMLString(f"<div {html_params(**html_kwargs)}></div>")
 
 
 class InstanceField(SelectField):

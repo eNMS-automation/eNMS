@@ -592,7 +592,9 @@ function updateProperty(instance, el, property, value, type) {
       .trigger("change");
   } else if (propertyType == "json") {
     const editor = jsonEditors[instance.id][property];
-    if (editor) editor.set(value);
+    if (editor) {
+      editor.set(value);
+    }
   } else if (propertyType == "code") {
     const editor = editors[instance.id][property];
     if (editor) editor.setValue(value);

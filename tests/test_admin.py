@@ -5,7 +5,7 @@ from tests.conftest import check_pages
 
 
 def test_authentication(base_client):
-    for page in app.rbac["endpoints"]["GET"]:
+    for page in app.rbac["get_requests"]:
         r = base_client.get(page)
         if page == "/login":
             assert r.status_code == 200
@@ -14,7 +14,7 @@ def test_authentication(base_client):
 
 
 def test_urls(user_client):
-    for page in app.rbac["endpoints"]["GET"]:
+    for page in app.rbac["get_requests"]:
         if "download" in page:
             continue
         r = user_client.get(page, follow_redirects=True)

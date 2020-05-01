@@ -14,6 +14,7 @@ from eNMS.forms.fields import (
     SelectField,
     SelectMultipleField,
 )
+from eNMS.setup import rbac
 
 
 class SettingsForm(BaseForm):
@@ -109,7 +110,11 @@ class GroupForm(BaseForm):
     form_type = HiddenField(default="group")
     id = HiddenField()
     name = StringField("Name", [InputRequired()])
-    rbac = JsonField("RBAC")
+    menu = SelectMultipleField("Menu", choices=list(rbac["menu"]))
+    pages = SelectMultipleField("Pages", choices=())
+    upper_menu = SelectMultipleField("Upper Menu", choices=())
+    get_requests = SelectMultipleField("GET requests", choices=())
+    post_request = SelectMultipleField("POST requests", choices=())
     email = StringField("Email")
 
 

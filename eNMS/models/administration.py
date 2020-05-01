@@ -48,8 +48,8 @@ class User(AbstractBase, UserMixin):
     def compute_rbac(self):
         rbac = defaultdict(list)
         for group in self.groups:
-            for access, allowed_list in group.rbac.items():
-                rbac[access].extend(allowed_list)
+            for access in app.rbac:
+                rbac[access].extend(getattr(group, access))
         return rbac
 
 
@@ -60,7 +60,11 @@ class Group(AbstractBase):
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.SmallString, unique=True)
     email = db.Column(db.SmallString)
-    rbac = db.Column(db.Dict)
+    menu = db.Column(db.List)
+    pages = db.Column(db.List)
+    upper_menu = db.Column(db.List)
+    get_requests = db.Column(db.List)
+    post_request = db.Column(db.List)
     users = relationship(
         "User", secondary=db.user_group_table, back_populates="groups"
     )

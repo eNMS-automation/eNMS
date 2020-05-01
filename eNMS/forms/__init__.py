@@ -113,6 +113,10 @@ def form_postprocessing(form, form_data):
     return data
 
 
+def choices(iterable):
+    return [(choice, choice) for choice in iterable]
+
+
 def configure_relationships(cls):
     form_type = cls.form_type.kwargs["default"]
     for related_model, relation in relationships[form_type].items():

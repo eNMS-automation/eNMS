@@ -3,7 +3,7 @@ from wtforms.widgets import TextArea
 
 from eNMS import app
 from eNMS.database import db
-from eNMS.forms import BaseForm, configure_relationships
+from eNMS.forms import BaseForm, choices, configure_relationships
 from eNMS.forms.fields import (
     BooleanField,
     HiddenField,
@@ -110,11 +110,11 @@ class GroupForm(BaseForm):
     form_type = HiddenField(default="group")
     id = HiddenField()
     name = StringField("Name", [InputRequired()])
-    menu = SelectMultipleField("Menu", choices=list(rbac["menu"]))
-    pages = SelectMultipleField("Pages", choices=())
-    upper_menu = SelectMultipleField("Upper Menu", choices=())
-    get_requests = SelectMultipleField("GET requests", choices=())
-    post_request = SelectMultipleField("POST requests", choices=())
+    menu = SelectMultipleField("Menu", choices=choices(list(rbac["menu"])))
+    pages = SelectMultipleField("Pages", choices=choices(rbac["pages"]))
+    upper_menu = SelectMultipleField("Upper Menu", choices=choices(rbac["upper_menu"]))
+    get_requests = SelectMultipleField("GET requests", choices=choices(rbac["get_requests"]))
+    post_request = SelectMultipleField("POST requests", choices=choices(rbac["post_requests"]))
     email = StringField("Email")
 
 

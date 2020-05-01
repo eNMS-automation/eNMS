@@ -44,6 +44,7 @@ class User(AbstractBase, UserMixin):
             kwargs["password"] = argon2.hash(kwargs["password"])
         super().update(**kwargs)
         self.rbac = self.compute_rbac()
+        print(self.rbac)
 
     def compute_rbac(self):
         rbac = defaultdict(list)
@@ -64,7 +65,7 @@ class Group(AbstractBase):
     pages = db.Column(db.List)
     upper_menu = db.Column(db.List)
     get_requests = db.Column(db.List)
-    post_request = db.Column(db.List)
+    post_requests = db.Column(db.List)
     users = relationship(
         "User", secondary=db.user_group_table, back_populates="groups"
     )

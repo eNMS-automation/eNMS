@@ -75,8 +75,8 @@ class Database:
     }
 
     import_classes = [
-        "user",
         "group",
+        "user",
         "device",
         "link",
         "pool",

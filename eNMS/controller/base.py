@@ -141,9 +141,7 @@ class BaseController:
         )
 
     def create_admin_user(self) -> None:
-        admin_group = db.factory("group", name="Admin Users", rbac={})
-        db.session.commit()
-        admin = db.factory("user", name="admin", groups=[admin_group.id])
+        admin = db.factory("user", name="admin")
         if not admin.password:
             admin.update(password="admin")
 

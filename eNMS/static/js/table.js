@@ -126,6 +126,7 @@ export class Table {
             type: this.type,
             export: self.csvExport,
           });
+          Object.assign(d, self.filteringData);
           if (this.runtime) {
             d.runtime = $(`#runtimes-${this.instance.id}`).val() || this.runtime;
           }
@@ -802,7 +803,7 @@ tables.result = class ResultTable extends Table {
     return [
       `<button
         class="btn btn-info"
-        onclick="eNMS.automation.compare('result', ${instance})"
+        onclick="eNMS.automation.compare('${this.type}', ${instance})"
         data-tooltip="Compare"
         type="button"
       >
@@ -836,6 +837,16 @@ tables.result = class ResultTable extends Table {
       </li>
     </ul>`,
     ];
+  }
+};
+
+tables.full_result = class FullResultTable extends tables.result {
+  get filteringData() {
+    return { full_result: true };
+  }
+
+  get modelFiltering() {
+    return "result";
   }
 };
 
@@ -948,6 +959,40 @@ tables.user = class UserTable extends Table {
         <li>
           <button type="button" class="btn btn-sm btn-primary"
           onclick="eNMS.base.showTypePanel('user', '${row.id}', 'duplicate')"
+          data-tooltip="Duplicate"
+            ><span class="glyphicon glyphicon-duplicate"></span
+          ></button>
+        </li>
+        ${this.deleteInstanceButton(row)}
+      </ul>`,
+    ];
+  }
+};
+
+tables.group = class GroupTable extends Table {
+  get controls() {
+    return [
+      this.columnDisplay(),
+      this.createNewButton(),
+      this.exportTableButton(),
+      this.clearSearchButton(),
+      this.refreshTableButton(),
+    ];
+  }
+
+  buttons(row) {
+    return [
+      `
+      <ul class="pagination pagination-lg" style="margin: 0px;">
+        <li>
+          <button type="button" class="btn btn-sm btn-primary"
+          onclick="eNMS.base.showTypePanel('group', '${row.id}')" data-tooltip="Edit"
+            ><span class="glyphicon glyphicon-edit"></span
+          ></button>
+        </li>
+        <li>
+          <button type="button" class="btn btn-sm btn-primary"
+          onclick="eNMS.base.showTypePanel('group', '${row.id}', 'duplicate')"
           data-tooltip="Duplicate"
             ><span class="glyphicon glyphicon-duplicate"></span
           ></button>

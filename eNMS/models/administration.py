@@ -1,5 +1,7 @@
+from collections import defaultdict
 from datetime import datetime
 from flask_login import UserMixin
+from itertools import chain
 from passlib.hash import argon2
 from sqlalchemy import Boolean, Integer
 
@@ -27,23 +29,24 @@ class User(AbstractBase, UserMixin):
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.SmallString, unique=True)
     email = db.Column(db.SmallString)
-    permissions = db.Column(db.List)
     password = db.Column(db.SmallString)
-    group = db.Column(db.SmallString)
     authentication = db.Column(db.SmallString, default="database")
+    groups = db.Column(db.List)
+    rbac = db.Column(db.Dict)
     small_menu = db.Column(Boolean, default=False, info={"dont_track_changes": True})
 
     def update(self, **kwargs):
         if app.settings["security"]["hash_user_passwords"] and "password" in kwargs:
             kwargs["password"] = argon2.hash(kwargs["password"])
         super().update(**kwargs)
+        self.rbac = self.compute_rbac()
 
-    @property
-    def is_admin(self):
-        return "Admin" in self.permissions
-
-    def allowed(self, permission):
-        return self.is_admin or permission in self.permissions
+    def compute_rbac(self):
+        rbac = defaultdict(list)
+        for group in self.groups:
+            for access, allowed_list in app.rbac["groups"][group].items():
+                rbac[access].extend(allowed_list)
+        return rbac
 
 
 @db.set_custom_properties
@@ -54,10 +57,24 @@ class Changelog(AbstractBase):
     __mapper_args__ = {"polymorphic_identity": "changelog", "polymorphic_on": type}
     id = db.Column(Integer, primary_key=True)
     time = db.Column(db.SmallString)
-    content = db.Column(db.LargeString, default="")
+    content = db.Column(db.LargeString)
     severity = db.Column(db.SmallString, default="debug")
     user = db.Column(db.SmallString, default="admin")
 
     def update(self, **kwargs):
         kwargs["time"] = str(datetime.now())
         super().update(**kwargs)
+
+
+@db.set_custom_properties
+class Group(AbstractBase):
+
+    __tablename__ = type = "group"
+    id = db.Column(Integer, primary_key=True)
+    name = db.Column(db.SmallString, unique=True)
+    email = db.Column(db.SmallString)
+    rbac = db.Column(db.Dict)
+
+    def update(self, **kwargs):
+        super().update(**kwargs)
+        self.rbac = self.compute_rbac()

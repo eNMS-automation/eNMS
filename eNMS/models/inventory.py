@@ -234,16 +234,14 @@ class Link(Object):
 
 def set_pool_properties(Pool):
     for property in properties["filtering"]["device"]:
-        setattr(
-            Pool, f"device_{property}", db.Column(db.LargeString, default=""),
-        )
+        setattr(Pool, f"device_{property}", db.Column(db.LargeString))
         setattr(
             Pool,
             f"device_{property}_match",
             db.Column(db.SmallString, default="inclusion"),
         )
     for property in properties["filtering"]["link"]:
-        setattr(Pool, f"link_{property}", db.Column(db.LargeString, default=""))
+        setattr(Pool, f"link_{property}", db.Column(db.LargeString))
         setattr(
             Pool,
             f"link_{property}_match",

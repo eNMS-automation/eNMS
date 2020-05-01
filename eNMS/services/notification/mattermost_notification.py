@@ -15,7 +15,7 @@ class MattermostNotificationService(Service):
     pretty_name = "Mattermost Notification"
     id = db.Column(Integer, ForeignKey("service.id"), primary_key=True)
     channel = db.Column(db.SmallString)
-    body = db.Column(db.LargeString, default="")
+    body = db.Column(db.LargeString)
 
     __mapper_args__ = {"polymorphic_identity": "mattermost_notification_service"}
 

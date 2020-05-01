@@ -101,7 +101,15 @@ class UserForm(BaseForm):
     name = StringField("Name", [InputRequired()])
     password = PasswordField("Password")
     email = StringField("Email")
-    group = SelectField("Permissions", choices=[(g, g) for g in app.rbac["groups"]])
+
+
+@configure_relationships
+class GroupForm(BaseForm):
+    template = "object"
+    form_type = HiddenField(default="group")
+    id = HiddenField()
+    name = StringField("Name", [InputRequired()])
+    email = StringField("Email")
 
 
 class ChangelogForm(BaseForm):

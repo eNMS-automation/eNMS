@@ -92,8 +92,7 @@ class Server(Flask):
                 )
                 return redirect(url_for("blueprint.route", page="login"))
             else:
-                forbidden_endpoints = app.rbac["groups"][current_user.group]["GET"]
-                if request.method == "GET" and request.path in forbidden_endpoints:
+                if request.method == "GET" and request.path not in current_user.rbac["GET"]:
                     return render_template("error.html", error=403), 403
                 return function(*args, **kwargs)
 
@@ -138,7 +137,7 @@ class Server(Flask):
                 "form_properties": form_properties,
                 "menu": rbac["menu"],
                 "names": app.property_names,
-                "rbac": rbac["groups"][getattr(current_user, "group", "Read Only")],
+                "rbac": getattr(current_user, "rbac", None),
                 "relations": list(set(chain.from_iterable(relationships.values()))),
                 "relationships": relationships,
                 "service_types": {
@@ -189,16 +188,23 @@ class Server(Flask):
         @blueprint.route("/login", methods=["GET", "POST"])
         def login():
             if request.method == "POST":
+                kwargs, success = request.form.to_dict(), False
+                username = kwargs["name"]
                 try:
-                    user = app.authenticate_user(**request.form.to_dict())
+                    user = app.authenticate_user(**kwargs)
                     if user:
                         login_user(user)
+                        success, log = True, f"User '{username}' logged in"
+                    else:
+                        log = f"Authentication failed for user '{username}'"
+                except Exception as exc:
+                    log = f"Authentication error for user '{username}' ({exc})"
+                finally:
+                    app.log("info" if success else "warning", log, logger="security")
+                    if success:
                         return redirect(url_for("blueprint.route", page="dashboard"))
                     else:
                         abort(403)
-                except Exception as exc:
-                    app.log("error", f"Authentication failed ({exc})")
-                    abort(403)
             if not current_user.is_authenticated:
                 login_form = LoginForm(request.form)
                 login_form.authentication_method.choices = [
@@ -220,6 +226,7 @@ class Server(Flask):
         @blueprint.route("/logout")
         @self.monitor_requests
         def logout():
+            app.log("info", f"User '{current_user.name}'' logging out", logger="security")
             logout_user()
             return redirect(url_for("blueprint.route", page="login"))
 
@@ -283,7 +290,7 @@ class Server(Flask):
             endpoint, *args = page.split("/")
             if f"/{endpoint}" not in app.rbac["endpoints"]["POST"]:
                 return jsonify({"alert": "Invalid POST request."})
-            if f"/{endpoint}" in app.rbac["groups"][current_user.group]["POST"]:
+            if f"/{endpoint}" not in current_user.rbac["POST"]:
                 return jsonify({"alert": "Error 403 Forbidden."})
             form_type = request.form.get("form_type")
             if endpoint in app.json_endpoints:

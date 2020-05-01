@@ -32,7 +32,7 @@ function openServicePanel() {
 }
 
 export function compare(type, instance) {
-  if (instance.type == "device" && type == "result") type = "device_result";
+  const objectType = type.includes("result") ? "result" : type;
   const v1 = $(`input[name=v1-${type}-${instance.id}]:checked`).val();
   const v2 = $(`input[name=v2-${type}-${instance.id}]:checked`).val();
   if (!v1 || !v2) {
@@ -43,7 +43,7 @@ export function compare(type, instance) {
     const cantorId = cantorPairing(parseInt(v1), parseInt(v2));
     openPanel({
       name: "compare",
-      title: `Compare ${type}`,
+      title: `Compare ${objectType}`,
       id: cantorId,
       size: "700 500",
       content: `
@@ -69,7 +69,7 @@ export function compare(type, instance) {
           width: "120px",
         });
         call({
-          url: `/compare/${type}/${instance.name}/${v1}/${v2}`,
+          url: `/compare/${objectType}/${instance.name}/${v1}/${v2}`,
           callback: (result) => {
             let diff2htmlUi = new Diff2HtmlUI({ diff: result });
             $(`#diff-type-${cantorId}`)
@@ -182,19 +182,15 @@ function showResult(id) {
   });
 }
 
-export const showRuntimePanel = function(type, service, runtime, displayTable) {
+export const showRuntimePanel = function(type, service, runtime, table) {
   const displayFunction =
     type == "logs"
       ? displayLogs
-      : service.type == "workflow" && !displayTable
+      : service.type == "workflow" && !table
       ? displayResultsTree
       : displayResultsTable;
   const panelType =
-    type == "logs"
-      ? "logs"
-      : service.type == "workflow" && !displayTable
-      ? "tree"
-      : "table";
+    type == "logs" ? "logs" : service.type == "workflow" && !table ? "tree" : "table";
   const panelId = `${panelType}-${service.id}`;
   call({
     url: `/get_runtimes/${type}/${service.id}`,
@@ -230,17 +226,17 @@ export const showRuntimePanel = function(type, service, runtime, displayTable) {
         <div class="modal-body">
           <div id="tooltip-overlay" class="overlay"></div>
           <form
-            id="search-form-result-${service.id}"
+            id="search-form-${table}-${service.id}"
             class="form-horizontal form-label-left"
             method="post"
           >
             <nav
-              id="controls-result-${service.id}"
+              id="controls-${table}-${service.id}"
               class="navbar navbar-default nav-controls"
               role="navigation"
             ></nav>
             <table
-              id="table-result-${service.id}"
+              id="table-${table}-${service.id}"
               class="table table-striped table-bordered table-hover"
               cellspacing="0"
               width="100%"
@@ -273,9 +269,9 @@ export const showRuntimePanel = function(type, service, runtime, displayTable) {
             .val(runtime)
             .selectpicker("refresh");
           $(`#runtimes-${panelId}`).on("change", function() {
-            displayFunction(service, this.value, true);
+            displayFunction(service, this.value, true, table);
           });
-          displayFunction(service, runtime);
+          displayFunction(service, runtime, null, table);
         },
       });
     },
@@ -361,7 +357,7 @@ function displayResultsTree(service, runtime) {
                 <button type="button"
                   class="btn btn-xs btn-primary"
                   onclick='eNMS.automation.showRuntimePanel(
-                    "results", ${data}, "${runtime}", true
+                    "results", ${data}, "${runtime}", "result"
                   )'>
                   <span class="glyphicon glyphicon-list-alt"></span>
                 </button>
@@ -381,9 +377,9 @@ function displayResultsTree(service, runtime) {
   });
 }
 
-function displayResultsTable(service, runtime) {
+function displayResultsTable(service, runtime, _, table) {
   // eslint-disable-next-line new-cap
-  new tables.result("result", service, runtime || currentRuntime, service.id);
+  new tables[table](table, service, runtime || currentRuntime, service.id);
 }
 
 function refreshLogs(service, runtime, editor, first, wasRefreshed) {

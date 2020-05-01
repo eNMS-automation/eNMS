@@ -77,7 +77,7 @@ class Service(AbstractBase):
     update_pools = db.Column(Boolean, default=False)
     send_notification = db.Column(Boolean, default=False)
     send_notification_method = db.Column(db.SmallString, default="mail")
-    notification_header = db.Column(db.LargeString, default="")
+    notification_header = db.Column(db.LargeString)
     display_only_failed_nodes = db.Column(Boolean, default=True)
     include_device_results = db.Column(Boolean, default=True)
     include_link_in_summary = db.Column(Boolean, default=True)
@@ -112,7 +112,7 @@ class Service(AbstractBase):
     max_processes = db.Column(Integer, default=5)
     conversion_method = db.Column(db.SmallString, default="none")
     validation_method = db.Column(db.SmallString, default="none")
-    content_match = db.Column(db.LargeString, default="")
+    content_match = db.Column(db.LargeString)
     content_match_regex = db.Column(Boolean, default=False)
     dict_match = db.Column(db.Dict)
     negative_logic = db.Column(Boolean, default=False)
@@ -238,12 +238,14 @@ class Result(AbstractBase):
 
     @classmethod
     def filtering_constraints(cls, **kwargs):
-        constraints = [
-            getattr(
-                models["result"],
-                "device" if kwargs["instance"]["type"] == "device" else "service",
-            ).has(id=kwargs["instance"]["id"])
-        ]
+        constraints = []
+        if not kwargs.get("full_result"):
+            constraints.append(
+                getattr(
+                    models["result"],
+                    "device" if kwargs["instance"]["type"] == "device" else "service",
+                ).has(id=kwargs["instance"]["id"])
+            )
         if kwargs.get("runtime"):
             constraints.append(models["result"].parent_runtime == kwargs["runtime"])
         return constraints
@@ -777,7 +779,13 @@ class Run(AbstractBase):
         return results
 
     def log(
-        self, severity, log, device=None, changelog=False, logger=None,
+        self,
+        severity,
+        log,
+        device=None,
+        changelog=False,
+        logger=None,
+        service_log=True,
     ):
         log_level = int(self.original.log_level)
         if not log_level or severity not in app.log_levels[log_level - 1 :]:
@@ -786,14 +794,14 @@ class Run(AbstractBase):
             device_name = device if isinstance(device, str) else device.name
             log = f"DEVICE {device_name} - {log}"
         log = f"USER {self.creator} - SERVICE {self.service.scoped_name} - {log}"
-        if logger:
-            getattr(getLogger(logger), severity)(log)
-        if changelog:
-            app.log(severity, log, user=self.creator)
-        run_log = f"{app.get_time()} - {severity} - {log}"
-        app.log_queue(self.parent_runtime, self.service_id, run_log)
-        if self.runtime != self.parent_runtime:
-            app.log_queue(self.parent_runtime, self.original.service_id, run_log)
+        settings = app.log(
+            severity, log, user=self.creator, changelog=changelog, logger=logger
+        )
+        if service_log or logger and settings.get("service_log"):
+            run_log = f"{app.get_time()} - {severity} - {log}"
+            app.log_queue(self.parent_runtime, self.service_id, run_log)
+            if self.runtime != self.parent_runtime:
+                app.log_queue(self.parent_runtime, self.original.service_id, run_log)
 
     def build_notification(self, results):
         notification = {

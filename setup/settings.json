@@ -30,7 +30,8 @@
     "sender": "eNMS@company.com",
     "server": "smtp.googlemail.com",
     "use_tls": true,
-    "username": "eNMS-user"
+    "username": "eNMS-user",
+    "reply_to": "reply_to@company.com"
   },
   "mattermost": {
     "channel": "",

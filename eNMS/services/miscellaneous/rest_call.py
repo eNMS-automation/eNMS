@@ -23,7 +23,7 @@ class RestCallService(Service):
     pretty_name = "REST Call"
     id = db.Column(Integer, ForeignKey("service.id"), primary_key=True)
     call_type = db.Column(db.SmallString)
-    rest_url = db.Column(db.LargeString, default="")
+    rest_url = db.Column(db.LargeString)
     payload = db.Column(JSON, default={})
     params = db.Column(JSON, default={})
     headers = db.Column(JSON, default={})

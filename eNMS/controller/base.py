@@ -141,7 +141,7 @@ class BaseController:
         )
 
     def create_admin_user(self) -> None:
-        admin = db.factory("user", **{"name": "admin", "group": "Admin"})
+        admin = db.factory("user", name="admin", groups=["Admin"])
         if not admin.password:
             admin.update(password="admin")
 
@@ -178,7 +178,7 @@ class BaseController:
         with open(self.path / "setup" / "logging.json", "r") as logging_config:
             logging_config = load(logging_config)
         dictConfig(logging_config)
-        for logger, log_level in logging_config["external_loggers"].items():
+        for logger, log_level in self.settings["logging"]["external_loggers"].items():
             info(f"Changing {logger} log level to '{log_level}'")
             log_level = getattr(import_module("logging"), log_level.upper())
             getLogger(logger).setLevel(log_level)
@@ -285,16 +285,20 @@ class BaseController:
                 return {"alert": f"There is already a {type} with the same parameters."}
             return {"alert": str(exc)}
 
-    def log(self, severity, content, user=None):
-        db.factory(
-            "changelog",
-            **{
-                "severity": severity,
-                "content": content,
-                "user": user or getattr(current_user, "name", "admin"),
-            },
-        )
-        getattr(import_module("logging"), severity)(content)
+    def log(self, severity, content, user=None, changelog=True, logger="root"):
+        logger_settings = self.settings["logging"]["loggers"].get(logger)
+        if logger:
+            getattr(getLogger(logger), severity)(content)
+        if changelog or logger and logger_settings.get("changelog"):
+            db.factory(
+                "changelog",
+                **{
+                    "severity": severity,
+                    "content": content,
+                    "user": user or getattr(current_user, "name", "admin"),
+                },
+            )
+        return logger_settings
 
     def count_models(self):
         return {

@@ -139,7 +139,6 @@ function sshConnection(id) {
   });
 }
 
-// eslint-disable-next-line
 function handOffSSHConnection(id) {
   notify("Starting SSH connection to the device...", "success", 3, true);
   call({
@@ -158,7 +157,6 @@ function handOffSSHConnection(id) {
   });
 }
 
-// eslint-disable-next-line
 function savePoolObjects(id) {
   call({
     url: `/save_pool_objects/${id}`,

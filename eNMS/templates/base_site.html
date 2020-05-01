@@ -105,21 +105,20 @@
       <div id="sidebar-menu" class="hidden-print main_menu">
         <div class="menu_section">
           <ul class="nav side-menu">
-            {% for label, category in menu.items() %} {% if label not in
-            rbac["menu"]["category"] %}
+            {% for label, category in menu.items() %} {% if label in rbac["category"] %}
             <li>
               <a
                 ><i class="fa fa-{{ category['icon'] }}"></i>{{ label }}
                 <span class="fa fa-chevron-down"></span>
               </a>
               <ul class="nav child_menu">
-                {% for page, data in category["pages"].items() %} {% if page not in
-                rbac["menu"]["page"] %} {% if data is mapping %}
+                {% for page, data in category["pages"].items() %} {% if page in
+                rbac["page"] %} {% if data is mapping %}
                 <li>
                   <a>{{ page }}<span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
-                    {% for subpage, url in data.items() %} {% if subpage not in
-                    rbac["menu"]["page"] %}
+                    {% for subpage, url in data.items() %} {% if subpage in rbac["page"]
+                    %}
                     <li><a href="{{ url }}">{{ subpage }}</a></li>
                     {% endif %} {% endfor %}
                   </ul>
@@ -200,7 +199,7 @@
                     &nbsp;Docs
                   </a>
                 </li>
-                {% if "Files" not in rbac["menu"]["bar"] %}
+                {% if "Files" in rbac["bar"] %}
                 <li class="nav-item">
                   <a
                     onclick="eNMS.administration.displayFiles()"
@@ -214,7 +213,7 @@
                     &nbsp;Files
                   </a>
                 </li>
-                {% endif %} {% if "Settings" not in rbac["menu"]["bar"] %}
+                {% endif %} {% if "Settings" in rbac["bar"] %}
                 <li class="nav-item">
                   <a
                     onclick="eNMS.administration.showSettings()"
@@ -228,7 +227,7 @@
                     &nbsp;Settings
                   </a>
                 </li>
-                {% endif %} {% if "Admin" not in rbac["menu"]["bar"] %}
+                {% endif %} {% if "Admin" in rbac["bar"] %}
                 <li class="nav-item">
                   <a
                     onclick="eNMS.base.openPanel({

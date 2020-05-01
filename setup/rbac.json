@@ -12,6 +12,7 @@
       "icon": "users", 
       "pages": {
         "Users": "/table/user",
+        "Groups": "/table/group",
         "Servers": "/table/server"
       }
     },
@@ -125,6 +126,7 @@
       "/table/configuration",
       "/table/device",
       "/table/event",
+      "/table/group",
       "/table/pool",
       "/table/link",
       "/table/run",
@@ -235,6 +237,7 @@
         "Changelog",
         "Sessions",
         "Users",
+        "Groups",
         "Servers",
         "Devices",
         "Configurations",
@@ -318,6 +321,7 @@
         "/table/changelog",
         "/table/configuration",
         "/table/device",
+        "/table/group",
         "/table/event",
         "/table/pool",
         "/table/link",
@@ -419,7 +423,24 @@
         "Scheduling",
         "Plugins"
       ],
-      "page": ["Events"],
+      "page": [
+        "Dashboard",
+        "Sessions",
+        "Devices",
+        "Configurations",
+        "Links",
+        "Pools",
+        "Network",
+        "Sites",
+        "Services",
+        "Workflow Builder",
+        "Results",
+        "Tasks",
+        "Events",
+        "Plugin 1",
+        "Submenu",
+        "Plugin 2"
+      ],
       "GET": [
         "/dashboard",
         "/download_file",

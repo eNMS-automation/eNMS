@@ -39,7 +39,6 @@ class User(AbstractBase, UserMixin):
             kwargs["password"] = argon2.hash(kwargs["password"])
         super().update(**kwargs)
         self.rbac = self.compute_rbac()
-        print(self.rbac)
 
     def compute_rbac(self):
         rbac = defaultdict(list)
@@ -64,3 +63,17 @@ class Changelog(AbstractBase):
     def update(self, **kwargs):
         kwargs["time"] = str(datetime.now())
         super().update(**kwargs)
+
+
+@db.set_custom_properties
+class Group(AbstractBase):
+
+    __tablename__ = type = "group"
+    id = db.Column(Integer, primary_key=True)
+    name = db.Column(db.SmallString, unique=True)
+    email = db.Column(db.SmallString)
+    rbac = db.Column(db.Dict)
+
+    def update(self, **kwargs):
+        super().update(**kwargs)
+        self.rbac = self.compute_rbac()

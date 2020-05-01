@@ -1,5 +1,4 @@
-- creation_time: '2020-04-22 07:07:12.866584'
-  crontab_expression: ''
+- crontab_expression: ''
   description: Back-up device configurations
   devices: []
   end_date: ''
@@ -7,15 +6,13 @@
   frequency_unit: seconds
   initial_payload: {}
   name: Configuration Poller
-  periodic: true
   pools: []
   scheduling_mode: standard
   service: 'Regression Workflow 9: Operational Data Backup'
   service_id: 50
   start_date: 09/10/2019 21:17:13
   type: task
-- creation_time: '2020-04-22 07:07:12.885133'
-  crontab_expression: ''
+- crontab_expression: ''
   description: Monitor eNMS cluster
   devices: []
   end_date: ''

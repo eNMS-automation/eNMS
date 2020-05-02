@@ -103,15 +103,18 @@ class RbacForm(BaseForm):
     menu = SelectMultipleField("Menu", choices=choices(list(rbac["menu"])))
     pages = SelectMultipleField("Pages", choices=choices(rbac["pages"]))
     upper_menu = SelectMultipleField("Upper Menu", choices=choices(rbac["upper_menu"]))
-    get_requests = SelectMultipleField("GET requests", choices=choices(rbac["get_requests"]))
-    post_requests = SelectMultipleField("POST requests", choices=choices(rbac["post_requests"]))
+    get_requests = SelectMultipleField(
+        "GET requests", choices=choices(rbac["get_requests"])
+    )
+    post_requests = SelectMultipleField(
+        "POST requests", choices=choices(rbac["post_requests"])
+    )
 
 
 @configure_relationships
 class UserForm(RbacForm):
     form_type = HiddenField(default="user")
     password = PasswordField("Password")
-    
 
 
 @configure_relationships

@@ -33,24 +33,26 @@ class User(AbstractBase, UserMixin):
     password = db.Column(db.SmallString)
     authentication = db.Column(db.SmallString, default="database")
     groups = db.Column(db.List)
-    rbac = db.Column(db.Dict)
+    menu = db.Column(db.List)
+    pages = db.Column(db.List)
+    upper_menu = db.Column(db.List)
+    get_requests = db.Column(db.List)
+    post_requests = db.Column(db.List)
     small_menu = db.Column(Boolean, default=False, info={"dont_track_changes": True})
     groups = relationship(
         "Group", secondary=db.user_group_table, back_populates="users"
     )
+    manual_rbac = db.Column(Boolean, default=False)
 
     def update(self, **kwargs):
         if app.settings["security"]["hash_user_passwords"] and "password" in kwargs:
             kwargs["password"] = argon2.hash(kwargs["password"])
         super().update(**kwargs)
-        self.rbac = self.compute_rbac()
-
-    def compute_rbac(self):
-        rbac = defaultdict(list)
-        for group in self.groups:
-            for access in app.rbac:
-                rbac[access].extend(getattr(group, access))
-        return rbac
+        if self.manual_rbac:
+            return
+        for access_type in app.rbac:
+            access = list(set().union(*(getattr(g, access_type) for g in self.groups)))
+            setattr(self, access_type, access)
 
 
 @db.set_custom_properties
@@ -65,9 +67,7 @@ class Group(AbstractBase):
     upper_menu = db.Column(db.List)
     get_requests = db.Column(db.List)
     post_requests = db.Column(db.List)
-    users = relationship(
-        "User", secondary=db.user_group_table, back_populates="groups"
-    )
+    users = relationship("User", secondary=db.user_group_table, back_populates="groups")
 
 
 @db.set_custom_properties

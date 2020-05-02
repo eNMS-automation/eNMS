@@ -129,9 +129,7 @@ class PoolForm(BaseForm):
             ("any", "Match if any property matches"),
         ),
     )
-    manual_rbac = BooleanField(
-        "Manually defined RBAC (won't be automatically updated based on user groups)"
-    )
+    manually_defined = BooleanField("Manually defined (won't be automatically updated)")
 
 
 class PoolObjectsForm(BaseForm):

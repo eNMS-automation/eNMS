@@ -140,7 +140,6 @@ class Server(Flask):
                 "form_properties": form_properties,
                 "menu": rbac["menu"],
                 "names": app.property_names,
-
                 "relations": list(set(chain.from_iterable(relationships.values()))),
                 "relationships": relationships,
                 "service_types": {

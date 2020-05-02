@@ -1,4 +1,5 @@
 from ast import literal_eval
+from flask_login import current_user
 from json import loads
 from os import environ
 from sqlalchemy import (
@@ -11,6 +12,7 @@ from sqlalchemy import (
     func,
     inspect,
     Integer,
+    or_,
     PickleType,
     String,
     Table,
@@ -310,6 +312,25 @@ class Database:
     def get_query_count(self, query):
         count_query = query.statement.with_only_columns([func.count()]).order_by(None)
         return query.session.execute(count_query).scalar()
+
+    def get_user_constraints(self, model):
+        if model == "pool" and not current_user.is_admin:
+            return [
+                or_(
+                    getattr(models[model], "groups").any(id=group.id)
+                    for group in current_user.groups
+                )
+            ]
+        elif model in ("device", "link") and not current_user.is_admin:
+            return [
+                or_(
+                    getattr(models[model], "pools").any(id=pool.id)
+                    for group in current_user.groups
+                    for pool in group.pools
+                )
+            ]
+        else:
+            return []
 
     def objectify(self, model, object_list):
         return [self.fetch(model, id=object_id) for object_id in object_list]

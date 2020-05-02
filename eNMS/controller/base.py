@@ -387,6 +387,12 @@ class BaseController:
             "total_count": results.count(),
         }
 
+    def get_user_constraints(self, model):
+        return or_(
+            getattr(models[model], "pools").any(id=pool.id)
+            for group in current_user.groups for pool in group.pools
+        )
+
     def filtering(self, table, **kwargs):
         model = models[table]
         ordering = getattr(
@@ -403,6 +409,8 @@ class BaseController:
         except regex_error:
             return {"error": "Invalid regular expression as search parameter."}
         constraints.extend(models[table].filtering_constraints(**kwargs))
+        if not current_user.is_admin and table in ("device", "link"):
+            constraints.append(self.get_user_constraints(table))
         result = db.session.query(model).filter(and_(*constraints))
         if ordering:
             result = result.order_by(ordering())

@@ -43,6 +43,7 @@ class User(AbstractBase, UserMixin):
         "Group", secondary=db.user_group_table, back_populates="users"
     )
     manual_rbac = db.Column(Boolean, default=False)
+    is_admin = db.Column(Boolean, default=False)
 
     def update(self, **kwargs):
         if app.settings["security"]["hash_user_passwords"] and "password" in kwargs:
@@ -51,6 +52,7 @@ class User(AbstractBase, UserMixin):
         self.update_rbac()
 
     def update_rbac(self):
+        self.is_admin = any(group.name == "Admin Users" for group in self.groups)
         if self.manual_rbac:
             return
         for access_type in app.rbac:

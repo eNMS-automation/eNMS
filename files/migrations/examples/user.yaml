@@ -66,7 +66,7 @@
     /workflow_builder, /view_service_results, /form/ansible_playbook_service, /form/pool]
   groups: [Read-only Users]
   manual_rbac: false
-  menu: [Visualization, Admin, Plugins, Home, Automation, Inventory, Scheduling]
+  menu: [Visualization, Plugins, Home, Automation, Inventory, Scheduling]
   name: read-only
   pages: [Configurations, Network, Plugin 2, Tasks, Dashboard, Devices, Pools, Results,
     Changelog, Sites, Plugin 1, Workflow Builder, Links, Submenu, Sessions, Events,

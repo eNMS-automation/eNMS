@@ -441,10 +441,6 @@ class AutomationController(BaseController):
             "runtime": runtime,
         }
 
-    def convert_date(self, date):
-
-        return
-
     def calendar_init(self, type):
         results = {}
         for instance in db.fetch_all(type):

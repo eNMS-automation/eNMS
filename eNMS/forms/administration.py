@@ -94,28 +94,29 @@ class ImportService(BaseForm):
     service = SelectField("Service", choices=())
 
 
-@configure_relationships
-class UserForm(BaseForm):
+class RbacForm(BaseForm):
     template = "object"
-    form_type = HiddenField(default="user")
+    form_type = HiddenField(default="rbac")
     id = HiddenField()
     name = StringField("Name", [InputRequired()])
-    password = PasswordField("Password")
     email = StringField("Email")
-
-
-@configure_relationships
-class GroupForm(BaseForm):
-    template = "object"
-    form_type = HiddenField(default="group")
-    id = HiddenField()
-    name = StringField("Name", [InputRequired()])
     menu = SelectMultipleField("Menu", choices=choices(list(rbac["menu"])))
     pages = SelectMultipleField("Pages", choices=choices(rbac["pages"]))
     upper_menu = SelectMultipleField("Upper Menu", choices=choices(rbac["upper_menu"]))
     get_requests = SelectMultipleField("GET requests", choices=choices(rbac["get_requests"]))
-    post_request = SelectMultipleField("POST requests", choices=choices(rbac["post_requests"]))
-    email = StringField("Email")
+    post_requests = SelectMultipleField("POST requests", choices=choices(rbac["post_requests"]))
+
+
+@configure_relationships
+class UserForm(RbacForm):
+    form_type = HiddenField(default="user")
+    password = PasswordField("Password")
+    
+
+
+@configure_relationships
+class GroupForm(RbacForm):
+    form_type = HiddenField(default="group")
 
 
 class ChangelogForm(BaseForm):

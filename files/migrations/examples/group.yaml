@@ -1,10 +1,10 @@
-- email: admin@admin_users.com
+- email: admin_users@enms.io
   get_requests: [/dashboard, /download_file, /form/add_services, /form/administration,
     /form/ansible_playbook_service, /form/changelog, /form/configure_bgp_service,
     /form/data_backup_service, /form/database_deletion, /form/database_migration,
     /form/device, /form/device_connection, /form/device_filtering, /form/event, /form/example_service,
-    /form/excel_export, /form/excel_import, /form/file, /form/files, /form/group, /form/generic_file_transfer_service,
-    /form/import_service, /form/link, /form/link_filtering, /form/mail_notification_service,
+    /form/excel_export, /form/excel_import, /form/file, /form/files, /form/generic_file_transfer_service,
+    /form/group, /form/import_service, /form/link, /form/link_filtering, /form/mail_notification_service,
     /form/mattermost_notification_service, /form/napalm_backup_service, /form/napalm_configuration_service,
     /form/napalm_getters_service, /form/napalm_ping_service, /form/napalm_rollback_service,
     /form/napalm_traceroute_service, /form/netmiko_configuration_service, /form/netmiko_file_transfer_service,
@@ -16,8 +16,9 @@
     /form/unix_command_service, /form/unix_shell_script_service, /form/upload_files,
     /form/user, /form/workflow, /form/workflow_edge, /form/workflow_label, /login,
     /logout, /table/changelog, /table/configuration, /table/device, /table/event,
-    /table/group, /table/pool, /table/link, /table/run, /table/server, /table/service, /table/session,
-    /table/task, /table/user, /view/network, /view/site, /view_service_results, /workflow_builder]
+    /table/group, /table/pool, /table/link, /table/run, /table/server, /table/service,
+    /table/session, /table/task, /table/user, /view/network, /view/site, /view_service_results,
+    /workflow_builder]
   menu: [Home, Admin, Inventory, Visualization, Automation, Scheduling, Plugins]
   name: Admin Users
   pages: [Dashboard, Changelog, Sessions, Users, Groups, Servers, Devices, Configurations,
@@ -42,3 +43,35 @@
   type: group
   upper_menu: [Admin, Settings, Files]
   users: [admin]
+- email: read-only@enms.io
+  get_requests: [/dashboard, /download_file, /form/add_services, /form/ansible_playbook_service,
+    /form/changelog, /form/configure_bgp_service, /form/data_backup_service, /form/device,
+    /form/device_connection, /form/device_filtering, /form/event, /form/example_service,
+    /form/file, /form/generic_file_transfer_service, /form/import_service, /form/link,
+    /form/link_filtering, /form/mail_notification_service, /form/mattermost_notification_service,
+    /form/napalm_backup_service, /form/napalm_configuration_service, /form/napalm_getters_service,
+    /form/napalm_ping_service, /form/napalm_rollback_service, /form/napalm_traceroute_service,
+    /form/netmiko_configuration_service, /form/netmiko_file_transfer_service, /form/netmiko_prompts_service,
+    /form/netmiko_validation_service, /form/payload_extraction_service, /form/ping_service,
+    /form/pool, /form/pool_filtering, /form/pool_objects, /form/python_snippet_service,
+    /form/rest_call_service, /form/restart_workflow, /form/result_log_deletion, /form/run,
+    /form/run_filtering, /form/settings_panel, /form/slack_notification_service, /form/swiss_army_knife_service,
+    /form/task, /form/task_filtering, /form/topology_import_service, /form/unix_command_service,
+    /form/unix_shell_script_service, /form/workflow, /form/workflow_edge, /form/workflow_label,
+    /login, /logout, /table/changelog, /table/configuration, /table/device, /table/event,
+    /table/pool, /table/link, /table/run, /table/service, /table/session, /table/task,
+    /view/network, /view/site, /view_service_results, /workflow_builder]
+  menu: [Home, Admin, Inventory, Visualization, Automation, Scheduling, Plugins]
+  name: Read-only Users
+  pages: [Dashboard, Changelog, Sessions, Devices, Configurations, Links, Pools, Network,
+    Sites, Services, Workflow Builder, Results, Tasks, Events, Plugin 1, Submenu,
+    Plugin 2]
+  post_requests: [/calendar_init, /compare, /counters, /count_models, /get, /get_all,
+    /get_git_history, /get_device_network_data, /get_device_logs, /get_service_logs,
+    /get_properties, /get_result, /get_runtimes, /get_view_topology, /get_service_state,
+    /get_session_log, /get_top_level_workflows, /get_workflow_results, /get_workflow_services,
+    /search_workflow_services, /multiselect_filtering, /scan_playbook_folder, /switch_menu,
+    /filtering, /view_filtering]
+  type: group
+  upper_menu: []
+  users: []

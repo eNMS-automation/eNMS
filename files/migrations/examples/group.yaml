@@ -75,7 +75,7 @@
   type: group
   upper_menu: []
   users: [read-only]
-- email: new-york@enms.io
+- email: chicago@enms.io
   get_requests: [/dashboard, /download_file, /form/add_services, /form/administration,
     /form/ansible_playbook_service, /form/changelog, /form/configure_bgp_service,
     /form/data_backup_service, /form/database_deletion, /form/database_migration,

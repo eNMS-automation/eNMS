@@ -70,13 +70,13 @@ class Database:
             "time_before_next_run",
             "status",
         ],
-        "user": ["id", "pools"],
+        "user": ["id", "pools", "groups"],
         "workflow_edge": ["id", "source_id", "destination_id", "workflow_id"],
     }
 
     import_classes = [
-        "group",
         "user",
+        "group",
         "device",
         "link",
         "pool",

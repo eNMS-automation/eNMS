@@ -48,6 +48,9 @@ class User(AbstractBase, UserMixin):
         if app.settings["security"]["hash_user_passwords"] and "password" in kwargs:
             kwargs["password"] = argon2.hash(kwargs["password"])
         super().update(**kwargs)
+        self.update_rbac()
+
+    def update_rbac(self):
         if self.manual_rbac:
             return
         for access_type in app.rbac:
@@ -68,6 +71,12 @@ class Group(AbstractBase):
     get_requests = db.Column(db.List)
     post_requests = db.Column(db.List)
     users = relationship("User", secondary=db.user_group_table, back_populates="groups")
+
+    def update(self, **kwargs):
+        kwargs["time"] = str(datetime.now())
+        super().update(**kwargs)
+        for user in self.users:
+            user.update_rbac()
 
 
 @db.set_custom_properties

@@ -46,7 +46,7 @@
   type: user
   upper_menu: [Settings, Admin, Files]
 - authentication: database
-  email: read-only
+  email: read-only@enms.io
   get_requests: [/form/unix_shell_script_service, /view/site, /form/workflow_edge,
     /form/result_log_deletion, /form/pool_objects, /form/topology_import_service,
     /form/device, /form/napalm_getters_service, /form/pool_filtering, /table/task,

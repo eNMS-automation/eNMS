@@ -49,6 +49,7 @@ class Database:
             "destination",
             "pools",
         ],
+        "group": ["services", "pools"],
         "link": ["id", "pools"],
         "pool": ["id", "services", "device_number", "link_number"],
         "service": [

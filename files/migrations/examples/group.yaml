@@ -24,6 +24,7 @@
   pages: [Dashboard, Changelog, Sessions, Users, Groups, Servers, Devices, Configurations,
     Links, Pools, Network, Sites, Services, Workflow Builder, Results, Tasks, Events,
     Plugin 1, Submenu, Plugin 2]
+  pools: [Devices only, Links only]
   post_requests: [/add_edge, /add_service_to_workflow, /copy_service_in_workflow,
     /calendar_init, /clear_results, /clear_configurations, /compare, /connection,
     /counters, /count_models, /create_label, /database_deletion, /delete_corrupted_edges,
@@ -40,6 +41,7 @@
     /scan_playbook_folder, /skip_services, /stop_workflow, /switch_menu, /scheduler_action,
     /filtering, /task_action, /topology_import, /update, /update_pool, /update_all_pools,
     /upload_files, /view_filtering]
+  services: []
   type: group
   upper_menu: [Admin, Settings, Files]
   users: [admin]
@@ -66,12 +68,14 @@
   pages: [Dashboard, Changelog, Sessions, Devices, Configurations, Links, Pools, Network,
     Sites, Services, Workflow Builder, Results, Tasks, Events, Plugin 1, Submenu,
     Plugin 2]
+  pools: []
   post_requests: [/calendar_init, /compare, /counters, /count_models, /get, /get_all,
     /get_git_history, /get_device_network_data, /get_device_logs, /get_service_logs,
     /get_properties, /get_result, /get_runtimes, /get_view_topology, /get_service_state,
     /get_session_log, /get_top_level_workflows, /get_workflow_results, /get_workflow_services,
     /search_workflow_services, /multiselect_filtering, /scan_playbook_folder, /switch_menu,
     /filtering, /view_filtering]
+  services: []
   type: group
   upper_menu: []
   users: [read-only]

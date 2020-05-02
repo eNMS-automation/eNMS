@@ -71,6 +71,8 @@ class Group(AbstractBase):
     get_requests = db.Column(db.List)
     post_requests = db.Column(db.List)
     users = relationship("User", secondary=db.user_group_table, back_populates="groups")
+    pools = relationship("Pool", secondary=db.pool_group_table, back_populates="groups")
+    services = relationship("Service", secondary=db.service_group_table, back_populates="groups")
 
     def update(self, **kwargs):
         kwargs["time"] = str(datetime.now())

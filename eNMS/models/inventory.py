@@ -273,6 +273,7 @@ class Pool(AbstractBase):
     )
     runs = relationship("Run", secondary=db.run_pool_table, back_populates="pools")
     tasks = relationship("Task", secondary=db.task_pool_table, back_populates="pools")
+    groups = relationship("Group", secondary=db.pool_group_table, back_populates="pools")
     manually_defined = db.Column(Boolean, default=False)
 
     def update(self, **kwargs):

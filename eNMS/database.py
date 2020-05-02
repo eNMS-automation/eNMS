@@ -262,6 +262,7 @@ class Database:
         for model1, model2 in (
             ("user", "group"),
             ("service", "device"),
+            ("service", "group"),
             ("service", "pool"),
             ("run", "device"),
             ("run", "pool"),
@@ -269,6 +270,7 @@ class Database:
             ("task", "pool"),
             ("service", "workflow"),
             ("pool", "device"),
+            ("pool", "group"),
             ("pool", "link"),
         ):
             kw = {"ondelete": "cascade"} if model1 == "run" else {}

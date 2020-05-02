@@ -12,6 +12,7 @@
   dict_match: {}
   display_only_failed_nodes: true
   events: []
+  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -134,6 +135,7 @@
   dict_match: {}
   display_only_failed_nodes: true
   events: []
+  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -259,6 +261,7 @@
   dict_match: {}
   display_only_failed_nodes: true
   events: []
+  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -314,6 +317,7 @@
   dict_match: {}
   display_only_failed_nodes: true
   events: []
+  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -378,6 +382,7 @@
   display_only_failed_nodes: true
   events: []
   exclusion_field: d
+  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -446,6 +451,7 @@
   dict_match: {}
   display_only_failed_nodes: true
   events: []
+  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -515,6 +521,7 @@
   display_only_failed_nodes: true
   driver: eos
   events: []
+  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -590,6 +597,7 @@
   exit_config_mode: true
   fast_cli: true
   global_delay_factor: 1.0
+  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -667,6 +675,7 @@
   expect_username_prompt: ''
   fast_cli: true
   global_delay_factor: 1.0
+  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -750,6 +759,7 @@
   exit_config_mode: true
   fast_cli: true
   global_delay_factor: 1.0
+  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -828,6 +838,7 @@
   expect_username_prompt: ''
   fast_cli: true
   global_delay_factor: 1.0
+  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -902,6 +913,7 @@
   display_only_failed_nodes: true
   driver: eos
   events: []
+  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -965,6 +977,7 @@
   dict_match: {}
   display_only_failed_nodes: true
   events: []
+  groups: []
   headers: {}
   impacting: true
   include_device_results: true
@@ -1040,6 +1053,7 @@
   driver: eos
   events: []
   getters: [get_facts]
+  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -1108,6 +1122,7 @@
   driver: eos
   events: []
   getters: [get_interfaces]
+  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -1175,6 +1190,7 @@
   driver: eos
   events: []
   getters: [get_interfaces_ip]
+  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -1242,6 +1258,7 @@
   driver: eos
   events: []
   getters: [get_config]
+  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -1303,6 +1320,7 @@
   dict_match: {}
   display_only_failed_nodes: true
   events: []
+  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -1360,6 +1378,7 @@
   dict_match: {}
   display_only_failed_nodes: true
   events: []
+  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -1375,7 +1394,7 @@
   max_processes: 5
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression Workflow E: Iteration Targets] Modify Payload for Iteration'
+  name: '[Regression Workflow F: Workflow of Workflows] Modify Payload for Iteration'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -1441,6 +1460,7 @@
   expect_username_prompt: ''
   fast_cli: true
   global_delay_factor: 1.0
+  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -1510,6 +1530,7 @@
   dict_match: {}
   display_only_failed_nodes: true
   events: []
+  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -1594,6 +1615,7 @@
   display_only_failed_nodes: false
   driver: eos
   events: []
+  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -1672,6 +1694,7 @@
   expect_username_prompt: ''
   fast_cli: true
   global_delay_factor: 1.0
+  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -1757,6 +1780,7 @@
   expect_username_prompt: ''
   fast_cli: true
   global_delay_factor: 1.0
+  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -1843,6 +1867,7 @@
   expect_username_prompt: ''
   fast_cli: false
   global_delay_factor: 1.0
+  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -1926,6 +1951,7 @@
   expect_username_prompt: ''
   fast_cli: false
   global_delay_factor: 1.0
+  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -1991,6 +2017,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -2050,6 +2077,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -2128,6 +2156,7 @@
   expect_username_prompt: ''
   fast_cli: true
   global_delay_factor: 1.0
+  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -2210,6 +2239,7 @@
   expect_username_prompt: ''
   fast_cli: false
   global_delay_factor: 1.0
+  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -2292,6 +2322,7 @@
   expect_username_prompt: ''
   fast_cli: false
   global_delay_factor: 1.0
+  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -2364,6 +2395,7 @@
   driver: eos
   events: []
   getters: [is_alive]
+  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -2433,6 +2465,7 @@
   driver: eos
   events: []
   getters: [get_facts]
+  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -2503,6 +2536,7 @@
   driver: eos
   events: []
   getters: [get_interfaces_ip]
+  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -2573,6 +2607,7 @@
   driver: eos
   events: []
   getters: [get_mac_address_table]
+  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -2642,6 +2677,7 @@
   driver: eos
   events: []
   getters: [get_facts]
+  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -2707,6 +2743,7 @@
   dict_match: {host: '{{device.ip_address}}', unreachable: 0, use_ssl: true}
   display_only_failed_nodes: false
   events: []
+  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -2769,6 +2806,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -2830,6 +2868,7 @@
   dict_match: {action: debug, changed: false, failed: false}
   display_only_failed_nodes: false
   events: []
+  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -2906,6 +2945,7 @@
   expect_username_prompt: ''
   fast_cli: false
   global_delay_factor: 1.0
+  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -2988,6 +3028,7 @@
   expect_username_prompt: ''
   fast_cli: true
   global_delay_factor: 1.0
+  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -3070,6 +3111,7 @@
   expect_username_prompt: ''
   fast_cli: true
   global_delay_factor: 1.0
+  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -3152,6 +3194,7 @@
   expect_username_prompt: ''
   fast_cli: true
   global_delay_factor: 1.0
+  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -3218,6 +3261,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -3281,6 +3325,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -3356,6 +3401,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -3432,6 +3478,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  groups: []
   headers: {}
   impacting: true
   include_device_results: true
@@ -3496,6 +3543,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -3581,6 +3629,7 @@
   expect_username_prompt: ''
   fast_cli: false
   global_delay_factor: 1.0
+  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -3650,6 +3699,7 @@
   dict_match: {}
   display_only_failed_nodes: true
   events: []
+  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -3716,6 +3766,7 @@
   dict_match: {}
   display_only_failed_nodes: true
   events: []
+  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -3817,6 +3868,7 @@
   dict_match: {}
   display_only_failed_nodes: true
   events: []
+  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -3890,6 +3942,7 @@
   dict_match: {}
   display_only_failed_nodes: true
   events: []
+  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -3962,6 +4015,7 @@
   dict_match: {}
   display_only_failed_nodes: true
   events: []
+  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -4077,6 +4131,7 @@
   dict_match: {}
   display_only_failed_nodes: true
   events: []
+  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -4121,11 +4176,11 @@
   send_notification_method: mail
   services: ['[Shared] Start', '[Shared] End', '[Regression Workflow F: Workflow of
       Workflows] Regression Workflow 5: VRF creation and deletion with Napalm', '[Regression
-      Workflow E: Iteration Targets] Modify Payload for Iteration', '[Regression Workflow
-      F: Workflow of Workflows] Regression Workflow F S2: Access Variables from Parent
-      Workflow', '[Regression Workflow F: Workflow of Workflows] Regression Workflow
-      F S1: Subworkflow of Workflow', '[Regression Workflow F: Workflow of Workflows]
-      Show interfaces with Netmiko', '[Shared] NAPALM: Get interfaces']
+      Workflow F: Workflow of Workflows] Modify Payload for Iteration', '[Regression
+      Workflow F: Workflow of Workflows] Regression Workflow F S2: Access Variables
+      from Parent Workflow', '[Regression Workflow F: Workflow of Workflows] Regression
+      Workflow F S1: Subworkflow of Workflow', '[Regression Workflow F: Workflow of
+      Workflows] Show interfaces with Netmiko', '[Shared] NAPALM: Get interfaces']
   shared: false
   skip: false
   skip_query: ''
@@ -4151,6 +4206,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -4218,6 +4274,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -4283,6 +4340,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -4368,6 +4426,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -4474,6 +4533,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -4565,6 +4625,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -4636,6 +4697,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -4703,12 +4765,12 @@
   scoped_name: 'Regression Workflow E: Iteration Targets'
   send_notification: false
   send_notification_method: mail
-  services: ['[Shared] Start', '[Shared] End', '[Regression Workflow E: Iteration
-      Targets] Modify Payload for Iteration', '[Regression Workflow E: Iteration Targets]
-      Iteration Target Workflow - Test 2', '[Regression Workflow E: Iteration Targets]
-      Iteration Targets Workflow - Test 1', '[Regression Workflow E: Iteration Targets]
-      Iteration Target Workflow - Test 3', '[Regression Workflow E: Iteration Targets]
-      Iteration Targets Workflow - Test 4']
+  services: ['[Shared] Start', '[Shared] End', '[Regression Workflow F: Workflow of
+      Workflows] Modify Payload for Iteration', '[Regression Workflow E: Iteration
+      Targets] Iteration Target Workflow - Test 2', '[Regression Workflow E: Iteration
+      Targets] Iteration Targets Workflow - Test 1', '[Regression Workflow E: Iteration
+      Targets] Iteration Target Workflow - Test 3', '[Regression Workflow E: Iteration
+      Targets] Iteration Targets Workflow - Test 4']
   shared: false
   skip: false
   skip_query: ''
@@ -4734,6 +4796,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -4808,6 +4871,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -4872,6 +4936,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -4938,6 +5003,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -5022,6 +5088,7 @@
   expect_username_prompt: ''
   fast_cli: false
   global_delay_factor: 1.0
+  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -5104,6 +5171,7 @@
   expect_username_prompt: ''
   fast_cli: false
   global_delay_factor: 1.0
+  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -5178,6 +5246,7 @@
   events: []
   fast_cli: false
   global_delay_factor: 1.0
+  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -5246,6 +5315,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  groups: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -5309,6 +5379,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  groups: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -5370,6 +5441,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  groups: []
   headers: {}
   impacting: true
   include_device_results: false
@@ -5434,6 +5506,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  groups: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -5496,6 +5569,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  groups: []
   headers: {}
   impacting: true
   include_device_results: false
@@ -5561,6 +5635,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  groups: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -5636,6 +5711,7 @@
   expect_username_prompt: ''
   fast_cli: false
   global_delay_factor: 1.0
+  groups: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -5719,6 +5795,7 @@
   expect_username_prompt: ''
   fast_cli: false
   global_delay_factor: 1.0
+  groups: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -5802,6 +5879,7 @@
   expect_username_prompt: ''
   fast_cli: false
   global_delay_factor: 1.0
+  groups: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -5870,6 +5948,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  groups: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -5952,6 +6031,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  groups: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -6013,6 +6093,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  groups: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -6089,6 +6170,7 @@
   expect_username_prompt: ''
   fast_cli: false
   global_delay_factor: 1.0
+  groups: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -6158,6 +6240,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  groups: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -6218,6 +6301,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  groups: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -6277,6 +6361,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  groups: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -6352,6 +6437,7 @@
   expect_username_prompt: ''
   fast_cli: true
   global_delay_factor: 1.0
+  groups: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -6418,6 +6504,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  groups: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -6477,6 +6564,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  groups: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -6536,6 +6624,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  groups: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -6595,6 +6684,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  groups: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -6656,6 +6746,7 @@
     value: [1.1.1.1, 2.2.2.2, 3.3.3.3, 11.11.11.11, 15.15.15.15]
   display_only_failed_nodes: false
   events: []
+  groups: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -6719,6 +6810,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  groups: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -6783,6 +6875,7 @@
     value: [1.1.1.1, 2.2.2.2, 3.3.3.3]
   display_only_failed_nodes: false
   events: []
+  groups: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -6845,6 +6938,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  groups: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -6907,6 +7001,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  groups: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -6969,6 +7064,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  groups: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -7032,6 +7128,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  groups: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -7110,6 +7207,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  groups: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -7171,6 +7269,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  groups: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -7230,6 +7329,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  groups: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -7287,6 +7387,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  groups: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -7346,6 +7447,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  groups: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -7416,6 +7518,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  groups: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -7486,6 +7589,7 @@
   expect_string: root.*#
   fast_cli: false
   global_delay_factor: 1.0
+  groups: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -7556,6 +7660,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  groups: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -7621,6 +7726,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  groups: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -7679,6 +7785,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
+  groups: []
   impacting: true
   import_type: opennms
   include_device_results: false
@@ -7758,6 +7865,7 @@
   expect_username_prompt: ''
   fast_cli: false
   global_delay_factor: 1.0
+  groups: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false

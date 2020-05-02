@@ -114,6 +114,7 @@ class RbacForm(BaseForm):
 @configure_relationships
 class UserForm(RbacForm):
     form_type = HiddenField(default="user")
+    manual_rbac = BooleanField("Manually defined RBAC")
     password = PasswordField("Password")
 
 

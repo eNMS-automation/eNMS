@@ -78,6 +78,9 @@ class Service(AbstractBase):
     groups = relationship(
         "Group", secondary=db.service_group_table, back_populates="services"
     )
+    users = relationship(
+        "User", secondary=db.user_service_table, back_populates="services"
+    )
     update_pools = db.Column(Boolean, default=False)
     send_notification = db.Column(Boolean, default=False)
     send_notification_method = db.Column(db.SmallString, default="mail")

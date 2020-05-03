@@ -267,6 +267,7 @@ class Database:
             ("user", "device"),
             ("user", "group"),
             ("user", "link"),
+            ("user", "service"),
             ("service", "device"),
             ("service", "group"),
             ("service", "pool"),
@@ -292,7 +293,7 @@ class Database:
             )
 
     def fetch(self, model, allow_none=False, all_matches=False, **kwargs):
-        query = self.session.query(models[model]).filter_by(**kwargs)
+        query = self.query(models[model]).filter_by(**kwargs)
         result = query.all() if all_matches else query.first()
         if result or allow_none:
             return result
@@ -301,6 +302,12 @@ class Database:
                 f"There is no {model} in the database "
                 f"with the following characteristics: {kwargs}"
             )
+
+    def query(self, model):
+        query, table = self.session.query(model), model.__tablename__
+        if table in ("device", "link", "service") and current_user:
+            query = query.filter(getattr(model, "users").any(id=current_user.id))
+        return query
 
     def fetch_all(self, model, **kwargs):
         return self.fetch(model, allow_none=True, all_matches=True, **kwargs)

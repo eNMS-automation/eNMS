@@ -320,6 +320,9 @@ class Pool(AbstractBase):
             )
             setattr(self, f"{object_type}s", objects)
             setattr(self, f"{object_type}_number", len(objects))
+        self.update_rbac()
+
+    def update_rbac(self):
         for group in self.groups:
             group.update_rbac()
 

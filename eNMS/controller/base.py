@@ -404,8 +404,7 @@ class BaseController:
         except regex_error:
             return {"error": "Invalid regular expression as search parameter."}
         constraints.extend(models[table].filtering_constraints(**kwargs))
-        constraints.extend(db.get_user_constraints(table))
-        result = db.session.query(model).filter(and_(*constraints))
+        result = db.query(model).filter(and_(*constraints))
         if ordering:
             result = result.order_by(ordering())
         table_result = {

@@ -267,7 +267,6 @@ class Database:
             ("user", "device"),
             ("user", "group"),
             ("user", "link"),
-            ("user", "service"),
             ("service", "device"),
             ("service", "group"),
             ("service", "pool"),
@@ -305,8 +304,16 @@ class Database:
 
     def query(self, model):
         query, table = self.session.query(model), model.__tablename__
-        if table in ("device", "link", "service") and current_user:
-            query = query.filter(getattr(model, "users").any(id=current_user.id))
+        if current_user:
+            if table in ("device", "link"):
+                query = query.filter(getattr(model, "users").any(id=current_user.id))
+            elif table == "service":
+                query = query.filter(
+                    or_(
+                        getattr(model, "groups").any(id=group.id)
+                        for group in current_user.groups
+                    )
+                )
         return query
 
     def fetch_all(self, model, **kwargs):

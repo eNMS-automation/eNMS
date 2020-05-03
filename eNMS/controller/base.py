@@ -377,7 +377,6 @@ class BaseController:
         results = db.session.query(model).filter(
             model.name.contains(params.get("term"))
         )
-        results = results.filter(*db.get_user_constraints(type))
         return {
             "items": [
                 {"text": result.ui_name, "id": str(result.id)}

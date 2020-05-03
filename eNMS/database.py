@@ -304,16 +304,15 @@ class Database:
 
     def query(self, model):
         query, table = self.session.query(model), model.__tablename__
-        if current_user:
-            if table in ("device", "link"):
-                query = query.filter(getattr(model, "users").any(id=current_user.id))
-            elif table == "service":
-                query = query.filter(
-                    or_(
-                        getattr(model, "groups").any(id=group.id)
-                        for group in current_user.groups
-                    )
+        if table in ("device", "link") and current_user:
+            query = query.filter(getattr(model, "users").any(id=current_user.id))
+        elif table in ("service", "workflow", "pool") and current_user:
+            query = query.filter(
+                or_(
+                    getattr(model, "groups").any(id=group.id)
+                    for group in current_user.groups
                 )
+            )
         return query
 
     def fetch_all(self, model, **kwargs):
@@ -329,19 +328,6 @@ class Database:
     def get_query_count(self, query):
         count_query = query.statement.with_only_columns([func.count()]).order_by(None)
         return query.session.execute(count_query).scalar()
-
-    def get_user_constraints(self, model):
-        if model == "pool" and not current_user.is_admin:
-            return [
-                or_(
-                    getattr(models[model], "groups").any(id=group.id)
-                    for group in current_user.groups
-                )
-            ]
-        elif model in ("device", "link") and not current_user.is_admin:
-            return [getattr(models[model], "users").any(id=current_user.id)]
-        else:
-            return []
 
     def objectify(self, model, object_list):
         return [self.fetch(model, id=object_id) for object_id in object_list]

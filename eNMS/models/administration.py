@@ -42,6 +42,10 @@ class User(AbstractBase, UserMixin):
     groups = relationship(
         "Group", secondary=db.user_group_table, back_populates="users"
     )
+    devices = relationship(
+        "Device", secondary=db.user_device_table, back_populates="users"
+    )
+    links = relationship("Link", secondary=db.user_link_table, back_populates="users")
     manual_rbac = db.Column(Boolean, default=False)
     is_admin = db.Column(Boolean, default=False)
 
@@ -58,6 +62,20 @@ class User(AbstractBase, UserMixin):
         for access_type in app.rbac:
             access = list(set().union(*(getattr(g, access_type) for g in self.groups)))
             setattr(self, access_type, access)
+        for object_type in ("device", "link"):
+            setattr(
+                self,
+                f"{object_type}s",
+                list(
+                    set().union(
+                        *(
+                            getattr(pool, f"{object_type}s")
+                            for group in self.groups
+                            for pool in group.pools
+                        )
+                    )
+                ),
+            )
 
 
 @db.set_custom_properties

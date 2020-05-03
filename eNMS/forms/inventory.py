@@ -2,7 +2,7 @@ from wtforms.validators import InputRequired
 from wtforms.widgets import TextArea
 
 from eNMS import app
-from eNMS.forms import BaseForm, configure_relationships
+from eNMS.forms import BaseForm
 from eNMS.forms.fields import (
     BooleanField,
     HiddenField,
@@ -61,7 +61,6 @@ class ObjectForm(BaseForm):
     model = StringField("Model")
 
 
-@configure_relationships
 class DeviceForm(ObjectForm):
     template = "object"
     form_type = HiddenField(default="device")
@@ -105,7 +104,6 @@ class DeviceDataForm(BaseForm):
     )
 
 
-@configure_relationships
 class LinkForm(ObjectForm):
     template = "object"
     form_type = HiddenField(default="link")

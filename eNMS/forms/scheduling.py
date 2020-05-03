@@ -20,7 +20,7 @@ def configure_form(cls):
 
 
 @configure_form
-@configure_relationships
+@configure_relationships("devices", "pools", "service")
 class EventForm(BaseForm):
     template = "event"
     form_type = HiddenField(default="event")
@@ -28,7 +28,7 @@ class EventForm(BaseForm):
     name = StringField("Name", [InputRequired()])
 
 
-@configure_relationships
+@configure_relationships("devices", "pools", "service")
 class TaskForm(BaseForm):
     template = "object"
     form_type = HiddenField(default="task")

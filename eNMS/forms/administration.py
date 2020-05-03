@@ -111,14 +111,14 @@ class RbacForm(BaseForm):
     )
 
 
-@configure_relationships
+@configure_relationships("groups")
 class UserForm(RbacForm):
     form_type = HiddenField(default="user")
     manual_rbac = BooleanField("Manually defined RBAC")
     password = PasswordField("Password")
 
 
-@configure_relationships
+@configure_relationships("users", "pools", "services")
 class GroupForm(RbacForm):
     form_type = HiddenField(default="group")
 

@@ -2,6 +2,7 @@ from builtins import __dict__ as builtins
 from collections import defaultdict
 from copy import deepcopy
 from datetime import datetime
+from flask_login import current_user
 from functools import partial
 from importlib import __import__ as importlib_import
 from io import BytesIO
@@ -581,6 +582,9 @@ class Run(AbstractBase):
 
     def device_run(self, payload):
         self.devices = self.compute_devices(payload)
+        user = db.fetch("user", allow_none=True, name=self.creator)
+        if not user.is_admin:
+            print(user.allowed_devices())
         if self.run_method != "once":
             self.run_state["progress"]["device"]["total"] += len(self.devices)
         if self.iteration_devices and not self.parent_device:

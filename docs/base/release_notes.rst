@@ -14,10 +14,6 @@ in the UI but couldn't make calls to the REST API)
 - Remove LDAP parameters from settings. The LDAP authentication is in the custom controller, there is a default
 function that works with a standard LDAP installation, but you can customize however you want.
 The LDAP server is now configured with the env variable LDAP_SERVER.
-
-Version 3.21.4
---------------
-
 - Defer loading of device configuration and operational data column
 - Fix device results table comparison mechanism
 - Add replier option in send mail mechanism
@@ -29,35 +25,9 @@ allowing for comparison of results same device / different service, same service
 - Refactor logging mechanism. In settings.json, add new logging sections to configure whether the log
 for a given logger should also be logged as changelog or service log by default.
 
-RBAC:
-
-Change of format in rbac.json
-
-before:
-
-    "Admin": {
-      "menu": {
-        "bar": [],
-        "category": [],
-        "page": []
-      },
-      "GET": [],
-      "POST": []
-    },
-
-after:
-
-    "Admin": {
-      "bar": [],
-      "category": [],
-      "page": [],
-      "get": [],
-      "post": []
-    },
-
-Update migration files (user.yaml):
-
-group: Admin -> groups: [Admin]
+MIGRATION:
+- Remove RBAC in rbac.json
+- Update migration files (user.yaml): group: Admin -> groups: [Admin Users]
 
 Version 3.21.3
 --------------

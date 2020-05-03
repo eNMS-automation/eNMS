@@ -19,8 +19,8 @@ def configure_form(cls):
     return cls
 
 
+@configure_relationships("service")
 @configure_form
-@configure_relationships("devices", "pools", "service")
 class EventForm(BaseForm):
     template = "event"
     form_type = HiddenField(default="event")

@@ -62,14 +62,16 @@ class User(AbstractBase, UserMixin):
         for access_type in app.rbac:
             access = list(set().union(*(getattr(g, access_type) for g in self.groups)))
             setattr(self, access_type, access)
-        for object_type in ("device", "link"):
+        if self.is_admin:
+            return
+        for object_type in ("devices", "links"):
             setattr(
                 self,
-                f"{object_type}s",
+                object_type,
                 list(
                     set().union(
                         *(
-                            getattr(pool, f"{object_type}s")
+                            getattr(pool, object_type)
                             for group in self.groups
                             for pool in group.pools
                         )
@@ -97,8 +99,10 @@ class Group(AbstractBase):
     )
 
     def update(self, **kwargs):
-        kwargs["time"] = str(datetime.now())
         super().update(**kwargs)
+        self.update_rbac()
+
+    def update_rbac(self):
         for user in self.users:
             user.update_rbac()
 

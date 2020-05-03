@@ -320,6 +320,8 @@ class Pool(AbstractBase):
             )
             setattr(self, f"{object_type}s", objects)
             setattr(self, f"{object_type}_number", len(objects))
+        for group in self.groups:
+            group.update_rbac()
 
 
 class Session(AbstractBase):

@@ -50,9 +50,10 @@ class Database:
             "source",
             "destination",
             "pools",
+            "users",
         ],
         "group": ["id", "services", "pools"],
-        "link": ["id", "pools"],
+        "link": ["id", "pools", "users"],
         "pool": ["id", "services", "device_number", "link_number"],
         "service": [
             "id",
@@ -73,7 +74,7 @@ class Database:
             "time_before_next_run",
             "status",
         ],
-        "user": ["id", "pools", "groups"],
+        "user": ["id", "devices", "pools", "links", "groups"],
         "workflow_edge": ["id", "source_id", "destination_id", "workflow_id"],
     }
 
@@ -324,13 +325,7 @@ class Database:
                 )
             ]
         elif model in ("device", "link") and not current_user.is_admin:
-            return [
-                or_(
-                    getattr(models[model], "pools").any(id=pool.id)
-                    for group in current_user.groups
-                    for pool in group.pools
-                )
-            ]
+            return [getattr(models[model], "users").any(id=current_user.id)]
         else:
             return []
 

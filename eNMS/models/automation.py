@@ -583,8 +583,10 @@ class Run(AbstractBase):
     def device_run(self, payload):
         self.devices = self.compute_devices(payload)
         user = db.fetch("user", allow_none=True, name=self.creator)
-        if not user.is_admin:
-            print(user.allowed_devices())
+        if not user.is_admin and set(self.devices) - set(user.devices):
+            error = f"RBAC ERROR: Unauthorized targets for user '{self.creator}'"
+            self.log("error", error)
+            return {"success": False, "result": error, "runtime": self.runtime}
         if self.run_method != "once":
             self.run_state["progress"]["device"]["total"] += len(self.devices)
         if self.iteration_devices and not self.parent_device:

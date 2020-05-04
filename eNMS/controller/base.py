@@ -374,9 +374,7 @@ class BaseController:
 
     def multiselect_filtering(self, model, **params):
         table = models[model]
-        results = db.query(model, table).filter(
-            table.name.contains(params.get("term"))
-        )
+        results = db.query(model, table).filter(table.name.contains(params.get("term")))
         return {
             "items": [
                 {"text": result.ui_name, "id": str(result.id)}
@@ -408,7 +406,7 @@ class BaseController:
             result = result.order_by(ordering())
         table_result = {
             "draw": int(kwargs["draw"]),
-            "recordsTotal": db.session.query(func.count(table.id)).scalar(),
+            "recordsTotal": db.count(model),
             "recordsFiltered": db.get_query_count(result),
             "data": [
                 obj.table_properties(**kwargs)

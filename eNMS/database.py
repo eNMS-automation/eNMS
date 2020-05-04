@@ -12,7 +12,6 @@ from sqlalchemy import (
     func,
     inspect,
     Integer,
-    or_,
     PickleType,
     String,
     Table,
@@ -305,28 +304,18 @@ class Database:
     def query(self, model, *args):
         query = self.session.query(*args)
         if model == "user":
-            return query 
+            return query
         elif getattr(current_user, "is_admin", False):
             return query
-        elif model in ("device", "link") and current_user:
-            query = query.filter(getattr(models[model], "users").any(id=current_user.id))
-        elif model in ("service", "workflow", "pool") and current_user:
-            query = query.filter(
-                or_(
-                    getattr(models[model], "groups").any(id=group.id)
-                    for group in current_user.groups
-                )
-            )
-        return query
+        else:
+            return models[model].rbac_filter(query)
 
     def fetch_all(self, model, **kwargs):
         return self.fetch(model, allow_none=True, all_matches=True, **kwargs)
 
     def count(self, model, **kwargs):
         return (
-            self.query(model, func.count(models[model].id))
-            .filter_by(**kwargs)
-            .scalar()
+            self.query(model, func.count(models[model].id)).filter_by(**kwargs).scalar()
         )
 
     def get_query_count(self, query):

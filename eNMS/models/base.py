@@ -105,6 +105,10 @@ class AbstractBase(db.base):
             result[property] = value
         return result
 
+    @classmethod
+    def rbac_filter(cls, query):
+        return query
+
     def table_properties(self, **kwargs):
         rest_api = kwargs.get("rest_api_request")
         columns = [c["data"] for c in kwargs["columns"]] if rest_api else None

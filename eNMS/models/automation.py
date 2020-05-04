@@ -172,6 +172,12 @@ class Service(AbstractBase):
     def filename(self):
         return app.strip_all(self.name)
 
+    @classmethod
+    def rbac_filter(cls, query):
+        return query.filter(
+            or_(cls.groups.any(id=group.id) for group in current_user.groups)
+        )
+
     def set_name(self, name=None):
         if self.shared:
             workflow = "[Shared] "

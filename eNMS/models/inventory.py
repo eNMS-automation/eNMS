@@ -1,5 +1,6 @@
+from flask_login import current_user
 from re import search, sub
-from sqlalchemy import Boolean, ForeignKey, Integer
+from sqlalchemy import Boolean, ForeignKey, Integer, or_
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.orm import backref, deferred, relationship
 from sqlalchemy.schema import UniqueConstraint
@@ -42,6 +43,10 @@ class Object(AbstractBase):
         number = f"{self.class_type}_number"
         for pool in self.pools:
             setattr(pool, number, getattr(pool, number) - 1)
+
+    @classmethod
+    def rbac_filter(cls, query):
+        return query.filter(cls.users.any(id=current_user.id))
 
 
 @db.set_custom_properties
@@ -321,6 +326,12 @@ class Pool(AbstractBase):
             setattr(self, f"{object_type}s", objects)
             setattr(self, f"{object_type}_number", len(objects))
         self.update_rbac()
+
+    @classmethod
+    def rbac_filter(cls, query):
+        return query.filter(
+            or_(cls.groups.any(id=group.id) for group in current_user.groups)
+        )
 
     def update_rbac(self):
         for group in self.groups:

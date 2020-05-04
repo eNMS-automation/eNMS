@@ -304,7 +304,11 @@ class Database:
 
     def query(self, model):
         table, query = models[model], self.session.query(models[model])
-        if model in ("device", "link") and current_user:
+        if model == "user":
+            return query 
+        elif getattr(current_user, "is_admin", False):
+            return query
+        elif model in ("device", "link") and current_user:
             query = query.filter(getattr(table, "users").any(id=current_user.id))
         elif model in ("service", "workflow", "pool") and current_user:
             query = query.filter(

@@ -292,7 +292,7 @@ class Database:
             )
 
     def fetch(self, model, allow_none=False, all_matches=False, **kwargs):
-        query = self.query(models[model]).filter_by(**kwargs)
+        query = self.query(model).filter_by(**kwargs)
         result = query.all() if all_matches else query.first()
         if result or allow_none:
             return result
@@ -303,13 +303,13 @@ class Database:
             )
 
     def query(self, model):
-        query, table = self.session.query(model), model.__tablename__
-        if table in ("device", "link") and current_user:
-            query = query.filter(getattr(model, "users").any(id=current_user.id))
-        elif table in ("service", "workflow", "pool") and current_user:
+        table, query = models[model], self.session.query(models[model])
+        if model in ("device", "link") and current_user:
+            query = query.filter(getattr(table, "users").any(id=current_user.id))
+        elif model in ("service", "workflow", "pool") and current_user:
             query = query.filter(
                 or_(
-                    getattr(model, "groups").any(id=group.id)
+                    getattr(table, "groups").any(id=group.id)
                     for group in current_user.groups
                 )
             )

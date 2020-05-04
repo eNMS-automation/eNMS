@@ -332,41 +332,41 @@ class BaseController:
             )
         )
 
-    def build_filtering_constraints(self, obj_type, **kwargs):
-        model, constraints = models[obj_type], []
-        for property in model_properties[obj_type]:
+    def build_filtering_constraints(self, model, **kwargs):
+        table, constraints = models[model], []
+        for property in model_properties[model]:
             value = kwargs["form"].get(property)
             if not value:
                 continue
             filter = kwargs["form"].get(f"{property}_filter")
             if value in ("bool-true", "bool-false"):
-                constraint = getattr(model, property) == (value == "bool-true")
+                constraint = getattr(table, property) == (value == "bool-true")
             elif filter == "equality":
-                constraint = getattr(model, property) == value
+                constraint = getattr(table, property) == value
             elif not filter or filter == "inclusion" or db.dialect == "sqlite":
-                constraint = getattr(model, property).contains(value)
+                constraint = getattr(table, property).contains(value)
             else:
                 compile(value)
                 regex_operator = "regexp" if db.dialect == "mysql" else "~"
-                constraint = getattr(model, property).op(regex_operator)(value)
+                constraint = getattr(table, property).op(regex_operator)(value)
             constraints.append(constraint)
-        for related_model, relation_properties in relationships[obj_type].items():
+        for related_model, relation_properties in relationships[model].items():
             relation_ids = [int(id) for id in kwargs["form"].get(related_model, [])]
             filter = kwargs["form"].get(f"{related_model}_filter")
             if filter == "none":
-                constraint = ~getattr(model, related_model).any()
+                constraint = ~getattr(table, related_model).any()
             elif not relation_ids:
                 continue
             elif relation_properties["list"]:
                 constraint = (and_ if filter == "all" else or_)(
-                    getattr(model, related_model).any(id=relation_id)
+                    getattr(table, related_model).any(id=relation_id)
                     for relation_id in relation_ids
                 )
                 if filter == "not_any":
                     constraint = ~constraint
             else:
                 constraint = or_(
-                    getattr(model, related_model).has(id=relation_id)
+                    getattr(table, related_model).has(id=relation_id)
                     for relation_id in relation_ids
                 )
             constraints.append(constraint)
@@ -387,11 +387,11 @@ class BaseController:
             "total_count": results.count(),
         }
 
-    def filtering(self, table, **kwargs):
-        model = models[table]
+    def filtering(self, model, **kwargs):
+        table = models[model]
         ordering = getattr(
             getattr(
-                model,
+                table,
                 kwargs["columns"][int(kwargs["order"][0]["column"])]["data"],
                 None,
             ),
@@ -399,16 +399,16 @@ class BaseController:
             None,
         )
         try:
-            constraints = self.build_filtering_constraints(table, **kwargs)
+            constraints = self.build_filtering_constraints(model, **kwargs)
         except regex_error:
             return {"error": "Invalid regular expression as search parameter."}
-        constraints.extend(models[table].filtering_constraints(**kwargs))
+        constraints.extend(table.filtering_constraints(**kwargs))
         result = db.query(model).filter(and_(*constraints))
         if ordering:
             result = result.order_by(ordering())
         table_result = {
             "draw": int(kwargs["draw"]),
-            "recordsTotal": db.session.query(func.count(model.id)).scalar(),
+            "recordsTotal": db.session.query(func.count(table.id)).scalar(),
             "recordsFiltered": db.get_query_count(result),
             "data": [
                 obj.table_properties(**kwargs)

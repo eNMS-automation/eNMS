@@ -372,10 +372,10 @@ class BaseController:
             constraints.append(constraint)
         return constraints
 
-    def multiselect_filtering(self, type, **params):
-        model = models[type]
-        results = db.session.query(model).filter(
-            model.name.contains(params.get("term"))
+    def multiselect_filtering(self, model, **params):
+        table = models[model]
+        results = db.query(model, table).filter(
+            table.name.contains(params.get("term"))
         )
         return {
             "items": [
@@ -403,7 +403,7 @@ class BaseController:
         except regex_error:
             return {"error": "Invalid regular expression as search parameter."}
         constraints.extend(table.filtering_constraints(**kwargs))
-        result = db.query(model).filter(and_(*constraints))
+        result = db.query(model, table).filter(and_(*constraints))
         if ordering:
             result = result.order_by(ordering())
         table_result = {

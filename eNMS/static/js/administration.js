@@ -3,10 +3,16 @@ global
 CodeMirror: false
 settings: true
 Dropzone: false
-JSONEditor: false
 */
 
-import { call, configureNamespace, editors, jsonEditors, notify, openPanel } from "./base.js";
+import {
+  call,
+  configureNamespace,
+  editors,
+  jsonEditors,
+  notify,
+  openPanel,
+} from "./base.js";
 import { tables } from "./table.js";
 
 let settingsEditor;

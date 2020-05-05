@@ -8,6 +8,7 @@ eNMS: true
 formProperties: false
 job: false
 jsPanel: false
+JSONEditor: false
 moment: false
 page: false
 relations: false

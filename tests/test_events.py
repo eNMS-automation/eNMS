@@ -46,5 +46,5 @@ def test_create_logs(user_client):
     number_of_logs = len(db.fetch_all("changelog"))
     for i in range(10):
         app.log("warning", str(i))
-        db.session.commit()
-    assert len(db.fetch_all("changelog")) == number_of_logs + 10
+    db.session.commit()
+    assert len(db.fetch_all("changelog")) == number_of_logs + 11

@@ -30,11 +30,10 @@ def test_user_management(user_client):
             "form_type": "user",
             "name": user,
             "email": f"{user}@test.com",
-            "groups": ["Admin"],
             "password": user,
         }
         user_client.post("/update/user", data=dict_user)
-    assert len(db.fetch_all("user")) == 4
+    assert len(db.fetch_all("user")) == 6
     user1 = db.fetch("user", name="user1")
     user_client.post("/delete_instance/user/{}".format(user1.id))
-    assert len(db.fetch_all("user")) == 3
+    assert len(db.fetch_all("user")) == 5

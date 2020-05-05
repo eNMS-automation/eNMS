@@ -1,7 +1,6 @@
 from wtforms.validators import InputRequired
 from wtforms.widgets import TextArea
 
-from eNMS import app
 from eNMS.database import db
 from eNMS.forms import BaseForm, choices, configure_relationships
 from eNMS.forms.fields import (

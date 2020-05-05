@@ -21,7 +21,6 @@ from functools import wraps
 from getpass import getuser
 from itertools import chain
 from os import environ
-from re import search
 from threading import Thread
 from uuid import getnode
 

@@ -8,7 +8,6 @@ from importlib import __import__ as importlib_import
 from io import BytesIO
 from json import loads
 from json.decoder import JSONDecodeError
-from logging import getLogger
 from multiprocessing.pool import ThreadPool
 from napalm import get_network_driver
 from netmiko import ConnectHandler

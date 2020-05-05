@@ -1,7 +1,5 @@
-from collections import defaultdict
 from datetime import datetime
 from flask_login import UserMixin
-from itertools import chain
 from passlib.hash import argon2
 from sqlalchemy import Boolean, Integer
 from sqlalchemy.orm import relationship

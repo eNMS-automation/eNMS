@@ -58,8 +58,8 @@ class User(AbstractBase, UserMixin):
         if self.manual_rbac:
             return
         for access_type in app.rbac:
-            access = list(set().union(*(getattr(g, access_type) for g in self.groups)))
-            setattr(self, access_type, access)
+            group_access = (getattr(group, access_type) for group in self.groups)
+            setattr(self, access_type, list(set().union(*group_access)))
         if self.is_admin:
             return
         for object_type in ("devices", "links"):

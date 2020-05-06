@@ -230,11 +230,17 @@ class Database:
                 ):
                     continue
                 change = f"{attr.key}: "
-                if type(getattr(target, attr.key)) == InstrumentedList:
-                    if hist.deleted:
-                        change += f"DELETED: {hist.deleted}"
-                    if hist.added:
-                        change += f"{' / ' if hist.deleted else ''}ADDED: {hist.added}"
+                property_type = type(getattr(target, attr.key))
+                if property_type in (InstrumentedList, MutableList):
+                    if property_type == MutableList:
+                        added = set(hist.added[0]) - set(hist.deleted[0])
+                        deleted = set(hist.deleted[0]) - set(hist.added[0])
+                    else:
+                        added, deleted = hist.added, hist.deleted
+                    if deleted:
+                        change += f"DELETED: {deleted}"
+                    if added:
+                        change += f"{' / ' if deleted else ''}ADDED: {added}"
                 else:
                     change += (
                         f"'{hist.deleted[0] if hist.deleted else None}' => "

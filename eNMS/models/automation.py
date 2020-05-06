@@ -126,6 +126,7 @@ class Service(AbstractBase):
     def __init__(self, **kwargs):
         kwargs.pop("status", None)
         super().__init__(**kwargs)
+        self.groups = getattr(current_user, "groups", [])
         if "name" not in kwargs:
             self.set_name()
 

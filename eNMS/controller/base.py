@@ -239,7 +239,7 @@ class BaseController:
 
     def log_queue(self, runtime, service, log=None, mode="add"):
         if self.redis:
-            key = f"logs/{runtime}/{service}"
+            key = f"{runtime}/{service}/logs"
             self.run_logs[runtime][int(service)] = None
             if mode == "add":
                 log = self.redis.lpush(key, log)

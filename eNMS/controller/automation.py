@@ -469,7 +469,10 @@ class AutomationController(BaseController):
     def stop_workflow(self, runtime):
         run = db.fetch("run", allow_none=True, runtime=runtime)
         if run and run.status == "Running":
-            self.run_stop[run.parent_runtime] = True
+            if self.redis:
+                self.redis.set(f"stop/{runtime}", "true")
+            else:
+                self.run_stop[run.parent_runtime] = True
             return True
 
     def task_action(self, mode, task_id):

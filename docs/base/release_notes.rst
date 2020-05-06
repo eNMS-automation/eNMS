@@ -7,7 +7,7 @@ Version 3.22
 
 - Remove database url from settings. Configured via env variable DATABASE_URL
 - In Rest Call service and other rest calls with request, use "json" kw instead of "data"
-- Implement remote scheduler
+- Remote scheduler
 - Remove TACACS+ parameters from settings, use env variable instead: TACACS_ADDR, TACACS_PASSWORD
 - Make REST API accept Tacacs and LDAP credentials (in the last version, if you were using TACACS+ or LDAP, you could authenticate
 in the UI but couldn't make calls to the REST API)
@@ -24,6 +24,7 @@ The LDAP server is now configured with the env variable LDAP_SERVER.
 allowing for comparison of results same device / different service, same service / different device, etc.
 - Refactor logging mechanism. In settings.json, add new logging sections to configure whether the log
 for a given logger should also be logged as changelog or service log by default.
+- RBAC
 
 MIGRATION:
 - Remove RBAC in rbac.json

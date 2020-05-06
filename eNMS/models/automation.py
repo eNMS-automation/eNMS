@@ -402,7 +402,10 @@ class Run(AbstractBase):
 
     @property
     def stop(self):
-        return app.run_stop[self.parent_runtime]
+        if app.redis:
+            return bool(app.redis.get(f"stop/{self.runtime}"))
+        else:
+            return app.run_stop[self.parent_runtime]
 
     @property
     def progress(self):
@@ -783,7 +786,6 @@ class Run(AbstractBase):
             status = "success" if results["success"] else "failure"
             self.run_state["progress"]["device"][status] += 1
             self.run_state["summary"][status].append(device.name)
-
             self.create_result({"runtime": app.get_time(), **results}, device)
         self.log("info", "FINISHED", device)
         if self.waiting_time:

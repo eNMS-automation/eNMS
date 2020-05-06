@@ -441,10 +441,16 @@ class Server(Flask):
 
             def post(self, cls):
                 data = request.get_json(force=True)
-                object_data = app.objectify(cls, data)
-                result = db.factory(cls, **object_data).serialized
-                db.session.commit()
-                return result
+                results_list = []
+                print(type(data))
+                print(data)
+                if not isinstance(data, list): data = [data]
+                for piece in data:
+                    object_data = app.objectify(cls, piece)
+                    result = db.factory(cls, **object_data).serialized
+                    db.session.commit()
+                    results_list.append(result)
+                return results_list
 
         class Migrate(Resource):
             decorators = [self.auth.login_required, self.catch_exceptions_and_commit]

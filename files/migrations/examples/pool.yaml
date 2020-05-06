@@ -248,7 +248,7 @@
   device_vendor_match: inclusion
   devices: [SanJose, SanDiego, Philadelphia, LosAngeles, Detroit, Baltimore, Cleveland,
     Cambridge, Minneapolis, NewYork, Sacramento, Orange, Denver, Aserver, Server 2]
-  groups: [SF Users]
+  groups: [San Francisco Users]
   last_modified: ''
   latitude: '37.77'
   link_color: ''

@@ -673,19 +673,23 @@ tables.service = class ServiceTable extends Table {
   }
 
   buttons(row) {
+    let runtimeArg = "";
+    if (row.type != "workflow") runtimeArg = ", null, 'result'";
     return `
       <ul class="pagination pagination-lg" style="margin: 0px; width: 270px">
         <li>
           <button type="button" class="btn btn-sm btn-info"
-          onclick="eNMS.automation.showRuntimePanel('results', ${row.instance})"
-          data-tooltip="Results"><span class="glyphicon glyphicon-list-alt">
-          </span></button>
+          onclick="eNMS.automation.showRuntimePanel('results', ${row.instance}
+          ${runtimeArg})" data-tooltip="Results">
+            <span class="glyphicon glyphicon-list-alt"></span>
+          </button>
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-info"
           onclick="eNMS.automation.showRuntimePanel('logs', ${row.instance})"
-          data-tooltip="Logs"><span class="glyphicon glyphicon-list"></span
-          ></button>
+          data-tooltip="Logs">
+            <span class="glyphicon glyphicon-list"></span>
+          </button>
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-success"

@@ -48,37 +48,72 @@ class AdministrationController(BaseController):
     def database_deletion(self, **kwargs):
         db.delete_all(*kwargs["deletion_types"])
 
-    def result_log_deletion(self, **kwargs):
-        date_time_object = datetime.strptime(kwargs["date_time"], "%d/%m/%Y %H:%M:%S")
-        date_time_string = date_time_object.strftime("%Y-%m-%d %H:%M:%S.%f")
-        for model in kwargs["deletion_types"]:
-            if model == "result":
-                field_name = "runtime"
-            elif model == "changelog":
-                field_name = "time"
-            session_query = db.session.query(models[model]).filter(
-                getattr(models[model], field_name) < date_time_string
-            )
-            session_query.delete(synchronize_session=False)
-            db.session.commit()
+    def delete_file(self, filepath):
+        remove(Path(filepath.replace(">", "/")))
+
+    def edit_file(self, filepath):
+        try:
+            with open(Path(filepath.replace(">", "/"))) as file:
+                return file.read()
+        except UnicodeDecodeError:
+            return {"error": f"Cannot read file (unsupported type)."}
+
+    def export_service(self, service_id):
+        service = db.fetch("service", id=service_id)
+        path = Path(self.path / "files" / "services" / service.filename)
+        path.mkdir(parents=True, exist_ok=True)
+        services = service.deep_services if service.type == "workflow" else [service]
+        services = [service.to_dict(export=True) for service in services]
+        for service_dict in services:
+            for relation in ("devices", "pools", "events"):
+                service_dict.pop(relation)
+        with open(path / "service.yaml", "w") as file:
+            yaml.dump(services, file)
+        if service.type == "workflow":
+            with open(path / "workflow_edge.yaml", "w") as file:
+                yaml.dump(
+                    [edge.to_dict(export=True) for edge in service.deep_edges], file
+                )
+        with open_tar(f"{path}.tgz", "w:gz") as tar:
+            tar.add(path, arcname=service.filename)
+        rmtree(path, ignore_errors=True)
 
     def get_cluster_status(self):
         return [server.status for server in db.fetch_all("server")]
 
+    def get_exported_services(self):
+        return [f for f in listdir(self.path / "files" / "services") if ".tgz" in f]
+
     def get_migration_folders(self):
         return listdir(self.path / "files" / "migrations")
 
-    def objectify(self, model, obj):
-        for property, relation in relationships[model].items():
-            if property not in obj:
-                continue
-            elif relation["list"]:
-                obj[property] = [
-                    db.fetch(relation["model"], name=name).id for name in obj[property]
-                ]
-            else:
-                obj[property] = db.fetch(relation["model"], name=obj[property]).id
-        return obj
+    def get_tree_files(self, path):
+        if path == "root":
+            path = self.settings["paths"]["files"] or self.path / "files"
+        else:
+            path = path.replace(">", "/")
+        return [
+            {
+                "a_attr": {"style": "width: 100%"},
+                "data": {
+                    "modified": ctime(getmtime(str(file))),
+                    "path": str(file),
+                    "name": file.name,
+                },
+                "text": file.name,
+                "children": file.is_dir(),
+                "type": "folder" if file.is_dir() else "file",
+            }
+            for file in Path(path).iterdir()
+        ]
+
+    def migration_export(self, **kwargs):
+        for cls_name in kwargs["import_export_types"]:
+            path = self.path / "files" / "migrations" / kwargs["name"]
+            if not exists(path):
+                makedirs(path)
+            with open(path / f"{cls_name}.yaml", "w") as migration_file:
+                yaml.dump(db.export(cls_name), migration_file)
 
     def migration_import(self, folder="migrations", **kwargs):
         status, models = "Import successful.", kwargs["import_export_types"]
@@ -163,36 +198,36 @@ class AdministrationController(BaseController):
         rmtree(path / service_name, ignore_errors=True)
         return status
 
-    def migration_export(self, **kwargs):
-        for cls_name in kwargs["import_export_types"]:
-            path = self.path / "files" / "migrations" / kwargs["name"]
-            if not exists(path):
-                makedirs(path)
-            with open(path / f"{cls_name}.yaml", "w") as migration_file:
-                yaml.dump(db.export(cls_name), migration_file)
+    def objectify(self, model, obj):
+        for property, relation in relationships[model].items():
+            if property not in obj:
+                continue
+            elif relation["list"]:
+                obj[property] = [
+                    db.fetch(relation["model"], name=name).id for name in obj[property]
+                ]
+            else:
+                obj[property] = db.fetch(relation["model"], name=obj[property]).id
+        return obj
 
-    def export_service(self, service_id):
-        service = db.fetch("service", id=service_id)
-        path = Path(self.path / "files" / "services" / service.filename)
-        path.mkdir(parents=True, exist_ok=True)
-        services = service.deep_services if service.type == "workflow" else [service]
-        services = [service.to_dict(export=True) for service in services]
-        for service_dict in services:
-            for relation in ("devices", "pools", "events"):
-                service_dict.pop(relation)
-        with open(path / "service.yaml", "w") as file:
-            yaml.dump(services, file)
-        if service.type == "workflow":
-            with open(path / "workflow_edge.yaml", "w") as file:
-                yaml.dump(
-                    [edge.to_dict(export=True) for edge in service.deep_edges], file
-                )
-        with open_tar(f"{path}.tgz", "w:gz") as tar:
-            tar.add(path, arcname=service.filename)
-        rmtree(path, ignore_errors=True)
+    def result_log_deletion(self, **kwargs):
+        date_time_object = datetime.strptime(kwargs["date_time"], "%d/%m/%Y %H:%M:%S")
+        date_time_string = date_time_object.strftime("%Y-%m-%d %H:%M:%S.%f")
+        for model in kwargs["deletion_types"]:
+            if model == "result":
+                field_name = "runtime"
+            elif model == "changelog":
+                field_name = "time"
+            session_query = db.session.query(models[model]).filter(
+                getattr(models[model], field_name) < date_time_string
+            )
+            session_query.delete(synchronize_session=False)
+            db.session.commit()
 
-    def get_exported_services(self):
-        return [f for f in listdir(self.path / "files" / "services") if ".tgz" in f]
+    def save_file(self, filepath, **kwargs):
+        if kwargs.get("file_content"):
+            with open(Path(filepath.replace(">", "/")), "w") as file:
+                return file.write(kwargs["file_content"])
 
     def save_settings(self, **kwargs):
         self.settings = kwargs["settings"]
@@ -213,41 +248,6 @@ class AdministrationController(BaseController):
                 db.factory("server", **{**server, **{"ip_address": str(ip_address)}})
             except ConnectionError:
                 continue
-
-    def get_tree_files(self, path):
-        if path == "root":
-            path = self.settings["paths"]["files"] or self.path / "files"
-        else:
-            path = path.replace(">", "/")
-        return [
-            {
-                "a_attr": {"style": "width: 100%"},
-                "data": {
-                    "modified": ctime(getmtime(str(file))),
-                    "path": str(file),
-                    "name": file.name,
-                },
-                "text": file.name,
-                "children": file.is_dir(),
-                "type": "folder" if file.is_dir() else "file",
-            }
-            for file in Path(path).iterdir()
-        ]
-
-    def delete_file(self, filepath):
-        remove(Path(filepath.replace(">", "/")))
-
-    def edit_file(self, filepath):
-        try:
-            with open(Path(filepath.replace(">", "/"))) as file:
-                return file.read()
-        except UnicodeDecodeError:
-            return {"error": f"Cannot read file (unsupported type)."}
-
-    def save_file(self, filepath, **kwargs):
-        if kwargs.get("file_content"):
-            with open(Path(filepath.replace(">", "/")), "w") as file:
-                return file.write(kwargs["file_content"])
 
     def upload_files(self, **kwargs):
         file = kwargs["file"]

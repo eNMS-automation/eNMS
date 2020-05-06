@@ -541,6 +541,8 @@ class Run(AbstractBase):
                 or self.run_method == "once"
             ):
                 results = self.create_result(results)
+            if app.redis and self.runtime == self.parent_runtime:
+                app.redis.delete(*app.redis.keys(f"{self.runtime}/*"))
             db.session.commit()
         return results
 
@@ -661,7 +663,7 @@ class Run(AbstractBase):
         if self.parent_runtime == self.runtime and not device:
             services = list(app.run_logs.get(self.runtime, []))
             for service_id in services:
-                logs = app.log_queue(self.runtime, service_id, mode="pop")
+                logs = app.log_queue(self.runtime, service_id, mode="get")
                 db.factory(
                     "service_log",
                     runtime=self.runtime,

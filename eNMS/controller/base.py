@@ -243,10 +243,8 @@ class BaseController:
             self.run_logs[runtime][int(service)] = None
             if mode == "add":
                 log = self.redis.lpush(key, log)
-            elif mode in ("get", "pop"):
+            else:
                 log = self.redis.lrange(key, 0, -1)[::-1]
-            if mode == "pop":
-                self.redis.delete(key)
         else:
             if mode == "add":
                 return self.run_logs[runtime][int(service)].append(log)

@@ -18,6 +18,7 @@ function doc(page) {
   let endpoint = {
     administration: "base/installation.html",
     dashboard: "base/features.html",
+    "table/configuration": "advanced/configuration_management.html",
     "table/device": "inventory/network_creation.html",
     "table/event": "automation/scheduling.html",
     "table/link": "inventory/network_creation.html",

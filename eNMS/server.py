@@ -129,6 +129,7 @@ class Server(Flask):
 
         @login_manager.request_loader
         def request_loader(request):
+            print("OK"*500, request)
             return db.fetch("user", allow_none=True, name=request.form.get("name"))
 
     def configure_context_processor(self):
@@ -169,6 +170,7 @@ class Server(Flask):
             user = db.fetch("user", name=username, allow_none=True)
             if not user or not password:
                 return False
+            print("test"*300)
             return bool(app.authenticate_user(name=username, password=password))
 
         @self.auth.get_password
@@ -402,6 +404,7 @@ class Server(Flask):
             decorators = [self.auth.login_required, self.catch_exceptions_and_commit]
 
             def get(self, cls, name):
+                print("USER"*500, current_user, current_user.__dict__)
                 return db.fetch(cls, name=name).to_dict(
                     relation_names_only=True, exclude=["positions"]
                 )

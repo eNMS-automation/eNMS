@@ -402,8 +402,8 @@ class Run(AbstractBase):
 
     @property
     def stop(self):
-        if app.redis:
-            return bool(app.redis.get(f"stop/{self.runtime}"))
+        if app.redis_queue:
+            return bool(app.redis("get", f"stop/{self.runtime}"))
         else:
             return app.run_stop[self.parent_runtime]
 
@@ -541,8 +541,8 @@ class Run(AbstractBase):
                 or self.run_method == "once"
             ):
                 results = self.create_result(results)
-            if app.redis and self.runtime == self.parent_runtime:
-                app.redis.delete(*app.redis.keys(f"{self.runtime}/*"))
+            if app.redis_queue and self.runtime == self.parent_runtime:
+                app.redis("delete", *app.redis("keys", f"{self.runtime}/*"))
             db.session.commit()
         return results
 
@@ -668,7 +668,7 @@ class Run(AbstractBase):
                     "service_log",
                     runtime=self.runtime,
                     service=service_id,
-                    content="\n".join(logs),
+                    content="\n".join(logs or []),
                 )
             if self.trigger == "REST":
                 results["devices"] = {}

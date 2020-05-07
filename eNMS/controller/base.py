@@ -19,6 +19,7 @@ from os.path import exists
 from pathlib import Path
 from re import compile, error as regex_error
 from redis import Redis
+from redis.exceptions import ConnectionError, TimeoutError
 from requests import Session as RequestSession
 from requests.adapters import HTTPAdapter
 from requests.packages.urllib3.util.retry import Retry
@@ -199,8 +200,8 @@ class BaseController:
 
     def init_redis(self):
         host = environ.get("REDIS_ADDR")
-        self.redis = (
-            Redis(host=host, port=6379, db=0, charset="utf-8", decode_responses=True)
+        self.redis_queue = (
+            Redis(host=host, port=6379, db=0, charset="utf-8", decode_responses=True, socket_timeout=0.1)
             if host
             else None
         )
@@ -237,14 +238,22 @@ class BaseController:
         )
         self.syslog_server.start()
 
+    def redis(self, operation, *args, **kwargs):
+        try:
+            return getattr(self.redis_queue, operation)(*args, **kwargs)
+        except (ConnectionError, TimeoutError):
+            self.log("error", f"Redis Queue Unreachable", changelog=True)
+
     def log_queue(self, runtime, service, log=None, mode="add"):
-        if self.redis:
+        if self.redis_queue:
             key = f"{runtime}/{service}/logs"
             self.run_logs[runtime][int(service)] = None
             if mode == "add":
-                log = self.redis.lpush(key, log)
+                log = self.redis("lpush", key, log)
             else:
-                log = self.redis.lrange(key, 0, -1)[::-1]
+                log = self.redis("lrange", key, 0, -1)
+                if log:
+                    log = log[::-1]
         else:
             if mode == "add":
                 return self.run_logs[runtime][int(service)].append(log)

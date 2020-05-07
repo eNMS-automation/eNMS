@@ -182,7 +182,7 @@ class AutomationController(BaseController):
         if log_instance:
             log = log_instance.content
         else:
-            log = "\n".join(self.log_queue(runtime, service, mode="get"))
+            log = "\n".join(self.log_queue(runtime, service, mode="get") or [])
         return {"logs": log, "refresh": not log_instance}
 
     def get_service_state(self, path, runtime=None):
@@ -469,8 +469,8 @@ class AutomationController(BaseController):
     def stop_workflow(self, runtime):
         run = db.fetch("run", allow_none=True, runtime=runtime)
         if run and run.status == "Running":
-            if self.redis:
-                self.redis.set(f"stop/{runtime}", "true")
+            if self.redis_queue:
+                self.redis("set", f"stop/{runtime}", "true")
             else:
                 self.run_stop[run.parent_runtime] = True
             return True

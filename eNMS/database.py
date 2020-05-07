@@ -285,7 +285,6 @@ class Database:
                 )
 
     def configure_associations(self):
-        print(models)
         for model1, model2 in self.many_to_many_relationships:
             kw = {"ondelete": "cascade"} if model1 == "run" else {}
             setattr(

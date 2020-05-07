@@ -90,6 +90,23 @@ class Database:
 
     dont_serialize = {"device": ["configuration", "operational_data"]}
 
+    many_to_many_relationships = (
+        ("user", "device"),
+        ("user", "group"),
+        ("user", "link"),
+        ("service", "device"),
+        ("service", "group"),
+        ("service", "pool"),
+        ("run", "device"),
+        ("run", "pool"),
+        ("task", "device"),
+        ("task", "pool"),
+        ("service", "workflow"),
+        ("pool", "device"),
+        ("pool", "group"),
+        ("pool", "link"),
+    )
+
     def __init__(self):
         self.database_url = environ.get("DATABASE_URL", "sqlite:///database.db")
         self.dialect = self.database_url.split(":")[0]
@@ -268,22 +285,8 @@ class Database:
                 )
 
     def configure_associations(self):
-        for model1, model2 in (
-            ("user", "device"),
-            ("user", "group"),
-            ("user", "link"),
-            ("service", "device"),
-            ("service", "group"),
-            ("service", "pool"),
-            ("run", "device"),
-            ("run", "pool"),
-            ("task", "device"),
-            ("task", "pool"),
-            ("service", "workflow"),
-            ("pool", "device"),
-            ("pool", "group"),
-            ("pool", "link"),
-        ):
+        print(models)
+        for model1, model2 in self.many_to_many_relationships:
             kw = {"ondelete": "cascade"} if model1 == "run" else {}
             setattr(
                 self,

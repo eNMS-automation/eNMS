@@ -1394,7 +1394,7 @@
   max_processes: 5
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression Workflow E: Iteration Targets] Modify Payload for Iteration'
+  name: '[Regression Workflow F: Workflow of Workflows] Modify Payload for Iteration'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -3000,7 +3000,7 @@
   waiting_time: 0
 - auto_find_prompt: true
   close_connection: false
-  command: show interface {{get_var('non_default_iteration_value_name')}}
+  command: show interface {{non_default_iteration_value_name}}
   completion_time: 1
   config_mode: false
   content_match: 255.255.255.255
@@ -3040,7 +3040,7 @@
   jump_command: ''
   jump_on_connect: false
   jump_username: ''
-  last_modified: '2019-12-09 12:28:55.349573'
+  last_modified: '2020-05-07 04:12:14.591180'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -3083,7 +3083,7 @@
   waiting_time: 0
 - auto_find_prompt: true
   close_connection: false
-  command: show interface {{get_var('iteration_value')}}
+  command: show interface {{iteration_value}}
   completion_time: 1
   config_mode: false
   content_match: 255.255.255.255
@@ -3123,7 +3123,7 @@
   jump_command: ''
   jump_on_connect: false
   jump_username: ''
-  last_modified: '2019-10-04 14:55:17.403338'
+  last_modified: '2020-05-07 04:12:20.834493'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -3166,7 +3166,7 @@
   waiting_time: 0
 - auto_find_prompt: true
   close_connection: false
-  command: show interface {{get_var('iteration_value')}}
+  command: show interface {{iteration_value}}
   completion_time: 1
   config_mode: false
   content_match: 255.255.255.255
@@ -3206,7 +3206,7 @@
   jump_command: ''
   jump_on_connect: false
   jump_username: ''
-  last_modified: '2019-10-21 19:23:12.184550'
+  last_modified: '2020-05-07 04:12:37.718852'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -3488,7 +3488,7 @@
   iteration_devices_property: name
   iteration_values: '["Washington", "Atlanta"]'
   iteration_variable_name: iteration_value
-  last_modified: '2019-10-21 19:21:56.505065'
+  last_modified: '2020-05-07 04:12:30.478077'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -3511,7 +3511,7 @@
   preprocessing: ''
   reply_to: ''
   reserved: false
-  rest_url: http://127.0.0.1:5000/rest/instance/device/{{get_var('iteration_value')}}
+  rest_url: http://127.0.0.1:5000/rest/instance/device/{{iteration_value}}
   run_method: per_device
   scoped_name: Iteration Targets Workflow - Test 4
   send_notification: false
@@ -4176,11 +4176,11 @@
   send_notification_method: mail
   services: ['[Shared] Start', '[Shared] End', '[Regression Workflow F: Workflow of
       Workflows] Regression Workflow 5: VRF creation and deletion with Napalm', '[Regression
-      Workflow E: Iteration Targets] Modify Payload for Iteration', '[Regression Workflow
-      F: Workflow of Workflows] Regression Workflow F S2: Access Variables from Parent
-      Workflow', '[Regression Workflow F: Workflow of Workflows] Regression Workflow
-      F S1: Subworkflow of Workflow', '[Regression Workflow F: Workflow of Workflows]
-      Show interfaces with Netmiko', '[Shared] NAPALM: Get interfaces']
+      Workflow F: Workflow of Workflows] Modify Payload for Iteration', '[Regression
+      Workflow F: Workflow of Workflows] Regression Workflow F S2: Access Variables
+      from Parent Workflow', '[Regression Workflow F: Workflow of Workflows] Regression
+      Workflow F S1: Subworkflow of Workflow', '[Regression Workflow F: Workflow of
+      Workflows] Show interfaces with Netmiko', '[Shared] NAPALM: Get interfaces']
   shared: false
   skip: false
   skip_query: ''
@@ -4765,12 +4765,12 @@
   scoped_name: 'Regression Workflow E: Iteration Targets'
   send_notification: false
   send_notification_method: mail
-  services: ['[Shared] Start', '[Shared] End', '[Regression Workflow E: Iteration
-      Targets] Modify Payload for Iteration', '[Regression Workflow E: Iteration Targets]
-      Iteration Target Workflow - Test 2', '[Regression Workflow E: Iteration Targets]
-      Iteration Targets Workflow - Test 1', '[Regression Workflow E: Iteration Targets]
-      Iteration Target Workflow - Test 3', '[Regression Workflow E: Iteration Targets]
-      Iteration Targets Workflow - Test 4']
+  services: ['[Shared] Start', '[Shared] End', '[Regression Workflow F: Workflow of
+      Workflows] Modify Payload for Iteration', '[Regression Workflow E: Iteration
+      Targets] Iteration Target Workflow - Test 2', '[Regression Workflow E: Iteration
+      Targets] Iteration Targets Workflow - Test 1', '[Regression Workflow E: Iteration
+      Targets] Iteration Target Workflow - Test 3', '[Regression Workflow E: Iteration
+      Targets] Iteration Targets Workflow - Test 4']
   shared: false
   skip: false
   skip_query: ''

@@ -40,8 +40,8 @@ class NetmikoValidationService(ConnectionService):
 
     def job(self, run, payload, device):
         command = run.sub(run.command, locals())
+        netmiko_connection = run.netmiko_connection(device)
         try:
-            netmiko_connection = run.netmiko_connection(device)
             prompt = run.enter_remote_device(netmiko_connection, device)
             netmiko_connection.session_log.truncate(0)
             run.log(

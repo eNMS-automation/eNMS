@@ -461,11 +461,7 @@ class Run(AbstractBase):
     def init_state(self):
         if app.run_db[self.parent_runtime].get(self.path):
             return
-        state = {
-            "progress": {
-                "device": {"total": 0, "success": 0, "failure": 0, "skipped": 0}
-            },
-        }
+        state = {}
         if self.placeholder:
             state["placeholder"] = self.placeholder.get_properties()
         if self.service.type == "workflow":
@@ -487,6 +483,7 @@ class Run(AbstractBase):
             if not method:
                 store[last] = value
             elif method == "increment":
+                store.setdefault(last, 0)
                 store[last] += value
             else:
                 store.setdefault(last, []).append(value)

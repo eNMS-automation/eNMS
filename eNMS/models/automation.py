@@ -451,6 +451,8 @@ class Run(AbstractBase):
         return list(devices)
 
     def init_state(self):
+        if app.run_db[self.parent_runtime].get(self.path):
+            return
         state = {
             "status": "Idle",
             "success": None,
@@ -492,7 +494,6 @@ class Run(AbstractBase):
         self.run_state["status"] = "Running"
         start = datetime.now().replace(microsecond=0)
         try:
-            a = [][0]
             app.service_db[self.service.id]["runs"] += 1
             self.service.status = "Running"
             db.session.commit()

@@ -213,7 +213,7 @@ class AutomationController(BaseController):
         run = db.fetch("run", parent_runtime=runtime)
         state = run.result().result["state"]
 
-        def rec(service, path=None):
+        def rec(service, path=str(run.service_id)):
             runs = db.fetch(
                 "run",
                 parent_runtime=runtime,
@@ -223,7 +223,7 @@ class AutomationController(BaseController):
             )
             if service.scoped_name in ("Start", "End") or not runs:
                 return
-            progress = state.get(path or str(service.id), {}).get("progress")
+            progress = state.get(path, {}).get("progress")
             track_progress = progress and progress["device"]["total"]
             data = {"progress": progress["device"]} if track_progress else {}
             color = "32CD32" if all(run.success for run in runs) else "FF6666"

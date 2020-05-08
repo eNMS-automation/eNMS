@@ -474,7 +474,6 @@ class Run(AbstractBase):
                 "failure": 0,
                 "skipped": 0,
             }
-        print("TTTT"*100, self.path)
         app.run_db[self.parent_runtime][self.path] = state
 
     def write_state(self, path, value):

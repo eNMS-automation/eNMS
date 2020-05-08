@@ -223,11 +223,7 @@ class AutomationController(BaseController):
             )
             if service.scoped_name in ("Start", "End") or not runs:
                 return
-            if not path:
-                path = str(service.id)
-                progress = state["progress"]
-            else:
-                progress = state["services"].get(path, {}).get("progress")
+            progress = state.get(path or str(service.id), {}).get("progress")
             track_progress = progress and progress["device"]["total"]
             data = {"progress": progress["device"]} if track_progress else {}
             color = "32CD32" if all(run.success for run in runs) else "FF6666"

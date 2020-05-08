@@ -389,16 +389,11 @@ class Run(AbstractBase):
 
     @property
     def run_state(self):
-        if self.state:
-            return self.state
-        elif self.runtime == self.parent_runtime:
-            return app.run_db[self.runtime]
-        else:
-            return app.run_db[self.parent_runtime]["services"][self.path]
+        return self.state or app.run_db[self.parent_runtime][self.path]
 
     @property
     def edge_state(self):
-        return app.run_db[self.parent_runtime]["edges"]
+        return app.run_db[self.parent_runtime][self.path]["edges"]
 
     @property
     def stop(self):
@@ -479,14 +474,18 @@ class Run(AbstractBase):
                 "failure": 0,
                 "skipped": 0,
             }
-        if self.runtime == self.parent_runtime:
-            if self.runtime in app.run_db:
-                return
-            app.run_db[self.runtime] = state
+        app.run_db[self.parent_runtime][self.path] = state
+
+    def write_state(self, path, value):
+        path = f"{self.parent_runtime}/{self.path}/{path}"
+        if app.redis_queue:
+            pass
         else:
-            service_states = app.run_db[self.parent_runtime]["services"]
-            if self.path not in service_states:
-                service_states[self.path] = state
+            *keys, last = path.split("/")
+            store = app.run_db
+            for key in keys:
+                store = store[key]
+            store[last] = value
 
     def run(self, payload):
         self.init_state()

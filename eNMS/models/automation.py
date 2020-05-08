@@ -388,8 +388,13 @@ class Run(AbstractBase):
         return {k: getattr(self.service, k) for k in ("id", "type", "name")}
 
     @property
-    def run_state(self):
-        return self.state or app.run_db[self.parent_runtime][self.path]
+    def get_state(self):
+        if self.state:
+            return self.state
+        elif app.redis_queue:
+            pass
+        else:
+            return app.run_db[self.parent_runtime][self.path]
 
     @property
     def edge_state(self):
@@ -404,8 +409,8 @@ class Run(AbstractBase):
 
     @property
     def progress(self):
-        if self.status == "Running" and self.run_state.get("progress"):
-            progress = self.run_state["progress"]["device"]
+        if self.status == "Running" and self.get_state.get("progress"):
+            progress = self.get_state["progress"]["device"]
             try:
                 return (
                     f"{progress['success'] + progress['failure']}/{progress['total']}"
@@ -487,7 +492,6 @@ class Run(AbstractBase):
             store = app.run_db
             for key in keys:
                 store = store[key]
-            value = store[last] + value if increment else value
             if not method:
                 store[last] = value
             elif method == "increment":
@@ -510,11 +514,11 @@ class Run(AbstractBase):
             results = {"success": False, "runtime": self.runtime, "result": result}
         finally:
             db.session.commit()
-            results["summary"] = self.run_state.get("summary", None)
+            results["summary"] = self.get_state.get("summary", None)
             self.status = "Aborted (STOP)" if self.stop else "Completed"
             self.write_state("status", self.status)
-            if self.run_state["success"] is not False:
-                self.success = self.run_state["success"] = results["success"]
+            if self.get_state["success"] is not False:
+                self.success = self.get_state["success"] = results["success"]
             if self.send_notification:
                 results = self.notify(results)
             app.service_db[self.service.id]["runs"] -= 1
@@ -590,7 +594,7 @@ class Run(AbstractBase):
         derived_run.properties = self.properties
         success = derived_run.run(payload)["success"]
         key = "success" if success else "failure"
-        self.run_state["summary"][key].append(device.name)
+        self.write_state(f"summary/{key}", device.name, "append")
         return success
 
     def device_run(self, payload):
@@ -601,7 +605,7 @@ class Run(AbstractBase):
             self.log("error", error)
             return {"success": False, "result": error, "runtime": self.runtime}
         if self.run_method != "once":
-            self.run_state["progress"]["device"]["total"] += len(self.devices)
+            self.write_state("progress/device/total", len(self.devices), "increment")
         if self.iteration_devices and not self.parent_device:
             if not self.workflow:
                 return {
@@ -744,9 +748,9 @@ class Run(AbstractBase):
             skip_service = self.eval(self.skip_query, **locals())[0]
         if skip_service or self.skip:
             if device:
-                self.run_state["progress"]["device"]["skipped"] += 1
+                self.write_state("progress/device/skipped", 1, "increment")
                 key = "success" if self.skip_value == "True" else "failure"
-                self.run_state["summary"][key].append(device.name)
+                self.write_state(f"summary/{key}", device.name, "append")
             return {
                 "result": "skipped",
                 "success": self.skip_value == "True",
@@ -788,8 +792,8 @@ class Run(AbstractBase):
         results["duration"] = str(datetime.now().replace(microsecond=0) - start)
         if device:
             status = "success" if results["success"] else "failure"
-            self.run_state["progress"]["device"][status] += 1
-            self.run_state["summary"][status].append(device.name)
+            self.write_state(f"progress/device/{status}", 1, "increment")
+            self.write_state(f"summary/{status}", device.name, "append")
             self.create_result({"runtime": app.get_time(), **results}, device)
         self.log("info", "FINISHED", device)
         if self.waiting_time:

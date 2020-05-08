@@ -177,9 +177,9 @@ class Workflow(Service):
             "success": list(success_devices),
             "failure": list(failure_devices),
         }
-        run.run_state["progress"]["device"]["success"] = len(success_devices)
-        run.run_state["progress"]["device"]["failure"] = len(failure_devices)
-        run.run_state["summary"] = summary
+        run.write_state("progress/device/success", len(success_devices))
+        run.write_state("progress/device/failure", len(failure_devices))
+        run.write_state("summary", summary)
         db.session.refresh(run)
         run.restart_run = restart_run
         return {"payload": payload, "success": success}
@@ -222,7 +222,7 @@ class Workflow(Service):
                 results = service_run.run(payload)
             if not device:
                 status = "success" if results["success"] else "failure"
-                run.run_state["progress"]["service"][status] += 1
+                run.write_state(f"progress/service/{status}", 1, "increment")
             for successor, edge in service.adjacent_services(
                 self, "destination", "success" if results["success"] else "failure",
             ):

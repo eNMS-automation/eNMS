@@ -201,7 +201,14 @@ class BaseController:
     def init_redis(self):
         host = environ.get("REDIS_ADDR")
         self.redis_queue = (
-            Redis(host=host, port=6379, db=0, charset="utf-8", decode_responses=True, socket_timeout=0.1)
+            Redis(
+                host=host,
+                port=6379,
+                db=0,
+                charset="utf-8",
+                decode_responses=True,
+                socket_timeout=0.1,
+            )
             if host
             else None
         )

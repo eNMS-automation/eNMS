@@ -391,7 +391,8 @@ class Run(AbstractBase):
         if self.state:
             return self.state
         elif app.redis_queue:
-            pass
+            keys = app.redis("keys", f"{self.parent_runtime}/state/*")
+            print(keys)
         else:
             return app.run_db[self.parent_runtime]
 
@@ -480,11 +481,14 @@ class Run(AbstractBase):
         app.run_db[self.parent_runtime][self.path] = state
 
     def write_state(self, path, value, method=None):
-        path = f"{self.parent_runtime}/{self.path}/{path}"
         if app.redis_queue:
-            pass
+            app.redis(
+                {None: "set", "append": "lpush", "increment": "hincrby"}[method],
+                f"{self.parent_runtime}/state/{self.path}/{path}",
+                value,
+            )
         else:
-            *keys, last = path.split("/")
+            *keys, last = f"{self.parent_runtime}/{self.path}/{path}".split("/")
             store = app.run_db
             for key in keys:
                 store = store[key]

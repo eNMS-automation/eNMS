@@ -842,7 +842,6 @@ export function getServiceState(id, first) {
 function displayWorkflowState(result) {
   resetDisplay();
   updateRuntimes(result);
-  console.log(result.state)
   if (!nodes || !edges || !result.state) return;
   for (let [path, state] of Object.entries(result.state)) {
     const id = parseInt(path.split(">").slice(-1)[0]);

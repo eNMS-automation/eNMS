@@ -393,7 +393,7 @@ class Run(AbstractBase):
         elif app.redis_queue:
             pass
         else:
-            return app.run_db[self.parent_runtime].get(self.path, {})
+            return app.run_db[self.parent_runtime]
 
     @property
     def edge_state(self):
@@ -408,7 +408,7 @@ class Run(AbstractBase):
 
     @property
     def progress(self):
-        progress = self.get_state().get("progress")
+        progress = self.get_state().get(self.path, {}).get("progress")
         if not progress:
             return "N/A"
         progress = progress["device"]
@@ -510,7 +510,7 @@ class Run(AbstractBase):
             results = {"success": False, "runtime": self.runtime, "result": result}
         finally:
             db.session.commit()
-            state = self.get_state()
+            state = self.get_state()[self.path]
             results["summary"] = state.get("summary", None)
             self.status = "Aborted (STOP)" if self.stop else "Completed"
             self.write_state("status", self.status)
@@ -525,7 +525,7 @@ class Run(AbstractBase):
                 datetime.now().replace(microsecond=0) - start
             )
             if self.runtime == self.parent_runtime:
-                self.state = results["state"] = state
+                self.state = results["state"] = app.run_db.pop(self.parent_runtime)
                 self.close_remaining_connections()
             if self.task and not (self.task.frequency or self.task.crontab_expression):
                 self.task.is_active = False

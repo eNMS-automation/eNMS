@@ -387,14 +387,13 @@ class Run(AbstractBase):
     def service_properties(self):
         return {k: getattr(self.service, k) for k in ("id", "type", "name")}
 
-    @property
     def get_state(self):
         if self.state:
             return self.state
         elif app.redis_queue:
             pass
         else:
-            return app.run_db[self.parent_runtime][self.path]
+            return app.run_db[self.parent_runtime].get(self.path, {})
 
     @property
     def edge_state(self):
@@ -409,17 +408,14 @@ class Run(AbstractBase):
 
     @property
     def progress(self):
-        if self.status == "Running" and self.get_state.get("progress"):
-            progress = self.get_state["progress"]["device"]
-            try:
-                return (
-                    f"{progress['success'] + progress['failure']}/{progress['total']}"
-                    f" ({progress['failure']} failed)"
-                )
-            except KeyError:
-                return "N/A"
-        else:
+        progress = self.get_state().get("progress")
+        if not progress:
             return "N/A"
+        progress = progress["device"]
+        return (
+            f"{progress['success'] + progress['failure']}"
+            f"/{progress['total']} ({progress['failure']} failed)"
+        )
 
     def compute_devices_from_query(_self, query, property, **locals):  # noqa: N805
         values = _self.eval(query, **locals)[0]
@@ -514,11 +510,12 @@ class Run(AbstractBase):
             results = {"success": False, "runtime": self.runtime, "result": result}
         finally:
             db.session.commit()
-            results["summary"] = self.get_state.get("summary", None)
+            state = self.get_state()
+            results["summary"] = state.get("summary", None)
             self.status = "Aborted (STOP)" if self.stop else "Completed"
             self.write_state("status", self.status)
-            if self.get_state["success"] is not False:
-                self.success = self.get_state["success"] = results["success"]
+            if state["success"] is not False:
+                self.success = state["success"] = results["success"]
             if self.send_notification:
                 results = self.notify(results)
             app.service_db[self.service.id]["runs"] -= 1
@@ -528,7 +525,7 @@ class Run(AbstractBase):
                 datetime.now().replace(microsecond=0) - start
             )
             if self.runtime == self.parent_runtime:
-                self.state = results["state"] = app.run_db.pop(self.runtime)
+                self.state = results["state"] = state
                 self.close_remaining_connections()
             if self.task and not (self.task.frequency or self.task.crontab_expression):
                 self.task.is_active = False

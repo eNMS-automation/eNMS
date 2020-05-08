@@ -478,7 +478,7 @@ class Run(AbstractBase):
             }
         app.run_db[self.parent_runtime][self.path] = state
 
-    def write_state(self, path, value):
+    def write_state(self, path, value, method=None):
         path = f"{self.parent_runtime}/{self.path}/{path}"
         if app.redis_queue:
             pass
@@ -487,11 +487,17 @@ class Run(AbstractBase):
             store = app.run_db
             for key in keys:
                 store = store[key]
-            store[last] = value
+            value = store[last] + value if increment else value
+            if not method:
+                store[last] = value
+            elif method == "increment":
+                store[last] += value
+            else:
+                getattr(store[last], method)(value)
 
     def run(self, payload):
         self.init_state()
-        self.run_state["status"] = "Running"
+        self.write_state("status", "Running")
         start = datetime.now().replace(microsecond=0)
         try:
             app.service_db[self.service.id]["runs"] += 1
@@ -506,7 +512,7 @@ class Run(AbstractBase):
             db.session.commit()
             results["summary"] = self.run_state.get("summary", None)
             self.status = "Aborted (STOP)" if self.stop else "Completed"
-            self.run_state["status"] = self.status
+            self.write_state("status", self.status)
             if self.run_state["success"] is not False:
                 self.success = self.run_state["success"] = results["success"]
             if self.send_notification:

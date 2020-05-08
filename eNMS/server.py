@@ -21,7 +21,8 @@ from flask_wtf.csrf import CSRFProtect
 from functools import wraps
 from getpass import getuser
 from itertools import chain
-from os import environ
+from importlib import import_module
+from os import environ, walk
 from re import search
 from uuid import getnode
 
@@ -47,6 +48,7 @@ class Server(Flask):
         super().__init__(__name__, static_folder=static_folder)
         self.update_config(mode)
         self.register_extensions()
+        self.register_plugins()
         self.configure_login_manager()
         self.configure_context_processor()
         self.configure_errors()
@@ -111,6 +113,29 @@ class Server(Flask):
                 "WTF_CSRF_ENABLED": mode != "test",
             }
         )
+
+    def register_plugins(self):
+        path_plugins = app.settings["app"]["plugin_path"]
+        plugin_dirs = next(walk(path_plugins))[1]
+        for plugin_dir in plugin_dirs:
+            if not plugin_dir[0] in ["_", "."]:
+                plugin_module = import_module(f"eNMS.plugins.{plugin_dir}")
+                if not hasattr(plugin_module, "plugin"):
+                    app.log(
+                        "info",
+                        f"""Loading plugin failed:
+                         {plugin_dir} missing attribute in '__init__.py'""",
+                    )
+                    continue
+                plugin = plugin_module.plugin
+                if plugin.active:
+                    app.log("info", f"Loading plugin: {plugin.description}")
+                    app.rbac["menu"]["Plugins"]["pages"].update(plugin.pages)
+                    self.register_blueprint(
+                        plugin.blueprint, url_prefix=plugin.url_prefix
+                    )
+                else:
+                    app.log("info", f"Plugin: {plugin.description} is deactivated.")
 
     def register_extensions(self):
         self.auth = HTTPBasicAuth()

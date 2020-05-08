@@ -846,10 +846,13 @@ function displayWorkflowState(result) {
   for (let [path, state] of Object.entries(result.state)) {
     const id = parseInt(path.split(">").slice(-1)[0]);
     if (ends.has(id) || !(id in nodes._data)) continue;
-    const progress = state.progress.device;
+    const total = parseInt(state.progress.device.total) || 0;
+    const success = parseInt(state.progress.device.success) || 0;
+    const skipped = parseInt(state.progress.device.skipped) || 0;
+    const failure = parseInt(state.progress.device.failure) || 0;
     colorService(
       id,
-      progress.total && progress.skipped == progress.total
+      total && skipped == total
         ? "#D3D3D3"
         : state.success === true
         ? "#32cd32"
@@ -857,16 +860,16 @@ function displayWorkflowState(result) {
         ? "#FF6666"
         : "#00CCFF"
     );
-    if (progress.total) {
+    if (total) {
       let label = `<b>${nodes.get(id).name}</b>\n`;
-      let progressLabel = `Progress - ${progress.success +
-        progress.failure +
-        progress.skipped}/${progress.total}`;
+      let progressLabel = `Progress - ${success +
+        failure +
+        skipped}/${total}`;
       label += `—————\n${progressLabel}`;
       let progressInfo = [];
-      if (progress.success) progressInfo.push(`${progress.success} passed`);
-      if (progress.failure) progressInfo.push(`${progress.failure} failed`);
-      if (progress.skipped) progressInfo.push(`${progress.skipped} skipped`);
+      if (success) progressInfo.push(`${success} passed`);
+      if (failure) progressInfo.push(`${failure} failed`);
+      if (skipped) progressInfo.push(`${skipped} skipped`);
       if (progressInfo.length) label += ` (${progressInfo.join(", ")})`;
       nodes.update({
         id: id,
@@ -874,7 +877,8 @@ function displayWorkflowState(result) {
       });
     }
   };
-  for (let [id, devices] of Object.entries(result.state[currentPath].edges)) {
+  if (!result.state.edges) return;
+  for (let [id, devices] of Object.entries(result.state.edges)) {
     if (!edges.get(id)) continue;
     edges.update({
       id: id,

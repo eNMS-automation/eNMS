@@ -398,7 +398,6 @@ class Run(AbstractBase):
                 for key in path:
                     inner_store = inner_store.setdefault(key, {})
                 inner_store[last_key] = value
-            print(state)
             return state
         else:
             return app.run_db[self.parent_runtime]
@@ -463,32 +462,18 @@ class Run(AbstractBase):
         if app.run_db[self.parent_runtime].get(self.path):
             return
         state = {
-            "status": "Idle",
             "progress": {
                 "device": {"total": 0, "success": 0, "failure": 0, "skipped": 0}
             },
-            "attempt": 0,
-            "waiting_time": {
-                "total": self.service.waiting_time,
-                "left": self.service.waiting_time,
-            },
-            "summary": {"success": [], "failure": []},
         }
         if self.placeholder:
             state["placeholder"] = self.placeholder.get_properties()
         if self.service.type == "workflow":
-            state.update({"edges": defaultdict(int), "services": defaultdict(dict)})
-            state["progress"]["service"] = {
-                "total": len(self.service.services),
-                "success": 0,
-                "failure": 0,
-                "skipped": 0,
-            }
+            state["edges"] = defaultdict(int)
         app.run_db[self.parent_runtime][self.path] = state
 
     def write_state(self, path, value, method=None):
         if app.redis_queue:
-            print(f"{self.parent_runtime}/state/{self.path}/{path}", value)
             app.redis(
                 {None: "set", "append": "lpush", "increment": "incr"}[method],
                 f"{self.parent_runtime}/state/{self.path}/{path}",
@@ -498,13 +483,13 @@ class Run(AbstractBase):
             *keys, last = f"{self.parent_runtime}/{self.path}/{path}".split("/")
             store = app.run_db
             for key in keys:
-                store = store[key]
+                store = store.setdefault(key, {})
             if not method:
                 store[last] = value
             elif method == "increment":
                 store[last] += value
             else:
-                getattr(store[last], method)(value)
+                store.setdefault(last, []).append(value)
 
     def run(self, payload):
         self.init_state()
@@ -521,21 +506,20 @@ class Run(AbstractBase):
             results = {"success": False, "runtime": self.runtime, "result": result}
         finally:
             db.session.commit()
-            state = self.get_state()[self.path]
-            results["summary"] = state.get("summary", None)
-            self.status = "Aborted (STOP)" if self.stop else "Completed"
-            self.write_state("status", self.status)
-            self.success = results["success"]
+            state = self.get_state()
+            service_state = state[self.path]
+            results["summary"] = service_state.get("summary", None)
+            self.status = state["status"] = "Aborted" if self.stop else "Completed"
+            self.success = state["success"] = results["success"]
             if self.send_notification:
                 results = self.notify(results)
             app.service_db[self.service.id]["runs"] -= 1
             if not app.service_db[self.id]["runs"]:
                 self.service.status = "Idle"
-            results["duration"] = self.duration = str(
-                datetime.now().replace(microsecond=0) - start
-            )
+            now = datetime.now().replace(microsecond=0)
+            results["duration"] = self.duration = str(now - start)
             if self.runtime == self.parent_runtime:
-                self.state = results["state"] = app.run_db.pop(self.parent_runtime)
+                self.state = results["state"] = state
                 self.close_remaining_connections()
             if self.task and not (self.task.frequency or self.task.crontab_expression):
                 self.task.is_active = False

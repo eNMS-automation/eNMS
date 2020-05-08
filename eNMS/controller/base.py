@@ -200,7 +200,6 @@ class BaseController:
 
     def init_redis(self):
         host = environ.get("REDIS_ADDR")
-        print("KKK"*500, host)
         self.redis_queue = (
             Redis(
                 host=host,

@@ -64,7 +64,9 @@ class NetmikoValidationService(ConnectionService):
             return {
                 "command": command,
                 "error": format_exc(),
-                "result": netmiko_connection.session_log.getvalue().decode(),
+                "result": netmiko_connection.session_log.getvalue()
+                .decode()
+                .ltrim("\U0000"),
                 "success": False,
             }
         return {"command": command, "result": result}

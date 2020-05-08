@@ -492,12 +492,20 @@ class Run(AbstractBase):
         self.run_state["status"] = "Running"
         start = datetime.now().replace(microsecond=0)
         try:
+            a = [][0]
             app.service_db[self.service.id]["runs"] += 1
             self.service.status = "Running"
             db.session.commit()
             results = {"runtime": self.runtime, **self.device_run(payload)}
         except Exception:
-            self.log("error", format_exc().splitlines())
+            result = (
+                f"Running {self.service.type} '{self.service.name}'"
+                " raised the following exception:\n"
+                f"{chr(10).join(format_exc().splitlines())}\n\n"
+                "Run aborted..."
+            )
+            print(self.original)
+            self.log("error", result)
             results = {"success": False, "runtime": self.runtime, "result": result}
         finally:
             db.session.commit()
@@ -799,7 +807,7 @@ class Run(AbstractBase):
         logger=None,
         service_log=True,
     ):
-        log_level = int(self.original.log_level)
+        log_level = int(self.original.service.log_level)
         if not log_level or severity not in app.log_levels[log_level - 1 :]:
             return
         if device:
@@ -811,9 +819,9 @@ class Run(AbstractBase):
         )
         if service_log or logger and settings.get("service_log"):
             run_log = f"{app.get_time()} - {severity} - {log}"
-            app.log_queue(self.parent_runtime, self.service_id, run_log)
+            app.log_queue(self.parent_runtime, self.service.id, run_log)
             if self.runtime != self.parent_runtime:
-                app.log_queue(self.parent_runtime, self.original.service_id, run_log)
+                app.log_queue(self.parent_runtime, self.original.service.id, run_log)
 
     def build_notification(self, results):
         notification = {

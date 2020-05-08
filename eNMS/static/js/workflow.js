@@ -842,11 +842,11 @@ export function getServiceState(id, first) {
 function displayWorkflowState(result) {
   resetDisplay();
   updateRuntimes(result);
+  console.log(result.state)
   if (!nodes || !edges || !result.state) return;
-  $.each(result.state, (path, state) => {
-    console.log(state)
+  for (let [path, state] of Object.entries(result.state)) {
     const id = parseInt(path.split(">").slice(-1)[0]);
-    if (ends.has(id) || !(id in nodes._data)) return;
+    if (ends.has(id) || !(id in nodes._data)) continue;
     const progress = state.progress.device;
     colorService(
       id,
@@ -874,9 +874,9 @@ function displayWorkflowState(result) {
         label: label,
       });
     }
-  });
-  $.each(result.state[currentPath].edges, (id, devices) => {
-    if (!edges.get(id)) return;
+  };
+  for (let [id, devices] of Object.entries(result.state[currentPath].edges)) {
+    if (!edges.get(id)) continue;
     edges.update({
       id: id,
       label:
@@ -885,7 +885,7 @@ function displayWorkflowState(result) {
           : `<b>${devices} DEVICE${devices == 1 ? "" : "S"}</b>`,
       font: { size: 15, multi: "html" },
     });
-  });
+  };
 }
 
 function resetDisplay() {

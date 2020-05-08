@@ -101,7 +101,7 @@ export function initDashboard() {
     },
   });
 
-  $.each(defaultProperties, function(type) {
+  Object.keys(defaultProperties).forEach((type) => {
     $(`#${type}-properties`)
       .selectpicker()
       .on("change", function() {

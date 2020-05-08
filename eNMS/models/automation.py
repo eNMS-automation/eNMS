@@ -498,13 +498,7 @@ class Run(AbstractBase):
             db.session.commit()
             results = {"runtime": self.runtime, **self.device_run(payload)}
         except Exception:
-            result = (
-                f"Running {self.service.type} '{self.service.name}'"
-                " raised the following exception:\n"
-                f"{chr(10).join(format_exc().splitlines())}\n\n"
-                "Run aborted..."
-            )
-            print(self.original)
+            result = "\n".join(format_exc().splitlines())
             self.log("error", result)
             results = {"success": False, "runtime": self.runtime, "result": result}
         finally:

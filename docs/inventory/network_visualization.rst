@@ -44,7 +44,7 @@ Marker Types
 ------------
 
 There are three different types of markers: images, circle, and circle marker.
-Displaying images can have an impact on performances above 10K devices;
+Displaying images can have an impact on performance above 10K devices;
 in that case, it is best to use circles or circle markers for scalability.
 
 .. image:: /_static/inventory/network_visualization/circle_markers.png
@@ -57,10 +57,12 @@ You can also configure in the settings which are used by default when you open t
 Site View
 ---------
 
-The geographical view displays all devices at their GPS coordinates. If several devices are colocated (e.g same building), they can be grouped in a site.
-A site is a pool with a longitude and a latitude. The site view displays all sites on the map.
+The geographical view displays all devices at their GPS coordinates. If several devices are colocated (e.g same
+building), they can be grouped in a site. A site is a pool with a longitude and a latitude. The site view displays all
+sites on the map.
 
-Clicking on a site will open a panel where all pool devices and links are organized in a logical and visually pleasing fashion using a force-based algorithm.
+Clicking on a site will open a panel where all pool devices and links are organized in a logical and visually
+pleasing fashion using a force-based algorithm.
 
 .. image:: /_static/base/site_view.png
    :alt: Site View

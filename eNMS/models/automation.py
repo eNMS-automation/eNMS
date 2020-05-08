@@ -392,7 +392,14 @@ class Run(AbstractBase):
             return self.state
         elif app.redis_queue:
             keys = app.redis("keys", f"{self.parent_runtime}/state/*")
-            print(keys)
+            data, state = list(zip(keys, app.redis("mget", *keys))), {}
+            for log, value in data:
+                inner_store, (*path, last_key) = state, log.split("/")[2:]
+                for key in path:
+                    inner_store = inner_store.setdefault(key, {})
+                inner_store[last_key] = value
+            print(state)
+            return state
         else:
             return app.run_db[self.parent_runtime]
 
@@ -457,7 +464,6 @@ class Run(AbstractBase):
             return
         state = {
             "status": "Idle",
-            "success": None,
             "progress": {
                 "device": {"total": 0, "success": 0, "failure": 0, "skipped": 0}
             },
@@ -482,8 +488,9 @@ class Run(AbstractBase):
 
     def write_state(self, path, value, method=None):
         if app.redis_queue:
+            print(f"{self.parent_runtime}/state/{self.path}/{path}", value)
             app.redis(
-                {None: "set", "append": "lpush", "increment": "hincrby"}[method],
+                {None: "set", "append": "lpush", "increment": "incr"}[method],
                 f"{self.parent_runtime}/state/{self.path}/{path}",
                 value,
             )
@@ -518,8 +525,7 @@ class Run(AbstractBase):
             results["summary"] = state.get("summary", None)
             self.status = "Aborted (STOP)" if self.stop else "Completed"
             self.write_state("status", self.status)
-            if state["success"] is not False:
-                self.success = state["success"] = results["success"]
+            self.success = results["success"]
             if self.send_notification:
                 results = self.notify(results)
             app.service_db[self.service.id]["runs"] -= 1

@@ -200,6 +200,7 @@ class BaseController:
 
     def init_redis(self):
         host = environ.get("REDIS_ADDR")
+        print("KKK"*500, host)
         self.redis_queue = (
             Redis(
                 host=host,
@@ -248,8 +249,8 @@ class BaseController:
     def redis(self, operation, *args, **kwargs):
         try:
             return getattr(self.redis_queue, operation)(*args, **kwargs)
-        except (ConnectionError, TimeoutError):
-            self.log("error", f"Redis Queue Unreachable", changelog=True)
+        except (ConnectionError, TimeoutError) as exc:
+            self.log("error", f"Redis Queue Unreachable ({exc})")
 
     def log_queue(self, runtime, service, log=None, mode="add"):
         if self.redis_queue:

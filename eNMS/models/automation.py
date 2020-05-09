@@ -403,10 +403,6 @@ class Run(AbstractBase):
             return app.run_db[self.parent_runtime]
 
     @property
-    def edge_state(self):
-        return app.run_db[self.parent_runtime][self.path]["edges"]
-
-    @property
     def stop(self):
         if app.redis_queue:
             return bool(app.redis("get", f"stop/{self.runtime}"))
@@ -467,6 +463,7 @@ class Run(AbstractBase):
         if self.service.type == "workflow":
             state["edges"] = defaultdict(int)
         app.run_db[self.parent_runtime][self.path] = state
+        self.write_state("success", True)
 
     def write_state(self, path, value, method=None):
         if app.redis_queue:
@@ -507,7 +504,7 @@ class Run(AbstractBase):
             service_state = state[self.path]
             results["summary"] = service_state.get("summary", None)
             self.status = state["status"] = "Aborted" if self.stop else "Completed"
-            self.success = state["success"] = results["success"]
+            self.success = results["success"]
             if self.send_notification:
                 results = self.notify(results)
             app.service_db[self.service.id]["runs"] -= 1
@@ -787,6 +784,8 @@ class Run(AbstractBase):
         if self.waiting_time:
             self.log("info", f"SLEEP {self.waiting_time} seconds...", device)
             sleep(self.waiting_time)
+        if not results["success"]:
+            self.write_state(f"success", False)
         if commit:
             db.session.commit()
         return results

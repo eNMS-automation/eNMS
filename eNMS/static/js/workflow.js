@@ -877,18 +877,19 @@ function displayWorkflowState(result) {
       });
     }
   };
-  if (!result.state.edges) return;
-  for (let [id, devices] of Object.entries(result.state.edges)) {
-    if (!edges.get(id)) continue;
-    edges.update({
-      id: id,
-      label:
-        typeof devices == "string"
-          ? `<b>${devices}</b>`
-          : `<b>${devices} DEVICE${devices == 1 ? "" : "S"}</b>`,
-      font: { size: 15, multi: "html" },
-    });
-  };
+  if (result.state[currentPath].edges) {
+    for (let [id, devices] of Object.entries(result.state[currentPath].edges)) {
+      if (!edges.get(id)) continue;
+      edges.update({
+        id: id,
+        label:
+          typeof devices == "string"
+            ? `<b>${devices}</b>`
+            : `<b>${devices} DEVICE${devices == 1 ? "" : "S"}</b>`,
+        font: { size: 15, multi: "html" },
+      });
+    };
+  }
 }
 
 function resetDisplay() {

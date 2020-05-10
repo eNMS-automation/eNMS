@@ -94,7 +94,7 @@ let placeholder;
 export function displayWorkflow(workflowData) {
   workflow = workflowData.service;
   placeholder = null;
-  currentPlaceholder = workflowData.state && workflowData.state.placeholder;
+  currentPlaceholder = workflowData.state?.placeholder;
   nodes = new vis.DataSet(workflow.services.map(serviceToNode));
   edges = new vis.DataSet(workflow.edges.map(edgeToEdge));
   workflow.services.map(drawIterationEdge);
@@ -295,7 +295,7 @@ export const switchToWorkflow = function(path, arrow, runtime) {
       url: `/get_service_state/${path}/${runtime || "latest"}`,
       callback: function(result) {
         workflow = result.service;
-        if (workflow && workflow.superworkflow) {
+        if (workflow?.superworkflow) {
           currentPath = `${workflow.superworkflow.id}>${path}`;
           $("#up-arrow").removeClass("disabled");
         }
@@ -878,7 +878,7 @@ function displayWorkflowState(result) {
     }
   };
   const state = result.state[currentPath];
-  if (state && state.edges) {
+  if (state?.edges) {
     for (let [id, devices] of Object.entries(state.edges)) {
       if (!edges.get(id)) continue;
       edges.update({
@@ -920,7 +920,7 @@ function resetDisplay() {
 function getWorkflowState(periodic, notification) {
   const runtime = $("#current-runtime").val();
   const url = runtime ? `/${runtime}` : "";
-  if (userIsActive && workflow && workflow.id) {
+  if (userIsActive && workflow?.id) {
     call({
       url: `/get_service_state/${currentPath}${url}`,
       callback: function(result) {

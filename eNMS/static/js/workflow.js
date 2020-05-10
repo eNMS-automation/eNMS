@@ -165,8 +165,7 @@ export function displayWorkflow(workflowData) {
 }
 
 function updateRuntimes(result) {
-  const state = result && result.state && result.state[currentPath];
-  currentPlaceholder = state && state.placeholder;
+  currentPlaceholder = result.state?.[currentPath]?.placeholder;
   const currentRuntime = $("#current-runtime").val();
   $("#current-runtime").empty();
   $("#current-runtime").append("<option value='normal'>Normal Display</option>");

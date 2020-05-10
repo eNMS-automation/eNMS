@@ -334,11 +334,11 @@ function displayResultsTree(service, runtime) {
               progressSummary = `
                 <div style="position: absolute; top: 0px; right: 160px">
                   <span style="color: #32cd32">
-                    ${node.data.progress.success} passed
+                    ${node.data.progress.success || 0} passed
                   </span>
                   <span style="color: #000000">-</span>
                   <span style="color: #FF6666">
-                    ${node.data.progress.failure} failed
+                    ${node.data.progress.failure || 0} failed
                   </span>
                 </div>
               `;

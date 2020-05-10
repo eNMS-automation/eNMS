@@ -165,7 +165,7 @@ export function displayWorkflow(workflowData) {
 }
 
 function updateRuntimes(result) {
-  const state = result.state[currentPath];
+  const state = result && result.state && result.state[currentPath];
   currentPlaceholder = state && state.placeholder;
   const currentRuntime = $("#current-runtime").val();
   $("#current-runtime").empty();

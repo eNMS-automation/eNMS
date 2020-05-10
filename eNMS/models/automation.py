@@ -459,7 +459,8 @@ class Run(AbstractBase):
             return
         state = {}
         if self.placeholder:
-            state["placeholder"] = self.placeholder.get_properties()
+            self.write_state("placeholder/id", self.placeholder.id)
+            self.write_state("placeholder/name", self.placeholder.name)
         if self.service.type == "workflow":
             state["edges"] = defaultdict(int)
         app.run_db[self.parent_runtime][self.path] = state
@@ -502,6 +503,7 @@ class Run(AbstractBase):
             db.session.commit()
             state = self.get_state()
             service_state = state[self.path]
+            print("LLL"*200, service_state.get("placeholder", None))
             results["summary"] = service_state.get("summary", None)
             self.status = state["status"] = "Aborted" if self.stop else "Completed"
             self.success = results["success"]

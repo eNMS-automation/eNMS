@@ -165,7 +165,8 @@ export function displayWorkflow(workflowData) {
 }
 
 function updateRuntimes(result) {
-  currentPlaceholder = result.state && result.state.placeholder;
+  const state = result.state[currentPath];
+  currentPlaceholder = state && state.placeholder;
   const currentRuntime = $("#current-runtime").val();
   $("#current-runtime").empty();
   $("#current-runtime").append("<option value='normal'>Normal Display</option>");
@@ -877,8 +878,9 @@ function displayWorkflowState(result) {
       });
     }
   };
-  if (result.state[currentPath].edges) {
-    for (let [id, devices] of Object.entries(result.state[currentPath].edges)) {
+  const state = result.state[currentPath];
+  if (state && state.edges) {
+    for (let [id, devices] of Object.entries(state.edges)) {
       if (!edges.get(id)) continue;
       edges.update({
         id: id,

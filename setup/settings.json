@@ -4,7 +4,8 @@
     "config_mode": "debug",
     "create_examples": true,
     "documentation_url": "https://enms.readthedocs.io/en/latest/",
-    "git_repository": "git@github.com:afourmy/gitpython-test.git"
+    "git_repository": "git@github.com:afourmy/gitpython-test.git",
+    "plugin_path": "eNMS/plugins"
   },
   "authentication": {
     "database": true,

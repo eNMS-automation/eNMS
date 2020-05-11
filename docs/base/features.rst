@@ -29,7 +29,7 @@ You can click on a device to display its properties, configuration, or start an 
   :alt: Geographical View
   :align: center
 
-Colocated devices can be grouped into geographical sites (campus, dacacenter, ...),
+Colocated devices can be grouped into geographical sites (campus, datacenter, ...),
 and displayed logically with a force-directed layout.
 
 .. image:: /_static/base/site_view.png
@@ -57,7 +57,7 @@ Oxidized/Rancid with the following features:
   - Download device configuration to a local text file.
   - Use the REST API support to return a specified device’s configuration.
   - Export all configurations to a remote Git repository (e.g. Gitlab)
-  - View differences between various revisions of a configuration with a git-style differences
+  - View git-style differences between various revisions of a configuration
 
 .. image:: /_static/base/configuration_search.png
    :alt: Configuration Search

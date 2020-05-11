@@ -1116,6 +1116,7 @@ class Run(AbstractBase):
             timeout=self.timeout,
             global_delay_factor=self.global_delay_factor,
             session_log=BytesIO(),
+            global_cmd_verify=False,
         )
         if self.enable_mode:
             netmiko_connection.enable()

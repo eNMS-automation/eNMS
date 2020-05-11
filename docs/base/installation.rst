@@ -4,8 +4,15 @@ Installation
 
 eNMS is designed to run on a **Unix server** with Python **3.6+**.
 
+.. contents::
+  :local:
+  :depth: 1
+
+|
+
+
 First steps
------------
+###########
 
 ::
 
@@ -25,27 +32,31 @@ First steps
  # or with gunicorn
  gunicorn --config gunicorn.py app:app
 
-Production mode
----------------
+|
 
-To start eNMS in production mode, you must change the value of the  "config_mode" in the settings.json file, and set the secret
-key.
+Production mode
+###############
+
+To start eNMS in production mode, you must change the value of the "config_mode" from "debug" to "production" in the
+settings.json file, and set the secret key.
 
 ::
 
  # set the SECRET_KEY environment variable
  export SECRET_KEY=value-of-your-secret-key
 
-All credentials should be stored in a Hashicorp Vault: the settings variable ``active`` under the ``vault`` section of the settings
-tells eNMS that a Vault has been setup and can be used.
+All credentials should be stored in a Hashicorp Vault: the settings variable ``active`` under the ``vault`` section of
+the settings tells eNMS that a Vault has been setup and can be used.
 Follow the manufacturer's instructions and options for how to setup a Hashicorp Vault.
 
 You must tell eNMS how to connect to the Vault with
-  - the ``address`` settings variable
+  - the ``VAULT_ADDRESS`` environment variable
   - the ``VAULT_TOKEN`` environment variable
 
 ::
 
+ # set the VAULT_ADDRESS environment variable
+ export VAULT_ADDRESS=url of the vault
  # set the VAULT_TOKEN environment variable
  export VAULT_TOKEN=vault-token
 
@@ -63,31 +74,42 @@ This mechanism is disabled by default. To activate it, you need to:
 .. _Settings:
 
 Settings
---------
+########
 
-The settings are divided into:
+The ``/setup/settings.json`` file includes:
 
 - Environment variables for all sensitive data (passwords, tokens, keys). Environment variables are exported
-  from Unix with the ``export`` keyword: ``export VARIABLE_NAME=value``.
-- Public variables defined in the ``settings.json`` file, and later modifiable from the administration
-  panel.
+  from Unix with the ``export`` keyword: ``export VARIABLE_NAME=value``. Environment variables include:
 
-Section ``app``
-***************
+::
+
+    - SECRET_KEY = secret_key
+    - MAIL_PASSWORD = mail_password
+    - TACACS_PASSWORD = tacacs_password
+    - SLACK_TOKEN = slack_token
+
+- Public variables defined in the ``settings.json`` file, and later modifiable from the administration
+  panel. Note that changing settings from the administration panel do not currently cause the settings.json file
+  to be rewritten.
+
+.. _app-settings:
+
+Settings ``app`` section
+**************************
 
 - ``address`` (default: ``""``) The address is needed when eNMS needs to provide a link back to the application,
   which is the case with GoTTY and mail notifications. When left empty, eNMS will try to guess the URL. This might
-  not work all the time depending on your environment (nginx configuration, proxy, ...)
+  not work consistently depending on your environment (nginx configuration, proxy, ...)
 - ``config_mode`` (default: ``"debug"``) Must be set to "debug" or "production".
 - ``create_examples`` (default: ``true``) By default, eNMS will create a network topology and a number of services
-  and workflows as an example of what you can do.
+  and workflows as examples of what you can do.
 - ``documentation_url`` (default: ``"https://enms.readthedocs.io/en/latest/"``) Can be changed if you want to host your
   own version of the documentation locally. Points to the online documentation by default.
 - ``git_repository`` (default: ``""``) Git is used as a version control system for device configurations: this variable
   is the address of the remote git repository where eNMS will push all device configurations.
 
-Section ``cluster``
-*******************
+Settings ``cluster`` section
+*******************************
 
 - ``active`` (default: ``false``)
 - ``id`` (default: ``true``)
@@ -95,8 +117,8 @@ Section ``cluster``
 - ``scan_protocol`` (default: ``"http"``)
 - ``scan_timeout`` (default: ``0.05``)
 
-Section ``database``
-********************
+Settings ``database`` section
+*******************************
 
 - ``url`` (default: ``"sqlite:///database.db?check_same_thread=False"``) `SQL Alchemy database URL
   <https://docs.sqlalchemy.org/en/13/core/engines.html#database-urls/>`_, configured
@@ -107,8 +129,8 @@ Section ``database``
 - ``small_string_length`` (default: ``255``) Length of a small string in the database.
 - ``small_string_length`` (default: ``32768``) Length of a large string in the database.
 
-Section ``ldap``
-****************
+Settings ``ldap`` section
+****************************
 
 If LDAP/Active Directory is enabled and the user doesn't exist in the database yet, eNMS tries to authenticate against
 LDAP/AD using the `ldap3` library, and if successful, that user gets added to eNMS locally.
@@ -122,23 +144,13 @@ LDAP/AD using the `ldap3` library, and if successful, that user gets added to eN
   matched user to determine if the user is allowed to log in.
 
 .. note:: Failure to match memberOf attribute output against ``admin_group`` results in a valid ldap user
-  within the ``basedn`` being given default permissions (i.e., Read Only group).  They will still
-  be able to log in. If a memberOf attribute matches the ``admin_group``, they will be given
-  Admin permissions.
-.. note:: Because eNMS saves the user credentials for LDAP and TACACS+ into the Vault, if a user's credentials expire
-  due to password aging, that user needs to login to eNMS in order for the updated credentials to be replaced in Vault storage.
-  In the event that services are already scheduled with User Credentials, these might fail if the credentials
-  are not updated in eNMS.
+  within the ``basedn`` being denied access on login. If a memberOf attribute matches the ``admin_group``, they
+  will be given Admin permissions.
+.. note:: eNMS does not store the credentials of LDAP and TACACS users; however, those users are listed in the
+  Admin / Users panel.
 
-Section ``logging``
-*******************
-
-- ``log_level`` (default: ``"debug"``) Gunicorn log level.
-- ``loggers`` (default: ``{"requests": "info", "urllib3": "info"}``) Change the default log levels of eNMS loggers. By default,
-eNMS will set the requests and urllib3 library to a log level of "info".
-
-Section ``mail``
-****************
+Settings  ``mail`` section
+****************************
 
   - ``server`` (default: ``"smtp.googlemail.com"``)
   - ``port`` (default: ``587``)
@@ -146,22 +158,29 @@ Section ``mail``
   - ``username`` (default: ``"eNMS-user"``)
   - ``sender`` (default: ``"eNMS@company.com"``)
 
-Section ``mattermost``
-**********************
+Settings ``mattermost`` section
+**********************************
 
 - ``url`` (default: ``"https://mattermost.company.com/hooks/i1phfh6fxjfwpy586bwqq5sk8w"``)
 - ``channel`` (default: ``""``)
 - ``verify_certificate`` (default: ``true``)
 
-Section ``paths``
-*****************
+Settings  ``paths`` section
+*****************************
 
-- ``custom_code`` (default: ``""``)
-- ``custom_services`` (default: ``""``) Path to a folder that contains :ref:`Custom Services`.
-- ``playbooks`` (default: ``""``)
+- ``files`` (default:``""``) Path to eNMS managed files needed by services and workflows. For example, files to upload
+  to devices.
+- ``custom_code`` (default: ``""``) Path to custom libraries that can be utilized within services and workflows
+- ``custom_services`` (default: ``""``) Path to a folder that contains :ref:`Custom Services`. These services are added
+  to the list of existing services in the Automation Panel when building services and workflows.
+- ``playbooks`` (default: ``""``) Path to where Ansible playbooks are stored so that they are
+  choosable in the Ansible Playbook service.
 
-Section ``requests``
-********************
+Settings ``requests`` section
+********************************
+
+Allows for tuning of the Python Requests library internal structures for connection pooling. Tuning
+these might be necessary depending on the load on eNMS.
 
 - Pool
 
@@ -176,55 +195,63 @@ Section ``requests``
     - ``connect`` (default: ``2``)
     - ``backoff_factor`` (default: ``0.5``)
 
-Section ``security``
-********************
+Settings  ``security`` section
+*********************************
 
 - ``hash_user_passwords`` (default: ``true``) All user passwords are automatically hashed by default.
-- ``forbidden_python_libraries`` (default: ``["eNMS","os","subprocess","sys"]``) There are a number of places in the UI where the user
-is allowed to run custom python scripts. You can configure which python libraries cannot be imported for security reasons.
+- ``forbidden_python_libraries`` (default: ``["eNMS","os","subprocess","sys"]``) There are a number of places in the UI
+  where the user is allowed to run custom python scripts. You can configure which python libraries cannot be imported
+  for security reasons.
 
-Section ``slack``
-*****************
+Settings ``slack`` section
+****************************
 
 - ``channel`` (default: ``""``)
 
-Section ``ssh``
-***************
+.. _ssh-settings:
+
+Settings ``ssh`` section
+************************
 
 - ``port_redirection`` (default: ``false``)
 - ``bypass_key_prompt`` (default: ``true``)
+- ``port`` (default: ``-1``)
 - ``start_port`` (default: ``9000``)
 - ``end_port`` (default: ``91000``)
+- ``enabled``
 
-Section ``syslog``
-******************
+    - ``web`` (default: ``true``)   Enables device terminal connections in a browser tab
+    - ``desktop`` (default: ``true``)  Enables device terminal connections from your desktop software that tunnels
+      through eNMS to the device
+
+Settings ``syslog`` section
+*****************************
 
 - ``active`` (default: ``false``)
 - ``address`` (default: ``"0.0.0.0"``)
 - ``port`` (default: ``514``)
 
-Section ``tacacs``
-******************
+Settings ``tacacs`` section
+*****************************
 
 - ``active`` (default: ``false``)
 - ``address`` (default: ``""``)
-- ``port`` (default: ``514``)
 
-Section ``vault``
-*****************
+Settings ``vault`` section
+****************************
 
 For eNMS to use a Vault to store all sensitive data (user and network credentials), you must set
-the ``active`` variable to ``true``, provide an address and export 
+the ``active`` variable to ``true``, provide an address and export
 
 **Public variables**
 
 - ``active`` (default: ``false``)
-- ``address`` (default: ``"http://127.0.0.1:8200"``)
 - ``unseal`` (default: ``false``) Automatically unseal the Vault. You must export the keys as
   environment variables.
 
 **Environment variables**
 
+- ``VAULT_ADDRESS``
 - ``VAULT_TOKEN``
 - ``UNSEAL_VAULT_KEY1``
 - ``UNSEAL_VAULT_KEY2``
@@ -232,8 +259,10 @@ the ``active`` variable to ``true``, provide an address and export
 - ``UNSEAL_VAULT_KEY4``
 - ``UNSEAL_VAULT_KEY5``
 
-Section ``view``
-****************
+Settings ``view`` section
+***************************
+
+Controls the default view for where the map is initially displayed in the Visualization panels
 
 - ``longitude`` (default: ``-96.0``)
 - ``latitude`` (default: ``33.0``)
@@ -241,10 +270,66 @@ Section ``view``
 - ``tile_layer`` (default: ``"osm"``)
 - ``marker`` (default: ``"Image"``)
 
-Private settings
-****************
 
-::
+Logging file
+############
+
+Logging settings exist in separate file: ``/setup/logging.json``. This file is directly passed into the Python Logging library,
+so it uses the Python3 logger file configuration syntax for your version of Python3. Using this file, the administrator
+can configure additional loggers and logger destinations as needed for workflows.
+
+By default, the two loggers are configured:
+  - The default logger has handlers for sending logs to the stdout console as well as a rotating log file ``logs/enms.log``
+  - A security logger captures logs for: User A ran Service/Workflow B on Devices [C,D,E...] to log file ``logs/security.log``
+
+And these can be reconfigured here to forward through syslog to remote collection if desired.
+
+Additionally, the ``external loggers`` section allows for changing the log levels for the various libraries used by eNMS
+
+
+Properties file
+###############
+
+The ``/setup/properties.json`` file includes:
+
+  1. Allowing for additional custom properties to be defined in eNMS for devices. In this way, eNMS device inventory can be extended to include additional columns/fields
+  #. Allowing for additional custom parameters to be added to services and workflows
+  #. Controlling which parameters and widgets can be seen from the Dashboard
+  #. Controlling which column/field properties are visible in the tables for device and link inventory, configuration, pools, as well as the service, results, and task browsers
+
+|
+
+properties.json custom device addition example:
+    - Keys under {"custom": { "device": {
+        - name the custom attribute being added.
+        - Keys/Value pairs under the newly added custom device attribute device_status.
+            - "pretty_name":"Default Username", *device attribute name to be displayed in UI*
+            - "type":"string", *data type of attribute*
+            - "default":"None", *default value of attribute*
+            - "private": true *optional - is attribute hidden from user*
+    - Keys under "tables" : { "device" : [ {  & "tables" : { "configuration" : [ {
+        - Details which attributes to display in these table, add custom attributes here
+        - Keys/Value pairs for tables
+            - "data":"device_status", *attribute created in custom device above*
+            - "title":"Device Status", *name to display in table*
+            - "search":"text", *search type*
+            - "width":"80%", *optional - text alignment, other example "width":"130px",*
+            - "visible":false, *default display option*
+            - "orderable": false *allow user to order by this attribute*
+    - Values under "filtering" : { "device" : [
+        - details which attributes to use for filtering
+        - you will need to add any custom device attributes name to this list for filtering
+
+RBAC file
+#########
+
+The ``/setup/rbac.json`` file allows configuration of:
+
+  - Which user roles have access to each of the controls in the UI
+  - Which user roles have access to each of the REST API endpoints
+
+Environment variables
+#####################
 
   - SECRET_KEY=secret_key
   - MAIL_PASSWORD=mail_password
@@ -270,3 +355,4 @@ The scheduler is a asynchronous application that must be deployed with uvicorn :
 
  cd scheduler
  uvicorn scheduler:scheduler --host 0.0.0.0
+

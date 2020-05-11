@@ -27,7 +27,6 @@ from re import search
 from uuid import getnode
 
 from eNMS import app
-from eNMS.plugins.routes import set_custom_routes
 from eNMS.database import db
 from eNMS.forms import (
     form_actions,
@@ -132,6 +131,7 @@ class Server(Flask):
                 plugin = plugin_module.plugin
                 if plugin.active:
                     app.log("info", f"Loading plugin: {plugin.description}")
+                    print(plugin.pages)
                     app.rbac["menu"]["Plugins"]["pages"].update(plugin.pages)
                     self.register_blueprint(
                         plugin.blueprint, url_prefix=plugin.url_prefix
@@ -160,6 +160,7 @@ class Server(Flask):
     def configure_context_processor(self):
         @self.context_processor
         def inject_properties():
+            print(rbac["menu"]["Plugins"])
             return {
                 "property_types": property_types,
                 "form_properties": form_properties,
@@ -346,7 +347,6 @@ class Server(Flask):
                     result = str(exc)
                 return jsonify({"alert": result})
 
-        set_custom_routes(blueprint)
         self.register_blueprint(blueprint)
 
     def configure_cli(self):

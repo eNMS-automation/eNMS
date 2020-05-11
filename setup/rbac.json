@@ -49,12 +49,7 @@
     },
     "Plugins": {
       "icon": "shield",
-      "pages": {
-        "Plugin 1": "/plugin/1",
-        "Submenu": {
-          "Plugin 2": "/plugin/2"
-        }
-      }
+      "pages": {}
     }
   },
   "pages": [

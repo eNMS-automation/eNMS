@@ -7,7 +7,7 @@ settings = {
     "url_prefix": "/plugin1",
     "template_folder": "templates",
     "static_folder": "static",
-    "pages": {"Plugin 10": f"/plugin1/"},
+    "pages": {"Plugin 10": "/plugin1/"},
     "rbac": {},  # TODO
 }
 
@@ -24,7 +24,6 @@ class Plugin:
         rbac={},
         cli_group=None,
     ):
-
         self.active = active
         self.description = description
         self.url_prefix = url_prefix
@@ -47,6 +46,11 @@ class Plugin:
         @self.blueprint.route("/")
         def plugin():
             return render_template("custom_1.html")
+
+
+class Controller:
+    def process_form_data(self, **data):
+        return data["router_id"] * 2
 
 
 plugin = Plugin(**settings)

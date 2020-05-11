@@ -113,11 +113,11 @@
               </a>
               <ul class="nav child_menu">
                 {% for page, data in category["pages"].items() %} {% if page in
-                user.pages %} {% if data is mapping %}
+                user.pages or user.is_admin %} {% if data is mapping %}
                 <li>
                   <a>{{ page }}<span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
-                    {% for subpage, url in data.items() %} {% if subpage in user.pages
+                    {% for subpage, url in data.items() %} {% if subpage in user.pages or user.is_admin
                     %}
                     <li><a href="{{ url }}">{{ subpage }}</a></li>
                     {% endif %} {% endfor %}

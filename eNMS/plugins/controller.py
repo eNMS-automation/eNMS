@@ -26,6 +26,3 @@ class CustomController:
             )
         success = self.tacacs_client.authenticate(name, password).valid
         return {"group": "Admin", "name": name} if success else False
-
-    def process_form_data(self, **data):
-        return data["router_id"] * 2

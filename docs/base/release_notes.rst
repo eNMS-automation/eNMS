@@ -51,8 +51,7 @@ Version 3.21.3
 
 - Add new plugins mechanism
 - Fix bug help panel open when clicking a field or label
-- Add error message in the logs when a service is run in per device mode but no
-devices have been selected.
+- Add error message in the logs when a service is run in per device mode but no devices have been selected.
 - Add default port of 22 for TCP ping in ping service
 - Disable edit panel on double-click for start/end services of a workflow
 - Fix invalid request bug when pressing enter after searching the "add services to workflow" panel
@@ -126,7 +125,7 @@ Version 3.21
 - Ability to display config older config from GIT
 - Ability to compare currently displayed config/data to any point in time in the past.
 - Syntax highlight option: ability to highlight certain keywords based on regular expression match,
-defined in eNMS/static/lib/codemirror/logsMode. Can be customized.
+  defined in eNMS/static/lib/codemirror/logsMode. Can be customized.
 - New logging property to configure log level for a service or disable logging.
 - Fix bug when typing invalid regex for table search (eg "(" )
 - Dont display Start / End services in service table
@@ -137,7 +136,7 @@ defined in eNMS/static/lib/codemirror/logsMode. Can be customized.
 - Add timestamp for session logs
 - Add device result counter in result tree window
 - Move to optional_requirements file and catch import error of all optional libraries:
-ansible, hvac, ldap3, pyats, pynetbox, slackclient>=1.3,<2, tacacs_plus
+  ansible, hvac, ldap3, pyats, pynetbox, slackclient>=1.3,<2, tacacs_plus
 - Fix Napalm BGP example service
 - Fix 404 custom passwords logs from Vault
 - Encrypt and decrypt all data going in and out of the vault (b64 / Fernet)
@@ -147,20 +146,20 @@ ansible, hvac, ldap3, pyats, pynetbox, slackclient>=1.3,<2, tacacs_plus
 - all post processing mode: "run on success" / "run on failure" / "run all the time" selector
 - Support functions and classes with set_var / get_var 
 - Fix front end bug when displaying the results if they contain a python SET (invalid JSON):
-all non-JSON compliant types are now automatically converted to a string when saving the results in the
-database, and a warning is issue in the service logs.
+  all non-JSON compliant types are now automatically converted to a string when saving the results in the
+  database, and a warning is issue in the service logs.
 - Add superworkflow mechanism
 - Add jump on connect support
 - Add log deletion support from CLI interface
 - Forbid import of "os", "subprocess" and "sys" in a python code area in service panel
-(snippet, pre/postprocessing, etc)
+  (snippet, pre/postprocessing, etc)
 - Refactor logging configuration: all the logging are now configured from a file in setup: logging.json
-Besides, the log function in a workflow takes a new parameter "logger" where you can specify a logger name.
-This means you can first add your own loggers in logging.json, then log to them from a workflow.
+  Besides, the log function in a workflow takes a new parameter "logger" where you can specify a logger name.
+  This means you can first add your own loggers in logging.json, then log to them from a workflow.
 - Remove CLI fetch, update and delete endpoint (curl to be used instead if you need it from the VM)
 - Improve workflow stop mechanism: now hitting stop will try to stop ASAP, not just after the on-going
-service but also after the on-going device, or after the on-going retry (e.g many retries...).
-Besides stop should now work from subworkflow too.
+  service but also after the on-going device, or after the on-going retry (e.g many retries...).
+  Besides stop should now work from subworkflow too.
 
 MIGRATION:
 In services, "result_postprocessing" -> "postprocessing"
@@ -206,7 +205,7 @@ Version 3.20.1
 - Add all service reference in submenu in workflow builder
 - Add entry to copy service name as reference.
 - Add new feature to accept a dictionary in iteration values. When a dictionary is used, the keys are used as the 
-name of the iteration step in the results.
+  name of the iteration step in the results.
 - Iteration variable are now referred to as global variable,
 - Catch all exceptions in rest api to return proper error 500 (device not found for get configuration, etc)
 - Fix bug position of shared services resetted after renaming workflow
@@ -229,19 +228,21 @@ Version 3.20
 
 - Add configuration management mechanism
 - New Table properties mechanism: all table properties are displayed in a JSON file: you can configure which ones
-appear in each table by default, whether they are searchable or not, etc, their label in the UI, etc.
-You will need to add your CUSTOM properties to that file if you want them to appear in the table.
+  appear in each table by default, whether they are searchable or not, etc, their label in the UI, etc.
+  You will need to add your CUSTOM properties to that file if you want them to appear in the table.
 - Same with dashboard properties and pool properties
 - New Column visibility feature
 - New Configuration Management Mechanism
 - RBAC
 - Refactoring of the search system: next to the input, old "Advanced Search" button now dedicated
-to relationship. Everything is now persisted in the DOM.
+  to relationship. Everything is now persisted in the DOM.
 
 MIGRATION:
 - In netmiko configuration backup service, rename:
-  * "configuration" -> "configuration_command"
-  * "operational_data" -> "operational_data_command"
+
+  - "configuration" -> "configuration_command"
+  - "operational_data" -> "operational_data_command"
+
 - Moved ansible, pyats to a dedicated file called "requirements_optional.txt":
 
 Version 3.19
@@ -280,7 +281,7 @@ Version 3.18.2
 - Allow restart from top-level workflow when restarting from a subworkflow service
 - New "Skip value" property to decide whether skip means success or failure
 - Fix the workflow builder progress display when devices are skipped. Now eNMS shows how many devices
-are skipped, and it no longer shows anything when it's 0 ("0 failed", "0 passed" etc are no longer displayed)
+  are skipped, and it no longer shows anything when it's 0 ("0 failed", "0 passed" etc are no longer displayed)
 - Netmiko session log code improvement for netmiko validation / prompt service
 
 Version 3.18.1

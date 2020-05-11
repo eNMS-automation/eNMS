@@ -77,14 +77,14 @@ function createNode(node, nodeType) {
   marker.bindTooltip(node["name"], { permanent: false });
   marker.node_id = node.id;
   markersArray.push(marker);
-  marker.on("click", function(e) {
+  marker.on("click", function (e) {
     if (nodeType == "site") {
       showPoolView(node.id);
     } else {
       showTypePanel(nodeType, node.id);
     }
   });
-  marker.on("contextmenu", function(e) {
+  marker.on("contextmenu", function (e) {
     $(".menu").hide();
     $(`.rc-${nodeType}-menu`).show();
     selectedObject = node;
@@ -109,10 +109,10 @@ function createLink(link) {
   });
   polylinesArray.push(polyline);
   polyline.link_id = link.id;
-  polyline.on("click", function(e) {
+  polyline.on("click", function (e) {
     showTypePanel("link", this.link_id);
   });
-  polyline.on("contextmenu", function(e) {
+  polyline.on("contextmenu", function (e) {
     $(".menu").hide();
     $(".rc-link-menu").show();
     selectedObject = link;
@@ -160,7 +160,7 @@ function updateView(withCluster) {
   if (viewType == "network") {
     call({
       url: "/get_view_topology",
-      callback: function(topology) {
+      callback: function (topology) {
         topology.devices.map((d) => createNode(d, "device"));
         topology.links.map(createLink);
       },
@@ -169,7 +169,7 @@ function updateView(withCluster) {
     $(".menu").hide();
     call({
       url: "/get_all/pool",
-      callback: function(pools) {
+      callback: function (pools) {
         for (let i = 0; i < pools.length; i++) {
           if (pools[i].longitude) {
             createNode(pools[i], "site");
@@ -222,10 +222,10 @@ function showPoolView(poolId) {
   });
   call({
     url: `/get/pool/${poolId}`,
-    callback: function(pool) {
+    callback: function (pool) {
       $(`#network-${poolId}`).contextMenu({
         menuSelector: "#contextMenu",
-        menuSelected: function(selectedMenu) {
+        menuSelected: function (selectedMenu) {
           const row = selectedMenu.text();
           action[row](selected);
         },
@@ -240,7 +240,7 @@ function displayPool(poolId, nodes, edges) {
   nodes = new vis.DataSet(nodes.map(deviceToNode));
   edges = new vis.DataSet(edges.map(linkToEdge));
   const network = new vis.Network(container, { nodes: nodes, edges: edges }, {});
-  network.on("oncontext", function(properties) {
+  network.on("oncontext", function (properties) {
     properties.event.preventDefault();
     const node = this.getNodeAt(properties.pointer.DOM);
     const edge = this.getEdgeAt(properties.pointer.DOM);
@@ -278,10 +278,10 @@ export function initView() {
   layer = L.tileLayer(layers[settings.view.tile_layer]);
   map
     .addLayer(layer)
-    .on("click", function(e) {
+    .on("click", function (e) {
       selectedObject = null;
     })
-    .on("contextmenu", function() {
+    .on("contextmenu", function () {
       if (!selectedObject) {
         $(".menu").hide();
         $(".geo-menu").show();
@@ -290,7 +290,7 @@ export function initView() {
   updateView();
   $("body").contextMenu({
     menuSelector: "#contextMenu",
-    menuSelected: function(selectedMenu) {
+    menuSelected: function (selectedMenu) {
       const row = selectedMenu.text();
       action[row](selectedObject);
       selectedObject = null;
@@ -328,7 +328,7 @@ function filterView() {
   call({
     url: "/view_filtering",
     data: data,
-    callback: function(results) {
+    callback: function (results) {
       deleteAll();
       results.device.map((d) => createNode(d, "device"));
       results.link.map(createLink);

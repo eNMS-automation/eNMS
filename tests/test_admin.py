@@ -15,7 +15,6 @@ def test_authentication(base_client):
 
 def test_urls(user_client):
     for page in app.rbac["get_requests"]:
-        print(page)
         if "download" in page:
             continue
         r = user_client.get(page, follow_redirects=True)

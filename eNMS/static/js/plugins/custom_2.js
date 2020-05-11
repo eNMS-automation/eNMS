@@ -8,9 +8,7 @@ function autofillForm() {
 }
 
 function resetForm() {
-  $("[id^='custom-']")
-    .val("")
-    .prop("checked", false);
+  $("[id^='custom-']").val("").prop("checked", false);
   notify("Values resetted programatically in JavaScript.", "success", 5);
 }
 
@@ -18,7 +16,7 @@ function submitForm() {
   call({
     url: "/process_form_data",
     form: "custom-form",
-    callback: function(routerId) {
+    callback: function (routerId) {
       $("#custom-router_id").val(routerId);
       notify("Form successfully submitted.", "success", 5, true);
     },
@@ -38,7 +36,7 @@ function submitPanelForm() {
   $("#panel").remove();
 }
 
-$(document).ready(function() {
+$(document).ready(function () {
   configureForm("custom");
 });
 

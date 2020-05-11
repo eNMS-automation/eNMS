@@ -1,3 +1,4 @@
 **/*.min.js
 **/bundles
 docs/**
+workflow.js

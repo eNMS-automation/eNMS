@@ -15,6 +15,7 @@ def test_authentication(base_client):
 
 def test_urls(user_client):
     for page in app.rbac["get_requests"]:
+        print(page)
         if "download" in page:
             continue
         r = user_client.get(page, follow_redirects=True)
@@ -33,7 +34,7 @@ def test_user_management(user_client):
             "password": user,
         }
         user_client.post("/update/user", data=dict_user)
-    assert len(db.fetch_all("user")) == 6
+    assert len(db.fetch_all("user")) == 8
     user1 = db.fetch("user", name="user1")
     user_client.post("/delete_instance/user/{}".format(user1.id))
-    assert len(db.fetch_all("user")) == 5
+    assert len(db.fetch_all("user")) == 7

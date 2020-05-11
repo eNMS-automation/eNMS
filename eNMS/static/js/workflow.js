@@ -862,9 +862,7 @@ function displayWorkflowState(result) {
     );
     if (total) {
       let label = `<b>${nodes.get(id).name}</b>\n`;
-      let progressLabel = `Progress - ${success +
-        failure +
-        skipped}/${total}`;
+      let progressLabel = `Progress - ${success + failure + skipped}/${total}`;
       label += `—————\n${progressLabel}`;
       let progressInfo = [];
       if (success) progressInfo.push(`${success} passed`);
@@ -876,7 +874,7 @@ function displayWorkflowState(result) {
         label: label,
       });
     }
-  };
+  }
   const state = result.state[currentPath];
   if (state?.edges) {
     for (let [id, devices] of Object.entries(state.edges)) {
@@ -889,7 +887,7 @@ function displayWorkflowState(result) {
             : `<b>${devices} DEVICE${devices == 1 ? "" : "S"}</b>`,
         font: { size: 15, multi: "html" },
       });
-    };
+    }
   }
 }
 

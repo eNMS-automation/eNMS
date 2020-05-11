@@ -158,7 +158,9 @@ class Workflow(Service):
                 ):
                     targets[successor.name] |= targets[service.name]
                     services.append(successor)
-                    run.write_state(f"edges/{edge.id}", len(targets[service.name]), "increment")
+                    run.write_state(
+                        f"edges/{edge.id}", len(targets[service.name]), "increment"
+                    )
             else:
                 summary = results.get("summary", {})
                 for edge_type in ("success", "failure"):
@@ -169,7 +171,9 @@ class Workflow(Service):
                             continue
                         targets[successor.name] |= set(summary[edge_type])
                         services.append(successor)
-                        run.write_state(f"edges/{edge.id}", len(summary[edge_type]), "increment")
+                        run.write_state(
+                            f"edges/{edge.id}", len(summary[edge_type]), "increment"
+                        )
         success_devices = targets[end.name]
         failure_devices = targets[start.name] - success_devices
         success = not failure_devices

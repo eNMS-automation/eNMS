@@ -50,7 +50,7 @@ class ResultLogDeletionForm(BaseForm):
     form_type = HiddenField(default="result_log_deletion")
     deletion_types = SelectMultipleField(
         "Instances do delete",
-        choices=[("result", "result"), ("changelog", "changelog")],
+        choices=[("run", "result"), ("changelog", "changelog")],
     )
     date_time = StringField(type="date", label="Delete Records before")
 

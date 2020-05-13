@@ -32,6 +32,9 @@ class User(AbstractBase, UserMixin):
     group = db.Column(db.SmallString)
     small_menu = db.Column(Boolean, default=False, info={"dont_track_changes": True})
 
+    def get_id(self):
+        return self.name
+
     def update(self, **kwargs):
         if app.settings["security"]["hash_user_passwords"] and "password" in kwargs:
             kwargs["password"] = argon2.hash(kwargs["password"])

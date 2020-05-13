@@ -85,7 +85,7 @@ class AdministrationController(BaseController):
         date_time_object = datetime.strptime(kwargs["date_time"], "%d/%m/%Y %H:%M:%S")
         date_time_string = date_time_object.strftime("%Y-%m-%d %H:%M:%S.%f")
         for model in kwargs["deletion_types"]:
-            if model == "result":
+            if model == "run":
                 field_name = "runtime"
             elif model == "changelog":
                 field_name = "time"

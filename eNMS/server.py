@@ -13,6 +13,9 @@ from flask import (
     request,
     send_file,
     url_for,
+    current_app,
+    session,
+    g,
 )
 from flask_httpauth import HTTPBasicAuth
 from flask_login import current_user, LoginManager, login_user, logout_user
@@ -48,6 +51,7 @@ class Server(Flask):
         self.update_config(mode)
         self.register_extensions()
         self.configure_login_manager()
+        self.configure_session_timeout()
         self.configure_context_processor()
         self.configure_errors()
         self.configure_authentication()
@@ -109,6 +113,9 @@ class Server(Flask):
                 "ERROR_404_HELP": False,
                 "MAX_CONTENT_LENGTH": 20 * 1024 * 1024,
                 "WTF_CSRF_ENABLED": mode != "test",
+                "PERMANENT_SESSION_LIFETIME": timedelta(
+                    minutes=app.settings["app"]["session_timeout_minutes"]
+                )
             }
         )
 
@@ -123,12 +130,19 @@ class Server(Flask):
         login_manager.init_app(self)
 
         @login_manager.user_loader
-        def user_loader(id):
-            return db.fetch("user", allow_none=True, id=int(id))
+        def user_loader(username):            
+            return db.fetch("user", allow_none=True, name=username)
 
         @login_manager.request_loader
         def request_loader(request):
             return db.fetch("user", allow_none=True, name=request.form.get("name"))
+
+    def configure_session_timeout(self):
+        @self.before_request
+        def before_request():
+            session.permanent = True
+            session.modified = True
+            g.user = current_user
 
     def configure_context_processor(self):
         @self.context_processor
@@ -194,7 +208,7 @@ class Server(Flask):
                 try:
                     user = app.authenticate_user(**request.form.to_dict())
                     if user:
-                        login_user(user)
+                        login_user(user, remember=False)
                         return redirect(url_for("blueprint.route", page="dashboard"))
                     else:
                         abort(403)
@@ -349,10 +363,11 @@ class Server(Flask):
             help="Type of logs",
         )
         def delete_log(keep_last_days, log):
+            table = "run" if log == "result" else log
             deletion_time = datetime.now() - timedelta(days=keep_last_days)
             app.result_log_deletion(
                 date_time=deletion_time.strftime("%d/%m/%Y %H:%M:%S"),
-                deletion_types=[log],
+                deletion_types=[table],
             )
             app.log("info", f"deleted all logs in '{log}' up until {deletion_time}")
 

@@ -4,10 +4,9 @@ from .forms import CustomForm
 settings = {
     "active": True,
     "name": "Plugin 2",
-    "url_prefix": "/plugin11",
     "template_folder": "templates",
     "static_folder": "static",
-    "pages": {"Plugin 11": {"Form": f"/plugin11/3", }},
+    "pages": {"Plugin 11": {"Form": f"/plugin2/3", }},
     "rbac": {},  # TODO
 }
 
@@ -15,7 +14,8 @@ settings = {
 class Plugin:
     def __init__(
         self,
-        url_prefix,
+        server,
+        controller,
         name="test",
         active=True,
         template_folder=None,
@@ -24,10 +24,10 @@ class Plugin:
         rbac={},
         cli_group=None,
     ):
+        self.server = server
+        self.controller = controller
         self.name = "Plugin 2"
         self.active = active
-        self.description = description
-        self.url_prefix = url_prefix
         self.template_folder = template_folder
         self.static_folder = static_folder
         self.pages = pages
@@ -38,12 +38,15 @@ class Plugin:
         self.register_endpoints()
 
     def init_blueprint(self):
-        self.blueprint = Blueprint(
+        blueprint = Blueprint(
             f"{__name__}_bp",
             __name__,
             template_folder=self.template_folder,
             static_folder=self.static_folder,
             cli_group=self.cli_group,
+        )
+        self.server.register_blueprint(
+            blueprint, url_prefix="/plugin2"
         )
 
     def register_routes(self):

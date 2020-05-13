@@ -150,8 +150,8 @@ class Server(Flask):
         login_manager.init_app(self)
 
         @login_manager.user_loader
-        def user_loader(id):
-            return db.fetch("user", allow_none=True, id=int(id))
+        def user_loader(username):
+            return db.fetch("user", allow_none=True, name=username)
 
         @login_manager.request_loader
         def request_loader(request):

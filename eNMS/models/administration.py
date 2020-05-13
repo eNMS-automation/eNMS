@@ -47,6 +47,9 @@ class User(AbstractBase, UserMixin):
     manual_rbac = db.Column(Boolean, default=False)
     is_admin = db.Column(Boolean, default=False)
 
+    def get_id(self):
+        return self.name
+
     def update(self, **kwargs):
         if app.settings["security"]["hash_user_passwords"] and "password" in kwargs:
             kwargs["password"] = argon2.hash(kwargs["password"])

@@ -396,6 +396,8 @@ class Run(AbstractBase):
                 inner_store, (*path, last_key) = state, log.split("/")[2:]
                 for key in path:
                     inner_store = inner_store.setdefault(key, {})
+                if value in ("False", "True"):
+                    value = value == "True"
                 inner_store[last_key] = value
             return state
         else:
@@ -411,13 +413,14 @@ class Run(AbstractBase):
     @property
     def progress(self):
         progress = self.get_state().get(self.path, {}).get("progress")
-        if not progress:
+        try:
+            progress = progress["device"]
+            return (
+                f"{progress['success'] + progress['failure']}"
+                f"/{progress['total']} ({progress['failure']} failed)"
+            )
+        except KeyError:
             return "N/A"
-        progress = progress["device"]
-        return (
-            f"{progress['success'] + progress['failure']}"
-            f"/{progress['total']} ({progress['failure']} failed)"
-        )
 
     def compute_devices_from_query(_self, query, property, **locals):  # noqa: N805
         values = _self.eval(query, **locals)[0]
@@ -454,9 +457,10 @@ class Run(AbstractBase):
         return list(devices)
 
     def init_state(self):
-        if app.run_db[self.parent_runtime].get(self.path):
-            return
-        app.run_db[self.parent_runtime][self.path] = {}
+        if not app.redis_queue:
+            if app.run_db[self.parent_runtime].get(self.path):
+                return
+            app.run_db[self.parent_runtime][self.path] = {}
         if self.placeholder:
             for property in ("id", "scoped_name", "type"):
                 value = getattr(self.placeholder, property)
@@ -465,6 +469,8 @@ class Run(AbstractBase):
 
     def write_state(self, path, value, method=None):
         if app.redis_queue:
+            if isinstance(value, bool):
+                value = str(value)
             app.redis(
                 {None: "set", "append": "lpush", "increment": "incr"}[method],
                 f"{self.parent_runtime}/state/{self.path}/{path}",

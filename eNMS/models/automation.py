@@ -396,10 +396,9 @@ class Run(AbstractBase):
                 inner_store, (*path, last_key) = state, log.split("/")[2:]
                 for key in path:
                     inner_store = inner_store.setdefault(key, {})
+                if value in ("false", "true"):
+                    value = value == "true"
                 inner_store[last_key] = value
-            if value in ("false", "true"):
-                value = True if value == "true" else False
-                print("KKK"*200, value)
             return state
         else:
             return app.run_db[self.parent_runtime]

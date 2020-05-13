@@ -829,10 +829,10 @@ function displayWorkflowState(result) {
   for (let [path, state] of Object.entries(result.state)) {
     const id = parseInt(path.split(">").slice(-1)[0]);
     if (ends.has(id) || !(id in nodes._data)) continue;
-    const total = parseInt(state.progress.device.total) || 0;
-    const success = parseInt(state.progress.device.success) || 0;
-    const skipped = parseInt(state.progress.device.skipped) || 0;
-    const failure = parseInt(state.progress.device.failure) || 0;
+    const total = parseInt(state.progress?.device?.total) || 0;
+    const success = parseInt(state.progress?.device?.success) || 0;
+    const skipped = parseInt(state.progress?.device?.skipped) || 0;
+    const failure = parseInt(state.progress?.device?.failure) || 0;
     colorService(
       id,
       total && skipped == total
@@ -865,7 +865,7 @@ function displayWorkflowState(result) {
       edges.update({
         id: id,
         label:
-          typeof devices == "string"
+          isNaN(devices)
             ? `<b>${devices}</b>`
             : `<b>${devices} DEVICE${devices == 1 ? "" : "S"}</b>`,
         font: { size: 15, multi: "html" },

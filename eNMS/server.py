@@ -130,7 +130,7 @@ class Server(Flask):
                     continue
                 plugin = plugin_module.Plugin(**plugin_module.settings)
                 if plugin.active:
-                    app.log("info", f"Loading plugin: {plugin.description}")
+                    app.log("info", f"Loading plugin: {plugin.name}")
                     app.rbac["menu"]["Plugins"]["pages"].update(plugin.pages)
                     self.register_blueprint(
                         plugin.blueprint, url_prefix=plugin.url_prefix

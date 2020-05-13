@@ -3,7 +3,7 @@ from .forms import CustomForm
 
 settings = {
     "active": True,
-    "description": "Plugin 11 - test plugin",
+    "name": "Plugin 2",
     "url_prefix": "/plugin11",
     "template_folder": "templates",
     "static_folder": "static",
@@ -16,15 +16,15 @@ class Plugin:
     def __init__(
         self,
         url_prefix,
+        name="test",
         active=True,
-        description="",
         template_folder=None,
         static_folder=None,
         pages={},
         rbac={},
         cli_group=None,
     ):
-
+        self.name = "Plugin 2"
         self.active = active
         self.description = description
         self.url_prefix = url_prefix

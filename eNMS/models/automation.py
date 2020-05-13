@@ -396,8 +396,8 @@ class Run(AbstractBase):
                 inner_store, (*path, last_key) = state, log.split("/")[2:]
                 for key in path:
                     inner_store = inner_store.setdefault(key, {})
-                if value in ("false", "true"):
-                    value = value == "true"
+                if value in ("False", "True"):
+                    value = value == "True"
                 inner_store[last_key] = value
             return state
         else:
@@ -465,10 +465,12 @@ class Run(AbstractBase):
             for property in ("id", "scoped_name", "type"):
                 value = getattr(self.placeholder, property)
                 self.write_state(f"placeholder/{property}", value)
-        self.write_state("success", "true")
+        self.write_state("success", True)
 
     def write_state(self, path, value, method=None):
         if app.redis_queue:
+            if isinstance(value, bool):
+                value = str(value)
             app.redis(
                 {None: "set", "append": "lpush", "increment": "incr"}[method],
                 f"{self.parent_runtime}/state/{self.path}/{path}",
@@ -787,7 +789,7 @@ class Run(AbstractBase):
             self.log("info", f"SLEEP {self.waiting_time} seconds...", device)
             sleep(self.waiting_time)
         if not results["success"]:
-            self.write_state(f"success", "false")
+            self.write_state(f"success", False)
         if commit:
             db.session.commit()
         return results

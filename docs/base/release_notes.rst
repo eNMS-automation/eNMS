@@ -25,6 +25,7 @@ allowing for comparison of results same device / different service, same service
 - Refactor logging mechanism. In settings.json, add new logging sections to configure whether the log
 for a given logger should also be logged as changelog or service log by default.
 - RBAC
+- Fix authentication bug flask_login
 
 MIGRATION:
 - Remove RBAC in rbac.json

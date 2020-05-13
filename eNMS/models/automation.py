@@ -397,6 +397,9 @@ class Run(AbstractBase):
                 for key in path:
                     inner_store = inner_store.setdefault(key, {})
                 inner_store[last_key] = value
+            if value in ("false", "true"):
+                value = True if value == "true" else False
+                print("KKK"*200, value)
             return state
         else:
             return app.run_db[self.parent_runtime]
@@ -411,13 +414,14 @@ class Run(AbstractBase):
     @property
     def progress(self):
         progress = self.get_state().get(self.path, {}).get("progress")
-        if not progress:
+        try:
+            progress = progress["device"]
+            return (
+                f"{progress['success'] + progress['failure']}"
+                f"/{progress['total']} ({progress['failure']} failed)"
+            )
+        except KeyError:
             return "N/A"
-        progress = progress["device"]
-        return (
-            f"{progress['success'] + progress['failure']}"
-            f"/{progress['total']} ({progress['failure']} failed)"
-        )
 
     def compute_devices_from_query(_self, query, property, **locals):  # noqa: N805
         values = _self.eval(query, **locals)[0]
@@ -461,7 +465,7 @@ class Run(AbstractBase):
             for property in ("id", "scoped_name", "type"):
                 value = getattr(self.placeholder, property)
                 self.write_state(f"placeholder/{property}", value)
-        self.write_state("success", True)
+        self.write_state("success", "true")
 
     def write_state(self, path, value, method=None):
         if app.redis_queue:
@@ -783,7 +787,7 @@ class Run(AbstractBase):
             self.log("info", f"SLEEP {self.waiting_time} seconds...", device)
             sleep(self.waiting_time)
         if not results["success"]:
-            self.write_state(f"success", False)
+            self.write_state(f"success", "false")
         if commit:
             db.session.commit()
         return results

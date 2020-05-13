@@ -1,3 +1,5 @@
+from functools import wraps
+
 from eNMS.controller.administration import AdministrationController
 from eNMS.controller.automation import AutomationController
 from eNMS.controller.inventory import InventoryController
@@ -10,4 +12,10 @@ class App(
     CustomController,
     InventoryController,
 ):
-    pass
+
+    def register_endpoint(self, func):
+        @wraps(func)
+        def wrapper(*args, **kwargs):
+            return func(*args, **kwargs)
+
+        return wrapper

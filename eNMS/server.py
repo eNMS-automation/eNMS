@@ -121,7 +121,7 @@ class Server(Flask):
         for plugin_dir in plugin_dirs:
             if not plugin_dir[0] in ["_", "."]:
                 plugin_module = import_module(f"eNMS.plugins.{plugin_dir}")
-                if not hasattr(plugin_module, "plugin"):
+                if not hasattr(plugin_module, "Plugin"):
                     app.log(
                         "info",
                         f"""Loading plugin failed:

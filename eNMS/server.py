@@ -128,10 +128,9 @@ class Server(Flask):
                          {plugin_dir} missing attribute in '__init__.py'""",
                     )
                     continue
-                plugin = plugin_module.plugin
+                plugin = plugin_module.Plugin(**plugin_module.settings)
                 if plugin.active:
                     app.log("info", f"Loading plugin: {plugin.description}")
-                    print(plugin.pages)
                     app.rbac["menu"]["Plugins"]["pages"].update(plugin.pages)
                     self.register_blueprint(
                         plugin.blueprint, url_prefix=plugin.url_prefix

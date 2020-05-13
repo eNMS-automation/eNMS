@@ -34,6 +34,8 @@ class Plugin:
         self.rbac = rbac
         self.cli_group = cli_group
         self.init_blueprint()
+        self.register_routes()
+        self.register_endpoints()
 
     def init_blueprint(self):
         self.blueprint = Blueprint(
@@ -44,10 +46,13 @@ class Plugin:
             cli_group=self.cli_group,
         )
 
+    def register_routes(self):
         @self.blueprint.route("/<int:page>")
         def plugin(page):
             form = CustomForm(request.form)
             return render_template(f"/custom_{page}.html", page=page, form=form)
 
-
-plugin = Plugin(**settings)
+    def register_endpoints(self, app):
+        @app.register_endpoint
+        def process_form_data(self, **data):
+            return data["router_id"] * 2

@@ -1,16 +1,6 @@
 from flask import render_template, Blueprint
 
 
-settings = {
-    "active": True,
-    "name": "Plugin 1",
-    "url_prefix": "/plugin1",
-    "template_folder": "templates",
-    "static_folder": "static",
-    "pages": {"Plugin 10": "/plugin1/"},
-}
-
-
 class Plugin:
     def __init__(self, server, controller, **kwargs):
         self.server = server
@@ -26,7 +16,6 @@ class Plugin:
             template_folder=self.template_folder,
             static_folder=self.static_folder,
         )
-        
 
         @self.blueprint.route("/")
         def plugin():

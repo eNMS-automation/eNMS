@@ -1,0 +1,7 @@
+{
+  "active": true,
+  "name": "Plugin 2",
+  "template_folder": "templates",
+  "static_folder": "static",
+  "pages": {"Plugin 11": {"Form": "/plugin2/3"}}
+}

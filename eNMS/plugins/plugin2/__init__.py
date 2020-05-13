@@ -1,14 +1,6 @@
 from flask import request, render_template, Blueprint
 from .forms import CustomForm
 
-settings = {
-    "active": True,
-    "name": "Plugin 2",
-    "template_folder": "templates",
-    "static_folder": "static",
-    "pages": {"Plugin 11": {"Form": f"/plugin2/3",}},
-}
-
 
 class Plugin:
     def __init__(self, server, controller, **kwargs):

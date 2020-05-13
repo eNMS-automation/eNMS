@@ -19,10 +19,12 @@ from flask_restful import abort as rest_abort, Api, Resource
 from flask_wtf.csrf import CSRFProtect
 from functools import wraps
 from getpass import getuser
-from itertools import chain
-from os import environ, walk
-from threading import Thread
 from importlib import import_module
+from itertools import chain
+from json import load
+from os import environ, walk
+from pathlib import Path
+from threading import Thread
 from re import search
 from uuid import getnode
 
@@ -116,24 +118,17 @@ class Server(Flask):
         )
 
     def register_plugins(self):
-        path_plugins = app.settings["app"]["plugin_path"]
-        plugin_dirs = next(walk(path_plugins))[1]
-        for plugin_dir in plugin_dirs:
-            if not plugin_dir[0] in ["_", "."]:
-                plugin_module = import_module(f"eNMS.plugins.{plugin_dir}")
-                if not hasattr(plugin_module, "Plugin"):
-                    app.log(
-                        "info",
-                        f"""Loading plugin failed:
-                         {plugin_dir} missing attribute in '__init__.py'""",
-                    )
-                    continue
-                plugin = plugin_module.Plugin(self, app, **plugin_module.settings)
-                if plugin.active:
-                    app.log("info", f"Loading plugin: {plugin.name}")
-                    app.rbac["menu"]["Plugins"]["pages"].update(plugin.pages)
-                else:
-                    app.log("info", f"Plugin: {plugin.description} is deactivated.")
+        for plugin in Path(app.settings["app"]["plugin_path"]).iterdir():
+            if not Path(plugin / "settings.json").exists():
+                continue
+            module = import_module(f"eNMS.plugins.{plugin.stem}")
+            with open(plugin / "settings.json", "r") as settings:
+                plugin = module.Plugin(self, app, **load(settings))
+            if plugin.active:
+                app.log("info", f"Loading plugin: {plugin.name}")
+                app.rbac["menu"]["Plugins"]["pages"].update(plugin.pages)
+            else:
+                app.log("info", f"Plugin: {plugin.description} is deactivated.")
 
     def register_extensions(self):
         self.auth = HTTPBasicAuth()
@@ -156,7 +151,6 @@ class Server(Flask):
     def configure_context_processor(self):
         @self.context_processor
         def inject_properties():
-            print(rbac["menu"]["Plugins"])
             return {
                 "property_types": property_types,
                 "form_properties": form_properties,

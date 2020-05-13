@@ -457,9 +457,10 @@ class Run(AbstractBase):
         return list(devices)
 
     def init_state(self):
-        if app.run_db[self.parent_runtime].get(self.path):
-            return
-        app.run_db[self.parent_runtime][self.path] = {}
+        if not app.redis_queue:
+            if app.run_db[self.parent_runtime].get(self.path):
+                return
+            app.run_db[self.parent_runtime][self.path] = {}
         if self.placeholder:
             for property in ("id", "scoped_name", "type"):
                 value = getattr(self.placeholder, property)

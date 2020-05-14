@@ -13,9 +13,7 @@ from flask import (
     request,
     send_file,
     url_for,
-    current_app,
     session,
-    g,
 )
 from flask_httpauth import HTTPBasicAuth
 from flask_login import current_user, LoginManager, login_user, logout_user
@@ -51,7 +49,6 @@ class Server(Flask):
         self.update_config(mode)
         self.register_extensions()
         self.configure_login_manager()
-        self.configure_session_timeout()
         self.configure_context_processor()
         self.configure_errors()
         self.configure_authentication()
@@ -115,7 +112,7 @@ class Server(Flask):
                 "WTF_CSRF_ENABLED": mode != "test",
                 "PERMANENT_SESSION_LIFETIME": timedelta(
                     minutes=app.settings["app"]["session_timeout_minutes"]
-                )
+                ),
             }
         )
 
@@ -130,19 +127,12 @@ class Server(Flask):
         login_manager.init_app(self)
 
         @login_manager.user_loader
-        def user_loader(username):            
+        def user_loader(username):
             return db.fetch("user", allow_none=True, name=username)
 
         @login_manager.request_loader
         def request_loader(request):
             return db.fetch("user", allow_none=True, name=request.form.get("name"))
-
-    def configure_session_timeout(self):
-        @self.before_request
-        def before_request():
-            session.permanent = True
-            session.modified = True
-            g.user = current_user
 
     def configure_context_processor(self):
         @self.context_processor
@@ -209,6 +199,7 @@ class Server(Flask):
                     user = app.authenticate_user(**request.form.to_dict())
                     if user:
                         login_user(user, remember=False)
+                        session.permanent = True
                         return redirect(url_for("blueprint.route", page="dashboard"))
                     else:
                         abort(403)

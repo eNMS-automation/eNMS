@@ -365,7 +365,7 @@ function displayResultsTree(service, runtime) {
       });
       tree.unbind("dblclick.jstree").bind("dblclick.jstree", function (event) {
         const service = tree.jstree().get_node(event.target);
-        showRuntimePanel("results", service.data.properties, runtime, true);
+        showRuntimePanel("results", service.data.properties, runtime, "result");
       });
     },
   });
@@ -373,6 +373,7 @@ function displayResultsTree(service, runtime) {
 
 function displayResultsTable(service, runtime, _, table) {
   // eslint-disable-next-line new-cap
+  table = table ?? "result";
   new tables[table](table, service, runtime || currentRuntime, service.id);
 }
 
@@ -512,7 +513,7 @@ function displayCalendar(calendarType) {
               if (calendarType == "task") {
                 showTypePanel("task", e.id);
               } else {
-                showRuntimePanel("results", e.service, e.runtime);
+                showRuntimePanel("results", e.service, e.runtime, "result");
               }
             },
             editable: true,

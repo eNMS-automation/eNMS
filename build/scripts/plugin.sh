@@ -27,7 +27,8 @@ function run() {
   elif [ "$mode" = "remove" ]; then
     rm -r $plugin
   else
-    git pull git@github.com:eNMS-automation/$plugin.git
+    cd $plugin
+    git pull
   fi
 }
 

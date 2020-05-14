@@ -390,7 +390,8 @@ function refreshLogs(service, runtime, editor, first, wasRefreshed) {
         );
       } else if (wasRefreshed) {
         $(`#logs-${service.id}`).remove();
-        showRuntimePanel("results", service, runtime);
+        const table = service.type == "workflow" ? null : "result";
+        showRuntimePanel("results", service, runtime, table);
       }
     },
   });

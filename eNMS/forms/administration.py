@@ -1,7 +1,8 @@
 from wtforms.validators import InputRequired
 from wtforms.widgets import TextArea
 
-from eNMS.database import app, db
+from eNMS import app
+from eNMS.database import db
 from eNMS.forms import BaseForm, choices, configure_relationships
 from eNMS.forms.fields import (
     BooleanField,
@@ -92,35 +93,6 @@ class ImportService(BaseForm):
     service = SelectField("Service", choices=())
 
 
-class RbacForm(BaseForm):
-    template = "object"
-    form_type = HiddenField(default="rbac")
-    id = HiddenField()
-    name = StringField("Name", [InputRequired()])
-    email = StringField("Email")
-    menu = SelectMultipleField("Menu", choices=choices(list(app.rbac["menu"])))
-    pages = SelectMultipleField("Pages", choices=choices(app.rbac["pages"]))
-    upper_menu = SelectMultipleField("Upper Menu", choices=choices(app.rbac["upper_menu"]))
-    get_requests = SelectMultipleField(
-        "GET requests", choices=choices(app.rbac["get_requests"])
-    )
-    post_requests = SelectMultipleField(
-        "POST requests", choices=choices(app.rbac["post_requests"])
-    )
-
-
-@configure_relationships("groups")
-class UserForm(RbacForm):
-    form_type = HiddenField(default="user")
-    manual_rbac = BooleanField("Manually defined RBAC")
-    password = PasswordField("Password")
-
-
-@configure_relationships("users", "pools", "services")
-class GroupForm(RbacForm):
-    form_type = HiddenField(default="group")
-
-
 class ChangelogForm(BaseForm):
     template = "object"
     form_type = HiddenField(default="changelog")
@@ -136,3 +108,34 @@ class ChangelogForm(BaseForm):
         ),
     )
     content = StringField(widget=TextArea(), render_kw={"rows": 10})
+
+
+def init_rbac_form(rbac):
+    class RbacForm(BaseForm):
+        template = "object"
+        form_type = HiddenField(default="rbac")
+        id = HiddenField()
+        name = StringField("Name", [InputRequired()])
+        email = StringField("Email")
+        menu = SelectMultipleField("Menu", choices=choices(list(rbac["menu"])))
+        pages = SelectMultipleField("Pages", choices=choices(rbac["pages"]))
+        upper_menu = SelectMultipleField(
+            "Upper Menu", choices=choices(rbac["upper_menu"])
+        )
+        get_requests = SelectMultipleField(
+            "GET requests", choices=choices(rbac["get_requests"])
+        )
+        post_requests = SelectMultipleField(
+            "POST requests", choices=choices(rbac["post_requests"])
+        )
+
+    @configure_relationships("groups")
+    class UserForm(RbacForm):
+        form_type = HiddenField(default="user")
+        manual_rbac = BooleanField("Manually defined RBAC")
+        password = PasswordField("Password")
+
+
+    @configure_relationships("users", "pools", "services")
+    class GroupForm(RbacForm):
+        form_type = HiddenField(default="group")

@@ -1,8 +1,10 @@
 {
   "active": true,
+  "blueprint_settings": {
+    "template_folder": "templates",
+    "static_folder": "static"
+  },
   "name": "Plugin 1",
-  "url_prefix": "/plugin1",
-  "template_folder": "templates",
-  "static_folder": "static",
-  "pages": {"Plugin 10": "/plugin1/"}
+  "pages": {"Plugin 10": "/plugin1/"},
+  "url_prefix": "/plugin1"
 }

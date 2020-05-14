@@ -14,10 +14,7 @@ class Plugin:
 
     def init_blueprint(self):
         self.blueprint = Blueprint(
-            f"{__name__}_bp",
-            __name__,
-            template_folder=self.template_folder,
-            static_folder=self.static_folder,
+            f"{__name__}_bp", __name__, **self.blueprint_settings
         )
 
     def register_routes(self):
@@ -25,7 +22,7 @@ class Plugin:
         def plugin(page):
             form = CustomForm(request.form)
             return render_template(f"/custom_{page}.html", page=page, form=form)
-        
+
         self.server.register_blueprint(self.blueprint, url_prefix="/plugin2")
 
     def register_endpoints(self):

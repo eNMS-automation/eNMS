@@ -12,7 +12,6 @@ class App(
     CustomController,
     InventoryController,
 ):
-
     def register_endpoint(self, func):
         @wraps(func)
         def wrapper(*args, **kwargs):

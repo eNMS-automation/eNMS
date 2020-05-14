@@ -7,18 +7,13 @@ class Plugin:
         self.controller = controller
         for key, value in kwargs.items():
             setattr(self, key, value)
-        self.init_blueprint()
+        self.configure_routes()
 
-    def init_blueprint(self):
-        self.blueprint = Blueprint(
-            f"{__name__}_bp",
-            __name__,
-            template_folder=self.template_folder,
-            static_folder=self.static_folder,
-        )
+    def configure_routes(self):
+        blueprint = Blueprint(f"{__name__}_bp", __name__, **self.blueprint_settings)
 
-        @self.blueprint.route("/")
+        @blueprint.route("/")
         def plugin():
             return render_template("custom_1.html")
-        
-        self.server.register_blueprint(self.blueprint, url_prefix="/plugin1")
+
+        self.server.register_blueprint(blueprint, url_prefix=self.url_prefix)

@@ -5,6 +5,6 @@
     "static_folder": "static"
   },
   "name": "Plugin 1",
-  "pages": {"Plugin 10": "/plugin1/"},
+  "pages": {"Plugin 1": "/plugin1/"},
   "url_prefix": "/plugin1"
 }

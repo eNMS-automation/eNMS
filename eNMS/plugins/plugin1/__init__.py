@@ -14,6 +14,6 @@ class Plugin:
 
         @blueprint.route("/")
         def plugin():
-            return render_template("custom_1.html")
+            return render_template("template.html")
 
         self.server.register_blueprint(blueprint, url_prefix=self.url_prefix)

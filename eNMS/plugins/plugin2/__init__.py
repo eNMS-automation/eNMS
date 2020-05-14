@@ -16,7 +16,7 @@ class Plugin:
 
         @blueprint.route("/form")
         def plugin():
-            return render_template("/custom_form.html", form=Form(request.form))
+            return render_template("/form.html", form=Form(request.form))
 
         self.server.register_blueprint(blueprint, url_prefix=self.url_prefix)
 

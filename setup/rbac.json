@@ -120,6 +120,7 @@
     "/form/netmiko_file_transfer_service",
     "/form/netmiko_prompts_service",
     "/form/netmiko_validation_service",
+    "/form/panel",
     "/form/payload_extraction_service",
     "/form/ping_service",
     "/form/pool",

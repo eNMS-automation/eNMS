@@ -123,7 +123,10 @@ class Server(Flask):
                 continue
             module = import_module(f"eNMS.plugins.{plugin.stem}")
             with open(plugin / "settings.json", "r") as settings:
-                plugin = module.Plugin(self, app, **load(settings))
+                plugin_settings = load(settings)
+            plugin = module.Plugin(self, app, **plugin_settings)
+            for requests in ("get_requests", "post_requests"):
+                app.rbac[requests].extend(plugin_settings["rbac"][requests])
             if plugin.active:
                 app.log("info", f"Loading plugin: {plugin.name}")
                 app.rbac["menu"]["Plugins"]["pages"].update(plugin.pages)

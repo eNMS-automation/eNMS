@@ -6,5 +6,11 @@
   },
   "name": "Plugin 1",
   "pages": {"Plugin 1": "/plugin1/"},
+  "rbac": {
+    "get_requests": [
+      "/plugin1"
+    ],
+    "post_requests": []
+  },
   "url_prefix": "/plugin1"
 }

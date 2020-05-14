@@ -13,6 +13,7 @@ class Plugin:
         blueprint = Blueprint(f"{__name__}_bp", __name__, **self.blueprint_settings)
 
         @blueprint.route("/")
+        @self.server.monitor_requests
         def plugin():
             return render_template("template.html")
 

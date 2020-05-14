@@ -9,17 +9,25 @@ function help() {
       -r                            Remove
       -u                            Update
       -p <plugin>                   Plugin Name
+
+      List of available plugins:
+        - plugin-template (serves as a template for creating a plugin)
   "
   exit 0
 }
 
 function run() {
+  if [[ -z "$plugin" ]]; then
+    echo "No plugin specified";
+    exit 1;
+  fi
+  cd eNMS/plugins
   if [ "$mode" = "install" ]; then
-    echo "install"
+    git clone git@github.com:eNMS-automation/$plugin.git
   elif [ "$mode" = "remove" ]; then
-    echo "remove"
+    rm -r $plugin
   else
-    echo "update"
+    git pull git@github.com:eNMS-automation/$plugin.git
   fi
 }
 

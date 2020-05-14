@@ -13,6 +13,8 @@ class App(
     InventoryController,
 ):
     def register_endpoint(self, func):
+        setattr(self, func.__name__, func)
+
         @wraps(func)
         def wrapper(*args, **kwargs):
             return func(*args, **kwargs)

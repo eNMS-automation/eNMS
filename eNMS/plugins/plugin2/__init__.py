@@ -16,11 +16,11 @@ class Plugin:
 
         @blueprint.route("/form")
         def plugin():
-            return render_template(f"/custom_{page}.html", form=Form(request.form))
+            return render_template("/custom_form.html", form=Form(request.form))
 
         self.server.register_blueprint(blueprint, url_prefix=self.url_prefix)
 
     def register_endpoints(self):
         @self.controller.register_endpoint
-        def process_form_data(self, **data):
+        def process_form_data(**data):
             return int(data["router_id"]) * 2

@@ -103,7 +103,6 @@ class BaseController:
         db.base.metadata.create_all(bind=db.engine)
         configure_mappers()
         db.configure_application_events(self)
-        print("test")
         self.init_forms()
         self.reset_run_status()
         if not db.fetch("user", allow_none=True, name="admin"):

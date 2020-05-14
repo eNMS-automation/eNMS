@@ -96,7 +96,8 @@ class Server(Flask):
                 return redirect(url_for("blueprint.route", page="login"))
             else:
                 if (
-                    request.method == "GET"
+                    not current_user.is_admin
+                    and request.method == "GET"
                     and request.path not in current_user.get_requests
                 ):
                     return render_template("error.html", error=403), 403

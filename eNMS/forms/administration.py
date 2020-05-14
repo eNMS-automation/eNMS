@@ -135,7 +135,6 @@ def init_rbac_form(rbac):
         manual_rbac = BooleanField("Manually defined RBAC")
         password = PasswordField("Password")
 
-
     @configure_relationships("users", "pools", "services")
     class GroupForm(RbacForm):
         form_type = HiddenField(default="group")

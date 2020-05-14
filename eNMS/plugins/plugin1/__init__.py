@@ -7,9 +7,9 @@ class Plugin:
         self.controller = controller
         for key, value in kwargs.items():
             setattr(self, key, value)
-        self.configure_routes()
+        self.register_routes()
 
-    def configure_routes(self):
+    def register_routes(self):
         blueprint = Blueprint(f"{__name__}_bp", __name__, **self.blueprint_settings)
 
         @blueprint.route("/")

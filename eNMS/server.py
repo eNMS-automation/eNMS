@@ -39,7 +39,6 @@ from eNMS.forms import (
 )
 from eNMS.forms.administration import init_rbac_form, LoginForm
 from eNMS.models import models, property_types, relationships
-from eNMS.plugin import Plugin
 from eNMS.setup import properties, rbac
 from traceback import format_exc
 
@@ -124,17 +123,16 @@ class Server(Flask):
             if not Path(plugin / "settings.json").exists():
                 continue
             module = import_module(f"eNMS.plugins.{plugin.stem}")
-            with open(plugin / "settings.json", "r") as settings:
-                plugin_settings = load(settings)
-            if not plugin_settings["active"]:
+            with open(plugin / "settings.json", "r") as file:
+                settings = load(file)
+            if not settings["active"]:
                 continue
-            PluginClass = type(plugin.stem, (module.Plugin, Plugin), {})
-            plugin = PluginClass(self, app, **plugin_settings)
+            plugin = module.Plugin(self, app, **settings)
             for requests in ("get_requests", "post_requests"):
-                app.rbac[requests].extend(plugin_settings["rbac"][requests])
-            app.rbac["menu"]["Plugins"]["pages"].update(plugin.pages)
+                app.rbac[requests].extend(settings["rbac"][requests])
+            app.rbac["menu"]["Plugins"]["pages"].update(settings["pages"])
             init_rbac_form(app.rbac)
-            app.log("info", f"Loading plugin: {plugin.name}")
+            app.log("info", f"Loading plugin: {settings['name']}")
 
     def register_extensions(self):
         self.auth = HTTPBasicAuth()

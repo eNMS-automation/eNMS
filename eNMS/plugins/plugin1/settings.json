@@ -1,6 +1,6 @@
 {
   "active": true,
-  "blueprint_settings": {
+  "blueprint": {
     "template_folder": "templates",
     "static_folder": "static"
   },

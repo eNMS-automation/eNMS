@@ -39,6 +39,7 @@ from eNMS.forms import (
 )
 from eNMS.forms.administration import init_rbac_form, LoginForm
 from eNMS.models import models, property_types, relationships
+from eNMS.plugin import Plugin
 from eNMS.setup import properties, rbac
 from traceback import format_exc
 
@@ -127,7 +128,8 @@ class Server(Flask):
                 plugin_settings = load(settings)
             if not plugin_settings["active"]:
                 continue
-            plugin = module.Plugin(self, app, **plugin_settings)
+            PluginClass = type(plugin.stem, (module.Plugin, Plugin), {})
+            plugin = PluginClass(self, app, **plugin_settings)
             for requests in ("get_requests", "post_requests"):
                 app.rbac[requests].extend(plugin_settings["rbac"][requests])
             app.rbac["menu"]["Plugins"]["pages"].update(plugin.pages)

@@ -2,15 +2,12 @@ from flask import render_template, Blueprint
 
 
 class Plugin:
-    def __init__(self, server, controller, **kwargs):
-        self.server = server
-        self.controller = controller
-        for key, value in kwargs.items():
-            setattr(self, key, value)
+    def __init__(self, server, controller, **settings):
+        super().__init__(server, controller, **settings)
         self.register_routes()
 
     def register_routes(self):
-        blueprint = Blueprint(f"{__name__}_bp", __name__, **self.blueprint_settings)
+        blueprint = Blueprint(__name__, __name__, **self.blueprint_settings)
 
         @blueprint.route("/")
         @self.server.monitor_requests

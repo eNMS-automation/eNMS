@@ -7,7 +7,6 @@ from tests.conftest import check_pages
 def test_authentication(base_client):
     for page in app.rbac["get_requests"]:
         r = base_client.get(page)
-        print(page, r.status_code)
         assert r.status_code in (200, 302)
 
 

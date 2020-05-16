@@ -128,9 +128,10 @@ class Server(Flask):
             if not settings["active"]:
                 continue
             plugin = module.Plugin(self, app, **settings)
-            for requests in ("get_requests", "post_requests"):
-                app.rbac[requests].extend(settings["rbac"][requests])
-            app.rbac["menu"]["Plugins"]["pages"].update(settings["pages"])
+            if "rbac" in settings:
+                for requests in ("get_requests", "post_requests"):
+                    app.rbac[requests].extend(settings["rbac"].get(requests, []))
+            app.rbac["menu"]["Plugins"]["pages"].update(settings.get("pages", {}))
             init_rbac_form(app.rbac)
             app.log("info", f"Loading plugin: {settings['name']}")
 

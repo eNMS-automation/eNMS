@@ -56,7 +56,6 @@ class Server(Flask):
         self.configure_authentication()
         self.configure_routes()
         self.configure_rest_api()
-        self.configure_cli()
 
     @staticmethod
     def catch_exceptions_and_commit(func):
@@ -127,7 +126,7 @@ class Server(Flask):
                 settings = load(file)
             if not settings["active"]:
                 continue
-            plugin = module.Plugin(self, app, **settings)
+            plugin = module.Plugin(self, app, db, **settings)
             if "rbac" in settings:
                 for requests in ("get_requests", "post_requests"):
                     app.rbac[requests].extend(settings["rbac"].get(requests, []))
@@ -343,40 +342,6 @@ class Server(Flask):
                 return jsonify({"alert": result})
 
         self.register_blueprint(blueprint)
-
-    def configure_cli(self):
-        @self.cli.command(name="run_service")
-        @argument("name")
-        @option("--devices")
-        @option("--payload")
-        def start(name, devices, payload):
-            devices_list = devices.split(",") if devices else []
-            devices_list = [db.fetch("device", name=name).id for name in devices_list]
-            payload_dict = loads(payload) if payload else {}
-            payload_dict.update(devices=devices_list, trigger="CLI", creator=getuser())
-            service = db.fetch("service", name=name)
-            results = app.run(service.id, **payload_dict)
-            db.session.commit()
-            echo(app.str_dict(results))
-
-        @self.cli.command(name="delete_log")
-        @option(
-            "--keep-last-days", default=15, help="Number of days to keep",
-        )
-        @option(
-            "--log",
-            "-l",
-            required=True,
-            type=Choice(("changelog", "result")),
-            help="Type of logs",
-        )
-        def delete_log(keep_last_days, log):
-            deletion_time = datetime.now() - timedelta(days=keep_last_days)
-            app.result_log_deletion(
-                date_time=deletion_time.strftime("%d/%m/%Y %H:%M:%S"),
-                deletion_types=[log],
-            )
-            app.log("info", f"deleted all logs in '{log}' up until {deletion_time}")
 
     def configure_rest_api(self):
 

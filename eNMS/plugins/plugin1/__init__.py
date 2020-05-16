@@ -2,7 +2,7 @@ from flask import render_template, Blueprint
 
 
 class Plugin:
-    def __init__(self, server, controller, **settings):
+    def __init__(self, server, controller, db, **settings):
         blueprint = Blueprint(__name__, __name__, **settings["blueprint"])
 
         @blueprint.route("/")

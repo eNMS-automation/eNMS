@@ -117,8 +117,8 @@
                 <li>
                   <a>{{ page }}<span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
-                    {% for subpage, url in data.items() %} {% if subpage in user.pages or user.is_admin
-                    %}
+                    {% for subpage, url in data.items() %} {% if subpage in user.pages
+                    or user.is_admin %}
                     <li><a href="{{ url }}">{{ subpage }}</a></li>
                     {% endif %} {% endfor %}
                   </ul>

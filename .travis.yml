@@ -22,4 +22,4 @@ matrix:
         - "node"
       script:
         - npm run prettier
-        - npm run lint
+        - # npm run lint

@@ -866,10 +866,9 @@ function displayWorkflowState(result) {
       if (!edges.get(id)) continue;
       edges.update({
         id: id,
-        label:
-          isNaN(devices)
-            ? `<b>${devices}</b>`
-            : `<b>${devices} DEVICE${devices == 1 ? "" : "S"}</b>`,
+        label: isNaN(devices)
+          ? `<b>${devices}</b>`
+          : `<b>${devices} DEVICE${devices == 1 ? "" : "S"}</b>`,
         font: { size: 15, multi: "html" },
       });
     }

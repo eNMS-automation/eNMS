@@ -1,6 +1,3 @@
-from click import argument, echo, option, Choice
-from datetime import datetime, timedelta
-from json import loads
 from flask import (
     abort,
     Blueprint,
@@ -18,14 +15,12 @@ from flask_login import current_user, LoginManager, login_user, logout_user
 from flask_restful import abort as rest_abort, Api, Resource
 from flask_wtf.csrf import CSRFProtect
 from functools import wraps
-from getpass import getuser
 from importlib import import_module
 from itertools import chain
 from json import load
-from os import environ, walk
+from os import environ
 from pathlib import Path
 from threading import Thread
-from re import search
 from uuid import getnode
 
 from eNMS import app

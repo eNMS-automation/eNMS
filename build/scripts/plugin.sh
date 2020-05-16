@@ -22,13 +22,13 @@ function run() {
     exit 1;
   fi
   cd eNMS/plugins
-  if [ "$mode" = "install" ]; then
-    git clone git@github.com:eNMS-automation/$plugin.git
+  if [ "$mode" = "update" ]; then
+    cd $plugin
+    git pull
   elif [ "$mode" = "remove" ]; then
     rm -r $plugin
   else
-    cd $plugin
-    git pull
+    git clone git@github.com:eNMS-automation/$plugin.git
   fi
 }
 

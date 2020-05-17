@@ -454,12 +454,10 @@ class BaseController:
         file_content=None,
     ):
         message = MIMEMultipart()
-        message.update({
-            "From": sender or self.settings["mail"]["sender"],
-            "To": recipients,
-            "Date": formatdate(localtime=True),
-            "Subject": subject
-        })
+        message["From"] = sender or self.settings["mail"]["sender"]
+        message["To"] = recipients
+        message["Date"] = formatdate(localtime=True)
+        message["Subject"] = subject
         message.add_header("reply-to", reply_to or self.settings["mail"]["reply_to"])
         message.attach(MIMEText(content))
         if filename:

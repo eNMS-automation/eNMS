@@ -381,8 +381,8 @@ class Server(Flask):
         class Query(Resource):
             decorators = [self.auth.login_required, self.catch_exceptions_and_commit]
 
-            def get(self, cls):
-                results = db.fetch(cls, all_matches=True, **request.args.to_dict())
+            def get(self, model):
+                results = db.fetch(model, all_matches=True, **request.args.to_dict())
                 return [
                     result.get_properties(exclude=["positions"]) for result in results
                 ]
@@ -390,13 +390,13 @@ class Server(Flask):
         class GetInstance(Resource):
             decorators = [self.auth.login_required, self.catch_exceptions_and_commit]
 
-            def get(self, cls, name):
-                return db.fetch(cls, name=name).to_dict(
+            def get(self, model, name):
+                return db.fetch(model, name=name).to_dict(
                     relation_names_only=True, exclude=["positions"]
                 )
 
-            def delete(self, cls, name):
-                result = db.delete(cls, name=name)
+            def delete(self, model, name):
+                result = db.delete(model, name=name)
                 return result
 
         class GetConfiguration(Resource):
@@ -427,18 +427,20 @@ class Server(Flask):
         class UpdateInstance(Resource):
             decorators = [self.auth.login_required, self.catch_exceptions_and_commit]
 
-            def post(self, cls):
-                data = request.get_json(force=True)
-                results_list = []
-                print(type(data))
-                print(data)
-                if not isinstance(data, list): data = [data]
-                for piece in data:
-                    object_data = app.objectify(cls, piece)
-                    result = db.factory(cls, **object_data).serialized
-                    db.session.commit()
-                    results_list.append(result)
-                return results_list
+            def post(self, model):
+                data, result = request.get_json(force=True), defaultdict(list)
+                if not isinstance(data, list):
+                    data = [data]
+                for instance in data:
+                    if "name" not in instance:
+                        result["failure"].append((instance, "Name is missing"))
+                    try:
+                        object_data = app.objectify(model, instance)
+                        instance = db.factory(model, **object_data)
+                        result["success"].append(instance.name)
+                    except Exception as exc:
+                        result["failure"].append(instance, format_exc())
+                return result
 
         class Migrate(Resource):
             decorators = [self.auth.login_required, self.catch_exceptions_and_commit]
@@ -571,9 +573,9 @@ class Server(Flask):
         api.add_resource(Heartbeat, "/rest/is_alive")
         api.add_resource(RunService, "/rest/run_service")
         api.add_resource(RunTask, "/rest/run_task")
-        api.add_resource(Query, "/rest/query/<string:cls>")
-        api.add_resource(UpdateInstance, "/rest/instance/<string:cls>")
-        api.add_resource(GetInstance, "/rest/instance/<string:cls>/<string:name>")
+        api.add_resource(Query, "/rest/query/<string:model>")
+        api.add_resource(UpdateInstance, "/rest/instance/<string:model>")
+        api.add_resource(GetInstance, "/rest/instance/<string:model>/<string:name>")
         api.add_resource(GetConfiguration, "/rest/configuration/<string:name>")
         api.add_resource(Search, "/rest/search")
         api.add_resource(GetResult, "/rest/result/<string:name>/<string:runtime>")

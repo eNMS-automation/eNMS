@@ -440,7 +440,7 @@ class Server(Flask):
                         object_data = app.objectify(model, instance)
                         instance = db.factory(model, **object_data)
                         result["success"].append(instance.name)
-                    except Exception as exc:
+                    except Exception:
                         result["failure"].append((instance, format_exc()))
                 return result
 

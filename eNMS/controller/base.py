@@ -453,8 +453,9 @@ class BaseController:
         filename=None,
         file_content=None,
     ):
+        sender = sender or self.settings["mail"]["sender"]
         message = MIMEMultipart()
-        message["From"] = sender or self.settings["mail"]["sender"]
+        message["From"] = sender
         message["To"] = recipients
         message["Date"] = formatdate(localtime=True)
         message["Subject"] = subject

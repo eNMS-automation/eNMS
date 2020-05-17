@@ -505,8 +505,10 @@ class Run(AbstractBase):
         finally:
             db.session.commit()
             state = self.get_state()
-            service_state = state[self.path]
-            results["summary"] = service_state.get("summary", None)
+            results["summary"] = {"failure": [], "success": []}
+            for result in self.results:
+                key = "success" if result.result["success"] else "failure"
+                results["summary"][key].append(result.device.name)
             self.status = state["status"] = "Aborted" if self.stop else "Completed"
             self.success = results["success"]
             if self.send_notification:
@@ -582,8 +584,6 @@ class Run(AbstractBase):
         )
         derived_run.properties = self.properties
         success = derived_run.run(payload)["success"]
-        key = "success" if success else "failure"
-        self.write_state(f"summary/{key}", device.name, "append")
         return success
 
     def device_run(self, payload):
@@ -738,8 +738,6 @@ class Run(AbstractBase):
         if skip_service or self.skip:
             if device:
                 self.write_state("progress/device/skipped", 1, "increment")
-                key = "success" if self.skip_value == "True" else "failure"
-                self.write_state(f"summary/{key}", device.name, "append")
             return {
                 "result": "skipped",
                 "success": self.skip_value == "True",
@@ -782,7 +780,6 @@ class Run(AbstractBase):
         if device:
             status = "success" if results["success"] else "failure"
             self.write_state(f"progress/device/{status}", 1, "increment")
-            self.write_state(f"summary/{status}", device.name, "append")
             self.create_result({"runtime": app.get_time(), **results}, device)
         self.log("info", "FINISHED", device)
         if self.waiting_time:
@@ -832,12 +829,10 @@ class Run(AbstractBase):
         if self.include_link_in_summary:
             address = app.settings["app"]["address"]
             notification["Link"] = f"{address}/view_service_results/{self.id}"
-        summary = results["summary"]
-        if summary:
-            if summary.get("failure"):
-                notification["FAILED"] = summary["failure"]
-            if summary.get("success") and not self.display_only_failed_nodes:
-                notification["PASSED"] = summary["success"]
+        if results["summary"]["failure"]:
+            notification["FAILED"] = results["summary"]["failure"]
+        if results["summary"]["success"] and not self.display_only_failed_nodes:
+            notification["PASSED"] = results["summary"]["success"]
         return notification
 
     def notify(self, results):

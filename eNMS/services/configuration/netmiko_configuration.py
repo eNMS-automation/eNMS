@@ -13,7 +13,7 @@ class NetmikoConfigurationService(ConnectionService):
     pretty_name = "Netmiko Configuration"
     parent_type = "connection_service"
     id = db.Column(Integer, ForeignKey("connection_service.id"), primary_key=True)
-    content = db.Column(db.LargeString, default="")
+    content = db.Column(db.LargeString)
     enable_mode = db.Column(Boolean, default=True)
     config_mode = db.Column(Boolean, default=False)
     driver = db.Column(db.SmallString)

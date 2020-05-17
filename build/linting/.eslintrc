@@ -12,6 +12,9 @@
   },
   "rules": {
     "quotes": [2, "double", { "allowTemplateLiterals": true }],
+    "space-before-function-paren": ["error", {
+      "named": "ignore"
+    }],
     "max-len": ["error", { "code": 88 }],
     "object-curly-spacing": "off",
     "no-invalid-this": 0,

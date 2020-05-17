@@ -18,6 +18,7 @@ function doc(page) {
   let endpoint = {
     administration: "base/installation.html",
     dashboard: "base/features.html",
+    "table/configuration": "advanced/configuration_management.html",
     "table/device": "inventory/network_creation.html",
     "table/event": "automation/scheduling.html",
     "table/link": "inventory/network_creation.html",
@@ -36,27 +37,19 @@ function doc(page) {
 function initSidebar() {
   $("#sidebar-menu")
     .find("a")
-    .on("click", function(ev) {
+    .on("click", function (ev) {
       let $li = $(this).parent();
       if ($li.is(".active")) {
         $li.removeClass("active active-sm");
         $("ul:first", $li).slideUp();
       } else {
         if (!$li.parent().is(".child_menu")) {
-          $("#sidebar-menu")
-            .find("li")
-            .removeClass("active active-sm");
-          $("#sidebar-menu")
-            .find("li ul")
-            .slideUp();
+          $("#sidebar-menu").find("li").removeClass("active active-sm");
+          $("#sidebar-menu").find("li ul").slideUp();
         } else {
           if ($("body").is(".nav-sm")) {
-            $("#sidebar-menu")
-              .find("li")
-              .removeClass("active active-sm");
-            $("#sidebar-menu")
-              .find("li ul")
-              .slideUp();
+            $("#sidebar-menu").find("li").removeClass("active active-sm");
+            $("#sidebar-menu").find("li ul").slideUp();
           }
         }
         $li.addClass("active");
@@ -64,39 +57,24 @@ function initSidebar() {
       }
     });
 
-  let switchMenu = function() {
+  let switchMenu = function () {
     if ($("body").hasClass("nav-sm")) {
       $("#eNMS").css({ "font-size": "17px" });
       $("#eNMS-version").css({ "font-size": "15px" });
-      $("#sidebar-menu")
-        .find("li.active ul")
-        .hide();
-      $("#sidebar-menu")
-        .find("li.active")
-        .addClass("active-sm");
-      $("#sidebar-menu")
-        .find("li.active")
-        .removeClass("active");
+      $("#sidebar-menu").find("li.active ul").hide();
+      $("#sidebar-menu").find("li.active").addClass("active-sm");
+      $("#sidebar-menu").find("li.active").removeClass("active");
     } else {
       $("#eNMS").css({ "font-size": "30px" });
       $("#eNMS-version").css({ "font-size": "20px" });
-      $("#sidebar-menu")
-        .find("li.active-sm ul")
-        .show();
-      $("#sidebar-menu")
-        .find("li.active-sm")
-        .addClass("active");
-      $("#sidebar-menu")
-        .find("li.active-sm")
-        .removeClass("active-sm");
+      $("#sidebar-menu").find("li.active-sm ul").show();
+      $("#sidebar-menu").find("li.active-sm").addClass("active");
+      $("#sidebar-menu").find("li.active-sm").removeClass("active-sm");
       const url = "a[href='" + currentUrl + "']";
-      $("#sidebar-menu")
-        .find(url)
-        .parent("li")
-        .addClass("current-page");
+      $("#sidebar-menu").find(url).parent("li").addClass("current-page");
       $("#sidebar-menu")
         .find("a")
-        .filter(function() {
+        .filter(function () {
           return this.href == currentUrl;
         })
         .parent("li")
@@ -106,22 +84,20 @@ function initSidebar() {
         .parent()
         .addClass("active");
     }
-    $(".dataTable").each(function() {
-      $(this)
-        .dataTable()
-        .fnDraw();
+    $(".dataTable").each(function () {
+      $(this).dataTable().fnDraw();
     });
   };
 
   switchMenu();
-  $("#menu_toggle").on("click", function() {
+  $("#menu_toggle").on("click", function () {
     call({ url: `/switch_menu/${user.id}` });
     $("body").toggleClass("nav-md nav-sm");
     switchMenu();
   });
 }
 
-$(document).ready(function() {
+$(document).ready(function () {
   NProgress.start();
   const alerts = localStorage.getItem("alerts");
   if (!alerts) {
@@ -146,6 +122,6 @@ $(document).ready(function() {
   createTooltips();
 });
 
-$(window).load(function() {
+$(window).load(function () {
   NProgress.done();
 });

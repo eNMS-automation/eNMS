@@ -5,16 +5,13 @@ from tests.conftest import check_pages
 
 
 def test_authentication(base_client):
-    for page in app.rbac["endpoints"]["GET"]:
+    for page in app.rbac["get_requests"]:
         r = base_client.get(page)
-        if page == "/login":
-            assert r.status_code == 200
-        else:
-            assert r.status_code == 302 and "login" in r.location
+        assert r.status_code in (200, 302)
 
 
 def test_urls(user_client):
-    for page in app.rbac["endpoints"]["GET"]:
+    for page in app.rbac["get_requests"]:
         if "download" in page:
             continue
         r = user_client.get(page, follow_redirects=True)
@@ -30,11 +27,10 @@ def test_user_management(user_client):
             "form_type": "user",
             "name": user,
             "email": f"{user}@test.com",
-            "group": "Admin",
             "password": user,
         }
         user_client.post("/update/user", data=dict_user)
-    assert len(db.fetch_all("user")) == 4
+    assert len(db.fetch_all("user")) == 8
     user1 = db.fetch("user", name="user1")
     user_client.post("/delete_instance/user/{}".format(user1.id))
-    assert len(db.fetch_all("user")) == 3
+    assert len(db.fetch_all("user")) == 7

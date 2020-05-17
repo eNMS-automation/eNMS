@@ -32,7 +32,7 @@ def user_client():
                 data={
                     "name": "admin",
                     "password": "admin",
-                    "authentication_method": "Local User",
+                    "authentication_method": "database",
                 },
             )
             yield client

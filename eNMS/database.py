@@ -1,5 +1,7 @@
 from ast import literal_eval
+from flask_login import current_user
 from json import loads
+from os import environ
 from sqlalchemy import (
     Boolean,
     Column,
@@ -47,14 +49,17 @@ class Database:
             "source",
             "destination",
             "pools",
+            "users",
         ],
-        "link": ["id", "pools"],
+        "group": ["id", "services", "pools"],
+        "link": ["id", "pools", "users"],
         "pool": ["id", "services", "device_number", "link_number"],
         "service": [
             "id",
             "sources",
             "destinations",
             "status",
+            "superworkflow_id",
             "tasks",
             "workflows",
             "tasks",
@@ -68,12 +73,13 @@ class Database:
             "time_before_next_run",
             "status",
         ],
-        "user": ["id", "pools"],
+        "user": ["id", "devices", "pools", "links", "groups"],
         "workflow_edge": ["id", "source_id", "destination_id", "workflow_id"],
     }
 
     import_classes = [
         "user",
+        "group",
         "device",
         "link",
         "pool",
@@ -84,8 +90,25 @@ class Database:
 
     dont_serialize = {"device": ["configuration", "operational_data"]}
 
+    many_to_many_relationships = (
+        ("user", "device"),
+        ("user", "group"),
+        ("user", "link"),
+        ("service", "device"),
+        ("service", "group"),
+        ("service", "pool"),
+        ("run", "device"),
+        ("run", "pool"),
+        ("task", "device"),
+        ("task", "pool"),
+        ("service", "workflow"),
+        ("pool", "device"),
+        ("pool", "group"),
+        ("pool", "link"),
+    )
+
     def __init__(self):
-        self.database_url = settings["database"]["url"]
+        self.database_url = environ.get("DATABASE_URL", "sqlite:///database.db")
         self.dialect = self.database_url.split(":")[0]
         self.configure_columns()
         self.engine = self.configure_engine()
@@ -124,6 +147,8 @@ class Database:
                     "pool_size": settings["database"]["pool_size"],
                 }
             )
+        elif self.dialect == "sqlite":
+            engine_parameters["connect_args"] = {"check_same_thread": False}
         return create_engine(self.database_url, **engine_parameters)
 
     def configure_columns(self):
@@ -133,7 +158,10 @@ class Database:
 
         self.Dict = MutableDict.as_mutable(CustomPickleType)
         self.List = MutableList.as_mutable(CustomPickleType)
-        self.LargeString = Text(settings["database"]["large_string_length"])
+        if self.dialect == "postgresql":
+            self.LargeString = Text
+        else:
+            self.LargeString = Text(settings["database"]["large_string_length"])
         self.SmallString = String(settings["database"]["small_string_length"])
 
         default_ctypes = {
@@ -219,11 +247,17 @@ class Database:
                 ):
                     continue
                 change = f"{attr.key}: "
-                if type(getattr(target, attr.key)) == InstrumentedList:
-                    if hist.deleted:
-                        change += f"DELETED: {hist.deleted}"
-                    if hist.added:
-                        change += f"{' / ' if hist.deleted else ''}ADDED: {hist.added}"
+                property_type = type(getattr(target, attr.key))
+                if property_type in (InstrumentedList, MutableList):
+                    if property_type == MutableList:
+                        added = set(hist.added[0]) - set(hist.deleted[0])
+                        deleted = set(hist.deleted[0]) - set(hist.added[0])
+                    else:
+                        added, deleted = hist.added, hist.deleted
+                    if deleted:
+                        change += f"DELETED: {deleted}"
+                    if added:
+                        change += f"{' / ' if deleted else ''}ADDED: {added}"
                 else:
                     change += (
                         f"'{hist.deleted[0] if hist.deleted else None}' => "
@@ -237,7 +271,7 @@ class Database:
                 )
                 app.log("info", f"UPDATE: {target.type} '{name}': ({changes})")
 
-        if app.settings["vault"]["active"]:
+        if app.use_vault:
 
             @event.listens_for(models["service"].name, "set", propagate=True)
             def vault_update(target, new_value, old_value, *_):
@@ -251,17 +285,7 @@ class Database:
                 )
 
     def configure_associations(self):
-        for model1, model2 in (
-            ("service", "device"),
-            ("service", "pool"),
-            ("run", "device"),
-            ("run", "pool"),
-            ("task", "device"),
-            ("task", "pool"),
-            ("service", "workflow"),
-            ("pool", "device"),
-            ("pool", "link"),
-        ):
+        for model1, model2 in self.many_to_many_relationships:
             kw = {"ondelete": "cascade"} if model1 == "run" else {}
             setattr(
                 self,
@@ -275,7 +299,7 @@ class Database:
             )
 
     def fetch(self, model, allow_none=False, all_matches=False, **kwargs):
-        query = self.session.query(models[model]).filter_by(**kwargs)
+        query = self.query(model, models[model]).filter_by(**kwargs)
         result = query.all() if all_matches else query.first()
         if result or allow_none:
             return result
@@ -285,14 +309,21 @@ class Database:
                 f"with the following characteristics: {kwargs}"
             )
 
+    def query(self, model, *args):
+        query = self.session.query(*args)
+        if model == "user":
+            return query
+        elif not current_user or current_user.is_admin:
+            return query
+        else:
+            return models[model].rbac_filter(query)
+
     def fetch_all(self, model, **kwargs):
         return self.fetch(model, allow_none=True, all_matches=True, **kwargs)
 
     def count(self, model, **kwargs):
         return (
-            self.session.query(func.count(models[model].id))
-            .filter_by(**kwargs)
-            .scalar()
+            self.query(model, func.count(models[model].id)).filter_by(**kwargs).scalar()
         )
 
     def get_query_count(self, query):
@@ -306,7 +337,10 @@ class Database:
         instance = self.session.query(models[model]).filter_by(**kwargs).first()
         if allow_none and not instance:
             return None
-        instance.delete()
+        try:
+            instance.delete()
+        except Exception as exc:
+            return {"alert": f"Unable to delete {instance.name} ({exc})."}
         serialized_instance = instance.serialized
         self.session.delete(instance)
         return serialized_instance

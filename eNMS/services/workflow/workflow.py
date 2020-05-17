@@ -158,7 +158,9 @@ class Workflow(Service):
                 ):
                     targets[successor.name] |= targets[service.name]
                     services.append(successor)
-                    run.edge_state[edge.id] += len(targets[service.name])
+                    run.write_state(
+                        f"edges/{edge.id}", len(targets[service.name]), "increment"
+                    )
             else:
                 summary = results.get("summary", {})
                 for edge_type in ("success", "failure"):
@@ -169,7 +171,9 @@ class Workflow(Service):
                             continue
                         targets[successor.name] |= set(summary[edge_type])
                         services.append(successor)
-                        run.edge_state[edge.id] += len(summary[edge_type])
+                        run.write_state(
+                            f"edges/{edge.id}", len(summary[edge_type]), "increment"
+                        )
         success_devices = targets[end.name]
         failure_devices = targets[start.name] - success_devices
         success = not failure_devices
@@ -177,9 +181,9 @@ class Workflow(Service):
             "success": list(success_devices),
             "failure": list(failure_devices),
         }
-        run.run_state["progress"]["device"]["success"] = len(success_devices)
-        run.run_state["progress"]["device"]["failure"] = len(failure_devices)
-        run.run_state["summary"] = summary
+        run.write_state("progress/device/success", len(success_devices))
+        run.write_state("progress/device/failure", len(failure_devices))
+        run.write_state("summary", summary)
         db.session.refresh(run)
         run.restart_run = restart_run
         return {"payload": payload, "success": success}
@@ -222,15 +226,15 @@ class Workflow(Service):
                 results = service_run.run(payload)
             if not device:
                 status = "success" if results["success"] else "failure"
-                run.run_state["progress"]["service"][status] += 1
+                run.write_state(f"progress/service/{status}", 1, "increment")
             for successor, edge in service.adjacent_services(
                 self, "destination", "success" if results["success"] else "failure",
             ):
                 services.append(successor)
                 if device:
-                    run.edge_state[edge.id] += 1
+                    run.write_state(f"edges/{edge.id}", 1, "increment")
                 else:
-                    run.edge_state[edge.id] = "DONE"
+                    run.write_state(f"edges/{edge.id}", "DONE")
         db.session.refresh(run)
         run.restart_run = restart_run
         return {"payload": payload, "success": end in visited}

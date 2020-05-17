@@ -95,7 +95,7 @@
         <img
           id="img-enms"
           src="{{ url_for('static', filename='img/logo.png') }}"
-          style="width: 30px; display: none"
+          style="width: 30px; display: none;"
         />
         {% set version_size = "15" if current_user.small_menu else "20" %}
         <h3 id="eNMS-version" style="font-size: {{ version_size }}px;">
@@ -105,21 +105,20 @@
       <div id="sidebar-menu" class="hidden-print main_menu">
         <div class="menu_section">
           <ul class="nav side-menu">
-            {% for label, category in menu.items() %} {% if label not in
-            rbac["menu"]["category"] %}
+            {% for label, category in menu.items() %} {% if label in user.menu %}
             <li>
               <a
                 ><i class="fa fa-{{ category['icon'] }}"></i>{{ label }}
                 <span class="fa fa-chevron-down"></span>
               </a>
               <ul class="nav child_menu">
-                {% for page, data in category["pages"].items() %} {% if page not in
-                rbac["menu"]["page"] %} {% if data is mapping %}
+                {% for page, data in category["pages"].items() %} {% if page in
+                user.pages or user.is_admin %} {% if data is mapping %}
                 <li>
                   <a>{{ page }}<span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
-                    {% for subpage, url in data.items() %} {% if subpage not in
-                    rbac["menu"]["page"] %}
+                    {% for subpage, url in data.items() %} {% if subpage in user.pages
+                    or user.is_admin %}
                     <li><a href="{{ url }}">{{ subpage }}</a></li>
                     {% endif %} {% endfor %}
                   </ul>
@@ -158,7 +157,7 @@
                   >
                     <img src="{{ url_for('static', filename='img/logo.png') }}" />
                     {{ current_user.name }}
-                    <span class=" fa fa-angle-down"></span>
+                    <span class="fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
                     <li>
@@ -172,7 +171,7 @@
                   <a
                     onclick="eNMS.base.createAlerts()"
                     class="dropdown-toggle info-number"
-                    style="cursor: pointer"
+                    style="cursor: pointer;"
                     data-toggle="dropdown"
                     aria-expanded="false"
                   >
@@ -200,11 +199,11 @@
                     &nbsp;Docs
                   </a>
                 </li>
-                {% if "Files" not in rbac["menu"]["bar"] %}
+                {% if "Files" in user.upper_menu %}
                 <li class="nav-item">
                   <a
                     onclick="eNMS.administration.displayFiles()"
-                    style="cursor:pointer"
+                    style="cursor: pointer;"
                   >
                     <img
                       src="{{ url_for('static', filename='img/files.png') }}"
@@ -214,11 +213,11 @@
                     &nbsp;Files
                   </a>
                 </li>
-                {% endif %} {% if "Settings" not in rbac["menu"]["bar"] %}
+                {% endif %} {% if "Settings" in user.upper_menu %}
                 <li class="nav-item">
                   <a
                     onclick="eNMS.administration.showSettings()"
-                    style="cursor:pointer"
+                    style="cursor: pointer;"
                   >
                     <img
                       src="{{ url_for('static', filename='img/settings.png') }}"
@@ -228,13 +227,13 @@
                     &nbsp;Settings
                   </a>
                 </li>
-                {% endif %} {% if "Admin" not in rbac["menu"]["bar"] %}
+                {% endif %} {% if "Admin" in user.upper_menu %}
                 <li class="nav-item">
                   <a
                     onclick="eNMS.base.openPanel({
                       name: 'administration', title: 'Administration Panel', size: 'auto'
                       })"
-                    style="cursor:pointer"
+                    style="cursor: pointer;"
                   >
                     <img
                       src="{{ url_for('static', filename='img/administration.png') }}"

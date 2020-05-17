@@ -1,7 +1,4 @@
-from click import argument, echo, option, Choice
-from datetime import datetime, timedelta
-from json import loads
-from passlib.hash import argon2
+from datetime import timedelta
 from flask import (
     abort,
     Blueprint,
@@ -20,14 +17,15 @@ from flask_login import current_user, LoginManager, login_user, logout_user
 from flask_restful import abort as rest_abort, Api, Resource
 from flask_wtf.csrf import CSRFProtect
 from functools import wraps
-from getpass import getuser
+from importlib import import_module
 from itertools import chain
+from json import load
 from os import environ
-from re import search
+from pathlib import Path
+from threading import Thread
 from uuid import getnode
 
 from eNMS import app
-from eNMS.plugins.routes import set_custom_routes
 from eNMS.database import db
 from eNMS.forms import (
     form_actions,
@@ -36,7 +34,7 @@ from eNMS.forms import (
     form_properties,
     form_templates,
 )
-from eNMS.forms.administration import LoginForm
+from eNMS.forms.administration import init_rbac_form, LoginForm
 from eNMS.models import models, property_types, relationships
 from eNMS.setup import properties, rbac
 from traceback import format_exc
@@ -48,13 +46,13 @@ class Server(Flask):
         super().__init__(__name__, static_folder=static_folder)
         self.update_config(mode)
         self.register_extensions()
+        self.register_plugins()
         self.configure_login_manager()
         self.configure_context_processor()
         self.configure_errors()
         self.configure_authentication()
         self.configure_routes()
         self.configure_rest_api()
-        self.configure_cli()
 
     @staticmethod
     def catch_exceptions_and_commit(func):
@@ -93,8 +91,11 @@ class Server(Flask):
                 )
                 return redirect(url_for("blueprint.route", page="login"))
             else:
-                forbidden_endpoints = app.rbac["groups"][current_user.group]["GET"]
-                if request.method == "GET" and request.path in forbidden_endpoints:
+                if (
+                    not current_user.is_admin
+                    and request.method == "GET"
+                    and request.path not in current_user.get_requests
+                ):
                     return render_template("error.html", error=403), 403
                 return function(*args, **kwargs)
 
@@ -116,6 +117,23 @@ class Server(Flask):
             }
         )
 
+    def register_plugins(self):
+        for plugin in Path(app.settings["app"]["plugin_path"]).iterdir():
+            if not Path(plugin / "settings.json").exists():
+                continue
+            module = import_module(f"eNMS.plugins.{plugin.stem}")
+            with open(plugin / "settings.json", "r") as file:
+                settings = load(file)
+            if not settings["active"]:
+                continue
+            plugin = module.Plugin(self, app, db, **settings)
+            if "rbac" in settings:
+                for requests in ("get_requests", "post_requests"):
+                    app.rbac[requests].extend(settings["rbac"].get(requests, []))
+            app.rbac["menu"]["Plugins"]["pages"].update(settings.get("pages", {}))
+            init_rbac_form(app.rbac)
+            app.log("info", f"Loading plugin: {settings['name']}")
+
     def register_extensions(self):
         self.auth = HTTPBasicAuth()
         self.csrf = CSRFProtect()
@@ -127,8 +145,8 @@ class Server(Flask):
         login_manager.init_app(self)
 
         @login_manager.user_loader
-        def user_loader(username):
-            return db.fetch("user", allow_none=True, name=username)
+        def user_loader(name):
+            return db.fetch("user", allow_none=True, name=name)
 
         @login_manager.request_loader
         def request_loader(request):
@@ -142,7 +160,6 @@ class Server(Flask):
                 "form_properties": form_properties,
                 "menu": rbac["menu"],
                 "names": app.property_names,
-                "rbac": rbac["groups"][getattr(current_user, "group", "Read Only")],
                 "relations": list(set(chain.from_iterable(relationships.values()))),
                 "relationships": relationships,
                 "service_types": {
@@ -170,12 +187,12 @@ class Server(Flask):
     def configure_authentication(self):
         @self.auth.verify_password
         def verify_password(username, password):
-            if not username or not password:
+            user = db.fetch("user", name=username, allow_none=True)
+            if not user or not password:
                 return False
-            user = db.fetch("user", name=username)
-            hash = app.settings["security"]["hash_user_passwords"]
-            verify = argon2.verify if hash else str.__eq__
-            return verify(password, app.get_password(user.password))
+            if app.authenticate_user(name=username, password=password):
+                login_user(user)
+                return True
 
         @self.auth.get_password
         def get_password(username):
@@ -195,26 +212,31 @@ class Server(Flask):
         @blueprint.route("/login", methods=["GET", "POST"])
         def login():
             if request.method == "POST":
+                kwargs, success = request.form.to_dict(), False
+                username = kwargs["name"]
                 try:
-                    user = app.authenticate_user(**request.form.to_dict())
+                    user = app.authenticate_user(**kwargs)
                     if user:
                         login_user(user, remember=False)
                         session.permanent = True
+                        success, log = True, f"User '{username}' logged in"
+                    else:
+                        log = f"Authentication failed for user '{username}'"
+                except Exception as exc:
+                    log = f"Authentication error for user '{username}' ({exc})"
+                finally:
+                    app.log("info" if success else "warning", log, logger="security")
+                    if success:
                         return redirect(url_for("blueprint.route", page="dashboard"))
                     else:
                         abort(403)
-                except Exception as exc:
-                    app.log("error", f"Authentication failed ({exc})")
-                    abort(403)
             if not current_user.is_authenticated:
                 login_form = LoginForm(request.form)
-                authentication_methods = []
-                if app.settings["ldap"]["active"]:
-                    authentication_methods.append(("LDAP Domain",) * 2)
-                if app.settings["tacacs"]["active"]:
-                    authentication_methods.append(("TACACS",) * 2)
-                authentication_methods.append(("Local User",) * 2)
-                login_form.authentication_method.choices = authentication_methods
+                login_form.authentication_method.choices = [
+                    (method, method.capitalize())
+                    for method, active in app.settings["authentication"].items()
+                    if active
+                ]
                 return render_template("login.html", login_form=login_form)
             return redirect(url_for("blueprint.route", page="dashboard"))
 
@@ -222,13 +244,16 @@ class Server(Flask):
         @self.monitor_requests
         def dashboard():
             return render_template(
-                f"dashboard.html",
+                "dashboard.html",
                 **{"endpoint": "dashboard", "properties": properties["dashboard"]},
             )
 
         @blueprint.route("/logout")
         @self.monitor_requests
         def logout():
+            app.log(
+                "info", f"User '{current_user.name}'' logging out", logger="security"
+            )
             logout_user()
             return redirect(url_for("blueprint.route", page="login"))
 
@@ -236,20 +261,20 @@ class Server(Flask):
         @self.monitor_requests
         def table(table_type):
             return render_template(
-                f"table.html", **{"endpoint": f"table/{table_type}", "type": table_type}
+                "table.html", **{"endpoint": f"table/{table_type}", "type": table_type}
             )
 
         @blueprint.route("/view/<view_type>")
         @self.monitor_requests
         def view(view_type):
             return render_template(
-                f"visualization.html", **{"endpoint": "view", "view_type": view_type}
+                "visualization.html", **{"endpoint": "view", "view_type": view_type}
             )
 
         @blueprint.route("/workflow_builder")
         @self.monitor_requests
         def workflow_builder():
-            return render_template(f"workflow.html", endpoint="workflow_builder")
+            return render_template("workflow.html", endpoint="workflow_builder")
 
         @blueprint.route("/form/<form_type>")
         @self.monitor_requests
@@ -290,9 +315,9 @@ class Server(Flask):
         @self.monitor_requests
         def route(page):
             endpoint, *args = page.split("/")
-            if f"/{endpoint}" not in app.rbac["endpoints"]["POST"]:
+            if f"/{endpoint}" not in app.rbac["post_requests"]:
                 return jsonify({"alert": "Invalid POST request."})
-            if f"/{endpoint}" in app.rbac["groups"][current_user.group]["POST"]:
+            if f"/{endpoint}" not in current_user.post_requests:
                 return jsonify({"alert": "Error 403 Forbidden."})
             form_type = request.form.get("form_type")
             if endpoint in app.json_endpoints:
@@ -310,57 +335,14 @@ class Server(Flask):
                 db.session.commit()
                 return jsonify(result)
             except Exception as exc:
-                raise exc
                 db.session.rollback()
                 if app.settings["app"]["config_mode"] == "debug":
                     raise
-                match = search("UNIQUE constraint failed: (\w+).(\w+)", str(exc))
-                if match:
-                    result = (
-                        f"There already is a {match.group(1)} "
-                        f"with the same {match.group(2)}."
-                    )
                 else:
                     result = str(exc)
                 return jsonify({"alert": result})
 
-        set_custom_routes(blueprint)
         self.register_blueprint(blueprint)
-
-    def configure_cli(self):
-        @self.cli.command(name="run_service")
-        @argument("name")
-        @option("--devices")
-        @option("--payload")
-        def start(name, devices, payload):
-            devices_list = devices.split(",") if devices else []
-            devices_list = [db.fetch("device", name=name).id for name in devices_list]
-            payload_dict = loads(payload) if payload else {}
-            payload_dict.update(devices=devices_list, trigger="CLI", creator=getuser())
-            service = db.fetch("service", name=name)
-            results = app.run(service.id, **payload_dict)
-            db.session.commit()
-            echo(app.str_dict(results))
-
-        @self.cli.command(name="delete_log")
-        @option(
-            "--keep-last-days", default=15, help="Number of days to keep",
-        )
-        @option(
-            "--log",
-            "-l",
-            required=True,
-            type=Choice(("changelog", "result")),
-            help="Type of logs",
-        )
-        def delete_log(keep_last_days, log):
-            table = "run" if log == "result" else log
-            deletion_time = datetime.now() - timedelta(days=keep_last_days)
-            app.result_log_deletion(
-                date_time=deletion_time.strftime("%d/%m/%Y %H:%M:%S"),
-                deletion_types=[table],
-            )
-            app.log("info", f"deleted all logs in '{log}' up until {deletion_time}")
 
     def configure_rest_api(self):
 
@@ -495,17 +477,29 @@ class Server(Flask):
                     data.update({"devices": devices, "pools": pools})
                 data["runtime"] = runtime = app.get_time()
                 if handle_asynchronously:
-                    app.scheduler.add_job(
-                        id=runtime,
-                        func=app.run,
-                        run_date=datetime.now(),
-                        args=[service.id],
-                        kwargs=data,
-                        trigger="date",
-                    )
+                    Thread(target=app.run, args=(service.id,), kwargs=data).start()
                     return {"errors": errors, "runtime": runtime}
                 else:
                     return {**app.run(service.id, **data), "errors": errors}
+
+        class RunTask(Resource):
+            decorators = [self.auth.login_required, self.catch_exceptions_and_commit]
+
+            def post(self):
+                task_id = request.get_json()
+                task = db.fetch("task", id=task_id)
+                data = {
+                    "trigger": "Scheduler",
+                    "creator": request.authorization["username"],
+                    "runtime": app.get_time(),
+                    "task": task_id,
+                    **task.initial_payload,
+                }
+                if task.devices:
+                    task["devices"] = [device.id for device in task.devices]
+                if task.pools:
+                    task["pools"] = [pool.id for pool in task.pools]
+                Thread(target=app.run, args=(task.service.id,), kwargs=data).start()
 
         class Topology(Resource):
             decorators = [self.auth.login_required, self.catch_exceptions_and_commit]
@@ -570,6 +564,7 @@ class Server(Flask):
         api.add_resource(CreatePool, "/rest/create_pool")
         api.add_resource(Heartbeat, "/rest/is_alive")
         api.add_resource(RunService, "/rest/run_service")
+        api.add_resource(RunTask, "/rest/run_task")
         api.add_resource(Query, "/rest/query/<string:cls>")
         api.add_resource(UpdateInstance, "/rest/instance/<string:cls>")
         api.add_resource(GetInstance, "/rest/instance/<string:cls>/<string:name>")

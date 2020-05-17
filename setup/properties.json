@@ -111,7 +111,6 @@
       ],
       "task":[ 
          "status",
-         "periodic",
          "frequency",
          "frequency_unit",
          "crontab_expression",
@@ -270,6 +269,52 @@
             "width":"130px",
             "orderable": false,
             "export": false
+         }
+      ],
+      "full_result":[ 
+         { 
+            "data":"runtime",
+            "title":"Runtime",
+            "search":"text"
+         },
+         { 
+            "data":"duration",
+            "title":"Duration",
+            "search":"text"
+         },
+         { 
+            "data":"device_name",
+            "title":"Device",
+            "search":"text",
+            "orderable": false
+         },
+         { 
+            "data":"service_name",
+            "title":"Service",
+            "search":"text",
+            "orderable": false
+         },
+         { 
+            "data":"success",
+            "title":"Status",
+            "search":"bool",
+            "width":"80px",
+            "orderable": false
+         },
+         { 
+            "data":"buttons",
+            "orderable": false,
+            "export": false
+         },
+         { 
+            "data":"v1",
+            "title":"V1",
+            "orderable": false
+         },
+         { 
+            "data":"v2",
+            "title":"V2",
+            "orderable": false
          }
       ],
       "link":[ 
@@ -612,8 +657,21 @@
             "search":"text"
          },
          { 
-            "data":"group",
-            "title":"Permission Group",
+            "data":"buttons",
+            "width":"130px",
+            "orderable": false,
+            "export": false
+         }
+      ],
+      "group":[ 
+         { 
+            "data":"name",
+            "title":"Name",
+            "search":"text"
+         },
+         { 
+            "data":"email",
+            "title":"Email Address",
             "search":"text"
          },
          { 

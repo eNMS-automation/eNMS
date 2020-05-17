@@ -1,4 +1,3 @@
-from json import dumps
 from requests.auth import HTTPBasicAuth
 from sqlalchemy import Boolean, ForeignKey, Integer
 from sqlalchemy.types import JSON
@@ -24,7 +23,7 @@ class RestCallService(Service):
     pretty_name = "REST Call"
     id = db.Column(Integer, ForeignKey("service.id"), primary_key=True)
     call_type = db.Column(db.SmallString)
-    rest_url = db.Column(db.LargeString, default="")
+    rest_url = db.Column(db.LargeString)
     payload = db.Column(JSON, default={})
     params = db.Column(JSON, default={})
     headers = db.Column(JSON, default={})
@@ -48,7 +47,7 @@ class RestCallService(Service):
                 self.username, app.get_password(self.password)
             )
         if run.call_type in ("POST", "PUT", "PATCH"):
-            kwargs["data"] = dumps(run.sub(run.payload, locals()))
+            kwargs["json"] = run.sub(run.payload, locals())
         call = getattr(app.request_session, run.call_type.lower())
         response = call(rest_url, **kwargs)
         if response.status_code not in range(200, 300):

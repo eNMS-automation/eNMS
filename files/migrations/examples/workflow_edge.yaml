@@ -214,10 +214,6 @@
     - Test 2', label: success, source: '[Regression Workflow E: Iteration Targets]
     Iteration Targets Workflow - Test 1', subtype: success, type: workflow_edge, workflow: 'Regression
     Workflow E: Iteration Targets'}
-- {destination: '[Regression Workflow E: Iteration Targets] Iteration Target Workflow
-    - Test 3', label: failure, source: '[Regression Workflow E: Iteration Targets]
-    Iteration Target Workflow - Test 2', subtype: failure, type: workflow_edge, workflow: 'Regression
-    Workflow E: Iteration Targets'}
 - {destination: '[Shared] Getters Workflow: Interface IP', label: success, source: '[Shared]
     Start', subtype: success, type: workflow_edge, workflow: '[[Regression Workflow
     F: Workflow of Workflows] Regression Workflow F S1: Subworkflow of Workflow] Regression
@@ -267,10 +263,6 @@
     Workflow] Variable Access Subworkflow: Access variables for iteration', subtype: success,
   type: workflow_edge, workflow: '[Regression Workflow F: Workflow of Workflows] Regression
     Workflow F S2: Access Variables from Parent Workflow'}
-- {destination: '[Regression Workflow E: Iteration Targets] Iteration Targets Workflow
-    - Test 4', label: failure, source: '[Regression Workflow E: Iteration Targets]
-    Iteration Target Workflow - Test 3', subtype: failure, type: workflow_edge, workflow: 'Regression
-    Workflow E: Iteration Targets'}
 - {destination: '[[Regression Workflow F: Workflow of Workflows] Regression Workflow
     F S1: Subworkflow of Workflow] Regression Workflow 8: Payload Extraction with
     Operations', label: success, source: '[[Regression Workflow F: Workflow of Workflows]
@@ -606,3 +598,11 @@
     Arista show version', label: success, source: '[Regression Workflow 6: Ansible
     with Validation] Simple Playbook', subtype: success, type: workflow_edge, workflow: 'Regression
     Workflow 6: Ansible with Validation'}
+- {destination: '[Regression Workflow E: Iteration Targets] Iteration Target Workflow
+    - Test 3', label: success, source: '[Regression Workflow E: Iteration Targets]
+    Iteration Target Workflow - Test 2', subtype: success, type: workflow_edge, workflow: 'Regression
+    Workflow E: Iteration Targets'}
+- {destination: '[Regression Workflow E: Iteration Targets] Iteration Targets Workflow
+    - Test 4', label: success, source: '[Regression Workflow E: Iteration Targets]
+    Iteration Target Workflow - Test 3', subtype: success, type: workflow_edge, workflow: 'Regression
+    Workflow E: Iteration Targets'}

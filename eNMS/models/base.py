@@ -20,7 +20,7 @@ class AbstractBase(db.base):
 
     def __getattribute__(self, property):
         if property in db.private_properties:
-            if app.settings["vault"]["active"]:
+            if app.use_vault:
                 target = self.service if self.type == "run" else self
                 path = f"secret/data/{target.type}/{target.name}/{property}"
                 data = app.vault_client.read(path)
@@ -36,7 +36,7 @@ class AbstractBase(db.base):
             if not value:
                 return
             value = app.encrypt(str.encode(value))
-            if app.settings["vault"]["active"]:
+            if app.use_vault:
                 app.vault_client.write(
                     f"secret/data/{self.type}/{self.name}/{property}",
                     data={property: value},
@@ -87,13 +87,14 @@ class AbstractBase(db.base):
                 continue
             if property in db.dont_serialize.get(self.type, []):
                 continue
-            if not hasattr(self, property):
-                continue
             if include and property not in include or exclude and property in exclude:
                 continue
             if export and property in no_migrate:
                 continue
-            value = getattr(self, property)
+            try:
+                value = getattr(self, property)
+            except AttributeError:
+                continue
             if export:
                 if isinstance(value, MutableList):
                     value = list(value)
@@ -103,6 +104,10 @@ class AbstractBase(db.base):
                     continue
             result[property] = value
         return result
+
+    @classmethod
+    def rbac_filter(cls, query):
+        return query
 
     def table_properties(self, **kwargs):
         rest_api = kwargs.get("rest_api_request")

@@ -1,15 +1,14 @@
-from apscheduler.triggers.cron import CronTrigger
-from datetime import datetime
-from flask_login import current_user
 from re import search
+from requests import get, post
+from requests.exceptions import ConnectionError
 from sqlalchemy import Boolean, case, ForeignKey, Integer
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy.orm import relationship
 
-from eNMS import app
 from eNMS.database import db
 from eNMS.models.base import AbstractBase
+from eNMS.setup import scheduler
 
 
 @db.set_custom_properties
@@ -17,12 +16,9 @@ class Task(AbstractBase):
 
     __tablename__ = type = "task"
     id = db.Column(Integer, primary_key=True)
-    aps_job_id = db.Column(db.SmallString)
     name = db.Column(db.SmallString, unique=True)
     description = db.Column(db.SmallString)
-    creation_time = db.Column(db.SmallString)
     scheduling_mode = db.Column(db.SmallString, default="standard")
-    periodic = db.Column(Boolean)
     frequency = db.Column(Integer)
     frequency_unit = db.Column(db.SmallString, default="seconds")
     start_date = db.Column(db.SmallString)
@@ -41,10 +37,6 @@ class Task(AbstractBase):
 
     def __init__(self, **kwargs):
         super().update(**kwargs)
-        self.creation_time = app.get_time()
-        self.aps_job_id = kwargs.get("aps_job_id", self.creation_time)
-        if self.is_active:
-            self.schedule()
 
     def update(self, **kwargs):
         super().update(**kwargs)
@@ -52,9 +44,7 @@ class Task(AbstractBase):
             self.schedule()
 
     def delete(self):
-        if app.scheduler.get_job(self.aps_job_id):
-            app.scheduler.remove_job(self.aps_job_id)
-        db.session.commit()
+        post(f"{scheduler['address']}/delete_job", json=self.id)
 
     @hybrid_property
     def status(self):
@@ -66,106 +56,32 @@ class Task(AbstractBase):
 
     @property
     def next_run_time(self):
-        job = app.scheduler.get_job(self.aps_job_id)
-        if job and job.next_run_time:
-            return job.next_run_time.strftime("%Y-%m-%d %H:%M:%S")
-        return None
+        try:
+            return get(
+                f"{scheduler['address']}/next_runtime/{self.id}", timeout=0.001
+            ).json()
+        except ConnectionError:
+            return "Scheduler Unreachable"
 
     @property
     def time_before_next_run(self):
-        job = app.scheduler.get_job(self.aps_job_id)
-        if job and job.next_run_time:
-            delta = job.next_run_time.replace(tzinfo=None) - datetime.now()
-            hours, remainder = divmod(delta.seconds, 3600)
-            minutes, seconds = divmod(remainder, 60)
-            days = f"{delta.days} days, " if delta.days else ""
-            return f"{days}{hours}h:{minutes}m:{seconds}s"
-        return None
+        try:
+            return get(
+                f"{scheduler['address']}/time_left/{self.id}", timeout=0.001
+            ).json()
+        except ConnectionError:
+            return "Scheduler Unreachable"
 
-    def aps_conversion(self, date):
-        dt: datetime = datetime.strptime(date, "%d/%m/%Y %H:%M:%S")
-        return datetime.strftime(dt, "%Y-%m-%d %H:%M:%S")
-
-    def aps_date(self, datetype):
-        date = getattr(self, datetype)
-        return self.aps_conversion(date) if date else None
-
-    def pause(self):
-        self.is_active = False
-        db.session.commit()
-        app.scheduler.pause_job(self.aps_job_id)
-
-    def resume(self):
-        self.schedule()
-        app.scheduler.resume_job(self.aps_job_id)
-        self.is_active = True
-        db.session.commit()
-
-    def run_properties(self):
-        properties = {
-            "task": self.id,
-            "trigger": "Scheduler",
-            "creator": current_user.name,
-            **self.initial_payload,
-        }
-        if self.devices:
-            properties["devices"] = [device.id for device in self.devices]
-        if self.pools:
-            properties["pools"] = [pool.id for pool in self.pools]
-        return properties
-
-    def kwargs(self):
-        default = {
-            "id": self.aps_job_id,
-            "func": app.run,
-            "replace_existing": True,
-            "args": [self.service_id],
-            "kwargs": self.run_properties(),
-        }
-        if self.scheduling_mode == "cron":
-            self.periodic = True
-            expression = self.crontab_expression.split()
-            mapping = {
-                "0": "sun",
-                "1": "mon",
-                "2": "tue",
-                "3": "wed",
-                "4": "thu",
-                "5": "fri",
-                "6": "sat",
-                "7": "sun",
-                "*": "*",
-            }
-            expression[-1] = ",".join(mapping[day] for day in expression[-1].split(","))
-            trigger = {"trigger": CronTrigger.from_crontab(" ".join(expression))}
-        elif self.frequency:
-            self.periodic = True
-            frequency_in_seconds = (
-                int(self.frequency)
-                * {"seconds": 1, "minutes": 60, "hours": 3600, "days": 86400}[
-                    self.frequency_unit
-                ]
-            )
-            trigger = {
-                "trigger": "interval",
-                "start_date": self.aps_date("start_date"),
-                "end_date": self.aps_date("end_date"),
-                "seconds": frequency_in_seconds,
-            }
-        else:
-            self.periodic = False
-            trigger = {"trigger": "date", "run_date": self.aps_date("start_date")}
-        return default, trigger
-
-    def schedule(self):
-        default, trigger = self.kwargs()
-        if not app.scheduler.get_job(self.aps_job_id):
-            app.scheduler.add_job(**{**default, **trigger})
-        else:
-            app.scheduler.modify_job(
-                default["id"], args=default["args"], kwargs=default["kwargs"]
-            )
-            app.scheduler.reschedule_job(default.pop("id"), **trigger)
+    def schedule(self, mode="schedule"):
+        try:
+            result = post(
+                f"{scheduler['address']}/schedule",
+                json={"mode": mode, "task": self.get_properties()},
+            ).json()
+        except ConnectionError:
+            return {"alert": "Scheduler Unreachable: the task cannot be scheduled."}
+        self.is_active = result.get("active", False)
+        return result
 
 
 @db.set_custom_properties

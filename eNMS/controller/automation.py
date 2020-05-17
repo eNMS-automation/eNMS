@@ -1,6 +1,4 @@
-from apscheduler.jobstores.base import JobLookupError
 from collections import defaultdict
-from datetime import datetime
 from flask import request
 from flask_login import current_user
 from napalm._SUPPORTED_DRIVERS import SUPPORTED_DRIVERS
@@ -8,6 +6,7 @@ from netmiko.ssh_dispatcher import CLASS_MAPPER, FILE_TRANSFER_MAP
 from operator import itemgetter
 from pathlib import Path
 from re import search, sub
+from threading import Thread
 from uuid import uuid4
 
 from eNMS.controller.base import BaseController
@@ -24,12 +23,6 @@ class AutomationController(BaseController):
     run_db = defaultdict(dict)
     run_logs = defaultdict(lambda: defaultdict(list))
     run_stop = defaultdict(bool)
-
-    def stop_workflow(self, runtime):
-        run = db.fetch("run", allow_none=True, runtime=runtime)
-        if run and run.status == "Running":
-            self.run_stop[run.parent_runtime] = True
-            return True
 
     def add_edge(self, workflow_id, subtype, source, destination):
         workflow_edge = self.update(
@@ -52,6 +45,33 @@ class AutomationController(BaseController):
     def add_service_to_workflow(self, workflow, service):
         workflow = db.fetch("workflow", id=workflow)
         workflow.services.append(db.fetch("service", id=service))
+
+    def calendar_init(self, type):
+        results = {}
+        for instance in db.fetch_all(type):
+            if getattr(instance, "workflow", None):
+                continue
+            date = getattr(instance, "next_run_time" if type == "task" else "runtime")
+            python_month = search(r".*-(\d{2})-.*", date)
+            if not python_month:
+                continue
+            month = "{:02}".format((int(python_month.group(1)) - 1) % 12)
+            start = [
+                int(i)
+                for i in sub(
+                    r"(\d+)-(\d+)-(\d+) (\d+):(\d+).*",
+                    r"\1," + month + r",\3,\4,\5",
+                    date,
+                ).split(",")
+            ]
+            results[instance.name] = {"start": start, **instance.serialized}
+        return results
+
+    def clear_results(self, service_id):
+        for result in db.fetch(
+            "run", all_matches=True, allow_none=True, service_id=service_id
+        ):
+            db.session.delete(result)
 
     def copy_service_in_workflow(self, workflow_id, **kwargs):
         service_sets = list(set(kwargs["services"].split(",")))
@@ -78,12 +98,6 @@ class AutomationController(BaseController):
             "services": [service.serialized for service in services],
             "update_time": workflow.last_modified,
         }
-
-    def clear_results(self, service_id):
-        for result in db.fetch(
-            "run", all_matches=True, allow_none=True, service_id=service_id
-        ):
-            db.session.delete(result)
 
     def create_label(self, workflow_id, x, y, **kwargs):
         workflow, label_id = db.fetch("workflow", id=workflow_id), str(uuid4())
@@ -126,6 +140,13 @@ class AutomationController(BaseController):
         db.fetch("workflow", id=workflow_id).last_modified = now
         return now
 
+    def delete_label(self, workflow_id, label):
+        workflow = db.fetch("workflow", id=workflow_id)
+        workflow.labels.pop(label)
+        now = self.get_time()
+        workflow.last_modified = now
+        return now
+
     def delete_node(self, workflow_id, service_id):
         workflow, service = (
             db.fetch("workflow", id=workflow_id),
@@ -138,16 +159,21 @@ class AutomationController(BaseController):
         workflow.last_modified = now
         return {"service": service.serialized, "update_time": now}
 
-    def delete_label(self, workflow_id, label):
-        workflow = db.fetch("workflow", id=workflow_id)
-        workflow.labels.pop(label)
-        now = self.get_time()
-        workflow.last_modified = now
-        return now
-
     def duplicate_workflow(self, workflow_id):
         workflow = db.fetch("workflow", id=workflow_id)
         return workflow.duplicate().serialized
+
+    def get_parent_workflows(self, workflow=None):
+        yield workflow
+        for parent_workflow in workflow.workflows:
+            yield from self.get_parent_workflows(parent_workflow)
+
+    def get_result(self, id):
+        return db.fetch("result", id=id).result
+
+    def get_runtimes(self, type, id):
+        runs = db.fetch("run", allow_none=True, all_matches=True, service_id=id)
+        return sorted(set((run.parent_runtime, run.parent_runtime) for run in runs))
 
     def get_service_logs(self, service, runtime):
         log_instance = db.fetch(
@@ -156,15 +182,25 @@ class AutomationController(BaseController):
         if log_instance:
             log = log_instance.content
         else:
-            log = "\n".join(self.run_logs[runtime].get(int(service), []))
+            log = "\n".join(self.log_queue(runtime, service, mode="get") or [])
         return {"logs": log, "refresh": not log_instance}
 
-    def get_runtimes(self, type, id):
-        runs = db.fetch("run", allow_none=True, all_matches=True, service_id=id)
-        return sorted(set((run.parent_runtime, run.parent_runtime) for run in runs))
-
-    def get_result(self, id):
-        return db.fetch("result", id=id).result
+    def get_service_state(self, path, runtime=None):
+        service_id = path.split(">")[-1]
+        state, service = None, db.fetch("service", id=service_id)
+        runs = db.fetch_all("run", service_id=service_id)
+        if not runtime:
+            runtime = "latest"
+        if runs and runtime != "normal":
+            if runtime == "latest":
+                runtime = runs[-1].parent_runtime
+            state = db.fetch("run", runtime=runtime).get_state()
+        return {
+            "service": service.to_dict(include=["services", "edges", "superworkflow"]),
+            "runtimes": sorted(set((r.parent_runtime, r.creator) for r in runs)),
+            "state": state,
+            "runtime": runtime,
+        }
 
     def get_top_level_workflows(self):
         return [
@@ -173,10 +209,50 @@ class AutomationController(BaseController):
             if not workflow.workflows
         ]
 
-    def get_parent_workflows(self, workflow=None):
-        yield workflow
-        for parent_workflow in workflow.workflows:
-            yield from self.get_parent_workflows(parent_workflow)
+    def get_workflow_results(self, workflow, runtime):
+        run = db.fetch("run", parent_runtime=runtime)
+        state = run.result().result["state"]
+
+        def rec(service, path=str(run.service_id)):
+            runs = db.fetch(
+                "run",
+                parent_runtime=runtime,
+                allow_none=True,
+                all_matches=True,
+                service_id=service.id,
+            )
+            if service.scoped_name in ("Start", "End") or not runs:
+                return
+            progress = state.get(path, {}).get("progress")
+            track_progress = progress and progress["device"]["total"]
+            data = {"progress": progress["device"]} if track_progress else {}
+            color = "32CD32" if all(run.success for run in runs) else "FF6666"
+            result = {
+                "runtime": min(run.runtime for run in runs),
+                "data": {"properties": service.base_properties, **data},
+                "text": service.scoped_name,
+                "a_attr": {"style": f"color: #{color};width: 100%"},
+            }
+            if service.type == "workflow":
+                children_results = []
+                for child in service.services:
+                    if child.scoped_name == "Placeholder":
+                        for run in runs:
+                            if run.placeholder:
+                                child = run.placeholder
+                                break
+                    child_results = rec(child, f"{path}>{child.id}")
+                    if not child_results:
+                        continue
+                    children_results.append(child_results)
+                return {
+                    "children": sorted(children_results, key=itemgetter("runtime")),
+                    **result,
+                }
+            else:
+                return result
+
+        return rec(run.service)
 
     def get_workflow_services(self, id, node):
         parents = list(self.get_parent_workflows(db.fetch("workflow", id=id)))
@@ -279,69 +355,6 @@ class AutomationController(BaseController):
                 key=itemgetter("text"),
             )
 
-    def search_workflow_services(self, *args, **kwargs):
-        return [
-            "standalone",
-            "shared",
-            *[
-                workflow.name
-                for workflow in db.fetch_all("workflow")
-                if any(
-                    kwargs["str"].lower() in service.scoped_name.lower()
-                    for service in workflow.services
-                )
-            ],
-        ]
-
-    def get_workflow_results(self, workflow, runtime):
-        run = db.fetch("run", parent_runtime=runtime)
-        state = run.result().result["state"]
-
-        def rec(service, path=None):
-            runs = db.fetch(
-                "run",
-                parent_runtime=runtime,
-                allow_none=True,
-                all_matches=True,
-                service_id=service.id,
-            )
-            if service.scoped_name in ("Start", "End") or not runs:
-                return
-            if not path:
-                path = str(service.id)
-                progress = state["progress"]
-            else:
-                progress = state["services"].get(path, {}).get("progress")
-            track_progress = progress and progress["device"]["total"]
-            data = {"progress": progress["device"]} if track_progress else {}
-            color = "32CD32" if all(run.success for run in runs) else "FF6666"
-            result = {
-                "runtime": min(run.runtime for run in runs),
-                "data": {"properties": service.base_properties, **data},
-                "text": service.scoped_name,
-                "a_attr": {"style": f"color: #{color};width: 100%"},
-            }
-            if service.type == "workflow":
-                children_results = []
-                for child in service.services:
-                    if child.scoped_name == "Placeholder":
-                        for run in runs:
-                            if run.placeholder:
-                                child = run.placeholder
-                                break
-                    child_results = rec(child, f"{path}>{child.id}")
-                    if not child_results:
-                        continue
-                    children_results.append(child_results)
-                return {
-                    "children": sorted(children_results, key=itemgetter("runtime")),
-                    **result,
-                }
-            else:
-                return result
-
-        return rec(run.service)
-
     @staticmethod
     def run(service, **kwargs):
         run_kwargs = {
@@ -373,8 +386,7 @@ class AutomationController(BaseController):
             run_kwargs["start_service"] = service.id
         run = db.factory("run", service=service.id, **run_kwargs)
         run.properties = kwargs
-        payload = {**initial_payload, **kwargs}
-        return run.run(payload)
+        return run.run({**initial_payload, **kwargs})
 
     def run_service(self, path, **kwargs):
         path_ids = str(path).split(">")
@@ -389,14 +401,7 @@ class AutomationController(BaseController):
         service = db.fetch("service", id=service_id)
         kwargs["runtime"] = runtime = self.get_time()
         if kwargs.get("asynchronous", True):
-            self.scheduler.add_job(
-                id=runtime,
-                func=self.run,
-                run_date=datetime.now(),
-                args=[service_id],
-                kwargs=kwargs,
-                trigger="date",
-            )
+            Thread(target=self.run, args=(service_id,), kwargs=kwargs).start()
         else:
             service.run(runtime=runtime)
         return {
@@ -421,6 +426,30 @@ class AutomationController(BaseController):
                 workflow.last_modified = now
         return now
 
+    def scan_playbook_folder(self):
+        path = Path(
+            self.settings["paths"]["playbooks"] or self.path / "files" / "playbooks"
+        )
+        playbooks = [[str(f) for f in path.glob(e)] for e in ("*.yaml", "*.yml")]
+        return sorted(sum(playbooks, []))
+
+    def scheduler_action(self, action):
+        getattr(self.scheduler, action)()
+
+    def search_workflow_services(self, *args, **kwargs):
+        return [
+            "standalone",
+            "shared",
+            *[
+                workflow.name
+                for workflow in db.fetch_all("workflow")
+                if any(
+                    kwargs["str"].lower() in service.scoped_name.lower()
+                    for service in workflow.services
+                )
+            ],
+        ]
+
     def skip_services(self, workflow_id, service_ids):
         services = [db.fetch("service", id=id) for id in service_ids.split("-")]
         workflow = db.fetch("workflow", id=workflow_id)
@@ -433,58 +462,14 @@ class AutomationController(BaseController):
             "update_time": workflow.last_modified,
         }
 
-    def get_service_state(self, path, runtime=None):
-        service_id = path.split(">")[-1]
-        state, service = None, db.fetch("service", id=service_id)
-        runs = db.fetch_all("run", service_id=service_id)
-        if not runtime:
-            runtime = "latest"
-        if runs and runtime != "normal":
-            if runtime == "latest":
-                runtime = runs[-1].parent_runtime
-            state = self.run_db.get(runtime) or db.fetch("run", runtime=runtime).state
-        return {
-            "service": service.to_dict(include=["services", "edges", "superworkflow"]),
-            "runtimes": sorted(set((r.parent_runtime, r.creator) for r in runs)),
-            "state": state,
-            "runtime": runtime,
-        }
+    def stop_workflow(self, runtime):
+        run = db.fetch("run", allow_none=True, runtime=runtime)
+        if run and run.status == "Running":
+            if self.redis_queue:
+                self.redis("set", f"stop/{runtime}", "true")
+            else:
+                self.run_stop[run.parent_runtime] = True
+            return True
 
-    def convert_date(self, date):
-        python_month = search(r".*-(\d{2})-.*", date).group(1)
-        month = "{:02}".format((int(python_month) - 1) % 12)
-        return [
-            int(i)
-            for i in sub(
-                r"(\d+)-(\d+)-(\d+) (\d+):(\d+).*", r"\1," + month + r",\3,\4,\5", date
-            ).split(",")
-        ]
-
-    def calendar_init(self, type):
-        results = {}
-        for instance in db.fetch_all(type):
-            if getattr(instance, "workflow", None):
-                continue
-            date = getattr(instance, "next_run_time" if type == "task" else "runtime")
-            if date:
-                results[instance.name] = {
-                    "start": self.convert_date(date),
-                    **instance.serialized,
-                }
-        return results
-
-    def scheduler_action(self, action):
-        getattr(self.scheduler, action)()
-
-    def task_action(self, action, task_id):
-        try:
-            return getattr(db.fetch("task", id=task_id), action)()
-        except JobLookupError:
-            return {"alert": "This task no longer exists."}
-
-    def scan_playbook_folder(self):
-        path = Path(
-            self.settings["paths"]["playbooks"] or self.path / "files" / "playbooks"
-        )
-        playbooks = [[str(f) for f in path.glob(e)] for e in ("*.yaml", "*.yml")]
-        return sorted(sum(playbooks, []))
+    def task_action(self, mode, task_id):
+        return db.fetch("task", id=task_id).schedule(mode)

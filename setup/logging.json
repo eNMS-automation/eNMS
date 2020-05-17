@@ -39,9 +39,5 @@
       "handlers": ["security"],
       "level": "DEBUG"
     }
-  },
-  "external_loggers": {
-    "requests": "info",
-    "urllib3": "info"
   }
 }

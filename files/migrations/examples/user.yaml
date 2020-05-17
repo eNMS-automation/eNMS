@@ -1,6 +1,222 @@
-- email: admin@admin.com
-  group: Admin
+- authentication: database
+  email: admin@enms.io
+  get_requests: [/logout, /form/excel_import, /form/run, /form/user, /form/run_filtering,
+    /form/restart_workflow, /form/data_backup_service, /form/run_relation_filtering,
+    /form/event_filtering, /form/mail_notification_service, /form/configure_bgp_service,
+    /form/example_service, /form/unix_shell_script_service, /form/napalm_getters_service,
+    /view/network, /table/event, /form/files, /form/netmiko_file_transfer_service,
+    /form/python_snippet_service, /form/excel_export, /download_file, /form/pool_relation_filtering,
+    /table/changelog, /table/task, /form/mattermost_notification_service, /form/link,
+    /form/netmiko_prompts_service, /form/administration, /form/settings_panel, /form/task,
+    /workflow_builder, /form/device_filtering, /form/task_filtering, /table/link,
+    /form/event, /form/database_migration, /form/panel, /table/server, /view/site,
+    /login, /form/swiss_army_knife_service, /form/napalm_configuration_service, /table/group,
+    /form/ping_service, /form/slack_notification_service, /form/event_relation_filtering,
+    /form/napalm_rollback_service, /form/device, /form/ansible_playbook_service, /form/group,
+    /table/service, /form/file, /table/device, /form/pool, /form/napalm_ping_service,
+    /form/device_relation_filtering, /form/netmiko_validation_service, /form/netmiko_configuration_service,
+    /form/pool_objects, /form/workflow_edge, /form/link_filtering, /form/generic_file_transfer_service,
+    /form/unix_command_service, /form/payload_extraction_service, /table/user, /form/device_connection,
+    /form/import_service, /form/napalm_backup_service, /form/topology_import_service,
+    /form/napalm_traceroute_service, /form/add_services, /form/result_log_deletion,
+    /form/link_relation_filtering, /form/rest_call_service, /form/service_filtering,
+    /table/configuration, /form/service_relation_filtering, /table/run, /form/database_deletion,
+    /form/changelog, /form/upload_files, /dashboard, /form/workflow, /form/pool_filtering,
+    /table/session, /view_service_results, /form/workflow_label, /table/pool, /form/server,
+    /form/task_relation_filtering]
+  is_admin: true
+  manual_rbac: false
+  menu: [Inventory, Plugins, Scheduling, Automation, Visualization, Admin, Home]
   name: admin
-  permissions: [Admin]
+  pages: [Plugin 2, Results, Network, Servers, Tasks, Plugin 1, Users, Workflow Builder,
+    Events, Submenu, Devices, Services, Links, Changelog, Dashboard, Pools, Sessions,
+    Configurations, Sites, Groups]
+  post_requests: [/get_cluster_status, /get_result, /export_topology, /clear_configurations,
+    /reset_status, /get_workflow_services, /get_device_network_data, /get_runtimes,
+    /run_service, /get_git_network_data, /compare, /delete_file, /get_properties,
+    /save_parameters, /multiselect_filtering, /copy_service_in_workflow, /get_tree_files,
+    /count_models, /get_exported_services, /import_topology, /process_form_data, /switch_menu,
+    /clear_results, /delete_edge, /export_service, /save_settings, /task_action, /duplicate_workflow,
+    /filtering, /import_service, /get_workflow_results, /save_file, /calendar_init,
+    /get_service_state, /update, /get_top_level_workflows, /delete_instance, /get,
+    /migration_import, /get_view_topology, /get_session_log, /counters, /skip_services,
+    /get_migration_folders, /get_device_logs, /scheduler_action, /database_deletion,
+    /topology_import, /delete_corrupted_edges, /search_workflow_services, /scan_playbook_folder,
+    /get_git_history, /get_service_logs, /update_pool, /get_all, /create_label, /edit_file,
+    /save_positions, /add_service_to_workflow, /connection, /update_all_pools, /scan_cluster,
+    /add_edge, /migration_export, /stop_workflow, /result_log_deletion, /upload_files,
+    /delete_label, /handoffssh, /get_git_content, /save_pool_objects, /view_filtering,
+    /delete_node]
   small_menu: false
   type: user
+  upper_menu: [Files, Admin, Settings]
+- authentication: database
+  email: read-only@enms.io
+  get_requests: [/table/session, /form/python_snippet_service, /table/run, /form/link_filtering,
+    /table/task, /view/network, /form/netmiko_file_transfer_service, /form/data_backup_service,
+    /form/example_service, /form/swiss_army_knife_service, /table/configuration, /form/import_service,
+    /form/generic_file_transfer_service, /form/payload_extraction_service, /form/settings_panel,
+    /table/pool, /form/device, /login, /form/mattermost_notification_service, /form/netmiko_prompts_service,
+    /form/event, /form/configure_bgp_service, /form/run_filtering, /table/event, /form/slack_notification_service,
+    /form/workflow_edge, /download_file, /form/unix_shell_script_service, /form/pool_filtering,
+    /table/link, /form/device_filtering, /form/task, /table/changelog, /form/napalm_configuration_service,
+    /workflow_builder, /form/result_log_deletion, /table/device, /form/mail_notification_service,
+    /form/napalm_getters_service, /form/workflow, /form/link, /form/device_connection,
+    /form/changelog, /form/napalm_ping_service, /form/pool_objects, /form/task_filtering,
+    /form/netmiko_validation_service, /form/run, /form/napalm_traceroute_service,
+    /table/service, /view/site, /form/netmiko_configuration_service, /form/restart_workflow,
+    /form/rest_call_service, /logout, /view_service_results, /form/file, /form/napalm_rollback_service,
+    /dashboard, /form/ping_service, /form/pool, /form/topology_import_service, /form/workflow_label,
+    /form/ansible_playbook_service, /form/unix_command_service, /form/napalm_backup_service,
+    /form/add_services]
+  is_admin: false
+  manual_rbac: false
+  menu: [Inventory, Visualization, Scheduling, Automation, Plugins, Home]
+  name: read-only
+  pages: [Results, Events, Configurations, Sessions, Sites, Dashboard, Devices, Pools,
+    Workflow Builder, Plugin 1, Tasks, Links, Network, Submenu, Plugin 2, Services,
+    Changelog]
+  post_requests: [/get_workflow_services, /scan_playbook_folder, /counters, /get_runtimes,
+    /get_service_state, /search_workflow_services, /get_result, /get, /get_view_topology,
+    /get_properties, /get_top_level_workflows, /get_all, /get_device_network_data,
+    /compare, /filtering, /calendar_init, /switch_menu, /get_device_logs, /view_filtering,
+    /get_session_log, /get_workflow_results, /multiselect_filtering, /get_git_history,
+    /get_service_logs, /count_models]
+  small_menu: false
+  type: user
+  upper_menu: []
+- authentication: database
+  email: chicago@enms.io
+  get_requests: [/table/session, /form/python_snippet_service, /table/run, /form/event_filtering,
+    /form/link_filtering, /table/task, /view/network, /form/netmiko_file_transfer_service,
+    /form/data_backup_service, /form/example_service, /form/swiss_army_knife_service,
+    /table/configuration, /form/device_relation_filtering, /form/generic_file_transfer_service,
+    /form/payload_extraction_service, /form/settings_panel, /table/pool, /form/device,
+    /login, /form/mattermost_notification_service, /form/netmiko_prompts_service,
+    /form/event, /form/configure_bgp_service, /form/pool_relation_filtering, /form/run_filtering,
+    /form/slack_notification_service, /form/topology_import_service, /download_file,
+    /form/unix_shell_script_service, /form/workflow_edge, /table/event, /form/pool_filtering,
+    /table/link, /form/device_filtering, /form/task, /form/task_relation_filtering,
+    /form/napalm_configuration_service, /table/changelog, /workflow_builder, /table/device,
+    /form/mail_notification_service, /form/napalm_getters_service, /form/workflow,
+    /form/link, /form/device_connection, /form/changelog, /form/napalm_ping_service,
+    /form/pool_objects, /form/run_relation_filtering, /form/link_relation_filtering,
+    /form/netmiko_validation_service, /form/run, /form/task_filtering, /form/napalm_traceroute_service,
+    /table/service, /form/service_relation_filtering, /view/site, /form/netmiko_configuration_service,
+    /form/restart_workflow, /form/rest_call_service, /logout, /view_service_results,
+    /form/event_relation_filtering, /form/file, /form/napalm_rollback_service, /dashboard,
+    /form/ping_service, /form/pool, /form/service_filtering, /form/workflow_label,
+    /form/ansible_playbook_service, /form/unix_command_service, /form/napalm_backup_service,
+    /form/add_services]
+  is_admin: false
+  manual_rbac: false
+  menu: [Inventory, Visualization, Scheduling, Automation, Plugins, Home]
+  name: chicago
+  pages: [Results, Events, Configurations, Sessions, Sites, Dashboard, Devices, Pools,
+    Workflow Builder, Plugin 1, Tasks, Links, Network, Submenu, Plugin 2, Services,
+    Changelog]
+  post_requests: [/get_workflow_services, /import_service, /connection, /delete_node,
+    /scan_playbook_folder, /counters, /delete_label, /get_tree_files, /get_runtimes,
+    /export_service, /get_service_state, /add_edge, /delete_edge, /search_workflow_services,
+    /reset_status, /get_git_network_data, /get_result, /save_positions, /update_all_pools,
+    /get, /get_view_topology, /delete_instance, /get_properties, /task_action, /get_top_level_workflows,
+    /get_exported_services, /get_all, /get_device_network_data, /update, /add_service_to_workflow,
+    /import_topology, /skip_services, /update_pool, /compare, /process_form_data,
+    /get_cluster_status, /get_migration_folders, /scan_cluster, /filtering, /handoffssh,
+    /clear_configurations, /save_pool_objects, /calendar_init, /switch_menu, /get_device_logs,
+    /view_filtering, /get_session_log, /copy_service_in_workflow, /get_workflow_results,
+    /run_service, /duplicate_workflow, /get_git_content, /get_git_history, /multiselect_filtering,
+    /get_service_logs, /stop_workflow, /count_models, /create_label]
+  small_menu: false
+  type: user
+  upper_menu: []
+- authentication: database
+  email: sf@enms.io
+  get_requests: [/table/session, /form/python_snippet_service, /table/run, /form/event_filtering,
+    /form/link_filtering, /table/task, /view/network, /form/netmiko_file_transfer_service,
+    /form/data_backup_service, /form/example_service, /form/swiss_army_knife_service,
+    /table/configuration, /form/device_relation_filtering, /form/generic_file_transfer_service,
+    /form/payload_extraction_service, /form/settings_panel, /table/pool, /form/device,
+    /login, /form/mattermost_notification_service, /form/netmiko_prompts_service,
+    /form/event, /form/configure_bgp_service, /form/pool_relation_filtering, /form/run_filtering,
+    /form/slack_notification_service, /form/topology_import_service, /download_file,
+    /form/unix_shell_script_service, /form/workflow_edge, /table/event, /form/pool_filtering,
+    /table/link, /form/device_filtering, /form/task, /form/task_relation_filtering,
+    /form/napalm_configuration_service, /table/changelog, /workflow_builder, /table/device,
+    /form/mail_notification_service, /form/napalm_getters_service, /form/workflow,
+    /form/link, /form/device_connection, /form/changelog, /form/napalm_ping_service,
+    /form/pool_objects, /form/run_relation_filtering, /form/link_relation_filtering,
+    /form/netmiko_validation_service, /form/run, /form/task_filtering, /form/napalm_traceroute_service,
+    /table/service, /form/service_relation_filtering, /view/site, /form/netmiko_configuration_service,
+    /form/restart_workflow, /form/rest_call_service, /logout, /view_service_results,
+    /form/event_relation_filtering, /form/file, /form/napalm_rollback_service, /dashboard,
+    /form/ping_service, /form/pool, /form/service_filtering, /form/workflow_label,
+    /form/ansible_playbook_service, /form/unix_command_service, /form/napalm_backup_service,
+    /form/add_services]
+  is_admin: false
+  manual_rbac: false
+  menu: [Inventory, Visualization, Scheduling, Automation, Plugins, Home]
+  name: sf
+  pages: [Results, Events, Configurations, Sessions, Sites, Dashboard, Devices, Pools,
+    Workflow Builder, Plugin 1, Tasks, Links, Network, Submenu, Plugin 2, Services,
+    Changelog]
+  post_requests: [/get_workflow_services, /import_service, /connection, /delete_node,
+    /scan_playbook_folder, /counters, /delete_label, /get_tree_files, /get_runtimes,
+    /export_service, /get_service_state, /add_edge, /delete_edge, /search_workflow_services,
+    /reset_status, /get_git_network_data, /get_result, /save_positions, /update_all_pools,
+    /get, /get_view_topology, /delete_instance, /get_properties, /task_action, /get_top_level_workflows,
+    /get_exported_services, /get_all, /get_device_network_data, /update, /add_service_to_workflow,
+    /import_topology, /skip_services, /update_pool, /compare, /process_form_data,
+    /get_cluster_status, /get_migration_folders, /scan_cluster, /filtering, /handoffssh,
+    /clear_configurations, /save_pool_objects, /calendar_init, /switch_menu, /get_device_logs,
+    /view_filtering, /get_session_log, /copy_service_in_workflow, /get_workflow_results,
+    /run_service, /duplicate_workflow, /get_git_content, /get_git_history, /multiselect_filtering,
+    /get_service_logs, /stop_workflow, /count_models, /create_label]
+  small_menu: false
+  type: user
+  upper_menu: []
+- authentication: database
+  email: ny@enms.io
+  get_requests: [/table/session, /form/python_snippet_service, /table/run, /form/event_filtering,
+    /form/link_filtering, /table/task, /view/network, /form/netmiko_file_transfer_service,
+    /form/data_backup_service, /form/example_service, /form/swiss_army_knife_service,
+    /table/configuration, /form/device_relation_filtering, /form/generic_file_transfer_service,
+    /form/payload_extraction_service, /form/settings_panel, /table/pool, /form/device,
+    /login, /form/mattermost_notification_service, /form/netmiko_prompts_service,
+    /form/event, /form/configure_bgp_service, /form/pool_relation_filtering, /form/run_filtering,
+    /form/slack_notification_service, /form/topology_import_service, /download_file,
+    /form/unix_shell_script_service, /form/workflow_edge, /table/event, /form/pool_filtering,
+    /table/link, /form/device_filtering, /form/task, /form/task_relation_filtering,
+    /form/napalm_configuration_service, /table/changelog, /workflow_builder, /table/device,
+    /form/mail_notification_service, /form/napalm_getters_service, /form/workflow,
+    /form/link, /form/device_connection, /form/changelog, /form/napalm_ping_service,
+    /form/pool_objects, /form/run_relation_filtering, /form/link_relation_filtering,
+    /form/netmiko_validation_service, /form/run, /form/task_filtering, /form/napalm_traceroute_service,
+    /table/service, /form/service_relation_filtering, /view/site, /form/netmiko_configuration_service,
+    /form/restart_workflow, /form/rest_call_service, /logout, /view_service_results,
+    /form/event_relation_filtering, /form/file, /form/napalm_rollback_service, /dashboard,
+    /form/ping_service, /form/pool, /form/service_filtering, /form/workflow_label,
+    /form/ansible_playbook_service, /form/unix_command_service, /form/napalm_backup_service,
+    /form/add_services]
+  is_admin: false
+  manual_rbac: false
+  menu: [Inventory, Visualization, Scheduling, Automation, Plugins, Home]
+  name: ny
+  pages: [Results, Events, Configurations, Sessions, Sites, Dashboard, Devices, Pools,
+    Workflow Builder, Plugin 1, Tasks, Links, Network, Submenu, Plugin 2, Services,
+    Changelog]
+  post_requests: [/get_workflow_services, /import_service, /connection, /delete_node,
+    /scan_playbook_folder, /counters, /delete_label, /get_tree_files, /get_runtimes,
+    /export_service, /get_service_state, /add_edge, /delete_edge, /search_workflow_services,
+    /reset_status, /get_git_network_data, /get_result, /save_positions, /update_all_pools,
+    /get, /get_view_topology, /delete_instance, /get_properties, /task_action, /get_top_level_workflows,
+    /get_exported_services, /get_all, /get_device_network_data, /update, /add_service_to_workflow,
+    /import_topology, /skip_services, /update_pool, /compare, /process_form_data,
+    /get_cluster_status, /get_migration_folders, /scan_cluster, /filtering, /handoffssh,
+    /clear_configurations, /save_pool_objects, /calendar_init, /switch_menu, /get_device_logs,
+    /view_filtering, /get_session_log, /copy_service_in_workflow, /get_workflow_results,
+    /run_service, /duplicate_workflow, /get_git_content, /get_git_history, /multiselect_filtering,
+    /get_service_logs, /stop_workflow, /count_models, /create_label]
+  small_menu: false
+  type: user
+  upper_menu: []

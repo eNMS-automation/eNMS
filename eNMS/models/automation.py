@@ -1,13 +1,12 @@
 from builtins import __dict__ as builtins
-from collections import defaultdict
 from copy import deepcopy
 from datetime import datetime
+from flask_login import current_user
 from functools import partial
 from importlib import __import__ as importlib_import
 from io import BytesIO
-from json import dumps, loads
+from json import loads
 from json.decoder import JSONDecodeError
-from logging import getLogger
 from multiprocessing.pool import ThreadPool
 from napalm import get_network_driver
 from netmiko import ConnectHandler
@@ -74,10 +73,13 @@ class Service(AbstractBase):
     pools = relationship(
         "Pool", secondary=db.service_pool_table, back_populates="services"
     )
+    groups = relationship(
+        "Group", secondary=db.service_group_table, back_populates="services"
+    )
     update_pools = db.Column(Boolean, default=False)
     send_notification = db.Column(Boolean, default=False)
     send_notification_method = db.Column(db.SmallString, default="mail")
-    notification_header = db.Column(db.LargeString, default="")
+    notification_header = db.Column(db.LargeString)
     display_only_failed_nodes = db.Column(Boolean, default=True)
     include_device_results = db.Column(Boolean, default=True)
     include_link_in_summary = db.Column(Boolean, default=True)
@@ -112,7 +114,7 @@ class Service(AbstractBase):
     max_processes = db.Column(Integer, default=5)
     conversion_method = db.Column(db.SmallString, default="none")
     validation_method = db.Column(db.SmallString, default="none")
-    content_match = db.Column(db.LargeString, default="")
+    content_match = db.Column(db.LargeString)
     content_match_regex = db.Column(Boolean, default=False)
     dict_match = db.Column(db.Dict)
     negative_logic = db.Column(Boolean, default=False)
@@ -123,6 +125,7 @@ class Service(AbstractBase):
     def __init__(self, **kwargs):
         kwargs.pop("status", None)
         super().__init__(**kwargs)
+        self.groups = getattr(current_user, "groups", [])
         if "name" not in kwargs:
             self.set_name()
 
@@ -167,6 +170,12 @@ class Service(AbstractBase):
     @property
     def filename(self):
         return app.strip_all(self.name)
+
+    @classmethod
+    def rbac_filter(cls, query):
+        return query.filter(
+            or_(cls.groups.any(id=group.id) for group in current_user.groups)
+        )
 
     def set_name(self, name=None):
         if self.shared:
@@ -238,12 +247,14 @@ class Result(AbstractBase):
 
     @classmethod
     def filtering_constraints(cls, **kwargs):
-        constraints = [
-            getattr(
-                models["result"],
-                "device" if kwargs["instance"]["type"] == "device" else "service",
-            ).has(id=kwargs["instance"]["id"])
-        ]
+        constraints = []
+        if not kwargs.get("full_result"):
+            constraints.append(
+                getattr(
+                    models["result"],
+                    "device" if kwargs["instance"]["type"] == "device" else "service",
+                ).has(id=kwargs["instance"]["id"])
+            )
         if kwargs.get("runtime"):
             constraints.append(models["result"].parent_runtime == kwargs["runtime"])
         return constraints
@@ -375,35 +386,40 @@ class Run(AbstractBase):
     def service_properties(self):
         return {k: getattr(self.service, k) for k in ("id", "type", "name")}
 
-    @property
-    def run_state(self):
+    def get_state(self):
         if self.state:
             return self.state
-        elif self.runtime == self.parent_runtime:
-            return app.run_db[self.runtime]
+        elif app.redis_queue:
+            keys = app.redis("keys", f"{self.parent_runtime}/state/*")
+            data, state = list(zip(keys, app.redis("mget", *keys))), {}
+            for log, value in data:
+                inner_store, (*path, last_key) = state, log.split("/")[2:]
+                for key in path:
+                    inner_store = inner_store.setdefault(key, {})
+                if value in ("False", "True"):
+                    value = value == "True"
+                inner_store[last_key] = value
+            return state
         else:
-            return app.run_db[self.parent_runtime]["services"][self.path]
-
-    @property
-    def edge_state(self):
-        return app.run_db[self.parent_runtime]["edges"]
+            return app.run_db[self.parent_runtime]
 
     @property
     def stop(self):
-        return app.run_stop[self.parent_runtime]
+        if app.redis_queue:
+            return bool(app.redis("get", f"stop/{self.runtime}"))
+        else:
+            return app.run_stop[self.parent_runtime]
 
     @property
     def progress(self):
-        if self.status == "Running" and self.run_state.get("progress"):
-            progress = self.run_state["progress"]["device"]
-            try:
-                return (
-                    f"{progress['success'] + progress['failure']}/{progress['total']}"
-                    f" ({progress['failure']} failed)"
-                )
-            except KeyError:
-                return "N/A"
-        else:
+        progress = self.get_state().get(self.path, {}).get("progress")
+        try:
+            progress = progress["device"]
+            return (
+                f"{progress['success'] + progress['failure']}"
+                f"/{progress['total']} ({progress['failure']} failed)"
+            )
+        except KeyError:
             return "N/A"
 
     def compute_devices_from_query(_self, query, property, **locals):  # noqa: N805
@@ -441,41 +457,41 @@ class Run(AbstractBase):
         return list(devices)
 
     def init_state(self):
-        state = {
-            "status": "Idle",
-            "success": None,
-            "progress": {
-                "device": {"total": 0, "success": 0, "failure": 0, "skipped": 0}
-            },
-            "attempt": 0,
-            "waiting_time": {
-                "total": self.service.waiting_time,
-                "left": self.service.waiting_time,
-            },
-            "summary": {"success": [], "failure": []},
-        }
-        if self.placeholder:
-            state["placeholder"] = self.placeholder.get_properties()
-        if self.service.type == "workflow":
-            state.update({"edges": defaultdict(int), "services": defaultdict(dict)})
-            state["progress"]["service"] = {
-                "total": len(self.service.services),
-                "success": 0,
-                "failure": 0,
-                "skipped": 0,
-            }
-        if self.runtime == self.parent_runtime:
-            if self.runtime in app.run_db:
+        if not app.redis_queue:
+            if app.run_db[self.parent_runtime].get(self.path):
                 return
-            app.run_db[self.runtime] = state
+            app.run_db[self.parent_runtime][self.path] = {}
+        if self.placeholder:
+            for property in ("id", "scoped_name", "type"):
+                value = getattr(self.placeholder, property)
+                self.write_state(f"placeholder/{property}", value)
+        self.write_state("success", True)
+
+    def write_state(self, path, value, method=None):
+        if app.redis_queue:
+            if isinstance(value, bool):
+                value = str(value)
+            app.redis(
+                {None: "set", "append": "lpush", "increment": "incr"}[method],
+                f"{self.parent_runtime}/state/{self.path}/{path}",
+                value,
+            )
         else:
-            service_states = app.run_db[self.parent_runtime]["services"]
-            if self.path not in service_states:
-                service_states[self.path] = state
+            *keys, last = f"{self.parent_runtime}/{self.path}/{path}".split("/")
+            store = app.run_db
+            for key in keys:
+                store = store.setdefault(key, {})
+            if not method:
+                store[last] = value
+            elif method == "increment":
+                store.setdefault(last, 0)
+                store[last] += value
+            else:
+                store.setdefault(last, []).append(value)
 
     def run(self, payload):
         self.init_state()
-        self.run_state["status"] = "Running"
+        self.write_state("status", "Running")
         start = datetime.now().replace(microsecond=0)
         try:
             app.service_db[self.service.id]["runs"] += 1
@@ -483,31 +499,25 @@ class Run(AbstractBase):
             db.session.commit()
             results = {"runtime": self.runtime, **self.device_run(payload)}
         except Exception:
-            result = (
-                f"Running {self.service.type} '{self.service.name}'"
-                " raised the following exception:\n"
-                f"{chr(10).join(format_exc().splitlines())}\n\n"
-                "Run aborted..."
-            )
+            result = "\n".join(format_exc().splitlines())
             self.log("error", result)
             results = {"success": False, "runtime": self.runtime, "result": result}
         finally:
             db.session.commit()
-            results["summary"] = self.run_state.get("summary", None)
-            self.status = "Aborted (STOP)" if self.stop else "Completed"
-            self.run_state["status"] = self.status
-            if self.run_state["success"] is not False:
-                self.success = self.run_state["success"] = results["success"]
+            state = self.get_state()
+            service_state = state[self.path]
+            results["summary"] = service_state.get("summary", None)
+            self.status = state["status"] = "Aborted" if self.stop else "Completed"
+            self.success = results["success"]
             if self.send_notification:
                 results = self.notify(results)
             app.service_db[self.service.id]["runs"] -= 1
             if not app.service_db[self.id]["runs"]:
                 self.service.status = "Idle"
-            results["duration"] = self.duration = str(
-                datetime.now().replace(microsecond=0) - start
-            )
+            now = datetime.now().replace(microsecond=0)
+            results["duration"] = self.duration = str(now - start)
             if self.runtime == self.parent_runtime:
-                self.state = results["state"] = app.run_db.pop(self.runtime)
+                self.state = results["state"] = state
                 self.close_remaining_connections()
             if self.task and not (self.task.frequency or self.task.crontab_expression):
                 self.task.is_active = False
@@ -526,6 +536,8 @@ class Run(AbstractBase):
                 or self.run_method == "once"
             ):
                 results = self.create_result(results)
+            if app.redis_queue and self.runtime == self.parent_runtime:
+                app.redis("delete", *app.redis("keys", f"{self.runtime}/*"))
             db.session.commit()
         return results
 
@@ -571,13 +583,18 @@ class Run(AbstractBase):
         derived_run.properties = self.properties
         success = derived_run.run(payload)["success"]
         key = "success" if success else "failure"
-        self.run_state["summary"][key].append(device.name)
+        self.write_state(f"summary/{key}", device.name, "append")
         return success
 
     def device_run(self, payload):
         self.devices = self.compute_devices(payload)
+        user = db.fetch("user", allow_none=True, name=self.creator)
+        if not user.is_admin and set(self.devices) - set(user.devices):
+            error = f"RBAC ERROR: Unauthorized targets for user '{self.creator}'"
+            self.log("error", error)
+            return {"success": False, "result": error, "runtime": self.runtime}
         if self.run_method != "once":
-            self.run_state["progress"]["device"]["total"] += len(self.devices)
+            self.write_state("progress/device/total", len(self.devices), "increment")
         if self.iteration_devices and not self.parent_device:
             if not self.workflow:
                 return {
@@ -639,12 +656,14 @@ class Run(AbstractBase):
         if device:
             result_kw["device"] = device.id
         if self.parent_runtime == self.runtime and not device:
-            for service_id, log in app.run_logs.pop(self.runtime, {}).items():
+            services = list(app.run_logs.get(self.runtime, []))
+            for service_id in services:
+                logs = app.log_queue(self.runtime, service_id, mode="get")
                 db.factory(
                     "service_log",
                     runtime=self.runtime,
                     service=service_id,
-                    content="\n".join(log),
+                    content="\n".join(logs or []),
                 )
             if self.trigger == "REST":
                 results["devices"] = {}
@@ -718,9 +737,9 @@ class Run(AbstractBase):
             skip_service = self.eval(self.skip_query, **locals())[0]
         if skip_service or self.skip:
             if device:
-                self.run_state["progress"]["device"]["skipped"] += 1
+                self.write_state("progress/device/skipped", 1, "increment")
                 key = "success" if self.skip_value == "True" else "failure"
-                self.run_state["summary"][key].append(device.name)
+                self.write_state(f"summary/{key}", device.name, "append")
             return {
                 "result": "skipped",
                 "success": self.skip_value == "True",
@@ -762,36 +781,43 @@ class Run(AbstractBase):
         results["duration"] = str(datetime.now().replace(microsecond=0) - start)
         if device:
             status = "success" if results["success"] else "failure"
-            self.run_state["progress"]["device"][status] += 1
-            self.run_state["summary"][status].append(device.name)
-
+            self.write_state(f"progress/device/{status}", 1, "increment")
+            self.write_state(f"summary/{status}", device.name, "append")
             self.create_result({"runtime": app.get_time(), **results}, device)
         self.log("info", "FINISHED", device)
         if self.waiting_time:
             self.log("info", f"SLEEP {self.waiting_time} seconds...", device)
             sleep(self.waiting_time)
+        if not results["success"]:
+            self.write_state("success", False)
         if commit:
             db.session.commit()
         return results
 
     def log(
-        self, severity, log, device=None, app_log=False, logger=None,
+        self,
+        severity,
+        log,
+        device=None,
+        changelog=False,
+        logger=None,
+        service_log=True,
     ):
-        log_level = int(self.original.log_level)
+        log_level = int(self.original.service.log_level)
         if not log_level or severity not in app.log_levels[log_level - 1 :]:
             return
         if device:
             device_name = device if isinstance(device, str) else device.name
             log = f"DEVICE {device_name} - {log}"
         log = f"USER {self.creator} - SERVICE {self.service.scoped_name} - {log}"
-        if logger:
-            getattr(getLogger(logger), severity)(log)
-        if app_log:
-            app.log(severity, log, user=self.creator)
-        run_log = f"{app.get_time()} - {severity} - {log}"
-        app.run_logs[self.parent_runtime][self.service_id].append(run_log)
-        if self.runtime != self.parent_runtime:
-            app.run_logs[self.parent_runtime][self.original.service_id].append(run_log)
+        settings = app.log(
+            severity, log, user=self.creator, changelog=changelog, logger=logger
+        )
+        if service_log or logger and settings.get("service_log"):
+            run_log = f"{app.get_time()} - {severity} - {log}"
+            app.log_queue(self.parent_runtime, self.service.id, run_log)
+            if self.runtime != self.parent_runtime:
+                app.log_queue(self.parent_runtime, self.original.service.id, run_log)
 
     def build_notification(self, results):
         notification = {
@@ -852,12 +878,10 @@ class Run(AbstractBase):
                 result = post(
                     app.settings["mattermost"]["url"],
                     verify=app.settings["mattermost"]["verify_certificate"],
-                    data=dumps(
-                        {
-                            "channel": app.settings["mattermost"]["channel"],
-                            "text": notification,
-                        }
-                    ),
+                    json={
+                        "channel": app.settings["mattermost"]["channel"],
+                        "text": notification,
+                    },
                 ).text
             results["notification"] = {"success": True, "result": result}
         except Exception:
@@ -1066,7 +1090,7 @@ class Run(AbstractBase):
                 setattr(connection, property, service_value)
         try:
             if not hasattr(connection, "check_config_mode"):
-                self.log("error", f"Netmiko 'check_config_mode' method is missing.")
+                self.log("error", "Netmiko 'check_config_mode' method is missing.")
                 return connection
             mode = connection.check_config_mode()
             if mode and not self.config_mode:

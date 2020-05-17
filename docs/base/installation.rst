@@ -73,10 +73,8 @@ This mechanism is disabled by default. To activate it, you need to:
 
 .. _Settings:
 
-|
-
-Settings file
-#############
+Settings
+########
 
 The ``/setup/settings.json`` file includes:
 
@@ -322,9 +320,6 @@ properties.json custom device addition example:
         - details which attributes to use for filtering
         - you will need to add any custom device attributes name to this list for filtering
 
-
-
-
 RBAC file
 #########
 
@@ -332,3 +327,32 @@ The ``/setup/rbac.json`` file allows configuration of:
 
   - Which user roles have access to each of the controls in the UI
   - Which user roles have access to each of the REST API endpoints
+
+Environment variables
+#####################
+
+  - SECRET_KEY=secret_key
+  - MAIL_PASSWORD=mail_password
+  - TACACS_PASSWORD=tacacs_password
+  - SLACK_TOKEN=slack_token
+
+Scheduler
+---------
+
+The scheduler used for running tasks at a later time is a web application that is distinct from eNMS.
+It can be installed on the same server as eNMS, or a remote server.
+
+Before running the scheduler, you must configure the following environment variables so it knows where
+eNMS is located and what credentials to authenticate with:
+
+- ``ENMS_ADDR``: URL of the remote server (example: ``"http://192.168.56.102"``)
+- ``ENMS_USER``: eNMS login
+- ``ENMS_PASSWORD``: eNMS password
+
+The scheduler is a asynchronous application that must be deployed with uvicorn :
+
+::
+
+ cd scheduler
+ uvicorn scheduler:scheduler --host 0.0.0.0
+

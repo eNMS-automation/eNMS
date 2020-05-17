@@ -2,13 +2,34 @@
 Release Notes
 =============
 
-Version 3.21.4
---------------
+Version 3.22
+------------
 
+- Remove database url from settings. Configured via env variable DATABASE_URL
+- In Rest Call service and other rest calls with request, use "json" kw instead of "data"
+- Remote scheduler
+- Remove TACACS+ parameters from settings, use env variable instead: TACACS_ADDR, TACACS_PASSWORD
+- Make REST API accept Tacacs and LDAP credentials (in the last version, if you were using TACACS+ or LDAP, you could authenticate
+in the UI but couldn't make calls to the REST API)
+- Remove LDAP parameters from settings. The LDAP authentication is in the custom controller, there is a default
+function that works with a standard LDAP installation, but you can customize however you want.
+The LDAP server is now configured with the env variable LDAP_SERVER.
 - Defer loading of device configuration and operational data column
 - Fix device results table comparison mechanism
 - Add replier option in send mail mechanism
 - Fix REST asynchronous get result not committed bug
+- Rename "app_log" option to changelog in log function for services
+- Fix comparison of device results
+- Add new entry in workflow RC menu "Workflow Results Table": contains all results for a given runtime,
+allowing for comparison of results same device / different service, same service / different device, etc.
+- Refactor logging mechanism. In settings.json, add new logging sections to configure whether the log
+for a given logger should also be logged as changelog or service log by default.
+- RBAC
+- Fix authentication bug flask_login
+
+MIGRATION:
+- Remove RBAC in rbac.json
+- Update migration files (user.yaml): group: Admin -> groups: [Admin Users]
 
 Version 3.21.3
 --------------

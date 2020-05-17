@@ -1,4 +1,3 @@
-from apscheduler.schedulers.background import BackgroundScheduler
 from base64 import b64decode, b64encode
 from collections import Counter
 from cryptography.fernet import Fernet
@@ -19,13 +18,15 @@ from os import environ, scandir
 from os.path import exists
 from pathlib import Path
 from re import compile, error as regex_error
+from redis import Redis
+from redis.exceptions import ConnectionError, TimeoutError
 from requests import Session as RequestSession
 from requests.adapters import HTTPAdapter
 from requests.packages.urllib3.util.retry import Retry
 from ruamel import yaml
 from smtplib import SMTP
 from string import punctuation
-from sqlalchemy import and_, func, or_
+from sqlalchemy import and_, or_
 from sqlalchemy.exc import IntegrityError, InvalidRequestError
 from sqlalchemy.orm import configure_mappers
 from sys import path as sys_path
@@ -36,14 +37,6 @@ try:
     from hvac import Client as VaultClient
 except ImportError as exc:
     warn(f"Couldn't import hvac module ({exc})")
-try:
-    from ldap3 import ALL, Server
-except ImportError as exc:
-    warn(f"Couldn't import ldap3 module ({exc})")
-try:
-    from tacacs_plus.client import TACACSClient
-except ImportError as exc:
-    warn(f"Couldn't import tacacs_plus module ({exc})")
 
 from eNMS.database import db
 from eNMS.models import models, model_properties, relationships
@@ -78,12 +71,8 @@ class BaseController:
         self.load_custom_properties()
         self.path = Path.cwd()
         self.init_encryption()
-        self.init_scheduler()
-        if settings["tacacs"]["active"]:
-            self.init_tacacs_client()
-        if settings["ldap"]["active"]:
-            self.init_ldap_client()
-        if settings["vault"]["active"]:
+        self.use_vault = settings["vault"]["use_vault"]
+        if self.use_vault:
             self.init_vault_client()
         if settings["syslog"]["active"]:
             self.init_syslog_server()
@@ -91,6 +80,7 @@ class BaseController:
             sys_path.append(settings["paths"]["custom_code"])
         self.fetch_version()
         self.init_logs()
+        self.init_redis()
         self.init_connection_pools()
 
     def init_encryption(self):
@@ -152,7 +142,7 @@ class BaseController:
         )
 
     def create_admin_user(self) -> None:
-        admin = db.factory("user", **{"name": "admin", "group": "Admin"})
+        admin = db.factory("user", name="admin")
         if not admin.password:
             admin.update(password="admin")
 
@@ -189,7 +179,7 @@ class BaseController:
         with open(self.path / "setup" / "logging.json", "r") as logging_config:
             logging_config = load(logging_config)
         dictConfig(logging_config)
-        for logger, log_level in logging_config["external_loggers"].items():
+        for logger, log_level in self.settings["logging"]["external_loggers"].items():
             info(f"Changing {logger} log level to '{log_level}'")
             log_level = getattr(import_module("logging"), log_level.upper())
             getLogger(logger).setLevel(log_level)
@@ -203,28 +193,25 @@ class BaseController:
                 HTTPAdapter(max_retries=retry, **self.settings["requests"]["pool"],),
             )
 
-    def init_scheduler(self):
-        self.scheduler = BackgroundScheduler(
-            {
-                "apscheduler.jobstores.default": {
-                    "type": "sqlalchemy",
-                    "url": "sqlite:///jobs.sqlite",
-                },
-                "apscheduler.executors.default": {
-                    "class": "apscheduler.executors.pool:ThreadPoolExecutor",
-                    "max_workers": "50",
-                },
-                "apscheduler.job_defaults.misfire_grace_time": "5",
-                "apscheduler.job_defaults.coalesce": "true",
-                "apscheduler.job_defaults.max_instances": "3",
-            }
-        )
-        self.scheduler.start()
-
     def init_forms(self):
         for file in (self.path / "eNMS" / "forms").glob("**/*.py"):
             spec = spec_from_file_location(str(file).split("/")[-1][:-3], str(file))
             spec.loader.exec_module(module_from_spec(spec))
+
+    def init_redis(self):
+        host = environ.get("REDIS_ADDR")
+        self.redis_queue = (
+            Redis(
+                host=host,
+                port=6379,
+                db=0,
+                charset="utf-8",
+                decode_responses=True,
+                socket_timeout=0.1,
+            )
+            if host
+            else None
+        )
 
     def init_services(self):
         path_services = [self.path / "eNMS" / "services"]
@@ -245,18 +232,10 @@ class BaseController:
                 except InvalidRequestError as exc:
                     error(f"Error loading custom service '{file}' ({str(exc)})")
 
-    def init_ldap_client(self):
-        self.ldap_client = Server(self.settings["ldap"]["server"], get_info=ALL)
-
-    def init_tacacs_client(self):
-        self.tacacs_client = TACACSClient(
-            self.settings["tacacs"]["address"], 49, environ.get("TACACS_PASSWORD")
-        )
-
     def init_vault_client(self):
-        self.vault_client = VaultClient()
-        self.vault_client.token = environ.get("VAULT_TOKEN")
-        if self.vault_client.sys.is_sealed() and self.settings["vault"]["unseal"]:
+        url = environ.get("VAULT_ADDR", "http://127.0.0.1:8200")
+        self.vault_client = VaultClient(url=url, token=environ.get("VAULT_TOKEN"))
+        if self.vault_client.sys.is_sealed() and self.settings["vault"]["unseal_vault"]:
             keys = [environ.get(f"UNSEAL_VAULT_KEY{i}") for i in range(1, 6)]
             self.vault_client.sys.submit_unseal_keys(filter(None, keys))
 
@@ -265,6 +244,29 @@ class BaseController:
             self.settings["syslog"]["address"], self.settings["syslog"]["port"]
         )
         self.syslog_server.start()
+
+    def redis(self, operation, *args, **kwargs):
+        try:
+            return getattr(self.redis_queue, operation)(*args, **kwargs)
+        except (ConnectionError, TimeoutError) as exc:
+            self.log("error", f"Redis Queue Unreachable ({exc})")
+
+    def log_queue(self, runtime, service, log=None, mode="add"):
+        if self.redis_queue:
+            key = f"{runtime}/{service}/logs"
+            self.run_logs[runtime][int(service)] = None
+            if mode == "add":
+                log = self.redis("lpush", key, log)
+            else:
+                log = self.redis("lrange", key, 0, -1)
+                if log:
+                    log = log[::-1]
+        else:
+            if mode == "add":
+                return self.run_logs[runtime][int(service)].append(log)
+            else:
+                log = getattr(self.run_logs[runtime], mode)(int(service), [])
+        return log
 
     def delete_instance(self, instance_type, instance_id):
         return db.delete(instance_type, id=instance_id)
@@ -297,16 +299,20 @@ class BaseController:
                 return {"alert": f"There is already a {type} with the same parameters."}
             return {"alert": str(exc)}
 
-    def log(self, severity, content, user=None):
-        db.factory(
-            "changelog",
-            **{
-                "severity": severity,
-                "content": content,
-                "user": user or getattr(current_user, "name", "admin"),
-            },
-        )
-        getattr(import_module("logging"), severity)(content)
+    def log(self, severity, content, user=None, changelog=True, logger="root"):
+        logger_settings = self.settings["logging"]["loggers"].get(logger)
+        if logger:
+            getattr(getLogger(logger), severity)(content)
+        if changelog or logger and logger_settings.get("changelog"):
+            db.factory(
+                "changelog",
+                **{
+                    "severity": severity,
+                    "content": content,
+                    "user": user or getattr(current_user, "name", "admin"),
+                },
+            )
+        return logger_settings
 
     def count_models(self):
         return {
@@ -340,51 +346,49 @@ class BaseController:
             )
         )
 
-    def build_filtering_constraints(self, obj_type, **kwargs):
-        model, constraints = models[obj_type], []
-        for property in model_properties[obj_type]:
+    def build_filtering_constraints(self, model, **kwargs):
+        table, constraints = models[model], []
+        for property in model_properties[model]:
             value = kwargs["form"].get(property)
             if not value:
                 continue
             filter = kwargs["form"].get(f"{property}_filter")
             if value in ("bool-true", "bool-false"):
-                constraint = getattr(model, property) == (value == "bool-true")
+                constraint = getattr(table, property) == (value == "bool-true")
             elif filter == "equality":
-                constraint = getattr(model, property) == value
+                constraint = getattr(table, property) == value
             elif not filter or filter == "inclusion" or db.dialect == "sqlite":
-                constraint = getattr(model, property).contains(value)
+                constraint = getattr(table, property).contains(value)
             else:
                 compile(value)
                 regex_operator = "regexp" if db.dialect == "mysql" else "~"
-                constraint = getattr(model, property).op(regex_operator)(value)
+                constraint = getattr(table, property).op(regex_operator)(value)
             constraints.append(constraint)
-        for related_model, relation_properties in relationships[obj_type].items():
+        for related_model, relation_properties in relationships[model].items():
             relation_ids = [int(id) for id in kwargs["form"].get(related_model, [])]
             filter = kwargs["form"].get(f"{related_model}_filter")
             if filter == "none":
-                constraint = ~getattr(model, related_model).any()
+                constraint = ~getattr(table, related_model).any()
             elif not relation_ids:
                 continue
             elif relation_properties["list"]:
                 constraint = (and_ if filter == "all" else or_)(
-                    getattr(model, related_model).any(id=relation_id)
+                    getattr(table, related_model).any(id=relation_id)
                     for relation_id in relation_ids
                 )
                 if filter == "not_any":
                     constraint = ~constraint
             else:
                 constraint = or_(
-                    getattr(model, related_model).has(id=relation_id)
+                    getattr(table, related_model).has(id=relation_id)
                     for relation_id in relation_ids
                 )
             constraints.append(constraint)
         return constraints
 
-    def multiselect_filtering(self, type, **params):
-        model = models[type]
-        results = db.session.query(model).filter(
-            model.name.contains(params.get("term"))
-        )
+    def multiselect_filtering(self, model, **params):
+        table = models[model]
+        results = db.query(model, table).filter(table.name.contains(params.get("term")))
         return {
             "items": [
                 {"text": result.ui_name, "id": str(result.id)}
@@ -395,11 +399,11 @@ class BaseController:
             "total_count": results.count(),
         }
 
-    def filtering(self, table, **kwargs):
-        model = models[table]
+    def filtering(self, model, **kwargs):
+        table = models[model]
         ordering = getattr(
             getattr(
-                model,
+                table,
                 kwargs["columns"][int(kwargs["order"][0]["column"])]["data"],
                 None,
             ),
@@ -407,16 +411,16 @@ class BaseController:
             None,
         )
         try:
-            constraints = self.build_filtering_constraints(table, **kwargs)
+            constraints = self.build_filtering_constraints(model, **kwargs)
         except regex_error:
             return {"error": "Invalid regular expression as search parameter."}
-        constraints.extend(models[table].filtering_constraints(**kwargs))
-        result = db.session.query(model).filter(and_(*constraints))
+        constraints.extend(table.filtering_constraints(**kwargs))
+        result = db.query(model, table).filter(and_(*constraints))
         if ordering:
             result = result.order_by(ordering())
         table_result = {
             "draw": int(kwargs["draw"]),
-            "recordsTotal": db.session.query(func.count(model.id)).scalar(),
+            "recordsTotal": db.count(model),
             "recordsFiltered": db.get_query_count(result),
             "data": [
                 obj.table_properties(**kwargs)

@@ -311,17 +311,16 @@ You can also trigger the import/export programmatically. Here's an example with 
 
 ::
 
- from json import dumps
  from requests import post
  from requests.auth import HTTPBasicAuth
 
  post(
      'yourIP/rest/migrate/import',
-     data=dumps({
+     json={
          "name": "Backup",
          "empty_database_before_import": False,
          "import_export_types": ["user", "device", "link", "pool", "service", "workflow_edge", "task"],
-     }),
+     },
      headers={'content-type': 'application/json'},
      auth=HTTPBasicAuth('admin', 'admin')
  )
@@ -349,7 +348,6 @@ Example of python script to import programmatically:
 
 ::
 
- from json import dumps
  from pathlib import Path
  from requests import post
  from requests.auth import HTTPBasicAuth
@@ -357,7 +355,7 @@ Example of python script to import programmatically:
  with open(Path.cwd() / 'project_name.xls', 'rb') as f:
      post(
          'https://IP/rest/topology/import',
-         data={'replace': True},
+         json={'replace': True},
          files={'file': f},
          auth=HTTPBasicAuth('admin', 'admin')
      )

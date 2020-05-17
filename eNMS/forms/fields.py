@@ -2,6 +2,7 @@ from ast import literal_eval, parse
 from json import loads
 from wtforms import (
     BooleanField as WtformsBooleanField,
+    Field as WtformsField,
     FieldList as WtformsFieldList,
     FloatField as WtformsFloatField,
     HiddenField as WtformsHiddenField,
@@ -12,6 +13,8 @@ from wtforms import (
     SelectMultipleField as WtformsSelectMultipleField,
 )
 from wtforms.validators import ValidationError
+from wtforms.widgets import html_params
+from wtforms.widgets.core import HTMLString
 
 from eNMS import app
 
@@ -116,6 +119,14 @@ class DictField(StringField):
         if app.contains_set(result):
             raise ValidationError("Sets are not allowed.")
         return True
+
+
+class JsonField(WtformsField):
+    type = "json"
+
+    def __call__(self, **kwargs):
+        html_kwargs = {"id": kwargs["id"], "class_": "add-id"}
+        return HTMLString(f"<div {html_params(**html_kwargs)}></div>")
 
 
 class InstanceField(SelectField):

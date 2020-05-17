@@ -3,10 +3,16 @@ global
 CodeMirror: false
 settings: true
 Dropzone: false
-JSONEditor: false
 */
 
-import { call, configureNamespace, editors, notify, openPanel } from "./base.js";
+import {
+  call,
+  configureNamespace,
+  editors,
+  jsonEditors,
+  notify,
+  openPanel,
+} from "./base.js";
 import { tables } from "./table.js";
 
 let settingsEditor;
@@ -14,8 +20,8 @@ let settingsEditor;
 function saveSettings() {
   call({
     url: "/save_settings",
-    data: settingsEditor.get(),
-    callback: function() {
+    data: { settings: settingsEditor.get(), save: true },
+    callback: function () {
       settings = settingsEditor.get();
       $("#settings").remove();
       notify("Settings saved.", "success", 5, true);
@@ -25,10 +31,11 @@ function saveSettings() {
 
 function showSettings() {
   openPanel({
-    name: "settings",
+    name: "settings_panel",
     title: "Settings",
-    callback: function() {
-      settingsEditor = new JSONEditor(document.getElementById("content"), {}, settings);
+    size: "700px 600px",
+    callback: function () {
+      jsonEditors.settings.set(settings);
     },
   });
 }
@@ -36,7 +43,7 @@ function showSettings() {
 function getClusterStatus() {
   call({
     url: "/get_cluster_status",
-    callback: function() {
+    callback: function () {
       tables.server.table.ajax.reload(null, false);
       setTimeout(getClusterStatus, 15000);
     },
@@ -48,7 +55,7 @@ function migrationsExport() {
   call({
     url: "/migration_export",
     form: "migration-form",
-    callback: function() {
+    callback: function () {
       notify("Migration Export successful.", "success", 5, true);
     },
   });
@@ -62,7 +69,7 @@ function showMigrationPanel() {
     callback: () => {
       call({
         url: "/get_migration_folders",
-        callback: function(folders) {
+        callback: function (folders) {
           let list = document.getElementById("versions");
           folders.forEach((item) => {
             let option = document.createElement("option");
@@ -80,7 +87,7 @@ function migrationsImport() {
   call({
     url: "/migration_import",
     form: "migration-form",
-    callback: function(result) {
+    callback: function (result) {
       notify(result, "success", 5, true);
     },
   });
@@ -94,7 +101,7 @@ function showImportServicePanel() {
     callback: () => {
       call({
         url: "/get_exported_services",
-        callback: function(services) {
+        callback: function (services) {
           let list = document.getElementById("service");
           services.forEach((item) => {
             let option = document.createElement("option");
@@ -112,7 +119,7 @@ function importService() {
   call({
     url: `/import_service/${$("#service").val()}`,
     title: "Import Service",
-    callback: function(result) {
+    callback: function (result) {
       notify("Service Import successful.", "success", 5, true);
       $("#import_service").remove();
     },
@@ -125,7 +132,7 @@ function databaseDeletion() {
     url: "/database_deletion",
     title: "Database Deletion",
     form: "database_deletion-form",
-    callback: function() {
+    callback: function () {
       notify("Database Deletion done.", "success", 5, true);
       $("#database_deletion").remove();
     },
@@ -137,7 +144,7 @@ function resultLogDeletion() {
   call({
     url: "/result_log_deletion",
     form: "result_log_deletion-form",
-    callback: function() {
+    callback: function () {
       notify("Log Deletion done.", "success", 5, true);
       $("#result_log_deletion").remove();
     },
@@ -147,7 +154,7 @@ function resultLogDeletion() {
 function getGitContent() {
   call({
     url: "/get_git_content",
-    callback: function() {
+    callback: function () {
       notify("Successfully pulled content from git.", "success", 5, true);
     },
   });
@@ -157,7 +164,7 @@ function scanCluster() {
   notify("Cluster Scan initiated...", "success", 5, true);
   call({
     url: "/scan_cluster",
-    callback: function() {
+    callback: function () {
       notify("Cluster Scan completed.", "success", 5, true);
     },
   });
@@ -166,10 +173,8 @@ function scanCluster() {
 function deleteFile(file) {
   call({
     url: `/delete_file/${file.data.path.replace(/\//g, ">")}`,
-    callback: function() {
-      $("#files-tree")
-        .jstree()
-        .delete_node(file.id);
+    callback: function () {
+      $("#files-tree").jstree().delete_node(file.id);
       notify(`File ${file.data.name} successfully deleted.`, "success", 5, true);
     },
   });
@@ -179,7 +184,7 @@ function editFile(file) {
   const filepath = file.data.path.replace(/\//g, ">");
   call({
     url: `/edit_file/${filepath}`,
-    callback: function(content) {
+    callback: function (content) {
       openPanel({
         name: "file",
         title: `Edit ${file.data.path}`,
@@ -208,7 +213,7 @@ function saveFile(file) {
   call({
     url: `/save_file/${file}`,
     form: `file-content-form-${file}`,
-    callback: function() {
+    callback: function () {
       notify(`File ${file} successfully saved.`, "success", 5, true);
       $(`[id="file-${file}"`).remove();
     },
@@ -231,7 +236,7 @@ function showFileUploadPanel(folder) {
         url: "/upload_files",
         autoProcessQueue: false,
       });
-      $(`[id="dropzone-submit-${path}"]`).click(function() {
+      $(`[id="dropzone-submit-${path}"]`).click(function () {
         $(`[id="folder-${path}"]`).val(folder);
         dropzone.processQueue();
         notify("Files successfully uploaded.", "success", 5, true);
@@ -245,14 +250,14 @@ function displayFiles() {
   openPanel({
     name: "files",
     title: "Files",
-    callback: function() {
+    callback: function () {
       $("#files-tree").jstree({
         core: {
           animation: 200,
           themes: { stripes: true, variant: "large" },
           check_callback: true,
           data: {
-            url: function(node) {
+            url: function (node) {
               const path = node.id == "#" ? "root" : node.data.path;
               return `/get_tree_files/${path.replace(/\//g, ">")}`;
             },
@@ -266,7 +271,7 @@ function displayFiles() {
           },
         },
         html_row: {
-          default: function(el, node) {
+          default: function (el, node) {
             if (!node) return;
             if (node.type == "file") {
               const data = JSON.stringify(node);
@@ -315,7 +320,7 @@ function displayFiles() {
           },
         },
       });
-      $("#files-tree").on("ready.jstree", function() {
+      $("#files-tree").on("ready.jstree", function () {
         $(this).off("click.jstree", ".jstree-anchor");
       });
     },

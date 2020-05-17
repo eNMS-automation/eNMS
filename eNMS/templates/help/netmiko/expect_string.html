@@ -1,12 +1,68 @@
 <div class="modal-body">
   <div>
-    <p>Expect string expects a string.</p>
+    <h2>Netmiko Expect String</h2>
+    <p>
+      A regular expression that identifies the end of device output. Netmiko waits for
+      additional device output until either the Expect String matches or Timeout seconds
+      is reached.
+    </p>
+    <p>
+      Auto Find Prompt enables the command prompt to end device data as an alternative
+      to the Expect String.
+    </p>
   </div>
-  <textarea class="help-snippet" style="height: fit-content">
-{
-  "rest_url": "https://www.example.com/",
-  "current_version": "1.0.3",
-  "new_version": "2.0.1"
-}</textarea
-  >
+  <div>
+    <h2>Example 1</h2>
+    <h2>Wait for Successful Completion of an Asynchronous File Transfer</h2>
+    <div>
+      Expect String:
+      <textarea class="help-snippet" style="height: fit-content;">
+completed successfully</textarea
+      >
+    </div>
+    <p style="margin-top: 10px;">Notes:</p>
+    <ol>
+      <li>
+        The device issues a prompt immediately and file transfer is performed in the
+        background.
+      </li>
+      <li>
+        “File transfer completed successfully” is displayed after successful completion.
+      </li>
+      <li>
+        The service will stop waiting once the “completed successfully” string is found
+        in the output. On file transfer failure the string is not found, and the service
+        times out after Timeout seconds.
+      </li>
+    </ol>
+  </div>
+  <div>
+    <h2>Example 2</h2>
+    <h2>Wait for the Completion of an Asynchronous File Transfer</h2>
+    <div>
+      Expect String:
+      <textarea class="help-snippet" style="height: fit-content;">
+completed successfully|failed</textarea
+      >
+    </div>
+    <p style="margin-top: 10px;">Notes:</p>
+    <ol>
+      <li>
+        The file transfer completes with one of the following messages: “File transfer
+        completed successfully” or “File transfer failed”.
+      </li>
+      <li>
+        The Expect String is a Regular Expression that matches either of the two
+        messages
+      </li>
+      <li>
+        The service will stop waiting once either completion message is found in the
+        output.
+      </li>
+      <li>
+        Validation can then be used to differentiate between success and failure. No
+        timeout is required for success or failure.
+      </li>
+    </ol>
+  </div>
 </div>

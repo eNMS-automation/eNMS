@@ -42,8 +42,8 @@ export class Table {
       orderCellsTop: true,
       autoWidth: false,
       scrollX: true,
-      drawCallback: function() {
-        $(".paginate_button > a").on("focus", function() {
+      drawCallback: function () {
+        $(".paginate_button > a").on("focus", function () {
           $(this).blur();
         });
         createTooltips();
@@ -51,10 +51,10 @@ export class Table {
       sDom: "tilp",
       columns: this.columns,
       columnDefs: [{ className: "dt-center", targets: "_all" }],
-      initComplete: function() {
+      initComplete: function () {
         this.api()
           .columns()
-          .every(function(index) {
+          .every(function (index) {
             const data = self.columns[index];
             let element;
             const elementId = `${self.type}_filtering-${data.data}`;
@@ -99,15 +99,15 @@ export class Table {
             }
             $(element)
               .appendTo($(this.header()))
-              .on("keyup change", function() {
+              .on("keyup change", function () {
                 if (waitForSearch) return;
                 waitForSearch = true;
-                setTimeout(function() {
+                setTimeout(function () {
                   self.table.page(0).ajax.reload(null, false);
                   waitForSearch = false;
                 }, 500);
               })
-              .on("click", function(e) {
+              .on("click", function (e) {
                 e.stopPropagation();
               });
           });
@@ -126,12 +126,13 @@ export class Table {
             type: this.type,
             export: self.csvExport,
           });
+          Object.assign(d, self.filteringData);
           if (this.runtime) {
             d.runtime = $(`#runtimes-${this.instance.id}`).val() || this.runtime;
           }
           return JSON.stringify(d);
         },
-        dataSrc: function(result) {
+        dataSrc: function (result) {
           if (result.error) {
             notify(result.error, "error", 5);
             return [];
@@ -208,13 +209,9 @@ export class Table {
       );
     });
     $("#column-display").selectpicker("refresh");
-    $("#column-display").on("change", function() {
+    $("#column-display").on("change", function () {
       self.columns.forEach((col) => {
-        self.table.column(`${col.name}:name`).visible(
-          $(this)
-            .val()
-            .includes(col.data)
-        );
+        self.table.column(`${col.name}:name`).visible($(this).val().includes(col.data));
       });
       self.table.ajax.reload(null, false);
       self.createfilteringTooltips();
@@ -441,7 +438,7 @@ tables.configuration = class ConfigurationTable extends Table {
       formatter: (value) => `Lines of context: ${value}`,
       tooltip: "always",
     });
-    $("#slider").on("change", function() {
+    $("#slider").on("change", function () {
       refreshTable("configuration");
     });
   }
@@ -672,19 +669,23 @@ tables.service = class ServiceTable extends Table {
   }
 
   buttons(row) {
+    let runtimeArg = "";
+    if (row.type != "workflow") runtimeArg = ", null, 'result'";
     return `
       <ul class="pagination pagination-lg" style="margin: 0px; width: 270px">
         <li>
           <button type="button" class="btn btn-sm btn-info"
-          onclick="eNMS.automation.showRuntimePanel('results', ${row.instance})"
-          data-tooltip="Results"><span class="glyphicon glyphicon-list-alt">
-          </span></button>
+          onclick="eNMS.automation.showRuntimePanel('results', ${row.instance}
+          ${runtimeArg})" data-tooltip="Results">
+            <span class="glyphicon glyphicon-list-alt"></span>
+          </button>
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-info"
           onclick="eNMS.automation.showRuntimePanel('logs', ${row.instance})"
-          data-tooltip="Logs"><span class="glyphicon glyphicon-list"></span
-          ></button>
+          data-tooltip="Logs">
+            <span class="glyphicon glyphicon-list"></span>
+          </button>
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-success"
@@ -724,7 +725,7 @@ tables.service = class ServiceTable extends Table {
     loadServiceTypes();
     $("#parent-filtering")
       .selectpicker()
-      .on("change", function() {
+      .on("change", function () {
         self.table.page(0).ajax.reload(null, false);
       });
   }
@@ -802,7 +803,7 @@ tables.result = class ResultTable extends Table {
     return [
       `<button
         class="btn btn-info"
-        onclick="eNMS.automation.compare('result', ${instance})"
+        onclick="eNMS.automation.compare('${this.type}', ${instance})"
         data-tooltip="Compare"
         type="button"
       >
@@ -836,6 +837,16 @@ tables.result = class ResultTable extends Table {
       </li>
     </ul>`,
     ];
+  }
+};
+
+tables.full_result = class FullResultTable extends tables.result {
+  get filteringData() {
+    return { full_result: true };
+  }
+
+  get modelFiltering() {
+    return "result";
   }
 };
 
@@ -958,6 +969,40 @@ tables.user = class UserTable extends Table {
   }
 };
 
+tables.group = class GroupTable extends Table {
+  get controls() {
+    return [
+      this.columnDisplay(),
+      this.createNewButton(),
+      this.exportTableButton(),
+      this.clearSearchButton(),
+      this.refreshTableButton(),
+    ];
+  }
+
+  buttons(row) {
+    return [
+      `
+      <ul class="pagination pagination-lg" style="margin: 0px;">
+        <li>
+          <button type="button" class="btn btn-sm btn-primary"
+          onclick="eNMS.base.showTypePanel('group', '${row.id}')" data-tooltip="Edit"
+            ><span class="glyphicon glyphicon-edit"></span
+          ></button>
+        </li>
+        <li>
+          <button type="button" class="btn btn-sm btn-primary"
+          onclick="eNMS.base.showTypePanel('group', '${row.id}', 'duplicate')"
+          data-tooltip="Duplicate"
+            ><span class="glyphicon glyphicon-duplicate"></span
+          ></button>
+        </li>
+        ${this.deleteInstanceButton(row)}
+      </ul>`,
+    ];
+  }
+};
+
 tables.server = class ServerTable extends Table {
   get controls() {
     return [
@@ -1058,14 +1103,10 @@ tables.event = class EventTable extends Table {
   }
 };
 
-export const clearSearch = function(tableId, notification) {
+export const clearSearch = function (tableId, notification) {
   $(`.search-input-${tableId},.search-list-${tableId}`).val("");
-  $(".search-relation-dd")
-    .val("any")
-    .selectpicker("refresh");
-  $(".search-relation")
-    .val([])
-    .trigger("change");
+  $(".search-relation-dd").val("any").selectpicker("refresh");
+  $(".search-relation").val([]).trigger("change");
   $(`.search-select-${tableId}`).val("inclusion");
   refreshTable(tableId);
   if (notification) notify("Search parameters cleared.", "success", 5);
@@ -1077,7 +1118,7 @@ function exportTable(tableId) {
   refreshTable(tableId);
 }
 
-export const refreshTable = function(tableId, notification) {
+export const refreshTable = function (tableId, notification) {
   tableInstances[tableId].table.ajax.reload(null, false);
   if (notification) notify("Table refreshed.", "success", 5);
 };

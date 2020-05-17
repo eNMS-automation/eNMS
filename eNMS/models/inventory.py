@@ -1,5 +1,6 @@
+from flask_login import current_user
 from re import search, sub
-from sqlalchemy import Boolean, ForeignKey, Integer
+from sqlalchemy import Boolean, ForeignKey, Integer, or_
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.orm import backref, deferred, relationship
 from sqlalchemy.schema import UniqueConstraint
@@ -42,6 +43,10 @@ class Object(AbstractBase):
         number = f"{self.class_type}_number"
         for pool in self.pools:
             setattr(pool, number, getattr(pool, number) - 1)
+
+    @classmethod
+    def rbac_filter(cls, query):
+        return query.filter(cls.users.any(id=current_user.id))
 
 
 @db.set_custom_properties
@@ -86,6 +91,9 @@ class Device(Object):
     )
     tasks = relationship(
         "Task", secondary=db.task_device_table, back_populates="devices"
+    )
+    users = relationship(
+        "User", secondary=db.user_device_table, back_populates="devices"
     )
     pools = relationship(
         "Pool", secondary=db.pool_device_table, back_populates="devices"
@@ -197,6 +205,7 @@ class Link(Object):
     )
     destination_name = association_proxy("destination", "name")
     pools = relationship("Pool", secondary=db.pool_link_table, back_populates="links")
+    users = relationship("User", secondary=db.user_link_table, back_populates="links")
     __table_args__ = (UniqueConstraint(name, source_id, destination_id),)
 
     def __init__(self, **kwargs):
@@ -234,16 +243,14 @@ class Link(Object):
 
 def set_pool_properties(Pool):
     for property in properties["filtering"]["device"]:
-        setattr(
-            Pool, f"device_{property}", db.Column(db.LargeString, default=""),
-        )
+        setattr(Pool, f"device_{property}", db.Column(db.LargeString))
         setattr(
             Pool,
             f"device_{property}_match",
             db.Column(db.SmallString, default="inclusion"),
         )
     for property in properties["filtering"]["link"]:
-        setattr(Pool, f"link_{property}", db.Column(db.LargeString, default=""))
+        setattr(Pool, f"link_{property}", db.Column(db.LargeString))
         setattr(
             Pool,
             f"link_{property}_match",
@@ -275,6 +282,9 @@ class Pool(AbstractBase):
     )
     runs = relationship("Run", secondary=db.run_pool_table, back_populates="pools")
     tasks = relationship("Task", secondary=db.task_pool_table, back_populates="pools")
+    groups = relationship(
+        "Group", secondary=db.pool_group_table, back_populates="pools"
+    )
     manually_defined = db.Column(Boolean, default=False)
 
     def update(self, **kwargs):
@@ -315,6 +325,17 @@ class Pool(AbstractBase):
             )
             setattr(self, f"{object_type}s", objects)
             setattr(self, f"{object_type}_number", len(objects))
+        self.update_rbac()
+
+    @classmethod
+    def rbac_filter(cls, query):
+        return query.filter(
+            or_(cls.groups.any(id=group.id) for group in current_user.groups)
+        )
+
+    def update_rbac(self):
+        for group in self.groups:
+            group.update_rbac()
 
 
 class Session(AbstractBase):

@@ -1,5 +1,4 @@
-- aps_job_id: Cluster Monitoring
-  creation_time: '2020-04-21 15:30:59.448766'
+- creation_time: '2020-04-21 15:30:59.448766'
   crontab_expression: ''
   description: Monitor eNMS cluster
   devices: []

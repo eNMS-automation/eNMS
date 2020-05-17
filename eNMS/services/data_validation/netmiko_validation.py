@@ -39,9 +39,9 @@ class NetmikoValidationService(ConnectionService):
     __mapper_args__ = {"polymorphic_identity": "netmiko_validation_service"}
 
     def job(self, run, payload, device):
+        command = run.sub(run.command, locals())
         netmiko_connection = run.netmiko_connection(device)
         try:
-            command = run.sub(run.command, locals())
             prompt = run.enter_remote_device(netmiko_connection, device)
             netmiko_connection.session_log.truncate(0)
             run.log(
@@ -79,8 +79,12 @@ class NetmikoValidationForm(NetmikoForm):
     auto_find_prompt = BooleanField(
         default=True, render_kw={"help": "netmiko/auto_find_prompt"}
     )
-    strip_prompt = BooleanField(default=True)
-    strip_command = BooleanField(default=True)
+    strip_prompt = BooleanField(
+        default=True, render_kw={"help": "netmiko/strip_prompt"}
+    )
+    strip_command = BooleanField(
+        default=True, render_kw={"help": "netmiko/strip_command"}
+    )
     use_genie = BooleanField(default=False)
     groups = {
         "Main Parameters": {"commands": ["command"], "default": "expanded"},

@@ -21,7 +21,7 @@ class UnixShellScriptService(ConnectionService):
     pretty_name = "Unix Shell"
     parent_type = "connection_service"
     id = db.Column(Integer, ForeignKey("connection_service.id"), primary_key=True)
-    source_code = db.Column(db.LargeString, default="")
+    source_code = db.Column(db.LargeString)
     enable_mode = db.Column(Boolean, default=False)
     config_mode = db.Column(Boolean, default=False)
     driver = db.Column(db.SmallString)
@@ -60,7 +60,7 @@ class UnixShellScriptService(ConnectionService):
             if "bash" in command:
                 result = output
             return_code = netmiko_connection.send_command(
-                f"echo $?",
+                "echo $?",
                 delay_factor=run.delay_factor,
                 expect_string=expect_string or None,
                 auto_find_prompt=run.auto_find_prompt,

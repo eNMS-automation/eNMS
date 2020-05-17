@@ -26,14 +26,25 @@
     "pool_size": 1000,
     "small_string_length": 255
   },
+  "logging": {
+    "loggers": {
+      "security": {
+        "changelog": true,
+        "service_log": true
+      }
+    },
+    "external_loggers": {
+      "requests": "info",
+      "urllib3": "info"
+    }
+  },
   "mail": {
     "port": 587,
     "reply_to": "reply_to@company.com",
     "sender": "eNMS@company.com",
     "server": "smtp.googlemail.com",
     "use_tls": true,
-    "username": "eNMS-user",
-    "reply_to": "reply_to@company.com"
+    "username": "eNMS-user"
   },
   "mattermost": {
     "channel": "",
@@ -97,17 +108,5 @@
     "marker": "Image",
     "tile_layer": "osm",
     "zoom_level": 5
-  },
-  "logging": {
-    "loggers": {
-      "security": {
-        "changelog": true,
-        "service_log": true
-      }
-    },
-    "external_loggers": {
-      "requests": "info",
-      "urllib3": "info"
-    }
   }
 }

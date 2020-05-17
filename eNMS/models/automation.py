@@ -834,9 +834,9 @@ class Run(AbstractBase):
             notification["Link"] = f"{address}/view_service_results/{self.id}"
         summary = results["summary"]
         if summary:
-            if summary["failure"]:
+            if summary.get("failure"):
                 notification["FAILED"] = summary["failure"]
-            if summary["success"] and not self.display_only_failed_nodes:
+            if summary.get("success") and not self.display_only_failed_nodes:
                 notification["PASSED"] = summary["success"]
         return notification
 

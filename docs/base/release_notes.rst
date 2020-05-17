@@ -25,11 +25,17 @@ allowing for comparison of results same device / different service, same service
 - Refactor logging mechanism. In settings.json, add new logging sections to configure whether the log
 for a given logger should also be logged as changelog or service log by default.
 - RBAC
-- Fix authentication bug flask_login
+- Fix authentication bug flask_login and add session timeout mechanism
+- Make plugins separate from eNMS in their own folder, add bash script to install/update/uninstall them
+- Make the CLI interface a plugins
+- Add session timeout 
+- Add "all results view" so you can compare any two results ina workflow ("Re: [E] Re: Visual results diff")
+- add option in settings so you can choose whether a logger goes to service log or not
 
 MIGRATION:
 - Remove RBAC in rbac.json
 - Update migration files (user.yaml): group: Admin -> groups: [Admin Users]
+- app_log -> changelog in the service migration files (python snippet services)
 
 Version 3.21.3
 --------------

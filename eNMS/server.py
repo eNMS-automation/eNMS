@@ -1,3 +1,4 @@
+from collections import defaultdict
 from datetime import timedelta
 from flask import (
     abort,
@@ -434,12 +435,13 @@ class Server(Flask):
                 for instance in data:
                     if "name" not in instance:
                         result["failure"].append((instance, "Name is missing"))
+                        continue
                     try:
                         object_data = app.objectify(model, instance)
                         instance = db.factory(model, **object_data)
                         result["success"].append(instance.name)
                     except Exception as exc:
-                        result["failure"].append(instance, format_exc())
+                        result["failure"].append((instance, format_exc()))
                 return result
 
         class Migrate(Resource):

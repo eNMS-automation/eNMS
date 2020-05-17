@@ -40,11 +40,11 @@
   },
   "mail": {
     "port": 587,
-    "reply_to": "reply_to@company.com",
-    "sender": "eNMS@company.com",
+    "reply_to": "antoine.fourmy@gmail.com",
+    "sender": "antoine.fourmy@gmail.com",
     "server": "smtp.googlemail.com",
     "use_tls": true,
-    "username": "eNMS-user"
+    "username": "antoine.fourmy@gmail.com"
   },
   "mattermost": {
     "channel": "",

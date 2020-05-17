@@ -238,7 +238,7 @@ class Server(Flask):
         @self.monitor_requests
         def dashboard():
             return render_template(
-                f"dashboard.html",
+                "dashboard.html",
                 **{"endpoint": "dashboard", "properties": properties["dashboard"]},
             )
 
@@ -255,20 +255,20 @@ class Server(Flask):
         @self.monitor_requests
         def table(table_type):
             return render_template(
-                f"table.html", **{"endpoint": f"table/{table_type}", "type": table_type}
+                "table.html", **{"endpoint": f"table/{table_type}", "type": table_type}
             )
 
         @blueprint.route("/view/<view_type>")
         @self.monitor_requests
         def view(view_type):
             return render_template(
-                f"visualization.html", **{"endpoint": "view", "view_type": view_type}
+                "visualization.html", **{"endpoint": "view", "view_type": view_type}
             )
 
         @blueprint.route("/workflow_builder")
         @self.monitor_requests
         def workflow_builder():
-            return render_template(f"workflow.html", endpoint="workflow_builder")
+            return render_template("workflow.html", endpoint="workflow_builder")
 
         @blueprint.route("/form/<form_type>")
         @self.monitor_requests

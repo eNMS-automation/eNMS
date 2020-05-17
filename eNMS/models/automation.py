@@ -789,7 +789,7 @@ class Run(AbstractBase):
             self.log("info", f"SLEEP {self.waiting_time} seconds...", device)
             sleep(self.waiting_time)
         if not results["success"]:
-            self.write_state(f"success", False)
+            self.write_state("success", False)
         if commit:
             db.session.commit()
         return results
@@ -1090,7 +1090,7 @@ class Run(AbstractBase):
                 setattr(connection, property, service_value)
         try:
             if not hasattr(connection, "check_config_mode"):
-                self.log("error", f"Netmiko 'check_config_mode' method is missing.")
+                self.log("error", "Netmiko 'check_config_mode' method is missing.")
                 return connection
             mode = connection.check_config_mode()
             if mode and not self.config_mode:

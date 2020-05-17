@@ -63,7 +63,7 @@ class DataBackupService(ConnectionService):
                                 line = f"{prefix} - {line}"
                             command_result.append(line)
                         result.append("\n".join(command_result))
-                    result = f"\n\n".join(result)
+                    result = "\n\n".join(result)
                 if not result:
                     continue
                 setattr(device, data, result)

@@ -56,7 +56,7 @@ class AdministrationController(BaseController):
             with open(Path(filepath.replace(">", "/"))) as file:
                 return file.read()
         except UnicodeDecodeError:
-            return {"error": f"Cannot read file (unsupported type)."}
+            return {"error": "Cannot read file (unsupported type)."}
 
     def export_service(self, service_id):
         service = db.fetch("service", id=service_id)

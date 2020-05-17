@@ -91,7 +91,7 @@ class SshConnection:
             if "\n" not in log:
                 continue
             else:
-                parsed_log = "\n".join(l for l in log.splitlines() if l)
+                parsed_log = "\n".join(line for line in log.splitlines() if line)
                 self.logger.info(parsed_log)
                 session.content += parsed_log
                 log = ""

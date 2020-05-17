@@ -60,7 +60,7 @@ class UnixShellScriptService(ConnectionService):
             if "bash" in command:
                 result = output
             return_code = netmiko_connection.send_command(
-                f"echo $?",
+                "echo $?",
                 delay_factor=run.delay_factor,
                 expect_string=expect_string or None,
                 auto_find_prompt=run.auto_find_prompt,

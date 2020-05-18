@@ -3,8 +3,8 @@ body {
   width: 100%;
   padding: 0;
   margin: 0;
-  background: #002240;
-  color: #73879c;
+  background: #202123;
+  color: #c95e57;
   font-family: "Helvetica Neue", Roboto, Arial, "Droid Sans", sans-serif;
   font-size: 13px;
   font-weight: 400;
@@ -12,7 +12,7 @@ body {
 }
 
 .left_column {
-  background: #002240;
+  background: #202123;
   height: 100%;
   float: left;
 }
@@ -26,7 +26,7 @@ body {
 }
 
 .right_column {
-  background: #ffffff;
+  background:  #1b1b1d;
   height: 100%;
   position: absolute;
   display: flex;
@@ -62,7 +62,7 @@ body {
 }
 
 .main_frame {
-  background: #ffffff;
+  background: #1b1b1d;
   width: 100%;
   padding: 10px 17px;
 }
@@ -90,7 +90,7 @@ body {
 
 .nav-sm .nav.child_menu li.active,
 .nav-sm .nav.side-menu li.active-sm {
-  border-right: 5px solid #1abb9c;
+  border-right: 5px solid #d62b1e;
 }
 
 .nav-sm .nav.side-menu li.active-sm ul ul,
@@ -101,7 +101,7 @@ body {
 }
 
 .nav-sm > .nav.side-menu > li.active-sm > a {
-  color: #1abb9c !important;
+  color: #d62b1e !important;
 }
 
 .nav-sm .nav.side-menu li a i.toggle-up {
@@ -183,7 +183,7 @@ body {
 
 .nav_menu {
   float: left;
-  background: #ededed;
+  background: #202123;
   border-bottom: 1px solid #d9dee4;
   margin-bottom: 10px;
   width: 100%;
@@ -248,7 +248,7 @@ a {
 }
 
 .nav.side-menu > li > a:hover {
-  color: #e3ebf3 !important;
+  color: #f2f5f7 !important;
 }
 
 .nav.side-menu > li > a:hover,
@@ -322,7 +322,7 @@ a {
 
 .nav.side-menu > li.active,
 .nav.side-menu > li.current-page {
-  border-right: 5px solid #1abb9c;
+  border-right: 5px solid #d62b1e;
 }
 
 .nav li.current-page {
@@ -341,7 +341,7 @@ a {
 
 .nav.side-menu > li.active > a {
   text-shadow: rgba(0, 0, 0, 0.25) 0 -1px 0;
-  background: linear-gradient(#334556, #2c4257), #002240;
+  background: linear-gradient(#334556, #2c4257), #747676;
   box-shadow: rgba(0, 0, 0, 0.25) 0 1px 0, inset rgba(255, 255, 255, 0.16) 0 1px 0;
 }
 
@@ -352,7 +352,7 @@ a {
 }
 
 .nav.navbar-nav > li > a {
-  color: #515356 !important;
+  color: #fff !important;
 }
 
 .nav.top_menu > li > a {
@@ -406,14 +406,14 @@ h2 {
 }
 
 .accordion .panel-heading {
-  background: #e3ebf3;
+  background: #f2f5f7;
   padding: 13px;
   width: 100%;
   display: block;
 }
 
 .accordion .panel:hover {
-  background: #e3ebf3;
+  background: #f2f5f7;
 }
 
 .x_title {
@@ -641,7 +641,7 @@ fieldset {
   content: "";
   position: absolute;
   height: 4px;
-  background: #ccc;
+  background: #1ded0e;
   top: 20px;
   width: 100%;
   z-index: 4;
@@ -673,7 +673,7 @@ fieldset {
 
 .wizard_horizontal ul.wizard_steps li a.done .step_no,
 .wizard_horizontal ul.wizard_steps li a.done:before {
-  background: #1abb9c;
+  background: #d62b1e;
   color: #fff;
 }
 

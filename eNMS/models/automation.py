@@ -419,7 +419,7 @@ class Run(AbstractBase):
                 f"{progress['success'] + progress['failure']}"
                 f"/{progress['total']} ({progress['failure']} failed)"
             )
-        except KeyError:
+        except (KeyError, TypeError):
             return "N/A"
 
     def compute_devices_from_query(_self, query, property, **locals):  # noqa: N805

@@ -943,12 +943,7 @@ export function initWorkflowBuilder() {
         if (workflow) {
           switchToWorkflow(workflow);
         } else {
-          notify(
-            `You must create a workflow in the
-          'Workflow management' page first.`,
-            "error",
-            5
-          );
+          notify("No workflow has been created yet.", "error", 5);
         }
       }
       $("#current-workflow,#current-runtimes").selectpicker({

@@ -1,4 +1,4 @@
-{% extends "base_site.html" %} {% block stylesheets %} {{ super() }}
+{% extends "base_site.html" %} {% block stylesheets %;} {{ super() }}
 <link href="{{ url_for('static', filename='css/table.css') }}" rel="stylesheet" />
 {% endblock stylesheets %} {% block content %}
 <form id="search-form-{{ type }}">
@@ -10,8 +10,8 @@
   ></nav>
   <table
     id="table-{{ type }}"
-    style="margin-top: 10px;"
-    class="table table-striped table-bordered table-hover add-id"
+    style="margin-top: 10px"
+    class="table table-bordered table-hover add-id"
     cellspacing="0"
     width="100%"
   ></table>

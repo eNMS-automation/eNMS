@@ -118,6 +118,7 @@ class Scheduler(Starlette):
                 **trigger,
             )
         else:
+            self.scheduler.modify_job(task["id"], args=[task["id"]])
             job = self.scheduler.reschedule_job(str(task["id"]), **trigger)
         return job.next_run_time > datetime.now(job.next_run_time.tzinfo)
 

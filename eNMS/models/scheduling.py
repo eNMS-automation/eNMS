@@ -1,6 +1,6 @@
 from re import search
 from requests import get, post
-from requests.exceptions import ConnectionError
+from requests.exceptions import ConnectionError, ReadTimeout
 from sqlalchemy import Boolean, case, ForeignKey, Integer
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.ext.hybrid import hybrid_property
@@ -58,18 +58,18 @@ class Task(AbstractBase):
     def next_run_time(self):
         try:
             return get(
-                f"{scheduler['address']}/next_runtime/{self.id}", timeout=0.001
+                f"{scheduler['address']}/next_runtime/{self.id}", timeout=0.01
             ).json()
-        except ConnectionError:
+        except (ConnectionError, ReadTimeout):
             return "Scheduler Unreachable"
 
     @property
     def time_before_next_run(self):
         try:
             return get(
-                f"{scheduler['address']}/time_left/{self.id}", timeout=0.001
+                f"{scheduler['address']}/time_left/{self.id}", timeout=0.01
             ).json()
-        except ConnectionError:
+        except (ConnectionError, ReadTimeout):
             return "Scheduler Unreachable"
 
     def schedule(self, mode="schedule"):

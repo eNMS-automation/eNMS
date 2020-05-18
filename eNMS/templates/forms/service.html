@@ -78,7 +78,7 @@
             ></a>
             <a
               class="panel-heading collapsed"
-              style="background-color: #ddd;"
+              style="background-color:#abadb3;"
               role="tab"
               id="heading-step1"
               data-toggle="collapse"
@@ -86,7 +86,7 @@
               aria-expanded="false"
               aria-controls="collapse-step1"
             >
-              <h4 class="panel-title" style="color: #000;">Main Parameters</h4>
+              <h4 class="panel-title" style="color:#000;">Main Parameters</h4>
             </a>
             <div
               id="collapse-step1"
@@ -94,7 +94,7 @@
               role="tabpanel"
               aria-labelledby="heading-step1"
             >
-              <div class="panel-body" style="background-color: #fafafa;">
+              <div class="panel-body" style="background-color:#202123;">
                 {{ form.scoped_name.label() }}
                 <div class="form-group">
                   {{ form.scoped_name(id=form_type + '-scoped_name', class="form-control
@@ -183,7 +183,7 @@
             ></a>
             <a
               class="panel-heading collapsed"
-              style="background-color: #ddd;"
+              style="background-color:#abadb3;"
               role="tab"
               id="heading-step1-2"
               data-toggle="collapse"
@@ -191,7 +191,7 @@
               aria-expanded="false"
               aria-controls="collapse-step1-2"
             >
-              <h4 class="panel-title" style="color: #000;">
+              <h4 class="panel-title" style="color:#000;">
                 Workflow Parameters
               </h4>
             </a>
@@ -201,7 +201,7 @@
               role="tabpanel"
               aria-labelledby="heading-step1-2"
             >
-              <div class="panel-body" style="background-color: #fafafa;">
+              <div class="panel-body" style="background-color:#202123;">
                 {{ form.preprocessing.label() }}
                 <div class="form-group">
                   {{ form.preprocessing(id=form_type + '-preprocessing',
@@ -256,7 +256,7 @@
             ></a>
             <a
               class="panel-heading collapsed"
-              style="background-color: #ddd;"
+              style="background-color:#abadb3;"
               role="tab"
               id="heading-step1-3"
               data-toggle="collapse"
@@ -264,7 +264,7 @@
               aria-expanded="false"
               aria-controls="collapse-step1-3"
             >
-              <h4 class="panel-title" style="color: #000;">
+              <h4 class="panel-title" style="color:#000;">
                 Custom Properties
               </h4>
             </a>
@@ -274,7 +274,7 @@
               role="tabpanel"
               aria-labelledby="heading-step1-3"
             >
-              <div class="panel-body" style="background-color: #fafafa;">
+              <div class="panel-body" style="background-color:#202123;">
                 {% for property, values in form.custom_properties.items() %} {% if
                 values["type"] == "boolean" %}
                 <fieldset>
@@ -321,7 +321,7 @@
             ></a>
             <a
               class="panel-heading collapsed"
-              style="background-color: #ddd;"
+              style="background-color:#abadb3;"
               role="tab"
               id="heading-{{ group_id }}"
               data-toggle="collapse"
@@ -329,7 +329,7 @@
               aria-expanded="false"
               aria-controls="collapse-{{ group_id }}"
             >
-              <h4 class="panel-title" style="color: #000;">{{ group_name }}</h4>
+              <h4 class="panel-title" style="color:#000;">{{ group_name }}</h4>
             </a>
             <div
               id="collapse-{{ group_id }}"
@@ -337,7 +337,7 @@
               role="tabpanel"
               aria-labelledby="heading-{{ group_id }}"
             >
-              <div class="panel-body" style="background-color: #fafafa;">
+              <div class="panel-body" style="background-color:#202123;">
                 {% for field_name in group.commands %} {% if field_name == "run_method"
                 or field_name == "form_type" %} {% elif form[field_name].type ==
                 "BooleanField" %}
@@ -363,7 +363,7 @@
                 {% elif form[field_name].type == "FieldList" %} {% for entry in
                 form[field_name] %}
                 <fieldset>
-                  <legend style="font-weight: bold;">
+                  <legend style="font-weight:bold;">
                     {{ field_name | capitalize() }} {{ loop.index }}
                   </legend>
                   {% for l in entry %} {% if l.widget.input_type != 'hidden' %}
@@ -416,7 +416,7 @@
             ></a>
             <a
               class="panel-heading collapsed"
-              style="background-color: #ddd;"
+              style="background-color:#abadb3;"
               role="tab"
               id="heading-step3"
               data-toggle="collapse"
@@ -424,7 +424,7 @@
               aria-expanded="false"
               aria-controls="collapse-step3"
             >
-              <h4 class="panel-title" style="color: #000;">Devices</h4>
+              <h4 class="panel-title" style="color:#000;">Devices</h4>
             </a>
             <div
               id="collapse-step3"
@@ -432,7 +432,7 @@
               role="tabpanel"
               aria-labelledby="heading-step3"
             >
-              <div class="panel-body" style="background-color: #fafafa;">
+              <div class="panel-body" style="background-color:#202123;">
                 {{ form.run_method.label() }}
                 <div class="form-group">
                   {{ form.run_method(id=form_type + '-run_method', class="form-control
@@ -502,7 +502,7 @@
             ></a>
             <a
               class="panel-heading collapsed"
-              style="background-color: #ddd;"
+              style="background-color:#abadb3;"
               role="tab"
               id="heading-step3-2"
               data-toggle="collapse"
@@ -510,7 +510,7 @@
               aria-expanded="false"
               aria-controls="collapse-step3-2"
             >
-              <h4 class="panel-title" style="color: #000;">
+              <h4 class="panel-title" style="color:#000;">
                 Iteration
               </h4>
             </a>
@@ -520,7 +520,7 @@
               role="tabpanel"
               aria-labelledby="heading-step3-2"
             >
-              <div class="panel-body" style="background-color: #fafafa;">
+              <div class="panel-body" style="background-color:#202123;">
                 {{ form.iteration_devices.label() }}
                 <div class="form-group">
                   {{ form.iteration_devices(id=form_type + '-iteration_devices',
@@ -566,7 +566,7 @@
             ></a>
             <a
               class="panel-heading collapsed"
-              style="background-color: #ddd;"
+              style="background-color:#abadb3;"
               role="tab"
               id="heading-step4"
               data-toggle="collapse"
@@ -574,7 +574,7 @@
               aria-expanded="false"
               aria-controls="collapse-step4"
             >
-              <h4 class="panel-title" style="color: #000;">
+              <h4 class="panel-title" style="color:#000;">
                 Python Postprocessing
               </h4>
             </a>
@@ -584,7 +584,7 @@
               role="tabpanel"
               aria-labelledby="heading-step4"
             >
-              <div class="panel-body" style="background-color: #fafafa;">
+              <div class="panel-body" style="background-color:#202123;">
                 {{ form.postprocessing_mode.label() }}
                 <div class="form-group">
                   {{ form.postprocessing_mode(id=form_type + '-postprocessing_mode',
@@ -611,7 +611,7 @@
             ></a>
             <a
               class="panel-heading collapsed"
-              style="background-color: #ddd;"
+              style="background-color:#abadb3;"
               role="tab"
               id="heading-step4-2"
               data-toggle="collapse"
@@ -619,7 +619,7 @@
               aria-expanded="false"
               aria-controls="collapse-step4-2"
             >
-              <h4 class="panel-title" style="color: #000;">
+              <h4 class="panel-title" style="color:#000;">
                 Validation
               </h4>
             </a>
@@ -629,7 +629,7 @@
               role="tabpanel"
               aria-labelledby="heading-step4-2"
             >
-              <div class="panel-body" style="background-color: #fafafa;">
+              <div class="panel-body" style="background-color:#202123;">
                 {{ form.conversion_method.label() }}
                 <div class="form-group">
                   {{ form.conversion_method(id=form_type + '-conversion_method',
@@ -702,7 +702,7 @@
             ></a>
             <a
               class="panel-heading collapsed"
-              style="background-color: #ddd;"
+              style="background-color:#abadb3;"
               role="tab"
               id="heading-step4-3"
               data-toggle="collapse"
@@ -710,7 +710,7 @@
               aria-expanded="false"
               aria-controls="collapse-step4-3"
             >
-              <h4 class="panel-title" style="color: #000;">
+              <h4 class="panel-title" style="color:#000;">
                 Notification
               </h4>
             </a>
@@ -720,7 +720,7 @@
               role="tabpanel"
               aria-labelledby="heading-step4-3"
             >
-              <div class="panel-body" style="background-color: #fafafa;">
+              <div class="panel-body" style="background-color:#202123;">
                 <fieldset>
                   <div class="item">
                     <input

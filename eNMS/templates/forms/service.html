@@ -797,22 +797,3 @@
     </div>
   </div>
 </form>
-[centos@mazztest050720-centos-server ~]$ cat /home/centos/ien-ap/eNMS/templates/table.html
-{% extends "base_site.html" %} {% block stylesheets %} {{ super() }}
-<link href="{{ url_for('static', filename='css/table.css') }}" rel="stylesheet" />
-{% endblock stylesheets %} {% block content %}
-<form id="search-form-{{ type }}">
-  <div id="tooltip-overlay" class="overlay"></div>
-  <nav
-    id="controls-{{ type }}"
-    class="navbar navbar-default nav-controls"
-    role="navigation"
-  ></nav>
-  <table
-    id="table-{{ type }}"
-    style="margin-top: 10px"
-    class="table table-bordered table-hover add-id"
-    cellspacing="0"
-    width="100%"
-  ></table>
-</form>

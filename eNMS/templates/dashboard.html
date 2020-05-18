@@ -45,9 +45,10 @@ stylesheets %} {{ super() }}
         {% endfor %}
       </select>
     </div>
-    <div id="{{ type }}" style="height: 550px;"></div>
+    <div id="{{ type }}" style="height:550px;"></div>
   </fieldset>
 </div>
 {% endfor %} {% endblock content %} {% block javascripts %} {{ super() }}
 <script src="{{ url_for('static', filename='lib/echarts/echarts.min.js') }}"></script>
+<script src="{{ url_for('static', filename='lib/echarts/dark.js') }}"></script>
 {% endblock javascripts %}

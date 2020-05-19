@@ -37,7 +37,7 @@ from eNMS.forms import (
 )
 from eNMS.forms.administration import init_rbac_form, LoginForm
 from eNMS.models import models, property_types, relationships
-from eNMS.setup import properties, rbac
+from eNMS.setup import properties, rbac, themes
 from traceback import format_exc
 
 
@@ -169,6 +169,7 @@ class Server(Flask):
                     if hasattr(service_class, "pretty_name")
                 },
                 "settings": app.settings,
+                "themes": themes,
                 "table_properties": app.properties["tables"],
                 "user": current_user.serialized
                 if current_user.is_authenticated

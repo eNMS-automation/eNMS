@@ -6,8 +6,7 @@
     "documentation_url": "https://enms.readthedocs.io/en/latest/",
     "git_repository": "git@github.com:afourmy/gitpython-test.git",
     "plugin_path": "eNMS/plugins",
-    "session_timeout_minutes": 30,
-    "theme": "default"
+    "session_timeout_minutes": 30
   },
   "authentication": {
     "database": true,

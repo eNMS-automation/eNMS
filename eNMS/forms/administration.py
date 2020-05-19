@@ -131,6 +131,7 @@ def init_rbac_form(rbac):
     class UserForm(RbacForm):
         form_type = HiddenField(default="user")
         manual_rbac = BooleanField("Manually defined RBAC")
+        theme = SelectField("Theme", choices=(("default", "Default"), ("dark", "Dark")))
         password = PasswordField("Password")
 
     @configure_relationships("users", "pools", "services")

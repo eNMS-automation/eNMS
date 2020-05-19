@@ -14,6 +14,7 @@ in the UI but couldn't make calls to the REST API)
 - Remove LDAP parameters from settings. The LDAP authentication is in the custom controller, there is a default
 function that works with a standard LDAP installation, but you can customize however you want.
 The LDAP server is now configured with the env variable LDAP_SERVER.
+The settings contain a new section "database" to enable ldap, database or tacacs authentication.
 - Defer loading of device configuration and operational data column
 - Fix device results table comparison mechanism
 - Add replier option in send mail mechanism

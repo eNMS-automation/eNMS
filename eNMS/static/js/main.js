@@ -6,13 +6,14 @@ settings: false
 user: false
 */
 
-import { call, createTooltips, detectUserInactivity } from "./base.js";
+import { call, configureNamespace, createTooltips, detectUserInactivity } from "./base.js";
 import { initDashboard } from "./inventory.js";
 import { tables } from "./table.js";
 import { initView } from "./visualization.js";
 import { initWorkflowBuilder } from "./workflow.js";
 
 const currentUrl = window.location.href.split("#")[0].split("?")[0];
+let currentTheme = user.theme;
 
 function doc(page) {
   let endpoint = {
@@ -32,6 +33,16 @@ function doc(page) {
     workflow_builder: "automation/workflows.html",
   }[page];
   $("#doc-link").attr("href", `${settings.app.documentation_url}${endpoint}`);
+}
+
+function switchTheme(theme) {
+  $(`link[href="static/css/themes/${currentTheme}.css"]`).remove();
+  currentTheme = theme;
+  let cssLink = document.createElement("link");
+  cssLink.rel = "stylesheet";
+  cssLink.type = "text/css";
+  cssLink.href = `static/css/themes/${theme}.css`;
+  document.getElementsByTagName("head")[0].appendChild(cssLink);
 }
 
 function initSidebar() {
@@ -97,6 +108,8 @@ function initSidebar() {
   });
 }
 
+configureNamespace("main", [switchTheme]);
+
 $(document).ready(function () {
   NProgress.start();
   const alerts = localStorage.getItem("alerts");
@@ -106,6 +119,7 @@ $(document).ready(function () {
     const alertNumber = JSON.parse(alerts).length;
     $("#alert-number").text(alertNumber > 99 ? "99+" : alertNumber || "");
   }
+  $("#theme").selectpicker();
   initSidebar();
   if (page.includes("table")) {
     const type = page.split("/")[1];

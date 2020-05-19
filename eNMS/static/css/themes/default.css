@@ -17,3 +17,7 @@ body {
   background-color: #ebf4fd;
   border: 1px solid #99b5d6;
 }
+
+.menu_section h3 {
+  color: #fff;
+}

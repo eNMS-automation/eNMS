@@ -13,6 +13,7 @@ from eNMS.forms.fields import (
     SelectField,
     SelectMultipleField,
 )
+from eNMS.setup import themes
 
 
 class SettingsForm(BaseForm):
@@ -131,7 +132,7 @@ def init_rbac_form(rbac):
     class UserForm(RbacForm):
         form_type = HiddenField(default="user")
         manual_rbac = BooleanField("Manually defined RBAC")
-        theme = SelectField("Theme", choices=(("default", "Default"), ("dark", "Dark")))
+        theme = SelectField("Theme", choices=themes["list"])
         password = PasswordField("Password")
 
     @configure_relationships("users", "pools", "services")

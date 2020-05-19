@@ -1,0 +1,7 @@
+{
+  "default": "default",
+  "list": [
+    ["default", "Default"],
+    ["dark", "Dark"]
+  ]
+}

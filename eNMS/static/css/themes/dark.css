@@ -16,3 +16,17 @@ body {
   background-color: #1b1b1d;
   border: 1px solid #99b5d6;
 }
+
+.menu_section h3 {
+  background: #35363a;
+  color: #fff;
+  font-family: "Helvetica Neue", Roboto, Arial, "Droid Sans", sans-serif;
+}
+
+.navbar-default {
+  background-color:#1b1b1d;
+}
+
+.light-bg {
+  background-color:#202123
+}

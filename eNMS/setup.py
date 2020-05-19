@@ -12,3 +12,6 @@ with open(Path.cwd() / "setup" / "properties.json", "r") as file:
 
 with open(Path.cwd() / "setup" / "scheduler.json", "r") as file:
     scheduler = load(file)
+
+with open(Path.cwd() / "setup" / "themes.json", "r") as file:
+    themes = load(file)

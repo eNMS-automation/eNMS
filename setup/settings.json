@@ -2,7 +2,7 @@
   "app": {
     "address": "test",
     "config_mode": "debug",
-    "create_examples": false,
+    "create_examples": true,
     "documentation_url": "https://enms.readthedocs.io/en/latest/",
     "git_repository": "git@github.com:afourmy/gitpython-test.git",
     "session_timeout_minutes": 30,

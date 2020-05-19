@@ -1,14 +1,14 @@
 body {
   margin: 0;
-  background: #747676;
-  color: #fff;
+  background: #002240;
+  color: #73879c;
   font-family: "Helvetica Neue", Roboto, Arial, "Droid Sans", sans-serif;
-  background: #35363a;
+  background: #f7f7f7;
 }
 
 .login_content {
-  background: #35363a;
-  border: 1px solid #35363a;
+  background: #f0efef;
+  border: 1px solid #919191;
   border-radius: 7%;
   margin: 5% auto;
   max-width: 450px;
@@ -26,6 +26,6 @@ body {
 }
 
 .login_content form input:focus {
-  background-color: #1b1b1d
+  background-color: #ebf4fd;
   border: 1px solid #99b5d6;
 }

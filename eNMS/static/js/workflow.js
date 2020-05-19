@@ -43,8 +43,6 @@ const dsoptions = {
   edges: {
     font: {
       size: 12,
-      strokeColor: "#1b1b1d",
-      color: "#fff",      
     },
   },
   nodes: {

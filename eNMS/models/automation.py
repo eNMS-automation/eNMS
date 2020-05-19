@@ -276,8 +276,8 @@ class Run(AbstractBase):
 
     __tablename__ = type = "run"
     __table_args__ = (
-        Index(f"ix_run_parent_runtime_0", "parent_runtime", "runtime"),
-        Index(f"ix_run_start_service_id_0", "start_service_id", "parent_runtime",
+        Index("ix_run_parent_runtime_0", "parent_runtime", "runtime"),
+        Index("ix_run_start_service_id_0", "start_service_id", "parent_runtime",
               "runtime"),
     )
     private = True
@@ -298,7 +298,7 @@ class Run(AbstractBase):
         "Run", remote_side=[id], foreign_keys="Run.parent_id", back_populates="children"
     )
     children = relationship("Run", foreign_keys="Run.parent_id")
-    parent_runtime = db.Column(db.SmallString, index=True)
+    parent_runtime = db.Column(db.SmallString)
     path = db.Column(db.SmallString)
     parent_device_id = db.Column(Integer, ForeignKey("device.id"))
     parent_device = relationship("Device", foreign_keys="Run.parent_device_id")

@@ -65,11 +65,11 @@ export function showConnectionPanel(device) {
     size: "auto",
     id: device.id,
     callback: () => {
-      $(`#custom-credentials-${device.id}`).change(function () {
+      $(`#custom-credentials-${device.id}`).change(function() {
         $(`#credentials-fields-${device.id}`).show();
       });
       $(`#device-credentials-${device.id},#user-credentials-${device.id}`).change(
-        function () {
+        function() {
           $(`#credentials-fields-${device.id}`).hide();
         }
       );
@@ -89,12 +89,12 @@ export function initDashboard() {
   };
   call({
     url: "/count_models",
-    callback: function (result) {
+    callback: function(result) {
       for (const type of Object.keys(defaultProperties)) {
         $(`#count-${type}`).text(result.counters[type]);
       }
       for (const [type, objects] of Object.entries(result.properties)) {
-        const diagram = echarts.init(document.getElementById(type));
+        const diagram = echarts.init(document.getElementById(type), "dark");
         drawDiagrams(diagram, parseData(objects));
         diagrams[type] = diagram;
       }
@@ -104,10 +104,10 @@ export function initDashboard() {
   Object.keys(defaultProperties).forEach((type) => {
     $(`#${type}-properties`)
       .selectpicker()
-      .on("change", function () {
+      .on("change", function() {
         call({
           url: `/counters/${this.value}/${type}`,
-          callback: function (objects) {
+          callback: function(objects) {
             drawDiagrams(diagrams[type], parseData(objects));
           },
         });
@@ -119,7 +119,7 @@ function sshConnection(id) {
   call({
     url: `/connection/${id}`,
     form: `connection-parameters-form-${id}`,
-    callback: function (result) {
+    callback: function(result) {
       let url = settings.app.address;
       if (!url) {
         url = `${window.location.protocol}//${window.location.hostname}`;
@@ -127,7 +127,7 @@ function sshConnection(id) {
       const link = result.redirection
         ? `${url}/terminal${result.port}/`
         : `${url}:${result.port}`;
-      setTimeout(function () {
+      setTimeout(function() {
         openUrl(link);
       }, 300);
       const message = `Click here to connect to ${result.device}.`;
@@ -144,7 +144,7 @@ function handOffSSHConnection(id) {
   call({
     url: `/handoffssh/${id}`,
     form: `connection-parameters-form-${id}`,
-    callback: function (result) {
+    callback: function(result) {
       let loc = window.location;
       if (result.hasOwnProperty("error")) {
         notify(`Error: ${result.error}`, "error", 10, true);
@@ -161,7 +161,7 @@ function savePoolObjects(id) {
   call({
     url: `/save_pool_objects/${id}`,
     form: `pool-objects-form-${id}`,
-    callback: function () {
+    callback: function() {
       tableInstances.pool.table.ajax.reload(null, false);
       notify("Changes to pool saved.", "success", 5, true);
       $(`#pool_objects-${id}`).remove();
@@ -174,10 +174,10 @@ function showPoolObjectsPanel(id) {
     name: "pool_objects",
     title: "Pool Objects",
     id: id,
-    callback: function () {
+    callback: function() {
       call({
         url: `/get/pool/${id}`,
-        callback: function (pool) {
+        callback: function(pool) {
           if (pool.devices.length > 1000 || pool.links.length > 1000) {
             notify("Too many objects to display.", "error", 5);
           } else {
@@ -202,7 +202,7 @@ function updatePools(pool) {
   const endpoint = pool ? `/update_pool/${pool}` : "/update_all_pools";
   call({
     url: endpoint,
-    callback: function () {
+    callback: function() {
       tableInstances.pool.table.ajax.reload(null, false);
       notify("Pool Update successful.", "success", 5, true);
     },
@@ -226,7 +226,7 @@ function showSessionLog(sessionId) {
           content: `<div id="content-${sessionId}" style="height:100%"></div>`,
           title: "Session log",
           id: sessionId,
-          callback: function () {
+          callback: function() {
             const content = document.getElementById(`content-${sessionId}`);
             // eslint-disable-next-line new-cap
             const editor = CodeMirror(content, {
@@ -286,7 +286,7 @@ function displayNetworkData(type, id, result, datetime) {
       </div>`,
     title: "Network Data",
     id: id,
-    callback: function () {
+    callback: function() {
       $(`#data-type-${id}`).bootstrapToggle({
         off: "Configuration",
         on: "Operational Data",
@@ -305,7 +305,7 @@ function displayNetworkData(type, id, result, datetime) {
       $(`#content-${id}`).data("CodeMirrorInstance", editor);
       editor.setSize("100%", "100%");
       $(`#data-type-${id}`)
-        .on("change", function () {
+        .on("change", function() {
           const value = $(this).prop("checked") ? "operational_data" : "configuration";
           editor.setValue(result[value]);
           editor.refresh();
@@ -315,7 +315,7 @@ function displayNetworkData(type, id, result, datetime) {
   });
 }
 
-export const showDeviceData = function (device) {
+export const showDeviceData = function(device) {
   call({
     url: `/get_device_network_data/${device.id}`,
     callback: (result) => {
@@ -376,7 +376,7 @@ function showGitHistory(device) {
             <div class="modal-body">
               <table 
                 id="configuration-table-${device.id}"
-                class="table table-striped table-bordered table-hover wrap"
+                class="table table-bordered table-hover wrap"
                 style="width:100%"
               >
                 <thead></thead>
@@ -403,14 +403,14 @@ function showGitHistory(device) {
               .order([0, "desc"])
               .draw();
             $(`#data-type-${device.id}`)
-              .on("change", function () {
+              .on("change", function() {
                 table.clear();
                 const data = $(this).prop("checked")
                   ? "operational_data"
                   : "configuration";
                 $(`#compare-${device.id}-btn`)
                   .unbind("click")
-                  .on("click", function () {
+                  .on("click", function() {
                     compare(data, device);
                   });
                 commits[data].forEach((commit) => {
@@ -468,7 +468,7 @@ function showDeviceResultsPanel(device) {
           ></nav>
           <table
             id="table-device_result-${device.id}"
-            class="table table-striped table-bordered table-hover"
+            class="table table-bordered table-hover"
             cellspacing="0"
             width="100%"
           ></table>
@@ -477,7 +477,7 @@ function showDeviceResultsPanel(device) {
     id: device.id,
     type: "device_result",
     title: `Results - ${device.name}`,
-    callback: function () {
+    callback: function() {
       // eslint-disable-next-line new-cap
       new tables["device_result"]("device_result", device, null, device.id);
     },
@@ -489,7 +489,7 @@ function showImportTopologyPanel() {
     name: "excel_import",
     title: "Import Topology as an Excel file",
     callback: () => {
-      document.getElementById("file").onchange = function () {
+      document.getElementById("file").onchange = function() {
         importTopology();
       };
     },
@@ -501,7 +501,7 @@ function exportTopology() {
   call({
     url: "/export_topology",
     form: "excel_export-form",
-    callback: function () {
+    callback: function() {
       notify("Topology successfully exported.", "success", 5, true);
     },
   });
@@ -518,7 +518,7 @@ function importTopology() {
     contentType: false,
     processData: false,
     async: true,
-    success: function (result) {
+    success: function(result) {
       notify(result, "success", 5, true);
     },
   });

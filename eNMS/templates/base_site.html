@@ -80,7 +80,10 @@
       rel="stylesheet"
     />
     <link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet" />
-    <link href="{{ url_for('static', filename='css/themes/{}.css'.format(current_user.theme)) }}" rel="stylesheet" />
+    <link
+      href="{{ url_for('static', filename='css/themes/{}.css'.format(current_user.theme)) }}"
+      rel="stylesheet"
+    />
     {% endblock stylesheets %} {% endblock head %}
   </head>
   {% block body %} {% set menu_class = "nav-sm" if current_user.small_menu else "nav-md"

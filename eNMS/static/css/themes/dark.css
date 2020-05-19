@@ -1,0 +1,18 @@
+body {
+  background: #747676;
+}
+
+.login {
+  color: #ffffff;
+  background: #35363a;
+}
+
+.login_content {
+  background: #35363a;
+  border: 1px solid #35363a;
+}
+
+.login_content form input:focus {
+  background-color: #1b1b1d;
+  border: 1px solid #99b5d6;
+}

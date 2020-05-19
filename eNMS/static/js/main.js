@@ -36,12 +36,13 @@ function doc(page) {
 }
 
 function switchTheme(theme) {
-  $(`link[href="static/css/themes/${currentTheme}.css"]`).remove();
+  console.log(currentTheme, theme)
+  $(`link[href="/static/css/themes/${currentTheme}.css"]`).remove();
   currentTheme = theme;
   let cssLink = document.createElement("link");
   cssLink.rel = "stylesheet";
   cssLink.type = "text/css";
-  cssLink.href = `static/css/themes/${theme}.css`;
+  cssLink.href = `/static/css/themes/${theme}.css`;
   document.getElementsByTagName("head")[0].appendChild(cssLink);
 }
 

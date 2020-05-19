@@ -1,17 +1,6 @@
 from pathlib import Path
 from json import load
 
-with open(Path.cwd() / "setup" / "settings.json", "r") as file:
-    settings = load(file)
-
-with open(Path.cwd() / "setup" / "rbac.json", "r") as file:
-    rbac = load(file)
-
-with open(Path.cwd() / "setup" / "properties.json", "r") as file:
-    properties = load(file)
-
-with open(Path.cwd() / "setup" / "scheduler.json", "r") as file:
-    scheduler = load(file)
-
-with open(Path.cwd() / "setup" / "themes.json", "r") as file:
-    themes = load(file)
+for setup_file in (Path.cwd() / "setup").iterdir():
+    with open(setup_file, "r") as file:
+        locals()[setup_file.stem] = load(file)

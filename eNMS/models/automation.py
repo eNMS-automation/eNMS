@@ -691,7 +691,12 @@ class Run(AbstractBase):
                     )
                 except SystemExit:
                     pass
-                results = self.service.job(self, payload, *args)
+                try:
+                    results = self.service.job(self, payload, *args)
+                except Exception as exc:
+                    self.log("error", str(exc), device)
+                    result = "\n".join(format_exc().splitlines())
+                    results = {"success": False, "result": result}
                 if device and (
                     getattr(self, "close_connection", False)
                     or self.runtime == self.parent_runtime
@@ -725,7 +730,7 @@ class Run(AbstractBase):
                     sleep(self.time_between_retries)
             except Exception as exc:
                 self.log("error", str(exc), device)
-                result = chr(10).join(format_exc().splitlines())
+                result = "\n".join(format_exc().splitlines())
                 results = {"success": False, "result": result}
         return results
 

@@ -155,7 +155,7 @@ class AdministrationController(BaseController):
                     except Exception:
                         info(
                             f"{str(instance)} could not be imported :"
-                            f"{chr(10).join(format_exc().splitlines())}"
+                            "\n".join(format_exc().splitlines())
                         )
                         status = "Partial import (see logs)."
         try:
@@ -181,7 +181,7 @@ class AdministrationController(BaseController):
                     pool.compute_pool()
             self.log("info", status)
         except Exception:
-            info(chr(10).join(format_exc().splitlines()))
+            info("\n".join(format_exc().splitlines()))
             status = "Partial import (see logs)."
         return status
 

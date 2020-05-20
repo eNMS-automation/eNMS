@@ -29,8 +29,8 @@ for a given logger should also be logged as changelog or service log by default.
 - Fix authentication bug flask_login and add session timeout mechanism
 - Make plugins separate from eNMS in their own folder, add bash script to install/update/uninstall them
 - Make the CLI interface a plugins
-- Add session timeout 
-- Add "all results view" so you can compare any two results ina workflow ("Re: [E] Re: Visual results diff")
+- Add session timeout
+- Add "all results view" so you can compare any two results in a workflow ("Re: [E] Re: Visual results diff")
 - add option in settings so you can choose whether a logger goes to service log or not
 - Remove summary from service state to improve workflow refresh performances
 

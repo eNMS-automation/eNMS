@@ -1,7 +1,4 @@
-body {
-  background: #747676;
-}
-
+/* Login Page */
 .login {
   color: #ffffff;
   background: #35363a;
@@ -21,6 +18,73 @@ body {
   background: #35363a;
   color: #fff;
   font-family: "Helvetica Neue", Roboto, Arial, "Droid Sans", sans-serif;
+}
+
+/* Main Page */
+body {
+  background: #202123;
+  color: #c95e57;
+}
+
+.left_column {
+  background: #202123;
+}
+
+.right_column {
+  background: #1b1b1d;
+}
+
+.main_frame {
+  background: #1b1b1d;
+}
+
+.nav-sm .nav.child_menu li.active,
+.nav-sm .nav.side-menu li.active-sm {
+  border-right: 5px solid #d62b1e;
+}
+
+.nav-sm > .nav.side-menu > li.active-sm > a {
+  color: #d62b1e !important;
+}
+
+.nav_menu {
+  background: #202123;
+  border-bottom: 1px solid #d9dee4;
+}
+
+.nav.side-menu > li > a:hover {
+  color: #f2f5f7 !important;
+}
+
+.nav.side-menu > li.active,
+.nav.side-menu > li.current-page {
+  border-right: 5px solid #d62b1e;
+}
+
+.nav.side-menu > li.active > a {
+  background: linear-gradient(#334556, #2c4257), #747676;
+}
+
+.nav.navbar-nav > li > a {
+  color: #ffffff !important;
+}
+
+.accordion .panel-heading {
+  background: #f2f5f7;
+}
+
+.accordion .panel:hover {
+  background: #f2f5f7;
+}
+
+.wizard_horizontal ul.wizard_steps li a:before {
+  background: #1ded0e;
+}
+
+.wizard_horizontal ul.wizard_steps li a.done .step_no,
+.wizard_horizontal ul.wizard_steps li a.done:before {
+  background: #d62b1e;
+  color: #fff;
 }
 
 .navbar-default {

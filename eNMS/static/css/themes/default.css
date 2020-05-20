@@ -1,8 +1,4 @@
-body {
-  background: #002240;
-  color: #73879c;
-}
-
+/* Login Page */
 .login {
   color: #73879c;
   background: #f7f7f7;
@@ -19,5 +15,72 @@ body {
 }
 
 .menu_section h3 {
+  color: #fff;
+}
+
+/* Main Page */
+body {
+  background: #002240;
+  color: #73879c;
+}
+
+.left_column {
+  background: #002240;
+}
+
+.right_column {
+  background: #ffffff;
+}
+
+.main_frame {
+  background: #ffffff;
+}
+
+.nav-sm .nav.child_menu li.active,
+.nav-sm .nav.side-menu li.active-sm {
+  border-right: 5px solid #1abb9c;
+}
+
+.nav-sm > .nav.side-menu > li.active-sm > a {
+  color: #1abb9c !important;
+}
+
+.nav_menu {
+  background: #ededed;
+  border-bottom: 1px solid #d9dee4;
+}
+
+.nav.side-menu > li > a:hover {
+  color: #e3ebf3 !important;
+}
+
+.nav.side-menu > li.active,
+.nav.side-menu > li.current-page {
+  border-right: 5px solid #1abb9c;
+}
+
+.nav.side-menu > li.active > a {
+  background: linear-gradient(#334556, #2c4257), #002240;
+}
+
+.nav.navbar-nav > li > a {
+  color: #515356 !important;
+}
+
+.accordion .panel-heading {
+  background: #e3ebf3;
+}
+
+.accordion .panel:hover {
+  background: #e3ebf3;
+}
+
+.wizard_horizontal ul.wizard_steps li a:before {
+  background: #ccc;
+}
+
+.wizard_horizontal ul.wizard_steps li a.done .step_no,
+.wizard_horizontal ul.wizard_steps li a.done:before {
+  background: #1abb9c;
   color: #fff;
 }

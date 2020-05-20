@@ -10,7 +10,6 @@ body {
 }
 
 .left_column {
-  background: #002240;
   height: 100%;
   float: left;
 }
@@ -24,7 +23,6 @@ body {
 }
 
 .right_column {
-  background: #ffffff;
   height: 100%;
   position: absolute;
   display: flex;
@@ -60,7 +58,6 @@ body {
 }
 
 .main_frame {
-  background: #ffffff;
   width: 100%;
   padding: 10px 17px;
 }
@@ -86,20 +83,11 @@ body {
   padding: 10px 5px;
 }
 
-.nav-sm .nav.child_menu li.active,
-.nav-sm .nav.side-menu li.active-sm {
-  border-right: 5px solid #1abb9c;
-}
-
 .nav-sm .nav.side-menu li.active-sm ul ul,
 .nav-sm ul.nav.child_menu ul {
   position: static;
   width: 200px;
   background: 0 0;
-}
-
-.nav-sm > .nav.side-menu > li.active-sm > a {
-  color: #1abb9c !important;
 }
 
 .nav-sm .nav.side-menu li a i.toggle-up {
@@ -180,8 +168,6 @@ body {
 
 .nav_menu {
   float: left;
-  background: #ededed;
-  border-bottom: 1px solid #d9dee4;
   margin-bottom: 10px;
   width: 100%;
   position: relative;
@@ -242,10 +228,6 @@ a {
 
 .nav.side-menu > li > a {
   margin-bottom: 6px;
-}
-
-.nav.side-menu > li > a:hover {
-  color: #e3ebf3 !important;
 }
 
 .nav.side-menu > li > a:hover,
@@ -317,11 +299,6 @@ a {
   padding: 13px 15px 12px;
 }
 
-.nav.side-menu > li.active,
-.nav.side-menu > li.current-page {
-  border-right: 5px solid #1abb9c;
-}
-
 .nav li.current-page {
   background: rgba(255, 255, 255, 0.05);
 }
@@ -338,7 +315,6 @@ a {
 
 .nav.side-menu > li.active > a {
   text-shadow: rgba(0, 0, 0, 0.25) 0 -1px 0;
-  background: linear-gradient(#334556, #2c4257), #002240;
   box-shadow: rgba(0, 0, 0, 0.25) 0 1px 0, inset rgba(255, 255, 255, 0.16) 0 1px 0;
 }
 
@@ -346,10 +322,6 @@ a {
 .navbar-nav > li > a {
   font-weight: 500;
   line-height: 32px;
-}
-
-.nav.navbar-nav > li > a {
-  color: #515356 !important;
 }
 
 .nav.top_menu > li > a {
@@ -403,14 +375,9 @@ h2 {
 }
 
 .accordion .panel-heading {
-  background: #e3ebf3;
   padding: 13px;
   width: 100%;
   display: block;
-}
-
-.accordion .panel:hover {
-  background: #e3ebf3;
 }
 
 .x_title {
@@ -638,7 +605,6 @@ fieldset {
   content: "";
   position: absolute;
   height: 4px;
-  background: #ccc;
   top: 20px;
   width: 100%;
   z-index: 4;
@@ -665,12 +631,6 @@ fieldset {
 .step_no,
 .wizard_horizontal ul.wizard_steps li a.selected:before {
   background: #34495e;
-  color: #fff;
-}
-
-.wizard_horizontal ul.wizard_steps li a.done .step_no,
-.wizard_horizontal ul.wizard_steps li a.done:before {
-  background: #1abb9c;
   color: #fff;
 }
 

@@ -234,6 +234,7 @@
     "/skip_services",
     "/stop_workflow",
     "/switch_menu",
+    "/switch_theme",
     "/scheduler_action",
     "/filtering",
     "/task_action",

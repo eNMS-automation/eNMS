@@ -249,6 +249,13 @@ class AdministrationController(BaseController):
             except ConnectionError:
                 continue
 
+    def switch_menu(self, user_id):
+        user = db.fetch("user", id=user_id)
+        user.small_menu = not user.small_menu
+
+    def switch_theme(self, user_id, theme):
+        db.fetch("user", id=user_id).theme = theme
+
     def upload_files(self, **kwargs):
         file = kwargs["file"]
         file.save(f"{kwargs['folder']}/{file.filename}")

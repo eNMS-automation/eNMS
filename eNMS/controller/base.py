@@ -501,10 +501,6 @@ class BaseController:
     def strip_all(self, input):
         return input.translate(str.maketrans("", "", f"{punctuation} "))
 
-    def switch_menu(self, user_id):
-        user = db.fetch("user", id=user_id)
-        user.small_menu = not user.small_menu
-
     def update_database_configurations_from_git(self):
         for dir in scandir(self.path / "network_data"):
             device = db.fetch("device", allow_none=True, name=dir.name)

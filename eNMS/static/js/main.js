@@ -36,7 +36,6 @@ function doc(page) {
 }
 
 function switchTheme(theme) {
-  console.log(currentTheme, theme)
   $(`link[href="/static/css/themes/${currentTheme}.css"]`).remove();
   currentTheme = theme;
   let cssLink = document.createElement("link");
@@ -44,6 +43,7 @@ function switchTheme(theme) {
   cssLink.type = "text/css";
   cssLink.href = `/static/css/themes/${theme}.css`;
   document.getElementsByTagName("head")[0].appendChild(cssLink);
+  call({ url: `/switch_theme/${user.id}/${theme}` });
 }
 
 function initSidebar() {

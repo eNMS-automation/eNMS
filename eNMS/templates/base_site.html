@@ -292,9 +292,7 @@
       const relationships = {{ relationships|tojson|safe }};
       const serviceTypes = {{ service_types|tojson|safe }};
       const tableProperties = {{ table_properties|tojson|safe }};
-      const themes = {{ themes|tojson|safe }};
-      console.log(user.theme)
-      const userTheme = themes.themes?.[user.theme]
+      const theme = {{ themes|tojson|safe }}.themes?.[user.theme];
       let action = {};
       let settings = {{ settings|tojson|safe }};
       let csrf_token = "{{ csrf_token() }}";

@@ -4,7 +4,7 @@
     "dark": {
       "name": "Dark",
       "workflow": {
-        "edge": {
+        "edges": {
           "strokeColor": "#1b1b1d",
           "color": "#fff"
         }

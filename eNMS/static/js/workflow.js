@@ -4,6 +4,7 @@ action: false
 page: false
 serviceTypes: false
 Set: false
+themes: false
 vis: false
 */
 
@@ -30,6 +31,8 @@ export let currentPath = localStorage.getItem("path");
 export let workflow = JSON.parse(localStorage.getItem("workflow"));
 export let currentRuntime;
 
+console.log(userTheme)
+
 vis.Network.prototype.zoom = function (scale) {
   const animationOptions = {
     scale: this.getScale() + scale,
@@ -43,6 +46,8 @@ const dsoptions = {
   edges: {
     font: {
       size: 12,
+      strokeColor: "#1b1b1d",
+      color: "#fff",
     },
   },
   nodes: {

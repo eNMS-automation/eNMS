@@ -1,7 +1,17 @@
 {
   "default": "default",
-  "list": [
-    ["default", "Default"],
-    ["dark", "Dark"]
-  ]
+  "themes": {
+    "dark": {
+      "name": "Dark",
+      "workflow": {
+        "edge": {
+          "strokeColor": "#1b1b1d",
+          "color": "#fff"
+        }
+      }
+    },
+    "default": {
+      "name": "Default"
+    }
+  }
 }

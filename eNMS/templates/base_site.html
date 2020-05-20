@@ -183,10 +183,10 @@
                     <span class="fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    {% for theme, theme_name in themes["list"] %}
+                    {% for theme, values in themes["themes"].items() %}
                     <li>
                       <a onclick="eNMS.main.switchTheme('{{ theme }}')"
-                        >{{ theme_name }}</a
+                        >{{ values["name"] }}</a
                       >
                     </li>
                     {% endfor %}
@@ -292,6 +292,9 @@
       const relationships = {{ relationships|tojson|safe }};
       const serviceTypes = {{ service_types|tojson|safe }};
       const tableProperties = {{ table_properties|tojson|safe }};
+      const themes = {{ themes|tojson|safe }};
+      console.log(user.theme)
+      const userTheme = themes.themes?.[user.theme]
       let action = {};
       let settings = {{ settings|tojson|safe }};
       let csrf_token = "{{ csrf_token() }}";

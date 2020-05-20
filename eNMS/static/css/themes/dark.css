@@ -87,6 +87,18 @@ body {
   color: #fff;
 }
 
+table.dataTable tr.odd {
+  background-color: #000;
+}
+
+table.dataTable tr.even {
+  background-color: #000;
+}
+
+table.dataTable tr:hover {
+  background-color: #462323;
+}
+
 .navbar-default {
   background-color: #1b1b1d;
 }

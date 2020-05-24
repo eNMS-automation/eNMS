@@ -3,6 +3,7 @@ global
 CodeMirror: false
 settings: true
 echarts: false
+theme: false
 */
 
 import { compare } from "./automation.js";
@@ -33,7 +34,7 @@ function drawDiagrams(diagram, result) {
         formatter: "{b} ({c})",
       },
     },
-    ...theme.dashboard
+    ...theme.dashboard,
   };
   if (result.legend.length < 10) {
     if (!options.legend) options.legend = {};

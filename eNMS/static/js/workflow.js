@@ -40,7 +40,7 @@ vis.Network.prototype.zoom = function (scale) {
 };
 
 const container = document.getElementById("network");
-const dsoptions = {
+const options = {
   interaction: {
     hover: true,
     hoverConnectedEdges: false,
@@ -64,7 +64,7 @@ const dsoptions = {
       callback(data);
     },
   },
-  ...theme.workflow
+  ...theme.workflow,
 };
 
 let nodes;
@@ -90,7 +90,7 @@ export function displayWorkflow(workflowData) {
   for (const [id, label] of Object.entries(workflow.labels)) {
     drawLabel(id, label);
   }
-  graph = new vis.Network(container, { nodes: nodes, edges: edges }, dsoptions);
+  graph = new vis.Network(container, { nodes: nodes, edges: edges }, options);
   graph.setOptions({ physics: false });
   graph.on("oncontext", function (properties) {
     if (triggerMenu) {

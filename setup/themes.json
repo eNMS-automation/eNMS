@@ -5,13 +5,39 @@
       "name": "Dark",
       "workflow": {
         "edges": {
-          "strokeColor": "#1b1b1d",
-          "color": "#fff"
+          "font": {
+            "size": 12,
+            "strokeColor": "#1b1b1d",
+            "color": "#fff"
+          }
+        },
+        "nodes": {
+          "shape": "box",
+          "font": {
+            "bold": {
+              "color": "#0077aa"
+            }
+          }
         }
       }
     },
     "default": {
-      "name": "Default"
+      "name": "Default",
+      "workflow": {
+        "edges": {
+          "font": {
+            "size": 12
+          }
+        },
+        "nodes": {
+          "shape": "box",
+          "font": {
+            "bold": {
+              "color": "#0077aa"
+            }
+          }
+        }
+      }
     }
   }
 }

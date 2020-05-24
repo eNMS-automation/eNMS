@@ -41,20 +41,8 @@ vis.Network.prototype.zoom = function (scale) {
 
 const container = document.getElementById("network");
 const dsoptions = {
-  edges: {
-    font: {
-      size: 12,
-      ...theme?.workflow?.edges
-    },
-  },
-  nodes: {
-    shape: "box",
-    font: {
-      bold: {
-        color: "#0077aa",
-      },
-    },
-  },
+  edges: theme.workflow.edges,
+  nodes: theme.workflow.nodes,
   interaction: {
     hover: true,
     hoverConnectedEdges: false,

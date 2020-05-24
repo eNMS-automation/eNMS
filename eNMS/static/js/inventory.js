@@ -33,13 +33,15 @@ function drawDiagrams(diagram, result) {
         formatter: "{b} ({c})",
       },
     },
+    ...theme.dashboard
   };
   if (result.legend.length < 10) {
-    options.legend = {
+    if (!options.legend) options.legend = {};
+    Object.assign(options.legend, {
       orient: "horizontal",
       bottom: 0,
       data: result.legend,
-    };
+    });
   }
   diagram.setOption(options);
 }

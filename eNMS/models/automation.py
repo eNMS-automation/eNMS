@@ -16,7 +16,7 @@ from ruamel import yaml
 from re import compile, search
 from requests import post
 from scp import SCPClient
-from sqlalchemy import Boolean, ForeignKey, Integer, or_
+from sqlalchemy import Boolean, ForeignKey, Index, Integer, or_
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.orm import relationship
 from threading import Thread
@@ -49,7 +49,7 @@ class Service(AbstractBase):
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.SmallString, unique=True)
     shared = db.Column(Boolean, default=False)
-    scoped_name = db.Column(db.SmallString)
+    scoped_name = db.Column(db.SmallString, index=True)
     last_modified = db.Column(db.SmallString, info={"dont_track_changes": True})
     description = db.Column(db.SmallString)
     number_of_retries = db.Column(Integer, default=0)
@@ -275,6 +275,12 @@ class ServiceLog(AbstractBase):
 class Run(AbstractBase):
 
     __tablename__ = type = "run"
+    __table_args__ = (
+        Index("ix_run_parent_runtime_0", "parent_runtime", "runtime"),
+        Index(
+            "ix_run_start_service_id_0", "start_service_id", "parent_runtime", "runtime"
+        ),
+    )
     private = True
     id = db.Column(Integer, primary_key=True)
     restart_path = db.Column(db.SmallString)
@@ -285,7 +291,7 @@ class Run(AbstractBase):
     properties = db.Column(db.Dict)
     success = db.Column(Boolean, default=False)
     status = db.Column(db.SmallString, default="Running")
-    runtime = db.Column(db.SmallString)
+    runtime = db.Column(db.SmallString, index=True)
     duration = db.Column(db.SmallString)
     trigger = db.Column(db.SmallString, default="UI")
     parent_id = db.Column(Integer, ForeignKey("run.id", ondelete="cascade"))

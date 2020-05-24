@@ -28,6 +28,7 @@ def test_user_management(user_client):
             "name": user,
             "email": f"{user}@test.com",
             "password": user,
+            "theme": "dark",
         }
         user_client.post("/update/user", data=dict_user)
     assert len(db.fetch_all("user")) == 8

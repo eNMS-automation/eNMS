@@ -537,8 +537,8 @@ class Server(Flask):
                     "columns": [{"data": column} for column in rest_body["columns"]],
                     "order": [{"column": 0, "dir": "asc"}],
                     "start": 0,
-                    "length": rest_body["maximum_return_records"],
-                    "form": rest_body["search_criteria"],
+                    "length": rest_body.get("maximum_return_records", 10),
+                    "form": rest_body.get("search_criteria", {}),
                     "rest_api_request": True,
                 }
                 return app.filtering(rest_body["type"], **kwargs)["data"]

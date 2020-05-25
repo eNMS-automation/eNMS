@@ -248,6 +248,8 @@ class Result(AbstractBase):
     @classmethod
     def filtering_constraints(cls, **kwargs):
         constraints = []
+        if kwargs.get("rest_api_request", False):
+            return []
         if not kwargs.get("full_result"):
             constraints.append(
                 getattr(

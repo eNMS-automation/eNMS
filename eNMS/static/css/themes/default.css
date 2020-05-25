@@ -69,6 +69,11 @@ body {
 
 .accordion .panel-heading {
   background: #e3ebf3;
+  background-color: #ddd;
+}
+
+.accordion .panel-body {
+  background-color: #fafafa;
 }
 
 .accordion .panel:hover {

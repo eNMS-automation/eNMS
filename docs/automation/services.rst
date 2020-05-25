@@ -53,7 +53,9 @@ Main Parameters
   inside multiple workflows, and a change to a shared service affects all workflows that use it. A service which is scoped
   within a workflow, either by creating the service inside the workflow or by deep copying the service into the workflow,
   exists only inside that workflow, so changes to it only affect its parent workflow.  A standalone service exists outside
-  of any workflow.
+  of any workflow. A superworkflow acts as a template or wrapper around another workflow and allows for services to be run
+  before and after the main workflow (which exists inside the superworkflow as a Placeholder). Because multiple workflows
+  can specify the same superworkflow, the superworkflow acts as if it is shared.
 
 - ``Workflows`` (**display only**) Displays the list of workflows that reference the service.
 - ``Description`` / ``Vendor`` / ``Operating System`` Useful for filtering services in the table.
@@ -437,7 +439,7 @@ Results
 *******
 
 A separate result is stored for each run of a service / workflow, plus a unique result for every device and for every
-service and subworkflow within a workflow.
+service and subworkflow/superworkflow within a workflow.
 Each result is displayed as a JSON object. If the service is run on several devices, you can display the results for a
 specific device, or display the list of all "failed" / "success" device.
 In the event that retries are configured, the results dictionary will contain an overall results section,

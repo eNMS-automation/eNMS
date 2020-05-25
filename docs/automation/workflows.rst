@@ -189,3 +189,15 @@ An example execution of a service in a workflow, in terms of waiting times and r
   time between retries pause
   Retry 2  (Successful, or only 2 Retries specified)
   Waiting time pause
+
+Superworkflow
+*************
+
+Just as a workflow can contain a subworkflow to subdivide and encapsulate related functionality, a workflow can also designate
+a superworkflow in its settings. The superworkflow allows for services to be run before and after the main workflow
+and using a potentially different workflow traversal mode (service by service or device by device). Superworkflow functions
+like a document template so that activities common to all workflows can be performed.  When the same superworkflow is
+used by multiple main workflows, it behaves like a shared service: a change to the superworkflow affects all workflows that
+use it.  In the superworkflow definition in Workflow Builder, the position of the main workflow is designated by adding
+the ``Placeholder`` service to the graph.  And in the main workflow definition, the superworkflow must be selected from
+the list of existing workflows.

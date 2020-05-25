@@ -18,7 +18,16 @@ Configuration parameters for creating this service instance:
 - ``options`` Additional --extra-vars to be passed to the playbook using the syntax {'key1':value1, 'key2': value2}.
   All inventory properties are automatically passed to the playbook using --extra-vars (if pass_device_properties is
   selected above). These options are appended.
+- Ansible itself supports a number of standard return codes; these are returned in the results of the service and include:
 
+  - 0 : OK or no hosts matched
+  - 1 : Error
+  - 2 : One or more hosts failed
+  - 3 : One or more hosts were unreachable
+  - 4 : Parser error
+  - 5 : Bad or incomplete options
+  - 99 : User interrupted execution
+  - 250 : Unexpected error
 
 .. note:: This Service supports variable substitution (as mentioned in the previous section) in the `arguments` and
    `options` input fields of its configuration form.

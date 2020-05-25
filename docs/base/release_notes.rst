@@ -33,6 +33,8 @@ for a given logger should also be logged as changelog or service log by default.
 - Add "all results view" so you can compare any two results in a workflow ("Re: [E] Re: Visual results diff")
 - add option in settings so you can choose whether a logger goes to service log or not
 - Remove summary from service state to improve workflow refresh performances
+- Add Dark mode and theme mechanism
+- Make search endpoint work with result to retrieve device results
 
 MIGRATION:
 - Remove RBAC in rbac.json

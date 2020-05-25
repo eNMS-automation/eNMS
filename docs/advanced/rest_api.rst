@@ -106,8 +106,8 @@ name needed to retrieve the results.
    }
 
 
-Retrieve the results of a service
-#################################
+Retrieve the status / results of a top-level service
+####################################################
 
 .. code-block:: python
   :caption: GET Request
@@ -149,9 +149,6 @@ The response when the result is ready will look very close to the synchronous re
           },
           "duration": "0:00:02",
   }
-
-
-|
 
 Retrieve or delete an instance
 ##############################
@@ -230,10 +227,23 @@ Custom Query Payload
       "search_criteria": {"name_filter": "inclusion", "name": "i"}
   }
 
+.. code-block:: python
+  :caption: Retrieve all results for a service
+
+  {
+    "type": "result",
+    "columns": ["result", "service_name", "device_name", "workflow_name"],
+    "search_criteria": {
+      "service_name": "Regression Workflow L: superworkflow",
+      "parent_runtime": "2020-05-25 11:45:25.721338"
+    }
+  }
+
+In order to retrieve a result for a specific device, it is possible to add the ``device_name`` key in the search criteria.
+
 Note:
 
-- Possible ``columns`` (or attributes) include: name, description, subtype, model, location, vendor, operating_system,
-  os_version, ip_address, port, configuration, operational_data. Other custom_properties maybe available in your environment.
+- Possible ``columns`` (or properties) can be found in ``setup/properties.json``.
 - Special ``columns``  "matches" is derived from a RegEX match "configuration", which returns the line where a regex was found
 - The example above will search for configurations using the regex of "link-".
 - Note the use of configuration attribute is used twice to define a single parameter in ``search_criteria``. Additional

@@ -471,6 +471,7 @@ export function configureForm(form, id, panelId) {
       } else {
         model = field.model;
       }
+
       initSelect(el, model, panelId, field.type == "object");
     }
   }

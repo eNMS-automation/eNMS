@@ -353,28 +353,28 @@ class Database:
     def export(self, model):
         return [instance.to_dict(export=True) for instance in self.fetch_all(model)]
 
-    def factory(self, cls_name, **kwargs):
+    def factory(self, _class, **kwargs):
         characters = set(kwargs.get("name", "") + kwargs.get("scoped_name", ""))
         if set("/\\'" + '"') & characters:
             raise Exception("Names cannot contain a slash or a quote.")
         instance, instance_id = None, kwargs.pop("id", 0)
         if instance_id:
-            instance = self.fetch(cls_name, id=instance_id)
+            instance = self.fetch(_class, id=instance_id)
         elif "name" in kwargs:
-            instance = self.fetch(cls_name, allow_none=True, name=kwargs["name"])
+            instance = self.fetch(_class, allow_none=True, name=kwargs["name"])
         if instance and not kwargs.get("must_be_new"):
             instance.update(**kwargs)
         else:
-            instance = models[cls_name](**kwargs)
+            instance = models[_class](**kwargs)
             self.session.add(instance)
         return instance
 
-    def set_custom_properties(self, cls):
-        for property, values in properties["custom"].get(cls.__tablename__, {}).items():
+    def set_custom_properties(self, model):
+        for property, values in properties["custom"].get(model.__tablename__, {}).items():
             is_private = values.get("private", False)
             kwargs = {"default": values["default"]} if not is_private else {}
             setattr(
-                cls,
+                model,
                 property,
                 self.Column(
                     {
@@ -386,7 +386,7 @@ class Database:
                     **kwargs,
                 ),
             )
-        return cls
+        return model
 
 
 db = Database()

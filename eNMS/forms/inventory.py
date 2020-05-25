@@ -105,11 +105,12 @@ class DeviceDataForm(BaseForm):
     )
 
 
-@configure_relationships("source", "destination")
 class LinkForm(ObjectForm):
     template = "object"
     form_type = HiddenField(default="link")
     id = HiddenField()
+    source = InstanceField("Source", [InputRequired()], model="device")
+    destination = InstanceField("Destination", [InputRequired()], model="device")
     color = StringField("Color")
 
 

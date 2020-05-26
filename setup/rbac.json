@@ -1,7 +1,7 @@
 {
   "menu": {
     "Home": {
-      "icon": "home", 
+      "icon": "home",
       "pages": {
         "Dashboard": "/dashboard",
         "Changelog": "/table/changelog",
@@ -9,7 +9,7 @@
       }
     },
     "Admin": {
-      "icon": "users", 
+      "icon": "users",
       "pages": {
         "Users": "/table/user",
         "Groups": "/table/group",
@@ -17,7 +17,7 @@
       }
     },
     "Inventory": {
-      "icon": "database", 
+      "icon": "database",
       "pages": {
         "Devices": "/table/device",
         "Configurations": "/table/configuration",
@@ -26,14 +26,14 @@
       }
     },
     "Visualization": {
-      "icon": "map-marker", 
+      "icon": "map-marker",
       "pages": {
         "Network": "/view/network",
         "Sites": "/view/site"
       }
     },
     "Automation": {
-      "icon": "sitemap", 
+      "icon": "sitemap",
       "pages": {
         "Services": "/table/service",
         "Workflow Builder": "/workflow_builder",
@@ -41,7 +41,7 @@
       }
     },
     "Scheduling": {
-      "icon": "clock-o", 
+      "icon": "clock-o",
       "pages": {
         "Tasks": "/table/task",
         "Events": "/table/event"
@@ -74,11 +74,7 @@
     "Submenu",
     "Plugin 2"
   ],
-  "upper_menu": [
-    "Admin",
-    "Settings",
-    "Files"
-  ],
+  "upper_menu": ["Admin", "Settings", "Files"],
   "get_requests": [
     "/dashboard",
     "/download_file",

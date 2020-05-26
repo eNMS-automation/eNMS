@@ -1,852 +1,844 @@
-{ 
-   "custom":{ 
-      "device":{ 
-         "property1":{ 
-            "pretty_name":"Property 1",
-            "type":"string",
-            "default":"10.145.14.1",
-            "is_address":true
-         },
-         "property2":{ 
-            "pretty_name":"Property 2",
-            "default": "CP",
-            "type":"string"
-         },
-         "reachable":{ 
-            "pretty_name":"Is Reachable",
-            "default": true,
-            "type":"boolean"
-         },
-         "down":{ 
-            "pretty_name":"Is Down",
-            "default": false,
-            "type":"boolean"
-         },
-         "property3":{ 
-            "pretty_name":"Private property",
-            "default": "password",
-            "type":"string",
-            "private":true
-         },
-         "attributes": {
-            "pretty_name":"Attributes",
-            "default": {},
-            "type": "json"
-         }
+{
+  "custom": {
+    "device": {
+      "property1": {
+        "pretty_name": "Property 1",
+        "type": "string",
+        "default": "10.145.14.1",
+        "is_address": true
       },
-      "link":{ 
-         "property1":{ 
-            "pretty_name":"Custom Property",
-            "type":"string",
-            "default":"CP"
-         }
+      "property2": {
+        "pretty_name": "Property 2",
+        "default": "CP",
+        "type": "string"
       },
-      "pool":{ 
-         "property1":{ 
-            "pretty_name":"Custom Property",
-            "type":"string",
-            "default":"CP"
-         }
+      "reachable": {
+        "pretty_name": "Is Reachable",
+        "default": true,
+        "type": "boolean"
       },
-      "service": {
-         "definition": {
-            "pretty_name": "Definition",
-            "default": "Definition"
-         },
-         "reserved": {
-            "pretty_name": "Reserved",
-            "type": "boolean",
-            "default": false
-         },
-         "impacting": {
-            "pretty_name": "Impacting",
-            "type": "boolean",
-            "default": true
-         },
-         "completion_time": {
-            "pretty_name": "Completion time",
-            "type": "integer",
-            "default": 1
-         }
+      "down": {
+        "pretty_name": "Is Down",
+        "default": false,
+        "type": "boolean"
+      },
+      "property3": {
+        "pretty_name": "Private property",
+        "default": "password",
+        "type": "string",
+        "private": true
+      },
+      "attributes": {
+        "pretty_name": "Attributes",
+        "default": { "1": ["2", "three"] },
+        "type": "json"
       }
-   },
-   "dashboard":{ 
-      "device":[ 
-         "model",
-         "vendor",
-         "subtype",
-         "icon",
-         "operating_system",
-         "os_version",
-         "port",
-         "property1",
-         "property2"
-      ],
-      "link":[ 
-         "model",
-         "vendor",
-         "subtype",
-         "icon",
-         "location"
-      ],
-      "service":[ 
-         "vendor",
-         "operating_system",
-         "creator",
-         "send_notification",
-         "send_notification_method",
-         "multiprocessing",
-         "max_processes",
-         "number_of_retries",
-         "time_between_retries"
-      ],
-      "workflow":[ 
-         "vendor",
-         "operating_system",
-         "creator",
-         "send_notification",
-         "send_notification_method",
-         "multiprocessing",
-         "max_processes",
-         "number_of_retries",
-         "time_between_retries"
-      ],
-      "user":[ 
-         "name"
-      ],
-      "task":[ 
-         "status",
-         "frequency",
-         "frequency_unit",
-         "crontab_expression",
-         "service_name"
-      ]
-   },
-   "tables":{ 
-      "device":[ 
-         { 
-            "data":"name",
-            "title":"Name",
-            "search":"text"
-         },
-         { 
-            "data":"description",
-            "title":"Description",
-            "search":"text",
-            "visible":false,
-            "orderable": false
-         },
-         { 
-            "data":"subtype",
-            "title":"Subtype",
-            "search":"text",
-            "visible":false
-         },
-         { 
-            "data":"model",
-            "title":"Model",
-            "search":"text"
-         },
-         { 
-            "data":"location",
-            "title":"Location",
-            "search":"text",
-            "visible":false
-         },
-         { 
-            "data":"vendor",
-            "title":"Vendor",
-            "search":"text"
-         },
-         { 
-            "data":"operating_system",
-            "title":"Operating System",
-            "search":"text"
-         },
-         { 
-            "data":"os_version",
-            "title":"OS Version",
-            "search":"text"
-         },
-         { 
-            "data":"ip_address",
-            "title":"IP Address",
-            "search":"text"
-         },
-         { 
-            "data":"port",
-            "title":"Port",
-            "search":"text",
-            "visible":false
-         },
-         { 
-            "data":"property1",
-            "title":"Property 1",
-            "search":"text",
-            "visible":false
-         },
-         { 
-            "data":"buttons",
-            "width":"230px",
-            "orderable": false,
-            "export": false
-         }
-      ],
-      "configuration":[ 
-         { 
-            "data":"name",
-            "title":"Name",
-            "search":"text"
-         },
-         { 
-            "data":"description",
-            "title":"Description",
-            "search":"text",
-            "visible":false,
-            "orderable": false
-         },
-         { 
-            "data":"subtype",
-            "title":"Subtype",
-            "search":"text",
-            "visible":false
-         },
-         { 
-            "data":"model",
-            "title":"Model",
-            "search":"text",
-            "visible":false
-         },
-         { 
-            "data":"location",
-            "title":"Location",
-            "search":"text",
-            "visible":false
-         },
-         { 
-            "data":"vendor",
-            "title":"Vendor",
-            "search":"text",
-            "visible":false
-         },
-         { 
-            "data":"operating_system",
-            "title":"Operating System",
-            "search":"text",
-            "visible":false
-         },
-         { 
-            "data":"os_version",
-            "title":"OS Version",
-            "search":"text",
-            "visible":false
-         },
-         { 
-            "data":"ip_address",
-            "title":"IP Address",
-            "search":"text",
-            "visible":false
-         },
-         { 
-            "data":"port",
-            "title":"Port",
-            "search":"text",
-            "visible":false
-         },
-         { 
-            "data":"configuration",
-            "title":"Configuration",
-            "search":"text",
-            "width":"80%",
-            "visible":true,
-            "orderable": false
-         },
-         { 
-            "data":"operational_data",
-            "title":"Operational Data",
-            "search":"text",
-            "width":"80%",
-            "visible":false,
-            "orderable": false
-         },
-         { 
-            "data":"buttons",
-            "width":"130px",
-            "orderable": false,
-            "export": false
-         }
-      ],
-      "full_result":[ 
-         { 
-            "data":"runtime",
-            "title":"Runtime",
-            "search":"text"
-         },
-         { 
-            "data":"duration",
-            "title":"Duration",
-            "search":"text"
-         },
-         { 
-            "data":"device_name",
-            "title":"Device",
-            "search":"text",
-            "orderable": false
-         },
-         { 
-            "data":"service_name",
-            "title":"Service",
-            "search":"text",
-            "orderable": false
-         },
-         { 
-            "data":"success",
-            "title":"Status",
-            "search":"bool",
-            "width":"80px",
-            "orderable": false
-         },
-         { 
-            "data":"buttons",
-            "orderable": false,
-            "export": false
-         },
-         { 
-            "data":"v1",
-            "title":"V1",
-            "orderable": false
-         },
-         { 
-            "data":"v2",
-            "title":"V2",
-            "orderable": false
-         }
-      ],
-      "link":[ 
-         { 
-            "data":"name",
-            "title":"Name",
-            "search":"text"
-         },
-         { 
-            "data":"description",
-            "title":"Description",
-            "search":"text",
-            "visible":false,
-            "orderable": false
-         },
-         { 
-            "data":"subtype",
-            "title":"Subtype",
-            "search":"text",
-            "visible":false
-         },
-         { 
-            "data":"model",
-            "title":"Model",
-            "search":"text"
-         },
-         { 
-            "data":"location",
-            "title":"Location",
-            "search":"text"
-         },
-         { 
-            "data":"vendor",
-            "title":"Vendor",
-            "search":"text"
-         },
-         { 
-            "data":"source_name",
-            "title":"Source",
-            "search":"text",
-            "orderable": false
-         },
-         { 
-            "data":"destination_name",
-            "title":"Destination",
-            "search":"text",
-            "orderable": false
-         },
-         { 
-            "data":"property1",
-            "title":"Property 1",
-            "search":"text",
-            "visible":false
-         },
-         { 
-            "data":"buttons",
-            "width":"130px",
-            "orderable": false,
-            "export": false
-         }
-      ],
-      "pool":[ 
-         { 
-            "data":"name",
-            "title":"Name",
-            "search":"text"
-         },
-         { 
-            "data":"last_modified",
-            "title":"Last modified",
-            "search":"text",
-            "width":"150px"
-         },
-         { 
-            "data":"description",
-            "title":"Description",
-            "search":"text",
-            "orderable": false
-         },
-         { 
-            "data":"manually_defined",
-            "title":"Manually defined",
-            "search":"bool",
-            "width":"100px"
-         },
-         { 
-            "data":"objectNumber",
-            "title":"Object Count",
-            "width":"150px",
-            "orderable": false
-         },
-         { 
-            "data":"buttons",
-            "width":"250px",
-            "orderable": false,
-            "export": false
-         }
-      ],
-      "service":[ 
-         { 
-            "data":"name",
-            "width":"600px",
-            "title":"Name",
-            "search":"text",
-            "className":"dt-body-left"
-         },
-         { 
-            "data":"last_modified",
-            "title":"Last Modified",
-            "search":"text",
-            "visible":false
-         },
-         { 
-            "data":"type",
-            "title":"Type",
-            "search":"text"
-         },
-         { 
-            "data":"vendor",
-            "title":"Vendor",
-            "search":"text",
-            "visible":false
-         },
-         { 
-            "data":"operating_system",
-            "title":"Operating System",
-            "search":"text",
-            "visible":false
-         },
-         { 
-            "data":"creator",
-            "title":"Creator",
-            "search":"text"
-         },
-         { 
-            "data":"status",
-            "title":"Status",
-            "search":"text",
-            "width":"100px"
-         },
-         { 
-            "data":"buttons",
-            "width":"260px",
-            "orderable": false,
-            "export": false
-         }
-      ],
-      "run":[ 
-         { 
-            "data":"runtime",
-            "title":"Runtime",
-            "search":"text",
-            "width":"200px"
-         },
-         { 
-            "data":"duration",
-            "title":"Duration",
-            "search":"text",
-            "width":"100px"
-         },
-         { 
-            "data":"start_service_name",
-            "title":"Service",
-            "search":"text",
-            "orderable": false
-         },
-         {
-            "data":"creator",
-            "title":"User",
-            "search":"text",
-            "width": "120px"
-         },
-         {
-            "data":"trigger",
-            "title":"Trigger",
-            "search":"text",
-            "width": "100px"
-         },
-         { 
-            "data":"status",
-            "title":"Status",
-            "search":"text",
-            "width":"100px"
-         },
-         { 
-            "data":"progress",
-            "title":"Progress",
-            "width":"150px",
-            "orderable": false
-         },
-         { 
-            "data":"buttons",
-            "width":"90px",
-            "orderable": false,
-            "export": false
-         }
-      ],
-      "result":[ 
-         { 
-            "data":"runtime",
-            "title":"Runtime",
-            "search":"text"
-         },
-         { 
-            "data":"duration",
-            "title":"Duration",
-            "search":"text"
-         },
-         { 
-            "data":"device_name",
-            "title":"Device",
-            "search":"text",
-            "orderable": false
-         },
-         { 
-            "data":"success",
-            "title":"Status",
-            "search":"bool",
-            "width":"80px",
-            "orderable": false
-         },
-         { 
-            "data":"buttons",
-            "orderable": false,
-            "export": false
-         },
-         { 
-            "data":"v1",
-            "title":"V1",
-            "orderable": false
-         },
-         { 
-            "data":"v2",
-            "title":"V2",
-            "orderable": false
-         }
-      ],
-      "device_result":[ 
-         { 
-            "data":"runtime",
-            "title":"Runtime",
-            "search":"text"
-         },
-         { 
-            "data":"duration",
-            "title":"Duration",
-            "search":"text"
-         },
-         { 
-            "data":"service_name",
-            "title":"Service",
-            "search":"text",
-            "orderable": false
-         },
-         { 
-            "data":"success",
-            "title":"Status",
-            "search":"text",
-            "width":"80px",
-            "orderable": false
-         },
-         { 
-            "data":"buttons",
-            "orderable": false,
-            "export": false
-         },
-         { 
-            "data":"v1",
-            "title":"V1",
-            "orderable": false
-         },
-         { 
-            "data":"v2",
-            "title":"V2",
-            "orderable": false
-         }
-      ],
-      "task":[ 
-         { 
-            "data":"name",
-            "title":"Name",
-            "search":"text"
-         },
-         { 
-            "data":"service_name",
-            "title":"Service",
-            "search":"text",
-            "orderable": false
-         },
-         { 
-            "data":"status",
-            "title":"Status",
-            "search":"text",
-            "width":"100px"
-         },
-         { 
-            "data":"scheduling_mode",
-            "title":"Scheduling",
-            "search":"text",
-            "width":"100px",
-            "visible":false
-         },
-         { 
-            "data":"periodicity",
-            "title":"Periodicity",
-            "search":"text",
-            "width":"100px",
-            "orderable": false
-         },
-         { 
-            "data":"next_run_time",
-            "title":"Next run time",
-            "search":"text",
-            "width":"150px",
-            "orderable": false
-         },
-         { 
-            "data":"time_before_next_run",
-            "title":"Time left",
-            "search":"text",
-            "width":"150px",
-            "orderable": false
-         },
-         { 
-            "data":"buttons",
-            "width":"200px",
-            "orderable": false,
-            "export": false
-         }
-      ],
-      "user":[ 
-         { 
-            "data":"name",
-            "title":"Username",
-            "search":"text"
-         },
-         { 
-            "data":"email",
-            "title":"Email Address",
-            "search":"text"
-         },
-         { 
-            "data":"buttons",
-            "width":"130px",
-            "orderable": false,
-            "export": false
-         }
-      ],
-      "group":[ 
-         { 
-            "data":"name",
-            "title":"Name",
-            "search":"text"
-         },
-         { 
-            "data":"email",
-            "title":"Email Address",
-            "search":"text"
-         },
-         { 
-            "data":"buttons",
-            "width":"130px",
-            "orderable": false,
-            "export": false
-         }
-      ],
-      "server":[ 
-         { 
-            "data":"name",
-            "title":"Username",
-            "search":"text"
-         },
-         { 
-            "data":"description",
-            "title":"Description",
-            "search":"text",
-            "orderable": false
-         },
-         { 
-            "data":"ip_address",
-            "title":"IP address",
-            "search":"text"
-         },
-         { 
-            "data":"weight",
-            "title":"Weight",
-            "search":"text"
-         },
-         { 
-            "data":"status",
-            "title":"Status",
-            "search":"text"
-         },
-         { 
-            "data":"buttons",
-            "width":"130px",
-            "orderable": false,
-            "export": false
-         }
-      ],
-      "changelog":[ 
-         { 
-            "data":"time",
-            "title":"Time",
-            "search":"text",
-            "width":"200px"
-         },
-         { 
-            "data":"user",
-            "title":"User",
-            "search":"text",
-            "width":"100px",
-            "orderable": false
-         },
-         { 
-            "data":"severity",
-            "title":"Severity",
-            "search":"text",
-            "width":"80px",
-            "orderable": false
-         },
-         { 
-            "data":"content",
-            "title":"Content",
-            "search":"text",
-            "className":"dt-body-left",
-            "orderable": false
-         }
-      ],
-      "session":[ 
-         { 
-            "data":"timestamp",
-            "title":"Timestamp",
-            "search":"text",
-            "width":"200px"
-         },
-         { 
-            "data":"device_name",
-            "title":"Device",
-            "search":"text",
-            "width":"150px",
-            "orderable": false
-         },
-         { 
-            "data":"user",
-            "title":"User",
-            "search":"text",
-            "width":"100px",
-            "orderable": false
-         },
-         { 
-            "data":"name",
-            "title":"Session UUID",
-            "search":"text",
-            "width":"300px",
-            "orderable": false
-         },
-         { 
-            "data":"buttons",
-            "width":"40px",
-            "orderable": false,
-            "export": false
-         }
-      ],
-      "event":[ 
-         { 
-            "data":"name",
-            "title":"Name",
-            "search":"text"
-         },
-         { 
-            "data":"service_name",
-            "title":"Service",
-            "search":"text",
-            "orderable": false
-         },
-         { 
-            "data":"log_source",
-            "title":"Log",
-            "search":"text",
-            "orderable": false
-         },
-         { 
-            "data":"log_content",
-            "title":"Content",
-            "search":"text",
-            "orderable": false
-         },
-         { 
-            "data":"buttons",
-            "width":"120px",
-            "orderable": false,
-            "export": false
-         }
-      ]
-   },
-   "filtering":{ 
-      "device":[ 
-         "name",
-         "description",
-         "subtype",
-         "model",
-         "location",
-         "vendor",
-         "icon",
-         "operating_system",
-         "os_version",
-         "netmiko_driver",
-         "napalm_driver",
-         "ip_address",
-         "port",
-         "longitude",
-         "latitude",
-         "configuration",
-         "operational_data",
-         "property1"
-      ],
-      "link":[ 
-         "name",
-         "description",
-         "subtype",
-         "model",
-         "location",
-         "vendor",
-         "color",
-         "source_name",
-         "destination_name"
-      ]
-   }
+    },
+    "link": {
+      "property1": {
+        "pretty_name": "Custom Property",
+        "type": "string",
+        "default": "CP"
+      }
+    },
+    "pool": {
+      "property1": {
+        "pretty_name": "Custom Property",
+        "type": "string",
+        "default": "CP"
+      }
+    },
+    "service": {
+      "definition": {
+        "pretty_name": "Definition",
+        "default": "Definition"
+      },
+      "reserved": {
+        "pretty_name": "Reserved",
+        "type": "boolean",
+        "default": false
+      },
+      "impacting": {
+        "pretty_name": "Impacting",
+        "type": "boolean",
+        "default": true
+      },
+      "completion_time": {
+        "pretty_name": "Completion time",
+        "type": "integer",
+        "default": 1
+      }
+    }
+  },
+  "dashboard": {
+    "device": [
+      "model",
+      "vendor",
+      "subtype",
+      "icon",
+      "operating_system",
+      "os_version",
+      "port",
+      "property1",
+      "property2"
+    ],
+    "link": ["model", "vendor", "subtype", "icon", "location"],
+    "service": [
+      "vendor",
+      "operating_system",
+      "creator",
+      "send_notification",
+      "send_notification_method",
+      "multiprocessing",
+      "max_processes",
+      "number_of_retries",
+      "time_between_retries"
+    ],
+    "workflow": [
+      "vendor",
+      "operating_system",
+      "creator",
+      "send_notification",
+      "send_notification_method",
+      "multiprocessing",
+      "max_processes",
+      "number_of_retries",
+      "time_between_retries"
+    ],
+    "user": ["name"],
+    "task": [
+      "status",
+      "frequency",
+      "frequency_unit",
+      "crontab_expression",
+      "service_name"
+    ]
+  },
+  "tables": {
+    "device": [
+      {
+        "data": "name",
+        "title": "Name",
+        "search": "text"
+      },
+      {
+        "data": "description",
+        "title": "Description",
+        "search": "text",
+        "visible": false,
+        "orderable": false
+      },
+      {
+        "data": "subtype",
+        "title": "Subtype",
+        "search": "text",
+        "visible": false
+      },
+      {
+        "data": "model",
+        "title": "Model",
+        "search": "text"
+      },
+      {
+        "data": "location",
+        "title": "Location",
+        "search": "text",
+        "visible": false
+      },
+      {
+        "data": "vendor",
+        "title": "Vendor",
+        "search": "text"
+      },
+      {
+        "data": "operating_system",
+        "title": "Operating System",
+        "search": "text"
+      },
+      {
+        "data": "os_version",
+        "title": "OS Version",
+        "search": "text"
+      },
+      {
+        "data": "ip_address",
+        "title": "IP Address",
+        "search": "text"
+      },
+      {
+        "data": "port",
+        "title": "Port",
+        "search": "text",
+        "visible": false
+      },
+      {
+        "data": "property1",
+        "title": "Property 1",
+        "search": "text",
+        "visible": false
+      },
+      {
+        "data": "buttons",
+        "width": "230px",
+        "orderable": false,
+        "export": false
+      }
+    ],
+    "configuration": [
+      {
+        "data": "name",
+        "title": "Name",
+        "search": "text"
+      },
+      {
+        "data": "description",
+        "title": "Description",
+        "search": "text",
+        "visible": false,
+        "orderable": false
+      },
+      {
+        "data": "subtype",
+        "title": "Subtype",
+        "search": "text",
+        "visible": false
+      },
+      {
+        "data": "model",
+        "title": "Model",
+        "search": "text",
+        "visible": false
+      },
+      {
+        "data": "location",
+        "title": "Location",
+        "search": "text",
+        "visible": false
+      },
+      {
+        "data": "vendor",
+        "title": "Vendor",
+        "search": "text",
+        "visible": false
+      },
+      {
+        "data": "operating_system",
+        "title": "Operating System",
+        "search": "text",
+        "visible": false
+      },
+      {
+        "data": "os_version",
+        "title": "OS Version",
+        "search": "text",
+        "visible": false
+      },
+      {
+        "data": "ip_address",
+        "title": "IP Address",
+        "search": "text",
+        "visible": false
+      },
+      {
+        "data": "port",
+        "title": "Port",
+        "search": "text",
+        "visible": false
+      },
+      {
+        "data": "configuration",
+        "title": "Configuration",
+        "search": "text",
+        "width": "80%",
+        "visible": true,
+        "orderable": false
+      },
+      {
+        "data": "operational_data",
+        "title": "Operational Data",
+        "search": "text",
+        "width": "80%",
+        "visible": false,
+        "orderable": false
+      },
+      {
+        "data": "buttons",
+        "width": "130px",
+        "orderable": false,
+        "export": false
+      }
+    ],
+    "full_result": [
+      {
+        "data": "runtime",
+        "title": "Runtime",
+        "search": "text"
+      },
+      {
+        "data": "duration",
+        "title": "Duration",
+        "search": "text"
+      },
+      {
+        "data": "device_name",
+        "title": "Device",
+        "search": "text",
+        "orderable": false
+      },
+      {
+        "data": "service_name",
+        "title": "Service",
+        "search": "text",
+        "orderable": false
+      },
+      {
+        "data": "success",
+        "title": "Status",
+        "search": "bool",
+        "width": "80px",
+        "orderable": false
+      },
+      {
+        "data": "buttons",
+        "orderable": false,
+        "export": false
+      },
+      {
+        "data": "v1",
+        "title": "V1",
+        "orderable": false
+      },
+      {
+        "data": "v2",
+        "title": "V2",
+        "orderable": false
+      }
+    ],
+    "link": [
+      {
+        "data": "name",
+        "title": "Name",
+        "search": "text"
+      },
+      {
+        "data": "description",
+        "title": "Description",
+        "search": "text",
+        "visible": false,
+        "orderable": false
+      },
+      {
+        "data": "subtype",
+        "title": "Subtype",
+        "search": "text",
+        "visible": false
+      },
+      {
+        "data": "model",
+        "title": "Model",
+        "search": "text"
+      },
+      {
+        "data": "location",
+        "title": "Location",
+        "search": "text"
+      },
+      {
+        "data": "vendor",
+        "title": "Vendor",
+        "search": "text"
+      },
+      {
+        "data": "source_name",
+        "title": "Source",
+        "search": "text",
+        "orderable": false
+      },
+      {
+        "data": "destination_name",
+        "title": "Destination",
+        "search": "text",
+        "orderable": false
+      },
+      {
+        "data": "property1",
+        "title": "Property 1",
+        "search": "text",
+        "visible": false
+      },
+      {
+        "data": "buttons",
+        "width": "130px",
+        "orderable": false,
+        "export": false
+      }
+    ],
+    "pool": [
+      {
+        "data": "name",
+        "title": "Name",
+        "search": "text"
+      },
+      {
+        "data": "last_modified",
+        "title": "Last modified",
+        "search": "text",
+        "width": "150px"
+      },
+      {
+        "data": "description",
+        "title": "Description",
+        "search": "text",
+        "orderable": false
+      },
+      {
+        "data": "manually_defined",
+        "title": "Manually defined",
+        "search": "bool",
+        "width": "100px"
+      },
+      {
+        "data": "objectNumber",
+        "title": "Object Count",
+        "width": "150px",
+        "orderable": false
+      },
+      {
+        "data": "buttons",
+        "width": "250px",
+        "orderable": false,
+        "export": false
+      }
+    ],
+    "service": [
+      {
+        "data": "name",
+        "width": "600px",
+        "title": "Name",
+        "search": "text",
+        "className": "dt-body-left"
+      },
+      {
+        "data": "last_modified",
+        "title": "Last Modified",
+        "search": "text",
+        "visible": false
+      },
+      {
+        "data": "type",
+        "title": "Type",
+        "search": "text"
+      },
+      {
+        "data": "vendor",
+        "title": "Vendor",
+        "search": "text",
+        "visible": false
+      },
+      {
+        "data": "operating_system",
+        "title": "Operating System",
+        "search": "text",
+        "visible": false
+      },
+      {
+        "data": "creator",
+        "title": "Creator",
+        "search": "text"
+      },
+      {
+        "data": "status",
+        "title": "Status",
+        "search": "text",
+        "width": "100px"
+      },
+      {
+        "data": "buttons",
+        "width": "260px",
+        "orderable": false,
+        "export": false
+      }
+    ],
+    "run": [
+      {
+        "data": "runtime",
+        "title": "Runtime",
+        "search": "text",
+        "width": "200px"
+      },
+      {
+        "data": "duration",
+        "title": "Duration",
+        "search": "text",
+        "width": "100px"
+      },
+      {
+        "data": "start_service_name",
+        "title": "Service",
+        "search": "text",
+        "orderable": false
+      },
+      {
+        "data": "creator",
+        "title": "User",
+        "search": "text",
+        "width": "120px"
+      },
+      {
+        "data": "trigger",
+        "title": "Trigger",
+        "search": "text",
+        "width": "100px"
+      },
+      {
+        "data": "status",
+        "title": "Status",
+        "search": "text",
+        "width": "100px"
+      },
+      {
+        "data": "progress",
+        "title": "Progress",
+        "width": "150px",
+        "orderable": false
+      },
+      {
+        "data": "buttons",
+        "width": "90px",
+        "orderable": false,
+        "export": false
+      }
+    ],
+    "result": [
+      {
+        "data": "runtime",
+        "title": "Runtime",
+        "search": "text"
+      },
+      {
+        "data": "duration",
+        "title": "Duration",
+        "search": "text"
+      },
+      {
+        "data": "device_name",
+        "title": "Device",
+        "search": "text",
+        "orderable": false
+      },
+      {
+        "data": "success",
+        "title": "Status",
+        "search": "bool",
+        "width": "80px",
+        "orderable": false
+      },
+      {
+        "data": "buttons",
+        "orderable": false,
+        "export": false
+      },
+      {
+        "data": "v1",
+        "title": "V1",
+        "orderable": false
+      },
+      {
+        "data": "v2",
+        "title": "V2",
+        "orderable": false
+      }
+    ],
+    "device_result": [
+      {
+        "data": "runtime",
+        "title": "Runtime",
+        "search": "text"
+      },
+      {
+        "data": "duration",
+        "title": "Duration",
+        "search": "text"
+      },
+      {
+        "data": "service_name",
+        "title": "Service",
+        "search": "text",
+        "orderable": false
+      },
+      {
+        "data": "success",
+        "title": "Status",
+        "search": "text",
+        "width": "80px",
+        "orderable": false
+      },
+      {
+        "data": "buttons",
+        "orderable": false,
+        "export": false
+      },
+      {
+        "data": "v1",
+        "title": "V1",
+        "orderable": false
+      },
+      {
+        "data": "v2",
+        "title": "V2",
+        "orderable": false
+      }
+    ],
+    "task": [
+      {
+        "data": "name",
+        "title": "Name",
+        "search": "text"
+      },
+      {
+        "data": "service_name",
+        "title": "Service",
+        "search": "text",
+        "orderable": false
+      },
+      {
+        "data": "status",
+        "title": "Status",
+        "search": "text",
+        "width": "100px"
+      },
+      {
+        "data": "scheduling_mode",
+        "title": "Scheduling",
+        "search": "text",
+        "width": "100px",
+        "visible": false
+      },
+      {
+        "data": "periodicity",
+        "title": "Periodicity",
+        "search": "text",
+        "width": "100px",
+        "orderable": false
+      },
+      {
+        "data": "next_run_time",
+        "title": "Next run time",
+        "search": "text",
+        "width": "150px",
+        "orderable": false
+      },
+      {
+        "data": "time_before_next_run",
+        "title": "Time left",
+        "search": "text",
+        "width": "150px",
+        "orderable": false
+      },
+      {
+        "data": "buttons",
+        "width": "200px",
+        "orderable": false,
+        "export": false
+      }
+    ],
+    "user": [
+      {
+        "data": "name",
+        "title": "Username",
+        "search": "text"
+      },
+      {
+        "data": "email",
+        "title": "Email Address",
+        "search": "text"
+      },
+      {
+        "data": "buttons",
+        "width": "130px",
+        "orderable": false,
+        "export": false
+      }
+    ],
+    "group": [
+      {
+        "data": "name",
+        "title": "Name",
+        "search": "text"
+      },
+      {
+        "data": "email",
+        "title": "Email Address",
+        "search": "text"
+      },
+      {
+        "data": "buttons",
+        "width": "130px",
+        "orderable": false,
+        "export": false
+      }
+    ],
+    "server": [
+      {
+        "data": "name",
+        "title": "Username",
+        "search": "text"
+      },
+      {
+        "data": "description",
+        "title": "Description",
+        "search": "text",
+        "orderable": false
+      },
+      {
+        "data": "ip_address",
+        "title": "IP address",
+        "search": "text"
+      },
+      {
+        "data": "weight",
+        "title": "Weight",
+        "search": "text"
+      },
+      {
+        "data": "status",
+        "title": "Status",
+        "search": "text"
+      },
+      {
+        "data": "buttons",
+        "width": "130px",
+        "orderable": false,
+        "export": false
+      }
+    ],
+    "changelog": [
+      {
+        "data": "time",
+        "title": "Time",
+        "search": "text",
+        "width": "200px"
+      },
+      {
+        "data": "user",
+        "title": "User",
+        "search": "text",
+        "width": "100px",
+        "orderable": false
+      },
+      {
+        "data": "severity",
+        "title": "Severity",
+        "search": "text",
+        "width": "80px",
+        "orderable": false
+      },
+      {
+        "data": "content",
+        "title": "Content",
+        "search": "text",
+        "className": "dt-body-left",
+        "orderable": false
+      }
+    ],
+    "session": [
+      {
+        "data": "timestamp",
+        "title": "Timestamp",
+        "search": "text",
+        "width": "200px"
+      },
+      {
+        "data": "device_name",
+        "title": "Device",
+        "search": "text",
+        "width": "150px",
+        "orderable": false
+      },
+      {
+        "data": "user",
+        "title": "User",
+        "search": "text",
+        "width": "100px",
+        "orderable": false
+      },
+      {
+        "data": "name",
+        "title": "Session UUID",
+        "search": "text",
+        "width": "300px",
+        "orderable": false
+      },
+      {
+        "data": "buttons",
+        "width": "40px",
+        "orderable": false,
+        "export": false
+      }
+    ],
+    "event": [
+      {
+        "data": "name",
+        "title": "Name",
+        "search": "text"
+      },
+      {
+        "data": "service_name",
+        "title": "Service",
+        "search": "text",
+        "orderable": false
+      },
+      {
+        "data": "log_source",
+        "title": "Log",
+        "search": "text",
+        "orderable": false
+      },
+      {
+        "data": "log_content",
+        "title": "Content",
+        "search": "text",
+        "orderable": false
+      },
+      {
+        "data": "buttons",
+        "width": "120px",
+        "orderable": false,
+        "export": false
+      }
+    ]
+  },
+  "filtering": {
+    "device": [
+      "name",
+      "description",
+      "subtype",
+      "model",
+      "location",
+      "vendor",
+      "icon",
+      "operating_system",
+      "os_version",
+      "netmiko_driver",
+      "napalm_driver",
+      "ip_address",
+      "port",
+      "longitude",
+      "latitude",
+      "configuration",
+      "operational_data",
+      "property1"
+    ],
+    "link": [
+      "name",
+      "description",
+      "subtype",
+      "model",
+      "location",
+      "vendor",
+      "color",
+      "source_name",
+      "destination_name"
+    ]
+  }
 }

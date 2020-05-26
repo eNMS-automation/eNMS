@@ -780,7 +780,7 @@ function restartWorkflow() {
   call({
     url: `/run_service/${currentPath}`,
     form: `restart_workflow-form`,
-    callback: function(result) {
+    callback: function (result) {
       $(`#restart_workflow-${workflow.id}`).remove();
       runLogic(result);
     },

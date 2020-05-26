@@ -310,7 +310,6 @@ class RestartWorkflowForm(BaseForm):
     form_type = HiddenField(default="restart_workflow")
     start_services = MultipleInstanceField("Services", model="service")
     restart_runtime = SelectField("Restart Runtime", choices=(), validation=False)
-    restart_from_top_level_workflow = BooleanField(default=True)
 
 
 class FileForm(BaseForm):

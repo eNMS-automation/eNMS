@@ -362,7 +362,6 @@ class AutomationController(BaseController):
             for key in (
                 "trigger",
                 "creator",
-                "restart_path",
                 "start_services",
                 "runtime",
                 "task",
@@ -389,12 +388,7 @@ class AutomationController(BaseController):
         return run.run({**initial_payload, **kwargs})
 
     def run_service(self, path, **kwargs):
-        path_ids = str(path).split(">")
-        if kwargs.get("restart_from_top_level_workflow", False):
-            kwargs["restart_path"] = f"{path}>{'-'.join(kwargs['start_services'])}"
-            service_id = path_ids[0]
-        else:
-            service_id = path_ids[-1]
+        service_id = str(path).split(">")[-1]
         for property in ("user", "csrf_token", "form_type"):
             kwargs.pop(property, None)
         kwargs["creator"] = getattr(current_user, "name", "")

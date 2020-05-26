@@ -446,7 +446,11 @@ export function configureForm(form, id, panelId) {
         selectedTextFormat: "count > 3",
       });
     } else if (field.type == "json") {
-      let editor = new JSONEditor(el[0]);
+      let editor = new JSONEditor(el.next()[0], {
+        onChange: function () {
+          $(el).val(JSON.stringify(editor.get()));
+        },
+      });
       if (id) {
         if (!jsonEditors[id]) jsonEditors[id] = {};
         jsonEditors[id][property] = editor;
@@ -471,7 +475,6 @@ export function configureForm(form, id, panelId) {
       } else {
         model = field.model;
       }
-
       initSelect(el, model, panelId, field.type == "object");
     }
   }

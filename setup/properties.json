@@ -27,6 +27,11 @@
             "default": "password",
             "type":"string",
             "private":true
+         },
+         "attributes": {
+            "pretty_name":"Attributes",
+            "default": {},
+            "type": "json"
          }
       },
       "link":{ 

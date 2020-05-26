@@ -379,8 +379,10 @@ class Database:
                 self.Column(
                     {
                         "boolean": Boolean,
+                        "dict": self.Dict,
                         "float": Float,
                         "integer": Integer,
+                        "json": JSON,
                         "string": self.LargeString,
                     }[values.get("type", "string")],
                     **kwargs,

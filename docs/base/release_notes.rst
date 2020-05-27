@@ -35,6 +35,8 @@ for a given logger should also be logged as changelog or service log by default.
 - Remove summary from service state to improve workflow refresh performances
 - Add Dark mode and theme mechanism
 - Make search endpoint work with result to retrieve device results
+- Allow dictionary and json as custom properties. For json properties, use jsoneditor to let the user
+edit them.
 
 MIGRATION:
 - Remove RBAC in rbac.json

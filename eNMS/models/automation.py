@@ -1032,6 +1032,7 @@ class Run(AbstractBase):
 
     def global_variables(_self, **locals):  # noqa: N805
         payload, device = locals.get("payload", {}), locals.get("device")
+        print("TTT"*100, _self.original.placeholder)
         variables = {
             "__builtins__": {**builtins, "__import__": _self._import},
             "send_email": app.send_email,
@@ -1043,6 +1044,7 @@ class Run(AbstractBase):
             "workflow": _self.workflow,
             "set_var": partial(_self.payload_helper, payload),
             "parent_device": _self.parent_device or device,
+            "placeholder": _self.original.placeholder,
             **locals,
         }
         if "variables" not in payload:

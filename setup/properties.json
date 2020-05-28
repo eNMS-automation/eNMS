@@ -32,6 +32,11 @@
         "default": "password",
         "type": "string",
         "private": true
+      },
+      "custom_configuration": {
+        "pretty_name": "Custom Configuration",
+        "default": "",
+        "configuration": true
       }
     },
     "link": {

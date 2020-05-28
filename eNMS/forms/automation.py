@@ -91,9 +91,9 @@ class ServiceForm(BaseForm):
     max_processes = IntegerField("Maximum number of processes", default=15)
     validation_condition = SelectField(
         choices=(
-            ("always", "Always run"),
             ("success", "Run on success only"),
             ("failure", "Run on failure only"),
+            ("always", "Always run"),
         )
     )
     conversion_method = SelectField(

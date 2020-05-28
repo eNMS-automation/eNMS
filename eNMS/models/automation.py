@@ -112,7 +112,7 @@ class Service(AbstractBase):
     maximum_runs = db.Column(Integer, default=1)
     multiprocessing = db.Column(Boolean, default=False)
     max_processes = db.Column(Integer, default=5)
-    validation_condition = db.Column(db.SmallString, default="always")
+    validation_condition = db.Column(db.SmallString, default="success")
     conversion_method = db.Column(db.SmallString, default="none")
     validation_method = db.Column(db.SmallString, default="none")
     content_match = db.Column(db.LargeString)
@@ -718,10 +718,17 @@ class Run(AbstractBase):
                             retries = exec_variables["retries"]
                     except SystemExit:
                         pass
-                if results["success"] and self.validation_method != "none":
+                run_validation = (
+                    self.validation_condition == "always"
+                    or self.validation_condition == "failure"
+                    and not results["success"]
+                    or self.validation_condition == "success"
+                    and results["success"]
+                )
+                if run_validation and self.validation_method != "none":
                     self.validate_result(results, payload, device)
-                if self.negative_logic and self.validation_method != "none":
-                    results["success"] = not results["success"]
+                    if self.negative_logic:
+                        results["success"] = not results["success"]
                 if results["success"]:
                     return results
                 elif retries:

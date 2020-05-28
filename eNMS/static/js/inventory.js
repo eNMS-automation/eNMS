@@ -327,9 +327,7 @@ function showGitConfiguration(device, commit) {
   call({
     url: `/get_git_network_data/${device.name}/${commit.hash}`,
     callback: (result) => {
-      const type = $(`#data-type-${device.id}`).prop("checked")
-        ? "operational_data"
-        : "configuration";
+      const type = $(`#data-type-${device.id}`).val();
       displayNetworkData(type, commit.hash, result, commit.date);
     },
   });
@@ -352,12 +350,10 @@ function showGitHistory(device) {
               role="navigation"
               style="margin-top: 5px"
             >
-              <input
-                id="data-type-${device.id}"
-                type="checkbox"
-                data-onstyle="info"
-                data-offstyle="primary"
-              >
+              <select id="data-type-${device.id}">
+                <option value="configuration">Configuration</option>
+                <option value="operational_data">Operational Data</option>
+              </select>
               <button
                 class="btn btn-info"
                 id="compare-${device.id}-btn"
@@ -379,11 +375,7 @@ function showGitHistory(device) {
               </table>
             <div>`,
           callback: () => {
-            $(`#data-type-${device.id}`).bootstrapToggle({
-              on: "Operational Data",
-              off: "Configuration",
-              width: "150px",
-            });
+            $(`#data-type-${device.id}`).selectpicker("refresh");
             let table = $(`#configuration-table-${device.id}`)
               // eslint-disable-next-line new-cap
               .DataTable({
@@ -400,15 +392,12 @@ function showGitHistory(device) {
             $(`#data-type-${device.id}`)
               .on("change", function () {
                 table.clear();
-                const data = $(this).prop("checked")
-                  ? "operational_data"
-                  : "configuration";
                 $(`#compare-${device.id}-btn`)
                   .unbind("click")
                   .on("click", function () {
-                    compare(data, device);
+                    compare(this.value, device);
                   });
-                commits[data].forEach((commit) => {
+                commits[this.value].forEach((commit) => {
                   table.row.add([
                     `${commit.date}`,
                     `${commit.hash}`,
@@ -425,12 +414,12 @@ function showGitHistory(device) {
                     </button>`,
                     `<input
                       type="radio"
-                      name="v1-${data}-${device.id}"
+                      name="v1-${this.value}-${device.id}"
                       value="${commit.hash}">
                     </input>`,
                     `<input
                       type="radio"
-                      name="v2-${data}-${device.id}"
+                      name="v2-${this.value}-${device.id}"
                       value="${commit.hash}">
                     </input>`,
                   ]);

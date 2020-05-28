@@ -168,12 +168,13 @@ class BaseController:
     def load_custom_properties(self):
         for model, values in self.properties["custom"].items():
             for property, property_dict in values.items():
-                self.property_names[property] = property_dict["pretty_name"]
+                pretty_name = property_dict["pretty_name"]
+                self.property_names[property] = pretty_name
                 model_properties[model].append(property)
                 if property_dict.get("private"):
                     db.private_properties.append(property)
                 if model == "device" and property_dict.get("configuration"):
-                    self.configuration_properties.append(property)
+                    self.configuration_properties[property] = pretty_name
 
     def init_logs(self):
         folder = self.path / "logs"

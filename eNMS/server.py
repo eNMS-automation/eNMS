@@ -157,10 +157,11 @@ class Server(Flask):
         @self.context_processor
         def inject_properties():
             return {
-                "property_types": property_types,
+                "configuration_properties": app.configuration_properties,
                 "form_properties": form_properties,
                 "menu": rbac["menu"],
                 "names": app.property_names,
+                "property_types": property_types,
                 "relations": list(set(chain.from_iterable(relationships.values()))),
                 "relationships": relationships,
                 "service_types": {

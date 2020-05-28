@@ -37,6 +37,9 @@ for a given logger should also be logged as changelog or service log by default.
 - Make search endpoint work with result to retrieve device results
 - Allow dictionary and json as custom properties. For json properties, use jsoneditor to let the user
 edit them.
+- Add example of model in template plugins
+- Add placeholder as a global variable in a workflow (e.g to be used in the superworkflow)
+- Add mechanism for creating custom configuration property
 
 MIGRATION:
 - Remove RBAC in rbac.json

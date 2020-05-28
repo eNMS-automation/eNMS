@@ -370,7 +370,9 @@ class Database:
         return instance
 
     def set_custom_properties(self, model):
-        for property, values in properties["custom"].get(model.__tablename__, {}).items():
+        for property, values in (
+            properties["custom"].get(model.__tablename__, {}).items()
+        ):
             is_private = values.get("private", False)
             kwargs = {"default": values["default"]} if not is_private else {}
             setattr(

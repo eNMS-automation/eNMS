@@ -285,6 +285,7 @@
       window.eNMS = {};
       const page = "{{ endpoint }}";
       const user = {{ user|tojson|safe }};
+      const configurationProperties = {{ configuration_properties|tojson|safe }};
       const propertyTypes = {{ property_types|tojson|safe }};
       const formProperties = {{ form_properties|tojson|safe }};
       const names = {{ names|tojson|safe }};

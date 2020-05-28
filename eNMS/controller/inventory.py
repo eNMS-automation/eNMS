@@ -22,7 +22,10 @@ from eNMS.models import models, model_properties, property_types
 class InventoryController(BaseController):
 
     ssh_port = -1
-    configuration_properties = ["configuration", "operational_data"]
+    configuration_properties = {
+        "configuration": "Configuration",
+        "operational_data": "Operational Data",
+    }
 
     def get_ssh_port(self):
         self.ssh_port += 1

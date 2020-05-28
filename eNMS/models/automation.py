@@ -112,6 +112,7 @@ class Service(AbstractBase):
     maximum_runs = db.Column(Integer, default=1)
     multiprocessing = db.Column(Boolean, default=False)
     max_processes = db.Column(Integer, default=5)
+    validation_mode = db.Column(db.SmallString, default="success")
     conversion_method = db.Column(db.SmallString, default="none")
     validation_method = db.Column(db.SmallString, default="none")
     content_match = db.Column(db.LargeString)
@@ -719,7 +720,7 @@ class Run(AbstractBase):
                         pass
                 if results["success"] and self.validation_method != "none":
                     self.validate_result(results, payload, device)
-                if self.negative_logic:
+                if self.negative_logic and self.validation_method != "none":
                     results["success"] = not results["success"]
                 if results["success"]:
                     return results

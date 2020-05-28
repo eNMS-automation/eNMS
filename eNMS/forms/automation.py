@@ -89,11 +89,11 @@ class ServiceForm(BaseForm):
     )
     multiprocessing = BooleanField("Multiprocessing")
     max_processes = IntegerField("Maximum number of processes", default=15)
-    validation_mode = SelectField(
+    validation_condition = SelectField(
         choices=(
-            ("success", "Validate on success only"),
-            ("failure", "Validate on failure only"),
-            ("always", "Always validate"),
+            ("always", "Always run"),
+            ("success", "Run on success only"),
+            ("failure", "Run on failure only"),
         )
     )
     conversion_method = SelectField(

@@ -622,6 +622,11 @@
               aria-labelledby="heading-step4-2"
             >
               <div class="panel-body" style="background-color: #fafafa;">
+                {{ form.validation_condition.label() }}
+                <div class="form-group">
+                  {{ form.validation_condition(id=form_type + '-validation_condition',
+                  class="form-control add-id") }}
+                </div>
                 {{ form.conversion_method.label() }}
                 <div class="form-group">
                   {{ form.conversion_method(id=form_type + '-conversion_method',

@@ -61,7 +61,7 @@
     'Regression Workflow I: Iteration Targets Advanced': [-131, -24]
     'Regression Workflow J: Workflow and Subworkflow Iteration': [0, 0]
     'Regression Workflow K: preprocessing and postprocessing': [-197, -37]
-    'Regression Workflow L: superworkflow': [0, 0]
+    'Regression Workflow L: superworkflow': [-179, 6]
     'Regression Workflow M: Unix command & shell, ping, - jump on connect - mechanism': [
       -382, 39]
     'Regression Workflow M: Unix command & shell, ping, jump server': [-341, 17]
@@ -118,6 +118,7 @@
   time_between_retries: 10
   type: swiss_army_knife_service
   update_pools: false
+  validation_condition: success
   validation_method: none
   vendor: ''
   waiting_time: 0
@@ -184,7 +185,7 @@
     'Regression Workflow I: Iteration Targets Advanced': [350, -6]
     'Regression Workflow J: Workflow and Subworkflow Iteration': [500, 0]
     'Regression Workflow K: preprocessing and postprocessing': [619, 353]
-    'Regression Workflow L: superworkflow': [500, 0]
+    'Regression Workflow L: superworkflow': [716, 138]
     'Regression Workflow M: Unix command & shell, ping, - jump on connect - mechanism': [
       560, 9]
     'Regression Workflow M: Unix command & shell, ping, jump server': [560, 9]
@@ -244,6 +245,7 @@
   time_between_retries: 10
   type: swiss_army_knife_service
   update_pools: false
+  validation_condition: success
   validation_method: none
   vendor: ''
   waiting_time: 0
@@ -300,6 +302,7 @@
   time_between_retries: 10
   type: swiss_army_knife_service
   update_pools: false
+  validation_condition: success
   validation_method: none
   vendor: ''
   waiting_time: 0
@@ -357,6 +360,7 @@
   time_between_retries: 10
   type: swiss_army_knife_service
   update_pools: false
+  validation_condition: success
   validation_method: none
   vendor: ''
   waiting_time: 0
@@ -431,6 +435,7 @@
   type: example_service
   update_pools: false
   url: https://www.google.fr/
+  validation_condition: success
   validation_method: none
   vendor: ''
   waiting_time: 0
@@ -498,6 +503,7 @@
   time_between_retries: 10
   type: configure_bgp_service
   update_pools: false
+  validation_condition: success
   validation_method: none
   vendor: ''
   vrf_name: configure_BGP_test
@@ -567,6 +573,7 @@
   type: napalm_backup_service
   update_pools: false
   use_device_driver: true
+  validation_condition: success
   validation_method: none
   vendor: ''
   waiting_time: 0
@@ -642,6 +649,7 @@
   type: netmiko_configuration_service
   update_pools: false
   use_device_driver: true
+  validation_condition: success
   validation_method: none
   vendor: Arista
   waiting_time: 0
@@ -729,6 +737,7 @@
   update_pools: false
   use_device_driver: true
   use_genie: false
+  validation_condition: success
   validation_method: text
   vendor: Arista
   waiting_time: 0
@@ -805,6 +814,7 @@
   type: netmiko_configuration_service
   update_pools: false
   use_device_driver: true
+  validation_condition: success
   validation_method: none
   vendor: Arista
   waiting_time: 1
@@ -890,6 +900,7 @@
   update_pools: false
   use_device_driver: true
   use_genie: false
+  validation_condition: success
   validation_method: text
   vendor: Arista
   waiting_time: 0
@@ -959,6 +970,7 @@
   type: napalm_configuration_service
   update_pools: false
   use_device_driver: true
+  validation_condition: success
   validation_method: none
   vendor: Arista
   waiting_time: 0
@@ -987,7 +999,7 @@
   iteration_devices_property: ip_address
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2020-05-28 05:51:55.739066'
+  last_modified: '2020-05-28 10:36:02.393623'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -1010,13 +1022,13 @@
     'Regression Workflow A: get_var, set_var, get_result': [-10, 157]
     'Regression Workflow C: Advanced multiprocessing': [340, 109]
     'Regression Workflow D: Prompts': [405, -103]
-    'Regression Workflow L: superworkflow': [224, -100]
+    'Regression Workflow L: superworkflow': [162, -126]
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
   reply_to: ''
   reserved: false
-  rest_url: http://127.0.0.1:5000/rest/{{ placeholder.definition }}
+  rest_url: http://127.0.0.1:5000/rest/is_alive
   run_method: per_device
   scoped_name: 'REST API: call *is_alive* endpoint'
   send_notification: false
@@ -1030,6 +1042,7 @@
   type: rest_call_service
   update_pools: false
   username: admin
+  validation_condition: success
   validation_method: text
   vendor: ''
   verify_ssl_certificate: true
@@ -1100,6 +1113,7 @@
   type: napalm_getters_service
   update_pools: false
   use_device_driver: true
+  validation_condition: success
   validation_method: dict_included
   vendor: ''
   waiting_time: 0
@@ -1168,6 +1182,7 @@
   type: napalm_getters_service
   update_pools: false
   use_device_driver: true
+  validation_condition: success
   validation_method: dict_included
   vendor: ''
   waiting_time: 0
@@ -1236,6 +1251,7 @@
   type: napalm_getters_service
   update_pools: false
   use_device_driver: true
+  validation_condition: success
   validation_method: dict_included
   vendor: ''
   waiting_time: 0
@@ -1303,6 +1319,7 @@
   type: napalm_getters_service
   update_pools: false
   use_device_driver: true
+  validation_condition: success
   validation_method: dict_included
   vendor: ''
   waiting_time: 0
@@ -1361,6 +1378,7 @@
   time_between_retries: 10
   type: swiss_army_knife_service
   update_pools: false
+  validation_condition: success
   validation_method: none
   vendor: ''
   waiting_time: 0
@@ -1427,6 +1445,7 @@
   time_between_retries: 10
   type: python_snippet_service
   update_pools: false
+  validation_condition: success
   validation_method: none
   vendor: ''
   waiting_time: 0
@@ -1513,6 +1532,7 @@
   update_pools: false
   use_device_driver: true
   use_genie: false
+  validation_condition: success
   validation_method: text
   vendor: Arista
   waiting_time: 0
@@ -1591,6 +1611,7 @@
   time_between_retries: 10
   type: payload_extraction_service
   update_pools: false
+  validation_condition: success
   validation_method: none
   variable1: simple_variable
   variable2: regex_variable
@@ -1661,6 +1682,7 @@
   type: napalm_rollback_service
   update_pools: false
   use_device_driver: true
+  validation_condition: success
   validation_method: none
   vendor: ''
   waiting_time: 0
@@ -1747,6 +1769,7 @@
   update_pools: false
   use_device_driver: true
   use_genie: false
+  validation_condition: success
   validation_method: text
   vendor: ''
   waiting_time: 0
@@ -1832,6 +1855,7 @@
   update_pools: false
   use_device_driver: true
   use_genie: false
+  validation_condition: success
   validation_method: text
   vendor: ''
   waiting_time: 0
@@ -1916,6 +1940,7 @@
   type: netmiko_prompts_service
   update_pools: false
   use_device_driver: true
+  validation_condition: success
   validation_method: text
   vendor: ''
   waiting_time: 0
@@ -2000,6 +2025,7 @@
   type: netmiko_prompts_service
   update_pools: false
   use_device_driver: true
+  validation_condition: success
   validation_method: text
   vendor: ''
   waiting_time: 0
@@ -2060,6 +2086,7 @@
   time_between_retries: 10
   type: python_snippet_service
   update_pools: false
+  validation_condition: success
   validation_method: none
   vendor: ''
   waiting_time: 0
@@ -2123,6 +2150,7 @@
   time_between_retries: 10
   type: python_snippet_service
   update_pools: false
+  validation_condition: success
   validation_method: none
   vendor: ''
   waiting_time: 0
@@ -2206,6 +2234,7 @@
   update_pools: false
   use_device_driver: true
   use_genie: false
+  validation_condition: success
   validation_method: text
   vendor: ''
   waiting_time: 0
@@ -2289,6 +2318,7 @@
   update_pools: false
   use_device_driver: true
   use_genie: false
+  validation_condition: success
   validation_method: text
   vendor: ''
   waiting_time: 0
@@ -2372,6 +2402,7 @@
   update_pools: false
   use_device_driver: true
   use_genie: false
+  validation_condition: success
   validation_method: text
   vendor: ''
   waiting_time: 0
@@ -2443,6 +2474,7 @@
   type: napalm_getters_service
   update_pools: false
   use_device_driver: true
+  validation_condition: success
   validation_method: dict_equal
   vendor: ''
   waiting_time: 0
@@ -2513,6 +2545,7 @@
   type: napalm_getters_service
   update_pools: false
   use_device_driver: true
+  validation_condition: success
   validation_method: dict_included
   vendor: ''
   waiting_time: 0
@@ -2585,6 +2618,7 @@
   type: napalm_getters_service
   update_pools: false
   use_device_driver: true
+  validation_condition: success
   validation_method: dict_included
   vendor: ''
   waiting_time: 0
@@ -2655,6 +2689,7 @@
   type: napalm_getters_service
   update_pools: false
   use_device_driver: true
+  validation_condition: success
   validation_method: dict_equal
   vendor: ''
   waiting_time: 0
@@ -2725,6 +2760,7 @@
   type: napalm_getters_service
   update_pools: false
   use_device_driver: true
+  validation_condition: success
   validation_method: dict_included
   vendor: ''
   waiting_time: 0
@@ -2788,6 +2824,7 @@
   time_between_retries: 10
   type: ansible_playbook_service
   update_pools: false
+  validation_condition: success
   validation_method: dict_included
   vendor: ''
   waiting_time: 0
@@ -2850,6 +2887,7 @@
   time_between_retries: 10
   type: ansible_playbook_service
   update_pools: false
+  validation_condition: success
   validation_method: text
   vendor: ''
   waiting_time: 0
@@ -2912,6 +2950,7 @@
   time_between_retries: 10
   type: ansible_playbook_service
   update_pools: false
+  validation_condition: success
   validation_method: dict_included
   vendor: ''
   waiting_time: 0
@@ -2995,6 +3034,7 @@
   update_pools: false
   use_device_driver: true
   use_genie: false
+  validation_condition: success
   validation_method: text
   vendor: ''
   waiting_time: 0
@@ -3078,6 +3118,7 @@
   update_pools: false
   use_device_driver: true
   use_genie: false
+  validation_condition: success
   validation_method: text
   vendor: Arista
   waiting_time: 0
@@ -3161,6 +3202,7 @@
   update_pools: false
   use_device_driver: true
   use_genie: false
+  validation_condition: success
   validation_method: text
   vendor: Arista
   waiting_time: 0
@@ -3244,6 +3286,7 @@
   update_pools: false
   use_device_driver: true
   use_genie: false
+  validation_condition: success
   validation_method: text
   vendor: Arista
   waiting_time: 0
@@ -3308,6 +3351,7 @@
   time_between_retries: 10
   type: python_snippet_service
   update_pools: false
+  validation_condition: success
   validation_method: none
   vendor: ''
   waiting_time: 0
@@ -3381,6 +3425,7 @@
   time_between_retries: 10
   type: payload_extraction_service
   update_pools: false
+  validation_condition: success
   validation_method: none
   variable1: boolean
   variable2: list
@@ -3457,6 +3502,7 @@
   time_between_retries: 10
   type: payload_extraction_service
   update_pools: false
+  validation_condition: success
   validation_method: none
   variable1: list
   variable2: list
@@ -3525,6 +3571,7 @@
   type: rest_call_service
   update_pools: false
   username: admin
+  validation_condition: success
   validation_method: text
   vendor: ''
   verify_ssl_certificate: false
@@ -3596,6 +3643,7 @@
   time_between_retries: 10
   type: python_snippet_service
   update_pools: false
+  validation_condition: success
   validation_method: none
   vendor: ''
   waiting_time: 0
@@ -3681,6 +3729,7 @@
   update_pools: false
   use_device_driver: true
   use_genie: false
+  validation_condition: success
   validation_method: text
   vendor: ''
   waiting_time: 0
@@ -3748,6 +3797,7 @@
   time_between_retries: 10
   type: workflow
   update_pools: false
+  validation_condition: success
   validation_method: none
   vendor: ''
   waiting_time: 0
@@ -3850,6 +3900,7 @@
   time_between_retries: 10
   type: workflow
   update_pools: false
+  validation_condition: success
   validation_method: none
   vendor: ''
   waiting_time: 0
@@ -3924,6 +3975,7 @@
   time_between_retries: 10
   type: workflow
   update_pools: false
+  validation_condition: success
   validation_method: none
   vendor: ''
   waiting_time: 0
@@ -3997,6 +4049,7 @@
   time_between_retries: 10
   type: workflow
   update_pools: false
+  validation_condition: success
   validation_method: none
   vendor: ''
   waiting_time: 0
@@ -4113,6 +4166,7 @@
   time_between_retries: 10
   type: workflow
   update_pools: false
+  validation_condition: success
   validation_method: none
   vendor: ''
   waiting_time: 0
@@ -4188,6 +4242,7 @@
   time_between_retries: 10
   type: workflow
   update_pools: false
+  validation_condition: success
   validation_method: none
   vendor: ''
   waiting_time: 0
@@ -4256,6 +4311,7 @@
   time_between_retries: 10
   type: workflow
   update_pools: false
+  validation_condition: success
   validation_method: none
   vendor: ''
   waiting_time: 0
@@ -4322,6 +4378,7 @@
   time_between_retries: 10
   type: workflow
   update_pools: false
+  validation_condition: success
   validation_method: none
   vendor: ''
   waiting_time: 0
@@ -4408,6 +4465,7 @@
   time_between_retries: 10
   type: workflow
   update_pools: false
+  validation_condition: success
   validation_method: none
   vendor: ''
   waiting_time: 0
@@ -4515,6 +4573,7 @@
   time_between_retries: 10
   type: workflow
   update_pools: false
+  validation_condition: success
   validation_method: none
   vendor: ''
   waiting_time: 0
@@ -4605,6 +4664,7 @@
   time_between_retries: 10
   type: workflow
   update_pools: false
+  validation_condition: success
   validation_method: none
   vendor: ''
   waiting_time: 0
@@ -4679,6 +4739,7 @@
   time_between_retries: 10
   type: workflow
   update_pools: false
+  validation_condition: success
   validation_method: none
   vendor: ''
   waiting_time: 0
@@ -4778,6 +4839,7 @@
   time_between_retries: 10
   type: workflow
   update_pools: false
+  validation_condition: success
   validation_method: none
   vendor: ''
   waiting_time: 0
@@ -4853,6 +4915,7 @@
   time_between_retries: 10
   type: workflow
   update_pools: false
+  validation_condition: success
   validation_method: none
   vendor: ''
   waiting_time: 0
@@ -4918,6 +4981,7 @@
   time_between_retries: 10
   type: workflow
   update_pools: false
+  validation_condition: success
   validation_method: none
   vendor: ''
   waiting_time: 0
@@ -4985,6 +5049,7 @@
   time_between_retries: 10
   type: workflow
   update_pools: false
+  validation_condition: success
   validation_method: none
   vendor: ''
   waiting_time: 0
@@ -5023,7 +5088,7 @@
         \ to check for the string \"NOVRF\".\r\nThere is no such VRF configured so\
         \ the service is expected to fail.\r\nRetry twice with 2 seconds between retries."
       positions: [-147, -217]
-  last_modified: '2020-02-23 09:44:26.466126'
+  last_modified: '2020-05-28 10:35:41.423468'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -5055,6 +5120,7 @@
   time_between_retries: 10
   type: workflow
   update_pools: false
+  validation_condition: success
   validation_method: none
   vendor: ''
   waiting_time: 0
@@ -5138,6 +5204,7 @@
   update_pools: false
   use_device_driver: true
   use_genie: false
+  validation_condition: success
   validation_method: text
   vendor: ''
   waiting_time: 0
@@ -5220,6 +5287,7 @@
   update_pools: false
   use_device_driver: true
   use_genie: false
+  validation_condition: success
   validation_method: none
   vendor: ''
   waiting_time: 0
@@ -5297,6 +5365,7 @@
   type: data_backup_service
   update_pools: false
   use_device_driver: true
+  validation_condition: success
   validation_method: none
   vendor: ''
   waiting_time: 0
@@ -5361,6 +5430,7 @@
   time_between_retries: 10
   type: workflow
   update_pools: false
+  validation_condition: success
   validation_method: none
   vendor: ''
   waiting_time: 0
@@ -5423,6 +5493,7 @@
   time_between_retries: 10
   type: workflow
   update_pools: false
+  validation_condition: success
   validation_method: none
   vendor: ''
   waiting_time: 0
@@ -5487,6 +5558,7 @@
   type: rest_call_service
   update_pools: false
   username: ''
+  validation_condition: success
   validation_method: none
   vendor: ''
   verify_ssl_certificate: false
@@ -5551,6 +5623,7 @@
   time_between_retries: 10
   type: workflow
   update_pools: false
+  validation_condition: success
   validation_method: none
   vendor: ''
   waiting_time: 0
@@ -5616,6 +5689,7 @@
   type: rest_call_service
   update_pools: false
   username: ''
+  validation_condition: success
   validation_method: none
   vendor: ''
   verify_ssl_certificate: false
@@ -5678,6 +5752,7 @@
   time_between_retries: 10
   type: workflow
   update_pools: false
+  validation_condition: success
   validation_method: none
   vendor: ''
   waiting_time: 0
@@ -5762,6 +5837,7 @@
   update_pools: false
   use_device_driver: true
   use_genie: false
+  validation_condition: success
   validation_method: none
   vendor: ''
   waiting_time: 0
@@ -5846,6 +5922,7 @@
   update_pools: false
   use_device_driver: true
   use_genie: false
+  validation_condition: success
   validation_method: none
   vendor: ''
   waiting_time: 0
@@ -5930,6 +6007,7 @@
   update_pools: false
   use_device_driver: true
   use_genie: false
+  validation_condition: success
   validation_method: none
   vendor: ''
   waiting_time: 0
@@ -6013,6 +6091,7 @@
   time_between_retries: 10
   type: workflow
   update_pools: false
+  validation_condition: success
   validation_method: none
   vendor: ''
   waiting_time: 0
@@ -6075,6 +6154,7 @@
   time_between_retries: 10
   type: workflow
   update_pools: false
+  validation_condition: success
   validation_method: none
   vendor: ''
   waiting_time: 0
@@ -6137,6 +6217,7 @@
   time_between_retries: 10
   type: workflow
   update_pools: false
+  validation_condition: success
   validation_method: none
   vendor: ''
   waiting_time: 0
@@ -6222,6 +6303,7 @@
   update_pools: false
   use_device_driver: true
   use_genie: false
+  validation_condition: success
   validation_method: text
   vendor: ''
   waiting_time: 0
@@ -6283,6 +6365,7 @@
   time_between_retries: 10
   type: ansible_playbook_service
   update_pools: false
+  validation_condition: success
   validation_method: none
   vendor: ''
   waiting_time: 0
@@ -6344,6 +6427,7 @@
   time_between_retries: 10
   type: workflow
   update_pools: false
+  validation_condition: success
   validation_method: none
   vendor: ''
   waiting_time: 0
@@ -6404,6 +6488,7 @@
   time_between_retries: 10
   type: python_snippet_service
   update_pools: false
+  validation_condition: success
   validation_method: none
   vendor: ''
   waiting_time: 0
@@ -6486,6 +6571,7 @@
   update_pools: false
   use_device_driver: true
   use_genie: false
+  validation_condition: success
   validation_method: none
   vendor: ''
   waiting_time: 0
@@ -6547,6 +6633,7 @@
   time_between_retries: 10
   type: workflow
   update_pools: false
+  validation_condition: success
   validation_method: none
   vendor: ''
   waiting_time: 0
@@ -6606,6 +6693,7 @@
   time_between_retries: 10
   type: python_snippet_service
   update_pools: false
+  validation_condition: success
   validation_method: none
   vendor: ''
   waiting_time: 0
@@ -6667,6 +6755,7 @@
   time_between_retries: 10
   type: workflow
   update_pools: false
+  validation_condition: success
   validation_method: none
   vendor: ''
   waiting_time: 0
@@ -6728,6 +6817,7 @@
   time_between_retries: 10
   type: python_snippet_service
   update_pools: false
+  validation_condition: success
   validation_method: none
   vendor: ''
   waiting_time: 0
@@ -6793,6 +6883,7 @@
   time_between_retries: 10
   type: python_snippet_service
   update_pools: false
+  validation_condition: success
   validation_method: dict_included
   vendor: ''
   waiting_time: 0
@@ -6857,6 +6948,7 @@
   time_between_retries: 10
   type: python_snippet_service
   update_pools: false
+  validation_condition: success
   validation_method: text
   vendor: ''
   waiting_time: 0
@@ -6921,6 +7013,7 @@
   time_between_retries: 10
   type: python_snippet_service
   update_pools: false
+  validation_condition: success
   validation_method: dict_included
   vendor: ''
   waiting_time: 0
@@ -6984,6 +7077,7 @@
   time_between_retries: 10
   type: python_snippet_service
   update_pools: false
+  validation_condition: success
   validation_method: text
   vendor: ''
   waiting_time: 0
@@ -7047,6 +7141,7 @@
   time_between_retries: 10
   type: python_snippet_service
   update_pools: false
+  validation_condition: success
   validation_method: text
   vendor: ''
   waiting_time: 0
@@ -7110,6 +7205,7 @@
   time_between_retries: 10
   type: python_snippet_service
   update_pools: false
+  validation_condition: success
   validation_method: dict_included
   vendor: ''
   waiting_time: 0
@@ -7190,6 +7286,7 @@
   time_between_retries: 10
   type: workflow
   update_pools: false
+  validation_condition: success
   validation_method: none
   vendor: ''
   waiting_time: 0
@@ -7252,6 +7349,7 @@
   time_between_retries: 10
   type: python_snippet_service
   update_pools: false
+  validation_condition: success
   validation_method: none
   vendor: ''
   waiting_time: 0
@@ -7312,6 +7410,7 @@
   time_between_retries: 10
   type: python_snippet_service
   update_pools: false
+  validation_condition: success
   validation_method: none
   vendor: ''
   waiting_time: 0
@@ -7352,7 +7451,7 @@
   operating_system: ''
   pools: []
   positions:
-    'Regression Workflow L: superworkflow': [217, 99]
+    'Regression Workflow L: superworkflow': [583, -95]
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -7369,6 +7468,7 @@
   time_between_retries: 10
   type: swiss_army_knife_service
   update_pools: false
+  validation_condition: success
   validation_method: none
   vendor: ''
   waiting_time: 0
@@ -7397,7 +7497,7 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels: {}
-  last_modified: '2020-03-25 10:19:08.926598'
+  last_modified: '2020-05-28 10:37:38.368354'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -7421,7 +7521,8 @@
   send_notification: false
   send_notification_method: mail
   services: ['[Shared] Start', '[Shared] End', '[Shared] Placeholder', '[Shared] REST
-      API: call *is_alive* endpoint']
+      API: call *is_alive* endpoint', '[Regression Workflow L: superworkflow] REST
+      API: call to placeholder property']
   shared: false
   skip: false
   skip_query: ''
@@ -7429,6 +7530,7 @@
   time_between_retries: 10
   type: workflow
   update_pools: false
+  validation_condition: success
   validation_method: none
   vendor: ''
   waiting_time: 0
@@ -7500,6 +7602,7 @@
   time_between_retries: 10
   type: workflow
   update_pools: false
+  validation_condition: success
   validation_method: none
   vendor: ''
   waiting_time: 0
@@ -7561,6 +7664,7 @@
   time_between_retries: 10
   type: unix_command_service
   update_pools: false
+  validation_condition: success
   validation_method: text
   vendor: ''
   waiting_time: 0
@@ -7642,6 +7746,7 @@
   type: unix_shell_script_service
   update_pools: false
   use_device_driver: false
+  validation_condition: success
   validation_method: none
   vendor: ''
   waiting_time: 0
@@ -7708,6 +7813,7 @@
   ttl: 60
   type: ping_service
   update_pools: false
+  validation_condition: success
   validation_method: none
   vendor: ''
   waiting_time: 0
@@ -7768,6 +7874,7 @@
   time_between_retries: 10
   type: workflow
   update_pools: false
+  validation_condition: success
   validation_method: none
   vendor: ''
   waiting_time: 0
@@ -7832,6 +7939,7 @@
   time_between_retries: 10
   type: topology_import_service
   update_pools: false
+  validation_condition: success
   validation_method: none
   vendor: ''
   waiting_time: 0
@@ -7917,6 +8025,75 @@
   update_pools: false
   use_device_driver: true
   use_genie: false
+  validation_condition: success
   validation_method: text
   vendor: ''
+  waiting_time: 0
+- call_type: GET
+  completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: text
+  creator: admin
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: Use REST call is_alive
+  device_query: ''
+  device_query_property: ip_address
+  devices: [Columbus]
+  dict_match: {}
+  display_only_failed_nodes: true
+  events: []
+  groups: [Admin Users]
+  headers: {}
+  impacting: true
+  include_device_results: true
+  include_link_in_summary: true
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: ip_address
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2020-05-28 10:36:29.931698'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 5
+  maximum_runs: 1
+  multiprocessing: true
+  name: '[Regression Workflow L: superworkflow] REST API: call to placeholder property'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  params: {verify: 'false'}
+  payload:
+    a: b
+    c: ['1', '2', '3']
+  pools: []
+  positions:
+    'Regression Workflow L: superworkflow': [227, 151]
+  postprocessing: ''
+  postprocessing_mode: always
+  preprocessing: ''
+  reply_to: ''
+  reserved: false
+  rest_url: http://127.0.0.1:5000/rest/{{ placeholder.definition }}
+  run_method: per_device
+  scoped_name: 'REST API: call to placeholder property'
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: false
+  skip_query: ''
+  skip_value: 'True'
+  time_between_retries: 10
+  timeout: 15
+  type: rest_call_service
+  update_pools: false
+  username: admin
+  validation_condition: success
+  validation_method: text
+  vendor: ''
+  verify_ssl_certificate: true
   waiting_time: 0

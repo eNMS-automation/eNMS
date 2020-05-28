@@ -266,13 +266,10 @@ function displayNetworkData(type, id, result, datetime) {
           class="navbar navbar-default nav-controls"
           role="navigation"
         >
-          <input ${type == "configuration" ? "" : "checked"}
-            id="data-type-${id}"
-            type="checkbox"
-            data-onstyle="info"
-            data-offstyle="primary"
-            
-          >
+          <select id="data-type-${id}">
+            <option value="configuration">Configuration</option>
+            <option value="operational_data">Operational Data</option>
+          </select>
           <button
             onclick="eNMS.inventory.downloadNetworkData(${id})"
             type="button"
@@ -290,11 +287,7 @@ function displayNetworkData(type, id, result, datetime) {
     title: "Network Data",
     id: id,
     callback: function () {
-      $(`#data-type-${id}`).bootstrapToggle({
-        off: "Configuration",
-        on: "Operational Data",
-        width: "150px",
-      });
+      $(`#data-type-${id}`).val(type).selectpicker("refresh");
       const content = document.getElementById(`content-${id}`);
       // eslint-disable-next-line new-cap
       const editor = CodeMirror(content, {
@@ -309,8 +302,7 @@ function displayNetworkData(type, id, result, datetime) {
       editor.setSize("100%", "100%");
       $(`#data-type-${id}`)
         .on("change", function () {
-          const value = $(this).prop("checked") ? "operational_data" : "configuration";
-          editor.setValue(result[value]);
+          editor.setValue(result[this.value]);
           editor.refresh();
         })
         .change();

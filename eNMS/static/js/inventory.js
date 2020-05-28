@@ -267,8 +267,9 @@ function displayNetworkData(type, id, result, datetime) {
           role="navigation"
         >
           <select id="data-type-${id}">
-            <option value="configuration">Configuration</option>
-            <option value="operational_data">Operational Data</option>
+            ${Object.entries(configurationProperties).map(
+              ([value, name]) => `<option value="${value}">${name}</option>`
+            )}
           </select>
           <button
             onclick="eNMS.inventory.downloadNetworkData(${id})"
@@ -351,8 +352,9 @@ function showGitHistory(device) {
               style="margin-top: 5px"
             >
               <select id="data-type-${device.id}">
-                <option value="configuration">Configuration</option>
-                <option value="operational_data">Operational Data</option>
+                ${Object.entries(configurationProperties).map(
+                  ([value, name]) => `<option value="${value}">${name}</option>`
+                )}
               </select>
               <button
                 class="btn btn-info"

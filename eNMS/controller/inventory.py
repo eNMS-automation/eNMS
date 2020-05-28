@@ -121,7 +121,7 @@ class InventoryController(BaseController):
                 {"hash": str(commit), "date": commit.committed_datetime}
                 for commit in list(repo.iter_commits(paths=path / data_type))
             ]
-            for data_type in ("configuration", "operational_data")
+            for data_type in self.configuration_properties
         }
 
     def get_git_network_data(self, device_name, hash):
@@ -136,10 +136,7 @@ class InventoryController(BaseController):
 
     def get_device_network_data(self, device_id):
         device = db.fetch("device", id=device_id)
-        return {
-            "configuration": device.configuration,
-            "operational_data": device.operational_data,
-        }
+        return {p: getattr(device, p) for p in self.configuration_properties}
 
     def get_session_log(self, session_id):
         return db.fetch("session", id=session_id).content

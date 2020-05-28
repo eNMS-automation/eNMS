@@ -1032,7 +1032,6 @@ class Run(AbstractBase):
 
     def global_variables(_self, **locals):  # noqa: N805
         payload, device = locals.get("payload", {}), locals.get("device")
-        print("TTT"*100, _self.original.placeholder)
         variables = {
             "__builtins__": {**builtins, "__import__": _self._import},
             "send_email": app.send_email,

@@ -134,6 +134,7 @@ class Server(Flask):
             app.rbac["menu"]["Plugins"]["pages"].update(settings.get("pages", {}))
             init_rbac_form(app.rbac)
             app.log("info", f"Loading plugin: {settings['name']}")
+        db.base.metadata.create_all(bind=db.engine)
 
     def register_extensions(self):
         self.auth = HTTPBasicAuth()

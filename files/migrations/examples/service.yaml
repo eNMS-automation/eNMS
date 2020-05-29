@@ -2113,7 +2113,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2020-02-26 06:51:04.539344'
+  last_modified: '2020-05-29 06:50:07.334676'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -2144,9 +2144,10 @@
   skip_value: 'True'
   source_code: "set_var(\"variable1\", 999, device=device.name)\r\nset_var(\"variable2\"\
     , \"1000\", device=device.name, section=\"variables\")\r\nset_var(\"iteration_simple\"\
-    , \"192.168.56.50\")\r\ndevices = [\"Boston\", \"Cincinnati\"] if device.name\
-    \ == \"Chicago\" else [\"Cleveland\", \"Washington\"]\r\nset_var(\"iteration_device\"\
-    , devices, device=device.name)\r\nsave_result(success=True, result={})"
+    , \"192.168.56.50\", export=True)\r\ndevices = [\"Boston\", \"Cincinnati\"] if\
+    \ device.name == \"Chicago\" else [\"Cleveland\", \"Washington\"]\r\nset_var(\"\
+    iteration_device\", devices, device=device.name)\r\nsave_result(success=True,\
+    \ result={})"
   time_between_retries: 10
   type: python_snippet_service
   update_pools: false
@@ -2324,7 +2325,7 @@
   waiting_time: 0
 - auto_find_prompt: true
   close_connection: false
-  command: show vrf {{get_result("Modify payload (per device)")["duration"]}}
+  command: show vrf {{get_result("Modify payload (per device)", device=device.name)["duration"]}}
   completion_time: 1
   config_mode: false
   content_match: ''
@@ -2364,7 +2365,7 @@
   jump_command: ''
   jump_on_connect: false
   jump_username: ''
-  last_modified: '2020-02-26 06:52:17.300164'
+  last_modified: '2020-05-29 06:56:23.711236'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -4407,6 +4408,15 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels:
+    6c961848-4911-4983-aaf9-d8e2dcb69bca:
+      alignment: left
+      content: "Set a variable called \"iteration_device\" that we will use in the\
+        \ following service\r\nto define iteration devices.\r\ndevices = [\"Boston\"\
+        , \"Cincinnati\"] if device.name == \"Chicago\" else [\"Cleveland\", \"Washington\"\
+        ]\r\nset_var(\"iteration_device\", devices, section=\"pools\", device=device.name)\r\
+        \nThe \"iteration_simple\" uses the \"export=True\" keyword to be available\
+        \ as global variables ({{ iteration_simple }})."
+      positions: ['103', '-224']
     8d64652f-dbc6-4916-ba06-a49ae0ed36fb:
       alignment: left
       content: "Will run on 4 \"iterated devices\" in total.\r\nTests that \"parent_device\"\
@@ -4421,14 +4431,7 @@
         retrieve a variable.\r\nIt also uses \"get_result\" to retrieve the result\
         \ of a previously run job."
       positions: [-92, -34]
-    d98b7c19-9d7b-4ddf-bada-2c47e492dbef:
-      alignment: left
-      content: "Set a variable called \"iteration_device\" that we will use in the\
-        \ following service\r\nto define iteration devices.\r\ndevices = [\"Boston\"\
-        , \"Cincinnati\"] if device.name == \"Chicago\" else [\"Cleveland\", \"Washington\"\
-        ]\r\nset_var(\"iteration_device\", devices, section=\"pools\", device=device.name)"
-      positions: [103, -224]
-  last_modified: '2020-02-23 09:53:20.871760'
+  last_modified: '2020-05-29 06:54:37.531304'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -4447,7 +4450,7 @@
   preprocessing: ''
   reply_to: ''
   reserved: false
-  run_method: per_service_with_workflow_targets
+  run_method: per_device
   scoped_name: 'Regression Workflow A: get_var, set_var, get_result'
   send_notification: false
   send_notification_method: mail

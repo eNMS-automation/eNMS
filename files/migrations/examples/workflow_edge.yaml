@@ -106,10 +106,6 @@
     payload helper', label: success, source: '[Regression Workflow A: get_var, set_var,
     get_result] Modify payload (per device)', subtype: success, type: workflow_edge,
   workflow: 'Regression Workflow A: get_var, set_var, get_result'}
-- {destination: '[Regression Workflow A: get_var, set_var, get_result] Show vrf with
-    python query', label: failure, source: '[Regression Workflow A: get_var, set_var,
-    get_result] Show vrf with payload helper', subtype: failure, type: workflow_edge,
-  workflow: 'Regression Workflow A: get_var, set_var, get_result'}
 - {destination: '[Shared] REST API: call *is_alive* endpoint', label: success, source: '[Regression
     Workflow A: get_var, set_var, get_result] Show vrf with python query', subtype: success,
   type: workflow_edge, workflow: 'Regression Workflow A: get_var, set_var, get_result'}
@@ -609,3 +605,7 @@
   workflow: 'Regression Workflow L: superworkflow'}
 - {destination: '[Shared] End', label: success, source: '[Shared] Placeholder', subtype: success,
   type: workflow_edge, workflow: 'Regression Workflow L: superworkflow'}
+- {destination: '[Regression Workflow A: get_var, set_var, get_result] Show vrf with
+    python query', label: success, source: '[Regression Workflow A: get_var, set_var,
+    get_result] Show vrf with payload helper', subtype: success, type: workflow_edge,
+  workflow: 'Regression Workflow A: get_var, set_var, get_result'}

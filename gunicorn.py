@@ -10,3 +10,4 @@ enable_stdio_inheritance = True
 timeout = 3000
 graceful_timeout = 3000
 limit_request_line = 0
+raw_env = ["TERM=screen"]

@@ -128,7 +128,7 @@
   description: Chicago
   down: false
   icon: router
-  ip_address: 192.168.1.188
+  ip_address: 192.168.56.50
   last_duration: ''
   last_failure: Never
   last_modified: ''
@@ -151,7 +151,7 @@
   subtype: ''
   tasks: []
   type: device
-  username: cisco
+  username: admin
   vendor: Cisco
 - attributes:
     '1': ['2', three]
@@ -407,7 +407,7 @@
   description: Boston
   down: false
   icon: router
-  ip_address: 10.0.0.103
+  ip_address: 192.168.56.50
   last_duration: ''
   last_failure: Never
   last_modified: ''
@@ -430,7 +430,7 @@
   subtype: ''
   tasks: []
   type: device
-  username: cisco
+  username: admin
   vendor: Cisco
 - attributes:
     '1': ['2', three]
@@ -461,7 +461,7 @@
   subtype: ''
   tasks: []
   type: device
-  username: cisco
+  username: admin
   vendor: Cisco
 - attributes:
     '1': ['2', three]
@@ -469,7 +469,7 @@
   description: Baltimore
   down: false
   icon: router
-  ip_address: 10.0.0.105
+  ip_address: 192.168.56.50
   last_duration: ''
   last_failure: Never
   last_modified: ''
@@ -492,7 +492,7 @@
   subtype: ''
   tasks: []
   type: device
-  username: cisco
+  username: admin
   vendor: Juniper
 - attributes:
     '1': ['2', three]
@@ -500,7 +500,7 @@
   description: Cleveland
   down: false
   icon: router
-  ip_address: 10.0.0.106
+  ip_address: 192.168.56.50
   last_duration: ''
   last_failure: Never
   last_modified: ''
@@ -523,7 +523,7 @@
   subtype: ''
   tasks: []
   type: device
-  username: cisco
+  username: admin
   vendor: Juniper
 - attributes:
     '1': ['2', three]
@@ -531,7 +531,7 @@
   description: Columbus
   down: false
   icon: router
-  ip_address: 10.0.0.107
+  ip_address: 192.168.56.50
   last_duration: ''
   last_failure: Never
   last_modified: ''
@@ -554,7 +554,7 @@
   subtype: ''
   tasks: []
   type: device
-  username: cisco
+  username: admin
   vendor: Juniper
 - attributes:
     '1': ['2', three]
@@ -562,7 +562,7 @@
   description: Cincinnati
   down: false
   icon: router
-  ip_address: 10.0.0.108
+  ip_address: 192.168.56.50
   last_duration: ''
   last_failure: Never
   last_modified: ''
@@ -585,7 +585,7 @@
   subtype: ''
   tasks: []
   type: device
-  username: cisco
+  username: admin
   vendor: Juniper
 - attributes:
     '1': ['2', three]
@@ -593,7 +593,7 @@
   description: Cambridge
   down: false
   icon: router
-  ip_address: 10.0.0.109
+  ip_address: 192.168.56.50
   last_duration: ''
   last_failure: Never
   last_modified: ''
@@ -616,7 +616,7 @@
   subtype: ''
   tasks: []
   type: device
-  username: cisco
+  username: admin
   vendor: Juniper
 - attributes:
     '1': ['2', three]

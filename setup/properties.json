@@ -39,7 +39,8 @@
         "configuration": true,
         "deferred": true,
         "log_change": false,
-        "form": false
+        "form": false,
+        "migrate": false
       }
     },
     "link": {

@@ -22,10 +22,7 @@ from eNMS.models import models, model_properties, property_types
 class InventoryController(BaseController):
 
     ssh_port = -1
-    configuration_properties = {
-        "configuration": "Configuration",
-        "operational_data": "Operational Data",
-    }
+    configuration_properties = {"configuration": "Configuration"}
 
     def get_ssh_port(self):
         self.ssh_port += 1
@@ -125,14 +122,12 @@ class InventoryController(BaseController):
         }
 
     def get_git_network_data(self, device_name, hash):
-        tree = Repo(self.path / "network_data").commit(hash).tree
-        configuration_file = tree / device_name / "configuration"
-        operational_data_file = tree / device_name / "operational_data"
-        with BytesIO(configuration_file.data_stream.read()) as f:
-            configuration = f.read().decode("utf-8")
-        with BytesIO(operational_data_file.data_stream.read()) as f:
-            operational_data = f.read().decode("utf-8")
-        return {"configuration": configuration, "operational_data": operational_data}
+        tree, result = Repo(self.path / "network_data").commit(hash).tree, {}
+        for property in self.configuration_properties:
+            file = tree / device_name / property
+            with BytesIO(file.data_stream.read()) as f:
+                result[property] = f.read().decode("utf-8")
+        return result
 
     def get_device_network_data(self, device_id):
         device = db.fetch("device", id=device_id)

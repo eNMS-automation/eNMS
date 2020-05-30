@@ -512,7 +512,7 @@ class BaseController:
             with open(Path(dir.path) / "data.yml") as data:
                 parameters = yaml.load(data)
                 device.update(**{"dont_update_pools": True, **parameters})
-            for data in ("configuration", "operational_data"):
+            for data in self.configuration_properties:
                 filepath = Path(dir.path) / data
                 if not filepath.exists():
                     continue
@@ -520,5 +520,8 @@ class BaseController:
                     setattr(device, data, file.read())
         db.session.commit()
         for pool in db.fetch_all("pool"):
-            if pool.device_configuration or pool.device_operational_data:
+            if any(
+                getattr(pool, f"device_{property}")
+                for property in self.configuration_properties
+            ):
                 pool.compute_pool()

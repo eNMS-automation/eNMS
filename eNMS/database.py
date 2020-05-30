@@ -44,7 +44,6 @@ class Database:
         "device": [
             "id",
             "configuration",
-            "operational_data",
             "services",
             "source",
             "destination",
@@ -88,7 +87,7 @@ class Database:
         "task",
     ]
 
-    dont_serialize = {"device": ["configuration", "operational_data"]}
+    dont_serialize = {"device": ["configuration"]}
 
     many_to_many_relationships = (
         ("user", "device"),
@@ -370,9 +369,8 @@ class Database:
         return instance
 
     def set_custom_properties(self, table):
-        for property, values in (
-            properties["custom"].get(table.__tablename__, {}).items()
-        ):
+        model = table.__tablename__
+        for property, values in properties["custom"].get(model, {}).items():
             if values.get("private", False):
                 kwargs = {}
             else:
@@ -392,7 +390,10 @@ class Database:
                 **kwargs,
             )
             if values.get("deferred"):
-                column = deferred(column) 
+                column = deferred(column)
+                self.dont_serialize[model].append(property)
+            if not values.get("migrate", True):
+                self.dont_migrate[model].append(property)
             setattr(table, property, column)
         return table
 

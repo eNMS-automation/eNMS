@@ -24,8 +24,8 @@ class DataBackupService(ConnectionService):
     fast_cli = db.Column(Boolean, default=False)
     timeout = db.Column(Integer, default=10.0)
     global_delay_factor = db.Column(Float, default=1.0)
-    configuration_command = db.Column(db.LargeString)
-    operational_data_command = db.Column(db.List)
+    configuration_property = db.Column(db.SmallString)
+    commands = db.Column(db.LargeString)
     replacements = db.Column(db.List)
 
     __mapper_args__ = {"polymorphic_identity": "data_backup_service"}
@@ -37,38 +37,34 @@ class DataBackupService(ConnectionService):
             device.last_runtime = datetime.now()
             netmiko_connection = run.netmiko_connection(device)
             run.log("info", "Fetching Operational Data", device)
-            for data in ("configuration", "operational_data"):
-                value = run.sub(getattr(self, f"{data}_command"), locals())
-                if data == "configuration":
-                    result = netmiko_connection.send_command(value)
-                    for r in self.replacements:
-                        result = sub(r["pattern"], r["replace_with"], result, flags=M)
-                else:
-                    result = []
-                    for cmd_dict in value:
-                        command, prefix = cmd_dict["command"], cmd_dict["prefix"]
-                        if not command:
-                            continue
-                        title = f"CMD '{command.upper()}'"
-                        if prefix:
-                            title += f" [{prefix}]"
-                        header = (
-                            f"\n{' ' * 30}{title}\n" f"{' ' * 30}{'*' * len(title)}"
-                        )
-                        command_result = [f"{header}\n\n"]
-                        for line in netmiko_connection.send_command(
-                            command
-                        ).splitlines():
-                            if prefix:
-                                line = f"{prefix} - {line}"
-                            command_result.append(line)
-                        result.append("\n".join(command_result))
-                    result = "\n\n".join(result)
-                if not result:
+            commands = run.sub(self.commands, locals())
+            result = []
+            for cmd_dict in commands:
+                command, prefix = cmd_dict["command"], cmd_dict["prefix"]
+                if not command:
                     continue
-                setattr(device, data, result)
-                with open(path / data, "w") as file:
-                    file.write(result)
+                title = f"CMD '{command.upper()}'"
+                if prefix:
+                    title += f" [{prefix}]"
+                header = (
+                    f"\n{' ' * 30}{title}\n" f"{' ' * 30}{'*' * len(title)}"
+                )
+                command_result = [f"{header}\n\n"]
+                for line in netmiko_connection.send_command(
+                    command
+                ).splitlines():
+                    if prefix:
+                        line = f"{prefix} - {line}"
+                    command_result.append(line)
+                result.append("\n".join(command_result))
+            result = "\n\n".join(result)
+            for r in self.replacements:
+                result = sub(r["pattern"], r["replace_with"], result, flags=M)
+            if not result:
+                continue
+            setattr(device, self.configuration_property, result)
+            with open(path / self.configuration_property, "w") as file:
+                file.write(result)
             device.last_status = "Success"
             device.last_duration = (
                 f"{(datetime.now() - device.last_runtime).total_seconds()}s"

@@ -40,11 +40,14 @@ edit them.
 - Add example of model in template plugins
 - Add placeholder as a global variable in a workflow (e.g to be used in the superworkflow)
 - Add mechanism for creating custom configuration property
+- New "export" keyword in set_var set to False by default. If true, the variable is considered global and can be referred to as 
+{{ variable }} in the workflow.
 
 MIGRATION:
 - Remove RBAC in rbac.json
 - Update migration files (user.yaml): group: Admin -> groups: [Admin Users]
 - app_log -> changelog in the service migration files (python snippet services)
+- set_var: add export keyword set to True in service.yaml for backward compatibility
 
 Version 3.21.3
 --------------

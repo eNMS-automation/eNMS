@@ -24,7 +24,7 @@ class DataBackupService(ConnectionService):
     fast_cli = db.Column(Boolean, default=False)
     timeout = db.Column(Integer, default=10.0)
     global_delay_factor = db.Column(Float, default=1.0)
-    configuration_property = db.Column(db.SmallString)
+    property = db.Column(db.SmallString)
     commands = db.Column(db.LargeString)
     replacements = db.Column(db.List)
 
@@ -39,31 +39,28 @@ class DataBackupService(ConnectionService):
             run.log("info", "Fetching Operational Data", device)
             commands = run.sub(self.commands, locals())
             result = []
-            for cmd_dict in commands:
-                command, prefix = cmd_dict["command"], cmd_dict["prefix"]
-                if not command:
+            for command in commands:
+                if not command["value"]:
                     continue
-                title = f"CMD '{command.upper()}'"
-                if prefix:
-                    title += f" [{prefix}]"
+                title = f"CMD '{command['value'].upper()}'"
+                if command["prefix"]:
+                    title += f" [{command['prefix']}]"
                 header = (
                     f"\n{' ' * 30}{title}\n" f"{' ' * 30}{'*' * len(title)}"
                 )
                 command_result = [f"{header}\n\n"]
                 for line in netmiko_connection.send_command(
-                    command
+                    command["value"]
                 ).splitlines():
-                    if prefix:
-                        line = f"{prefix} - {line}"
+                    if command["prefix"]:
+                        line = f"{command['prefix']} - {line}"
                     command_result.append(line)
                 result.append("\n".join(command_result))
             result = "\n\n".join(result)
             for r in self.replacements:
                 result = sub(r["pattern"], r["replace_with"], result, flags=M)
-            if not result:
-                continue
-            setattr(device, self.configuration_property, result)
-            with open(path / self.configuration_property, "w") as file:
+            setattr(device, self.property, result)
+            with open(path / self.property, "w") as file:
                 file.write(result)
             device.last_status = "Success"
             device.last_duration = (
@@ -84,23 +81,19 @@ class ReplacementForm(FlaskForm):
     replace_with = StringField("Replace With")
 
 
-class OperationalDataForm(FlaskForm):
-    command = StringField("Operational Data Command")
+class CommandsForm(FlaskForm):
+    value = StringField("Command")
     prefix = StringField("Label")
 
 
 class DataBackupForm(NetmikoForm):
     form_type = HiddenField(default="data_backup_service")
-    configuration_command = StringField("Command to retrieve the configuration")
-    operational_data_command = FieldList(FormField(OperationalDataForm), min_entries=12)
+    property = StringField("Configuration Property to Update")
+    commands = FieldList(FormField(CommandsForm), min_entries=12)
     replacements = FieldList(FormField(ReplacementForm), min_entries=12)
     groups = {
-        "Create Configuration File": {
-            "commands": ["configuration_command"],
-            "default": "expanded",
-        },
-        "Create Operational Data File": {
-            "commands": ["operational_data_command"],
+        "Target property and commands": {
+            "commands": ["property", "commands"],
             "default": "expanded",
         },
         "Search Response & Replace": {

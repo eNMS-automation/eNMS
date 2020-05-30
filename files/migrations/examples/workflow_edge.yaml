@@ -203,8 +203,8 @@
   source: '[Regression Workflow C: Advanced multiprocessing] napalm_configure_bgp_1',
   subtype: prerequisite, type: workflow_edge, workflow: 'Regression Workflow C: Advanced
     multiprocessing'}
-- {destination: '[Regression Workflow E: Iteration Targets] Modify Payload for Iteration',
-  label: success, source: '[Shared] Start', subtype: success, type: workflow_edge,
+- {destination: '[Regression Workflow F: Workflow of Workflows] Modify Payload for
+    Iteration', label: success, source: '[Shared] Start', subtype: success, type: workflow_edge,
   workflow: 'Regression Workflow E: Iteration Targets'}
 - {destination: '[Regression Workflow E: Iteration Targets] Iteration Target Workflow
     - Test 2', label: success, source: '[Regression Workflow E: Iteration Targets]
@@ -244,8 +244,8 @@
     variable from snippet', label: success, source: '[Shared] Start', subtype: success,
   type: workflow_edge, workflow: '[Regression Workflow F: Workflow of Workflows] Regression
     Workflow F S2: Access Variables from Parent Workflow'}
-- {destination: '[Regression Workflow E: Iteration Targets] Modify Payload for Iteration',
-  label: success, source: '[Shared] Start', subtype: success, type: workflow_edge,
+- {destination: '[Regression Workflow F: Workflow of Workflows] Modify Payload for
+    Iteration', label: success, source: '[Shared] Start', subtype: success, type: workflow_edge,
   workflow: 'Regression Workflow F: Workflow of Workflows'}
 - {destination: '[[Regression Workflow F: Workflow of Workflows] Regression Workflow
     F S2: Access Variables from Parent Workflow] Variable Access Subworkflow: Access
@@ -286,7 +286,7 @@
   type: workflow_edge, workflow: 'Regression Workflow 1: Netmiko with validation and
     retries'}
 - {destination: '[Regression Workflow E: Iteration Targets] Iteration Targets Workflow
-    - Test 1', label: success, source: '[Regression Workflow E: Iteration Targets]
+    - Test 1', label: success, source: '[Regression Workflow F: Workflow of Workflows]
     Modify Payload for Iteration', subtype: success, type: workflow_edge, workflow: 'Regression
     Workflow E: Iteration Targets'}
 - {destination: '[Shared] End', label: success, source: '[Regression Workflow D: Prompts]
@@ -321,7 +321,7 @@
     of Workflows] Regression Workflow F S1: Subworkflow of Workflow', subtype: success,
   type: workflow_edge, workflow: 'Regression Workflow F: Workflow of Workflows'}
 - {destination: '[Regression Workflow F: Workflow of Workflows] Show interfaces with
-    Netmiko', label: success, source: '[Regression Workflow E: Iteration Targets]
+    Netmiko', label: success, source: '[Regression Workflow F: Workflow of Workflows]
     Modify Payload for Iteration', subtype: success, type: workflow_edge, workflow: 'Regression
     Workflow F: Workflow of Workflows'}
 - {destination: '[Regression Workflow F: Workflow of Workflows] Regression Workflow
@@ -347,9 +347,6 @@
 - {destination: '[Shared] Example Service (does nothing)', label: success, source: '[Shared]
     Start', subtype: success, type: workflow_edge, workflow: 'Regression Workflow
     C: Advanced multiprocessing'}
-- {destination: '[Regression Workflow 9: Operational Data Backup] Retrieve Operational
-    Data', label: success, source: '[Shared] Start', subtype: success, type: workflow_edge,
-  workflow: 'Regression Workflow 9: Operational Data Backup'}
 - {destination: '[Regression Workflow 9: Operational Data Backup] git_push_configurations',
   label: success, source: '[Regression Workflow 9: Operational Data Backup] Retrieve
     Operational Data', subtype: success, type: workflow_edge, workflow: 'Regression
@@ -609,3 +606,10 @@
     python query', label: success, source: '[Regression Workflow A: get_var, set_var,
     get_result] Show vrf with payload helper', subtype: success, type: workflow_edge,
   workflow: 'Regression Workflow A: get_var, set_var, get_result'}
+- {destination: '[Regression Workflow 9: Operational Data Backup] Get Configuration',
+  label: success, source: '[Shared] Start', subtype: success, type: workflow_edge,
+  workflow: 'Regression Workflow 9: Operational Data Backup'}
+- {destination: '[Regression Workflow 9: Operational Data Backup] Retrieve Operational
+    Data', label: success, source: '[Regression Workflow 9: Operational Data Backup]
+    Get Configuration', subtype: success, type: workflow_edge, workflow: 'Regression
+    Workflow 9: Operational Data Backup'}

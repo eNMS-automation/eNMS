@@ -250,8 +250,8 @@ class Database:
                 property_type = type(getattr(target, attr.key))
                 if property_type in (InstrumentedList, MutableList):
                     if property_type == MutableList:
-                        added = set(hist.added[0]) - set(hist.deleted[0])
-                        deleted = set(hist.deleted[0]) - set(hist.added[0])
+                        added = [x for x in hist.added[0] if x not in hist.deleted[0]]
+                        deleted = [x for x in hist.deleted[0] if x not in hist.added[0]]
                     else:
                         added, deleted = hist.added, hist.deleted
                     if deleted:

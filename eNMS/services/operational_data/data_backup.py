@@ -26,7 +26,7 @@ class DataBackupService(ConnectionService):
     timeout = db.Column(Integer, default=10.0)
     global_delay_factor = db.Column(Float, default=1.0)
     property = db.Column(db.SmallString)
-    commands = db.Column(db.LargeString)
+    commands = db.Column(db.List)
     replacements = db.Column(db.List)
 
     __mapper_args__ = {"polymorphic_identity": "data_backup_service"}

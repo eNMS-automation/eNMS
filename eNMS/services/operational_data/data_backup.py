@@ -5,16 +5,17 @@ from re import M, sub
 from sqlalchemy import Boolean, Float, ForeignKey, Integer
 from wtforms import FormField
 
+from eNMS import app
 from eNMS.database import db
 from eNMS.forms.automation import NetmikoForm
-from eNMS.forms.fields import FieldList, HiddenField, StringField
+from eNMS.forms.fields import FieldList, HiddenField, SelectField, StringField
 from eNMS.models.automation import ConnectionService
 
 
 class DataBackupService(ConnectionService):
 
     __tablename__ = "data_backup_service"
-    pretty_name = "Netmiko Operational Data Backup"
+    pretty_name = "Netmiko Data Backup"
     parent_type = "connection_service"
     id = db.Column(Integer, ForeignKey("connection_service.id"), primary_key=True)
     enable_mode = db.Column(Boolean, default=True)
@@ -45,9 +46,7 @@ class DataBackupService(ConnectionService):
                 title = f"CMD '{command['value'].upper()}'"
                 if command["prefix"]:
                     title += f" [{command['prefix']}]"
-                header = (
-                    f"\n{' ' * 30}{title}\n" f"{' ' * 30}{'*' * len(title)}"
-                )
+                header = f"\n{' ' * 30}{title}\n" f"{' ' * 30}{'*' * len(title)}"
                 command_result = [f"{header}\n\n"]
                 for line in netmiko_connection.send_command(
                     command["value"]
@@ -88,7 +87,10 @@ class CommandsForm(FlaskForm):
 
 class DataBackupForm(NetmikoForm):
     form_type = HiddenField(default="data_backup_service")
-    property = StringField("Configuration Property to Update")
+    property = SelectField(
+        "Configuration Property to Update",
+        choices=list(app.configuration_properties.items()),
+    )
     commands = FieldList(FormField(CommandsForm), min_entries=12)
     replacements = FieldList(FormField(ReplacementForm), min_entries=12)
     groups = {

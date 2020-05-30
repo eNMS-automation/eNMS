@@ -37,12 +37,12 @@ class DataBackupService(ConnectionService):
         try:
             device.last_runtime = datetime.now()
             netmiko_connection = run.netmiko_connection(device)
-            run.log("info", "Fetching Operational Data", device)
             commands = run.sub(self.commands, locals())
             result = []
             for command in commands:
                 if not command["value"]:
                     continue
+                run.log("info", f"Running command '{command['value']}'", device)
                 title = f"CMD '{command['value'].upper()}'"
                 if command["prefix"]:
                     title += f" [{command['prefix']}]"

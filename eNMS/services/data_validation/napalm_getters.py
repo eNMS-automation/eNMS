@@ -1,5 +1,6 @@
 from sqlalchemy import Boolean, ForeignKey, Integer
 
+from eNMS import app
 from eNMS.database import db
 from eNMS.forms.automation import NapalmForm
 from eNMS.forms.fields import HiddenField, SelectMultipleField
@@ -38,31 +39,7 @@ class NapalmGettersService(ConnectionService):
 
 class NapalmGettersForm(NapalmForm):
     form_type = HiddenField(default="napalm_getters_service")
-    getters = SelectMultipleField(
-        choices=(
-            ("get_arp_table", "ARP table"),
-            ("get_interfaces_counters", "Interfaces counters"),
-            ("get_facts", "Facts"),
-            ("get_environment", "Environment"),
-            ("get_config", "Configuration"),
-            ("get_interfaces", "Interfaces"),
-            ("get_interfaces_ip", "Interface IP"),
-            ("get_lldp_neighbors", "LLDP neighbors"),
-            ("get_lldp_neighbors_detail", "LLDP neighbors detail"),
-            ("get_mac_address_table", "MAC address"),
-            ("get_ntp_servers", "NTP servers"),
-            ("get_ntp_stats", "NTP statistics"),
-            ("get_optics", "Transceivers"),
-            ("get_snmp_information", "SNMP"),
-            ("get_users", "Users"),
-            ("get_network_instances", "Network instances (VRF)"),
-            ("get_ntp_peers", "NTP peers"),
-            ("get_bgp_config", "BGP configuration"),
-            ("get_bgp_neighbors", "BGP neighbors"),
-            ("get_ipv6_neighbors_table", "IPv6"),
-            ("is_alive", "Is alive"),
-        )
-    )
+    getters = SelectMultipleField(choices=app.NAPALM_GETTERS)
     groups = {
         "Main Parameters": {"commands": ["getters"], "default": "expanded"},
         **NapalmForm.groups,

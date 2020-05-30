@@ -18,6 +18,30 @@ class AutomationController(BaseController):
     NETMIKO_DRIVERS = sorted((driver, driver) for driver in CLASS_MAPPER)
     NETMIKO_SCP_DRIVERS = sorted((driver, driver) for driver in FILE_TRANSFER_MAP)
     NAPALM_DRIVERS = sorted((driver, driver) for driver in SUPPORTED_DRIVERS[1:])
+    NAPALM_GETTERS = (
+        ("get_arp_table", "ARP table"),
+        ("get_interfaces_counters", "Interfaces counters"),
+        ("get_facts", "Facts"),
+        ("get_environment", "Environment"),
+        ("get_config", "Configuration"),
+        ("get_interfaces", "Interfaces"),
+        ("get_interfaces_ip", "Interface IP"),
+        ("get_lldp_neighbors", "LLDP neighbors"),
+        ("get_lldp_neighbors_detail", "LLDP neighbors detail"),
+        ("get_mac_address_table", "MAC address"),
+        ("get_ntp_servers", "NTP servers"),
+        ("get_ntp_stats", "NTP statistics"),
+        ("get_optics", "Transceivers"),
+        ("get_snmp_information", "SNMP"),
+        ("get_users", "Users"),
+        ("get_network_instances", "Network instances (VRF)"),
+        ("get_ntp_peers", "NTP peers"),
+        ("get_bgp_config", "BGP configuration"),
+        ("get_bgp_neighbors", "BGP neighbors"),
+        ("get_ipv6_neighbors_table", "IPv6"),
+        ("is_alive", "Is alive"),
+    )
+
     connections_cache = {"napalm": defaultdict(dict), "netmiko": defaultdict(dict)}
     service_db = defaultdict(lambda: {"runs": 0})
     run_db = defaultdict(dict)

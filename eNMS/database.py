@@ -373,22 +373,26 @@ class Database:
         for property, values in (
             properties["custom"].get(model.__tablename__, {}).items()
         ):
-            is_private = values.get("private", False)
-            kwargs = {"default": values["default"]} if not is_private else {}
+            if values.get("private", False):
+                kwargs = {}
+            else:
+                kwargs = {
+                    "default": values["default"],
+                    "info": {"log_change": kwargs.get("log_change", True)},
+                }
+            column = self.Column(
+                {
+                    "boolean": Boolean,
+                    "dict": self.Dict,
+                    "float": Float,
+                    "integer": Integer,
+                    "json": JSON,
+                    "string": self.LargeString,
+                }[values.get("type", "string")],
+                **kwargs,
+            )
             setattr(
-                model,
-                property,
-                self.Column(
-                    {
-                        "boolean": Boolean,
-                        "dict": self.Dict,
-                        "float": Float,
-                        "integer": Integer,
-                        "json": JSON,
-                        "string": self.LargeString,
-                    }[values.get("type", "string")],
-                    **kwargs,
-                ),
+                model, property, column,
             )
         return model
 

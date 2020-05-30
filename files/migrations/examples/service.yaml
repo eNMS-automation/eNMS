@@ -3763,7 +3763,7 @@
       content: "This workflow calls netmiko and napalm backup services.\r\nThe devices\
         \ must be defined in the service, not in the workflow."
       positions: [-280, 128]
-  last_modified: '2020-05-30 06:11:25.699613'
+  last_modified: '2020-05-30 06:34:36.992775'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -5296,7 +5296,19 @@
   vendor: ''
   waiting_time: 0
 - close_connection: true
-  commands: []
+  commands:
+  - {prefix: shusers, value: show users}
+  - {prefix: shipintbr, value: show ip interface brief}
+  - {prefix: '', value: show vrf}
+  - {prefix: '', value: ''}
+  - {prefix: '', value: ''}
+  - {prefix: '', value: ''}
+  - {prefix: '', value: ''}
+  - {prefix: '', value: ''}
+  - {prefix: '', value: ''}
+  - {prefix: '', value: ''}
+  - {prefix: '', value: ''}
+  - {prefix: '', value: ''}
   completion_time: 1
   config_mode: false
   content_match: ''
@@ -5327,7 +5339,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2019-12-17 09:30:47.573296'
+  last_modified: '2020-05-30 06:34:33.857324'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -5341,12 +5353,21 @@
   operating_system: ''
   pools: [Washington]
   positions:
-    'Regression Workflow 9: Operational Data Backup': [-91, -33]
+    'Regression Workflow 9: Operational Data Backup': [-125, 15]
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
-  property: ''
+  property: operational_data
   replacements:
+  - {pattern: '', replace_with: ''}
+  - {pattern: '', replace_with: ''}
+  - {pattern: '', replace_with: ''}
+  - {pattern: '', replace_with: ''}
+  - {pattern: '', replace_with: ''}
+  - {pattern: '', replace_with: ''}
+  - {pattern: '', replace_with: ''}
+  - {pattern: '', replace_with: ''}
+  - {pattern: '', replace_with: ''}
   - {pattern: '', replace_with: ''}
   - {pattern: '', replace_with: ''}
   - {pattern: '', replace_with: ''}
@@ -8215,7 +8236,7 @@
   events: []
   fast_cli: false
   global_delay_factor: 1.0
-  groups: [Admin Users]
+  groups: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -8238,7 +8259,7 @@
   operating_system: ''
   pools: []
   positions:
-    'Regression Workflow 9: Operational Data Backup': [-428, -8]
+    'Regression Workflow 9: Operational Data Backup': [-455, 15]
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''

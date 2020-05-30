@@ -212,9 +212,9 @@ Custom Query Payload
 
   {
     "type": "device",
-      "columns": ["name", "ip_address", "configuration", "configuration_matches", "operational_data", "operational_data_matches"],
+      "columns": ["name", "ip_address", "configuration", "configuration_matches"],
       "maximum_return_records": 3,
-      "search_criteria": {"configuration_filter": "inclusion", "configuration": "i", "operational_data": "ace"}
+      "search_criteria": {"configuration_filter": "inclusion", "configuration": "i"}
   }
 
 .. code-block:: python

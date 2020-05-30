@@ -70,7 +70,6 @@ class Device(Object):
     netmiko_driver = db.Column(db.SmallString, default="cisco_ios")
     napalm_driver = db.Column(db.SmallString, default="ios")
     configuration = deferred(db.Column(db.LargeString, info={"log_change": False}))
-    operational_data = deferred(db.Column(db.LargeString, info={"log_change": False}))
     last_failure = db.Column(db.SmallString, default="Never")
     last_status = db.Column(db.SmallString, default="Never")
     last_update = db.Column(db.SmallString, default="Never")

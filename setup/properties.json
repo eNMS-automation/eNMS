@@ -33,10 +33,13 @@
         "type": "string",
         "private": true
       },
-      "custom_configuration": {
-        "pretty_name": "Custom Configuration",
+      "operational_data": {
+        "pretty_name": "Operational Data",
         "default": "",
-        "configuration": true
+        "configuration": true,
+        "deferred": true,
+        "log_change": false,
+        "form": false
       }
     },
     "link": {

@@ -21,7 +21,7 @@ from sqlalchemy.dialects.mysql.base import MSMediumBlob
 from sqlalchemy.ext.associationproxy import ASSOCIATION_PROXY
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.ext.mutable import MutableDict, MutableList
-from sqlalchemy.orm import scoped_session, sessionmaker
+from sqlalchemy.orm import deferred, scoped_session, sessionmaker
 from sqlalchemy.types import JSON
 from sqlalchemy.orm.collections import InstrumentedList
 
@@ -369,16 +369,16 @@ class Database:
             self.session.add(instance)
         return instance
 
-    def set_custom_properties(self, model):
+    def set_custom_properties(self, table):
         for property, values in (
-            properties["custom"].get(model.__tablename__, {}).items()
+            properties["custom"].get(table.__tablename__, {}).items()
         ):
             if values.get("private", False):
                 kwargs = {}
             else:
                 kwargs = {
                     "default": values["default"],
-                    "info": {"log_change": kwargs.get("log_change", True)},
+                    "info": {"log_change": values.get("log_change", True)},
                 }
             column = self.Column(
                 {
@@ -391,10 +391,10 @@ class Database:
                 }[values.get("type", "string")],
                 **kwargs,
             )
-            setattr(
-                model, property, column,
-            )
-        return model
+            if values.get("deferred"):
+                column = deferred(column) 
+            setattr(table, property, column)
+        return table
 
 
 db = Database()

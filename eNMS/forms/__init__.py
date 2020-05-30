@@ -35,6 +35,8 @@ class MetaForm(FormMeta):
             form.custom_properties = {}
         form.custom_properties.update(app.properties["custom"].get(form_type, {}))
         for property, values in form.custom_properties.items():
+            if not values.get("form", True):
+                continue
             if property in db.private_properties:
                 field = PasswordField
             else:

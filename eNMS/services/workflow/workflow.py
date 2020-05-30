@@ -17,7 +17,7 @@ class Workflow(Service):
     parent_type = "service"
     id = db.Column(Integer, ForeignKey("service.id"), primary_key=True)
     close_connection = db.Column(Boolean, default=False)
-    labels = db.Column(db.Dict, info={"dont_track_changes": True})
+    labels = db.Column(db.Dict, info={"log_change": False})
     services = relationship(
         "Service", secondary=db.service_workflow_table, back_populates="workflows"
     )

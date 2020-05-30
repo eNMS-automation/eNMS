@@ -16,7 +16,7 @@ class Object(AbstractBase):
     type = db.Column(db.SmallString)
     __mapper_args__ = {"polymorphic_identity": "object", "polymorphic_on": type}
     id = db.Column(Integer, primary_key=True)
-    last_modified = db.Column(db.SmallString, info={"dont_track_changes": True})
+    last_modified = db.Column(db.SmallString, info={"log_change": False})
     subtype = db.Column(db.SmallString)
     description = db.Column(db.SmallString)
     model = db.Column(db.SmallString)
@@ -70,10 +70,10 @@ class Device(Object):
     netmiko_driver = db.Column(db.SmallString, default="cisco_ios")
     napalm_driver = db.Column(db.SmallString, default="ios")
     configuration = deferred(
-        db.Column(db.LargeString, info={"dont_track_changes": True})
+        db.Column(db.LargeString, info={"log_change": False})
     )
     operational_data = deferred(
-        db.Column(db.LargeString, info={"dont_track_changes": True})
+        db.Column(db.LargeString, info={"log_change": False})
     )
     last_failure = db.Column(db.SmallString, default="Never")
     last_status = db.Column(db.SmallString, default="Never")
@@ -266,7 +266,7 @@ class Pool(AbstractBase):
     __tablename__ = type = "pool"
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.SmallString, unique=True)
-    last_modified = db.Column(db.SmallString, info={"dont_track_changes": True})
+    last_modified = db.Column(db.SmallString, info={"log_change": False})
     description = db.Column(db.SmallString)
     operator = db.Column(db.SmallString, default="all")
     devices = relationship(
@@ -346,7 +346,7 @@ class Session(AbstractBase):
     name = db.Column(db.SmallString, unique=True)
     timestamp = db.Column(db.SmallString)
     user = db.Column(db.SmallString)
-    content = db.Column(db.LargeString, info={"dont_track_changes": True})
+    content = db.Column(db.LargeString, info={"log_change": False})
     device_id = db.Column(Integer, ForeignKey("device.id"))
     device = relationship(
         "Device", back_populates="sessions", foreign_keys="Session.device_id"

@@ -36,9 +36,9 @@ class User(AbstractBase, UserMixin):
     upper_menu = db.Column(db.List)
     get_requests = db.Column(db.List)
     post_requests = db.Column(db.List)
-    small_menu = db.Column(Boolean, default=False, info={"dont_track_changes": True})
+    small_menu = db.Column(Boolean, default=False, info={"log_change": False})
     theme = db.Column(
-        db.SmallString, default="Default", info={"dont_track_changes": True}
+        db.SmallString, default="Default", info={"log_change": False}
     )
     groups = relationship(
         "Group", secondary=db.user_group_table, back_populates="users"

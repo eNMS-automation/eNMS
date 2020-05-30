@@ -8,7 +8,13 @@ from wtforms import FormField
 from eNMS import app
 from eNMS.database import db
 from eNMS.forms.automation import NapalmForm
-from eNMS.forms.fields import HiddenField, StringField, SelectMultipleField, FieldList
+from eNMS.forms.fields import (
+    HiddenField,
+    SelectField,
+    StringField,
+    SelectMultipleField,
+    FieldList,
+)
 from eNMS.models.automation import ConnectionService
 
 
@@ -69,15 +75,15 @@ class ReplacementForm(FlaskForm):
 
 class NapalmBackupForm(NapalmForm):
     form_type = HiddenField(default="napalm_backup_service")
+    property = SelectField(
+        "Configuration Property to Update",
+        choices=list(app.configuration_properties.items()),
+    )
     getters = SelectMultipleField(choices=app.NAPALM_GETTERS)
     replacements = FieldList(FormField(ReplacementForm), min_entries=3)
     groups = {
-        "Create Configuration File": {
-            "commands": ["configuration_getters"],
-            "default": "expanded",
-        },
-        "Create Operational Data File": {
-            "commands": ["operational_data_getters"],
+        "Target Property and Getters": {
+            "commands": ["property", "getters"],
             "default": "expanded",
         },
         "Search Response & Replace": {

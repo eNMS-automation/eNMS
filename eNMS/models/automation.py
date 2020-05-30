@@ -50,12 +50,12 @@ class Service(AbstractBase):
     name = db.Column(db.SmallString, unique=True)
     shared = db.Column(Boolean, default=False)
     scoped_name = db.Column(db.SmallString, index=True)
-    last_modified = db.Column(db.SmallString, info={"dont_track_changes": True})
+    last_modified = db.Column(db.SmallString, info={"log_change": False})
     description = db.Column(db.SmallString)
     number_of_retries = db.Column(Integer, default=0)
     time_between_retries = db.Column(Integer, default=10)
     max_number_of_retries = db.Column(Integer, default=100)
-    positions = db.Column(db.Dict, info={"dont_track_changes": True})
+    positions = db.Column(db.Dict, info={"log_change": False})
     tasks = relationship("Task", back_populates="service", cascade="all,delete")
     events = relationship("Event", back_populates="service", cascade="all,delete")
     vendor = db.Column(db.SmallString)
@@ -210,7 +210,7 @@ class Result(AbstractBase):
 
     __tablename__ = type = "result"
     private = True
-    dont_track_changes = True
+    log_change = False
     id = db.Column(Integer, primary_key=True)
     success = db.Column(Boolean, default=False)
     runtime = db.Column(db.SmallString)
@@ -267,7 +267,7 @@ class ServiceLog(AbstractBase):
 
     __tablename__ = type = "service_log"
     private = True
-    dont_track_changes = True
+    log_change = False
     id = db.Column(Integer, primary_key=True)
     content = db.Column(db.LargeString)
     runtime = db.Column(db.SmallString)
@@ -330,7 +330,7 @@ class Run(AbstractBase):
     )
     task_id = db.Column(Integer, ForeignKey("task.id", ondelete="SET NULL"))
     task = relationship("Task", foreign_keys="Run.task_id")
-    state = db.Column(db.Dict, info={"dont_track_changes": True})
+    state = db.Column(db.Dict, info={"log_change": False})
     results = relationship("Result", back_populates="run", cascade="all, delete-orphan")
     model_properties = ["progress", "service_properties"]
 
@@ -360,8 +360,8 @@ class Run(AbstractBase):
         return self if not self.parent else self.parent.original
 
     @property
-    def dont_track_changes(self):
-        return self.runtime != self.parent_runtime
+    def log_change(self):
+        return self.runtime == self.parent_runtime
 
     def __repr__(self):
         return f"{self.runtime}: SERVICE '{self.service}'"

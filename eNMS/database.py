@@ -240,8 +240,8 @@ class Database:
                 hist = state.get_history(attr.key, True)
                 if (
                     getattr(target, "private", False)
-                    or getattr(target, "dont_track_changes", False)
-                    or getattr(state.class_, attr.key).info.get("dont_track_changes")
+                    or not getattr(target, "log_changes", True)
+                    or not getattr(state.class_, attr.key).info.get("log_change", True)
                     or attr.key in self.private_properties
                     or not hist.has_changes()
                 ):

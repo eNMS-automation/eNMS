@@ -251,7 +251,7 @@ function showSessionLog(sessionId) {
 
 function downloadNetworkData(id) {
   downloadFile(
-    $(`#data-type-${id}`).prop("checked") ? "operational_data" : "configuration",
+    $(`#data-type-${id}`).val(),
     $(`#content-${id}`).data("CodeMirrorInstance").getValue(),
     "txt"
   );
@@ -315,10 +315,10 @@ export const showDeviceData = function (device) {
   call({
     url: `/get_device_network_data/${device.id}`,
     callback: (result) => {
-      if (!result.configuration && !result.operational_data) {
-        notify("No data stored.", "error", 5);
-      } else {
+      if (Object.keys(configurationProperties).some((p) => result[p])) {
         displayNetworkData("configuration", device.id, result, device.last_runtime);
+      } else {
+        notify("No data stored.", "error", 5);
       }
     },
   });
@@ -338,9 +338,7 @@ function showGitHistory(device) {
   call({
     url: `/get_git_history/${device.id}`,
     callback: (commits) => {
-      if (!commits.configuration.length && !commits.operational_data.length) {
-        notify("No data stored.", "error", 5);
-      } else {
+      if (Object.keys(configurationProperties).some((p) => commits[p].length)) {
         openPanel({
           name: "git_history",
           id: device.id,
@@ -431,6 +429,8 @@ function showGitHistory(device) {
               .change();
           },
         });
+      } else {
+        notify("No data stored.", "error", 5);
       }
     },
   });

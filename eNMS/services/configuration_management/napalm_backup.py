@@ -21,7 +21,7 @@ from eNMS.models.automation import ConnectionService
 class NapalmBackupService(ConnectionService):
 
     __tablename__ = "napalm_backup_service"
-    pretty_name = "NAPALM Operational Data Backup"
+    pretty_name = "NAPALM Data Backup"
     parent_type = "connection_service"
     id = db.Column(Integer, ForeignKey("connection_service.id"), primary_key=True)
     driver = db.Column(db.SmallString)
@@ -40,7 +40,7 @@ class NapalmBackupService(ConnectionService):
         try:
             device.last_runtime = datetime.now()
             napalm_connection = run.napalm_connection(device)
-            run.log("info", "Fetching Operational Data", device)
+            run.log("info", f"Fetching getters: {' - 'join(run.getters)}", device)
             result = {}
             for getter in run.getters:
                 try:

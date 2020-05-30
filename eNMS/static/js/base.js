@@ -588,6 +588,7 @@ function updateProperty(instance, el, property, value, type) {
   } else if (propertyType == "object") {
     el.append(new Option(value.name, value.id)).val(value.id).trigger("change");
   } else if (propertyType == "json") {
+    el.val(JSON.stringify(value));
     const editor = jsonEditors[instance.id][property];
     if (editor) editor.set(value);
   } else if (propertyType == "code") {

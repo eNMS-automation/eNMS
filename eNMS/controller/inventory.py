@@ -149,20 +149,14 @@ class InventoryController(BaseController):
         for obj_type in ("device", "link"):
             sheet = workbook.add_sheet(obj_type)
             for index, property in enumerate(model_properties[obj_type]):
-                if property in (
-                    "id",
-                    "source_id",
-                    "destination_id",
-                    "configuration",
-                    "operational_data",
-                ):
+                if property in db.dont_migrate[obj_type]:
                     continue
                 sheet.write(0, index, property)
                 for obj_index, obj in enumerate(db.fetch_all(obj_type), 1):
                     value = getattr(obj, property)
                     if type(value) == bytes:
                         value = str(self.decrypt(value), "utf-8")
-                    sheet.write(obj_index, index, value)
+                    sheet.write(obj_index, index, str(value))
         workbook.save(self.path / "files" / "spreadsheets" / filename)
 
     def topology_import(self, file):

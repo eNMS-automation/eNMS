@@ -45,8 +45,10 @@ class Database:
             "id",
             "configuration",
             "services",
+            "source_id",
             "source",
             "destination",
+            "destination_id",
             "pools",
             "users",
         ],
@@ -116,6 +118,7 @@ class Database:
         self.configure_associations()
         self.configure_events()
         self.field_conversion = {
+            "bool": bool,
             "dict": self.dict_conversion,
             "float": float,
             "int": int,

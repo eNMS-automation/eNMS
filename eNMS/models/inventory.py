@@ -5,6 +5,7 @@ from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.orm import backref, deferred, relationship
 from sqlalchemy.schema import UniqueConstraint
 
+from eNMS import app
 from eNMS.models.base import AbstractBase
 from eNMS.database import db
 from eNMS.setup import properties
@@ -103,7 +104,7 @@ class Device(Object):
         include_properties = columns if rest_api_request else None
         properties = super().get_properties(include=include_properties)
         context = int(kwargs["form"].get("context-lines", 0))
-        for property in ("configuration", "operational_data"):
+        for property in app.configuration_properties:
             if rest_api_request:
                 if property in columns:
                     properties[property] = getattr(self, property)

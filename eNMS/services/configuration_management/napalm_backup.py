@@ -22,8 +22,8 @@ class NapalmBackupService(ConnectionService):
     use_device_driver = db.Column(Boolean, default=True)
     timeout = db.Column(Integer, default=60)
     optional_args = db.Column(db.Dict)
-    configuration_getters = db.Column(db.List)
-    operational_data_getters = db.Column(db.List)
+    property = db.Column(db.SmallString)
+    getters = db.Column(db.List)
     replacements = db.Column(db.List)
 
     __mapper_args__ = {"polymorphic_identity": "napalm_backup_service"}
@@ -35,24 +35,19 @@ class NapalmBackupService(ConnectionService):
             device.last_runtime = datetime.now()
             napalm_connection = run.napalm_connection(device)
             run.log("info", "Fetching Operational Data", device)
-            for data_type in ("configuration_getters", "operational_data_getters"):
-                result = {}
-                for getter in getattr(run, data_type):
-                    try:
-                        output = app.str_dict(getattr(napalm_connection, getter)())
-                        for r in self.replacements:
-                            output = sub(
-                                r["pattern"], r["replace_with"], output, flags=M,
-                            )
-                        result[getter] = output
-                    except Exception as exc:
-                        result[getter] = f"{getter} failed because of {exc}"
-                if not result:
-                    continue
-                result = app.str_dict(result)
-                setattr(device, data_type, result)
-                with open(path / data_type, "w") as file:
-                    file.write(result)
+            result = {}
+            for getter in run.getters:
+                try:
+                    output = app.str_dict(getattr(napalm_connection, getter)())
+                    for r in self.replacements:
+                        output = sub(r["pattern"], r["replace_with"], output, flags=M,)
+                    result[getter] = output
+                except Exception as exc:
+                    result[getter] = f"{getter} failed because of {exc}"
+            result = app.str_dict(result)
+            setattr(device, property, result)
+            with open(path / property, "w") as file:
+                file.write(result)
             device.last_status = "Success"
             device.last_duration = (
                 f"{(datetime.now() - device.last_runtime).total_seconds()}s"
@@ -74,56 +69,7 @@ class ReplacementForm(FlaskForm):
 
 class NapalmBackupForm(NapalmForm):
     form_type = HiddenField(default="napalm_backup_service")
-    configuration_getters = SelectMultipleField(
-        choices=(
-            ("get_arp_table", "ARP table"),
-            ("get_interfaces_counters", "Interfaces counters"),
-            ("get_facts", "Facts"),
-            ("get_environment", "Environment"),
-            ("get_config", "Configuration"),
-            ("get_interfaces", "Interfaces"),
-            ("get_interfaces_ip", "Interface IP"),
-            ("get_lldp_neighbors", "LLDP neighbors"),
-            ("get_lldp_neighbors_detail", "LLDP neighbors detail"),
-            ("get_mac_address_table", "MAC address"),
-            ("get_ntp_servers", "NTP servers"),
-            ("get_ntp_stats", "NTP statistics"),
-            ("get_optics", "Transceivers"),
-            ("get_snmp_information", "SNMP"),
-            ("get_users", "Users"),
-            ("get_network_instances", "Network instances (VRF)"),
-            ("get_ntp_peers", "NTP peers"),
-            ("get_bgp_config", "BGP configuration"),
-            ("get_bgp_neighbors", "BGP neighbors"),
-            ("get_ipv6_neighbors_table", "IPv6"),
-            ("is_alive", "Is alive"),
-        )
-    )
-    operational_data_getters = SelectMultipleField(
-        choices=(
-            ("get_arp_table", "ARP table"),
-            ("get_interfaces_counters", "Interfaces counters"),
-            ("get_facts", "Facts"),
-            ("get_environment", "Environment"),
-            ("get_config", "Configuration"),
-            ("get_interfaces", "Interfaces"),
-            ("get_interfaces_ip", "Interface IP"),
-            ("get_lldp_neighbors", "LLDP neighbors"),
-            ("get_lldp_neighbors_detail", "LLDP neighbors detail"),
-            ("get_mac_address_table", "MAC address"),
-            ("get_ntp_servers", "NTP servers"),
-            ("get_ntp_stats", "NTP statistics"),
-            ("get_optics", "Transceivers"),
-            ("get_snmp_information", "SNMP"),
-            ("get_users", "Users"),
-            ("get_network_instances", "Network instances (VRF)"),
-            ("get_ntp_peers", "NTP peers"),
-            ("get_bgp_config", "BGP configuration"),
-            ("get_bgp_neighbors", "BGP neighbors"),
-            ("get_ipv6_neighbors_table", "IPv6"),
-            ("is_alive", "Is alive"),
-        )
-    )
+    getters = SelectMultipleField(choices=app.NAPALM_GETTERS)
     replacements = FieldList(FormField(ReplacementForm), min_entries=3)
     groups = {
         "Create Configuration File": {

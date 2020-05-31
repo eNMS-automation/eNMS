@@ -37,10 +37,10 @@
         "pretty_name": "Operational Data",
         "default": "",
         "configuration": true,
-        "deferred": true,
         "log_change": false,
         "form": false,
-        "migrate": false
+        "migrate": false,
+        "serialize": false
       }
     },
     "link": {

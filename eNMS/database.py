@@ -21,7 +21,7 @@ from sqlalchemy.dialects.mysql.base import MSMediumBlob
 from sqlalchemy.ext.associationproxy import ASSOCIATION_PROXY
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.ext.mutable import MutableDict, MutableList
-from sqlalchemy.orm import deferred, scoped_session, sessionmaker
+from sqlalchemy.orm import scoped_session, sessionmaker
 from sqlalchemy.types import JSON
 from sqlalchemy.orm.collections import InstrumentedList
 
@@ -392,8 +392,7 @@ class Database:
                 }[values.get("type", "string")],
                 **kwargs,
             )
-            if values.get("deferred"):
-                column = deferred(column)
+            if not values.get("serialize", True):
                 self.dont_serialize[model].append(property)
             if not values.get("migrate", True):
                 self.dont_migrate[model].append(property)

@@ -510,7 +510,6 @@
   waiting_time: 100
 - close_connection: false
   completion_time: 1
-  configuration_getters: []
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -527,6 +526,7 @@
   display_only_failed_nodes: true
   driver: eos
   events: []
+  getters: [get_arp_table, get_interfaces]
   groups: []
   impacting: true
   include_device_results: true
@@ -536,7 +536,7 @@
   iteration_devices_property: ip_address
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2019-10-03 16:03:29.843088'
+  last_modified: '2020-05-31 03:49:21.749075'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -548,7 +548,6 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  operational_data_getters: []
   optional_args: {}
   pools: []
   positions:
@@ -556,7 +555,11 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
-  replacements: []
+  property: configuration
+  replacements:
+  - {pattern: '', replace_with: ''}
+  - {pattern: '', replace_with: ''}
+  - {pattern: '', replace_with: ''}
   reply_to: ''
   reserved: false
   run_method: per_device

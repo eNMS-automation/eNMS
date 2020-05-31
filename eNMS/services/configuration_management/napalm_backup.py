@@ -40,7 +40,7 @@ class NapalmBackupService(ConnectionService):
         try:
             device.last_runtime = datetime.now()
             napalm_connection = run.napalm_connection(device)
-            run.log("info", f"Fetching getters: {' - 'join(run.getters)}", device)
+            run.log("info", f"Fetching getters: {' - '.join(run.getters)}", device)
             result = {}
             for getter in run.getters:
                 try:

@@ -42,6 +42,8 @@ edit them.
 - Add mechanism for creating custom configuration property
 - New "export" keyword in set_var set to False by default. If true, the variable is considered global and can be referred to as 
 {{ variable }} in the workflow.
+- Refactor data backup services with custom configuration properties. Implement "Operational Data" as
+an example custom property.
 
 MIGRATION:
 - Remove RBAC in rbac.json

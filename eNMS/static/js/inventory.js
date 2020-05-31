@@ -1,6 +1,7 @@
 /*
 global
 CodeMirror: false
+configurationProperties: false
 settings: true
 echarts: false
 theme: false

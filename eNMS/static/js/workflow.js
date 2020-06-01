@@ -816,37 +816,42 @@ function displayWorkflowState(result) {
   updateRuntimes(result);
   if (!nodes || !edges || !result.state) return;
   for (let [path, state] of Object.entries(result.state)) {
+    console.log(path, state)
     const id = parseInt(path.split(">").slice(-1)[0]);
     if (ends.has(id) || !(id in nodes._data)) continue;
-    const total = parseInt(state.progress?.device?.total) || 0;
-    const success = parseInt(state.progress?.device?.success) || 0;
-    const skipped = parseInt(state.progress?.device?.skipped) || 0;
-    const failure = parseInt(state.progress?.device?.failure) || 0;
-    colorService(
-      id,
-      skipped == total
-        ? "#D3D3D3"
-        : success + failure + skipped < total
-        ? "#89CFF0"
-        : state.success === true
-        ? "#32cd32"
-        : state.success === false
-        ? "#FF6666"
-        : "#00CCFF"
-    );
-    if (total) {
-      let label = `<b>${nodes.get(id).name}</b>\n`;
-      let progressLabel = `Progress - ${success + failure + skipped}/${total}`;
-      label += `—————\n${progressLabel}`;
-      let progressInfo = [];
-      if (success) progressInfo.push(`${success} passed`);
-      if (failure) progressInfo.push(`${failure} failed`);
-      if (skipped) progressInfo.push(`${skipped} skipped`);
-      if (progressInfo.length) label += ` (${progressInfo.join(", ")})`;
-      nodes.update({
-        id: id,
-        label: label,
-      });
+    if (state.progress?.device) {
+      const total = parseInt(state.progress?.device?.total) || 0;
+      const success = parseInt(state.progress?.device?.success) || 0;
+      const skipped = parseInt(state.progress?.device?.skipped) || 0;
+      const failure = parseInt(state.progress?.device?.failure) || 0;
+      colorService(
+        id,
+        skipped == total
+          ? "#D3D3D3"
+          : success + failure + skipped < total
+          ? "#89CFF0"
+          : state.success === true
+          ? "#32cd32"
+          : state.success === false
+          ? "#FF6666"
+          : "#00CCFF"
+      );
+      if (total) {
+        let label = `<b>${nodes.get(id).name}</b>\n`;
+        let progressLabel = `Progress - ${success + failure + skipped}/${total}`;
+        label += `—————\n${progressLabel}`;
+        let progressInfo = [];
+        if (success) progressInfo.push(`${success} passed`);
+        if (failure) progressInfo.push(`${failure} failed`);
+        if (skipped) progressInfo.push(`${skipped} skipped`);
+        if (progressInfo.length) label += ` (${progressInfo.join(", ")})`;
+        nodes.update({
+          id: id,
+          label: label,
+        });
+      }
+    } else {
+      colorService(id, state.success ? "#32cd32" : "#FF6666");
     }
   }
   const state = result.state[currentPath];

@@ -306,64 +306,6 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- completion_time: 1
-  content_match: ''
-  content_match_regex: false
-  conversion_method: none
-  creator: admin
-  definition: Definition
-  delete_spaces_before_matching: false
-  description: Push configurations to Git
-  device_query: ''
-  device_query_property: ip_address
-  devices: []
-  dict_match: {}
-  display_only_failed_nodes: true
-  events: []
-  groups: []
-  impacting: true
-  include_device_results: true
-  include_link_in_summary: true
-  initial_payload: {}
-  iteration_devices: ''
-  iteration_devices_property: ip_address
-  iteration_values: ''
-  iteration_variable_name: iteration_value
-  last_modified: '2020-02-27 12:29:01.649602'
-  log_level: 1
-  mail_recipient: ''
-  max_number_of_retries: 100
-  max_processes: 5
-  maximum_runs: 1
-  multiprocessing: false
-  name: '[Regression Workflow 9: Operational Data Backup] git_push_configurations'
-  negative_logic: false
-  notification_header: ''
-  number_of_retries: 0
-  operating_system: ''
-  pools: []
-  positions:
-    'Regression Workflow 9: Operational Data Backup': [207, 117]
-  postprocessing: ''
-  postprocessing_mode: always
-  preprocessing: ''
-  reply_to: ''
-  reserved: false
-  run_method: once
-  scoped_name: git_push_configurations
-  send_notification: false
-  send_notification_method: mail
-  shared: false
-  skip: false
-  skip_query: ''
-  skip_value: 'True'
-  time_between_retries: 10
-  type: swiss_army_knife_service
-  update_pools: false
-  validation_condition: success
-  validation_method: none
-  vendor: ''
-  waiting_time: 0
 - a_dict: {}
   a_float: 5.0
   a_list: []
@@ -1415,7 +1357,7 @@
   max_processes: 5
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression Workflow E: Iteration Targets] Modify Payload for Iteration'
+  name: '[Regression Workflow F: Workflow of Workflows] Modify Payload for Iteration'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -3766,7 +3708,7 @@
       content: "This workflow calls netmiko and napalm backup services.\r\nThe devices\
         \ must be defined in the service, not in the workflow."
       positions: [-280, 128]
-  last_modified: '2020-05-30 06:34:36.992775'
+  last_modified: '2020-06-01 09:52:30.460325'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -3791,10 +3733,10 @@
   send_notification: false
   send_notification_method: mail
   services: ['[Shared] Start', '[Shared] End', '[Regression Workflow 9: Operational
-      Data Backup] git_push_configurations', '[Regression Workflow 9: Operational
       Data Backup] Configuration Backup (NAPALM)', '[Regression Workflow 9: Operational
       Data Backup] Retrieve Operational Data', '[Regression Workflow 9: Operational
-      Data Backup] Get Configuration']
+      Data Backup] Get Configuration', '[Regression Workflow 9: Operational Data Backup]
+      Push Configurations to Git']
   shared: false
   skip: false
   skip_query: ''
@@ -4235,11 +4177,11 @@
   send_notification_method: mail
   services: ['[Shared] Start', '[Shared] End', '[Regression Workflow F: Workflow of
       Workflows] Regression Workflow 5: VRF creation and deletion with Napalm', '[Regression
-      Workflow E: Iteration Targets] Modify Payload for Iteration', '[Regression Workflow
-      F: Workflow of Workflows] Regression Workflow F S2: Access Variables from Parent
-      Workflow', '[Regression Workflow F: Workflow of Workflows] Regression Workflow
-      F S1: Subworkflow of Workflow', '[Regression Workflow F: Workflow of Workflows]
-      Show interfaces with Netmiko', '[Shared] NAPALM: Get interfaces']
+      Workflow F: Workflow of Workflows] Modify Payload for Iteration', '[Regression
+      Workflow F: Workflow of Workflows] Regression Workflow F S2: Access Variables
+      from Parent Workflow', '[Regression Workflow F: Workflow of Workflows] Regression
+      Workflow F S1: Subworkflow of Workflow', '[Regression Workflow F: Workflow of
+      Workflows] Show interfaces with Netmiko', '[Shared] NAPALM: Get interfaces']
   shared: false
   skip: false
   skip_query: ''
@@ -4833,12 +4775,12 @@
   scoped_name: 'Regression Workflow E: Iteration Targets'
   send_notification: false
   send_notification_method: mail
-  services: ['[Shared] Start', '[Shared] End', '[Regression Workflow E: Iteration
-      Targets] Modify Payload for Iteration', '[Regression Workflow E: Iteration Targets]
-      Iteration Target Workflow - Test 2', '[Regression Workflow E: Iteration Targets]
-      Iteration Targets Workflow - Test 1', '[Regression Workflow E: Iteration Targets]
-      Iteration Target Workflow - Test 3', '[Regression Workflow E: Iteration Targets]
-      Iteration Targets Workflow - Test 4']
+  services: ['[Shared] Start', '[Shared] End', '[Regression Workflow F: Workflow of
+      Workflows] Modify Payload for Iteration', '[Regression Workflow E: Iteration
+      Targets] Iteration Target Workflow - Test 2', '[Regression Workflow E: Iteration
+      Targets] Iteration Targets Workflow - Test 1', '[Regression Workflow E: Iteration
+      Targets] Iteration Target Workflow - Test 3', '[Regression Workflow E: Iteration
+      Targets] Iteration Targets Workflow - Test 4']
   shared: false
   skip: false
   skip_query: ''
@@ -8296,6 +8238,68 @@
   type: data_backup_service
   update_pools: false
   use_device_driver: true
+  validation_condition: success
+  validation_method: none
+  vendor: ''
+  waiting_time: 0
+- commit: false
+  commit_message: ''
+  completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  devices: []
+  dict_match: {}
+  display_only_failed_nodes: false
+  events: []
+  git_repository: ''
+  groups: [Admin Users]
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2020-06-01 09:52:24.094851'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Regression Workflow 9: Operational Data Backup] Push Configurations to Git'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions:
+    'Regression Workflow 9: Operational Data Backup': [148, 191]
+  postprocessing: ''
+  postprocessing_mode: always
+  preprocessing: ''
+  pull: false
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: Push Configurations to Git
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: false
+  skip_query: ''
+  skip_value: 'True'
+  time_between_retries: 10
+  type: git_service
+  update_pools: false
   validation_condition: success
   validation_method: none
   vendor: ''

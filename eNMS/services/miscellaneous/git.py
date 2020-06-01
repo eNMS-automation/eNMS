@@ -17,7 +17,7 @@ class GitService(Service):
     pull = db.Column(Boolean)
     commit = db.Column(Boolean)
     commit_message = db.Column(db.LargeString)
-    psh = db.Column(Boolean)
+    push = db.Column(Boolean)
 
     __mapper_args__ = {"polymorphic_identity": "git_service"}
 

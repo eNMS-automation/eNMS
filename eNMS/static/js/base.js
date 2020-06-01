@@ -448,9 +448,11 @@ export function configureForm(form, id, panelId) {
     } else if (field.type == "json") {
       let editor = new JSONEditor(el.next()[0], {
         onChange: function () {
+          console.log("test")
           $(el).val(JSON.stringify(editor.get()));
         },
       });
+      $(el).val("{}");
       if (id) {
         if (!jsonEditors[id]) jsonEditors[id] = {};
         jsonEditors[id][property] = editor;

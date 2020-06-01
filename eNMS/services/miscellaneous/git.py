@@ -1,12 +1,10 @@
+from git import Repo
+from git.exc import GitCommandError
 from sqlalchemy import Boolean, ForeignKey, Integer
 
 from eNMS.database import db
 from eNMS.forms.automation import ServiceForm
-from eNMS.forms.fields import (
-    BooleanField,
-    HiddenField,
-    StringField,
-)
+from eNMS.forms.fields import BooleanField, HiddenField, StringField
 from eNMS.models.automation import Service
 
 
@@ -24,12 +22,20 @@ class GitService(Service):
     __mapper_args__ = {"polymorphic_identity": "git_service"}
 
     def job(self, run, payload, device=None):
-        return {}
+        repo = Repo(self.git_repository)
+        if self.pull:
+            repo.remotes.origin.pull()
+        if self.commit:
+            repo.git.add(A=True)
+            repo.git.commit(m=self.commit_message)
+        if self.push:
+            repo.remotes.origin.push()
+        return {"success": True}
 
 
 class GitForm(ServiceForm):
     form_type = HiddenField(default="git_service")
-    repository = StringField("Remote Git Repository")
+    git_repository = StringField("Path to Local Git Repository")
     pull = BooleanField("Git Pull")
     commit = BooleanField("Do 'git add' and commit")
     commit_message = StringField("Commit Message")

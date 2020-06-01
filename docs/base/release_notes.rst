@@ -44,6 +44,7 @@ edit them.
 {{ variable }} in the workflow.
 - Refactor data backup services with custom configuration properties. Implement "Operational Data" as
 an example custom property.
+- Add new Git service. Replace "git_push_configurations" swiss army knife service with instance of git service.
 
 MIGRATION:
 - Remove RBAC in rbac.json

@@ -44,19 +44,6 @@ class SwissArmyKnifeService(Service):
             )
         return {"success": True}
 
-    def git_push_configurations(self, run, payload, device=None):
-        if not app.settings["app"]["git_repository"]:
-            return
-        repo = Repo(Path.cwd() / "network_data")
-        try:
-            repo.remotes.origin.pull()
-            repo.git.add(A=True)
-            repo.git.commit(m="Automatic commit (configurations)")
-        except GitCommandError as exc:
-            info(f"Git commit failed ({str(exc)}")
-        repo.remotes.origin.push()
-        return {"success": True}
-
     def process_payload1(self, run, payload, device):
         get_facts = run.get_result("NAPALM: Get Facts", device.name)
         get_interfaces = run.get_result("NAPALM: Get interfaces", device.name)

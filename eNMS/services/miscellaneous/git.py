@@ -14,6 +14,7 @@ class GitService(Service):
     pretty_name = "Git Action"
     id = db.Column(Integer, ForeignKey("service.id"), primary_key=True)
     git_repository = db.Column(db.SmallString)
+    relative_path = db.Column(Boolean)
     pull = db.Column(Boolean)
     commit = db.Column(Boolean)
     commit_message = db.Column(db.LargeString)
@@ -22,7 +23,11 @@ class GitService(Service):
     __mapper_args__ = {"polymorphic_identity": "git_service"}
 
     def job(self, run, payload, device=None):
-        repo = Repo(self.git_repository)
+        repo = Repo(
+            Path.cwd() / self.git_repository
+            if self.relative_path
+            else self.git_repository
+        )
         if self.pull:
             repo.remotes.origin.pull()
         if self.commit:
@@ -36,6 +41,7 @@ class GitService(Service):
 class GitForm(ServiceForm):
     form_type = HiddenField(default="git_service")
     git_repository = StringField("Path to Local Git Repository")
+    relative_path = BooleanField("Path is relative to eNMS folder")
     pull = BooleanField("Git Pull")
     commit = BooleanField("Do 'git add' and commit")
     commit_message = StringField("Commit Message")

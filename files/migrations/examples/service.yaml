@@ -8242,8 +8242,8 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- commit: false
-  commit_message: ''
+- commit: true
+  commit_message: Automatic commit (configurations)
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -8258,8 +8258,8 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
-  git_repository: ''
-  groups: [Admin Users]
+  git_repository: settings["app"]["git_repository"]
+  groups: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -8268,7 +8268,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2020-06-01 09:52:24.094851'
+  last_modified: '2020-06-01 09:55:17.305354'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -8286,7 +8286,8 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
-  pull: false
+  pull: true
+  push: true
   reply_to: ''
   reserved: false
   run_method: per_device

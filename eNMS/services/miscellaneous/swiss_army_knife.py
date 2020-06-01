@@ -1,7 +1,6 @@
 from git import Repo
 from git.exc import GitCommandError
 from logging import info
-from pathlib import Path
 from requests import get
 from sqlalchemy import ForeignKey, Integer
 

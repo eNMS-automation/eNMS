@@ -94,12 +94,12 @@
   down: false
   icon: router
   ip_address: 192.168.56.50
-  last_duration: 9.242875s
+  last_duration: 3.67625s
   last_failure: '2020-05-31 03:54:56.395570'
   last_modified: ''
-  last_runtime: '2020-05-31 04:56:44.225485'
+  last_runtime: '2020-06-01 10:07:23.988337'
   last_status: Success
-  last_update: '2020-05-31 04:56:44.225485'
+  last_update: '2020-06-01 10:07:23.988337'
   latitude: '38.89511'
   location: Washington
   longitude: '-77.03637'

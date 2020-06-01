@@ -167,61 +167,6 @@
   creator: admin
   definition: Definition
   delete_spaces_before_matching: false
-  description: Push configurations to Gitlab
-  device_query: ''
-  device_query_property: ip_address
-  devices: []
-  dict_match: {}
-  display_only_failed_nodes: true
-  events: []
-  impacting: true
-  include_device_results: true
-  include_link_in_summary: true
-  initial_payload: {}
-  iteration_devices: ''
-  iteration_devices_property: ip_address
-  iteration_values: ''
-  iteration_variable_name: iteration_value
-  last_modified: '2019-06-24 07:19:52.529269'
-  log_level: 1
-  mail_recipient: ''
-  max_number_of_retries: 100
-  max_processes: 5
-  maximum_runs: 1
-  multiprocessing: false
-  name: git_push_configurations
-  negative_logic: false
-  notification_header: ''
-  number_of_retries: 0
-  operating_system: ''
-  pools: []
-  positions:
-    Configuration Management Workflow: !!python/tuple [0, 300]
-  postprocessing: ''
-  postprocessing_mode: always
-  preprocessing: ''
-  reserved: false
-  run_method: per_device
-  scoped_name: git_push_configurations
-  send_notification: false
-  send_notification_method: mail
-  shared: false
-  skip: false
-  skip_query: ''
-  skip_value: 'True'
-  time_between_retries: 10
-  type: swiss_army_knife_service
-  update_pools: false
-  validation_method: none
-  vendor: ''
-  waiting_time: 0
-- completion_time: 1
-  content_match: ''
-  content_match_regex: false
-  conversion_method: none
-  creator: admin
-  definition: Definition
-  delete_spaces_before_matching: false
   description: ''
   device_query: ''
   device_query_property: name

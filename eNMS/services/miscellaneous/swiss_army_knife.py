@@ -1,6 +1,3 @@
-from git import Repo
-from git.exc import GitCommandError
-from logging import info
 from requests import get
 from sqlalchemy import ForeignKey, Integer
 

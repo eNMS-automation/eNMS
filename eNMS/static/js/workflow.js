@@ -816,7 +816,6 @@ function displayWorkflowState(result) {
   updateRuntimes(result);
   if (!nodes || !edges || !result.state) return;
   for (let [path, state] of Object.entries(result.state)) {
-    console.log(path, state)
     const id = parseInt(path.split(">").slice(-1)[0]);
     if (ends.has(id) || !(id in nodes._data)) continue;
     if (state.progress?.device) {

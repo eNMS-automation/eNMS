@@ -605,7 +605,6 @@ class Run(AbstractBase):
             ]
             return {"success": all(results), "runtime": self.runtime}
         elif self.run_method != "per_device":
-            print("TTTTT"*200, self.service.name)
             return self.get_results(payload)
         else:
             if self.parent_runtime == self.runtime and not self.devices:

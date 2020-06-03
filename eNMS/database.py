@@ -214,6 +214,7 @@ class Database:
             if "service" in name and name != "service":
                 model_properties[name].extend(model_properties["service"])
             models.update({name: model, name.lower(): model})
+            model_properties[name].extend(model.model_properties)
             model_properties[name] = list(set(model_properties[name]))
             for relation in mapper.relationships:
                 if getattr(relation.mapper.class_, "private", False):

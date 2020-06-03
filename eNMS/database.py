@@ -1,5 +1,6 @@
 from ast import literal_eval
 from flask_login import current_user
+from functools import wraps
 from json import loads
 from os import environ
 from sqlalchemy import (
@@ -18,12 +19,14 @@ from sqlalchemy import (
     Text,
 )
 from sqlalchemy.dialects.mysql.base import MSMediumBlob
+from sqlalchemy.exc import OperationalError
 from sqlalchemy.ext.associationproxy import ASSOCIATION_PROXY
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.ext.mutable import MutableDict, MutableList
 from sqlalchemy.orm import scoped_session, sessionmaker
 from sqlalchemy.types import JSON
 from sqlalchemy.orm.collections import InstrumentedList
+from time import sleep
 
 from eNMS.models import model_properties, models, property_types, relationships
 from eNMS.setup import properties, settings
@@ -135,6 +138,20 @@ class Database:
             return literal_eval(input)
         except Exception:
             return loads(input)
+
+    @staticmethod
+    def commit(function):
+        @wraps(function)
+        def decorated_function(*args, **kwargs):
+            for _ in range(3):
+                try:
+                    function(*args, **kwargs)
+                    self.session.commit()
+                except OperationalError:
+                    self.session.rollback()
+                    sleep(5)
+
+        return decorated_function
 
     def configure_engine(self):
         engine_parameters = {

@@ -89,6 +89,13 @@ class ServiceForm(BaseForm):
     )
     multiprocessing = BooleanField("Multiprocessing")
     max_processes = IntegerField("Maximum number of processes", default=15)
+    validation_condition = SelectField(
+        choices=(
+            ("success", "Run on success only"),
+            ("failure", "Run on failure only"),
+            ("always", "Always run"),
+        )
+    )
     conversion_method = SelectField(
         choices=(
             ("none", "No conversion"),
@@ -310,7 +317,6 @@ class RestartWorkflowForm(BaseForm):
     form_type = HiddenField(default="restart_workflow")
     start_services = MultipleInstanceField("Services", model="service")
     restart_runtime = SelectField("Restart Runtime", choices=(), validation=False)
-    restart_from_top_level_workflow = BooleanField(default=True)
 
 
 class FileForm(BaseForm):

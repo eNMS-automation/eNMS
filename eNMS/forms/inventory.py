@@ -6,6 +6,7 @@ from eNMS.forms import BaseForm
 from eNMS.forms.fields import (
     BooleanField,
     HiddenField,
+    InstanceField,
     IntegerField,
     MultipleInstanceField,
     PasswordField,
@@ -98,16 +99,15 @@ class DeviceForm(ObjectForm):
 class DeviceDataForm(BaseForm):
     template = "device_data"
     form_type = HiddenField(default="device_data")
-    data_type = SelectField(
-        "Display",
-        choices=(("configuration", "Configuration"), ("data", "Operational Data")),
-    )
+    data_type = SelectField("Display", choices=app.configuration_properties)
 
 
 class LinkForm(ObjectForm):
     template = "object"
     form_type = HiddenField(default="link")
     id = HiddenField()
+    source = InstanceField("Source", [InputRequired()], model="device")
+    destination = InstanceField("Destination", [InputRequired()], model="device")
     color = StringField("Color")
 
 

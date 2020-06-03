@@ -44,10 +44,11 @@ class Database:
         "device": [
             "id",
             "configuration",
-            "operational_data",
             "services",
+            "source_id",
             "source",
             "destination",
+            "destination_id",
             "pools",
             "users",
         ],
@@ -88,7 +89,7 @@ class Database:
         "task",
     ]
 
-    dont_serialize = {"device": ["configuration", "operational_data"]}
+    dont_serialize = {"device": ["configuration"]}
 
     many_to_many_relationships = (
         ("user", "device"),
@@ -117,6 +118,7 @@ class Database:
         self.configure_associations()
         self.configure_events()
         self.field_conversion = {
+            "bool": bool,
             "dict": self.dict_conversion,
             "float": float,
             "int": int,
@@ -240,8 +242,8 @@ class Database:
                 hist = state.get_history(attr.key, True)
                 if (
                     getattr(target, "private", False)
-                    or getattr(target, "dont_track_changes", False)
-                    or getattr(state.class_, attr.key).info.get("dont_track_changes")
+                    or not getattr(target, "log_changes", True)
+                    or not getattr(state.class_, attr.key).info.get("log_change", True)
                     or attr.key in self.private_properties
                     or not hist.has_changes()
                 ):
@@ -250,8 +252,8 @@ class Database:
                 property_type = type(getattr(target, attr.key))
                 if property_type in (InstrumentedList, MutableList):
                     if property_type == MutableList:
-                        added = set(hist.added[0]) - set(hist.deleted[0])
-                        deleted = set(hist.deleted[0]) - set(hist.added[0])
+                        added = [x for x in hist.added[0] if x not in hist.deleted[0]]
+                        deleted = [x for x in hist.deleted[0] if x not in hist.added[0]]
                     else:
                         added, deleted = hist.added, hist.deleted
                     if deleted:
@@ -353,40 +355,49 @@ class Database:
     def export(self, model):
         return [instance.to_dict(export=True) for instance in self.fetch_all(model)]
 
-    def factory(self, cls_name, **kwargs):
+    def factory(self, _class, **kwargs):
         characters = set(kwargs.get("name", "") + kwargs.get("scoped_name", ""))
         if set("/\\'" + '"') & characters:
             raise Exception("Names cannot contain a slash or a quote.")
         instance, instance_id = None, kwargs.pop("id", 0)
         if instance_id:
-            instance = self.fetch(cls_name, id=instance_id)
+            instance = self.fetch(_class, id=instance_id)
         elif "name" in kwargs:
-            instance = self.fetch(cls_name, allow_none=True, name=kwargs["name"])
+            instance = self.fetch(_class, allow_none=True, name=kwargs["name"])
         if instance and not kwargs.get("must_be_new"):
             instance.update(**kwargs)
         else:
-            instance = models[cls_name](**kwargs)
+            instance = models[_class](**kwargs)
             self.session.add(instance)
         return instance
 
-    def set_custom_properties(self, cls):
-        for property, values in properties["custom"].get(cls.__tablename__, {}).items():
-            is_private = values.get("private", False)
-            kwargs = {"default": values["default"]} if not is_private else {}
-            setattr(
-                cls,
-                property,
-                self.Column(
-                    {
-                        "boolean": Boolean,
-                        "float": Float,
-                        "integer": Integer,
-                        "string": self.LargeString,
-                    }[values.get("type", "string")],
-                    **kwargs,
-                ),
+    def set_custom_properties(self, table):
+        model = table.__tablename__
+        for property, values in properties["custom"].get(model, {}).items():
+            if values.get("private", False):
+                kwargs = {}
+            else:
+                kwargs = {
+                    "default": values["default"],
+                    "info": {"log_change": values.get("log_change", True)},
+                }
+            column = self.Column(
+                {
+                    "boolean": Boolean,
+                    "dict": self.Dict,
+                    "float": Float,
+                    "integer": Integer,
+                    "json": JSON,
+                    "string": self.LargeString,
+                }[values.get("type", "string")],
+                **kwargs,
             )
-        return cls
+            if not values.get("serialize", True):
+                self.dont_serialize[model].append(property)
+            if not values.get("migrate", True):
+                self.dont_migrate[model].append(property)
+            setattr(table, property, column)
+        return table
 
 
 db = Database()

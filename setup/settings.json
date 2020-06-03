@@ -1,6 +1,6 @@
 {
   "app": {
-    "address": "test",
+    "address": "",
     "config_mode": "debug",
     "create_examples": true,
     "documentation_url": "https://enms.readthedocs.io/en/latest/",
@@ -71,12 +71,7 @@
     }
   },
   "security": {
-    "forbidden_python_libraries": [
-      "eNMS",
-      "os",
-      "subprocess",
-      "sys"
-    ],
+    "forbidden_python_libraries": ["eNMS", "os", "subprocess", "sys"],
     "hash_user_passwords": true
   },
   "slack": {

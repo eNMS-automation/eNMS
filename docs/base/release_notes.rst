@@ -33,11 +33,23 @@ for a given logger should also be logged as changelog or service log by default.
 - Add "all results view" so you can compare any two results in a workflow ("Re: [E] Re: Visual results diff")
 - add option in settings so you can choose whether a logger goes to service log or not
 - Remove summary from service state to improve workflow refresh performances
+- Add Dark mode and theme mechanism
+- Make search endpoint work with result to retrieve device results
+- Allow dictionary and json as custom properties. For json properties, use jsoneditor to let the user
+edit them.
+- Add example of model in template plugins
+- Add placeholder as a global variable in a workflow (e.g to be used in the superworkflow)
+- Add mechanism for creating custom configuration property
+- New "export" keyword in set_var set to False by default. If true, the variable is considered global and can be referred to as 
+{{ variable }} in the workflow.
+- Refactor data backup services with custom configuration properties. Implement "Operational Data" as
+an example custom property.
 
 MIGRATION:
 - Remove RBAC in rbac.json
 - Update migration files (user.yaml): group: Admin -> groups: [Admin Users]
 - app_log -> changelog in the service migration files (python snippet services)
+- set_var: add export keyword set to True in service.yaml for backward compatibility
 
 Version 3.21.3
 --------------

@@ -50,12 +50,12 @@ class Service(AbstractBase):
     name = db.Column(db.SmallString, unique=True)
     shared = db.Column(Boolean, default=False)
     scoped_name = db.Column(db.SmallString, index=True)
-    last_modified = db.Column(db.SmallString, info={"dont_track_changes": True})
+    last_modified = db.Column(db.SmallString, info={"log_change": False})
     description = db.Column(db.SmallString)
     number_of_retries = db.Column(Integer, default=0)
     time_between_retries = db.Column(Integer, default=10)
     max_number_of_retries = db.Column(Integer, default=100)
-    positions = db.Column(db.Dict, info={"dont_track_changes": True})
+    positions = db.Column(db.Dict, info={"log_change": False})
     tasks = relationship("Task", back_populates="service", cascade="all,delete")
     events = relationship("Event", back_populates="service", cascade="all,delete")
     vendor = db.Column(db.SmallString)
@@ -112,6 +112,7 @@ class Service(AbstractBase):
     maximum_runs = db.Column(Integer, default=1)
     multiprocessing = db.Column(Boolean, default=False)
     max_processes = db.Column(Integer, default=5)
+    validation_condition = db.Column(db.SmallString, default="success")
     conversion_method = db.Column(db.SmallString, default="none")
     validation_method = db.Column(db.SmallString, default="none")
     content_match = db.Column(db.LargeString)
@@ -209,7 +210,7 @@ class Result(AbstractBase):
 
     __tablename__ = type = "result"
     private = True
-    dont_track_changes = True
+    log_change = False
     id = db.Column(Integer, primary_key=True)
     success = db.Column(Boolean, default=False)
     runtime = db.Column(db.SmallString)
@@ -248,6 +249,8 @@ class Result(AbstractBase):
     @classmethod
     def filtering_constraints(cls, **kwargs):
         constraints = []
+        if kwargs.get("rest_api_request", False):
+            return []
         if not kwargs.get("full_result"):
             constraints.append(
                 getattr(
@@ -264,7 +267,7 @@ class ServiceLog(AbstractBase):
 
     __tablename__ = type = "service_log"
     private = True
-    dont_track_changes = True
+    log_change = False
     id = db.Column(Integer, primary_key=True)
     content = db.Column(db.LargeString)
     runtime = db.Column(db.SmallString)
@@ -283,7 +286,6 @@ class Run(AbstractBase):
     )
     private = True
     id = db.Column(Integer, primary_key=True)
-    restart_path = db.Column(db.SmallString)
     restart_run_id = db.Column(Integer, ForeignKey("run.id"))
     restart_run = relationship("Run", uselist=False, foreign_keys=restart_run_id)
     start_services = db.Column(db.List)
@@ -328,7 +330,7 @@ class Run(AbstractBase):
     )
     task_id = db.Column(Integer, ForeignKey("task.id", ondelete="SET NULL"))
     task = relationship("Task", foreign_keys="Run.task_id")
-    state = db.Column(db.Dict, info={"dont_track_changes": True})
+    state = db.Column(db.Dict, info={"log_change": False})
     results = relationship("Result", back_populates="run", cascade="all, delete-orphan")
     model_properties = ["progress", "service_properties"]
 
@@ -339,19 +341,9 @@ class Run(AbstractBase):
             self.creator = self.parent.creator
         if not kwargs.get("parent_runtime"):
             self.parent_runtime = self.runtime
-            self.restart_path = kwargs.get("restart_path")
             self.path = str(self.service.id)
         else:
             self.path = f"{self.parent.path}>{self.service.id}"
-        restart_path = self.original.restart_path
-        if restart_path:
-            path_ids = restart_path.split(">")
-            if str(self.service.id) in path_ids:
-                workflow_index = path_ids.index(str(self.service.id))
-                if workflow_index == len(path_ids) - 2:
-                    self.start_services = path_ids[-1].split("-")
-                elif workflow_index < len(path_ids) - 2:
-                    self.start_services = [path_ids[workflow_index + 1]]
         if not self.start_services:
             self.start_services = [db.fetch("service", scoped_name="Start").id]
 
@@ -368,8 +360,8 @@ class Run(AbstractBase):
         return self if not self.parent else self.parent.original
 
     @property
-    def dont_track_changes(self):
-        return self.runtime != self.parent_runtime
+    def log_change(self):
+        return self.runtime == self.parent_runtime
 
     def __repr__(self):
         return f"{self.runtime}: SERVICE '{self.service}'"
@@ -633,10 +625,8 @@ class Run(AbstractBase):
                     (device.id, self.runtime, payload, results)
                     for device in self.devices
                 ]
-                pool = ThreadPool(processes=processes)
-                pool.map(self.get_device_result, process_args)
-                pool.close()
-                pool.join()
+                with ThreadPool(processes=processes) as pool:
+                    pool.map(self.get_device_result, process_args)
             else:
                 results = [
                     self.get_results(payload, device, commit=False)
@@ -726,10 +716,17 @@ class Run(AbstractBase):
                             retries = exec_variables["retries"]
                     except SystemExit:
                         pass
-                if results["success"] and self.validation_method != "none":
+                run_validation = (
+                    self.validation_condition == "always"
+                    or self.validation_condition == "failure"
+                    and not results["success"]
+                    or self.validation_condition == "success"
+                    and results["success"]
+                )
+                if run_validation and self.validation_method != "none":
                     self.validate_result(results, payload, device)
-                if self.negative_logic:
-                    results["success"] = not results["success"]
+                    if self.negative_logic:
+                        results["success"] = not results["success"]
                 if results["success"]:
                     return results
                 elif retries:
@@ -984,16 +981,23 @@ class Run(AbstractBase):
         section=None,
         operation="set",
         allow_none=False,
+        export=False,
     ):
+        global_variables = payload.setdefault("global", {})
         payload = payload.setdefault("variables", {})
         if device:
             payload = payload.setdefault("devices", {})
             payload = payload.setdefault(device, {})
+            if export:
+                global_variables = global_variables.setdefault("devices", {})
+                global_variables = global_variables.setdefault(device, {})
         if section:
             payload = payload.setdefault(section, {})
         if value is not None:
             if operation == "set":
                 payload[name] = value
+                if export:
+                    global_variables[name] = value
             else:
                 getattr(payload[name], operation)(value)
         else:
@@ -1052,15 +1056,14 @@ class Run(AbstractBase):
             "workflow": _self.workflow,
             "set_var": partial(_self.payload_helper, payload),
             "parent_device": _self.parent_device or device,
+            "placeholder": _self.original.placeholder,
             **locals,
         }
         if "variables" not in payload:
             return variables
-        variables.update(
-            {k: v for k, v in payload["variables"].items() if k != "devices"}
-        )
-        if "devices" in payload["variables"] and device:
-            variables.update(payload["variables"]["devices"].get(device.name, {}))
+        variables.update(payload["global"])
+        if device and "devices" in payload["global"]:
+            variables.update(payload["global"]["devices"].get(device.name, {}))
         return variables
 
     def eval(_self, query, function="eval", **locals):  # noqa: N805

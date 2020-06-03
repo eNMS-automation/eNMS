@@ -1,6 +1,7 @@
 /*
 global
 CodeMirror: false
+configurationProperties: false
 settings: true
 echarts: false
 theme: false
@@ -251,7 +252,7 @@ function showSessionLog(sessionId) {
 
 function downloadNetworkData(id) {
   downloadFile(
-    $(`#data-type-${id}`).prop("checked") ? "operational_data" : "configuration",
+    $(`#data-type-${id}`).val(),
     $(`#content-${id}`).data("CodeMirrorInstance").getValue(),
     "txt"
   );
@@ -266,13 +267,11 @@ function displayNetworkData(type, id, result, datetime) {
           class="navbar navbar-default nav-controls"
           role="navigation"
         >
-          <input ${type == "configuration" ? "" : "checked"}
-            id="data-type-${id}"
-            type="checkbox"
-            data-onstyle="info"
-            data-offstyle="primary"
-            
-          >
+          <select id="data-type-${id}">
+            ${Object.entries(configurationProperties).map(
+              ([value, name]) => `<option value="${value}">${name}</option>`
+            )}
+          </select>
           <button
             onclick="eNMS.inventory.downloadNetworkData(${id})"
             type="button"
@@ -290,11 +289,7 @@ function displayNetworkData(type, id, result, datetime) {
     title: "Network Data",
     id: id,
     callback: function () {
-      $(`#data-type-${id}`).bootstrapToggle({
-        off: "Configuration",
-        on: "Operational Data",
-        width: "150px",
-      });
+      $(`#data-type-${id}`).val(type).selectpicker("refresh");
       const content = document.getElementById(`content-${id}`);
       // eslint-disable-next-line new-cap
       const editor = CodeMirror(content, {
@@ -309,8 +304,7 @@ function displayNetworkData(type, id, result, datetime) {
       editor.setSize("100%", "100%");
       $(`#data-type-${id}`)
         .on("change", function () {
-          const value = $(this).prop("checked") ? "operational_data" : "configuration";
-          editor.setValue(result[value]);
+          editor.setValue(result[this.value]);
           editor.refresh();
         })
         .change();
@@ -322,10 +316,10 @@ export const showDeviceData = function (device) {
   call({
     url: `/get_device_network_data/${device.id}`,
     callback: (result) => {
-      if (!result.configuration && !result.operational_data) {
-        notify("No data stored.", "error", 5);
-      } else {
+      if (Object.keys(configurationProperties).some((p) => result[p])) {
         displayNetworkData("configuration", device.id, result, device.last_runtime);
+      } else {
+        notify("No data stored.", "error", 5);
       }
     },
   });
@@ -335,9 +329,7 @@ function showGitConfiguration(device, commit) {
   call({
     url: `/get_git_network_data/${device.name}/${commit.hash}`,
     callback: (result) => {
-      const type = $(`#data-type-${device.id}`).prop("checked")
-        ? "operational_data"
-        : "configuration";
+      const type = $(`#data-type-${device.id}`).val();
       displayNetworkData(type, commit.hash, result, commit.date);
     },
   });
@@ -347,9 +339,7 @@ function showGitHistory(device) {
   call({
     url: `/get_git_history/${device.id}`,
     callback: (commits) => {
-      if (!commits.configuration.length && !commits.operational_data.length) {
-        notify("No data stored.", "error", 5);
-      } else {
+      if (Object.keys(configurationProperties).some((p) => commits[p].length)) {
         openPanel({
           name: "git_history",
           id: device.id,
@@ -360,12 +350,11 @@ function showGitHistory(device) {
               role="navigation"
               style="margin-top: 5px"
             >
-              <input
-                id="data-type-${device.id}"
-                type="checkbox"
-                data-onstyle="info"
-                data-offstyle="primary"
-              >
+              <select id="data-type-${device.id}">
+                ${Object.entries(configurationProperties).map(
+                  ([value, name]) => `<option value="${value}">${name}</option>`
+                )}
+              </select>
               <button
                 class="btn btn-info"
                 id="compare-${device.id}-btn"
@@ -387,11 +376,7 @@ function showGitHistory(device) {
               </table>
             <div>`,
           callback: () => {
-            $(`#data-type-${device.id}`).bootstrapToggle({
-              on: "Operational Data",
-              off: "Configuration",
-              width: "150px",
-            });
+            $(`#data-type-${device.id}`).selectpicker("refresh");
             let table = $(`#configuration-table-${device.id}`)
               // eslint-disable-next-line new-cap
               .DataTable({
@@ -408,15 +393,12 @@ function showGitHistory(device) {
             $(`#data-type-${device.id}`)
               .on("change", function () {
                 table.clear();
-                const data = $(this).prop("checked")
-                  ? "operational_data"
-                  : "configuration";
                 $(`#compare-${device.id}-btn`)
                   .unbind("click")
                   .on("click", function () {
-                    compare(data, device);
+                    compare(this.value, device);
                   });
-                commits[data].forEach((commit) => {
+                commits[this.value].forEach((commit) => {
                   table.row.add([
                     `${commit.date}`,
                     `${commit.hash}`,
@@ -433,12 +415,12 @@ function showGitHistory(device) {
                     </button>`,
                     `<input
                       type="radio"
-                      name="v1-${data}-${device.id}"
+                      name="v1-${this.value}-${device.id}"
                       value="${commit.hash}">
                     </input>`,
                     `<input
                       type="radio"
-                      name="v2-${data}-${device.id}"
+                      name="v2-${this.value}-${device.id}"
                       value="${commit.hash}">
                     </input>`,
                   ]);
@@ -448,6 +430,8 @@ function showGitHistory(device) {
               .change();
           },
         });
+      } else {
+        notify("No data stored.", "error", 5);
       }
     },
   });

@@ -134,6 +134,7 @@ class Server(Flask):
             app.rbac["menu"]["Plugins"]["pages"].update(settings.get("pages", {}))
             init_rbac_form(app.rbac)
             app.log("info", f"Loading plugin: {settings['name']}")
+        db.base.metadata.create_all(bind=db.engine)
 
     def register_extensions(self):
         self.auth = HTTPBasicAuth()
@@ -157,10 +158,11 @@ class Server(Flask):
         @self.context_processor
         def inject_properties():
             return {
-                "property_types": property_types,
+                "configuration_properties": app.configuration_properties,
                 "form_properties": form_properties,
                 "menu": rbac["menu"],
                 "names": app.property_names,
+                "property_types": property_types,
                 "relations": list(set(chain.from_iterable(relationships.values()))),
                 "relationships": relationships,
                 "service_types": {
@@ -537,8 +539,8 @@ class Server(Flask):
                     "columns": [{"data": column} for column in rest_body["columns"]],
                     "order": [{"column": 0, "dir": "asc"}],
                     "start": 0,
-                    "length": rest_body["maximum_return_records"],
-                    "form": rest_body["search_criteria"],
+                    "length": rest_body.get("maximum_return_records", 10),
+                    "form": rest_body.get("search_criteria", {}),
                     "rest_api_request": True,
                 }
                 return app.filtering(rest_body["type"], **kwargs)["data"]

@@ -9,8 +9,10 @@ from eNMS import app
 from eNMS.database import db
 from eNMS.forms.fields import (
     BooleanField,
+    DictField,
     InstanceField,
     IntegerField,
+    JsonField,
     MultipleInstanceField,
     PasswordField,
     StringField,
@@ -33,12 +35,16 @@ class MetaForm(FormMeta):
             form.custom_properties = {}
         form.custom_properties.update(app.properties["custom"].get(form_type, {}))
         for property, values in form.custom_properties.items():
+            if not values.get("form", True):
+                continue
             if property in db.private_properties:
                 field = PasswordField
             else:
                 field = {
                     "boolean": BooleanField,
+                    "dict": DictField,
                     "integer": IntegerField,
+                    "json": JsonField,
                     "string": StringField,
                 }[values.get("type", "string")]
             form_kw = {"default": values["default"]} if "default" in values else {}

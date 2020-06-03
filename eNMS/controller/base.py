@@ -167,11 +167,14 @@ class BaseController:
 
     def load_custom_properties(self):
         for model, values in self.properties["custom"].items():
-            self.property_names.update({k: v["pretty_name"] for k, v in values.items()})
-            model_properties[model].extend(list(values))
-            db.private_properties.extend(
-                list(p for p, v in values.items() if v.get("private", False))
-            )
+            for property, property_dict in values.items():
+                pretty_name = property_dict["pretty_name"]
+                self.property_names[property] = pretty_name
+                model_properties[model].append(property)
+                if property_dict.get("private"):
+                    db.private_properties.append(property)
+                if model == "device" and property_dict.get("configuration"):
+                    self.configuration_properties[property] = pretty_name
 
     def init_logs(self):
         folder = self.path / "logs"
@@ -509,7 +512,7 @@ class BaseController:
             with open(Path(dir.path) / "data.yml") as data:
                 parameters = yaml.load(data)
                 device.update(**{"dont_update_pools": True, **parameters})
-            for data in ("configuration", "operational_data"):
+            for data in self.configuration_properties:
                 filepath = Path(dir.path) / data
                 if not filepath.exists():
                     continue
@@ -517,5 +520,8 @@ class BaseController:
                     setattr(device, data, file.read())
         db.session.commit()
         for pool in db.fetch_all("pool"):
-            if pool.device_configuration or pool.device_operational_data:
+            if any(
+                getattr(pool, f"device_{property}")
+                for property in self.configuration_properties
+            ):
                 pool.compute_pool()

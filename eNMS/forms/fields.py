@@ -124,9 +124,13 @@ class DictField(StringField):
 class JsonField(WtformsField):
     type = "json"
 
+    def __init__(self, *args, **kwargs):
+        self.name = kwargs.get("_name")
+        super().__init__(*args, **kwargs)
+
     def __call__(self, **kwargs):
-        html_kwargs = {"id": kwargs["id"], "class_": "add-id"}
-        return HTMLString(f"<div {html_params(**html_kwargs)}></div>")
+        html_kwargs = {"id": kwargs["id"], "class_": "add-id", "name": self.name}
+        return HTMLString(f"<input {html_params(**html_kwargs)} hidden><div></div>")
 
 
 class InstanceField(SelectField):

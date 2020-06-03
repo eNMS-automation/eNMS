@@ -23,6 +23,7 @@ from eNMS.models import models, model_properties, property_types
 class InventoryController(BaseController):
 
     ssh_port = -1
+    configuration_properties = {"configuration": "Configuration"}
 
     def get_ssh_port(self):
         self.ssh_port += 1
@@ -120,25 +121,20 @@ class InventoryController(BaseController):
                 {"hash": str(commit), "date": commit.committed_datetime}
                 for commit in list(repo.iter_commits(paths=path / data_type))
             ]
-            for data_type in ("configuration", "operational_data")
+            for data_type in self.configuration_properties
         }
 
     def get_git_network_data(self, device_name, hash):
-        tree = Repo(self.path / "network_data").commit(hash).tree
-        configuration_file = tree / device_name / "configuration"
-        operational_data_file = tree / device_name / "operational_data"
-        with BytesIO(configuration_file.data_stream.read()) as f:
-            configuration = f.read().decode("utf-8")
-        with BytesIO(operational_data_file.data_stream.read()) as f:
-            operational_data = f.read().decode("utf-8")
-        return {"configuration": configuration, "operational_data": operational_data}
+        tree, result = Repo(self.path / "network_data").commit(hash).tree, {}
+        for property in self.configuration_properties:
+            file = tree / device_name / property
+            with BytesIO(file.data_stream.read()) as f:
+                result[property] = f.read().decode("utf-8")
+        return result
 
     def get_device_network_data(self, device_id):
         device = db.fetch("device", id=device_id)
-        return {
-            "configuration": device.configuration,
-            "operational_data": device.operational_data,
-        }
+        return {p: getattr(device, p) for p in self.configuration_properties}
 
     def get_session_log(self, session_id):
         return db.fetch("session", id=session_id).content
@@ -156,20 +152,14 @@ class InventoryController(BaseController):
         for obj_type in ("device", "link"):
             sheet = workbook.add_sheet(obj_type)
             for index, property in enumerate(model_properties[obj_type]):
-                if property in (
-                    "id",
-                    "source_id",
-                    "destination_id",
-                    "configuration",
-                    "operational_data",
-                ):
+                if property in db.dont_migrate[obj_type]:
                     continue
                 sheet.write(0, index, property)
                 for obj_index, obj in enumerate(db.fetch_all(obj_type), 1):
                     value = getattr(obj, property)
                     if type(value) == bytes:
                         value = str(self.decrypt(value), "utf-8")
-                    sheet.write(obj_index, index, value)
+                    sheet.write(obj_index, index, str(value))
         workbook.save(self.path / "files" / "spreadsheets" / filename)
 
     def topology_import(self, file):

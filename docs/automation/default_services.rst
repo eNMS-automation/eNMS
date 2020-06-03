@@ -107,25 +107,20 @@ Configuration parameters for creating this service instance:
 - ``Inline_transfer`` Cisco specific method of transferring files between internal components of the device
 - ``Overwrite_file`` If checked, overwrite the file at the destination if it exists
 
-Netmiko Operational Data Backup Service
+Netmiko Data Backup Service
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 This service uses Netmiko to send commands to store information from devices.
 
-Configuration File Creation
+Target Property and Commands
 """"""""""""""""""""""""""""
-- All Common Netmiko Parameters (see above)
-- ``Command to retrieve the configuration`` This is the command to show the entire config.
-
-Create Operational Data File
-"""""""""""""""""""""""""""""
-- All Common Netmiko Parameters (see above)
-- ``Operational Data Command x`` - This is a series of twelve commands that are used to pull operational and status information.
+- Property to update (e.g ``Configuration``)
+- ``Commands`` - This is a series of twelve commands that are used to pull data from the device.
 - ``Label`` This is the label the data will be given in the results
 
 Search Response and Replace
 """""""""""""""""""""""""""""
-- Used in ``Config File Creation`` and ``Operational Data File`` to filter out unwanted information
+- Used to filter out unwanted information
 - ``Pattern`` The pattern to search through the retrieved data to replace
 - ``Replace With`` This is what will be substituted when the ``pattern`` is found.
 
@@ -195,9 +190,9 @@ Napalm Common Parameters
 - ``Optional arguments`` Napalm supports a number of optional arguments that are documented here:
   (https://napalm.readthedocs.io/en/latest/support/index.html#optional-arguments)
 
-Napalm Operational Data Backup
+Napalm Data Backup
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-This service uses Napalm to pull configuration and operational data from devices to store the data for later comparison
+This service uses Napalm to pull data from devices and store it for later comparison
 and for historical tracking.
 
 - All Napalm Common Parameters (See Above)

@@ -9,8 +9,16 @@
       {% for field in form %} {% set id = "{}-{}".format(form_type, field.name) %} {%
       set class = "form-control-bool" if field.type == "BooleanField" else
       "form-control" %} {% if field.widget.input_type == 'hidden' %} {{ field(id=id,
-      class="add-id") }} {% elif field.type == "JsonField" %} {{ field(id=id,
-      class="add-id {}".format(class)) }} {% else %}
+      class="add-id") }} {% elif field.type == "JsonField" %}
+      <fieldset class="section">
+        <legend align="center" class="section">
+          {{ field.label }}
+        </legend>
+        <div class="form-group">
+          {{ field(id=id, class="add-id {}".format(class)) }}
+        </div>
+      </fieldset>
+      {% else %}
       <label class="control-label col-md-3 col-sm-3 col-xs-12">{{ field.label }}</label>
       <div class="col-md-9 col-sm-9 col-xs-12">
         {{ field(id=id, class="{} add-id".format(class), checked=field.default) }}

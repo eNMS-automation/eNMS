@@ -5,6 +5,7 @@ from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.orm import backref, deferred, relationship
 from sqlalchemy.schema import UniqueConstraint
 
+from eNMS import app
 from eNMS.models.base import AbstractBase
 from eNMS.database import db
 from eNMS.setup import properties
@@ -16,7 +17,7 @@ class Object(AbstractBase):
     type = db.Column(db.SmallString)
     __mapper_args__ = {"polymorphic_identity": "object", "polymorphic_on": type}
     id = db.Column(Integer, primary_key=True)
-    last_modified = db.Column(db.SmallString, info={"dont_track_changes": True})
+    last_modified = db.Column(db.SmallString, info={"log_change": False})
     subtype = db.Column(db.SmallString)
     description = db.Column(db.SmallString)
     model = db.Column(db.SmallString)
@@ -69,12 +70,7 @@ class Device(Object):
     enable_password = db.Column(db.SmallString)
     netmiko_driver = db.Column(db.SmallString, default="cisco_ios")
     napalm_driver = db.Column(db.SmallString, default="ios")
-    configuration = deferred(
-        db.Column(db.LargeString, info={"dont_track_changes": True})
-    )
-    operational_data = deferred(
-        db.Column(db.LargeString, info={"dont_track_changes": True})
-    )
+    configuration = deferred(db.Column(db.LargeString, info={"log_change": False}))
     last_failure = db.Column(db.SmallString, default="Never")
     last_status = db.Column(db.SmallString, default="Never")
     last_update = db.Column(db.SmallString, default="Never")
@@ -108,7 +104,7 @@ class Device(Object):
         include_properties = columns if rest_api_request else None
         properties = super().get_properties(include=include_properties)
         context = int(kwargs["form"].get("context-lines", 0))
-        for property in ("configuration", "operational_data"):
+        for property in app.configuration_properties:
             if rest_api_request:
                 if property in columns:
                     properties[property] = getattr(self, property)
@@ -266,7 +262,7 @@ class Pool(AbstractBase):
     __tablename__ = type = "pool"
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.SmallString, unique=True)
-    last_modified = db.Column(db.SmallString, info={"dont_track_changes": True})
+    last_modified = db.Column(db.SmallString, info={"log_change": False})
     description = db.Column(db.SmallString)
     operator = db.Column(db.SmallString, default="all")
     devices = relationship(
@@ -346,7 +342,7 @@ class Session(AbstractBase):
     name = db.Column(db.SmallString, unique=True)
     timestamp = db.Column(db.SmallString)
     user = db.Column(db.SmallString)
-    content = db.Column(db.LargeString, info={"dont_track_changes": True})
+    content = db.Column(db.LargeString, info={"log_change": False})
     device_id = db.Column(Integer, ForeignKey("device.id"))
     device = relationship(
         "Device", back_populates="sessions", foreign_keys="Session.device_id"

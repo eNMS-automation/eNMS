@@ -446,7 +446,12 @@ export function configureForm(form, id, panelId) {
         selectedTextFormat: "count > 3",
       });
     } else if (field.type == "json") {
-      let editor = new JSONEditor(el[0]);
+      let editor = new JSONEditor(el.next()[0], {
+        onChange: function () {
+          $(el).val(JSON.stringify(editor.get()));
+        },
+      });
+      $(el).val("{}");
       if (id) {
         if (!jsonEditors[id]) jsonEditors[id] = {};
         jsonEditors[id][property] = editor;
@@ -584,10 +589,9 @@ function updateProperty(instance, el, property, value, type) {
   } else if (propertyType == "object") {
     el.append(new Option(value.name, value.id)).val(value.id).trigger("change");
   } else if (propertyType == "json") {
+    el.val(JSON.stringify(value));
     const editor = jsonEditors[instance.id][property];
-    if (editor) {
-      editor.set(value);
-    }
+    if (editor) editor.set(value);
   } else if (propertyType == "code") {
     const editor = editors[instance.id][property];
     if (editor) editor.setValue(value);

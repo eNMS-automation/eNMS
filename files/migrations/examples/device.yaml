@@ -1,4 +1,6 @@
-- description: Jackson
+- attributes:
+    '1': ['2', three]
+  description: Jackson
   down: false
   icon: router
   ip_address: 192.168.56.51
@@ -26,7 +28,9 @@
   type: device
   username: cisco
   vendor: Cisco
-- description: PaloAlto
+- attributes:
+    '1': ['2', three]
+  description: PaloAlto
   down: false
   icon: router
   ip_address: 192.168.1.86
@@ -54,7 +58,9 @@
   type: device
   username: cisco
   vendor: Cisco
-- description: Austin
+- attributes:
+    '1': ['2', three]
+  description: Austin
   down: false
   icon: router
   ip_address: 192.168.105.9
@@ -82,16 +88,18 @@
   type: device
   username: admin
   vendor: Arista
-- description: Washington
+- attributes:
+    '1': ['2', three]
+  description: Washington
   down: false
   icon: router
   ip_address: 192.168.56.50
   last_duration: 9.242875s
-  last_failure: '2020-04-14 04:12:15.069545'
+  last_failure: '2020-05-31 03:54:56.395570'
   last_modified: ''
-  last_runtime: '2020-04-14 05:40:27.121883'
+  last_runtime: '2020-05-31 03:57:23.484427'
   last_status: Success
-  last_update: '2020-04-14 05:40:27.121883'
+  last_update: '2020-05-31 03:57:23.484427'
   latitude: '38.89511'
   location: Washington
   longitude: '-77.03637'
@@ -110,10 +118,12 @@
   type: device
   username: admin
   vendor: Arista
-- description: Chicago
+- attributes:
+    '1': ['2', three]
+  description: Chicago
   down: false
   icon: router
-  ip_address: 192.168.1.188
+  ip_address: 192.168.56.50
   last_duration: ''
   last_failure: Never
   last_modified: ''
@@ -136,9 +146,11 @@
   subtype: ''
   tasks: []
   type: device
-  username: cisco
+  username: admin
   vendor: Cisco
-- description: SanJose
+- attributes:
+    '1': ['2', three]
+  description: SanJose
   down: false
   icon: router
   ip_address: 192.168.1.187
@@ -166,7 +178,9 @@
   type: device
   username: cisco
   vendor: Cisco
-- description: SanDiego
+- attributes:
+    '1': ['2', three]
+  description: SanDiego
   down: false
   icon: router
   ip_address: 10.0.0.12
@@ -194,7 +208,9 @@
   type: device
   username: cisco
   vendor: Cisco
-- description: Dallas
+- attributes:
+    '1': ['2', three]
+  description: Dallas
   down: false
   icon: router
   ip_address: 10.0.0.100
@@ -222,7 +238,9 @@
   type: device
   username: cisco
   vendor: Cisco
-- description: Philadelphia
+- attributes:
+    '1': ['2', three]
+  description: Philadelphia
   down: false
   icon: router
   ip_address: 10.0.0.101
@@ -250,7 +268,9 @@
   type: device
   username: cisco
   vendor: Cisco
-- description: LosAngeles
+- attributes:
+    '1': ['2', three]
+  description: LosAngeles
   down: false
   icon: optical_switch
   ip_address: 10.0.0.13
@@ -278,7 +298,9 @@
   type: device
   username: cisco
   vendor: Cisco
-- description: Detroit
+- attributes:
+    '1': ['2', three]
+  description: Detroit
   down: false
   icon: router
   ip_address: 10.0.0.14
@@ -306,7 +328,9 @@
   type: device
   username: cisco
   vendor: Cisco
-- description: Richmond
+- attributes:
+    '1': ['2', three]
+  description: Richmond
   down: false
   icon: router
   ip_address: 10.0.0.15
@@ -334,7 +358,9 @@
   type: device
   username: cisco
   vendor: Cisco
-- description: Atlanta
+- attributes:
+    '1': ['2', three]
+  description: Atlanta
   down: false
   icon: router
   ip_address: 10.0.0.102
@@ -362,10 +388,12 @@
   type: device
   username: cisco
   vendor: Cisco
-- description: Boston
+- attributes:
+    '1': ['2', three]
+  description: Boston
   down: false
   icon: router
-  ip_address: 10.0.0.103
+  ip_address: 192.168.56.50
   last_duration: ''
   last_failure: Never
   last_modified: ''
@@ -388,9 +416,11 @@
   subtype: ''
   tasks: []
   type: device
-  username: cisco
+  username: admin
   vendor: Cisco
-- description: Houston
+- attributes:
+    '1': ['2', three]
+  description: Houston
   down: false
   icon: router
   ip_address: 10.0.0.104
@@ -416,12 +446,14 @@
   subtype: ''
   tasks: []
   type: device
-  username: cisco
+  username: admin
   vendor: Cisco
-- description: Baltimore
+- attributes:
+    '1': ['2', three]
+  description: Baltimore
   down: false
   icon: router
-  ip_address: 10.0.0.105
+  ip_address: 192.168.56.50
   last_duration: ''
   last_failure: Never
   last_modified: ''
@@ -444,12 +476,14 @@
   subtype: ''
   tasks: []
   type: device
-  username: cisco
+  username: admin
   vendor: Juniper
-- description: Cleveland
+- attributes:
+    '1': ['2', three]
+  description: Cleveland
   down: false
   icon: router
-  ip_address: 10.0.0.106
+  ip_address: 192.168.56.50
   last_duration: ''
   last_failure: Never
   last_modified: ''
@@ -472,12 +506,14 @@
   subtype: ''
   tasks: []
   type: device
-  username: cisco
+  username: admin
   vendor: Juniper
-- description: Columbus
+- attributes:
+    '1': ['2', three]
+  description: Columbus
   down: false
   icon: router
-  ip_address: 10.0.0.107
+  ip_address: 192.168.56.50
   last_duration: ''
   last_failure: Never
   last_modified: ''
@@ -500,12 +536,14 @@
   subtype: ''
   tasks: []
   type: device
-  username: cisco
+  username: admin
   vendor: Juniper
-- description: Cincinnati
+- attributes:
+    '1': ['2', three]
+  description: Cincinnati
   down: false
   icon: router
-  ip_address: 10.0.0.108
+  ip_address: 192.168.56.50
   last_duration: ''
   last_failure: Never
   last_modified: ''
@@ -528,12 +566,14 @@
   subtype: ''
   tasks: []
   type: device
-  username: cisco
+  username: admin
   vendor: Juniper
-- description: Cambridge
+- attributes:
+    '1': ['2', three]
+  description: Cambridge
   down: false
   icon: router
-  ip_address: 10.0.0.109
+  ip_address: 192.168.56.50
   last_duration: ''
   last_failure: Never
   last_modified: ''
@@ -556,9 +596,11 @@
   subtype: ''
   tasks: []
   type: device
-  username: cisco
+  username: admin
   vendor: Juniper
-- description: Minneapolis
+- attributes:
+    '1': ['2', three]
+  description: Minneapolis
   down: false
   icon: router
   ip_address: 10.0.0.110
@@ -586,7 +628,9 @@
   type: device
   username: cisco
   vendor: Juniper
-- description: NewYork
+- attributes:
+    '1': ['2', three]
+  description: NewYork
   down: false
   icon: router
   ip_address: 192.168.1.88
@@ -614,7 +658,9 @@
   type: device
   username: cisco
   vendor: Juniper
-- description: Sacramento
+- attributes:
+    '1': ['2', three]
+  description: Sacramento
   down: false
   icon: router
   ip_address: 10.0.0.111
@@ -642,7 +688,9 @@
   type: device
   username: cisco
   vendor: Juniper
-- description: SanFrancisco
+- attributes:
+    '1': ['2', three]
+  description: SanFrancisco
   down: false
   icon: router
   ip_address: 192.168.1.89
@@ -670,7 +718,9 @@
   type: device
   username: cisco
   vendor: Juniper
-- description: Orange
+- attributes:
+    '1': ['2', three]
+  description: Orange
   down: false
   icon: router
   ip_address: 10.0.0.114
@@ -698,7 +748,9 @@
   type: device
   username: cisco
   vendor: Juniper
-- description: Oakland
+- attributes:
+    '1': ['2', three]
+  description: Oakland
   down: false
   icon: router
   ip_address: 10.0.0.112
@@ -726,7 +778,9 @@
   type: device
   username: cisco
   vendor: Cisco
-- description: Denver
+- attributes:
+    '1': ['2', three]
+  description: Denver
   down: false
   icon: router
   ip_address: 10.0.0.113
@@ -754,7 +808,9 @@
   type: device
   username: cisco
   vendor: Cisco
-- description: Denver
+- attributes:
+    '1': ['2', three]
+  description: Denver
   down: false
   icon: router
   ip_address: 127.0.0.1
@@ -782,7 +838,9 @@
   type: device
   username: admin
   vendor: Cisco
-- description: Washington
+- attributes:
+    '1': ['2', three]
+  description: Washington
   down: false
   icon: router
   ip_address: 192.168.56.103

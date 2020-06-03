@@ -780,7 +780,7 @@ function restartWorkflow() {
   call({
     url: `/run_service/${currentPath}`,
     form: `restart_workflow-form`,
-    function(result) {
+    callback: function (result) {
       $(`#restart_workflow-${workflow.id}`).remove();
       runLogic(result);
     },
@@ -815,6 +815,7 @@ function displayWorkflowState(result) {
   resetDisplay();
   updateRuntimes(result);
   if (!nodes || !edges || !result.state) return;
+  let nodeUpdates = [], edgeUpdates = [];
   for (let [path, state] of Object.entries(result.state)) {
     const id = parseInt(path.split(">").slice(-1)[0]);
     if (ends.has(id) || !(id in nodes._data)) continue;
@@ -843,17 +844,18 @@ function displayWorkflowState(result) {
       if (failure) progressInfo.push(`${failure} failed`);
       if (skipped) progressInfo.push(`${skipped} skipped`);
       if (progressInfo.length) label += ` (${progressInfo.join(", ")})`;
-      nodes.update({
+      nodeUpdates.push({
         id: id,
         label: label,
       });
     }
   }
+  nodes.update(nodeUpdates);
   const state = result.state[currentPath];
   if (state?.edges) {
     for (let [id, devices] of Object.entries(state.edges)) {
       if (!edges.get(id)) continue;
-      edges.update({
+      edgeUpdates.push({
         id: id,
         label: isNaN(devices)
           ? `<b>${devices}</b>`
@@ -861,31 +863,36 @@ function displayWorkflowState(result) {
         font: { size: 15, multi: "html" },
       });
     }
+    edges.update(edgeUpdates);
   }
 }
 
 function resetDisplay() {
+  let nodeUpdates = [], edgeUpdates = [];
   $("#progressbar").hide();
   workflow.services.forEach((service) => {
     if (service.scoped_name == "Placeholder") {
-      nodes.update({
+      nodeUpdates.push({
         id: service.id,
         label: "Placeholder",
       });
     } else if (ends.has(service.id) || !nodes) {
       return;
     } else {
-      nodes.update({
+      nodeUpdates.push({
         id: service.id,
         label: getServiceLabel(service),
         color: service.skip ? "#D3D3D3" : "#D2E5FF",
       });
     }
   });
-  if (!edges) return;
-  workflow.edges.forEach((edge) => {
-    edges.update({ id: edge.id, label: edge.label });
-  });
+  nodes.update(nodeUpdates);
+  if (edges) {
+    workflow.edges.forEach((edge) => {
+      edgeUpdates.push({ id: edge.id, label: edge.label });
+    });
+    edges.update(edgeUpdates);
+  }
 }
 
 function getWorkflowState(periodic, notification) {

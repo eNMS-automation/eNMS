@@ -815,8 +815,7 @@ function displayWorkflowState(result) {
   resetDisplay();
   updateRuntimes(result);
   if (!nodes || !edges || !result.state) return;
-  let node_updates = [];
-  let edge_updates = [];
+  let nodeUpdates = [], edgeUpdates = [];
   for (let [path, state] of Object.entries(result.state)) {
     const id = parseInt(path.split(">").slice(-1)[0]);
     if (ends.has(id) || !(id in nodes._data)) continue;
@@ -845,17 +844,18 @@ function displayWorkflowState(result) {
       if (failure) progressInfo.push(`${failure} failed`);
       if (skipped) progressInfo.push(`${skipped} skipped`);
       if (progressInfo.length) label += ` (${progressInfo.join(", ")})`;
-      node_updates.push({
+      nodeUpdates.push({
         id: id,
         label: label,
       });
     }
   }
+  nodes.update(nodeUpdates);
   const state = result.state[currentPath];
   if (state?.edges) {
     for (let [id, devices] of Object.entries(state.edges)) {
       if (!edges.get(id)) continue;
-      edge_updates.push({
+      edgeUpdates.push({
         id: id,
         label: isNaN(devices)
           ? `<b>${devices}</b>`
@@ -863,45 +863,35 @@ function displayWorkflowState(result) {
         font: { size: 15, multi: "html" },
       });
     }
-    if (node_updates.length > 0) {
-      nodes.update(node_updates);
-    }
-    if (edge_updates.length > 0) {
-      edges.update(edge_updates);
-    }
+    edges.update(edgeUpdates);
   }
 }
 
 function resetDisplay() {
-  let node_updates = [];
-  let edge_updates = [];
+  let nodeUpdates = [], edgeUpdates = [];
   $("#progressbar").hide();
   workflow.services.forEach((service) => {
     if (service.scoped_name == "Placeholder") {
-      node_updates.push({
+      nodeUpdates.push({
         id: service.id,
         label: "Placeholder",
       });
     } else if (ends.has(service.id) || !nodes) {
       return;
     } else {
-      node_updates.push({
+      nodeUpdates.push({
         id: service.id,
         label: getServiceLabel(service),
         color: service.skip ? "#D3D3D3" : "#D2E5FF",
       });
     }
   });
+  nodes.update(nodeUpdates);
   if (edges) {
     workflow.edges.forEach((edge) => {
-      edge_updates.push({ id: edge.id, label: edge.label });
+      edgeUpdates.push({ id: edge.id, label: edge.label });
     });
-  }
-  if (node_updates.length > 0) {
-    nodes.update(node_updates);
-  }
-  if (edge_updates.length > 0) {
-    edges.update(edge_updates);
+    edges.update(edgeUpdates);
   }
 }
 

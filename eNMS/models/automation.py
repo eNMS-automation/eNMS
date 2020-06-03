@@ -171,10 +171,6 @@ class Service(AbstractBase):
     def filename(self):
         return app.strip_all(self.name)
 
-    @property
-    def status(self):
-        return "Running" if app.service_db[self.id]["runs"] else "Idle"
-
     @classmethod
     def rbac_filter(cls, query):
         return query.filter(
@@ -496,12 +492,15 @@ class Run(AbstractBase):
         start = datetime.now().replace(microsecond=0)
         try:
             app.service_db[self.service.id]["runs"] += 1
+            self.service.status = "Running"
+            db.session.commit()
             results = {"runtime": self.runtime, **self.device_run(payload)}
         except Exception:
             result = "\n".join(format_exc().splitlines())
             self.log("error", result)
             results = {"success": False, "runtime": self.runtime, "result": result}
         finally:
+            db.session.commit()
             state = self.get_state()
             results["summary"] = {"failure": [], "success": []}
             for result in self.results:
@@ -512,6 +511,8 @@ class Run(AbstractBase):
             if self.send_notification:
                 results = self.notify(results)
             app.service_db[self.service.id]["runs"] -= 1
+            if not app.service_db[self.id]["runs"]:
+                self.service.status = "Idle"
             now = datetime.now().replace(microsecond=0)
             results["duration"] = self.duration = str(now - start)
             if self.runtime == self.parent_runtime:

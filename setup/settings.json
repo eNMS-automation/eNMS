@@ -1,6 +1,6 @@
 {
   "app": {
-    "address": "test",
+    "address": "",
     "config_mode": "debug",
     "create_examples": true,
     "documentation_url": "https://enms.readthedocs.io/en/latest/",

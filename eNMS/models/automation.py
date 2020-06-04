@@ -537,7 +537,7 @@ class Run(AbstractBase):
     def make_results_json_compliant(self, results):
         def rec(value):
             if isinstance(value, dict):
-                return {k: rec(v) for k, v in value.items()}
+                return {k: rec(value[k]) for k in list(value)}
             elif isinstance(value, list):
                 return list(map(rec, value))
             elif not isinstance(value, (int, str, bool, float, None.__class__)):

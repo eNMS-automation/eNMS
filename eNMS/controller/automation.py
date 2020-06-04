@@ -400,6 +400,7 @@ class AutomationController(BaseController):
         if restart_run:
             run_kwargs["restart_run"] = restart_run
         service = db.fetch("service", id=service)
+        service.status = "Running"
         initial_payload = service.initial_payload
         if service.type == "workflow" and service.superworkflow:
             run_kwargs["placeholder"] = run_kwargs["start_service"] = service.id
@@ -407,7 +408,7 @@ class AutomationController(BaseController):
             initial_payload.update(service.initial_payload)
         else:
             run_kwargs["start_service"] = service.id
-        run = db.factory("run", service=service.id, **run_kwargs)
+        run = db.factory("run", service=service.id, commit=True, **run_kwargs)
         run.properties = kwargs
         return run.run({**initial_payload, **kwargs})
 

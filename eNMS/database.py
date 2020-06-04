@@ -139,20 +139,6 @@ class Database:
         except Exception:
             return loads(input)
 
-    @staticmethod
-    def commit(function):
-        @wraps(function)
-        def decorated_function(*args, **kwargs):
-            for _ in range(3):
-                try:
-                    function(*args, **kwargs)
-                    self.session.commit()
-                except OperationalError:
-                    self.session.rollback()
-                    sleep(5)
-
-        return decorated_function
-
     def configure_engine(self):
         engine_parameters = {
             "convert_unicode": True,
@@ -373,20 +359,34 @@ class Database:
     def export(self, model):
         return [instance.to_dict(export=True) for instance in self.fetch_all(model)]
 
-    def factory(self, _class, **kwargs):
-        characters = set(kwargs.get("name", "") + kwargs.get("scoped_name", ""))
-        if set("/\\'" + '"') & characters:
-            raise Exception("Names cannot contain a slash or a quote.")
-        instance, instance_id = None, kwargs.pop("id", 0)
-        if instance_id:
-            instance = self.fetch(_class, id=instance_id)
-        elif "name" in kwargs:
-            instance = self.fetch(_class, allow_none=True, name=kwargs["name"])
-        if instance and not kwargs.get("must_be_new"):
-            instance.update(**kwargs)
+    def factory(self, _class, commit=False, **kwargs):
+        def transaction(_class, **kwargs):
+            characters = set(kwargs.get("name", "") + kwargs.get("scoped_name", ""))
+            if set("/\\'" + '"') & characters:
+                raise Exception("Names cannot contain a slash or a quote.")
+            instance, instance_id = None, kwargs.pop("id", 0)
+            if instance_id:
+                instance = self.fetch(_class, id=instance_id)
+            elif "name" in kwargs:
+                instance = self.fetch(_class, allow_none=True, name=kwargs["name"])
+            if instance and not kwargs.get("must_be_new"):
+                instance.update(**kwargs)
+            else:
+                instance = models[_class](**kwargs)
+                self.session.add(instance)
+            return instance
+
+        if not commit:
+            instance = transaction(_class, **kwargs)
         else:
-            instance = models[_class](**kwargs)
-            self.session.add(instance)
+            for index in range(3):
+                try:
+                    instance = transaction(_class, **kwargs)
+                    self.session.commit()
+                    break
+                except OperationalError:
+                    self.session.rollback()
+                    sleep(3 * (index + 1))
         return instance
 
     def set_custom_properties(self, table):

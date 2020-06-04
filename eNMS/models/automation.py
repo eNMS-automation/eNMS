@@ -492,15 +492,12 @@ class Run(AbstractBase):
         start = datetime.now().replace(microsecond=0)
         try:
             app.service_db[self.service.id]["runs"] += 1
-            self.service.status = "Running"
-            db.session.commit()
             results = {"runtime": self.runtime, **self.device_run(payload)}
         except Exception:
             result = "\n".join(format_exc().splitlines())
             self.log("error", result)
             results = {"success": False, "runtime": self.runtime, "result": result}
         finally:
-            db.session.commit()
             state = self.get_state()
             results["summary"] = {"failure": [], "success": []}
             for result in self.results:
@@ -534,10 +531,10 @@ class Run(AbstractBase):
                 or len(self.devices) > 1
                 or self.run_method == "once"
             ):
-                results = self.create_result(results)
+                print("END" * 300)
+                results = self.create_result(results, commit=True)
             if app.redis_queue and self.runtime == self.parent_runtime:
                 app.redis("delete", *app.redis("keys", f"{self.runtime}/*"))
-            db.session.commit()
         return results
 
     def make_results_json_compliant(self, results):
@@ -636,7 +633,7 @@ class Run(AbstractBase):
                 "runtime": self.runtime,
             }
 
-    def create_result(self, results, device=None):
+    def create_result(self, results, device=None, commit=False):
         self.success = results["success"]
         results = self.make_results_json_compliant(results)
         result_kw = {
@@ -664,7 +661,7 @@ class Run(AbstractBase):
                 results["devices"] = {}
                 for result in self.results:
                     results["devices"][result.device.name] = result.result
-        result = db.factory("result", result=results, **result_kw)
+        result = db.factory("result", result=results, commit=commit, **result_kw)
         return results
 
     def run_service_job(self, payload, device):
@@ -794,8 +791,6 @@ class Run(AbstractBase):
             sleep(self.waiting_time)
         if not results["success"]:
             self.write_state("success", False)
-        if commit:
-            db.session.commit()
         return results
 
     def log(

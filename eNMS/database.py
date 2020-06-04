@@ -2,6 +2,7 @@ from ast import literal_eval
 from flask_login import current_user
 from functools import wraps
 from json import loads
+from logging import error
 from os import environ
 from sqlalchemy import (
     Boolean,
@@ -19,7 +20,7 @@ from sqlalchemy import (
     Text,
 )
 from sqlalchemy.dialects.mysql.base import MSMediumBlob
-from sqlalchemy.exc import OperationalError
+from sqlalchemy.exc import DatabaseError, OperationalError
 from sqlalchemy.ext.associationproxy import ASSOCIATION_PROXY
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.ext.mutable import MutableDict, MutableList
@@ -27,6 +28,7 @@ from sqlalchemy.orm import scoped_session, sessionmaker
 from sqlalchemy.types import JSON
 from sqlalchemy.orm.collections import InstrumentedList
 from time import sleep
+from traceback import format_exc
 
 from eNMS.models import model_properties, models, property_types, relationships
 from eNMS.setup import properties, settings
@@ -306,7 +308,13 @@ class Database:
 
     def fetch(self, model, allow_none=False, all_matches=False, **kwargs):
         query = self.query(model, models[model]).filter_by(**kwargs)
-        result = query.all() if all_matches else query.first()
+        for index in range(3):
+            try:
+                result = query.all() if all_matches else query.first()
+                break
+            except (DatabaseError, OperationalError):
+                sleep(5 * (index + 1))
+                error(f"FETCH n°{index} FAILED:\n{format_exc()}")
         if result or allow_none:
             return result
         else:
@@ -379,14 +387,15 @@ class Database:
         if not commit:
             instance = transaction(_class, **kwargs)
         else:
-            for index in range(3):
+            for index in range(10):
                 try:
                     instance = transaction(_class, **kwargs)
                     self.session.commit()
                     break
-                except OperationalError:
+                except (DatabaseError, OperationalError):
+                    error(f"Commit n°{index} failed:\n{format_exc()}")
                     self.session.rollback()
-                    sleep(3 * (index + 1))
+                    sleep(5 * (index + 1))
         return instance
 
     def set_custom_properties(self, table):

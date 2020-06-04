@@ -410,6 +410,7 @@ class Run(AbstractBase):
     @property
     def progress(self):
         progress = self.get_state().get(self.path, {}).get("progress")
+        print(progress)
         try:
             progress = progress["device"]
             return (

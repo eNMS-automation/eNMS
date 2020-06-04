@@ -149,7 +149,7 @@ class Workflow(Service):
                 }
                 if run.parent_device_id:
                     kwargs["parent_device"] = run.parent_device_id
-                service_run = db.factory("run", **kwargs)
+                service_run = db.factory("run", commit=True, **kwargs)
                 results = service_run.run(payload)
             if service.run_method in ("once", "per_service_with_service_targets"):
                 edge_type = "success" if results["success"] else "failure"
@@ -222,7 +222,7 @@ class Workflow(Service):
                     kwargs["parent_device"] = run.parent_device_id
                 if device:
                     kwargs["devices"] = [device.id]
-                service_run = db.factory("run", **kwargs)
+                service_run = db.factory("run", commit=True, **kwargs)
                 results = service_run.run(payload)
             if not device:
                 status = "success" if results["success"] else "failure"

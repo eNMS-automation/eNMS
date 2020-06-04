@@ -121,7 +121,6 @@ class Service(AbstractBase):
     negative_logic = db.Column(Boolean, default=False)
     delete_spaces_before_matching = db.Column(Boolean, default=False)
     run_method = db.Column(db.SmallString, default="per_device")
-    status = db.Column(db.SmallString, default="Idle")
 
     def __init__(self, **kwargs):
         kwargs.pop("status", None)
@@ -413,10 +412,8 @@ class Run(AbstractBase):
         progress = self.get_state().get(self.path, {}).get("progress")
         try:
             progress = progress["device"]
-            return (
-                f"{progress['success'] + progress['failure']}"
-                f"/{progress['total']} ({progress['failure']} failed)"
-            )
+            failure, success = progress.get("failure", 0), progress.get("success", 0)
+            return f"{success + failure}/{progress['total']} ({failure} failed)"
         except (KeyError, TypeError):
             return "N/A"
 
@@ -493,15 +490,12 @@ class Run(AbstractBase):
         start = datetime.now().replace(microsecond=0)
         try:
             app.service_db[self.service.id]["runs"] += 1
-            self.service.status = "Running"
-            db.session.commit()
             results = {"runtime": self.runtime, **self.device_run(payload)}
         except Exception:
             result = "\n".join(format_exc().splitlines())
             self.log("error", result)
             results = {"success": False, "runtime": self.runtime, "result": result}
         finally:
-            db.session.commit()
             state = self.get_state()
             results["summary"] = {"failure": [], "success": []}
             for result in self.results:
@@ -538,7 +532,6 @@ class Run(AbstractBase):
                 results = self.create_result(results)
             if app.redis_queue and self.runtime == self.parent_runtime:
                 app.redis("delete", *app.redis("keys", f"{self.runtime}/*"))
-            db.session.commit()
         return results
 
     def make_results_json_compliant(self, results):
@@ -628,10 +621,7 @@ class Run(AbstractBase):
                 with ThreadPool(processes=processes) as pool:
                     pool.map(self.get_device_result, process_args)
             else:
-                results = [
-                    self.get_results(payload, device, commit=False)
-                    for device in self.devices
-                ]
+                results = [self.get_results(payload, device) for device in self.devices]
             return {
                 "success": all(result["success"] for result in results),
                 "runtime": self.runtime,
@@ -665,7 +655,7 @@ class Run(AbstractBase):
                 results["devices"] = {}
                 for result in self.results:
                     results["devices"][result.device.name] = result.result
-        result = db.factory("result", result=results, **result_kw)
+        result = db.factory("result", result=results, commit=True, **result_kw)
         return results
 
     def run_service_job(self, payload, device):
@@ -737,7 +727,7 @@ class Run(AbstractBase):
                 results = {"success": False, "result": result}
         return results
 
-    def get_results(self, payload, device=None, commit=True):
+    def get_results(self, payload, device=None):
         self.log("info", "STARTING", device)
         start = datetime.now().replace(microsecond=0)
         skip_service = False
@@ -795,8 +785,6 @@ class Run(AbstractBase):
             sleep(self.waiting_time)
         if not results["success"]:
             self.write_state("success", False)
-        if commit:
-            db.session.commit()
         return results
 
     def log(

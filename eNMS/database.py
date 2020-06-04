@@ -133,6 +133,9 @@ class Database:
             "str": str,
             "date": str,
         }
+        for retry_type, values in settings["database"]["retry"].items():
+            for parameter, number in values.items():
+                setattr(self, f"retry_{retry_type}_{parameter}", number)
 
     @staticmethod
     def dict_conversion(input):
@@ -308,12 +311,12 @@ class Database:
 
     def fetch(self, model, allow_none=False, all_matches=False, **kwargs):
         query = self.query(model, models[model]).filter_by(**kwargs)
-        for index in range(3):
+        for index in range(self.retry_fetch_number):
             try:
                 result = query.all() if all_matches else query.first()
                 break
             except (DatabaseError, OperationalError):
-                sleep(5 * (index + 1))
+                sleep(self.retry_fetch_time * (index + 1))
                 error(f"FETCH n°{index} FAILED:\n{format_exc()}")
         if result or allow_none:
             return result
@@ -387,7 +390,7 @@ class Database:
         if not commit:
             instance = transaction(_class, **kwargs)
         else:
-            for index in range(10):
+            for index in range(self.retry_commit_number):
                 try:
                     instance = transaction(_class, **kwargs)
                     self.session.commit()
@@ -395,7 +398,7 @@ class Database:
                 except (DatabaseError, OperationalError):
                     error(f"Commit n°{index} failed:\n{format_exc()}")
                     self.session.rollback()
-                    sleep(5 * (index + 1))
+                    sleep(self.retry_commit_time * (index + 1))
         return instance
 
     def set_custom_properties(self, table):

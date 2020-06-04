@@ -621,10 +621,7 @@ class Run(AbstractBase):
                 with ThreadPool(processes=processes) as pool:
                     pool.map(self.get_device_result, process_args)
             else:
-                results = [
-                    self.get_results(payload, device)
-                    for device in self.devices
-                ]
+                results = [self.get_results(payload, device) for device in self.devices]
             return {
                 "success": all(result["success"] for result in results),
                 "runtime": self.runtime,

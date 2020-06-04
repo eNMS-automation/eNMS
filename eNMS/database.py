@@ -1,6 +1,5 @@
 from ast import literal_eval
 from flask_login import current_user
-from functools import wraps
 from json import loads
 from logging import error
 from os import environ

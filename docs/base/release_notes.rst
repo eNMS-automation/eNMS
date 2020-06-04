@@ -44,6 +44,8 @@ edit them.
 {{ variable }} in the workflow.
 - Refactor data backup services with custom configuration properties. Implement "Operational Data" as
 an example custom property.
+- Fix model properties for table filtering to work with hybrid properties / expression
+- Add database fetch/commit retry mechanism to handle deadlocks & other SQL operational errors
 
 MIGRATION:
 - Remove RBAC in rbac.json

@@ -7240,7 +7240,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  definition: Definition
+  definition: is_alive
   delete_spaces_before_matching: false
   description: ''
   device_query: ''
@@ -7277,7 +7277,7 @@
         \ in the payload with set_var :\r\n\r\ndef test():\r\n    return device.operating_system\r\
         \n\r\nclass Test():\r\n    device = device.name"
       positions: [-16, 269]
-  last_modified: '2020-03-25 10:19:00.595922'
+  last_modified: '2020-06-04 09:30:51.105136'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100

@@ -531,8 +531,7 @@ class Run(AbstractBase):
                 or len(self.devices) > 1
                 or self.run_method == "once"
             ):
-                print("END" * 300)
-                results = self.create_result(results, commit=True)
+                results = self.create_result(results)
             if app.redis_queue and self.runtime == self.parent_runtime:
                 app.redis("delete", *app.redis("keys", f"{self.runtime}/*"))
         return results
@@ -625,7 +624,7 @@ class Run(AbstractBase):
                     pool.map(self.get_device_result, process_args)
             else:
                 results = [
-                    self.get_results(payload, device, commit=False)
+                    self.get_results(payload, device)
                     for device in self.devices
                 ]
             return {
@@ -633,7 +632,7 @@ class Run(AbstractBase):
                 "runtime": self.runtime,
             }
 
-    def create_result(self, results, device=None, commit=False):
+    def create_result(self, results, device=None):
         self.success = results["success"]
         results = self.make_results_json_compliant(results)
         result_kw = {
@@ -661,7 +660,7 @@ class Run(AbstractBase):
                 results["devices"] = {}
                 for result in self.results:
                     results["devices"][result.device.name] = result.result
-        result = db.factory("result", result=results, commit=commit, **result_kw)
+        result = db.factory("result", result=results, commit=True, **result_kw)
         return results
 
     def run_service_job(self, payload, device):
@@ -733,7 +732,7 @@ class Run(AbstractBase):
                 results = {"success": False, "result": result}
         return results
 
-    def get_results(self, payload, device=None, commit=True):
+    def get_results(self, payload, device=None):
         self.log("info", "STARTING", device)
         start = datetime.now().replace(microsecond=0)
         skip_service = False

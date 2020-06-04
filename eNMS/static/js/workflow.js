@@ -815,8 +815,8 @@ function displayWorkflowState(result) {
   resetDisplay();
   updateRuntimes(result);
   if (!nodes || !edges || !result.state) return;
-  let nodeUpdates = [],
-    edgeUpdates = [];
+  let nodeUpdates = [];
+  let edgeUpdates = [];
   for (let [path, state] of Object.entries(result.state)) {
     const id = parseInt(path.split(">").slice(-1)[0]);
     if (ends.has(id) || !(id in nodes._data)) continue;
@@ -869,8 +869,8 @@ function displayWorkflowState(result) {
 }
 
 function resetDisplay() {
-  let nodeUpdates = [],
-    edgeUpdates = [];
+  let nodeUpdates = [];
+  let edgeUpdates = [];
   $("#progressbar").hide();
   workflow.services.forEach((service) => {
     if (service.scoped_name == "Placeholder") {

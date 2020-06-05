@@ -195,8 +195,15 @@ class AutomationController(BaseController):
     def get_result(self, id):
         return db.fetch("result", id=id).result
 
-    def get_runtimes(self, type, id):
-        runs = db.fetch("run", allow_none=True, all_matches=True, service_id=id)
+    def get_runtimes(self, type, id, max_runs=200):
+        runs = db.fetch(
+            "run",
+            allow_none=True,
+            all_matches=True,
+            service_id=id,
+            order=[("runtime", "desc")],
+            limit=max_runs,
+        )
         return sorted(set((run.parent_runtime, run.parent_runtime) for run in runs))
 
     def get_service_logs(self, service, runtime):
@@ -209,10 +216,12 @@ class AutomationController(BaseController):
             log = "\n".join(self.log_queue(runtime, service, mode="get") or [])
         return {"logs": log, "refresh": not log_instance}
 
-    def get_service_state(self, path, runtime=None):
+    def get_service_state(self, path, runtime=None, max_runs=200):
         service_id = path.split(">")[-1]
         state, service = None, db.fetch("service", id=service_id)
-        runs = db.fetch_all("run", service_id=service_id)
+        runs = db.fetch_all(
+            "run", service_id=service_id, order=[("runtime", "desc")], limit=max_runs
+        )
         if not runtime:
             runtime = "latest"
         if runs and runtime != "normal":

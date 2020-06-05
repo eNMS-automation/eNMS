@@ -58,16 +58,10 @@ class User(AbstractBase, UserMixin):
             kwargs["password"] = argon2.hash(kwargs["password"])
         super().update(**kwargs)
         self.update_rbac()
+        if not self.is_admin:
+            self.update_objects()
 
-    def update_rbac(self):
-        self.is_admin = any(group.name == "Admin Users" for group in self.groups)
-        if self.manual_rbac:
-            return
-        for access_type in app.rbac:
-            group_access = (getattr(group, access_type) for group in self.groups)
-            setattr(self, access_type, list(set().union(*group_access)))
-        if self.is_admin:
-            return
+    def update_objects(self):
         for object_type in ("devices", "links"):
             setattr(
                 self,
@@ -82,6 +76,14 @@ class User(AbstractBase, UserMixin):
                     )
                 ),
             )
+
+    def update_rbac(self):
+        self.is_admin = any(group.name == "Admin Users" for group in self.groups)
+        if self.manual_rbac:
+            return
+        for access_type in app.rbac:
+            group_access = (getattr(group, access_type) for group in self.groups)
+            setattr(self, access_type, list(set().union(*group_access)))
 
 
 @db.set_custom_properties

@@ -46,7 +46,7 @@ from eNMS.setup import settings, properties, rbac
 
 class BaseController:
 
-    log_levels = ["info", "warning", "error", "critical"]
+    log_levels = ["debug", "info", "warning", "error", "critical"]
 
     rest_endpoints = [
         "get_cluster_status",

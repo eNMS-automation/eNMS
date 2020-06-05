@@ -903,9 +903,9 @@ function getWorkflowState(periodic, notification) {
   const url = runtime ? `/${runtime}` : "";
 
   let done = null;
-  let data_loaded_promise = null;
+  let dataLoadedPromise = null;
   if (periodic) {
-    data_loaded_promise = new Promise((resolve, reject) => {
+    dataLoadedPromise = new Promise((resolve, reject) => {
       done = resolve;
     });
   }
@@ -926,7 +926,7 @@ function getWorkflowState(periodic, notification) {
   }
   if (periodic) {
     let interval = 4000;
-    Promise.race([data_loaded_promise, wait(30000)])
+    Promise.race([dataLoadedPromise, wait(30000)])
       .then(() => {
         return wait(interval);
       })

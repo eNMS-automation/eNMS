@@ -1131,12 +1131,11 @@ function refreshTablePeriodically(tableId, interval, first) {
   return wait(interval)
     .then(() => {
       let done = null;
-      let table_data_loaded = new Promise((resolve) => {
+      let dataLoadedPromise = new Promise((resolve) => {
         done = resolve;
       });
       refreshTable(tableId, false, done);
-      // Do not start the timer for the next refresh until the table is loaded.
-      return Promise.race([table_data_loaded, wait(Math.min(interval * 4, 30000))]);
+      return Promise.race([dataLoadedPromise, wait(Math.min(interval * 4, 30000))]);
     })
     .then(() => {
       return refreshTablePeriodically(tableId, interval, false);

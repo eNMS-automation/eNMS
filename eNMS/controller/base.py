@@ -48,13 +48,6 @@ class BaseController:
 
     log_levels = ["info", "warning", "error", "critical"]
 
-    json_endpoints = [
-        "multiselect_filtering",
-        "save_settings",
-        "filtering",
-        "view_filtering",
-    ]
-
     rest_endpoints = [
         "get_cluster_status",
         "get_git_content",

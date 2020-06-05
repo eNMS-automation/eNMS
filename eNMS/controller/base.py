@@ -144,7 +144,7 @@ class BaseController:
             self.topology_import(file)
 
     def get_git_content(self):
-        repo = self.settings["app"].get(["git_repository"], None)
+        repo = self.settings["app"]["git_repository"]
         if not repo:
             return
         local_path = self.path / "network_data"

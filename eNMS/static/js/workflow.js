@@ -905,13 +905,24 @@ function resetDisplay() {
   }
 }
 
+const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
 function getWorkflowState(periodic, notification) {
   const runtime = $("#current-runtime").val();
   const url = runtime ? `/${runtime}` : "";
+
+  let done = null, failed = null;
+  let data_loaded_promise = null;
+  if (periodic) {
+    data_loaded_promise = new Promise( (resolve, reject) =>
+    {
+      done = resolve; failed = reject;
+    });
+  }
   if (userIsActive && workflow?.id) {
     call({
       url: `/get_service_state/${currentPath}${url}`,
       callback: function (result) {
+        if (done) done(result);
         if (result.service.id != workflow.id) return;
         currentRuntime = result.runtime;
         if (result.service.last_modified !== workflow.last_modified) {
@@ -922,7 +933,18 @@ function getWorkflowState(periodic, notification) {
       },
     });
   }
-  if (periodic) setTimeout(() => getWorkflowState(true), 4000);
+  if (periodic) {
+      let interval = 4000;
+      // Do not start the next get_service_state until we have seen the prior
+      // results - or if we hit a maximum delay
+      Promise.race([data_loaded_promise, wait(interval * 3 + 1000)])
+        .then( () => {
+            return wait(interval)
+        })
+        .then( () => {
+            getWorkflowState(periodic, notification)
+        });
+  }
   if (notification) notify("Workflow refreshed.", "success", 5);
 }
 

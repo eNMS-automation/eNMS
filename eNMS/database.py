@@ -315,16 +315,23 @@ class Database:
             limit = kwargs.pop("limit", None)
             offset = kwargs.pop("offset", None)
             if limit is None or type(limit) != int or limit < 1:
-                raise ValueError("A positive value for 'limit' must be provided if "
-                                 "order is provided.")
+                raise ValueError(
+                    "A positive value for 'limit' must be provided if "
+                    "order is provided."
+                )
             if not isinstance(order, list) or len(order) < 1:
                 raise ValueError("A list of ordering criterion is required.")
             for criterion in order:
-                if not (isinstance(criterion, list) or isinstance(criterion, tuple)) \
-                        or len(criterion) != 2:
+                if (
+                    not (isinstance(criterion, list) or isinstance(criterion, tuple))
+                    or len(criterion) != 2
+                ):
                     continue
-                model_order = getattr(getattr(models[model], str(criterion[0]), None),
-                                      str(criterion[1]), None)
+                model_order = getattr(
+                    getattr(models[model], str(criterion[0]), None),
+                    str(criterion[1]),
+                    None,
+                )
                 if model_order is not None:
                     query = query.order_by(model_order())
             query = query.limit(limit)

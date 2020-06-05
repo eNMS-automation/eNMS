@@ -310,10 +310,10 @@ class Database:
 
     def fetch(self, model, allow_none=False, all_matches=False, **kwargs):
         order = kwargs.pop("order", None)
+        limit = kwargs.pop("limit", None)
+        offset = kwargs.pop("offset", None)
         query = self.query(model, models[model]).filter_by(**kwargs)
         if order is not None:
-            limit = kwargs.pop("limit", None)
-            offset = kwargs.pop("offset", None)
             if limit is None or type(limit) != int or limit < 1:
                 raise ValueError(
                     "A positive value for 'limit' must be provided if "

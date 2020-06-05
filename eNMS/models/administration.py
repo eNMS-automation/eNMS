@@ -61,27 +61,25 @@ class User(AbstractBase, UserMixin):
 
     def update_rbac(self):
         self.is_admin = any(group.name == "Admin Users" for group in self.groups)
-        if self.manual_rbac:
-            return
-        for access_type in app.rbac:
-            group_access = (getattr(group, access_type) for group in self.groups)
-            setattr(self, access_type, list(set().union(*group_access)))
-        if self.is_admin:
-            return
-        for object_type in ("devices", "links"):
-            setattr(
-                self,
-                object_type,
-                list(
-                    set().union(
-                        *(
-                            getattr(pool, object_type)
-                            for group in self.groups
-                            for pool in group.pools
+        if not self.is_admin:
+            for object_type in ("devices", "links"):
+                setattr(
+                    self,
+                    object_type,
+                    list(
+                        set().union(
+                            *(
+                                getattr(pool, object_type)
+                                for group in self.groups
+                                for pool in group.pools
+                            )
                         )
-                    )
-                ),
-            )
+                    ),
+                )
+        if not self.manual_rbac:
+            for access_type in app.rbac:
+                group_access = (getattr(group, access_type) for group in self.groups)
+                setattr(self, access_type, list(set().union(*group_access)))
 
 
 @db.set_custom_properties

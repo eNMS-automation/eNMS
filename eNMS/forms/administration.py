@@ -131,7 +131,7 @@ def init_rbac_form(rbac):
     @configure_relationships("groups")
     class UserForm(RbacForm):
         form_type = HiddenField(default="user")
-        manual_rbac = BooleanField("Manually defined RBAC")
+        manual_rbac = BooleanField("Manually defined RBAC", default=False)
         theme = SelectField(
             "Theme",
             choices=[

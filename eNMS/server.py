@@ -324,7 +324,7 @@ class Server(Flask):
             if f"/{endpoint}" not in current_user.post_requests:
                 return jsonify({"alert": "Error 403 Forbidden."})
             form_type = request.form.get("form_type")
-            if endpoint in app.json_endpoints:
+            if request.json:
                 result = getattr(app, endpoint)(*args, **request.json)
             elif form_type:
                 form = form_classes[form_type](request.form)

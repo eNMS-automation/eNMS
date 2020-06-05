@@ -7240,7 +7240,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  definition: Definition
+  definition: is_alive
   delete_spaces_before_matching: false
   description: ''
   device_query: ''
@@ -7277,7 +7277,7 @@
         \ in the payload with set_var :\r\n\r\ndef test():\r\n    return device.operating_system\r\
         \n\r\nclass Test():\r\n    device = device.name"
       positions: [-16, 269]
-  last_modified: '2020-03-25 10:19:00.595922'
+  last_modified: '2020-06-04 09:30:51.105136'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -7338,7 +7338,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2020-03-23 17:14:06.644918'
+  last_modified: '2020-06-04 09:38:08.670625'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -7355,10 +7355,10 @@
     'Regression Workflow K: preprocessing and postprocessing': [-26, 123]
   postprocessing: "results[\"postprocessing\"] = f\"Value set with postprocessing\
     \ for {device.name}\"\r\n\r\ndef test():\r\n  \treturn device.operating_system\r\
-    \n\r\nclass Test():\r\n  device = device.name\r\n\r\nset_var(\"func\", test, device=device.name)\r\
-    \nset_var(\"cls\", Test, device=device.name)\r\n"
+    \n\r\nclass Test():\r\n  device = device.name\r\n\r\nset_var(\"func\", test, device=device.name,\
+    \ export=True)\r\nset_var(\"cls\", Test, device=device.name, export=True)\r\n"
   postprocessing_mode: always
-  preprocessing: set_var("test", device.operating_system, device=device.name)
+  preprocessing: set_var("test", device.operating_system, device=device.name, export=True)
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -7401,7 +7401,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2020-03-23 17:15:20.426341'
+  last_modified: '2020-06-04 09:38:15.173377'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -7420,7 +7420,7 @@
   postprocessing: "results[\"SHOULD BE THERE\"] = \"NO BUG\"\r\n\r\nresults[\"func_result\"\
     ] = func()\r\nresults[\"cls_result\"] = cls().device"
   postprocessing_mode: failure
-  preprocessing: set_var("integer", 10)
+  preprocessing: set_var("integer", 10, export=True)
   reply_to: ''
   reserved: false
   run_method: per_device

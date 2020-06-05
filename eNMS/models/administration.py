@@ -38,7 +38,7 @@ class User(AbstractBase, UserMixin):
     post_requests = db.Column(db.List)
     small_menu = db.Column(Boolean, default=False, info={"dont_track_changes": True})
     theme = db.Column(
-        db.SmallString, default="Default", info={"dont_track_changes": True}
+        db.SmallString, default="default", info={"dont_track_changes": True}
     )
     groups = relationship(
         "Group", secondary=db.user_group_table, back_populates="users"
@@ -76,11 +76,10 @@ class User(AbstractBase, UserMixin):
                         )
                     ),
                 )
-        if self.manual_rbac:
-            return
-        for access_type in app.rbac:
-            group_access = (getattr(group, access_type) for group in self.groups)
-            setattr(self, access_type, list(set().union(*group_access)))
+        if not self.manual_rbac:
+            for access_type in app.rbac:
+                group_access = (getattr(group, access_type) for group in self.groups)
+                setattr(self, access_type, list(set().union(*group_access)))
 
 
 @db.set_custom_properties

@@ -215,7 +215,7 @@ class Result(AbstractBase):
     log_change = False
     id = db.Column(Integer, primary_key=True)
     success = db.Column(Boolean, default=False)
-    runtime = db.Column(db.SmallString)
+    runtime = db.Column(db.SmallString, index=True)
     duration = db.Column(db.SmallString)
     result = db.Column(db.Dict)
     run_id = db.Column(Integer, ForeignKey("run.id", ondelete="cascade"))

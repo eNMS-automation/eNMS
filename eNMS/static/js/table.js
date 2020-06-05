@@ -11,6 +11,7 @@ import {
   notify,
   serializeForm,
   userIsActive,
+  wait
 } from "./base.js";
 import { loadServiceTypes } from "./automation.js";
 
@@ -50,7 +51,9 @@ export class Table {
       },
       sDom: "tilp",
       columns: this.columns,
-      order:  ["changelog", "run" , "result"].includes(this.type) ? [[0, "desc"]] : undefined,
+      order: ["changelog", "run", "result"].includes(this.type)
+        ? [[0, "desc"]]
+        : undefined,
       columnDefs: [{ className: "dt-center", targets: "_all" }],
       initComplete: function () {
         this.api()
@@ -1118,40 +1121,30 @@ function exportTable(tableId) {
 
 export const refreshTable = function (tableId, notification, callback) {
   tableInstances[tableId].table.ajax.reload((data) => {
-     if (callback) callback(null, data);
+     if (callback) callback(data);
   }, false);
   if (notification) notify("Table refreshed.", "success", 5);
 };
 
-const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
 function refreshTablePeriodically(tableId, interval, first) {
   if (userIsActive && !first) refreshTable(tableId, false);
-  return wait(interval).then(() =>
-  {
-      let done = null, failed = null;
-      let p = new Promise( (resolve, reject) => { done = resolve; failed = reject });
-      let f = function(err, data) {
-         console.log(`... error: ${err}, data: ${data}`);
-         if (err) {
-           failed(err);
-         }
-         else {
-           done(data);
-         }
-      }
-      refreshTable(tableId, false, f);
+  return wait(interval)
+    .then(() => {
+      let done = null;
+      let table_data_loaded = new Promise((resolve) => {
+        done = resolve;
+      });
+      refreshTable(tableId, false, done);
       // Do not start the timer for the next refresh until the table is loaded.
-      return Promise.race([p, wait(Math.min(interval * 4 + 3000, 30000))]);
-  })
-  .then( () =>
-  {
-    return refreshTablePeriodically(tableId, interval, false);
-  })
-  .catch( (err) =>
-  {
-    notify(JSON.stringify(err), "error", 5)
-    return refreshTablePeriodically(tableId, interval, false);
-  })
+      return Promise.race([table_data_loaded, wait(Math.min(interval * 4, 30000))]);
+    })
+    .then(() => {
+      return refreshTablePeriodically(tableId, interval, false);
+    })
+    .catch((err) => {
+      notify((err || "Could not retrieve table data").toString(), "error", 5);
+      return refreshTablePeriodically(tableId, interval, false);
+    });
 }
 
 configureNamespace("table", [clearSearch, exportTable, refreshTable]);

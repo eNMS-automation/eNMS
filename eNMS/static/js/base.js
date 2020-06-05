@@ -864,6 +864,8 @@ function fullScreen() {
   }
 }
 
+export const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
 configureNamespace("base", [
   call,
   clearAlerts,
@@ -876,4 +878,5 @@ configureNamespace("base", [
   showDeletionPanel,
   openPanel,
   showTypePanel,
+  wait
 ]);

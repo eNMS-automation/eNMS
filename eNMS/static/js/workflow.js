@@ -22,6 +22,7 @@ import {
   openPanel,
   showTypePanel,
   userIsActive,
+  wait
 } from "./base.js";
 import { clearSearch, tableInstances } from "./table.js";
 
@@ -897,17 +898,15 @@ function resetDisplay() {
   }
 }
 
-const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
 function getWorkflowState(periodic, notification) {
   const runtime = $("#current-runtime").val();
   const url = runtime ? `/${runtime}` : "";
 
-  let done = null, failed = null;
+  let done = null;
   let data_loaded_promise = null;
   if (periodic) {
-    data_loaded_promise = new Promise( (resolve, reject) =>
-    {
-      done = resolve; failed = reject;
+    data_loaded_promise = new Promise((resolve, reject) => {
+      done = resolve;
     });
   }
   if (userIsActive && workflow?.id) {
@@ -926,16 +925,14 @@ function getWorkflowState(periodic, notification) {
     });
   }
   if (periodic) {
-      let interval = 4000;
-      // Do not start the next get_service_state until we have seen the prior
-      // results - or if we hit a maximum delay
-      Promise.race([data_loaded_promise, wait(interval * 3 + 1000)])
-        .then( () => {
-            return wait(interval)
-        })
-        .then( () => {
-            getWorkflowState(periodic, notification)
-        });
+    let interval = 4000;
+    Promise.race([data_loaded_promise, wait(30000)])
+      .then(() => {
+        return wait(interval);
+      })
+      .then(() => {
+        getWorkflowState(periodic, notification);
+      });
   }
   if (notification) notify("Workflow refreshed.", "success", 5);
 }

@@ -208,6 +208,9 @@ class ConnectionService(Service):
 class Result(AbstractBase):
 
     __tablename__ = type = "result"
+    __table_args__ = (
+        Index("ix_result_service_id_0", "service_id", "parent_runtime", "id"),
+    )
     private = True
     log_change = False
     id = db.Column(Integer, primary_key=True)
@@ -217,7 +220,7 @@ class Result(AbstractBase):
     result = db.Column(db.Dict)
     run_id = db.Column(Integer, ForeignKey("run.id", ondelete="cascade"))
     run = relationship("Run", back_populates="results", foreign_keys="Result.run_id")
-    parent_runtime = db.Column(db.SmallString)
+    parent_runtime = db.Column(db.SmallString, index=True)
     parent_device_id = db.Column(Integer, ForeignKey("device.id"))
     parent_device = relationship("Device", uselist=False, foreign_keys=parent_device_id)
     parent_device_name = association_proxy("parent_device", "name")

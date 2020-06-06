@@ -368,6 +368,7 @@ class Database:
         for model in models:
             for instance in self.fetch_all(model):
                 self.delete_instance(instance)
+            self.session.commit()
 
     def export(self, model):
         return [instance.to_dict(export=True) for instance in self.fetch_all(model)]

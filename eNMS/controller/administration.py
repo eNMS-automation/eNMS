@@ -117,6 +117,7 @@ class AdministrationController(BaseController):
 
     def migration_import(self, folder="migrations", **kwargs):
         status, models = "Import successful.", kwargs["import_export_types"]
+        print("TTT"*100, models)
         skip_update_pools_after_import = kwargs.get(
             "skip_update_pools_after_import", False
         )

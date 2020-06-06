@@ -5,7 +5,7 @@
     /table/session, /form/changelog, /table/server, /form/device_filtering, /download_file,
     /form/device, /form/napalm_traceroute_service, /form/netmiko_prompts_service,
     /form/napalm_getters_service, /form/python_snippet_service, /form/slack_notification_service,
-    /form/data_backup_service, /form/workflow, /form/files, /form/excel_import, /form/database_migration,
+    /form/netmiko_backup_service, /form/workflow, /form/files, /form/excel_import, /form/database_migration,
     /form/result_log_deletion, /form/netmiko_validation_service, /form/server, /form/topology_import_service,
     /form/unix_shell_script_service, /logout, /table/configuration, /form/run, /form/device_connection,
     /login, /form/administration, /form/example_service, /table/changelog, /view/network,

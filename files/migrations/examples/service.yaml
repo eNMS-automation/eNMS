@@ -5387,7 +5387,7 @@
   start_new_connection: false
   time_between_retries: 10
   timeout: 10
-  type: data_backup_service
+  type: netmiko_backup_service
   update_pools: false
   use_device_driver: true
   validation_condition: success
@@ -8293,7 +8293,7 @@
   start_new_connection: false
   time_between_retries: 10
   timeout: 10
-  type: data_backup_service
+  type: netmiko_backup_service
   update_pools: false
   use_device_driver: true
   validation_condition: success

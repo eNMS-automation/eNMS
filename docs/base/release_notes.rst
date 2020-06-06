@@ -52,6 +52,7 @@ MIGRATION:
 - Update migration files (user.yaml): group: Admin -> groups: [Admin Users]
 - app_log -> changelog in the service migration files (python snippet services)
 - set_var: add export keyword set to True in service.yaml for backward compatibility
+- rename DataBackupService / NetmikoBackupService, data_backup_service -> netmiko_backup_service
 
 Version 3.21.3
 --------------

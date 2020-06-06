@@ -226,7 +226,7 @@ class AutomationController(BaseController):
             runtime = "latest"
         if runs and runtime != "normal":
             if runtime == "latest":
-                runtime = runs[-1].parent_runtime
+                runtime = runs[0].parent_runtime
             state = db.fetch("run", runtime=runtime).get_state()
         return {
             "service": service.to_dict(include=["services", "edges", "superworkflow"]),

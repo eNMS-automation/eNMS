@@ -192,7 +192,7 @@ export const showRuntimePanel = function (type, service, runtime, table) {
   const panelType =
     type == "logs" ? "logs" : service.type == "workflow" && !table ? "tree" : "table";
   const panelId = `${panelType}-${service.id}`;
-  console.log(panelType, panelId)
+  console.log(panelType, panelId, table)
   call({
     url: `/get_runtimes/${type}/${service.id}`,
     callback: (runtimes) => {
@@ -543,7 +543,7 @@ Object.assign(action, {
   Duplicate: (service) => showTypePanel(service.type, service.id, "duplicate"),
   Run: (service) => normalRun(service.id),
   "Parameterized Run": (service) => showTypePanel(service.type, service.id, "run"),
-  Results: (service) => showRuntimePanel("results", service),
+  Results: (service) => showRuntimePanel("results", service, currentRuntime, "result"),
   Backward: () => switchToWorkflow(arrowHistory[arrowPointer - 1], "left"),
   Forward: () => switchToWorkflow(arrowHistory[arrowPointer + 1], "right"),
 });

@@ -888,7 +888,7 @@ function resetDisplay() {
       });
     }
   });
-  nodes.update(nodeUpdates);
+  if (nodes) nodes.update(nodeUpdates);
   if (edges) {
     workflow.edges.forEach((edge) => {
       edgeUpdates.push({ id: edge.id, label: edge.label });

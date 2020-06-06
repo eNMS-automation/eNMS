@@ -117,14 +117,8 @@ class AdministrationController(BaseController):
 
     def migration_import(self, folder="migrations", **kwargs):
         status, models = "Import successful.", kwargs["import_export_types"]
-        print("TTT"*100, models)
-        skip_update_pools_after_import = kwargs.get(
-            "skip_update_pools_after_import", False
-        )
         if kwargs.get("empty_database_before_import", False):
-            for model in models:
-                db.delete_all(model)
-                db.session.commit()
+            db.delete_all(*models)
         workflow_edges, workflow_services, superworkflows = [], {}, {}
         folder_path = self.path / "files" / folder / kwargs["name"]
         for model in models:
@@ -154,10 +148,7 @@ class AdministrationController(BaseController):
                         )
                         db.session.commit()
                     except Exception:
-                        info(
-                            f"{str(instance)} could not be imported :"
-                            "\n".join(format_exc().splitlines())
-                        )
+                        info(f"{str(instance)} could not be imported:\n{format_exc()}")
                         status = "Partial import (see logs)."
         try:
             for name, services in workflow_services.items():
@@ -177,7 +168,7 @@ class AdministrationController(BaseController):
                 db.session.commit()
             for service in db.fetch_all("service"):
                 service.set_name()
-            if not skip_update_pools_after_import:
+            if not kwargs.get("skip_pool_update"):
                 for pool in db.fetch_all("pool"):
                     pool.compute_pool()
             self.log("info", status)

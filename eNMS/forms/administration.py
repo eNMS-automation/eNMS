@@ -77,7 +77,7 @@ class DatabaseMigrationsForm(BaseForm):
     template = "database_migration"
     form_type = HiddenField(default="database_migration")
     empty_database_before_import = BooleanField("Empty Database before Import")
-    skip_update_pools_after_import = BooleanField(
+    skip_pool_update = BooleanField(
         "Skip the Pool update after Import", default="checked"
     )
     export_choices = [(p, p) for p in db.import_classes]

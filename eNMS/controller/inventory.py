@@ -193,7 +193,6 @@ class InventoryController(BaseController):
         file = kwargs["file"]
         if kwargs["replace"]:
             db.delete_all("device")
-            db.session.commit()
         if self.allowed_file(secure_filename(file.filename), {"xls", "xlsx"}):
             result = self.topology_import(file)
         info("Inventory import: Done.")

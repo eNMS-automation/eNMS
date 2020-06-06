@@ -31,8 +31,6 @@ export let currentPath = localStorage.getItem("path");
 export let workflow = JSON.parse(localStorage.getItem("workflow"));
 export let currentRuntime;
 
-console.log(theme)
-
 vis.Network.prototype.zoom = function (scale) {
   const animationOptions = {
     scale: this.getScale() + scale,

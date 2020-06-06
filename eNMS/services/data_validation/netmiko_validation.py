@@ -46,7 +46,7 @@ class NetmikoValidationService(ConnectionService):
             netmiko_connection.session_log.truncate(0)
             run.log(
                 "info",
-                f"sending CMD '{command}' with Netmiko",
+                f"sending COMMAND '{command}' with Netmiko",
                 device,
                 logger="security",
             )

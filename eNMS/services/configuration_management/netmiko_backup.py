@@ -43,7 +43,7 @@ class DataBackupService(ConnectionService):
                 if not command["value"]:
                     continue
                 run.log("info", f"Running command '{command['value']}'", device)
-                title = f"CMD '{command['value'].upper()}'"
+                title = f"COMMAND '{command['value'].upper()}'"
                 if command["prefix"]:
                     title += f" [{command['prefix']}]"
                 header = f"\n{' ' * 30}{title}\n" f"{' ' * 30}{'*' * len(title)}"

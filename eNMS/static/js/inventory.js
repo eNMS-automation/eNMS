@@ -273,7 +273,7 @@ function displayNetworkData(type, id, result, datetime) {
             )}
           </select>
           <button
-            onclick="eNMS.inventory.downloadNetworkData(${id})"
+            onclick="eNMS.inventory.downloadNetworkData('${id}')"
             type="button"
             class="btn btn-primary"
             style="margin-left: 10px"

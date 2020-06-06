@@ -245,6 +245,9 @@ class Result(AbstractBase):
         super().__init__(**kwargs)
         self.parent_runtime = self.run.parent_runtime
 
+    def __repr__(self):
+        return f"SERVICE '{self.service}' - DEVICE '{self.device} ({self.runtime})"
+
     @classmethod
     def filtering_constraints(cls, **kwargs):
         constraints = []
@@ -272,6 +275,9 @@ class ServiceLog(AbstractBase):
     runtime = db.Column(db.SmallString)
     service_id = db.Column(Integer, ForeignKey("service.id"))
     service = relationship("Service", foreign_keys="ServiceLog.service_id")
+
+    def __repr__(self):
+        return f"SERVICE '{self.service}' ({self.runtime})"
 
 
 class Run(AbstractBase):

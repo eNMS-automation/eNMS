@@ -240,7 +240,7 @@ class Database:
 
         @event.listens_for(self.base, "before_delete", propagate=True)
         def log_instance_deletion(mapper, connection, target):
-            name = getattr(target, "name", target.id)
+            name = getattr(target, "name", str(target))
             app.log("info", f"DELETION: {target.type} '{name}'")
 
         @event.listens_for(self.base, "before_update", propagate=True)

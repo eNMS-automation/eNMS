@@ -17,7 +17,7 @@ class AbstractBase(db.base):
         return True
 
     def __repr__(self):
-        return self.name
+        return getattr(self, "name", str(self.id))
 
     def __getattribute__(self, property):
         if property in db.private_properties:

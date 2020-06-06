@@ -83,7 +83,7 @@ let placeholder;
 export function displayWorkflow(workflowData) {
   workflow = workflowData.service;
   placeholder = null;
-  currentPlaceholder = workflowData.state?.placeholder;
+  currentPlaceholder = workflowData.state?.[currentPath]?.placeholder
   nodes = new vis.DataSet(workflow.services.map(serviceToNode));
   edges = new vis.DataSet(workflow.edges.map(edgeToEdge));
   workflow.services.map(drawIterationEdge);
@@ -283,7 +283,9 @@ export const switchToWorkflow = function (path, arrow, runtime) {
       callback: function (result) {
         workflow = result.service;
         if (workflow?.superworkflow) {
-          currentPath = `${workflow.superworkflow.id}>${path}`;
+          if (!currentPath.includes(workflow.superworkflow.id)) {
+            currentPath = `${workflow.superworkflow.id}>${path}`;
+          }
           $("#up-arrow").removeClass("disabled");
         }
         localStorage.setItem("path", path);

@@ -353,6 +353,9 @@ class Database:
         instance = self.session.query(models[model]).filter_by(**kwargs).first()
         if allow_none and not instance:
             return None
+        return self.delete_instance(instance)
+
+    def delete_instance(self, instance):
         try:
             instance.delete()
         except Exception as exc:
@@ -364,7 +367,7 @@ class Database:
     def delete_all(self, *models):
         for model in models:
             for instance in self.fetch_all(model):
-                self.delete(model, id=instance.id)
+                self.delete_instance(instance)
 
     def export(self, model):
         return [instance.to_dict(export=True) for instance in self.fetch_all(model)]

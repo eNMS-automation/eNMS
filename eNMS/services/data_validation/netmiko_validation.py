@@ -88,6 +88,7 @@ class NetmikoValidationForm(NetmikoForm):
     use_genie = BooleanField(default=False)
     groups = {
         "Main Parameters": {"commands": ["command"], "default": "expanded"},
+        **NetmikoForm.groups,
         "Advanced Netmiko Parameters": {
             "commands": [
                 "expect_string",
@@ -98,5 +99,4 @@ class NetmikoValidationForm(NetmikoForm):
             ],
             "default": "hidden",
         },
-        **NetmikoForm.groups,
     }

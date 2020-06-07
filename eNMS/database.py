@@ -329,7 +329,7 @@ class Database:
         query = self.session.query(*args)
         if model == "user":
             return query
-        elif not current_user or current_user.is_admin:
+        elif not current_user or getattr(current_user, "is_admin", False):
             return query
         else:
             return models[model].rbac_filter(query)

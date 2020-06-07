@@ -6,10 +6,12 @@ function help() {
 
     Options:
       -d <database>                Database (mysql | pgsql | sqlite) (default: sqlite)
+      -g                           Start the application with gunicorn
       -h                           Help
       -p <path>                    Path to folder (default: current folder \$PWD)
       -r                           Reload Database
       -q                           Use a redis queue
+      -s                           Start scheduler
   "
   exit 0
 }
@@ -65,7 +67,6 @@ while getopts h?grqstvp:d: opt; do
       r) reload=true;;
       q) redis=true;;
       s) scheduler=true;;
-      t) tacacs=true;;
       h|\?) help;;
     esac
 done

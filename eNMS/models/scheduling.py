@@ -6,7 +6,8 @@ from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy.orm import relationship
 
-from eNMS.database import app, db
+from eNMS import app
+from eNMS.database import db
 from eNMS.models.base import AbstractBase
 from eNMS.setup import scheduler
 

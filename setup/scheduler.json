@@ -1,5 +1,4 @@
 {
-  "address": "http://192.168.56.103:8000",
   "logging": {
     "version": 1,
     "disable_existing_loggers": false,

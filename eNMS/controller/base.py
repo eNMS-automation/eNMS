@@ -74,6 +74,7 @@ class BaseController:
         self.fetch_version()
         self.init_logs()
         self.init_redis()
+        self.init_scheduler()
         self.init_connection_pools()
 
     def init_encryption(self):
@@ -208,6 +209,9 @@ class BaseController:
             if host
             else None
         )
+
+    def init_scheduler(self):
+        self.scheduler_address = environ.get("SCHEDULER_ADDR")
 
     def init_services(self):
         path_services = [self.path / "eNMS" / "services"]

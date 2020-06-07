@@ -6,7 +6,7 @@ from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy.orm import relationship
 
-from eNMS.database import db
+from eNMS.database import app, db
 from eNMS.models.base import AbstractBase
 from eNMS.setup import scheduler
 
@@ -44,7 +44,7 @@ class Task(AbstractBase):
             self.schedule()
 
     def delete(self):
-        post(f"{scheduler['address']}/delete_job", json=self.id)
+        post(f"{app.scheduler_address}/delete_job", json=self.id)
 
     @hybrid_property
     def status(self):
@@ -58,7 +58,7 @@ class Task(AbstractBase):
     def next_run_time(self):
         try:
             return get(
-                f"{scheduler['address']}/next_runtime/{self.id}", timeout=0.01
+                f"{app.scheduler_address}/next_runtime/{self.id}", timeout=0.01
             ).json()
         except (ConnectionError, ReadTimeout):
             return "Scheduler Unreachable"
@@ -67,7 +67,7 @@ class Task(AbstractBase):
     def time_before_next_run(self):
         try:
             return get(
-                f"{scheduler['address']}/time_left/{self.id}", timeout=0.01
+                f"{app.scheduler_address}/time_left/{self.id}", timeout=0.01
             ).json()
         except (ConnectionError, ReadTimeout):
             return "Scheduler Unreachable"
@@ -75,7 +75,7 @@ class Task(AbstractBase):
     def schedule(self, mode="schedule"):
         try:
             result = post(
-                f"{scheduler['address']}/schedule",
+                f"{app.scheduler_address}/schedule",
                 json={"mode": mode, "task": self.get_properties()},
             ).json()
         except ConnectionError:

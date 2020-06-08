@@ -37,6 +37,7 @@ edit them.
 - Refactor data backup services with custom configuration properties. Implement "Operational Data" as
 an example custom property.
 - Add database fetch/commit retry mechanism to handle deadlocks & other SQL operational errors
+- Add validation condition for validation section.
 
 MIGRATION:
 - Remove RBAC in rbac.json

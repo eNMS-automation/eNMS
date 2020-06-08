@@ -26,6 +26,7 @@ class Object(AbstractBase):
 
     def update(self, **kwargs):
         super().update(**kwargs)
+        self.users = [current_user] if current_user else []
         if kwargs.get("dont_update_pools", False):
             return
         for pool in db.fetch_all("pool"):
@@ -285,6 +286,7 @@ class Pool(AbstractBase):
 
     def update(self, **kwargs):
         super().update(**kwargs)
+        self.groups = getattr(current_user, "groups", [])
         self.compute_pool()
 
     def property_match(self, obj, property):

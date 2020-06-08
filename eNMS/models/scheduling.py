@@ -9,7 +9,6 @@ from sqlalchemy.orm import relationship
 from eNMS import app
 from eNMS.database import db
 from eNMS.models.base import AbstractBase
-from eNMS.setup import scheduler
 
 
 @db.set_custom_properties

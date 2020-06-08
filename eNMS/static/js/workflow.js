@@ -83,7 +83,7 @@ let placeholder;
 export function displayWorkflow(workflowData) {
   workflow = workflowData.service;
   placeholder = null;
-  currentPlaceholder = workflowData.state?.[currentPath]?.placeholder
+  currentPlaceholder = workflowData.state?.[currentPath]?.placeholder;
   nodes = new vis.DataSet(workflow.services.map(serviceToNode));
   edges = new vis.DataSet(workflow.edges.map(edgeToEdge));
   workflow.services.map(drawIterationEdge);

@@ -23,7 +23,6 @@
     /table/link, /workflow_builder, /form/database_migration, /table/server, /form/restart_workflow,
     /form/mattermost_notification_service, /form/workflow, /form/device_connection]
   is_admin: true
-  manual_rbac: false
   menu: [Scheduling, Home, Automation, Plugins, Visualization, Admin, Inventory]
   name: admin
   pages: [Dashboard, Configurations, Tasks, Plugin 1, Events, Changelog, Services,
@@ -70,7 +69,6 @@
     /form/generic_file_transfer_service, /form/settings_panel, /table/service, /form/event,
     /form/device_connection]
   is_admin: false
-  manual_rbac: false
   menu: [Scheduling, Home, Automation, Plugins, Visualization, Inventory]
   name: read-only
   pages: [Sessions, Tasks, Devices, Network, Results, Plugin 1, Dashboard, Pools,
@@ -109,7 +107,6 @@
     /form/netmiko_validation_service, /form/generic_file_transfer_service, /form/service_filtering,
     /form/settings_panel, /table/service, /form/event, /form/device_connection]
   is_admin: false
-  manual_rbac: false
   menu: [Scheduling, Home, Automation, Plugins, Visualization, Inventory]
   name: chicago
   pages: [Sessions, Tasks, Devices, Network, Results, Plugin 1, Dashboard, Pools,
@@ -155,7 +152,6 @@
     /form/netmiko_validation_service, /form/generic_file_transfer_service, /form/service_filtering,
     /form/settings_panel, /table/service, /form/event, /form/device_connection]
   is_admin: false
-  manual_rbac: false
   menu: [Scheduling, Home, Automation, Plugins, Visualization, Inventory]
   name: sf
   pages: [Sessions, Tasks, Devices, Network, Results, Plugin 1, Dashboard, Pools,
@@ -201,7 +197,6 @@
     /form/netmiko_validation_service, /form/generic_file_transfer_service, /form/service_filtering,
     /form/settings_panel, /table/service, /form/event, /form/device_connection]
   is_admin: false
-  manual_rbac: false
   menu: [Scheduling, Home, Automation, Plugins, Visualization, Inventory]
   name: ny
   pages: [Sessions, Tasks, Devices, Network, Results, Plugin 1, Dashboard, Pools,

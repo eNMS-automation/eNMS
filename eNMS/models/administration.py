@@ -47,7 +47,6 @@ class User(AbstractBase, UserMixin):
         "Device", secondary=db.user_device_table, back_populates="users"
     )
     links = relationship("Link", secondary=db.user_link_table, back_populates="users")
-    manual_rbac = db.Column(Boolean, default=False)
     is_admin = db.Column(Boolean, default=False)
 
     def get_id(self):

@@ -20,7 +20,6 @@
     /table/run, /workflow_builder, /form/link, /form/netmiko_file_transfer_service,
     /view/site, /form/import_service, /form/napalm_configuration_service, /form/ping_service,
     /form/mattermost_notification_service, /form/ansible_playbook_service]
-  manual_rbac: false
   menu: [Admin, Home, Scheduling, Automation, Inventory, Visualization, Plugins]
   name: admin
   pages: [Network, Events, Configurations, Tasks, Servers, Services, Plugin 1, Links,

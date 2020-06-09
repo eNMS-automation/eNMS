@@ -55,7 +55,7 @@ class DeviceConnectionForm(BaseForm):
 class ObjectForm(BaseForm):
     form_type = HiddenField(default="object")
     name = StringField("Name", [InputRequired()])
-    public = BooleanField("Public")
+    public = BooleanField("Public", default=False)
     description = StringField("Description")
     subtype = StringField("Subtype")
     location = StringField("Location")
@@ -118,7 +118,7 @@ class PoolForm(BaseForm):
     form_type = HiddenField(default="pool")
     id = HiddenField()
     name = StringField("Name", [InputRequired()])
-    public = BooleanField("Public")
+    public = BooleanField("Public", default=False)
     description = StringField("Description")
     longitude = StringField("Longitude", default=0.0)
     latitude = StringField("Latitude", default=0.0)

@@ -114,6 +114,7 @@ class Service(AbstractBase):
     maximum_runs = db.Column(Integer, default=1)
     multiprocessing = db.Column(Boolean, default=False)
     max_processes = db.Column(Integer, default=5)
+    status = db.Column(db.SmallString, default="Idle")
     validation_condition = db.Column(db.SmallString, default="success")
     conversion_method = db.Column(db.SmallString, default="none")
     validation_method = db.Column(db.SmallString, default="none")

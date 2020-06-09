@@ -8,6 +8,7 @@ from eNMS.models import model_properties, property_types, relationships
 class AbstractBase(db.base):
 
     __abstract__ = True
+    model_properties = []
 
     def __init__(self, **kwargs):
         self.update(**kwargs)
@@ -16,7 +17,7 @@ class AbstractBase(db.base):
         return True
 
     def __repr__(self):
-        return self.name
+        return getattr(self, "name", str(self.id))
 
     def __getattribute__(self, property):
         if property in db.private_properties:
@@ -80,12 +81,12 @@ class AbstractBase(db.base):
         result = {}
         no_migrate = db.dont_migrate.get(self.type, db.dont_migrate["service"])
         properties = list(model_properties[self.type])
-        if not export:
-            properties.extend(getattr(self, "model_properties", []))
         for property in properties:
             if property in db.private_properties:
                 continue
             if property in db.dont_serialize.get(self.type, []):
+                continue
+            if export and property in getattr(self, "model_properties", []):
                 continue
             if include and property not in include or exclude and property in exclude:
                 continue

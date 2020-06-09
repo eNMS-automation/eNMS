@@ -1,6 +1,6 @@
 {
   "app": {
-    "address": "test",
+    "address": "",
     "config_mode": "debug",
     "create_examples": true,
     "documentation_url": "https://enms.readthedocs.io/en/latest/",
@@ -24,6 +24,16 @@
     "large_string_length": 32768,
     "max_overflow": 10,
     "pool_size": 1000,
+    "retry": {
+      "fetch": {
+        "number": 3,
+        "time": 3
+      },
+      "commit": {
+        "number": 10,
+        "time": 5
+      }
+    },
     "small_string_length": 255
   },
   "logging": {

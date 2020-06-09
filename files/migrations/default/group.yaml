@@ -1,7 +1,7 @@
 - email: admin-users@enms.io
   get_requests: [/dashboard, /download_file, /form/add_services, /form/administration,
     /form/ansible_playbook_service, /form/changelog, /form/configure_bgp_service,
-    /form/data_backup_service, /form/database_deletion, /form/database_migration,
+    /form/netmiko_backup_service, /form/database_deletion, /form/database_migration,
     /form/device, /form/device_connection, /form/device_filtering, /form/event, /form/example_service,
     /form/excel_export, /form/excel_import, /form/file, /form/files, /form/generic_file_transfer_service,
     /form/group, /form/import_service, /form/link, /form/link_filtering, /form/mail_notification_service,

@@ -68,9 +68,9 @@ class NetmikoConfigurationForm(NetmikoForm):
             ],
             "default": "expanded",
         },
+        **NetmikoForm.groups,
         "Advanced Netmiko Parameters": {
             "commands": ["strip_prompt", "strip_command"],
             "default": "hidden",
         },
-        **NetmikoForm.groups,
     }

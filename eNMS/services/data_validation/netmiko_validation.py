@@ -46,7 +46,7 @@ class NetmikoValidationService(ConnectionService):
             netmiko_connection.session_log.truncate(0)
             run.log(
                 "info",
-                f"sending CMD '{command}' with Netmiko",
+                f"sending COMMAND '{command}' with Netmiko",
                 device,
                 logger="security",
             )
@@ -88,6 +88,7 @@ class NetmikoValidationForm(NetmikoForm):
     use_genie = BooleanField(default=False)
     groups = {
         "Main Parameters": {"commands": ["command"], "default": "expanded"},
+        **NetmikoForm.groups,
         "Advanced Netmiko Parameters": {
             "commands": [
                 "expect_string",
@@ -98,5 +99,4 @@ class NetmikoValidationForm(NetmikoForm):
             ],
             "default": "hidden",
         },
-        **NetmikoForm.groups,
     }

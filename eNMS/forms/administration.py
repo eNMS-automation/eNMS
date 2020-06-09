@@ -77,7 +77,7 @@ class DatabaseMigrationsForm(BaseForm):
     template = "database_migration"
     form_type = HiddenField(default="database_migration")
     empty_database_before_import = BooleanField("Empty Database before Import")
-    skip_update_pools_after_import = BooleanField(
+    skip_pool_update = BooleanField(
         "Skip the Pool update after Import", default="checked"
     )
     export_choices = [(p, p) for p in db.import_classes]
@@ -116,22 +116,10 @@ def init_rbac_form(rbac):
         id = HiddenField()
         name = StringField("Name", [InputRequired()])
         email = StringField("Email")
-        menu = SelectMultipleField("Menu", choices=choices(list(rbac["menu"])))
-        pages = SelectMultipleField("Pages", choices=choices(rbac["pages"]))
-        upper_menu = SelectMultipleField(
-            "Upper Menu", choices=choices(rbac["upper_menu"])
-        )
-        get_requests = SelectMultipleField(
-            "GET requests", choices=choices(rbac["get_requests"])
-        )
-        post_requests = SelectMultipleField(
-            "POST requests", choices=choices(rbac["post_requests"])
-        )
 
     @configure_relationships("groups")
     class UserForm(RbacForm):
         form_type = HiddenField(default="user")
-        manual_rbac = BooleanField("Manually defined RBAC")
         theme = SelectField(
             "Theme",
             choices=[
@@ -143,3 +131,14 @@ def init_rbac_form(rbac):
     @configure_relationships("users", "pools", "services")
     class GroupForm(RbacForm):
         form_type = HiddenField(default="group")
+        menu = SelectMultipleField("Menu", choices=choices(list(rbac["menu"])))
+        pages = SelectMultipleField("Pages", choices=choices(rbac["pages"]))
+        upper_menu = SelectMultipleField(
+            "Upper Menu", choices=choices(rbac["upper_menu"])
+        )
+        get_requests = SelectMultipleField(
+            "GET requests", choices=choices(rbac["get_requests"])
+        )
+        post_requests = SelectMultipleField(
+            "POST requests", choices=choices(rbac["post_requests"])
+        )

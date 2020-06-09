@@ -83,7 +83,7 @@
     "/form/ansible_playbook_service",
     "/form/changelog",
     "/form/configure_bgp_service",
-    "/form/data_backup_service",
+    "/form/netmiko_backup_service",
     "/form/database_deletion",
     "/form/database_migration",
     "/form/device",

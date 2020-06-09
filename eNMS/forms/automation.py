@@ -81,6 +81,7 @@ class ServiceForm(BaseForm):
             ("failure", "Run on failure only"),
         )
     )
+    public = BooleanField("Public")
     log_level = SelectField(
         "Logging",
         choices=((0, "Disable logging"), *enumerate(app.log_levels, 1)),
@@ -260,19 +261,6 @@ class NetmikoForm(ConnectionForm):
         render_kw={"help": "netmiko/expect_prompt"},
     )
     groups = {
-        "Jump on connect Parameters": {
-            "commands": [
-                "jump_on_connect",
-                "jump_command",
-                "expect_username_prompt",
-                "jump_username",
-                "expect_password_prompt",
-                "jump_password",
-                "expect_prompt",
-                "exit_command",
-            ],
-            "default": "hidden",
-        },
         "Netmiko Parameters": {
             "commands": [
                 "driver",
@@ -287,6 +275,19 @@ class NetmikoForm(ConnectionForm):
             "default": "expanded",
         },
         "Connection Parameters": ConnectionForm.group,
+        "Jump on connect Parameters": {
+            "commands": [
+                "jump_on_connect",
+                "jump_command",
+                "expect_username_prompt",
+                "jump_username",
+                "expect_password_prompt",
+                "jump_password",
+                "expect_prompt",
+                "exit_command",
+            ],
+            "default": "hidden",
+        },
     }
 
 

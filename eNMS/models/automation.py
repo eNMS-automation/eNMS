@@ -19,6 +19,7 @@ from scp import SCPClient
 from sqlalchemy import Boolean, ForeignKey, Index, Integer, or_
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.orm import relationship
+from sqlalchemy.sql.expression import true
 from threading import Thread
 from time import sleep
 from traceback import format_exc
@@ -48,6 +49,7 @@ class Service(AbstractBase):
     __mapper_args__ = {"polymorphic_identity": "service", "polymorphic_on": type}
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.SmallString, unique=True)
+    public = db.Column(Boolean)
     shared = db.Column(Boolean, default=False)
     scoped_name = db.Column(db.SmallString, index=True)
     last_modified = db.Column(db.SmallString, info={"log_change": False})
@@ -121,7 +123,6 @@ class Service(AbstractBase):
     negative_logic = db.Column(Boolean, default=False)
     delete_spaces_before_matching = db.Column(Boolean, default=False)
     run_method = db.Column(db.SmallString, default="per_device")
-    status = db.Column(db.SmallString, default="Idle")
 
     def __init__(self, **kwargs):
         kwargs.pop("status", None)
@@ -175,7 +176,10 @@ class Service(AbstractBase):
     @classmethod
     def rbac_filter(cls, query):
         return query.filter(
-            or_(cls.groups.any(id=group.id) for group in current_user.groups)
+            or_(
+                cls.public == true(),
+                or_(cls.groups.any(id=group.id) for group in current_user.groups),
+            )
         )
 
     def set_name(self, name=None):
@@ -246,6 +250,9 @@ class Result(AbstractBase):
         super().__init__(**kwargs)
         self.parent_runtime = self.run.parent_runtime
 
+    def __repr__(self):
+        return f"SERVICE '{self.service}' - DEVICE '{self.device} ({self.runtime})"
+
     @classmethod
     def filtering_constraints(cls, **kwargs):
         constraints = []
@@ -273,6 +280,9 @@ class ServiceLog(AbstractBase):
     runtime = db.Column(db.SmallString)
     service_id = db.Column(Integer, ForeignKey("service.id"))
     service = relationship("Service", foreign_keys="ServiceLog.service_id")
+
+    def __repr__(self):
+        return f"SERVICE '{self.service}' ({self.runtime})"
 
 
 class Run(AbstractBase):
@@ -351,6 +361,18 @@ class Run(AbstractBase):
     def filtering_constraints(cls, **_):
         return [cls.parent_runtime == cls.runtime]
 
+    @classmethod
+    def rbac_filter(cls, query):
+        return query.filter(
+            or_(
+                cls.service.has(public=True),
+                or_(
+                    models["group"].services.any(id=cls.service_id)
+                    for group in current_user.groups
+                ),
+            )
+        )
+
     @property
     def name(self):
         return repr(self)
@@ -413,10 +435,8 @@ class Run(AbstractBase):
         progress = self.get_state().get(self.path, {}).get("progress")
         try:
             progress = progress["device"]
-            return (
-                f"{progress['success'] + progress['failure']}"
-                f"/{progress['total']} ({progress['failure']} failed)"
-            )
+            failure, success = progress.get("failure", 0), progress.get("success", 0)
+            return f"{success + failure}/{progress['total']} ({failure} failed)"
         except (KeyError, TypeError):
             return "N/A"
 
@@ -493,15 +513,12 @@ class Run(AbstractBase):
         start = datetime.now().replace(microsecond=0)
         try:
             app.service_db[self.service.id]["runs"] += 1
-            self.service.status = "Running"
-            db.session.commit()
             results = {"runtime": self.runtime, **self.device_run(payload)}
         except Exception:
             result = "\n".join(format_exc().splitlines())
             self.log("error", result)
             results = {"success": False, "runtime": self.runtime, "result": result}
         finally:
-            db.session.commit()
             state = self.get_state()
             results["summary"] = {"failure": [], "success": []}
             for result in self.results:
@@ -538,13 +555,12 @@ class Run(AbstractBase):
                 results = self.create_result(results)
             if app.redis_queue and self.runtime == self.parent_runtime:
                 app.redis("delete", *app.redis("keys", f"{self.runtime}/*"))
-            db.session.commit()
         return results
 
     def make_results_json_compliant(self, results):
         def rec(value):
             if isinstance(value, dict):
-                return {k: rec(v) for k, v in value.items()}
+                return {k: rec(value[k]) for k in list(value)}
             elif isinstance(value, list):
                 return list(map(rec, value))
             elif not isinstance(value, (int, str, bool, float, None.__class__)):
@@ -587,8 +603,11 @@ class Run(AbstractBase):
     def device_run(self, payload):
         self.devices = self.compute_devices(payload)
         user = db.fetch("user", allow_none=True, name=self.creator)
-        if not user.is_admin and set(self.devices) - set(user.devices):
-            error = f"RBAC ERROR: Unauthorized targets for user '{self.creator}'"
+        private_targets = set(device for device in self.devices if not device.public)
+        unauthorized_targets = private_targets - set(user.devices)
+        if not user.is_admin and unauthorized_targets:
+            targets = "".join(device.name for device in unauthorized_targets)
+            error = f"Unauthorized targets ({targets}) for user '{self.creator}'"
             self.log("error", error)
             return {"success": False, "result": error, "runtime": self.runtime}
         if self.run_method != "once":
@@ -628,10 +647,7 @@ class Run(AbstractBase):
                 with ThreadPool(processes=processes) as pool:
                     pool.map(self.get_device_result, process_args)
             else:
-                results = [
-                    self.get_results(payload, device, commit=False)
-                    for device in self.devices
-                ]
+                results = [self.get_results(payload, device) for device in self.devices]
             return {
                 "success": all(result["success"] for result in results),
                 "runtime": self.runtime,
@@ -665,7 +681,7 @@ class Run(AbstractBase):
                 results["devices"] = {}
                 for result in self.results:
                     results["devices"][result.device.name] = result.result
-        result = db.factory("result", result=results, **result_kw)
+        result = db.factory("result", result=results, commit=True, **result_kw)
         return results
 
     def run_service_job(self, payload, device):
@@ -737,7 +753,7 @@ class Run(AbstractBase):
                 results = {"success": False, "result": result}
         return results
 
-    def get_results(self, payload, device=None, commit=True):
+    def get_results(self, payload, device=None):
         self.log("info", "STARTING", device)
         start = datetime.now().replace(microsecond=0)
         skip_service = False
@@ -795,8 +811,6 @@ class Run(AbstractBase):
             sleep(self.waiting_time)
         if not results["success"]:
             self.write_state("success", False)
-        if commit:
-            db.session.commit()
         return results
 
     def log(

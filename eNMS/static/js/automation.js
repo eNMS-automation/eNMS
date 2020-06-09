@@ -419,10 +419,13 @@ function parameterizedRun(type, id) {
 }
 
 export function runLogic(result) {
-  showRuntimePanel("logs", result.service, result.runtime);
-  notify(`Service '${result.service.name}' started.`, "success", 5, true);
+  const service = result.service.superworkflow || result.service;
+  showRuntimePanel("logs", service, result.runtime);
+  notify(`Service '${service.name}' started.`, "success", 5, true);
   if (page == "workflow_builder" && workflow) {
-    if (result.service.id != workflow.id) {
+    if (service != result.service) {
+      switchToWorkflow(service.id, null, result.runtime);
+    } else if (result.service.id != workflow.id) {
       getServiceState(result.service.id, true);
     } else {
       $("#current-runtime")
@@ -539,7 +542,8 @@ Object.assign(action, {
   Duplicate: (service) => showTypePanel(service.type, service.id, "duplicate"),
   Run: (service) => normalRun(service.id),
   "Parameterized Run": (service) => showTypePanel(service.type, service.id, "run"),
-  Results: (service) => showRuntimePanel("results", service),
+  Logs: (service) => showRuntimePanel("logs", service, currentRuntime),
+  Results: (service) => showRuntimePanel("results", service, currentRuntime, "result"),
   Backward: () => switchToWorkflow(arrowHistory[arrowPointer - 1], "left"),
   Forward: () => switchToWorkflow(arrowHistory[arrowPointer + 1], "right"),
 });

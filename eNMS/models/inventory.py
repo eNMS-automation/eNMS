@@ -4,6 +4,7 @@ from sqlalchemy import Boolean, ForeignKey, Integer, or_
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.orm import backref, deferred, relationship
 from sqlalchemy.schema import UniqueConstraint
+from sqlalchemy.sql.expression import true
 
 from eNMS import app
 from eNMS.models.base import AbstractBase
@@ -17,6 +18,7 @@ class Object(AbstractBase):
     type = db.Column(db.SmallString)
     __mapper_args__ = {"polymorphic_identity": "object", "polymorphic_on": type}
     id = db.Column(Integer, primary_key=True)
+    public = db.Column(Boolean)
     last_modified = db.Column(db.SmallString, info={"log_change": False})
     subtype = db.Column(db.SmallString)
     description = db.Column(db.SmallString)
@@ -26,6 +28,7 @@ class Object(AbstractBase):
 
     def update(self, **kwargs):
         super().update(**kwargs)
+        self.users = [current_user] if current_user else []
         if kwargs.get("dont_update_pools", False):
             return
         for pool in db.fetch_all("pool"):
@@ -47,7 +50,9 @@ class Object(AbstractBase):
 
     @classmethod
     def rbac_filter(cls, query):
-        return query.filter(cls.users.any(id=current_user.id))
+        return query.filter(
+            or_(cls.public == true(), cls.users.any(id=current_user.id))
+        )
 
 
 @db.set_custom_properties
@@ -262,6 +267,7 @@ class Pool(AbstractBase):
     __tablename__ = type = "pool"
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.SmallString, unique=True)
+    public = db.Column(Boolean)
     last_modified = db.Column(db.SmallString, info={"log_change": False})
     description = db.Column(db.SmallString)
     operator = db.Column(db.SmallString, default="all")
@@ -285,6 +291,7 @@ class Pool(AbstractBase):
 
     def update(self, **kwargs):
         super().update(**kwargs)
+        self.groups = getattr(current_user, "groups", [])
         self.compute_pool()
 
     def property_match(self, obj, property):
@@ -326,7 +333,10 @@ class Pool(AbstractBase):
     @classmethod
     def rbac_filter(cls, query):
         return query.filter(
-            or_(cls.groups.any(id=group.id) for group in current_user.groups)
+            or_(
+                cls.public == true(),
+                or_(cls.groups.any(id=group.id) for group in current_user.groups),
+            )
         )
 
     def update_rbac(self):

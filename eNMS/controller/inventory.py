@@ -3,6 +3,7 @@ from flask_login import current_user
 from git import Repo
 from io import BytesIO
 from logging import info
+from os import environ
 from sqlalchemy import and_
 from subprocess import Popen
 from threading import Thread
@@ -45,20 +46,22 @@ class InventoryController(BaseController):
         else:
             options = ""
         if protocol == "telnet":
-            cmd.extend(f"telnet {address}".split())
+            nested_cmd = f"telnet {address}"
         elif "authentication" in kwargs:
-            login, pwd = (
+            login, environ["SSHPASS"] = (
                 (device.username, self.get_password(device.password))
                 if kwargs["credentials"] == "device"
                 else (current_user.name, self.get_password(current_user.password))
                 if kwargs["credentials"] == "user"
                 else (kwargs["username"], kwargs["password"])
             )
-            cmd.extend(f"sshpass -p {pwd} ssh {options} {login}@{address}".split())
+            nested_cmd = f"sshpass -e ssh {options} {login}@{address} -p {device.port}"
         else:
-            cmd.extend(f"ssh {options} {address}".split())
-        if protocol != "telnet":
-            cmd.extend(f"-p {device.port}".split())
+            nested_cmd = f"ssh {options} {address} -p {device.port}"
+        if "multiplexing" in kwargs:
+            cmd.append(nested_cmd)
+        else:
+            cmd.extend(nested_cmd.split())
         Popen(cmd)
         return {
             "device": device.name,
@@ -190,7 +193,6 @@ class InventoryController(BaseController):
         file = kwargs["file"]
         if kwargs["replace"]:
             db.delete_all("device")
-            db.session.commit()
         if self.allowed_file(secure_filename(file.filename), {"xls", "xlsx"}):
             result = self.topology_import(file)
         info("Inventory import: Done.")

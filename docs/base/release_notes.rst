@@ -15,12 +15,8 @@ in the UI but couldn't make calls to the REST API)
 function that works with a standard LDAP installation, but you can customize however you want.
 The LDAP server is now configured with the env variable LDAP_SERVER.
 The settings contain a new section "database" to enable ldap, database or tacacs authentication.
-- Defer loading of device configuration and operational data column
-- Fix device results table comparison mechanism
 - Add replier option in send mail mechanism
-- Fix REST asynchronous get result not committed bug
-- Rename "app_log" option to changelog in log function for services
-- Fix comparison of device results
+- Rename "app_log" option to "changelog" in log function for services
 - Add new entry in workflow RC menu "Workflow Results Table": contains all results for a given runtime,
 allowing for comparison of results same device / different service, same service / different device, etc.
 - Refactor logging mechanism. In settings.json, add new logging sections to configure whether the log
@@ -29,15 +25,11 @@ for a given logger should also be logged as changelog or service log by default.
 - Fix authentication bug flask_login and add session timeout mechanism
 - Make plugins separate from eNMS in their own folder, add bash script to install/update/uninstall them
 - Make the CLI interface a plugins
-- Add session timeout
-- Add "all results view" so you can compare any two results in a workflow ("Re: [E] Re: Visual results diff")
-- add option in settings so you can choose whether a logger goes to service log or not
 - Remove summary from service state to improve workflow refresh performances
 - Add Dark mode and theme mechanism
 - Make search endpoint work with result to retrieve device results
 - Allow dictionary and json as custom properties. For json properties, use jsoneditor to let the user
 edit them.
-- Add example of model in template plugins
 - Add placeholder as a global variable in a workflow (e.g to be used in the superworkflow)
 - Add mechanism for creating custom configuration property
 - New "export" keyword in set_var set to False by default. If true, the variable is considered global and can be referred to as 
@@ -45,12 +37,15 @@ edit them.
 - Refactor data backup services with custom configuration properties. Implement "Operational Data" as
 an example custom property.
 - Add new Git service. Replace "git_push_configurations" swiss army knife service with instance of git service.
+- Add database fetch/commit retry mechanism to handle deadlocks & other SQL operational errors
+- Add validation condition for validation section.
 
 MIGRATION:
 - Remove RBAC in rbac.json
 - Update migration files (user.yaml): group: Admin -> groups: [Admin Users]
 - app_log -> changelog in the service migration files (python snippet services)
 - set_var: add export keyword set to True in service.yaml for backward compatibility
+- rename DataBackupService / NetmikoBackupService, data_backup_service -> netmiko_backup_service
 
 Version 3.21.3
 --------------

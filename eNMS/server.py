@@ -319,12 +319,13 @@ class Server(Flask):
         @self.monitor_requests
         def route(page):
             endpoint, *args = page.split("/")
+            admin_user = current_user.is_admin
             if f"/{endpoint}" not in app.rbac["post_requests"]:
                 return jsonify({"alert": "Invalid POST request."})
-            if f"/{endpoint}" not in current_user.post_requests:
+            if not admin_user and f"/{endpoint}" not in current_user.post_requests:
                 return jsonify({"alert": "Error 403 Forbidden."})
             form_type = request.form.get("form_type")
-            if endpoint in app.json_endpoints:
+            if request.json:
                 result = getattr(app, endpoint)(*args, **request.json)
             elif form_type:
                 form = form_classes[form_type](request.form)

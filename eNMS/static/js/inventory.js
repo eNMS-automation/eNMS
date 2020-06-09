@@ -273,7 +273,7 @@ function displayNetworkData(type, id, result, datetime) {
             )}
           </select>
           <button
-            onclick="eNMS.inventory.downloadNetworkData(${id})"
+            onclick="eNMS.inventory.downloadNetworkData('${id}')"
             type="button"
             class="btn btn-primary"
             style="margin-left: 10px"
@@ -392,13 +392,14 @@ function showGitHistory(device) {
               .draw();
             $(`#data-type-${device.id}`)
               .on("change", function () {
+                const configurationProperty = this.value;
                 table.clear();
                 $(`#compare-${device.id}-btn`)
                   .unbind("click")
                   .on("click", function () {
-                    compare(this.value, device);
+                    compare(configurationProperty, device);
                   });
-                commits[this.value].forEach((commit) => {
+                commits[configurationProperty].forEach((commit) => {
                   table.row.add([
                     `${commit.date}`,
                     `${commit.hash}`,
@@ -415,12 +416,12 @@ function showGitHistory(device) {
                     </button>`,
                     `<input
                       type="radio"
-                      name="v1-${this.value}-${device.id}"
+                      name="v1-${configurationProperty}-${device.id}"
                       value="${commit.hash}">
                     </input>`,
                     `<input
                       type="radio"
-                      name="v2-${this.value}-${device.id}"
+                      name="v2-${configurationProperty}-${device.id}"
                       value="${commit.hash}">
                     </input>`,
                   ]);

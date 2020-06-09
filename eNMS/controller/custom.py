@@ -10,6 +10,8 @@ try:
 except ImportError as exc:
     warn(f"Couldn't import tacacs_plus module ({exc})")
 
+from eNMS.database import db
+
 
 class CustomController:
     def ldap_authentication(self, user, name, password):
@@ -17,7 +19,8 @@ class CustomController:
             self.ldap_server = Server(environ.get("LDAP_ADDR"))
         user = f"uid={name},dc=example,dc=com"
         success = Connection(self.ldap_server, user=user, password=password).bind()
-        return {"group": "Admin", "name": name} if success else False
+        admin_group = db.fetch("group", name="Admin Users").id
+        return {"groups": [admin_group], "name": name} if success else False
 
     def tacacs_authentication(self, user, name, password):
         if not hasattr(self, "tacacs_client"):
@@ -25,4 +28,5 @@ class CustomController:
                 environ.get("TACACS_ADDR"), 49, environ.get("TACACS_PASSWORD")
             )
         success = self.tacacs_client.authenticate(name, password).valid
-        return {"group": "Admin", "name": name} if success else False
+        admin_group = db.fetch("group", name="Admin Users").id
+        return {"groups": [admin_group], "name": name} if success else False

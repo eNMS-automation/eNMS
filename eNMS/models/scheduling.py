@@ -1,14 +1,16 @@
+from flask_login import current_user
 from re import search
 from requests import get, post
-from requests.exceptions import ConnectionError, ReadTimeout
-from sqlalchemy import Boolean, case, ForeignKey, Integer
+from requests.exceptions import ConnectionError, MissingSchema, ReadTimeout
+from sqlalchemy import Boolean, case, ForeignKey, Integer, or_
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy.orm import relationship
 
+from eNMS import app
 from eNMS.database import db
+from eNMS.models import models
 from eNMS.models.base import AbstractBase
-from eNMS.setup import scheduler
 
 
 @db.set_custom_properties
@@ -44,7 +46,7 @@ class Task(AbstractBase):
             self.schedule()
 
     def delete(self):
-        post(f"{scheduler['address']}/delete_job", json=self.id)
+        post(f"{app.scheduler_address}/delete_job", json=self.id)
 
     @hybrid_property
     def status(self):
@@ -54,28 +56,40 @@ class Task(AbstractBase):
     def status(cls):  # noqa: N805
         return case([(cls.is_active, "Active")], else_="Inactive")
 
+    @classmethod
+    def rbac_filter(cls, query):
+        return query.filter(
+            or_(
+                cls.service.has(public=True),
+                or_(
+                    models["group"].services.any(id=cls.service_id)
+                    for group in current_user.groups
+                ),
+            )
+        )
+
     @property
     def next_run_time(self):
         try:
             return get(
-                f"{scheduler['address']}/next_runtime/{self.id}", timeout=0.01
+                f"{app.scheduler_address}/next_runtime/{self.id}", timeout=0.01
             ).json()
-        except (ConnectionError, ReadTimeout):
+        except (ConnectionError, MissingSchema, ReadTimeout):
             return "Scheduler Unreachable"
 
     @property
     def time_before_next_run(self):
         try:
             return get(
-                f"{scheduler['address']}/time_left/{self.id}", timeout=0.01
+                f"{app.scheduler_address}/time_left/{self.id}", timeout=0.01
             ).json()
-        except (ConnectionError, ReadTimeout):
+        except (ConnectionError, MissingSchema, ReadTimeout):
             return "Scheduler Unreachable"
 
     def schedule(self, mode="schedule"):
         try:
             result = post(
-                f"{scheduler['address']}/schedule",
+                f"{app.scheduler_address}/schedule",
                 json={"mode": mode, "task": self.get_properties()},
             ).json()
         except ConnectionError:

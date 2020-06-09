@@ -38,7 +38,7 @@ class User(AbstractBase, UserMixin):
     post_requests = db.Column(db.List)
     small_menu = db.Column(Boolean, default=False, info={"dont_track_changes": True})
     theme = db.Column(
-        db.SmallString, default="Default", info={"dont_track_changes": True}
+        db.SmallString, default="default", info={"dont_track_changes": True}
     )
     groups = relationship(
         "Group", secondary=db.user_group_table, back_populates="users"
@@ -47,7 +47,6 @@ class User(AbstractBase, UserMixin):
         "Device", secondary=db.user_device_table, back_populates="users"
     )
     links = relationship("Link", secondary=db.user_link_table, back_populates="users")
-    manual_rbac = db.Column(Boolean, default=False)
     is_admin = db.Column(Boolean, default=False)
 
     def get_id(self):
@@ -61,11 +60,6 @@ class User(AbstractBase, UserMixin):
 
     def update_rbac(self):
         self.is_admin = any(group.name == "Admin Users" for group in self.groups)
-        if self.manual_rbac:
-            return
-        for access_type in app.rbac:
-            group_access = (getattr(group, access_type) for group in self.groups)
-            setattr(self, access_type, list(set().union(*group_access)))
         if self.is_admin:
             return
         for object_type in ("devices", "links"):
@@ -82,6 +76,9 @@ class User(AbstractBase, UserMixin):
                     )
                 ),
             )
+        for access_type in app.rbac:
+            group_access = (getattr(group, access_type) for group in self.groups)
+            setattr(self, access_type, list(set().union(*group_access)))
 
 
 @db.set_custom_properties

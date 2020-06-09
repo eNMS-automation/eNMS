@@ -12,9 +12,9 @@ from eNMS.forms.fields import FieldList, HiddenField, SelectField, StringField
 from eNMS.models.automation import ConnectionService
 
 
-class DataBackupService(ConnectionService):
+class NetmikoBackupService(ConnectionService):
 
-    __tablename__ = "data_backup_service"
+    __tablename__ = "netmiko_backup_service"
     pretty_name = "Netmiko Data Backup"
     parent_type = "connection_service"
     id = db.Column(Integer, ForeignKey("connection_service.id"), primary_key=True)
@@ -29,7 +29,7 @@ class DataBackupService(ConnectionService):
     commands = db.Column(db.List)
     replacements = db.Column(db.List)
 
-    __mapper_args__ = {"polymorphic_identity": "data_backup_service"}
+    __mapper_args__ = {"polymorphic_identity": "netmiko_backup_service"}
 
     def job(self, run, payload, device):
         path = Path.cwd() / "network_data" / device.name
@@ -43,7 +43,7 @@ class DataBackupService(ConnectionService):
                 if not command["value"]:
                     continue
                 run.log("info", f"Running command '{command['value']}'", device)
-                title = f"CMD '{command['value'].upper()}'"
+                title = f"COMMAND '{command['value'].upper()}'"
                 if command["prefix"]:
                     title += f" [{command['prefix']}]"
                 header = f"\n{' ' * 30}{title}\n" f"{' ' * 30}{'*' * len(title)}"
@@ -86,7 +86,7 @@ class CommandsForm(FlaskForm):
 
 
 class DataBackupForm(NetmikoForm):
-    form_type = HiddenField(default="data_backup_service")
+    form_type = HiddenField(default="netmiko_backup_service")
     property = SelectField(
         "Configuration Property to Update",
         choices=list(app.configuration_properties.items()),

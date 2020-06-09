@@ -1,6 +1,7 @@
 from ast import literal_eval
 from flask_login import current_user
 from json import loads
+from logging import error
 from os import environ
 from sqlalchemy import (
     Boolean,
@@ -18,12 +19,15 @@ from sqlalchemy import (
     Text,
 )
 from sqlalchemy.dialects.mysql.base import MSMediumBlob
+from sqlalchemy.exc import DatabaseError, OperationalError
 from sqlalchemy.ext.associationproxy import ASSOCIATION_PROXY
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.ext.mutable import MutableDict, MutableList
 from sqlalchemy.orm import scoped_session, sessionmaker
 from sqlalchemy.types import JSON
 from sqlalchemy.orm.collections import InstrumentedList
+from time import sleep
+from traceback import format_exc
 
 from eNMS.models import model_properties, models, property_types, relationships
 from eNMS.setup import properties, settings
@@ -128,6 +132,9 @@ class Database:
             "str": str,
             "date": str,
         }
+        for retry_type, values in settings["database"]["retry"].items():
+            for parameter, number in values.items():
+                setattr(self, f"retry_{retry_type}_{parameter}", number)
 
     @staticmethod
     def dict_conversion(input):
@@ -214,6 +221,7 @@ class Database:
             if "service" in name and name != "service":
                 model_properties[name].extend(model_properties["service"])
             models.update({name: model, name.lower(): model})
+            model_properties[name].extend(model.model_properties)
             model_properties[name] = list(set(model_properties[name]))
             for relation in mapper.relationships:
                 if getattr(relation.mapper.class_, "private", False):
@@ -232,7 +240,7 @@ class Database:
 
         @event.listens_for(self.base, "before_delete", propagate=True)
         def log_instance_deletion(mapper, connection, target):
-            name = getattr(target, "name", target.id)
+            name = getattr(target, "name", str(target))
             app.log("info", f"DELETION: {target.type} '{name}'")
 
         @event.listens_for(self.base, "before_update", propagate=True)
@@ -302,7 +310,13 @@ class Database:
 
     def fetch(self, model, allow_none=False, all_matches=False, **kwargs):
         query = self.query(model, models[model]).filter_by(**kwargs)
-        result = query.all() if all_matches else query.first()
+        for index in range(self.retry_fetch_number):
+            try:
+                result = query.all() if all_matches else query.first()
+                break
+            except (DatabaseError, OperationalError):
+                sleep(self.retry_fetch_time * (index + 1))
+                error(f"FETCH n°{index} FAILED:\n{format_exc()}")
         if result or allow_none:
             return result
         else:
@@ -315,7 +329,7 @@ class Database:
         query = self.session.query(*args)
         if model == "user":
             return query
-        elif not current_user or current_user.is_admin:
+        elif not current_user or getattr(current_user, "is_admin", False):
             return query
         else:
             return models[model].rbac_filter(query)
@@ -339,6 +353,9 @@ class Database:
         instance = self.session.query(models[model]).filter_by(**kwargs).first()
         if allow_none and not instance:
             return None
+        return self.delete_instance(instance)
+
+    def delete_instance(self, instance):
         try:
             instance.delete()
         except Exception as exc:
@@ -350,25 +367,41 @@ class Database:
     def delete_all(self, *models):
         for model in models:
             for instance in self.fetch_all(model):
-                self.delete(model, id=instance.id)
+                self.delete_instance(instance)
+            self.session.commit()
 
     def export(self, model):
         return [instance.to_dict(export=True) for instance in self.fetch_all(model)]
 
-    def factory(self, _class, **kwargs):
-        characters = set(kwargs.get("name", "") + kwargs.get("scoped_name", ""))
-        if set("/\\'" + '"') & characters:
-            raise Exception("Names cannot contain a slash or a quote.")
-        instance, instance_id = None, kwargs.pop("id", 0)
-        if instance_id:
-            instance = self.fetch(_class, id=instance_id)
-        elif "name" in kwargs:
-            instance = self.fetch(_class, allow_none=True, name=kwargs["name"])
-        if instance and not kwargs.get("must_be_new"):
-            instance.update(**kwargs)
+    def factory(self, _class, commit=False, **kwargs):
+        def transaction(_class, **kwargs):
+            characters = set(kwargs.get("name", "") + kwargs.get("scoped_name", ""))
+            if set("/\\'" + '"') & characters:
+                raise Exception("Names cannot contain a slash or a quote.")
+            instance, instance_id = None, kwargs.pop("id", 0)
+            if instance_id:
+                instance = self.fetch(_class, id=instance_id)
+            elif "name" in kwargs:
+                instance = self.fetch(_class, allow_none=True, name=kwargs["name"])
+            if instance and not kwargs.get("must_be_new"):
+                instance.update(**kwargs)
+            else:
+                instance = models[_class](**kwargs)
+                self.session.add(instance)
+            return instance
+
+        if not commit:
+            instance = transaction(_class, **kwargs)
         else:
-            instance = models[_class](**kwargs)
-            self.session.add(instance)
+            for index in range(self.retry_commit_number):
+                try:
+                    instance = transaction(_class, **kwargs)
+                    self.session.commit()
+                    break
+                except (DatabaseError, OperationalError):
+                    error(f"Commit n°{index} failed:\n{format_exc()}")
+                    self.session.rollback()
+                    sleep(self.retry_commit_time * (index + 1))
         return instance
 
     def set_custom_properties(self, table):

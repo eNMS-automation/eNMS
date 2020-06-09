@@ -4,6 +4,7 @@ from sqlalchemy import Boolean, ForeignKey, Integer, or_
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.orm import backref, deferred, relationship
 from sqlalchemy.schema import UniqueConstraint
+from sqlalchemy.sql.expression import true
 
 from eNMS import app
 from eNMS.models.base import AbstractBase
@@ -49,7 +50,9 @@ class Object(AbstractBase):
 
     @classmethod
     def rbac_filter(cls, query):
-        return query.filter(or_(cls.public == True, cls.users.any(id=current_user.id)))
+        return query.filter(
+            or_(cls.public == true(), cls.users.any(id=current_user.id))
+        )
 
 
 @db.set_custom_properties
@@ -331,7 +334,7 @@ class Pool(AbstractBase):
     def rbac_filter(cls, query):
         return query.filter(
             or_(
-                cls.public == True,
+                cls.public == true(),
                 or_(cls.groups.any(id=group.id) for group in current_user.groups),
             )
         )

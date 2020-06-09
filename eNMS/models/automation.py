@@ -19,6 +19,7 @@ from scp import SCPClient
 from sqlalchemy import Boolean, ForeignKey, Index, Integer, or_
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.orm import relationship
+from sqlalchemy.sql.expression import true
 from threading import Thread
 from time import sleep
 from traceback import format_exc
@@ -176,7 +177,7 @@ class Service(AbstractBase):
     def rbac_filter(cls, query):
         return query.filter(
             or_(
-                cls.public == True,
+                cls.public == true(),
                 or_(cls.groups.any(id=group.id) for group in current_user.groups),
             )
         )

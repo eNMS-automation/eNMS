@@ -32,7 +32,7 @@ class Object(AbstractBase):
         if kwargs.get("dont_update_pools", False):
             return
         for pool in db.fetch_all("pool"):
-            if pool.manually_defined:
+            if pool.manually_defined or not pool.compute(self.class_type):
                 continue
             match = pool.object_match(self)
             relation, number = f"{self.class_type}s", f"{self.class_type}_number"
@@ -314,16 +314,19 @@ class Pool(AbstractBase):
             for property in properties["filtering"][obj.class_type]
         )
 
+    def compute(self, object_type):
+        return any(
+            getattr(self, f"{object_type}_{property}")
+            for property in properties["filtering"][object_type]
+        )
+
     def compute_pool(self):
         if self.manually_defined:
             return
         for object_type in ("device", "link"):
             objects = (
                 list(filter(self.object_match, db.fetch_all(object_type)))
-                if any(
-                    getattr(self, f"{object_type}_{property}")
-                    for property in properties["filtering"][object_type]
-                )
+                if self.compute(object_type)
                 else []
             )
             setattr(self, f"{object_type}s", objects)

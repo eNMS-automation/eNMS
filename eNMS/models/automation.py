@@ -360,6 +360,15 @@ class Run(AbstractBase):
     def filtering_constraints(cls, **_):
         return [cls.parent_runtime == cls.runtime]
 
+    @classmethod
+    def rbac_filter(cls, query):
+        return query.filter(
+            or_(
+                models["group"].services.any(id=cls.service_id)
+                for group in current_user.groups
+            )
+        )
+
     @property
     def name(self):
         return repr(self)

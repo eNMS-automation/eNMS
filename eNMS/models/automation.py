@@ -48,6 +48,7 @@ class Service(AbstractBase):
     __mapper_args__ = {"polymorphic_identity": "service", "polymorphic_on": type}
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.SmallString, unique=True)
+    public = db.Column(Boolean)
     shared = db.Column(Boolean, default=False)
     scoped_name = db.Column(db.SmallString, index=True)
     last_modified = db.Column(db.SmallString, info={"log_change": False})

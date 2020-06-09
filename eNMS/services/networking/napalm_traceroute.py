@@ -43,11 +43,10 @@ class NapalmTracerouteForm(NapalmForm):
     form_type = HiddenField(default="napalm_traceroute_service")
     destination_ip = StringField(substitution=True)
     source_ip = StringField(substitution=True)
-    timeout = IntegerField(default=2)
     ttl = IntegerField(default=255)
     vrf = StringField()
     groups = {
-        "Ping Parameters": {
+        "Traceroute Parameters": {
             "commands": ["destination_ip", "source_ip", "timeout", "ttl", "vrf"],
             "default": "expanded",
         },

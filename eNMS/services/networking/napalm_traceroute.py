@@ -31,7 +31,7 @@ class NapalmTracerouteService(ConnectionService):
         run.log("info", f"NAPALM TRACEROUTE : {source} -> {destination}", device)
         traceroute = napalm_connection.traceroute(
             destination=destination,
-            source=run.source,
+            source=source,
             vrf=run.vrf,
             ttl=run.ttl or 255,
             timeout=run.timeout or 2,

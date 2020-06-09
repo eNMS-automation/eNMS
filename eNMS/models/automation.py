@@ -364,8 +364,11 @@ class Run(AbstractBase):
     def rbac_filter(cls, query):
         return query.filter(
             or_(
-                models["group"].services.any(id=cls.service_id)
-                for group in current_user.groups
+                cls.service.has(public=True),
+                or_(
+                    models["group"].services.any(id=cls.service_id)
+                    for group in current_user.groups
+                ),
             )
         )
 

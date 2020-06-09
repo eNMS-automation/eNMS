@@ -1,13 +1,15 @@
+from flask_login import current_user
 from re import search
 from requests import get, post
 from requests.exceptions import ConnectionError, MissingSchema, ReadTimeout
-from sqlalchemy import Boolean, case, ForeignKey, Integer
+from sqlalchemy import Boolean, case, ForeignKey, Integer, or_
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy.orm import relationship
 
 from eNMS import app
 from eNMS.database import db
+from eNMS.models import models
 from eNMS.models.base import AbstractBase
 
 
@@ -53,6 +55,18 @@ class Task(AbstractBase):
     @status.expression
     def status(cls):  # noqa: N805
         return case([(cls.is_active, "Active")], else_="Inactive")
+
+    @classmethod
+    def rbac_filter(cls, query):
+        return query.filter(
+            or_(
+                cls.service.has(public=True),
+                or_(
+                    models["group"].services.any(id=cls.service_id)
+                    for group in current_user.groups
+                ),
+            )
+        )
 
     @property
     def next_run_time(self):

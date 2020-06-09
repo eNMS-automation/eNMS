@@ -175,7 +175,10 @@ class Service(AbstractBase):
     @classmethod
     def rbac_filter(cls, query):
         return query.filter(
-            or_(cls.groups.any(id=group.id) for group in current_user.groups)
+            or_(
+                cls.public == True,
+                or_(cls.groups.any(id=group.id) for group in current_user.groups),
+            )
         )
 
     def set_name(self, name=None):

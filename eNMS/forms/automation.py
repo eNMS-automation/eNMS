@@ -81,6 +81,7 @@ class ServiceForm(BaseForm):
             ("failure", "Run on failure only"),
         )
     )
+    public = BooleanField("Public")
     log_level = SelectField(
         "Logging",
         choices=((0, "Disable logging"), *enumerate(app.log_levels, 1)),

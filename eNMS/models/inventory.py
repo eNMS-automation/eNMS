@@ -49,7 +49,7 @@ class Object(AbstractBase):
 
     @classmethod
     def rbac_filter(cls, query):
-        return query.filter(cls.users.any(id=current_user.id))
+        return query.filter(or_(cls.public == True, cls.users.any(id=current_user.id)))
 
 
 @db.set_custom_properties
@@ -330,7 +330,10 @@ class Pool(AbstractBase):
     @classmethod
     def rbac_filter(cls, query):
         return query.filter(
-            or_(cls.groups.any(id=group.id) for group in current_user.groups)
+            or_(
+                cls.public == True,
+                or_(cls.groups.any(id=group.id) for group in current_user.groups),
+            )
         )
 
     def update_rbac(self):

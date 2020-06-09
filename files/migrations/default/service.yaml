@@ -37,6 +37,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: true
   reserved: false
   run_method: per_device
   scoped_name: Start
@@ -91,6 +92,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: true
   reserved: false
   run_method: per_device
   scoped_name: End
@@ -254,6 +256,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: true
   reserved: false
   run_method: per_device
   scoped_name: Placeholder

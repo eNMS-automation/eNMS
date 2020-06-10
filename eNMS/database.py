@@ -96,20 +96,22 @@ class Database:
     dont_serialize = {"device": ["configuration"]}
 
     many_to_many_relationships = (
-        ("user", "device"),
-        ("user", "group"),
-        ("user", "link"),
-        ("service", "device"),
-        ("service", "group"),
-        ("service", "pool"),
+        ("access", "device"),
+        ("access", "group"),
+        ("access", "link"),
+        ("access", "pool"),
+        ("access", "service"),
+        ("access", "user"),
+        ("pool", "device"),
+        ("pool", "link"),
         ("run", "device"),
         ("run", "pool"),
+        ("service", "device"),
+        ("service", "pool"),
+        ("service", "workflow"),
         ("task", "device"),
         ("task", "pool"),
-        ("service", "workflow"),
-        ("pool", "device"),
-        ("pool", "group"),
-        ("pool", "link"),
+        ("user", "group"),
     )
 
     def __init__(self):

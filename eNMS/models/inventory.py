@@ -93,9 +93,6 @@ class Device(Object):
     tasks = relationship(
         "Task", secondary=db.task_device_table, back_populates="devices"
     )
-    users = relationship(
-        "User", secondary=db.user_device_table, back_populates="devices"
-    )
     pools = relationship(
         "Pool", secondary=db.pool_device_table, back_populates="devices"
     )
@@ -206,7 +203,6 @@ class Link(Object):
     )
     destination_name = association_proxy("destination", "name")
     pools = relationship("Pool", secondary=db.pool_link_table, back_populates="links")
-    users = relationship("User", secondary=db.user_link_table, back_populates="links")
     __table_args__ = (UniqueConstraint(name, source_id, destination_id),)
 
     def __init__(self, **kwargs):

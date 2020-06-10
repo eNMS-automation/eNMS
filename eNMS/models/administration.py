@@ -43,10 +43,9 @@ class User(AbstractBase, UserMixin):
     groups = relationship(
         "Group", secondary=db.user_group_table, back_populates="users"
     )
-    devices = relationship(
-        "Device", secondary=db.user_device_table, back_populates="users"
+    access = relationship(
+        "Access", secondary=db.access_user_table, back_populates="users"
     )
-    links = relationship("Link", secondary=db.user_link_table, back_populates="users")
     is_admin = db.Column(Boolean, default=False)
 
     def get_id(self):
@@ -88,15 +87,29 @@ class Group(AbstractBase):
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.SmallString, unique=True)
     email = db.Column(db.SmallString)
+    users = relationship("User", secondary=db.user_group_table, back_populates="groups")
+
+    def update(self, **kwargs):
+        super().update(**kwargs)
+
+
+@db.set_custom_properties
+class Access(AbstractBase):
+
+    __tablename__ = type = "group"
+    id = db.Column(Integer, primary_key=True)
+    name = db.Column(db.SmallString, unique=True)
+    email = db.Column(db.SmallString)
     menu = db.Column(db.List)
     pages = db.Column(db.List)
     upper_menu = db.Column(db.List)
     get_requests = db.Column(db.List)
     post_requests = db.Column(db.List)
-    users = relationship("User", secondary=db.user_group_table, back_populates="groups")
-    pools = relationship("Pool", secondary=db.pool_group_table, back_populates="groups")
+    users = relationship("User", secondary=db.user_group_table, back_populates="access")
+    groups = relationship("Group", secondary=db.user_group_table, back_populates="access")
+    pools = relationship("Pool", secondary=db.pool_group_table, back_populates="access")
     services = relationship(
-        "Service", secondary=db.service_group_table, back_populates="groups"
+        "Service", secondary=db.service_group_table, back_populates="access"
     )
 
     def update(self, **kwargs):

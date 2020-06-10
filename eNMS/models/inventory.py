@@ -333,7 +333,6 @@ class Pool(AbstractBase):
             )
             setattr(self, f"{object_type}s", objects)
             setattr(self, f"{object_type}_number", len(objects))
-        self.update_rbac()
 
     @classmethod
     def rbac_filter(cls, query):
@@ -343,10 +342,6 @@ class Pool(AbstractBase):
                 or_(cls.groups.any(id=group.id) for group in current_user.groups),
             )
         )
-
-    def update_rbac(self):
-        for group in self.groups:
-            group.update_rbac()
 
 
 class Session(AbstractBase):

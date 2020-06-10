@@ -57,7 +57,15 @@ class Database:
             "users",
         ],
         "group": ["id", "services", "pools"],
-        "link": ["id", "pools", "users"],
+        "link": [
+            "id",
+            "pools",
+            "users",
+            "destination_id",
+            "destination_name",
+            "source_id",
+            "source_name",
+        ],
         "pool": ["id", "services", "device_number", "link_number"],
         "service": [
             "id",

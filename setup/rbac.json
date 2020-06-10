@@ -54,26 +54,10 @@
     }
   },
   "models": {
-    "devices": [
-      "Read",
-      "Edit",
-      "Connect",
-      "Use as target"
-    ],
-    "links": [
-      "Read",
-      "Edit"
-    ],
-    "pools": [
-      "Read",
-      "Edit"
-    ],
-    "services": [
-      "Read",
-      "Edit",
-      "Run",
-      "Schedule"
-    ]
+    "devices": ["Read", "Edit", "Connect", "Use as target"],
+    "links": ["Read", "Edit"],
+    "pools": ["Read", "Edit"],
+    "services": ["Read", "Edit", "Run", "Schedule"]
   },
   "pages": [
     "Dashboard",

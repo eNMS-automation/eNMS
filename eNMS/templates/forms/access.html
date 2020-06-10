@@ -23,9 +23,9 @@
       >
         <thead>
           <tr>
-            <th>Property</th>
-            <th>Value</th>
-            <th style="width: 25%;">Match</th>
+            <th>Model</th>
+            <th>Instances</th>
+            <th style="width: 25%;">Access Rights</th>
           </tr>
         </thead>
         <tbody>
@@ -35,10 +35,12 @@
               {{ model.capitalize() }}
             </td>
             <td>
-              {{ form[model](id="access-" + model, class="form-control add-id", style="width:100%") }}
+              {{ form[model](id="access-" + model, class="form-control add-id",
+              style="width:100%") }}
             </td>
             <td>
-              {{ form[model + "_access"](id="access-" + model + "_access", class="form-control add-id") }}
+              {{ form[model + "_access"](id="access-" + model + "_access",
+              class="form-control add-id no-search", **{"data-width": "200px"}) }}
             </td>
           </tr>
           {% endfor %}

@@ -58,12 +58,20 @@ class User(AbstractBase, UserMixin):
         super().update(**kwargs)
         self.update_rbac()
 
+    @property
+    def user_access(self):
+        yield from self.access
+        for group in self.groups:
+            yield from group.access
+
     def update_rbac(self):
         if self.is_admin:
             return
         for access_type in app.rbac:
-            group_access = (getattr(group, access_type) for group in self.groups)
-            setattr(self, access_type, list(set().union(*group_access)))
+            if not hasattr(self, access_type):
+                continue
+            result = (getattr(access, access_type) for access in self.user_access)
+            setattr(self, access_type, list(set().union(*result)))
 
 
 @db.set_custom_properties
@@ -77,9 +85,6 @@ class Group(AbstractBase):
     access = relationship(
         "Access", secondary=db.access_group_table, back_populates="groups"
     )
-
-    def update(self, **kwargs):
-        super().update(**kwargs)
 
 
 @db.set_custom_properties
@@ -117,7 +122,10 @@ class Access(AbstractBase):
         self.update_rbac()
 
     def update_rbac(self):
-        for user in self.users:
+        users = set(self.users)
+        for group in self.groups:
+            users |= set(group.users)
+        for user in users:
             user.update_rbac()
 
 

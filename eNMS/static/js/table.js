@@ -974,7 +974,7 @@ tables.group = class GroupTable extends Table {
     return [
       this.columnDisplay(),
       this.createNewButton(),
-      this.exportTableButton(),
+      this.searchTableButton(),
       this.clearSearchButton(),
       this.refreshTableButton(),
     ];
@@ -1008,6 +1008,7 @@ tables.access = class AccessTable extends Table {
     return [
       this.columnDisplay(),
       this.createNewButton(),
+      this.searchTableButton(),
       this.clearSearchButton(),
       this.refreshTableButton(),
     ];

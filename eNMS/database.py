@@ -78,7 +78,18 @@ class Database:
             "time_before_next_run",
             "status",
         ],
-        "user": ["id", "devices", "pools", "links", "groups"],
+        "user": [
+            "id",
+            "devices",
+            "pools",
+            "links",
+            "menu",
+            "groups",
+            "get_requests",
+            "post_requests",
+            "upper_menu",
+            "pages",
+        ],
         "workflow_edge": ["id", "source_id", "destination_id", "workflow_id"],
     }
 
@@ -91,6 +102,7 @@ class Database:
         "service",
         "workflow_edge",
         "task",
+        "access",
     ]
 
     dont_serialize = {"device": ["configuration"]}

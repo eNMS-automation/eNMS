@@ -111,7 +111,6 @@ class ChangelogForm(BaseForm):
 
 
 def init_rbac_form(rbac):
-
     def configure_access_form(cls):
         cls.models = rbac["models"]
         for model, access_rights in cls.models.items():

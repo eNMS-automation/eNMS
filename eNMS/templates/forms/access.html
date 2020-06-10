@@ -12,6 +12,11 @@
         {{ form.name(id="access-name", class="form-control required add-id",
         placeholder="Name") }}
       </div>
+      <label>Description</label>
+      <div class="form-group">
+        {{ form.description(id="access-description", class="form-control required add-id",
+        placeholder="Description") }}
+      </div>
       <fieldset class="section">
         <legend align="center" class="section">
           Targets
@@ -25,7 +30,35 @@
           </div>
         </div>
       </fieldset>
-      <br />
+      <fieldset class="section">
+        <legend align="center" class="section">
+          User Interface Access
+        </legend>
+        <div class="form-group">
+          <div class="form-group">
+            {{ form.menu(id="access-menu", class="form-control add-id") }}
+          </div>
+          <div class="form-group">
+            {{ form.pages(id="access-pages", class="form-control add-id") }}
+          </div>
+          <div class="form-group">
+            {{ form.upper_menu(id="access-upper_menu", class="form-control add-id") }}
+          </div>
+        </div>
+      </fieldset>
+      <fieldset class="section">
+        <legend align="center" class="section">
+          GET / POST Requests Access
+        </legend>
+        <div class="form-group">
+          <div class="form-group">
+            {{ form.get_requests(id="access-get_requests", class="form-control add-id") }}
+          </div>
+          <div class="form-group">
+            {{ form.post_requests(id="access-post_requests", class="form-control add-id") }}
+          </div>
+        </div>
+      </fieldset>
       <fieldset class="section">
         <legend align="center" class="section">
           Model Access Rights

@@ -81,6 +81,9 @@ class Device(Object):
     last_update = db.Column(db.SmallString, default="Never")
     last_runtime = db.Column(db.SmallString)
     last_duration = db.Column(db.SmallString)
+    access = relationship(
+        "Access", secondary=db.access_device_table, back_populates="devices"
+    )
     services = relationship(
         "Service", secondary=db.service_device_table, back_populates="devices"
     )
@@ -203,6 +206,9 @@ class Link(Object):
     )
     destination_name = association_proxy("destination", "name")
     pools = relationship("Pool", secondary=db.pool_link_table, back_populates="links")
+    access = relationship(
+        "Access", secondary=db.access_link_table, back_populates="links"
+    )
     __table_args__ = (UniqueConstraint(name, source_id, destination_id),)
 
     def __init__(self, **kwargs):
@@ -280,8 +286,8 @@ class Pool(AbstractBase):
     )
     runs = relationship("Run", secondary=db.run_pool_table, back_populates="pools")
     tasks = relationship("Task", secondary=db.task_pool_table, back_populates="pools")
-    groups = relationship(
-        "Group", secondary=db.pool_group_table, back_populates="pools"
+    access = relationship(
+        "Access", secondary=db.access_pool_table, back_populates="pools"
     )
     manually_defined = db.Column(Boolean, default=False)
 

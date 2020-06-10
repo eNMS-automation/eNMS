@@ -27,6 +27,7 @@ class User(AbstractBase, UserMixin):
     __tablename__ = type = "user"
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.SmallString, unique=True)
+    is_admin = db.Column(Boolean)
     email = db.Column(db.SmallString)
     password = db.Column(db.SmallString)
     authentication = db.Column(db.SmallString, default="database")
@@ -58,23 +59,8 @@ class User(AbstractBase, UserMixin):
         self.update_rbac()
 
     def update_rbac(self):
-        self.is_admin = any(group.name == "Admin Users" for group in self.groups)
         if self.is_admin:
             return
-        for object_type in ("devices", "links"):
-            setattr(
-                self,
-                object_type,
-                list(
-                    set().union(
-                        *(
-                            getattr(pool, object_type)
-                            for group in self.groups
-                            for pool in group.pools
-                        )
-                    )
-                ),
-            )
         for access_type in app.rbac:
             group_access = (getattr(group, access_type) for group in self.groups)
             setattr(self, access_type, list(set().union(*group_access)))
@@ -88,6 +74,9 @@ class Group(AbstractBase):
     name = db.Column(db.SmallString, unique=True)
     email = db.Column(db.SmallString)
     users = relationship("User", secondary=db.user_group_table, back_populates="groups")
+    access = relationship(
+        "Access", secondary=db.access_group_table, back_populates="groups"
+    )
 
     def update(self, **kwargs):
         super().update(**kwargs)
@@ -96,21 +85,22 @@ class Group(AbstractBase):
 @db.set_custom_properties
 class Access(AbstractBase):
 
-    __tablename__ = type = "group"
+    __tablename__ = type = "access"
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.SmallString, unique=True)
-    email = db.Column(db.SmallString)
     menu = db.Column(db.List)
     pages = db.Column(db.List)
     upper_menu = db.Column(db.List)
     get_requests = db.Column(db.List)
     post_requests = db.Column(db.List)
-    users = relationship("User", secondary=db.user_group_table, back_populates="access")
-    groups = relationship("Group", secondary=db.user_group_table, back_populates="access")
-    pools = relationship("Pool", secondary=db.pool_group_table, back_populates="access")
+    users = relationship("User", secondary=db.access_user_table, back_populates="access")
+    groups = relationship("Group", secondary=db.access_group_table, back_populates="access")
+    pools = relationship("Pool", secondary=db.access_pool_table, back_populates="access")
     services = relationship(
-        "Service", secondary=db.service_group_table, back_populates="access"
+        "Service", secondary=db.access_service_table, back_populates="access"
     )
+    devices = relationship("Device", secondary=db.access_device_table, back_populates="access")
+    links = relationship("Link", secondary=db.access_link_table, back_populates="access")
 
     def update(self, **kwargs):
         super().update(**kwargs)

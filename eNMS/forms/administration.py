@@ -120,6 +120,7 @@ def init_rbac_form(rbac):
     @configure_relationships("groups")
     class UserForm(RbacForm):
         form_type = HiddenField(default="user")
+        is_admin = BooleanField()
         theme = SelectField(
             "Theme",
             choices=[

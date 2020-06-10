@@ -53,6 +53,28 @@
       "pages": {}
     }
   },
+  "relations": {
+    "device": [
+      "Read",
+      "Edit",
+      "Connect",
+      "Use as target"
+    ],
+    "link": [
+      "Read",
+      "Edit"
+    ],
+    "pool": [
+      "Read",
+      "Edit"
+    ],
+    "service": [
+      "Read",
+      "Edit",
+      "Run",
+      "Schedule"
+    ]
+  },
   "pages": [
     "Dashboard",
     "Changelog",

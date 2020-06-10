@@ -35,10 +35,8 @@
               {{ names.get(property, property.replace("_", " ").capitalize() ) }}
             </td>
             <td>
-              {{ form[property](id="pool-" + property,
-              class="form-control add-id") }}
+              {{ form[property](id="access-" + property, class="form-control add-id") }}
             </td>
-
           </tr>
           {% endfor %}
         </tbody>

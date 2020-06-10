@@ -109,6 +109,30 @@ class ChangelogForm(BaseForm):
     content = StringField(widget=TextArea(), render_kw={"rows": 10})
 
 
+def configure_access_form(cls):
+    cls.device_properties = app.properties["filtering"]["device"]
+    cls.link_properties = app.properties["filtering"]["link"]
+    for cls_name, properties in (
+        ("device", app.properties["filtering"]["device"]),
+        ("link", app.properties["filtering"]["link"]),
+    ):
+        for property in properties:
+            match_field = f"{cls_name}_{property}_match"
+            setattr(cls, f"{cls_name}_{property}", StringField(property))
+            setattr(
+                cls,
+                match_field,
+                SelectField(
+                    choices=(
+                        ("inclusion", "Inclusion"),
+                        ("equality", "Equality"),
+                        ("regex", "Regular Expression"),
+                    )
+                ),
+            )
+    return cls
+
+
 def init_rbac_form(rbac):
     class RbacForm(BaseForm):
         template = "object"

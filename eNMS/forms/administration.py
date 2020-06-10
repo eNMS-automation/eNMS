@@ -128,9 +128,14 @@ def init_rbac_form(rbac):
         )
         password = PasswordField("Password")
 
-    @configure_relationships("users", "pools", "services")
+    @configure_relationships("users")
     class GroupForm(RbacForm):
         form_type = HiddenField(default="group")
+
+
+    @configure_relationships("users", "groups", "pools", "services")
+    class AccessForm(RbacForm):
+        form_type = HiddenField(default="access")
         menu = SelectMultipleField("Menu", choices=choices(list(rbac["menu"])))
         pages = SelectMultipleField("Pages", choices=choices(rbac["pages"]))
         upper_menu = SelectMultipleField(

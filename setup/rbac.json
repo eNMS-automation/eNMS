@@ -8,11 +8,12 @@
         "Sessions": "/table/session"
       }
     },
-    "Admin": {
+    "Administration": {
       "icon": "users",
       "pages": {
         "Users": "/table/user",
         "Groups": "/table/group",
+        "Access": "/table/access",
         "Servers": "/table/server"
       }
     },

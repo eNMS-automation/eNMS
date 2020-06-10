@@ -29,13 +29,16 @@
           </tr>
         </thead>
         <tbody>
-          {% for property in form.relations %}
+          {% for model in form.models %}
           <tr>
             <td>
-              {{ names.get(property, property.replace("_", " ").capitalize() ) }}
+              {{ model.capitalize() }}
             </td>
             <td>
-              {{ form[property](id="access-" + property, class="form-control add-id") }}
+              {{ form[model](id="access-" + model, class="form-control add-id", style="width:100%") }}
+            </td>
+            <td>
+              {{ form[model + "_access"](id="access-" + model + "_access", class="form-control add-id") }}
             </td>
           </tr>
           {% endfor %}

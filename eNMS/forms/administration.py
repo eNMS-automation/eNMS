@@ -2,12 +2,13 @@ from wtforms.validators import InputRequired
 from wtforms.widgets import TextArea
 
 from eNMS.database import db
-from eNMS.forms import BaseForm, choices, configure_relationships
+from eNMS.forms import BaseForm, choices, configure_relationships, form_properties
 from eNMS.forms.fields import (
     BooleanField,
     HiddenField,
     IntegerField,
     JsonField,
+    MultipleInstanceField,
     PasswordField,
     StringField,
     SelectField,
@@ -109,31 +110,18 @@ class ChangelogForm(BaseForm):
     content = StringField(widget=TextArea(), render_kw={"rows": 10})
 
 
-def configure_access_form(cls):
-    cls.device_properties = app.properties["filtering"]["device"]
-    cls.link_properties = app.properties["filtering"]["link"]
-    for cls_name, properties in (
-        ("device", app.properties["filtering"]["device"]),
-        ("link", app.properties["filtering"]["link"]),
-    ):
-        for property in properties:
-            match_field = f"{cls_name}_{property}_match"
-            setattr(cls, f"{cls_name}_{property}", StringField(property))
-            setattr(
-                cls,
-                match_field,
-                SelectField(
-                    choices=(
-                        ("inclusion", "Inclusion"),
-                        ("equality", "Equality"),
-                        ("regex", "Regular Expression"),
-                    )
-                ),
-            )
-    return cls
-
-
 def init_rbac_form(rbac):
+
+    def configure_access_form(cls):
+        cls.models = rbac["models"]
+        for model, access_rights in cls.models.items():
+            setattr(cls, model, MultipleInstanceField())
+            form_properties["access"][model] = {"type": "object-list"}
+            access_field = SelectMultipleField(choices=choices(access_rights))
+            form_properties["access"][f"{model}_access"] = {"type": "multiselect"}
+            setattr(cls, f"{model}_access", access_field)
+        return cls
+
     class RbacForm(BaseForm):
         template = "object"
         form_type = HiddenField(default="rbac")
@@ -157,8 +145,8 @@ def init_rbac_form(rbac):
     class GroupForm(RbacForm):
         form_type = HiddenField(default="group")
 
-
-    @configure_relationships("users", "groups", "devices", "links", "pools", "services")
+    @configure_relationships("users", "groups")
+    @configure_access_form
     class AccessForm(RbacForm):
         template = "access"
         form_type = HiddenField(default="access")

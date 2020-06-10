@@ -53,22 +53,22 @@
       "pages": {}
     }
   },
-  "relations": {
-    "device": [
+  "models": {
+    "devices": [
       "Read",
       "Edit",
       "Connect",
       "Use as target"
     ],
-    "link": [
+    "links": [
       "Read",
       "Edit"
     ],
-    "pool": [
+    "pools": [
       "Read",
       "Edit"
     ],
-    "service": [
+    "services": [
       "Read",
       "Edit",
       "Run",

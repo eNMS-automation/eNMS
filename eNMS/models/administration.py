@@ -93,14 +93,24 @@ class Access(AbstractBase):
     upper_menu = db.Column(db.List)
     get_requests = db.Column(db.List)
     post_requests = db.Column(db.List)
-    users = relationship("User", secondary=db.access_user_table, back_populates="access")
-    groups = relationship("Group", secondary=db.access_group_table, back_populates="access")
-    pools = relationship("Pool", secondary=db.access_pool_table, back_populates="access")
+    users = relationship(
+        "User", secondary=db.access_user_table, back_populates="access"
+    )
+    groups = relationship(
+        "Group", secondary=db.access_group_table, back_populates="access"
+    )
+    pools = relationship(
+        "Pool", secondary=db.access_pool_table, back_populates="access"
+    )
     services = relationship(
         "Service", secondary=db.access_service_table, back_populates="access"
     )
-    devices = relationship("Device", secondary=db.access_device_table, back_populates="access")
-    links = relationship("Link", secondary=db.access_link_table, back_populates="access")
+    devices = relationship(
+        "Device", secondary=db.access_device_table, back_populates="access"
+    )
+    links = relationship(
+        "Link", secondary=db.access_link_table, back_populates="access"
+    )
 
     def update(self, **kwargs):
         super().update(**kwargs)

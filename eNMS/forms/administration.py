@@ -134,8 +134,9 @@ def init_rbac_form(rbac):
         form_type = HiddenField(default="group")
 
 
-    @configure_relationships("users", "groups", "pools", "services")
+    @configure_relationships("users", "groups", "devices", "links", "pools", "services")
     class AccessForm(RbacForm):
+        template = "access"
         form_type = HiddenField(default="access")
         menu = SelectMultipleField("Menu", choices=choices(list(rbac["menu"])))
         pages = SelectMultipleField("Pages", choices=choices(rbac["pages"]))
@@ -148,3 +149,4 @@ def init_rbac_form(rbac):
         post_requests = SelectMultipleField(
             "POST requests", choices=choices(rbac["post_requests"])
         )
+        relations = ["devices", "links", "pools", "services"]

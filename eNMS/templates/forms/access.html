@@ -1,0 +1,57 @@
+<div class="modal-body">
+  <form
+    id="edit-pool-form"
+    class="form-horizontal form-label-left add-id"
+    method="post"
+    autocomplete="off"
+  >
+    {{ form.id(id='pool-id', class="add-id") }} {{ form.hidden_tag() }}
+    <div class="form-group">
+      <label>Name</label>
+      <div class="form-group">
+        {{ form.name(id="pool-name", class="form-control required add-id",
+        placeholder="Name") }}
+      </div>
+      <br />
+      <div class="x_title">
+        <h3>Device properties</h3>
+      </div>
+      <table
+        class="table table-striped table-bordered dt-responsive nowrap"
+        cellspacing="0"
+        width="100%"
+      >
+        <thead>
+          <tr>
+            <th>Property</th>
+            <th>Value</th>
+            <th style="width: 25%;">Match</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for property in form.relations %}
+          <tr>
+            <td>
+              {{ names.get(property, property.replace("_", " ").capitalize() ) }}
+            </td>
+            <td>
+              {{ form[property](id="pool-" + property,
+              class="form-control add-id") }}
+            </td>
+
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <center>
+        <button
+          type="button"
+          class="btn btn-success btn-id add-id"
+          value="eNMS.base.processData"
+        >
+          Save
+        </button>
+      </center>
+    </div>
+  </form>
+</div>

@@ -150,6 +150,7 @@ def init_rbac_form(rbac):
     class AccessForm(RbacForm):
         template = "access"
         form_type = HiddenField(default="access")
+        description = StringField("Description")
         menu = SelectMultipleField("Menu", choices=choices(list(rbac["menu"])))
         pages = SelectMultipleField("Pages", choices=choices(rbac["pages"]))
         upper_menu = SelectMultipleField(

@@ -1,4 +1,5 @@
-- description: All objects
+- access: []
+  description: All objects
   device_configuration: ''
   device_configuration_match: inclusion
   device_description: ''
@@ -39,7 +40,6 @@
     Philadelphia, LosAngeles, Detroit, Richmond, Atlanta, Boston, Houston, Baltimore,
     Cleveland, Columbus, Cincinnati, Cambridge, Minneapolis, NewYork, Sacramento,
     SanFrancisco, Orange, Oakland, Denver, Aserver, Server 2]
-  groups: []
   last_modified: '2020-04-21 15:23:58.190204'
   latitude: '0.0'
   link_color: ''
@@ -70,7 +70,8 @@
   property1: CP
   tasks: []
   type: pool
-- description: Devices only
+- access: []
+  description: Devices only
   device_configuration: ''
   device_configuration_match: inclusion
   device_description: ''
@@ -111,7 +112,6 @@
     Philadelphia, LosAngeles, Detroit, Richmond, Atlanta, Boston, Houston, Baltimore,
     Cleveland, Columbus, Cincinnati, Cambridge, Minneapolis, NewYork, Sacramento,
     SanFrancisco, Orange, Oakland, Denver, Aserver, Server 2]
-  groups: []
   last_modified: '2020-04-21 15:24:39.430415'
   latitude: '0.0'
   link_color: ''
@@ -140,7 +140,8 @@
   property1: CP
   tasks: []
   type: pool
-- description: Links only
+- access: []
+  description: Links only
   device_configuration: ''
   device_configuration_match: inclusion
   device_description: ''
@@ -178,7 +179,6 @@
   device_vendor: ''
   device_vendor_match: inclusion
   devices: []
-  groups: []
   last_modified: '2020-04-21 15:24:30.299047'
   latitude: '0.0'
   link_color: ''
@@ -209,7 +209,8 @@
   property1: CP
   tasks: []
   type: pool
-- description: Datacenter San Francisco
+- access: []
+  description: Datacenter San Francisco
   device_configuration: ''
   device_configuration_match: inclusion
   device_description: ''
@@ -248,7 +249,6 @@
   device_vendor_match: inclusion
   devices: [SanJose, SanDiego, Philadelphia, LosAngeles, Detroit, Baltimore, Cleveland,
     Cambridge, Minneapolis, NewYork, Sacramento, Orange, Denver, Aserver, Server 2]
-  groups: [San Francisco Users]
   last_modified: ''
   latitude: '37.77'
   link_color: ''
@@ -277,7 +277,8 @@
   property1: CP
   tasks: []
   type: pool
-- description: Datacenter New York
+- access: []
+  description: Datacenter New York
   device_configuration: ''
   device_configuration_match: inclusion
   device_description: ''
@@ -317,7 +318,6 @@
   devices: [Jackson, PaloAlto, Washington, Chicago, SanJose, SanDiego, Dallas, Philadelphia,
     Atlanta, Baltimore, Cleveland, Cincinnati, Cambridge, Minneapolis, Sacramento,
     SanFrancisco, Orange, Oakland]
-  groups: [New York Users]
   last_modified: ''
   latitude: '40.71'
   link_color: ''
@@ -346,7 +346,8 @@
   property1: CP
   tasks: []
   type: pool
-- description: Datacenter Chicago
+- access: []
+  description: Datacenter Chicago
   device_configuration: ''
   device_configuration_match: inclusion
   device_description: ''
@@ -385,7 +386,6 @@
   device_vendor_match: inclusion
   devices: [Austin, Washington, Chicago, SanDiego, Philadelphia, Detroit, Richmond,
     Baltimore, Cincinnati, Cambridge, Minneapolis, SanFrancisco]
-  groups: [Chicago Users]
   last_modified: ''
   latitude: '41.87'
   link_color: ''
@@ -414,7 +414,8 @@
   property1: CP
   tasks: []
   type: pool
-- description: ''
+- access: []
+  description: ''
   device_configuration: ''
   device_configuration_match: inclusion
   device_description: ''
@@ -452,7 +453,6 @@
   device_vendor: ''
   device_vendor_match: inclusion
   devices: [Washington]
-  groups: []
   last_modified: '2019-10-25 14:45:46.418406'
   latitude: '0.0'
   link_color: ''

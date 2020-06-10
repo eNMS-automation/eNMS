@@ -1,4 +1,5 @@
-- completion_time: 1
+- access: []
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -12,7 +13,6 @@
   dict_match: {}
   display_only_failed_nodes: true
   events: []
-  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -123,7 +123,8 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- completion_time: 1
+- access: []
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -137,7 +138,6 @@
   dict_match: {}
   display_only_failed_nodes: true
   events: []
-  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -251,7 +251,8 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- completion_time: 1
+- access: []
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -265,7 +266,6 @@
   dict_match: {}
   display_only_failed_nodes: true
   events: []
-  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -311,6 +311,7 @@
 - a_dict: {}
   a_float: 5.0
   a_list: []
+  access: []
   an_integer: 10
   boolean1: true
   boolean2: false
@@ -330,7 +331,6 @@
   display_only_failed_nodes: true
   events: []
   exclusion_field: d
-  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -383,7 +383,8 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- close_connection: false
+- access: []
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -400,7 +401,6 @@
   dict_match: {}
   display_only_failed_nodes: true
   events: []
-  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -452,7 +452,8 @@
   vendor: ''
   vrf_name: configure_BGP_test
   waiting_time: 100
-- close_connection: false
+- access: []
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -471,7 +472,6 @@
   driver: eos
   events: []
   getters: [get_arp_table, get_interfaces]
-  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -524,7 +524,8 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- close_connection: false
+- access: []
+  close_connection: false
   commit_configuration: false
   completion_time: 1
   config_mode: false
@@ -551,7 +552,6 @@
   exit_config_mode: true
   fast_cli: true
   global_delay_factor: 1.0
-  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -600,7 +600,8 @@
   validation_method: none
   vendor: Arista
   waiting_time: 0
-- auto_find_prompt: true
+- access: []
+  auto_find_prompt: true
   close_connection: true
   command: show vrf
   completion_time: 1
@@ -630,7 +631,6 @@
   expect_username_prompt: ''
   fast_cli: true
   global_delay_factor: 1.0
-  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -688,7 +688,8 @@
   validation_method: text
   vendor: Arista
   waiting_time: 0
-- close_connection: false
+- access: []
+  close_connection: false
   commit_configuration: false
   completion_time: 1
   config_mode: false
@@ -715,7 +716,6 @@
   exit_config_mode: true
   fast_cli: true
   global_delay_factor: 1.0
-  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -765,7 +765,8 @@
   validation_method: none
   vendor: Arista
   waiting_time: 1
-- auto_find_prompt: true
+- access: []
+  auto_find_prompt: true
   close_connection: false
   command: show vrf
   completion_time: 1
@@ -795,7 +796,6 @@
   expect_username_prompt: ''
   fast_cli: true
   global_delay_factor: 1.0
-  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -851,7 +851,8 @@
   validation_method: text
   vendor: Arista
   waiting_time: 0
-- action: load_merge_candidate
+- access: []
+  action: load_merge_candidate
   close_connection: false
   completion_time: 1
   content: "vrf instance napalm\r\n"
@@ -871,7 +872,6 @@
   display_only_failed_nodes: true
   driver: eos
   events: []
-  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -921,7 +921,8 @@
   validation_method: none
   vendor: Arista
   waiting_time: 0
-- call_type: GET
+- access: []
+  call_type: GET
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -936,7 +937,6 @@
   dict_match: {}
   display_only_failed_nodes: true
   events: []
-  groups: []
   headers: {}
   impacting: true
   include_device_results: true
@@ -994,7 +994,8 @@
   vendor: ''
   verify_ssl_certificate: true
   waiting_time: 0
-- close_connection: false
+- access: []
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -1013,7 +1014,6 @@
   driver: eos
   events: []
   getters: [get_facts]
-  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -1064,7 +1064,8 @@
   validation_method: dict_included
   vendor: ''
   waiting_time: 0
-- close_connection: false
+- access: []
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -1083,7 +1084,6 @@
   driver: eos
   events: []
   getters: [get_interfaces]
-  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -1133,7 +1133,8 @@
   validation_method: dict_included
   vendor: ''
   waiting_time: 0
-- close_connection: false
+- access: []
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -1152,7 +1153,6 @@
   driver: eos
   events: []
   getters: [get_interfaces_ip]
-  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -1202,7 +1202,8 @@
   validation_method: dict_included
   vendor: ''
   waiting_time: 0
-- close_connection: false
+- access: []
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -1221,7 +1222,6 @@
   driver: eos
   events: []
   getters: [get_config]
-  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -1270,7 +1270,8 @@
   validation_method: dict_included
   vendor: ''
   waiting_time: 0
-- completion_time: 1
+- access: []
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -1284,7 +1285,6 @@
   dict_match: {}
   display_only_failed_nodes: true
   events: []
-  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -1329,7 +1329,8 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- completion_time: 1
+- access: []
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -1343,7 +1344,6 @@
   dict_match: {}
   display_only_failed_nodes: true
   events: []
-  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -1359,7 +1359,7 @@
   max_processes: 5
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression Workflow F: Workflow of Workflows] Modify Payload for Iteration'
+  name: '[Regression Workflow E: Iteration Targets] Modify Payload for Iteration'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -1396,7 +1396,8 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- auto_find_prompt: true
+- access: []
+  auto_find_prompt: true
   close_connection: true
   command: show ip route
   completion_time: 1
@@ -1426,7 +1427,6 @@
   expect_username_prompt: ''
   fast_cli: true
   global_delay_factor: 1.0
-  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -1483,7 +1483,8 @@
   validation_method: text
   vendor: Arista
   waiting_time: 0
-- completion_time: 1
+- access: []
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -1497,7 +1498,6 @@
   dict_match: {}
   display_only_failed_nodes: true
   events: []
-  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -1565,7 +1565,8 @@
   variable3: textfsm_variable
   vendor: ''
   waiting_time: 0
-- close_connection: false
+- access: []
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -1583,7 +1584,6 @@
   display_only_failed_nodes: false
   driver: eos
   events: []
-  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -1633,7 +1633,8 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- auto_find_prompt: true
+- access: []
+  auto_find_prompt: true
   close_connection: false
   command: show vrf
   completion_time: 1
@@ -1663,7 +1664,6 @@
   expect_username_prompt: ''
   fast_cli: true
   global_delay_factor: 1.0
-  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -1720,7 +1720,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- auto_find_prompt: true
+- access: []
+  auto_find_prompt: true
   close_connection: false
   command: show vrf
   completion_time: 1
@@ -1750,7 +1751,6 @@
   expect_username_prompt: ''
   fast_cli: true
   global_delay_factor: 1.0
-  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -1806,7 +1806,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- close_connection: false
+- access: []
+  close_connection: false
   command: show vrf a
   completion_time: 1
   config_mode: false
@@ -1838,7 +1839,6 @@
   expect_username_prompt: ''
   fast_cli: false
   global_delay_factor: 1.0
-  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -1891,7 +1891,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- close_connection: false
+- access: []
+  close_connection: false
   command: show vrf
   completion_time: 1
   config_mode: false
@@ -1923,7 +1924,6 @@
   expect_username_prompt: ''
   fast_cli: false
   global_delay_factor: 1.0
-  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -1976,7 +1976,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- completion_time: 1
+- access: []
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -1990,7 +1991,6 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
-  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -2037,7 +2037,8 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- completion_time: 1
+- access: []
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -2051,7 +2052,6 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
-  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -2102,7 +2102,8 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- auto_find_prompt: true
+- access: []
+  auto_find_prompt: true
   close_connection: false
   command: show vrf {{iteration_simple}}
   completion_time: 1
@@ -2132,7 +2133,6 @@
   expect_username_prompt: ''
   fast_cli: true
   global_delay_factor: 1.0
-  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -2186,7 +2186,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- auto_find_prompt: true
+- access: []
+  auto_find_prompt: true
   close_connection: false
   command: show vrf test
   completion_time: 1
@@ -2216,7 +2217,6 @@
   expect_username_prompt: ''
   fast_cli: false
   global_delay_factor: 1.0
-  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -2270,7 +2270,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- auto_find_prompt: true
+- access: []
+  auto_find_prompt: true
   close_connection: false
   command: show vrf {{get_result("Modify payload (per device)", device=device.name)["duration"]}}
   completion_time: 1
@@ -2300,7 +2301,6 @@
   expect_username_prompt: ''
   fast_cli: false
   global_delay_factor: 1.0
-  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -2354,7 +2354,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- close_connection: false
+- access: []
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -2374,7 +2375,6 @@
   driver: eos
   events: []
   getters: [is_alive]
-  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -2426,7 +2426,8 @@
   validation_method: dict_equal
   vendor: ''
   waiting_time: 0
-- close_connection: false
+- access: []
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -2445,7 +2446,6 @@
   driver: eos
   events: []
   getters: [get_facts]
-  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -2497,7 +2497,8 @@
   validation_method: dict_included
   vendor: ''
   waiting_time: 0
-- close_connection: false
+- access: []
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -2517,7 +2518,6 @@
   driver: eos
   events: []
   getters: [get_interfaces_ip]
-  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -2570,7 +2570,8 @@
   validation_method: dict_included
   vendor: ''
   waiting_time: 0
-- close_connection: false
+- access: []
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -2589,7 +2590,6 @@
   driver: eos
   events: []
   getters: [get_mac_address_table]
-  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -2641,7 +2641,8 @@
   validation_method: dict_equal
   vendor: ''
   waiting_time: 0
-- close_connection: false
+- access: []
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -2660,7 +2661,6 @@
   driver: eos
   events: []
   getters: [get_facts]
-  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -2712,7 +2712,8 @@
   validation_method: dict_included
   vendor: ''
   waiting_time: 0
-- arguments: ''
+- access: []
+  arguments: ''
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -2727,7 +2728,6 @@
   dict_match: {host: '{{device.ip_address}}', unreachable: 0, use_ssl: true}
   display_only_failed_nodes: false
   events: []
-  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -2776,7 +2776,8 @@
   validation_method: dict_included
   vendor: ''
   waiting_time: 0
-- arguments: ''
+- access: []
+  arguments: ''
   completion_time: 1
   content_match: ip address\s.*/24
   content_match_regex: true
@@ -2791,7 +2792,6 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
-  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -2839,7 +2839,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- arguments: ''
+- access: []
+  arguments: ''
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -2854,7 +2855,6 @@
   dict_match: {action: debug, changed: false, failed: false}
   display_only_failed_nodes: false
   events: []
-  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -2902,7 +2902,8 @@
   validation_method: dict_included
   vendor: ''
   waiting_time: 0
-- auto_find_prompt: true
+- access: []
+  auto_find_prompt: true
   close_connection: false
   command: show version
   completion_time: 1
@@ -2932,7 +2933,6 @@
   expect_username_prompt: ''
   fast_cli: false
   global_delay_factor: 1.0
-  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -2986,7 +2986,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- auto_find_prompt: true
+- access: []
+  auto_find_prompt: true
   close_connection: false
   command: show interface {{non_default_iteration_value_name}}
   completion_time: 1
@@ -3016,7 +3017,6 @@
   expect_username_prompt: ''
   fast_cli: true
   global_delay_factor: 1.0
-  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -3070,7 +3070,8 @@
   validation_method: text
   vendor: Arista
   waiting_time: 0
-- auto_find_prompt: true
+- access: []
+  auto_find_prompt: true
   close_connection: false
   command: show interface {{iteration_value}}
   completion_time: 1
@@ -3100,7 +3101,6 @@
   expect_username_prompt: ''
   fast_cli: true
   global_delay_factor: 1.0
-  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -3154,7 +3154,8 @@
   validation_method: text
   vendor: Arista
   waiting_time: 0
-- auto_find_prompt: true
+- access: []
+  auto_find_prompt: true
   close_connection: false
   command: show interface {{iteration_value}}
   completion_time: 1
@@ -3184,7 +3185,6 @@
   expect_username_prompt: ''
   fast_cli: true
   global_delay_factor: 1.0
-  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -3238,7 +3238,8 @@
   validation_method: text
   vendor: Arista
   waiting_time: 0
-- completion_time: 1
+- access: []
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -3252,7 +3253,6 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
-  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -3303,7 +3303,8 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- completion_time: 1
+- access: []
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -3317,7 +3318,6 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
-  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -3380,7 +3380,8 @@
   variable3: dict
   vendor: ''
   waiting_time: 0
-- completion_time: 1
+- access: []
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -3394,7 +3395,6 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
-  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -3457,7 +3457,8 @@
   variable3: dict
   vendor: ''
   waiting_time: 0
-- call_type: GET
+- access: []
+  call_type: GET
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -3472,7 +3473,6 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
-  groups: []
   headers: {}
   impacting: true
   include_device_results: true
@@ -3524,7 +3524,8 @@
   vendor: ''
   verify_ssl_certificate: false
   waiting_time: 0
-- completion_time: 1
+- access: []
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -3538,7 +3539,6 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
-  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -3595,7 +3595,8 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- auto_find_prompt: true
+- access: []
+  auto_find_prompt: true
   close_connection: false
   command: show interface {{get_var('iteration_value')}}
   completion_time: 1
@@ -3625,7 +3626,6 @@
   expect_username_prompt: ''
   fast_cli: false
   global_delay_factor: 1.0
-  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -3681,7 +3681,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- close_connection: false
+- access: []
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -3696,7 +3697,6 @@
   dict_match: {}
   display_only_failed_nodes: true
   events: []
-  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -3750,7 +3750,8 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- close_connection: false
+- access: []
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -3765,7 +3766,6 @@
   dict_match: {}
   display_only_failed_nodes: true
   events: []
-  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -3853,7 +3853,8 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- close_connection: false
+- access: []
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -3868,7 +3869,6 @@
   dict_match: {}
   display_only_failed_nodes: true
   events: []
-  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -3928,7 +3928,8 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- close_connection: false
+- access: []
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -3943,7 +3944,6 @@
   dict_match: {}
   display_only_failed_nodes: true
   events: []
-  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -4002,7 +4002,8 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- close_connection: false
+- access: []
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -4017,7 +4018,6 @@
   dict_match: {}
   display_only_failed_nodes: true
   events: []
-  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -4119,7 +4119,8 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- close_connection: false
+- access: []
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -4134,7 +4135,6 @@
   dict_match: {}
   display_only_failed_nodes: true
   events: []
-  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -4179,11 +4179,11 @@
   send_notification_method: mail
   services: ['[Shared] Start', '[Shared] End', '[Regression Workflow F: Workflow of
       Workflows] Regression Workflow 5: VRF creation and deletion with Napalm', '[Regression
-      Workflow F: Workflow of Workflows] Modify Payload for Iteration', '[Regression
-      Workflow F: Workflow of Workflows] Regression Workflow F S2: Access Variables
-      from Parent Workflow', '[Regression Workflow F: Workflow of Workflows] Regression
-      Workflow F S1: Subworkflow of Workflow', '[Regression Workflow F: Workflow of
-      Workflows] Show interfaces with Netmiko', '[Shared] NAPALM: Get interfaces']
+      Workflow E: Iteration Targets] Modify Payload for Iteration', '[Regression Workflow
+      F: Workflow of Workflows] Regression Workflow F S2: Access Variables from Parent
+      Workflow', '[Regression Workflow F: Workflow of Workflows] Regression Workflow
+      F S1: Subworkflow of Workflow', '[Regression Workflow F: Workflow of Workflows]
+      Show interfaces with Netmiko', '[Shared] NAPALM: Get interfaces']
   shared: false
   skip: false
   skip_query: ''
@@ -4195,7 +4195,8 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- close_connection: false
+- access: []
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -4210,7 +4211,6 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
-  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -4264,7 +4264,8 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- close_connection: false
+- access: []
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -4279,7 +4280,6 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
-  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -4331,7 +4331,8 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- close_connection: false
+- access: []
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -4346,7 +4347,6 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
-  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -4420,7 +4420,8 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- close_connection: false
+- access: []
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -4435,7 +4436,6 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
-  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -4528,7 +4528,8 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- close_connection: false
+- access: []
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -4543,7 +4544,6 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
-  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -4619,7 +4619,8 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- close_connection: false
+- access: []
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -4636,7 +4637,6 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
-  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -4694,7 +4694,8 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- close_connection: false
+- access: []
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -4709,7 +4710,6 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
-  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -4777,12 +4777,12 @@
   scoped_name: 'Regression Workflow E: Iteration Targets'
   send_notification: false
   send_notification_method: mail
-  services: ['[Shared] Start', '[Shared] End', '[Regression Workflow F: Workflow of
-      Workflows] Modify Payload for Iteration', '[Regression Workflow E: Iteration
-      Targets] Iteration Target Workflow - Test 2', '[Regression Workflow E: Iteration
-      Targets] Iteration Targets Workflow - Test 1', '[Regression Workflow E: Iteration
-      Targets] Iteration Target Workflow - Test 3', '[Regression Workflow E: Iteration
-      Targets] Iteration Targets Workflow - Test 4']
+  services: ['[Shared] Start', '[Shared] End', '[Regression Workflow E: Iteration
+      Targets] Modify Payload for Iteration', '[Regression Workflow E: Iteration Targets]
+      Iteration Target Workflow - Test 2', '[Regression Workflow E: Iteration Targets]
+      Iteration Targets Workflow - Test 1', '[Regression Workflow E: Iteration Targets]
+      Iteration Target Workflow - Test 3', '[Regression Workflow E: Iteration Targets]
+      Iteration Targets Workflow - Test 4']
   shared: false
   skip: false
   skip_query: ''
@@ -4794,7 +4794,8 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- close_connection: false
+- access: []
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -4809,7 +4810,6 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
-  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -4870,7 +4870,8 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- close_connection: false
+- access: []
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -4885,7 +4886,6 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
-  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -4936,7 +4936,8 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- close_connection: false
+- access: []
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -4951,7 +4952,6 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
-  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -5004,7 +5004,8 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- close_connection: false
+- access: []
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -5019,7 +5020,6 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
-  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -5075,7 +5075,8 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- auto_find_prompt: true
+- access: []
+  auto_find_prompt: true
   close_connection: false
   command: show vrf
   completion_time: 1
@@ -5105,7 +5106,6 @@
   expect_username_prompt: ''
   fast_cli: false
   global_delay_factor: 1.0
-  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -5159,7 +5159,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- auto_find_prompt: true
+- access: []
+  auto_find_prompt: true
   close_connection: false
   command: show interfaces
   completion_time: 1
@@ -5189,7 +5190,6 @@
   expect_username_prompt: ''
   fast_cli: false
   global_delay_factor: 1.0
-  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -5242,7 +5242,8 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- close_connection: true
+- access: []
+  close_connection: true
   commands:
   - {prefix: shusers, value: show run}
   - {prefix: shipintbr, value: show ip interface brief}
@@ -5277,7 +5278,6 @@
   events: []
   fast_cli: false
   global_delay_factor: 1.0
-  groups: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -5338,7 +5338,8 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- close_connection: false
+- access: []
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -5353,7 +5354,6 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
-  groups: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -5403,7 +5403,8 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- close_connection: false
+- access: []
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -5418,7 +5419,6 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
-  groups: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -5466,7 +5466,8 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- call_type: GET
+- access: []
+  call_type: GET
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -5481,7 +5482,6 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
-  groups: []
   headers: {}
   impacting: true
   include_device_results: false
@@ -5532,7 +5532,8 @@
   vendor: ''
   verify_ssl_certificate: false
   waiting_time: 0
-- close_connection: false
+- access: []
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -5547,7 +5548,6 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
-  groups: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -5596,7 +5596,8 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- call_type: GET
+- access: []
+  call_type: GET
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -5611,7 +5612,6 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
-  groups: []
   headers: {}
   impacting: true
   include_device_results: false
@@ -5663,7 +5663,8 @@
   vendor: ''
   verify_ssl_certificate: false
   waiting_time: 0
-- close_connection: false
+- access: []
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -5678,7 +5679,6 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
-  groups: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -5725,7 +5725,8 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- auto_find_prompt: true
+- access: []
+  auto_find_prompt: true
   close_connection: false
   command: ''
   completion_time: 1
@@ -5755,7 +5756,6 @@
   expect_username_prompt: ''
   fast_cli: false
   global_delay_factor: 1.0
-  groups: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -5810,7 +5810,8 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- auto_find_prompt: true
+- access: []
+  auto_find_prompt: true
   close_connection: false
   command: ''
   completion_time: 1
@@ -5840,7 +5841,6 @@
   expect_username_prompt: ''
   fast_cli: false
   global_delay_factor: 1.0
-  groups: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -5895,7 +5895,8 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- auto_find_prompt: true
+- access: []
+  auto_find_prompt: true
   close_connection: false
   command: ''
   completion_time: 1
@@ -5925,7 +5926,6 @@
   expect_username_prompt: ''
   fast_cli: false
   global_delay_factor: 1.0
-  groups: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -5980,7 +5980,8 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- close_connection: false
+- access: []
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -5995,7 +5996,6 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
-  groups: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -6064,7 +6064,8 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- close_connection: false
+- access: []
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -6079,7 +6080,6 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
-  groups: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -6127,7 +6127,8 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- close_connection: false
+- access: []
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -6142,7 +6143,6 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
-  groups: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -6190,7 +6190,8 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- auto_find_prompt: true
+- access: []
+  auto_find_prompt: true
   close_connection: false
   command: show vrf
   completion_time: 1
@@ -6220,7 +6221,6 @@
   expect_username_prompt: ''
   fast_cli: false
   global_delay_factor: 1.0
-  groups: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -6276,7 +6276,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- arguments: ''
+- access: []
+  arguments: ''
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -6291,7 +6292,6 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
-  groups: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -6338,7 +6338,8 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- close_connection: false
+- access: []
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -6353,7 +6354,6 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
-  groups: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -6400,7 +6400,8 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- completion_time: 1
+- access: []
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -6414,7 +6415,6 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
-  groups: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -6461,7 +6461,8 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- auto_find_prompt: true
+- access: []
+  auto_find_prompt: true
   close_connection: false
   command: show vrf {{command_dict["command"]}}
   completion_time: 1
@@ -6491,7 +6492,6 @@
   expect_username_prompt: ''
   fast_cli: true
   global_delay_factor: 1.0
-  groups: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -6544,7 +6544,8 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- close_connection: false
+- access: []
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -6559,7 +6560,6 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
-  groups: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -6606,7 +6606,8 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- completion_time: 1
+- access: []
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -6620,7 +6621,6 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
-  groups: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -6666,7 +6666,8 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- close_connection: false
+- access: []
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -6681,7 +6682,6 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
-  groups: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -6728,7 +6728,8 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- completion_time: 1
+- access: []
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -6742,7 +6743,6 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
-  groups: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -6790,7 +6790,8 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- completion_time: 1
+- access: []
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -6805,7 +6806,6 @@
     value: [1.1.1.1, 2.2.2.2, 3.3.3.3, 11.11.11.11, 15.15.15.15]
   display_only_failed_nodes: false
   events: []
-  groups: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -6856,7 +6856,8 @@
   validation_method: dict_included
   vendor: ''
   waiting_time: 0
-- completion_time: 1
+- access: []
+  completion_time: 1
   content_match: (\d\.){3}\d
   content_match_regex: true
   conversion_method: none
@@ -6870,7 +6871,6 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
-  groups: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -6921,7 +6921,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- completion_time: 1
+- access: []
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -6936,7 +6937,6 @@
     value: [1.1.1.1, 2.2.2.2, 3.3.3.3]
   display_only_failed_nodes: false
   events: []
-  groups: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -6986,7 +6986,8 @@
   validation_method: dict_included
   vendor: ''
   waiting_time: 0
-- completion_time: 1
+- access: []
+  completion_time: 1
   content_match: (\d\.){3}\d
   content_match_regex: true
   conversion_method: none
@@ -7000,7 +7001,6 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
-  groups: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -7050,7 +7050,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- completion_time: 1
+- access: []
+  completion_time: 1
   content_match: \[1,2,False,1.*\]
   content_match_regex: true
   conversion_method: none
@@ -7064,7 +7065,6 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
-  groups: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -7114,7 +7114,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- completion_time: 1
+- access: []
+  completion_time: 1
   content_match: '{"a": ["o", True, 4], "prefix_length": 24, "failed": 0}'
   content_match_regex: false
   conversion_method: none
@@ -7128,7 +7129,6 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
-  groups: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -7178,7 +7178,8 @@
   validation_method: dict_included
   vendor: ''
   waiting_time: 0
-- close_connection: false
+- access: []
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -7193,7 +7194,6 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
-  groups: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -7259,7 +7259,8 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- completion_time: 1
+- access: []
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -7273,7 +7274,6 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
-  groups: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -7322,7 +7322,8 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- completion_time: 1
+- access: []
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -7336,7 +7337,6 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
-  groups: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -7383,7 +7383,8 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- completion_time: 1
+- access: []
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -7397,7 +7398,6 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
-  groups: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -7442,7 +7442,8 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- close_connection: false
+- access: []
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -7457,7 +7458,6 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
-  groups: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -7504,7 +7504,8 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- close_connection: false
+- access: []
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -7519,7 +7520,6 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
-  groups: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -7576,7 +7576,8 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- command: ps -ef
+- access: []
+  command: ps -ef
   completion_time: 1
   content_match: python\d
   content_match_regex: true
@@ -7591,7 +7592,6 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
-  groups: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -7638,7 +7638,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- auto_find_prompt: false
+- access: []
+  auto_find_prompt: false
   close_connection: false
   completion_time: 1
   config_mode: false
@@ -7663,7 +7664,6 @@
   expect_string: root.*#
   fast_cli: false
   global_delay_factor: 1.0
-  groups: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -7720,7 +7720,8 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- completion_time: 1
+- access: []
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -7735,7 +7736,6 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
-  groups: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -7787,7 +7787,8 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- close_connection: false
+- access: []
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -7802,7 +7803,6 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
-  groups: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -7848,7 +7848,8 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- completion_time: 1
+- access: []
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -7862,7 +7863,6 @@
   dict_match: {}
   display_only_failed_nodes: false
   events: []
-  groups: []
   impacting: true
   import_type: opennms
   include_device_results: false
@@ -7913,7 +7913,8 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- auto_find_prompt: true
+- access: []
+  auto_find_prompt: true
   close_connection: false
   command: ps -ef
   completion_time: 1
@@ -7943,7 +7944,6 @@
   expect_username_prompt: ''
   fast_cli: false
   global_delay_factor: 1.0
-  groups: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -7999,7 +7999,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- call_type: GET
+- access: []
+  call_type: GET
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -8014,7 +8015,6 @@
   dict_match: {}
   display_only_failed_nodes: true
   events: []
-  groups: []
   headers: {}
   impacting: true
   include_device_results: true
@@ -8067,7 +8067,8 @@
   vendor: ''
   verify_ssl_certificate: true
   waiting_time: 0
-- auto_find_prompt: true
+- access: []
+  auto_find_prompt: true
   close_connection: false
   command: show version
   completion_time: 1
@@ -8097,7 +8098,6 @@
   expect_username_prompt: 'username:'
   fast_cli: false
   global_delay_factor: 1.0
-  groups: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -8149,7 +8149,8 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- close_connection: false
+- access: []
+  close_connection: false
   commands:
   - {prefix: '', value: show run}
   - {prefix: '', value: ''}
@@ -8184,7 +8185,6 @@
   events: []
   fast_cli: false
   global_delay_factor: 1.0
-  groups: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -8245,7 +8245,7 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- commit: true
+- access: []
   commit_message: Automatic commit (configurations)
   completion_time: 1
   content_match: ''
@@ -8262,7 +8262,6 @@
   display_only_failed_nodes: false
   events: []
   git_repository: network_data
-  groups: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false

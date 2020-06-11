@@ -1,40 +1,10 @@
-- access: []
-  authentication: database
-  email: admin@enms.io
-  is_admin: true
-  name: admin
-  small_menu: false
-  theme: default
-  type: user
-- access: []
-  authentication: database
-  email: read-only@enms.io
-  is_admin: false
-  name: read-only
-  small_menu: false
-  theme: default
-  type: user
-- access: []
-  authentication: database
-  email: chicago@enms.io
-  is_admin: false
-  name: chicago
-  small_menu: false
-  theme: default
-  type: user
-- access: []
-  authentication: database
-  email: sf@enms.io
-  is_admin: false
-  name: sf
-  small_menu: false
-  theme: default
-  type: user
-- access: []
-  authentication: database
-  email: ny@enms.io
-  is_admin: false
-  name: ny
-  small_menu: false
-  theme: default
-  type: user
+- {authentication: database, email: admin@enms.io, is_admin: true, name: admin, small_menu: false,
+  theme: default, type: user}
+- {authentication: database, email: read-only@enms.io, is_admin: false, name: read-only,
+  small_menu: false, theme: default, type: user}
+- {authentication: database, email: chicago@enms.io, is_admin: false, name: chicago,
+  small_menu: false, theme: default, type: user}
+- {authentication: database, email: sf@enms.io, is_admin: false, name: sf, small_menu: false,
+  theme: default, type: user}
+- {authentication: database, email: ny@enms.io, is_admin: false, name: ny, small_menu: false,
+  theme: default, type: user}

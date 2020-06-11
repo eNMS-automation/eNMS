@@ -87,6 +87,7 @@ class Database:
             "status",
         ],
         "user": [
+            "access",
             "id",
             "devices",
             "pools",

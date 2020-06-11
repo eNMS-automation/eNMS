@@ -62,8 +62,8 @@ class Task(AbstractBase):
             or_(
                 cls.service.has(public=True),
                 or_(
-                    models["group"].services.any(id=cls.service_id)
-                    for group in current_user.groups
+                    models["access"].services.any(id=cls.service_id)
+                    for access in current_user.access
                 ),
             )
         )

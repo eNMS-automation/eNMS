@@ -7,6 +7,7 @@ from sqlalchemy.schema import UniqueConstraint
 from sqlalchemy.sql.expression import true
 
 from eNMS import app
+from eNMS.models import models
 from eNMS.models.base import AbstractBase
 from eNMS.database import db
 from eNMS.setup import properties
@@ -28,7 +29,6 @@ class Object(AbstractBase):
 
     def update(self, **kwargs):
         super().update(**kwargs)
-        self.users = [current_user] if current_user else []
         if kwargs.get("dont_update_pools", False):
             return
         for pool in db.fetch_all("pool"):
@@ -50,8 +50,11 @@ class Object(AbstractBase):
 
     @classmethod
     def rbac_filter(cls, query):
-        return query.filter(
-            or_(cls.public == true(), cls.users.any(id=current_user.id))
+        user_access = [access.id for access in current_user.access]
+        return (
+            query.filter(cls.public == true())
+            .join(cls.access)
+            .filter(models["access"].id.in_(user_access))
         )
 
 

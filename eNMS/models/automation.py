@@ -179,7 +179,7 @@ class Service(AbstractBase):
         return query.filter(
             or_(
                 cls.public == true(),
-                or_(cls.groups.any(id=group.id) for group in current_user.groups),
+                or_(cls.access.any(id=access.id) for access in current_user.access),
             )
         )
 
@@ -603,10 +603,10 @@ class Run(AbstractBase):
 
     def device_run(self, payload):
         self.devices = self.compute_devices(payload)
-        #user = db.fetch("user", allow_none=True, name=self.creator)
-        #private_targets = set(device for device in self.devices if not device.public)
-        #unauthorized_targets = private_targets - set(user.devices)
-        #if not user.is_admin and unauthorized_targets:
+        # user = db.fetch("user", allow_none=True, name=self.creator)
+        # private_targets = set(device for device in self.devices if not device.public)
+        # unauthorized_targets = private_targets - set(user.devices)
+        # if not user.is_admin and unauthorized_targets:
         #    targets = "".join(device.name for device in unauthorized_targets)
         #    error = f"Unauthorized targets ({targets}) for user '{self.creator}'"
         #    self.log("error", error)

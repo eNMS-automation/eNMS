@@ -1,5 +1,4 @@
-- access: []
-  attributes:
+- attributes:
     '1': ['2', three]
   description: Jackson
   down: false
@@ -29,8 +28,7 @@
   type: device
   username: cisco
   vendor: Cisco
-- access: []
-  attributes:
+- attributes:
     '1': ['2', three]
   description: PaloAlto
   down: false
@@ -60,8 +58,7 @@
   type: device
   username: cisco
   vendor: Cisco
-- access: []
-  attributes:
+- attributes:
     '1': ['2', three]
   description: Austin
   down: false
@@ -91,8 +88,7 @@
   type: device
   username: admin
   vendor: Arista
-- access: []
-  attributes:
+- attributes:
     '1': ['2', three]
   description: Washington
   down: false
@@ -122,8 +118,7 @@
   type: device
   username: admin
   vendor: Arista
-- access: []
-  attributes:
+- attributes:
     '1': ['2', three]
   description: Chicago
   down: false
@@ -153,8 +148,7 @@
   type: device
   username: admin
   vendor: Cisco
-- access: []
-  attributes:
+- attributes:
     '1': ['2', three]
   description: SanJose
   down: false
@@ -184,8 +178,7 @@
   type: device
   username: cisco
   vendor: Cisco
-- access: []
-  attributes:
+- attributes:
     '1': ['2', three]
   description: SanDiego
   down: false
@@ -215,8 +208,7 @@
   type: device
   username: cisco
   vendor: Cisco
-- access: []
-  attributes:
+- attributes:
     '1': ['2', three]
   description: Dallas
   down: false
@@ -246,8 +238,7 @@
   type: device
   username: cisco
   vendor: Cisco
-- access: []
-  attributes:
+- attributes:
     '1': ['2', three]
   description: Philadelphia
   down: false
@@ -277,8 +268,7 @@
   type: device
   username: cisco
   vendor: Cisco
-- access: []
-  attributes:
+- attributes:
     '1': ['2', three]
   description: LosAngeles
   down: false
@@ -308,8 +298,7 @@
   type: device
   username: cisco
   vendor: Cisco
-- access: []
-  attributes:
+- attributes:
     '1': ['2', three]
   description: Detroit
   down: false
@@ -339,8 +328,7 @@
   type: device
   username: cisco
   vendor: Cisco
-- access: []
-  attributes:
+- attributes:
     '1': ['2', three]
   description: Richmond
   down: false
@@ -370,8 +358,7 @@
   type: device
   username: cisco
   vendor: Cisco
-- access: []
-  attributes:
+- attributes:
     '1': ['2', three]
   description: Atlanta
   down: false
@@ -401,8 +388,7 @@
   type: device
   username: cisco
   vendor: Cisco
-- access: []
-  attributes:
+- attributes:
     '1': ['2', three]
   description: Boston
   down: false
@@ -432,8 +418,7 @@
   type: device
   username: admin
   vendor: Cisco
-- access: []
-  attributes:
+- attributes:
     '1': ['2', three]
   description: Houston
   down: false
@@ -463,8 +448,7 @@
   type: device
   username: admin
   vendor: Cisco
-- access: []
-  attributes:
+- attributes:
     '1': ['2', three]
   description: Baltimore
   down: false
@@ -494,8 +478,7 @@
   type: device
   username: admin
   vendor: Juniper
-- access: []
-  attributes:
+- attributes:
     '1': ['2', three]
   description: Cleveland
   down: false
@@ -525,8 +508,7 @@
   type: device
   username: admin
   vendor: Juniper
-- access: []
-  attributes:
+- attributes:
     '1': ['2', three]
   description: Columbus
   down: false
@@ -556,8 +538,7 @@
   type: device
   username: admin
   vendor: Juniper
-- access: []
-  attributes:
+- attributes:
     '1': ['2', three]
   description: Cincinnati
   down: false
@@ -587,8 +568,7 @@
   type: device
   username: admin
   vendor: Juniper
-- access: []
-  attributes:
+- attributes:
     '1': ['2', three]
   description: Cambridge
   down: false
@@ -618,8 +598,7 @@
   type: device
   username: admin
   vendor: Juniper
-- access: []
-  attributes:
+- attributes:
     '1': ['2', three]
   description: Minneapolis
   down: false
@@ -649,8 +628,7 @@
   type: device
   username: cisco
   vendor: Juniper
-- access: []
-  attributes:
+- attributes:
     '1': ['2', three]
   description: NewYork
   down: false
@@ -680,8 +658,7 @@
   type: device
   username: cisco
   vendor: Juniper
-- access: []
-  attributes:
+- attributes:
     '1': ['2', three]
   description: Sacramento
   down: false
@@ -711,8 +688,7 @@
   type: device
   username: cisco
   vendor: Juniper
-- access: []
-  attributes:
+- attributes:
     '1': ['2', three]
   description: SanFrancisco
   down: false
@@ -742,8 +718,7 @@
   type: device
   username: cisco
   vendor: Juniper
-- access: []
-  attributes:
+- attributes:
     '1': ['2', three]
   description: Orange
   down: false
@@ -773,8 +748,7 @@
   type: device
   username: cisco
   vendor: Juniper
-- access: []
-  attributes:
+- attributes:
     '1': ['2', three]
   description: Oakland
   down: false
@@ -804,8 +778,7 @@
   type: device
   username: cisco
   vendor: Cisco
-- access: []
-  attributes:
+- attributes:
     '1': ['2', three]
   description: Denver
   down: false
@@ -835,8 +808,7 @@
   type: device
   username: cisco
   vendor: Cisco
-- access: []
-  attributes:
+- attributes:
     '1': ['2', three]
   description: Denver
   down: false
@@ -866,8 +838,7 @@
   type: device
   username: admin
   vendor: Cisco
-- access: []
-  attributes:
+- attributes:
     '1': ['2', three]
   description: Washington
   down: false

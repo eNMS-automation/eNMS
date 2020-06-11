@@ -1,5 +1,4 @@
-- access: []
-  completion_time: 1
+- completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -123,8 +122,7 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- access: []
-  completion_time: 1
+- completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -251,8 +249,7 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- access: []
-  completion_time: 1
+- completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -311,7 +308,6 @@
 - a_dict: {}
   a_float: 5.0
   a_list: []
-  access: []
   an_integer: 10
   boolean1: true
   boolean2: false
@@ -383,8 +379,7 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- access: []
-  close_connection: false
+- close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -452,8 +447,7 @@
   vendor: ''
   vrf_name: configure_BGP_test
   waiting_time: 100
-- access: []
-  close_connection: false
+- close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -524,8 +518,7 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- access: []
-  close_connection: false
+- close_connection: false
   commit_configuration: false
   completion_time: 1
   config_mode: false
@@ -600,8 +593,7 @@
   validation_method: none
   vendor: Arista
   waiting_time: 0
-- access: []
-  auto_find_prompt: true
+- auto_find_prompt: true
   close_connection: true
   command: show vrf
   completion_time: 1
@@ -688,8 +680,7 @@
   validation_method: text
   vendor: Arista
   waiting_time: 0
-- access: []
-  close_connection: false
+- close_connection: false
   commit_configuration: false
   completion_time: 1
   config_mode: false
@@ -765,8 +756,7 @@
   validation_method: none
   vendor: Arista
   waiting_time: 1
-- access: []
-  auto_find_prompt: true
+- auto_find_prompt: true
   close_connection: false
   command: show vrf
   completion_time: 1
@@ -851,8 +841,7 @@
   validation_method: text
   vendor: Arista
   waiting_time: 0
-- access: []
-  action: load_merge_candidate
+- action: load_merge_candidate
   close_connection: false
   completion_time: 1
   content: "vrf instance napalm\r\n"
@@ -921,8 +910,7 @@
   validation_method: none
   vendor: Arista
   waiting_time: 0
-- access: []
-  call_type: GET
+- call_type: GET
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -994,8 +982,7 @@
   vendor: ''
   verify_ssl_certificate: true
   waiting_time: 0
-- access: []
-  close_connection: false
+- close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -1064,8 +1051,7 @@
   validation_method: dict_included
   vendor: ''
   waiting_time: 0
-- access: []
-  close_connection: false
+- close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -1133,8 +1119,7 @@
   validation_method: dict_included
   vendor: ''
   waiting_time: 0
-- access: []
-  close_connection: false
+- close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -1202,8 +1187,7 @@
   validation_method: dict_included
   vendor: ''
   waiting_time: 0
-- access: []
-  close_connection: false
+- close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -1270,8 +1254,7 @@
   validation_method: dict_included
   vendor: ''
   waiting_time: 0
-- access: []
-  completion_time: 1
+- completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -1329,8 +1312,7 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- access: []
-  completion_time: 1
+- completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -1396,8 +1378,7 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- access: []
-  auto_find_prompt: true
+- auto_find_prompt: true
   close_connection: true
   command: show ip route
   completion_time: 1
@@ -1483,8 +1464,7 @@
   validation_method: text
   vendor: Arista
   waiting_time: 0
-- access: []
-  completion_time: 1
+- completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -1565,8 +1545,7 @@
   variable3: textfsm_variable
   vendor: ''
   waiting_time: 0
-- access: []
-  close_connection: false
+- close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -1633,8 +1612,7 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- access: []
-  auto_find_prompt: true
+- auto_find_prompt: true
   close_connection: false
   command: show vrf
   completion_time: 1
@@ -1720,8 +1698,7 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- access: []
-  auto_find_prompt: true
+- auto_find_prompt: true
   close_connection: false
   command: show vrf
   completion_time: 1
@@ -1806,8 +1783,7 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- access: []
-  close_connection: false
+- close_connection: false
   command: show vrf a
   completion_time: 1
   config_mode: false
@@ -1891,8 +1867,7 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- access: []
-  close_connection: false
+- close_connection: false
   command: show vrf
   completion_time: 1
   config_mode: false
@@ -1976,8 +1951,7 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- access: []
-  completion_time: 1
+- completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -2037,8 +2011,7 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- access: []
-  completion_time: 1
+- completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -2102,8 +2075,7 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- access: []
-  auto_find_prompt: true
+- auto_find_prompt: true
   close_connection: false
   command: show vrf {{iteration_simple}}
   completion_time: 1
@@ -2186,8 +2158,7 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- access: []
-  auto_find_prompt: true
+- auto_find_prompt: true
   close_connection: false
   command: show vrf test
   completion_time: 1
@@ -2270,8 +2241,7 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- access: []
-  auto_find_prompt: true
+- auto_find_prompt: true
   close_connection: false
   command: show vrf {{get_result("Modify payload (per device)", device=device.name)["duration"]}}
   completion_time: 1
@@ -2354,8 +2324,7 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- access: []
-  close_connection: false
+- close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -2426,8 +2395,7 @@
   validation_method: dict_equal
   vendor: ''
   waiting_time: 0
-- access: []
-  close_connection: false
+- close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -2497,8 +2465,7 @@
   validation_method: dict_included
   vendor: ''
   waiting_time: 0
-- access: []
-  close_connection: false
+- close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -2570,8 +2537,7 @@
   validation_method: dict_included
   vendor: ''
   waiting_time: 0
-- access: []
-  close_connection: false
+- close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -2641,8 +2607,7 @@
   validation_method: dict_equal
   vendor: ''
   waiting_time: 0
-- access: []
-  close_connection: false
+- close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -2712,8 +2677,7 @@
   validation_method: dict_included
   vendor: ''
   waiting_time: 0
-- access: []
-  arguments: ''
+- arguments: ''
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -2776,8 +2740,7 @@
   validation_method: dict_included
   vendor: ''
   waiting_time: 0
-- access: []
-  arguments: ''
+- arguments: ''
   completion_time: 1
   content_match: ip address\s.*/24
   content_match_regex: true
@@ -2839,8 +2802,7 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- access: []
-  arguments: ''
+- arguments: ''
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -2902,8 +2864,7 @@
   validation_method: dict_included
   vendor: ''
   waiting_time: 0
-- access: []
-  auto_find_prompt: true
+- auto_find_prompt: true
   close_connection: false
   command: show version
   completion_time: 1
@@ -2986,8 +2947,7 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- access: []
-  auto_find_prompt: true
+- auto_find_prompt: true
   close_connection: false
   command: show interface {{non_default_iteration_value_name}}
   completion_time: 1
@@ -3070,8 +3030,7 @@
   validation_method: text
   vendor: Arista
   waiting_time: 0
-- access: []
-  auto_find_prompt: true
+- auto_find_prompt: true
   close_connection: false
   command: show interface {{iteration_value}}
   completion_time: 1
@@ -3154,8 +3113,7 @@
   validation_method: text
   vendor: Arista
   waiting_time: 0
-- access: []
-  auto_find_prompt: true
+- auto_find_prompt: true
   close_connection: false
   command: show interface {{iteration_value}}
   completion_time: 1
@@ -3238,8 +3196,7 @@
   validation_method: text
   vendor: Arista
   waiting_time: 0
-- access: []
-  completion_time: 1
+- completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -3303,8 +3260,7 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- access: []
-  completion_time: 1
+- completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -3380,8 +3336,7 @@
   variable3: dict
   vendor: ''
   waiting_time: 0
-- access: []
-  completion_time: 1
+- completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -3457,8 +3412,7 @@
   variable3: dict
   vendor: ''
   waiting_time: 0
-- access: []
-  call_type: GET
+- call_type: GET
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -3524,8 +3478,7 @@
   vendor: ''
   verify_ssl_certificate: false
   waiting_time: 0
-- access: []
-  completion_time: 1
+- completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -3595,8 +3548,7 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- access: []
-  auto_find_prompt: true
+- auto_find_prompt: true
   close_connection: false
   command: show interface {{get_var('iteration_value')}}
   completion_time: 1
@@ -3681,8 +3633,7 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- access: []
-  close_connection: false
+- close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -3750,8 +3701,7 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- access: []
-  close_connection: false
+- close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -3853,8 +3803,7 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- access: []
-  close_connection: false
+- close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -3928,8 +3877,7 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- access: []
-  close_connection: false
+- close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -4002,8 +3950,7 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- access: []
-  close_connection: false
+- close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -4119,8 +4066,7 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- access: []
-  close_connection: false
+- close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -4195,8 +4141,7 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- access: []
-  close_connection: false
+- close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -4264,8 +4209,7 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- access: []
-  close_connection: false
+- close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -4331,8 +4275,7 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- access: []
-  close_connection: false
+- close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -4420,8 +4363,7 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- access: []
-  close_connection: false
+- close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -4528,8 +4470,7 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- access: []
-  close_connection: false
+- close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -4619,8 +4560,7 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- access: []
-  close_connection: false
+- close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -4694,8 +4634,7 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- access: []
-  close_connection: false
+- close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -4794,8 +4733,7 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- access: []
-  close_connection: false
+- close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -4870,8 +4808,7 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- access: []
-  close_connection: false
+- close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -4936,8 +4873,7 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- access: []
-  close_connection: false
+- close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -5004,8 +4940,7 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- access: []
-  close_connection: false
+- close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -5075,8 +5010,7 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- access: []
-  auto_find_prompt: true
+- auto_find_prompt: true
   close_connection: false
   command: show vrf
   completion_time: 1
@@ -5159,8 +5093,7 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- access: []
-  auto_find_prompt: true
+- auto_find_prompt: true
   close_connection: false
   command: show interfaces
   completion_time: 1
@@ -5242,8 +5175,7 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- access: []
-  close_connection: true
+- close_connection: true
   commands:
   - {prefix: shusers, value: show run}
   - {prefix: shipintbr, value: show ip interface brief}
@@ -5338,8 +5270,7 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- access: []
-  close_connection: false
+- close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -5403,8 +5334,7 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- access: []
-  close_connection: false
+- close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -5466,8 +5396,7 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- access: []
-  call_type: GET
+- call_type: GET
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -5532,8 +5461,7 @@
   vendor: ''
   verify_ssl_certificate: false
   waiting_time: 0
-- access: []
-  close_connection: false
+- close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -5596,8 +5524,7 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- access: []
-  call_type: GET
+- call_type: GET
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -5663,8 +5590,7 @@
   vendor: ''
   verify_ssl_certificate: false
   waiting_time: 0
-- access: []
-  close_connection: false
+- close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -5725,8 +5651,7 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- access: []
-  auto_find_prompt: true
+- auto_find_prompt: true
   close_connection: false
   command: ''
   completion_time: 1
@@ -5810,8 +5735,7 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- access: []
-  auto_find_prompt: true
+- auto_find_prompt: true
   close_connection: false
   command: ''
   completion_time: 1
@@ -5895,8 +5819,7 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- access: []
-  auto_find_prompt: true
+- auto_find_prompt: true
   close_connection: false
   command: ''
   completion_time: 1
@@ -5980,8 +5903,7 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- access: []
-  close_connection: false
+- close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -6064,8 +5986,7 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- access: []
-  close_connection: false
+- close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -6127,8 +6048,7 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- access: []
-  close_connection: false
+- close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -6190,8 +6110,7 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- access: []
-  auto_find_prompt: true
+- auto_find_prompt: true
   close_connection: false
   command: show vrf
   completion_time: 1
@@ -6276,8 +6195,7 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- access: []
-  arguments: ''
+- arguments: ''
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -6338,8 +6256,7 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- access: []
-  close_connection: false
+- close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -6400,8 +6317,7 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- access: []
-  completion_time: 1
+- completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -6461,8 +6377,7 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- access: []
-  auto_find_prompt: true
+- auto_find_prompt: true
   close_connection: false
   command: show vrf {{command_dict["command"]}}
   completion_time: 1
@@ -6544,8 +6459,7 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- access: []
-  close_connection: false
+- close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -6606,8 +6520,7 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- access: []
-  completion_time: 1
+- completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -6666,8 +6579,7 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- access: []
-  close_connection: false
+- close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -6728,8 +6640,7 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- access: []
-  completion_time: 1
+- completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -6790,8 +6701,7 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- access: []
-  completion_time: 1
+- completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -6856,8 +6766,7 @@
   validation_method: dict_included
   vendor: ''
   waiting_time: 0
-- access: []
-  completion_time: 1
+- completion_time: 1
   content_match: (\d\.){3}\d
   content_match_regex: true
   conversion_method: none
@@ -6921,8 +6830,7 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- access: []
-  completion_time: 1
+- completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -6986,8 +6894,7 @@
   validation_method: dict_included
   vendor: ''
   waiting_time: 0
-- access: []
-  completion_time: 1
+- completion_time: 1
   content_match: (\d\.){3}\d
   content_match_regex: true
   conversion_method: none
@@ -7050,8 +6957,7 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- access: []
-  completion_time: 1
+- completion_time: 1
   content_match: \[1,2,False,1.*\]
   content_match_regex: true
   conversion_method: none
@@ -7114,8 +7020,7 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- access: []
-  completion_time: 1
+- completion_time: 1
   content_match: '{"a": ["o", True, 4], "prefix_length": 24, "failed": 0}'
   content_match_regex: false
   conversion_method: none
@@ -7178,8 +7083,7 @@
   validation_method: dict_included
   vendor: ''
   waiting_time: 0
-- access: []
-  close_connection: false
+- close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -7259,8 +7163,7 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- access: []
-  completion_time: 1
+- completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -7322,8 +7225,7 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- access: []
-  completion_time: 1
+- completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -7383,8 +7285,7 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- access: []
-  completion_time: 1
+- completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -7442,8 +7343,7 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- access: []
-  close_connection: false
+- close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -7504,8 +7404,7 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- access: []
-  close_connection: false
+- close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -7576,8 +7475,7 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- access: []
-  command: ps -ef
+- command: ps -ef
   completion_time: 1
   content_match: python\d
   content_match_regex: true
@@ -7638,8 +7536,7 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- access: []
-  auto_find_prompt: false
+- auto_find_prompt: false
   close_connection: false
   completion_time: 1
   config_mode: false
@@ -7720,8 +7617,7 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- access: []
-  completion_time: 1
+- completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -7787,8 +7683,7 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- access: []
-  close_connection: false
+- close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -7848,8 +7743,7 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- access: []
-  completion_time: 1
+- completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -7913,8 +7807,7 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- access: []
-  auto_find_prompt: true
+- auto_find_prompt: true
   close_connection: false
   command: ps -ef
   completion_time: 1
@@ -7999,8 +7892,7 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- access: []
-  call_type: GET
+- call_type: GET
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -8067,8 +7959,7 @@
   vendor: ''
   verify_ssl_certificate: true
   waiting_time: 0
-- access: []
-  auto_find_prompt: true
+- auto_find_prompt: true
   close_connection: false
   command: show version
   completion_time: 1
@@ -8149,8 +8040,7 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- access: []
-  close_connection: false
+- close_connection: false
   commands:
   - {prefix: '', value: show run}
   - {prefix: '', value: ''}
@@ -8245,8 +8135,7 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- access: []
-  commit_message: Automatic commit (configurations)
+- commit_message: Automatic commit (configurations)
   completion_time: 1
   content_match: ''
   content_match_regex: false

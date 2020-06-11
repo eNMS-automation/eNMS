@@ -1,5 +1,4 @@
-- access: []
-  description: All objects
+- description: All objects
   device_configuration: ''
   device_configuration_match: inclusion
   device_description: ''
@@ -70,8 +69,7 @@
   property1: CP
   tasks: []
   type: pool
-- access: []
-  description: Devices only
+- description: Devices only
   device_configuration: ''
   device_configuration_match: inclusion
   device_description: ''
@@ -140,8 +138,7 @@
   property1: CP
   tasks: []
   type: pool
-- access: []
-  description: Links only
+- description: Links only
   device_configuration: ''
   device_configuration_match: inclusion
   device_description: ''
@@ -209,8 +206,7 @@
   property1: CP
   tasks: []
   type: pool
-- access: []
-  description: Datacenter San Francisco
+- description: Datacenter San Francisco
   device_configuration: ''
   device_configuration_match: inclusion
   device_description: ''
@@ -277,8 +273,7 @@
   property1: CP
   tasks: []
   type: pool
-- access: []
-  description: Datacenter New York
+- description: Datacenter New York
   device_configuration: ''
   device_configuration_match: inclusion
   device_description: ''
@@ -346,8 +341,7 @@
   property1: CP
   tasks: []
   type: pool
-- access: []
-  description: Datacenter Chicago
+- description: Datacenter Chicago
   device_configuration: ''
   device_configuration_match: inclusion
   device_description: ''
@@ -414,8 +408,7 @@
   property1: CP
   tasks: []
   type: pool
-- access: []
-  description: ''
+- description: ''
   device_configuration: ''
   device_configuration_match: inclusion
   device_description: ''

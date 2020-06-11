@@ -1,6 +1,6 @@
 - description: ''
-  devices: []
-  get_requests: [/dashboard, /download_file, /form/add_services, /form/administration,
+  devices: [Dallas]
+  get_requests: [/dashboard, /download_file, /form/access, /form/add_services, /form/administration,
     /form/ansible_playbook_service, /form/changelog, /form/configure_bgp_service,
     /form/netmiko_backup_service, /form/database_deletion, /form/database_migration,
     /form/device, /form/device_connection, /form/device_filtering, /form/device_relation_filtering,
@@ -30,7 +30,7 @@
   pages: [Access, Dashboard, Changelog, Sessions, Users, Groups, Servers, Devices,
     Configurations, Links, Pools, Network, Sites, Services, Workflow Builder, Results,
     Tasks, Events, Plugin 1, Submenu, Plugin 2]
-  pools: []
+  pools: [Datacenter San Francisco]
   post_requests: [/add_edge, /add_service_to_workflow, /copy_service_in_workflow,
     /calendar_init, /clear_results, /clear_configurations, /compare, /connection,
     /counters, /count_models, /create_label, /database_deletion, /delete_corrupted_edges,

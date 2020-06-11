@@ -86,6 +86,7 @@
   "get_requests": [
     "/dashboard",
     "/download_file",
+    "/form/access",
     "/form/add_services",
     "/form/administration",
     "/form/ansible_playbook_service",

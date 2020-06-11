@@ -46,6 +46,7 @@ class Database:
 
     dont_migrate = {
         "device": [
+            "access",
             "id",
             "configuration",
             "services",
@@ -56,8 +57,9 @@ class Database:
             "pools",
             "users",
         ],
-        "group": ["id", "services", "pools"],
+        "group": ["access", "id", "services", "pools"],
         "link": [
+            "access",
             "id",
             "pools",
             "users",
@@ -66,8 +68,9 @@ class Database:
             "source_id",
             "source_name",
         ],
-        "pool": ["id", "services", "device_number", "link_number"],
+        "pool": ["access", "id", "services", "device_number", "link_number"],
         "service": [
+            "access",
             "id",
             "sources",
             "destinations",
@@ -79,6 +82,7 @@ class Database:
             "edges",
         ],
         "task": [
+            "access",
             "id",
             "service_name",
             "next_run_time",

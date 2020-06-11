@@ -93,6 +93,7 @@ class Access(AbstractBase):
     __tablename__ = type = "access"
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.SmallString, unique=True)
+    description = db.Column(db.SmallString)
     menu = db.Column(db.List)
     pages = db.Column(db.List)
     upper_menu = db.Column(db.List)

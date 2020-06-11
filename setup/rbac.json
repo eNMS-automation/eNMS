@@ -60,6 +60,7 @@
     "pools": ["Read", "Edit"]
   },
   "pages": [
+    "Access",
     "Dashboard",
     "Changelog",
     "Sessions",

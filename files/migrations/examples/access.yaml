@@ -27,9 +27,9 @@
   links: []
   menu: [Home, Administration, Inventory, Visualization, Automation, Scheduling, Plugins]
   name: Full Access
-  pages: [Dashboard, Changelog, Sessions, Users, Groups, Servers, Devices, Configurations,
-    Links, Pools, Network, Sites, Services, Workflow Builder, Results, Tasks, Events,
-    Plugin 1, Submenu, Plugin 2]
+  pages: [Access, Dashboard, Changelog, Sessions, Users, Groups, Servers, Devices,
+    Configurations, Links, Pools, Network, Sites, Services, Workflow Builder, Results,
+    Tasks, Events, Plugin 1, Submenu, Plugin 2]
   pools: []
   post_requests: [/add_edge, /add_service_to_workflow, /copy_service_in_workflow,
     /calendar_init, /clear_results, /clear_configurations, /compare, /connection,

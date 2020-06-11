@@ -14,8 +14,8 @@
       </div>
       <label>Description</label>
       <div class="form-group">
-        {{ form.description(id="access-description", class="form-control required add-id",
-        placeholder="Description") }}
+        {{ form.description(id="access-description", class="form-control required
+        add-id", placeholder="Description") }}
       </div>
       <fieldset class="section">
         <legend align="center" class="section">
@@ -52,10 +52,12 @@
         </legend>
         <div class="form-group">
           <div class="form-group">
-            {{ form.get_requests(id="access-get_requests", class="form-control add-id") }}
+            {{ form.get_requests(id="access-get_requests", class="form-control add-id")
+            }}
           </div>
           <div class="form-group">
-            {{ form.post_requests(id="access-post_requests", class="form-control add-id") }}
+            {{ form.post_requests(id="access-post_requests", class="form-control
+            add-id") }}
           </div>
         </div>
       </fieldset>
@@ -65,35 +67,35 @@
         </legend>
         <div class="form-group">
           <table
-          class="table table-striped table-bordered dt-responsive nowrap"
-          cellspacing="0"
-          width="100%"
-        >
-          <thead>
-            <tr>
-              <th>Model</th>
-              <th>Instances</th>
-              <th style="width: 25%;">Access Rights</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for model in form.models %}
-            <tr>
-              <td>
-                {{ model.capitalize() }}
-              </td>
-              <td>
-                {{ form[model](id="access-" + model, class="form-control add-id",
-                style="width:100%") }}
-              </td>
-              <td>
-                {{ form[model + "_access"](id="access-" + model + "_access",
-                class="form-control add-id no-search", **{"data-width": "200px"}) }}
-              </td>
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
+            class="table table-striped table-bordered dt-responsive nowrap"
+            cellspacing="0"
+            width="100%"
+          >
+            <thead>
+              <tr>
+                <th>Model</th>
+                <th>Instances</th>
+                <th style="width: 25%;">Access Rights</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for model in form.models %}
+              <tr>
+                <td>
+                  {{ model.capitalize() }}
+                </td>
+                <td>
+                  {{ form[model](id="access-" + model, class="form-control add-id",
+                  style="width:100%") }}
+                </td>
+                <td>
+                  {{ form[model + "_access"](id="access-" + model + "_access",
+                  class="form-control add-id no-search", **{"data-width": "200px"}) }}
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
         </div>
       </fieldset>
       <center>

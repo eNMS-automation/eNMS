@@ -49,13 +49,23 @@ class Object(AbstractBase):
             setattr(pool, number, getattr(pool, number) - 1)
 
     @classmethod
-    def rbac_filter(Device, query):
-        User, Access = models["user"], models["access"]
-        print(current_user.id)
-        return (
-            query
-            .filter(Device.access.any(Access.users.any(User.name == current_user.name))
-        ))
+    def rbac_filter(cls, query):
+        return query.filter(
+            or_(
+                cls.access.any(
+                    models["access"].users.any(
+                        models["user"].name == current_user.name
+                    ),
+                    cls.pools.any(
+                        models["pool"].access.any(
+                            models["access"].users.any(
+                                models["user"].name == current_user.name
+                            )
+                        )
+                    ),
+                )
+            )
+        )
 
 
 @db.set_custom_properties

@@ -10,8 +10,6 @@ try:
 except ImportError as exc:
     warn(f"Couldn't import tacacs_plus module ({exc})")
 
-from eNMS.database import db
-
 
 class CustomController:
     def ldap_authentication(self, user, name, password):

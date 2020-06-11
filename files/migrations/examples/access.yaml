@@ -1,5 +1,5 @@
 - description: ''
-  devices: [Dallas]
+  devices: []
   get_requests: [/dashboard, /download_file, /form/access, /form/add_services, /form/administration,
     /form/ansible_playbook_service, /form/changelog, /form/configure_bgp_service,
     /form/netmiko_backup_service, /form/database_deletion, /form/database_migration,
@@ -30,7 +30,7 @@
   pages: [Access, Dashboard, Changelog, Sessions, Users, Groups, Servers, Devices,
     Configurations, Links, Pools, Network, Sites, Services, Workflow Builder, Results,
     Tasks, Events, Plugin 1, Submenu, Plugin 2]
-  pools: [Datacenter San Francisco]
+  pools: []
   post_requests: [/add_edge, /add_service_to_workflow, /copy_service_in_workflow,
     /calendar_init, /clear_results, /clear_configurations, /compare, /connection,
     /counters, /count_models, /create_label, /database_deletion, /delete_corrupted_edges,
@@ -50,4 +50,18 @@
   services: []
   type: access
   upper_menu: [Admin, Settings, Files]
+  users: [chicago]
+- description: ''
+  devices: [Dallas]
+  get_requests: []
+  groups: []
+  links: []
+  menu: []
+  name: Device Dallas - Pool San Francisco
+  pages: []
+  pools: [Datacenter San Francisco]
+  post_requests: []
+  services: []
+  type: access
+  upper_menu: []
   users: [chicago]

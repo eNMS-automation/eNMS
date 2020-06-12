@@ -80,7 +80,10 @@ class Service(AbstractBase):
     )
     original_id = db.Column(Integer, ForeignKey("service.id"))
     original = relationship(
-        "Service", remote_side=[id], foreign_keys="Service.original_id", post_update=True
+        "Service",
+        remote_side=[id],
+        foreign_keys="Service.original_id",
+        post_update=True,
     )
     update_pools = db.Column(Boolean, default=False)
     send_notification = db.Column(Boolean, default=False)
@@ -191,7 +194,13 @@ class Service(AbstractBase):
         return query.filter(
             or_(
                 cls.public == true(),
-                or_(cls.access.any(id=access.id) for access in current_user.access),
+                cls.original.has(
+                    models["service"].access.any(
+                        models["access"].users.any(
+                            models["user"].name == current_user.name
+                        )
+                    )
+                ),
             )
         )
 

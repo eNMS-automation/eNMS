@@ -50,6 +50,12 @@ class Object(AbstractBase):
 
     @classmethod
     def rbac_filter(cls, query):
+        return (
+            query.join(cls.pools)
+            .join(models["pool"].access)
+            .join(models["access"].users)
+            .filter(models["user"].name == current_user.name)
+        )
         return query.filter(
             or_(
                 cls.public == true(),

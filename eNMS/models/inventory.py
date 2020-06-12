@@ -50,25 +50,22 @@ class Object(AbstractBase):
 
     @classmethod
     def rbac_filter(cls, query):
-        return (
-            query.join(cls.pools)
-            .join(models["pool"].access)
-            .join(models["access"].users)
+        user_device = (
+            query.join(cls.access)
+            .join(models["user"], models["access"].users)
             .filter(models["user"].name == current_user.name)
         )
+        user_pool_device = (
+            query.join(cls.pools)
+            .join(models["access"], models["pool"].access)
+            .join(models["user"], models["access"].users)
+            .filter(models["user"].name == current_user.name)
+        )
+        new_query = user_device.union(user_pool_device)
+        return new_query
         return query.filter(
             or_(
                 cls.public == true(),
-                cls.access.any(
-                    models["access"].users.any(models["user"].name == current_user.name)
-                ),
-                cls.pools.any(
-                    models["pool"].access.any(
-                        models["access"].users.any(
-                            models["user"].name == current_user.name
-                        )
-                    )
-                ),
                 cls.access.any(
                     models["access"].groups.any(
                         models["group"].users.any(

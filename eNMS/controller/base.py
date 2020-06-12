@@ -417,7 +417,7 @@ class BaseController:
         constraints.extend(table.filtering_constraints(**kwargs))
         result = db.query(model, table).filter(and_(*constraints))
         if ordering:
-            result = result.order_by(ordering())
+            result = result.distinct().order_by(ordering())
         table_result = {
             "draw": int(kwargs["draw"]),
             "recordsTotal": db.count(model),

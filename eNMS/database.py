@@ -354,9 +354,9 @@ class Database:
                 f"with the following characteristics: {kwargs}"
             )
 
-    def query(self, model, *args):
+    def query(self, model, *args, count=False):
         query = self.session.query(*args)
-        if model == "user":
+        if model == "user" or count:
             return query
         elif not current_user or getattr(current_user, "is_admin", False):
             return query
@@ -368,7 +368,9 @@ class Database:
 
     def count(self, model, **kwargs):
         return (
-            self.query(model, func.count(models[model].id)).filter_by(**kwargs).scalar()
+            self.query(model, func.count(models[model].id), count=True)
+            .filter_by(**kwargs)
+            .scalar()
         )
 
     def get_query_count(self, query):

@@ -58,7 +58,18 @@ class Task(AbstractBase):
 
     @classmethod
     def rbac_filter(cls, query):
-        return query.filter(or_(cls.public == true()))
+        return query.filter(
+            or_(
+                cls.service.has(public=True),
+                cls.service.has(
+                    models["service"].access.any(
+                        models["access"].users.any(
+                            models["user"].name == current_user.name
+                        )
+                    )
+                ),
+            )
+        )
 
     @property
     def next_run_time(self):

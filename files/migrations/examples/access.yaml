@@ -51,17 +51,17 @@
   type: access
   upper_menu: [Admin, Settings, Files]
   users: [chicago]
-- description: ''
+- description: The associated - data backup - task should be available as a result
   devices: [Dallas]
   get_requests: []
   groups: [New York Users]
   links: []
   menu: []
-  name: Device Dallas - Pool San Francisco
+  name: 'Custom Access : Device Dallas - Pool San Francisco - Data Backup Workflow'
   pages: []
   pools: [Datacenter San Francisco]
   post_requests: []
-  services: []
+  services: ['Regression Workflow 9: Operational Data Backup']
   type: access
   upper_menu: []
   users: [chicago]

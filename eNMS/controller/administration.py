@@ -167,7 +167,7 @@ class AdministrationController(BaseController):
                 self.update(edge.pop("type"), **edge)
                 db.session.commit()
             for service in db.fetch_all("service"):
-                service.set_name()
+                service.update()
             if not kwargs.get("skip_pool_update"):
                 for pool in db.fetch_all("pool"):
                     pool.compute_pool()

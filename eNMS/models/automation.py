@@ -78,6 +78,10 @@ class Service(AbstractBase):
     access = relationship(
         "Access", secondary=db.access_service_table, back_populates="services"
     )
+    original_id = db.Column(Integer, ForeignKey("service.id"))
+    original = relationship(
+        "Service", remote_side=[id], foreign_keys="Service.original_id", post_update=True
+    )
     update_pools = db.Column(Boolean, default=False)
     send_notification = db.Column(Boolean, default=False)
     send_notification_method = db.Column(db.SmallString, default="mail")
@@ -128,14 +132,22 @@ class Service(AbstractBase):
     def __init__(self, **kwargs):
         kwargs.pop("status", None)
         super().__init__(**kwargs)
-        self.groups = getattr(current_user, "groups", [])
         if "name" not in kwargs:
             self.set_name()
+        self.original = self.original_service
+
+    @property
+    def original_service(self):
+        if self.shared or not self.workflows:
+            return self
+        else:
+            return self.workflows[0].original_service
 
     def update(self, **kwargs):
-        if kwargs["scoped_name"] != self.scoped_name:
+        if "scoped_name" in kwargs and kwargs.get("scoped_name") != self.scoped_name:
             self.set_name(kwargs["scoped_name"])
         super().update(**kwargs)
+        self.original = self.original_service
 
     @classmethod
     def filtering_constraints(cls, **kwargs):

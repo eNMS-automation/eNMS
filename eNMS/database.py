@@ -74,6 +74,8 @@ class Database:
             "id",
             "sources",
             "destinations",
+            "original",
+            "original_id",
             "status",
             "superworkflow_id",
             "tasks",

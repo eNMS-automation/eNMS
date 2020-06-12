@@ -61,7 +61,8 @@
   pages: []
   pools: [Datacenter San Francisco]
   post_requests: []
-  services: ['Regression Workflow 9: Operational Data Backup']
+  services: ['Regression Workflow 9: Operational Data Backup', 'Regression Workflow
+      F: Workflow of Workflows']
   type: access
   upper_menu: []
   users: [chicago]

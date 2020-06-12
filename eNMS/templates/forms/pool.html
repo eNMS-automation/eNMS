@@ -12,6 +12,12 @@
         {{ form.name(id="pool-name", class="form-control required add-id",
         placeholder="Name") }}
       </div>
+      <fieldset>
+        <div class="item">
+          {{ form.public(id="pool-public", class="add-id") }}
+          <label>Public</label>
+        </div>
+      </fieldset>
       <label>Description</label>
       <div class="form-group">
         {{ form.description(id="pool-description", class="form-control add-id",

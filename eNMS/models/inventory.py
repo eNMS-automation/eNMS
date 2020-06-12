@@ -321,7 +321,6 @@ class Pool(AbstractBase):
 
     def update(self, **kwargs):
         super().update(**kwargs)
-        self.groups = getattr(current_user, "groups", [])
         self.compute_pool()
 
     def property_match(self, obj, property):

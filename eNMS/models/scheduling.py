@@ -58,11 +58,7 @@ class Task(AbstractBase):
 
     @classmethod
     def rbac_filter(cls, query):
-        return query.filter(
-            or_(
-                cls.public == true(),
-            )
-        )
+        return query.filter(or_(cls.public == true()))
 
     @property
     def next_run_time(self):

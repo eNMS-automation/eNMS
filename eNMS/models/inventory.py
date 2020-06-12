@@ -366,7 +366,18 @@ class Pool(AbstractBase):
         return query.filter(
             or_(
                 cls.public == true(),
-                cls.access.any(models["user"].name == current_user.name),
+                cls.access.any(
+                    models["access"].users.any(
+                        models["user"].name == current_user.name
+                    ),
+                ),
+                cls.access.any(
+                    models["access"].groups.any(
+                        models["group"].users.any(
+                            models["user"].name == current_user.name
+                        )
+                    )
+                ),
             )
         )
 

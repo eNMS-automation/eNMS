@@ -413,6 +413,26 @@ class Run(AbstractBase):
                         )
                     )
                 ),
+                cls.service.has(
+                    models["service"].original.has(
+                        models["service"].access.any(
+                            models["access"].users.any(
+                                models["user"].name == current_user.name
+                            )
+                        )
+                    )
+                ),
+                cls.service.has(
+                    models["service"].original.has(
+                        models["service"].access.any(
+                            models["access"].groups.any(
+                                models["group"].users.any(
+                                    models["user"].name == current_user.name
+                                )
+                            )
+                        )
+                    )
+                ),
             )
         )
 

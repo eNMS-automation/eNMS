@@ -64,7 +64,7 @@ class Object(AbstractBase):
                 ),
                 cls.access.any(
                     models["access"].groups.any(
-                        models["access"].users.any(
+                        models["group"].users.any(
                             models["user"].name == current_user.name
                         )
                     )

@@ -69,6 +69,15 @@ class Object(AbstractBase):
                         )
                     )
                 ),
+                cls.pools.any(
+                    models["pool"].access.any(
+                        models["access"].groups.any(
+                            models["group"].users.any(
+                                models["user"].name == current_user.name
+                            )
+                        )
+                    )
+                ),
             )
         )
 

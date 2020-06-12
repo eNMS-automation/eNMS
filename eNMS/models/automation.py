@@ -397,9 +397,12 @@ class Run(AbstractBase):
         return query.filter(
             or_(
                 cls.service.has(public=True),
-                or_(
-                    models["group"].services.any(id=cls.service_id)
-                    for group in current_user.groups
+                cls.service.has(
+                    models["service"].access.any(
+                        models["access"].users.any(
+                            models["user"].name == current_user.name
+                        )
+                    )
                 ),
             )
         )

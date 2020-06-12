@@ -54,7 +54,7 @@
 - description: ''
   devices: [Dallas]
   get_requests: []
-  groups: []
+  groups: [New York Users]
   links: []
   menu: []
   name: Device Dallas - Pool San Francisco

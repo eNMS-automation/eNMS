@@ -53,17 +53,16 @@ class Object(AbstractBase):
         return query.filter(
             or_(
                 cls.access.any(
-                    models["access"].users.any(
-                        models["user"].name == current_user.name
-                    ),
-                    cls.pools.any(
-                        models["pool"].access.any(
-                            models["access"].users.any(
-                                models["user"].name == current_user.name
-                            )
+                    models["access"].users.any(models["user"].name == current_user.name)
+                ),
+                cls.pools.any(
+                    models["pool"].access.any(
+                        models["access"].users.any(
+                            models["user"].name == current_user.name
                         )
-                    ),
-                )
+                    )
+                ),
+                cls.access.any(models["access"].groups.any(models["access"].users.any(models["user"].name == current_user.name)))
             )
         )
 

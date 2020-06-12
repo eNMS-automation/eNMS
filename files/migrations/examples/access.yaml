@@ -23,7 +23,7 @@
     /table/event, /table/group, /table/pool, /table/link, /table/run, /table/server,
     /table/service, /table/session, /table/task, /table/user, /view/network, /view/site,
     /view_service_results, /workflow_builder, /plugin1/, /template/form]
-  groups: []
+  groups: [New York Users]
   links: []
   menu: [Home, Administration, Inventory, Visualization, Automation, Scheduling, Plugins]
   name: Full Access

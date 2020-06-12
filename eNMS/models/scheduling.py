@@ -60,11 +60,7 @@ class Task(AbstractBase):
     def rbac_filter(cls, query):
         return query.filter(
             or_(
-                cls.service.has(public=True),
-                or_(
-                    models["access"].services.any(id=cls.service_id)
-                    for access in current_user.access
-                ),
+                cls.public == true(),
             )
         )
 

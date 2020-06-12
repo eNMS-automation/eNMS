@@ -868,3 +868,33 @@
   type: device
   username: admin
   vendor: linux
+- attributes: {}
+  description: ''
+  down: false
+  icon: antenna
+  ip_address: 127.0.0.1
+  last_duration: ''
+  last_failure: Never
+  last_modified: '2020-06-12 02:58:20.658796'
+  last_runtime: ''
+  last_status: Never
+  last_update: Never
+  latitude: '0.0'
+  location: Paris
+  longitude: '0.0'
+  model: ''
+  name: Public
+  napalm_driver: ios
+  netmiko_driver: cisco_ios
+  operating_system: ''
+  os_version: ''
+  port: 22
+  property1: 10.145.14.1
+  property2: CP
+  public: true
+  reachable: true
+  subtype: ''
+  tasks: []
+  type: device
+  username: ''
+  vendor: Cisco

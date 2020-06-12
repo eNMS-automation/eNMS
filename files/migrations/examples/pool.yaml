@@ -38,7 +38,7 @@
   devices: [Jackson, PaloAlto, Austin, Washington, Chicago, SanJose, SanDiego, Dallas,
     Philadelphia, LosAngeles, Detroit, Richmond, Atlanta, Boston, Houston, Baltimore,
     Cleveland, Columbus, Cincinnati, Cambridge, Minneapolis, NewYork, Sacramento,
-    SanFrancisco, Orange, Oakland, Denver, Aserver, Server 2]
+    SanFrancisco, Orange, Oakland, Denver, Aserver, Server 2, Public]
   last_modified: '2020-04-21 15:23:58.190204'
   latitude: '0.0'
   link_color: ''
@@ -109,7 +109,7 @@
   devices: [Jackson, PaloAlto, Austin, Washington, Chicago, SanJose, SanDiego, Dallas,
     Philadelphia, LosAngeles, Detroit, Richmond, Atlanta, Boston, Houston, Baltimore,
     Cleveland, Columbus, Cincinnati, Cambridge, Minneapolis, NewYork, Sacramento,
-    SanFrancisco, Orange, Oakland, Denver, Aserver, Server 2]
+    SanFrancisco, Orange, Oakland, Denver, Aserver, Server 2, Public]
   last_modified: '2020-04-21 15:24:39.430415'
   latitude: '0.0'
   link_color: ''
@@ -379,7 +379,7 @@
   device_vendor: ''
   device_vendor_match: inclusion
   devices: [Austin, Washington, Chicago, SanDiego, Philadelphia, Detroit, Richmond,
-    Baltimore, Cincinnati, Cambridge, Minneapolis, SanFrancisco]
+    Baltimore, Cincinnati, Cambridge, Minneapolis, SanFrancisco, Public]
   last_modified: ''
   latitude: '41.87'
   link_color: ''

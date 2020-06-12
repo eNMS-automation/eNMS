@@ -52,6 +52,7 @@ class Object(AbstractBase):
     def rbac_filter(cls, query):
         return query.filter(
             or_(
+                cls.public == true(),
                 cls.access.any(
                     models["access"].users.any(models["user"].name == current_user.name)
                 ),
@@ -366,7 +367,7 @@ class Pool(AbstractBase):
         return query.filter(
             or_(
                 cls.public == true(),
-                or_(cls.groups.any(id=group.id) for group in current_user.groups),
+                cls.access.any(models["user"].name == current_user.name),
             )
         )
 

@@ -317,7 +317,7 @@ class BaseController:
     def count_models(self):
         return {
             "counters": {
-                instance_type: db.count(instance_type)
+                instance_type: db.query(instance_type).count()
                 for instance_type in properties["dashboard"]
             },
             "properties": {
@@ -388,7 +388,7 @@ class BaseController:
 
     def multiselect_filtering(self, model, **params):
         table = models[model]
-        results = db.query(model, table).filter(table.name.contains(params.get("term")))
+        results = db.query(model).filter(table.name.contains(params.get("term")))
         return {
             "items": [
                 {"text": result.ui_name, "id": str(result.id)}
@@ -415,24 +415,24 @@ class BaseController:
         except regex_error:
             return {"error": "Invalid regular expression as search parameter."}
         constraints.extend(table.filtering_constraints(**kwargs))
-        result = db.query(model, table)
-        total_records, result = result.count(), result.filter(and_(*constraints))
+        query = db.query(model)
+        total_records, query = query.count(), query.filter(and_(*constraints))
         if ordering:
-            result = result.order_by(ordering())
+            query = query.order_by(ordering())
         table_result = {
             "draw": int(kwargs["draw"]),
             "recordsTotal": total_records,
-            "recordsFiltered": db.get_query_count(result),
+            "recordsFiltered": db.get_query_count(query),
             "data": [
                 obj.table_properties(**kwargs)
-                for obj in result.limit(int(kwargs["length"]))
+                for obj in query.limit(int(kwargs["length"]))
                 .offset(int(kwargs["start"]))
                 .all()
             ],
         }
         if kwargs.get("export"):
             table_result["full_result"] = [
-                obj.table_properties(**kwargs) for obj in result.all()
+                obj.table_properties(**kwargs) for obj in query.all()
             ]
         return table_result
 

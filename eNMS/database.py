@@ -338,7 +338,7 @@ class Database:
             )
 
     def fetch(self, model, allow_none=False, all_matches=False, **kwargs):
-        query = self.query(model, models[model]).filter_by(**kwargs)
+        query = self.query(model).filter_by(**kwargs)
         for index in range(self.retry_fetch_number):
             try:
                 result = query.all() if all_matches else query.first()
@@ -354,24 +354,14 @@ class Database:
                 f"with the following characteristics: {kwargs}"
             )
 
-    def query(self, model, *args, count=False):
-        query = self.session.query(*args)
-        if model == "user" or count:
-            return query
-        elif not current_user or getattr(current_user, "is_admin", False):
-            return query
-        else:
-            return models[model].rbac_filter(query)
+    def query(self, model):
+        query = self.session.query(models[model])
+        if model != "user" and not getattr(current_user, "is_admin", True):
+            query = models[model].rbac_filter(query)
+        return query
 
     def fetch_all(self, model, **kwargs):
         return self.fetch(model, allow_none=True, all_matches=True, **kwargs)
-
-    def count(self, model, **kwargs):
-        return (
-            self.query(model, func.count(models[model].id), count=True)
-            .filter_by(**kwargs)
-            .scalar()
-        )
 
     def get_query_count(self, query):
         count_query = query.statement.with_only_columns([func.count()]).order_by(None)

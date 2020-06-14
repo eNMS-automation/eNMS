@@ -415,12 +415,13 @@ class BaseController:
         except regex_error:
             return {"error": "Invalid regular expression as search parameter."}
         constraints.extend(table.filtering_constraints(**kwargs))
-        result = db.query(model, table).filter(and_(*constraints))
+        result = db.query(model, table)
+        total_records, result = result.count(), result.filter(and_(*constraints))
         if ordering:
-            result = result.distinct().order_by(ordering())
+            result = result.order_by(ordering())
         table_result = {
             "draw": int(kwargs["draw"]),
-            "recordsTotal": db.count(model),
+            "recordsTotal": total_records,
             "recordsFiltered": db.get_query_count(result),
             "data": [
                 obj.table_properties(**kwargs)

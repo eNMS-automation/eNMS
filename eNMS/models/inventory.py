@@ -2,7 +2,7 @@ from flask_login import current_user
 from re import search, sub
 from sqlalchemy import Boolean, ForeignKey, Integer
 from sqlalchemy.ext.associationproxy import association_proxy
-from sqlalchemy.orm import backref, deferred, relationship
+from sqlalchemy.orm import backref, relationship
 from sqlalchemy.schema import UniqueConstraint
 from sqlalchemy.sql.expression import true
 
@@ -103,7 +103,7 @@ class Device(Object):
     enable_password = db.Column(db.SmallString)
     netmiko_driver = db.Column(db.SmallString, default="cisco_ios")
     napalm_driver = db.Column(db.SmallString, default="ios")
-    configuration = deferred(db.Column(db.LargeString, info={"log_change": False}))
+    configuration = db.Column(db.LargeString, info={"log_change": False})
     last_failure = db.Column(db.SmallString, default="Never")
     last_status = db.Column(db.SmallString, default="Never")
     last_update = db.Column(db.SmallString, default="Never")

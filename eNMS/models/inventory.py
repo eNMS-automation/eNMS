@@ -4,6 +4,7 @@ from sqlalchemy import Boolean, ForeignKey, Integer, or_
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.orm import backref, deferred, relationship
 from sqlalchemy.schema import UniqueConstraint
+from sqlalchemy.sql import union
 from sqlalchemy.sql.expression import true
 
 from eNMS import app
@@ -50,39 +51,36 @@ class Object(AbstractBase):
 
     @classmethod
     def rbac_filter(cls, query):
-        user_device = (
+        public_device = query.filter(cls.public == true())
+        device_access = (
             query.join(cls.access)
             .join(models["user"], models["access"].users)
             .filter(models["user"].name == current_user.name)
         )
-        user_pool_device = (
+        device_pool_access = (
             query.join(cls.pools)
             .join(models["access"], models["pool"].access)
             .join(models["user"], models["access"].users)
             .filter(models["user"].name == current_user.name)
         )
-        new_query = user_device.union(user_pool_device)
-        return new_query
-        return query.filter(
-            or_(
-                cls.public == true(),
-                cls.access.any(
-                    models["access"].groups.any(
-                        models["group"].users.any(
-                            models["user"].name == current_user.name
-                        )
-                    )
-                ),
-                cls.pools.any(
-                    models["pool"].access.any(
-                        models["access"].groups.any(
-                            models["group"].users.any(
-                                models["user"].name == current_user.name
-                            )
-                        )
-                    )
-                ),
-            )
+        device_user_group_access = (
+            query.join(cls.access)
+            .join(models["group"], models["access"].groups)
+            .join(models["user"], models["group"].users)
+            .filter(models["user"].name == current_user.name)
+        )
+        device_pool_group_access = (
+            query.join(cls.pools)
+            .join(models["access"], models["pool"].access)
+            .join(models["group"], models["access"].groups)
+            .join(models["user"], models["group"].users)
+            .filter(models["user"].name == current_user.name)
+        )
+        return device_access.union(
+            public_device,
+            device_pool_access,
+            device_user_group_access,
+            device_pool_group_access,
         )
 
 

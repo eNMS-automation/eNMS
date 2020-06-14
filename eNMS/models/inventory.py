@@ -50,36 +50,36 @@ class Object(AbstractBase):
 
     @classmethod
     def rbac_filter(cls, query):
-        public_devices = query.filter(cls.public == true())
-        user_access_devices = (
+        public_objects = query.filter(cls.public == true())
+        user_access_objects = (
             query.join(cls.access)
             .join(models["user"], models["access"].users)
             .filter(models["user"].name == current_user.name)
         )
-        user_access_pool_devices = (
+        user_access_pool_objects = (
             query.join(cls.pools)
             .join(models["access"], models["pool"].access)
             .join(models["user"], models["access"].users)
             .filter(models["user"].name == current_user.name)
         )
-        user_group_access_devices = (
+        user_group_access_objects = (
             query.join(cls.access)
             .join(models["group"], models["access"].groups)
             .join(models["user"], models["group"].users)
             .filter(models["user"].name == current_user.name)
         )
-        user_group_access_pool_devices = (
+        user_group_access_pool_objects = (
             query.join(cls.pools)
             .join(models["access"], models["pool"].access)
             .join(models["group"], models["access"].groups)
             .join(models["user"], models["group"].users)
             .filter(models["user"].name == current_user.name)
         )
-        return public_devices.union(
-            user_access_devices,
-            user_access_pool_devices,
-            user_group_access_devices,
-            user_group_access_pool_devices,
+        return public_objects.union(
+            user_access_objects,
+            user_access_pool_objects,
+            user_group_access_objects,
+            user_group_access_pool_objects,
         )
 
 

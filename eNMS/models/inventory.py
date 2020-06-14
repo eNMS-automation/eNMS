@@ -51,36 +51,36 @@ class Object(AbstractBase):
 
     @classmethod
     def rbac_filter(cls, query):
-        public_device = query.filter(cls.public == true())
-        device_access = (
+        public_devices = query.filter(cls.public == true())
+        user_access_devices = (
             query.join(cls.access)
             .join(models["user"], models["access"].users)
             .filter(models["user"].name == current_user.name)
         )
-        device_pool_access = (
+        user_access_pool_devices = (
             query.join(cls.pools)
             .join(models["access"], models["pool"].access)
             .join(models["user"], models["access"].users)
             .filter(models["user"].name == current_user.name)
         )
-        device_user_group_access = (
+        user_group_access_devices = (
             query.join(cls.access)
             .join(models["group"], models["access"].groups)
             .join(models["user"], models["group"].users)
             .filter(models["user"].name == current_user.name)
         )
-        device_pool_group_access = (
+        user_group_access_pool_devices = (
             query.join(cls.pools)
             .join(models["access"], models["pool"].access)
             .join(models["group"], models["access"].groups)
             .join(models["user"], models["group"].users)
             .filter(models["user"].name == current_user.name)
         )
-        return device_access.union(
-            public_device,
-            device_pool_access,
-            device_user_group_access,
-            device_pool_group_access,
+        return public_devices.union(
+            user_access_devices,
+            user_access_pool_devices,
+            user_group_access_devices,
+            user_group_access_pool_devices,
         )
 
 
@@ -364,23 +364,19 @@ class Pool(AbstractBase):
 
     @classmethod
     def rbac_filter(cls, query):
-        return query.filter(
-            or_(
-                cls.public == true(),
-                cls.access.any(
-                    models["access"].users.any(
-                        models["user"].name == current_user.name
-                    ),
-                ),
-                cls.access.any(
-                    models["access"].groups.any(
-                        models["group"].users.any(
-                            models["user"].name == current_user.name
-                        )
-                    )
-                ),
-            )
+        public_pools = query.filter(cls.public == true())
+        user_access_pools = (
+            query.join(cls.access)
+            .join(models["user"], models["access"].users)
+            .filter(models["user"].name == current_user.name)
         )
+        user_group_access_pools = (
+            query.join(cls.access)
+            .join(models["group"], models["access"].groups)
+            .join(models["user"], models["group"].users)
+            .filter(models["user"].name == current_user.name)
+        )
+        return public_pools.union(user_access_pools, user_group_access_pools)
 
 
 class Session(AbstractBase):

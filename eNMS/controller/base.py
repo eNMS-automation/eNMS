@@ -289,8 +289,8 @@ class BaseController:
             kwargs["last_modified"] = self.get_time()
             kwargs["creator"] = kwargs["user"] = getattr(current_user, "name", "")
             instance = db.factory(type, must_be_new=must_be_new, **kwargs)
-            if kwargs.get("original"):
-                db.fetch(type, id=kwargs["original"]).duplicate(clone=instance)
+            if kwargs.get("copy"):
+                db.fetch(type, id=kwargs["copy"]).duplicate(clone=instance)
             db.session.flush()
             return instance.serialized
         except Exception as exc:

@@ -491,7 +491,7 @@ function showServicePanel(type, id, mode) {
     }
     $(`#${type}-shared-${id}`).prop("disabled", true);
     if (mode == "duplicate" && type == "workflow") {
-      $(`#original-${id}`).val(id);
+      $(`#copy-${id}`).val(id);
     }
   }
   $(id ? `#${type}-workflows-${id}` : `#${type}-workflows`).prop("disabled", true);

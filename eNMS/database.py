@@ -363,10 +363,6 @@ class Database:
     def fetch_all(self, model, **kwargs):
         return self.fetch(model, allow_none=True, all_matches=True, **kwargs)
 
-    def get_query_count(self, query):
-        count_query = query.statement.with_only_columns([func.count()]).order_by(None)
-        return query.session.execute(count_query).scalar()
-
     def objectify(self, model, object_list):
         return [self.fetch(model, id=object_id) for object_id in object_list]
 

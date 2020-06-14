@@ -422,7 +422,7 @@ class BaseController:
         table_result = {
             "draw": int(kwargs["draw"]),
             "recordsTotal": total_records,
-            "recordsFiltered": db.get_query_count(query),
+            "recordsFiltered": query.count(),
             "data": [
                 obj.table_properties(**kwargs)
                 for obj in query.limit(int(kwargs["length"]))

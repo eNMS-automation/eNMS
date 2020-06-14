@@ -1,10 +1,9 @@
 from flask_login import current_user
 from re import search, sub
-from sqlalchemy import Boolean, ForeignKey, Integer, or_
+from sqlalchemy import Boolean, ForeignKey, Integer
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.orm import backref, deferred, relationship
 from sqlalchemy.schema import UniqueConstraint
-from sqlalchemy.sql import union
 from sqlalchemy.sql.expression import true
 
 from eNMS import app

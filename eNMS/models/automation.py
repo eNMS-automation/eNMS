@@ -18,7 +18,7 @@ from requests import post
 from scp import SCPClient
 from sqlalchemy import Boolean, ForeignKey, Index, Integer, or_
 from sqlalchemy.ext.associationproxy import association_proxy
-from sqlalchemy.orm import relationship
+from sqlalchemy.orm import aliased, relationship
 from sqlalchemy.sql.expression import true
 from threading import Thread
 from time import sleep
@@ -191,27 +191,22 @@ class Service(AbstractBase):
 
     @classmethod
     def rbac_filter(cls, query):
-        return query.filter(
-            or_(
-                cls.public == true(),
-                cls.original.has(
-                    models["service"].access.any(
-                        models["access"].users.any(
-                            models["user"].name == current_user.name
-                        )
-                    )
-                ),
-                cls.original.has(
-                    models["service"].access.any(
-                        models["access"].groups.any(
-                            models["group"].users.any(
-                                models["user"].name == current_user.name
-                            )
-                        )
-                    )
-                ),
-            )
+        service_alias = aliased(cls)
+        public_services = query.filter(cls.public == true())
+        user_access_services = (
+            query.join(cls.original.of_type(service_alias))
+            .join(models["access"], service_alias.access)
+            .join(models["user"], models["access"].users)
+            .filter(models["user"].name == current_user.name)
         )
+        user_group_access_services = (
+            query.join(cls.original.of_type(service_alias))
+            .join(models["access"], service_alias.access)
+            .join(models["group"], models["access"].groups)
+            .join(models["user"], models["group"].users)
+            .filter(models["user"].name == current_user.name)
+        )
+        return public_services.union(user_access_services, user_group_access_services)
 
     def set_name(self, name=None):
         if self.shared:

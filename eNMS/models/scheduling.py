@@ -6,6 +6,7 @@ from sqlalchemy import Boolean, case, ForeignKey, Integer, or_
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy.orm import relationship
+from sqlalchemy.sql.expression import true
 
 from eNMS import app
 from eNMS.database import db
@@ -58,27 +59,23 @@ class Task(AbstractBase):
 
     @classmethod
     def rbac_filter(cls, query):
-        return query.filter(
-            or_(
-                cls.service.has(public=True),
-                cls.service.has(
-                    models["service"].access.any(
-                        models["access"].users.any(
-                            models["user"].name == current_user.name
-                        )
-                    )
-                ),
-                cls.service.has(
-                    models["service"].access.any(
-                        models["access"].groups.any(
-                            models["group"].users.any(
-                                models["user"].name == current_user.name
-                            )
-                        )
-                    )
-                ),
-            )
+        public_tasks = query.join(cls.service).filter(
+            models["service"].public == true()
         )
+        user_access_tasks = (
+            query.join(cls.service)
+            .join(models["access"], models["service"].access)
+            .join(models["user"], models["access"].users)
+            .filter(models["user"].name == current_user.name)
+        )
+        user_group_access_tasks = (
+            query.join(cls.service)
+            .join(models["access"], models["service"].access)
+            .join(models["group"], models["access"].groups)
+            .join(models["user"], models["group"].users)
+            .filter(models["user"].name == current_user.name)
+        )
+        return public_tasks.union(user_access_tasks, user_group_access_tasks)
 
     @property
     def next_run_time(self):

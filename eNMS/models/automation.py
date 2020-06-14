@@ -394,47 +394,23 @@ class Run(AbstractBase):
 
     @classmethod
     def rbac_filter(cls, query):
-        return query.filter(
-            or_(
-                cls.service.has(public=True),
-                cls.service.has(
-                    models["service"].access.any(
-                        models["access"].users.any(
-                            models["user"].name == current_user.name
-                        )
-                    )
-                ),
-                cls.service.has(
-                    models["service"].access.any(
-                        models["access"].groups.any(
-                            models["group"].users.any(
-                                models["user"].name == current_user.name
-                            )
-                        )
-                    )
-                ),
-                cls.service.has(
-                    models["service"].original.has(
-                        models["service"].access.any(
-                            models["access"].users.any(
-                                models["user"].name == current_user.name
-                            )
-                        )
-                    )
-                ),
-                cls.service.has(
-                    models["service"].original.has(
-                        models["service"].access.any(
-                            models["access"].groups.any(
-                                models["group"].users.any(
-                                    models["user"].name == current_user.name
-                                )
-                            )
-                        )
-                    )
-                ),
-            )
+        public_services = query.join(cls.service).filter(
+            models["service"].public == true()
         )
+        user_access_services = (
+            query.join(cls.service)
+            .join(models["access"], models["service"].access)
+            .join(models["user"], models["access"].users)
+            .filter(models["user"].name == current_user.name)
+        )
+        user_group_access_services = (
+            query.join(cls.service)
+            .join(models["access"], models["service"].access)
+            .join(models["group"], models["access"].groups)
+            .join(models["user"], models["group"].users)
+            .filter(models["user"].name == current_user.name)
+        )
+        return public_services.union(user_access_services, user_group_access_services)
 
     @property
     def name(self):

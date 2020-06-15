@@ -135,8 +135,8 @@ class BaseController:
             },
         )
 
-    def create_admin_user(self) -> None:
-        admin = db.factory("user", name="admin")
+    def create_admin_user(self):
+        admin = db.factory("user", name="admin", is_admin=True)
         if not admin.password:
             admin.update(password="admin")
 

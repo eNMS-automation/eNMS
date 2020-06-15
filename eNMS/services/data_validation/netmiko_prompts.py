@@ -61,15 +61,10 @@ class NetmikoPromptsService(ConnectionService):
                     logger="security",
                 )
                 confirmation = run.sub(expect_string, locals())
-                result = netmiko_connection.send_command_timing(
-                    command, delay_factor=run.delay_factor
+                result = netmiko_connection.send_command(
+                    command, expect_string=confirmation, delay_factor=run.delay_factor
                 )
                 results[command] = {"result": result, "match": confirmation}
-                if confirmation and confirmation not in result:
-                    results.update(
-                        {"success": False, "result": result, "match": confirmation}
-                    )
-                    return results
             run.exit_remote_device(netmiko_connection, prompt, device)
         except Exception:
             return {

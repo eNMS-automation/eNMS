@@ -429,7 +429,7 @@ class AutomationController(BaseController):
             "user": current_user.name,
         }
 
-    def save_positions(self, workflow_id):
+    def save_positions(self, workflow_id, **_):
         now, old_position = self.get_time(), None
         workflow = db.fetch("workflow", allow_none=True, id=workflow_id)
         for id, position in request.json.items():

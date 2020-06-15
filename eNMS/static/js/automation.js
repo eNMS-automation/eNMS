@@ -222,7 +222,7 @@ export const showRuntimePanel = function (type, service, runtime, table) {
           <div id="result-${panelId}" style="height: 500px"></div>
         </div>`;
       } else {
-        if (!table) table = "result"
+        if (!table) table = "result";
         content = `
         <div class="modal-body">
           <div id="tooltip-overlay" class="overlay"></div>

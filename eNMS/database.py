@@ -10,7 +10,6 @@ from sqlalchemy import (
     event,
     ForeignKey,
     Float,
-    func,
     inspect,
     Integer,
     PickleType,

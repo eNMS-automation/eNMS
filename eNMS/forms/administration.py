@@ -13,6 +13,7 @@ from eNMS.forms.fields import (
     StringField,
     SelectField,
     SelectMultipleField,
+    SelectMultipleStringField,
 )
 from eNMS.setup import themes
 
@@ -116,7 +117,7 @@ def init_rbac_form(rbac):
         for model, access_rights in cls.models.items():
             setattr(cls, model, MultipleInstanceField())
             form_properties["access"][model] = {"type": "object-list"}
-            access_field = SelectMultipleField(choices=choices(access_rights))
+            access_field = SelectMultipleStringField(choices=choices(access_rights))
             form_properties["access"][f"{model}_access"] = {"type": "multiselect"}
             setattr(cls, f"{model}_access", access_field)
         return cls

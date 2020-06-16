@@ -102,8 +102,11 @@ def form_postprocessing(form, form_data):
     if request.files:
         data["file"] = request.files["file"]
     for property, field in form_properties[form_data.get("form_type")].items():
-        if field["type"] in ("object-list", "multiselect"):
-            data[property] = form_data.getlist(property)
+        if field["type"] in ("object-list", "multiselect", "multiselect-string"):
+            value = form_data.getlist(property)
+            if field["type"] == "multiselect-string":
+                value = str(value)
+            data[property] = value
         elif field["type"] == "object":
             data[property] = form_data.get(property)
         elif field["type"] == "field-list":

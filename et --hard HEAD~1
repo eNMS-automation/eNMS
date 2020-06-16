@@ -1,0 +1,43 @@
+[33mcommit 3a423849cd4248659842783390bb335d3bc8703d[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m
+Author: Antoine Fourmy <antoine.fourmy@gmail.com>
+Date:   Tue Jun 16 10:59:01 2020 -0400
+
+    rbac per relation access p4
+
+[1mdiff --git a/eNMS/models/administration.py b/eNMS/models/administration.py[m
+[1mindex 1fa1f2d1e..e4bae000e 100644[m
+[1m--- a/eNMS/models/administration.py[m
+[1m+++ b/eNMS/models/administration.py[m
+[36m@@ -117,10 +117,10 @@[m [mclass Access(AbstractBase):[m
+     links = relationship([m
+         "Link", secondary=db.access_link_table, back_populates="access"[m
+     )[m
+[31m-    services_access = db.Column(db.List)[m
+[31m-    devices_access = db.Column(db.List)[m
+[31m-    links_access = db.Column(db.List)[m
+[31m-    pools_access = db.Column(db.List)[m
+[32m+[m[32m    services_access = db.Column(db.SmallString)[m
+[32m+[m[32m    devices_access = db.Column(db.SmallString)[m
+[32m+[m[32m    links_access = db.Column(db.SmallString)[m
+[32m+[m[32m    pools_access = db.Column(db.SmallString)[m
+ [m
+     def update(self, **kwargs):[m
+         super().update(**kwargs)[m
+[1mdiff --git a/setup/rbac.json b/setup/rbac.json[m
+[1mindex e791c4196..78fb264cc 100644[m
+[1m--- a/setup/rbac.json[m
+[1m+++ b/setup/rbac.json[m
+[36m@@ -54,10 +54,10 @@[m
+     }[m
+   },[m
+   "models": {[m
+[31m-    "services": ["Read", "Edit", "Run", "Schedule"],[m
+[32m+[m[32m    "services": ["Read", "Read & Edit", "Run", "Schedule"],[m
+     "devices": ["Read", "Edit", "Connect", "Use as target"],[m
+[31m-    "links": ["Read", "Edit"],[m
+[31m-    "pools": ["Read", "Edit"][m
+[32m+[m[32m    "links": ["Read", "Read & Edit"],[m
+[32m+[m[32m    "pools": ["Read", "Read & Edit"][m
+   },[m
+   "pages": [[m
+     "Access",[m

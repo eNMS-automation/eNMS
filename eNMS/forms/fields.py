@@ -75,6 +75,10 @@ class SelectMultipleField(WtformsSelectMultipleField):
     type = "multiselect"
 
 
+class SelectMultipleStringField(SelectMultipleField):
+    type = "multiselect-string"
+
+
 class FieldList(WtformsFieldList):
     type = "field-list"
 

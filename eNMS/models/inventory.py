@@ -51,25 +51,25 @@ class Object(AbstractBase):
     @classmethod
     def rbac_filter(cls, query, mode):
         public_objects = query.filter(cls.public == true())
-        access_value = getattr(models["access"], f"{cls.class_type}s_access")
+        condition = getattr(models["access"], f"{cls.class_type}s_access") == mode
         user_access_objects = (
             query.join(cls.access)
             .join(models["user"], models["access"].users)
-            .filter(access_value.contains(mode))
+            .filter(condition)
             .filter(models["user"].name == current_user.name)
         )
         user_access_pool_objects = (
             query.join(cls.pools)
             .join(models["access"], models["pool"].access)
             .join(models["user"], models["access"].users)
-            .filter(access_value.contains(mode))
+            .filter(condition)
             .filter(models["user"].name == current_user.name)
         )
         user_group_access_objects = (
             query.join(cls.access)
             .join(models["group"], models["access"].groups)
             .join(models["user"], models["group"].users)
-            .filter(access_value.contains(mode))
+            .filter(condition)
             .filter(models["user"].name == current_user.name)
         )
         user_group_access_pool_objects = (
@@ -77,7 +77,7 @@ class Object(AbstractBase):
             .join(models["access"], models["pool"].access)
             .join(models["group"], models["access"].groups)
             .join(models["user"], models["group"].users)
-            .filter(access_value.contains(mode))
+            .filter(condition)
             .filter(models["user"].name == current_user.name)
         )
         return public_objects.union(

@@ -58,7 +58,7 @@ class Task(AbstractBase):
         return case([(cls.is_active, "Active")], else_="Inactive")
 
     @classmethod
-    def rbac_filter(cls, query):
+    def rbac_filter(cls, query, mode):
         public_tasks = query.join(cls.service).filter(
             models["service"].public == true()
         )

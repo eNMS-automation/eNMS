@@ -107,7 +107,7 @@ class AbstractBase(db.base):
         return result
 
     @classmethod
-    def rbac_filter(cls, query):
+    def rbac_filter(cls, query, mode):
         return query
 
     def table_properties(self, **kwargs):

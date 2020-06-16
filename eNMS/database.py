@@ -336,7 +336,7 @@ class Database:
                 ),
             )
 
-    def fetch(self, model, allow_none=False, all_matches=False, mode="read", **kwargs):
+    def fetch(self, model, allow_none=False, all_matches=False, mode="Read", **kwargs):
         query = self.query(model, mode).filter_by(**kwargs)
         for index in range(self.retry_fetch_number):
             try:
@@ -353,7 +353,7 @@ class Database:
                 f"with the following characteristics: {kwargs}"
             )
 
-    def query(self, model, mode="read"):
+    def query(self, model, mode="Read"):
         query = self.session.query(models[model])
         if model != "user" and not getattr(current_user, "is_admin", True):
             query = models[model].rbac_filter(query, mode)

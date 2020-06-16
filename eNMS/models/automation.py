@@ -190,7 +190,7 @@ class Service(AbstractBase):
         return app.strip_all(self.name)
 
     @classmethod
-    def rbac_filter(cls, query):
+    def rbac_filter(cls, query, mode):
         service_alias = aliased(cls)
         public_services = query.filter(cls.public == true())
         user_access_services = (
@@ -388,7 +388,7 @@ class Run(AbstractBase):
         return [cls.parent_runtime == cls.runtime]
 
     @classmethod
-    def rbac_filter(cls, query):
+    def rbac_filter(cls, query, mode):
         public_services = query.join(cls.service).filter(
             models["service"].public == true()
         )

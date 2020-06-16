@@ -1,5 +1,6 @@
 - description: ''
   devices: []
+  devices_access: []
   get_requests: [/dashboard, /download_file, /form/access, /form/add_services, /form/administration,
     /form/ansible_playbook_service, /form/changelog, /form/configure_bgp_service,
     /form/netmiko_backup_service, /form/database_deletion, /form/database_migration,
@@ -25,12 +26,14 @@
     /view_service_results, /workflow_builder, /plugin1/, /template/form]
   groups: [New York Users]
   links: []
+  links_access: []
   menu: [Home, Administration, Inventory, Visualization, Automation, Scheduling, Plugins]
   name: Full Access
   pages: [Access, Dashboard, Changelog, Sessions, Users, Groups, Servers, Devices,
     Configurations, Links, Pools, Network, Sites, Services, Workflow Builder, Results,
     Tasks, Events, Plugin 1, Submenu, Plugin 2]
   pools: []
+  pools_access: []
   post_requests: [/add_edge, /add_service_to_workflow, /copy_service_in_workflow,
     /calendar_init, /clear_results, /clear_configurations, /compare, /connection,
     /counters, /count_models, /create_label, /database_deletion, /delete_corrupted_edges,
@@ -48,21 +51,26 @@
     /filtering, /task_action, /topology_import, /update, /update_pool, /update_all_pools,
     /upload_files, /view_filtering, /form/panel, /process_form_data]
   services: []
+  services_access: []
   type: access
   upper_menu: [Admin, Settings, Files]
   users: [chicago]
 - description: The associated - data backup - task should be available as a result
   devices: [Dallas]
+  devices_access: [Read]
   get_requests: []
   groups: [New York Users]
   links: []
+  links_access: [Read]
   menu: []
   name: 'Custom Access : Device Dallas - Pool San Francisco - Data Backup Workflow'
   pages: []
   pools: [Datacenter San Francisco]
+  pools_access: [Read]
   post_requests: []
   services: ['Regression Workflow 9: Operational Data Backup', 'Regression Workflow
       F: Workflow of Workflows']
+  services_access: [Read, Edit]
   type: access
   upper_menu: []
   users: [chicago]

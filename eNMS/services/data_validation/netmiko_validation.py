@@ -61,12 +61,11 @@ class NetmikoValidationService(ConnectionService):
             )
             run.exit_remote_device(netmiko_connection, prompt, device)
         except Exception:
+            result = netmiko_connection.session_log.getvalue().decode().lstrip("\u0000")
             return {
                 "command": command,
                 "error": format_exc(),
-                "result": netmiko_connection.session_log.getvalue()
-                .decode()
-                .lstrip("\u0000"),
+                "result": result,
                 "success": False,
             }
         return {"command": command, "result": result}

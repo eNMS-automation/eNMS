@@ -67,13 +67,12 @@ class NetmikoPromptsService(ConnectionService):
                 results[command] = {"result": result, "match": confirmation}
             run.exit_remote_device(netmiko_connection, prompt, device)
         except Exception:
+            result = netmiko_connection.session_log.getvalue().decode().lstrip("\u0000")
             return {
                 **results,
                 **{
                     "error": format_exc(),
-                    "result": netmiko_connection.session_log.getvalue()
-                    .decode()
-                    .lstrip("\u0000"),
+                    "result": result,
                     "match": confirmation,
                     "success": False,
                 },

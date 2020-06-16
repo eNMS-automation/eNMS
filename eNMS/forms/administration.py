@@ -118,7 +118,7 @@ def init_rbac_form(rbac):
             setattr(cls, model, MultipleInstanceField())
             form_properties["access"][model] = {"type": "object-list"}
             access_field = SelectMultipleStringField(choices=choices(access_rights))
-            form_properties["access"][f"{model}_access"] = {"type": "multiselect"}
+            form_properties["access"][f"{model}_access"] = {"type": "multiselect-string"}
             setattr(cls, f"{model}_access", access_field)
         return cls
 

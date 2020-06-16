@@ -581,6 +581,9 @@ function updateProperty(instance, el, property, value, type) {
     } catch (e) {
       // ignore
     }
+    if (propertyType == "multiselect-string") {
+      value = JSON.parse(value.replace(/'/g, `"`));
+    }
     el.selectpicker("val", value);
     el.selectpicker("render");
   } else if (propertyType == "object-list") {

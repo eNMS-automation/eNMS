@@ -71,7 +71,9 @@ class NetmikoPromptsService(ConnectionService):
                 **results,
                 **{
                     "error": format_exc(),
-                    "result": netmiko_connection.session_log.getvalue().decode(),
+                    "result": netmiko_connection.session_log.getvalue()
+                    .decode()
+                    .lstrip("\u0000"),
                     "match": confirmation,
                     "success": False,
                 },

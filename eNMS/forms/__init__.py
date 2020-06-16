@@ -106,7 +106,6 @@ def form_postprocessing(form, form_data):
             value = form_data.getlist(property)
             if field["type"] == "multiselect-string":
                 value = str(value)
-            print("KKK"*200, property, field["type"], value)
             data[property] = value
         elif field["type"] == "object":
             data[property] = form_data.get(property)

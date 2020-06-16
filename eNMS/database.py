@@ -336,8 +336,8 @@ class Database:
                 ),
             )
 
-    def fetch(self, model, allow_none=False, all_matches=False, **kwargs):
-        query = self.query(model).filter_by(**kwargs)
+    def fetch(self, model, allow_none=False, all_matches=False, mode="read", **kwargs):
+        query = self.query(model, mode).filter_by(**kwargs)
         for index in range(self.retry_fetch_number):
             try:
                 result = query.all() if all_matches else query.first()
@@ -353,10 +353,10 @@ class Database:
                 f"with the following characteristics: {kwargs}"
             )
 
-    def query(self, model):
+    def query(self, model, mode="read"):
         query = self.session.query(models[model])
         if model != "user" and not getattr(current_user, "is_admin", True):
-            query = models[model].rbac_filter(query)
+            query = models[model].rbac_filter(query, mode)
         return query
 
     def fetch_all(self, model, **kwargs):
@@ -396,9 +396,11 @@ class Database:
                 raise Exception("Names cannot contain a slash or a quote.")
             instance, instance_id = None, kwargs.pop("id", 0)
             if instance_id:
-                instance = self.fetch(_class, id=instance_id)
+                instance = self.fetch(_class, id=instance_id, mode="edit")
             elif "name" in kwargs:
-                instance = self.fetch(_class, allow_none=True, name=kwargs["name"])
+                instance = self.fetch(
+                    _class, allow_none=True, name=kwargs["name"], mode="edit"
+                )
             if instance and not kwargs.get("must_be_new"):
                 instance.update(**kwargs)
             else:

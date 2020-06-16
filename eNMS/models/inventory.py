@@ -49,11 +49,12 @@ class Object(AbstractBase):
             setattr(pool, number, getattr(pool, number) - 1)
 
     @classmethod
-    def rbac_filter(cls, query):
+    def rbac_filter(cls, query, mode):
         public_objects = query.filter(cls.public == true())
         user_access_objects = (
             query.join(cls.access)
             .join(models["user"], models["access"].users)
+            .filter(models["access"].device_access == mode)
             .filter(models["user"].name == current_user.name)
         )
         user_access_pool_objects = (

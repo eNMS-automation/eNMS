@@ -300,7 +300,7 @@ The ``/setup/properties.json`` file includes:
 |
 
 properties.json custom device addition example:
-    - Keys under {"custom": { "device": {
+    - Keys under ``{"custom": { "device": {``
         - name the custom attribute being added.
         - Keys/Value pairs under the newly added custom device attribute device_status.
             - "pretty_name":"Default Username", *device attribute name to be displayed in UI*
@@ -308,11 +308,11 @@ properties.json custom device addition example:
             - "default":"None", *default value of attribute*
             - "private": true *optional - is attribute hidden from user*
             - "configuration": true *optional - creates a custom 'Inventory/Configurations' attribute
-            - "log_change" false *optional - primarly if "configuration": true, disables logging when a changes is made to attribute
-            - "form": false *optional - primarly if "configuration": true, disables option to edit attribute in Device User Interface
-            - "migrate": fasle *optional - primarly if "configuration": true, choose if attribute should be consdered for migration
-            - "serialize": false *optional - primarly if "configuration": true, whether it is passed to the front-end when the object itself is (for large objects you don't want to send to front end)
-    - Keys under "tables" : { "device" : [ {  & "tables" : { "configuration" : [ {
+            - "log_change" false *optional - disables logging when a changes is made to attribute
+            - "form": false *optional - disables option to edit attribute in Device User Interface
+            - "migrate": fasle *optional - choose if attribute should be consdered for migration
+            - "serialize": false *optional - whether it is passed to the front-end when the object itself is
+    - Keys under ``"tables" : { "device" : [ {  & "tables" : { "configuration" : [ {``
         - Details which attributes to display in these table, add custom attributes here
         - Keys/Value pairs for tables
             - "data":"device_status", *attribute created in custom device above*
@@ -321,7 +321,7 @@ properties.json custom device addition example:
             - "width":"80%", *optional - text alignment, other example "width":"130px",*
             - "visible":false, *default display option*
             - "orderable": false *allow user to order by this attribute*
-    - Values under "filtering" : { "device" : [
+    - Values under ``"filtering" : { "device" : [``
         - details which attributes to use for filtering
         - you will need to add any custom device attributes name to this list for filtering
 

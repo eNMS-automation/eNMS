@@ -307,6 +307,11 @@ properties.json custom device addition example:
             - "type":"string", *data type of attribute*
             - "default":"None", *default value of attribute*
             - "private": true *optional - is attribute hidden from user*
+            - "configuration": true *optional - creates a custom 'Inventory/Configurations' attribute
+            - "log_change" false *optional - primarly if "configuration": true, disables logging when a changes is made to attribute
+            - "form": false *optional - primarly if "configuration": true, disables option to edit attribute in Device User Interface
+            - "migrate": fasle *optional - primarly if "configuration": true, choose if attribute should be consdered for migration
+            - "serialize": false *optional - primarly if "configuration": true, whether it is passed to the front-end when the object itself is (for large objects you don't want to send to front end)
     - Keys under "tables" : { "device" : [ {  & "tables" : { "configuration" : [ {
         - Details which attributes to display in these table, add custom attributes here
         - Keys/Value pairs for tables

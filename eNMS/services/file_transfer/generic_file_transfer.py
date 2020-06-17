@@ -34,7 +34,7 @@ class GenericFileTransferService(Service):
     source_file_includes_globbing = db.Column(Boolean, default=False)
     max_transfer_size = db.Column(Integer, default=2 ** 30)
     window_size = db.Column(Integer, default=2 ** 30)
-    timeout = db.Column(Float, default=1.0)
+    timeout = db.Column(Float, default=10.0)
 
     __mapper_args__ = {"polymorphic_identity": "generic_file_transfer_service"}
 

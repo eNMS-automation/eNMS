@@ -2,7 +2,7 @@ from glob import glob
 from os.path import split
 from pathlib import Path
 from paramiko import SSHClient, AutoAddPolicy
-from sqlalchemy import Boolean, ForeignKey, Integer
+from sqlalchemy import Boolean, Float, ForeignKey, Integer
 from wtforms.validators import InputRequired
 
 from eNMS import app
@@ -10,6 +10,7 @@ from eNMS.database import db
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import (
     BooleanField,
+    FloatField,
     HiddenField,
     IntegerField,
     SelectField,
@@ -33,6 +34,7 @@ class GenericFileTransferService(Service):
     source_file_includes_globbing = db.Column(Boolean, default=False)
     max_transfer_size = db.Column(Integer, default=2 ** 30)
     window_size = db.Column(Integer, default=2 ** 30)
+    timeout = db.Column(Float, default=1.0)
 
     __mapper_args__ = {"polymorphic_identity": "generic_file_transfer_service"}
 
@@ -69,7 +71,7 @@ class GenericFileTransferService(Service):
                             device,
                         )
                         continue
-                    path, filename = split(glob_source)
+                    _, filename = split(glob_source)
                     if destination[-1] != "/":
                         destination = destination + "/"
                     glob_destination = destination + filename
@@ -110,3 +112,4 @@ class GenericFileTransferForm(ServiceForm):
     )
     max_transfer_size = IntegerField(default=2 ** 30)
     window_size = IntegerField(default=2 ** 30)
+    timeout = FloatField(default=10.0)

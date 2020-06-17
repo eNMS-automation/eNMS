@@ -1013,10 +1013,13 @@ class Run(AbstractBase):
                 window_size=self.window_size,
                 max_packet_size=self.max_transfer_size,
             ) as sftp:
+                sftp.get_channel().settimeout(self.timeout)
                 for source, destination in files:
                     getattr(sftp, self.direction)(source, destination)
         else:
-            with SCPClient(ssh_client.get_transport()) as scp:
+            with SCPClient(
+                ssh_client.get_transport(), socket_timeout=self.timeout
+            ) as scp:
                 for source, destination in files:
                     getattr(scp, self.direction)(source, destination)
 

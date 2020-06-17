@@ -2064,7 +2064,7 @@
   skip_value: 'True'
   source_code: "set_var(\"variable1\", 999, device=device.name)\r\nset_var(\"variable2\"\
     , \"1000\", device=device.name, section=\"variables\")\r\nset_var(\"iteration_simple\"\
-    , \"192.168.56.50\", export=True)\r\ndevices = [\"Boston\", \"Cincinnati\"] if\
+    , \"192.168.56.50\")\r\ndevices = [\"Boston\", \"Cincinnati\"] if\
     \ device.name == \"Chicago\" else [\"Cleveland\", \"Washington\"]\r\nset_var(\"\
     iteration_device\", devices, device=device.name)\r\nsave_result(success=True,\
     \ result={})"
@@ -4304,9 +4304,7 @@
       content: "Set a variable called \"iteration_device\" that we will use in the\
         \ following service\r\nto define iteration devices.\r\ndevices = [\"Boston\"\
         , \"Cincinnati\"] if device.name == \"Chicago\" else [\"Cleveland\", \"Washington\"\
-        ]\r\nset_var(\"iteration_device\", devices, section=\"pools\", device=device.name)\r\
-        \nThe \"iteration_simple\" uses the \"export=True\" keyword to be available\
-        \ as global variables ({{ iteration_simple }})."
+        ]\r\nset_var(\"iteration_device\", devices, section=\"pools\", device=device.name)."
       positions: ['103', '-224']
     8d64652f-dbc6-4916-ba06-a49ae0ed36fb:
       alignment: left
@@ -7202,10 +7200,10 @@
     'Regression Workflow K: preprocessing and postprocessing': [-26, 123]
   postprocessing: "results[\"postprocessing\"] = f\"Value set with postprocessing\
     \ for {device.name}\"\r\n\r\ndef test():\r\n  \treturn device.operating_system\r\
-    \n\r\nclass Test():\r\n  device = device.name\r\n\r\nset_var(\"func\", test, device=device.name,\
-    \ export=True)\r\nset_var(\"cls\", Test, device=device.name, export=True)\r\n"
+    \n\r\nclass Test():\r\n  device = device.name\r\n\r\nset_var(\"func\", test, device=device.name)\r\n
+    set_var(\"cls\", Test, device=device.name)\r\n"
   postprocessing_mode: always
-  preprocessing: set_var("test", device.operating_system, device=device.name, export=True)
+  preprocessing: set_var("test", device.operating_system, device=device.name)
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -7266,7 +7264,7 @@
   postprocessing: "results[\"SHOULD BE THERE\"] = \"NO BUG\"\r\n\r\nresults[\"func_result\"\
     ] = func()\r\nresults[\"cls_result\"] = cls().device"
   postprocessing_mode: failure
-  preprocessing: set_var("integer", 10, export=True)
+  preprocessing: set_var("integer", 10)
   reply_to: ''
   reserved: false
   run_method: per_device

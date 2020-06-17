@@ -237,9 +237,9 @@ class Server(Flask):
             if not current_user.is_authenticated:
                 login_form = LoginForm(request.form)
                 login_form.authentication_method.choices = [
-                    (method, method.capitalize())
-                    for method, active in app.settings["authentication"].items()
-                    if active
+                    (method, properties["display_name"])
+                    for method, properties in app.settings["authentication"].items()
+                    if properties["enabled"]
                 ]
                 return render_template("login.html", login_form=login_form)
             return redirect(url_for("blueprint.route", page="dashboard"))

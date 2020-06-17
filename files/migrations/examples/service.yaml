@@ -2064,10 +2064,9 @@
   skip_value: 'True'
   source_code: "set_var(\"variable1\", 999, device=device.name)\r\nset_var(\"variable2\"\
     , \"1000\", device=device.name, section=\"variables\")\r\nset_var(\"iteration_simple\"\
-    , \"192.168.56.50\")\r\ndevices = [\"Boston\", \"Cincinnati\"] if\
-    \ device.name == \"Chicago\" else [\"Cleveland\", \"Washington\"]\r\nset_var(\"\
-    iteration_device\", devices, device=device.name)\r\nsave_result(success=True,\
-    \ result={})"
+    , \"192.168.56.50\")\r\ndevices = [\"Boston\", \"Cincinnati\"] if device.name\
+    \ == \"Chicago\" else [\"Cleveland\", \"Washington\"]\r\nset_var(\"iteration_device\"\
+    , devices, device=device.name)\r\nsave_result(success=True, result={})"
   time_between_retries: 10
   type: python_snippet_service
   update_pools: false
@@ -7183,7 +7182,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2020-06-04 09:38:08.670625'
+  last_modified: '2020-06-17 05:05:10.364625'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -7200,10 +7199,11 @@
     'Regression Workflow K: preprocessing and postprocessing': [-26, 123]
   postprocessing: "results[\"postprocessing\"] = f\"Value set with postprocessing\
     \ for {device.name}\"\r\n\r\ndef test():\r\n  \treturn device.operating_system\r\
-    \n\r\nclass Test():\r\n  device = device.name\r\n\r\nset_var(\"func\", test, device=device.name)\r\n
-    set_var(\"cls\", Test, device=device.name)\r\n"
+    \n\r\nclass Test():\r\n  device = device.name\r\n\r\nset_var(\"func\", test, device=device.name)\r\
+    \nset_var(\"cls\", Test, device=device.name)\r\n"
   postprocessing_mode: always
   preprocessing: set_var("test", device.operating_system, device=device.name)
+  public: false
   reply_to: ''
   reserved: false
   run_method: per_device

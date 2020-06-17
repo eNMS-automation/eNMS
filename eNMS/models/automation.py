@@ -190,21 +190,21 @@ class Service(AbstractBase):
         return app.strip_all(self.name)
 
     @classmethod
-    def rbac_filter(cls, query, mode):
+    def rbac_filter(cls, query, mode, user):
         service_alias = aliased(cls)
         public_services = query.filter(cls.public == true())
         user_access_services = (
             query.join(cls.original.of_type(service_alias))
             .join(models["access"], service_alias.access)
             .join(models["user"], models["access"].users)
-            .filter(models["user"].name == current_user.name)
+            .filter(models["user"].name == user.name)
         )
         user_group_access_services = (
             query.join(cls.original.of_type(service_alias))
             .join(models["access"], service_alias.access)
             .join(models["group"], models["access"].groups)
             .join(models["user"], models["group"].users)
-            .filter(models["user"].name == current_user.name)
+            .filter(models["user"].name == user.name)
         )
         return public_services.union(user_access_services, user_group_access_services)
 
@@ -388,7 +388,7 @@ class Run(AbstractBase):
         return [cls.parent_runtime == cls.runtime]
 
     @classmethod
-    def rbac_filter(cls, query, mode):
+    def rbac_filter(cls, query, mode, user):
         public_services = query.join(cls.service).filter(
             models["service"].public == true()
         )
@@ -396,14 +396,14 @@ class Run(AbstractBase):
             query.join(cls.service)
             .join(models["access"], models["service"].access)
             .join(models["user"], models["access"].users)
-            .filter(models["user"].name == current_user.name)
+            .filter(models["user"].name == user.name)
         )
         user_group_access_services = (
             query.join(cls.service)
             .join(models["access"], models["service"].access)
             .join(models["group"], models["access"].groups)
             .join(models["user"], models["group"].users)
-            .filter(models["user"].name == current_user.name)
+            .filter(models["user"].name == user.name)
         )
         return public_services.union(user_access_services, user_group_access_services)
 
@@ -636,7 +636,9 @@ class Run(AbstractBase):
 
     def device_run(self, payload):
         self.devices = self.compute_devices(payload)
-        user = db.fetch("user", allow_none=True, name=self.creator)
+        allowed_targets = set(db.query("device", rbac="target", username=self.creator))
+        if not set(self.devices).issubset(set(allowed_targets)):
+            return {"result": "RBAC: Targets not allowed", "success": False}
         if self.run_method != "once":
             self.write_state("progress/device/total", len(self.devices), "increment")
         if self.iteration_devices and not self.parent_device:

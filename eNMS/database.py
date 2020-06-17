@@ -353,10 +353,18 @@ class Database:
                 f"with the following characteristics: {kwargs}"
             )
 
-    def query(self, model, rbac="read"):
+    def query(self, model, rbac="read", username=None):
+        if current_user:
+            user = current_user
+        else:
+            user = (
+                self.session.query(models["user"])
+                .filter_by(name=username or "admin")
+                .first()
+            )
         query = self.session.query(models[model])
-        if model != "user" and not getattr(current_user, "is_admin", True):
-            query = models[model].rbac_filter(query, rbac)
+        if model != "user" and not user.is_admin:
+            query = models[model].rbac_filter(query, rbac, user)
         return query
 
     def fetch_all(self, model, **kwargs):

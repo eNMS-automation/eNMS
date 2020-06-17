@@ -74,3 +74,21 @@
   type: access
   upper_menu: []
   users: [chicago]
+- description: ''
+  devices: [Baltimore, Austin]
+  devices_access: "['Read', 'Edit']"
+  get_requests: []
+  groups: [Chicago Users]
+  links: []
+  links_access: '[]'
+  menu: []
+  name: Edit Devices Baltimore and Austin
+  pages: []
+  pools: []
+  pools_access: '[]'
+  post_requests: []
+  services: []
+  services_access: '[]'
+  type: access
+  upper_menu: []
+  users: [ny]

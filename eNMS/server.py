@@ -326,16 +326,18 @@ class Server(Flask):
                 return jsonify({"alert": "Error 403 Forbidden."})
             form_type = request.form.get("form_type")
             if request.json:
-                result = getattr(app, endpoint)(*args, **request.json)
+                kwargs = request.json
             elif form_type:
                 form = form_classes[form_type](request.form)
                 if not form.validate_on_submit():
                     return jsonify({"invalid_form": True, **{"errors": form.errors}})
-                result = getattr(app, endpoint)(
-                    *args, **form_postprocessing(form, request.form)
-                )
+                kwargs = form_postprocessing(form, request.form)
             else:
-                result = getattr(app, endpoint)(*args, **request.form)
+                kwargs = request.form
+            try:
+                result = getattr(app, endpoint)(*args, **kwargs)
+            except LookupError:
+                return {"alert": "Error 403 - Operation not allowed."}
             try:
                 db.session.commit()
                 return jsonify(result)

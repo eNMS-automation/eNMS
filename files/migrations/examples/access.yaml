@@ -63,7 +63,8 @@
   links: []
   links_access: "['Read']"
   menu: []
-  name: 'Custom Access : Device Dallas - Pool San Francisco - Data Backup Workflow'
+  name: Read Access Device Dallas - Pool San Francisco - Read Edit Data Backup and
+    Workflows of Workflow
   pages: []
   pools: [Datacenter San Francisco]
   pools_access: "['Read']"
@@ -92,3 +93,21 @@
   type: access
   upper_menu: []
   users: [ny]
+- description: ''
+  devices: [Washington, Austin]
+  devices_access: "['Read', 'Connect', 'Use as target']"
+  get_requests: []
+  groups: [New York Users]
+  links: []
+  links_access: '[]'
+  menu: []
+  name: Read, Connect and Use as Target Access to Washington & Austin
+  pages: []
+  pools: []
+  pools_access: '[]'
+  post_requests: []
+  services: []
+  services_access: '[]'
+  type: access
+  upper_menu: []
+  users: [chicago]

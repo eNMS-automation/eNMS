@@ -354,17 +354,18 @@ class Database:
             )
 
     def query(self, model, rbac="read", username=None):
-        if current_user:
-            user = current_user
-        else:
-            user = (
-                self.session.query(models["user"])
-                .filter_by(name=username or "admin")
-                .first()
-            )
         query = self.session.query(models[model])
-        if model != "user" and not user.is_admin:
-            query = models[model].rbac_filter(query, rbac, user)
+        if model != "user":
+            if current_user:
+                user = current_user
+            else:
+                user = (
+                    self.session.query(models["user"])
+                    .filter_by(name=username or "admin")
+                    .first()
+                )
+            if not user.is_admin:
+                query = models[model].rbac_filter(query, rbac, user)
         return query
 
     def fetch_all(self, model, **kwargs):

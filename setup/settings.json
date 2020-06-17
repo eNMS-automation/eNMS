@@ -39,7 +39,7 @@
   "logging": {
     "loggers": {
       "security": {
-        "changelog": true,
+        "change_log": true,
         "service_log": true
       }
     },

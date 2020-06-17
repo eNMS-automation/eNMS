@@ -299,11 +299,11 @@ class BaseController:
                 return {"alert": f"There is already a {type} with the same parameters."}
             return {"alert": str(exc)}
 
-    def log(self, severity, content, user=None, changelog=True, logger="root"):
+    def log(self, severity, content, user=None, change_log=True, logger="root"):
         logger_settings = self.settings["logging"]["loggers"].get(logger)
         if logger:
             getattr(getLogger(logger), severity)(content)
-        if changelog or logger and logger_settings.get("changelog"):
+        if change_log or logger and logger_settings.get("change_log"):
             db.factory(
                 "changelog",
                 **{

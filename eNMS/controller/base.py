@@ -98,9 +98,7 @@ class BaseController:
         configure_mappers()
         db.configure_application_events(self)
         self.init_forms()
-        self.reset_run_status()
         if not db.fetch("user", allow_none=True, name="admin"):
-            self.configure_server_id()
             self.create_admin_user()
             db.session.commit()
             if self.settings["app"]["create_examples"]:
@@ -113,7 +111,9 @@ class BaseController:
                     name="default", import_export_types=db.import_classes
                 )
             self.get_git_content()
-            db.session.commit()
+        self.configure_server_id()
+        self.reset_run_status()
+        db.session.commit()
 
     def reset_run_status(self):
         for run in db.fetch("run", all_matches=True, allow_none=True, status="Running"):

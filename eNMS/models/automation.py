@@ -852,7 +852,7 @@ class Run(AbstractBase):
         severity,
         log,
         device=None,
-        changelog=False,
+        change_log=False,
         logger=None,
         service_log=True,
     ):
@@ -864,7 +864,7 @@ class Run(AbstractBase):
             log = f"DEVICE {device_name} - {log}"
         log = f"USER {self.creator} - SERVICE {self.service.scoped_name} - {log}"
         settings = app.log(
-            severity, log, user=self.creator, changelog=changelog, logger=logger
+            severity, log, user=self.creator, change_log=change_log, logger=logger
         )
         if service_log or logger and settings.get("service_log"):
             run_log = f"{app.get_time()} - {severity} - {log}"

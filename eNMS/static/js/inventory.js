@@ -119,9 +119,9 @@ export function initDashboard() {
   });
 }
 
-function sshConnection(id) {
+function webConnection(id) {
   call({
-    url: `/connection/${id}`,
+    url: `/web_connection/${id}`,
     form: `connection-parameters-form-${id}`,
     callback: function (result) {
       let url = settings.app.address;
@@ -143,10 +143,10 @@ function sshConnection(id) {
   });
 }
 
-function handOffSSHConnection(id) {
+function desktopConnection(id) {
   notify("Starting SSH connection to the device...", "success", 3, true);
   call({
-    url: `/handoffssh/${id}`,
+    url: `/desktop_connection/${id}`,
     form: `connection-parameters-form-${id}`,
     callback: function (result) {
       let loc = window.location;
@@ -515,9 +515,9 @@ function importTopology() {
 configureNamespace("inventory", [
   downloadNetworkData,
   exportTopology,
-  handOffSSHConnection,
+  desktopConnection,
   showConnectionPanel,
-  sshConnection,
+  webConnection,
   savePoolObjects,
   showPoolObjectsPanel,
   updatePools,

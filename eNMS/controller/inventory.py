@@ -31,7 +31,7 @@ class InventoryController(BaseController):
         end = self.settings["ssh"]["end_port"]
         return start + self.ssh_port % (end - start)
 
-    def connection(self, device_id, **kwargs):
+    def web_connection(self, device_id, **kwargs):
         device = db.fetch("device", id=device_id, rbac="connect")
         cmd = [str(self.path / "files" / "apps" / "gotty"), "-w"]
         port, protocol = self.get_ssh_port(), kwargs["protocol"]
@@ -78,8 +78,8 @@ class InventoryController(BaseController):
         ]
         return "\n".join(device_logs)
 
-    def handoffssh(self, id, **kwargs):
-        device = db.fetch("device", id=id)
+    def desktop_connection(self, id, **kwargs):
+        device = db.fetch("device", id=id, rbac="connect")
         credentials = (
             (device.username, self.get_password(device.password))
             if kwargs["credentials"] == "device"

@@ -35,7 +35,7 @@
   pools: []
   pools_access: ''
   post_requests: [/add_edge, /add_service_to_workflow, /copy_service_in_workflow,
-    /calendar_init, /clear_results, /clear_configurations, /compare, /connection,
+    /calendar_init, /clear_results, /clear_configurations, /compare, /web_connection,
     /counters, /count_models, /create_label, /database_deletion, /delete_corrupted_edges,
     /delete_edge, /delete_instance, /delete_label, /delete_node, /duplicate_workflow,
     /export_service, /export_topology, /delete_file, /edit_file, /get, /get_all, /get_cluster_status,
@@ -43,7 +43,7 @@
     /get_git_network_data, /get_git_content, /get_migration_folders, /get_service_logs,
     /get_properties, /get_result, /get_runtimes, /get_view_topology, /get_service_state,
     /get_session_log, /get_top_level_workflows, /get_tree_files, /get_workflow_results,
-    /get_workflow_services, /search_workflow_services, /handoffssh, /import_service,
+    /get_workflow_services, /search_workflow_services, /desktop_connection, /import_service,
     /import_topology, /migration_export, /migration_import, /multiselect_filtering,
     /reset_status, /result_log_deletion, /run_service, /save_file, /save_parameters,
     /save_pool_objects, /save_positions, /save_settings, /scan_cluster, /scan_playbook_folder,

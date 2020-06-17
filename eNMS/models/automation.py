@@ -636,14 +636,7 @@ class Run(AbstractBase):
 
     def device_run(self, payload):
         self.devices = self.compute_devices(payload)
-        # user = db.fetch("user", allow_none=True, name=self.creator)
-        # private_targets = set(device for device in self.devices if not device.public)
-        # unauthorized_targets = private_targets - set(user.devices)
-        # if not user.is_admin and unauthorized_targets:
-        #    targets = "".join(device.name for device in unauthorized_targets)
-        #    error = f"Unauthorized targets ({targets}) for user '{self.creator}'"
-        #    self.log("error", error)
-        #    return {"success": False, "result": error, "runtime": self.runtime}
+        user = db.fetch("user", allow_none=True, name=self.creator)
         if self.run_method != "once":
             self.write_state("progress/device/total", len(self.devices), "increment")
         if self.iteration_devices and not self.parent_device:

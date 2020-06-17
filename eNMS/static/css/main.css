@@ -783,11 +783,10 @@ fieldset.section {
 
 /* enables resizing of code mirror content */
 .CodeMirror {
-  resize: vertical;  
+  resize: vertical;
 }
 
-/* prevents text area resizing in horizontal direction
-   to preserve layout. */
+/* prevents text area resizing in horizontal direction to preserve layout. */
 textarea.form-control {
   resize: vertical;
 }

@@ -1029,23 +1029,16 @@ class Run(AbstractBase):
         section=None,
         operation="set",
         allow_none=False,
-        export=False,
     ):
-        global_variables = payload.setdefault("global", {})
         payload = payload.setdefault("variables", {})
         if device:
             payload = payload.setdefault("devices", {})
             payload = payload.setdefault(device, {})
-            if export:
-                global_variables = global_variables.setdefault("devices", {})
-                global_variables = global_variables.setdefault(device, {})
         if section:
             payload = payload.setdefault(section, {})
         if value is not None:
             if operation == "set":
                 payload[name] = value
-                if export:
-                    global_variables[name] = value
             else:
                 getattr(payload[name], operation)(value)
         else:
@@ -1109,9 +1102,9 @@ class Run(AbstractBase):
         }
         if "variables" not in payload:
             return variables
-        variables.update(payload["global"])
-        if device and "devices" in payload["global"]:
-            variables.update(payload["global"]["devices"].get(device.name, {}))
+        variables.update(payload["variables"])
+        if device and "devices" in payload["variables"]:
+            variables.update(payload["variables"]["devices"].get(device.name, {}))
         return variables
 
     def eval(_self, query, function="eval", **locals):  # noqa: N805

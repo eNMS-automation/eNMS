@@ -359,11 +359,7 @@ class Database:
             if current_user:
                 user = current_user
             else:
-                user = (
-                    self.session.query(models["user"])
-                    .filter_by(name=username or "admin")
-                    .first()
-                )
+                user = self.fetch("user", name=username or "admin")
             if not user.is_admin:
                 query = models[model].rbac_filter(query, rbac, user)
         return query

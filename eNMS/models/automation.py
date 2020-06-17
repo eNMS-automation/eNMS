@@ -636,9 +636,14 @@ class Run(AbstractBase):
 
     def device_run(self, payload):
         self.devices = self.compute_devices(payload)
-        allowed_targets = set(db.query("device", rbac="target", username=self.creator))
-        if not set(self.devices).issubset(set(allowed_targets)):
-            return {"result": "RBAC: Targets not allowed", "success": False}
+        allowed_targets = db.query("device", rbac="target", username=self.creator)
+        unauthorized_targets = set(self.devices) - set(allowed_targets)
+        if unauthorized_targets:
+            result = (
+                f"Error 403: User '{self.creator}' is not allowed to set the following"
+                f" devices as targets: {', '.join(map(str, unauthorized_targets))}"
+            )
+            return {"result": result, "success": False}
         if self.run_method != "once":
             self.write_state("progress/device/total", len(self.devices), "increment")
         if self.iteration_devices and not self.parent_device:

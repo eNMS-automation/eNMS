@@ -32,7 +32,7 @@ class InventoryController(BaseController):
         return start + self.ssh_port % (end - start)
 
     def connection(self, device_id, **kwargs):
-        device = db.fetch("device", id=device_id)
+        device = db.fetch("device", id=device_id, rbac="connect")
         cmd = [str(self.path / "files" / "apps" / "gotty"), "-w"]
         port, protocol = self.get_ssh_port(), kwargs["protocol"]
         address = getattr(device, kwargs["address"])

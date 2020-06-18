@@ -111,3 +111,22 @@
   type: access
   upper_menu: []
   users: [chicago]
+- description: ''
+  devices: []
+  devices_access: '[]'
+  get_requests: []
+  groups: []
+  links: [link10, link11, link12]
+  links_access: "['Read', 'Edit']"
+  menu: []
+  name: Pool link 0-5 (READ) + links 10, 11, 12 (EDIT) (links 6-9 should be available
+    via public pool of links)
+  pages: []
+  pools: [Links 0 through 5 - Non-public pool - Access set up]
+  pools_access: "['Read']"
+  post_requests: []
+  services: []
+  services_access: '[]'
+  type: access
+  upper_menu: []
+  users: []

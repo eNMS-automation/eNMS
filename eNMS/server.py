@@ -122,12 +122,18 @@ class Server(Flask):
         for plugin in Path(app.settings["app"]["plugin_path"]).iterdir():
             if not Path(plugin / "settings.json").exists():
                 continue
-            module = import_module(f"eNMS.plugins.{plugin.stem}")
             with open(plugin / "settings.json", "r") as file:
                 settings = load(file)
             if not settings["active"]:
                 continue
-            plugin = module.Plugin(self, app, db, **settings)
+            try:
+                module = import_module(f"eNMS.plugins.{plugin.stem}")
+                plugin = module.Plugin(self, app, db, **settings)
+            except Exception as e:
+                app.log(
+                    "error", f"Could not load plugin: `{plugin.stem}` \n\tError: {e}"
+                )
+                continue
             if "rbac" in settings:
                 for requests in ("get_requests", "post_requests"):
                     app.rbac[requests].extend(settings["rbac"].get(requests, []))

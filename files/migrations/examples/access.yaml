@@ -115,7 +115,7 @@
   devices: []
   devices_access: '[]'
   get_requests: []
-  groups: []
+  groups: [Chicago Users]
   links: [link10, link11, link12]
   links_access: "['Read', 'Edit']"
   menu: []
@@ -129,4 +129,4 @@
   services_access: '[]'
   type: access
   upper_menu: []
-  users: []
+  users: [ny]

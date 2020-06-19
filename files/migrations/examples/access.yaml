@@ -63,15 +63,15 @@
   links: []
   links_access: "['Read']"
   menu: []
-  name: Read Access Device Dallas - Pool San Francisco - Read Edit Data Backup and
-    Workflows of Workflow
+  name: Read Access Device Dallas - Pool San Francisco - Data Backup and Workflows
+    of Workflow (READ)
   pages: []
   pools: [Datacenter San Francisco]
   pools_access: "['Read']"
   post_requests: []
   services: ['Regression Workflow 9: Operational Data Backup', 'Regression Workflow
       F: Workflow of Workflows']
-  services_access: "['Read', 'Edit']"
+  services_access: "['Read']"
   type: access
   upper_menu: []
   users: [chicago]
@@ -101,13 +101,15 @@
   links: []
   links_access: '[]'
   menu: []
-  name: Read, Connect and Use as Target Access to Washington & Austin
+  name: Read, Connect and Use as Target Access to Washington & Austin - Workflow 4
+    + Superworkflow (EDIT)
   pages: []
   pools: []
   pools_access: '[]'
   post_requests: []
-  services: []
-  services_access: '[]'
+  services: ['Regression Workflow 4: VRF creation and deletion with Netmiko', 'Regression
+      Workflow L: superworkflow']
+  services_access: "['Read', 'Edit']"
   type: access
   upper_menu: []
   users: [chicago]

@@ -595,11 +595,7 @@ function savePositions() {
     contentType: "application/json;charset=UTF-8",
     data: JSON.stringify(graph.getPositions(), null, "\t"),
     success: function (updateTime) {
-      if (updateTime) {
-        workflow.last_modified = updateTime;
-      } else {
-        notify("HTTP Error 403 – Forbidden", "error", 5);
-      }
+      if (updateTime) workflow.last_modified = updateTime;
     },
   });
 }

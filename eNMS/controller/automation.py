@@ -124,7 +124,8 @@ class AutomationController(BaseController):
         }
 
     def create_label(self, workflow_id, x, y, **kwargs):
-        workflow, label_id = db.fetch("workflow", id=workflow_id), str(uuid4())
+        workflow = db.fetch("workflow", id=workflow_id, rbac="Edit")
+        label_id = str(uuid4())
         label = {
             "positions": [x, y],
             "content": kwargs["text"],
@@ -429,13 +430,15 @@ class AutomationController(BaseController):
             "user": current_user.name,
         }
 
-    def save_positions(self, workflow_id, **_):
+    def save_positions(self, workflow_id, **kwargs):
         now, old_position = self.get_time(), None
-        workflow = db.fetch("workflow", allow_none=True, id=workflow_id)
-        for id, position in request.json.items():
+        workflow = db.fetch("workflow", allow_none=True, id=workflow_id, rbac="Edit")
+        if not workflow:
+            return
+        for id, position in kwargs.items():
             new_position = [position["x"], position["y"]]
             if "-" not in id:
-                service = db.fetch("service", id=id)
+                service = db.fetch("service", id=id, rbac="Edit")
                 old_position = service.positions.get(workflow.name)
                 service.positions[workflow.name] = new_position
             elif id in workflow.labels:

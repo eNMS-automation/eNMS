@@ -245,7 +245,7 @@
   device_vendor_match: inclusion
   devices: [SanJose, SanDiego, Philadelphia, LosAngeles, Detroit, Baltimore, Cleveland,
     Cambridge, Minneapolis, NewYork, Sacramento, Orange, Denver, Aserver, Server 2]
-  last_modified: ''
+  last_modified: '2020-06-19 06:44:54.194589'
   latitude: '37.77'
   link_color: ''
   link_color_match: inclusion
@@ -271,6 +271,7 @@
   name: Datacenter San Francisco
   operator: all
   property1: CP
+  public: false
   tasks: []
   type: pool
 - description: Datacenter New York

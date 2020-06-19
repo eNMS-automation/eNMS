@@ -196,6 +196,7 @@ class Service(AbstractBase):
             query.join(cls.original.of_type(service_alias))
             .join(models["access"], service_alias.access)
             .join(models["user"], models["access"].users)
+            .filter(models["access"].services_access.contains(mode))
             .filter(models["user"].name == user.name)
         )
         user_group_access_services = (
@@ -203,6 +204,7 @@ class Service(AbstractBase):
             .join(models["access"], service_alias.access)
             .join(models["group"], models["access"].groups)
             .join(models["user"], models["group"].users)
+            .filter(models["access"].services_access.contains(mode))
             .filter(models["user"].name == user.name)
         )
         return public_services.union(user_access_services, user_group_access_services)

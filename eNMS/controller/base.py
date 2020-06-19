@@ -272,7 +272,7 @@ class BaseController:
         return db.delete(instance_type, id=instance_id)
 
     def get(self, instance_type, id):
-        return db.fetch(instance_type, id=id).serialized
+        return db.fetch("service", id=id).serialized
 
     def get_properties(self, instance_type, id):
         return db.fetch(instance_type, id=id).get_properties()

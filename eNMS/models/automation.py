@@ -140,8 +140,7 @@ class Service(AbstractBase):
 
     def get_originals(self, workflow):
         if workflow.workflows:
-            originals = (self.get_originals(w) for w in workflow.workflows)
-            return set().union(*originals)
+            return set().union(*(self.get_originals(w) for w in workflow.workflows))
         else:
             return {workflow}
 
@@ -150,7 +149,6 @@ class Service(AbstractBase):
             self.set_name(kwargs["scoped_name"])
         super().update(**kwargs)
         self.originals = list(self.get_originals(self))
-        print("ORIGINALS"*100, self.originals)
 
     @classmethod
     def filtering_constraints(cls, **kwargs):

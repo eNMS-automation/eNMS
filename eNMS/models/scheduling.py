@@ -1,4 +1,3 @@
-from flask_login import current_user
 from re import search
 from requests import get, post
 from requests.exceptions import ConnectionError, MissingSchema, ReadTimeout

@@ -1,7 +1,6 @@
 from builtins import __dict__ as builtins
 from copy import deepcopy
 from datetime import datetime
-from flask_login import current_user
 from functools import partial
 from importlib import __import__ as importlib_import
 from io import BytesIO

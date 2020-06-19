@@ -1,4 +1,3 @@
-from flask_login import current_user
 from re import search, sub
 from sqlalchemy import Boolean, ForeignKey, Integer
 from sqlalchemy.ext.associationproxy import association_proxy

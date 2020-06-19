@@ -9,9 +9,9 @@
     "session_timeout_minutes": 30
   },
   "authentication": {
-    "database": {"enabled": true, "display_name": "Local User"},
-    "ldap":  {"enabled": true, "display_name": "LDAP"},
-    "tacacs": {"enabled": true, "display_name": "TACACS+"}
+    "database": { "enabled": true, "display_name": "Local User" },
+    "ldap": { "enabled": true, "display_name": "LDAP" },
+    "tacacs": { "enabled": true, "display_name": "TACACS+" }
   },
   "cluster": {
     "active": false,

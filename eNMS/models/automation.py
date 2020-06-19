@@ -136,20 +136,21 @@ class Service(AbstractBase):
         super().__init__(**kwargs)
         if "name" not in kwargs:
             self.set_name()
-        self.originals = list(self.get_originals())
+        self.originals = list(self.get_originals(self))
 
-    def get_originals(self):
-        if self.workflows:
-            originals = (self.get_originals(workflow) for workflow in self.workflows)
+    def get_originals(self, workflow):
+        if workflow.workflows:
+            originals = (self.get_originals(w) for w in workflow.workflows)
             return set().union(*originals)
         else:
-            return {self}
+            return {workflow}
 
     def update(self, **kwargs):
         if "scoped_name" in kwargs and kwargs.get("scoped_name") != self.scoped_name:
             self.set_name(kwargs["scoped_name"])
         super().update(**kwargs)
-        self.originals = list(self.get_originals())
+        self.originals = list(self.get_originals(self))
+        print("ORIGINALS"*100, self.originals)
 
     @classmethod
     def filtering_constraints(cls, **kwargs):

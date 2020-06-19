@@ -445,6 +445,8 @@ class Run(AbstractBase):
             return self.state
         elif app.redis_queue:
             keys = app.redis("keys", f"{self.parent_runtime}/state/*")
+            if not keys:
+                return {}
             data, state = list(zip(keys, app.redis("mget", *keys))), {}
             for log, value in data:
                 inner_store, (*path, last_key) = state, log.split("/")[2:]

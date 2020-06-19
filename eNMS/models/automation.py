@@ -77,12 +77,12 @@ class Service(AbstractBase):
     access = relationship(
         "Access", secondary=db.access_service_table, back_populates="services"
     )
-    original_id = db.Column(Integer, ForeignKey("service.id"))
-    original = relationship(
+    originals = relationship(
         "Service",
-        remote_side=[id],
-        foreign_keys="Service.original_id",
-        post_update=True,
+        secondary=db.originals_association,
+        primaryjoin=id == db.originals_association.c.original_id,
+        secondaryjoin=id == db.originals_association.c.child_id,
+        backref="children",
     )
     update_pools = db.Column(Boolean, default=False)
     send_notification = db.Column(Boolean, default=False)
@@ -136,20 +136,20 @@ class Service(AbstractBase):
         super().__init__(**kwargs)
         if "name" not in kwargs:
             self.set_name()
-        self.original = self.original_service
+        self.originals = list(self.get_originals())
 
-    @property
-    def original_service(self):
-        if self.shared or not self.workflows:
-            return self
+    def get_originals(self):
+        if self.workflows:
+            originals = (self.get_originals(workflow) for workflow in self.workflows)
+            return set().union(*originals)
         else:
-            return self.workflows[0].original_service
+            return {self}
 
     def update(self, **kwargs):
         if "scoped_name" in kwargs and kwargs.get("scoped_name") != self.scoped_name:
             self.set_name(kwargs["scoped_name"])
         super().update(**kwargs)
-        self.original = self.original_service
+        self.originals = list(self.get_originals())
 
     @classmethod
     def filtering_constraints(cls, **kwargs):
@@ -193,14 +193,14 @@ class Service(AbstractBase):
         service_alias = aliased(cls)
         public_services = query.filter(cls.public == true())
         user_access_services = (
-            query.join(cls.original.of_type(service_alias))
+            query.join(cls.originals.of_type(service_alias))
             .join(models["access"], service_alias.access)
             .join(models["user"], models["access"].users)
             .filter(models["access"].services_access.contains(mode))
             .filter(models["user"].name == user.name)
         )
         user_group_access_services = (
-            query.join(cls.original.of_type(service_alias))
+            query.join(cls.originals.of_type(service_alias))
             .join(models["access"], service_alias.access)
             .join(models["group"], models["access"].groups)
             .join(models["user"], models["group"].users)

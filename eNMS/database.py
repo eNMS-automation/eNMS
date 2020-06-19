@@ -73,8 +73,7 @@ class Database:
             "id",
             "sources",
             "destinations",
-            "original",
-            "original_id",
+            "originals",
             "status",
             "superworkflow_id",
             "tasks",
@@ -335,6 +334,12 @@ class Database:
                     Column(f"{model2}_id", Integer, ForeignKey(f"{model2}.id")),
                 ),
             )
+        self.originals_association = Table(
+            "originals_association",
+            self.base.metadata,
+            Column("original_id", Integer, ForeignKey("service.id"), primary_key=True),
+            Column("child_id", Integer, ForeignKey("service.id"), primary_key=True),
+        )
 
     def fetch(self, model, allow_none=False, all_matches=False, rbac="read", **kwargs):
         query = self.query(model, rbac).filter_by(**kwargs)

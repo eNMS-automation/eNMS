@@ -1,0 +1,35 @@
+<div class="modal-body">
+    <div>
+      <p>
+        The <b>iteration_values</b> parameter can be a list of strings or a list variable, which can be called as a variable in Step 2 (Specific), using the Iteration Variable Name.
+      </p>
+    </div>
+    <div>
+      <h2> Example 1</h2>
+      <h2> Set iteration value to a static list:</h2>
+          Iteration Values:
+          <textarea class="help-snippet" style="height: fit-content">['xe-0/1/0','xe-0/1/1','ge-0/0/1']</textarea>
+          Iteration Variable Name:
+          <textarea class="help-snippet" style="height: fit-content">conf_ints</textarea>
+    </div>
+    <div>
+      <h2> Example 2</h2>
+      <h2> Retrieve iteration value from prior service results:</h2>
+      <div>
+          Iteration Values:
+        <textarea class="help-snippet" style="height: fit-content">get_result("Check Interface Status", device=device.name)["bad_interfaces"].keys()</textarea>
+          Iteration Variable Name:
+          <textarea class="help-snippet" style="height: fit-content">bad_ints</textarea>
+     </div>
+    <div>
+      <h2> Example 3</h2>
+      <h2> Retrieve iteration value from variable:</h2>
+      <div>
+          Iteration Values:
+          <textarea class="help-snippet" style="height: fit-content">get_var('voice_vlans',device=device.name)</textarea>
+          Iteration Variable Name:
+          <textarea class="help-snippet" style="height: fit-content">vce_vlans</textarea>
+     </div>
+    </div>
+  
+  </div>

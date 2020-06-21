@@ -212,7 +212,7 @@
               aria-labelledby="heading-step1-2"
             >
               <div class="panel-body" style="background-color: #fafafa;">
-                {{ form.preprocessing.label() }}
+                {{ form.preprocessing.label(help="common/preprocessing") }}
                 <div class="form-group">
                   {{ form.preprocessing(id=form_type + '-preprocessing',
                   class="form-control add-id") }}
@@ -229,7 +229,7 @@
                     {{ form.skip.label() }}
                   </div>
                 </fieldset>
-                {{ form.skip_query.label() }}
+                {{ form.skip_query.label(help="common/skip_query") }}
                 <div class="form-group">
                   {{ form.skip_query(id=form_type + '-skip_query', class="form-control
                   readonly-when-run add-id") }}
@@ -467,6 +467,7 @@
                   </div>
                 </fieldset>
                 <label>Device Query (define targets from a python query)</label>
+                {{ form.device_query.label(help="common/device_query") }}
                 <div class="form-group">
                   {{ form.device_query(id=form_type + '-device_query',
                   class="form-control add-id") }}
@@ -527,7 +528,7 @@
               aria-labelledby="heading-step3-2"
             >
               <div class="panel-body" style="background-color: #fafafa;">
-                {{ form.iteration_devices.label() }}
+                {{ form.iteration_devices.label(help="common/iteration_devices") }}
                 <div class="form-group">
                   {{ form.iteration_devices(id=form_type + '-iteration_devices',
                   class="form-control add-id") }}
@@ -537,7 +538,7 @@
                   {{ form.iteration_devices_property(id=form_type +
                   '-iteration_devices_property', class="form-control add-id") }}
                 </div>
-                {{ form.iteration_values.label() }}
+                {{ form.iteration_values.label(help="common/iteration_values") }}
                 <div class="form-group">
                   {{ form.iteration_values(id=form_type + '-iteration_values',
                   class="form-control add-id") }}
@@ -595,7 +596,7 @@
                   {{ form.postprocessing_mode(id=form_type + '-postprocessing_mode',
                   class="form-control add-id") }}
                 </div>
-                {{ form.postprocessing.label() }}
+                {{ form.postprocessing.label(help="common/postprocessing") }}
                 <div class="form-group">
                   {{ form.postprocessing(id=form_type + '-postprocessing',
                   class="form-control add-id") }}

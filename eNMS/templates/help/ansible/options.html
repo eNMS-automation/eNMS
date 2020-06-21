@@ -1,0 +1,29 @@
+<div class="modal-body">
+  <div>
+    <p>
+      The ansible playbook service executes the specified playbook on a single device at a time (using ansible-playbook
+      '-i' argument. The <b>options</b> parameter allows to user to pass key/value variable definitions into the
+      playbook (same as using the ansible-playbook '-e' option).
+    </p>
+  </div>
+  <div>
+    <h2> Example </h2>
+    <div>
+      <textarea class="help-snippet" style="height: fit-content">
+        {
+          "version": "1.2.3",
+          "do_validation": "yes",
+          "username": device.username,
+          "password": device.password,
+          "host": device.ip_address
+        }
+      </textarea>
+    </div>
+    <div>
+        Note that inside the ansible playbook, { { version } }, { { do_validation } },
+        { { username } }, { { password } }, and { { host } } can be used to reference these extra variables that are
+        passed in.
+    </div>
+  </div>
+
+</div>

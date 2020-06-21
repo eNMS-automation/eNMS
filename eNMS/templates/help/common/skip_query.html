@@ -1,0 +1,19 @@
+<div class="modal-body">
+  <div>
+      The <b>skip query</b> parameter allows you to define python expression to determine
+        if the service should be skipped. <P>
+      <p>This expression is evaluated to determine what to SKIP - if you happen to use
+        an expression that identifies what you WANT - then you will likely have to negate that expression.</p>
+      <p>If a service is skipped, the <b>Skip Value</b> determines the workflow result (success = True, False).
+        The default value is True.<p>
+      <a href="/docs/automation/services.html#substitution-fields" style="text-decoration: underline">Variable substitution</a> can be performed in this block.
+      <p>Example, run only for Cisco Transport devices (choose the match, then negate it to skip those devices that do NOT match).
+      <textarea class="help-snippet" style="height: fit-content">not ("TRANSPORT" in device.subtype.upper()
+and "IOS-XE" == device.operating_system.strip().upper()
+and "CISCO" == device.vendor.strip().upper())</textarea>
+
+      <P>Example using get_var:
+      <textarea class="help-snippet" style="height: fit-content">not get_var("upgrade_needed", device=device.name)
+      </textarea>
+  </div>
+</div>

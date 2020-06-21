@@ -529,15 +529,13 @@ export function showTypePanel(type, id, mode) {
     name: type,
     id: id,
     callback: function (panel) {
-      let classType = type;
       if (type == "workflow" || type.includes("service")) {
         showServicePanel(type, id, mode);
-        classType = "service";
       }
       if (id) {
         const properties = type === "pool" ? "_properties" : "";
         call({
-          url: `/get${properties}/${classType}/${id}`,
+          url: `/get${properties}/${type}/${id}`,
           callback: function (instance) {
             const action = mode ? mode.toUpperCase() : "EDIT";
             panel.setHeaderTitle(`${action} ${type} - ${instance.name}`);

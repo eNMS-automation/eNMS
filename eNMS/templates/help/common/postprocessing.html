@@ -1,24 +1,26 @@
 <div class="modal-body">
   <div>
     <p>
-      The <b>postprocessing</b> parameter provides a means for the user to modify the service results
-      before the completion of the service. It also allows the user to inspect previously saved information
-      with <b>set_var</b> and compare to information retrieved by this service to make further decisions as to what
-      actions should be taken.
+      The <b>postprocessing</b> parameter provides a means for the user to modify the
+      service results before the completion of the service. It also allows the user to
+      inspect previously saved information with <b>set_var</b> and compare to
+      information retrieved by this service to make further decisions as to what actions
+      should be taken.
     </p>
     <p>
-      The postprocessing mode selector above allows the user to select when the postprocessing will run: always,
-      only on success, or only on failure.  Note that the postprocessing runs before the validation and notification
-      parts of the service.
+      The postprocessing mode selector above allows the user to select when the
+      postprocessing will run: always, only on success, or only on failure. Note that
+      the postprocessing runs before the validation and notification parts of the
+      service.
     </p>
     <p>
-      In the below example, card states are compared to ensure all cards are ready for an upgrade. By
-      setting <b>results['success'] = False</b>, we can force the service to be re-executed using the
-      <b>retries</b> and <b>time between retries</b> set in <b>Step 1</b>
+      In the below example, card states are compared to ensure all cards are ready for
+      an upgrade. By setting <b>results['success'] = False</b>, we can force the service
+      to be re-executed using the <b>retries</b> and <b>time between retries</b> set in
+      <b>Step 1</b>
     </p>
   </div>
-  <textarea class="help-snippet" style="height: fit-content">
-  {
+  <textarea class="help-snippet" style="height: fit-content;">
     upgrade_status_results = results['result']
     for card_name, card_values in upgrade_status_result.items():
       card_state = card_values['exa-base:status']['state']
@@ -31,6 +33,5 @@
     else:
       results['success'] = False
       results['result'] = 'Waiting for ready'
-  }
   </textarea>
 </div>

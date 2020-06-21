@@ -1,50 +1,60 @@
 <div class="modal-body">
   <div>
     <p>
-      The <b>device_query</b> parameter allows for selecting the target device list
-      from a previous service's result or from variables set by a previous service. This
-      parameter is a list of either Device Names or IP Addresses that come from the inventory.
-      The user must select Name or IP Address from the Query Property Type to let the
-      system know whether to expect to match Device Name or IP Addresses.
+      The <b>device_query</b> parameter allows for selecting the target device list from
+      a previous service's result or from variables set by a previous service. This
+      parameter is a list of either Device Names or IP Addresses that come from the
+      inventory. The user must select Name or IP Address from the Query Property Type to
+      let the system know whether to expect to match Device Name or IP Addresses.
     </p>
     <p>
-      Important note: the <b>device_query</b> field is cumulative/summed with the Devices and Pools
-      fields in the target selection form. This means that if the user selects devices, pools, and a
-      device_query, the service will run on the combination of all devices from the selected devices,
-      pools and device_query.
+      Important note: the <b>device_query</b> field is cumulative/summed with the
+      Devices and Pools fields in the target selection form. This means that if the user
+      selects devices, pools, and a device_query, the service will run on the
+      combination of all devices from the selected devices, pools and device_query.
     </p>
   </div>
   <div>
-    <h2> Example 1</h2>
-    <h2> Retrieve device list from the result of a previous service</h2>
+    <h2>Example 1</h2>
+    <h2>Retrieve device list from the result of a previous service</h2>
     <div>
       Device Query:
-      <textarea class="help-snippet" style="height: fit-content">get_result('Previous_Service_Name')['result']</textarea>
+      <textarea class="help-snippet" style="height: fit-content;">
+get_result('Previous_Service_Name')['result']</textarea
+      >
     </div>
     <p style="margin-top: 10px;">Notes:</p>
-      Select the whether the previous service result contained Device Names or IP Addresses in the Query
-      Property Type field
+    Select the whether the previous service result contained Device Names or IP
+    Addresses in the Query Property Type field
   </div>
   <div>
-    <h2> Example 2</h2>
-    <h2> Use the parent workflow's devices as the target device list for this service</h2>
+    <h2>Example 2</h2>
+    <h2>
+      Use the parent workflow's devices as the target device list for this service
+    </h2>
     <div>
       Device Query:
-      <textarea class="help-snippet" style="height: fit-content">[x.name for x in workflow.devices]</textarea>
+      <textarea class="help-snippet" style="height: fit-content;">
+[x.name for x in workflow.devices]</textarea
+      >
     </div>
     <p style="margin-top: 10px;">Notes:</p>
-      Select Name in the Query Property Type field
+    Select Name in the Query Property Type field
   </div>
   <div>
-    <h2> Example 3</h2>
-    <h2> Retrieve the target device list from a variable set by a previous service using set_var('variable_name')</h2>
+    <h2>Example 3</h2>
+    <h2>
+      Retrieve the target device list from a variable set by a previous service using
+      set_var('variable_name')
+    </h2>
     <div>
       Device Query:
-      <textarea class="help-snippet" style="height: fit-content">get_var('variable_name')</textarea>
+      <textarea class="help-snippet" style="height: fit-content;">
+get_var('variable_name')</textarea
+      >
     </div>
     <p style="margin-top: 10px;">Notes:</p>
-      Select the whether the previous service result contained Device Names or IP Addresses in the Query
-      Property Type field
+    Select the whether the previous service result contained Device Names or IP
+    Addresses in the Query Property Type field
   </div>
-
 </div>

@@ -1,4 +1,3 @@
-from flask_login import current_user
 from re import search
 from requests import get, post
 from requests.exceptions import ConnectionError, MissingSchema, ReadTimeout
@@ -58,7 +57,7 @@ class Task(AbstractBase):
         return case([(cls.is_active, "Active")], else_="Inactive")
 
     @classmethod
-    def rbac_filter(cls, query, mode):
+    def rbac_filter(cls, query, mode, user):
         public_tasks = query.join(cls.service).filter(
             models["service"].public == true()
         )
@@ -66,14 +65,14 @@ class Task(AbstractBase):
             query.join(cls.service)
             .join(models["access"], models["service"].access)
             .join(models["user"], models["access"].users)
-            .filter(models["user"].name == current_user.name)
+            .filter(models["user"].name == user.name)
         )
         user_group_access_tasks = (
             query.join(cls.service)
             .join(models["access"], models["service"].access)
             .join(models["group"], models["access"].groups)
             .join(models["user"], models["group"].users)
-            .filter(models["user"].name == current_user.name)
+            .filter(models["user"].name == user.name)
         )
         return public_tasks.union(user_access_tasks, user_group_access_tasks)
 

@@ -1,7 +1,6 @@
 from builtins import __dict__ as builtins
 from copy import deepcopy
 from datetime import datetime
-from flask_login import current_user
 from functools import partial
 from importlib import __import__ as importlib_import
 from io import BytesIO
@@ -78,12 +77,12 @@ class Service(AbstractBase):
     access = relationship(
         "Access", secondary=db.access_service_table, back_populates="services"
     )
-    original_id = db.Column(Integer, ForeignKey("service.id"))
-    original = relationship(
+    originals = relationship(
         "Service",
-        remote_side=[id],
-        foreign_keys="Service.original_id",
-        post_update=True,
+        secondary=db.originals_association,
+        primaryjoin=id == db.originals_association.c.original_id,
+        secondaryjoin=id == db.originals_association.c.child_id,
+        backref="children",
     )
     update_pools = db.Column(Boolean, default=False)
     send_notification = db.Column(Boolean, default=False)
@@ -137,20 +136,19 @@ class Service(AbstractBase):
         super().__init__(**kwargs)
         if "name" not in kwargs:
             self.set_name()
-        self.original = self.original_service
+        self.originals = list(self.get_originals(self))
 
-    @property
-    def original_service(self):
-        if self.shared or not self.workflows:
-            return self
+    def get_originals(self, workflow):
+        if workflow.workflows:
+            return set().union(*(self.get_originals(w) for w in workflow.workflows))
         else:
-            return self.workflows[0].original_service
+            return {workflow}
 
     def update(self, **kwargs):
         if "scoped_name" in kwargs and kwargs.get("scoped_name") != self.scoped_name:
             self.set_name(kwargs["scoped_name"])
         super().update(**kwargs)
-        self.original = self.original_service
+        self.originals = list(self.get_originals(self))
 
     @classmethod
     def filtering_constraints(cls, **kwargs):
@@ -190,21 +188,24 @@ class Service(AbstractBase):
         return app.strip_all(self.name)
 
     @classmethod
-    def rbac_filter(cls, query, mode):
-        service_alias = aliased(cls)
-        public_services = query.filter(cls.public == true())
+    def rbac_filter(cls, query, mode, user):
+        Service = models["service"]
+        service_alias = aliased(Service)
+        public_services = query.filter(Service.public == true())
         user_access_services = (
-            query.join(cls.original.of_type(service_alias))
+            query.join(Service.originals.of_type(service_alias))
             .join(models["access"], service_alias.access)
             .join(models["user"], models["access"].users)
-            .filter(models["user"].name == current_user.name)
+            .filter(models["access"].services_access.contains(mode))
+            .filter(models["user"].name == user.name)
         )
         user_group_access_services = (
-            query.join(cls.original.of_type(service_alias))
+            query.join(Service.originals.of_type(service_alias))
             .join(models["access"], service_alias.access)
             .join(models["group"], models["access"].groups)
             .join(models["user"], models["group"].users)
-            .filter(models["user"].name == current_user.name)
+            .filter(models["access"].services_access.contains(mode))
+            .filter(models["user"].name == user.name)
         )
         return public_services.union(user_access_services, user_group_access_services)
 
@@ -388,7 +389,7 @@ class Run(AbstractBase):
         return [cls.parent_runtime == cls.runtime]
 
     @classmethod
-    def rbac_filter(cls, query, mode):
+    def rbac_filter(cls, query, mode, user):
         public_services = query.join(cls.service).filter(
             models["service"].public == true()
         )
@@ -396,14 +397,14 @@ class Run(AbstractBase):
             query.join(cls.service)
             .join(models["access"], models["service"].access)
             .join(models["user"], models["access"].users)
-            .filter(models["user"].name == current_user.name)
+            .filter(models["user"].name == user.name)
         )
         user_group_access_services = (
             query.join(cls.service)
             .join(models["access"], models["service"].access)
             .join(models["group"], models["access"].groups)
             .join(models["user"], models["group"].users)
-            .filter(models["user"].name == current_user.name)
+            .filter(models["user"].name == user.name)
         )
         return public_services.union(user_access_services, user_group_access_services)
 
@@ -445,6 +446,8 @@ class Run(AbstractBase):
             return self.state
         elif app.redis_queue:
             keys = app.redis("keys", f"{self.parent_runtime}/state/*")
+            if not keys:
+                return {}
             data, state = list(zip(keys, app.redis("mget", *keys))), {}
             for log, value in data:
                 inner_store, (*path, last_key) = state, log.split("/")[2:]
@@ -636,14 +639,14 @@ class Run(AbstractBase):
 
     def device_run(self, payload):
         self.devices = self.compute_devices(payload)
-        # user = db.fetch("user", allow_none=True, name=self.creator)
-        # private_targets = set(device for device in self.devices if not device.public)
-        # unauthorized_targets = private_targets - set(user.devices)
-        # if not user.is_admin and unauthorized_targets:
-        #    targets = "".join(device.name for device in unauthorized_targets)
-        #    error = f"Unauthorized targets ({targets}) for user '{self.creator}'"
-        #    self.log("error", error)
-        #    return {"success": False, "result": error, "runtime": self.runtime}
+        allowed_targets = db.query("device", rbac="target", username=self.creator)
+        unauthorized_targets = set(self.devices) - set(allowed_targets)
+        if unauthorized_targets:
+            result = (
+                f"Error 403: User '{self.creator}' is not allowed to set the following"
+                f" devices as targets: {', '.join(map(str, unauthorized_targets))}"
+            )
+            return {"result": result, "success": False}
         if self.run_method != "once":
             self.write_state("progress/device/total", len(self.devices), "increment")
         if self.iteration_devices and not self.parent_device:

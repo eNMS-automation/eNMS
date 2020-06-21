@@ -243,9 +243,9 @@ class Server(Flask):
             if not current_user.is_authenticated:
                 login_form = LoginForm(request.form)
                 login_form.authentication_method.choices = [
-                    (method, method.capitalize())
-                    for method, active in app.settings["authentication"].items()
-                    if active
+                    (method, properties["display_name"])
+                    for method, properties in app.settings["authentication"].items()
+                    if properties["enabled"]
                 ]
                 return render_template("login.html", login_form=login_form)
             return redirect(url_for("blueprint.route", page="dashboard"))
@@ -332,16 +332,18 @@ class Server(Flask):
                 return jsonify({"alert": "Error 403 Forbidden."})
             form_type = request.form.get("form_type")
             if request.json:
-                result = getattr(app, endpoint)(*args, **request.json)
+                kwargs = request.json
             elif form_type:
                 form = form_classes[form_type](request.form)
                 if not form.validate_on_submit():
                     return jsonify({"invalid_form": True, **{"errors": form.errors}})
-                result = getattr(app, endpoint)(
-                    *args, **form_postprocessing(form, request.form)
-                )
+                kwargs = form_postprocessing(form, request.form)
             else:
-                result = getattr(app, endpoint)(*args, **request.form)
+                kwargs = request.form
+            try:
+                result = getattr(app, endpoint)(*args, **kwargs)
+            except LookupError:
+                return {"alert": "Error 403 - Operation not allowed."}
             try:
                 db.session.commit()
                 return jsonify(result)

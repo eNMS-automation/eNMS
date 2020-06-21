@@ -139,7 +139,7 @@ def test_pool_management(user_client):
     assert len(p1.links) == 20
     assert len(p2.devices) == 12
     assert len(p2.links) == 4
-    assert len(db.fetch_all("pool")) == 9
+    assert len(db.fetch_all("pool")) == 11
     user_client.post(f"/delete_instance/pool/{p1.id}")
     user_client.post(f"/delete_instance/pool/{p2.id}")
-    assert len(db.fetch_all("pool")) == 7
+    assert len(db.fetch_all("pool")) == 9

@@ -98,9 +98,7 @@ class BaseController:
         configure_mappers()
         db.configure_application_events(self)
         self.init_forms()
-        self.reset_run_status()
         if not db.fetch("user", allow_none=True, name="admin"):
-            self.configure_server_id()
             self.create_admin_user()
             db.session.commit()
             if self.settings["app"]["create_examples"]:
@@ -113,7 +111,9 @@ class BaseController:
                     name="default", import_export_types=db.import_classes
                 )
             self.get_git_content()
-            db.session.commit()
+        self.configure_server_id()
+        self.reset_run_status()
+        db.session.commit()
 
     def reset_run_status(self):
         for run in db.fetch("run", all_matches=True, allow_none=True, status="Running"):
@@ -268,17 +268,17 @@ class BaseController:
                 log = getattr(self.run_logs[runtime], mode)(int(service), [])
         return log
 
-    def delete_instance(self, instance_type, instance_id):
-        return db.delete(instance_type, id=instance_id)
+    def delete_instance(self, model, instance_id):
+        return db.delete(model, id=instance_id)
 
-    def get(self, instance_type, id):
-        return db.fetch(instance_type, id=id).serialized
+    def get(self, model, id):
+        return db.fetch(model, id=id).serialized
 
-    def get_properties(self, instance_type, id):
-        return db.fetch(instance_type, id=id).get_properties()
+    def get_properties(self, model, id):
+        return db.fetch(model, id=id).get_properties()
 
-    def get_all(self, instance_type):
-        return [instance.get_properties() for instance in db.fetch_all(instance_type)]
+    def get_all(self, model):
+        return [instance.get_properties() for instance in db.fetch_all(model)]
 
     def update(self, type, **kwargs):
         try:
@@ -293,6 +293,8 @@ class BaseController:
                 db.fetch(type, id=kwargs["copy"]).duplicate(clone=instance)
             db.session.flush()
             return instance.serialized
+        except LookupError:
+            return {"alert": "Error 403 - Operation not allowed."}
         except Exception as exc:
             db.session.rollback()
             if isinstance(exc, IntegrityError):
@@ -317,15 +319,14 @@ class BaseController:
     def count_models(self):
         return {
             "counters": {
-                instance_type: db.query(instance_type).count()
-                for instance_type in properties["dashboard"]
+                model: db.query(model).count() for model in properties["dashboard"]
             },
             "properties": {
-                instance_type: Counter(
-                    str(getattr(instance, properties["dashboard"][instance_type][0]))
-                    for instance in db.fetch_all(instance_type)
+                model: Counter(
+                    str(getattr(instance, properties["dashboard"][model][0]))
+                    for instance in db.fetch_all(model)
                 )
-                for instance_type in properties["dashboard"]
+                for model in properties["dashboard"]
             },
         }
 

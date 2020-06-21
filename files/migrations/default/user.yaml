@@ -28,7 +28,7 @@
   post_requests: [/get_tree_files, /get_device_network_data, /update, /update_pool,
     /delete_corrupted_edges, /get_all, /get_cluster_status, /import_service, /task_action,
     /calendar_init, /topology_import, /run_service, /copy_service_in_workflow, /get_top_level_workflows,
-    /scan_cluster, /get_exported_services, /multiselect_filtering, /connection, /get_service_state,
+    /scan_cluster, /get_exported_services, /multiselect_filtering, /web_connection, /get_service_state,
     /counters, /create_label, /skip_services, /export_service, /import_topology, /save_parameters,
     /switch_menu, /update_all_pools, /result_log_deletion, /reset_status, /scan_playbook_folder,
     /get_git_history, /get_view_topology, /upload_files, /clear_results, /database_deletion,
@@ -38,7 +38,7 @@
     /get_workflow_results, /add_service_to_workflow, /clear_configurations, /migration_export,
     /get, /get_properties, /search_workflow_services, /count_models, /save_settings,
     /filtering, /edit_file, /migration_import, /get_session_log, /process_form_data,
-    /delete_instance, /get_git_network_data, /compare, /get_workflow_services, /handoffssh,
+    /delete_instance, /get_git_network_data, /compare, /get_workflow_services, /desktop_connection,
     /get_runtimes, /delete_node, /scheduler_action]
   small_menu: false
   type: user

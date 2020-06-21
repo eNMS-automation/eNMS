@@ -1,4 +1,3 @@
-from flask_login import current_user
 from re import search, sub
 from sqlalchemy import Boolean, ForeignKey, Integer
 from sqlalchemy.ext.associationproxy import association_proxy
@@ -49,28 +48,28 @@ class Object(AbstractBase):
             setattr(pool, number, getattr(pool, number) - 1)
 
     @classmethod
-    def rbac_filter(cls, query, mode):
+    def rbac_filter(cls, query, mode, user):
         public_objects = query.filter(cls.public == true())
         access_property = getattr(models["access"], f"{cls.class_type}s_access")
         user_access_objects = (
             query.join(cls.access)
             .join(models["user"], models["access"].users)
             .filter(access_property.contains(mode))
-            .filter(models["user"].name == current_user.name)
+            .filter(models["user"].name == user.name)
         )
         user_access_pool_objects = (
             query.join(cls.pools)
             .join(models["access"], models["pool"].access)
             .join(models["user"], models["access"].users)
             .filter(access_property.contains(mode))
-            .filter(models["user"].name == current_user.name)
+            .filter(models["user"].name == user.name)
         )
         user_group_access_objects = (
             query.join(cls.access)
             .join(models["group"], models["access"].groups)
             .join(models["user"], models["group"].users)
             .filter(access_property.contains(mode))
-            .filter(models["user"].name == current_user.name)
+            .filter(models["user"].name == user.name)
         )
         user_group_access_pool_objects = (
             query.join(cls.pools)
@@ -78,7 +77,7 @@ class Object(AbstractBase):
             .join(models["group"], models["access"].groups)
             .join(models["user"], models["group"].users)
             .filter(access_property.contains(mode))
-            .filter(models["user"].name == current_user.name)
+            .filter(models["user"].name == user.name)
         )
         return public_objects.union(
             user_access_objects,
@@ -367,18 +366,20 @@ class Pool(AbstractBase):
             setattr(self, f"{object_type}_number", len(objects))
 
     @classmethod
-    def rbac_filter(cls, query, mode):
+    def rbac_filter(cls, query, mode, user):
         public_pools = query.filter(cls.public == true())
         user_access_pools = (
             query.join(cls.access)
             .join(models["user"], models["access"].users)
-            .filter(models["user"].name == current_user.name)
+            .filter(models["access"].pools_access.contains(mode))
+            .filter(models["user"].name == user.name)
         )
         user_group_access_pools = (
             query.join(cls.access)
             .join(models["group"], models["access"].groups)
             .join(models["user"], models["group"].users)
-            .filter(models["user"].name == current_user.name)
+            .filter(models["access"].pools_access.contains(mode))
+            .filter(models["user"].name == user.name)
         )
         return public_pools.union(user_access_pools, user_group_access_pools)
 

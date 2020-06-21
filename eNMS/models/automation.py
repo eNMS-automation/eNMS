@@ -189,18 +189,17 @@ class Service(AbstractBase):
 
     @classmethod
     def rbac_filter(cls, query, mode, user):
-        Service = models["service"]
-        service_alias = aliased(Service)
-        public_services = query.filter(Service.public == true())
+        service_alias = aliased(models["service"])
+        public_services = query.filter(models["service"].public == true())
         user_access_services = (
-            query.join(Service.originals.of_type(service_alias))
+            query.join(models["service"].originals.of_type(service_alias))
             .join(models["access"], service_alias.access)
             .join(models["user"], models["access"].users)
             .filter(models["access"].services_access.contains(mode))
             .filter(models["user"].name == user.name)
         )
         user_group_access_services = (
-            query.join(Service.originals.of_type(service_alias))
+            query.join(models["service"].originals.of_type(service_alias))
             .join(models["access"], service_alias.access)
             .join(models["group"], models["access"].groups)
             .join(models["user"], models["group"].users)

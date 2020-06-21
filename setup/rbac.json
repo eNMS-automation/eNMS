@@ -47,10 +47,6 @@
         "Tasks": "/table/task",
         "Events": "/table/event"
       }
-    },
-    "Plugins": {
-      "icon": "shield",
-      "pages": {}
     }
   },
   "models": {

@@ -129,13 +129,13 @@ class Server(Flask):
             try:
                 module = import_module(f"eNMS.plugins.{plugin.stem}")
                 plugin = module.Plugin(self, app, db, **settings)
+                app.rbac["menu"].update(settings.get("menu", {}))
             except Exception as exc:
                 app.log("error", f"Could not load plugin '{plugin.stem}' ({exc})")
                 continue
             if "rbac" in settings:
                 for requests in ("get_requests", "post_requests"):
                     app.rbac[requests].extend(settings["rbac"].get(requests, []))
-            app.rbac["menu"]["Plugins"]["pages"].update(settings.get("pages", {}))
             init_rbac_form(app.rbac)
             app.log("info", f"Loading plugin: {settings['name']}")
         db.base.metadata.create_all(bind=db.engine)

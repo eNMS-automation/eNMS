@@ -7,8 +7,8 @@
   "name": "Plugin 1",
   "menu": {
     "Plugin 1": {
-      "icon": "shield",
-      "pages": { "Plugin 1": "/plugin1/" }
+      "icon": "external-link-square",
+      "pages": { "Devices": "/plugin1/" }
     }
   },
   "rbac": {

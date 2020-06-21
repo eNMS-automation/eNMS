@@ -129,10 +129,8 @@ class Server(Flask):
             try:
                 module = import_module(f"eNMS.plugins.{plugin.stem}")
                 plugin = module.Plugin(self, app, db, **settings)
-            except Exception as e:
-                app.log(
-                    "error", f"Could not load plugin: `{plugin.stem}` \n\tError: {e}"
-                )
+            except Exception as exc:
+                app.log("error", f"Could not load plugin '{plugin.stem}' ({exc})")
                 continue
             if "rbac" in settings:
                 for requests in ("get_requests", "post_requests"):

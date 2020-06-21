@@ -3,52 +3,7 @@
     <p>
       The ansible playbook service executes the specified playbook on a single device at a time (using ansible-playbook
       '-i' argument. The <b>arguments</b> parameter allows to user to pass the following standard command line arguments
-      to ansible-playbook.
-    </p>
-    <p>
-    optional arguments:
-      <ul>
-        <li>--ask-vault-pass      ask for vault password</li>
-        <li>--flush-cache         clear the fact cache for every host in inventory</li>
-        <li>--force-handlers      run handlers even if a task fails</li>
-        <li>--list-hosts          outputs a list of matching hosts; does not execute anything else</li>
-        <li>--list-tags           list all available tags</li>
-        <li>--list-tasks          list all tasks that would be executed</li>
-        <li>--skip-tags SKIP_TAGS only run plays and tasks whose tags do not match these values</li>
-        <li>--start-at-task START_AT_TASK start the playbook at the task matching this name</li>
-        <li>--step                one-step-at-a-time: confirm each task before running</li>
-        <li>--syntax-check        perform a syntax check on the playbook, but do not execute it</li>
-        <li>--vault-id VAULT_IDS  the vault identity to use</li>
-        <li>--vault-password-file VAULT_PASSWORD_FILES vault password file</li>
-        <li>--version             show program's version number, config file location, configured module search path, module location, executable location and exit</li>
-        <li>-C, --check           don't make any changes; instead, try to predict some of the changes that may occur</li>
-        <li>-D, --diff            when changing (small) files and templates, show the differences in those files; works great with --check</li>
-        <li>-M MODULE_PATH, --module-path MODULE_PATH prepend colon-separated path(s) to module library (default=~/.ansible/plugins/modules:/usr/share/ansible/plugins/modules)</li>
-        <li>-f FORKS, --forks FORKS specify number of parallel processes to use (default=5)</li>
-        <li>-h, --help            show this help message and exit</li>
-        <li>-l SUBSET, --limit SUBSET further limit selected hosts to an additional pattern</li>
-        <li>-t TAGS, --tags TAGS  only run plays and tasks tagged with these values</li>
-        <li>-v, --verbose         verbose mode (-vvv for more, -vvvv to enable connection debugging)</li>
-      </ul>
-    <p>
-    Connection Options: control as whom and how to connect to hosts
-      <ul>
-        <li>--private-key PRIVATE_KEY_FILE, --key-file PRIVATE_KEY_FILE use this file to authenticate the connection</li>
-        <li>--scp-extra-args SCP_EXTRA_ARGS specify extra arguments to pass to scp only (e.g. -l)</li>
-        <li>--sftp-extra-args SFTP_EXTRA_ARGS specify extra arguments to pass to sftp only (e.g. -f, -l)</li>
-        <li>--ssh-common-args SSH_COMMON_ARGS specify common arguments to pass to sftp/scp/ssh (e.g. ProxyCommand)</li>
-        <li>--ssh-extra-args SSH_EXTRA_ARGS specify extra arguments to pass to ssh only (e.g. -R)</li>
-        <li>-T TIMEOUT, --timeout TIMEOUT override the connection timeout in seconds (default=10)</li>
-        <li>-c CONNECTION, --connection CONNECTION connection type to use (default=smart)</li>
-        <li>-u REMOTE_USER, --user REMOTE_USER connect as this user (default=None)</li>
-    </ul>
-    <p>
-    Privilege Escalation Options: control how and which user you become as on target hosts
-      <ul>
-        <li>--become-method BECOME_METHOD privilege escalation method to use (default=sudo), use `ansible-doc -t become -l` to list valid choices</li>
-        <li>--become-user BECOME_USER run operations as this user (default=root)</li>
-        <li>-K, --ask-become-pass ask for privilege escalation password</li>
-        <li>-b, --become          run operations with become (does not imply password prompting)</li>
+      to ansible-playbook (see Ansible documentation).
     </p>
   </div>
 

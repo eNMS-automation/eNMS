@@ -268,17 +268,17 @@ class BaseController:
                 log = getattr(self.run_logs[runtime], mode)(int(service), [])
         return log
 
-    def delete_instance(self, instance_type, instance_id):
-        return db.delete(instance_type, id=instance_id)
+    def delete_instance(self, model, instance_id):
+        return db.delete(model, id=instance_id)
 
-    def get(self, instance_type, id):
-        return db.fetch("service", id=id).serialized
+    def get(self, model, id):
+        return db.fetch(model, id=id).serialized
 
-    def get_properties(self, instance_type, id):
-        return db.fetch(instance_type, id=id).get_properties()
+    def get_properties(self, model, id):
+        return db.fetch(model, id=id).get_properties()
 
-    def get_all(self, instance_type):
-        return [instance.get_properties() for instance in db.fetch_all(instance_type)]
+    def get_all(self, model):
+        return [instance.get_properties() for instance in db.fetch_all(model)]
 
     def update(self, type, **kwargs):
         try:
@@ -319,15 +319,14 @@ class BaseController:
     def count_models(self):
         return {
             "counters": {
-                instance_type: db.query(instance_type).count()
-                for instance_type in properties["dashboard"]
+                model: db.query(model).count() for model in properties["dashboard"]
             },
             "properties": {
-                instance_type: Counter(
-                    str(getattr(instance, properties["dashboard"][instance_type][0]))
-                    for instance in db.fetch_all(instance_type)
+                model: Counter(
+                    str(getattr(instance, properties["dashboard"][model][0]))
+                    for instance in db.fetch_all(model)
                 )
-                for instance_type in properties["dashboard"]
+                for model in properties["dashboard"]
             },
         }
 

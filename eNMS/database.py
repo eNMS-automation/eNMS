@@ -451,6 +451,8 @@ class Database:
                     "integer": Integer,
                     "json": JSON,
                     "string": self.LargeString,
+                    "select": self.SmallString,
+                    "multiselect": self.List,
                 }[values.get("type", "string")],
                 **kwargs,
             )

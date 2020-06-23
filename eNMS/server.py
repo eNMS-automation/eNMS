@@ -24,6 +24,7 @@ from json import load
 from os import environ
 from pathlib import Path
 from threading import Thread
+from traceback import format_exc
 from uuid import getnode
 
 from eNMS import app
@@ -38,7 +39,6 @@ from eNMS.forms import (
 from eNMS.forms.administration import init_rbac_form, LoginForm
 from eNMS.models import models, property_types, relationships
 from eNMS.setup import properties, rbac, themes
-from traceback import format_exc
 
 
 class Server(Flask):

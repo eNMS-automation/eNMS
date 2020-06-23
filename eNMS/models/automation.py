@@ -1034,6 +1034,7 @@ class Run(AbstractBase):
         section=None,
         operation="set",
         allow_none=False,
+        default=None,
     ):
         payload = payload.setdefault("variables", {})
         if device:
@@ -1047,9 +1048,9 @@ class Run(AbstractBase):
             else:
                 getattr(payload[name], operation)(value)
         else:
-            if name not in payload and not allow_none:
+            if name not in payload and not allow_none and default is None:
                 raise Exception(f"Payload Editor: {name} not found in {payload}.")
-            return payload.get(name)
+            return payload.get(name, default)
 
     def get_var(self, payload, name, device=None, **kwargs):
         return self.payload_helper(payload, name, device=device, **kwargs)

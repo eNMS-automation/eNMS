@@ -138,7 +138,9 @@ class Server(Flask):
                     app.rbac[requests].extend(settings["rbac"].get(requests, []))
                 for entry in settings["menu"].keys():
                     if "pages" in settings["menu"][entry].keys():
-                        app.rbac["pages"].extend(settings["menu"][entry]["pages"].keys())
+                        app.rbac["pages"].extend(
+                            settings["menu"][entry]["pages"].keys()
+                        )
             init_rbac_form(app.rbac)
             app.log("info", f"Loading plugin: {settings['name']}")
         db.base.metadata.create_all(bind=db.engine)

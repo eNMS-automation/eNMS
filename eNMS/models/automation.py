@@ -1046,7 +1046,7 @@ class Run(AbstractBase):
             if operation == "set":
                 payload[name] = value
             else:
-                getattr(payload[name], operation)(value)
+                return getattr(payload[name], operation)(value)
         else:
             if name not in payload and not allow_none and default is None:
                 raise Exception(f"Payload Editor: {name} not found in {payload}.")

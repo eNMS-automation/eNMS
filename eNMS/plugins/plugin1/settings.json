@@ -1,5 +1,5 @@
 {
-  "active": true,
+  "active": false,
   "blueprint": {
     "template_folder": "templates",
     "static_folder": "static"
@@ -8,11 +8,11 @@
   "menu": {
     "Plugin 1": {
       "icon": "external-link-square",
-      "pages": { "Devices": "/plugin1/" }
+      "pages": 
     }
   },
   "rbac": {
-    "get_requests": ["/plugin1/"],
+    "get_requests": [],
     "post_requests": []
   },
   "url_prefix": "/plugin1"

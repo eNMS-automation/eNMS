@@ -142,7 +142,7 @@ class Service(AbstractBase):
         if workflow.workflows:
             return set().union(*(self.get_originals(w) for w in workflow.workflows))
         else:
-            return {workflow}
+            return {self, workflow}
 
     def update(self, **kwargs):
         if "scoped_name" in kwargs and kwargs.get("scoped_name") != self.scoped_name:

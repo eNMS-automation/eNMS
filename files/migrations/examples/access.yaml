@@ -132,3 +132,21 @@
   type: access
   upper_menu: []
   users: [ny]
+- description: ''
+  devices: []
+  devices_access: '[]'
+  get_requests: []
+  groups: [Chicago Users]
+  links: []
+  links_access: '[]'
+  menu: []
+  name: EDIT access for the Example Service (shared, in workflows)
+  pages: []
+  pools: []
+  pools_access: '[]'
+  post_requests: []
+  services: ['[Shared] Example Service (does nothing)']
+  services_access: "['Read', 'Edit']"
+  type: access
+  upper_menu: []
+  users: [ny]

@@ -70,6 +70,7 @@ class Database:
         "pool": ["access", "id", "services", "device_number", "link_number"],
         "service": [
             "access",
+            "children",
             "id",
             "sources",
             "destinations",

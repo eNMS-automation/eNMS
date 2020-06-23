@@ -1094,7 +1094,7 @@
   pools: []
   positions:
     'Regression Workflow 2: Separate Failure - Success paths': [611, -72]
-    'Regression Workflow 3: Napalm getters (postprocessing)': [-111, 213]
+    'Regression Workflow 3: Napalm getters (postprocessing)': [-166, 303]
     'Regression Workflow F: Workflow of Workflows': [-336, 217]
   postprocessing: ''
   postprocessing_mode: always
@@ -1146,7 +1146,7 @@
   iteration_devices_property: ip_address
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2019-09-18 19:04:51.055911'
+  last_modified: '2020-06-23 04:26:08.659023'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -1161,12 +1161,14 @@
   optional_args: {}
   pools: []
   positions:
-    'Regression Workflow 3: Napalm getters (postprocessing)': [221, -78]
+    'Regression Workflow 3: Napalm getters (postprocessing)': [303, 43]
     'Regression Workflow F: Workflow of Workflows': [3, -51]
-  postprocessing: "# Will change the IPv6 of the Management Interface to ::1\r\nresults[\"\
-    result\"][\"get_interfaces_ip\"][\"Management1\"][\"ipv6\"] = \"::1\""
+  postprocessing: "# Will change the IPv6 of the Management Interface to ::1\r\nip_address\
+    \ = get_var(\"value that does not exist\", default=\"::1\")\r\nresults[\"result\"\
+    ][\"get_interfaces_ip\"][\"Management1\"][\"ipv6\"] = ip_address"
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -1229,7 +1231,7 @@
   optional_args: {}
   pools: []
   positions:
-    'Regression Workflow 3: Napalm getters (postprocessing)': [531, -9]
+    'Regression Workflow 3: Napalm getters (postprocessing)': [652, -22]
     'Regression Workflow F: Workflow of Workflows': [3, -51]
   postprocessing: ''
   postprocessing_mode: always
@@ -1290,7 +1292,7 @@
   operating_system: ''
   pools: []
   positions:
-    'Regression Workflow 3: Napalm getters (postprocessing)': [360, 210]
+    'Regression Workflow 3: Napalm getters (postprocessing)': [424, 229]
     'Regression Workflow F: Workflow of Workflows': [3, -51]
   postprocessing: ''
   postprocessing_mode: always
@@ -3900,17 +3902,20 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels:
-    c9ee8980-a972-4ace-a596-03eb2842c4d7:
+    41d9aca9-265a-428c-af8f-da83d682b1f7:
+      alignment: center
       content: "In get_interfaces_ip, we test the python post-processing of\r\nthe\
-        \ results by setting the IPv6 address of the Mgmt1 interface\r\nto \"::1\""
-      positions: [165, -143]
+        \ results by setting the IPv6 address of the Mgmt1 interface\r\nto \"::1\"\
+        .\r\nThe value \"::1\" comes from get_var trying to retrieve a value\r\nthat\
+        \ does not exist in the payload via the \"default\" keyword."
+      positions: [297, -83]
     fa4bd6ec-c736-4b7e-afb0-f4a79b477033:
       alignment: left
       content: "Process payload is a Swiss Army Knife service that uses the results\
         \ of both get_facts\r\nand get_interfaces to compute its success value.\r\n\
         Prerequisite edges are used to ensure the order in which services are run."
-      positions: [385, 283]
-  last_modified: '2020-02-23 09:44:37.562782'
+      positions: [441, 312]
+  last_modified: '2020-06-23 04:27:23.318804'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100

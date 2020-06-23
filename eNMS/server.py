@@ -130,19 +130,19 @@ class Server(Flask):
                 module = import_module(f"eNMS.plugins.{plugin.stem}")
                 plugin = module.Plugin(self, app, db, **settings)
                 app.rbac["menu"].update(settings.get("menu", {}))
+                for request_type in ("get_requests", "post_requests"):
+                    requests = settings.get("rbac", {}).get(request_type, [])
+                    app.rbac[request_type].extend(requests)
+                for section_name, section in settings.get("menu", {}).items():
+                    app.rbac["menu"][section_name] = section
+                    for page, values in section["pages"].items():
+                        pages = [page] if isinstance(values, str) else [page, *values]
+                        app.rbac["pages"].extend(pages)
             except Exception as exc:
                 app.log("error", f"Could not load plugin '{plugin.stem}' ({exc})")
                 continue
-            if "rbac" in settings:
-                for requests in ("get_requests", "post_requests"):
-                    app.rbac[requests].extend(settings["rbac"].get(requests, []))
-                for entry in settings["menu"].keys():
-                    if "pages" in settings["menu"][entry].keys():
-                        app.rbac["pages"].extend(
-                            settings["menu"][entry]["pages"].keys()
-                        )
-            init_rbac_form(app.rbac)
             app.log("info", f"Loading plugin: {settings['name']}")
+        init_rbac_form(app.rbac)
         db.base.metadata.create_all(bind=db.engine)
 
     def register_extensions(self):

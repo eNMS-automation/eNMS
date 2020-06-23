@@ -73,10 +73,7 @@
     "Workflow Builder",
     "Results",
     "Tasks",
-    "Events",
-    "Plugin 1",
-    "Submenu",
-    "Plugin 2"
+    "Events"
   ],
   "upper_menu": ["Admin", "Settings", "Files"],
   "get_requests": [

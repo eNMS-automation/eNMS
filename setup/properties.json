@@ -694,6 +694,11 @@
         "search": "text"
       },
       {
+        "data": "description",
+        "title": "Description",
+        "search": "text"
+      },
+      {
         "data": "buttons",
         "width": "130px",
         "orderable": false,

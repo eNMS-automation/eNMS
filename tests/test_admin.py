@@ -3,16 +3,25 @@ from eNMS.database import db
 
 from tests.conftest import check_pages
 
+ignored_endpoints = [
+    "/download",
+    "/logout",
+    "/rest/",
+    "/view_service_results",
+]
+
 
 def test_authentication(base_client):
     for page in app.rbac["get_requests"]:
+        if any(endpoint in page for endpoint in ignored_endpoints):
+            continue
         r = base_client.get(page)
         assert r.status_code in (200, 302)
 
 
 def test_urls(user_client):
     for page in app.rbac["get_requests"]:
-        if "download" in page:
+        if any(endpoint in page for endpoint in ignored_endpoints):
             continue
         r = user_client.get(page, follow_redirects=True)
         assert r.status_code == 200

@@ -29,7 +29,7 @@ class AdministrationController(BaseController):
         method = kwargs.get(
             "authentication_method", getattr(user, "authentication", None)
         )
-        if not method or not self.settings["authentication"].get(method):
+        if method not in self.settings["authentication"]:
             return False
         elif method == "database":
             hash = self.settings["security"]["hash_user_passwords"]

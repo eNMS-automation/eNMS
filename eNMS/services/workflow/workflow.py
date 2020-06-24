@@ -185,7 +185,7 @@ class Workflow(Service):
         run.write_state("progress/device/failure", len(failure_devices))
         db.session.refresh(run)
         run.restart_run = restart_run
-        return {"payload": payload, "success": success}
+        return {"payload": payload, "success": success, "summary": summary}
 
     def standard_bfs(self, run, payload, device=None):
         number_of_runs = defaultdict(int)

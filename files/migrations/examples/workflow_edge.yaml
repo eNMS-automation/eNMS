@@ -581,8 +581,6 @@
 - {destination: '[Shared] Placeholder', label: success, source: '[Regression Workflow
     L: superworkflow] REST API: call to placeholder property', subtype: success, type: workflow_edge,
   workflow: 'Regression Workflow L: superworkflow'}
-- {destination: '[Shared] End', label: success, source: '[Shared] Placeholder', subtype: success,
-  type: workflow_edge, workflow: 'Regression Workflow L: superworkflow'}
 - {destination: '[Regression Workflow A: get_var, set_var, get_result] Show vrf with
     python query', label: success, source: '[Regression Workflow A: get_var, set_var,
     get_result] Show vrf with payload helper', subtype: success, type: workflow_edge,
@@ -605,3 +603,9 @@
 - {destination: '[Shared] End', label: success, source: '[Regression Workflow 9: Operational
     Data Backup] Push Configurations to Git', subtype: success, type: workflow_edge,
   workflow: 'Regression Workflow 9: Operational Data Backup'}
+- {destination: '[Regression Workflow L: superworkflow] Post Placeholder Processing',
+  label: success, source: '[Shared] Placeholder', subtype: success, type: workflow_edge,
+  workflow: 'Regression Workflow L: superworkflow'}
+- {destination: '[Shared] End', label: success, source: '[Regression Workflow L: superworkflow]
+    Post Placeholder Processing', subtype: success, type: workflow_edge, workflow: 'Regression
+    Workflow L: superworkflow'}

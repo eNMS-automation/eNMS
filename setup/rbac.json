@@ -243,5 +243,21 @@
     "/update_all_pools",
     "/upload_files",
     "/view_filtering"
+  ],
+  "rest_get_requests": [
+    "/configuration",
+    "/is_alive",
+    "/instance",
+    "/query",
+    "/result",
+    "/search"
+  ],
+  "rest_post_requests": [
+    "/create_pool",
+    "/instance",
+    "/migrate",
+    "/run_service",
+    "/run_task",
+    "/topology"
   ]
 }

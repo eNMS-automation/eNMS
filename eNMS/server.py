@@ -59,6 +59,7 @@ class Server(Flask):
     def catch_exceptions_and_commit(func):
         @wraps(func)
         def wrapper(*args, **kwargs):
+            print(request.type, request.path)
             try:
                 return func(*args, **kwargs)
             except LookupError as exc:

@@ -71,7 +71,7 @@
   post_requests: []
   services: ['Regression Workflow 9: Operational Data Backup', 'Regression Workflow
       F: Workflow of Workflows']
-  services_access: "['Read']"
+  services_access: "['Read', 'Schedule']"
   type: access
   upper_menu: []
   users: [chicago]

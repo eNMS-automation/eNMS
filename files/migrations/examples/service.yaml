@@ -7370,7 +7370,7 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels: {}
-  last_modified: '2020-06-24 03:55:26.204147'
+  last_modified: '2020-06-24 05:12:49.760300'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -7387,9 +7387,10 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   reply_to: ''
   reserved: false
-  run_method: per_device
+  run_method: per_service_with_workflow_targets
   scoped_name: 'Regression Workflow L: superworkflow'
   send_notification: false
   send_notification_method: mail

@@ -15,6 +15,8 @@ from eNMS.forms.fields import (
     JsonField,
     MultipleInstanceField,
     PasswordField,
+    SelectField,
+    SelectMultipleField,
     StringField,
 )
 from eNMS.models import property_types, relationships
@@ -46,8 +48,12 @@ class MetaForm(FormMeta):
                     "integer": IntegerField,
                     "json": JsonField,
                     "string": StringField,
+                    "select": SelectField,
+                    "multiselect": SelectMultipleField,
                 }[values.get("type", "string")]
             form_kw = {"default": values["default"]} if "default" in values else {}
+            if field in [SelectField, SelectMultipleField]:
+                form_kw["choices"] = values["choices"]
             field = field(values["pretty_name"], **form_kw)
             setattr(form, property, field)
             attrs[property] = field

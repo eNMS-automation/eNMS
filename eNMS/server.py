@@ -4,6 +4,7 @@ from flask import (
     abort,
     Blueprint,
     Flask,
+    g,
     jsonify,
     make_response,
     redirect,
@@ -59,11 +60,6 @@ class Server(Flask):
     def monitor_rest_request(func):
         @wraps(func)
         def wrapper(*args, **kwargs):
-            request_type = f"{request.method.lower()}_requests"
-            endpoint = "/".join(request.path.split("/")[:3])
-            authorized_endpoint = endpoint in getattr(current_user, request_type)
-            if not current_user.is_admin and not authorized_endpoint:
-                rest_abort(403)
             try:
                 return func(*args, **kwargs)
             except LookupError as exc:
@@ -205,12 +201,17 @@ class Server(Flask):
     def configure_authentication(self):
         @self.auth.verify_password
         def verify_password(username, password):
-            user = db.fetch("user", name=username, allow_none=True)
-            if not user or not password:
-                return False
-            if app.authenticate_user(name=username, password=password):
-                login_user(user)
-                return True
+            user = app.authenticate_user(name=username, password=password)
+            if user:
+                request_type = f"{request.method.lower()}_requests"
+                endpoint = "/".join(request.path.split("/")[:3])
+                authorized_endpoint = endpoint in getattr(user, request_type)
+                if user.is_admin or authorized_endpoint:
+                    login_user(user)
+                    return True
+                g.status = 403
+            else:
+                g.status = 401
 
         @self.auth.get_password
         def get_password(username):
@@ -218,7 +219,9 @@ class Server(Flask):
 
         @self.auth.error_handler
         def unauthorized():
-            return make_response(jsonify({"message": "Wrong credentials."}), 401)
+            print(g.status)
+            message = f"{'Wrong' if g.status == 401 else 'Insufficient'} credentials"
+            return make_response(jsonify({"message": message}), g.status)
 
     def configure_routes(self):
         blueprint = Blueprint("blueprint", __name__, template_folder="../templates")

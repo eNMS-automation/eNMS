@@ -35,7 +35,8 @@ class AdministrationController(BaseController):
             hash = self.settings["security"]["hash_user_passwords"]
             verify = argon2.verify if hash else str.__eq__
             user_password = self.get_password(user.password)
-            return user if user and verify(password, user_password) else False
+            success = user and user_password and verify(password, user_password)
+            return user if success else False
         else:
             response = getattr(self, f"{method}_authentication")(user, name, password)
             if not response:

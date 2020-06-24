@@ -417,7 +417,7 @@ class AutomationController(BaseController):
         for property in ("user", "csrf_token", "form_type"):
             kwargs.pop(property, None)
         kwargs["creator"] = getattr(current_user, "name", "")
-        service = db.fetch("service", id=service_id)
+        service = db.fetch("service", id=service_id, rbac="run")
         kwargs["runtime"] = runtime = self.get_time()
         if kwargs.get("asynchronous", True):
             Thread(target=self.run, args=(service_id,), kwargs=kwargs).start()
@@ -493,4 +493,6 @@ class AutomationController(BaseController):
             return True
 
     def task_action(self, mode, task_id):
-        return db.fetch("task", id=task_id).schedule(mode)
+        task = db.fetch("task", id=task_id)
+        db.fetch("service", rbac="schedule", id=task.service_id)
+        return task.schedule(mode)

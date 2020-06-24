@@ -556,10 +556,11 @@ class Run(AbstractBase):
             results = {"success": False, "runtime": self.runtime, "result": result}
         finally:
             state = self.get_state()
-            results["summary"] = {"failure": [], "success": []}
-            for result in self.results:
-                key = "success" if result.result["success"] else "failure"
-                results["summary"][key].append(result.device.name)
+            if "summary" not in results:
+                results["summary"] = {"failure": [], "success": []}
+                for result in self.results:
+                    key = "success" if result.result["success"] else "failure"
+                    results["summary"][key].append(result.device.name)
             self.status = state["status"] = "Aborted" if self.stop else "Completed"
             self.success = results["success"]
             if self.send_notification:

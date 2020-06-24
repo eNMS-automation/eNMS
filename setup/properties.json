@@ -41,6 +41,25 @@
         "form": false,
         "migrate": false,
         "serialize": false
+      },
+      "custom_select": {
+        "pretty_name": "Custom Select",
+        "choices": [
+          ["a", "A"],
+          ["b", "B"]
+        ],
+        "default": "b",
+        "type": "select"
+      },
+      "custom_multiselect": {
+        "pretty_name": "Custom Multiselect",
+        "choices": [
+          ["a", "A"],
+          ["b", "B"],
+          ["c", "C"]
+        ],
+        "default": ["a", "c"],
+        "type": "multiselect"
       }
     },
     "link": {

@@ -111,6 +111,13 @@ export const call = function ({ url, data, form, callback }) {
     success: function (results) {
       processResults(callback, results);
     },
+    error: function (error) {
+      let message = `Error ${error.status}: ${error.statusText}.`;
+      if (error.status == 400) {
+        message += " Your session might have expired, try refreshing the page.";
+      }
+      notify(message, "error", 5);
+    },
   };
   if (data) {
     Object.assign(params, {

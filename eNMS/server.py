@@ -37,7 +37,7 @@ from eNMS.forms import (
     form_properties,
     form_templates,
 )
-from eNMS.forms.administration import init_rbac_form, LoginForm
+from eNMS.forms.administration import init_variable_forms, LoginForm
 from eNMS.models import models, property_types, relationships
 from eNMS.setup import properties, rbac, themes
 
@@ -143,7 +143,7 @@ class Server(Flask):
                 app.log("error", f"Could not load plugin '{plugin.stem}' ({exc})")
                 continue
             app.log("info", f"Loading plugin: {settings['name']}")
-        init_rbac_form(app.rbac)
+        init_variable_forms(app.rbac)
         db.base.metadata.create_all(bind=db.engine)
 
     def register_extensions(self):

@@ -33,7 +33,6 @@ from eNMS.setup import database as database_settings, properties, settings
 
 
 class Database:
-
     def __init__(self):
         for setting in database_settings.items():
             setattr(self, *setting)

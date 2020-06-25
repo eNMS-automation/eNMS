@@ -40,15 +40,6 @@ class UploadFilesForm(BaseForm):
     form_type = HiddenField(default="upload_files")
 
 
-class DatabaseDeletionForm(BaseForm):
-    action = "eNMS.administration.databaseDeletion"
-    form_type = HiddenField(default="database_deletion")
-    deletion_choices = [(p, p) for p in db.import_export_models]
-    deletion_types = SelectMultipleField(
-        "Instances to delete", choices=deletion_choices
-    )
-
-
 class ResultLogDeletionForm(BaseForm):
     action = "eNMS.administration.resultLogDeletion"
     form_type = HiddenField(default="result_log_deletion")
@@ -75,19 +66,6 @@ class LoginForm(BaseForm):
     password = PasswordField("Password", [InputRequired()])
 
 
-class DatabaseMigrationsForm(BaseForm):
-    template = "database_migration"
-    form_type = HiddenField(default="database_migration")
-    empty_database_before_import = BooleanField("Empty Database before Import")
-    skip_pool_update = BooleanField(
-        "Skip the Pool update after Import", default="checked"
-    )
-    export_choices = [(p, p) for p in db.import_export_models]
-    import_export_types = SelectMultipleField(
-        "Instances to migrate", choices=export_choices
-    )
-
-
 class ImportService(BaseForm):
     action = "eNMS.administration.importService"
     form_type = HiddenField(default="import_service")
@@ -111,7 +89,7 @@ class ChangelogForm(BaseForm):
     content = StringField(widget=TextArea(), render_kw={"rows": 10})
 
 
-def init_rbac_form(rbac):
+def init_variable_forms(rbac):
     def configure_access_form(cls):
         cls.models = rbac["models"]
         for model, access_rights in cls.models.items():
@@ -165,3 +143,23 @@ def init_rbac_form(rbac):
             "POST requests", choices=choices(rbac["post_requests"])
         )
         relations = ["devices", "links", "pools", "services"]
+
+    class DatabaseMigrationsForm(BaseForm):
+        template = "database_migration"
+        form_type = HiddenField(default="database_migration")
+        empty_database_before_import = BooleanField("Empty Database before Import")
+        skip_pool_update = BooleanField(
+            "Skip the Pool update after Import", default="checked"
+        )
+        export_choices = [(p, p) for p in db.import_export_models]
+        import_export_types = SelectMultipleField(
+            "Instances to migrate", choices=export_choices
+        )
+
+    class DatabaseDeletionForm(BaseForm):
+        action = "eNMS.administration.databaseDeletion"
+        form_type = HiddenField(default="database_deletion")
+        deletion_choices = [(p, p) for p in db.import_export_models]
+        deletion_types = SelectMultipleField(
+            "Instances to delete", choices=deletion_choices
+        )

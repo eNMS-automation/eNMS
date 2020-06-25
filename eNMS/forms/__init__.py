@@ -52,7 +52,7 @@ class MetaForm(FormMeta):
                     "multiselect": SelectMultipleField,
                 }[values.get("type", "string")]
             form_kw = {"default": values["default"]} if "default" in values else {}
-            if field in [SelectField, SelectMultipleField]:
+            if field in (SelectField, SelectMultipleField):
                 form_kw["choices"] = values["choices"]
             field = field(values["pretty_name"], **form_kw)
             setattr(form, property, field)

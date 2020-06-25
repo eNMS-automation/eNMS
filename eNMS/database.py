@@ -45,26 +45,9 @@ class Database:
 
     dont_serialize = {"device": ["configuration"]}
 
-    many_to_many_relationships = (
-        ("access", "device"),
-        ("access", "group"),
-        ("access", "link"),
-        ("access", "pool"),
-        ("access", "service"),
-        ("access", "user"),
-        ("pool", "device"),
-        ("pool", "link"),
-        ("run", "device"),
-        ("run", "pool"),
-        ("service", "device"),
-        ("service", "pool"),
-        ("service", "workflow"),
-        ("task", "device"),
-        ("task", "pool"),
-        ("user", "group"),
-    )
-
     def __init__(self):
+        for setting in database_settings.items():
+            setattr(self, *setting)
         self.database_url = environ.get("DATABASE_URL", "sqlite:///database.db")
         self.dialect = self.database_url.split(":")[0]
         self.configure_columns()
@@ -84,8 +67,6 @@ class Database:
             "str": str,
             "date": str,
         }
-        for setting in database_settings.items():
-            setattr(self, *setting)
         for retry_type, values in settings["database"]["retry"].items():
             for parameter, number in values.items():
                 setattr(self, f"retry_{retry_type}_{parameter}", number)

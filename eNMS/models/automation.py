@@ -591,7 +591,7 @@ class Run(AbstractBase):
             ):
                 results = self.create_result(results)
             if app.redis_queue and self.runtime == self.parent_runtime:
-                app.redis("delete", *app.redis("keys", f"{self.runtime}/*"))
+                app.redis("delete", *(app.redis("keys", f"{self.runtime}/*") or []))
         return results
 
     def make_results_json_compliant(self, results):

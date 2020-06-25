@@ -7,18 +7,16 @@ for setup_file in (Path.cwd() / "setup").iterdir():
 
 
 def update_file(old, new):
-    def rec(old, new):
-        for k, v in new.items():
-            if k not in old:
-                old[k] = v
+    for k, v in new.items():
+        if k not in old:
+            old[k] = v
+        else:
+            old_value = old[k]
+            if isinstance(old_value, list):
+                old_value.extend(v)
+            elif isinstance(old_value, dict):
+                update_file(old_value, v)
             else:
-                old_value = old[k]
-                if isinstance(old_value, list):
-                    old_value.extend(v)
-                elif isinstance(old_value, dict):
-                    rec(old_value, v)
-                else:
-                    old[k] = v
+                old[k] = v
 
-    rec(old, new)
     return old

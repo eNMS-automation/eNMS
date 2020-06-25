@@ -264,9 +264,8 @@ class Server(Flask):
         @blueprint.route("/logout")
         @self.monitor_requests
         def logout():
-            app.log(
-                "info", f"User '{current_user.name}'' logging out", logger="security"
-            )
+            logout_log = f"User '{current_user.name}' logging out"
+            app.log("info", logout_log, logger="security")
             logout_user()
             return redirect(url_for("blueprint.route", page="login"))
 

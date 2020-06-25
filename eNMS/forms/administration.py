@@ -89,9 +89,9 @@ class ChangelogForm(BaseForm):
     content = StringField(widget=TextArea(), render_kw={"rows": 10})
 
 
-def init_variable_forms(rbac):
+def init_variable_forms(app):
     def configure_access_form(cls):
-        cls.models = rbac["models"]
+        cls.models = app.rbac["models"]
         for model, access_rights in cls.models.items():
             setattr(cls, model, MultipleInstanceField())
             form_properties["access"][model] = {"type": "object-list"}
@@ -131,16 +131,16 @@ def init_variable_forms(rbac):
         template = "access"
         form_type = HiddenField(default="access")
         description = StringField("Description")
-        menu = SelectMultipleField("Menu", choices=choices(list(rbac["menu"])))
-        pages = SelectMultipleField("Pages", choices=choices(rbac["pages"]))
+        menu = SelectMultipleField("Menu", choices=choices(list(app.rbac["menu"])))
+        pages = SelectMultipleField("Pages", choices=choices(app.rbac["pages"]))
         upper_menu = SelectMultipleField(
-            "Upper Menu", choices=choices(rbac["upper_menu"])
+            "Upper Menu", choices=choices(app.rbac["upper_menu"])
         )
         get_requests = SelectMultipleField(
-            "GET requests", choices=choices(rbac["get_requests"])
+            "GET requests", choices=choices(app.rbac["get_requests"])
         )
         post_requests = SelectMultipleField(
-            "POST requests", choices=choices(rbac["post_requests"])
+            "POST requests", choices=choices(app.rbac["post_requests"])
         )
         relations = ["devices", "links", "pools", "services"]
 
@@ -151,7 +151,7 @@ def init_variable_forms(rbac):
         skip_pool_update = BooleanField(
             "Skip the Pool update after Import", default="checked"
         )
-        export_choices = [(p, p) for p in db.import_export_models]
+        export_choices = [(p, p) for p in app.database["import_export_models"]]
         import_export_types = SelectMultipleField(
             "Instances to migrate", choices=export_choices
         )
@@ -159,7 +159,7 @@ def init_variable_forms(rbac):
     class DatabaseDeletionForm(BaseForm):
         action = "eNMS.administration.databaseDeletion"
         form_type = HiddenField(default="database_deletion")
-        deletion_choices = [(p, p) for p in db.import_export_models]
+        deletion_choices = [(p, p) for p in app.database["import_export_models"]]
         deletion_types = SelectMultipleField(
             "Instances to delete", choices=deletion_choices
         )

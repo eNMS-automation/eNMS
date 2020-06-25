@@ -131,12 +131,12 @@ class Server(Flask):
                 module = import_module(f"eNMS.plugins.{plugin_path.stem}")
                 module.Plugin(self, app, db, **settings)
                 for setup_file in ("database", "properties", "rbac"):
-                    update_file(getattr(app, setup_file), settings.get("rbac", {}))
+                    update_file(getattr(app, setup_file), settings.get(setup_file, {}))
             except Exception as exc:
                 app.log("error", f"Could not load plugin '{plugin_path.stem}' ({exc})")
                 continue
             app.log("info", f"Loading plugin: {settings['name']}")
-        init_variable_forms(app.rbac)
+        init_variable_forms(app)
         db.base.metadata.create_all(bind=db.engine)
 
     def register_extensions(self):

@@ -59,12 +59,6 @@ class Database:
             for parameter, number in values.items():
                 setattr(self, f"retry_{retry_type}_{parameter}", number)
 
-    def __contains__(self, item):
-        return hasattr(self, item)
-
-    def __getitem__(self, item):
-        return getattr(self, item)
-
     @staticmethod
     def dict_conversion(input):
         try:

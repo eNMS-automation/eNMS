@@ -39,7 +39,7 @@ from eNMS.forms import (
 )
 from eNMS.forms.administration import init_variable_forms, LoginForm
 from eNMS.models import models, property_types, relationships
-from eNMS.setup import properties, rbac, themes
+from eNMS.setup import properties, rbac, themes, update_setup_file
 
 
 class Server(Flask):
@@ -120,27 +120,20 @@ class Server(Flask):
         )
 
     def register_plugins(self):
-        for plugin in Path(app.settings["app"]["plugin_path"]).iterdir():
-            if not Path(plugin / "settings.json").exists():
+        for plugin_path in Path(app.settings["app"]["plugin_path"]).iterdir():
+            if not Path(plugin_path / "settings.json").exists():
                 continue
             try:
-                with open(plugin / "settings.json", "r") as file:
+                with open(plugin_path / "settings.json", "r") as file:
                     settings = load(file)
                 if not settings["active"]:
                     continue
-                module = import_module(f"eNMS.plugins.{plugin.stem}")
+                module = import_module(f"eNMS.plugins.{plugin_path.stem}")
                 plugin = module.Plugin(self, app, db, **settings)
-                app.rbac["menu"].update(settings.get("menu", {}))
-                for request_type in ("get_requests", "post_requests"):
-                    requests = settings.get("rbac", {}).get(request_type, [])
-                    app.rbac[request_type].extend(requests)
-                for section_name, section in settings.get("menu", {}).items():
-                    app.rbac["menu"][section_name] = section
-                    for page, values in section["pages"].items():
-                        pages = [page] if isinstance(values, str) else [page, *values]
-                        app.rbac["pages"].extend(pages)
+                update_setup_file(app.rbac, settings.get("rbac", {}))
+                update_setup_file(db, settings.get("database", {}))
             except Exception as exc:
-                app.log("error", f"Could not load plugin '{plugin.stem}' ({exc})")
+                app.log("error", f"Could not load plugin '{plugin_path.stem}' ({exc})")
                 continue
             app.log("info", f"Loading plugin: {settings['name']}")
         init_variable_forms(app.rbac)

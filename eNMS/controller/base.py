@@ -103,12 +103,12 @@ class BaseController:
             db.session.commit()
             if self.settings["app"]["create_examples"]:
                 self.migration_import(
-                    name="examples", import_export_types=db.import_classes
+                    name="examples", import_export_types=db.import_export_models
                 )
                 self.update_credentials()
             else:
                 self.migration_import(
-                    name="default", import_export_types=db.import_classes
+                    name="default", import_export_types=db.import_export_models
                 )
             self.get_git_content()
         self.configure_server_id()

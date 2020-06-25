@@ -219,7 +219,6 @@ class Server(Flask):
 
         @self.auth.error_handler
         def unauthorized():
-            print(g.status)
             message = f"{'Wrong' if g.status == 401 else 'Insufficient'} credentials"
             return make_response(jsonify({"message": message}), g.status)
 

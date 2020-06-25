@@ -29,7 +29,7 @@ from time import sleep
 from traceback import format_exc
 
 from eNMS.models import model_properties, models, property_types, relationships
-from eNMS.setup import properties, settings
+from eNMS.setup import database as database_settings, properties, settings
 
 
 class Database:
@@ -41,82 +41,6 @@ class Database:
         "netbox_token",
         "librenms_token",
         "opennms_password",
-    ]
-
-    dont_migrate = {
-        "device": [
-            "access",
-            "id",
-            "configuration",
-            "services",
-            "source_id",
-            "source",
-            "destination",
-            "destination_id",
-            "pools",
-            "users",
-        ],
-        "group": ["access", "id", "services", "pools"],
-        "link": [
-            "access",
-            "id",
-            "pools",
-            "users",
-            "destination_id",
-            "destination_name",
-            "source_id",
-            "source_name",
-        ],
-        "pool": ["access", "id", "services", "device_number", "link_number"],
-        "service": [
-            "access",
-            "children",
-            "id",
-            "sources",
-            "destinations",
-            "originals",
-            "status",
-            "superworkflow_id",
-            "tasks",
-            "workflows",
-            "tasks",
-            "edges",
-        ],
-        "task": [
-            "access",
-            "id",
-            "service_name",
-            "next_run_time",
-            "is_active",
-            "time_before_next_run",
-            "status",
-        ],
-        "user": [
-            "access",
-            "id",
-            "devices",
-            "pools",
-            "links",
-            "menu",
-            "groups",
-            "get_requests",
-            "post_requests",
-            "upper_menu",
-            "pages",
-        ],
-        "workflow_edge": ["id", "source_id", "destination_id", "workflow_id"],
-    }
-
-    import_classes = [
-        "user",
-        "group",
-        "device",
-        "link",
-        "pool",
-        "service",
-        "workflow_edge",
-        "task",
-        "access",
     ]
 
     dont_serialize = {"device": ["configuration"]}
@@ -160,6 +84,8 @@ class Database:
             "str": str,
             "date": str,
         }
+        for setting in database_settings.items():
+            setattr(self, *setting)
         for retry_type, values in settings["database"]["retry"].items():
             for parameter, number in values.items():
                 setattr(self, f"retry_{retry_type}_{parameter}", number)

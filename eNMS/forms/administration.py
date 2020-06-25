@@ -43,7 +43,7 @@ class UploadFilesForm(BaseForm):
 class DatabaseDeletionForm(BaseForm):
     action = "eNMS.administration.databaseDeletion"
     form_type = HiddenField(default="database_deletion")
-    deletion_choices = [(p, p) for p in db.import_classes]
+    deletion_choices = [(p, p) for p in db.import_export_models]
     deletion_types = SelectMultipleField(
         "Instances to delete", choices=deletion_choices
     )
@@ -82,7 +82,7 @@ class DatabaseMigrationsForm(BaseForm):
     skip_pool_update = BooleanField(
         "Skip the Pool update after Import", default="checked"
     )
-    export_choices = [(p, p) for p in db.import_classes]
+    export_choices = [(p, p) for p in db.import_export_models]
     import_export_types = SelectMultipleField(
         "Instances to migrate", choices=export_choices
     )

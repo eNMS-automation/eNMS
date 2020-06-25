@@ -39,7 +39,7 @@ from eNMS.forms import (
 )
 from eNMS.forms.administration import init_variable_forms, LoginForm
 from eNMS.models import models, property_types, relationships
-from eNMS.setup import properties, rbac, themes, update_setup_file
+from eNMS.setup import properties, rbac, themes, update_file
 
 
 class Server(Flask):
@@ -129,9 +129,9 @@ class Server(Flask):
                 if not settings["active"]:
                     continue
                 module = import_module(f"eNMS.plugins.{plugin_path.stem}")
-                plugin = module.Plugin(self, app, db, **settings)
-                update_setup_file(app.rbac, settings.get("rbac", {}))
-                update_setup_file(db, settings.get("database", {}))
+                module.Plugin(self, app, db, **settings)
+                for setup_file in ("database", "properties", "rbac"):
+                    update_file(getattr(app, setup_file), settings.get("rbac", {}))
             except Exception as exc:
                 app.log("error", f"Could not load plugin '{plugin_path.stem}' ({exc})")
                 continue

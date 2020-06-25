@@ -6,7 +6,7 @@ for setup_file in (Path.cwd() / "setup").iterdir():
         locals()[setup_file.stem] = load(file)
 
 
-def update_setup_file(old, new):
+def update_file(old, new):
     def rec(old, new):
         for k, v in new.items():
             if k not in old:

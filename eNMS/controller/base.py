@@ -41,7 +41,7 @@ except ImportError as exc:
 from eNMS.database import db
 from eNMS.models import models, model_properties, relationships
 from eNMS.controller.syslog import SyslogServer
-from eNMS.setup import settings, properties, rbac
+from eNMS.setup import database, settings, properties, rbac
 
 
 class BaseController:
@@ -61,6 +61,7 @@ class BaseController:
         self.settings = settings
         self.rbac = rbac
         self.properties = properties
+        self.database = database
         self.load_custom_properties()
         self.path = Path.cwd()
         self.init_encryption()

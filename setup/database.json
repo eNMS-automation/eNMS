@@ -90,5 +90,14 @@
     ["task", "device"],
     ["task", "pool"],
     ["user", "group"]
-  ]
+  ],
+  "private_properties": [
+    "password",
+    "enable_password",
+    "custom_password",
+    "netbox_token",
+    "librenms_token",
+    "opennms_password"
+  ],
+  "dont_serialize": { "device": ["configuration"] }
 }

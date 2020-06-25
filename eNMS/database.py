@@ -34,17 +34,6 @@ from eNMS.setup import database as database_settings, properties, settings
 
 class Database:
 
-    private_properties = [
-        "password",
-        "enable_password",
-        "custom_password",
-        "netbox_token",
-        "librenms_token",
-        "opennms_password",
-    ]
-
-    dont_serialize = {"device": ["configuration"]}
-
     def __init__(self):
         for setting in database_settings.items():
             setattr(self, *setting)

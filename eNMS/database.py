@@ -18,7 +18,6 @@ from sqlalchemy import (
     Text,
 )
 from sqlalchemy.dialects.mysql.base import MSMediumBlob
-from sqlalchemy.exc import DatabaseError, OperationalError
 from sqlalchemy.ext.associationproxy import ASSOCIATION_PROXY
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.ext.mutable import MutableDict, MutableList
@@ -243,9 +242,10 @@ class Database:
             try:
                 result = query.all() if all_matches else query.first()
                 break
-            except (DatabaseError, OperationalError):
-                sleep(self.retry_fetch_time * (index + 1))
+            except Exception:
                 error(f"FETCH n°{index} FAILED:\n{format_exc()}")
+                self.session.rollback()
+                sleep(self.retry_fetch_time * (index + 1))
         if result or allow_none:
             return result
         else:
@@ -322,7 +322,7 @@ class Database:
                     instance = transaction(_class, **kwargs)
                     self.session.commit()
                     break
-                except (DatabaseError, OperationalError):
+                except Exception:
                     error(f"Commit n°{index} failed:\n{format_exc()}")
                     self.session.rollback()
                     sleep(self.retry_commit_time * (index + 1))

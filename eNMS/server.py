@@ -25,6 +25,7 @@ from json import load
 from os import environ
 from pathlib import Path
 from threading import Thread
+from time import sleep
 from traceback import format_exc
 from uuid import getnode
 
@@ -60,19 +61,21 @@ class Server(Flask):
     def monitor_rest_request(func):
         @wraps(func)
         def wrapper(*args, **kwargs):
-            try:
-                return func(*args, **kwargs)
-            except LookupError as exc:
-                rest_abort(404, message=str(exc))
-            except Exception as exc:
-                rest_abort(500, message=str(exc))
-            finally:
+            for index in range(db.retry_commit_number):
+                try:
+                    result = func(*args, **kwargs)
+                except Exception as exc:
+                    return rest_abort(500, message=str(exc))
                 try:
                     db.session.commit()
+                    return result
                 except Exception as exc:
                     db.session.rollback()
-                    app.log("error", format_exc())
-                    rest_abort(500, message=str(exc))
+                    app.log("error", f"Rest Call n°{index} failed ({exc}).")
+                    stacktrace = format_exc()
+                    sleep(db.retry_commit_time * (index + 1))
+            else:
+                rest_abort(500, message=stacktrace)
 
         return wrapper
 
@@ -427,7 +430,7 @@ class Server(Flask):
                     "run", service_name=name, runtime=runtime, allow_none=True
                 )
                 if not run:
-                    raise LookupError(
+                    return (
                         "There are no results or on-going services "
                         "for the requested service and runtime."
                     )

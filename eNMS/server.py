@@ -383,7 +383,6 @@ class Server(Flask):
                         "manually_defined": True,
                     },
                 )
-                db.session.commit()
                 return data
 
         class Heartbeat(Resource):

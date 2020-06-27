@@ -25,7 +25,6 @@ from sqlalchemy.orm import scoped_session, sessionmaker
 from sqlalchemy.types import JSON
 from sqlalchemy.orm.collections import InstrumentedList
 from time import sleep
-from traceback import format_exc
 
 from eNMS.models import model_properties, models, property_types, relationships
 from eNMS.setup import database as database_settings, properties, settings
@@ -242,8 +241,8 @@ class Database:
             try:
                 result = query.all() if all_matches else query.first()
                 break
-            except Exception:
-                error(f"FETCH n°{index} FAILED:\n{format_exc()}")
+            except Exception as exc:
+                error(f"Fetch n°{index} failed ({exc})")
                 self.session.rollback()
                 sleep(self.retry_fetch_time * (index + 1))
         if result or allow_none:
@@ -322,8 +321,8 @@ class Database:
                     instance = transaction(_class, **kwargs)
                     self.session.commit()
                     break
-                except Exception:
-                    error(f"Commit n°{index} failed:\n{format_exc()}")
+                except Exception as exc:
+                    error(f"Commit n°{index} failed ({exc})")
                     self.session.rollback()
                     sleep(self.retry_commit_time * (index + 1))
         return instance

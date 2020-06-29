@@ -23,13 +23,13 @@ function run() {
     export ENMS_ADDR="http://192.168.56.102"
     export ENMS_USER="admin"
     export ENMS_PASSWORD="admin"
-    gunicorn --config ../gunicorn.py scheduler:scheduler
+    gunicorn --config gunicorn.py scheduler:scheduler
     exit 0
   fi
   if [ "$redis" = true ]; then
     export REDIS_ADDR="192.168.56.103"
   fi
-  export SCHEDULER_ADDR="http://192.168.56.103:8000"
+  export SCHEDULER_ADDR="http://192.168.56.103:5000"
   export LDAP_ADDR="192.168.56.104"
   export TACACS_ADDR="192.168.56.104"
   export TACACS_PASSWORD="testing123"

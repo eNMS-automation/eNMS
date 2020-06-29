@@ -28,7 +28,7 @@ class Scheduler(Flask):
     seconds = {"seconds": 1, "minutes": 60, "hours": 3600, "days": 86400}
 
     def __init__(self):
-        super().__init__()
+        super().__init__(__name__)
         with open(Path.cwd().parent / "setup" / "scheduler.json", "r") as file:
             self.settings = load(file)
         dictConfig(self.settings["logging"])
@@ -49,13 +49,12 @@ class Scheduler(Flask):
     def register_routes(self):
         @self.route("/job", methods=["DELETE"])
         def delete():
-            print(request.json)
             job_id = request.json
             if self.scheduler.get_job(job_id):
                 self.scheduler.remove_job(job_id)
             return jsonify(True)
 
-        @self.route("/next_runtime/{task_id}")
+        @self.route("/next_runtime/<task_id>")
         def next_runtime(task_id):
             job = self.scheduler.get_job(task_id)
             if job and job.next_run_time:
@@ -77,7 +76,7 @@ class Scheduler(Flask):
                 except JobLookupError:
                     return jsonify({"alert": "There is no such job scheduled."})
 
-        @self.route("/time_left/{task_id}")
+        @self.route("/time_left/<task_id>")
         def time_left(task_id):
             job = self.scheduler.get_job(task_id)
             if job and job.next_run_time:

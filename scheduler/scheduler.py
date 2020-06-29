@@ -2,7 +2,7 @@ from apscheduler.jobstores.base import JobLookupError
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from apscheduler.triggers.cron import CronTrigger
 from datetime import datetime
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from json import load
 from logging.config import dictConfig
 from os import environ
@@ -48,38 +48,38 @@ class Scheduler(Flask):
 
     def register_routes(self):
         @self.route("/job", methods=["DELETE"])
-        def delete(request):
-            job_id = await request.json()
+        def delete():
+            print(request.json)
+            job_id = request.json
             if self.scheduler.get_job(job_id):
                 self.scheduler.remove_job(job_id)
             return jsonify(True)
 
         @self.route("/next_runtime/{task_id}")
-        def next_runtime(request):
-            job = self.scheduler.get_job(request.path_params["task_id"])
+        def next_runtime(task_id):
+            job = self.scheduler.get_job(task_id)
             if job and job.next_run_time:
                 return jsonify(job.next_run_time.strftime("%Y-%m-%d %H:%M:%S"))
             return jsonify("Not Scheduled")
 
         @self.route("/schedule", methods=["POST"])
-        def schedule(request):
-            data = await request.json()
-            if data["mode"] in ("resume", "schedule"):
-                result = self.schedule_task(data["task"])
+        def schedule():
+            if request.json["mode"] in ("resume", "schedule"):
+                result = self.schedule_task(request.json["task"])
                 if not result:
                     return jsonify({"alert": "Cannot schedule in the past."})
                 else:
                     return jsonify({"response": "Task resumed.", "active": True})
             else:
                 try:
-                    self.scheduler.pause_job(data["task"]["id"])
+                    self.scheduler.pause_job(request.json["task"]["id"])
                     return jsonify({"response": "Task paused."})
                 except JobLookupError:
                     return jsonify({"alert": "There is no such job scheduled."})
 
         @self.route("/time_left/{task_id}")
-        def time_left(request):
-            job = self.scheduler.get_job(request.path_params["task_id"])
+        def time_left(task_id):
+            job = self.scheduler.get_job(task_id)
             if job and job.next_run_time:
                 delta = job.next_run_time.replace(tzinfo=None) - datetime.now()
                 hours, remainder = divmod(delta.seconds, 3600)

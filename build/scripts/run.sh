@@ -23,7 +23,7 @@ function run() {
     export ENMS_ADDR="http://192.168.56.102"
     export ENMS_USER="admin"
     export ENMS_PASSWORD="admin"
-    uvicorn scheduler:scheduler --host 0.0.0.0
+    gunicorn --config ../gunicorn.py scheduler:scheduler
     exit 0
   fi
   if [ "$redis" = true ]; then

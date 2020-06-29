@@ -47,9 +47,8 @@ class Scheduler(Flask):
         self.scheduler.start()
 
     def register_routes(self):
-        @self.route("/job", methods=["DELETE"])
-        def delete():
-            job_id = request.json
+        @self.route("/delete_job/<job_id>", methods=["POST"])
+        def delete_job(job_id):
             if self.scheduler.get_job(job_id):
                 self.scheduler.remove_job(job_id)
             return jsonify(True)

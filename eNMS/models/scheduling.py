@@ -46,7 +46,7 @@ class Task(AbstractBase):
             self.schedule()
 
     def delete(self):
-        post(f"{app.scheduler_address}/delete_job", json=self.id)
+        post(f"{app.scheduler_address}/delete_job/{self.id}")
 
     @hybrid_property
     def status(self):

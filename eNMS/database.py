@@ -255,12 +255,12 @@ class Database:
 
     def query(self, model, rbac="read", username=None):
         query = self.session.query(models[model])
-        if model != "user":
+        if rbac and model != "user":
             if current_user:
                 user = current_user
             else:
                 user = self.fetch("user", name=username or "admin")
-            if rbac and not user.is_admin:
+            if not user.is_admin:
                 query = models[model].rbac_filter(query, rbac, user)
         return query
 

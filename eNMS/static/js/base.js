@@ -886,4 +886,6 @@ configureNamespace("base", [
   showDeletionPanel,
   openPanel,
   showTypePanel,
+  processInstance,
+  loadScript
 ]);

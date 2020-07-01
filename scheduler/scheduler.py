@@ -1,5 +1,5 @@
 from apscheduler.jobstores.base import JobLookupError
-from apscheduler.schedulers.asyncio import AsyncIOScheduler
+from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.triggers.cron import CronTrigger
 from datetime import datetime
 from flask import Flask, jsonify, request
@@ -43,7 +43,7 @@ class Scheduler(Flask):
         return datetime.strftime(date, "%Y-%m-%d %H:%M:%S")
 
     def configure_scheduler(self):
-        self.scheduler = AsyncIOScheduler(self.settings["config"])
+        self.scheduler = BackgroundScheduler(self.settings["config"])
         self.scheduler.start()
 
     def register_routes(self):

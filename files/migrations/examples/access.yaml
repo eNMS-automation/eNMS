@@ -1,6 +1,4 @@
 - description: ''
-  devices: []
-  devices_access: ''
   get_requests: [/dashboard, /download_file, /form/access, /form/add_services, /form/administration,
     /form/ansible_playbook_service, /form/changelog, /form/configure_bgp_service,
     /form/netmiko_backup_service, /form/database_deletion, /form/database_migration,
@@ -23,17 +21,15 @@
     /login, /logout, /table/access, /table/changelog, /table/configuration, /table/device,
     /table/event, /table/group, /table/pool, /table/link, /table/run, /table/server,
     /table/service, /table/session, /table/task, /table/user, /view/network, /view/site,
-    /view_service_results, /workflow_builder, /plugin1/, /template/form]
+    /view_service_results, /workflow_builder, /template/form]
   groups: [New York Users]
-  links: []
-  links_access: ''
-  menu: [Home, Administration, Inventory, Visualization, Automation, Scheduling, Plugins]
-  name: Full Access
+  menu: [Home, Administration, Inventory, Visualization, Automation, Scheduling]
+  name: UI + Endpoints (FULL)
   pages: [Access, Dashboard, Changelog, Sessions, Users, Groups, Servers, Devices,
     Configurations, Links, Pools, Network, Sites, Services, Workflow Builder, Results,
-    Tasks, Events, Plugin 1, Submenu, Plugin 2]
+    Tasks, Events]
   pools: []
-  pools_access: ''
+  pools_access: '[]'
   post_requests: [/add_edge, /add_service_to_workflow, /copy_service_in_workflow,
     /calendar_init, /clear_results, /clear_configurations, /compare, /web_connection,
     /counters, /count_models, /create_label, /database_deletion, /delete_corrupted_edges,
@@ -51,20 +47,15 @@
     /filtering, /task_action, /topology_import, /update, /update_pool, /update_all_pools,
     /upload_files, /view_filtering, /form/panel, /process_form_data]
   services: []
-  services_access: ''
+  services_access: '[]'
   type: access
   upper_menu: [Admin, Settings, Files]
   users: [chicago]
 - description: The associated - data backup - task should be available as a result
-  devices: [Dallas]
-  devices_access: "['Read']"
   get_requests: []
   groups: [New York Users]
-  links: []
-  links_access: "['Read']"
   menu: []
-  name: Read Access Device Dallas - Pool San Francisco - Data Backup and Workflows
-    of Workflow (READ)
+  name: Pool San Francisco (READ) - Data Backup and Workflows of Workflow (READ)
   pages: []
   pools: [Datacenter San Francisco]
   pools_access: "['Read']"
@@ -76,36 +67,13 @@
   upper_menu: []
   users: [chicago]
 - description: ''
-  devices: [Baltimore, Austin]
-  devices_access: "['Read', 'Edit']"
-  get_requests: []
-  groups: [Chicago Users]
-  links: []
-  links_access: '[]'
-  menu: []
-  name: Edit Devices Baltimore and Austin
-  pages: []
-  pools: []
-  pools_access: '[]'
-  post_requests: []
-  services: []
-  services_access: '[]'
-  type: access
-  upper_menu: []
-  users: [ny]
-- description: ''
-  devices: [Washington, Austin]
-  devices_access: "['Read', 'Connect', 'Use as target']"
   get_requests: []
   groups: [New York Users]
-  links: []
-  links_access: '[]'
   menu: []
-  name: Read, Connect and Use as Target Access to Washington & Austin - Workflow 3
-    & 4 + Superworkflow (EDIT)
+  name: Washington Pool (FULL) - Workflow 3 & 4 + Superworkflow (EDIT)
   pages: []
-  pools: []
-  pools_access: '[]'
+  pools: [Washington]
+  pools_access: "['Read', 'Edit', 'Connect', 'Use as target']"
   post_requests: []
   services: ['Regression Workflow 4: VRF creation and deletion with Netmiko', 'Regression
       Workflow L: superworkflow', 'Regression Workflow 3: Napalm getters (postprocessing)']
@@ -114,15 +82,10 @@
   upper_menu: []
   users: [chicago]
 - description: ''
-  devices: []
-  devices_access: '[]'
   get_requests: []
   groups: [Chicago Users]
-  links: [link10, link11, link12]
-  links_access: "['Read', 'Edit']"
   menu: []
-  name: Pool link 0-5 (EDIT) + links 10, 11, 12 (EDIT) (links 6-9 should be available
-    via public pool of links)
+  name: Pool link 0-5 (EDIT) (links 6-9 should be available via public pool of links)
   pages: []
   pools: [Links 0 through 5 - Non-public pool - Access set up]
   pools_access: "['Read', 'Edit']"
@@ -133,14 +96,10 @@
   upper_menu: []
   users: [ny]
 - description: ''
-  devices: []
-  devices_access: '[]'
   get_requests: []
   groups: [Chicago Users]
-  links: []
-  links_access: '[]'
   menu: []
-  name: EDIT access for the Example Service (shared, in workflows)
+  name: Example Service (shared, in workflows) (EDIT)
   pages: []
   pools: []
   pools_access: '[]'

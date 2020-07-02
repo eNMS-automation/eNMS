@@ -303,7 +303,7 @@ class BaseController:
             return {"alert": str(exc)}
 
     def log(self, severity, content, user=None, change_log=True, logger="root"):
-        logger_settings = self.settings["logging"]["loggers"].get(logger)
+        logger_settings = self.settings["logging"]["loggers"].get(logger, {})
         if logger:
             getattr(getLogger(logger), severity)(content)
         if change_log or logger and logger_settings.get("change_log"):

@@ -250,7 +250,7 @@ class BaseController:
         try:
             return getattr(self.redis_queue, operation)(*args, **kwargs)
         except (ConnectionError, TimeoutError) as exc:
-            self.log("error", f"Redis Queue Unreachable ({exc})")
+            self.log("error", f"Redis Queue Unreachable ({exc})", change_log=False)
 
     def log_queue(self, runtime, service, log=None, mode="add"):
         if self.redis_queue:

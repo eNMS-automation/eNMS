@@ -10,6 +10,7 @@ from eNMS.forms.fields import BooleanField, HiddenField, InstanceField, SelectFi
 from eNMS.models.automation import Service
 
 
+@db.set_custom_properties
 class Workflow(Service):
 
     __tablename__ = "workflow"

@@ -50,10 +50,8 @@
     }
   },
   "models": {
-    "services": ["Read", "Edit", "Run", "Schedule"],
-    "devices": ["Read", "Edit", "Connect", "Use as target"],
-    "links": ["Read", "Edit"],
-    "pools": ["Read", "Edit"]
+    "pools": ["Read", "Edit", "Connect", "Use as target"],
+    "services": ["Read", "Edit", "Run", "Schedule"]
   },
   "pages": [
     "Access",

@@ -61,20 +61,20 @@ class Task(AbstractBase):
         public_tasks = query.join(cls.service).filter(
             models["service"].public == true()
         )
-        user_access_tasks = (
+        user_tasks = (
             query.join(cls.service)
             .join(models["access"], models["service"].access)
             .join(models["user"], models["access"].users)
             .filter(models["user"].name == user.name)
         )
-        user_group_access_tasks = (
+        user_group_tasks = (
             query.join(cls.service)
             .join(models["access"], models["service"].access)
             .join(models["group"], models["access"].groups)
             .join(models["user"], models["group"].users)
             .filter(models["user"].name == user.name)
         )
-        return public_tasks.union(user_access_tasks, user_group_access_tasks)
+        return public_tasks.union(user_tasks, user_group_tasks)
 
     @property
     def next_run_time(self):

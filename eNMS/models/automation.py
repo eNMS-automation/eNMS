@@ -191,14 +191,14 @@ class Service(AbstractBase):
     def rbac_filter(cls, query, mode, user):
         service_alias = aliased(models["service"])
         public_services = query.filter(models["service"].public == true())
-        user_access_services = (
+        user_services = (
             query.join(models["service"].originals.of_type(service_alias))
             .join(models["access"], service_alias.access)
             .join(models["user"], models["access"].users)
             .filter(models["access"].services_access.contains(mode))
             .filter(models["user"].name == user.name)
         )
-        user_group_access_services = (
+        user_group_services = (
             query.join(models["service"].originals.of_type(service_alias))
             .join(models["access"], service_alias.access)
             .join(models["group"], models["access"].groups)
@@ -206,7 +206,7 @@ class Service(AbstractBase):
             .filter(models["access"].services_access.contains(mode))
             .filter(models["user"].name == user.name)
         )
-        return public_services.union(user_access_services, user_group_access_services)
+        return public_services.union(user_services, user_group_services)
 
     def set_name(self, name=None):
         if self.shared:
@@ -392,20 +392,20 @@ class Run(AbstractBase):
         public_services = query.join(cls.service).filter(
             models["service"].public == true()
         )
-        user_access_services = (
+        user_services = (
             query.join(cls.service)
             .join(models["access"], models["service"].access)
             .join(models["user"], models["access"].users)
             .filter(models["user"].name == user.name)
         )
-        user_group_access_services = (
+        user_group_services = (
             query.join(cls.service)
             .join(models["access"], models["service"].access)
             .join(models["group"], models["access"].groups)
             .join(models["user"], models["group"].users)
             .filter(models["user"].name == user.name)
         )
-        return public_services.union(user_access_services, user_group_access_services)
+        return public_services.union(user_services, user_group_services)
 
     @property
     def name(self):

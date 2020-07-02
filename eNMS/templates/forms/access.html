@@ -35,12 +35,15 @@
           User Interface Access
         </legend>
         <div class="form-group">
+          <label>Sections</label>
           <div class="form-group">
             {{ form.menu(id="access-menu", class="form-control add-id") }}
           </div>
+          <label>Pages</label>
           <div class="form-group">
             {{ form.pages(id="access-pages", class="form-control add-id") }}
           </div>
+          <label>Upper Menu</label>
           <div class="form-group">
             {{ form.upper_menu(id="access-upper_menu", class="form-control add-id") }}
           </div>
@@ -48,13 +51,15 @@
       </fieldset>
       <fieldset class="section">
         <legend align="center" class="section">
-          GET / POST Requests Access
+          Endpoints Access
         </legend>
         <div class="form-group">
+          <label>GET Requests</label>
           <div class="form-group">
             {{ form.get_requests(id="access-get_requests", class="form-control add-id")
             }}
           </div>
+          <label>POST Requests</label>
           <div class="form-group">
             {{ form.post_requests(id="access-post_requests", class="form-control
             add-id") }}

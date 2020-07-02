@@ -63,7 +63,7 @@
       }
     },
     "link": {
-      "property1": {
+      "custom_property": {
         "pretty_name": "Custom Property",
         "type": "string",
         "default": "CP"
@@ -95,6 +95,13 @@
         "pretty_name": "Completion time",
         "type": "integer",
         "default": 1
+      }
+    },
+    "workflow": {
+      "workflow_category": {
+        "pretty_name": "Workflow Category",
+        "type": "string",
+        "default": "Example workflow(s)"
       }
     }
   },

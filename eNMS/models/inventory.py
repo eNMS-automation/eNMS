@@ -50,41 +50,22 @@ class Object(AbstractBase):
     @classmethod
     def rbac_filter(cls, query, mode, user):
         public_objects = query.filter(cls.public == true())
-        access_property = getattr(models["access"], f"{cls.class_type}s_access")
-        user_access_objects = (
-            query.join(cls.access)
-            .join(models["user"], models["access"].users)
-            .filter(access_property.contains(mode))
-            .filter(models["user"].name == user.name)
-        )
-        user_access_pool_objects = (
+        user_objects = (
             query.join(cls.pools)
             .join(models["access"], models["pool"].access)
             .join(models["user"], models["access"].users)
-            .filter(access_property.contains(mode))
+            .filter(models["access"].pools_access.contains(mode))
             .filter(models["user"].name == user.name)
         )
-        user_group_access_objects = (
-            query.join(cls.access)
-            .join(models["group"], models["access"].groups)
-            .join(models["user"], models["group"].users)
-            .filter(access_property.contains(mode))
-            .filter(models["user"].name == user.name)
-        )
-        user_group_access_pool_objects = (
+        user_group_objects = (
             query.join(cls.pools)
             .join(models["access"], models["pool"].access)
             .join(models["group"], models["access"].groups)
             .join(models["user"], models["group"].users)
-            .filter(access_property.contains(mode))
+            .filter(models["access"].pools_access.contains(mode))
             .filter(models["user"].name == user.name)
         )
-        return public_objects.union(
-            user_access_objects,
-            user_access_pool_objects,
-            user_group_access_objects,
-            user_group_access_pool_objects,
-        )
+        return public_objects.union(user_objects, user_group_objects)
 
 
 @db.set_custom_properties
@@ -113,9 +94,6 @@ class Device(Object):
     last_update = db.Column(db.SmallString, default="Never")
     last_runtime = db.Column(db.SmallString)
     last_duration = db.Column(db.SmallString)
-    access = relationship(
-        "Access", secondary=db.access_device_table, back_populates="devices"
-    )
     services = relationship(
         "Service", secondary=db.service_device_table, back_populates="devices"
     )
@@ -238,9 +216,6 @@ class Link(Object):
     )
     destination_name = association_proxy("destination", "name")
     pools = relationship("Pool", secondary=db.pool_link_table, back_populates="links")
-    access = relationship(
-        "Access", secondary=db.access_link_table, back_populates="links"
-    )
     __table_args__ = (UniqueConstraint(name, source_id, destination_id),)
 
     def __init__(self, **kwargs):
@@ -368,20 +343,20 @@ class Pool(AbstractBase):
     @classmethod
     def rbac_filter(cls, query, mode, user):
         public_pools = query.filter(cls.public == true())
-        user_access_pools = (
+        user_pools = (
             query.join(cls.access)
             .join(models["user"], models["access"].users)
             .filter(models["access"].pools_access.contains(mode))
             .filter(models["user"].name == user.name)
         )
-        user_group_access_pools = (
+        user_group_pools = (
             query.join(cls.access)
             .join(models["group"], models["access"].groups)
             .join(models["user"], models["group"].users)
             .filter(models["access"].pools_access.contains(mode))
             .filter(models["user"].name == user.name)
         )
-        return public_pools.union(user_access_pools, user_group_access_pools)
+        return public_pools.union(user_pools, user_group_pools)
 
 
 class Session(AbstractBase):

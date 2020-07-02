@@ -141,7 +141,7 @@ def init_variable_forms(app):
         post_requests = SelectMultipleField(
             "POST requests", choices=choices(app.rbac["post_requests"])
         )
-        relations = ["devices", "links", "pools", "services"]
+        relations = ["pools", "services"]
 
     class DatabaseMigrationsForm(BaseForm):
         template = "database_migration"

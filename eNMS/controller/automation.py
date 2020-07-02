@@ -135,6 +135,19 @@ class AutomationController(BaseController):
 
     def delete_corrupted_edges(self):
         edges, duplicated_edges = db.fetch_all("workflow_edge"), defaultdict(list)
+        number_of_corrupted_edges = 0
+        for edge in edges:
+            services = getattr(edge.workflow, "services", [])
+            if (
+                not edge.source
+                or not edge.destination
+                or not edge.workflow
+                or edge.source not in services
+                or edge.destination not in services
+            ):
+                db.session.delete(edge)
+                number_of_corrupted_edges += 1
+        db.session.commit()
         for edge in edges:
             duplicated_edges[
                 (
@@ -144,17 +157,9 @@ class AutomationController(BaseController):
                     edge.subtype,
                 )
             ].append(edge)
-        number_of_corrupted_edges = 0
         for duplicates in duplicated_edges.values():
-            if len(duplicates) == 1:
-                continue
             for duplicate in duplicates[1:]:
                 db.session.delete(duplicate)
-                number_of_corrupted_edges += 1
-        for edge in edges:
-            services = edge.workflow.services
-            if edge.source not in services or edge.destination not in services:
-                db.session.delete(edge)
                 number_of_corrupted_edges += 1
         return number_of_corrupted_edges
 

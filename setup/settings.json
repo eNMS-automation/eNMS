@@ -36,18 +36,6 @@
     },
     "small_string_length": 255
   },
-  "logging": {
-    "loggers": {
-      "security": {
-        "change_log": true,
-        "service_log": true
-      }
-    },
-    "external_loggers": {
-      "requests": "info",
-      "urllib3": "info"
-    }
-  },
   "mail": {
     "port": 587,
     "reply_to": "antoine.fourmy@gmail.com",

@@ -37,7 +37,13 @@
     },
     "security": {
       "handlers": ["security"],
-      "level": "DEBUG"
+      "level": "DEBUG",
+      "change_log": true,
+      "service_log": true
     }
+  },
+  "external_loggers": {
+    "requests": "info",
+    "urllib3": "info"
   }
 }

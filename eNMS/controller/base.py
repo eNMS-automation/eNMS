@@ -41,7 +41,7 @@ except ImportError as exc:
 from eNMS.database import db
 from eNMS.models import models, model_properties, relationships
 from eNMS.controller.syslog import SyslogServer
-from eNMS.setup import database, settings, properties, rbac
+from eNMS.setup import database, logging, properties, rbac, settings
 
 
 class BaseController:
@@ -62,6 +62,7 @@ class BaseController:
         self.rbac = rbac
         self.properties = properties
         self.database = database
+        self.logging = logging
         self.load_custom_properties()
         self.path = Path.cwd()
         self.init_encryption()
@@ -177,7 +178,7 @@ class BaseController:
         with open(self.path / "setup" / "logging.json", "r") as logging_config:
             logging_config = load(logging_config)
         dictConfig(logging_config)
-        for logger, log_level in self.settings["logging"]["external_loggers"].items():
+        for logger, log_level in logging_config["external_loggers"].items():
             info(f"Changing {logger} log level to '{log_level}'")
             log_level = getattr(import_module("logging"), log_level.upper())
             getLogger(logger).setLevel(log_level)
@@ -303,7 +304,7 @@ class BaseController:
             return {"alert": str(exc)}
 
     def log(self, severity, content, user=None, change_log=True, logger="root"):
-        logger_settings = self.settings["logging"]["loggers"].get(logger, {})
+        logger_settings = self.logging["loggers"].get(logger, {})
         if logger:
             getattr(getLogger(logger), severity)(content)
         if change_log or logger and logger_settings.get("change_log"):

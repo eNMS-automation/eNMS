@@ -35,7 +35,10 @@ class MetaForm(FormMeta):
         form = type.__new__(cls, name, bases, attrs)
         if not hasattr(form, "custom_properties"):
             form.custom_properties = {}
-        form.custom_properties.update(app.properties["custom"].get(form_type, {}))
+        form.custom_properties = {
+            **form.custom_properties,
+            **app.properties["custom"].get(form_type, {}),
+        }
         for property, values in form.custom_properties.items():
             if not values.get("form", True):
                 continue

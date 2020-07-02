@@ -63,7 +63,7 @@
       }
     },
     "link": {
-      "property1": {
+      "custom_property": {
         "pretty_name": "Custom Property",
         "type": "string",
         "default": "CP"

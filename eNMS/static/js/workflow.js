@@ -392,7 +392,9 @@ function saveEdge(edge) {
     url: `/add_edge/${param}`,
     callback: function (result) {
       workflow.last_modified = result.update_time;
-      edges.add(edgeToEdge(result.edge));
+      const newEdge = edgeToEdge(result.edge);
+      edges.add(newEdge);
+      workflow.edges.push(newEdge)
       graph.addEdgeMode();
     },
   });

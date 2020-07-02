@@ -343,20 +343,20 @@ class Pool(AbstractBase):
     @classmethod
     def rbac_filter(cls, query, mode, user):
         public_pools = query.filter(cls.public == true())
-        user_access_pools = (
+        user_pools = (
             query.join(cls.access)
             .join(models["user"], models["access"].users)
             .filter(models["access"].pools_access.contains(mode))
             .filter(models["user"].name == user.name)
         )
-        user_group_access_pools = (
+        user_group_pools = (
             query.join(cls.access)
             .join(models["group"], models["access"].groups)
             .join(models["user"], models["group"].users)
             .filter(models["access"].pools_access.contains(mode))
             .filter(models["user"].name == user.name)
         )
-        return public_pools.union(user_access_pools, user_group_access_pools)
+        return public_pools.union(user_pools, user_group_pools)
 
 
 class Session(AbstractBase):

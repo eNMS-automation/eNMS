@@ -96,13 +96,14 @@
         "type": "integer",
         "default": 1
       }
-    }
+    },
     "workflow": {
       "workflow_category": {
         "pretty_name": "Workflow Category",
+        "type": "string",
         "default": "Example workflow(s)"
       }
-    },
+    }
   },
   "dashboard": {
     "device": [

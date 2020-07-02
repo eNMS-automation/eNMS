@@ -3,33 +3,33 @@ td span {
 }
 
 /* Set the table pages in the middle */
-.dataTables_length {  
-  width: 40%; 
-  float: left;  
+.dataTables_length {
+  width: 40%;
+  float: left;
 }
 
 /* Align center for "No data available in table" when empty table */
 .dataTables_empty,
 table.display td.center {
-  text-align: center;  
+  text-align: center;
 }
 
 /* Align "Show 1 to 10 of X entries to the right */
 .dataTables_info {
   font-size: 15px;
-  margin-right: 8px;  
+  margin-right: 8px;
   margin-top: -10px;
   float: right;
 }
 
-.dataTables_scrollBody {  
+.dataTables_scrollBody {
   margin-bottom: 10px;
 }
 
 .dataTables_paginate .pagination {
   display: block;
   margin-left: auto;
-  margin-right: auto;  
+  margin-right: auto;
 }
 
 th.dt-center,

@@ -74,9 +74,7 @@
     "workflow_edge": ["id", "source_id", "destination_id", "workflow_id"]
   },
   "many_to_many_relationships": [
-    ["access", "device"],
     ["access", "group"],
-    ["access", "link"],
     ["access", "pool"],
     ["access", "service"],
     ["access", "user"],

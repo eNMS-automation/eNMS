@@ -111,15 +111,7 @@ class Access(AbstractBase):
     services = relationship(
         "Service", secondary=db.access_service_table, back_populates="access"
     )
-    devices = relationship(
-        "Device", secondary=db.access_device_table, back_populates="access"
-    )
-    links = relationship(
-        "Link", secondary=db.access_link_table, back_populates="access"
-    )
     services_access = db.Column(db.SmallString)
-    devices_access = db.Column(db.SmallString)
-    links_access = db.Column(db.SmallString)
     pools_access = db.Column(db.SmallString)
 
     def update(self, **kwargs):

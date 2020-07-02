@@ -394,7 +394,7 @@ function saveEdge(edge) {
       workflow.last_modified = result.update_time;
       const newEdge = edgeToEdge(result.edge);
       edges.add(newEdge);
-      workflow.edges.push(newEdge)
+      workflow.edges.push(newEdge);
       graph.addEdgeMode();
     },
   });

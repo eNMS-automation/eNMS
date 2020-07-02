@@ -887,5 +887,5 @@ configureNamespace("base", [
   openPanel,
   showTypePanel,
   processInstance,
-  loadScript
+  loadScript,
 ]);

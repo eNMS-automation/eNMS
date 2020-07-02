@@ -97,6 +97,12 @@
         "default": 1
       }
     }
+    "workflow": {
+      "workflow_category": {
+        "pretty_name": "Workflow Category",
+        "default": "Example workflow(s)"
+      }
+    },
   },
   "dashboard": {
     "device": [

@@ -430,7 +430,6 @@ class Run(AbstractBase):
         elif self.__dict__.get("service_id") or self.__dict__.get("service"):
             return getattr(self.service, key)
         else:
-            print(self.__dict__)
             raise AttributeError
 
     def result(self, device=None):
@@ -1034,7 +1033,7 @@ class Run(AbstractBase):
         value=None,
         device=None,
         section=None,
-        operation="set",
+        operation="__setitem__",
         allow_none=False,
         default=None,
     ):
@@ -1044,18 +1043,16 @@ class Run(AbstractBase):
             payload = payload.setdefault(device, {})
         if section:
             payload = payload.setdefault(section, {})
-        if value is not None:
-            if operation == "set":
-                payload[name] = value
-            else:
-                return getattr(payload[name], operation)(value)
+        if value is None:
+            value = default
+        value = getattr(payload, operation)(name, value)
+        if operation == "get" and not allow_none and value is None:
+            raise Exception(f"Payload Editor: {name} not found in {payload}.")
         else:
-            if name not in payload and not allow_none and default is None:
-                raise Exception(f"Payload Editor: {name} not found in {payload}.")
-            return payload.get(name, default)
+            return value
 
-    def get_var(self, payload, name, device=None, **kwargs):
-        return self.payload_helper(payload, name, device=device, **kwargs)
+    def get_var(self, *args, device=None, **kwargs):
+        return self.payload_helper(*args, operation="get", device=device, **kwargs)
 
     def get_result(self, service_name, device=None, workflow=None):
         def filter_run(query, property):

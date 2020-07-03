@@ -555,6 +555,7 @@ class Run(AbstractBase):
             self.log("error", result)
             results = {"success": False, "runtime": self.runtime, "result": result}
         finally:
+            db.session.commit()
             state = self.get_state()
             if "summary" not in results:
                 results["summary"] = {"failure": [], "success": []}

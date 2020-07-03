@@ -351,26 +351,25 @@
               aria-labelledby="heading-{{ group_id }}"
             >
               <div class="panel-body" style="background-color: #fafafa;">
-                {% for field_name in group.commands %} {% if field_name == "run_method"
-                or field_name == "form_type" %} {% elif form[field_name].type ==
-                "BooleanField" %}
+                {% for field_name in group.commands %} {% set label %} {% if
+                form[field_name].render_kw and "help" in form[field_name].render_kw %}
+                <label
+                  help="{{ form[field_name].render_kw['help'] }}"
+                  for="{{ field_name }}"
+                >
+                  {{ form[field_name].label }}
+                </label>
+                {% else %}
+                <label>{{ form[field_name].label }}</label>
+                {% endif %} {% endset %} {% if field_name == "run_method" or field_name
+                == "form_type" %} {% elif form[field_name].type == "BooleanField" %}
                 <fieldset>
                   <div class="item">
                     {% if form[field_name].default %} {{
                     form[field_name](id="{}-{}".format(form_type, field_name),
                     class="add-id", checked=True) }} {% else %} {{
                     form[field_name](id="{}-{}".format(form_type, field_name),
-                    class="add-id") }} {% endif %} {% if form[field_name].render_kw and
-                    "help" in form[field_name].render_kw %}
-                    <label
-                      help="{{ form[field_name].render_kw['help'] }}"
-                      for="{{ field_name }}"
-                    >
-                      {{ form[field_name].label }}
-                    </label>
-                    {% else %}
-                    <label>{{ form[field_name].label }}</label>
-                    {% endif %}
+                    class="add-id") }} {% endif %} {{ label }}
                   </div>
                 </fieldset>
                 {% elif form[field_name].type == "FieldList" %} {% for entry in
@@ -387,17 +386,7 @@
                   </div>
                   {% endif %} {% endfor %}
                 </fieldset>
-                {% endfor %} {% else %} {% if form[field_name].render_kw and "help" in
-                form[field_name].render_kw %}
-                <label
-                  help="{{ form[field_name].render_kw['help'] }}"
-                  for="{{ field_name }}"
-                >
-                  {{ form[field_name].label }}
-                </label>
-                {% else %}
-                <label>{{ form[field_name].label }}</label>
-                {% endif %}
+                {% endfor %} {% else %} {{ label }}
                 <div class="form-group">
                   {{ form[field_name](id="{}-{}".format(form_type, field_name),
                   class="form-control add-id") }}

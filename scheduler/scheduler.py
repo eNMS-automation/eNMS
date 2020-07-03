@@ -92,7 +92,7 @@ class Scheduler(Flask):
             f"{environ.get('ENMS_ADDR')}/rest/run_task",
             json=task_id,
             auth=HTTPBasicAuth(environ.get("ENMS_USER"), environ.get("ENMS_PASSWORD")),
-            verify=not environ.get("DONT_VERIFY_CERTIFICATE"),
+            verify=int(environ.get("VERIFY_CERTIFICATE", 1)),
         )
 
     def schedule_task(self, task):

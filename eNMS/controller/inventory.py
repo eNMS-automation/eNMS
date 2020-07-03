@@ -127,9 +127,12 @@ class InventoryController(BaseController):
     def get_git_network_data(self, device_name, hash):
         tree, result = Repo(self.path / "network_data").commit(hash).tree, {}
         for property in self.configuration_properties:
-            file = tree / device_name / property
-            with BytesIO(file.data_stream.read()) as f:
-                result[property] = f.read().decode("utf-8")
+            try:
+                file = tree / device_name / property
+                with BytesIO(file.data_stream.read()) as f:
+                    result[property] = f.read().decode("utf-8")
+            except KeyError:
+                result[property] = ""
         return result
 
     def get_device_network_data(self, device_id):

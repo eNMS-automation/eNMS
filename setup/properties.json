@@ -42,6 +42,15 @@
         "migrate": false,
         "serialize": false
       },
+      "specialized_data": {
+        "pretty_name": "Specialized Data",
+        "default": "",
+        "configuration": true,
+        "log_change": false,
+        "form": false,
+        "migrate": false,
+        "serialize": false
+      },
       "custom_select": {
         "pretty_name": "Custom Select",
         "choices": [

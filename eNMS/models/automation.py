@@ -427,9 +427,10 @@ class Run(AbstractBase):
             return self.__dict__[key]
         elif key in self.__dict__.get("properties", {}):
             return self.__dict__["properties"][key]
-        elif self.__dict__.get("service_id"):
+        elif self.__dict__.get("service_id") or self.__dict__.get("service"):
             return getattr(self.service, key)
         else:
+            print(self.__dict__)
             raise AttributeError
 
     def result(self, device=None):

@@ -92,6 +92,9 @@ Custom Properties
 The Custom Properties section allows each instance of eNMS to add extra properties to the service form.  Additional
 information for these fields may be available using the help icon next to the field label.
 
+The location for the help file can specified in the ``setup/properties.json`` file like this:
+  - "render_kw":  { "help": "custom/impacting" }
+
 Section ``Specific``
 ********************
 

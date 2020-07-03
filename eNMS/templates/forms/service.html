@@ -285,34 +285,21 @@
             >
               <div class="panel-body" style="background-color: #fafafa;">
                 {% for property, values in form.custom_properties.items() %} {% if
-                values["type"] == "boolean" %}
+                values["type"] == "boolean" %} {% set label %} {% if "render_kw" in
+                values and "help" in values.get("render_kw", {}) %}
+                <label help="{{ values['render_kw']['help'] }}" for="{{ property }}">
+                  {{ values["pretty_name"] }}
+                </label>
+                {% else %}
+                <label>{{ values["pretty_name"] }}</label>
+                {% endif %} {% endset %}
                 <fieldset>
                   <div class="item">
                     {{ form[property](id="{}-{}".format(form_type, property),
-                    class="add-id", checked=form[property].default) }}
-                    {% if  "render_kw" in values and "help" in values["render_kw"] %}
-                    <label
-                      help="{{ values['render_kw']['help'] }}"
-                      for="{{ property }}"
-                    >
-                      {{ values["pretty_name"] }}
-                    </label>
-                    {% else %}
-                    <label>{{ values["pretty_name"] }}</label>
-                    {% endif %}
+                    class="add-id", checked=form[property].default) }} {{ label }}
                   </div>
                 </fieldset>
-                {% else %}
-                    {% if  "render_kw" in values and "help" in values["render_kw"] %}
-                    <label
-                      help="{{ values['render_kw']['help'] }}"
-                      for="{{ property }}"
-                    >
-                      {{ values["pretty_name"] }}
-                    </label>
-                    {% else %}
-                      <label>{{ values["pretty_name"] }}</label>
-                    {% endif %}
+                {% else %} {{ label }}
                 <div class="form-group">
                   {{ form[property](id="{}-{}".format(form_type, property),
                   class="form-control add-id") }}

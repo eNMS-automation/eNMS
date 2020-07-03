@@ -347,7 +347,7 @@ class Server(Flask):
                 kwargs = request.form
             try:
                 result = getattr(app, endpoint)(*args, **kwargs)
-            except LookupError:
+            except db.rbac_error:
                 return {"alert": "Error 403 - Operation not allowed."}
             try:
                 db.session.commit()
@@ -532,12 +532,14 @@ class Server(Flask):
 
             def post(self, direction):
                 if direction == "import":
-                    return app.import_topology(
+                    result = app.import_topology(
                         **{
                             "replace": request.form["replace"] == "True",
                             "file": request.files["file"],
                         }
                     )
+                    status = 206 if "Partial" in result else 200
+                    return result, status
                 else:
                     app.export_topology(**request.get_json(force=True))
                     return "Topology Export successfully executed."

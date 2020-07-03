@@ -36,6 +36,7 @@ class Database:
             setattr(self, *setting)
         self.database_url = environ.get("DATABASE_URL", "sqlite:///database.db")
         self.dialect = self.database_url.split(":")[0]
+        self.rbac_error = type("RbacError", (Exception,), {})
         self.configure_columns()
         self.engine = self.configure_engine()
         self.session = scoped_session(sessionmaker(autoflush=False, bind=self.engine))
@@ -248,7 +249,7 @@ class Database:
         if result or allow_none:
             return result
         else:
-            raise LookupError(
+            raise db.rbac_error(
                 f"There is no {model} in the database "
                 f"with the following characteristics: {kwargs}"
             )

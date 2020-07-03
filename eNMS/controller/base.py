@@ -295,7 +295,7 @@ class BaseController:
                 db.fetch(type, id=kwargs["copy"]).duplicate(clone=instance)
             db.session.flush()
             return instance.serialized
-        except LookupError:
+        except db.rbac_error:
             return {"alert": "Error 403 - Operation not allowed."}
         except Exception as exc:
             db.session.rollback()

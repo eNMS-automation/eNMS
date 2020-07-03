@@ -347,7 +347,7 @@ class Server(Flask):
                 kwargs = request.form
             try:
                 result = getattr(app, endpoint)(*args, **kwargs)
-            except LookupError:
+            except db.rbac_error:
                 return {"alert": "Error 403 - Operation not allowed."}
             try:
                 db.session.commit()

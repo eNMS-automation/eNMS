@@ -890,6 +890,7 @@
       "latitude",
       "configuration",
       "operational_data",
+      "specialized_data",
       "property1"
     ],
     "link": [

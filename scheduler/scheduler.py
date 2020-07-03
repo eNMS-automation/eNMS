@@ -88,8 +88,12 @@ class Scheduler(Flask):
 
     @staticmethod
     def run_service(task_id):
-        auth = HTTPBasicAuth(environ.get("ENMS_USER"), environ.get("ENMS_PASSWORD"))
-        post(f"{environ.get('ENMS_ADDR')}/rest/run_task", json=task_id, auth=auth)
+        post(
+            f"{environ.get('ENMS_ADDR')}/rest/run_task",
+            json=task_id,
+            auth=HTTPBasicAuth(environ.get("ENMS_USER"), environ.get("ENMS_PASSWORD")),
+            verify=not environ.get("DONT_VERIFY_CERTIFICATE"),
+        )
 
     def schedule_task(self, task):
         if task["scheduling_mode"] == "cron":

@@ -40,7 +40,7 @@ class AbstractBase(db.base):
             if app.use_vault:
                 app.vault_client.write(
                     f"secret/data/{self.type}/{self.name}/{property}",
-                    data={property: value},
+                    data={property: value.decode("utf-8")},
                 )
             else:
                 super().__setattr__(property, value)

@@ -953,10 +953,11 @@ class Run(AbstractBase):
             user = db.fetch("user", name=self.creator)
             return user.name, app.get_password(user.password)
         else:
-            return (
-                self.sub(self.custom_username, locals()),
-                app.get_password(self.sub(self.custom_password, locals())),
-            )
+            custom_password = app.get_password(self.custom_password)
+            substituted_password = self.sub(custom_password, locals())
+            if custom_password != substituted_password:
+                custom_password = app.get_password(substituted_password[2:-1])
+            return (self.sub(self.custom_username, locals()), custom_password)
 
     def convert_result(self, result):
         if self.conversion_method == "none" or "result" not in result:

@@ -77,7 +77,7 @@ class Task(AbstractBase):
         )
         return public_tasks.union(user_tasks, user_group_tasks)
 
-    def _catch_request_exceptions(func):
+    def _catch_request_exceptions(func):  # noqa: N805
         @wraps(func)
         def wrapper(*args, **kwargs):
             try:

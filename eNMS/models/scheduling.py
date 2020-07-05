@@ -1,3 +1,4 @@
+from functools import wraps
 from re import search
 from requests import get, post
 from requests.exceptions import ConnectionError, MissingSchema, ReadTimeout
@@ -76,23 +77,29 @@ class Task(AbstractBase):
         )
         return public_tasks.union(user_tasks, user_group_tasks)
 
-    @property
-    def next_run_time(self):
-        try:
-            return get(
-                f"{app.scheduler_address}/next_runtime/{self.id}", timeout=0.01
-            ).json()
-        except (ConnectionError, MissingSchema, ReadTimeout):
-            return "Scheduler Unreachable"
+    def _catch_request_exceptions(func):
+        @wraps(func)
+        def wrapper(*args, **kwargs):
+            try:
+                return func(*args, **kwargs)
+            except (ConnectionError, MissingSchema, ReadTimeout):
+                return "Scheduler Unreachable"
+            except Exception as exc:
+                return f"Error ({exc})"
+
+        return wrapper
 
     @property
+    @_catch_request_exceptions
+    def next_run_time(self):
+        return get(
+            f"{app.scheduler_address}/next_runtime/{self.id}", timeout=0.01
+        ).json()
+
+    @property
+    @_catch_request_exceptions
     def time_before_next_run(self):
-        try:
-            return get(
-                f"{app.scheduler_address}/time_left/{self.id}", timeout=0.01
-            ).json()
-        except (ConnectionError, MissingSchema, ReadTimeout):
-            return "Scheduler Unreachable"
+        return get(f"{app.scheduler_address}/time_left/{self.id}", timeout=0.01).json()
 
     def schedule(self, mode="schedule"):
         try:

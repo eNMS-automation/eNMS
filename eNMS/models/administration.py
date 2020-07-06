@@ -57,7 +57,6 @@ class User(AbstractBase, UserMixin):
                 access.groups.append(group)
                 setattr(access, f"{model}_access", str(app.rbac["models"][model]))
             getattr(access, model).append(instance)
-            
 
     def get_id(self):
         return self.name

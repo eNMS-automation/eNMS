@@ -132,6 +132,7 @@ ___
 
 - An _[overview of eNMS](https://www.youtube.com/watch?v=XwU0yom_aY0&t=1205s)_ on youtube
 - A _[podcast about eNMS and network automation](https://www.pythonpodcast.com/enms-network-automation-episode-232/)_
+- You can join the `#enms` channel on the _[networktocode slack](https://networktocode.herokuapp.com/slack)_ for questions, feedback or feature requests.
 
 ## Quick Install
     Install python 3.6+ (earlier versions not supported)

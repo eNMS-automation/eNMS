@@ -11,8 +11,17 @@
       "filtering" in form_type else field.name %} {% set class = "form-control-bool" if
       field.type == "BooleanField" else "form-control" %} {% if field.widget.input_type
       == 'hidden' %} {{ field() }} {% elif field.type == "JsonField" %} {{ field(id=id,
-      class=class) }} {% else %}
+      class=class) }} {% else %} {% if field.render_kw and "help" in field.render_kw %}
+      <label
+        class="control-label col-md-3 col-sm-3 col-xs-12"
+        help="{{ field.render_kw['help'] }}"
+        for="{{ field.name }}"
+      >
+        {{ field.label }}
+      </label>
+      {% else %}
       <label class="control-label col-md-3 col-sm-3 col-xs-12">{{ field.label }}</label>
+      {% endif %}
       <div class="col-md-9 col-sm-9 col-xs-12">
         {{ field(id=id, class=class) }}
       </div>

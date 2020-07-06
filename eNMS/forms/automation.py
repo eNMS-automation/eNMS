@@ -58,7 +58,7 @@ class ServiceForm(BaseForm):
         "Skip Query (Python)", python=True, widget=TextArea(), render_kw={"rows": 2}
     )
     skip_value = SelectField(
-        "Skip Value", choices=(("True", "True"), ("False", "False"),),
+        "Skip Value", choices=(("True", "True"), ("False", "False")),
     )
     vendor = StringField("Vendor")
     operating_system = StringField("Operating System")

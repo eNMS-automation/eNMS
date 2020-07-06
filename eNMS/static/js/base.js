@@ -379,11 +379,12 @@ export function preprocessForm(panel, id, type, duplicate) {
         <span class="glyphicon glyphicon-info-sign"></span>
       </button>
     `).on("click", function () {
+      const helpUrl = $(el).attr("help");
       openPanel({
         name: `help-${$(el).attr("for")}`,
         title: $(el).attr("for"),
         size: "600px auto",
-        url: `../help/${$(el).attr("help")}`,
+        url: helpUrl.charAt(0) === "/" ? `..${helpUrl}` : `../help/${helpUrl}`,
         callback: function (helpPanel) {
           helpPanel.querySelectorAll(".help-snippet").forEach((el) => {
             const editor = CodeMirror.fromTextArea(el, {

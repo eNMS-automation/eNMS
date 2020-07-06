@@ -49,6 +49,16 @@ class User(AbstractBase, UserMixin):
     )
     is_admin = db.Column(Boolean, default=False)
 
+    def add_access(self, model, instance):
+        for group in self.groups:
+            access = db.fetch("access", name=f"{group.name}: {model}", allow_none=True)
+            if not access:
+                access = db.factory("access", name=f"{group.name}: {model}")
+                access.groups.append(group)
+                setattr(access, f"{model}_access", str(app.rbac["models"][model]))
+            getattr(access, model).append(instance)
+            
+
     def get_id(self):
         return self.name
 

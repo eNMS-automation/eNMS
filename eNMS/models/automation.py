@@ -1,6 +1,7 @@
 from builtins import __dict__ as builtins
 from copy import deepcopy
 from datetime import datetime
+from flask_login import current_user
 from functools import partial
 from importlib import __import__ as importlib_import
 from io import BytesIO
@@ -136,7 +137,8 @@ class Service(AbstractBase):
         super().__init__(**kwargs)
         if "name" not in kwargs:
             self.set_name()
-        self.originals = list(self.get_originals(self))
+        if not getattr(current_user, "is_admin", True) and self.originals == [self]:
+            current_user.add_access("services", self)
 
     def get_originals(self, workflow):
         if workflow.workflows:

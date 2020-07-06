@@ -301,6 +301,8 @@ class Pool(AbstractBase):
     def update(self, **kwargs):
         super().update(**kwargs)
         self.compute_pool()
+        if not getattr(current_user, "is_admin", True):
+            current_user.add_access("pools", self)
 
     def property_match(self, obj, property):
         pool_value = getattr(self, f"{obj.class_type}_{property}")

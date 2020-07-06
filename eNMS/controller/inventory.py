@@ -26,10 +26,13 @@ class InventoryController(BaseController):
     configuration_properties = {"configuration": "Configuration"}
 
     def get_ssh_port(self):
-        self.ssh_port += 1
+        if self.redis_queue:
+            self.ssh_port = self.redis("incr", "ssh_port", 1)
+        else:
+            self.ssh_port += 1
         start = self.settings["ssh"]["start_port"]
         end = self.settings["ssh"]["end_port"]
-        return start + self.ssh_port % (end - start)
+        return start + int(self.ssh_port) % (end - start)
 
     def web_connection(self, device_id, **kwargs):
         device = db.fetch("device", id=device_id, rbac="connect")

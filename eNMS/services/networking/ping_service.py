@@ -75,3 +75,10 @@ class PingForm(ServiceForm):
     timeout = IntegerField(default=2)
     ttl = IntegerField(default=60)
     packet_size = IntegerField(default=56)
+
+    def validate(self):
+        valid_form = super().validate()
+        invalid_tcp_port = self.protocol.data == "TCP" and not self.ports.data
+        if invalid_tcp_port:
+            self.ports.errors.append("You must enter a port for a TCP ping.")
+        return valid_form and not invalid_tcp_port

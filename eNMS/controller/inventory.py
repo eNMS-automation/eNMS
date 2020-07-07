@@ -43,7 +43,7 @@ class InventoryController(BaseController):
         if "accept-once" in kwargs:
             cmd.append("--once")
         if "multiplexing" in kwargs:
-            cmd.extend(f"tmux new -A -s gotty{port}".split())
+            cmd.extend(f"tmux new -A -s gotty{device_id}".split())
         if self.settings["ssh"]["bypass_key_prompt"]:
             options = "-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
         else:

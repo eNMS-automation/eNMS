@@ -473,7 +473,8 @@ class Run(AbstractBase):
         progress = self.get_state().get(self.path, {}).get("progress")
         try:
             progress = progress["device"]
-            failure, success = progress.get("failure", 0), progress.get("success", 0)
+            failure = int(progress.get("failure", 0))
+            success = int(progress.get("success", 0))
             return f"{success + failure}/{progress['total']} ({failure} failed)"
         except (KeyError, TypeError):
             return "N/A"

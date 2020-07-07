@@ -211,7 +211,8 @@ class Server(Flask):
 
         @self.auth.get_password
         def get_password(username):
-            return getattr(db.fetch("user", name=username), "password", False)
+            user = db.fetch("user", allow_none=True, name=username)
+            return getattr(user, "password", False)
 
         @self.auth.error_handler
         def unauthorized():

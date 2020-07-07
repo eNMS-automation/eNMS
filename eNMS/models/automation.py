@@ -443,8 +443,8 @@ class Run(AbstractBase):
         return {k: getattr(self.service, k) for k in ("id", "type", "name")}
 
     def get_state(self):
-        if self.state:
-            return self.state
+        if self.original.state:
+            return self.original.state
         elif app.redis_queue:
             keys = app.redis("keys", f"{self.parent_runtime}/state/*")
             if not keys:

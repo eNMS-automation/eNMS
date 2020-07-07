@@ -249,9 +249,10 @@ class Server(Flask):
                         abort(403)
             if not current_user.is_authenticated:
                 login_form = LoginForm(request.form)
+                methods = app.settings["authentication"]["methods"].items()
                 login_form.authentication_method.choices = [
                     (method, properties["display_name"])
-                    for method, properties in app.settings["authentication"].items()
+                    for method, properties in methods
                     if properties["enabled"]
                 ]
                 return render_template("login.html", login_form=login_form)

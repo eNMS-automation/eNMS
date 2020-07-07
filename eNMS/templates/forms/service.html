@@ -284,16 +284,15 @@
               aria-labelledby="heading-step1-3"
             >
               <div class="panel-body" style="background-color: #fafafa;">
-                {% for property, values in form.custom_properties.items() %}
-                {% set label %} {% if "render_kw" in
-                values and "help" in values.get("render_kw", {}) %}
+                {% for property, values in form.custom_properties.items() %} {% set
+                label %} {% if "render_kw" in values and "help" in
+                values.get("render_kw", {}) %}
                 <label help="{{ values['render_kw']['help'] }}" for="{{ property }}">
                   {{ values["pretty_name"] }}
                 </label>
                 {% else %}
                 <label>{{ values["pretty_name"] }}</label>
-                {% endif %} {% endset %}
-                {% if values["type"] == "boolean" %}
+                {% endif %} {% endset %} {% if values["type"] == "boolean" %}
                 <fieldset>
                   <div class="item">
                     {{ form[property](id="{}-{}".format(form_type, property),

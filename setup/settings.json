@@ -11,9 +11,18 @@
   "authentication": {
     "default": "ldap",
     "methods": {
-      "database": { "enabled": true, "display_name": "Local User" },
-      "ldap": { "enabled": true, "display_name": "LDAP" },
-      "tacacs": { "enabled": true, "display_name": "TACACS+" }
+      "database": {
+        "display_name": "Local User",
+        "enabled": true
+      },
+      "ldap": {
+        "display_name": "LDAP",
+        "enabled": true
+      },
+      "tacacs": {
+        "display_name": "TACACS+",
+        "enabled": true
+      }
     }
   },
   "cluster": {
@@ -28,13 +37,13 @@
     "max_overflow": 10,
     "pool_size": 1000,
     "retry": {
-      "fetch": {
-        "number": 3,
-        "time": 3
-      },
       "commit": {
         "number": 10,
         "time": 5
+      },
+      "fetch": {
+        "number": 3,
+        "time": 3
       }
     },
     "small_string_length": 255
@@ -72,7 +81,12 @@
     }
   },
   "security": {
-    "forbidden_python_libraries": ["eNMS", "os", "subprocess", "sys"],
+    "forbidden_python_libraries": [
+      "eNMS",
+      "os",
+      "subprocess",
+      "sys"
+    ],
     "hash_user_passwords": true
   },
   "slack": {

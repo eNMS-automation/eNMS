@@ -15,15 +15,12 @@ import {
 } from "./base.js";
 import { tables } from "./table.js";
 
-let settingsEditor;
-
 function saveSettings() {
   call({
     url: "/save_settings",
-    data: { settings: settingsEditor.get(), save: true },
+    data: { settings: jsonEditors.settings.get(), save: true },
     callback: function () {
-      settings = settingsEditor.get();
-      $("#settings").remove();
+      $("#settings_panel").remove();
       notify("Settings saved.", "success", 5, true);
     },
   });

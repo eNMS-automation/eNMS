@@ -19,6 +19,7 @@ from eNMS.setup import themes
 
 class SettingsForm(BaseForm):
     form_type = HiddenField(default="settings_panel")
+    action = "eNMS.administration.saveSettings"
     settings = JsonField("Settings")
     write_changes = BooleanField("Write changes back to 'settings.json' file")
 

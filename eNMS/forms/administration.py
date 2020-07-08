@@ -14,7 +14,7 @@ from eNMS.forms.fields import (
     SelectMultipleField,
     SelectMultipleStringField,
 )
-from eNMS.setup import themes
+from eNMS.setup import settings, themes
 
 
 class SettingsForm(BaseForm):
@@ -113,6 +113,13 @@ def init_variable_forms(app):
     class UserForm(RbacForm):
         form_type = HiddenField(default="user")
         is_admin = BooleanField(default=False)
+        authentication = SelectField(
+            "Authentication Method",
+            choices=[
+                (method, values["display_name"])
+                for method, values in settings["authentication"]["methods"].items()
+            ],
+        )
         theme = SelectField(
             "Theme",
             choices=[

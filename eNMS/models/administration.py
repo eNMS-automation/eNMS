@@ -30,7 +30,7 @@ class User(AbstractBase, UserMixin):
     is_admin = db.Column(Boolean)
     email = db.Column(db.SmallString)
     password = db.Column(db.SmallString)
-    authentication = db.Column(db.SmallString, default="database")
+    authentication = db.Column(db.SmallString)
     groups = db.Column(db.List)
     menu = db.Column(db.List)
     pages = db.Column(db.List)

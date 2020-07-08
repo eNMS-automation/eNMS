@@ -2,6 +2,12 @@
 Release Notes
 =============
 
+Version 3.22.1
+--------------
+
+- Add user authentication method in user forms
+- Fix settings saving mechanism
+
 Version 3.22
 ------------
 

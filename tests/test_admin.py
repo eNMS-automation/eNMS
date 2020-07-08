@@ -37,6 +37,7 @@ def test_user_management(user_client):
             "name": user,
             "email": f"{user}@test.com",
             "password": user,
+            "authentication": "database",
             "theme": "dark",
         }
         user_client.post("/update/user", data=dict_user)

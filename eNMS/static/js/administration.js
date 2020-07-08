@@ -16,10 +16,15 @@ import {
 import { tables } from "./table.js";
 
 function saveSettings() {
+  const newSettings = jsonEditors.settings.get();
   call({
     url: "/save_settings",
-    data: { settings: jsonEditors.settings.get(), save: true },
+    data: {
+      settings: newSettings,
+      save: $("#write_changes").prop("checked"),
+    },
     callback: function () {
+      settings = newSettings;
       $("#settings_panel").remove();
       notify("Settings saved.", "success", 5, true);
     },

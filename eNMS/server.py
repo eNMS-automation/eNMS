@@ -354,7 +354,7 @@ class Server(Flask):
                 return {"alert": "Error 403 - Operation not allowed."}
             except Exception as exc:
                 return {"alert": str(exc)}
-            return result
+            return jsonify(result)
 
         self.register_blueprint(blueprint)
 

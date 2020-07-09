@@ -11,4 +11,4 @@ loglevel = "debug"
 preload_app = True
 raw_env = ["TERM=screen"]
 timeout = 3000
-workers = 6#2 * cpu_count() + 1 if environ.get("REDIS_ADDR") else 1
+workers = 2 * cpu_count() + 1 if environ.get("REDIS_ADDR") else 1

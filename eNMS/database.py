@@ -1,4 +1,5 @@
 from ast import literal_eval
+from contextlib import contextmanager
 from flask_login import current_user
 from json import loads
 from logging import error
@@ -39,7 +40,7 @@ class Database:
         self.rbac_error = type("RbacError", (Exception,), {})
         self.configure_columns()
         self.engine = self.configure_engine()
-        self.session = scoped_session(sessionmaker(autoflush=False, bind=self.engine))
+        self.session = self.get_session()
         self.base = declarative_base()
         self.configure_associations()
         self.configure_events()
@@ -57,6 +58,9 @@ class Database:
         for retry_type, values in settings["database"]["retry"].items():
             for parameter, number in values.items():
                 setattr(self, f"retry_{retry_type}_{parameter}", number)
+
+    def get_session(self):
+        return scoped_session(sessionmaker(autoflush=False, bind=self.engine))
 
     @staticmethod
     def dict_conversion(input):
@@ -327,6 +331,18 @@ class Database:
                     self.session.rollback()
                     sleep(self.retry_commit_time * (index + 1))
         return instance
+
+    @contextmanager
+    def session_scope(self):
+        self.session = session = self.get_session()
+        try:
+            yield session
+            session.commit()
+        except:
+            session.rollback()
+            raise
+        finally:
+            session.close()
 
     def set_custom_properties(self, table):
         model = table.__tablename__

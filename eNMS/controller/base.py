@@ -94,7 +94,7 @@ class BaseController:
             password = str.encode(password)
         return str(self.decrypt(password), "utf-8")
 
-    def initialize(self):
+    def initialize_database(self):
         self.init_services()
         db.base.metadata.create_all(bind=db.engine)
         configure_mappers()
@@ -189,7 +189,7 @@ class BaseController:
         for protocol in ("http", "https"):
             self.request_session.mount(
                 f"{protocol}://",
-                HTTPAdapter(max_retries=retry, **self.settings["requests"]["pool"],),
+                HTTPAdapter(max_retries=retry, **self.settings["requests"]["pool"]),
             )
 
     def init_forms(self):

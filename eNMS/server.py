@@ -348,6 +348,7 @@ class Server(Flask):
             else:
                 kwargs = request.form
             try:
+                db.session = db.get_session()
                 result = getattr(app, endpoint)(*args, **kwargs)
             except db.rbac_error:
                 return {"alert": "Error 403 - Operation not allowed."}

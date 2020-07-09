@@ -61,12 +61,17 @@ function changeMarker(type) {
 
 function createNode(node, nodeType) {
   if (!node.latitude && !node.longitude) return;
-  const marker =
-    markerType == "Circle Marker"
-      ? L.circleMarker([node.latitude, node.longitude])
-      : markerType == "Circle"
-      ? L.circle([node.latitude, node.longitude])
-      : L.marker([node.latitude, node.longitude]);
+  let marker;
+  try {
+    marker =
+      markerType == "Circle Marker"
+        ? L.circleMarker([node.latitude, node.longitude])
+        : markerType == "Circle"
+        ? L.circle([node.latitude, node.longitude])
+        : L.marker([node.latitude, node.longitude]);
+  } catch {
+    return;
+  }
   if (markerType == "Image") {
     marker.icon =
       nodeType === "device"

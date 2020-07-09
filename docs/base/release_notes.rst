@@ -8,6 +8,7 @@ Version 3.22.1
 - Add user authentication method in user forms
 - Fix settings saving mechanism
 - Fix gunicorn multiple workers sqlalchemy post fork session conflict bug
+- Dont prevent wrong device GPS coordinates from displaying links in network view
 
 Version 3.22
 ------------

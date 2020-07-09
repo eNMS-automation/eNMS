@@ -1058,8 +1058,8 @@ class Run(AbstractBase):
         else:
             return value
 
-    def get_var(self, *args, device=None, **kwargs):
-        return self.payload_helper(*args, operation="get", device=device, **kwargs)
+    def get_var(self, *args, **kwargs):
+        return self.payload_helper(*args, operation="get", **kwargs)
 
     def get_result(self, service_name, device=None, workflow=None):
         def filter_run(query, property):

@@ -348,20 +348,13 @@ class Server(Flask):
             else:
                 kwargs = request.form
             try:
-                db.session = db.get_session()
-                result = getattr(app, endpoint)(*args, **kwargs)
+                with db.session_scope():
+                    result = getattr(app, endpoint)(*args, **kwargs)
             except db.rbac_error:
                 return {"alert": "Error 403 - Operation not allowed."}
-            try:
-                db.session.commit()
-                return jsonify(result)
             except Exception as exc:
-                db.session.rollback()
-                if app.settings["app"]["config_mode"] == "debug":
-                    raise
-                else:
-                    result = str(exc)
-                return jsonify({"alert": result})
+                return {"alert": str(exc)}
+            return result
 
         self.register_blueprint(blueprint)
 

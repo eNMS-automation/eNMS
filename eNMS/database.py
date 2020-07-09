@@ -334,15 +334,15 @@ class Database:
 
     @contextmanager
     def session_scope(self):
-        self.session = session = self.get_session()
+        self.session = self.get_session()
         try:
-            yield session
-            session.commit()
+            yield self.session
+            self.session.commit()
         except:
-            session.rollback()
+            self.session.rollback()
             raise
         finally:
-            session.close()
+            self.session.close()
 
     def set_custom_properties(self, table):
         model = table.__tablename__

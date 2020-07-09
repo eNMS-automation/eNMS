@@ -338,7 +338,7 @@ class Database:
         try:
             yield self.session
             self.session.commit()
-        except:
+        except Exception:
             self.session.rollback()
             raise
         finally:

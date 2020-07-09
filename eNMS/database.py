@@ -69,7 +69,6 @@ class Database:
     def configure_engine(self):
         engine_parameters = {
             "convert_unicode": True,
-            
             "pool_pre_ping": True,
             "pool_recycle": 3600,
         }

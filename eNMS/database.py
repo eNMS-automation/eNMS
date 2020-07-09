@@ -40,7 +40,7 @@ class Database:
         self.rbac_error = type("RbacError", (Exception,), {})
         self.configure_columns()
         self.engine = self.configure_engine()
-        self.session = self.get_session()
+        self.session = scoped_session(sessionmaker(autoflush=False, bind=self.engine))
         self.base = declarative_base()
         self.configure_associations()
         self.configure_events()
@@ -58,9 +58,6 @@ class Database:
         for retry_type, values in settings["database"]["retry"].items():
             for parameter, number in values.items():
                 setattr(self, f"retry_{retry_type}_{parameter}", number)
-
-    def get_session(self):
-        return scoped_session(sessionmaker(autoflush=False, bind=self.engine))
 
     @staticmethod
     def dict_conversion(input):
@@ -334,7 +331,6 @@ class Database:
 
     @contextmanager
     def session_scope(self):
-        self.session = self.get_session()
         try:
             yield self.session
             self.session.commit()

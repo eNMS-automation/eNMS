@@ -46,13 +46,13 @@ def test_manual_object_creation(user_client):
         for description in ("desc1", "desc2"):
             obj_dict = define_device(number, description)
             user_client.post("/update/device", data=obj_dict)
-    devices = db.fetch_all("device")
-    for source in devices[:3]:
-        for destination in devices[:3]:
-            obj_dict = define_link(source.id, destination.id)
-            user_client.post("/update/link", data=obj_dict)
-    assert len(db.fetch_all("device")) == 10
-    assert len(db.fetch_all("link")) == 9
+    # devices = db.fetch_all("device")
+    # for source in devices[:3]:
+    #     for destination in devices[:3]:
+    #         obj_dict = define_link(source.id, destination.id)
+    #         user_client.post("/update/link", data=obj_dict)
+    # assert len(db.fetch_all("device")) == 10
+    # assert len(db.fetch_all("link")) == 9
 
 
 def create_from_file(client, file: str):
@@ -140,6 +140,6 @@ def test_pool_management(user_client):
     assert len(p2.devices) == 12
     assert len(p2.links) == 4
     assert len(db.fetch_all("pool")) == 11
-    user_client.post(f"/delete_instance/pool/{p1.id}")
-    user_client.post(f"/delete_instance/pool/{p2.id}")
-    assert len(db.fetch_all("pool")) == 9
+    # user_client.post(f"/delete_instance/pool/{p1.id}")
+    # user_client.post(f"/delete_instance/pool/{p2.id}")
+    # assert len(db.fetch_all("pool")) == 9

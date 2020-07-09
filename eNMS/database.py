@@ -69,6 +69,7 @@ class Database:
     def configure_engine(self):
         engine_parameters = {
             "convert_unicode": True,
+            
             "pool_pre_ping": True,
             "pool_recycle": 3600,
         }
@@ -77,6 +78,7 @@ class Database:
                 {
                     "max_overflow": settings["database"]["max_overflow"],
                     "pool_size": settings["database"]["pool_size"],
+                    "isolation_level": "READ COMMITTED",
                 }
             )
         elif self.dialect == "sqlite":

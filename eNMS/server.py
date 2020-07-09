@@ -348,7 +348,6 @@ class Server(Flask):
             else:
                 kwargs = request.form
             try:
-                db.session.commit()
                 with db.session_scope():
                     result = getattr(app, endpoint)(*args, **kwargs)
             except db.rbac_error:

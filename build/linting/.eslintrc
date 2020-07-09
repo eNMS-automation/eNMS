@@ -16,6 +16,7 @@
       "named": "ignore"
     }],
     "max-len": ["error", { "code": 88 }],
+    "no-console": ["error", { "allow": ["warn", "error"] }],
     "object-curly-spacing": "off",
     "no-invalid-this": 0,
     "linebreak-style": 0,

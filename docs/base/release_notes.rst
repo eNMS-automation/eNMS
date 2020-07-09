@@ -7,12 +7,12 @@ Version 3.22.1
 
 - Add user authentication method in user forms
 - Fix settings saving mechanism
+- Fix gunicorn multiple workers sqlalchemy post fork session conflict bug
 
 Version 3.22
 ------------
 
 - Remove database url from settings. Configured via env variable DATABASE_URL
-- In Rest Call service and other rest calls with request, use "json" kw instead of "data"
 - Remote scheduler
 - Remove TACACS+ parameters from settings, use env variable instead: TACACS_ADDR, TACACS_PASSWORD
 - Make REST API accept Tacacs and LDAP credentials (in the last version, if you were using TACACS+ or LDAP, you could authenticate
@@ -38,8 +38,6 @@ for a given logger should also be logged as changelog or service log by default.
 edit them.
 - Add placeholder as a global variable in a workflow (e.g to be used in the superworkflow)
 - Add mechanism for creating custom configuration property
-- New "export" keyword in set_var set to False by default. If true, the variable is considered global and can be referred to as 
-{{ variable }} in the workflow.
 - Refactor data backup services with custom configuration properties. Implement "Operational Data" as
 an example custom property.
 - Add new Git service. Replace "git_push_configurations" swiss army knife service with instance of git service.

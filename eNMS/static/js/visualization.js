@@ -69,8 +69,8 @@ function createNode(node, nodeType) {
         : markerType == "Circle"
         ? L.circle([node.latitude, node.longitude])
         : L.marker([node.latitude, node.longitude]);
-  } catch {
-    return;
+  } catch(err) {
+    return console.error(`Device '${node.name}' couldn't be loaded (${err})`);
   }
   if (markerType == "Image") {
     marker.icon =

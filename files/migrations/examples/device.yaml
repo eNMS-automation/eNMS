@@ -904,13 +904,13 @@
   ip_address: 192.168.56.103
   last_duration: ''
   last_failure: Never
-  last_modified: '2020-03-26 13:23:53.762218'
+  last_modified: '2020-07-09 02:41:15.713322'
   last_runtime: ''
   last_status: Never
   last_update: Never
-  latitude: '38.89511'
+  latitude: 38,.,89511
   location: Washington
-  longitude: '-50.0'
+  longitude: wrong coordinate
   model: linux
   name: Server 2
   napalm_driver: eos
@@ -920,6 +920,7 @@
   port: 22
   property1: ''
   property2: CP
+  public: false
   reachable: true
   subtype: ''
   tasks: []

@@ -31,6 +31,8 @@
   device_port_match: inclusion
   device_property1: ''
   device_property1_match: inclusion
+  device_specialized_data: ''
+  device_specialized_data_match: inclusion
   device_subtype: ''
   device_subtype_match: inclusion
   device_vendor: ''
@@ -102,6 +104,8 @@
   device_port_match: inclusion
   device_property1: ''
   device_property1_match: inclusion
+  device_specialized_data: ''
+  device_specialized_data_match: inclusion
   device_subtype: ''
   device_subtype_match: inclusion
   device_vendor: ''
@@ -171,6 +175,8 @@
   device_port_match: inclusion
   device_property1: ''
   device_property1_match: inclusion
+  device_specialized_data: ''
+  device_specialized_data_match: inclusion
   device_subtype: ''
   device_subtype_match: inclusion
   device_vendor: ''
@@ -239,6 +245,8 @@
   device_port_match: inclusion
   device_property1: ''
   device_property1_match: inclusion
+  device_specialized_data: ''
+  device_specialized_data_match: inclusion
   device_subtype: ''
   device_subtype_match: inclusion
   device_vendor: ''
@@ -307,6 +315,8 @@
   device_port_match: inclusion
   device_property1: ''
   device_property1_match: inclusion
+  device_specialized_data: ''
+  device_specialized_data_match: inclusion
   device_subtype: ''
   device_subtype_match: inclusion
   device_vendor: ''
@@ -375,6 +385,8 @@
   device_port_match: inclusion
   device_property1: ''
   device_property1_match: inclusion
+  device_specialized_data: ''
+  device_specialized_data_match: inclusion
   device_subtype: ''
   device_subtype_match: inclusion
   device_vendor: ''
@@ -442,6 +454,8 @@
   device_port_match: inclusion
   device_property1: ''
   device_property1_match: inclusion
+  device_specialized_data: ''
+  device_specialized_data_match: inclusion
   device_subtype: ''
   device_subtype_match: inclusion
   device_vendor: ''
@@ -508,6 +522,8 @@
   device_port_match: inclusion
   device_property1: ''
   device_property1_match: inclusion
+  device_specialized_data: ''
+  device_specialized_data_match: inclusion
   device_subtype: ''
   device_subtype_match: inclusion
   device_vendor: ''
@@ -575,6 +591,8 @@
   device_port_match: inclusion
   device_property1: ''
   device_property1_match: inclusion
+  device_specialized_data: ''
+  device_specialized_data_match: inclusion
   device_subtype: ''
   device_subtype_match: inclusion
   device_vendor: ''

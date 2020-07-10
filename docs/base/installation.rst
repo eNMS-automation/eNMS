@@ -18,7 +18,7 @@ The first step is to download the application. You can download the latest relea
 by going to the `"Release" section of eNMS github repository
   <https://github.com/eNMS-automation/eNMS/releases>`_
 
-The other option is to clone the master branch of the git repository from github :
+The other option is to clone the master branch of the git repository from github:
 
 ::
 
@@ -26,7 +26,7 @@ The other option is to clone the master branch of the git repository from github
  git clone https://github.com/afourmy/eNMS.git
  cd eNMS
 
-Once you downloaded the application and you are in the `/eNMS` folder, you need to install the python requirements :
+Once the application is  in the `/eNMS` folder, you need to install the python requirements:
 
  # install the requirements:
  pip install -r build/requirements/requirements.txt

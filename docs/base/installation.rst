@@ -2,7 +2,7 @@
 Installation
 ============
 
-eNMS is designed to run on a **Unix server** with Python **3.6+**.
+eNMS is a Flask web application designed to run on a **Unix server** with Python **3.6+**.
 
 .. contents::
   :local:
@@ -14,14 +14,26 @@ eNMS is designed to run on a **Unix server** with Python **3.6+**.
 First steps
 ###########
 
+The first step is to download the application. You can download the latest release of eNMS directly from your browser,
+by going to the `"Release" section of eNMS github repository
+  <https://github.com/eNMS-automation/eNMS/releases>`_
+
+The other option is to clone the master branch of the git repository from github :
+
 ::
 
  # download the code from github:
  git clone https://github.com/afourmy/eNMS.git
  cd eNMS
 
+Once you downloaded the application and you are in the `/eNMS` folder, you need to install the python requirements :
+
  # install the requirements:
  pip install -r build/requirements/requirements.txt
+
+Once the requirements have been installed, you can run the application with Flask built-in development server.
+
+::
 
  # set the FLASK_APP environment variable
  export FLASK_APP=app.py
@@ -29,13 +41,19 @@ First steps
  # start the application with Flask
  flask run --host=0.0.0.0
 
- # or with gunicorn
- gunicorn --config gunicorn.py app:app
-
 |
 
 Production mode
 ###############
+
+In production, you must use a WSGI HTTP server like gunicorn to run eNMS instead of Flask development server.
+You can find a configuration file for gunicorn in the main folder (`gunicorn.py`), and run the application with the 
+following command:
+
+::
+
+ # start the application with gunicorn
+ gunicorn --config gunicorn.py app:app
 
 To start eNMS in production mode, you must change the value of the "config_mode" from "debug" to "production" in the
 settings.json file, and set the secret key.
@@ -44,6 +62,8 @@ settings.json file, and set the secret key.
 
  # set the SECRET_KEY environment variable
  export SECRET_KEY=value-of-your-secret-key
+
+Instead of using Flask 
 
 All credentials should be stored in a Hashicorp Vault: the settings variable ``active`` under the ``vault`` section of
 the settings tells eNMS that a Vault has been setup and can be used.

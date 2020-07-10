@@ -247,6 +247,8 @@ class Database:
             except Exception as exc:
                 error(f"Fetch n°{index} failed ({exc})")
                 self.session.rollback()
+                if index == self.retry_fetch_number - 1:
+                    raise exc
                 sleep(self.retry_fetch_time * (index + 1))
         if result or allow_none:
             return result
@@ -327,6 +329,8 @@ class Database:
                 except Exception as exc:
                     error(f"Commit n°{index} failed ({exc})")
                     self.session.rollback()
+                    if index == self.retry_commit_number - 1:
+                        raise exc
                     sleep(self.retry_commit_time * (index + 1))
         return instance
 

@@ -15,7 +15,7 @@ First steps
 ###########
 
 The first step is to download the application. You can download the latest release of eNMS directly from your browser,
-by going to the `"Release" section of eNMS github repository<https://github.com/eNMS-automation/eNMS/releases/>`_
+by going to the `Release section of eNMS github repository <https://github.com/eNMS-automation/eNMS/releases/>`_
 
 The other option is to clone the master branch of the git repository from github:
 

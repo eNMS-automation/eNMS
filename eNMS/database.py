@@ -263,7 +263,7 @@ class Database:
                 user = current_user
             else:
                 user = self.fetch("user", name=username or "admin")
-            if not user.is_admin:
+            if user.is_authenticated and not user.is_admin:
                 query = models[model].rbac_filter(query, rbac, user)
         return query
 

@@ -15,7 +15,7 @@ First steps
 ###########
 
 The first step is to download the application. You can download the latest release of eNMS directly from your browser,
-by going to the `Release section of eNMS github repository <https://github.com/eNMS-automation/eNMS/releases/>`_
+by going to the `Release section <https://github.com/eNMS-automation/eNMS/releases>`_ of eNMS github repository.
 
 The other option is to clone the master branch of the git repository from github:
 
@@ -25,7 +25,7 @@ The other option is to clone the master branch of the git repository from github
  git clone https://github.com/afourmy/eNMS.git
  cd eNMS
 
-Once the application is installed, you must go to the `/eNMS` folder and install eNMS python depedencies:
+Once the application is installed, you must go to the `eNMS` folder and install eNMS python depedencies:
 
 ::
 
@@ -47,7 +47,35 @@ Once the requirements have been installed, you can run the application with Flas
 Production mode
 ###############
 
-In production, you must use a WSGI HTTP server like gunicorn to run eNMS instead of Flask development server.
+Database
+********
+
+By default, eNMS will use an SQLite database (`sqlite:///database.db`). You can configure a different database with the
+`DATABASE_URL` environment variable
+(see `SQL Alchemy database URL <https://docs.sqlalchemy.org/en/13/core/engines.html#database-urls>`_)
+
+For example, for a MySQL database, the variable could be:
+
+::
+
+ export DATABASE_URL="mysql://root:password@localhost/enms"
+
+
+Secret key
+**********
+
+You need to configure the secret key used by Flask to sign sessions
+
+::
+
+ # set the SECRET_KEY environment variable
+ export SECRET_KEY=value-of-your-secret-key
+
+WSGI server
+***********
+
+You must use a WSGI HTTP server like gunicorn to run eNMS instead of Flask development server.
+
 You can find a configuration file for gunicorn in the main folder (`gunicorn.py`), and run the application with the 
 following command:
 
@@ -56,15 +84,8 @@ following command:
  # start the application with gunicorn
  gunicorn --config gunicorn.py app:app
 
-To start eNMS in production mode, you must change the value of the "config_mode" from "debug" to "production" in the
-settings.json file, and set the secret key.
-
-::
-
- # set the SECRET_KEY environment variable
- export SECRET_KEY=value-of-your-secret-key
-
-Instead of using Flask 
+Hashicorp Vault
+***************
 
 All credentials should be stored in a Hashicorp Vault: the settings variable ``active`` under the ``vault`` section of
 the settings tells eNMS that a Vault has been setup and can be used.
@@ -141,9 +162,6 @@ Settings ``cluster`` section
 Settings ``database`` section
 *******************************
 
-- ``url`` (default: ``"sqlite:///database.db?check_same_thread=False"``) `SQL Alchemy database URL
-  <https://docs.sqlalchemy.org/en/13/core/engines.html#database-urls/>`_, configured
-  for SQLite by default.
 - ``pool_size`` (default: ``1000``) Number of connections kept persistently in `SQL Alchemy pool
   <https://docs.sqlalchemy.org/en/13/core/pooling.html#sqlalchemy.pool.QueuePool/>`_.
 - ``max_overflow`` (default: ``10``) Maximum overflow size of the connection pool.

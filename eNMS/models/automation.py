@@ -28,6 +28,11 @@ from xmltodict import parse
 from xml.parsers.expat import ExpatError
 
 try:
+    from scrapli.driver.core import EOSDriver
+except ImportError as exc:
+    warn(f"Couldn't import scrapli module ({exc})")
+
+try:
     from slackclient import SlackClient
 except ImportError as exc:
     warn(f"Couldn't import slackclient module ({exc})")
@@ -1194,6 +1199,20 @@ class Run(AbstractBase):
             device.name
         ] = netmiko_connection
         return netmiko_connection
+
+    def scrapli_connection(self, device):
+        connection = self.get_or_close_connection("scrapli", device.name)
+        if connection:
+            self.log("info", "Using cached Scrapli connection", device)
+            return connection
+        self.log(
+            "info", "OPENING Scrapli connection", device, logger="security",
+        )
+        username, password = self.get_credentials(device)
+        driver = device.scrapli_driver if self.use_device_driver else self.driver
+
+        app.connections_cache["scrapli"][self.parent_runtime][device.name] = connection
+        return connection
 
     def napalm_connection(self, device):
         connection = self.get_or_close_connection("napalm", device.name)

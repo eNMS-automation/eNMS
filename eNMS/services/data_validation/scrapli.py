@@ -28,8 +28,8 @@ class NetmikoValidationService(ConnectionService):
 class NetmikoValidationForm(ConnectionForm):
     form_type = HiddenField(default="scrapli_service")
     command = StringField(substitution=True)
-    driver = SelectField(choices=choices(app.NETMIKO_DRIVERS))
+    driver = SelectField(choices=choices(app.SCRAPLI_DRIVERS))
     groups = {
-        "Main Parameters": {"commands": ["command"], "default": "expanded"},
+        "Main Parameters": {"commands": ["command", "driver"], "default": "expanded"},
         **ConnectionForm.groups,
     }

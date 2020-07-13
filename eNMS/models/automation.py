@@ -1210,6 +1210,7 @@ class Run(AbstractBase):
             auth_password=password,
             auth_private_key=False,
         )
+        connection.open()
         app.connections_cache["scrapli"][self.parent_runtime][device.name] = connection
         return connection
 
@@ -1256,7 +1257,10 @@ class Run(AbstractBase):
                 self.disconnect(library, device, connection)
         else:
             try:
-                connection.find_prompt()
+                if library == "netmiko":
+                    connection.find_prompt()
+                else:
+                    connection.get_prompt()
                 return connection
             except Exception:
                 self.disconnect(library, device, connection)
@@ -1266,14 +1270,14 @@ class Run(AbstractBase):
         return cache.get(device)
 
     def close_device_connection(self, device):
-        for library in ("netmiko", "napalm"):
+        for library in ("netmiko", "napalm", "scrapli"):
             connection = self.get_connection(library, device)
             if connection:
                 self.disconnect(library, device, connection)
 
     def close_remaining_connections(self):
         threads = []
-        for library in ("netmiko", "napalm"):
+        for library in ("netmiko", "napalm", "scrapli"):
             devices = list(app.connections_cache[library][self.runtime])
             for device in devices:
                 connection = app.connections_cache[library][self.runtime][device]

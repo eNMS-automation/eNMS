@@ -7,6 +7,27 @@ from pathlib import Path
 from re import search, sub
 from threading import Thread
 from uuid import uuid4
+from warnings import warn
+
+try:
+    from scrapli.driver.core import (
+        IOSXEDriver,
+        IOSXRDriver,
+        NXOSDriver,
+        EOSDriver,
+        JunosDriver,
+    )
+
+    SCRAPLI_DRIVERS = {
+        "cisco_iosxe": IOSXEDriver,
+        "cisco_iosxr": IOSXRDriver,
+        "cisco_nxos": NXOSDriver,
+        "arista_eos": EOSDriver,
+        "juniper_junos": JunosDriver,
+    }
+except ImportError as exc:
+    SCRAPLI_DRIVERS = {}
+    warn(f"Couldn't import scrapli module ({exc})")
 
 from eNMS.controller.base import BaseController
 from eNMS.database import db
@@ -40,6 +61,7 @@ class AutomationController(BaseController):
         ("get_ipv6_neighbors_table", "IPv6"),
         ("is_alive", "Is alive"),
     )
+    SCRAPLI_DRIVERS = SCRAPLI_DRIVERS
 
     connections_cache = {"napalm": defaultdict(dict), "netmiko": defaultdict(dict)}
     service_db = defaultdict(lambda: {"runs": 0})

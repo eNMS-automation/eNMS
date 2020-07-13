@@ -1,7 +1,9 @@
-from sqlalchemy import Boolean, ForeignKey, Integer
+from sqlalchemy import ForeignKey, Integer
 
+from eNMS import app
 from eNMS.database import db
-from eNMS.forms.fields import HiddenField, StringField
+from eNMS.forms import choices
+from eNMS.forms.fields import HiddenField, SelectField, StringField
 from eNMS.forms.automation import ConnectionForm
 from eNMS.models.automation import ConnectionService
 
@@ -14,8 +16,6 @@ class NetmikoValidationService(ConnectionService):
     id = db.Column(Integer, ForeignKey("connection_service.id"), primary_key=True)
     command = db.Column(db.LargeString)
     driver = db.Column(db.SmallString)
-    use_device_driver = db.Column(Boolean, default=True)
-    fast_cli = db.Column(Boolean, default=False)
 
     __mapper_args__ = {"polymorphic_identity": "scrapli_service"}
 
@@ -28,6 +28,7 @@ class NetmikoValidationService(ConnectionService):
 class NetmikoValidationForm(ConnectionForm):
     form_type = HiddenField(default="scrapli_service")
     command = StringField(substitution=True)
+    driver = SelectField(choices=choices(app.NETMIKO_DRIVERS))
     groups = {
         "Main Parameters": {"commands": ["command"], "default": "expanded"},
         **ConnectionForm.groups,

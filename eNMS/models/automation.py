@@ -28,24 +28,6 @@ from xmltodict import parse
 from xml.parsers.expat import ExpatError
 
 try:
-    from scrapli.driver.core import (                                                                                                    
-        IOSXEDriver,
-        IOSXRDriver,
-        NXOSDriver,
-        EOSDriver,
-        JunosDriver,
-    )
-    scrapli_drivers = {
-        "cisco_iosxe": IOSXEDriver,
-        "cisco_iosxr": IOSXRDriver,
-        "cisco_nxos": NXOSDriver,
-        "arista_eos": EOSDriver,
-        "juniper_junos": JunosDriver,
-    }
-except ImportError as exc:
-    warn(f"Couldn't import scrapli module ({exc})")
-
-try:
     from slackclient import SlackClient
 except ImportError as exc:
     warn(f"Couldn't import slackclient module ({exc})")
@@ -1222,11 +1204,11 @@ class Run(AbstractBase):
             "info", "OPENING Scrapli connection", device, logger="security",
         )
         username, password = self.get_credentials(device)
-        connection = scrapli_drivers[self.driver](
+        connection = app.SCRAPLI_DRIVERS[self.driver](
             host=device.ip_address,
             auth_username=username,
             auth_password=password,
-            auth_private_key=False
+            auth_private_key=False,
         )
         app.connections_cache["scrapli"][self.parent_runtime][device.name] = connection
         return connection

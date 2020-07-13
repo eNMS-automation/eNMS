@@ -2,7 +2,7 @@ from wtforms.validators import InputRequired
 from wtforms.widgets import TextArea
 
 from eNMS import app
-from eNMS.forms import BaseForm
+from eNMS.forms import BaseForm, choices
 from eNMS.forms.fields import (
     BooleanField,
     HiddenField,
@@ -94,6 +94,9 @@ class DeviceForm(ObjectForm):
     )
     netmiko_driver = SelectField(
         "Netmiko Driver", choices=app.NETMIKO_DRIVERS, default="cisco_ios"
+    )
+    scrapli_driver = SelectField(
+        "Scrapli Driver", choices=choices(app.SCRAPLI_DRIVERS), default="cisco_iosxe"
     )
 
 

@@ -1203,8 +1203,9 @@ class Run(AbstractBase):
         self.log(
             "info", "OPENING Scrapli connection", device, logger="security",
         )
+        driver = device.scrapli_driver if self.use_device_driver else self.driver
         username, password = self.get_credentials(device)
-        connection = app.SCRAPLI_DRIVERS[self.driver](
+        connection = app.SCRAPLI_DRIVERS[driver](
             host=device.ip_address,
             auth_username=username,
             auth_password=password,

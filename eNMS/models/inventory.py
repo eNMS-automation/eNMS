@@ -89,6 +89,7 @@ class Device(Object):
     enable_password = db.Column(db.SmallString)
     netmiko_driver = db.Column(db.SmallString, default="cisco_ios")
     napalm_driver = db.Column(db.SmallString, default="ios")
+    scrapli_driver = db.Column(db.SmallString, default="cisco_iosxe")
     configuration = db.Column(db.LargeString, info={"log_change": False})
     last_failure = db.Column(db.SmallString, default="Never")
     last_status = db.Column(db.SmallString, default="Never")

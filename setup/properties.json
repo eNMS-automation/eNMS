@@ -884,6 +884,7 @@
       "os_version",
       "netmiko_driver",
       "napalm_driver",
+      "scrapli_driver",
       "ip_address",
       "port",
       "longitude",

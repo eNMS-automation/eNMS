@@ -96,15 +96,15 @@ Services can be combined into a workflow.
 
 ## 5. Configuration Management
 
-eNMS can work as a network device configuration backup tool and replace
-Oxidized/Rancid with the following features:
+eNMS can be used as a device configuration backup tool, like Oxidized/Rancid, with the following features:
 
-  - Poll network elements and store the latest configuration in the database.
-  - Search for any text or regular-expression in all configurations.
-  - Download device configuration to a local text file.
-  - Use the REST API support to return a specified device’s configuration.
+  - Poll network devices and store the latest configuration in the database
+  - Store any operational data that can be retrieved from the device CLI (e.g ``show version``, ``get facts`` etc.)
+  - Search for any text or regular-expression in all configurations
+  - Download device configuration to a local text file
+  - Use the REST API support to return a specified device’s configuration
   - Export all configurations to a remote Git repository (e.g. Gitlab)
-  - View differences between various revisions of a configuration with a git-style differences
+  - View git-style differences between various revisions of a configuration
 
 Search Configuration                          |  Compare Configuration
 :--------------------------------------------:|:-------------------------------:

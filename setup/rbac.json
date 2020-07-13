@@ -129,6 +129,7 @@
     "/form/run",
     "/form/run_filtering",
     "/form/run_relation_filtering",
+    "/form/scrapli_service",
     "/form/server",
     "/form/service_filtering",
     "/form/service_relation_filtering",

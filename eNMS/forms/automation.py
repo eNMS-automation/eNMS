@@ -178,7 +178,7 @@ class ConnectionForm(ServiceForm):
     custom_password = PasswordField("Custom Password", substitution=True)
     start_new_connection = BooleanField("Start New Connection")
     close_connection = BooleanField("Close Connection")
-    group = {
+    groups = {
         "commands": [
             "credentials",
             "custom_username",
@@ -274,7 +274,7 @@ class NetmikoForm(ConnectionForm):
             ],
             "default": "expanded",
         },
-        "Connection Parameters": ConnectionForm.group,
+        "Connection Parameters": ConnectionForm.groups,
         "Jump on connect Parameters": {
             "commands": [
                 "jump_on_connect",
@@ -303,7 +303,7 @@ class NapalmForm(ConnectionForm):
             "commands": ["driver", "use_device_driver", "timeout", "optional_args"],
             "default": "expanded",
         },
-        "Connection Parameters": ConnectionForm.group,
+        "Connection Parameters": ConnectionForm.groups,
     }
 
 

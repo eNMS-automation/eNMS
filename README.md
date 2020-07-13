@@ -138,6 +138,10 @@ ___
 - _[eNMS Installation](https://www.youtube.com/watch?v=Zu2iLNaZDQc)_
 - _[Overview of eNMS](https://www.youtube.com/watch?v=XwU0yom_aY0&t=1205s)_
 
+## Podcasts
+
+- A _[podcast about eNMS and network automation](https://www.pythonpodcast.com/enms-network-automation-episode-232/)_
+
 ## Quick Install
     Install python 3.6+ (earlier versions not supported)
     git clone https://github.com/afourmy/eNMS.git
@@ -146,7 +150,3 @@ ___
     export FLASK_APP=app.py
     flask run --host=0.0.0.0
     Log in (default credentials: admin / admin)
-
-## Podcasts
-
-- A _[podcast about eNMS and network automation](https://www.pythonpodcast.com/enms-network-automation-episode-232/)_

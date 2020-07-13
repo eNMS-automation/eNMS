@@ -218,6 +218,9 @@ export function openPanel({
   size,
   url,
 }) {
+  if (!user.get_requests.includes(url || `../form/${name}`)) {
+    return notify("Error 403 - Operation not allowed.", "error", 5);
+  }
   const panelId = id ? `${name}-${id}` : name;
   if ($(`#${panelId}`).length) {
     $(`#${panelId}`).css("zIndex", ++topZ);

@@ -130,9 +130,13 @@ ___
 
 ## Online content
 
-- An _[overview of eNMS](https://www.youtube.com/watch?v=XwU0yom_aY0&t=1205s)_ on youtube
-- A _[podcast about eNMS and network automation](https://www.pythonpodcast.com/enms-network-automation-episode-232/)_
+- You can follow us on _[Twitter](https://twitter.com/AutomationEnms)_ or _[Linkedin](https://www.linkedin.com/company/enms-automation)_ to receive notifications about new training content and releases.
 - You can join the `#enms` channel on the _[networktocode slack](https://networktocode.herokuapp.com/slack)_ for questions, feedback or feature requests.
+
+## Training Videos
+
+- _[eNMS Installation](https://www.youtube.com/watch?v=Zu2iLNaZDQc)_
+- _[Overview of eNMS](https://www.youtube.com/watch?v=XwU0yom_aY0&t=1205s)_
 
 ## Quick Install
     Install python 3.6+ (earlier versions not supported)
@@ -142,3 +146,7 @@ ___
     export FLASK_APP=app.py
     flask run --host=0.0.0.0
     Log in (default credentials: admin / admin)
+
+## Podcasts
+
+- A _[podcast about eNMS and network automation](https://www.pythonpodcast.com/enms-network-automation-episode-232/)_

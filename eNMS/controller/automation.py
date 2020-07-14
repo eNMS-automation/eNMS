@@ -239,8 +239,10 @@ class AutomationController(BaseController):
         return {"logs": log, "refresh": not log_instance}
 
     def get_service_state(self, path, runtime=None):
-        service_id = path.split(">")[-1]
-        state, service = None, db.fetch("service", id=service_id)
+        service_id, state = path.split(">")[-1], None
+        service = db.fetch("service", id=service_id, allow_none=True)
+        if not service:
+            return {}
         runs = db.fetch_all("run", service_id=service_id)
         if not runtime:
             runtime = "latest"

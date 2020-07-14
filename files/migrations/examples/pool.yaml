@@ -31,6 +31,8 @@
   device_port_match: inclusion
   device_property1: ''
   device_property1_match: inclusion
+  device_scrapli_driver: ''
+  device_scrapli_driver_match: inclusion
   device_specialized_data: ''
   device_specialized_data_match: inclusion
   device_subtype: ''
@@ -104,6 +106,8 @@
   device_port_match: inclusion
   device_property1: ''
   device_property1_match: inclusion
+  device_scrapli_driver: ''
+  device_scrapli_driver_match: inclusion
   device_specialized_data: ''
   device_specialized_data_match: inclusion
   device_subtype: ''
@@ -175,6 +179,8 @@
   device_port_match: inclusion
   device_property1: ''
   device_property1_match: inclusion
+  device_scrapli_driver: ''
+  device_scrapli_driver_match: inclusion
   device_specialized_data: ''
   device_specialized_data_match: inclusion
   device_subtype: ''
@@ -245,6 +251,8 @@
   device_port_match: inclusion
   device_property1: ''
   device_property1_match: inclusion
+  device_scrapli_driver: ''
+  device_scrapli_driver_match: inclusion
   device_specialized_data: ''
   device_specialized_data_match: inclusion
   device_subtype: ''
@@ -315,6 +323,8 @@
   device_port_match: inclusion
   device_property1: ''
   device_property1_match: inclusion
+  device_scrapli_driver: ''
+  device_scrapli_driver_match: inclusion
   device_specialized_data: ''
   device_specialized_data_match: inclusion
   device_subtype: ''
@@ -385,6 +395,8 @@
   device_port_match: inclusion
   device_property1: ''
   device_property1_match: inclusion
+  device_scrapli_driver: ''
+  device_scrapli_driver_match: inclusion
   device_specialized_data: ''
   device_specialized_data_match: inclusion
   device_subtype: ''
@@ -454,6 +466,8 @@
   device_port_match: inclusion
   device_property1: ''
   device_property1_match: inclusion
+  device_scrapli_driver: ''
+  device_scrapli_driver_match: inclusion
   device_specialized_data: ''
   device_specialized_data_match: inclusion
   device_subtype: ''
@@ -522,6 +536,8 @@
   device_port_match: inclusion
   device_property1: ''
   device_property1_match: inclusion
+  device_scrapli_driver: ''
+  device_scrapli_driver_match: inclusion
   device_specialized_data: ''
   device_specialized_data_match: inclusion
   device_subtype: ''
@@ -591,6 +607,8 @@
   device_port_match: inclusion
   device_property1: ''
   device_property1_match: inclusion
+  device_scrapli_driver: ''
+  device_scrapli_driver_match: inclusion
   device_specialized_data: ''
   device_specialized_data_match: inclusion
   device_subtype: ''

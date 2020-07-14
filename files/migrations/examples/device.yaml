@@ -25,6 +25,7 @@
   property1: 10.145.14.1
   property2: CP
   reachable: true
+  scrapli_driver: arista_eos
   subtype: ''
   tasks: []
   type: device
@@ -57,6 +58,7 @@
   property1: 10.145.14.1
   property2: CP
   reachable: true
+  scrapli_driver: arista_eos
   subtype: ''
   tasks: []
   type: device
@@ -89,6 +91,7 @@
   property1: 10.145.14.1
   property2: CP
   reachable: true
+  scrapli_driver: arista_eos
   subtype: ''
   tasks: []
   type: device
@@ -105,9 +108,9 @@
   last_duration: 3.285175s
   last_failure: '2020-06-14 05:12:38.353048'
   last_modified: ''
-  last_runtime: '2020-06-24 05:09:58.941462'
+  last_runtime: '2020-07-14 06:53:23.114859'
   last_status: Success
-  last_update: '2020-06-24 05:09:58.941462'
+  last_update: '2020-07-14 06:53:23.114859'
   latitude: '38.89511'
   location: Washington
   longitude: '-77.03637'
@@ -121,6 +124,7 @@
   property1: 10.145.14.1
   property2: CP
   reachable: true
+  scrapli_driver: arista_eos
   subtype: ''
   tasks: []
   type: device
@@ -153,6 +157,7 @@
   property1: 10.145.14.1
   property2: CP
   reachable: true
+  scrapli_driver: arista_eos
   subtype: ''
   tasks: []
   type: device
@@ -185,6 +190,7 @@
   property1: 10.145.14.1
   property2: CP
   reachable: true
+  scrapli_driver: arista_eos
   subtype: ''
   tasks: []
   type: device
@@ -217,6 +223,7 @@
   property1: 10.145.14.1
   property2: CP
   reachable: true
+  scrapli_driver: arista_eos
   subtype: ''
   tasks: []
   type: device
@@ -249,6 +256,7 @@
   property1: 10.145.14.1
   property2: CP
   reachable: true
+  scrapli_driver: arista_eos
   subtype: ''
   tasks: []
   type: device
@@ -281,6 +289,7 @@
   property1: 10.145.14.1
   property2: CP
   reachable: true
+  scrapli_driver: arista_eos
   subtype: ''
   tasks: []
   type: device
@@ -313,6 +322,7 @@
   property1: 10.145.14.1
   property2: CP
   reachable: true
+  scrapli_driver: arista_eos
   subtype: ''
   tasks: []
   type: device
@@ -345,6 +355,7 @@
   property1: 10.145.14.1
   property2: CP
   reachable: true
+  scrapli_driver: arista_eos
   subtype: ''
   tasks: []
   type: device
@@ -377,6 +388,7 @@
   property1: 10.145.14.1
   property2: CP
   reachable: true
+  scrapli_driver: arista_eos
   subtype: ''
   tasks: []
   type: device
@@ -409,6 +421,7 @@
   property1: 10.145.14.1
   property2: CP
   reachable: true
+  scrapli_driver: arista_eos
   subtype: ''
   tasks: []
   type: device
@@ -441,6 +454,7 @@
   property1: 10.145.14.1
   property2: CP
   reachable: true
+  scrapli_driver: arista_eos
   subtype: ''
   tasks: []
   type: device
@@ -473,6 +487,7 @@
   property1: 10.145.14.1
   property2: CP
   reachable: true
+  scrapli_driver: arista_eos
   subtype: ''
   tasks: []
   type: device
@@ -505,6 +520,7 @@
   property1: 10.145.14.1
   property2: CP
   reachable: true
+  scrapli_driver: arista_eos
   subtype: ''
   tasks: []
   type: device
@@ -537,6 +553,7 @@
   property1: 10.145.14.1
   property2: CP
   reachable: true
+  scrapli_driver: arista_eos
   subtype: ''
   tasks: []
   type: device
@@ -569,6 +586,7 @@
   property1: 10.145.14.1
   property2: CP
   reachable: true
+  scrapli_driver: arista_eos
   subtype: ''
   tasks: []
   type: device
@@ -601,6 +619,7 @@
   property1: 10.145.14.1
   property2: CP
   reachable: true
+  scrapli_driver: arista_eos
   subtype: ''
   tasks: []
   type: device
@@ -633,6 +652,7 @@
   property1: 10.145.14.1
   property2: CP
   reachable: true
+  scrapli_driver: arista_eos
   subtype: ''
   tasks: []
   type: device
@@ -665,6 +685,7 @@
   property1: 10.145.14.1
   property2: CP
   reachable: true
+  scrapli_driver: arista_eos
   subtype: ''
   tasks: []
   type: device
@@ -697,6 +718,7 @@
   property1: 10.145.14.1
   property2: CP
   reachable: true
+  scrapli_driver: arista_eos
   subtype: ''
   tasks: []
   type: device
@@ -729,6 +751,7 @@
   property1: 10.145.14.1
   property2: CP
   reachable: true
+  scrapli_driver: arista_eos
   subtype: ''
   tasks: []
   type: device
@@ -761,6 +784,7 @@
   property1: 10.145.14.1
   property2: CP
   reachable: true
+  scrapli_driver: arista_eos
   subtype: ''
   tasks: []
   type: device
@@ -793,6 +817,7 @@
   property1: 10.145.14.1
   property2: CP
   reachable: true
+  scrapli_driver: arista_eos
   subtype: ''
   tasks: []
   type: device
@@ -825,6 +850,7 @@
   property1: 10.145.14.1
   property2: CP
   reachable: true
+  scrapli_driver: arista_eos
   subtype: ''
   tasks: []
   type: device
@@ -857,6 +883,7 @@
   property1: 10.145.14.1
   property2: CP
   reachable: true
+  scrapli_driver: arista_eos
   subtype: ''
   tasks: []
   type: device
@@ -889,6 +916,7 @@
   property1: 10.145.14.1
   property2: CP
   reachable: true
+  scrapli_driver: arista_eos
   subtype: ''
   tasks: []
   type: device
@@ -922,6 +950,7 @@
   property2: CP
   public: false
   reachable: true
+  scrapli_driver: arista_eos
   subtype: ''
   tasks: []
   type: device
@@ -954,6 +983,7 @@
   property2: CP
   public: true
   reachable: true
+  scrapli_driver: cisco_iosxe
   subtype: ''
   tasks: []
   type: device

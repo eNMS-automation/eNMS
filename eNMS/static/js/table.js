@@ -941,6 +941,7 @@ tables.user = class UserTable extends Table {
       this.columnDisplay(),
       this.createNewButton(),
       this.exportTableButton(),
+      this.searchTableButton(),
       this.clearSearchButton(),
       this.refreshTableButton(),
     ];

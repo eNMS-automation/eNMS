@@ -5,7 +5,7 @@ from requests.exceptions import ConnectionError, MissingSchema, ReadTimeout
 from sqlalchemy import Boolean, case, ForeignKey, Integer
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.ext.hybrid import hybrid_property
-from sqlalchemy.orm import relationship
+from sqlalchemy.orm import aliased, relationship
 from sqlalchemy.sql.expression import true
 
 from eNMS import app
@@ -62,15 +62,18 @@ class Task(AbstractBase):
         public_tasks = query.join(cls.service).filter(
             models["service"].public == true()
         )
+        service_alias = aliased(models["service"])
         user_tasks = (
             query.join(cls.service)
-            .join(models["access"], models["service"].access)
+            .join(models["service"].originals.of_type(service_alias))
+            .join(models["access"], service_alias.access)
             .join(models["user"], models["access"].users)
             .filter(models["user"].name == user.name)
         )
         user_group_tasks = (
             query.join(cls.service)
-            .join(models["access"], models["service"].access)
+            .join(models["service"].originals.of_type(service_alias))
+            .join(models["access"], service_alias.access)
             .join(models["group"], models["access"].groups)
             .join(models["user"], models["group"].users)
             .filter(models["user"].name == user.name)

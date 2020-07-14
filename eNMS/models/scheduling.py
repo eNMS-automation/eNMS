@@ -5,7 +5,7 @@ from requests.exceptions import ConnectionError, MissingSchema, ReadTimeout
 from sqlalchemy import Boolean, case, ForeignKey, Integer
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.ext.hybrid import hybrid_property
-from sqlalchemy.orm import relationship
+from sqlalchemy.orm import aliased, relationship
 from sqlalchemy.sql.expression import true
 
 from eNMS import app
@@ -38,13 +38,10 @@ class Task(AbstractBase):
     service_name = association_proxy("service", "name")
     model_properties = ["next_run_time", "time_before_next_run", "status"]
 
-    def __init__(self, **kwargs):
-        super().update(**kwargs)
-
     def update(self, **kwargs):
         super().update(**kwargs)
-        if self.is_active:
-            self.schedule()
+        db.session.commit()
+        self.schedule(mode="schedule" if self.is_active else "pause")
 
     def delete(self):
         post(f"{app.scheduler_address}/delete_job/{self.id}")
@@ -62,15 +59,18 @@ class Task(AbstractBase):
         public_tasks = query.join(cls.service).filter(
             models["service"].public == true()
         )
+        service_alias = aliased(models["service"])
         user_tasks = (
             query.join(cls.service)
-            .join(models["access"], models["service"].access)
+            .join(models["service"].originals.of_type(service_alias))
+            .join(models["access"], service_alias.access)
             .join(models["user"], models["access"].users)
             .filter(models["user"].name == user.name)
         )
         user_group_tasks = (
             query.join(cls.service)
-            .join(models["access"], models["service"].access)
+            .join(models["service"].originals.of_type(service_alias))
+            .join(models["access"], service_alias.access)
             .join(models["group"], models["access"].groups)
             .join(models["user"], models["group"].users)
             .filter(models["user"].name == user.name)
@@ -103,10 +103,8 @@ class Task(AbstractBase):
 
     def schedule(self, mode="schedule"):
         try:
-            result = post(
-                f"{app.scheduler_address}/schedule",
-                json={"mode": mode, "task": self.get_properties()},
-            ).json()
+            payload = {"mode": mode, "task": self.get_properties()}
+            result = post(f"{app.scheduler_address}/schedule", json=payload).json()
         except ConnectionError:
             return {"alert": "Scheduler Unreachable: the task cannot be scheduled."}
         self.is_active = result.get("active", False)

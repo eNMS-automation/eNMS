@@ -508,19 +508,18 @@ class Server(Flask):
             decorators = [self.auth.login_required, self.monitor_rest_request]
 
             def post(self):
-                task_id = request.get_json()
-                task = db.fetch("task", id=task_id)
+                task = db.fetch("task", id=request.get_json())
                 data = {
                     "trigger": "Scheduler",
                     "creator": request.authorization["username"],
                     "runtime": app.get_time(),
-                    "task": task_id,
+                    "task": task.id,
                     **task.initial_payload,
                 }
                 if task.devices:
-                    task["devices"] = [device.id for device in task.devices]
+                    data["devices"] = [device.id for device in task.devices]
                 if task.pools:
-                    task["pools"] = [pool.id for pool in task.pools]
+                    data["pools"] = [pool.id for pool in task.pools]
                 Thread(target=app.run, args=(task.service.id,), kwargs=data).start()
 
         class Topology(Resource):

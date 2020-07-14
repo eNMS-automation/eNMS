@@ -394,15 +394,18 @@ class Run(AbstractBase):
         public_services = query.join(cls.service).filter(
             models["service"].public == true()
         )
+        service_alias = aliased(models["service"])
         user_services = (
             query.join(cls.service)
-            .join(models["access"], models["service"].access)
+            .join(models["service"].originals.of_type(service_alias))
+            .join(models["access"], service_alias.access)
             .join(models["user"], models["access"].users)
             .filter(models["user"].name == user.name)
         )
         user_group_services = (
             query.join(cls.service)
-            .join(models["access"], models["service"].access)
+            .join(models["service"].originals.of_type(service_alias))
+            .join(models["access"], service_alias.access)
             .join(models["group"], models["access"].groups)
             .join(models["user"], models["group"].users)
             .filter(models["user"].name == user.name)

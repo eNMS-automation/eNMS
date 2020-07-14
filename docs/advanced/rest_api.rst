@@ -282,9 +282,9 @@ Example of payload to schedule a task from the REST API: this payload will creat
  {
     "name": "test",
     "service": "netmiko_check_vrf_test",
-	"is_active": true,
-	"devices": ["Baltimore"],
-	"start_date": "13/08/2019 10:16:50"
+    "is_active": true,
+    "devices": ["Baltimore"],
+    "start_date": "13/08/2019 10:16:50"
  }
 
 This task schedules the service ``netmiko_check_vrf_test`` to run at ``20/06/2019 23:15:15`` on the device whose name is ``Baltimore``.

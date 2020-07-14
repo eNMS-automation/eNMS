@@ -38,12 +38,10 @@ class Task(AbstractBase):
     service_name = association_proxy("service", "name")
     model_properties = ["next_run_time", "time_before_next_run", "status"]
 
-    def __init__(self, **kwargs):
-        super().update(**kwargs)
-
     def update(self, **kwargs):
         super().update(**kwargs)
         if self.is_active:
+            db.session.commit()
             self.schedule()
 
     def delete(self):
@@ -106,10 +104,8 @@ class Task(AbstractBase):
 
     def schedule(self, mode="schedule"):
         try:
-            result = post(
-                f"{app.scheduler_address}/schedule",
-                json={"mode": mode, "task": self.get_properties()},
-            ).json()
+            payload = {"mode": mode, "task": self.get_properties()}
+            result = post(f"{app.scheduler_address}/schedule", json=payload).json()
         except ConnectionError:
             return {"alert": "Scheduler Unreachable: the task cannot be scheduled."}
         self.is_active = result.get("active", False)

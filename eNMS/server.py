@@ -504,25 +504,6 @@ class Server(Flask):
                 else:
                     return {**app.run(service.id, **data), "errors": errors}
 
-        class RunTask(Resource):
-            decorators = [self.auth.login_required, self.monitor_rest_request]
-
-            def post(self):
-                task_id = request.get_json()
-                task = db.fetch("task", id=task_id)
-                data = {
-                    "trigger": "Scheduler",
-                    "creator": request.authorization["username"],
-                    "runtime": app.get_time(),
-                    "task": task_id,
-                    **task.initial_payload,
-                }
-                if task.devices:
-                    task["devices"] = [device.id for device in task.devices]
-                if task.pools:
-                    task["pools"] = [pool.id for pool in task.pools]
-                Thread(target=app.run, args=(task.service.id,), kwargs=data).start()
-
         class Topology(Resource):
             decorators = [self.auth.login_required, self.monitor_rest_request]
 
@@ -588,7 +569,6 @@ class Server(Flask):
         api.add_resource(CreatePool, "/rest/create_pool")
         api.add_resource(Heartbeat, "/rest/is_alive")
         api.add_resource(RunService, "/rest/run_service")
-        api.add_resource(RunTask, "/rest/run_task")
         api.add_resource(Query, "/rest/query/<string:model>")
         api.add_resource(UpdateInstance, "/rest/instance/<string:model>")
         api.add_resource(GetInstance, "/rest/instance/<string:model>/<string:name>")

@@ -13,6 +13,7 @@ moment: false
 page: false
 relations: false
 relationships: false
+user: false
 */
 
 import { tableInstances } from "./table.js";

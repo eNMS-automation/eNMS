@@ -508,13 +508,12 @@ class Server(Flask):
             decorators = [self.auth.login_required, self.monitor_rest_request]
 
             def post(self):
-                task_id = request.get_json()
-                task = db.fetch("task", id=task_id)
+                task = db.fetch("task", id=request.get_json())
                 data = {
                     "trigger": "Scheduler",
                     "creator": request.authorization["username"],
                     "runtime": app.get_time(),
-                    "task": task_id,
+                    "task": task.id,
                     **task.initial_payload,
                 }
                 if task.devices:

@@ -8,7 +8,7 @@ from eNMS.forms.automation import ConnectionForm
 from eNMS.models.automation import ConnectionService
 
 
-class NetmikoValidationService(ConnectionService):
+class ScrapliService(ConnectionService):
 
     __tablename__ = "scrapli_service"
     pretty_name = "Scrapli Commands"
@@ -25,7 +25,7 @@ class NetmikoValidationService(ConnectionService):
         return {"command": command, "result": "result"}
 
 
-class NetmikoValidationForm(ConnectionForm):
+class ScrapliForm(ConnectionForm):
     form_type = HiddenField(default="scrapli_service")
     command = StringField(substitution=True)
     driver = SelectField(choices=choices(app.SCRAPLI_DRIVERS))

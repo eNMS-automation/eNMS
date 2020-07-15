@@ -1,4 +1,5 @@
 from sqlalchemy import Boolean, ForeignKey, Integer
+from wtforms.widgets import TextArea
 
 from eNMS import app
 from eNMS.database import db
@@ -14,27 +15,29 @@ class ScrapliService(ConnectionService):
     pretty_name = "Scrapli Commands"
     parent_type = "connection_service"
     id = db.Column(Integer, ForeignKey("connection_service.id"), primary_key=True)
-    command = db.Column(db.LargeString)
+    commands = db.Column(db.LargeString)
     driver = db.Column(db.SmallString)
     use_device_driver = db.Column(Boolean, default=True)
 
     __mapper_args__ = {"polymorphic_identity": "scrapli_service"}
 
     def job(self, run, payload, device):
-        command = run.sub(run.command, locals())
+        commands = run.sub(run.commands, locals()).split("\n")
         connection = run.scrapli_connection(device)
-        response = connection.send_command("show run")
-        return {"command": command, "result": response.result}
+        result = "\n".join(
+            connection.send_command(command).result for command in commands
+        )
+        return {"commands": commands, "result": result}
 
 
 class ScrapliForm(ConnectionForm):
     form_type = HiddenField(default="scrapli_service")
-    command = StringField(substitution=True)
+    commands = StringField(substitution=True, widget=TextArea(), render_kw={"rows": 5})
     driver = SelectField(choices=choices(app.SCRAPLI_DRIVERS))
     use_device_driver = BooleanField(default=True)
     groups = {
         "Main Parameters": {
-            "commands": ["command", "driver", "use_device_driver"],
+            "commands": ["commands", "driver", "use_device_driver"],
             "default": "expanded",
         },
         **ConnectionForm.groups,

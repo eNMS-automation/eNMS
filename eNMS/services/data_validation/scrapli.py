@@ -22,11 +22,9 @@ class ScrapliService(ConnectionService):
     __mapper_args__ = {"polymorphic_identity": "scrapli_service"}
 
     def job(self, run, payload, device):
-        commands = run.sub(run.commands, locals()).split("\n")
+        commands = run.sub(run.commands, locals()).splitlines()
         connection = run.scrapli_connection(device)
-        result = "\n".join(
-            connection.send_command(command).result for command in commands
-        )
+        result = connection.send_commands(commands).result
         return {"commands": commands, "result": result}
 
 

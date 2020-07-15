@@ -8358,7 +8358,7 @@
   waiting_time: 0
   workflow_category: Example workflow(s)
 - close_connection: false
-  command: ''
+  commands: "show run\r\nshow vrf"
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -8384,7 +8384,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2020-07-15 01:41:24.186533'
+  last_modified: '2020-07-15 01:51:32.060410'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -8417,6 +8417,7 @@
   time_between_retries: 10
   type: scrapli_service
   update_pools: false
+  use_device_driver: true
   validation_condition: success
   validation_method: none
   vendor: ''

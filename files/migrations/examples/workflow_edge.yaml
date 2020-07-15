@@ -609,3 +609,9 @@
 - {destination: '[Shared] End', label: success, source: '[Regression Workflow L: superworkflow]
     Post Placeholder Processing', subtype: success, type: workflow_edge, workflow: 'Regression
     Workflow L: superworkflow'}
+- {destination: '[Regression Workflow O: Scrapli] Check running configuration', label: success,
+  source: '[Shared] Start', subtype: success, type: workflow_edge, workflow: 'Regression
+    Workflow O: Scrapli'}
+- {destination: '[Shared] End', label: success, source: '[Regression Workflow O: Scrapli]
+    Check running configuration', subtype: success, type: workflow_edge, workflow: 'Regression
+    Workflow O: Scrapli'}

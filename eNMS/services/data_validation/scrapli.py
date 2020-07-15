@@ -16,13 +16,15 @@ class ScrapliService(ConnectionService):
     id = db.Column(Integer, ForeignKey("connection_service.id"), primary_key=True)
     command = db.Column(db.LargeString)
     driver = db.Column(db.SmallString)
+    use_device_driver = db.Column(Boolean, default=True)
 
     __mapper_args__ = {"polymorphic_identity": "scrapli_service"}
 
     def job(self, run, payload, device):
         command = run.sub(run.command, locals())
         connection = run.scrapli_connection(device)
-        return {"command": command, "result": "result"}
+        response = connection.send_command("show run")
+        return {"command": command, "result": response.result}
 
 
 class ScrapliForm(ConnectionForm):
@@ -30,6 +32,6 @@ class ScrapliForm(ConnectionForm):
     command = StringField(substitution=True)
     driver = SelectField(choices=choices(app.SCRAPLI_DRIVERS))
     groups = {
-        "Main Parameters": {"commands": ["command", "driver"], "default": "expanded"},
+        "Main Parameters": {"commands": ["command", "driver", "use_device_driver"], "default": "expanded"},
         **ConnectionForm.groups,
     }

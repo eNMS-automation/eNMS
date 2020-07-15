@@ -65,7 +65,7 @@
       -382, 39]
     'Regression Workflow M: Unix command & shell, ping, jump server': [-341, 17]
     'Regression Workflow N: Topology Import (netbox, librenms, opennms)': [-141, 21]
-    'Regression Workflow O: Scrapli': [0, 0]
+    'Regression Workflow O: Scrapli': [-192, 31]
     Subworkflow 1: !!python/tuple [0, 0]
     Subworkflow 2: !!python/tuple [0, 0]
     Workflow  in device by device mode: !!python/tuple [0, 0]
@@ -190,7 +190,7 @@
       560, 9]
     'Regression Workflow M: Unix command & shell, ping, jump server': [560, 9]
     'Regression Workflow N: Topology Import (netbox, librenms, opennms)': [636, 24]
-    'Regression Workflow O: Scrapli': [500, 0]
+    'Regression Workflow O: Scrapli': [641, 54]
     Subworkflow 1: !!python/tuple [0, 0]
     Subworkflow 2: !!python/tuple [0, 0]
     T: !!python/tuple [500, 0]
@@ -8319,7 +8319,7 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels: {}
-  last_modified: '2020-07-15 01:41:36.426577'
+  last_modified: '2020-07-15 02:01:56.292047'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -8344,7 +8344,7 @@
   send_notification: false
   send_notification_method: mail
   services: ['[Shared] Start', '[Shared] End', '[Regression Workflow O: Scrapli] Check
-      running configuration']
+      running configuration', '[Regression Workflow O: Scrapli] Configure VRF TEST-VRF']
   shared: false
   skip: false
   skip_query: ''
@@ -8384,7 +8384,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2020-07-15 01:51:32.060410'
+  last_modified: '2020-07-15 02:01:30.590001'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -8398,8 +8398,8 @@
   operating_system: ''
   pools: []
   positions:
-    'Regression Workflow O: Scrapli': [233, -86]
-  postprocessing: ''
+    'Regression Workflow O: Scrapli': [65, -142]
+  postprocessing: results["success"] = "TEST-VRF" not in results["result"]
   postprocessing_mode: always
   preprocessing: ''
   public: false
@@ -8407,6 +8407,71 @@
   reserved: false
   run_method: per_device
   scoped_name: Check running configuration
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: false
+  skip_query: ''
+  skip_value: 'True'
+  start_new_connection: false
+  time_between_retries: 10
+  type: scrapli_service
+  update_pools: false
+  use_device_driver: true
+  validation_condition: success
+  validation_method: none
+  vendor: ''
+  waiting_time: 0
+- close_connection: false
+  commands: ''
+  completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credentials: device
+  custom_username: ''
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  devices: []
+  dict_match: {}
+  display_only_failed_nodes: false
+  driver: cisco_iosxe
+  events: []
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2020-07-15 02:01:50.813858'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Regression Workflow O: Scrapli] Configure VRF TEST-VRF'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions:
+    'Regression Workflow O: Scrapli': [402, -124]
+  postprocessing: ''
+  postprocessing_mode: always
+  preprocessing: ''
+  public: false
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: Configure VRF TEST-VRF
   send_notification: false
   send_notification_method: mail
   shared: false

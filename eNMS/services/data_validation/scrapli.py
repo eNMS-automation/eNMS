@@ -16,6 +16,7 @@ class ScrapliService(ConnectionService):
     parent_type = "connection_service"
     id = db.Column(Integer, ForeignKey("connection_service.id"), primary_key=True)
     commands = db.Column(db.LargeString)
+    is_configuration = db.Column(Boolean)
     driver = db.Column(db.SmallString)
     use_device_driver = db.Column(Boolean, default=True)
 

@@ -134,15 +134,15 @@ Configuration parameters for creating this service instance:
 
 - All Common Netmiko Parameters (see above)
 - ``Command`` CLI command to send to the device
-- ``Confirmation1`` first expected confirmation question prompted by the device
+- ``Confirmation1`` Regular expression to match first expected confirmation question prompted by the device
 - ``Response1`` response to first confirmation question prompted by the device
-- ``Confirmation2`` second expected confirmation question prompted by the device
+- ``Confirmation2`` Regular expression to match second expected confirmation question prompted by the device
 - ``Response2`` response to second confirmation question prompted by the device
-- ``Confirmation3`` third expected confirmation question prompted by the device
+- ``Confirmation3`` Regular expression to match third expected confirmation question prompted by the device
 - ``Response3`` response to third confirmation question prompted by the device
 
 .. note:: This Service supports variable substitution (as mentioned in the previous section) in the `command` input
-   field of its configuration form.
+ field of its configuration form.
 
 Netmiko Validation Service
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

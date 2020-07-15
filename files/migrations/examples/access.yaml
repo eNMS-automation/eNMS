@@ -69,7 +69,9 @@
   type: access
   upper_menu: []
   users: [chicago]
-- description: ''
+- description: User 'chicago' and pool 'New York Users' can run workflows 3/4 and
+    they can only use 'Washington' as a target. Running workflows 3/4 with anything
+    other target than just 'Washington' should be refused.
   get_requests: []
   groups: [New York Users]
   menu: []
@@ -80,7 +82,7 @@
   post_requests: []
   services: ['Regression Workflow 4: VRF creation and deletion with Netmiko', 'Regression
       Workflow L: superworkflow', 'Regression Workflow 3: Napalm getters (postprocessing)']
-  services_access: "['Read', 'Edit']"
+  services_access: "['Read', 'Edit', 'Run']"
   type: access
   upper_menu: []
   users: [chicago]

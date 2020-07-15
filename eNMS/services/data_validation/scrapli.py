@@ -24,19 +24,20 @@ class ScrapliService(ConnectionService):
 
     def job(self, run, payload, device):
         commands = run.sub(run.commands, locals()).splitlines()
-        connection = run.scrapli_connection(device)
-        result = connection.send_commands(commands).result
+        function = "send_configs" if run.is_configuration else "send_commands"
+        result = getattr(run.scrapli_connection(device), function)(commands).result
         return {"commands": commands, "result": result}
 
 
 class ScrapliForm(ConnectionForm):
     form_type = HiddenField(default="scrapli_service")
     commands = StringField(substitution=True, widget=TextArea(), render_kw={"rows": 5})
+    is_configuration = BooleanField()
     driver = SelectField(choices=choices(app.SCRAPLI_DRIVERS))
     use_device_driver = BooleanField(default=True)
     groups = {
         "Main Parameters": {
-            "commands": ["commands", "driver", "use_device_driver"],
+            "commands": ["commands", "is_configuration", "driver", "use_device_driver"],
             "default": "expanded",
         },
         **ConnectionForm.groups,

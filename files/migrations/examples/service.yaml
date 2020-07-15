@@ -8423,7 +8423,7 @@
   vendor: ''
   waiting_time: 0
 - close_connection: false
-  commands: ''
+  commands: vrf instance TEST-VRF
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -8445,11 +8445,12 @@
   include_device_results: false
   include_link_in_summary: false
   initial_payload: {}
+  is_configuration: false
   iteration_devices: ''
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2020-07-15 02:01:50.813858'
+  last_modified: '2020-07-15 02:40:00.044000'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100

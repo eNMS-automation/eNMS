@@ -646,7 +646,7 @@ class Run(AbstractBase):
 
     def device_run(self, payload):
         self.devices = self.compute_devices(payload)
-        if False and self.runtime == self.parent_runtime:
+        if self.runtime == self.parent_runtime:
             allowed_targets = db.query("device", rbac="target", username=self.creator)
             unauthorized_targets = set(self.devices) - set(allowed_targets)
             if unauthorized_targets:
@@ -654,6 +654,7 @@ class Run(AbstractBase):
                     f"Error 403: User '{self.creator}' is not allowed to use these"
                     f" devices as targets: {', '.join(map(str, unauthorized_targets))}"
                 )
+                self.log("info", result, logger="security")
                 return {"result": result, "success": False}
         if self.run_method != "once":
             self.write_state("progress/device/total", len(self.devices), "increment")

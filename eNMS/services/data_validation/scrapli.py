@@ -1,9 +1,9 @@
-from sqlalchemy import ForeignKey, Integer
+from sqlalchemy import Boolean, ForeignKey, Integer
 
 from eNMS import app
 from eNMS.database import db
 from eNMS.forms import choices
-from eNMS.forms.fields import HiddenField, SelectField, StringField
+from eNMS.forms.fields import BooleanField, HiddenField, SelectField, StringField
 from eNMS.forms.automation import ConnectionForm
 from eNMS.models.automation import ConnectionService
 
@@ -31,7 +31,11 @@ class ScrapliForm(ConnectionForm):
     form_type = HiddenField(default="scrapli_service")
     command = StringField(substitution=True)
     driver = SelectField(choices=choices(app.SCRAPLI_DRIVERS))
+    use_device_driver = BooleanField(default=True)
     groups = {
-        "Main Parameters": {"commands": ["command", "driver", "use_device_driver"], "default": "expanded"},
+        "Main Parameters": {
+            "commands": ["command", "driver", "use_device_driver"],
+            "default": "expanded",
+        },
         **ConnectionForm.groups,
     }

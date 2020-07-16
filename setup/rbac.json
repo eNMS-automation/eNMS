@@ -89,6 +89,7 @@
     "/form/database_migration",
     "/form/device",
     "/form/device_connection",
+    "/form/device_data",
     "/form/device_filtering",
     "/form/device_relation_filtering",
     "/form/event",

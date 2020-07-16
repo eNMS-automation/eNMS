@@ -16,7 +16,7 @@ class GitService(Service):
     git_repository = db.Column(db.SmallString)
     relative_path = db.Column(Boolean)
     pull = db.Column(Boolean)
-    commit = db.Column(Boolean)
+    add_commit = db.Column(Boolean)
     commit_message = db.Column(db.LargeString)
     push = db.Column(Boolean)
 
@@ -30,7 +30,7 @@ class GitService(Service):
         )
         if self.pull:
             repo.remotes.origin.pull()
-        if self.commit:
+        if self.add_commit:
             repo.git.add(A=True)
             repo.git.commit(m=self.commit_message)
         if self.push:
@@ -43,6 +43,6 @@ class GitForm(ServiceForm):
     git_repository = StringField("Path to Local Git Repository")
     relative_path = BooleanField("Path is relative to eNMS folder")
     pull = BooleanField("Git Pull")
-    commit = BooleanField("Do 'git add' and commit")
+    add_commit = BooleanField("Do 'git add' and commit")
     commit_message = StringField("Commit Message")
     push = BooleanField("Git Push")

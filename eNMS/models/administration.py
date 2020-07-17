@@ -124,12 +124,13 @@ class Access(AbstractBase):
     pools_access = db.Column(db.SmallString)
 
     def update(self, **kwargs):
+        old_users, old_groups = self.users, self.groups
         super().update(**kwargs)
-        self.update_rbac()
+        self.update_rbac(old_users, old_groups)
 
-    def update_rbac(self):
-        users = set(self.users)
-        for group in self.groups:
+    def update_rbac(self, users, groups):
+        users = set(users) | set(self.users)
+        for group in set(groups) | set(self.groups):
             users |= set(group.users)
         for user in users:
             user.update_rbac()

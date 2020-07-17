@@ -1,5 +1,6 @@
 from datetime import datetime
 from flask_login import UserMixin
+from itertools import chain
 from passlib.hash import argon2
 from sqlalchemy import Boolean, Integer
 from sqlalchemy.orm import relationship
@@ -95,6 +96,12 @@ class Group(AbstractBase):
         "Access", secondary=db.access_group_table, back_populates="groups"
     )
 
+    def update(self, **kwargs):
+        old_users = set(self.users)
+        super().update(**kwargs)
+        for user in old_users | set(self.users):
+            user.update_rbac()
+
 
 @db.set_custom_properties
 class Access(AbstractBase):
@@ -123,16 +130,14 @@ class Access(AbstractBase):
     services_access = db.Column(db.SmallString)
     pools_access = db.Column(db.SmallString)
 
-    def update(self, **kwargs):
-        old_users, old_groups = self.users, self.groups
-        super().update(**kwargs)
-        self.update_rbac(old_users, old_groups)
+    def get_users(self):
+        group_users = chain.from_iterable(group.users for group in self.groups)
+        return set(self.users) | set(group_users)
 
-    def update_rbac(self, users, groups):
-        users = set(users) | set(self.users)
-        for group in set(groups) | set(self.groups):
-            users |= set(group.users)
-        for user in users:
+    def update(self, **kwargs):
+        old_users = self.get_users()
+        super().update(**kwargs)
+        for user in old_users | self.get_users():
             user.update_rbac()
 
 

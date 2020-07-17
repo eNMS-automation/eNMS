@@ -8,7 +8,13 @@ from wtforms import FormField
 from eNMS import app
 from eNMS.database import db
 from eNMS.forms.automation import NetmikoForm
-from eNMS.forms.fields import FieldList, HiddenField, SelectField, StringField
+from eNMS.forms.fields import (
+    BooleanField,
+    FieldList,
+    HiddenField,
+    SelectField,
+    StringField,
+)
 from eNMS.models.automation import ConnectionService
 
 
@@ -28,6 +34,7 @@ class NetmikoBackupService(ConnectionService):
     property = db.Column(db.SmallString)
     commands = db.Column(db.List)
     replacements = db.Column(db.List)
+    add_header = db.Column(Boolean, default=True)
 
     __mapper_args__ = {"polymorphic_identity": "netmiko_backup_service"}
 
@@ -47,7 +54,7 @@ class NetmikoBackupService(ConnectionService):
                 if command["prefix"]:
                     title += f" [{command['prefix']}]"
                 header = f"\n{' ' * 30}{title}\n" f"{' ' * 30}{'*' * len(title)}"
-                command_result = [f"{header}\n\n"]
+                command_result = [f"{header}\n\n"] if self.add_header else []
                 for line in netmiko_connection.send_command(
                     command["value"]
                 ).splitlines():
@@ -93,6 +100,7 @@ class DataBackupForm(NetmikoForm):
     )
     commands = FieldList(FormField(CommandsForm), min_entries=12)
     replacements = FieldList(FormField(ReplacementForm), min_entries=12)
+    add_header = BooleanField(default=True)
     groups = {
         "Target property and commands": {
             "commands": ["property", "commands"],

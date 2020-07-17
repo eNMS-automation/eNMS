@@ -100,10 +100,10 @@ class DataBackupForm(NetmikoForm):
     )
     commands = FieldList(FormField(CommandsForm), min_entries=12)
     replacements = FieldList(FormField(ReplacementForm), min_entries=12)
-    add_header = BooleanField(default=True)
+    add_header = BooleanField("Add header for each ommand", default=True)
     groups = {
         "Target property and commands": {
-            "commands": ["property", "commands"],
+            "commands": ["property", "add_header", "commands"],
             "default": "expanded",
         },
         "Search Response & Replace": {

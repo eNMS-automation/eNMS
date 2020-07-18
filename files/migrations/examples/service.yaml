@@ -5196,7 +5196,8 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- close_connection: true
+- add_header: true
+  close_connection: true
   commands:
   - {prefix: shusers, value: show run}
   - {prefix: shipintbr, value: show ip interface brief}
@@ -8078,7 +8079,8 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- close_connection: false
+- add_header: true
+  close_connection: false
   commands:
   - {prefix: '', value: show run}
   - {prefix: '', value: ''}

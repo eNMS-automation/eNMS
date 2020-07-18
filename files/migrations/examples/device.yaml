@@ -27,7 +27,6 @@
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
-  tasks: []
   type: device
   username: cisco
   vendor: Cisco
@@ -60,7 +59,6 @@
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
-  tasks: []
   type: device
   username: cisco
   vendor: Cisco
@@ -93,7 +91,6 @@
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
-  tasks: []
   type: device
   username: admin
   vendor: Arista
@@ -108,9 +105,9 @@
   last_duration: 3.285175s
   last_failure: '2020-06-14 05:12:38.353048'
   last_modified: ''
-  last_runtime: '2020-07-14 06:53:23.114859'
+  last_runtime: '2020-07-17 05:59:57.157778'
   last_status: Success
-  last_update: '2020-07-14 06:53:23.114859'
+  last_update: '2020-07-17 05:59:57.157778'
   latitude: '38.89511'
   location: Washington
   longitude: '-77.03637'
@@ -126,7 +123,6 @@
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
-  tasks: []
   type: device
   username: admin
   vendor: Arista
@@ -159,7 +155,6 @@
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
-  tasks: []
   type: device
   username: admin
   vendor: Cisco
@@ -192,7 +187,6 @@
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
-  tasks: []
   type: device
   username: cisco
   vendor: Cisco
@@ -225,7 +219,6 @@
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
-  tasks: []
   type: device
   username: cisco
   vendor: Cisco
@@ -258,7 +251,6 @@
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
-  tasks: []
   type: device
   username: cisco
   vendor: Cisco
@@ -291,7 +283,6 @@
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
-  tasks: []
   type: device
   username: cisco
   vendor: Cisco
@@ -324,7 +315,6 @@
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
-  tasks: []
   type: device
   username: cisco
   vendor: Cisco
@@ -357,7 +347,6 @@
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
-  tasks: []
   type: device
   username: cisco
   vendor: Cisco
@@ -390,7 +379,6 @@
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
-  tasks: []
   type: device
   username: cisco
   vendor: Cisco
@@ -423,7 +411,6 @@
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
-  tasks: []
   type: device
   username: cisco
   vendor: Cisco
@@ -456,7 +443,6 @@
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
-  tasks: []
   type: device
   username: admin
   vendor: Cisco
@@ -489,7 +475,6 @@
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
-  tasks: []
   type: device
   username: admin
   vendor: Cisco
@@ -522,7 +507,6 @@
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
-  tasks: []
   type: device
   username: admin
   vendor: Juniper
@@ -555,7 +539,6 @@
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
-  tasks: []
   type: device
   username: admin
   vendor: Juniper
@@ -588,7 +571,6 @@
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
-  tasks: []
   type: device
   username: admin
   vendor: Juniper
@@ -621,7 +603,6 @@
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
-  tasks: []
   type: device
   username: admin
   vendor: Juniper
@@ -654,7 +635,6 @@
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
-  tasks: []
   type: device
   username: admin
   vendor: Juniper
@@ -687,7 +667,6 @@
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
-  tasks: []
   type: device
   username: cisco
   vendor: Juniper
@@ -720,7 +699,6 @@
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
-  tasks: []
   type: device
   username: cisco
   vendor: Juniper
@@ -753,7 +731,6 @@
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
-  tasks: []
   type: device
   username: cisco
   vendor: Juniper
@@ -786,7 +763,6 @@
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
-  tasks: []
   type: device
   username: cisco
   vendor: Juniper
@@ -819,7 +795,6 @@
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
-  tasks: []
   type: device
   username: cisco
   vendor: Juniper
@@ -852,7 +827,6 @@
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
-  tasks: []
   type: device
   username: cisco
   vendor: Cisco
@@ -885,7 +859,6 @@
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
-  tasks: []
   type: device
   username: cisco
   vendor: Cisco
@@ -918,7 +891,6 @@
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
-  tasks: []
   type: device
   username: admin
   vendor: Cisco
@@ -952,7 +924,6 @@
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
-  tasks: []
   type: device
   username: admin
   vendor: linux
@@ -985,7 +956,6 @@
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: ''
-  tasks: []
   type: device
   username: ''
   vendor: Cisco

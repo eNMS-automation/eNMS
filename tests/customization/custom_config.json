@@ -8,7 +8,7 @@
 	"app": {
 	  "address": "http://192.168.105.3",
 	  "config_mode": "debug",
-	  "create_examples": true,
+	  "startup_migration": "examples",
 	  "documentation_url": "https://enms.readthedocs.io/en/latest/",
 	  "log_level": "debug",
 	  "git_repository": "git@github.com:afourmy/gitpython-test.git"

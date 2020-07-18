@@ -9,6 +9,8 @@ Version 3.22.1
 - Fix settings saving mechanism
 - Fix gunicorn multiple workers sqlalchemy post fork session conflict bug
 - Dont prevent wrong device GPS coordinates from displaying links in network view
+- Fix RBAC bugs
+- Add new Scrapli service to send commands / configuration to network device
 
 Version 3.22
 ------------

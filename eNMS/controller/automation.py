@@ -10,23 +10,9 @@ from uuid import uuid4
 from warnings import warn
 
 try:
-    from scrapli.driver.core import (
-        IOSXEDriver,
-        IOSXRDriver,
-        NXOSDriver,
-        EOSDriver,
-        JunosDriver,
-    )
-
-    SCRAPLI_DRIVERS = {
-        "cisco_iosxe": IOSXEDriver,
-        "cisco_iosxr": IOSXRDriver,
-        "cisco_nxos": NXOSDriver,
-        "arista_eos": EOSDriver,
-        "juniper_junos": JunosDriver,
-    }
+    from scrapli import CORE_PLATFORM_MA
 except ImportError as exc:
-    SCRAPLI_DRIVERS = {}
+    CORE_PLATFORM_MAP = {}
     warn(f"Couldn't import scrapli module ({exc})")
 
 from eNMS.controller.base import BaseController
@@ -61,7 +47,7 @@ class AutomationController(BaseController):
         ("get_ipv6_neighbors_table", "IPv6"),
         ("is_alive", "Is alive"),
     )
-    SCRAPLI_DRIVERS = SCRAPLI_DRIVERS
+    SCRAPLI_DRIVERS = CORE_PLATFORM_MAP
 
     connections_cache = {
         library: defaultdict(dict) for library in ("netmiko", "napalm", "scrapli")

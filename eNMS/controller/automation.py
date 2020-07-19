@@ -10,7 +10,7 @@ from uuid import uuid4
 from warnings import warn
 
 try:
-    from scrapli import CORE_PLATFORM_MA
+    from scrapli.factory import CORE_PLATFORM_MAP
 except ImportError as exc:
     CORE_PLATFORM_MAP = {}
     warn(f"Couldn't import scrapli module ({exc})")

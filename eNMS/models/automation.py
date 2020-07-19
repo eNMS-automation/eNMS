@@ -1215,11 +1215,13 @@ class Run(AbstractBase):
         )
         username, password = self.get_credentials(device)
         connection = Scrapli(
+            transport=self.transport,
             platform=device.scrapli_driver if self.use_device_driver else self.driver,
             host=device.ip_address,
             auth_username=username,
             auth_password=password,
             auth_private_key=False,
+            auth_strict_key=False,
         )
         connection.open()
         app.connections_cache["scrapli"][self.parent_runtime][device.name] = connection

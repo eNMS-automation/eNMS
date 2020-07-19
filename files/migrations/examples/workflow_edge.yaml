@@ -618,6 +618,9 @@
 - {destination: '[Regression Workflow O: Scrapli] Check that TEST-VRF is configured',
   label: success, source: '[Regression Workflow O: Scrapli] Configure VRF TEST-VRF',
   subtype: success, type: workflow_edge, workflow: 'Regression Workflow O: Scrapli'}
+- {destination: '[Regression Workflow O: Scrapli] Decommission VRF TEST-VRF', label: success,
+  source: '[Regression Workflow O: Scrapli] Check that TEST-VRF is configured', subtype: success,
+  type: workflow_edge, workflow: 'Regression Workflow O: Scrapli'}
 - {destination: '[Shared] End', label: success, source: '[Regression Workflow O: Scrapli]
-    Check that TEST-VRF is configured', subtype: success, type: workflow_edge, workflow: 'Regression
+    Decommission VRF TEST-VRF', subtype: success, type: workflow_edge, workflow: 'Regression
     Workflow O: Scrapli'}

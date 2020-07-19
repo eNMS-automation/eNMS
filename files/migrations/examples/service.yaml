@@ -8321,7 +8321,7 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels: {}
-  last_modified: '2020-07-15 02:50:25.116621'
+  last_modified: '2020-07-19 03:57:28.779641'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -8347,7 +8347,8 @@
   send_notification_method: mail
   services: ['[Shared] Start', '[Shared] End', '[Regression Workflow O: Scrapli] Check
       running configuration', '[Regression Workflow O: Scrapli] Configure VRF TEST-VRF',
-    '[Regression Workflow O: Scrapli] Check that TEST-VRF is configured']
+    '[Regression Workflow O: Scrapli] Check that TEST-VRF is configured', '[Regression
+      Workflow O: Scrapli] Decommission VRF TEST-VRF']
   shared: false
   skip: false
   skip_query: ''
@@ -8418,6 +8419,7 @@
   skip_value: 'True'
   start_new_connection: false
   time_between_retries: 10
+  transport: system
   type: scrapli_service
   update_pools: false
   use_device_driver: true
@@ -8442,7 +8444,7 @@
   devices: []
   dict_match: {}
   display_only_failed_nodes: false
-  driver: cisco_iosxe
+  driver: arista_eos
   events: []
   impacting: true
   include_device_results: false
@@ -8453,7 +8455,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2020-07-15 02:49:43.730225'
+  last_modified: '2020-07-19 03:57:12.933011'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -8484,6 +8486,7 @@
   skip_value: 'True'
   start_new_connection: false
   time_between_retries: 10
+  transport: system
   type: scrapli_service
   update_pools: false
   use_device_driver: true
@@ -8533,7 +8536,7 @@
   operating_system: ''
   pools: []
   positions:
-    'Regression Workflow O: Scrapli': [24, 104]
+    'Regression Workflow O: Scrapli': [6, 112]
   postprocessing: results["success"] = "TEST-VRF" in results["result"]
   postprocessing_mode: always
   preprocessing: ''
@@ -8550,6 +8553,74 @@
   skip_value: 'True'
   start_new_connection: false
   time_between_retries: 10
+  transport: system
+  type: scrapli_service
+  update_pools: false
+  use_device_driver: true
+  validation_condition: success
+  validation_method: none
+  vendor: ''
+  waiting_time: 0
+- close_connection: false
+  commands: no vrf instance TEST-VRF
+  completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credentials: device
+  custom_username: ''
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  devices: []
+  dict_match: {}
+  display_only_failed_nodes: false
+  driver: arista_eos
+  events: []
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  is_configuration: true
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2020-07-19 03:57:21.922089'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Regression Workflow O: Scrapli] Decommission VRF TEST-VRF'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions:
+    'Regression Workflow O: Scrapli': [373, 107]
+  postprocessing: ''
+  postprocessing_mode: always
+  preprocessing: ''
+  public: false
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: Decommission VRF TEST-VRF
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: false
+  skip_query: ''
+  skip_value: 'True'
+  start_new_connection: false
+  time_between_retries: 10
+  transport: system
   type: scrapli_service
   update_pools: false
   use_device_driver: true

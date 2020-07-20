@@ -82,6 +82,7 @@
     "/form/add_services",
     "/form/administration",
     "/form/ansible_playbook_service",
+    "/form/calendar",
     "/form/changelog",
     "/form/compare",
     "/form/configure_bgp_service",

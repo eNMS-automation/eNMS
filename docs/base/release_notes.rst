@@ -2,6 +2,13 @@
 Release Notes
 =============
 
+Version 3.22.2
+--------------
+
+- Fix iteration device factory commit bug
+- Fix workflow in service by service with workflow targets skipped service bug
+- Add missing rbac endpoints in full + read only access
+
 Version 3.22.1
 --------------
 

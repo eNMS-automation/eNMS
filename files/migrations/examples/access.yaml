@@ -154,11 +154,11 @@
   pools_access: '[]'
   post_requests: [/calendar_init, /compare, /counters, /count_models, /get, /get_all,
     /get_cluster_status, /get_git_history, /get_device_network_data, /get_device_logs,
-    /get_exported_services, /get_git_network_data, /get_git_content, /get_migration_folders,
-    /get_service_logs, /get_properties, /get_result, /get_runtimes, /get_view_topology,
-    /get_service_state, /get_session_log, /get_top_level_workflows, /get_tree_files,
-    /get_workflow_results, /get_workflow_services, /search_workflow_services, /multiselect_filtering,
-    /switch_menu, /switch_theme, /filtering, /view_filtering]
+    /get_exported_services, /get_git_network_data, /get_migration_folders, /get_service_logs,
+    /get_properties, /get_result, /get_runtimes, /get_view_topology, /get_service_state,
+    /get_session_log, /get_top_level_workflows, /get_tree_files, /get_workflow_results,
+    /get_workflow_services, /search_workflow_services, /multiselect_filtering, /switch_menu,
+    /switch_theme, /filtering, /view_filtering]
   services: []
   services_access: '[]'
   type: access

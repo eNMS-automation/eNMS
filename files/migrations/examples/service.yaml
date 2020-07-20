@@ -8175,7 +8175,8 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- commit_message: Automatic commit (configurations)
+- add_commit: true
+  commit_message: Automatic commit (configurations)
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -8199,7 +8200,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2020-06-01 10:08:33.312913'
+  last_modified: '2020-07-20 04:43:07.649203'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -8217,6 +8218,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   pull: true
   push: true
   relative_path: true

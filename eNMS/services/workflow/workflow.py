@@ -126,7 +126,7 @@ class Workflow(Service):
                 continue
             number_of_runs[service.name] += 1
             visited.add(service)
-            if service in (start, end):
+            if service in (start, end) or service.skip:
                 results = {
                     "summary": {
                         "success": {device.name for device in run.devices},

@@ -101,6 +101,7 @@
     "/form/file",
     "/form/files",
     "/form/generic_file_transfer_service",
+    "/form/git_history",
     "/form/group",
     "/form/import_service",
     "/form/link",

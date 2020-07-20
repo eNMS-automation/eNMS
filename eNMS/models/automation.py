@@ -635,6 +635,7 @@ class Run(AbstractBase):
         )
         derived_run = db.factory(
             "run",
+            commit=True,
             **{
                 "service": self.service.id,
                 "devices": [derived_device.id for derived_device in derived_devices],

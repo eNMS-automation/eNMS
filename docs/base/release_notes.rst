@@ -8,6 +8,9 @@ Version 3.22.2
 - Fix iteration device factory commit bug
 - Fix workflow in service by service with workflow targets skipped service bug
 - Add missing rbac endpoints in full + read only access
+- Fix device creation empty driver due to Scrapli
+- Fix workflow iteration mechanism bug
+- Fix workflow skip query bug
 
 Version 3.22.1
 --------------

@@ -572,6 +572,12 @@
         "orderable": false
       },
       {
+        "data": "parent_device_name",
+        "title": "Parent Device",
+        "search": "text",
+        "orderable": false
+      },
+      {
         "data": "success",
         "title": "Status",
         "search": "bool",

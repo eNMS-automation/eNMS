@@ -126,7 +126,8 @@ class Workflow(Service):
                 continue
             number_of_runs[service.name] += 1
             visited.add(service)
-            if service in (start, end) or service.skip:
+            skip_query = run.eval(service.skip_query, **locals())[0]
+            if service in (start, end) or service.skip or skip_query:
                 results = {
                     "summary": {
                         "success": {device.name for device in run.devices},

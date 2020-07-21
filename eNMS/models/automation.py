@@ -1130,7 +1130,7 @@ class Run(AbstractBase):
 
     def eval(_self, query, function="eval", **locals):  # noqa: N805
         exec_variables = _self.global_variables(**locals)
-        results = builtins[function](query, exec_variables)
+        results = builtins[function](query, exec_variables) if query else ""
         return results, exec_variables
 
     def sub(self, input, variables):

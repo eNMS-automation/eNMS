@@ -666,15 +666,17 @@ class Run(AbstractBase):
             self.write_state("progress/device/total", len(self.devices), "increment")
         if self.iteration_devices and not self.parent_device:
             if not self.workflow:
-                return {
-                    "success": False,
-                    "result": "Device iteration not allowed outside of a workflow",
-                    "runtime": self.runtime,
-                }
-            results = [
-                self.device_iteration(payload, device) for device in self.devices
-            ]
-            return {"success": all(results), "runtime": self.runtime}
+                result = "Device iteration not allowed outside of a workflow"
+                return {"success": False, "result": result, "runtime": self.runtime}
+            summary = {"failure": [], "success": []}
+            for device in self.devices:
+                key = "success" if self.device_iteration(payload, device) else "failure"
+                summary[key].append(device.name)
+            return {
+                "success": not summary["failure"],
+                "summary": summary,
+                "runtime": self.runtime,
+            }
         elif self.run_method != "per_device":
             return self.get_results(payload)
         else:
@@ -684,11 +686,7 @@ class Run(AbstractBase):
                     "but no targets have been selected (in Step 3 > Targets)."
                 )
                 self.log("error", error)
-                return {
-                    "success": False,
-                    "runtime": self.runtime,
-                    "result": error,
-                }
+                return {"success": False, "runtime": self.runtime, "result": error}
             if self.multiprocessing and len(self.devices) > 1:
                 results = []
                 processes = min(len(self.devices), self.max_processes)

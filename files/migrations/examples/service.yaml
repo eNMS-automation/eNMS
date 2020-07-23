@@ -1518,9 +1518,9 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  operation1: set
-  operation2: set
-  operation3: set
+  operation1: __setitem__
+  operation2: __setitem__
+  operation3: __setitem__
   pools: []
   positions:
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
@@ -3308,7 +3308,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  operation1: set
+  operation1: __setitem__
   operation2: append
   operation3: update
   pools: []

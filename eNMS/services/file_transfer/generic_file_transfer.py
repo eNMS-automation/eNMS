@@ -85,12 +85,6 @@ class GenericFileTransferService(Service):
                     device,
                 )
                 run.transfer_file(ssh_client, pairs)
-        elif run.direction.lower() == "put" and not Path(source).is_file():
-            success = False
-            result = (
-                f"Source file {source} does not exist, is a directory,"
-                " or you forgot to enable globbing"
-            )
         else:
             run.log("info", f"Transferring file {source} to {destination}", device)
             try:

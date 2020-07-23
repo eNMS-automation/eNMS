@@ -235,9 +235,9 @@ class AutomationController(BaseController):
         if runs and runtime != "normal":
             if runtime == "latest":
                 runtime = runs[-1].parent_runtime
-            runs = [r for r in runs if r.parent_runtime == runtime]
-            if runs:
-                state = runs[0].get_state()
+            latest_runs = [r for r in runs if r.parent_runtime == runtime]
+            if latest_runs:
+                state = latest_runs[0].get_state()
         return {
             "service": service.to_dict(include=["services", "edges", "superworkflow"]),
             "runtimes": sorted(set((r.parent_runtime, r.creator) for r in runs)),

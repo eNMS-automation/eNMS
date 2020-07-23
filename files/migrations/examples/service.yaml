@@ -6748,7 +6748,7 @@
   device_query_property: name
   devices: []
   dict_match:
-    value: [1.1.1.1, 2.2.2.2, 3.3.3.3, 11.11.11.11, 15.15.15.15]
+    value: [1.1.1.1, 2.2.2.2, 3.3.3.3]
   display_only_failed_nodes: false
   events: []
   impacting: true
@@ -6759,7 +6759,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2020-03-16 06:55:19.951275'
+  last_modified: '2020-07-23 10:36:54.411888'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -6781,6 +6781,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -6888,7 +6889,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2020-03-16 06:56:59.422307'
+  last_modified: '2020-07-23 10:40:12.634239'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -6910,6 +6911,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -6921,7 +6923,7 @@
   skip_query: ''
   skip_value: 'True'
   source_code: "result = {}\r\nresults[\"success\"] = True\r\nresults[\"result\"]\
-    \ = get_var(\"regex_variable\", device=device.name)"
+    \ = {\"value\": get_var(\"regex_variable\", device=device.name)}"
   time_between_retries: 10
   type: python_snippet_service
   update_pools: false

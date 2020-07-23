@@ -624,3 +624,85 @@
 - {destination: '[Shared] End', label: success, source: '[Regression Workflow O: Scrapli]
     Decommission VRF TEST-VRF', subtype: success, type: workflow_edge, workflow: 'Regression
     Workflow O: Scrapli'}
+- {destination: '[Shared] REST API: call *is_alive* endpoint', label: success, source: '[Shared]
+    Start', subtype: success, type: workflow_edge, workflow: 'Regression workflow
+    P: large workflow (scalability)'}
+- {destination: '[Regression workflow P: large workflow (scalability)] REST API: call
+    *is_alive* endpoint', label: success, source: '[Shared] REST API: call *is_alive*
+    endpoint', subtype: success, type: workflow_edge, workflow: 'Regression workflow
+    P: large workflow (scalability)'}
+- {destination: '[Regression workflow P: large workflow (scalability)] REST API: call
+    *is_alive* endpoint 2', label: success, source: '[Regression workflow P: large
+    workflow (scalability)] REST API: call *is_alive* endpoint', subtype: success,
+  type: workflow_edge, workflow: 'Regression workflow P: large workflow (scalability)'}
+- {destination: '[Regression workflow P: large workflow (scalability)] REST API: call
+    *is_alive* endpoint 3', label: success, source: '[Regression workflow P: large
+    workflow (scalability)] REST API: call *is_alive* endpoint 2', subtype: success,
+  type: workflow_edge, workflow: 'Regression workflow P: large workflow (scalability)'}
+- {destination: '[Regression workflow P: large workflow (scalability)] REST API: call
+    *is_alive* endpoint 4', label: success, source: '[Regression workflow P: large
+    workflow (scalability)] REST API: call *is_alive* endpoint 3', subtype: success,
+  type: workflow_edge, workflow: 'Regression workflow P: large workflow (scalability)'}
+- {destination: '[Regression workflow P: large workflow (scalability)] REST API: call
+    *is_alive* endpoint 5', label: success, source: '[Regression workflow P: large
+    workflow (scalability)] REST API: call *is_alive* endpoint 4', subtype: success,
+  type: workflow_edge, workflow: 'Regression workflow P: large workflow (scalability)'}
+- {destination: '[Regression workflow P: large workflow (scalability)] Show vrf with
+    netmiko 1', label: success, source: '[Regression workflow P: large workflow (scalability)]
+    REST API: call *is_alive* endpoint 5', subtype: success, type: workflow_edge,
+  workflow: 'Regression workflow P: large workflow (scalability)'}
+- {destination: '[Regression workflow P: large workflow (scalability)] Show vrf with
+    netmiko 2', label: success, source: '[Regression workflow P: large workflow (scalability)]
+    Show vrf with netmiko 1', subtype: success, type: workflow_edge, workflow: 'Regression
+    workflow P: large workflow (scalability)'}
+- {destination: '[Regression workflow P: large workflow (scalability)] Show vrf with
+    netmiko 3', label: success, source: '[Regression workflow P: large workflow (scalability)]
+    Show vrf with netmiko 2', subtype: success, type: workflow_edge, workflow: 'Regression
+    workflow P: large workflow (scalability)'}
+- {destination: '[Regression workflow P: large workflow (scalability)] Show vrf with
+    netmiko 4', label: success, source: '[Regression workflow P: large workflow (scalability)]
+    Show vrf with netmiko 3', subtype: success, type: workflow_edge, workflow: 'Regression
+    workflow P: large workflow (scalability)'}
+- {destination: '[Regression workflow P: large workflow (scalability)] Show vrf with
+    netmiko 5', label: success, source: '[Regression workflow P: large workflow (scalability)]
+    Show vrf with netmiko 4', subtype: success, type: workflow_edge, workflow: 'Regression
+    workflow P: large workflow (scalability)'}
+- {destination: '[Regression workflow P: large workflow (scalability)] Show vrf with
+    netmiko 6', label: success, source: '[Regression workflow P: large workflow (scalability)]
+    Show vrf with netmiko 5', subtype: success, type: workflow_edge, workflow: 'Regression
+    workflow P: large workflow (scalability)'}
+- {destination: '[Regression workflow P: large workflow (scalability)] Sleep with
+    python', label: success, source: '[Regression workflow P: large workflow (scalability)]
+    Show vrf with netmiko 6', subtype: success, type: workflow_edge, workflow: 'Regression
+    workflow P: large workflow (scalability)'}
+- {destination: '[Regression workflow P: large workflow (scalability)] Sleep with
+    python 2', label: success, source: '[Regression workflow P: large workflow (scalability)]
+    Sleep with python', subtype: success, type: workflow_edge, workflow: 'Regression
+    workflow P: large workflow (scalability)'}
+- {destination: '[Regression workflow P: large workflow (scalability)] Sleep with
+    python 3', label: success, source: '[Regression workflow P: large workflow (scalability)]
+    Sleep with python 2', subtype: success, type: workflow_edge, workflow: 'Regression
+    workflow P: large workflow (scalability)'}
+- {destination: '[Regression workflow P: large workflow (scalability)] Sleep with
+    python 4', label: success, source: '[Regression workflow P: large workflow (scalability)]
+    Sleep with python 3', subtype: success, type: workflow_edge, workflow: 'Regression
+    workflow P: large workflow (scalability)'}
+- {destination: '[Regression workflow P: large workflow (scalability)] Sleep with
+    python 5', label: success, source: '[Regression workflow P: large workflow (scalability)]
+    Sleep with python 4', subtype: success, type: workflow_edge, workflow: 'Regression
+    workflow P: large workflow (scalability)'}
+- {destination: '[Regression workflow P: large workflow (scalability)] Sleep with
+    python 6', label: success, source: '[Regression workflow P: large workflow (scalability)]
+    Sleep with python 5', subtype: success, type: workflow_edge, workflow: 'Regression
+    workflow P: large workflow (scalability)'}
+- {destination: '[Regression workflow P: large workflow (scalability)] Sleep with
+    python 7', label: success, source: '[Regression workflow P: large workflow (scalability)]
+    Sleep with python 6', subtype: success, type: workflow_edge, workflow: 'Regression
+    workflow P: large workflow (scalability)'}
+- {destination: '[Regression workflow P: large workflow (scalability)] Sleep with
+    python 8', label: success, source: '[Regression workflow P: large workflow (scalability)]
+    Sleep with python 7', subtype: success, type: workflow_edge, workflow: 'Regression
+    workflow P: large workflow (scalability)'}
+- {destination: '[Shared] End', label: success, source: '[Regression workflow P: large
+    workflow (scalability)] Sleep with python 8', subtype: success, type: workflow_edge,
+  workflow: 'Regression workflow P: large workflow (scalability)'}

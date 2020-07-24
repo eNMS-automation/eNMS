@@ -66,7 +66,9 @@
     'Regression Workflow M: Unix command & shell, ping, jump server': [-341, 17]
     'Regression Workflow N: Topology Import (netbox, librenms, opennms)': [-141, 21]
     'Regression Workflow O: Scrapli': [-192, 31]
-    'Regression workflow P: large workflow (scalability)': [-437, -191]
+    'Regression Workflow P: large workflow (scalability)': &id001 [-437, -191]
+    'Regression Workflow Q: File transfer': [-231, -93]
+    'Regression workflow P: large workflow (scalability)': *id001
     Subworkflow 1: !!python/tuple [0, 0]
     Subworkflow 2: !!python/tuple [0, 0]
     Workflow  in device by device mode: !!python/tuple [0, 0]
@@ -192,7 +194,9 @@
     'Regression Workflow M: Unix command & shell, ping, jump server': [560, 9]
     'Regression Workflow N: Topology Import (netbox, librenms, opennms)': [636, 24]
     'Regression Workflow O: Scrapli': [628, 113]
-    'Regression workflow P: large workflow (scalability)': [483, -268]
+    'Regression Workflow P: large workflow (scalability)': &id002 [483, -268]
+    'Regression Workflow Q: File transfer': [500, 0]
+    'Regression workflow P: large workflow (scalability)': *id002
     Subworkflow 1: !!python/tuple [0, 0]
     Subworkflow 2: !!python/tuple [0, 0]
     T: !!python/tuple [500, 0]
@@ -962,7 +966,8 @@
     'Regression Workflow C: Advanced multiprocessing': [340, 109]
     'Regression Workflow D: Prompts': [405, -103]
     'Regression Workflow L: superworkflow': [162, -126]
-    'Regression workflow P: large workflow (scalability)': [-415, -115]
+    'Regression Workflow P: large workflow (scalability)': &id003 [-415, -115]
+    'Regression workflow P: large workflow (scalability)': *id003
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -8659,14 +8664,14 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels: {}
-  last_modified: '2020-07-23 04:29:59.080841'
+  last_modified: '2020-07-24 03:31:58.475229'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
   max_processes: 8
   maximum_runs: 1
   multiprocessing: true
-  name: 'Regression workflow P: large workflow (scalability)'
+  name: 'Regression Workflow P: large workflow (scalability)'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -8682,30 +8687,30 @@
   reply_to: ''
   reserved: false
   run_method: per_device
-  scoped_name: 'Regression workflow P: large workflow (scalability)'
+  scoped_name: 'Regression Workflow P: large workflow (scalability)'
   send_notification: false
   send_notification_method: mail
   services: ['[Shared] Start', '[Shared] End', '[Shared] REST API: call *is_alive*
-      endpoint', '[Regression workflow P: large workflow (scalability)] REST API:
-      call *is_alive* endpoint', '[Regression workflow P: large workflow (scalability)]
-      REST API: call *is_alive* endpoint 2', '[Regression workflow P: large workflow
-      (scalability)] REST API: call *is_alive* endpoint 3', '[Regression workflow
+      endpoint', '[Regression Workflow P: large workflow (scalability)] REST API:
+      call *is_alive* endpoint', '[Regression Workflow P: large workflow (scalability)]
+      REST API: call *is_alive* endpoint 2', '[Regression Workflow P: large workflow
+      (scalability)] REST API: call *is_alive* endpoint 3', '[Regression Workflow
       P: large workflow (scalability)] REST API: call *is_alive* endpoint 4', '[Regression
-      workflow P: large workflow (scalability)] REST API: call *is_alive* endpoint
-      5', '[Regression workflow P: large workflow (scalability)] Show vrf with netmiko
-      1', '[Regression workflow P: large workflow (scalability)] Show vrf with netmiko
-      2', '[Regression workflow P: large workflow (scalability)] Show vrf with netmiko
-      3', '[Regression workflow P: large workflow (scalability)] Show vrf with netmiko
-      4', '[Regression workflow P: large workflow (scalability)] Show vrf with netmiko
-      5', '[Regression workflow P: large workflow (scalability)] Show vrf with netmiko
-      6', '[Regression workflow P: large workflow (scalability)] Sleep with python',
-    '[Regression workflow P: large workflow (scalability)] Sleep with python 2', '[Regression
-      workflow P: large workflow (scalability)] Sleep with python 3', '[Regression
-      workflow P: large workflow (scalability)] Sleep with python 4', '[Regression
-      workflow P: large workflow (scalability)] Sleep with python 5', '[Regression
-      workflow P: large workflow (scalability)] Sleep with python 6', '[Regression
-      workflow P: large workflow (scalability)] Sleep with python 7', '[Regression
-      workflow P: large workflow (scalability)] Sleep with python 8']
+      Workflow P: large workflow (scalability)] REST API: call *is_alive* endpoint
+      5', '[Regression Workflow P: large workflow (scalability)] Show vrf with netmiko
+      1', '[Regression Workflow P: large workflow (scalability)] Show vrf with netmiko
+      2', '[Regression Workflow P: large workflow (scalability)] Show vrf with netmiko
+      3', '[Regression Workflow P: large workflow (scalability)] Show vrf with netmiko
+      4', '[Regression Workflow P: large workflow (scalability)] Show vrf with netmiko
+      5', '[Regression Workflow P: large workflow (scalability)] Show vrf with netmiko
+      6', '[Regression Workflow P: large workflow (scalability)] Sleep with python',
+    '[Regression Workflow P: large workflow (scalability)] Sleep with python 2', '[Regression
+      Workflow P: large workflow (scalability)] Sleep with python 3', '[Regression
+      Workflow P: large workflow (scalability)] Sleep with python 4', '[Regression
+      Workflow P: large workflow (scalability)] Sleep with python 5', '[Regression
+      Workflow P: large workflow (scalability)] Sleep with python 6', '[Regression
+      Workflow P: large workflow (scalability)] Sleep with python 7', '[Regression
+      Workflow P: large workflow (scalability)] Sleep with python 8']
   shared: false
   skip: false
   skip_query: ''
@@ -8749,7 +8754,7 @@
   max_processes: 5
   maximum_runs: 1
   multiprocessing: true
-  name: '[Regression workflow P: large workflow (scalability)] REST API: call *is_alive*
+  name: '[Regression Workflow P: large workflow (scalability)] REST API: call *is_alive*
     endpoint'
   negative_logic: false
   notification_header: ''
@@ -8767,7 +8772,8 @@
     'Regression Workflow C: Advanced multiprocessing': [340, 109]
     'Regression Workflow D: Prompts': [405, -103]
     'Regression Workflow L: superworkflow': [162, -126]
-    'Regression workflow P: large workflow (scalability)': [-404, -20]
+    'Regression Workflow P: large workflow (scalability)': &id004 [-404, -20]
+    'Regression workflow P: large workflow (scalability)': *id004
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -8824,7 +8830,7 @@
   max_processes: 5
   maximum_runs: 1
   multiprocessing: true
-  name: '[Regression workflow P: large workflow (scalability)] REST API: call *is_alive*
+  name: '[Regression Workflow P: large workflow (scalability)] REST API: call *is_alive*
     endpoint 2'
   negative_logic: false
   notification_header: ''
@@ -8836,7 +8842,8 @@
     c: ['1', '2', '3']
   pools: []
   positions:
-    'Regression workflow P: large workflow (scalability)': [-406, 73]
+    'Regression Workflow P: large workflow (scalability)': &id005 [-406, 73]
+    'Regression workflow P: large workflow (scalability)': *id005
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -8893,7 +8900,7 @@
   max_processes: 5
   maximum_runs: 1
   multiprocessing: true
-  name: '[Regression workflow P: large workflow (scalability)] REST API: call *is_alive*
+  name: '[Regression Workflow P: large workflow (scalability)] REST API: call *is_alive*
     endpoint 3'
   negative_logic: false
   notification_header: ''
@@ -8905,7 +8912,8 @@
     c: ['1', '2', '3']
   pools: []
   positions:
-    'Regression workflow P: large workflow (scalability)': [-402, 156]
+    'Regression Workflow P: large workflow (scalability)': &id006 [-402, 156]
+    'Regression workflow P: large workflow (scalability)': *id006
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -8962,7 +8970,7 @@
   max_processes: 5
   maximum_runs: 1
   multiprocessing: true
-  name: '[Regression workflow P: large workflow (scalability)] REST API: call *is_alive*
+  name: '[Regression Workflow P: large workflow (scalability)] REST API: call *is_alive*
     endpoint 4'
   negative_logic: false
   notification_header: ''
@@ -8974,7 +8982,8 @@
     c: ['1', '2', '3']
   pools: []
   positions:
-    'Regression workflow P: large workflow (scalability)': [-94, 200]
+    'Regression Workflow P: large workflow (scalability)': &id007 [-94, 200]
+    'Regression workflow P: large workflow (scalability)': *id007
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -9031,7 +9040,7 @@
   max_processes: 5
   maximum_runs: 1
   multiprocessing: true
-  name: '[Regression workflow P: large workflow (scalability)] REST API: call *is_alive*
+  name: '[Regression Workflow P: large workflow (scalability)] REST API: call *is_alive*
     endpoint 5'
   negative_logic: false
   notification_header: ''
@@ -9043,7 +9052,8 @@
     c: ['1', '2', '3']
   pools: []
   positions:
-    'Regression workflow P: large workflow (scalability)': [-94, 109]
+    'Regression Workflow P: large workflow (scalability)': &id008 [-94, 109]
+    'Regression workflow P: large workflow (scalability)': *id008
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -9117,7 +9127,7 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression workflow P: large workflow (scalability)] Show vrf with netmiko
+  name: '[Regression Workflow P: large workflow (scalability)] Show vrf with netmiko
     1'
   negative_logic: false
   notification_header: ''
@@ -9125,7 +9135,8 @@
   operating_system: ''
   pools: []
   positions:
-    'Regression workflow P: large workflow (scalability)': [-117, 5]
+    'Regression Workflow P: large workflow (scalability)': &id009 [-117, 5]
+    'Regression workflow P: large workflow (scalability)': *id009
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -9201,7 +9212,7 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression workflow P: large workflow (scalability)] Show vrf with netmiko
+  name: '[Regression Workflow P: large workflow (scalability)] Show vrf with netmiko
     2'
   negative_logic: false
   notification_header: ''
@@ -9209,7 +9220,8 @@
   operating_system: ''
   pools: []
   positions:
-    'Regression workflow P: large workflow (scalability)': [-81, -125]
+    'Regression Workflow P: large workflow (scalability)': &id010 [-81, -125]
+    'Regression workflow P: large workflow (scalability)': *id010
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -9285,7 +9297,7 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression workflow P: large workflow (scalability)] Show vrf with netmiko
+  name: '[Regression Workflow P: large workflow (scalability)] Show vrf with netmiko
     3'
   negative_logic: false
   notification_header: ''
@@ -9293,7 +9305,8 @@
   operating_system: ''
   pools: []
   positions:
-    'Regression workflow P: large workflow (scalability)': [-89, -196]
+    'Regression Workflow P: large workflow (scalability)': &id011 [-89, -196]
+    'Regression workflow P: large workflow (scalability)': *id011
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -9369,7 +9382,7 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression workflow P: large workflow (scalability)] Show vrf with netmiko
+  name: '[Regression Workflow P: large workflow (scalability)] Show vrf with netmiko
     4'
   negative_logic: false
   notification_header: ''
@@ -9377,7 +9390,8 @@
   operating_system: ''
   pools: []
   positions:
-    'Regression workflow P: large workflow (scalability)': [183, -222]
+    'Regression Workflow P: large workflow (scalability)': &id012 [183, -222]
+    'Regression workflow P: large workflow (scalability)': *id012
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -9453,7 +9467,7 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression workflow P: large workflow (scalability)] Show vrf with netmiko
+  name: '[Regression Workflow P: large workflow (scalability)] Show vrf with netmiko
     5'
   negative_logic: false
   notification_header: ''
@@ -9461,7 +9475,8 @@
   operating_system: ''
   pools: []
   positions:
-    'Regression workflow P: large workflow (scalability)': [188, -130]
+    'Regression Workflow P: large workflow (scalability)': &id013 [188, -130]
+    'Regression workflow P: large workflow (scalability)': *id013
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -9537,7 +9552,7 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression workflow P: large workflow (scalability)] Show vrf with netmiko
+  name: '[Regression Workflow P: large workflow (scalability)] Show vrf with netmiko
     6'
   negative_logic: false
   notification_header: ''
@@ -9545,7 +9560,8 @@
   operating_system: ''
   pools: []
   positions:
-    'Regression workflow P: large workflow (scalability)': [190, -36]
+    'Regression Workflow P: large workflow (scalability)': &id014 [190, -36]
+    'Regression workflow P: large workflow (scalability)': *id014
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -9602,14 +9618,15 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression workflow P: large workflow (scalability)] Sleep with python'
+  name: '[Regression Workflow P: large workflow (scalability)] Sleep with python'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
   pools: []
   positions:
-    'Regression workflow P: large workflow (scalability)': [194, 47]
+    'Regression Workflow P: large workflow (scalability)': &id015 [194, 47]
+    'Regression workflow P: large workflow (scalability)': *id015
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -9662,14 +9679,15 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression workflow P: large workflow (scalability)] Sleep with python 2'
+  name: '[Regression Workflow P: large workflow (scalability)] Sleep with python 2'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
   pools: []
   positions:
-    'Regression workflow P: large workflow (scalability)': [203, 127]
+    'Regression Workflow P: large workflow (scalability)': &id016 [203, 127]
+    'Regression workflow P: large workflow (scalability)': *id016
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -9722,14 +9740,15 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression workflow P: large workflow (scalability)] Sleep with python 3'
+  name: '[Regression Workflow P: large workflow (scalability)] Sleep with python 3'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
   pools: []
   positions:
-    'Regression workflow P: large workflow (scalability)': [207, 230]
+    'Regression Workflow P: large workflow (scalability)': &id017 [207, 230]
+    'Regression workflow P: large workflow (scalability)': *id017
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -9782,14 +9801,15 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression workflow P: large workflow (scalability)] Sleep with python 4'
+  name: '[Regression Workflow P: large workflow (scalability)] Sleep with python 4'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
   pools: []
   positions:
-    'Regression workflow P: large workflow (scalability)': [476, 232]
+    'Regression Workflow P: large workflow (scalability)': &id018 [476, 232]
+    'Regression workflow P: large workflow (scalability)': *id018
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -9842,14 +9862,15 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression workflow P: large workflow (scalability)] Sleep with python 5'
+  name: '[Regression Workflow P: large workflow (scalability)] Sleep with python 5'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
   pools: []
   positions:
-    'Regression workflow P: large workflow (scalability)': [471, 142]
+    'Regression Workflow P: large workflow (scalability)': &id019 [471, 142]
+    'Regression workflow P: large workflow (scalability)': *id019
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -9902,14 +9923,15 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression workflow P: large workflow (scalability)] Sleep with python 6'
+  name: '[Regression Workflow P: large workflow (scalability)] Sleep with python 6'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
   pools: []
   positions:
-    'Regression workflow P: large workflow (scalability)': [476, 44]
+    'Regression Workflow P: large workflow (scalability)': &id020 [476, 44]
+    'Regression workflow P: large workflow (scalability)': *id020
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -9962,14 +9984,15 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression workflow P: large workflow (scalability)] Sleep with python 7'
+  name: '[Regression Workflow P: large workflow (scalability)] Sleep with python 7'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
   pools: []
   positions:
-    'Regression workflow P: large workflow (scalability)': [469, -50]
+    'Regression Workflow P: large workflow (scalability)': &id021 [469, -50]
+    'Regression workflow P: large workflow (scalability)': *id021
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -10022,14 +10045,15 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression workflow P: large workflow (scalability)] Sleep with python 8'
+  name: '[Regression Workflow P: large workflow (scalability)] Sleep with python 8'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
   pools: []
   positions:
-    'Regression workflow P: large workflow (scalability)': [467, -163]
+    'Regression Workflow P: large workflow (scalability)': &id022 [467, -163]
+    'Regression workflow P: large workflow (scalability)': *id022
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -10049,6 +10073,151 @@
   time_between_retries: 10
   type: python_snippet_service
   update_pools: false
+  validation_condition: success
+  validation_method: none
+  vendor: ''
+  waiting_time: 0
+- close_connection: false
+  completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  devices: [Washington]
+  dict_match: {}
+  display_only_failed_nodes: false
+  events: []
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  labels: {}
+  last_modified: '2020-07-24 03:33:35.785449'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: 'Regression Workflow Q: File transfer'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions: {}
+  postprocessing: ''
+  postprocessing_mode: always
+  preprocessing: ''
+  public: false
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: 'Regression Workflow Q: File transfer'
+  send_notification: false
+  send_notification_method: mail
+  services: ['[Shared] Start', '[Shared] End', '[Regression Workflow Q: File transfer]
+      Check that test file does not exist']
+  shared: false
+  skip: false
+  skip_query: ''
+  skip_value: 'True'
+  time_between_retries: 10
+  type: workflow
+  update_pools: false
+  validation_condition: success
+  validation_method: none
+  vendor: ''
+  waiting_time: 0
+  workflow_category: Example workflow(s)
+- auto_find_prompt: true
+  close_connection: false
+  command: dir enms_files
+  completion_time: 1
+  config_mode: false
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credentials: device
+  custom_username: ''
+  definition: Definition
+  delay_factor: 1.0
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  devices: []
+  dict_match: {}
+  display_only_failed_nodes: false
+  driver: a10
+  enable_mode: true
+  events: []
+  exit_command: exit
+  expect_password_prompt: password
+  expect_prompt: admin.*$
+  expect_string: ''
+  expect_username_prompt: 'username:'
+  fast_cli: false
+  global_delay_factor: 1.0
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  jump_command: ssh jump_server_IP
+  jump_on_connect: false
+  jump_username: ''
+  last_modified: '2020-07-24 03:34:30.742447'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Regression Workflow Q: File transfer] Check that test file does not exist'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions:
+    'Regression Workflow Q: File transfer': [-194, 46]
+  postprocessing: ''
+  postprocessing_mode: always
+  preprocessing: ''
+  public: false
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: Check that test file does not exist
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: false
+  skip_query: ''
+  skip_value: 'True'
+  start_new_connection: false
+  strip_command: true
+  strip_prompt: true
+  time_between_retries: 10
+  timeout: 10.0
+  type: netmiko_validation_service
+  update_pools: false
+  use_device_driver: true
+  use_genie: false
   validation_condition: success
   validation_method: none
   vendor: ''

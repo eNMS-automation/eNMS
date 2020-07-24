@@ -2,7 +2,7 @@
   "app": {
     "address": "",
     "config_mode": "debug",
-    "create_examples": true,
+    "startup_migration": "examples",
     "documentation_url": "https://enms.readthedocs.io/en/latest/",
     "git_repository": "git@github.com:afourmy/gitpython-test.git",
     "plugin_path": "eNMS/plugins",

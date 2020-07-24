@@ -19,17 +19,17 @@ class PayloadExtractionService(Service):
     query1 = db.Column(db.SmallString)
     match_type1 = db.Column(db.SmallString, default="none")
     match1 = db.Column(db.LargeString)
-    operation1 = db.Column(db.SmallString, default="set")
+    operation1 = db.Column(db.SmallString, default="__setitem__")
     variable2 = db.Column(db.SmallString)
     query2 = db.Column(db.SmallString)
     match_type2 = db.Column(db.SmallString, default="none")
     match2 = db.Column(db.LargeString)
-    operation2 = db.Column(db.SmallString, default="set")
+    operation2 = db.Column(db.SmallString, default="__setitem__")
     variable3 = db.Column(db.SmallString)
     query3 = db.Column(db.SmallString)
     match_type3 = db.Column(db.SmallString, default="none")
     match3 = db.Column(db.LargeString)
-    operation3 = db.Column(db.SmallString, default="set")
+    operation3 = db.Column(db.SmallString, default="__setitem__")
 
     __mapper_args__ = {"polymorphic_identity": "payload_extraction_service"}
 

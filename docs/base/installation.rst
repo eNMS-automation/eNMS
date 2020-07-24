@@ -143,8 +143,10 @@ Settings ``app`` section
   which is the case with GoTTY and mail notifications. When left empty, eNMS will try to guess the URL. This might
   not work consistently depending on your environment (nginx configuration, proxy, ...)
 - ``config_mode`` (default: ``"debug"``) Must be set to "debug" or "production".
-- ``create_examples`` (default: ``true``) By default, eNMS will create a network topology and a number of services
-  and workflows as examples of what you can do.
+- ``startup_migration`` (default: ``"examples"``) Name of the migration to load when eNMS starts for the first time.
+By default, when eNMS loads for the first time, it will create a network topology and a number of services and workflows
+as examples of what you can do. You can set the migration to ``"default"`` instead, in which case eNMS will only load what
+is required for the application to function properly.
 - ``documentation_url`` (default: ``"https://enms.readthedocs.io/en/latest/"``) Can be changed if you want to host your
   own version of the documentation locally. Points to the online documentation by default.
 - ``git_repository`` (default: ``""``) Git is used as a version control system for device configurations: this variable

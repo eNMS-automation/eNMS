@@ -103,15 +103,11 @@ class BaseController:
         if not db.fetch("user", allow_none=True, name="admin"):
             self.create_admin_user()
             db.session.commit()
-            if self.settings["app"]["create_examples"]:
-                self.migration_import(
-                    name="examples", import_export_types=db.import_export_models
-                )
-                self.update_credentials()
-            else:
-                self.migration_import(
-                    name="default", import_export_types=db.import_export_models
-                )
+            self.migration_import(
+                name=self.settings["app"].get("startup_migration", "default"),
+                import_export_types=db.import_export_models,
+            )
+            self.update_credentials()
             self.get_git_content()
         self.configure_server_id()
         self.reset_run_status()
@@ -217,15 +213,14 @@ class BaseController:
 
     def init_services(self):
         path_services = [self.path / "eNMS" / "services"]
+        load_examples = self.settings["app"].get("startup_migration") == "examples"
         if self.settings["paths"]["custom_services"]:
             path_services.append(Path(self.settings["paths"]["custom_services"]))
         for path in path_services:
             for file in path.glob("**/*.py"):
                 if "init" in str(file):
                     continue
-                if not self.settings["app"]["create_examples"] and "examples" in str(
-                    file
-                ):
+                if not load_examples and "examples" in str(file):
                     continue
                 info(f"Loading service: {file}")
                 spec = spec_from_file_location(str(file).split("/")[-1][:-3], str(file))

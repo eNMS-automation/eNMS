@@ -28,6 +28,11 @@ from xmltodict import parse
 from xml.parsers.expat import ExpatError
 
 try:
+    from scrapli import Scrapli
+except ImportError as exc:
+    warn(f"Couldn't import scrapli module ({exc})")
+
+try:
     from slackclient import SlackClient
 except ImportError as exc:
     warn(f"Couldn't import slackclient module ({exc})")
@@ -630,6 +635,7 @@ class Run(AbstractBase):
         )
         derived_run = db.factory(
             "run",
+            commit=True,
             **{
                 "service": self.service.id,
                 "devices": [derived_device.id for derived_device in derived_devices],
@@ -660,15 +666,17 @@ class Run(AbstractBase):
             self.write_state("progress/device/total", len(self.devices), "increment")
         if self.iteration_devices and not self.parent_device:
             if not self.workflow:
-                return {
-                    "success": False,
-                    "result": "Device iteration not allowed outside of a workflow",
-                    "runtime": self.runtime,
-                }
-            results = [
-                self.device_iteration(payload, device) for device in self.devices
-            ]
-            return {"success": all(results), "runtime": self.runtime}
+                result = "Device iteration not allowed outside of a workflow"
+                return {"success": False, "result": result, "runtime": self.runtime}
+            summary = {"failure": [], "success": []}
+            for device in self.devices:
+                key = "success" if self.device_iteration(payload, device) else "failure"
+                summary[key].append(device.name)
+            return {
+                "success": not summary["failure"],
+                "summary": summary,
+                "runtime": self.runtime,
+            }
         elif self.run_method != "per_device":
             return self.get_results(payload)
         else:
@@ -678,11 +686,7 @@ class Run(AbstractBase):
                     "but no targets have been selected (in Step 3 > Targets)."
                 )
                 self.log("error", error)
-                return {
-                    "success": False,
-                    "runtime": self.runtime,
-                    "result": error,
-                }
+                return {"success": False, "runtime": self.runtime, "result": error}
             if self.multiprocessing and len(self.devices) > 1:
                 results = []
                 processes = min(len(self.devices), self.max_processes)
@@ -1126,7 +1130,7 @@ class Run(AbstractBase):
 
     def eval(_self, query, function="eval", **locals):  # noqa: N805
         exec_variables = _self.global_variables(**locals)
-        results = builtins[function](query, exec_variables)
+        results = builtins[function](query, exec_variables) if query else ""
         return results, exec_variables
 
     def sub(self, input, variables):
@@ -1208,13 +1212,15 @@ class Run(AbstractBase):
         self.log(
             "info", "OPENING Scrapli connection", device, logger="security",
         )
-        driver = device.scrapli_driver if self.use_device_driver else self.driver
         username, password = self.get_credentials(device)
-        connection = app.SCRAPLI_DRIVERS[driver](
+        connection = Scrapli(
+            transport=self.transport,
+            platform=device.scrapli_driver if self.use_device_driver else self.driver,
             host=device.ip_address,
             auth_username=username,
             auth_password=password,
             auth_private_key=False,
+            auth_strict_key=False,
         )
         connection.open()
         app.connections_cache["scrapli"][self.parent_runtime][device.name] = connection

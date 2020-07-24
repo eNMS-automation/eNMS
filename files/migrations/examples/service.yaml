@@ -66,6 +66,9 @@
     'Regression Workflow M: Unix command & shell, ping, jump server': [-341, 17]
     'Regression Workflow N: Topology Import (netbox, librenms, opennms)': [-141, 21]
     'Regression Workflow O: Scrapli': [-192, 31]
+    'Regression Workflow P: large workflow (scalability)': &id001 [-437, -191]
+    'Regression Workflow Q: File transfer': [-479, -89]
+    'Regression workflow P: large workflow (scalability)': *id001
     Subworkflow 1: !!python/tuple [0, 0]
     Subworkflow 2: !!python/tuple [0, 0]
     Workflow  in device by device mode: !!python/tuple [0, 0]
@@ -191,6 +194,9 @@
     'Regression Workflow M: Unix command & shell, ping, jump server': [560, 9]
     'Regression Workflow N: Topology Import (netbox, librenms, opennms)': [636, 24]
     'Regression Workflow O: Scrapli': [628, 113]
+    'Regression Workflow P: large workflow (scalability)': &id002 [483, -268]
+    'Regression Workflow Q: File transfer': [576, 135]
+    'Regression workflow P: large workflow (scalability)': *id002
     Subworkflow 1: !!python/tuple [0, 0]
     Subworkflow 2: !!python/tuple [0, 0]
     T: !!python/tuple [500, 0]
@@ -960,6 +966,8 @@
     'Regression Workflow C: Advanced multiprocessing': [340, 109]
     'Regression Workflow D: Prompts': [405, -103]
     'Regression Workflow L: superworkflow': [162, -126]
+    'Regression Workflow P: large workflow (scalability)': &id003 [-415, -115]
+    'Regression workflow P: large workflow (scalability)': *id003
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -1515,9 +1523,9 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  operation1: set
-  operation2: set
-  operation3: set
+  operation1: __setitem__
+  operation2: __setitem__
+  operation3: __setitem__
   pools: []
   positions:
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
@@ -3305,7 +3313,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  operation1: set
+  operation1: __setitem__
   operation2: append
   operation3: update
   pools: []
@@ -5196,7 +5204,8 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- close_connection: true
+- add_header: true
+  close_connection: true
   commands:
   - {prefix: shusers, value: show run}
   - {prefix: shipintbr, value: show ip interface brief}
@@ -6744,7 +6753,7 @@
   device_query_property: name
   devices: []
   dict_match:
-    value: [1.1.1.1, 2.2.2.2, 3.3.3.3, 11.11.11.11, 15.15.15.15]
+    value: [1.1.1.1, 2.2.2.2, 3.3.3.3]
   display_only_failed_nodes: false
   events: []
   impacting: true
@@ -6755,7 +6764,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2020-03-16 06:55:19.951275'
+  last_modified: '2020-07-23 10:36:54.411888'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -6777,6 +6786,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -6884,7 +6894,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2020-03-16 06:56:59.422307'
+  last_modified: '2020-07-23 10:40:12.634239'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -6906,6 +6916,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -6917,7 +6928,7 @@
   skip_query: ''
   skip_value: 'True'
   source_code: "result = {}\r\nresults[\"success\"] = True\r\nresults[\"result\"]\
-    \ = get_var(\"regex_variable\", device=device.name)"
+    \ = {\"value\": get_var(\"regex_variable\", device=device.name)}"
   time_between_retries: 10
   type: python_snippet_service
   update_pools: false
@@ -8078,7 +8089,8 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- close_connection: false
+- add_header: true
+  close_connection: false
   commands:
   - {prefix: '', value: show run}
   - {prefix: '', value: ''}
@@ -8173,7 +8185,8 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- commit_message: Automatic commit (configurations)
+- add_commit: true
+  commit_message: Automatic commit (configurations)
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -8197,7 +8210,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2020-06-01 10:08:33.312913'
+  last_modified: '2020-07-20 04:43:07.649203'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -8215,6 +8228,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   pull: true
   push: true
   relative_path: true
@@ -8319,7 +8333,7 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels: {}
-  last_modified: '2020-07-15 02:50:25.116621'
+  last_modified: '2020-07-19 03:57:28.779641'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -8345,7 +8359,8 @@
   send_notification_method: mail
   services: ['[Shared] Start', '[Shared] End', '[Regression Workflow O: Scrapli] Check
       running configuration', '[Regression Workflow O: Scrapli] Configure VRF TEST-VRF',
-    '[Regression Workflow O: Scrapli] Check that TEST-VRF is configured']
+    '[Regression Workflow O: Scrapli] Check that TEST-VRF is configured', '[Regression
+      Workflow O: Scrapli] Decommission VRF TEST-VRF']
   shared: false
   skip: false
   skip_query: ''
@@ -8416,6 +8431,7 @@
   skip_value: 'True'
   start_new_connection: false
   time_between_retries: 10
+  transport: system
   type: scrapli_service
   update_pools: false
   use_device_driver: true
@@ -8440,7 +8456,7 @@
   devices: []
   dict_match: {}
   display_only_failed_nodes: false
-  driver: cisco_iosxe
+  driver: arista_eos
   events: []
   impacting: true
   include_device_results: false
@@ -8451,7 +8467,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2020-07-15 02:49:43.730225'
+  last_modified: '2020-07-19 03:57:12.933011'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -8482,6 +8498,7 @@
   skip_value: 'True'
   start_new_connection: false
   time_between_retries: 10
+  transport: system
   type: scrapli_service
   update_pools: false
   use_device_driver: true
@@ -8531,7 +8548,7 @@
   operating_system: ''
   pools: []
   positions:
-    'Regression Workflow O: Scrapli': [24, 104]
+    'Regression Workflow O: Scrapli': [6, 112]
   postprocessing: results["success"] = "TEST-VRF" in results["result"]
   postprocessing_mode: always
   preprocessing: ''
@@ -8548,9 +8565,1970 @@
   skip_value: 'True'
   start_new_connection: false
   time_between_retries: 10
+  transport: system
   type: scrapli_service
   update_pools: false
   use_device_driver: true
+  validation_condition: success
+  validation_method: none
+  vendor: ''
+  waiting_time: 0
+- close_connection: false
+  commands: no vrf instance TEST-VRF
+  completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credentials: device
+  custom_username: ''
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  devices: []
+  dict_match: {}
+  display_only_failed_nodes: false
+  driver: arista_eos
+  events: []
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  is_configuration: true
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2020-07-19 03:57:21.922089'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Regression Workflow O: Scrapli] Decommission VRF TEST-VRF'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions:
+    'Regression Workflow O: Scrapli': [373, 107]
+  postprocessing: ''
+  postprocessing_mode: always
+  preprocessing: ''
+  public: false
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: Decommission VRF TEST-VRF
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: false
+  skip_query: ''
+  skip_value: 'True'
+  start_new_connection: false
+  time_between_retries: 10
+  transport: system
+  type: scrapli_service
+  update_pools: false
+  use_device_driver: true
+  validation_condition: success
+  validation_method: none
+  vendor: ''
+  waiting_time: 0
+- close_connection: false
+  completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  devices: []
+  dict_match: {}
+  display_only_failed_nodes: false
+  events: []
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  labels: {}
+  last_modified: '2020-07-24 03:31:58.475229'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 8
+  maximum_runs: 1
+  multiprocessing: true
+  name: 'Regression Workflow P: large workflow (scalability)'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: [All objects, Devices only, Links only, Datacenter San Francisco, Datacenter
+      New York, Datacenter Chicago, Washington, Links 6 through 9 - Public pools,
+    Links 0 through 5 - Non-public pool - Access set up]
+  positions: {}
+  postprocessing: ''
+  postprocessing_mode: always
+  preprocessing: ''
+  public: false
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: 'Regression Workflow P: large workflow (scalability)'
+  send_notification: false
+  send_notification_method: mail
+  services: ['[Shared] Start', '[Shared] End', '[Shared] REST API: call *is_alive*
+      endpoint', '[Regression Workflow P: large workflow (scalability)] REST API:
+      call *is_alive* endpoint', '[Regression Workflow P: large workflow (scalability)]
+      REST API: call *is_alive* endpoint 2', '[Regression Workflow P: large workflow
+      (scalability)] REST API: call *is_alive* endpoint 3', '[Regression Workflow
+      P: large workflow (scalability)] REST API: call *is_alive* endpoint 4', '[Regression
+      Workflow P: large workflow (scalability)] REST API: call *is_alive* endpoint
+      5', '[Regression Workflow P: large workflow (scalability)] Show vrf with netmiko
+      1', '[Regression Workflow P: large workflow (scalability)] Show vrf with netmiko
+      2', '[Regression Workflow P: large workflow (scalability)] Show vrf with netmiko
+      3', '[Regression Workflow P: large workflow (scalability)] Show vrf with netmiko
+      4', '[Regression Workflow P: large workflow (scalability)] Show vrf with netmiko
+      5', '[Regression Workflow P: large workflow (scalability)] Show vrf with netmiko
+      6', '[Regression Workflow P: large workflow (scalability)] Sleep with python',
+    '[Regression Workflow P: large workflow (scalability)] Sleep with python 2', '[Regression
+      Workflow P: large workflow (scalability)] Sleep with python 3', '[Regression
+      Workflow P: large workflow (scalability)] Sleep with python 4', '[Regression
+      Workflow P: large workflow (scalability)] Sleep with python 5', '[Regression
+      Workflow P: large workflow (scalability)] Sleep with python 6', '[Regression
+      Workflow P: large workflow (scalability)] Sleep with python 7', '[Regression
+      Workflow P: large workflow (scalability)] Sleep with python 8']
+  shared: false
+  skip: false
+  skip_query: ''
+  skip_value: 'True'
+  time_between_retries: 10
+  type: workflow
+  update_pools: false
+  validation_condition: success
+  validation_method: none
+  vendor: ''
+  waiting_time: 0
+  workflow_category: Example workflow(s)
+- call_type: GET
+  completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: text
+  creator: admin
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: Use REST call is_alive
+  device_query: ''
+  device_query_property: ip_address
+  devices: []
+  dict_match: {}
+  display_only_failed_nodes: true
+  events: []
+  headers: {}
+  impacting: true
+  include_device_results: true
+  include_link_in_summary: true
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: ip_address
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2020-05-28 10:36:02.393623'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 5
+  maximum_runs: 1
+  multiprocessing: true
+  name: '[Regression Workflow P: large workflow (scalability)] REST API: call *is_alive*
+    endpoint'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  params: {verify: 'false'}
+  payload:
+    a: b
+    c: ['1', '2', '3']
+  pools: []
+  positions:
+    'Regression Workflow 2: Separate Failure - Success paths': [374, 278]
+    'Regression Workflow 3: Napalm getters (postprocessing)': ['-50', '0']
+    'Regression Workflow A: get_var, set_var, get_result': [-10, 157]
+    'Regression Workflow C: Advanced multiprocessing': [340, 109]
+    'Regression Workflow D: Prompts': [405, -103]
+    'Regression Workflow L: superworkflow': [162, -126]
+    'Regression Workflow P: large workflow (scalability)': &id004 [-404, -20]
+    'Regression workflow P: large workflow (scalability)': *id004
+  postprocessing: ''
+  postprocessing_mode: always
+  preprocessing: ''
+  public: true
+  reply_to: ''
+  reserved: false
+  rest_url: http://127.0.0.1:5000/rest/is_alive
+  run_method: per_device
+  scoped_name: 'REST API: call *is_alive* endpoint'
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: false
+  skip_query: ''
+  skip_value: 'True'
+  time_between_retries: 10
+  timeout: 15
+  type: rest_call_service
+  update_pools: false
+  username: admin
+  validation_condition: success
+  validation_method: text
+  vendor: ''
+  verify_ssl_certificate: true
+  waiting_time: 0
+- call_type: GET
+  completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: text
+  creator: admin
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: Use REST call is_alive
+  device_query: ''
+  device_query_property: ip_address
+  devices: []
+  dict_match: {}
+  display_only_failed_nodes: true
+  events: []
+  headers: {}
+  impacting: true
+  include_device_results: true
+  include_link_in_summary: true
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: ip_address
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2020-07-23 04:22:56.588493'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 5
+  maximum_runs: 1
+  multiprocessing: true
+  name: '[Regression Workflow P: large workflow (scalability)] REST API: call *is_alive*
+    endpoint 2'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  params: {verify: 'false'}
+  payload:
+    a: b
+    c: ['1', '2', '3']
+  pools: []
+  positions:
+    'Regression Workflow P: large workflow (scalability)': &id005 [-406, 73]
+    'Regression workflow P: large workflow (scalability)': *id005
+  postprocessing: ''
+  postprocessing_mode: always
+  preprocessing: ''
+  public: true
+  reply_to: ''
+  reserved: false
+  rest_url: http://127.0.0.1:5000/rest/is_alive
+  run_method: per_device
+  scoped_name: 'REST API: call *is_alive* endpoint 2'
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: false
+  skip_query: ''
+  skip_value: 'True'
+  time_between_retries: 10
+  timeout: 15
+  type: rest_call_service
+  update_pools: false
+  username: admin
+  validation_condition: success
+  validation_method: text
+  vendor: ''
+  verify_ssl_certificate: true
+  waiting_time: 0
+- call_type: GET
+  completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: text
+  creator: admin
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: Use REST call is_alive
+  device_query: ''
+  device_query_property: ip_address
+  devices: []
+  dict_match: {}
+  display_only_failed_nodes: true
+  events: []
+  headers: {}
+  impacting: true
+  include_device_results: true
+  include_link_in_summary: true
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: ip_address
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2020-07-23 04:23:04.891363'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 5
+  maximum_runs: 1
+  multiprocessing: true
+  name: '[Regression Workflow P: large workflow (scalability)] REST API: call *is_alive*
+    endpoint 3'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  params: {verify: 'false'}
+  payload:
+    a: b
+    c: ['1', '2', '3']
+  pools: []
+  positions:
+    'Regression Workflow P: large workflow (scalability)': &id006 [-402, 156]
+    'Regression workflow P: large workflow (scalability)': *id006
+  postprocessing: ''
+  postprocessing_mode: always
+  preprocessing: ''
+  public: true
+  reply_to: ''
+  reserved: false
+  rest_url: http://127.0.0.1:5000/rest/is_alive
+  run_method: per_device
+  scoped_name: 'REST API: call *is_alive* endpoint 3'
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: false
+  skip_query: ''
+  skip_value: 'True'
+  time_between_retries: 10
+  timeout: 15
+  type: rest_call_service
+  update_pools: false
+  username: admin
+  validation_condition: success
+  validation_method: text
+  vendor: ''
+  verify_ssl_certificate: true
+  waiting_time: 0
+- call_type: GET
+  completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: text
+  creator: admin
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: Use REST call is_alive
+  device_query: ''
+  device_query_property: ip_address
+  devices: []
+  dict_match: {}
+  display_only_failed_nodes: true
+  events: []
+  headers: {}
+  impacting: true
+  include_device_results: true
+  include_link_in_summary: true
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: ip_address
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2020-07-23 04:23:09.409631'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 5
+  maximum_runs: 1
+  multiprocessing: true
+  name: '[Regression Workflow P: large workflow (scalability)] REST API: call *is_alive*
+    endpoint 4'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  params: {verify: 'false'}
+  payload:
+    a: b
+    c: ['1', '2', '3']
+  pools: []
+  positions:
+    'Regression Workflow P: large workflow (scalability)': &id007 [-94, 200]
+    'Regression workflow P: large workflow (scalability)': *id007
+  postprocessing: ''
+  postprocessing_mode: always
+  preprocessing: ''
+  public: true
+  reply_to: ''
+  reserved: false
+  rest_url: http://127.0.0.1:5000/rest/is_alive
+  run_method: per_device
+  scoped_name: 'REST API: call *is_alive* endpoint 4'
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: false
+  skip_query: ''
+  skip_value: 'True'
+  time_between_retries: 10
+  timeout: 15
+  type: rest_call_service
+  update_pools: false
+  username: admin
+  validation_condition: success
+  validation_method: text
+  vendor: ''
+  verify_ssl_certificate: true
+  waiting_time: 0
+- call_type: GET
+  completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: text
+  creator: admin
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: Use REST call is_alive
+  device_query: ''
+  device_query_property: ip_address
+  devices: []
+  dict_match: {}
+  display_only_failed_nodes: true
+  events: []
+  headers: {}
+  impacting: true
+  include_device_results: true
+  include_link_in_summary: true
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: ip_address
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2020-07-23 04:23:17.465645'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 5
+  maximum_runs: 1
+  multiprocessing: true
+  name: '[Regression Workflow P: large workflow (scalability)] REST API: call *is_alive*
+    endpoint 5'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  params: {verify: 'false'}
+  payload:
+    a: b
+    c: ['1', '2', '3']
+  pools: []
+  positions:
+    'Regression Workflow P: large workflow (scalability)': &id008 [-94, 109]
+    'Regression workflow P: large workflow (scalability)': *id008
+  postprocessing: ''
+  postprocessing_mode: always
+  preprocessing: ''
+  public: true
+  reply_to: ''
+  reserved: false
+  rest_url: http://127.0.0.1:5000/rest/is_alive
+  run_method: per_device
+  scoped_name: 'REST API: call *is_alive* endpoint 5'
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: false
+  skip_query: ''
+  skip_value: 'True'
+  time_between_retries: 10
+  timeout: 15
+  type: rest_call_service
+  update_pools: false
+  username: admin
+  validation_condition: success
+  validation_method: text
+  vendor: ''
+  verify_ssl_certificate: true
+  waiting_time: 0
+- auto_find_prompt: true
+  close_connection: false
+  command: show vrf
+  completion_time: 1
+  config_mode: false
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credentials: device
+  custom_username: ''
+  definition: Definition
+  delay_factor: 1.0
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  devices: []
+  dict_match: {}
+  display_only_failed_nodes: false
+  driver: a10
+  enable_mode: true
+  events: []
+  exit_command: exit
+  expect_password_prompt: password
+  expect_prompt: admin.*$
+  expect_string: ''
+  expect_username_prompt: 'username:'
+  fast_cli: false
+  global_delay_factor: 1.0
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  jump_command: ssh jump_server_IP
+  jump_on_connect: false
+  jump_username: ''
+  last_modified: '2020-07-23 04:24:01.412880'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Regression Workflow P: large workflow (scalability)] Show vrf with netmiko
+    1'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions:
+    'Regression Workflow P: large workflow (scalability)': &id009 [-117, 5]
+    'Regression workflow P: large workflow (scalability)': *id009
+  postprocessing: ''
+  postprocessing_mode: always
+  preprocessing: ''
+  public: false
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: Show vrf with netmiko 1
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: false
+  skip_query: ''
+  skip_value: 'True'
+  start_new_connection: false
+  strip_command: true
+  strip_prompt: true
+  time_between_retries: 10
+  timeout: 10.0
+  type: netmiko_validation_service
+  update_pools: false
+  use_device_driver: true
+  use_genie: false
+  validation_condition: success
+  validation_method: none
+  vendor: ''
+  waiting_time: 0
+- auto_find_prompt: true
+  close_connection: false
+  command: show vrf
+  completion_time: 1
+  config_mode: false
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credentials: device
+  custom_username: ''
+  definition: Definition
+  delay_factor: 1.0
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  devices: []
+  dict_match: {}
+  display_only_failed_nodes: false
+  driver: a10
+  enable_mode: true
+  events: []
+  exit_command: exit
+  expect_password_prompt: password
+  expect_prompt: admin.*$
+  expect_string: ''
+  expect_username_prompt: 'username:'
+  fast_cli: false
+  global_delay_factor: 1.0
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  jump_command: ssh jump_server_IP
+  jump_on_connect: false
+  jump_username: ''
+  last_modified: '2020-07-23 04:24:08.389448'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Regression Workflow P: large workflow (scalability)] Show vrf with netmiko
+    2'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions:
+    'Regression Workflow P: large workflow (scalability)': &id010 [-81, -125]
+    'Regression workflow P: large workflow (scalability)': *id010
+  postprocessing: ''
+  postprocessing_mode: always
+  preprocessing: ''
+  public: false
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: Show vrf with netmiko 2
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: false
+  skip_query: ''
+  skip_value: 'True'
+  start_new_connection: false
+  strip_command: true
+  strip_prompt: true
+  time_between_retries: 10
+  timeout: 10.0
+  type: netmiko_validation_service
+  update_pools: false
+  use_device_driver: true
+  use_genie: false
+  validation_condition: success
+  validation_method: none
+  vendor: ''
+  waiting_time: 0
+- auto_find_prompt: true
+  close_connection: false
+  command: show vrf
+  completion_time: 1
+  config_mode: false
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credentials: device
+  custom_username: ''
+  definition: Definition
+  delay_factor: 1.0
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  devices: []
+  dict_match: {}
+  display_only_failed_nodes: false
+  driver: a10
+  enable_mode: true
+  events: []
+  exit_command: exit
+  expect_password_prompt: password
+  expect_prompt: admin.*$
+  expect_string: ''
+  expect_username_prompt: 'username:'
+  fast_cli: false
+  global_delay_factor: 1.0
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  jump_command: ssh jump_server_IP
+  jump_on_connect: false
+  jump_username: ''
+  last_modified: '2020-07-23 04:24:14.709003'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Regression Workflow P: large workflow (scalability)] Show vrf with netmiko
+    3'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions:
+    'Regression Workflow P: large workflow (scalability)': &id011 [-89, -196]
+    'Regression workflow P: large workflow (scalability)': *id011
+  postprocessing: ''
+  postprocessing_mode: always
+  preprocessing: ''
+  public: false
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: Show vrf with netmiko 3
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: false
+  skip_query: ''
+  skip_value: 'True'
+  start_new_connection: false
+  strip_command: true
+  strip_prompt: true
+  time_between_retries: 10
+  timeout: 10.0
+  type: netmiko_validation_service
+  update_pools: false
+  use_device_driver: true
+  use_genie: false
+  validation_condition: success
+  validation_method: none
+  vendor: ''
+  waiting_time: 0
+- auto_find_prompt: true
+  close_connection: false
+  command: show vrf
+  completion_time: 1
+  config_mode: false
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credentials: device
+  custom_username: ''
+  definition: Definition
+  delay_factor: 1.0
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  devices: []
+  dict_match: {}
+  display_only_failed_nodes: false
+  driver: a10
+  enable_mode: true
+  events: []
+  exit_command: exit
+  expect_password_prompt: password
+  expect_prompt: admin.*$
+  expect_string: ''
+  expect_username_prompt: 'username:'
+  fast_cli: false
+  global_delay_factor: 1.0
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  jump_command: ssh jump_server_IP
+  jump_on_connect: false
+  jump_username: ''
+  last_modified: '2020-07-23 04:24:25.381253'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Regression Workflow P: large workflow (scalability)] Show vrf with netmiko
+    4'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions:
+    'Regression Workflow P: large workflow (scalability)': &id012 [183, -222]
+    'Regression workflow P: large workflow (scalability)': *id012
+  postprocessing: ''
+  postprocessing_mode: always
+  preprocessing: ''
+  public: false
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: Show vrf with netmiko 4
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: false
+  skip_query: ''
+  skip_value: 'True'
+  start_new_connection: false
+  strip_command: true
+  strip_prompt: true
+  time_between_retries: 10
+  timeout: 10.0
+  type: netmiko_validation_service
+  update_pools: false
+  use_device_driver: true
+  use_genie: false
+  validation_condition: success
+  validation_method: none
+  vendor: ''
+  waiting_time: 0
+- auto_find_prompt: true
+  close_connection: false
+  command: show vrf
+  completion_time: 1
+  config_mode: false
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credentials: device
+  custom_username: ''
+  definition: Definition
+  delay_factor: 1.0
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  devices: []
+  dict_match: {}
+  display_only_failed_nodes: false
+  driver: a10
+  enable_mode: true
+  events: []
+  exit_command: exit
+  expect_password_prompt: password
+  expect_prompt: admin.*$
+  expect_string: ''
+  expect_username_prompt: 'username:'
+  fast_cli: false
+  global_delay_factor: 1.0
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  jump_command: ssh jump_server_IP
+  jump_on_connect: false
+  jump_username: ''
+  last_modified: '2020-07-23 04:24:35.821369'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Regression Workflow P: large workflow (scalability)] Show vrf with netmiko
+    5'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions:
+    'Regression Workflow P: large workflow (scalability)': &id013 [188, -130]
+    'Regression workflow P: large workflow (scalability)': *id013
+  postprocessing: ''
+  postprocessing_mode: always
+  preprocessing: ''
+  public: false
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: Show vrf with netmiko 5
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: false
+  skip_query: ''
+  skip_value: 'True'
+  start_new_connection: false
+  strip_command: true
+  strip_prompt: true
+  time_between_retries: 10
+  timeout: 10.0
+  type: netmiko_validation_service
+  update_pools: false
+  use_device_driver: true
+  use_genie: false
+  validation_condition: success
+  validation_method: none
+  vendor: ''
+  waiting_time: 0
+- auto_find_prompt: true
+  close_connection: false
+  command: show vrf
+  completion_time: 1
+  config_mode: false
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credentials: device
+  custom_username: ''
+  definition: Definition
+  delay_factor: 1.0
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  devices: []
+  dict_match: {}
+  display_only_failed_nodes: false
+  driver: a10
+  enable_mode: true
+  events: []
+  exit_command: exit
+  expect_password_prompt: password
+  expect_prompt: admin.*$
+  expect_string: ''
+  expect_username_prompt: 'username:'
+  fast_cli: false
+  global_delay_factor: 1.0
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  jump_command: ssh jump_server_IP
+  jump_on_connect: false
+  jump_username: ''
+  last_modified: '2020-07-23 04:24:46.398373'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Regression Workflow P: large workflow (scalability)] Show vrf with netmiko
+    6'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions:
+    'Regression Workflow P: large workflow (scalability)': &id014 [190, -36]
+    'Regression workflow P: large workflow (scalability)': *id014
+  postprocessing: ''
+  postprocessing_mode: always
+  preprocessing: ''
+  public: false
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: Show vrf with netmiko 6
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: false
+  skip_query: ''
+  skip_value: 'True'
+  start_new_connection: false
+  strip_command: true
+  strip_prompt: true
+  time_between_retries: 10
+  timeout: 10.0
+  type: netmiko_validation_service
+  update_pools: false
+  use_device_driver: true
+  use_genie: false
+  validation_condition: success
+  validation_method: none
+  vendor: ''
+  waiting_time: 0
+- completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  devices: []
+  dict_match: {}
+  display_only_failed_nodes: false
+  events: []
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2020-07-23 04:25:47.575549'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Regression Workflow P: large workflow (scalability)] Sleep with python'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions:
+    'Regression Workflow P: large workflow (scalability)': &id015 [194, 47]
+    'Regression workflow P: large workflow (scalability)': *id015
+  postprocessing: ''
+  postprocessing_mode: always
+  preprocessing: ''
+  public: false
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: Sleep with python
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: false
+  skip_query: ''
+  skip_value: 'True'
+  source_code: "from time import sleep\r\nsleep(1)\r\n\r\nresult = {}\r\nresults[\"\
+    success\"] = True\r\nresults[\"result\"] = result"
+  time_between_retries: 10
+  type: python_snippet_service
+  update_pools: false
+  validation_condition: success
+  validation_method: none
+  vendor: ''
+  waiting_time: 0
+- completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  devices: []
+  dict_match: {}
+  display_only_failed_nodes: false
+  events: []
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2020-07-23 04:26:11.463154'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Regression Workflow P: large workflow (scalability)] Sleep with python 2'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions:
+    'Regression Workflow P: large workflow (scalability)': &id016 [203, 127]
+    'Regression workflow P: large workflow (scalability)': *id016
+  postprocessing: ''
+  postprocessing_mode: always
+  preprocessing: ''
+  public: false
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: Sleep with python 2
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: false
+  skip_query: ''
+  skip_value: 'True'
+  source_code: "from time import sleep\r\nsleep(1)\r\n\r\nresult = {}\r\nresults[\"\
+    success\"] = True\r\nresults[\"result\"] = result"
+  time_between_retries: 10
+  type: python_snippet_service
+  update_pools: false
+  validation_condition: success
+  validation_method: none
+  vendor: ''
+  waiting_time: 0
+- completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  devices: []
+  dict_match: {}
+  display_only_failed_nodes: false
+  events: []
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2020-07-23 04:26:15.643665'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Regression Workflow P: large workflow (scalability)] Sleep with python 3'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions:
+    'Regression Workflow P: large workflow (scalability)': &id017 [207, 230]
+    'Regression workflow P: large workflow (scalability)': *id017
+  postprocessing: ''
+  postprocessing_mode: always
+  preprocessing: ''
+  public: false
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: Sleep with python 3
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: false
+  skip_query: ''
+  skip_value: 'True'
+  source_code: "from time import sleep\r\nsleep(1)\r\n\r\nresult = {}\r\nresults[\"\
+    success\"] = True\r\nresults[\"result\"] = result"
+  time_between_retries: 10
+  type: python_snippet_service
+  update_pools: false
+  validation_condition: success
+  validation_method: none
+  vendor: ''
+  waiting_time: 0
+- completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  devices: []
+  dict_match: {}
+  display_only_failed_nodes: false
+  events: []
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2020-07-23 04:26:24.286728'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Regression Workflow P: large workflow (scalability)] Sleep with python 4'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions:
+    'Regression Workflow P: large workflow (scalability)': &id018 [476, 232]
+    'Regression workflow P: large workflow (scalability)': *id018
+  postprocessing: ''
+  postprocessing_mode: always
+  preprocessing: ''
+  public: false
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: Sleep with python 4
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: false
+  skip_query: ''
+  skip_value: 'True'
+  source_code: "from time import sleep\r\nsleep(1)\r\n\r\nresult = {}\r\nresults[\"\
+    success\"] = True\r\nresults[\"result\"] = result"
+  time_between_retries: 10
+  type: python_snippet_service
+  update_pools: false
+  validation_condition: success
+  validation_method: none
+  vendor: ''
+  waiting_time: 0
+- completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  devices: []
+  dict_match: {}
+  display_only_failed_nodes: false
+  events: []
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2020-07-23 04:27:00.421513'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Regression Workflow P: large workflow (scalability)] Sleep with python 5'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions:
+    'Regression Workflow P: large workflow (scalability)': &id019 [471, 142]
+    'Regression workflow P: large workflow (scalability)': *id019
+  postprocessing: ''
+  postprocessing_mode: always
+  preprocessing: ''
+  public: false
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: Sleep with python 5
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: false
+  skip_query: ''
+  skip_value: 'True'
+  source_code: "from time import sleep\r\nsleep(1)\r\n\r\nresult = {}\r\nresults[\"\
+    success\"] = True\r\nresults[\"result\"] = result"
+  time_between_retries: 10
+  type: python_snippet_service
+  update_pools: false
+  validation_condition: success
+  validation_method: none
+  vendor: ''
+  waiting_time: 0
+- completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  devices: []
+  dict_match: {}
+  display_only_failed_nodes: false
+  events: []
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2020-07-23 04:27:07.869515'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Regression Workflow P: large workflow (scalability)] Sleep with python 6'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions:
+    'Regression Workflow P: large workflow (scalability)': &id020 [476, 44]
+    'Regression workflow P: large workflow (scalability)': *id020
+  postprocessing: ''
+  postprocessing_mode: always
+  preprocessing: ''
+  public: false
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: Sleep with python 6
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: false
+  skip_query: ''
+  skip_value: 'True'
+  source_code: "from time import sleep\r\nsleep(1)\r\n\r\nresult = {}\r\nresults[\"\
+    success\"] = True\r\nresults[\"result\"] = result"
+  time_between_retries: 10
+  type: python_snippet_service
+  update_pools: false
+  validation_condition: success
+  validation_method: none
+  vendor: ''
+  waiting_time: 0
+- completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  devices: []
+  dict_match: {}
+  display_only_failed_nodes: false
+  events: []
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2020-07-23 04:27:13.996425'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Regression Workflow P: large workflow (scalability)] Sleep with python 7'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions:
+    'Regression Workflow P: large workflow (scalability)': &id021 [469, -50]
+    'Regression workflow P: large workflow (scalability)': *id021
+  postprocessing: ''
+  postprocessing_mode: always
+  preprocessing: ''
+  public: false
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: Sleep with python 7
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: false
+  skip_query: ''
+  skip_value: 'True'
+  source_code: "from time import sleep\r\nsleep(1)\r\n\r\nresult = {}\r\nresults[\"\
+    success\"] = True\r\nresults[\"result\"] = result"
+  time_between_retries: 10
+  type: python_snippet_service
+  update_pools: false
+  validation_condition: success
+  validation_method: none
+  vendor: ''
+  waiting_time: 0
+- completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  devices: []
+  dict_match: {}
+  display_only_failed_nodes: false
+  events: []
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2020-07-23 04:27:25.383275'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Regression Workflow P: large workflow (scalability)] Sleep with python 8'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions:
+    'Regression Workflow P: large workflow (scalability)': &id022 [467, -163]
+    'Regression workflow P: large workflow (scalability)': *id022
+  postprocessing: ''
+  postprocessing_mode: always
+  preprocessing: ''
+  public: false
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: Sleep with python 8
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: false
+  skip_query: ''
+  skip_value: 'True'
+  source_code: "from time import sleep\r\nsleep(1)\r\n\r\nresult = {}\r\nresults[\"\
+    success\"] = True\r\nresults[\"result\"] = result"
+  time_between_retries: 10
+  type: python_snippet_service
+  update_pools: false
+  validation_condition: success
+  validation_method: none
+  vendor: ''
+  waiting_time: 0
+- close_connection: false
+  completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  devices: [Washington]
+  dict_match: {}
+  display_only_failed_nodes: false
+  events: []
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  labels: {}
+  last_modified: '2020-07-24 04:16:12.826791'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: 'Regression Workflow Q: File transfer'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions: {}
+  postprocessing: ''
+  postprocessing_mode: always
+  preprocessing: ''
+  public: false
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: 'Regression Workflow Q: File transfer'
+  send_notification: false
+  send_notification_method: mail
+  services: ['[Shared] Start', '[Shared] End', '[Regression Workflow Q: File transfer]
+      Check that test file does not exist', '[Regression Workflow Q: File transfer]
+      Transfer a.bin', '[Regression Workflow Q: File transfer] Check that test file
+      does exist', '[Regression Workflow Q: File transfer] Transfer bc.bin and bd.bin
+      with glob option', '[Regression Workflow Q: File transfer] Delete all transferred
+      files']
+  shared: false
+  skip: false
+  skip_query: ''
+  skip_value: 'True'
+  time_between_retries: 10
+  type: workflow
+  update_pools: false
+  validation_condition: success
+  validation_method: none
+  vendor: ''
+  waiting_time: 0
+  workflow_category: Example workflow(s)
+- auto_find_prompt: true
+  close_connection: false
+  command: dir enms_files
+  completion_time: 1
+  config_mode: false
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credentials: device
+  custom_username: ''
+  definition: Definition
+  delay_factor: 1.0
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  devices: []
+  dict_match: {}
+  display_only_failed_nodes: false
+  driver: a10
+  enable_mode: true
+  events: []
+  exit_command: exit
+  expect_password_prompt: password
+  expect_prompt: admin.*$
+  expect_string: ''
+  expect_username_prompt: 'username:'
+  fast_cli: false
+  global_delay_factor: 1.0
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  jump_command: ssh jump_server_IP
+  jump_on_connect: false
+  jump_username: ''
+  last_modified: '2020-07-24 04:12:46.366228'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Regression Workflow Q: File transfer] Check that test file does not exist'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions:
+    'Regression Workflow Q: File transfer': [-357, 195]
+  postprocessing: results["success"] = "a.bin" not in results["result"]
+  postprocessing_mode: always
+  preprocessing: ''
+  public: false
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: Check that test file does not exist
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: false
+  skip_query: ''
+  skip_value: 'True'
+  start_new_connection: false
+  strip_command: true
+  strip_prompt: true
+  time_between_retries: 10
+  timeout: 10.0
+  type: netmiko_validation_service
+  update_pools: false
+  use_device_driver: true
+  use_genie: false
+  validation_condition: success
+  validation_method: none
+  vendor: ''
+  waiting_time: 0
+- completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  destination_file: enms_files/a.bin
+  device_query: ''
+  device_query_property: name
+  devices: []
+  dict_match: {}
+  direction: put
+  display_only_failed_nodes: false
+  events: []
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2020-07-24 04:08:50.675082'
+  load_known_host_keys: false
+  log_level: 1
+  look_for_keys: false
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  max_transfer_size: 1073741824
+  maximum_runs: 1
+  missing_host_key_policy: true
+  multiprocessing: false
+  name: '[Regression Workflow Q: File transfer] Transfer a.bin'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions:
+    'Regression Workflow Q: File transfer': [-101, -144]
+  postprocessing: ''
+  postprocessing_mode: always
+  preprocessing: ''
+  protocol: scp
+  public: false
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: Transfer a.bin
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: false
+  skip_query: ''
+  skip_value: 'True'
+  source_file: /media/sf_shared/eNMS/tests/file_transfer/a.bin
+  source_file_includes_globbing: false
+  time_between_retries: 10
+  timeout: 10.0
+  type: generic_file_transfer_service
+  update_pools: false
+  validation_condition: success
+  validation_method: none
+  vendor: ''
+  waiting_time: 0
+  window_size: 1073741824
+- auto_find_prompt: true
+  close_connection: false
+  command: dir enms_files
+  completion_time: 1
+  config_mode: false
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credentials: device
+  custom_username: ''
+  definition: Definition
+  delay_factor: 1.0
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  devices: []
+  dict_match: {}
+  display_only_failed_nodes: false
+  driver: a10
+  enable_mode: true
+  events: []
+  exit_command: exit
+  expect_password_prompt: password
+  expect_prompt: admin.*$
+  expect_string: ''
+  expect_username_prompt: 'username:'
+  fast_cli: false
+  global_delay_factor: 1.0
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  jump_command: ssh jump_server_IP
+  jump_on_connect: false
+  jump_username: ''
+  last_modified: '2020-07-24 04:13:28.626790'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Regression Workflow Q: File transfer] Check that test file does exist'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions:
+    'Regression Workflow Q: File transfer': [296, -147]
+  postprocessing: "simple_file = \"a.bin\" in results[\"result\"]\r\nglob_files =\
+    \ \"bc.bin\" in results[\"result\"] and \"bd.bin\" in results[\"result\"]\r\n\
+    results[\"success\"] = simple_file and glob_files"
+  postprocessing_mode: always
+  preprocessing: ''
+  public: false
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: Check that test file does exist
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: false
+  skip_query: ''
+  skip_value: 'True'
+  start_new_connection: false
+  strip_command: true
+  strip_prompt: true
+  time_between_retries: 10
+  timeout: 10.0
+  type: netmiko_validation_service
+  update_pools: false
+  use_device_driver: true
+  use_genie: false
+  validation_condition: success
+  validation_method: none
+  vendor: ''
+  waiting_time: 0
+- completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  destination_file: enms_files
+  device_query: ''
+  device_query_property: name
+  devices: [Washington]
+  dict_match: {}
+  direction: put
+  display_only_failed_nodes: false
+  events: []
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2020-07-24 04:12:14.915986'
+  load_known_host_keys: false
+  log_level: 1
+  look_for_keys: false
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  max_transfer_size: 1073741824
+  maximum_runs: 1
+  missing_host_key_policy: true
+  multiprocessing: false
+  name: '[Regression Workflow Q: File transfer] Transfer bc.bin and bd.bin with glob
+    option'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions:
+    'Regression Workflow Q: File transfer': [24, 183]
+  postprocessing: ''
+  postprocessing_mode: always
+  preprocessing: ''
+  protocol: scp
+  public: false
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: Transfer bc.bin and bd.bin with glob option
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: false
+  skip_query: ''
+  skip_value: 'True'
+  source_file: /media/sf_shared/eNMS/tests/file_transfer/?[c|d].bi*
+  source_file_includes_globbing: true
+  time_between_retries: 10
+  timeout: 10.0
+  type: generic_file_transfer_service
+  update_pools: false
+  validation_condition: success
+  validation_method: none
+  vendor: ''
+  waiting_time: 0
+  window_size: 1073741824
+- auto_find_prompt: true
+  close_connection: false
+  command: delete flash:/enms_files/*.bin
+  completion_time: 1
+  config_mode: false
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credentials: device
+  custom_username: ''
+  definition: Definition
+  delay_factor: 1.0
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  devices: [Washington]
+  dict_match: {}
+  display_only_failed_nodes: false
+  driver: a10
+  enable_mode: true
+  events: []
+  exit_command: exit
+  expect_password_prompt: password
+  expect_prompt: admin.*$
+  expect_string: ''
+  expect_username_prompt: 'username:'
+  fast_cli: false
+  global_delay_factor: 1.0
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  jump_command: ssh jump_server_IP
+  jump_on_connect: false
+  jump_username: ''
+  last_modified: '2020-07-24 04:18:11.791054'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Regression Workflow Q: File transfer] Delete all transferred files'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions:
+    'Regression Workflow Q: File transfer': [400, 178]
+  postprocessing: ''
+  postprocessing_mode: always
+  preprocessing: ''
+  public: false
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: Delete all transferred files
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: false
+  skip_query: ''
+  skip_value: 'True'
+  start_new_connection: false
+  strip_command: true
+  strip_prompt: true
+  time_between_retries: 10
+  timeout: 10.0
+  type: netmiko_validation_service
+  update_pools: false
+  use_device_driver: true
+  use_genie: false
   validation_condition: success
   validation_method: none
   vendor: ''

@@ -21,6 +21,7 @@
       "destination",
       "destination_id",
       "pools",
+      "tasks",
       "users"
     ],
     "group": ["access", "id", "services", "pools"],

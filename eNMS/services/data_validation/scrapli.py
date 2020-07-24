@@ -18,6 +18,7 @@ class ScrapliService(ConnectionService):
     commands = db.Column(db.LargeString)
     is_configuration = db.Column(Boolean)
     driver = db.Column(db.SmallString)
+    transport = db.Column(db.SmallString, default="system")
     use_device_driver = db.Column(Boolean, default=True)
 
     __mapper_args__ = {"polymorphic_identity": "scrapli_service"}
@@ -34,10 +35,17 @@ class ScrapliForm(ConnectionForm):
     commands = StringField(substitution=True, widget=TextArea(), render_kw={"rows": 5})
     is_configuration = BooleanField()
     driver = SelectField(choices=choices(app.SCRAPLI_DRIVERS))
+    transport = SelectField(choices=choices(("system", "paramiko", "ssh2")))
     use_device_driver = BooleanField(default=True)
     groups = {
         "Main Parameters": {
-            "commands": ["commands", "is_configuration", "driver", "use_device_driver"],
+            "commands": [
+                "commands",
+                "is_configuration",
+                "driver",
+                "transport",
+                "use_device_driver",
+            ],
             "default": "expanded",
         },
         **ConnectionForm.groups,

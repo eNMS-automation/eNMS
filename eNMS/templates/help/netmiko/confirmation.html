@@ -1,0 +1,47 @@
+<div class="modal-body">
+  <div>
+    <h2>Netmiko Confirmation and Response</h2>
+    <p>
+      A regular expression that identifies an expected prompt from the device. Netmiko
+      sends the corresponding response after the confirmation is matched in the device
+      output.
+    </p>
+    <p>
+      Up to three confirmation/response pairs can be specified. Empty confirmations are
+      ignored.
+    </p>
+  </div>
+  <div>
+    <h2>Example 1</h2>
+    <h2>Approve a File Copy Confirmation Request</h2>
+    <div>
+      Confirmation1:
+      <textarea class="help-snippet" style="height: fit-content;">
+Destination file: .*</textarea
+      >
+    </div>
+    <div>
+      Response1:
+      <textarea class="help-snippet" style="height: fit-content;">confirm</textarea>
+    </div>
+    <p style="margin-top: 10px;">Notes:</p>
+    <ol>
+      <li>
+        The device issues a confirmation prompt immediately after the file copy is
+        initiated
+        <textarea class="help-snippet" style="height: fit-content;">
+# copy running-configration harddisk:backup.config
+Destination file: harddisk:backup.config?[confirm]</textarea
+        >
+      </li>
+      <li>
+        After sending the command, Netmiko Prompts Service waits until it sees text
+        matching the Confirmation1 regex and then sends the Response1 text. If
+        additional confirmation/response pairs are defined it will wait for a match
+        against the the next confirmation and send the response text. Once all
+        confiration/response pairs have been used, Netmiko Prompts Service waits for the
+        device prompt before completing the service.
+      </li>
+    </ol>
+  </div>
+</div>

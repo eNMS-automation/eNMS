@@ -9,9 +9,9 @@
   last_duration: ''
   last_failure: Never
   last_modified: ''
-  last_runtime: '0.0'
-  last_status: Never
-  last_update: Never
+  last_runtime: '2020-07-20 04:39:08.768234'
+  last_status: Success
+  last_update: '2020-07-20 04:39:08.768234'
   latitude: '32.29876'
   location: Jackson
   longitude: '-90.18481'
@@ -27,7 +27,6 @@
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
-  tasks: []
   type: device
   username: cisco
   vendor: Cisco
@@ -40,11 +39,11 @@
   icon: router
   ip_address: 192.168.1.86
   last_duration: ''
-  last_failure: Never
+  last_failure: '2020-07-20 04:32:06.730537'
   last_modified: ''
-  last_runtime: '0.0'
-  last_status: Never
-  last_update: Never
+  last_runtime: '2020-07-20 04:39:43.466264'
+  last_status: Success
+  last_update: '2020-07-20 04:39:43.466264'
   latitude: '37.44188'
   location: PaloAlto
   longitude: '-122.14302'
@@ -60,7 +59,6 @@
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
-  tasks: []
   type: device
   username: cisco
   vendor: Cisco
@@ -75,9 +73,9 @@
   last_duration: ''
   last_failure: Never
   last_modified: ''
-  last_runtime: '0.0'
-  last_status: Never
-  last_update: Never
+  last_runtime: '2020-07-20 04:39:08.968713'
+  last_status: Success
+  last_update: '2020-07-20 04:39:08.968713'
   latitude: '30.26715'
   location: Austin
   longitude: '-97.74306'
@@ -93,7 +91,6 @@
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
-  tasks: []
   type: device
   username: admin
   vendor: Arista
@@ -106,11 +103,11 @@
   icon: router
   ip_address: 192.168.56.50
   last_duration: 3.285175s
-  last_failure: '2020-06-14 05:12:38.353048'
+  last_failure: Never
   last_modified: ''
-  last_runtime: '2020-07-14 06:53:23.114859'
+  last_runtime: '2020-07-20 04:39:49.102137'
   last_status: Success
-  last_update: '2020-07-14 06:53:23.114859'
+  last_update: '2020-07-20 04:39:49.102137'
   latitude: '38.89511'
   location: Washington
   longitude: '-77.03637'
@@ -126,7 +123,6 @@
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
-  tasks: []
   type: device
   username: admin
   vendor: Arista
@@ -141,9 +137,9 @@
   last_duration: ''
   last_failure: Never
   last_modified: ''
-  last_runtime: '0.0'
-  last_status: Never
-  last_update: Never
+  last_runtime: '2020-07-20 04:40:03.352089'
+  last_status: Success
+  last_update: '2020-07-20 04:40:03.352089'
   latitude: '41.85003'
   location: Chicago
   longitude: '-87.65005'
@@ -159,7 +155,6 @@
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
-  tasks: []
   type: device
   username: admin
   vendor: Cisco
@@ -174,9 +169,9 @@
   last_duration: ''
   last_failure: Never
   last_modified: ''
-  last_runtime: '0.0'
-  last_status: Never
-  last_update: Never
+  last_runtime: '2020-07-20 04:39:08.971460'
+  last_status: Success
+  last_update: '2020-07-20 04:39:08.971460'
   latitude: '37.33939'
   location: SanJose
   longitude: '-121.89496'
@@ -192,7 +187,6 @@
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
-  tasks: []
   type: device
   username: cisco
   vendor: Cisco
@@ -205,11 +199,11 @@
   icon: router
   ip_address: 10.0.0.12
   last_duration: ''
-  last_failure: Never
+  last_failure: '2020-07-20 04:32:12.182149'
   last_modified: ''
-  last_runtime: '0.0'
-  last_status: Never
-  last_update: Never
+  last_runtime: '2020-07-20 04:39:53.522336'
+  last_status: Success
+  last_update: '2020-07-20 04:39:53.522336'
   latitude: '32.71533'
   location: SanDiego
   longitude: '-117.15726'
@@ -225,7 +219,6 @@
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
-  tasks: []
   type: device
   username: cisco
   vendor: Cisco
@@ -238,11 +231,11 @@
   icon: router
   ip_address: 10.0.0.100
   last_duration: ''
-  last_failure: Never
+  last_failure: '2020-07-20 04:32:06.611262'
   last_modified: ''
-  last_runtime: '0.0'
-  last_status: Never
-  last_update: Never
+  last_runtime: '2020-07-20 04:40:08.725383'
+  last_status: Success
+  last_update: '2020-07-20 04:40:08.725383'
   latitude: '32.78306'
   location: Dallas
   longitude: '-96.80667'
@@ -258,7 +251,6 @@
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
-  tasks: []
   type: device
   username: cisco
   vendor: Cisco
@@ -271,11 +263,11 @@
   icon: router
   ip_address: 10.0.0.101
   last_duration: ''
-  last_failure: Never
+  last_failure: '2020-07-20 04:32:06.785546'
   last_modified: ''
-  last_runtime: '0.0'
-  last_status: Never
-  last_update: Never
+  last_runtime: '2020-07-20 04:40:03.059156'
+  last_status: Success
+  last_update: '2020-07-20 04:40:03.059156'
   latitude: '39.95234'
   location: Philadelphia
   longitude: '-75.16379'
@@ -291,7 +283,6 @@
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
-  tasks: []
   type: device
   username: cisco
   vendor: Cisco
@@ -306,9 +297,9 @@
   last_duration: ''
   last_failure: Never
   last_modified: ''
-  last_runtime: '0.0'
-  last_status: Never
-  last_update: Never
+  last_runtime: '2020-07-20 04:39:23.141740'
+  last_status: Success
+  last_update: '2020-07-20 04:39:23.141740'
   latitude: '34.05223'
   location: LosAngeles
   longitude: '-118.24368'
@@ -324,7 +315,6 @@
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
-  tasks: []
   type: device
   username: cisco
   vendor: Cisco
@@ -339,9 +329,9 @@
   last_duration: ''
   last_failure: Never
   last_modified: ''
-  last_runtime: '0.0'
-  last_status: Never
-  last_update: Never
+  last_runtime: '2020-07-20 04:39:36.378796'
+  last_status: Success
+  last_update: '2020-07-20 04:39:36.378796'
   latitude: '42.33143'
   location: Detroit
   longitude: '-83.04575'
@@ -357,7 +347,6 @@
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
-  tasks: []
   type: device
   username: cisco
   vendor: Cisco
@@ -372,9 +361,9 @@
   last_duration: ''
   last_failure: Never
   last_modified: ''
-  last_runtime: '0.0'
-  last_status: Never
-  last_update: Never
+  last_runtime: '2020-07-20 04:39:08.918180'
+  last_status: Success
+  last_update: '2020-07-20 04:39:08.918180'
   latitude: '37.55376'
   location: Richmond
   longitude: '-77.46026'
@@ -390,7 +379,6 @@
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
-  tasks: []
   type: device
   username: cisco
   vendor: Cisco
@@ -405,9 +393,9 @@
   last_duration: ''
   last_failure: Never
   last_modified: ''
-  last_runtime: '0.0'
-  last_status: Never
-  last_update: Never
+  last_runtime: '2020-07-20 04:39:59.375869'
+  last_status: Success
+  last_update: '2020-07-20 04:39:59.375869'
   latitude: '33.749'
   location: Atlanta
   longitude: '-84.38798'
@@ -423,7 +411,6 @@
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
-  tasks: []
   type: device
   username: cisco
   vendor: Cisco
@@ -438,9 +425,9 @@
   last_duration: ''
   last_failure: Never
   last_modified: ''
-  last_runtime: '0.0'
-  last_status: Never
-  last_update: Never
+  last_runtime: '2020-07-20 04:39:49.396390'
+  last_status: Success
+  last_update: '2020-07-20 04:39:49.396390'
   latitude: '42.35843'
   location: Boston
   longitude: '-71.05977'
@@ -456,7 +443,6 @@
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
-  tasks: []
   type: device
   username: admin
   vendor: Cisco
@@ -471,9 +457,9 @@
   last_duration: ''
   last_failure: Never
   last_modified: ''
-  last_runtime: '0.0'
-  last_status: Never
-  last_update: Never
+  last_runtime: '2020-07-20 04:39:08.790457'
+  last_status: Success
+  last_update: '2020-07-20 04:39:08.790457'
   latitude: '29.76328'
   location: Houston
   longitude: '-95.36327'
@@ -489,7 +475,6 @@
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
-  tasks: []
   type: device
   username: admin
   vendor: Cisco
@@ -504,9 +489,9 @@
   last_duration: ''
   last_failure: Never
   last_modified: ''
-  last_runtime: '0.0'
-  last_status: Never
-  last_update: Never
+  last_runtime: '2020-07-20 04:40:13.216748'
+  last_status: Success
+  last_update: '2020-07-20 04:40:13.216748'
   latitude: '39.29038'
   location: Baltimore
   longitude: '-76.61219'
@@ -522,7 +507,6 @@
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
-  tasks: []
   type: device
   username: admin
   vendor: Juniper
@@ -537,9 +521,9 @@
   last_duration: ''
   last_failure: Never
   last_modified: ''
-  last_runtime: '0.0'
-  last_status: Never
-  last_update: Never
+  last_runtime: '2020-07-20 04:39:56.249043'
+  last_status: Success
+  last_update: '2020-07-20 04:39:56.249043'
   latitude: '41.4995'
   location: Cleveland
   longitude: '-81.69541'
@@ -555,7 +539,6 @@
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
-  tasks: []
   type: device
   username: admin
   vendor: Juniper
@@ -570,9 +553,9 @@
   last_duration: ''
   last_failure: Never
   last_modified: ''
-  last_runtime: '0.0'
-  last_status: Never
-  last_update: Never
+  last_runtime: '2020-07-20 04:39:53.109326'
+  last_status: Success
+  last_update: '2020-07-20 04:39:53.109326'
   latitude: '39.96118'
   location: Columbus
   longitude: '-82.99879'
@@ -588,7 +571,6 @@
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
-  tasks: []
   type: device
   username: admin
   vendor: Juniper
@@ -603,9 +585,9 @@
   last_duration: ''
   last_failure: Never
   last_modified: ''
-  last_runtime: '0.0'
-  last_status: Never
-  last_update: Never
+  last_runtime: '2020-07-20 04:39:36.187202'
+  last_status: Success
+  last_update: '2020-07-20 04:39:36.187202'
   latitude: '39.162'
   location: Cincinnati
   longitude: '-84.45689'
@@ -621,7 +603,6 @@
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
-  tasks: []
   type: device
   username: admin
   vendor: Juniper
@@ -634,11 +615,11 @@
   icon: router
   ip_address: 192.168.56.50
   last_duration: ''
-  last_failure: Never
+  last_failure: '2020-07-20 04:32:12.687792'
   last_modified: ''
-  last_runtime: '0.0'
-  last_status: Never
-  last_update: Never
+  last_runtime: '2020-07-20 04:39:23.140814'
+  last_status: Success
+  last_update: '2020-07-20 04:39:23.140814'
   latitude: '42.3751'
   location: Cambridge
   longitude: '-71.10561'
@@ -654,7 +635,6 @@
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
-  tasks: []
   type: device
   username: admin
   vendor: Juniper
@@ -667,11 +647,11 @@
   icon: router
   ip_address: 10.0.0.110
   last_duration: ''
-  last_failure: Never
+  last_failure: '2020-07-20 04:32:06.668636'
   last_modified: ''
-  last_runtime: '0.0'
-  last_status: Never
-  last_update: Never
+  last_runtime: '2020-07-20 04:39:40.407448'
+  last_status: Success
+  last_update: '2020-07-20 04:39:40.407448'
   latitude: '44.97997'
   location: Minneapolis
   longitude: '-93.26384'
@@ -687,7 +667,6 @@
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
-  tasks: []
   type: device
   username: cisco
   vendor: Juniper
@@ -702,9 +681,9 @@
   last_duration: ''
   last_failure: Never
   last_modified: ''
-  last_runtime: '0.0'
-  last_status: Never
-  last_update: Never
+  last_runtime: '2020-07-20 04:40:12.637961'
+  last_status: Success
+  last_update: '2020-07-20 04:40:12.637961'
   latitude: '40.71427'
   location: NewYork
   longitude: '-74.00597'
@@ -720,7 +699,6 @@
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
-  tasks: []
   type: device
   username: cisco
   vendor: Juniper
@@ -735,9 +713,9 @@
   last_duration: ''
   last_failure: Never
   last_modified: ''
-  last_runtime: '0.0'
-  last_status: Never
-  last_update: Never
+  last_runtime: '2020-07-20 04:39:23.090502'
+  last_status: Success
+  last_update: '2020-07-20 04:39:23.090502'
   latitude: '38.58157'
   location: Sacramento
   longitude: '-121.4944'
@@ -753,7 +731,6 @@
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
-  tasks: []
   type: device
   username: cisco
   vendor: Juniper
@@ -766,11 +743,11 @@
   icon: router
   ip_address: 192.168.1.89
   last_duration: ''
-  last_failure: Never
+  last_failure: '2020-07-20 04:32:12.629241'
   last_modified: ''
-  last_runtime: '0.0'
-  last_status: Never
-  last_update: Never
+  last_runtime: '2020-07-20 04:39:58.930456'
+  last_status: Success
+  last_update: '2020-07-20 04:39:58.930456'
   latitude: '37.77493'
   location: SanFrancisco
   longitude: '-122.41942'
@@ -786,7 +763,6 @@
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
-  tasks: []
   type: device
   username: cisco
   vendor: Juniper
@@ -801,9 +777,9 @@
   last_duration: ''
   last_failure: Never
   last_modified: ''
-  last_runtime: '0.0'
-  last_status: Never
-  last_update: Never
+  last_runtime: '2020-07-20 04:39:23.113169'
+  last_status: Success
+  last_update: '2020-07-20 04:39:23.113169'
   latitude: '33.78779'
   location: Orange
   longitude: '-117.85311'
@@ -819,7 +795,6 @@
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
-  tasks: []
   type: device
   username: cisco
   vendor: Juniper
@@ -834,9 +809,9 @@
   last_duration: ''
   last_failure: Never
   last_modified: ''
-  last_runtime: '0.0'
-  last_status: Never
-  last_update: Never
+  last_runtime: '2020-07-20 04:40:09.435991'
+  last_status: Success
+  last_update: '2020-07-20 04:40:09.435991'
   latitude: '37.80437'
   location: Oakland
   longitude: '-122.2708'
@@ -852,7 +827,6 @@
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
-  tasks: []
   type: device
   username: cisco
   vendor: Cisco
@@ -865,11 +839,11 @@
   icon: router
   ip_address: 10.0.0.113
   last_duration: ''
-  last_failure: Never
+  last_failure: '2020-07-20 04:32:12.125484'
   last_modified: ''
-  last_runtime: '0.0'
-  last_status: Never
-  last_update: Never
+  last_runtime: '2020-07-20 04:39:36.373466'
+  last_status: Success
+  last_update: '2020-07-20 04:39:36.373466'
   latitude: '39.73915'
   location: Denver
   longitude: '-104.9847'
@@ -885,7 +859,6 @@
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
-  tasks: []
   type: device
   username: cisco
   vendor: Cisco
@@ -900,9 +873,9 @@
   last_duration: ''
   last_failure: Never
   last_modified: ''
-  last_runtime: '0.0'
-  last_status: Never
-  last_update: Never
+  last_runtime: '2020-07-20 04:39:26.703117'
+  last_status: Success
+  last_update: '2020-07-20 04:39:26.703117'
   latitude: '48.0'
   location: Paris
   longitude: '2.0'
@@ -918,7 +891,6 @@
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
-  tasks: []
   type: device
   username: admin
   vendor: Cisco
@@ -952,7 +924,6 @@
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
-  tasks: []
   type: device
   username: admin
   vendor: linux
@@ -985,7 +956,6 @@
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: ''
-  tasks: []
   type: device
   username: ''
   vendor: Cisco

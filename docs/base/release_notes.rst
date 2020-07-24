@@ -2,6 +2,16 @@
 Release Notes
 =============
 
+Version 3.22.2
+--------------
+
+- Fix iteration device factory commit bug
+- Fix workflow in service by service with workflow targets skipped service bug
+- Add missing rbac endpoints in full + read only access
+- Fix device creation empty driver due to Scrapli
+- Fix workflow iteration mechanism bug
+- Fix workflow skip query bug
+
 Version 3.22.1
 --------------
 
@@ -9,6 +19,8 @@ Version 3.22.1
 - Fix settings saving mechanism
 - Fix gunicorn multiple workers sqlalchemy post fork session conflict bug
 - Dont prevent wrong device GPS coordinates from displaying links in network view
+- Fix RBAC bugs
+- Add new Scrapli service to send commands / configuration to network device
 
 Version 3.22
 ------------

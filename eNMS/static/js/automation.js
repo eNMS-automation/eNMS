@@ -482,6 +482,7 @@ function field(name, type, id) {
 
 function displayCalendar(calendarType) {
   openPanel({
+    name: "calendar",
     title: `Calendar - ${calendarType}`,
     id: calendarType,
     content: `

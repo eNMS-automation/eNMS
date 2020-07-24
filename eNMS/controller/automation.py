@@ -10,23 +10,9 @@ from uuid import uuid4
 from warnings import warn
 
 try:
-    from scrapli.driver.core import (
-        IOSXEDriver,
-        IOSXRDriver,
-        NXOSDriver,
-        EOSDriver,
-        JunosDriver,
-    )
-
-    SCRAPLI_DRIVERS = {
-        "cisco_iosxe": IOSXEDriver,
-        "cisco_iosxr": IOSXRDriver,
-        "cisco_nxos": NXOSDriver,
-        "arista_eos": EOSDriver,
-        "juniper_junos": JunosDriver,
-    }
+    from scrapli.factory import CORE_PLATFORM_MAP
 except ImportError as exc:
-    SCRAPLI_DRIVERS = {}
+    CORE_PLATFORM_MAP = {"cisco_iosxe": "cisco_iosxe"}
     warn(f"Couldn't import scrapli module ({exc})")
 
 from eNMS.controller.base import BaseController
@@ -61,7 +47,7 @@ class AutomationController(BaseController):
         ("get_ipv6_neighbors_table", "IPv6"),
         ("is_alive", "Is alive"),
     )
-    SCRAPLI_DRIVERS = SCRAPLI_DRIVERS
+    SCRAPLI_DRIVERS = CORE_PLATFORM_MAP
 
     connections_cache = {
         library: defaultdict(dict) for library in ("netmiko", "napalm", "scrapli")
@@ -249,9 +235,9 @@ class AutomationController(BaseController):
         if runs and runtime != "normal":
             if runtime == "latest":
                 runtime = runs[-1].parent_runtime
-            runs = [r for r in runs if r.parent_runtime == runtime]
-            if runs:
-                state = runs[0].get_state()
+            latest_runs = [r for r in runs if r.parent_runtime == runtime]
+            if latest_runs:
+                state = latest_runs[0].get_state()
         return {
             "service": service.to_dict(include=["services", "edges", "superworkflow"]),
             "runtimes": sorted(set((r.parent_runtime, r.creator) for r in runs)),

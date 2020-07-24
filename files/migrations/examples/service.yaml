@@ -195,7 +195,7 @@
     'Regression Workflow N: Topology Import (netbox, librenms, opennms)': [636, 24]
     'Regression Workflow O: Scrapli': [628, 113]
     'Regression Workflow P: large workflow (scalability)': &id002 [483, -268]
-    'Regression Workflow Q: File transfer': [565, 11]
+    'Regression Workflow Q: File transfer': [576, 135]
     'Regression workflow P: large workflow (scalability)': *id002
     Subworkflow 1: !!python/tuple [0, 0]
     Subworkflow 2: !!python/tuple [0, 0]
@@ -10101,7 +10101,7 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels: {}
-  last_modified: '2020-07-24 04:12:49.440137'
+  last_modified: '2020-07-24 04:16:12.826791'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -10129,7 +10129,8 @@
       Check that test file does not exist', '[Regression Workflow Q: File transfer]
       Transfer a.bin', '[Regression Workflow Q: File transfer] Check that test file
       does exist', '[Regression Workflow Q: File transfer] Transfer bc.bin and bd.bin
-      with glob option']
+      with glob option', '[Regression Workflow Q: File transfer] Delete all transferred
+      files']
   shared: false
   skip: false
   skip_query: ''
@@ -10349,7 +10350,7 @@
   operating_system: ''
   pools: []
   positions:
-    'Regression Workflow Q: File transfer': [281, -165]
+    'Regression Workflow Q: File transfer': [296, -147]
   postprocessing: "simple_file = \"a.bin\" in results[\"result\"]\r\nglob_files =\
     \ \"bc.bin\" in results[\"result\"] and \"bd.bin\" in results[\"result\"]\r\n\
     results[\"success\"] = simple_file and glob_files"
@@ -10449,3 +10450,86 @@
   vendor: ''
   waiting_time: 0
   window_size: 1073741824
+- auto_find_prompt: true
+  close_connection: false
+  command: delete flash:/enms_files/*.bin
+  completion_time: 1
+  config_mode: false
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credentials: device
+  custom_username: ''
+  definition: Definition
+  delay_factor: 1.0
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  devices: [Washington]
+  dict_match: {}
+  display_only_failed_nodes: false
+  driver: a10
+  enable_mode: true
+  events: []
+  exit_command: exit
+  expect_password_prompt: password
+  expect_prompt: admin.*$
+  expect_string: ''
+  expect_username_prompt: 'username:'
+  fast_cli: false
+  global_delay_factor: 1.0
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  jump_command: ssh jump_server_IP
+  jump_on_connect: false
+  jump_username: ''
+  last_modified: '2020-07-24 04:18:11.791054'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Regression Workflow Q: File transfer] Delete all transferred files'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions:
+    'Regression Workflow Q: File transfer': [400, 178]
+  postprocessing: ''
+  postprocessing_mode: always
+  preprocessing: ''
+  public: false
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: Delete all transferred files
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: false
+  skip_query: ''
+  skip_value: 'True'
+  start_new_connection: false
+  strip_command: true
+  strip_prompt: true
+  time_between_retries: 10
+  timeout: 10.0
+  type: netmiko_validation_service
+  update_pools: false
+  use_device_driver: true
+  use_genie: false
+  validation_condition: success
+  validation_method: none
+  vendor: ''
+  waiting_time: 0

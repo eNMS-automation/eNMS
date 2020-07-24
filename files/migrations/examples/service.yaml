@@ -10101,7 +10101,7 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels: {}
-  last_modified: '2020-07-24 04:16:12.826791'
+  last_modified: '2020-07-24 10:10:19.457888'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -10130,7 +10130,7 @@
       Transfer a.bin', '[Regression Workflow Q: File transfer] Check that test file
       does exist', '[Regression Workflow Q: File transfer] Transfer bc.bin and bd.bin
       with glob option', '[Regression Workflow Q: File transfer] Delete all transferred
-      files']
+      files', '[Regression Workflow Q: File transfer] Transfer non-existing file']
   shared: false
   skip: false
   skip_query: ''
@@ -10198,7 +10198,7 @@
   operating_system: ''
   pools: []
   positions:
-    'Regression Workflow Q: File transfer': [-357, 195]
+    'Regression Workflow Q: File transfer': [-171, -148]
   postprocessing: results["success"] = "a.bin" not in results["result"]
   postprocessing_mode: always
   preprocessing: ''
@@ -10268,7 +10268,7 @@
   operating_system: ''
   pools: []
   positions:
-    'Regression Workflow Q: File transfer': [-101, -144]
+    'Regression Workflow Q: File transfer': [-21, 255]
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -10350,7 +10350,7 @@
   operating_system: ''
   pools: []
   positions:
-    'Regression Workflow Q: File transfer': [296, -147]
+    'Regression Workflow Q: File transfer': [362, 239]
   postprocessing: "simple_file = \"a.bin\" in results[\"result\"]\r\nglob_files =\
     \ \"bc.bin\" in results[\"result\"] and \"bd.bin\" in results[\"result\"]\r\n\
     results[\"success\"] = simple_file and glob_files"
@@ -10423,7 +10423,7 @@
   operating_system: ''
   pools: []
   positions:
-    'Regression Workflow Q: File transfer': [24, 183]
+    'Regression Workflow Q: File transfer': [187, -140]
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -10505,7 +10505,7 @@
   operating_system: ''
   pools: []
   positions:
-    'Regression Workflow Q: File transfer': [400, 178]
+    'Regression Workflow Q: File transfer': [517, -138]
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -10533,3 +10533,72 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
+- completion_time: 1
+  content_match: No such file or directory
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  destination_file: enms_files
+  device_query: ''
+  device_query_property: name
+  devices: []
+  dict_match: {}
+  direction: put
+  display_only_failed_nodes: false
+  events: []
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2020-07-24 10:13:57.495865'
+  load_known_host_keys: false
+  log_level: 1
+  look_for_keys: false
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  max_transfer_size: 1073741824
+  maximum_runs: 1
+  missing_host_key_policy: true
+  multiprocessing: false
+  name: '[Regression Workflow Q: File transfer] Transfer non-existing file'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions:
+    'Regression Workflow Q: File transfer': [-332, 180]
+  postprocessing: ''
+  postprocessing_mode: always
+  preprocessing: ''
+  protocol: scp
+  public: false
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: Transfer non-existing file
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: false
+  skip_query: ''
+  skip_value: 'True'
+  source_file: /media/test.bin
+  source_file_includes_globbing: false
+  time_between_retries: 10
+  timeout: 10.0
+  type: generic_file_transfer_service
+  update_pools: false
+  validation_condition: failure
+  validation_method: text
+  vendor: ''
+  waiting_time: 0
+  window_size: 1073741824

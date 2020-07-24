@@ -67,7 +67,7 @@
     'Regression Workflow N: Topology Import (netbox, librenms, opennms)': [-141, 21]
     'Regression Workflow O: Scrapli': [-192, 31]
     'Regression Workflow P: large workflow (scalability)': &id001 [-437, -191]
-    'Regression Workflow Q: File transfer': [-231, -93]
+    'Regression Workflow Q: File transfer': [-389, -83]
     'Regression workflow P: large workflow (scalability)': *id001
     Subworkflow 1: !!python/tuple [0, 0]
     Subworkflow 2: !!python/tuple [0, 0]
@@ -10101,7 +10101,7 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels: {}
-  last_modified: '2020-07-24 03:33:35.785449'
+  last_modified: '2020-07-24 03:57:44.785345'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -10126,7 +10126,9 @@
   send_notification: false
   send_notification_method: mail
   services: ['[Shared] Start', '[Shared] End', '[Regression Workflow Q: File transfer]
-      Check that test file does not exist']
+      Check that test file does not exist', '[Regression Workflow Q: File transfer]
+      Create new test file', '[Regression Workflow Q: File transfer] Check that test
+      file does exist']
   shared: false
   skip: false
   skip_query: ''
@@ -10180,7 +10182,7 @@
   jump_command: ssh jump_server_IP
   jump_on_connect: false
   jump_username: ''
-  last_modified: '2020-07-24 03:34:30.742447'
+  last_modified: '2020-07-24 03:57:39.734274'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -10194,8 +10196,8 @@
   operating_system: ''
   pools: []
   positions:
-    'Regression Workflow Q: File transfer': [-194, 46]
-  postprocessing: ''
+    'Regression Workflow Q: File transfer': [-357, 172]
+  postprocessing: '"a.bin" not in results["result"]'
   postprocessing_mode: always
   preprocessing: ''
   public: false
@@ -10203,6 +10205,158 @@
   reserved: false
   run_method: per_device
   scoped_name: Check that test file does not exist
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: false
+  skip_query: ''
+  skip_value: 'True'
+  start_new_connection: false
+  strip_command: true
+  strip_prompt: true
+  time_between_retries: 10
+  timeout: 10.0
+  type: netmiko_validation_service
+  update_pools: false
+  use_device_driver: true
+  use_genie: false
+  validation_condition: success
+  validation_method: none
+  vendor: ''
+  waiting_time: 0
+- completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  destination_file: enms_files/a.bin
+  device_query: ''
+  device_query_property: name
+  devices: []
+  dict_match: {}
+  direction: put
+  display_only_failed_nodes: false
+  events: []
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2020-07-24 03:55:57.618063'
+  load_known_host_keys: false
+  log_level: 1
+  look_for_keys: false
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  max_transfer_size: 1073741824
+  maximum_runs: 1
+  missing_host_key_policy: true
+  multiprocessing: false
+  name: '[Regression Workflow Q: File transfer] Create new test file'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions:
+    'Regression Workflow Q: File transfer': [-101, -144]
+  postprocessing: ''
+  postprocessing_mode: always
+  preprocessing: ''
+  protocol: scp
+  public: false
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: Create new test file
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: false
+  skip_query: ''
+  skip_value: 'True'
+  source_file: /media/sf_shared/eNMS/tests/file_transfer/a.bin
+  source_file_includes_globbing: false
+  time_between_retries: 10
+  timeout: 10.0
+  type: generic_file_transfer_service
+  update_pools: false
+  validation_condition: success
+  validation_method: none
+  vendor: ''
+  waiting_time: 0
+  window_size: 1073741824
+- auto_find_prompt: true
+  close_connection: false
+  command: dir enms_files
+  completion_time: 1
+  config_mode: false
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credentials: device
+  custom_username: ''
+  definition: Definition
+  delay_factor: 1.0
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  devices: []
+  dict_match: {}
+  display_only_failed_nodes: false
+  driver: a10
+  enable_mode: true
+  events: []
+  exit_command: exit
+  expect_password_prompt: password
+  expect_prompt: admin.*$
+  expect_string: ''
+  expect_username_prompt: 'username:'
+  fast_cli: false
+  global_delay_factor: 1.0
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  jump_command: ssh jump_server_IP
+  jump_on_connect: false
+  jump_username: ''
+  last_modified: '2020-07-24 03:57:27.639902'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Regression Workflow Q: File transfer] Check that test file does exist'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions:
+    'Regression Workflow Q: File transfer': [108, 136]
+  postprocessing: '"a.bin" in results["result"]'
+  postprocessing_mode: always
+  preprocessing: ''
+  public: false
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: Check that test file does exist
   send_notification: false
   send_notification_method: mail
   shared: false

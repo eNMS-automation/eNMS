@@ -709,6 +709,13 @@
 - {destination: '[Regression Workflow Q: File transfer] Check that test file does
     not exist', label: success, source: '[Shared] Start', subtype: success, type: workflow_edge,
   workflow: 'Regression Workflow Q: File transfer'}
+- {destination: '[Regression Workflow Q: File transfer] Create new test file', label: success,
+  source: '[Regression Workflow Q: File transfer] Check that test file does not exist',
+  subtype: success, type: workflow_edge, workflow: 'Regression Workflow Q: File transfer'}
+- {destination: '[Regression Workflow Q: File transfer] Check that test file does
+    exist', label: success, source: '[Regression Workflow Q: File transfer] Create
+    new test file', subtype: success, type: workflow_edge, workflow: 'Regression Workflow
+    Q: File transfer'}
 - {destination: '[Shared] End', label: success, source: '[Regression Workflow Q: File
-    transfer] Check that test file does not exist', subtype: success, type: workflow_edge,
+    transfer] Check that test file does exist', subtype: success, type: workflow_edge,
   workflow: 'Regression Workflow Q: File transfer'}

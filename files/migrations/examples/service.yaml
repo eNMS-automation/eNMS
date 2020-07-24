@@ -67,7 +67,7 @@
     'Regression Workflow N: Topology Import (netbox, librenms, opennms)': [-141, 21]
     'Regression Workflow O: Scrapli': [-192, 31]
     'Regression Workflow P: large workflow (scalability)': &id001 [-437, -191]
-    'Regression Workflow Q: File transfer': [-389, -83]
+    'Regression Workflow Q: File transfer': [-479, -89]
     'Regression workflow P: large workflow (scalability)': *id001
     Subworkflow 1: !!python/tuple [0, 0]
     Subworkflow 2: !!python/tuple [0, 0]
@@ -195,7 +195,7 @@
     'Regression Workflow N: Topology Import (netbox, librenms, opennms)': [636, 24]
     'Regression Workflow O: Scrapli': [628, 113]
     'Regression Workflow P: large workflow (scalability)': &id002 [483, -268]
-    'Regression Workflow Q: File transfer': [500, 0]
+    'Regression Workflow Q: File transfer': [565, 11]
     'Regression workflow P: large workflow (scalability)': *id002
     Subworkflow 1: !!python/tuple [0, 0]
     Subworkflow 2: !!python/tuple [0, 0]
@@ -10101,7 +10101,7 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels: {}
-  last_modified: '2020-07-24 03:57:44.785345'
+  last_modified: '2020-07-24 04:12:49.440137'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -10127,8 +10127,9 @@
   send_notification_method: mail
   services: ['[Shared] Start', '[Shared] End', '[Regression Workflow Q: File transfer]
       Check that test file does not exist', '[Regression Workflow Q: File transfer]
-      Create new test file', '[Regression Workflow Q: File transfer] Check that test
-      file does exist']
+      Transfer a.bin', '[Regression Workflow Q: File transfer] Check that test file
+      does exist', '[Regression Workflow Q: File transfer] Transfer bc.bin and bd.bin
+      with glob option']
   shared: false
   skip: false
   skip_query: ''
@@ -10182,7 +10183,7 @@
   jump_command: ssh jump_server_IP
   jump_on_connect: false
   jump_username: ''
-  last_modified: '2020-07-24 03:57:39.734274'
+  last_modified: '2020-07-24 04:12:46.366228'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -10196,8 +10197,8 @@
   operating_system: ''
   pools: []
   positions:
-    'Regression Workflow Q: File transfer': [-357, 172]
-  postprocessing: '"a.bin" not in results["result"]'
+    'Regression Workflow Q: File transfer': [-357, 195]
+  postprocessing: results["success"] = "a.bin" not in results["result"]
   postprocessing_mode: always
   preprocessing: ''
   public: false
@@ -10248,7 +10249,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2020-07-24 03:55:57.618063'
+  last_modified: '2020-07-24 04:08:50.675082'
   load_known_host_keys: false
   log_level: 1
   look_for_keys: false
@@ -10259,7 +10260,7 @@
   maximum_runs: 1
   missing_host_key_policy: true
   multiprocessing: false
-  name: '[Regression Workflow Q: File transfer] Create new test file'
+  name: '[Regression Workflow Q: File transfer] Transfer a.bin'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -10275,7 +10276,7 @@
   reply_to: ''
   reserved: false
   run_method: per_device
-  scoped_name: Create new test file
+  scoped_name: Transfer a.bin
   send_notification: false
   send_notification_method: mail
   shared: false
@@ -10334,7 +10335,7 @@
   jump_command: ssh jump_server_IP
   jump_on_connect: false
   jump_username: ''
-  last_modified: '2020-07-24 03:57:27.639902'
+  last_modified: '2020-07-24 04:13:28.626790'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -10348,8 +10349,10 @@
   operating_system: ''
   pools: []
   positions:
-    'Regression Workflow Q: File transfer': [108, 136]
-  postprocessing: '"a.bin" in results["result"]'
+    'Regression Workflow Q: File transfer': [281, -165]
+  postprocessing: "simple_file = \"a.bin\" in results[\"result\"]\r\nglob_files =\
+    \ \"bc.bin\" in results[\"result\"] and \"bd.bin\" in results[\"result\"]\r\n\
+    results[\"success\"] = simple_file and glob_files"
   postprocessing_mode: always
   preprocessing: ''
   public: false
@@ -10376,3 +10379,73 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
+- completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  destination_file: enms_files
+  device_query: ''
+  device_query_property: name
+  devices: [Washington]
+  dict_match: {}
+  direction: put
+  display_only_failed_nodes: false
+  events: []
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2020-07-24 04:12:14.915986'
+  load_known_host_keys: false
+  log_level: 1
+  look_for_keys: false
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  max_transfer_size: 1073741824
+  maximum_runs: 1
+  missing_host_key_policy: true
+  multiprocessing: false
+  name: '[Regression Workflow Q: File transfer] Transfer bc.bin and bd.bin with glob
+    option'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions:
+    'Regression Workflow Q: File transfer': [24, 183]
+  postprocessing: ''
+  postprocessing_mode: always
+  preprocessing: ''
+  protocol: scp
+  public: false
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: Transfer bc.bin and bd.bin with glob option
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: false
+  skip_query: ''
+  skip_value: 'True'
+  source_file: /media/sf_shared/eNMS/tests/file_transfer/?[c|d].bi*
+  source_file_includes_globbing: true
+  time_between_retries: 10
+  timeout: 10.0
+  type: generic_file_transfer_service
+  update_pools: false
+  validation_condition: success
+  validation_method: none
+  vendor: ''
+  waiting_time: 0
+  window_size: 1073741824

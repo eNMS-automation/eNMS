@@ -709,13 +709,17 @@
 - {destination: '[Regression Workflow Q: File transfer] Check that test file does
     not exist', label: success, source: '[Shared] Start', subtype: success, type: workflow_edge,
   workflow: 'Regression Workflow Q: File transfer'}
-- {destination: '[Regression Workflow Q: File transfer] Create new test file', label: success,
+- {destination: '[Regression Workflow Q: File transfer] Transfer a.bin', label: success,
   source: '[Regression Workflow Q: File transfer] Check that test file does not exist',
   subtype: success, type: workflow_edge, workflow: 'Regression Workflow Q: File transfer'}
-- {destination: '[Regression Workflow Q: File transfer] Check that test file does
-    exist', label: success, source: '[Regression Workflow Q: File transfer] Create
-    new test file', subtype: success, type: workflow_edge, workflow: 'Regression Workflow
-    Q: File transfer'}
 - {destination: '[Shared] End', label: success, source: '[Regression Workflow Q: File
     transfer] Check that test file does exist', subtype: success, type: workflow_edge,
   workflow: 'Regression Workflow Q: File transfer'}
+- {destination: '[Regression Workflow Q: File transfer] Transfer bc.bin and bd.bin
+    with glob option', label: success, source: '[Regression Workflow Q: File transfer]
+    Transfer a.bin', subtype: success, type: workflow_edge, workflow: 'Regression
+    Workflow Q: File transfer'}
+- {destination: '[Regression Workflow Q: File transfer] Check that test file does
+    exist', label: success, source: '[Regression Workflow Q: File transfer] Transfer
+    bc.bin and bd.bin with glob option', subtype: success, type: workflow_edge, workflow: 'Regression
+    Workflow Q: File transfer'}

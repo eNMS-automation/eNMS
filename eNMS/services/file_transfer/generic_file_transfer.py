@@ -46,7 +46,6 @@ class GenericFileTransferService(Service):
             ssh_client.load_system_host_keys()
         source = run.sub(run.source_file, locals())
         destination = run.sub(run.destination_file, locals())
-        success, result = True, f"File {source} transferred successfully"
         ssh_client.connect(
             device.ip_address,
             username=device.username,
@@ -56,8 +55,10 @@ class GenericFileTransferService(Service):
         if run.source_file_includes_globbing:
             glob_source_file_list = glob(source, recursive=False)
             if not glob_source_file_list:
-                success = False
-                result = f"Glob pattern {source} returned no matching files"
+                return {
+                    "success": False,
+                    "result": f"Glob pattern {source} returned no matching files",
+                }
             else:
                 files = []
                 for glob_source in glob_source_file_list:
@@ -68,14 +69,13 @@ class GenericFileTransferService(Service):
                         destination = destination + "/"
                     glob_destination = destination + filename
                     files.append((glob_source, glob_destination))
-                run.transfer_file(ssh_client, files)
         else:
             files = [(source, destination)]
         log = ", ".join("Transferring {} to {}".format(*pairs) for pairs in files)
         run.log("info", log, device)
         run.transfer_file(ssh_client, files)
         ssh_client.close()
-        return {"success": success, "result": result}
+        return {"success": True, "result": "Transfer successful"}
 
 
 class GenericFileTransferForm(ServiceForm):

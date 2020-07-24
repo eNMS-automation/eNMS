@@ -59,39 +59,21 @@ class GenericFileTransferService(Service):
                 success = False
                 result = f"Glob pattern {source} returned no matching files"
             else:
-                pairs = []
+                files = []
                 for glob_source in glob_source_file_list:
-                    if run.direction.lower() == "put" and Path(glob_source).is_dir():
-                        run.log(
-                            "warn",
-                            (
-                                f"Skipping glob transfer of directory"
-                                f"{glob_source} to {destination}"
-                            ),
-                            device,
-                        )
+                    if Path(glob_source).is_dir():
                         continue
                     _, filename = split(glob_source)
                     if destination[-1] != "/":
                         destination = destination + "/"
                     glob_destination = destination + filename
-                    pairs.append((glob_source, glob_destination))
-                run.log(
-                    "info",
-                    (
-                        f"Transferring glob file(s)"
-                        f"{glob_source_file_list} to {destination}"
-                    ),
-                    device,
-                )
-                run.transfer_file(ssh_client, pairs)
+                    files.append((glob_source, glob_destination))
+                run.transfer_file(ssh_client, files)
         else:
-            run.log("info", f"Transferring file {source} to {destination}", device)
-            try:
-                run.transfer_file(ssh_client, [(source, destination)])
-            except FileNotFoundError:
-                success = False
-                result = f"Source file {source} does not exist, or you forgot to enable globbing"
+            files = [(source, destination)]
+        log = ", ".join("Transferring {} to {}".format(*pairs) for pairs in files)
+        run.log("info", log, device)
+        run.transfer_file(ssh_client, files)
         ssh_client.close()
         return {"success": success, "result": result}
 

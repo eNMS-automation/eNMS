@@ -2,6 +2,14 @@
 Release Notes
 =============
 
+Version 3.22.3
+--------------
+
+- Add regression workflow for file transfer
+- Fix RBAC service run and task scheduling REST API bug
+- Fix payload extraction workflow __setitem__ bug
+- Add regression workflow with lots of service for scalability testing
+
 Version 3.22.2
 --------------
 

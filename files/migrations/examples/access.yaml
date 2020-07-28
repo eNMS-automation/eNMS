@@ -77,7 +77,7 @@
   get_requests: []
   groups: [New York Users]
   menu: []
-  name: Washington Pool (FULL) - Workflow 3 & 4 + Superworkflow (EDIT)
+  name: Washington Pool (FULL) - Workflow 3 & 4 + Superworkflow (EDIT - RUN)
   pages: []
   pools: [Washington]
   pools_access: "['Read', 'Edit', 'Connect', 'Use as target']"
@@ -164,3 +164,17 @@
   type: access
   upper_menu: [Admin, Settings, Files]
   users: []
+- description: ''
+  get_requests: []
+  groups: [New York Users]
+  menu: []
+  name: Scrapli workflow (EDIT only)
+  pages: []
+  pools: []
+  pools_access: '[]'
+  post_requests: []
+  services: ['Regression Workflow O: Scrapli']
+  services_access: "['Read', 'Edit']"
+  type: access
+  upper_menu: []
+  users: [chicago]

@@ -473,7 +473,7 @@ class Server(Flask):
                     **request.get_json(force=True),
                 }
                 errors, devices, pools = [], [], []
-                service = db.fetch("service", name=data["name"])
+                service = db.fetch("service", name=data["name"], rbac="run")
                 handle_asynchronously = data.get("async", False)
                 for device_name in data.get("devices", ""):
                     device = db.fetch("device", name=device_name)

@@ -508,7 +508,7 @@ class Server(Flask):
             decorators = [self.auth.login_required, self.monitor_rest_request]
 
             def post(self):
-                task = db.fetch("task", id=request.get_json())
+                task = db.fetch("task", rbac="schedule", id=request.get_json())
                 data = {
                     "trigger": "Scheduler",
                     "creator": request.authorization["username"],

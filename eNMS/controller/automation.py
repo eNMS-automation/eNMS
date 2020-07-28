@@ -512,6 +512,4 @@ class AutomationController(BaseController):
             return True
 
     def task_action(self, mode, task_id):
-        task = db.fetch("task", id=task_id)
-        db.fetch("service", rbac="schedule", id=task.service_id)
-        return task.schedule(mode)
+        return db.fetch("task", id=task_id, rbac="schedule").schedule(mode)

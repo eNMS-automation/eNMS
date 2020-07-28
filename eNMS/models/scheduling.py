@@ -56,6 +56,7 @@ class Task(AbstractBase):
 
     @classmethod
     def rbac_filter(cls, query, mode, user):
+        service_mode = "read" if mode == "read" else "schedule"
         public_tasks = query.join(cls.service).filter(
             models["service"].public == true()
         )
@@ -65,6 +66,7 @@ class Task(AbstractBase):
             .join(models["service"].originals.of_type(service_alias))
             .join(models["access"], service_alias.access)
             .join(models["user"], models["access"].users)
+            .filter(models["access"].services_access.contains(service_mode))
             .filter(models["user"].name == user.name)
         )
         user_group_tasks = (
@@ -73,6 +75,7 @@ class Task(AbstractBase):
             .join(models["access"], service_alias.access)
             .join(models["group"], models["access"].groups)
             .join(models["user"], models["group"].users)
+            .filter(models["access"].services_access.contains(service_mode))
             .filter(models["user"].name == user.name)
         )
         return public_tasks.union(user_tasks, user_group_tasks)

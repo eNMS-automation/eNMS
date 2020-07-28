@@ -164,7 +164,9 @@
   type: access
   upper_menu: [Admin, Settings, Files]
   users: []
-- description: ''
+- description: There is an associated task for the scrapli workflow. 'ny' and 'chicago'
+    users should not be able to edit or start that task because they cannot schedule
+    the workflow.
   get_requests: []
   groups: [New York Users]
   menu: []

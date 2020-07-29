@@ -5,6 +5,7 @@ from tests.conftest import check_pages
 
 ignored_endpoints = [
     "/download",
+    "/form/alerts_table",
     "/form/calendar",
     "/form/compare",
     "/form/device_data",

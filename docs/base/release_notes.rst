@@ -10,6 +10,7 @@ Version 3.22.3
 - Fix payload extraction workflow __setitem__ bug
 - Add regression workflow with lots of service for scalability testing
 - Add regression workflow for skipped service in workflow targets SxS run mode
+- Fix rest call service local() scope bug
 
 Version 3.22.2
 --------------

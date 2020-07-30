@@ -1134,6 +1134,7 @@ class Run(AbstractBase):
         return results, exec_variables
 
     def sub(self, input, variables):
+
         r = compile("{{(.*?)}}")
 
         def replace(match):

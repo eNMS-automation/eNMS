@@ -29,7 +29,10 @@
     "Visualization": {
       "icon": "map-marker",
       "pages": {
-        "Network": "/view/network",
+        "Network": {
+          "2D": "/view/network",
+          "3D": "/view/3d_network"
+        },
         "Sites": "/view/site"
       }
     },

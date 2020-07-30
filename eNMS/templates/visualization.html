@@ -75,6 +75,8 @@
 <script>
   let viewType = "{{ view_type }}";
 </script>
-<script src="{{ url_for('static', filename='lib/leaflet/leaflet.min.js') }}"></script>
-<script src="{{ url_for('static', filename='lib/leaflet-markercluster/leaflet.markercluster.min.js') }}"></script>
+{% if view_type in ("network", "site") %}
+  <script src="{{ url_for('static', filename='lib/leaflet/leaflet.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='lib/leaflet-markercluster/leaflet.markercluster.min.js') }}"></script>
+{% endif %}
 {% endblock javascripts %}

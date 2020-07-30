@@ -1,5 +1,6 @@
 {% extends "base_site.html" %} {% block title %} Geographical View {% endblock title %}
 {% block stylesheets %} {{ super() }}
+{% if view_type in ("network", "site") %}
 <link
   href="{{ url_for('static', filename='lib/leaflet/leaflet.min.css') }}"
   rel="stylesheet"
@@ -8,6 +9,12 @@
   href="{{ url_for('static', filename='lib/leaflet-markercluster/leaflet.markercluster.min.css') }}"
   rel="stylesheet"
 />
+{% else %}
+<link
+  href="{{ url_for('static', filename='lib/cesium/Widgets/widgets.css') }}"
+  rel="stylesheet"
+/>
+{% endif %}
 <link
   href="{{ url_for('static', filename='css/visualization.css') }}"
   rel="stylesheet"
@@ -79,5 +86,7 @@
 {% if view_type in ("network", "site") %}
   <script src="{{ url_for('static', filename='lib/leaflet/leaflet.min.js') }}"></script>
   <script src="{{ url_for('static', filename='lib/leaflet-markercluster/leaflet.markercluster.min.js') }}"></script>
+{% else %}
+  <script src="{{ url_for('static', filename='lib/cesium/Cesium.js') }}"></script>
 {% endif %}
 {% endblock javascripts %}

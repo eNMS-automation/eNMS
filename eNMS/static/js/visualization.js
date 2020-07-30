@@ -1,6 +1,7 @@
 /*
 global
 action: false
+dimension: false
 settings: true
 jsPanel: false
 L: false
@@ -304,7 +305,12 @@ function initFramework() {
     }
     routerIcon = window["icon_router"];
   } else {
-    console.log("3d");
+    var viewer = new Cesium.Viewer("map", {
+      timeline: false,
+      geocoder: false,
+      animation : false,
+      selectionIndicator : false,
+    });
   }
 }
 

@@ -2,6 +2,11 @@
 Release Notes
 =============
 
+Version 3.23.0
+--------------
+
+- 3D network view
+
 Version 3.22.3
 --------------
 

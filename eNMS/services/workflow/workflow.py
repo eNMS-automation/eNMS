@@ -129,10 +129,7 @@ class Workflow(Service):
             skip_query = run.eval(service.skip_query, **locals())[0]
             if service in (start, end) or service.skip or skip_query:
                 results = {
-                    "summary": {
-                        "success": {device.name for device in run.devices},
-                        "failure": [],
-                    },
+                    "summary": {"success": targets[service.name], "failure": []},
                     "success": True,
                 }
             else:

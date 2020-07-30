@@ -74,6 +74,7 @@
 {% endif %} {% endblock content %} {% block javascripts %} {{ super()}}
 <script>
   let viewType = "{{ view_type }}";
+  let dimension = viewType == "3d_network" ? "3D" : "2D";
 </script>
 {% if view_type in ("network", "site") %}
   <script src="{{ url_for('static', filename='lib/leaflet/leaflet.min.js') }}"></script>

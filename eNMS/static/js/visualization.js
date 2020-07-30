@@ -61,6 +61,13 @@ function changeMarker(type) {
 
 function createNode(node, nodeType) {
   if (!node.latitude && !node.longitude) return;
+  (dimension == "2D" ? createNode2d : createNode3d)(node, nodeType);
+}
+
+function createNode3d(node, nodeType) {
+}
+
+function createNode2d(node, nodeType) {
   let marker;
   try {
     marker =
@@ -184,7 +191,11 @@ function updateView(withCluster) {
     });
     $(".geo-menu").show();
   }
-  map[clustered ? "addLayer" : "removeLayer"](markerGroup);
+  if (dimension == "2D") {
+    map[clustered ? "addLayer" : "removeLayer"](markerGroup);
+  } else {
+
+  }
 }
 
 function deviceToNode(device) {
@@ -264,34 +275,42 @@ function displayPool(poolId, nodes, edges) {
   });
 }
 
-export function initView() {
-  for (const [key, value] of Object.entries(iconSizes)) {
-    window[`icon_${key}`] = L.icon({
-      iconUrl: `../static/img/view/${key}.gif`,
-      iconSize: value,
-      iconAnchor: [9, 6],
-      popupAnchor: [8, -5],
-    });
+function initFramework() {
+  if (dimension == "2D") {
+    markerGroup = L.markerClusterGroup();
+    map = L.map("map", { preferCanvas: true }).setView(
+      [settings.view.latitude, settings.view.longitude],
+      settings.view.zoom_level
+    );
+    layer = L.tileLayer(layers[settings.view.tile_layer]);
+    map
+      .addLayer(layer)
+      .on("click", function (e) {
+        selectedObject = null;
+      })
+      .on("contextmenu", function () {
+        if (!selectedObject) {
+          $(".menu").hide();
+          $(".geo-menu").show();
+        }
+      });
+    for (const [key, value] of Object.entries(iconSizes)) {
+      window[`icon_${key}`] = L.icon({
+        iconUrl: `../static/img/view/${key}.gif`,
+        iconSize: value,
+        iconAnchor: [9, 6],
+        popupAnchor: [8, -5],
+      });
+    }
+    routerIcon = window["icon_router"];
+  } else {
+    console.log("3d");
   }
-  routerIcon = window["icon_router"];
-  markerGroup = L.markerClusterGroup();
+}
+
+export function initView() {
+  initFramework();
   markerType = settings.view.marker;
-  map = L.map("map", { preferCanvas: true }).setView(
-    [settings.view.latitude, settings.view.longitude],
-    settings.view.zoom_level
-  );
-  layer = L.tileLayer(layers[settings.view.tile_layer]);
-  map
-    .addLayer(layer)
-    .on("click", function (e) {
-      selectedObject = null;
-    })
-    .on("contextmenu", function () {
-      if (!selectedObject) {
-        $(".menu").hide();
-        $(".geo-menu").show();
-      }
-    });
   updateView();
   $("body").contextMenu({
     menuSelector: "#contextMenu",

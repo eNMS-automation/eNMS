@@ -731,3 +731,18 @@
     not exist', label: success, source: '[Regression Workflow Q: File transfer] Transfer
     non-existing file', subtype: success, type: workflow_edge, workflow: 'Regression
     Workflow Q: File transfer'}
+- {destination: '[Workflow Regression R: skip services in service by service mode]
+    Partial failure', label: success, source: '[Shared] Start', subtype: success,
+  type: workflow_edge, workflow: 'Workflow Regression R: skip services in service
+    by service mode'}
+- {destination: '[Workflow Regression R: skip services in service by service mode]
+    Last service', label: success, source: '[Workflow Regression R: skip services
+    in service by service mode] Partial failure', subtype: success, type: workflow_edge,
+  workflow: 'Workflow Regression R: skip services in service by service mode'}
+- {destination: '[Workflow Regression R: skip services in service by service mode]
+    Skipped service', label: success, source: '[Workflow Regression R: skip services
+    in service by service mode] Last service', subtype: success, type: workflow_edge,
+  workflow: 'Workflow Regression R: skip services in service by service mode'}
+- {destination: '[Shared] End', label: success, source: '[Workflow Regression R: skip
+    services in service by service mode] Skipped service', subtype: success, type: workflow_edge,
+  workflow: 'Workflow Regression R: skip services in service by service mode'}

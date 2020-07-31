@@ -305,7 +305,7 @@ function initFramework() {
     }
     routerIcon = window["icon_router"];
   } else {
-    var viewer = new Cesium.Viewer("map", {
+    let viewer = new Cesium.Viewer("map", {
       timeline: false,
       geocoder: false,
       animation : false,

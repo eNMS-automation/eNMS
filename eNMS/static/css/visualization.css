@@ -19,3 +19,8 @@ intrinsic (Safari) - moz (Firefox) - webkit (Chrome) */
   padding: 10 10;
   width: 100px;
 }
+
+/* remove cesium logo */
+.cesium-widget-credits{
+  display:none !important;
+}

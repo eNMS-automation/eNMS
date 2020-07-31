@@ -1123,9 +1123,10 @@ class Run(AbstractBase):
         }
         if "variables" not in payload:
             return variables
+        device_variables = payload["variables"].pop("devices", None)
         variables.update(payload["variables"])
-        if device and "devices" in payload["variables"]:
-            variables.update(payload["variables"]["devices"].get(device.name, {}))
+        if device and device_variables:
+            variables.update(device_variables.get(device.name, {}))
         return variables
 
     def eval(_self, query, function="eval", **locals):  # noqa: N805

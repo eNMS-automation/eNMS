@@ -72,7 +72,9 @@
     Subworkflow 1: !!python/tuple [0, 0]
     Subworkflow 2: !!python/tuple [0, 0]
     Workflow  in device by device mode: !!python/tuple [0, 0]
-    'Workflow Regression R: skip services in service by service mode': [-148, 17]
+    'Workflow Regression R: skip services in service by service mode': [-336, -35]
+    'Workflow Regression S: conditional skip query with skip value set to False': [
+      -183, -152]
     Workflow in service by service mode (workflow targets): !!python/tuple [0, 0]
     Workflow in service targets mode: !!python/tuple [0, 0]
     Workflow with device and value iteration: [0, 0]
@@ -205,6 +207,8 @@
     TEST2: !!python/tuple [500, 0]
     Workflow  in device by device mode: !!python/tuple [0, 0]
     'Workflow Regression R: skip services in service by service mode': [500, 0]
+    'Workflow Regression S: conditional skip query with skip value set to False': [
+      640, -155]
     Workflow in service by service mode (workflow targets): !!python/tuple [0, 0]
     Workflow in service targets mode: !!python/tuple [0, 0]
     Workflow with device and value iteration: [500, 0]
@@ -5240,6 +5244,10 @@
   driver: a10
   enable_mode: true
   events: []
+  exit_command: ''
+  expect_password_prompt: ''
+  expect_prompt: ''
+  expect_username_prompt: ''
   fast_cli: false
   global_delay_factor: 1.0
   impacting: true
@@ -5250,6 +5258,9 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jump_command: ''
+  jump_on_connect: false
+  jump_username: ''
   last_modified: '2020-06-01 10:08:24.484251'
   log_level: 1
   mail_recipient: ''
@@ -8125,6 +8136,10 @@
   driver: a10
   enable_mode: true
   events: []
+  exit_command: ''
+  expect_password_prompt: ''
+  expect_prompt: ''
+  expect_username_prompt: ''
   fast_cli: false
   global_delay_factor: 1.0
   impacting: true
@@ -8135,6 +8150,9 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jump_command: ''
+  jump_on_connect: false
+  jump_username: ''
   last_modified: '2020-05-30 06:09:05.488720'
   log_level: 1
   mail_recipient: ''
@@ -10628,7 +10646,7 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels: {}
-  last_modified: '2020-07-30 03:01:14.405187'
+  last_modified: '2020-08-03 11:54:39.284184'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -10654,8 +10672,8 @@
   send_notification_method: mail
   services: ['[Shared] Start', '[Shared] End', '[Workflow Regression R: skip services
       in service by service mode] Partial failure', '[Workflow Regression R: skip
-      services in service by service mode] Skipped service', '[Workflow Regression
-      R: skip services in service by service mode] Last service']
+      services in service by service mode] Last service', '[Workflow Regression R:
+      skip services in service by service mode] Skipped service']
   shared: false
   skip: false
   skip_query: ''
@@ -10705,7 +10723,7 @@
   operating_system: ''
   pools: []
   positions:
-    'Workflow Regression R: skip services in service by service mode': [12, -125]
+    'Workflow Regression R: skip services in service by service mode': [-124, -154]
   postprocessing: results["success"] = device.name == "Washington"
   postprocessing_mode: always
   preprocessing: ''
@@ -10755,15 +10773,14 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2020-07-30 03:00:49.063845'
+  last_modified: '2020-08-03 11:56:43.665997'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Workflow Regression R: skip services in service by service mode] Skipped
-    service'
+  name: '[Workflow Regression R: skip services in service by service mode] Last service'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -10778,7 +10795,7 @@
   reply_to: ''
   reserved: false
   run_method: per_device
-  scoped_name: Skipped service
+  scoped_name: Last service
   send_notification: false
   send_notification_method: mail
   shared: false
@@ -10820,21 +10837,22 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2020-07-30 03:01:02.102280'
+  last_modified: '2020-08-03 11:56:38.981289'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Workflow Regression R: skip services in service by service mode] Last service'
+  name: '[Workflow Regression R: skip services in service by service mode] Skipped
+    service'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
   pools: []
   positions:
-    'Workflow Regression R: skip services in service by service mode': [126, 129]
+    'Workflow Regression R: skip services in service by service mode': [12, 179]
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -10842,11 +10860,349 @@
   reply_to: ''
   reserved: false
   run_method: per_device
-  scoped_name: Last service
+  scoped_name: Skipped service
   send_notification: false
   send_notification_method: mail
   shared: false
   skip: true
+  skip_query: ''
+  skip_value: 'True'
+  source_code: "# Availble variables: device, results, run\r\n# Returning state:\r\
+    \n#    results[\"success\"] = True\r\n#    results[\"result\"] = <return data>\r\
+    \n# Logging: log(level, text)\r\n#    log(\"info\", \"My log message\")\r\n# Exit\
+    \ in the middle of the script:\r\n#    exit()\r\n#    Note: exit() is not required\
+    \ as the last line\r\n\r\nresult = {}\r\nresults[\"success\"] = True\r\nresults[\"\
+    result\"] = result"
+  time_between_retries: 10
+  type: python_snippet_service
+  update_pools: false
+  validation_condition: success
+  validation_method: none
+  vendor: ''
+  waiting_time: 0
+- close_connection: false
+  completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  devices: [PaloAlto, Austin, Washington]
+  dict_match: {}
+  display_only_failed_nodes: false
+  events: []
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  labels:
+    0e05e9d9-86cc-4158-b826-8cb8af123da6:
+      alignment: left
+      content: "This workflow runs on 3 devices including Washington.\r\nThe first\
+        \ service will skip Washington.\r\nWashington must follow the failure edges\
+        \ while the other\r\ntwo devices follow the success edge.\r\nIn the end, they\
+        \ should all run the last service."
+      positions: [212, -141]
+  last_modified: '2020-08-03 12:00:59.245986'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: 'Workflow Regression S: conditional skip query with skip value set to False'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions: {}
+  postprocessing: ''
+  postprocessing_mode: always
+  preprocessing: ''
+  public: false
+  reply_to: ''
+  reserved: false
+  run_method: per_service_with_workflow_targets
+  scoped_name: 'Workflow Regression S: conditional skip query with skip value set
+    to False'
+  send_notification: false
+  send_notification_method: mail
+  services: ['[Shared] Start', '[Shared] End', '[Workflow Regression S: conditional
+      skip query with skip value set to False] Skip Washington with Skip value ==
+      False', '[Workflow Regression S: conditional skip query with skip value set
+      to False] Post-failure service', '[Workflow Regression S: conditional skip query
+      with skip value set to False] Post-success service', '[Workflow Regression S:
+      conditional skip query with skip value set to False] Final service']
+  shared: false
+  skip: false
+  skip_query: ''
+  skip_value: 'True'
+  time_between_retries: 10
+  type: workflow
+  update_pools: false
+  validation_condition: success
+  validation_method: none
+  vendor: ''
+  waiting_time: 0
+  workflow_category: Example workflow(s)
+- completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  devices: []
+  dict_match: {}
+  display_only_failed_nodes: false
+  events: []
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2020-08-03 12:01:17.859136'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Workflow Regression S: conditional skip query with skip value set to False]
+    Skip Washington with Skip value == False'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions:
+    'Workflow Regression S: conditional skip query with skip value set to False': [
+      -149, -30]
+  postprocessing: ''
+  postprocessing_mode: always
+  preprocessing: ''
+  public: false
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: Skip Washington with Skip value == False
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: false
+  skip_query: device.name == "Washington"
+  skip_value: 'False'
+  source_code: "# Availble variables: device, results, run\r\n# Returning state:\r\
+    \n#    results[\"success\"] = True\r\n#    results[\"result\"] = <return data>\r\
+    \n# Logging: log(level, text)\r\n#    log(\"info\", \"My log message\")\r\n# Exit\
+    \ in the middle of the script:\r\n#    exit()\r\n#    Note: exit() is not required\
+    \ as the last line\r\n\r\nresult = {}\r\nresults[\"success\"] = True\r\nresults[\"\
+    result\"] = result"
+  time_between_retries: 10
+  type: python_snippet_service
+  update_pools: false
+  validation_condition: success
+  validation_method: none
+  vendor: ''
+  waiting_time: 0
+- completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  devices: []
+  dict_match: {}
+  display_only_failed_nodes: false
+  events: []
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2020-08-03 12:00:27.263343'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Workflow Regression S: conditional skip query with skip value set to False]
+    Post-failure service'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions:
+    'Workflow Regression S: conditional skip query with skip value set to False': [
+      264, -16]
+  postprocessing: ''
+  postprocessing_mode: always
+  preprocessing: ''
+  public: false
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: Post-failure service
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: false
+  skip_query: ''
+  skip_value: 'True'
+  source_code: "# Availble variables: device, results, run\r\n# Returning state:\r\
+    \n#    results[\"success\"] = True\r\n#    results[\"result\"] = <return data>\r\
+    \n# Logging: log(level, text)\r\n#    log(\"info\", \"My log message\")\r\n# Exit\
+    \ in the middle of the script:\r\n#    exit()\r\n#    Note: exit() is not required\
+    \ as the last line\r\n\r\nresult = {}\r\nresults[\"success\"] = True\r\nresults[\"\
+    result\"] = result"
+  time_between_retries: 10
+  type: python_snippet_service
+  update_pools: false
+  validation_condition: success
+  validation_method: none
+  vendor: ''
+  waiting_time: 0
+- completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  devices: []
+  dict_match: {}
+  display_only_failed_nodes: false
+  events: []
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2020-08-03 12:00:36.785336'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Workflow Regression S: conditional skip query with skip value set to False]
+    Post-success service'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions:
+    'Workflow Regression S: conditional skip query with skip value set to False': [
+      208, 194]
+  postprocessing: ''
+  postprocessing_mode: always
+  preprocessing: ''
+  public: false
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: Post-success service
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: false
+  skip_query: ''
+  skip_value: 'True'
+  source_code: "# Availble variables: device, results, run\r\n# Returning state:\r\
+    \n#    results[\"success\"] = True\r\n#    results[\"result\"] = <return data>\r\
+    \n# Logging: log(level, text)\r\n#    log(\"info\", \"My log message\")\r\n# Exit\
+    \ in the middle of the script:\r\n#    exit()\r\n#    Note: exit() is not required\
+    \ as the last line\r\n\r\nresult = {}\r\nresults[\"success\"] = True\r\nresults[\"\
+    result\"] = result"
+  time_between_retries: 10
+  type: python_snippet_service
+  update_pools: false
+  validation_condition: success
+  validation_method: none
+  vendor: ''
+  waiting_time: 0
+- completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  devices: []
+  dict_match: {}
+  display_only_failed_nodes: false
+  events: []
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2020-08-03 12:00:41.901802'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Workflow Regression S: conditional skip query with skip value set to False]
+    Final service'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions:
+    'Workflow Regression S: conditional skip query with skip value set to False': [
+      636, 63]
+  postprocessing: ''
+  postprocessing_mode: always
+  preprocessing: ''
+  public: false
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: Final service
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: false
   skip_query: ''
   skip_value: 'True'
   source_code: "# Availble variables: device, results, run\r\n# Returning state:\r\

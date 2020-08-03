@@ -13,6 +13,7 @@ Version 3.22.3
 - Fix rest call service local() scope bug
 - Fix get var / set var "devices" keyword bug
 - Add jump on connect parameters for netmiko backup service
+- Fix skipped query with device in service by service with workflow targets mode bug
 
 Version 3.22.2
 --------------

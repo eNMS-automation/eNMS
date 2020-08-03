@@ -1107,25 +1107,25 @@ class Run(AbstractBase):
 
     def global_variables(_self, **locals):  # noqa: N805
         payload, device = locals.get("payload", {}), locals.get("device")
-        variables = {
-            "__builtins__": {**builtins, "__import__": _self._import},
-            "send_email": app.send_email,
-            "settings": app.settings,
-            "devices": _self.devices,
-            "get_var": partial(_self.get_var, payload),
-            "get_result": _self.get_result,
-            "log": _self.log,
-            "workflow": _self.workflow,
-            "set_var": partial(_self.payload_helper, payload),
-            "parent_device": _self.parent_device or device,
-            "placeholder": _self.original.placeholder,
-            **locals,
-        }
-        if "variables" not in payload:
-            return variables
-        variables.update(payload["variables"])
-        if device and "devices" in payload["variables"]:
+        variables = locals
+        variables.update(payload.get("variables", {}))
+        if device and "devices" in payload.get("variables", {}):
             variables.update(payload["variables"]["devices"].get(device.name, {}))
+        variables.update(
+            {
+                "__builtins__": {**builtins, "__import__": _self._import},
+                "send_email": app.send_email,
+                "settings": app.settings,
+                "devices": _self.devices,
+                "get_var": partial(_self.get_var, payload),
+                "get_result": _self.get_result,
+                "log": _self.log,
+                "workflow": _self.workflow,
+                "set_var": partial(_self.payload_helper, payload),
+                "parent_device": _self.parent_device or device,
+                "placeholder": _self.original.placeholder,
+            }
+        )
         return variables
 
     def eval(_self, query, function="eval", **locals):  # noqa: N805

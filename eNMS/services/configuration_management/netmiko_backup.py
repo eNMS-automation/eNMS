@@ -35,6 +35,14 @@ class NetmikoBackupService(ConnectionService):
     commands = db.Column(db.List)
     replacements = db.Column(db.List)
     add_header = db.Column(Boolean, default=True)
+    jump_on_connect = db.Column(Boolean, default=False)
+    jump_command = db.Column(db.SmallString)
+    jump_username = db.Column(db.SmallString)
+    jump_password = db.Column(db.SmallString)
+    exit_command = db.Column(db.SmallString)
+    expect_username_prompt = db.Column(db.SmallString)
+    expect_password_prompt = db.Column(db.SmallString)
+    expect_prompt = db.Column(db.SmallString)
 
     __mapper_args__ = {"polymorphic_identity": "netmiko_backup_service"}
 

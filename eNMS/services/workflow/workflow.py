@@ -126,8 +126,7 @@ class Workflow(Service):
                 continue
             number_of_runs[service.name] += 1
             visited.add(service)
-            skip_query = run.eval(service.skip_query, **locals())[0]
-            if service in (start, end) or service.skip or skip_query:
+            if service in (start, end) or service.skip:
                 results = {
                     "summary": {"success": targets[service.name], "failure": []},
                     "success": True,

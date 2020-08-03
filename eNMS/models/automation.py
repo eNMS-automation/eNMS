@@ -1107,7 +1107,11 @@ class Run(AbstractBase):
 
     def global_variables(_self, **locals):  # noqa: N805
         payload, device = locals.get("payload", {}), locals.get("device")
-        variables = {
+        variables = locals
+        variables.update(payload.get("variables", {}))
+        if device and "devices" in payload.get("variables", {}):
+            variables.update(payload["variables"]["devices"].get(device.name, {}))
+        variables.update({
             "__builtins__": {**builtins, "__import__": _self._import},
             "send_email": app.send_email,
             "settings": app.settings,
@@ -1119,14 +1123,7 @@ class Run(AbstractBase):
             "set_var": partial(_self.payload_helper, payload),
             "parent_device": _self.parent_device or device,
             "placeholder": _self.original.placeholder,
-            **locals,
-        }
-        if "variables" not in payload:
-            return variables
-        device_variables = payload["variables"].pop("devices", None)
-        variables.update(payload["variables"])
-        if device and device_variables:
-            variables.update(device_variables.get(device.name, {}))
+        })
         return variables
 
     def eval(_self, query, function="eval", **locals):  # noqa: N805

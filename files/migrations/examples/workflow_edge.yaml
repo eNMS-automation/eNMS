@@ -731,46 +731,46 @@
     not exist', label: success, source: '[Regression Workflow Q: File transfer] Transfer
     non-existing file', subtype: success, type: workflow_edge, workflow: 'Regression
     Workflow Q: File transfer'}
-- {destination: '[Workflow Regression R: skip services in service by service mode]
+- {destination: '[Regression Workflow R: skip services in service by service mode]
     Partial failure', label: success, source: '[Shared] Start', subtype: success,
-  type: workflow_edge, workflow: 'Workflow Regression R: skip services in service
+  type: workflow_edge, workflow: 'Regression Workflow R: skip services in service
     by service mode'}
-- {destination: '[Workflow Regression R: skip services in service by service mode]
-    Skipped service', label: success, source: '[Workflow Regression R: skip services
+- {destination: '[Regression Workflow R: skip services in service by service mode]
+    Skipped service', label: success, source: '[Regression Workflow R: skip services
     in service by service mode] Partial failure', subtype: success, type: workflow_edge,
-  workflow: 'Workflow Regression R: skip services in service by service mode'}
-- {destination: '[Workflow Regression R: skip services in service by service mode]
-    Last service', label: success, source: '[Workflow Regression R: skip services
+  workflow: 'Regression Workflow R: skip services in service by service mode'}
+- {destination: '[Regression Workflow R: skip services in service by service mode]
+    Last service', label: success, source: '[Regression Workflow R: skip services
     in service by service mode] Skipped service', subtype: success, type: workflow_edge,
-  workflow: 'Workflow Regression R: skip services in service by service mode'}
-- {destination: '[Shared] End', label: success, source: '[Workflow Regression R: skip
+  workflow: 'Regression Workflow R: skip services in service by service mode'}
+- {destination: '[Shared] End', label: success, source: '[Regression Workflow R: skip
     services in service by service mode] Last service', subtype: success, type: workflow_edge,
-  workflow: 'Workflow Regression R: skip services in service by service mode'}
-- {destination: '[Workflow Regression S: conditional skip query with skip value set
+  workflow: 'Regression Workflow R: skip services in service by service mode'}
+- {destination: '[Regression Workflow S: conditional skip query with skip value set
     to False] Skip Washington with Skip value == False', label: success, source: '[Shared]
-    Start', subtype: success, type: workflow_edge, workflow: 'Workflow Regression
+    Start', subtype: success, type: workflow_edge, workflow: 'Regression Workflow
     S: conditional skip query with skip value set to False'}
-- {destination: '[Workflow Regression S: conditional skip query with skip value set
-    to False] Post-failure service', label: success, source: '[Workflow Regression
+- {destination: '[Regression Workflow S: conditional skip query with skip value set
+    to False] Post-failure service', label: success, source: '[Regression Workflow
     S: conditional skip query with skip value set to False] Skip Washington with Skip
-    value == False', subtype: success, type: workflow_edge, workflow: 'Workflow Regression
-    S: conditional skip query with skip value set to False'}
-- {destination: '[Workflow Regression S: conditional skip query with skip value set
-    to False] Final service', label: success, source: '[Workflow Regression S: conditional
+    value == False', subtype: success, type: workflow_edge, workflow: 'Regression
+    Workflow S: conditional skip query with skip value set to False'}
+- {destination: '[Regression Workflow S: conditional skip query with skip value set
+    to False] Final service', label: success, source: '[Regression Workflow S: conditional
     skip query with skip value set to False] Post-failure service', subtype: success,
-  type: workflow_edge, workflow: 'Workflow Regression S: conditional skip query with
+  type: workflow_edge, workflow: 'Regression Workflow S: conditional skip query with
     skip value set to False'}
-- {destination: '[Workflow Regression S: conditional skip query with skip value set
-    to False] Final service', label: success, source: '[Workflow Regression S: conditional
+- {destination: '[Regression Workflow S: conditional skip query with skip value set
+    to False] Final service', label: success, source: '[Regression Workflow S: conditional
     skip query with skip value set to False] Post-success service', subtype: success,
-  type: workflow_edge, workflow: 'Workflow Regression S: conditional skip query with
+  type: workflow_edge, workflow: 'Regression Workflow S: conditional skip query with
     skip value set to False'}
-- {destination: '[Shared] End', label: success, source: '[Workflow Regression S: conditional
+- {destination: '[Shared] End', label: success, source: '[Regression Workflow S: conditional
     skip query with skip value set to False] Final service', subtype: success, type: workflow_edge,
-  workflow: 'Workflow Regression S: conditional skip query with skip value set to
+  workflow: 'Regression Workflow S: conditional skip query with skip value set to
     False'}
-- {destination: '[Workflow Regression S: conditional skip query with skip value set
-    to False] Post-success service', label: failure, source: '[Workflow Regression
+- {destination: '[Regression Workflow S: conditional skip query with skip value set
+    to False] Post-success service', label: failure, source: '[Regression Workflow
     S: conditional skip query with skip value set to False] Skip Washington with Skip
-    value == False', subtype: failure, type: workflow_edge, workflow: 'Workflow Regression
-    S: conditional skip query with skip value set to False'}
+    value == False', subtype: failure, type: workflow_edge, workflow: 'Regression
+    Workflow S: conditional skip query with skip value set to False'}

@@ -228,7 +228,7 @@ class AutomationController(BaseController):
         service_id, state = path.split(">")[-1], None
         service = db.fetch("service", id=service_id, allow_none=True)
         if not service:
-            return {}
+            raise db.rbac_error
         runs = db.fetch_all("run", service_id=service_id)
         if not runtime:
             runtime = "latest"

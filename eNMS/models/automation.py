@@ -812,10 +812,13 @@ class Run(AbstractBase):
         if skip_service or self.skip:
             if device:
                 self.write_state("progress/device/skipped", 1, "increment")
-            return {
+            results = {
                 "result": "skipped",
+                "duration": "0:00:00",
                 "success": self.skip_value == "True",
             }
+            self.create_result({"runtime": app.get_time(), **results}, device)
+            return results
         results = {}
         try:
             if self.restart_run and self.service.type == "workflow":

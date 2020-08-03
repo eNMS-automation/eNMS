@@ -11,6 +11,8 @@ Version 3.22.3
 - Add regression workflow with lots of service for scalability testing
 - Add regression workflow for skipped service in workflow targets SxS run mode
 - Fix rest call service local() scope bug
+- Fix get var / set var "devices" keyword bug
+- Add jump on connect parameters for netmiko backup service
 
 Version 3.22.2
 --------------

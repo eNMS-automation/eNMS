@@ -53,10 +53,11 @@ class NetmikoPromptsService(ConnectionService):
                 if not send_string:
                     break
                 command = run.sub(send_string, locals())
-                commands.append(command)
+                clean_command = command.replace(netmiko_connection.password, "********")
+                commands.append(clean_command)
                 run.log(
                     "info",
-                    f"Sending '{command}' with Netmiko",
+                    f"Sending '{clean_command}' with Netmiko",
                     device,
                     logger="security",
                 )
@@ -67,7 +68,12 @@ class NetmikoPromptsService(ConnectionService):
                 results[command] = {"result": result, "match": confirmation}
             run.exit_remote_device(netmiko_connection, prompt, device)
         except Exception:
-            result = netmiko_connection.session_log.getvalue().decode().lstrip("\u0000")
+            result = (
+                netmiko_connection.session_log.getvalue()
+                .decode()
+                .lstrip("\u0000")
+                .replace(netmiko_connection.password, "********")
+            )
             return {
                 **results,
                 **{

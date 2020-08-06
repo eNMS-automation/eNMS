@@ -337,7 +337,7 @@ function initFramework() {
       selectionIndicator : false,
     });
     viewer.scene.primitives.add(polylines);
-    handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.map);
+    handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
     handler.setInputAction(onClick3d, Cesium.ScreenSpaceEventType.LEFT_CLICK);
   }
 }

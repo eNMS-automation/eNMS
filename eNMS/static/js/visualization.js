@@ -131,7 +131,7 @@ function createLink3d(link) {
       link.source_longitude, link.source_latitude,
       link.destination_longitude, link.destination_latitude
     ]),
-    width : 4
+    width : 1
   });
 }
 

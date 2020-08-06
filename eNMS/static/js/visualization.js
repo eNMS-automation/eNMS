@@ -50,7 +50,7 @@ let logicalLinks = [];
 let routerIcon;
 let viewer;
 let handler;
-let polylines = new Cesium.PolylineCollection();
+let polylines;
 
 function switchLayer(layerType) {
   map.removeLayer(layer);
@@ -131,7 +131,7 @@ function createLink3d(link) {
       link.source_longitude, link.source_latitude,
       link.destination_longitude, link.destination_latitude
     ]),
-    width : 1
+    width: 1
   });
 }
 
@@ -329,6 +329,7 @@ function initFramework() {
     }
     routerIcon = window["icon_router"];
   } else {
+    polylines = new Cesium.PolylineCollection();
     viewer = new Cesium.Viewer("map", {
       timeline: false,
       geocoder: false,
@@ -344,7 +345,7 @@ function initFramework() {
 function onClick3d(click) {
   console.log(click.position)
   const node = viewer.scene.pick(click.position);
-  console.log(node)
+  console.log(viewer.scene.pick(click.position));
   if (node) {
     if (node.type == "site") {
       showPoolView(node.id);

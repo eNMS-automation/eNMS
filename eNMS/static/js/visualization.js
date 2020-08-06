@@ -50,6 +50,7 @@ let logicalLinks = [];
 let routerIcon;
 let viewer;
 let handler;
+let polylines = new Cesium.PolylineCollection();
 
 function switchLayer(layerType) {
   map.removeLayer(layer);
@@ -120,6 +121,21 @@ function createNode2d(node, nodeType) {
 }
 
 function createLink(link) {
+  (dimension == "2D" ? createLink2d : createLink3d)(link);
+}
+
+function createLink3d(link) {
+  polylines.add({
+    id: 4,
+    positions : Cesium.Cartesian3.fromDegreesArray([
+      link.source_longitude, link.source_latitude,
+      link.destination_longitude, link.destination_latitude
+    ]),
+    width : 4
+  });
+}
+
+function createLink2d(link) {
   if (clustered) return;
   let pointA = new L.LatLng(link.source_latitude, link.source_longitude);
   let pointB = new L.LatLng(link.destination_latitude, link.destination_longitude);
@@ -180,7 +196,7 @@ Object.assign(action, {
 function updateView(withCluster) {
   deleteAll();
   clustered = withCluster;
-  if (viewType == "network") {
+  if (viewType.includes("network")) {
     call({
       url: "/get_view_topology",
       callback: function (topology) {
@@ -319,6 +335,7 @@ function initFramework() {
       animation : false,
       selectionIndicator : false,
     });
+    viewer.scene.primitives.add(polylines);
     handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.map);
     handler.setInputAction(onClick3d, Cesium.ScreenSpaceEventType.LEFT_CLICK);
   }

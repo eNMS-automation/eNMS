@@ -49,6 +49,7 @@ let logicalDevices = [];
 let logicalLinks = [];
 let routerIcon;
 let viewer;
+let handler;
 
 function switchLayer(layerType) {
   map.removeLayer(layer);
@@ -203,8 +204,6 @@ function updateView(withCluster) {
   }
   if (dimension == "2D") {
     map[clustered ? "addLayer" : "removeLayer"](markerGroup);
-  } else {
-
   }
 }
 
@@ -320,6 +319,21 @@ function initFramework() {
       animation : false,
       selectionIndicator : false,
     });
+    handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.map);
+    handler.setInputAction(onClick3d, Cesium.ScreenSpaceEventType.LEFT_CLICK);
+  }
+}
+
+function onClick3d(click) {
+  console.log(click.position)
+  const node = viewer.scene.pick(click.position);
+  console.log(node)
+  if (node) {
+    if (node.type == "site") {
+      showPoolView(node.id);
+    } else {
+      showTypePanel(node.type, node.id);
+    }
   }
 }
 

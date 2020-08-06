@@ -48,6 +48,7 @@ let selected;
 let logicalDevices = [];
 let logicalLinks = [];
 let routerIcon;
+let viewer;
 
 function switchLayer(layerType) {
   map.removeLayer(layer);
@@ -66,6 +67,14 @@ function createNode(node, nodeType) {
 }
 
 function createNode3d(node, nodeType) {
+  viewer.entities.add({
+    id: node.id,
+    position: Cesium.Cartesian3.fromDegrees(node.longitude, node.latitude),
+    billboard: {
+      image: "../static/img/stay.gif",
+      scaleByDistance: new Cesium.NearFarScalar(1.5e2, 2.0, 1.5e7, 0.5),
+    },
+  });
 }
 
 function createNode2d(node, nodeType) {
@@ -305,7 +314,7 @@ function initFramework() {
     }
     routerIcon = window["icon_router"];
   } else {
-    let viewer = new Cesium.Viewer("map", {
+    viewer = new Cesium.Viewer("map", {
       timeline: false,
       geocoder: false,
       animation : false,

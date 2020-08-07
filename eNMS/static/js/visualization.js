@@ -126,7 +126,7 @@ function createLink(link) {
 
 function createLink3d(link) {
   polylines.add({
-    id: 4,
+    id: link.id,
     positions : Cesium.Cartesian3.fromDegreesArray([
       link.source_longitude, link.source_latitude,
       link.destination_longitude, link.destination_latitude
@@ -343,13 +343,15 @@ function initFramework() {
 }
 
 function onClick3d(click) {
-  const node = viewer.scene.pick(click.position);
-  if (node) {
-    const properties = node.id._properties;
-    if (node.type == "site") {
-      showPoolView(properties._id._value);
+  const instance = viewer.scene.pick(click.position);
+  if (instance) {
+    const isLink = typeof instance.id == "number";
+    const id = isLink ? instance.id : instance.id._properties._id._value;
+    const type = isLink ? "link" : instance.id._properties._type._value;
+    if (type == "site") {
+      showPoolView(id);
     } else {
-      showTypePanel(properties._type._value, properties._id._value);
+      showTypePanel(type, id);
     }
   }
 }

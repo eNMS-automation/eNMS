@@ -70,7 +70,7 @@ function createNode(node, nodeType) {
 
 function createNode3d(node, nodeType) {
   viewer.entities.add({
-    id: node.id,
+    properties: node,
     position: Cesium.Cartesian3.fromDegrees(node.longitude, node.latitude),
     billboard: {
       image: "../static/img/stay.gif",
@@ -343,14 +343,13 @@ function initFramework() {
 }
 
 function onClick3d(click) {
-  console.log(click.position)
   const node = viewer.scene.pick(click.position);
-  console.log(viewer.scene.pick(click.position));
   if (node) {
+    const properties = node.id._properties;
     if (node.type == "site") {
-      showPoolView(node.id);
+      showPoolView(properties._id._value);
     } else {
-      showTypePanel(node.type, node.id);
+      showTypePanel(properties._type._value, properties._id._value);
     }
   }
 }

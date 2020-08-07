@@ -131,6 +131,9 @@ function createLink3d(link) {
       link.source_longitude, link.source_latitude,
       link.destination_longitude, link.destination_latitude
     ]),
+    material : Cesium.Material.fromType('Color', {
+      color : Cesium.Color.fromCssColorString(link.color.trim())
+    }),
     width: 1
   });
 }
@@ -344,6 +347,7 @@ function initFramework() {
 
 function onClick3d(click) {
   const instance = viewer.scene.pick(click.position);
+  console.log(instance)
   if (instance) {
     const isLink = typeof instance.id == "number";
     const id = isLink ? instance.id : instance.id._properties._id._value;

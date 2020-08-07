@@ -24,3 +24,8 @@ intrinsic (Safari) - moz (Firefox) - webkit (Chrome) */
 .cesium-widget-credits{
   display:none !important;
 }
+
+/* don't display node ID on node click */
+.cesium-viewer-infoBoxContainer {
+  display:none !important;
+}

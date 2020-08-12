@@ -1,6 +1,6 @@
 {% extends "base_site.html" %} {% block title %} Geographical View {% endblock title %}
 {% block stylesheets %} {{ super() }}
-{% if view_type in ("network", "site") %}
+{% if dimension == "2D" %}
 <link
   href="{{ url_for('static', filename='lib/leaflet/leaflet.min.css') }}"
   rel="stylesheet"
@@ -81,10 +81,9 @@
 </nav>
 {% endif %} {% endblock content %} {% block javascripts %} {{ super()}}
 <script>
-  let viewType = "{{ view_type }}";
-  let dimension = viewType == "3d_network" ? "3D" : "2D";
+  let dimension = "{{ dimension }}";
 </script>
-{% if view_type in ("network", "site") %}
+{% if dimension == "2D" %}
   <script src="{{ url_for('static', filename='lib/leaflet/leaflet.min.js') }}"></script>
   <script src="{{ url_for('static', filename='lib/leaflet-markercluster/leaflet.markercluster.min.js') }}"></script>
 {% else %}

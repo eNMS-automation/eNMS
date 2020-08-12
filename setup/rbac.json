@@ -29,11 +29,8 @@
     "Visualization": {
       "icon": "map-marker",
       "pages": {
-        "Network": {
-          "2D": "/view/network",
-          "3D": "/view/3d_network"
-        },
-        "Sites": "/view/site"
+        "2D Network": "/visualization/2D",
+        "3D Network": "/visualization/3D"
       }
     },
     "Automation": {

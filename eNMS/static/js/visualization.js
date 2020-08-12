@@ -68,11 +68,12 @@ function createNode(node, nodeType) {
 }
 
 function createNode3d(node, nodeType) {
+  const icon = nodeType === "device" ? node.icon || "router" : "site";
   markersArray.push(viewer.entities.add({
     properties: node,
     position: Cesium.Cartesian3.fromDegrees(node.longitude, node.latitude),
     billboard: {
-      image: `../static/img/view/3D/${node.icon || "router"}.gif`,
+      image: `../static/img/view/3D/${icon}.gif`,
       scaleByDistance: new Cesium.NearFarScalar(1.5e2, 2.0, 1.5e7, 0.5),
     },
   }));

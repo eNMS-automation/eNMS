@@ -373,7 +373,7 @@ export function initView() {
       selectedObject = null;
     },
   });
-  $("#view-type").change(updateView);
+  $("#view-type").change(() => updateView());
   Object.assign(action, {
     Properties: (o) => showTypePanel(o.type, o.id),
     Connect: (d) => showConnectionPanel(d),

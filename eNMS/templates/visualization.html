@@ -60,7 +60,6 @@
   </li>
 </ul>
 <div id="map"></div>
-{% if view_type == "network" %}
 <nav class="navbar navbar-default controls nav-controls" role="navigation">
   <input id="view-type" type="checkbox" checked data-toggle="toggle" data-on="Network" data-off="Sites">
   <button style="margin-left: 5px" type="button" id="device-filtering" class="btn btn-primary btn-search">
@@ -79,7 +78,7 @@
     <span class="glyphicon glyphicon-refresh"></span>
   </button>
 </nav>
-{% endif %} {% endblock content %} {% block javascripts %} {{ super()}}
+{% endblock content %} {% block javascripts %} {{ super()}}
 <script>
   let dimension = "{{ dimension }}";
 </script>

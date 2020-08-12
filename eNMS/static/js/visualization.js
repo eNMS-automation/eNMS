@@ -68,14 +68,14 @@ function createNode(node, nodeType) {
 }
 
 function createNode3d(node, nodeType) {
-  viewer.entities.add({
+  markersArray.push(viewer.entities.add({
     properties: node,
     position: Cesium.Cartesian3.fromDegrees(node.longitude, node.latitude),
     billboard: {
       image: "../static/img/stay.gif",
       scaleByDistance: new Cesium.NearFarScalar(1.5e2, 2.0, 1.5e7, 0.5),
     },
-  });
+  }));
 }
 
 function createNode2d(node, nodeType) {
@@ -124,7 +124,7 @@ function createLink(link) {
 }
 
 function createLink3d(link) {
-  polylines.add({
+  polylinesArray.push(polylines.add({
     id: link.id,
     positions: Cesium.Cartesian3.fromDegreesArray([
       link.source_longitude,
@@ -136,7 +136,7 @@ function createLink3d(link) {
       color: Cesium.Color.fromCssColorString(link.color.trim()),
     }),
     width: 1,
-  });
+  }));
 }
 
 function createLink2d(link) {
@@ -178,7 +178,13 @@ function deleteAllDevices() {
 }
 
 function deleteAllLinks() {
-  polylinesArray.map((l) => l.removeFrom(map));
+  polylinesArray.map((polyline) => {
+    if (dimension == "2D") {
+      polyline.removeFrom(map);
+    } else {
+      polylines.remove(polyline)
+    }
+  });
   polylinesArray = [];
 }
 
@@ -348,7 +354,6 @@ function initFramework() {
 
 function onClick3d(click) {
   const instance = viewer.scene.pick(click.position);
-  console.log(instance);
   if (instance) {
     const isLink = typeof instance.id == "number";
     const id = isLink ? instance.id : instance.id._properties._id._value;

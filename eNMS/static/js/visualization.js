@@ -351,7 +351,13 @@ function initFramework() {
     viewer.scene.primitives.add(polylines);
     handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
     handler.setInputAction(onClick3d, Cesium.ScreenSpaceEventType.LEFT_CLICK);
+    handler.setInputAction(changeCursor, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
   }
+}
+
+function changeCursor(click) {
+  const instance = viewer.scene.pick(click.endPosition);
+  document.body.style.cursor = instance ? "pointer" : "default";
 }
 
 function onClick3d(click) {

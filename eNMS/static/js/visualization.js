@@ -72,7 +72,7 @@ function createNode3d(node, nodeType) {
     properties: node,
     position: Cesium.Cartesian3.fromDegrees(node.longitude, node.latitude),
     billboard: {
-      image: "../static/img/stay.gif",
+      image: "../static/img/view/3D/router.gif",
       scaleByDistance: new Cesium.NearFarScalar(1.5e2, 2.0, 1.5e7, 0.5),
     },
   }));
@@ -239,7 +239,7 @@ function deviceToNode(device) {
   const logicalDevice = {
     id: device.id,
     label: device.name,
-    image: `/static/img/view/${device.icon}.gif`,
+    image: `/static/img/view/2D/${device.icon}.gif`,
     shape: "image",
   };
   logicalDevices[device.id] = device;
@@ -333,7 +333,7 @@ function initFramework() {
       });
     for (const [key, value] of Object.entries(iconSizes)) {
       window[`icon_${key}`] = L.icon({
-        iconUrl: `../static/img/view/${key}.gif`,
+        iconUrl: `../static/img/view/2D/${key}.gif`,
         iconSize: value,
         iconAnchor: [9, 6],
         popupAnchor: [8, -5],

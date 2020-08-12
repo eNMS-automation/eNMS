@@ -374,6 +374,9 @@ export function initView() {
       selectedObject = null;
     },
   });
+  $("#view-type").change(function() {
+    console.log("test");
+  });
   Object.assign(action, {
     Properties: (o) => showTypePanel(o.type, o.id),
     Connect: (d) => showConnectionPanel(d),

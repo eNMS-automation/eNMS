@@ -72,7 +72,7 @@ function createNode3d(node, nodeType) {
     properties: node,
     position: Cesium.Cartesian3.fromDegrees(node.longitude, node.latitude),
     billboard: {
-      image: "../static/img/view/3D/router.gif",
+      image: `../static/img/view/3D/${node.icon || "router"}.gif`,
       scaleByDistance: new Cesium.NearFarScalar(1.5e2, 2.0, 1.5e7, 0.5),
     },
   }));

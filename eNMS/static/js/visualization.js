@@ -168,7 +168,9 @@ function createLink2d(link) {
 
 function deleteAllDevices() {
   for (let i = 0; i < markersArray.length; i++) {
-    if (clustered) {
+    if (dimension == "3D") {
+      viewer.entities.remove(markersArray[i]);
+    } else if (clustered) {
       markerGroup.removeLayer(markersArray[i]);
     } else {
       markersArray[i].removeFrom(map);

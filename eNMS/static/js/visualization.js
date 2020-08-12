@@ -5,7 +5,6 @@ dimension: false
 settings: true
 jsPanel: false
 L: false
-viewType: false
 vis: false
 */
 
@@ -201,7 +200,7 @@ Object.assign(action, {
 function updateView(withCluster) {
   deleteAll();
   clustered = withCluster;
-  if (viewType.includes("network")) {
+  if ($("#view-type").prop("checked")) {
     call({
       url: "/get_view_topology",
       callback: function (topology) {
@@ -374,9 +373,7 @@ export function initView() {
       selectedObject = null;
     },
   });
-  $("#view-type").change(function() {
-    console.log("test");
-  });
+  $("#view-type").change(updateView);
   Object.assign(action, {
     Properties: (o) => showTypePanel(o.type, o.id),
     Connect: (d) => showConnectionPanel(d),

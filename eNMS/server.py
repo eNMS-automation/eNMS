@@ -291,7 +291,7 @@ class Server(Flask):
         @blueprint.route("/logical_view")
         @self.monitor_requests
         def logical_view():
-            return render_template("logical_view.html", endpoint="view")
+            return render_template("logical_view.html", endpoint="logical")
 
         @blueprint.route("/workflow_builder")
         @self.monitor_requests

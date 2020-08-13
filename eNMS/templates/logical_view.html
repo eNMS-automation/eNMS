@@ -7,7 +7,24 @@
 {% endblock stylesheets %} {% block content %}
 <form id="device-filtering-form" class="overlay"></form>
 <form id="link-filtering-form" class="overlay"></form>
-<div id="map"></div>
-{% endif %} {% endblock content %} {% block javascripts %} {{ super()}}
-<script src="{{ url_for('static', filename='lib/3d-force-graph/3d-force-graph.js') }}"></script>
+<div id="3d-graph"></div>
+{% endblock content %} {% block javascripts %} {{ super()}}
+<script src="{{ url_for('static', filename='lib/3d-force-graph/3d-force-graph.min.js') }}"></script>
+<script>
+  // Random tree
+  const N = 300;
+  const gData = {
+    nodes: [...Array(N).keys()].map(i => ({ id: i })),
+    links: [...Array(N).keys()]
+      .filter(id => id)
+      .map(id => ({
+        source: id,
+        target: Math.round(Math.random() * (id-1))
+      }))
+  };
+
+  const Graph = ForceGraph3D()
+    (document.getElementById('3d-graph'))
+      .graphData(gData);
+</script>
 {% endblock javascripts %}

@@ -5240,6 +5240,10 @@
   driver: a10
   enable_mode: true
   events: []
+  exit_command: ''
+  expect_password_prompt: ''
+  expect_prompt: ''
+  expect_username_prompt: ''
   fast_cli: false
   global_delay_factor: 1.0
   impacting: true
@@ -5250,6 +5254,9 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jump_command: ''
+  jump_on_connect: false
+  jump_username: ''
   last_modified: '2020-06-01 10:08:24.484251'
   log_level: 1
   mail_recipient: ''
@@ -8125,6 +8132,10 @@
   driver: a10
   enable_mode: true
   events: []
+  exit_command: ''
+  expect_password_prompt: ''
+  expect_prompt: ''
+  expect_username_prompt: ''
   fast_cli: false
   global_delay_factor: 1.0
   impacting: true
@@ -8135,6 +8146,9 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
+  jump_command: ''
+  jump_on_connect: false
+  jump_username: ''
   last_modified: '2020-05-30 06:09:05.488720'
   log_level: 1
   mail_recipient: ''

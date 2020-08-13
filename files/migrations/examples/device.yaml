@@ -1,6 +1,4 @@
-- attributes:
-    '1': ['2', three]
-  custom_multiselect: [a, c]
+- custom_multiselect: [a, c]
   custom_select: b
   description: Jackson
   down: false
@@ -30,9 +28,7 @@
   type: device
   username: cisco
   vendor: Cisco
-- attributes:
-    '1': ['2', three]
-  custom_multiselect: [a, c]
+- custom_multiselect: [a, c]
   custom_select: b
   description: PaloAlto
   down: false
@@ -62,9 +58,7 @@
   type: device
   username: cisco
   vendor: Cisco
-- attributes:
-    '1': ['2', three]
-  custom_multiselect: [a, c]
+- custom_multiselect: [a, c]
   custom_select: b
   description: Austin
   down: false
@@ -94,9 +88,7 @@
   type: device
   username: admin
   vendor: Arista
-- attributes:
-    '1': ['2', three]
-  custom_multiselect: [a, c]
+- custom_multiselect: [a, c]
   custom_select: b
   description: Washington
   down: false
@@ -126,9 +118,7 @@
   type: device
   username: admin
   vendor: Arista
-- attributes:
-    '1': ['2', three]
-  custom_multiselect: [a, c]
+- custom_multiselect: [a, c]
   custom_select: b
   description: Chicago
   down: false
@@ -158,9 +148,7 @@
   type: device
   username: admin
   vendor: Cisco
-- attributes:
-    '1': ['2', three]
-  custom_multiselect: [a, c]
+- custom_multiselect: [a, c]
   custom_select: b
   description: SanJose
   down: false
@@ -190,9 +178,7 @@
   type: device
   username: cisco
   vendor: Cisco
-- attributes:
-    '1': ['2', three]
-  custom_multiselect: [a, c]
+- custom_multiselect: [a, c]
   custom_select: b
   description: SanDiego
   down: false
@@ -222,9 +208,7 @@
   type: device
   username: cisco
   vendor: Cisco
-- attributes:
-    '1': ['2', three]
-  custom_multiselect: [a, c]
+- custom_multiselect: [a, c]
   custom_select: b
   description: Dallas
   down: false
@@ -254,9 +238,7 @@
   type: device
   username: cisco
   vendor: Cisco
-- attributes:
-    '1': ['2', three]
-  custom_multiselect: [a, c]
+- custom_multiselect: [a, c]
   custom_select: b
   description: Philadelphia
   down: false
@@ -286,9 +268,7 @@
   type: device
   username: cisco
   vendor: Cisco
-- attributes:
-    '1': ['2', three]
-  custom_multiselect: [a, c]
+- custom_multiselect: [a, c]
   custom_select: b
   description: LosAngeles
   down: false
@@ -318,9 +298,7 @@
   type: device
   username: cisco
   vendor: Cisco
-- attributes:
-    '1': ['2', three]
-  custom_multiselect: [a, c]
+- custom_multiselect: [a, c]
   custom_select: b
   description: Detroit
   down: false
@@ -350,9 +328,7 @@
   type: device
   username: cisco
   vendor: Cisco
-- attributes:
-    '1': ['2', three]
-  custom_multiselect: [a, c]
+- custom_multiselect: [a, c]
   custom_select: b
   description: Richmond
   down: false
@@ -382,9 +358,7 @@
   type: device
   username: cisco
   vendor: Cisco
-- attributes:
-    '1': ['2', three]
-  custom_multiselect: [a, c]
+- custom_multiselect: [a, c]
   custom_select: b
   description: Atlanta
   down: false
@@ -414,9 +388,7 @@
   type: device
   username: cisco
   vendor: Cisco
-- attributes:
-    '1': ['2', three]
-  custom_multiselect: [a, c]
+- custom_multiselect: [a, c]
   custom_select: b
   description: Boston
   down: false
@@ -446,9 +418,7 @@
   type: device
   username: admin
   vendor: Cisco
-- attributes:
-    '1': ['2', three]
-  custom_multiselect: [a, c]
+- custom_multiselect: [a, c]
   custom_select: b
   description: Houston
   down: false
@@ -478,9 +448,7 @@
   type: device
   username: admin
   vendor: Cisco
-- attributes:
-    '1': ['2', three]
-  custom_multiselect: [a, c]
+- custom_multiselect: [a, c]
   custom_select: b
   description: Baltimore
   down: false
@@ -510,9 +478,7 @@
   type: device
   username: admin
   vendor: Juniper
-- attributes:
-    '1': ['2', three]
-  custom_multiselect: [a, c]
+- custom_multiselect: [a, c]
   custom_select: b
   description: Cleveland
   down: false
@@ -542,9 +508,7 @@
   type: device
   username: admin
   vendor: Juniper
-- attributes:
-    '1': ['2', three]
-  custom_multiselect: [a, c]
+- custom_multiselect: [a, c]
   custom_select: b
   description: Columbus
   down: false
@@ -574,9 +538,7 @@
   type: device
   username: admin
   vendor: Juniper
-- attributes:
-    '1': ['2', three]
-  custom_multiselect: [a, c]
+- custom_multiselect: [a, c]
   custom_select: b
   description: Cincinnati
   down: false
@@ -606,9 +568,7 @@
   type: device
   username: admin
   vendor: Juniper
-- attributes:
-    '1': ['2', three]
-  custom_multiselect: [a, c]
+- custom_multiselect: [a, c]
   custom_select: b
   description: Cambridge
   down: false
@@ -638,9 +598,7 @@
   type: device
   username: admin
   vendor: Juniper
-- attributes:
-    '1': ['2', three]
-  custom_multiselect: [a, c]
+- custom_multiselect: [a, c]
   custom_select: b
   description: Minneapolis
   down: false
@@ -670,9 +628,7 @@
   type: device
   username: cisco
   vendor: Juniper
-- attributes:
-    '1': ['2', three]
-  custom_multiselect: [a, c]
+- custom_multiselect: [a, c]
   custom_select: b
   description: NewYork
   down: false
@@ -702,9 +658,7 @@
   type: device
   username: cisco
   vendor: Juniper
-- attributes:
-    '1': ['2', three]
-  custom_multiselect: [a, c]
+- custom_multiselect: [a, c]
   custom_select: b
   description: Sacramento
   down: false
@@ -734,9 +688,7 @@
   type: device
   username: cisco
   vendor: Juniper
-- attributes:
-    '1': ['2', three]
-  custom_multiselect: [a, c]
+- custom_multiselect: [a, c]
   custom_select: b
   description: SanFrancisco
   down: false
@@ -766,9 +718,7 @@
   type: device
   username: cisco
   vendor: Juniper
-- attributes:
-    '1': ['2', three]
-  custom_multiselect: [a, c]
+- custom_multiselect: [a, c]
   custom_select: b
   description: Orange
   down: false
@@ -798,9 +748,7 @@
   type: device
   username: cisco
   vendor: Juniper
-- attributes:
-    '1': ['2', three]
-  custom_multiselect: [a, c]
+- custom_multiselect: [a, c]
   custom_select: b
   description: Oakland
   down: false
@@ -830,9 +778,7 @@
   type: device
   username: cisco
   vendor: Cisco
-- attributes:
-    '1': ['2', three]
-  custom_multiselect: [a, c]
+- custom_multiselect: [a, c]
   custom_select: b
   description: Denver
   down: false
@@ -862,9 +808,7 @@
   type: device
   username: cisco
   vendor: Cisco
-- attributes:
-    '1': ['2', three]
-  custom_multiselect: [a, c]
+- custom_multiselect: [a, c]
   custom_select: b
   description: Denver
   down: false
@@ -894,9 +838,7 @@
   type: device
   username: admin
   vendor: Cisco
-- attributes:
-    '1': ['2', three]
-  custom_multiselect: [a, c]
+- custom_multiselect: [a, c]
   custom_select: b
   description: Washington
   down: false
@@ -927,8 +869,7 @@
   type: device
   username: admin
   vendor: linux
-- attributes: {}
-  custom_multiselect: [a, c]
+- custom_multiselect: [a, c]
   custom_select: b
   description: ''
   down: false

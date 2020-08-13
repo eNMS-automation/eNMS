@@ -349,7 +349,7 @@ function initFramework() {
     polylines = new Cesium.PolylineCollection();
     let providerViewModels = [
       new Cesium.ProviderViewModel({
-        name: "Open\u00adStreet\u00adMap",
+        name: "Open Street Map",
         iconUrl: Cesium.buildModuleUrl(
           "Widgets/Images/ImageryProviders/openStreetMap.png"
         ),

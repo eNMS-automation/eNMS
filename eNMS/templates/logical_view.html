@@ -1,0 +1,22 @@
+{% extends "base_site.html" %} {% block title %} Geographical View {% endblock title %}
+{% block stylesheets %} {{ super() }}
+<link
+  href="{{ url_for('static', filename='lib/leaflet/leaflet.min.css') }}"
+  rel="stylesheet"
+/>
+<link
+  href="{{ url_for('static', filename='lib/leaflet-markercluster/leaflet.markercluster.min.css') }}"
+  rel="stylesheet"
+/>
+<link
+  href="{{ url_for('static', filename='css/visualization.css') }}"
+  rel="stylesheet"
+/>
+{% endblock stylesheets %} {% block content %}
+<form id="device-filtering-form" class="overlay"></form>
+<form id="link-filtering-form" class="overlay"></form>
+<div id="map"></div>
+{% endif %} {% endblock content %} {% block javascripts %} {{ super()}}
+<script src="{{ url_for('static', filename='lib/leaflet/leaflet.min.js') }}"></script>
+<script src="{{ url_for('static', filename='lib/leaflet-markercluster/leaflet.markercluster.min.js') }}"></script>
+{% endblock javascripts %}

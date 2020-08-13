@@ -22,11 +22,6 @@
         "default": false,
         "type": "boolean"
       },
-      "attributes": {
-        "pretty_name": "Attributes",
-        "default": { "1": ["2", "three"] },
-        "type": "json"
-      },
       "property3": {
         "pretty_name": "Private property",
         "default": "password",

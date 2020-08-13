@@ -1,6 +1,5 @@
 {% extends "base_site.html" %} {% block title %} Geographical View {% endblock title %}
-{% block stylesheets %} {{ super() }}
-{% if dimension == "2D" %}
+{% block stylesheets %} {{ super() }} {% if dimension == "2D" %}
 <link
   href="{{ url_for('static', filename='lib/leaflet/leaflet.min.css') }}"
   rel="stylesheet"
@@ -61,8 +60,20 @@
 </ul>
 <div id="map"></div>
 <nav class="navbar navbar-default controls nav-controls" role="navigation">
-  <input id="view-type" type="checkbox" checked data-toggle="toggle" data-on="Network" data-off="Sites">
-  <button style="margin-left: 5px" type="button" id="device-filtering" class="btn btn-primary btn-search">
+  <input
+    id="view-type"
+    type="checkbox"
+    checked
+    data-toggle="toggle"
+    data-on="Network"
+    data-off="Sites"
+  />
+  <button
+    style="margin-left: 5px;"
+    type="button"
+    id="device-filtering"
+    class="btn btn-primary btn-search"
+  >
     <span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp;Device
   </button>
   <button type="button" id="link-filtering" class="btn btn-primary btn-search">
@@ -83,9 +94,8 @@
   let dimension = "{{ dimension }}";
 </script>
 {% if dimension == "2D" %}
-  <script src="{{ url_for('static', filename='lib/leaflet/leaflet.min.js') }}"></script>
-  <script src="{{ url_for('static', filename='lib/leaflet-markercluster/leaflet.markercluster.min.js') }}"></script>
+<script src="{{ url_for('static', filename='lib/leaflet/leaflet.min.js') }}"></script>
+<script src="{{ url_for('static', filename='lib/leaflet-markercluster/leaflet.markercluster.min.js') }}"></script>
 {% else %}
-  <script src="{{ url_for('static', filename='lib/cesium/Cesium.js') }}"></script>
-{% endif %}
-{% endblock javascripts %}
+<script src="{{ url_for('static', filename='lib/cesium/Cesium.js') }}"></script>
+{% endif %} {% endblock javascripts %}

@@ -1,6 +1,7 @@
 **/*.min.js
 **/*.min.css
 **/bundles
+**/cesium
 **/.webassets-cache
 *.py
 *.png

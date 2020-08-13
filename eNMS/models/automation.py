@@ -734,7 +734,7 @@ class Run(AbstractBase):
                 results["devices"] = {}
                 for result in self.results:
                     results["devices"][result.device.name] = result.result
-        result = db.factory("result", result=results, commit=commit, **result_kw)
+        db.factory("result", result=results, commit=commit, **result_kw)
         return results
 
     def run_service_job(self, payload, device):
@@ -750,12 +750,13 @@ class Run(AbstractBase):
                 if self.number_of_retries - retries:
                     retry = self.number_of_retries - retries
                     self.log("error", f"RETRY n°{retry}", device)
-                try:
-                    _, exec_variables = self.eval(
-                        self.service.preprocessing, function="exec", **locals()
-                    )
-                except SystemExit:
-                    pass
+                if self.service.preprocessing:
+                    try:
+                        self.eval(
+                            self.service.preprocessing, function="exec", **locals()
+                        )
+                    except SystemExit:
+                        pass
                 try:
                     results = self.service.job(self, payload, *args)
                 except Exception as exc:
@@ -770,7 +771,7 @@ class Run(AbstractBase):
                 self.convert_result(results)
                 if "success" not in results:
                     results["success"] = True
-                if (
+                if self.service.postprocessing and (
                     self.postprocessing_mode == "always"
                     or self.postprocessing_mode == "failure"
                     and not results["success"]

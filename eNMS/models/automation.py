@@ -697,13 +697,16 @@ class Run(AbstractBase):
                 with ThreadPool(processes=processes) as pool:
                     pool.map(self.get_device_result, process_args)
             else:
-                results = [self.get_results(payload, device) for device in self.devices]
+                results = [
+                    self.get_results(payload, device, commit=False)
+                    for device in self.devices
+                ]
             return {
                 "success": all(result["success"] for result in results),
                 "runtime": self.runtime,
             }
 
-    def create_result(self, results, device=None):
+    def create_result(self, results, device=None, commit=True):
         self.success = results["success"]
         results = self.make_results_json_compliant(results)
         result_kw = {
@@ -731,7 +734,7 @@ class Run(AbstractBase):
                 results["devices"] = {}
                 for result in self.results:
                     results["devices"][result.device.name] = result.result
-        result = db.factory("result", result=results, commit=True, **result_kw)
+        result = db.factory("result", result=results, commit=commit, **result_kw)
         return results
 
     def run_service_job(self, payload, device):
@@ -803,7 +806,7 @@ class Run(AbstractBase):
                 results = {"success": False, "result": result}
         return results
 
-    def get_results(self, payload, device=None):
+    def get_results(self, payload, device=None, commit=True):
         self.log("info", "STARTING", device)
         start = datetime.now().replace(microsecond=0)
         skip_service = False
@@ -817,7 +820,9 @@ class Run(AbstractBase):
                 "duration": "0:00:00",
                 "success": self.skip_value == "True",
             }
-            self.create_result({"runtime": app.get_time(), **results}, device)
+            self.create_result(
+                {"runtime": app.get_time(), **results}, device, commit=commit
+            )
             return results
         results = {}
         try:
@@ -857,7 +862,9 @@ class Run(AbstractBase):
         if device:
             status = "success" if results["success"] else "failure"
             self.write_state(f"progress/device/{status}", 1, "increment")
-            self.create_result({"runtime": app.get_time(), **results}, device)
+            self.create_result(
+                {"runtime": app.get_time(), **results}, device, commit=commit
+            )
         self.log("info", "FINISHED", device)
         if self.waiting_time:
             self.log("info", f"SLEEP {self.waiting_time} seconds...", device)

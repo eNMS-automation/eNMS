@@ -288,6 +288,11 @@ class Server(Flask):
                 "visualization.html", endpoint="view", dimension=dimension
             )
 
+        @blueprint.route("/logical_view")
+        @self.monitor_requests
+        def logical_view(dimension):
+            return render_template("logical_view.html", endpoint="view")
+
         @blueprint.route("/workflow_builder")
         @self.monitor_requests
         def workflow_builder():

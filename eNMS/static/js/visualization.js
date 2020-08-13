@@ -69,14 +69,16 @@ function createNode(node, nodeType) {
 
 function createNode3d(node, nodeType) {
   const icon = nodeType === "device" ? node.icon || "router" : "site";
-  markersArray.push(viewer.entities.add({
-    properties: node,
-    position: Cesium.Cartesian3.fromDegrees(node.longitude, node.latitude),
-    billboard: {
-      image: `../static/img/view/3D/${icon}.gif`,
-      scaleByDistance: new Cesium.NearFarScalar(1.5e2, 2.0, 1.5e7, 0.5),
-    },
-  }));
+  markersArray.push(
+    viewer.entities.add({
+      properties: node,
+      position: Cesium.Cartesian3.fromDegrees(node.longitude, node.latitude),
+      billboard: {
+        image: `../static/img/view/3D/${icon}.gif`,
+        scaleByDistance: new Cesium.NearFarScalar(1.5e2, 2.0, 1.5e7, 0.5),
+      },
+    })
+  );
 }
 
 function createNode2d(node, nodeType) {
@@ -125,19 +127,21 @@ function createLink(link) {
 }
 
 function createLink3d(link) {
-  polylinesArray.push(polylines.add({
-    id: link.id,
-    positions: Cesium.Cartesian3.fromDegreesArray([
-      link.source_longitude,
-      link.source_latitude,
-      link.destination_longitude,
-      link.destination_latitude,
-    ]),
-    material: Cesium.Material.fromType("Color", {
-      color: Cesium.Color.fromCssColorString(link.color.trim()),
-    }),
-    width: 1,
-  }));
+  polylinesArray.push(
+    polylines.add({
+      id: link.id,
+      positions: Cesium.Cartesian3.fromDegreesArray([
+        link.source_longitude,
+        link.source_latitude,
+        link.destination_longitude,
+        link.destination_latitude,
+      ]),
+      material: Cesium.Material.fromType("Color", {
+        color: Cesium.Color.fromCssColorString(link.color.trim()),
+      }),
+      width: 1,
+    })
+  );
 }
 
 function createLink2d(link) {
@@ -185,7 +189,7 @@ function deleteAllLinks() {
     if (dimension == "2D") {
       polyline.removeFrom(map);
     } else {
-      polylines.remove(polyline)
+      polylines.remove(polyline);
     }
   });
   polylinesArray = [];
@@ -343,11 +347,25 @@ function initFramework() {
     routerIcon = window["icon_router"];
   } else {
     polylines = new Cesium.PolylineCollection();
+    let providerViewModels = [
+      new Cesium.ProviderViewModel({
+        name: "Open\u00adStreet\u00adMap",
+        iconUrl: Cesium.buildModuleUrl(
+          "Widgets/Images/ImageryProviders/openStreetMap.png"
+        ),
+        creationFunction: function () {
+          return new Cesium.OpenStreetMapImageryProvider({
+            url: "http://tile.openstreetmap.org/",
+          });
+        },
+      }),
+    ];
     viewer = new Cesium.Viewer("map", {
       timeline: false,
       geocoder: false,
       animation: false,
       selectionIndicator: false,
+      imageryProviderViewModels: providerViewModels,
     });
     viewer.scene.primitives.add(polylines);
     handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
@@ -367,7 +385,8 @@ function onClick3d(click) {
     const isLink = typeof instance.id == "number";
     const id = isLink ? instance.id : instance.id._properties._id._value;
     const type = isLink ? "link" : instance.id._properties._type._value;
-    if (type == "site") {
+    console.log(type);
+    if (type == "pool") {
       showPoolView(id);
     } else {
       showTypePanel(type, id);

@@ -23,11 +23,9 @@
       }))
   };
 
-  const Graph = ForceGraph3D()
-    (document.getElementById('network'))
-      .graphData(gData);
-
-      Graph.width($(".main_frame").width() + 20);
-      Graph.height($(".main_frame").height() - 90);
+  const Graph = ForceGraph3D()(document.getElementById('network'));
+  Graph.graphData(gData);
+  Graph.width($(".main_frame").width() + 20);
+  Graph.height($(".main_frame").height() - 90);
 </script>
 {% endblock javascripts %}

@@ -409,7 +409,9 @@ function initLogicalView() {
       const Graph = ForceGraph3D()(document.getElementById("network"));
       Graph.width($(".main_frame").width() + 20);
       Graph.height($(".main_frame").height() - 90);
-      Graph.nodeThreeObject(({ icon }) => {
+      Graph
+        .backgroundColor("#FFFFFF")
+        .nodeThreeObject(({ icon }) => {
         // use a sphere as a drag handle
         const image = new THREE.Mesh(
           new THREE.SphereGeometry(7),
@@ -439,11 +441,13 @@ function initLogicalView() {
         })
         .linkDirectionalParticles("value")
         .linkDirectionalParticleSpeed((d) => d.value * 0.001)
+        .linkWidth(2)
+        .linkOpacity(.3)
         .linkThreeObjectExtend(true)
         .linkThreeObject((link) => {
           const sprite = new SpriteText(link.name);
-          sprite.color = "lightgrey";
-          sprite.textHeight = 1.5;
+          sprite.color = "#000000";
+          sprite.textHeight = 3;
           return sprite;
         })
         .linkPositionUpdate((sprite, { start, end }) => {

@@ -1,13 +1,9 @@
 {% extends "base_site.html" %} {% block title %} Geographical View {% endblock title %}
 {% block stylesheets %} {{ super() }}
-<link
-  href="{{ url_for('static', filename='lib/3d-force-graph/3d-force-graph.css') }}"
-  rel="stylesheet"
-/>
 {% endblock stylesheets %} {% block content %}
 <form id="device-filtering-form" class="overlay"></form>
 <form id="link-filtering-form" class="overlay"></form>
-<div id="3d-graph"></div>
+<div id="network"></div>
 {% endblock content %} {% block javascripts %} {{ super()}}
 <script src="{{ url_for('static', filename='lib/3d-force-graph/3d-force-graph.min.js') }}"></script>
 <script>
@@ -24,7 +20,7 @@
   };
 
   const Graph = ForceGraph3D()
-    (document.getElementById('3d-graph'))
+    (document.getElementById('network'))
       .graphData(gData);
 </script>
 {% endblock javascripts %}

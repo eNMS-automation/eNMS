@@ -420,15 +420,33 @@ export function initView() {
         const Graph = ForceGraph3D()(document.getElementById("network"));
         Graph.width($(".main_frame").width() + 20);
         Graph.height($(".main_frame").height() - 90);
-        Graph.graphData({
+        Graph
+        .nodeThreeObject(({ icon }) => {
+          // use a sphere as a drag handle
+          const obj = new THREE.Mesh(
+            new THREE.SphereGeometry(7),
+            new THREE.MeshBasicMaterial({ depthWrite: false, transparent: true, opacity: 0 })
+          );
+  
+          // add img sprite as child
+          const imgTexture = new THREE.TextureLoader().load(`../static/img/view/2D/${icon}.gif`);
+          const material = new THREE.SpriteMaterial({ map: imgTexture });
+          const sprite = new THREE.Sprite(material);
+          sprite.scale.set(12, 12);
+          obj.add(sprite);
+  
+          return obj;
+        })
+        .graphData({
           nodes: topology.devices,
           links: topology.links.map((link) => ({
             source: link.source_id,
             target: link.destination_id,
+            value: 5
           })),
         })
-          .linkDirectionalArrowLength(3.5)
-          .linkDirectionalArrowRelPos(1);
+        .linkDirectionalParticles("value")
+        .linkDirectionalParticleSpeed(d => d.value * 0.001);
       },
     });
   } else {

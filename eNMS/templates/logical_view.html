@@ -1,5 +1,9 @@
 {% extends "base_site.html" %} {% block title %} Geographical View {% endblock title %}
 {% block stylesheets %} {{ super() }}
+<link
+  href="{{ url_for('static', filename='css/visualization.css') }}"
+  rel="stylesheet"
+/>
 {% endblock stylesheets %} {% block content %}
 <form id="device-filtering-form" class="overlay"></form>
 <form id="link-filtering-form" class="overlay"></form>
@@ -22,5 +26,8 @@
   const Graph = ForceGraph3D()
     (document.getElementById('network'))
       .graphData(gData);
+
+      Graph.width($(".main_frame").width() + 20);
+      Graph.height($(".main_frame").height() - 90);
 </script>
 {% endblock javascripts %}

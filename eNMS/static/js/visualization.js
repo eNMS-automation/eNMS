@@ -39,7 +39,7 @@ let selectedObject;
 let markersArray = [];
 let polylinesArray = [];
 let layer;
-let markerType;
+let markerType = settings.view.marker;
 let map;
 let markerGroup;
 let clustered;
@@ -318,60 +318,68 @@ function displayPool(poolId, nodes, edges) {
   });
 }
 
-function initFramework() {
-  if (dimension == "2D") {
-    markerGroup = L.markerClusterGroup();
-    map = L.map("map", { preferCanvas: true }).setView(
-      [settings.view.latitude, settings.view.longitude],
-      settings.view.zoom_level
-    );
-    layer = L.tileLayer(layers[settings.view.tile_layer]);
-    map
-      .addLayer(layer)
-      .on("click", function (e) {
-        selectedObject = null;
-      })
-      .on("contextmenu", function () {
-        if (!selectedObject) {
-          $(".menu").hide();
-          $(".geo-menu").show();
-        }
-      });
-    for (const [key, value] of Object.entries(iconSizes)) {
-      window[`icon_${key}`] = L.icon({
-        iconUrl: `../static/img/view/3D/${key}.gif`,
-        iconSize: value,
-        iconAnchor: [9, 6],
-        popupAnchor: [8, -5],
-      });
-    }
-    routerIcon = window["icon_router"];
-  } else {
-    polylines = new Cesium.PolylineCollection();
-    let providerViewModels = [
-      new Cesium.ProviderViewModel({
-        name: "Open Street Map",
-        iconUrl: Cesium.buildModuleUrl(
-          "Widgets/Images/ImageryProviders/openStreetMap.png"
-        ),
-        creationFunction: function () {
-          return new Cesium.OpenStreetMapImageryProvider({
-            url: "http://tile.openstreetmap.org/",
-          });
-        },
-      }),
-    ];
-    viewer = new Cesium.Viewer("map", {
-      timeline: false,
-      geocoder: false,
-      animation: false,
-      selectionIndicator: false,
-      imageryProviderViewModels: providerViewModels,
+function init2dGeographicalFramework() {
+  markerGroup = L.markerClusterGroup();
+  map = L.map("map", { preferCanvas: true }).setView(
+    [settings.view.latitude, settings.view.longitude],
+    settings.view.zoom_level
+  );
+  layer = L.tileLayer(layers[settings.view.tile_layer]);
+  map
+    .addLayer(layer)
+    .on("click", function (e) {
+      selectedObject = null;
+    })
+    .on("contextmenu", function () {
+      if (!selectedObject) {
+        $(".menu").hide();
+        $(".geo-menu").show();
+      }
     });
-    viewer.scene.primitives.add(polylines);
-    handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
-    handler.setInputAction(onClick3d, Cesium.ScreenSpaceEventType.LEFT_CLICK);
-    handler.setInputAction(changeCursor, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
+  for (const [key, value] of Object.entries(iconSizes)) {
+    window[`icon_${key}`] = L.icon({
+      iconUrl: `../static/img/view/3D/${key}.gif`,
+      iconSize: value,
+      iconAnchor: [9, 6],
+      popupAnchor: [8, -5],
+    });
+  }
+  routerIcon = window["icon_router"];
+}
+
+function init3dGeographicalFramework() {
+  polylines = new Cesium.PolylineCollection();
+  let providerViewModels = [
+    new Cesium.ProviderViewModel({
+      name: "Open Street Map",
+      iconUrl: Cesium.buildModuleUrl(
+        "Widgets/Images/ImageryProviders/openStreetMap.png"
+      ),
+      creationFunction: function () {
+        return new Cesium.OpenStreetMapImageryProvider({
+          url: "http://tile.openstreetmap.org/",
+        });
+      },
+    }),
+  ];
+  viewer = new Cesium.Viewer("map", {
+    timeline: false,
+    geocoder: false,
+    animation: false,
+    selectionIndicator: false,
+    imageryProviderViewModels: providerViewModels,
+  });
+  viewer.scene.primitives.add(polylines);
+  handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
+  handler.setInputAction(onClick3d, Cesium.ScreenSpaceEventType.LEFT_CLICK);
+  handler.setInputAction(changeCursor, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
+}
+
+function initGeographicalFramework() {
+  if (dimension == "2D") {
+    init2dGeographicalFramework();
+  } else {
+    init3dGeographicalFramework();
   }
 }
 
@@ -413,8 +421,7 @@ export function initView() {
     Graph.width($(".main_frame").width() + 20);
     Graph.height($(".main_frame").height() - 90);
   } else {
-    initFramework();
-    markerType = settings.view.marker;
+    initGeographicalFramework();
     updateView();
     $("body").contextMenu({
       menuSelector: "#contextMenu",

@@ -26,6 +26,7 @@
 {% else %}
 <div id="map"></div>
 <ul id="contextMenu" class="dropdown-menu" role="menu">
+  {% if dimension == "2D" %}
   <li class="menu dropdown-submenu geo-menu">
     <a class="menu-submenu menu-layer" tabindex="-1" href="#"
       >Type of View<span class="caret-right"></span
@@ -54,6 +55,7 @@
       <li><a tabindex="-1" href="#">Circle Marker</a></li>
     </ul>
   </li>
+  {% endif %}
   <li class="menu rc-device-menu rc-link-menu rc-site-menu">
     <a tabindex="-1" href="#">Properties</a>
   </li>

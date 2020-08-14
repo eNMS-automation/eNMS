@@ -321,7 +321,7 @@ function displayPool(poolId, nodes, edges) {
 function initFramework() {
   if (dimension == "2D") {
     markerGroup = L.markerClusterGroup();
-    map = L.map("network", { preferCanvas: true }).setView(
+    map = L.map("map", { preferCanvas: true }).setView(
       [settings.view.latitude, settings.view.longitude],
       settings.view.zoom_level
     );
@@ -361,7 +361,7 @@ function initFramework() {
         },
       }),
     ];
-    viewer = new Cesium.Viewer("network", {
+    viewer = new Cesium.Viewer("map", {
       timeline: false,
       geocoder: false,
       animation: false,

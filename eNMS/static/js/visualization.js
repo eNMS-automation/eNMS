@@ -420,33 +420,35 @@ export function initView() {
         const Graph = ForceGraph3D()(document.getElementById("network"));
         Graph.width($(".main_frame").width() + 20);
         Graph.height($(".main_frame").height() - 90);
-        Graph
-        .nodeThreeObject(({ icon }) => {
+        Graph.nodeThreeObject(({ icon }) => {
           // use a sphere as a drag handle
-          const obj = new THREE.Mesh(
+          const image = new THREE.Mesh(
             new THREE.SphereGeometry(7),
-            new THREE.MeshBasicMaterial({ depthWrite: false, transparent: true, opacity: 0 })
+            new THREE.MeshBasicMaterial({
+              depthWrite: false,
+              transparent: true,
+              opacity: 0,
+            })
           );
-  
-          // add img sprite as child
-          const imgTexture = new THREE.TextureLoader().load(`../static/img/view/2D/${icon}.gif`);
-          const material = new THREE.SpriteMaterial({ map: imgTexture });
-          const sprite = new THREE.Sprite(material);
-          sprite.scale.set(12, 12);
-          obj.add(sprite);
-  
-          return obj;
+          const sprite = new THREE.Sprite(
+            new THREE.SpriteMaterial({
+              map: new THREE.TextureLoader().load(`../static/img/view/2D/${icon}.gif`),
+            })
+          );
+          sprite.scale.set(10, 10);
+          image.add(sprite);
+          return image;
         })
-        .graphData({
-          nodes: topology.devices,
-          links: topology.links.map((link) => ({
-            source: link.source_id,
-            target: link.destination_id,
-            value: 5
-          })),
-        })
-        .linkDirectionalParticles("value")
-        .linkDirectionalParticleSpeed(d => d.value * 0.001);
+          .graphData({
+            nodes: topology.devices,
+            links: topology.links.map((link) => ({
+              source: link.source_id,
+              target: link.destination_id,
+              value: 5,
+            })),
+          })
+          .linkDirectionalParticles("value")
+          .linkDirectionalParticleSpeed((d) => d.value * 0.001);
       },
     });
   } else {

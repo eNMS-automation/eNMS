@@ -413,7 +413,6 @@ function initLogicalView() {
       Graph
         .backgroundColor("#FFFFFF")
         .nodeThreeObject(({ icon }) => {
-        // use a sphere as a drag handle
         const image = new THREE.Mesh(
           new THREE.SphereGeometry(7),
           new THREE.MeshBasicMaterial({

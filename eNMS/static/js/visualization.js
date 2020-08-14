@@ -370,6 +370,7 @@ function init3dGeographicalFramework() {
     imageryProviderViewModels: providerViewModels,
   });
   viewer.scene.primitives.add(polylines);
+  viewer.scene.postProcessStages.fxaa.enabled = true;
   handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
   handler.setInputAction(onClick3d, Cesium.ScreenSpaceEventType.LEFT_CLICK);
   handler.setInputAction(changeCursor, Cesium.ScreenSpaceEventType.MOUSE_MOVE);

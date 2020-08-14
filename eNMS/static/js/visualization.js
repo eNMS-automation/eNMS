@@ -127,6 +127,7 @@ function createLink(link) {
 }
 
 function createLink3d(link) {
+  const color = Cesium.Color.fromCssColorString(link.color.trim()) || "#000000";
   polylinesArray.push(
     polylines.add({
       id: link.id,
@@ -137,7 +138,7 @@ function createLink3d(link) {
         link.destination_latitude,
       ]),
       material: Cesium.Material.fromType("Color", {
-        color: Cesium.Color.fromCssColorString(link.color.trim()),
+        color: color,
       }),
       width: 1,
     })

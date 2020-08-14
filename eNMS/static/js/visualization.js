@@ -394,7 +394,6 @@ function onClick3d(click) {
     const isLink = typeof instance.id == "number";
     const id = isLink ? instance.id : instance.id._properties._id._value;
     const type = isLink ? "link" : instance.id._properties._type._value;
-    console.log(type);
     if (type == "pool") {
       showPoolView(id);
     } else {
@@ -415,11 +414,21 @@ export function initView() {
           target: Math.round(Math.random() * (id - 1)),
         })),
     };
+    call({
+      url: "/get_view_topology",
+      callback: function (topology) {
+        const Graph = ForceGraph3D()(document.getElementById("network"));
+        Graph.width($(".main_frame").width() + 20);
+        Graph.height($(".main_frame").height() - 90);
+        console.log(topology.devices, topology.links)
+        Graph.graphData({
+          nodes: topology.devices,
+          links: topology.links.map((link) => ({source: link.source_id, target: link.destination_id}))
+        });
+      },
+    });
 
-    const Graph = ForceGraph3D()(document.getElementById("network"));
-    Graph.graphData(gData);
-    Graph.width($(".main_frame").width() + 20);
-    Graph.height($(".main_frame").height() - 90);
+
   } else {
     initGeographicalFramework();
     updateView();

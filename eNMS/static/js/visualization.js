@@ -420,15 +420,17 @@ export function initView() {
         const Graph = ForceGraph3D()(document.getElementById("network"));
         Graph.width($(".main_frame").width() + 20);
         Graph.height($(".main_frame").height() - 90);
-        console.log(topology.devices, topology.links)
         Graph.graphData({
           nodes: topology.devices,
-          links: topology.links.map((link) => ({source: link.source_id, target: link.destination_id}))
-        });
+          links: topology.links.map((link) => ({
+            source: link.source_id,
+            target: link.destination_id,
+          })),
+        })
+          .linkDirectionalArrowLength(3.5)
+          .linkDirectionalArrowRelPos(1);
       },
     });
-
-
   } else {
     initGeographicalFramework();
     updateView();

@@ -21,9 +21,8 @@
 {% endblock stylesheets %} {% block content %}
 <form id="device-filtering-form" class="overlay"></form>
 <form id="link-filtering-form" class="overlay"></form>
-{% if endpoint == "logical_view" %}
 <div id="network"></div>
-{% else %}
+{% if endpoint != "logical_view" %}
 <ul id="contextMenu" class="dropdown-menu" role="menu">
   <li class="menu dropdown-submenu geo-menu">
     <a class="menu-submenu menu-layer" tabindex="-1" href="#"
@@ -61,7 +60,6 @@
     <a tabindex="-1" href="#">Configuration</a>
   </li>
 </ul>
-<div id="map"></div>
 <nav class="navbar navbar-default controls nav-controls" role="navigation">
   <input
     id="view-type"
@@ -92,8 +90,8 @@
     <span class="glyphicon glyphicon-refresh"></span>
   </button>
 </nav>
-{% endif %} {% endblock content %} {% block javascripts %} {{ super()}}
-{% if endpoint == "logical_view" %}
+{% endif %} {% endblock content %} {% block javascripts %} {{ super()}} {% if endpoint
+== "logical_view" %}
 <script src="{{ url_for('static', filename='lib/3d-force-graph/3d-force-graph.min.js') }}"></script>
 {% else %}
 <script>

@@ -1,5 +1,5 @@
 from pathlib import Path
-from random import uniform
+from random import randrange, uniform
 from xlwt import easyxf, Workbook
 
 DEVICE_HEAHDERS = ("name", "longitude", "latitude", "subtype", "ip_address")
@@ -17,11 +17,19 @@ link_sheet = workbook.add_sheet("link")
 for index, header in enumerate(DEVICE_HEAHDERS):
     device_sheet.write(0, index, header)
 
-for i in range(1, 9000):
-    device_sheet.write(i, 0, "a" + str(i))
-    device_sheet.write(i, 1, uniform(-180.0, 180.0))
-    device_sheet.write(i, 2, uniform(-90.0, 90.0))
-    device_sheet.write(i, 3, "router")
-    device_sheet.write(i, 4, "a" + str(i))
+for index, header in enumerate(LINK_HEAHDERS):
+    link_sheet.write(0, index, header)
+
+for index in range(1, 9000):
+    device_sheet.write(index, 0, f"d{index}")
+    device_sheet.write(index, 1, uniform(-180.0, 180.0))
+    device_sheet.write(index, 2, uniform(-90.0, 90.0))
+    device_sheet.write(index, 3, "router")
+    device_sheet.write(index, 4, f"d{index}")
+    source, destination = randrange(9000), randrange(9000)
+    link_sheet.write(index, 0, f"d{source}-d{destination}")
+    link_sheet.write(index, 1, f"d{source}")
+    link_sheet.write(index, 2, f"d{destination}")
+    link_sheet.write(index, 3, f"#{hex(randrange(16777215))[2:]}")
 
 workbook.save(Path.cwd() / "test_65000.xls")

@@ -445,10 +445,24 @@ export function initView() {
               source: link.source_id,
               target: link.destination_id,
               value: 5,
+              ...link
             })),
           })
           .linkDirectionalParticles("value")
-          .linkDirectionalParticleSpeed((d) => d.value * 0.001);
+          .linkDirectionalParticleSpeed((d) => d.value * 0.001)
+          .linkThreeObjectExtend(true)
+          .linkThreeObject(link => {
+            const sprite = new SpriteText(link.name);
+            sprite.color = "lightgrey";
+            sprite.textHeight = 1.5;
+            return sprite;
+          })
+          .linkPositionUpdate((sprite, { start, end }) => {
+            const middlePos = Object.assign(...['x', 'y', 'z'].map(c => ({
+              [c]: start[c] + (end[c] - start[c]) / 2
+            })));
+            Object.assign(sprite.position, middlePos);
+          });
       },
     });
   } else {

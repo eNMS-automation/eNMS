@@ -10,22 +10,7 @@
 <div id="network"></div>
 {% endblock content %} {% block javascripts %} {{ super()}}
 <script src="{{ url_for('static', filename='lib/3d-force-graph/3d-force-graph.min.js') }}"></script>
+<script src="{{ url_for('static', filename='lib/cesium/Cesium.js') }}"></script>
 <script>
-  // Random tree
-  const N = 300;
-  const gData = {
-    nodes: [...Array(N).keys()].map(i => ({ id: i })),
-    links: [...Array(N).keys()]
-      .filter(id => id)
-      .map(id => ({
-        source: id,
-        target: Math.round(Math.random() * (id-1))
-      }))
-  };
-
-  const Graph = ForceGraph3D()(document.getElementById('network'));
-  Graph.graphData(gData);
-  Graph.width($(".main_frame").width() + 20);
-  Graph.height($(".main_frame").height() - 90);
 </script>
 {% endblock javascripts %}

@@ -395,39 +395,57 @@ function onClick3d(click) {
 }
 
 export function initView() {
-  initFramework();
-  markerType = settings.view.marker;
-  updateView();
-  $("body").contextMenu({
-    menuSelector: "#contextMenu",
-    menuSelected: function (selectedMenu) {
-      const row = selectedMenu.text();
-      action[row](selectedObject);
-      selectedObject = null;
-    },
-  });
-  $("#view-type").change(() => updateView());
-  Object.assign(action, {
-    Properties: (o) => showTypePanel(o.type, o.id),
-    Connect: (d) => showConnectionPanel(d),
-    Configuration: (d) => showDeviceData(d),
-  });
-  for (let type of ["device", "link"]) {
-    createTooltip({
-      autoshow: true,
-      persistent: true,
-      name: `${type}_filtering`,
-      target: `#${type}-filtering`,
-      container: `#${type}-filtering-form`,
-      size: "700 400",
-      position: {
-        my: "center-top",
-        at: "center-bottom",
-        offsetY: 10,
+  if (page == "logical_view") {
+    const N = 300;
+    const gData = {
+      nodes: [...Array(N).keys()].map(i => ({ id: i })),
+      links: [...Array(N).keys()]
+        .filter(id => id)
+        .map(id => ({
+          source: id,
+          target: Math.round(Math.random() * (id-1))
+        }))
+    };
+  
+    const Graph = ForceGraph3D()(document.getElementById('network'));
+    Graph.graphData(gData);
+    Graph.width($(".main_frame").width() + 20);
+    Graph.height($(".main_frame").height() - 90);
+  } else {
+    initFramework();
+    markerType = settings.view.marker;
+    updateView();
+    $("body").contextMenu({
+      menuSelector: "#contextMenu",
+      menuSelected: function (selectedMenu) {
+        const row = selectedMenu.text();
+        action[row](selectedObject);
+        selectedObject = null;
       },
-      url: `../form/${type}_filtering`,
-      title: `${type.charAt(0).toUpperCase() + type.slice(1)} Filtering`,
     });
+    $("#view-type").change(() => updateView());
+    Object.assign(action, {
+      Properties: (o) => showTypePanel(o.type, o.id),
+      Connect: (d) => showConnectionPanel(d),
+      Configuration: (d) => showDeviceData(d),
+    });
+    for (let type of ["device", "link"]) {
+      createTooltip({
+        autoshow: true,
+        persistent: true,
+        name: `${type}_filtering`,
+        target: `#${type}-filtering`,
+        container: `#${type}-filtering-form`,
+        size: "700 400",
+        position: {
+          my: "center-top",
+          at: "center-bottom",
+          offsetY: 10,
+        },
+        url: `../form/${type}_filtering`,
+        title: `${type.charAt(0).toUpperCase() + type.slice(1)} Filtering`,
+      });
+    }
   }
 }
 

@@ -43,4 +43,4 @@ for index in range(1, 9000):
     link_sheet.write(index, 2, f"d{destination}")
     link_sheet.write(index, 3, f"#{hex(randrange(16777215))[2:]}")
 
-workbook.save(Path.cwd() / "test_9000_nodes_links.xls")
+workbook.save(Path.cwd() / "topology_9000_nodes_links.xls")

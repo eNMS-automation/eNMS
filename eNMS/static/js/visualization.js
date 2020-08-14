@@ -245,7 +245,7 @@ function deviceToNode(device) {
   const logicalDevice = {
     id: device.id,
     label: device.name,
-    image: `/static/img/view/2D/${device.icon}.gif`,
+    image: `/static/img/view/3D/${device.icon}.gif`,
     shape: "image",
   };
   logicalDevices[device.id] = device;
@@ -339,7 +339,7 @@ function initFramework() {
       });
     for (const [key, value] of Object.entries(iconSizes)) {
       window[`icon_${key}`] = L.icon({
-        iconUrl: `../static/img/view/2D/${key}.gif`,
+        iconUrl: `../static/img/view/3D/${key}.gif`,
         iconSize: value,
         iconAnchor: [9, 6],
         popupAnchor: [8, -5],
@@ -399,16 +399,16 @@ export function initView() {
   if (page == "logical_view") {
     const N = 300;
     const gData = {
-      nodes: [...Array(N).keys()].map(i => ({ id: i })),
+      nodes: [...Array(N).keys()].map((i) => ({ id: i })),
       links: [...Array(N).keys()]
-        .filter(id => id)
-        .map(id => ({
+        .filter((id) => id)
+        .map((id) => ({
           source: id,
-          target: Math.round(Math.random() * (id-1))
-        }))
+          target: Math.round(Math.random() * (id - 1)),
+        })),
     };
-  
-    const Graph = ForceGraph3D()(document.getElementById('network'));
+
+    const Graph = ForceGraph3D()(document.getElementById("network"));
     Graph.graphData(gData);
     Graph.width($(".main_frame").width() + 20);
     Graph.height($(".main_frame").height() - 90);

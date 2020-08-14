@@ -92,16 +92,16 @@
     <span class="glyphicon glyphicon-refresh"></span>
   </button>
 </nav>
-{% endif %}
-{% endblock content %} {% block javascripts %} {{ super()}}
+{% endif %} {% endblock content %} {% block javascripts %} {{ super()}}
+{% if endpoint == "logical_view" %}
+<script src="{{ url_for('static', filename='lib/3d-force-graph/3d-force-graph.min.js') }}"></script>
+{% else %}
 <script>
   let dimension = "{{ dimension }}";
 </script>
-{% if endpoint == "logical_view" %}
-<script src="{{ url_for('static', filename='lib/3d-force-graph/3d-force-graph.min.js') }}"></script>
-{% elif dimension == "2D" %}
+{% if dimension == "2D" %}
 <script src="{{ url_for('static', filename='lib/leaflet/leaflet.min.js') }}"></script>
 <script src="{{ url_for('static', filename='lib/leaflet-markercluster/leaflet.markercluster.min.js') }}"></script>
 {% else %}
 <script src="{{ url_for('static', filename='lib/cesium/Cesium.js') }}"></script>
-{% endif %} {% endblock javascripts %}
+{% endif %} {% endif %} {% endblock javascripts %}

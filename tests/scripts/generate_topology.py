@@ -37,7 +37,7 @@ for index in range(1, 9000):
     device_sheet.write(index, 2, uniform(-90.0, 90.0))
     device_sheet.write(index, 3, choice(DEVICE_TYPES))
     device_sheet.write(index, 4, f"d{index}")
-    source, destination = randrange(9000), randrange(9000)
+    source, destination = randrange(1, 9000), randrange(1, 9000)
     link_sheet.write(index, 0, f"d{source}-d{destination}")
     link_sheet.write(index, 1, f"d{source}")
     link_sheet.write(index, 2, f"d{destination}")

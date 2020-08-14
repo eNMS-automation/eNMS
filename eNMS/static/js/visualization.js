@@ -404,16 +404,6 @@ function onClick3d(click) {
 
 export function initView() {
   if (page == "logical_view") {
-    const N = 300;
-    const gData = {
-      nodes: [...Array(N).keys()].map((i) => ({ id: i })),
-      links: [...Array(N).keys()]
-        .filter((id) => id)
-        .map((id) => ({
-          source: id,
-          target: Math.round(Math.random() * (id - 1)),
-        })),
-    };
     call({
       url: "/get_view_topology",
       callback: function (topology) {
@@ -445,23 +435,27 @@ export function initView() {
               source: link.source_id,
               target: link.destination_id,
               value: 5,
-              ...link
+              ...link,
             })),
           })
           .linkDirectionalParticles("value")
           .linkDirectionalParticleSpeed((d) => d.value * 0.001)
           .linkThreeObjectExtend(true)
-          .linkThreeObject(link => {
+          .linkThreeObject((link) => {
             const sprite = new SpriteText(link.name);
             sprite.color = "lightgrey";
             sprite.textHeight = 1.5;
             return sprite;
           })
           .linkPositionUpdate((sprite, { start, end }) => {
-            const middlePos = Object.assign(...['x', 'y', 'z'].map(c => ({
-              [c]: start[c] + (end[c] - start[c]) / 2
-            })));
-            Object.assign(sprite.position, middlePos);
+            Object.assign(
+              sprite.position,
+              Object.assign(
+                ...["x", "y", "z"].map((c) => ({
+                  [c]: start[c] + (end[c] - start[c]) / 2,
+                }))
+              )
+            );
           });
       },
     });

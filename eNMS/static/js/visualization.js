@@ -402,63 +402,67 @@ function onClick3d(click) {
   }
 }
 
+function initLogicalView() {
+  call({
+    url: "/get_view_topology",
+    callback: function (topology) {
+      const Graph = ForceGraph3D()(document.getElementById("network"));
+      Graph.width($(".main_frame").width() + 20);
+      Graph.height($(".main_frame").height() - 90);
+      Graph.nodeThreeObject(({ icon }) => {
+        // use a sphere as a drag handle
+        const image = new THREE.Mesh(
+          new THREE.SphereGeometry(7),
+          new THREE.MeshBasicMaterial({
+            depthWrite: false,
+            transparent: true,
+            opacity: 0,
+          })
+        );
+        const sprite = new THREE.Sprite(
+          new THREE.SpriteMaterial({
+            map: new THREE.TextureLoader().load(`../static/img/view/2D/${icon}.gif`),
+          })
+        );
+        sprite.scale.set(10, 10);
+        image.add(sprite);
+        return image;
+      })
+        .graphData({
+          nodes: topology.devices,
+          links: topology.links.map((link) => ({
+            source: link.source_id,
+            target: link.destination_id,
+            value: 5,
+            ...link,
+          })),
+        })
+        .linkDirectionalParticles("value")
+        .linkDirectionalParticleSpeed((d) => d.value * 0.001)
+        .linkThreeObjectExtend(true)
+        .linkThreeObject((link) => {
+          const sprite = new SpriteText(link.name);
+          sprite.color = "lightgrey";
+          sprite.textHeight = 1.5;
+          return sprite;
+        })
+        .linkPositionUpdate((sprite, { start, end }) => {
+          Object.assign(
+            sprite.position,
+            Object.assign(
+              ...["x", "y", "z"].map((c) => ({
+                [c]: start[c] + (end[c] - start[c]) / 2,
+              }))
+            )
+          );
+        });
+    },
+  });
+}
+
 export function initView() {
   if (page == "logical_view") {
-    call({
-      url: "/get_view_topology",
-      callback: function (topology) {
-        const Graph = ForceGraph3D()(document.getElementById("network"));
-        Graph.width($(".main_frame").width() + 20);
-        Graph.height($(".main_frame").height() - 90);
-        Graph.nodeThreeObject(({ icon }) => {
-          // use a sphere as a drag handle
-          const image = new THREE.Mesh(
-            new THREE.SphereGeometry(7),
-            new THREE.MeshBasicMaterial({
-              depthWrite: false,
-              transparent: true,
-              opacity: 0,
-            })
-          );
-          const sprite = new THREE.Sprite(
-            new THREE.SpriteMaterial({
-              map: new THREE.TextureLoader().load(`../static/img/view/2D/${icon}.gif`),
-            })
-          );
-          sprite.scale.set(10, 10);
-          image.add(sprite);
-          return image;
-        })
-          .graphData({
-            nodes: topology.devices,
-            links: topology.links.map((link) => ({
-              source: link.source_id,
-              target: link.destination_id,
-              value: 5,
-              ...link,
-            })),
-          })
-          .linkDirectionalParticles("value")
-          .linkDirectionalParticleSpeed((d) => d.value * 0.001)
-          .linkThreeObjectExtend(true)
-          .linkThreeObject((link) => {
-            const sprite = new SpriteText(link.name);
-            sprite.color = "lightgrey";
-            sprite.textHeight = 1.5;
-            return sprite;
-          })
-          .linkPositionUpdate((sprite, { start, end }) => {
-            Object.assign(
-              sprite.position,
-              Object.assign(
-                ...["x", "y", "z"].map((c) => ({
-                  [c]: start[c] + (end[c] - start[c]) / 2,
-                }))
-              )
-            );
-          });
-      },
-    });
+    initLogicalView();
   } else {
     initGeographicalFramework();
     updateView();

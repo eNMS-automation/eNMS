@@ -1,3 +1,4 @@
+from collections import Counter
 from pathlib import Path
 from random import choice, randrange, uniform
 from xlwt import easyxf, Workbook
@@ -31,16 +32,21 @@ for index, header in enumerate(DEVICE_HEAHDERS):
 for index, header in enumerate(LINK_HEADERS):
     link_sheet.write(0, index, header)
 
-for index in range(1, 9000):
+for index in range(1, 3000):
     device_sheet.write(index, 0, f"d{index}")
     device_sheet.write(index, 1, uniform(-180.0, 180.0))
     device_sheet.write(index, 2, uniform(-90.0, 90.0))
     device_sheet.write(index, 3, choice(DEVICE_TYPES))
     device_sheet.write(index, 4, f"d{index}")
-    source, destination = randrange(1, 9000), randrange(1, 9000)
-    link_sheet.write(index, 0, f"d{source}-d{destination}")
+
+device_counter = Counter()
+for index in range(1, 6000):
+    source, destination = randrange(1, 3000), randrange(1, 3000)
+    device_counter[f"d{source}-d{destination}"] += 1
+    number = device_counter[f"d{source}-d{destination}"]
+    link_sheet.write(index, 0, f"d{source}-d{destination}-{number}")
     link_sheet.write(index, 1, f"d{source}")
     link_sheet.write(index, 2, f"d{destination}")
     link_sheet.write(index, 3, f"#{hex(randrange(16777215))[2:]}")
 
-workbook.save(Path.cwd() / "topology_9000_nodes_links.xls")
+workbook.save(Path.cwd() / "topology_3000_nodes_6000_links.xls")

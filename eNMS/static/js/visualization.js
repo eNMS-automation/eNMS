@@ -44,8 +44,10 @@ let map;
 let markerGroup;
 let clustered;
 let selected;
-let logicalDevices = [];
-let logicalLinks = [];
+let logicalDevices = {};
+let logicalLinks = {};
+let geographicalDevices = {};
+let geographicalLinks = {};
 let routerIcon;
 let viewer;
 let handler;
@@ -64,11 +66,13 @@ function changeMarker(type) {
 
 function createNode(node, nodeType) {
   if (!node.latitude && !node.longitude) return;
+  geographicalDevices[node.id] = node;
   (dimension == "2D" ? createNode2d : createNode3d)(node, nodeType);
 }
 
 function createNode3d(node, nodeType) {
   const icon = nodeType === "device" ? node.icon || "router" : "site";
+
   markersArray.push(
     viewer.entities.add({
       properties: node,
@@ -123,6 +127,7 @@ function createNode2d(node, nodeType) {
 }
 
 function createLink(link) {
+  geographicalLinks[link.id] = link;
   (dimension == "2D" ? createLink2d : createLink3d)(link);
 }
 
@@ -373,6 +378,7 @@ function init3dGeographicalFramework() {
   viewer.scene.postProcessStages.fxaa.enabled = true;
   handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
   handler.setInputAction(onClick3d, Cesium.ScreenSpaceEventType.LEFT_CLICK);
+  handler.setInputAction(onRightClick3d, Cesium.ScreenSpaceEventType.RIGHT_CLICK);
   handler.setInputAction(changeCursor, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
 }
 
@@ -387,6 +393,21 @@ function initGeographicalFramework() {
 function changeCursor(click) {
   const instance = viewer.scene.pick(click.endPosition);
   document.body.style.cursor = instance ? "pointer" : "default";
+}
+
+function onRightClick3d(click) {
+  const instance = viewer.scene.pick(click.position);
+  console.log(instance);
+  if (instance) {
+    const nodeType = typeof instance.id == "number" ? "link" : "device";
+    selectedObject = (nodeType == "device" ? geographicalDevices : geographicalLinks)[
+      instance.id._properties._id._value
+    ];
+    $(`.rc-${nodeType == "device" ? "link" : "device"}-menu`).hide();
+    $(`.rc-${nodeType}-menu`).show();
+  } else {
+    selectedObject = null;
+  }
 }
 
 function onClick3d(click) {
@@ -410,26 +431,25 @@ function initLogicalView() {
       const Graph = ForceGraph3D()(document.getElementById("network"));
       Graph.width($(".main_frame").width() + 20);
       Graph.height($(".main_frame").height() - 90);
-      Graph
-        .backgroundColor("#FFFFFF")
+      Graph.backgroundColor("#FFFFFF")
         .nodeThreeObject(({ icon }) => {
-        const image = new THREE.Mesh(
-          new THREE.SphereGeometry(7),
-          new THREE.MeshBasicMaterial({
-            depthWrite: false,
-            transparent: true,
-            opacity: 0,
-          })
-        );
-        const sprite = new THREE.Sprite(
-          new THREE.SpriteMaterial({
-            map: new THREE.TextureLoader().load(`../static/img/view/2D/${icon}.gif`),
-          })
-        );
-        sprite.scale.set(10, 10);
-        image.add(sprite);
-        return image;
-      })
+          const image = new THREE.Mesh(
+            new THREE.SphereGeometry(7),
+            new THREE.MeshBasicMaterial({
+              depthWrite: false,
+              transparent: true,
+              opacity: 0,
+            })
+          );
+          const sprite = new THREE.Sprite(
+            new THREE.SpriteMaterial({
+              map: new THREE.TextureLoader().load(`../static/img/view/2D/${icon}.gif`),
+            })
+          );
+          sprite.scale.set(10, 10);
+          image.add(sprite);
+          return image;
+        })
         .graphData({
           nodes: topology.devices,
           links: topology.links.map((link) => ({
@@ -442,7 +462,7 @@ function initLogicalView() {
         .linkDirectionalParticles("value")
         .linkDirectionalParticleSpeed((d) => d.value * 0.001)
         .linkWidth(2)
-        .linkOpacity(.3)
+        .linkOpacity(0.3)
         .linkThreeObjectExtend(true)
         .linkThreeObject((link) => {
           const sprite = new SpriteText(link.name);

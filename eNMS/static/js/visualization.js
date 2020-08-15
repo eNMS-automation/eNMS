@@ -397,14 +397,12 @@ function changeCursor(click) {
 
 function onRightClick3d(click) {
   const instance = viewer.scene.pick(click.position);
-  console.log(instance);
   if (instance) {
-    const nodeType = typeof instance.id == "number" ? "link" : "device";
-    selectedObject = (nodeType == "device" ? geographicalDevices : geographicalLinks)[
-      instance.id._properties._id._value
-    ];
-    $(`.rc-${nodeType == "device" ? "link" : "device"}-menu`).hide();
-    $(`.rc-${nodeType}-menu`).show();
+    const isLink = typeof instance.id == "number";
+    const id = isLink ? instance.id : instance.id._properties._id._value;
+    selectedObject = (isLink ? geographicalLinks : geographicalDevices)[id];
+    $(`.rc-${isLink ? "device" : "link"}-menu`).hide();
+    $(`.rc-${isLink ? "link" : "device"}-menu`).show();
   } else {
     selectedObject = null;
   }

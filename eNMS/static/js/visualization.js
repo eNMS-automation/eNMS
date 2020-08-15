@@ -401,10 +401,12 @@ function onRightClick3d(click) {
     const isLink = typeof instance.id == "number";
     const id = isLink ? instance.id : instance.id._properties._id._value;
     selectedObject = (isLink ? geographicalLinks : geographicalDevices)[id];
-    $(`.rc-${isLink ? "device" : "link"}-menu`).hide();
-    $(`.rc-${isLink ? "link" : "device"}-menu`).show();
+    const menu = isLink ? "link" : selectedObject.type == "pool" ? "site" : "device";
+    $(".menu").hide();
+    $(`.rc-${menu}-menu`).show();
   } else {
     selectedObject = null;
+    $(".menu").hide();
   }
 }
 

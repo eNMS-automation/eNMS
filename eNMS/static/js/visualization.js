@@ -432,12 +432,9 @@ function initLogicalView() {
     url: "/get_view_topology",
     callback: function (topology) {
       const Graph = ForceGraph3D()(document.getElementById("network"));
-      Graph
-        .width($(".main_frame").width() + 20)
+      Graph.width($(".main_frame").width() + 20)
         .height($(".main_frame").height() - 90)
         .backgroundColor("#FFFFFF")
-        .linkDirectionalParticles("value")
-        .linkDirectionalParticleSpeed((d) => d.value * 0.001)
         .linkWidth(2)
         .linkOpacity(0.3)
         .linkThreeObjectExtend(true)
@@ -466,6 +463,10 @@ function initLogicalView() {
             ...link,
           })),
         });
+      if (viewSettings.display_link_traffic) {
+        Graph.linkDirectionalParticles("value");
+        Graph.linkDirectionalParticleSpeed((d) => d.value * viewSettings.traffic_speed);
+      }
       if (viewSettings.display_icons) {
         Graph.nodeThreeObject(({ icon }) => {
           const image = new THREE.Mesh(
@@ -484,7 +485,7 @@ function initLogicalView() {
           sprite.scale.set(10, 10);
           image.add(sprite);
           return image;
-        })
+        });
       }
     },
   });

@@ -120,7 +120,9 @@
       "_3D": {}
     },
     "logical": {
-      "display_icons": true
+      "display_icons": true,
+      "display_link_traffic": true,
+      "traffic_speed": 0.001
     }
   }
 }

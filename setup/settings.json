@@ -107,11 +107,17 @@
     "unseal_vault": false,
     "use_vault": false
   },
-  "view": {
-    "latitude": 33,
-    "longitude": -96,
-    "marker": "Image",
-    "tile_layer": "osm",
-    "zoom_level": 5
+  "visualization": {
+    "geographical": {
+      "_2D": {
+        "latitude": 33,
+        "longitude": -96,
+        "marker": "Image",
+        "tile_layer": "osm",
+        "zoom_level": 5
+      },
+      "_3D": {}
+    },
+    "logical": {}
   }
 }

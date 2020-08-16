@@ -39,7 +39,7 @@ let selectedObject;
 let markersArray = [];
 let polylinesArray = [];
 let layer;
-let markerType = settings.view.marker;
+let markerType;
 let map;
 let markerGroup;
 let clustered;
@@ -324,12 +324,14 @@ function displayPool(poolId, nodes, edges) {
 }
 
 function init2dGeographicalFramework() {
+  const settings2d = settings.visualization.geographical._2D;
+  markerType = settings2d.marker;
   markerGroup = L.markerClusterGroup();
   map = L.map("map", { preferCanvas: true }).setView(
-    [settings.view.latitude, settings.view.longitude],
-    settings.view.zoom_level
+    [settings2d.latitude, settings2d.longitude],
+    settings2d.zoom_level
   );
-  layer = L.tileLayer(layers[settings.view.tile_layer]);
+  layer = L.tileLayer(layers[settings2d.tile_layer]);
   map
     .addLayer(layer)
     .on("click", function (e) {

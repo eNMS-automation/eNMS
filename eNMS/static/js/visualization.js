@@ -435,8 +435,8 @@ function initLogicalView() {
       Graph.width($(".main_frame").width() + 20)
         .height($(".main_frame").height() - 90)
         .backgroundColor("#FFFFFF")
-        .linkWidth(2)
-        .linkOpacity(0.3)
+        .linkWidth(viewSettings.link_width)
+        .linkOpacity(viewSettings.link_opacity)
         .linkThreeObjectExtend(true)
         .linkThreeObject((link) => {
           const sprite = new SpriteText(link.name);
@@ -464,8 +464,9 @@ function initLogicalView() {
           })),
         });
       if (viewSettings.display_link_traffic) {
-        Graph.linkDirectionalParticles("value");
-        Graph.linkDirectionalParticleSpeed((d) => d.value * viewSettings.traffic_speed);
+        Graph.linkDirectionalParticles("value").linkDirectionalParticleSpeed(
+          (d) => d.value * viewSettings.traffic_speed
+        );
       }
       if (viewSettings.display_icons) {
         Graph.nodeThreeObject(({ icon }) => {

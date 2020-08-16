@@ -119,6 +119,8 @@
       },
       "_3D": {}
     },
-    "logical": {}
+    "logical": {
+      "display_icons": true
+    }
   }
 }

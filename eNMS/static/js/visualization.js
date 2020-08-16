@@ -427,40 +427,15 @@ function onClick3d(click) {
 }
 
 function initLogicalView() {
+  const viewSettings = settings.view.logical;
   call({
     url: "/get_view_topology",
     callback: function (topology) {
       const Graph = ForceGraph3D()(document.getElementById("network"));
-      Graph.width($(".main_frame").width() + 20);
-      Graph.height($(".main_frame").height() - 90);
-      Graph.backgroundColor("#FFFFFF")
-        .nodeThreeObject(({ icon }) => {
-          const image = new THREE.Mesh(
-            new THREE.SphereGeometry(7),
-            new THREE.MeshBasicMaterial({
-              depthWrite: false,
-              transparent: true,
-              opacity: 0,
-            })
-          );
-          const sprite = new THREE.Sprite(
-            new THREE.SpriteMaterial({
-              map: new THREE.TextureLoader().load(`../static/img/view/2D/${icon}.gif`),
-            })
-          );
-          sprite.scale.set(10, 10);
-          image.add(sprite);
-          return image;
-        })
-        .graphData({
-          nodes: topology.devices,
-          links: topology.links.map((link) => ({
-            source: link.source_id,
-            target: link.destination_id,
-            value: 5,
-            ...link,
-          })),
-        })
+      Graph
+        .width($(".main_frame").width() + 20)
+        .height($(".main_frame").height() - 90)
+        .backgroundColor("#FFFFFF")
         .linkDirectionalParticles("value")
         .linkDirectionalParticleSpeed((d) => d.value * 0.001)
         .linkWidth(2)
@@ -481,7 +456,36 @@ function initLogicalView() {
               }))
             )
           );
+        })
+        .graphData({
+          nodes: topology.devices,
+          links: topology.links.map((link) => ({
+            source: link.source_id,
+            target: link.destination_id,
+            value: 5,
+            ...link,
+          })),
         });
+      if (viewSettings.display_icons) {
+        Graph.nodeThreeObject(({ icon }) => {
+          const image = new THREE.Mesh(
+            new THREE.SphereGeometry(7),
+            new THREE.MeshBasicMaterial({
+              depthWrite: false,
+              transparent: true,
+              opacity: 0,
+            })
+          );
+          const sprite = new THREE.Sprite(
+            new THREE.SpriteMaterial({
+              map: new THREE.TextureLoader().load(`../static/img/view/2D/${icon}.gif`),
+            })
+          );
+          sprite.scale.set(10, 10);
+          image.add(sprite);
+          return image;
+        })
+      }
     },
   });
 }

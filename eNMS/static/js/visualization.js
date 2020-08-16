@@ -324,7 +324,7 @@ function displayPool(poolId, nodes, edges) {
 }
 
 function init2dGeographicalFramework() {
-  const settings2d = settings.visualization.geographical._2D;
+  const settings2d = settings.view.geographical._2D;
   markerType = settings2d.marker;
   markerGroup = L.markerClusterGroup();
   map = L.map("map", { preferCanvas: true }).setView(

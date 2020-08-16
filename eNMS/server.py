@@ -281,17 +281,13 @@ class Server(Flask):
                 "table.html", **{"endpoint": f"table/{table_type}", "type": table_type}
             )
 
-        @blueprint.route("/visualization/<dimension>")
+        @blueprint.route("/visualization/<view_type>")
         @self.monitor_requests
-        def view(dimension):
-            return render_template(
-                "visualization.html", endpoint="view", dimension=dimension
-            )
-
-        @blueprint.route("/logical_view")
-        @self.monitor_requests
-        def logical_view():
-            return render_template("visualization.html", endpoint="logical_view")
+        def view(view_type):
+            kwargs = {"endpoint": view_type}
+            if view_type == "geographical_view":
+                kwargs["dimension"] = app.settings["view"]["geographical"]["default"]
+            return render_template("visualization.html", **kwargs)
 
         @blueprint.route("/workflow_builder")
         @self.monitor_requests

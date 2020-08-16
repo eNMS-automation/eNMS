@@ -107,8 +107,9 @@
     "unseal_vault": false,
     "use_vault": false
   },
-  "visualization": {
+  "view": {
     "geographical": {
+      "default": "3D",
       "_2D": {
         "latitude": 33,
         "longitude": -96,

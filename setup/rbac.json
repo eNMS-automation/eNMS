@@ -29,9 +29,8 @@
     "Visualization": {
       "icon": "map-marker",
       "pages": {
-        "2D Network": "/visualization/2D",
-        "3D Network": "/visualization/3D",
-        "Logical View": "/logical_view"
+        "Geographical View": "/visualization/geographical_view",
+        "Logical View": "/visualization/logical_view"
       }
     },
     "Automation": {

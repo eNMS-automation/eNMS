@@ -1798,3 +1798,63 @@
   type: device
   username: cisco
   vendor: Cisco
+- custom_multiselect: [a, c]
+  custom_select: b
+  description: Washington
+  down: false
+  icon: router
+  ip_address: 192.168.56.103
+  last_duration: ''
+  last_failure: Never
+  last_modified: ''
+  last_runtime: ''
+  last_status: Never
+  last_update: Never
+  latitude: 38,.,89511
+  location: Washington
+  longitude: wrong coordinate
+  model: linux
+  name: Server 2
+  napalm_driver: eos
+  netmiko_driver: linux
+  operating_system: linux
+  os_version: 15.5(3)M
+  port: 22
+  property1: 10.145.14.1
+  property2: CP
+  reachable: true
+  scrapli_driver: arista_eos
+  subtype: ''
+  type: device
+  username: admin
+  vendor: linux
+- custom_multiselect: [a, c]
+  custom_select: b
+  description: Denver
+  down: false
+  icon: router
+  ip_address: 127.0.0.1
+  last_duration: ''
+  last_failure: Never
+  last_modified: ''
+  last_runtime: '2020-07-20 04:39:26.703117'
+  last_status: Success
+  last_update: '2020-07-20 04:39:26.703117'
+  latitude: '48.0'
+  location: Paris
+  longitude: '2.0'
+  model: Cisco
+  name: Aserver
+  napalm_driver: eos
+  netmiko_driver: arista_eos
+  operating_system: IOS-XE
+  os_version: '3.6.5E '
+  port: 22
+  property1: 10.145.14.1
+  property2: CP
+  reachable: true
+  scrapli_driver: arista_eos
+  subtype: ''
+  type: device
+  username: admin
+  vendor: Cisco

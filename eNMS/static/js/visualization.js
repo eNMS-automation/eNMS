@@ -431,10 +431,18 @@ function initLogicalView() {
   call({
     url: "/get_view_topology",
     callback: function (topology) {
-      const Graph = ForceGraph3D()(document.getElementById("network"));
+      const network = document.getElementById("network");
+      const Graph = ForceGraph3D()(network);
       Graph.width($(".main_frame").width() + 20)
         .height($(".main_frame").height() - 90)
         .backgroundColor("#FFFFFF")
+        .onNodeHover((node) => (network.style.cursor = node ? "pointer" : null))
+        .onNodeClick((node) => {
+          const distance = 40;
+          const ratio = 1 + distance / Math.hypot(node.x, node.y, node.z);
+          const position = { x: node.x * ratio, y: node.y * ratio, z: node.z * ratio };
+          Graph.cameraPosition(position, node, 3000);
+        })
         .linkWidth(viewSettings.link_width)
         .linkOpacity(viewSettings.link_opacity)
         .linkThreeObjectExtend(true)

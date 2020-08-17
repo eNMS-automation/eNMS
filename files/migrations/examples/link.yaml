@@ -110,7 +110,7 @@
   last_modified: '', location: spain, model: '', name: europe-link12, source: router29,
   subtype: OTU2, type: link, vendor: Ciena}
 - {color: '#0000ff', custom_property: CP, description: optical fiber 10G, destination: router30,
-  last_modified: '', location: spain, model: '', name: europe-ink13, source: router28,
+  last_modified: '', location: spain, model: '', name: europe-link13, source: router28,
   subtype: OTU2, type: link, vendor: Ciena}
 - {color: '#0000ff', custom_property: CP, description: optical fiber 10G, destination: router27,
   last_modified: '', location: spain, model: '', name: europe-link14, source: router36,

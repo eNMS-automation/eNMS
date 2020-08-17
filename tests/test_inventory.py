@@ -76,7 +76,7 @@ def test_object_creation_type(user_client):
 
 
 routers = ["router" + str(i) for i in range(5, 20)]
-links = ["link" + str(i) for i in range(4, 15)]
+links = ["europe-link" + str(i) for i in range(4, 15)]
 
 
 @check_pages("table/device", "table/link", "visualization/geographical_view")

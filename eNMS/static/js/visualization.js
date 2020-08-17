@@ -441,6 +441,7 @@ function initLogicalView() {
           const ratio = 1 + 100 / Math.hypot(node.x, node.y, node.z);
           const position = { x: node.x * ratio, y: node.y * ratio, z: node.z * ratio };
           Graph.cameraPosition(position, node, 3000);
+          setTimeout(() => showTypePanel(node.type, node.id), 3000);
         })
         .linkWidth(viewSettings.link_width)
         .linkOpacity(viewSettings.link_opacity)

@@ -1,5 +1,6 @@
 {% extends "base_site.html" %} {% block title %} Geographical View {% endblock title %}
-{% block stylesheets %} {{ super() }} {% if dimension == "2D" %}
+{% block stylesheets %} {{ super() }} {% if endpoint == "geographical_view" %} {% if
+dimension == "2D" %}
 <link
   href="{{ url_for('static', filename='lib/leaflet/leaflet.min.css') }}"
   rel="stylesheet"
@@ -13,7 +14,7 @@
   href="{{ url_for('static', filename='lib/cesium/Widgets/widgets.css') }}"
   rel="stylesheet"
 />
-{% endif %}
+{% endif %} {% endif %}
 <link
   href="{{ url_for('static', filename='css/visualization.css') }}"
   rel="stylesheet"
@@ -24,8 +25,7 @@
     color: pink !important;
   }
 </style>
-{% endif %}
-{% endblock stylesheets %} {% block content %}
+{% endif %} {% endblock stylesheets %} {% block content %}
 <form id="device-filtering-form" class="overlay"></form>
 <form id="link-filtering-form" class="overlay"></form>
 {% if endpoint == "logical_view" %}

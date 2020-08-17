@@ -1,4 +1,5 @@
 **/*.min.js
 **/bundles
+**/cesium
 docs/**
 workflow.js

@@ -1,10 +1,15 @@
 /*
 global
 action: false
+Cesium: false
 dimension: false
+ForceGraph3D: false
 settings: true
 jsPanel: false
 L: false
+page: false
+SpriteText: false
+THREE: false
 vis: false
 */
 
@@ -432,15 +437,16 @@ function initLogicalView() {
     url: "/get_view_topology",
     callback: function (topology) {
       const network = document.getElementById("network");
-      const Graph = ForceGraph3D(viewSettings.config)(network);
-      Graph.width($(".main_frame").width() + 20)
+      // eslint-disable-next-line new-cap
+      const graph = ForceGraph3D(viewSettings.config)(network);
+      graph.width($(".main_frame").width() + 20)
         .height($(".main_frame").height() - 90)
         .backgroundColor("#FFFFFF")
         .onNodeHover((node) => (network.style.cursor = node ? "pointer" : null))
         .onNodeClick((node) => {
           const ratio = 1 + 100 / Math.hypot(node.x, node.y, node.z);
           const position = { x: node.x * ratio, y: node.y * ratio, z: node.z * ratio };
-          Graph.cameraPosition(position, node, 1500);
+          graph.cameraPosition(position, node, 1500);
           setTimeout(() => showTypePanel(node.type, node.id), 1550);
         })
         .onLinkHover((link) => (network.style.cursor = link ? "pointer" : null))
@@ -473,14 +479,13 @@ function initLogicalView() {
             ...link,
           })),
         });
-      console.log($(".scene-tooltip"));
       if (viewSettings.display_link_traffic) {
-        Graph.linkDirectionalParticles("value").linkDirectionalParticleSpeed(
+        graph.linkDirectionalParticles("value").linkDirectionalParticleSpeed(
           (d) => d.value * viewSettings.traffic_speed
         );
       }
       if (viewSettings.display_icons) {
-        Graph.nodeThreeObject(({ icon }) => {
+        graph.nodeThreeObject(({ icon }) => {
           const image = new THREE.Mesh(
             new THREE.SphereGeometry(7),
             new THREE.MeshBasicMaterial({

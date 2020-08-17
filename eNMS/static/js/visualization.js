@@ -438,8 +438,7 @@ function initLogicalView() {
         .backgroundColor("#FFFFFF")
         .onNodeHover((node) => (network.style.cursor = node ? "pointer" : null))
         .onNodeClick((node) => {
-          const distance = 40;
-          const ratio = 1 + distance / Math.hypot(node.x, node.y, node.z);
+          const ratio = 1 + 100 / Math.hypot(node.x, node.y, node.z);
           const position = { x: node.x * ratio, y: node.y * ratio, z: node.z * ratio };
           Graph.cameraPosition(position, node, 3000);
         })

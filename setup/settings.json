@@ -120,6 +120,10 @@
       "_3D": {}
     },
     "logical": {
+      "config": {
+        "controlType": "trackball",
+        "rendererConfig": { "antialias": true, "alpha": true }
+      },
       "display_icons": true,
       "display_link_traffic": true,
       "traffic_speed": 0.001,

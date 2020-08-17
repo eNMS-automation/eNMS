@@ -432,7 +432,7 @@ function initLogicalView() {
     url: "/get_view_topology",
     callback: function (topology) {
       const network = document.getElementById("network");
-      const Graph = ForceGraph3D()(network);
+      const Graph = ForceGraph3D(viewSettings.config)(network);
       Graph.width($(".main_frame").width() + 20)
         .height($(".main_frame").height() - 90)
         .backgroundColor("#FFFFFF")

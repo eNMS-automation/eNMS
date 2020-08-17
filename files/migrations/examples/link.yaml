@@ -82,3 +82,174 @@
 - {color: '#000000 ', custom_property: CP, description: optical fiber 400G, destination: Denver,
   last_modified: '', location: '', model: 400G, name: link27, source: Oakland, subtype: ODU2,
   type: link, vendor: Ciena}
+- {color: '#0000ff', custom_property: CP, description: optical fiber 10G, destination: router32,
+  last_modified: '', location: spain, model: '', name: europe-link4, source: router30,
+  subtype: OTU2, type: link, vendor: Ciena}
+- {color: '#0000ff', custom_property: CP, description: optical fiber 10G, destination: router31,
+  last_modified: '', location: spain, model: '', name: europe-link5, source: router32,
+  subtype: OTU2, type: link, vendor: Ciena}
+- {color: '#0000ff', custom_property: CP, description: optical fiber 10G, destination: router33,
+  last_modified: '', location: spain, model: '', name: europe-link6, source: router31,
+  subtype: OTU2, type: link, vendor: Ciena}
+- {color: '#0000ff', custom_property: CP, description: optical fiber 10G, destination: router35,
+  last_modified: '', location: spain, model: '', name: europe-link7, source: router33,
+  subtype: OTU2, type: link, vendor: Ciena}
+- {color: '#0000ff', custom_property: CP, description: optical fiber 10G, destination: router36,
+  last_modified: '', location: spain, model: '', name: europe-link8, source: router35,
+  subtype: OTU2, type: link, vendor: Ciena}
+- {color: '#0000ff', custom_property: CP, description: optical fiber 10G, destination: router31,
+  last_modified: '', location: spain, model: '', name: europe-link9, source: router36,
+  subtype: OTU2, type: link, vendor: Ciena}
+- {color: '#0000ff', custom_property: CP, description: optical fiber 10G, destination: router28,
+  last_modified: '', location: spain, model: '', name: europe-link10, source: router31,
+  subtype: OTU2, type: link, vendor: Ciena}
+- {color: '#0000ff', custom_property: CP, description: optical fiber 10G, destination: router29,
+  last_modified: '', location: spain, model: '', name: europe-link11, source: router28,
+  subtype: OTU2, type: link, vendor: Ciena}
+- {color: '#0000ff', custom_property: CP, description: optical fiber 10G, destination: router36,
+  last_modified: '', location: spain, model: '', name: europe-link12, source: router29,
+  subtype: OTU2, type: link, vendor: Ciena}
+- {color: '#0000ff', custom_property: CP, description: optical fiber 10G, destination: router30,
+  last_modified: '', location: spain, model: '', name: europe-ink13, source: router28,
+  subtype: OTU2, type: link, vendor: Ciena}
+- {color: '#0000ff', custom_property: CP, description: optical fiber 10G, destination: router27,
+  last_modified: '', location: spain, model: '', name: europe-link14, source: router36,
+  subtype: OTU2, type: link, vendor: Ciena}
+- {color: '#0000ff', custom_property: CP, description: optical fiber 10G, destination: router17,
+  last_modified: '', location: spain, model: '', name: europe-link15, source: router35,
+  subtype: OTU2, type: link, vendor: Ciena}
+- {color: '#0000ff', custom_property: CP, description: optical fiber 10G, destination: router17,
+  last_modified: '', location: france, model: '', name: europe-link16, source: router27,
+  subtype: OTU2, type: link, vendor: Ciena}
+- {color: '#0000ff', custom_property: CP, description: optical fiber 10G, destination: router16,
+  last_modified: '', location: france, model: '', name: europe-link17, source: router17,
+  subtype: OTU2, type: link, vendor: Ciena}
+- {color: '#0000ff', custom_property: CP, description: optical fiber 100G, destination: router34,
+  last_modified: '', location: eastern europe, model: '', name: europe-link18, source: router16,
+  subtype: OTU2, type: link, vendor: Ciena}
+- {color: '#0000ff', custom_property: CP, description: optical fiber 100G, destination: router12,
+  last_modified: '', location: eastern europe, model: '', name: europe-link19, source: router34,
+  subtype: OTU2, type: link, vendor: Ciena}
+- {color: '#0000ff', custom_property: CP, description: optical fiber 100G, destination: router22,
+  last_modified: '', location: eastern europe, model: '', name: europe-link20, source: router12,
+  subtype: OTU2, type: link, vendor: Ciena}
+- {color: '#0000ff', custom_property: CP, description: optical fiber 100G, destination: router23,
+  last_modified: '', location: eastern europe, model: '', name: europe-link21, source: router22,
+  subtype: OTU2, type: link, vendor: Ciena}
+- {color: '#0000ff', custom_property: CP, description: optical fiber 100G, destination: router24,
+  last_modified: '', location: eastern europe, model: '', name: europe-link22, source: router23,
+  subtype: OTU2, type: link, vendor: Ciena}
+- {color: '#0000ff', custom_property: CP, description: optical fiber 100G, destination: router24,
+  last_modified: '', location: eastern europe, model: '', name: europe-link23, source: router15,
+  subtype: OTU2, type: link, vendor: Ciena}
+- {color: '#0000ff', custom_property: CP, description: optical fiber 100G, destination: router12,
+  last_modified: '', location: eastern europe, model: '', name: europe-link24, source: router15,
+  subtype: OTU2, type: link, vendor: Ciena}
+- {color: '#0000ff', custom_property: CP, description: optical fiber 100G, destination: router18,
+  last_modified: '', location: eastern europe, model: '', name: europe-link25, source: router15,
+  subtype: OTU2, type: link, vendor: Ciena}
+- {color: '#0000ff', custom_property: CP, description: optical fiber 100G, destination: router19,
+  last_modified: '', location: eastern europe, model: '', name: europe-link26, source: router18,
+  subtype: OTU2, type: link, vendor: Ciena}
+- {color: '#0000ff', custom_property: CP, description: optical fiber 100G, destination: router21,
+  last_modified: '', location: eastern europe, model: '', name: europe-link27, source: router19,
+  subtype: OTU2, type: link, vendor: Ciena}
+- {color: '#0000ff', custom_property: CP, description: optical fiber 100G, destination: router24,
+  last_modified: '', location: eastern europe, model: '', name: europe-link28, source: router21,
+  subtype: OTU2, type: link, vendor: Ciena}
+- {color: '#0000ff', custom_property: CP, description: optical fiber 100G, destination: router20,
+  last_modified: '', location: eastern europe, model: '', name: europe-link29, source: router19,
+  subtype: OTU2, type: link, vendor: Ciena}
+- {color: '#0000ff', custom_property: CP, description: optical fiber 100G, destination: router18,
+  last_modified: '', location: eastern europe, model: '', name: europe-link30, source: router20,
+  subtype: OTU2, type: link, vendor: Ciena}
+- {color: '#0000ff', custom_property: CP, description: optical fiber 100G, destination: router8,
+  last_modified: '', location: eastern europe, model: '', name: europe-link31, source: router20,
+  subtype: OTU2, type: link, vendor: Ciena}
+- {color: '#0000ff', custom_property: CP, description: optical fiber 100G, destination: router8,
+  last_modified: '', location: eastern europe, model: '', name: europe-link32, source: router14,
+  subtype: OTU2, type: link, vendor: Ciena}
+- {color: '#0000ff', custom_property: CP, description: optical fiber 100G, destination: router12,
+  last_modified: '', location: eastern europe, model: '', name: europe-link33, source: router14,
+  subtype: OTU2, type: link, vendor: Ciena}
+- {color: '#0000ff', custom_property: CP, description: optical fiber 100G, destination: router13,
+  last_modified: '', location: eastern europe, model: '', name: europe-link34, source: router12,
+  subtype: OTU2, type: link, vendor: Ciena}
+- {color: '#0000ff', custom_property: CP, description: optical fiber 100G, destination: router11,
+  last_modified: '', location: france, model: '', name: europe-link35, source: router13,
+  subtype: OTU2, type: link, vendor: Ciena}
+- {color: '#0000ff', custom_property: CP, description: optical fiber 100G, destination: router10,
+  last_modified: '', location: france, model: '', name: europe-link36, source: router11,
+  subtype: OTU2, type: link, vendor: Ciena}
+- {color: '#0000ff', custom_property: CP, description: optical fiber 100G, destination: router16,
+  last_modified: '', location: france, model: '', name: europe-link37, source: router10,
+  subtype: OTU2, type: link, vendor: Ciena}
+- {color: '#0000ff', custom_property: CP, description: optical fiber 100G, destination: router7,
+  last_modified: '', location: france, model: '', name: europe-link38, source: router10,
+  subtype: OTU2, type: link, vendor: Ciena}
+- {color: '#0000ff', custom_property: CP, description: optical fiber 100G, destination: router6,
+  last_modified: '', location: france, model: '', name: europe-link39, source: router13,
+  subtype: OTU2, type: link, vendor: Ciena}
+- {color: '#0000ff', custom_property: CP, description: optical fiber 100G, destination: router8,
+  last_modified: '', location: eastern europe, model: '', name: europe-link40, source: router7,
+  subtype: OTU2, type: link, vendor: Ciena}
+- {color: '#0000ff', custom_property: CP, description: optical fiber 100G, destination: router21,
+  last_modified: '', location: eastern europe, model: '', name: europe-link41, source: router14,
+  subtype: OTU2, type: link, vendor: Ciena}
+- {color: '#0000ff', custom_property: CP, description: optical fiber 100G, destination: router25,
+  last_modified: '', location: france, model: '', name: europe-link42, source: router6,
+  subtype: OTU2, type: link, vendor: Ciena}
+- {color: '#0000ff', custom_property: CP, description: optical fiber 100G, destination: router5,
+  last_modified: '', location: france, model: '', name: europe-link43, source: router25,
+  subtype: OTU2, type: link, vendor: Ciena}
+- {color: '#0000ff', custom_property: CP, description: optical fiber 100G, destination: router26,
+  last_modified: '', location: france, model: '', name: europe-link44, source: router5,
+  subtype: OTU2, type: link, vendor: Ciena}
+- {color: '#0000ff', custom_property: CP, description: optical fiber 100G, destination: router9,
+  last_modified: '', location: france, model: '', name: europe-link45, source: router5,
+  subtype: OTU2, type: link, vendor: Ciena}
+- {color: '#0000ff', custom_property: CP, description: optical fiber 100G, destination: router26,
+  last_modified: '', location: france, model: '', name: europe-link46, source: router26,
+  subtype: OTU2, type: link, vendor: Ciena}
+- {color: '#0000ff', custom_property: CP, description: optical fiber 100G, destination: router17,
+  last_modified: '', location: france, model: '', name: europe-link47, source: router9,
+  subtype: OTU2, type: link, vendor: Ciena}
+- {color: '#0000ff', custom_property: CP, description: optical fiber 100G, destination: router10,
+  last_modified: '', location: france, model: '', name: europe-link48, source: router9,
+  subtype: OTU2, type: link, vendor: Ciena}
+- {color: '#0000ff', custom_property: CP, description: optical fiber 100G, destination: router11,
+  last_modified: '', location: france, model: '', name: europe-link49, source: router16,
+  subtype: OTU2, type: link, vendor: Ciena}
+- {color: '#0000ff', custom_property: CP, description: optical fiber 100G, destination: router37,
+  last_modified: '', location: spain, model: '', name: europe-link50, source: router32,
+  subtype: OTU2, type: link, vendor: Ciena}
+- {color: '#0000ff', custom_property: CP, description: optical fiber 100G, destination: router33,
+  last_modified: '', location: spain, model: '', name: europe-link51, source: router37,
+  subtype: OTU2, type: link, vendor: Ciena}
+- {color: '#0000ff', custom_property: CP, description: optical fiber 100G, destination: router25,
+  last_modified: '', location: france, model: '', name: europe-link52, source: router26,
+  subtype: OTU2, type: link, vendor: Ciena}
+- {color: '#FF7C01', custom_property: CP, description: '', destination: Boston, last_modified: '2020-08-17
+    05:01:50.711250', location: '', model: '', name: atlantic-r26-boston-1, public: false,
+  source: router26, subtype: '', type: link, vendor: ''}
+- {color: '#FF7C01', custom_property: CP, description: '', destination: Boston, last_modified: '2020-08-17
+    05:01:53.793640', location: '', model: '', name: atlantic-r26-boston-2, public: false,
+  source: router26, subtype: '', type: link, vendor: ''}
+- {color: '#FF7C01', custom_property: CP, description: '', destination: NewYork, last_modified: '2020-08-17
+    05:05:20.818008', location: '', model: '', name: atlantic-r26-ny, public: false,
+  source: router26, subtype: '', type: link, vendor: ''}
+- {color: '#FF7C01', custom_property: CP, description: '', destination: Washington,
+  last_modified: '2020-08-17 05:05:33.399662', location: '', model: '', name: atlantic-r26-washington,
+  public: false, source: router26, subtype: '', type: link, vendor: ''}
+- {color: '#FF7C01', custom_property: CP, description: '', destination: NewYork, last_modified: '2020-08-17
+    05:05:52.041558', location: '', model: '', name: atlantic-r28-ny, public: false,
+  source: router28, subtype: '', type: link, vendor: ''}
+- {color: '#FF7C01', custom_property: CP, description: '', destination: Washington,
+  last_modified: '2020-08-17 05:06:07.757545', location: '', model: '', name: atlantic-r28-washington,
+  public: false, source: router28, subtype: '', type: link, vendor: ''}
+- {color: '#FF7C01', custom_property: CP, description: '', destination: Boston, last_modified: '2020-08-17
+    05:07:13.759644', location: '', model: '', name: atlantic-r20-boston, public: false,
+  source: router20, subtype: '', type: link, vendor: ''}
+- {color: '#FF7C01', custom_property: CP, description: '', destination: Richmond,
+  last_modified: '2020-08-17 05:07:27.392250', location: '', model: '', name: atlantic-r20-richmond,
+  public: false, source: router20, subtype: '', type: link, vendor: ''}

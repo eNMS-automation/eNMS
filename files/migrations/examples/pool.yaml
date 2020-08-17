@@ -42,7 +42,11 @@
   devices: [Jackson, PaloAlto, Austin, Washington, Chicago, SanJose, SanDiego, Dallas,
     Philadelphia, LosAngeles, Detroit, Richmond, Atlanta, Boston, Houston, Baltimore,
     Cleveland, Columbus, Cincinnati, Cambridge, Minneapolis, NewYork, Sacramento,
-    SanFrancisco, Orange, Oakland, Denver, Aserver, Server 2, Public]
+    SanFrancisco, Orange, Oakland, Denver, router5, router6, router7, router8, router9,
+    router10, router11, router12, router13, router14, router15, router16, router17,
+    router18, router19, router20, router21, router22, router23, router24, router25,
+    router26, router27, router28, router29, router30, router31, router32, router33,
+    router34, router35, router36, router37]
   last_modified: '2020-04-21 15:23:58.190204'
   latitude: '0.0'
   link_color: ''
@@ -65,7 +69,17 @@
   link_vendor_match: inclusion
   links: [link0, link1, link2, link3, link4, link5, link6, link7, link8, link9, link10,
     link11, link12, link13, link14, link15, link16, link17, link18, link19, link20,
-    link21, link22, link23, link24, link25, link26, link27]
+    link21, link22, link23, link24, link25, link26, link27, europe-link4, europe-link5,
+    europe-link6, europe-link7, europe-link8, europe-link9, europe-link10, europe-link11,
+    europe-link12, europe-ink13, europe-link14, europe-link15, europe-link16, europe-link17,
+    europe-link18, europe-link19, europe-link20, europe-link21, europe-link22, europe-link23,
+    europe-link24, europe-link25, europe-link26, europe-link27, europe-link28, europe-link29,
+    europe-link30, europe-link31, europe-link32, europe-link33, europe-link34, europe-link35,
+    europe-link36, europe-link37, europe-link38, europe-link39, europe-link40, europe-link41,
+    europe-link42, europe-link43, europe-link44, europe-link45, europe-link46, europe-link47,
+    europe-link48, europe-link49, europe-link50, europe-link51, europe-link52, atlantic-r26-boston-1,
+    atlantic-r26-boston-2, atlantic-r26-ny, atlantic-r26-washington, atlantic-r28-ny,
+    atlantic-r28-washington, atlantic-r20-boston, atlantic-r20-richmond]
   longitude: '0.0'
   manually_defined: false
   name: All objects
@@ -117,7 +131,11 @@
   devices: [Jackson, PaloAlto, Austin, Washington, Chicago, SanJose, SanDiego, Dallas,
     Philadelphia, LosAngeles, Detroit, Richmond, Atlanta, Boston, Houston, Baltimore,
     Cleveland, Columbus, Cincinnati, Cambridge, Minneapolis, NewYork, Sacramento,
-    SanFrancisco, Orange, Oakland, Denver, Aserver, Server 2, Public]
+    SanFrancisco, Orange, Oakland, Denver, router5, router6, router7, router8, router9,
+    router10, router11, router12, router13, router14, router15, router16, router17,
+    router18, router19, router20, router21, router22, router23, router24, router25,
+    router26, router27, router28, router29, router30, router31, router32, router33,
+    router34, router35, router36, router37]
   last_modified: '2020-04-21 15:24:39.430415'
   latitude: '0.0'
   link_color: ''
@@ -210,7 +228,17 @@
   link_vendor_match: inclusion
   links: [link0, link1, link2, link3, link4, link5, link6, link7, link8, link9, link10,
     link11, link12, link13, link14, link15, link16, link17, link18, link19, link20,
-    link21, link22, link23, link24, link25, link26, link27]
+    link21, link22, link23, link24, link25, link26, link27, europe-link4, europe-link5,
+    europe-link6, europe-link7, europe-link8, europe-link9, europe-link10, europe-link11,
+    europe-link12, europe-ink13, europe-link14, europe-link15, europe-link16, europe-link17,
+    europe-link18, europe-link19, europe-link20, europe-link21, europe-link22, europe-link23,
+    europe-link24, europe-link25, europe-link26, europe-link27, europe-link28, europe-link29,
+    europe-link30, europe-link31, europe-link32, europe-link33, europe-link34, europe-link35,
+    europe-link36, europe-link37, europe-link38, europe-link39, europe-link40, europe-link41,
+    europe-link42, europe-link43, europe-link44, europe-link45, europe-link46, europe-link47,
+    europe-link48, europe-link49, europe-link50, europe-link51, europe-link52, atlantic-r26-boston-1,
+    atlantic-r26-boston-2, atlantic-r26-ny, atlantic-r26-washington, atlantic-r28-ny,
+    atlantic-r28-washington, atlantic-r20-boston, atlantic-r20-richmond]
   longitude: '0.0'
   manually_defined: false
   name: Links only
@@ -260,7 +288,11 @@
   device_vendor: ''
   device_vendor_match: inclusion
   devices: [SanJose, SanDiego, Philadelphia, LosAngeles, Detroit, Baltimore, Cleveland,
-    Cambridge, Minneapolis, NewYork, Sacramento, Orange, Denver, Aserver, Server 2]
+    Cambridge, Minneapolis, NewYork, Sacramento, Orange, Denver, router5, router6,
+    router7, router8, router9, router10, router11, router12, router13, router14, router15,
+    router16, router17, router18, router19, router20, router21, router22, router23,
+    router24, router25, router26, router27, router28, router29, router30, router31,
+    router32, router33, router34, router35, router36, router37]
   last_modified: '2020-06-19 06:44:54.194589'
   latitude: '37.77'
   link_color: ''
@@ -404,7 +436,7 @@
   device_vendor: ''
   device_vendor_match: inclusion
   devices: [Austin, Washington, Chicago, SanDiego, Philadelphia, Detroit, Richmond,
-    Baltimore, Cincinnati, Cambridge, Minneapolis, SanFrancisco, Public]
+    Baltimore, Cincinnati, Cambridge, Minneapolis, SanFrancisco]
   last_modified: ''
   latitude: '41.87'
   link_color: ''
@@ -565,7 +597,7 @@
   link_subtype_match: inclusion
   link_vendor: ''
   link_vendor_match: inclusion
-  links: [link0, link1, link2, link3, link4, link5]
+  links: [link0, link1, link2, link3, link4, link5, europe-link4, europe-link5]
   longitude: '0.0'
   manually_defined: false
   name: Links 0 through 5 - Non-public pool - Access set up
@@ -636,7 +668,7 @@
   link_subtype_match: inclusion
   link_vendor: ''
   link_vendor_match: inclusion
-  links: [link6, link7, link8, link9]
+  links: [link6, link7, link8, link9, europe-link6, europe-link7, europe-link8, europe-link9]
   longitude: '0.0'
   manually_defined: false
   name: Links 6 through 9 - Public pools

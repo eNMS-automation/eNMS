@@ -7609,7 +7609,7 @@
   description: ''
   device_query: ''
   device_query_property: name
-  devices: [Server 2]
+  devices: []
   dict_match: {}
   display_only_failed_nodes: false
   driver: linux

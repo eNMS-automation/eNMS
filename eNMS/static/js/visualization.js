@@ -439,7 +439,8 @@ function initLogicalView() {
       const network = document.getElementById("network");
       // eslint-disable-next-line new-cap
       const graph = ForceGraph3D(viewSettings.config)(network);
-      graph.width($(".main_frame").width() + 20)
+      graph
+        .width($(".main_frame").width() + 20)
         .height($(".main_frame").height() - 90)
         .backgroundColor("#FFFFFF")
         .onNodeHover((node) => (network.style.cursor = node ? "pointer" : null))
@@ -480,9 +481,9 @@ function initLogicalView() {
           })),
         });
       if (viewSettings.display_link_traffic) {
-        graph.linkDirectionalParticles("value").linkDirectionalParticleSpeed(
-          (d) => d.value * viewSettings.traffic_speed
-        );
+        graph
+          .linkDirectionalParticles("value")
+          .linkDirectionalParticleSpeed((d) => d.value * viewSettings.traffic_speed);
       }
       if (viewSettings.display_icons) {
         graph.nodeThreeObject(({ icon }) => {

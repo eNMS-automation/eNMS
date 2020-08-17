@@ -29,3 +29,7 @@ intrinsic (Safari) - moz (Firefox) - webkit (Chrome) */
 .cesium-viewer-infoBoxContainer {
   display: none !important;
 }
+
+.scene-tooltip {
+  transform: translate(-50%, -25px) !important;
+}

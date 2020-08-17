@@ -473,6 +473,7 @@ function initLogicalView() {
             ...link,
           })),
         });
+      console.log($(".scene-tooltip"))
       if (viewSettings.display_link_traffic) {
         Graph.linkDirectionalParticles("value").linkDirectionalParticleSpeed(
           (d) => d.value * viewSettings.traffic_speed

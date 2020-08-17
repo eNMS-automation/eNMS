@@ -440,9 +440,11 @@ function initLogicalView() {
         .onNodeClick((node) => {
           const ratio = 1 + 100 / Math.hypot(node.x, node.y, node.z);
           const position = { x: node.x * ratio, y: node.y * ratio, z: node.z * ratio };
-          Graph.cameraPosition(position, node, 3000);
-          setTimeout(() => showTypePanel(node.type, node.id), 3000);
+          Graph.cameraPosition(position, node, 1500);
+          setTimeout(() => showTypePanel(node.type, node.id), 1550);
         })
+        .onLinkHover((link) => (network.style.cursor = link ? "pointer" : null))
+        .onLinkClick((link) => showTypePanel("link", link.id))
         .linkWidth(viewSettings.link_width)
         .linkOpacity(viewSettings.link_opacity)
         .linkThreeObjectExtend(true)

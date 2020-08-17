@@ -181,9 +181,9 @@
     "/table/session",
     "/table/task",
     "/table/user",
-    "/view/network",
-    "/view/site",
     "/view_service_results",
+    "/visualization/geographical_view",
+    "/visualization/logical_view",
     "/workflow_builder"
   ],
   "post_requests": [

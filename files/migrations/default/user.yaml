@@ -8,7 +8,7 @@
     /form/netmiko_backup_service, /form/workflow, /form/files, /form/excel_import, /form/database_migration,
     /form/result_log_deletion, /form/netmiko_validation_service, /form/server, /form/topology_import_service,
     /form/unix_shell_script_service, /logout, /table/configuration, /form/run, /form/device_connection,
-    /login, /form/administration, /form/example_service, /table/changelog, /view/network,
+    /login, /form/administration, /form/example_service, /table/changelog, /visualization/geographical_view,
     /table/link, /form/restart_workflow, /table/event, /form/napalm_rollback_service,
     /form/workflow_label, /form/napalm_ping_service, /table/service, /form/event,
     /form/user, /form/link_filtering, /form/pool, /table/group, /form/pool_filtering,
@@ -18,7 +18,7 @@
     /dashboard, /form/file, /form/task, /table/pool, /form/generic_file_transfer_service,
     /form/netmiko_configuration_service, /form/mail_notification_service, /form/upload_files,
     /table/run, /workflow_builder, /form/link, /form/netmiko_file_transfer_service,
-    /view/site, /form/import_service, /form/napalm_configuration_service, /form/ping_service,
+    /visualization/logical_view, /form/import_service, /form/napalm_configuration_service, /form/ping_service,
     /form/mattermost_notification_service, /form/ansible_playbook_service]
   menu: [Admin, Home, Scheduling, Automation, Inventory, Visualization, Plugins]
   name: admin

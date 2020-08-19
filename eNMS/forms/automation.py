@@ -176,6 +176,7 @@ class ConnectionForm(ServiceForm):
     )
     custom_username = StringField("Custom Username", substitution=True)
     custom_password = PasswordField("Custom Password", substitution=True)
+    use_host_keys = BooleanField("Use Host Keys")
     start_new_connection = BooleanField("Start New Connection")
     close_connection = BooleanField("Close Connection")
     groups = {
@@ -184,6 +185,7 @@ class ConnectionForm(ServiceForm):
                 "credentials",
                 "custom_username",
                 "custom_password",
+                "use_host_keys",
                 "start_new_connection",
                 "close_connection",
             ],

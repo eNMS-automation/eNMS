@@ -18,6 +18,12 @@
           "#c4ccd3"
         ]
       },
+      "view": {
+        "logical": {
+          "background": "#FFFFFF",
+          "label": "#000000"
+        }
+      },
       "workflow": {
         "edges": {
           "font": {

@@ -22,7 +22,7 @@ dimension == "2D" %}
 {% if endpoint == "logical_view" %}
 <style>
   .scene-tooltip {
-    color: pink !important;
+    color: {{ themes["themes"][current_user.theme]["view"]["logical"]["label"] }} !important;
   }
 </style>
 {% endif %} {% endblock stylesheets %} {% block content %}

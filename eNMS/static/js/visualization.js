@@ -9,6 +9,7 @@ jsPanel: false
 L: false
 page: false
 SpriteText: false
+theme: false
 THREE: false
 vis: false
 */
@@ -442,7 +443,7 @@ function initLogicalView() {
       graph
         .width($(".main_frame").width() + 20)
         .height($(".main_frame").height() - 90)
-        .backgroundColor("#FFFFFF")
+        .backgroundColor(theme.view.logical.background)
         .onNodeHover((node) => (network.style.cursor = node ? "pointer" : null))
         .onNodeClick((node) => {
           const ratio = 1 + 100 / Math.hypot(node.x, node.y, node.z);
@@ -457,7 +458,7 @@ function initLogicalView() {
         .linkThreeObjectExtend(true)
         .linkThreeObject((link) => {
           const sprite = new SpriteText(link.name);
-          sprite.color = "#000000";
+          sprite.color = theme.view.logical.label;
           sprite.textHeight = 3;
           return sprite;
         })

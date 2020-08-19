@@ -62,6 +62,12 @@
           }
         }
       },
+      "view": {
+        "logical": {
+          "background": "#000000",
+          "label": "#FFFFFF"
+        }
+      },
       "workflow": {
         "edges": {
           "font": {

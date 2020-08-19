@@ -1207,7 +1207,7 @@ class Run(AbstractBase):
             global_delay_factor=self.global_delay_factor,
             session_log=BytesIO(),
             global_cmd_verify=False,
-            use_keys=self.use_host_keys
+            use_keys=self.use_host_keys,
         )
         if self.enable_mode:
             netmiko_connection.enable()

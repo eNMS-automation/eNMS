@@ -416,6 +416,7 @@ function init3dGeographicalFramework() {
   });
   viewer.scene.primitives.add(polylines);
   viewer.scene.postProcessStages.fxaa.enabled = true;
+  $(".cesium-baseLayerPicker-dropDown > div").slice(2, 4).hide();
   labels = viewer.scene.primitives.add(new Cesium.LabelCollection());
   handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
   handler.setInputAction(onClick3d, Cesium.ScreenSpaceEventType.LEFT_CLICK);

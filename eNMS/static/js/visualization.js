@@ -93,6 +93,7 @@ function createNode3d(node, nodeType) {
         text: node.name,
         scaleByDistance: new Cesium.NearFarScalar(1.5e2, 1.5, 8.0e6, 0.0),
         pixelOffset: new Cesium.Cartesian2(0.0, 20.0),
+        font: "20px sans-serif",
       },
     })
   );

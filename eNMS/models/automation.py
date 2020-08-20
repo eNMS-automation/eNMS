@@ -238,6 +238,7 @@ class ConnectionService(Service):
     credentials = db.Column(db.SmallString, default="device")
     custom_username = db.Column(db.SmallString)
     custom_password = db.Column(db.SmallString)
+    use_host_keys = db.Column(Boolean, default=False)
     start_new_connection = db.Column(Boolean, default=False)
     close_connection = db.Column(Boolean, default=False)
     __mapper_args__ = {"polymorphic_identity": "connection_service"}
@@ -1206,6 +1207,7 @@ class Run(AbstractBase):
             global_delay_factor=self.global_delay_factor,
             session_log=BytesIO(),
             global_cmd_verify=False,
+            use_keys=self.use_host_keys,
         )
         if self.enable_mode:
             netmiko_connection.enable()

@@ -511,42 +511,42 @@ function initLogicalView() {
 }
 
 export function initView() {
+  $("body").contextMenu({
+    menuSelector: "#contextMenu",
+    menuSelected: function (selectedMenu) {
+      const row = selectedMenu.text();
+      action[row](selectedObject);
+      selectedObject = null;
+    },
+  });
+  Object.assign(action, {
+    Properties: (o) => showTypePanel(o.type, o.id),
+    Connect: (d) => showConnectionPanel(d),
+    Configuration: (d) => showDeviceData(d),
+  });
+  for (let type of ["device", "link"]) {
+    createTooltip({
+      autoshow: true,
+      persistent: true,
+      name: `${type}_filtering`,
+      target: `#${type}-filtering`,
+      container: `#${type}-filtering-form`,
+      size: "700 400",
+      position: {
+        my: "center-top",
+        at: "center-bottom",
+        offsetY: 10,
+      },
+      url: `../form/${type}_filtering`,
+      title: `${type.charAt(0).toUpperCase() + type.slice(1)} Filtering`,
+    });
+  }
   if (page == "logical_view") {
     initLogicalView();
   } else {
     initGeographicalFramework();
     updateView();
-    $("body").contextMenu({
-      menuSelector: "#contextMenu",
-      menuSelected: function (selectedMenu) {
-        const row = selectedMenu.text();
-        action[row](selectedObject);
-        selectedObject = null;
-      },
-    });
     $("#view-type").change(() => updateView());
-    Object.assign(action, {
-      Properties: (o) => showTypePanel(o.type, o.id),
-      Connect: (d) => showConnectionPanel(d),
-      Configuration: (d) => showDeviceData(d),
-    });
-    for (let type of ["device", "link"]) {
-      createTooltip({
-        autoshow: true,
-        persistent: true,
-        name: `${type}_filtering`,
-        target: `#${type}-filtering`,
-        container: `#${type}-filtering-form`,
-        size: "700 400",
-        position: {
-          my: "center-top",
-          at: "center-bottom",
-          offsetY: 10,
-        },
-        url: `../form/${type}_filtering`,
-        title: `${type.charAt(0).toUpperCase() + type.slice(1)} Filtering`,
-      });
-    }
   }
 }
 

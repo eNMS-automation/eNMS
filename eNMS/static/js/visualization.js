@@ -88,6 +88,12 @@ function createNode3d(node, nodeType) {
         image: `../static/img/view/3D/${icon}.gif`,
         scaleByDistance: new Cesium.NearFarScalar(1.5e2, 2.0, 1.5e7, 0.5),
       },
+      label: {
+        fillColor: Cesium.Color.BLACK,
+        text: node.name,
+        scaleByDistance: new Cesium.NearFarScalar(1.5e2, 1.5, 8.0e6, 0.0),
+        pixelOffset: new Cesium.Cartesian2(0.0, 20.0),
+      },
     })
   );
 }

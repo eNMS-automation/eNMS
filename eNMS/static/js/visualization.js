@@ -59,6 +59,7 @@ let routerIcon;
 let viewer;
 let handler;
 let polylines;
+let labels;
 
 function switchLayer(layerType) {
   map.removeLayer(layer);
@@ -79,7 +80,6 @@ function createNode(node, nodeType) {
 
 function createNode3d(node, nodeType) {
   const icon = nodeType === "device" ? node.icon || "router" : "site";
-
   markersArray.push(
     viewer.entities.add({
       properties: node,
@@ -161,6 +161,34 @@ function createLink3d(link) {
       width: 1,
     })
   );
+
+  labels.add({
+    position: new Cesium.Cartesian3.fromDegrees(
+      ...computeLinkMiddle(link),
+      0.0
+    ),
+    scaleByDistance: new Cesium.NearFarScalar(1.5e2, 1.5, 8.0e6, 0.0),
+    fillColor: Cesium.Color.BLACK,
+    pixelOffset: new Cesium.Cartesian2(30, 0),
+    text: link.name,
+  });
+}
+
+function computeLinkMiddle(link) {
+  const lat1 = link.source_latitude
+  const lat2 = link.destination_latitude
+  const lon1 = link.source_longitude
+  const lon2 = link.destination_longitude
+  const φ1 = lat1 * Math.PI/180;
+  const φ2 = lat2 * Math.PI/180;
+  const λ1 = lon1 * Math.PI/180;
+  const λ2 = lon2 * Math.PI/180;
+  const Bx = Math.cos(φ2) * Math.cos(λ2-λ1);
+  const By = Math.cos(φ2) * Math.sin(λ2-λ1);
+  const φ3 = Math.atan2(Math.sin(φ1) + Math.sin(φ2),
+                        Math.sqrt( (Math.cos(φ1)+Bx)*(Math.cos(φ1)+Bx) + By*By ) );
+  const λ3 = λ1 + Math.atan2(By, Math.cos(φ1) + Bx);
+  return [λ3 * (180/Math.PI), φ3* (180/Math.PI)]
 }
 
 function createLink2d(link) {
@@ -391,6 +419,7 @@ function init3dGeographicalFramework() {
   });
   viewer.scene.primitives.add(polylines);
   viewer.scene.postProcessStages.fxaa.enabled = true;
+  labels = viewer.scene.primitives.add(new Cesium.LabelCollection());
   handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
   handler.setInputAction(onClick3d, Cesium.ScreenSpaceEventType.LEFT_CLICK);
   handler.setInputAction(onRightClick3d, Cesium.ScreenSpaceEventType.RIGHT_CLICK);

@@ -456,23 +456,6 @@ function initLogicalView() {
         .onLinkClick((link) => showTypePanel("link", link.id))
         .linkWidth(viewSettings.link_width)
         .linkOpacity(viewSettings.link_opacity)
-        .linkThreeObjectExtend(true)
-        .linkThreeObject((link) => {
-          const sprite = new SpriteText(link.name);
-          sprite.color = theme.view.logical.label;
-          sprite.textHeight = 3;
-          return sprite;
-        })
-        .linkPositionUpdate((sprite, { start, end }) => {
-          Object.assign(
-            sprite.position,
-            Object.assign(
-              ...["x", "y", "z"].map((c) => ({
-                [c]: start[c] + (end[c] - start[c]) / 2,
-              }))
-            )
-          );
-        })
         .graphData({
           nodes: topology.devices,
           links: topology.links.map((link) => ({
@@ -482,6 +465,26 @@ function initLogicalView() {
             ...link,
           })),
         });
+      if (viewSettings.display_link_label) {
+        graph
+          .linkThreeObjectExtend(true)
+          .linkThreeObject((link) => {
+            const sprite = new SpriteText(link.name);
+            sprite.color = theme.view.logical.label;
+            sprite.textHeight = 3;
+            return sprite;
+          })
+          .linkPositionUpdate((sprite, { start, end }) => {
+            Object.assign(
+              sprite.position,
+              Object.assign(
+                ...["x", "y", "z"].map((c) => ({
+                  [c]: start[c] + (end[c] - start[c]) / 2,
+                }))
+              )
+            );
+          });
+      }
       if (viewSettings.display_link_traffic) {
         graph
           .linkDirectionalParticles("value")

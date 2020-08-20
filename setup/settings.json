@@ -125,6 +125,7 @@
         "rendererConfig": { "antialias": true, "alpha": true }
       },
       "display_icons": true,
+      "display_link_label": false,
       "display_link_traffic": true,
       "traffic_speed": 0.001,
       "link_width": 2,

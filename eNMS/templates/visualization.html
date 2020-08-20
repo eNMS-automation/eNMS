@@ -102,8 +102,8 @@ dimension == "2D" %}
     <span class="glyphicon glyphicon-refresh"></span>
   </button>
 </nav>
-{% endblock content %} {% block javascripts %} {{ super()}} {% if endpoint
-== "logical_view" %}
+{% endblock content %} {% block javascripts %} {{ super()}} {% if endpoint ==
+"logical_view" %}
 <script src="{{ url_for('static', filename='lib/3d-force-graph/three.min.js') }}"></script>
 <script src="{{ url_for('static', filename='lib/3d-force-graph/three-spritetext.min.js') }}"></script>
 <script src="{{ url_for('static', filename='lib/3d-force-graph/3d-force-graph.min.js') }}"></script>

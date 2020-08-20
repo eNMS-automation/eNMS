@@ -41,6 +41,7 @@ const iconSizes = {
   site: [22, 22],
 };
 
+let graph;
 let selectedObject;
 let markersArray = [];
 let polylinesArray = [];
@@ -67,7 +68,7 @@ function switchLayer(layerType) {
 
 function changeMarker(type) {
   markerType = type;
-  updateView();
+  displayNetwork();
 }
 
 function createNode(node, nodeType) {
@@ -218,11 +219,11 @@ Object.assign(action, {
   Image: () => changeMarker("Image"),
   Circle: () => changeMarker("Circle"),
   "Circle Marker": () => changeMarker("Circle Marker"),
-  Normal: () => updateView(),
-  Clustered: () => updateView(true),
+  Normal: () => displayNetwork(),
+  Clustered: () => displayNetwork(true),
 });
 
-function updateView(withCluster) {
+function displayNetwork(withCluster) {
   deleteAll();
   clustered = withCluster;
   if ($("#view-type").prop("checked")) {
@@ -439,7 +440,7 @@ function initLogicalView() {
     callback: function (topology) {
       const network = document.getElementById("network");
       // eslint-disable-next-line new-cap
-      const graph = ForceGraph3D(viewSettings.config)(network);
+      graph = ForceGraph3D(viewSettings.config)(network);
       graph
         .width($(".main_frame").width() + 20)
         .height($(".main_frame").height() - 90)
@@ -545,8 +546,8 @@ export function initView() {
     initLogicalView();
   } else {
     initGeographicalFramework();
-    updateView();
-    $("#view-type").change(() => updateView());
+    displayNetwork();
+    $("#view-type").change(() => displayNetwork());
   }
 }
 
@@ -559,9 +560,29 @@ function filterView() {
     url: "/view_filtering",
     data: data,
     callback: function (results) {
-      deleteAll();
-      results.device.map((d) => createNode(d, "device"));
-      results.link.map(createLink);
+      const nodesId = results.device.map((node) => node.id);
+      if (page == "logical_view") {
+        graph.graphData({
+          nodes: results.device,
+          links: results.link
+            .filter(
+              (link) =>
+                nodesId.includes(link.source_id) &&
+                nodesId.includes(link.destination_id)
+            )
+            .map((link) => ({
+              source: link.source_id,
+              target: link.destination_id,
+              value: 5,
+              ...link,
+            })),
+        });
+        graph.refresh();
+      } else {
+        deleteAll();
+        results.device.map((d) => createNode(d, "device"));
+        results.link.map(createLink);
+      }
       notify("Filter applied.", "success", 5);
     },
   });

@@ -445,12 +445,19 @@ function initLogicalView() {
         .width($(".main_frame").width() + 20)
         .height($(".main_frame").height() - 90)
         .backgroundColor(theme.view.logical.background)
+        .onBackgroundRightClick(() => {
+          $(".menu").hide();
+        })
         .onNodeHover((node) => (network.style.cursor = node ? "pointer" : null))
         .onNodeClick((node) => {
           const ratio = 1 + 100 / Math.hypot(node.x, node.y, node.z);
           const position = { x: node.x * ratio, y: node.y * ratio, z: node.z * ratio };
           graph.cameraPosition(position, node, 1500);
           setTimeout(() => showTypePanel(node.type, node.id), 1550);
+        })
+        .onNodeRightClick((node) => {
+          $(".menu").show();
+          selectedObject = node;
         })
         .onLinkHover((link) => (network.style.cursor = link ? "pointer" : null))
         .onLinkClick((link) => showTypePanel("link", link.id))

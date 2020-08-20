@@ -238,6 +238,7 @@ class ConnectionService(Service):
     credentials = db.Column(db.SmallString, default="device")
     custom_username = db.Column(db.SmallString)
     custom_password = db.Column(db.SmallString)
+    use_host_keys = db.Column(Boolean, default=False)
     start_new_connection = db.Column(Boolean, default=False)
     close_connection = db.Column(Boolean, default=False)
     __mapper_args__ = {"polymorphic_identity": "connection_service"}
@@ -697,13 +698,16 @@ class Run(AbstractBase):
                 with ThreadPool(processes=processes) as pool:
                     pool.map(self.get_device_result, process_args)
             else:
-                results = [self.get_results(payload, device) for device in self.devices]
+                results = [
+                    self.get_results(payload, device, commit=False)
+                    for device in self.devices
+                ]
             return {
                 "success": all(result["success"] for result in results),
                 "runtime": self.runtime,
             }
 
-    def create_result(self, results, device=None):
+    def create_result(self, results, device=None, commit=True):
         self.success = results["success"]
         results = self.make_results_json_compliant(results)
         result_kw = {
@@ -731,7 +735,7 @@ class Run(AbstractBase):
                 results["devices"] = {}
                 for result in self.results:
                     results["devices"][result.device.name] = result.result
-        result = db.factory("result", result=results, commit=True, **result_kw)
+        db.factory("result", result=results, commit=commit, **result_kw)
         return results
 
     def run_service_job(self, payload, device):
@@ -747,12 +751,13 @@ class Run(AbstractBase):
                 if self.number_of_retries - retries:
                     retry = self.number_of_retries - retries
                     self.log("error", f"RETRY n°{retry}", device)
-                try:
-                    _, exec_variables = self.eval(
-                        self.service.preprocessing, function="exec", **locals()
-                    )
-                except SystemExit:
-                    pass
+                if self.service.preprocessing:
+                    try:
+                        self.eval(
+                            self.service.preprocessing, function="exec", **locals()
+                        )
+                    except SystemExit:
+                        pass
                 try:
                     results = self.service.job(self, payload, *args)
                 except Exception as exc:
@@ -767,7 +772,7 @@ class Run(AbstractBase):
                 self.convert_result(results)
                 if "success" not in results:
                     results["success"] = True
-                if (
+                if self.service.postprocessing and (
                     self.postprocessing_mode == "always"
                     or self.postprocessing_mode == "failure"
                     and not results["success"]
@@ -803,7 +808,7 @@ class Run(AbstractBase):
                 results = {"success": False, "result": result}
         return results
 
-    def get_results(self, payload, device=None):
+    def get_results(self, payload, device=None, commit=True):
         self.log("info", "STARTING", device)
         start = datetime.now().replace(microsecond=0)
         skip_service = False
@@ -812,10 +817,15 @@ class Run(AbstractBase):
         if skip_service or self.skip:
             if device:
                 self.write_state("progress/device/skipped", 1, "increment")
-            return {
+            results = {
                 "result": "skipped",
+                "duration": "0:00:00",
                 "success": self.skip_value == "True",
             }
+            self.create_result(
+                {"runtime": app.get_time(), **results}, device, commit=commit
+            )
+            return results
         results = {}
         try:
             if self.restart_run and self.service.type == "workflow":
@@ -854,7 +864,9 @@ class Run(AbstractBase):
         if device:
             status = "success" if results["success"] else "failure"
             self.write_state(f"progress/device/{status}", 1, "increment")
-            self.create_result({"runtime": app.get_time(), **results}, device)
+            self.create_result(
+                {"runtime": app.get_time(), **results}, device, commit=commit
+            )
         self.log("info", "FINISHED", device)
         if self.waiting_time:
             self.log("info", f"SLEEP {self.waiting_time} seconds...", device)
@@ -1195,6 +1207,7 @@ class Run(AbstractBase):
             global_delay_factor=self.global_delay_factor,
             session_log=BytesIO(),
             global_cmd_verify=False,
+            use_keys=self.use_host_keys,
         )
         if self.enable_mode:
             netmiko_connection.enable()

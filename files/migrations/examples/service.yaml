@@ -68,11 +68,16 @@
     'Regression Workflow O: Scrapli': [-192, 31]
     'Regression Workflow P: large workflow (scalability)': &id001 [-437, -191]
     'Regression Workflow Q: File transfer': [-479, -89]
+    'Regression Workflow R: skip services in service by service mode': &id002 [-336,
+      -35]
+    'Regression Workflow S: conditional skip query with skip value set to False': &id003 [
+      -183, -152]
     'Regression workflow P: large workflow (scalability)': *id001
     Subworkflow 1: !!python/tuple [0, 0]
     Subworkflow 2: !!python/tuple [0, 0]
     Workflow  in device by device mode: !!python/tuple [0, 0]
-    'Workflow Regression R: skip services in service by service mode': [-148, 17]
+    'Workflow Regression R: skip services in service by service mode': *id002
+    'Workflow Regression S: conditional skip query with skip value set to False': *id003
     Workflow in service by service mode (workflow targets): !!python/tuple [0, 0]
     Workflow in service targets mode: !!python/tuple [0, 0]
     Workflow with device and value iteration: [0, 0]
@@ -195,16 +200,21 @@
     'Regression Workflow M: Unix command & shell, ping, jump server': [560, 9]
     'Regression Workflow N: Topology Import (netbox, librenms, opennms)': [636, 24]
     'Regression Workflow O: Scrapli': [628, 113]
-    'Regression Workflow P: large workflow (scalability)': &id002 [483, -268]
+    'Regression Workflow P: large workflow (scalability)': &id004 [483, -268]
     'Regression Workflow Q: File transfer': [576, 135]
-    'Regression workflow P: large workflow (scalability)': *id002
+    'Regression Workflow R: skip services in service by service mode': &id005 [500,
+      0]
+    'Regression Workflow S: conditional skip query with skip value set to False': &id006 [
+      640, -155]
+    'Regression workflow P: large workflow (scalability)': *id004
     Subworkflow 1: !!python/tuple [0, 0]
     Subworkflow 2: !!python/tuple [0, 0]
     T: !!python/tuple [500, 0]
     TEST: !!python/tuple [500, 0]
     TEST2: !!python/tuple [500, 0]
     Workflow  in device by device mode: !!python/tuple [0, 0]
-    'Workflow Regression R: skip services in service by service mode': [500, 0]
+    'Workflow Regression R: skip services in service by service mode': *id005
+    'Workflow Regression S: conditional skip query with skip value set to False': *id006
     Workflow in service by service mode (workflow targets): !!python/tuple [0, 0]
     Workflow in service targets mode: !!python/tuple [0, 0]
     Workflow with device and value iteration: [500, 0]
@@ -968,8 +978,8 @@
     'Regression Workflow C: Advanced multiprocessing': [340, 109]
     'Regression Workflow D: Prompts': [405, -103]
     'Regression Workflow L: superworkflow': [162, -126]
-    'Regression Workflow P: large workflow (scalability)': &id003 [-415, -115]
-    'Regression workflow P: large workflow (scalability)': *id003
+    'Regression Workflow P: large workflow (scalability)': &id007 [-415, -115]
+    'Regression workflow P: large workflow (scalability)': *id007
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -8788,8 +8798,8 @@
     'Regression Workflow C: Advanced multiprocessing': [340, 109]
     'Regression Workflow D: Prompts': [405, -103]
     'Regression Workflow L: superworkflow': [162, -126]
-    'Regression Workflow P: large workflow (scalability)': &id004 [-404, -20]
-    'Regression workflow P: large workflow (scalability)': *id004
+    'Regression Workflow P: large workflow (scalability)': &id008 [-404, -20]
+    'Regression workflow P: large workflow (scalability)': *id008
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -8858,8 +8868,8 @@
     c: ['1', '2', '3']
   pools: []
   positions:
-    'Regression Workflow P: large workflow (scalability)': &id005 [-406, 73]
-    'Regression workflow P: large workflow (scalability)': *id005
+    'Regression Workflow P: large workflow (scalability)': &id009 [-406, 73]
+    'Regression workflow P: large workflow (scalability)': *id009
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -8928,8 +8938,8 @@
     c: ['1', '2', '3']
   pools: []
   positions:
-    'Regression Workflow P: large workflow (scalability)': &id006 [-402, 156]
-    'Regression workflow P: large workflow (scalability)': *id006
+    'Regression Workflow P: large workflow (scalability)': &id010 [-402, 156]
+    'Regression workflow P: large workflow (scalability)': *id010
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -8998,8 +9008,8 @@
     c: ['1', '2', '3']
   pools: []
   positions:
-    'Regression Workflow P: large workflow (scalability)': &id007 [-94, 200]
-    'Regression workflow P: large workflow (scalability)': *id007
+    'Regression Workflow P: large workflow (scalability)': &id011 [-94, 200]
+    'Regression workflow P: large workflow (scalability)': *id011
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -9068,8 +9078,8 @@
     c: ['1', '2', '3']
   pools: []
   positions:
-    'Regression Workflow P: large workflow (scalability)': &id008 [-94, 109]
-    'Regression workflow P: large workflow (scalability)': *id008
+    'Regression Workflow P: large workflow (scalability)': &id012 [-94, 109]
+    'Regression workflow P: large workflow (scalability)': *id012
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -9151,8 +9161,8 @@
   operating_system: ''
   pools: []
   positions:
-    'Regression Workflow P: large workflow (scalability)': &id009 [-117, 5]
-    'Regression workflow P: large workflow (scalability)': *id009
+    'Regression Workflow P: large workflow (scalability)': &id013 [-117, 5]
+    'Regression workflow P: large workflow (scalability)': *id013
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -9236,8 +9246,8 @@
   operating_system: ''
   pools: []
   positions:
-    'Regression Workflow P: large workflow (scalability)': &id010 [-81, -125]
-    'Regression workflow P: large workflow (scalability)': *id010
+    'Regression Workflow P: large workflow (scalability)': &id014 [-81, -125]
+    'Regression workflow P: large workflow (scalability)': *id014
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -9321,8 +9331,8 @@
   operating_system: ''
   pools: []
   positions:
-    'Regression Workflow P: large workflow (scalability)': &id011 [-89, -196]
-    'Regression workflow P: large workflow (scalability)': *id011
+    'Regression Workflow P: large workflow (scalability)': &id015 [-89, -196]
+    'Regression workflow P: large workflow (scalability)': *id015
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -9406,8 +9416,8 @@
   operating_system: ''
   pools: []
   positions:
-    'Regression Workflow P: large workflow (scalability)': &id012 [183, -222]
-    'Regression workflow P: large workflow (scalability)': *id012
+    'Regression Workflow P: large workflow (scalability)': &id016 [183, -222]
+    'Regression workflow P: large workflow (scalability)': *id016
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -9491,8 +9501,8 @@
   operating_system: ''
   pools: []
   positions:
-    'Regression Workflow P: large workflow (scalability)': &id013 [188, -130]
-    'Regression workflow P: large workflow (scalability)': *id013
+    'Regression Workflow P: large workflow (scalability)': &id017 [188, -130]
+    'Regression workflow P: large workflow (scalability)': *id017
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -9576,8 +9586,8 @@
   operating_system: ''
   pools: []
   positions:
-    'Regression Workflow P: large workflow (scalability)': &id014 [190, -36]
-    'Regression workflow P: large workflow (scalability)': *id014
+    'Regression Workflow P: large workflow (scalability)': &id018 [190, -36]
+    'Regression workflow P: large workflow (scalability)': *id018
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -9641,8 +9651,8 @@
   operating_system: ''
   pools: []
   positions:
-    'Regression Workflow P: large workflow (scalability)': &id015 [194, 47]
-    'Regression workflow P: large workflow (scalability)': *id015
+    'Regression Workflow P: large workflow (scalability)': &id019 [194, 47]
+    'Regression workflow P: large workflow (scalability)': *id019
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -9702,8 +9712,8 @@
   operating_system: ''
   pools: []
   positions:
-    'Regression Workflow P: large workflow (scalability)': &id016 [203, 127]
-    'Regression workflow P: large workflow (scalability)': *id016
+    'Regression Workflow P: large workflow (scalability)': &id020 [203, 127]
+    'Regression workflow P: large workflow (scalability)': *id020
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -9763,8 +9773,8 @@
   operating_system: ''
   pools: []
   positions:
-    'Regression Workflow P: large workflow (scalability)': &id017 [207, 230]
-    'Regression workflow P: large workflow (scalability)': *id017
+    'Regression Workflow P: large workflow (scalability)': &id021 [207, 230]
+    'Regression workflow P: large workflow (scalability)': *id021
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -9824,8 +9834,8 @@
   operating_system: ''
   pools: []
   positions:
-    'Regression Workflow P: large workflow (scalability)': &id018 [476, 232]
-    'Regression workflow P: large workflow (scalability)': *id018
+    'Regression Workflow P: large workflow (scalability)': &id022 [476, 232]
+    'Regression workflow P: large workflow (scalability)': *id022
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -9885,8 +9895,8 @@
   operating_system: ''
   pools: []
   positions:
-    'Regression Workflow P: large workflow (scalability)': &id019 [471, 142]
-    'Regression workflow P: large workflow (scalability)': *id019
+    'Regression Workflow P: large workflow (scalability)': &id023 [471, 142]
+    'Regression workflow P: large workflow (scalability)': *id023
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -9946,8 +9956,8 @@
   operating_system: ''
   pools: []
   positions:
-    'Regression Workflow P: large workflow (scalability)': &id020 [476, 44]
-    'Regression workflow P: large workflow (scalability)': *id020
+    'Regression Workflow P: large workflow (scalability)': &id024 [476, 44]
+    'Regression workflow P: large workflow (scalability)': *id024
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -10007,8 +10017,8 @@
   operating_system: ''
   pools: []
   positions:
-    'Regression Workflow P: large workflow (scalability)': &id021 [469, -50]
-    'Regression workflow P: large workflow (scalability)': *id021
+    'Regression Workflow P: large workflow (scalability)': &id025 [469, -50]
+    'Regression workflow P: large workflow (scalability)': *id025
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -10068,8 +10078,8 @@
   operating_system: ''
   pools: []
   positions:
-    'Regression Workflow P: large workflow (scalability)': &id022 [467, -163]
-    'Regression workflow P: large workflow (scalability)': *id022
+    'Regression Workflow P: large workflow (scalability)': &id026 [467, -163]
+    'Regression workflow P: large workflow (scalability)': *id026
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -10642,14 +10652,14 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels: {}
-  last_modified: '2020-07-30 03:01:14.405187'
+  last_modified: '2020-08-03 12:05:01.889086'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: 'Workflow Regression R: skip services in service by service mode'
+  name: 'Regression Workflow R: skip services in service by service mode'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -10663,13 +10673,13 @@
   reply_to: ''
   reserved: false
   run_method: per_service_with_workflow_targets
-  scoped_name: 'Workflow Regression R: skip services in service by service mode'
+  scoped_name: 'Regression Workflow R: skip services in service by service mode'
   send_notification: false
   send_notification_method: mail
-  services: ['[Shared] Start', '[Shared] End', '[Workflow Regression R: skip services
-      in service by service mode] Partial failure', '[Workflow Regression R: skip
-      services in service by service mode] Skipped service', '[Workflow Regression
-      R: skip services in service by service mode] Last service']
+  services: ['[Shared] Start', '[Shared] End', '[Regression Workflow R: skip services
+      in service by service mode] Partial failure', '[Regression Workflow R: skip
+      services in service by service mode] Last service', '[Regression Workflow R:
+      skip services in service by service mode] Skipped service']
   shared: false
   skip: false
   skip_query: ''
@@ -10711,7 +10721,7 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Workflow Regression R: skip services in service by service mode] Partial
+  name: '[Regression Workflow R: skip services in service by service mode] Partial
     failure'
   negative_logic: false
   notification_header: ''
@@ -10719,7 +10729,9 @@
   operating_system: ''
   pools: []
   positions:
-    'Workflow Regression R: skip services in service by service mode': [12, -125]
+    'Regression Workflow R: skip services in service by service mode': &id027 [-124,
+      -154]
+    'Workflow Regression R: skip services in service by service mode': *id027
   postprocessing: results["success"] = device.name == "Washington"
   postprocessing_mode: always
   preprocessing: ''
@@ -10769,22 +10781,23 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2020-07-30 03:00:49.063845'
+  last_modified: '2020-08-03 11:56:43.665997'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Workflow Regression R: skip services in service by service mode] Skipped
-    service'
+  name: '[Regression Workflow R: skip services in service by service mode] Last service'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
   pools: []
   positions:
-    'Workflow Regression R: skip services in service by service mode': [304, -102]
+    'Regression Workflow R: skip services in service by service mode': &id028 [304,
+      -102]
+    'Workflow Regression R: skip services in service by service mode': *id028
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -10792,7 +10805,7 @@
   reply_to: ''
   reserved: false
   run_method: per_device
-  scoped_name: Skipped service
+  scoped_name: Last service
   send_notification: false
   send_notification_method: mail
   shared: false
@@ -10834,21 +10847,24 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2020-07-30 03:01:02.102280'
+  last_modified: '2020-08-03 11:56:38.981289'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Workflow Regression R: skip services in service by service mode] Last service'
+  name: '[Regression Workflow R: skip services in service by service mode] Skipped
+    service'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
   pools: []
   positions:
-    'Workflow Regression R: skip services in service by service mode': [126, 129]
+    'Regression Workflow R: skip services in service by service mode': &id029 [12,
+      179]
+    'Workflow Regression R: skip services in service by service mode': *id029
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -10856,11 +10872,358 @@
   reply_to: ''
   reserved: false
   run_method: per_device
-  scoped_name: Last service
+  scoped_name: Skipped service
   send_notification: false
   send_notification_method: mail
   shared: false
   skip: true
+  skip_query: ''
+  skip_value: 'True'
+  source_code: "# Availble variables: device, results, run\r\n# Returning state:\r\
+    \n#    results[\"success\"] = True\r\n#    results[\"result\"] = <return data>\r\
+    \n# Logging: log(level, text)\r\n#    log(\"info\", \"My log message\")\r\n# Exit\
+    \ in the middle of the script:\r\n#    exit()\r\n#    Note: exit() is not required\
+    \ as the last line\r\n\r\nresult = {}\r\nresults[\"success\"] = True\r\nresults[\"\
+    result\"] = result"
+  time_between_retries: 10
+  type: python_snippet_service
+  update_pools: false
+  validation_condition: success
+  validation_method: none
+  vendor: ''
+  waiting_time: 0
+- close_connection: false
+  completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  devices: [PaloAlto, Austin, Washington]
+  dict_match: {}
+  display_only_failed_nodes: false
+  events: []
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  labels:
+    065de869-c69f-4489-8c9a-8dbb520d1031:
+      alignment: left
+      content: "Must be tested both in:\r\n- device by device mode\r\n- service by\
+        \ service with workflow targets mode"
+      positions: [207, 65]
+    0e05e9d9-86cc-4158-b826-8cb8af123da6:
+      alignment: left
+      content: "This workflow runs on 3 devices including Washington.\r\nThe first\
+        \ service will skip Washington.\r\nWashington must follow the failure edges\
+        \ while the other\r\ntwo devices follow the success edge.\r\nIn the end, they\
+        \ should all run the last service."
+      positions: [212, -141]
+  last_modified: '2020-08-03 12:04:50.862773'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: 'Regression Workflow S: conditional skip query with skip value set to False'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions: {}
+  postprocessing: ''
+  postprocessing_mode: always
+  preprocessing: ''
+  public: false
+  reply_to: ''
+  reserved: false
+  run_method: per_service_with_workflow_targets
+  scoped_name: 'Regression Workflow S: conditional skip query with skip value set
+    to False'
+  send_notification: false
+  send_notification_method: mail
+  services: ['[Shared] Start', '[Shared] End', '[Regression Workflow S: conditional
+      skip query with skip value set to False] Skip Washington with Skip value ==
+      False', '[Regression Workflow S: conditional skip query with skip value set
+      to False] Post-failure service', '[Regression Workflow S: conditional skip query
+      with skip value set to False] Post-success service', '[Regression Workflow S:
+      conditional skip query with skip value set to False] Final service']
+  shared: false
+  skip: false
+  skip_query: ''
+  skip_value: 'True'
+  time_between_retries: 10
+  type: workflow
+  update_pools: false
+  validation_condition: success
+  validation_method: none
+  vendor: ''
+  waiting_time: 0
+  workflow_category: Example workflow(s)
+- completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  devices: []
+  dict_match: {}
+  display_only_failed_nodes: false
+  events: []
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2020-08-03 12:01:17.859136'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Regression Workflow S: conditional skip query with skip value set to False]
+    Skip Washington with Skip value == False'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions:
+    'Regression Workflow S: conditional skip query with skip value set to False': &id030 [
+      -149, -30]
+    'Workflow Regression S: conditional skip query with skip value set to False': *id030
+  postprocessing: ''
+  postprocessing_mode: always
+  preprocessing: ''
+  public: false
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: Skip Washington with Skip value == False
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: false
+  skip_query: device.name == "Washington"
+  skip_value: 'False'
+  source_code: "# Availble variables: device, results, run\r\n# Returning state:\r\
+    \n#    results[\"success\"] = True\r\n#    results[\"result\"] = <return data>\r\
+    \n# Logging: log(level, text)\r\n#    log(\"info\", \"My log message\")\r\n# Exit\
+    \ in the middle of the script:\r\n#    exit()\r\n#    Note: exit() is not required\
+    \ as the last line\r\n\r\nresult = {}\r\nresults[\"success\"] = True\r\nresults[\"\
+    result\"] = result"
+  time_between_retries: 10
+  type: python_snippet_service
+  update_pools: false
+  validation_condition: success
+  validation_method: none
+  vendor: ''
+  waiting_time: 0
+- completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  devices: []
+  dict_match: {}
+  display_only_failed_nodes: false
+  events: []
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2020-08-03 12:00:27.263343'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Regression Workflow S: conditional skip query with skip value set to False]
+    Post-failure service'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions:
+    'Regression Workflow S: conditional skip query with skip value set to False': &id031 [
+      264, -16]
+    'Workflow Regression S: conditional skip query with skip value set to False': *id031
+  postprocessing: ''
+  postprocessing_mode: always
+  preprocessing: ''
+  public: false
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: Post-failure service
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: false
+  skip_query: ''
+  skip_value: 'True'
+  source_code: "# Availble variables: device, results, run\r\n# Returning state:\r\
+    \n#    results[\"success\"] = True\r\n#    results[\"result\"] = <return data>\r\
+    \n# Logging: log(level, text)\r\n#    log(\"info\", \"My log message\")\r\n# Exit\
+    \ in the middle of the script:\r\n#    exit()\r\n#    Note: exit() is not required\
+    \ as the last line\r\n\r\nresult = {}\r\nresults[\"success\"] = True\r\nresults[\"\
+    result\"] = result"
+  time_between_retries: 10
+  type: python_snippet_service
+  update_pools: false
+  validation_condition: success
+  validation_method: none
+  vendor: ''
+  waiting_time: 0
+- completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  devices: []
+  dict_match: {}
+  display_only_failed_nodes: false
+  events: []
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2020-08-03 12:00:36.785336'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Regression Workflow S: conditional skip query with skip value set to False]
+    Post-success service'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions:
+    'Regression Workflow S: conditional skip query with skip value set to False': &id032 [
+      208, 194]
+    'Workflow Regression S: conditional skip query with skip value set to False': *id032
+  postprocessing: ''
+  postprocessing_mode: always
+  preprocessing: ''
+  public: false
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: Post-success service
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: false
+  skip_query: ''
+  skip_value: 'True'
+  source_code: "# Availble variables: device, results, run\r\n# Returning state:\r\
+    \n#    results[\"success\"] = True\r\n#    results[\"result\"] = <return data>\r\
+    \n# Logging: log(level, text)\r\n#    log(\"info\", \"My log message\")\r\n# Exit\
+    \ in the middle of the script:\r\n#    exit()\r\n#    Note: exit() is not required\
+    \ as the last line\r\n\r\nresult = {}\r\nresults[\"success\"] = True\r\nresults[\"\
+    result\"] = result"
+  time_between_retries: 10
+  type: python_snippet_service
+  update_pools: false
+  validation_condition: success
+  validation_method: none
+  vendor: ''
+  waiting_time: 0
+- completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  devices: []
+  dict_match: {}
+  display_only_failed_nodes: false
+  events: []
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2020-08-03 12:00:41.901802'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Regression Workflow S: conditional skip query with skip value set to False]
+    Final service'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions:
+    'Regression Workflow S: conditional skip query with skip value set to False': &id033 [
+      636, 63]
+    'Workflow Regression S: conditional skip query with skip value set to False': *id033
+  postprocessing: ''
+  postprocessing_mode: always
+  preprocessing: ''
+  public: false
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: Final service
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: false
   skip_query: ''
   skip_value: 'True'
   source_code: "# Availble variables: device, results, run\r\n# Returning state:\r\

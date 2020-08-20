@@ -171,10 +171,12 @@ function createLink3d(link) {
 }
 
 function computeLinkMiddle(link) {
-  const φ1 = (link.source_latitude * Math.PI) / 180;
-  const φ2 = (link.destination_latitude * Math.PI) / 180;
-  const λ1 = (link.source_longitude * Math.PI) / 180;
-  const λ2 = (link.destination_longitude * Math.PI) / 180;
+  const [φ1, φ2, λ1, λ2] = [
+    link.source_latitude,
+    link.destination_latitude,
+    link.source_longitude,
+    link.destination_longitude,
+  ].map((coordinate) => (coordinate * Math.PI) / 180);
   const Bx = Math.cos(φ2) * Math.cos(λ2 - λ1);
   const By = Math.cos(φ2) * Math.sin(λ2 - λ1);
   const φ3 = Math.atan2(

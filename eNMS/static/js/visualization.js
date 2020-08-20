@@ -163,32 +163,26 @@ function createLink3d(link) {
   );
 
   labels.add({
-    position: new Cesium.Cartesian3.fromDegrees(
-      ...computeLinkMiddle(link),
-      0.0
-    ),
+    position: new Cesium.Cartesian3.fromDegrees(...computeLinkMiddle(link), 0.0),
     scaleByDistance: new Cesium.NearFarScalar(1.5e2, 1.5, 8.0e6, 0.0),
     fillColor: Cesium.Color.BLACK,
-    pixelOffset: new Cesium.Cartesian2(30, 0),
     text: link.name,
   });
 }
 
 function computeLinkMiddle(link) {
-  const lat1 = link.source_latitude
-  const lat2 = link.destination_latitude
-  const lon1 = link.source_longitude
-  const lon2 = link.destination_longitude
-  const φ1 = lat1 * Math.PI/180;
-  const φ2 = lat2 * Math.PI/180;
-  const λ1 = lon1 * Math.PI/180;
-  const λ2 = lon2 * Math.PI/180;
-  const Bx = Math.cos(φ2) * Math.cos(λ2-λ1);
-  const By = Math.cos(φ2) * Math.sin(λ2-λ1);
-  const φ3 = Math.atan2(Math.sin(φ1) + Math.sin(φ2),
-                        Math.sqrt( (Math.cos(φ1)+Bx)*(Math.cos(φ1)+Bx) + By*By ) );
+  const φ1 = (link.source_latitude * Math.PI) / 180;
+  const φ2 = (link.destination_latitude * Math.PI) / 180;
+  const λ1 = (link.source_longitude * Math.PI) / 180;
+  const λ2 = (link.destination_longitude * Math.PI) / 180;
+  const Bx = Math.cos(φ2) * Math.cos(λ2 - λ1);
+  const By = Math.cos(φ2) * Math.sin(λ2 - λ1);
+  const φ3 = Math.atan2(
+    Math.sin(φ1) + Math.sin(φ2),
+    Math.sqrt((Math.cos(φ1) + Bx) * (Math.cos(φ1) + Bx) + By * By)
+  );
   const λ3 = λ1 + Math.atan2(By, Math.cos(φ1) + Bx);
-  return [λ3 * (180/Math.PI), φ3* (180/Math.PI)]
+  return [λ3 * (180 / Math.PI), φ3 * (180 / Math.PI)];
 }
 
 function createLink2d(link) {

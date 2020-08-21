@@ -13,6 +13,13 @@
       "tooltip": "OpenStreetMap (OSM) is a collaborative project to create a free editable map of the world.\nhttp://www.openstreetmap.org",
       "type": "OpenStreetMapImageryProvider",
       "args": { "url": "http://tile.openstreetmap.org/" }
+    },
+    "Bing Maps Aerial": {
+      "category": "Satellite View",
+      "icon": "Widgets/Images/ImageryProviders/bingAerial.png",
+      "tooltip": "Bing Maps standard road maps, provided by Cesium ion",
+      "type": "createWorldImagery",
+      "arg": "AERIAL"
     }
   }
 }

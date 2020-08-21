@@ -396,16 +396,6 @@ function init3dGeographicalFramework() {
   polylines = new Cesium.PolylineCollection();
   let providerViewModels2 = [
     new Cesium.ProviderViewModel({
-      name: "Bing Maps Aerial",
-      iconUrl: Cesium.buildModuleUrl("Widgets/Images/ImageryProviders/bingAerial.png"),
-      category: "Cesium ion",
-      creationFunction: function () {
-        return new Cesium.createWorldImagery({
-          style: Cesium.IonWorldImageryStyle.AERIAL,
-        });
-      },
-    }),
-    new Cesium.ProviderViewModel({
       name: "Bing Maps Aerial with Labels",
       iconUrl: Cesium.buildModuleUrl(
         "Widgets/Images/ImageryProviders/bingAerialLabels.png"
@@ -567,6 +557,12 @@ area washes and organic edges over a paper texture to add warm pop to any map.\n
       layer.creationFunction = function () {
         return new Cesium[properties.type]({
           url: Cesium.buildModuleUrl(properties.args.url),
+        });
+      };
+    } else if (properties.type == "createWorldImagery") {
+      layer.creationFunction = function () {
+        return new Cesium[properties.type]({
+          style: Cesium.IonWorldImageryStyle[properties.arg],
         });
       };
     } else {

@@ -20,6 +20,13 @@
       "tooltip": "Bing Maps standard road maps, provided by Cesium ion",
       "type": "createWorldImagery",
       "arg": "AERIAL"
+    },
+    "Bing Maps Aerial with Labels": {
+      "category": "Satellite View",
+      "icon": "Widgets/Images/ImageryProviders/bingAerialLabels.png",
+      "tooltip": "Bing Maps aerial imagery with labels, provided by Cesium ion",
+      "type": "createWorldImagery",
+      "arg": "AERIAL_WITH_LABELS"
     }
   }
 }

@@ -396,17 +396,6 @@ function init3dGeographicalFramework() {
   polylines = new Cesium.PolylineCollection();
   let providerViewModels2 = [
     new Cesium.ProviderViewModel({
-      name: "Open Street Map",
-      iconUrl: Cesium.buildModuleUrl(
-        "Widgets/Images/ImageryProviders/openStreetMap.png"
-      ),
-      creationFunction: function () {
-        return new Cesium.OpenStreetMapImageryProvider({
-          url: "http://tile.openstreetmap.org/",
-        });
-      },
-    }),
-    new Cesium.ProviderViewModel({
       name: "Bing Maps Aerial",
       iconUrl: Cesium.buildModuleUrl("Widgets/Images/ImageryProviders/bingAerial.png"),
       category: "Cesium ion",
@@ -570,7 +559,7 @@ area washes and organic edges over a paper texture to add warm pop to any map.\n
   ]) {
     layer = {
       name: name,
-      iconUrl: Cesium.buildModuleUrl(properties.url),
+      iconUrl: Cesium.buildModuleUrl(properties.icon),
       tooltip: properties.tooltip,
     };
     if (properties.type == "TileMapServiceImageryProvider") {
@@ -578,6 +567,10 @@ area washes and organic edges over a paper texture to add warm pop to any map.\n
         return new Cesium[properties.type]({
           url: Cesium.buildModuleUrl(properties.args.url),
         });
+      };
+    } else {
+      layer.creationFunction = function () {
+        return new Cesium[properties.type](properties.args);
       };
     }
     return new Cesium.ProviderViewModel(layer);

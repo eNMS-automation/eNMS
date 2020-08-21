@@ -5,6 +5,12 @@
       "tooltip": "Natural Earth II, darkened for contrast.\nhttp://www.naturalearthdata.com/",
       "type": "TileMapServiceImageryProvider",
       "args": { "url": "Assets/Textures/NaturalEarthII" }
+    },
+    "Open Street Map": {
+      "icon": "Widgets/Images/ImageryProviders/openStreetMap.png",
+      "tooltip": "",
+      "type": "OpenStreetMapImageryProvider",
+      "args": { "url": "http://tile.openstreetmap.org/" }
     }
   }
 }

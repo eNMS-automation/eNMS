@@ -406,6 +406,16 @@ function init3dGeographicalFramework() {
         });
       },
     }),
+    new Cesium.ProviderViewModel({
+      name : 'Natural Earth II',
+      iconUrl : Cesium.buildModuleUrl('Widgets/Images/ImageryProviders/naturalEarthII.png'),
+      tooltip : 'Natural Earth II, darkened for contrast.\nhttp://www.naturalearthdata.com/',
+      creationFunction : function() {
+          return new Cesium.TileMapServiceImageryProvider({
+              url : Cesium.buildModuleUrl('Assets/Textures/NaturalEarthII')
+          });
+      }
+    })
   ];
   viewer = new Cesium.Viewer("map", {
     timeline: false,

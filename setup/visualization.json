@@ -1,14 +1,16 @@
 {
   "layers": {
     "Natural Earth II": {
+      "category": "Satellite View",
       "icon": "Widgets/Images/ImageryProviders/naturalEarthII.png",
       "tooltip": "Natural Earth II, darkened for contrast.\nhttp://www.naturalearthdata.com/",
       "type": "TileMapServiceImageryProvider",
       "args": { "url": "Assets/Textures/NaturalEarthII" }
     },
     "Open Street Map": {
+      "category": "Street View",
       "icon": "Widgets/Images/ImageryProviders/openStreetMap.png",
-      "tooltip": "",
+      "tooltip": "OpenStreetMap (OSM) is a collaborative project to create a free editable map of the world.\nhttp://www.openstreetmap.org",
       "type": "OpenStreetMapImageryProvider",
       "args": { "url": "http://tile.openstreetmap.org/" }
     }

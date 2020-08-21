@@ -25,6 +25,11 @@ intrinsic (Safari) - moz (Firefox) - webkit (Chrome) */
   display: none !important;
 }
 
+/* Dont display section titles in base layer picker */
+.cesium-baseLayerPicker-sectionTitle {
+  display: none !important;
+}
+
 .scene-tooltip {
   transform: translate(-50%, -25px) !important;
 }

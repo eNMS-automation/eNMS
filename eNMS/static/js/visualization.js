@@ -558,6 +558,7 @@ area washes and organic edges over a paper texture to add warm pop to any map.\n
     properties,
   ]) {
     layer = {
+      category: properties.category,
       name: name,
       iconUrl: Cesium.buildModuleUrl(properties.icon),
       tooltip: properties.tooltip,

@@ -396,6 +396,16 @@ function init3dGeographicalFramework() {
   polylines = new Cesium.PolylineCollection();
   let providerViewModels = [
     new Cesium.ProviderViewModel({
+      name : 'Natural Earth II',
+      iconUrl : Cesium.buildModuleUrl('Widgets/Images/ImageryProviders/naturalEarthII.png'),
+      tooltip : 'Natural Earth II, darkened for contrast.\nhttp://www.naturalearthdata.com/',
+      creationFunction : function() {
+          return new Cesium.TileMapServiceImageryProvider({
+              url : Cesium.buildModuleUrl('Assets/Textures/NaturalEarthII')
+          });
+      }
+    }),
+    new Cesium.ProviderViewModel({
       name: "Open Street Map",
       iconUrl: Cesium.buildModuleUrl(
         "Widgets/Images/ImageryProviders/openStreetMap.png"
@@ -407,14 +417,14 @@ function init3dGeographicalFramework() {
       },
     }),
     new Cesium.ProviderViewModel({
-      name : 'Natural Earth II',
-      iconUrl : Cesium.buildModuleUrl('Widgets/Images/ImageryProviders/naturalEarthII.png'),
-      tooltip : 'Natural Earth II, darkened for contrast.\nhttp://www.naturalearthdata.com/',
-      creationFunction : function() {
-          return new Cesium.TileMapServiceImageryProvider({
-              url : Cesium.buildModuleUrl('Assets/Textures/NaturalEarthII')
-          });
-      }
+      name: "Bing Maps Aerial",
+      iconUrl: Cesium.buildModuleUrl("Widgets/Images/ImageryProviders/bingAerial.png"),
+      category: "Cesium ion",
+      creationFunction: function () {
+        return new Cesium.createWorldImagery({
+          style: Cesium.IonWorldImageryStyle.AERIAL,
+        });
+      },
     })
   ];
   viewer = new Cesium.Viewer("map", {

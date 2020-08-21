@@ -396,25 +396,6 @@ function init3dGeographicalFramework() {
   polylines = new Cesium.PolylineCollection();
   let providerViewModels2 = [
     new Cesium.ProviderViewModel({
-      name: "ESRI National Geographic",
-      iconUrl: Cesium.buildModuleUrl(
-        "Widgets/Images/ImageryProviders/esriNationalGeographic.png"
-      ),
-      tooltip:
-        "\
-This web map contains the National Geographic World Map service. This map service is designed to be used as a general reference map \
-for informational and educational purposes as well as a basemap by GIS professionals and other users for creating web maps and web \
-mapping applications.\nhttp://www.esri.com",
-      category: "Other",
-      creationFunction: function () {
-        return new Cesium.ArcGisMapServerImageryProvider({
-          url:
-            "https://services.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer/",
-          enablePickFeatures: false,
-        });
-      },
-    }),
-    new Cesium.ProviderViewModel({
       name: "Stamen Watercolor",
       iconUrl: Cesium.buildModuleUrl(
         "Widgets/Images/ImageryProviders/stamenWatercolor.png"

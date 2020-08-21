@@ -54,6 +54,16 @@
         "url": "https://services.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer",
         "enablePickFeatures": false
       }
+    },
+    "ESRI National Geographic": {
+      "category":"Street View",
+      "icon": "Widgets/Images/ImageryProviders/esriNationalGeographic.png",
+      "tooltip": "National Geographic World Map service.\nhttp://www.esri.com",
+      "type": "ArcGisMapServerImageryProvider",
+      "args": {
+        "url": "https://services.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer",
+        "enablePickFeatures": false
+      }
     }
   }
 }

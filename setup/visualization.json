@@ -1,0 +1,12 @@
+{
+  "layers": {
+    "Natural Earth II": {
+      "icon": "Widgets/Images/ImageryProviders/naturalEarthII.png",
+      "tooltip": "Natural Earth II, darkened for contrast.\nhttp://www.naturalearthdata.com/",
+      "function": {
+        "type": "TileMapServiceImageryProvider",
+        "url": "Assets/Textures/NaturalEarthII"
+      }
+    }
+  }
+}

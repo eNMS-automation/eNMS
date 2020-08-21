@@ -394,15 +394,15 @@ function init2dGeographicalFramework() {
 
 function init3dGeographicalFramework() {
   polylines = new Cesium.PolylineCollection();
-  let providerViewModels = [
+  let providerViewModels2 = [
     new Cesium.ProviderViewModel({
       name : 'Natural Earth II',
       iconUrl : Cesium.buildModuleUrl('Widgets/Images/ImageryProviders/naturalEarthII.png'),
       tooltip : 'Natural Earth II, darkened for contrast.\nhttp://www.naturalearthdata.com/',
       creationFunction : function() {
-          return new Cesium.TileMapServiceImageryProvider({
-              url : Cesium.buildModuleUrl('Assets/Textures/NaturalEarthII')
-          });
+        return new Cesium.TileMapServiceImageryProvider({
+          url : Cesium.buildModuleUrl('Assets/Textures/NaturalEarthII')
+        });
       }
     }),
     new Cesium.ProviderViewModel({
@@ -576,7 +576,15 @@ area washes and organic edges over a paper texture to add warm pop to any map.\n
       },
     })
   ];
-  console.log(visualization)
+  let providerViewModels = Object.entries(visualization.layers).map(function([name, properties]) {
+    layer = {"name": name, iconUrl: Cesium.buildModuleUrl(properties.url), tooltip: properties.tooltip}
+    if (properties.type == "TileMapServiceImageryProvider") {
+      layer.creationFunction = function() {
+        return new Cesium[properties.type]({url: Cesium.buildModuleUrl(properties.args.url)})
+      }
+    }
+    return new Cesium.ProviderViewModel(layer)
+  });
   viewer = new Cesium.Viewer("map", {
     timeline: false,
     geocoder: false,

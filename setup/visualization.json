@@ -27,6 +27,13 @@
       "tooltip": "Bing Maps aerial imagery with labels, provided by Cesium ion",
       "type": "createWorldImagery",
       "arg": "AERIAL_WITH_LABELS"
+    },
+    "Bing Maps Aerial with Roads": {
+      "category": "Street View",
+      "icon": "Widgets/Images/ImageryProviders/bingRoads.png",
+      "tooltip": "Bing Maps standard road maps, provided by Cesium ion",
+      "type": "createWorldImagery",
+      "arg": "ROAD"
     }
   }
 }

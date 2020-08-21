@@ -396,17 +396,6 @@ function init3dGeographicalFramework() {
   polylines = new Cesium.PolylineCollection();
   let providerViewModels2 = [
     new Cesium.ProviderViewModel({
-      name: "Bing Maps Roads",
-      iconUrl: Cesium.buildModuleUrl("Widgets/Images/ImageryProviders/bingRoads.png"),
-      tooltip: "Bing Maps standard road maps, provided by Cesium ion",
-      category: "Cesium ion",
-      creationFunction: function () {
-        return new Cesium.createWorldImagery({
-          style: Cesium.IonWorldImageryStyle.ROAD,
-        });
-      },
-    }),
-    new Cesium.ProviderViewModel({
       name: "ESRI World Imagery",
       iconUrl: Cesium.buildModuleUrl(
         "Widgets/Images/ImageryProviders/esriWorldImagery.png"

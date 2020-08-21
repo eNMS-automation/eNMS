@@ -36,7 +36,7 @@
       "arg": "ROAD"
     },
     "ESRI World Imagery": {
-      "category":"Satellite View",
+      "category": "Satellite View",
       "icon": "Widgets/Images/ImageryProviders/esriWorldImagery.png",
       "tooltip": "World Imagery provides one meter or better satellite and aerial imagery.\nhttp://www.esri.com",
       "type": "ArcGisMapServerImageryProvider",
@@ -46,7 +46,7 @@
       }
     },
     "ESRI World Street Map": {
-      "category":"Street View",
+      "category": "Street View",
       "icon": "Widgets/Images/ImageryProviders/esriWorldStreetMap.png",
       "tooltip": "Street-level data for the world.\nhttp://www.esri.com",
       "type": "ArcGisMapServerImageryProvider",
@@ -56,13 +56,23 @@
       }
     },
     "ESRI National Geographic": {
-      "category":"Street View",
+      "category": "Street View",
       "icon": "Widgets/Images/ImageryProviders/esriNationalGeographic.png",
       "tooltip": "National Geographic World Map service.\nhttp://www.esri.com",
       "type": "ArcGisMapServerImageryProvider",
       "args": {
         "url": "https://services.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer",
         "enablePickFeatures": false
+      }
+    },
+    "Stamen Watercolor": {
+      "category": "Street View",
+      "icon": "Widgets/Images/ImageryProviders/esriNationalGeographic.png",
+      "tooltip": "Reminiscent of hand drawn maps.\nhttp://maps.stamen.com",
+      "type": "OpenStreetMapImageryProvider",
+      "args": {
+        "url": "https://stamen-tiles.a.ssl.fastly.net/watercolor/",
+        "credit": "Map tiles by Stamen Design, under CC BY 3.0. Data by OpenStreetMap, under CC BY SA."
       }
     }
   }

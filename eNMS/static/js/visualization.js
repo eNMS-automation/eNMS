@@ -396,23 +396,6 @@ function init3dGeographicalFramework() {
   polylines = new Cesium.PolylineCollection();
   let providerViewModels2 = [
     new Cesium.ProviderViewModel({
-      name: "Stamen Watercolor",
-      iconUrl: Cesium.buildModuleUrl(
-        "Widgets/Images/ImageryProviders/stamenWatercolor.png"
-      ),
-      tooltip:
-        "Reminiscent of hand drawn maps, Stamen watercolor maps apply raster effect \
-area washes and organic edges over a paper texture to add warm pop to any map.\nhttp://maps.stamen.com",
-      category: "Other",
-      creationFunction: function () {
-        return new OpenStreetMapImageryProvider({
-          url: "https://stamen-tiles.a.ssl.fastly.net/watercolor/",
-          credit:
-            "Map tiles by Stamen Design, under CC BY 3.0. Data by OpenStreetMap, under CC BY SA.",
-        });
-      },
-    }),
-    new Cesium.ProviderViewModel({
       name: "Stamen Toner",
       iconUrl: Cesium.buildModuleUrl("Widgets/Images/ImageryProviders/stamenToner.png"),
       tooltip: "A high contrast black and white map.\nhttp://maps.stamen.com",

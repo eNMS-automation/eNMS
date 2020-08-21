@@ -110,6 +110,7 @@ dimension == "2D" %}
 {% else %}
 <script>
   let dimension = "{{ dimension }}";
+  let visualization = {{ visualization|tojson|safe }};
 </script>
 {% if dimension == "2D" %}
 <script src="{{ url_for('static', filename='lib/leaflet/leaflet.min.js') }}"></script>

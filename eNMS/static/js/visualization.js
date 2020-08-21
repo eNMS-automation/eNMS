@@ -576,6 +576,7 @@ area washes and organic edges over a paper texture to add warm pop to any map.\n
       },
     })
   ];
+  console.log(visualization)
   viewer = new Cesium.Viewer("map", {
     timeline: false,
     geocoder: false,

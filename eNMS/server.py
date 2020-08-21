@@ -40,7 +40,7 @@ from eNMS.forms import (
 )
 from eNMS.forms.administration import init_variable_forms, LoginForm
 from eNMS.models import models, property_types, relationships
-from eNMS.setup import properties, rbac, themes, update_file
+from eNMS.setup import properties, rbac, themes, update_file, visualization
 
 
 class Server(Flask):
@@ -284,7 +284,7 @@ class Server(Flask):
         @blueprint.route("/visualization/<view_type>")
         @self.monitor_requests
         def view(view_type):
-            kwargs = {"endpoint": view_type}
+            kwargs = {"endpoint": view_type, "visualization": visualization}
             if view_type == "geographical_view":
                 kwargs["dimension"] = app.settings["view"]["geographical"]["default"]
             return render_template("visualization.html", **kwargs)

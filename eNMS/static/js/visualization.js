@@ -396,16 +396,6 @@ function init3dGeographicalFramework() {
   polylines = new Cesium.PolylineCollection();
   let providerViewModels2 = [
     new Cesium.ProviderViewModel({
-      name : 'Natural Earth II',
-      iconUrl : Cesium.buildModuleUrl('Widgets/Images/ImageryProviders/naturalEarthII.png'),
-      tooltip : 'Natural Earth II, darkened for contrast.\nhttp://www.naturalearthdata.com/',
-      creationFunction : function() {
-        return new Cesium.TileMapServiceImageryProvider({
-          url : Cesium.buildModuleUrl('Assets/Textures/NaturalEarthII')
-        });
-      }
-    }),
-    new Cesium.ProviderViewModel({
       name: "Open Street Map",
       iconUrl: Cesium.buildModuleUrl(
         "Widgets/Images/ImageryProviders/openStreetMap.png"
@@ -531,9 +521,7 @@ area washes and organic edges over a paper texture to add warm pop to any map.\n
     }),
     new Cesium.ProviderViewModel({
       name: "Stamen Toner",
-      iconUrl: Cesium.buildModuleUrl(
-        "Widgets/Images/ImageryProviders/stamenToner.png"
-      ),
+      iconUrl: Cesium.buildModuleUrl("Widgets/Images/ImageryProviders/stamenToner.png"),
       tooltip: "A high contrast black and white map.\nhttp://maps.stamen.com",
       category: "Other",
       creationFunction: function () {
@@ -574,16 +562,25 @@ area washes and organic edges over a paper texture to add warm pop to any map.\n
       creationFunction: function () {
         return new Cesium.IonImageryProvider({ assetId: 3812 });
       },
-    })
+    }),
   ];
-  let providerViewModels = Object.entries(visualization.layers).map(function([name, properties]) {
-    layer = {"name": name, iconUrl: Cesium.buildModuleUrl(properties.url), tooltip: properties.tooltip}
+  let providerViewModels = Object.entries(visualization.layers).map(function ([
+    name,
+    properties,
+  ]) {
+    layer = {
+      name: name,
+      iconUrl: Cesium.buildModuleUrl(properties.url),
+      tooltip: properties.tooltip,
+    };
     if (properties.type == "TileMapServiceImageryProvider") {
-      layer.creationFunction = function() {
-        return new Cesium[properties.type]({url: Cesium.buildModuleUrl(properties.args.url)})
-      }
+      layer.creationFunction = function () {
+        return new Cesium[properties.type]({
+          url: Cesium.buildModuleUrl(properties.args.url),
+        });
+      };
     }
-    return new Cesium.ProviderViewModel(layer)
+    return new Cesium.ProviderViewModel(layer);
   });
   viewer = new Cesium.Viewer("map", {
     timeline: false,

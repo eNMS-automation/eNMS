@@ -396,49 +396,6 @@ function init3dGeographicalFramework() {
   polylines = new Cesium.PolylineCollection();
   let providerViewModels2 = [
     new Cesium.ProviderViewModel({
-      name: "ESRI World Imagery",
-      iconUrl: Cesium.buildModuleUrl(
-        "Widgets/Images/ImageryProviders/esriWorldImagery.png"
-      ),
-      tooltip:
-        "\
-World Imagery provides one meter or better satellite and aerial imagery in many parts of the world and lower resolution \
-satellite imagery worldwide.  The map includes NASA Blue Marble: Next Generation 500m resolution imagery at small scales \
-(above 1:1,000,000), i-cubed 15m eSAT imagery at medium-to-large scales (down to 1:70,000) for the world, and USGS 15m Landsat \
-imagery for Antarctica. The map features 0.3m resolution imagery in the continental United States and 0.6m resolution imagery in \
-parts of Western Europe from DigitalGlobe. In other parts of the world, 1 meter resolution imagery is available from GeoEye IKONOS, \
-i-cubed Nationwide Prime, Getmapping, AeroGRID, IGN Spain, and IGP Portugal.  Additionally, imagery at different resolutions has been \
-contributed by the GIS User Community.\nhttp://www.esri.com",
-      category: "Other",
-      creationFunction: function () {
-        return new Cesium.ArcGisMapServerImageryProvider({
-          url:
-            "https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer",
-          enablePickFeatures: false,
-        });
-      },
-    }),
-    new Cesium.ProviderViewModel({
-      name: "ESRI World Street Map",
-      iconUrl: Cesium.buildModuleUrl(
-        "Widgets/Images/ImageryProviders/esriWorldStreetMap.png"
-      ),
-      tooltip:
-        "\
-This worldwide street map presents highway-level data for the world. Street-level data includes the United States; much of \
-Canada; Japan; most countries in Europe; Australia and New Zealand; India; parts of South America including Argentina, Brazil, \
-Chile, Colombia, and Venezuela; Ghana; and parts of southern Africa including Botswana, Lesotho, Namibia, South Africa, and Swaziland.\n\
-http://www.esri.com",
-      category: "Other",
-      creationFunction: function () {
-        return new Cesium.ArcGisMapServerImageryProvider({
-          url:
-            "https://services.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer",
-          enablePickFeatures: false,
-        });
-      },
-    }),
-    new Cesium.ProviderViewModel({
       name: "ESRI National Geographic",
       iconUrl: Cesium.buildModuleUrl(
         "Widgets/Images/ImageryProviders/esriNationalGeographic.png"

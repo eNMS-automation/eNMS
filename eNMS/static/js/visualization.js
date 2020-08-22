@@ -29,8 +29,6 @@ const layers = {
   gm: "http://mt0.google.com/vt/lyrs=y&hl=en&x={x}&y={y}&z={z}&s=Ga",
 };
 
-const dimension = visualization.geographical.default;
-
 const iconSizes = {
   antenna: [18, 12],
   firewall: [18, 12],
@@ -44,6 +42,7 @@ const iconSizes = {
 };
 
 let graph;
+let dimension;
 let selectedObject;
 let markersArray = [];
 let polylinesArray = [];
@@ -64,6 +63,7 @@ let polylines;
 let labels;
 
 function initGeographicalFramework() {
+  dimension = visualization.geographical.default;
   if (dimension == "2D") {
     init2dGeographicalFramework();
   } else {

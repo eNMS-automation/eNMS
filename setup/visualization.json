@@ -1,7 +1,7 @@
 {
   "layers": {
     "Natural Earth II": {
-      "category": "Satellite View",
+      "category": "Low-Resolution Satellite View",
       "icon": "Widgets/Images/ImageryProviders/naturalEarthII.png",
       "tooltip": "Natural Earth II, darkened for contrast.\nhttp://www.naturalearthdata.com/",
       "type": "TileMapServiceImageryProvider",
@@ -15,14 +15,14 @@
       "args": { "url": "http://tile.openstreetmap.org/" }
     },
     "Bing Maps Aerial": {
-      "category": "Satellite View",
+      "category": "High-Resolution Satellite View",
       "icon": "Widgets/Images/ImageryProviders/bingAerial.png",
       "tooltip": "Bing Maps standard road maps, provided by Cesium ion",
       "type": "createWorldImagery",
       "arg": "AERIAL"
     },
     "Bing Maps Aerial with Labels": {
-      "category": "Satellite View",
+      "category": "High-Resolution Satellite View",
       "icon": "Widgets/Images/ImageryProviders/bingAerialLabels.png",
       "tooltip": "Bing Maps aerial imagery with labels, provided by Cesium ion",
       "type": "createWorldImagery",
@@ -36,7 +36,7 @@
       "arg": "ROAD"
     },
     "ESRI World Imagery": {
-      "category": "Satellite View",
+      "category": "High-Resolution Satellite View",
       "icon": "Widgets/Images/ImageryProviders/esriWorldImagery.png",
       "tooltip": "World Imagery provides one meter or better satellite and aerial imagery.\nhttp://www.esri.com",
       "type": "ArcGisMapServerImageryProvider",
@@ -86,21 +86,21 @@
       }
     },
     "Sentinel-2": {
-      "category": "Satellite View",
+      "category": "High-Resolution Satellite View",
       "icon": "Widgets/Images/ImageryProviders/sentinel-2.png",
       "tooltip": "Sentinel-2 cloudless by EOX IT Services GmbH (Contains modified Copernicus Sentinel data 2016 and 2017).",
       "type": "IonImageryProvider",
       "args": { "assetId": 3954 }
     },
     "Blue Marble": {
-      "category": "Satellite View",
+      "category": "Low-Resolution Satellite View",
       "icon": "Widgets/Images/ImageryProviders/blueMarble.png",
       "tooltip": "Blue Marble Next Generation July, 2004 imagery from NASA.",
       "type": "IonImageryProvider",
       "args": { "assetId": 3845 }
     },
     "Earth at night": {
-      "category": "Satellite View",
+      "category": "Low-Resolution Satellite View",
       "icon": "Widgets/Images/ImageryProviders/earthAtNight.png",
       "tooltip": "The Earth at night, also known as The Black Marble, is a 500 meter resolution global composite imagery layer released by NASA.",
       "type": "IonImageryProvider",

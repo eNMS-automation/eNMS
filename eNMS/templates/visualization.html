@@ -1,6 +1,6 @@
 {% extends "base_site.html" %} {% block title %} Geographical View {% endblock title %}
-{% block stylesheets %} {{ super() }} {% if endpoint == "geographical_view" %} {% if
-dimension == "2D" %}
+{% set dimension = visualization["geographical"]["default"] %} {% block stylesheets %}
+{{ super() }} {% if endpoint == "geographical_view" %} {% if dimension == "2D" %}
 <link
   href="{{ url_for('static', filename='lib/leaflet/leaflet.min.css') }}"
   rel="stylesheet"
@@ -107,12 +107,12 @@ dimension == "2D" %}
 <script src="{{ url_for('static', filename='lib/3d-force-graph/three.min.js') }}"></script>
 <script src="{{ url_for('static', filename='lib/3d-force-graph/three-spritetext.min.js') }}"></script>
 <script src="{{ url_for('static', filename='lib/3d-force-graph/3d-force-graph.min.js') }}"></script>
-{% else %} {% if dimension == "2D" %}
+{% elif dimension == "2D" %}
 <script src="{{ url_for('static', filename='lib/leaflet/leaflet.min.js') }}"></script>
 <script src="{{ url_for('static', filename='lib/leaflet-markercluster/leaflet.markercluster.min.js') }}"></script>
 {% else %}
 <script src="{{ url_for('static', filename='lib/cesium/Cesium.js') }}"></script>
-{% endif %} {% endif %}
+{% endif %}
 <script>
   let visualization = {{ visualization|tojson|safe }};
 </script>

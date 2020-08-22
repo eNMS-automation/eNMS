@@ -396,19 +396,6 @@ function init3dGeographicalFramework() {
   polylines = new Cesium.PolylineCollection();
   let providerViewModels2 = [
     new Cesium.ProviderViewModel({
-      name: "Stamen Toner",
-      iconUrl: Cesium.buildModuleUrl("Widgets/Images/ImageryProviders/stamenToner.png"),
-      tooltip: "A high contrast black and white map.\nhttp://maps.stamen.com",
-      category: "Other",
-      creationFunction: function () {
-        return new Cesium.OpenStreetMapImageryProvider({
-          url: "https://stamen-tiles.a.ssl.fastly.net/toner/",
-          credit:
-            "Map tiles by Stamen Design, under CC BY 3.0. Data by OpenStreetMap, under CC BY SA.",
-        });
-      },
-    }),
-    new Cesium.ProviderViewModel({
       name: "Sentinel-2",
       iconUrl: Cesium.buildModuleUrl("Widgets/Images/ImageryProviders/sentinel-2.png"),
       tooltip:

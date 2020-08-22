@@ -74,6 +74,16 @@
         "url": "https://stamen-tiles.a.ssl.fastly.net/watercolor/",
         "credit": "Map tiles by Stamen Design, under CC BY 3.0. Data by OpenStreetMap, under CC BY SA."
       }
+    },
+    "Stamen Toner": {
+      "category": "Street View",
+      "icon": "Widgets/Images/ImageryProviders/stamenToner.png",
+      "tooltip": "A high contrast black and white map.\nhttp://maps.stamen.com",
+      "type": "OpenStreetMapImageryProvider",
+      "args": {
+        "url": "https://stamen-tiles.a.ssl.fastly.net/toner/",
+        "credit": "Map tiles by Stamen Design, under CC BY 3.0. Data by OpenStreetMap, under CC BY SA."
+      }
     }
   }
 }

@@ -28,7 +28,7 @@ intrinsic (Safari) - moz (Firefox) - webkit (Chrome) */
 /* don't display note on missing cesium token */
 .cesium-credit-textContainer {
   display: none !important;
-} 
+}
 
 /* Dont display section titles in base layer picker */
 .cesium-baseLayerPicker-sectionTitle {

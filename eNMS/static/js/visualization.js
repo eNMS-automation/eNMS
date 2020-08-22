@@ -2,7 +2,6 @@
 global
 action: false
 Cesium: false
-dimension: false
 ForceGraph3D: false
 settings: true
 jsPanel: false
@@ -12,6 +11,7 @@ SpriteText: false
 theme: false
 THREE: false
 vis: false
+visualization: false
 */
 
 import {
@@ -28,6 +28,8 @@ const layers = {
   osm: "http://{s}.tile.osm.org/{z}/{x}/{y}.png",
   gm: "http://mt0.google.com/vt/lyrs=y&hl=en&x={x}&y={y}&z={z}&s=Ga",
 };
+
+const dimension = visualization.geographical.default;
 
 const iconSizes = {
   antenna: [18, 12],
@@ -394,36 +396,35 @@ function init2dGeographicalFramework() {
 
 function init3dGeographicalFramework() {
   polylines = new Cesium.PolylineCollection();
-  let providerViewModels = Object.entries(visualization.layers).map(function ([
-    name,
-    properties,
-  ]) {
-    const iconUrl = `Widgets/Images/ImageryProviders/${properties.icon}.png`;
-    layer = {
-      category: properties.category,
-      name: name,
-      iconUrl: Cesium.buildModuleUrl(iconUrl),
-      tooltip: properties.tooltip,
-    };
-    if (properties.type == "TileMapServiceImageryProvider") {
-      layer.creationFunction = function () {
-        return new Cesium[properties.type]({
-          url: Cesium.buildModuleUrl(properties.args.url),
-        });
+  let providerViewModels = Object.entries(visualization.geographical._3D.layers).map(
+    function ([name, properties]) {
+      const iconUrl = `Widgets/Images/ImageryProviders/${properties.icon}.png`;
+      layer = {
+        category: properties.category,
+        name: name,
+        iconUrl: Cesium.buildModuleUrl(iconUrl),
+        tooltip: properties.tooltip,
       };
-    } else if (properties.type == "createWorldImagery") {
-      layer.creationFunction = function () {
-        return new Cesium[properties.type]({
-          style: Cesium.IonWorldImageryStyle[properties.arg],
-        });
-      };
-    } else {
-      layer.creationFunction = function () {
-        return new Cesium[properties.type](properties.args);
-      };
+      if (properties.type == "TileMapServiceImageryProvider") {
+        layer.creationFunction = function () {
+          return new Cesium[properties.type]({
+            url: Cesium.buildModuleUrl(properties.args.url),
+          });
+        };
+      } else if (properties.type == "createWorldImagery") {
+        layer.creationFunction = function () {
+          return new Cesium[properties.type]({
+            style: Cesium.IonWorldImageryStyle[properties.arg],
+          });
+        };
+      } else {
+        layer.creationFunction = function () {
+          return new Cesium[properties.type](properties.args);
+        };
+      }
+      return new Cesium.ProviderViewModel(layer);
     }
-    return new Cesium.ProviderViewModel(layer);
-  });
+  );
   viewer = new Cesium.Viewer("map", {
     timeline: false,
     geocoder: false,
@@ -484,7 +485,7 @@ function onClick3d(click) {
 }
 
 function initLogicalView() {
-  const viewSettings = settings.view.logical;
+  const viewSettings = visualization.logical;
   call({
     url: "/get_view_topology",
     callback: function (topology) {

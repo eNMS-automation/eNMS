@@ -285,8 +285,6 @@ class Server(Flask):
         @self.monitor_requests
         def view(view_type):
             kwargs = {"endpoint": view_type, "visualization": visualization}
-            if view_type == "geographical_view":
-                kwargs["dimension"] = app.settings["view"]["geographical"]["default"]
             return render_template("visualization.html", **kwargs)
 
         @blueprint.route("/workflow_builder")

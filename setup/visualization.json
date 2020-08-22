@@ -21,14 +21,14 @@
       "type": "createWorldImagery",
       "arg": "AERIAL"
     },
-    "Bing Maps Aerial with Labels": {
+    "Bing Maps with Labels": {
       "category": "High-Resolution Satellite View",
       "icon": "bingAerialLabels",
       "tooltip": "Bing Maps aerial imagery with labels, provided by Cesium ion",
       "type": "createWorldImagery",
       "arg": "AERIAL_WITH_LABELS"
     },
-    "Bing Maps Aerial with Roads": {
+    "Bing Maps with Roads": {
       "category": "Street View",
       "icon": "bingRoads",
       "tooltip": "Bing Maps standard road maps, provided by Cesium ion",
@@ -55,7 +55,7 @@
         "enablePickFeatures": false
       }
     },
-    "ESRI National Geographic": {
+    "ESRI Nat Geographic": {
       "category": "Street View",
       "icon": "esriNationalGeographic",
       "tooltip": "National Geographic World Map service.\nhttp://www.esri.com",

@@ -396,15 +396,6 @@ function init3dGeographicalFramework() {
   polylines = new Cesium.PolylineCollection();
   let providerViewModels2 = [
     new Cesium.ProviderViewModel({
-      name: "Blue Marble",
-      iconUrl: Cesium.buildModuleUrl("Widgets/Images/ImageryProviders/blueMarble.png"),
-      tooltip: "Blue Marble Next Generation July, 2004 imagery from NASA.",
-      category: "Cesium ion",
-      creationFunction: function () {
-        return new Cesium.IonImageryProvider({ assetId: 3845 });
-      },
-    }),
-    new Cesium.ProviderViewModel({
       name: "Earth at night",
       iconUrl: Cesium.buildModuleUrl(
         "Widgets/Images/ImageryProviders/earthAtNight.png"

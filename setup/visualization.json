@@ -91,6 +91,13 @@
       "tooltip": "Sentinel-2 cloudless by EOX IT Services GmbH (Contains modified Copernicus Sentinel data 2016 and 2017).",
       "type": "IonImageryProvider",
       "args": { "assetId": 3954 }
+    },
+    "Blue Marble": {
+      "category": "Satellite View",
+      "icon": "Widgets/Images/ImageryProviders/blueMarble.png",
+      "tooltip": "Blue Marble Next Generation July, 2004 imagery from NASA.",
+      "type": "IonImageryProvider",
+      "args": { "assetId": 3845 }
     }
   }
 }

@@ -29,18 +29,6 @@ const layers = {
   gm: "http://mt0.google.com/vt/lyrs=y&hl=en&x={x}&y={y}&z={z}&s=Ga",
 };
 
-const iconSizes = {
-  antenna: [18, 12],
-  firewall: [18, 12],
-  host: [18, 12],
-  optical_switch: [18, 12],
-  regenerator: [18, 12],
-  router: [18, 12],
-  server: [18, 12],
-  switch: [18, 12],
-  site: [22, 22],
-};
-
 let graph;
 let dimension;
 let selectedObject;
@@ -91,7 +79,7 @@ function init2dGeographicalFramework() {
         $(".geo-menu").show();
       }
     });
-  for (const [key, value] of Object.entries(iconSizes)) {
+  for (const [key, value] of Object.entries(settings2d.icons)) {
     window[`icon_${key}`] = L.icon({
       iconUrl: `../static/img/view/3D/${key}.gif`,
       iconSize: value,

@@ -1,12 +1,23 @@
 {
   "geographical": {
-    "default": "3D",
+    "default": "2D",
     "_2D": {
       "latitude": 33,
       "longitude": -96,
       "marker": "Image",
       "tile_layer": "osm",
-      "zoom_level": 5
+      "zoom_level": 5,
+      "icons": {
+        "antenna": [18, 12],
+        "firewall": [18, 12],
+        "host": [18, 12],
+        "optical_switch": [18, 12],
+        "regenerator": [18, 12],
+        "router": [18, 12],
+        "server": [18, 12],
+        "switch": [18, 12],
+        "site": [22, 22]
+      }
     },
     "_3D": {
       "layers": {

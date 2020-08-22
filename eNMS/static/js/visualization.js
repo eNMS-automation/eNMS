@@ -3,7 +3,6 @@ global
 action: false
 Cesium: false
 ForceGraph3D: false
-settings: true
 jsPanel: false
 L: false
 page: false
@@ -231,6 +230,7 @@ function createLink3d(link) {
   );
 
   labels.add({
+    // eslint-disable-next-line new-cap
     position: new Cesium.Cartesian3.fromDegrees(...computeLinkMiddle(link), 0.0),
     scaleByDistance: new Cesium.NearFarScalar(1.5e2, 1.5, 8.0e6, 0.0),
     fillColor: Cesium.Color.BLACK,

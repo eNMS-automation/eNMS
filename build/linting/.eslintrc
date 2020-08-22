@@ -11,6 +11,7 @@
     "jquery": true
   },
   "rules": {
+    "comma-dangle": 0,
     "quotes": [2, "double", { "allowTemplateLiterals": true }],
     "space-before-function-paren": ["error", {
       "named": "ignore"

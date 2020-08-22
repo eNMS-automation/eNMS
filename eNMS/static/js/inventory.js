@@ -150,7 +150,7 @@ function desktopConnection(id) {
     form: `connection-parameters-form-${id}`,
     callback: function (result) {
       let loc = window.location;
-      if (result.hasOwnProperty("error")) {
+      if (result.error) {
         notify(`Error: ${result.error}`, "error", 10, true);
       } else {
         const link = `${result.username}@${loc.hostname}:${result.port}`;

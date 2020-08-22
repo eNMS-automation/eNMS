@@ -658,7 +658,7 @@ function processData(type, id) {
   });
 }
 
-(function ($, jstree, undefined) {
+(function ($) {
   "use strict";
 
   $.jstree.plugins.html_row = function (options, parent) {

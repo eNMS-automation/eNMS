@@ -98,6 +98,13 @@
       "tooltip": "Blue Marble Next Generation July, 2004 imagery from NASA.",
       "type": "IonImageryProvider",
       "args": { "assetId": 3845 }
+    },
+    "Earth at night": {
+      "category": "Satellite View",
+      "icon": "Widgets/Images/ImageryProviders/earthAtNight.png",
+      "tooltip": "The Earth at night, also known as The Black Marble, is a 500 meter resolution global composite imagery layer released by NASA.",
+      "type": "IonImageryProvider",
+      "args": { "assetId": 3812 }
     }
   }
 }

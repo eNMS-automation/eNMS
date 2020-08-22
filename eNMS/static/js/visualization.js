@@ -394,20 +394,6 @@ function init2dGeographicalFramework() {
 
 function init3dGeographicalFramework() {
   polylines = new Cesium.PolylineCollection();
-  let providerViewModels2 = [
-    new Cesium.ProviderViewModel({
-      name: "Earth at night",
-      iconUrl: Cesium.buildModuleUrl(
-        "Widgets/Images/ImageryProviders/earthAtNight.png"
-      ),
-      tooltip:
-        "The Earth at night, also known as The Black Marble, is a 500 meter resolution global composite imagery layer released by NASA.",
-      category: "Cesium ion",
-      creationFunction: function () {
-        return new Cesium.IonImageryProvider({ assetId: 3812 });
-      },
-    }),
-  ];
   let providerViewModels = Object.entries(visualization.layers).map(function ([
     name,
     properties,

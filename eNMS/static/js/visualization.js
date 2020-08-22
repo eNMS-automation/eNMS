@@ -398,10 +398,11 @@ function init3dGeographicalFramework() {
     name,
     properties,
   ]) {
+    const iconUrl = `Widgets/Images/ImageryProviders/${properties.icon}.png`;
     layer = {
       category: properties.category,
       name: name,
-      iconUrl: Cesium.buildModuleUrl(properties.icon),
+      iconUrl: Cesium.buildModuleUrl(iconUrl),
       tooltip: properties.tooltip,
     };
     if (properties.type == "TileMapServiceImageryProvider") {

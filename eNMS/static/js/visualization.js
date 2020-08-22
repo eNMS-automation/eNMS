@@ -63,6 +63,83 @@ let handler;
 let polylines;
 let labels;
 
+function initGeographicalFramework() {
+  if (dimension == "2D") {
+    init2dGeographicalFramework();
+  } else {
+    init3dGeographicalFramework();
+  }
+}
+
+function init2dGeographicalFramework() {
+  const settings2d = settings.view.geographical._2D;
+  markerType = settings2d.marker;
+  markerGroup = L.markerClusterGroup();
+  map = L.map("map", { preferCanvas: true }).setView(
+    [settings2d.latitude, settings2d.longitude],
+    settings2d.zoom_level
+  );
+  layer = L.tileLayer(layers[settings2d.tile_layer]);
+  map
+    .addLayer(layer)
+    .on("click", function (e) {
+      selectedObject = null;
+    })
+    .on("contextmenu", function () {
+      if (!selectedObject) {
+        $(".menu").hide();
+        $(".geo-menu").show();
+      }
+    });
+  for (const [key, value] of Object.entries(iconSizes)) {
+    window[`icon_${key}`] = L.icon({
+      iconUrl: `../static/img/view/3D/${key}.gif`,
+      iconSize: value,
+      iconAnchor: [9, 6],
+      popupAnchor: [8, -5],
+    });
+  }
+  routerIcon = window["icon_router"];
+}
+
+function init3dGeographicalFramework() {
+  polylines = new Cesium.PolylineCollection();
+  let providerViewModels = Object.entries(visualization.geographical._3D.layers).map(
+    function ([name, properties]) {
+      const iconUrl = `Widgets/Images/ImageryProviders/${properties.icon}.png`;
+      return new Cesium.ProviderViewModel({
+        category: properties.category,
+        creationFunction: () =>
+          new Cesium[properties.type](
+            properties.type == "TileMapServiceImageryProvider"
+              ? { url: Cesium.buildModuleUrl(properties.args.url) }
+              : properties.type == "createWorldImagery"
+              ? { style: Cesium.IonWorldImageryStyle[properties.arg] }
+              : properties.args
+          ),
+        name: name,
+        iconUrl: Cesium.buildModuleUrl(iconUrl),
+        tooltip: properties.tooltip,
+      });
+    }
+  );
+  viewer = new Cesium.Viewer("map", {
+    timeline: false,
+    geocoder: false,
+    animation: false,
+    selectionIndicator: false,
+    imageryProviderViewModels: providerViewModels,
+  });
+  viewer.scene.primitives.add(polylines);
+  viewer.scene.postProcessStages.fxaa.enabled = true;
+  $(".cesium-baseLayerPicker-dropDown > div").slice(2, 4).hide();
+  labels = viewer.scene.primitives.add(new Cesium.LabelCollection());
+  handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
+  handler.setInputAction(onClick3d, Cesium.ScreenSpaceEventType.LEFT_CLICK);
+  handler.setInputAction(onRightClick3d, Cesium.ScreenSpaceEventType.RIGHT_CLICK);
+  handler.setInputAction(changeCursor, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
+}
+
 function switchLayer(layerType) {
   map.removeLayer(layer);
   layer = L.tileLayer(layers[layerType]);
@@ -361,93 +438,6 @@ function displayPool(poolId, nodes, edges) {
       $(".insite-menu").show();
     }
   });
-}
-
-function init2dGeographicalFramework() {
-  const settings2d = settings.view.geographical._2D;
-  markerType = settings2d.marker;
-  markerGroup = L.markerClusterGroup();
-  map = L.map("map", { preferCanvas: true }).setView(
-    [settings2d.latitude, settings2d.longitude],
-    settings2d.zoom_level
-  );
-  layer = L.tileLayer(layers[settings2d.tile_layer]);
-  map
-    .addLayer(layer)
-    .on("click", function (e) {
-      selectedObject = null;
-    })
-    .on("contextmenu", function () {
-      if (!selectedObject) {
-        $(".menu").hide();
-        $(".geo-menu").show();
-      }
-    });
-  for (const [key, value] of Object.entries(iconSizes)) {
-    window[`icon_${key}`] = L.icon({
-      iconUrl: `../static/img/view/3D/${key}.gif`,
-      iconSize: value,
-      iconAnchor: [9, 6],
-      popupAnchor: [8, -5],
-    });
-  }
-  routerIcon = window["icon_router"];
-}
-
-function init3dGeographicalFramework() {
-  polylines = new Cesium.PolylineCollection();
-  let providerViewModels = Object.entries(visualization.geographical._3D.layers).map(
-    function ([name, properties]) {
-      const iconUrl = `Widgets/Images/ImageryProviders/${properties.icon}.png`;
-      layer = {
-        category: properties.category,
-        name: name,
-        iconUrl: Cesium.buildModuleUrl(iconUrl),
-        tooltip: properties.tooltip,
-      };
-      if (properties.type == "TileMapServiceImageryProvider") {
-        layer.creationFunction = function () {
-          return new Cesium[properties.type]({
-            url: Cesium.buildModuleUrl(properties.args.url),
-          });
-        };
-      } else if (properties.type == "createWorldImagery") {
-        layer.creationFunction = function () {
-          return new Cesium[properties.type]({
-            style: Cesium.IonWorldImageryStyle[properties.arg],
-          });
-        };
-      } else {
-        layer.creationFunction = function () {
-          return new Cesium[properties.type](properties.args);
-        };
-      }
-      return new Cesium.ProviderViewModel(layer);
-    }
-  );
-  viewer = new Cesium.Viewer("map", {
-    timeline: false,
-    geocoder: false,
-    animation: false,
-    selectionIndicator: false,
-    imageryProviderViewModels: providerViewModels,
-  });
-  viewer.scene.primitives.add(polylines);
-  viewer.scene.postProcessStages.fxaa.enabled = true;
-  $(".cesium-baseLayerPicker-dropDown > div").slice(2, 4).hide();
-  labels = viewer.scene.primitives.add(new Cesium.LabelCollection());
-  handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
-  handler.setInputAction(onClick3d, Cesium.ScreenSpaceEventType.LEFT_CLICK);
-  handler.setInputAction(onRightClick3d, Cesium.ScreenSpaceEventType.RIGHT_CLICK);
-  handler.setInputAction(changeCursor, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
-}
-
-function initGeographicalFramework() {
-  if (dimension == "2D") {
-    init2dGeographicalFramework();
-  } else {
-    init3dGeographicalFramework();
-  }
 }
 
 function changeCursor(click) {

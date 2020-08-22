@@ -84,6 +84,13 @@
         "url": "https://stamen-tiles.a.ssl.fastly.net/toner/",
         "credit": "Map tiles by Stamen Design, under CC BY 3.0. Data by OpenStreetMap, under CC BY SA."
       }
+    },
+    "Sentinel-2": {
+      "category": "Satellite View",
+      "icon": "Widgets/Images/ImageryProviders/sentinel-2.png",
+      "tooltip": "Sentinel-2 cloudless by EOX IT Services GmbH (Contains modified Copernicus Sentinel data 2016 and 2017).",
+      "type": "IonImageryProvider",
+      "args": { "assetId": 3954 }
     }
   }
 }

@@ -396,16 +396,6 @@ function init3dGeographicalFramework() {
   polylines = new Cesium.PolylineCollection();
   let providerViewModels2 = [
     new Cesium.ProviderViewModel({
-      name: "Sentinel-2",
-      iconUrl: Cesium.buildModuleUrl("Widgets/Images/ImageryProviders/sentinel-2.png"),
-      tooltip:
-        "Sentinel-2 cloudless by EOX IT Services GmbH (Contains modified Copernicus Sentinel data 2016 and 2017).",
-      category: "Cesium ion",
-      creationFunction: function () {
-        return new Cesium.IonImageryProvider({ assetId: 3954 });
-      },
-    }),
-    new Cesium.ProviderViewModel({
       name: "Blue Marble",
       iconUrl: Cesium.buildModuleUrl("Widgets/Images/ImageryProviders/blueMarble.png"),
       tooltip: "Blue Marble Next Generation July, 2004 imagery from NASA.",

@@ -17,6 +17,10 @@
         "server": [18, 12],
         "switch": [18, 12],
         "site": [22, 22]
+      },
+      "layers": {
+        "osm": "http://{s}.tile.osm.org/{z}/{x}/{y}.png",
+        "gm": "http://mt0.google.com/vt/lyrs=y&hl=en&x={x}&y={y}&z={z}&s=Ga"
       }
     },
     "_3D": {

@@ -23,11 +23,6 @@ import {
 } from "./base.js";
 import { showConnectionPanel, showDeviceData } from "./inventory.js";
 
-const layers = {
-  osm: "http://{s}.tile.osm.org/{z}/{x}/{y}.png",
-  gm: "http://mt0.google.com/vt/lyrs=y&hl=en&x={x}&y={y}&z={z}&s=Ga",
-};
-
 let graph;
 let dimension;
 let selectedObject;
@@ -65,7 +60,7 @@ function init2dGeographicalFramework() {
     [settings2d.latitude, settings2d.longitude],
     settings2d.zoom_level
   );
-  layer = L.tileLayer(layers[settings2d.tile_layer]);
+  layer = L.tileLayer(settings2d.layers[settings2d.tile_layer]);
   map
     .addLayer(layer)
     .on("click", function (e) {
@@ -128,7 +123,7 @@ function init3dGeographicalFramework() {
 
 function switchLayer(layerType) {
   map.removeLayer(layer);
-  layer = L.tileLayer(layers[layerType]);
+  layer = L.tileLayer(visualization.geographical._2D.layers[layerType]);
   map.addLayer(layer);
 }
 

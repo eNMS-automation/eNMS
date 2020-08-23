@@ -31,14 +31,6 @@ export let currentPath = localStorage.getItem("path");
 export let workflow = JSON.parse(localStorage.getItem("workflow"));
 export let currentRuntime;
 
-vis.Network.prototype.zoom = function (scale) {
-  const animationOptions = {
-    scale: this.getScale() + scale,
-    animation: { duration: 300 },
-  };
-  this.view.moveTo(animationOptions);
-};
-
 const container = document.getElementById("network");
 const options = {
   interaction: {
@@ -923,6 +915,13 @@ function getWorkflowState(periodic, notification) {
 }
 
 export function initWorkflowBuilder() {
+  vis.Network.prototype.zoom = function (scale) {
+    const animationOptions = {
+      scale: this.getScale() + scale,
+      animation: { duration: 300 },
+    };
+    this.view.moveTo(animationOptions);
+  };
   loadServiceTypes();
   $("#left-arrow,#right-arrow").addClass("disabled");
   $("#edge-type").on("change", function () {

@@ -398,13 +398,9 @@ function showPoolView(poolId) {
           action[row](selectedObject);
         },
       });
-      displayPool(poolId, pool.devices, pool.links);
+      create3dGraphNetwork(`network-${poolId}`, pool.devices, pool.links);
     },
   });
-}
-
-function displayPool(poolId, nodes, edges) {
-  create3dGraphNetwork(`network-${poolId}`, nodes, edges);
 }
 
 function changeCursor(click) {
@@ -463,7 +459,6 @@ function create3dGraphNetwork(container, devices, links) {
     .onNodeRightClick((node) => {
       $(".menu").show();
       selectedObject = node;
-      console.log(selectedObject)
     })
     .onLinkHover((link) => (network.style.cursor = link ? "pointer" : null))
     .onLinkClick((link) => showTypePanel("link", link.id))
@@ -523,7 +518,6 @@ function create3dGraphNetwork(container, devices, links) {
       return image;
     });
   }
-  return graph
 }
 
 function initLogicalView() {

@@ -9,7 +9,6 @@ page: false
 SpriteText: false
 theme: false
 THREE: false
-vis: false
 visualization: false
 */
 
@@ -343,27 +342,6 @@ function displayNetwork(withCluster) {
   if (dimension == "2D") {
     map[clustered ? "addLayer" : "removeLayer"](markerGroup);
   }
-}
-
-function deviceToNode(device) {
-  const logicalDevice = {
-    id: device.id,
-    label: device.name,
-    image: `/static/img/view/3D/${device.icon}.gif`,
-    shape: "image",
-  };
-  logicalDevices[device.id] = device;
-  return logicalDevice;
-}
-
-function linkToEdge(link) {
-  const logicalLink = {
-    id: link.id,
-    from: link.source_id,
-    to: link.destination_id,
-  };
-  logicalLinks[link.id] = link;
-  return logicalLink;
 }
 
 function showPoolView(poolId) {

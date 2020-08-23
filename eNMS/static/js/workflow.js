@@ -128,12 +128,14 @@ export function displayWorkflow(workflowData) {
       showTypePanel(node.type, node.id);
     }
   });
-  graph.on("hoverNode", function () {
-    graph.canvas.body.container.style.cursor = "pointer";
-  });
-  graph.on("blurNode", function () {
-    graph.canvas.body.container.style.cursor = "default";
-  });
+  for (const objectType of ["Node", "Edge"]) {
+    graph.on(`hover${objectType}`, function () {
+      graph.canvas.body.container.style.cursor = "pointer";
+    });
+    graph.on(`blur${objectType}`, function () {
+      graph.canvas.body.container.style.cursor = "default";
+    });
+  }
   updateRuntimes(workflowData);
   if (!$(`#current-workflow option[value='${workflow.id}']`).length) {
     $("#current-workflow").append(

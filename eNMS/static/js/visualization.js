@@ -462,90 +462,94 @@ function onClick3d(click) {
   }
 }
 
-function initLogicalView() {
+function create3dGraphNetwork(container, devices, links) {
   const viewSettings = visualization.logical;
+  const network = document.getElementById(container);
+  // eslint-disable-next-line new-cap
+  graph = ForceGraph3D(viewSettings.config)(network);
+  graph
+    .width($(".main_frame").width() + 20)
+    .height($(".main_frame").height() - 90)
+    .backgroundColor(theme.view.logical.background)
+    .onBackgroundRightClick(() => {
+      $(".menu").hide();
+    })
+    .onNodeHover((node) => (network.style.cursor = node ? "pointer" : null))
+    .onNodeClick((node) => {
+      const ratio = 1 + 100 / Math.hypot(node.x, node.y, node.z);
+      const position = { x: node.x * ratio, y: node.y * ratio, z: node.z * ratio };
+      graph.cameraPosition(position, node, 1500);
+      setTimeout(() => showTypePanel(node.type, node.id), 1550);
+    })
+    .onNodeRightClick((node) => {
+      $(".menu").show();
+      selectedObject = node;
+    })
+    .onLinkHover((link) => (network.style.cursor = link ? "pointer" : null))
+    .onLinkClick((link) => showTypePanel("link", link.id))
+    .linkWidth(viewSettings.link_width)
+    .linkOpacity(viewSettings.link_opacity)
+    .graphData({
+      nodes: devices,
+      links: links.map((link) => ({
+        source: link.source_id,
+        target: link.destination_id,
+        value: 5,
+        ...link,
+      })),
+    });
+  if (viewSettings.display_link_label) {
+    graph
+      .linkThreeObjectExtend(true)
+      .linkThreeObject((link) => {
+        const sprite = new SpriteText(link.name);
+        sprite.color = theme.view.logical.label;
+        sprite.textHeight = 3;
+        return sprite;
+      })
+      .linkPositionUpdate((sprite, { start, end }) => {
+        Object.assign(
+          sprite.position,
+          Object.assign(
+            ...["x", "y", "z"].map((c) => ({
+              [c]: start[c] + (end[c] - start[c]) / 2,
+            }))
+          )
+        );
+      });
+  }
+  if (viewSettings.display_link_traffic) {
+    graph
+      .linkDirectionalParticles("value")
+      .linkDirectionalParticleSpeed((d) => d.value * viewSettings.traffic_speed);
+  }
+  if (viewSettings.display_icons) {
+    graph.nodeThreeObject(({ icon }) => {
+      const image = new THREE.Mesh(
+        new THREE.SphereGeometry(7),
+        new THREE.MeshBasicMaterial({
+          depthWrite: false,
+          transparent: true,
+          opacity: 0,
+        })
+      );
+      const sprite = new THREE.Sprite(
+        new THREE.SpriteMaterial({
+          map: new THREE.TextureLoader().load(`../static/img/view/2D/${icon}.gif`),
+        })
+      );
+      sprite.scale.set(10, 10);
+      image.add(sprite);
+      return image;
+    });
+  }
+}
+
+function initLogicalView() {
   call({
     url: "/get_view_topology",
     callback: function (topology) {
-      const network = document.getElementById("network");
-      // eslint-disable-next-line new-cap
-      graph = ForceGraph3D(viewSettings.config)(network);
-      graph
-        .width($(".main_frame").width() + 20)
-        .height($(".main_frame").height() - 90)
-        .backgroundColor(theme.view.logical.background)
-        .onBackgroundRightClick(() => {
-          $(".menu").hide();
-        })
-        .onNodeHover((node) => (network.style.cursor = node ? "pointer" : null))
-        .onNodeClick((node) => {
-          const ratio = 1 + 100 / Math.hypot(node.x, node.y, node.z);
-          const position = { x: node.x * ratio, y: node.y * ratio, z: node.z * ratio };
-          graph.cameraPosition(position, node, 1500);
-          setTimeout(() => showTypePanel(node.type, node.id), 1550);
-        })
-        .onNodeRightClick((node) => {
-          $(".menu").show();
-          selectedObject = node;
-        })
-        .onLinkHover((link) => (network.style.cursor = link ? "pointer" : null))
-        .onLinkClick((link) => showTypePanel("link", link.id))
-        .linkWidth(viewSettings.link_width)
-        .linkOpacity(viewSettings.link_opacity)
-        .graphData({
-          nodes: topology.devices,
-          links: topology.links.map((link) => ({
-            source: link.source_id,
-            target: link.destination_id,
-            value: 5,
-            ...link,
-          })),
-        });
-      if (viewSettings.display_link_label) {
-        graph
-          .linkThreeObjectExtend(true)
-          .linkThreeObject((link) => {
-            const sprite = new SpriteText(link.name);
-            sprite.color = theme.view.logical.label;
-            sprite.textHeight = 3;
-            return sprite;
-          })
-          .linkPositionUpdate((sprite, { start, end }) => {
-            Object.assign(
-              sprite.position,
-              Object.assign(
-                ...["x", "y", "z"].map((c) => ({
-                  [c]: start[c] + (end[c] - start[c]) / 2,
-                }))
-              )
-            );
-          });
-      }
-      if (viewSettings.display_link_traffic) {
-        graph
-          .linkDirectionalParticles("value")
-          .linkDirectionalParticleSpeed((d) => d.value * viewSettings.traffic_speed);
-      }
-      if (viewSettings.display_icons) {
-        graph.nodeThreeObject(({ icon }) => {
-          const image = new THREE.Mesh(
-            new THREE.SphereGeometry(7),
-            new THREE.MeshBasicMaterial({
-              depthWrite: false,
-              transparent: true,
-              opacity: 0,
-            })
-          );
-          const sprite = new THREE.Sprite(
-            new THREE.SpriteMaterial({
-              map: new THREE.TextureLoader().load(`../static/img/view/2D/${icon}.gif`),
-            })
-          );
-          sprite.scale.set(10, 10);
-          image.add(sprite);
-          return image;
-        });
-      }
+      create3dGraphNetwork("network", topology.devices, topology.links);
     },
   });
 }

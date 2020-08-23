@@ -97,3 +97,8 @@ body {
   background: #1abb9c;
   color: #fff;
 }
+
+/* Label color in logical view */
+.scene-tooltip {
+  color: #000 !important;
+}

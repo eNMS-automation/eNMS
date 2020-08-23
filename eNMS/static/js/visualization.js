@@ -405,10 +405,8 @@ function showPoolView(poolId) {
 }
 
 function displayPool(poolId, nodes, edges) {
-  let container = document.getElementById(`network-${poolId}`);
-  nodes = new vis.DataSet(nodes.map(deviceToNode));
-  edges = new vis.DataSet(edges.map(linkToEdge));
-  const network = new vis.Network(container, { nodes: nodes, edges: edges }, {});
+  create3dGraphNetwork(`network-${poolId}`, nodes, edges);
+  /*
   network.on("oncontext", function (properties) {
     properties.event.preventDefault();
     const node = this.getNodeAt(properties.pointer.DOM);
@@ -426,6 +424,7 @@ function displayPool(poolId, nodes, edges) {
       $(".insite-menu").show();
     }
   });
+  */
 }
 
 function changeCursor(click) {

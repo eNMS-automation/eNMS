@@ -114,8 +114,4 @@
 <script src="{{ url_for('static', filename='lib/leaflet-markercluster/leaflet.markercluster.min.js') }}"></script>
 {% else %}
 <script src="{{ url_for('static', filename='lib/cesium/Cesium.js') }}"></script>
-{% endif %}
-<script>
-  let visualization = {{ visualization|tojson|safe }};
-</script>
-{% endblock javascripts %}
+{% endif %} {% endblock javascripts %}

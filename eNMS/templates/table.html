@@ -20,4 +20,8 @@
     width="100%"
   ></table>
 </form>
-{% endblock content %} {% block javascripts %} {{ super() }} {% endblock javascripts %}
+{% endblock content %} {% block javascripts %} {{ super() }} {% if type == "pool" %}
+<script src="{{ url_for('static', filename='lib/3d-force-graph/three.min.js') }}"></script>
+<script src="{{ url_for('static', filename='lib/3d-force-graph/three-spritetext.min.js') }}"></script>
+<script src="{{ url_for('static', filename='lib/3d-force-graph/3d-force-graph.min.js') }}"></script>
+{% endif %} {% endblock javascripts %}

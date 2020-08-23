@@ -295,6 +295,7 @@
       const serviceTypes = {{ service_types|tojson|safe }};
       const tableProperties = {{ table_properties|tojson|safe }};
       const theme = {{ themes|tojson|safe }}.themes?.[user.theme];
+      const visualization = {{ visualization|tojson|safe }};
       let action = {};
       let settings = {{ settings|tojson|safe }};
       let csrf_token = "{{ csrf_token() }}";

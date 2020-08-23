@@ -183,6 +183,7 @@ class Server(Flask):
                 if current_user.is_authenticated
                 else None,
                 "version": app.version,
+                "visualization": visualization,
             }
 
     def configure_errors(self):
@@ -284,8 +285,7 @@ class Server(Flask):
         @blueprint.route("/visualization/<view_type>")
         @self.monitor_requests
         def view(view_type):
-            kwargs = {"endpoint": view_type, "visualization": visualization}
-            return render_template("visualization.html", **kwargs)
+            return render_template("visualization.html", endpoint=view_type)
 
         @blueprint.route("/workflow_builder")
         @self.monitor_requests

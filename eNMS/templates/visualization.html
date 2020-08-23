@@ -73,6 +73,7 @@
   </li>
 </ul>
 <nav class="navbar navbar-default controls nav-controls" role="navigation">
+  {% if endpoint == "geographical_view" %}
   <input
     id="view-type"
     type="checkbox"
@@ -81,6 +82,7 @@
     data-on="Network"
     data-off="Sites"
   />
+  {% endif %}
   <button
     style="margin-left: 5px;"
     type="button"

@@ -38,7 +38,6 @@ let markerType;
 let map;
 let markerGroup;
 let clustered;
-let selected;
 let logicalDevices = {};
 let logicalLinks = {};
 let geographicalDevices = {};
@@ -396,7 +395,7 @@ function showPoolView(poolId) {
         menuSelector: "#contextMenu",
         menuSelected: function (selectedMenu) {
           const row = selectedMenu.text();
-          action[row](selected);
+          action[row](selectedObject);
         },
       });
       displayPool(poolId, pool.devices, pool.links);
@@ -406,25 +405,6 @@ function showPoolView(poolId) {
 
 function displayPool(poolId, nodes, edges) {
   create3dGraphNetwork(`network-${poolId}`, nodes, edges);
-  /*
-  network.on("oncontext", function (properties) {
-    properties.event.preventDefault();
-    const node = this.getNodeAt(properties.pointer.DOM);
-    const edge = this.getEdgeAt(properties.pointer.DOM);
-    if (typeof node !== "undefined") {
-      $(".menu").hide();
-      $(".rc-device-menu").show();
-      selected = logicalDevices[node];
-    } else if (typeof edge !== "undefined") {
-      selected = logicalLinks[edge];
-      $(".menu").hide();
-      $(".rc-link-menu").show();
-    } else {
-      $(".menu").hide();
-      $(".insite-menu").show();
-    }
-  });
-  */
 }
 
 function changeCursor(click) {
@@ -483,6 +463,7 @@ function create3dGraphNetwork(container, devices, links) {
     .onNodeRightClick((node) => {
       $(".menu").show();
       selectedObject = node;
+      console.log(selectedObject)
     })
     .onLinkHover((link) => (network.style.cursor = link ? "pointer" : null))
     .onLinkClick((link) => showTypePanel("link", link.id))
@@ -542,6 +523,7 @@ function create3dGraphNetwork(container, devices, links) {
       return image;
     });
   }
+  return graph
 }
 
 function initLogicalView() {

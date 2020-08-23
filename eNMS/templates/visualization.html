@@ -19,13 +19,7 @@
   href="{{ url_for('static', filename='css/visualization.css') }}"
   rel="stylesheet"
 />
-{% if endpoint == "logical_view" %}
-<style>
-  .scene-tooltip {
-    color: {{ themes["themes"][current_user.theme]["view"]["logical"]["label"] }} !important;
-  }
-</style>
-{% endif %} {% endblock stylesheets %} {% block content %}
+{% endblock stylesheets %} {% block content %}
 <form id="device-filtering-form" class="overlay"></form>
 <form id="link-filtering-form" class="overlay"></form>
 {% if endpoint == "logical_view" %}

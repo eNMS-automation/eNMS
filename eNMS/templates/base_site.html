@@ -80,6 +80,11 @@
       href="{{ url_for('static', filename='css/themes/{}.css'.format(current_user.theme)) }}"
       rel="stylesheet"
     />
+    <style>
+      .scene-tooltip {
+        color: {{ themes["themes"][current_user.theme]["view"]["logical"]["label"] }} !important;
+      }
+    </style>
     {% endblock stylesheets %} {% endblock head %}
   </head>
   {% block body %} {% set menu_class = "nav-sm" if current_user.small_menu else "nav-md"

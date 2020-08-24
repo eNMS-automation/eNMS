@@ -97,6 +97,14 @@
   >
     <span class="glyphicon glyphicon-refresh"></span>
   </button>
+  <button
+    class="btn btn-info"
+    onclick="eNMS.visualization.clearSearch()"
+    data-tooltip="Clear Search"
+    type="button"
+  >
+    <span class="glyphicon glyphicon-remove"></span>
+  </button>
 </nav>
 {% endblock content %} {% block javascripts %} {{ super()}}
 <script src="{{ url_for('static', filename='lib/3d-force-graph/three.min.js') }}"></script>

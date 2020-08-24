@@ -577,4 +577,13 @@ function filterView() {
   });
 }
 
-configureNamespace("visualization", [showPoolView, filterView]);
+function clearSearch() {
+  for (const table of ["device", "link"]) {
+    $(`.search-input-${table},.search-list-${table}`).val("");
+    $(".search-relation-dd").val("any").selectpicker("refresh");
+    $(".search-relation").val([]).trigger("change");
+    $(`.search-select-${table}`).val("inclusion").selectpicker("refresh");
+  }
+}
+
+configureNamespace("visualization", [clearSearch, filterView, showPoolView]);

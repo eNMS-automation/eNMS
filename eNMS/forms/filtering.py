@@ -23,6 +23,7 @@ def filtering_form_generator():
         relation_form = {
             "template": "filtering",
             "properties": sorted(relations),
+            "object_type": form_type,
             "form_type": HiddenField(default=f"{form_type}_relation_filtering"),
             **{
                 **relations,

@@ -540,7 +540,7 @@ export function initView() {
   }
 }
 
-function filterView() {
+function filterView(noAlert) {
   const data = {
     device: { form: serializeForm(`#device-filtering-form`) },
     link: { form: serializeForm(`#link-filtering-form`) },
@@ -572,7 +572,7 @@ function filterView() {
         results.device.map((d) => createNode(d, "device"));
         results.link.map(createLink);
       }
-      notify("Filter applied.", "success", 5);
+      if (!noAlert) notify("Filter applied.", "success", 5);
     },
   });
 }
@@ -584,6 +584,8 @@ function clearSearch() {
     $(".search-relation").val([]).trigger("change");
     $(`.search-select-${table}`).val("inclusion").selectpicker("refresh");
   }
+  filterView(true);
+  notify("Search parameters cleared.", "success", 5);
 }
 
 configureNamespace("visualization", [clearSearch, filterView, showPoolView]);

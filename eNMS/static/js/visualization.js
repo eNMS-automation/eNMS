@@ -32,8 +32,6 @@ let markerType;
 let map;
 let markerGroup;
 let clustered;
-let logicalDevices = {};
-let logicalLinks = {};
 let geographicalDevices = {};
 let geographicalLinks = {};
 let routerIcon;

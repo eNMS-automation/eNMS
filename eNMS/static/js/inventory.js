@@ -20,23 +20,8 @@ import {
 import { tables, tableInstances } from "./table.js";
 
 function drawDiagrams(diagram, result) {
-  const options = {
-    tooltip: {
-      formatter: "{b} : {c} ({d}%)",
-    },
-    series: [
-      {
-        type: "pie",
-        data: result.data,
-      },
-    ],
-    label: {
-      normal: {
-        formatter: "{b} ({c})",
-      },
-    },
-    ...theme.dashboard,
-  };
+  let options = { ...settings.dashboard, ...theme.dashboard };
+  options.series[0].data = result.data;
   if (result.legend.length < 10) {
     if (!options.legend) options.legend = {};
     Object.assign(options.legend, {

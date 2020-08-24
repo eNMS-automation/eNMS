@@ -32,6 +32,21 @@
     "scan_subnet": "192.168.105.0/24",
     "scan_timeout": 0.05
   },
+  "dashboard": {
+    "tooltip": {
+      "formatter": "{b} : {c} ({d}%)"
+    },
+    "series": [
+      {
+        "type": "pie"
+      }
+    ],
+    "label": {
+      "normal": {
+        "formatter": "{b} ({c})"
+      }
+    }
+  },
   "database": {
     "large_string_length": 32768,
     "max_overflow": 10,

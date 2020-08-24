@@ -3,7 +3,7 @@ from contextlib import contextmanager
 from flask_login import current_user
 from json import loads
 from logging import error
-from os import environ
+from os import getenv
 from sqlalchemy import (
     Boolean,
     Column,
@@ -35,7 +35,7 @@ class Database:
     def __init__(self):
         for setting in database_settings.items():
             setattr(self, *setting)
-        self.database_url = environ.get("DATABASE_URL", "sqlite:///database.db")
+        self.database_url = getenv("DATABASE_URL", "sqlite:///database.db")
         self.dialect = self.database_url.split(":")[0]
         self.rbac_error = type("RbacError", (Exception,), {})
         self.configure_columns()

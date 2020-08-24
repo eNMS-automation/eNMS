@@ -1,5 +1,5 @@
 from multiprocessing import cpu_count
-from os import environ
+from os import getenv
 
 accesslog = "-"
 bind = "0.0.0.0:5000"
@@ -11,4 +11,4 @@ loglevel = "debug"
 preload_app = True
 raw_env = ["TERM=screen"]
 timeout = 3000
-workers = 2 * cpu_count() + 1 if environ.get("REDIS_ADDR") else 1
+workers = 2 * cpu_count() + 1 if getenv("REDIS_ADDR") else 1

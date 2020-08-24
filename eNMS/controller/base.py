@@ -14,7 +14,7 @@ from importlib.util import module_from_spec, spec_from_file_location
 from json import load
 from logging.config import dictConfig
 from logging import getLogger, error, info
-from os import environ, scandir
+from os import getenv, scandir
 from os.path import exists
 from pathlib import Path
 from re import compile, error as regex_error
@@ -80,7 +80,7 @@ class BaseController:
         self.init_connection_pools()
 
     def init_encryption(self):
-        self.fernet_encryption = environ.get("FERNET_KEY")
+        self.fernet_encryption = getenv("FERNET_KEY")
         if self.fernet_encryption:
             fernet = Fernet(self.fernet_encryption)
             self.encrypt, self.decrypt = fernet.encrypt, fernet.decrypt
@@ -194,7 +194,7 @@ class BaseController:
             spec.loader.exec_module(module_from_spec(spec))
 
     def init_redis(self):
-        host = environ.get("REDIS_ADDR")
+        host = getenv("REDIS_ADDR")
         self.redis_queue = (
             Redis(
                 host=host,
@@ -209,7 +209,7 @@ class BaseController:
         )
 
     def init_scheduler(self):
-        self.scheduler_address = environ.get("SCHEDULER_ADDR")
+        self.scheduler_address = getenv("SCHEDULER_ADDR")
 
     def init_services(self):
         path_services = [self.path / "eNMS" / "services"]
@@ -230,10 +230,10 @@ class BaseController:
                     error(f"Error loading custom service '{file}' ({str(exc)})")
 
     def init_vault_client(self):
-        url = environ.get("VAULT_ADDR", "http://127.0.0.1:8200")
-        self.vault_client = VaultClient(url=url, token=environ.get("VAULT_TOKEN"))
+        url = getenv("VAULT_ADDR", "http://127.0.0.1:8200")
+        self.vault_client = VaultClient(url=url, token=getenv("VAULT_TOKEN"))
         if self.vault_client.sys.is_sealed() and self.settings["vault"]["unseal_vault"]:
-            keys = [environ.get(f"UNSEAL_VAULT_KEY{i}") for i in range(1, 6)]
+            keys = [getenv(f"UNSEAL_VAULT_KEY{i}") for i in range(1, 6)]
             self.vault_client.sys.submit_unseal_keys(filter(None, keys))
 
     def init_syslog_server(self):
@@ -467,7 +467,7 @@ class BaseController:
         server = SMTP(self.settings["mail"]["server"], self.settings["mail"]["port"])
         if self.settings["mail"]["use_tls"]:
             server.starttls()
-            password = environ.get("MAIL_PASSWORD", "")
+            password = getenv("MAIL_PASSWORD", "")
             server.login(self.settings["mail"]["username"], password)
         server.sendmail(sender, recipients.split(","), message.as_string())
         server.close()

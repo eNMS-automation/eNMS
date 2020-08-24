@@ -10,7 +10,7 @@ from json.decoder import JSONDecodeError
 from multiprocessing.pool import ThreadPool
 from napalm import get_network_driver
 from netmiko import ConnectHandler
-from os import environ
+from os import getenv
 from paramiko import SFTPClient
 from ruamel import yaml
 from re import compile, search
@@ -948,7 +948,7 @@ class Run(AbstractBase):
                     file_content=app.str_dict(file_content),
                 )
             elif self.send_notification_method == "slack":
-                result = SlackClient(environ.get("SLACK_TOKEN")).api_call(
+                result = SlackClient(getenv("SLACK_TOKEN")).api_call(
                     "chat.postMessage",
                     channel=app.settings["slack"]["channel"],
                     text=notification,

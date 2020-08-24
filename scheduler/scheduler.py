@@ -5,7 +5,7 @@ from datetime import datetime
 from flask import Flask, jsonify, request
 from json import load
 from logging.config import dictConfig
-from os import environ
+from os import getenv
 from pathlib import Path
 from requests import post
 from requests.auth import HTTPBasicAuth
@@ -89,10 +89,10 @@ class Scheduler(Flask):
     @staticmethod
     def run_service(task_id):
         post(
-            f"{environ.get('ENMS_ADDR')}/rest/run_task",
+            f"{getenv('ENMS_ADDR')}/rest/run_task",
             json=task_id,
-            auth=HTTPBasicAuth(environ.get("ENMS_USER"), environ.get("ENMS_PASSWORD")),
-            verify=int(environ.get("VERIFY_CERTIFICATE", 1)),
+            auth=HTTPBasicAuth(getenv("ENMS_USER"), getenv("ENMS_PASSWORD")),
+            verify=int(getenv("VERIFY_CERTIFICATE", 1)),
         )
 
     def schedule_task(self, task):

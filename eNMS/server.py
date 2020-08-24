@@ -22,7 +22,7 @@ from functools import wraps
 from importlib import import_module
 from itertools import chain
 from json import load
-from os import environ
+from os import getenv
 from pathlib import Path
 from threading import Thread
 from time import sleep
@@ -111,7 +111,7 @@ class Server(Flask):
         self.config.update(
             {
                 "DEBUG": mode != "production",
-                "SECRET_KEY": environ.get("SECRET_KEY", "get-a-real-key"),
+                "SECRET_KEY": getenv("SECRET_KEY", "get-a-real-key"),
                 "WTF_CSRF_TIME_LIMIT": None,
                 "ERROR_404_HELP": False,
                 "MAX_CONTENT_LENGTH": 20 * 1024 * 1024,

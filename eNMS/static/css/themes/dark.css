@@ -104,6 +104,21 @@ table.dataTable tr:hover {
   background-color: #462323;
 }
 
+/* Color of text input in forms */
+.form-control {
+  background-color: #cccccc;
+}
+
+/* Color of lists in forms */
+.btn-default {
+  background-color: #cccccc;
+}
+
+/* Color of pagination buttons in workflow builder */
+.pagination>li>a, .pagination>li>span {
+  background-color: #cccccc;
+}
+
 .navbar-default {
   background-color: #1b1b1d;
 }

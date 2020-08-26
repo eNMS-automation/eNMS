@@ -105,8 +105,11 @@ table.dataTable tr:hover {
 }
 
 /* Color of text input in forms */
-.form-control {
-  background-color: #cccccc;
+.form-control,
+.select2-selection,
+.select2-container--default {
+  color: #d62b1e;
+  background-color: #cccccc !important;
 }
 
 /* Color of lists in forms */

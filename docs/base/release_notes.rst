@@ -9,6 +9,8 @@ Version 3.23.0
 - Update endpoint in migration files: view/network and view/site no longer exists. Must be replaced with
 visualization/geographical_view and visualization/logical_view
 - Update settings.json with new geographical / logical view settings (key "view" -> "visualization")
+- Make the error page colors confiurable per theme
+- Update the dark theme to display input / list in grey instead of white (too much contrast)
 
 Version 3.22.3
 --------------

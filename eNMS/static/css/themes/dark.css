@@ -115,7 +115,8 @@ table.dataTable tr:hover {
 }
 
 /* Color of pagination buttons in workflow builder */
-.pagination>li>a, .pagination>li>span {
+.pagination > li > a,
+.pagination > li > span {
   background-color: #cccccc;
 }
 

@@ -3,8 +3,12 @@
   <head>
     <title>{{ error }}</title>
     <link href="{{ url_for('static', filename='css/error.css') }}" rel="stylesheet" />
+    <link
+      href="{{ url_for('static', filename='css/themes/{}.css'.format(current_user.theme)) }}"
+      rel="stylesheet"
+    />
   </head>
-  <body>
+  <body class="error-theme">
     <div class="col-middle">
       <h1 class="error-number">{{ error }}</h1>
       {% if error == 403 %}

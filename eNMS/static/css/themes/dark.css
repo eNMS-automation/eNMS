@@ -123,6 +123,12 @@ table.dataTable tr:hover {
   background-color: #cccccc;
 }
 
+/* Color of upper menu on hover */
+.top_nav .nav .open > a,
+.top_nav .nav > li > a:hover {
+  background-color: #462323;
+}
+
 .navbar-default {
   background-color: #1b1b1d;
 }

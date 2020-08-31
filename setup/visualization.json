@@ -24,6 +24,10 @@
       }
     },
     "_3D": {
+      "labels": {
+        "node": true,
+        "link": false
+      },
       "layers": {
         "Natural Earth II": {
           "category": "Low-Resolution Satellite View",

@@ -137,23 +137,24 @@ function createNode(node, nodeType) {
 
 function createNode3d(node, nodeType) {
   const icon = nodeType === "device" ? node.icon || "router" : "site";
-  markersArray.push(
-    viewer.entities.add({
-      properties: node,
-      position: Cesium.Cartesian3.fromDegrees(node.longitude, node.latitude),
-      billboard: {
-        image: `../static/img/view/3D/${icon}.gif`,
-        scaleByDistance: new Cesium.NearFarScalar(1.5e2, 2.0, 1.5e7, 0.5),
-      },
-      label: {
-        fillColor: Cesium.Color.BLACK,
-        text: node.name,
-        scaleByDistance: new Cesium.NearFarScalar(1.5e2, 1.5, 8.0e6, 0.0),
-        pixelOffset: new Cesium.Cartesian2(0.0, 20.0),
-        font: "20px sans-serif",
-      },
-    })
-  );
+  let entity = {
+    properties: node,
+    position: Cesium.Cartesian3.fromDegrees(node.longitude, node.latitude),
+    billboard: {
+      image: `../static/img/view/3D/${icon}.gif`,
+      scaleByDistance: new Cesium.NearFarScalar(1.5e2, 2.0, 1.5e7, 0.5),
+    },
+  };
+  if (visualization.geographical._3D.labels.node) {
+    entity.label = {
+      fillColor: Cesium.Color.BLACK,
+      text: node.name,
+      scaleByDistance: new Cesium.NearFarScalar(1.5e2, 1.5, 8.0e6, 0.0),
+      pixelOffset: new Cesium.Cartesian2(0.0, 20.0),
+      font: "20px sans-serif",
+    };
+  }
+  markersArray.push(viewer.entities.add(entity));
 }
 
 function createNode2d(node, nodeType) {
@@ -219,14 +220,15 @@ function createLink3d(link) {
       width: 1,
     })
   );
-
-  labels.add({
-    // eslint-disable-next-line new-cap
-    position: new Cesium.Cartesian3.fromDegrees(...computeLinkMiddle(link), 0.0),
-    scaleByDistance: new Cesium.NearFarScalar(1.5e2, 1.5, 8.0e6, 0.0),
-    fillColor: Cesium.Color.BLACK,
-    text: link.name,
-  });
+  if (visualization.geographical._3D.labels.link) {
+    labels.add({
+      // eslint-disable-next-line new-cap
+      position: new Cesium.Cartesian3.fromDegrees(...computeLinkMiddle(link), 0.0),
+      scaleByDistance: new Cesium.NearFarScalar(1.5e2, 1.5, 8.0e6, 0.0),
+      fillColor: Cesium.Color.BLACK,
+      text: link.name,
+    });
+  }
 }
 
 function computeLinkMiddle(link) {
@@ -391,7 +393,6 @@ function onRightClick3d(click) {
   } else {
     selectedObject = null;
     $(".menu").hide();
-    $(".geo-menu").show();
   }
 }
 

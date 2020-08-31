@@ -410,7 +410,7 @@ function onClick3d(click) {
   }
 }
 
-function create3dGraphNetwork(container, devices, links) {
+function create3dGraphNetwork(container) {
   const viewSettings = visualization.logical;
   const network = document.getElementById(container);
   // eslint-disable-next-line new-cap
@@ -437,15 +437,6 @@ function create3dGraphNetwork(container, devices, links) {
     .onLinkClick((link) => showTypePanel("link", link.id))
     .linkWidth(viewSettings.link_width)
     .linkOpacity(viewSettings.link_opacity)
-    .graphData({
-      nodes: devices,
-      links: links.map((link) => ({
-        source: link.source_id,
-        target: link.destination_id,
-        value: 5,
-        ...link,
-      })),
-    });
   if (viewSettings.display_link_label) {
     graph
       .linkThreeObjectExtend(true)
@@ -493,15 +484,6 @@ function create3dGraphNetwork(container, devices, links) {
   }
 }
 
-function initLogicalView() {
-  call({
-    url: "/get_view_topology",
-    callback: function (topology) {
-      create3dGraphNetwork("network", topology.devices, topology.links);
-    },
-  });
-}
-
 export function initView() {
   $("body").contextMenu({
     menuSelector: "#contextMenu",
@@ -534,7 +516,9 @@ export function initView() {
     });
   }
   if (page == "logical_view") {
-    initLogicalView();
+    create3dGraphNetwork("network");
+    notify("Loading network...", "success", 5);
+    filterView();
   } else {
     initGeographicalFramework();
     displayNetwork();
@@ -553,6 +537,14 @@ function filterView(noAlert) {
     callback: function (results) {
       const nodesId = results.device.map((node) => node.id);
       if (page == "logical_view") {
+        if (results.device.length > 2000 || results.link.length > 1000) {
+          return notify(
+            `Too many objects to display. Use the device and link
+            filtering mechanism to reduce the size of the network`,
+            "error",
+            5
+          );
+        }
         graph.graphData({
           nodes: results.device,
           links: results.link

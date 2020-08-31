@@ -148,6 +148,7 @@ export class Table {
       },
     });
     $(window).resize(this.table.columns.adjust);
+    $(`[name=table-${this.id}_length]`).selectpicker("refresh");
     if (["changelog", "run", "result"].includes(this.type)) {
       this.table.order([0, "desc"]).draw();
     }

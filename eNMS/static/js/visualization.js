@@ -436,7 +436,7 @@ function create3dGraphNetwork(container) {
     .onLinkHover((link) => (network.style.cursor = link ? "pointer" : null))
     .onLinkClick((link) => showTypePanel("link", link.id))
     .linkWidth(viewSettings.link_width)
-    .linkOpacity(viewSettings.link_opacity)
+    .linkOpacity(viewSettings.link_opacity);
   if (viewSettings.display_link_label) {
     graph
       .linkThreeObjectExtend(true)
@@ -518,7 +518,7 @@ export function initView() {
   if (page == "logical_view") {
     create3dGraphNetwork("network");
     notify("Loading network...", "success", 5);
-    filterView();
+    filterView(true);
   } else {
     initGeographicalFramework();
     displayNetwork();
@@ -527,6 +527,7 @@ export function initView() {
 }
 
 function filterView(noAlert) {
+  const maximumSize = visualization.logical.maximum_size;
   const data = {
     device: { form: serializeForm(`#device-filtering-form`) },
     link: { form: serializeForm(`#link-filtering-form`) },
@@ -537,7 +538,10 @@ function filterView(noAlert) {
     callback: function (results) {
       const nodesId = results.device.map((node) => node.id);
       if (page == "logical_view") {
-        if (results.device.length > 2000 || results.link.length > 1000) {
+        if (
+          results.device.length > maximumSize.node ||
+          results.link.length > maximumSize.link
+        ) {
           return notify(
             `Too many objects to display. Use the device and link
             filtering mechanism to reduce the size of the network`,

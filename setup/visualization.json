@@ -148,6 +148,10 @@
     "display_link_traffic": true,
     "traffic_speed": 0.001,
     "link_width": 2,
-    "link_opacity": 0.3
+    "link_opacity": 0.3,
+    "maximum_size": {
+      "node": 2000,
+      "link": 1000
+    }
   }
 }

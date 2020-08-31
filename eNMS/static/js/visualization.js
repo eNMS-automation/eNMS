@@ -391,6 +391,7 @@ function onRightClick3d(click) {
   } else {
     selectedObject = null;
     $(".menu").hide();
+    $(".geo-menu").show();
   }
 }
 

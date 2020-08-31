@@ -30,7 +30,7 @@
 <ul id="contextMenu" class="dropdown-menu" role="menu">
   {% if dimension == "2D" %}
   <li class="menu dropdown-submenu geo-menu">
-    <a class="menu-submenu menu-layer" tabindex="-1" href="#"
+    <a class="menu-submenu" tabindex="-1" href="#"
       >Type of View<span class="caret-right"></span
     ></a>
     <ul class="dropdown-menu">
@@ -39,7 +39,7 @@
     </ul>
   </li>
   <li class="menu dropdown-submenu geo-menu">
-    <a class="menu-submenu menu-layer" tabindex="-1" href="#"
+    <a class="menu-submenu" tabindex="-1" href="#"
       >Tile layer<span class="caret-right"></span
     ></a>
     <ul class="dropdown-menu">
@@ -48,13 +48,23 @@
     </ul>
   </li>
   <li class="menu dropdown-submenu geo-menu">
-    <a class="menu-submenu menu-layer" tabindex="-1" href="#"
+    <a class="menu-submenu" tabindex="-1" href="#"
       >Type of Marker<span class="caret-right"></span
     ></a>
     <ul class="dropdown-menu">
       <li><a tabindex="-1" href="#">Image</a></li>
       <li><a tabindex="-1" href="#">Circle</a></li>
       <li><a tabindex="-1" href="#">Circle Marker</a></li>
+    </ul>
+  </li>
+  {% else %}
+  <li class="menu dropdown-submenu geo-menu">
+    <a class="menu-submenu" tabindex="-1" href="#"
+      >Show / Hide Labels<span class="caret-right"></span
+    ></a>
+    <ul class="dropdown-menu">
+      <li><a tabindex="-1" href="#">Node Labels</a></li>
+      <li><a tabindex="-1" href="#">Link Labels</a></li>
     </ul>
   </li>
   {% endif %}

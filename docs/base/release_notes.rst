@@ -11,6 +11,7 @@ visualization/geographical_view and visualization/logical_view
 - Update settings.json with new geographical / logical view settings (key "view" -> "visualization")
 - Make the error page colors confiurable per theme (move css colors to theme specific CSS file)
 - Update the dark theme to display input / list in grey instead of white (too much contrast)
+- Use the log level of the parameterized run instead of always using the service log level
 
 Version 3.22.3
 --------------

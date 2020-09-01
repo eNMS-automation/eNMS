@@ -36,9 +36,13 @@
   positions:
     Iteration Services Test Workflow: ['-359', '-163']
     'Regression Workflow 1: Netmiko with validation and retries': [-385, 11]
+    'Regression Workflow 1: VRF creation and deletion with Netmiko': &id001 [-383,
+      -95]
+    'Regression Workflow 1: link neighbors mechanism': &id002 [-273, -126]
     'Regression Workflow 2: Separate Failure - Success paths': [-327, -20]
     'Regression Workflow 3: Napalm getters (postprocessing)': [-316, 80]
-    'Regression Workflow 4: VRF creation and deletion with Netmiko': [-383, -95]
+    'Regression Workflow 4: VRF creation and deletion with Netmiko': *id001
+    'Regression Workflow 4: link neighbors mechanism': *id002
     'Regression Workflow 5: VRF creation and deletion with Napalm': !!python/tuple [
       0, 0]
     'Regression Workflow 6: Ansible with Validation': [-557, -5]
@@ -49,7 +53,7 @@
     'Regression Workflow A: get_var, set_var, get_result': [-506, -55]
     'Regression Workflow B: Napalm getters validation': !!python/tuple [0, 0]
     'Regression Workflow C: Advanced multiprocessing': [-492, -39]
-    'Regression Workflow D: Prompts': [-167, 49]
+    'Regression Workflow D: Prompts': [-295, 99]
     'Regression Workflow E: Iteration Targets': [-342, -252]
     'Regression Workflow F S1: Subworkflow of Workflow': !!python/tuple [0, 0]
     'Regression Workflow F S2: Access Variables from Parent Workflow': !!python/tuple [
@@ -66,19 +70,19 @@
     'Regression Workflow M: Unix command & shell, ping, jump server': [-341, 17]
     'Regression Workflow N: Topology Import (netbox, librenms, opennms)': [-141, 21]
     'Regression Workflow O: Scrapli': [-192, 31]
-    'Regression Workflow P: large workflow (scalability)': &id001 [-437, -191]
+    'Regression Workflow P: large workflow (scalability)': &id003 [-437, -191]
     'Regression Workflow Q: File transfer': [-479, -89]
-    'Regression Workflow R: skip services in service by service mode': &id002 [-336,
+    'Regression Workflow R: skip services in service by service mode': &id004 [-336,
       -35]
-    'Regression Workflow S: conditional skip query with skip value set to False': &id003 [
+    'Regression Workflow S: conditional skip query with skip value set to False': &id005 [
       -183, -152]
-    'Regression Workflow T: link neighbors mechanism': [-273, -126]
-    'Regression workflow P: large workflow (scalability)': *id001
+    'Regression Workflow T: link neighbors mechanism': *id002
+    'Regression workflow P: large workflow (scalability)': *id003
     Subworkflow 1: !!python/tuple [0, 0]
     Subworkflow 2: !!python/tuple [0, 0]
     Workflow  in device by device mode: !!python/tuple [0, 0]
-    'Workflow Regression R: skip services in service by service mode': *id002
-    'Workflow Regression S: conditional skip query with skip value set to False': *id003
+    'Workflow Regression R: skip services in service by service mode': *id004
+    'Workflow Regression S: conditional skip query with skip value set to False': *id005
     Workflow in service by service mode (workflow targets): !!python/tuple [0, 0]
     Workflow in service targets mode: !!python/tuple [0, 0]
     Workflow with device and value iteration: [0, 0]
@@ -171,9 +175,13 @@
   positions:
     Iteration Services Test Workflow: ['-9', '294']
     'Regression Workflow 1: Netmiko with validation and retries': [115, 3]
+    'Regression Workflow 1: VRF creation and deletion with Netmiko': &id006 [-383,
+      167]
+    'Regression Workflow 1: link neighbors mechanism': &id007 [713, 86]
     'Regression Workflow 2: Separate Failure - Success paths': [737, 276]
     'Regression Workflow 3: Napalm getters (postprocessing)': [703, 150]
-    'Regression Workflow 4: VRF creation and deletion with Netmiko': [-383, 167]
+    'Regression Workflow 4: VRF creation and deletion with Netmiko': *id006
+    'Regression Workflow 4: link neighbors mechanism': *id007
     'Regression Workflow 5: VRF creation and deletion with Napalm': !!python/tuple [
       0, 0]
     'Regression Workflow 6: Ansible with Validation': [567, -24]
@@ -201,22 +209,22 @@
     'Regression Workflow M: Unix command & shell, ping, jump server': [560, 9]
     'Regression Workflow N: Topology Import (netbox, librenms, opennms)': [636, 24]
     'Regression Workflow O: Scrapli': [628, 113]
-    'Regression Workflow P: large workflow (scalability)': &id004 [483, -268]
+    'Regression Workflow P: large workflow (scalability)': &id008 [483, -268]
     'Regression Workflow Q: File transfer': [576, 135]
-    'Regression Workflow R: skip services in service by service mode': &id005 [500,
+    'Regression Workflow R: skip services in service by service mode': &id009 [500,
       0]
-    'Regression Workflow S: conditional skip query with skip value set to False': &id006 [
+    'Regression Workflow S: conditional skip query with skip value set to False': &id010 [
       640, -155]
-    'Regression Workflow T: link neighbors mechanism': [713, 86]
-    'Regression workflow P: large workflow (scalability)': *id004
+    'Regression Workflow T: link neighbors mechanism': *id007
+    'Regression workflow P: large workflow (scalability)': *id008
     Subworkflow 1: !!python/tuple [0, 0]
     Subworkflow 2: !!python/tuple [0, 0]
     T: !!python/tuple [500, 0]
     TEST: !!python/tuple [500, 0]
     TEST2: !!python/tuple [500, 0]
     Workflow  in device by device mode: !!python/tuple [0, 0]
-    'Workflow Regression R: skip services in service by service mode': *id005
-    'Workflow Regression S: conditional skip query with skip value set to False': *id006
+    'Workflow Regression R: skip services in service by service mode': *id009
+    'Workflow Regression S: conditional skip query with skip value set to False': *id010
     Workflow in service by service mode (workflow targets): !!python/tuple [0, 0]
     Workflow in service targets mode: !!python/tuple [0, 0]
     Workflow with device and value iteration: [500, 0]
@@ -584,14 +592,16 @@
   max_processes: 5
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression Workflow 4: VRF creation and deletion with Netmiko] netmiko_create_vrf_test'
+  name: '[Regression Workflow 1: VRF creation and deletion with Netmiko] netmiko_create_vrf_test'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: eos
   pools: []
   positions:
-    'Regression Workflow 4: VRF creation and deletion with Netmiko': [-38, -86]
+    'Regression Workflow 1: VRF creation and deletion with Netmiko': &id011 [-38,
+      -86]
+    'Regression Workflow 4: VRF creation and deletion with Netmiko': *id011
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -666,7 +676,7 @@
   max_processes: 5
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression Workflow 4: VRF creation and deletion with Netmiko] netmiko_check_vrf_test'
+  name: '[Regression Workflow 1: VRF creation and deletion with Netmiko] netmiko_check_vrf_test'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -674,8 +684,10 @@
   pools: []
   positions:
     Iteration Services Test Workflow: ['147', '-14']
+    'Regression Workflow 1: VRF creation and deletion with Netmiko': &id012 [445,
+      -37]
     'Regression Workflow 2: Separate Failure - Success paths': ['84', '-3']
-    'Regression Workflow 4: VRF creation and deletion with Netmiko': [445, -37]
+    'Regression Workflow 4: VRF creation and deletion with Netmiko': *id012
     'Regression Workflow 5: VRF creation and deletion with Napalm': ['0', '-50']
     'Regression Workflow A: get_var, set_var, get_result': ['355', '-25']
     iteration_devices_workflow: ['414', '-154']
@@ -748,14 +760,16 @@
   max_processes: 5
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression Workflow 4: VRF creation and deletion with Netmiko] netmiko_delete_vrf_test'
+  name: '[Regression Workflow 1: VRF creation and deletion with Netmiko] netmiko_delete_vrf_test'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: eos
   pools: []
   positions:
-    'Regression Workflow 4: VRF creation and deletion with Netmiko': [476, 119]
+    'Regression Workflow 1: VRF creation and deletion with Netmiko': &id013 [476,
+      119]
+    'Regression Workflow 4: VRF creation and deletion with Netmiko': *id013
     'Regression Workflow 5: VRF creation and deletion with Napalm': ['0', '50']
   postprocessing: ''
   postprocessing_mode: always
@@ -838,8 +852,10 @@
   operating_system: eos
   pools: []
   positions:
+    'Regression Workflow 1: VRF creation and deletion with Netmiko': &id014 [-10,
+      157]
     'Regression Workflow 2: Separate Failure - Success paths': [-194, 225]
-    'Regression Workflow 4: VRF creation and deletion with Netmiko': [-10, 157]
+    'Regression Workflow 4: VRF creation and deletion with Netmiko': *id014
     'Regression Workflow 5: VRF creation and deletion with Napalm': ['0', '150']
     iteration_devices_workflow: ['337', '-145']
   postprocessing: ''
@@ -987,8 +1003,8 @@
     'Regression Workflow C: Advanced multiprocessing': [340, 109]
     'Regression Workflow D: Prompts': [405, -103]
     'Regression Workflow L: superworkflow': [162, -126]
-    'Regression Workflow P: large workflow (scalability)': &id007 [-415, -115]
-    'Regression workflow P: large workflow (scalability)': *id007
+    'Regression Workflow P: large workflow (scalability)': &id015 [-415, -115]
+    'Regression workflow P: large workflow (scalability)': *id015
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -3818,14 +3834,14 @@
         \ a combination of devices and pools.\r\nThe workflow is running on \"Austin\"\
         \ as a device and \"Washington\", as a pool."
       positions: [39, -176]
-  last_modified: '2020-05-28 05:51:36.183557'
+  last_modified: '2020-09-01 10:36:21.521349'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
   max_processes: 5
   maximum_runs: 1
   multiprocessing: true
-  name: 'Regression Workflow 4: VRF creation and deletion with Netmiko'
+  name: 'Regression Workflow 1: VRF creation and deletion with Netmiko'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -3836,16 +3852,17 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   reply_to: ''
   reserved: false
   run_method: per_device
-  scoped_name: 'Regression Workflow 4: VRF creation and deletion with Netmiko'
+  scoped_name: 'Regression Workflow 1: VRF creation and deletion with Netmiko'
   send_notification: false
   send_notification_method: mail
-  services: ['[Shared] Start', '[Shared] End', '[Regression Workflow 4: VRF creation
-      and deletion with Netmiko] netmiko_create_vrf_test', '[Regression Workflow 4:
+  services: ['[Shared] Start', '[Shared] End', '[Regression Workflow 1: VRF creation
+      and deletion with Netmiko] netmiko_create_vrf_test', '[Regression Workflow 1:
       VRF creation and deletion with Netmiko] netmiko_check_vrf_test', '[Regression
-      Workflow 4: VRF creation and deletion with Netmiko] netmiko_delete_vrf_test',
+      Workflow 1: VRF creation and deletion with Netmiko] netmiko_delete_vrf_test',
     '[Shared] Netmiko: Check VRF (test) does not exist']
   shared: false
   skip: false
@@ -4298,12 +4315,18 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels:
+    4b2ac5bb-900e-40b2-952b-30614cf6e22a:
+      alignment: left
+      content: "Use Netmiko to run a \"show vrf\".\r\nUse the validation mechanism\
+        \ to check for the string \"NOVRF\".\r\nThere is no such VRF configured so\
+        \ the service is expected to fail.\r\nRetry twice with 2 seconds between retries."
+      positions: [-243, -179]
     ce7e6857-714e-4102-a65b-ec2d67414866:
       content: "Test of the maximum number of run of a service in a workflow.\r\n\
         For Test Netmiko Prompt Service, it is set to 2: it should run\r\nonce more\
         \ after the REST service.\r\n"
-      positions: [145, -168]
-  last_modified: '2020-02-23 09:53:37.837312'
+      positions: [288, -203]
+  last_modified: '2020-09-01 10:23:09.650778'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -4328,7 +4351,8 @@
   send_notification_method: mail
   services: ['[Shared] Start', '[Shared] End', '[Regression Workflow D: Prompts] Test
       Netmiko Prompt Service', '[Regression Workflow D: Prompts] Test netmiko prompts
-      pass', '[Shared] REST API: call *is_alive* endpoint']
+      pass', '[Shared] REST API: call *is_alive* endpoint', '[Regression Workflow
+      D: Prompts] Check VRF (NOVRF) exists']
   shared: false
   skip: false
   skip_query: ''
@@ -5012,161 +5036,6 @@
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
-- close_connection: false
-  completion_time: 1
-  content_match: ''
-  content_match_regex: false
-  conversion_method: none
-  creator: admin
-  definition: Definition
-  delete_spaces_before_matching: false
-  description: ''
-  device_query: ''
-  device_query_property: name
-  devices: []
-  dict_match: {}
-  display_only_failed_nodes: false
-  events: []
-  impacting: true
-  include_device_results: true
-  include_link_in_summary: false
-  initial_payload: {}
-  iteration_devices: ''
-  iteration_devices_property: name
-  iteration_values: ''
-  iteration_variable_name: iteration_value
-  labels:
-    7596d28d-4b04-4314-b81e-2123ae51172d:
-      alignment: left
-      content: In this workflow, devices are configured at SERVICE level.
-      positions: [-169, -303]
-    f865beb3-e097-45f9-917c-184a423d8249:
-      alignment: left
-      content: "Use Netmiko to run a \"show vrf\".\r\nUse the validation mechanism\
-        \ to check for the string \"NOVRF\".\r\nThere is no such VRF configured so\
-        \ the service is expected to fail.\r\nRetry twice with 2 seconds between retries."
-      positions: [-147, -217]
-  last_modified: '2020-05-28 10:35:41.423468'
-  log_level: 1
-  mail_recipient: ''
-  max_number_of_retries: 100
-  max_processes: 50
-  maximum_runs: 1
-  multiprocessing: false
-  name: 'Regression Workflow 1: Netmiko with validation and retries'
-  negative_logic: false
-  notification_header: ''
-  number_of_retries: 0
-  operating_system: ''
-  pools: []
-  positions: {}
-  postprocessing: ''
-  postprocessing_mode: always
-  preprocessing: ''
-  reply_to: ''
-  reserved: false
-  run_method: per_service_with_service_targets
-  scoped_name: 'Regression Workflow 1: Netmiko with validation and retries'
-  send_notification: false
-  send_notification_method: mail
-  services: ['[Shared] Start', '[Shared] End', '[Regression Workflow 1: Netmiko with
-      validation and retries] Check VRF (NOVRF) exists']
-  shared: false
-  skip: false
-  skip_query: ''
-  skip_value: 'True'
-  time_between_retries: 10
-  type: workflow
-  update_pools: false
-  validation_condition: success
-  validation_method: none
-  vendor: ''
-  waiting_time: 0
-  workflow_category: Example workflow(s)
-- auto_find_prompt: true
-  close_connection: false
-  command: show vrf
-  completion_time: 1
-  config_mode: false
-  content_match: NOVRF
-  content_match_regex: false
-  conversion_method: none
-  creator: admin
-  credentials: device
-  custom_username: ''
-  definition: Definition
-  delay_factor: 1.0
-  delete_spaces_before_matching: false
-  description: ''
-  device_query: ''
-  device_query_property: name
-  devices: [Washington]
-  dict_match: {}
-  display_only_failed_nodes: false
-  driver: a10
-  enable_mode: true
-  events: []
-  exit_command: ''
-  expect_password_prompt: ''
-  expect_prompt: ''
-  expect_string: ''
-  expect_username_prompt: ''
-  fast_cli: false
-  global_delay_factor: 1.0
-  impacting: true
-  include_device_results: true
-  include_link_in_summary: false
-  initial_payload: {}
-  iteration_devices: ''
-  iteration_devices_property: name
-  iteration_values: ''
-  iteration_variable_name: iteration_value
-  jump_command: ''
-  jump_on_connect: false
-  jump_username: ''
-  last_modified: '2019-10-21 21:59:43.430409'
-  log_level: 1
-  mail_recipient: ''
-  max_number_of_retries: 100
-  max_processes: 50
-  maximum_runs: 1
-  multiprocessing: false
-  name: '[Regression Workflow 1: Netmiko with validation and retries] Check VRF (NOVRF)
-    exists'
-  negative_logic: false
-  notification_header: ''
-  number_of_retries: 2
-  operating_system: ''
-  pools: []
-  positions:
-    'Regression Workflow 1: Netmiko with validation and retries': [-142, -137]
-  postprocessing: ''
-  postprocessing_mode: always
-  preprocessing: ''
-  reply_to: ''
-  reserved: false
-  run_method: per_device
-  scoped_name: Check VRF (NOVRF) exists
-  send_notification: false
-  send_notification_method: mail
-  shared: false
-  skip: false
-  skip_query: ''
-  skip_value: 'True'
-  start_new_connection: false
-  strip_command: true
-  strip_prompt: true
-  time_between_retries: 2
-  timeout: 10.0
-  type: netmiko_validation_service
-  update_pools: false
-  use_device_driver: true
-  use_genie: false
-  use_host_keys: false
-  validation_condition: success
-  validation_method: text
-  vendor: ''
-  waiting_time: 0
 - auto_find_prompt: true
   close_connection: false
   command: show interfaces
@@ -8846,8 +8715,8 @@
     'Regression Workflow C: Advanced multiprocessing': [340, 109]
     'Regression Workflow D: Prompts': [405, -103]
     'Regression Workflow L: superworkflow': [162, -126]
-    'Regression Workflow P: large workflow (scalability)': &id008 [-404, -20]
-    'Regression workflow P: large workflow (scalability)': *id008
+    'Regression Workflow P: large workflow (scalability)': &id016 [-404, -20]
+    'Regression workflow P: large workflow (scalability)': *id016
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -8916,8 +8785,8 @@
     c: ['1', '2', '3']
   pools: []
   positions:
-    'Regression Workflow P: large workflow (scalability)': &id009 [-406, 73]
-    'Regression workflow P: large workflow (scalability)': *id009
+    'Regression Workflow P: large workflow (scalability)': &id017 [-406, 73]
+    'Regression workflow P: large workflow (scalability)': *id017
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -8986,8 +8855,8 @@
     c: ['1', '2', '3']
   pools: []
   positions:
-    'Regression Workflow P: large workflow (scalability)': &id010 [-402, 156]
-    'Regression workflow P: large workflow (scalability)': *id010
+    'Regression Workflow P: large workflow (scalability)': &id018 [-402, 156]
+    'Regression workflow P: large workflow (scalability)': *id018
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -9056,8 +8925,8 @@
     c: ['1', '2', '3']
   pools: []
   positions:
-    'Regression Workflow P: large workflow (scalability)': &id011 [-94, 200]
-    'Regression workflow P: large workflow (scalability)': *id011
+    'Regression Workflow P: large workflow (scalability)': &id019 [-94, 200]
+    'Regression workflow P: large workflow (scalability)': *id019
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -9126,8 +8995,8 @@
     c: ['1', '2', '3']
   pools: []
   positions:
-    'Regression Workflow P: large workflow (scalability)': &id012 [-94, 109]
-    'Regression workflow P: large workflow (scalability)': *id012
+    'Regression Workflow P: large workflow (scalability)': &id020 [-94, 109]
+    'Regression workflow P: large workflow (scalability)': *id020
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -9209,8 +9078,8 @@
   operating_system: ''
   pools: []
   positions:
-    'Regression Workflow P: large workflow (scalability)': &id013 [-117, 5]
-    'Regression workflow P: large workflow (scalability)': *id013
+    'Regression Workflow P: large workflow (scalability)': &id021 [-117, 5]
+    'Regression workflow P: large workflow (scalability)': *id021
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -9295,8 +9164,8 @@
   operating_system: ''
   pools: []
   positions:
-    'Regression Workflow P: large workflow (scalability)': &id014 [-81, -125]
-    'Regression workflow P: large workflow (scalability)': *id014
+    'Regression Workflow P: large workflow (scalability)': &id022 [-81, -125]
+    'Regression workflow P: large workflow (scalability)': *id022
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -9381,8 +9250,8 @@
   operating_system: ''
   pools: []
   positions:
-    'Regression Workflow P: large workflow (scalability)': &id015 [-89, -196]
-    'Regression workflow P: large workflow (scalability)': *id015
+    'Regression Workflow P: large workflow (scalability)': &id023 [-89, -196]
+    'Regression workflow P: large workflow (scalability)': *id023
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -9467,8 +9336,8 @@
   operating_system: ''
   pools: []
   positions:
-    'Regression Workflow P: large workflow (scalability)': &id016 [183, -222]
-    'Regression workflow P: large workflow (scalability)': *id016
+    'Regression Workflow P: large workflow (scalability)': &id024 [183, -222]
+    'Regression workflow P: large workflow (scalability)': *id024
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -9553,8 +9422,8 @@
   operating_system: ''
   pools: []
   positions:
-    'Regression Workflow P: large workflow (scalability)': &id017 [188, -130]
-    'Regression workflow P: large workflow (scalability)': *id017
+    'Regression Workflow P: large workflow (scalability)': &id025 [188, -130]
+    'Regression workflow P: large workflow (scalability)': *id025
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -9639,8 +9508,8 @@
   operating_system: ''
   pools: []
   positions:
-    'Regression Workflow P: large workflow (scalability)': &id018 [190, -36]
-    'Regression workflow P: large workflow (scalability)': *id018
+    'Regression Workflow P: large workflow (scalability)': &id026 [190, -36]
+    'Regression workflow P: large workflow (scalability)': *id026
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -9705,8 +9574,8 @@
   operating_system: ''
   pools: []
   positions:
-    'Regression Workflow P: large workflow (scalability)': &id019 [194, 47]
-    'Regression workflow P: large workflow (scalability)': *id019
+    'Regression Workflow P: large workflow (scalability)': &id027 [194, 47]
+    'Regression workflow P: large workflow (scalability)': *id027
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -9766,8 +9635,8 @@
   operating_system: ''
   pools: []
   positions:
-    'Regression Workflow P: large workflow (scalability)': &id020 [203, 127]
-    'Regression workflow P: large workflow (scalability)': *id020
+    'Regression Workflow P: large workflow (scalability)': &id028 [203, 127]
+    'Regression workflow P: large workflow (scalability)': *id028
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -9827,8 +9696,8 @@
   operating_system: ''
   pools: []
   positions:
-    'Regression Workflow P: large workflow (scalability)': &id021 [207, 230]
-    'Regression workflow P: large workflow (scalability)': *id021
+    'Regression Workflow P: large workflow (scalability)': &id029 [207, 230]
+    'Regression workflow P: large workflow (scalability)': *id029
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -9888,8 +9757,8 @@
   operating_system: ''
   pools: []
   positions:
-    'Regression Workflow P: large workflow (scalability)': &id022 [476, 232]
-    'Regression workflow P: large workflow (scalability)': *id022
+    'Regression Workflow P: large workflow (scalability)': &id030 [476, 232]
+    'Regression workflow P: large workflow (scalability)': *id030
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -9949,8 +9818,8 @@
   operating_system: ''
   pools: []
   positions:
-    'Regression Workflow P: large workflow (scalability)': &id023 [471, 142]
-    'Regression workflow P: large workflow (scalability)': *id023
+    'Regression Workflow P: large workflow (scalability)': &id031 [471, 142]
+    'Regression workflow P: large workflow (scalability)': *id031
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -10010,8 +9879,8 @@
   operating_system: ''
   pools: []
   positions:
-    'Regression Workflow P: large workflow (scalability)': &id024 [476, 44]
-    'Regression workflow P: large workflow (scalability)': *id024
+    'Regression Workflow P: large workflow (scalability)': &id032 [476, 44]
+    'Regression workflow P: large workflow (scalability)': *id032
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -10071,8 +9940,8 @@
   operating_system: ''
   pools: []
   positions:
-    'Regression Workflow P: large workflow (scalability)': &id025 [469, -50]
-    'Regression workflow P: large workflow (scalability)': *id025
+    'Regression Workflow P: large workflow (scalability)': &id033 [469, -50]
+    'Regression workflow P: large workflow (scalability)': *id033
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -10132,8 +10001,8 @@
   operating_system: ''
   pools: []
   positions:
-    'Regression Workflow P: large workflow (scalability)': &id026 [467, -163]
-    'Regression workflow P: large workflow (scalability)': *id026
+    'Regression Workflow P: large workflow (scalability)': &id034 [467, -163]
+    'Regression workflow P: large workflow (scalability)': *id034
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -10786,9 +10655,9 @@
   operating_system: ''
   pools: []
   positions:
-    'Regression Workflow R: skip services in service by service mode': &id027 [-124,
+    'Regression Workflow R: skip services in service by service mode': &id035 [-124,
       -154]
-    'Workflow Regression R: skip services in service by service mode': *id027
+    'Workflow Regression R: skip services in service by service mode': *id035
   postprocessing: results["success"] = device.name == "Washington"
   postprocessing_mode: always
   preprocessing: ''
@@ -10852,9 +10721,9 @@
   operating_system: ''
   pools: []
   positions:
-    'Regression Workflow R: skip services in service by service mode': &id028 [304,
+    'Regression Workflow R: skip services in service by service mode': &id036 [304,
       -102]
-    'Workflow Regression R: skip services in service by service mode': *id028
+    'Workflow Regression R: skip services in service by service mode': *id036
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -10919,9 +10788,9 @@
   operating_system: ''
   pools: []
   positions:
-    'Regression Workflow R: skip services in service by service mode': &id029 [12,
+    'Regression Workflow R: skip services in service by service mode': &id037 [12,
       179]
-    'Workflow Regression R: skip services in service by service mode': *id029
+    'Workflow Regression R: skip services in service by service mode': *id037
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -11065,9 +10934,9 @@
   operating_system: ''
   pools: []
   positions:
-    'Regression Workflow S: conditional skip query with skip value set to False': &id030 [
+    'Regression Workflow S: conditional skip query with skip value set to False': &id038 [
       -149, -30]
-    'Workflow Regression S: conditional skip query with skip value set to False': *id030
+    'Workflow Regression S: conditional skip query with skip value set to False': *id038
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -11132,9 +11001,9 @@
   operating_system: ''
   pools: []
   positions:
-    'Regression Workflow S: conditional skip query with skip value set to False': &id031 [
+    'Regression Workflow S: conditional skip query with skip value set to False': &id039 [
       264, -16]
-    'Workflow Regression S: conditional skip query with skip value set to False': *id031
+    'Workflow Regression S: conditional skip query with skip value set to False': *id039
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -11199,9 +11068,9 @@
   operating_system: ''
   pools: []
   positions:
-    'Regression Workflow S: conditional skip query with skip value set to False': &id032 [
+    'Regression Workflow S: conditional skip query with skip value set to False': &id040 [
       208, 194]
-    'Workflow Regression S: conditional skip query with skip value set to False': *id032
+    'Workflow Regression S: conditional skip query with skip value set to False': *id040
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -11266,9 +11135,9 @@
   operating_system: ''
   pools: []
   positions:
-    'Regression Workflow S: conditional skip query with skip value set to False': &id033 [
+    'Regression Workflow S: conditional skip query with skip value set to False': &id041 [
       636, 63]
-    'Workflow Regression S: conditional skip query with skip value set to False': *id033
+    'Workflow Regression S: conditional skip query with skip value set to False': *id041
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -11335,21 +11204,21 @@
     a0ccdcaf-94b9-43f3-873c-db101440e363:
       alignment: left
       content: "This workflow is designed to test the get_neighbors function.\r\n\
-        get_neighbors takes:\r\n- one mandatory parameter object type: \"link\"\
-        \ or \"device\" to retrieve\r\neither the neighboring links of a device, or\
-        \ the neighboring devices\r\n(connected to the original device via a link)\r\
-        \n- an optional parameter direction (\"both\" / \"source\" / \"destination\"\
+        get_neighbors takes:\r\n- one mandatory parameter object type: \"link\" or\
+        \ \"device\" to retrieve\r\neither the neighboring links of a device, or the\
+        \ neighboring devices\r\n(connected to the original device via a link)\r\n\
+        - an optional parameter direction (\"both\" / \"source\" / \"destination\"\
         ,\r\ndefault to \"both\").\r\n- any link parameters used to filter the links\
         \ that are to be considered"
       positions: [-234, -252]
-  last_modified: '2020-09-01 07:35:15.331144'
+  last_modified: '2020-09-01 10:36:16.250628'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: 'Regression Workflow T: link neighbors mechanism'
+  name: 'Regression Workflow 4: link neighbors mechanism'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -11363,11 +11232,11 @@
   reply_to: ''
   reserved: false
   run_method: per_device
-  scoped_name: 'Regression Workflow T: link neighbors mechanism'
+  scoped_name: 'Regression Workflow 4: link neighbors mechanism'
   send_notification: false
   send_notification_method: mail
-  services: ['[Shared] Start', '[Shared] End', '[Regression Workflow T: link neighbors
-      mechanism] Test get_neighbors function', '[Regression Workflow T: link neighbors
+  services: ['[Shared] Start', '[Shared] End', '[Regression Workflow 4: link neighbors
+      mechanism] Test get_neighbors function', '[Regression Workflow 4: link neighbors
       mechanism] Iterate over neighbors of workflow device']
   shared: false
   skip: false
@@ -11410,14 +11279,16 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression Workflow T: link neighbors mechanism] Test get_neighbors function'
+  name: '[Regression Workflow 4: link neighbors mechanism] Test get_neighbors function'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
   pools: []
   positions:
-    'Regression Workflow T: link neighbors mechanism': [-20, 30]
+    'Regression Workflow 1: link neighbors mechanism': &id042 [-20, 30]
+    'Regression Workflow 4: link neighbors mechanism': *id042
+    'Regression Workflow T: link neighbors mechanism': *id042
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -11434,16 +11305,16 @@
   skip_value: 'True'
   source_code: "def names(instances):\r\n  return {instance.name for instance in instances}\r\
     \n\r\nresult = {}\r\n# neighbors in both direction\r\nresults[\"result\"] = {\r\
-    \n  \t\"direction=both, device\": names(device.get_neighbors(\"device\")),\r\
-    \n\t\"direction=both, link\": names(device.get_neighbors(\"link\")),\r\n\t\"\
-    direction=source, device\": names(device.get_neighbors(\"device\", direction=\"\
-    source\")),\r\n\t\"direction=source, link\": names(device.get_neighbors(\"link\"\
-    , direction=\"source\")),\r\n\t\"direction=destination, device\": names(device.get_neighbors(\"\
+    \n  \t\"direction=both, device\": names(device.get_neighbors(\"device\")),\r\n\
+    \t\"direction=both, link\": names(device.get_neighbors(\"link\")),\r\n\t\"direction=source,\
+    \ device\": names(device.get_neighbors(\"device\", direction=\"source\")),\r\n\
+    \t\"direction=source, link\": names(device.get_neighbors(\"link\", direction=\"\
+    source\")),\r\n\t\"direction=destination, device\": names(device.get_neighbors(\"\
     device\", direction=\"destination\")),\r\n  \t\"direction=destination, link\"\
-    : names(device.get_neighbors(\"link\", direction=\"destination\")),\r\n\t\"\
-    direction=both, device, 10G\": names(device.get_neighbors(\"device\", model=\"\
-    10G\")),\r\n  \t\"direction=both, link, 400G\": names(device.get_neighbors(\"\
-    link\", model=\"400G\")),\r\n  \t\"direction=source, device, 40G\": names(device.get_neighbors(\"\
+    : names(device.get_neighbors(\"link\", direction=\"destination\")),\r\n\t\"direction=both,\
+    \ device, 10G\": names(device.get_neighbors(\"device\", model=\"10G\")),\r\n \
+    \ \t\"direction=both, link, 400G\": names(device.get_neighbors(\"link\", model=\"\
+    400G\")),\r\n  \t\"direction=source, device, 40G\": names(device.get_neighbors(\"\
     device\", direction=\"source\", model=\"40G\")),\r\n  \t\"direction=destination,\
     \ link, 10G\": names(device.get_neighbors(\"link\", direction=\"destination\"\
     , model=\"10G\")),\r\n}\r\nresults[\"expected_result\"] = {\r\n   \t\"direction=both,\
@@ -11496,7 +11367,7 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression Workflow T: link neighbors mechanism] Iterate over neighbors
+  name: '[Regression Workflow 4: link neighbors mechanism] Iterate over neighbors
     of workflow device'
   negative_logic: false
   notification_header: ''
@@ -11506,7 +11377,9 @@
   payload: {}
   pools: []
   positions:
-    'Regression Workflow T: link neighbors mechanism': [401, -181]
+    'Regression Workflow 1: link neighbors mechanism': &id043 [401, -181]
+    'Regression Workflow 4: link neighbors mechanism': *id043
+    'Regression Workflow T: link neighbors mechanism': *id043
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -11531,4 +11404,89 @@
   validation_method: none
   vendor: ''
   verify_ssl_certificate: false
+  waiting_time: 0
+- auto_find_prompt: true
+  close_connection: false
+  command: show vrf
+  completion_time: 1
+  config_mode: false
+  content_match: NOVRF
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credentials: device
+  custom_username: ''
+  definition: Definition
+  delay_factor: 1.0
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  devices: []
+  dict_match: {}
+  display_only_failed_nodes: false
+  driver: a10
+  enable_mode: true
+  events: []
+  exit_command: ''
+  expect_password_prompt: ''
+  expect_prompt: ''
+  expect_string: ''
+  expect_username_prompt: ''
+  fast_cli: false
+  global_delay_factor: 1.0
+  impacting: true
+  include_device_results: true
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  jump_command: ''
+  jump_on_connect: false
+  jump_username: ''
+  last_modified: '2019-10-21 21:59:43.430409'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 50
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Regression Workflow D: Prompts] Check VRF (NOVRF) exists'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 2
+  operating_system: ''
+  pools: []
+  positions:
+    'Regression Workflow 1: Netmiko with validation and retries': [-142, -137]
+    'Regression Workflow D: Prompts': [-291, -104]
+  postprocessing: ''
+  postprocessing_mode: always
+  preprocessing: ''
+  public: true
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: Check VRF (NOVRF) exists
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: false
+  skip_query: ''
+  skip_value: 'True'
+  start_new_connection: false
+  strip_command: true
+  strip_prompt: true
+  time_between_retries: 2
+  timeout: 10.0
+  type: netmiko_validation_service
+  update_pools: false
+  use_device_driver: true
+  use_genie: false
+  use_host_keys: false
+  validation_condition: success
+  validation_method: text
+  vendor: ''
   waiting_time: 0

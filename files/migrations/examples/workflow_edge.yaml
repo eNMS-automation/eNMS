@@ -1,21 +1,21 @@
-- {destination: '[Regression Workflow 4: VRF creation and deletion with Netmiko] netmiko_create_vrf_test',
+- {destination: '[Regression Workflow 1: VRF creation and deletion with Netmiko] netmiko_create_vrf_test',
   label: success, source: '[Shared] Start', subtype: success, type: workflow_edge,
-  workflow: 'Regression Workflow 4: VRF creation and deletion with Netmiko'}
-- {destination: '[Regression Workflow 4: VRF creation and deletion with Netmiko] netmiko_check_vrf_test',
-  label: success, source: '[Regression Workflow 4: VRF creation and deletion with
+  workflow: 'Regression Workflow 1: VRF creation and deletion with Netmiko'}
+- {destination: '[Regression Workflow 1: VRF creation and deletion with Netmiko] netmiko_check_vrf_test',
+  label: success, source: '[Regression Workflow 1: VRF creation and deletion with
     Netmiko] netmiko_create_vrf_test', subtype: success, type: workflow_edge, workflow: 'Regression
-    Workflow 4: VRF creation and deletion with Netmiko'}
-- {destination: '[Regression Workflow 4: VRF creation and deletion with Netmiko] netmiko_delete_vrf_test',
-  label: success, source: '[Regression Workflow 4: VRF creation and deletion with
+    Workflow 1: VRF creation and deletion with Netmiko'}
+- {destination: '[Regression Workflow 1: VRF creation and deletion with Netmiko] netmiko_delete_vrf_test',
+  label: success, source: '[Regression Workflow 1: VRF creation and deletion with
     Netmiko] netmiko_check_vrf_test', subtype: success, type: workflow_edge, workflow: 'Regression
-    Workflow 4: VRF creation and deletion with Netmiko'}
+    Workflow 1: VRF creation and deletion with Netmiko'}
 - {destination: '[Shared] Netmiko: Check VRF (test) does not exist', label: success,
-  source: '[Regression Workflow 4: VRF creation and deletion with Netmiko] netmiko_delete_vrf_test',
-  subtype: success, type: workflow_edge, workflow: 'Regression Workflow 4: VRF creation
+  source: '[Regression Workflow 1: VRF creation and deletion with Netmiko] netmiko_delete_vrf_test',
+  subtype: success, type: workflow_edge, workflow: 'Regression Workflow 1: VRF creation
     and deletion with Netmiko'}
 - {destination: '[Shared] End', label: success, source: '[Shared] Netmiko: Check VRF
     (test) does not exist', subtype: success, type: workflow_edge, workflow: 'Regression
-    Workflow 4: VRF creation and deletion with Netmiko'}
+    Workflow 1: VRF creation and deletion with Netmiko'}
 - {destination: '[[Regression Workflow F: Workflow of Workflows] Regression Workflow
     5: VRF creation and deletion with Napalm] Create a VRF with NAPALM', label: success,
   source: '[Shared] Start', subtype: success, type: workflow_edge, workflow: '[Regression
@@ -89,9 +89,6 @@
 - {destination: '[Shared] NAPALM: Get Facts', label: success, source: '[Shared] Netmiko:
     Check VRF (test) does not exist', subtype: success, type: workflow_edge, workflow: 'Regression
     Workflow 2: Separate Failure - Success paths'}
-- {destination: '[Regression Workflow D: Prompts] Test Netmiko Prompt Service', label: success,
-  source: '[Shared] Start', subtype: success, type: workflow_edge, workflow: 'Regression
-    Workflow D: Prompts'}
 - {destination: '[Regression Workflow D: Prompts] Test netmiko prompts pass', label: failure,
   source: '[Regression Workflow D: Prompts] Test Netmiko Prompt Service', subtype: failure,
   type: workflow_edge, workflow: 'Regression Workflow D: Prompts'}
@@ -281,10 +278,6 @@
     Workflow F S1: Subworkflow of Workflow] Regression Workflow 7: Payload Extraction
     & Validation', subtype: success, type: workflow_edge, workflow: '[Regression Workflow
     F: Workflow of Workflows] Regression Workflow F S1: Subworkflow of Workflow'}
-- {destination: '[Regression Workflow 1: Netmiko with validation and retries] Check
-    VRF (NOVRF) exists', label: success, source: '[Shared] Start', subtype: success,
-  type: workflow_edge, workflow: 'Regression Workflow 1: Netmiko with validation and
-    retries'}
 - {destination: '[Regression Workflow E: Iteration Targets] Iteration Targets Workflow
     - Test 1', label: success, source: '[Regression Workflow F: Workflow of Workflows]
     Modify Payload for Iteration', subtype: success, type: workflow_edge, workflow: 'Regression
@@ -572,9 +565,6 @@
     - Test 4', label: success, source: '[Regression Workflow E: Iteration Targets]
     Iteration Target Workflow - Test 3', subtype: success, type: workflow_edge, workflow: 'Regression
     Workflow E: Iteration Targets'}
-- {destination: '[Shared] End', label: failure, source: '[Regression Workflow 1: Netmiko
-    with validation and retries] Check VRF (NOVRF) exists', subtype: failure, type: workflow_edge,
-  workflow: 'Regression Workflow 1: Netmiko with validation and retries'}
 - {destination: '[Regression Workflow L: superworkflow] REST API: call to placeholder
     property', label: success, source: '[Shared] REST API: call *is_alive* endpoint',
   subtype: success, type: workflow_edge, workflow: 'Regression Workflow L: superworkflow'}
@@ -774,13 +764,19 @@
     S: conditional skip query with skip value set to False] Skip Washington with Skip
     value == False', subtype: failure, type: workflow_edge, workflow: 'Regression
     Workflow S: conditional skip query with skip value set to False'}
-- {destination: '[Regression Workflow T: link neighbors mechanism] Test get_neighbors
+- {destination: '[Regression Workflow 4: link neighbors mechanism] Test get_neighbors
     function', label: success, source: '[Shared] Start', subtype: success, type: workflow_edge,
-  workflow: 'Regression Workflow T: link neighbors mechanism'}
-- {destination: '[Regression Workflow T: link neighbors mechanism] Iterate over neighbors
-    of workflow device', label: success, source: '[Regression Workflow T: link neighbors
+  workflow: 'Regression Workflow 4: link neighbors mechanism'}
+- {destination: '[Regression Workflow 4: link neighbors mechanism] Iterate over neighbors
+    of workflow device', label: success, source: '[Regression Workflow 4: link neighbors
     mechanism] Test get_neighbors function', subtype: success, type: workflow_edge,
-  workflow: 'Regression Workflow T: link neighbors mechanism'}
-- {destination: '[Shared] End', label: success, source: '[Regression Workflow T: link
+  workflow: 'Regression Workflow 4: link neighbors mechanism'}
+- {destination: '[Shared] End', label: success, source: '[Regression Workflow 4: link
     neighbors mechanism] Iterate over neighbors of workflow device', subtype: success,
-  type: workflow_edge, workflow: 'Regression Workflow T: link neighbors mechanism'}
+  type: workflow_edge, workflow: 'Regression Workflow 4: link neighbors mechanism'}
+- {destination: '[Regression Workflow D: Prompts] Check VRF (NOVRF) exists', label: success,
+  source: '[Shared] Start', subtype: success, type: workflow_edge, workflow: 'Regression
+    Workflow D: Prompts'}
+- {destination: '[Regression Workflow D: Prompts] Test Netmiko Prompt Service', label: success,
+  source: '[Regression Workflow D: Prompts] Check VRF (NOVRF) exists', subtype: success,
+  type: workflow_edge, workflow: 'Regression Workflow D: Prompts'}

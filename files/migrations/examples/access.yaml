@@ -83,7 +83,7 @@
   pools: [Washington]
   pools_access: "['Read', 'Edit', 'Connect', 'Use as target']"
   post_requests: []
-  services: ['Regression Workflow 4: VRF creation and deletion with Netmiko', 'Regression
+  services: ['Regression Workflow 1: VRF creation and deletion with Netmiko', 'Regression
       Workflow L: superworkflow', 'Regression Workflow 3: Napalm getters (postprocessing)']
   services_access: "['Read', 'Edit', 'Run']"
   type: access

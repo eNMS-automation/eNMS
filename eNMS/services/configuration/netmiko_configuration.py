@@ -34,7 +34,10 @@ class NetmikoConfigurationService(ConnectionService):
         netmiko_connection = run.netmiko_connection(device)
         config = run.sub(run.content, locals())
         run.log(
-            "info", "Pushing Configuration with Netmiko", device, logger="security",
+            "info",
+            "Pushing Configuration with Netmiko",
+            device,
+            logger="security",
         )
         netmiko_connection.send_config_set(
             config.splitlines(),

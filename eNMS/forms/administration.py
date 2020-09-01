@@ -44,7 +44,8 @@ class ResultLogDeletionForm(BaseForm):
     action = "eNMS.administration.resultLogDeletion"
     form_type = HiddenField(default="result_log_deletion")
     deletion_types = SelectMultipleField(
-        "Instances do delete", choices=[("run", "result"), ("changelog", "changelog")],
+        "Instances do delete",
+        choices=[("run", "result"), ("changelog", "changelog")],
     )
     date_time = StringField(type="date", label="Delete Records before")
 

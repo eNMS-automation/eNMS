@@ -163,7 +163,9 @@ class Workflow(Service):
                 summary = results.get("summary", {})
                 for edge_type in ("success", "failure"):
                     for successor, edge in service.adjacent_services(
-                        self, "destination", edge_type,
+                        self,
+                        "destination",
+                        edge_type,
                     ):
                         if not summary[edge_type]:
                             continue
@@ -225,7 +227,9 @@ class Workflow(Service):
                 status = "success" if results["success"] else "failure"
                 run.write_state(f"progress/service/{status}", 1, "increment")
             for successor, edge in service.adjacent_services(
-                self, "destination", "success" if results["success"] else "failure",
+                self,
+                "destination",
+                "success" if results["success"] else "failure",
             ):
                 services.append(successor)
                 if device:

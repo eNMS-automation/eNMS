@@ -11322,20 +11322,20 @@
   labels:
     12c1aa1a-19a6-41cc-a1b3-04c2e0abe15c:
       alignment: left
-      content: "Tests get_neighboring on the main device Dallas\r\nwith many different\
+      content: "Tests get_neighbors on the main device Dallas\r\nwith many different\
         \ parameters.\r\nIf any of these tests fails, the whole service should fail."
       positions: [-21, 123]
     93568f7d-0cd8-4062-92e7-7bfb346ea1d2:
       alignment: left
-      content: "Using get_neighboring as the iteration query.\r\nThe service should\
+      content: "Using get_neighbors as the iteration query.\r\nThe service should\
         \ use the four neighbors of Dallas as iteration targets.\r\nIt uses \"device.name\"\
         \ to query device info via the REST API.\r\nCredentials must be updated each\
         \ time."
       positions: [449, -291]
     a0ccdcaf-94b9-43f3-873c-db101440e363:
       alignment: left
-      content: "This workflow is designed to test the get_neighboring function.\r\n\
-        get_neighboring takes:\r\n- one mandatory parameter object type: \"link\"\
+      content: "This workflow is designed to test the get_neighbors function.\r\n\
+        get_neighbors takes:\r\n- one mandatory parameter object type: \"link\"\
         \ or \"device\" to retrieve\r\neither the neighboring links of a device, or\
         \ the neighboring devices\r\n(connected to the original device via a link)\r\
         \n- an optional parameter direction (\"both\" / \"source\" / \"destination\"\
@@ -11434,18 +11434,18 @@
   skip_value: 'True'
   source_code: "def names(instances):\r\n  return {instance.name for instance in instances}\r\
     \n\r\nresult = {}\r\n# neighbors in both direction\r\nresults[\"result\"] = {\r\
-    \n  \t\"direction=both, device\": names(device.get_neighboring(\"device\")),\r\
-    \n\t\"direction=both, link\": names(device.get_neighboring(\"link\")),\r\n\t\"\
-    direction=source, device\": names(device.get_neighboring(\"device\", direction=\"\
-    source\")),\r\n\t\"direction=source, link\": names(device.get_neighboring(\"link\"\
-    , direction=\"source\")),\r\n\t\"direction=destination, device\": names(device.get_neighboring(\"\
+    \n  \t\"direction=both, device\": names(device.get_neighbors(\"device\")),\r\
+    \n\t\"direction=both, link\": names(device.get_neighbors(\"link\")),\r\n\t\"\
+    direction=source, device\": names(device.get_neighbors(\"device\", direction=\"\
+    source\")),\r\n\t\"direction=source, link\": names(device.get_neighbors(\"link\"\
+    , direction=\"source\")),\r\n\t\"direction=destination, device\": names(device.get_neighbors(\"\
     device\", direction=\"destination\")),\r\n  \t\"direction=destination, link\"\
-    : names(device.get_neighboring(\"link\", direction=\"destination\")),\r\n\t\"\
-    direction=both, device, 10G\": names(device.get_neighboring(\"device\", model=\"\
-    10G\")),\r\n  \t\"direction=both, link, 400G\": names(device.get_neighboring(\"\
-    link\", model=\"400G\")),\r\n  \t\"direction=source, device, 40G\": names(device.get_neighboring(\"\
+    : names(device.get_neighbors(\"link\", direction=\"destination\")),\r\n\t\"\
+    direction=both, device, 10G\": names(device.get_neighbors(\"device\", model=\"\
+    10G\")),\r\n  \t\"direction=both, link, 400G\": names(device.get_neighbors(\"\
+    link\", model=\"400G\")),\r\n  \t\"direction=source, device, 40G\": names(device.get_neighbors(\"\
     device\", direction=\"source\", model=\"40G\")),\r\n  \t\"direction=destination,\
-    \ link, 10G\": names(device.get_neighboring(\"link\", direction=\"destination\"\
+    \ link, 10G\": names(device.get_neighbors(\"link\", direction=\"destination\"\
     , model=\"10G\")),\r\n}\r\nresults[\"expected_result\"] = {\r\n   \t\"direction=both,\
     \ device\": {\"Austin\", \"Atlanta\", \"Houston\", \"LosAngeles\"},\r\n\t\"direction=both,\
     \ link\": {\"link13\", \"link25\", \"link0\", \"link24\"},\r\n\t\"direction=source,\
@@ -11485,7 +11485,7 @@
   include_device_results: false
   include_link_in_summary: false
   initial_payload: {}
-  iteration_devices: device.get_neighboring("device")
+  iteration_devices: device.get_neighbors("device")
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value

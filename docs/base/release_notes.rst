@@ -14,6 +14,7 @@ visualization/geographical_view and visualization/logical_view
 - Use the log level of the parameterized run instead of always using the service log level
 - Change field syntax for context help to be 'help="path"' instead of using render_kw={"help": ...}
 - Don't update the "creator" field when an existing object is edited
+- Add new function "get_neighbors" to retrieve neighboring devices or links of a device
 
 Version 3.22.3
 --------------

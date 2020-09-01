@@ -115,7 +115,7 @@ class Device(Object):
         "Session", back_populates="device", cascade="all, delete-orphan"
     )
 
-    def get_neighboring(self, object_type, direction="both", **link_constraints):
+    def get_neighbors(self, object_type, direction="both", **link_constraints):
         filters = [models["link"].destination == self, models["link"].source == self]
         edge_constraints = (
             filters if direction == "both" else [filters[direction == "source"]]

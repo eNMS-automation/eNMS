@@ -494,7 +494,10 @@ class Run(AbstractBase):
         if isinstance(values, str):
             values = [values]
         for value in values:
-            device = db.fetch("device", allow_none=True, **{property: value})
+            if isinstance(value, models["device"]):
+                device = value
+            else:
+                device = db.fetch("device", allow_none=True, **{property: value})
             if device:
                 devices.add(device)
             else:

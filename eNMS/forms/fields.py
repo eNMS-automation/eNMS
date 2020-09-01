@@ -19,11 +19,19 @@ from wtforms.widgets.core import HTMLString
 from eNMS import app
 
 
-class HiddenField(WtformsHiddenField):
+class FieldMixin:
+    def __init__(self, *args, **kwargs):
+        print("KKK" * 100)
+        if "help" in kwargs:
+            kwargs.setdefault("render_kw", {})["help"] = kwargs.pop("help")
+        super().__init__(*args, **kwargs)
+
+
+class HiddenField(WtformsHiddenField, FieldMixin):
     type = "hidden"
 
 
-class StringField(WtformsStringField):
+class StringField(FieldMixin, WtformsStringField):
     type = "str"
 
     def __init__(self, *args, **kwargs):
@@ -50,19 +58,19 @@ class StringField(WtformsStringField):
         return True
 
 
-class BooleanField(WtformsBooleanField):
+class BooleanField(FieldMixin, WtformsBooleanField):
     type = "bool"
 
 
-class IntegerField(WtformsIntegerField):
+class IntegerField(FieldMixin, WtformsIntegerField):
     type = "integer"
 
 
-class FloatField(WtformsFloatField):
+class FloatField(FieldMixin, WtformsFloatField):
     type = "float"
 
 
-class SelectField(WtformsSelectField):
+class SelectField(FieldMixin, WtformsSelectField):
     type = "list"
 
     def __init__(self, *args, **kwargs):
@@ -71,11 +79,11 @@ class SelectField(WtformsSelectField):
         super().__init__(*args, **kwargs)
 
 
-class SelectMultipleField(WtformsSelectMultipleField):
+class SelectMultipleField(WtformsSelectMultipleField, FieldMixin):
     type = "multiselect"
 
 
-class SelectMultipleStringField(SelectMultipleField):
+class SelectMultipleStringField(SelectMultipleField, FieldMixin):
     type = "multiselect-string"
 
 
@@ -83,7 +91,7 @@ class FieldList(WtformsFieldList):
     type = "field-list"
 
 
-class PasswordField(WtformsPasswordField):
+class PasswordField(WtformsPasswordField, FieldMixin):
     type = "str"
 
     def __init__(self, *args, **kwargs):
@@ -96,7 +104,7 @@ class PasswordField(WtformsPasswordField):
         return super().__call__(*args, **kwargs)
 
 
-class DictField(StringField):
+class DictField(StringField, FieldMixin):
     type = "dict"
 
     def __init__(self, *args, **kwargs):
@@ -125,7 +133,7 @@ class DictField(StringField):
         return True
 
 
-class JsonField(WtformsField):
+class JsonField(WtformsField, FieldMixin):
     type = "json"
 
     def __init__(self, *args, **kwargs):
@@ -137,7 +145,7 @@ class JsonField(WtformsField):
         return HTMLString(f"<input {html_params(**html_kwargs)} hidden><div></div>")
 
 
-class InstanceField(SelectField):
+class InstanceField(SelectField, FieldMixin):
     type = "object"
 
     def __init__(self, *args, **kwargs):
@@ -149,7 +157,7 @@ class InstanceField(SelectField):
         pass
 
 
-class MultipleInstanceField(WtformsSelectMultipleField):
+class MultipleInstanceField(WtformsSelectMultipleField, FieldMixin):
     type = "object-list"
 
     def __init__(self, *args, **kwargs):

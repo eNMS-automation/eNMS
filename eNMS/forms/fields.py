@@ -27,7 +27,7 @@ class FieldMixin:
         super().__init__(*args, **kwargs)
 
 
-class HiddenField(WtformsHiddenField, FieldMixin):
+class HiddenField(WtformsHiddenField):
     type = "hidden"
 
 
@@ -79,19 +79,19 @@ class SelectField(FieldMixin, WtformsSelectField):
         super().__init__(*args, **kwargs)
 
 
-class SelectMultipleField(WtformsSelectMultipleField, FieldMixin):
+class SelectMultipleField(FieldMixin, WtformsSelectMultipleField):
     type = "multiselect"
 
 
-class SelectMultipleStringField(SelectMultipleField, FieldMixin):
+class SelectMultipleStringField(SelectMultipleField):
     type = "multiselect-string"
 
 
-class FieldList(WtformsFieldList):
+class FieldList(FieldMixin, WtformsFieldList):
     type = "field-list"
 
 
-class PasswordField(WtformsPasswordField, FieldMixin):
+class PasswordField(FieldMixin, WtformsPasswordField):
     type = "str"
 
     def __init__(self, *args, **kwargs):
@@ -104,7 +104,7 @@ class PasswordField(WtformsPasswordField, FieldMixin):
         return super().__call__(*args, **kwargs)
 
 
-class DictField(StringField, FieldMixin):
+class DictField(StringField):
     type = "dict"
 
     def __init__(self, *args, **kwargs):
@@ -133,7 +133,7 @@ class DictField(StringField, FieldMixin):
         return True
 
 
-class JsonField(WtformsField, FieldMixin):
+class JsonField(FieldMixin, WtformsField):
     type = "json"
 
     def __init__(self, *args, **kwargs):
@@ -145,7 +145,7 @@ class JsonField(WtformsField, FieldMixin):
         return HTMLString(f"<input {html_params(**html_kwargs)} hidden><div></div>")
 
 
-class InstanceField(SelectField, FieldMixin):
+class InstanceField(SelectField):
     type = "object"
 
     def __init__(self, *args, **kwargs):
@@ -157,7 +157,7 @@ class InstanceField(SelectField, FieldMixin):
         pass
 
 
-class MultipleInstanceField(WtformsSelectMultipleField, FieldMixin):
+class MultipleInstanceField(FieldMixin, WtformsSelectMultipleField):
     type = "object-list"
 
     def __init__(self, *args, **kwargs):

@@ -89,24 +89,12 @@ class NetmikoPromptsService(ConnectionService):
 class NetmikoPromptsForm(NetmikoForm):
     form_type = HiddenField(default="netmiko_prompts_service")
     command = StringField(substitution=True)
-    confirmation1 = StringField(
-        substitution=True, render_kw={"help": "netmiko/confirmation"}
-    )
-    response1 = StringField(
-        substitution=True, render_kw={"help": "netmiko/confirmation"}
-    )
-    confirmation2 = StringField(
-        substitution=True, render_kw={"help": "netmiko/confirmation"}
-    )
-    response2 = StringField(
-        substitution=True, render_kw={"help": "netmiko/confirmation"}
-    )
-    confirmation3 = StringField(
-        substitution=True, render_kw={"help": "netmiko/confirmation"}
-    )
-    response3 = StringField(
-        substitution=True, render_kw={"help": "netmiko/confirmation"}
-    )
+    confirmation1 = StringField(substitution=True, help="netmiko/confirmation")
+    response1 = StringField(substitution=True, help="netmiko/confirmation")
+    confirmation2 = StringField(substitution=True, help="netmiko/confirmation")
+    response2 = StringField(substitution=True, help="netmiko/confirmation")
+    confirmation3 = StringField(substitution=True, help="netmiko/confirmation")
+    response3 = StringField(substitution=True, help="netmiko/confirmation")
     groups = {
         "Main Parameters": {
             "commands": [

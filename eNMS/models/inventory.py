@@ -1,6 +1,6 @@
 from flask_login import current_user
 from re import search, sub
-from sqlalchemy import Boolean, ForeignKey, Integer, or_
+from sqlalchemy import and_, Boolean, ForeignKey, Integer, or_
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.orm import backref, relationship
 from sqlalchemy.schema import UniqueConstraint
@@ -115,10 +115,20 @@ class Device(Object):
         "Session", back_populates="device", cascade="all, delete-orphan"
     )
 
-    def get_neighboring(self, object_type, direction="both", **link_kwargs):
-        filters = (models["link"].destination == self, models["link"].source == self)
-        constraints = filters if direction == "both" else (filters[direction == "source"],)
-        neighboring_links = db.query("link").filter(or_(*constraints)).all()
+    def get_neighboring(self, object_type, direction="both", **link_constraints):
+        filters = [models["link"].destination == self, models["link"].source == self]
+        edge_constraints = (
+            filters if direction == "both" else [filters[direction == "source"]]
+        )
+        link_constraints = [
+            getattr(models["link"], key) == value
+            for key, value in link_constraints.items()
+        ]
+        neighboring_links = (
+            db.query("link")
+            .filter(and_(or_(*edge_constraints), *link_constraints))
+            .all()
+        )
         if "link" in object_type:
             return neighboring_links
         else:

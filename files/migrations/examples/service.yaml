@@ -72,7 +72,7 @@
       -35]
     'Regression Workflow S: conditional skip query with skip value set to False': &id003 [
       -183, -152]
-    'Regression Workflow T: link neighbors mechanism': [0, 0]
+    'Regression Workflow T: link neighbors mechanism': [-156, 0]
     'Regression workflow P: large workflow (scalability)': *id001
     Subworkflow 1: !!python/tuple [0, 0]
     Subworkflow 2: !!python/tuple [0, 0]
@@ -207,7 +207,7 @@
       0]
     'Regression Workflow S: conditional skip query with skip value set to False': &id006 [
       640, -155]
-    'Regression Workflow T: link neighbors mechanism': [500, 0]
+    'Regression Workflow T: link neighbors mechanism': [648, 24]
     'Regression workflow P: large workflow (scalability)': *id004
     Subworkflow 1: !!python/tuple [0, 0]
     Subworkflow 2: !!python/tuple [0, 0]
@@ -11320,7 +11320,7 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels: {}
-  last_modified: '2020-09-01 04:26:45.903895'
+  last_modified: '2020-09-01 07:08:47.403962'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -11380,7 +11380,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2020-09-01 04:38:46.931190'
+  last_modified: '2020-09-01 07:22:37.645802'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -11394,7 +11394,7 @@
   operating_system: ''
   pools: []
   positions:
-    'Regression Workflow T: link neighbors mechanism': [226, -157]
+    'Regression Workflow T: link neighbors mechanism': [11, -224]
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -11410,19 +11410,31 @@
   skip_query: ''
   skip_value: 'True'
   source_code: "def names(instances):\r\n  return {instance.name for instance in instances}\r\
-    \n\r\nresult = {}\r\nresults[\"success\"] = True\r\n# neighbors in both direction\r\
-    \nresults[\"result\"] = {\r\n  \t\"direction=both, device\": device.get_neighboring(\"\
-    device\"),\r\n\t\"direction=both, link\": device.get_neighboring(\"link\"),\r\n\
-    \t\"direction=source, device\": device.get_neighboring(\"device\", direction=\"\
-    source\"),\r\n\t\"direction=source, link\": device.get_neighboring(\"link\", direction=\"\
-    source\"),\r\n\t\"direction=destination, device\": device.get_neighboring(\"device\"\
-    , direction=\"destination\"),\r\n  \t\"direction=destination, link\": device.get_neighboring(\"\
-    link\", direction=\"destination\"),\r\n\t\"direction=both, device, 10G\": device.get_neighboring(\"\
-    device\", model=\"10G\"),\r\n  \t\"direction=both, link, 400G\": device.get_neighboring(\"\
-    link\", model=\"400G\"),\r\n  \t\"direction=source, device, 40G\": device.get_neighboring(\"\
-    device\", direction=\"source\", model=\"40G\"),\r\n  \t\"direction=destination,\
-    \ link, 10G\": device.get_neighboring(\"link\", direction=\"destination\", model=\"\
-    10G\"),\r\n}"
+    \n\r\nresult = {}\r\n# neighbors in both direction\r\nresults[\"result\"] = {\r\
+    \n  \t\"direction=both, device\": names(device.get_neighboring(\"device\")),\r\
+    \n\t\"direction=both, link\": names(device.get_neighboring(\"link\")),\r\n\t\"\
+    direction=source, device\": names(device.get_neighboring(\"device\", direction=\"\
+    source\")),\r\n\t\"direction=source, link\": names(device.get_neighboring(\"link\"\
+    , direction=\"source\")),\r\n\t\"direction=destination, device\": names(device.get_neighboring(\"\
+    device\", direction=\"destination\")),\r\n  \t\"direction=destination, link\"\
+    : names(device.get_neighboring(\"link\", direction=\"destination\")),\r\n\t\"\
+    direction=both, device, 10G\": names(device.get_neighboring(\"device\", model=\"\
+    10G\")),\r\n  \t\"direction=both, link, 400G\": names(device.get_neighboring(\"\
+    link\", model=\"400G\")),\r\n  \t\"direction=source, device, 40G\": names(device.get_neighboring(\"\
+    device\", direction=\"source\", model=\"40G\")),\r\n  \t\"direction=destination,\
+    \ link, 10G\": names(device.get_neighboring(\"link\", direction=\"destination\"\
+    , model=\"10G\")),\r\n}\r\nresults[\"expected_result\"] = {\r\n   \t\"direction=both,\
+    \ device\": {\"Austin\", \"Atlanta\", \"Houston\", \"LosAngeles\"},\r\n\t\"direction=both,\
+    \ link\": {\"link13\", \"link25\", \"link0\", \"link24\"},\r\n\t\"direction=source,\
+    \ device\": {\"Atlanta\", \"LosAngeles\"},\r\n\t\"direction=source, link\": {\"\
+    link25\", \"link24\"},\r\n\t\"direction=destination, device\": {\"Austin\", \"\
+    Houston\"},\r\n  \t\"direction=destination, link\": {\"link13\", \"link0\"},\r\
+    \n\t\"direction=both, device, 10G\": {\"Houston\"},\r\n  \t\"direction=both, link,\
+    \ 400G\": {\"link25\", \"link24\"},\r\n  \t\"direction=source, device, 40G\":\
+    \ set(),\r\n  \t\"direction=destination, link, 10G\": {\"link0\"},\r\n}\r\n\r\n\
+    results[\"success\"] = True\r\nfor test, result in results[\"result\"].items():\r\
+    \n    if result != results[\"expected_result\"][test]:\r\n        results[\"success\"\
+    ] = False\r\n"
   time_between_retries: 10
   type: python_snippet_service
   update_pools: false

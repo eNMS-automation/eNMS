@@ -777,6 +777,10 @@
 - {destination: '[Regression Workflow T: link neighbors mechanism] Test get_neighbors
     function', label: success, source: '[Shared] Start', subtype: success, type: workflow_edge,
   workflow: 'Regression Workflow T: link neighbors mechanism'}
-- {destination: '[Shared] End', label: success, source: '[Regression Workflow T: link
-    neighbors mechanism] Test get_neighbors function', subtype: success, type: workflow_edge,
+- {destination: '[Regression Workflow T: link neighbors mechanism] Iterate over neighbors
+    of workflow device', label: success, source: '[Regression Workflow T: link neighbors
+    mechanism] Test get_neighbors function', subtype: success, type: workflow_edge,
   workflow: 'Regression Workflow T: link neighbors mechanism'}
+- {destination: '[Shared] End', label: success, source: '[Regression Workflow T: link
+    neighbors mechanism] Iterate over neighbors of workflow device', subtype: success,
+  type: workflow_edge, workflow: 'Regression Workflow T: link neighbors mechanism'}

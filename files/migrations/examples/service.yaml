@@ -72,7 +72,7 @@
       -35]
     'Regression Workflow S: conditional skip query with skip value set to False': &id003 [
       -183, -152]
-    'Regression Workflow T: link neighbors mechanism': [-156, 0]
+    'Regression Workflow T: link neighbors mechanism': [-273, -126]
     'Regression workflow P: large workflow (scalability)': *id001
     Subworkflow 1: !!python/tuple [0, 0]
     Subworkflow 2: !!python/tuple [0, 0]
@@ -207,7 +207,7 @@
       0]
     'Regression Workflow S: conditional skip query with skip value set to False': &id006 [
       640, -155]
-    'Regression Workflow T: link neighbors mechanism': [648, 24]
+    'Regression Workflow T: link neighbors mechanism': [713, 86]
     'Regression workflow P: large workflow (scalability)': *id004
     Subworkflow 1: !!python/tuple [0, 0]
     Subworkflow 2: !!python/tuple [0, 0]
@@ -11319,8 +11319,30 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  labels: {}
-  last_modified: '2020-09-01 07:08:47.403962'
+  labels:
+    12c1aa1a-19a6-41cc-a1b3-04c2e0abe15c:
+      alignment: left
+      content: "Tests get_neighboring on the main device Dallas\r\nwith many different\
+        \ parameters.\r\nIf any of these tests fails, the whole service should fail."
+      positions: [-21, 123]
+    93568f7d-0cd8-4062-92e7-7bfb346ea1d2:
+      alignment: left
+      content: "Using get_neighboring as the iteration query.\r\nThe service should\
+        \ use the four neighbors of Dallas as iteration targets.\r\nIt uses \"device.name\"\
+        \ to query device info via the REST API.\r\nCredentials must be updated each\
+        \ time."
+      positions: [449, -291]
+    a0ccdcaf-94b9-43f3-873c-db101440e363:
+      alignment: left
+      content: "This workflow is designed to test the get_neighboring function.\r\n\
+        get_neighboring takes:\r\n- one mandatory parameter object type: \"link\"\
+        \ or \"device\" to retrieve\r\neither the neighboring links of a device, or\
+        \ the neighboring devices\r\n(connected to the original device via a link)\r\
+        \n- an optional parameter direction (\"both\" / \"source\" / \"destination\"\
+        ,\r\ndefault to \"both\").\r\n- any link parameters used to filter the links\
+        \ that are to be considered"
+      positions: [-234, -252]
+  last_modified: '2020-09-01 07:35:15.331144'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -11345,7 +11367,8 @@
   send_notification: false
   send_notification_method: mail
   services: ['[Shared] Start', '[Shared] End', '[Regression Workflow T: link neighbors
-      mechanism] Test get_neighbors function']
+      mechanism] Test get_neighbors function', '[Regression Workflow T: link neighbors
+      mechanism] Iterate over neighbors of workflow device']
   shared: false
   skip: false
   skip_query: ''
@@ -11394,7 +11417,7 @@
   operating_system: ''
   pools: []
   positions:
-    'Regression Workflow T: link neighbors mechanism': [11, -224]
+    'Regression Workflow T: link neighbors mechanism': [-20, 30]
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -11441,4 +11464,71 @@
   validation_condition: success
   validation_method: none
   vendor: ''
+  waiting_time: 0
+- call_type: GET
+  completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  devices: []
+  dict_match: {}
+  display_only_failed_nodes: false
+  events: []
+  headers: {}
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: device.get_neighboring("device")
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2020-09-01 07:28:53.069205'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Regression Workflow T: link neighbors mechanism] Iterate over neighbors
+    of workflow device'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  params: {}
+  payload: {}
+  pools: []
+  positions:
+    'Regression Workflow T: link neighbors mechanism': [401, -181]
+  postprocessing: ''
+  postprocessing_mode: always
+  preprocessing: ''
+  public: false
+  reply_to: ''
+  reserved: false
+  rest_url: http://127.0.0.1:5000/rest/instance/device/{{device.name}}
+  run_method: per_device
+  scoped_name: Iterate over neighbors of workflow device
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: false
+  skip_query: ''
+  skip_value: 'True'
+  time_between_retries: 10
+  timeout: 15
+  type: rest_call_service
+  update_pools: false
+  username: admin
+  validation_condition: success
+  validation_method: none
+  vendor: ''
+  verify_ssl_certificate: false
   waiting_time: 0

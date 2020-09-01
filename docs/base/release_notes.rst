@@ -13,6 +13,7 @@ visualization/geographical_view and visualization/logical_view
 - Update the dark theme to display input / list in grey instead of white (too much contrast)
 - Use the log level of the parameterized run instead of always using the service log level
 - Change field syntax for context help to be 'help="path"' instead of using render_kw={"help": ...}
+- Don't update the "creator" field when an existing object is edited
 
 Version 3.22.3
 --------------

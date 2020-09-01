@@ -11307,7 +11307,7 @@
   description: ''
   device_query: ''
   device_query_property: name
-  devices: [Austin]
+  devices: [Dallas]
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -11320,7 +11320,7 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels: {}
-  last_modified: '2020-09-01 04:00:52.602321'
+  last_modified: '2020-09-01 04:26:45.903895'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -11380,7 +11380,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2020-09-01 04:00:48.280857'
+  last_modified: '2020-09-01 04:38:46.931190'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -11409,8 +11409,20 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
-  source_code: "result = {}\r\nresults[\"success\"] = True\r\nresults[\"result\"]\
-    \ = device.get_neighbors()"
+  source_code: "def names(instances):\r\n  return {instance.name for instance in instances}\r\
+    \n\r\nresult = {}\r\nresults[\"success\"] = True\r\n# neighbors in both direction\r\
+    \nresults[\"result\"] = {\r\n  \t\"direction=both, device\": device.get_neighboring(\"\
+    device\"),\r\n\t\"direction=both, link\": device.get_neighboring(\"link\"),\r\n\
+    \t\"direction=source, device\": device.get_neighboring(\"device\", direction=\"\
+    source\"),\r\n\t\"direction=source, link\": device.get_neighboring(\"link\", direction=\"\
+    source\"),\r\n\t\"direction=destination, device\": device.get_neighboring(\"device\"\
+    , direction=\"destination\"),\r\n  \t\"direction=destination, link\": device.get_neighboring(\"\
+    link\", direction=\"destination\"),\r\n\t\"direction=both, device, 10G\": device.get_neighboring(\"\
+    device\", model=\"10G\"),\r\n  \t\"direction=both, link, 400G\": device.get_neighboring(\"\
+    link\", model=\"400G\"),\r\n  \t\"direction=source, device, 40G\": device.get_neighboring(\"\
+    device\", direction=\"source\", model=\"40G\"),\r\n  \t\"direction=destination,\
+    \ link, 10G\": device.get_neighboring(\"link\", direction=\"destination\", model=\"\
+    10G\"),\r\n}"
   time_between_retries: 10
   type: python_snippet_service
   update_pools: false

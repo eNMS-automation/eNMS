@@ -117,7 +117,7 @@ class Device(Object):
 
     def get_neighboring(self, object_type, direction="both", **link_kwargs):
         filters = (models["link"].destination == self, models["link"].source == self)
-        constraints = filters if direction == "both" else filters[direction == "source"]
+        constraints = filters if direction == "both" else (filters[direction == "source"],)
         neighboring_links = db.query("link").filter(or_(*constraints)).all()
         if "link" in object_type:
             return neighboring_links

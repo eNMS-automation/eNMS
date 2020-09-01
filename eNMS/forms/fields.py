@@ -21,7 +21,6 @@ from eNMS import app
 
 class FieldMixin:
     def __init__(self, *args, **kwargs):
-        print("KKK" * 100)
         if "help" in kwargs:
             kwargs.setdefault("render_kw", {})["help"] = kwargs.pop("help")
         super().__init__(*args, **kwargs)

@@ -94,7 +94,7 @@
         "pretty_name": "Impacting",
         "type": "boolean",
         "default": true,
-        "render_kw": { "help": "custom/impacting" }
+        "help": "custom/impacting"
       },
       "completion_time": {
         "pretty_name": "Completion time",

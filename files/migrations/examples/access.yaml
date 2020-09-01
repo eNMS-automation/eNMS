@@ -25,8 +25,8 @@
     /rest/instance, /rest/query, /rest/result, /rest/search, /table/access, /table/changelog,
     /table/configuration, /table/device, /table/event, /table/group, /table/pool,
     /table/link, /table/run, /table/server, /table/service, /table/session, /table/task,
-    /table/user, /visualization/geographical_view, /visualization/logical_view, /view_service_results, /workflow_builder,
-    /form/panel, /template/form, /template/devices]
+    /table/user, /visualization/geographical_view, /visualization/logical_view, /view_service_results,
+    /workflow_builder, /form/panel, /template/form, /template/devices]
   groups: [New York Users]
   menu: [Home, Administration, Inventory, Visualization, Automation, Scheduling, Template]
   name: UI + Endpoints (FULL)
@@ -144,8 +144,8 @@
     /rest/instance, /rest/query, /rest/result, /rest/search, /table/access, /table/changelog,
     /table/configuration, /table/device, /table/event, /table/group, /table/pool,
     /table/link, /table/run, /table/server, /table/service, /table/session, /table/task,
-    /table/user, /visualization/geographical_view, /visualization/logical_view, /view_service_results, /workflow_builder,
-    /form/panel, /template/form, /template/devices]
+    /table/user, /visualization/geographical_view, /visualization/logical_view, /view_service_results,
+    /workflow_builder, /form/panel, /template/form, /template/devices]
   groups: []
   menu: [Home, Administration, Inventory, Visualization, Automation, Scheduling, Template]
   name: Read-Only Profile

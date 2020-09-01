@@ -774,3 +774,9 @@
     S: conditional skip query with skip value set to False] Skip Washington with Skip
     value == False', subtype: failure, type: workflow_edge, workflow: 'Regression
     Workflow S: conditional skip query with skip value set to False'}
+- {destination: '[Regression Workflow T: link neighbors mechanism] Test get_neighbors
+    function', label: success, source: '[Shared] Start', subtype: success, type: workflow_edge,
+  workflow: 'Regression Workflow T: link neighbors mechanism'}
+- {destination: '[Shared] End', label: success, source: '[Regression Workflow T: link
+    neighbors mechanism] Test get_neighbors function', subtype: success, type: workflow_edge,
+  workflow: 'Regression Workflow T: link neighbors mechanism'}

@@ -115,6 +115,10 @@ class Device(Object):
         "Session", back_populates="device", cascade="all, delete-orphan"
     )
 
+    def get_neighbors(self, **link_kwargs):
+        links_source = db.fetch_all("link", source=self)
+        return links_source
+
     def table_properties(self, **kwargs):
         columns = [c["data"] for c in kwargs["columns"]]
         rest_api_request = kwargs.get("rest_api_request")

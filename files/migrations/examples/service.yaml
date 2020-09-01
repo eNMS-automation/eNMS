@@ -72,6 +72,7 @@
       -35]
     'Regression Workflow S: conditional skip query with skip value set to False': &id003 [
       -183, -152]
+    'Regression Workflow T: link neighbors mechanism': [0, 0]
     'Regression workflow P: large workflow (scalability)': *id001
     Subworkflow 1: !!python/tuple [0, 0]
     Subworkflow 2: !!python/tuple [0, 0]
@@ -206,6 +207,7 @@
       0]
     'Regression Workflow S: conditional skip query with skip value set to False': &id006 [
       640, -155]
+    'Regression Workflow T: link neighbors mechanism': [500, 0]
     'Regression workflow P: large workflow (scalability)': *id004
     Subworkflow 1: !!python/tuple [0, 0]
     Subworkflow 2: !!python/tuple [0, 0]
@@ -462,6 +464,7 @@
   time_between_retries: 10
   type: configure_bgp_service
   update_pools: false
+  use_host_keys: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -534,6 +537,7 @@
   type: napalm_backup_service
   update_pools: false
   use_device_driver: true
+  use_host_keys: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -609,6 +613,7 @@
   type: netmiko_configuration_service
   update_pools: false
   use_device_driver: true
+  use_host_keys: false
   validation_condition: success
   validation_method: none
   vendor: Arista
@@ -696,6 +701,7 @@
   update_pools: false
   use_device_driver: true
   use_genie: false
+  use_host_keys: false
   validation_condition: success
   validation_method: text
   vendor: Arista
@@ -772,6 +778,7 @@
   type: netmiko_configuration_service
   update_pools: false
   use_device_driver: true
+  use_host_keys: false
   validation_condition: success
   validation_method: none
   vendor: Arista
@@ -857,6 +864,7 @@
   update_pools: false
   use_device_driver: true
   use_genie: false
+  use_host_keys: false
   validation_condition: success
   validation_method: text
   vendor: Arista
@@ -926,6 +934,7 @@
   type: napalm_configuration_service
   update_pools: false
   use_device_driver: true
+  use_host_keys: false
   validation_condition: success
   validation_method: none
   vendor: Arista
@@ -1069,6 +1078,7 @@
   type: napalm_getters_service
   update_pools: false
   use_device_driver: true
+  use_host_keys: false
   validation_condition: success
   validation_method: dict_included
   vendor: ''
@@ -1137,6 +1147,7 @@
   type: napalm_getters_service
   update_pools: false
   use_device_driver: true
+  use_host_keys: false
   validation_condition: success
   validation_method: dict_included
   vendor: ''
@@ -1207,6 +1218,7 @@
   type: napalm_getters_service
   update_pools: false
   use_device_driver: true
+  use_host_keys: false
   validation_condition: success
   validation_method: dict_included
   vendor: ''
@@ -1274,6 +1286,7 @@
   type: napalm_getters_service
   update_pools: false
   use_device_driver: true
+  use_host_keys: false
   validation_condition: success
   validation_method: dict_included
   vendor: ''
@@ -1484,6 +1497,7 @@
   update_pools: false
   use_device_driver: true
   use_genie: false
+  use_host_keys: false
   validation_condition: success
   validation_method: text
   vendor: Arista
@@ -1632,6 +1646,7 @@
   type: napalm_rollback_service
   update_pools: false
   use_device_driver: true
+  use_host_keys: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -1718,6 +1733,7 @@
   update_pools: false
   use_device_driver: true
   use_genie: false
+  use_host_keys: false
   validation_condition: success
   validation_method: text
   vendor: ''
@@ -1803,6 +1819,7 @@
   update_pools: false
   use_device_driver: true
   use_genie: false
+  use_host_keys: false
   validation_condition: success
   validation_method: text
   vendor: ''
@@ -1887,6 +1904,7 @@
   type: netmiko_prompts_service
   update_pools: false
   use_device_driver: true
+  use_host_keys: false
   validation_condition: success
   validation_method: text
   vendor: ''
@@ -1971,6 +1989,7 @@
   type: netmiko_prompts_service
   update_pools: false
   use_device_driver: true
+  use_host_keys: false
   validation_condition: success
   validation_method: text
   vendor: ''
@@ -2177,6 +2196,7 @@
   update_pools: false
   use_device_driver: true
   use_genie: false
+  use_host_keys: false
   validation_condition: success
   validation_method: text
   vendor: ''
@@ -2260,6 +2280,7 @@
   update_pools: false
   use_device_driver: true
   use_genie: false
+  use_host_keys: false
   validation_condition: success
   validation_method: text
   vendor: ''
@@ -2343,6 +2364,7 @@
   update_pools: false
   use_device_driver: true
   use_genie: false
+  use_host_keys: false
   validation_condition: success
   validation_method: text
   vendor: ''
@@ -2414,6 +2436,7 @@
   type: napalm_getters_service
   update_pools: false
   use_device_driver: true
+  use_host_keys: false
   validation_condition: success
   validation_method: dict_equal
   vendor: ''
@@ -2484,6 +2507,7 @@
   type: napalm_getters_service
   update_pools: false
   use_device_driver: true
+  use_host_keys: false
   validation_condition: success
   validation_method: dict_included
   vendor: ''
@@ -2556,6 +2580,7 @@
   type: napalm_getters_service
   update_pools: false
   use_device_driver: true
+  use_host_keys: false
   validation_condition: success
   validation_method: dict_included
   vendor: ''
@@ -2626,6 +2651,7 @@
   type: napalm_getters_service
   update_pools: false
   use_device_driver: true
+  use_host_keys: false
   validation_condition: success
   validation_method: dict_equal
   vendor: ''
@@ -2696,6 +2722,7 @@
   type: napalm_getters_service
   update_pools: false
   use_device_driver: true
+  use_host_keys: false
   validation_condition: success
   validation_method: dict_included
   vendor: ''
@@ -2966,6 +2993,7 @@
   update_pools: false
   use_device_driver: true
   use_genie: false
+  use_host_keys: false
   validation_condition: success
   validation_method: text
   vendor: ''
@@ -3049,6 +3077,7 @@
   update_pools: false
   use_device_driver: true
   use_genie: false
+  use_host_keys: false
   validation_condition: success
   validation_method: text
   vendor: Arista
@@ -3132,6 +3161,7 @@
   update_pools: false
   use_device_driver: true
   use_genie: false
+  use_host_keys: false
   validation_condition: success
   validation_method: text
   vendor: Arista
@@ -3215,6 +3245,7 @@
   update_pools: false
   use_device_driver: true
   use_genie: false
+  use_host_keys: false
   validation_condition: success
   validation_method: text
   vendor: Arista
@@ -3652,6 +3683,7 @@
   update_pools: false
   use_device_driver: true
   use_genie: false
+  use_host_keys: false
   validation_condition: success
   validation_method: text
   vendor: ''
@@ -5130,6 +5162,7 @@
   update_pools: false
   use_device_driver: true
   use_genie: false
+  use_host_keys: false
   validation_condition: success
   validation_method: text
   vendor: ''
@@ -5212,6 +5245,7 @@
   update_pools: false
   use_device_driver: true
   use_genie: false
+  use_host_keys: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -5315,6 +5349,7 @@
   type: netmiko_backup_service
   update_pools: false
   use_device_driver: true
+  use_host_keys: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -5784,6 +5819,7 @@
   update_pools: false
   use_device_driver: true
   use_genie: false
+  use_host_keys: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -5868,6 +5904,7 @@
   update_pools: false
   use_device_driver: true
   use_genie: false
+  use_host_keys: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -5952,6 +5989,7 @@
   update_pools: false
   use_device_driver: true
   use_genie: false
+  use_host_keys: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -6247,6 +6285,7 @@
   update_pools: false
   use_device_driver: true
   use_genie: false
+  use_host_keys: false
   validation_condition: success
   validation_method: text
   vendor: ''
@@ -6512,6 +6551,7 @@
   update_pools: false
   use_device_driver: true
   use_genie: false
+  use_host_keys: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -7680,6 +7720,7 @@
   type: unix_shell_script_service
   update_pools: false
   use_device_driver: false
+  use_host_keys: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -7956,6 +7997,7 @@
   update_pools: false
   use_device_driver: true
   use_genie: false
+  use_host_keys: false
   validation_condition: success
   validation_method: text
   vendor: ''
@@ -8104,6 +8146,7 @@
   update_pools: false
   use_device_driver: true
   use_genie: false
+  use_host_keys: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -8207,6 +8250,7 @@
   type: netmiko_backup_service
   update_pools: false
   use_device_driver: true
+  use_host_keys: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -8461,6 +8505,7 @@
   type: scrapli_service
   update_pools: false
   use_device_driver: true
+  use_host_keys: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -8528,6 +8573,7 @@
   type: scrapli_service
   update_pools: false
   use_device_driver: true
+  use_host_keys: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -8595,6 +8641,7 @@
   type: scrapli_service
   update_pools: false
   use_device_driver: true
+  use_host_keys: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -8662,6 +8709,7 @@
   type: scrapli_service
   update_pools: false
   use_device_driver: true
+  use_host_keys: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -9186,6 +9234,7 @@
   update_pools: false
   use_device_driver: true
   use_genie: false
+  use_host_keys: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -9271,6 +9320,7 @@
   update_pools: false
   use_device_driver: true
   use_genie: false
+  use_host_keys: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -9356,6 +9406,7 @@
   update_pools: false
   use_device_driver: true
   use_genie: false
+  use_host_keys: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -9441,6 +9492,7 @@
   update_pools: false
   use_device_driver: true
   use_genie: false
+  use_host_keys: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -9526,6 +9578,7 @@
   update_pools: false
   use_device_driver: true
   use_genie: false
+  use_host_keys: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -9611,6 +9664,7 @@
   update_pools: false
   use_device_driver: true
   use_genie: false
+  use_host_keys: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -10248,6 +10302,7 @@
   update_pools: false
   use_device_driver: true
   use_genie: false
+  use_host_keys: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -10402,6 +10457,7 @@
   update_pools: false
   use_device_driver: true
   use_genie: false
+  use_host_keys: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -10555,6 +10611,7 @@
   update_pools: false
   use_device_driver: true
   use_genie: false
+  use_host_keys: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -11232,6 +11289,128 @@
     \ in the middle of the script:\r\n#    exit()\r\n#    Note: exit() is not required\
     \ as the last line\r\n\r\nresult = {}\r\nresults[\"success\"] = True\r\nresults[\"\
     result\"] = result"
+  time_between_retries: 10
+  type: python_snippet_service
+  update_pools: false
+  validation_condition: success
+  validation_method: none
+  vendor: ''
+  waiting_time: 0
+- close_connection: false
+  completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  devices: []
+  dict_match: {}
+  display_only_failed_nodes: false
+  events: []
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  labels: {}
+  last_modified: '2020-09-01 03:58:54.246277'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: 'Regression Workflow T: link neighbors mechanism'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions: {}
+  postprocessing: ''
+  postprocessing_mode: always
+  preprocessing: ''
+  public: false
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: 'Regression Workflow T: link neighbors mechanism'
+  send_notification: false
+  send_notification_method: mail
+  services: ['[Shared] Start', '[Shared] End', '[Regression Workflow T: link neighbors
+      mechanism] Test get_neighbors function']
+  shared: false
+  skip: false
+  skip_query: ''
+  skip_value: 'True'
+  time_between_retries: 10
+  type: workflow
+  update_pools: false
+  validation_condition: success
+  validation_method: none
+  vendor: ''
+  waiting_time: 0
+  workflow_category: Example workflow(s)
+- completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  devices: [Austin]
+  dict_match: {}
+  display_only_failed_nodes: false
+  events: []
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2020-09-01 03:59:07.705699'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Regression Workflow T: link neighbors mechanism] Test get_neighbors function'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions:
+    'Regression Workflow T: link neighbors mechanism': [154, -63]
+  postprocessing: ''
+  postprocessing_mode: always
+  preprocessing: ''
+  public: false
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: Test get_neighbors function
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: false
+  skip_query: ''
+  skip_value: 'True'
+  source_code: "result = {}\r\nresults[\"success\"] = True\r\nresults[\"result\"]\
+    \ = device.get_neighbors()"
   time_between_retries: 10
   type: python_snippet_service
   update_pools: false

@@ -16,6 +16,8 @@ visualization/geographical_view and visualization/logical_view
 - Don't update the "creator" field when an existing object is edited
 - Add new function "get_neighbors" to retrieve neighboring devices or links of a device
 - Refactor the migration import mechanism to better handle class relationships
+- Web / Desktop connection to a device is now restrict-able to make the users provide their own credentials.
+=> e.g to prevent inventory device credentials from being used to connect to devices.
 
 Version 3.22.3
 --------------

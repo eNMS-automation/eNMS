@@ -104,6 +104,7 @@ class Task(AbstractBase):
     def time_before_next_run(self):
         return get(f"{app.scheduler_address}/time_left/{self.id}", timeout=0.01).json()
 
+    @_catch_request_exceptions
     def schedule(self, mode="schedule"):
         try:
             payload = {"mode": mode, "task": self.get_properties()}

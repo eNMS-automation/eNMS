@@ -1,6 +1,5 @@
 from passlib.hash import argon2
 from collections import defaultdict
-from copy import deepcopy
 from ipaddress import IPv4Network
 from json import dump
 from logging import info

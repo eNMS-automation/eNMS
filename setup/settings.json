@@ -110,7 +110,7 @@
     },
     "credentials": {
       "device": true,
-      "user": false,
+      "user": true,
       "custom": true
     },
     "end_port": 9100,

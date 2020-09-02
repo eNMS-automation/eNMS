@@ -34,6 +34,7 @@
     <div class="x_title">
       <h4 class="text-center">Credentials</h4>
     </div>
+    {% if settings["ssh"]["credentials"]["device"] %}
     <div class="radio">
       <label>
         <input
@@ -47,6 +48,8 @@
         Authentication with device credentials
       </label>
     </div>
+    {% endif %}
+    {% if settings["ssh"]["credentials"]["user"] %}
     <div class="radio">
       <label>
         <input
@@ -59,6 +62,8 @@
         Authentication with user credentials
       </label>
     </div>
+    {% endif %}
+    {% if settings["ssh"]["credentials"]["custom"] %}
     <div class="radio">
       <label>
         <input
@@ -80,6 +85,7 @@
         {{ form.password(class="form-control", placeholder="Password") }}
       </div>
     </div>
+    {% endif %}
     <div class="x_title">
       <h4 class="text-center">Protocol</h4>
     </div>

@@ -18,6 +18,7 @@ visualization/geographical_view and visualization/logical_view
 - Refactor the migration import mechanism to better handle class relationships
 - Web / Desktop connection to a device is now restrict-able to make the users provide their own credentials.
 => e.g to prevent inventory device credentials from being used to connect to devices.
+- Fix position of sorting icon in table so it doesn't eat space of the search bar
 
 Version 3.22.3
 --------------

@@ -29,6 +29,16 @@
         "link": false
       },
       "layers": {
+        "A World Imagery ESRI": {
+          "category": "High-Resolution Satellite View",
+          "icon": "esriWorldImagery",
+          "tooltip": "World Imagery provides one meter or better satellite and aerial imagery.\nhttp://www.esri.com",
+          "type": "ArcGisMapServerImageryProvider",
+          "args": {
+            "url": "https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer",
+            "enablePickFeatures": false
+          }
+        },
         "Natural Earth II": {
           "category": "Low-Resolution Satellite View",
           "icon": "naturalEarthII",
@@ -63,16 +73,6 @@
           "tooltip": "Bing Maps standard road maps, provided by Cesium ion",
           "type": "createWorldImagery",
           "arg": "ROAD"
-        },
-        "ESRI World Imagery": {
-          "category": "High-Resolution Satellite View",
-          "icon": "esriWorldImagery",
-          "tooltip": "World Imagery provides one meter or better satellite and aerial imagery.\nhttp://www.esri.com",
-          "type": "ArcGisMapServerImageryProvider",
-          "args": {
-            "url": "https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer",
-            "enablePickFeatures": false
-          }
         },
         "ESRI World Street Map": {
           "category": "Street View",

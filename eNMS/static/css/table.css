@@ -75,3 +75,7 @@ table.dataTable thead > tr > th.sorting_asc,
 table.dataTable thead > tr > th.sorting_desc {
   padding-right: 5px;
 }
+
+.table-search {
+  pointer-events: all;
+}

@@ -60,7 +60,7 @@ export class Table {
             const elementId = `${self.type}_filtering-${data.data}`;
             if (data.search == "text") {
               element = `
-              <div class="input-group" style="width:100%">
+              <div class="input-group table-search" style="width:100%">
                 <input
                   id="${elementId}"
                   name="${data.data}"

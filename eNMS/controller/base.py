@@ -339,8 +339,8 @@ class BaseController:
             unified_diff(
                 first.splitlines(),
                 second.splitlines(),
-                fromfile="-",
-                tofile="-",
+                fromfile=f"V1 ({v1})",
+                tofile=f"V2 ({v2})",
                 lineterm="",
             )
         )

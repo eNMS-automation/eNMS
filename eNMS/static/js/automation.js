@@ -81,7 +81,7 @@ export function compare(type, instance) {
                     ? "side-by-side"
                     : "line-by-line",
                 });
-                $(".d2h-file-header").hide();
+                $(".d2h-tag").hide();
               })
               .change();
           },

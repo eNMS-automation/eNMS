@@ -1394,7 +1394,7 @@
   max_processes: 5
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression Workflow F: Workflow of Workflows] Modify Payload for Iteration'
+  name: '[Shared] Modify Payload for Iteration'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -1414,7 +1414,7 @@
   scoped_name: Modify Payload for Iteration
   send_notification: false
   send_notification_method: mail
-  shared: false
+  shared: true
   skip: false
   skip_query: ''
   skip_value: 'True'
@@ -4204,12 +4204,12 @@
   send_notification: true
   send_notification_method: mail
   services: ['[Shared] Start', '[Shared] End', '[Regression Workflow F: Workflow of
-      Workflows] Regression Workflow 5: VRF creation and deletion with Napalm', '[Regression
-      Workflow F: Workflow of Workflows] Modify Payload for Iteration', '[Regression
-      Workflow F: Workflow of Workflows] Regression Workflow F S2: Access Variables
-      from Parent Workflow', '[Regression Workflow F: Workflow of Workflows] Regression
-      Workflow F S1: Subworkflow of Workflow', '[Regression Workflow F: Workflow of
-      Workflows] Show interfaces with Netmiko', '[Shared] NAPALM: Get interfaces']
+      Workflows] Regression Workflow 5: VRF creation and deletion with Napalm', '[Shared]
+      Modify Payload for Iteration', '[Regression Workflow F: Workflow of Workflows]
+      Regression Workflow F S2: Access Variables from Parent Workflow', '[Regression
+      Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow of
+      Workflow', '[Regression Workflow F: Workflow of Workflows] Show interfaces with
+      Netmiko', '[Shared] NAPALM: Get interfaces']
   shared: false
   skip: false
   skip_query: ''
@@ -4808,12 +4808,12 @@
   scoped_name: 'Regression Workflow E: Iteration Targets'
   send_notification: false
   send_notification_method: mail
-  services: ['[Shared] Start', '[Shared] End', '[Regression Workflow F: Workflow of
-      Workflows] Modify Payload for Iteration', '[Regression Workflow E: Iteration
-      Targets] Iteration Target Workflow - Test 2', '[Regression Workflow E: Iteration
-      Targets] Iteration Targets Workflow - Test 1', '[Regression Workflow E: Iteration
-      Targets] Iteration Target Workflow - Test 3', '[Regression Workflow E: Iteration
-      Targets] Iteration Targets Workflow - Test 4']
+  services: ['[Shared] Start', '[Shared] End', '[Shared] Modify Payload for Iteration',
+    '[Regression Workflow E: Iteration Targets] Iteration Target Workflow - Test 2',
+    '[Regression Workflow E: Iteration Targets] Iteration Targets Workflow - Test
+      1', '[Regression Workflow E: Iteration Targets] Iteration Target Workflow -
+      Test 3', '[Regression Workflow E: Iteration Targets] Iteration Targets Workflow
+      - Test 4']
   shared: false
   skip: false
   skip_query: ''

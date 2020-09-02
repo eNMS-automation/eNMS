@@ -1,4 +1,5 @@
 from passlib.hash import argon2
+from collections import defaultdict
 from copy import deepcopy
 from ipaddress import IPv4Network
 from json import dump
@@ -120,62 +121,52 @@ class AdministrationController(BaseController):
         status, models = "Import successful.", kwargs["import_export_types"]
         if kwargs.get("empty_database_before_import", False):
             db.delete_all(*models)
-        workflow_edges, workflow_services, superworkflows = [], {}, {}
-        folder_path = self.path / "files" / folder / kwargs["name"]
+        relations = defaultdict(lambda: defaultdict(dict))
         for model in models:
-            path = folder_path / f"{model}.yaml"
+            path = self.path / "files" / folder / kwargs["name"] / f"{model}.yaml"
             if not path.exists():
                 continue
             with open(path, "r") as migration_file:
                 instances = yaml.load(migration_file)
-                if model == "workflow_edge":
-                    workflow_edges = deepcopy(instances)
-                    continue
                 for instance in instances:
-                    instance_type = (
-                        instance.pop("type") if model == "service" else model
-                    )
-                    if (
-                        instance_type in ("service", "workflow")
-                        and "superworkflow" in instance
-                    ):
-                        superworkflows[instance["name"]] = instance.pop("superworkflow")
-                    if instance_type == "workflow":
-                        workflow_services[instance["name"]] = instance.pop("services")
+                    instance_type, relation_dict = instance.pop("type", model), {}
+                    for related_model, relation in relationships[instance_type].items():
+                        relation_dict[related_model] = instance.pop(related_model, [])
                     try:
-                        instance = self.objectify(instance_type, instance)
-                        db.factory(
-                            instance_type, **{"dont_update_pools": True, **instance}
-                        )
-                        db.session.commit()
+                        instance_id = db.factory(
+                            instance_type,
+                            dont_update_pools=True,
+                            commit=True,
+                            **instance,
+                        ).id
+                        relations[instance_type][instance_id] = relation_dict
                     except Exception:
                         info(f"{str(instance)} could not be imported:\n{format_exc()}")
                         status = "Partial import (see logs)."
-        try:
-            for name, services in workflow_services.items():
-                workflow = db.fetch("workflow", name=name)
-                workflow.services = [
-                    db.fetch("service", name=service_name) for service_name in services
-                ]
-            db.session.commit()
-            for name, superworkflow in superworkflows.items():
-                service = db.fetch("service", name=name)
-                service.superworkflow = db.fetch("workflow", name=superworkflow)
-            db.session.commit()
-            for edge in workflow_edges:
-                for property in ("source", "destination", "workflow"):
-                    edge[property] = db.fetch("service", name=edge[property]).id
-                self.update(edge.pop("type"), **edge)
-                db.session.commit()
-            for service in db.fetch_all("service"):
-                service.update()
-            if not kwargs.get("skip_pool_update"):
-                for pool in db.fetch_all("pool"):
-                    pool.compute_pool()
-            self.log("info", status)
-        except Exception:
-            info("\n".join(format_exc().splitlines()))
-            status = "Partial import (see logs)."
+        for model, instances in relations.items():
+            for instance_id, related_models in instances.items():
+                for property, value in related_models.items():
+                    if not value:
+                        continue
+                    relation = relationships[model][property]
+                    if relation["list"]:
+                        value = [
+                            db.fetch(relation["model"], name=name) for name in value
+                        ]
+                    else:
+                        value = db.fetch(relation["model"], name=value)
+                    try:
+                        setattr(db.fetch(model, id=instance_id), property, value)
+                    except Exception:
+                        info("\n".join(format_exc().splitlines()))
+                        status = "Partial import (see logs)."
+        db.session.commit()
+        for service in db.fetch_all("service"):
+            service.update()
+        if not kwargs.get("skip_pool_update"):
+            for pool in db.fetch_all("pool"):
+                pool.compute_pool()
+                self.log("info", status)
         return status
 
     def import_service(self, archive):

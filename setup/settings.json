@@ -108,6 +108,11 @@
       "desktop": true,
       "web": true
     },
+    "credentials": {
+      "device": true,
+      "user": false,
+      "custom": true
+    },
     "end_port": 9100,
     "port": -1,
     "port_redirection": false,

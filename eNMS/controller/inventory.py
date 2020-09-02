@@ -35,6 +35,8 @@ class InventoryController(BaseController):
         return start + int(self.ssh_port) % (end - start)
 
     def web_connection(self, device_id, **kwargs):
+        if not self.settings["ssh"]["credentials"][kwargs["credentials"]]:
+            return {"alert": "Unauthorized authentication method."}
         device = db.fetch("device", id=device_id, rbac="connect")
         cmd = [str(self.path / "files" / "apps" / "gotty"), "-w"]
         port, protocol = self.get_ssh_port(), kwargs["protocol"]
@@ -73,15 +75,9 @@ class InventoryController(BaseController):
             "server_addr": self.settings["app"]["address"],
         }
 
-    def get_device_logs(self, device_id):
-        device_logs = [
-            log.name
-            for log in db.fetch_all("log")
-            if log.source == db.fetch("device", id=device_id).ip_address
-        ]
-        return "\n".join(device_logs)
-
     def desktop_connection(self, id, **kwargs):
+        if not self.settings["ssh"]["credentials"][kwargs["credentials"]]:
+            return {"alert": "Unauthorized authentication method."}
         device = db.fetch("device", id=id, rbac="connect")
         credentials = (
             (device.username, self.get_password(device.password))
@@ -115,6 +111,14 @@ class InventoryController(BaseController):
             }
         except Exception as exc:
             return {"error": exc.args}
+
+    def get_device_logs(self, device_id):
+        device_logs = [
+            log.name
+            for log in db.fetch_all("log")
+            if log.source == db.fetch("device", id=device_id).ip_address
+        ]
+        return "\n".join(device_logs)
 
     def get_git_history(self, device_id):
         device = db.fetch("device", id=device_id)

@@ -49,12 +49,25 @@ td.dt-center {
   margin-right: 25px;
 }
 
+/* Set default cursor for the header instead of pointer */
+table.dataTable thead .sorting,
+table.dataTable thead .sorting_asc,
+table.dataTable thead .sorting_asc_disabled,
+table.dataTable thead .sorting_desc,
+table.dataTable thead .sorting_desc_disabled {
+  cursor: default;
+  pointer-events: none;
+}
+
 /* Position the sorting icon in the upper right corner */
+/* Set pointer cursor on the sorting icon */
 table.dataTable thead .sorting:after,
 table.dataTable thead .sorting_asc:after,
 table.dataTable thead .sorting_desc:after {
   top: 5px;
   right: 8px;
+  cursor: pointer;
+  pointer-events: all;
 }
 
 table.dataTable thead > tr > th.sorting,

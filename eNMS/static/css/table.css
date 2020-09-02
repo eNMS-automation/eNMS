@@ -48,3 +48,17 @@ td.dt-center {
   margin-left: 25px;
   margin-right: 25px;
 }
+
+/* Position the sorting icon in the upper right corner */
+table.dataTable thead .sorting:after,
+table.dataTable thead .sorting_asc:after,
+table.dataTable thead .sorting_desc:after {
+  top: 5px;
+  right: 8px;
+}
+
+table.dataTable thead > tr > th.sorting,
+table.dataTable thead > tr > th.sorting_asc,
+table.dataTable thead > tr > th.sorting_desc {
+  padding-right: 5px;
+}

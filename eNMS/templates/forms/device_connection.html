@@ -48,8 +48,7 @@
         Authentication with device credentials
       </label>
     </div>
-    {% endif %}
-    {% if settings["ssh"]["credentials"]["user"] %}
+    {% endif %} {% if settings["ssh"]["credentials"]["user"] %}
     <div class="radio">
       <label>
         <input
@@ -62,8 +61,7 @@
         Authentication with user credentials
       </label>
     </div>
-    {% endif %}
-    {% if settings["ssh"]["credentials"]["custom"] %}
+    {% endif %} {% if settings["ssh"]["credentials"]["custom"] %}
     <div class="radio">
       <label>
         <input

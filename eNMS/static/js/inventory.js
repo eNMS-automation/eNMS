@@ -57,7 +57,7 @@ export function showConnectionPanel(device) {
       $(`#custom-credentials-${device.id}`).change(function () {
         $(`#credentials-fields-${device.id}`).show();
       });
-      $(`#accept-once-${device.id},#multiplexing-${device.id}`).change(function() {
+      $(`#accept-once-${device.id},#multiplexing-${device.id}`).change(function () {
         if (!this.checked) return;
         const other = this.name == "accept-once" ? "multiplexing" : "accept-once";
         $(`#${other}-${device.id}`).prop("checked", false);

@@ -73,7 +73,7 @@ export function compare(type, instance) {
           off: "Line by line",
           width: "120px",
         });
-        const valueToLabel = { 0: 1, 1: 3, 2: 10, 3: 100, 5: "All" };
+        const valueToLabel = { 0: 1, 1: 3, 2: 10, 3: 100, 4: "All" };
         $(`#slider-${cantorId}`)
           .bootstrapSlider({
             value: 1,

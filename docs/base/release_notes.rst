@@ -19,7 +19,8 @@ visualization/geographical_view and visualization/logical_view
 - Web / Desktop connection to a device is now restrict-able to make the users provide their own credentials
 => e.g to prevent inventory device credentials from being used to connect to devices
 - Fix position of sorting icon in table so it doesn't eat space of the search bar
-- Make the options "Accept only one client" and "Share session with all clients" incompatible in the device connection form 
+- Make the options "Accept only one client" and "Share session with all clients" incompatible in the device connection form
+- Configuration git diff: indicate which is V1 and which is V2. Option to display more context lines, including all of it.
 
 Version 3.22.3
 --------------

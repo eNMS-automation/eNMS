@@ -177,6 +177,9 @@ function showResult(id) {
             modes: ["code", "view"],
             onModeChange: function (newMode) {
               editor.set(newMode == "code" ? result : jsonResult);
+              document.querySelectorAll(".jsoneditor-string").forEach((el) => {
+                el.innerText = el.innerText.replace(/(?:\\n)/g, "\n");
+              });
             },
             onEvent(node, event) {
               if (event.type === "click") {

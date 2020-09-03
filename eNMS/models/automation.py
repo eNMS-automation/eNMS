@@ -126,7 +126,6 @@ class Service(AbstractBase):
     maximum_runs = db.Column(Integer, default=1)
     multiprocessing = db.Column(Boolean, default=False)
     max_processes = db.Column(Integer, default=5)
-    per_device_waiting_time = db.Column(Integer, default=0)
     status = db.Column(db.SmallString, default="Idle")
     validation_condition = db.Column(db.SmallString, default="success")
     conversion_method = db.Column(db.SmallString, default="none")

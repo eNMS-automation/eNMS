@@ -371,7 +371,8 @@ function showPoolView(poolId) {
           action[row](selectedObject);
         },
       });
-      create3dGraphNetwork(`network-${poolId}`, pool.devices, pool.links);
+      const graph = create3dGraphNetwork(`network-${poolId}`);
+      update3dGraphData(graph, pool.devices, pool.links);
     },
   });
 }
@@ -482,6 +483,7 @@ function create3dGraphNetwork(container) {
       return image;
     });
   }
+  return graph
 }
 
 export function initView() {
@@ -526,6 +528,24 @@ export function initView() {
   }
 }
 
+function update3dGraphData(graph, devices, links) {
+  const nodesId = devices.map((node) => node.id);
+  graph.graphData({
+    nodes: devices,
+    links: links
+      .filter(
+        (link) =>
+          nodesId.includes(link.source_id) && nodesId.includes(link.destination_id)
+      )
+      .map((link) => ({
+        source: link.source_id,
+        target: link.destination_id,
+        value: 5,
+        ...link,
+      })),
+  }).refresh();
+}
+
 function filterView(noAlert) {
   const maximumSize = visualization.logical.maximum_size;
   const data = {
@@ -536,7 +556,6 @@ function filterView(noAlert) {
     url: "/view_filtering",
     data: data,
     callback: function (results) {
-      const nodesId = results.device.map((node) => node.id);
       if (page == "logical_view") {
         if (
           results.device.length > maximumSize.node ||
@@ -549,22 +568,7 @@ function filterView(noAlert) {
             5
           );
         }
-        graph.graphData({
-          nodes: results.device,
-          links: results.link
-            .filter(
-              (link) =>
-                nodesId.includes(link.source_id) &&
-                nodesId.includes(link.destination_id)
-            )
-            .map((link) => ({
-              source: link.source_id,
-              target: link.destination_id,
-              value: 5,
-              ...link,
-            })),
-        });
-        graph.refresh();
+        update3dGraphData(graph, results.device, results.link);
       } else {
         deleteAll();
         results.device.map((d) => createNode(d, "device"));

@@ -433,15 +433,16 @@ tables.configuration = class ConfigurationTable extends Table {
 
   postProcessing(...args) {
     super.postProcessing(...args);
-    $("#slider").bootstrapSlider({
-      value: 0,
-      ticks: [...Array(6).keys()],
-      formatter: (value) => `Lines of context: ${value}`,
-      tooltip: "always",
-    });
-    $("#slider").on("change", function () {
-      refreshTable("configuration");
-    });
+    $("#slider")
+      .bootstrapSlider({
+        value: 0,
+        ticks: [...Array(6).keys()],
+        formatter: (value) => `Lines of context: ${value}`,
+        tooltip: "always",
+      })
+      .on("change", function () {
+        refreshTable("configuration");
+      });
   }
 
   get controls() {

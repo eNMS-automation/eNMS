@@ -73,35 +73,38 @@ export function compare(type, instance) {
           off: "Line by line",
           width: "120px",
         });
-        const valueToLabel = {0: 1, 1: 3, 2: 10, 3: 100, 4: 1000, 5: "All"};
-        $(`#slider-${cantorId}`).bootstrapSlider({
-          value: 1,
-          ticks: [...Array(6).keys()],
-          ticks_labels: Object.values(valueToLabel),
-          formatter: (value) => `Lines of context: ${valueToLabel[value]}`,
-          tooltip: "always",
-        }).change(function() {
-          let value = valueToLabel[this.value];
-          if (value == "All") value = 999999;
-          call({
-            url: `/compare/${objectType}/${instance.name}/${v1}/${v2}/${value}`,
-            callback: (result) => {
-              let diff2htmlUi = new Diff2HtmlUI({ diff: result });
-              $(`#diff-type-${cantorId}`)
-                .on("change", function () {
-                  diff2htmlUi.draw(`#content-${cantorId}`, {
-                    matching: "lines",
-                    drawFileList: true,
-                    outputFormat: $(this).prop("checked")
-                      ? "side-by-side"
-                      : "line-by-line",
-                  });
-                  $(".d2h-tag").hide();
-                })
-                .change();
-            },
-          });
-        });
+        const valueToLabel = { 0: 1, 1: 3, 2: 10, 3: 100, 5: "All" };
+        $(`#slider-${cantorId}`)
+          .bootstrapSlider({
+            value: 1,
+            ticks: [...Array(5).keys()],
+            ticks_labels: Object.values(valueToLabel),
+            formatter: (value) => `Lines of context: ${valueToLabel[value]}`,
+            tooltip: "always",
+          })
+          .change(function () {
+            let value = valueToLabel[this.value];
+            if (value == "All") value = 999999;
+            call({
+              url: `/compare/${objectType}/${instance.name}/${v1}/${v2}/${value}`,
+              callback: (result) => {
+                let diff2htmlUi = new Diff2HtmlUI({ diff: result });
+                $(`#diff-type-${cantorId}`)
+                  .on("change", function () {
+                    diff2htmlUi.draw(`#content-${cantorId}`, {
+                      matching: "lines",
+                      drawFileList: true,
+                      outputFormat: $(this).prop("checked")
+                        ? "side-by-side"
+                        : "line-by-line",
+                    });
+                    $(".d2h-tag").hide();
+                  })
+                  .change();
+              },
+            });
+          })
+          .trigger("change");
       },
     });
   }

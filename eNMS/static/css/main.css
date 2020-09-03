@@ -791,3 +791,8 @@ fieldset.section {
 textarea.form-control {
   resize: vertical;
 }
+
+.slider {
+  margin-left: 35px;
+  margin-right: 35px;
+}

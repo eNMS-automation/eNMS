@@ -44,11 +44,6 @@ td.dt-center {
   text-align: center;
 }
 
-.slider {
-  margin-left: 25px;
-  margin-right: 25px;
-}
-
 /* Set default cursor for the header instead of pointer */
 table.dataTable thead .sorting,
 table.dataTable thead .sorting_asc,

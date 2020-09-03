@@ -328,7 +328,7 @@ class BaseController:
             },
         }
 
-    def compare(self, type, device_name, v1, v2):
+    def compare(self, type, device_name, v1, v2, context_lines):
         if type in ("result", "device_result"):
             first = self.str_dict(getattr(db.fetch("result", id=v1), "result"))
             second = self.str_dict(getattr(db.fetch("result", id=v2), "result"))
@@ -342,6 +342,7 @@ class BaseController:
                 fromfile=f"V1 ({v1})",
                 tofile=f"V2 ({v2})",
                 lineterm="",
+                n=int(context_lines),
             )
         )
 

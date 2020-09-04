@@ -11,7 +11,7 @@
 	  "startup_migration": "examples",
 	  "documentation_url": "https://enms.readthedocs.io/en/latest/",
 	  "log_level": "debug",
-	  "git_repository": "git@github.com:afourmy/gitpython-test.git"
+	  "git_repository": ""
 	},
 	"cluster": {
 	  "active": false,

@@ -234,16 +234,16 @@ const rectangleSelection = (container, network, nodes) => {
     }
   });
 
-  network.on("afterDrawing", (ctx) => {
+  network.on("afterDrawing", (context) => {
     if (drag) {
       const [startX, startY] = canvasify(DOMRect.startX, DOMRect.startY);
       const [endX, endY] = canvasify(DOMRect.endX, DOMRect.endY);
-      ctx.setLineDash([5]);
-      ctx.strokeStyle = "rgba(78, 146, 237, 0.75)";
-      ctx.strokeRect(startX, startY, endX - startX, endY - startY);
-      ctx.setLineDash([]);
-      ctx.fillStyle = "rgba(151, 194, 252, 0.45)";
-      ctx.fillRect(startX, startY, endX - startX, endY - startY);
+      context.setLineDash([5]);
+      context.strokeStyle = "rgba(78, 146, 237, 0.75)";
+      context.strokeRect(startX, startY, endX - startX, endY - startY);
+      context.setLineDash([]);
+      context.fillStyle = "rgba(151, 194, 252, 0.45)";
+      context.fillRect(startX, startY, endX - startX, endY - startY);
     }
   });
 };
@@ -575,6 +575,7 @@ function switchMode(mode, noNotification) {
     graph.addNodeMode();
     notification = "Mode: Motion.";
   } else {
+    graph.setSelection({nodes: [], edges: []});
     graph.addEdgeMode();
     notification = `Mode: Creation of '${currentMode}' Edge.`;
   }

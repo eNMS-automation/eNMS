@@ -483,7 +483,7 @@ function create3dGraphNetwork(container) {
       return image;
     });
   }
-  return graph
+  return graph;
 }
 
 export function initView() {
@@ -530,20 +530,22 @@ export function initView() {
 
 function update3dGraphData(graph, devices, links) {
   const nodesId = devices.map((node) => node.id);
-  graph.graphData({
-    nodes: devices,
-    links: links
-      .filter(
-        (link) =>
-          nodesId.includes(link.source_id) && nodesId.includes(link.destination_id)
-      )
-      .map((link) => ({
-        source: link.source_id,
-        target: link.destination_id,
-        value: 5,
-        ...link,
-      })),
-  }).refresh();
+  graph
+    .graphData({
+      nodes: devices,
+      links: links
+        .filter(
+          (link) =>
+            nodesId.includes(link.source_id) && nodesId.includes(link.destination_id)
+        )
+        .map((link) => ({
+          source: link.source_id,
+          target: link.destination_id,
+          value: 5,
+          ...link,
+        })),
+    })
+    .refresh();
 }
 
 function filterView(noAlert) {

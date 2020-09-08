@@ -440,6 +440,7 @@ export function configureForm(form, id, panelId) {
   for (const [property, field] of Object.entries(formProperties[form])) {
     const fieldId = id ? `${form}-${property}-${id}` : `${form}-${property}`;
     let el = $(`#${fieldId}`);
+    const elClass = el.attr("class");
     if (!el.length) el = $(`#${property}`);
     if (field.type == "date") {
       el.datetimepicker({
@@ -451,7 +452,6 @@ export function configureForm(form, id, panelId) {
         useCurrent: false,
       });
     } else if (["list", "multiselect", "multiselect-string"].includes(field.type)) {
-      const elClass = el.attr("class");
       el.selectpicker({
         liveSearch: elClass ? !elClass.includes("no-search") : false,
         actionsBox: true,

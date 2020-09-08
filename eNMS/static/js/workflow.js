@@ -575,7 +575,7 @@ function switchMode(mode, noNotification) {
     graph.addNodeMode();
     notification = "Mode: Motion.";
   } else {
-    graph.setSelection({nodes: [], edges: []});
+    graph.setSelection({ nodes: [], edges: [] });
     graph.addEdgeMode();
     notification = `Mode: Creation of '${currentMode}' Edge.`;
   }

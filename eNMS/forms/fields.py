@@ -140,7 +140,8 @@ class JsonField(FieldMixin, WtformsField):
         super().__init__(*args, **kwargs)
 
     def __call__(self, **kwargs):
-        html_kwargs = {"id": kwargs["id"], "class_": "add-id", "name": self.name}
+        class_ = "add-id collapsed" if "collapsed" in kwargs["class"] else "add-id"
+        html_kwargs = {"id": kwargs["id"], "class_": class_, "name": self.name}
         return HTMLString(f"<input {html_params(**html_kwargs)} hidden><div></div>")
 
 

@@ -440,7 +440,7 @@ export function configureForm(form, id, panelId) {
   for (const [property, field] of Object.entries(formProperties[form])) {
     const fieldId = id ? `${form}-${property}-${id}` : `${form}-${property}`;
     let el = $(`#${fieldId}`);
-    
+
     if (!el.length) el = $(`#${property}`);
     if (field.type == "date") {
       el.datetimepicker({

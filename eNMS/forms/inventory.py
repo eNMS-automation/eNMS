@@ -154,3 +154,9 @@ class ExportForm(BaseForm):
     action = "eNMS.inventory.exportTopology"
     form_type = HiddenField(default="excel_export")
     export_filename = StringField("Filename")
+
+
+class VisualizationForm(BaseForm):
+    action = "eNMS.visualization.saveParameters"
+    form_type = HiddenField(default="visualization")
+    pools = MultipleInstanceField("Pools", model="pool")

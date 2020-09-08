@@ -592,4 +592,13 @@ function clearSearch() {
   notify("Search parameters cleared.", "success", 5);
 }
 
-configureNamespace("visualization", [clearSearch, filterView, showPoolView]);
+function saveParameters() {
+  console.log("test");
+}
+
+configureNamespace("visualization", [
+  clearSearch,
+  filterView,
+  saveParameters,
+  showPoolView,
+]);

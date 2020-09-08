@@ -247,7 +247,7 @@
     "/result_log_deletion",
     "/run_service",
     "/save_file",
-    "/save_parameters",
+    "/save_visualization_parameters",
     "/save_pool_objects",
     "/save_positions",
     "/save_settings",

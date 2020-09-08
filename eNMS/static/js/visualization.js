@@ -594,7 +594,7 @@ function clearSearch() {
 
 function saveParameters() {
   call({
-    url: "/save_parameters",
+    url: "/save_visualization_parameters",
     form: "visualization-form",
     callback: () => notify("Parameters saved.", "success", 5),
   });

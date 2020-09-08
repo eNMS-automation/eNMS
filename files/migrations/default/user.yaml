@@ -29,7 +29,7 @@
     /delete_corrupted_edges, /get_all, /get_cluster_status, /import_service, /task_action,
     /calendar_init, /topology_import, /run_service, /copy_service_in_workflow, /get_top_level_workflows,
     /scan_cluster, /get_exported_services, /multiselect_filtering, /web_connection, /get_service_state,
-    /counters, /create_label, /skip_services, /export_service, /import_topology, /save_parameters,
+    /counters, /create_label, /skip_services, /export_service, /import_topology, /save_visualization_parameters,
     /switch_menu, /update_all_pools, /result_log_deletion, /reset_status, /scan_playbook_folder,
     /get_git_history, /get_view_topology, /upload_files, /clear_results, /database_deletion,
     /delete_label, /get_migration_folders, /export_topology, /get_device_logs, /save_pool_objects,

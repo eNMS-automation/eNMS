@@ -18,6 +18,7 @@ from eNMS.controller.base import BaseController
 from eNMS.database import db
 from eNMS.models import models
 from eNMS.models import relationships
+from eNMS.setup import visualization
 
 
 class AdministrationController(BaseController):
@@ -212,9 +213,10 @@ class AdministrationController(BaseController):
             with open(Path(filepath.replace(">", "/")), "w") as file:
                 return file.write(kwargs["file_content"])
 
-    def save_parameters(self, **kwargs):
-        pools = [pool.name for pool in db.objectify("pool", kwargs["pools"])]
-        return {"pools": pools}
+    def save_visualization_parameters(self, **kwargs):
+        visualization["pools"] = [p.name for p in db.objectify("pool", kwargs["pools"])]
+        with open(self.path / "setup" / "visualization.json", "w") as file:
+            dump(visualization, file)
 
     def save_settings(self, **kwargs):
         self.settings = kwargs["settings"]

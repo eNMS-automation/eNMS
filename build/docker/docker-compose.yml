@@ -1,0 +1,61 @@
+version: "3"
+services:
+  enms:
+    image: gnubyte/enms
+    hostname: enms
+    container_name: enms
+    restart: always
+    ports:
+        - 80:5000
+    networks:
+      - backend
+    volumes:
+      - ./logs:/opt/enms/logs
+      - ./network_data:/opt/enms/network_data
+    networks:
+      - backend
+    environment:
+      - DATABASE_URL=mysql://${DATABASE_USER}:${DATABASE_PASS}@${DATABASE_HOST}:${DATABASE_PORT}/${DATABASE_NAME}
+      - VAULT_ADDR=http://${VAULT_HOST}:${VAULT_PORT}
+      - VAULT_TOKEN=${VAULT_TOKEN}
+    links:
+      - db
+      - vault
+  # Database
+  db:
+    image: mysql:5.7
+    hostname: enmsdb
+    container_name: enmsdb
+    networks:
+      - backend
+    volumes:
+      - ./db:/var/lib/mysql
+      - ./resources/mysql/init.sql:/opt/init.sql
+    environment:
+      - MYSQL_ROOT_USER=${DATABASE_ROOT_USER}
+      - MYSQL_ROOT_PASSWORD=${DATABASE_ROOT_PASS}
+      - MYSQL_DATABASE=${DATABASE_NAME}
+      - MYSQL_USER=${DATABASE_USER}
+      - MYSQL_PASSWORD=${DATABASE_PASS}
+    command: --init-file /opt/init.sql
+  # Hashivault Vault Project (Secrets Secure Storage)
+  vault:
+    image: vault
+    hostname: enmsvault
+    container_name: enmsvault
+    networks:
+      - backend
+    volumes: 
+      - ./resources/vault:/vault/config
+      - ./vault/policies:/vault/policies
+      - ./vault/data:/vault/data
+      - ./vault/logs:/vault/logs
+    environment:
+      - VAULT_TOKEN=${VAULT_TOKEN}
+    cap_add:
+        #capacity to container add
+        - IPC_LOCK
+networks:
+  backend:
+    driver: bridge
+          

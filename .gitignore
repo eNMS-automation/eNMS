@@ -51,3 +51,10 @@ node_modules/
 
 # SSH Handoff
 rsa.key
+
+
+#containerized runtime volume mounts
+build/docker/db
+build/docker/logs
+build/docker/network_data
+build/docker/vault

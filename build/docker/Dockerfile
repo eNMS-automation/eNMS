@@ -35,7 +35,8 @@ COPY build/scripts/docker-boot.sh docker-boot.sh
 RUN chmod +x docker-boot.sh
 # ------
 # App Dependencies Installation
-ADD build/docker/id_rsa /root/.ssh/id_rsa
+#  - id_rsa key here so that the image within docker can do a signed pull from github
+ADD build/docker/resources/id_rsa /root/.ssh/id_rsa
 
 RUN mkdir -m 700 /root/.ssh; \
   touch -m 600 /root/.ssh/known_hosts; \

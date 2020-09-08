@@ -593,7 +593,11 @@ function clearSearch() {
 }
 
 function saveParameters() {
-  console.log("test");
+  call({
+    url: "/save_parameters",
+    form: "visualization-form",
+    callback: () => notify("Parameters saved.", "success", 5),
+  });
 }
 
 configureNamespace("visualization", [

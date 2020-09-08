@@ -212,6 +212,10 @@ class AdministrationController(BaseController):
             with open(Path(filepath.replace(">", "/")), "w") as file:
                 return file.write(kwargs["file_content"])
 
+    def save_parameters(self, **kwargs):
+        pools = [pool.name for pool in db.objectify("pool", kwargs["pools"])]
+        return {"pools": pools}
+
     def save_settings(self, **kwargs):
         self.settings = kwargs["settings"]
         if kwargs["save"]:

@@ -2,6 +2,13 @@
 Release Notes
 =============
 
+Version 3.22.4
+--------------
+
+- Catch exception in log function when fetching log level from database
+- Fix object numbers not updated for manually defined pool
+- Catch exception in query rest endpoint when no results found to avoid stacktrace in server logs
+
 Version 3.22.3
 --------------
 

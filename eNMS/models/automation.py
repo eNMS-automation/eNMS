@@ -884,7 +884,10 @@ class Run(AbstractBase):
         logger=None,
         service_log=True,
     ):
-        log_level = int(self.original.service.log_level)
+        try:
+            log_level = int(self.original.service.log_level)
+        except Exception:
+            log_level = 1
         if not log_level or severity not in app.log_levels[log_level - 1 :]:
             return
         if device:

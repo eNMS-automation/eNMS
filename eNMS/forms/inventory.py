@@ -158,5 +158,5 @@ class ExportForm(BaseForm):
 
 class VisualizationForm(BaseForm):
     action = "eNMS.visualization.saveParameters"
-    form_type = HiddenField(default="visualization")
-    pools = MultipleInstanceField("Pools", model="pool")
+    form_type = HiddenField(default="visualization_parameters")
+    default_pools = MultipleInstanceField("Pools", model="pool")

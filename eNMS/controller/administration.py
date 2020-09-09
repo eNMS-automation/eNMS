@@ -221,8 +221,9 @@ class AdministrationController(BaseController):
                 return file.write(kwargs["file_content"])
 
     def save_visualization_parameters(self, **kwargs):
-        for pool in db.objectify("pool", kwargs["pools"]):
-            pool.visualization_default = True
+        default_pools = db.objectify("pool", kwargs["default_pools"])
+        for pool in db.fetch_all("pool"):
+            pool.visualization_default = pool in default_pools
 
     def save_settings(self, **kwargs):
         self.settings = kwargs["settings"]

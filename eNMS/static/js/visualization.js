@@ -596,24 +596,27 @@ function clearSearch() {
 function saveParameters() {
   call({
     url: "/save_visualization_parameters",
-    form: "visualization-form",
-    callback: () => notify("Default pools saved.", "success", 5),
+    form: "visualization_parameters-form",
+    callback: () => {
+      notify("Default pools saved.", "success", 5);
+      $("#visualization_parameters").remove();
+    }
   });
 }
 
 function openVisualizationPanel() {
   openPanel({
     title: 'Visualization Parameters',
-    name: 'visualization',
+    name: 'visualization_parameters',
     size: '400 200',
     callback: () => {
       call({
         url: "/get_visualization_parameters",
         callback: (pools) => {
           pools.forEach((pool) => {
-            $('#pools').append(new Option(pool.name, pool.id, false, false));
+            $('#default_pools').append(new Option(pool.name, pool.id, false, false));
           });
-          $('#pools').val(pools.map((pool) => pool.id)).trigger("change");
+          $('#default_pools').val(pools.map((pool) => pool.id)).trigger("change");
         }
       });
     }

@@ -228,6 +228,7 @@
     "/get_session_log",
     "/get_top_level_workflows",
     "/get_tree_files",
+    "/get_visualization_parameters",
     "/get_workflow_results",
     "/get_workflow_services",
     "/search_workflow_services",

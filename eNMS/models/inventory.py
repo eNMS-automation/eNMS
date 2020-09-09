@@ -318,6 +318,7 @@ class Pool(AbstractBase):
     services = relationship(
         "Service", secondary=db.service_pool_table, back_populates="pools"
     )
+    visualization_default = db.Column(Boolean)
     runs = relationship("Run", secondary=db.run_pool_table, back_populates="pools")
     tasks = relationship("Task", secondary=db.task_pool_table, back_populates="pools")
     access = relationship(

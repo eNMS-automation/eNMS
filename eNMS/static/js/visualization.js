@@ -19,6 +19,7 @@ import {
   notify,
   serializeForm,
   showTypePanel,
+  openPanel,
 } from "./base.js";
 import { showConnectionPanel, showDeviceData } from "./inventory.js";
 
@@ -596,13 +597,33 @@ function saveParameters() {
   call({
     url: "/save_visualization_parameters",
     form: "visualization-form",
-    callback: () => notify("Parameters saved.", "success", 5),
+    callback: () => notify("Default pools saved.", "success", 5),
+  });
+}
+
+function openVisualizationPanel() {
+  openPanel({
+    title: 'Visualization Parameters',
+    name: 'visualization',
+    size: '400 200',
+    callback: () => {
+      call({
+        url: "/get_visualization_parameters",
+        callback: (pools) => {
+          pools.forEach((pool) => {
+            $('#pools').append(new Option(pool.name, pool.id, false, false));
+          });
+          $('#pools').val(pools.map((pool) => pool.id)).trigger("change");
+        }
+      });
+    }
   });
 }
 
 configureNamespace("visualization", [
   clearSearch,
   filterView,
+  openVisualizationPanel,
   saveParameters,
   showPoolView,
 ]);

@@ -109,6 +109,13 @@ class AdministrationController(BaseController):
             for file in Path(path).iterdir()
         ]
 
+    def get_visualization_parameters(self):
+        return [
+            pool.serialized
+            for pool in db.fetch_all("pool")
+            if pool.visualization_default
+        ]
+
     def migration_export(self, **kwargs):
         for cls_name in kwargs["import_export_types"]:
             path = self.path / "files" / "migrations" / kwargs["name"]
@@ -214,9 +221,8 @@ class AdministrationController(BaseController):
                 return file.write(kwargs["file_content"])
 
     def save_visualization_parameters(self, **kwargs):
-        visualization["pools"] = [p.name for p in db.objectify("pool", kwargs["pools"])]
-        with open(self.path / "setup" / "visualization.json", "w") as file:
-            dump(visualization, file)
+        for pool in db.objectify("pool", kwargs["pools"]):
+            pool.visualization_default = True
 
     def save_settings(self, **kwargs):
         self.settings = kwargs["settings"]

@@ -46,7 +46,12 @@ class NapalmBackupService(ConnectionService):
                 try:
                     output = app.str_dict(getattr(napalm_connection, getter)())
                     for r in self.replacements:
-                        output = sub(r["pattern"], r["replace_with"], output, flags=M,)
+                        output = sub(
+                            r["pattern"],
+                            r["replace_with"],
+                            output,
+                            flags=M,
+                        )
                     result[getter] = output
                 except Exception as exc:
                     result[getter] = f"{getter} failed because of {exc}"

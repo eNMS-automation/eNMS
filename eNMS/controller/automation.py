@@ -414,7 +414,9 @@ class AutomationController(BaseController):
             if kwargs.get(key)
         }
         restart_run = db.fetch(
-            "run", allow_none=True, runtime=kwargs.get("restart_runtime"),
+            "run",
+            allow_none=True,
+            runtime=kwargs.get("restart_runtime"),
         )
         if restart_run:
             run_kwargs["restart_run"] = restart_run

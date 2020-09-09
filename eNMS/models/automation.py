@@ -1191,7 +1191,10 @@ class Run(AbstractBase):
             self.log("info", "Using cached Netmiko connection", device)
             return self.update_netmiko_connection(connection)
         self.log(
-            "info", "OPENING Netmiko connection", device, logger="security",
+            "info",
+            "OPENING Netmiko connection",
+            device,
+            logger="security",
         )
         username, password = self.get_credentials(device)
         driver = device.netmiko_driver if self.use_device_driver else self.driver
@@ -1224,7 +1227,10 @@ class Run(AbstractBase):
             self.log("info", "Using cached Scrapli connection", device)
             return connection
         self.log(
-            "info", "OPENING Scrapli connection", device, logger="security",
+            "info",
+            "OPENING Scrapli connection",
+            device,
+            logger="security",
         )
         username, password = self.get_credentials(device)
         connection = Scrapli(
@@ -1246,7 +1252,10 @@ class Run(AbstractBase):
             self.log("info", "Using cached NAPALM connection", device)
             return connection
         self.log(
-            "info", "OPENING Napalm connection", device, logger="security",
+            "info",
+            "OPENING Napalm connection",
+            device,
+            logger="security",
         )
         username, password = self.get_credentials(device)
         optional_args = self.service.optional_args

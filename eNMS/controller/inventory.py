@@ -104,7 +104,8 @@ class InventoryController(BaseController):
                 device.ip_address, *credentials, session.id, uuid, port
             )
             Thread(
-                target=ssh_connection.start_session, args=(session.id, uuid, port),
+                target=ssh_connection.start_session,
+                args=(session.id, uuid, port),
             ).start()
             return {
                 "port": port,

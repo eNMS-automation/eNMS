@@ -25,7 +25,10 @@ class Client(SSHClient):
         self.load_system_host_keys()
         self.set_missing_host_key_policy(WarningPolicy)
         self.connect(
-            hostname=hostname, username=username, password=password, timeout=3,
+            hostname=hostname,
+            username=username,
+            password=password,
+            timeout=3,
         )
         self.shell = self.invoke_shell()
 

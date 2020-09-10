@@ -18,7 +18,6 @@ from eNMS.controller.base import BaseController
 from eNMS.database import db
 from eNMS.models import models
 from eNMS.models import relationships
-from eNMS.setup import visualization
 
 
 class AdministrationController(BaseController):

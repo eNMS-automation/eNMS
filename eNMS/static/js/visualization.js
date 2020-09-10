@@ -600,26 +600,28 @@ function saveParameters() {
     callback: () => {
       notify("Default pools saved.", "success", 5);
       $("#visualization_parameters").remove();
-    }
+    },
   });
 }
 
 function openVisualizationPanel() {
   openPanel({
-    title: 'Visualization Parameters',
-    name: 'visualization_parameters',
-    size: '400 200',
+    title: "Visualization Parameters",
+    name: "visualization_parameters",
+    size: "400 200",
     callback: () => {
       call({
         url: "/get_visualization_parameters",
         callback: (pools) => {
           pools.forEach((pool) => {
-            $('#default_pools').append(new Option(pool.name, pool.id, false, false));
+            $("#default_pools").append(new Option(pool.name, pool.id, false, false));
           });
-          $('#default_pools').val(pools.map((pool) => pool.id)).trigger("change");
-        }
+          $("#default_pools")
+            .val(pools.map((pool) => pool.id))
+            .trigger("change");
+        },
       });
-    }
+    },
   });
 }
 

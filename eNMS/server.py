@@ -84,28 +84,6 @@ class Server(Flask):
 
         return decorated_function
 
-    @staticmethod
-    def monitor_rest_request(func):
-        @wraps(func)
-        def wrapper(*args, **kwargs):
-            for index in range(db.retry_commit_number):
-                try:
-                    result = func(*args, **kwargs)
-                except Exception as exc:
-                    return rest_abort(500, message=str(exc))
-                try:
-                    db.session.commit()
-                    return result
-                except Exception as exc:
-                    db.session.rollback()
-                    app.log("error", f"Rest Call n°{index} failed ({exc}).")
-                    stacktrace = format_exc()
-                    sleep(db.retry_commit_time * (index + 1))
-            else:
-                rest_abort(500, message=stacktrace)
-
-        return wrapper
-
     def update_config(self, mode):
         mode = (mode or app.settings["app"]["config_mode"]).lower()
         self.config.update(
@@ -358,6 +336,30 @@ class Server(Flask):
 
         self.register_blueprint(blueprint)
 
+    @staticmethod
+    def monitor_rest_request(func):
+        @wraps(func)
+        def wrapper(*args, **kwargs):
+            for index in range(db.retry_commit_number):
+                try:
+                    result = func(*args, **kwargs)
+                except db.rbac_error as exc:
+                    return rest_abort(404, message=str(exc))
+                except Exception as exc:
+                    return rest_abort(500, message=str(exc))
+                try:
+                    db.session.commit()
+                    return result
+                except Exception as exc:
+                    db.session.rollback()
+                    app.log("error", f"Rest Call n°{index} failed ({exc}).")
+                    stacktrace = format_exc()
+                    sleep(db.retry_commit_time * (index + 1))
+            else:
+                rest_abort(500, message=stacktrace)
+
+        return wrapper
+
     def configure_rest_api(self):
 
         api = Api(self, decorators=[self.csrf.exempt])
@@ -395,11 +397,8 @@ class Server(Flask):
             decorators = [self.auth.login_required, self.monitor_rest_request]
 
             def get(self, model):
-                try:
-                    properties = request.args.to_dict()
-                    results = db.fetch(model, all_matches=True, **properties)
-                except db.rbac_error as exc:
-                    return {"message": str(exc)}
+                properties = request.args.to_dict()
+                results = db.fetch(model, all_matches=True, **properties)
                 return [
                     result.get_properties(exclude=["positions"]) for result in results
                 ]

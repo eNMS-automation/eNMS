@@ -333,8 +333,9 @@ class BaseController:
             first = self.str_dict(getattr(db.fetch("result", id=v1), "result"))
             second = self.str_dict(getattr(db.fetch("result", id=v2), "result"))
         else:
-            first = self.get_git_network_data(device_name, v1)[type]
-            second = self.get_git_network_data(device_name, v2)[type]
+            result1, v1 = self.get_git_network_data(device_name, v1)
+            result2, v2 = self.get_git_network_data(device_name, v2)
+            first, second = result1[type], result2[type]
         return "\n".join(
             unified_diff(
                 first.splitlines(),

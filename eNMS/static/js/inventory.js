@@ -320,7 +320,7 @@ function showGitConfiguration(device, commit) {
     url: `/get_git_network_data/${device.name}/${commit.hash}`,
     callback: (result) => {
       const type = $(`#data-type-${device.id}`).val();
-      displayNetworkData(type, commit.hash, result, commit.date);
+      displayNetworkData(type, commit.hash, ...result);
     },
   });
 }
@@ -372,7 +372,7 @@ function showGitHistory(device) {
               .DataTable({
                 columns: [
                   { width: "250px", title: "Datetime" },
-                  { title: "Commit Hash" },
+                  { title: "Git Commit Hash" },
                   { width: "35px", className: "dt-center" },
                   { width: "30px", title: "V1", className: "dt-center" },
                   { width: "30px", title: "V2", className: "dt-center" },

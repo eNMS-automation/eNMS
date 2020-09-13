@@ -321,7 +321,6 @@ function displayNetwork({initialization, noAlert, withCluster}) {
   let data = {}
   for (let type of ["device", "link"]) {
     let form = serializeForm(`#${type}-filtering-form`);
-    console.log(form.pools)
     if (!form.pools) form.pools = defaultPools.map((p) => p.id);
     data[type] = {form: form}
   }

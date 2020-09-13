@@ -312,37 +312,59 @@ Object.assign(action, {
   Circle: () => changeMarker("Circle"),
   "Circle Marker": () => changeMarker("Circle Marker"),
   Normal: () => displayNetwork(),
-  Clustered: () => displayNetwork(true),
+  Clustered: () => displayNetwork(undefined, true),
 });
 
-function displayNetwork(withCluster) {
-  deleteAll();
+function displayNetwork(noAlert, withCluster) {
+  const maximumSize = visualization.logical.maximum_size;
+  const data = {
+    device: { form: serializeForm(`#device-filtering-form`) },
+    link: { form: serializeForm(`#link-filtering-form`) },
+  };
   clustered = withCluster;
-  if ($("#view-type").prop("checked")) {
-    call({
-      url: "/get_view_topology",
-      callback: function (topology) {
-        topology.devices.map((d) => createNode(d, "device"));
-        topology.links.map(createLink);
-      },
-    });
-  } else {
-    $(".menu").hide();
-    call({
-      url: "/get_all/pool",
-      callback: function (pools) {
-        for (let i = 0; i < pools.length; i++) {
-          if (pools[i].longitude) {
-            createNode(pools[i], "site");
-          }
+  call({
+    url: "/view_filtering",
+    data: data,
+    callback: function (results) {
+      if (page == "logical_view") {
+        if (
+          results.device.length > maximumSize.node ||
+          results.link.length > maximumSize.link
+        ) {
+          return notify(
+            `Too many objects to display. Use the device and link
+            filtering mechanism to reduce the size of the network`,
+            "error",
+            5
+          );
         }
-      },
-    });
-    $(".geo-menu").show();
-  }
-  if (dimension == "2D") {
-    map[clustered ? "addLayer" : "removeLayer"](markerGroup);
-  }
+        update3dGraphData(graph, results.device, results.link);
+      } else {
+        deleteAll();
+        if ($("#view-type").prop("checked")) {
+          results.device.map((d) => createNode(d, "device"));
+          results.link.map(createLink);
+        } else {
+          $(".menu").hide();
+          call({
+            url: "/get_all/pool",
+            callback: function (pools) {
+              for (let i = 0; i < pools.length; i++) {
+                if (pools[i].longitude) {
+                  createNode(pools[i], "site");
+                }
+              }
+            },
+          });
+          $(".geo-menu").show();
+        }
+        if (dimension == "2D") {
+          map[clustered ? "addLayer" : "removeLayer"](markerGroup);
+        }
+      }
+      if (!noAlert) notify("Filter applied.", "success", 5);
+    },
+  });
 }
 
 function showPoolView(poolId) {
@@ -521,12 +543,11 @@ export function initView() {
   if (page == "logical_view") {
     create3dGraphNetwork("network");
     notify("Loading network...", "success", 5);
-    filterView(true);
   } else {
     initGeographicalFramework();
-    displayNetwork();
     $("#view-type").change(() => displayNetwork());
   }
+  displayNetwork(true);
 }
 
 function update3dGraphData(graph, devices, links) {
@@ -549,39 +570,6 @@ function update3dGraphData(graph, devices, links) {
     .refresh();
 }
 
-function filterView(noAlert) {
-  const maximumSize = visualization.logical.maximum_size;
-  const data = {
-    device: { form: serializeForm(`#device-filtering-form`) },
-    link: { form: serializeForm(`#link-filtering-form`) },
-  };
-  call({
-    url: "/view_filtering",
-    data: data,
-    callback: function (results) {
-      if (page == "logical_view") {
-        if (
-          results.device.length > maximumSize.node ||
-          results.link.length > maximumSize.link
-        ) {
-          return notify(
-            `Too many objects to display. Use the device and link
-            filtering mechanism to reduce the size of the network`,
-            "error",
-            5
-          );
-        }
-        update3dGraphData(graph, results.device, results.link);
-      } else {
-        deleteAll();
-        results.device.map((d) => createNode(d, "device"));
-        results.link.map(createLink);
-      }
-      if (!noAlert) notify("Filter applied.", "success", 5);
-    },
-  });
-}
-
 function clearSearch() {
   for (const table of ["device", "link"]) {
     $(`.search-input-${table},.search-list-${table}`).val("");
@@ -589,7 +577,7 @@ function clearSearch() {
     $(".search-relation").val([]).trigger("change");
     $(`.search-select-${table}`).val("inclusion").selectpicker("refresh");
   }
-  filterView(true);
+  displayNetwork(true);
   notify("Search parameters cleared.", "success", 5);
 }
 
@@ -627,7 +615,7 @@ function openVisualizationPanel() {
 
 configureNamespace("visualization", [
   clearSearch,
-  filterView,
+  displayNetwork,
   openVisualizationPanel,
   saveParameters,
   showPoolView,

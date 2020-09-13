@@ -237,12 +237,6 @@ class InventoryController(BaseController):
         for pool in db.fetch_all("pool"):
             pool.compute_pool()
 
-    def get_view_topology(self):
-        return {
-            "devices": [d.view_properties for d in db.fetch_all("device")],
-            "links": [d.view_properties for d in db.fetch_all("link")],
-        }
-
     def view_filtering(self, **kwargs):
         return {
             obj_type: [

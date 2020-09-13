@@ -127,7 +127,7 @@ function switchLayer(layerType) {
 
 function changeMarker(type) {
   markerType = type;
-  displayNetwork();
+  displayNetwork({});
 }
 
 function createNode(node, nodeType) {
@@ -311,15 +311,16 @@ Object.assign(action, {
   Image: () => changeMarker("Image"),
   Circle: () => changeMarker("Circle"),
   "Circle Marker": () => changeMarker("Circle Marker"),
-  Normal: () => displayNetwork(),
-  Clustered: () => displayNetwork(undefined, true),
+  Normal: () => displayNetwork({}),
+  Clustered: () => displayNetwork({withCluster: true}),
 });
 
-function displayNetwork(noAlert, withCluster) {
+function displayNetwork({initialization, noAlert, withCluster}) {
   const maximumSize = visualization.logical.maximum_size;
+  const form = {pools: ["3", "4"], pools_filter: "any"}
   const data = {
-    device: { form: serializeForm(`#device-filtering-form`) },
-    link: { form: serializeForm(`#link-filtering-form`) },
+    device: { form: initialization ? form : serializeForm(`#device-filtering-form`) },
+    link: { form: initialization ? form : serializeForm(`#link-filtering-form`) },
   };
   clustered = withCluster;
   call({
@@ -545,9 +546,9 @@ export function initView() {
     notify("Loading network...", "success", 5);
   } else {
     initGeographicalFramework();
-    $("#view-type").change(() => displayNetwork());
+    $("#view-type").change(() => displayNetwork({}));
   }
-  displayNetwork(true);
+  displayNetwork({initialization: true, noAlert: true});
 }
 
 function update3dGraphData(graph, devices, links) {
@@ -577,7 +578,7 @@ function clearSearch() {
     $(".search-relation").val([]).trigger("change");
     $(`.search-select-${table}`).val("inclusion").selectpicker("refresh");
   }
-  displayNetwork(true);
+  displayNetwork({noAlert: true});
   notify("Search parameters cleared.", "success", 5);
 }
 

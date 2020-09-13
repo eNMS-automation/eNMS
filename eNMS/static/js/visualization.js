@@ -2,6 +2,7 @@
 global
 action: false
 Cesium: false
+defaultPools: false
 ForceGraph3D: false
 jsPanel: false
 L: false
@@ -317,7 +318,7 @@ Object.assign(action, {
 
 function displayNetwork({initialization, noAlert, withCluster}) {
   const maximumSize = visualization.logical.maximum_size;
-  const form = {pools: ["3", "4"], pools_filter: "any"}
+  const form = {pools: defaultPools.map((p) => p.id), pools_filter: "any"}
   const data = {
     device: { form: initialization ? form : serializeForm(`#device-filtering-form`) },
     link: { form: initialization ? form : serializeForm(`#link-filtering-form`) },

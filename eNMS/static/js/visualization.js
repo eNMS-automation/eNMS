@@ -318,55 +318,57 @@ Object.assign(action, {
 
 function displayNetwork({initialization, noAlert, withCluster}) {
   const maximumSize = visualization.logical.maximum_size;
-  const form = {pools: defaultPools.map((p) => p.id), pools_filter: "any"}
-  const data = {
-    device: { form: initialization ? form : serializeForm(`#device-filtering-form`) },
-    link: { form: initialization ? form : serializeForm(`#link-filtering-form`) },
-  };
+  let data = {}
+  for (let type of ["device", "link"]) {
+    let form = serializeForm(`#${type}-filtering-form`);
+    console.log(form.pools)
+    if (!form.pools) form.pools = defaultPools.map((p) => p.id);
+    data[type] = {form: form}
+  }
   clustered = withCluster;
-  call({
-    url: "/view_filtering",
-    data: data,
-    callback: function (results) {
-      if (page == "logical_view") {
-        if (
-          results.device.length > maximumSize.node ||
-          results.link.length > maximumSize.link
-        ) {
-          return notify(
-            `Too many objects to display. Use the device and link
-            filtering mechanism to reduce the size of the network`,
-            "error",
-            5
-          );
+  deleteAll();
+  if (page == "geographical_view" && !$("#view-type").prop("checked")) {
+    $(".menu").hide();
+    call({
+      url: "/get_all/pool",
+      callback: function (pools) {
+        for (let i = 0; i < pools.length; i++) {
+          if (pools[i].longitude) {
+            createNode(pools[i], "site");
+          }
         }
-        update3dGraphData(graph, results.device, results.link);
-      } else {
-        deleteAll();
-        if ($("#view-type").prop("checked")) {
+      },
+    });
+    $(".geo-menu").show();
+  } else {
+    call({
+      url: "/view_filtering",
+      data: data,
+      callback: function (results) {
+        if (page == "logical_view") {
+          if (
+            results.device.length > maximumSize.node ||
+            results.link.length > maximumSize.link
+          ) {
+            return notify(
+              `Too many objects to display. Use the device and link
+              filtering mechanism to reduce the size of the network`,
+              "error",
+              5
+            );
+          }
+          update3dGraphData(graph, results.device, results.link);
+        } else {
           results.device.map((d) => createNode(d, "device"));
           results.link.map(createLink);
-        } else {
-          $(".menu").hide();
-          call({
-            url: "/get_all/pool",
-            callback: function (pools) {
-              for (let i = 0; i < pools.length; i++) {
-                if (pools[i].longitude) {
-                  createNode(pools[i], "site");
-                }
-              }
-            },
-          });
-          $(".geo-menu").show();
+          if (dimension == "2D") {
+            map[clustered ? "addLayer" : "removeLayer"](markerGroup);
+          }
         }
-        if (dimension == "2D") {
-          map[clustered ? "addLayer" : "removeLayer"](markerGroup);
-        }
-      }
-      if (!noAlert) notify("Filter applied.", "success", 5);
-    },
-  });
+        if (!noAlert) notify("Filter applied.", "success", 5);
+      },
+    });
+  }
 }
 
 function showPoolView(poolId) {
@@ -547,7 +549,7 @@ export function initView() {
     notify("Loading network...", "success", 5);
   } else {
     initGeographicalFramework();
-    $("#view-type").change(() => displayNetwork({}));
+    $("#view-type").change(() => displayNetwork({noAlert: true}));
   }
   displayNetwork({initialization: true, noAlert: true});
 }

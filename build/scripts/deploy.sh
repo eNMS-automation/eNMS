@@ -26,10 +26,10 @@ function install() {
     # export VAULT_TOKEN=token
     # vault secrets enable -version=1 -path=secret kv
   elif [ "$install" = "mysql" ]; then
-    sudo apt install -y mysql-server python3-mysqldb
+    sudo apt install -y $install-server python3-mysqldb
     sudo pip3 install mysqlclient
-    sudo mysql -u root --password=password -e 'CREATE DATABASE enms;'
-    sudo mysql -u root --password=password -e 'set global max_connections = 2000;'
+    sudo $install -u root --password=password -e 'CREATE DATABASE enms;'
+    sudo $install -u root --password=password -e 'set global max_connections = 2000;'
   elif [ "$install" = "postgresql" ]; then
     sudo apt-get install -y postgresql libpq-dev postgresql-client
     sudo pip3 install psycopg2

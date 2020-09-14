@@ -983,9 +983,9 @@ class Run(AbstractBase):
             custom_password = app.get_password(self.custom_password)
             substituted_password = self.sub(custom_password, locals())
             if custom_password != substituted_password:
-                if substituted_password.startswith("b'"):
-                    substituted_password = substituted_password[2:-1]
-                custom_password = app.get_password(substituted_password)
+                custom_password = substituted_password
+                if custom_password.startswith("b'"):
+                    custom_password = custom_password[2:-1]
             return (self.sub(self.custom_username, locals()), custom_password)
 
     def convert_result(self, result):

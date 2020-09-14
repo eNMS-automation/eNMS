@@ -35,7 +35,7 @@ function run() {
   export TACACS_PASSWORD="testing123"
   export FLASK_APP="app.py"
   export FLASK_DEBUG=1
-  if [ "$database" = "mysql" ]; then
+  if [ "$database" = "mysql" ] || [ "$database" = "mariadb" ]; then
     export DATABASE_URL="mysql://root:password@localhost/enms";
   elif [ "$database" = "pgsql" ]; then
     export DATABASE_URL="postgresql://root:password@localhost:5432/enms"

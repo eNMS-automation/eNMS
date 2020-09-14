@@ -22,7 +22,6 @@ visualization/geographical_view and visualization/logical_view
 - Make the options "Accept only one client" and "Share session with all clients" incompatible in the device connection form
 - Configuration git diff: indicate which is V1 and which is V2. Option to display more context lines, including all of it.
 - Improve display of Json property in form (make them collapsed by default)
-- Fix substitution mechanism for custom passwords in netmiko / napalm services
 
 Version 3.22.3
 --------------

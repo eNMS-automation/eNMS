@@ -63,10 +63,7 @@ class InventoryController(BaseController):
             nested_cmd = f"sshpass -e ssh {options} {login}@{address} -p {device.port}"
         else:
             nested_cmd = f"ssh {options} {address} -p {device.port}"
-        if "multiplexing" in kwargs:
-            cmd.append(nested_cmd)
-        else:
-            cmd.extend(nested_cmd.split())
+        cmd.extend([nested_cmd] if "multiplexing" in kwargs else nested_cmd.split())
         Popen(cmd)
         return {
             "device": device.name,

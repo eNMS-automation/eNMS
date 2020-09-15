@@ -739,7 +739,8 @@ class Run(AbstractBase):
                 results["devices"] = {}
                 for result in self.results:
                     results["devices"][result.device.name] = result.result
-        db.factory("result", result=results, commit=commit, **result_kw)
+        if not self.disable_result_creation:
+            db.factory("result", result=results, commit=commit, **result_kw)
         return results
 
     def run_service_job(self, payload, device):

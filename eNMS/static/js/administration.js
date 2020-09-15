@@ -15,11 +15,6 @@ import {
 } from "./base.js";
 import { tables } from "./table.js";
 
-function accessSelection(select) {
-  console.log("test")
-}
-
-
 function saveSettings() {
   const newSettings = jsonEditors.settings.get();
   call({
@@ -335,7 +330,6 @@ function displayFiles() {
 }
 
 configureNamespace("administration", [
-  accessSelection,
   createNewFolder,
   databaseDeletion,
   deleteFile,

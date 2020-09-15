@@ -818,9 +818,10 @@ function displayWorkflowState(result) {
   if (!nodes || !edges || !result.state) return;
   let nodeUpdates = [];
   let edgeUpdates = [];
+  const serviceIds = workflow.services.map((s) => s.id);
   for (let [path, state] of Object.entries(result.state)) {
     const id = parseInt(path.split(">").slice(-1)[0]);
-    if (ends.has(id) || !(id in nodes._data)) continue;
+    if (ends.has(id) || !serviceIds.includes(id)) continue;
     if (state.progress?.device) {
       const total = parseInt(state.progress?.device?.total) || 0;
       const success = parseInt(state.progress?.device?.success) || 0;

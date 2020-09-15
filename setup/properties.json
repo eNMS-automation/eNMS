@@ -910,6 +910,10 @@
       "color",
       "source_name",
       "destination_name"
+    ],
+    "user": [
+      "name",
+      "email"
     ]
   }
 }

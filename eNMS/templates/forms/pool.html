@@ -44,8 +44,9 @@
         </div>
       </fieldset>
       <br />
+      {% for model in form.models %}
       <div class="x_title">
-        <h3>Device properties</h3>
+        <h3>{{ model|capitalize }} properties</h3>
       </div>
       <table
         class="table table-striped table-bordered dt-responsive nowrap"
@@ -60,56 +61,25 @@
           </tr>
         </thead>
         <tbody>
-          {% for property in form.device_properties %}
+          {% for property in form[model + "_properties"] %}
+          {% set property_name = "{}_{}".format(model, property) %}
           <tr>
             <td>
               {{ names.get(property, property.replace("_", " ").capitalize() ) }}
             </td>
             <td>
-              {{ form['device_' + property](id="pool-" + 'device_' + property,
+              {{ form[property_name](id="pool-" + property_name,
               class="form-control add-id") }}
             </td>
             <td>
-              {{ form['device_' + property + '_match'](id="pool-" +'device_' + property
+              {{ form[property_name + '_match'](id="pool-" + property_name
               + '_match', class="form-control add-id") }}
             </td>
           </tr>
           {% endfor %}
         </tbody>
       </table>
-      <div class="x_title">
-        <h3>Link properties</h3>
-      </div>
-      <table
-        class="table table-striped table-bordered dt-responsive nowrap"
-        cellspacing="0"
-        width="100%"
-      >
-        <thead>
-          <tr>
-            <th>Property</th>
-            <th>Value</th>
-            <th style="width: 25%;">Match</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for property in form.link_properties %}
-          <tr>
-            <td>
-              {{ names.get(property, property.replace("_", " ").capitalize() ) }}
-            </td>
-            <td>
-              {{ form['link_' + property](id="pool-" + 'link_' + property,
-              class="form-control add-id") }}
-            </td>
-            <td>
-              {{ form['link_' + property + '_match'](id="pool-" +'link_' + property +
-              '_match', class="form-control add-id") }}
-            </td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
+      {% endfor %}
       <div class="x_title">
         <h3>Custom Properties</h3>
       </div>

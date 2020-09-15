@@ -16,15 +16,12 @@ from eNMS.forms.fields import (
 
 
 def configure_pool_form(cls):
-    cls.device_properties = app.properties["filtering"]["device"]
-    cls.link_properties = app.properties["filtering"]["link"]
-    for cls_name, properties in (
-        ("device", app.properties["filtering"]["device"]),
-        ("link", app.properties["filtering"]["link"]),
-    ):
-        for property in properties:
-            match_field = f"{cls_name}_{property}_match"
-            setattr(cls, f"{cls_name}_{property}", StringField(property))
+    cls.models = ("device", "link", "user")
+    for model in cls.models:
+        setattr(cls, f"{model}_properties", app.properties["filtering"][model])
+        for property in app.properties["filtering"][model]:
+            match_field = f"{model}_{property}_match"
+            setattr(cls, f"{model}_{property}", StringField(property))
             setattr(
                 cls,
                 match_field,

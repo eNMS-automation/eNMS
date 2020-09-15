@@ -788,6 +788,11 @@ function showAllAlerts() {
   });
 }
 
+function resetForm(type, id) {
+  $(`#${type}-${id} form`).trigger("reset");
+  $(`#${type}-${id} form select`).val([]).trigger("change");
+}
+
 function getAlerts(preview) {
   let alerts = JSON.parse(localStorage.getItem("alerts")).reverse();
   if (preview) alerts = alerts.splice(0, 4);
@@ -892,6 +897,7 @@ configureNamespace("base", [
   openPanel,
   processData,
   processInstance,
+  resetForm,
   showAllAlerts,
   showDeletionPanel,
   showTypePanel,

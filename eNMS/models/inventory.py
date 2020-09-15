@@ -279,20 +279,24 @@ class Link(Object):
 
 
 def set_pool_properties(Pool):
-    for property in properties["filtering"]["device"]:
-        setattr(Pool, f"device_{property}", db.Column(db.LargeString))
+    for model in Pool.models:
+        for property in properties["filtering"][model]:
+            setattr(Pool, f"{model}_{property}", db.Column(db.LargeString))
+            setattr(
+                Pool,
+                f"{model}_{property}_match",
+                db.Column(db.SmallString, default="inclusion"),
+            )
         setattr(
             Pool,
-            f"device_{property}_match",
-            db.Column(db.SmallString, default="inclusion"),
+            f"{model}s",
+            relationship(
+                model.capitalize(),
+                secondary=getattr(db, f"pool_{model}_table"),
+                back_populates="pools",
+            ),
         )
-    for property in properties["filtering"]["link"]:
-        setattr(Pool, f"link_{property}", db.Column(db.LargeString))
-        setattr(
-            Pool,
-            f"link_{property}_match",
-            db.Column(db.SmallString, default="inclusion"),
-        )
+        setattr(Pool, f"{model}_number", db.Column(Integer, default=0))
     return Pool
 
 
@@ -301,18 +305,13 @@ def set_pool_properties(Pool):
 class Pool(AbstractBase):
 
     __tablename__ = type = "pool"
+    models = ("device", "link", "user")
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.SmallString, unique=True)
     public = db.Column(Boolean)
     last_modified = db.Column(db.SmallString, info={"log_change": False})
     description = db.Column(db.SmallString)
     operator = db.Column(db.SmallString, default="all")
-    devices = relationship(
-        "Device", secondary=db.pool_device_table, back_populates="pools"
-    )
-    device_number = db.Column(Integer, default=0)
-    links = relationship("Link", secondary=db.pool_link_table, back_populates="pools")
-    link_number = db.Column(Integer, default=0)
     latitude = db.Column(db.SmallString, default="0.0")
     longitude = db.Column(db.SmallString, default="0.0")
     services = relationship(

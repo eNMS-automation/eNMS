@@ -24,6 +24,8 @@ visualization/geographical_view and visualization/logical_view
 - Improve display of Json property in form (make them collapsed by default)
 - Update to new version of Vis.Js (potential workflow builder impact)
 - Add mechanism to disable result creation (e.g for config collection workflow)
+- Extend pool for users and services. The "devices" and "pools" relationship with services have to be renamed
+"target_devices" and "target_pools" in the service.yaml file.
 
 Version 3.22.3
 --------------

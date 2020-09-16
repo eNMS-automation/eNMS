@@ -307,7 +307,7 @@ def set_pool_properties(Pool):
 class Pool(AbstractBase):
 
     __tablename__ = type = "pool"
-    models = ("device", "link", "user")
+    models = ("device", "link", "service", "user")
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.SmallString, unique=True)
     public = db.Column(Boolean)

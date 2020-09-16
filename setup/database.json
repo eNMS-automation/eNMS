@@ -81,6 +81,7 @@
     ["access", "user"],
     ["pool", "device"],
     ["pool", "link"],
+    ["pool", "service"],
     ["pool", "user"],
     ["run", "device"],
     ["run", "pool"],

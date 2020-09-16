@@ -16,7 +16,7 @@ from eNMS.forms.fields import (
 
 
 def configure_pool_form(cls):
-    cls.models = ("device", "link", "user")
+    cls.models = ("device", "link", "service", "user")
     for model in cls.models:
         setattr(cls, f"{model}_properties", app.properties["filtering"][model])
         for property in app.properties["filtering"][model]:

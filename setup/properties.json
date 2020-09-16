@@ -911,6 +911,12 @@
       "source_name",
       "destination_name"
     ],
+    "service": [
+      "name",
+      "description",
+      "vendor",
+      "operating_system"
+    ],
     "user": [
       "name",
       "email"

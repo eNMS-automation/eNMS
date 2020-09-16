@@ -8,7 +8,7 @@
   description: Start point of a workflow
   device_query: ''
   device_query_property: ip_address
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: true
   events: []
@@ -32,7 +32,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -63,7 +63,7 @@
   description: End point of a workflow
   device_query: ''
   device_query_property: ip_address
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: true
   events: []
@@ -87,7 +87,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -118,7 +118,7 @@
   description: Monitor eNMS cluster
   device_query: ''
   device_query_property: ip_address
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: true
   events: []
@@ -142,7 +142,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -172,7 +172,7 @@
   description: ''
   device_query: ''
   device_query_property: name
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -196,7 +196,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions: {}
   postprocessing: ''
   postprocessing_mode: always

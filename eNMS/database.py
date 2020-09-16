@@ -237,6 +237,27 @@ class Database:
             Column("original_id", Integer, ForeignKey("service.id"), primary_key=True),
             Column("child_id", Integer, ForeignKey("service.id"), primary_key=True),
         )
+        for target_type in ("device", "pool"):
+            setattr(
+                self,
+                f"service_target_{target_type}_table",
+                Table(
+                    f"service_target_{target_type}_association",
+                    self.base.metadata,
+                    Column(
+                        "service_id",
+                        Integer,
+                        ForeignKey("service.id"),
+                        primary_key=True,
+                    ),
+                    Column(
+                        f"{target_type}_id",
+                        Integer,
+                        ForeignKey(f"{target_type}.id"),
+                        primary_key=True,
+                    ),
+                ),
+            )
 
     def fetch(self, model, allow_none=False, all_matches=False, rbac="read", **kwargs):
         query = self.query(model, rbac).filter_by(**kwargs)

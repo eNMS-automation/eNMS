@@ -84,8 +84,6 @@
     ["pool", "user"],
     ["run", "device"],
     ["run", "pool"],
-    ["service", "device"],
-    ["service", "pool"],
     ["service", "workflow"],
     ["task", "device"],
     ["task", "pool"],

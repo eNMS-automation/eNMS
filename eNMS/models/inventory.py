@@ -97,7 +97,9 @@ class Device(Object):
     last_runtime = db.Column(db.SmallString)
     last_duration = db.Column(db.SmallString)
     services = relationship(
-        "Service", secondary=db.service_device_table, back_populates="devices"
+        "Service",
+        secondary=db.service_target_device_table,
+        back_populates="target_devices",
     )
     runs = relationship(
         "Run",
@@ -315,7 +317,7 @@ class Pool(AbstractBase):
     latitude = db.Column(db.SmallString, default="0.0")
     longitude = db.Column(db.SmallString, default="0.0")
     services = relationship(
-        "Service", secondary=db.service_pool_table, back_populates="pools"
+        "Service", secondary=db.service_target_pool_table, back_populates="target_pools"
     )
     visualization_default = db.Column(Boolean)
     runs = relationship("Run", secondary=db.run_pool_table, back_populates="pools")

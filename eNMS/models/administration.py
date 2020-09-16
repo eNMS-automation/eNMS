@@ -42,9 +42,7 @@ class User(AbstractBase, UserMixin):
     theme = db.Column(
         db.SmallString, default="default", info={"dont_track_changes": True}
     )
-    pools = relationship(
-        "Pool", secondary=db.pool_user_table, back_populates="users"
-    )
+    pools = relationship("Pool", secondary=db.pool_user_table, back_populates="users")
     groups = relationship(
         "Group", secondary=db.user_group_table, back_populates="users"
     )

@@ -31,9 +31,9 @@ class ServiceForm(BaseForm):
     device_query_property = SelectField(
         "Query Property Type", choices=(("name", "Name"), ("ip_address", "IP address"))
     )
-    devices = MultipleInstanceField("Devices")
+    target_devices = MultipleInstanceField("Devices")
     disable_result_creation = BooleanField("Disable Result Creation")
-    pools = MultipleInstanceField("Pools")
+    target_pools = MultipleInstanceField("Pools")
     update_pools = BooleanField("Update pools before running")
     workflows = MultipleInstanceField("Workflows")
     waiting_time = IntegerField(

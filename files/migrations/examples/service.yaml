@@ -8,7 +8,7 @@
   description: Start point of a workflow
   device_query: ''
   device_query_property: ip_address
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: true
   events: []
@@ -32,7 +32,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions:
     Iteration Services Test Workflow: ['-359', '-163']
     'Regression Workflow 1: Netmiko with validation and retries': [-385, 11]
@@ -147,7 +147,7 @@
   description: End point of a workflow
   device_query: ''
   device_query_property: ip_address
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: true
   events: []
@@ -171,7 +171,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions:
     Iteration Services Test Workflow: ['-9', '294']
     'Regression Workflow 1: Netmiko with validation and retries': [115, 3]
@@ -289,7 +289,7 @@
   description: Monitor eNMS cluster
   device_query: ''
   device_query_property: ip_address
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: true
   events: []
@@ -313,7 +313,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -352,7 +352,7 @@
   description: Example
   device_query: ''
   device_query_property: ip_address
-  devices: [Washington]
+  target_devices: [Washington]
   dict_match: {}
   display_only_failed_nodes: true
   events: []
@@ -381,7 +381,7 @@
   number_in_range: 7
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow 2: Separate Failure - Success paths': [741, 106]
     'Regression Workflow C: Advanced multiprocessing': [-266, -204]
@@ -422,7 +422,7 @@
   description: Configure BGP Peering with Napalm
   device_query: ''
   device_query_property: ip_address
-  devices: [Washington]
+  target_devices: [Washington]
   dict_match: {}
   display_only_failed_nodes: true
   events: []
@@ -451,7 +451,7 @@
   number_of_retries: 0
   operating_system: ''
   optional_args: {}
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow C: Advanced multiprocessing': [299, -170]
   postprocessing: ''
@@ -491,7 +491,7 @@
   description: Configuration Backup using NAPALM
   device_query: ''
   device_query_property: ip_address
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: true
   driver: eos
@@ -518,7 +518,7 @@
   number_of_retries: 0
   operating_system: ''
   optional_args: {}
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow 9: Operational Data Backup': [-259, 351]
   postprocessing: ''
@@ -568,7 +568,7 @@
   description: Create a VRF "test" with Netmiko
   device_query: ''
   device_query_property: ip_address
-  devices: [Washington, Austin]
+  target_devices: [Washington, Austin]
   dict_match: {}
   display_only_failed_nodes: true
   driver: arista_eos
@@ -597,7 +597,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: eos
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow 1: VRF creation and deletion with Netmiko': &id011 [-38,
       -86]
@@ -645,7 +645,7 @@
   description: Check that the vrf "test" is configured
   device_query: ''
   device_query_property: ip_address
-  devices: [Washington, Austin]
+  target_devices: [Washington, Austin]
   dict_match: {}
   display_only_failed_nodes: true
   driver: arista_eos
@@ -681,7 +681,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: eos
-  pools: []
+  target_pools: []
   positions:
     Iteration Services Test Workflow: ['147', '-14']
     'Regression Workflow 1: VRF creation and deletion with Netmiko': &id012 [445,
@@ -736,7 +736,7 @@
   description: Delete VRF "test"
   device_query: ''
   device_query_property: ip_address
-  devices: [Washington, Austin]
+  target_devices: [Washington, Austin]
   dict_match: {}
   display_only_failed_nodes: true
   driver: arista_eos
@@ -765,7 +765,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: eos
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow 1: VRF creation and deletion with Netmiko': &id013 [476,
       119]
@@ -814,7 +814,7 @@
   description: Check that the vrf "test" is NOT configured
   device_query: ''
   device_query_property: ip_address
-  devices: [Washington, Austin, Philadelphia]
+  target_devices: [Washington, Austin, Philadelphia]
   dict_match: {}
   display_only_failed_nodes: true
   driver: arista_eos
@@ -850,7 +850,7 @@
   notification_header: ''
   number_of_retries: 2
   operating_system: eos
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow 1: VRF creation and deletion with Netmiko': &id014 [-10,
       157]
@@ -900,7 +900,7 @@
   description: Create a VRF "test" with Napalm
   device_query: ''
   device_query_property: ip_address
-  devices: [Washington, Austin]
+  target_devices: [Washington, Austin]
   dict_match: {}
   display_only_failed_nodes: true
   driver: eos
@@ -927,7 +927,7 @@
   number_of_retries: 0
   operating_system: eos
   optional_args: {}
-  pools: []
+  target_pools: []
   positions:
     '[Regression Workflow F: Workflow of Workflows] Regression Workflow 5: VRF creation and deletion with Napalm': [
       -374, -164]
@@ -966,7 +966,7 @@
   description: Use REST call is_alive
   device_query: ''
   device_query_property: ip_address
-  devices: [Columbus]
+  target_devices: [Columbus]
   dict_match: {}
   display_only_failed_nodes: true
   events: []
@@ -995,7 +995,7 @@
   payload:
     a: b
     c: ['1', '2', '3']
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow 2: Separate Failure - Success paths': [374, 278]
     'Regression Workflow 3: Napalm getters (postprocessing)': ['-50', '0']
@@ -1042,7 +1042,7 @@
   description: 'Getter: get_facts'
   device_query: ''
   device_query_property: ip_address
-  devices: [Washington, Austin]
+  target_devices: [Washington, Austin]
   dict_match: {}
   display_only_failed_nodes: true
   driver: eos
@@ -1069,7 +1069,7 @@
   number_of_retries: 0
   operating_system: ''
   optional_args: {}
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow 2: Separate Failure - Success paths': [-102, -130]
     'Regression Workflow 3: Napalm getters (postprocessing)': [-154, -70]
@@ -1112,7 +1112,7 @@
   description: 'Getter: get_interfaces'
   device_query: ''
   device_query_property: ip_address
-  devices: [Washington, Austin]
+  target_devices: [Washington, Austin]
   dict_match: {}
   display_only_failed_nodes: true
   driver: eos
@@ -1139,7 +1139,7 @@
   number_of_retries: 0
   operating_system: ''
   optional_args: {}
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow 2: Separate Failure - Success paths': [611, -72]
     'Regression Workflow 3: Napalm getters (postprocessing)': [-166, 303]
@@ -1181,7 +1181,7 @@
   description: 'Getter: get_interfaces_ip'
   device_query: ''
   device_query_property: ip_address
-  devices: [Washington, Austin]
+  target_devices: [Washington, Austin]
   dict_match: {}
   display_only_failed_nodes: true
   driver: eos
@@ -1208,7 +1208,7 @@
   number_of_retries: 0
   operating_system: ''
   optional_args: {}
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow 3: Napalm getters (postprocessing)': [303, 43]
     'Regression Workflow F: Workflow of Workflows': [3, -51]
@@ -1252,7 +1252,7 @@
   description: 'Getter: get_config'
   device_query: ''
   device_query_property: ip_address
-  devices: [Washington, Austin]
+  target_devices: [Washington, Austin]
   dict_match: {}
   display_only_failed_nodes: true
   driver: eos
@@ -1279,7 +1279,7 @@
   number_of_retries: 0
   operating_system: ''
   optional_args: {}
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow 3: Napalm getters (postprocessing)': [652, -22]
     'Regression Workflow F: Workflow of Workflows': [3, -51]
@@ -1317,7 +1317,7 @@
   description: Process Payload in example workflow
   device_query: ''
   device_query_property: ip_address
-  devices: [Washington, Austin]
+  target_devices: [Washington, Austin]
   dict_match: {}
   display_only_failed_nodes: true
   events: []
@@ -1341,7 +1341,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow 3: Napalm getters (postprocessing)': [424, 229]
     'Regression Workflow F: Workflow of Workflows': [3, -51]
@@ -1375,7 +1375,7 @@
   description: Add devices to the payload
   device_query: ''
   device_query_property: ip_address
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: true
   events: []
@@ -1399,7 +1399,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions:
     Iteration Services Test Workflow: ['3', '-144']
     'Regression Workflow E: Iteration Targets': [-195, -168]
@@ -1448,7 +1448,7 @@
   description: Show IP route
   device_query: ''
   device_query_property: ip_address
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: true
   driver: arista_eos
@@ -1486,7 +1486,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: eos
-  pools: []
+  target_pools: []
   positions:
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow 7: Payload Extraction & Validation'
@@ -1528,7 +1528,7 @@
   description: Payload Variables Extraction with Regex/TextFSM
   device_query: ''
   device_query_property: ip_address
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: true
   events: []
@@ -1568,7 +1568,7 @@
   operation1: __setitem__
   operation2: __setitem__
   operation3: __setitem__
-  pools: []
+  target_pools: []
   positions:
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow 7: Payload Extraction & Validation'
@@ -1612,7 +1612,7 @@
   description: ''
   device_query: ''
   device_query_property: ip_address
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   driver: eos
@@ -1639,7 +1639,7 @@
   number_of_retries: 0
   operating_system: ''
   optional_args: {}
-  pools: []
+  target_pools: []
   positions:
     '[Regression Workflow F: Workflow of Workflows] Regression Workflow 5: VRF creation and deletion with Napalm': [
       287, 136]
@@ -1684,7 +1684,7 @@
   description: ''
   device_query: ''
   device_query_property: ip_address
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   driver: arista_eos
@@ -1721,7 +1721,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow A: get_var, set_var, get_result': ['266', '161']
     'Regression Workflow C: Advanced multiprocessing': [123, -187]
@@ -1771,7 +1771,7 @@
   description: ''
   device_query: ''
   device_query_property: ip_address
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   driver: arista_eos
@@ -1808,7 +1808,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions:
     '[Regression Workflow F: Workflow of Workflows] Regression Workflow 5: VRF creation and deletion with Napalm': [
       -348, 160]
@@ -1859,7 +1859,7 @@
   description: ''
   device_query: ''
   device_query_property: ip_address
-  devices: [Washington]
+  target_devices: [Washington]
   dict_match: {}
   display_only_failed_nodes: false
   driver: a10
@@ -1895,7 +1895,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow D: Prompts': [22, -74]
   postprocessing: ''
@@ -1944,7 +1944,7 @@
   description: ''
   device_query: ''
   device_query_property: ip_address
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   driver: a10
@@ -1980,7 +1980,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow D: Prompts': [350, 108]
   postprocessing: ''
@@ -2020,7 +2020,7 @@
   description: ''
   device_query: ''
   device_query_property: ip_address
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -2045,7 +2045,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow A: get_var, set_var, get_result': [-376, -138]
   postprocessing: ''
@@ -2080,7 +2080,7 @@
   description: ''
   device_query: ''
   device_query_property: ip_address
-  devices: [Washington, Chicago]
+  target_devices: [Washington, Chicago]
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -2105,7 +2105,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow A: get_var, set_var, get_result': [0, -144]
   postprocessing: ''
@@ -2150,7 +2150,7 @@
   description: ''
   device_query: ''
   device_query_property: ip_address
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   driver: arista_eos
@@ -2187,7 +2187,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow A: get_var, set_var, get_result': [474, -11]
   postprocessing: ''
@@ -2234,7 +2234,7 @@
   description: ''
   device_query: ''
   device_query_property: ip_address
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   driver: a10
@@ -2271,7 +2271,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow A: get_var, set_var, get_result': [425, 190]
   postprocessing: ''
@@ -2318,7 +2318,7 @@
   description: ''
   device_query: ''
   device_query_property: ip_address
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   driver: a10
@@ -2355,7 +2355,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow A: get_var, set_var, get_result': [-445, 128]
   postprocessing: ''
@@ -2398,7 +2398,7 @@
   description: ''
   device_query: ''
   device_query_property: ip_address
-  devices: []
+  target_devices: []
   dict_match:
     is_alive: {is_alive: true}
   display_only_failed_nodes: false
@@ -2428,7 +2428,7 @@
   number_of_retries: 0
   operating_system: ''
   optional_args: {}
-  pools: []
+  target_pools: []
   positions:
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow B: Napalm getters validation'
@@ -2470,7 +2470,7 @@
   description: ''
   device_query: ''
   device_query_property: ip_address
-  devices: []
+  target_devices: []
   dict_match: {fqdn: localhost, vendor: Arista}
   display_only_failed_nodes: false
   driver: eos
@@ -2499,7 +2499,7 @@
   number_of_retries: 0
   operating_system: ''
   optional_args: {}
-  pools: []
+  target_pools: []
   positions:
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow B: Napalm getters validation'
@@ -2541,7 +2541,7 @@
   description: ''
   device_query: ''
   device_query_property: ip_address
-  devices: []
+  target_devices: []
   dict_match:
     '{{device.ip_address}}': {prefix_length: 24}
   display_only_failed_nodes: false
@@ -2569,7 +2569,7 @@
   number_of_retries: 0
   operating_system: ''
   optional_args: {}
-  pools: []
+  target_pools: []
   positions:
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow 8: Payload Extraction with Operations'
@@ -2614,7 +2614,7 @@
   description: ''
   device_query: ''
   device_query_property: ip_address
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   driver: eos
@@ -2643,7 +2643,7 @@
   number_of_retries: 0
   operating_system: ''
   optional_args: {}
-  pools: []
+  target_pools: []
   positions:
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow B: Napalm getters validation'
@@ -2685,7 +2685,7 @@
   description: ''
   device_query: ''
   device_query_property: ip_address
-  devices: []
+  target_devices: []
   dict_match: {fqdn: localhost, uptime: '666', vendor: Arista}
   display_only_failed_nodes: false
   driver: eos
@@ -2714,7 +2714,7 @@
   number_of_retries: 0
   operating_system: ''
   optional_args: {}
-  pools: []
+  target_pools: []
   positions:
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow B: Napalm getters validation'
@@ -2754,7 +2754,7 @@
   description: ''
   device_query: ''
   device_query_property: ip_address
-  devices: [Washington]
+  target_devices: [Washington]
   dict_match: {host: '{{device.ip_address}}', unreachable: 0, use_ssl: true}
   display_only_failed_nodes: false
   events: []
@@ -2782,7 +2782,7 @@
   options: {}
   pass_device_properties: true
   playbook_path: /media/sf_shared/eNMS/files/playbooks/arista_show_version.yml
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow 6: Ansible with Validation': [-107, 153]
     'Regression Workflow B: Napalm getters validation': [-30, 126]
@@ -2817,7 +2817,7 @@
   description: ''
   device_query: ''
   device_query_property: ip_address
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -2845,7 +2845,7 @@
   options: {}
   pass_device_properties: true
   playbook_path: /media/sf_shared/eNMS/files/playbooks/arista_show_running_config.yml
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow 6: Ansible with Validation': [179, -62]
   postprocessing: ''
@@ -2879,7 +2879,7 @@
   description: ''
   device_query: ''
   device_query_property: ip_address
-  devices: []
+  target_devices: []
   dict_match: {action: debug, changed: false, failed: false}
   display_only_failed_nodes: false
   events: []
@@ -2907,7 +2907,7 @@
   options: {}
   pass_device_properties: true
   playbook_path: /media/sf_shared/eNMS/files/playbooks/arista_show_running_config.yml
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow 6: Ansible with Validation': [486, 173]
   postprocessing: ''
@@ -2947,7 +2947,7 @@
   description: ''
   device_query: ''
   device_query_property: ip_address
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   driver: a10
@@ -2983,7 +2983,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow C: Advanced multiprocessing': [-367, 143]
     'Regression Workflow F: Workflow of Workflows': [678, 52]
@@ -3031,7 +3031,7 @@
   description: Check the iteration mechanism (interfaces)
   device_query: ''
   device_query_property: ip_address
-  devices: [Austin, Washington]
+  target_devices: [Austin, Washington]
   dict_match: {}
   display_only_failed_nodes: true
   driver: arista_eos
@@ -3068,7 +3068,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: eos
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow E: Iteration Targets': [240, -144]
   postprocessing: ''
@@ -3115,7 +3115,7 @@
   description: Check the iteration mechanism (interfaces)
   device_query: ''
   device_query_property: ip_address
-  devices: [Austin, Washington]
+  target_devices: [Austin, Washington]
   dict_match: {}
   display_only_failed_nodes: true
   driver: arista_eos
@@ -3152,7 +3152,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: eos
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow E: Iteration Targets': [572, -4]
   postprocessing: ''
@@ -3199,7 +3199,7 @@
   description: Check the iteration mechanism (interfaces)
   device_query: ''
   device_query_property: ip_address
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: true
   driver: arista_eos
@@ -3236,7 +3236,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: eos
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow E: Iteration Targets': [556, 123]
   postprocessing: ''
@@ -3276,7 +3276,7 @@
   description: ''
   device_query: ''
   device_query_property: ip_address
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -3302,7 +3302,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions:
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow 8: Payload Extraction with Operations'
@@ -3340,7 +3340,7 @@
   description: ''
   device_query: ''
   device_query_property: ip_address
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -3375,7 +3375,7 @@
   operation1: __setitem__
   operation2: append
   operation3: update
-  pools: []
+  target_pools: []
   positions:
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow 8: Payload Extraction with Operations'
@@ -3416,7 +3416,7 @@
   description: ''
   device_query: ''
   device_query_property: ip_address
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -3451,7 +3451,7 @@
   operation1: append
   operation2: extend
   operation3: update
-  pools: []
+  target_pools: []
   positions:
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow 8: Payload Extraction with Operations'
@@ -3493,7 +3493,7 @@
   description: ''
   device_query: ''
   device_query_property: ip_address
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -3521,7 +3521,7 @@
   operating_system: ''
   params: {}
   payload: {}
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow E: Iteration Targets': [-135, 91]
   postprocessing: ''
@@ -3558,7 +3558,7 @@
   description: ''
   device_query: ''
   device_query_property: ip_address
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -3584,7 +3584,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow F: Workflow of Workflows': [-179, 146]
     '[Regression Workflow F: Workflow of Workflows] Regression Workflow F S2: Access Variables from Parent Workflow': [
@@ -3635,7 +3635,7 @@
   description: ''
   device_query: ''
   device_query_property: ip_address
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   driver: a10
@@ -3673,7 +3673,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions:
     '[Regression Workflow F: Workflow of Workflows] Regression Workflow F S2: Access Variables from Parent Workflow': [
       244, 113]
@@ -3715,7 +3715,7 @@
   description: Poll configuration and push to gitlab
   device_query: ''
   device_query_property: ip_address
-  devices: [Washington]
+  target_devices: [Washington]
   dict_match: {}
   display_only_failed_nodes: true
   events: []
@@ -3744,7 +3744,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow F S1: Subworkflow of Workflow': [200, -205]
   postprocessing: ''
@@ -3784,7 +3784,7 @@
   description: Create and delete a VRF with Netmiko
   device_query: ''
   device_query_property: ip_address
-  devices: [Austin, Washington]
+  target_devices: [Austin, Washington]
   dict_match: {}
   display_only_failed_nodes: true
   events: []
@@ -3846,7 +3846,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: eos
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow F: Workflow of Workflows': [-423, -31]
   postprocessing: ''
@@ -3888,7 +3888,7 @@
   description: Create and delete a VRF with Napalm
   device_query: ''
   device_query_property: ip_address
-  devices: [Washington]
+  target_devices: [Washington]
   dict_match: {}
   display_only_failed_nodes: true
   events: []
@@ -3920,7 +3920,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: eos
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow F: Workflow of Workflows': [152, 75]
   postprocessing: ''
@@ -3963,7 +3963,7 @@
   description: REST call, Napalm getters, etc
   device_query: ''
   device_query_property: ip_address
-  devices: [Washington, Atlanta]
+  target_devices: [Washington, Atlanta]
   dict_match: {}
   display_only_failed_nodes: true
   events: []
@@ -4001,7 +4001,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: eos
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow F: Workflow of Workflows': [464, 224]
   postprocessing: ''
@@ -4040,7 +4040,7 @@
   description: Test the payload extraction and validation mechanisms
   device_query: ''
   device_query_property: ip_address
-  devices: [Washington]
+  target_devices: [Washington]
   dict_match: {}
   display_only_failed_nodes: true
   events: []
@@ -4106,7 +4106,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions:
     '[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow of Workflow': [
       134, -147]
@@ -4157,7 +4157,7 @@
   description: Test the inner workflow system
   device_query: ''
   device_query_property: ip_address
-  devices: [Washington, Austin]
+  target_devices: [Washington, Austin]
   dict_match: {}
   display_only_failed_nodes: true
   events: []
@@ -4192,7 +4192,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: eos
-  pools: []
+  target_pools: []
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -4233,7 +4233,7 @@
   description: Workflow with separate failure - success path
   device_query: ''
   device_query_property: ip_address
-  devices: [Washington, Philadelphia, LosAngeles]
+  target_devices: [Washington, Philadelphia, LosAngeles]
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -4248,7 +4248,7 @@
   labels:
     63bebf9d-b5d5-47fd-9849-4177f2517be4:
       alignment: left
-      content: "This workflow runs on 3 devices: one router and 2 dummy devices.\r\
+      content: "This workflow runs on 3 target_devices: one router and 2 dummy devices.\r\
         \nThe router will take the upward path, the dummy devices the downward path.\r\
         \nBoth path rejoin at the end.\r\nTo be tested both with and without multiprocessing."
       positions: [185, 37]
@@ -4264,7 +4264,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -4302,7 +4302,7 @@
   description: ''
   device_query: ''
   device_query_property: ip_address
-  devices: [Washington]
+  target_devices: [Washington]
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -4338,7 +4338,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -4376,7 +4376,7 @@
   description: ''
   device_query: ''
   device_query_property: ip_address
-  devices: [Washington, Chicago]
+  target_devices: [Washington, Chicago]
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -4422,7 +4422,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -4463,7 +4463,7 @@
   description: ''
   device_query: ''
   device_query_property: ip_address
-  devices: [Washington, Austin]
+  target_devices: [Washington, Austin]
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -4494,7 +4494,7 @@
       positions: [-391, -186]
     4d62e069-5dfd-4e6d-b418-8c273a750b06:
       alignment: left
-      content: "This workflow is running on two devices: Washington (vEOS) and Austin\
+      content: "This workflow is running on two target_devices: Washington (vEOS) and Austin\
         \ (dummy).\r\nIt uses NAPALM to retrieve data from a device and the validation\
         \ mechanism.\r\nTo be tested with and without multiprocessing."
       positions: [-13, 4]
@@ -4524,7 +4524,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions:
     '[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow of Workflow': [
       678, 11]
@@ -4571,7 +4571,7 @@
   description: ''
   device_query: ''
   device_query_property: ip_address
-  devices: [Washington, Austin]
+  target_devices: [Washington, Austin]
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -4622,7 +4622,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -4662,7 +4662,7 @@
   description: ''
   device_query: ''
   device_query_property: ip_address
-  devices: [Jackson, PaloAlto, Austin, Washington, Chicago, SanJose, SanDiego, Dallas,
+  target_devices: [Jackson, PaloAlto, Austin, Washington, Chicago, SanJose, SanDiego, Dallas,
     Houston, Baltimore, Cleveland, Cincinnati, Minneapolis, Sacramento, SanFrancisco,
     Oakland, Denver]
   dict_match: {}
@@ -4699,7 +4699,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -4737,7 +4737,7 @@
   description: ''
   device_query: ''
   device_query_property: ip_address
-  devices: [Washington, Austin]
+  target_devices: [Washington, Austin]
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -4776,7 +4776,7 @@
       alignment: left
       content: "Set the following variables in the payload :\r\n- Interfaces 1: ['Loopback101',\
         \ 'Loopback15'] for \"Washington\"\r\notherwise ['Loopback9', 'Loopback1000']\r\
-        \n- Derived Devices: [\"Washington\", \"Austin\"] for any device\r\n- Interfaces\
+        \n- Derived target_devices: [\"Washington\", \"Austin\"] for any device\r\n- Interfaces\
         \ 2: ['Loopback333', 'Loopback334'] for any device"
       positions: [-118, -61]
     fbd0224f-eae2-461b-bfc5-9de385e078f0:
@@ -4797,7 +4797,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -4837,7 +4837,7 @@
   description: ''
   device_query: ''
   device_query_property: ip_address
-  devices: [Washington]
+  target_devices: [Washington]
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -4863,7 +4863,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions:
     '[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow of Workflow': [
       135, 187]
@@ -4913,7 +4913,7 @@
   description: ''
   device_query: ''
   device_query_property: ip_address
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -4939,7 +4939,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow F: Workflow of Workflows': [164, 375]
   postprocessing: ''
@@ -4979,7 +4979,7 @@
   description: ''
   device_query: ''
   device_query_property: ip_address
-  devices: [Washington]
+  target_devices: [Washington]
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -5005,7 +5005,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow F: Workflow of Workflows': [-655, 369]
   postprocessing: ''
@@ -5053,7 +5053,7 @@
   description: ''
   device_query: ''
   device_query_property: name
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   driver: a10
@@ -5089,7 +5089,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow F: Workflow of Workflows': [-408, 34]
   postprocessing: ''
@@ -5147,7 +5147,7 @@
   description: ''
   device_query: ''
   device_query_property: name
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   driver: a10
@@ -5182,7 +5182,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [Washington]
+  target_pools: [Washington]
   positions:
     'Regression Workflow 9: Operational Data Backup': [-125, 15]
   postprocessing: ''
@@ -5234,7 +5234,7 @@
   description: ''
   device_query: ''
   device_query_property: name
-  devices: [Washington, Austin]
+  target_devices: [Washington, Austin]
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -5259,7 +5259,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -5299,7 +5299,7 @@
   description: ''
   device_query: ''
   device_query_property: name
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -5325,7 +5325,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow G: run methods (BFS)': [-296, -98]
   postprocessing: ''
@@ -5362,7 +5362,7 @@
   description: ''
   device_query: ''
   device_query_property: name
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -5389,7 +5389,7 @@
   operating_system: ''
   params: {}
   payload: {}
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow G: run methods (BFS)': [-135, 189]
   postprocessing: ''
@@ -5427,7 +5427,7 @@
   description: ''
   device_query: ''
   device_query_property: name
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -5453,7 +5453,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow G: run methods (BFS)': [123, -96]
   postprocessing: ''
@@ -5491,7 +5491,7 @@
   description: ''
   device_query: ''
   device_query_property: name
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -5519,7 +5519,7 @@
   operating_system: ''
   params: {}
   payload: {}
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow G: run methods (BFS)': [254, 163]
   postprocessing: ''
@@ -5557,7 +5557,7 @@
   description: ''
   device_query: ''
   device_query_property: name
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -5582,7 +5582,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow G: run methods (BFS)': [622, -89]
   postprocessing: ''
@@ -5625,7 +5625,7 @@
   description: ''
   device_query: ''
   device_query_property: name
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   driver: a10
@@ -5662,7 +5662,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions:
     '[Regression Workflow G: run methods (BFS)] Workflow  in device by device mode': [
       248, -94]
@@ -5710,7 +5710,7 @@
   description: ''
   device_query: ''
   device_query_property: name
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   driver: a10
@@ -5747,7 +5747,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions:
     '[Regression Workflow G: run methods (BFS)] Workflow in service by service mode (workflow targets)': [
       239, -108]
@@ -5795,7 +5795,7 @@
   description: ''
   device_query: ''
   device_query_property: name
-  devices: [Philadelphia, LosAngeles]
+  target_devices: [Philadelphia, LosAngeles]
   dict_match: {}
   display_only_failed_nodes: false
   driver: a10
@@ -5832,7 +5832,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions:
     '[Regression Workflow G: run methods (BFS)] Workflow in service targets mode': [
       234, -86]
@@ -5874,7 +5874,7 @@
   description: ''
   device_query: ''
   device_query_property: name
-  devices: [PaloAlto]
+  target_devices: [PaloAlto]
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -5921,7 +5921,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -5958,7 +5958,7 @@
   description: ''
   device_query: ''
   device_query_property: name
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -5984,7 +5984,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow H: shared service in multiple subworkflows': [-241, 197]
   postprocessing: ''
@@ -6021,7 +6021,7 @@
   description: ''
   device_query: ''
   device_query_property: name
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -6047,7 +6047,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow H: shared service in multiple subworkflows': [548, 48]
   postprocessing: ''
@@ -6090,7 +6090,7 @@
   description: ''
   device_query: ''
   device_query_property: name
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   driver: a10
@@ -6126,7 +6126,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions:
     '[Regression Workflow H: shared service in multiple subworkflows] Subworkflow 1': [
       167, -185]
@@ -6170,7 +6170,7 @@
   description: ''
   device_query: ''
   device_query_property: name
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -6197,7 +6197,7 @@
   options: {}
   pass_device_properties: false
   playbook_path: /media/sf_shared/eNMS/files/playbooks/simple_playbook.yml
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow 6: Ansible with Validation': [-536, 192]
   postprocessing: ''
@@ -6231,7 +6231,7 @@
   description: ''
   device_query: ''
   device_query_property: name
-  devices: [Washington]
+  target_devices: [Washington]
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -6256,7 +6256,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -6292,7 +6292,7 @@
   description: ''
   device_query: ''
   device_query_property: name
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -6316,7 +6316,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow I: Iteration Targets Advanced': [132, -202]
   postprocessing: ''
@@ -6359,7 +6359,7 @@
   description: ''
   device_query: ''
   device_query_property: name
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   driver: arista_eos
@@ -6395,7 +6395,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow I: Iteration Targets Advanced': [135, 100]
   postprocessing: ''
@@ -6436,7 +6436,7 @@
   description: ''
   device_query: ''
   device_query_property: name
-  devices: [Washington]
+  target_devices: [Washington]
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -6461,7 +6461,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -6497,7 +6497,7 @@
   description: ''
   device_query: ''
   device_query_property: name
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -6521,7 +6521,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow J: Workflow and Subworkflow Iteration': [226, -76]
   postprocessing: ''
@@ -6557,7 +6557,7 @@
   description: ''
   device_query: ''
   device_query_property: name
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -6582,7 +6582,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow J: Workflow and Subworkflow Iteration': [218, 171]
   postprocessing: ''
@@ -6618,7 +6618,7 @@
   description: ''
   device_query: ''
   device_query_property: name
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -6643,7 +6643,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions:
     '[Regression Workflow J: Workflow and Subworkflow Iteration] Subworkflow Iteration': [
       231, -87]
@@ -6679,7 +6679,7 @@
   description: ''
   device_query: ''
   device_query_property: name
-  devices: []
+  target_devices: []
   dict_match:
     value: [1.1.1.1, 2.2.2.2, 3.3.3.3]
   display_only_failed_nodes: false
@@ -6706,7 +6706,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions:
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow 7: Payload Extraction & Validation'
@@ -6745,7 +6745,7 @@
   description: ''
   device_query: ''
   device_query_property: name
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -6771,7 +6771,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions:
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow 7: Payload Extraction & Validation'
@@ -6809,7 +6809,7 @@
   description: ''
   device_query: ''
   device_query_property: name
-  devices: []
+  target_devices: []
   dict_match:
     value: [1.1.1.1, 2.2.2.2, 3.3.3.3]
   display_only_failed_nodes: false
@@ -6836,7 +6836,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions:
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow 7: Payload Extraction & Validation'
@@ -6874,7 +6874,7 @@
   description: ''
   device_query: ''
   device_query_property: name
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -6900,7 +6900,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions:
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow 7: Payload Extraction & Validation'
@@ -6937,7 +6937,7 @@
   description: ''
   device_query: ''
   device_query_property: name
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -6963,7 +6963,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions:
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow 8: Payload Extraction with Operations'
@@ -7000,7 +7000,7 @@
   description: ''
   device_query: ''
   device_query_property: name
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -7026,7 +7026,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions:
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow 8: Payload Extraction with Operations'
@@ -7064,7 +7064,7 @@
   description: ''
   device_query: ''
   device_query_property: name
-  devices: [Washington, Chicago]
+  target_devices: [Washington, Chicago]
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -7107,7 +7107,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -7144,7 +7144,7 @@
   description: ''
   device_query: ''
   device_query_property: name
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -7168,7 +7168,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow K: preprocessing and postprocessing': [-26, 123]
   postprocessing: "results[\"postprocessing\"] = f\"Value set with postprocessing\
@@ -7207,7 +7207,7 @@
   description: ''
   device_query: ''
   device_query_property: name
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -7232,7 +7232,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow K: preprocessing and postprocessing': [558, 152]
   postprocessing: "results[\"SHOULD BE THERE\"] = \"NO BUG\"\r\n\r\nresults[\"func_result\"\
@@ -7267,7 +7267,7 @@
   description: ''
   device_query: ''
   device_query_property: name
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -7291,7 +7291,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow L: superworkflow': [511, -111]
   postprocessing: ''
@@ -7326,7 +7326,7 @@
   description: ''
   device_query: ''
   device_query_property: name
-  devices: [SanJose, SanDiego]
+  target_devices: [SanJose, SanDiego]
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -7351,7 +7351,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -7390,7 +7390,7 @@
   description: ''
   device_query: ''
   device_query_property: name
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -7420,7 +7420,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -7462,7 +7462,7 @@
   description: ''
   device_query: ''
   device_query_property: name
-  devices: [Washington, LosAngeles]
+  target_devices: [Washington, LosAngeles]
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -7487,7 +7487,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow M: Unix command & shell, ping, - jump on connect - mechanism': [
       -177, -94]
@@ -7528,7 +7528,7 @@
   description: ''
   device_query: ''
   device_query_property: name
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   driver: linux
@@ -7558,7 +7558,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow M: Unix command & shell, ping, - jump on connect - mechanism': [
       -113, 220]
@@ -7605,7 +7605,7 @@
   description: ''
   device_query: ''
   device_query_property: name
-  devices: [Washington]
+  target_devices: [Washington]
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -7631,7 +7631,7 @@
   number_of_retries: 0
   operating_system: ''
   packet_size: 56
-  pools: []
+  target_pools: []
   ports: '22'
   positions:
     'Regression Workflow M: Unix command & shell, ping, - jump on connect - mechanism': [
@@ -7671,7 +7671,7 @@
   description: ''
   device_query: ''
   device_query_property: name
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -7696,7 +7696,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -7731,7 +7731,7 @@
   description: ''
   device_query: ''
   device_query_property: name
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -7759,10 +7759,10 @@
   notification_header: ''
   number_of_retries: 0
   opennms_address: https://demo.opennms.org/opennms/rest
-  opennms_devices: https://demo.opennms.org/opennms/rest/nodes
+  opennms_target_devices: https://demo.opennms.org/opennms/rest/nodes
   opennms_login: demo
   operating_system: ''
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow N: Topology Import (netbox, librenms, opennms)': [113, -104]
   postprocessing: ''
@@ -7802,7 +7802,7 @@
   description: ''
   device_query: ''
   device_query_property: name
-  devices: [Washington]
+  target_devices: [Washington]
   dict_match: {}
   display_only_failed_nodes: false
   driver: a10
@@ -7839,7 +7839,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow M: Unix command & shell, ping, - jump on connect - mechanism': [
       358, 190]
@@ -7882,7 +7882,7 @@
   description: Use REST call is_alive
   device_query: ''
   device_query_property: ip_address
-  devices: [Columbus]
+  target_devices: [Columbus]
   dict_match: {}
   display_only_failed_nodes: true
   events: []
@@ -7911,7 +7911,7 @@
   payload:
     a: b
     c: ['1', '2', '3']
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow L: superworkflow': [227, 151]
   postprocessing: ''
@@ -7955,7 +7955,7 @@
   description: ''
   device_query: ''
   device_query_property: name
-  devices: [Boston, Baltimore, Columbus, Cambridge, Cincinnati, Cleveland, Chicago]
+  target_devices: [Boston, Baltimore, Columbus, Cambridge, Cincinnati, Cleveland, Chicago]
   dict_match: {}
   display_only_failed_nodes: false
   driver: a10
@@ -7991,7 +7991,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -8048,7 +8048,7 @@
   description: ''
   device_query: ''
   device_query_property: name
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   driver: a10
@@ -8083,7 +8083,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow 9: Operational Data Backup': [-455, 15]
   postprocessing: ''
@@ -8136,7 +8136,7 @@
   description: ''
   device_query: ''
   device_query_property: name
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -8161,7 +8161,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow 9: Operational Data Backup': [148, 191]
   postprocessing: ''
@@ -8198,7 +8198,7 @@
   description: ''
   device_query: ''
   device_query_property: name
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -8222,7 +8222,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow L: superworkflow': [606, 47]
   postprocessing: ''
@@ -8259,7 +8259,7 @@
   description: ''
   device_query: ''
   device_query_property: name
-  devices: [Washington]
+  target_devices: [Washington]
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -8284,7 +8284,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -8326,7 +8326,7 @@
   description: ''
   device_query: ''
   device_query_property: name
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   driver: cisco_iosxe
@@ -8351,7 +8351,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow O: Scrapli': [-33, -167]
   postprocessing: results["success"] = "TEST-VRF" not in results["result"]
@@ -8393,7 +8393,7 @@
   description: ''
   device_query: ''
   device_query_property: name
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   driver: arista_eos
@@ -8419,7 +8419,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow O: Scrapli': [402, -161]
   postprocessing: ''
@@ -8461,7 +8461,7 @@
   description: ''
   device_query: ''
   device_query_property: name
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   driver: cisco_iosxe
@@ -8487,7 +8487,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow O: Scrapli': [6, 112]
   postprocessing: results["success"] = "TEST-VRF" in results["result"]
@@ -8529,7 +8529,7 @@
   description: ''
   device_query: ''
   device_query_property: name
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   driver: arista_eos
@@ -8555,7 +8555,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow O: Scrapli': [373, 107]
   postprocessing: ''
@@ -8594,7 +8594,7 @@
   description: ''
   device_query: ''
   device_query_property: name
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -8619,7 +8619,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects, Devices only, Links only, Datacenter San Francisco, Datacenter
+  target_pools: [All objects, Devices only, Links only, Datacenter San Francisco, Datacenter
       New York, Datacenter Chicago, Washington, Links 6 through 9 - Public pools,
     Links 0 through 5 - Non-public pool - Access set up]
   positions: {}
@@ -8677,7 +8677,7 @@
   description: Use REST call is_alive
   device_query: ''
   device_query_property: ip_address
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: true
   events: []
@@ -8707,7 +8707,7 @@
   payload:
     a: b
     c: ['1', '2', '3']
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow 2: Separate Failure - Success paths': [374, 278]
     'Regression Workflow 3: Napalm getters (postprocessing)': ['-50', '0']
@@ -8753,7 +8753,7 @@
   description: Use REST call is_alive
   device_query: ''
   device_query_property: ip_address
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: true
   events: []
@@ -8783,7 +8783,7 @@
   payload:
     a: b
     c: ['1', '2', '3']
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow P: large workflow (scalability)': &id017 [-406, 73]
     'Regression workflow P: large workflow (scalability)': *id017
@@ -8823,7 +8823,7 @@
   description: Use REST call is_alive
   device_query: ''
   device_query_property: ip_address
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: true
   events: []
@@ -8853,7 +8853,7 @@
   payload:
     a: b
     c: ['1', '2', '3']
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow P: large workflow (scalability)': &id018 [-402, 156]
     'Regression workflow P: large workflow (scalability)': *id018
@@ -8893,7 +8893,7 @@
   description: Use REST call is_alive
   device_query: ''
   device_query_property: ip_address
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: true
   events: []
@@ -8923,7 +8923,7 @@
   payload:
     a: b
     c: ['1', '2', '3']
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow P: large workflow (scalability)': &id019 [-94, 200]
     'Regression workflow P: large workflow (scalability)': *id019
@@ -8963,7 +8963,7 @@
   description: Use REST call is_alive
   device_query: ''
   device_query_property: ip_address
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: true
   events: []
@@ -8993,7 +8993,7 @@
   payload:
     a: b
     c: ['1', '2', '3']
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow P: large workflow (scalability)': &id020 [-94, 109]
     'Regression workflow P: large workflow (scalability)': *id020
@@ -9039,7 +9039,7 @@
   description: ''
   device_query: ''
   device_query_property: name
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   driver: a10
@@ -9076,7 +9076,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow P: large workflow (scalability)': &id021 [-117, 5]
     'Regression workflow P: large workflow (scalability)': *id021
@@ -9125,7 +9125,7 @@
   description: ''
   device_query: ''
   device_query_property: name
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   driver: a10
@@ -9162,7 +9162,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow P: large workflow (scalability)': &id022 [-81, -125]
     'Regression workflow P: large workflow (scalability)': *id022
@@ -9211,7 +9211,7 @@
   description: ''
   device_query: ''
   device_query_property: name
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   driver: a10
@@ -9248,7 +9248,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow P: large workflow (scalability)': &id023 [-89, -196]
     'Regression workflow P: large workflow (scalability)': *id023
@@ -9297,7 +9297,7 @@
   description: ''
   device_query: ''
   device_query_property: name
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   driver: a10
@@ -9334,7 +9334,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow P: large workflow (scalability)': &id024 [183, -222]
     'Regression workflow P: large workflow (scalability)': *id024
@@ -9383,7 +9383,7 @@
   description: ''
   device_query: ''
   device_query_property: name
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   driver: a10
@@ -9420,7 +9420,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow P: large workflow (scalability)': &id025 [188, -130]
     'Regression workflow P: large workflow (scalability)': *id025
@@ -9469,7 +9469,7 @@
   description: ''
   device_query: ''
   device_query_property: name
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   driver: a10
@@ -9506,7 +9506,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow P: large workflow (scalability)': &id026 [190, -36]
     'Regression workflow P: large workflow (scalability)': *id026
@@ -9548,7 +9548,7 @@
   description: ''
   device_query: ''
   device_query_property: name
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -9572,7 +9572,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow P: large workflow (scalability)': &id027 [194, 47]
     'Regression workflow P: large workflow (scalability)': *id027
@@ -9609,7 +9609,7 @@
   description: ''
   device_query: ''
   device_query_property: name
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -9633,7 +9633,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow P: large workflow (scalability)': &id028 [203, 127]
     'Regression workflow P: large workflow (scalability)': *id028
@@ -9670,7 +9670,7 @@
   description: ''
   device_query: ''
   device_query_property: name
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -9694,7 +9694,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow P: large workflow (scalability)': &id029 [207, 230]
     'Regression workflow P: large workflow (scalability)': *id029
@@ -9731,7 +9731,7 @@
   description: ''
   device_query: ''
   device_query_property: name
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -9755,7 +9755,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow P: large workflow (scalability)': &id030 [476, 232]
     'Regression workflow P: large workflow (scalability)': *id030
@@ -9792,7 +9792,7 @@
   description: ''
   device_query: ''
   device_query_property: name
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -9816,7 +9816,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow P: large workflow (scalability)': &id031 [471, 142]
     'Regression workflow P: large workflow (scalability)': *id031
@@ -9853,7 +9853,7 @@
   description: ''
   device_query: ''
   device_query_property: name
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -9877,7 +9877,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow P: large workflow (scalability)': &id032 [476, 44]
     'Regression workflow P: large workflow (scalability)': *id032
@@ -9914,7 +9914,7 @@
   description: ''
   device_query: ''
   device_query_property: name
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -9938,7 +9938,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow P: large workflow (scalability)': &id033 [469, -50]
     'Regression workflow P: large workflow (scalability)': *id033
@@ -9975,7 +9975,7 @@
   description: ''
   device_query: ''
   device_query_property: name
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -9999,7 +9999,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow P: large workflow (scalability)': &id034 [467, -163]
     'Regression workflow P: large workflow (scalability)': *id034
@@ -10037,7 +10037,7 @@
   description: ''
   device_query: ''
   device_query_property: name
-  devices: [Washington]
+  target_devices: [Washington]
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -10062,7 +10062,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -10109,7 +10109,7 @@
   description: ''
   device_query: ''
   device_query_property: name
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   driver: a10
@@ -10145,7 +10145,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow Q: File transfer': [-171, -148]
   postprocessing: results["success"] = "a.bin" not in results["result"]
@@ -10187,7 +10187,7 @@
   destination_file: enms_files/a.bin
   device_query: ''
   device_query_property: name
-  devices: []
+  target_devices: []
   dict_match: {}
   direction: put
   display_only_failed_nodes: false
@@ -10216,7 +10216,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow Q: File transfer': [-21, 255]
   postprocessing: ''
@@ -10262,7 +10262,7 @@
   description: ''
   device_query: ''
   device_query_property: name
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   driver: a10
@@ -10298,7 +10298,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow Q: File transfer': [362, 239]
   postprocessing: "simple_file = \"a.bin\" in results[\"result\"]\r\nglob_files =\
@@ -10342,7 +10342,7 @@
   destination_file: enms_files
   device_query: ''
   device_query_property: name
-  devices: [Washington]
+  target_devices: [Washington]
   dict_match: {}
   direction: put
   display_only_failed_nodes: false
@@ -10372,7 +10372,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow Q: File transfer': [187, -140]
   postprocessing: ''
@@ -10418,7 +10418,7 @@
   description: ''
   device_query: ''
   device_query_property: name
-  devices: [Washington]
+  target_devices: [Washington]
   dict_match: {}
   display_only_failed_nodes: false
   driver: a10
@@ -10454,7 +10454,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow Q: File transfer': [517, -138]
   postprocessing: ''
@@ -10496,7 +10496,7 @@
   destination_file: enms_files
   device_query: ''
   device_query_property: name
-  devices: []
+  target_devices: []
   dict_match: {}
   direction: put
   display_only_failed_nodes: false
@@ -10525,7 +10525,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow Q: File transfer': [-332, 180]
   postprocessing: ''
@@ -10565,7 +10565,7 @@
   description: ''
   device_query: ''
   device_query_property: name
-  devices: [Austin, Washington, Chicago]
+  target_devices: [Austin, Washington, Chicago]
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -10590,7 +10590,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -10628,7 +10628,7 @@
   description: ''
   device_query: ''
   device_query_property: name
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -10653,7 +10653,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow R: skip services in service by service mode': &id035 [-124,
       -154]
@@ -10695,7 +10695,7 @@
   description: ''
   device_query: ''
   device_query_property: name
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -10719,7 +10719,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow R: skip services in service by service mode': &id036 [304,
       -102]
@@ -10761,7 +10761,7 @@
   description: ''
   device_query: ''
   device_query_property: name
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -10786,7 +10786,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow R: skip services in service by service mode': &id037 [12,
       179]
@@ -10829,7 +10829,7 @@
   description: ''
   device_query: ''
   device_query_property: name
-  devices: [PaloAlto, Austin, Washington]
+  target_devices: [PaloAlto, Austin, Washington]
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -10866,7 +10866,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -10907,7 +10907,7 @@
   description: ''
   device_query: ''
   device_query_property: name
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -10932,7 +10932,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow S: conditional skip query with skip value set to False': &id038 [
       -149, -30]
@@ -10974,7 +10974,7 @@
   description: ''
   device_query: ''
   device_query_property: name
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -10999,7 +10999,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow S: conditional skip query with skip value set to False': &id039 [
       264, -16]
@@ -11041,7 +11041,7 @@
   description: ''
   device_query: ''
   device_query_property: name
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -11066,7 +11066,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow S: conditional skip query with skip value set to False': &id040 [
       208, 194]
@@ -11108,7 +11108,7 @@
   description: ''
   device_query: ''
   device_query_property: name
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -11133,7 +11133,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow S: conditional skip query with skip value set to False': &id041 [
       636, 63]
@@ -11176,7 +11176,7 @@
   description: ''
   device_query: ''
   device_query_property: name
-  devices: [Dallas]
+  target_devices: [Dallas]
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -11223,7 +11223,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -11260,7 +11260,7 @@
   description: ''
   device_query: ''
   device_query_property: name
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -11284,7 +11284,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow 1: link neighbors mechanism': &id042 [-20, 30]
     'Regression Workflow 4: link neighbors mechanism': *id042
@@ -11347,7 +11347,7 @@
   description: ''
   device_query: ''
   device_query_property: name
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -11375,7 +11375,7 @@
   operating_system: ''
   params: {}
   payload: {}
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow 1: link neighbors mechanism': &id043 [401, -181]
     'Regression Workflow 4: link neighbors mechanism': *id043
@@ -11422,7 +11422,7 @@
   description: ''
   device_query: ''
   device_query_property: name
-  devices: []
+  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   driver: a10
@@ -11458,7 +11458,7 @@
   notification_header: ''
   number_of_retries: 2
   operating_system: ''
-  pools: []
+  target_pools: []
   positions:
     'Regression Workflow 1: Netmiko with validation and retries': [-142, -137]
     'Regression Workflow D: Prompts': [-291, -104]

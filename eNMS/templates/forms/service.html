@@ -178,6 +178,17 @@
                   {{ form.log_level(id=form_type + '-log_level', class="form-control
                   add-id") }}
                 </div>
+                <fieldset>
+                  <div class="item">
+                    <input
+                      id="{{ form_type }}-disable_result_creation"
+                      name="disable_result_creation"
+                      class="add-id"
+                      type="checkbox"
+                    />
+                    <label>Disable Result Creation</label>
+                  </div>
+                </fieldset>
               </div>
             </div>
           </div>

@@ -75,20 +75,92 @@
     "workflow_edge": ["id", "source_id", "destination_id", "workflow_id"]
   },
   "many_to_many_relationships": [
-    ["access", "group"],
-    ["access", "pool"],
-    ["access", "service"],
-    ["access", "user"],
-    ["pool", "device"],
-    ["pool", "link"],
-    ["pool", "service"],
-    ["pool", "user"],
-    ["run", "device"],
-    ["run", "pool"],
-    ["service", "workflow"],
-    ["task", "device"],
-    ["task", "pool"],
-    ["user", "group"]
+    [
+      {
+        "model": "access"
+      },
+      { "model": "group" }
+    ],
+    [
+      {
+        "model": "access"
+      },
+      { "model": "pool" }
+    ],
+    [
+      {
+        "model": "access"
+      },
+      { "model": "service" }
+    ],
+    [
+      {
+        "model": "access"
+      },
+      { "model": "user" }
+    ],
+    [
+      {
+        "model": "pool"
+      },
+      { "model": "device" }
+    ],
+    [
+      {
+        "model": "pool"
+      },
+      { "model": "link" }
+    ],
+    [
+      {
+        "model": "pool"
+      },
+      { "model": "service" }
+    ],
+    [
+      {
+        "model": "pool"
+      },
+      { "model": "user" }
+    ],
+    [
+      {
+        "model": "run",
+        "kwargs": { "ondelete": "cascade" }
+      },
+      { "model": "device" }
+    ],
+    [
+      {
+        "model": "run",
+        "kwargs": { "ondelete": "cascade" }
+      },
+      { "model": "pool" }
+    ],
+    [
+      {
+        "model": "service"
+      },
+      { "model": "workflow" }
+    ],
+    [
+      {
+        "model": "task"
+      },
+      { "model": "device" }
+    ],
+    [
+      {
+        "model": "task"
+      },
+      { "model": "pool" }
+    ],
+    [
+      {
+        "model": "user"
+      },
+      { "model": "group" }
+    ]
   ],
   "private_properties": [
     "password",

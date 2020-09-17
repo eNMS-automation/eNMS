@@ -524,7 +524,7 @@ tables.pool = class PoolTable extends Table {
     row.objectNumber = "";
     for (const model of ["device", "link", "service", "user"]) {
       row.objectNumber += `${row[`${model}_number`]} ${model}s`;
-      if (model !== "user") row.objectNumber += " - "
+      if (model !== "user") row.objectNumber += " - ";
     }
     return row;
   }

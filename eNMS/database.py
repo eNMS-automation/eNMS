@@ -219,16 +219,17 @@ class Database:
                 )
 
     def configure_associations(self):
-        for model1, model2 in self.many_to_many_relationships:
-            kw = {"ondelete": "cascade"} if model1 == "run" else {}
+        for r1, r2 in self.many_to_many_relationships:
+            model1, model2 = r1["model"], r2["model"]
+            kwargs1, kwargs2 = r1["kwargs"], r2["kwargs"]
             setattr(
                 self,
                 f"{model1}_{model2}_table",
                 Table(
                     f"{model1}_{model2}_association",
                     self.base.metadata,
-                    Column(f"{model1}_id", Integer, ForeignKey(f"{model1}.id", **kw)),
-                    Column(f"{model2}_id", Integer, ForeignKey(f"{model2}.id")),
+                    Column(f"{model1}_id", Integer, ForeignKey(f"{model1}.id", **kwargs1)),
+                    Column(f"{model2}_id", Integer, ForeignKey(f"{model2}.id", **kwargs2)),
                 ),
             )
         self.originals_association = Table(

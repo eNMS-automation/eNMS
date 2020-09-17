@@ -521,7 +521,11 @@ tables.link = class LinkTable extends Table {
 tables.pool = class PoolTable extends Table {
   addRow(properties) {
     let row = super.addRow(properties);
-    row.objectNumber = `${row.device_number} devices - ${row.link_number} links - ${row.service_number} services`;
+    row.objectNumber = "";
+    for (const model of ["device", "link", "service", "user"]) {
+      row.objectNumber += `${row[`${model}_number`]} ${model}s`;
+      if (model !== "user") row.objectNumber += " - "
+    }
     return row;
   }
 

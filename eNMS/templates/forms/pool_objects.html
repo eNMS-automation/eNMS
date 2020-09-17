@@ -6,22 +6,16 @@
 >
   {{ form.hidden_tag() }}
   <div class="modal-body">
-    <label>Devices</label>
+    {% for model in form.models %}
+    <label>{{ model|capitalize }}</label>
     <div class="form-group">
-      {{ form.devices(class="form-control add-id") }}
+      {{ form[model](class="form-control add-id") }}
     </div>
-    <label>Links</label>
+    <label>Define {{ model }} from string</label>
     <div class="form-group">
-      {{ form.links(class="form-control add-id") }}
+      {{ form["string_" + model](class="form-control add-id") }}
     </div>
-    <label>Define devices from string</label>
-    <div class="form-group">
-      {{ form.string_devices(class="form-control add-id") }}
-    </div>
-    <label>Define links from string</label>
-    <div class="form-group">
-      {{ form.string_links(class="form-control add-id") }}
-    </div>
+    {% endfor %}
   </div>
   <div class="modal-footer">
     <button

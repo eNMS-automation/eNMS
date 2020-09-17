@@ -1131,6 +1131,8 @@ class Run(AbstractBase):
         variables.update(
             {
                 "__builtins__": {**builtins, "__import__": _self._import},
+                "fetch": db.fetch,
+                "fetch_all": db.fetch_all,
                 "send_email": app.send_email,
                 "settings": app.settings,
                 "devices": _self.devices,

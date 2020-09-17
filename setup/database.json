@@ -141,6 +141,18 @@
       {
         "model": "service"
       },
+      { "model": "device" }
+    ],
+    [
+      {
+        "model": "service"
+      },
+      { "model": "pool" }
+    ],
+    [
+      {
+        "model": "service"
+      },
       { "model": "workflow" }
     ],
     [

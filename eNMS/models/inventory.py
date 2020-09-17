@@ -316,7 +316,7 @@ class Pool(AbstractBase):
     operator = db.Column(db.SmallString, default="all")
     latitude = db.Column(db.SmallString, default="0.0")
     longitude = db.Column(db.SmallString, default="0.0")
-    services = relationship(
+    target_services = relationship(
         "Service", secondary=db.service_target_pool_table, back_populates="target_pools"
     )
     visualization_default = db.Column(Boolean)

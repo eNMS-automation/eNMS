@@ -61,19 +61,19 @@
           </tr>
         </thead>
         <tbody>
-          {% for property in form[model + "_properties"] %}
-          {% set property_name = "{}_{}".format(model, property) %}
+          {% for property in form[model + "_properties"] %} {% set property_name =
+          "{}_{}".format(model, property) %}
           <tr>
             <td>
               {{ names.get(property, property.replace("_", " ").capitalize() ) }}
             </td>
             <td>
-              {{ form[property_name](id="pool-" + property_name,
-              class="form-control add-id") }}
+              {{ form[property_name](id="pool-" + property_name, class="form-control
+              add-id") }}
             </td>
             <td>
-              {{ form[property_name + '_match'](id="pool-" + property_name
-              + '_match', class="form-control add-id") }}
+              {{ form[property_name + '_match'](id="pool-" + property_name + '_match',
+              class="form-control add-id") }}
             </td>
           </tr>
           {% endfor %}

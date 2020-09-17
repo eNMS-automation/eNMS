@@ -79,7 +79,10 @@ class Service(AbstractBase):
         "Device", secondary=db.service_target_device_table, back_populates="services"
     )
     target_pools = relationship(
-        "Pool", secondary=db.service_target_pool_table, back_populates="services"
+        "Pool", secondary=db.service_target_pool_table, back_populates="target_services"
+    )
+    pools = relationship(
+        "Pool", secondary=db.pool_service_table, back_populates="services"
     )
     access = relationship(
         "Access", secondary=db.access_service_table, back_populates="services"

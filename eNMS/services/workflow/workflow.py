@@ -114,7 +114,7 @@ class Workflow(Service):
         visited, success, targets = set(), False, defaultdict(set)
         restart_run = run.restart_run
         for service in services:
-            targets[service.name] |= {device.name for device in run.devices}
+            targets[service.name] |= {device.name for device in run.target_devices}
         while services:
             if run.stop:
                 return {"payload": payload, "success": False}
@@ -133,7 +133,7 @@ class Workflow(Service):
                 }
             else:
                 kwargs = {
-                    "devices": [
+                    "target_devices": [
                         db.fetch("device", name=name).id
                         for name in targets[service.name]
                     ],
@@ -220,7 +220,7 @@ class Workflow(Service):
                 if run.parent_device_id:
                     kwargs["parent_device"] = run.parent_device_id
                 if device:
-                    kwargs["devices"] = [device.id]
+                    kwargs["target_devices"] = [device.id]
                 service_run = db.factory("run", commit=True, **kwargs)
                 results = service_run.run(payload)
             if not device:

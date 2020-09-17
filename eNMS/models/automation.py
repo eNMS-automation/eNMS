@@ -353,10 +353,10 @@ class Run(AbstractBase):
     path = db.Column(db.SmallString)
     parent_device_id = db.Column(Integer, ForeignKey("device.id"))
     parent_device = relationship("Device", foreign_keys="Run.parent_device_id")
-    devices = relationship(
+    target_devices = relationship(
         "Device", secondary=db.run_device_table, back_populates="runs"
     )
-    pools = relationship("Pool", secondary=db.run_pool_table, back_populates="runs")
+    target_pools = relationship("Pool", secondary=db.run_pool_table, back_populates="runs")
     service_id = db.Column(Integer, ForeignKey("service.id"))
     service = relationship(
         "Service", back_populates="runs", foreign_keys="Run.service_id"
@@ -512,8 +512,8 @@ class Run(AbstractBase):
 
     def compute_devices(self, payload):
         service = self.placeholder or self.service
-        devices = set(self.devices)
-        for pool in self.pools:
+        devices = set(self.target_devices)
+        for pool in self.target_pools:
             devices |= set(pool.devices)
         if not devices:
             if service.device_query:
@@ -522,8 +522,8 @@ class Run(AbstractBase):
                     service.device_query_property,
                     payload=payload,
                 )
-            devices |= set(service.devices)
-            for pool in service.pools:
+            devices |= set(service.target_devices)
+            for pool in service.target_pools:
                 if self.update_pools:
                     pool.compute_pool()
                 devices |= set(pool.devices)
@@ -606,7 +606,7 @@ class Run(AbstractBase):
             results["trigger"] = self.trigger
             if (
                 self.runtime == self.parent_runtime
-                or len(self.devices) > 1
+                or len(self.target_devices) > 1
                 or self.run_method == "once"
             ):
                 results = self.create_result(results)
@@ -659,10 +659,10 @@ class Run(AbstractBase):
         return success
 
     def device_run(self, payload):
-        self.devices = self.compute_devices(payload)
+        self.target_devices = self.compute_devices(payload)
         if self.runtime == self.parent_runtime:
             allowed_targets = db.query("device", rbac="target", username=self.creator)
-            unauthorized_targets = set(self.devices) - set(allowed_targets)
+            unauthorized_targets = set(self.target_devices) - set(allowed_targets)
             if unauthorized_targets:
                 result = (
                     f"Error 403: User '{self.creator}' is not allowed to use these"
@@ -671,13 +671,13 @@ class Run(AbstractBase):
                 self.log("info", result, logger="security")
                 return {"result": result, "success": False}
         if self.run_method != "once":
-            self.write_state("progress/device/total", len(self.devices), "increment")
+            self.write_state("progress/device/total", len(self.target_devices), "increment")
         if self.iteration_devices and not self.parent_device:
             if not self.workflow:
                 result = "Device iteration not allowed outside of a workflow"
                 return {"success": False, "result": result, "runtime": self.runtime}
             summary = {"failure": [], "success": []}
-            for device in self.devices:
+            for device in self.target_devices:
                 key = "success" if self.device_iteration(payload, device) else "failure"
                 summary[key].append(device.name)
             return {
@@ -688,26 +688,26 @@ class Run(AbstractBase):
         elif self.run_method != "per_device":
             return self.get_results(payload)
         else:
-            if self.parent_runtime == self.runtime and not self.devices:
+            if self.parent_runtime == self.runtime and not self.target_devices:
                 error = (
                     "The service 'Run method' is set to 'Per device' mode, "
                     "but no targets have been selected (in Step 3 > Targets)."
                 )
                 self.log("error", error)
                 return {"success": False, "runtime": self.runtime, "result": error}
-            if self.multiprocessing and len(self.devices) > 1:
+            if self.multiprocessing and len(self.target_devices) > 1:
                 results = []
-                processes = min(len(self.devices), self.max_processes)
+                processes = min(len(self.target_devices), self.max_processes)
                 process_args = [
                     (device.id, self.runtime, payload, results)
-                    for device in self.devices
+                    for device in self.target_devices
                 ]
                 with ThreadPool(processes=processes) as pool:
                     pool.map(self.get_device_result, process_args)
             else:
                 results = [
                     self.get_results(payload, device, commit=False)
-                    for device in self.devices
+                    for device in self.target_devices
                 ]
             return {
                 "success": all(result["success"] for result in results),
@@ -933,7 +933,7 @@ class Run(AbstractBase):
         file_content = deepcopy(notification)
         if self.include_device_results:
             file_content["Device Results"] = {}
-            for device in self.devices:
+            for device in self.target_devices:
                 device_result = db.fetch(
                     "result",
                     service_id=self.service_id,
@@ -1136,7 +1136,7 @@ class Run(AbstractBase):
                 "__builtins__": {**builtins, "__import__": _self._import},
                 "send_email": app.send_email,
                 "settings": app.settings,
-                "devices": _self.devices,
+                "devices": _self.target_devices,
                 "get_var": partial(_self.get_var, payload),
                 "get_result": _self.get_result,
                 "log": _self.log,

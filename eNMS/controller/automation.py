@@ -408,8 +408,8 @@ class AutomationController(BaseController):
                 "start_services",
                 "runtime",
                 "task",
-                "devices",
-                "pools",
+                "target_devices",
+                "target_pools",
             )
             if kwargs.get(key)
         }

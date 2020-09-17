@@ -104,7 +104,7 @@ class Device(Object):
     runs = relationship(
         "Run",
         secondary=db.run_device_table,
-        back_populates="devices",
+        back_populates="target_devices",
         cascade="all,delete",
     )
     tasks = relationship(
@@ -320,7 +320,7 @@ class Pool(AbstractBase):
         "Service", secondary=db.service_target_pool_table, back_populates="target_pools"
     )
     visualization_default = db.Column(Boolean)
-    runs = relationship("Run", secondary=db.run_pool_table, back_populates="pools")
+    runs = relationship("Run", secondary=db.run_pool_table, back_populates="target_pools")
     tasks = relationship("Task", secondary=db.task_pool_table, back_populates="pools")
     access = relationship(
         "Access", secondary=db.access_pool_table, back_populates="pools"

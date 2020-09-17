@@ -36,6 +36,18 @@ def configure_pool_form(cls):
     return cls
 
 
+def configure_pool_object_form(cls):
+    cls.models = ("device", "link", "service", "user")
+    for model in cls.models:
+        setattr(cls, f"{model}s", f"{model}s")
+        setattr(
+            cls,
+            f"string_{model}s",
+            StringField(widget=TextArea(), render_kw={"rows": 5}),
+        )
+    return cls
+
+
 class DeviceConnectionForm(BaseForm):
     template = "device_connection"
     form_type = HiddenField(default="device_connection")
@@ -132,13 +144,10 @@ class PoolForm(BaseForm):
     manually_defined = BooleanField("Manually defined (won't be automatically updated)")
 
 
+@configure_pool_object_form
 class PoolObjectsForm(BaseForm):
     template = "pool_objects"
     form_type = HiddenField(default="pool_objects")
-    devices = MultipleInstanceField("Devices")
-    links = MultipleInstanceField("Links")
-    string_devices = StringField(widget=TextArea(), render_kw={"rows": 5})
-    string_links = StringField(widget=TextArea(), render_kw={"rows": 5})
 
 
 class ExcelImportForm(BaseForm):

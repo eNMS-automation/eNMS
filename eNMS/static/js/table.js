@@ -521,7 +521,7 @@ tables.link = class LinkTable extends Table {
 tables.pool = class PoolTable extends Table {
   addRow(properties) {
     let row = super.addRow(properties);
-    row.objectNumber = `${row.device_number} devices - ${row.link_number} links`;
+    row.objectNumber = `${row.device_number} devices - ${row.link_number} links - ${row.service_number} services`;
     return row;
   }
 

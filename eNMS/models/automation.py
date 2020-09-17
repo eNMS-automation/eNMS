@@ -49,7 +49,7 @@ from eNMS.models.administration import User  # noqa: F401
 @db.set_custom_properties
 class Service(AbstractBase):
 
-    __tablename__ = "service"
+    __tablename__ = class_type = "service"
     type = db.Column(db.SmallString)
     __mapper_args__ = {"polymorphic_identity": "service", "polymorphic_on": type}
     id = db.Column(Integer, primary_key=True)

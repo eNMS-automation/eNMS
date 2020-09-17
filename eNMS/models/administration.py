@@ -25,7 +25,7 @@ class Server(AbstractBase):
 @db.set_custom_properties
 class User(AbstractBase, UserMixin):
 
-    __tablename__ = type = "user"
+    __tablename__ = type = class_type = "user"
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.SmallString, unique=True)
     is_admin = db.Column(Boolean)

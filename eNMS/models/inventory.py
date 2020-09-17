@@ -353,23 +353,23 @@ class Pool(AbstractBase):
             for property in properties["filtering"][obj.class_type]
         )
 
-    def compute(self, object_type):
+    def compute(self, model):
         return any(
-            getattr(self, f"{object_type}_{property}")
-            for property in properties["filtering"][object_type]
+            getattr(self, f"{model}_{property}")
+            for property in properties["filtering"][model]
         )
 
     def compute_pool(self):
         if self.manually_defined:
             return
-        for object_type in ("device", "link"):
+        for model in self.models:
             objects = (
-                list(filter(self.object_match, db.fetch_all(object_type)))
-                if self.compute(object_type)
+                list(filter(self.object_match, db.fetch_all(model)))
+                if self.compute(model)
                 else []
             )
-            setattr(self, f"{object_type}s", objects)
-            setattr(self, f"{object_type}_number", len(objects))
+            setattr(self, f"{model}s", objects)
+            setattr(self, f"{model}_number", len(objects))
 
     @classmethod
     def rbac_filter(cls, query, mode, user):

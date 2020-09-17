@@ -175,7 +175,7 @@ function showPoolObjectsPanel(id) {
           if (pool.devices.length > 1000 || pool.links.length > 1000) {
             notify("Too many objects to display.", "error", 5);
           } else {
-            for (const type of ["device", "link"]) {
+            for (const type of ["device", "link", "service", "user"]) {
               initSelect($(`#${type}s-${id}`), type, `pool_objects-${id}`);
               pool[`${type}s`].forEach((o) => {
                 $(`#${type}s-${id}`).append(new Option(o.name, o.id));

@@ -1143,7 +1143,7 @@ class Run(AbstractBase):
         r = compile("{{(.*?)}}")
 
         def replace(match):
-            return str(self.eval(match.()[2:-2], **variables)[0])
+            return str(self.eval(match.group()[2:-2], **variables)[0])
 
         def rec(input):
             if isinstance(input, str):

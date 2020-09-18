@@ -93,20 +93,13 @@ class Access(AbstractBase):
     upper_menu = db.Column(db.List)
     get_requests = db.Column(db.List)
     post_requests = db.Column(db.List)
-    users = relationship(
-        "User", secondary=db.access_user_table, back_populates="access"
+    user_pools = relationship(
+        "Pool", secondary=db.access_pool_table, back_populates="access_users"
     )
-    groups = relationship(
-        "Group", secondary=db.access_group_table, back_populates="access"
+    access_pools = relationship(
+        "Pool", secondary=db.access_pool_table, back_populates="access_pools"
     )
-    pools = relationship(
-        "Pool", secondary=db.access_pool_table, back_populates="access"
-    )
-    services = relationship(
-        "Service", secondary=db.access_service_table, back_populates="access"
-    )
-    services_access = db.Column(db.SmallString)
-    pools_access = db.Column(db.SmallString)
+    access_type = db.Column(db.SmallString)
 
     def get_users(self):
         group_users = chain.from_iterable(group.users for group in self.groups)

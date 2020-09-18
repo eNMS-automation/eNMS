@@ -55,7 +55,7 @@ class Object(AbstractBase):
             query.join(cls.pools)
             .join(models["access"], models["pool"].access)
             .join(models["user"], models["access"].users)
-            .filter(models["access"].pools_access.contains(mode))
+            .filter(models["access"].access_type.contains(mode))
             .filter(models["user"].name == user.name)
         )
         user_group_objects = (
@@ -63,7 +63,7 @@ class Object(AbstractBase):
             .join(models["access"], models["pool"].access)
             .join(models["group"], models["access"].groups)
             .join(models["user"], models["group"].users)
-            .filter(models["access"].pools_access.contains(mode))
+            .filter(models["access"].access_type.contains(mode))
             .filter(models["user"].name == user.name)
         )
         return public_objects.union(user_objects, user_group_objects)
@@ -322,8 +322,11 @@ class Pool(AbstractBase):
     visualization_default = db.Column(Boolean)
     runs = relationship("Run", secondary=db.run_pool_table, back_populates="target_pools")
     tasks = relationship("Task", secondary=db.task_pool_table, back_populates="pools")
-    access = relationship(
-        "Access", secondary=db.access_pool_table, back_populates="pools"
+    access_users = relationship(
+        "Access", secondary=db.access_pool_table, back_populates="user_pools"
+    )
+    access_pools = relationship(
+        "Access", secondary=db.access_pool_table, back_populates="access_pools"
     )
     manually_defined = db.Column(Boolean, default=False)
 
@@ -380,14 +383,14 @@ class Pool(AbstractBase):
         user_pools = (
             query.join(cls.access)
             .join(models["user"], models["access"].users)
-            .filter(models["access"].pools_access.contains(mode))
+            .filter(models["access"].access_type.contains(mode))
             .filter(models["user"].name == user.name)
         )
         user_group_pools = (
             query.join(cls.access)
             .join(models["group"], models["access"].groups)
             .join(models["user"], models["group"].users)
-            .filter(models["access"].pools_access.contains(mode))
+            .filter(models["access"].access_type.contains(mode))
             .filter(models["user"].name == user.name)
         )
         return public_pools.union(user_pools, user_group_pools)

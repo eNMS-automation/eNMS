@@ -34,7 +34,7 @@
     Configurations, Links, Pools, Network, Sites, Services, Workflow Builder, Results,
     Tasks, Events, Page, Subpage]
   pools: []
-  pools_access: '[]'
+  access_type: '[]'
   post_requests: [/add_edge, /add_service_to_workflow, /copy_service_in_workflow,
     /calendar_init, /clear_results, /clear_configurations, /compare, /web_connection,
     /counters, /count_models, /create_label, /database_deletion, /delete_corrupted_edges,
@@ -64,7 +64,7 @@
   name: Pool San Francisco (READ) - Data Backup and Workflows of Workflow (READ)
   pages: []
   pools: [Datacenter San Francisco]
-  pools_access: "['Read']"
+  access_type: "['Read']"
   post_requests: []
   services: ['Regression Workflow 9: Operational Data Backup', 'Regression Workflow
       F: Workflow of Workflows']
@@ -81,7 +81,7 @@
   name: Washington Pool (FULL) - Workflow 3 & 4 + Superworkflow (EDIT - RUN)
   pages: []
   pools: [Washington]
-  pools_access: "['Read', 'Edit', 'Connect', 'Use as target']"
+  access_type: "['Read', 'Edit', 'Connect', 'Use as target']"
   post_requests: []
   services: ['Regression Workflow 1: VRF creation and deletion with Netmiko', 'Regression
       Workflow L: superworkflow', 'Regression Workflow 3: Napalm getters (postprocessing)']
@@ -96,7 +96,7 @@
   name: Pool link 0-5 (EDIT) (links 6-9 should be available via public pool of links)
   pages: []
   pools: [Links 0 through 5 - Non-public pool - Access set up]
-  pools_access: "['Read', 'Edit']"
+  access_type: "['Read', 'Edit']"
   post_requests: []
   services: []
   services_access: '[]'
@@ -110,7 +110,7 @@
   name: Example Service (shared, in workflows) (EDIT)
   pages: []
   pools: []
-  pools_access: '[]'
+  access_type: '[]'
   post_requests: []
   services: ['[Shared] Example Service (does nothing)']
   services_access: "['Read', 'Edit']"
@@ -153,7 +153,7 @@
     Configurations, Links, Pools, Network, Sites, Services, Workflow Builder, Results,
     Tasks, Events, Page, Subpage]
   pools: []
-  pools_access: '[]'
+  access_type: '[]'
   post_requests: [/calendar_init, /compare, /counters, /count_models, /edit_file,
     /get, /get_all, /get_cluster_status, /get_git_history, /get_device_network_data,
     /get_device_logs, /get_exported_services, /get_git_network_data, /get_migration_folders,
@@ -175,7 +175,7 @@
   name: Scrapli workflow (EDIT only)
   pages: []
   pools: []
-  pools_access: '[]'
+  access_type: '[]'
   post_requests: []
   services: ['Regression Workflow O: Scrapli']
   services_access: "['Read', 'Edit']"

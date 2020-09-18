@@ -8,7 +8,7 @@
     {{ form.id(id='access-id', class="add-id") }} {{ form.hidden_tag() }}
     <div class="form-group">
       <label>Name</label>
-      <div class="form-group">
+      <div class="form-">
         {{ form.name(id="access-name", class="form-control required add-id",
         placeholder="Name") }}
       </div>
@@ -23,10 +23,7 @@
         </legend>
         <div class="form-group">
           <div class="form-group">
-            {{ form.users(id="access-users", class="form-control add-id") }}
-          </div>
-          <div class="form-group">
-            {{ form.groups(id="access-groups", class="form-control add-id") }}
+            {{ form.user_pools(id="access-users_pools", class="form-control add-id") }}
           </div>
         </div>
       </fieldset>
@@ -84,21 +81,19 @@
               </tr>
             </thead>
             <tbody>
-              {% for model in form.models %}
               <tr>
                 <td>
-                  {{ model.capitalize() }}
+                  Access
                 </td>
                 <td>
-                  {{ form[model](id="access-" + model, class="form-control add-id",
+                  {{ form.access_pools(id="access-access_pools", class="form-control add-id",
                   style="width:100%") }}
                 </td>
                 <td>
-                  {{ form[model + "_access"](id="access-" + model + "_access",
+                  {{ form.access_type(id="access-access_type",
                   class="form-control add-id no-search", **{"data-width": "200px"}) }}
                 </td>
               </tr>
-              {% endfor %}
             </tbody>
           </table>
         </div>

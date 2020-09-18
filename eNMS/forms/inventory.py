@@ -40,7 +40,11 @@ def configure_pool_object_form(cls):
     cls.models = ("devices", "links", "services", "users")
     for model in cls.models:
         setattr(cls, model, MultipleInstanceField(model))
-        setattr(cls, f"string_{model}", StringField(widget=TextArea(), render_kw={"rows": 5}))
+        setattr(
+            cls,
+            f"string_{model}",
+            StringField(widget=TextArea(), render_kw={"rows": 5}),
+        )
     return cls
 
 

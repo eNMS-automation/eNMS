@@ -347,7 +347,9 @@ class Run(AbstractBase):
     target_devices = relationship(
         "Device", secondary=db.run_device_table, back_populates="runs"
     )
-    target_pools = relationship("Pool", secondary=db.run_pool_table, back_populates="runs")
+    target_pools = relationship(
+        "Pool", secondary=db.run_pool_table, back_populates="runs"
+    )
     service_id = db.Column(Integer, ForeignKey("service.id"))
     service = relationship(
         "Service", back_populates="runs", foreign_keys="Run.service_id"
@@ -656,7 +658,9 @@ class Run(AbstractBase):
                 self.log("info", result, logger="security")
                 return {"result": result, "success": False}
         if self.run_method != "once":
-            self.write_state("progress/device/total", len(self.target_devices), "increment")
+            self.write_state(
+                "progress/device/total", len(self.target_devices), "increment"
+            )
         if self.iteration_devices and not self.parent_device:
             if not self.workflow:
                 result = "Device iteration not allowed outside of a workflow"

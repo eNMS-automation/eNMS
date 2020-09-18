@@ -91,18 +91,6 @@ class ChangelogForm(BaseForm):
 
 
 def init_variable_forms(app):
-    def configure_access_form(cls):
-        cls.models = app.rbac["models"]
-        for model, access_rights in cls.models.items():
-            setattr(cls, model, MultipleInstanceField())
-            form_properties["access"][model] = {"type": "object-list"}
-            access_field = SelectMultipleStringField(choices=choices(access_rights))
-            form_properties["access"][f"{model}_access"] = {
-                "type": "multiselect-string"
-            }
-            setattr(cls, f"{model}_access", access_field)
-        return cls
-
     class RbacForm(BaseForm):
         template = "object"
         form_type = HiddenField(default="rbac")
@@ -129,7 +117,6 @@ def init_variable_forms(app):
         password = PasswordField("Password")
 
     @configure_relationships("users")
-    @configure_access_form
     class AccessForm(RbacForm):
         template = "access"
         form_type = HiddenField(default="access")
@@ -144,6 +131,14 @@ def init_variable_forms(app):
         )
         post_requests = SelectMultipleField(
             "POST requests", choices=choices(app.rbac["post_requests"])
+        )
+        user_pools = MultipleInstanceField("pool")
+        access_pools = MultipleInstanceField("pool")
+        access_type = SelectMultipleField(
+            "Access Type",
+            choices=choices(
+                ["Read", "Edit", "Run", "Schedule", "Connect", "Use as target"]
+            ),
         )
         relations = ["pools", "services"]
 

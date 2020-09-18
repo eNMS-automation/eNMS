@@ -26,6 +26,7 @@ visualization/geographical_view and visualization/logical_view
 - Add mechanism to disable result creation (e.g for config collection workflow)
 - Extend pool for users and services. The "devices" and "pools" relationship with services have to be renamed
 "target_devices" and "target_pools" in the service.yaml file.
+- Change syntax of many to many relationship in database.json
 
 Version 3.22.3
 --------------

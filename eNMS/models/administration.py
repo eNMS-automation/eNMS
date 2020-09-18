@@ -32,7 +32,6 @@ class User(AbstractBase, UserMixin):
     email = db.Column(db.SmallString)
     password = db.Column(db.SmallString)
     authentication = db.Column(db.SmallString)
-    groups = db.Column(db.List)
     menu = db.Column(db.List)
     pages = db.Column(db.List)
     upper_menu = db.Column(db.List)
@@ -43,9 +42,6 @@ class User(AbstractBase, UserMixin):
         db.SmallString, default="default", info={"dont_track_changes": True}
     )
     pools = relationship("Pool", secondary=db.pool_user_table, back_populates="users")
-    groups = relationship(
-        "Group", secondary=db.user_group_table, back_populates="users"
-    )
     access = relationship(
         "Access", secondary=db.access_user_table, back_populates="users"
     )
@@ -83,25 +79,6 @@ class User(AbstractBase, UserMixin):
                 continue
             result = (getattr(access, access_type) for access in self.user_access)
             setattr(self, access_type, list(set().union(*result)))
-
-
-@db.set_custom_properties
-class Group(AbstractBase):
-
-    __tablename__ = type = "group"
-    id = db.Column(Integer, primary_key=True)
-    name = db.Column(db.SmallString, unique=True)
-    email = db.Column(db.SmallString)
-    users = relationship("User", secondary=db.user_group_table, back_populates="groups")
-    access = relationship(
-        "Access", secondary=db.access_group_table, back_populates="groups"
-    )
-
-    def update(self, **kwargs):
-        old_users = set(self.users)
-        super().update(**kwargs)
-        for user in old_users | set(self.users):
-            user.update_rbac()
 
 
 @db.set_custom_properties

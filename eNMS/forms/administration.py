@@ -110,7 +110,6 @@ def init_variable_forms(app):
         name = StringField("Name", [InputRequired()])
         email = StringField("Email")
 
-    @configure_relationships("groups")
     class UserForm(RbacForm):
         form_type = HiddenField(default="user")
         is_admin = BooleanField(default=False)
@@ -130,10 +129,6 @@ def init_variable_forms(app):
         password = PasswordField("Password")
 
     @configure_relationships("users")
-    class GroupForm(RbacForm):
-        form_type = HiddenField(default="group")
-
-    @configure_relationships("users", "groups")
     @configure_access_form
     class AccessForm(RbacForm):
         template = "access"

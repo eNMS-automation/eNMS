@@ -325,7 +325,7 @@ class Pool(AbstractBase):
     access_users = relationship(
         "Access", secondary=db.access_pool_table, back_populates="user_pools"
     )
-    access_pools = relationship(
+    access = relationship(
         "Access", secondary=db.access_pool_table, back_populates="access_pools"
     )
     manually_defined = db.Column(Boolean, default=False)

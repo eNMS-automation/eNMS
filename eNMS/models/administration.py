@@ -48,11 +48,11 @@ class User(AbstractBase, UserMixin):
     is_admin = db.Column(Boolean, default=False)
 
     def add_access(self, model, instance):
-        for group in self.groups:
-            access = db.fetch("access", name=f"{group.name}: {model}", allow_none=True)
+        for pool in self.pools:
+            access = db.fetch("access", name=f"{pool.name}: {model}", allow_none=True)
             if not access:
-                access = db.factory("access", name=f"{group.name}: {model}")
-                access.groups.append(group)
+                access = db.factory("access", name=f"{pool.name}: {model}")
+                access.user_pools.append(pool)
                 setattr(access, f"{model}_access", str(app.rbac["models"][model]))
             getattr(access, model).append(instance)
 
@@ -67,9 +67,8 @@ class User(AbstractBase, UserMixin):
 
     @property
     def user_access(self):
-        yield from self.access
-        for group in self.groups:
-            yield from group.access
+        for pool in self.pools:
+            yield from pool.access
 
     def update_rbac(self):
         if self.is_admin:
@@ -97,13 +96,12 @@ class Access(AbstractBase):
         "Pool", secondary=db.access_pool_table, back_populates="access_users"
     )
     access_pools = relationship(
-        "Pool", secondary=db.access_pool_table, back_populates="access_pools"
+        "Pool", secondary=db.access_pool_table, back_populates="access"
     )
     access_type = db.Column(db.SmallString)
 
     def get_users(self):
-        group_users = chain.from_iterable(group.users for group in self.groups)
-        return set(self.users) | set(group_users)
+        return set(chain.from_iterable(pool.users for pool in self.user_pools))
 
     def update(self, **kwargs):
         old_users = self.get_users()

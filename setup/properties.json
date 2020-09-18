@@ -711,24 +711,6 @@
         "export": false
       }
     ],
-    "group": [
-      {
-        "data": "name",
-        "title": "Name",
-        "search": "text"
-      },
-      {
-        "data": "email",
-        "title": "Email Address",
-        "search": "text"
-      },
-      {
-        "data": "buttons",
-        "width": "130px",
-        "orderable": false,
-        "export": false
-      }
-    ],
     "access": [
       {
         "data": "name",

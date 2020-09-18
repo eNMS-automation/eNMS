@@ -12,7 +12,6 @@
       "icon": "users",
       "pages": {
         "Users": "/table/user",
-        "Groups": "/table/group",
         "Access": "/table/access",
         "Servers": "/table/server"
       }
@@ -59,7 +58,6 @@
     "Changelog",
     "Sessions",
     "Users",
-    "Groups",
     "Servers",
     "Devices",
     "Configurations",
@@ -105,8 +103,6 @@
     "/form/files",
     "/form/generic_file_transfer_service",
     "/form/git_history",
-    "/form/group",
-    "/form/group_relation_filtering",
     "/form/import_service",
     "/form/instance_deletion",
     "/form/link",
@@ -172,7 +168,6 @@
     "/table/configuration",
     "/table/device",
     "/table/event",
-    "/table/group",
     "/table/pool",
     "/table/link",
     "/table/run",

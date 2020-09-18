@@ -1,7 +1,6 @@
 {
   "import_export_models": [
     "user",
-    "group",
     "device",
     "link",
     "pool",
@@ -24,7 +23,6 @@
       "tasks",
       "users"
     ],
-    "group": ["access", "id", "services", "pools"],
     "link": [
       "access",
       "id",
@@ -66,7 +64,6 @@
       "pools",
       "links",
       "menu",
-      "groups",
       "get_requests",
       "post_requests",
       "upper_menu",
@@ -75,12 +72,6 @@
     "workflow_edge": ["id", "source_id", "destination_id", "workflow_id"]
   },
   "many_to_many_relationships": [
-    [
-      {
-        "model": "access"
-      },
-      { "model": "group" }
-    ],
     [
       {
         "model": "access"
@@ -166,12 +157,6 @@
         "model": "task"
       },
       { "model": "pool" }
-    ],
-    [
-      {
-        "model": "user"
-      },
-      { "model": "group" }
     ]
   ],
   "private_properties": [

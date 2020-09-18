@@ -84,9 +84,6 @@ class Service(AbstractBase):
     pools = relationship(
         "Pool", secondary=db.pool_service_table, back_populates="services"
     )
-    access = relationship(
-        "Access", secondary=db.access_service_table, back_populates="services"
-    )
     originals = relationship(
         "Service",
         secondary=db.originals_association,
@@ -211,7 +208,7 @@ class Service(AbstractBase):
             .filter(models["access"].access_type.contains(mode))
             .filter(models["user"].name == user.name)
         )
-        return public_services.union(user_services, rbac_services)
+        return public_services.union(rbac_services)
 
     def set_name(self, name=None):
         if self.shared:
@@ -402,19 +399,13 @@ class Run(AbstractBase):
         user_services = (
             query.join(cls.service)
             .join(models["service"].originals.of_type(service_alias))
-            .join(models["access"], service_alias.access)
-            .join(models["user"], models["access"].users)
+            .join(models["pool"], models["service"].pools)
+            .join(models["access"], models["pool"].access)
+            .join(models["user"], models["access"].user_pools)
+            .join(models["pool"], models["access"].user_pools)
             .filter(models["user"].name == user.name)
         )
-        user_group_services = (
-            query.join(cls.service)
-            .join(models["service"].originals.of_type(service_alias))
-            .join(models["access"], service_alias.access)
-            .join(models["group"], models["access"].groups)
-            .join(models["user"], models["group"].users)
-            .filter(models["user"].name == user.name)
-        )
-        return public_services.union(user_services, user_group_services)
+        return public_services.union(user_services)
 
     @property
     def name(self):

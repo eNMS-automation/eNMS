@@ -42,9 +42,6 @@ class User(AbstractBase, UserMixin):
         db.SmallString, default="default", info={"dont_track_changes": True}
     )
     pools = relationship("Pool", secondary=db.pool_user_table, back_populates="users")
-    access = relationship(
-        "Access", secondary=db.access_user_table, back_populates="users"
-    )
     is_admin = db.Column(Boolean, default=False)
 
     def add_access(self, model, instance):

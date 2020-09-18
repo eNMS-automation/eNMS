@@ -80,18 +80,6 @@
     ],
     [
       {
-        "model": "access"
-      },
-      { "model": "service" }
-    ],
-    [
-      {
-        "model": "access"
-      },
-      { "model": "user" }
-    ],
-    [
-      {
         "model": "pool"
       },
       { "model": "device" }

@@ -134,7 +134,7 @@ def init_variable_forms(app):
         )
         user_pools = MultipleInstanceField("pool")
         access_pools = MultipleInstanceField("pool")
-        access_type = SelectMultipleField(
+        access_type = SelectMultipleStringField(
             "Access Type",
             choices=choices(
                 ["Read", "Edit", "Run", "Schedule", "Connect", "Use as target"]

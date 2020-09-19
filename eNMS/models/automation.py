@@ -197,18 +197,15 @@ class Service(AbstractBase):
 
     @classmethod
     def rbac_filter(cls, query, mode, user):
-        service_alias = aliased(models["service"])
-        public_services = query.filter(models["service"].public == true())
-        rbac_services = (
-            query.join(models["service"].originals.of_type(service_alias))
-            .join(models["pool"], service_alias.pools)
+        pool_alias = aliased(models["pool"])
+        return query.filter(cls.public == true()).union(
+            query.join(cls.pools)
             .join(models["access"], models["pool"].access)
-            .join(models["pool"], models["access"].access_users)
-            .join(models["user"], models["pool"].users)
+            .join(pool_alias, models["access"].user_pools)
+            .join(models["user"], pool_alias.users)
             .filter(models["access"].access_type.contains(mode))
             .filter(models["user"].name == user.name)
         )
-        return public_services.union(rbac_services)
 
     def set_name(self, name=None):
         if self.shared:
@@ -397,14 +394,14 @@ class Run(AbstractBase):
         public_services = query.join(cls.service).filter(
             models["service"].public == true()
         )
-        service_alias = aliased(models["service"])
+        pool_alias = aliased(models["pool"])
         user_services = (
             query.join(cls.service)
-            .join(models["service"].originals.of_type(service_alias))
             .join(models["pool"], models["service"].pools)
             .join(models["access"], models["pool"].access)
-            .join(models["user"], models["access"].user_pools)
-            .join(models["pool"], models["access"].user_pools)
+            .join(pool_alias, models["access"].user_pools)
+            .join(models["user"], pool_alias.users)
+            .filter(models["access"].access_type.contains(mode))
             .filter(models["user"].name == user.name)
         )
         return public_services.union(user_services)

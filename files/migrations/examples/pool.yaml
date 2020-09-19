@@ -104,7 +104,7 @@
   user_name: .*
   user_name_match: regex
   user_number: 5
-  users: [admin, read-only, chicago, sf, ny]
+  users: [sf, chicago, read-only, ny, admin]
 - access_users: []
   description: Devices only
   device_configuration: ''

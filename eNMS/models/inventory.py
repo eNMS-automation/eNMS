@@ -2,7 +2,7 @@ from flask_login import current_user
 from re import search, sub
 from sqlalchemy import and_, Boolean, ForeignKey, Integer, or_
 from sqlalchemy.ext.associationproxy import association_proxy
-from sqlalchemy.orm import backref, relationship
+from sqlalchemy.orm import aliased, backref, relationship
 from sqlalchemy.schema import UniqueConstraint
 from sqlalchemy.sql.expression import true
 
@@ -50,23 +50,15 @@ class Object(AbstractBase):
 
     @classmethod
     def rbac_filter(cls, query, mode, user):
-        public_objects = query.filter(cls.public == true())
-        user_objects = (
+        pool_alias = aliased(models["pool"])
+        return query.filter(cls.public == true()).union(
             query.join(cls.pools)
             .join(models["access"], models["pool"].access)
-            .join(models["user"], models["access"].users)
+            .join(pool_alias, models["access"].user_pools)
+            .join(models["user"], pool_alias.users)
             .filter(models["access"].access_type.contains(mode))
             .filter(models["user"].name == user.name)
         )
-        user_group_objects = (
-            query.join(cls.pools)
-            .join(models["access"], models["pool"].access)
-            .join(models["group"], models["access"].groups)
-            .join(models["user"], models["group"].users)
-            .filter(models["access"].access_type.contains(mode))
-            .filter(models["user"].name == user.name)
-        )
-        return public_objects.union(user_objects, user_group_objects)
 
 
 @db.set_custom_properties

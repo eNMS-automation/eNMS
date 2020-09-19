@@ -1,4 +1,5 @@
-- description: All objects
+- access_users: [Full Access to Everything]
+  description: All objects
   device_configuration: ''
   device_configuration_match: inclusion
   device_description: ''
@@ -47,7 +48,7 @@
     router18, router19, router20, router21, router22, router23, router24, router25,
     router26, router27, router28, router29, router30, router31, router32, router33,
     router34, router35, router36, router37, Server 2, Aserver]
-  last_modified: '2020-04-21 15:23:58.190204'
+  last_modified: '2020-09-19 07:12:54.590340'
   latitude: '0.0'
   link_color: ''
   link_color_match: inclusion
@@ -85,9 +86,27 @@
   name: All objects
   operator: all
   property1: CP
+  public: false
+  service_description: ''
+  service_description_match: inclusion
+  service_name: .*
+  service_name_match: regex
+  service_number: 155
+  service_operating_system: ''
+  service_operating_system_match: inclusion
+  service_vendor: ''
+  service_vendor_match: inclusion
+  target_services: ['Regression Workflow P: large workflow (scalability)']
   tasks: []
   type: pool
-- description: Devices only
+  user_email: ''
+  user_email_match: inclusion
+  user_name: .*
+  user_name_match: regex
+  user_number: 5
+  users: [admin, read-only, chicago, sf, ny]
+- access_users: []
+  description: Devices only
   device_configuration: ''
   device_configuration_match: inclusion
   device_description: ''
@@ -162,9 +181,26 @@
   name: Devices only
   operator: all
   property1: CP
+  service_description: ''
+  service_description_match: inclusion
+  service_name: ''
+  service_name_match: inclusion
+  service_number: 0
+  service_operating_system: ''
+  service_operating_system_match: inclusion
+  service_vendor: ''
+  service_vendor_match: inclusion
+  target_services: ['Regression Workflow P: large workflow (scalability)']
   tasks: []
   type: pool
-- description: Links only
+  user_email: ''
+  user_email_match: inclusion
+  user_name: ''
+  user_name_match: inclusion
+  user_number: 0
+  users: []
+- access_users: []
+  description: Links only
   device_configuration: ''
   device_configuration_match: inclusion
   device_description: ''
@@ -244,9 +280,26 @@
   name: Links only
   operator: all
   property1: CP
+  service_description: ''
+  service_description_match: inclusion
+  service_name: ''
+  service_name_match: inclusion
+  service_number: 0
+  service_operating_system: ''
+  service_operating_system_match: inclusion
+  service_vendor: ''
+  service_vendor_match: inclusion
+  target_services: ['Regression Workflow P: large workflow (scalability)']
   tasks: []
   type: pool
-- description: Datacenter San Francisco
+  user_email: ''
+  user_email_match: inclusion
+  user_name: ''
+  user_name_match: inclusion
+  user_number: 0
+  users: []
+- access_users: []
+  description: Datacenter San Francisco
   device_configuration: ''
   device_configuration_match: inclusion
   device_description: ''
@@ -320,9 +373,26 @@
   operator: all
   property1: CP
   public: false
+  service_description: ''
+  service_description_match: inclusion
+  service_name: ''
+  service_name_match: inclusion
+  service_number: 0
+  service_operating_system: ''
+  service_operating_system_match: inclusion
+  service_vendor: ''
+  service_vendor_match: inclusion
+  target_services: ['Regression Workflow P: large workflow (scalability)']
   tasks: []
   type: pool
-- description: Datacenter New York
+  user_email: ''
+  user_email_match: inclusion
+  user_name: ''
+  user_name_match: inclusion
+  user_number: 0
+  users: []
+- access_users: []
+  description: Datacenter New York
   device_configuration: ''
   device_configuration_match: inclusion
   device_description: ''
@@ -392,9 +462,26 @@
   name: Datacenter New York
   operator: all
   property1: CP
+  service_description: ''
+  service_description_match: inclusion
+  service_name: ''
+  service_name_match: inclusion
+  service_number: 0
+  service_operating_system: ''
+  service_operating_system_match: inclusion
+  service_vendor: ''
+  service_vendor_match: inclusion
+  target_services: ['Regression Workflow P: large workflow (scalability)']
   tasks: []
   type: pool
-- description: Datacenter Chicago
+  user_email: ''
+  user_email_match: inclusion
+  user_name: ''
+  user_name_match: inclusion
+  user_number: 0
+  users: []
+- access_users: []
+  description: Datacenter Chicago
   device_configuration: ''
   device_configuration_match: inclusion
   device_description: ''
@@ -463,9 +550,26 @@
   name: Datacenter Chicago
   operator: all
   property1: CP
+  service_description: ''
+  service_description_match: inclusion
+  service_name: ''
+  service_name_match: inclusion
+  service_number: 0
+  service_operating_system: ''
+  service_operating_system_match: inclusion
+  service_vendor: ''
+  service_vendor_match: inclusion
+  target_services: ['Regression Workflow P: large workflow (scalability)']
   tasks: []
   type: pool
-- description: ''
+  user_email: ''
+  user_email_match: inclusion
+  user_name: ''
+  user_name_match: inclusion
+  user_number: 0
+  users: []
+- access_users: []
+  description: ''
   device_configuration: ''
   device_configuration_match: inclusion
   device_description: ''
@@ -533,9 +637,27 @@
   name: Washington
   operator: all
   property1: CP
+  service_description: ''
+  service_description_match: inclusion
+  service_name: ''
+  service_name_match: inclusion
+  service_number: 0
+  service_operating_system: ''
+  service_operating_system_match: inclusion
+  service_vendor: ''
+  service_vendor_match: inclusion
+  target_services: ['[Regression Workflow 9: Operational Data Backup] Retrieve Operational
+      Data', 'Regression Workflow P: large workflow (scalability)']
   tasks: []
   type: pool
-- description: ''
+  user_email: ''
+  user_email_match: inclusion
+  user_name: ''
+  user_name_match: inclusion
+  user_number: 0
+  users: []
+- access_users: []
+  description: ''
   device_configuration: ''
   device_configuration_match: inclusion
   device_description: ''
@@ -604,9 +726,26 @@
   operator: all
   property1: CP
   public: false
+  service_description: ''
+  service_description_match: inclusion
+  service_name: ''
+  service_name_match: inclusion
+  service_number: 0
+  service_operating_system: ''
+  service_operating_system_match: inclusion
+  service_vendor: ''
+  service_vendor_match: inclusion
+  target_services: ['Regression Workflow P: large workflow (scalability)']
   tasks: []
   type: pool
-- description: ''
+  user_email: ''
+  user_email_match: inclusion
+  user_name: ''
+  user_name_match: inclusion
+  user_number: 0
+  users: []
+- access_users: []
+  description: ''
   device_configuration: ''
   device_configuration_match: inclusion
   device_description: ''
@@ -675,5 +814,21 @@
   operator: all
   property1: CP
   public: true
+  service_description: ''
+  service_description_match: inclusion
+  service_name: ''
+  service_name_match: inclusion
+  service_number: 0
+  service_operating_system: ''
+  service_operating_system_match: inclusion
+  service_vendor: ''
+  service_vendor_match: inclusion
+  target_services: ['Regression Workflow P: large workflow (scalability)']
   tasks: []
   type: pool
+  user_email: ''
+  user_email_match: inclusion
+  user_name: ''
+  user_name_match: inclusion
+  user_number: 0
+  users: []

@@ -8,7 +8,6 @@
   description: Start point of a workflow
   device_query: ''
   device_query_property: ip_address
-  target_devices: []
   dict_match: {}
   display_only_failed_nodes: true
   events: []
@@ -32,7 +31,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions:
     Iteration Services Test Workflow: ['-359', '-163']
     'Regression Workflow 1: Netmiko with validation and retries': [-385, 11]
@@ -130,6 +129,8 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   type: swiss_army_knife_service
   update_pools: false
@@ -147,7 +148,6 @@
   description: End point of a workflow
   device_query: ''
   device_query_property: ip_address
-  target_devices: []
   dict_match: {}
   display_only_failed_nodes: true
   events: []
@@ -171,7 +171,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions:
     Iteration Services Test Workflow: ['-9', '294']
     'Regression Workflow 1: Netmiko with validation and retries': [115, 3]
@@ -272,6 +272,8 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   type: swiss_army_knife_service
   update_pools: false
@@ -289,7 +291,6 @@
   description: Monitor eNMS cluster
   device_query: ''
   device_query_property: ip_address
-  target_devices: []
   dict_match: {}
   display_only_failed_nodes: true
   events: []
@@ -313,7 +314,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -328,6 +329,8 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   type: swiss_army_knife_service
   update_pools: false
@@ -352,7 +355,6 @@
   description: Example
   device_query: ''
   device_query_property: ip_address
-  target_devices: [Washington]
   dict_match: {}
   display_only_failed_nodes: true
   events: []
@@ -381,7 +383,7 @@
   number_in_range: 7
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow 2: Separate Failure - Success paths': [741, 106]
     'Regression Workflow C: Advanced multiprocessing': [-266, -204]
@@ -401,6 +403,8 @@
   skip_value: 'True'
   string1: cisco
   string2: s2
+  target_devices: [Washington]
+  target_pools: []
   time_between_retries: 10
   type: example_service
   update_pools: false
@@ -422,7 +426,6 @@
   description: Configure BGP Peering with Napalm
   device_query: ''
   device_query_property: ip_address
-  target_devices: [Washington]
   dict_match: {}
   display_only_failed_nodes: true
   events: []
@@ -451,7 +454,7 @@
   number_of_retries: 0
   operating_system: ''
   optional_args: {}
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow C: Advanced multiprocessing': [299, -170]
   postprocessing: ''
@@ -469,6 +472,8 @@
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
+  target_devices: [Washington]
+  target_pools: []
   time_between_retries: 10
   type: configure_bgp_service
   update_pools: false
@@ -491,7 +496,6 @@
   description: Configuration Backup using NAPALM
   device_query: ''
   device_query_property: ip_address
-  target_devices: []
   dict_match: {}
   display_only_failed_nodes: true
   driver: eos
@@ -518,7 +522,7 @@
   number_of_retries: 0
   operating_system: ''
   optional_args: {}
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow 9: Operational Data Backup': [-259, 351]
   postprocessing: ''
@@ -540,6 +544,8 @@
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   timeout: 60
   type: napalm_backup_service
@@ -568,7 +574,6 @@
   description: Create a VRF "test" with Netmiko
   device_query: ''
   device_query_property: ip_address
-  target_devices: [Washington, Austin]
   dict_match: {}
   display_only_failed_nodes: true
   driver: arista_eos
@@ -597,7 +602,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: eos
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow 1: VRF creation and deletion with Netmiko': &id011 [-38,
       -86]
@@ -618,6 +623,8 @@
   start_new_connection: false
   strip_command: false
   strip_prompt: false
+  target_devices: [Austin, Washington]
+  target_pools: []
   time_between_retries: 10
   timeout: 3
   type: netmiko_configuration_service
@@ -645,7 +652,6 @@
   description: Check that the vrf "test" is configured
   device_query: ''
   device_query_property: ip_address
-  target_devices: [Washington, Austin]
   dict_match: {}
   display_only_failed_nodes: true
   driver: arista_eos
@@ -681,7 +687,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: eos
-  target_pools: []
+  pools: [All objects]
   positions:
     Iteration Services Test Workflow: ['147', '-14']
     'Regression Workflow 1: VRF creation and deletion with Netmiko': &id012 [445,
@@ -707,6 +713,8 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
+  target_devices: [Austin, Washington]
+  target_pools: []
   time_between_retries: 10
   timeout: 3.0
   type: netmiko_validation_service
@@ -736,7 +744,6 @@
   description: Delete VRF "test"
   device_query: ''
   device_query_property: ip_address
-  target_devices: [Washington, Austin]
   dict_match: {}
   display_only_failed_nodes: true
   driver: arista_eos
@@ -765,7 +772,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: eos
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow 1: VRF creation and deletion with Netmiko': &id013 [476,
       119]
@@ -787,6 +794,8 @@
   start_new_connection: false
   strip_command: false
   strip_prompt: false
+  target_devices: [Austin, Washington]
+  target_pools: []
   time_between_retries: 10
   timeout: 3
   type: netmiko_configuration_service
@@ -814,7 +823,6 @@
   description: Check that the vrf "test" is NOT configured
   device_query: ''
   device_query_property: ip_address
-  target_devices: [Washington, Austin, Philadelphia]
   dict_match: {}
   display_only_failed_nodes: true
   driver: arista_eos
@@ -850,7 +858,7 @@
   notification_header: ''
   number_of_retries: 2
   operating_system: eos
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow 1: VRF creation and deletion with Netmiko': &id014 [-10,
       157]
@@ -874,6 +882,8 @@
   start_new_connection: true
   strip_command: true
   strip_prompt: true
+  target_devices: [Austin, Washington, Philadelphia]
+  target_pools: []
   time_between_retries: 1
   timeout: 3.0
   type: netmiko_validation_service
@@ -900,7 +910,6 @@
   description: Create a VRF "test" with Napalm
   device_query: ''
   device_query_property: ip_address
-  target_devices: [Washington, Austin]
   dict_match: {}
   display_only_failed_nodes: true
   driver: eos
@@ -927,7 +936,7 @@
   number_of_retries: 0
   operating_system: eos
   optional_args: {}
-  target_pools: []
+  pools: [All objects]
   positions:
     '[Regression Workflow F: Workflow of Workflows] Regression Workflow 5: VRF creation and deletion with Napalm': [
       -374, -164]
@@ -945,6 +954,8 @@
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
+  target_devices: [Austin, Washington]
+  target_pools: []
   time_between_retries: 10
   timeout: 10
   type: napalm_configuration_service
@@ -966,7 +977,6 @@
   description: Use REST call is_alive
   device_query: ''
   device_query_property: ip_address
-  target_devices: [Columbus]
   dict_match: {}
   display_only_failed_nodes: true
   events: []
@@ -995,7 +1005,7 @@
   payload:
     a: b
     c: ['1', '2', '3']
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow 2: Separate Failure - Success paths': [374, 278]
     'Regression Workflow 3: Napalm getters (postprocessing)': ['-50', '0']
@@ -1019,6 +1029,8 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  target_devices: [Columbus]
+  target_pools: []
   time_between_retries: 10
   timeout: 15
   type: rest_call_service
@@ -1042,7 +1054,6 @@
   description: 'Getter: get_facts'
   device_query: ''
   device_query_property: ip_address
-  target_devices: [Washington, Austin]
   dict_match: {}
   display_only_failed_nodes: true
   driver: eos
@@ -1069,7 +1080,7 @@
   number_of_retries: 0
   operating_system: ''
   optional_args: {}
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow 2: Separate Failure - Success paths': [-102, -130]
     'Regression Workflow 3: Napalm getters (postprocessing)': [-154, -70]
@@ -1089,6 +1100,8 @@
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
+  target_devices: [Austin, Washington]
+  target_pools: []
   time_between_retries: 10
   timeout: 1
   type: napalm_getters_service
@@ -1112,7 +1125,6 @@
   description: 'Getter: get_interfaces'
   device_query: ''
   device_query_property: ip_address
-  target_devices: [Washington, Austin]
   dict_match: {}
   display_only_failed_nodes: true
   driver: eos
@@ -1139,7 +1151,7 @@
   number_of_retries: 0
   operating_system: ''
   optional_args: {}
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow 2: Separate Failure - Success paths': [611, -72]
     'Regression Workflow 3: Napalm getters (postprocessing)': [-166, 303]
@@ -1158,6 +1170,8 @@
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
+  target_devices: [Austin, Washington]
+  target_pools: []
   time_between_retries: 10
   timeout: 1
   type: napalm_getters_service
@@ -1181,7 +1195,6 @@
   description: 'Getter: get_interfaces_ip'
   device_query: ''
   device_query_property: ip_address
-  target_devices: [Washington, Austin]
   dict_match: {}
   display_only_failed_nodes: true
   driver: eos
@@ -1208,7 +1221,7 @@
   number_of_retries: 0
   operating_system: ''
   optional_args: {}
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow 3: Napalm getters (postprocessing)': [303, 43]
     'Regression Workflow F: Workflow of Workflows': [3, -51]
@@ -1229,6 +1242,8 @@
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
+  target_devices: [Austin, Washington]
+  target_pools: []
   time_between_retries: 10
   timeout: 60
   type: napalm_getters_service
@@ -1252,7 +1267,6 @@
   description: 'Getter: get_config'
   device_query: ''
   device_query_property: ip_address
-  target_devices: [Washington, Austin]
   dict_match: {}
   display_only_failed_nodes: true
   driver: eos
@@ -1279,7 +1293,7 @@
   number_of_retries: 0
   operating_system: ''
   optional_args: {}
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow 3: Napalm getters (postprocessing)': [652, -22]
     'Regression Workflow F: Workflow of Workflows': [3, -51]
@@ -1297,6 +1311,8 @@
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
+  target_devices: [Austin, Washington]
+  target_pools: []
   time_between_retries: 10
   timeout: 60
   type: napalm_getters_service
@@ -1317,7 +1333,6 @@
   description: Process Payload in example workflow
   device_query: ''
   device_query_property: ip_address
-  target_devices: [Washington, Austin]
   dict_match: {}
   display_only_failed_nodes: true
   events: []
@@ -1341,7 +1356,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow 3: Napalm getters (postprocessing)': [424, 229]
     'Regression Workflow F: Workflow of Workflows': [3, -51]
@@ -1358,6 +1373,8 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  target_devices: [Austin, Washington]
+  target_pools: []
   time_between_retries: 10
   type: swiss_army_knife_service
   update_pools: false
@@ -1375,7 +1392,6 @@
   description: Add devices to the payload
   device_query: ''
   device_query_property: ip_address
-  target_devices: []
   dict_match: {}
   display_only_failed_nodes: true
   events: []
@@ -1399,7 +1415,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions:
     Iteration Services Test Workflow: ['3', '-144']
     'Regression Workflow E: Iteration Targets': [-195, -168]
@@ -1424,6 +1440,8 @@
     \ Devices\", [\"Atlanta\", \"Austin\"] if device.name == \"Austin\" else [\"Washington\"\
     ], device=device.name)\r\n\r\n# Interfaces 2\r\nset_var('Interfaces 2', ['Loopback333',\
     \ 'Loopback334'])\r\nsave_result(True, {})"
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   type: python_snippet_service
   update_pools: false
@@ -1448,7 +1466,6 @@
   description: Show IP route
   device_query: ''
   device_query_property: ip_address
-  target_devices: []
   dict_match: {}
   display_only_failed_nodes: true
   driver: arista_eos
@@ -1486,7 +1503,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: eos
-  target_pools: []
+  pools: [All objects]
   positions:
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow 7: Payload Extraction & Validation'
@@ -1507,6 +1524,8 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   timeout: 3.0
   type: netmiko_validation_service
@@ -1528,7 +1547,6 @@
   description: Payload Variables Extraction with Regex/TextFSM
   device_query: ''
   device_query_property: ip_address
-  target_devices: []
   dict_match: {}
   display_only_failed_nodes: true
   events: []
@@ -1568,7 +1586,7 @@
   operation1: __setitem__
   operation2: __setitem__
   operation3: __setitem__
-  target_pools: []
+  pools: [All objects]
   positions:
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow 7: Payload Extraction & Validation'
@@ -1589,6 +1607,8 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   type: payload_extraction_service
   update_pools: false
@@ -1612,7 +1632,6 @@
   description: ''
   device_query: ''
   device_query_property: ip_address
-  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   driver: eos
@@ -1639,7 +1658,7 @@
   number_of_retries: 0
   operating_system: ''
   optional_args: {}
-  target_pools: []
+  pools: [All objects]
   positions:
     '[Regression Workflow F: Workflow of Workflows] Regression Workflow 5: VRF creation and deletion with Napalm': [
       287, 136]
@@ -1657,6 +1676,8 @@
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   timeout: 60
   type: napalm_rollback_service
@@ -1684,7 +1705,6 @@
   description: ''
   device_query: ''
   device_query_property: ip_address
-  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   driver: arista_eos
@@ -1721,7 +1741,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow A: get_var, set_var, get_result': ['266', '161']
     'Regression Workflow C: Advanced multiprocessing': [123, -187]
@@ -1743,6 +1763,8 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   timeout: 10.0
   type: netmiko_validation_service
@@ -1771,7 +1793,6 @@
   description: ''
   device_query: ''
   device_query_property: ip_address
-  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   driver: arista_eos
@@ -1808,7 +1829,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions:
     '[Regression Workflow F: Workflow of Workflows] Regression Workflow 5: VRF creation and deletion with Napalm': [
       -348, 160]
@@ -1829,6 +1850,8 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   timeout: 10.0
   type: netmiko_validation_service
@@ -1859,7 +1882,6 @@
   description: ''
   device_query: ''
   device_query_property: ip_address
-  target_devices: [Washington]
   dict_match: {}
   display_only_failed_nodes: false
   driver: a10
@@ -1895,7 +1917,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow D: Prompts': [22, -74]
   postprocessing: ''
@@ -1915,6 +1937,8 @@
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
+  target_devices: [Washington]
+  target_pools: []
   time_between_retries: 10
   timeout: 10
   type: netmiko_prompts_service
@@ -1944,7 +1968,6 @@
   description: ''
   device_query: ''
   device_query_property: ip_address
-  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   driver: a10
@@ -1980,7 +2003,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow D: Prompts': [350, 108]
   postprocessing: ''
@@ -2000,6 +2023,8 @@
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   timeout: 10
   type: netmiko_prompts_service
@@ -2020,7 +2045,6 @@
   description: ''
   device_query: ''
   device_query_property: ip_address
-  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -2045,7 +2069,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow A: get_var, set_var, get_result': [-376, -138]
   postprocessing: ''
@@ -2063,6 +2087,8 @@
   skip_value: 'True'
   source_code: "set_var(\"global_variable\", value=1050)\r\nset_var(\"variable\",\
     \ \"variable_in_variables\")\r\nsave_result(success=True, result={})"
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   type: python_snippet_service
   update_pools: false
@@ -2080,7 +2106,6 @@
   description: ''
   device_query: ''
   device_query_property: ip_address
-  target_devices: [Washington, Chicago]
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -2105,7 +2130,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow A: get_var, set_var, get_result': [0, -144]
   postprocessing: ''
@@ -2126,6 +2151,8 @@
     , \"192.168.56.50\")\r\ndevices = [\"Boston\", \"Cincinnati\"] if device.name\
     \ == \"Chicago\" else [\"Cleveland\", \"Washington\"]\r\nset_var(\"iteration_device\"\
     , devices, device=device.name)\r\nsave_result(success=True, result={})"
+  target_devices: [Washington, Chicago]
+  target_pools: []
   time_between_retries: 10
   type: python_snippet_service
   update_pools: false
@@ -2150,7 +2177,6 @@
   description: ''
   device_query: ''
   device_query_property: ip_address
-  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   driver: arista_eos
@@ -2187,7 +2213,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow A: get_var, set_var, get_result': [474, -11]
   postprocessing: ''
@@ -2206,6 +2232,8 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   timeout: 1.0
   type: netmiko_validation_service
@@ -2234,7 +2262,6 @@
   description: ''
   device_query: ''
   device_query_property: ip_address
-  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   driver: a10
@@ -2271,7 +2298,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow A: get_var, set_var, get_result': [425, 190]
   postprocessing: ''
@@ -2290,6 +2317,8 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   timeout: 10.0
   type: netmiko_validation_service
@@ -2318,7 +2347,6 @@
   description: ''
   device_query: ''
   device_query_property: ip_address
-  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   driver: a10
@@ -2355,7 +2383,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow A: get_var, set_var, get_result': [-445, 128]
   postprocessing: ''
@@ -2374,6 +2402,8 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   timeout: 10.0
   type: netmiko_validation_service
@@ -2398,7 +2428,6 @@
   description: ''
   device_query: ''
   device_query_property: ip_address
-  target_devices: []
   dict_match:
     is_alive: {is_alive: true}
   display_only_failed_nodes: false
@@ -2428,7 +2457,7 @@
   number_of_retries: 0
   operating_system: ''
   optional_args: {}
-  target_pools: []
+  pools: [All objects]
   positions:
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow B: Napalm getters validation'
@@ -2447,6 +2476,8 @@
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   timeout: 1
   type: napalm_getters_service
@@ -2470,7 +2501,6 @@
   description: ''
   device_query: ''
   device_query_property: ip_address
-  target_devices: []
   dict_match: {fqdn: localhost, vendor: Arista}
   display_only_failed_nodes: false
   driver: eos
@@ -2499,7 +2529,7 @@
   number_of_retries: 0
   operating_system: ''
   optional_args: {}
-  target_pools: []
+  pools: [All objects]
   positions:
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow B: Napalm getters validation'
@@ -2518,6 +2548,8 @@
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   timeout: 60
   type: napalm_getters_service
@@ -2541,7 +2573,6 @@
   description: ''
   device_query: ''
   device_query_property: ip_address
-  target_devices: []
   dict_match:
     '{{device.ip_address}}': {prefix_length: 24}
   display_only_failed_nodes: false
@@ -2569,7 +2600,7 @@
   number_of_retries: 0
   operating_system: ''
   optional_args: {}
-  target_pools: []
+  pools: [All objects]
   positions:
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow 8: Payload Extraction with Operations'
@@ -2591,6 +2622,8 @@
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   timeout: 60
   type: napalm_getters_service
@@ -2614,7 +2647,6 @@
   description: ''
   device_query: ''
   device_query_property: ip_address
-  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   driver: eos
@@ -2643,7 +2675,7 @@
   number_of_retries: 0
   operating_system: ''
   optional_args: {}
-  target_pools: []
+  pools: [All objects]
   positions:
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow B: Napalm getters validation'
@@ -2662,6 +2694,8 @@
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   timeout: 60
   type: napalm_getters_service
@@ -2685,7 +2719,6 @@
   description: ''
   device_query: ''
   device_query_property: ip_address
-  target_devices: []
   dict_match: {fqdn: localhost, uptime: '666', vendor: Arista}
   display_only_failed_nodes: false
   driver: eos
@@ -2714,7 +2747,7 @@
   number_of_retries: 0
   operating_system: ''
   optional_args: {}
-  target_pools: []
+  pools: [All objects]
   positions:
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow B: Napalm getters validation'
@@ -2733,6 +2766,8 @@
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   timeout: 60
   type: napalm_getters_service
@@ -2754,7 +2789,6 @@
   description: ''
   device_query: ''
   device_query_property: ip_address
-  target_devices: [Washington]
   dict_match: {host: '{{device.ip_address}}', unreachable: 0, use_ssl: true}
   display_only_failed_nodes: false
   events: []
@@ -2782,7 +2816,7 @@
   options: {}
   pass_device_properties: true
   playbook_path: /media/sf_shared/eNMS/files/playbooks/arista_show_version.yml
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow 6: Ansible with Validation': [-107, 153]
     'Regression Workflow B: Napalm getters validation': [-30, 126]
@@ -2799,6 +2833,8 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  target_devices: [Washington]
+  target_pools: []
   time_between_retries: 10
   type: ansible_playbook_service
   update_pools: false
@@ -2817,7 +2853,6 @@
   description: ''
   device_query: ''
   device_query_property: ip_address
-  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -2845,7 +2880,7 @@
   options: {}
   pass_device_properties: true
   playbook_path: /media/sf_shared/eNMS/files/playbooks/arista_show_running_config.yml
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow 6: Ansible with Validation': [179, -62]
   postprocessing: ''
@@ -2861,6 +2896,8 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   type: ansible_playbook_service
   update_pools: false
@@ -2879,7 +2916,6 @@
   description: ''
   device_query: ''
   device_query_property: ip_address
-  target_devices: []
   dict_match: {action: debug, changed: false, failed: false}
   display_only_failed_nodes: false
   events: []
@@ -2907,7 +2943,7 @@
   options: {}
   pass_device_properties: true
   playbook_path: /media/sf_shared/eNMS/files/playbooks/arista_show_running_config.yml
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow 6: Ansible with Validation': [486, 173]
   postprocessing: ''
@@ -2923,6 +2959,8 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   type: ansible_playbook_service
   update_pools: false
@@ -2947,7 +2985,6 @@
   description: ''
   device_query: ''
   device_query_property: ip_address
-  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   driver: a10
@@ -2983,7 +3020,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow C: Advanced multiprocessing': [-367, 143]
     'Regression Workflow F: Workflow of Workflows': [678, 52]
@@ -3003,6 +3040,8 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   timeout: 10.0
   type: netmiko_validation_service
@@ -3031,7 +3070,6 @@
   description: Check the iteration mechanism (interfaces)
   device_query: ''
   device_query_property: ip_address
-  target_devices: [Austin, Washington]
   dict_match: {}
   display_only_failed_nodes: true
   driver: arista_eos
@@ -3068,7 +3106,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: eos
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow E: Iteration Targets': [240, -144]
   postprocessing: ''
@@ -3087,6 +3125,8 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
+  target_devices: [Austin, Washington]
+  target_pools: []
   time_between_retries: 10
   timeout: 3.0
   type: netmiko_validation_service
@@ -3115,7 +3155,6 @@
   description: Check the iteration mechanism (interfaces)
   device_query: ''
   device_query_property: ip_address
-  target_devices: [Austin, Washington]
   dict_match: {}
   display_only_failed_nodes: true
   driver: arista_eos
@@ -3152,7 +3191,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: eos
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow E: Iteration Targets': [572, -4]
   postprocessing: ''
@@ -3171,6 +3210,8 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
+  target_devices: [Austin, Washington]
+  target_pools: []
   time_between_retries: 10
   timeout: 3.0
   type: netmiko_validation_service
@@ -3199,7 +3240,6 @@
   description: Check the iteration mechanism (interfaces)
   device_query: ''
   device_query_property: ip_address
-  target_devices: []
   dict_match: {}
   display_only_failed_nodes: true
   driver: arista_eos
@@ -3236,7 +3276,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: eos
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow E: Iteration Targets': [556, 123]
   postprocessing: ''
@@ -3255,6 +3295,8 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   timeout: 3.0
   type: netmiko_validation_service
@@ -3276,7 +3318,6 @@
   description: ''
   device_query: ''
   device_query_property: ip_address
-  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -3302,7 +3343,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions:
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow 8: Payload Extraction with Operations'
@@ -3323,6 +3364,8 @@
   source_code: "set_var(\"list\", [1, 2], device=device.name)\r\nset_var(\"dict\"\
     , {\"a\": [\"o\", True, 4]}, device=device.name)\r\nsave_result(success=True,\
     \ result={})"
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   type: python_snippet_service
   update_pools: false
@@ -3340,7 +3383,6 @@
   description: ''
   device_query: ''
   device_query_property: ip_address
-  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -3375,7 +3417,7 @@
   operation1: __setitem__
   operation2: append
   operation3: update
-  target_pools: []
+  pools: [All objects]
   positions:
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow 8: Payload Extraction with Operations'
@@ -3396,6 +3438,8 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   type: payload_extraction_service
   update_pools: false
@@ -3416,7 +3460,6 @@
   description: ''
   device_query: ''
   device_query_property: ip_address
-  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -3451,7 +3494,7 @@
   operation1: append
   operation2: extend
   operation3: update
-  target_pools: []
+  pools: [All objects]
   positions:
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow 8: Payload Extraction with Operations'
@@ -3472,6 +3515,8 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   type: payload_extraction_service
   update_pools: false
@@ -3493,7 +3538,6 @@
   description: ''
   device_query: ''
   device_query_property: ip_address
-  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -3521,7 +3565,7 @@
   operating_system: ''
   params: {}
   payload: {}
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow E: Iteration Targets': [-135, 91]
   postprocessing: ''
@@ -3538,6 +3582,8 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   timeout: 15
   type: rest_call_service
@@ -3558,7 +3604,6 @@
   description: ''
   device_query: ''
   device_query_property: ip_address
-  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -3584,7 +3629,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow F: Workflow of Workflows': [-179, 146]
     '[Regression Workflow F: Workflow of Workflows] Regression Workflow F S2: Access Variables from Parent Workflow': [
@@ -3611,6 +3656,8 @@
     \ get_result(\"netmiko_check_vrf_napalm\", device=device.name, workflow=\"Regression\
     \ Workflow 5: VRF creation and deletion with Napalm\"),\r\n}\r\nsave_result(success=True,\
     \ result=result)"
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   type: python_snippet_service
   update_pools: false
@@ -3635,7 +3682,6 @@
   description: ''
   device_query: ''
   device_query_property: ip_address
-  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   driver: a10
@@ -3673,7 +3719,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions:
     '[Regression Workflow F: Workflow of Workflows] Regression Workflow F S2: Access Variables from Parent Workflow': [
       244, 113]
@@ -3693,6 +3739,8 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   timeout: 10.0
   type: netmiko_validation_service
@@ -3715,7 +3763,6 @@
   description: Poll configuration and push to gitlab
   device_query: ''
   device_query_property: ip_address
-  target_devices: [Washington]
   dict_match: {}
   display_only_failed_nodes: true
   events: []
@@ -3744,7 +3791,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow F S1: Subworkflow of Workflow': [200, -205]
   postprocessing: ''
@@ -3765,6 +3812,8 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  target_devices: [Washington]
+  target_pools: []
   time_between_retries: 10
   type: workflow
   update_pools: false
@@ -3784,7 +3833,6 @@
   description: Create and delete a VRF with Netmiko
   device_query: ''
   device_query_property: ip_address
-  target_devices: [Austin, Washington]
   dict_match: {}
   display_only_failed_nodes: true
   events: []
@@ -3846,7 +3894,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: eos
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow F: Workflow of Workflows': [-423, -31]
   postprocessing: ''
@@ -3869,6 +3917,8 @@
   skip_query: ''
   skip_value: 'True'
   superworkflow: 'Regression Workflow L: superworkflow'
+  target_devices: [Austin, Washington]
+  target_pools: []
   time_between_retries: 10
   type: workflow
   update_pools: false
@@ -3888,7 +3938,6 @@
   description: Create and delete a VRF with Napalm
   device_query: ''
   device_query_property: ip_address
-  target_devices: [Washington]
   dict_match: {}
   display_only_failed_nodes: true
   events: []
@@ -3920,7 +3969,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: eos
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow F: Workflow of Workflows': [152, 75]
   postprocessing: ''
@@ -3944,6 +3993,8 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  target_devices: [Washington]
+  target_pools: []
   time_between_retries: 10
   type: workflow
   update_pools: false
@@ -3963,7 +4014,6 @@
   description: REST call, Napalm getters, etc
   device_query: ''
   device_query_property: ip_address
-  target_devices: [Washington, Atlanta]
   dict_match: {}
   display_only_failed_nodes: true
   events: []
@@ -4001,7 +4051,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: eos
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow F: Workflow of Workflows': [464, 224]
   postprocessing: ''
@@ -4021,6 +4071,8 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  target_devices: [Washington, Atlanta]
+  target_pools: []
   time_between_retries: 10
   type: workflow
   update_pools: false
@@ -4040,7 +4092,6 @@
   description: Test the payload extraction and validation mechanisms
   device_query: ''
   device_query_property: ip_address
-  target_devices: [Washington]
   dict_match: {}
   display_only_failed_nodes: true
   events: []
@@ -4106,7 +4157,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions:
     '[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow of Workflow': [
       134, -147]
@@ -4138,6 +4189,8 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  target_devices: [Washington]
+  target_pools: []
   time_between_retries: 10
   type: workflow
   update_pools: false
@@ -4157,7 +4210,6 @@
   description: Test the inner workflow system
   device_query: ''
   device_query_property: ip_address
-  target_devices: [Washington, Austin]
   dict_match: {}
   display_only_failed_nodes: true
   events: []
@@ -4192,7 +4244,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: eos
-  target_pools: []
+  pools: [All objects]
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -4214,6 +4266,8 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  target_devices: [Austin, Washington]
+  target_pools: []
   time_between_retries: 10
   type: workflow
   update_pools: false
@@ -4233,7 +4287,6 @@
   description: Workflow with separate failure - success path
   device_query: ''
   device_query_property: ip_address
-  target_devices: [Washington, Philadelphia, LosAngeles]
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -4264,7 +4317,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -4283,6 +4336,8 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  target_devices: [Washington, Philadelphia, LosAngeles]
+  target_pools: []
   time_between_retries: 10
   type: workflow
   update_pools: false
@@ -4302,7 +4357,6 @@
   description: ''
   device_query: ''
   device_query_property: ip_address
-  target_devices: [Washington]
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -4338,7 +4392,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -4357,6 +4411,8 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  target_devices: [Washington]
+  target_pools: []
   time_between_retries: 10
   type: workflow
   update_pools: false
@@ -4376,7 +4432,6 @@
   description: ''
   device_query: ''
   device_query_property: ip_address
-  target_devices: [Washington, Chicago]
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -4422,7 +4477,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -4444,6 +4499,8 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  target_devices: [Washington, Chicago]
+  target_pools: []
   time_between_retries: 10
   type: workflow
   update_pools: false
@@ -4463,7 +4520,6 @@
   description: ''
   device_query: ''
   device_query_property: ip_address
-  target_devices: [Washington, Austin]
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -4494,9 +4550,9 @@
       positions: [-391, -186]
     4d62e069-5dfd-4e6d-b418-8c273a750b06:
       alignment: left
-      content: "This workflow is running on two target_devices: Washington (vEOS) and Austin\
-        \ (dummy).\r\nIt uses NAPALM to retrieve data from a device and the validation\
-        \ mechanism.\r\nTo be tested with and without multiprocessing."
+      content: "This workflow is running on two target_devices: Washington (vEOS)\
+        \ and Austin (dummy).\r\nIt uses NAPALM to retrieve data from a device and\
+        \ the validation mechanism.\r\nTo be tested with and without multiprocessing."
       positions: [-13, 4]
     a5c335bc-dced-4512-b5bc-1149ea7eec73:
       alignment: left
@@ -4524,7 +4580,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions:
     '[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow of Workflow': [
       678, 11]
@@ -4552,6 +4608,8 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  target_devices: [Austin, Washington]
+  target_pools: []
   time_between_retries: 10
   type: workflow
   update_pools: false
@@ -4571,7 +4629,6 @@
   description: ''
   device_query: ''
   device_query_property: ip_address
-  target_devices: [Washington, Austin]
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -4622,7 +4679,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -4643,6 +4700,8 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  target_devices: [Austin, Washington]
+  target_pools: []
   time_between_retries: 10
   type: workflow
   update_pools: false
@@ -4662,9 +4721,6 @@
   description: ''
   device_query: ''
   device_query_property: ip_address
-  target_devices: [Jackson, PaloAlto, Austin, Washington, Chicago, SanJose, SanDiego, Dallas,
-    Houston, Baltimore, Cleveland, Cincinnati, Minneapolis, Sacramento, SanFrancisco,
-    Oakland, Denver]
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -4699,7 +4755,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -4718,6 +4774,10 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  target_devices: [Jackson, PaloAlto, Austin, Washington, Chicago, SanJose, SanDiego,
+    Dallas, Houston, Baltimore, Cleveland, Cincinnati, Minneapolis, Sacramento, SanFrancisco,
+    Oakland, Denver]
+  target_pools: []
   time_between_retries: 10
   type: workflow
   update_pools: false
@@ -4737,7 +4797,6 @@
   description: ''
   device_query: ''
   device_query_property: ip_address
-  target_devices: [Washington, Austin]
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -4776,8 +4835,8 @@
       alignment: left
       content: "Set the following variables in the payload :\r\n- Interfaces 1: ['Loopback101',\
         \ 'Loopback15'] for \"Washington\"\r\notherwise ['Loopback9', 'Loopback1000']\r\
-        \n- Derived target_devices: [\"Washington\", \"Austin\"] for any device\r\n- Interfaces\
-        \ 2: ['Loopback333', 'Loopback334'] for any device"
+        \n- Derived target_devices: [\"Washington\", \"Austin\"] for any device\r\n\
+        - Interfaces 2: ['Loopback333', 'Loopback334'] for any device"
       positions: [-118, -61]
     fbd0224f-eae2-461b-bfc5-9de385e078f0:
       alignment: left
@@ -4797,7 +4856,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -4818,6 +4877,8 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  target_devices: [Austin, Washington]
+  target_pools: []
   time_between_retries: 10
   type: workflow
   update_pools: false
@@ -4837,7 +4898,6 @@
   description: ''
   device_query: ''
   device_query_property: ip_address
-  target_devices: [Washington]
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -4863,7 +4923,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions:
     '[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow of Workflow': [
       135, 187]
@@ -4894,6 +4954,8 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  target_devices: [Washington]
+  target_pools: []
   time_between_retries: 10
   type: workflow
   update_pools: false
@@ -4913,7 +4975,6 @@
   description: ''
   device_query: ''
   device_query_property: ip_address
-  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -4939,7 +5000,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow F: Workflow of Workflows': [164, 375]
   postprocessing: ''
@@ -4960,6 +5021,8 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   type: workflow
   update_pools: false
@@ -4979,7 +5042,6 @@
   description: ''
   device_query: ''
   device_query_property: ip_address
-  target_devices: [Washington]
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -5005,7 +5067,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow F: Workflow of Workflows': [-655, 369]
   postprocessing: ''
@@ -5028,6 +5090,8 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  target_devices: [Washington]
+  target_pools: []
   time_between_retries: 10
   type: workflow
   update_pools: false
@@ -5053,7 +5117,6 @@
   description: ''
   device_query: ''
   device_query_property: name
-  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   driver: a10
@@ -5089,7 +5152,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow F: Workflow of Workflows': [-408, 34]
   postprocessing: ''
@@ -5108,6 +5171,8 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   timeout: 10.0
   type: netmiko_validation_service
@@ -5147,7 +5212,6 @@
   description: ''
   device_query: ''
   device_query_property: name
-  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   driver: a10
@@ -5182,7 +5246,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: [Washington]
+  pools: [All objects]
   positions:
     'Regression Workflow 9: Operational Data Backup': [-125, 15]
   postprocessing: ''
@@ -5213,6 +5277,8 @@
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
+  target_devices: []
+  target_pools: [Washington]
   time_between_retries: 10
   timeout: 10
   type: netmiko_backup_service
@@ -5234,7 +5300,6 @@
   description: ''
   device_query: ''
   device_query_property: name
-  target_devices: [Washington, Austin]
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -5259,7 +5324,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -5280,6 +5345,8 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  target_devices: [Austin, Washington]
+  target_pools: []
   time_between_retries: 10
   type: workflow
   update_pools: false
@@ -5299,7 +5366,6 @@
   description: ''
   device_query: ''
   device_query_property: name
-  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -5325,7 +5391,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow G: run methods (BFS)': [-296, -98]
   postprocessing: ''
@@ -5343,6 +5409,8 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   type: workflow
   update_pools: false
@@ -5362,7 +5430,6 @@
   description: ''
   device_query: ''
   device_query_property: name
-  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -5389,7 +5456,7 @@
   operating_system: ''
   params: {}
   payload: {}
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow G: run methods (BFS)': [-135, 189]
   postprocessing: ''
@@ -5406,6 +5473,8 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   timeout: 15
   type: rest_call_service
@@ -5427,7 +5496,6 @@
   description: ''
   device_query: ''
   device_query_property: name
-  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -5453,7 +5521,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow G: run methods (BFS)': [123, -96]
   postprocessing: ''
@@ -5472,6 +5540,8 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   type: workflow
   update_pools: false
@@ -5491,7 +5561,6 @@
   description: ''
   device_query: ''
   device_query_property: name
-  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -5519,7 +5588,7 @@
   operating_system: ''
   params: {}
   payload: {}
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow G: run methods (BFS)': [254, 163]
   postprocessing: ''
@@ -5536,6 +5605,8 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   timeout: 15
   type: rest_call_service
@@ -5557,7 +5628,6 @@
   description: ''
   device_query: ''
   device_query_property: name
-  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -5582,7 +5652,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow G: run methods (BFS)': [622, -89]
   postprocessing: ''
@@ -5600,6 +5670,8 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   type: workflow
   update_pools: false
@@ -5625,7 +5697,6 @@
   description: ''
   device_query: ''
   device_query_property: name
-  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   driver: a10
@@ -5662,7 +5733,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions:
     '[Regression Workflow G: run methods (BFS)] Workflow  in device by device mode': [
       248, -94]
@@ -5682,6 +5753,8 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   timeout: 10.0
   type: netmiko_validation_service
@@ -5710,7 +5783,6 @@
   description: ''
   device_query: ''
   device_query_property: name
-  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   driver: a10
@@ -5747,7 +5819,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions:
     '[Regression Workflow G: run methods (BFS)] Workflow in service by service mode (workflow targets)': [
       239, -108]
@@ -5767,6 +5839,8 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   timeout: 10.0
   type: netmiko_validation_service
@@ -5795,7 +5869,6 @@
   description: ''
   device_query: ''
   device_query_property: name
-  target_devices: [Philadelphia, LosAngeles]
   dict_match: {}
   display_only_failed_nodes: false
   driver: a10
@@ -5832,7 +5905,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions:
     '[Regression Workflow G: run methods (BFS)] Workflow in service targets mode': [
       234, -86]
@@ -5852,6 +5925,8 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
+  target_devices: [Philadelphia, LosAngeles]
+  target_pools: []
   time_between_retries: 10
   timeout: 10.0
   type: netmiko_validation_service
@@ -5874,7 +5949,6 @@
   description: ''
   device_query: ''
   device_query_property: name
-  target_devices: [PaloAlto]
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -5921,7 +5995,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -5939,6 +6013,8 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  target_devices: [PaloAlto]
+  target_pools: []
   time_between_retries: 10
   type: workflow
   update_pools: false
@@ -5958,7 +6034,6 @@
   description: ''
   device_query: ''
   device_query_property: name
-  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -5984,7 +6059,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow H: shared service in multiple subworkflows': [-241, 197]
   postprocessing: ''
@@ -6002,6 +6077,8 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   type: workflow
   update_pools: false
@@ -6021,7 +6098,6 @@
   description: ''
   device_query: ''
   device_query_property: name
-  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -6047,7 +6123,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow H: shared service in multiple subworkflows': [548, 48]
   postprocessing: ''
@@ -6065,6 +6141,8 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   type: workflow
   update_pools: false
@@ -6090,7 +6168,6 @@
   description: ''
   device_query: ''
   device_query_property: name
-  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   driver: a10
@@ -6126,7 +6203,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions:
     '[Regression Workflow H: shared service in multiple subworkflows] Subworkflow 1': [
       167, -185]
@@ -6148,6 +6225,8 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   timeout: 10.0
   type: netmiko_validation_service
@@ -6170,7 +6249,6 @@
   description: ''
   device_query: ''
   device_query_property: name
-  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -6197,7 +6275,7 @@
   options: {}
   pass_device_properties: false
   playbook_path: /media/sf_shared/eNMS/files/playbooks/simple_playbook.yml
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow 6: Ansible with Validation': [-536, 192]
   postprocessing: ''
@@ -6213,6 +6291,8 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   type: ansible_playbook_service
   update_pools: false
@@ -6231,7 +6311,6 @@
   description: ''
   device_query: ''
   device_query_property: name
-  target_devices: [Washington]
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -6256,7 +6335,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -6274,6 +6353,8 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  target_devices: [Washington]
+  target_pools: []
   time_between_retries: 10
   type: workflow
   update_pools: false
@@ -6292,7 +6373,6 @@
   description: ''
   device_query: ''
   device_query_property: name
-  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -6316,7 +6396,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow I: Iteration Targets Advanced': [132, -202]
   postprocessing: ''
@@ -6335,6 +6415,8 @@
   source_code: "results[\"success\"] = True\r\nresults[\"result\"] = {\r\n  \"dict_iteration\"\
     : {\r\n    \"variable1\": {\"command\": \"test\"},\r\n    \"variable2\": {\"command\"\
     : \"test2\"}\r\n  }\r\n}"
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   type: python_snippet_service
   update_pools: false
@@ -6359,7 +6441,6 @@
   description: ''
   device_query: ''
   device_query_property: name
-  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   driver: arista_eos
@@ -6395,7 +6476,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow I: Iteration Targets Advanced': [135, 100]
   postprocessing: ''
@@ -6414,6 +6495,8 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   timeout: 10.0
   type: netmiko_validation_service
@@ -6436,7 +6519,6 @@
   description: ''
   device_query: ''
   device_query_property: name
-  target_devices: [Washington]
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -6461,7 +6543,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -6479,6 +6561,8 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  target_devices: [Washington]
+  target_pools: []
   time_between_retries: 10
   type: workflow
   update_pools: false
@@ -6497,7 +6581,6 @@
   description: ''
   device_query: ''
   device_query_property: name
-  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -6521,7 +6604,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow J: Workflow and Subworkflow Iteration': [226, -76]
   postprocessing: ''
@@ -6539,6 +6622,8 @@
   skip_value: 'True'
   source_code: "result={\"top_level\": top_level_iteration}\r\nresults[\"result\"\
     ] = result\r\nresults[\"success\"] = True"
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   type: python_snippet_service
   update_pools: false
@@ -6557,7 +6642,6 @@
   description: ''
   device_query: ''
   device_query_property: name
-  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -6582,7 +6666,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow J: Workflow and Subworkflow Iteration': [218, 171]
   postprocessing: ''
@@ -6600,6 +6684,8 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   type: workflow
   update_pools: false
@@ -6618,7 +6704,6 @@
   description: ''
   device_query: ''
   device_query_property: name
-  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -6643,7 +6728,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions:
     '[Regression Workflow J: Workflow and Subworkflow Iteration] Subworkflow Iteration': [
       231, -87]
@@ -6662,6 +6747,8 @@
   skip_value: 'True'
   source_code: "result={\"top_level\": top_level_iteration, \"subworkflow\": subworkflow_iteration}\r\
     \nresults[\"success\"] = True\r\nresults[\"result\"] = result\r\n"
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   type: python_snippet_service
   update_pools: false
@@ -6679,7 +6766,6 @@
   description: ''
   device_query: ''
   device_query_property: name
-  target_devices: []
   dict_match:
     value: [1.1.1.1, 2.2.2.2, 3.3.3.3]
   display_only_failed_nodes: false
@@ -6706,7 +6792,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions:
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow 7: Payload Extraction & Validation'
@@ -6728,6 +6814,8 @@
   source_code: "result = {}\r\nresults[\"success\"] = True\r\nresults[\"result\"]\
     \ = get_result(\"Payload Extraction\", device.name)[\"result\"][\"regex_variable\"\
     ]"
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   type: python_snippet_service
   update_pools: false
@@ -6745,7 +6833,6 @@
   description: ''
   device_query: ''
   device_query_property: name
-  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -6771,7 +6858,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions:
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow 7: Payload Extraction & Validation'
@@ -6792,6 +6879,8 @@
   source_code: "result = {}\r\nresults[\"success\"] = True\r\nresults[\"result\"]\
     \ = get_result(\"Payload Extraction\", device.name)[\"result\"][\"textfsm_variable\"\
     ][\"value\"][0][1]"
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   type: python_snippet_service
   update_pools: false
@@ -6809,7 +6898,6 @@
   description: ''
   device_query: ''
   device_query_property: name
-  target_devices: []
   dict_match:
     value: [1.1.1.1, 2.2.2.2, 3.3.3.3]
   display_only_failed_nodes: false
@@ -6836,7 +6924,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions:
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow 7: Payload Extraction & Validation'
@@ -6857,6 +6945,8 @@
   skip_value: 'True'
   source_code: "result = {}\r\nresults[\"success\"] = True\r\nresults[\"result\"]\
     \ = {\"value\": get_var(\"regex_variable\", device=device.name)}"
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   type: python_snippet_service
   update_pools: false
@@ -6874,7 +6964,6 @@
   description: ''
   device_query: ''
   device_query_property: name
-  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -6900,7 +6989,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions:
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow 7: Payload Extraction & Validation'
@@ -6920,6 +7009,8 @@
   skip_value: 'True'
   source_code: "result = {}\r\nresults[\"success\"] = True\r\nresults[\"result\"]\
     \ = get_var(\"textfsm_variable\", device=device.name)[0][1]"
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   type: python_snippet_service
   update_pools: false
@@ -6937,7 +7028,6 @@
   description: ''
   device_query: ''
   device_query_property: name
-  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -6963,7 +7053,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions:
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow 8: Payload Extraction with Operations'
@@ -6983,6 +7073,8 @@
   skip_value: 'True'
   source_code: "result = {}\r\nresults[\"success\"] = True\r\nresults[\"result\"]\
     \ = get_var(\"list\", device=device.name)"
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   type: python_snippet_service
   update_pools: false
@@ -7000,7 +7092,6 @@
   description: ''
   device_query: ''
   device_query_property: name
-  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -7026,7 +7117,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions:
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow 8: Payload Extraction with Operations'
@@ -7046,6 +7137,8 @@
   skip_value: 'True'
   source_code: "result = {}\r\nresults[\"success\"] = True\r\nresults[\"result\"]\
     \ = get_var(\"dict\", device=device.name)"
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   type: python_snippet_service
   update_pools: false
@@ -7064,7 +7157,6 @@
   description: ''
   device_query: ''
   device_query_property: name
-  target_devices: [Washington, Chicago]
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -7107,7 +7199,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -7126,6 +7218,8 @@
   skip_query: ''
   skip_value: 'True'
   superworkflow: 'Regression Workflow L: superworkflow'
+  target_devices: [Washington, Chicago]
+  target_pools: []
   time_between_retries: 10
   type: workflow
   update_pools: false
@@ -7144,7 +7238,6 @@
   description: ''
   device_query: ''
   device_query_property: name
-  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -7168,7 +7261,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow K: preprocessing and postprocessing': [-26, 123]
   postprocessing: "results[\"postprocessing\"] = f\"Value set with postprocessing\
@@ -7190,6 +7283,8 @@
   skip_value: 'True'
   source_code: "result = {}\r\nresults[\"success\"] = True\r\nresults[\"result\"]\
     \ = test"
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   type: python_snippet_service
   update_pools: false
@@ -7207,7 +7302,6 @@
   description: ''
   device_query: ''
   device_query_property: name
-  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -7232,7 +7326,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow K: preprocessing and postprocessing': [558, 152]
   postprocessing: "results[\"SHOULD BE THERE\"] = \"NO BUG\"\r\n\r\nresults[\"func_result\"\
@@ -7250,6 +7344,8 @@
   skip_query: ''
   skip_value: 'True'
   source_code: "results[\"integer\"] = 10 + integer\r\nresults[\"success\"] = False"
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   type: python_snippet_service
   update_pools: false
@@ -7267,7 +7363,6 @@
   description: ''
   device_query: ''
   device_query_property: name
-  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -7291,7 +7386,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow L: superworkflow': [511, -111]
   postprocessing: ''
@@ -7308,6 +7403,8 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   type: swiss_army_knife_service
   update_pools: false
@@ -7326,7 +7423,6 @@
   description: ''
   device_query: ''
   device_query_property: name
-  target_devices: [SanJose, SanDiego]
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -7351,7 +7447,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -7371,6 +7467,8 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  target_devices: [SanJose, SanDiego]
+  target_pools: []
   time_between_retries: 10
   type: workflow
   update_pools: false
@@ -7390,7 +7488,6 @@
   description: ''
   device_query: ''
   device_query_property: name
-  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -7420,7 +7517,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -7443,6 +7540,8 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   type: workflow
   update_pools: false
@@ -7462,7 +7561,6 @@
   description: ''
   device_query: ''
   device_query_property: name
-  target_devices: [Washington, LosAngeles]
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -7487,7 +7585,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow M: Unix command & shell, ping, - jump on connect - mechanism': [
       -177, -94]
@@ -7505,6 +7603,8 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  target_devices: [Washington, LosAngeles]
+  target_pools: []
   time_between_retries: 10
   type: unix_command_service
   update_pools: false
@@ -7528,7 +7628,6 @@
   description: ''
   device_query: ''
   device_query_property: name
-  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   driver: linux
@@ -7558,7 +7657,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow M: Unix command & shell, ping, - jump on connect - mechanism': [
       -113, 220]
@@ -7584,6 +7683,8 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   timeout: 10
   type: unix_shell_script_service
@@ -7605,7 +7706,6 @@
   description: ''
   device_query: ''
   device_query_property: name
-  target_devices: [Washington]
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -7631,7 +7731,7 @@
   number_of_retries: 0
   operating_system: ''
   packet_size: 56
-  target_pools: []
+  pools: [All objects]
   ports: '22'
   positions:
     'Regression Workflow M: Unix command & shell, ping, - jump on connect - mechanism': [
@@ -7651,6 +7751,8 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  target_devices: [Washington]
+  target_pools: []
   time_between_retries: 10
   timeout: 2
   ttl: 60
@@ -7671,7 +7773,6 @@
   description: ''
   device_query: ''
   device_query_property: name
-  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -7696,7 +7797,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -7713,6 +7814,8 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   type: workflow
   update_pools: false
@@ -7731,7 +7834,6 @@
   description: ''
   device_query: ''
   device_query_property: name
-  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -7759,10 +7861,10 @@
   notification_header: ''
   number_of_retries: 0
   opennms_address: https://demo.opennms.org/opennms/rest
-  opennms_target_devices: https://demo.opennms.org/opennms/rest/nodes
+  opennms_devices: ''
   opennms_login: demo
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow N: Topology Import (netbox, librenms, opennms)': [113, -104]
   postprocessing: ''
@@ -7778,6 +7880,8 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   type: topology_import_service
   update_pools: false
@@ -7802,7 +7906,6 @@
   description: ''
   device_query: ''
   device_query_property: name
-  target_devices: [Washington]
   dict_match: {}
   display_only_failed_nodes: false
   driver: a10
@@ -7839,7 +7942,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow M: Unix command & shell, ping, - jump on connect - mechanism': [
       358, 190]
@@ -7860,6 +7963,8 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
+  target_devices: [Washington]
+  target_pools: []
   time_between_retries: 10
   timeout: 10.0
   type: netmiko_validation_service
@@ -7882,7 +7987,6 @@
   description: Use REST call is_alive
   device_query: ''
   device_query_property: ip_address
-  target_devices: [Columbus]
   dict_match: {}
   display_only_failed_nodes: true
   events: []
@@ -7911,7 +8015,7 @@
   payload:
     a: b
     c: ['1', '2', '3']
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow L: superworkflow': [227, 151]
   postprocessing: ''
@@ -7928,6 +8032,8 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  target_devices: [Columbus]
+  target_pools: []
   time_between_retries: 10
   timeout: 15
   type: rest_call_service
@@ -7955,7 +8061,6 @@
   description: ''
   device_query: ''
   device_query_property: name
-  target_devices: [Boston, Baltimore, Columbus, Cambridge, Cincinnati, Cleveland, Chicago]
   dict_match: {}
   display_only_failed_nodes: false
   driver: a10
@@ -7991,7 +8096,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -8009,6 +8114,8 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
+  target_devices: [Chicago, Boston, Baltimore, Cleveland, Columbus, Cincinnati, Cambridge]
+  target_pools: []
   time_between_retries: 10
   timeout: 10.0
   type: netmiko_validation_service
@@ -8048,7 +8155,6 @@
   description: ''
   device_query: ''
   device_query_property: name
-  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   driver: a10
@@ -8083,7 +8189,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow 9: Operational Data Backup': [-455, 15]
   postprocessing: ''
@@ -8114,6 +8220,8 @@
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   timeout: 10
   type: netmiko_backup_service
@@ -8136,7 +8244,6 @@
   description: ''
   device_query: ''
   device_query_property: name
-  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -8161,7 +8268,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow 9: Operational Data Backup': [148, 191]
   postprocessing: ''
@@ -8181,6 +8288,8 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   type: git_service
   update_pools: false
@@ -8198,7 +8307,6 @@
   description: ''
   device_query: ''
   device_query_property: name
-  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -8222,7 +8330,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow L: superworkflow': [606, 47]
   postprocessing: ''
@@ -8241,6 +8349,8 @@
   skip_value: 'True'
   source_code: "result = {}\r\nresults[\"success\"] = True\r\nresults[\"result\"]\
     \ = get_result(placeholder.name)[\"summary\"]"
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   type: python_snippet_service
   update_pools: false
@@ -8259,7 +8369,6 @@
   description: ''
   device_query: ''
   device_query_property: name
-  target_devices: [Washington]
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -8284,7 +8393,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -8304,6 +8413,8 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  target_devices: [Washington]
+  target_pools: []
   time_between_retries: 10
   type: workflow
   update_pools: false
@@ -8326,7 +8437,6 @@
   description: ''
   device_query: ''
   device_query_property: name
-  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   driver: cisco_iosxe
@@ -8351,7 +8461,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow O: Scrapli': [-33, -167]
   postprocessing: results["success"] = "TEST-VRF" not in results["result"]
@@ -8369,6 +8479,8 @@
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   transport: system
   type: scrapli_service
@@ -8393,7 +8505,6 @@
   description: ''
   device_query: ''
   device_query_property: name
-  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   driver: arista_eos
@@ -8419,7 +8530,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow O: Scrapli': [402, -161]
   postprocessing: ''
@@ -8437,6 +8548,8 @@
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   transport: system
   type: scrapli_service
@@ -8461,7 +8574,6 @@
   description: ''
   device_query: ''
   device_query_property: name
-  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   driver: cisco_iosxe
@@ -8487,7 +8599,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow O: Scrapli': [6, 112]
   postprocessing: results["success"] = "TEST-VRF" in results["result"]
@@ -8505,6 +8617,8 @@
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   transport: system
   type: scrapli_service
@@ -8529,7 +8643,6 @@
   description: ''
   device_query: ''
   device_query_property: name
-  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   driver: arista_eos
@@ -8555,7 +8668,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow O: Scrapli': [373, 107]
   postprocessing: ''
@@ -8573,6 +8686,8 @@
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   transport: system
   type: scrapli_service
@@ -8594,7 +8709,6 @@
   description: ''
   device_query: ''
   device_query_property: name
-  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -8619,9 +8733,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: [All objects, Devices only, Links only, Datacenter San Francisco, Datacenter
-      New York, Datacenter Chicago, Washington, Links 6 through 9 - Public pools,
-    Links 0 through 5 - Non-public pool - Access set up]
+  pools: [All objects]
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -8658,6 +8770,10 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  target_devices: []
+  target_pools: [All objects, Devices only, Links only, Datacenter San Francisco,
+    Datacenter New York, Datacenter Chicago, Washington, Links 0 through 5 - Non-public
+      pool - Access set up, Links 6 through 9 - Public pools]
   time_between_retries: 10
   type: workflow
   update_pools: false
@@ -8677,7 +8793,6 @@
   description: Use REST call is_alive
   device_query: ''
   device_query_property: ip_address
-  target_devices: []
   dict_match: {}
   display_only_failed_nodes: true
   events: []
@@ -8707,7 +8822,7 @@
   payload:
     a: b
     c: ['1', '2', '3']
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow 2: Separate Failure - Success paths': [374, 278]
     'Regression Workflow 3: Napalm getters (postprocessing)': ['-50', '0']
@@ -8732,6 +8847,8 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   timeout: 15
   type: rest_call_service
@@ -8753,7 +8870,6 @@
   description: Use REST call is_alive
   device_query: ''
   device_query_property: ip_address
-  target_devices: []
   dict_match: {}
   display_only_failed_nodes: true
   events: []
@@ -8783,7 +8899,7 @@
   payload:
     a: b
     c: ['1', '2', '3']
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow P: large workflow (scalability)': &id017 [-406, 73]
     'Regression workflow P: large workflow (scalability)': *id017
@@ -8802,6 +8918,8 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   timeout: 15
   type: rest_call_service
@@ -8823,7 +8941,6 @@
   description: Use REST call is_alive
   device_query: ''
   device_query_property: ip_address
-  target_devices: []
   dict_match: {}
   display_only_failed_nodes: true
   events: []
@@ -8853,7 +8970,7 @@
   payload:
     a: b
     c: ['1', '2', '3']
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow P: large workflow (scalability)': &id018 [-402, 156]
     'Regression workflow P: large workflow (scalability)': *id018
@@ -8872,6 +8989,8 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   timeout: 15
   type: rest_call_service
@@ -8893,7 +9012,6 @@
   description: Use REST call is_alive
   device_query: ''
   device_query_property: ip_address
-  target_devices: []
   dict_match: {}
   display_only_failed_nodes: true
   events: []
@@ -8923,7 +9041,7 @@
   payload:
     a: b
     c: ['1', '2', '3']
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow P: large workflow (scalability)': &id019 [-94, 200]
     'Regression workflow P: large workflow (scalability)': *id019
@@ -8942,6 +9060,8 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   timeout: 15
   type: rest_call_service
@@ -8963,7 +9083,6 @@
   description: Use REST call is_alive
   device_query: ''
   device_query_property: ip_address
-  target_devices: []
   dict_match: {}
   display_only_failed_nodes: true
   events: []
@@ -8993,7 +9112,7 @@
   payload:
     a: b
     c: ['1', '2', '3']
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow P: large workflow (scalability)': &id020 [-94, 109]
     'Regression workflow P: large workflow (scalability)': *id020
@@ -9012,6 +9131,8 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   timeout: 15
   type: rest_call_service
@@ -9039,7 +9160,6 @@
   description: ''
   device_query: ''
   device_query_property: name
-  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   driver: a10
@@ -9076,7 +9196,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow P: large workflow (scalability)': &id021 [-117, 5]
     'Regression workflow P: large workflow (scalability)': *id021
@@ -9097,6 +9217,8 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   timeout: 10.0
   type: netmiko_validation_service
@@ -9125,7 +9247,6 @@
   description: ''
   device_query: ''
   device_query_property: name
-  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   driver: a10
@@ -9162,7 +9283,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow P: large workflow (scalability)': &id022 [-81, -125]
     'Regression workflow P: large workflow (scalability)': *id022
@@ -9183,6 +9304,8 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   timeout: 10.0
   type: netmiko_validation_service
@@ -9211,7 +9334,6 @@
   description: ''
   device_query: ''
   device_query_property: name
-  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   driver: a10
@@ -9248,7 +9370,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow P: large workflow (scalability)': &id023 [-89, -196]
     'Regression workflow P: large workflow (scalability)': *id023
@@ -9269,6 +9391,8 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   timeout: 10.0
   type: netmiko_validation_service
@@ -9297,7 +9421,6 @@
   description: ''
   device_query: ''
   device_query_property: name
-  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   driver: a10
@@ -9334,7 +9457,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow P: large workflow (scalability)': &id024 [183, -222]
     'Regression workflow P: large workflow (scalability)': *id024
@@ -9355,6 +9478,8 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   timeout: 10.0
   type: netmiko_validation_service
@@ -9383,7 +9508,6 @@
   description: ''
   device_query: ''
   device_query_property: name
-  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   driver: a10
@@ -9420,7 +9544,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow P: large workflow (scalability)': &id025 [188, -130]
     'Regression workflow P: large workflow (scalability)': *id025
@@ -9441,6 +9565,8 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   timeout: 10.0
   type: netmiko_validation_service
@@ -9469,7 +9595,6 @@
   description: ''
   device_query: ''
   device_query_property: name
-  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   driver: a10
@@ -9506,7 +9631,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow P: large workflow (scalability)': &id026 [190, -36]
     'Regression workflow P: large workflow (scalability)': *id026
@@ -9527,6 +9652,8 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   timeout: 10.0
   type: netmiko_validation_service
@@ -9548,7 +9675,6 @@
   description: ''
   device_query: ''
   device_query_property: name
-  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -9572,7 +9698,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow P: large workflow (scalability)': &id027 [194, 47]
     'Regression workflow P: large workflow (scalability)': *id027
@@ -9592,6 +9718,8 @@
   skip_value: 'True'
   source_code: "from time import sleep\r\nsleep(1)\r\n\r\nresult = {}\r\nresults[\"\
     success\"] = True\r\nresults[\"result\"] = result"
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   type: python_snippet_service
   update_pools: false
@@ -9609,7 +9737,6 @@
   description: ''
   device_query: ''
   device_query_property: name
-  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -9633,7 +9760,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow P: large workflow (scalability)': &id028 [203, 127]
     'Regression workflow P: large workflow (scalability)': *id028
@@ -9653,6 +9780,8 @@
   skip_value: 'True'
   source_code: "from time import sleep\r\nsleep(1)\r\n\r\nresult = {}\r\nresults[\"\
     success\"] = True\r\nresults[\"result\"] = result"
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   type: python_snippet_service
   update_pools: false
@@ -9670,7 +9799,6 @@
   description: ''
   device_query: ''
   device_query_property: name
-  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -9694,7 +9822,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow P: large workflow (scalability)': &id029 [207, 230]
     'Regression workflow P: large workflow (scalability)': *id029
@@ -9714,6 +9842,8 @@
   skip_value: 'True'
   source_code: "from time import sleep\r\nsleep(1)\r\n\r\nresult = {}\r\nresults[\"\
     success\"] = True\r\nresults[\"result\"] = result"
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   type: python_snippet_service
   update_pools: false
@@ -9731,7 +9861,6 @@
   description: ''
   device_query: ''
   device_query_property: name
-  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -9755,7 +9884,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow P: large workflow (scalability)': &id030 [476, 232]
     'Regression workflow P: large workflow (scalability)': *id030
@@ -9775,6 +9904,8 @@
   skip_value: 'True'
   source_code: "from time import sleep\r\nsleep(1)\r\n\r\nresult = {}\r\nresults[\"\
     success\"] = True\r\nresults[\"result\"] = result"
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   type: python_snippet_service
   update_pools: false
@@ -9792,7 +9923,6 @@
   description: ''
   device_query: ''
   device_query_property: name
-  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -9816,7 +9946,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow P: large workflow (scalability)': &id031 [471, 142]
     'Regression workflow P: large workflow (scalability)': *id031
@@ -9836,6 +9966,8 @@
   skip_value: 'True'
   source_code: "from time import sleep\r\nsleep(1)\r\n\r\nresult = {}\r\nresults[\"\
     success\"] = True\r\nresults[\"result\"] = result"
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   type: python_snippet_service
   update_pools: false
@@ -9853,7 +9985,6 @@
   description: ''
   device_query: ''
   device_query_property: name
-  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -9877,7 +10008,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow P: large workflow (scalability)': &id032 [476, 44]
     'Regression workflow P: large workflow (scalability)': *id032
@@ -9897,6 +10028,8 @@
   skip_value: 'True'
   source_code: "from time import sleep\r\nsleep(1)\r\n\r\nresult = {}\r\nresults[\"\
     success\"] = True\r\nresults[\"result\"] = result"
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   type: python_snippet_service
   update_pools: false
@@ -9914,7 +10047,6 @@
   description: ''
   device_query: ''
   device_query_property: name
-  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -9938,7 +10070,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow P: large workflow (scalability)': &id033 [469, -50]
     'Regression workflow P: large workflow (scalability)': *id033
@@ -9958,6 +10090,8 @@
   skip_value: 'True'
   source_code: "from time import sleep\r\nsleep(1)\r\n\r\nresult = {}\r\nresults[\"\
     success\"] = True\r\nresults[\"result\"] = result"
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   type: python_snippet_service
   update_pools: false
@@ -9975,7 +10109,6 @@
   description: ''
   device_query: ''
   device_query_property: name
-  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -9999,7 +10132,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow P: large workflow (scalability)': &id034 [467, -163]
     'Regression workflow P: large workflow (scalability)': *id034
@@ -10019,6 +10152,8 @@
   skip_value: 'True'
   source_code: "from time import sleep\r\nsleep(1)\r\n\r\nresult = {}\r\nresults[\"\
     success\"] = True\r\nresults[\"result\"] = result"
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   type: python_snippet_service
   update_pools: false
@@ -10037,7 +10172,6 @@
   description: ''
   device_query: ''
   device_query_property: name
-  target_devices: [Washington]
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -10062,7 +10196,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -10084,6 +10218,8 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  target_devices: [Washington]
+  target_pools: []
   time_between_retries: 10
   type: workflow
   update_pools: false
@@ -10109,7 +10245,6 @@
   description: ''
   device_query: ''
   device_query_property: name
-  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   driver: a10
@@ -10145,7 +10280,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow Q: File transfer': [-171, -148]
   postprocessing: results["success"] = "a.bin" not in results["result"]
@@ -10165,6 +10300,8 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   timeout: 10.0
   type: netmiko_validation_service
@@ -10187,7 +10324,6 @@
   destination_file: enms_files/a.bin
   device_query: ''
   device_query_property: name
-  target_devices: []
   dict_match: {}
   direction: put
   display_only_failed_nodes: false
@@ -10216,7 +10352,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow Q: File transfer': [-21, 255]
   postprocessing: ''
@@ -10236,6 +10372,8 @@
   skip_value: 'True'
   source_file: /media/sf_shared/eNMS/tests/file_transfer/a.bin
   source_file_includes_globbing: false
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   timeout: 10.0
   type: generic_file_transfer_service
@@ -10262,7 +10400,6 @@
   description: ''
   device_query: ''
   device_query_property: name
-  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   driver: a10
@@ -10298,7 +10435,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow Q: File transfer': [362, 239]
   postprocessing: "simple_file = \"a.bin\" in results[\"result\"]\r\nglob_files =\
@@ -10320,6 +10457,8 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   timeout: 10.0
   type: netmiko_validation_service
@@ -10342,7 +10481,6 @@
   destination_file: enms_files
   device_query: ''
   device_query_property: name
-  target_devices: [Washington]
   dict_match: {}
   direction: put
   display_only_failed_nodes: false
@@ -10372,7 +10510,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow Q: File transfer': [187, -140]
   postprocessing: ''
@@ -10392,6 +10530,8 @@
   skip_value: 'True'
   source_file: /media/sf_shared/eNMS/tests/file_transfer/?[c|d].bi*
   source_file_includes_globbing: true
+  target_devices: [Washington]
+  target_pools: []
   time_between_retries: 10
   timeout: 10.0
   type: generic_file_transfer_service
@@ -10418,7 +10558,6 @@
   description: ''
   device_query: ''
   device_query_property: name
-  target_devices: [Washington]
   dict_match: {}
   display_only_failed_nodes: false
   driver: a10
@@ -10454,7 +10593,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow Q: File transfer': [517, -138]
   postprocessing: ''
@@ -10474,6 +10613,8 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
+  target_devices: [Washington]
+  target_pools: []
   time_between_retries: 10
   timeout: 10.0
   type: netmiko_validation_service
@@ -10496,7 +10637,6 @@
   destination_file: enms_files
   device_query: ''
   device_query_property: name
-  target_devices: []
   dict_match: {}
   direction: put
   display_only_failed_nodes: false
@@ -10525,7 +10665,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow Q: File transfer': [-332, 180]
   postprocessing: ''
@@ -10545,6 +10685,8 @@
   skip_value: 'True'
   source_file: /media/test.bin
   source_file_includes_globbing: false
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   timeout: 10.0
   type: generic_file_transfer_service
@@ -10565,7 +10707,6 @@
   description: ''
   device_query: ''
   device_query_property: name
-  target_devices: [Austin, Washington, Chicago]
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -10590,7 +10731,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -10610,6 +10751,8 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  target_devices: [Austin, Washington, Chicago]
+  target_pools: []
   time_between_retries: 10
   type: workflow
   update_pools: false
@@ -10628,7 +10771,6 @@
   description: ''
   device_query: ''
   device_query_property: name
-  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -10653,7 +10795,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow R: skip services in service by service mode': &id035 [-124,
       -154]
@@ -10678,6 +10820,8 @@
     \ in the middle of the script:\r\n#    exit()\r\n#    Note: exit() is not required\
     \ as the last line\r\n\r\nresult = {}\r\nresults[\"success\"] = True\r\nresults[\"\
     result\"] = result"
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   type: python_snippet_service
   update_pools: false
@@ -10695,7 +10839,6 @@
   description: ''
   device_query: ''
   device_query_property: name
-  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -10719,7 +10862,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow R: skip services in service by service mode': &id036 [304,
       -102]
@@ -10744,6 +10887,8 @@
     \ in the middle of the script:\r\n#    exit()\r\n#    Note: exit() is not required\
     \ as the last line\r\n\r\nresult = {}\r\nresults[\"success\"] = True\r\nresults[\"\
     result\"] = result"
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   type: python_snippet_service
   update_pools: false
@@ -10761,7 +10906,6 @@
   description: ''
   device_query: ''
   device_query_property: name
-  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -10786,7 +10930,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow R: skip services in service by service mode': &id037 [12,
       179]
@@ -10811,6 +10955,8 @@
     \ in the middle of the script:\r\n#    exit()\r\n#    Note: exit() is not required\
     \ as the last line\r\n\r\nresult = {}\r\nresults[\"success\"] = True\r\nresults[\"\
     result\"] = result"
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   type: python_snippet_service
   update_pools: false
@@ -10829,7 +10975,6 @@
   description: ''
   device_query: ''
   device_query_property: name
-  target_devices: [PaloAlto, Austin, Washington]
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -10866,7 +11011,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -10889,6 +11034,8 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  target_devices: [PaloAlto, Austin, Washington]
+  target_pools: []
   time_between_retries: 10
   type: workflow
   update_pools: false
@@ -10907,7 +11054,6 @@
   description: ''
   device_query: ''
   device_query_property: name
-  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -10932,7 +11078,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow S: conditional skip query with skip value set to False': &id038 [
       -149, -30]
@@ -10957,6 +11103,8 @@
     \ in the middle of the script:\r\n#    exit()\r\n#    Note: exit() is not required\
     \ as the last line\r\n\r\nresult = {}\r\nresults[\"success\"] = True\r\nresults[\"\
     result\"] = result"
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   type: python_snippet_service
   update_pools: false
@@ -10974,7 +11122,6 @@
   description: ''
   device_query: ''
   device_query_property: name
-  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -10999,7 +11146,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow S: conditional skip query with skip value set to False': &id039 [
       264, -16]
@@ -11024,6 +11171,8 @@
     \ in the middle of the script:\r\n#    exit()\r\n#    Note: exit() is not required\
     \ as the last line\r\n\r\nresult = {}\r\nresults[\"success\"] = True\r\nresults[\"\
     result\"] = result"
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   type: python_snippet_service
   update_pools: false
@@ -11041,7 +11190,6 @@
   description: ''
   device_query: ''
   device_query_property: name
-  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -11066,7 +11214,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow S: conditional skip query with skip value set to False': &id040 [
       208, 194]
@@ -11091,6 +11239,8 @@
     \ in the middle of the script:\r\n#    exit()\r\n#    Note: exit() is not required\
     \ as the last line\r\n\r\nresult = {}\r\nresults[\"success\"] = True\r\nresults[\"\
     result\"] = result"
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   type: python_snippet_service
   update_pools: false
@@ -11108,7 +11258,6 @@
   description: ''
   device_query: ''
   device_query_property: name
-  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -11133,7 +11282,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow S: conditional skip query with skip value set to False': &id041 [
       636, 63]
@@ -11158,6 +11307,8 @@
     \ in the middle of the script:\r\n#    exit()\r\n#    Note: exit() is not required\
     \ as the last line\r\n\r\nresult = {}\r\nresults[\"success\"] = True\r\nresults[\"\
     result\"] = result"
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   type: python_snippet_service
   update_pools: false
@@ -11176,7 +11327,6 @@
   description: ''
   device_query: ''
   device_query_property: name
-  target_devices: [Dallas]
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -11223,7 +11373,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -11242,6 +11392,8 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  target_devices: [Dallas]
+  target_pools: []
   time_between_retries: 10
   type: workflow
   update_pools: false
@@ -11260,7 +11412,6 @@
   description: ''
   device_query: ''
   device_query_property: name
-  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -11284,7 +11435,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow 1: link neighbors mechanism': &id042 [-20, 30]
     'Regression Workflow 4: link neighbors mechanism': *id042
@@ -11329,6 +11480,8 @@
     results[\"success\"] = True\r\nfor test, result in results[\"result\"].items():\r\
     \n    if result != results[\"expected_result\"][test]:\r\n        results[\"success\"\
     ] = False\r\n"
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   type: python_snippet_service
   update_pools: false
@@ -11347,7 +11500,6 @@
   description: ''
   device_query: ''
   device_query_property: name
-  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -11375,7 +11527,7 @@
   operating_system: ''
   params: {}
   payload: {}
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow 1: link neighbors mechanism': &id043 [401, -181]
     'Regression Workflow 4: link neighbors mechanism': *id043
@@ -11395,6 +11547,8 @@
   skip: false
   skip_query: ''
   skip_value: 'True'
+  target_devices: []
+  target_pools: []
   time_between_retries: 10
   timeout: 15
   type: rest_call_service
@@ -11422,7 +11576,6 @@
   description: ''
   device_query: ''
   device_query_property: name
-  target_devices: []
   dict_match: {}
   display_only_failed_nodes: false
   driver: a10
@@ -11458,7 +11611,7 @@
   notification_header: ''
   number_of_retries: 2
   operating_system: ''
-  target_pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow 1: Netmiko with validation and retries': [-142, -137]
     'Regression Workflow D: Prompts': [-291, -104]
@@ -11479,6 +11632,8 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
+  target_devices: []
+  target_pools: []
   time_between_retries: 2
   timeout: 10.0
   type: netmiko_validation_service

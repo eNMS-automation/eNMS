@@ -56,29 +56,20 @@ class Task(AbstractBase):
 
     @classmethod
     def rbac_filter(cls, query, mode, user):
-        service_mode = "read" if mode == "read" else "schedule"
         public_tasks = query.join(cls.service).filter(
             models["service"].public == true()
         )
-        service_alias = aliased(models["service"])
+        pool_alias = aliased(models["pool"])
         user_tasks = (
             query.join(cls.service)
-            .join(models["service"].originals.of_type(service_alias))
-            .join(models["access"], service_alias.access)
-            .join(models["user"], models["access"].users)
-            .filter(models["access"].services_access.contains(service_mode))
+            .join(models["pool"], models["service"].pools)
+            .join(models["access"], models["pool"].access)
+            .join(pool_alias, models["access"].user_pools)
+            .join(models["user"], pool_alias.users)
+            .filter(models["access"].access_type.contains(mode))
             .filter(models["user"].name == user.name)
         )
-        user_group_tasks = (
-            query.join(cls.service)
-            .join(models["service"].originals.of_type(service_alias))
-            .join(models["access"], service_alias.access)
-            .join(models["group"], models["access"].groups)
-            .join(models["user"], models["group"].users)
-            .filter(models["access"].services_access.contains(service_mode))
-            .filter(models["user"].name == user.name)
-        )
-        return public_tasks.union(user_tasks, user_group_tasks)
+        return public_tasks.union(user_tasks)
 
     def _catch_request_exceptions(func):  # noqa: N805
         @wraps(func)

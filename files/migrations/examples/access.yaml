@@ -52,7 +52,7 @@
     /update, /update_pool, /update_all_pools, /upload_files, /view_filtering, /process_form_data]
   type: access
   upper_menu: [Admin, Settings, Files]
-  user_pools: [All objects]
+  user_pools: [Non-admin user pool]
 - access_pools: []
   access_type: "['Read']"
   description: The associated - data backup - task should be available as a result

@@ -8,3 +8,5 @@
   theme: default, type: user}
 - {authentication: database, email: ny@enms.io, is_admin: false, name: ny, small_menu: false,
   theme: default, type: user}
+- {authentication: database, email: Non-admin user with full access rights, is_admin: false,
+  name: nadmin, small_menu: false, theme: default, type: user}

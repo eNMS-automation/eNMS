@@ -1,4 +1,4 @@
-- access_users: [Full Access to Everything]
+- access_users: []
   description: All objects
   device_configuration: ''
   device_configuration_match: inclusion
@@ -104,7 +104,7 @@
   user_name: .*
   user_name_match: regex
   user_number: 5
-  users: [sf, chicago, read-only, ny, admin]
+  users: [admin, read-only, chicago, sf, ny]
 - access_users: []
   description: Devices only
   device_configuration: ''
@@ -832,3 +832,91 @@
   user_name_match: inclusion
   user_number: 0
   users: []
+- access_users: [Full Access to Everything]
+  description: ''
+  device_configuration: ''
+  device_configuration_match: inclusion
+  device_description: ''
+  device_description_match: inclusion
+  device_icon: ''
+  device_icon_match: inclusion
+  device_ip_address: ''
+  device_ip_address_match: inclusion
+  device_latitude: ''
+  device_latitude_match: inclusion
+  device_location: ''
+  device_location_match: inclusion
+  device_longitude: ''
+  device_longitude_match: inclusion
+  device_model: ''
+  device_model_match: inclusion
+  device_name: ''
+  device_name_match: inclusion
+  device_napalm_driver: ''
+  device_napalm_driver_match: inclusion
+  device_netmiko_driver: ''
+  device_netmiko_driver_match: inclusion
+  device_operating_system: ''
+  device_operating_system_match: inclusion
+  device_operational_data: ''
+  device_operational_data_match: inclusion
+  device_os_version: ''
+  device_os_version_match: inclusion
+  device_port: ''
+  device_port_match: inclusion
+  device_property1: ''
+  device_property1_match: inclusion
+  device_scrapli_driver: ''
+  device_scrapli_driver_match: inclusion
+  device_specialized_data: ''
+  device_specialized_data_match: inclusion
+  device_subtype: ''
+  device_subtype_match: inclusion
+  device_vendor: ''
+  device_vendor_match: inclusion
+  devices: []
+  last_modified: '2020-09-21 06:17:30.948195'
+  latitude: '0.0'
+  link_color: ''
+  link_color_match: inclusion
+  link_description: ''
+  link_description_match: inclusion
+  link_destination_name: ''
+  link_destination_name_match: inclusion
+  link_location: ''
+  link_location_match: inclusion
+  link_model: ''
+  link_model_match: inclusion
+  link_name: ''
+  link_name_match: inclusion
+  link_source_name: ''
+  link_source_name_match: inclusion
+  link_subtype: ''
+  link_subtype_match: inclusion
+  link_vendor: ''
+  link_vendor_match: inclusion
+  links: []
+  longitude: '0.0'
+  manually_defined: false
+  name: Non-admin user pool
+  operator: all
+  property1: CP
+  public: false
+  service_description: ''
+  service_description_match: inclusion
+  service_name: ''
+  service_name_match: inclusion
+  service_number: 0
+  service_operating_system: ''
+  service_operating_system_match: inclusion
+  service_vendor: ''
+  service_vendor_match: inclusion
+  target_services: []
+  tasks: []
+  type: pool
+  user_email: ''
+  user_email_match: inclusion
+  user_name: nadmin
+  user_name_match: inclusion
+  user_number: 1
+  users: [nadmin]

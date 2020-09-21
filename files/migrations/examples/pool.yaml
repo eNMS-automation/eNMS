@@ -103,8 +103,8 @@
   user_email_match: inclusion
   user_name: .*
   user_name_match: regex
-  user_number: 5
-  users: [admin, read-only, chicago, sf, ny]
+  user_number: 6
+  users: [admin, read-only, chicago, sf, ny, nadmin]
 - access_users: []
   description: Devices only
   device_configuration: ''
@@ -346,7 +346,7 @@
     router16, router17, router18, router19, router20, router21, router22, router23,
     router24, router25, router26, router27, router28, router29, router30, router31,
     router32, router33, router34, router35, router36, router37, Server 2, Aserver]
-  last_modified: '2020-06-19 06:44:54.194589'
+  last_modified: '2020-09-21 06:22:51.921859'
   latitude: '37.77'
   link_color: ''
   link_color_match: inclusion
@@ -358,15 +358,27 @@
   link_location_match: inclusion
   link_model: ''
   link_model_match: inclusion
-  link_name: ''
-  link_name_match: inclusion
+  link_name: .*
+  link_name_match: regex
   link_source_name: ''
   link_source_name_match: inclusion
   link_subtype: ''
   link_subtype_match: inclusion
   link_vendor: ''
   link_vendor_match: inclusion
-  links: []
+  links: [link0, link1, link2, link3, link4, link5, link6, link7, link8, link9, link10,
+    link11, link12, link13, link14, link15, link16, link17, link18, link19, link20,
+    link21, link22, link23, link24, link25, link26, link27, europe-link4, europe-link5,
+    europe-link6, europe-link7, europe-link8, europe-link9, europe-link10, europe-link11,
+    europe-link12, europe-link13, europe-link14, europe-link15, europe-link16, europe-link17,
+    europe-link18, europe-link19, europe-link20, europe-link21, europe-link22, europe-link23,
+    europe-link24, europe-link25, europe-link26, europe-link27, europe-link28, europe-link29,
+    europe-link30, europe-link31, europe-link32, europe-link33, europe-link34, europe-link35,
+    europe-link36, europe-link37, europe-link38, europe-link39, europe-link40, europe-link41,
+    europe-link42, europe-link43, europe-link44, europe-link45, europe-link46, europe-link47,
+    europe-link48, europe-link49, europe-link50, europe-link51, europe-link52, atlantic-r26-boston-1,
+    atlantic-r26-boston-2, atlantic-r26-ny, atlantic-r26-washington, atlantic-r28-ny,
+    atlantic-r28-washington, atlantic-r20-boston, atlantic-r20-richmond]
   longitude: '-122.43'
   manually_defined: false
   name: Datacenter San Francisco
@@ -436,7 +448,7 @@
   devices: [Jackson, PaloAlto, Washington, Chicago, SanJose, SanDiego, Dallas, Philadelphia,
     Atlanta, Baltimore, Cleveland, Cincinnati, Cambridge, Minneapolis, Sacramento,
     SanFrancisco, Orange, Oakland]
-  last_modified: ''
+  last_modified: '2020-09-21 06:22:57.467002'
   latitude: '40.71'
   link_color: ''
   link_color_match: inclusion
@@ -448,20 +460,33 @@
   link_location_match: inclusion
   link_model: ''
   link_model_match: inclusion
-  link_name: ''
-  link_name_match: inclusion
+  link_name: .*
+  link_name_match: regex
   link_source_name: ''
   link_source_name_match: inclusion
   link_subtype: ''
   link_subtype_match: inclusion
   link_vendor: ''
   link_vendor_match: inclusion
-  links: []
+  links: [link0, link1, link2, link3, link4, link5, link6, link7, link8, link9, link10,
+    link11, link12, link13, link14, link15, link16, link17, link18, link19, link20,
+    link21, link22, link23, link24, link25, link26, link27, europe-link4, europe-link5,
+    europe-link6, europe-link7, europe-link8, europe-link9, europe-link10, europe-link11,
+    europe-link12, europe-link13, europe-link14, europe-link15, europe-link16, europe-link17,
+    europe-link18, europe-link19, europe-link20, europe-link21, europe-link22, europe-link23,
+    europe-link24, europe-link25, europe-link26, europe-link27, europe-link28, europe-link29,
+    europe-link30, europe-link31, europe-link32, europe-link33, europe-link34, europe-link35,
+    europe-link36, europe-link37, europe-link38, europe-link39, europe-link40, europe-link41,
+    europe-link42, europe-link43, europe-link44, europe-link45, europe-link46, europe-link47,
+    europe-link48, europe-link49, europe-link50, europe-link51, europe-link52, atlantic-r26-boston-1,
+    atlantic-r26-boston-2, atlantic-r26-ny, atlantic-r26-washington, atlantic-r28-ny,
+    atlantic-r28-washington, atlantic-r20-boston, atlantic-r20-richmond]
   longitude: '-74.0'
   manually_defined: false
   name: Datacenter New York
   operator: all
   property1: CP
+  public: false
   service_description: ''
   service_description_match: inclusion
   service_name: ''
@@ -524,7 +549,7 @@
   device_vendor_match: inclusion
   devices: [Austin, Washington, Chicago, SanDiego, Philadelphia, Detroit, Richmond,
     Baltimore, Cincinnati, Cambridge, Minneapolis, SanFrancisco]
-  last_modified: ''
+  last_modified: '2020-09-21 06:22:36.450390'
   latitude: '41.87'
   link_color: ''
   link_color_match: inclusion
@@ -536,20 +561,33 @@
   link_location_match: inclusion
   link_model: ''
   link_model_match: inclusion
-  link_name: ''
-  link_name_match: inclusion
+  link_name: .*
+  link_name_match: regex
   link_source_name: ''
   link_source_name_match: inclusion
   link_subtype: ''
   link_subtype_match: inclusion
   link_vendor: ''
   link_vendor_match: inclusion
-  links: []
+  links: [link0, link1, link2, link3, link4, link5, link6, link7, link8, link9, link10,
+    link11, link12, link13, link14, link15, link16, link17, link18, link19, link20,
+    link21, link22, link23, link24, link25, link26, link27, europe-link4, europe-link5,
+    europe-link6, europe-link7, europe-link8, europe-link9, europe-link10, europe-link11,
+    europe-link12, europe-link13, europe-link14, europe-link15, europe-link16, europe-link17,
+    europe-link18, europe-link19, europe-link20, europe-link21, europe-link22, europe-link23,
+    europe-link24, europe-link25, europe-link26, europe-link27, europe-link28, europe-link29,
+    europe-link30, europe-link31, europe-link32, europe-link33, europe-link34, europe-link35,
+    europe-link36, europe-link37, europe-link38, europe-link39, europe-link40, europe-link41,
+    europe-link42, europe-link43, europe-link44, europe-link45, europe-link46, europe-link47,
+    europe-link48, europe-link49, europe-link50, europe-link51, europe-link52, atlantic-r26-boston-1,
+    atlantic-r26-boston-2, atlantic-r26-ny, atlantic-r26-washington, atlantic-r28-ny,
+    atlantic-r28-washington, atlantic-r20-boston, atlantic-r20-richmond]
   longitude: '-87.62'
   manually_defined: false
   name: Datacenter Chicago
   operator: all
   property1: CP
+  public: false
   service_description: ''
   service_description_match: inclusion
   service_name: ''

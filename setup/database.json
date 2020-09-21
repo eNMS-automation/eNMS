@@ -74,12 +74,6 @@
   "many_to_many_relationships": [
     [
       {
-        "model": "access"
-      },
-      { "model": "pool" }
-    ],
-    [
-      {
         "model": "pool"
       },
       { "model": "device" }

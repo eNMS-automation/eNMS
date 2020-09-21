@@ -317,10 +317,10 @@ class Pool(AbstractBase):
     )
     tasks = relationship("Task", secondary=db.task_pool_table, back_populates="pools")
     access_users = relationship(
-        "Access", secondary=db.access_pool_table, back_populates="user_pools"
+        "Access", secondary=db.access_user_pools_table, back_populates="user_pools"
     )
     access = relationship(
-        "Access", secondary=db.access_pool_table, back_populates="access_pools"
+        "Access", secondary=db.access_model_pools_table, back_populates="access_pools"
     )
     manually_defined = db.Column(Boolean, default=False)
 

@@ -90,10 +90,10 @@ class Access(AbstractBase):
     get_requests = db.Column(db.List)
     post_requests = db.Column(db.List)
     user_pools = relationship(
-        "Pool", secondary=db.access_pool_table, back_populates="access_users"
+        "Pool", secondary=db.access_user_pools_table, back_populates="access_users"
     )
     access_pools = relationship(
-        "Pool", secondary=db.access_pool_table, back_populates="access"
+        "Pool", secondary=db.access_model_pools_table, back_populates="access"
     )
     access_type = db.Column(db.SmallString)
 

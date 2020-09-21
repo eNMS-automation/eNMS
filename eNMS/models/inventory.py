@@ -373,11 +373,12 @@ class Pool(AbstractBase):
 
     @classmethod
     def rbac_filter(cls, query, mode, user):
+        pool_alias = aliased(models["pool"])
         return query.filter(cls.public == true()).union(
-            query.join(cls.users)
-            .join(cls.access)
+            query.join(cls.access)
+            .join(pool_alias, models["access"].user_pools)
+            .join(models["user"], pool_alias.users)
             .filter(models["access"].access_type.contains(mode))
-            .filter(models["user"].name == user.name)
         )
 
 

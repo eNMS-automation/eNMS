@@ -379,6 +379,7 @@ class Pool(AbstractBase):
             .join(pool_alias, models["access"].user_pools)
             .join(models["user"], pool_alias.users)
             .filter(models["access"].access_type.contains(mode))
+            .filter(models["user"].name == user.name)
         )
 
 

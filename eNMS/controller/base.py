@@ -431,7 +431,6 @@ class BaseController:
                 .all()
             ],
         }
-        print(table_result["data"])
         if kwargs.get("export"):
             table_result["full_result"] = [
                 obj.table_properties(**kwargs) for obj in query.all()

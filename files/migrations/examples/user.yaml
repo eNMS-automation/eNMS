@@ -1,6 +1,6 @@
 - {authentication: database, email: admin@enms.io, is_admin: true, name: admin, small_menu: false,
   theme: default, type: user}
-- {authentication: database, email: read-only@enms.io, is_admin: false, name: read-only,
+- {authentication: database, email: read-only@enms.io, is_admin: false, name: readonly,
   small_menu: false, theme: default, type: user}
 - {authentication: database, email: chicago@enms.io, is_admin: false, name: chicago,
   small_menu: false, theme: default, type: user}

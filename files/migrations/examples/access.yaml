@@ -53,31 +53,7 @@
   type: access
   upper_menu: [Admin, Settings, Files]
   user_pools: [Non-admin user pool]
-- access_pools: []
-  access_type: "['Read']"
-  description: The associated - data backup - task should be available as a result
-  get_requests: []
-  menu: []
-  name: Pool San Francisco (READ) - Data Backup and Workflows of Workflow (READ)
-  pages: []
-  post_requests: []
-  type: access
-  upper_menu: []
-  user_pools: []
-- access_pools: []
-  access_type: "['Read', 'Edit', 'Connect', 'Use as target']"
-  description: User 'chicago' and pool 'New York Users' can run workflows 3/4 and
-    they can only use 'Washington' as a target. Running workflows 3/4 with anything
-    other target than just 'Washington' should be refused.
-  get_requests: []
-  menu: []
-  name: Washington Pool (FULL) - Workflow 3 & 4 + Superworkflow (EDIT - RUN)
-  pages: []
-  post_requests: []
-  type: access
-  upper_menu: []
-  user_pools: []
-- access_pools: []
+- access_pools: [Links 0 through 5 - Non-public pool - Access set up]
   access_type: "['Read', 'Edit']"
   description: ''
   get_requests: []
@@ -87,18 +63,7 @@
   post_requests: []
   type: access
   upper_menu: []
-  user_pools: []
-- access_pools: []
-  access_type: '[]'
-  description: ''
-  get_requests: []
-  menu: []
-  name: Example Service (shared, in workflows) (EDIT)
-  pages: []
-  post_requests: []
-  type: access
-  upper_menu: []
-  user_pools: []
+  user_pools: [User ny]
 - access_pools: []
   access_type: '[]'
   description: All menu entries and GET requests, all non-editing POST requests.
@@ -145,16 +110,15 @@
   type: access
   upper_menu: [Admin, Settings, Files]
   user_pools: []
-- access_pools: []
-  access_type: '[]'
-  description: There is an associated task for the scrapli workflow. 'ny' and 'chicago'
-    users should not be able to edit or start that task because they cannot schedule
-    the workflow.
+- access_pools: [Datacenter New York]
+  access_type: "['Read']"
+  description: 'ny york user should have access to: all devices in datacenter new
+    york (READ + CONNECT), all links (EDIT for link 0-5 + 6-9, READ for the rest)'
   get_requests: []
   menu: []
-  name: Scrapli workflow (EDIT only)
+  name: New York Pool Access for user ny
   pages: []
   post_requests: []
   type: access
   upper_menu: []
-  user_pools: []
+  user_pools: [User ny]

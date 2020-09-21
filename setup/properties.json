@@ -700,6 +700,11 @@
         "search": "text"
       },
       {
+        "data": "description",
+        "title": "Description",
+        "search": "text"
+      },
+      {
         "data": "email",
         "title": "Email Address",
         "search": "text"
@@ -894,6 +899,6 @@
       "destination_name"
     ],
     "service": ["name", "description", "vendor", "operating_system"],
-    "user": ["name", "email"]
+    "user": ["name", "description", "email"]
   }
 }

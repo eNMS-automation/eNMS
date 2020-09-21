@@ -28,6 +28,7 @@ class User(AbstractBase, UserMixin):
     __tablename__ = type = class_type = "user"
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.SmallString, unique=True)
+    description = db.Column(db.SmallString)
     is_admin = db.Column(Boolean)
     email = db.Column(db.SmallString)
     password = db.Column(db.SmallString)

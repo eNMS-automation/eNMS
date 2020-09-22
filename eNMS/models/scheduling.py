@@ -61,16 +61,16 @@ class Task(AbstractBase):
             models["service"].public == true()
         )
         pool_alias = aliased(models["pool"])
-        user_tasks = (
+        return public_tasks.union(
             query.join(cls.service)
             .join(models["pool"], models["service"].pools)
             .join(models["access"], models["pool"].access)
             .join(pool_alias, models["access"].user_pools)
             .join(models["user"], pool_alias.users)
             .filter(models["access"].access_type.contains(mode))
-            .filter(models["user"].name == user.name)
+            .filter(models["user"].name == user.name),
+            query.filter(cls.creator == user.name),
         )
-        return public_tasks.union(user_tasks)
 
     def _catch_request_exceptions(func):  # noqa: N805
         @wraps(func)

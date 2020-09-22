@@ -58,7 +58,8 @@ class Object(AbstractBase):
             .join(pool_alias, models["access"].user_pools)
             .join(models["user"], pool_alias.users)
             .filter(models["access"].access_type.contains(mode))
-            .filter(models["user"].name == user.name)
+            .filter(models["user"].name == user.name),
+            query.filter(cls.creator == user.name),
         )
 
 
@@ -381,7 +382,8 @@ class Pool(AbstractBase):
             .join(pool_alias, models["access"].user_pools)
             .join(models["user"], pool_alias.users)
             .filter(models["access"].access_type.contains(mode))
-            .filter(models["user"].name == user.name)
+            .filter(models["user"].name == user.name),
+            query.filter(cls.creator == user.name),
         )
 
 

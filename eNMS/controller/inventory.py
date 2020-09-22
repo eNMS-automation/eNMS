@@ -222,7 +222,8 @@ class InventoryController(BaseController):
                     if obj not in objects:
                         objects.append(obj)
             else:
-                objects = db.objectify(obj_type, kwargs[f"{obj_type}s"])
+                instances = kwargs.get(f"{obj_type}s", [])
+                objects = db.objectify(obj_type, instances)
             setattr(pool, f"{obj_type}_number", len(objects))
             setattr(pool, f"{obj_type}s", objects)
         pool.last_modified = self.get_time()

@@ -120,12 +120,10 @@ pool2 = {
 
 
 def create_pool(pool: dict) -> dict:
-    for property in properties["filtering"]["device"]:
-        if f"device_{property}_match" not in pool:
-            pool[f"device_{property}_match"] = "inclusion"
-    for property in properties["filtering"]["link"]:
-        if f"link_{property}_match" not in pool:
-            pool[f"link_{property}_match"] = "inclusion"
+    for model, model_properties in properties["filtering"].items():
+        for property in model_properties:
+            if f"{model}_{property}_match" not in pool:
+                pool[f"{model}_{property}_match"] = "inclusion"
     return pool
 
 
@@ -139,7 +137,4 @@ def test_pool_management(user_client):
     assert len(p1.links) == 20
     assert len(p2.devices) == 12
     assert len(p2.links) == 4
-    assert len(db.fetch_all("pool")) == 11
-    # user_client.post(f"/delete_instance/pool/{p1.id}")
-    # user_client.post(f"/delete_instance/pool/{p2.id}")
-    # assert len(db.fetch_all("pool")) == 9
+    assert len(db.fetch_all("pool")) == 14

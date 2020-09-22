@@ -41,6 +41,7 @@ def test_urls(user_client):
 
 @check_pages("table/user")
 def test_user_management(user_client):
+    number_of_users = len(db.fetch_all("user"))
     for user in ("user1", "user2", "user3"):
         dict_user = {
             "form_type": "user",
@@ -51,7 +52,7 @@ def test_user_management(user_client):
             "theme": "dark",
         }
         user_client.post("/update/user", data=dict_user)
-    assert len(db.fetch_all("user")) == 8
+    assert len(db.fetch_all("user")) == number_of_users + 3
     user1 = db.fetch("user", name="user1")
     user_client.post("/delete_instance/user/{}".format(user1.id))
-    assert len(db.fetch_all("user")) == 7
+    assert len(db.fetch_all("user")) == number_of_users + 2

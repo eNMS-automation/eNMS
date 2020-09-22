@@ -28,22 +28,6 @@ class Object(AbstractBase):
     location = db.Column(db.SmallString)
     vendor = db.Column(db.SmallString)
 
-    def update(self, **kwargs):
-        super().update(**kwargs)
-        if kwargs.get("dont_update_pools", False):
-            return
-        for pool in db.fetch_all("pool"):
-            if pool.manually_defined or not pool.compute(self.class_type):
-                continue
-            match = pool.object_match(self)
-            relation, number = f"{self.class_type}s", f"{self.class_type}_number"
-            if match and self not in getattr(pool, relation):
-                getattr(pool, relation).append(self)
-                setattr(pool, number, getattr(pool, number) + 1)
-            if self in getattr(pool, relation) and not match:
-                getattr(pool, relation).remove(self)
-                setattr(pool, number, getattr(pool, number) - 1)
-
     def delete(self):
         number = f"{self.class_type}_number"
         for pool in self.pools:

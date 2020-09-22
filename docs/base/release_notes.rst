@@ -27,6 +27,8 @@ visualization/geographical_view and visualization/logical_view
 - Extend pool for users and services. The "devices" and "pools" relationship with services have to be renamed
 "target_devices" and "target_pools" in the service.yaml file.
 - Change syntax of many to many relationship in database.json
+- Refactor rbac system to use pools extension to user and services to define user access. Remove "group" model.
+Add "groups" property to user and add "creator" property for pools, devices and links.
 
 Version 3.22.3
 --------------

@@ -453,6 +453,7 @@ class Server(Flask):
                         continue
                     try:
                         object_data = app.objectify(model, instance)
+                        object_data["update_pools"] = model in properties["filtering"]
                         instance = db.factory(model, **object_data)
                         result["success"].append(instance.name)
                     except Exception:

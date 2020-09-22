@@ -141,7 +141,6 @@ class AdministrationController(BaseController):
                     try:
                         instance_id = db.factory(
                             instance_type,
-                            dont_update_pools=True,
                             commit=True,
                             **instance,
                         ).id

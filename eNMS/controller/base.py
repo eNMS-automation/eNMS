@@ -284,6 +284,7 @@ class BaseController:
                 if arg in kwargs:
                     kwargs[arg] = kwargs[arg].strip()
             kwargs["last_modified"] = self.get_time()
+            kwargs["update_pools"] = type in properties["filtering"]
             if must_be_new:
                 kwargs["creator"] = kwargs["user"] = getattr(current_user, "name", "")
             instance = db.factory(type, must_be_new=must_be_new, **kwargs)
@@ -510,7 +511,7 @@ class BaseController:
                 continue
             with open(Path(dir.path) / "data.yml") as data:
                 parameters = yaml.load(data)
-                device.update(**{"dont_update_pools": True, **parameters})
+                device.update(**parameters)
             for data in self.configuration_properties:
                 filepath = Path(dir.path) / data
                 if not filepath.exists():

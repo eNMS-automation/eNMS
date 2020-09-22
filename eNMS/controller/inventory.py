@@ -181,7 +181,7 @@ class InventoryController(BaseController):
                 continue
             properties = sheet.row_values(0)
             for row_index in range(1, sheet.nrows):
-                values = {"dont_update_pools": True}
+                values = {}
                 for index, property in enumerate(properties):
                     if not property:
                         continue

@@ -3,7 +3,6 @@ from sqlalchemy.ext.mutable import MutableDict, MutableList
 from eNMS import app
 from eNMS.database import db
 from eNMS.models import model_properties, property_types, relationships
-from eNMS.setup import properties
 
 
 class AbstractBase(db.base):
@@ -74,7 +73,7 @@ class AbstractBase(db.base):
             if property_type == "bool":
                 value = value not in (False, "false")
             setattr(self, property, value)
-        if kwargs.get("dont_update_pools", self.type not in properties["filtering"]):
+        if not kwargs.get("update_pools"):
             return
         for pool in db.fetch_all("pool"):
             if pool.manually_defined or not pool.compute(self.class_type):

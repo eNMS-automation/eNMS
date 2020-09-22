@@ -101,6 +101,7 @@ def init_variable_forms(app):
     class UserForm(RbacForm):
         form_type = HiddenField(default="user")
         description = StringField("Description")
+        groups = StringField("Groups")
         is_admin = BooleanField(default=False)
         authentication = SelectField(
             "Authentication Method",

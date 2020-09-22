@@ -734,6 +734,11 @@
         "search": "text"
       },
       {
+        "data": "groups",
+        "title": "Groups",
+        "search": "text"
+      },
+      {
         "data": "email",
         "title": "Email Address",
         "search": "text"
@@ -897,6 +902,7 @@
     "device": [
       "name",
       "description",
+      "creator",
       "subtype",
       "model",
       "location",
@@ -919,6 +925,7 @@
     "link": [
       "name",
       "description",
+      "creator",
       "subtype",
       "model",
       "location",
@@ -927,7 +934,7 @@
       "source_name",
       "destination_name"
     ],
-    "service": ["name", "description", "vendor", "operating_system"],
-    "user": ["name", "description", "email"]
+    "service": ["name", "description", "creator", "vendor", "operating_system"],
+    "user": ["name", "description", "groups", "email"]
   }
 }

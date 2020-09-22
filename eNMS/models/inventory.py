@@ -19,6 +19,7 @@ class Object(AbstractBase):
     type = db.Column(db.SmallString)
     __mapper_args__ = {"polymorphic_identity": "object", "polymorphic_on": type}
     id = db.Column(Integer, primary_key=True)
+    creator = db.Column(db.SmallString)
     public = db.Column(Boolean)
     last_modified = db.Column(db.SmallString, info={"log_change": False})
     subtype = db.Column(db.SmallString)
@@ -302,6 +303,7 @@ class Pool(AbstractBase):
     models = ("device", "link", "service", "user")
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.SmallString, unique=True)
+    creator = db.Column(db.SmallString)
     public = db.Column(Boolean)
     last_modified = db.Column(db.SmallString, info={"log_change": False})
     description = db.Column(db.SmallString)

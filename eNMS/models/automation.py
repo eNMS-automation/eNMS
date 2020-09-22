@@ -143,8 +143,6 @@ class Service(AbstractBase):
         super().__init__(**kwargs)
         if "name" not in kwargs:
             self.set_name()
-        if not getattr(current_user, "is_admin", True) and self.originals == [self]:
-            current_user.add_access("services", self)
 
     def get_originals(self, workflow):
         if workflow.workflows:
@@ -1379,4 +1377,7 @@ class Run(AbstractBase):
             "last_failure": device.last_failure,
             "last_runtime": device.last_runtime,
             "last_update": device.last_update,
-            "last_status": devi
+            "last_status": device.last_status,
+        }
+        with open(path / "data.yml", "w") as file:
+            yaml.dump(data, file, default_flow_style=False)

@@ -665,6 +665,17 @@
         "search": "text"
       },
       {
+        "data": "description",
+        "title": "Description",
+        "search": "text"
+      },
+      {
+        "data": "creator",
+        "title": "Creator",
+        "search": "text",
+        "visible": false
+      },
+      {
         "data": "service_name",
         "title": "Service",
         "search": "text",

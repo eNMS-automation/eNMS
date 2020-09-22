@@ -21,6 +21,7 @@ class Task(AbstractBase):
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.SmallString, unique=True)
     description = db.Column(db.SmallString)
+    creator = db.Column(db.SmallString)
     scheduling_mode = db.Column(db.SmallString, default="standard")
     frequency = db.Column(Integer)
     frequency_unit = db.Column(db.SmallString, default="seconds")

@@ -1379,7 +1379,4 @@ class Run(AbstractBase):
             "last_failure": device.last_failure,
             "last_runtime": device.last_runtime,
             "last_update": device.last_update,
-            "last_status": device.last_status,
-        }
-        with open(path / "data.yml", "w") as file:
-            yaml.dump(data, file, default_flow_style=False)
+            "last_status": devi

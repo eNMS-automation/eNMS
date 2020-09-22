@@ -331,8 +331,6 @@ class Pool(AbstractBase):
         old_users = set(self.users)
         super().update(**kwargs)
         self.compute_pool()
-        if not getattr(current_user, "is_admin", True):
-            current_user.add_access("pools", self)
         for user in old_users | set(self.users):
             user.update_rbac()
 

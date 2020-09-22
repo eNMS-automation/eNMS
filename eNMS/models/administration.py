@@ -45,15 +45,6 @@ class User(AbstractBase, UserMixin):
     pools = relationship("Pool", secondary=db.pool_user_table, back_populates="users")
     is_admin = db.Column(Boolean, default=False)
 
-    def add_access(self, model, instance):
-        for pool in self.pools:
-            access = db.fetch("access", name=f"{pool.name}: {model}", allow_none=True)
-            if not access:
-                access = db.factory("access", name=f"{pool.name}: {model}")
-                access.user_pools.append(pool)
-                setattr(access, f"{model}_access", str(app.rbac["models"][model]))
-            getattr(access, model).append(instance)
-
     def get_id(self):
         return self.name
 

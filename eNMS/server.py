@@ -429,10 +429,11 @@ class Server(Flask):
                     "run", service_name=name, runtime=runtime, allow_none=True
                 )
                 if not run:
-                    return (
+                    error_message = (
                         "There are no results or on-going services "
                         "for the requested service and runtime."
                     )
+                    return {"error": error_message}
                 else:
                     result = run.result()
                     return {

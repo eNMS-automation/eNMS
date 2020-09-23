@@ -11,6 +11,8 @@ Version 3.22.4
 - Add "fetch" and "fetch_all" function to workflow global space. Set rbac to "edit" and username to current user
 for both these functions.
 - Add "encrypt" function to workflow global space to encrypt password and use substitution in custom passwords.
+- Return json object in get result REST endpoint when no results found for consistency.
+- Reset service status to "Idle" when reloading the app along with the run status.
 
 Version 3.22.3
 --------------

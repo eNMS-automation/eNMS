@@ -8,6 +8,9 @@ Version 3.22.4
 - Catch exception in log function when fetching log level from database
 - Fix object numbers not updated for manually defined pool
 - Catch exception in query rest endpoint when no results found to avoid stacktrace in server logs
+- Add "fetch" and "fetch_all" function to workflow global space. Set rbac to "edit" and username to current user
+for both these functions.
+- Add "encrypt" function to workflow global space to encrypt password and use substitution in custom passwords.
 
 Version 3.22.3
 --------------

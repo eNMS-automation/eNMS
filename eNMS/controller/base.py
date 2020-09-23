@@ -87,6 +87,11 @@ class BaseController:
         else:
             self.encrypt, self.decrypt = b64encode, b64decode
 
+    def encrypt_password(self, password):
+        if isinstance(password, str):
+            password = str.encode(password)
+        return self.encrypt(password)
+
     def get_password(self, password):
         if not password:
             return

@@ -1136,6 +1136,7 @@ class Run(AbstractBase):
                 "send_email": app.send_email,
                 "settings": app.settings,
                 "devices": _self.devices,
+                "encrypt": app.encrypt_password,
                 "get_var": partial(_self.get_var, payload),
                 "get_result": _self.get_result,
                 "log": _self.log,

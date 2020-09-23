@@ -36,7 +36,7 @@ class AbstractBase(db.base):
         if property in db.private_properties:
             if not value:
                 return
-            value = app.encrypt(str.encode(value))
+            value = app.encrypt_password(value)
             if app.use_vault:
                 app.vault_client.write(
                     f"secret/data/{self.type}/{self.name}/{property}",

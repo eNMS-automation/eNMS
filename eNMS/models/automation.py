@@ -1122,6 +1122,12 @@ class Run(AbstractBase):
             raise ImportError(f"Module '{module}' is restricted.")
         return importlib_import(module, *args, **kwargs)
 
+    def fetch(self, *args, **kwargs):
+        return db.fetch(*args, rbac="edit", username=self.creator, **kwargs)
+
+    def fetch_all(self, *args, **kwargs):
+        return db.fetch(*args, rbac="edit", username=self.creator, **kwargs)
+
     def global_variables(_self, **locals):  # noqa: N805
         payload, device = locals.get("payload", {}), locals.get("device")
         variables = locals
@@ -1131,8 +1137,8 @@ class Run(AbstractBase):
         variables.update(
             {
                 "__builtins__": {**builtins, "__import__": _self._import},
-                "fetch": db.fetch,
-                "fetch_all": db.fetch_all,
+                "fetch": _self.fetch,
+                "fetch_all": _self.fetch_all,
                 "send_email": app.send_email,
                 "settings": app.settings,
                 "devices": _self.devices,

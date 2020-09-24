@@ -216,7 +216,7 @@
       0]
     'Regression Workflow S: conditional skip query with skip value set to False': &id010 [
       640, -155]
-    'Regression Workflow T: global variables': [625, 189]
+    'Regression Workflow T: global variables': [569, -66]
     'Regression Workflow T: link neighbors mechanism': *id007
     'Regression workflow P: large workflow (scalability)': *id008
     Subworkflow 1: !!python/tuple [0, 0]
@@ -11677,13 +11677,13 @@
         \ via variable substitution:\r\n* {{ get_result(\"Credentials encryption\"\
         , device=device.name)[\"username\"] }}\r\n* {{ get_result(\"Credentials encryption\"\
         , device=device.name)[\"password\"] }}"
-      positions: [545, -157]
+      positions: [524, 221]
     e5b50708-629d-41ac-a83b-275946c7d45a:
       alignment: left
       content: "We encrypt credentials with the \"encrypt\" function.\r\nTo be decrypted\
         \ in the next service via\r\ncustom credentials variable substitution."
-      positions: [44, -191]
-  last_modified: '2020-09-24 04:25:40.767284'
+      positions: [73, -121]
+  last_modified: '2020-09-24 04:30:24.166542'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -11828,9 +11828,9 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: [All objects]
   positions:
-    'Regression Workflow T: global variables': [25, -87]
+    'Regression Workflow T: global variables': [42, -43]
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -11912,9 +11912,9 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: [All objects]
   positions:
-    'Regression Workflow T: global variables': [552, -52]
+    'Regression Workflow T: global variables': [487, 104]
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''

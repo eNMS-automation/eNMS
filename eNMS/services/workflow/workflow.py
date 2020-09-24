@@ -226,7 +226,7 @@ class Workflow(Service):
                 service_run = db.factory("run", commit=True, **kwargs)
                 results = service_run.run(payload)
                 if not results:
-                    return
+                    return {"discard": True}
             if not device:
                 status = "success" if results["success"] else "failure"
                 run.write_state(f"progress/service/{status}", 1, "increment")

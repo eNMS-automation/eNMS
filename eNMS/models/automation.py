@@ -556,6 +556,8 @@ class Run(AbstractBase):
             self.log("error", result)
             results = {"success": False, "runtime": self.runtime, "result": result}
         finally:
+            if "discard" in results:
+                return
             db.session.commit()
             state = self.get_state()
             if "summary" not in results:
@@ -693,8 +695,11 @@ class Run(AbstractBase):
                     self.get_results(payload, device, commit=False)
                     for device in self.target_devices
                 ]
+            results = list(filter(None, results))
+            if not results:
+                return {"discard": True}
             return {
-                "success": all(result["success"] for result in results),
+                "success": all(result["success"] for result in results if result),
                 "runtime": self.runtime,
             }
 
@@ -807,6 +812,9 @@ class Run(AbstractBase):
         if self.skip_query:
             skip_service = self.eval(self.skip_query, **locals())[0]
         if skip_service or self.skip:
+            if self.skip_value == "Discard":
+                self.write_state("progress/device/skipped", 1, "increment")
+                return
             if device:
                 self.write_state("progress/device/skipped", 1, "increment")
             results = {

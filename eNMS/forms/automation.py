@@ -60,7 +60,7 @@ class ServiceForm(BaseForm):
     )
     skip_value = SelectField(
         "Skip Value",
-        choices=(("True", "True"), ("False", "False")),
+        choices=(("True", "True"), ("False", "False"), ("Discard", "Discard")),
     )
     vendor = StringField("Vendor")
     operating_system = StringField("Operating System")

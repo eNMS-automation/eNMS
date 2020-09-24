@@ -2,7 +2,7 @@
     Netmiko] netmiko_create_vrf_test', label: success, source: '[Shared] Start', subtype: success,
   type: workflow_edge, workflow: 'Regression Workflow 1: VRF creation and deletion
     with Netmiko'}
-- {color: (((, destination: '[Regression Workflow 1: VRF creation and deletion with
+- {color: green, destination: '[Regression Workflow 1: VRF creation and deletion with
     Netmiko] netmiko_check_vrf_test', label: success, source: '[Regression Workflow
     1: VRF creation and deletion with Netmiko] netmiko_create_vrf_test', subtype: success,
   type: workflow_edge, workflow: 'Regression Workflow 1: VRF creation and deletion
@@ -818,6 +818,14 @@
 - {color: green, destination: '[Regression Workflow T: global variables] Functions
     fetch and fetch_all', label: success, source: '[Shared] Start', subtype: success,
   type: workflow_edge, workflow: 'Regression Workflow T: global variables'}
+- {color: green, destination: '[Regression Workflow T: global variables] Credentials
+    encryption', label: success, source: '[Regression Workflow T: global variables]
+    Functions fetch and fetch_all', subtype: success, type: workflow_edge, workflow: 'Regression
+    Workflow T: global variables'}
+- {color: green, destination: '[Regression Workflow T: global variables] Show vrf
+    with custom encrypted credentials', label: success, source: '[Regression Workflow
+    T: global variables] Credentials encryption', subtype: success, type: workflow_edge,
+  workflow: 'Regression Workflow T: global variables'}
 - {color: green, destination: '[Shared] End', label: success, source: '[Regression
-    Workflow T: global variables] Functions fetch and fetch_all', subtype: success,
+    Workflow T: global variables] Show vrf with custom encrypted credentials', subtype: success,
   type: workflow_edge, workflow: 'Regression Workflow T: global variables'}

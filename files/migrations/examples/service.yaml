@@ -75,7 +75,7 @@
       -35]
     'Regression Workflow S: conditional skip query with skip value set to False': &id005 [
       -183, -152]
-    'Regression Workflow T: global variables': [-110, 27]
+    'Regression Workflow T: global variables': [-277, -147]
     'Regression Workflow T: link neighbors mechanism': *id002
     'Regression workflow P: large workflow (scalability)': *id003
     Subworkflow 1: !!python/tuple [0, 0]
@@ -216,7 +216,7 @@
       0]
     'Regression Workflow S: conditional skip query with skip value set to False': &id010 [
       640, -155]
-    'Regression Workflow T: global variables': [560, 65]
+    'Regression Workflow T: global variables': [625, 189]
     'Regression Workflow T: link neighbors mechanism': *id007
     'Regression workflow P: large workflow (scalability)': *id008
     Subworkflow 1: !!python/tuple [0, 0]
@@ -11670,8 +11670,20 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  labels: {}
-  last_modified: '2020-09-24 04:15:00.697173'
+  labels:
+    bc5601cb-db25-4614-b82b-15122f71739b:
+      alignment: left
+      content: "We use get_result to fetch custom credentials\r\nfrom previous service\
+        \ via variable substitution:\r\n* {{ get_result(\"Credentials encryption\"\
+        , device=device.name)[\"username\"] }}\r\n* {{ get_result(\"Credentials encryption\"\
+        , device=device.name)[\"password\"] }}"
+      positions: [545, -157]
+    e5b50708-629d-41ac-a83b-275946c7d45a:
+      alignment: left
+      content: "We encrypt credentials with the \"encrypt\" function.\r\nTo be decrypted\
+        \ in the next service via\r\ncustom credentials variable substitution."
+      positions: [44, -191]
+  last_modified: '2020-09-24 04:25:40.767284'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -11683,7 +11695,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: [All objects]
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -11696,7 +11708,9 @@
   send_notification: false
   send_notification_method: mail
   services: ['[Shared] Start', '[Shared] End', '[Regression Workflow T: global variables]
-      Functions fetch and fetch_all']
+      Functions fetch and fetch_all', '[Regression Workflow T: global variables] Credentials
+      encryption', '[Regression Workflow T: global variables] Show vrf with custom
+      encrypted credentials']
   shared: false
   skip: false
   skip_query: ''
@@ -11745,9 +11759,9 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: [All objects]
   positions:
-    'Regression Workflow T: global variables': [98, -131]
+    'Regression Workflow T: global variables': [-180, 198]
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -11776,6 +11790,157 @@
   time_between_retries: 10
   type: python_snippet_service
   update_pools: false
+  validation_condition: success
+  validation_method: none
+  vendor: ''
+  waiting_time: 0
+- completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  events: []
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2020-09-24 04:20:21.737519'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Regression Workflow T: global variables] Credentials encryption'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions:
+    'Regression Workflow T: global variables': [25, -87]
+  postprocessing: ''
+  postprocessing_mode: always
+  preprocessing: ''
+  public: false
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: Credentials encryption
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: false
+  skip_query: ''
+  skip_value: 'True'
+  source_code: "result = {}\r\nresults[\"success\"] = True\r\nresults[\"username\"\
+    ] = \"admin\"\r\nresults[\"password\"] = encrypt(\"admin\")\r\nresults[\"result\"\
+    ] = result"
+  target_devices: []
+  target_pools: []
+  time_between_retries: 10
+  type: python_snippet_service
+  update_pools: false
+  validation_condition: success
+  validation_method: none
+  vendor: ''
+  waiting_time: 0
+- auto_find_prompt: true
+  close_connection: false
+  command: show vrf
+  completion_time: 1
+  config_mode: false
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credentials: custom
+  custom_username: '{{ get_result("Credentials encryption", device=device.name)["username"]
+    }}'
+  definition: Definition
+  delay_factor: 1.0
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  driver: a10
+  enable_mode: true
+  events: []
+  exit_command: exit
+  expect_password_prompt: password
+  expect_prompt: admin.*$
+  expect_string: ''
+  expect_username_prompt: 'username:'
+  fast_cli: false
+  global_delay_factor: 1.0
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  jump_command: ssh jump_server_IP
+  jump_on_connect: false
+  jump_username: ''
+  last_modified: '2020-09-24 04:24:35.178486'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Regression Workflow T: global variables] Show vrf with custom encrypted
+    credentials'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions:
+    'Regression Workflow T: global variables': [552, -52]
+  postprocessing: ''
+  postprocessing_mode: always
+  preprocessing: ''
+  public: false
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: Show vrf with custom encrypted credentials
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: false
+  skip_query: ''
+  skip_value: 'True'
+  start_new_connection: false
+  strip_command: true
+  strip_prompt: true
+  target_devices: []
+  target_pools: []
+  time_between_retries: 10
+  timeout: 10.0
+  type: netmiko_validation_service
+  update_pools: false
+  use_device_driver: true
+  use_genie: false
+  use_host_keys: false
   validation_condition: success
   validation_method: none
   vendor: ''

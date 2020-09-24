@@ -98,7 +98,7 @@
   service_description_match: inclusion
   service_name: .*
   service_name_match: regex
-  service_number: 155
+  service_number: 157
   service_operating_system: ''
   service_operating_system_match: inclusion
   service_vendor: ''
@@ -115,7 +115,7 @@
   user_name: .*
   user_name_match: regex
   user_number: 6
-  users: [chicago, readonly, sf, nadmin, ny, admin]
+  users: [admin, readonly, chicago, sf, ny, nadmin]
 - access_users: []
   creator: ''
   description: Devices only

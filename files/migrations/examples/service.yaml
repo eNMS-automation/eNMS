@@ -52,7 +52,7 @@
     'Regression Workflow A: get_var, set_var, get_result': [-506, -55]
     'Regression Workflow B: Napalm getters validation': !!python/tuple [0, 0]
     'Regression Workflow C: Advanced multiprocessing': [-492, -39]
-    'Regression Workflow D: Prompts': [-295, 99]
+    'Regression Workflow D: Prompts': [-397, 136]
     'Regression Workflow E: Iteration Targets': [-342, -252]
     'Regression Workflow F S1: Subworkflow of Workflow': !!python/tuple [0, 0]
     'Regression Workflow F S2: Access Variables from Parent Workflow': !!python/tuple [
@@ -75,6 +75,7 @@
       -35]
     'Regression Workflow S: conditional skip query with skip value set to False': &id005 [
       -183, -152]
+    'Regression Workflow T: global variables': [-110, 27]
     'Regression Workflow T: link neighbors mechanism': *id002
     'Regression workflow P: large workflow (scalability)': *id003
     Subworkflow 1: !!python/tuple [0, 0]
@@ -215,6 +216,7 @@
       0]
     'Regression Workflow S: conditional skip query with skip value set to False': &id010 [
       640, -155]
+    'Regression Workflow T: global variables': [560, 65]
     'Regression Workflow T: link neighbors mechanism': *id007
     'Regression workflow P: large workflow (scalability)': *id008
     Subworkflow 1: !!python/tuple [0, 0]
@@ -1010,7 +1012,7 @@
     'Regression Workflow 2: Separate Failure - Success paths': [374, 278]
     'Regression Workflow 3: Napalm getters (postprocessing)': ['-50', '0']
     'Regression Workflow A: get_var, set_var, get_result': [-10, 157]
-    'Regression Workflow C: Advanced multiprocessing': [340, 109]
+    'Regression Workflow C: Advanced multiprocessing': [386, 124]
     'Regression Workflow D: Prompts': [405, -103]
     'Regression Workflow L: superworkflow': [162, -126]
     'Regression Workflow P: large workflow (scalability)': &id015 [-415, -115]
@@ -3022,7 +3024,7 @@
   operating_system: ''
   pools: [All objects]
   positions:
-    'Regression Workflow C: Advanced multiprocessing': [-367, 143]
+    'Regression Workflow C: Advanced multiprocessing': [-315, 157]
     'Regression Workflow F: Workflow of Workflows': [678, 52]
   postprocessing: ''
   postprocessing_mode: always
@@ -4380,7 +4382,7 @@
         For Test Netmiko Prompt Service, it is set to 2: it should run\r\nonce more\
         \ after the REST service.\r\n"
       positions: [288, -203]
-  last_modified: '2020-09-01 10:23:09.650778'
+  last_modified: '2020-09-24 04:09:58.444758'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -4743,7 +4745,7 @@
     d36009d8-ce3a-4ce6-8766-5dc3241d777b:
       content: The service "Napalm configure BGP" is configured to be skipped.
       positions: [329, -230]
-  last_modified: '2020-02-23 09:53:31.596720'
+  last_modified: '2020-09-24 04:10:35.842638'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -11643,5 +11645,138 @@
   use_host_keys: false
   validation_condition: success
   validation_method: text
+  vendor: ''
+  waiting_time: 0
+- close_connection: false
+  completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  events: []
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  labels: {}
+  last_modified: '2020-09-24 04:15:00.697173'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: 'Regression Workflow T: global variables'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions: {}
+  postprocessing: ''
+  postprocessing_mode: always
+  preprocessing: ''
+  public: false
+  reply_to: ''
+  reserved: false
+  run_method: per_service_with_workflow_targets
+  scoped_name: 'Regression Workflow T: global variables'
+  send_notification: false
+  send_notification_method: mail
+  services: ['[Shared] Start', '[Shared] End', '[Regression Workflow T: global variables]
+      Functions fetch and fetch_all']
+  shared: false
+  skip: false
+  skip_query: ''
+  skip_value: 'True'
+  target_devices: [PaloAlto, Washington]
+  target_pools: []
+  time_between_retries: 10
+  type: workflow
+  update_pools: false
+  validation_condition: success
+  validation_method: none
+  vendor: ''
+  waiting_time: 0
+  workflow_category: Example workflow(s)
+- completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  events: []
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2020-09-24 04:16:21.025423'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Regression Workflow T: global variables] Functions fetch and fetch_all'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions:
+    'Regression Workflow T: global variables': [98, -131]
+  postprocessing: ''
+  postprocessing_mode: always
+  preprocessing: ''
+  public: false
+  reply_to: ''
+  reserved: false
+  run_method: once
+  scoped_name: Functions fetch and fetch_all
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: false
+  skip_query: ''
+  skip_value: 'True'
+  source_code: "result = {}\r\nsuccess = True\r\nresults[\"result\"] = result\r\n\r\
+    \ntry:\r\n    fetch(\"user\", name=\"admin\")\r\n    success = False\r\nexcept:\r\
+    \n    pass\r\n\r\ntry:\r\n    fetch(\"access\", name=\"Full Access to Everything\"\
+    )\r\n    success = False\r\nexcept:\r\n    pass\r\n\r\ntry:\r\n    fetch(\"task\"\
+    , name=\"Full Access to Everything\")\r\n    success = False\r\nexcept:\r\n  \
+    \  pass\r\n\r\nresults[\"operations\"] = {\r\n    \"device\": fetch(\"device\"\
+    , name=\"Washington\").name,\r\n    \"pool\": fetch(\"pool\", name=\"All objects\"\
+    ).name,\r\n    \"services\": [service.name for service in fetch_all(\"service\"\
+    )]\r\n}\r\n\r\nresults[\"success\"] = success"
+  target_devices: []
+  target_pools: []
+  time_between_retries: 10
+  type: python_snippet_service
+  update_pools: false
+  validation_condition: success
+  validation_method: none
   vendor: ''
   waiting_time: 0

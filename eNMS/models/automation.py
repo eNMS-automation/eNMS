@@ -1122,8 +1122,9 @@ class Run(AbstractBase):
             raise ImportError(f"Module '{module}' is restricted.")
         return importlib_import(module, *args, **kwargs)
 
-    def fetch(self, model, fetch_all=False, **kwargs):
-        func = "fetch_all" if fetch_all else "fetch"
+    def fetch(self, model, func="fetch", **kwargs):
+        if model not in ("device", "link", "pool", "service"):
+            raise db.rbac_error(f"Cannot fetch {model}s from workflow builder.")
         return getattr(db, func)(model, rbac="edit", username=self.creator, **kwargs)
 
     def global_variables(_self, **locals):  # noqa: N805
@@ -1136,7 +1137,7 @@ class Run(AbstractBase):
             {
                 "__builtins__": {**builtins, "__import__": _self._import},
                 "fetch": _self.fetch,
-                "fetch_all": partial(_self.fetch, fetch_all=True),
+                "fetch_all": partial(_self.fetch, func="fetch_all"),
                 "send_email": app.send_email,
                 "settings": app.settings,
                 "devices": _self.devices,

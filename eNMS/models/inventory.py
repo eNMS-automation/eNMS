@@ -344,14 +344,13 @@ class Pool(AbstractBase):
         )
 
     def compute_pool(self):
-        if self.manually_defined:
-            return
         for model in self.models:
-            objects = (
-                list(filter(self.object_match, db.fetch_all(model)))
-                if self.compute(model)
-                else []
-            )
+            if not self.manually_defined:
+                objects = (
+                    list(filter(self.object_match, db.fetch_all(model)))
+                    if self.compute(model)
+                    else []
+                )
             setattr(self, f"{model}s", objects)
             setattr(self, f"{model}_number", len(objects))
 

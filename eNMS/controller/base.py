@@ -87,6 +87,11 @@ class BaseController:
         else:
             self.encrypt, self.decrypt = b64encode, b64decode
 
+    def encrypt_password(self, password):
+        if isinstance(password, str):
+            password = str.encode(password)
+        return self.encrypt(password)
+
     def get_password(self, password):
         if not password:
             return
@@ -116,6 +121,7 @@ class BaseController:
     def reset_run_status(self):
         for run in db.fetch("run", all_matches=True, allow_none=True, status="Running"):
             run.status = "Aborted (RELOAD)"
+            run.service.status = "Idle"
         db.session.commit()
 
     def fetch_version(self):

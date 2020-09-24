@@ -30,6 +30,18 @@ visualization/geographical_view and visualization/logical_view
 - Refactor rbac system to use pools extension to user and services to define user access. Remove "group" model.
 Add "groups" property to user and add "creator" property for pools, devices and links.
 
+Version 3.22.4
+--------------
+
+- Catch exception in log function when fetching log level from database
+- Fix object numbers not updated for manually defined pool
+- Catch exception in query rest endpoint when no results found to avoid stacktrace in server logs
+- Add "fetch" and "fetch_all" function to workflow global space. Set rbac to "edit" and username to current user
+for both these functions.
+- Add "encrypt" function to workflow global space to encrypt password and use substitution in custom passwords.
+- Return json object in get result REST endpoint when no results found for consistency.
+- Reset service status to "Idle" when reloading the app along with the run status.
+
 Version 3.22.3
 --------------
 

@@ -876,7 +876,10 @@ class Run(AbstractBase):
         logger=None,
         service_log=True,
     ):
-        log_level = int(self.original.log_level)
+        try:
+            log_level = int(self.original.log_level)
+        except Exception:
+            log_level = 1
         if not log_level or severity not in app.log_levels[log_level - 1 :]:
             return
         if device:
@@ -1109,6 +1112,11 @@ class Run(AbstractBase):
             raise ImportError(f"Module '{module}' is restricted.")
         return importlib_import(module, *args, **kwargs)
 
+    def fetch(self, model, func="fetch", **kwargs):
+        if model not in ("device", "link", "pool", "service"):
+            raise db.rbac_error(f"Cannot fetch {model}s from workflow builder.")
+        return getattr(db, func)(model, rbac="edit", username=self.creator, **kwargs)
+
     def global_variables(_self, **locals):  # noqa: N805
         payload, device = locals.get("payload", {}), locals.get("device")
         variables = locals
@@ -1118,9 +1126,12 @@ class Run(AbstractBase):
         variables.update(
             {
                 "__builtins__": {**builtins, "__import__": _self._import},
+                "fetch": _self.fetch,
+                "fetch_all": partial(_self.fetch, func="fetch_all"),
                 "send_email": app.send_email,
                 "settings": app.settings,
                 "devices": _self.target_devices,
+                "encrypt": app.encrypt_password,
                 "get_var": partial(_self.get_var, payload),
                 "get_result": _self.get_result,
                 "log": _self.log,

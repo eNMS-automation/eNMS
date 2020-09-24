@@ -834,3 +834,8 @@
     Workflow S: conditional skip query in failed and discard mode] Skip router5-7
     in discard mode', subtype: success, type: workflow_edge, workflow: 'Regression
     Workflow S: conditional skip query in failed and discard mode'}
+- {color: red, destination: '[Regression Workflow S: conditional skip query in failed
+    and discard mode] Skip Washington with Skip value == False', label: failure, source: '[Regression
+    Workflow S: conditional skip query in failed and discard mode] Skip router5-7
+    in discard mode', subtype: failure, type: workflow_edge, workflow: 'Regression
+    Workflow S: conditional skip query in failed and discard mode'}

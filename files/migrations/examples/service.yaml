@@ -11007,7 +11007,7 @@
       content: "Must be tested both in:\r\n- device by device mode\r\n- service by\
         \ service with workflow targets mode"
       positions: [273, 201]
-  last_modified: '2020-09-24 04:49:17.719480'
+  last_modified: '2020-09-24 06:26:12.136620'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -11027,7 +11027,7 @@
   public: false
   reply_to: ''
   reserved: false
-  run_method: per_service_with_workflow_targets
+  run_method: per_device
   scoped_name: 'Regression Workflow S: conditional skip query in failed and discard
     mode'
   send_notification: false

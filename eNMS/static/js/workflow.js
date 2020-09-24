@@ -858,7 +858,7 @@ function displayWorkflowState(result) {
     for (let [id, devices] of Object.entries(state.edges)) {
       if (!edges.get(parseInt(id))) continue;
       edgeUpdates.push({
-        id: id,
+        id: parseInt(id),
         label: isNaN(devices)
           ? `<b>${devices}</b>`
           : `<b>${devices} DEVICE${devices == 1 ? "" : "S"}</b>`,
@@ -915,7 +915,7 @@ function getWorkflowState(periodic, notification) {
       },
     });
   }
-  if (periodic) setTimeout(() => getWorkflowState(true), 4000);
+  //if (periodic) setTimeout(() => getWorkflowState(true), 4000);
   if (notification) notify("Workflow refreshed.", "success", 5);
 }
 

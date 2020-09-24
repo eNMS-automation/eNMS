@@ -1,7 +1,10 @@
 - access_users: []
+  creator: ''
   description: All objects
   device_configuration: ''
   device_configuration_match: inclusion
+  device_creator: ''
+  device_creator_match: inclusion
   device_description: ''
   device_description_match: inclusion
   device_icon: ''
@@ -52,6 +55,8 @@
   latitude: '0.0'
   link_color: ''
   link_color_match: inclusion
+  link_creator: ''
+  link_creator_match: inclusion
   link_description: ''
   link_description_match: inclusion
   link_destination_name: ''
@@ -87,6 +92,8 @@
   operator: all
   property1: CP
   public: false
+  service_creator: ''
+  service_creator_match: inclusion
   service_description: ''
   service_description_match: inclusion
   service_name: .*
@@ -99,16 +106,23 @@
   target_services: ['Regression Workflow P: large workflow (scalability)']
   tasks: []
   type: pool
+  user_description: ''
+  user_description_match: inclusion
   user_email: ''
   user_email_match: inclusion
+  user_groups: ''
+  user_groups_match: inclusion
   user_name: .*
   user_name_match: regex
   user_number: 6
-  users: [admin, readonly, chicago, sf, ny, nadmin]
+  users: [ny, chicago, readonly, sf, nadmin, admin]
 - access_users: []
+  creator: ''
   description: Devices only
   device_configuration: ''
   device_configuration_match: inclusion
+  device_creator: ''
+  device_creator_match: inclusion
   device_description: ''
   device_description_match: inclusion
   device_icon: ''
@@ -159,6 +173,8 @@
   latitude: '0.0'
   link_color: ''
   link_color_match: inclusion
+  link_creator: ''
+  link_creator_match: inclusion
   link_description: ''
   link_description_match: inclusion
   link_destination_name: ''
@@ -181,6 +197,8 @@
   name: Devices only
   operator: all
   property1: CP
+  service_creator: ''
+  service_creator_match: inclusion
   service_description: ''
   service_description_match: inclusion
   service_name: ''
@@ -193,16 +211,23 @@
   target_services: ['Regression Workflow P: large workflow (scalability)']
   tasks: []
   type: pool
+  user_description: ''
+  user_description_match: inclusion
   user_email: ''
   user_email_match: inclusion
+  user_groups: ''
+  user_groups_match: inclusion
   user_name: ''
   user_name_match: inclusion
   user_number: 0
   users: []
 - access_users: []
+  creator: ''
   description: Links only
   device_configuration: ''
   device_configuration_match: inclusion
+  device_creator: ''
+  device_creator_match: inclusion
   device_description: ''
   device_description_match: inclusion
   device_icon: ''
@@ -246,6 +271,8 @@
   latitude: '0.0'
   link_color: ''
   link_color_match: inclusion
+  link_creator: ''
+  link_creator_match: inclusion
   link_description: ''
   link_description_match: inclusion
   link_destination_name: ''
@@ -280,6 +307,8 @@
   name: Links only
   operator: all
   property1: CP
+  service_creator: ''
+  service_creator_match: inclusion
   service_description: ''
   service_description_match: inclusion
   service_name: ''
@@ -292,16 +321,23 @@
   target_services: ['Regression Workflow P: large workflow (scalability)']
   tasks: []
   type: pool
+  user_description: ''
+  user_description_match: inclusion
   user_email: ''
   user_email_match: inclusion
+  user_groups: ''
+  user_groups_match: inclusion
   user_name: ''
   user_name_match: inclusion
   user_number: 0
   users: []
 - access_users: []
+  creator: ''
   description: Datacenter San Francisco
   device_configuration: ''
   device_configuration_match: inclusion
+  device_creator: ''
+  device_creator_match: inclusion
   device_description: ''
   device_description_match: inclusion
   device_icon: ''
@@ -350,6 +386,8 @@
   latitude: '37.77'
   link_color: ''
   link_color_match: inclusion
+  link_creator: ''
+  link_creator_match: inclusion
   link_description: ''
   link_description_match: inclusion
   link_destination_name: ''
@@ -385,6 +423,8 @@
   operator: all
   property1: CP
   public: false
+  service_creator: ''
+  service_creator_match: inclusion
   service_description: ''
   service_description_match: inclusion
   service_name: ''
@@ -397,16 +437,23 @@
   target_services: ['Regression Workflow P: large workflow (scalability)']
   tasks: []
   type: pool
+  user_description: ''
+  user_description_match: inclusion
   user_email: ''
   user_email_match: inclusion
+  user_groups: ''
+  user_groups_match: inclusion
   user_name: ''
   user_name_match: inclusion
   user_number: 0
   users: []
 - access_users: []
+  creator: ''
   description: Datacenter New York
   device_configuration: ''
   device_configuration_match: inclusion
+  device_creator: ''
+  device_creator_match: inclusion
   device_description: ''
   device_description_match: inclusion
   device_icon: ''
@@ -452,6 +499,8 @@
   latitude: '40.71'
   link_color: ''
   link_color_match: inclusion
+  link_creator: ''
+  link_creator_match: inclusion
   link_description: ''
   link_description_match: inclusion
   link_destination_name: ''
@@ -487,6 +536,8 @@
   operator: all
   property1: CP
   public: false
+  service_creator: ''
+  service_creator_match: inclusion
   service_description: ''
   service_description_match: inclusion
   service_name: ''
@@ -499,16 +550,23 @@
   target_services: ['Regression Workflow P: large workflow (scalability)']
   tasks: []
   type: pool
+  user_description: ''
+  user_description_match: inclusion
   user_email: ''
   user_email_match: inclusion
+  user_groups: ''
+  user_groups_match: inclusion
   user_name: ''
   user_name_match: inclusion
   user_number: 0
   users: []
 - access_users: []
+  creator: ''
   description: Datacenter Chicago
   device_configuration: ''
   device_configuration_match: inclusion
+  device_creator: ''
+  device_creator_match: inclusion
   device_description: ''
   device_description_match: inclusion
   device_icon: ''
@@ -553,6 +611,8 @@
   latitude: '41.87'
   link_color: ''
   link_color_match: inclusion
+  link_creator: ''
+  link_creator_match: inclusion
   link_description: ''
   link_description_match: inclusion
   link_destination_name: ''
@@ -588,6 +648,8 @@
   operator: all
   property1: CP
   public: false
+  service_creator: ''
+  service_creator_match: inclusion
   service_description: ''
   service_description_match: inclusion
   service_name: ''
@@ -600,16 +662,23 @@
   target_services: ['Regression Workflow P: large workflow (scalability)']
   tasks: []
   type: pool
+  user_description: ''
+  user_description_match: inclusion
   user_email: ''
   user_email_match: inclusion
+  user_groups: ''
+  user_groups_match: inclusion
   user_name: ''
   user_name_match: inclusion
   user_number: 0
   users: []
 - access_users: []
+  creator: ''
   description: ''
   device_configuration: ''
   device_configuration_match: inclusion
+  device_creator: ''
+  device_creator_match: inclusion
   device_description: ''
   device_description_match: inclusion
   device_icon: ''
@@ -653,6 +722,8 @@
   latitude: '0.0'
   link_color: ''
   link_color_match: inclusion
+  link_creator: ''
+  link_creator_match: inclusion
   link_description: ''
   link_description_match: inclusion
   link_destination_name: ''
@@ -675,6 +746,8 @@
   name: Washington
   operator: all
   property1: CP
+  service_creator: ''
+  service_creator_match: inclusion
   service_description: ''
   service_description_match: inclusion
   service_name: ''
@@ -688,16 +761,23 @@
       Data', 'Regression Workflow P: large workflow (scalability)']
   tasks: []
   type: pool
+  user_description: ''
+  user_description_match: inclusion
   user_email: ''
   user_email_match: inclusion
+  user_groups: ''
+  user_groups_match: inclusion
   user_name: ''
   user_name_match: inclusion
   user_number: 0
   users: []
 - access_users: []
+  creator: ''
   description: ''
   device_configuration: ''
   device_configuration_match: inclusion
+  device_creator: ''
+  device_creator_match: inclusion
   device_description: ''
   device_description_match: inclusion
   device_icon: ''
@@ -741,6 +821,8 @@
   latitude: '0.0'
   link_color: ''
   link_color_match: inclusion
+  link_creator: ''
+  link_creator_match: inclusion
   link_description: ''
   link_description_match: inclusion
   link_destination_name: ''
@@ -764,6 +846,8 @@
   operator: all
   property1: CP
   public: false
+  service_creator: ''
+  service_creator_match: inclusion
   service_description: ''
   service_description_match: inclusion
   service_name: ''
@@ -776,16 +860,23 @@
   target_services: ['Regression Workflow P: large workflow (scalability)']
   tasks: []
   type: pool
+  user_description: ''
+  user_description_match: inclusion
   user_email: ''
   user_email_match: inclusion
+  user_groups: ''
+  user_groups_match: inclusion
   user_name: ''
   user_name_match: inclusion
   user_number: 0
   users: []
 - access_users: []
+  creator: ''
   description: ''
   device_configuration: ''
   device_configuration_match: inclusion
+  device_creator: ''
+  device_creator_match: inclusion
   device_description: ''
   device_description_match: inclusion
   device_icon: ''
@@ -829,6 +920,8 @@
   latitude: '0.0'
   link_color: ''
   link_color_match: inclusion
+  link_creator: ''
+  link_creator_match: inclusion
   link_description: ''
   link_description_match: inclusion
   link_destination_name: ''
@@ -852,6 +945,8 @@
   operator: all
   property1: CP
   public: true
+  service_creator: ''
+  service_creator_match: inclusion
   service_description: ''
   service_description_match: inclusion
   service_name: ''
@@ -864,16 +959,23 @@
   target_services: ['Regression Workflow P: large workflow (scalability)']
   tasks: []
   type: pool
+  user_description: ''
+  user_description_match: inclusion
   user_email: ''
   user_email_match: inclusion
+  user_groups: ''
+  user_groups_match: inclusion
   user_name: ''
   user_name_match: inclusion
   user_number: 0
   users: []
 - access_users: [Full Access to Everything]
+  creator: ''
   description: ''
   device_configuration: ''
   device_configuration_match: inclusion
+  device_creator: ''
+  device_creator_match: inclusion
   device_description: ''
   device_description_match: inclusion
   device_icon: ''
@@ -917,6 +1019,8 @@
   latitude: '0.0'
   link_color: ''
   link_color_match: inclusion
+  link_creator: ''
+  link_creator_match: inclusion
   link_description: ''
   link_description_match: inclusion
   link_destination_name: ''
@@ -940,6 +1044,8 @@
   operator: all
   property1: CP
   public: false
+  service_creator: ''
+  service_creator_match: inclusion
   service_description: ''
   service_description_match: inclusion
   service_name: ''
@@ -952,17 +1058,24 @@
   target_services: []
   tasks: []
   type: pool
+  user_description: ''
+  user_description_match: inclusion
   user_email: ''
   user_email_match: inclusion
+  user_groups: ''
+  user_groups_match: inclusion
   user_name: nadmin
   user_name_match: inclusion
   user_number: 1
   users: [nadmin]
 - access_users: [Pool link 0-5 (EDIT) (links 6-9 should be available via public pool
       of links), New York Pool Access for user ny]
+  creator: ''
   description: ''
   device_configuration: ''
   device_configuration_match: inclusion
+  device_creator: ''
+  device_creator_match: inclusion
   device_description: ''
   device_description_match: inclusion
   device_icon: ''
@@ -1006,6 +1119,8 @@
   latitude: '0.0'
   link_color: ''
   link_color_match: inclusion
+  link_creator: ''
+  link_creator_match: inclusion
   link_description: ''
   link_description_match: inclusion
   link_destination_name: ''
@@ -1029,6 +1144,8 @@
   operator: all
   property1: CP
   public: false
+  service_creator: ''
+  service_creator_match: inclusion
   service_description: ''
   service_description_match: inclusion
   service_name: ''
@@ -1041,16 +1158,23 @@
   target_services: []
   tasks: []
   type: pool
+  user_description: ''
+  user_description_match: inclusion
   user_email: ''
   user_email_match: inclusion
+  user_groups: ''
+  user_groups_match: inclusion
   user_name: ny
   user_name_match: inclusion
   user_number: 1
   users: [ny]
 - access_users: [Read-Only Profile]
+  creator: ''
   description: ''
   device_configuration: ''
   device_configuration_match: inclusion
+  device_creator: ''
+  device_creator_match: inclusion
   device_description: ''
   device_description_match: inclusion
   device_icon: ''
@@ -1094,6 +1218,8 @@
   latitude: '0.0'
   link_color: ''
   link_color_match: inclusion
+  link_creator: ''
+  link_creator_match: inclusion
   link_description: ''
   link_description_match: inclusion
   link_destination_name: ''
@@ -1117,6 +1243,8 @@
   operator: all
   property1: CP
   public: false
+  service_creator: ''
+  service_creator_match: inclusion
   service_description: ''
   service_description_match: inclusion
   service_name: ''
@@ -1129,9 +1257,13 @@
   target_services: []
   tasks: []
   type: pool
+  user_description: ''
+  user_description_match: inclusion
   user_email: ''
   user_email_match: inclusion
+  user_groups: ''
+  user_groups_match: inclusion
   user_name: readonly
   user_name_match: inclusion
-  user_number: 0
-  users: []
+  user_number: 1
+  users: [readonly]

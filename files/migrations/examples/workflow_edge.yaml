@@ -1,780 +1,816 @@
-- {destination: '[Regression Workflow 1: VRF creation and deletion with Netmiko] netmiko_create_vrf_test',
+- {color: green, destination: '[Regression Workflow 1: VRF creation and deletion with
+    Netmiko] netmiko_create_vrf_test', label: success, source: '[Shared] Start', subtype: success,
+  type: workflow_edge, workflow: 'Regression Workflow 1: VRF creation and deletion
+    with Netmiko'}
+- {color: '#0D0D0D', destination: '[Regression Workflow 1: VRF creation and deletion
+    with Netmiko] netmiko_check_vrf_test', label: success, source: '[Regression Workflow
+    1: VRF creation and deletion with Netmiko] netmiko_create_vrf_test', subtype: success,
+  type: workflow_edge, workflow: 'Regression Workflow 1: VRF creation and deletion
+    with Netmiko'}
+- {color: green, destination: '[Regression Workflow 1: VRF creation and deletion with
+    Netmiko] netmiko_delete_vrf_test', label: success, source: '[Regression Workflow
+    1: VRF creation and deletion with Netmiko] netmiko_check_vrf_test', subtype: success,
+  type: workflow_edge, workflow: 'Regression Workflow 1: VRF creation and deletion
+    with Netmiko'}
+- {color: green, destination: '[Shared] Netmiko: Check VRF (test) does not exist',
+  label: success, source: '[Regression Workflow 1: VRF creation and deletion with
+    Netmiko] netmiko_delete_vrf_test', subtype: success, type: workflow_edge, workflow: 'Regression
+    Workflow 1: VRF creation and deletion with Netmiko'}
+- {color: green, destination: '[Shared] End', label: success, source: '[Shared] Netmiko:
+    Check VRF (test) does not exist', subtype: success, type: workflow_edge, workflow: 'Regression
+    Workflow 1: VRF creation and deletion with Netmiko'}
+- {color: green, destination: '[[Regression Workflow F: Workflow of Workflows] Regression
+    Workflow 5: VRF creation and deletion with Napalm] Create a VRF with NAPALM',
   label: success, source: '[Shared] Start', subtype: success, type: workflow_edge,
-  workflow: 'Regression Workflow 1: VRF creation and deletion with Netmiko'}
-- {destination: '[Regression Workflow 1: VRF creation and deletion with Netmiko] netmiko_check_vrf_test',
-  label: success, source: '[Regression Workflow 1: VRF creation and deletion with
-    Netmiko] netmiko_create_vrf_test', subtype: success, type: workflow_edge, workflow: 'Regression
-    Workflow 1: VRF creation and deletion with Netmiko'}
-- {destination: '[Regression Workflow 1: VRF creation and deletion with Netmiko] netmiko_delete_vrf_test',
-  label: success, source: '[Regression Workflow 1: VRF creation and deletion with
-    Netmiko] netmiko_check_vrf_test', subtype: success, type: workflow_edge, workflow: 'Regression
-    Workflow 1: VRF creation and deletion with Netmiko'}
-- {destination: '[Shared] Netmiko: Check VRF (test) does not exist', label: success,
-  source: '[Regression Workflow 1: VRF creation and deletion with Netmiko] netmiko_delete_vrf_test',
-  subtype: success, type: workflow_edge, workflow: 'Regression Workflow 1: VRF creation
-    and deletion with Netmiko'}
-- {destination: '[Shared] End', label: success, source: '[Shared] Netmiko: Check VRF
-    (test) does not exist', subtype: success, type: workflow_edge, workflow: 'Regression
-    Workflow 1: VRF creation and deletion with Netmiko'}
-- {destination: '[[Regression Workflow F: Workflow of Workflows] Regression Workflow
-    5: VRF creation and deletion with Napalm] Create a VRF with NAPALM', label: success,
-  source: '[Shared] Start', subtype: success, type: workflow_edge, workflow: '[Regression
-    Workflow F: Workflow of Workflows] Regression Workflow 5: VRF creation and deletion
-    with Napalm'}
-- {destination: '[Regression Workflow 3: Napalm getters (postprocessing)] get_interfaces_ip',
-  label: success, source: '[Shared] NAPALM: Get Facts', subtype: success, type: workflow_edge,
-  workflow: 'Regression Workflow 3: Napalm getters (postprocessing)'}
-- {destination: '[Regression Workflow 3: Napalm getters (postprocessing)] get_config',
-  label: success, source: '[Regression Workflow 3: Napalm getters (postprocessing)]
-    get_interfaces_ip', subtype: success, type: workflow_edge, workflow: 'Regression
-    Workflow 3: Napalm getters (postprocessing)'}
-- {destination: '[Regression Workflow 3: Napalm getters (postprocessing)] process_payload1',
-  label: success, source: '[Regression Workflow 3: Napalm getters (postprocessing)]
-    get_config', subtype: success, type: workflow_edge, workflow: 'Regression Workflow
-    3: Napalm getters (postprocessing)'}
-- {destination: '[Regression Workflow 3: Napalm getters (postprocessing)] process_payload1',
-  label: success, source: '[Shared] NAPALM: Get interfaces', subtype: success, type: workflow_edge,
-  workflow: 'Regression Workflow 3: Napalm getters (postprocessing)'}
-- {destination: '[Shared] End', label: success, source: '[Regression Workflow 3: Napalm
-    getters (postprocessing)] process_payload1', subtype: success, type: workflow_edge,
-  workflow: 'Regression Workflow 3: Napalm getters (postprocessing)'}
-- {destination: '[Regression Workflow 3: Napalm getters (postprocessing)] process_payload1',
-  label: prerequisite, source: '[Shared] NAPALM: Get interfaces', subtype: prerequisite,
-  type: workflow_edge, workflow: 'Regression Workflow 3: Napalm getters (postprocessing)'}
-- {destination: '[Regression Workflow 3: Napalm getters (postprocessing)] process_payload1',
-  label: prerequisite, source: '[Shared] NAPALM: Get Facts', subtype: prerequisite,
-  type: workflow_edge, workflow: 'Regression Workflow 3: Napalm getters (postprocessing)'}
-- {destination: '[[[Regression Workflow F: Workflow of Workflows] Regression Workflow
-    F S1: Subworkflow of Workflow] Regression Workflow 7: Payload Extraction & Validation]
-    netmiko_show_ip_route', label: success, source: '[Shared] Start', subtype: success,
-  type: workflow_edge, workflow: '[[Regression Workflow F: Workflow of Workflows]
-    Regression Workflow F S1: Subworkflow of Workflow] Regression Workflow 7: Payload
-    Extraction & Validation'}
-- {destination: '[[Regression Workflow F: Workflow of Workflows] Regression Workflow
-    5: VRF creation and deletion with Napalm] Check VRF exists with Netmiko', label: success,
-  source: '[[Regression Workflow F: Workflow of Workflows] Regression Workflow 5:
-    VRF creation and deletion with Napalm] Create a VRF with NAPALM', subtype: success,
-  type: workflow_edge, workflow: '[Regression Workflow F: Workflow of Workflows] Regression
-    Workflow 5: VRF creation and deletion with Napalm'}
-- {destination: '[[Regression Workflow F: Workflow of Workflows] Regression Workflow
-    5: VRF creation and deletion with Napalm] Rollback Configuration with NAPALM',
-  label: success, source: '[[Regression Workflow F: Workflow of Workflows] Regression
-    Workflow 5: VRF creation and deletion with Napalm] Check VRF exists with Netmiko',
-  subtype: success, type: workflow_edge, workflow: '[Regression Workflow F: Workflow
-    of Workflows] Regression Workflow 5: VRF creation and deletion with Napalm'}
-- {destination: '[[Regression Workflow F: Workflow of Workflows] Regression Workflow
-    5: VRF creation and deletion with Napalm] Check VRF is not configured with Netmiko',
-  label: success, source: '[[Regression Workflow F: Workflow of Workflows] Regression
-    Workflow 5: VRF creation and deletion with Napalm] Rollback Configuration with
-    NAPALM', subtype: success, type: workflow_edge, workflow: '[Regression Workflow
-    F: Workflow of Workflows] Regression Workflow 5: VRF creation and deletion with
-    Napalm'}
-- {destination: '[Shared] End', label: success, source: '[[Regression Workflow F:
-    Workflow of Workflows] Regression Workflow 5: VRF creation and deletion with Napalm]
-    Check VRF is not configured with Netmiko', subtype: success, type: workflow_edge,
   workflow: '[Regression Workflow F: Workflow of Workflows] Regression Workflow 5:
     VRF creation and deletion with Napalm'}
-- {destination: '[Shared] NAPALM: Get Facts', label: success, source: '[Shared] Start',
+- {color: green, destination: '[Regression Workflow 3: Napalm getters (postprocessing)]
+    get_interfaces_ip', label: success, source: '[Shared] NAPALM: Get Facts', subtype: success,
+  type: workflow_edge, workflow: 'Regression Workflow 3: Napalm getters (postprocessing)'}
+- {color: green, destination: '[Regression Workflow 3: Napalm getters (postprocessing)]
+    get_config', label: success, source: '[Regression Workflow 3: Napalm getters (postprocessing)]
+    get_interfaces_ip', subtype: success, type: workflow_edge, workflow: 'Regression
+    Workflow 3: Napalm getters (postprocessing)'}
+- {color: green, destination: '[Regression Workflow 3: Napalm getters (postprocessing)]
+    process_payload1', label: success, source: '[Regression Workflow 3: Napalm getters
+    (postprocessing)] get_config', subtype: success, type: workflow_edge, workflow: 'Regression
+    Workflow 3: Napalm getters (postprocessing)'}
+- {color: green, destination: '[Regression Workflow 3: Napalm getters (postprocessing)]
+    process_payload1', label: success, source: '[Shared] NAPALM: Get interfaces',
   subtype: success, type: workflow_edge, workflow: 'Regression Workflow 3: Napalm
     getters (postprocessing)'}
-- {destination: '[Shared] NAPALM: Get interfaces', label: success, source: '[Shared]
+- {color: green, destination: '[Shared] End', label: success, source: '[Regression
+    Workflow 3: Napalm getters (postprocessing)] process_payload1', subtype: success,
+  type: workflow_edge, workflow: 'Regression Workflow 3: Napalm getters (postprocessing)'}
+- {color: blue, destination: '[Regression Workflow 3: Napalm getters (postprocessing)]
+    process_payload1', label: prerequisite, source: '[Shared] NAPALM: Get interfaces',
+  subtype: prerequisite, type: workflow_edge, workflow: 'Regression Workflow 3: Napalm
+    getters (postprocessing)'}
+- {color: blue, destination: '[Regression Workflow 3: Napalm getters (postprocessing)]
+    process_payload1', label: prerequisite, source: '[Shared] NAPALM: Get Facts',
+  subtype: prerequisite, type: workflow_edge, workflow: 'Regression Workflow 3: Napalm
+    getters (postprocessing)'}
+- {color: green, destination: '[[[Regression Workflow F: Workflow of Workflows] Regression
+    Workflow F S1: Subworkflow of Workflow] Regression Workflow 7: Payload Extraction
+    & Validation] netmiko_show_ip_route', label: success, source: '[Shared] Start',
+  subtype: success, type: workflow_edge, workflow: '[[Regression Workflow F: Workflow
+    of Workflows] Regression Workflow F S1: Subworkflow of Workflow] Regression Workflow
+    7: Payload Extraction & Validation'}
+- {color: green, destination: '[[Regression Workflow F: Workflow of Workflows] Regression
+    Workflow 5: VRF creation and deletion with Napalm] Check VRF exists with Netmiko',
+  label: success, source: '[[Regression Workflow F: Workflow of Workflows] Regression
+    Workflow 5: VRF creation and deletion with Napalm] Create a VRF with NAPALM',
+  subtype: success, type: workflow_edge, workflow: '[Regression Workflow F: Workflow
+    of Workflows] Regression Workflow 5: VRF creation and deletion with Napalm'}
+- {color: green, destination: '[[Regression Workflow F: Workflow of Workflows] Regression
+    Workflow 5: VRF creation and deletion with Napalm] Rollback Configuration with
+    NAPALM', label: success, source: '[[Regression Workflow F: Workflow of Workflows]
+    Regression Workflow 5: VRF creation and deletion with Napalm] Check VRF exists
+    with Netmiko', subtype: success, type: workflow_edge, workflow: '[Regression Workflow
+    F: Workflow of Workflows] Regression Workflow 5: VRF creation and deletion with
+    Napalm'}
+- {color: green, destination: '[[Regression Workflow F: Workflow of Workflows] Regression
+    Workflow 5: VRF creation and deletion with Napalm] Check VRF is not configured
+    with Netmiko', label: success, source: '[[Regression Workflow F: Workflow of Workflows]
+    Regression Workflow 5: VRF creation and deletion with Napalm] Rollback Configuration
+    with NAPALM', subtype: success, type: workflow_edge, workflow: '[Regression Workflow
+    F: Workflow of Workflows] Regression Workflow 5: VRF creation and deletion with
+    Napalm'}
+- {color: green, destination: '[Shared] End', label: success, source: '[[Regression
+    Workflow F: Workflow of Workflows] Regression Workflow 5: VRF creation and deletion
+    with Napalm] Check VRF is not configured with Netmiko', subtype: success, type: workflow_edge,
+  workflow: '[Regression Workflow F: Workflow of Workflows] Regression Workflow 5:
+    VRF creation and deletion with Napalm'}
+- {color: green, destination: '[Shared] NAPALM: Get Facts', label: success, source: '[Shared]
     Start', subtype: success, type: workflow_edge, workflow: 'Regression Workflow
     3: Napalm getters (postprocessing)'}
-- {destination: '[Shared] REST API: call *is_alive* endpoint', label: failure, source: '[Shared]
-    Netmiko: Check VRF (test) does not exist', subtype: failure, type: workflow_edge,
+- {color: green, destination: '[Shared] NAPALM: Get interfaces', label: success, source: '[Shared]
+    Start', subtype: success, type: workflow_edge, workflow: 'Regression Workflow
+    3: Napalm getters (postprocessing)'}
+- {color: red, destination: '[Shared] REST API: call *is_alive* endpoint', label: failure,
+  source: '[Shared] Netmiko: Check VRF (test) does not exist', subtype: failure, type: workflow_edge,
   workflow: 'Regression Workflow 2: Separate Failure - Success paths'}
-- {destination: '[Shared] Netmiko: Check VRF (test) does not exist', label: success,
-  source: '[Shared] Start', subtype: success, type: workflow_edge, workflow: 'Regression
-    Workflow 2: Separate Failure - Success paths'}
-- {destination: '[Shared] NAPALM: Get Facts', label: success, source: '[Shared] Netmiko:
-    Check VRF (test) does not exist', subtype: success, type: workflow_edge, workflow: 'Regression
-    Workflow 2: Separate Failure - Success paths'}
-- {destination: '[Regression Workflow D: Prompts] Test netmiko prompts pass', label: failure,
-  source: '[Regression Workflow D: Prompts] Test Netmiko Prompt Service', subtype: failure,
-  type: workflow_edge, workflow: 'Regression Workflow D: Prompts'}
-- {destination: '[Regression Workflow A: get_var, set_var, get_result] Modify payload
-    (no device)', label: success, source: '[Shared] Start', subtype: success, type: workflow_edge,
-  workflow: 'Regression Workflow A: get_var, set_var, get_result'}
-- {destination: '[Regression Workflow A: get_var, set_var, get_result] Modify payload
-    (per device)', label: success, source: '[Regression Workflow A: get_var, set_var,
-    get_result] Modify payload (no device)', subtype: success, type: workflow_edge,
-  workflow: 'Regression Workflow A: get_var, set_var, get_result'}
-- {destination: '[Regression Workflow A: get_var, set_var, get_result] Show vrf with
-    payload helper', label: success, source: '[Regression Workflow A: get_var, set_var,
-    get_result] Modify payload (per device)', subtype: success, type: workflow_edge,
-  workflow: 'Regression Workflow A: get_var, set_var, get_result'}
-- {destination: '[Shared] REST API: call *is_alive* endpoint', label: success, source: '[Regression
-    Workflow A: get_var, set_var, get_result] Show vrf with python query', subtype: success,
+- {color: green, destination: '[Shared] Netmiko: Check VRF (test) does not exist',
+  label: success, source: '[Shared] Start', subtype: success, type: workflow_edge,
+  workflow: 'Regression Workflow 2: Separate Failure - Success paths'}
+- {color: green, destination: '[Shared] NAPALM: Get Facts', label: success, source: '[Shared]
+    Netmiko: Check VRF (test) does not exist', subtype: success, type: workflow_edge,
+  workflow: 'Regression Workflow 2: Separate Failure - Success paths'}
+- {color: red, destination: '[Regression Workflow D: Prompts] Test netmiko prompts
+    pass', label: failure, source: '[Regression Workflow D: Prompts] Test Netmiko
+    Prompt Service', subtype: failure, type: workflow_edge, workflow: 'Regression
+    Workflow D: Prompts'}
+- {color: green, destination: '[Regression Workflow A: get_var, set_var, get_result]
+    Modify payload (no device)', label: success, source: '[Shared] Start', subtype: success,
   type: workflow_edge, workflow: 'Regression Workflow A: get_var, set_var, get_result'}
-- {destination: '[Regression Workflow A: get_var, set_var, get_result] show runtime
-    with get_result helper', label: success, source: '[Shared] REST API: call *is_alive*
-    endpoint', subtype: success, type: workflow_edge, workflow: 'Regression Workflow
-    A: get_var, set_var, get_result'}
-- {destination: '[Shared] End', label: success, source: '[Regression Workflow A: get_var,
-    set_var, get_result] show runtime with get_result helper', subtype: success, type: workflow_edge,
+- {color: green, destination: '[Regression Workflow A: get_var, set_var, get_result]
+    Modify payload (per device)', label: success, source: '[Regression Workflow A:
+    get_var, set_var, get_result] Modify payload (no device)', subtype: success, type: workflow_edge,
   workflow: 'Regression Workflow A: get_var, set_var, get_result'}
-- {destination: '[[[Regression Workflow F: Workflow of Workflows] Regression Workflow
-    F S1: Subworkflow of Workflow] Regression Workflow B: Napalm getters validation]
-    Getters Workflow: is alive', label: success, source: '[Shared] Start', subtype: success,
-  type: workflow_edge, workflow: '[[Regression Workflow F: Workflow of Workflows]
-    Regression Workflow F S1: Subworkflow of Workflow] Regression Workflow B: Napalm
-    getters validation'}
-- {destination: '[[[Regression Workflow F: Workflow of Workflows] Regression Workflow
-    F S1: Subworkflow of Workflow] Regression Workflow B: Napalm getters validation]
-    Getters Workflow: get facts', label: success, source: '[[[Regression Workflow
-    F: Workflow of Workflows] Regression Workflow F S1: Subworkflow of Workflow] Regression
-    Workflow B: Napalm getters validation] Getters Workflow: is alive', subtype: success,
-  type: workflow_edge, workflow: '[[Regression Workflow F: Workflow of Workflows]
-    Regression Workflow F S1: Subworkflow of Workflow] Regression Workflow B: Napalm
-    getters validation'}
-- {destination: '[[[Regression Workflow F: Workflow of Workflows] Regression Workflow
-    F S1: Subworkflow of Workflow] Regression Workflow B: Napalm getters validation]
-    Getters Workflow: MAC address', label: success, source: '[Shared] Getters Workflow:
-    Interface IP', subtype: success, type: workflow_edge, workflow: '[[Regression
+- {color: green, destination: '[Regression Workflow A: get_var, set_var, get_result]
+    Show vrf with payload helper', label: success, source: '[Regression Workflow A:
+    get_var, set_var, get_result] Modify payload (per device)', subtype: success,
+  type: workflow_edge, workflow: 'Regression Workflow A: get_var, set_var, get_result'}
+- {color: green, destination: '[Shared] REST API: call *is_alive* endpoint', label: success,
+  source: '[Regression Workflow A: get_var, set_var, get_result] Show vrf with python
+    query', subtype: success, type: workflow_edge, workflow: 'Regression Workflow
+    A: get_var, set_var, get_result'}
+- {color: green, destination: '[Regression Workflow A: get_var, set_var, get_result]
+    show runtime with get_result helper', label: success, source: '[Shared] REST API:
+    call *is_alive* endpoint', subtype: success, type: workflow_edge, workflow: 'Regression
+    Workflow A: get_var, set_var, get_result'}
+- {color: green, destination: '[Shared] End', label: success, source: '[Regression
+    Workflow A: get_var, set_var, get_result] show runtime with get_result helper',
+  subtype: success, type: workflow_edge, workflow: 'Regression Workflow A: get_var,
+    set_var, get_result'}
+- {color: green, destination: '[[[Regression Workflow F: Workflow of Workflows] Regression
+    Workflow F S1: Subworkflow of Workflow] Regression Workflow B: Napalm getters
+    validation] Getters Workflow: is alive', label: success, source: '[Shared] Start',
+  subtype: success, type: workflow_edge, workflow: '[[Regression Workflow F: Workflow
+    of Workflows] Regression Workflow F S1: Subworkflow of Workflow] Regression Workflow
+    B: Napalm getters validation'}
+- {color: green, destination: '[[[Regression Workflow F: Workflow of Workflows] Regression
+    Workflow F S1: Subworkflow of Workflow] Regression Workflow B: Napalm getters
+    validation] Getters Workflow: get facts', label: success, source: '[[[Regression
+    Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow of Workflow]
+    Regression Workflow B: Napalm getters validation] Getters Workflow: is alive',
+  subtype: success, type: workflow_edge, workflow: '[[Regression Workflow F: Workflow
+    of Workflows] Regression Workflow F S1: Subworkflow of Workflow] Regression Workflow
+    B: Napalm getters validation'}
+- {color: green, destination: '[[[Regression Workflow F: Workflow of Workflows] Regression
+    Workflow F S1: Subworkflow of Workflow] Regression Workflow B: Napalm getters
+    validation] Getters Workflow: MAC address', label: success, source: '[Shared]
+    Getters Workflow: Interface IP', subtype: success, type: workflow_edge, workflow: '[[Regression
     Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow of Workflow]
     Regression Workflow B: Napalm getters validation'}
-- {destination: '[Shared] End', label: success, source: '[[[Regression Workflow F:
-    Workflow of Workflows] Regression Workflow F S1: Subworkflow of Workflow] Regression
-    Workflow B: Napalm getters validation] Getters Workflow: MAC address', subtype: success,
-  type: workflow_edge, workflow: '[[Regression Workflow F: Workflow of Workflows]
-    Regression Workflow F S1: Subworkflow of Workflow] Regression Workflow B: Napalm
-    getters validation'}
-- {destination: '[[[Regression Workflow F: Workflow of Workflows] Regression Workflow
-    F S1: Subworkflow of Workflow] Regression Workflow B: Napalm getters validation]
-    Getters Workflow: get facts failed match', label: success, source: '[[[Regression
+- {color: green, destination: '[Shared] End', label: success, source: '[[[Regression
+    Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow of Workflow]
+    Regression Workflow B: Napalm getters validation] Getters Workflow: MAC address',
+  subtype: success, type: workflow_edge, workflow: '[[Regression Workflow F: Workflow
+    of Workflows] Regression Workflow F S1: Subworkflow of Workflow] Regression Workflow
+    B: Napalm getters validation'}
+- {color: green, destination: '[[[Regression Workflow F: Workflow of Workflows] Regression
+    Workflow F S1: Subworkflow of Workflow] Regression Workflow B: Napalm getters
+    validation] Getters Workflow: get facts failed match', label: success, source: '[[[Regression
     Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow of Workflow]
     Regression Workflow B: Napalm getters validation] Getters Workflow: get facts',
   subtype: success, type: workflow_edge, workflow: '[[Regression Workflow F: Workflow
     of Workflows] Regression Workflow F S1: Subworkflow of Workflow] Regression Workflow
     B: Napalm getters validation'}
-- {destination: '[Shared] Getters Workflow: Interface IP', label: failure, source: '[[[Regression
-    Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow of Workflow]
-    Regression Workflow B: Napalm getters validation] Getters Workflow: get facts
-    failed match', subtype: failure, type: workflow_edge, workflow: '[[Regression
-    Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow of Workflow]
-    Regression Workflow B: Napalm getters validation'}
-- {destination: '[Regression Workflow 6: Ansible with Validation] Ansible Workflow:
-    Arista show configuration (regex match)', label: success, source: '[Regression
+- {color: red, destination: '[Shared] Getters Workflow: Interface IP', label: failure,
+  source: '[[[Regression Workflow F: Workflow of Workflows] Regression Workflow F
+    S1: Subworkflow of Workflow] Regression Workflow B: Napalm getters validation]
+    Getters Workflow: get facts failed match', subtype: failure, type: workflow_edge,
+  workflow: '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F
+    S1: Subworkflow of Workflow] Regression Workflow B: Napalm getters validation'}
+- {color: green, destination: '[Regression Workflow 6: Ansible with Validation] Ansible
+    Workflow: Arista show configuration (regex match)', label: success, source: '[Regression
     Workflow 6: Ansible with Validation] Ansible Workflow: Arista show version', subtype: success,
   type: workflow_edge, workflow: 'Regression Workflow 6: Ansible with Validation'}
-- {destination: '[Regression Workflow 6: Ansible with Validation] Ansible Workflow:
-    Arista show configuration (dict match)', label: success, source: '[Regression
+- {color: green, destination: '[Regression Workflow 6: Ansible with Validation] Ansible
+    Workflow: Arista show configuration (dict match)', label: success, source: '[Regression
     Workflow 6: Ansible with Validation] Ansible Workflow: Arista show configuration
     (regex match)', subtype: success, type: workflow_edge, workflow: 'Regression Workflow
     6: Ansible with Validation'}
-- {destination: '[Shared] End', label: success, source: '[Regression Workflow 6: Ansible
-    with Validation] Ansible Workflow: Arista show configuration (dict match)', subtype: success,
-  type: workflow_edge, workflow: 'Regression Workflow 6: Ansible with Validation'}
-- {destination: '[Shared] NAPALM: Get interfaces', label: success, source: '[Shared]
+- {color: green, destination: '[Shared] End', label: success, source: '[Regression
+    Workflow 6: Ansible with Validation] Ansible Workflow: Arista show configuration
+    (dict match)', subtype: success, type: workflow_edge, workflow: 'Regression Workflow
+    6: Ansible with Validation'}
+- {color: green, destination: '[Shared] NAPALM: Get interfaces', label: success, source: '[Shared]
     REST API: call *is_alive* endpoint', subtype: success, type: workflow_edge, workflow: 'Regression
     Workflow 2: Separate Failure - Success paths'}
-- {destination: '[Shared] Example Service (does nothing)', label: success, source: '[Shared]
-    NAPALM: Get interfaces', subtype: success, type: workflow_edge, workflow: 'Regression
-    Workflow 2: Separate Failure - Success paths'}
-- {destination: '[Shared] NAPALM: Get interfaces', label: success, source: '[Shared]
+- {color: green, destination: '[Shared] Example Service (does nothing)', label: success,
+  source: '[Shared] NAPALM: Get interfaces', subtype: success, type: workflow_edge,
+  workflow: 'Regression Workflow 2: Separate Failure - Success paths'}
+- {color: green, destination: '[Shared] NAPALM: Get interfaces', label: success, source: '[Shared]
     NAPALM: Get Facts', subtype: success, type: workflow_edge, workflow: 'Regression
     Workflow 2: Separate Failure - Success paths'}
-- {destination: '[Shared] Example Service (does nothing)', label: failure, source: '[Shared]
-    NAPALM: Get interfaces', subtype: failure, type: workflow_edge, workflow: 'Regression
-    Workflow 2: Separate Failure - Success paths'}
-- {destination: '[Regression Workflow C: Advanced multiprocessing] Show version with
-    multiprocessing', label: success, source: '[Shared] Start', subtype: success,
+- {color: red, destination: '[Shared] Example Service (does nothing)', label: failure,
+  source: '[Shared] NAPALM: Get interfaces', subtype: failure, type: workflow_edge,
+  workflow: 'Regression Workflow 2: Separate Failure - Success paths'}
+- {color: green, destination: '[Regression Workflow C: Advanced multiprocessing] Show
+    version with multiprocessing', label: success, source: '[Shared] Start', subtype: success,
   type: workflow_edge, workflow: 'Regression Workflow C: Advanced multiprocessing'}
-- {destination: '[Regression Workflow C: Advanced multiprocessing] napalm_configure_bgp_1',
+- {color: green, destination: '[Regression Workflow C: Advanced multiprocessing] napalm_configure_bgp_1',
   label: success, source: '[Shared] Example Service (does nothing)', subtype: success,
   type: workflow_edge, workflow: 'Regression Workflow C: Advanced multiprocessing'}
-- {destination: '[Shared] REST API: call *is_alive* endpoint', label: success, source: '[Regression
-    Workflow C: Advanced multiprocessing] napalm_configure_bgp_1', subtype: success,
-  type: workflow_edge, workflow: 'Regression Workflow C: Advanced multiprocessing'}
-- {destination: '[Shared] REST API: call *is_alive* endpoint', label: failure, source: '[Regression
-    Workflow C: Advanced multiprocessing] Show version with multiprocessing', subtype: failure,
-  type: workflow_edge, workflow: 'Regression Workflow C: Advanced multiprocessing'}
-- {destination: '[Shared] End', label: success, source: '[Shared] REST API: call *is_alive*
-    endpoint', subtype: success, type: workflow_edge, workflow: 'Regression Workflow
-    C: Advanced multiprocessing'}
-- {destination: '[Shared] REST API: call *is_alive* endpoint', label: prerequisite,
+- {color: green, destination: '[Shared] REST API: call *is_alive* endpoint', label: success,
+  source: '[Regression Workflow C: Advanced multiprocessing] napalm_configure_bgp_1',
+  subtype: success, type: workflow_edge, workflow: 'Regression Workflow C: Advanced
+    multiprocessing'}
+- {color: red, destination: '[Shared] REST API: call *is_alive* endpoint', label: failure,
+  source: '[Regression Workflow C: Advanced multiprocessing] Show version with multiprocessing',
+  subtype: failure, type: workflow_edge, workflow: 'Regression Workflow C: Advanced
+    multiprocessing'}
+- {color: green, destination: '[Shared] End', label: success, source: '[Shared] REST
+    API: call *is_alive* endpoint', subtype: success, type: workflow_edge, workflow: 'Regression
+    Workflow C: Advanced multiprocessing'}
+- {color: blue, destination: '[Shared] REST API: call *is_alive* endpoint', label: prerequisite,
   source: '[Regression Workflow C: Advanced multiprocessing] Show version with multiprocessing',
   subtype: prerequisite, type: workflow_edge, workflow: 'Regression Workflow C: Advanced
     multiprocessing'}
-- {destination: '[Shared] REST API: call *is_alive* endpoint', label: prerequisite,
+- {color: blue, destination: '[Shared] REST API: call *is_alive* endpoint', label: prerequisite,
   source: '[Regression Workflow C: Advanced multiprocessing] napalm_configure_bgp_1',
   subtype: prerequisite, type: workflow_edge, workflow: 'Regression Workflow C: Advanced
     multiprocessing'}
-- {destination: '[Shared] Modify Payload for Iteration', label: success, source: '[Shared]
-    Start', subtype: success, type: workflow_edge, workflow: 'Regression Workflow
-    E: Iteration Targets'}
-- {destination: '[Regression Workflow E: Iteration Targets] Iteration Target Workflow
-    - Test 2', label: success, source: '[Regression Workflow E: Iteration Targets]
-    Iteration Targets Workflow - Test 1', subtype: success, type: workflow_edge, workflow: 'Regression
+- {color: green, destination: '[Shared] Modify Payload for Iteration', label: success,
+  source: '[Shared] Start', subtype: success, type: workflow_edge, workflow: 'Regression
     Workflow E: Iteration Targets'}
-- {destination: '[Shared] Getters Workflow: Interface IP', label: success, source: '[Shared]
-    Start', subtype: success, type: workflow_edge, workflow: '[[Regression Workflow
-    F: Workflow of Workflows] Regression Workflow F S1: Subworkflow of Workflow] Regression
-    Workflow 8: Payload Extraction with Operations'}
-- {destination: '[[[Regression Workflow F: Workflow of Workflows] Regression Workflow
-    F S1: Subworkflow of Workflow] Regression Workflow 8: Payload Extraction with
-    Operations] Payload Workflow: Add initial variables', label: success, source: '[Shared]
+- {color: green, destination: '[Regression Workflow E: Iteration Targets] Iteration
+    Target Workflow - Test 2', label: success, source: '[Regression Workflow E: Iteration
+    Targets] Iteration Targets Workflow - Test 1', subtype: success, type: workflow_edge,
+  workflow: 'Regression Workflow E: Iteration Targets'}
+- {color: green, destination: '[Shared] Getters Workflow: Interface IP', label: success,
+  source: '[Shared] Start', subtype: success, type: workflow_edge, workflow: '[[Regression
+    Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow of Workflow]
+    Regression Workflow 8: Payload Extraction with Operations'}
+- {color: green, destination: '[[[Regression Workflow F: Workflow of Workflows] Regression
+    Workflow F S1: Subworkflow of Workflow] Regression Workflow 8: Payload Extraction
+    with Operations] Payload Workflow: Add initial variables', label: success, source: '[Shared]
     Getters Workflow: Interface IP', subtype: success, type: workflow_edge, workflow: '[[Regression
     Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow of Workflow]
     Regression Workflow 8: Payload Extraction with Operations'}
-- {destination: '[[[Regression Workflow F: Workflow of Workflows] Regression Workflow
-    F S1: Subworkflow of Workflow] Regression Workflow 8: Payload Extraction with
-    Operations] Payload Workflow: Extraction 1', label: success, source: '[[[Regression
+- {color: green, destination: '[[[Regression Workflow F: Workflow of Workflows] Regression
+    Workflow F S1: Subworkflow of Workflow] Regression Workflow 8: Payload Extraction
+    with Operations] Payload Workflow: Extraction 1', label: success, source: '[[[Regression
     Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow of Workflow]
     Regression Workflow 8: Payload Extraction with Operations] Payload Workflow: Add
     initial variables', subtype: success, type: workflow_edge, workflow: '[[Regression
     Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow of Workflow]
     Regression Workflow 8: Payload Extraction with Operations'}
-- {destination: '[[[Regression Workflow F: Workflow of Workflows] Regression Workflow
-    F S1: Subworkflow of Workflow] Regression Workflow 8: Payload Extraction with
-    Operations] Payload Workflow: Extraction 2', label: success, source: '[[[Regression
+- {color: green, destination: '[[[Regression Workflow F: Workflow of Workflows] Regression
+    Workflow F S1: Subworkflow of Workflow] Regression Workflow 8: Payload Extraction
+    with Operations] Payload Workflow: Extraction 2', label: success, source: '[[[Regression
     Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow of Workflow]
     Regression Workflow 8: Payload Extraction with Operations] Payload Workflow: Extraction
     1', subtype: success, type: workflow_edge, workflow: '[[Regression Workflow F:
     Workflow of Workflows] Regression Workflow F S1: Subworkflow of Workflow] Regression
     Workflow 8: Payload Extraction with Operations'}
-- {destination: '[Shared] End', label: success, source: '[Regression Workflow E: Iteration
-    Targets] Iteration Targets Workflow - Test 4', subtype: success, type: workflow_edge,
-  workflow: 'Regression Workflow E: Iteration Targets'}
-- {destination: '[[Regression Workflow F: Workflow of Workflows] Regression Workflow
-    F S2: Access Variables from Parent Workflow] Variable Access Subworkflow: Access
-    variable from snippet', label: success, source: '[Shared] Start', subtype: success,
-  type: workflow_edge, workflow: '[Regression Workflow F: Workflow of Workflows] Regression
-    Workflow F S2: Access Variables from Parent Workflow'}
-- {destination: '[Shared] Modify Payload for Iteration', label: success, source: '[Shared]
-    Start', subtype: success, type: workflow_edge, workflow: 'Regression Workflow
-    F: Workflow of Workflows'}
-- {destination: '[[Regression Workflow F: Workflow of Workflows] Regression Workflow
-    F S2: Access Variables from Parent Workflow] Variable Access Subworkflow: Access
-    variables for iteration', label: success, source: '[[Regression Workflow F: Workflow
-    of Workflows] Regression Workflow F S2: Access Variables from Parent Workflow]
-    Variable Access Subworkflow: Access variable from snippet', subtype: success,
-  type: workflow_edge, workflow: '[Regression Workflow F: Workflow of Workflows] Regression
-    Workflow F S2: Access Variables from Parent Workflow'}
-- {destination: '[Shared] End', label: success, source: '[[Regression Workflow F:
-    Workflow of Workflows] Regression Workflow F S2: Access Variables from Parent
-    Workflow] Variable Access Subworkflow: Access variables for iteration', subtype: success,
-  type: workflow_edge, workflow: '[Regression Workflow F: Workflow of Workflows] Regression
-    Workflow F S2: Access Variables from Parent Workflow'}
-- {destination: '[[Regression Workflow F: Workflow of Workflows] Regression Workflow
-    F S1: Subworkflow of Workflow] Regression Workflow 8: Payload Extraction with
-    Operations', label: success, source: '[[Regression Workflow F: Workflow of Workflows]
-    Regression Workflow F S1: Subworkflow of Workflow] Regression Workflow B: Napalm
-    getters validation', subtype: success, type: workflow_edge, workflow: '[Regression
-    Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow of Workflow'}
-- {destination: '[Shared] End', label: success, source: '[[Regression Workflow F:
-    Workflow of Workflows] Regression Workflow F S1: Subworkflow of Workflow] Regression
-    Workflow 8: Payload Extraction with Operations', subtype: success, type: workflow_edge,
-  workflow: '[Regression Workflow F: Workflow of Workflows] Regression Workflow F
-    S1: Subworkflow of Workflow'}
-- {destination: '[[Regression Workflow F: Workflow of Workflows] Regression Workflow
-    F S1: Subworkflow of Workflow] Regression Workflow 7: Payload Extraction & Validation',
-  label: success, source: '[Shared] Start', subtype: success, type: workflow_edge,
-  workflow: '[Regression Workflow F: Workflow of Workflows] Regression Workflow F
-    S1: Subworkflow of Workflow'}
-- {destination: '[[Regression Workflow F: Workflow of Workflows] Regression Workflow
-    F S1: Subworkflow of Workflow] Regression Workflow B: Napalm getters validation',
-  label: success, source: '[[Regression Workflow F: Workflow of Workflows] Regression
-    Workflow F S1: Subworkflow of Workflow] Regression Workflow 7: Payload Extraction
-    & Validation', subtype: success, type: workflow_edge, workflow: '[Regression Workflow
-    F: Workflow of Workflows] Regression Workflow F S1: Subworkflow of Workflow'}
-- {destination: '[Regression Workflow E: Iteration Targets] Iteration Targets Workflow
-    - Test 1', label: success, source: '[Shared] Modify Payload for Iteration', subtype: success,
+- {color: green, destination: '[Shared] End', label: success, source: '[Regression
+    Workflow E: Iteration Targets] Iteration Targets Workflow - Test 4', subtype: success,
   type: workflow_edge, workflow: 'Regression Workflow E: Iteration Targets'}
-- {destination: '[Shared] End', label: success, source: '[Regression Workflow D: Prompts]
-    Test netmiko prompts pass', subtype: success, type: workflow_edge, workflow: 'Regression
-    Workflow D: Prompts'}
-- {destination: '[Shared] REST API: call *is_alive* endpoint', label: success, source: '[Regression
+- {color: green, destination: '[[Regression Workflow F: Workflow of Workflows] Regression
+    Workflow F S2: Access Variables from Parent Workflow] Variable Access Subworkflow:
+    Access variable from snippet', label: success, source: '[Shared] Start', subtype: success,
+  type: workflow_edge, workflow: '[Regression Workflow F: Workflow of Workflows] Regression
+    Workflow F S2: Access Variables from Parent Workflow'}
+- {color: green, destination: '[Shared] Modify Payload for Iteration', label: success,
+  source: '[Shared] Start', subtype: success, type: workflow_edge, workflow: 'Regression
+    Workflow F: Workflow of Workflows'}
+- {color: green, destination: '[[Regression Workflow F: Workflow of Workflows] Regression
+    Workflow F S2: Access Variables from Parent Workflow] Variable Access Subworkflow:
+    Access variables for iteration', label: success, source: '[[Regression Workflow
+    F: Workflow of Workflows] Regression Workflow F S2: Access Variables from Parent
+    Workflow] Variable Access Subworkflow: Access variable from snippet', subtype: success,
+  type: workflow_edge, workflow: '[Regression Workflow F: Workflow of Workflows] Regression
+    Workflow F S2: Access Variables from Parent Workflow'}
+- {color: green, destination: '[Shared] End', label: success, source: '[[Regression
+    Workflow F: Workflow of Workflows] Regression Workflow F S2: Access Variables
+    from Parent Workflow] Variable Access Subworkflow: Access variables for iteration',
+  subtype: success, type: workflow_edge, workflow: '[Regression Workflow F: Workflow
+    of Workflows] Regression Workflow F S2: Access Variables from Parent Workflow'}
+- {color: green, destination: '[[Regression Workflow F: Workflow of Workflows] Regression
+    Workflow F S1: Subworkflow of Workflow] Regression Workflow 8: Payload Extraction
+    with Operations', label: success, source: '[[Regression Workflow F: Workflow of
+    Workflows] Regression Workflow F S1: Subworkflow of Workflow] Regression Workflow
+    B: Napalm getters validation', subtype: success, type: workflow_edge, workflow: '[Regression
+    Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow of Workflow'}
+- {color: green, destination: '[Shared] End', label: success, source: '[[Regression
+    Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow of Workflow]
+    Regression Workflow 8: Payload Extraction with Operations', subtype: success,
+  type: workflow_edge, workflow: '[Regression Workflow F: Workflow of Workflows] Regression
+    Workflow F S1: Subworkflow of Workflow'}
+- {color: green, destination: '[[Regression Workflow F: Workflow of Workflows] Regression
+    Workflow F S1: Subworkflow of Workflow] Regression Workflow 7: Payload Extraction
+    & Validation', label: success, source: '[Shared] Start', subtype: success, type: workflow_edge,
+  workflow: '[Regression Workflow F: Workflow of Workflows] Regression Workflow F
+    S1: Subworkflow of Workflow'}
+- {color: green, destination: '[[Regression Workflow F: Workflow of Workflows] Regression
+    Workflow F S1: Subworkflow of Workflow] Regression Workflow B: Napalm getters
+    validation', label: success, source: '[[Regression Workflow F: Workflow of Workflows]
+    Regression Workflow F S1: Subworkflow of Workflow] Regression Workflow 7: Payload
+    Extraction & Validation', subtype: success, type: workflow_edge, workflow: '[Regression
+    Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow of Workflow'}
+- {color: green, destination: '[Regression Workflow E: Iteration Targets] Iteration
+    Targets Workflow - Test 1', label: success, source: '[Shared] Modify Payload for
+    Iteration', subtype: success, type: workflow_edge, workflow: 'Regression Workflow
+    E: Iteration Targets'}
+- {color: green, destination: '[Shared] End', label: success, source: '[Regression
     Workflow D: Prompts] Test netmiko prompts pass', subtype: success, type: workflow_edge,
   workflow: 'Regression Workflow D: Prompts'}
-- {destination: '[Regression Workflow D: Prompts] Test Netmiko Prompt Service', label: success,
-  source: '[Shared] REST API: call *is_alive* endpoint', subtype: success, type: workflow_edge,
-  workflow: 'Regression Workflow D: Prompts'}
-- {destination: '[Shared] End', label: success, source: '[Shared] Example Service
-    (does nothing)', subtype: success, type: workflow_edge, workflow: 'Regression
+- {color: green, destination: '[Shared] REST API: call *is_alive* endpoint', label: success,
+  source: '[Regression Workflow D: Prompts] Test netmiko prompts pass', subtype: success,
+  type: workflow_edge, workflow: 'Regression Workflow D: Prompts'}
+- {color: green, destination: '[Regression Workflow D: Prompts] Test Netmiko Prompt
+    Service', label: success, source: '[Shared] REST API: call *is_alive* endpoint',
+  subtype: success, type: workflow_edge, workflow: 'Regression Workflow D: Prompts'}
+- {color: green, destination: '[Shared] End', label: success, source: '[Shared] Example
+    Service (does nothing)', subtype: success, type: workflow_edge, workflow: 'Regression
     Workflow 2: Separate Failure - Success paths'}
-- {destination: '[Regression Workflow 9: Operational Data Backup] Configuration Backup
-    (NAPALM)', label: success, source: '[Shared] Start', subtype: success, type: workflow_edge,
-  workflow: 'Regression Workflow 9: Operational Data Backup'}
-- {destination: '[Regression Workflow F: Workflow of Workflows] Regression Workflow
-    F S1: Subworkflow of Workflow', label: success, source: '[Regression Workflow
-    F: Workflow of Workflows] Regression Workflow F S2: Access Variables from Parent
-    Workflow', subtype: success, type: workflow_edge, workflow: 'Regression Workflow
+- {color: green, destination: '[Regression Workflow 9: Operational Data Backup] Configuration
+    Backup (NAPALM)', label: success, source: '[Shared] Start', subtype: success,
+  type: workflow_edge, workflow: 'Regression Workflow 9: Operational Data Backup'}
+- {color: green, destination: '[Regression Workflow F: Workflow of Workflows] Regression
+    Workflow F S1: Subworkflow of Workflow', label: success, source: '[Regression
+    Workflow F: Workflow of Workflows] Regression Workflow F S2: Access Variables
+    from Parent Workflow', subtype: success, type: workflow_edge, workflow: 'Regression
+    Workflow F: Workflow of Workflows'}
+- {color: green, destination: '[Shared] End', label: success, source: '[Regression
+    Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow of Workflow',
+  subtype: success, type: workflow_edge, workflow: 'Regression Workflow F: Workflow
+    of Workflows'}
+- {color: green, destination: '[Regression Workflow F: Workflow of Workflows] Show
+    interfaces with Netmiko', label: success, source: '[Shared] Modify Payload for
+    Iteration', subtype: success, type: workflow_edge, workflow: 'Regression Workflow
     F: Workflow of Workflows'}
-- {destination: '[Shared] End', label: success, source: '[Regression Workflow F: Workflow
-    of Workflows] Regression Workflow F S1: Subworkflow of Workflow', subtype: success,
-  type: workflow_edge, workflow: 'Regression Workflow F: Workflow of Workflows'}
-- {destination: '[Regression Workflow F: Workflow of Workflows] Show interfaces with
-    Netmiko', label: success, source: '[Shared] Modify Payload for Iteration', subtype: success,
-  type: workflow_edge, workflow: 'Regression Workflow F: Workflow of Workflows'}
-- {destination: '[Regression Workflow F: Workflow of Workflows] Regression Workflow
-    5: VRF creation and deletion with Napalm', label: success, source: '[Regression
+- {color: green, destination: '[Regression Workflow F: Workflow of Workflows] Regression
+    Workflow 5: VRF creation and deletion with Napalm', label: success, source: '[Regression
     Workflow F: Workflow of Workflows] Show interfaces with Netmiko', subtype: success,
   type: workflow_edge, workflow: 'Regression Workflow F: Workflow of Workflows'}
-- {destination: '[[[Regression Workflow F: Workflow of Workflows] Regression Workflow
-    F S1: Subworkflow of Workflow] Regression Workflow 7: Payload Extraction & Validation]
-    Payload Extraction', label: success, source: '[[[Regression Workflow F: Workflow
-    of Workflows] Regression Workflow F S1: Subworkflow of Workflow] Regression Workflow
-    7: Payload Extraction & Validation] netmiko_show_ip_route', subtype: success,
+- {color: green, destination: '[[[Regression Workflow F: Workflow of Workflows] Regression
+    Workflow F S1: Subworkflow of Workflow] Regression Workflow 7: Payload Extraction
+    & Validation] Payload Extraction', label: success, source: '[[[Regression Workflow
+    F: Workflow of Workflows] Regression Workflow F S1: Subworkflow of Workflow] Regression
+    Workflow 7: Payload Extraction & Validation] netmiko_show_ip_route', subtype: success,
   type: workflow_edge, workflow: '[[Regression Workflow F: Workflow of Workflows]
     Regression Workflow F S1: Subworkflow of Workflow] Regression Workflow 7: Payload
     Extraction & Validation'}
-- {destination: '[Shared] NAPALM: Get interfaces', label: success, source: '[Regression
+- {color: green, destination: '[Shared] NAPALM: Get interfaces', label: success, source: '[Regression
     Workflow F: Workflow of Workflows] Regression Workflow 5: VRF creation and deletion
     with Napalm', subtype: success, type: workflow_edge, workflow: 'Regression Workflow
     F: Workflow of Workflows'}
-- {destination: '[Regression Workflow F: Workflow of Workflows] Regression Workflow
-    F S2: Access Variables from Parent Workflow', label: success, source: '[Shared]
+- {color: green, destination: '[Regression Workflow F: Workflow of Workflows] Regression
+    Workflow F S2: Access Variables from Parent Workflow', label: success, source: '[Shared]
     NAPALM: Get interfaces', subtype: success, type: workflow_edge, workflow: 'Regression
     Workflow F: Workflow of Workflows'}
-- {destination: '[Shared] Example Service (does nothing)', label: success, source: '[Shared]
-    Start', subtype: success, type: workflow_edge, workflow: 'Regression Workflow
-    C: Advanced multiprocessing'}
-- {destination: '[Regression Workflow F: Workflow of Workflows] Regression Workflow
-    5: VRF creation and deletion with Napalm', label: failure, source: '[Regression
+- {color: green, destination: '[Shared] Example Service (does nothing)', label: success,
+  source: '[Shared] Start', subtype: success, type: workflow_edge, workflow: 'Regression
+    Workflow C: Advanced multiprocessing'}
+- {color: red, destination: '[Regression Workflow F: Workflow of Workflows] Regression
+    Workflow 5: VRF creation and deletion with Napalm', label: failure, source: '[Regression
     Workflow F: Workflow of Workflows] Show interfaces with Netmiko', subtype: failure,
   type: workflow_edge, workflow: 'Regression Workflow F: Workflow of Workflows'}
-- {destination: '[Regression Workflow G: run methods (BFS)] Workflow  in device by
-    device mode', label: success, source: '[Shared] Start', subtype: success, type: workflow_edge,
+- {color: green, destination: '[Regression Workflow G: run methods (BFS)] Workflow  in
+    device by device mode', label: success, source: '[Shared] Start', subtype: success,
+  type: workflow_edge, workflow: 'Regression Workflow G: run methods (BFS)'}
+- {color: green, destination: '[Regression Workflow G: run methods (BFS)] Service
+    in run once mode', label: success, source: '[Regression Workflow G: run methods
+    (BFS)] Workflow  in device by device mode', subtype: success, type: workflow_edge,
   workflow: 'Regression Workflow G: run methods (BFS)'}
-- {destination: '[Regression Workflow G: run methods (BFS)] Service in run once mode',
-  label: success, source: '[Regression Workflow G: run methods (BFS)] Workflow  in
-    device by device mode', subtype: success, type: workflow_edge, workflow: 'Regression
+- {color: red, destination: '[Regression Workflow G: run methods (BFS)] Service in
+    run once mode', label: failure, source: '[Regression Workflow G: run methods (BFS)]
+    Workflow  in device by device mode', subtype: failure, type: workflow_edge, workflow: 'Regression
     Workflow G: run methods (BFS)'}
-- {destination: '[Regression Workflow G: run methods (BFS)] Service in run once mode',
-  label: failure, source: '[Regression Workflow G: run methods (BFS)] Workflow  in
-    device by device mode', subtype: failure, type: workflow_edge, workflow: 'Regression
-    Workflow G: run methods (BFS)'}
-- {destination: '[Regression Workflow G: run methods (BFS)] Workflow in service by
-    service mode (workflow targets)', label: success, source: '[Regression Workflow
-    G: run methods (BFS)] Service in run once mode', subtype: success, type: workflow_edge,
+- {color: green, destination: '[Regression Workflow G: run methods (BFS)] Workflow
+    in service by service mode (workflow targets)', label: success, source: '[Regression
+    Workflow G: run methods (BFS)] Service in run once mode', subtype: success, type: workflow_edge,
   workflow: 'Regression Workflow G: run methods (BFS)'}
-- {destination: '[Regression Workflow G: run methods (BFS)] Service in Run once per
-    device mode', label: success, source: '[Regression Workflow G: run methods (BFS)]
-    Workflow in service by service mode (workflow targets)', subtype: success, type: workflow_edge,
+- {color: green, destination: '[Regression Workflow G: run methods (BFS)] Service
+    in Run once per device mode', label: success, source: '[Regression Workflow G:
+    run methods (BFS)] Workflow in service by service mode (workflow targets)', subtype: success,
+  type: workflow_edge, workflow: 'Regression Workflow G: run methods (BFS)'}
+- {color: green, destination: '[Regression Workflow G: run methods (BFS)] Workflow
+    in service targets mode', label: success, source: '[Regression Workflow G: run
+    methods (BFS)] Service in Run once per device mode', subtype: success, type: workflow_edge,
   workflow: 'Regression Workflow G: run methods (BFS)'}
-- {destination: '[Regression Workflow G: run methods (BFS)] Workflow in service targets
-    mode', label: success, source: '[Regression Workflow G: run methods (BFS)] Service
-    in Run once per device mode', subtype: success, type: workflow_edge, workflow: 'Regression
-    Workflow G: run methods (BFS)'}
-- {destination: '[Shared] End', label: success, source: '[Regression Workflow G: run
-    methods (BFS)] Workflow in service targets mode', subtype: success, type: workflow_edge,
-  workflow: 'Regression Workflow G: run methods (BFS)'}
-- {destination: '[[Regression Workflow G: run methods (BFS)] Workflow  in device by
-    device mode] Validation show VRF', label: success, source: '[Shared] Start', subtype: success,
-  type: workflow_edge, workflow: '[Regression Workflow G: run methods (BFS)] Workflow  in
-    device by device mode'}
-- {destination: '[Shared] End', label: success, source: '[[Regression Workflow G:
-    run methods (BFS)] Workflow  in device by device mode] Validation show VRF', subtype: success,
-  type: workflow_edge, workflow: '[Regression Workflow G: run methods (BFS)] Workflow  in
-    device by device mode'}
-- {destination: '[[Regression Workflow G: run methods (BFS)] Workflow in service by
-    service mode (workflow targets)] Validation show VRF', label: success, source: '[Shared]
+- {color: green, destination: '[Shared] End', label: success, source: '[Regression
+    Workflow G: run methods (BFS)] Workflow in service targets mode', subtype: success,
+  type: workflow_edge, workflow: 'Regression Workflow G: run methods (BFS)'}
+- {color: green, destination: '[[Regression Workflow G: run methods (BFS)] Workflow  in
+    device by device mode] Validation show VRF', label: success, source: '[Shared]
     Start', subtype: success, type: workflow_edge, workflow: '[Regression Workflow
-    G: run methods (BFS)] Workflow in service by service mode (workflow targets)'}
-- {destination: '[Shared] End', label: success, source: '[[Regression Workflow G:
-    run methods (BFS)] Workflow in service by service mode (workflow targets)] Validation
+    G: run methods (BFS)] Workflow  in device by device mode'}
+- {color: green, destination: '[Shared] End', label: success, source: '[[Regression
+    Workflow G: run methods (BFS)] Workflow  in device by device mode] Validation
     show VRF', subtype: success, type: workflow_edge, workflow: '[Regression Workflow
-    G: run methods (BFS)] Workflow in service by service mode (workflow targets)'}
-- {destination: '[[Regression Workflow G: run methods (BFS)] Workflow in service targets
-    mode] Validation show VRF', label: success, source: '[Shared] Start', subtype: success,
-  type: workflow_edge, workflow: '[Regression Workflow G: run methods (BFS)] Workflow
-    in service targets mode'}
-- {destination: '[Shared] End', label: success, source: '[[Regression Workflow G:
-    run methods (BFS)] Workflow in service targets mode] Validation show VRF', subtype: success,
-  type: workflow_edge, workflow: '[Regression Workflow G: run methods (BFS)] Workflow
-    in service targets mode'}
-- {destination: '[Regression Workflow H: shared service in multiple subworkflows]
-    Subworkflow 1', label: success, source: '[Shared] Start', subtype: success, type: workflow_edge,
-  workflow: 'Regression Workflow H: shared service in multiple subworkflows'}
-- {destination: '[Regression Workflow H: shared service in multiple subworkflows]
-    Subworkflow 2', label: success, source: '[Regression Workflow H: shared service
-    in multiple subworkflows] Subworkflow 1', subtype: success, type: workflow_edge,
-  workflow: 'Regression Workflow H: shared service in multiple subworkflows'}
-- {destination: '[Shared] End', label: success, source: '[Regression Workflow H: shared
-    service in multiple subworkflows] Subworkflow 2', subtype: success, type: workflow_edge,
-  workflow: 'Regression Workflow H: shared service in multiple subworkflows'}
-- {destination: '[Shared] Shared Service for Regression Workflow H', label: success,
+    G: run methods (BFS)] Workflow  in device by device mode'}
+- {color: green, destination: '[[Regression Workflow G: run methods (BFS)] Workflow
+    in service by service mode (workflow targets)] Validation show VRF', label: success,
   source: '[Shared] Start', subtype: success, type: workflow_edge, workflow: '[Regression
-    Workflow H: shared service in multiple subworkflows] Subworkflow 1'}
-- {destination: '[Shared] End', label: success, source: '[Shared] Shared Service for
-    Regression Workflow H', subtype: success, type: workflow_edge, workflow: '[Regression
-    Workflow H: shared service in multiple subworkflows] Subworkflow 1'}
-- {destination: '[Shared] Shared Service for Regression Workflow H', label: success,
-  source: '[Shared] Start', subtype: success, type: workflow_edge, workflow: '[Regression
-    Workflow H: shared service in multiple subworkflows] Subworkflow 2'}
-- {destination: '[Shared] End', label: success, source: '[Shared] Shared Service for
-    Regression Workflow H', subtype: success, type: workflow_edge, workflow: '[Regression
-    Workflow H: shared service in multiple subworkflows] Subworkflow 2'}
-- {destination: '[Shared] End', label: failure, source: '[Shared] Shared Service for
-    Regression Workflow H', subtype: failure, type: workflow_edge, workflow: '[Regression
-    Workflow H: shared service in multiple subworkflows] Subworkflow 1'}
-- {destination: '[Shared] End', label: failure, source: '[Regression Workflow H: shared
-    service in multiple subworkflows] Subworkflow 2', subtype: failure, type: workflow_edge,
+    Workflow G: run methods (BFS)] Workflow in service by service mode (workflow targets)'}
+- {color: green, destination: '[Shared] End', label: success, source: '[[Regression
+    Workflow G: run methods (BFS)] Workflow in service by service mode (workflow targets)]
+    Validation show VRF', subtype: success, type: workflow_edge, workflow: '[Regression
+    Workflow G: run methods (BFS)] Workflow in service by service mode (workflow targets)'}
+- {color: green, destination: '[[Regression Workflow G: run methods (BFS)] Workflow
+    in service targets mode] Validation show VRF', label: success, source: '[Shared]
+    Start', subtype: success, type: workflow_edge, workflow: '[Regression Workflow
+    G: run methods (BFS)] Workflow in service targets mode'}
+- {color: green, destination: '[Shared] End', label: success, source: '[[Regression
+    Workflow G: run methods (BFS)] Workflow in service targets mode] Validation show
+    VRF', subtype: success, type: workflow_edge, workflow: '[Regression Workflow G:
+    run methods (BFS)] Workflow in service targets mode'}
+- {color: green, destination: '[Regression Workflow H: shared service in multiple
+    subworkflows] Subworkflow 1', label: success, source: '[Shared] Start', subtype: success,
+  type: workflow_edge, workflow: 'Regression Workflow H: shared service in multiple
+    subworkflows'}
+- {color: green, destination: '[Regression Workflow H: shared service in multiple
+    subworkflows] Subworkflow 2', label: success, source: '[Regression Workflow H:
+    shared service in multiple subworkflows] Subworkflow 1', subtype: success, type: workflow_edge,
   workflow: 'Regression Workflow H: shared service in multiple subworkflows'}
-- {destination: '[Regression Workflow 6: Ansible with Validation] Simple Playbook',
+- {color: green, destination: '[Shared] End', label: success, source: '[Regression
+    Workflow H: shared service in multiple subworkflows] Subworkflow 2', subtype: success,
+  type: workflow_edge, workflow: 'Regression Workflow H: shared service in multiple
+    subworkflows'}
+- {color: green, destination: '[Shared] Shared Service for Regression Workflow H',
   label: success, source: '[Shared] Start', subtype: success, type: workflow_edge,
+  workflow: '[Regression Workflow H: shared service in multiple subworkflows] Subworkflow
+    1'}
+- {color: green, destination: '[Shared] End', label: success, source: '[Shared] Shared
+    Service for Regression Workflow H', subtype: success, type: workflow_edge, workflow: '[Regression
+    Workflow H: shared service in multiple subworkflows] Subworkflow 1'}
+- {color: green, destination: '[Shared] Shared Service for Regression Workflow H',
+  label: success, source: '[Shared] Start', subtype: success, type: workflow_edge,
+  workflow: '[Regression Workflow H: shared service in multiple subworkflows] Subworkflow
+    2'}
+- {color: green, destination: '[Shared] End', label: success, source: '[Shared] Shared
+    Service for Regression Workflow H', subtype: success, type: workflow_edge, workflow: '[Regression
+    Workflow H: shared service in multiple subworkflows] Subworkflow 2'}
+- {color: red, destination: '[Shared] End', label: failure, source: '[Shared] Shared
+    Service for Regression Workflow H', subtype: failure, type: workflow_edge, workflow: '[Regression
+    Workflow H: shared service in multiple subworkflows] Subworkflow 1'}
+- {color: red, destination: '[Shared] End', label: failure, source: '[Regression Workflow
+    H: shared service in multiple subworkflows] Subworkflow 2', subtype: failure,
+  type: workflow_edge, workflow: 'Regression Workflow H: shared service in multiple
+    subworkflows'}
+- {color: green, destination: '[Regression Workflow 6: Ansible with Validation] Simple
+    Playbook', label: success, source: '[Shared] Start', subtype: success, type: workflow_edge,
   workflow: 'Regression Workflow 6: Ansible with Validation'}
-- {destination: '[Regression Workflow I: Iteration Targets Advanced] Set Variables
-    for Iteration', label: success, source: '[Shared] Start', subtype: success, type: workflow_edge,
+- {color: green, destination: '[Regression Workflow I: Iteration Targets Advanced]
+    Set Variables for Iteration', label: success, source: '[Shared] Start', subtype: success,
+  type: workflow_edge, workflow: 'Regression Workflow I: Iteration Targets Advanced'}
+- {color: green, destination: '[Regression Workflow I: Iteration Targets Advanced]
+    Show VRF with iteration', label: success, source: '[Regression Workflow I: Iteration
+    Targets Advanced] Set Variables for Iteration', subtype: success, type: workflow_edge,
   workflow: 'Regression Workflow I: Iteration Targets Advanced'}
-- {destination: '[Regression Workflow I: Iteration Targets Advanced] Show VRF with
-    iteration', label: success, source: '[Regression Workflow I: Iteration Targets
-    Advanced] Set Variables for Iteration', subtype: success, type: workflow_edge,
-  workflow: 'Regression Workflow I: Iteration Targets Advanced'}
-- {destination: '[Shared] End', label: success, source: '[Regression Workflow I: Iteration
-    Targets Advanced] Show VRF with iteration', subtype: success, type: workflow_edge,
-  workflow: 'Regression Workflow I: Iteration Targets Advanced'}
-- {destination: '[Regression Workflow J: Workflow and Subworkflow Iteration] Test
-    Iteration', label: success, source: '[Shared] Start', subtype: success, type: workflow_edge,
+- {color: green, destination: '[Shared] End', label: success, source: '[Regression
+    Workflow I: Iteration Targets Advanced] Show VRF with iteration', subtype: success,
+  type: workflow_edge, workflow: 'Regression Workflow I: Iteration Targets Advanced'}
+- {color: green, destination: '[Regression Workflow J: Workflow and Subworkflow Iteration]
+    Test Iteration', label: success, source: '[Shared] Start', subtype: success, type: workflow_edge,
   workflow: 'Regression Workflow J: Workflow and Subworkflow Iteration'}
-- {destination: '[Regression Workflow J: Workflow and Subworkflow Iteration] Subworkflow
-    Iteration', label: success, source: '[Regression Workflow J: Workflow and Subworkflow
-    Iteration] Test Iteration', subtype: success, type: workflow_edge, workflow: 'Regression
-    Workflow J: Workflow and Subworkflow Iteration'}
-- {destination: '[Shared] End', label: success, source: '[Regression Workflow J: Workflow
-    and Subworkflow Iteration] Subworkflow Iteration', subtype: success, type: workflow_edge,
+- {color: green, destination: '[Regression Workflow J: Workflow and Subworkflow Iteration]
+    Subworkflow Iteration', label: success, source: '[Regression Workflow J: Workflow
+    and Subworkflow Iteration] Test Iteration', subtype: success, type: workflow_edge,
   workflow: 'Regression Workflow J: Workflow and Subworkflow Iteration'}
-- {destination: '[[Regression Workflow J: Workflow and Subworkflow Iteration] Subworkflow
-    Iteration] Test Iteration', label: success, source: '[Shared] Start', subtype: success,
-  type: workflow_edge, workflow: '[Regression Workflow J: Workflow and Subworkflow
-    Iteration] Subworkflow Iteration'}
-- {destination: '[Shared] End', label: success, source: '[[Regression Workflow J:
-    Workflow and Subworkflow Iteration] Subworkflow Iteration] Test Iteration', subtype: success,
-  type: workflow_edge, workflow: '[Regression Workflow J: Workflow and Subworkflow
-    Iteration] Subworkflow Iteration'}
-- {destination: '[[[Regression Workflow F: Workflow of Workflows] Regression Workflow
-    F S1: Subworkflow of Workflow] Regression Workflow 7: Payload Extraction & Validation]
-    Validation dict via results', label: success, source: '[[[Regression Workflow
+- {color: green, destination: '[Shared] End', label: success, source: '[Regression
+    Workflow J: Workflow and Subworkflow Iteration] Subworkflow Iteration', subtype: success,
+  type: workflow_edge, workflow: 'Regression Workflow J: Workflow and Subworkflow
+    Iteration'}
+- {color: green, destination: '[[Regression Workflow J: Workflow and Subworkflow Iteration]
+    Subworkflow Iteration] Test Iteration', label: success, source: '[Shared] Start',
+  subtype: success, type: workflow_edge, workflow: '[Regression Workflow J: Workflow
+    and Subworkflow Iteration] Subworkflow Iteration'}
+- {color: green, destination: '[Shared] End', label: success, source: '[[Regression
+    Workflow J: Workflow and Subworkflow Iteration] Subworkflow Iteration] Test Iteration',
+  subtype: success, type: workflow_edge, workflow: '[Regression Workflow J: Workflow
+    and Subworkflow Iteration] Subworkflow Iteration'}
+- {color: green, destination: '[[[Regression Workflow F: Workflow of Workflows] Regression
+    Workflow F S1: Subworkflow of Workflow] Regression Workflow 7: Payload Extraction
+    & Validation] Validation dict via results', label: success, source: '[[[Regression
+    Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow of Workflow]
+    Regression Workflow 7: Payload Extraction & Validation] Payload Extraction', subtype: success,
+  type: workflow_edge, workflow: '[[Regression Workflow F: Workflow of Workflows]
+    Regression Workflow F S1: Subworkflow of Workflow] Regression Workflow 7: Payload
+    Extraction & Validation'}
+- {color: green, destination: '[[[Regression Workflow F: Workflow of Workflows] Regression
+    Workflow F S1: Subworkflow of Workflow] Regression Workflow 7: Payload Extraction
+    & Validation] Validate text via results', label: success, source: '[[[Regression
+    Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow of Workflow]
+    Regression Workflow 7: Payload Extraction & Validation] Validation dict via results',
+  subtype: success, type: workflow_edge, workflow: '[[Regression Workflow F: Workflow
+    of Workflows] Regression Workflow F S1: Subworkflow of Workflow] Regression Workflow
+    7: Payload Extraction & Validation'}
+- {color: green, destination: '[Shared] End', label: success, source: '[[[Regression
+    Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow of Workflow]
+    Regression Workflow 7: Payload Extraction & Validation] Validate text via results',
+  subtype: success, type: workflow_edge, workflow: '[[Regression Workflow F: Workflow
+    of Workflows] Regression Workflow F S1: Subworkflow of Workflow] Regression Workflow
+    7: Payload Extraction & Validation'}
+- {color: green, destination: '[[[Regression Workflow F: Workflow of Workflows] Regression
+    Workflow F S1: Subworkflow of Workflow] Regression Workflow 7: Payload Extraction
+    & Validation] Validate dict via payload', label: success, source: '[[[Regression
+    Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow of Workflow]
+    Regression Workflow 7: Payload Extraction & Validation] Payload Extraction', subtype: success,
+  type: workflow_edge, workflow: '[[Regression Workflow F: Workflow of Workflows]
+    Regression Workflow F S1: Subworkflow of Workflow] Regression Workflow 7: Payload
+    Extraction & Validation'}
+- {color: green, destination: '[[[Regression Workflow F: Workflow of Workflows] Regression
+    Workflow F S1: Subworkflow of Workflow] Regression Workflow 7: Payload Extraction
+    & Validation] Validate text via payload', label: success, source: '[[[Regression
+    Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow of Workflow]
+    Regression Workflow 7: Payload Extraction & Validation] Validate dict via payload',
+  subtype: success, type: workflow_edge, workflow: '[[Regression Workflow F: Workflow
+    of Workflows] Regression Workflow F S1: Subworkflow of Workflow] Regression Workflow
+    7: Payload Extraction & Validation'}
+- {color: green, destination: '[Shared] End', label: success, source: '[[[Regression
+    Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow of Workflow]
+    Regression Workflow 7: Payload Extraction & Validation] Validate text via payload',
+  subtype: success, type: workflow_edge, workflow: '[[Regression Workflow F: Workflow
+    of Workflows] Regression Workflow F S1: Subworkflow of Workflow] Regression Workflow
+    7: Payload Extraction & Validation'}
+- {color: green, destination: '[[[Regression Workflow F: Workflow of Workflows] Regression
+    Workflow F S1: Subworkflow of Workflow] Regression Workflow 8: Payload Extraction
+    with Operations] Validation 1', label: success, source: '[[[Regression Workflow
     F: Workflow of Workflows] Regression Workflow F S1: Subworkflow of Workflow] Regression
-    Workflow 7: Payload Extraction & Validation] Payload Extraction', subtype: success,
-  type: workflow_edge, workflow: '[[Regression Workflow F: Workflow of Workflows]
-    Regression Workflow F S1: Subworkflow of Workflow] Regression Workflow 7: Payload
-    Extraction & Validation'}
-- {destination: '[[[Regression Workflow F: Workflow of Workflows] Regression Workflow
-    F S1: Subworkflow of Workflow] Regression Workflow 7: Payload Extraction & Validation]
-    Validate text via results', label: success, source: '[[[Regression Workflow F:
-    Workflow of Workflows] Regression Workflow F S1: Subworkflow of Workflow] Regression
-    Workflow 7: Payload Extraction & Validation] Validation dict via results', subtype: success,
-  type: workflow_edge, workflow: '[[Regression Workflow F: Workflow of Workflows]
-    Regression Workflow F S1: Subworkflow of Workflow] Regression Workflow 7: Payload
-    Extraction & Validation'}
-- {destination: '[Shared] End', label: success, source: '[[[Regression Workflow F:
-    Workflow of Workflows] Regression Workflow F S1: Subworkflow of Workflow] Regression
-    Workflow 7: Payload Extraction & Validation] Validate text via results', subtype: success,
-  type: workflow_edge, workflow: '[[Regression Workflow F: Workflow of Workflows]
-    Regression Workflow F S1: Subworkflow of Workflow] Regression Workflow 7: Payload
-    Extraction & Validation'}
-- {destination: '[[[Regression Workflow F: Workflow of Workflows] Regression Workflow
-    F S1: Subworkflow of Workflow] Regression Workflow 7: Payload Extraction & Validation]
-    Validate dict via payload', label: success, source: '[[[Regression Workflow F:
-    Workflow of Workflows] Regression Workflow F S1: Subworkflow of Workflow] Regression
-    Workflow 7: Payload Extraction & Validation] Payload Extraction', subtype: success,
-  type: workflow_edge, workflow: '[[Regression Workflow F: Workflow of Workflows]
-    Regression Workflow F S1: Subworkflow of Workflow] Regression Workflow 7: Payload
-    Extraction & Validation'}
-- {destination: '[[[Regression Workflow F: Workflow of Workflows] Regression Workflow
-    F S1: Subworkflow of Workflow] Regression Workflow 7: Payload Extraction & Validation]
-    Validate text via payload', label: success, source: '[[[Regression Workflow F:
-    Workflow of Workflows] Regression Workflow F S1: Subworkflow of Workflow] Regression
-    Workflow 7: Payload Extraction & Validation] Validate dict via payload', subtype: success,
-  type: workflow_edge, workflow: '[[Regression Workflow F: Workflow of Workflows]
-    Regression Workflow F S1: Subworkflow of Workflow] Regression Workflow 7: Payload
-    Extraction & Validation'}
-- {destination: '[Shared] End', label: success, source: '[[[Regression Workflow F:
-    Workflow of Workflows] Regression Workflow F S1: Subworkflow of Workflow] Regression
-    Workflow 7: Payload Extraction & Validation] Validate text via payload', subtype: success,
-  type: workflow_edge, workflow: '[[Regression Workflow F: Workflow of Workflows]
-    Regression Workflow F S1: Subworkflow of Workflow] Regression Workflow 7: Payload
-    Extraction & Validation'}
-- {destination: '[[[Regression Workflow F: Workflow of Workflows] Regression Workflow
-    F S1: Subworkflow of Workflow] Regression Workflow 8: Payload Extraction with
-    Operations] Validation 1', label: success, source: '[[[Regression Workflow F:
-    Workflow of Workflows] Regression Workflow F S1: Subworkflow of Workflow] Regression
     Workflow 8: Payload Extraction with Operations] Payload Workflow: Extraction 2',
   subtype: success, type: workflow_edge, workflow: '[[Regression Workflow F: Workflow
     of Workflows] Regression Workflow F S1: Subworkflow of Workflow] Regression Workflow
     8: Payload Extraction with Operations'}
-- {destination: '[[[Regression Workflow F: Workflow of Workflows] Regression Workflow
-    F S1: Subworkflow of Workflow] Regression Workflow 8: Payload Extraction with
-    Operations] Validation 2', label: success, source: '[[[Regression Workflow F:
-    Workflow of Workflows] Regression Workflow F S1: Subworkflow of Workflow] Regression
+- {color: green, destination: '[[[Regression Workflow F: Workflow of Workflows] Regression
+    Workflow F S1: Subworkflow of Workflow] Regression Workflow 8: Payload Extraction
+    with Operations] Validation 2', label: success, source: '[[[Regression Workflow
+    F: Workflow of Workflows] Regression Workflow F S1: Subworkflow of Workflow] Regression
     Workflow 8: Payload Extraction with Operations] Validation 1', subtype: success,
   type: workflow_edge, workflow: '[[Regression Workflow F: Workflow of Workflows]
     Regression Workflow F S1: Subworkflow of Workflow] Regression Workflow 8: Payload
     Extraction with Operations'}
-- {destination: '[Shared] End', label: success, source: '[[[Regression Workflow F:
-    Workflow of Workflows] Regression Workflow F S1: Subworkflow of Workflow] Regression
-    Workflow 8: Payload Extraction with Operations] Validation 2', subtype: success,
+- {color: green, destination: '[Shared] End', label: success, source: '[[[Regression
+    Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow of Workflow]
+    Regression Workflow 8: Payload Extraction with Operations] Validation 2', subtype: success,
   type: workflow_edge, workflow: '[[Regression Workflow F: Workflow of Workflows]
     Regression Workflow F S1: Subworkflow of Workflow] Regression Workflow 8: Payload
     Extraction with Operations'}
-- {destination: '[Regression Workflow K: preprocessing and postprocessing] Preprocessing',
-  label: success, source: '[Shared] Start', subtype: success, type: workflow_edge,
+- {color: green, destination: '[Regression Workflow K: preprocessing and postprocessing]
+    Preprocessing', label: success, source: '[Shared] Start', subtype: success, type: workflow_edge,
   workflow: 'Regression Workflow K: preprocessing and postprocessing'}
-- {destination: '[Regression Workflow K: preprocessing and postprocessing] Service
-    preprocessing and postprocessing', label: success, source: '[Regression Workflow
-    K: preprocessing and postprocessing] Preprocessing', subtype: success, type: workflow_edge,
-  workflow: 'Regression Workflow K: preprocessing and postprocessing'}
-- {destination: '[Shared] End', label: failure, source: '[Regression Workflow K: preprocessing
-    and postprocessing] Service preprocessing and postprocessing', subtype: failure,
+- {color: green, destination: '[Regression Workflow K: preprocessing and postprocessing]
+    Service preprocessing and postprocessing', label: success, source: '[Regression
+    Workflow K: preprocessing and postprocessing] Preprocessing', subtype: success,
   type: workflow_edge, workflow: 'Regression Workflow K: preprocessing and postprocessing'}
-- {destination: '[Shared] REST API: call *is_alive* endpoint', label: success, source: '[Shared]
-    Start', subtype: success, type: workflow_edge, workflow: 'Regression Workflow
-    L: superworkflow'}
-- {destination: '[Regression Workflow M: Unix command & shell, ping, - jump on connect
-    - mechanism] Unix command: ps -ef | grep test', label: success, source: '[Shared]
-    Start', subtype: success, type: workflow_edge, workflow: 'Regression Workflow
-    M: Unix command & shell, ping, - jump on connect - mechanism'}
-- {destination: '[Regression Workflow M: Unix command & shell, ping, - jump on connect
-    - mechanism] Unix shell: ping device from server 2', label: success, source: '[Regression
-    Workflow M: Unix command & shell, ping, - jump on connect - mechanism] Unix command:
-    ps -ef | grep test', subtype: success, type: workflow_edge, workflow: 'Regression
-    Workflow M: Unix command & shell, ping, - jump on connect - mechanism'}
-- {destination: '[Regression Workflow M: Unix command & shell, ping, - jump on connect
-    - mechanism] Ping Washington', label: success, source: '[Regression Workflow M:
-    Unix command & shell, ping, - jump on connect - mechanism] Unix shell: ping device
-    from server 2', subtype: success, type: workflow_edge, workflow: 'Regression Workflow
-    M: Unix command & shell, ping, - jump on connect - mechanism'}
-- {destination: '[Regression Workflow N: Topology Import (netbox, librenms, opennms)]
-    OpenNMS Import', label: success, source: '[Shared] Start', subtype: success, type: workflow_edge,
-  workflow: 'Regression Workflow N: Topology Import (netbox, librenms, opennms)'}
-- {destination: '[Shared] End', label: success, source: '[Regression Workflow N: Topology
-    Import (netbox, librenms, opennms)] OpenNMS Import', subtype: success, type: workflow_edge,
-  workflow: 'Regression Workflow N: Topology Import (netbox, librenms, opennms)'}
-- {destination: '[Regression Workflow M: Unix command & shell, ping, - jump on connect
-    - mechanism] Validation: jump on server 2 from Washington', label: success, source: '[Regression
-    Workflow M: Unix command & shell, ping, - jump on connect - mechanism] Ping Washington',
-  subtype: success, type: workflow_edge, workflow: 'Regression Workflow M: Unix command
-    & shell, ping, - jump on connect - mechanism'}
-- {destination: '[Shared] End', label: success, source: '[Regression Workflow M: Unix
-    command & shell, ping, - jump on connect - mechanism] Validation: jump on server
-    2 from Washington', subtype: success, type: workflow_edge, workflow: 'Regression
-    Workflow M: Unix command & shell, ping, - jump on connect - mechanism'}
-- {destination: '[Regression Workflow 6: Ansible with Validation] Ansible Workflow:
-    Arista show version', label: success, source: '[Regression Workflow 6: Ansible
-    with Validation] Simple Playbook', subtype: success, type: workflow_edge, workflow: 'Regression
-    Workflow 6: Ansible with Validation'}
-- {destination: '[Regression Workflow E: Iteration Targets] Iteration Target Workflow
-    - Test 3', label: success, source: '[Regression Workflow E: Iteration Targets]
-    Iteration Target Workflow - Test 2', subtype: success, type: workflow_edge, workflow: 'Regression
-    Workflow E: Iteration Targets'}
-- {destination: '[Regression Workflow E: Iteration Targets] Iteration Targets Workflow
-    - Test 4', label: success, source: '[Regression Workflow E: Iteration Targets]
-    Iteration Target Workflow - Test 3', subtype: success, type: workflow_edge, workflow: 'Regression
-    Workflow E: Iteration Targets'}
-- {destination: '[Regression Workflow L: superworkflow] REST API: call to placeholder
-    property', label: success, source: '[Shared] REST API: call *is_alive* endpoint',
-  subtype: success, type: workflow_edge, workflow: 'Regression Workflow L: superworkflow'}
-- {destination: '[Shared] Placeholder', label: success, source: '[Regression Workflow
-    L: superworkflow] REST API: call to placeholder property', subtype: success, type: workflow_edge,
-  workflow: 'Regression Workflow L: superworkflow'}
-- {destination: '[Regression Workflow A: get_var, set_var, get_result] Show vrf with
-    python query', label: success, source: '[Regression Workflow A: get_var, set_var,
-    get_result] Show vrf with payload helper', subtype: success, type: workflow_edge,
-  workflow: 'Regression Workflow A: get_var, set_var, get_result'}
-- {destination: '[Regression Workflow 9: Operational Data Backup] Get Configuration',
-  label: success, source: '[Shared] Start', subtype: success, type: workflow_edge,
-  workflow: 'Regression Workflow 9: Operational Data Backup'}
-- {destination: '[Regression Workflow 9: Operational Data Backup] Retrieve Operational
-    Data', label: success, source: '[Regression Workflow 9: Operational Data Backup]
-    Get Configuration', subtype: success, type: workflow_edge, workflow: 'Regression
-    Workflow 9: Operational Data Backup'}
-- {destination: '[Regression Workflow 9: Operational Data Backup] Push Configurations
-    to Git', label: success, source: '[Regression Workflow 9: Operational Data Backup]
-    Retrieve Operational Data', subtype: success, type: workflow_edge, workflow: 'Regression
-    Workflow 9: Operational Data Backup'}
-- {destination: '[Regression Workflow 9: Operational Data Backup] Push Configurations
-    to Git', label: success, source: '[Regression Workflow 9: Operational Data Backup]
-    Configuration Backup (NAPALM)', subtype: success, type: workflow_edge, workflow: 'Regression
-    Workflow 9: Operational Data Backup'}
-- {destination: '[Shared] End', label: success, source: '[Regression Workflow 9: Operational
-    Data Backup] Push Configurations to Git', subtype: success, type: workflow_edge,
-  workflow: 'Regression Workflow 9: Operational Data Backup'}
-- {destination: '[Regression Workflow L: superworkflow] Post Placeholder Processing',
-  label: success, source: '[Shared] Placeholder', subtype: success, type: workflow_edge,
-  workflow: 'Regression Workflow L: superworkflow'}
-- {destination: '[Shared] End', label: success, source: '[Regression Workflow L: superworkflow]
-    Post Placeholder Processing', subtype: success, type: workflow_edge, workflow: 'Regression
-    Workflow L: superworkflow'}
-- {destination: '[Regression Workflow O: Scrapli] Check running configuration', label: success,
+- {color: red, destination: '[Shared] End', label: failure, source: '[Regression Workflow
+    K: preprocessing and postprocessing] Service preprocessing and postprocessing',
+  subtype: failure, type: workflow_edge, workflow: 'Regression Workflow K: preprocessing
+    and postprocessing'}
+- {color: green, destination: '[Shared] REST API: call *is_alive* endpoint', label: success,
   source: '[Shared] Start', subtype: success, type: workflow_edge, workflow: 'Regression
-    Workflow O: Scrapli'}
-- {destination: '[Regression Workflow O: Scrapli] Configure VRF TEST-VRF', label: success,
-  source: '[Regression Workflow O: Scrapli] Check running configuration', subtype: success,
-  type: workflow_edge, workflow: 'Regression Workflow O: Scrapli'}
-- {destination: '[Regression Workflow O: Scrapli] Check that TEST-VRF is configured',
-  label: success, source: '[Regression Workflow O: Scrapli] Configure VRF TEST-VRF',
-  subtype: success, type: workflow_edge, workflow: 'Regression Workflow O: Scrapli'}
-- {destination: '[Regression Workflow O: Scrapli] Decommission VRF TEST-VRF', label: success,
-  source: '[Regression Workflow O: Scrapli] Check that TEST-VRF is configured', subtype: success,
-  type: workflow_edge, workflow: 'Regression Workflow O: Scrapli'}
-- {destination: '[Shared] End', label: success, source: '[Regression Workflow O: Scrapli]
-    Decommission VRF TEST-VRF', subtype: success, type: workflow_edge, workflow: 'Regression
-    Workflow O: Scrapli'}
-- {destination: '[Shared] REST API: call *is_alive* endpoint', label: success, source: '[Shared]
-    Start', subtype: success, type: workflow_edge, workflow: 'Regression Workflow
-    P: large workflow (scalability)'}
-- {destination: '[Regression Workflow P: large workflow (scalability)] REST API: call
-    *is_alive* endpoint', label: success, source: '[Shared] REST API: call *is_alive*
+    Workflow L: superworkflow'}
+- {color: green, destination: '[Regression Workflow M: Unix command & shell, ping,
+    - jump on connect - mechanism] Unix command: ps -ef | grep test', label: success,
+  source: '[Shared] Start', subtype: success, type: workflow_edge, workflow: 'Regression
+    Workflow M: Unix command & shell, ping, - jump on connect - mechanism'}
+- {color: green, destination: '[Regression Workflow M: Unix command & shell, ping,
+    - jump on connect - mechanism] Unix shell: ping device from server 2', label: success,
+  source: '[Regression Workflow M: Unix command & shell, ping, - jump on connect -
+    mechanism] Unix command: ps -ef | grep test', subtype: success, type: workflow_edge,
+  workflow: 'Regression Workflow M: Unix command & shell, ping, - jump on connect
+    - mechanism'}
+- {color: green, destination: '[Regression Workflow M: Unix command & shell, ping,
+    - jump on connect - mechanism] Ping Washington', label: success, source: '[Regression
+    Workflow M: Unix command & shell, ping, - jump on connect - mechanism] Unix shell:
+    ping device from server 2', subtype: success, type: workflow_edge, workflow: 'Regression
+    Workflow M: Unix command & shell, ping, - jump on connect - mechanism'}
+- {color: green, destination: '[Regression Workflow N: Topology Import (netbox, librenms,
+    opennms)] OpenNMS Import', label: success, source: '[Shared] Start', subtype: success,
+  type: workflow_edge, workflow: 'Regression Workflow N: Topology Import (netbox,
+    librenms, opennms)'}
+- {color: green, destination: '[Shared] End', label: success, source: '[Regression
+    Workflow N: Topology Import (netbox, librenms, opennms)] OpenNMS Import', subtype: success,
+  type: workflow_edge, workflow: 'Regression Workflow N: Topology Import (netbox,
+    librenms, opennms)'}
+- {color: green, destination: '[Regression Workflow M: Unix command & shell, ping,
+    - jump on connect - mechanism] Validation: jump on server 2 from Washington',
+  label: success, source: '[Regression Workflow M: Unix command & shell, ping, - jump
+    on connect - mechanism] Ping Washington', subtype: success, type: workflow_edge,
+  workflow: 'Regression Workflow M: Unix command & shell, ping, - jump on connect
+    - mechanism'}
+- {color: green, destination: '[Shared] End', label: success, source: '[Regression
+    Workflow M: Unix command & shell, ping, - jump on connect - mechanism] Validation:
+    jump on server 2 from Washington', subtype: success, type: workflow_edge, workflow: 'Regression
+    Workflow M: Unix command & shell, ping, - jump on connect - mechanism'}
+- {color: green, destination: '[Regression Workflow 6: Ansible with Validation] Ansible
+    Workflow: Arista show version', label: success, source: '[Regression Workflow
+    6: Ansible with Validation] Simple Playbook', subtype: success, type: workflow_edge,
+  workflow: 'Regression Workflow 6: Ansible with Validation'}
+- {color: green, destination: '[Regression Workflow E: Iteration Targets] Iteration
+    Target Workflow - Test 3', label: success, source: '[Regression Workflow E: Iteration
+    Targets] Iteration Target Workflow - Test 2', subtype: success, type: workflow_edge,
+  workflow: 'Regression Workflow E: Iteration Targets'}
+- {color: green, destination: '[Regression Workflow E: Iteration Targets] Iteration
+    Targets Workflow - Test 4', label: success, source: '[Regression Workflow E: Iteration
+    Targets] Iteration Target Workflow - Test 3', subtype: success, type: workflow_edge,
+  workflow: 'Regression Workflow E: Iteration Targets'}
+- {color: green, destination: '[Regression Workflow L: superworkflow] REST API: call
+    to placeholder property', label: success, source: '[Shared] REST API: call *is_alive*
     endpoint', subtype: success, type: workflow_edge, workflow: 'Regression Workflow
-    P: large workflow (scalability)'}
-- {destination: '[Regression Workflow P: large workflow (scalability)] REST API: call
-    *is_alive* endpoint 2', label: success, source: '[Regression Workflow P: large
-    workflow (scalability)] REST API: call *is_alive* endpoint', subtype: success,
-  type: workflow_edge, workflow: 'Regression Workflow P: large workflow (scalability)'}
-- {destination: '[Regression Workflow P: large workflow (scalability)] REST API: call
-    *is_alive* endpoint 3', label: success, source: '[Regression Workflow P: large
-    workflow (scalability)] REST API: call *is_alive* endpoint 2', subtype: success,
-  type: workflow_edge, workflow: 'Regression Workflow P: large workflow (scalability)'}
-- {destination: '[Regression Workflow P: large workflow (scalability)] REST API: call
-    *is_alive* endpoint 4', label: success, source: '[Regression Workflow P: large
-    workflow (scalability)] REST API: call *is_alive* endpoint 3', subtype: success,
-  type: workflow_edge, workflow: 'Regression Workflow P: large workflow (scalability)'}
-- {destination: '[Regression Workflow P: large workflow (scalability)] REST API: call
-    *is_alive* endpoint 5', label: success, source: '[Regression Workflow P: large
-    workflow (scalability)] REST API: call *is_alive* endpoint 4', subtype: success,
-  type: workflow_edge, workflow: 'Regression Workflow P: large workflow (scalability)'}
-- {destination: '[Regression Workflow P: large workflow (scalability)] Show vrf with
-    netmiko 1', label: success, source: '[Regression Workflow P: large workflow (scalability)]
-    REST API: call *is_alive* endpoint 5', subtype: success, type: workflow_edge,
-  workflow: 'Regression Workflow P: large workflow (scalability)'}
-- {destination: '[Regression Workflow P: large workflow (scalability)] Show vrf with
-    netmiko 2', label: success, source: '[Regression Workflow P: large workflow (scalability)]
-    Show vrf with netmiko 1', subtype: success, type: workflow_edge, workflow: 'Regression
-    Workflow P: large workflow (scalability)'}
-- {destination: '[Regression Workflow P: large workflow (scalability)] Show vrf with
-    netmiko 3', label: success, source: '[Regression Workflow P: large workflow (scalability)]
-    Show vrf with netmiko 2', subtype: success, type: workflow_edge, workflow: 'Regression
-    Workflow P: large workflow (scalability)'}
-- {destination: '[Regression Workflow P: large workflow (scalability)] Show vrf with
-    netmiko 4', label: success, source: '[Regression Workflow P: large workflow (scalability)]
-    Show vrf with netmiko 3', subtype: success, type: workflow_edge, workflow: 'Regression
-    Workflow P: large workflow (scalability)'}
-- {destination: '[Regression Workflow P: large workflow (scalability)] Show vrf with
-    netmiko 5', label: success, source: '[Regression Workflow P: large workflow (scalability)]
-    Show vrf with netmiko 4', subtype: success, type: workflow_edge, workflow: 'Regression
-    Workflow P: large workflow (scalability)'}
-- {destination: '[Regression Workflow P: large workflow (scalability)] Show vrf with
-    netmiko 6', label: success, source: '[Regression Workflow P: large workflow (scalability)]
-    Show vrf with netmiko 5', subtype: success, type: workflow_edge, workflow: 'Regression
-    Workflow P: large workflow (scalability)'}
-- {destination: '[Regression Workflow P: large workflow (scalability)] Sleep with
-    python', label: success, source: '[Regression Workflow P: large workflow (scalability)]
-    Show vrf with netmiko 6', subtype: success, type: workflow_edge, workflow: 'Regression
-    Workflow P: large workflow (scalability)'}
-- {destination: '[Regression Workflow P: large workflow (scalability)] Sleep with
-    python 2', label: success, source: '[Regression Workflow P: large workflow (scalability)]
-    Sleep with python', subtype: success, type: workflow_edge, workflow: 'Regression
-    Workflow P: large workflow (scalability)'}
-- {destination: '[Regression Workflow P: large workflow (scalability)] Sleep with
-    python 3', label: success, source: '[Regression Workflow P: large workflow (scalability)]
-    Sleep with python 2', subtype: success, type: workflow_edge, workflow: 'Regression
-    Workflow P: large workflow (scalability)'}
-- {destination: '[Regression Workflow P: large workflow (scalability)] Sleep with
-    python 4', label: success, source: '[Regression Workflow P: large workflow (scalability)]
-    Sleep with python 3', subtype: success, type: workflow_edge, workflow: 'Regression
-    Workflow P: large workflow (scalability)'}
-- {destination: '[Regression Workflow P: large workflow (scalability)] Sleep with
-    python 5', label: success, source: '[Regression Workflow P: large workflow (scalability)]
-    Sleep with python 4', subtype: success, type: workflow_edge, workflow: 'Regression
-    Workflow P: large workflow (scalability)'}
-- {destination: '[Regression Workflow P: large workflow (scalability)] Sleep with
-    python 6', label: success, source: '[Regression Workflow P: large workflow (scalability)]
-    Sleep with python 5', subtype: success, type: workflow_edge, workflow: 'Regression
-    Workflow P: large workflow (scalability)'}
-- {destination: '[Regression Workflow P: large workflow (scalability)] Sleep with
-    python 7', label: success, source: '[Regression Workflow P: large workflow (scalability)]
-    Sleep with python 6', subtype: success, type: workflow_edge, workflow: 'Regression
-    Workflow P: large workflow (scalability)'}
-- {destination: '[Regression Workflow P: large workflow (scalability)] Sleep with
-    python 8', label: success, source: '[Regression Workflow P: large workflow (scalability)]
-    Sleep with python 7', subtype: success, type: workflow_edge, workflow: 'Regression
-    Workflow P: large workflow (scalability)'}
-- {destination: '[Shared] End', label: success, source: '[Regression Workflow P: large
-    workflow (scalability)] Sleep with python 8', subtype: success, type: workflow_edge,
-  workflow: 'Regression Workflow P: large workflow (scalability)'}
-- {destination: '[Regression Workflow Q: File transfer] Transfer a.bin', label: success,
-  source: '[Regression Workflow Q: File transfer] Check that test file does not exist',
-  subtype: success, type: workflow_edge, workflow: 'Regression Workflow Q: File transfer'}
-- {destination: '[Regression Workflow Q: File transfer] Transfer bc.bin and bd.bin
-    with glob option', label: success, source: '[Regression Workflow Q: File transfer]
-    Transfer a.bin', subtype: success, type: workflow_edge, workflow: 'Regression
-    Workflow Q: File transfer'}
-- {destination: '[Regression Workflow Q: File transfer] Check that test file does
-    exist', label: success, source: '[Regression Workflow Q: File transfer] Transfer
-    bc.bin and bd.bin with glob option', subtype: success, type: workflow_edge, workflow: 'Regression
-    Workflow Q: File transfer'}
-- {destination: '[Regression Workflow Q: File transfer] Delete all transferred files',
-  label: success, source: '[Regression Workflow Q: File transfer] Check that test
-    file does exist', subtype: success, type: workflow_edge, workflow: 'Regression
-    Workflow Q: File transfer'}
-- {destination: '[Shared] End', label: success, source: '[Regression Workflow Q: File
-    transfer] Delete all transferred files', subtype: success, type: workflow_edge,
-  workflow: 'Regression Workflow Q: File transfer'}
-- {destination: '[Regression Workflow Q: File transfer] Transfer non-existing file',
+    L: superworkflow'}
+- {color: green, destination: '[Shared] Placeholder', label: success, source: '[Regression
+    Workflow L: superworkflow] REST API: call to placeholder property', subtype: success,
+  type: workflow_edge, workflow: 'Regression Workflow L: superworkflow'}
+- {color: green, destination: '[Regression Workflow A: get_var, set_var, get_result]
+    Show vrf with python query', label: success, source: '[Regression Workflow A:
+    get_var, set_var, get_result] Show vrf with payload helper', subtype: success,
+  type: workflow_edge, workflow: 'Regression Workflow A: get_var, set_var, get_result'}
+- {color: green, destination: '[Regression Workflow 9: Operational Data Backup] Get
+    Configuration', label: success, source: '[Shared] Start', subtype: success, type: workflow_edge,
+  workflow: 'Regression Workflow 9: Operational Data Backup'}
+- {color: green, destination: '[Regression Workflow 9: Operational Data Backup] Retrieve
+    Operational Data', label: success, source: '[Regression Workflow 9: Operational
+    Data Backup] Get Configuration', subtype: success, type: workflow_edge, workflow: 'Regression
+    Workflow 9: Operational Data Backup'}
+- {color: green, destination: '[Regression Workflow 9: Operational Data Backup] Push
+    Configurations to Git', label: success, source: '[Regression Workflow 9: Operational
+    Data Backup] Retrieve Operational Data', subtype: success, type: workflow_edge,
+  workflow: 'Regression Workflow 9: Operational Data Backup'}
+- {color: green, destination: '[Regression Workflow 9: Operational Data Backup] Push
+    Configurations to Git', label: success, source: '[Regression Workflow 9: Operational
+    Data Backup] Configuration Backup (NAPALM)', subtype: success, type: workflow_edge,
+  workflow: 'Regression Workflow 9: Operational Data Backup'}
+- {color: green, destination: '[Shared] End', label: success, source: '[Regression
+    Workflow 9: Operational Data Backup] Push Configurations to Git', subtype: success,
+  type: workflow_edge, workflow: 'Regression Workflow 9: Operational Data Backup'}
+- {color: green, destination: '[Regression Workflow L: superworkflow] Post Placeholder
+    Processing', label: success, source: '[Shared] Placeholder', subtype: success,
+  type: workflow_edge, workflow: 'Regression Workflow L: superworkflow'}
+- {color: green, destination: '[Shared] End', label: success, source: '[Regression
+    Workflow L: superworkflow] Post Placeholder Processing', subtype: success, type: workflow_edge,
+  workflow: 'Regression Workflow L: superworkflow'}
+- {color: green, destination: '[Regression Workflow O: Scrapli] Check running configuration',
   label: success, source: '[Shared] Start', subtype: success, type: workflow_edge,
-  workflow: 'Regression Workflow Q: File transfer'}
-- {destination: '[Regression Workflow Q: File transfer] Check that test file does
-    not exist', label: success, source: '[Regression Workflow Q: File transfer] Transfer
-    non-existing file', subtype: success, type: workflow_edge, workflow: 'Regression
+  workflow: 'Regression Workflow O: Scrapli'}
+- {color: green, destination: '[Regression Workflow O: Scrapli] Configure VRF TEST-VRF',
+  label: success, source: '[Regression Workflow O: Scrapli] Check running configuration',
+  subtype: success, type: workflow_edge, workflow: 'Regression Workflow O: Scrapli'}
+- {color: green, destination: '[Regression Workflow O: Scrapli] Check that TEST-VRF
+    is configured', label: success, source: '[Regression Workflow O: Scrapli] Configure
+    VRF TEST-VRF', subtype: success, type: workflow_edge, workflow: 'Regression Workflow
+    O: Scrapli'}
+- {color: green, destination: '[Regression Workflow O: Scrapli] Decommission VRF TEST-VRF',
+  label: success, source: '[Regression Workflow O: Scrapli] Check that TEST-VRF is
+    configured', subtype: success, type: workflow_edge, workflow: 'Regression Workflow
+    O: Scrapli'}
+- {color: green, destination: '[Shared] End', label: success, source: '[Regression
+    Workflow O: Scrapli] Decommission VRF TEST-VRF', subtype: success, type: workflow_edge,
+  workflow: 'Regression Workflow O: Scrapli'}
+- {color: green, destination: '[Shared] REST API: call *is_alive* endpoint', label: success,
+  source: '[Shared] Start', subtype: success, type: workflow_edge, workflow: 'Regression
+    Workflow P: large workflow (scalability)'}
+- {color: green, destination: '[Regression Workflow P: large workflow (scalability)]
+    REST API: call *is_alive* endpoint', label: success, source: '[Shared] REST API:
+    call *is_alive* endpoint', subtype: success, type: workflow_edge, workflow: 'Regression
+    Workflow P: large workflow (scalability)'}
+- {color: green, destination: '[Regression Workflow P: large workflow (scalability)]
+    REST API: call *is_alive* endpoint 2', label: success, source: '[Regression Workflow
+    P: large workflow (scalability)] REST API: call *is_alive* endpoint', subtype: success,
+  type: workflow_edge, workflow: 'Regression Workflow P: large workflow (scalability)'}
+- {color: green, destination: '[Regression Workflow P: large workflow (scalability)]
+    REST API: call *is_alive* endpoint 3', label: success, source: '[Regression Workflow
+    P: large workflow (scalability)] REST API: call *is_alive* endpoint 2', subtype: success,
+  type: workflow_edge, workflow: 'Regression Workflow P: large workflow (scalability)'}
+- {color: green, destination: '[Regression Workflow P: large workflow (scalability)]
+    REST API: call *is_alive* endpoint 4', label: success, source: '[Regression Workflow
+    P: large workflow (scalability)] REST API: call *is_alive* endpoint 3', subtype: success,
+  type: workflow_edge, workflow: 'Regression Workflow P: large workflow (scalability)'}
+- {color: green, destination: '[Regression Workflow P: large workflow (scalability)]
+    REST API: call *is_alive* endpoint 5', label: success, source: '[Regression Workflow
+    P: large workflow (scalability)] REST API: call *is_alive* endpoint 4', subtype: success,
+  type: workflow_edge, workflow: 'Regression Workflow P: large workflow (scalability)'}
+- {color: green, destination: '[Regression Workflow P: large workflow (scalability)]
+    Show vrf with netmiko 1', label: success, source: '[Regression Workflow P: large
+    workflow (scalability)] REST API: call *is_alive* endpoint 5', subtype: success,
+  type: workflow_edge, workflow: 'Regression Workflow P: large workflow (scalability)'}
+- {color: green, destination: '[Regression Workflow P: large workflow (scalability)]
+    Show vrf with netmiko 2', label: success, source: '[Regression Workflow P: large
+    workflow (scalability)] Show vrf with netmiko 1', subtype: success, type: workflow_edge,
+  workflow: 'Regression Workflow P: large workflow (scalability)'}
+- {color: green, destination: '[Regression Workflow P: large workflow (scalability)]
+    Show vrf with netmiko 3', label: success, source: '[Regression Workflow P: large
+    workflow (scalability)] Show vrf with netmiko 2', subtype: success, type: workflow_edge,
+  workflow: 'Regression Workflow P: large workflow (scalability)'}
+- {color: green, destination: '[Regression Workflow P: large workflow (scalability)]
+    Show vrf with netmiko 4', label: success, source: '[Regression Workflow P: large
+    workflow (scalability)] Show vrf with netmiko 3', subtype: success, type: workflow_edge,
+  workflow: 'Regression Workflow P: large workflow (scalability)'}
+- {color: green, destination: '[Regression Workflow P: large workflow (scalability)]
+    Show vrf with netmiko 5', label: success, source: '[Regression Workflow P: large
+    workflow (scalability)] Show vrf with netmiko 4', subtype: success, type: workflow_edge,
+  workflow: 'Regression Workflow P: large workflow (scalability)'}
+- {color: green, destination: '[Regression Workflow P: large workflow (scalability)]
+    Show vrf with netmiko 6', label: success, source: '[Regression Workflow P: large
+    workflow (scalability)] Show vrf with netmiko 5', subtype: success, type: workflow_edge,
+  workflow: 'Regression Workflow P: large workflow (scalability)'}
+- {color: green, destination: '[Regression Workflow P: large workflow (scalability)]
+    Sleep with python', label: success, source: '[Regression Workflow P: large workflow
+    (scalability)] Show vrf with netmiko 6', subtype: success, type: workflow_edge,
+  workflow: 'Regression Workflow P: large workflow (scalability)'}
+- {color: green, destination: '[Regression Workflow P: large workflow (scalability)]
+    Sleep with python 2', label: success, source: '[Regression Workflow P: large workflow
+    (scalability)] Sleep with python', subtype: success, type: workflow_edge, workflow: 'Regression
+    Workflow P: large workflow (scalability)'}
+- {color: green, destination: '[Regression Workflow P: large workflow (scalability)]
+    Sleep with python 3', label: success, source: '[Regression Workflow P: large workflow
+    (scalability)] Sleep with python 2', subtype: success, type: workflow_edge, workflow: 'Regression
+    Workflow P: large workflow (scalability)'}
+- {color: green, destination: '[Regression Workflow P: large workflow (scalability)]
+    Sleep with python 4', label: success, source: '[Regression Workflow P: large workflow
+    (scalability)] Sleep with python 3', subtype: success, type: workflow_edge, workflow: 'Regression
+    Workflow P: large workflow (scalability)'}
+- {color: green, destination: '[Regression Workflow P: large workflow (scalability)]
+    Sleep with python 5', label: success, source: '[Regression Workflow P: large workflow
+    (scalability)] Sleep with python 4', subtype: success, type: workflow_edge, workflow: 'Regression
+    Workflow P: large workflow (scalability)'}
+- {color: green, destination: '[Regression Workflow P: large workflow (scalability)]
+    Sleep with python 6', label: success, source: '[Regression Workflow P: large workflow
+    (scalability)] Sleep with python 5', subtype: success, type: workflow_edge, workflow: 'Regression
+    Workflow P: large workflow (scalability)'}
+- {color: green, destination: '[Regression Workflow P: large workflow (scalability)]
+    Sleep with python 7', label: success, source: '[Regression Workflow P: large workflow
+    (scalability)] Sleep with python 6', subtype: success, type: workflow_edge, workflow: 'Regression
+    Workflow P: large workflow (scalability)'}
+- {color: green, destination: '[Regression Workflow P: large workflow (scalability)]
+    Sleep with python 8', label: success, source: '[Regression Workflow P: large workflow
+    (scalability)] Sleep with python 7', subtype: success, type: workflow_edge, workflow: 'Regression
+    Workflow P: large workflow (scalability)'}
+- {color: green, destination: '[Shared] End', label: success, source: '[Regression
+    Workflow P: large workflow (scalability)] Sleep with python 8', subtype: success,
+  type: workflow_edge, workflow: 'Regression Workflow P: large workflow (scalability)'}
+- {color: green, destination: '[Regression Workflow Q: File transfer] Transfer a.bin',
+  label: success, source: '[Regression Workflow Q: File transfer] Check that test
+    file does not exist', subtype: success, type: workflow_edge, workflow: 'Regression
     Workflow Q: File transfer'}
-- {destination: '[Regression Workflow R: skip services in service by service mode]
-    Partial failure', label: success, source: '[Shared] Start', subtype: success,
+- {color: green, destination: '[Regression Workflow Q: File transfer] Transfer bc.bin
+    and bd.bin with glob option', label: success, source: '[Regression Workflow Q:
+    File transfer] Transfer a.bin', subtype: success, type: workflow_edge, workflow: 'Regression
+    Workflow Q: File transfer'}
+- {color: green, destination: '[Regression Workflow Q: File transfer] Check that test
+    file does exist', label: success, source: '[Regression Workflow Q: File transfer]
+    Transfer bc.bin and bd.bin with glob option', subtype: success, type: workflow_edge,
+  workflow: 'Regression Workflow Q: File transfer'}
+- {color: green, destination: '[Regression Workflow Q: File transfer] Delete all transferred
+    files', label: success, source: '[Regression Workflow Q: File transfer] Check
+    that test file does exist', subtype: success, type: workflow_edge, workflow: 'Regression
+    Workflow Q: File transfer'}
+- {color: green, destination: '[Shared] End', label: success, source: '[Regression
+    Workflow Q: File transfer] Delete all transferred files', subtype: success, type: workflow_edge,
+  workflow: 'Regression Workflow Q: File transfer'}
+- {color: green, destination: '[Regression Workflow Q: File transfer] Transfer non-existing
+    file', label: success, source: '[Shared] Start', subtype: success, type: workflow_edge,
+  workflow: 'Regression Workflow Q: File transfer'}
+- {color: green, destination: '[Regression Workflow Q: File transfer] Check that test
+    file does not exist', label: success, source: '[Regression Workflow Q: File transfer]
+    Transfer non-existing file', subtype: success, type: workflow_edge, workflow: 'Regression
+    Workflow Q: File transfer'}
+- {color: green, destination: '[Regression Workflow R: skip services in service by
+    service mode] Partial failure', label: success, source: '[Shared] Start', subtype: success,
   type: workflow_edge, workflow: 'Regression Workflow R: skip services in service
     by service mode'}
-- {destination: '[Regression Workflow R: skip services in service by service mode]
-    Skipped service', label: success, source: '[Regression Workflow R: skip services
-    in service by service mode] Partial failure', subtype: success, type: workflow_edge,
-  workflow: 'Regression Workflow R: skip services in service by service mode'}
-- {destination: '[Regression Workflow R: skip services in service by service mode]
-    Last service', label: success, source: '[Regression Workflow R: skip services
-    in service by service mode] Skipped service', subtype: success, type: workflow_edge,
-  workflow: 'Regression Workflow R: skip services in service by service mode'}
-- {destination: '[Shared] End', label: success, source: '[Regression Workflow R: skip
-    services in service by service mode] Last service', subtype: success, type: workflow_edge,
-  workflow: 'Regression Workflow R: skip services in service by service mode'}
-- {destination: '[Regression Workflow S: conditional skip query with skip value set
-    to False] Skip Washington with Skip value == False', label: success, source: '[Shared]
-    Start', subtype: success, type: workflow_edge, workflow: 'Regression Workflow
-    S: conditional skip query with skip value set to False'}
-- {destination: '[Regression Workflow S: conditional skip query with skip value set
-    to False] Post-failure service', label: success, source: '[Regression Workflow
-    S: conditional skip query with skip value set to False] Skip Washington with Skip
-    value == False', subtype: success, type: workflow_edge, workflow: 'Regression
-    Workflow S: conditional skip query with skip value set to False'}
-- {destination: '[Regression Workflow S: conditional skip query with skip value set
-    to False] Final service', label: success, source: '[Regression Workflow S: conditional
-    skip query with skip value set to False] Post-failure service', subtype: success,
-  type: workflow_edge, workflow: 'Regression Workflow S: conditional skip query with
-    skip value set to False'}
-- {destination: '[Regression Workflow S: conditional skip query with skip value set
-    to False] Final service', label: success, source: '[Regression Workflow S: conditional
-    skip query with skip value set to False] Post-success service', subtype: success,
-  type: workflow_edge, workflow: 'Regression Workflow S: conditional skip query with
-    skip value set to False'}
-- {destination: '[Shared] End', label: success, source: '[Regression Workflow S: conditional
-    skip query with skip value set to False] Final service', subtype: success, type: workflow_edge,
-  workflow: 'Regression Workflow S: conditional skip query with skip value set to
-    False'}
-- {destination: '[Regression Workflow S: conditional skip query with skip value set
-    to False] Post-success service', label: failure, source: '[Regression Workflow
-    S: conditional skip query with skip value set to False] Skip Washington with Skip
-    value == False', subtype: failure, type: workflow_edge, workflow: 'Regression
-    Workflow S: conditional skip query with skip value set to False'}
-- {destination: '[Regression Workflow 4: link neighbors mechanism] Test get_neighbors
-    function', label: success, source: '[Shared] Start', subtype: success, type: workflow_edge,
-  workflow: 'Regression Workflow 4: link neighbors mechanism'}
-- {destination: '[Regression Workflow 4: link neighbors mechanism] Iterate over neighbors
-    of workflow device', label: success, source: '[Regression Workflow 4: link neighbors
-    mechanism] Test get_neighbors function', subtype: success, type: workflow_edge,
-  workflow: 'Regression Workflow 4: link neighbors mechanism'}
-- {destination: '[Shared] End', label: success, source: '[Regression Workflow 4: link
-    neighbors mechanism] Iterate over neighbors of workflow device', subtype: success,
-  type: workflow_edge, workflow: 'Regression Workflow 4: link neighbors mechanism'}
-- {destination: '[Regression Workflow D: Prompts] Check VRF (NOVRF) exists', label: success,
+- {color: green, destination: '[Regression Workflow R: skip services in service by
+    service mode] Skipped service', label: success, source: '[Regression Workflow
+    R: skip services in service by service mode] Partial failure', subtype: success,
+  type: workflow_edge, workflow: 'Regression Workflow R: skip services in service
+    by service mode'}
+- {color: green, destination: '[Regression Workflow R: skip services in service by
+    service mode] Last service', label: success, source: '[Regression Workflow R:
+    skip services in service by service mode] Skipped service', subtype: success,
+  type: workflow_edge, workflow: 'Regression Workflow R: skip services in service
+    by service mode'}
+- {color: green, destination: '[Shared] End', label: success, source: '[Regression
+    Workflow R: skip services in service by service mode] Last service', subtype: success,
+  type: workflow_edge, workflow: 'Regression Workflow R: skip services in service
+    by service mode'}
+- {color: green, destination: '[Regression Workflow S: conditional skip query with
+    skip value set to False] Skip Washington with Skip value == False', label: success,
   source: '[Shared] Start', subtype: success, type: workflow_edge, workflow: 'Regression
+    Workflow S: conditional skip query with skip value set to False'}
+- {color: green, destination: '[Regression Workflow S: conditional skip query with
+    skip value set to False] Post-failure service', label: success, source: '[Regression
+    Workflow S: conditional skip query with skip value set to False] Skip Washington
+    with Skip value == False', subtype: success, type: workflow_edge, workflow: 'Regression
+    Workflow S: conditional skip query with skip value set to False'}
+- {color: green, destination: '[Regression Workflow S: conditional skip query with
+    skip value set to False] Final service', label: success, source: '[Regression
+    Workflow S: conditional skip query with skip value set to False] Post-failure
+    service', subtype: success, type: workflow_edge, workflow: 'Regression Workflow
+    S: conditional skip query with skip value set to False'}
+- {color: green, destination: '[Regression Workflow S: conditional skip query with
+    skip value set to False] Final service', label: success, source: '[Regression
+    Workflow S: conditional skip query with skip value set to False] Post-success
+    service', subtype: success, type: workflow_edge, workflow: 'Regression Workflow
+    S: conditional skip query with skip value set to False'}
+- {color: green, destination: '[Shared] End', label: success, source: '[Regression
+    Workflow S: conditional skip query with skip value set to False] Final service',
+  subtype: success, type: workflow_edge, workflow: 'Regression Workflow S: conditional
+    skip query with skip value set to False'}
+- {color: red, destination: '[Regression Workflow S: conditional skip query with skip
+    value set to False] Post-success service', label: failure, source: '[Regression
+    Workflow S: conditional skip query with skip value set to False] Skip Washington
+    with Skip value == False', subtype: failure, type: workflow_edge, workflow: 'Regression
+    Workflow S: conditional skip query with skip value set to False'}
+- {color: green, destination: '[Regression Workflow 4: link neighbors mechanism] Test
+    get_neighbors function', label: success, source: '[Shared] Start', subtype: success,
+  type: workflow_edge, workflow: 'Regression Workflow 4: link neighbors mechanism'}
+- {color: green, destination: '[Regression Workflow 4: link neighbors mechanism] Iterate
+    over neighbors of workflow device', label: success, source: '[Regression Workflow
+    4: link neighbors mechanism] Test get_neighbors function', subtype: success, type: workflow_edge,
+  workflow: 'Regression Workflow 4: link neighbors mechanism'}
+- {color: green, destination: '[Shared] End', label: success, source: '[Regression
+    Workflow 4: link neighbors mechanism] Iterate over neighbors of workflow device',
+  subtype: success, type: workflow_edge, workflow: 'Regression Workflow 4: link neighbors
+    mechanism'}
+- {color: green, destination: '[Regression Workflow D: Prompts] Check VRF (NOVRF)
+    exists', label: success, source: '[Shared] Start', subtype: success, type: workflow_edge,
+  workflow: 'Regression Workflow D: Prompts'}
+- {color: green, destination: '[Regression Workflow D: Prompts] Test Netmiko Prompt
+    Service', label: success, source: '[Regression Workflow D: Prompts] Check VRF
+    (NOVRF) exists', subtype: success, type: workflow_edge, workflow: 'Regression
     Workflow D: Prompts'}
-- {destination: '[Regression Workflow D: Prompts] Test Netmiko Prompt Service', label: success,
-  source: '[Regression Workflow D: Prompts] Check VRF (NOVRF) exists', subtype: success,
-  type: workflow_edge, workflow: 'Regression Workflow D: Prompts'}

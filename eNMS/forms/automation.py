@@ -356,3 +356,4 @@ class WorkflowEdgeForm(BaseForm):
     form_type = HiddenField(default="workflow_edge")
     id = HiddenField()
     label = StringField()
+    color = StringField()

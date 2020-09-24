@@ -1,12 +1,13 @@
-- {authentication: database, email: admin@enms.io, is_admin: true, name: admin, small_menu: false,
-  theme: default, type: user}
-- {authentication: database, email: read-only@enms.io, is_admin: false, name: readonly,
-  small_menu: false, theme: default, type: user}
-- {authentication: database, email: chicago@enms.io, is_admin: false, name: chicago,
-  small_menu: false, theme: default, type: user}
-- {authentication: database, email: sf@enms.io, is_admin: false, name: sf, small_menu: false,
-  theme: default, type: user}
-- {authentication: database, email: ny@enms.io, is_admin: false, name: ny, small_menu: false,
-  theme: default, type: user}
-- {authentication: database, email: Non-admin user with full access rights, is_admin: false,
-  name: nadmin, small_menu: false, theme: default, type: user}
+- {authentication: database, description: '', email: admin@enms.io, groups: '', is_admin: true,
+  name: admin, small_menu: false, theme: default, type: user}
+- {authentication: database, description: '', email: read-only@enms.io, groups: '',
+  is_admin: false, name: readonly, small_menu: false, theme: default, type: user}
+- {authentication: database, description: '', email: chicago@enms.io, groups: '',
+  is_admin: false, name: chicago, small_menu: false, theme: default, type: user}
+- {authentication: database, description: '', email: sf@enms.io, groups: '', is_admin: false,
+  name: sf, small_menu: false, theme: default, type: user}
+- {authentication: database, description: '', email: ny@enms.io, groups: '', is_admin: false,
+  name: ny, small_menu: false, theme: default, type: user}
+- {authentication: database, description: '', email: Non-admin user with full access
+    rights, groups: '', is_admin: false, name: nadmin, small_menu: false, theme: default,
+  type: user}

@@ -1,4 +1,5 @@
-- custom_json:
+- creator: ''
+  custom_json:
     a: c
     b: [1, 2, '3']
   custom_multiselect: [a, c]
@@ -31,7 +32,8 @@
   type: device
   username: cisco
   vendor: Cisco
-- custom_json:
+- creator: ''
+  custom_json:
     a: c
     b: [1, 2, '3']
   custom_multiselect: [a, c]
@@ -64,7 +66,8 @@
   type: device
   username: cisco
   vendor: Cisco
-- custom_json:
+- creator: ''
+  custom_json:
     a: c
     b: [1, 2, '3']
   custom_multiselect: [a, c]
@@ -97,7 +100,8 @@
   type: device
   username: admin
   vendor: Arista
-- custom_json:
+- creator: ''
+  custom_json:
     a: c
     b: [1, 2, '3']
   custom_multiselect: [a, c]
@@ -130,7 +134,8 @@
   type: device
   username: admin
   vendor: Arista
-- custom_json:
+- creator: ''
+  custom_json:
     a: c
     b: [1, 2, '3']
   custom_multiselect: [a, c]
@@ -163,7 +168,8 @@
   type: device
   username: admin
   vendor: Cisco
-- custom_json:
+- creator: ''
+  custom_json:
     a: c
     b: [1, 2, '3']
   custom_multiselect: [a, c]
@@ -196,7 +202,8 @@
   type: device
   username: cisco
   vendor: Cisco
-- custom_json:
+- creator: ''
+  custom_json:
     a: c
     b: [1, 2, '3']
   custom_multiselect: [a, c]
@@ -229,7 +236,8 @@
   type: device
   username: cisco
   vendor: Cisco
-- custom_json:
+- creator: ''
+  custom_json:
     a: c
     b: [1, 2, '3']
   custom_multiselect: [a, c]
@@ -262,7 +270,8 @@
   type: device
   username: cisco
   vendor: Cisco
-- custom_json:
+- creator: ''
+  custom_json:
     a: c
     b: [1, 2, '3']
   custom_multiselect: [a, c]
@@ -295,7 +304,8 @@
   type: device
   username: cisco
   vendor: Cisco
-- custom_json:
+- creator: ''
+  custom_json:
     a: c
     b: [1, 2, '3']
   custom_multiselect: [a, c]
@@ -328,7 +338,8 @@
   type: device
   username: cisco
   vendor: Cisco
-- custom_json:
+- creator: ''
+  custom_json:
     a: c
     b: [1, 2, '3']
   custom_multiselect: [a, c]
@@ -361,7 +372,8 @@
   type: device
   username: cisco
   vendor: Cisco
-- custom_json:
+- creator: ''
+  custom_json:
     a: c
     b: [1, 2, '3']
   custom_multiselect: [a, c]
@@ -394,7 +406,8 @@
   type: device
   username: cisco
   vendor: Cisco
-- custom_json:
+- creator: ''
+  custom_json:
     a: c
     b: [1, 2, '3']
   custom_multiselect: [a, c]
@@ -427,7 +440,8 @@
   type: device
   username: cisco
   vendor: Cisco
-- custom_json:
+- creator: ''
+  custom_json:
     a: c
     b: [1, 2, '3']
   custom_multiselect: [a, c]
@@ -460,7 +474,8 @@
   type: device
   username: admin
   vendor: Cisco
-- custom_json:
+- creator: ''
+  custom_json:
     a: c
     b: [1, 2, '3']
   custom_multiselect: [a, c]
@@ -493,7 +508,8 @@
   type: device
   username: admin
   vendor: Cisco
-- custom_json:
+- creator: ''
+  custom_json:
     a: c
     b: [1, 2, '3']
   custom_multiselect: [a, c]
@@ -526,7 +542,8 @@
   type: device
   username: admin
   vendor: Juniper
-- custom_json:
+- creator: ''
+  custom_json:
     a: c
     b: [1, 2, '3']
   custom_multiselect: [a, c]
@@ -559,7 +576,8 @@
   type: device
   username: admin
   vendor: Juniper
-- custom_json:
+- creator: ''
+  custom_json:
     a: c
     b: [1, 2, '3']
   custom_multiselect: [a, c]
@@ -592,7 +610,8 @@
   type: device
   username: admin
   vendor: Juniper
-- custom_json:
+- creator: ''
+  custom_json:
     a: c
     b: [1, 2, '3']
   custom_multiselect: [a, c]
@@ -625,7 +644,8 @@
   type: device
   username: admin
   vendor: Juniper
-- custom_json:
+- creator: ''
+  custom_json:
     a: c
     b: [1, 2, '3']
   custom_multiselect: [a, c]
@@ -658,7 +678,8 @@
   type: device
   username: admin
   vendor: Juniper
-- custom_json:
+- creator: ''
+  custom_json:
     a: c
     b: [1, 2, '3']
   custom_multiselect: [a, c]
@@ -691,7 +712,8 @@
   type: device
   username: cisco
   vendor: Juniper
-- custom_json:
+- creator: ''
+  custom_json:
     a: c
     b: [1, 2, '3']
   custom_multiselect: [a, c]
@@ -724,7 +746,8 @@
   type: device
   username: cisco
   vendor: Juniper
-- custom_json:
+- creator: ''
+  custom_json:
     a: c
     b: [1, 2, '3']
   custom_multiselect: [a, c]
@@ -757,7 +780,8 @@
   type: device
   username: cisco
   vendor: Juniper
-- custom_json:
+- creator: ''
+  custom_json:
     a: c
     b: [1, 2, '3']
   custom_multiselect: [a, c]
@@ -790,7 +814,8 @@
   type: device
   username: cisco
   vendor: Juniper
-- custom_json:
+- creator: ''
+  custom_json:
     a: c
     b: [1, 2, '3']
   custom_multiselect: [a, c]
@@ -823,7 +848,8 @@
   type: device
   username: cisco
   vendor: Juniper
-- custom_json:
+- creator: ''
+  custom_json:
     a: c
     b: [1, 2, '3']
   custom_multiselect: [a, c]
@@ -856,7 +882,8 @@
   type: device
   username: cisco
   vendor: Cisco
-- custom_json:
+- creator: ''
+  custom_json:
     a: c
     b: [1, 2, '3']
   custom_multiselect: [a, c]
@@ -889,7 +916,8 @@
   type: device
   username: cisco
   vendor: Cisco
-- custom_json:
+- creator: ''
+  custom_json:
     a: c
     b: [1, 2, '3']
   custom_multiselect: [a, c]
@@ -922,7 +950,8 @@
   type: device
   username: cisco
   vendor: Cisco
-- custom_json:
+- creator: ''
+  custom_json:
     a: c
     b: [1, 2, '3']
   custom_multiselect: [a, c]
@@ -955,7 +984,8 @@
   type: device
   username: cisco
   vendor: Cisco
-- custom_json:
+- creator: ''
+  custom_json:
     a: c
     b: [1, 2, '3']
   custom_multiselect: [a, c]
@@ -988,7 +1018,8 @@
   type: device
   username: cisco
   vendor: Cisco
-- custom_json:
+- creator: ''
+  custom_json:
     a: c
     b: [1, 2, '3']
   custom_multiselect: [a, c]
@@ -1021,7 +1052,8 @@
   type: device
   username: cisco
   vendor: Cisco
-- custom_json:
+- creator: ''
+  custom_json:
     a: c
     b: [1, 2, '3']
   custom_multiselect: [a, c]
@@ -1054,7 +1086,8 @@
   type: device
   username: cisco
   vendor: Cisco
-- custom_json:
+- creator: ''
+  custom_json:
     a: c
     b: [1, 2, '3']
   custom_multiselect: [a, c]
@@ -1087,7 +1120,8 @@
   type: device
   username: cisco
   vendor: Cisco
-- custom_json:
+- creator: ''
+  custom_json:
     a: c
     b: [1, 2, '3']
   custom_multiselect: [a, c]
@@ -1120,7 +1154,8 @@
   type: device
   username: cisco
   vendor: Cisco
-- custom_json:
+- creator: ''
+  custom_json:
     a: c
     b: [1, 2, '3']
   custom_multiselect: [a, c]
@@ -1153,7 +1188,8 @@
   type: device
   username: cisco
   vendor: Cisco
-- custom_json:
+- creator: ''
+  custom_json:
     a: c
     b: [1, 2, '3']
   custom_multiselect: [a, c]
@@ -1186,7 +1222,8 @@
   type: device
   username: cisco
   vendor: Cisco
-- custom_json:
+- creator: ''
+  custom_json:
     a: c
     b: [1, 2, '3']
   custom_multiselect: [a, c]
@@ -1219,7 +1256,8 @@
   type: device
   username: cisco
   vendor: Cisco
-- custom_json:
+- creator: ''
+  custom_json:
     a: c
     b: [1, 2, '3']
   custom_multiselect: [a, c]
@@ -1252,7 +1290,8 @@
   type: device
   username: cisco
   vendor: Cisco
-- custom_json:
+- creator: ''
+  custom_json:
     a: c
     b: [1, 2, '3']
   custom_multiselect: [a, c]
@@ -1285,7 +1324,8 @@
   type: device
   username: cisco
   vendor: Cisco
-- custom_json:
+- creator: ''
+  custom_json:
     a: c
     b: [1, 2, '3']
   custom_multiselect: [a, c]
@@ -1318,7 +1358,8 @@
   type: device
   username: cisco
   vendor: Cisco
-- custom_json:
+- creator: ''
+  custom_json:
     a: c
     b: [1, 2, '3']
   custom_multiselect: [a, c]
@@ -1351,7 +1392,8 @@
   type: device
   username: cisco
   vendor: Cisco
-- custom_json:
+- creator: ''
+  custom_json:
     a: c
     b: [1, 2, '3']
   custom_multiselect: [a, c]
@@ -1384,7 +1426,8 @@
   type: device
   username: cisco
   vendor: Cisco
-- custom_json:
+- creator: ''
+  custom_json:
     a: c
     b: [1, 2, '3']
   custom_multiselect: [a, c]
@@ -1417,7 +1460,8 @@
   type: device
   username: cisco
   vendor: Juniper
-- custom_json:
+- creator: ''
+  custom_json:
     a: c
     b: [1, 2, '3']
   custom_multiselect: [a, c]
@@ -1450,7 +1494,8 @@
   type: device
   username: cisco
   vendor: Juniper
-- custom_json:
+- creator: ''
+  custom_json:
     a: c
     b: [1, 2, '3']
   custom_multiselect: [a, c]
@@ -1483,7 +1528,8 @@
   type: device
   username: cisco
   vendor: Juniper
-- custom_json:
+- creator: ''
+  custom_json:
     a: c
     b: [1, 2, '3']
   custom_multiselect: [a, c]
@@ -1516,7 +1562,8 @@
   type: device
   username: cisco
   vendor: Juniper
-- custom_json:
+- creator: ''
+  custom_json:
     a: c
     b: [1, 2, '3']
   custom_multiselect: [a, c]
@@ -1549,7 +1596,8 @@
   type: device
   username: cisco
   vendor: Juniper
-- custom_json:
+- creator: ''
+  custom_json:
     a: c
     b: [1, 2, '3']
   custom_multiselect: [a, c]
@@ -1582,7 +1630,8 @@
   type: device
   username: cisco
   vendor: Juniper
-- custom_json:
+- creator: ''
+  custom_json:
     a: c
     b: [1, 2, '3']
   custom_multiselect: [a, c]
@@ -1615,7 +1664,8 @@
   type: device
   username: cisco
   vendor: Juniper
-- custom_json:
+- creator: ''
+  custom_json:
     a: c
     b: [1, 2, '3']
   custom_multiselect: [a, c]
@@ -1648,7 +1698,8 @@
   type: device
   username: cisco
   vendor: Juniper
-- custom_json:
+- creator: ''
+  custom_json:
     a: c
     b: [1, 2, '3']
   custom_multiselect: [a, c]
@@ -1681,7 +1732,8 @@
   type: device
   username: cisco
   vendor: Juniper
-- custom_json:
+- creator: ''
+  custom_json:
     a: c
     b: [1, 2, '3']
   custom_multiselect: [a, c]
@@ -1714,7 +1766,8 @@
   type: device
   username: cisco
   vendor: Juniper
-- custom_json:
+- creator: ''
+  custom_json:
     a: c
     b: [1, 2, '3']
   custom_multiselect: [a, c]
@@ -1747,7 +1800,8 @@
   type: device
   username: cisco
   vendor: Cisco
-- custom_json:
+- creator: ''
+  custom_json:
     a: c
     b: [1, 2, '3']
   custom_multiselect: [a, c]
@@ -1780,7 +1834,8 @@
   type: device
   username: cisco
   vendor: Cisco
-- custom_json:
+- creator: ''
+  custom_json:
     a: c
     b: [1, 2, '3']
   custom_multiselect: [a, c]
@@ -1813,7 +1868,8 @@
   type: device
   username: cisco
   vendor: Cisco
-- custom_json:
+- creator: ''
+  custom_json:
     a: c
     b: [1, 2, '3']
   custom_multiselect: [a, c]
@@ -1846,7 +1902,8 @@
   type: device
   username: cisco
   vendor: Cisco
-- custom_json:
+- creator: ''
+  custom_json:
     a: c
     b: [1, 2, '3']
   custom_multiselect: [a, c]
@@ -1879,7 +1936,8 @@
   type: device
   username: cisco
   vendor: Cisco
-- custom_json:
+- creator: ''
+  custom_json:
     a: c
     b: [1, 2, '3']
   custom_multiselect: [a, c]
@@ -1912,7 +1970,8 @@
   type: device
   username: cisco
   vendor: Cisco
-- custom_json:
+- creator: ''
+  custom_json:
     a: c
     b: [1, 2, '3']
   custom_multiselect: [a, c]
@@ -1945,7 +2004,8 @@
   type: device
   username: cisco
   vendor: Cisco
-- custom_json:
+- creator: ''
+  custom_json:
     a: c
     b: [1, 2, '3']
   custom_multiselect: [a, c]
@@ -1978,7 +2038,8 @@
   type: device
   username: cisco
   vendor: Cisco
-- custom_json:
+- creator: ''
+  custom_json:
     a: c
     b: [1, 2, '3']
   custom_multiselect: [a, c]
@@ -2011,7 +2072,8 @@
   type: device
   username: admin
   vendor: linux
-- custom_json:
+- creator: ''
+  custom_json:
     a: c
     b: [1, 2, '3']
   custom_multiselect: [a, c]

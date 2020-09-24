@@ -266,6 +266,7 @@ class WorkflowEdge(AbstractBase):
     __tablename__ = type = "workflow_edge"
     id = db.Column(Integer, primary_key=True)
     label = db.Column(db.SmallString)
+    color = db.Column(db.SmallString)
     subtype = db.Column(db.SmallString)
     source_id = db.Column(Integer, ForeignKey("service.id"))
     source = relationship(
@@ -288,9 +289,11 @@ class WorkflowEdge(AbstractBase):
     __table_args__ = (
         UniqueConstraint(subtype, source_id, destination_id, workflow_id),
     )
+    color_mapping = {"success": "green", "failure": "red", "prerequisite": "blue"}
 
     def __init__(self, **kwargs):
         self.label = kwargs["subtype"]
+        self.color = self.color_mapping[kwargs["subtype"]]
         super().__init__(**kwargs)
 
     @property

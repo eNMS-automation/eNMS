@@ -1,4 +1,5 @@
-- crontab_expression: ''
+- creator: ''
+  crontab_expression: ''
   description: Back-up device configurations
   devices: []
   end_date: ''
@@ -12,7 +13,8 @@
   service_id: 49
   start_date: 09/10/2019 21:17:13
   type: task
-- crontab_expression: ''
+- creator: ''
+  crontab_expression: ''
   description: Monitor eNMS cluster
   devices: []
   end_date: ''
@@ -26,7 +28,8 @@
   service_id: 3
   start_date: ''
   type: task
-- crontab_expression: ''
+- creator: ''
+  crontab_expression: ''
   description: ''
   devices: [PaloAlto, Austin]
   end_date: ''

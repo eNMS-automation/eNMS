@@ -543,12 +543,7 @@ function edgeToEdge(edge) {
       roundness: edge.subtype == "success" ? 0.1 : edge.subtype == "failure" ? -0.1 : 0,
     },
     color: {
-      color:
-        edge.subtype == "success"
-          ? "green"
-          : edge.subtype == "failure"
-          ? "red"
-          : "blue",
+      color: edge.color,
     },
     arrows: { to: { enabled: true } },
   };

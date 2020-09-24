@@ -11984,7 +11984,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2020-09-24 04:48:34.775481'
+  last_modified: '2020-09-24 05:33:07.299889'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -11997,7 +11997,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow S: conditional skip query in failed and discard mode': &id044 [
       -215, 70]
@@ -12014,8 +12014,8 @@
   send_notification_method: mail
   shared: false
   skip: false
-  skip_query: ''
-  skip_value: 'True'
+  skip_query: device.name.startswith("router")
+  skip_value: Discard
   source_code: "# Availble variables: device, results, run\r\n# Returning state:\r\
     \n#    results[\"success\"] = True\r\n#    results[\"result\"] = <return data>\r\
     \n# Logging: log(level, text)\r\n#    log(\"info\", \"My log message\")\r\n# Exit\

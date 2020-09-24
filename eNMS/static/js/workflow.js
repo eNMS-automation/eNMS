@@ -856,7 +856,7 @@ function displayWorkflowState(result) {
   const state = result.state[currentPath];
   if (state?.edges) {
     for (let [id, devices] of Object.entries(state.edges)) {
-      if (!edges.get(id)) continue;
+      if (!edges.get(parseInt(id))) continue;
       edgeUpdates.push({
         id: id,
         label: isNaN(devices)

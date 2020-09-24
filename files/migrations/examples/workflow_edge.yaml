@@ -769,34 +769,30 @@
     Workflow R: skip services in service by service mode] Last service', subtype: success,
   type: workflow_edge, workflow: 'Regression Workflow R: skip services in service
     by service mode'}
-- {color: green, destination: '[Regression Workflow S: conditional skip query with
-    skip value set to False] Skip Washington with Skip value == False', label: success,
-  source: '[Shared] Start', subtype: success, type: workflow_edge, workflow: 'Regression
-    Workflow S: conditional skip query with skip value set to False'}
-- {color: green, destination: '[Regression Workflow S: conditional skip query with
-    skip value set to False] Post-failure service', label: success, source: '[Regression
-    Workflow S: conditional skip query with skip value set to False] Skip Washington
+- {color: green, destination: '[Regression Workflow S: conditional skip query in failed
+    and discard mode] Post-success service', label: success, source: '[Regression
+    Workflow S: conditional skip query in failed and discard mode] Skip Washington
     with Skip value == False', subtype: success, type: workflow_edge, workflow: 'Regression
-    Workflow S: conditional skip query with skip value set to False'}
-- {color: green, destination: '[Regression Workflow S: conditional skip query with
-    skip value set to False] Final service', label: success, source: '[Regression
-    Workflow S: conditional skip query with skip value set to False] Post-failure
-    service', subtype: success, type: workflow_edge, workflow: 'Regression Workflow
-    S: conditional skip query with skip value set to False'}
-- {color: green, destination: '[Regression Workflow S: conditional skip query with
-    skip value set to False] Final service', label: success, source: '[Regression
-    Workflow S: conditional skip query with skip value set to False] Post-success
-    service', subtype: success, type: workflow_edge, workflow: 'Regression Workflow
-    S: conditional skip query with skip value set to False'}
+    Workflow S: conditional skip query in failed and discard mode'}
+- {color: green, destination: '[Regression Workflow S: conditional skip query in failed
+    and discard mode] Final service', label: success, source: '[Regression Workflow
+    S: conditional skip query in failed and discard mode] Post-success service', subtype: success,
+  type: workflow_edge, workflow: 'Regression Workflow S: conditional skip query in
+    failed and discard mode'}
+- {color: green, destination: '[Regression Workflow S: conditional skip query in failed
+    and discard mode] Final service', label: success, source: '[Regression Workflow
+    S: conditional skip query in failed and discard mode] Post-failure service', subtype: success,
+  type: workflow_edge, workflow: 'Regression Workflow S: conditional skip query in
+    failed and discard mode'}
 - {color: green, destination: '[Shared] End', label: success, source: '[Regression
-    Workflow S: conditional skip query with skip value set to False] Final service',
+    Workflow S: conditional skip query in failed and discard mode] Final service',
   subtype: success, type: workflow_edge, workflow: 'Regression Workflow S: conditional
-    skip query with skip value set to False'}
-- {color: red, destination: '[Regression Workflow S: conditional skip query with skip
-    value set to False] Post-success service', label: failure, source: '[Regression
-    Workflow S: conditional skip query with skip value set to False] Skip Washington
+    skip query in failed and discard mode'}
+- {color: red, destination: '[Regression Workflow S: conditional skip query in failed
+    and discard mode] Post-failure service', label: failure, source: '[Regression
+    Workflow S: conditional skip query in failed and discard mode] Skip Washington
     with Skip value == False', subtype: failure, type: workflow_edge, workflow: 'Regression
-    Workflow S: conditional skip query with skip value set to False'}
+    Workflow S: conditional skip query in failed and discard mode'}
 - {color: green, destination: '[Regression Workflow 4: link neighbors mechanism] Test
     get_neighbors function', label: success, source: '[Shared] Start', subtype: success,
   type: workflow_edge, workflow: 'Regression Workflow 4: link neighbors mechanism'}
@@ -829,3 +825,12 @@
 - {color: green, destination: '[Shared] End', label: success, source: '[Regression
     Workflow T: global variables] Show vrf with custom encrypted credentials', subtype: success,
   type: workflow_edge, workflow: 'Regression Workflow T: global variables'}
+- {color: green, destination: '[Regression Workflow S: conditional skip query in failed
+    and discard mode] Skip router5-7 in discard mode', label: success, source: '[Shared]
+    Start', subtype: success, type: workflow_edge, workflow: 'Regression Workflow
+    S: conditional skip query in failed and discard mode'}
+- {color: green, destination: '[Regression Workflow S: conditional skip query in failed
+    and discard mode] Skip Washington with Skip value == False', label: success, source: '[Regression
+    Workflow S: conditional skip query in failed and discard mode] Skip router5-7
+    in discard mode', subtype: success, type: workflow_edge, workflow: 'Regression
+    Workflow S: conditional skip query in failed and discard mode'}

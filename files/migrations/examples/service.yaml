@@ -69,20 +69,22 @@
     'Regression Workflow M: Unix command & shell, ping, jump server': [-341, 17]
     'Regression Workflow N: Topology Import (netbox, librenms, opennms)': [-141, 21]
     'Regression Workflow O: Scrapli': [-192, 31]
-    'Regression Workflow P: large workflow (scalability)': &id003 [-437, -191]
+    'Regression Workflow P: large workflow (scalability)': &id004 [-437, -191]
     'Regression Workflow Q: File transfer': [-479, -89]
-    'Regression Workflow R: skip services in service by service mode': &id004 [-336,
+    'Regression Workflow R: skip services in service by service mode': &id005 [-336,
       -35]
-    'Regression Workflow S: conditional skip query with skip value set to False': &id005 [
-      -183, -152]
+    'Regression Workflow S: conditional skip query in failed and discard mode': &id003 [
+      -205, -81]
+    'Regression Workflow S: conditional skip query with skip value set to False': *id003
     'Regression Workflow T: global variables': [-277, -147]
     'Regression Workflow T: link neighbors mechanism': *id002
-    'Regression workflow P: large workflow (scalability)': *id003
+    'Regression workflow P: large workflow (scalability)': *id004
     Subworkflow 1: !!python/tuple [0, 0]
     Subworkflow 2: !!python/tuple [0, 0]
     Workflow  in device by device mode: !!python/tuple [0, 0]
-    'Workflow Regression R: skip services in service by service mode': *id004
-    'Workflow Regression S: conditional skip query with skip value set to False': *id005
+    'Workflow Regression R: skip services in service by service mode': *id005
+    'Workflow Regression S: conditional skip query with skip value set to False': [
+      -183, -152]
     Workflow in service by service mode (workflow targets): !!python/tuple [0, 0]
     Workflow in service targets mode: !!python/tuple [0, 0]
     Workflow with device and value iteration: [0, 0]
@@ -210,23 +212,25 @@
     'Regression Workflow M: Unix command & shell, ping, jump server': [560, 9]
     'Regression Workflow N: Topology Import (netbox, librenms, opennms)': [636, 24]
     'Regression Workflow O: Scrapli': [628, 113]
-    'Regression Workflow P: large workflow (scalability)': &id008 [483, -268]
+    'Regression Workflow P: large workflow (scalability)': &id009 [483, -268]
     'Regression Workflow Q: File transfer': [576, 135]
-    'Regression Workflow R: skip services in service by service mode': &id009 [500,
+    'Regression Workflow R: skip services in service by service mode': &id010 [500,
       0]
-    'Regression Workflow S: conditional skip query with skip value set to False': &id010 [
+    'Regression Workflow S: conditional skip query in failed and discard mode': &id008 [
       640, -155]
+    'Regression Workflow S: conditional skip query with skip value set to False': *id008
     'Regression Workflow T: global variables': [569, -66]
     'Regression Workflow T: link neighbors mechanism': *id007
-    'Regression workflow P: large workflow (scalability)': *id008
+    'Regression workflow P: large workflow (scalability)': *id009
     Subworkflow 1: !!python/tuple [0, 0]
     Subworkflow 2: !!python/tuple [0, 0]
     T: !!python/tuple [500, 0]
     TEST: !!python/tuple [500, 0]
     TEST2: !!python/tuple [500, 0]
     Workflow  in device by device mode: !!python/tuple [0, 0]
-    'Workflow Regression R: skip services in service by service mode': *id009
-    'Workflow Regression S: conditional skip query with skip value set to False': *id010
+    'Workflow Regression R: skip services in service by service mode': *id010
+    'Workflow Regression S: conditional skip query with skip value set to False': [
+      640, -155]
     Workflow in service by service mode (workflow targets): !!python/tuple [0, 0]
     Workflow in service targets mode: !!python/tuple [0, 0]
     Workflow with device and value iteration: [500, 0]
@@ -10978,6 +10982,7 @@
   device_query: ''
   device_query_property: name
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   events: []
   impacting: true
@@ -10989,26 +10994,27 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels:
+    055563ce-090a-4d88-b80c-c208f2befa69:
+      alignment: left
+      content: "This workflow runs on 6 devices including Washington.\r\nThe first\
+        \ service will DISCARD 3 devices: router5-7.\r\nThe second service will skip\
+        \ Washington in failed skip mode.\r\nWashington must follow the failure edges\
+        \ while the other\r\ntwo devices follow the success edge.\r\nIn the end, these\
+        \ 3 devices should all run the last service."
+      positions: [170, -57]
     065de869-c69f-4489-8c9a-8dbb520d1031:
       alignment: left
       content: "Must be tested both in:\r\n- device by device mode\r\n- service by\
         \ service with workflow targets mode"
-      positions: [207, 65]
-    0e05e9d9-86cc-4158-b826-8cb8af123da6:
-      alignment: left
-      content: "This workflow runs on 3 devices including Washington.\r\nThe first\
-        \ service will skip Washington.\r\nWashington must follow the failure edges\
-        \ while the other\r\ntwo devices follow the success edge.\r\nIn the end, they\
-        \ should all run the last service."
-      positions: [212, -141]
-  last_modified: '2020-08-03 12:04:50.862773'
+      positions: [273, 201]
+  last_modified: '2020-09-24 04:49:17.719480'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: 'Regression Workflow S: conditional skip query with skip value set to False'
+  name: 'Regression Workflow S: conditional skip query in failed and discard mode'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -11022,21 +11028,22 @@
   reply_to: ''
   reserved: false
   run_method: per_service_with_workflow_targets
-  scoped_name: 'Regression Workflow S: conditional skip query with skip value set
-    to False'
+  scoped_name: 'Regression Workflow S: conditional skip query in failed and discard
+    mode'
   send_notification: false
   send_notification_method: mail
   services: ['[Shared] Start', '[Shared] End', '[Regression Workflow S: conditional
-      skip query with skip value set to False] Skip Washington with Skip value ==
-      False', '[Regression Workflow S: conditional skip query with skip value set
-      to False] Post-failure service', '[Regression Workflow S: conditional skip query
-      with skip value set to False] Post-success service', '[Regression Workflow S:
-      conditional skip query with skip value set to False] Final service']
+      skip query in failed and discard mode] Skip Washington with Skip value == False',
+    '[Regression Workflow S: conditional skip query in failed and discard mode] Post-success
+      service', '[Regression Workflow S: conditional skip query in failed and discard
+      mode] Post-failure service', '[Regression Workflow S: conditional skip query
+      in failed and discard mode] Final service', '[Regression Workflow S: conditional
+      skip query in failed and discard mode] Skip router5-7 in discard mode']
   shared: false
   skip: false
   skip_query: ''
   skip_value: 'True'
-  target_devices: [PaloAlto, Austin, Washington]
+  target_devices: [PaloAlto, Austin, Washington, router5, router6, router7]
   target_pools: []
   time_between_retries: 10
   type: workflow
@@ -11074,7 +11081,7 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression Workflow S: conditional skip query with skip value set to False]
+  name: '[Regression Workflow S: conditional skip query in failed and discard mode]
     Skip Washington with Skip value == False'
   negative_logic: false
   notification_header: ''
@@ -11082,9 +11089,11 @@
   operating_system: ''
   pools: [All objects]
   positions:
-    'Regression Workflow S: conditional skip query with skip value set to False': &id038 [
+    'Regression Workflow S: conditional skip query in failed and discard mode': &id038 [
+      -242, 237]
+    'Regression Workflow S: conditional skip query with skip value set to False': *id038
+    'Workflow Regression S: conditional skip query with skip value set to False': [
       -149, -30]
-    'Workflow Regression S: conditional skip query with skip value set to False': *id038
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -11125,6 +11134,7 @@
   device_query: ''
   device_query_property: name
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   events: []
   impacting: true
@@ -11135,14 +11145,85 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2020-08-03 12:00:27.263343'
+  last_modified: '2020-09-24 04:46:11.235751'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression Workflow S: conditional skip query with skip value set to False]
+  name: '[Regression Workflow S: conditional skip query in failed and discard mode]
+    Post-success service'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: [All objects]
+  positions:
+    'Regression Workflow S: conditional skip query in failed and discard mode': &id039 [
+      412, 108]
+    'Regression Workflow S: conditional skip query with skip value set to False': *id039
+    'Workflow Regression S: conditional skip query with skip value set to False': [
+      264, -16]
+  postprocessing: ''
+  postprocessing_mode: always
+  preprocessing: ''
+  public: false
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: Post-success service
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: false
+  skip_query: ''
+  skip_value: 'True'
+  source_code: "# Availble variables: device, results, run\r\n# Returning state:\r\
+    \n#    results[\"success\"] = True\r\n#    results[\"result\"] = <return data>\r\
+    \n# Logging: log(level, text)\r\n#    log(\"info\", \"My log message\")\r\n# Exit\
+    \ in the middle of the script:\r\n#    exit()\r\n#    Note: exit() is not required\
+    \ as the last line\r\n\r\nresult = {}\r\nresults[\"success\"] = True\r\nresults[\"\
+    result\"] = result"
+  target_devices: []
+  target_pools: []
+  time_between_retries: 10
+  type: python_snippet_service
+  update_pools: false
+  validation_condition: success
+  validation_method: none
+  vendor: ''
+  waiting_time: 0
+- completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  events: []
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2020-09-24 04:46:08.378087'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Regression Workflow S: conditional skip query in failed and discard mode]
     Post-failure service'
   negative_logic: false
   notification_header: ''
@@ -11150,9 +11231,11 @@
   operating_system: ''
   pools: [All objects]
   positions:
-    'Regression Workflow S: conditional skip query with skip value set to False': &id039 [
-      264, -16]
-    'Workflow Regression S: conditional skip query with skip value set to False': *id039
+    'Regression Workflow S: conditional skip query in failed and discard mode': &id040 [
+      605, 248]
+    'Regression Workflow S: conditional skip query with skip value set to False': *id040
+    'Workflow Regression S: conditional skip query with skip value set to False': [
+      208, 194]
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -11203,74 +11286,6 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2020-08-03 12:00:36.785336'
-  log_level: 1
-  mail_recipient: ''
-  max_number_of_retries: 100
-  max_processes: 15
-  maximum_runs: 1
-  multiprocessing: false
-  name: '[Regression Workflow S: conditional skip query with skip value set to False]
-    Post-success service'
-  negative_logic: false
-  notification_header: ''
-  number_of_retries: 0
-  operating_system: ''
-  pools: [All objects]
-  positions:
-    'Regression Workflow S: conditional skip query with skip value set to False': &id040 [
-      208, 194]
-    'Workflow Regression S: conditional skip query with skip value set to False': *id040
-  postprocessing: ''
-  postprocessing_mode: always
-  preprocessing: ''
-  public: false
-  reply_to: ''
-  reserved: false
-  run_method: per_device
-  scoped_name: Post-success service
-  send_notification: false
-  send_notification_method: mail
-  shared: false
-  skip: false
-  skip_query: ''
-  skip_value: 'True'
-  source_code: "# Availble variables: device, results, run\r\n# Returning state:\r\
-    \n#    results[\"success\"] = True\r\n#    results[\"result\"] = <return data>\r\
-    \n# Logging: log(level, text)\r\n#    log(\"info\", \"My log message\")\r\n# Exit\
-    \ in the middle of the script:\r\n#    exit()\r\n#    Note: exit() is not required\
-    \ as the last line\r\n\r\nresult = {}\r\nresults[\"success\"] = True\r\nresults[\"\
-    result\"] = result"
-  target_devices: []
-  target_pools: []
-  time_between_retries: 10
-  type: python_snippet_service
-  update_pools: false
-  validation_condition: success
-  validation_method: none
-  vendor: ''
-  waiting_time: 0
-- completion_time: 1
-  content_match: ''
-  content_match_regex: false
-  conversion_method: none
-  creator: admin
-  definition: Definition
-  delete_spaces_before_matching: false
-  description: ''
-  device_query: ''
-  device_query_property: name
-  dict_match: {}
-  display_only_failed_nodes: false
-  events: []
-  impacting: true
-  include_device_results: false
-  include_link_in_summary: false
-  initial_payload: {}
-  iteration_devices: ''
-  iteration_devices_property: name
-  iteration_values: ''
-  iteration_variable_name: iteration_value
   last_modified: '2020-08-03 12:00:41.901802'
   log_level: 1
   mail_recipient: ''
@@ -11278,7 +11293,7 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression Workflow S: conditional skip query with skip value set to False]
+  name: '[Regression Workflow S: conditional skip query in failed and discard mode]
     Final service'
   negative_logic: false
   notification_header: ''
@@ -11286,9 +11301,11 @@
   operating_system: ''
   pools: [All objects]
   positions:
-    'Regression Workflow S: conditional skip query with skip value set to False': &id041 [
+    'Regression Workflow S: conditional skip query in failed and discard mode': &id041 [
+      660, 13]
+    'Regression Workflow S: conditional skip query with skip value set to False': *id041
+    'Workflow Regression S: conditional skip query with skip value set to False': [
       636, 63]
-    'Workflow Regression S: conditional skip query with skip value set to False': *id041
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -11941,6 +11958,75 @@
   use_device_driver: true
   use_genie: false
   use_host_keys: false
+  validation_condition: success
+  validation_method: none
+  vendor: ''
+  waiting_time: 0
+- completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  events: []
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2020-09-24 04:48:34.775481'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Regression Workflow S: conditional skip query in failed and discard mode]
+    Skip router5-7 in discard mode'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions:
+    'Regression Workflow S: conditional skip query in failed and discard mode': &id044 [
+      -215, 70]
+    'Regression Workflow S: conditional skip query with skip value set to False': *id044
+  postprocessing: ''
+  postprocessing_mode: always
+  preprocessing: ''
+  public: false
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: Skip router5-7 in discard mode
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: false
+  skip_query: ''
+  skip_value: 'True'
+  source_code: "# Availble variables: device, results, run\r\n# Returning state:\r\
+    \n#    results[\"success\"] = True\r\n#    results[\"result\"] = <return data>\r\
+    \n# Logging: log(level, text)\r\n#    log(\"info\", \"My log message\")\r\n# Exit\
+    \ in the middle of the script:\r\n#    exit()\r\n#    Note: exit() is not required\
+    \ as the last line\r\n\r\nresult = {}\r\nresults[\"success\"] = True\r\nresults[\"\
+    result\"] = result"
+  target_devices: []
+  target_pools: []
+  time_between_retries: 10
+  type: python_snippet_service
+  update_pools: false
   validation_condition: success
   validation_method: none
   vendor: ''

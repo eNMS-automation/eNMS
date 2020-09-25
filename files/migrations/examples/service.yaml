@@ -130,7 +130,7 @@
   send_notification: false
   send_notification_method: mail
   shared: true
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   target_devices: []
@@ -277,7 +277,7 @@
   send_notification: false
   send_notification_method: mail
   shared: true
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   target_devices: []
@@ -334,7 +334,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   target_devices: []
@@ -406,7 +406,7 @@
   send_notification: false
   send_notification_method: mail
   shared: true
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   string1: cisco
@@ -476,7 +476,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: true
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
@@ -548,7 +548,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: true
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
@@ -625,7 +625,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
@@ -715,7 +715,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
@@ -796,7 +796,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
@@ -884,7 +884,7 @@
   send_notification: false
   send_notification_method: mail
   shared: true
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   start_new_connection: true
@@ -958,7 +958,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
@@ -1034,7 +1034,7 @@
   send_notification: false
   send_notification_method: mail
   shared: true
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   target_devices: [Columbus]
@@ -1104,7 +1104,7 @@
   send_notification: false
   send_notification_method: mail
   shared: true
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
@@ -1174,7 +1174,7 @@
   send_notification: false
   send_notification_method: mail
   shared: true
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
@@ -1246,7 +1246,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
@@ -1315,7 +1315,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
@@ -1378,7 +1378,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   target_devices: [Austin, Washington]
@@ -1439,7 +1439,7 @@
   send_notification: false
   send_notification_method: mail
   shared: true
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   source_code: "# Interfaces 1\r\ntargets = ['Loopback101', 'Loopback15'] if device.name\
@@ -1526,7 +1526,7 @@
   send_notification: true
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
@@ -1612,7 +1612,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   target_devices: []
@@ -1680,7 +1680,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
@@ -1765,7 +1765,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
@@ -1852,7 +1852,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
@@ -1941,7 +1941,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
@@ -2027,7 +2027,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
@@ -2090,7 +2090,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   source_code: "set_var(\"global_variable\", value=1050)\r\nset_var(\"variable\",\
@@ -2151,7 +2151,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   source_code: "set_var(\"variable1\", 999, device=device.name)\r\nset_var(\"variable2\"\
@@ -2234,7 +2234,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
@@ -2319,7 +2319,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
@@ -2404,7 +2404,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
@@ -2480,7 +2480,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
@@ -2552,7 +2552,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
@@ -2626,7 +2626,7 @@
   send_notification: false
   send_notification_method: mail
   shared: true
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
@@ -2698,7 +2698,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
@@ -2770,7 +2770,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
@@ -2838,7 +2838,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   target_devices: [Washington]
@@ -2901,7 +2901,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   target_devices: []
@@ -2964,7 +2964,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   target_devices: []
@@ -3042,7 +3042,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
@@ -3127,7 +3127,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
@@ -3212,7 +3212,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
@@ -3297,7 +3297,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
@@ -3366,7 +3366,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   source_code: "set_var(\"list\", [1, 2], device=device.name)\r\nset_var(\"dict\"\
@@ -3443,7 +3443,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   target_devices: []
@@ -3520,7 +3520,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   target_devices: []
@@ -3587,7 +3587,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   target_devices: []
@@ -3652,7 +3652,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   source_code: "result = {\r\n \"get_var\": get_var(\"Interfaces 2\"),\r\n\"version\
@@ -3741,7 +3741,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
@@ -3817,7 +3817,7 @@
       Data Backup] Get Configuration', '[Regression Workflow 9: Operational Data Backup]
       Push Configurations to Git']
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   target_devices: [Washington]
@@ -3921,7 +3921,7 @@
       Workflow 1: VRF creation and deletion with Netmiko] netmiko_delete_vrf_test',
     '[Shared] Netmiko: Check VRF (test) does not exist']
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   superworkflow: 'Regression Workflow L: superworkflow'
@@ -3998,7 +3998,7 @@
       Workflow F: Workflow of Workflows] Regression Workflow 5: VRF creation and deletion
       with Napalm] Check VRF is not configured with Netmiko']
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   target_devices: [Washington]
@@ -4076,7 +4076,7 @@
       get_interfaces_ip', '[Regression Workflow 3: Napalm getters (postprocessing)]
       get_config', '[Regression Workflow 3: Napalm getters (postprocessing)] process_payload1']
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   target_devices: [Washington, Atlanta]
@@ -4194,7 +4194,7 @@
       Workflow] Regression Workflow 7: Payload Extraction & Validation] Validate text
       via payload']
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   target_devices: [Washington]
@@ -4271,7 +4271,7 @@
       Workflow', '[Regression Workflow F: Workflow of Workflows] Show interfaces with
       Netmiko', '[Shared] NAPALM: Get interfaces']
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   target_devices: [Austin, Washington]
@@ -4341,7 +4341,7 @@
       not exist', '[Shared] Example Service (does nothing)', '[Shared] NAPALM: Get
       interfaces']
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   target_devices: [Washington, Philadelphia, LosAngeles]
@@ -4416,7 +4416,7 @@
       pass', '[Shared] REST API: call *is_alive* endpoint', '[Regression Workflow
       D: Prompts] Check VRF (NOVRF) exists']
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   target_devices: [Washington]
@@ -4504,7 +4504,7 @@
       call *is_alive* endpoint', '[Regression Workflow A: get_var, set_var, get_result]
       show runtime with get_result helper']
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   target_devices: [Washington, Chicago]
@@ -4613,7 +4613,7 @@
       of Workflow] Regression Workflow B: Napalm getters validation] Getters Workflow:
       get facts failed match']
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   target_devices: [Austin, Washington]
@@ -4705,7 +4705,7 @@
       Arista show configuration (dict match)', '[Regression Workflow 6: Ansible with
       Validation] Simple Playbook']
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   target_devices: [Austin, Washington]
@@ -4779,7 +4779,7 @@
     '[Shared] REST API: call *is_alive* endpoint', '[Regression Workflow C: Advanced
       multiprocessing] napalm_configure_bgp_1']
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   target_devices: [Jackson, PaloAlto, Austin, Washington, Chicago, SanJose, SanDiego,
@@ -4882,7 +4882,7 @@
       Test 3', '[Regression Workflow E: Iteration Targets] Iteration Targets Workflow
       - Test 4']
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   target_devices: [Austin, Washington]
@@ -4959,7 +4959,7 @@
       Workflow] Regression Workflow 8: Payload Extraction with Operations] Validation
       2']
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   target_devices: [Washington]
@@ -5026,7 +5026,7 @@
       F: Workflow of Workflows] Regression Workflow F S2: Access Variables from Parent
       Workflow] Variable Access Subworkflow: Access variables for iteration']
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   target_devices: []
@@ -5095,7 +5095,7 @@
       Workflows] Regression Workflow F S1: Subworkflow of Workflow] Regression Workflow
       7: Payload Extraction & Validation']
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   target_devices: [Washington]
@@ -5173,7 +5173,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
@@ -5281,7 +5281,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
@@ -5350,7 +5350,7 @@
       G: run methods (BFS)] Service in Run once per device mode', '[Regression Workflow
       G: run methods (BFS)] Workflow in service targets mode']
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   target_devices: [Austin, Washington]
@@ -5414,7 +5414,7 @@
   services: ['[Shared] Start', '[Shared] End', '[[Regression Workflow G: run methods
       (BFS)] Workflow  in device by device mode] Validation show VRF']
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   target_devices: []
@@ -5478,7 +5478,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   target_devices: []
@@ -5545,7 +5545,7 @@
       (BFS)] Workflow in service by service mode (workflow targets)] Validation show
       VRF']
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   target_devices: []
@@ -5610,7 +5610,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   target_devices: []
@@ -5675,7 +5675,7 @@
   services: ['[Shared] Start', '[Shared] End', '[[Regression Workflow G: run methods
       (BFS)] Workflow in service targets mode] Validation show VRF']
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   target_devices: []
@@ -5755,7 +5755,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
@@ -5841,7 +5841,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
@@ -5927,7 +5927,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
@@ -6018,7 +6018,7 @@
       in multiple subworkflows] Subworkflow 1', '[Regression Workflow H: shared service
       in multiple subworkflows] Subworkflow 2']
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   target_devices: [PaloAlto]
@@ -6082,7 +6082,7 @@
   services: ['[Shared] Start', '[Shared] End', '[Shared] Shared Service for Regression
       Workflow H']
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   target_devices: []
@@ -6146,7 +6146,7 @@
   services: ['[Shared] Start', '[Shared] End', '[Shared] Shared Service for Regression
       Workflow H']
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   target_devices: []
@@ -6227,7 +6227,7 @@
   send_notification: false
   send_notification_method: mail
   shared: true
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
@@ -6296,7 +6296,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   target_devices: []
@@ -6358,7 +6358,7 @@
       Targets Advanced] Set Variables for Iteration', '[Regression Workflow I: Iteration
       Targets Advanced] Show VRF with iteration']
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   target_devices: [Washington]
@@ -6417,7 +6417,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   source_code: "results[\"success\"] = True\r\nresults[\"result\"] = {\r\n  \"dict_iteration\"\
@@ -6497,7 +6497,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
@@ -6566,7 +6566,7 @@
       Subworkflow Iteration] Test Iteration', '[Regression Workflow J: Workflow and
       Subworkflow Iteration] Subworkflow Iteration']
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   target_devices: [Washington]
@@ -6625,7 +6625,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   source_code: "result={\"top_level\": top_level_iteration}\r\nresults[\"result\"\
@@ -6689,7 +6689,7 @@
   services: ['[Shared] Start', '[Shared] End', '[[Regression Workflow J: Workflow
       and Subworkflow Iteration] Subworkflow Iteration] Test Iteration']
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   target_devices: []
@@ -6750,7 +6750,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   source_code: "result={\"top_level\": top_level_iteration, \"subworkflow\": subworkflow_iteration}\r\
@@ -6816,7 +6816,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   source_code: "result = {}\r\nresults[\"success\"] = True\r\nresults[\"result\"]\
@@ -6881,7 +6881,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   source_code: "result = {}\r\nresults[\"success\"] = True\r\nresults[\"result\"]\
@@ -6948,7 +6948,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   source_code: "result = {}\r\nresults[\"success\"] = True\r\nresults[\"result\"]\
@@ -7012,7 +7012,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   source_code: "result = {}\r\nresults[\"success\"] = True\r\nresults[\"result\"]\
@@ -7076,7 +7076,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   source_code: "result = {}\r\nresults[\"success\"] = True\r\nresults[\"result\"]\
@@ -7140,7 +7140,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   source_code: "result = {}\r\nresults[\"success\"] = True\r\nresults[\"result\"]\
@@ -7222,7 +7222,7 @@
       and postprocessing] Preprocessing', '[Regression Workflow K: preprocessing and
       postprocessing] Service preprocessing and postprocessing']
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   superworkflow: 'Regression Workflow L: superworkflow'
@@ -7286,7 +7286,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   source_code: "result = {}\r\nresults[\"success\"] = True\r\nresults[\"result\"]\
@@ -7348,7 +7348,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   source_code: "results[\"integer\"] = 10 + integer\r\nresults[\"success\"] = False"
@@ -7408,7 +7408,7 @@
   send_notification: false
   send_notification_method: mail
   shared: true
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   target_devices: []
@@ -7472,7 +7472,7 @@
       API: call to placeholder property', '[Regression Workflow L: superworkflow]
       Post Placeholder Processing']
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   target_devices: [SanJose, SanDiego]
@@ -7545,7 +7545,7 @@
       Workflow M: Unix command & shell, ping, - jump on connect - mechanism] Validation:
       jump on server 2 from Washington']
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   target_devices: []
@@ -7608,7 +7608,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   target_devices: [Washington, LosAngeles]
@@ -7680,7 +7680,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: true
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   source_code: "#!/bin/bash\r\n# The following example shell script returns 0 for\
@@ -7756,7 +7756,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   target_devices: [Washington]
@@ -7819,7 +7819,7 @@
   services: ['[Shared] Start', '[Shared] End', '[Regression Workflow N: Topology Import
       (netbox, librenms, opennms)] OpenNMS Import']
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   target_devices: []
@@ -7885,7 +7885,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   target_devices: []
@@ -7965,7 +7965,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
@@ -8037,7 +8037,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   target_devices: [Columbus]
@@ -8116,7 +8116,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
@@ -8224,7 +8224,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
@@ -8293,7 +8293,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   target_devices: []
@@ -8352,7 +8352,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   source_code: "result = {}\r\nresults[\"success\"] = True\r\nresults[\"result\"]\
@@ -8418,7 +8418,7 @@
     '[Regression Workflow O: Scrapli] Check that TEST-VRF is configured', '[Regression
       Workflow O: Scrapli] Decommission VRF TEST-VRF']
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   target_devices: [Washington]
@@ -8483,7 +8483,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
@@ -8552,7 +8552,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
@@ -8621,7 +8621,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
@@ -8690,7 +8690,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
@@ -8775,7 +8775,7 @@
       Workflow P: large workflow (scalability)] Sleep with python 7', '[Regression
       Workflow P: large workflow (scalability)] Sleep with python 8']
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   target_devices: []
@@ -8852,7 +8852,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   target_devices: []
@@ -8923,7 +8923,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   target_devices: []
@@ -8994,7 +8994,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   target_devices: []
@@ -9065,7 +9065,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   target_devices: []
@@ -9136,7 +9136,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   target_devices: []
@@ -9219,7 +9219,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
@@ -9306,7 +9306,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
@@ -9393,7 +9393,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
@@ -9480,7 +9480,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
@@ -9567,7 +9567,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
@@ -9654,7 +9654,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
@@ -9721,7 +9721,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   source_code: "from time import sleep\r\nsleep(1)\r\n\r\nresult = {}\r\nresults[\"\
@@ -9783,7 +9783,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   source_code: "from time import sleep\r\nsleep(1)\r\n\r\nresult = {}\r\nresults[\"\
@@ -9845,7 +9845,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   source_code: "from time import sleep\r\nsleep(1)\r\n\r\nresult = {}\r\nresults[\"\
@@ -9907,7 +9907,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   source_code: "from time import sleep\r\nsleep(1)\r\n\r\nresult = {}\r\nresults[\"\
@@ -9969,7 +9969,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   source_code: "from time import sleep\r\nsleep(1)\r\n\r\nresult = {}\r\nresults[\"\
@@ -10031,7 +10031,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   source_code: "from time import sleep\r\nsleep(1)\r\n\r\nresult = {}\r\nresults[\"\
@@ -10093,7 +10093,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   source_code: "from time import sleep\r\nsleep(1)\r\n\r\nresult = {}\r\nresults[\"\
@@ -10155,7 +10155,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   source_code: "from time import sleep\r\nsleep(1)\r\n\r\nresult = {}\r\nresults[\"\
@@ -10223,7 +10223,7 @@
       with glob option', '[Regression Workflow Q: File transfer] Delete all transferred
       files', '[Regression Workflow Q: File transfer] Transfer non-existing file']
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   target_devices: [Washington]
@@ -10302,7 +10302,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
@@ -10375,7 +10375,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   source_file: /media/sf_shared/eNMS/tests/file_transfer/a.bin
@@ -10459,7 +10459,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
@@ -10533,7 +10533,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   source_file: /media/sf_shared/eNMS/tests/file_transfer/?[c|d].bi*
@@ -10615,7 +10615,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
@@ -10688,7 +10688,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   source_file: /media/test.bin
@@ -10756,7 +10756,7 @@
       services in service by service mode] Last service', '[Regression Workflow R:
       skip services in service by service mode] Skipped service']
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   target_devices: [Austin, Washington, Chicago]
@@ -10819,7 +10819,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   source_code: "# Availble variables: device, results, run\r\n# Returning state:\r\
@@ -10886,7 +10886,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   source_code: "# Availble variables: device, results, run\r\n# Returning state:\r\
@@ -10954,7 +10954,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: true
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   source_code: "# Availble variables: device, results, run\r\n# Returning state:\r\
@@ -11042,7 +11042,7 @@
       in failed and discard mode] Final service', '[Regression Workflow S: conditional
       skip query in failed and discard mode] Skip router5-7 in discard mode']
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   target_devices: [PaloAlto, Austin, Washington, router5, router6, router7]
@@ -11107,7 +11107,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: device.name == "Washington"
   skip_value: 'False'
   source_code: "# Availble variables: device, results, run\r\n# Returning state:\r\
@@ -11178,7 +11178,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   source_code: "# Availble variables: device, results, run\r\n# Returning state:\r\
@@ -11249,7 +11249,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   source_code: "# Availble variables: device, results, run\r\n# Returning state:\r\
@@ -11319,7 +11319,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   source_code: "# Availble variables: device, results, run\r\n# Returning state:\r\
@@ -11410,7 +11410,7 @@
       mechanism] Test get_neighbors function', '[Regression Workflow 4: link neighbors
       mechanism] Iterate over neighbors of workflow device']
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   target_devices: [Dallas]
@@ -11472,7 +11472,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   source_code: "def names(instances):\r\n  return {instance.name for instance in instances}\r\
@@ -11565,7 +11565,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   target_devices: []
@@ -11647,7 +11647,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
@@ -11731,7 +11731,7 @@
       encryption', '[Regression Workflow T: global variables] Show vrf with custom
       encrypted credentials']
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   target_devices: [PaloAlto, Washington]
@@ -11792,7 +11792,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   source_code: "result = {}\r\nsuccess = True\r\nresults[\"result\"] = result\r\n\r\
@@ -11861,7 +11861,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   source_code: "result = {}\r\nresults[\"success\"] = True\r\nresults[\"username\"\
@@ -11945,7 +11945,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
@@ -12015,7 +12015,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: device.name.startswith("router")
   skip_value: Discard
   source_code: "# Availble variables: device, results, run\r\n# Returning state:\r\
@@ -12101,7 +12101,7 @@
     '[Regression Workflow U: fork based on value with skip discard mode] is_alive
       endpoint 2']
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   target_devices: [Austin, Washington, Baltimore, Cincinnati, Cambridge]
@@ -12178,7 +12178,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   target_devices: []
@@ -12242,7 +12242,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: device.model != "Arista"
   skip_value: Discard
   source_code: "# Availble variables: device, results, run\r\n# Returning state:\r\
@@ -12309,7 +12309,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: device.model != "Juniper"
   skip_value: Discard
   source_code: "# Availble variables: device, results, run\r\n# Returning state:\r\
@@ -12395,7 +12395,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
@@ -12470,7 +12470,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   target_devices: []
@@ -12541,7 +12541,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: false
+  skip: {}
   skip_query: ''
   skip_value: 'True'
   target_devices: []

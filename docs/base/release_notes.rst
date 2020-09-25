@@ -31,6 +31,8 @@ visualization/geographical_view and visualization/logical_view
 Add "groups" property to user and add "creator" property for pools, devices and links.
 - Fork based on string value instead of just True / False: new discard mode for the skip mechanism. When using discard,
 devices do not follow any edge after the skipped service.
+- Refactor skip property so that it is no longer a property of the service to avoid side effect of skipping shared services.
+In the migration files, the skip property must be removed: it will not be migrated.
 
 Version 3.22.4
 --------------

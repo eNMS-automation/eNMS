@@ -915,7 +915,7 @@ function getWorkflowState(periodic, notification) {
       },
     });
   }
-  //if (periodic) setTimeout(() => getWorkflowState(true), 4000);
+  if (periodic) setTimeout(() => getWorkflowState(true), 4000);
   if (notification) notify("Workflow refreshed.", "success", 5);
 }
 

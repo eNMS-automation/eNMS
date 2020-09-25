@@ -87,10 +87,9 @@
 - {color: green, destination: '[Shared] NAPALM: Get interfaces', label: success, source: '[Shared]
     Start', subtype: success, type: workflow_edge, workflow: 'Regression Workflow
     3: Napalm getters (postprocessing)'}
-- {color: "\u0432\u0444\u0430\u044B\u043A", destination: '[Shared] REST API: call
-    *is_alive* endpoint', label: failure, source: '[Shared] Netmiko: Check VRF (test)
-    does not exist', subtype: failure, type: workflow_edge, workflow: 'Regression
-    Workflow 2: Separate Failure - Success paths'}
+- {color: red, destination: '[Shared] REST API: call *is_alive* endpoint', label: failure,
+  source: '[Shared] Netmiko: Check VRF (test) does not exist', subtype: failure, type: workflow_edge,
+  workflow: 'Regression Workflow 2: Separate Failure - Success paths'}
 - {color: green, destination: '[Shared] Netmiko: Check VRF (test) does not exist',
   label: success, source: '[Shared] Start', subtype: success, type: workflow_edge,
   workflow: 'Regression Workflow 2: Separate Failure - Success paths'}

@@ -29,6 +29,8 @@ visualization/geographical_view and visualization/logical_view
 - Change syntax of many to many relationship in database.json
 - Refactor rbac system to use pools extension to user and services to define user access. Remove "group" model.
 Add "groups" property to user and add "creator" property for pools, devices and links.
+- Fork based on string value instead of just True / False: new discard mode for the skip mechanism. When using discard,
+devices do not follow any edge after the skipped service.
 
 Version 3.22.4
 --------------

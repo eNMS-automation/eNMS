@@ -497,7 +497,7 @@ class AutomationController(BaseController):
         workflow = db.fetch("workflow", id=workflow_id)
         skip = not all(service.skip for service in services)
         for service in services:
-            service.skip = skip
+            service.skip[workflow.name] = skip
         workflow.last_modified = self.get_time()
         return {
             "skip": "skip" if skip else "unskip",

@@ -434,7 +434,7 @@ function skipServices() {
       workflow.last_modified = result.update_time;
       workflow.services.forEach((service) => {
         if (selectedNodes.includes(service.id)) {
-          service.skip = result.skip === "skip";
+          service.skip[workflow.name] = result.skip === "skip";
           nodes.update({
             id: service.id,
             color: result.skip === "skip" ? "#D3D3D3" : "#D2E5FF",
@@ -885,7 +885,7 @@ function resetDisplay() {
       nodeUpdates.push({
         id: service.id,
         label: getServiceLabel(service),
-        color: service.skip ? "#D3D3D3" : "#D2E5FF",
+        color: service.skip[workflow.name] ? "#D3D3D3" : "#D2E5FF",
       });
     }
   });

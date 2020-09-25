@@ -100,7 +100,7 @@ class Service(AbstractBase):
     mail_recipient = db.Column(db.SmallString)
     reply_to = db.Column(db.SmallString)
     initial_payload = db.Column(db.Dict)
-    skip = db.Column(Boolean, default=False)
+    skip = db.Column(db.Dict)
     skip_query = db.Column(db.LargeString)
     skip_value = db.Column(db.SmallString, default="True")
     iteration_values = db.Column(db.LargeString)
@@ -808,10 +808,10 @@ class Run(AbstractBase):
     def get_results(self, payload, device=None, commit=True):
         self.log("info", "STARTING", device)
         start = datetime.now().replace(microsecond=0)
-        skip_service = False
-        if self.skip_query:
+        skip_service = self.skip.get(self.workflow_name)
+        if not skip_service and self.skip_query:
             skip_service = self.eval(self.skip_query, **locals())[0]
-        if skip_service or self.skip:
+        if skip_service:
             if device:
                 self.write_state("progress/device/skipped", 1, "increment")
             if self.skip_value == "Discard":

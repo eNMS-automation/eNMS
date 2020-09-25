@@ -228,18 +228,6 @@
                   {{ form.preprocessing(id=form_type + '-preprocessing',
                   class="form-control add-id") }}
                 </div>
-                <fieldset>
-                  <div class="item">
-                    <input
-                      id="{{ form_type }}-skip"
-                      name="skip"
-                      class="readonly-when-run add-id"
-                      type="checkbox"
-                      value="y"
-                    />
-                    {{ form.skip.label() }}
-                  </div>
-                </fieldset>
                 {{ form.skip_query.label(help="common/skip_query") }}
                 <div class="form-group">
                   {{ form.skip_query(id=form_type + '-skip_query', class="form-control

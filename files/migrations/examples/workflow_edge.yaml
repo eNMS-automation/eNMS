@@ -853,11 +853,52 @@
     fork based on value with skip discard mode] REST API: call *is_alive* endpoint',
   subtype: success, type: workflow_edge, workflow: 'Regression Workflow U: fork based
     on value with skip discard mode'}
+- {color: green, destination: '[Regression Workflow U: fork based on value with skip
+    discard mode] Show VRF', label: success, source: '[Regression Workflow U: fork
+    based on value with skip discard mode] Arista devices', subtype: success, type: workflow_edge,
+  workflow: 'Regression Workflow U: fork based on value with skip discard mode'}
+- {color: red, destination: '[Regression Workflow U: fork based on value with skip
+    discard mode] is_alive endpoint', label: failure, source: '[Regression Workflow
+    U: fork based on value with skip discard mode] Arista devices', subtype: failure,
+  type: workflow_edge, workflow: 'Regression Workflow U: fork based on value with
+    skip discard mode'}
+- {color: red, destination: '[Shared] End', label: failure, source: '[Regression Workflow
+    U: fork based on value with skip discard mode] is_alive endpoint', subtype: failure,
+  type: workflow_edge, workflow: 'Regression Workflow U: fork based on value with
+    skip discard mode'}
+- {color: red, destination: '[Shared] End', label: failure, source: '[Regression Workflow
+    U: fork based on value with skip discard mode] Show VRF', subtype: failure, type: workflow_edge,
+  workflow: 'Regression Workflow U: fork based on value with skip discard mode'}
 - {color: green, destination: '[Shared] End', label: success, source: '[Regression
-    Workflow U: fork based on value with skip discard mode] Juniper devices', subtype: success,
+    Workflow U: fork based on value with skip discard mode] Show VRF', subtype: success,
   type: workflow_edge, workflow: 'Regression Workflow U: fork based on value with
     skip discard mode'}
 - {color: green, destination: '[Shared] End', label: success, source: '[Regression
-    Workflow U: fork based on value with skip discard mode] Arista devices', subtype: success,
+    Workflow U: fork based on value with skip discard mode] is_alive endpoint', subtype: success,
+  type: workflow_edge, workflow: 'Regression Workflow U: fork based on value with
+    skip discard mode'}
+- {color: green, destination: '[Regression Workflow U: fork based on value with skip
+    discard mode] Show VRF 2', label: success, source: '[Regression Workflow U: fork
+    based on value with skip discard mode] Juniper devices', subtype: success, type: workflow_edge,
+  workflow: 'Regression Workflow U: fork based on value with skip discard mode'}
+- {color: green, destination: '[Shared] End', label: success, source: '[Regression
+    Workflow U: fork based on value with skip discard mode] Show VRF 2', subtype: success,
+  type: workflow_edge, workflow: 'Regression Workflow U: fork based on value with
+    skip discard mode'}
+- {color: green, destination: '[Shared] End', label: success, source: '[Regression
+    Workflow U: fork based on value with skip discard mode] is_alive endpoint 2',
+  subtype: success, type: workflow_edge, workflow: 'Regression Workflow U: fork based
+    on value with skip discard mode'}
+- {color: red, destination: '[Regression Workflow U: fork based on value with skip
+    discard mode] is_alive endpoint 2', label: failure, source: '[Regression Workflow
+    U: fork based on value with skip discard mode] Juniper devices', subtype: failure,
+  type: workflow_edge, workflow: 'Regression Workflow U: fork based on value with
+    skip discard mode'}
+- {color: red, destination: '[Shared] End', label: failure, source: '[Regression Workflow
+    U: fork based on value with skip discard mode] is_alive endpoint 2', subtype: failure,
+  type: workflow_edge, workflow: 'Regression Workflow U: fork based on value with
+    skip discard mode'}
+- {color: red, destination: '[Shared] End', label: failure, source: '[Regression Workflow
+    U: fork based on value with skip discard mode] Show VRF 2', subtype: failure,
   type: workflow_edge, workflow: 'Regression Workflow U: fork based on value with
     skip discard mode'}

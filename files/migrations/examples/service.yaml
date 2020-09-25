@@ -78,7 +78,7 @@
     'Regression Workflow S: conditional skip query with skip value set to False': *id003
     'Regression Workflow T: global variables': [-277, -147]
     'Regression Workflow T: link neighbors mechanism': *id002
-    'Regression Workflow U: fork based on value with skip discard mode': [-349, 56]
+    'Regression Workflow U: fork based on value with skip discard mode': [-427, -187]
     'Regression workflow P: large workflow (scalability)': *id004
     Subworkflow 1: !!python/tuple [0, 0]
     Subworkflow 2: !!python/tuple [0, 0]
@@ -222,7 +222,7 @@
     'Regression Workflow S: conditional skip query with skip value set to False': *id008
     'Regression Workflow T: global variables': [569, -66]
     'Regression Workflow T: link neighbors mechanism': *id007
-    'Regression Workflow U: fork based on value with skip discard mode': [623, 55]
+    'Regression Workflow U: fork based on value with skip discard mode': [642, 158]
     'Regression workflow P: large workflow (scalability)': *id009
     Subworkflow 1: !!python/tuple [0, 0]
     Subworkflow 2: !!python/tuple [0, 0]
@@ -12057,14 +12057,15 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels:
-    f7e45ba4-f035-4712-a246-d8035c45b9f7:
+    2d556ef0-7090-42ef-936d-cbe0da45ff4c:
       alignment: left
       content: "This workflow runs on 5 devices:\r\n* 2 with model \"Arista\": Washington,\
         \ Austin\r\n* 3 with model \"Juniper\": Baltimore, Cambridge, Cincinnati\r\
         \nThe devices will take different success based on their model,\r\nusing the\
-        \ \"Discard\" option of the skip mechanism."
-      positions: [213, -131]
-  last_modified: '2020-09-24 07:55:08.158923'
+        \ \"Discard\" option of the skip mechanism.\r\nTo be tested both in\r\n- device\
+        \ by device mode\r\n- service by service with workflow targets mode"
+      positions: [28, 8]
+  last_modified: '2020-09-25 04:29:47.316996'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -12076,7 +12077,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: [All objects]
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -12091,7 +12092,12 @@
   services: ['[Shared] Start', '[Shared] End', '[Regression Workflow U: fork based
       on value with skip discard mode] REST API: call *is_alive* endpoint', '[Regression
       Workflow U: fork based on value with skip discard mode] Arista devices', '[Regression
-      Workflow U: fork based on value with skip discard mode] Juniper devices']
+      Workflow U: fork based on value with skip discard mode] Juniper devices', '[Regression
+      Workflow U: fork based on value with skip discard mode] Show VRF', '[Regression
+      Workflow U: fork based on value with skip discard mode] is_alive endpoint',
+    '[Regression Workflow U: fork based on value with skip discard mode] Show VRF
+      2', '[Regression Workflow U: fork based on value with skip discard mode] is_alive
+      endpoint 2']
   shared: false
   skip: false
   skip_query: ''
@@ -12147,7 +12153,7 @@
   payload:
     a: b
     c: ['1', '2', '3']
-  pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow 2: Separate Failure - Success paths': [374, 278]
     'Regression Workflow 3: Napalm getters (postprocessing)': ['-50', '0']
@@ -12156,7 +12162,7 @@
     'Regression Workflow D: Prompts': [405, -103]
     'Regression Workflow L: superworkflow': [162, -126]
     'Regression Workflow P: large workflow (scalability)': &id045 [-415, -115]
-    'Regression Workflow U: fork based on value with skip discard mode': [-237, -103]
+    'Regression Workflow U: fork based on value with skip discard mode': [-340, -81]
     'Regression workflow P: large workflow (scalability)': *id045
   postprocessing: ''
   postprocessing_mode: always
@@ -12220,9 +12226,9 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: [All objects]
   positions:
-    'Regression Workflow U: fork based on value with skip discard mode': [94, -14]
+    'Regression Workflow U: fork based on value with skip discard mode': [-40, -168]
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -12287,9 +12293,9 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: [All objects]
   positions:
-    'Regression Workflow U: fork based on value with skip discard mode': [-113, 130]
+    'Regression Workflow U: fork based on value with skip discard mode': [-351, 186]
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -12318,4 +12324,320 @@
   validation_condition: success
   validation_method: none
   vendor: ''
+  waiting_time: 0
+- auto_find_prompt: true
+  close_connection: false
+  command: show vrf
+  completion_time: 1
+  config_mode: false
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credentials: device
+  custom_username: ''
+  definition: Definition
+  delay_factor: 1.0
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  driver: a10
+  enable_mode: true
+  events: []
+  exit_command: exit
+  expect_password_prompt: password
+  expect_prompt: admin.*$
+  expect_string: ''
+  expect_username_prompt: 'username:'
+  fast_cli: false
+  global_delay_factor: 1.0
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  jump_command: ssh jump_server_IP
+  jump_on_connect: false
+  jump_username: ''
+  last_modified: '2020-09-25 04:28:01.307849'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Regression Workflow U: fork based on value with skip discard mode] Show
+    VRF'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions:
+    'Regression Workflow U: fork based on value with skip discard mode': [345, -162]
+  postprocessing: ''
+  postprocessing_mode: always
+  preprocessing: ''
+  public: false
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: Show VRF
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: false
+  skip_query: ''
+  skip_value: 'True'
+  start_new_connection: false
+  strip_command: true
+  strip_prompt: true
+  target_devices: []
+  target_pools: []
+  time_between_retries: 10
+  timeout: 10.0
+  type: netmiko_validation_service
+  update_pools: false
+  use_device_driver: true
+  use_genie: false
+  use_host_keys: false
+  validation_condition: success
+  validation_method: none
+  vendor: ''
+  waiting_time: 0
+- call_type: GET
+  completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: text
+  creator: admin
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: Use REST call is_alive
+  device_query: ''
+  device_query_property: ip_address
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: true
+  events: []
+  headers: {}
+  impacting: true
+  include_device_results: true
+  include_link_in_summary: true
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: ip_address
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2020-09-25 04:28:32.441780'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 5
+  maximum_runs: 1
+  multiprocessing: true
+  name: '[Regression Workflow U: fork based on value with skip discard mode] is_alive
+    endpoint'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  params: {verify: 'false'}
+  payload:
+    a: b
+    c: ['1', '2', '3']
+  pools: []
+  positions:
+    'Regression Workflow U: fork based on value with skip discard mode': [338, -47]
+  postprocessing: ''
+  postprocessing_mode: always
+  preprocessing: ''
+  public: true
+  reply_to: ''
+  reserved: false
+  rest_url: http://127.0.0.1:5000/rest/is_alive
+  run_method: per_device
+  scoped_name: is_alive endpoint
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: false
+  skip_query: ''
+  skip_value: 'True'
+  target_devices: []
+  target_pools: []
+  time_between_retries: 10
+  timeout: 15
+  type: rest_call_service
+  update_pools: false
+  username: admin
+  validation_condition: success
+  validation_method: text
+  vendor: ''
+  verify_ssl_certificate: true
+  waiting_time: 0
+- auto_find_prompt: true
+  close_connection: false
+  command: show vrf
+  completion_time: 1
+  config_mode: false
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credentials: device
+  custom_username: ''
+  definition: Definition
+  delay_factor: 1.0
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  driver: a10
+  enable_mode: true
+  events: []
+  exit_command: exit
+  expect_password_prompt: password
+  expect_prompt: admin.*$
+  expect_string: ''
+  expect_username_prompt: 'username:'
+  fast_cli: false
+  global_delay_factor: 1.0
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  jump_command: ssh jump_server_IP
+  jump_on_connect: false
+  jump_username: ''
+  last_modified: '2020-09-25 04:28:57.654157'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Regression Workflow U: fork based on value with skip discard mode] Show
+    VRF 2'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions:
+    'Regression Workflow U: fork based on value with skip discard mode': [-107, 142]
+  postprocessing: ''
+  postprocessing_mode: always
+  preprocessing: ''
+  public: false
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: Show VRF 2
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: false
+  skip_query: ''
+  skip_value: 'True'
+  start_new_connection: false
+  strip_command: true
+  strip_prompt: true
+  target_devices: []
+  target_pools: []
+  time_between_retries: 10
+  timeout: 10.0
+  type: netmiko_validation_service
+  update_pools: false
+  use_device_driver: true
+  use_genie: false
+  use_host_keys: false
+  validation_condition: success
+  validation_method: none
+  vendor: ''
+  waiting_time: 0
+- call_type: GET
+  completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: text
+  creator: admin
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: Use REST call is_alive
+  device_query: ''
+  device_query_property: ip_address
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: true
+  events: []
+  headers: {}
+  impacting: true
+  include_device_results: true
+  include_link_in_summary: true
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: ip_address
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2020-09-25 04:29:12.592558'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 5
+  maximum_runs: 1
+  multiprocessing: true
+  name: '[Regression Workflow U: fork based on value with skip discard mode] is_alive
+    endpoint 2'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  params: {verify: 'false'}
+  payload:
+    a: b
+    c: ['1', '2', '3']
+  pools: []
+  positions:
+    'Regression Workflow U: fork based on value with skip discard mode': [-103, 258]
+  postprocessing: ''
+  postprocessing_mode: always
+  preprocessing: ''
+  public: true
+  reply_to: ''
+  reserved: false
+  rest_url: http://127.0.0.1:5000/rest/is_alive
+  run_method: per_device
+  scoped_name: is_alive endpoint 2
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: false
+  skip_query: ''
+  skip_value: 'True'
+  target_devices: []
+  target_pools: []
+  time_between_retries: 10
+  timeout: 15
+  type: rest_call_service
+  update_pools: false
+  username: admin
+  validation_condition: success
+  validation_method: text
+  vendor: ''
+  verify_ssl_certificate: true
   waiting_time: 0

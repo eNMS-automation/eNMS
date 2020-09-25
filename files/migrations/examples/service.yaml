@@ -476,7 +476,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: {}
+  skip: {'Regression Workflow C: Advanced multiprocessing': true}
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
@@ -548,7 +548,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: {}
+  skip: {'Regression Workflow 9: Operational Data Backup': true}
   skip_query: ''
   skip_value: 'True'
   start_new_connection: false
@@ -3787,7 +3787,7 @@
       content: "This workflow calls netmiko and napalm backup services.\r\nThe devices\
         \ must be defined in the service, not in the workflow."
       positions: [-280, 128]
-  last_modified: '2020-06-01 09:52:30.460325'
+  last_modified: '2020-09-25 12:32:56.853893'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -4751,7 +4751,7 @@
     d36009d8-ce3a-4ce6-8766-5dc3241d777b:
       content: The service "Napalm configure BGP" is configured to be skipped.
       positions: [329, -230]
-  last_modified: '2020-09-24 04:10:35.842638'
+  last_modified: '2020-09-25 12:32:46.011016'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -10727,7 +10727,7 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels: {}
-  last_modified: '2020-08-03 12:05:01.889086'
+  last_modified: '2020-09-25 12:33:43.778754'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -10954,7 +10954,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: {}
+  skip: {'Regression Workflow R: skip services in service by service mode': true}
   skip_query: ''
   skip_value: 'True'
   source_code: "# Availble variables: device, results, run\r\n# Returning state:\r\

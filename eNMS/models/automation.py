@@ -812,11 +812,10 @@ class Run(AbstractBase):
         if self.skip_query:
             skip_service = self.eval(self.skip_query, **locals())[0]
         if skip_service or self.skip:
-            if self.skip_value == "Discard":
-                self.write_state("progress/device/skipped", 1, "increment")
-                return
             if device:
                 self.write_state("progress/device/skipped", 1, "increment")
+            if self.skip_value == "Discard":
+                return
             results = {
                 "result": "skipped",
                 "duration": "0:00:00",

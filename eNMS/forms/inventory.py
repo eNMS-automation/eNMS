@@ -22,6 +22,7 @@ def configure_pool_form(cls):
         for property in app.properties["filtering"][model]:
             match_field = f"{model}_{property}_match"
             setattr(cls, f"{model}_{property}", StringField(property))
+            setattr(cls, f"{model}_{property}_invert", BooleanField(property))
             setattr(
                 cls,
                 match_field,

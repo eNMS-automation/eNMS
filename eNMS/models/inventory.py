@@ -266,6 +266,7 @@ def set_pool_properties(Pool):
                 f"{model}_{property}_match",
                 db.Column(db.SmallString, default="inclusion"),
             )
+            setattr(Pool, f"{model}_{property}_invert", db.Column(Boolean))
         setattr(
             Pool,
             f"{model}s",

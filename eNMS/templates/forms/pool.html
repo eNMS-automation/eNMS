@@ -58,6 +58,7 @@
             <th>Property</th>
             <th>Value</th>
             <th style="width: 25%;">Match</th>
+            <th style="width: 5%;">Invert</th>
           </tr>
         </thead>
         <tbody>
@@ -73,6 +74,10 @@
             </td>
             <td>
               {{ form[property_name + '_match'](id="pool-" + property_name + '_match',
+              class="form-control add-id") }}
+            </td>
+            <td>
+              {{ form[property_name + '_invert'](id="pool-" + property_name + '_invert',
               class="form-control add-id") }}
             </td>
           </tr>

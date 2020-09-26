@@ -91,6 +91,7 @@ class Service(AbstractBase):
         backref="children",
     )
     update_target_pools = db.Column(Boolean, default=False)
+    update_pools_after_running = db.Column(Boolean, default=False)
     send_notification = db.Column(Boolean, default=False)
     send_notification_method = db.Column(db.SmallString, default="mail")
     notification_header = db.Column(db.LargeString)

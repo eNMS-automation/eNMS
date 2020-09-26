@@ -189,6 +189,18 @@
                     <label>Disable Result Creation</label>
                   </div>
                 </fieldset>
+                <fieldset>
+                  <div class="item">
+                    <input
+                      id="{{ form_type }}-update_pools_after_running"
+                      name="update_pools_after_running"
+                      type="checkbox"
+                      class="add-id"
+                      value="y"
+                    />
+                    <label>Update pools after running</label>
+                  </div>
+                </fieldset>
               </div>
             </div>
           </div>
@@ -456,7 +468,7 @@
                       class="add-id"
                       value="y"
                     />
-                    <label>Update pools before running</label>
+                    <label>Update target pools before running</label>
                   </div>
                 </fieldset>
                 <label>Device Query (define targets from a python query)</label>
@@ -713,7 +725,7 @@
               aria-controls="collapse-step4-3"
             >
               <h4 class="panel-title" style="color: #000;">
-                Notification
+                Notifications
               </h4>
             </a>
             <div

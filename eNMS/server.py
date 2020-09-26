@@ -221,9 +221,7 @@ class Server(Flask):
                 except Exception as exc:
                     log = f"Authentication error for user '{username}' ({exc})"
                 finally:
-                    log_level = "info" if success else "warning"
-                    app.log(log_level, log, logger="security", commit=True)
-                    db.session.commit()
+                    app.log("info" if success else "warning", log, logger="security")
                     if success:
                         return redirect(url_for("blueprint.route", page="dashboard"))
                     else:
@@ -251,7 +249,7 @@ class Server(Flask):
         @self.monitor_requests
         def logout():
             logout_log = f"User '{current_user.name}' logging out"
-            app.log("info", logout_log, logger="security", commit=True)
+            app.log("info", logout_log, logger="security")
             logout_user()
             return redirect(url_for("blueprint.route", page="login"))
 

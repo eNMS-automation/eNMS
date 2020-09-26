@@ -77,8 +77,10 @@
               class="form-control add-id") }}
             </td>
             <td>
-              {{ form[property_name + '_invert'](id="pool-" + property_name + '_invert',
-              class="form-control add-id") }}
+              <center>
+                  {{ form[property_name + '_invert'](id="pool-" + property_name + '_invert',
+              class="form-control add-id", style="width: 30px; height: 25px") }}
+              </center>
             </td>
           </tr>
           {% endfor %}

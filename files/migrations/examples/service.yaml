@@ -3822,6 +3822,7 @@
   device_query: ''
   device_query_property: ip_address
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: true
   events: []
   impacting: true
@@ -3837,7 +3838,7 @@
       content: "This workflow calls netmiko and napalm backup services.\r\nThe devices\
         \ must be defined in the service, not in the workflow."
       positions: [-280, 128]
-  last_modified: '2020-09-25 12:32:56.853893'
+  last_modified: '2020-09-26 04:13:28.510593'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -3855,6 +3856,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   reply_to: ''
   reserved: false
   run_method: per_service_with_workflow_targets
@@ -3874,7 +3876,7 @@
   target_pools: []
   time_between_retries: 10
   type: workflow
-  update_pools_after_running: false
+  update_pools_after_running: true
   update_target_pools: false
   validation_condition: success
   validation_method: none

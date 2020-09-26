@@ -316,9 +316,11 @@ class BaseController:
                 **{
                     "severity": severity,
                     "content": content,
-                    "user": user or getattr(current_user, "name", "admin"),
+                    "user": user or getattr(current_user, "name", ""),
                 },
             )
+        if commit:
+            db.session.commit()
         return logger_settings
 
     def count_models(self):

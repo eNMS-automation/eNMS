@@ -810,20 +810,24 @@
     Service', label: success, source: '[Regression Workflow D: Prompts] Check VRF
     (NOVRF) exists', subtype: success, type: workflow_edge, workflow: 'Regression
     Workflow D: Prompts'}
-- {color: green, destination: '[Regression Workflow T: global variables] Functions
-    fetch and fetch_all', label: success, source: '[Shared] Start', subtype: success,
-  type: workflow_edge, workflow: 'Regression Workflow T: global variables'}
-- {color: green, destination: '[Regression Workflow T: global variables] Credentials
-    encryption', label: success, source: '[Regression Workflow T: global variables]
-    Functions fetch and fetch_all', subtype: success, type: workflow_edge, workflow: 'Regression
-    Workflow T: global variables'}
-- {color: green, destination: '[Regression Workflow T: global variables] Show vrf
-    with custom encrypted credentials', label: success, source: '[Regression Workflow
-    T: global variables] Credentials encryption', subtype: success, type: workflow_edge,
-  workflow: 'Regression Workflow T: global variables'}
+- {color: green, destination: '[Regression Workflow T: global variables and post-run
+    pool update] Functions fetch and fetch_all', label: success, source: '[Shared]
+    Start', subtype: success, type: workflow_edge, workflow: 'Regression Workflow
+    T: global variables and post-run pool update'}
+- {color: green, destination: '[Regression Workflow T: global variables and post-run
+    pool update] Credentials encryption', label: success, source: '[Regression Workflow
+    T: global variables and post-run pool update] Functions fetch and fetch_all',
+  subtype: success, type: workflow_edge, workflow: 'Regression Workflow T: global
+    variables and post-run pool update'}
+- {color: green, destination: '[Regression Workflow T: global variables and post-run
+    pool update] Show vrf with custom encrypted credentials', label: success, source: '[Regression
+    Workflow T: global variables and post-run pool update] Credentials encryption',
+  subtype: success, type: workflow_edge, workflow: 'Regression Workflow T: global
+    variables and post-run pool update'}
 - {color: green, destination: '[Shared] End', label: success, source: '[Regression
-    Workflow T: global variables] Show vrf with custom encrypted credentials', subtype: success,
-  type: workflow_edge, workflow: 'Regression Workflow T: global variables'}
+    Workflow T: global variables and post-run pool update] Show vrf with custom encrypted
+    credentials', subtype: success, type: workflow_edge, workflow: 'Regression Workflow
+    T: global variables and post-run pool update'}
 - {color: green, destination: '[Regression Workflow S: conditional skip query in failed
     and discard mode] Skip router5-7 in discard mode', label: success, source: '[Shared]
     Start', subtype: success, type: workflow_edge, workflow: 'Regression Workflow

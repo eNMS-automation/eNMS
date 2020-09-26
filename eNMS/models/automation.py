@@ -90,7 +90,7 @@ class Service(AbstractBase):
         secondaryjoin=id == db.originals_association.c.child_id,
         backref="children",
     )
-    update_pools = db.Column(Boolean, default=False)
+    update_target_pools = db.Column(Boolean, default=False)
     send_notification = db.Column(Boolean, default=False)
     send_notification_method = db.Column(db.SmallString, default="mail")
     notification_header = db.Column(db.LargeString)
@@ -506,7 +506,7 @@ class Run(AbstractBase):
                 )
             devices |= set(service.target_devices)
             for pool in service.target_pools:
-                if self.update_pools:
+                if self.update_target_pools:
                     pool.compute_pool()
                 devices |= set(pool.devices)
         return list(devices)

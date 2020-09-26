@@ -137,7 +137,7 @@
   target_pools: []
   time_between_retries: 10
   type: swiss_army_knife_service
-  update_pools: false
+  update_target_pools: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -284,7 +284,7 @@
   target_pools: []
   time_between_retries: 10
   type: swiss_army_knife_service
-  update_pools: false
+  update_target_pools: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -341,7 +341,7 @@
   target_pools: []
   time_between_retries: 10
   type: swiss_army_knife_service
-  update_pools: false
+  update_target_pools: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -415,7 +415,7 @@
   target_pools: []
   time_between_retries: 10
   type: example_service
-  update_pools: false
+  update_target_pools: false
   url: https://www.google.fr/
   validation_condition: success
   validation_method: none
@@ -484,7 +484,7 @@
   target_pools: []
   time_between_retries: 10
   type: configure_bgp_service
-  update_pools: false
+  update_target_pools: false
   use_host_keys: false
   validation_condition: success
   validation_method: none
@@ -557,7 +557,7 @@
   time_between_retries: 10
   timeout: 60
   type: napalm_backup_service
-  update_pools: false
+  update_target_pools: false
   use_device_driver: true
   use_host_keys: false
   validation_condition: success
@@ -636,7 +636,7 @@
   time_between_retries: 10
   timeout: 3
   type: netmiko_configuration_service
-  update_pools: false
+  update_target_pools: false
   use_device_driver: true
   use_host_keys: false
   validation_condition: success
@@ -726,7 +726,7 @@
   time_between_retries: 10
   timeout: 3.0
   type: netmiko_validation_service
-  update_pools: false
+  update_target_pools: false
   use_device_driver: true
   use_genie: false
   use_host_keys: false
@@ -807,7 +807,7 @@
   time_between_retries: 10
   timeout: 3
   type: netmiko_configuration_service
-  update_pools: false
+  update_target_pools: false
   use_device_driver: true
   use_host_keys: false
   validation_condition: success
@@ -895,7 +895,7 @@
   time_between_retries: 1
   timeout: 3.0
   type: netmiko_validation_service
-  update_pools: false
+  update_target_pools: false
   use_device_driver: true
   use_genie: false
   use_host_keys: false
@@ -967,7 +967,7 @@
   time_between_retries: 10
   timeout: 10
   type: napalm_configuration_service
-  update_pools: false
+  update_target_pools: false
   use_device_driver: true
   use_host_keys: false
   validation_condition: success
@@ -1042,7 +1042,7 @@
   time_between_retries: 10
   timeout: 15
   type: rest_call_service
-  update_pools: false
+  update_target_pools: false
   username: admin
   validation_condition: success
   validation_method: text
@@ -1113,7 +1113,7 @@
   time_between_retries: 10
   timeout: 1
   type: napalm_getters_service
-  update_pools: false
+  update_target_pools: false
   use_device_driver: true
   use_host_keys: false
   validation_condition: success
@@ -1183,7 +1183,7 @@
   time_between_retries: 10
   timeout: 1
   type: napalm_getters_service
-  update_pools: false
+  update_target_pools: false
   use_device_driver: true
   use_host_keys: false
   validation_condition: success
@@ -1255,7 +1255,7 @@
   time_between_retries: 10
   timeout: 60
   type: napalm_getters_service
-  update_pools: false
+  update_target_pools: false
   use_device_driver: true
   use_host_keys: false
   validation_condition: success
@@ -1324,7 +1324,7 @@
   time_between_retries: 10
   timeout: 60
   type: napalm_getters_service
-  update_pools: false
+  update_target_pools: false
   use_device_driver: true
   use_host_keys: false
   validation_condition: success
@@ -1385,7 +1385,7 @@
   target_pools: []
   time_between_retries: 10
   type: swiss_army_knife_service
-  update_pools: false
+  update_target_pools: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -1452,7 +1452,7 @@
   target_pools: []
   time_between_retries: 10
   type: python_snippet_service
-  update_pools: false
+  update_target_pools: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -1537,7 +1537,7 @@
   time_between_retries: 10
   timeout: 3.0
   type: netmiko_validation_service
-  update_pools: false
+  update_target_pools: false
   use_device_driver: true
   use_genie: false
   use_host_keys: false
@@ -1619,7 +1619,7 @@
   target_pools: []
   time_between_retries: 10
   type: payload_extraction_service
-  update_pools: false
+  update_target_pools: false
   validation_condition: success
   validation_method: none
   variable1: simple_variable
@@ -1689,7 +1689,7 @@
   time_between_retries: 10
   timeout: 60
   type: napalm_rollback_service
-  update_pools: false
+  update_target_pools: false
   use_device_driver: true
   use_host_keys: false
   validation_condition: success
@@ -1776,7 +1776,7 @@
   time_between_retries: 10
   timeout: 10.0
   type: netmiko_validation_service
-  update_pools: false
+  update_target_pools: false
   use_device_driver: true
   use_genie: false
   use_host_keys: false
@@ -1863,7 +1863,7 @@
   time_between_retries: 10
   timeout: 10.0
   type: netmiko_validation_service
-  update_pools: false
+  update_target_pools: false
   use_device_driver: true
   use_genie: false
   use_host_keys: false
@@ -1950,7 +1950,7 @@
   time_between_retries: 10
   timeout: 10
   type: netmiko_prompts_service
-  update_pools: false
+  update_target_pools: false
   use_device_driver: true
   use_host_keys: false
   validation_condition: success
@@ -2036,7 +2036,7 @@
   time_between_retries: 10
   timeout: 10
   type: netmiko_prompts_service
-  update_pools: false
+  update_target_pools: false
   use_device_driver: true
   use_host_keys: false
   validation_condition: success
@@ -2099,7 +2099,7 @@
   target_pools: []
   time_between_retries: 10
   type: python_snippet_service
-  update_pools: false
+  update_target_pools: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -2163,7 +2163,7 @@
   target_pools: []
   time_between_retries: 10
   type: python_snippet_service
-  update_pools: false
+  update_target_pools: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -2245,7 +2245,7 @@
   time_between_retries: 10
   timeout: 1.0
   type: netmiko_validation_service
-  update_pools: false
+  update_target_pools: false
   use_device_driver: true
   use_genie: false
   use_host_keys: false
@@ -2330,7 +2330,7 @@
   time_between_retries: 10
   timeout: 10.0
   type: netmiko_validation_service
-  update_pools: false
+  update_target_pools: false
   use_device_driver: true
   use_genie: false
   use_host_keys: false
@@ -2415,7 +2415,7 @@
   time_between_retries: 10
   timeout: 10.0
   type: netmiko_validation_service
-  update_pools: false
+  update_target_pools: false
   use_device_driver: true
   use_genie: false
   use_host_keys: false
@@ -2489,7 +2489,7 @@
   time_between_retries: 10
   timeout: 1
   type: napalm_getters_service
-  update_pools: false
+  update_target_pools: false
   use_device_driver: true
   use_host_keys: false
   validation_condition: success
@@ -2561,7 +2561,7 @@
   time_between_retries: 10
   timeout: 60
   type: napalm_getters_service
-  update_pools: false
+  update_target_pools: false
   use_device_driver: true
   use_host_keys: false
   validation_condition: success
@@ -2635,7 +2635,7 @@
   time_between_retries: 10
   timeout: 60
   type: napalm_getters_service
-  update_pools: false
+  update_target_pools: false
   use_device_driver: true
   use_host_keys: false
   validation_condition: success
@@ -2707,7 +2707,7 @@
   time_between_retries: 10
   timeout: 60
   type: napalm_getters_service
-  update_pools: false
+  update_target_pools: false
   use_device_driver: true
   use_host_keys: false
   validation_condition: success
@@ -2779,7 +2779,7 @@
   time_between_retries: 10
   timeout: 60
   type: napalm_getters_service
-  update_pools: false
+  update_target_pools: false
   use_device_driver: true
   use_host_keys: false
   validation_condition: success
@@ -2845,7 +2845,7 @@
   target_pools: []
   time_between_retries: 10
   type: ansible_playbook_service
-  update_pools: false
+  update_target_pools: false
   validation_condition: success
   validation_method: dict_included
   vendor: ''
@@ -2908,7 +2908,7 @@
   target_pools: []
   time_between_retries: 10
   type: ansible_playbook_service
-  update_pools: false
+  update_target_pools: false
   validation_condition: success
   validation_method: text
   vendor: ''
@@ -2971,7 +2971,7 @@
   target_pools: []
   time_between_retries: 10
   type: ansible_playbook_service
-  update_pools: false
+  update_target_pools: false
   validation_condition: success
   validation_method: dict_included
   vendor: ''
@@ -3053,7 +3053,7 @@
   time_between_retries: 10
   timeout: 10.0
   type: netmiko_validation_service
-  update_pools: false
+  update_target_pools: false
   use_device_driver: true
   use_genie: false
   use_host_keys: false
@@ -3138,7 +3138,7 @@
   time_between_retries: 10
   timeout: 3.0
   type: netmiko_validation_service
-  update_pools: false
+  update_target_pools: false
   use_device_driver: true
   use_genie: false
   use_host_keys: false
@@ -3223,7 +3223,7 @@
   time_between_retries: 10
   timeout: 3.0
   type: netmiko_validation_service
-  update_pools: false
+  update_target_pools: false
   use_device_driver: true
   use_genie: false
   use_host_keys: false
@@ -3308,7 +3308,7 @@
   time_between_retries: 10
   timeout: 3.0
   type: netmiko_validation_service
-  update_pools: false
+  update_target_pools: false
   use_device_driver: true
   use_genie: false
   use_host_keys: false
@@ -3376,7 +3376,7 @@
   target_pools: []
   time_between_retries: 10
   type: python_snippet_service
-  update_pools: false
+  update_target_pools: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -3450,7 +3450,7 @@
   target_pools: []
   time_between_retries: 10
   type: payload_extraction_service
-  update_pools: false
+  update_target_pools: false
   validation_condition: success
   validation_method: none
   variable1: boolean
@@ -3527,7 +3527,7 @@
   target_pools: []
   time_between_retries: 10
   type: payload_extraction_service
-  update_pools: false
+  update_target_pools: false
   validation_condition: success
   validation_method: none
   variable1: list
@@ -3595,7 +3595,7 @@
   time_between_retries: 10
   timeout: 15
   type: rest_call_service
-  update_pools: false
+  update_target_pools: false
   username: admin
   validation_condition: success
   validation_method: text
@@ -3668,7 +3668,7 @@
   target_pools: []
   time_between_retries: 10
   type: python_snippet_service
-  update_pools: false
+  update_target_pools: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -3752,7 +3752,7 @@
   time_between_retries: 10
   timeout: 10.0
   type: netmiko_validation_service
-  update_pools: false
+  update_target_pools: false
   use_device_driver: true
   use_genie: false
   use_host_keys: false
@@ -3824,7 +3824,7 @@
   target_pools: []
   time_between_retries: 10
   type: workflow
-  update_pools: false
+  update_target_pools: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -3929,7 +3929,7 @@
   target_pools: []
   time_between_retries: 10
   type: workflow
-  update_pools: false
+  update_target_pools: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -4005,7 +4005,7 @@
   target_pools: []
   time_between_retries: 10
   type: workflow
-  update_pools: false
+  update_target_pools: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -4083,7 +4083,7 @@
   target_pools: []
   time_between_retries: 10
   type: workflow
-  update_pools: false
+  update_target_pools: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -4201,7 +4201,7 @@
   target_pools: []
   time_between_retries: 10
   type: workflow
-  update_pools: false
+  update_target_pools: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -4278,7 +4278,7 @@
   target_pools: []
   time_between_retries: 10
   type: workflow
-  update_pools: false
+  update_target_pools: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -4348,7 +4348,7 @@
   target_pools: []
   time_between_retries: 10
   type: workflow
-  update_pools: false
+  update_target_pools: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -4423,7 +4423,7 @@
   target_pools: []
   time_between_retries: 10
   type: workflow
-  update_pools: false
+  update_target_pools: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -4511,7 +4511,7 @@
   target_pools: []
   time_between_retries: 10
   type: workflow
-  update_pools: false
+  update_target_pools: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -4620,7 +4620,7 @@
   target_pools: []
   time_between_retries: 10
   type: workflow
-  update_pools: false
+  update_target_pools: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -4712,7 +4712,7 @@
   target_pools: []
   time_between_retries: 10
   type: workflow
-  update_pools: false
+  update_target_pools: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -4788,7 +4788,7 @@
   target_pools: []
   time_between_retries: 10
   type: workflow
-  update_pools: false
+  update_target_pools: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -4889,7 +4889,7 @@
   target_pools: []
   time_between_retries: 10
   type: workflow
-  update_pools: false
+  update_target_pools: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -4966,7 +4966,7 @@
   target_pools: []
   time_between_retries: 10
   type: workflow
-  update_pools: false
+  update_target_pools: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -5033,7 +5033,7 @@
   target_pools: []
   time_between_retries: 10
   type: workflow
-  update_pools: false
+  update_target_pools: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -5102,7 +5102,7 @@
   target_pools: []
   time_between_retries: 10
   type: workflow
-  update_pools: false
+  update_target_pools: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -5184,7 +5184,7 @@
   time_between_retries: 10
   timeout: 10.0
   type: netmiko_validation_service
-  update_pools: false
+  update_target_pools: false
   use_device_driver: true
   use_genie: false
   use_host_keys: false
@@ -5290,7 +5290,7 @@
   time_between_retries: 10
   timeout: 10
   type: netmiko_backup_service
-  update_pools: false
+  update_target_pools: false
   use_device_driver: true
   use_host_keys: false
   validation_condition: success
@@ -5357,7 +5357,7 @@
   target_pools: []
   time_between_retries: 10
   type: workflow
-  update_pools: false
+  update_target_pools: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -5421,7 +5421,7 @@
   target_pools: []
   time_between_retries: 10
   type: workflow
-  update_pools: false
+  update_target_pools: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -5486,7 +5486,7 @@
   time_between_retries: 10
   timeout: 15
   type: rest_call_service
-  update_pools: false
+  update_target_pools: false
   username: ''
   validation_condition: success
   validation_method: none
@@ -5552,7 +5552,7 @@
   target_pools: []
   time_between_retries: 10
   type: workflow
-  update_pools: false
+  update_target_pools: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -5618,7 +5618,7 @@
   time_between_retries: 10
   timeout: 15
   type: rest_call_service
-  update_pools: false
+  update_target_pools: false
   username: ''
   validation_condition: success
   validation_method: none
@@ -5682,7 +5682,7 @@
   target_pools: []
   time_between_retries: 10
   type: workflow
-  update_pools: false
+  update_target_pools: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -5766,7 +5766,7 @@
   time_between_retries: 10
   timeout: 10.0
   type: netmiko_validation_service
-  update_pools: false
+  update_target_pools: false
   use_device_driver: true
   use_genie: false
   use_host_keys: false
@@ -5852,7 +5852,7 @@
   time_between_retries: 10
   timeout: 10.0
   type: netmiko_validation_service
-  update_pools: false
+  update_target_pools: false
   use_device_driver: true
   use_genie: false
   use_host_keys: false
@@ -5938,7 +5938,7 @@
   time_between_retries: 10
   timeout: 10.0
   type: netmiko_validation_service
-  update_pools: false
+  update_target_pools: false
   use_device_driver: true
   use_genie: false
   use_host_keys: false
@@ -6025,7 +6025,7 @@
   target_pools: []
   time_between_retries: 10
   type: workflow
-  update_pools: false
+  update_target_pools: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -6089,7 +6089,7 @@
   target_pools: []
   time_between_retries: 10
   type: workflow
-  update_pools: false
+  update_target_pools: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -6153,7 +6153,7 @@
   target_pools: []
   time_between_retries: 10
   type: workflow
-  update_pools: false
+  update_target_pools: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -6238,7 +6238,7 @@
   time_between_retries: 10
   timeout: 10.0
   type: netmiko_validation_service
-  update_pools: false
+  update_target_pools: false
   use_device_driver: true
   use_genie: false
   use_host_keys: false
@@ -6303,7 +6303,7 @@
   target_pools: []
   time_between_retries: 10
   type: ansible_playbook_service
-  update_pools: false
+  update_target_pools: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -6365,7 +6365,7 @@
   target_pools: []
   time_between_retries: 10
   type: workflow
-  update_pools: false
+  update_target_pools: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -6427,7 +6427,7 @@
   target_pools: []
   time_between_retries: 10
   type: python_snippet_service
-  update_pools: false
+  update_target_pools: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -6508,7 +6508,7 @@
   time_between_retries: 10
   timeout: 10.0
   type: netmiko_validation_service
-  update_pools: false
+  update_target_pools: false
   use_device_driver: true
   use_genie: false
   use_host_keys: false
@@ -6573,7 +6573,7 @@
   target_pools: []
   time_between_retries: 10
   type: workflow
-  update_pools: false
+  update_target_pools: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -6634,7 +6634,7 @@
   target_pools: []
   time_between_retries: 10
   type: python_snippet_service
-  update_pools: false
+  update_target_pools: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -6696,7 +6696,7 @@
   target_pools: []
   time_between_retries: 10
   type: workflow
-  update_pools: false
+  update_target_pools: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -6759,7 +6759,7 @@
   target_pools: []
   time_between_retries: 10
   type: python_snippet_service
-  update_pools: false
+  update_target_pools: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -6826,7 +6826,7 @@
   target_pools: []
   time_between_retries: 10
   type: python_snippet_service
-  update_pools: false
+  update_target_pools: false
   validation_condition: success
   validation_method: dict_included
   vendor: ''
@@ -6891,7 +6891,7 @@
   target_pools: []
   time_between_retries: 10
   type: python_snippet_service
-  update_pools: false
+  update_target_pools: false
   validation_condition: success
   validation_method: text
   vendor: ''
@@ -6957,7 +6957,7 @@
   target_pools: []
   time_between_retries: 10
   type: python_snippet_service
-  update_pools: false
+  update_target_pools: false
   validation_condition: success
   validation_method: dict_included
   vendor: ''
@@ -7021,7 +7021,7 @@
   target_pools: []
   time_between_retries: 10
   type: python_snippet_service
-  update_pools: false
+  update_target_pools: false
   validation_condition: success
   validation_method: text
   vendor: ''
@@ -7085,7 +7085,7 @@
   target_pools: []
   time_between_retries: 10
   type: python_snippet_service
-  update_pools: false
+  update_target_pools: false
   validation_condition: success
   validation_method: text
   vendor: ''
@@ -7149,7 +7149,7 @@
   target_pools: []
   time_between_retries: 10
   type: python_snippet_service
-  update_pools: false
+  update_target_pools: false
   validation_condition: success
   validation_method: dict_included
   vendor: ''
@@ -7230,7 +7230,7 @@
   target_pools: []
   time_between_retries: 10
   type: workflow
-  update_pools: false
+  update_target_pools: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -7295,7 +7295,7 @@
   target_pools: []
   time_between_retries: 10
   type: python_snippet_service
-  update_pools: false
+  update_target_pools: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -7356,7 +7356,7 @@
   target_pools: []
   time_between_retries: 10
   type: python_snippet_service
-  update_pools: false
+  update_target_pools: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -7415,7 +7415,7 @@
   target_pools: []
   time_between_retries: 10
   type: swiss_army_knife_service
-  update_pools: false
+  update_target_pools: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -7479,7 +7479,7 @@
   target_pools: []
   time_between_retries: 10
   type: workflow
-  update_pools: false
+  update_target_pools: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -7552,7 +7552,7 @@
   target_pools: []
   time_between_retries: 10
   type: workflow
-  update_pools: false
+  update_target_pools: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -7615,7 +7615,7 @@
   target_pools: []
   time_between_retries: 10
   type: unix_command_service
-  update_pools: false
+  update_target_pools: false
   validation_condition: success
   validation_method: text
   vendor: ''
@@ -7696,7 +7696,7 @@
   time_between_retries: 10
   timeout: 10
   type: unix_shell_script_service
-  update_pools: false
+  update_target_pools: false
   use_device_driver: false
   use_host_keys: false
   validation_condition: success
@@ -7765,7 +7765,7 @@
   timeout: 2
   ttl: 60
   type: ping_service
-  update_pools: false
+  update_target_pools: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -7826,7 +7826,7 @@
   target_pools: []
   time_between_retries: 10
   type: workflow
-  update_pools: false
+  update_target_pools: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -7892,7 +7892,7 @@
   target_pools: []
   time_between_retries: 10
   type: topology_import_service
-  update_pools: false
+  update_target_pools: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -7976,7 +7976,7 @@
   time_between_retries: 10
   timeout: 10.0
   type: netmiko_validation_service
-  update_pools: false
+  update_target_pools: false
   use_device_driver: true
   use_genie: false
   use_host_keys: false
@@ -8045,7 +8045,7 @@
   time_between_retries: 10
   timeout: 15
   type: rest_call_service
-  update_pools: false
+  update_target_pools: false
   username: admin
   validation_condition: success
   validation_method: text
@@ -8127,7 +8127,7 @@
   time_between_retries: 10
   timeout: 10.0
   type: netmiko_validation_service
-  update_pools: false
+  update_target_pools: false
   use_device_driver: true
   use_genie: false
   use_host_keys: false
@@ -8233,7 +8233,7 @@
   time_between_retries: 10
   timeout: 10
   type: netmiko_backup_service
-  update_pools: false
+  update_target_pools: false
   use_device_driver: true
   use_host_keys: false
   validation_condition: success
@@ -8300,7 +8300,7 @@
   target_pools: []
   time_between_retries: 10
   type: git_service
-  update_pools: false
+  update_target_pools: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -8361,7 +8361,7 @@
   target_pools: []
   time_between_retries: 10
   type: python_snippet_service
-  update_pools: false
+  update_target_pools: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -8425,7 +8425,7 @@
   target_pools: []
   time_between_retries: 10
   type: workflow
-  update_pools: false
+  update_target_pools: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -8492,7 +8492,7 @@
   time_between_retries: 10
   transport: system
   type: scrapli_service
-  update_pools: false
+  update_target_pools: false
   use_device_driver: true
   use_host_keys: false
   validation_condition: success
@@ -8561,7 +8561,7 @@
   time_between_retries: 10
   transport: system
   type: scrapli_service
-  update_pools: false
+  update_target_pools: false
   use_device_driver: true
   use_host_keys: false
   validation_condition: success
@@ -8630,7 +8630,7 @@
   time_between_retries: 10
   transport: system
   type: scrapli_service
-  update_pools: false
+  update_target_pools: false
   use_device_driver: true
   use_host_keys: false
   validation_condition: success
@@ -8699,7 +8699,7 @@
   time_between_retries: 10
   transport: system
   type: scrapli_service
-  update_pools: false
+  update_target_pools: false
   use_device_driver: true
   use_host_keys: false
   validation_condition: success
@@ -8784,7 +8784,7 @@
       pool - Access set up, Links 6 through 9 - Public pools]
   time_between_retries: 10
   type: workflow
-  update_pools: false
+  update_target_pools: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -8860,7 +8860,7 @@
   time_between_retries: 10
   timeout: 15
   type: rest_call_service
-  update_pools: false
+  update_target_pools: false
   username: admin
   validation_condition: success
   validation_method: text
@@ -8931,7 +8931,7 @@
   time_between_retries: 10
   timeout: 15
   type: rest_call_service
-  update_pools: false
+  update_target_pools: false
   username: admin
   validation_condition: success
   validation_method: text
@@ -9002,7 +9002,7 @@
   time_between_retries: 10
   timeout: 15
   type: rest_call_service
-  update_pools: false
+  update_target_pools: false
   username: admin
   validation_condition: success
   validation_method: text
@@ -9073,7 +9073,7 @@
   time_between_retries: 10
   timeout: 15
   type: rest_call_service
-  update_pools: false
+  update_target_pools: false
   username: admin
   validation_condition: success
   validation_method: text
@@ -9144,7 +9144,7 @@
   time_between_retries: 10
   timeout: 15
   type: rest_call_service
-  update_pools: false
+  update_target_pools: false
   username: admin
   validation_condition: success
   validation_method: text
@@ -9230,7 +9230,7 @@
   time_between_retries: 10
   timeout: 10.0
   type: netmiko_validation_service
-  update_pools: false
+  update_target_pools: false
   use_device_driver: true
   use_genie: false
   use_host_keys: false
@@ -9317,7 +9317,7 @@
   time_between_retries: 10
   timeout: 10.0
   type: netmiko_validation_service
-  update_pools: false
+  update_target_pools: false
   use_device_driver: true
   use_genie: false
   use_host_keys: false
@@ -9404,7 +9404,7 @@
   time_between_retries: 10
   timeout: 10.0
   type: netmiko_validation_service
-  update_pools: false
+  update_target_pools: false
   use_device_driver: true
   use_genie: false
   use_host_keys: false
@@ -9491,7 +9491,7 @@
   time_between_retries: 10
   timeout: 10.0
   type: netmiko_validation_service
-  update_pools: false
+  update_target_pools: false
   use_device_driver: true
   use_genie: false
   use_host_keys: false
@@ -9578,7 +9578,7 @@
   time_between_retries: 10
   timeout: 10.0
   type: netmiko_validation_service
-  update_pools: false
+  update_target_pools: false
   use_device_driver: true
   use_genie: false
   use_host_keys: false
@@ -9665,7 +9665,7 @@
   time_between_retries: 10
   timeout: 10.0
   type: netmiko_validation_service
-  update_pools: false
+  update_target_pools: false
   use_device_driver: true
   use_genie: false
   use_host_keys: false
@@ -9730,7 +9730,7 @@
   target_pools: []
   time_between_retries: 10
   type: python_snippet_service
-  update_pools: false
+  update_target_pools: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -9792,7 +9792,7 @@
   target_pools: []
   time_between_retries: 10
   type: python_snippet_service
-  update_pools: false
+  update_target_pools: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -9854,7 +9854,7 @@
   target_pools: []
   time_between_retries: 10
   type: python_snippet_service
-  update_pools: false
+  update_target_pools: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -9916,7 +9916,7 @@
   target_pools: []
   time_between_retries: 10
   type: python_snippet_service
-  update_pools: false
+  update_target_pools: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -9978,7 +9978,7 @@
   target_pools: []
   time_between_retries: 10
   type: python_snippet_service
-  update_pools: false
+  update_target_pools: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -10040,7 +10040,7 @@
   target_pools: []
   time_between_retries: 10
   type: python_snippet_service
-  update_pools: false
+  update_target_pools: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -10102,7 +10102,7 @@
   target_pools: []
   time_between_retries: 10
   type: python_snippet_service
-  update_pools: false
+  update_target_pools: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -10164,7 +10164,7 @@
   target_pools: []
   time_between_retries: 10
   type: python_snippet_service
-  update_pools: false
+  update_target_pools: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -10230,7 +10230,7 @@
   target_pools: []
   time_between_retries: 10
   type: workflow
-  update_pools: false
+  update_target_pools: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -10313,7 +10313,7 @@
   time_between_retries: 10
   timeout: 10.0
   type: netmiko_validation_service
-  update_pools: false
+  update_target_pools: false
   use_device_driver: true
   use_genie: false
   use_host_keys: false
@@ -10385,7 +10385,7 @@
   time_between_retries: 10
   timeout: 10.0
   type: generic_file_transfer_service
-  update_pools: false
+  update_target_pools: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -10470,7 +10470,7 @@
   time_between_retries: 10
   timeout: 10.0
   type: netmiko_validation_service
-  update_pools: false
+  update_target_pools: false
   use_device_driver: true
   use_genie: false
   use_host_keys: false
@@ -10543,7 +10543,7 @@
   time_between_retries: 10
   timeout: 10.0
   type: generic_file_transfer_service
-  update_pools: false
+  update_target_pools: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -10626,7 +10626,7 @@
   time_between_retries: 10
   timeout: 10.0
   type: netmiko_validation_service
-  update_pools: false
+  update_target_pools: false
   use_device_driver: true
   use_genie: false
   use_host_keys: false
@@ -10698,7 +10698,7 @@
   time_between_retries: 10
   timeout: 10.0
   type: generic_file_transfer_service
-  update_pools: false
+  update_target_pools: false
   validation_condition: failure
   validation_method: text
   vendor: ''
@@ -10763,7 +10763,7 @@
   target_pools: []
   time_between_retries: 10
   type: workflow
-  update_pools: false
+  update_target_pools: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -10832,7 +10832,7 @@
   target_pools: []
   time_between_retries: 10
   type: python_snippet_service
-  update_pools: false
+  update_target_pools: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -10899,7 +10899,7 @@
   target_pools: []
   time_between_retries: 10
   type: python_snippet_service
-  update_pools: false
+  update_target_pools: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -10967,7 +10967,7 @@
   target_pools: []
   time_between_retries: 10
   type: python_snippet_service
-  update_pools: false
+  update_target_pools: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -11049,7 +11049,7 @@
   target_pools: []
   time_between_retries: 10
   type: workflow
-  update_pools: false
+  update_target_pools: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -11120,7 +11120,7 @@
   target_pools: []
   time_between_retries: 10
   type: python_snippet_service
-  update_pools: false
+  update_target_pools: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -11191,7 +11191,7 @@
   target_pools: []
   time_between_retries: 10
   type: python_snippet_service
-  update_pools: false
+  update_target_pools: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -11262,7 +11262,7 @@
   target_pools: []
   time_between_retries: 10
   type: python_snippet_service
-  update_pools: false
+  update_target_pools: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -11332,7 +11332,7 @@
   target_pools: []
   time_between_retries: 10
   type: python_snippet_service
-  update_pools: false
+  update_target_pools: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -11417,7 +11417,7 @@
   target_pools: []
   time_between_retries: 10
   type: workflow
-  update_pools: false
+  update_target_pools: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -11505,7 +11505,7 @@
   target_pools: []
   time_between_retries: 10
   type: python_snippet_service
-  update_pools: false
+  update_target_pools: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -11573,7 +11573,7 @@
   time_between_retries: 10
   timeout: 15
   type: rest_call_service
-  update_pools: false
+  update_target_pools: false
   username: admin
   validation_condition: success
   validation_method: none
@@ -11658,7 +11658,7 @@
   time_between_retries: 2
   timeout: 10.0
   type: netmiko_validation_service
-  update_pools: false
+  update_target_pools: false
   use_device_driver: true
   use_genie: false
   use_host_keys: false
@@ -11738,7 +11738,7 @@
   target_pools: []
   time_between_retries: 10
   type: workflow
-  update_pools: false
+  update_target_pools: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -11808,7 +11808,7 @@
   target_pools: []
   time_between_retries: 10
   type: python_snippet_service
-  update_pools: false
+  update_target_pools: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -11871,7 +11871,7 @@
   target_pools: []
   time_between_retries: 10
   type: python_snippet_service
-  update_pools: false
+  update_target_pools: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -11956,7 +11956,7 @@
   time_between_retries: 10
   timeout: 10.0
   type: netmiko_validation_service
-  update_pools: false
+  update_target_pools: false
   use_device_driver: true
   use_genie: false
   use_host_keys: false
@@ -12028,7 +12028,7 @@
   target_pools: []
   time_between_retries: 10
   type: python_snippet_service
-  update_pools: false
+  update_target_pools: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -12108,7 +12108,7 @@
   target_pools: []
   time_between_retries: 10
   type: workflow
-  update_pools: false
+  update_target_pools: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -12186,7 +12186,7 @@
   time_between_retries: 10
   timeout: 15
   type: rest_call_service
-  update_pools: false
+  update_target_pools: false
   username: admin
   validation_condition: success
   validation_method: text
@@ -12255,7 +12255,7 @@
   target_pools: []
   time_between_retries: 10
   type: python_snippet_service
-  update_pools: false
+  update_target_pools: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -12322,7 +12322,7 @@
   target_pools: []
   time_between_retries: 10
   type: python_snippet_service
-  update_pools: false
+  update_target_pools: false
   validation_condition: success
   validation_method: none
   vendor: ''
@@ -12406,7 +12406,7 @@
   time_between_retries: 10
   timeout: 10.0
   type: netmiko_validation_service
-  update_pools: false
+  update_target_pools: false
   use_device_driver: true
   use_genie: false
   use_host_keys: false
@@ -12478,7 +12478,7 @@
   time_between_retries: 10
   timeout: 15
   type: rest_call_service
-  update_pools: false
+  update_target_pools: false
   username: admin
   validation_condition: success
   validation_method: text
@@ -12549,7 +12549,7 @@
   time_between_retries: 10
   timeout: 15
   type: rest_call_service
-  update_pools: false
+  update_target_pools: false
   username: admin
   validation_condition: success
   validation_method: text

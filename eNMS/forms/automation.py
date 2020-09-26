@@ -34,7 +34,7 @@ class ServiceForm(BaseForm):
     target_devices = MultipleInstanceField("Devices")
     disable_result_creation = BooleanField("Disable Result Creation")
     target_pools = MultipleInstanceField("Pools")
-    update_pools = BooleanField("Update pools before running")
+    update_target_pools = BooleanField("Update target pools before running")
     workflows = MultipleInstanceField("Workflows")
     waiting_time = IntegerField(
         "Time to Wait before next service is started (in seconds)", default=0

@@ -115,7 +115,7 @@
   user_name: .*
   user_name_match: regex
   user_number: 6
-  users: [admin, readonly, chicago, sf, ny, nadmin]
+  users: [ny, readonly, chicago, sf, nadmin, admin]
 - access_users: []
   creator: ''
   description: Devices only
@@ -1267,3 +1267,108 @@
   user_name_match: inclusion
   user_number: 1
   users: [readonly]
+- access_users: []
+  creator: admin
+  description: ''
+  device_configuration: ''
+  device_configuration_match: inclusion
+  device_creator: ''
+  device_creator_match: inclusion
+  device_description: ''
+  device_description_match: inclusion
+  device_icon: ''
+  device_icon_match: inclusion
+  device_ip_address: ''
+  device_ip_address_match: inclusion
+  device_latitude: ''
+  device_latitude_match: inclusion
+  device_location: ''
+  device_location_match: inclusion
+  device_longitude: ''
+  device_longitude_match: inclusion
+  device_model: ''
+  device_model_match: inclusion
+  device_name: router
+  device_name_invert: true
+  device_name_match: inclusion
+  device_napalm_driver: ''
+  device_napalm_driver_match: inclusion
+  device_netmiko_driver: ''
+  device_netmiko_driver_match: inclusion
+  device_operating_system: ''
+  device_operating_system_match: inclusion
+  device_operational_data: ''
+  device_operational_data_match: inclusion
+  device_os_version: ''
+  device_os_version_match: inclusion
+  device_port: ''
+  device_port_match: inclusion
+  device_property1: ''
+  device_property1_match: inclusion
+  device_scrapli_driver: ''
+  device_scrapli_driver_match: inclusion
+  device_specialized_data: ''
+  device_specialized_data_match: inclusion
+  device_subtype: ''
+  device_subtype_match: inclusion
+  device_vendor: ''
+  device_vendor_match: inclusion
+  devices: [Jackson, PaloAlto, Austin, Washington, Chicago, SanJose, SanDiego, Dallas,
+    Philadelphia, LosAngeles, Detroit, Richmond, Atlanta, Boston, Houston, Baltimore,
+    Cleveland, Columbus, Cincinnati, Cambridge, Minneapolis, NewYork, Sacramento,
+    SanFrancisco, Orange, Oakland, Denver, Server 2, Aserver]
+  last_modified: '2020-09-26 00:47:22.329360'
+  latitude: '0.0'
+  link_color: ''
+  link_color_match: inclusion
+  link_creator: ''
+  link_creator_match: inclusion
+  link_description: ''
+  link_description_match: inclusion
+  link_destination_name: ''
+  link_destination_name_match: inclusion
+  link_location: ''
+  link_location_match: inclusion
+  link_model: ''
+  link_model_match: inclusion
+  link_name: link[1-9]
+  link_name_invert: true
+  link_name_match: regex
+  link_source_name: ''
+  link_source_name_match: inclusion
+  link_subtype: ''
+  link_subtype_match: inclusion
+  link_vendor: ''
+  link_vendor_match: inclusion
+  links: [link0, atlantic-r26-boston-1, atlantic-r26-boston-2, atlantic-r26-ny, atlantic-r26-washington,
+    atlantic-r28-ny, atlantic-r28-washington, atlantic-r20-boston, atlantic-r20-richmond]
+  longitude: '0.0'
+  manually_defined: false
+  name: 'Pool Invert Mechanism: ~router in name, ~link[1-9] in name'
+  operator: all
+  property1: CP
+  public: false
+  service_creator: ''
+  service_creator_match: inclusion
+  service_description: ''
+  service_description_match: inclusion
+  service_name: ''
+  service_name_match: inclusion
+  service_number: 0
+  service_operating_system: ''
+  service_operating_system_match: inclusion
+  service_vendor: ''
+  service_vendor_match: inclusion
+  target_services: []
+  tasks: []
+  type: pool
+  user_description: ''
+  user_description_match: inclusion
+  user_email: ''
+  user_email_match: inclusion
+  user_groups: ''
+  user_groups_match: inclusion
+  user_name: ''
+  user_name_match: inclusion
+  user_number: 0
+  users: []

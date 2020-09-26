@@ -568,6 +568,9 @@ class Run(AbstractBase):
                     results["summary"][key].append(result.device.name)
             self.status = state["status"] = "Aborted" if self.stop else "Completed"
             self.success = results["success"]
+            if self.update_pools_after_running:
+                for pool in db.fetch_all("pool"):
+                    pool.compute_pool()
             if self.send_notification:
                 results = self.notify(results)
             app.service_db[self.service.id]["runs"] -= 1

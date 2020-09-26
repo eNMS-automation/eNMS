@@ -322,14 +322,16 @@ class Pool(AbstractBase):
         pool_value = getattr(self, f"{obj.class_type}_{property}")
         object_value = str(getattr(obj, property))
         match = getattr(self, f"{obj.class_type}_{property}_match")
+        invert = getattr(self, f"{obj.class_type}_{property}_invert")
         if not pool_value:
-            return True
+            result = True
         elif match == "inclusion":
-            return pool_value in object_value
+            result = pool_value in object_value
         elif match == "equality":
-            return pool_value == object_value
+            result = pool_value == object_value
         else:
-            return bool(search(pool_value, object_value))
+            result = bool(search(pool_value, object_value))
+        return not result if invert else result
 
     def object_match(self, obj):
         operator = all if self.operator == "all" else any

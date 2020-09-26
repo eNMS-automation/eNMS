@@ -35,6 +35,7 @@ devices do not follow any edge after the skipped service.
 In the migration files, the skip property must be removed: it will not be migrated.
 - Add new option in pool to invert logic for each property.
 - Rename "update_pools" to "update_target_pools". Migration files must be updated.
+- New Option "Update pools after running" for workflow like the configuration management workflow.
 
 Version 3.22.4
 --------------

@@ -36,6 +36,7 @@ In the migration files, the skip property must be removed: it will not be migrat
 - Add new option in pool to invert logic for each property.
 - Rename "update_pools" to "update_target_pools". Migration files must be updated.
 - New Option "Update pools after running" for workflow like the configuration management workflow.
+- Add log to the changelog when user logs in and logs out.
 
 Version 3.22.4
 --------------

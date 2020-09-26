@@ -11847,13 +11847,13 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels:
-    54f336fe-4a80-4549-b291-971d2d7aafd9:
+    50a94bb5-ad54-4164-92a3-b4022d43de4d:
       alignment: left
-      content: "Test fetch and fetch_all.\r\nChange name of device \"Washington\"\
-        \ to \"-\".\r\nWorkflow is configured to update pools after running:\r\nWashigton\
+      content: "Test fetch and fetch_all.\r\nChange name of device \"Chicago\" to\
+        \ \"-\".\r\nWorkflow is configured to update pools after running:\r\nChicago\
         \ should be remove from the pools:\r\n* Datacenter Chicago\r\n* Datacenter\
         \ New York"
-      positions: [-119, 259]
+      positions: ['-119', '259']
     bc5601cb-db25-4614-b82b-15122f71739b:
       alignment: left
       content: "We use get_result to fetch custom credentials\r\nfrom previous service\
@@ -11866,7 +11866,7 @@
       content: "We encrypt credentials with the \"encrypt\" function.\r\nTo be decrypted\
         \ in the next service via\r\ncustom credentials variable substitution."
       positions: [73, -121]
-  last_modified: '2020-09-26 03:23:49.158695'
+  last_modified: '2020-09-26 03:33:45.116553'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -11932,7 +11932,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2020-09-26 03:29:31.040017'
+  last_modified: '2020-09-26 03:33:30.418782'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -11968,7 +11968,7 @@
     \n    pass\r\n\r\ntry:\r\n    fetch(\"access\", name=\"Full Access to Everything\"\
     )\r\n    success = False\r\nexcept:\r\n    pass\r\n\r\ntry:\r\n    fetch(\"task\"\
     , name=\"Full Access to Everything\")\r\n    success = False\r\nexcept:\r\n  \
-    \  pass\r\n\r\nchicago = fetch(\"device\", name=\"Washington\")\r\n\r\nresults[\"\
+    \  pass\r\n\r\nchicago = fetch(\"device\", name=\"Chicago\")\r\n\r\nresults[\"\
     operations\"] = {\r\n    \"device\": chicago.name,\r\n    \"pool\": fetch(\"pool\"\
     , name=\"All objects\").name,\r\n    \"services\": [service.name for service in\
     \ fetch_all(\"service\")]\r\n}\r\n\r\nchicago.name = \"-\"\r\n\r\nresults[\"success\"\

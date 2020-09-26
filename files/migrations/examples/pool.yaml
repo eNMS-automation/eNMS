@@ -115,7 +115,7 @@
   user_name: .*
   user_name_match: regex
   user_number: 6
-  users: [admin, readonly, chicago, sf, ny, nadmin]
+  users: [readonly, sf, nadmin, ny, chicago, admin]
 - access_users: []
   creator: ''
   description: Devices only
@@ -757,8 +757,8 @@
   service_operating_system_match: inclusion
   service_vendor: ''
   service_vendor_match: inclusion
-  target_services: ['[Regression Workflow 9: Operational Data Backup] Retrieve Operational
-      Data', 'Regression Workflow P: large workflow (scalability)']
+  target_services: ['Regression Workflow P: large workflow (scalability)', '[Regression
+      Workflow 9: Operational Data Backup] Retrieve Operational Data']
   tasks: []
   type: pool
   user_description: ''

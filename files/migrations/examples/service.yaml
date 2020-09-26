@@ -11932,7 +11932,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2020-09-26 03:22:03.034101'
+  last_modified: '2020-09-26 03:29:31.040017'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -11968,11 +11968,11 @@
     \n    pass\r\n\r\ntry:\r\n    fetch(\"access\", name=\"Full Access to Everything\"\
     )\r\n    success = False\r\nexcept:\r\n    pass\r\n\r\ntry:\r\n    fetch(\"task\"\
     , name=\"Full Access to Everything\")\r\n    success = False\r\nexcept:\r\n  \
-    \  pass\r\n\r\nwashington = fetch(\"device\", name=\"Washington\").name\r\n\r\n\
-    results[\"operations\"] = {\r\n    \"device\": washington,\r\n    \"pool\": fetch(\"\
-    pool\", name=\"All objects\").name,\r\n    \"services\": [service.name for service\
-    \ in fetch_all(\"service\")]\r\n}\r\n\r\nwashington.name = \"-\"\r\n\r\nresults[\"\
-    success\"] = success"
+    \  pass\r\n\r\nchicago = fetch(\"device\", name=\"Washington\")\r\n\r\nresults[\"\
+    operations\"] = {\r\n    \"device\": chicago.name,\r\n    \"pool\": fetch(\"pool\"\
+    , name=\"All objects\").name,\r\n    \"services\": [service.name for service in\
+    \ fetch_all(\"service\")]\r\n}\r\n\r\nchicago.name = \"-\"\r\n\r\nresults[\"success\"\
+    ] = success"
   target_devices: []
   target_pools: []
   time_between_retries: 10

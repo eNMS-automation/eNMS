@@ -159,7 +159,7 @@ class Database:
     def configure_application_events(self, app):
         @event.listens_for(self.base, "after_insert", propagate=True)
         def log_instance_creation(mapper, connection, target):
-            if hasattr(target, "name"):
+            if hasattr(target, "name") and target.type != "run":
                 app.log("info", f"CREATION: {target.type} '{target.name}'")
 
         @event.listens_for(self.base, "before_delete", propagate=True)

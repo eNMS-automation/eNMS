@@ -2,7 +2,7 @@ from wtforms.validators import InputRequired
 from wtforms.widgets import TextArea
 
 from eNMS import app
-from eNMS.forms import BaseForm, choices
+from eNMS.forms import BaseForm, choices, form_properties
 from eNMS.forms.fields import (
     BooleanField,
     HiddenField,
@@ -20,12 +20,12 @@ def configure_pool_form(cls):
     for model in cls.models:
         setattr(cls, f"{model}_properties", app.properties["filtering"][model])
         for property in app.properties["filtering"][model]:
-            match_field = f"{model}_{property}_match"
             setattr(cls, f"{model}_{property}", StringField(property))
             setattr(cls, f"{model}_{property}_invert", BooleanField(property))
+            form_properties["pool"][f"{model}_{property}_invert"] = {"type": "bool"}
             setattr(
                 cls,
-                match_field,
+                f"{model}_{property}_match",
                 SelectField(
                     choices=(
                         ("inclusion", "Inclusion"),

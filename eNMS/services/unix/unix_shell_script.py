@@ -40,7 +40,7 @@ class UnixShellScriptService(ConnectionService):
     def job(self, run, payload, device):
         netmiko_connection = run.netmiko_connection(device)
         source_code = run.sub(run.source_code, locals())
-        script_file_name = f"{self.name}.sh"
+        script_file_name = f"{run.space_deleter(app.get_time())}.sh"
         run.log("info", f"Sending shell script '{script_file_name}'", device)
         expect_string = run.sub(run.expect_string, locals())
         command_list = (

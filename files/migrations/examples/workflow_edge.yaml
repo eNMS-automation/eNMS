@@ -550,15 +550,15 @@
   source: '[Shared] Start', subtype: success, type: workflow_edge, workflow: 'Regression
     Workflow M: Unix command & shell, ping, - jump on connect - mechanism'}
 - {color: green, destination: '[Regression Workflow M: Unix command & shell, ping,
-    - jump on connect - mechanism] Unix shell: ping device from server 2', label: success,
-  source: '[Regression Workflow M: Unix command & shell, ping, - jump on connect -
-    mechanism] Unix command: ps -ef | grep test', subtype: success, type: workflow_edge,
+    - jump on connect - mechanism] Unix shell: ping eNMS server from remote server',
+  label: success, source: '[Regression Workflow M: Unix command & shell, ping, - jump
+    on connect - mechanism] Unix command: ps -ef | grep test', subtype: success, type: workflow_edge,
   workflow: 'Regression Workflow M: Unix command & shell, ping, - jump on connect
     - mechanism'}
 - {color: green, destination: '[Regression Workflow M: Unix command & shell, ping,
     - jump on connect - mechanism] Ping Washington', label: success, source: '[Regression
     Workflow M: Unix command & shell, ping, - jump on connect - mechanism] Unix shell:
-    ping device from server 2', subtype: success, type: workflow_edge, workflow: 'Regression
+    ping eNMS server from remote server', subtype: success, type: workflow_edge, workflow: 'Regression
     Workflow M: Unix command & shell, ping, - jump on connect - mechanism'}
 - {color: green, destination: '[Regression Workflow N: Topology Import (netbox, librenms,
     opennms)] OpenNMS Import', label: success, source: '[Shared] Start', subtype: success,

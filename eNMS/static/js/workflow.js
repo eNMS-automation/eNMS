@@ -136,7 +136,6 @@ export function displayWorkflow(workflowData) {
       graph.canvas.body.container.style.cursor = "default";
     });
   }
-  updateRuntimes(workflowData);
   if (!$(`#current-workflow option[value='${workflow.id}']`).length) {
     $("#current-workflow").append(
       `<option value="${workflow.id}">${workflow.scoped_name}</option>`
@@ -810,6 +809,7 @@ export function getServiceState(id, first) {
 function displayWorkflowState(result) {
   resetDisplay();
   updateRuntimes(result);
+  if (currentRuntime == "normal") return;
   if (!nodes || !edges || !result.state) return;
   let nodeUpdates = [];
   let edgeUpdates = [];

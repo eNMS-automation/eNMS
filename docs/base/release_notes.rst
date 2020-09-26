@@ -33,6 +33,7 @@ Add "groups" property to user and add "creator" property for pools, devices and 
 devices do not follow any edge after the skipped service.
 - Refactor skip property so that it is no longer a property of the service to avoid side effect of skipping shared services.
 In the migration files, the skip property must be removed: it will not be migrated.
+- Add new option in pool to invert logic for each property.
 
 Version 3.22.4
 --------------

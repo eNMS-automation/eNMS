@@ -80,6 +80,8 @@
     'Regression Workflow T: global variables and post-run pool update': [-277, -147]
     'Regression Workflow T: link neighbors mechanism': *id002
     'Regression Workflow U: fork based on value with skip discard mode': [-477, 154]
+    'Regression Workflow V: skip query with device in run once mode': [-323, -36]
+    'Regression Workflow V: skip query with device in subworkflow SxS': [-71, -2]
     'Regression workflow P: large workflow (scalability)': *id004
     Subworkflow 1: !!python/tuple [0, 0]
     Subworkflow 2: !!python/tuple [0, 0]
@@ -226,6 +228,8 @@
     'Regression Workflow T: global variables and post-run pool update': [569, -66]
     'Regression Workflow T: link neighbors mechanism': *id007
     'Regression Workflow U: fork based on value with skip discard mode': [645, 270]
+    'Regression Workflow V: skip query with device in run once mode': [648, 46]
+    'Regression Workflow V: skip query with device in subworkflow SxS': [572, -3]
     'Regression workflow P: large workflow (scalability)': *id009
     Subworkflow 1: !!python/tuple [0, 0]
     Subworkflow 2: !!python/tuple [0, 0]
@@ -258,6 +262,8 @@
     '[Regression Workflow H: shared service in multiple subworkflows] Subworkflow 2': [
       500, 0]
     '[Regression Workflow J: Workflow and Subworkflow Iteration] Subworkflow Iteration': [
+      500, 0]
+    '[Regression Workflow V: skip query with device in run once mode] Subworkflow in SxS mode': !!python/tuple [
       500, 0]
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow 7: Payload Extraction & Validation'
@@ -12741,4 +12747,213 @@
   validation_method: text
   vendor: ''
   verify_ssl_certificate: true
+  waiting_time: 0
+- close_connection: false
+  completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  events: []
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  labels:
+    b2f718c0-c2fb-4194-92b2-171c4a29ec07:
+      alignment: left
+      content: "When a service is in \"Run once\" mode, it must\r\nbe allowed to skip\
+        \ devices with the skip query.\r\nThis also applies to a subworkflow in SxS\
+        \ mode,\r\nwhich is equivalent to a service in run once mode."
+      positions: [134, -99]
+    d5ab84fd-7ab4-43a2-a99e-a49daa59a364:
+      alignment: left
+      content: "In this service, Washington should be skipped\r\nwith a skipped value\
+        \ of True (it should move forward to the subworkflow).\r\nThe other devices\
+        \ should appear in the results under the \"devices\" key."
+      positions: [-78, 186]
+  last_modified: '2020-09-26 21:50:27.550853'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: 'Regression Workflow V: skip query with device in run once mode'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions: {}
+  postprocessing: ''
+  postprocessing_mode: always
+  preprocessing: ''
+  public: false
+  reply_to: ''
+  reserved: false
+  run_method: per_service_with_workflow_targets
+  scoped_name: 'Regression Workflow V: skip query with device in run once mode'
+  send_notification: false
+  send_notification_method: mail
+  services: ['[Shared] Start', '[Shared] End', '[Regression Workflow V: skip query
+      with device in run once mode] Subworkflow in SxS mode', '[Regression Workflow
+      V: skip query with device in run once mode] Python service in run once mode']
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: 'True'
+  target_devices: [PaloAlto, Austin, Washington]
+  target_pools: []
+  time_between_retries: 10
+  type: workflow
+  update_pools_after_running: false
+  update_target_pools: false
+  validation_condition: success
+  validation_method: none
+  vendor: ''
+  waiting_time: 0
+  workflow_category: Example workflow(s)
+- close_connection: false
+  completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  events: []
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  labels: {}
+  last_modified: '2020-09-26 21:45:53.944044'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Regression Workflow V: skip query with device in run once mode] Subworkflow
+    in SxS mode'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions:
+    'Regression Workflow V: skip query with device in run once mode': [361, 115]
+  postprocessing: ''
+  postprocessing_mode: always
+  preprocessing: ''
+  public: false
+  reply_to: ''
+  reserved: false
+  run_method: per_service_with_workflow_targets
+  scoped_name: Subworkflow in SxS mode
+  send_notification: false
+  send_notification_method: mail
+  services: ['[Shared] Start', '[Shared] End']
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: 'True'
+  target_devices: []
+  target_pools: []
+  time_between_retries: 10
+  type: workflow
+  update_pools_after_running: false
+  update_target_pools: false
+  validation_condition: success
+  validation_method: none
+  vendor: ''
+  waiting_time: 0
+  workflow_category: Example workflow(s)
+- completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  events: []
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2020-09-26 21:49:10.304513'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Regression Workflow V: skip query with device in run once mode] Python service
+    in run once mode'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions:
+    'Regression Workflow V: skip query with device in run once mode': [-71, 98]
+  postprocessing: ''
+  postprocessing_mode: always
+  preprocessing: ''
+  public: false
+  reply_to: ''
+  reserved: false
+  run_method: once
+  scoped_name: Python service in run once mode
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: {}
+  skip_query: device.name == "Washington"
+  skip_value: 'True'
+  source_code: "\r\nresult = {}\r\nfor device in devices:\r\n  results.setdefault(\"\
+    devices\", []).append(device.name)\r\nresults[\"success\"] = True\r\nresults[\"\
+    result\"] = result"
+  target_devices: []
+  target_pools: []
+  time_between_retries: 10
+  type: python_snippet_service
+  update_pools_after_running: false
+  update_target_pools: false
+  validation_condition: success
+  validation_method: none
+  vendor: ''
   waiting_time: 0

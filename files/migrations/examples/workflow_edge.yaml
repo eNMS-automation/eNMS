@@ -897,3 +897,16 @@
     U: fork based on value with skip discard mode] Juniper devices', subtype: failure,
   type: workflow_edge, workflow: 'Regression Workflow U: fork based on value with
     skip discard mode'}
+- {color: green, destination: '[Regression Workflow V: skip query with device in run
+    once mode] Python service in run once mode', label: success, source: '[Shared]
+    Start', subtype: success, type: workflow_edge, workflow: 'Regression Workflow
+    V: skip query with device in run once mode'}
+- {color: green, destination: '[Regression Workflow V: skip query with device in run
+    once mode] Subworkflow in SxS mode', label: success, source: '[Regression Workflow
+    V: skip query with device in run once mode] Python service in run once mode',
+  subtype: success, type: workflow_edge, workflow: 'Regression Workflow V: skip query
+    with device in run once mode'}
+- {color: green, destination: '[Shared] End', label: success, source: '[Regression
+    Workflow V: skip query with device in run once mode] Subworkflow in SxS mode',
+  subtype: success, type: workflow_edge, workflow: 'Regression Workflow V: skip query
+    with device in run once mode'}

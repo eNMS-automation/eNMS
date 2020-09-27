@@ -165,16 +165,11 @@ class Workflow(Service):
                     run.write_state(
                         f"edges/{edge.id}", len(summary[edge_type]), "increment"
                     )
-        success_devices = targets[end.name]
-        failure_devices = targets[start.name] - success_devices
-        success = not failure_devices
-        summary = {
-            "success": list(success_devices),
-            "failure": list(failure_devices),
-        }
+        failed = list(targets[start.name] - targets[end.name])
+        summary = {"success": list(targets[end.name]), "failure": failed}
         db.session.refresh(run)
         run.restart_run = restart_run
-        return {"payload": payload, "success": success, "summary": summary}
+        return {"payload": payload, "success": not failed, "summary": summary}
 
     def standard_bfs(self, run, payload, device=None):
         number_of_runs = defaultdict(int)

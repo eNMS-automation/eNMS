@@ -696,19 +696,19 @@ class Run(AbstractBase):
                 self.create_result(device_results, device, commit=False)
                 results.append(device_results)
             else:
-                summary.setdefault("temp", []).append(device.name)
                 non_skipped_targets.append(device)
         self.target_devices = non_skipped_targets
         if self.run_method != "per_device":
             results = self.get_results(payload)
             if "summary" not in results:
                 summary_key = "success" if results["success"] else "failure"
-                summary[summary_key].extend(summary.pop("temp", []))
+                device_names = [device.name for device in self.target_devices]
+                summary[summary_key].extend(device_names)
                 results["summary"] = summary
             for key in ("success", "failure"):
                 device_number = len(results["summary"][key])
                 self.write_state(f"progress/device/{key}", device_number)
-            return {"summary": summary, **results}
+            return results
         else:
             if self.parent_runtime == self.runtime and not self.target_devices:
                 error = (

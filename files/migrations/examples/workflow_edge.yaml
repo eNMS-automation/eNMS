@@ -902,11 +902,36 @@
     Start', subtype: success, type: workflow_edge, workflow: 'Regression Workflow
     V: skip query with device in run once mode'}
 - {color: green, destination: '[Regression Workflow V: skip query with device in run
-    once mode] Subworkflow in SxS mode', label: success, source: '[Regression Workflow
-    V: skip query with device in run once mode] Python service in run once mode',
-  subtype: success, type: workflow_edge, workflow: 'Regression Workflow V: skip query
-    with device in run once mode'}
+    once mode] Subworkflow in SxS mode - workflow targets', label: success, source: '[Regression
+    Workflow V: skip query with device in run once mode] Python service in run once
+    mode', subtype: success, type: workflow_edge, workflow: 'Regression Workflow V:
+    skip query with device in run once mode'}
+- {color: green, destination: '[Regression Workflow V: skip query with device in run
+    once mode] Subworkflow in SxS mode - service targets', label: success, source: '[Regression
+    Workflow V: skip query with device in run once mode] Subworkflow in SxS mode -
+    workflow targets', subtype: success, type: workflow_edge, workflow: 'Regression
+    Workflow V: skip query with device in run once mode'}
 - {color: green, destination: '[Shared] End', label: success, source: '[Regression
-    Workflow V: skip query with device in run once mode] Subworkflow in SxS mode',
-  subtype: success, type: workflow_edge, workflow: 'Regression Workflow V: skip query
-    with device in run once mode'}
+    Workflow V: skip query with device in run once mode] Subworkflow in SxS mode -
+    service targets', subtype: success, type: workflow_edge, workflow: 'Regression
+    Workflow V: skip query with device in run once mode'}
+- {color: red, destination: '[Regression Workflow V: skip query with device in run
+    once mode] Subworkflow in SxS mode - workflow targets', label: failure, source: '[Regression
+    Workflow V: skip query with device in run once mode] Python service in run once
+    mode', subtype: failure, type: workflow_edge, workflow: 'Regression Workflow V:
+    skip query with device in run once mode'}
+- {color: red, destination: '[Regression Workflow V: skip query with device in run
+    once mode] Subworkflow in SxS mode - service targets', label: failure, source: '[Regression
+    Workflow V: skip query with device in run once mode] Subworkflow in SxS mode -
+    workflow targets', subtype: failure, type: workflow_edge, workflow: 'Regression
+    Workflow V: skip query with device in run once mode'}
+- {color: red, destination: '[[Regression Workflow V: skip query with device in run
+    once mode] Subworkflow in SxS mode - workflow targets] Fail Austin', label: failure,
+  source: '[Shared] Start', subtype: failure, type: workflow_edge, workflow: '[Regression
+    Workflow V: skip query with device in run once mode] Subworkflow in SxS mode -
+    workflow targets'}
+- {color: red, destination: '[Shared] End', label: failure, source: '[[Regression
+    Workflow V: skip query with device in run once mode] Subworkflow in SxS mode -
+    workflow targets] Fail Austin', subtype: failure, type: workflow_edge, workflow: '[Regression
+    Workflow V: skip query with device in run once mode] Subworkflow in SxS mode -
+    workflow targets'}

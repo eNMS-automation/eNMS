@@ -671,9 +671,7 @@ class Run(AbstractBase):
                 "summary": summary,
                 "runtime": self.runtime,
             }
-        self.write_state(
-            "progress/device/total", len(self.target_devices), "increment"
-        )
+        self.write_state("progress/device/total", len(self.target_devices), "increment")
         non_skipped_targets, results = [], []
         skip_service = self.skip.get(self.workflow_name)
         if skip_service:
@@ -698,13 +696,14 @@ class Run(AbstractBase):
                 self.create_result(device_results, device, commit=False)
                 results.append(device_results)
             else:
-                summary["success"].append(device.name)
+                summary.setdefault("temp", []).append(device.name)
                 non_skipped_targets.append(device)
         if self.run_method != "per_device":
-            self.write_state(
-                "progress/device/success", len(non_skipped_targets), "increment"
-            )
-            return {"summary": summary, **self.get_results(payload)}
+            results = self.get_results(payload)
+            summary_key = "success" if results["success"] else "failure"
+            self.write_state(f"progress/device/{summary_key}", len(non_skipped_targets))
+            summary[summary_key].extend(summary.pop("temp", []))
+            return {"summary": summary, **results}
         else:
             if self.parent_runtime == self.runtime and not self.target_devices:
                 error = (
@@ -722,10 +721,12 @@ class Run(AbstractBase):
                 with ThreadPool(processes=processes) as pool:
                     pool.map(self.get_device_result, process_args)
             else:
-                results.extend([
-                    self.get_results(payload, device, commit=False)
-                    for device in non_skipped_targets
-                ])
+                results.extend(
+                    [
+                        self.get_results(payload, device, commit=False)
+                        for device in non_skipped_targets
+                    ]
+                )
             if not results:
                 return {"discard": True}
             return {

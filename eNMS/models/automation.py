@@ -1208,6 +1208,7 @@ class Run(AbstractBase):
             "info",
             "OPENING Netmiko connection",
             device,
+            change_log=False,
             logger="security",
         )
         username, password = self.get_credentials(device)
@@ -1244,6 +1245,7 @@ class Run(AbstractBase):
             "info",
             "OPENING Scrapli connection",
             device,
+            change_log=False,
             logger="security",
         )
         username, password = self.get_credentials(device)
@@ -1269,6 +1271,7 @@ class Run(AbstractBase):
             "info",
             "OPENING Napalm connection",
             device,
+            change_log=False,
             logger="security",
         )
         username, password = self.get_credentials(device)

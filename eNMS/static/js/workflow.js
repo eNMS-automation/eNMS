@@ -824,7 +824,7 @@ function displayWorkflowState(result) {
       const failure = parseInt(state.progress?.device?.failure) || 0;
       colorService(
         id,
-        skipped == total
+          state.status == "Skipped" || total && skipped == total
           ? "#D3D3D3"
           : success + failure + skipped < total
           ? "#89CFF0"

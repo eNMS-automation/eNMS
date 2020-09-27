@@ -658,10 +658,6 @@ class Run(AbstractBase):
                 )
                 self.log("info", result, logger="security")
                 return {"result": result, "success": False}
-        if self.run_method != "once":
-            self.write_state(
-                "progress/device/total", len(self.target_devices), "increment"
-            )
         if self.iteration_devices and not self.parent_device:
             if not self.workflow:
                 result = "Device iteration not allowed outside of a workflow"
@@ -675,7 +671,36 @@ class Run(AbstractBase):
                 "summary": summary,
                 "runtime": self.runtime,
             }
-        elif self.run_method != "per_device":
+        self.write_state(
+            "progress/device/total", len(self.target_devices), "increment"
+        )
+        non_skipped_targets, results = [], []
+        skip_service = self.skip.get(self.workflow_name)
+        if skip_service:
+            self.write_state("status", "Skipped")
+        for device in self.target_devices:
+            skip_device = skip_service
+            if not skip_service and self.skip_query:
+                skip_device = self.eval(self.skip_query, **locals())[0]
+            if skip_device:
+                if device:
+                    self.write_state("progress/device/skipped", 1, "increment")
+                if self.skip_value == "Discard":
+                    continue
+                device_results = {
+                    "runtime": app.get_time(),
+                    "result": "skipped",
+                    "duration": "0:00:00",
+                    "success": self.skip_value == "True",
+                }
+                self.create_result(device_results, device, commit=False)
+                results.append(device_results)
+            else:
+                non_skipped_targets.append(device)
+        if self.run_method != "per_device":
+            self.write_state(
+                "progress/device/success", len(non_skipped_targets), "increment"
+            )
             return self.get_results(payload)
         else:
             if self.parent_runtime == self.runtime and not self.target_devices:
@@ -685,21 +710,19 @@ class Run(AbstractBase):
                 )
                 self.log("error", error)
                 return {"success": False, "runtime": self.runtime, "result": error}
-            if self.multiprocessing and len(self.target_devices) > 1:
-                results = []
-                processes = min(len(self.target_devices), self.max_processes)
+            if self.multiprocessing and len(non_skipped_targets) > 1:
+                processes = min(len(non_skipped_targets), self.max_processes)
                 process_args = [
                     (device.id, self.runtime, payload, results)
-                    for device in self.target_devices
+                    for device in non_skipped_targets
                 ]
                 with ThreadPool(processes=processes) as pool:
                     pool.map(self.get_device_result, process_args)
             else:
-                results = [
+                results.extend([
                     self.get_results(payload, device, commit=False)
-                    for device in self.target_devices
-                ]
-            results = list(filter(None, results))
+                    for device in non_skipped_targets
+                ])
             if not results:
                 return {"discard": True}
             return {
@@ -812,23 +835,6 @@ class Run(AbstractBase):
     def get_results(self, payload, device=None, commit=True):
         self.log("info", "STARTING", device)
         start = datetime.now().replace(microsecond=0)
-        skip_service = self.skip.get(self.workflow_name)
-        if not skip_service and self.skip_query:
-            skip_service = self.eval(self.skip_query, **locals())[0]
-        if skip_service:
-            if device:
-                self.write_state("progress/device/skipped", 1, "increment")
-            if self.skip_value == "Discard":
-                return
-            results = {
-                "result": "skipped",
-                "duration": "0:00:00",
-                "success": self.skip_value == "True",
-            }
-            self.create_result(
-                {"runtime": app.get_time(), **results}, device, commit=commit
-            )
-            return results
         results = {}
         try:
             if self.restart_run and self.service.type == "workflow":

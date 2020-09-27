@@ -151,31 +151,20 @@ class Workflow(Service):
                 results = service_run.run(payload)
                 if not results:
                     return
-            if service.run_method in ("once", "per_service_with_service_targets"):
-                edge_type = "success" if results["success"] else "failure"
+            summary = results.get("summary", {})
+            for edge_type in ("success", "failure"):
                 for successor, edge in service.adjacent_services(
-                    self, "destination", edge_type
+                    self,
+                    "destination",
+                    edge_type,
                 ):
-                    targets[successor.name] |= targets[service.name]
+                    if not summary[edge_type]:
+                        continue
+                    targets[successor.name] |= set(summary[edge_type])
                     services.append(successor)
                     run.write_state(
-                        f"edges/{edge.id}", len(targets[service.name]), "increment"
+                        f"edges/{edge.id}", len(summary[edge_type]), "increment"
                     )
-            else:
-                summary = results.get("summary", {})
-                for edge_type in ("success", "failure"):
-                    for successor, edge in service.adjacent_services(
-                        self,
-                        "destination",
-                        edge_type,
-                    ):
-                        if not summary[edge_type]:
-                            continue
-                        targets[successor.name] |= set(summary[edge_type])
-                        services.append(successor)
-                        run.write_state(
-                            f"edges/{edge.id}", len(summary[edge_type]), "increment"
-                        )
         success_devices = targets[end.name]
         failure_devices = targets[start.name] - success_devices
         success = not failure_devices

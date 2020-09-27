@@ -658,11 +658,11 @@ class Run(AbstractBase):
                 )
                 self.log("info", result, logger="security")
                 return {"result": result, "success": False}
+        summary = {"failure": [], "success": []}
         if self.iteration_devices and not self.parent_device:
             if not self.workflow:
                 result = "Device iteration not allowed outside of a workflow"
                 return {"success": False, "result": result, "runtime": self.runtime}
-            summary = {"failure": [], "success": []}
             for device in self.target_devices:
                 key = "success" if self.device_iteration(payload, device) else "failure"
                 summary[key].append(device.name)
@@ -693,15 +693,18 @@ class Run(AbstractBase):
                     "duration": "0:00:00",
                     "success": self.skip_value == "True",
                 }
+                summary_key = "success" if self.skip_value == "True" else "failure"
+                summary[summary_key].append(device.name)
                 self.create_result(device_results, device, commit=False)
                 results.append(device_results)
             else:
+                summary["success"].append(device.name)
                 non_skipped_targets.append(device)
         if self.run_method != "per_device":
             self.write_state(
                 "progress/device/success", len(non_skipped_targets), "increment"
             )
-            return self.get_results(payload)
+            return {"summary": summary, **self.get_results(payload)}
         else:
             if self.parent_runtime == self.runtime and not self.target_devices:
                 error = (

@@ -113,7 +113,7 @@
     '[Regression Workflow J: Workflow and Subworkflow Iteration] Subworkflow Iteration': [
       0, 0]
     '[Regression Workflow V: skip query with device in run once mode] Subworkflow in SxS mode - workflow targets': [
-      0, 0]
+      -77, -17]
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow 7: Payload Extraction & Validation'
     : [-115, -305]
@@ -270,7 +270,7 @@
     '[Regression Workflow V: skip query with device in run once mode] Subworkflow in SxS mode - service targets': !!python/tuple [
       500, 0]
     '[Regression Workflow V: skip query with device in run once mode] Subworkflow in SxS mode - workflow targets': [
-      500, 0]
+      521, -13]
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow 7: Payload Extraction & Validation'
     : [279, 262]
@@ -12800,7 +12800,7 @@
         \ considered a failure for the workflow.\r\nAustin should move along the failure\
         \ edge, and\r\nWashington should move along the success edge."
       positions: [-201, 295]
-  last_modified: '2020-09-27 03:55:24.071609'
+  last_modified: '2020-09-27 03:58:20.430158'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -12868,7 +12868,7 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels: {}
-  last_modified: '2020-09-27 03:55:51.026348'
+  last_modified: '2020-09-27 04:02:57.192549'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -12883,7 +12883,7 @@
   operating_system: ''
   pools: [All objects]
   positions:
-    'Regression Workflow V: skip query with device in run once mode': [-212, 165]
+    'Regression Workflow V: skip query with device in run once mode': [-221, 154]
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -12934,7 +12934,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2020-09-26 21:49:10.304513'
+  last_modified: '2020-09-27 03:59:10.932026'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -12963,7 +12963,7 @@
   shared: false
   skip: {}
   skip_query: device.name == "Washington"
-  skip_value: 'True'
+  skip_value: 'False'
   source_code: "\r\nresult = {}\r\nfor device in devices:\r\n  results.setdefault(\"\
     devices\", []).append(device.name)\r\nresults[\"success\"] = True\r\nresults[\"\
     result\"] = result"
@@ -13014,7 +13014,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow V: skip query with device in run once mode': [342, 205]
   postprocessing: ''
@@ -13078,7 +13078,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: [All objects]
   positions:
     '[Regression Workflow V: skip query with device in run once mode] Subworkflow in SxS mode - workflow targets': [
       230, -19]

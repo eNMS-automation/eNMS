@@ -672,7 +672,7 @@ class Run(AbstractBase):
                 "runtime": self.runtime,
             }
         self.write_state("progress/device/total", len(self.target_devices), "increment")
-        non_skipped_targets, results = [], []
+        non_skipped_targets, skipped_targets, results = [], [], []
         skip_service = self.skip.get(self.workflow_name)
         if skip_service:
             self.write_state("status", "Skipped")
@@ -692,7 +692,7 @@ class Run(AbstractBase):
                     "success": self.skip_value == "True",
                 }
                 summary_key = "success" if self.skip_value == "True" else "failure"
-                summary[summary_key].append(device.name)
+                skipped_targets.append(device.name)
                 self.create_result(device_results, device, commit=False)
                 results.append(device_results)
             else:
@@ -708,6 +708,8 @@ class Run(AbstractBase):
             for key in ("success", "failure"):
                 device_number = len(results["summary"][key])
                 self.write_state(f"progress/device/{key}", device_number)
+            skipped_key = "success" if self.skip_value == "True" else "failure"
+            summary[skipped_key].extend(skipped_targets)
             return results
         else:
             if self.parent_runtime == self.runtime and not self.target_devices:

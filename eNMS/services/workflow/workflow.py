@@ -172,8 +172,6 @@ class Workflow(Service):
             "success": list(success_devices),
             "failure": list(failure_devices),
         }
-        run.write_state("progress/device/success", len(success_devices))
-        run.write_state("progress/device/failure", len(failure_devices))
         db.session.refresh(run)
         run.restart_run = restart_run
         return {"payload": payload, "success": success, "summary": summary}

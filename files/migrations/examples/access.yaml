@@ -1,5 +1,6 @@
 - access_pools: [All objects]
   access_type: "['Read', 'Edit', 'Run', 'Schedule', 'Connect', 'Use as target']"
+  delete_requests: [/rest/instance]
   description: Full Access to Everything
   get_requests: [/dashboard, /download_file, /form/access, /form/access_relation_filtering,
     /form/add_services, /form/administration, /form/alerts_table, /form/ansible_playbook_service,
@@ -55,6 +56,7 @@
   user_pools: [Non-admin user pool]
 - access_pools: [Links 0 through 5 - Non-public pool - Access set up]
   access_type: "['Read', 'Edit']"
+  delete_requests: []
   description: ''
   get_requests: []
   menu: []
@@ -66,6 +68,7 @@
   user_pools: [User ny]
 - access_pools: [All objects]
   access_type: "['Read']"
+  delete_requests: []
   description: All menu entries and GET requests, all non-editing POST requests.
   get_requests: [/dashboard, /download_file, /form/add_services, /form/administration,
     /form/alerts_table, /form/ansible_playbook_service, /form/calendar, /form/changelog,
@@ -109,6 +112,7 @@
   user_pools: [User readonly]
 - access_pools: [Datacenter New York]
   access_type: "['Read']"
+  delete_requests: []
   description: 'ny york user should have access to: all devices in datacenter new
     york (READ + CONNECT), all links (EDIT for link 0-5 + 6-9, READ for the rest)'
   get_requests: []

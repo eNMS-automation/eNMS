@@ -64,6 +64,7 @@
       "pools",
       "links",
       "menu",
+      "delete_requests",
       "get_requests",
       "post_requests",
       "upper_menu",

@@ -83,6 +83,7 @@ class Access(AbstractBase):
     upper_menu = db.Column(db.List)
     get_requests = db.Column(db.List)
     post_requests = db.Column(db.List)
+    delete_requests = db.Column(db.List)
     user_pools = relationship(
         "Pool", secondary=db.access_user_pools_table, back_populates="access_users"
     )

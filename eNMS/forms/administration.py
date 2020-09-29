@@ -134,6 +134,9 @@ def init_variable_forms(app):
         post_requests = SelectMultipleField(
             "POST requests", choices=choices(app.rbac["post_requests"])
         )
+        delete_requests = SelectMultipleField(
+            "DELETE requests", choices=choices(app.rbac["delete_requests"])
+        )
         user_pools = MultipleInstanceField("pool")
         access_pools = MultipleInstanceField("pool")
         access_type = SelectMultipleStringField(

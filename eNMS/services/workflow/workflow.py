@@ -100,19 +100,13 @@ class Workflow(Service):
     def deep_edges(self):
         return sum([w.edges for w in self.deep_services if w.type == "workflow"], [])
 
-    def job(self, run, *args):
-        if run.run_method == "per_service_with_workflow_targets":
-            return self.tracking_bfs(run, *args)
-        else:
-            return self.standard_bfs(run, *args)
-
-    def tracking_bfs(self, run, payload):
+    def job(self, run, payload, device=None):
         number_of_runs = defaultdict(int)
         start = db.fetch("service", scoped_name="Start")
         end = db.fetch("service", scoped_name="End")
         services = [db.fetch("service", id=id) for id in run.start_services]
-        visited, success, targets = set(), False, defaultdict(set)
-        restart_run = run.restart_run
+        visited, targets, restart_run = set(), defaultdict(set), run.restart_run
+        tracking_bfs = run.run_method == "per_service_with_workflow_targets"
         for service in services:
             targets[service.name] |= {device.name for device in run.target_devices}
         while services:
@@ -126,17 +120,16 @@ class Workflow(Service):
                 continue
             number_of_runs[service.name] += 1
             visited.add(service)
-            if service in (start, end) or service.skip.get(self.name):
-                results = {
-                    "summary": {"success": targets[service.name], "failure": []},
-                    "success": True,
-                }
+            if service in (start, end) or service.skip.get(self.name, False):
+                success = True if service.skip_value == "True" else False
+                results = {"result": "skipped", "success": success}
+                if tracking_bfs:
+                    results["summary"] = {
+                        "success": targets[service.name],
+                        "failure": [],
+                    }
             else:
                 kwargs = {
-                    "target_devices": [
-                        db.fetch("device", name=name).id
-                        for name in targets[service.name]
-                    ],
                     "service": run.placeholder.id
                     if service.scoped_name == "Placeholder"
                     else service.id,
@@ -145,86 +138,53 @@ class Workflow(Service):
                     "parent": run,
                     "parent_runtime": run.parent_runtime,
                 }
+                if tracking_bfs:
+                    kwargs["target_devices"] = [
+                        db.fetch("device", name=name).id
+                        for name in targets[service.name]
+                    ]
+                elif device:
+                    kwargs["target_devices"] = [device.id]
                 if run.parent_device_id:
                     kwargs["parent_device"] = run.parent_device_id
                 service_run = db.factory("run", commit=True, **kwargs)
                 results = service_run.run(payload)
                 if not results:
                     continue
+            status = "success" if results["success"] else "failure"
             summary = results.get("summary", {})
+            if not tracking_bfs and not device:
+                run.write_state(f"progress/service/{status}", 1, "increment")
             for edge_type in ("success", "failure"):
+                if not tracking_bfs and edge_type != status:
+                    continue
+                if tracking_bfs and not summary[edge_type]:
+                    continue
                 for successor, edge in service.adjacent_services(
                     self,
                     "destination",
                     edge_type,
                 ):
-                    if not summary[edge_type]:
-                        continue
-                    targets[successor.name] |= set(summary[edge_type])
+                    if tracking_bfs:
+                        targets[successor.name] |= set(summary[edge_type])
                     services.append(successor)
-                    run.write_state(
-                        f"edges/{edge.id}", len(summary[edge_type]), "increment"
-                    )
-        failed = list(targets[start.name] - targets[end.name])
-        summary = {"success": list(targets[end.name]), "failure": failed}
+                    if tracking_bfs:
+                        run.write_state(
+                            f"edges/{edge.id}", len(summary[edge_type]), "increment"
+                        )
+                    elif device:
+                        run.write_state(f"edges/{edge.id}", 1, "increment")
+                    else:
+                        run.write_state(f"edges/{edge.id}", "DONE")
+        if tracking_bfs:
+            failed = list(targets[start.name] - targets[end.name])
+            summary = {"success": list(targets[end.name]), "failure": failed}
+            results = {"payload": payload, "success": not failed, "summary": summary}
+        else:
+            results = {"payload": payload, "success": end in visited}
         db.session.refresh(run)
         run.restart_run = restart_run
-        return {"payload": payload, "success": not failed, "summary": summary}
-
-    def standard_bfs(self, run, payload, device=None):
-        number_of_runs = defaultdict(int)
-        start = db.fetch("service", scoped_name="Start")
-        end = db.fetch("service", scoped_name="End")
-        services = [db.fetch("service", id=id) for id in run.start_services]
-        restart_run = run.restart_run
-        visited = set()
-        while services:
-            if run.stop:
-                return {"payload": payload, "success": False}
-            service = services.pop()
-            if number_of_runs[service.name] >= service.maximum_runs or any(
-                node not in visited
-                for node, _ in service.adjacent_services(self, "source", "prerequisite")
-            ):
-                continue
-            number_of_runs[service.name] += 1
-            visited.add(service)
-            if service in (start, end):
-                results = {"result": "skipped", "success": True}
-            else:
-                kwargs = {
-                    "service": run.placeholder.id
-                    if service.scoped_name == "Placeholder"
-                    else service.id,
-                    "workflow": self.id,
-                    "restart_run": restart_run,
-                    "parent": run,
-                    "parent_runtime": run.parent_runtime,
-                }
-                if run.parent_device_id:
-                    kwargs["parent_device"] = run.parent_device_id
-                if device:
-                    kwargs["target_devices"] = [device.id]
-                service_run = db.factory("run", commit=True, **kwargs)
-                results = service_run.run(payload)
-                if not results:
-                    continue
-            if not device:
-                status = "success" if results["success"] else "failure"
-                run.write_state(f"progress/service/{status}", 1, "increment")
-            for successor, edge in service.adjacent_services(
-                self,
-                "destination",
-                "success" if results["success"] else "failure",
-            ):
-                services.append(successor)
-                if device:
-                    run.write_state(f"edges/{edge.id}", 1, "increment")
-                else:
-                    run.write_state(f"edges/{edge.id}", "DONE")
-        db.session.refresh(run)
-        run.restart_run = restart_run
-        return {"payload": payload, "success": end in visited}
+        return results
 
 
 class WorkflowForm(ServiceForm):

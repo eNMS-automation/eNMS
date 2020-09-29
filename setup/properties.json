@@ -249,6 +249,35 @@
         "orderable": false
       },
       {
+        "data": "last_status",
+        "title": "Status",
+        "search": "text"
+      },
+      {
+        "data": "last_failure",
+        "title": "Last Failure",
+        "search": "text",
+        "visible": false
+      },
+      {
+        "data": "last_update",
+        "title": "Last Update",
+        "search": "text",
+        "visible": false
+      },
+      {
+        "data": "last_runtime",
+        "title": "Last Runtime",
+        "search": "text",
+        "visible": false
+      },
+      {
+        "data": "last_duration",
+        "title": "Last Duration",
+        "search": "text",
+        "visible": false
+      },
+      {
         "data": "subtype",
         "title": "Subtype",
         "search": "text",
@@ -300,7 +329,7 @@
         "data": "configuration",
         "title": "Configuration",
         "search": "text",
-        "width": "80%",
+        "width": "70%",
         "visible": true,
         "orderable": false
       },

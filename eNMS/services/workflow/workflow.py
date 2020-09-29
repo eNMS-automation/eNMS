@@ -150,7 +150,7 @@ class Workflow(Service):
                 service_run = db.factory("run", commit=True, **kwargs)
                 results = service_run.run(payload)
                 if not results:
-                    return
+                    continue
             summary = results.get("summary", {})
             for edge_type in ("success", "failure"):
                 for successor, edge in service.adjacent_services(

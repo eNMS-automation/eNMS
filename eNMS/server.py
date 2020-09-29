@@ -180,7 +180,7 @@ class Server(Flask):
             if user:
                 request_type = f"{request.method.lower()}_requests"
                 endpoint = "/".join(request.path.split("/")[:3])
-                authorized_endpoint = endpoint in getattr(user, request_type)
+                authorized_endpoint = endpoint in getattr(user, request_type, [])
                 if user.is_admin or authorized_endpoint:
                     login_user(user)
                     return True

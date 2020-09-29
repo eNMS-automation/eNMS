@@ -779,7 +779,7 @@ class Run(AbstractBase):
         while retries and total_retries < self.max_number_of_retries:
             if self.stop:
                 self.log("error", f"ABORTING {device.name} (STOP)")
-                return {"success": False, "result": "Aborted (STOP)"}
+                return {"success": False, "result": "Stopped"}
             retries -= 1
             total_retries += 1
             try:

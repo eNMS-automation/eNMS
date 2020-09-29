@@ -111,7 +111,7 @@ class Workflow(Service):
             targets[service.name] |= {device.name for device in run.target_devices}
         while services:
             if run.stop:
-                return {"payload": payload, "success": False, "result": "stopped"}
+                return {"payload": payload, "success": False, "result": "Stopped"}
             service = services.pop()
             if number_of_runs[service.name] >= service.maximum_runs or any(
                 node not in visited

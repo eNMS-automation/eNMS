@@ -7,6 +7,7 @@ from sqlalchemy.orm import relationship
 
 from eNMS import app
 from eNMS.database import db
+from eNMS.models import models
 from eNMS.models.base import AbstractBase
 
 
@@ -54,21 +55,18 @@ class User(AbstractBase, UserMixin):
         if app.settings["security"]["hash_user_passwords"] and kwargs.get("password"):
             kwargs["password"] = argon2.hash(kwargs["password"])
         super().update(**kwargs)
-        self.update_rbac()
 
-    @property
-    def user_access(self):
-        for pool in self.pools:
-            yield from pool.access
-
-    def update_rbac(self):
-        if self.is_admin:
-            return
-        for access_type in app.rbac:
-            if not hasattr(self, access_type):
-                continue
-            result = (getattr(access, access_type) for access in self.user_access)
-            setattr(self, access_type, list(set().union(*result)))
+    def endpoint_access(self, endpoint, property):
+        return any(
+            endpoint in getattr(access, property)
+            for access in (
+                db.session.query(models["access"])
+                .join(models["pool"], models["access"].user_pools)
+                .join(models["user"], models["pool"].users)
+                .filter(models["user"].name == self.name)
+                .all()
+            )
+        )
 
 
 @db.set_custom_properties
@@ -91,15 +89,6 @@ class Access(AbstractBase):
         "Pool", secondary=db.access_model_pools_table, back_populates="access"
     )
     access_type = db.Column(db.SmallString)
-
-    def get_users(self):
-        return set(chain.from_iterable(pool.users for pool in self.user_pools))
-
-    def update(self, **kwargs):
-        old_users = self.get_users()
-        super().update(**kwargs)
-        for user in old_users | self.get_users():
-            user.update_rbac()
 
 
 @db.set_custom_properties

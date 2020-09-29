@@ -115,7 +115,7 @@
   user_name: .*
   user_name_match: regex
   user_number: 6
-  users: [admin, readonly, chicago, sf, ny, nadmin]
+  users: [nadmin, readonly, ny, chicago, sf, admin]
 - access_users: []
   creator: ''
   description: Devices only

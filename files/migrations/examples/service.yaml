@@ -12248,6 +12248,11 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels:
+    7ac4a816-41e6-4737-aa39-4df30198b799:
+      alignment: left
+      content: "This service is configured to discard all devices,\r\nso as to test\
+        \ that it works when all devices are discarded."
+      positions: [39, 502]
     f8de3ca5-718c-4d76-860e-ddceeb7e3f83:
       alignment: left
       content: "This workflow runs on 5 devices:\r\n* 2 with model \"Arista\": Washington,\
@@ -12259,7 +12264,7 @@
         \ edge after skip service)\r\n- 2 devices discarded in the lower path (0 device\
         \ in the failure edge after skip service)"
       positions: [23, 144]
-  last_modified: '2020-09-25 04:35:18.331821'
+  last_modified: '2020-09-29 00:56:27.443813'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -12290,7 +12295,7 @@
       Workflow U: fork based on value with skip discard mode] Show VRF', '[Regression
       Workflow U: fork based on value with skip discard mode] is_alive endpoint',
     '[Regression Workflow U: fork based on value with skip discard mode] is_alive
-      endpoint 2']
+      endpoint 2: Skipped']
   shared: false
   skip: {}
   skip_query: ''
@@ -12706,7 +12711,7 @@
   iteration_devices_property: ip_address
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2020-09-25 04:29:12.592558'
+  last_modified: '2020-09-29 00:55:48.720517'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -12714,7 +12719,7 @@
   maximum_runs: 1
   multiprocessing: true
   name: '[Regression Workflow U: fork based on value with skip discard mode] is_alive
-    endpoint 2'
+    endpoint 2: Skipped'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -12734,13 +12739,13 @@
   reserved: false
   rest_url: http://127.0.0.1:5000/rest/is_alive
   run_method: per_device
-  scoped_name: is_alive endpoint 2
+  scoped_name: 'is_alive endpoint 2: Skipped'
   send_notification: false
   send_notification_method: mail
   shared: false
   skip: {}
-  skip_query: ''
-  skip_value: 'True'
+  skip_query: 'True'
+  skip_value: Discard
   target_devices: []
   target_pools: []
   time_between_retries: 10

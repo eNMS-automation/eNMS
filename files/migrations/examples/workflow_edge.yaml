@@ -881,16 +881,16 @@
   type: workflow_edge, workflow: 'Regression Workflow U: fork based on value with
     skip discard mode'}
 - {color: green, destination: '[Shared] End', label: success, source: '[Regression
-    Workflow U: fork based on value with skip discard mode] is_alive endpoint 2',
+    Workflow U: fork based on value with skip discard mode] is_alive endpoint 2: Skipped',
   subtype: success, type: workflow_edge, workflow: 'Regression Workflow U: fork based
     on value with skip discard mode'}
 - {color: red, destination: '[Shared] End', label: failure, source: '[Regression Workflow
-    U: fork based on value with skip discard mode] is_alive endpoint 2', subtype: failure,
-  type: workflow_edge, workflow: 'Regression Workflow U: fork based on value with
-    skip discard mode'}
+    U: fork based on value with skip discard mode] is_alive endpoint 2: Skipped',
+  subtype: failure, type: workflow_edge, workflow: 'Regression Workflow U: fork based
+    on value with skip discard mode'}
 - {color: green, destination: '[Regression Workflow U: fork based on value with skip
-    discard mode] is_alive endpoint 2', label: success, source: '[Regression Workflow
-    U: fork based on value with skip discard mode] Juniper devices', subtype: success,
+    discard mode] is_alive endpoint 2: Skipped', label: success, source: '[Regression
+    Workflow U: fork based on value with skip discard mode] Juniper devices', subtype: success,
   type: workflow_edge, workflow: 'Regression Workflow U: fork based on value with
     skip discard mode'}
 - {color: red, destination: '[Shared] End', label: failure, source: '[Regression Workflow

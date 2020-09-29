@@ -111,11 +111,11 @@ class Workflow(Service):
             targets[service.name] |= {device.name for device in run.target_devices}
         while services:
             if run.stop:
-                return {"payload": payload, "success": False}
+                return {"payload": payload, "success": False, "result": "stopped"}
             service = services.pop()
             if number_of_runs[service.name] >= service.maximum_runs or any(
                 node not in visited
-                for node, _ in service.adjacent_services(self, "source", "prerequisite")
+                for node, _ in service.neighbors(self, "source", "prerequisite")
             ):
                 continue
             number_of_runs[service.name] += 1
@@ -160,10 +160,8 @@ class Workflow(Service):
                     continue
                 if tracking_bfs and not summary[edge_type]:
                     continue
-                for successor, edge in service.adjacent_services(
-                    self,
-                    "destination",
-                    edge_type,
+                for successor, edge in service.neighbors(
+                    self, "destination", edge_type
                 ):
                     if tracking_bfs:
                         targets[successor.name] |= set(summary[edge_type])

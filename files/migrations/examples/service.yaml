@@ -12263,8 +12263,8 @@
         \ results:\r\n- 3 devices discarded in the upper path. (0 device in the failure\
         \ edge after skip service)\r\n- 2 devices discarded in the lower path (0 device\
         \ in the failure edge after skip service)"
-      positions: [23, 144]
-  last_modified: '2020-09-29 00:56:27.443813'
+      positions: [-12, 193]
+  last_modified: '2020-09-29 04:30:34.627953'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -12783,20 +12783,21 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels:
-    09381c09-3f0e-4a05-80e6-c9859e22a8e2:
+    7c48dd42-cfd7-435d-97d6-ae4b37603d84:
       alignment: left
       content: "In this service, Washington should be skipped\r\nwith a skipped value\
-        \ of True:\r\nit should move forward to the subworkflow with the failure edge.\r\
-        \nThe other devices should appear in the results under the \"devices\" key."
-      positions: [-10, -107]
-    82cc65f2-2001-4c1b-9387-3c5f85282370:
+        \ of False:\r\nit should move forward to the subworkflow with the failure\
+        \ edge.\r\nThe other devices should appear in the results under the \"devices\"\
+        \ key."
+      positions: ['-10', '-107']
+    d4451b5e-1d2c-4a43-bbbc-3fd0e60eda25:
       alignment: left
       content: "When a service is in \"Run once\" mode, it must\r\nbe allowed to skip\
         \ devices with the skip query.\r\nThis also applies to a subworkflow in SxS\
-        \ mode,\r\nwhich is equivalent to a service in run once mode.\r\nThis workflow\
-        \ must be tested in SxS and DxD mode.\r\nBesides,  the first service must\
-        \ be tested in full skip mode\r\nto make sure the display is correct."
-      positions: [472, -84]
+        \ mode,\r\nwhich is equivalent to a service in run once mode.\r\nBesides,\
+        \  the first service must be tested in full skip mode\r\nto make sure the\
+        \ display is correct."
+      positions: ['472', '-84']
     f9a7af7c-88d0-46ff-84f9-9a15cf4df7b1:
       alignment: left
       content: "PaloAlto is skipped at workflow level with skip value set to Discard.\r\
@@ -12805,7 +12806,7 @@
         \ considered a failure for the workflow.\r\nAustin should move along the failure\
         \ edge, and\r\nWashington should move along the success edge."
       positions: [-201, 295]
-  last_modified: '2020-09-27 03:58:20.430158'
+  last_modified: '2020-09-29 04:31:23.956521'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -12939,7 +12940,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2020-09-27 03:59:10.932026'
+  last_modified: '2020-09-29 04:31:17.767321'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -12969,9 +12970,9 @@
   skip: {}
   skip_query: device.name == "Washington"
   skip_value: 'False'
-  source_code: "\r\nresult = {}\r\nfor device in devices:\r\n  results.setdefault(\"\
-    devices\", []).append(device.name)\r\nresults[\"success\"] = True\r\nresults[\"\
-    result\"] = result"
+  source_code: "result = {}\r\nfor device in devices:\r\n  results.setdefault(\"devices\"\
+    , []).append(device.name)\r\nresults[\"success\"] = True\r\nresults[\"result\"\
+    ] = result"
   target_devices: []
   target_pools: []
   time_between_retries: 10

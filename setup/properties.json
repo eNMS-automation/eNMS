@@ -249,36 +249,6 @@
         "orderable": false
       },
       {
-        "data": "last_status",
-        "title": "Status",
-        "search": "text",
-        "width": "80px"
-      },
-      {
-        "data": "last_failure",
-        "title": "Last Failure",
-        "search": "text",
-        "visible": false
-      },
-      {
-        "data": "last_update",
-        "title": "Last Update",
-        "search": "text",
-        "visible": false
-      },
-      {
-        "data": "last_runtime",
-        "title": "Last Runtime",
-        "search": "text",
-        "visible": false
-      },
-      {
-        "data": "last_duration",
-        "title": "Last Duration",
-        "search": "text",
-        "visible": false
-      },
-      {
         "data": "subtype",
         "title": "Subtype",
         "search": "text",
@@ -341,6 +311,36 @@
         "width": "80%",
         "visible": false,
         "orderable": false
+      },
+      {
+        "data": "last_status",
+        "title": "Status",
+        "search": "text",
+        "width": "80px"
+      },
+      {
+        "data": "last_failure",
+        "title": "Last Failure",
+        "search": "text",
+        "visible": false
+      },
+      {
+        "data": "last_update",
+        "title": "Last Update",
+        "search": "text",
+        "visible": false
+      },
+      {
+        "data": "last_runtime",
+        "title": "Last Runtime",
+        "search": "text",
+        "visible": false
+      },
+      {
+        "data": "last_duration",
+        "title": "Last Duration",
+        "search": "text",
+        "visible": false
       },
       {
         "data": "buttons",

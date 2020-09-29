@@ -424,9 +424,10 @@ tables.configuration = class ConfigurationTable extends Table {
       derivedProperties: ["last_runtime"],
       ...kwargs,
     });
-    row.last_status = row.last_status == "Success"
-      ? `<button type="button" class="btn btn-sm btn-success">Success</button>`
-      : `<button type="button" class="btn btn-sm btn-danger">Failure</button>`
+    row.last_status =
+      row.last_status == "Success"
+        ? `<button type="button" class="btn btn-sm btn-success">Success</button>`
+        : `<button type="button" class="btn btn-sm btn-danger">Failure</button>`;
     return row;
   }
 

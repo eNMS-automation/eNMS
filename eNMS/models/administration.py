@@ -39,6 +39,7 @@ class User(AbstractBase, UserMixin):
     upper_menu = db.Column(db.List)
     get_requests = db.Column(db.List)
     post_requests = db.Column(db.List)
+    delete_requests = db.Column(db.List)
     small_menu = db.Column(Boolean, default=False, info={"dont_track_changes": True})
     theme = db.Column(
         db.SmallString, default="default", info={"dont_track_changes": True}

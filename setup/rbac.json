@@ -68,6 +68,7 @@
     "Events"
   ],
   "upper_menu": ["Admin", "Settings", "Files"],
+  "delete_requests": ["/rest/instance"],
   "get_requests": [
     "/dashboard",
     "/download_file",

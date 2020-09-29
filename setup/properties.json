@@ -251,7 +251,8 @@
       {
         "data": "last_status",
         "title": "Status",
-        "search": "text"
+        "search": "text",
+        "width": "80px"
       },
       {
         "data": "last_failure",

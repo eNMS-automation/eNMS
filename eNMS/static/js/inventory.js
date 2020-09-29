@@ -373,9 +373,19 @@ function showGitHistory(device) {
                 columns: [
                   { width: "250px", title: "Datetime" },
                   { title: "Git Commit Hash" },
-                  { width: "35px", className: "dt-center" },
-                  { width: "30px", title: "V1", className: "dt-center" },
-                  { width: "30px", title: "V2", className: "dt-center" },
+                  { width: "35px", className: "dt-center", orderable: false },
+                  {
+                    width: "30px",
+                    title: "V1",
+                    className: "dt-center",
+                    orderable: false,
+                  },
+                  {
+                    width: "30px",
+                    title: "V2",
+                    className: "dt-center",
+                    orderable: false,
+                  },
                 ],
               })
               .order([0, "desc"])

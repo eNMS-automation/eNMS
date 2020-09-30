@@ -409,7 +409,7 @@ function refreshLogs(service, runtime, editor, first, wasRefreshed, line) {
       if (!first && result.refresh && result.logs.length) {
         editor.replaceRange(`\n${result.logs}`, CodeMirror.Pos(editor.lineCount()));
         editor.setCursor(editor.lineCount(), 0);
-      } else if (first) {
+      } else if (first || !result.refresh) {
         editor.setValue(result.logs);
         editor.refresh();
       }
@@ -418,11 +418,11 @@ function refreshLogs(service, runtime, editor, first, wasRefreshed, line) {
           () => refreshLogs(service, runtime, editor, false, result.refresh, result.line),
           1000
         );
-      } else if (wasRefreshed) {
+      }/* else if (wasRefreshed) {
         $(`#logs-${service.id}`).remove();
         const table = service.type == "workflow" ? null : "result";
         showRuntimePanel("results", service, runtime, table);
-      }
+      }*/
     },
   });
 }

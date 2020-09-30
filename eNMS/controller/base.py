@@ -254,21 +254,22 @@ class BaseController:
         except (ConnectionError, TimeoutError) as exc:
             self.log("error", f"Redis Queue Unreachable ({exc})", change_log=False)
 
-    def log_queue(self, runtime, service, log=None, mode="add"):
+    def log_queue(self, runtime, service, log=None, mode="add", start_line=0):
         if self.redis_queue:
             key = f"{runtime}/{service}/logs"
             self.run_logs[runtime][int(service)] = None
             if mode == "add":
                 log = self.redis("lpush", key, log)
             else:
-                log = self.redis("lrange", key, 0, -1)
+                log = self.redis("lrange", key, start_line, -1)
                 if log:
                     log = log[::-1]
         else:
             if mode == "add":
                 return self.run_logs[runtime][int(service)].append(log)
             else:
-                log = getattr(self.run_logs[runtime], mode)(int(service), [])
+                full_log = getattr(self.run_logs[runtime], mode)(int(service), [])
+                log = full_log[start_line:]
         return log
 
     def delete_instance(self, model, instance_id):

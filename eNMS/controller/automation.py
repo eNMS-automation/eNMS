@@ -214,14 +214,19 @@ class AutomationController(BaseController):
         runs = db.fetch("run", allow_none=True, all_matches=True, service_id=id)
         return sorted(set((run.parent_runtime, run.parent_runtime) for run in runs))
 
-    def get_service_logs(self, service, runtime):
+    def get_service_logs(self, service, runtime, start_line):
         log_instance = db.fetch(
             "service_log", allow_none=True, runtime=runtime, service_id=service
         )
         if log_instance:
             log = log_instance.content
         else:
-            log = "\n".join(self.log_queue(runtime, service, mode="get") or [])
+            log = "\n".join(
+                self.log_queue(
+                    runtime, service, start_line=int(start_line) - 1, mode="get"
+                )
+                or []
+            )
         return {"logs": log, "refresh": not log_instance}
 
     def get_service_state(self, path, runtime=None):

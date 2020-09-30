@@ -400,16 +400,14 @@ function displayResultsTable(service, runtime, _, table) {
   new tables[table](table, service, runtime || currentRuntime, service.id);
 }
 
-function refreshLogs(service, runtime, editor, first, wasRefreshed) {
+function refreshLogs(service, runtime, editor, first, wasRefreshed, line) {
   if (!$(`#service-logs-${service.id}`).length) return;
   if (runtime != $(`#runtimes-logs-${service.id}`).val()) return;
   call({
-    url: `/get_service_logs/${service.id}/${runtime}/${editor.lineCount()}`,
+    url: `/get_service_logs/${service.id}/${runtime}/${line || 0}`,
     callback: function (result) {
-      if (!first && result.refresh) {
-        
-        const logs = `${editor.lineCount() > 1 ? "\n" : ""}${result.logs}`
-        editor.replaceRange(logs, CodeMirror.Pos(editor.lineCount()));
+      if (!first && result.refresh && result.logs.length) {
+        editor.replaceRange(`\n${result.logs}`, CodeMirror.Pos(editor.lineCount()));
         editor.setCursor(editor.lineCount(), 0);
       } else if (first) {
         editor.setValue(result.logs);
@@ -417,7 +415,7 @@ function refreshLogs(service, runtime, editor, first, wasRefreshed) {
       }
       if (first || result.refresh) {
         setTimeout(
-          () => refreshLogs(service, runtime, editor, false, result.refresh),
+          () => refreshLogs(service, runtime, editor, false, result.refresh, result.line),
           1000
         );
       } else if (wasRefreshed) {

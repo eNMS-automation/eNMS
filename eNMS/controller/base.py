@@ -261,9 +261,9 @@ class BaseController:
             if mode == "add":
                 log = self.redis("lpush", key, log)
             else:
-                log = self.redis("lrange", key, start_line, -1)
+                log = self.redis("lrange", key, 0, -1)
                 if log:
-                    log = log[::-1]
+                    log = log[::-1][start_line:]
         else:
             if mode == "add":
                 return self.run_logs[runtime][int(service)].append(log)

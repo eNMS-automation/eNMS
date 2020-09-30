@@ -218,16 +218,16 @@ class AutomationController(BaseController):
         log_instance = db.fetch(
             "service_log", allow_none=True, runtime=runtime, service_id=service
         )
+        number_of_lines = 0
         if log_instance:
             log = log_instance.content
         else:
-            log = "\n".join(
-                self.log_queue(
+            lines = self.log_queue(
                     runtime, service, start_line=int(start_line) - 1, mode="get"
-                )
-                or []
-            )
-        return {"logs": log, "refresh": not log_instance}
+                ) or []
+            number_of_lines = len(lines)
+            log = "\n".join(lines)
+        return {"logs": log, "refresh": not log_instance, "line": int(start_line) + number_of_lines}
 
     def get_service_state(self, path, runtime=None):
         service_id, state = path.split(">")[-1], None

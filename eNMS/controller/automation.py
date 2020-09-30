@@ -223,7 +223,7 @@ class AutomationController(BaseController):
             log = log_instance.content
         else:
             lines = self.log_queue(
-                    runtime, service, start_line=int(start_line) - 1, mode="get"
+                    runtime, service, start_line=int(start_line), mode="get"
                 ) or []
             number_of_lines = len(lines)
             log = "\n".join(lines)

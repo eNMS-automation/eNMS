@@ -402,6 +402,7 @@ function displayResultsTable(service, runtime, _, table) {
 
 function refreshLogs(service, runtime, editor, first, wasRefreshed) {
   if (!$(`#service-logs-${service.id}`).length) return;
+  if (runtime != $(`#runtimes-logs-${service.id}`).val()) return;
   call({
     url: `/get_service_logs/${service.id}/${runtime}`,
     callback: function (result) {

@@ -220,14 +220,18 @@ class AutomationController(BaseController):
         )
         number_of_lines = 0
         if log_instance:
-            log = log_instance.content
+            logs = log_instance.content
         else:
-            lines = self.log_queue(
-                    runtime, service, start_line=int(start_line), mode="get"
-                ) or []
-            number_of_lines = len(lines)
-            log = "\n".join(lines)
-        return {"logs": log, "refresh": not log_instance, "line": int(start_line) + number_of_lines}
+            lines = (
+                self.log_queue(runtime, service, start_line=int(start_line), mode="get")
+                or []
+            )
+            number_of_lines, logs = len(lines), "\n".join(lines)
+        return {
+            "logs": logs,
+            "refresh": not log_instance,
+            "line": int(start_line) + number_of_lines,
+        }
 
     def get_service_state(self, path, runtime=None):
         service_id, state = path.split(">")[-1], None

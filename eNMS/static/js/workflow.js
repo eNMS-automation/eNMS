@@ -525,7 +525,7 @@ function drawIterationEdge(service) {
         color: "black",
         arrows: { to: { enabled: true } },
         title: title,
-        font: { vadjust: -15 }
+        font: { vadjust: -15 },
       });
     }
   }

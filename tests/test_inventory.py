@@ -137,4 +137,4 @@ def test_pool_management(user_client):
     assert len(p1.links) == 20
     assert len(p2.devices) == 12
     assert len(p2.links) == 4
-    assert len(db.fetch_all("pool")) == 14
+    assert len(db.fetch_all("pool")) == 15

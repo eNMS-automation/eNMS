@@ -407,6 +407,7 @@ function refreshLogs(service, runtime, editor, first, wasRefreshed, line) {
     url: `/get_service_logs/${service.id}/${runtime}/${line || 0}`,
     callback: function (result) {
       if (!first && result.refresh && result.logs.length) {
+        // eslint-disable-next-line new-cap
         editor.replaceRange(`\n${result.logs}`, CodeMirror.Pos(editor.lineCount()));
         editor.setCursor(editor.lineCount(), 0);
       } else if (first || !result.refresh) {
@@ -415,7 +416,8 @@ function refreshLogs(service, runtime, editor, first, wasRefreshed, line) {
       }
       if (first || result.refresh) {
         setTimeout(
-          () => refreshLogs(service, runtime, editor, false, result.refresh, result.line),
+          () =>
+            refreshLogs(service, runtime, editor, false, result.refresh, result.line),
           1000
         );
       } else if (wasRefreshed) {

@@ -570,11 +570,6 @@ class Run(AbstractBase):
         finally:
             db.session.commit()
             state = self.get_state()
-            if "summary" not in results:
-                results["summary"] = {"failure": [], "success": []}
-                for result in self.results:
-                    key = "success" if result.result["success"] else "failure"
-                    results["summary"][key].append(result.device.name)
             self.status = state["status"] = "Aborted" if self.stop else "Completed"
             self.success = results["success"]
             if self.send_notification:
@@ -666,11 +661,11 @@ class Run(AbstractBase):
                 return {"result": result, "success": False}
         if self.run_method != "once":
             self.write_state("progress/device/total", len(self.devices), "increment")
+        summary = {"failure": [], "success": []}
         if self.iteration_devices and not self.parent_device:
             if not self.workflow:
                 result = "Device iteration not allowed outside of a workflow"
                 return {"success": False, "result": result, "runtime": self.runtime}
-            summary = {"failure": [], "success": []}
             for device in self.devices:
                 key = "success" if self.device_iteration(payload, device) else "failure"
                 summary[key].append(device.name)
@@ -703,7 +698,11 @@ class Run(AbstractBase):
                     self.get_results(payload, device, commit=False)
                     for device in self.devices
                 ]
+            for result in results:
+                key = "success" if result["success"] else "failure"
+                summary[key].append(result["device_target"])
             return {
+                "summary": summary,
                 "success": all(result["success"] for result in results),
                 "runtime": self.runtime,
             }
@@ -814,21 +813,23 @@ class Run(AbstractBase):
         self.log("info", "STARTING", device)
         start = datetime.now().replace(microsecond=0)
         skip_service = False
+        results = {"device_target": getattr(device, "name", None)}
         if self.skip_query:
             skip_service = self.eval(self.skip_query, **locals())[0]
         if skip_service or self.skip:
+            results.update(
+                {
+                    "result": "skipped",
+                    "duration": "0:00:00",
+                    "success": self.skip_value == "True",
+                }
+            )
             if device:
                 self.write_state("progress/device/skipped", 1, "increment")
-            results = {
-                "result": "skipped",
-                "duration": "0:00:00",
-                "success": self.skip_value == "True",
-            }
             self.create_result(
                 {"runtime": app.get_time(), **results}, device, commit=commit
             )
             return results
-        results = {}
         try:
             if self.restart_run and self.service.type == "workflow":
                 old_result = self.restart_run.result(

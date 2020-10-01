@@ -875,10 +875,9 @@ class Run(AbstractBase):
             else:
                 results.update(self.run_service_job(payload, device))
         except Exception:
-            results.update(
-                {"success": False, "result": "\n".join(format_exc().splitlines())}
-            )
-            self.log("error", "\n".join(format_exc().splitlines()), device)
+            formatted_error = "\n".join(format_exc().splitlines())
+            results.update({"success": False, "result": formatted_error})
+            self.log("error", formatted_error, device)
         results["duration"] = str(datetime.now().replace(microsecond=0) - start)
         if device:
             status = "success" if results["success"] else "failure"

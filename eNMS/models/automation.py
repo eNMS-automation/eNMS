@@ -561,11 +561,6 @@ class Run(AbstractBase):
                 return
             db.session.commit()
             state = self.get_state()
-            if "summary" not in results:
-                results["summary"] = {"failure": [], "success": []}
-                for result in self.results:
-                    key = "success" if result.result["success"] else "failure"
-                    results["summary"][key].append(result.device.name)
             self.status = state["status"] = "Aborted" if self.stop else "Completed"
             self.success = results["success"]
             if self.update_pools_after_running:
@@ -736,7 +731,11 @@ class Run(AbstractBase):
                 )
             if not results:
                 return {"discard": True}
+            for result in results:
+                key = "success" if result["success"] else "failure"
+                summary[key].append(result["device_target"])
             return {
+                "summary": summary,
                 "success": all(result["success"] for result in results if result),
                 "runtime": self.runtime,
             }
@@ -846,7 +845,7 @@ class Run(AbstractBase):
     def get_results(self, payload, device=None, commit=True):
         self.log("info", "STARTING", device)
         start = datetime.now().replace(microsecond=0)
-        results = {}
+        results = {"device_target": getattr(device, "name", None)}
         try:
             if self.restart_run and self.service.type == "workflow":
                 old_result = self.restart_run.result(

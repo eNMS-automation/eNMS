@@ -1,4 +1,5 @@
 from base64 import b64decode, b64encode
+from click import get_current_context
 from collections import Counter
 from cryptography.fernet import Fernet
 from datetime import datetime
@@ -63,6 +64,7 @@ class BaseController:
         self.properties = properties
         self.database = database
         self.logging = logging
+        self.cli_command = self.detect_cli()
         self.load_custom_properties()
         self.path = Path.cwd()
         self.init_encryption()
@@ -87,6 +89,12 @@ class BaseController:
         else:
             self.encrypt, self.decrypt = b64encode, b64decode
 
+    def detect_cli(self):
+        try:
+            return get_current_context().info_name == "flask"
+        except RuntimeError:
+            return False
+
     def encrypt_password(self, password):
         if isinstance(password, str):
             password = str.encode(password)
@@ -104,6 +112,8 @@ class BaseController:
         db.base.metadata.create_all(bind=db.engine)
         configure_mappers()
         db.configure_application_events(self)
+        if self.cli_command:
+            return
         self.init_forms()
         if not db.fetch("user", allow_none=True, name="admin"):
             self.create_admin_user()

@@ -83,6 +83,8 @@
     'Regression Workflow V: skip query with device in run once mode': [-412, -72]
     'Regression Workflow V: skip query with device in subworkflow SxS': [-71, -2]
     'Regression Workflow W: disable result creation mode': [-295, -141]
+    'Regression Workflow W: skip, discard and disable result creation mechanism': [
+      -295, -141]
     'Regression workflow P: large workflow (scalability)': *id004
     Subworkflow 1: !!python/tuple [0, 0]
     Subworkflow 2: !!python/tuple [0, 0]
@@ -115,7 +117,10 @@
       0, 0]
     '[Regression Workflow V: skip query with device in run once mode] Subworkflow in SxS mode - workflow targets': [
       -77, -17]
-    '[Regression Workflow W: disable result creation mode] Workflow in DxD mode': [
+    '[Regression Workflow W: disable result creation mode] Workflow in DxD mode': &id006 [
+      0, 0]
+    '[Regression Workflow W: skip, discard and disable result creation mechanism] Workflow in DxD mode': *id006
+    '[Regression Workflow W: skip, discard and disable result creation mechanism] Workflow in SxS mode': [
       0, 0]
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow 7: Payload Extraction & Validation'
@@ -188,13 +193,13 @@
   positions:
     Iteration Services Test Workflow: ['-9', '294']
     'Regression Workflow 1: Netmiko with validation and retries': [115, 3]
-    'Regression Workflow 1: VRF creation and deletion with Netmiko': &id006 [-383,
+    'Regression Workflow 1: VRF creation and deletion with Netmiko': &id007 [-383,
       167]
-    'Regression Workflow 1: link neighbors mechanism': &id007 [713, 86]
+    'Regression Workflow 1: link neighbors mechanism': &id008 [713, 86]
     'Regression Workflow 2: Separate Failure - Success paths': [737, 276]
     'Regression Workflow 3: Napalm getters (postprocessing)': [703, 150]
-    'Regression Workflow 4: VRF creation and deletion with Netmiko': *id006
-    'Regression Workflow 4: link neighbors mechanism': *id007
+    'Regression Workflow 4: VRF creation and deletion with Netmiko': *id007
+    'Regression Workflow 4: link neighbors mechanism': *id008
     'Regression Workflow 5: VRF creation and deletion with Napalm': !!python/tuple [
       0, 0]
     'Regression Workflow 6: Ansible with Validation': [567, -24]
@@ -222,28 +227,30 @@
     'Regression Workflow M: Unix command & shell, ping, jump server': [560, 9]
     'Regression Workflow N: Topology Import (netbox, librenms, opennms)': [636, 24]
     'Regression Workflow O: Scrapli': [628, 113]
-    'Regression Workflow P: large workflow (scalability)': &id009 [483, -268]
+    'Regression Workflow P: large workflow (scalability)': &id010 [483, -268]
     'Regression Workflow Q: File transfer': [576, 135]
-    'Regression Workflow R: skip services in service by service mode': &id010 [500,
+    'Regression Workflow R: skip services in service by service mode': &id011 [500,
       0]
-    'Regression Workflow S: conditional skip query in failed and discard mode': &id008 [
+    'Regression Workflow S: conditional skip query in failed and discard mode': &id009 [
       640, -155]
-    'Regression Workflow S: conditional skip query with skip value set to False': *id008
+    'Regression Workflow S: conditional skip query with skip value set to False': *id009
     'Regression Workflow T: global variables': [569, -66]
     'Regression Workflow T: global variables and post-run pool update': [569, -66]
-    'Regression Workflow T: link neighbors mechanism': *id007
+    'Regression Workflow T: link neighbors mechanism': *id008
     'Regression Workflow U: fork based on value with skip discard mode': [645, 270]
     'Regression Workflow V: skip query with device in run once mode': [670, 159]
     'Regression Workflow V: skip query with device in subworkflow SxS': [572, -3]
     'Regression Workflow W: disable result creation mode': [529, -52]
-    'Regression workflow P: large workflow (scalability)': *id009
+    'Regression Workflow W: skip, discard and disable result creation mechanism': [
+      547, -96]
+    'Regression workflow P: large workflow (scalability)': *id010
     Subworkflow 1: !!python/tuple [0, 0]
     Subworkflow 2: !!python/tuple [0, 0]
     T: !!python/tuple [500, 0]
     TEST: !!python/tuple [500, 0]
     TEST2: !!python/tuple [500, 0]
     Workflow  in device by device mode: !!python/tuple [0, 0]
-    'Workflow Regression R: skip services in service by service mode': *id010
+    'Workflow Regression R: skip services in service by service mode': *id011
     'Workflow Regression S: conditional skip query with skip value set to False': [
       640, -155]
     Workflow in service by service mode (workflow targets): !!python/tuple [0, 0]
@@ -275,9 +282,12 @@
       500, 0]
     '[Regression Workflow V: skip query with device in run once mode] Subworkflow in SxS mode - workflow targets': [
       521, -13]
-    '[Regression Workflow W: disable result creation mode] Workflow in DxD mode': [
+    '[Regression Workflow W: disable result creation mode] Workflow in DxD mode': &id012 [
       500, 0]
     '[Regression Workflow W: disable result creation mode] Workflow in SxS mode': !!python/tuple [
+      500, 0]
+    '[Regression Workflow W: skip, discard and disable result creation mechanism] Workflow in DxD mode': *id012
+    '[Regression Workflow W: skip, discard and disable result creation mechanism] Workflow in SxS mode': [
       500, 0]
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow 7: Payload Extraction & Validation'
@@ -640,9 +650,9 @@
   operating_system: eos
   pools: [All objects]
   positions:
-    'Regression Workflow 1: VRF creation and deletion with Netmiko': &id011 [-38,
+    'Regression Workflow 1: VRF creation and deletion with Netmiko': &id013 [-38,
       -86]
-    'Regression Workflow 4: VRF creation and deletion with Netmiko': *id011
+    'Regression Workflow 4: VRF creation and deletion with Netmiko': *id013
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -727,10 +737,10 @@
   pools: [All objects]
   positions:
     Iteration Services Test Workflow: ['147', '-14']
-    'Regression Workflow 1: VRF creation and deletion with Netmiko': &id012 [445,
+    'Regression Workflow 1: VRF creation and deletion with Netmiko': &id014 [445,
       -37]
     'Regression Workflow 2: Separate Failure - Success paths': ['84', '-3']
-    'Regression Workflow 4: VRF creation and deletion with Netmiko': *id012
+    'Regression Workflow 4: VRF creation and deletion with Netmiko': *id014
     'Regression Workflow 5: VRF creation and deletion with Napalm': ['0', '-50']
     'Regression Workflow A: get_var, set_var, get_result': ['355', '-25']
     iteration_devices_workflow: ['414', '-154']
@@ -812,9 +822,9 @@
   operating_system: eos
   pools: [All objects]
   positions:
-    'Regression Workflow 1: VRF creation and deletion with Netmiko': &id013 [476,
+    'Regression Workflow 1: VRF creation and deletion with Netmiko': &id015 [476,
       119]
-    'Regression Workflow 4: VRF creation and deletion with Netmiko': *id013
+    'Regression Workflow 4: VRF creation and deletion with Netmiko': *id015
     'Regression Workflow 5: VRF creation and deletion with Napalm': ['0', '50']
   postprocessing: ''
   postprocessing_mode: always
@@ -899,10 +909,10 @@
   operating_system: eos
   pools: [All objects]
   positions:
-    'Regression Workflow 1: VRF creation and deletion with Netmiko': &id014 [-10,
+    'Regression Workflow 1: VRF creation and deletion with Netmiko': &id016 [-10,
       157]
     'Regression Workflow 2: Separate Failure - Success paths': [-194, 225]
-    'Regression Workflow 4: VRF creation and deletion with Netmiko': *id014
+    'Regression Workflow 4: VRF creation and deletion with Netmiko': *id016
     'Regression Workflow 5: VRF creation and deletion with Napalm': ['0', '150']
     iteration_devices_workflow: ['337', '-145']
   postprocessing: ''
@@ -1054,8 +1064,8 @@
     'Regression Workflow C: Advanced multiprocessing': [386, 124]
     'Regression Workflow D: Prompts': [405, -103]
     'Regression Workflow L: superworkflow': [162, -126]
-    'Regression Workflow P: large workflow (scalability)': &id015 [-415, -115]
-    'Regression workflow P: large workflow (scalability)': *id015
+    'Regression Workflow P: large workflow (scalability)': &id017 [-415, -115]
+    'Regression workflow P: large workflow (scalability)': *id017
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -8979,8 +8989,8 @@
     'Regression Workflow C: Advanced multiprocessing': [340, 109]
     'Regression Workflow D: Prompts': [405, -103]
     'Regression Workflow L: superworkflow': [162, -126]
-    'Regression Workflow P: large workflow (scalability)': &id016 [-404, -20]
-    'Regression workflow P: large workflow (scalability)': *id016
+    'Regression Workflow P: large workflow (scalability)': &id018 [-404, -20]
+    'Regression workflow P: large workflow (scalability)': *id018
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -9051,8 +9061,8 @@
     c: ['1', '2', '3']
   pools: [All objects]
   positions:
-    'Regression Workflow P: large workflow (scalability)': &id017 [-406, 73]
-    'Regression workflow P: large workflow (scalability)': *id017
+    'Regression Workflow P: large workflow (scalability)': &id019 [-406, 73]
+    'Regression workflow P: large workflow (scalability)': *id019
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -9123,8 +9133,8 @@
     c: ['1', '2', '3']
   pools: [All objects]
   positions:
-    'Regression Workflow P: large workflow (scalability)': &id018 [-402, 156]
-    'Regression workflow P: large workflow (scalability)': *id018
+    'Regression Workflow P: large workflow (scalability)': &id020 [-402, 156]
+    'Regression workflow P: large workflow (scalability)': *id020
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -9195,8 +9205,8 @@
     c: ['1', '2', '3']
   pools: [All objects]
   positions:
-    'Regression Workflow P: large workflow (scalability)': &id019 [-94, 200]
-    'Regression workflow P: large workflow (scalability)': *id019
+    'Regression Workflow P: large workflow (scalability)': &id021 [-94, 200]
+    'Regression workflow P: large workflow (scalability)': *id021
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -9267,8 +9277,8 @@
     c: ['1', '2', '3']
   pools: [All objects]
   positions:
-    'Regression Workflow P: large workflow (scalability)': &id020 [-94, 109]
-    'Regression workflow P: large workflow (scalability)': *id020
+    'Regression Workflow P: large workflow (scalability)': &id022 [-94, 109]
+    'Regression workflow P: large workflow (scalability)': *id022
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -9352,8 +9362,8 @@
   operating_system: ''
   pools: [All objects]
   positions:
-    'Regression Workflow P: large workflow (scalability)': &id021 [-117, 5]
-    'Regression workflow P: large workflow (scalability)': *id021
+    'Regression Workflow P: large workflow (scalability)': &id023 [-117, 5]
+    'Regression workflow P: large workflow (scalability)': *id023
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -9440,8 +9450,8 @@
   operating_system: ''
   pools: [All objects]
   positions:
-    'Regression Workflow P: large workflow (scalability)': &id022 [-81, -125]
-    'Regression workflow P: large workflow (scalability)': *id022
+    'Regression Workflow P: large workflow (scalability)': &id024 [-81, -125]
+    'Regression workflow P: large workflow (scalability)': *id024
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -9528,8 +9538,8 @@
   operating_system: ''
   pools: [All objects]
   positions:
-    'Regression Workflow P: large workflow (scalability)': &id023 [-89, -196]
-    'Regression workflow P: large workflow (scalability)': *id023
+    'Regression Workflow P: large workflow (scalability)': &id025 [-89, -196]
+    'Regression workflow P: large workflow (scalability)': *id025
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -9616,8 +9626,8 @@
   operating_system: ''
   pools: [All objects]
   positions:
-    'Regression Workflow P: large workflow (scalability)': &id024 [183, -222]
-    'Regression workflow P: large workflow (scalability)': *id024
+    'Regression Workflow P: large workflow (scalability)': &id026 [183, -222]
+    'Regression workflow P: large workflow (scalability)': *id026
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -9704,8 +9714,8 @@
   operating_system: ''
   pools: [All objects]
   positions:
-    'Regression Workflow P: large workflow (scalability)': &id025 [188, -130]
-    'Regression workflow P: large workflow (scalability)': *id025
+    'Regression Workflow P: large workflow (scalability)': &id027 [188, -130]
+    'Regression workflow P: large workflow (scalability)': *id027
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -9792,8 +9802,8 @@
   operating_system: ''
   pools: [All objects]
   positions:
-    'Regression Workflow P: large workflow (scalability)': &id026 [190, -36]
-    'Regression workflow P: large workflow (scalability)': *id026
+    'Regression Workflow P: large workflow (scalability)': &id028 [190, -36]
+    'Regression workflow P: large workflow (scalability)': *id028
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -9860,8 +9870,8 @@
   operating_system: ''
   pools: [All objects]
   positions:
-    'Regression Workflow P: large workflow (scalability)': &id027 [194, 47]
-    'Regression workflow P: large workflow (scalability)': *id027
+    'Regression Workflow P: large workflow (scalability)': &id029 [194, 47]
+    'Regression workflow P: large workflow (scalability)': *id029
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -9923,8 +9933,8 @@
   operating_system: ''
   pools: [All objects]
   positions:
-    'Regression Workflow P: large workflow (scalability)': &id028 [203, 127]
-    'Regression workflow P: large workflow (scalability)': *id028
+    'Regression Workflow P: large workflow (scalability)': &id030 [203, 127]
+    'Regression workflow P: large workflow (scalability)': *id030
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -9986,8 +9996,8 @@
   operating_system: ''
   pools: [All objects]
   positions:
-    'Regression Workflow P: large workflow (scalability)': &id029 [207, 230]
-    'Regression workflow P: large workflow (scalability)': *id029
+    'Regression Workflow P: large workflow (scalability)': &id031 [207, 230]
+    'Regression workflow P: large workflow (scalability)': *id031
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -10049,8 +10059,8 @@
   operating_system: ''
   pools: [All objects]
   positions:
-    'Regression Workflow P: large workflow (scalability)': &id030 [476, 232]
-    'Regression workflow P: large workflow (scalability)': *id030
+    'Regression Workflow P: large workflow (scalability)': &id032 [476, 232]
+    'Regression workflow P: large workflow (scalability)': *id032
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -10112,8 +10122,8 @@
   operating_system: ''
   pools: [All objects]
   positions:
-    'Regression Workflow P: large workflow (scalability)': &id031 [471, 142]
-    'Regression workflow P: large workflow (scalability)': *id031
+    'Regression Workflow P: large workflow (scalability)': &id033 [471, 142]
+    'Regression workflow P: large workflow (scalability)': *id033
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -10175,8 +10185,8 @@
   operating_system: ''
   pools: [All objects]
   positions:
-    'Regression Workflow P: large workflow (scalability)': &id032 [476, 44]
-    'Regression workflow P: large workflow (scalability)': *id032
+    'Regression Workflow P: large workflow (scalability)': &id034 [476, 44]
+    'Regression workflow P: large workflow (scalability)': *id034
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -10238,8 +10248,8 @@
   operating_system: ''
   pools: [All objects]
   positions:
-    'Regression Workflow P: large workflow (scalability)': &id033 [469, -50]
-    'Regression workflow P: large workflow (scalability)': *id033
+    'Regression Workflow P: large workflow (scalability)': &id035 [469, -50]
+    'Regression workflow P: large workflow (scalability)': *id035
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -10301,8 +10311,8 @@
   operating_system: ''
   pools: [All objects]
   positions:
-    'Regression Workflow P: large workflow (scalability)': &id034 [467, -163]
-    'Regression workflow P: large workflow (scalability)': *id034
+    'Regression Workflow P: large workflow (scalability)': &id036 [467, -163]
+    'Regression workflow P: large workflow (scalability)': *id036
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -10973,9 +10983,9 @@
   operating_system: ''
   pools: [All objects]
   positions:
-    'Regression Workflow R: skip services in service by service mode': &id035 [-124,
+    'Regression Workflow R: skip services in service by service mode': &id037 [-124,
       -154]
-    'Workflow Regression R: skip services in service by service mode': *id035
+    'Workflow Regression R: skip services in service by service mode': *id037
   postprocessing: results["success"] = device.name == "Washington"
   postprocessing_mode: always
   preprocessing: ''
@@ -11041,9 +11051,9 @@
   operating_system: ''
   pools: [All objects]
   positions:
-    'Regression Workflow R: skip services in service by service mode': &id036 [304,
+    'Regression Workflow R: skip services in service by service mode': &id038 [304,
       -102]
-    'Workflow Regression R: skip services in service by service mode': *id036
+    'Workflow Regression R: skip services in service by service mode': *id038
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -11110,9 +11120,9 @@
   operating_system: ''
   pools: [All objects]
   positions:
-    'Regression Workflow R: skip services in service by service mode': &id037 [12,
+    'Regression Workflow R: skip services in service by service mode': &id039 [12,
       179]
-    'Workflow Regression R: skip services in service by service mode': *id037
+    'Workflow Regression R: skip services in service by service mode': *id039
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -11263,9 +11273,9 @@
   operating_system: ''
   pools: [All objects]
   positions:
-    'Regression Workflow S: conditional skip query in failed and discard mode': &id038 [
+    'Regression Workflow S: conditional skip query in failed and discard mode': &id040 [
       -242, 237]
-    'Regression Workflow S: conditional skip query with skip value set to False': *id038
+    'Regression Workflow S: conditional skip query with skip value set to False': *id040
     'Workflow Regression S: conditional skip query with skip value set to False': [
       -149, -30]
   postprocessing: ''
@@ -11335,9 +11345,9 @@
   operating_system: ''
   pools: [All objects]
   positions:
-    'Regression Workflow S: conditional skip query in failed and discard mode': &id039 [
+    'Regression Workflow S: conditional skip query in failed and discard mode': &id041 [
       412, 108]
-    'Regression Workflow S: conditional skip query with skip value set to False': *id039
+    'Regression Workflow S: conditional skip query with skip value set to False': *id041
     'Workflow Regression S: conditional skip query with skip value set to False': [
       264, -16]
   postprocessing: ''
@@ -11407,9 +11417,9 @@
   operating_system: ''
   pools: [All objects]
   positions:
-    'Regression Workflow S: conditional skip query in failed and discard mode': &id040 [
+    'Regression Workflow S: conditional skip query in failed and discard mode': &id042 [
       605, 248]
-    'Regression Workflow S: conditional skip query with skip value set to False': *id040
+    'Regression Workflow S: conditional skip query with skip value set to False': *id042
     'Workflow Regression S: conditional skip query with skip value set to False': [
       208, 194]
   postprocessing: ''
@@ -11478,9 +11488,9 @@
   operating_system: ''
   pools: [All objects]
   positions:
-    'Regression Workflow S: conditional skip query in failed and discard mode': &id041 [
+    'Regression Workflow S: conditional skip query in failed and discard mode': &id043 [
       660, 13]
-    'Regression Workflow S: conditional skip query with skip value set to False': *id041
+    'Regression Workflow S: conditional skip query with skip value set to False': *id043
     'Workflow Regression S: conditional skip query with skip value set to False': [
       636, 63]
   postprocessing: ''
@@ -11635,9 +11645,9 @@
   operating_system: ''
   pools: [All objects]
   positions:
-    'Regression Workflow 1: link neighbors mechanism': &id042 [-20, 30]
-    'Regression Workflow 4: link neighbors mechanism': *id042
-    'Regression Workflow T: link neighbors mechanism': *id042
+    'Regression Workflow 1: link neighbors mechanism': &id044 [-20, 30]
+    'Regression Workflow 4: link neighbors mechanism': *id044
+    'Regression Workflow T: link neighbors mechanism': *id044
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -11728,9 +11738,9 @@
   payload: {}
   pools: [All objects]
   positions:
-    'Regression Workflow 1: link neighbors mechanism': &id043 [401, -181]
-    'Regression Workflow 4: link neighbors mechanism': *id043
-    'Regression Workflow T: link neighbors mechanism': *id043
+    'Regression Workflow 1: link neighbors mechanism': &id045 [401, -181]
+    'Regression Workflow 4: link neighbors mechanism': *id045
+    'Regression Workflow T: link neighbors mechanism': *id045
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -12199,9 +12209,9 @@
   operating_system: ''
   pools: [All objects]
   positions:
-    'Regression Workflow S: conditional skip query in failed and discard mode': &id044 [
+    'Regression Workflow S: conditional skip query in failed and discard mode': &id046 [
       -215, 70]
-    'Regression Workflow S: conditional skip query with skip value set to False': *id044
+    'Regression Workflow S: conditional skip query with skip value set to False': *id046
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -12368,9 +12378,9 @@
     'Regression Workflow C: Advanced multiprocessing': [386, 124]
     'Regression Workflow D: Prompts': [405, -103]
     'Regression Workflow L: superworkflow': [162, -126]
-    'Regression Workflow P: large workflow (scalability)': &id045 [-415, -115]
+    'Regression Workflow P: large workflow (scalability)': &id047 [-415, -115]
     'Regression Workflow U: fork based on value with skip discard mode': [-354, -22]
-    'Regression workflow P: large workflow (scalability)': *id045
+    'Regression workflow P: large workflow (scalability)': *id047
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -13150,27 +13160,34 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels:
-    3d5c80a3-5f2d-4687-b9a7-7e39b33b37e8:
+    63712159-29e8-4848-8889-9e630019a516:
       alignment: left
-      content: "This workflow tests that the disable result creation works fine\r\n\
-        AND does not prevent the workflow from running properly.\r\nTo be tested both\
-        \ in DxD and SxS with workflow targets mode.\r\nRuns on: PaloAlto, Washington,\
-        \ Austin"
-      positions: [118, -144]
-    897a1eec-6a97-4844-97a0-61b127c58868:
+      content: "Austin is discarded.\r\nPaloAlto should be stopped in the middle of\
+        \ the workflow.\r\nExpected output: PaloAlto via failure edge,\r\nWashington\
+        \ via success edge."
+      positions: [404, 220]
+    b4479263-ee3a-4526-a182-0b73b025d972:
       alignment: left
       content: "PaloAlto is skipped with skip value of False.\r\nAustin should be\
         \ stopped in the middle of the workflow.\r\nExpected output: PaloAlto and\
         \ Austin via failure edge,\r\nWashington on success edge."
-      positions: [-158, 247]
-  last_modified: '2020-10-01 03:56:28.492375'
+      positions: [-227, 264]
+    ec9df9f3-7b90-4939-99c7-c8cacf696a3d:
+      alignment: left
+      content: "This workflow tests that the disable result creation works fine.\r\
+        \nAll results are disabled, except for the services in subworkflows.\r\nAND\
+        \ does not prevent the workflow from running properly.\r\nTo be tested both\
+        \ in DxD and SxS with workflow targets mode.\r\nRuns on: PaloAlto, Washington,\
+        \ Austin"
+      positions: [104, -127]
+  last_modified: '2020-10-01 04:06:50.783995'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: 'Regression Workflow W: disable result creation mode'
+  name: 'Regression Workflow W: skip, discard and disable result creation mechanism'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -13184,14 +13201,15 @@
   reply_to: ''
   reserved: false
   run_method: per_service_with_workflow_targets
-  scoped_name: 'Regression Workflow W: disable result creation mode'
+  scoped_name: 'Regression Workflow W: skip, discard and disable result creation mechanism'
   send_notification: false
   send_notification_method: mail
-  services: ['[Shared] Start', '[Shared] End', '[Regression Workflow W: disable result
-      creation mode] Pre-service with result creation disabled', '[Regression Workflow
-      W: disable result creation mode] Workflow in DxD mode', '[Regression Workflow
-      W: disable result creation mode] Workflow in SxS mode', '[Regression Workflow
-      W: disable result creation mode] Service in run once mode']
+  services: ['[Shared] Start', '[Shared] End', '[Regression Workflow W: skip, discard
+      and disable result creation mechanism] Pre-service with result creation disabled',
+    '[Regression Workflow W: skip, discard and disable result creation mechanism]
+      Workflow in DxD mode', '[Regression Workflow W: skip, discard and disable result
+      creation mechanism] Workflow in SxS mode', '[Regression Workflow W: skip, discard
+      and disable result creation mechanism] Service in run once mode']
   shared: false
   skip: {}
   skip_query: ''
@@ -13229,15 +13247,15 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2020-10-01 03:47:43.823478'
+  last_modified: '2020-10-01 04:05:51.093813'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression Workflow W: disable result creation mode] Pre-service with result
-    creation disabled'
+  name: '[Regression Workflow W: skip, discard and disable result creation mechanism]
+    Pre-service with result creation disabled'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -13245,6 +13263,8 @@
   pools: [All objects]
   positions:
     'Regression Workflow W: disable result creation mode': [-312, -10]
+    'Regression Workflow W: skip, discard and disable result creation mechanism': [
+      -254, -15]
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -13259,12 +13279,8 @@
   skip: {}
   skip_query: ''
   skip_value: 'True'
-  source_code: "# Availble variables: device, results, run\r\n# Returning state:\r\
-    \n#    results[\"success\"] = True\r\n#    results[\"result\"] = <return data>\r\
-    \n# Logging: log(level, text)\r\n#    log(\"info\", \"My log message\")\r\n# Exit\
-    \ in the middle of the script:\r\n#    exit()\r\n#    Note: exit() is not required\
-    \ as the last line\r\n\r\nresult = {}\r\nresults[\"success\"] = True\r\nresults[\"\
-    result\"] = result"
+  source_code: "result = {}\r\nresults[\"success\"] = True\r\nresults[\"result\"]\
+    \ = result"
   target_devices: []
   target_pools: []
   time_between_retries: 10
@@ -13306,7 +13322,8 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression Workflow W: disable result creation mode] Workflow in DxD mode'
+  name: '[Regression Workflow W: skip, discard and disable result creation mechanism]
+    Workflow in DxD mode'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -13314,6 +13331,8 @@
   pools: [All objects]
   positions:
     'Regression Workflow W: disable result creation mode': [-174, 154]
+    'Regression Workflow W: skip, discard and disable result creation mechanism': [
+      -231, 149]
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -13324,8 +13343,8 @@
   scoped_name: Workflow in DxD mode
   send_notification: false
   send_notification_method: mail
-  services: ['[Shared] Start', '[Shared] End', '[[Regression Workflow W: disable result
-      creation mode] Workflow in DxD mode] Fail Austin']
+  services: ['[Shared] Start', '[Shared] End', '[[Regression Workflow W: skip, discard
+      and disable result creation mechanism] Workflow in DxD mode] Fail Austin']
   shared: false
   skip: {}
   skip_query: device.name == "PaloAlto"
@@ -13365,21 +13384,24 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels: {}
-  last_modified: '2020-10-01 03:53:35.036852'
+  last_modified: '2020-10-01 04:05:39.947559'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression Workflow W: disable result creation mode] Workflow in SxS mode'
+  name: '[Regression Workflow W: skip, discard and disable result creation mechanism]
+    Workflow in SxS mode'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow W: disable result creation mode': [442, 205]
+    'Regression Workflow W: skip, discard and disable result creation mechanism': [
+      379, 130]
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -13390,11 +13412,12 @@
   scoped_name: Workflow in SxS mode
   send_notification: false
   send_notification_method: mail
-  services: ['[Shared] Start', '[Shared] End']
+  services: ['[Shared] Start', '[Shared] End', '[[Regression Workflow W: skip, discard
+      and disable result creation mechanism] Workflow in SxS mode] Fail PaloAlto']
   shared: false
   skip: {}
-  skip_query: ''
-  skip_value: 'True'
+  skip_query: device.name == "Austin"
+  skip_value: Discard
   target_devices: []
   target_pools: []
   time_between_retries: 10
@@ -13428,22 +13451,24 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2020-10-01 03:59:17.410209'
+  last_modified: '2020-10-01 04:05:55.852522'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression Workflow W: disable result creation mode] Service in run once
-    mode'
+  name: '[Regression Workflow W: skip, discard and disable result creation mechanism]
+    Service in run once mode'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: [All objects]
   positions:
     'Regression Workflow W: disable result creation mode': [101, -37]
+    'Regression Workflow W: skip, discard and disable result creation mechanism': [
+      103, -43]
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -13458,12 +13483,8 @@
   skip: {}
   skip_query: ''
   skip_value: 'True'
-  source_code: "# Availble variables: device, results, run\r\n# Returning state:\r\
-    \n#    results[\"success\"] = True\r\n#    results[\"result\"] = <return data>\r\
-    \n# Logging: log(level, text)\r\n#    log(\"info\", \"My log message\")\r\n# Exit\
-    \ in the middle of the script:\r\n#    exit()\r\n#    Note: exit() is not required\
-    \ as the last line\r\n\r\nresult = {}\r\nresults[\"success\"] = True\r\nresults[\"\
-    result\"] = result"
+  source_code: "result = {}\r\nresults[\"success\"] = True\r\nresults[\"result\"]\
+    \ = result"
   target_devices: []
   target_pools: []
   time_between_retries: 10
@@ -13496,23 +13517,24 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2020-10-01 03:55:42.084741'
+  last_modified: '2020-10-01 04:06:03.214998'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[[Regression Workflow W: disable result creation mode] Workflow in DxD mode]
-    Fail Austin'
+  name: '[[Regression Workflow W: skip, discard and disable result creation mechanism]
+    Workflow in DxD mode] Fail Austin'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: [All objects]
   positions:
-    '[Regression Workflow W: disable result creation mode] Workflow in DxD mode': [
+    '[Regression Workflow W: disable result creation mode] Workflow in DxD mode': &id048 [
       224, -51]
+    '[Regression Workflow W: skip, discard and disable result creation mechanism] Workflow in DxD mode': *id048
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -13527,12 +13549,73 @@
   skip: {}
   skip_query: ''
   skip_value: 'True'
-  source_code: "# Availble variables: device, results, run\r\n# Returning state:\r\
-    \n#    results[\"success\"] = True\r\n#    results[\"result\"] = <return data>\r\
-    \n# Logging: log(level, text)\r\n#    log(\"info\", \"My log message\")\r\n# Exit\
-    \ in the middle of the script:\r\n#    exit()\r\n#    Note: exit() is not required\
-    \ as the last line\r\n\r\nresult = {}\r\nresults[\"success\"] = device.name ==\
-    \ \"Washington\"\r\nresults[\"result\"] = result"
+  source_code: "result = {}\r\nresults[\"success\"] = device.name == \"Washington\"\
+    \r\nresults[\"result\"] = result"
+  target_devices: []
+  target_pools: []
+  time_between_retries: 10
+  type: python_snippet_service
+  update_pools_after_running: false
+  update_target_pools: false
+  validation_condition: success
+  validation_method: none
+  vendor: ''
+  waiting_time: 0
+- completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  events: []
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2020-10-01 04:05:44.930376'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[[Regression Workflow W: skip, discard and disable result creation mechanism]
+    Workflow in SxS mode] Fail PaloAlto'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions:
+    '[Regression Workflow W: skip, discard and disable result creation mechanism] Workflow in SxS mode': [
+      220, -28]
+  postprocessing: ''
+  postprocessing_mode: always
+  preprocessing: ''
+  public: false
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: Fail PaloAlto
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: 'True'
+  source_code: "result = {}\r\nresults[\"success\"] = device.name != \"PaloAlto\"\r\
+    \nresults[\"result\"] = result"
   target_devices: []
   target_pools: []
   time_between_retries: 10

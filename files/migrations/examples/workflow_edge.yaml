@@ -935,34 +935,55 @@
     workflow targets] Fail Austin', subtype: success, type: workflow_edge, workflow: '[Regression
     Workflow V: skip query with device in run once mode] Subworkflow in SxS mode -
     workflow targets'}
-- {color: green, destination: '[Regression Workflow W: disable result creation mode]
-    Pre-service with result creation disabled', label: success, source: '[Shared]
-    Start', subtype: success, type: workflow_edge, workflow: 'Regression Workflow
-    W: disable result creation mode'}
-- {color: green, destination: '[Regression Workflow W: disable result creation mode]
-    Workflow in DxD mode', label: success, source: '[Regression Workflow W: disable
-    result creation mode] Pre-service with result creation disabled', subtype: success,
-  type: workflow_edge, workflow: 'Regression Workflow W: disable result creation mode'}
-- {color: green, destination: '[Regression Workflow W: disable result creation mode]
-    Service in run once mode', label: success, source: '[Regression Workflow W: disable
-    result creation mode] Workflow in DxD mode', subtype: success, type: workflow_edge,
-  workflow: 'Regression Workflow W: disable result creation mode'}
-- {color: green, destination: '[Regression Workflow W: disable result creation mode]
-    Workflow in SxS mode', label: success, source: '[Regression Workflow W: disable
-    result creation mode] Service in run once mode', subtype: success, type: workflow_edge,
-  workflow: 'Regression Workflow W: disable result creation mode'}
+- {color: green, destination: '[Regression Workflow W: skip, discard and disable result
+    creation mechanism] Pre-service with result creation disabled', label: success,
+  source: '[Shared] Start', subtype: success, type: workflow_edge, workflow: 'Regression
+    Workflow W: skip, discard and disable result creation mechanism'}
+- {color: green, destination: '[Regression Workflow W: skip, discard and disable result
+    creation mechanism] Workflow in DxD mode', label: success, source: '[Regression
+    Workflow W: skip, discard and disable result creation mechanism] Pre-service with
+    result creation disabled', subtype: success, type: workflow_edge, workflow: 'Regression
+    Workflow W: skip, discard and disable result creation mechanism'}
+- {color: green, destination: '[Regression Workflow W: skip, discard and disable result
+    creation mechanism] Service in run once mode', label: success, source: '[Regression
+    Workflow W: skip, discard and disable result creation mechanism] Workflow in DxD
+    mode', subtype: success, type: workflow_edge, workflow: 'Regression Workflow W:
+    skip, discard and disable result creation mechanism'}
+- {color: green, destination: '[Regression Workflow W: skip, discard and disable result
+    creation mechanism] Workflow in SxS mode', label: success, source: '[Regression
+    Workflow W: skip, discard and disable result creation mechanism] Service in run
+    once mode', subtype: success, type: workflow_edge, workflow: 'Regression Workflow
+    W: skip, discard and disable result creation mechanism'}
 - {color: green, destination: '[Shared] End', label: success, source: '[Regression
-    Workflow W: disable result creation mode] Workflow in SxS mode', subtype: success,
-  type: workflow_edge, workflow: 'Regression Workflow W: disable result creation mode'}
-- {color: green, destination: '[[Regression Workflow W: disable result creation mode]
-    Workflow in DxD mode] Fail Austin', label: success, source: '[Shared] Start',
-  subtype: success, type: workflow_edge, workflow: '[Regression Workflow W: disable
-    result creation mode] Workflow in DxD mode'}
+    Workflow W: skip, discard and disable result creation mechanism] Workflow in SxS
+    mode', subtype: success, type: workflow_edge, workflow: 'Regression Workflow W:
+    skip, discard and disable result creation mechanism'}
+- {color: green, destination: '[[Regression Workflow W: skip, discard and disable
+    result creation mechanism] Workflow in DxD mode] Fail Austin', label: success,
+  source: '[Shared] Start', subtype: success, type: workflow_edge, workflow: '[Regression
+    Workflow W: skip, discard and disable result creation mechanism] Workflow in DxD
+    mode'}
 - {color: green, destination: '[Shared] End', label: success, source: '[[Regression
-    Workflow W: disable result creation mode] Workflow in DxD mode] Fail Austin',
-  subtype: success, type: workflow_edge, workflow: '[Regression Workflow W: disable
-    result creation mode] Workflow in DxD mode'}
-- {color: red, destination: '[Regression Workflow W: disable result creation mode]
-    Service in run once mode', label: failure, source: '[Regression Workflow W: disable
-    result creation mode] Workflow in DxD mode', subtype: failure, type: workflow_edge,
-  workflow: 'Regression Workflow W: disable result creation mode'}
+    Workflow W: skip, discard and disable result creation mechanism] Workflow in DxD
+    mode] Fail Austin', subtype: success, type: workflow_edge, workflow: '[Regression
+    Workflow W: skip, discard and disable result creation mechanism] Workflow in DxD
+    mode'}
+- {color: red, destination: '[Regression Workflow W: skip, discard and disable result
+    creation mechanism] Service in run once mode', label: failure, source: '[Regression
+    Workflow W: skip, discard and disable result creation mechanism] Workflow in DxD
+    mode', subtype: failure, type: workflow_edge, workflow: 'Regression Workflow W:
+    skip, discard and disable result creation mechanism'}
+- {color: green, destination: '[[Regression Workflow W: skip, discard and disable
+    result creation mechanism] Workflow in SxS mode] Fail PaloAlto', label: success,
+  source: '[Shared] Start', subtype: success, type: workflow_edge, workflow: '[Regression
+    Workflow W: skip, discard and disable result creation mechanism] Workflow in SxS
+    mode'}
+- {color: green, destination: '[Shared] End', label: success, source: '[[Regression
+    Workflow W: skip, discard and disable result creation mechanism] Workflow in SxS
+    mode] Fail PaloAlto', subtype: success, type: workflow_edge, workflow: '[Regression
+    Workflow W: skip, discard and disable result creation mechanism] Workflow in SxS
+    mode'}
+- {color: red, destination: '[Shared] End', label: failure, source: '[Regression Workflow
+    W: skip, discard and disable result creation mechanism] Workflow in SxS mode',
+  subtype: failure, type: workflow_edge, workflow: 'Regression Workflow W: skip, discard
+    and disable result creation mechanism'}

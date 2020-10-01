@@ -37,6 +37,8 @@ In the migration files, the skip property must be removed: it will not be migrat
 - Rename "update_pools" to "update_target_pools". Migration files must be updated.
 - New Option "Update pools after running" for workflow like the configuration management workflow.
 - Refactor skip mechanism to work with run once mode service.
+- Don't reset run status when running a CLI command with CLI plugins
+- Refactor log mechanism to send log to client bit by bit, instead of all run logs at each refresh request
 
 Version 3.22.4
 --------------

@@ -1,0 +1,96 @@
+<div class="modal-body">
+  <div>
+    <p>
+      Example
+      <textarea class="help-snippet" style="height: fit-content;">
+  acceptance_data = get_result("preacceptance", device=device.name)["result"]
+  version_info = get_result("get version", device=device.name)["result"]
+  version = version_info["version"]
+  set_var("sw_version", version, device=device.name)
+  set_var("active_alarms", acceptance_data["alarms"],
+        device=device.name)
+  log("info", f"Data retrieved on device={device.name}"
+      f"with ip={device.ip_address}, version={version}")
+  if (version != "1.0.1"):
+      set_var("target_version", "1.0.1", device=device.name)
+      set_var("upgrade_needed", True, device=device.name)
+  else
+      set_var("upgrade_needed", False, device=device.name)
+  exit()  # while not required, can be used in middle of script
+  results["success"] = True
+  results["result"] = ["Data to be retuned in 'result'"]
+  Availble variables: device, results, run</textarea
+      >
+    </p>
+  </div>
+
+  <div>
+    <h3>Logging</h3>
+    For best visibility, we recommend that you use the 'log' function. You can also
+    'import logging'; however, those logs are only seen in the server logs
+    <code>log(severity, message, logger=logger)</code> where severity is "info",
+    "error", "warning", or "critical" and logger is omitted (default), "security", or
+    some other user configured logger in settings
+    <p>
+      Workflow Example:
+      <textarea class="help-snippet" style="height: fit-content;">
+ log("info", f"Log test on device={device.name}"
+  f"with ip={device.ip_address}")</textarea
+      >
+    </p>
+  </div>
+
+  <div>
+    <h3>Retrieving previous results get_result</h3>
+    <textarea class="help-snippet" style="height: fit-content;">
+r = get_result("previous_service", device=device.name)
+r = get_result("run_once_service")</textarea
+    >
+  </div>
+  <div>
+    <h3>Retrieving variables via get_var</h3>
+    See also:
+    <a
+      href="/docs/automation/workflows.html#saving-and-retrieving-values-in-a-workflow"
+      style="text-decoration: underline;"
+      >get_var/set_var documentation</a
+    >
+    <textarea class="help-snippet" style="height: fit-content;">
+# get a general variable
+hostname = get_var("hostname")
+# get device-specific variable
+ip_addresses = get_var("ip_addresses", device=device.name)
+# get section-specific variable - i.e., non-device grouping
+config_data = get_var("config_element", section="config")</textarea
+    >
+  </div>
+  <div>
+    <h3>Setting variables via set_var</h3>
+    See also:
+    <a
+      href="/docs/automation/workflows.html#saving-and-retrieving-values-in-a-workflow"
+      style="text-decoration: underline;"
+      >get_var/set_var documentation</a
+    >
+    <textarea class="help-snippet" style="height: fit-content;">
+set_var("test_hostname", "hostname");
+set_var("ip_addresses", ["127.0.0.1", "192.168.0.1" ],
+  device=device.name)</textarea
+    >
+  </div>
+  <div>
+    <h3>Additional information on available variables</h3>
+    See also:<a
+      href="/docs/automation/services.html#using-python-code-in-the-service-panel"
+      style="text-decoration: underline;"
+      >Available variables and functions in Python</a
+    >
+  </div>
+  <div>
+    <h3>Allowed imports</h3>
+    <p>
+      You cannot import 'os', 'sys', and 'subprocess'; other standard Python 3 libraries
+      can be imported.
+    </p>
+  </div>
+</div>

@@ -935,3 +935,14 @@
     workflow targets] Fail Austin', subtype: success, type: workflow_edge, workflow: '[Regression
     Workflow V: skip query with device in run once mode] Subworkflow in SxS mode -
     workflow targets'}
+- {color: green, destination: '[Regression Workflow W: disable result creation mode]
+    Pre-service with result creation disabled', label: success, source: '[Shared]
+    Start', subtype: success, type: workflow_edge, workflow: 'Regression Workflow
+    W: disable result creation mode'}
+- {color: green, destination: '[Regression Workflow W: disable result creation mode]
+    Workflow in DxD mode', label: success, source: '[Regression Workflow W: disable
+    result creation mode] Pre-service with result creation disabled', subtype: success,
+  type: workflow_edge, workflow: 'Regression Workflow W: disable result creation mode'}
+- {color: green, destination: '[Shared] End', label: success, source: '[Regression
+    Workflow W: disable result creation mode] Workflow in DxD mode', subtype: success,
+  type: workflow_edge, workflow: 'Regression Workflow W: disable result creation mode'}

@@ -757,8 +757,8 @@
   service_operating_system_match: inclusion
   service_vendor: ''
   service_vendor_match: inclusion
-  target_services: ['Regression Workflow P: large workflow (scalability)', '[Regression
-      Workflow 9: Operational Data Backup] Retrieve Operational Data']
+  target_services: ['[Regression Workflow 9: Operational Data Backup] Retrieve Operational
+      Data', 'Regression Workflow P: large workflow (scalability)']
   tasks: []
   type: pool
   user_description: ''

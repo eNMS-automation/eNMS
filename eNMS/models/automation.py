@@ -681,6 +681,7 @@ class Run(AbstractBase):
                 if self.skip_value == "Discard":
                     continue
                 device_results = {
+                    "device_target": getattr(device, "name", None),
                     "runtime": app.get_time(),
                     "result": "skipped",
                     "duration": "0:00:00",

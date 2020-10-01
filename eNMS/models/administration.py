@@ -70,7 +70,7 @@ class User(AbstractBase, UserMixin):
         for request_type in ("get", "post", "delete"):
             allowed_endpoints, property = set(), f"{request_type}_requests"
             for access in user_access:
-                allowed_endpoints |= getattr(access, property)
+                allowed_endpoints |= set(getattr(access, property))
             setattr(self, property, list(allowed_endpoints))
 
 
@@ -96,7 +96,7 @@ class Access(AbstractBase):
     access_type = db.Column(db.SmallString)
 
     def get_users(self):	
-        return set(chain.from_iterable(pool.users for pool in self.user_pools))	
+        return set(chain.from_iterable(pool.users for pool in self.user_pools))
 
     def update(self, **kwargs):	
         old_users = self.get_users()	

@@ -171,7 +171,7 @@ class AdministrationController(BaseController):
         if not kwargs.get("skip_pool_update"):
             for pool in db.fetch_all("pool"):
                 pool.compute_pool()
-                self.log("info", status)
+        self.log("info", status)
         return status
 
     def import_service(self, archive):

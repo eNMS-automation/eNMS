@@ -11,7 +11,6 @@ from napalm import get_network_driver
 from netmiko import ConnectHandler
 from os import getenv
 from paramiko import SFTPClient
-from ruamel import yaml
 from re import compile, search
 from requests import post
 from scp import SCPClient

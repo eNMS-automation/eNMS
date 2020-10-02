@@ -353,20 +353,22 @@ function addServicesToWorkflow() {
 function deleteSelection() {
   const selection = {
     nodes: graph.getSelectedNodes().filter((node) => !ends.has(node)),
-    edges: graph.getSelectedEdges()
-  }
+    edges: graph.getSelectedEdges(),
+  };
   selection.nodes.forEach((node) => {
     delete workflow.labels[node];
     graph.getConnectedEdges(node).forEach((edge) => {
       if (!selection.edges.includes(edge)) selection.edges.push(edge);
-    })
-  })
+    });
+  });
   call({
     url: `/delete_workflow_selection/${workflow.id}`,
     data: selection,
     callback: function (updateTime) {
       graph.deleteSelected();
-      workflow.services = workflow.services.filter((n) => !selection.nodes.includes(n.id));
+      workflow.services = workflow.services.filter(
+        (n) => !selection.nodes.includes(n.id)
+      );
       workflow.edges = workflow.edges.filter((e) => !selection.edges.includes(e.id));
       workflow.last_modified = updateTime;
       notify("Selection removed.", "success", 5);

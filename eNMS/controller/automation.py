@@ -174,18 +174,15 @@ class AutomationController(BaseController):
         return number_of_corrupted_edges
 
     def delete_workflow_selection(self, workflow_id, **selection):
-        print(selection)
-
-    def delete_edge(self, workflow_id, edge_id):
-        db.delete("workflow_edge", id=edge_id)
+        workflow = db.fetch("workflow", id=workflow_id)
         now = self.get_time()
-        db.fetch("workflow", id=workflow_id).last_modified = now
-        return now
+        workflow.last_modified = now
+        for edge_id in selection["edges"]:
+            db.delete("workflow_edge", id=edge_id)
 
     def delete_label(self, workflow_id, label):
-        workflow = db.fetch("workflow", id=workflow_id)
+        
         workflow.labels.pop(label)
-        now = self.get_time()
         workflow.last_modified = now
         return now
 
@@ -197,8 +194,7 @@ class AutomationController(BaseController):
         workflow.services.remove(service)
         if not service.shared:
             db.delete("service", id=service.id)
-        now = self.get_time()
-        workflow.last_modified = now
+        
         return {"service": service.serialized, "update_time": now}
 
     def duplicate_workflow(self, workflow_id):

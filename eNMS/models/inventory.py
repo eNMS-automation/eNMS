@@ -315,7 +315,7 @@ class Pool(AbstractBase):
         old_users = set(self.users)
         super().update(**kwargs)
         self.compute_pool()
-        for user in old_users | set(self.users):	
+        for user in old_users | set(self.users):
             user.update_rbac()
 
     def property_match(self, obj, property):

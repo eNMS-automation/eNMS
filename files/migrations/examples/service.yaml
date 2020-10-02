@@ -13596,7 +13596,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: [All objects]
   positions:
     '[Regression Workflow W: skip, discard and disable result creation mechanism] Workflow in SxS mode': [
       220, -28]

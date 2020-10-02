@@ -8,12 +8,22 @@
   down: false
   icon: router
   ip_address: 192.168.56.51
-  last_duration: ''
-  last_failure: Never
+  last_configuration_duration: Never
+  last_configuration_failure: Never
+  last_configuration_runtime: Never
+  last_configuration_status: Never
+  last_configuration_update: Never
   last_modified: ''
-  last_runtime: '2020-07-20 04:39:08.768234'
-  last_status: Success
-  last_update: '2020-07-20 04:39:08.768234'
+  last_operational_data_duration: Never
+  last_operational_data_failure: Never
+  last_operational_data_runtime: Never
+  last_operational_data_status: Never
+  last_operational_data_update: Never
+  last_specialized_data_duration: Never
+  last_specialized_data_failure: Never
+  last_specialized_data_runtime: Never
+  last_specialized_data_status: Never
+  last_specialized_data_update: Never
   latitude: '32.29876'
   location: Jackson
   longitude: '-90.18481'
@@ -42,12 +52,22 @@
   down: false
   icon: router
   ip_address: 192.168.1.86
-  last_duration: ''
-  last_failure: '2020-07-20 04:32:06.730537'
+  last_configuration_duration: Never
+  last_configuration_failure: Never
+  last_configuration_runtime: Never
+  last_configuration_status: Never
+  last_configuration_update: Never
   last_modified: ''
-  last_runtime: '2020-07-20 04:39:43.466264'
-  last_status: Success
-  last_update: '2020-07-20 04:39:43.466264'
+  last_operational_data_duration: Never
+  last_operational_data_failure: Never
+  last_operational_data_runtime: Never
+  last_operational_data_status: Never
+  last_operational_data_update: Never
+  last_specialized_data_duration: Never
+  last_specialized_data_failure: Never
+  last_specialized_data_runtime: Never
+  last_specialized_data_status: Never
+  last_specialized_data_update: Never
   latitude: '37.44188'
   location: PaloAlto
   longitude: '-122.14302'
@@ -76,12 +96,22 @@
   down: false
   icon: router
   ip_address: 192.168.105.9
-  last_duration: ''
-  last_failure: Never
+  last_configuration_duration: Never
+  last_configuration_failure: Never
+  last_configuration_runtime: Never
+  last_configuration_status: Never
+  last_configuration_update: Never
   last_modified: ''
-  last_runtime: '2020-07-20 04:39:08.968713'
-  last_status: Success
-  last_update: '2020-07-20 04:39:08.968713'
+  last_operational_data_duration: Never
+  last_operational_data_failure: Never
+  last_operational_data_runtime: Never
+  last_operational_data_status: Never
+  last_operational_data_update: Never
+  last_specialized_data_duration: Never
+  last_specialized_data_failure: Never
+  last_specialized_data_runtime: Never
+  last_specialized_data_status: Never
+  last_specialized_data_update: Never
   latitude: '30.26715'
   location: Austin
   longitude: '-97.74306'
@@ -110,12 +140,22 @@
   down: false
   icon: router
   ip_address: 192.168.56.50
-  last_duration: 3.285175s
-  last_failure: Never
+  last_configuration_duration: 6.308002s
+  last_configuration_failure: Never
+  last_configuration_runtime: '2020-10-02 11:16:49.363284'
+  last_configuration_status: Success
+  last_configuration_update: '2020-10-02 11:16:49.363284'
   last_modified: ''
-  last_runtime: '2020-09-03 04:50:45.071358'
-  last_status: Success
-  last_update: '2020-09-03 04:50:45.071358'
+  last_operational_data_duration: 3.509847s
+  last_operational_data_failure: Never
+  last_operational_data_runtime: '2020-10-02 11:16:55.905709'
+  last_operational_data_status: Success
+  last_operational_data_update: '2020-10-02 11:16:55.905709'
+  last_specialized_data_duration: Never
+  last_specialized_data_failure: Never
+  last_specialized_data_runtime: Never
+  last_specialized_data_status: Never
+  last_specialized_data_update: Never
   latitude: '38.89511'
   location: Washington
   longitude: '-77.03637'
@@ -144,12 +184,22 @@
   down: false
   icon: router
   ip_address: 192.168.56.50
-  last_duration: ''
-  last_failure: Never
+  last_configuration_duration: Never
+  last_configuration_failure: Never
+  last_configuration_runtime: Never
+  last_configuration_status: Never
+  last_configuration_update: Never
   last_modified: ''
-  last_runtime: '2020-07-20 04:40:03.352089'
-  last_status: Success
-  last_update: '2020-07-20 04:40:03.352089'
+  last_operational_data_duration: Never
+  last_operational_data_failure: Never
+  last_operational_data_runtime: Never
+  last_operational_data_status: Never
+  last_operational_data_update: Never
+  last_specialized_data_duration: Never
+  last_specialized_data_failure: Never
+  last_specialized_data_runtime: Never
+  last_specialized_data_status: Never
+  last_specialized_data_update: Never
   latitude: '41.85003'
   location: Chicago
   longitude: '-87.65005'
@@ -178,12 +228,22 @@
   down: false
   icon: router
   ip_address: 192.168.1.187
-  last_duration: ''
-  last_failure: Never
+  last_configuration_duration: Never
+  last_configuration_failure: Never
+  last_configuration_runtime: Never
+  last_configuration_status: Never
+  last_configuration_update: Never
   last_modified: ''
-  last_runtime: '2020-07-20 04:39:08.971460'
-  last_status: Success
-  last_update: '2020-07-20 04:39:08.971460'
+  last_operational_data_duration: Never
+  last_operational_data_failure: Never
+  last_operational_data_runtime: Never
+  last_operational_data_status: Never
+  last_operational_data_update: Never
+  last_specialized_data_duration: Never
+  last_specialized_data_failure: Never
+  last_specialized_data_runtime: Never
+  last_specialized_data_status: Never
+  last_specialized_data_update: Never
   latitude: '37.33939'
   location: SanJose
   longitude: '-121.89496'
@@ -212,12 +272,22 @@
   down: false
   icon: router
   ip_address: 10.0.0.12
-  last_duration: ''
-  last_failure: '2020-07-20 04:32:12.182149'
+  last_configuration_duration: Never
+  last_configuration_failure: Never
+  last_configuration_runtime: Never
+  last_configuration_status: Never
+  last_configuration_update: Never
   last_modified: ''
-  last_runtime: '2020-07-20 04:39:53.522336'
-  last_status: Success
-  last_update: '2020-07-20 04:39:53.522336'
+  last_operational_data_duration: Never
+  last_operational_data_failure: Never
+  last_operational_data_runtime: Never
+  last_operational_data_status: Never
+  last_operational_data_update: Never
+  last_specialized_data_duration: Never
+  last_specialized_data_failure: Never
+  last_specialized_data_runtime: Never
+  last_specialized_data_status: Never
+  last_specialized_data_update: Never
   latitude: '32.71533'
   location: SanDiego
   longitude: '-117.15726'
@@ -246,12 +316,22 @@
   down: false
   icon: router
   ip_address: 10.0.0.100
-  last_duration: ''
-  last_failure: '2020-07-20 04:32:06.611262'
+  last_configuration_duration: Never
+  last_configuration_failure: Never
+  last_configuration_runtime: Never
+  last_configuration_status: Never
+  last_configuration_update: Never
   last_modified: ''
-  last_runtime: '2020-07-20 04:40:08.725383'
-  last_status: Success
-  last_update: '2020-07-20 04:40:08.725383'
+  last_operational_data_duration: Never
+  last_operational_data_failure: Never
+  last_operational_data_runtime: Never
+  last_operational_data_status: Never
+  last_operational_data_update: Never
+  last_specialized_data_duration: Never
+  last_specialized_data_failure: Never
+  last_specialized_data_runtime: Never
+  last_specialized_data_status: Never
+  last_specialized_data_update: Never
   latitude: '32.78306'
   location: Dallas
   longitude: '-96.80667'
@@ -280,12 +360,22 @@
   down: false
   icon: router
   ip_address: 10.0.0.101
-  last_duration: ''
-  last_failure: '2020-07-20 04:32:06.785546'
+  last_configuration_duration: Never
+  last_configuration_failure: Never
+  last_configuration_runtime: Never
+  last_configuration_status: Never
+  last_configuration_update: Never
   last_modified: ''
-  last_runtime: '2020-07-20 04:40:03.059156'
-  last_status: Success
-  last_update: '2020-07-20 04:40:03.059156'
+  last_operational_data_duration: Never
+  last_operational_data_failure: Never
+  last_operational_data_runtime: Never
+  last_operational_data_status: Never
+  last_operational_data_update: Never
+  last_specialized_data_duration: Never
+  last_specialized_data_failure: Never
+  last_specialized_data_runtime: Never
+  last_specialized_data_status: Never
+  last_specialized_data_update: Never
   latitude: '39.95234'
   location: Philadelphia
   longitude: '-75.16379'
@@ -314,12 +404,22 @@
   down: false
   icon: optical_switch
   ip_address: 10.0.0.13
-  last_duration: ''
-  last_failure: Never
+  last_configuration_duration: Never
+  last_configuration_failure: Never
+  last_configuration_runtime: Never
+  last_configuration_status: Never
+  last_configuration_update: Never
   last_modified: ''
-  last_runtime: '2020-07-20 04:39:23.141740'
-  last_status: Success
-  last_update: '2020-07-20 04:39:23.141740'
+  last_operational_data_duration: Never
+  last_operational_data_failure: Never
+  last_operational_data_runtime: Never
+  last_operational_data_status: Never
+  last_operational_data_update: Never
+  last_specialized_data_duration: Never
+  last_specialized_data_failure: Never
+  last_specialized_data_runtime: Never
+  last_specialized_data_status: Never
+  last_specialized_data_update: Never
   latitude: '34.05223'
   location: LosAngeles
   longitude: '-118.24368'
@@ -348,12 +448,22 @@
   down: false
   icon: router
   ip_address: 10.0.0.14
-  last_duration: ''
-  last_failure: Never
+  last_configuration_duration: Never
+  last_configuration_failure: Never
+  last_configuration_runtime: Never
+  last_configuration_status: Never
+  last_configuration_update: Never
   last_modified: ''
-  last_runtime: '2020-07-20 04:39:36.378796'
-  last_status: Success
-  last_update: '2020-07-20 04:39:36.378796'
+  last_operational_data_duration: Never
+  last_operational_data_failure: Never
+  last_operational_data_runtime: Never
+  last_operational_data_status: Never
+  last_operational_data_update: Never
+  last_specialized_data_duration: Never
+  last_specialized_data_failure: Never
+  last_specialized_data_runtime: Never
+  last_specialized_data_status: Never
+  last_specialized_data_update: Never
   latitude: '42.33143'
   location: Detroit
   longitude: '-83.04575'
@@ -382,12 +492,22 @@
   down: false
   icon: router
   ip_address: 10.0.0.15
-  last_duration: ''
-  last_failure: Never
+  last_configuration_duration: Never
+  last_configuration_failure: Never
+  last_configuration_runtime: Never
+  last_configuration_status: Never
+  last_configuration_update: Never
   last_modified: ''
-  last_runtime: '2020-07-20 04:39:08.918180'
-  last_status: Success
-  last_update: '2020-07-20 04:39:08.918180'
+  last_operational_data_duration: Never
+  last_operational_data_failure: Never
+  last_operational_data_runtime: Never
+  last_operational_data_status: Never
+  last_operational_data_update: Never
+  last_specialized_data_duration: Never
+  last_specialized_data_failure: Never
+  last_specialized_data_runtime: Never
+  last_specialized_data_status: Never
+  last_specialized_data_update: Never
   latitude: '37.55376'
   location: Richmond
   longitude: '-77.46026'
@@ -416,12 +536,22 @@
   down: false
   icon: router
   ip_address: 10.0.0.102
-  last_duration: ''
-  last_failure: Never
+  last_configuration_duration: Never
+  last_configuration_failure: Never
+  last_configuration_runtime: Never
+  last_configuration_status: Never
+  last_configuration_update: Never
   last_modified: ''
-  last_runtime: '2020-07-20 04:39:59.375869'
-  last_status: Success
-  last_update: '2020-07-20 04:39:59.375869'
+  last_operational_data_duration: Never
+  last_operational_data_failure: Never
+  last_operational_data_runtime: Never
+  last_operational_data_status: Never
+  last_operational_data_update: Never
+  last_specialized_data_duration: Never
+  last_specialized_data_failure: Never
+  last_specialized_data_runtime: Never
+  last_specialized_data_status: Never
+  last_specialized_data_update: Never
   latitude: '33.749'
   location: Atlanta
   longitude: '-84.38798'
@@ -450,12 +580,22 @@
   down: false
   icon: router
   ip_address: 192.168.56.50
-  last_duration: ''
-  last_failure: Never
+  last_configuration_duration: Never
+  last_configuration_failure: Never
+  last_configuration_runtime: Never
+  last_configuration_status: Never
+  last_configuration_update: Never
   last_modified: ''
-  last_runtime: '2020-07-20 04:39:49.396390'
-  last_status: Success
-  last_update: '2020-07-20 04:39:49.396390'
+  last_operational_data_duration: Never
+  last_operational_data_failure: Never
+  last_operational_data_runtime: Never
+  last_operational_data_status: Never
+  last_operational_data_update: Never
+  last_specialized_data_duration: Never
+  last_specialized_data_failure: Never
+  last_specialized_data_runtime: Never
+  last_specialized_data_status: Never
+  last_specialized_data_update: Never
   latitude: '42.35843'
   location: Boston
   longitude: '-71.05977'
@@ -484,12 +624,22 @@
   down: false
   icon: router
   ip_address: 10.0.0.104
-  last_duration: ''
-  last_failure: Never
+  last_configuration_duration: Never
+  last_configuration_failure: Never
+  last_configuration_runtime: Never
+  last_configuration_status: Never
+  last_configuration_update: Never
   last_modified: ''
-  last_runtime: '2020-07-20 04:39:08.790457'
-  last_status: Success
-  last_update: '2020-07-20 04:39:08.790457'
+  last_operational_data_duration: Never
+  last_operational_data_failure: Never
+  last_operational_data_runtime: Never
+  last_operational_data_status: Never
+  last_operational_data_update: Never
+  last_specialized_data_duration: Never
+  last_specialized_data_failure: Never
+  last_specialized_data_runtime: Never
+  last_specialized_data_status: Never
+  last_specialized_data_update: Never
   latitude: '29.76328'
   location: Houston
   longitude: '-95.36327'
@@ -518,12 +668,22 @@
   down: false
   icon: router
   ip_address: 192.168.56.50
-  last_duration: ''
-  last_failure: Never
+  last_configuration_duration: Never
+  last_configuration_failure: Never
+  last_configuration_runtime: Never
+  last_configuration_status: Never
+  last_configuration_update: Never
   last_modified: ''
-  last_runtime: '2020-07-20 04:40:13.216748'
-  last_status: Success
-  last_update: '2020-07-20 04:40:13.216748'
+  last_operational_data_duration: Never
+  last_operational_data_failure: Never
+  last_operational_data_runtime: Never
+  last_operational_data_status: Never
+  last_operational_data_update: Never
+  last_specialized_data_duration: Never
+  last_specialized_data_failure: Never
+  last_specialized_data_runtime: Never
+  last_specialized_data_status: Never
+  last_specialized_data_update: Never
   latitude: '39.29038'
   location: Baltimore
   longitude: '-76.61219'
@@ -552,12 +712,22 @@
   down: false
   icon: router
   ip_address: 192.168.56.50
-  last_duration: ''
-  last_failure: Never
+  last_configuration_duration: Never
+  last_configuration_failure: Never
+  last_configuration_runtime: Never
+  last_configuration_status: Never
+  last_configuration_update: Never
   last_modified: ''
-  last_runtime: '2020-07-20 04:39:56.249043'
-  last_status: Success
-  last_update: '2020-07-20 04:39:56.249043'
+  last_operational_data_duration: Never
+  last_operational_data_failure: Never
+  last_operational_data_runtime: Never
+  last_operational_data_status: Never
+  last_operational_data_update: Never
+  last_specialized_data_duration: Never
+  last_specialized_data_failure: Never
+  last_specialized_data_runtime: Never
+  last_specialized_data_status: Never
+  last_specialized_data_update: Never
   latitude: '41.4995'
   location: Cleveland
   longitude: '-81.69541'
@@ -586,12 +756,22 @@
   down: false
   icon: router
   ip_address: 192.168.56.50
-  last_duration: ''
-  last_failure: Never
+  last_configuration_duration: Never
+  last_configuration_failure: Never
+  last_configuration_runtime: Never
+  last_configuration_status: Never
+  last_configuration_update: Never
   last_modified: ''
-  last_runtime: '2020-07-20 04:39:53.109326'
-  last_status: Success
-  last_update: '2020-07-20 04:39:53.109326'
+  last_operational_data_duration: Never
+  last_operational_data_failure: Never
+  last_operational_data_runtime: Never
+  last_operational_data_status: Never
+  last_operational_data_update: Never
+  last_specialized_data_duration: Never
+  last_specialized_data_failure: Never
+  last_specialized_data_runtime: Never
+  last_specialized_data_status: Never
+  last_specialized_data_update: Never
   latitude: '39.96118'
   location: Columbus
   longitude: '-82.99879'
@@ -620,12 +800,22 @@
   down: false
   icon: router
   ip_address: 192.168.56.50
-  last_duration: ''
-  last_failure: Never
+  last_configuration_duration: Never
+  last_configuration_failure: Never
+  last_configuration_runtime: Never
+  last_configuration_status: Never
+  last_configuration_update: Never
   last_modified: ''
-  last_runtime: '2020-07-20 04:39:36.187202'
-  last_status: Success
-  last_update: '2020-07-20 04:39:36.187202'
+  last_operational_data_duration: Never
+  last_operational_data_failure: Never
+  last_operational_data_runtime: Never
+  last_operational_data_status: Never
+  last_operational_data_update: Never
+  last_specialized_data_duration: Never
+  last_specialized_data_failure: Never
+  last_specialized_data_runtime: Never
+  last_specialized_data_status: Never
+  last_specialized_data_update: Never
   latitude: '39.162'
   location: Cincinnati
   longitude: '-84.45689'
@@ -654,12 +844,22 @@
   down: false
   icon: router
   ip_address: 192.168.56.50
-  last_duration: ''
-  last_failure: '2020-07-20 04:32:12.687792'
+  last_configuration_duration: Never
+  last_configuration_failure: Never
+  last_configuration_runtime: Never
+  last_configuration_status: Never
+  last_configuration_update: Never
   last_modified: ''
-  last_runtime: '2020-07-20 04:39:23.140814'
-  last_status: Success
-  last_update: '2020-07-20 04:39:23.140814'
+  last_operational_data_duration: Never
+  last_operational_data_failure: Never
+  last_operational_data_runtime: Never
+  last_operational_data_status: Never
+  last_operational_data_update: Never
+  last_specialized_data_duration: Never
+  last_specialized_data_failure: Never
+  last_specialized_data_runtime: Never
+  last_specialized_data_status: Never
+  last_specialized_data_update: Never
   latitude: '42.3751'
   location: Cambridge
   longitude: '-71.10561'
@@ -688,12 +888,22 @@
   down: false
   icon: router
   ip_address: 10.0.0.110
-  last_duration: ''
-  last_failure: '2020-07-20 04:32:06.668636'
+  last_configuration_duration: Never
+  last_configuration_failure: Never
+  last_configuration_runtime: Never
+  last_configuration_status: Never
+  last_configuration_update: Never
   last_modified: ''
-  last_runtime: '2020-07-20 04:39:40.407448'
-  last_status: Success
-  last_update: '2020-07-20 04:39:40.407448'
+  last_operational_data_duration: Never
+  last_operational_data_failure: Never
+  last_operational_data_runtime: Never
+  last_operational_data_status: Never
+  last_operational_data_update: Never
+  last_specialized_data_duration: Never
+  last_specialized_data_failure: Never
+  last_specialized_data_runtime: Never
+  last_specialized_data_status: Never
+  last_specialized_data_update: Never
   latitude: '44.97997'
   location: Minneapolis
   longitude: '-93.26384'
@@ -722,12 +932,22 @@
   down: false
   icon: router
   ip_address: 192.168.1.88
-  last_duration: ''
-  last_failure: Never
+  last_configuration_duration: Never
+  last_configuration_failure: Never
+  last_configuration_runtime: Never
+  last_configuration_status: Never
+  last_configuration_update: Never
   last_modified: ''
-  last_runtime: '2020-07-20 04:40:12.637961'
-  last_status: Success
-  last_update: '2020-07-20 04:40:12.637961'
+  last_operational_data_duration: Never
+  last_operational_data_failure: Never
+  last_operational_data_runtime: Never
+  last_operational_data_status: Never
+  last_operational_data_update: Never
+  last_specialized_data_duration: Never
+  last_specialized_data_failure: Never
+  last_specialized_data_runtime: Never
+  last_specialized_data_status: Never
+  last_specialized_data_update: Never
   latitude: '40.71427'
   location: NewYork
   longitude: '-74.00597'
@@ -756,12 +976,22 @@
   down: false
   icon: router
   ip_address: 10.0.0.111
-  last_duration: ''
-  last_failure: Never
+  last_configuration_duration: Never
+  last_configuration_failure: Never
+  last_configuration_runtime: Never
+  last_configuration_status: Never
+  last_configuration_update: Never
   last_modified: ''
-  last_runtime: '2020-07-20 04:39:23.090502'
-  last_status: Success
-  last_update: '2020-07-20 04:39:23.090502'
+  last_operational_data_duration: Never
+  last_operational_data_failure: Never
+  last_operational_data_runtime: Never
+  last_operational_data_status: Never
+  last_operational_data_update: Never
+  last_specialized_data_duration: Never
+  last_specialized_data_failure: Never
+  last_specialized_data_runtime: Never
+  last_specialized_data_status: Never
+  last_specialized_data_update: Never
   latitude: '38.58157'
   location: Sacramento
   longitude: '-121.4944'
@@ -790,12 +1020,22 @@
   down: false
   icon: router
   ip_address: 192.168.1.89
-  last_duration: ''
-  last_failure: '2020-07-20 04:32:12.629241'
+  last_configuration_duration: Never
+  last_configuration_failure: Never
+  last_configuration_runtime: Never
+  last_configuration_status: Never
+  last_configuration_update: Never
   last_modified: ''
-  last_runtime: '2020-07-20 04:39:58.930456'
-  last_status: Success
-  last_update: '2020-07-20 04:39:58.930456'
+  last_operational_data_duration: Never
+  last_operational_data_failure: Never
+  last_operational_data_runtime: Never
+  last_operational_data_status: Never
+  last_operational_data_update: Never
+  last_specialized_data_duration: Never
+  last_specialized_data_failure: Never
+  last_specialized_data_runtime: Never
+  last_specialized_data_status: Never
+  last_specialized_data_update: Never
   latitude: '37.77493'
   location: SanFrancisco
   longitude: '-122.41942'
@@ -824,12 +1064,22 @@
   down: false
   icon: router
   ip_address: 10.0.0.114
-  last_duration: ''
-  last_failure: Never
+  last_configuration_duration: Never
+  last_configuration_failure: Never
+  last_configuration_runtime: Never
+  last_configuration_status: Never
+  last_configuration_update: Never
   last_modified: ''
-  last_runtime: '2020-07-20 04:39:23.113169'
-  last_status: Success
-  last_update: '2020-07-20 04:39:23.113169'
+  last_operational_data_duration: Never
+  last_operational_data_failure: Never
+  last_operational_data_runtime: Never
+  last_operational_data_status: Never
+  last_operational_data_update: Never
+  last_specialized_data_duration: Never
+  last_specialized_data_failure: Never
+  last_specialized_data_runtime: Never
+  last_specialized_data_status: Never
+  last_specialized_data_update: Never
   latitude: '33.78779'
   location: Orange
   longitude: '-117.85311'
@@ -858,12 +1108,22 @@
   down: false
   icon: router
   ip_address: 10.0.0.112
-  last_duration: ''
-  last_failure: Never
+  last_configuration_duration: Never
+  last_configuration_failure: Never
+  last_configuration_runtime: Never
+  last_configuration_status: Never
+  last_configuration_update: Never
   last_modified: ''
-  last_runtime: '2020-07-20 04:40:09.435991'
-  last_status: Success
-  last_update: '2020-07-20 04:40:09.435991'
+  last_operational_data_duration: Never
+  last_operational_data_failure: Never
+  last_operational_data_runtime: Never
+  last_operational_data_status: Never
+  last_operational_data_update: Never
+  last_specialized_data_duration: Never
+  last_specialized_data_failure: Never
+  last_specialized_data_runtime: Never
+  last_specialized_data_status: Never
+  last_specialized_data_update: Never
   latitude: '37.80437'
   location: Oakland
   longitude: '-122.2708'
@@ -892,12 +1152,22 @@
   down: false
   icon: router
   ip_address: 10.0.0.113
-  last_duration: ''
-  last_failure: '2020-07-20 04:32:12.125484'
+  last_configuration_duration: Never
+  last_configuration_failure: Never
+  last_configuration_runtime: Never
+  last_configuration_status: Never
+  last_configuration_update: Never
   last_modified: ''
-  last_runtime: '2020-07-20 04:39:36.373466'
-  last_status: Success
-  last_update: '2020-07-20 04:39:36.373466'
+  last_operational_data_duration: Never
+  last_operational_data_failure: Never
+  last_operational_data_runtime: Never
+  last_operational_data_status: Never
+  last_operational_data_update: Never
+  last_specialized_data_duration: Never
+  last_specialized_data_failure: Never
+  last_specialized_data_runtime: Never
+  last_specialized_data_status: Never
+  last_specialized_data_update: Never
   latitude: '39.73915'
   location: Denver
   longitude: '-104.9847'
@@ -926,12 +1196,22 @@
   down: false
   icon: router
   ip_address: 192.168.1.85
-  last_duration: ''
-  last_failure: Never
+  last_configuration_duration: Never
+  last_configuration_failure: Never
+  last_configuration_runtime: Never
+  last_configuration_status: Never
+  last_configuration_update: Never
   last_modified: ''
-  last_runtime: ''
-  last_status: Never
-  last_update: Never
+  last_operational_data_duration: Never
+  last_operational_data_failure: Never
+  last_operational_data_runtime: Never
+  last_operational_data_status: Never
+  last_operational_data_update: Never
+  last_specialized_data_duration: Never
+  last_specialized_data_failure: Never
+  last_specialized_data_runtime: Never
+  last_specialized_data_status: Never
+  last_specialized_data_update: Never
   latitude: '47.403792182567656'
   location: france
   longitude: '-0.4080065865215727'
@@ -960,12 +1240,22 @@
   down: false
   icon: router
   ip_address: 192.168.1.86
-  last_duration: ''
-  last_failure: Never
+  last_configuration_duration: Never
+  last_configuration_failure: Never
+  last_configuration_runtime: Never
+  last_configuration_status: Never
+  last_configuration_update: Never
   last_modified: ''
-  last_runtime: ''
-  last_status: Never
-  last_update: Never
+  last_operational_data_duration: Never
+  last_operational_data_failure: Never
+  last_operational_data_runtime: Never
+  last_operational_data_status: Never
+  last_operational_data_update: Never
+  last_specialized_data_duration: Never
+  last_specialized_data_failure: Never
+  last_specialized_data_runtime: Never
+  last_specialized_data_status: Never
+  last_specialized_data_update: Never
   latitude: '48.421248383492745'
   location: france
   longitude: '2.366904644610879'
@@ -994,12 +1284,22 @@
   down: false
   icon: router
   ip_address: 192.168.1.87
-  last_duration: ''
-  last_failure: Never
+  last_configuration_duration: Never
+  last_configuration_failure: Never
+  last_configuration_runtime: Never
+  last_configuration_status: Never
+  last_configuration_update: Never
   last_modified: ''
-  last_runtime: ''
-  last_status: Never
-  last_update: Never
+  last_operational_data_duration: Never
+  last_operational_data_failure: Never
+  last_operational_data_runtime: Never
+  last_operational_data_status: Never
+  last_operational_data_update: Never
+  last_specialized_data_duration: Never
+  last_specialized_data_failure: Never
+  last_specialized_data_runtime: Never
+  last_specialized_data_status: Never
+  last_specialized_data_update: Never
   latitude: '49.98884227261501'
   location: france
   longitude: '4.553994745638234'
@@ -1028,12 +1328,22 @@
   down: false
   icon: router
   ip_address: 192.168.1.88
-  last_duration: ''
-  last_failure: Never
+  last_configuration_duration: Never
+  last_configuration_failure: Never
+  last_configuration_runtime: Never
+  last_configuration_status: Never
+  last_configuration_update: Never
   last_modified: ''
-  last_runtime: ''
-  last_status: Never
-  last_update: Never
+  last_operational_data_duration: Never
+  last_operational_data_failure: Never
+  last_operational_data_runtime: Never
+  last_operational_data_status: Never
+  last_operational_data_update: Never
+  last_specialized_data_duration: Never
+  last_specialized_data_failure: Never
+  last_specialized_data_runtime: Never
+  last_specialized_data_status: Never
+  last_specialized_data_update: Never
   latitude: '50.41433737503949'
   location: eastern europe
   longitude: '8.084503313789972'
@@ -1062,12 +1372,22 @@
   down: false
   icon: router
   ip_address: 192.168.1.188
-  last_duration: ''
-  last_failure: Never
+  last_configuration_duration: Never
+  last_configuration_failure: Never
+  last_configuration_runtime: Never
+  last_configuration_status: Never
+  last_configuration_update: Never
   last_modified: ''
-  last_runtime: ''
-  last_status: Never
-  last_update: Never
+  last_operational_data_duration: Never
+  last_operational_data_failure: Never
+  last_operational_data_runtime: Never
+  last_operational_data_status: Never
+  last_operational_data_update: Never
+  last_specialized_data_duration: Never
+  last_specialized_data_failure: Never
+  last_specialized_data_runtime: Never
+  last_specialized_data_status: Never
+  last_specialized_data_update: Never
   latitude: '45.559733221855026'
   location: france
   longitude: '2.0137607972959803'
@@ -1096,12 +1416,22 @@
   down: false
   icon: router
   ip_address: 192.168.1.187
-  last_duration: ''
-  last_failure: Never
+  last_configuration_duration: Never
+  last_configuration_failure: Never
+  last_configuration_runtime: Never
+  last_configuration_status: Never
+  last_configuration_update: Never
   last_modified: ''
-  last_runtime: ''
-  last_status: Never
-  last_update: Never
+  last_operational_data_duration: Never
+  last_operational_data_failure: Never
+  last_operational_data_runtime: Never
+  last_operational_data_status: Never
+  last_operational_data_update: Never
+  last_specialized_data_duration: Never
+  last_specialized_data_failure: Never
+  last_specialized_data_runtime: Never
+  last_specialized_data_status: Never
+  last_specialized_data_update: Never
   latitude: '46.386212676269515'
   location: france
   longitude: '4.533886327086546'
@@ -1130,12 +1460,22 @@
   down: false
   icon: router
   ip_address: 10.0.0.12
-  last_duration: ''
-  last_failure: Never
+  last_configuration_duration: Never
+  last_configuration_failure: Never
+  last_configuration_runtime: Never
+  last_configuration_status: Never
+  last_configuration_update: Never
   last_modified: ''
-  last_runtime: ''
-  last_status: Never
-  last_update: Never
+  last_operational_data_duration: Never
+  last_operational_data_failure: Never
+  last_operational_data_runtime: Never
+  last_operational_data_status: Never
+  last_operational_data_update: Never
+  last_specialized_data_duration: Never
+  last_specialized_data_failure: Never
+  last_specialized_data_runtime: Never
+  last_specialized_data_status: Never
+  last_specialized_data_update: Never
   latitude: '46.31282384039465'
   location: france
   longitude: '7.623210990527811'
@@ -1164,12 +1504,22 @@
   down: false
   icon: router
   ip_address: 10.0.0.13
-  last_duration: ''
-  last_failure: Never
+  last_configuration_duration: Never
+  last_configuration_failure: Never
+  last_configuration_runtime: Never
+  last_configuration_status: Never
+  last_configuration_update: Never
   last_modified: ''
-  last_runtime: ''
-  last_status: Never
-  last_update: Never
+  last_operational_data_duration: Never
+  last_operational_data_failure: Never
+  last_operational_data_runtime: Never
+  last_operational_data_status: Never
+  last_operational_data_update: Never
+  last_specialized_data_duration: Never
+  last_specialized_data_failure: Never
+  last_specialized_data_runtime: Never
+  last_specialized_data_status: Never
+  last_specialized_data_update: Never
   latitude: '47.28163316850573'
   location: eastern europe
   longitude: '10.390327738326055'
@@ -1198,12 +1548,22 @@
   down: false
   icon: router
   ip_address: 10.0.0.14
-  last_duration: ''
-  last_failure: Never
+  last_configuration_duration: Never
+  last_configuration_failure: Never
+  last_configuration_runtime: Never
+  last_configuration_status: Never
+  last_configuration_update: Never
   last_modified: ''
-  last_runtime: ''
-  last_status: Never
-  last_update: Never
+  last_operational_data_duration: Never
+  last_operational_data_failure: Never
+  last_operational_data_runtime: Never
+  last_operational_data_status: Never
+  last_operational_data_update: Never
+  last_specialized_data_duration: Never
+  last_specialized_data_failure: Never
+  last_specialized_data_runtime: Never
+  last_specialized_data_status: Never
+  last_specialized_data_update: Never
   latitude: '48.050503441733596'
   location: france
   longitude: '6.508434253625658'
@@ -1232,12 +1592,22 @@
   down: false
   icon: router
   ip_address: 10.0.0.15
-  last_duration: ''
-  last_failure: Never
+  last_configuration_duration: Never
+  last_configuration_failure: Never
+  last_configuration_runtime: Never
+  last_configuration_status: Never
+  last_configuration_update: Never
   last_modified: ''
-  last_runtime: ''
-  last_status: Never
-  last_update: Never
+  last_operational_data_duration: Never
+  last_operational_data_failure: Never
+  last_operational_data_runtime: Never
+  last_operational_data_status: Never
+  last_operational_data_update: Never
+  last_specialized_data_duration: Never
+  last_specialized_data_failure: Never
+  last_specialized_data_runtime: Never
+  last_specialized_data_status: Never
+  last_specialized_data_update: Never
   latitude: '49.35693311180886'
   location: eastern europe
   longitude: '9.74130182060886'
@@ -1266,12 +1636,22 @@
   down: false
   icon: router
   ip_address: 10.0.0.16
-  last_duration: ''
-  last_failure: Never
+  last_configuration_duration: Never
+  last_configuration_failure: Never
+  last_configuration_runtime: Never
+  last_configuration_status: Never
+  last_configuration_update: Never
   last_modified: ''
-  last_runtime: ''
-  last_status: Never
-  last_update: Never
+  last_operational_data_duration: Never
+  last_operational_data_failure: Never
+  last_operational_data_runtime: Never
+  last_operational_data_status: Never
+  last_operational_data_update: Never
+  last_specialized_data_duration: Never
+  last_specialized_data_failure: Never
+  last_specialized_data_runtime: Never
+  last_specialized_data_status: Never
+  last_specialized_data_update: Never
   latitude: '49.22507496520804'
   location: eastern europe
   longitude: '10.109935828061502'
@@ -1300,12 +1680,22 @@
   down: false
   icon: router
   ip_address: 10.0.0.17
-  last_duration: ''
-  last_failure: Never
+  last_configuration_duration: Never
+  last_configuration_failure: Never
+  last_configuration_runtime: Never
+  last_configuration_status: Never
+  last_configuration_update: Never
   last_modified: ''
-  last_runtime: ''
-  last_status: Never
-  last_update: Never
+  last_operational_data_duration: Never
+  last_operational_data_failure: Never
+  last_operational_data_runtime: Never
+  last_operational_data_status: Never
+  last_operational_data_update: Never
+  last_specialized_data_duration: Never
+  last_specialized_data_failure: Never
+  last_specialized_data_runtime: Never
+  last_specialized_data_status: Never
+  last_specialized_data_update: Never
   latitude: '44.69860318923541'
   location: france
   longitude: '5.595254381372841'
@@ -1334,12 +1724,22 @@
   down: false
   icon: router
   ip_address: 10.0.0.18
-  last_duration: ''
-  last_failure: Never
+  last_configuration_duration: Never
+  last_configuration_failure: Never
+  last_configuration_runtime: Never
+  last_configuration_status: Never
+  last_configuration_update: Never
   last_modified: ''
-  last_runtime: ''
-  last_status: Never
-  last_update: Never
+  last_operational_data_duration: Never
+  last_operational_data_failure: Never
+  last_operational_data_runtime: Never
+  last_operational_data_status: Never
+  last_operational_data_update: Never
+  last_specialized_data_duration: Never
+  last_specialized_data_failure: Never
+  last_specialized_data_runtime: Never
+  last_specialized_data_status: Never
+  last_specialized_data_update: Never
   latitude: '44.098423304433176'
   location: france
   longitude: '2.1511313297338606'
@@ -1368,12 +1768,22 @@
   down: false
   icon: router
   ip_address: 10.0.0.19
-  last_duration: ''
-  last_failure: Never
+  last_configuration_duration: Never
+  last_configuration_failure: Never
+  last_configuration_runtime: Never
+  last_configuration_status: Never
+  last_configuration_update: Never
   last_modified: ''
-  last_runtime: ''
-  last_status: Never
-  last_update: Never
+  last_operational_data_duration: Never
+  last_operational_data_failure: Never
+  last_operational_data_runtime: Never
+  last_operational_data_status: Never
+  last_operational_data_update: Never
+  last_specialized_data_duration: Never
+  last_specialized_data_failure: Never
+  last_specialized_data_runtime: Never
+  last_specialized_data_status: Never
+  last_specialized_data_update: Never
   latitude: '51.16509496536982'
   location: eastern europe
   longitude: '12.041475611784332'
@@ -1402,12 +1812,22 @@
   down: false
   icon: router
   ip_address: 10.0.0.20
-  last_duration: ''
-  last_failure: Never
+  last_configuration_duration: Never
+  last_configuration_failure: Never
+  last_configuration_runtime: Never
+  last_configuration_status: Never
+  last_configuration_update: Never
   last_modified: ''
-  last_runtime: ''
-  last_status: Never
-  last_update: Never
+  last_operational_data_duration: Never
+  last_operational_data_failure: Never
+  last_operational_data_runtime: Never
+  last_operational_data_status: Never
+  last_operational_data_update: Never
+  last_specialized_data_duration: Never
+  last_specialized_data_failure: Never
+  last_specialized_data_runtime: Never
+  last_specialized_data_status: Never
+  last_specialized_data_update: Never
   latitude: '53.00251151627622'
   location: eastern europe
   longitude: '14.637732184922653'
@@ -1436,12 +1856,22 @@
   down: false
   icon: router
   ip_address: 10.0.0.21
-  last_duration: ''
-  last_failure: Never
+  last_configuration_duration: Never
+  last_configuration_failure: Never
+  last_configuration_runtime: Never
+  last_configuration_status: Never
+  last_configuration_update: Never
   last_modified: ''
-  last_runtime: ''
-  last_status: Never
-  last_update: Never
+  last_operational_data_duration: Never
+  last_operational_data_failure: Never
+  last_operational_data_runtime: Never
+  last_operational_data_status: Never
+  last_operational_data_update: Never
+  last_specialized_data_duration: Never
+  last_specialized_data_failure: Never
+  last_specialized_data_runtime: Never
+  last_specialized_data_status: Never
+  last_specialized_data_update: Never
   latitude: '52.898908251546565'
   location: eastern europe
   longitude: '9.620913979151592'
@@ -1470,12 +1900,22 @@
   down: false
   icon: router
   ip_address: 10.0.0.22
-  last_duration: ''
-  last_failure: Never
+  last_configuration_duration: Never
+  last_configuration_failure: Never
+  last_configuration_runtime: Never
+  last_configuration_status: Never
+  last_configuration_update: Never
   last_modified: ''
-  last_runtime: ''
-  last_status: Never
-  last_update: Never
+  last_operational_data_duration: Never
+  last_operational_data_failure: Never
+  last_operational_data_runtime: Never
+  last_operational_data_status: Never
+  last_operational_data_update: Never
+  last_specialized_data_duration: Never
+  last_specialized_data_failure: Never
+  last_specialized_data_runtime: Never
+  last_specialized_data_status: Never
+  last_specialized_data_update: Never
   latitude: '51.13069724514281'
   location: eastern europe
   longitude: '15.322252610306014'
@@ -1504,12 +1944,22 @@
   down: false
   icon: router
   ip_address: 10.0.0.23
-  last_duration: ''
-  last_failure: Never
+  last_configuration_duration: Never
+  last_configuration_failure: Never
+  last_configuration_runtime: Never
+  last_configuration_status: Never
+  last_configuration_update: Never
   last_modified: ''
-  last_runtime: ''
-  last_status: Never
-  last_update: Never
+  last_operational_data_duration: Never
+  last_operational_data_failure: Never
+  last_operational_data_runtime: Never
+  last_operational_data_status: Never
+  last_operational_data_update: Never
+  last_specialized_data_duration: Never
+  last_specialized_data_failure: Never
+  last_specialized_data_runtime: Never
+  last_specialized_data_status: Never
+  last_specialized_data_update: Never
   latitude: '46.86709038736285'
   location: eastern europe
   longitude: '14.509961201590082'
@@ -1538,12 +1988,22 @@
   down: false
   icon: router
   ip_address: 10.0.0.24
-  last_duration: ''
-  last_failure: Never
+  last_configuration_duration: Never
+  last_configuration_failure: Never
+  last_configuration_runtime: Never
+  last_configuration_status: Never
+  last_configuration_update: Never
   last_modified: ''
-  last_runtime: ''
-  last_status: Never
-  last_update: Never
+  last_operational_data_duration: Never
+  last_operational_data_failure: Never
+  last_operational_data_runtime: Never
+  last_operational_data_status: Never
+  last_operational_data_update: Never
+  last_specialized_data_duration: Never
+  last_specialized_data_failure: Never
+  last_specialized_data_runtime: Never
+  last_specialized_data_status: Never
+  last_specialized_data_update: Never
   latitude: '48.2265031612354'
   location: eastern europe
   longitude: '16.394243292075355'
@@ -1572,12 +2032,22 @@
   down: false
   icon: router
   ip_address: 10.0.0.25
-  last_duration: ''
-  last_failure: Never
+  last_configuration_duration: Never
+  last_configuration_failure: Never
+  last_configuration_runtime: Never
+  last_configuration_status: Never
+  last_configuration_update: Never
   last_modified: ''
-  last_runtime: ''
-  last_status: Never
-  last_update: Never
+  last_operational_data_duration: Never
+  last_operational_data_failure: Never
+  last_operational_data_runtime: Never
+  last_operational_data_status: Never
+  last_operational_data_update: Never
+  last_specialized_data_duration: Never
+  last_specialized_data_failure: Never
+  last_specialized_data_runtime: Never
+  last_specialized_data_status: Never
+  last_specialized_data_update: Never
   latitude: '49.84702977845239'
   location: eastern europe
   longitude: '15.23113134650369'
@@ -1606,12 +2076,22 @@
   down: false
   icon: router
   ip_address: 10.0.0.26
-  last_duration: ''
-  last_failure: Never
+  last_configuration_duration: Never
+  last_configuration_failure: Never
+  last_configuration_runtime: Never
+  last_configuration_status: Never
+  last_configuration_update: Never
   last_modified: ''
-  last_runtime: ''
-  last_status: Never
-  last_update: Never
+  last_operational_data_duration: Never
+  last_operational_data_failure: Never
+  last_operational_data_runtime: Never
+  last_operational_data_status: Never
+  last_operational_data_update: Never
+  last_specialized_data_duration: Never
+  last_specialized_data_failure: Never
+  last_specialized_data_runtime: Never
+  last_specialized_data_status: Never
+  last_specialized_data_update: Never
   latitude: '49.20978690554773'
   location: france
   longitude: '-0.9363500525806724'
@@ -1640,12 +2120,22 @@
   down: false
   icon: router
   ip_address: 10.0.0.27
-  last_duration: ''
-  last_failure: Never
+  last_configuration_duration: Never
+  last_configuration_failure: Never
+  last_configuration_runtime: Never
+  last_configuration_status: Never
+  last_configuration_update: Never
   last_modified: ''
-  last_runtime: ''
-  last_status: Never
-  last_update: Never
+  last_operational_data_duration: Never
+  last_operational_data_failure: Never
+  last_operational_data_runtime: Never
+  last_operational_data_status: Never
+  last_operational_data_update: Never
+  last_specialized_data_duration: Never
+  last_specialized_data_failure: Never
+  last_specialized_data_runtime: Never
+  last_specialized_data_status: Never
+  last_specialized_data_update: Never
   latitude: '48.49233507313489'
   location: france
   longitude: '-3.304732896119501'
@@ -1674,12 +2164,22 @@
   down: false
   icon: router
   ip_address: 10.0.0.28
-  last_duration: ''
-  last_failure: Never
+  last_configuration_duration: Never
+  last_configuration_failure: Never
+  last_configuration_runtime: Never
+  last_configuration_status: Never
+  last_configuration_update: Never
   last_modified: ''
-  last_runtime: ''
-  last_status: Never
-  last_update: Never
+  last_operational_data_duration: Never
+  last_operational_data_failure: Never
+  last_operational_data_runtime: Never
+  last_operational_data_status: Never
+  last_operational_data_update: Never
+  last_specialized_data_duration: Never
+  last_specialized_data_failure: Never
+  last_specialized_data_runtime: Never
+  last_specialized_data_status: Never
+  last_specialized_data_update: Never
   latitude: '43.45727942401689'
   location: france
   longitude: '-0.07442133974525358'
@@ -1708,12 +2208,22 @@
   down: false
   icon: router
   ip_address: 10.0.0.29
-  last_duration: ''
-  last_failure: Never
+  last_configuration_duration: Never
+  last_configuration_failure: Never
+  last_configuration_runtime: Never
+  last_configuration_status: Never
+  last_configuration_update: Never
   last_modified: ''
-  last_runtime: ''
-  last_status: Never
-  last_update: Never
+  last_operational_data_duration: Never
+  last_operational_data_failure: Never
+  last_operational_data_runtime: Never
+  last_operational_data_status: Never
+  last_operational_data_update: Never
+  last_specialized_data_duration: Never
+  last_specialized_data_failure: Never
+  last_specialized_data_runtime: Never
+  last_specialized_data_status: Never
+  last_specialized_data_update: Never
   latitude: '41.418677137969205'
   location: spain
   longitude: '-7.341918530493528'
@@ -1742,12 +2252,22 @@
   down: false
   icon: router
   ip_address: 10.0.0.30
-  last_duration: ''
-  last_failure: Never
+  last_configuration_duration: Never
+  last_configuration_failure: Never
+  last_configuration_runtime: Never
+  last_configuration_status: Never
+  last_configuration_update: Never
   last_modified: ''
-  last_runtime: ''
-  last_status: Never
-  last_update: Never
+  last_operational_data_duration: Never
+  last_operational_data_failure: Never
+  last_operational_data_runtime: Never
+  last_operational_data_status: Never
+  last_operational_data_update: Never
+  last_specialized_data_duration: Never
+  last_specialized_data_failure: Never
+  last_specialized_data_runtime: Never
+  last_specialized_data_status: Never
+  last_specialized_data_update: Never
   latitude: '42.187262151915185'
   location: spain
   longitude: '-5.1153688818914205'
@@ -1776,12 +2296,22 @@
   down: false
   icon: router
   ip_address: 10.0.0.31
-  last_duration: ''
-  last_failure: Never
+  last_configuration_duration: Never
+  last_configuration_failure: Never
+  last_configuration_runtime: Never
+  last_configuration_status: Never
+  last_configuration_update: Never
   last_modified: ''
-  last_runtime: ''
-  last_status: Never
-  last_update: Never
+  last_operational_data_duration: Never
+  last_operational_data_failure: Never
+  last_operational_data_runtime: Never
+  last_operational_data_status: Never
+  last_operational_data_update: Never
+  last_specialized_data_duration: Never
+  last_specialized_data_failure: Never
+  last_specialized_data_runtime: Never
+  last_specialized_data_status: Never
+  last_specialized_data_update: Never
   latitude: '39.02973685301361'
   location: spain
   longitude: '-6.831899076757841'
@@ -1810,12 +2340,22 @@
   down: false
   icon: router
   ip_address: 10.0.0.32
-  last_duration: ''
-  last_failure: Never
+  last_configuration_duration: Never
+  last_configuration_failure: Never
+  last_configuration_runtime: Never
+  last_configuration_status: Never
+  last_configuration_update: Never
   last_modified: ''
-  last_runtime: ''
-  last_status: Never
-  last_update: Never
+  last_operational_data_duration: Never
+  last_operational_data_failure: Never
+  last_operational_data_runtime: Never
+  last_operational_data_status: Never
+  last_operational_data_update: Never
+  last_specialized_data_duration: Never
+  last_specialized_data_failure: Never
+  last_specialized_data_runtime: Never
+  last_specialized_data_status: Never
+  last_specialized_data_update: Never
   latitude: '40.253150884808775'
   location: spain
   longitude: '-4.399811607291714'
@@ -1844,12 +2384,22 @@
   down: false
   icon: router
   ip_address: 10.0.0.33
-  last_duration: ''
-  last_failure: Never
+  last_configuration_duration: Never
+  last_configuration_failure: Never
+  last_configuration_runtime: Never
+  last_configuration_status: Never
+  last_configuration_update: Never
   last_modified: ''
-  last_runtime: ''
-  last_status: Never
-  last_update: Never
+  last_operational_data_duration: Never
+  last_operational_data_failure: Never
+  last_operational_data_runtime: Never
+  last_operational_data_status: Never
+  last_operational_data_update: Never
+  last_specialized_data_duration: Never
+  last_specialized_data_failure: Never
+  last_specialized_data_runtime: Never
+  last_specialized_data_status: Never
+  last_specialized_data_update: Never
   latitude: '37.727674262495064'
   location: spain
   longitude: '-4.655147037393568'
@@ -1878,12 +2428,22 @@
   down: false
   icon: router
   ip_address: 10.0.0.34
-  last_duration: ''
-  last_failure: Never
+  last_configuration_duration: Never
+  last_configuration_failure: Never
+  last_configuration_runtime: Never
+  last_configuration_status: Never
+  last_configuration_update: Never
   last_modified: ''
-  last_runtime: ''
-  last_status: Never
-  last_update: Never
+  last_operational_data_duration: Never
+  last_operational_data_failure: Never
+  last_operational_data_runtime: Never
+  last_operational_data_status: Never
+  last_operational_data_update: Never
+  last_specialized_data_duration: Never
+  last_specialized_data_failure: Never
+  last_specialized_data_runtime: Never
+  last_specialized_data_status: Never
+  last_specialized_data_update: Never
   latitude: '40.43266024960298'
   location: spain
   longitude: '-2.2697275591281967'
@@ -1912,12 +2472,22 @@
   down: false
   icon: router
   ip_address: 10.0.0.35
-  last_duration: ''
-  last_failure: Never
+  last_configuration_duration: Never
+  last_configuration_failure: Never
+  last_configuration_runtime: Never
+  last_configuration_status: Never
+  last_configuration_update: Never
   last_modified: ''
-  last_runtime: ''
-  last_status: Never
-  last_update: Never
+  last_operational_data_duration: Never
+  last_operational_data_failure: Never
+  last_operational_data_runtime: Never
+  last_operational_data_status: Never
+  last_operational_data_update: Never
+  last_specialized_data_duration: Never
+  last_specialized_data_failure: Never
+  last_specialized_data_runtime: Never
+  last_specialized_data_status: Never
+  last_specialized_data_update: Never
   latitude: '44.93341536963455'
   location: eastern europe
   longitude: '10.168249814583962'
@@ -1946,12 +2516,22 @@
   down: false
   icon: router
   ip_address: 10.0.0.36
-  last_duration: ''
-  last_failure: Never
+  last_configuration_duration: Never
+  last_configuration_failure: Never
+  last_configuration_runtime: Never
+  last_configuration_status: Never
+  last_configuration_update: Never
   last_modified: ''
-  last_runtime: ''
-  last_status: Never
-  last_update: Never
+  last_operational_data_duration: Never
+  last_operational_data_failure: Never
+  last_operational_data_runtime: Never
+  last_operational_data_status: Never
+  last_operational_data_update: Never
+  last_specialized_data_duration: Never
+  last_specialized_data_failure: Never
+  last_specialized_data_runtime: Never
+  last_specialized_data_status: Never
+  last_specialized_data_update: Never
   latitude: '42.03685733119689'
   location: spain
   longitude: '-0.12208528992162263'
@@ -1980,12 +2560,22 @@
   down: false
   icon: router
   ip_address: 10.0.0.37
-  last_duration: ''
-  last_failure: Never
+  last_configuration_duration: Never
+  last_configuration_failure: Never
+  last_configuration_runtime: Never
+  last_configuration_status: Never
+  last_configuration_update: Never
   last_modified: ''
-  last_runtime: ''
-  last_status: Never
-  last_update: Never
+  last_operational_data_duration: Never
+  last_operational_data_failure: Never
+  last_operational_data_runtime: Never
+  last_operational_data_status: Never
+  last_operational_data_update: Never
+  last_specialized_data_duration: Never
+  last_specialized_data_failure: Never
+  last_specialized_data_runtime: Never
+  last_specialized_data_status: Never
+  last_specialized_data_update: Never
   latitude: '42.78304985155282'
   location: spain
   longitude: '-2.8956130447830795'
@@ -2014,12 +2604,22 @@
   down: false
   icon: router
   ip_address: 10.0.0.38
-  last_duration: ''
-  last_failure: Never
+  last_configuration_duration: Never
+  last_configuration_failure: Never
+  last_configuration_runtime: Never
+  last_configuration_status: Never
+  last_configuration_update: Never
   last_modified: ''
-  last_runtime: ''
-  last_status: Never
-  last_update: Never
+  last_operational_data_duration: Never
+  last_operational_data_failure: Never
+  last_operational_data_runtime: Never
+  last_operational_data_status: Never
+  last_operational_data_update: Never
+  last_specialized_data_duration: Never
+  last_specialized_data_failure: Never
+  last_specialized_data_runtime: Never
+  last_specialized_data_status: Never
+  last_specialized_data_update: Never
   latitude: '39.190713414545066'
   location: spain
   longitude: '-2.3607245612088796'
@@ -2048,12 +2648,22 @@
   down: false
   icon: router
   ip_address: 192.168.56.103
-  last_duration: ''
-  last_failure: Never
+  last_configuration_duration: Never
+  last_configuration_failure: Never
+  last_configuration_runtime: Never
+  last_configuration_status: Never
+  last_configuration_update: Never
   last_modified: ''
-  last_runtime: ''
-  last_status: Never
-  last_update: Never
+  last_operational_data_duration: Never
+  last_operational_data_failure: Never
+  last_operational_data_runtime: Never
+  last_operational_data_status: Never
+  last_operational_data_update: Never
+  last_specialized_data_duration: Never
+  last_specialized_data_failure: Never
+  last_specialized_data_runtime: Never
+  last_specialized_data_status: Never
+  last_specialized_data_update: Never
   latitude: 38,.,89511
   location: Washington
   longitude: wrong coordinate
@@ -2082,12 +2692,22 @@
   down: false
   icon: router
   ip_address: 127.0.0.1
-  last_duration: ''
-  last_failure: Never
+  last_configuration_duration: Never
+  last_configuration_failure: Never
+  last_configuration_runtime: Never
+  last_configuration_status: Never
+  last_configuration_update: Never
   last_modified: ''
-  last_runtime: '2020-07-20 04:39:26.703117'
-  last_status: Success
-  last_update: '2020-07-20 04:39:26.703117'
+  last_operational_data_duration: Never
+  last_operational_data_failure: Never
+  last_operational_data_runtime: Never
+  last_operational_data_status: Never
+  last_operational_data_update: Never
+  last_specialized_data_duration: Never
+  last_specialized_data_failure: Never
+  last_specialized_data_runtime: Never
+  last_specialized_data_status: Never
+  last_specialized_data_update: Never
   latitude: '48.0'
   location: Paris
   longitude: '2.0'

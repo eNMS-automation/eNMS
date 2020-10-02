@@ -98,7 +98,7 @@
   service_description_match: inclusion
   service_name: .*
   service_name_match: regex
-  service_number: 178
+  service_number: 179
   service_operating_system: ''
   service_operating_system_match: inclusion
   service_vendor: ''

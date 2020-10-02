@@ -196,6 +196,7 @@
     "/delete_instance",
     "/delete_label",
     "/delete_node",
+    "/delete_workflow_selection",
     "/duplicate_workflow",
     "/export_service",
     "/export_topology",

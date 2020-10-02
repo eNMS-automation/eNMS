@@ -173,6 +173,9 @@ class AutomationController(BaseController):
                 number_of_corrupted_edges += 1
         return number_of_corrupted_edges
 
+    def delete_workflow_selection(self, workflow_id, **selection):
+        print(selection)
+
     def delete_edge(self, workflow_id, edge_id):
         db.delete("workflow_edge", id=edge_id)
         now = self.get_time()

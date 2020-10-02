@@ -353,12 +353,8 @@ function addServicesToWorkflow() {
 function deleteNode(id) {
   let node = nodes.get(id);
   if (node.type == "label") {
-    deleteLabel(node);
   } else {
-    workflow.services = workflow.services.filter((n) => n.id != id);
-    workflow.edges = workflow.edges.filter(
-      (e) => ![e.source_id, e.destination_id].includes(id)
-    );
+
     call({
       url: `/delete_node/${workflow.id}/${id}`,
       callback: function (result) {
@@ -371,18 +367,6 @@ function deleteNode(id) {
       },
     });
   }
-}
-
-function deleteLabel(label, noNotification) {
-  nodes.remove(label.id);
-  call({
-    url: `/delete_label/${workflow.id}/${label.id}`,
-    callback: function (updateTime) {
-      delete workflow.labels[label.id];
-      workflow.last_modified = updateTime;
-      if (!noNotification) notify("Label removed.", "success", 5);
-    },
-  });
 }
 
 function saveEdge(edge) {
@@ -550,13 +534,29 @@ function edgeToEdge(edge) {
 }
 
 function deleteSelection() {
-  graph
-    .getSelectedNodes()
-    .filter((node) => !ends.has(node))
-    .map((node) => deleteNode(node));
-  graph.getSelectedEdges().map((edge) => deleteEdge(edge));
-  graph.deleteSelected();
-  switchMode(currentMode, true);
+  console.log(nodes)
+  const selection = {
+    nodes: graph.getSelectedNodes().filter((node) => !ends.has(node)),
+    edges: graph.getSelectedEdges()
+  }
+  selection.nodes.forEach((node) => {
+    delete workflow.labels[node];
+    graph.getConnectedEdges(node).forEach((edge) => {
+      if (!selection.edges.includes(edge)) selection.edges.push(edge);
+    })
+  })
+  call({
+    url: `/delete_workflow_selection/${workflow.id}`,
+    data: selection,
+    callback: function (updateTime) {
+      graph.deleteSelected();
+      workflow.services = workflow.services.filter((n) => !selection.nodes.includes(n.id));
+      workflow.edges = workflow.edges.filter((e) => !selection.edges.includes(e.id));
+      workflow.last_modified = updateTime;
+      notify("Selection removed.", "success", 5);
+      switchMode(currentMode, true);
+    },
+  });
 }
 
 function switchMode(mode, noNotification) {
@@ -693,7 +693,6 @@ Object.assign(action, {
   "Edit Edge": (edge) => {
     showTypePanel("workflow_edge", edge.id);
   },
-  "Delete Label": deleteLabel,
   Skip: () => skipServices(),
   "Zoom In": () => graph.zoom(0.2),
   "Zoom Out": () => graph.zoom(-0.2),
@@ -717,10 +716,6 @@ function createLabel() {
     url: `/create_label/${params}`,
     form: "workflow_label-form",
     callback: function (result) {
-      if (currLabel) {
-        deleteLabel(currLabel, true);
-        currLabel = null;
-      }
       drawLabel(result.id, result);
       $("#workflow_label").remove();
       notify("Label created.", "success", 5);

@@ -51,7 +51,7 @@ class NetmikoBackupService(ConnectionService):
         path.mkdir(parents=True, exist_ok=True)
         try:
             runtime = datetime.now()
-            setattr(device, f"last_{self.property}_runtime", runtime)
+            setattr(device, f"last_{self.property}_runtime", str(runtime))
             netmiko_connection = run.netmiko_connection(device)
             commands = run.sub(self.commands, locals())
             result = []

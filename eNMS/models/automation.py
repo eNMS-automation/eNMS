@@ -1413,11 +1413,14 @@ class Run(AbstractBase):
         )
 
     def update_configuration_properties(self, path, property, device):
-        property_timestamps = {
+        try:
+            with open(path / "timestamps.json", "r") as file:
+                data = load(file)
+        except FileNotFoundError:
+            data = {}
+        data[property] = {
             f"last_{timestamp}": getattr(device, f"last_{property}_{timestamp}")
             for timestamp in app.configuration_timestamps
         }
-        with open(path / f"data_{property}.json", "r+") as file:
-            data = load(file)
-            data[property] = property_timestamps
+        with open(path / "timestamps.json", "w") as file:
             dump(data, file, indent=4)

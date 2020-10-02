@@ -199,12 +199,12 @@ class BaseController:
                     "orderable": False,
                 },
             )
-            for indicator in self.configuration_indicators:
+            for timestamp in self.configuration_timestamps:
                 self.properties["tables"]["configuration"].insert(
                     -1,
                     {
-                        "data": f"last_{property}_{indicator}",
-                        "title": f"Last {title} {indicator.capitalize()}",
+                        "data": f"last_{property}_{timestamp}",
+                        "title": f"Last {title} {timestamp.capitalize()}",
                         "search": "text",
                         "visible": False,
                     },

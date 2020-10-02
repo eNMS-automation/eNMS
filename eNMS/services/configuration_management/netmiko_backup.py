@@ -85,7 +85,7 @@ class NetmikoBackupService(ConnectionService):
             setattr(device, f"last_{self.property}_status", "Failure")
             setattr(device, f"last_{self.property}_failure", str(runtime))
             return {"success": False, "result": str(exc)}
-        run.generate_yaml_file(path, self.property, device)
+        run.update_configuration_properties(path, self.property, device)
         return {"success": True}
 
 

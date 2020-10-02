@@ -24,7 +24,7 @@ class InventoryController(BaseController):
 
     ssh_port = -1
     configuration_properties = {"configuration": "Configuration"}
-    configuration_indicators = ("status", "update", "failure", "runtime", "duration")
+    configuration_timestamps = ("status", "update", "failure", "runtime", "duration")
 
     def get_ssh_port(self):
         if self.redis_queue:

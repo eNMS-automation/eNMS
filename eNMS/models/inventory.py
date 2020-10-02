@@ -48,10 +48,10 @@ class Object(AbstractBase):
 
 def set_configuration_properties(Device):
     for property in app.configuration_properties:
-        for indicator in app.configuration_indicators:
+        for timestamp in app.configuration_timestamps:
             setattr(
                 Device,
-                f"last_{property}_{indicator}",
+                f"last_{property}_{timestamp}",
                 db.Column(db.SmallString, default="Never"),
             )
     return Device

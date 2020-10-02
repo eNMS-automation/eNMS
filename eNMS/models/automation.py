@@ -4,7 +4,7 @@ from datetime import datetime
 from functools import partial
 from importlib import __import__ as importlib_import
 from io import BytesIO
-from json import loads
+from json import dump, load, loads
 from json.decoder import JSONDecodeError
 from multiprocessing.pool import ThreadPool
 from napalm import get_network_driver
@@ -1412,10 +1412,12 @@ class Run(AbstractBase):
             strip_command=True,
         )
 
-    def generate_yaml_file(self, path, property, device):
-        data = {
-            f"last_{indicator}": getattr(device, f"last_{property}_{indicator}")
-            for indicator in app.configuration_indicators
+    def update_configuration_properties(self, path, property, device):
+        property_timestamps = {
+            f"last_{timestamp}": getattr(device, f"last_{property}_{timestamp}")
+            for timestamp in app.configuration_timestamps
         }
-        with open(path / f"data_{property}.yml", "w") as file:
-            yaml.dump(data, file, default_flow_style=False)
+        with open(path / f"data_{property}.json", "r+") as file:
+            data = load(file)
+            data[property] = property_timestamps
+            dump(data, file, indent=4)

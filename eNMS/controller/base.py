@@ -199,6 +199,16 @@ class BaseController:
                     "orderable": False,
                 },
             )
+            for indicator in ("status", "update", "failure", "runtime", "duration"):
+                self.properties["tables"]["configuration"].insert(
+                    -1,
+                    {
+                        "data": f"last_{property}_{indicator}",
+                        "title": f"Last {title} {indicator.capitalize()}",
+                        "search": "text",
+                        "visible": False
+                    }
+                )
 
     def init_logs(self):
         folder = self.path / "logs"

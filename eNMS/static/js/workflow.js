@@ -350,23 +350,29 @@ function addServicesToWorkflow() {
   });
 }
 
-function deleteNode(id) {
-  let node = nodes.get(id);
-  if (node.type == "label") {
-  } else {
-
-    call({
-      url: `/delete_node/${workflow.id}/${id}`,
-      callback: function (result) {
-        workflow.last_modified = result.update_time;
-        notify(
-          `'${result.service.scoped_name}' deleted from the workflow.`,
-          "success",
-          5
-        );
-      },
-    });
+function deleteSelection() {
+  const selection = {
+    nodes: graph.getSelectedNodes().filter((node) => !ends.has(node)),
+    edges: graph.getSelectedEdges()
   }
+  selection.nodes.forEach((node) => {
+    delete workflow.labels[node];
+    graph.getConnectedEdges(node).forEach((edge) => {
+      if (!selection.edges.includes(edge)) selection.edges.push(edge);
+    })
+  })
+  call({
+    url: `/delete_workflow_selection/${workflow.id}`,
+    data: selection,
+    callback: function (updateTime) {
+      graph.deleteSelected();
+      workflow.services = workflow.services.filter((n) => !selection.nodes.includes(n.id));
+      workflow.edges = workflow.edges.filter((e) => !selection.edges.includes(e.id));
+      workflow.last_modified = updateTime;
+      notify("Selection removed.", "success", 5);
+      switchMode(currentMode, true);
+    },
+  });
 }
 
 function saveEdge(edge) {
@@ -379,18 +385,6 @@ function saveEdge(edge) {
       edges.add(newEdge);
       workflow.edges.push(newEdge);
       graph.addEdgeMode();
-    },
-  });
-}
-
-function deleteEdge(edgeId) {
-  const edgeNumber = workflow.edges.length;
-  workflow.edges = workflow.edges.filter((e) => e.id != edgeId);
-  if (workflow.edges.length == edgeNumber) return;
-  call({
-    url: `/delete_edge/${workflow.id}/${edgeId}`,
-    callback: (updateTime) => {
-      workflow.last_modified = updateTime;
     },
   });
 }
@@ -531,32 +525,6 @@ function edgeToEdge(edge) {
     },
     arrows: { to: { enabled: true } },
   };
-}
-
-function deleteSelection() {
-  console.log(nodes)
-  const selection = {
-    nodes: graph.getSelectedNodes().filter((node) => !ends.has(node)),
-    edges: graph.getSelectedEdges()
-  }
-  selection.nodes.forEach((node) => {
-    delete workflow.labels[node];
-    graph.getConnectedEdges(node).forEach((edge) => {
-      if (!selection.edges.includes(edge)) selection.edges.push(edge);
-    })
-  })
-  call({
-    url: `/delete_workflow_selection/${workflow.id}`,
-    data: selection,
-    callback: function (updateTime) {
-      graph.deleteSelected();
-      workflow.services = workflow.services.filter((n) => !selection.nodes.includes(n.id));
-      workflow.edges = workflow.edges.filter((e) => !selection.edges.includes(e.id));
-      workflow.last_modified = updateTime;
-      notify("Selection removed.", "success", 5);
-      switchMode(currentMode, true);
-    },
-  });
 }
 
 function switchMode(mode, noNotification) {

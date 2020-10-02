@@ -262,6 +262,7 @@ export class Table {
           id="column-display"
           title="Columns"
           class="form-control"
+          data-size="20"
           data-actions-box="true"
           data-selected-text-format="static"
         ></select>

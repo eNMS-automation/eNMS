@@ -24,7 +24,6 @@ from redis.exceptions import ConnectionError, TimeoutError
 from requests import Session as RequestSession
 from requests.adapters import HTTPAdapter
 from requests.packages.urllib3.util.retry import Retry
-from ruamel import yaml
 from smtplib import SMTP
 from string import punctuation
 from sqlalchemy import and_, or_
@@ -550,17 +549,22 @@ class BaseController:
     def update_database_configurations_from_git(self):
         for dir in scandir(self.path / "network_data"):
             device = db.fetch("device", allow_none=True, name=dir.name)
+            timestamp_path = Path(dir.path) / "timestamps.json"
             if not device:
                 continue
-            with open(Path(dir.path) / "data.yml") as data:
-                parameters = yaml.load(data)
-                device.update(**parameters)
-            for data in self.configuration_properties:
-                filepath = Path(dir.path) / data
+            try:
+                with open(timestamp_path) as file:
+                    timestamps = load(file)
+            except Exception:
+                timestamps = {}
+            for property in self.configuration_properties:
+                for timestamp, value in timestamps.get(property, {}).items():
+                    setattr(device, f"last_{property}_{timestamp}", value)
+                filepath = Path(dir.path) / property
                 if not filepath.exists():
                     continue
                 with open(filepath) as file:
-                    setattr(device, data, file.read())
+                    setattr(device, property, file.read())
         db.session.commit()
         for pool in db.fetch_all("pool"):
             if any(

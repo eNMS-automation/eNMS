@@ -1419,7 +1419,7 @@ class Run(AbstractBase):
         except FileNotFoundError:
             data = {}
         data[property] = {
-            f"last_{timestamp}": getattr(device, f"last_{property}_{timestamp}")
+            timestamp: getattr(device, f"last_{property}_{timestamp}")
             for timestamp in app.configuration_timestamps
         }
         with open(path / "timestamps.json", "w") as file:

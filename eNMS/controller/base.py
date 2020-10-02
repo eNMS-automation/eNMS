@@ -183,6 +183,7 @@ class BaseController:
                     db.private_properties.append(property)
                 if model == "device" and property_dict.get("configuration"):
                     self.configuration_properties[property] = pretty_name
+                    self.properties["filtering"]["device"].append(property)
 
     def init_logs(self):
         folder = self.path / "logs"

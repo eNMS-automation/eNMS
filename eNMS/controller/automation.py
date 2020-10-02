@@ -175,27 +175,19 @@ class AutomationController(BaseController):
 
     def delete_workflow_selection(self, workflow_id, **selection):
         workflow = db.fetch("workflow", id=workflow_id)
-        now = self.get_time()
-        workflow.last_modified = now
+        now = 
+        workflow.last_modified = self.get_time()
         for edge_id in selection["edges"]:
             db.delete("workflow_edge", id=edge_id)
-
-    def delete_label(self, workflow_id, label):
-        
-        workflow.labels.pop(label)
-        workflow.last_modified = now
-        return now
-
-    def delete_node(self, workflow_id, service_id):
-        workflow, service = (
-            db.fetch("workflow", id=workflow_id),
-            db.fetch("service", id=service_id),
-        )
-        workflow.services.remove(service)
-        if not service.shared:
-            db.delete("service", id=service.id)
-        
-        return {"service": service.serialized, "update_time": now}
+        for node_id in selection["nodes"]:
+            if isinstance(node_id, str):
+                workflow.labels.pop(node_id)
+            else:
+                service = db.fetch("service", id=node_id)
+                workflow.services.remove(service)
+                if not service.shared:
+                    db.delete("service", id=service.id)
+        return workflow.last_modified
 
     def duplicate_workflow(self, workflow_id):
         workflow = db.fetch("workflow", id=workflow_id)

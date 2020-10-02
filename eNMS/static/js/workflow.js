@@ -554,13 +554,10 @@ $("#current-runtime").on("change", function () {
 });
 
 function savePositions() {
-  $.ajax({
-    type: "POST",
+  call({
     url: `/save_positions/${workflow.id}`,
-    dataType: "json",
-    contentType: "application/json;charset=UTF-8",
-    data: JSON.stringify(graph.getPositions(), null, "\t"),
-    success: function (updateTime) {
+    data: graph.getPositions(),
+    callback: function (updateTime) {
       if (updateTime) workflow.last_modified = updateTime;
     },
   });

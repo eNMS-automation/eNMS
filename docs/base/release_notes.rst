@@ -39,6 +39,9 @@ In the migration files, the skip property must be removed: it will not be migrat
 - Refactor skip mechanism to work with run once mode service.
 - Don't reset run status when running a CLI command with CLI plugins
 - Refactor log mechanism to send log to client bit by bit, instead of all run logs at each refresh request
+- "No validation" in the service panel is now an option of the "validation condition" instead of the
+"validation method". For the migration files, this means that for all services where "validation_method" is set to
+"none", it must be replaced with "text" and "validation_condition" must be set to "none" instead.
 
 Version 3.22.4
 --------------

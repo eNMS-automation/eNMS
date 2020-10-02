@@ -94,6 +94,7 @@ class ServiceForm(BaseForm):
     max_processes = IntegerField("Maximum number of processes", default=15)
     validation_condition = SelectField(
         choices=(
+            ("none", "No validation"),
             ("success", "Run on success only"),
             ("failure", "Run on failure only"),
             ("always", "Always run"),
@@ -110,7 +111,6 @@ class ServiceForm(BaseForm):
     validation_method = SelectField(
         "Validation Method",
         choices=(
-            ("none", "No validation"),
             ("text", "Validation by text match"),
             ("dict_included", "Validation by dictionary inclusion"),
             ("dict_equal", "Validation by dictionary equality"),

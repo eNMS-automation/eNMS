@@ -128,9 +128,9 @@ class Service(AbstractBase):
     multiprocessing = db.Column(Boolean, default=False)
     max_processes = db.Column(Integer, default=5)
     status = db.Column(db.SmallString, default="Idle")
-    validation_condition = db.Column(db.SmallString, default="success")
+    validation_condition = db.Column(db.SmallString, default="none")
     conversion_method = db.Column(db.SmallString, default="none")
-    validation_method = db.Column(db.SmallString, default="none")
+    validation_method = db.Column(db.SmallString, default="text")
     content_match = db.Column(db.LargeString)
     content_match_regex = db.Column(Boolean, default=False)
     dict_match = db.Column(db.Dict)
@@ -829,7 +829,7 @@ class Run(AbstractBase):
                     or self.validation_condition == "success"
                     and results["success"]
                 )
-                if run_validation and self.validation_method != "none":
+                if run_validation:
                     self.validate_result(results, payload, device)
                     if self.negative_logic:
                         results["success"] = not results["success"]

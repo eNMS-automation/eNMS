@@ -297,22 +297,6 @@
         "visible": false
       },
       {
-        "data": "configuration",
-        "title": "Configuration",
-        "search": "text",
-        "width": "70%",
-        "visible": true,
-        "orderable": false
-      },
-      {
-        "data": "operational_data",
-        "title": "Operational Data",
-        "search": "text",
-        "width": "80%",
-        "visible": false,
-        "orderable": false
-      },
-      {
         "data": "last_status",
         "title": "Status",
         "search": "text",
@@ -947,7 +931,6 @@
       "port",
       "longitude",
       "latitude",
-      "configuration",
       "property1"
     ],
     "link": [

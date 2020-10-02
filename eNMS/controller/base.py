@@ -66,6 +66,7 @@ class BaseController:
         self.logging = logging
         self.cli_command = self.detect_cli()
         self.load_custom_properties()
+        self.load_configuration_properties()
         self.path = Path.cwd()
         self.init_encryption()
         self.use_vault = settings["vault"]["use_vault"]
@@ -183,7 +184,21 @@ class BaseController:
                     db.private_properties.append(property)
                 if model == "device" and property_dict.get("configuration"):
                     self.configuration_properties[property] = pretty_name
-                    self.properties["filtering"]["device"].append(property)
+
+    def load_configuration_properties(self):
+        for property, title in self.configuration_properties.items():
+            self.properties["filtering"]["device"].append(property)
+            self.properties["tables"]["configuration"].insert(
+                -1,
+                {
+                    "data": property,
+                    "title": title,
+                    "search": "text",
+                    "width": "70%",
+                    "visible": property == "configuration",
+                    "orderable": False,
+                },
+            )
 
     def init_logs(self):
         folder = self.path / "logs"

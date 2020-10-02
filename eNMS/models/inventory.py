@@ -46,6 +46,18 @@ class Object(AbstractBase):
         )
 
 
+def set_configuration_properties(Device):
+    for property in app.configuration_properties:
+        for indicator in ("status", "update", "failure", "runtime", "duration"):
+            setattr(
+                Device,
+                f"last_{property}_{indicator}",
+                db.Column(db.SmallString, default="Never"),
+            )
+    return Device
+
+
+@set_configuration_properties
 @db.set_custom_properties
 class Device(Object):
 
@@ -68,11 +80,6 @@ class Device(Object):
     napalm_driver = db.Column(db.SmallString, default="ios")
     scrapli_driver = db.Column(db.SmallString, default="cisco_iosxe")
     configuration = db.Column(db.LargeString, info={"log_change": False})
-    last_failure = db.Column(db.SmallString, default="Never")
-    last_status = db.Column(db.SmallString, default="Never")
-    last_update = db.Column(db.SmallString, default="Never")
-    last_runtime = db.Column(db.SmallString)
-    last_duration = db.Column(db.SmallString)
     services = relationship(
         "Service",
         secondary=db.service_target_device_table,

@@ -48,7 +48,7 @@ class Object(AbstractBase):
 
 def set_configuration_properties(Device):
     for property in app.configuration_properties:
-        for indicator in ("status", "update", "failure", "runtime", "duration"):
+        for indicator in app.configuration_indicators:
             setattr(
                 Device,
                 f"last_{property}_{indicator}",

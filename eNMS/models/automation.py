@@ -1412,12 +1412,10 @@ class Run(AbstractBase):
             strip_command=True,
         )
 
-    def generate_yaml_file(self, path, device):
+    def generate_yaml_file(self, path, property, device):
         data = {
-            "last_failure": device.last_failure,
-            "last_runtime": device.last_runtime,
-            "last_update": device.last_update,
-            "last_status": device.last_status,
+            f"last_{indicator}": getattr(device, f"last_{property}_{indicator}")
+            for indicator in app.configuration_indicators
         }
-        with open(path / "data.yml", "w") as file:
+        with open(path / f"data_{property}.yml", "w") as file:
             yaml.dump(data, file, default_flow_style=False)

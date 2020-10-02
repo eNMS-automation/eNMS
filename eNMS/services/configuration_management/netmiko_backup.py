@@ -50,7 +50,7 @@ class NetmikoBackupService(ConnectionService):
         path = Path.cwd() / "network_data" / device.name
         path.mkdir(parents=True, exist_ok=True)
         try:
-            device.last_runtime = datetime.now()
+            setattr(device, f"last_{self.property}_runtime", datetime.now())
             netmiko_connection = run.netmiko_connection(device)
             commands = run.sub(self.commands, locals())
             result = []
@@ -76,17 +76,16 @@ class NetmikoBackupService(ConnectionService):
             setattr(device, self.property, result)
             with open(path / self.property, "w") as file:
                 file.write(result)
-            device.last_status = "Success"
-            device.last_duration = (
-                f"{(datetime.now() - device.last_runtime).total_seconds()}s"
-            )
-            device.last_update = str(device.last_runtime)
-            run.generate_yaml_file(path, device)
+
+            setattr(device, f"last_{self.property}_status", "Success")
+            duration = f"{(datetime.now() - device.last_runtime).total_seconds()}s"
+            setattr(device, f"last_{self.property}_duration", duration)
+            setattr(device, f"last_{self.property}_update", str(device.last_runtime))
         except Exception as exc:
-            device.last_status = "Failure"
-            device.last_failure = str(device.last_runtime)
-            run.generate_yaml_file(path, device)
+            setattr(device, f"last_{self.property}_status", "Failure")
+            setattr(device, f"last_{self.property}_failure", str(device.last_runtime))
             return {"success": False, "result": str(exc)}
+        run.generate_yaml_file(path, self.property, device)
         return {"success": True}
 
 

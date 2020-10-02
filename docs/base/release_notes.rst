@@ -42,6 +42,9 @@ In the migration files, the skip property must be removed: it will not be migrat
 - "No validation" in the service panel is now an option of the "validation condition" instead of the
 "validation method". For the migration files, this means that for all services where "validation_method" is set to
 "none", it must be replaced with "text" and "validation_condition" must be set to "none" instead.
+- The timestamps like "last runtime", "last failure", etc are now per configuration property. The timestamps are
+all stored per device in a json.file called "timestamps.json". These timestamps properties have been added to
+the configuration table.
 
 Version 3.22.4
 --------------

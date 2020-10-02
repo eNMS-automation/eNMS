@@ -4,18 +4,16 @@ from ruamel import yaml
 
 import_classes = [
     "service",
-    "task",
 ]
 
 
-def update_property(project, property, value=None, types=None):
+def update_property(project, value=None, types=None):
     if not types:
         types = import_classes
     path = (
         Path.cwd()
         / "Desktop"
         / "shared"
-        / "project"
         / "eNMS"
         / "files"
         / "migrations"
@@ -25,10 +23,11 @@ def update_property(project, property, value=None, types=None):
         with open(path / f"{instance_type}.yaml", "r") as migration_file:
             objects = yaml.load(migration_file)
         for obj in objects:
-            obj["devices"] = []
-            obj["pools"] = []
+            if obj["validation_method"] == "none":
+                obj["validation_condition"] = "none"
+                obj["validation_method"] = "text"
         with open(path / f"{instance_type}.yaml", "w") as migration_file:
             yaml.dump(objects, migration_file)
 
 
-update_property("Backup0902_devs", "devices")
+update_property("examples")

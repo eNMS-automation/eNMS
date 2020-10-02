@@ -152,8 +152,8 @@
   type: swiss_army_knife_service
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
 - completion_time: 1
@@ -319,8 +319,8 @@
   type: swiss_army_knife_service
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
 - completion_time: 1
@@ -377,8 +377,8 @@
   type: swiss_army_knife_service
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
 - a_dict: {}
@@ -453,8 +453,8 @@
   update_pools_after_running: false
   update_target_pools: false
   url: https://www.google.fr/
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
 - close_connection: false
@@ -523,8 +523,8 @@
   update_pools_after_running: false
   update_target_pools: false
   use_host_keys: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   vrf_name: configure_BGP_test
   waiting_time: 100
@@ -598,8 +598,8 @@
   update_target_pools: false
   use_device_driver: true
   use_host_keys: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
 - close_connection: false
@@ -678,8 +678,8 @@
   update_target_pools: false
   use_device_driver: true
   use_host_keys: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: Arista
   waiting_time: 0
 - auto_find_prompt: true
@@ -851,8 +851,8 @@
   update_target_pools: false
   use_device_driver: true
   use_host_keys: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: Arista
   waiting_time: 1
 - auto_find_prompt: true
@@ -1013,8 +1013,8 @@
   update_target_pools: false
   use_device_driver: true
   use_host_keys: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: Arista
   waiting_time: 0
 - call_type: GET
@@ -1435,8 +1435,8 @@
   type: swiss_army_knife_service
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
 - completion_time: 1
@@ -1503,8 +1503,8 @@
   type: python_snippet_service
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
 - auto_find_prompt: true
@@ -1672,8 +1672,8 @@
   type: payload_extraction_service
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   variable1: simple_variable
   variable2: regex_variable
   variable3: textfsm_variable
@@ -1745,8 +1745,8 @@
   update_target_pools: false
   use_device_driver: true
   use_host_keys: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
 - auto_find_prompt: true
@@ -2158,8 +2158,8 @@
   type: python_snippet_service
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
 - completion_time: 1
@@ -2223,8 +2223,8 @@
   type: python_snippet_service
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
 - auto_find_prompt: true
@@ -3452,8 +3452,8 @@
   type: python_snippet_service
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
 - completion_time: 1
@@ -3527,8 +3527,8 @@
   type: payload_extraction_service
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   variable1: boolean
   variable2: list
   variable3: dict
@@ -3605,8 +3605,8 @@
   type: payload_extraction_service
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   variable1: list
   variable2: list
   variable3: dict
@@ -3748,8 +3748,8 @@
   type: python_snippet_service
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
 - auto_find_prompt: true
@@ -3908,8 +3908,8 @@
   type: workflow
   update_pools_after_running: true
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -4014,8 +4014,8 @@
   type: workflow
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -4091,8 +4091,8 @@
   type: workflow
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -4170,8 +4170,8 @@
   type: workflow
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -4289,8 +4289,8 @@
   type: workflow
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -4367,8 +4367,8 @@
   type: workflow
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -4438,8 +4438,8 @@
   type: workflow
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -4514,8 +4514,8 @@
   type: workflow
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -4603,8 +4603,8 @@
   type: workflow
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -4713,8 +4713,8 @@
   type: workflow
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -4806,8 +4806,8 @@
   type: workflow
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -4883,8 +4883,8 @@
   type: workflow
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -4985,8 +4985,8 @@
   type: workflow
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -5063,8 +5063,8 @@
   type: workflow
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -5131,8 +5131,8 @@
   type: workflow
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -5201,8 +5201,8 @@
   type: workflow
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -5287,8 +5287,8 @@
   use_device_driver: true
   use_genie: false
   use_host_keys: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
 - add_header: true
@@ -5393,8 +5393,8 @@
   update_target_pools: false
   use_device_driver: true
   use_host_keys: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
 - close_connection: false
@@ -5459,8 +5459,8 @@
   type: workflow
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -5524,8 +5524,8 @@
   type: workflow
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -5591,8 +5591,8 @@
   update_pools_after_running: false
   update_target_pools: false
   username: ''
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   verify_ssl_certificate: false
   waiting_time: 0
@@ -5657,8 +5657,8 @@
   type: workflow
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -5725,8 +5725,8 @@
   update_pools_after_running: false
   update_target_pools: false
   username: ''
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   verify_ssl_certificate: false
   waiting_time: 0
@@ -5789,8 +5789,8 @@
   type: workflow
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -5877,8 +5877,8 @@
   use_device_driver: true
   use_genie: false
   use_host_keys: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
 - auto_find_prompt: true
@@ -5964,8 +5964,8 @@
   use_device_driver: true
   use_genie: false
   use_host_keys: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
 - auto_find_prompt: true
@@ -6051,8 +6051,8 @@
   use_device_driver: true
   use_genie: false
   use_host_keys: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
 - close_connection: false
@@ -6136,8 +6136,8 @@
   type: workflow
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -6201,8 +6201,8 @@
   type: workflow
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -6266,8 +6266,8 @@
   type: workflow
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -6418,8 +6418,8 @@
   type: ansible_playbook_service
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
 - close_connection: false
@@ -6481,8 +6481,8 @@
   type: workflow
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -6544,8 +6544,8 @@
   type: python_snippet_service
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
 - auto_find_prompt: true
@@ -6629,8 +6629,8 @@
   use_device_driver: true
   use_genie: false
   use_host_keys: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
 - close_connection: false
@@ -6692,8 +6692,8 @@
   type: workflow
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -6754,8 +6754,8 @@
   type: python_snippet_service
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
 - close_connection: false
@@ -6817,8 +6817,8 @@
   type: workflow
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -6881,8 +6881,8 @@
   type: python_snippet_service
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
 - completion_time: 1
@@ -7359,8 +7359,8 @@
   type: workflow
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -7425,8 +7425,8 @@
   type: python_snippet_service
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
 - completion_time: 1
@@ -7487,8 +7487,8 @@
   type: python_snippet_service
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
 - completion_time: 1
@@ -7547,8 +7547,8 @@
   type: swiss_army_knife_service
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
 - close_connection: false
@@ -7612,8 +7612,8 @@
   type: workflow
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -7686,8 +7686,8 @@
   type: workflow
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -7903,8 +7903,8 @@
   type: ping_service
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
 - close_connection: false
@@ -7965,8 +7965,8 @@
   type: workflow
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -8032,8 +8032,8 @@
   type: topology_import_service
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
 - auto_find_prompt: true
@@ -8273,8 +8273,8 @@
   use_device_driver: true
   use_genie: false
   use_host_keys: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
 - add_header: true
@@ -8379,8 +8379,8 @@
   update_target_pools: false
   use_device_driver: true
   use_host_keys: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
 - add_commit: true
@@ -8445,8 +8445,8 @@
   type: git_service
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
 - completion_time: 1
@@ -8507,8 +8507,8 @@
   type: python_snippet_service
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
 - close_connection: false
@@ -8572,8 +8572,8 @@
   type: workflow
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -8642,8 +8642,8 @@
   update_target_pools: false
   use_device_driver: true
   use_host_keys: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
 - close_connection: false
@@ -8712,8 +8712,8 @@
   update_target_pools: false
   use_device_driver: true
   use_host_keys: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
 - close_connection: false
@@ -8782,8 +8782,8 @@
   update_target_pools: false
   use_device_driver: true
   use_host_keys: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
 - close_connection: false
@@ -8852,8 +8852,8 @@
   update_target_pools: false
   use_device_driver: true
   use_host_keys: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
 - close_connection: false
@@ -8936,8 +8936,8 @@
   type: workflow
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -9391,8 +9391,8 @@
   use_device_driver: true
   use_genie: false
   use_host_keys: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
 - auto_find_prompt: true
@@ -9479,8 +9479,8 @@
   use_device_driver: true
   use_genie: false
   use_host_keys: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
 - auto_find_prompt: true
@@ -9567,8 +9567,8 @@
   use_device_driver: true
   use_genie: false
   use_host_keys: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
 - auto_find_prompt: true
@@ -9655,8 +9655,8 @@
   use_device_driver: true
   use_genie: false
   use_host_keys: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
 - auto_find_prompt: true
@@ -9743,8 +9743,8 @@
   use_device_driver: true
   use_genie: false
   use_host_keys: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
 - auto_find_prompt: true
@@ -9831,8 +9831,8 @@
   use_device_driver: true
   use_genie: false
   use_host_keys: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
 - completion_time: 1
@@ -9894,8 +9894,8 @@
   type: python_snippet_service
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
 - completion_time: 1
@@ -9957,8 +9957,8 @@
   type: python_snippet_service
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
 - completion_time: 1
@@ -10020,8 +10020,8 @@
   type: python_snippet_service
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
 - completion_time: 1
@@ -10083,8 +10083,8 @@
   type: python_snippet_service
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
 - completion_time: 1
@@ -10146,8 +10146,8 @@
   type: python_snippet_service
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
 - completion_time: 1
@@ -10209,8 +10209,8 @@
   type: python_snippet_service
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
 - completion_time: 1
@@ -10272,8 +10272,8 @@
   type: python_snippet_service
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
 - completion_time: 1
@@ -10335,8 +10335,8 @@
   type: python_snippet_service
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
 - close_connection: false
@@ -10402,8 +10402,8 @@
   type: workflow
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -10489,8 +10489,8 @@
   use_device_driver: true
   use_genie: false
   use_host_keys: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
 - completion_time: 1
@@ -10559,8 +10559,8 @@
   type: generic_file_transfer_service
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
   window_size: 1073741824
@@ -10648,8 +10648,8 @@
   use_device_driver: true
   use_genie: false
   use_host_keys: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
 - completion_time: 1
@@ -10719,8 +10719,8 @@
   type: generic_file_transfer_service
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
   window_size: 1073741824
@@ -10806,8 +10806,8 @@
   use_device_driver: true
   use_genie: false
   use_host_keys: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
 - completion_time: 1
@@ -10942,8 +10942,8 @@
   type: workflow
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -11012,8 +11012,8 @@
   type: python_snippet_service
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
 - completion_time: 1
@@ -11080,8 +11080,8 @@
   type: python_snippet_service
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
 - completion_time: 1
@@ -11149,8 +11149,8 @@
   type: python_snippet_service
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
 - close_connection: false
@@ -11232,8 +11232,8 @@
   type: workflow
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -11304,8 +11304,8 @@
   type: python_snippet_service
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
 - completion_time: 1
@@ -11376,8 +11376,8 @@
   type: python_snippet_service
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
 - completion_time: 1
@@ -11448,8 +11448,8 @@
   type: python_snippet_service
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
 - completion_time: 1
@@ -11519,8 +11519,8 @@
   type: python_snippet_service
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
 - close_connection: false
@@ -11605,8 +11605,8 @@
   type: workflow
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -11694,8 +11694,8 @@
   type: python_snippet_service
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
 - call_type: GET
@@ -11764,8 +11764,8 @@
   update_pools_after_running: false
   update_target_pools: false
   username: admin
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   verify_ssl_certificate: false
   waiting_time: 0
@@ -11938,8 +11938,8 @@
   type: workflow
   update_pools_after_running: true
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -12012,8 +12012,8 @@
   type: python_snippet_service
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
 - completion_time: 1
@@ -12078,8 +12078,8 @@
   type: python_snippet_service
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
 - auto_find_prompt: true
@@ -12168,8 +12168,8 @@
   use_device_driver: true
   use_genie: false
   use_host_keys: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
 - completion_time: 1
@@ -12238,8 +12238,8 @@
   type: python_snippet_service
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
 - close_connection: false
@@ -12324,8 +12324,8 @@
   type: workflow
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -12473,8 +12473,8 @@
   type: python_snippet_service
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
 - completion_time: 1
@@ -12541,8 +12541,8 @@
   type: python_snippet_service
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
 - auto_find_prompt: true
@@ -12629,8 +12629,8 @@
   use_device_driver: true
   use_genie: false
   use_host_keys: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
 - call_type: GET
@@ -12863,8 +12863,8 @@
   type: workflow
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -12931,8 +12931,8 @@
   type: workflow
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -12997,8 +12997,8 @@
   type: python_snippet_service
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
 - close_connection: false
@@ -13062,8 +13062,8 @@
   type: workflow
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -13132,8 +13132,8 @@
   type: python_snippet_service
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
 - close_connection: false
@@ -13220,8 +13220,8 @@
   type: workflow
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -13287,8 +13287,8 @@
   type: python_snippet_service
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
 - close_connection: false
@@ -13355,8 +13355,8 @@
   type: workflow
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -13424,8 +13424,8 @@
   type: workflow
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -13491,8 +13491,8 @@
   type: python_snippet_service
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
 - completion_time: 1
@@ -13557,8 +13557,8 @@
   type: python_snippet_service
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0
 - completion_time: 1
@@ -13622,7 +13622,7 @@
   type: python_snippet_service
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
-  validation_method: none
+  validation_condition: none
+  validation_method: text
   vendor: ''
   waiting_time: 0

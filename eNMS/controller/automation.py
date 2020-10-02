@@ -175,7 +175,6 @@ class AutomationController(BaseController):
 
     def delete_workflow_selection(self, workflow_id, **selection):
         workflow = db.fetch("workflow", id=workflow_id)
-        now = 
         workflow.last_modified = self.get_time()
         for edge_id in selection["edges"]:
             db.delete("workflow_edge", id=edge_id)

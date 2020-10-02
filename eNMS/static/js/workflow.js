@@ -469,7 +469,7 @@ function serviceToNode(service) {
 }
 
 function drawLabel(id, label) {
-  nodes.add({
+  nodes.update({
     id: id,
     shape: "box",
     type: "label",
@@ -676,9 +676,8 @@ function createLabel() {
     : mousePosition
     ? [mousePosition.x, mousePosition.y]
     : [0, 0];
-  const params = `${workflow.id}/${pos[0]}/${pos[1]}`;
   call({
-    url: `/create_label/${params}`,
+    url: `/create_label/${workflow.id}/${pos[0]}/${pos[1]}/${currLabel.id}`,
     form: "workflow_label-form",
     callback: function (result) {
       drawLabel(result.id, result);

@@ -132,9 +132,9 @@ class AutomationController(BaseController):
             "update_time": workflow.last_modified,
         }
 
-    def create_label(self, workflow_id, x, y, **kwargs):
+    def create_label(self, workflow_id, x, y, label_id, **kwargs):
         workflow = db.fetch("workflow", id=workflow_id, rbac="edit")
-        label_id = str(uuid4())
+        label_id = str(uuid4()) if label_id == "undefined" else label_id
         label = {
             "positions": [x, y],
             "content": kwargs["text"],

@@ -424,10 +424,13 @@ tables.configuration = class ConfigurationTable extends Table {
       derivedProperties: ["last_runtime"],
       ...kwargs,
     });
-    row.last_status =
-      row.last_status == "Success"
-        ? `<button type="button" class="btn btn-sm btn-success">Success</button>`
-        : `<button type="button" class="btn btn-sm btn-danger">Failure</button>`;
+    const failureBtn = `<button type="button" class="btn btn-sm btn-danger">`;
+    const successBtn = `<button type="button" class="btn btn-sm btn-success">`;
+    for (const [key, value] of Object.entries(row)) {
+      if (typeof value !== "string") continue;
+      if (value.toLowerCase() == "failure") row[key] = `${failureBtn}Failure</button>`;
+      if (value.toLowerCase() == "success") row[key] = `${successBtn}Success</button>`;
+    }
     return row;
   }
 

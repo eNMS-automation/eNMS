@@ -74,4 +74,3 @@ result = {}
 results["success"] = True
 results["result"] = result""",
     )
-

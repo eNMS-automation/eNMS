@@ -17,9 +17,9 @@ class Server(AbstractBase):
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.SmallString, unique=True)
     description = db.Column(db.SmallString)
-    ip_address = db.Column(db.SmallString)
+    ip_address = db.Column(db.TinyString)
     weight = db.Column(Integer, default=1)
-    status = db.Column(db.SmallString, default="down")
+    status = db.Column(db.TinyString, default="down")
 
 
 @db.set_custom_properties
@@ -31,7 +31,7 @@ class User(AbstractBase, UserMixin):
     is_admin = db.Column(Boolean)
     email = db.Column(db.SmallString)
     password = db.Column(db.SmallString)
-    authentication = db.Column(db.SmallString)
+    authentication = db.Column(db.TinyString)
     groups = db.Column(db.List)
     menu = db.Column(db.List)
     pages = db.Column(db.List)
@@ -40,7 +40,7 @@ class User(AbstractBase, UserMixin):
     post_requests = db.Column(db.List)
     small_menu = db.Column(Boolean, default=False, info={"dont_track_changes": True})
     theme = db.Column(
-        db.SmallString, default="default", info={"dont_track_changes": True}
+        db.TinyString, default="default", info={"dont_track_changes": True}
     )
     groups = relationship(
         "Group", secondary=db.user_group_table, back_populates="users"
@@ -148,9 +148,9 @@ class Changelog(AbstractBase):
     type = db.Column(db.SmallString)
     __mapper_args__ = {"polymorphic_identity": "changelog", "polymorphic_on": type}
     id = db.Column(Integer, primary_key=True)
-    time = db.Column(db.SmallString)
+    time = db.Column(db.TinyString)
     content = db.Column(db.LargeString)
-    severity = db.Column(db.SmallString, default="debug")
+    severity = db.Column(db.TinyString, default="debug")
     user = db.Column(db.SmallString, default="admin")
 
     def update(self, **kwargs):

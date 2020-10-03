@@ -46,7 +46,8 @@
         "time": 3
       }
     },
-    "small_string_length": 255
+    "small_string_length": 255,
+    "tiny_string_length": 64
   },
   "mail": {
     "port": 587,

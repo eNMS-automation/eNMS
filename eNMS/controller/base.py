@@ -509,11 +509,13 @@ class BaseController:
     def update_database_configurations_from_git(self):
         for dir in scandir(self.path / "network_data"):
             device = db.fetch("device", allow_none=True, name=dir.name)
+            filepath = Path(dir.path) / "data.yml"
             if not device:
                 continue
-            with open(Path(dir.path) / "data.yml") as data:
-                parameters = yaml.load(data)
-                device.update(**{"dont_update_pools": True, **parameters})
+            if filepath.exists():
+                with open(Path(dir.path) / "data.yml") as data:
+                    parameters = yaml.load(data)
+                    device.update(**{"dont_update_pools": True, **parameters})
             for data in self.configuration_properties:
                 filepath = Path(dir.path) / data
                 if not filepath.exists():

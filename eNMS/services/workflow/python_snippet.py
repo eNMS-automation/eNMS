@@ -68,7 +68,7 @@ class PythonSnippetForm(ServiceForm):
         widget=TextArea(),
         render_kw={"rows": 15, "help": "python_snippet/source_code"},
         default="""
-# Click on "i" to right of "Source Code" for examples. 
+# Click on "i" to right of "Source Code" for examples.
 
 result = {}
 results["success"] = True

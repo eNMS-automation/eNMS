@@ -20,7 +20,7 @@ class Object(AbstractBase):
     __mapper_args__ = {"polymorphic_identity": "object", "polymorphic_on": type}
     id = db.Column(Integer, primary_key=True)
     public = db.Column(Boolean)
-    last_modified = db.Column(db.SmallString, info={"log_change": False})
+    last_modified = db.Column(db.TinyString, info={"log_change": False})
     subtype = db.Column(db.SmallString)
     description = db.Column(db.SmallString)
     model = db.Column(db.SmallString)
@@ -77,25 +77,25 @@ class Device(Object):
     parent_type = "object"
     id = db.Column(Integer, ForeignKey(Object.id), primary_key=True)
     name = db.Column(db.SmallString, unique=True)
-    icon = db.Column(db.SmallString, default="router")
+    icon = db.Column(db.TinyString, default="router")
     operating_system = db.Column(db.SmallString)
     os_version = db.Column(db.SmallString)
-    ip_address = db.Column(db.SmallString)
-    longitude = db.Column(db.SmallString, default="0.0")
-    latitude = db.Column(db.SmallString, default="0.0")
+    ip_address = db.Column(db.TinyString)
+    longitude = db.Column(db.TinyString, default="0.0")
+    latitude = db.Column(db.TinyString, default="0.0")
     port = db.Column(Integer, default=22)
     username = db.Column(db.SmallString)
     password = db.Column(db.SmallString)
     enable_password = db.Column(db.SmallString)
-    netmiko_driver = db.Column(db.SmallString, default="cisco_ios")
-    napalm_driver = db.Column(db.SmallString, default="ios")
-    scrapli_driver = db.Column(db.SmallString, default="cisco_iosxe")
+    netmiko_driver = db.Column(db.TinyString, default="cisco_ios")
+    napalm_driver = db.Column(db.TinyString, default="ios")
+    scrapli_driver = db.Column(db.TinyString, default="cisco_iosxe")
     configuration = db.Column(db.LargeString, info={"log_change": False})
-    last_failure = db.Column(db.SmallString, default="Never")
-    last_status = db.Column(db.SmallString, default="Never")
-    last_update = db.Column(db.SmallString, default="Never")
-    last_runtime = db.Column(db.SmallString)
-    last_duration = db.Column(db.SmallString)
+    last_failure = db.Column(db.TinyString, default="Never")
+    last_status = db.Column(db.TinyString, default="Never")
+    last_update = db.Column(db.TinyString, default="Never")
+    last_runtime = db.Column(db.TinyString)
+    last_duration = db.Column(db.TinyString)
     services = relationship(
         "Service", secondary=db.service_device_table, back_populates="devices"
     )
@@ -202,7 +202,7 @@ class Link(Object):
     parent_type = "object"
     id = db.Column(Integer, ForeignKey("object.id"), primary_key=True)
     name = db.Column(db.SmallString)
-    color = db.Column(db.SmallString, default="#000000")
+    color = db.Column(db.TinyString, default="#000000")
     source_id = db.Column(Integer, ForeignKey("device.id"))
     destination_id = db.Column(Integer, ForeignKey("device.id"))
     source = relationship(
@@ -259,14 +259,14 @@ def set_pool_properties(Pool):
         setattr(
             Pool,
             f"device_{property}_match",
-            db.Column(db.SmallString, default="inclusion"),
+            db.Column(db.TinyString, default="inclusion"),
         )
     for property in properties["filtering"]["link"]:
         setattr(Pool, f"link_{property}", db.Column(db.LargeString))
         setattr(
             Pool,
             f"link_{property}_match",
-            db.Column(db.SmallString, default="inclusion"),
+            db.Column(db.TinyString, default="inclusion"),
         )
     return Pool
 
@@ -279,7 +279,7 @@ class Pool(AbstractBase):
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.SmallString, unique=True)
     public = db.Column(Boolean)
-    last_modified = db.Column(db.SmallString, info={"log_change": False})
+    last_modified = db.Column(db.TinyString, info={"log_change": False})
     description = db.Column(db.SmallString)
     operator = db.Column(db.SmallString, default="all")
     devices = relationship(
@@ -288,8 +288,8 @@ class Pool(AbstractBase):
     device_number = db.Column(Integer, default=0)
     links = relationship("Link", secondary=db.pool_link_table, back_populates="pools")
     link_number = db.Column(Integer, default=0)
-    latitude = db.Column(db.SmallString, default="0.0")
-    longitude = db.Column(db.SmallString, default="0.0")
+    latitude = db.Column(db.TinyString, default="0.0")
+    longitude = db.Column(db.TinyString, default="0.0")
     services = relationship(
         "Service", secondary=db.service_pool_table, back_populates="pools"
     )
@@ -369,7 +369,7 @@ class Session(AbstractBase):
     private = True
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.SmallString, unique=True)
-    timestamp = db.Column(db.SmallString)
+    timestamp = db.Column(db.TinyString)
     user = db.Column(db.SmallString)
     content = db.Column(db.LargeString, info={"log_change": False})
     device_id = db.Column(Integer, ForeignKey("device.id"))

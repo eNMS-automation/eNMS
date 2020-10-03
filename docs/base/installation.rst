@@ -167,6 +167,7 @@ Settings ``database`` section
 - ``pool_size`` (default: ``1000``) Number of connections kept persistently in `SQL Alchemy pool
   <https://docs.sqlalchemy.org/en/13/core/pooling.html#sqlalchemy.pool.QueuePool/>`_.
 - ``max_overflow`` (default: ``10``) Maximum overflow size of the connection pool.
+- ``tiny_string_length`` (default: ``64``) Length of a tiny string in the database.
 - ``small_string_length`` (default: ``255``) Length of a small string in the database.
 - ``small_string_length`` (default: ``32768``) Length of a large string in the database.
 

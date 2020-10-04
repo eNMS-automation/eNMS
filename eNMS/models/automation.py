@@ -626,7 +626,7 @@ class Run(AbstractBase):
             commit=True,
             **{
                 "service": self.service.id,
-                "devices": [derived_device.id for derived_device in derived_devices],
+                "target_devices": [derived_device.id for derived_device in derived_devices],
                 "workflow": self.workflow.id,
                 "parent_device": device.id,
                 "restart_run": self.restart_run,

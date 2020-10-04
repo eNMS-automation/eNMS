@@ -26,3 +26,8 @@ class CustomController:
             )
         success = self.tacacs_client.authenticate(name, password).valid
         return {"name": name, "is_admin": True} if success else False
+
+    def parse_configuration_property(self, device, property, value=None):
+        if not value:
+            value = getattr(device, property)
+        return value

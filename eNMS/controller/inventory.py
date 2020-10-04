@@ -131,20 +131,26 @@ class InventoryController(BaseController):
         }
 
     def get_git_network_data(self, device_name, hash):
-        commit = Repo(self.path / "network_data").commit(hash)
-        result = {}
+        commit, result = Repo(self.path / "network_data").commit(hash), {}
+        device = fetch("device", name=device_name)
         for property in self.configuration_properties:
             try:
                 file = commit.tree / device_name / property
                 with BytesIO(file.data_stream.read()) as f:
-                    result[property] = f.read().decode("utf-8")
+                    value = f.read().decode("utf-8")
+                result[property] = self.parse_configuration_property(
+                    device, property, value
+                )
             except KeyError:
                 result[property] = ""
         return result, commit.committed_datetime
 
     def get_device_network_data(self, device_id):
         device = db.fetch("device", id=device_id)
-        return {p: getattr(device, p) for p in self.configuration_properties}
+        return {
+            property: self.parse_configuration_property(device, property)
+            for property in self.configuration_properties
+        }
 
     def get_session_log(self, session_id):
         return db.fetch("session", id=session_id).content

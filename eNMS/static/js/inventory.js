@@ -232,7 +232,12 @@ function showSessionLog(sessionId) {
               extraKeys: { "Ctrl-F": "findPersistent" },
             });
             editor.setSize("100%", "100%");
-            editor.setValue(log);
+            editor.setValue(
+              log.replace(
+                /[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]/g,
+                ""
+              )
+            );
           },
         });
       }

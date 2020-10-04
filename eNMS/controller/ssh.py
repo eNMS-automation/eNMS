@@ -11,6 +11,7 @@ from paramiko import (
     WarningPolicy,
 )
 from pathlib import Path
+from re import compile
 from socket import AF_INET, socket, SOCK_STREAM, SOL_SOCKET, SO_REUSEADDR
 from string import printable
 from threading import Event, Thread
@@ -90,15 +91,11 @@ class SshConnection:
             if not response:
                 continue
             self.server.channel.send(response)
-            log += "".join(c for c in str(response, "utf-8") if c in printable)
-            if "\n" not in log:
-                continue
-            else:
-                parsed_log = "\n".join(line for line in log.splitlines() if line)
-                self.logger.info(parsed_log)
-                session.content += parsed_log
-                log = ""
+            log += str(response, "utf-8")
+            self.logger.info(log)
             sleep(0.1)
+        ansi_escape = compile(r"(\x9B|\x1B\[)[0-?]*[ -\/]*[@-~]")
+        session.content = ansi_escape.sub("", log)
         db.session.commit()
 
     def send_data(self):

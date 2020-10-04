@@ -45,6 +45,7 @@ In the migration files, the skip property must be removed: it will not be migrat
 - The timestamps like "last runtime", "last failure", etc are now per configuration property. The timestamps are
 all stored per device in a json.file called "timestamps.json". These timestamps properties have been added to
 the configuration table.
+- Add ability to hard-code logic to mask password hashes when config is displayed in custom controller.
 
 Version 3.22.4
 --------------

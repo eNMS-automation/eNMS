@@ -107,8 +107,9 @@ class Workflow(Service):
         services = [db.fetch("service", id=id) for id in run.start_services]
         visited, targets, restart_run = set(), defaultdict(set), run.restart_run
         tracking_bfs = run.run_method == "per_service_with_workflow_targets"
+        start_targets = [device] if device else run.target_devices
         for service in services:
-            targets[service.name] |= {device.name for device in run.target_devices}
+            targets[service.name] |= {device.name for device in start_targets}
         while services:
             if run.stop:
                 return {"payload": payload, "success": False, "result": "Stopped"}
@@ -123,7 +124,7 @@ class Workflow(Service):
             if service in (start, end) or service.skip.get(self.name, False):
                 success = True if service.skip_value == "True" else False
                 results = {"result": "skipped", "success": success}
-                if tracking_bfs:
+                if tracking_bfs or device:
                     results["summary"] = {
                         "success": targets[service.name],
                         "failure": [],
@@ -138,13 +139,11 @@ class Workflow(Service):
                     "parent": run,
                     "parent_runtime": run.parent_runtime,
                 }
-                if tracking_bfs:
+                if tracking_bfs or device:
                     kwargs["target_devices"] = [
                         db.fetch("device", name=name).id
                         for name in targets[service.name]
                     ]
-                elif device:
-                    kwargs["target_devices"] = [device.id]
                 if run.parent_device_id:
                     kwargs["parent_device"] = run.parent_device_id
                 service_run = db.factory("run", commit=True, **kwargs)
@@ -163,18 +162,16 @@ class Workflow(Service):
                 for successor, edge in service.neighbors(
                     self, "destination", edge_type
                 ):
-                    if tracking_bfs:
+                    if tracking_bfs or device:
                         targets[successor.name] |= set(summary[edge_type])
                     services.append(successor)
-                    if tracking_bfs:
+                    if tracking_bfs or device:
                         run.write_state(
                             f"edges/{edge.id}", len(summary[edge_type]), "increment"
                         )
-                    elif device:
-                        run.write_state(f"edges/{edge.id}", 1, "increment")
                     else:
                         run.write_state(f"edges/{edge.id}", "DONE")
-        if tracking_bfs:
+        if tracking_bfs or device:
             failed = list(targets[start.name] - targets[end.name])
             summary = {"success": list(targets[end.name]), "failure": failed}
             results = {"payload": payload, "success": not failed, "summary": summary}

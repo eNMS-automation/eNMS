@@ -556,8 +556,6 @@ class Run(AbstractBase):
             self.log("error", result)
             results = {"success": False, "runtime": self.runtime, "result": result}
         finally:
-            if "discard" in results:
-                return
             db.session.commit()
             state = self.get_state()
             self.status = state["status"] = "Aborted" if self.stop else "Completed"
@@ -729,8 +727,6 @@ class Run(AbstractBase):
                         for device in non_skipped_targets
                     ]
                 )
-            if not results:
-                return {"discard": True}
             for result in results:
                 key = "success" if result["success"] else "failure"
                 summary[key].append(result["device_target"])

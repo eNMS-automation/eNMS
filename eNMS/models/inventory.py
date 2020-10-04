@@ -183,18 +183,15 @@ class Device(Object):
 
     @property
     def view_properties(self):
-        return {
-            property: getattr(self, property)
-            for property in (
-                "id",
-                "type",
-                "name",
-                "icon",
-                "latitude",
-                "longitude",
-                "last_runtime",
-            )
-        }
+        properties = (
+            "id",
+            "type",
+            "name",
+            "icon",
+            "latitude",
+            "longitude",
+        )
+        return {property: getattr(self, property) for property in properties}
 
     @property
     def ui_name(self):

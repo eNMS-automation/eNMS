@@ -495,13 +495,12 @@ function create3dGraphNetwork(container) {
         new THREE.SphereGeometry(7),
         new THREE.MeshBasicMaterial({
           depthWrite: false,
-          transparent: true,
-          opacity: 0,
         })
       );
       const sprite = new THREE.Sprite(
         new THREE.SpriteMaterial({
           map: new THREE.TextureLoader().load(`../static/img/view/2D/${icon}.gif`),
+          alphaTest: 0.5,
         })
       );
       sprite.scale.set(10, 10);

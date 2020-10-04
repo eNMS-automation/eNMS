@@ -66,17 +66,9 @@ class PythonSnippetForm(ServiceForm):
         type="code",
         python=True,
         widget=TextArea(),
-        render_kw={"rows": 15},
+        render_kw={"rows": 15, "help": "python_snippet/source_code"},
         default="""
-# Availble variables: device, results, run
-# Returning state:
-#    results["success"] = True
-#    results["result"] = <return data>
-# Logging: log(level, text)
-#    log("info", "My log message")
-# Exit in the middle of the script:
-#    exit()
-#    Note: exit() is not required as the last line
+# Click on "i" to right of "Source Code" for examples.
 
 result = {}
 results["success"] = True

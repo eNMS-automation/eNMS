@@ -96,12 +96,14 @@ class Database:
         else:
             self.LargeString = Text(settings["database"]["large_string_length"])
         self.SmallString = String(settings["database"]["small_string_length"])
+        self.TinyString = String(settings["database"]["tiny_string_length"])
 
         default_ctypes = {
             self.Dict: {},
             self.List: [],
             self.LargeString: "",
             self.SmallString: "",
+            self.TinyString: "",
             Text: "",
         }
 

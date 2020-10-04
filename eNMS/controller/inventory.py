@@ -128,7 +128,7 @@ class InventoryController(BaseController):
 
     def get_git_network_data(self, device_name, hash):
         commit, result = Repo(self.path / "network_data").commit(hash), {}
-        device = fetch("device", name=device_name)
+        device = db.fetch("device", name=device_name)
         for property in self.configuration_properties:
             try:
                 file = commit.tree / device_name / property

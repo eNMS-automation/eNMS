@@ -13,7 +13,6 @@ from paramiko import (
 from pathlib import Path
 from re import compile
 from socket import AF_INET, socket, SOCK_STREAM, SOL_SOCKET, SO_REUSEADDR
-from string import printable
 from threading import Event, Thread
 from time import sleep
 

@@ -35,7 +35,6 @@ class User(AbstractBase, UserMixin):
     email = db.Column(db.SmallString)
     password = db.Column(db.SmallString)
     authentication = db.Column(db.TinyString)
-    groups = db.Column(db.List)
     menu = db.Column(db.List)
     pages = db.Column(db.List)
     upper_menu = db.Column(db.List)

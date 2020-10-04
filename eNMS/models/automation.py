@@ -571,7 +571,7 @@ class Run(AbstractBase):
             now = datetime.now().replace(microsecond=0)
             results["duration"] = self.duration = str(now - start)
             if self.runtime == self.parent_runtime:
-                self.state = results["state"] = state
+                self.state = state
                 self.close_remaining_connections()
             if self.task and not (self.task.frequency or self.task.crontab_expression):
                 self.task.is_active = False

@@ -36,11 +36,11 @@ class AbstractBase(db.base):
         if property in db.private_properties:
             if not value:
                 return
-            value = app.encrypt_password(value)
+            value = app.encrypt_password(value).decode("utf-8")
             if app.use_vault:
                 app.vault_client.write(
                     f"secret/data/{self.type}/{self.name}/{property}",
-                    data={property: value.decode("utf-8")},
+                    data={property: value},
                 )
             else:
                 super().__setattr__(property, value)

@@ -94,13 +94,9 @@ class InventoryController(BaseController):
         )
         db.session.commit()
         try:
-            ssh_connection = SshConnection(
-                device.ip_address, *credentials, session.id, uuid, port
-            )
-            Thread(
-                target=ssh_connection.start_session,
-                args=(session.id, uuid, port),
-            ).start()
+            args = (session.id, uuid, port)
+            ssh_connection = SshConnection(device.ip_address, credentials, *args)
+            Thread(target=ssh_connection.start_session, args=args).start()
             return {
                 "port": port,
                 "username": uuid,

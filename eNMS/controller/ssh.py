@@ -67,8 +67,8 @@ class Server(ServerInterface):
 
 
 class SshConnection:
-    def __init__(self, hostname, username, password, session_id, uuid, port):
-        self.client = Client(hostname, username, password)
+    def __init__(self, hostname, credentials, session_id, uuid, port):
+        self.client = Client(hostname, *credentials)
         path = Path.cwd() / "logs" / "ssh_sessions"
         path.mkdir(parents=True, exist_ok=True)
         self.logger = getLogger(hostname)

@@ -37,14 +37,10 @@ function drawDiagrams(diagram, result) {
     },
     ...theme.dashboard,
   };
-  if (result.legend.length < 10) {
-    if (!options.legend) options.legend = {};
-    Object.assign(options.legend, {
-      orient: "horizontal",
-      bottom: 0,
-      data: result.legend,
-    });
-  }
+  Object.assign(options.legend, {
+    data: result.legend,
+    show: result.legend.length < 10,
+  });
   diagram.setOption(options);
 }
 

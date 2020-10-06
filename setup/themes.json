@@ -16,7 +16,11 @@
           "#6e7074",
           "#546570",
           "#c4ccd3"
-        ]
+        ],
+        "legend": {
+          "bottom": 0,
+          "orient": "horizontal"
+        }
       },
       "workflow": {
         "edges": {
@@ -51,6 +55,8 @@
           "#f49f42"
         ],
         "legend": {
+          "bottom": 0,
+          "orient": "horizontal",
           "textStyle": {
             "color": "#fff"
           }

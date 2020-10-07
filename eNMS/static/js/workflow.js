@@ -350,26 +350,28 @@ function addServicesToWorkflow() {
   });
 }
 
-function deleteSelection() {
-  const selection = {
-    nodes: graph.getSelectedNodes().filter((node) => !ends.has(node)),
-    edges: graph.getSelectedEdges(),
-  };
-  selection.nodes.forEach((node) => {
+function deleteFromWorkflow(data) {
+  if (!data) {
+    data = {
+      nodes: graph.getSelectedNodes().filter((node) => !ends.has(node)),
+      edges: graph.getSelectedEdges(),
+    };
+  }
+  data.nodes.forEach((node) => {
     delete workflow.labels[node];
     graph.getConnectedEdges(node).forEach((edge) => {
-      if (!selection.edges.includes(edge)) selection.edges.push(edge);
+      if (!data.edges.includes(edge)) data.edges.push(edge);
     });
   });
   call({
     url: `/delete_workflow_selection/${workflow.id}`,
-    data: selection,
+    data: data,
     callback: function (updateTime) {
       graph.deleteSelected();
       workflow.services = workflow.services.filter(
-        (n) => !selection.nodes.includes(n.id)
+        (n) => !data.nodes.includes(n.id)
       );
-      workflow.edges = workflow.edges.filter((e) => !selection.edges.includes(e.id));
+      workflow.edges = workflow.edges.filter((e) => !data.edges.includes(e.id));
       workflow.last_modified = updateTime;
       notify("Selection removed.", "success", 5);
       switchMode(currentMode, true);
@@ -646,7 +648,7 @@ Object.assign(action, {
   "Workflow Logs": () => showRuntimePanel("logs", workflow),
   "Add to Workflow": addServicePanel,
   "Stop Workflow": () => stopWorkflow(),
-  Delete: deleteSelection,
+  Delete: deleteFromWorkflow,
   "Service Name": (service) => copyToClipboard(service.name),
   "Top-level Result": getResultLink,
   "Per-device Result": (node) => getResultLink(node, true),

@@ -914,22 +914,6 @@ function getWorkflowTree() {
                 </button>
                 <button
                   type="button"
-                  class="btn btn-xs btn-info"
-                  onclick='eNMS.automation.showRuntimePanel("logs", ${data},
-                  "${currentRuntime}")'
-                >
-                  <span class="glyphicon glyphicon-list"></span>
-                </button>
-                <button
-                  type="button"
-                  class="btn btn-xs btn-info"
-                  onclick='eNMS.automation.showRuntimePanel("results", ${data},
-                  "${currentRuntime}")'
-                >
-                  <span class="glyphicon glyphicon-list-alt"></span>
-                </button>
-                <button
-                  type="button"
                   class="btn btn-xs btn-primary"
                   onclick='eNMS.base.showTypePanel("service", ${node.data.id})'
                 >

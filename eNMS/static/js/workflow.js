@@ -890,27 +890,21 @@ function getWorkflowTree() {
           themes: { stripes: true },
           data: {
             url: function (node) {
-              const nodeId = node.id == "#" ? "all" : node.data.id;
-              return `/get_workflow_tree/${workflow.id}`;
+              const serviceId = node.id == "#" ? workflow.id : node.data.id;
+              return `/get_workflow_tree/${serviceId}`;
             },
             type: "POST",
           },
         },
-        plugins: ["checkbox", "search", "types", "wholerow"],
-        checkbox: {
-          three_state: false,
-        },
+        plugins: ["search", "types", "wholerow"],
         search: {
           show_only_matches: true,
           ajax: {
             type: "POST",
-            url: "/search_workflow_services",
+            url: `/search_workflow_tree/${workflow.id}`,
           },
         },
         types: {
-          category: {
-            icon: "fa fa-folder",
-          },
           default: {
             icon: "glyphicon glyphicon-file",
           },
@@ -918,6 +912,13 @@ function getWorkflowTree() {
             icon: "fa fa-sitemap",
           },
         },
+      });
+      let timer = false;
+      $("#workflow-tree-search").keyup(function (event) {
+        if (timer) clearTimeout(timer);
+        timer = setTimeout(function () {
+          $("#workflow-tree").jstree(true).search($("#workflow-tree-search").val());
+        }, 500);
       });
     },
   });

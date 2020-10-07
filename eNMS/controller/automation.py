@@ -296,12 +296,14 @@ class AutomationController(BaseController):
 
         return rec(run.service)
 
-    def get_workflow_tree(self, workflow_id):
-        workflow = db.fetch("service", id=workflow_id)
+    def get_workflow_tree(self, path):
+        print(path, path.split(">")[-1])
+        workflow = db.fetch("service", id=path.split(">")[-1])
         return [
             {
-                "data": {"workflow": workflow_id, **service.base_properties},
+                "data": {"path": path, **service.base_properties},
                 "id": service.id,
+                "path": f"{path}>{service.id}",
                 "text": service.scoped_name,
                 "children": service.type == "workflow",
                 "a_attr": {

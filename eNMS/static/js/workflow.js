@@ -252,7 +252,7 @@ function filterWorkflowTable(tableId, path) {
   switchToWorkflow(path);
 }
 
-export const switchToWorkflow = function (path, arrow, runtime) {
+export const switchToWorkflow = function (path, arrow, runtime, selection) {
   if (typeof path === "undefined") return;
   if (path.toString().includes(">")) {
     $("#up-arrow").removeClass("disabled");
@@ -292,6 +292,7 @@ export const switchToWorkflow = function (path, arrow, runtime) {
           localStorage.setItem("workflow", JSON.stringify(workflow));
         }
         displayWorkflow(result);
+        if (selection) graph.setSelection(selection);
       },
     });
   } else {
@@ -891,8 +892,8 @@ function getWorkflowTree() {
           themes: { stripes: true },
           data: {
             url: function (node) {
-              const serviceId = node.id == "#" ? workflow.id : node.data.id;
-              return `/get_workflow_tree/${serviceId}`;
+              const path = node.id == "#" ? workflow.id : `${node.data.path}>${node.data.id}`;
+              return `/get_workflow_tree/${path}`;
             },
             type: "POST",
           },
@@ -907,7 +908,7 @@ function getWorkflowTree() {
                 <button
                   type="button"
                   class="btn btn-xs btn-info"
-                  onclick='eNMS.workflow.displayService(${data})'
+                  onclick='eNMS.workflow.highlightService(${data})'
                 >
                   <span class="glyphicon glyphicon-share-alt"></span>
                 </button>
@@ -965,8 +966,14 @@ function getWorkflowTree() {
   });
 }
 
-function displayService(service) {
-  console.log(service);
+function highlightService(service) {
+  const [workflowId, serviceId] = `${service.path}>${service.id}`.split(">").slice(-2);
+  const selection = { nodes: [parseInt(serviceId)], edges: [] };
+  if (workflowId != workflow.id) {
+    switchToWorkflow(service.path, null, currentRuntime, selection);
+  } else {
+    graph.setSelection(selection);
+  }
 }
 
 export function initWorkflowBuilder() {
@@ -1021,7 +1028,7 @@ export function initWorkflowBuilder() {
 configureNamespace("workflow", [
   addServicesToWorkflow,
   createLabel,
-  displayService,
+  highlightService,
   filterWorkflowTable,
   getWorkflowState,
   getWorkflowTree,

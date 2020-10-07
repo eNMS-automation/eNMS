@@ -205,7 +205,6 @@ function showResult(id) {
 }
 
 export const showRuntimePanel = function (type, service, runtime, table) {
-  console.log(type, service, runtime, table)
   const displayFunction =
     type == "logs"
       ? displayLogs

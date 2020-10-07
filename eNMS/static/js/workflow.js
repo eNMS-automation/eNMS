@@ -892,7 +892,8 @@ function getWorkflowTree() {
           themes: { stripes: true },
           data: {
             url: function (node) {
-              const path = node.id == "#" ? workflow.id : `${node.data.path}>${node.data.id}`;
+              const path =
+                node.id == "#" ? workflow.id : `${node.data.path}>${node.data.id}`;
               return `/get_workflow_tree/${path}`;
             },
             type: "POST",
@@ -910,7 +911,7 @@ function getWorkflowTree() {
                   class="btn btn-xs btn-info"
                   onclick='eNMS.workflow.highlightService(${data})'
                 >
-                  <span class="glyphicon glyphicon-share-alt"></span>
+                  <span class="glyphicon glyphicon-screenshot"></span>
                 </button>
                 <button
                   type="button"

@@ -350,28 +350,26 @@ function addServicesToWorkflow() {
   });
 }
 
-function deleteFromWorkflow(data) {
-  if (!data) {
-    data = {
-      nodes: graph.getSelectedNodes().filter((node) => !ends.has(node)),
-      edges: graph.getSelectedEdges(),
-    };
-  }
-  data.nodes.forEach((node) => {
+function deleteSelection() {
+  const selection = {
+    nodes: graph.getSelectedNodes().filter((node) => !ends.has(node)),
+    edges: graph.getSelectedEdges(),
+  };
+  selection.nodes.forEach((node) => {
     delete workflow.labels[node];
     graph.getConnectedEdges(node).forEach((edge) => {
-      if (!data.edges.includes(edge)) data.edges.push(edge);
+      if (!selection.edges.includes(edge)) selection.edges.push(edge);
     });
   });
   call({
     url: `/delete_workflow_selection/${workflow.id}`,
-    data: data,
+    data: selection,
     callback: function (updateTime) {
       graph.deleteSelected();
       workflow.services = workflow.services.filter(
-        (n) => !data.nodes.includes(n.id)
+        (n) => !selection.nodes.includes(n.id)
       );
-      workflow.edges = workflow.edges.filter((e) => !data.edges.includes(e.id));
+      workflow.edges = workflow.edges.filter((e) => !selection.edges.includes(e.id));
       workflow.last_modified = updateTime;
       notify("Selection removed.", "success", 5);
       switchMode(currentMode, true);
@@ -648,7 +646,7 @@ Object.assign(action, {
   "Workflow Logs": () => showRuntimePanel("logs", workflow),
   "Add to Workflow": addServicePanel,
   "Stop Workflow": () => stopWorkflow(),
-  Delete: deleteFromWorkflow,
+  Delete: deleteSelection,
   "Service Name": (service) => copyToClipboard(service.name),
   "Top-level Result": getResultLink,
   "Per-device Result": (node) => getResultLink(node, true),
@@ -914,7 +912,7 @@ function getWorkflowTree() {
                 <button
                   type="button"
                   class="btn btn-xs btn-danger"
-                  onclick='eNMS.administration.deleteFile(${node.id})'
+                  onclick='eNMS.administration.deleteFile(${data})'
                 >
                   <span class="glyphicon glyphicon-trash"></span>
                 </button>

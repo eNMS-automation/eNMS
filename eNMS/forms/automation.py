@@ -341,6 +341,12 @@ class AddServiceForm(BaseForm):
     search = StringField()
 
 
+class WorkflowTreeForm(BaseForm):
+    form_type = HiddenField(default="workflow_tree")
+    template = "workflow_tree"
+    search = StringField()
+
+
 class WorkflowLabelForm(BaseForm):
     form_type = HiddenField(default="workflow_label")
     action = "eNMS.workflow.createLabel"

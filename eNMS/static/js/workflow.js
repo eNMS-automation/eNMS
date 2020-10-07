@@ -881,7 +881,46 @@ function getWorkflowState(periodic) {
 }
 
 function getWorkflowTree() {
-  console.log("test");
+  openPanel({
+    name: "workflow_tree",
+    callback: function () {
+      $("#workflow-tree").jstree({
+        core: {
+          animation: 200,
+          themes: { stripes: true },
+          data: {
+            url: function (node) {
+              const nodeId = node.id == "#" ? "all" : node.data.id;
+              return `/get_workflow_tree/${workflow.id}`;
+            },
+            type: "POST",
+          },
+        },
+        plugins: ["checkbox", "search", "types", "wholerow"],
+        checkbox: {
+          three_state: false,
+        },
+        search: {
+          show_only_matches: true,
+          ajax: {
+            type: "POST",
+            url: "/search_workflow_services",
+          },
+        },
+        types: {
+          category: {
+            icon: "fa fa-folder",
+          },
+          default: {
+            icon: "glyphicon glyphicon-file",
+          },
+          workflow: {
+            icon: "fa fa-sitemap",
+          },
+        },
+      });
+    },
+  });
 }
 
 export function initWorkflowBuilder() {

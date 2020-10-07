@@ -221,6 +221,7 @@
     "/get_visualization_parameters",
     "/get_workflow_results",
     "/get_workflow_services",
+    "/get_workflow_tree",
     "/search_workflow_services",
     "/desktop_connection",
     "/import_service",

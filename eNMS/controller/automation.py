@@ -296,8 +296,21 @@ class AutomationController(BaseController):
 
         return rec(run.service)
 
-    def get_workflow_tree(self, id):
-        pass
+    def get_workflow_tree(self, workflow_id):
+        workflow = db.fetch("workflow", id=workflow_id)
+        return [
+            {
+                "data": {"id": "standalone"},
+                "id": "standalone",
+                "text": "Standalone services",
+                "children": True,
+                "a_attr": {
+                    "class": "no_checkbox",
+                    "style": "color: #000000; width: 100%",
+                },
+                "type": "workflow",
+            }
+        ]
 
     def get_workflow_services(self, id, node):
         parents = list(self.get_parent_workflows(db.fetch("workflow", id=id)))

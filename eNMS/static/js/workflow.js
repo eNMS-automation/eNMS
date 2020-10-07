@@ -896,7 +896,30 @@ function getWorkflowTree() {
             type: "POST",
           },
         },
-        plugins: ["search", "types", "wholerow"],
+        plugins: ["html_row", "search", "types", "wholerow"],
+        html_row: {
+          default: function (el, node) {
+            if (!node) return;
+            $(el).find("a").append(`
+              <div style="position: absolute; top: 0px; right: 20px">
+                <button
+                  type="button"
+                  class="btn btn-xs btn-primary"
+                  onclick='eNMS.base.showTypePanel("service", ${node.id})'
+                >
+                  <span class="glyphicon glyphicon-edit"></span>
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-xs btn-danger"
+                  onclick='eNMS.administration.deleteFile(${node.id})'
+                >
+                  <span class="glyphicon glyphicon-trash"></span>
+                </button>
+              </div>
+            `);
+          },
+        },
         search: {
           show_only_matches: true,
           ajax: {

@@ -860,7 +860,7 @@ function resetDisplay() {
   }
 }
 
-function getWorkflowState(periodic, notification) {
+function getWorkflowState(periodic) {
   const runtime = $("#current-runtime").val();
   const url = runtime ? `/${runtime}` : "";
   if (userIsActive && workflow?.id) {
@@ -878,7 +878,10 @@ function getWorkflowState(periodic, notification) {
     });
   }
   if (periodic) setTimeout(() => getWorkflowState(true), 4000);
-  if (notification) notify("Workflow refreshed.", "success", 5);
+}
+
+function getWorkflowTree() {
+  console.log("test");
 }
 
 export function initWorkflowBuilder() {
@@ -935,6 +938,7 @@ configureNamespace("workflow", [
   createLabel,
   filterWorkflowTable,
   getWorkflowState,
+  getWorkflowTree,
   restartWorkflow,
   switchMode,
   switchToWorkflow,

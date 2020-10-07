@@ -15,7 +15,7 @@ from importlib.util import module_from_spec, spec_from_file_location
 from json import load
 from logging.config import dictConfig
 from logging import getLogger, error, info
-from os import getenv, scandir
+from os import getenv, getpid, getppid, getuid, scandir
 from os.path import exists
 from pathlib import Path
 from re import compile, error as regex_error
@@ -58,6 +58,7 @@ class BaseController:
     property_names = {}
 
     def __init__(self):
+        print("TTT"*100, getpid(), getppid(), getuid())
         self.settings = settings
         self.rbac = rbac
         self.properties = properties

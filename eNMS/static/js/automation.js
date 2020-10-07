@@ -205,6 +205,7 @@ function showResult(id) {
 }
 
 export const showRuntimePanel = function (type, service, runtime, table) {
+  console.log(type, service, runtime, table)
   const displayFunction =
     type == "logs"
       ? displayLogs
@@ -217,7 +218,7 @@ export const showRuntimePanel = function (type, service, runtime, table) {
   call({
     url: `/get_runtimes/${type}/${service.id}`,
     callback: (runtimes) => {
-      if (!runtime && !runtimes.length) {
+      if (!runtimes.length) {
         return notify(`No ${type} yet.`, "error", 5);
       }
       let content;

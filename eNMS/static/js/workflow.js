@@ -883,6 +883,7 @@ function getWorkflowState(periodic) {
 function getWorkflowTree() {
   openPanel({
     name: "workflow_tree",
+    title: `${workflow.scoped_name} - Tree Structure`,
     callback: function () {
       $("#workflow-tree").jstree({
         core: {

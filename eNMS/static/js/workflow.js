@@ -906,10 +906,10 @@ function getWorkflowTree() {
               <div style="position: absolute; top: 0px; right: 20px">
                 <button
                   type="button"
-                  class="btn btn-xs btn-primary"
-                  onclick='eNMS.base.showTypePanel("service", ${node.data.id})'
+                  class="btn btn-xs btn-info"
+                  onclick='eNMS.workflow.displayService(${data})'
                 >
-                  <span class="glyphicon glyphicon-edit"></span>
+                  <span class="glyphicon glyphicon-share-alt"></span>
                 </button>
                 <button
                   type="button"
@@ -926,6 +926,13 @@ function getWorkflowTree() {
                   "${currentRuntime}")'
                 >
                   <span class="glyphicon glyphicon-list-alt"></span>
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-xs btn-primary"
+                  onclick='eNMS.base.showTypePanel("service", ${node.data.id})'
+                >
+                  <span class="glyphicon glyphicon-edit"></span>
                 </button>
               </div>
             `);
@@ -956,6 +963,10 @@ function getWorkflowTree() {
       });
     },
   });
+}
+
+function displayService(service) {
+  console.log(service);
 }
 
 export function initWorkflowBuilder() {
@@ -1010,6 +1021,7 @@ export function initWorkflowBuilder() {
 configureNamespace("workflow", [
   addServicesToWorkflow,
   createLabel,
+  displayService,
   filterWorkflowTable,
   getWorkflowState,
   getWorkflowTree,

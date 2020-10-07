@@ -300,7 +300,7 @@ class AutomationController(BaseController):
         workflow = db.fetch("service", id=workflow_id)
         return [
             {
-                "data": service.base_properties,
+                "data": {"workflow": workflow_id, **service.base_properties},
                 "id": service.id,
                 "text": service.scoped_name,
                 "children": service.type == "workflow",

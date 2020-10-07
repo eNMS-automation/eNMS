@@ -905,16 +905,25 @@ function getWorkflowTree() {
                 <button
                   type="button"
                   class="btn btn-xs btn-primary"
-                  onclick='eNMS.base.showTypePanel("service", ${node.id})'
+                  onclick='eNMS.base.showTypePanel("service", ${node.data.id})'
                 >
                   <span class="glyphicon glyphicon-edit"></span>
                 </button>
                 <button
                   type="button"
-                  class="btn btn-xs btn-danger"
-                  onclick='eNMS.administration.deleteFile(${data})'
+                  class="btn btn-xs btn-info"
+                  onclick='eNMS.automation.showRuntimePanel('results', ${node.data}
+                  ${currentRuntime})'
                 >
-                  <span class="glyphicon glyphicon-trash"></span>
+                  <span class="glyphicon glyphicon-list-alt"></span>
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-xs btn-info"
+                  onclick='eNMS.automation.showRuntimePanel('logs', ${node.data}
+                  ${currentRuntime})'
+                >
+                  <span class="glyphicon glyphicon-list"></span>
                 </button>
               </div>
             `);

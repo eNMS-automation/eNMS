@@ -317,7 +317,7 @@ class AutomationController(BaseController):
             if service.scoped_name not in ("Start", "End", "Placeholder")
         ]
 
-    def search_workflow_tree(self, workflow_id):
+    def search_workflow_tree(self, workflow_id, **_):
         workflow = db.fetch("service", id=workflow_id)
         return [service.name for service in workflow.services]
 

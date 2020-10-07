@@ -900,6 +900,7 @@ function getWorkflowTree() {
         html_row: {
           default: function (el, node) {
             if (!node) return;
+            const data = JSON.stringify(node.data);
             $(el).find("a").append(`
               <div style="position: absolute; top: 0px; right: 20px">
                 <button
@@ -912,16 +913,16 @@ function getWorkflowTree() {
                 <button
                   type="button"
                   class="btn btn-xs btn-info"
-                  onclick='eNMS.automation.showRuntimePanel('results', ${node.data}
-                  ${currentRuntime})'
+                  onclick='eNMS.automation.showRuntimePanel("results", ${data},
+                  "${currentRuntime}")'
                 >
                   <span class="glyphicon glyphicon-list-alt"></span>
                 </button>
                 <button
                   type="button"
                   class="btn btn-xs btn-info"
-                  onclick='eNMS.automation.showRuntimePanel('logs', ${node.data}
-                  ${currentRuntime})'
+                  onclick='eNMS.automation.showRuntimePanel("logs", ${data},
+                  "${currentRuntime}")'
                 >
                   <span class="glyphicon glyphicon-list"></span>
                 </button>

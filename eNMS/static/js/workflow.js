@@ -885,11 +885,12 @@ function getWorkflowTree() {
   openPanel({
     name: "workflow_tree",
     title: `${workflow.scoped_name} - Tree Structure`,
+    id: workflow.id,
     callback: function () {
       call({
         url: `/get_workflow_tree/${currentPath}`,
         callback: function(data) {
-          $("#workflow-tree").jstree({
+          $(`#workflow-tree-${workflow.id}`).jstree({
             core: {
               animation: 100,
               themes: { stripes: true },
@@ -936,7 +937,8 @@ function getWorkflowTree() {
           $("#workflow-tree-search").keyup(function (event) {
             if (timer) clearTimeout(timer);
             timer = setTimeout(function () {
-              $("#workflow-tree").jstree(true).search($("#workflow-tree-search").val());
+              const searchValue = $("#workflow-tree-search").val();
+              $(`#workflow-tree-${workflow.id}`).jstree(true).search(searchValue);
             }, 500);
           });
         }

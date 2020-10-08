@@ -943,10 +943,12 @@ function getWorkflowTree() {
 }
 
 function highlightService(service) {
-  const [workflowId, serviceId] = service.path.split(">").slice(-2);
+  const servicePath = service.path.split(">");
+  const [workflowId, serviceId] = servicePath.slice(-2);
   const selection = { nodes: [parseInt(serviceId)], edges: [] };
   if (workflowId != workflow.id) {
-    switchToWorkflow(service.path, null, currentRuntime, selection);
+    const workflowPath = servicePath.slice(0, -1).join(">");
+    switchToWorkflow(workflowPath, null, currentRuntime, selection);
   } else {
     graph.setSelection(selection);
   }

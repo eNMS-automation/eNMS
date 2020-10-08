@@ -46,7 +46,8 @@ In the migration files, the skip property must be removed: it will not be migrat
 all stored per device in a json.file called "timestamps.json". These timestamps properties have been added to
 the configuration table.
 - Add ability to hard-code logic to mask password hashes when config is displayed in custom controller.
-- Add workflow tree in the workflow builder to visualize workflow and subworkflows as a tree with buttons
+- Add workflow tree in the workflow builder to visualize workflow and subworkflows as a tree with buttons:
+edit / skip + new mechanism: highlight to teleport to any service. Makes it easier to work with large multi-level workflows.
 
 Version 3.22.4
 --------------

@@ -324,10 +324,6 @@ class AutomationController(BaseController):
 
         return rec(db.fetch("workflow", id=full_path.split(">")[0]))
 
-    def search_workflow_tree(self, workflow_id, **_):
-        workflow = db.fetch("service", id=workflow_id)
-        return [service.name for service in workflow.services]
-
     def get_workflow_services(self, id, node):
         parents = list(self.get_parent_workflows(db.fetch("workflow", id=id)))
         if node == "all":

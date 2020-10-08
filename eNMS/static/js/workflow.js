@@ -922,10 +922,6 @@ function getWorkflowTree() {
             },
             search: {
               show_only_matches: true,
-              ajax: {
-                type: "POST",
-                url: `/search_workflow_tree/${workflow.id}`,
-              },
             },
             types: {
               default: {

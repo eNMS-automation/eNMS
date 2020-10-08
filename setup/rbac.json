@@ -223,7 +223,6 @@
     "/get_workflow_services",
     "/get_workflow_tree",
     "/search_workflow_services",
-    "/search_workflow_tree",
     "/desktop_connection",
     "/import_service",
     "/import_topology",

@@ -362,7 +362,7 @@ function displayResultsTree(service, runtime) {
             } else {
               progressSummary = "";
             }
-            $(el).find("a").append(`
+            $(el).find("a").first().append(`
               ${progressSummary}
               <div style="position: absolute; top: 0px; right: 50px">
                 <button type="button"

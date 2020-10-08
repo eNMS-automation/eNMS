@@ -899,13 +899,13 @@ function getWorkflowTree() {
             html_row: {
               default: function (el, node) {
                 if (!node) return;
-                const data = JSON.stringify(node.data);
-                $(el).find("a").append(`
+                const service = JSON.stringify(node.data);
+                $(el).find("a").first().append(`
                   <div style="position: absolute; top: 0px; right: 20px">
                     <button
                       type="button"
                       class="btn btn-xs btn-info"
-                      onclick='eNMS.workflow.highlightService(${data})'
+                      onclick='eNMS.workflow.highlightService(${service})'
                     >
                       <span class="glyphicon glyphicon-screenshot"></span>
                     </button>
@@ -943,7 +943,7 @@ function getWorkflowTree() {
 }
 
 function highlightService(service) {
-  const [workflowId, serviceId] = `${service.path}>${service.id}`.split(">").slice(-2);
+  const [workflowId, serviceId] = service.path.split(">").slice(-2);
   const selection = { nodes: [parseInt(serviceId)], edges: [] };
   if (workflowId != workflow.id) {
     switchToWorkflow(service.path, null, currentRuntime, selection);

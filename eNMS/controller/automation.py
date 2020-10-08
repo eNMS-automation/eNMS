@@ -297,22 +297,21 @@ class AutomationController(BaseController):
         return rec(run.service)
 
     def get_workflow_tree(self, full_path):
-
         def rec(service, path=""):
             path += ">" * bool(path) + str(service.id)
             if service.scoped_name in ("Start", "End", "Placeholder"):
                 return
-            if service.type == "workflow":
-                unfiltered_children = [rec(child, path) for child in service.services]
-                children = list(filter(None, unfiltered_children))
-            else:
-                children = False
             return {
                 "data": {"path": path, **service.base_properties},
                 "id": service.id,
-                "state" : { "opened" : full_path.startswith(path)},
+                "state": {"opened": full_path.startswith(path)},
                 "text": service.scoped_name,
-                "children": children,
+                "children": sorted(
+                    filter(None, [rec(child, path) for child in service.services]),
+                    key=lambda node: node["text"].lower(),
+                )
+                if service.type == "workflow"
+                else False,
                 "a_attr": {
                     "class": "no_checkbox",
                     "style": (

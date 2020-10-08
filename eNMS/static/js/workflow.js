@@ -949,7 +949,7 @@ function highlightService(service) {
   if (workflowId != workflow.id) {
     const workflowPath = servicePath.slice(0, -1).join(">");
     switchToWorkflow(workflowPath, null, currentRuntime, selection);
-  } else {
+  } else if (serviceId) {
     graph.setSelection(selection);
   }
 }

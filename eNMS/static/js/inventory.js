@@ -19,6 +19,14 @@ import {
 } from "./base.js";
 import { tables, tableInstances } from "./table.js";
 
+const ansiEscapeRegex = new RegExp(
+  [
+    "[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}",
+    "(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]",
+  ].join(""),
+  "g"
+);
+
 function drawDiagrams(diagram, result) {
   let options = { ...settings.dashboard, ...theme.dashboard };
   options.series[0].data = result.data;
@@ -228,12 +236,7 @@ function showSessionLog(sessionId) {
               extraKeys: { "Ctrl-F": "findPersistent" },
             });
             editor.setSize("100%", "100%");
-            editor.setValue(
-              log.replace(
-                /[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]/g,
-                ""
-              )
-            );
+            editor.setValue(log.replace(ansiEscapeRegex, ""));
           },
         });
       }

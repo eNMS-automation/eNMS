@@ -889,7 +889,7 @@ function getWorkflowTree() {
     callback: function () {
       call({
         url: `/get_workflow_tree/${currentPath}`,
-        callback: function(data) {
+        callback: function (data) {
           $(`#workflow-tree-${workflow.id}`).jstree({
             core: {
               animation: 100,
@@ -941,8 +941,8 @@ function getWorkflowTree() {
               $(`#workflow-tree-${workflow.id}`).jstree(true).search(searchValue);
             }, 500);
           });
-        }
-      })
+        },
+      });
     },
   });
 }

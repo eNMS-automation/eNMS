@@ -936,13 +936,8 @@ function getWorkflowTree() {
               },
             },
           });
-      let timer = false;
-      $("#workflow-tree-search").keyup(function (event) {
-        if (timer) clearTimeout(timer);
-        timer = setTimeout(function () {
-          $("#workflow-tree").jstree(true).search($("#workflow-tree-search").val());
-        }, 500);
-      });
+        }
+      })
     },
   });
 }

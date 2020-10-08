@@ -886,60 +886,56 @@ function getWorkflowTree() {
     name: "workflow_tree",
     title: `${workflow.scoped_name} - Tree Structure`,
     callback: function () {
-      $("#workflow-tree").jstree({
-        core: {
-          animation: 200,
-          themes: { stripes: true },
-          data: {
-            url: function (node) {
-              const path =
-                node.id == "#" ? workflow.id : `${node.data.path}>${node.data.id}`;
-              return `/get_workflow_tree/${path}`;
+      call({
+        url: `/get_workflow_tree/${path}`,
+        callback: function(data) {
+          $("#workflow-tree").jstree({
+            core: {
+              animation: 100,
+              themes: { stripes: true },
+              data: data,
             },
-            type: "POST",
-          },
-        },
-        plugins: ["html_row", "search", "types", "wholerow"],
-        html_row: {
-          default: function (el, node) {
-            if (!node) return;
-            const data = JSON.stringify(node.data);
-            $(el).find("a").append(`
-              <div style="position: absolute; top: 0px; right: 20px">
-                <button
-                  type="button"
-                  class="btn btn-xs btn-info"
-                  onclick='eNMS.workflow.highlightService(${data})'
-                >
-                  <span class="glyphicon glyphicon-screenshot"></span>
-                </button>
-                <button
-                  type="button"
-                  class="btn btn-xs btn-primary"
-                  onclick='eNMS.base.showTypePanel("service", ${node.data.id})'
-                >
-                  <span class="glyphicon glyphicon-edit"></span>
-                </button>
-              </div>
-            `);
-          },
-        },
-        search: {
-          show_only_matches: true,
-          ajax: {
-            type: "POST",
-            url: `/search_workflow_tree/${workflow.id}`,
-          },
-        },
-        types: {
-          default: {
-            icon: "glyphicon glyphicon-file",
-          },
-          workflow: {
-            icon: "fa fa-sitemap",
-          },
-        },
-      });
+            plugins: ["html_row", "search", "types", "wholerow"],
+            html_row: {
+              default: function (el, node) {
+                if (!node) return;
+                const data = JSON.stringify(node.data);
+                $(el).find("a").append(`
+                  <div style="position: absolute; top: 0px; right: 20px">
+                    <button
+                      type="button"
+                      class="btn btn-xs btn-info"
+                      onclick='eNMS.workflow.highlightService(${data})'
+                    >
+                      <span class="glyphicon glyphicon-screenshot"></span>
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-xs btn-primary"
+                      onclick='eNMS.base.showTypePanel("service", ${node.data.id})'
+                    >
+                      <span class="glyphicon glyphicon-edit"></span>
+                    </button>
+                  </div>
+                `);
+              },
+            },
+            search: {
+              show_only_matches: true,
+              ajax: {
+                type: "POST",
+                url: `/search_workflow_tree/${workflow.id}`,
+              },
+            },
+            types: {
+              default: {
+                icon: "glyphicon glyphicon-file",
+              },
+              workflow: {
+                icon: "fa fa-sitemap",
+              },
+            },
+          });
       let timer = false;
       $("#workflow-tree-search").keyup(function (event) {
         if (timer) clearTimeout(timer);

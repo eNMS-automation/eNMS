@@ -297,15 +297,19 @@ class AutomationController(BaseController):
         return rec(run.service)
 
     def get_workflow_tree(self, path):
-        print(path, path.split(">")[-1])
-        workflow = db.fetch("service", id=path.split(">")[-1])
-        return [
-            {
+        service_path = path.split(">")
+
+        def rec(service):
+            if service.type == "workflow":
+                children = [rec(child) for child in service.services]
+            else:
+                children = False
+            return {
                 "data": {"path": path, **service.base_properties},
                 "id": service.id,
-                "path": f"{path}>{service.id}",
+                #"path": f"{path}>{service.id}",
                 "text": service.scoped_name,
-                "children": service.type == "workflow",
+                "children": children,
                 "a_attr": {
                     "class": "no_checkbox",
                     "style": (
@@ -315,9 +319,8 @@ class AutomationController(BaseController):
                 },
                 "type": service.type,
             }
-            for service in workflow.services
-            if service.scoped_name not in ("Start", "End", "Placeholder")
-        ]
+
+        return rec(db.fetch("workflow", id=service_path[0]))
 
     def search_workflow_tree(self, workflow_id, **_):
         workflow = db.fetch("service", id=workflow_id)

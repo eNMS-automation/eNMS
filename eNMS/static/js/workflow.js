@@ -887,7 +887,7 @@ function getWorkflowTree() {
     title: `${workflow.scoped_name} - Tree Structure`,
     callback: function () {
       call({
-        url: `/get_workflow_tree/${path}`,
+        url: `/get_workflow_tree/${currentPath}`,
         callback: function(data) {
           $("#workflow-tree").jstree({
             core: {

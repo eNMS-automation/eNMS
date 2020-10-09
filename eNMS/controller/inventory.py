@@ -60,7 +60,7 @@ class InventoryController(BaseController):
             command = f"ssh {options} {address} -p {device.port}"
         connection_id = uuid4()
         result = {
-            "device": device_id,
+            "device": device.name,
             "command": command,
             "connection_id": connection_id
         }

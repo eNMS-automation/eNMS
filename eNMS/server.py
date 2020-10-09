@@ -17,6 +17,7 @@ from flask import (
 from flask_httpauth import HTTPBasicAuth
 from flask_login import current_user, LoginManager, login_user, logout_user
 from flask_restful import abort as rest_abort, Api, Resource
+from flask_socketio import SocketIO
 from flask_wtf.csrf import CSRFProtect
 from functools import wraps
 from importlib import import_module
@@ -122,6 +123,7 @@ class Server(Flask):
 
     def register_extensions(self):
         self.auth = HTTPBasicAuth()
+        self.socketio = SocketIO(self)
         self.csrf = CSRFProtect()
         self.csrf.init_app(self)
 
@@ -235,6 +237,12 @@ class Server(Flask):
                 ]
                 return render_template("login.html", login_form=login_form)
             return redirect(url_for("blueprint.route", page="dashboard"))
+
+        @blueprint.route("/connect_device/<device_id>")
+        @self.monitor_requests
+        def index(device_id):
+            device = db.fetch("device", id=device_id)
+            return render_template("connection.html", device=device.serialized)
 
         @blueprint.route("/dashboard")
         @self.monitor_requests

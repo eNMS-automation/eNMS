@@ -229,6 +229,7 @@
     "/migration_export",
     "/migration_import",
     "/multiselect_filtering",
+    "/pytty_connection",
     "/reset_status",
     "/rest/create_pool",
     "/rest/instance",

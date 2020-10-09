@@ -25,6 +25,7 @@ class InventoryController(BaseController):
     ssh_port = -1
     configuration_properties = {"configuration": "Configuration"}
     configuration_timestamps = ("status", "update", "failure", "runtime", "duration")
+    web_connections = {}
 
     def get_ssh_port(self):
         if self.redis_queue:
@@ -34,6 +35,37 @@ class InventoryController(BaseController):
         start = self.settings["ssh"]["start_port"]
         end = self.settings["ssh"]["end_port"]
         return start + int(self.ssh_port) % (end - start)
+
+    def pytty_connection(self, device_id, **kwargs):
+        if not self.settings["ssh"]["credentials"][kwargs["credentials"]]:
+            return {"alert": "Unauthorized authentication method."}
+        device = db.fetch("device", id=device_id, rbac="connect") 
+        address = getattr(device, kwargs["address"])
+        if self.settings["ssh"]["bypass_key_prompt"]:
+            options = "-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
+        else:
+            options = ""
+        if kwargs["protocol"] == "telnet":
+            command = f"telnet {address}"
+        elif "authentication" in kwargs:
+            login, environ["SSHPASS"] = (
+                (device.username, self.get_password(device.password))
+                if kwargs["credentials"] == "device"
+                else (current_user.name, self.get_password(current_user.password))
+                if kwargs["credentials"] == "user"
+                else (kwargs["username"], kwargs["password"])
+            )
+            command = f"sshpass -e ssh {options} {login}@{address} -p {device.port}"
+        else:
+            command = f"ssh {options} {address} -p {device.port}"
+        connection_id = uuid4()
+        result = {
+            "device": device_id,
+            "command": command,
+            "connection_id": connection_id
+        }
+        self.web_connections[connection_id] = result
+        return result
 
     def web_connection(self, device_id, **kwargs):
         if not self.settings["ssh"]["credentials"][kwargs["credentials"]]:

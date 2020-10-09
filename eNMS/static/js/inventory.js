@@ -113,6 +113,25 @@ export function initDashboard() {
   });
 }
 
+function pyttyConnection(id) {
+  call({
+    url: `/pytty_connection/${id}`,
+    form: `connection-parameters-form-${id}`,
+    callback: function (result) {
+      let url = settings.app.address;
+      if (!url) {
+        url = `${window.location.protocol}//${window.location.hostname}`;
+      }
+      const link = `${url}/connect_device/${id}`;
+      setTimeout(function () {
+        openUrl(link);
+      }, 300);
+      const message = `Click here to connect to ${result.device}.`;
+      notify(`<a target='_blank' href='${link}'>${message}</a>`, "success", 15, true);
+    }
+  });
+}
+
 function webConnection(id) {
   call({
     url: `/web_connection/${id}`,
@@ -520,6 +539,7 @@ configureNamespace("inventory", [
   downloadNetworkData,
   exportTopology,
   desktopConnection,
+  pyttyConnection,
   showConnectionPanel,
   webConnection,
   savePoolObjects,

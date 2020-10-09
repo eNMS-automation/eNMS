@@ -39,7 +39,7 @@ class InventoryController(BaseController):
     def pytty_connection(self, device_id, **kwargs):
         if not self.settings["ssh"]["credentials"][kwargs["credentials"]]:
             return {"alert": "Unauthorized authentication method."}
-        device = db.fetch("device", id=device_id, rbac="connect") 
+        device = db.fetch("device", id=device_id, rbac="connect")
         address = getattr(device, kwargs["address"])
         if self.settings["ssh"]["bypass_key_prompt"]:
             options = "-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
@@ -62,7 +62,7 @@ class InventoryController(BaseController):
         result = {
             "device": device.base_properties,
             "command": command,
-            "connection_id": connection_id
+            "connection_id": connection_id,
         }
         self.web_connections[connection_id] = result
         return result

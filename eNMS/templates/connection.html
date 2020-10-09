@@ -16,15 +16,13 @@
       const term = new Terminal({ cursorBlink: true });
       const fitAddon = new FitAddon.FitAddon();
       const socket = io.connect("/terminal", { query: `id=${connection}` });
-      socket.emit('join', {'room': connection});
+      socket.emit("join", connection);
       term.loadAddon(fitAddon);
       term.open(document.getElementById("terminal"));
       fitAddon.fit();
       term.write("Connecting...");
       term.onKey((event) => socket.emit("input", event.key, connection));
-      socket.on("output", (data) => {
-        term.write(data)
-      });
+      socket.on("output", (data) => term.write(data));
     </script>
   </body>
 </html>

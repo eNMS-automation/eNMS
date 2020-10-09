@@ -619,7 +619,9 @@ class Server(Flask):
         while True:
             self.socketio.sleep(0.1)
             output = read(kwargs["file_descriptor"], 1024).decode()
-            self.socketio.emit("output", output, namespace="/terminal", room=kwargs["connection_id"])
+            self.socketio.emit(
+                "output", output, namespace="/terminal", room=kwargs["connection_id"]
+            )
 
     def configure_sockets(self):
         @self.socketio.on("input", namespace="/terminal")
@@ -628,8 +630,8 @@ class Server(Flask):
             write(file_descriptor, data.encode())
 
         @self.socketio.on("join", namespace="/terminal")
-        def on_join(data):
-            join_room(data["room"])
+        def on_join(room):
+            join_room(room)
 
         @self.socketio.on("connect", namespace="/terminal")
         def connect():
@@ -638,7 +640,9 @@ class Server(Flask):
             if not process_id:
                 run(app.web_connections[connection_id]["command"].split())
             else:
-                self.socketio.start_background_task(target=self.send_data, **app.web_connections[connection_id])
+                self.socketio.start_background_task(
+                    target=self.send_data, **app.web_connections[connection_id]
+                )
 
 
 server = Server()

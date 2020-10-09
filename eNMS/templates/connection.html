@@ -8,9 +8,9 @@
   </head>
   <body style="background-color: black;">
     <div style="width: 100%; height: 100%;" id="terminal"></div>
-    <script src="{{ url_for('static', filename='lib/xterm/xterm.js') }}"></script>
-    <script src="{{ url_for('static', filename='lib/xterm/xterm-addon-fit.js') }}"></script>
-    <script src="{{ url_for('static', filename='lib/socketio/socket.io.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/xterm/xterm.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/xterm/xterm-addon-fit.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/socketio/socket.io.min.js') }}"></script>
     <script>
       const connection = "{{ connection }}";
       const term = new Terminal({ cursorBlink: true });

@@ -244,8 +244,6 @@ class Server(Flask):
         @blueprint.route("/connect_device/<connection_id>")
         @self.monitor_requests
         def index(connection_id):
-            print(app.web_connections)
-            connection = app.web_connections[connection_id]
             return render_template("connection.html", connection=connection_id)
 
         @blueprint.route("/dashboard")
@@ -617,28 +615,26 @@ class Server(Flask):
         api.add_resource(Topology, "/rest/topology/<string:direction>")
         api.add_resource(Sink, "/rest/<path:path>")
 
-    def send_data(self):
+    def send_data(self, args):
         while True:
             self.socketio.sleep(0.1)
-            output = read(self.file_descriptor, 1024).decode()
+            output = read(args, 1024).decode()
             self.socketio.emit("output", output, namespace="/terminal")
 
     def configure_sockets(self):
         @self.socketio.on("input", namespace="/terminal")
-        def input(data):
-            write(self.file_descriptor, data.encode())
+        def input(data, connection_id):
+            file_descriptor = app.web_connections[connection_id]["file_descriptor"]
+            write(file_descriptor, data.encode())
 
         @self.socketio.on("connect", namespace="/terminal")
         def connect():
-            self.process_id, self.file_descriptor = fork()
-            if not self.process_id:
-                command = (
-                    "sshpass -p admin ssh -o StrictHostKeyChecking=no "
-                    "-o UserKnownHostsFile=/dev/null admin@192.168.56.50"
-                )
-                run(command.split())
+            (process_id, file_descriptor), connection_id = fork(), request.args["id"]
+            app.web_connections[connection_id]["file_descriptor"] = file_descriptor
+            if not process_id:
+                run(app.web_connections[connection_id]["command"].split())
             else:
-                self.socketio.start_background_task(target=self.send_data)
+                self.socketio.start_background_task(target=self.send_data, args=file_descriptor)
 
 
 server = Server()

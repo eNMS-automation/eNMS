@@ -23,8 +23,10 @@ from functools import wraps
 from importlib import import_module
 from itertools import chain
 from json import load
-from os import getenv
+from os import getenv, read, write
 from pathlib import Path
+from pty import fork
+from subprocess import run
 from threading import Thread
 from time import sleep
 from traceback import format_exc
@@ -57,6 +59,7 @@ class Server(Flask):
         self.configure_authentication()
         self.configure_routes()
         self.configure_rest_api()
+        self.configure_sockets()
 
     @staticmethod
     def monitor_requests(function):
@@ -612,6 +615,29 @@ class Server(Flask):
         api.add_resource(Migrate, "/rest/migrate/<string:direction>")
         api.add_resource(Topology, "/rest/topology/<string:direction>")
         api.add_resource(Sink, "/rest/<path:path>")
+
+    def send_data(self):
+        while True:
+            self.socketio.sleep(0.1)
+            output = read(self.file_descriptor, 1024).decode()
+            self.socketio.emit("output", output, namespace="/terminal")
+
+    def configure_sockets(self):
+        @self.socketio.on("input", namespace="/terminal")
+        def input(data):
+            write(self.file_descriptor, data.encode())
+
+        @self.socketio.on("connect", namespace="/terminal")
+        def connect():
+            self.process_id, self.file_descriptor = fork()
+            if not self.process_id:
+                command = (
+                    "sshpass -p admin ssh -o StrictHostKeyChecking=no "
+                    "-o UserKnownHostsFile=/dev/null admin@192.168.56.50"
+                )
+                run(command.split())
+            else:
+                self.socketio.start_background_task(target=self.send_data)
 
 
 server = Server()

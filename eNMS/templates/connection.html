@@ -10,6 +10,16 @@
     <script src="{{ url_for('static', filename='lib/xterm/xterm.js') }}"></script>
     <script src="{{ url_for('static', filename='lib/xterm/xterm-addon-fit.js') }}"></script>
     <script src="{{ url_for('static', filename='lib/socketio/socket.io.js') }}"></script>
-    <script type="module" src="{{ url_for('static', filename='js/inventory.js') }}"></script>
+    <script>
+      const term = new Terminal({ cursorBlink: true });
+      const fitAddon = new FitAddon.FitAddon();
+      const socket = io.connect("/terminal");
+      term.loadAddon(fitAddon);
+      term.open(document.getElementById("terminal"));
+      fitAddon.fit();
+      term.write("Connecting...");
+      term.onKey((event) => socket.emit("input", event.key));
+      socket.on("output", (data) => term.write(data));
+    </script>
   </body>
 </html>

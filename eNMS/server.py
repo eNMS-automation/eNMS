@@ -241,11 +241,12 @@ class Server(Flask):
                 return render_template("login.html", login_form=login_form)
             return redirect(url_for("blueprint.route", page="dashboard"))
 
-        @blueprint.route("/connect_device/<device_id>")
+        @blueprint.route("/connect_device/<connection_id>")
         @self.monitor_requests
-        def index(device_id):
-            device = db.fetch("device", id=device_id)
-            return render_template("connection.html", device=device.serialized)
+        def index(connection_id):
+            print(app.web_connections)
+            connection = app.web_connections[connection_id]
+            return render_template("connection.html", connection=connection_id)
 
         @blueprint.route("/dashboard")
         @self.monitor_requests

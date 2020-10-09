@@ -126,7 +126,7 @@ function pyttyConnection(id) {
       setTimeout(function () {
         openUrl(link);
       }, 300);
-      const message = `Click here to connect to ${result.device}.`;
+      const message = `Click here to connect to ${result.device.name}.`;
       notify(`<a target='_blank' href='${link}'>${message}</a>`, "success", 15, true);
     }
   });

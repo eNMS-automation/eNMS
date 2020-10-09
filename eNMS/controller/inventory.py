@@ -58,9 +58,9 @@ class InventoryController(BaseController):
             command = f"sshpass -e ssh {options} {login}@{address} -p {device.port}"
         else:
             command = f"ssh {options} {address} -p {device.port}"
-        connection_id = uuid4()
+        connection_id = str(uuid4())
         result = {
-            "device": device.name,
+            "device": device.base_properties,
             "command": command,
             "connection_id": connection_id
         }

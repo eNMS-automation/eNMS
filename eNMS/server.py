@@ -639,12 +639,9 @@ class Server(Flask):
             app.web_connections[connection_id]["file_descriptor"] = file_descriptor
             if process_id:
                 kwargs = app.web_connections[connection_id]
-                self.socketio.start_background_task(
-                    target=self.send_data, **kwargs
-                )
+                self.socketio.start_background_task(target=self.send_data, **kwargs)
             else:
                 run(app.web_connections[connection_id]["command"].split())
-
 
 
 server = Server()

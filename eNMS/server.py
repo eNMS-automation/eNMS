@@ -635,14 +635,16 @@ class Server(Flask):
 
         @self.socketio.on("connect", namespace="/terminal")
         def connect():
-            (process_id, file_descriptor), connection_id = fork(), request.args["id"]
+            connection_id, (process_id, file_descriptor) = request.args["id"], fork()
             app.web_connections[connection_id]["file_descriptor"] = file_descriptor
-            if not process_id:
-                run(app.web_connections[connection_id]["command"].split())
-            else:
+            if process_id:
+                kwargs = app.web_connections[connection_id]
                 self.socketio.start_background_task(
-                    target=self.send_data, **app.web_connections[connection_id]
+                    target=self.send_data, **kwargs
                 )
+            else:
+                run(app.web_connections[connection_id]["command"].split())
+
 
 
 server = Server()

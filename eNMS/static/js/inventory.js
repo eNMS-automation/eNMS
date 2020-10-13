@@ -122,7 +122,7 @@ function pyttyConnection(id) {
       if (!url) {
         url = `${window.location.protocol}//${window.location.hostname}`;
       }
-      const link = `${url}/connect_device/${result.connection_id}`;
+      const link = `${url}:5001`;
       setTimeout(function () {
         openUrl(link);
       }, 300);

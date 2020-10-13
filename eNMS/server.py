@@ -17,7 +17,6 @@ from flask import (
 from flask_httpauth import HTTPBasicAuth
 from flask_login import current_user, LoginManager, login_user, logout_user
 from flask_restful import abort as rest_abort, Api, Resource
-from flask_socketio import join_room, SocketIO
 from flask_wtf.csrf import CSRFProtect
 from functools import wraps
 from importlib import import_module
@@ -59,7 +58,6 @@ class Server(Flask):
         self.configure_authentication()
         self.configure_routes()
         self.configure_rest_api()
-        self.configure_sockets()
 
     @staticmethod
     def monitor_requests(function):
@@ -126,7 +124,6 @@ class Server(Flask):
 
     def register_extensions(self):
         self.auth = HTTPBasicAuth()
-        self.socketio = SocketIO(self)
         self.csrf = CSRFProtect()
         self.csrf.init_app(self)
 
@@ -614,34 +611,6 @@ class Server(Flask):
         api.add_resource(Migrate, "/rest/migrate/<string:direction>")
         api.add_resource(Topology, "/rest/topology/<string:direction>")
         api.add_resource(Sink, "/rest/<path:path>")
-
-    def send_data(self, **kwargs):
-        while True:
-            self.socketio.sleep(0.1)
-            output = read(kwargs["file_descriptor"], 1024).decode()
-            self.socketio.emit(
-                "output", output, namespace="/terminal", room=kwargs["connection_id"]
-            )
-
-    def configure_sockets(self):
-        @self.socketio.on("input", namespace="/terminal")
-        def input(data, connection_id):
-            file_descriptor = app.web_connections[connection_id]["file_descriptor"]
-            write(file_descriptor, data.encode())
-
-        @self.socketio.on("join", namespace="/terminal")
-        def on_join(room):
-            join_room(room)
-
-        @self.socketio.on("connect", namespace="/terminal")
-        def connect():
-            connection_id, (process_id, file_descriptor) = request.args["id"], fork()
-            app.web_connections[connection_id]["file_descriptor"] = file_descriptor
-            if process_id:
-                kwargs = app.web_connections[connection_id]
-                self.socketio.start_background_task(target=self.send_data, **kwargs)
-            else:
-                run(app.web_connections[connection_id]["command"].split())
 
 
 server = Server()

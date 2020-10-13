@@ -37,31 +37,25 @@ class InventoryController(BaseController):
         return start + int(self.ssh_port) % (end - start)
 
     def pytty_connection(self, device_id, **kwargs):
-        if not self.settings["ssh"]["credentials"][kwargs["credentials"]]:
-            return {"alert": "Unauthorized authentication method."}
-        device = db.fetch("device", id=device_id, rbac="connect")
-        address = getattr(device, kwargs["address"])
-        if self.settings["ssh"]["bypass_key_prompt"]:
-            options = "-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
-        else:
-            options = ""
-        if kwargs["protocol"] == "telnet":
-            command = f"telnet {address}"
-        elif "authentication" in kwargs:
-            login, environ["SSHPASS"] = (
-                (device.username, self.get_password(device.password))
-                if kwargs["credentials"] == "device"
-                else (current_user.name, self.get_password(current_user.password))
-                if kwargs["credentials"] == "user"
-                else (kwargs["username"], kwargs["password"])
-            )
-            command = f"sshpass -e ssh {options} {login}@{address} -p {device.port}"
-        else:
-            command = f"ssh {options} {address} -p {device.port} -l {current_user}"
+
+        try:
+            if not self.settings["ssh"]["credentials"][kwargs["credentials"]]:
+                return {"alert": "Unauthorized authentication method."}
+            device = db.fetch("device", id=device_id, rbac="connect")
+            address = getattr(device, kwargs["address"])
+            print("OK"*100)
+            terminal = Terminal()
+            print(terminal)
+            env = environ.copy()
+            print(env)
+            Popen("flask run -h 0.0.0.0 -p 5001".split(), cwd=self.path / "pytty", env={"FLASK_APP": "app.py"})
+            print("terminal running")
+        except Exception as exc:
+            import traceback
+            print(traceback.format_exc())
         connection_id = str(uuid4())
         result = {
             "device": device.base_properties,
-            "command": command,
             "connection_id": connection_id,
         }
         self.web_connections[connection_id] = result

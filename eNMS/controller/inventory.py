@@ -39,8 +39,14 @@ class InventoryController(BaseController):
         if not self.settings["ssh"]["credentials"][kwargs["credentials"]]:
             return {"alert": "Unauthorized authentication method."}
         device = db.fetch("device", id=device_id, rbac="connect")
-        address = getattr(device, kwargs["address"])
-        Popen("flask run -h 0.0.0.0 -p 5001".split(), cwd=self.path / "terminal", env={"FLASK_APP": "app.py"})
+        Popen(
+            "flask run -h 0.0.0.0 -p 5001".split(),
+            cwd=self.path / "terminal",
+            env={
+                "FLASK_APP": "app.py",
+                "IP_ADDRESS": getattr(device, kwargs["address"]),
+            },
+        )
         connection_id = str(uuid4())
         result = {
             "device": device.base_properties,

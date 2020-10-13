@@ -25,7 +25,6 @@ class InventoryController(BaseController):
     ssh_port = -1
     configuration_properties = {"configuration": "Configuration"}
     configuration_timestamps = ("status", "update", "failure", "runtime", "duration")
-    web_connections = {}
 
     def get_ssh_port(self):
         if self.redis_queue:
@@ -37,28 +36,16 @@ class InventoryController(BaseController):
         return start + int(self.ssh_port) % (end - start)
 
     def pytty_connection(self, device_id, **kwargs):
-
-        try:
-            if not self.settings["ssh"]["credentials"][kwargs["credentials"]]:
-                return {"alert": "Unauthorized authentication method."}
-            device = db.fetch("device", id=device_id, rbac="connect")
-            address = getattr(device, kwargs["address"])
-            print("OK"*100)
-            terminal = Terminal()
-            print(terminal)
-            env = environ.copy()
-            print(env)
-            Popen("flask run -h 0.0.0.0 -p 5001".split(), cwd=self.path / "pytty", env={"FLASK_APP": "app.py"})
-            print("terminal running")
-        except Exception as exc:
-            import traceback
-            print(traceback.format_exc())
+        if not self.settings["ssh"]["credentials"][kwargs["credentials"]]:
+            return {"alert": "Unauthorized authentication method."}
+        device = db.fetch("device", id=device_id, rbac="connect")
+        address = getattr(device, kwargs["address"])
+        Popen("flask run -h 0.0.0.0 -p 5001".split(), cwd=self.path / "terminal", env={"FLASK_APP": "app.py"})
         connection_id = str(uuid4())
         result = {
             "device": device.base_properties,
             "connection_id": connection_id,
         }
-        self.web_connections[connection_id] = result
         return result
 
     def web_connection(self, device_id, **kwargs):

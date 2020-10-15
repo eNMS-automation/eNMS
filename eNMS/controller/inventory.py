@@ -3,7 +3,6 @@ from flask_login import current_user
 from git import Repo
 from io import BytesIO
 from logging import info
-from os import environ
 from sqlalchemy import and_
 from subprocess import Popen
 from threading import Thread

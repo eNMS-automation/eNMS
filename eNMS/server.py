@@ -22,10 +22,8 @@ from functools import wraps
 from importlib import import_module
 from itertools import chain
 from json import load
-from os import getenv, read, write
+from os import getenv
 from pathlib import Path
-from pty import fork
-from subprocess import run
 from threading import Thread
 from time import sleep
 from traceback import format_exc

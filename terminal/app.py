@@ -1,8 +1,7 @@
 from flask import Flask, jsonify, render_template, request
 from flask_socketio import SocketIO
-from os import getenv, kill, read, write
+from os import getenv, read, write
 from pty import fork
-from signal import SIGKILL
 from subprocess import run
 
 

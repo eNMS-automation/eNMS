@@ -118,11 +118,8 @@ function pyttyConnection(id) {
     url: `/pytty_connection/${id}`,
     form: `connection-parameters-form-${id}`,
     callback: function (result) {
-      let url = settings.app.address;
-      if (!url) {
-        url = `${window.location.protocol}//${window.location.hostname}`;
-      }
-      const link = `${url}:5001`;
+      const url = settings.app.address || `${window.location.protocol}//${window.location.hostname}`;
+      const link = `${url}:${result.port}`;
       setTimeout(function () {
         openUrl(link);
       }, 300);

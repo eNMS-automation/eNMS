@@ -121,7 +121,10 @@ function pyttyConnection(id) {
       const url =
         settings.app.address ||
         `${window.location.protocol}//${window.location.hostname}`;
-      setTimeout(() => openUrl(`${url}:${result.port}/${result.endpoint}`), 300);
+      const link = result.redirection
+        ? `${url}/terminal${result.port}`
+        : `${url}:${result.port}`;
+      setTimeout(() => openUrl(`${link}/${result.endpoint}`), 300);
       const message = `Click here to connect to ${result.device}.`;
       notify(`<a target='_blank' href='${link}'>${message}</a>`, "success", 15, true);
     },
@@ -137,9 +140,7 @@ function webConnection(id) {
       if (!url) {
         url = `${window.location.protocol}//${window.location.hostname}`;
       }
-      const link = result.redirection
-        ? `${url}/terminal${result.port}/`
-        : `${url}:${result.port}`;
+
       setTimeout(function () {
         openUrl(link);
       }, 300);

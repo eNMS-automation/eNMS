@@ -70,15 +70,15 @@ class InventoryController(BaseController):
                 )
             )
         Popen(command, cwd=self.path / "terminal", env=environment)
-        return {"device": device.name, "port": port, "endpoint": endpoint}
-
-    def web_connection(self, device_id, **kwargs):
         return {
             "device": device.name,
             "port": port,
+            "endpoint": endpoint,
             "redirection": self.settings["ssh"]["port_redirection"],
-            "server_addr": self.settings["app"]["address"],
         }
+
+    def web_connection(self, device_id, **kwargs):
+        pass
 
     def desktop_connection(self, id, **kwargs):
         if not self.settings["ssh"]["credentials"][kwargs["credentials"]]:

@@ -73,12 +73,6 @@ class InventoryController(BaseController):
         return {"device": device.name, "port": port, "endpoint": endpoint}
 
     def web_connection(self, device_id, **kwargs):
-        if protocol == "telnet":
-            nested_cmd = f"telnet {address}"
-        else:
-            nested_cmd = f"ssh {options} {address} -p {device.port}"
-        cmd.extend([nested_cmd] if "multiplexing" in kwargs else nested_cmd.split())
-        Popen(cmd)
         return {
             "device": device.name,
             "port": port,

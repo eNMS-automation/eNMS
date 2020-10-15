@@ -33,14 +33,16 @@ class Server(Flask):
             if self.process_id:
                 self.socketio.start_background_task(target=self.send_data)
             else:
+                port = f"-p {getenv('PORT')}"
                 if getenv("PROTOCOL") == "telnet":
                     command = "telnet 192.168.56.50"
                 elif getenv('PASSWORD'):
                     command = (
                         f"sshpass -p {getenv('PASSWORD')} ssh {getenv('OPTIONS')} "
-                        f"{getenv('USERNAME')}@{getenv('IP_ADDRESS')} "
-                        f"-p {getenv('PORT')}"
+                        f"{getenv('USERNAME')}@{getenv('IP_ADDRESS')} {port}"
                     )
+                else:
+                    command = f"ssh {getenv('OPTIONS')} {getenv('IP_ADDRESS')} {port}"
                 run(command.split())
 
 

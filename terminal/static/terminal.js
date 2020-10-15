@@ -1,3 +1,10 @@
+/*
+global
+FitAddon: false
+io: false
+Terminal: false
+*/
+
 const terminal = new Terminal({ cursorBlink: true });
 const fitAddon = new FitAddon.FitAddon();
 const socket = io.connect("/terminal");

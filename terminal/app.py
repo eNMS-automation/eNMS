@@ -30,9 +30,11 @@ class Server(Flask):
         @self.route("/shutdown", methods=["POST"])
         def shutdown():
             request.environ.get("werkzeug.server.shutdown")()
+            print(request.json, request.args)
             post(
                 "http://127.0.0.1:5000/rest/instance/session",
                 json={
+                    "content": "",
                     "device_id": getenv("DEVICE"),
                     "name": str(uuid4()),
                     "timestamp": str(datetime.now()),

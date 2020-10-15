@@ -1,7 +1,8 @@
 from flask import Flask, render_template
 from flask_socketio import SocketIO
-from os import getenv, read, write
+from os import getenv, kill, read, write
 from pty import fork
+from signal import SIGKILL
 from subprocess import run
 
 
@@ -15,8 +16,14 @@ class Server(Flask):
     def send_data(self):
         while True:
             self.socketio.sleep(0.1)
-            output = read(self.file_descriptor, 1024).decode()
+            try:
+                output = read(self.file_descriptor, 1024).decode()
+            except OSError:
+                break
             self.socketio.emit("output", output, namespace="/terminal")
+
+    def shutdown(self):
+        kill(self.process_id, SIGKILL)
 
     def configure_routes(self):
         @self.route(f"/{getenv('ENDPOINT')}")

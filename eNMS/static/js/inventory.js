@@ -121,8 +121,8 @@ function pyttyConnection(id) {
       const url =
         settings.app.address ||
         `${window.location.protocol}//${window.location.hostname}`;
-      setTimeout(() => openUrl(`${url}:${result.port}/${result.ENDPOINT}`), 300);
-      const message = `Click here to connect to ${result.device.name}.`;
+      setTimeout(() => openUrl(`${url}:${result.port}/${result.endpoint}`), 300);
+      const message = `Click here to connect to ${result.device}.`;
       notify(`<a target='_blank' href='${link}'>${message}</a>`, "success", 15, true);
     },
   });

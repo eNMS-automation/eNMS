@@ -52,20 +52,22 @@ class InventoryController(BaseController):
             "PROTOCOL": kwargs["protocol"],
             "OPTIONS": options
         }
-        Popen(command, cwd=self.path / "terminal", env=environment)
-        return {"device": device.base_properties, "port": port, **environment}
-
-    def web_connection(self, device_id, **kwargs):
-        if protocol == "telnet":
-            nested_cmd = f"telnet {address}"
-        elif "authentication" in kwargs:
-            login, environ["SSHPASS"] = (
+        print(kwargs)
+        if "authentication" in kwargs:
+            environment.update(zip(("USERNAME", "PASSWORD"), (
                 (device.username, self.get_password(device.password))
                 if kwargs["credentials"] == "device"
                 else (current_user.name, self.get_password(current_user.password))
                 if kwargs["credentials"] == "user"
                 else (kwargs["username"], kwargs["password"])
-            )
+            )))
+        print(environment)
+        Popen(command, cwd=self.path / "terminal", env=environment)
+        return {"device": device.name, "port": port, "endpoint": endpoint}
+
+    def web_connection(self, device_id, **kwargs):
+        if protocol == "telnet":
+            nested_cmd = f"telnet {address}"
             nested_cmd = f"sshpass -e ssh {options} {login}@{address} -p {device.port}"
         else:
             nested_cmd = f"ssh {options} {address} -p {device.port}"

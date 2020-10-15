@@ -3,6 +3,7 @@ from flask_login import current_user
 from git import Repo
 from io import BytesIO
 from logging import info
+from os import getenv
 from sqlalchemy import and_
 from subprocess import Popen
 from threading import Thread
@@ -45,12 +46,16 @@ class InventoryController(BaseController):
         else:
             options = ""
         environment = {
+            "DEVICE": str(device.id),
             "ENDPOINT": endpoint,
             "FLASK_APP": "app.py",
             "IP_ADDRESS": getattr(device, kwargs["address"]),
             "OPTIONS": options,
             "PORT": str(device.port),
             "PROTOCOL": kwargs["protocol"],
+            "USER": current_user.name,
+            "ENMS_USER": getenv("ENMS_USER"),
+            "ENMS_PASSWORD": getenv("ENMS_PASSWORD"),
         }
         if "authentication" in kwargs:
             environment.update(

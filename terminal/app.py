@@ -32,8 +32,13 @@ class Server(Flask):
             request.environ.get("werkzeug.server.shutdown")()
             post(
                 "http://127.0.0.1:5000/rest/instance/session",
-                json={"name": str(uuid4()), "timestamp": str(datetime.now())},
-                auth=HTTPBasicAuth("admin", "admin"),
+                json={
+                    "device_id": getenv("DEVICE"),
+                    "name": str(uuid4()),
+                    "timestamp": str(datetime.now()),
+                    "user": getenv("USER"),
+                },
+                auth=HTTPBasicAuth(getenv("ENMS_USER"), getenv("ENMS_PASSWORD")),
             )
             return jsonify(True)
 

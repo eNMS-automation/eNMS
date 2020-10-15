@@ -10,10 +10,8 @@ function initPytty() {
   socket.on("output", (data) => terminal.write(data));
 }
 
-window.onbeforeunload = function closingCode(){
-  fetch("/shutdown", {
-    method: "POST", 
-  });
+window.onbeforeunload = function closingCode() {
+  fetch("/shutdown", { method: "POST" });
 };
 
 initPytty();

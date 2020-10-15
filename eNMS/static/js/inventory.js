@@ -113,9 +113,9 @@ export function initDashboard() {
   });
 }
 
-function pyttyConnection(id) {
+function webConnection(id) {
   call({
-    url: `/pytty_connection/${id}`,
+    url: `/web_connection/${id}`,
     form: `connection-parameters-form-${id}`,
     callback: function (result) {
       const url =
@@ -125,25 +125,6 @@ function pyttyConnection(id) {
         ? `${url}/terminal${result.port}`
         : `${url}:${result.port}`;
       setTimeout(() => openUrl(`${link}/${result.endpoint}`), 300);
-      const message = `Click here to connect to ${result.device}.`;
-      notify(`<a target='_blank' href='${link}'>${message}</a>`, "success", 15, true);
-    },
-  });
-}
-
-function webConnection(id) {
-  call({
-    url: `/web_connection/${id}`,
-    form: `connection-parameters-form-${id}`,
-    callback: function (result) {
-      let url = settings.app.address;
-      if (!url) {
-        url = `${window.location.protocol}//${window.location.hostname}`;
-      }
-
-      setTimeout(function () {
-        openUrl(link);
-      }, 300);
       const message = `Click here to connect to ${result.device}.`;
       notify(`<a target='_blank' href='${link}'>${message}</a>`, "success", 15, true);
       const warning = `Don't forget to turn off the pop-up blocker !`;
@@ -536,7 +517,6 @@ configureNamespace("inventory", [
   downloadNetworkData,
   exportTopology,
   desktopConnection,
-  pyttyConnection,
   showConnectionPanel,
   webConnection,
   savePoolObjects,

@@ -35,7 +35,7 @@ class InventoryController(BaseController):
         end = self.settings["ssh"]["end_port"]
         return start + int(self.ssh_port) % (end - start)
 
-    def pytty_connection(self, device_id, **kwargs):
+    def web_connection(self, device_id, **kwargs):
         if not self.settings["ssh"]["credentials"][kwargs["credentials"]]:
             return {"alert": "Unauthorized authentication method."}
         device = db.fetch("device", id=device_id, rbac="connect")
@@ -76,9 +76,6 @@ class InventoryController(BaseController):
             "endpoint": endpoint,
             "redirection": self.settings["ssh"]["port_redirection"],
         }
-
-    def web_connection(self, device_id, **kwargs):
-        pass
 
     def desktop_connection(self, id, **kwargs):
         if not self.settings["ssh"]["credentials"][kwargs["credentials"]]:

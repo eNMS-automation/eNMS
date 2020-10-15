@@ -1,8 +1,12 @@
+from datetime import datetime
 from flask import Flask, jsonify, render_template, request
 from flask_socketio import SocketIO
 from os import getenv, read, write
 from pty import fork
+from requests import post
+from requests.auth import HTTPBasicAuth
 from subprocess import run
+from uuid import uuid4
 
 
 class Server(Flask):
@@ -26,6 +30,11 @@ class Server(Flask):
         @self.route("/shutdown", methods=["POST"])
         def shutdown():
             request.environ.get("werkzeug.server.shutdown")()
+            post(
+                "http://127.0.0.1:5000/rest/instance/session",
+                json={"name": str(uuid4()), "timestamp": str(datetime.now())},
+                auth=HTTPBasicAuth("admin", "admin"),
+            )
             return jsonify(True)
 
         @self.socketio.on("input", namespace="/terminal")

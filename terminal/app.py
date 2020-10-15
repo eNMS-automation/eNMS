@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, jsonify, render_template, request
 from flask_socketio import SocketIO
 from os import getenv, kill, read, write
 from pty import fork
@@ -16,14 +16,8 @@ class Server(Flask):
     def send_data(self):
         while True:
             self.socketio.sleep(0.1)
-            try:
-                output = read(self.file_descriptor, 1024).decode()
-            except OSError:
-                break
+            output = read(self.file_descriptor, 1024).decode()
             self.socketio.emit("output", output, namespace="/terminal")
-
-    def shutdown(self):
-        kill(self.process_id, SIGKILL)
 
     def configure_routes(self):
         @self.route(f"/{getenv('ENDPOINT')}")
@@ -32,7 +26,8 @@ class Server(Flask):
 
         @self.route("/shutdown", methods=["POST"])
         def shutdown():
-            return "shutdown"
+            request.environ.get("werkzeug.server.shutdown")()
+            return jsonify(True)
 
         @self.socketio.on("input", namespace="/terminal")
         def input(data):

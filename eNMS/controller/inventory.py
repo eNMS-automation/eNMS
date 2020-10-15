@@ -39,22 +39,16 @@ class InventoryController(BaseController):
         if not self.settings["ssh"]["credentials"][kwargs["credentials"]]:
             return {"alert": "Unauthorized authentication method."}
         device = db.fetch("device", id=device_id, rbac="connect")
-        port = self.get_ssh_port()
-        Popen(
-            f"flask run -h 0.0.0.0 -p {port}".split(),
-            cwd=self.path / "terminal",
-            env={
-                "FLASK_APP": "app.py",
-                "IP_ADDRESS": getattr(device, kwargs["address"]),
-                "PROTOCOL": kwargs["protocol"]
-            },
-        )
-        connection_id = str(uuid4())
-        return {
-            "device": device.base_properties,
-            "connection_id": connection_id,
-            "port": port,
+        port, endpoint = self.get_ssh_port(), str(uuid4())
+        command = f"flask run -h 0.0.0.0 -p {port}".split()
+        environment = {
+            "ENDPOINT": endpoint,
+            "FLASK_APP": "app.py",
+            "IP_ADDRESS": getattr(device, kwargs["address"]),
+            "PROTOCOL": kwargs["protocol"],
         }
+        Popen(command, cwd=self.path / "terminal", env=environment)
+        return {"device": device.base_properties, "port": port, **environment}
 
     def web_connection(self, device_id, **kwargs):
         if "accept-once" in kwargs:

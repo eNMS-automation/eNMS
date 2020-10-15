@@ -118,11 +118,10 @@ function pyttyConnection(id) {
     url: `/pytty_connection/${id}`,
     form: `connection-parameters-form-${id}`,
     callback: function (result) {
-      const url = settings.app.address || `${window.location.protocol}//${window.location.hostname}`;
-      const link = `${url}:${result.port}`;
-      setTimeout(function () {
-        openUrl(link);
-      }, 300);
+      const url =
+        settings.app.address ||
+        `${window.location.protocol}//${window.location.hostname}`;
+      setTimeout(() => openUrl(`${url}:${result.port}/${result.ENDPOINT}`), 300);
       const message = `Click here to connect to ${result.device.name}.`;
       notify(`<a target='_blank' href='${link}'>${message}</a>`, "success", 15, true);
     },

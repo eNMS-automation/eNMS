@@ -33,7 +33,6 @@ class Server(Flask):
             if self.process_id:
                 self.socketio.start_background_task(target=self.send_data)
             else:
-                print(getenv("PROTOCOL")*100)
                 if getenv("PROTOCOL") == "telnet":
                     command = "telnet 192.168.56.50"
                 else:

@@ -35,8 +35,12 @@ class Server(Flask):
             else:
                 if getenv("PROTOCOL") == "telnet":
                     command = "telnet 192.168.56.50"
-                else:
-                    command = f"sshpass -p {getenv('PASSWORD')} ssh {getenv('OPTIONS')} {getenv('USERNAME')}@192.168.56.50"
+                elif getenv('PASSWORD'):
+                    command = (
+                        f"sshpass -p {getenv('PASSWORD')} ssh {getenv('OPTIONS')} "
+                        f"{getenv('USERNAME')}@{getenv('IP_ADDRESS')} "
+                        f"-p {getenv('PORT')}"
+                    )
                 run(command.split())
 
 

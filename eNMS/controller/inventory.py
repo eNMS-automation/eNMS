@@ -49,26 +49,32 @@ class InventoryController(BaseController):
             "ENDPOINT": endpoint,
             "FLASK_APP": "app.py",
             "IP_ADDRESS": getattr(device, kwargs["address"]),
+            "OPTIONS": options,
+            "PORT": str(device.port),
             "PROTOCOL": kwargs["protocol"],
-            "OPTIONS": options
         }
-        print(kwargs)
         if "authentication" in kwargs:
-            environment.update(zip(("USERNAME", "PASSWORD"), (
-                (device.username, self.get_password(device.password))
-                if kwargs["credentials"] == "device"
-                else (current_user.name, self.get_password(current_user.password))
-                if kwargs["credentials"] == "user"
-                else (kwargs["username"], kwargs["password"])
-            )))
-        print(environment)
+            environment.update(
+                zip(
+                    ("USERNAME", "PASSWORD"),
+                    (
+                        (device.username, self.get_password(device.password))
+                        if kwargs["credentials"] == "device"
+                        else (
+                            current_user.name,
+                            self.get_password(current_user.password),
+                        )
+                        if kwargs["credentials"] == "user"
+                        else (kwargs["username"], kwargs["password"])
+                    ),
+                )
+            )
         Popen(command, cwd=self.path / "terminal", env=environment)
         return {"device": device.name, "port": port, "endpoint": endpoint}
 
     def web_connection(self, device_id, **kwargs):
         if protocol == "telnet":
             nested_cmd = f"telnet {address}"
-            nested_cmd = f"sshpass -e ssh {options} {login}@{address} -p {device.port}"
         else:
             nested_cmd = f"ssh {options} {address} -p {device.port}"
         cmd.extend([nested_cmd] if "multiplexing" in kwargs else nested_cmd.split())

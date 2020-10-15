@@ -10,19 +10,17 @@ function initPytty() {
   terminal.onKey((event) => socket.emit("input", event.key));
   socket.on("output", (data) => {
     terminal.write(data);
-    terminalContent += data
+    terminalContent += data;
   });
 }
 
-window.onbeforeunload = function closingCode() {
-  $.ajax({
-    type: "POST",
-    async: false,
-    url: "/shutdown",
-    data: JSON.stringify(data),
-    contentType: "application/json",
-    dataType: "json",
-  });
+window.onunload = function () {
+  navigator.sendBeacon(
+    "/shutdown",
+    new Blob([JSON.stringify(terminalContent)], {
+      type: "application/json",
+    })
+  );
 };
 
 initPytty();

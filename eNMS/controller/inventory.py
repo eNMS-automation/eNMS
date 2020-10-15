@@ -41,24 +41,21 @@ class InventoryController(BaseController):
         device = db.fetch("device", id=device_id, rbac="connect")
         port, endpoint = self.get_ssh_port(), str(uuid4())
         command = f"flask run -h 0.0.0.0 -p {port}".split()
+        if self.settings["ssh"]["bypass_key_prompt"]:
+            options = "-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
+        else:
+            options = ""
         environment = {
             "ENDPOINT": endpoint,
             "FLASK_APP": "app.py",
             "IP_ADDRESS": getattr(device, kwargs["address"]),
             "PROTOCOL": kwargs["protocol"],
+            "OPTIONS": options
         }
         Popen(command, cwd=self.path / "terminal", env=environment)
         return {"device": device.base_properties, "port": port, **environment}
 
     def web_connection(self, device_id, **kwargs):
-        if "accept-once" in kwargs:
-            cmd.append("--once")
-        if "multiplexing" in kwargs:
-            cmd.extend(f"tmux new -A -s gotty{port}".split())
-        if self.settings["ssh"]["bypass_key_prompt"]:
-            options = "-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
-        else:
-            options = ""
         if protocol == "telnet":
             nested_cmd = f"telnet {address}"
         elif "authentication" in kwargs:

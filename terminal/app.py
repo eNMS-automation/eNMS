@@ -19,7 +19,7 @@ class Server(Flask):
             self.socketio.emit("output", output, namespace="/terminal")
 
     def configure_routes(self):
-        @self.route("/")
+        @self.route(f"/{getenv('ENDPOINT')}")
         def index():
             return render_template("index.html")
 
@@ -36,10 +36,7 @@ class Server(Flask):
                 if getenv("PROTOCOL") == "telnet":
                     command = "telnet 192.168.56.50"
                 else:
-                    command = (
-                        "sshpass -p admin ssh -o StrictHostKeyChecking=no "
-                        "-o UserKnownHostsFile=/dev/null admin@192.168.56.50"
-                    )
+                    command = f"sshpass -p admin ssh {getenv('OPTIONS')} admin@192.168.56.50"
                 run(command.split())
 
 

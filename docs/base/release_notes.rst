@@ -48,6 +48,8 @@ the configuration table.
 - Add ability to hard-code logic to mask password hashes when config is displayed in custom controller.
 - Add workflow tree in the workflow builder to visualize workflow and subworkflows as a tree with buttons:
 edit / new mechanism: highlight to teleport to any service. Makes it easier to work with large multi-level workflows.
+- Replace gotty with pure python implementation. Save session output with webssh. Need to set ENMS_USER and ENMS_PASSWORD
+like with the scheduler to save the session via REST API.
 
 Version 3.22.4
 --------------

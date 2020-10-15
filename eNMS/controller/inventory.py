@@ -40,28 +40,21 @@ class InventoryController(BaseController):
             return {"alert": "Unauthorized authentication method."}
         device = db.fetch("device", id=device_id, rbac="connect")
         Popen(
-            "flask run -h 0.0.0.0 -p 5001".split(),
+            f"flask run -h 0.0.0.0 -p {self.get_ssh_port()}".split(),
             cwd=self.path / "terminal",
             env={
                 "FLASK_APP": "app.py",
                 "IP_ADDRESS": getattr(device, kwargs["address"]),
+                "PROTOCOL": kwargs["protocol"]
             },
         )
         connection_id = str(uuid4())
-        result = {
+        return {
             "device": device.base_properties,
             "connection_id": connection_id,
         }
-        return result
 
     def web_connection(self, device_id, **kwargs):
-        if not self.settings["ssh"]["credentials"][kwargs["credentials"]]:
-            return {"alert": "Unauthorized authentication method."}
-        device = db.fetch("device", id=device_id, rbac="connect")
-        cmd = [str(self.path / "files" / "apps" / "gotty"), "-w"]
-        port, protocol = self.get_ssh_port(), kwargs["protocol"]
-        address = getattr(device, kwargs["address"])
-        cmd.extend(["-p", str(port)])
         if "accept-once" in kwargs:
             cmd.append("--once")
         if "multiplexing" in kwargs:

@@ -1,6 +1,6 @@
 from flask import Flask, render_template
 from flask_socketio import SocketIO
-from os import read, write
+from os import getenv, read, write
 from pty import fork
 from subprocess import run
 
@@ -33,10 +33,14 @@ class Server(Flask):
             if self.process_id:
                 self.socketio.start_background_task(target=self.send_data)
             else:
-                command = (
-                    "sshpass -p admin ssh -o StrictHostKeyChecking=no "
-                    "-o UserKnownHostsFile=/dev/null admin@192.168.56.50"
-                )
+                print(getenv("PROTOCOL")*100)
+                if getenv("PROTOCOL") == "telnet":
+                    command = "telnet 192.168.56.50"
+                else:
+                    command = (
+                        "sshpass -p admin ssh -o StrictHostKeyChecking=no "
+                        "-o UserKnownHostsFile=/dev/null admin@192.168.56.50"
+                    )
                 run(command.split())
 
 

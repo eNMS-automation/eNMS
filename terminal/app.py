@@ -30,6 +30,10 @@ class Server(Flask):
         def index():
             return render_template("index.html")
 
+        @self.route("/shutdown", methods=["POST"])
+        def shutdown():
+            return "shutdown"
+
         @self.socketio.on("input", namespace="/terminal")
         def input(data):
             write(self.file_descriptor, data.encode())

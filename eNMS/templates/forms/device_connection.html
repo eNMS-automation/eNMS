@@ -9,6 +9,16 @@
     {{ form.address(class="form-control add-id") }}<br />
     <div class="x_title">
       <h4 class="text-center">Credentials</h4>
+    </div><br />
+    <div class="item">
+      <input
+        id="authentication"
+        name="authentication"
+        class="add-id"
+        type="checkbox"
+        checked=""
+      />
+      <label>Automatically authenticate</label>
     </div>
     {% if settings["ssh"]["credentials"]["device"] %}
     <div class="radio">

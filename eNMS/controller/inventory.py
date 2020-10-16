@@ -54,8 +54,8 @@ class InventoryController(BaseController):
             "PORT": str(device.port),
             "PROTOCOL": kwargs["protocol"],
             "USER": current_user.name,
-            "ENMS_USER": getenv("ENMS_USER"),
-            "ENMS_PASSWORD": getenv("ENMS_PASSWORD"),
+            "ENMS_USER": getenv("ENMS_USER", "admin"),
+            "ENMS_PASSWORD": getenv("ENMS_PASSWORD", "admin"),
         }
         if "authentication" in kwargs:
             environment.update(
@@ -73,6 +73,7 @@ class InventoryController(BaseController):
                     ),
                 )
             )
+        print(command, self.path, self.path / "terminal", environment)
         Popen(command, cwd=self.path / "terminal", env=environment)
         return {
             "device": device.name,

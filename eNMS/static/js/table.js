@@ -1080,7 +1080,6 @@ tables.changelog = class ChangelogTable extends Table {
       this.exportTableButton(),
       this.clearSearchButton(),
       this.refreshTableButton(),
-      this.bulkDeletionButton(),
     ];
   }
 };

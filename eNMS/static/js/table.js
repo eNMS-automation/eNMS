@@ -9,6 +9,7 @@ import {
   createTooltips,
   downloadFile,
   notify,
+  openPanel,
   serializeForm,
   userIsActive,
 } from "./base.js";
@@ -329,6 +330,18 @@ export class Table {
       </button>`;
   }
 
+  bulkDeletionButton() {
+    return `
+      <button
+        class="btn btn-danger"
+        onclick="eNMS.table.bulkDeletion('${this.id}', true)"
+        data-tooltip="Bulk Deletion"
+        type="button"
+      >
+        <span class="glyphicon glyphicon-trash"></span>
+      </button>`;
+  }
+
   deleteInstanceButton(row) {
     return `
       <li>
@@ -374,6 +387,7 @@ tables.device = class DeviceTable extends Table {
       this.searchTableButton(),
       this.clearSearchButton(),
       this.refreshTableButton(),
+      this.bulkDeletionButton(),
     ];
   }
 
@@ -1143,4 +1157,28 @@ function refreshTablePeriodically(tableId, interval, first) {
   setTimeout(() => refreshTablePeriodically(tableId, interval), interval);
 }
 
-configureNamespace("table", [clearSearch, exportTable, refreshTable]);
+function bulkDeletion() {
+  openPanel({
+    name: "bulk_deletion",
+    content: `
+      <div class="modal-body">
+        Are you sure you want to permanently remove all items
+        displayed in the table ?
+      </div>
+      <div class="modal-footer">
+        <center>
+          <button
+            type="button"
+            class="btn btn-danger"
+            onclick="eNMS.base.bulkDeletion()"
+          >
+            Delete
+          </button>
+        </center>
+      </div><br>`,
+    title: "Bulk Deletion: x items",
+    size: "auto",
+  });
+}
+
+configureNamespace("table", [bulkDeletion, clearSearch, exportTable, refreshTable]);

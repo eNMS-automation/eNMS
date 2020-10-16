@@ -451,9 +451,9 @@ class BaseController:
             return {"error": "Invalid regular expression as search parameter."}
         constraints.extend(table.filtering_constraints(**kwargs))
         query = db.query(model)
+        total_records, query = query.count(), query.filter(and_(*constraints))
         if bulk:
             return [obj.id for obj in query.all()]
-        total_records, query = query.count(), query.filter(and_(*constraints))
         ordering = getattr(
             getattr(
                 table,
@@ -488,8 +488,10 @@ class BaseController:
         return allowed_syntax and allowed_extension
 
     def bulk_deletion(self, table, **kwargs):
-        result = self.filtering(table, bulk=True, form=kwargs)
-        return result
+        instances = self.filtering(table, bulk=True, form=kwargs)
+        for instance_id in instances:
+            db.delete(table, id=instance_id)
+        return len(instances)
 
     def get_time(self):
         return str(datetime.now())

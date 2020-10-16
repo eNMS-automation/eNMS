@@ -440,7 +440,6 @@ export function configureForm(form, id, panelId) {
   for (const [property, field] of Object.entries(formProperties[form])) {
     const fieldId = id ? `${form}-${property}-${id}` : `${form}-${property}`;
     let el = $(`#${fieldId}`);
-
     if (!el.length) el = $(`#${property}`);
     if (field.type == "date") {
       el.datetimepicker({
@@ -560,6 +559,18 @@ export function showTypePanel(type, id, mode) {
         });
       } else if (mode == "bulk") {
         panel.setHeaderTitle(`Edit all selected ${type} in bulk`);
+        for (const property of Object.keys(formProperties[panel.id])) {
+          if (["form_type", "id", "name"].includes(property)) continue;
+          $(`label[for='${property}']`).after(`
+            <div class="item" style='float:right; margin-left: 15px'>
+              <input
+                id="bulk-edit-${property}"
+                name="bulk-edit-${property}"
+                type="checkbox"
+              />
+            </div>
+          `)
+        }
       } else {
         panel.setHeaderTitle(`Create a New ${type}`);
         if (page == "workflow_builder" && creationMode == "create_service") {

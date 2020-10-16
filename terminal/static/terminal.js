@@ -10,7 +10,7 @@ const fitAddon = new FitAddon.FitAddon();
 const socket = io.connect("/terminal");
 let terminalContent = "";
 
-function initPytty() {
+function initTerminal() {
   terminal.loadAddon(fitAddon);
   terminal.open(document.getElementById("terminal"));
   fitAddon.fit();
@@ -30,4 +30,4 @@ window.onunload = function () {
   );
 };
 
-initPytty();
+initTerminal();

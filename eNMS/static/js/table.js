@@ -4,11 +4,13 @@ tableProperties: false
 */
 
 import {
+  call,
   configureNamespace,
   createTooltip,
   createTooltips,
   downloadFile,
   notify,
+  openPanel,
   serializeForm,
   userIsActive,
 } from "./base.js";
@@ -333,7 +335,7 @@ export class Table {
     return `
       <button
         class="btn btn-danger"
-        onclick="eNMS.base.showBulkDeletionPanel('${this.id}', '${this.type}')"
+        onclick="eNMS.table.showBulkDeletionPanel('${this.id}', '${this.type}')"
         data-tooltip="Bulk Deletion"
         type="button"
       >
@@ -1168,4 +1170,40 @@ function refreshTablePeriodically(tableId, interval, first) {
   setTimeout(() => refreshTablePeriodically(tableId, interval), interval);
 }
 
-configureNamespace("table", [clearSearch, exportTable, refreshTable]);
+function showBulkDeletionPanel(tableId, model) {
+  openPanel({
+    name: "bulk_deletion",
+    id: tableId,
+    content: `
+      <div class="modal-body">
+        Are you sure you want to permanently remove all items
+        currently displayed in the table ?
+      </div>
+      <div class="modal-footer">
+        <center>
+          <button
+            type="button"
+            class="btn btn-danger"
+            onclick="eNMS.table.bulkDeletion('${tableId}', '${model}')"
+          >
+            Delete
+          </button>
+        </center>
+      </div><br>`,
+    title: "Bulk Deletion: x items",
+    size: "auto",
+  });
+}
+
+function bulkDeletion(tableId, model) {
+  call({
+    url: `/bulk_deletion/${model}`,
+    form: `search-form-${tableId}`,
+    callback: function (number) {
+      $(`#bulk_deletion-${tableId}`).remove();
+      notify(`${number} items deleted.`, "success", 5, true);
+    },
+  });
+}
+
+configureNamespace("table", [bulkDeletion, clearSearch, exportTable, refreshTable, showBulkDeletionPanel]);

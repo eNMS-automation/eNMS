@@ -350,43 +350,6 @@ export function showDeletionPanel(instance) {
   });
 }
 
-function showBulkDeletionPanel(tableId, model) {
-  openPanel({
-    name: "bulk_deletion",
-    id: tableId,
-    content: `
-      <div class="modal-body">
-        Are you sure you want to permanently remove all items
-        currently displayed in the table ?
-      </div>
-      <div class="modal-footer">
-        <center>
-          <button
-            type="button"
-            class="btn btn-danger"
-            onclick="eNMS.base.bulkDeletion('${tableId}', '${model}')"
-          >
-            Delete
-          </button>
-        </center>
-      </div><br>`,
-    title: "Bulk Deletion: x items",
-    size: "auto",
-  });
-}
-
-function bulkDeletion(tableId, model) {
-  call({
-    url: `/bulk_deletion/${model}`,
-    form: `search-form-${tableId}`,
-    callback: function (result) {
-      console.log(result);
-      $(`#bulk_deletion-${tableId}`).remove();
-      notify("Bulk deletion.", "success", 5, true);
-    },
-  });
-}
-
 export function preprocessForm(panel, id, type, duplicate) {
   if (type) {
     panel.querySelectorAll(".add-type").forEach((el) => {
@@ -919,7 +882,6 @@ function fullScreen() {
 }
 
 configureNamespace("base", [
-  bulkDeletion,
   call,
   clearAlerts,
   copyToClipboard,
@@ -931,7 +893,6 @@ configureNamespace("base", [
   processData,
   processInstance,
   showAllAlerts,
-  showBulkDeletionPanel,
   showDeletionPanel,
   showTypePanel,
 ]);

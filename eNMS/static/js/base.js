@@ -380,7 +380,7 @@ function bulkDeletion(tableId, model) {
     url: `/bulk_deletion/${model}`,
     form: `search-form-${tableId}`,
     callback: function (result) {
-      console.log(result)
+      console.log(result);
       $(`#bulk_deletion-${tableId}`).remove();
       notify("Bulk deletion.", "success", 5, true);
     },

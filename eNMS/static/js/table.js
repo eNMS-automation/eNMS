@@ -515,6 +515,7 @@ tables.link = class LinkTable extends Table {
       this.searchTableButton(),
       this.clearSearchButton(),
       this.refreshTableButton(),
+      this.bulkDeletionButton(),
     ];
   }
 
@@ -566,6 +567,7 @@ tables.pool = class PoolTable extends Table {
       this.searchTableButton(),
       this.clearSearchButton(),
       this.refreshTableButton(),
+      this.bulkDeletionButton(),
     ];
   }
 
@@ -692,6 +694,7 @@ tables.service = class ServiceTable extends Table {
       >
         <select id="service-type" class="form-control"></select>
       </button>`,
+      this.bulkDeletionButton(),
     ];
   }
 
@@ -925,6 +928,7 @@ tables.task = class TaskTable extends Table {
       >
         <span class="glyphicon glyphicon-pause"></span>
       </button>`,
+      this.bulkDeletionButton(),
     ];
   }
 
@@ -971,6 +975,7 @@ tables.user = class UserTable extends Table {
       this.searchTableButton(),
       this.clearSearchButton(),
       this.refreshTableButton(),
+      this.bulkDeletionButton(),
     ];
   }
 
@@ -1005,6 +1010,7 @@ tables.access = class AccessTable extends Table {
       this.searchTableButton(),
       this.clearSearchButton(),
       this.refreshTableButton(),
+      this.bulkDeletionButton(),
     ];
   }
 
@@ -1039,6 +1045,7 @@ tables.server = class ServerTable extends Table {
       this.exportTableButton(),
       this.clearSearchButton(),
       this.refreshTableButton(),
+      this.bulkDeletionButton(),
     ];
   }
 
@@ -1073,13 +1080,18 @@ tables.changelog = class ChangelogTable extends Table {
       this.exportTableButton(),
       this.clearSearchButton(),
       this.refreshTableButton(),
+      this.bulkDeletionButton(),
     ];
   }
 };
 
 tables.session = class SessionTable extends Table {
   get controls() {
-    return [this.columnDisplay(), this.refreshTableButton("session")];
+    return [
+      this.columnDisplay(),
+      this.refreshTableButton("session"),
+      this.bulkDeletionButton(),
+    ];
   }
 
   buttons(row) {
@@ -1105,6 +1117,7 @@ tables.event = class EventTable extends Table {
       this.exportTableButton(),
       this.clearSearchButton(),
       this.refreshTableButton(),
+      this.bulkDeletionButton(),
     ];
   }
 

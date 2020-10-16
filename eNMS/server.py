@@ -331,9 +331,10 @@ class Server(Flask):
                 with db.session_scope():
                     result = getattr(app, endpoint)(*args, **kwargs)
             except db.rbac_error:
-                return {"alert": "Error 403 - Operation not allowed."}
+                result = {"alert": "Error 403 - Operation not allowed."}
             except Exception as exc:
-                return {"alert": str(exc)}
+                app.log("error", format_exc(), change_log=False)
+                result = {"alert": "Error 500 - Internal Server Error"}
             return jsonify(result)
 
         self.register_blueprint(blueprint)

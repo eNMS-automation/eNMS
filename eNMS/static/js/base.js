@@ -378,7 +378,7 @@ function showBulkDeletionPanel(tableId, model) {
 function bulkDeletion(tableId, model) {
   call({
     url: `/bulk_deletion/${model}`,
-    form: serializeForm(`#search-form-${tableId}`),
+    form: `search-form-${tableId}`,
     callback: function (result) {
       console.log(result)
       $(`#bulk_deletion-${tableId}`).remove();

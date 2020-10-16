@@ -58,13 +58,9 @@ export function showConnectionPanel(device) {
     size: "auto",
     id: device.id,
     callback: () => {
+      $(`#address-${device.id}`).selectpicker();
       $(`#custom-credentials-${device.id}`).change(function () {
         $(`#credentials-fields-${device.id}`).show();
-      });
-      $(`#accept-once-${device.id},#multiplexing-${device.id}`).change(function () {
-        if (!this.checked) return;
-        const other = this.name == "accept-once" ? "multiplexing" : "accept-once";
-        $(`#${other}-${device.id}`).prop("checked", false);
       });
       $(`#device-credentials-${device.id},#user-credentials-${device.id}`).change(
         function () {

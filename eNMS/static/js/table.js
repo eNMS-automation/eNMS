@@ -331,6 +331,18 @@ export class Table {
       </button>`;
   }
 
+  bulkEditButton() {
+    return `
+      <button
+        class="btn btn-primary"
+        onclick="eNMS.base.showTypePanel('${this.type}', null, 'bulk')"
+        data-tooltip="Bulk Edit"
+        type="button"
+      >
+        <span class="glyphicon glyphicon-edit"></span>
+      </button>`;
+  }
+
   bulkDeletionButton() {
     return `
       <button
@@ -384,6 +396,7 @@ tables.device = class DeviceTable extends Table {
     return [
       this.columnDisplay(),
       this.createNewButton(),
+      this.bulkEditButton(),
       this.exportTableButton(),
       this.searchTableButton(),
       this.clearSearchButton(),

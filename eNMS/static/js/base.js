@@ -558,6 +558,8 @@ export function showTypePanel(type, id, mode) {
             }
           },
         });
+      } else if (mode == "bulk") {
+        panel.setHeaderTitle(`Edit all selected ${type} in bulk`);
       } else {
         panel.setHeaderTitle(`Create a New ${type}`);
         if (page == "workflow_builder" && creationMode == "create_service") {

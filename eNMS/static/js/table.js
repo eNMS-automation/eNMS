@@ -9,7 +9,6 @@ import {
   createTooltips,
   downloadFile,
   notify,
-  openPanel,
   serializeForm,
   userIsActive,
 } from "./base.js";
@@ -334,7 +333,7 @@ export class Table {
     return `
       <button
         class="btn btn-danger"
-        onclick="eNMS.base.showBulkDeletionPanel('${this.id}')"
+        onclick="eNMS.base.showBulkDeletionPanel('${this.id}', '${this.type}')"
         data-tooltip="Bulk Deletion"
         type="button"
       >

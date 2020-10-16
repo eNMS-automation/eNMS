@@ -181,12 +181,12 @@
   "post_requests": [
     "/add_edge",
     "/add_service_to_workflow",
+    "/bulk_deletion",
     "/copy_service_in_workflow",
     "/calendar_init",
     "/clear_results",
     "/clear_configurations",
     "/compare",
-    "/web_connection",
     "/counters",
     "/count_models",
     "/create_label",
@@ -257,6 +257,7 @@
     "/update_pool",
     "/update_all_pools",
     "/upload_files",
-    "/view_filtering"
+    "/view_filtering",
+    "/web_connection"
   ]
 }

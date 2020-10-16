@@ -443,9 +443,9 @@ class BaseController:
             "total_count": results.count(),
         }
 
-    def filtering(self, model, **kwargs):
+    def filtering(self, model, **kwargs, bulk=False):
         table = models[model]
-        ordering = getattr(
+        ordering = None if bulk else getattr(
             getattr(
                 table,
                 kwargs["columns"][int(kwargs["order"][0]["column"])]["data"],
@@ -484,6 +484,10 @@ class BaseController:
         allowed_syntax = "." in name
         allowed_extension = name.rsplit(".", 1)[1].lower() in allowed_modules
         return allowed_syntax and allowed_extension
+
+    def bulk_deletion(self, model, **kwargs):
+        result = self.filtering(model, **kwargs)
+        return result
 
     def get_time(self):
         return str(datetime.now())

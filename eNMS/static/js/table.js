@@ -1200,10 +1200,17 @@ function bulkDeletion(tableId, model) {
     url: `/bulk_deletion/${model}`,
     form: `search-form-${tableId}`,
     callback: function (number) {
+      refreshTable(tableId);
       $(`#bulk_deletion-${tableId}`).remove();
       notify(`${number} items deleted.`, "success", 5, true);
     },
   });
 }
 
-configureNamespace("table", [bulkDeletion, clearSearch, exportTable, refreshTable, showBulkDeletionPanel]);
+configureNamespace("table", [
+  bulkDeletion,
+  clearSearch,
+  exportTable,
+  refreshTable,
+  showBulkDeletionPanel,
+]);

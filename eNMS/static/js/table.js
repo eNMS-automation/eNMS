@@ -334,7 +334,7 @@ export class Table {
     return `
       <button
         class="btn btn-danger"
-        onclick="eNMS.table.bulkDeletion('${this.id}', true)"
+        onclick="eNMS.base.showBulkDeletionPanel('${this.id}')"
         data-tooltip="Bulk Deletion"
         type="button"
       >
@@ -1157,28 +1157,4 @@ function refreshTablePeriodically(tableId, interval, first) {
   setTimeout(() => refreshTablePeriodically(tableId, interval), interval);
 }
 
-function bulkDeletion() {
-  openPanel({
-    name: "bulk_deletion",
-    content: `
-      <div class="modal-body">
-        Are you sure you want to permanently remove all items
-        displayed in the table ?
-      </div>
-      <div class="modal-footer">
-        <center>
-          <button
-            type="button"
-            class="btn btn-danger"
-            onclick="eNMS.base.bulkDeletion()"
-          >
-            Delete
-          </button>
-        </center>
-      </div><br>`,
-    title: "Bulk Deletion: x items",
-    size: "auto",
-  });
-}
-
-configureNamespace("table", [bulkDeletion, clearSearch, exportTable, refreshTable]);
+configureNamespace("table", [clearSearch, exportTable, refreshTable]);

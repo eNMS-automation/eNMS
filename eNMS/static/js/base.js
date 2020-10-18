@@ -560,16 +560,19 @@ export function showTypePanel(type, id, mode) {
       } else if (mode == "bulk") {
         panel.setHeaderTitle(`Edit all selected ${type} in bulk`);
         for (const property of Object.keys(formProperties[panel.id])) {
-          if (["form_type", "id", "name"].includes(property)) continue;
-          $(`label[for='${property}']`).after(`
-            <div class="item" style='float:right; margin-left: 15px'>
-              <input
-                id="bulk-edit-${property}"
-                name="bulk-edit-${property}"
-                type="checkbox"
-              />
-            </div>
-          `)
+          if (["form_type", "id", "name"].includes(property)) {
+            $(`#${type}-${property}`).prop("readonly", true);
+          } else {
+            $(`label[for='${property}']`).after(`
+              <div class="item" style='float:right; margin-left: 15px'>
+                <input
+                  id="bulk-edit-${property}"
+                  name="bulk-edit-${property}"
+                  type="checkbox"
+                />
+              </div>
+            `);
+          }
         }
       } else {
         panel.setHeaderTitle(`Create a New ${type}`);

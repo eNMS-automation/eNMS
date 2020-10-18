@@ -182,6 +182,7 @@
     "/add_edge",
     "/add_service_to_workflow",
     "/bulk_deletion",
+    "/bulk_edit",
     "/copy_service_in_workflow",
     "/calendar_init",
     "/clear_results",

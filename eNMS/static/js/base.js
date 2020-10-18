@@ -146,6 +146,14 @@ export function serializeForm(form) {
   return result;
 }
 
+export function objectifyForm(form) {
+  let data = {};
+  $(`#${form}`).serializeArray().map(function(x) {
+    data[x.name] = x.value;
+  });
+  return data;
+}
+
 export const deleteInstance = function (type, id) {
   call({
     url: `/delete_instance/${type}/${id}`,

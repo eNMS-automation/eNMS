@@ -10,6 +10,7 @@ import {
   createTooltips,
   downloadFile,
   notify,
+  objectifyForm,
   openPanel,
   serializeForm,
   userIsActive,
@@ -1223,11 +1224,14 @@ function bulkDeletion(tableId, model) {
 function bulkEdit(model) {
   call({
     url: `/bulk_edit/${model}`,
-    form: `search-form-${model}`,
+    data: {
+      "search": objectifyForm(`search-form-${model}`),
+      "bulk-edit": objectifyForm(`edit-${model}-form`),
+    },
     callback: function (number) {
       refreshTable(model);
-      $(`#bulk_edit-${model}`).remove();
-      notify(`${number} items deleted.`, "success", 5, true);
+      $(`#edit-${model}-form`).remove();
+      notify(`${number} items modified.`, "success", 5, true);
     },
   });
 }

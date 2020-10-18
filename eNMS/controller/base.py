@@ -493,6 +493,9 @@ class BaseController:
             db.delete(table, id=instance_id)
         return len(instances)
 
+    def bulk_edit(self, table, **kwargs):
+        return 3
+
     def get_time(self):
         return str(datetime.now())
 

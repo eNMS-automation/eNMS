@@ -1220,8 +1220,21 @@ function bulkDeletion(tableId, model) {
   });
 }
 
+function bulkEdit(model) {
+  call({
+    url: `/bulk_edit/${model}`,
+    form: `search-form-${model}`,
+    callback: function (number) {
+      refreshTable(model);
+      $(`#bulk_edit-${model}`).remove();
+      notify(`${number} items deleted.`, "success", 5, true);
+    },
+  });
+}
+
 configureNamespace("table", [
   bulkDeletion,
+  bulkEdit,
   clearSearch,
   exportTable,
   refreshTable,

@@ -560,6 +560,9 @@ export function showTypePanel(type, id, mode) {
       } else if (mode == "bulk") {
         panel.setHeaderTitle(`Edit all selected ${type} in bulk`);
         for (const property of Object.keys(formProperties[panel.id])) {
+          $(`#${type}-edit-action`)
+            .attr("onclick", `eNMS.table.bulkEdit('${type}')`)
+            .text("Bulk Edit");
           if (["form_type", "id", "name"].includes(property)) {
             $(`#${type}-${property}`).prop("readonly", true);
           } else {

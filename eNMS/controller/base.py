@@ -494,7 +494,15 @@ class BaseController:
         return len(instances)
 
     def bulk_edit(self, table, **kwargs):
-        return 3
+        instances = self.filtering(table, bulk=True, form=kwargs["search"])
+        update_kwargs = {
+            property: value
+            for property, value in kwargs["bulk-edit"].items()
+            if kwargs["bulk-edit"].get(f"bulk-edit-{property}") == "on"
+        }
+        for instance_id in instances:
+            db.factory(table, id=instance_id, **update_kwargs)
+        return len(instances)
 
     def get_time(self):
         return str(datetime.now())

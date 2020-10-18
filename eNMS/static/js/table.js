@@ -1230,7 +1230,7 @@ function bulkEdit(model) {
     },
     callback: function (number) {
       refreshTable(model);
-      $(`#edit-${model}-form`).remove();
+      $(`#${model}`).remove();
       notify(`${number} items modified.`, "success", 5, true);
     },
   });

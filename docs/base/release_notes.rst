@@ -2,8 +2,8 @@
 Release Notes
 =============
 
-Version 3.23.0
---------------
+Version 4.0.0
+-------------
 
 - Add 3D network view and 3D logical view. Add default pools mechanism for large networks.
 - Update endpoint in migration files: view/network and view/site no longer exists. Must be replaced with

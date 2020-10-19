@@ -148,9 +148,11 @@ export function serializeForm(form) {
 
 export function objectifyForm(form) {
   let data = {};
-  $(`#${form}`).serializeArray().map(function(x) {
-    data[x.name] = x.value;
-  });
+  $(`#${form}`)
+    .serializeArray()
+    .map(function (x) {
+      data[x.name] = x.value;
+    });
   return data;
 }
 

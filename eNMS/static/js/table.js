@@ -1225,7 +1225,7 @@ function bulkEdit(model) {
   call({
     url: `/bulk_edit/${model}`,
     data: {
-      "search": objectifyForm(`search-form-${model}`),
+      search: objectifyForm(`search-form-${model}`),
       "bulk-edit": objectifyForm(`edit-${model}-form`),
     },
     callback: function (number) {

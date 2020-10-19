@@ -332,7 +332,7 @@ class Server(Flask):
                     result = getattr(app, endpoint)(*args, **kwargs)
             except db.rbac_error:
                 result = {"alert": "Error 403 - Operation not allowed."}
-            except Exception as exc:
+            except Exception:
                 app.log("error", format_exc(), change_log=False)
                 result = {"alert": "Error 500 - Internal Server Error"}
             return jsonify(result)

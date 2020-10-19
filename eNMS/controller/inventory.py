@@ -73,7 +73,6 @@ class InventoryController(BaseController):
                     ),
                 )
             )
-        print(command, self.path, self.path / "terminal", environment)
         Popen(command, cwd=self.path / "terminal", env=environment)
         return {
             "device": device.name,

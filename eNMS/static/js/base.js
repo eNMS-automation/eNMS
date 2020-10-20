@@ -568,7 +568,7 @@ export function showTypePanel(type, id, mode) {
           },
         });
       } else if (mode == "bulk") {
-        panel.setHeaderTitle(`Edit all selected ${type} in bulk`);
+        panel.setHeaderTitle(`Edit all ${type} in table in bulk`);
         for (const property of Object.keys(formProperties[panel.id])) {
           $(`#${type}-edit-action`)
             .attr("onclick", `eNMS.table.bulkEdit('${type}')`)

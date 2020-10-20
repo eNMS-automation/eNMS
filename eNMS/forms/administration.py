@@ -100,23 +100,25 @@ def init_variable_forms(app):
 
     class UserForm(RbacForm):
         form_type = HiddenField(default="user")
-        description = StringField("Description")
-        groups = StringField("Groups")
-        is_admin = BooleanField(default=False)
         authentication = SelectField(
-            "Authentication Method",
+            "Authentication",
             choices=[
                 (method, values["display_name"])
                 for method, values in settings["authentication"]["methods"].items()
             ],
         )
+        password = PasswordField("Password")
+        description = StringField("Description")
+        groups = StringField("Groups")
+        is_admin = BooleanField(default=False)
+
         theme = SelectField(
             "Theme",
             choices=[
                 (theme, values["name"]) for theme, values in themes["themes"].items()
             ],
         )
-        password = PasswordField("Password")
+        
 
     @configure_relationships("users")
     class AccessForm(RbacForm):

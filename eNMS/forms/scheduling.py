@@ -33,11 +33,11 @@ class TaskForm(BaseForm):
     template = "object"
     form_type = HiddenField(default="task")
     id = HiddenField()
+    name = StringField("Name", [InputRequired()])
     scheduling_mode = SelectField(
         "Scheduling Mode",
         choices=(("cron", "Crontab Scheduling"), ("standard", "Standard Scheduling")),
     )
-    name = StringField("Name", [InputRequired()])
     description = StringField("Description")
     start_date = StringField("Start Date", type="date")
     end_date = StringField("End Date", type="date")

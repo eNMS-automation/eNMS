@@ -919,6 +919,7 @@ tables.task = class TaskTable extends Table {
     return [
       this.columnDisplay(),
       this.createNewButton(),
+      this.bulkEditButton(),
       this.searchTableButton(),
       this.clearSearchButton(),
       this.refreshTableButton(),

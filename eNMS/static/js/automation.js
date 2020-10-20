@@ -27,8 +27,8 @@ import {
   workflow,
 } from "./workflow.js";
 
-function openServicePanel() {
-  showTypePanel($("#service-type").val());
+function openServicePanel(bulk) {
+  showTypePanel($("#service-type").val(), null, bulk ? 'bulk' : null);
 }
 
 export function compare(type, instance) {

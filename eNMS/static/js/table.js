@@ -333,10 +333,14 @@ export class Table {
   }
 
   bulkEditButton() {
+    const showPanelFunction =
+      this.type == "service"
+        ? "automation.openServicePanel(true)"
+        : `base.showTypePanel('${this.type}', null, 'bulk')`;
     return `
       <button
         class="btn btn-primary"
-        onclick="eNMS.base.showTypePanel('${this.type}', null, 'bulk')"
+        onclick="eNMS.${showPanelFunction}"
         data-tooltip="Bulk Edit"
         type="button"
       >

@@ -568,12 +568,12 @@ export function showTypePanel(type, id, mode) {
           },
         });
       } else if (mode == "bulk") {
-        panel.setHeaderTitle(`Edit all ${type} in table in bulk`);
+        panel.setHeaderTitle(`Edit all ${type}s in table in bulk`);
         for (const property of Object.keys(formProperties[panel.id])) {
           $(`#${type}-edit-action`)
             .attr("onclick", `eNMS.table.bulkEdit('${type}')`)
             .text("Bulk Edit");
-          if (["form_type", "id", "name"].includes(property)) {
+          if (["name", "scoped_name", "type"].includes(property)) {
             $(`#${type}-${property}`).prop("readonly", true);
           } else {
             $(`label[for='${property}']`).after(`

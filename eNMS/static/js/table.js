@@ -527,6 +527,7 @@ tables.link = class LinkTable extends Table {
     return [
       this.columnDisplay(),
       this.createNewButton(),
+      this.bulkEditButton(),
       this.exportTableButton(),
       this.searchTableButton(),
       this.clearSearchButton(),
@@ -710,6 +711,7 @@ tables.service = class ServiceTable extends Table {
       >
         <select id="service-type" class="form-control"></select>
       </button>`,
+      this.bulkEditButton(),
       this.bulkDeletionButton(),
     ];
   }
@@ -987,6 +989,7 @@ tables.user = class UserTable extends Table {
     return [
       this.columnDisplay(),
       this.createNewButton(),
+      this.bulkEditButton(),
       this.exportTableButton(),
       this.searchTableButton(),
       this.clearSearchButton(),
@@ -1058,6 +1061,7 @@ tables.server = class ServerTable extends Table {
     return [
       this.columnDisplay(),
       this.createNewButton(),
+      this.bulkEditButton(),
       this.exportTableButton(),
       this.clearSearchButton(),
       this.refreshTableButton(),

@@ -494,12 +494,16 @@ class BaseController:
         return len(instances)
 
     def bulk_edit(self, table, **kwargs):
-        instances = self.filtering(table, bulk=True, form=kwargs["search"])
-        update_kwargs = {
+        instances = kwargs.pop("id").split("-")
+        kwargs = {
             property: value
-            for property, value in kwargs["bulk-edit"].items()
-            if kwargs["bulk-edit"].get(f"bulk-edit-{property}") == "on"
+            for property, value in kwargs.items()
+            if kwargs.get(f"bulk-edit-{property}")
         }
+        for instance_id in instances:
+            db.factory(table, id=instance_id, **kwargs)
+        return len(instances)
+
         for instance_id in instances:
             db.factory(table, id=instance_id, **update_kwargs)
         return len(instances)

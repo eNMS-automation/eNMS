@@ -558,25 +558,34 @@ export function showTypePanel(type, id, mode) {
           },
         });
       } else if (mode == "bulk") {
-        panel.setHeaderTitle(`Edit all ${type}s in table in bulk`);
-        for (const property of Object.keys(formProperties[panel.id])) {
-          $(`#${type}-edit-action`)
-            .attr("onclick", `eNMS.table.bulkEdit('${type}')`)
-            .text("Bulk Edit");
-          if (["name", "scoped_name", "type"].includes(property)) {
-            $(`#${type}-${property}`).prop("readonly", true);
-          } else {
-            $(`label[for='${property}']`).after(`
-              <div class="item" style='float:right; margin-left: 15px'>
-                <input
-                  id="bulk-edit-${property}"
-                  name="bulk-edit-${property}"
-                  type="checkbox"
-                />
-              </div>
-            `);
-          }
-        }
+        const table = type == "workflow" || type.includes("service") ? "service" : type;
+        call({
+          url: `/filtering/${table}`,
+          data: {form: serializeForm(`#search-form-${table}`), bulk: true},
+          callback: function (instances) {
+            $(`#${type}-id`).val(instances.join("-"));
+            $(`#${type}-scoped_name`).val("Bulk Edit");
+            panel.setHeaderTitle(`Edit all ${type}s in table in bulk`);
+            for (const property of Object.keys(formProperties[panel.id])) {
+              $(`#${type}-edit-action`)
+                .attr("onclick", `eNMS.table.bulkEdit('${type}')`)
+                .text("Bulk Edit");
+              if (["name", "scoped_name", "type"].includes(property)) {
+                $(`#${type}-${property}`).prop("readonly", true);
+              } else {
+                $(`label[for='${property}']`).after(`
+                  <div class="item" style='float:right; margin-left: 15px'>
+                    <input
+                      id="bulk-edit-${property}"
+                      name="bulk-edit-${property}"
+                      type="checkbox"
+                    />
+                  </div>
+                `);
+              }
+            }
+          },
+        });
       } else {
         panel.setHeaderTitle(`Create a New ${type}`);
         if (page == "workflow_builder" && creationMode == "create_service") {

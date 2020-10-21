@@ -1233,10 +1233,7 @@ function bulkEdit(model) {
   const table = model == "workflow" || model.includes("service") ? "service" : model;
   call({
     url: `/bulk_edit/${table}`,
-    data: {
-      search: serializeForm(`#search-form-${table}`),
-      "bulk-edit": serializeForm(`#edit-${model}-form`),
-    },
+    form: `edit-${model}-form`,
     callback: function (number) {
       refreshTable(table);
       $(`#${model}`).remove();

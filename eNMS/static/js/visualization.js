@@ -554,6 +554,12 @@ export function initView() {
 
 function update3dGraphData(graph, devices, links) {
   const nodesId = devices.map((node) => node.id);
+  let duplicates = {};
+  for (const link of links) {
+    const key1 = `${link.source_id}-${link.destination_id}`;
+    const key2 = `${link.destination_id}-${link.source_id}`;
+    duplicates[key1] = duplicates[key2] = (duplicates[key1] || 0) + 1;
+  }
   graph
     .graphData({
       nodes: devices,

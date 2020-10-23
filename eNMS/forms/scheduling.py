@@ -56,6 +56,8 @@ class TaskForm(BaseForm):
 
     def validate(self):
         valid_form = super().validate()
+        if self.name.data == "Bulk Edit":
+            return valid_form
         no_date = self.scheduling_mode.data == "standard" and not self.start_date.data
         if no_date:
             self.start_date.errors.append("A start date must be set.")

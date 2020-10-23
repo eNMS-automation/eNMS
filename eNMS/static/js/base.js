@@ -385,8 +385,8 @@ export function preprocessForm(panel, id, type, duplicate) {
     `).on("click", function () {
       const helpUrl = $(el).attr("help");
       openPanel({
-        name: `help-${$(el).attr("for")}`,
-        title: $(el).attr("for"),
+        name: `help-${$(el).attr("property")}`,
+        title: $(el).attr("property"),
         size: "600px auto",
         url: helpUrl.charAt(0) === "/" ? `..${helpUrl}` : `../help/${helpUrl}`,
         callback: function (helpPanel) {
@@ -564,7 +564,7 @@ export function showTypePanel(type, id, mode) {
           data: {form: serializeForm(`#search-form-${table}`), bulk: true},
           callback: function (instances) {
             $(`#${type}-id`).val(instances.join("-"));
-            $(`#${type}-scoped_name`).val("Bulk Edit");
+            $(`#${type}-scoped_name,#${type}-name`).val("Bulk Edit");
             panel.setHeaderTitle(`Edit all ${type}s in table in bulk`);
             for (const property of Object.keys(formProperties[panel.id])) {
               $(`#${type}-edit-action`)

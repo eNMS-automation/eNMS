@@ -119,7 +119,7 @@ class ServiceForm(BaseForm):
     content_match = StringField(
         "Content Match", widget=TextArea(), render_kw={"rows": 8}, substitution=True
     )
-    content_match_regex = BooleanField("Match content with Regular Expression")
+    content_match_regex = BooleanField('"Content Match" is a regular expression')
     dict_match = DictField("Dictionary to Match Against", substitution=True)
     negative_logic = BooleanField("Negative logic")
     delete_spaces_before_matching = BooleanField("Delete Spaces before Matching")

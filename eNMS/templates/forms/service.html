@@ -297,11 +297,11 @@
               <div class="panel-body" style="background-color: #fafafa;">
                 {% for property, values in form.custom_properties.items() %} {% set
                 label %} {% if "help" in values %}
-                <label help="{{ values['help'] }}" for="{{ property }}">
+                <label for="{{ property }}" help="{{ values['help'] }}" property="{{ property }}">
                   {{ values["pretty_name"] }}
                 </label>
                 {% else %}
-                <label>{{ values["pretty_name"] }}</label>
+                <label for="{{ property }}">{{ values["pretty_name"] }}</label>
                 {% endif %} {% endset %} {% if values["type"] == "boolean" %}
                 <fieldset>
                   <div class="item">
@@ -365,7 +365,7 @@
                 form[field_name].render_kw and "help" in form[field_name].render_kw %}
                 <label
                   help="{{ form[field_name].render_kw['help'] }}"
-                  for="{{ field_name }}"
+                  property="{{ field_name }}"
                 >
                   {{ form[field_name].label }}
                 </label>
@@ -669,7 +669,7 @@
                       type="checkbox"
                       value="y"
                     />
-                    <label>"Content Match" is a regular expression</label>
+                    {{ form.content_match_regex.label() }}
                   </div>
                 </fieldset>
                 {{ form.dict_match.label() }}

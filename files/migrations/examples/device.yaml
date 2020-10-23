@@ -140,17 +140,17 @@
   down: false
   icon: router
   ip_address: 192.168.56.50
-  last_configuration_duration: 6.308002s
+  last_configuration_duration: 5.858119s
   last_configuration_failure: Never
-  last_configuration_runtime: '2020-10-02 11:16:49.363284'
+  last_configuration_runtime: '2020-10-04 14:46:31.178365'
   last_configuration_status: Success
-  last_configuration_update: '2020-10-02 11:16:49.363284'
+  last_configuration_update: '2020-10-04 14:46:31.178365'
   last_modified: ''
-  last_operational_data_duration: 3.509847s
+  last_operational_data_duration: 3.294594s
   last_operational_data_failure: Never
-  last_operational_data_runtime: '2020-10-02 11:16:55.905709'
+  last_operational_data_runtime: '2020-10-04 14:46:37.127144'
   last_operational_data_status: Success
-  last_operational_data_update: '2020-10-02 11:16:55.905709'
+  last_operational_data_update: '2020-10-04 14:46:37.127144'
   last_specialized_data_duration: Never
   last_specialized_data_failure: Never
   last_specialized_data_runtime: Never

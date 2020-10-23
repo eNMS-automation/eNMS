@@ -578,7 +578,7 @@ function update3dGraphData(graph, devices, links) {
           return {
             source: link.source_id,
             target: link.destination_id,
-            curvature: duplicates[key] - 1 ? 0.5 : 0,
+            curvature: duplicates[key] > 2 ? 1 : duplicates[key] == 2 ? 0.2 : 0,
             rotation: curvature[link.id] ? angle : 0,
             value: 5,
             ...link,

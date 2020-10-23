@@ -278,3 +278,6 @@
     100G, destination: router11, last_modified: '2020-10-23 04:50:33.242347', location: france,
   model: '', name: europe-link35-3, public: false, source: router13, subtype: OTU2,
   type: link, vendor: Ciena}
+- {color: '#FF7C01', creator: admin, custom_property: CP, description: '', destination: router26,
+  last_modified: '2020-10-23 06:02:14.938665', location: '', model: '', name: atlantic-r26-boston-4-inverted,
+  public: false, source: Boston, subtype: '', type: link, vendor: ''}

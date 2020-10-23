@@ -316,7 +316,7 @@ Object.assign(action, {
   Clustered: () => displayNetwork({ withCluster: true }),
 });
 
-function displayNetwork({ initialization, noAlert, withCluster }) {
+function displayNetwork({ noAlert, withCluster }) {
   const maximumSize = visualization.logical.maximum_size;
   let data = {};
   for (let type of ["device", "link"]) {
@@ -549,7 +549,7 @@ export function initView() {
     initGeographicalFramework();
     $("#view-type").change(() => displayNetwork({ noAlert: true }));
   }
-  displayNetwork({ initialization: true, noAlert: true });
+  displayNetwork({ noAlert: true });
 }
 
 function update3dGraphData(graph, devices, links) {

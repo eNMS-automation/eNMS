@@ -118,7 +118,7 @@
                       type="checkbox"
                       value="y"
                     />
-                    <label>Public</label>
+                    {{ form.public.label() }}
                   </div>
                 </fieldset>
                 <fieldset class="readonly-when-run">
@@ -130,7 +130,7 @@
                       type="checkbox"
                       value="y"
                     />
-                    <label>Shared</label>
+                    {{ form.shared.label() }}
                   </div>
                 </fieldset>
                 <label for="workflows">Workflows</label>
@@ -168,7 +168,7 @@
                   {{ form.time_between_retries(id=form_type + '-time_between_retries',
                   class="form-control add-id") }}
                 </div>
-                <label>Maximum number of retries (loop prevention mechanism)</label>
+                {{ form.max_number_of_retries.label() }}
                 <div class="form-group">
                   {{ form.max_number_of_retries(id=form_type + '-max_number_of_retries',
                   class="form-control add-id") }}
@@ -186,7 +186,7 @@
                       class="add-id"
                       type="checkbox"
                     />
-                    <label>Disable Result Creation</label>
+                    {{ form.disable_result_creation.label() }}
                   </div>
                 </fieldset>
                 <fieldset>
@@ -198,7 +198,7 @@
                       class="add-id"
                       value="y"
                     />
-                    <label>Update pools after running</label>
+                    {{ form.update_pools_after_running.label() }}
                   </div>
                 </fieldset>
               </div>
@@ -468,7 +468,7 @@
                       class="add-id"
                       value="y"
                     />
-                    <label>Update target pools before running</label>
+                    {{ form.update_target_pools.label() }}
                   </div>
                 </fieldset>
                 <label>Device Query (define targets from a python query)</label>

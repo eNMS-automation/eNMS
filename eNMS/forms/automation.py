@@ -22,7 +22,7 @@ class ServiceForm(BaseForm):
     id = HiddenField()
     name = StringField("Name")
     type = StringField("Service Type")
-    shared = BooleanField("Shared Service")
+    shared = BooleanField("Shared")
     scoped_name = StringField("Scoped Name", [InputRequired()])
     description = StringField("Description")
     device_query = StringField(

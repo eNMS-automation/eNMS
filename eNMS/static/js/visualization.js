@@ -41,8 +41,6 @@ let viewer;
 let handler;
 let polylines;
 let labels;
-let selection = [];
-let selectionMode;
 
 function initGeographicalFramework() {
   dimension = visualization.geographical.default;
@@ -426,7 +424,6 @@ function onRightClick3d(click) {
 }
 
 function onClick3d(click) {
-  console.log(click)
   const instance = viewer.scene.pick(click.position);
   if (instance) {
     const isLink = typeof instance.id == "number";
@@ -546,12 +543,6 @@ export function initView() {
       url: `../form/${type}_filtering`,
       title: `${type.charAt(0).toUpperCase() + type.slice(1)} Filtering`,
     });
-  }
-  window.onkeyup = function(e) {
-    if (e.keyCode == 17) selectionMode = false;
-  }
-  window.onkeydown = function(e) {
-    if (e.keyCode == 17) selectionMode = true;
   }
   if (page == "logical_view") {
     create3dGraphNetwork("network");

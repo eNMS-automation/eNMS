@@ -332,10 +332,11 @@ export class Table {
   }
 
   bulkEditButton() {
+    const panelType = this.modelFiltering || this.type
     const showPanelFunction =
-      this.type == "service"
+      panelType == "service"
         ? "automation.openServicePanel(true)"
-        : `base.showTypePanel('${this.type}', null, 'bulk')`;
+        : `base.showTypePanel('${panelType}', null, 'bulk')`;
     return `
       <button
         class="btn btn-primary"
@@ -399,12 +400,12 @@ tables.device = class DeviceTable extends Table {
   get controls() {
     return [
       this.columnDisplay(),
+      this.refreshTableButton(),
+      this.searchTableButton(),
+      this.clearSearchButton(),
       this.createNewButton(),
       this.bulkEditButton(),
       this.exportTableButton(),
-      this.searchTableButton(),
-      this.clearSearchButton(),
-      this.refreshTableButton(),
       this.bulkDeletionButton(),
     ];
   }
@@ -412,13 +413,6 @@ tables.device = class DeviceTable extends Table {
   buttons(row) {
     return `
       <ul class="pagination pagination-lg" style="margin: 0px; width: 230px">
-        <li>
-          <button type="button" class="btn btn-sm btn-dark"
-          onclick="eNMS.inventory.showConnectionPanel(${row.instance})"
-          data-tooltip="Connection"
-            ><span class="glyphicon glyphicon-console"></span
-          ></button>
-        </li>
         <li>
           <button type="button" class="btn btn-sm btn-info"
           onclick="eNMS.inventory.showDeviceData(${row.instance})"
@@ -444,6 +438,13 @@ tables.device = class DeviceTable extends Table {
           onclick="eNMS.base.showTypePanel('device', '${row.id}', 'duplicate')"
           data-tooltip="Duplicate"
             ><span class="glyphicon glyphicon-duplicate"></span
+          ></button>
+        </li>
+        <li>
+          <button type="button" class="btn btn-sm btn-dark"
+          onclick="eNMS.inventory.showConnectionPanel(${row.instance})"
+          data-tooltip="Connection"
+            ><span class="glyphicon glyphicon-console"></span
           ></button>
         </li>
         ${this.deleteInstanceButton(row)}
@@ -494,7 +495,11 @@ tables.configuration = class ConfigurationTable extends Table {
         class="slider"
         style="width: 200px"
       >`,
+      this.refreshTableButton(),
       this.clearSearchButton(),
+      this.bulkEditButton(),
+      this.exportTableButton(),
+      this.bulkDeletionButton(),
     ];
   }
 

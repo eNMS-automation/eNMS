@@ -992,12 +992,12 @@ tables.user = class UserTable extends Table {
   get controls() {
     return [
       this.columnDisplay(),
+      this.refreshTableButton(),
+      this.searchTableButton(),
+      this.clearSearchButton(),
       this.createNewButton(),
       this.bulkEditButton(),
       this.exportTableButton(),
-      this.searchTableButton(),
-      this.clearSearchButton(),
-      this.refreshTableButton(),
       this.bulkDeletionButton(),
     ];
   }
@@ -1029,10 +1029,11 @@ tables.access = class AccessTable extends Table {
   get controls() {
     return [
       this.columnDisplay(),
-      this.createNewButton(),
+      this.refreshTableButton(),
       this.searchTableButton(),
       this.clearSearchButton(),
-      this.refreshTableButton(),
+      this.createNewButton(),
+      this.exportTableButton(),
       this.bulkDeletionButton(),
     ];
   }
@@ -1064,11 +1065,11 @@ tables.server = class ServerTable extends Table {
   get controls() {
     return [
       this.columnDisplay(),
+      this.refreshTableButton(),
+      this.clearSearchButton(),
       this.createNewButton(),
       this.bulkEditButton(),
       this.exportTableButton(),
-      this.clearSearchButton(),
-      this.refreshTableButton(),
       this.bulkDeletionButton(),
     ];
   }
@@ -1100,10 +1101,10 @@ tables.changelog = class ChangelogTable extends Table {
   get controls() {
     return [
       this.columnDisplay(),
+      this.refreshTableButton(),
+      this.clearSearchButton(),
       this.createNewButton(),
       this.exportTableButton(),
-      this.clearSearchButton(),
-      this.refreshTableButton(),
     ];
   }
 };

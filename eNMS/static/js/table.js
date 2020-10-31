@@ -336,7 +336,7 @@ export class Table {
     const showPanelFunction =
       panelType == "service"
         ? "automation.openServicePanel(true)"
-        : `base.showTypePanel('${panelType}', null, 'bulk')`;
+        : `base.showTypePanel('${panelType}', null, 'bulk', '${this.id}')`;
     return `
       <button
         class="btn btn-primary"
@@ -349,10 +349,11 @@ export class Table {
   }
 
   bulkDeletionButton() {
+    const type = this.modelFiltering || this.type;
     return `
       <button
         class="btn btn-danger"
-        onclick="eNMS.table.showBulkDeletionPanel('${this.id}', '${this.type}')"
+        onclick="eNMS.table.showBulkDeletionPanel('${this.id}', '${type}')"
         data-tooltip="Bulk Deletion"
         type="button"
       >
@@ -1235,10 +1236,9 @@ function bulkDeletion(tableId, model) {
   });
 }
 
-function bulkEdit(model) {
-  const table = model == "workflow" || model.includes("service") ? "service" : model;
+function bulkEdit(model, table) {
   call({
-    url: `/bulk_edit/${table}`,
+    url: `/bulk_edit/${model}`,
     form: `edit-${model}-form`,
     callback: function (number) {
       refreshTable(table);

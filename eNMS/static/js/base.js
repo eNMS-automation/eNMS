@@ -536,7 +536,7 @@ function configureServicePanel(type, id, mode) {
   }
 }
 
-export function showTypePanel(type, id, mode) {
+export function showTypePanel(type, id, mode, tableId) {
   openPanel({
     name: type,
     id: id,
@@ -561,14 +561,14 @@ export function showTypePanel(type, id, mode) {
         const table = type == "workflow" || type.includes("service") ? "service" : type;
         call({
           url: `/filtering/${table}`,
-          data: {form: serializeForm(`#search-form-${table}`), bulk: true},
+          data: {form: serializeForm(`#search-form-${tableId}`), bulk: true},
           callback: function (instances) {
             $(`#${type}-id`).val(instances.join("-"));
             $(`#${type}-scoped_name,#${type}-name`).val("Bulk Edit");
             panel.setHeaderTitle(`Edit all ${type}s in table in bulk`);
             for (const property of Object.keys(formProperties[panel.id])) {
               $(`#${type}-edit-action`)
-                .attr("onclick", `eNMS.table.bulkEdit('${type}')`)
+                .attr("onclick", `eNMS.table.bulkEdit('${type}', '${tableId}')`)
                 .text("Bulk Edit");
               if (["name", "scoped_name", "type"].includes(property)) {
                 $(`#${type}-${property}`).prop("readonly", true);

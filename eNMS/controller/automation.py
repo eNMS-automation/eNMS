@@ -477,6 +477,9 @@ class AutomationController(BaseController):
             "user": current_user.name,
         }
 
+    def run_services_on_targets(self, **kwargs):
+        print(kwargs)
+
     def save_positions(self, workflow_id, **kwargs):
         now, old_position = self.get_time(), None
         workflow = db.fetch("workflow", allow_none=True, id=workflow_id, rbac="edit")

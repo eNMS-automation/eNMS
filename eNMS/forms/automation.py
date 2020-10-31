@@ -341,8 +341,9 @@ class AddServiceForm(BaseForm):
     search = StringField()
 
 
-class RunServiceForm(BaseForm):
-    form_type = HiddenField(default="run_service")
+class RunServicesForm(BaseForm):
+    form_type = HiddenField(default="run_services")
+    template = "run_services"
     services = MultipleInstanceField("Services", model="service")
 
 

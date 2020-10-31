@@ -599,12 +599,21 @@ export function deleteCorruptedEdges() {
 
 function showRunServicePanel(device) {
   openPanel({
-    name: "run_service",
+    name: "run_services",
     title: `Run services on ${device.name}`,
     size: "900px 300px",
     id: device.id,
     callback: function () {
-      console.log("test");
+    },
+  });
+}
+
+function runServicesOnTargets(type, id) {
+  call({
+    url: "/run_services_on_targets",
+    form: `run_service-form-${id}`,
+    callback: function (result) {
+      runLogic(result);
     },
   });
 }
@@ -621,6 +630,7 @@ configureNamespace("automation", [
   parameterizedRun,
   pauseTask,
   resumeTask,
+  runServicesOnTargets,
   schedulerAction,
   showResult,
   showRunServicePanel,

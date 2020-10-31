@@ -1,0 +1,20 @@
+<form
+  id="run-services-form"
+  class="form-horizontal form-label-left add-id"
+  method="post"
+>
+  {{ form.hidden_tag() }}
+  <div class="modal-body">
+    {{ form.services(id="run_services-services", class="form-control add-id") }}
+    <br /><br />
+    <center>
+      <button
+        type="button"
+        class="btn btn-success add-id btn-id"
+        value="eNMS.automation.runServicesOnTargets"
+      >
+        Run
+      </button>
+    </center>
+  </div>
+</form>

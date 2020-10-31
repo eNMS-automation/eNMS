@@ -239,6 +239,7 @@
     "/rest/topology",
     "/result_log_deletion",
     "/run_service",
+    "/run_services_on_targets",
     "/save_file",
     "/save_visualization_parameters",
     "/save_pool_objects",

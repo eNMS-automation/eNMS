@@ -53,6 +53,7 @@ like with the scheduler to save the session via REST API. For this to work, admi
 two new environment variables: ENMS_USER and ENMS_PASSWORD (same as scheduler)
 - Add bulk deletion and bulk edit mechanism for tables
 - Add support for multiple parallel link display in logical view
+- Add "run service on targets mechanism" in device table and network visualization pages
 
 Version 3.22.4
 --------------

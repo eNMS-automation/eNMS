@@ -341,6 +341,11 @@ class AddServiceForm(BaseForm):
     search = StringField()
 
 
+class RunServiceForm(BaseForm):
+    form_type = HiddenField(default="run_service")
+    services = MultipleInstanceField("Services", model="service")
+
+
 class WorkflowTreeForm(BaseForm):
     form_type = HiddenField(default="workflow_tree")
     template = "workflow_tree"

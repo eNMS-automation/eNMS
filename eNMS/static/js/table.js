@@ -450,7 +450,7 @@ tables.device = class DeviceTable extends Table {
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-success"
-          onclick="eNMS.automation.runService('${row.id}')" data-tooltip="Run Service"
+          onclick="eNMS.automation.showRunServicePanel(${row.instance})" data-tooltip="Run Service"
             ><span class="glyphicon glyphicon-play"></span
           ></button>
         </li>

@@ -597,6 +597,18 @@ export function deleteCorruptedEdges() {
   });
 }
 
+function showRunServicePanel(device) {
+  openPanel({
+    name: "run_service",
+    title: `Run services on ${device.name}`,
+    size: "900px 300px",
+    id: device.id,
+    callback: function () {
+      console.log("test");
+    },
+  });
+}
+
 configureNamespace("automation", [
   compare,
   copyClipboard,
@@ -611,5 +623,6 @@ configureNamespace("automation", [
   resumeTask,
   schedulerAction,
   showResult,
+  showRunServicePanel,
   showRuntimePanel,
 ]);

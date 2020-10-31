@@ -558,9 +558,9 @@ export function showTypePanel(type, id, mode, tableId) {
           },
         });
       } else if (mode == "bulk") {
-        const table = type == "workflow" || type.includes("service") ? "service" : type;
+        const model = type == "workflow" || type.includes("service") ? "service" : type;
         call({
-          url: `/filtering/${table}`,
+          url: `/filtering/${tableId}`,
           data: {form: serializeForm(`#search-form-${tableId}`), bulk: true},
           callback: function (instances) {
             $(`#${type}-id`).val(instances.join("-"));
@@ -568,7 +568,7 @@ export function showTypePanel(type, id, mode, tableId) {
             panel.setHeaderTitle(`Edit all ${type}s in table in bulk`);
             for (const property of Object.keys(formProperties[panel.id])) {
               $(`#${type}-edit-action`)
-                .attr("onclick", `eNMS.table.bulkEdit('${type}', '${tableId}')`)
+                .attr("onclick", `eNMS.table.bulkEdit('${type}', '${model}', '${tableId}')`)
                 .text("Bulk Edit");
               if (["name", "scoped_name", "type"].includes(property)) {
                 $(`#${type}-${property}`).prop("readonly", true);

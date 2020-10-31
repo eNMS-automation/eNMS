@@ -504,10 +504,6 @@ class BaseController:
             db.factory(table, id=instance_id, **kwargs)
         return len(instances)
 
-        for instance_id in instances:
-            db.factory(table, id=instance_id, **update_kwargs)
-        return len(instances)
-
     def get_time(self):
         return str(datetime.now())
 

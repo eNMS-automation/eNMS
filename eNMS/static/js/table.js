@@ -1236,13 +1236,13 @@ function bulkDeletion(tableId, model) {
   });
 }
 
-function bulkEdit(model, table) {
+function bulkEdit(formId, model, table) {
   call({
     url: `/bulk_edit/${model}`,
-    form: `edit-${model}-form`,
+    form: `edit-${formId}-form`,
     callback: function (number) {
       refreshTable(table);
-      $(`#${model}`).remove();
+      $(`#${formId}`).remove();
       notify(`${number} items modified.`, "success", 5, true);
     },
   });

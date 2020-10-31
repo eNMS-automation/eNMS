@@ -703,7 +703,6 @@ tables.service = class ServiceTable extends Table {
       >
         <span class="glyphicon glyphicon-chevron-right"></span>
       </a>`,
-      this.exportTableButton(),
       `
       <button
         class="btn btn-primary"
@@ -721,6 +720,7 @@ tables.service = class ServiceTable extends Table {
         <select id="service-type" class="form-control"></select>
       </button>`,
       this.bulkEditButton(),
+      this.exportTableButton(),
       this.bulkDeletionButton(),
     ];
   }

@@ -745,19 +745,6 @@ tables.service = class ServiceTable extends Table {
           </button>
         </li>
         <li>
-          <button type="button" class="btn btn-sm btn-success"
-          onclick="eNMS.automation.normalRun('${row.id}')" data-tooltip="Run"
-            ><span class="glyphicon glyphicon-play"></span
-          ></button>
-        </li>
-        <li>
-          <button type="button" class="btn btn-sm btn-success"
-          onclick="eNMS.base.showTypePanel('${row.type}', '${row.id}', 'run')"
-          data-tooltip="Parameterized Run"
-            ><span class="glyphicon glyphicon-play-circle"></span
-          ></button>
-        </li>
-        <li>
           <button
             type="button"
             class="btn btn-sm btn-primary"
@@ -769,6 +756,19 @@ tables.service = class ServiceTable extends Table {
           <button type="button" class="btn btn-sm btn-primary"
           onclick="eNMS.automation.exportService('${row.id}')" data-tooltip="Export"
             ><span class="glyphicon glyphicon-upload"></span
+          ></button>
+        </li>
+        <li>
+          <button type="button" class="btn btn-sm btn-success"
+          onclick="eNMS.automation.normalRun('${row.id}')" data-tooltip="Run"
+            ><span class="glyphicon glyphicon-play"></span
+          ></button>
+        </li>
+        <li>
+          <button type="button" class="btn btn-sm btn-success"
+          onclick="eNMS.base.showTypePanel('${row.type}', '${row.id}', 'run')"
+          data-tooltip="Parameterized Run"
+            ><span class="glyphicon glyphicon-play-circle"></span
           ></button>
         </li>
         ${this.deleteInstanceButton(row)}
@@ -927,11 +927,9 @@ tables.task = class TaskTable extends Table {
   get controls() {
     return [
       this.columnDisplay(),
-      this.createNewButton(),
-      this.bulkEditButton(),
+      this.refreshTableButton(),
       this.searchTableButton(),
       this.clearSearchButton(),
-      this.refreshTableButton(),
       ` <button
         class="btn btn-info"
         onclick="eNMS.automation.displayCalendar('task')"
@@ -939,8 +937,10 @@ tables.task = class TaskTable extends Table {
         type="button"
       >
         <span class="glyphicon glyphicon-calendar"></span>
-      </button>
-      <button
+      </button>`,
+      this.createNewButton(),
+      this.bulkEditButton(),
+      ` <button
         type="button"
         class="btn btn-success"
         onclick="eNMS.automation.schedulerAction('resume')"
@@ -1143,10 +1143,10 @@ tables.event = class EventTable extends Table {
   get controls() {
     return [
       this.columnDisplay(),
+      this.refreshTableButton(),
+      this.clearSearchButton(),
       this.createNewButton(),
       this.exportTableButton(),
-      this.clearSearchButton(),
-      this.refreshTableButton(),
       this.bulkDeletionButton(),
     ];
   }

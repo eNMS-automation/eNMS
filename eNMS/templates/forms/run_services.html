@@ -1,9 +1,10 @@
 <form
-  id="run-services-form"
+  id="run_services-form"
   class="form-horizontal form-label-left add-id"
   method="post"
 >
   {{ form.hidden_tag() }}
+  <input type="hidden" name="targets" id="targets" class="add-id"/>
   <div class="modal-body">
     {{ form.services(id="run_services-services", class="form-control add-id") }}
     <br /><br />

@@ -604,14 +604,15 @@ function showRunServicePanel(device) {
     size: "900px 300px",
     id: device.id,
     callback: function () {
+      $(`#targets-${device.id}`).val(device.id);
     },
   });
 }
 
-function runServicesOnTargets(type, id) {
+function runServicesOnTargets(id) {
   call({
     url: "/run_services_on_targets",
-    form: `run_service-form-${id}`,
+    form: `run_services-form-${id}`,
     callback: function (result) {
       runLogic(result);
     },

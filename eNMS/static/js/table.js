@@ -535,12 +535,12 @@ tables.link = class LinkTable extends Table {
   get controls() {
     return [
       this.columnDisplay(),
+      this.refreshTableButton(),
+      this.searchTableButton(),
+      this.clearSearchButton(),
       this.createNewButton(),
       this.bulkEditButton(),
       this.exportTableButton(),
-      this.searchTableButton(),
-      this.clearSearchButton(),
-      this.refreshTableButton(),
       this.bulkDeletionButton(),
     ];
   }
@@ -580,6 +580,9 @@ tables.pool = class PoolTable extends Table {
   get controls() {
     return [
       this.columnDisplay(),
+      this.refreshTableButton(),
+      this.searchTableButton(),
+      this.clearSearchButton(),
       this.createNewButton(),
       this.exportTableButton(),
       ` <button
@@ -590,9 +593,6 @@ tables.pool = class PoolTable extends Table {
       >
         <span class="glyphicon glyphicon-flash"></span>
       </button>`,
-      this.searchTableButton(),
-      this.clearSearchButton(),
-      this.refreshTableButton(),
       this.bulkDeletionButton(),
     ];
   }

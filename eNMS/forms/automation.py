@@ -345,7 +345,7 @@ class AddServiceForm(BaseForm):
 class RunServiceForm(BaseForm):
     form_type = HiddenField(default="run_service")
     template = "run_service"
-    services = InstanceField("Services", model="service")
+    service = InstanceField("Services", model="service")
 
 
 class WorkflowTreeForm(BaseForm):

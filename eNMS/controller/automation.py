@@ -477,7 +477,7 @@ class AutomationController(BaseController):
             "user": current_user.name,
         }
 
-    def run_services_on_targets(self, **kwargs):
+    def run_service_on_targets(self, **kwargs):
         print(kwargs)
 
     def save_positions(self, workflow_id, **kwargs):

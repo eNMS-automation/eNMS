@@ -5,14 +5,15 @@ from eNMS import app
 from eNMS.forms import BaseForm
 from eNMS.forms.fields import (
     BooleanField,
+    DictField,
     FloatField,
     HiddenField,
+    InstanceField,
     IntegerField,
-    StringField,
-    DictField,
     MultipleInstanceField,
     PasswordField,
     SelectField,
+    StringField,
 )
 
 
@@ -341,10 +342,10 @@ class AddServiceForm(BaseForm):
     search = StringField()
 
 
-class RunServicesForm(BaseForm):
-    form_type = HiddenField(default="run_services")
-    template = "run_services"
-    services = MultipleInstanceField("Services", model="service")
+class RunServiceForm(BaseForm):
+    form_type = HiddenField(default="run_service")
+    template = "run_service"
+    services = InstanceField("Services", model="service")
 
 
 class WorkflowTreeForm(BaseForm):

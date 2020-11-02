@@ -597,17 +597,17 @@ export function deleteCorruptedEdges() {
   });
 }
 
-export function showRunServicePanel({instance, bulk, type}) {
-  const title = bulk ? `all ${type}s in table` : `${instance.type} '${instance.name}'`;
-  const panelId = bulk ? "bulk" : instance.id;
+export function showRunServicePanel({instance, type}) {
+  const title = type ? `all ${type}s in table` : `${instance.type} '${instance.name}'`;
+  const panelId = type || instance.id;
   openPanel({
     name: "run_service",
     title: `Run service on ${title}`,
     size: "900px 300px",
     id: panelId,
     callback: function () {
-      $(`#targets-type-${panelId}`).val(bulk ? type : instance.type);
-      if (bulk) {
+      $(`#targets-type-${panelId}`).val(type || instance.type);
+      if (type) {
         call({
           url: `/filtering/${type}`,
           data: {form: serializeForm(`#search-form-${type}`), bulk: true},

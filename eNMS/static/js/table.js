@@ -410,8 +410,8 @@ tables.device = class DeviceTable extends Table {
       ` <button
         type="button"
         class="btn btn-success"
-        onclick="eNMS.automation.showRunServicePanel({bulk: true})"
-        data-tooltip="Resume all tasks"
+        onclick="eNMS.automation.showRunServicePanel({bulk: true, type: 'device'})"
+        data-tooltip="Run services on all devices in table"
       >
         <span class="glyphicon glyphicon-play"></span>
       </button>`,
@@ -606,6 +606,14 @@ tables.pool = class PoolTable extends Table {
         type="button"
       >
         <span class="glyphicon glyphicon-flash"></span>
+      </button>`,
+      ` <button
+        type="button"
+        class="btn btn-success"
+        onclick="eNMS.automation.showRunServicePanel({bulk: true, type: 'pool'})"
+        data-tooltip="Run services on all pools in table"
+      >
+        <span class="glyphicon glyphicon-play"></span>
       </button>`,
       this.bulkDeletionButton(),
     ];

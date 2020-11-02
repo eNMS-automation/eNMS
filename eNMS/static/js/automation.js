@@ -597,16 +597,16 @@ export function deleteCorruptedEdges() {
 }
 
 function showRunServicePanel({instance, bulk, type}) {
-  const title = bulk ? "all instances in table" : `${instance.type} '${instance.name}'`;
-  const suffix = instance ? `-${instance.id}` : "";
+  const title = bulk ? `all ${type}s in table` : `${instance.type} '${instance.name}'`;
+  const panelId = bulk ? "bulk" : instance.id;
   openPanel({
     name: "run_service",
     title: `Run service on ${title}`,
     size: "900px 300px",
-    id: instance?.id,
+    id: panelId,
     callback: function () {
-      $(`#targets${suffix}`).val(instance?.id);
-      $(`#targets-type${suffix}`).val(instance?.type || type);
+      $(`#targets-${panelId}`).val("");
+      $(`#targets-type-${panelId}`).val(bulk ? type : instance.type);
     },
   });
 }

@@ -596,15 +596,17 @@ export function deleteCorruptedEdges() {
   });
 }
 
-function showRunServicePanel({instance, bulk}) {
+function showRunServicePanel({instance, bulk, type}) {
+  const title = bulk ? "all instances in table" : `${instance.type} '${instance.name}'`;
+  const suffix = instance ? `-${instance.id}` : "";
   openPanel({
     name: "run_service",
-    title: `Run service on ${instance.type} '${instance.name}'`,
+    title: `Run service on ${title}`,
     size: "900px 300px",
-    id: instance.id,
+    id: instance?.id,
     callback: function () {
-      $(`#targets-${instance.id}`).val(instance.id);
-      $(`#targets-type-${instance.id}`).val(instance.type);
+      $(`#targets${suffix}`).val(instance?.id);
+      $(`#targets-type${suffix}`).val(instance?.type || type);
     },
   });
 }

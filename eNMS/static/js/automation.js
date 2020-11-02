@@ -204,7 +204,7 @@ function showResult(id) {
   });
 }
 
-export const showRuntimePanel = function (type, service, runtime, table) {
+export const showRuntimePanel = function (type, service, runtime, table, newRuntime) {
   const displayFunction =
     type == "logs"
       ? displayLogs
@@ -217,9 +217,8 @@ export const showRuntimePanel = function (type, service, runtime, table) {
   call({
     url: `/get_runtimes/${type}/${service.id}`,
     callback: (runtimes) => {
-      if (!runtimes.length) {
-        return notify(`No ${type} yet.`, "error", 5);
-      }
+      if (newRuntime) runtimes.push([runtime, runtime]);
+      if (!runtimes.length) return notify(`No ${type} yet.`, "error", 5);
       let content;
       if (panelType == "logs") {
         content = `
@@ -451,7 +450,7 @@ function parameterizedRun(type, id) {
 
 export function runLogic(result) {
   const service = result.service.superworkflow || result.service;
-  showRuntimePanel("logs", service, result.runtime);
+  showRuntimePanel("logs", service, result.runtime, undefined, true);
   notify(`Service '${service.name}' started.`, "success", 5, true);
   if (page == "workflow_builder" && workflow) {
     if (service != result.service) {

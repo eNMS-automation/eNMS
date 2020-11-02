@@ -479,7 +479,8 @@ class AutomationController(BaseController):
 
     def run_service_on_targets(self, **kwargs):
         return self.run_service(
-            kwargs["service"], **{f"target_{kwargs['type']}s": [kwargs["targets"]]}
+            kwargs["service"],
+            **{f"target_{kwargs['type']}s": kwargs["targets"].split("-")},
         )
 
     def save_positions(self, workflow_id, **kwargs):

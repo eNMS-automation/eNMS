@@ -596,14 +596,14 @@ export function deleteCorruptedEdges() {
   });
 }
 
-function showRunServicePanel(device) {
+function showRunServicePanel(instance) {
   openPanel({
     name: "run_service",
-    title: `Run service on ${device.name}`,
+    title: `Run service on ${instance.type} '${instance.name}'`,
     size: "900px 300px",
-    id: device.id,
+    id: instance.id,
     callback: function () {
-      $(`#targets-${device.id}`).val(device.id);
+      $(`#targets-${instance.id}`).val(instance.id);
     },
   });
 }

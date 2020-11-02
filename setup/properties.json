@@ -452,7 +452,7 @@
       },
       {
         "data": "buttons",
-        "width": "250px",
+        "width": "270px",
         "orderable": false,
         "export": false
       }

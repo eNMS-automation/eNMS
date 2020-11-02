@@ -605,7 +605,7 @@ tables.pool = class PoolTable extends Table {
 
   buttons(row) {
     return `
-      <ul class="pagination pagination-lg" style="margin: 0px; width: 230px">
+      <ul class="pagination pagination-lg" style="margin: 0px; width: 270px">
         <li>
           <button type="button" class="btn btn-sm btn-info"
           onclick="eNMS.visualization.showPoolView('${row.id}')"
@@ -638,6 +638,12 @@ tables.pool = class PoolTable extends Table {
           onclick="eNMS.base.showTypePanel('pool', '${row.id}', 'duplicate')"
           data-tooltip="Duplicate"
             ><span class="glyphicon glyphicon-duplicate"></span
+          ></button>
+        </li>
+        <li>
+          <button type="button" class="btn btn-sm btn-success"
+          onclick="eNMS.automation.showRunServicePanel(${row.instance})" data-tooltip="Run Service"
+            ><span class="glyphicon glyphicon-play"></span
           ></button>
         </li>
         ${this.deleteInstanceButton(row)}

@@ -4,7 +4,7 @@ action: false
 page: false
 serviceTypes: false
 Set: false
-themes: false
+theme: false
 vis: false
 */
 

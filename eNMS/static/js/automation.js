@@ -604,6 +604,7 @@ function showRunServicePanel(instance) {
     id: instance.id,
     callback: function () {
       $(`#targets-${instance.id}`).val(instance.id);
+      $(`#targets-type-${instance.id}`).val(instance.type);
     },
   });
 }

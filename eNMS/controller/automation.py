@@ -478,7 +478,9 @@ class AutomationController(BaseController):
         }
 
     def run_service_on_targets(self, **kwargs):
-        return self.run_service(kwargs["service"], target_devices=[kwargs["targets"]])
+        return self.run_service(
+            kwargs["service"], **{f"target_{kwargs['type']}s": [kwargs["targets"]]}
+        )
 
     def save_positions(self, workflow_id, **kwargs):
         now, old_position = self.get_time(), None

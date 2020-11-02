@@ -118,7 +118,6 @@ def init_variable_forms(app):
                 (theme, values["name"]) for theme, values in themes["themes"].items()
             ],
         )
-        
 
     @configure_relationships("users")
     class AccessForm(RbacForm):

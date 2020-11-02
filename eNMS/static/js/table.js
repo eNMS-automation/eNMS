@@ -332,7 +332,7 @@ export class Table {
   }
 
   bulkEditButton() {
-    const panelType = this.modelFiltering || this.type
+    const panelType = this.modelFiltering || this.type;
     const showPanelFunction =
       panelType == "service"
         ? "automation.openServicePanel(true)"

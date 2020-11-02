@@ -527,7 +527,7 @@ export function initView() {
     Properties: (o) => showTypePanel(o.type, o.id),
     Connect: (d) => showConnectionPanel(d),
     Configuration: (d) => showDeviceData(d),
-    "Run Service": (d) => showRunServicePanel({instance: d}),
+    "Run Service": (d) => showRunServicePanel({ instance: d }),
   });
   for (let type of ["device", "link"]) {
     createTooltip({
@@ -576,7 +576,7 @@ function update3dGraphData(graph, devices, links) {
         )
         .map((link) => {
           const key = `${link.destination_id}-${link.source_id}`;
-          const angle = Math.PI * 2 * curvature[link.id] / duplicates[key];
+          const angle = (Math.PI * 2 * curvature[link.id]) / duplicates[key];
           return {
             source: link.source_id,
             target: link.destination_id,
@@ -584,8 +584,8 @@ function update3dGraphData(graph, devices, links) {
             rotation: curvature[link.id] ? angle : 0,
             value: 5,
             ...link,
-          }
-        })
+          };
+        }),
     })
     .refresh();
 }

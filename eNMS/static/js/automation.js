@@ -29,7 +29,7 @@ import {
 } from "./workflow.js";
 
 function openServicePanel(bulk) {
-  showTypePanel($("#service-type").val(), null, bulk ? 'bulk' : null, "service");
+  showTypePanel($("#service-type").val(), null, bulk ? "bulk" : null, "service");
 }
 
 export function compare(type, instance) {
@@ -597,7 +597,7 @@ export function deleteCorruptedEdges() {
   });
 }
 
-export function showRunServicePanel({instance, type}) {
+export function showRunServicePanel({ instance, type }) {
   const title = type ? `all ${type}s in table` : `${instance.type} '${instance.name}'`;
   const panelId = type || instance.id;
   openPanel({
@@ -610,7 +610,7 @@ export function showRunServicePanel({instance, type}) {
       if (type) {
         call({
           url: `/filtering/${type}`,
-          data: {form: serializeForm(`#search-form-${type}`), bulk: true},
+          data: { form: serializeForm(`#search-form-${type}`), bulk: true },
           callback: function (instances) {
             $(`#targets-${panelId}`).val(instances.join("-"));
           },

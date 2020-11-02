@@ -297,7 +297,11 @@
               <div class="panel-body" style="background-color: #fafafa;">
                 {% for property, values in form.custom_properties.items() %} {% set
                 label %} {% if "help" in values %}
-                <label for="{{ property }}" help="{{ values['help'] }}" property="{{ property }}">
+                <label
+                  for="{{ property }}"
+                  help="{{ values['help'] }}"
+                  property="{{ property }}"
+                >
                   {{ values["pretty_name"] }}
                 </label>
                 {% else %}

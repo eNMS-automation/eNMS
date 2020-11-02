@@ -321,7 +321,7 @@ function displayNetwork({ noAlert, withCluster }) {
   const maximumSize = visualization.logical.maximum_size;
   let data = {};
   for (let type of ["device", "link"]) {
-    let form = serializeForm(`#${type}-filtering-form`);
+    let form = serializeForm(`#search-form-${type}`);
     if (!form.pools) form.pools = defaultPools.map((p) => p.id);
     data[type] = { form: form };
   }
@@ -535,7 +535,7 @@ export function initView() {
       persistent: true,
       name: `${type}_filtering`,
       target: `#${type}-filtering`,
-      container: `#${type}-filtering-form`,
+      container: `#search-form-${type}`,
       size: "700 400",
       position: {
         my: "center-top",

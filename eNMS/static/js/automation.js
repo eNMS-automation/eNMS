@@ -15,6 +15,7 @@ import {
   configureNamespace,
   notify,
   openPanel,
+  serializeForm,
   showTypePanel,
 } from "./base.js";
 import { tables } from "./table.js";
@@ -605,8 +606,18 @@ function showRunServicePanel({instance, bulk, type}) {
     size: "900px 300px",
     id: panelId,
     callback: function () {
-      $(`#targets-${panelId}`).val("");
       $(`#targets-type-${panelId}`).val(bulk ? type : instance.type);
+      if (bulk) {
+        call({
+          url: `/filtering/${type}`,
+          data: {form: serializeForm(`#search-form-${type}`), bulk: true},
+          callback: function (instances) {
+            $(`#targets-${panelId}`).val(instances.join("-"));
+          },
+        });
+      } else {
+        $(`#targets-${panelId}`).val(instance.id);
+      }
     },
   });
 }

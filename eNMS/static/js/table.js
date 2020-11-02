@@ -407,6 +407,14 @@ tables.device = class DeviceTable extends Table {
       this.createNewButton(),
       this.bulkEditButton(),
       this.exportTableButton(),
+      ` <button
+        type="button"
+        class="btn btn-success"
+        onclick="eNMS.automation.showRunServicePanel({bulk: true})"
+        data-tooltip="Resume all tasks"
+      >
+        <span class="glyphicon glyphicon-play"></span>
+      </button>`,
       this.bulkDeletionButton(),
     ];
   }
@@ -450,9 +458,9 @@ tables.device = class DeviceTable extends Table {
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-success"
-          onclick="eNMS.automation.showRunServicePanel(${row.instance})" data-tooltip="Run Service"
-            ><span class="glyphicon glyphicon-play"></span
-          ></button>
+          onclick="eNMS.automation.showRunServicePanel({instance: ${row.instance}})"
+          data-tooltip="Run Service"><span class="glyphicon glyphicon-play">
+          </span></button>
         </li>
         ${this.deleteInstanceButton(row)}
       </ul>`;
@@ -642,9 +650,9 @@ tables.pool = class PoolTable extends Table {
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-success"
-          onclick="eNMS.automation.showRunServicePanel(${row.instance})" data-tooltip="Run Service"
-            ><span class="glyphicon glyphicon-play"></span
-          ></button>
+          onclick="eNMS.automation.showRunServicePanel({instance: ${row.instance}})"
+          data-tooltip="Run Service"><span class="glyphicon glyphicon-play">
+          </span></button>
         </li>
         ${this.deleteInstanceButton(row)}
       </ul>

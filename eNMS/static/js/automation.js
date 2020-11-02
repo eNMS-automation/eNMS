@@ -596,7 +596,7 @@ export function deleteCorruptedEdges() {
   });
 }
 
-function showRunServicePanel(instance) {
+function showRunServicePanel({instance, bulk}) {
   openPanel({
     name: "run_service",
     title: `Run service on ${instance.type} '${instance.name}'`,

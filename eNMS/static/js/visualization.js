@@ -23,6 +23,7 @@ import {
   openPanel,
 } from "./base.js";
 import { showConnectionPanel, showDeviceData } from "./inventory.js";
+import { showRunServicePanel } from "./automation.js";
 
 let graph;
 let dimension;
@@ -526,6 +527,7 @@ export function initView() {
     Properties: (o) => showTypePanel(o.type, o.id),
     Connect: (d) => showConnectionPanel(d),
     Configuration: (d) => showDeviceData(d),
+    "Run Service": (d) => showRunServicePanel({instance: d}),
   });
   for (let type of ["device", "link"]) {
     createTooltip({

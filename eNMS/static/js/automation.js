@@ -597,7 +597,7 @@ export function deleteCorruptedEdges() {
   });
 }
 
-function showRunServicePanel({instance, bulk, type}) {
+export function showRunServicePanel({instance, bulk, type}) {
   const title = bulk ? `all ${type}s in table` : `${instance.type} '${instance.name}'`;
   const panelId = bulk ? "bulk" : instance.id;
   openPanel({

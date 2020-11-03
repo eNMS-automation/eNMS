@@ -796,11 +796,6 @@ class Run(AbstractBase):
                     self.log("error", str(exc), device)
                     result = "\n".join(format_exc().splitlines())
                     results = {"success": False, "result": result}
-                if device and (
-                    getattr(self, "close_connection", False)
-                    or self.runtime == self.parent_runtime
-                ):
-                    self.close_device_connection(device.name)
                 self.convert_result(results)
                 if "success" not in results:
                     results["success"] = True
@@ -878,6 +873,11 @@ class Run(AbstractBase):
             self.log("error", formatted_error, device)
         results["duration"] = str(datetime.now().replace(microsecond=0) - start)
         if device:
+            if (
+                getattr(self, "close_connection", False)
+                or self.runtime == self.parent_runtime
+            ):
+                self.close_device_connection(device.name)
             status = "success" if results["success"] else "failure"
             self.write_state(f"progress/device/{status}", 1, "increment")
             self.create_result(

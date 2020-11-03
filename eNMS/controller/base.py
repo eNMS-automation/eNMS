@@ -117,7 +117,6 @@ class BaseController:
         self.init_forms()
         if not db.fetch("user", allow_none=True, name="admin"):
             self.create_admin_user()
-            db.session.commit()
             self.migration_import(
                 name=self.settings["app"].get("startup_migration", "default"),
                 import_export_types=db.import_export_models,
@@ -150,7 +149,7 @@ class BaseController:
         )
 
     def create_admin_user(self):
-        admin = db.factory("user", name="admin", is_admin=True)
+        admin = db.factory("user", name="admin", is_admin=True, commit=True)
         if not admin.password:
             admin.update(password="admin")
 

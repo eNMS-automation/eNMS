@@ -54,6 +54,8 @@ two new environment variables: ENMS_USER and ENMS_PASSWORD (same as scheduler)
 - Add bulk deletion and bulk edit mechanism for tables
 - Add support for multiple parallel link display in logical view
 - Add "run service on targets mechanism" in device table and network visualization pages
+- Fix bug connection not cached when using iteration values with a standalone service
+- Fix bug when exporting table to .csv - column shift if comma in property value
 
 Version 3.22.4
 --------------

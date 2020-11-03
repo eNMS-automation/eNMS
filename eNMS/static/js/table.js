@@ -171,7 +171,7 @@ export class Table {
       Object.keys(instance).forEach((key) => {
         if (!visibleColumns.includes(key)) delete instance[key];
       });
-      return visibleColumns.map((column) => instance[column]);
+      return visibleColumns.map((column) => `"${instance[column]}"`);
     });
     downloadFile(
       this.type,

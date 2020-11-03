@@ -18,12 +18,8 @@ class Object(AbstractBase):
     type = db.Column(db.SmallString)
     __mapper_args__ = {"polymorphic_identity": "object", "polymorphic_on": type}
     id = db.Column(Integer, primary_key=True)
-<<<<<<< HEAD
     creator = db.Column(db.SmallString)
-    public = db.Column(Boolean)
-=======
     public = db.Column(Boolean, default=False)
->>>>>>> master
     last_modified = db.Column(db.TinyString, info={"log_change": False})
     subtype = db.Column(db.SmallString)
     description = db.Column(db.SmallString)

@@ -14,11 +14,11 @@ class GitService(Service):
     pretty_name = "Git Action"
     id = db.Column(Integer, ForeignKey("service.id"), primary_key=True)
     git_repository = db.Column(db.SmallString)
-    relative_path = db.Column(Boolean)
-    pull = db.Column(Boolean)
-    add_commit = db.Column(Boolean)
+    relative_path = db.Column(Boolean, default=False)
+    pull = db.Column(Boolean, default=False)
+    add_commit = db.Column(Boolean, default=False)
     commit_message = db.Column(db.LargeString)
-    push = db.Column(Boolean)
+    push = db.Column(Boolean, default=False)
 
     __mapper_args__ = {"polymorphic_identity": "git_service"}
 

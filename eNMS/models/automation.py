@@ -52,7 +52,7 @@ class Service(AbstractBase):
     __mapper_args__ = {"polymorphic_identity": "service", "polymorphic_on": type}
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.SmallString, unique=True)
-    public = db.Column(Boolean)
+    public = db.Column(Boolean, default=False)
     shared = db.Column(Boolean, default=False)
     scoped_name = db.Column(db.SmallString, index=True)
     last_modified = db.Column(db.TinyString, info={"log_change": False})
@@ -61,7 +61,7 @@ class Service(AbstractBase):
     time_between_retries = db.Column(Integer, default=10)
     max_number_of_retries = db.Column(Integer, default=100)
     positions = db.Column(db.Dict, info={"log_change": False})
-    disable_result_creation = db.Column(Boolean)
+    disable_result_creation = db.Column(Boolean, default=False)
     tasks = relationship("Task", back_populates="service", cascade="all,delete")
     events = relationship("Event", back_populates="service", cascade="all,delete")
     vendor = db.Column(db.SmallString)

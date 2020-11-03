@@ -31,7 +31,7 @@ class User(AbstractBase, UserMixin):
     name = db.Column(db.SmallString, unique=True)
     description = db.Column(db.SmallString)
     groups = db.Column(db.SmallString)
-    is_admin = db.Column(Boolean)
+    is_admin = db.Column(Boolean, default=False)
     email = db.Column(db.SmallString)
     password = db.Column(db.SmallString)
     authentication = db.Column(db.TinyString)

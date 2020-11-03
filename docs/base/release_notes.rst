@@ -56,6 +56,8 @@ two new environment variables: ENMS_USER and ENMS_PASSWORD (same as scheduler)
 - Add "run service on targets mechanism" in device table and network visualization pages
 - Fix bug connection not cached when using iteration values with a standalone service
 - Fix bug when exporting table to .csv - column shift if comma in property value
+- When scheduling a task, the creator of the service run is not properly set to the user who scheduled
+the task instead of the admin user.
 
 Version 3.22.4
 --------------

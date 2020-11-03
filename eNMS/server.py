@@ -519,7 +519,7 @@ class Server(Flask):
                 task = db.fetch("task", rbac="schedule", id=request.get_json())
                 data = {
                     "trigger": "Scheduler",
-                    "creator": request.authorization["username"],
+                    "creator": task.last_scheduled_by,
                     "runtime": app.get_time(),
                     "task": task.id,
                     **task.initial_payload,

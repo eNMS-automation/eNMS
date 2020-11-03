@@ -1,3 +1,4 @@
+from flask_login import current_user
 from functools import wraps
 from re import search
 from requests import get, post
@@ -22,6 +23,7 @@ class Task(AbstractBase):
     name = db.Column(db.SmallString, unique=True)
     description = db.Column(db.SmallString)
     creator = db.Column(db.SmallString)
+    last_scheduled_by = db.Column(db.SmallString)
     scheduling_mode = db.Column(db.TinyString, default="standard")
     frequency = db.Column(Integer)
     frequency_unit = db.Column(db.TinyString, default="seconds")
@@ -101,6 +103,7 @@ class Task(AbstractBase):
         try:
             payload = {"mode": mode, "task": self.get_properties()}
             result = post(f"{app.scheduler_address}/schedule", json=payload).json()
+            self.last_scheduled_by = current_user.name
         except ConnectionError:
             return {"alert": "Scheduler Unreachable: the task cannot be scheduled."}
         self.is_active = result.get("active", False)

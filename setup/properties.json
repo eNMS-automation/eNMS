@@ -660,6 +660,12 @@
         "visible": false
       },
       {
+        "data": "last_scheduled_by",
+        "title": "Last scheduled by",
+        "search": "text",
+        "visible": false
+      },
+      {
         "data": "service_name",
         "title": "Service",
         "search": "text",

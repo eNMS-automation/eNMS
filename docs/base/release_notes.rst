@@ -58,6 +58,8 @@ two new environment variables: ENMS_USER and ENMS_PASSWORD (same as scheduler)
 - Fix bug when exporting table to .csv - column shift if comma in property value
 - When scheduling a task, the creator of the service run is not properly set to the user who scheduled
 the task instead of the admin user.
+- Add a cap for number of threads when running a service with multiprocessing enabled. Maximum number 
+of threads configurable from settings.json > automation > max process.
 
 Version 3.22.4
 --------------

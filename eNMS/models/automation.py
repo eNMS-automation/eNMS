@@ -724,6 +724,7 @@ class Run(AbstractBase):
                     (device.id, self.runtime, payload, results)
                     for device in non_skipped_targets
                 ]
+                self.log("info", f"Starting a pool of {processes} threads")
                 with ThreadPool(processes=processes) as pool:
                     pool.map(self.get_device_result, process_args)
             else:

@@ -96,9 +96,6 @@ class DeviceForm(ObjectForm):
     os_version = StringField("OS Version")
     longitude = StringField("Longitude", default=0.0)
     latitude = StringField("Latitude", default=0.0)
-    username = StringField("Username")
-    password = PasswordField("Password")
-    enable_password = PasswordField("'Enable' Password")
     napalm_driver = SelectField(
         "NAPALM Driver", choices=app.NAPALM_DRIVERS, default="ios"
     )

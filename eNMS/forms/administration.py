@@ -71,7 +71,7 @@ class CredentialForm(BaseForm):
     description = StringField("Description")
     username = StringField("Username")
     password = PasswordField("Password")
-    enable_password = PasswordField("Enable Password")
+    enable_password = PasswordField("'Enable' Password")
     priority = IntegerField("Priority", default=1)
     device_pools = MultipleInstanceField("Devices", model="pool")
     user_pools = MultipleInstanceField("Users", model="pool")

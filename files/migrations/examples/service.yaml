@@ -9141,9 +9141,9 @@
   skip_query: ''
   skip_value: 'True'
   target_devices: []
-  target_pools: [All objects, Devices only, Links only, Datacenter San Francisco,
-    Datacenter New York, Datacenter Chicago, Washington, Links 0 through 5 - Non-public
-      pool - Access set up, Links 6 through 9 - Public pools]
+  target_pools: [All objects, All devices, All links, Datacenter San Francisco, Datacenter
+      New York, Datacenter Chicago, Washington, Links 0 through 5 - Non-public pool
+      - Access set up, Links 6 through 9 - Public pools]
   time_between_retries: 10
   type: workflow
   update_pools_after_running: false
@@ -13927,7 +13927,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: [All objects]
   positions: {}
   postprocessing: ''
   postprocessing_mode: always

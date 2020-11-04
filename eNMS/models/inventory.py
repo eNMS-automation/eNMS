@@ -292,6 +292,7 @@ class Pool(AbstractBase):
     models = ("device", "link", "service", "user")
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.SmallString, unique=True)
+    manually_defined = db.Column(Boolean, default=False)
     creator = db.Column(db.SmallString)
     public = db.Column(Boolean, default=False)
     last_modified = db.Column(db.TinyString, info={"log_change": False})
@@ -313,7 +314,12 @@ class Pool(AbstractBase):
     access = relationship(
         "Access", secondary=db.access_model_pools_table, back_populates="access_pools"
     )
-    manually_defined = db.Column(Boolean, default=False)
+    credential_devices = relationship(
+        "Credential", secondary=db.credential_device_pools_table, back_populates="device_pools"
+    )
+    credential_users = relationship(
+        "Credential", secondary=db.credential_user_pools_table, back_populates="user_pools"
+    )
 
     def update(self, **kwargs):
         old_users = set(self.users)

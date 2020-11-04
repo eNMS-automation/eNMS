@@ -111,7 +111,15 @@ class Credentials(AbstractBase):
     __tablename__ = type = "credential"
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.SmallString, unique=True)
-    description = db.Column(db.SmallString)
+    description = db.Column(db.SmallString)ù
+    priority = db.Column(Integer, default=1)
+    device_pools = relationship(
+        "Pool", secondary=db.credential_device_pools_table, back_populates="credential_devices"
+    )
+    user_pools = relationship(
+        "Pool", secondary=db.credential_user_pools_table, back_populates="credential_users"
+    )
+
 
 @db.set_custom_properties
 class Changelog(AbstractBase):

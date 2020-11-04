@@ -173,8 +173,7 @@ def init_variable_forms(app):
             "Skip the Pool update after Import", default="checked"
         )
         export_private_properties = BooleanField(
-            "Include private properties (passwords, etc...) in exported files",
-            default="checked",
+            "Include private properties", default="checked"
         )
         export_choices = [(p, p) for p in app.database["import_export_models"]]
         import_export_types = SelectMultipleField(

@@ -6,6 +6,7 @@
   frequency: 3600
   frequency_unit: seconds
   initial_payload: {}
+  last_scheduled_by: ''
   name: Configuration Poller
   pools: []
   scheduling_mode: standard
@@ -21,6 +22,7 @@
   frequency: 15
   frequency_unit: seconds
   initial_payload: {}
+  last_scheduled_by: ''
   name: Cluster Monitoring
   pools: []
   scheduling_mode: standard
@@ -36,6 +38,7 @@
   frequency: 0
   frequency_unit: seconds
   initial_payload: {}
+  last_scheduled_by: ''
   name: Scrapli RBAC scheduling
   pools: []
   scheduling_mode: standard

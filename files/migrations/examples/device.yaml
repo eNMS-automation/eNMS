@@ -36,6 +36,7 @@
   port: 22
   property1: 10.145.14.1
   property2: CP
+  public: false
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -80,6 +81,7 @@
   port: 22
   property1: 10.145.14.1
   property2: CP
+  public: false
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -124,6 +126,7 @@
   port: 22
   property1: 10.145.14.1
   property2: CP
+  public: false
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -168,6 +171,7 @@
   port: 22
   property1: 10.145.14.1
   property2: CP
+  public: false
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -212,6 +216,7 @@
   port: 22
   property1: 10.145.14.1
   property2: CP
+  public: false
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -256,6 +261,7 @@
   port: 22
   property1: 10.145.14.1
   property2: CP
+  public: false
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -300,6 +306,7 @@
   port: 22
   property1: 10.145.14.1
   property2: CP
+  public: false
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -344,6 +351,7 @@
   port: 22
   property1: 10.145.14.1
   property2: CP
+  public: false
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -388,6 +396,7 @@
   port: 22
   property1: 10.145.14.1
   property2: CP
+  public: false
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -432,6 +441,7 @@
   port: 22
   property1: 10.145.14.1
   property2: CP
+  public: false
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -476,6 +486,7 @@
   port: 22
   property1: 10.145.14.1
   property2: CP
+  public: false
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -520,6 +531,7 @@
   port: 22
   property1: 10.145.14.1
   property2: CP
+  public: false
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -564,6 +576,7 @@
   port: 22
   property1: 10.145.14.1
   property2: CP
+  public: false
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -608,6 +621,7 @@
   port: 22
   property1: 10.145.14.1
   property2: CP
+  public: false
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -652,6 +666,7 @@
   port: 22
   property1: 10.145.14.1
   property2: CP
+  public: false
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -696,6 +711,7 @@
   port: 22
   property1: 10.145.14.1
   property2: CP
+  public: false
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -740,6 +756,7 @@
   port: 22
   property1: 10.145.14.1
   property2: CP
+  public: false
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -784,6 +801,7 @@
   port: 22
   property1: 10.145.14.1
   property2: CP
+  public: false
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -828,6 +846,7 @@
   port: 22
   property1: 10.145.14.1
   property2: CP
+  public: false
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -872,6 +891,7 @@
   port: 22
   property1: 10.145.14.1
   property2: CP
+  public: false
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -916,6 +936,7 @@
   port: 22
   property1: 10.145.14.1
   property2: CP
+  public: false
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -960,6 +981,7 @@
   port: 22
   property1: 10.145.14.1
   property2: CP
+  public: false
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -1004,6 +1026,7 @@
   port: 22
   property1: 10.145.14.1
   property2: CP
+  public: false
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -1048,6 +1071,7 @@
   port: 22
   property1: 10.145.14.1
   property2: CP
+  public: false
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -1092,6 +1116,7 @@
   port: 22
   property1: 10.145.14.1
   property2: CP
+  public: false
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -1136,6 +1161,7 @@
   port: 22
   property1: 10.145.14.1
   property2: CP
+  public: false
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -1180,6 +1206,7 @@
   port: 22
   property1: 10.145.14.1
   property2: CP
+  public: false
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -1224,6 +1251,7 @@
   port: 22
   property1: 10.145.14.1
   property2: CP
+  public: false
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -1268,6 +1296,7 @@
   port: 22
   property1: 10.145.14.1
   property2: CP
+  public: false
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -1312,6 +1341,7 @@
   port: 22
   property1: 10.145.14.1
   property2: CP
+  public: false
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -1356,6 +1386,7 @@
   port: 22
   property1: 10.145.14.1
   property2: CP
+  public: false
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -1400,6 +1431,7 @@
   port: 22
   property1: 10.145.14.1
   property2: CP
+  public: false
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -1444,6 +1476,7 @@
   port: 22
   property1: 10.145.14.1
   property2: CP
+  public: false
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -1488,6 +1521,7 @@
   port: 22
   property1: 10.145.14.1
   property2: CP
+  public: false
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -1532,6 +1566,7 @@
   port: 22
   property1: 10.145.14.1
   property2: CP
+  public: false
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -1576,6 +1611,7 @@
   port: 22
   property1: 10.145.14.1
   property2: CP
+  public: false
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -1620,6 +1656,7 @@
   port: 22
   property1: 10.145.14.1
   property2: CP
+  public: false
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -1664,6 +1701,7 @@
   port: 22
   property1: 10.145.14.1
   property2: CP
+  public: false
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -1708,6 +1746,7 @@
   port: 22
   property1: 10.145.14.1
   property2: CP
+  public: false
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -1752,6 +1791,7 @@
   port: 22
   property1: 10.145.14.1
   property2: CP
+  public: false
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -1796,6 +1836,7 @@
   port: 22
   property1: 10.145.14.1
   property2: CP
+  public: false
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -1840,6 +1881,7 @@
   port: 22
   property1: 10.145.14.1
   property2: CP
+  public: false
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -1884,6 +1926,7 @@
   port: 22
   property1: 10.145.14.1
   property2: CP
+  public: false
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -1928,6 +1971,7 @@
   port: 22
   property1: 10.145.14.1
   property2: CP
+  public: false
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -1972,6 +2016,7 @@
   port: 22
   property1: 10.145.14.1
   property2: CP
+  public: false
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -2016,6 +2061,7 @@
   port: 22
   property1: 10.145.14.1
   property2: CP
+  public: false
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -2060,6 +2106,7 @@
   port: 22
   property1: 10.145.14.1
   property2: CP
+  public: false
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -2104,6 +2151,7 @@
   port: 22
   property1: 10.145.14.1
   property2: CP
+  public: false
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -2148,6 +2196,7 @@
   port: 22
   property1: 10.145.14.1
   property2: CP
+  public: false
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -2192,6 +2241,7 @@
   port: 22
   property1: 10.145.14.1
   property2: CP
+  public: false
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -2236,6 +2286,7 @@
   port: 22
   property1: 10.145.14.1
   property2: CP
+  public: false
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -2280,6 +2331,7 @@
   port: 22
   property1: 10.145.14.1
   property2: CP
+  public: false
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -2324,6 +2376,7 @@
   port: 22
   property1: 10.145.14.1
   property2: CP
+  public: false
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -2368,6 +2421,7 @@
   port: 22
   property1: 10.145.14.1
   property2: CP
+  public: false
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -2412,6 +2466,7 @@
   port: 22
   property1: 10.145.14.1
   property2: CP
+  public: false
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -2456,6 +2511,7 @@
   port: 22
   property1: 10.145.14.1
   property2: CP
+  public: false
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -2500,6 +2556,7 @@
   port: 22
   property1: 10.145.14.1
   property2: CP
+  public: false
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -2544,6 +2601,7 @@
   port: 22
   property1: 10.145.14.1
   property2: CP
+  public: false
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -2588,6 +2646,7 @@
   port: 22
   property1: 10.145.14.1
   property2: CP
+  public: false
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -2632,6 +2691,7 @@
   port: 22
   property1: 10.145.14.1
   property2: CP
+  public: false
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -2676,6 +2736,7 @@
   port: 22
   property1: 10.145.14.1
   property2: CP
+  public: false
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -2720,6 +2781,7 @@
   port: 22
   property1: 10.145.14.1
   property2: CP
+  public: false
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''

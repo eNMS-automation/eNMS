@@ -9,6 +9,7 @@
   device_query: ''
   device_query_property: ip_address
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: true
   events: []
   impacting: true
@@ -167,6 +168,7 @@
   device_query: ''
   device_query_property: ip_address
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: true
   events: []
   impacting: true
@@ -334,6 +336,7 @@
   device_query: ''
   device_query_property: ip_address
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: true
   events: []
   impacting: true
@@ -361,6 +364,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -399,6 +403,7 @@
   device_query: ''
   device_query_property: ip_address
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: true
   events: []
   exclusion_field: d
@@ -433,6 +438,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   regex: ''
   reply_to: ''
   reserved: false
@@ -471,6 +477,7 @@
   device_query: ''
   device_query_property: ip_address
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: true
   events: []
   impacting: true
@@ -504,6 +511,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   remote_as: 200
   reply_to: ''
   reserved: false
@@ -542,6 +550,7 @@
   device_query: ''
   device_query_property: ip_address
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: true
   driver: eos
   events: []
@@ -574,6 +583,7 @@
   postprocessing_mode: always
   preprocessing: ''
   property: operational_data
+  public: false
   replacements:
   - {pattern: '', replace_with: ''}
   - {pattern: '', replace_with: ''}
@@ -621,6 +631,7 @@
   device_query: ''
   device_query_property: ip_address
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: true
   driver: arista_eos
   enable_mode: true
@@ -656,6 +667,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -700,6 +712,7 @@
   device_query: ''
   device_query_property: ip_address
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: true
   driver: arista_eos
   enable_mode: true
@@ -747,6 +760,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -793,6 +807,7 @@
   device_query: ''
   device_query_property: ip_address
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: true
   driver: arista_eos
   enable_mode: true
@@ -829,6 +844,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -873,6 +889,7 @@
   device_query: ''
   device_query_property: ip_address
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: true
   driver: arista_eos
   enable_mode: true
@@ -918,6 +935,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -961,6 +979,7 @@
   device_query: ''
   device_query_property: ip_address
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: true
   driver: eos
   events: []
@@ -993,6 +1012,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -1029,6 +1049,7 @@
   device_query: ''
   device_query_property: ip_address
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: true
   events: []
   headers: {}
@@ -1069,6 +1090,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   reply_to: ''
   reserved: false
   rest_url: http://127.0.0.1:5000/rest/is_alive
@@ -1107,6 +1129,7 @@
   device_query: ''
   device_query_property: ip_address
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: true
   driver: eos
   events: []
@@ -1141,6 +1164,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -1179,6 +1203,7 @@
   device_query: ''
   device_query_property: ip_address
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: true
   driver: eos
   events: []
@@ -1212,6 +1237,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -1250,6 +1276,7 @@
   device_query: ''
   device_query_property: ip_address
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: true
   driver: eos
   events: []
@@ -1323,6 +1350,7 @@
   device_query: ''
   device_query_property: ip_address
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: true
   driver: eos
   events: []
@@ -1355,6 +1383,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -1390,6 +1419,7 @@
   device_query: ''
   device_query_property: ip_address
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: true
   events: []
   impacting: true
@@ -1419,6 +1449,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -1450,6 +1481,7 @@
   device_query: ''
   device_query_property: ip_address
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: true
   events: []
   impacting: true
@@ -1481,6 +1513,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -1525,6 +1558,7 @@
   device_query: ''
   device_query_property: ip_address
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: true
   driver: arista_eos
   enable_mode: true
@@ -1569,6 +1603,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -1607,6 +1642,7 @@
   device_query: ''
   device_query_property: ip_address
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: true
   events: []
   impacting: true
@@ -1653,6 +1689,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   query1: get_result("netmiko_show_ip_route", device.name)["success"]
   query2: get_result("netmiko_show_ip_route", device.name)["result"]
   query3: get_result("netmiko_show_ip_route", device=device.name)["result"]
@@ -1693,6 +1730,7 @@
   device_query: ''
   device_query_property: ip_address
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   driver: eos
   events: []
@@ -1725,6 +1763,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -1767,6 +1806,7 @@
   device_query: ''
   device_query_property: ip_address
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   driver: arista_eos
   enable_mode: true
@@ -1811,6 +1851,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -1856,6 +1897,7 @@
   device_query: ''
   device_query_property: ip_address
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   driver: arista_eos
   enable_mode: true
@@ -1899,6 +1941,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -1946,6 +1989,7 @@
   device_query: ''
   device_query_property: ip_address
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   driver: a10
   enable_mode: true
@@ -1986,6 +2030,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   reply_to: ''
   reserved: false
   response1: show vrf b
@@ -2033,6 +2078,7 @@
   device_query: ''
   device_query_property: ip_address
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   driver: a10
   enable_mode: true
@@ -2073,6 +2119,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   reply_to: ''
   reserved: false
   response1: show vrf
@@ -2111,6 +2158,7 @@
   device_query: ''
   device_query_property: ip_address
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   events: []
   impacting: true
@@ -2140,6 +2188,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   reply_to: ''
   reserved: false
   run_method: once
@@ -2173,6 +2222,7 @@
   device_query: ''
   device_query_property: ip_address
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   events: []
   impacting: true
@@ -2202,6 +2252,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -2245,6 +2296,7 @@
   device_query: ''
   device_query_property: ip_address
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   driver: arista_eos
   enable_mode: true
@@ -2286,6 +2338,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -2331,6 +2384,7 @@
   device_query: ''
   device_query_property: ip_address
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   driver: a10
   enable_mode: true
@@ -2372,6 +2426,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -2417,6 +2472,7 @@
   device_query: ''
   device_query_property: ip_address
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   driver: a10
   enable_mode: true
@@ -2458,6 +2514,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -2500,6 +2557,7 @@
   device_query_property: ip_address
   dict_match:
     is_alive: {is_alive: true}
+  disable_result_creation: false
   display_only_failed_nodes: false
   driver: eos
   events: []
@@ -2535,6 +2593,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -2573,6 +2632,7 @@
   device_query: ''
   device_query_property: ip_address
   dict_match: {fqdn: localhost, vendor: Arista}
+  disable_result_creation: false
   display_only_failed_nodes: false
   driver: eos
   events: []
@@ -2608,6 +2668,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -2647,6 +2708,7 @@
   device_query_property: ip_address
   dict_match:
     '{{device.ip_address}}': {prefix_length: 24}
+  disable_result_creation: false
   display_only_failed_nodes: false
   driver: eos
   events: []
@@ -2683,6 +2745,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -2721,6 +2784,7 @@
   device_query: ''
   device_query_property: ip_address
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   driver: eos
   events: []
@@ -2756,6 +2820,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -2794,6 +2859,7 @@
   device_query: ''
   device_query_property: ip_address
   dict_match: {fqdn: localhost, uptime: '666', vendor: Arista}
+  disable_result_creation: false
   display_only_failed_nodes: false
   driver: eos
   events: []
@@ -2829,6 +2895,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -2865,6 +2932,7 @@
   device_query: ''
   device_query_property: ip_address
   dict_match: {host: '{{device.ip_address}}', unreachable: 0, use_ssl: true}
+  disable_result_creation: false
   display_only_failed_nodes: false
   events: []
   impacting: true
@@ -2898,6 +2966,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -2930,6 +2999,7 @@
   device_query: ''
   device_query_property: ip_address
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   events: []
   impacting: true
@@ -2962,6 +3032,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -2994,6 +3065,7 @@
   device_query: ''
   device_query_property: ip_address
   dict_match: {action: debug, changed: false, failed: false}
+  disable_result_creation: false
   display_only_failed_nodes: false
   events: []
   impacting: true
@@ -3026,6 +3098,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -3064,6 +3137,7 @@
   device_query: ''
   device_query_property: ip_address
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   driver: a10
   enable_mode: true
@@ -3105,6 +3179,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -3150,6 +3225,7 @@
   device_query: ''
   device_query_property: ip_address
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: true
   driver: arista_eos
   enable_mode: true
@@ -3191,6 +3267,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -3236,6 +3313,7 @@
   device_query: ''
   device_query_property: ip_address
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: true
   driver: arista_eos
   enable_mode: true
@@ -3277,6 +3355,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -3322,6 +3401,7 @@
   device_query: ''
   device_query_property: ip_address
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: true
   driver: arista_eos
   enable_mode: true
@@ -3363,6 +3443,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -3401,6 +3482,7 @@
   device_query: ''
   device_query_property: ip_address
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   events: []
   impacting: true
@@ -3433,6 +3515,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -3467,6 +3550,7 @@
   device_query: ''
   device_query_property: ip_address
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   events: []
   impacting: true
@@ -3508,6 +3592,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   query1: 'get_result("Getters Workflow: Interface IP", device=device.name)["negative_logic"]'
   query2: 'get_result("Getters Workflow: Interface IP", device=device.name)["negative_logic"]'
   query3: 'get_result("Getters Workflow: Interface IP", device=device.name)["match"]'
@@ -3545,6 +3630,7 @@
   device_query: ''
   device_query_property: ip_address
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   events: []
   impacting: true
@@ -3586,6 +3672,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   query1: get_result("Start")["state"]["completed"]
   query2: get_result("Start")["logs"]
   query3: get_result("Start")["state"]
@@ -3624,6 +3711,7 @@
   device_query: ''
   device_query_property: ip_address
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   events: []
   headers: {}
@@ -3656,6 +3744,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   reply_to: ''
   reserved: false
   rest_url: http://127.0.0.1:5000/rest/instance/device/{{iteration_value}}
@@ -3691,6 +3780,7 @@
   device_query: ''
   device_query_property: ip_address
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   events: []
   impacting: true
@@ -3723,6 +3813,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -3770,6 +3861,7 @@
   device_query: ''
   device_query_property: ip_address
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   driver: a10
   enable_mode: true
@@ -3813,6 +3905,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -3925,6 +4018,7 @@
   device_query: ''
   device_query_property: ip_address
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: true
   events: []
   impacting: true
@@ -4031,6 +4125,7 @@
   device_query: ''
   device_query_property: ip_address
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: true
   events: []
   impacting: true
@@ -4067,6 +4162,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -4108,6 +4204,7 @@
   device_query: ''
   device_query_property: ip_address
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: true
   events: []
   impacting: true
@@ -4150,6 +4247,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -4187,6 +4285,7 @@
   device_query: ''
   device_query_property: ip_address
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: true
   events: []
   impacting: true
@@ -4258,6 +4357,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -4306,6 +4406,7 @@
   device_query: ''
   device_query_property: ip_address
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: true
   events: []
   impacting: true
@@ -4344,6 +4445,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -4384,6 +4486,7 @@
   device_query: ''
   device_query_property: ip_address
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   events: []
   impacting: true
@@ -4418,6 +4521,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -4455,6 +4559,7 @@
   device_query: ''
   device_query_property: ip_address
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   events: []
   impacting: true
@@ -4494,6 +4599,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -4531,6 +4637,7 @@
   device_query: ''
   device_query_property: ip_address
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   events: []
   impacting: true
@@ -4580,6 +4687,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -4620,6 +4728,7 @@
   device_query: ''
   device_query_property: ip_address
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   events: []
   impacting: true
@@ -4686,6 +4795,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -4730,6 +4840,7 @@
   device_query: ''
   device_query_property: ip_address
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   events: []
   impacting: true
@@ -4784,6 +4895,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -4823,6 +4935,7 @@
   device_query: ''
   device_query_property: ip_address
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   events: []
   impacting: true
@@ -4861,6 +4974,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -4900,6 +5014,7 @@
   device_query: ''
   device_query_property: ip_address
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   events: []
   impacting: true
@@ -4963,6 +5078,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -5002,6 +5118,7 @@
   device_query: ''
   device_query_property: ip_address
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   events: []
   impacting: true
@@ -5033,6 +5150,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -5080,6 +5198,7 @@
   device_query: ''
   device_query_property: ip_address
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   events: []
   impacting: true
@@ -5110,6 +5229,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -5148,6 +5268,7 @@
   device_query: ''
   device_query_property: ip_address
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   events: []
   impacting: true
@@ -5178,6 +5299,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -5224,6 +5346,7 @@
   device_query: ''
   device_query_property: name
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   driver: a10
   enable_mode: true
@@ -5264,6 +5387,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -5320,6 +5444,7 @@
   device_query: ''
   device_query_property: name
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   driver: a10
   enable_mode: true
@@ -5360,6 +5485,7 @@
   postprocessing_mode: always
   preprocessing: ''
   property: operational_data
+  public: false
   replacements:
   - {pattern: '', replace_with: ''}
   - {pattern: '', replace_with: ''}
@@ -5409,6 +5535,7 @@
   device_query: ''
   device_query_property: name
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   events: []
   impacting: true
@@ -5437,6 +5564,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -5476,6 +5604,7 @@
   device_query: ''
   device_query_property: name
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   events: []
   impacting: true
@@ -5506,6 +5635,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -5541,6 +5671,7 @@
   device_query: ''
   device_query_property: name
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   events: []
   headers: {}
@@ -5572,6 +5703,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   reply_to: ''
   reserved: false
   rest_url: ''
@@ -5608,6 +5740,7 @@
   device_query: ''
   device_query_property: name
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   events: []
   impacting: true
@@ -5638,6 +5771,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   reply_to: ''
   reserved: false
   run_method: per_service_with_workflow_targets
@@ -5674,6 +5808,7 @@
   device_query: ''
   device_query_property: name
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   events: []
   headers: {}
@@ -5706,6 +5841,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   reply_to: ''
   reserved: false
   rest_url: ''
@@ -5742,6 +5878,7 @@
   device_query: ''
   device_query_property: name
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   events: []
   impacting: true
@@ -5771,6 +5908,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   reply_to: ''
   reserved: false
   run_method: per_service_with_service_targets
@@ -5812,6 +5950,7 @@
   device_query: ''
   device_query_property: name
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   driver: a10
   enable_mode: true
@@ -5854,6 +5993,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -5899,6 +6039,7 @@
   device_query: ''
   device_query_property: name
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   driver: a10
   enable_mode: true
@@ -5941,6 +6082,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -5986,6 +6128,7 @@
   device_query: ''
   device_query_property: name
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   driver: a10
   enable_mode: true
@@ -6028,6 +6171,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -6067,6 +6211,7 @@
   device_query: ''
   device_query_property: name
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   events: []
   impacting: true
@@ -6117,6 +6262,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   reply_to: ''
   reserved: false
   run_method: per_service_with_workflow_targets
@@ -6153,6 +6299,7 @@
   device_query: ''
   device_query_property: name
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   events: []
   impacting: true
@@ -6183,6 +6330,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   reply_to: ''
   reserved: false
   run_method: per_service_with_workflow_targets
@@ -6218,6 +6366,7 @@
   device_query: ''
   device_query_property: name
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   events: []
   impacting: true
@@ -6248,6 +6397,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   reply_to: ''
   reserved: false
   run_method: per_service_with_workflow_targets
@@ -6289,6 +6439,7 @@
   device_query: ''
   device_query_property: name
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   driver: a10
   enable_mode: true
@@ -6332,6 +6483,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -6371,6 +6523,7 @@
   device_query: ''
   device_query_property: name
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   events: []
   impacting: true
@@ -6402,6 +6555,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -6434,6 +6588,7 @@
   device_query: ''
   device_query_property: name
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   events: []
   impacting: true
@@ -6462,6 +6617,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -6497,6 +6653,7 @@
   device_query: ''
   device_query_property: name
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   events: []
   impacting: true
@@ -6525,6 +6682,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -6566,6 +6724,7 @@
   device_query: ''
   device_query_property: name
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   driver: arista_eos
   enable_mode: true
@@ -6606,6 +6765,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -6645,6 +6805,7 @@
   device_query: ''
   device_query_property: name
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   events: []
   impacting: true
@@ -6673,6 +6834,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -6708,6 +6870,7 @@
   device_query: ''
   device_query_property: name
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   events: []
   impacting: true
@@ -6736,6 +6899,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -6770,6 +6934,7 @@
   device_query: ''
   device_query_property: name
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   events: []
   impacting: true
@@ -6799,6 +6964,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -6833,6 +6999,7 @@
   device_query: ''
   device_query_property: name
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   events: []
   impacting: true
@@ -6863,6 +7030,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -6897,6 +7065,7 @@
   device_query_property: name
   dict_match:
     value: [1.1.1.1, 2.2.2.2, 3.3.3.3]
+  disable_result_creation: false
   display_only_failed_nodes: false
   events: []
   impacting: true
@@ -6964,6 +7133,7 @@
   device_query: ''
   device_query_property: name
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   events: []
   impacting: true
@@ -6996,6 +7166,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -7031,6 +7202,7 @@
   device_query_property: name
   dict_match:
     value: [1.1.1.1, 2.2.2.2, 3.3.3.3]
+  disable_result_creation: false
   display_only_failed_nodes: false
   events: []
   impacting: true
@@ -7097,6 +7269,7 @@
   device_query: ''
   device_query_property: name
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   events: []
   impacting: true
@@ -7129,6 +7302,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -7162,6 +7336,7 @@
   device_query: ''
   device_query_property: name
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   events: []
   impacting: true
@@ -7194,6 +7369,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -7227,6 +7403,7 @@
   device_query: ''
   device_query_property: name
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   events: []
   impacting: true
@@ -7259,6 +7436,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -7293,6 +7471,7 @@
   device_query: ''
   device_query_property: name
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   events: []
   impacting: true
@@ -7339,6 +7518,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   reply_to: ''
   reserved: false
   run_method: per_service_with_workflow_targets
@@ -7375,6 +7555,7 @@
   device_query: ''
   device_query_property: name
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   events: []
   impacting: true
@@ -7440,6 +7621,7 @@
   device_query: ''
   device_query_property: name
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   events: []
   impacting: true
@@ -7470,6 +7652,7 @@
     ] = func()\r\nresults[\"cls_result\"] = cls().device"
   postprocessing_mode: failure
   preprocessing: set_var("integer", 10)
+  public: false
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -7502,6 +7685,7 @@
   device_query: ''
   device_query_property: name
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   events: []
   impacting: true
@@ -7563,6 +7747,7 @@
   device_query: ''
   device_query_property: name
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   events: []
   impacting: true
@@ -7629,6 +7814,7 @@
   device_query: ''
   device_query_property: name
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   events: []
   impacting: true
@@ -7662,6 +7848,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   reply_to: ''
   reserved: false
   run_method: per_service_with_service_targets
@@ -7703,6 +7890,7 @@
   device_query: ''
   device_query_property: name
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   events: []
   impacting: true
@@ -7734,6 +7922,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -7851,6 +8040,7 @@
   device_query: ''
   device_query_property: name
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   events: []
   impacting: true
@@ -7885,6 +8075,7 @@
   postprocessing_mode: always
   preprocessing: ''
   protocol: ICMP
+  public: false
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -7919,6 +8110,7 @@
   device_query: ''
   device_query_property: name
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   events: []
   impacting: true
@@ -7947,6 +8139,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   reply_to: ''
   reserved: false
   run_method: per_service_with_service_targets
@@ -7981,6 +8174,7 @@
   device_query: ''
   device_query_property: name
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   events: []
   impacting: true
@@ -8016,6 +8210,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   reply_to: ''
   reserved: false
   run_method: once
@@ -8054,6 +8249,7 @@
   device_query: ''
   device_query_property: name
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   driver: a10
   enable_mode: true
@@ -8097,6 +8293,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -8136,6 +8333,7 @@
   device_query: ''
   device_query_property: ip_address
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: true
   events: []
   headers: {}
@@ -8169,6 +8367,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   reply_to: ''
   reserved: false
   rest_url: http://127.0.0.1:5000/rest/{{ placeholder.definition }}
@@ -8211,6 +8410,7 @@
   device_query: ''
   device_query_property: name
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   driver: a10
   enable_mode: true
@@ -8250,6 +8450,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
+  public: false
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -8306,6 +8507,7 @@
   device_query: ''
   device_query_property: name
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   driver: a10
   enable_mode: true
@@ -8346,6 +8548,7 @@
   postprocessing_mode: always
   preprocessing: ''
   property: configuration
+  public: false
   replacements:
   - {pattern: '', replace_with: ''}
   - {pattern: '', replace_with: ''}
@@ -8396,6 +8599,7 @@
   device_query: ''
   device_query_property: name
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   events: []
   git_repository: network_data
@@ -8460,6 +8664,7 @@
   device_query: ''
   device_query_property: name
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   events: []
   impacting: true
@@ -8523,6 +8728,7 @@
   device_query: ''
   device_query_property: name
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   events: []
   impacting: true
@@ -8592,6 +8798,7 @@
   device_query: ''
   device_query_property: name
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   driver: cisco_iosxe
   events: []
@@ -8599,6 +8806,7 @@
   include_device_results: false
   include_link_in_summary: false
   initial_payload: {}
+  is_configuration: false
   iteration_devices: ''
   iteration_devices_property: name
   iteration_values: ''
@@ -8661,6 +8869,7 @@
   device_query: ''
   device_query_property: name
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   driver: arista_eos
   events: []
@@ -8731,6 +8940,7 @@
   device_query: ''
   device_query_property: name
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   driver: cisco_iosxe
   events: []
@@ -8801,6 +9011,7 @@
   device_query: ''
   device_query_property: name
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   driver: arista_eos
   events: []
@@ -8868,6 +9079,7 @@
   device_query: ''
   device_query_property: name
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   events: []
   impacting: true
@@ -8953,6 +9165,7 @@
   device_query: ''
   device_query_property: ip_address
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: true
   events: []
   headers: {}
@@ -9031,6 +9244,7 @@
   device_query: ''
   device_query_property: ip_address
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: true
   events: []
   headers: {}
@@ -9103,6 +9317,7 @@
   device_query: ''
   device_query_property: ip_address
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: true
   events: []
   headers: {}
@@ -9175,6 +9390,7 @@
   device_query: ''
   device_query_property: ip_address
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: true
   events: []
   headers: {}
@@ -9247,6 +9463,7 @@
   device_query: ''
   device_query_property: ip_address
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: true
   events: []
   headers: {}
@@ -9325,6 +9542,7 @@
   device_query: ''
   device_query_property: name
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   driver: a10
   enable_mode: true
@@ -9413,6 +9631,7 @@
   device_query: ''
   device_query_property: name
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   driver: a10
   enable_mode: true
@@ -9501,6 +9720,7 @@
   device_query: ''
   device_query_property: name
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   driver: a10
   enable_mode: true
@@ -9589,6 +9809,7 @@
   device_query: ''
   device_query_property: name
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   driver: a10
   enable_mode: true
@@ -9677,6 +9898,7 @@
   device_query: ''
   device_query_property: name
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   driver: a10
   enable_mode: true
@@ -9765,6 +9987,7 @@
   device_query: ''
   device_query_property: name
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   driver: a10
   enable_mode: true
@@ -9846,6 +10069,7 @@
   device_query: ''
   device_query_property: name
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   events: []
   impacting: true
@@ -9909,6 +10133,7 @@
   device_query: ''
   device_query_property: name
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   events: []
   impacting: true
@@ -9972,6 +10197,7 @@
   device_query: ''
   device_query_property: name
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   events: []
   impacting: true
@@ -10035,6 +10261,7 @@
   device_query: ''
   device_query_property: name
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   events: []
   impacting: true
@@ -10098,6 +10325,7 @@
   device_query: ''
   device_query_property: name
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   events: []
   impacting: true
@@ -10161,6 +10389,7 @@
   device_query: ''
   device_query_property: name
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   events: []
   impacting: true
@@ -10224,6 +10453,7 @@
   device_query: ''
   device_query_property: name
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   events: []
   impacting: true
@@ -10287,6 +10517,7 @@
   device_query: ''
   device_query_property: name
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   events: []
   impacting: true
@@ -10351,6 +10582,7 @@
   device_query: ''
   device_query_property: name
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   events: []
   impacting: true
@@ -10425,6 +10657,7 @@
   device_query: ''
   device_query_property: name
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   driver: a10
   enable_mode: true
@@ -10506,6 +10739,7 @@
   device_query_property: name
   dict_match: {}
   direction: put
+  disable_result_creation: false
   display_only_failed_nodes: false
   events: []
   impacting: true
@@ -10582,6 +10816,7 @@
   device_query: ''
   device_query_property: name
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   driver: a10
   enable_mode: true
@@ -10665,6 +10900,7 @@
   device_query_property: name
   dict_match: {}
   direction: put
+  disable_result_creation: false
   display_only_failed_nodes: false
   events: []
   impacting: true
@@ -10742,6 +10978,7 @@
   device_query: ''
   device_query_property: name
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   driver: a10
   enable_mode: true
@@ -10823,6 +11060,7 @@
   device_query_property: name
   dict_match: {}
   direction: put
+  disable_result_creation: false
   display_only_failed_nodes: false
   events: []
   impacting: true
@@ -10893,6 +11131,7 @@
   device_query: ''
   device_query_property: name
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   events: []
   impacting: true
@@ -10958,6 +11197,7 @@
   device_query: ''
   device_query_property: name
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   events: []
   impacting: true
@@ -11027,6 +11267,7 @@
   device_query: ''
   device_query_property: name
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   events: []
   impacting: true
@@ -11095,6 +11336,7 @@
   device_query: ''
   device_query_property: name
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   events: []
   impacting: true
@@ -11248,6 +11490,7 @@
   device_query: ''
   device_query_property: name
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   events: []
   impacting: true
@@ -11463,6 +11706,7 @@
   device_query: ''
   device_query_property: name
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   events: []
   impacting: true
@@ -11535,6 +11779,7 @@
   device_query: ''
   device_query_property: name
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   events: []
   impacting: true
@@ -11621,6 +11866,7 @@
   device_query: ''
   device_query_property: name
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   events: []
   impacting: true
@@ -11710,6 +11956,7 @@
   device_query: ''
   device_query_property: name
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   events: []
   headers: {}
@@ -11787,6 +12034,7 @@
   device_query: ''
   device_query_property: name
   dict_match: {}
+  disable_result_creation: false
   display_only_failed_nodes: false
   driver: a10
   enable_mode: true

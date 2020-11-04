@@ -34,7 +34,18 @@
       "source_id",
       "source_name"
     ],
-    "pool": ["access", "access_users", "credential_devices", "credential_users", "id", "services", "device_number", "link_number"],
+    "pool": [
+      "access",
+      "access_users",
+      "credential_devices",
+      "credential_users",
+      "device_number",
+      "id",
+      "link_number",
+      "service_number",
+      "services",
+      "user_number"
+    ],
     "service": [
       "access",
       "children",

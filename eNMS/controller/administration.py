@@ -144,6 +144,9 @@ class AdministrationController(BaseController):
                     instance_type, relation_dict = instance.pop("type", model), {}
                     for related_model, relation in relationships[instance_type].items():
                         relation_dict[related_model] = instance.pop(related_model, [])
+                    for property, value in instance.items():
+                        if property in db.private_properties:
+                            instance[property] = self.get_password(value)
                     try:
                         instance_id = db.factory(
                             instance_type,

@@ -12,8 +12,9 @@
       "icon": "users",
       "pages": {
         "Users": "/table/user",
+        "Servers": "/table/server",
         "Access": "/table/access",
-        "Servers": "/table/server"
+        "Credentials": "/table/credential"
       }
     },
     "Inventory": {

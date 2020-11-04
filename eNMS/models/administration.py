@@ -106,6 +106,14 @@ class Access(AbstractBase):
 
 
 @db.set_custom_properties
+class Credentials(AbstractBase):
+
+    __tablename__ = type = "credential"
+    id = db.Column(Integer, primary_key=True)
+    name = db.Column(db.SmallString, unique=True)
+    description = db.Column(db.SmallString)
+
+@db.set_custom_properties
 class Changelog(AbstractBase):
 
     __tablename__ = "changelog"

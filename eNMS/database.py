@@ -386,7 +386,10 @@ class Database:
             self.session.commit()
 
     def export(self, model, private_properties=False):
-        return [instance.to_dict(export=True) for instance in self.fetch_all(model)]
+        return [
+            instance.to_dict(export=True, private_properties=private_properties)
+            for instance in self.fetch_all(model)
+        ]
 
     def factory(self, _class, commit=False, **kwargs):
         def transaction(_class, **kwargs):

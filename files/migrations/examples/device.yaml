@@ -41,7 +41,6 @@
   scrapli_driver: arista_eos
   subtype: ''
   type: device
-  username: cisco
   vendor: Cisco
 - creator: ''
   custom_json:
@@ -86,7 +85,6 @@
   scrapli_driver: arista_eos
   subtype: ''
   type: device
-  username: cisco
   vendor: Cisco
 - creator: ''
   custom_json:
@@ -131,7 +129,6 @@
   scrapli_driver: arista_eos
   subtype: ''
   type: device
-  username: admin
   vendor: Arista
 - creator: ''
   custom_json:
@@ -176,7 +173,6 @@
   scrapli_driver: arista_eos
   subtype: ''
   type: device
-  username: admin
   vendor: Arista
 - creator: ''
   custom_json:
@@ -221,7 +217,6 @@
   scrapli_driver: arista_eos
   subtype: ''
   type: device
-  username: admin
   vendor: Cisco
 - creator: ''
   custom_json:
@@ -266,7 +261,6 @@
   scrapli_driver: arista_eos
   subtype: ''
   type: device
-  username: cisco
   vendor: Cisco
 - creator: ''
   custom_json:
@@ -311,7 +305,6 @@
   scrapli_driver: arista_eos
   subtype: ''
   type: device
-  username: cisco
   vendor: Cisco
 - creator: ''
   custom_json:
@@ -356,7 +349,6 @@
   scrapli_driver: arista_eos
   subtype: ''
   type: device
-  username: cisco
   vendor: Cisco
 - creator: ''
   custom_json:
@@ -401,7 +393,6 @@
   scrapli_driver: arista_eos
   subtype: ''
   type: device
-  username: cisco
   vendor: Cisco
 - creator: ''
   custom_json:
@@ -446,7 +437,6 @@
   scrapli_driver: arista_eos
   subtype: ''
   type: device
-  username: cisco
   vendor: Cisco
 - creator: ''
   custom_json:
@@ -491,7 +481,6 @@
   scrapli_driver: arista_eos
   subtype: ''
   type: device
-  username: cisco
   vendor: Cisco
 - creator: ''
   custom_json:
@@ -536,7 +525,6 @@
   scrapli_driver: arista_eos
   subtype: ''
   type: device
-  username: cisco
   vendor: Cisco
 - creator: ''
   custom_json:
@@ -581,7 +569,6 @@
   scrapli_driver: arista_eos
   subtype: ''
   type: device
-  username: cisco
   vendor: Cisco
 - creator: ''
   custom_json:
@@ -626,7 +613,6 @@
   scrapli_driver: arista_eos
   subtype: ''
   type: device
-  username: admin
   vendor: Cisco
 - creator: ''
   custom_json:
@@ -671,7 +657,6 @@
   scrapli_driver: arista_eos
   subtype: ''
   type: device
-  username: admin
   vendor: Cisco
 - creator: ''
   custom_json:
@@ -716,7 +701,6 @@
   scrapli_driver: arista_eos
   subtype: ''
   type: device
-  username: admin
   vendor: Juniper
 - creator: ''
   custom_json:
@@ -761,7 +745,6 @@
   scrapli_driver: arista_eos
   subtype: ''
   type: device
-  username: admin
   vendor: Juniper
 - creator: ''
   custom_json:
@@ -806,7 +789,6 @@
   scrapli_driver: arista_eos
   subtype: ''
   type: device
-  username: admin
   vendor: Juniper
 - creator: ''
   custom_json:
@@ -851,7 +833,6 @@
   scrapli_driver: arista_eos
   subtype: ''
   type: device
-  username: admin
   vendor: Juniper
 - creator: ''
   custom_json:
@@ -896,7 +877,6 @@
   scrapli_driver: arista_eos
   subtype: ''
   type: device
-  username: admin
   vendor: Juniper
 - creator: ''
   custom_json:
@@ -941,7 +921,6 @@
   scrapli_driver: arista_eos
   subtype: ''
   type: device
-  username: cisco
   vendor: Juniper
 - creator: ''
   custom_json:
@@ -986,7 +965,6 @@
   scrapli_driver: arista_eos
   subtype: ''
   type: device
-  username: cisco
   vendor: Juniper
 - creator: ''
   custom_json:
@@ -1031,7 +1009,6 @@
   scrapli_driver: arista_eos
   subtype: ''
   type: device
-  username: cisco
   vendor: Juniper
 - creator: ''
   custom_json:
@@ -1076,7 +1053,6 @@
   scrapli_driver: arista_eos
   subtype: ''
   type: device
-  username: cisco
   vendor: Juniper
 - creator: ''
   custom_json:
@@ -1121,7 +1097,6 @@
   scrapli_driver: arista_eos
   subtype: ''
   type: device
-  username: cisco
   vendor: Juniper
 - creator: ''
   custom_json:
@@ -1166,7 +1141,6 @@
   scrapli_driver: arista_eos
   subtype: ''
   type: device
-  username: cisco
   vendor: Cisco
 - creator: ''
   custom_json:
@@ -1211,7 +1185,6 @@
   scrapli_driver: arista_eos
   subtype: ''
   type: device
-  username: cisco
   vendor: Cisco
 - creator: ''
   custom_json:
@@ -1256,7 +1229,6 @@
   scrapli_driver: cisco_iosxe
   subtype: router
   type: device
-  username: cisco
   vendor: Cisco
 - creator: ''
   custom_json:
@@ -1301,7 +1273,6 @@
   scrapli_driver: cisco_iosxe
   subtype: router
   type: device
-  username: cisco
   vendor: Cisco
 - creator: ''
   custom_json:
@@ -1346,7 +1317,6 @@
   scrapli_driver: cisco_iosxe
   subtype: router
   type: device
-  username: cisco
   vendor: Cisco
 - creator: ''
   custom_json:
@@ -1391,7 +1361,6 @@
   scrapli_driver: cisco_iosxe
   subtype: router
   type: device
-  username: cisco
   vendor: Cisco
 - creator: ''
   custom_json:
@@ -1436,7 +1405,6 @@
   scrapli_driver: cisco_iosxe
   subtype: router
   type: device
-  username: cisco
   vendor: Cisco
 - creator: ''
   custom_json:
@@ -1481,7 +1449,6 @@
   scrapli_driver: cisco_iosxe
   subtype: router
   type: device
-  username: cisco
   vendor: Cisco
 - creator: ''
   custom_json:
@@ -1526,7 +1493,6 @@
   scrapli_driver: cisco_iosxe
   subtype: router
   type: device
-  username: cisco
   vendor: Cisco
 - creator: ''
   custom_json:
@@ -1571,7 +1537,6 @@
   scrapli_driver: cisco_iosxe
   subtype: router
   type: device
-  username: cisco
   vendor: Cisco
 - creator: ''
   custom_json:
@@ -1616,7 +1581,6 @@
   scrapli_driver: cisco_iosxe
   subtype: router
   type: device
-  username: cisco
   vendor: Cisco
 - creator: ''
   custom_json:
@@ -1661,7 +1625,6 @@
   scrapli_driver: cisco_iosxe
   subtype: router
   type: device
-  username: cisco
   vendor: Cisco
 - creator: ''
   custom_json:
@@ -1706,7 +1669,6 @@
   scrapli_driver: cisco_iosxe
   subtype: router
   type: device
-  username: cisco
   vendor: Cisco
 - creator: ''
   custom_json:
@@ -1751,7 +1713,6 @@
   scrapli_driver: cisco_iosxe
   subtype: router
   type: device
-  username: cisco
   vendor: Cisco
 - creator: ''
   custom_json:
@@ -1796,7 +1757,6 @@
   scrapli_driver: cisco_iosxe
   subtype: router
   type: device
-  username: cisco
   vendor: Cisco
 - creator: ''
   custom_json:
@@ -1841,7 +1801,6 @@
   scrapli_driver: cisco_iosxe
   subtype: router
   type: device
-  username: cisco
   vendor: Cisco
 - creator: ''
   custom_json:
@@ -1886,7 +1845,6 @@
   scrapli_driver: cisco_iosxe
   subtype: router
   type: device
-  username: cisco
   vendor: Cisco
 - creator: ''
   custom_json:
@@ -1931,7 +1889,6 @@
   scrapli_driver: cisco_iosxe
   subtype: router
   type: device
-  username: cisco
   vendor: Juniper
 - creator: ''
   custom_json:
@@ -1976,7 +1933,6 @@
   scrapli_driver: cisco_iosxe
   subtype: router
   type: device
-  username: cisco
   vendor: Juniper
 - creator: ''
   custom_json:
@@ -2021,7 +1977,6 @@
   scrapli_driver: cisco_iosxe
   subtype: router
   type: device
-  username: cisco
   vendor: Juniper
 - creator: ''
   custom_json:
@@ -2066,7 +2021,6 @@
   scrapli_driver: cisco_iosxe
   subtype: router
   type: device
-  username: cisco
   vendor: Juniper
 - creator: ''
   custom_json:
@@ -2111,7 +2065,6 @@
   scrapli_driver: cisco_iosxe
   subtype: router
   type: device
-  username: cisco
   vendor: Juniper
 - creator: ''
   custom_json:
@@ -2156,7 +2109,6 @@
   scrapli_driver: cisco_iosxe
   subtype: router
   type: device
-  username: cisco
   vendor: Juniper
 - creator: ''
   custom_json:
@@ -2201,7 +2153,6 @@
   scrapli_driver: cisco_iosxe
   subtype: router
   type: device
-  username: cisco
   vendor: Juniper
 - creator: ''
   custom_json:
@@ -2246,7 +2197,6 @@
   scrapli_driver: cisco_iosxe
   subtype: router
   type: device
-  username: cisco
   vendor: Juniper
 - creator: ''
   custom_json:
@@ -2291,7 +2241,6 @@
   scrapli_driver: cisco_iosxe
   subtype: router
   type: device
-  username: cisco
   vendor: Juniper
 - creator: ''
   custom_json:
@@ -2336,7 +2285,6 @@
   scrapli_driver: cisco_iosxe
   subtype: router
   type: device
-  username: cisco
   vendor: Juniper
 - creator: ''
   custom_json:
@@ -2381,7 +2329,6 @@
   scrapli_driver: cisco_iosxe
   subtype: router
   type: device
-  username: cisco
   vendor: Cisco
 - creator: ''
   custom_json:
@@ -2426,7 +2373,6 @@
   scrapli_driver: cisco_iosxe
   subtype: router
   type: device
-  username: cisco
   vendor: Cisco
 - creator: ''
   custom_json:
@@ -2471,7 +2417,6 @@
   scrapli_driver: cisco_iosxe
   subtype: router
   type: device
-  username: cisco
   vendor: Cisco
 - creator: ''
   custom_json:
@@ -2516,7 +2461,6 @@
   scrapli_driver: cisco_iosxe
   subtype: router
   type: device
-  username: cisco
   vendor: Cisco
 - creator: ''
   custom_json:
@@ -2561,7 +2505,6 @@
   scrapli_driver: cisco_iosxe
   subtype: router
   type: device
-  username: cisco
   vendor: Cisco
 - creator: ''
   custom_json:
@@ -2606,7 +2549,6 @@
   scrapli_driver: cisco_iosxe
   subtype: router
   type: device
-  username: cisco
   vendor: Cisco
 - creator: ''
   custom_json:
@@ -2651,7 +2593,6 @@
   scrapli_driver: cisco_iosxe
   subtype: router
   type: device
-  username: cisco
   vendor: Cisco
 - creator: ''
   custom_json:
@@ -2696,7 +2637,6 @@
   scrapli_driver: cisco_iosxe
   subtype: router
   type: device
-  username: cisco
   vendor: Cisco
 - creator: ''
   custom_json:
@@ -2741,7 +2681,6 @@
   scrapli_driver: arista_eos
   subtype: ''
   type: device
-  username: admin
   vendor: linux
 - creator: ''
   custom_json:
@@ -2786,5 +2725,4 @@
   scrapli_driver: arista_eos
   subtype: ''
   type: device
-  username: admin
   vendor: Cisco

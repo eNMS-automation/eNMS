@@ -1095,6 +1095,42 @@ tables.access = class AccessTable extends Table {
   }
 };
 
+tables.credential = class CredentialTable extends Table {
+  get controls() {
+    return [
+      this.columnDisplay(),
+      this.refreshTableButton(),
+      this.clearSearchButton(),
+      this.createNewButton(),
+      this.bulkEditButton(),
+      this.exportTableButton(),
+      this.bulkDeletionButton(),
+    ];
+  }
+
+  buttons(row) {
+    return [
+      `
+      <ul class="pagination pagination-lg" style="margin: 0px;">
+        <li>
+          <button type="button" class="btn btn-sm btn-primary"
+          onclick="eNMS.base.showTypePanel('server', '${row.id}')" data-tooltip="Edit"
+            ><span class="glyphicon glyphicon-edit"></span
+          ></button>
+        </li>
+        <li>
+          <button type="button" class="btn btn-sm btn-primary"
+          onclick="eNMS.base.showTypePanel('server', '${row.id}', 'duplicate')"
+          data-tooltip="Duplicate"
+            ><span class="glyphicon glyphicon-duplicate"></span
+          ></button>
+        </li>
+        ${this.deleteInstanceButton(row)}
+      </ul>`,
+    ];
+  }
+};
+
 tables.server = class ServerTable extends Table {
   get controls() {
     return [

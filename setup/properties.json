@@ -792,6 +792,30 @@
         "export": false
       }
     ],
+    "credential": [
+      {
+        "data": "name",
+        "title": "Username",
+        "search": "text"
+      },
+      {
+        "data": "description",
+        "title": "Description",
+        "search": "text",
+        "orderable": false
+      },
+      {
+        "data": "priority",
+        "title": "Priority",
+        "search": "text"
+      },
+      {
+        "data": "buttons",
+        "width": "130px",
+        "orderable": false,
+        "export": false
+      }
+    ],
     "changelog": [
       {
         "data": "time",

@@ -470,6 +470,7 @@
   conversion_method: none
   creator: admin
   credentials: device
+  custom_password: ''
   custom_username: ''
   definition: Definition
   delete_spaces_before_matching: false
@@ -543,6 +544,7 @@
   conversion_method: none
   creator: admin
   credentials: device
+  custom_password: ''
   custom_username: ''
   definition: Definition
   delete_spaces_before_matching: false
@@ -623,6 +625,7 @@
   conversion_method: none
   creator: admin
   credentials: device
+  custom_password: ''
   custom_username: ''
   definition: Definition
   delay_factor: 1.0
@@ -704,6 +707,7 @@
   conversion_method: text
   creator: admin
   credentials: device
+  custom_password: ''
   custom_username: ''
   definition: Definition
   delay_factor: 1.0
@@ -734,6 +738,7 @@
   iteration_variable_name: iteration_value
   jump_command: ''
   jump_on_connect: false
+  jump_password: ''
   jump_username: ''
   last_modified: '2019-10-10 09:46:36.865576'
   log_level: 1
@@ -799,6 +804,7 @@
   conversion_method: none
   creator: admin
   credentials: device
+  custom_password: ''
   custom_username: ''
   definition: Definition
   delay_factor: 1.0
@@ -881,6 +887,7 @@
   conversion_method: text
   creator: admin
   credentials: device
+  custom_password: ''
   custom_username: ''
   definition: Definition
   delay_factor: 1.0
@@ -911,6 +918,7 @@
   iteration_variable_name: iteration_value
   jump_command: ''
   jump_on_connect: false
+  jump_password: ''
   jump_username: ''
   last_modified: '2020-05-29 06:44:11.874459'
   log_level: 1
@@ -972,6 +980,7 @@
   conversion_method: none
   creator: admin
   credentials: device
+  custom_password: ''
   custom_username: ''
   definition: Definition
   delete_spaces_before_matching: false
@@ -1074,6 +1083,7 @@
   number_of_retries: 0
   operating_system: ''
   params: {verify: 'false'}
+  password: ''
   payload:
     a: b
     c: ['1', '2', '3']
@@ -1122,6 +1132,7 @@
   conversion_method: none
   creator: admin
   credentials: device
+  custom_password: ''
   custom_username: ''
   definition: Definition
   delete_spaces_before_matching: false
@@ -1196,6 +1207,7 @@
   conversion_method: none
   creator: admin
   credentials: device
+  custom_password: ''
   custom_username: ''
   definition: Definition
   delete_spaces_before_matching: false
@@ -1269,6 +1281,7 @@
   conversion_method: none
   creator: admin
   credentials: device
+  custom_password: ''
   custom_username: ''
   definition: Definition
   delete_spaces_before_matching: false
@@ -1343,6 +1356,7 @@
   conversion_method: none
   creator: admin
   credentials: device
+  custom_password: ''
   custom_username: ''
   definition: Definition
   delete_spaces_before_matching: false
@@ -1550,6 +1564,7 @@
   conversion_method: text
   creator: admin
   credentials: device
+  custom_password: ''
   custom_username: ''
   definition: Definition
   delay_factor: 1.0
@@ -1580,6 +1595,7 @@
   iteration_variable_name: iteration_value
   jump_command: ''
   jump_on_connect: false
+  jump_password: ''
   jump_username: ''
   last_modified: '2019-10-10 13:42:39.673781'
   log_level: 1
@@ -1723,6 +1739,7 @@
   conversion_method: none
   creator: admin
   credentials: device
+  custom_password: ''
   custom_username: ''
   definition: Definition
   delete_spaces_before_matching: false
@@ -1798,6 +1815,7 @@
   conversion_method: text
   creator: admin
   credentials: device
+  custom_password: ''
   custom_username: ''
   definition: Definition
   delay_factor: 1.0
@@ -1828,6 +1846,7 @@
   iteration_variable_name: iteration_value
   jump_command: ''
   jump_on_connect: false
+  jump_password: ''
   jump_username: ''
   last_modified: '2019-11-18 08:26:08.788541'
   log_level: 1
@@ -1889,6 +1908,7 @@
   conversion_method: text
   creator: admin
   credentials: device
+  custom_password: ''
   custom_username: ''
   definition: Definition
   delay_factor: 1.0
@@ -1919,6 +1939,7 @@
   iteration_variable_name: iteration_value
   jump_command: ''
   jump_on_connect: false
+  jump_password: ''
   jump_username: ''
   last_modified: '2019-11-18 08:26:31.713881'
   log_level: 1
@@ -1981,6 +2002,7 @@
   conversion_method: text
   creator: admin
   credentials: device
+  custom_password: ''
   custom_username: ''
   definition: Definition
   delay_factor: 1.0
@@ -2011,6 +2033,7 @@
   iteration_variable_name: iteration_value
   jump_command: ''
   jump_on_connect: false
+  jump_password: ''
   jump_username: ''
   last_modified: '2019-09-18 18:31:59.605812'
   log_level: 1
@@ -2070,6 +2093,7 @@
   conversion_method: text
   creator: admin
   credentials: device
+  custom_password: ''
   custom_username: ''
   definition: Definition
   delay_factor: 1.0
@@ -2100,6 +2124,7 @@
   iteration_variable_name: iteration_value
   jump_command: ''
   jump_on_connect: false
+  jump_password: ''
   jump_username: ''
   last_modified: '2019-07-19 15:41:59.683776'
   log_level: 1
@@ -2288,6 +2313,7 @@
   conversion_method: text
   creator: admin
   credentials: device
+  custom_password: ''
   custom_username: ''
   definition: Definition
   delay_factor: 1.0
@@ -2318,6 +2344,7 @@
   iteration_variable_name: iteration_value
   jump_command: ''
   jump_on_connect: false
+  jump_password: ''
   jump_username: ''
   last_modified: '2020-02-26 06:48:40.762497'
   log_level: 1
@@ -2376,6 +2403,7 @@
   conversion_method: text
   creator: admin
   credentials: device
+  custom_password: ''
   custom_username: ''
   definition: Definition
   delay_factor: 1.0
@@ -2406,6 +2434,7 @@
   iteration_variable_name: iteration_value
   jump_command: ''
   jump_on_connect: false
+  jump_password: ''
   jump_username: ''
   last_modified: '2020-02-26 06:50:26.306070'
   log_level: 1
@@ -2464,6 +2493,7 @@
   conversion_method: text
   creator: admin
   credentials: device
+  custom_password: ''
   custom_username: ''
   definition: Definition
   delay_factor: 1.0
@@ -2494,6 +2524,7 @@
   iteration_variable_name: iteration_value
   jump_command: ''
   jump_on_connect: false
+  jump_password: ''
   jump_username: ''
   last_modified: '2020-05-29 06:56:23.711236'
   log_level: 1
@@ -2549,6 +2580,7 @@
   conversion_method: none
   creator: admin
   credentials: device
+  custom_password: ''
   custom_username: ''
   definition: Definition
   delete_spaces_before_matching: false
@@ -2625,6 +2657,7 @@
   conversion_method: none
   creator: admin
   credentials: device
+  custom_password: ''
   custom_username: ''
   definition: Definition
   delete_spaces_before_matching: false
@@ -2700,6 +2733,7 @@
   conversion_method: none
   creator: admin
   credentials: device
+  custom_password: ''
   custom_username: ''
   definition: Definition
   delete_spaces_before_matching: false
@@ -2777,6 +2811,7 @@
   conversion_method: none
   creator: admin
   credentials: device
+  custom_password: ''
   custom_username: ''
   definition: Definition
   delete_spaces_before_matching: false
@@ -2852,6 +2887,7 @@
   conversion_method: none
   creator: admin
   credentials: device
+  custom_password: ''
   custom_username: ''
   definition: Definition
   delete_spaces_before_matching: false
@@ -3129,6 +3165,7 @@
   conversion_method: text
   creator: admin
   credentials: device
+  custom_password: ''
   custom_username: ''
   definition: Definition
   delay_factor: 1.0
@@ -3159,6 +3196,7 @@
   iteration_variable_name: iteration_value
   jump_command: ''
   jump_on_connect: false
+  jump_password: ''
   jump_username: ''
   last_modified: '2019-08-13 20:58:22.190268'
   log_level: 1
@@ -3217,6 +3255,7 @@
   conversion_method: text
   creator: admin
   credentials: device
+  custom_password: ''
   custom_username: ''
   definition: Definition
   delay_factor: 1.0
@@ -3247,6 +3286,7 @@
   iteration_variable_name: non_default_iteration_value_name
   jump_command: ''
   jump_on_connect: false
+  jump_password: ''
   jump_username: ''
   last_modified: '2020-05-07 04:19:08.658446'
   log_level: 1
@@ -3305,6 +3345,7 @@
   conversion_method: text
   creator: admin
   credentials: device
+  custom_password: ''
   custom_username: ''
   definition: Definition
   delay_factor: 1.0
@@ -3335,6 +3376,7 @@
   iteration_variable_name: iteration_value
   jump_command: ''
   jump_on_connect: false
+  jump_password: ''
   jump_username: ''
   last_modified: '2020-05-07 04:19:45.112707'
   log_level: 1
@@ -3393,6 +3435,7 @@
   conversion_method: text
   creator: admin
   credentials: device
+  custom_password: ''
   custom_username: ''
   definition: Definition
   delay_factor: 1.0
@@ -3423,6 +3466,7 @@
   iteration_variable_name: iteration_value
   jump_command: ''
   jump_on_connect: false
+  jump_password: ''
   jump_username: ''
   last_modified: '2020-05-07 04:19:56.019693'
   log_level: 1
@@ -3737,6 +3781,7 @@
   number_of_retries: 0
   operating_system: ''
   params: {}
+  password: ''
   payload: {}
   pools: [All objects]
   positions:
@@ -3853,6 +3898,7 @@
   conversion_method: none
   creator: admin
   credentials: device
+  custom_password: ''
   custom_username: ''
   definition: Definition
   delay_factor: 1.0
@@ -3883,6 +3929,7 @@
   iteration_variable_name: iteration_value
   jump_command: ''
   jump_on_connect: false
+  jump_password: ''
   jump_username: ''
   last_modified: '2019-10-10 23:22:44.432133'
   log_level: 1
@@ -5338,6 +5385,7 @@
   conversion_method: none
   creator: admin
   credentials: device
+  custom_password: ''
   custom_username: ''
   definition: Definition
   delay_factor: 1.0
@@ -5368,6 +5416,7 @@
   iteration_variable_name: iteration_value
   jump_command: ''
   jump_on_connect: false
+  jump_password: ''
   jump_username: ''
   last_modified: '2019-10-05 10:15:25.968061'
   log_level: 1
@@ -5437,6 +5486,7 @@
   conversion_method: none
   creator: admin
   credentials: device
+  custom_password: ''
   custom_username: ''
   definition: Definition
   delete_spaces_before_matching: false
@@ -5465,6 +5515,7 @@
   iteration_variable_name: iteration_value
   jump_command: ''
   jump_on_connect: false
+  jump_password: ''
   jump_username: ''
   last_modified: '2020-06-01 10:08:24.484251'
   log_level: 1
@@ -5696,6 +5747,7 @@
   number_of_retries: 0
   operating_system: ''
   params: {}
+  password: ''
   payload: {}
   pools: [All objects]
   positions:
@@ -5834,6 +5886,7 @@
   number_of_retries: 0
   operating_system: ''
   params: {}
+  password: ''
   payload: {}
   pools: [All objects]
   positions:
@@ -5942,6 +5995,7 @@
   conversion_method: none
   creator: admin
   credentials: device
+  custom_password: ''
   custom_username: ''
   definition: Definition
   delay_factor: 1.0
@@ -5972,6 +6026,7 @@
   iteration_variable_name: iteration_value
   jump_command: ''
   jump_on_connect: false
+  jump_password: ''
   jump_username: ''
   last_modified: '2019-12-05 04:52:26.145384'
   log_level: 1
@@ -6031,6 +6086,7 @@
   conversion_method: none
   creator: admin
   credentials: device
+  custom_password: ''
   custom_username: ''
   definition: Definition
   delay_factor: 1.0
@@ -6061,6 +6117,7 @@
   iteration_variable_name: iteration_value
   jump_command: ''
   jump_on_connect: false
+  jump_password: ''
   jump_username: ''
   last_modified: '2019-12-05 04:52:44.909327'
   log_level: 1
@@ -6120,6 +6177,7 @@
   conversion_method: none
   creator: admin
   credentials: device
+  custom_password: ''
   custom_username: ''
   definition: Definition
   delay_factor: 1.0
@@ -6150,6 +6208,7 @@
   iteration_variable_name: iteration_value
   jump_command: ''
   jump_on_connect: false
+  jump_password: ''
   jump_username: ''
   last_modified: '2019-12-05 04:53:36.285402'
   log_level: 1
@@ -6431,6 +6490,7 @@
   conversion_method: none
   creator: admin
   credentials: device
+  custom_password: ''
   custom_username: ''
   definition: Definition
   delay_factor: 1.0
@@ -6461,6 +6521,7 @@
   iteration_variable_name: iteration_value
   jump_command: ''
   jump_on_connect: false
+  jump_password: ''
   jump_username: ''
   last_modified: '2019-12-16 16:46:16.211030'
   log_level: 1
@@ -6716,6 +6777,7 @@
   conversion_method: none
   creator: admin
   credentials: device
+  custom_password: ''
   custom_username: ''
   definition: Definition
   delay_factor: 1.0
@@ -6746,6 +6808,7 @@
   iteration_variable_name: command_dict
   jump_command: ''
   jump_on_connect: false
+  jump_password: ''
   jump_username: ''
   last_modified: '2020-02-22 10:09:31.770582'
   log_level: 1
@@ -7952,6 +8015,7 @@
   conversion_method: none
   creator: admin
   credentials: device
+  custom_password: ''
   custom_username: ''
   definition: Definition
   delay_factor: 1.0
@@ -8188,6 +8252,7 @@
   iteration_variable_name: iteration_value
   last_modified: '2020-03-27 15:00:28.449935'
   librenms_address: http://librenms.example.com
+  librenms_token: ''
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -8198,11 +8263,13 @@
     Import'
   negative_logic: false
   netbox_address: http://0.0.0.0:8000
+  netbox_token: ''
   notification_header: ''
   number_of_retries: 0
   opennms_address: https://demo.opennms.org/opennms/rest
   opennms_devices: ''
   opennms_login: demo
+  opennms_password: ''
   operating_system: ''
   pools: [All objects]
   positions:
@@ -8241,6 +8308,7 @@
   conversion_method: none
   creator: admin
   credentials: device
+  custom_password: ''
   custom_username: ''
   definition: Definition
   delay_factor: 1.0
@@ -8271,6 +8339,7 @@
   iteration_variable_name: iteration_value
   jump_command: ssh 192.168.56.103
   jump_on_connect: true
+  jump_password: ''
   jump_username: ''
   last_modified: '2020-03-28 05:52:51.717182'
   log_level: 1
@@ -8358,6 +8427,7 @@
   number_of_retries: 0
   operating_system: ''
   params: {verify: 'false'}
+  password: ''
   payload:
     a: b
     c: ['1', '2', '3']
@@ -8402,6 +8472,7 @@
   conversion_method: none
   creator: admin
   credentials: device
+  custom_password: ''
   custom_username: ''
   definition: Definition
   delay_factor: 1.0
@@ -8432,6 +8503,7 @@
   iteration_variable_name: iteration_value
   jump_command: ssh jump_server_IP
   jump_on_connect: false
+  jump_password: ''
   jump_username: ''
   last_modified: '2020-05-29 03:45:43.702087'
   log_level: 1
@@ -8500,6 +8572,7 @@
   conversion_method: none
   creator: admin
   credentials: device
+  custom_password: ''
   custom_username: ''
   definition: Definition
   delete_spaces_before_matching: false
@@ -8528,6 +8601,7 @@
   iteration_variable_name: iteration_value
   jump_command: ''
   jump_on_connect: false
+  jump_password: ''
   jump_username: ''
   last_modified: '2020-05-30 06:09:05.488720'
   log_level: 1
@@ -8791,6 +8865,7 @@
   conversion_method: none
   creator: admin
   credentials: device
+  custom_password: ''
   custom_username: ''
   definition: Definition
   delete_spaces_before_matching: false
@@ -8862,6 +8937,7 @@
   conversion_method: none
   creator: admin
   credentials: device
+  custom_password: ''
   custom_username: ''
   definition: Definition
   delete_spaces_before_matching: false
@@ -8933,6 +9009,7 @@
   conversion_method: none
   creator: admin
   credentials: device
+  custom_password: ''
   custom_username: ''
   definition: Definition
   delete_spaces_before_matching: false
@@ -9004,6 +9081,7 @@
   conversion_method: none
   creator: admin
   credentials: device
+  custom_password: ''
   custom_username: ''
   definition: Definition
   delete_spaces_before_matching: false
@@ -9191,6 +9269,7 @@
   number_of_retries: 0
   operating_system: ''
   params: {verify: 'false'}
+  password: ''
   payload:
     a: b
     c: ['1', '2', '3']
@@ -9270,6 +9349,7 @@
   number_of_retries: 0
   operating_system: ''
   params: {verify: 'false'}
+  password: ''
   payload:
     a: b
     c: ['1', '2', '3']
@@ -9343,6 +9423,7 @@
   number_of_retries: 0
   operating_system: ''
   params: {verify: 'false'}
+  password: ''
   payload:
     a: b
     c: ['1', '2', '3']
@@ -9416,6 +9497,7 @@
   number_of_retries: 0
   operating_system: ''
   params: {verify: 'false'}
+  password: ''
   payload:
     a: b
     c: ['1', '2', '3']
@@ -9489,6 +9571,7 @@
   number_of_retries: 0
   operating_system: ''
   params: {verify: 'false'}
+  password: ''
   payload:
     a: b
     c: ['1', '2', '3']
@@ -9534,6 +9617,7 @@
   conversion_method: none
   creator: admin
   credentials: device
+  custom_password: ''
   custom_username: ''
   definition: Definition
   delay_factor: 1.0
@@ -9564,6 +9648,7 @@
   iteration_variable_name: iteration_value
   jump_command: ssh jump_server_IP
   jump_on_connect: false
+  jump_password: ''
   jump_username: ''
   last_modified: '2020-07-23 04:24:01.412880'
   log_level: 1
@@ -9623,6 +9708,7 @@
   conversion_method: none
   creator: admin
   credentials: device
+  custom_password: ''
   custom_username: ''
   definition: Definition
   delay_factor: 1.0
@@ -9653,6 +9739,7 @@
   iteration_variable_name: iteration_value
   jump_command: ssh jump_server_IP
   jump_on_connect: false
+  jump_password: ''
   jump_username: ''
   last_modified: '2020-07-23 04:24:08.389448'
   log_level: 1
@@ -9712,6 +9799,7 @@
   conversion_method: none
   creator: admin
   credentials: device
+  custom_password: ''
   custom_username: ''
   definition: Definition
   delay_factor: 1.0
@@ -9742,6 +9830,7 @@
   iteration_variable_name: iteration_value
   jump_command: ssh jump_server_IP
   jump_on_connect: false
+  jump_password: ''
   jump_username: ''
   last_modified: '2020-07-23 04:24:14.709003'
   log_level: 1
@@ -9801,6 +9890,7 @@
   conversion_method: none
   creator: admin
   credentials: device
+  custom_password: ''
   custom_username: ''
   definition: Definition
   delay_factor: 1.0
@@ -9831,6 +9921,7 @@
   iteration_variable_name: iteration_value
   jump_command: ssh jump_server_IP
   jump_on_connect: false
+  jump_password: ''
   jump_username: ''
   last_modified: '2020-07-23 04:24:25.381253'
   log_level: 1
@@ -9890,6 +9981,7 @@
   conversion_method: none
   creator: admin
   credentials: device
+  custom_password: ''
   custom_username: ''
   definition: Definition
   delay_factor: 1.0
@@ -9920,6 +10012,7 @@
   iteration_variable_name: iteration_value
   jump_command: ssh jump_server_IP
   jump_on_connect: false
+  jump_password: ''
   jump_username: ''
   last_modified: '2020-07-23 04:24:35.821369'
   log_level: 1
@@ -9979,6 +10072,7 @@
   conversion_method: none
   creator: admin
   credentials: device
+  custom_password: ''
   custom_username: ''
   definition: Definition
   delay_factor: 1.0
@@ -10009,6 +10103,7 @@
   iteration_variable_name: iteration_value
   jump_command: ssh jump_server_IP
   jump_on_connect: false
+  jump_password: ''
   jump_username: ''
   last_modified: '2020-07-23 04:24:46.398373'
   log_level: 1
@@ -10649,6 +10744,7 @@
   conversion_method: none
   creator: admin
   credentials: device
+  custom_password: ''
   custom_username: ''
   definition: Definition
   delay_factor: 1.0
@@ -10679,6 +10775,7 @@
   iteration_variable_name: iteration_value
   jump_command: ssh jump_server_IP
   jump_on_connect: false
+  jump_password: ''
   jump_username: ''
   last_modified: '2020-07-24 04:12:46.366228'
   log_level: 1
@@ -10808,6 +10905,7 @@
   conversion_method: none
   creator: admin
   credentials: device
+  custom_password: ''
   custom_username: ''
   definition: Definition
   delay_factor: 1.0
@@ -10838,6 +10936,7 @@
   iteration_variable_name: iteration_value
   jump_command: ssh jump_server_IP
   jump_on_connect: false
+  jump_password: ''
   jump_username: ''
   last_modified: '2020-07-24 04:13:28.626790'
   log_level: 1
@@ -10970,6 +11069,7 @@
   conversion_method: none
   creator: admin
   credentials: device
+  custom_password: ''
   custom_username: ''
   definition: Definition
   delay_factor: 1.0
@@ -11000,6 +11100,7 @@
   iteration_variable_name: iteration_value
   jump_command: ssh jump_server_IP
   jump_on_connect: false
+  jump_password: ''
   jump_username: ''
   last_modified: '2020-07-24 04:18:11.791054'
   log_level: 1
@@ -11982,6 +12083,7 @@
   number_of_retries: 0
   operating_system: ''
   params: {}
+  password: ''
   payload: {}
   pools: [All objects]
   positions:
@@ -12026,6 +12128,7 @@
   conversion_method: none
   creator: admin
   credentials: device
+  custom_password: ''
   custom_username: ''
   definition: Definition
   delay_factor: 1.0
@@ -12056,6 +12159,7 @@
   iteration_variable_name: iteration_value
   jump_command: ''
   jump_on_connect: false
+  jump_password: ''
   jump_username: ''
   last_modified: '2019-10-21 21:59:43.430409'
   log_level: 1
@@ -12340,6 +12444,7 @@
   conversion_method: none
   creator: admin
   credentials: custom
+  custom_password: ''
   custom_username: '{{ get_result("Credentials encryption", device=device.name)["username"]
     }}'
   definition: Definition
@@ -12371,6 +12476,7 @@
   iteration_variable_name: iteration_value
   jump_command: ssh jump_server_IP
   jump_on_connect: false
+  jump_password: ''
   jump_username: ''
   last_modified: '2020-09-24 04:24:35.178486'
   log_level: 1
@@ -12615,6 +12721,7 @@
   number_of_retries: 0
   operating_system: ''
   params: {verify: 'false'}
+  password: ''
   payload:
     a: b
     c: ['1', '2', '3']
@@ -12803,6 +12910,7 @@
   conversion_method: none
   creator: admin
   credentials: device
+  custom_password: ''
   custom_username: ''
   definition: Definition
   delay_factor: 1.0
@@ -12833,6 +12941,7 @@
   iteration_variable_name: iteration_value
   jump_command: ssh jump_server_IP
   jump_on_connect: false
+  jump_password: ''
   jump_username: ''
   last_modified: '2020-09-25 04:28:01.307849'
   log_level: 1
@@ -12919,6 +13028,7 @@
   number_of_retries: 0
   operating_system: ''
   params: {verify: 'false'}
+  password: ''
   payload:
     a: b
     c: ['1', '2', '3']
@@ -12991,6 +13101,7 @@
   number_of_retries: 0
   operating_system: ''
   params: {verify: 'false'}
+  password: ''
   payload:
     a: b
     c: ['1', '2', '3']
@@ -13884,6 +13995,7 @@
   conversion_method: none
   creator: admin
   credentials: device
+  custom_password: ''
   custom_username: ''
   definition: Definition
   delay_factor: 1.0
@@ -13914,6 +14026,7 @@
   iteration_variable_name: iteration_value
   jump_command: ssh jump_server_IP
   jump_on_connect: false
+  jump_password: ''
   jump_username: ''
   last_modified: '2020-11-04 02:37:36.654430'
   log_level: 1

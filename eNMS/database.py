@@ -344,7 +344,7 @@ class Database:
                 query = models[model].rbac_filter(query, rbac, user)
         return query
 
-    def get_credentials(self, user, device):
+    def get_device_credential(self, user, device):
         pool_alias = aliased(models["pool"])
         return max(
             db.session.query(models["credential"])

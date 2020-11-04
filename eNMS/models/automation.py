@@ -995,10 +995,9 @@ class Run(AbstractBase):
             }
         return results
 
-    def get_credentials(self, device):
+    def get_credentials(self, credential):
         if self.credentials == "device":
-            credential = db.get_credentials(self.creator, device.name)
-            return credential.username, app.get_password(credential.password)
+            return credential.name, app.get_password(credential.password)
         elif self.credentials == "user":
             user = db.fetch("user", name=self.creator)
             return user.name, app.get_password(user.password)
@@ -1009,7 +1008,7 @@ class Run(AbstractBase):
                 if substituted_password.startswith("b'"):
                     substituted_password = substituted_password[2:-1]
                 custom_password = app.get_password(substituted_password)
-            return (self.sub(self.custom_username, locals()), custom_password)
+            return self.sub(self.custom_username, locals()), custom_password
 
     def convert_result(self, result):
         if self.conversion_method == "none" or "result" not in result:
@@ -1231,7 +1230,9 @@ class Run(AbstractBase):
             change_log=False,
             logger="security",
         )
-        username, password = self.get_credentials(device)
+        device_credential = db.get_device_credential(self.creator, device.name)
+        username, password = self.get_credentials(device_credential)
+        print(username, password, "OOO"*300)
         driver = device.netmiko_driver if self.use_device_driver else self.driver
         netmiko_connection = ConnectHandler(
             device_type=driver,
@@ -1239,7 +1240,7 @@ class Run(AbstractBase):
             port=device.port,
             username=username,
             password=password,
-            secret=app.get_password(device.enable_password),
+            secret=app.get_password(device_credential.enable_password),
             fast_cli=self.fast_cli,
             timeout=self.timeout,
             global_delay_factor=self.global_delay_factor,

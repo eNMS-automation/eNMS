@@ -1232,7 +1232,6 @@ class Run(AbstractBase):
         )
         device_credential = db.get_device_credential(self.creator, device.name)
         username, password = self.get_credentials(device_credential)
-        print(username, password, "OOO"*300)
         driver = device.netmiko_driver if self.use_device_driver else self.driver
         netmiko_connection = ConnectHandler(
             device_type=driver,

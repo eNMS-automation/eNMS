@@ -121,7 +121,13 @@ class AdministrationController(BaseController):
             if not exists(path):
                 makedirs(path)
             with open(path / f"{cls_name}.yaml", "w") as migration_file:
-                yaml.dump(db.export(cls_name), migration_file)
+                yaml.dump(
+                    db.export(
+                        cls_name,
+                        private_properties=kwargs["export_private_properties"],
+                    ),
+                    migration_file,
+                )
 
     def migration_import(self, folder="migrations", **kwargs):
         status, models = "Import successful.", kwargs["import_export_types"]

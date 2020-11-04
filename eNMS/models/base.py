@@ -90,12 +90,14 @@ class AbstractBase(db.base):
     def delete(self):
         pass
 
-    def get_properties(self, export=False, exclude=None, include=None):
+    def get_properties(
+        self, export=False, exclude=None, include=None, private_properties=False
+    ):
         result = {}
         no_migrate = db.dont_migrate.get(self.type, db.dont_migrate["service"])
         properties = list(model_properties[self.type])
         for property in properties:
-            if property in db.private_properties:
+            if not private_properties and property in db.private_properties:
                 continue
             if property in db.dont_serialize.get(self.type, []):
                 continue
@@ -136,9 +138,16 @@ class AbstractBase(db.base):
         return instance
 
     def to_dict(
-        self, export=False, relation_names_only=False, exclude=None, include=None
+        self,
+        export=False,
+        relation_names_only=False,
+        exclude=None,
+        include=None,
+        private_properties=False,
     ):
-        properties = self.get_properties(export, exclude=exclude)
+        properties = self.get_properties(
+            export, exclude=exclude, private_properties=private_properties
+        )
         no_migrate = db.dont_migrate.get(self.type, db.dont_migrate["service"])
         for property, relation in relationships[self.type].items():
             if include and property not in include or exclude and property in exclude:

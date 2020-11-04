@@ -52,7 +52,11 @@ class User(AbstractBase, UserMixin):
         return self.name
 
     def update(self, **kwargs):
-        if app.settings["security"]["hash_user_passwords"] and kwargs.get("password"):
+        if (
+            app.settings["security"]["hash_user_passwords"]
+            and kwargs.get("password")
+            and not kwargs["password"].startswith("$argon2i")
+        ):
             kwargs["password"] = argon2.hash(kwargs["password"])
         super().update(**kwargs)
         self.update_rbac()

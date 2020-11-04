@@ -795,7 +795,12 @@
     "credential": [
       {
         "data": "name",
-        "title": "Username",
+        "title": "Name",
+        "search": "text"
+      },
+      {
+        "data": "subtype",
+        "title": "Type",
         "search": "text"
       },
       {
@@ -803,6 +808,11 @@
         "title": "Description",
         "search": "text",
         "orderable": false
+      },
+      {
+        "data": "username",
+        "title": "Username",
+        "search": "text"
       },
       {
         "data": "priority",

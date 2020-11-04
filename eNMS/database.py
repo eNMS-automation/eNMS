@@ -22,7 +22,7 @@ from sqlalchemy.dialects.mysql.base import MSMediumBlob
 from sqlalchemy.ext.associationproxy import ASSOCIATION_PROXY
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.ext.mutable import MutableDict, MutableList
-from sqlalchemy.orm import scoped_session, sessionmaker
+from sqlalchemy.orm import aliased, scoped_session, sessionmaker
 from sqlalchemy.types import JSON
 from sqlalchemy.orm.collections import InstrumentedList
 from time import sleep
@@ -342,6 +342,20 @@ class Database:
             if user.is_authenticated and not user.is_admin:
                 query = models[model].rbac_filter(query, rbac, user)
         return query
+
+    def get_credentials(self, user, device):
+        pool_alias = aliased(models["pool"])
+        credentials = (
+            db.session.query(models["credential"])
+            .join(models["pool"], models["credential"].user_pools)
+            .join(models["user"], models["pool"].users)
+            .join(pool_alias, models["credential"].device_pools)
+            .join(models["device"], models["pool"].devices)
+            .filter(models["user"].name == user)
+            .filter(models["device"].name == device)
+            .all()
+        )
+        return credentials
 
     def fetch_all(self, model, **kwargs):
         return self.fetch(model, allow_none=True, all_matches=True, **kwargs)

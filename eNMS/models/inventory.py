@@ -315,10 +315,14 @@ class Pool(AbstractBase):
         "Access", secondary=db.access_model_pools_table, back_populates="access_pools"
     )
     credential_devices = relationship(
-        "Credential", secondary=db.credential_device_pools_table, back_populates="device_pools"
+        "Credential",
+        secondary=db.credential_device_pools_table,
+        back_populates="device_pools",
     )
     credential_users = relationship(
-        "Credential", secondary=db.credential_user_pools_table, back_populates="user_pools"
+        "Credential",
+        secondary=db.credential_user_pools_table,
+        back_populates="user_pools",
     )
 
     def update(self, **kwargs):

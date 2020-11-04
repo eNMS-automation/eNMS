@@ -65,7 +65,12 @@ class CredentialForm(BaseForm):
     form_type = HiddenField(default="credential")
     id = HiddenField()
     name = StringField("Name", [InputRequired()])
+    subtype = SelectField(
+        "Type", choices=(("password", "Username / Password"), ("key", "SSH Key"))
+    )
     description = StringField("Description")
+    username = StringField("Username", [InputRequired()])
+    password = PasswordField("Password", [InputRequired()])
     priority = IntegerField("Priority", default=1)
     device_pools = MultipleInstanceField("Devices", model="pool")
     user_pools = MultipleInstanceField("Users", model="pool")

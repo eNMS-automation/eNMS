@@ -997,7 +997,7 @@ class Run(AbstractBase):
 
     def get_credentials(self, credential):
         if self.credentials == "device":
-            return credential.name, app.get_password(credential.password)
+            return credential.username, app.get_password(credential.password)
         elif self.credentials == "user":
             user = db.fetch("user", name=self.creator)
             return user.name, app.get_password(user.password)

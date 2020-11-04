@@ -60,6 +60,17 @@ class ServerForm(BaseForm):
     weight = IntegerField("Weigth")
 
 
+class CredentialForm(BaseForm):
+    template = "object"
+    form_type = HiddenField(default="credential")
+    id = HiddenField()
+    name = StringField("Name", [InputRequired()])
+    description = StringField("Description")
+    priority = IntegerField("Priority", default=1)
+    device_pools = MultipleInstanceField("Devices", model="pool")
+    user_pools = MultipleInstanceField("Users", model="pool")
+
+
 class LoginForm(BaseForm):
     form_type = HiddenField(default="login")
     authentication_method = SelectField("Authentication Method", choices=())

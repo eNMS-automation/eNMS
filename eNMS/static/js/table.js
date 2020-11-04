@@ -1114,13 +1114,13 @@ tables.credential = class CredentialTable extends Table {
       <ul class="pagination pagination-lg" style="margin: 0px;">
         <li>
           <button type="button" class="btn btn-sm btn-primary"
-          onclick="eNMS.base.showTypePanel('server', '${row.id}')" data-tooltip="Edit"
+          onclick="eNMS.base.showTypePanel('credential', '${row.id}')" data-tooltip="Edit"
             ><span class="glyphicon glyphicon-edit"></span
           ></button>
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-primary"
-          onclick="eNMS.base.showTypePanel('server', '${row.id}', 'duplicate')"
+          onclick="eNMS.base.showTypePanel('credential', '${row.id}', 'duplicate')"
           data-tooltip="Duplicate"
             ><span class="glyphicon glyphicon-duplicate"></span
           ></button>

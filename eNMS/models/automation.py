@@ -715,7 +715,11 @@ class Run(AbstractBase):
                 self.log("error", error)
                 return {"success": False, "runtime": self.runtime, "result": error}
             if self.multiprocessing and len(non_skipped_targets) > 1:
-                processes = min(len(non_skipped_targets), self.max_processes)
+                processes = min(
+                    len(non_skipped_targets),
+                    self.max_processes,
+                    app.settings["automation"]["max_process"],
+                )
                 process_args = [
                     (device.id, self.runtime, payload, results)
                     for device in non_skipped_targets

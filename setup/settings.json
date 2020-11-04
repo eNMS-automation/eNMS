@@ -25,6 +25,9 @@
       }
     }
   },
+  "automation": {
+    "max_process": 25
+  },
   "cluster": {
     "active": false,
     "id": true,

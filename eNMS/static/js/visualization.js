@@ -183,11 +183,7 @@ function createNode2d(node, nodeType) {
   marker.node_id = node.id;
   markersArray.push(marker);
   marker.on("click", function (e) {
-    if (nodeType == "site") {
-      showPoolView(node.id);
-    } else {
-      showTypePanel(nodeType, node.id);
-    }
+    showTypePanel(nodeType, node.id);
   });
   marker.on("contextmenu", function (e) {
     $(".menu").hide();
@@ -442,11 +438,7 @@ function onClick3d(click) {
     const isLink = typeof instance.id == "number";
     const id = isLink ? instance.id : instance.id._properties._id._value;
     const type = isLink ? "link" : instance.id._properties._type._value;
-    if (type == "pool") {
-      showPoolView(id);
-    } else {
-      showTypePanel(type, id);
-    }
+    showTypePanel(type, id);
   }
 }
 

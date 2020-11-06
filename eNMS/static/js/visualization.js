@@ -13,6 +13,7 @@ THREE: false
 visualization: false
 */
 
+import { showRunServicePanel } from "./automation.js";
 import {
   call,
   configureNamespace,
@@ -23,7 +24,7 @@ import {
   openPanel,
 } from "./base.js";
 import { showConnectionPanel, showDeviceData } from "./inventory.js";
-import { showRunServicePanel } from "./automation.js";
+import { tables } from "./table.js";
 
 let graph;
 let dimension;
@@ -438,9 +439,42 @@ function onClick3d(click) {
     const isLink = typeof instance.id == "number";
     const id = isLink ? instance.id : instance.id._properties._id._value;
     const type = isLink ? "link" : instance.id._properties._type._value;
-    showTypePanel(type, id);
+    if (type == "site") {
+      showFilteredTable(type, id)
+    } else {
+      showTypePanel(type, id);
+    }
   }
 }
+
+function showFilteredTable(type, id) {
+  openPanel({
+    name: "table",
+    content: `
+      <div class="modal-body">
+        <div id="tooltip-overlay" class="overlay"></div>
+        <form
+          id="search-form-device-${id}"
+          class="form-horizontal form-label-left"
+          method="post"
+        >
+          <table
+            id="table-device-${id}"
+            class="table table-striped table-bordered table-hover"
+            cellspacing="0"
+            width="100%"
+          ></table>
+        </form>
+      </div>`,
+    id: id,
+    title: "Device",
+    callback: function () {
+      // eslint-disable-next-line new-cap
+      new tables["device"]("device", null, null, id);
+    },
+  });
+}
+
 
 function create3dGraphNetwork(container) {
   const viewSettings = visualization.logical;

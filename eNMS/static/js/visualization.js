@@ -535,7 +535,6 @@ export function initView() {
     notify("Loading network...", "success", 5);
   } else {
     initGeographicalFramework();
-    $("#view-type").change(() => displayNetwork({ noAlert: true }));
   }
   displayNetwork({ noAlert: true });
 }

@@ -52,7 +52,6 @@ edit / new mechanism: highlight to teleport to any service. Makes it easier to w
 like with the scheduler to save the session via REST API. For this to work, admin credentials must be defined via
 two new environment variables: ENMS_USER and ENMS_PASSWORD (same as scheduler)
 - Add bulk deletion and bulk edit mechanism for tables
-- Add support for multiple parallel link display in logical view
 - Add "run service on targets mechanism" in device table and network visualization pages
 - Fix bug connection not cached when using iteration values with a standalone service
 - Fix bug when exporting table to .csv - column shift if comma in property value

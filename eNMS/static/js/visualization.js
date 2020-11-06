@@ -324,13 +324,22 @@ function processNetwork(network) {
       const key = `${device.longitude}/${device.latitude}`;
       devices[key] = devices[key] ? [...devices[key], device.id] : [device.id];
     }
-    let filteredDevices = new Set();
+    let colocatedDevices = new Set();
     for (const [coords, ids] of Object.entries(devices)) {
       if (ids.length == 1) continue;
-      ids.forEach(filteredDevices.add, filteredDevices);
+      ids.forEach(colocatedDevices.add, colocatedDevices);
       const [longitude, latitude] = coords.split("/");
-      network.device.push({type: "site", icon: "site", id: ids.join("-"), longitude: longitude, latitude: latitude})
+      network.device.push({
+        type: "site",
+        icon: "site",
+        id: ids.join("-"),
+        longitude: longitude,
+        latitude: latitude,
+      });
     }
+    network.device = network.device.filter(
+      (device) => !colocatedDevices.has(device.id)
+    );
   }
 }
 
@@ -348,7 +357,7 @@ function displayNetwork({ noAlert, withCluster }) {
     url: "/view_filtering",
     data: data,
     callback: function (results) {
-      processNetwork(results)
+      processNetwork(results);
       if (page == "logical_view") {
         if (
           results.device.length > maximumSize.node ||

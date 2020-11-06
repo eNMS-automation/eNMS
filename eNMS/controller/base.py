@@ -391,11 +391,12 @@ class BaseController:
 
     def build_filtering_constraints(self, model, **kwargs):
         table, constraints = models[model], []
+        constraint_dict = {**kwargs["form"], **kwargs.get("constraints", {})}
         for property in model_properties[model]:
-            value = kwargs["form"].get(property)
+            value = constraint_dict.get(property)
             if not value:
                 continue
-            filter = kwargs["form"].get(f"{property}_filter")
+            filter = constraint_dict.get(f"{property}_filter")
             if value in ("bool-true", "bool-false"):
                 constraint = getattr(table, property) == (value == "bool-true")
             elif filter == "equality":
@@ -408,8 +409,8 @@ class BaseController:
                 constraint = getattr(table, property).op(regex_operator)(value)
             constraints.append(constraint)
         for related_model, relation_properties in relationships[model].items():
-            relation_ids = [int(id) for id in kwargs["form"].get(related_model, [])]
-            filter = kwargs["form"].get(f"{related_model}_filter")
+            relation_ids = [int(id) for id in constraint_dict.get(related_model, [])]
+            filter = constraint_dict.get(f"{related_model}_filter")
             if filter == "none":
                 constraint = ~getattr(table, related_model).any()
             elif not relation_ids:

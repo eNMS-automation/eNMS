@@ -440,14 +440,16 @@ function onClick3d(click) {
     const id = isLink ? instance.id : instance.id._properties._id._value;
     const type = isLink ? "link" : instance.id._properties._type._value;
     if (type == "site") {
-      showFilteredTable(type, id)
+      const longitude = instance.id._properties._longitude._value;
+      const latitude = instance.id._properties._latitude._value;
+      showFilteredTable(id, {longitude: longitude, latitude: latitude});
     } else {
       showTypePanel(type, id);
     }
   }
 }
 
-function showFilteredTable(type, id) {
+function showFilteredTable(id, constraints) {
   openPanel({
     name: "table",
     content: `
@@ -470,7 +472,7 @@ function showFilteredTable(type, id) {
     title: "Device",
     callback: function () {
       // eslint-disable-next-line new-cap
-      new tables["device"]("device", null, null, id);
+      new tables["device"]("device", null, null, id, constraints);
     },
   });
 }

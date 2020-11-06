@@ -24,7 +24,7 @@ let waitForSearch = false;
 $.fn.dataTable.ext.errMode = "none";
 
 export class Table {
-  constructor(type, instance, runtime, id) {
+  constructor(type, instance, runtime, id, constraints) {
     let self = this;
     this.instance = instance;
     this.runtime = runtime;
@@ -123,6 +123,7 @@ export class Table {
         data: (d) => {
           Object.assign(d, {
             form: serializeForm(`#search-form-${this.id}`),
+            constraints: constraints,
             instance: this.instance,
             columns: this.columns,
             type: this.type,

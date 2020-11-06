@@ -295,8 +295,6 @@ class Pool(AbstractBase):
     last_modified = db.Column(db.TinyString, info={"log_change": False})
     description = db.Column(db.SmallString)
     operator = db.Column(db.TinyString, default="all")
-    latitude = db.Column(db.TinyString, default="0.0")
-    longitude = db.Column(db.TinyString, default="0.0")
     target_services = relationship(
         "Service", secondary=db.service_target_pool_table, back_populates="target_pools"
     )

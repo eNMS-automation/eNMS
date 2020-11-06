@@ -2788,3 +2788,318 @@
   subtype: ''
   type: device
   vendor: Cisco
+- creator: admin
+  custom_json:
+    a: c
+    b: [1, 2, '3']
+  custom_multiselect: [a, c]
+  custom_select: b
+  description: Dallas
+  down: false
+  icon: router
+  ip_address: 10.0.0.100
+  last_configuration_duration: Never
+  last_configuration_failure: Never
+  last_configuration_runtime: Never
+  last_configuration_status: Never
+  last_configuration_update: Never
+  last_modified: '2020-11-06 04:49:26.367303'
+  last_operational_data_duration: Never
+  last_operational_data_failure: Never
+  last_operational_data_runtime: Never
+  last_operational_data_status: Never
+  last_operational_data_update: Never
+  last_specialized_data_duration: Never
+  last_specialized_data_failure: Never
+  last_specialized_data_runtime: Never
+  last_specialized_data_status: Never
+  last_specialized_data_update: Never
+  latitude: '32.78306'
+  location: Dallas
+  longitude: '-96.80667'
+  model: Cisco
+  name: Dallas-2
+  napalm_driver: eos
+  netmiko_driver: arista_eos
+  operating_system: IOS-XR
+  os_version: 5.1.X
+  port: 22
+  property1: 10.145.14.1
+  property2: CP
+  property3: ''
+  public: false
+  reachable: true
+  scrapli_driver: arista_eos
+  subtype: ''
+  type: device
+  vendor: Cisco
+- creator: admin
+  custom_json:
+    a: c
+    b: [1, 2, '3']
+  custom_multiselect: [a, c]
+  custom_select: b
+  description: Dallas
+  down: false
+  icon: router
+  ip_address: 10.0.0.100
+  last_configuration_duration: Never
+  last_configuration_failure: Never
+  last_configuration_runtime: Never
+  last_configuration_status: Never
+  last_configuration_update: Never
+  last_modified: '2020-11-06 04:49:32.451857'
+  last_operational_data_duration: Never
+  last_operational_data_failure: Never
+  last_operational_data_runtime: Never
+  last_operational_data_status: Never
+  last_operational_data_update: Never
+  last_specialized_data_duration: Never
+  last_specialized_data_failure: Never
+  last_specialized_data_runtime: Never
+  last_specialized_data_status: Never
+  last_specialized_data_update: Never
+  latitude: '32.78306'
+  location: Dallas
+  longitude: '-96.80667'
+  model: Cisco
+  name: Dallas-3
+  napalm_driver: eos
+  netmiko_driver: arista_eos
+  operating_system: IOS-XR
+  os_version: 5.1.X
+  port: 22
+  property1: 10.145.14.1
+  property2: CP
+  property3: ''
+  public: false
+  reachable: true
+  scrapli_driver: arista_eos
+  subtype: ''
+  type: device
+  vendor: Cisco
+- creator: admin
+  custom_json:
+    a: c
+    b: [1, 2, '3']
+  custom_multiselect: [a, c]
+  custom_select: b
+  description: Dallas
+  down: false
+  icon: router
+  ip_address: 10.0.0.100
+  last_configuration_duration: Never
+  last_configuration_failure: Never
+  last_configuration_runtime: Never
+  last_configuration_status: Never
+  last_configuration_update: Never
+  last_modified: '2020-11-06 04:49:37.427351'
+  last_operational_data_duration: Never
+  last_operational_data_failure: Never
+  last_operational_data_runtime: Never
+  last_operational_data_status: Never
+  last_operational_data_update: Never
+  last_specialized_data_duration: Never
+  last_specialized_data_failure: Never
+  last_specialized_data_runtime: Never
+  last_specialized_data_status: Never
+  last_specialized_data_update: Never
+  latitude: '32.78306'
+  location: Dallas
+  longitude: '-96.80667'
+  model: Cisco
+  name: Dallas-4
+  napalm_driver: eos
+  netmiko_driver: arista_eos
+  operating_system: IOS-XR
+  os_version: 5.1.X
+  port: 22
+  property1: 10.145.14.1
+  property2: CP
+  property3: ''
+  public: false
+  reachable: true
+  scrapli_driver: arista_eos
+  subtype: ''
+  type: device
+  vendor: Cisco
+- creator: admin
+  custom_json:
+    a: c
+    b: [1, 2, '3']
+  custom_multiselect: [a, c]
+  custom_select: b
+  description: Austin
+  down: false
+  icon: router
+  ip_address: 192.168.105.9
+  last_configuration_duration: Never
+  last_configuration_failure: Never
+  last_configuration_runtime: Never
+  last_configuration_status: Never
+  last_configuration_update: Never
+  last_modified: '2020-11-06 04:49:46.192297'
+  last_operational_data_duration: Never
+  last_operational_data_failure: Never
+  last_operational_data_runtime: Never
+  last_operational_data_status: Never
+  last_operational_data_update: Never
+  last_specialized_data_duration: Never
+  last_specialized_data_failure: Never
+  last_specialized_data_runtime: Never
+  last_specialized_data_status: Never
+  last_specialized_data_update: Never
+  latitude: '30.26715'
+  location: Austin
+  longitude: '-97.74306'
+  model: Arista
+  name: Austin-2
+  napalm_driver: eos
+  netmiko_driver: arista_eos
+  operating_system: eos
+  os_version: 15.5(3)M
+  port: 22
+  property1: 10.145.14.1
+  property2: CP
+  property3: ''
+  public: false
+  reachable: true
+  scrapli_driver: arista_eos
+  subtype: ''
+  type: device
+  vendor: Arista
+- creator: admin
+  custom_json:
+    a: c
+    b: [1, 2, '3']
+  custom_multiselect: [a, c]
+  custom_select: b
+  description: Austin
+  down: false
+  icon: router
+  ip_address: 192.168.105.9
+  last_configuration_duration: Never
+  last_configuration_failure: Never
+  last_configuration_runtime: Never
+  last_configuration_status: Never
+  last_configuration_update: Never
+  last_modified: '2020-11-06 04:49:50.515386'
+  last_operational_data_duration: Never
+  last_operational_data_failure: Never
+  last_operational_data_runtime: Never
+  last_operational_data_status: Never
+  last_operational_data_update: Never
+  last_specialized_data_duration: Never
+  last_specialized_data_failure: Never
+  last_specialized_data_runtime: Never
+  last_specialized_data_status: Never
+  last_specialized_data_update: Never
+  latitude: '30.26715'
+  location: Austin
+  longitude: '-97.74306'
+  model: Arista
+  name: Austin-3
+  napalm_driver: eos
+  netmiko_driver: arista_eos
+  operating_system: eos
+  os_version: 15.5(3)M
+  port: 22
+  property1: 10.145.14.1
+  property2: CP
+  property3: ''
+  public: false
+  reachable: true
+  scrapli_driver: arista_eos
+  subtype: ''
+  type: device
+  vendor: Arista
+- creator: admin
+  custom_json:
+    a: c
+    b: [1, 2, '3']
+  custom_multiselect: [a, c]
+  custom_select: b
+  description: Jackson
+  down: false
+  icon: router
+  ip_address: 192.168.56.51
+  last_configuration_duration: Never
+  last_configuration_failure: Never
+  last_configuration_runtime: Never
+  last_configuration_status: Never
+  last_configuration_update: Never
+  last_modified: '2020-11-06 04:49:59.322806'
+  last_operational_data_duration: Never
+  last_operational_data_failure: Never
+  last_operational_data_runtime: Never
+  last_operational_data_status: Never
+  last_operational_data_update: Never
+  last_specialized_data_duration: Never
+  last_specialized_data_failure: Never
+  last_specialized_data_runtime: Never
+  last_specialized_data_status: Never
+  last_specialized_data_update: Never
+  latitude: '32.29876'
+  location: Jackson
+  longitude: '-90.18481'
+  model: Cisco
+  name: Jackson-2
+  napalm_driver: eos
+  netmiko_driver: arista_eos
+  operating_system: IOS
+  os_version: 15.5(3)M
+  port: 22
+  property1: 10.145.14.1
+  property2: CP
+  property3: ''
+  public: false
+  reachable: true
+  scrapli_driver: arista_eos
+  subtype: ''
+  type: device
+  vendor: Cisco
+- creator: admin
+  custom_json:
+    a: c
+    b: [1, 2, '3']
+  custom_multiselect: [a, c]
+  custom_select: b
+  description: Oakland
+  down: false
+  icon: router
+  ip_address: 10.0.0.112
+  last_configuration_duration: Never
+  last_configuration_failure: Never
+  last_configuration_runtime: Never
+  last_configuration_status: Never
+  last_configuration_update: Never
+  last_modified: '2020-11-06 04:50:06.701973'
+  last_operational_data_duration: Never
+  last_operational_data_failure: Never
+  last_operational_data_runtime: Never
+  last_operational_data_status: Never
+  last_operational_data_update: Never
+  last_specialized_data_duration: Never
+  last_specialized_data_failure: Never
+  last_specialized_data_runtime: Never
+  last_specialized_data_status: Never
+  last_specialized_data_update: Never
+  latitude: '37.80437'
+  location: Oakland
+  longitude: '-122.2708'
+  model: Cisco
+  name: Oakland-2
+  napalm_driver: eos
+  netmiko_driver: arista_eos
+  operating_system: IOS-XE
+  os_version: '3.6.5E '
+  port: 22
+  property1: 10.145.14.1
+  property2: CP
+  property3: ''
+  public: false
+  reachable: true
+  scrapli_driver: arista_eos
+  subtype: ''
+  type: device
+  vendor: Cisco

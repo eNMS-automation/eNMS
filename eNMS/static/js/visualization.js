@@ -321,8 +321,15 @@ function processNetwork(network) {
   if (page == "geographical_view") {
     let devices = {};
     for (const device of network.device) {
-      const key = `${device.longitude}-${device.latitude}`;
+      const key = `${device.longitude}/${device.latitude}`;
       devices[key] = devices[key] ? [...devices[key], device.id] : [device.id];
+    }
+    let filteredDevices = new Set();
+    for (const [coords, ids] of Object.entries(devices)) {
+      if (ids.length == 1) continue;
+      ids.forEach(filteredDevices.add, filteredDevices);
+      const [longitude, latitude] = coords.split("/");
+      network.device.push({type: "site", icon: "site", id: ids.join("-"), longitude: longitude, latitude: latitude})
     }
   }
 }

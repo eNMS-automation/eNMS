@@ -52,7 +52,6 @@
     router34, router35, router36, router37, Server 2, Aserver, Dallas-2, Dallas-3,
     Dallas-4, Austin-2, Austin-3, Jackson-2, Oakland-2]
   last_modified: '2020-09-19 07:12:54.590340'
-  latitude: '0.0'
   link_color: ''
   link_color_match: inclusion
   link_creator: ''
@@ -88,7 +87,6 @@
     atlantic-r28-washington, atlantic-r20-boston-1, atlantic-r20-richmond-2, atlantic-r26-boston-3,
     atlantic-r20-boston-2, atlantic-r20-richmond-1, europe-link30-2, europe-link31-2,
     europe-link35-2, europe-link35-3, atlantic-r26-boston-4-inverted]
-  longitude: '0.0'
   manually_defined: false
   name: All objects
   operator: all
@@ -191,7 +189,6 @@
     router34, router35, router36, router37, Server 2, Aserver, Dallas-2, Dallas-3,
     Dallas-4, Austin-2, Austin-3, Jackson-2, Oakland-2]
   last_modified: '2020-11-04 04:09:36.824587'
-  latitude: '0.0'
   link_color: ''
   link_color_invert: false
   link_color_match: inclusion
@@ -223,7 +220,6 @@
   link_vendor_invert: false
   link_vendor_match: inclusion
   links: []
-  longitude: '0.0'
   manually_defined: false
   name: All devices
   operator: all
@@ -327,7 +323,6 @@
   device_vendor_match: inclusion
   devices: []
   last_modified: '2020-11-04 04:09:46.618445'
-  latitude: '0.0'
   link_color: ''
   link_color_invert: false
   link_color_match: inclusion
@@ -373,7 +368,6 @@
     atlantic-r28-washington, atlantic-r20-boston-1, atlantic-r20-richmond-2, atlantic-r26-boston-3,
     atlantic-r20-boston-2, atlantic-r20-richmond-1, europe-link30-2, europe-link31-2,
     europe-link35-2, europe-link35-3, atlantic-r26-boston-4-inverted]
-  longitude: '0.0'
   manually_defined: false
   name: All links
   operator: all
@@ -461,7 +455,6 @@
     router24, router25, router26, router27, router28, router29, router30, router31,
     router32, router33, router34, router35, router36, router37, Server 2, Aserver]
   last_modified: '2020-09-21 06:22:51.921859'
-  latitude: '37.77'
   link_color: ''
   link_color_match: inclusion
   link_creator: ''
@@ -497,7 +490,6 @@
     atlantic-r28-washington, atlantic-r20-boston-1, atlantic-r20-richmond-2, atlantic-r26-boston-3,
     atlantic-r20-boston-2, atlantic-r20-richmond-1, europe-link30-2, europe-link31-2,
     europe-link35-2, europe-link35-3, atlantic-r26-boston-4-inverted]
-  longitude: '-122.43'
   manually_defined: false
   name: Datacenter San Francisco
   operator: all
@@ -573,7 +565,6 @@
     Atlanta, Baltimore, Cleveland, Cincinnati, Cambridge, Minneapolis, Sacramento,
     SanFrancisco, Orange, Oakland, Dallas-2, Dallas-3, Dallas-4, Jackson-2, Oakland-2]
   last_modified: '2020-09-21 06:22:57.467002'
-  latitude: '40.71'
   link_color: ''
   link_color_match: inclusion
   link_creator: ''
@@ -609,7 +600,6 @@
     atlantic-r28-washington, atlantic-r20-boston-1, atlantic-r20-richmond-2, atlantic-r26-boston-3,
     atlantic-r20-boston-2, atlantic-r20-richmond-1, europe-link30-2, europe-link31-2,
     europe-link35-2, europe-link35-3, atlantic-r26-boston-4-inverted]
-  longitude: '-74.0'
   manually_defined: false
   name: Datacenter New York
   operator: all
@@ -684,7 +674,6 @@
   devices: [Austin, Washington, Chicago, SanDiego, Philadelphia, Detroit, Richmond,
     Baltimore, Cincinnati, Cambridge, Minneapolis, SanFrancisco, Austin-2, Austin-3]
   last_modified: '2020-09-21 06:22:36.450390'
-  latitude: '41.87'
   link_color: ''
   link_color_match: inclusion
   link_creator: ''
@@ -720,7 +709,6 @@
     atlantic-r28-washington, atlantic-r20-boston-1, atlantic-r20-richmond-2, atlantic-r26-boston-3,
     atlantic-r20-boston-2, atlantic-r20-richmond-1, europe-link30-2, europe-link31-2,
     europe-link35-2, europe-link35-3, atlantic-r26-boston-4-inverted]
-  longitude: '-87.62'
   manually_defined: false
   name: Datacenter Chicago
   operator: all
@@ -794,7 +782,6 @@
   device_vendor_match: inclusion
   devices: [Washington]
   last_modified: '2019-10-25 14:45:46.418406'
-  latitude: '0.0'
   link_color: ''
   link_color_match: inclusion
   link_creator: ''
@@ -816,7 +803,6 @@
   link_vendor: ''
   link_vendor_match: inclusion
   links: []
-  longitude: '0.0'
   manually_defined: false
   name: Washington
   operator: all
@@ -891,7 +877,6 @@
   device_vendor_match: inclusion
   devices: []
   last_modified: '2020-06-18 03:08:09.159229'
-  latitude: '0.0'
   link_color: ''
   link_color_match: inclusion
   link_creator: ''
@@ -913,7 +898,6 @@
   link_vendor: ''
   link_vendor_match: inclusion
   links: [link0, link1, link2, link3, link4, link5, europe-link4, europe-link5]
-  longitude: '0.0'
   manually_defined: false
   name: Links 0 through 5 - Non-public pool - Access set up
   operator: all
@@ -987,7 +971,6 @@
   device_vendor_match: inclusion
   devices: []
   last_modified: '2020-06-18 03:07:43.220208'
-  latitude: '0.0'
   link_color: ''
   link_color_match: inclusion
   link_creator: ''
@@ -1009,7 +992,6 @@
   link_vendor: ''
   link_vendor_match: inclusion
   links: [link6, link7, link8, link9, europe-link6, europe-link7, europe-link8, europe-link9]
-  longitude: '0.0'
   manually_defined: false
   name: Links 6 through 9 - Public pools
   operator: all
@@ -1083,7 +1065,6 @@
   device_vendor_match: inclusion
   devices: []
   last_modified: '2020-09-21 06:17:30.948195'
-  latitude: '0.0'
   link_color: ''
   link_color_match: inclusion
   link_creator: ''
@@ -1105,7 +1086,6 @@
   link_vendor: ''
   link_vendor_match: inclusion
   links: []
-  longitude: '0.0'
   manually_defined: false
   name: Non-admin user pool
   operator: all
@@ -1179,7 +1159,6 @@
   device_vendor_match: inclusion
   devices: []
   last_modified: '2020-09-21 06:31:33.876612'
-  latitude: '0.0'
   link_color: ''
   link_color_match: inclusion
   link_creator: ''
@@ -1201,7 +1180,6 @@
   link_vendor: ''
   link_vendor_match: inclusion
   links: []
-  longitude: '0.0'
   manually_defined: false
   name: User ny
   operator: all
@@ -1275,7 +1253,6 @@
   device_vendor_match: inclusion
   devices: []
   last_modified: '2020-09-21 08:57:14.927608'
-  latitude: '0.0'
   link_color: ''
   link_color_match: inclusion
   link_creator: ''
@@ -1297,7 +1274,6 @@
   link_vendor: ''
   link_vendor_match: inclusion
   links: []
-  longitude: '0.0'
   manually_defined: false
   name: User readonly
   operator: all
@@ -1376,7 +1352,6 @@
     SanFrancisco, Orange, Oakland, Denver, Server 2, Aserver, Dallas-2, Dallas-3,
     Dallas-4, Austin-2, Austin-3, Jackson-2, Oakland-2]
   last_modified: '2020-09-26 00:47:22.329360'
-  latitude: '0.0'
   link_color: ''
   link_color_match: inclusion
   link_creator: ''
@@ -1401,7 +1376,6 @@
   links: [link0, atlantic-r26-boston-1, atlantic-r26-boston-2, atlantic-r26-ny, atlantic-r26-washington,
     atlantic-r28-ny, atlantic-r28-washington, atlantic-r20-boston-1, atlantic-r20-richmond-2,
     atlantic-r26-boston-3, atlantic-r20-boston-2, atlantic-r20-richmond-1, atlantic-r26-boston-4-inverted]
-  longitude: '0.0'
   manually_defined: false
   name: 'Pool Invert Mechanism: ~router in name, ~link[1-9] in name'
   operator: all
@@ -1496,7 +1470,6 @@
   device_vendor_match: inclusion
   devices: []
   last_modified: '2020-11-04 04:10:00.565904'
-  latitude: '0.0'
   link_color: ''
   link_color_invert: false
   link_color_match: inclusion
@@ -1528,7 +1501,6 @@
   link_vendor_invert: false
   link_vendor_match: inclusion
   links: []
-  longitude: '0.0'
   manually_defined: false
   name: All users
   operator: all

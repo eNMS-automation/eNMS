@@ -465,7 +465,6 @@ function create3dGraphNetwork(container) {
     .onLinkClick((link) => showTypePanel("link", link.id))
     .linkWidth(viewSettings.link_width)
     .linkOpacity(viewSettings.link_opacity)
-    .linkCurvature("curvature")
     .linkCurveRotation("rotation");
   if (viewSettings.display_link_label) {
     graph
@@ -558,14 +557,6 @@ export function initView() {
 
 function update3dGraphData(graph, devices, links) {
   const nodesId = devices.map((node) => node.id);
-  let duplicates = {};
-  let curvature = {};
-  for (const link of links) {
-    const key1 = `${link.source_id}-${link.destination_id}`;
-    const key2 = `${link.destination_id}-${link.source_id}`;
-    curvature[link.id] = duplicates[key1] || 0;
-    duplicates[key1] = duplicates[key2] = (duplicates[key1] || 0) + 1;
-  }
   graph
     .graphData({
       nodes: devices,
@@ -575,13 +566,9 @@ function update3dGraphData(graph, devices, links) {
             nodesId.includes(link.source_id) && nodesId.includes(link.destination_id)
         )
         .map((link) => {
-          const key = `${link.destination_id}-${link.source_id}`;
-          const angle = (Math.PI * 2 * curvature[link.id]) / duplicates[key];
           return {
             source: link.source_id,
             target: link.destination_id,
-            curvature: duplicates[key] > 2 ? 1 : duplicates[key] == 2 ? 0.2 : 0,
-            rotation: curvature[link.id] ? angle : 0,
             value: 5,
             ...link,
           };

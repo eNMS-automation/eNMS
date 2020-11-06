@@ -317,6 +317,16 @@ Object.assign(action, {
   Clustered: () => displayNetwork({ withCluster: true }),
 });
 
+function processNetwork(network) {
+  if (page == "geographical_view") {
+    let devices = {};
+    for (const device of network.device) {
+      const key = `${device.longitude}-${device.latitude}`;
+      devices[key] = devices[key] ? [...devices[key], device.id] : [device.id];
+    }
+  }
+}
+
 function displayNetwork({ noAlert, withCluster }) {
   const maximumSize = visualization.logical.maximum_size;
   let data = {};
@@ -331,6 +341,7 @@ function displayNetwork({ noAlert, withCluster }) {
     url: "/view_filtering",
     data: data,
     callback: function (results) {
+      processNetwork(results)
       if (page == "logical_view") {
         if (
           results.device.length > maximumSize.node ||

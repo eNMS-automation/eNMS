@@ -442,7 +442,7 @@ function onClick3d(click) {
     if (type == "site") {
       const longitude = instance.id._properties._longitude._value;
       const latitude = instance.id._properties._latitude._value;
-      showFilteredTable(id, {longitude: longitude, latitude: latitude});
+      showFilteredTable(id, { longitude: longitude, latitude: latitude });
     } else {
       showTypePanel(type, id);
     }
@@ -476,7 +476,6 @@ function showFilteredTable(id, constraints) {
     },
   });
 }
-
 
 function create3dGraphNetwork(container) {
   const viewSettings = visualization.logical;

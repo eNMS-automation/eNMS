@@ -3,7 +3,6 @@ global
 action: false
 page: false
 serviceTypes: false
-Set: false
 theme: false
 vis: false
 */

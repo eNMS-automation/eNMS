@@ -130,6 +130,7 @@ def create_pool(pool: dict) -> dict:
 @check_pages("table/device", "table/link", "visualization/geographical_view")
 def test_pool_management(user_client):
     create_from_file(user_client, "europe.xls")
+    pool_number = len(db.fetch_all("pool"))
     user_client.post("/update/pool", data=create_pool(pool1))
     user_client.post("/update/pool", data=create_pool(pool2))
     p1, p2 = db.fetch("pool", name="pool1"), db.fetch("pool", name="pool2")
@@ -137,4 +138,4 @@ def test_pool_management(user_client):
     assert len(p1.links) == 20
     assert len(p2.devices) == 12
     assert len(p2.links) == 4
-    assert len(db.fetch_all("pool")) == 15
+    assert len(db.fetch_all("pool")) == pool_number + 2

@@ -217,7 +217,7 @@ function createLink3d(link) {
       color: color,
     }),
     width: 1,
-  })
+  });
   if (visualization.geographical._3D.labels.link) {
     labels.add({
       // eslint-disable-next-line new-cap
@@ -340,14 +340,23 @@ function processNetwork(network) {
   let links = {};
   let bundleCoordinates = {};
   for (const link of network.link) {
-    const key = [link.source_id, link.destination_id].sort().join("/");
+    const key = (page == "logical_view"
+      ? [link.source_id, link.destination_id]
+      : [
+          `${link.source_latitude}/${link.source_longitude}`,
+          `${link.destination_latitude}/${link.destination_longitude}`,
+        ]
+    )
+      .sort()
+      .join("/");
     links[key] = links[key] ? [...links[key], link.id] : [link.id];
-    if (!bundleCoordinates[key]) bundleCoordinates[key] = {
-      source_latitude: link.source_latitude,
-      source_longitude: link.source_longitude,
-      destination_latitude: link.destination_latitude,
-      destination_longitude: link.destination_longitude,
-    }
+    if (!bundleCoordinates[key])
+      bundleCoordinates[key] = {
+        source_latitude: link.source_latitude,
+        source_longitude: link.source_longitude,
+        destination_latitude: link.destination_latitude,
+        destination_longitude: link.destination_longitude,
+      };
   }
   let parallelLinks = new Set();
   for (const [endpoints, ids] of Object.entries(links)) {
@@ -360,12 +369,10 @@ function processNetwork(network) {
       color: "#FFFFFF",
       source_id: source_id,
       destination_id: destination_id,
-      ...bundleCoordinates[endpoints]
+      ...bundleCoordinates[endpoints],
     });
   }
-  network.link = network.link.filter(
-    (link) => !parallelLinks.has(link.id)
-  );
+  network.link = network.link.filter((link) => !parallelLinks.has(link.id));
 }
 
 function displayNetwork({ noAlert, withCluster }) {
@@ -472,7 +479,7 @@ function onClick3d(click) {
       const latitude = instance.id._properties._latitude._value;
       showFilteredTable(id, "device", { longitude: longitude, latitude: latitude });
     } else if (typeof id === "string" && id.includes("-")) {
-      showFilteredTable(id, "link", {id: "(148|149)", id_filter: "regex"});
+      showFilteredTable(id, "link", { id: id.split("-").join("|"), id_filter: "regex" });
     } else {
       showTypePanel(type, id);
     }

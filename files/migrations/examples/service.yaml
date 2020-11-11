@@ -5078,7 +5078,7 @@
       content: "The iteration values are set to [\"Loopback11\",\"Loopback15\"] (static),\
         \ and the name\r\nof the iteration variable is set to a non-default value.\r\
         \nThe service does a \"show interface\" over the loopback interfaces."
-      positions: [202, -224]
+      positions: [208, -239]
     76ece5f4-54f7-4f6b-8ea0-7d2918524e92:
       alignment: left
       content: "This service iterates over a set of values defined\r\nat the first\
@@ -5108,7 +5108,7 @@
         \nwith the iteration set to [\"Washington\", \"Atlanta\"].\r\nCredentials\
         \ must be updated after a database drop."
       positions: [-99, 196]
-  last_modified: '2020-05-07 04:21:08.180083'
+  last_modified: '2020-11-11 01:51:18.223089'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100

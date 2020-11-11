@@ -339,9 +339,16 @@ function processNetwork(network) {
     );
   }
   let links = {};
+  let bundleCoordinates = {};
   for (const link of network.link) {
     const key = [link.source_id, link.destination_id].sort().join("/");
     links[key] = links[key] ? [...links[key], link.id] : [link.id];
+    if (!bundleCoordinates[key]) bundleCoordinates[key] = {
+      source_latitude: link.source_latitude,
+      source_longitude: link.source_longitude,
+      destination_latitude: link.destination_latitude,
+      destination_longitude: link.destination_longitude,
+    }
   }
   let parallelLinks = new Set();
   for (const [endpoints, ids] of Object.entries(links)) {
@@ -349,9 +356,12 @@ function processNetwork(network) {
     ids.forEach(parallelLinks.add, parallelLinks);
     const [source_id, destination_id] = endpoints.split("/");
     network.link.push({
+      name: `Bundle:${ids.join("-")}`,
       id: ids.join("-"),
+      color: "#FFFFFF",
       source_id: source_id,
       destination_id: destination_id,
+      ...bundleCoordinates[endpoints]
     });
   }
   network.link = network.link.filter(

@@ -31,12 +31,8 @@
       "users",
       "destination_id",
       "destination_name",
-      "destination_latitude",
-      "destination_longitude",
       "source_id",
-      "source_name",
-      "source_latitude",
-      "source_longitude"
+      "source_name"
     ],
     "pool": [
       "access",

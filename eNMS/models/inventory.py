@@ -215,11 +215,15 @@ class Link(Object):
         backref=backref("source", cascade="all, delete-orphan"),
     )
     source_name = association_proxy("source", "name")
+    source_longitude = association_proxy("source", "longitude")
+    source_latitude = association_proxy("source", "latitude")
     destination = relationship(
         Device,
         primaryjoin=destination_id == Device.id,
         backref=backref("destination", cascade="all, delete-orphan"),
     )
+    destination_longitude = association_proxy("destination", "longitude")
+    destination_latitude = association_proxy("destination", "latitude")
     destination_name = association_proxy("destination", "name")
     pools = relationship("Pool", secondary=db.pool_link_table, back_populates="links")
     __table_args__ = (UniqueConstraint(name, source_id, destination_id),)

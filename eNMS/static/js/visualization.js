@@ -31,14 +31,13 @@ let dimension;
 let selectedObject;
 let markersArray = [];
 let polylinesObjects = {};
-let polylinesProperties = {};
 let layer;
 let markerType;
 let map;
 let markerGroup;
 let clustered;
-let geographicalDevices = {};
-let geographicalLinks = {};
+let devicesProperties = {};
+let linksProperties = {};
 let routerIcon;
 let viewer;
 let handler;
@@ -136,7 +135,7 @@ function changeMarker(type) {
 
 function createNode(node, nodeType) {
   if (!node.latitude && !node.longitude) return;
-  geographicalDevices[node.id] = node;
+  devicesProperties[node.id] = node;
   (dimension == "2D" ? createNode2d : createNode3d)(node, nodeType);
 }
 
@@ -200,7 +199,7 @@ function createNode2d(node, nodeType) {
 }
 
 function createLink(link) {
-  geographicalLinks[link.id] = link;
+  linksProperties[link.id] = link;
   (dimension == "2D" ? createLink2d : createLink3d)(link);
 }
 
@@ -296,6 +295,7 @@ function deleteAllLinks() {
     }
   }
   polylinesObjects = {};
+  linksProperties = {};
 }
 
 function deleteAll() {
@@ -360,6 +360,7 @@ function processNetwork(network) {
       color: "#FFFFFF",
       source_id: source_id,
       destination_id: destination_id,
+      constraints: bundleCoordinates[endpoints],
       ...bundleCoordinates[endpoints]
     });
   }
@@ -451,7 +452,7 @@ function onRightClick3d(click) {
   if (instance) {
     const isLink = typeof instance.id == "number";
     const id = isLink ? instance.id : instance.id._properties._id._value;
-    selectedObject = (isLink ? geographicalLinks : geographicalDevices)[id];
+    selectedObject = (isLink ? linksProperties : devicesProperties)[id];
     const menu = isLink ? "link" : selectedObject.type == "pool" ? "site" : "device";
     $(".menu").hide();
     $(`.rc-${menu}-menu`).show();
@@ -470,26 +471,28 @@ function onClick3d(click) {
     if (type == "site") {
       const longitude = instance.id._properties._longitude._value;
       const latitude = instance.id._properties._latitude._value;
-      showFilteredTable(id, { longitude: longitude, latitude: latitude });
+      showFilteredTable(id, "device", { longitude: longitude, latitude: latitude });
+    } else if (isLink && id.includes("-")) {
+      showFilteredTable(id, "link", linksProperties[id].constraints);
     } else {
       showTypePanel(type, id);
     }
   }
 }
 
-function showFilteredTable(id, constraints) {
+function showFilteredTable(id, type, constraints) {
   openPanel({
     name: "table",
     content: `
       <div class="modal-body">
         <div id="tooltip-overlay" class="overlay"></div>
         <form
-          id="search-form-device-${id}"
+          id="search-form-${type}-${id}"
           class="form-horizontal form-label-left"
           method="post"
         >
           <table
-            id="table-device-${id}"
+            id="table-${type}-${id}"
             class="table table-striped table-bordered table-hover"
             cellspacing="0"
             width="100%"
@@ -497,10 +500,10 @@ function showFilteredTable(id, constraints) {
         </form>
       </div>`,
     id: id,
-    title: "Device",
+    title: `Filtered ${type}s`,
     callback: function () {
       // eslint-disable-next-line new-cap
-      new tables["device"]("device", null, null, id, constraints);
+      new tables[type](type, null, null, id, constraints);
     },
   });
 }

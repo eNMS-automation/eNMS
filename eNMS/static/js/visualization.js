@@ -360,7 +360,6 @@ function processNetwork(network) {
       color: "#FFFFFF",
       source_id: source_id,
       destination_id: destination_id,
-      constraints: bundleCoordinates[endpoints],
       ...bundleCoordinates[endpoints]
     });
   }
@@ -472,8 +471,8 @@ function onClick3d(click) {
       const longitude = instance.id._properties._longitude._value;
       const latitude = instance.id._properties._latitude._value;
       showFilteredTable(id, "device", { longitude: longitude, latitude: latitude });
-    } else if (isLink && id.includes("-")) {
-      showFilteredTable(id, "link", linksProperties[id].constraints);
+    } else if (typeof id === "string" && id.includes("-")) {
+      showFilteredTable(id, "link", {id: "(148|149)", id_filter: "regex"});
     } else {
       showTypePanel(type, id);
     }

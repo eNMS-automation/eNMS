@@ -365,7 +365,7 @@ function processNetwork(network) {
     const [source_id, destination_id] = endpoints.split("/");
     network.link.push({
       type: "bundle",
-      name: `Bundle:${ids.join("-")}`,
+      name: "Colocated links",
       id: ids.join("-"),
       color: "#FF1493",
       source_id: parseInt(source_id),

@@ -474,12 +474,9 @@ function onClick3d(click) {
     const isLink = ["number", "string"].includes(typeof instance.id);
     const id = isLink ? instance.id : instance.id._properties._id._value;
     const type = isLink ? "link" : instance.id._properties._type._value;
-    if (type == "site") {
-      const longitude = instance.id._properties._longitude._value;
-      const latitude = instance.id._properties._latitude._value;
-      showFilteredTable(id, "device", { longitude: longitude, latitude: latitude });
-    } else if (typeof id === "string" && id.includes("-")) {
-      showFilteredTable(id, "link", { id: id.split("-").join("|"), id_filter: "regex" });
+    if (type == "site" || (typeof id === "string" && id.includes("-"))) {
+      const constraints = { id: `^(${id.split("-").join("|")})$`, id_filter: "regex" };
+      showFilteredTable(id, isLink ? "link" : "device", constraints);
     } else {
       showTypePanel(type, id);
     }
@@ -489,6 +486,7 @@ function onClick3d(click) {
 function showFilteredTable(id, type, constraints) {
   openPanel({
     name: "table",
+    size: "1000 500",
     content: `
       <div class="modal-body">
         <div id="tooltip-overlay" class="overlay"></div>

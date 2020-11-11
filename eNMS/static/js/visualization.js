@@ -184,7 +184,7 @@ function createNode2d(node, nodeType) {
   marker.node_id = node.id;
   markersArray.push(marker);
   marker.on("click", function (e) {
-    showTypePanel(nodeType, node.id);
+    leftClickBinding("device", node.id, node.type == "site")
   });
   marker.on("contextmenu", function (e) {
     $(".menu").hide();
@@ -469,18 +469,23 @@ function onRightClick3d(click) {
   }
 }
 
+function leftClickBinding(type, id, bundle) {
+  if (bundle) {
+    const constraints = { id: `^(${id.split("-").join("|")})$`, id_filter: "regex" };
+    showFilteredTable(id, type, constraints);
+  } else {
+    showTypePanel(type, id);
+  }
+}
+
 function onClick3d(click) {
   const instance = viewer.scene.pick(click.position);
   if (instance) {
     const isLink = ["number", "string"].includes(typeof instance.id);
     const id = isLink ? instance.id : instance.id._properties._id._value;
     const type = isLink ? "link" : instance.id._properties._type._value;
-    if (type == "site" || (typeof id === "string" && id.includes("-"))) {
-      const constraints = { id: `^(${id.split("-").join("|")})$`, id_filter: "regex" };
-      showFilteredTable(id, isLink ? "link" : "device", constraints);
-    } else {
-      showTypePanel(type, id);
-    }
+    const bundle = type == "site" || (typeof id === "string" && id.includes("-"));
+    leftClickBinding(type, id, bundle);
   }
 }
 
@@ -537,14 +542,7 @@ function create3dGraphNetwork(container) {
       selectedObject = node;
     })
     .onLinkHover((link) => (network.style.cursor = link ? "pointer" : null))
-    .onLinkClick((link) => {
-      if (link.type == "bundle") {
-        const constraints = { id: `^(${link.id.split("-").join("|")})$`, id_filter: "regex" };
-        showFilteredTable(link.id, "link", constraints);
-      } else {
-        showTypePanel("link", link.id);
-      }
-    })
+    .onLinkClick((link) => leftClickBinding("link", link.id, link.type == "bundle"))
     .linkWidth(viewSettings.link_width)
     .linkOpacity(viewSettings.link_opacity)
     .linkCurveRotation("rotation");

@@ -249,11 +249,11 @@ class InventoryController(BaseController):
 
     def view_filtering(self, **kwargs):
         return {
-            obj_type: [
+            f"{model}s": [
                 d.view_properties
-                for d in db.session.query(models[obj_type])
-                .filter(and_(*self.build_filtering_constraints(obj_type, **form)))
+                for d in db.session.query(models[model])
+                .filter(and_(*self.build_filtering_constraints(model, **form)))
                 .all()
             ]
-            for obj_type, form in kwargs.items()
+            for model, form in kwargs.items()
         }

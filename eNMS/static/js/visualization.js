@@ -316,7 +316,7 @@ Object.assign(action, {
 function processNetwork(network) {
   if (page == "geographical_view") {
     let devices = {};
-    for (const device of network.device) {
+    for (const device of network.devices) {
       const key = `${device.longitude}/${device.latitude}`;
       devices[key] = devices[key] ? [...devices[key], device.id] : [device.id];
     }
@@ -325,7 +325,7 @@ function processNetwork(network) {
       if (ids.length == 1) continue;
       ids.forEach(colocatedDevices.add, colocatedDevices);
       const [longitude, latitude] = coords.split("/");
-      network.device.push({
+      network.devices.push({
         type: "site",
         icon: "site",
         id: ids.join("-"),
@@ -333,13 +333,13 @@ function processNetwork(network) {
         latitude: latitude,
       });
     }
-    network.device = network.device.filter(
+    network.devices = network.devices.filter(
       (device) => !colocatedDevices.has(device.id)
     );
   }
   let links = {};
   let bundleCoordinates = {};
-  for (const link of network.link) {
+  for (const link of network.links) {
     const key = (page == "logical_view"
       ? [link.source_id, link.destination_id]
       : [
@@ -363,7 +363,7 @@ function processNetwork(network) {
     if (ids.length == 1) continue;
     ids.forEach(parallelLinks.add, parallelLinks);
     const [source_id, destination_id] = endpoints.split("/");
-    network.link.push({
+    network.links.push({
       type: "bundle",
       name: "Colocated links",
       id: ids.join("-"),
@@ -373,7 +373,7 @@ function processNetwork(network) {
       ...bundleCoordinates[endpoints],
     });
   }
-  network.link = network.link.filter((link) => !parallelLinks.has(link.id));
+  network.links = network.links.filter((link) => !parallelLinks.has(link.id));
 }
 
 function displayNetwork({ noAlert, withCluster }) {
@@ -389,12 +389,12 @@ function displayNetwork({ noAlert, withCluster }) {
   call({
     url: "/view_filtering",
     data: data,
-    callback: function (results) {
-      processNetwork(results);
+    callback: function (network) {
+      processNetwork(network);
       if (page == "logical_view") {
         if (
-          results.device.length > maximumSize.node ||
-          results.link.length > maximumSize.link
+          network.devices.length > maximumSize.node ||
+          network.links.length > maximumSize.link
         ) {
           return notify(
             `Too many objects to display. Use the device and link
@@ -403,10 +403,10 @@ function displayNetwork({ noAlert, withCluster }) {
             5
           );
         }
-        update3dGraphData(graph, results.device, results.link);
+        update3dGraphData(graph, network);
       } else {
-        results.device.map((d) => createNode(d, "device"));
-        results.link.map(createLink);
+        network.devices.map((d) => createNode(d, "device"));
+        network.links.map(createLink);
         if (dimension == "2D") {
           map[clustered ? "addLayer" : "removeLayer"](markerGroup);
         }
@@ -444,7 +444,7 @@ function showPoolView(poolId) {
         },
       });
       const graph = create3dGraphNetwork(`network-${poolId}`);
-      update3dGraphData(graph, pool.devices, pool.links);
+      update3dGraphData(graph, pool);
     },
   });
 }
@@ -636,12 +636,12 @@ export function initView() {
   displayNetwork({ noAlert: true });
 }
 
-function update3dGraphData(graph, devices, links) {
-  const nodesId = devices.map((node) => node.id);
+function update3dGraphData(graph, network) {
+  const nodesId = network.devices.map((node) => node.id);
   graph
     .graphData({
-      nodes: devices,
-      links: links
+      nodes: network.devices,
+      links: network.links
         .filter(
           (link) =>
             nodesId.includes(link.source_id) && nodesId.includes(link.destination_id)

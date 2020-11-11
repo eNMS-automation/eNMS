@@ -308,3 +308,15 @@
     400G, destination: Atlanta, last_modified: '2020-11-11 01:57:32.887923', location: '',
   model: 400G, name: link25-3, public: false, source: Dallas, subtype: ODU2, type: link,
   vendor: Ciena}
+- {color: '#000000 ', creator: admin, custom_property: CP, description: optical fiber
+    400G, destination: Atlanta, last_modified: '2020-11-11 07:39:25.193900', location: '',
+  model: 400G, name: link25-dallas2, public: false, source: Dallas-2, subtype: ODU2,
+  type: link, vendor: Ciena}
+- {color: '#000000 ', creator: admin, custom_property: CP, description: optical fiber
+    400G, destination: Dallas-2, last_modified: '2020-11-11 07:39:48.243670', location: '',
+  model: 400G, name: link25-reversed, public: false, source: Atlanta, subtype: ODU2,
+  type: link, vendor: Ciena}
+- {color: '#000000 ', creator: admin, custom_property: CP, description: optical fiber
+    400G, destination: Dallas-3, last_modified: '2020-11-11 07:40:15.498418', location: '',
+  model: 400G, name: link25-reversed-2, public: false, source: Atlanta, subtype: ODU2,
+  type: link, vendor: Ciena}

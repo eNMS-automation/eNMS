@@ -133,14 +133,14 @@ function changeMarker(type) {
   displayNetwork({});
 }
 
-function createNode(node, nodeType) {
+function createNode(node) {
   if (!node.latitude && !node.longitude) return;
   devicesProperties[node.id] = node;
-  (dimension == "2D" ? createNode2d : createNode3d)(node, nodeType);
+  (dimension == "2D" ? createNode2d : createNode3d)(node);
 }
 
-function createNode3d(node, nodeType) {
-  const icon = nodeType === "device" ? node.icon || "router" : "site";
+function createNode3d(node) {
+  const icon = node.type === "device" ? node.icon || "router" : "site";
   let entity = {
     properties: node,
     position: Cesium.Cartesian3.fromDegrees(node.longitude, node.latitude),
@@ -161,7 +161,7 @@ function createNode3d(node, nodeType) {
   markersArray.push(viewer.entities.add(entity));
 }
 
-function createNode2d(node, nodeType) {
+function createNode2d(node) {
   let marker;
   try {
     marker =
@@ -175,7 +175,7 @@ function createNode2d(node, nodeType) {
   }
   if (markerType == "Image") {
     marker.icon =
-      nodeType === "device"
+      node.type === "device"
         ? (marker.icon = window[`icon_${node.icon}`] || routerIcon)
         : (marker.icon = window["icon_site"]);
     marker.setIcon(marker.icon);
@@ -188,7 +188,7 @@ function createNode2d(node, nodeType) {
   });
   marker.on("contextmenu", function (e) {
     $(".menu").hide();
-    $(`.rc-${nodeType}-menu`).show();
+    $(`.rc-${node.type}-menu`).show();
     selectedObject = node;
   });
   if (clustered) {
@@ -405,7 +405,7 @@ function displayNetwork({ noAlert, withCluster }) {
         }
         update3dGraphData(graph, network);
       } else {
-        network.devices.map((d) => createNode(d, "device"));
+        network.devices.map(createNode);
         network.links.map(createLink);
         if (dimension == "2D") {
           map[clustered ? "addLayer" : "removeLayer"](markerGroup);

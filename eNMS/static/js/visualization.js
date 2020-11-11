@@ -30,7 +30,8 @@ let graph;
 let dimension;
 let selectedObject;
 let markersArray = [];
-let polylinesArray = [];
+let polylinesObjects = {};
+let polylinesProperties = {};
 let layer;
 let markerType;
 let map;
@@ -205,21 +206,19 @@ function createLink(link) {
 
 function createLink3d(link) {
   const color = Cesium.Color.fromCssColorString(link.color.trim()) || "#000000";
-  polylinesArray.push(
-    polylines.add({
-      id: link.id,
-      positions: Cesium.Cartesian3.fromDegreesArray([
-        link.source_longitude,
-        link.source_latitude,
-        link.destination_longitude,
-        link.destination_latitude,
-      ]),
-      material: Cesium.Material.fromType("Color", {
-        color: color,
-      }),
-      width: 1,
-    })
-  );
+  polylinesObjects[link.id] = polylines.add({
+    id: link.id,
+    positions: Cesium.Cartesian3.fromDegreesArray([
+      link.source_longitude,
+      link.source_latitude,
+      link.destination_longitude,
+      link.destination_latitude,
+    ]),
+    material: Cesium.Material.fromType("Color", {
+      color: color,
+    }),
+    width: 1,
+  })
   if (visualization.geographical._3D.labels.link) {
     labels.add({
       // eslint-disable-next-line new-cap
@@ -259,7 +258,7 @@ function createLink2d(link) {
     opacity: 1,
     smoothFactor: 1,
   });
-  polylinesArray.push(polyline);
+  polylinesObjects[link.id] = polyline;
   polyline.link_id = link.id;
   polyline.on("click", function (e) {
     showTypePanel("link", this.link_id);
@@ -289,14 +288,14 @@ function deleteAllDevices() {
 }
 
 function deleteAllLinks() {
-  polylinesArray.map((polyline) => {
+  for (const polyline of Object.values(polylinesObjects)) {
     if (dimension == "2D") {
       polyline.removeFrom(map);
     } else {
       polylines.remove(polyline);
     }
-  });
-  polylinesArray = [];
+  }
+  polylinesObjects = {};
 }
 
 function deleteAll() {
@@ -465,7 +464,7 @@ function onRightClick3d(click) {
 function onClick3d(click) {
   const instance = viewer.scene.pick(click.position);
   if (instance) {
-    const isLink = typeof instance.id == "number";
+    const isLink = ["number", "string"].includes(typeof instance.id);
     const id = isLink ? instance.id : instance.id._properties._id._value;
     const type = isLink ? "link" : instance.id._properties._type._value;
     if (type == "site") {

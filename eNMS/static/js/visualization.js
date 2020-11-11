@@ -260,7 +260,7 @@ function createLink2d(link) {
   polylinesObjects[link.id] = polyline;
   polyline.link_id = link.id;
   polyline.on("click", function (e) {
-    showTypePanel("link", this.link_id);
+    leftClickBinding("link", this.link_id, link.type == "bundle");
   });
   polyline.on("contextmenu", function (e) {
     $(".menu").hide();
@@ -327,6 +327,7 @@ function processNetwork(network) {
       const [longitude, latitude] = coords.split("/");
       network.devices.push({
         type: "site",
+        name: `Site (${latitude},${longitude})`,
         icon: "site",
         id: ids.join("-"),
         longitude: longitude,
@@ -485,7 +486,7 @@ function onClick3d(click) {
     const id = isLink ? instance.id : instance.id._properties._id._value;
     const type = isLink ? "link" : instance.id._properties._type._value;
     const bundle = type == "site" || (typeof id === "string" && id.includes("-"));
-    leftClickBinding(type, id, bundle);
+    leftClickBinding(isLink ? "link" : "device", id, bundle);
   }
 }
 

@@ -87,7 +87,7 @@
     atlantic-r28-washington, atlantic-r20-boston-1, atlantic-r20-richmond-2, atlantic-r26-boston-3,
     atlantic-r20-boston-2, atlantic-r20-richmond-1, europe-link30-2, europe-link31-2,
     europe-link35-2, europe-link35-3, atlantic-r26-boston-4-inverted, link25-2, link25-3,
-    link25-dallas2, link25-reversed, link25-reversed-2]
+    link25-dallas2, link25-reversed, link25-reversed-2, link13-2]
   manually_defined: false
   name: All objects
   operator: all
@@ -369,7 +369,7 @@
     atlantic-r28-washington, atlantic-r20-boston-1, atlantic-r20-richmond-2, atlantic-r26-boston-3,
     atlantic-r20-boston-2, atlantic-r20-richmond-1, europe-link30-2, europe-link31-2,
     europe-link35-2, europe-link35-3, atlantic-r26-boston-4-inverted, link25-2, link25-3,
-    link25-dallas2, link25-reversed, link25-reversed-2]
+    link25-dallas2, link25-reversed, link25-reversed-2, link13-2]
   manually_defined: false
   name: All links
   operator: all
@@ -492,7 +492,7 @@
     atlantic-r28-washington, atlantic-r20-boston-1, atlantic-r20-richmond-2, atlantic-r26-boston-3,
     atlantic-r20-boston-2, atlantic-r20-richmond-1, europe-link30-2, europe-link31-2,
     europe-link35-2, europe-link35-3, atlantic-r26-boston-4-inverted, link25-2, link25-3,
-    link25-dallas2, link25-reversed, link25-reversed-2]
+    link25-dallas2, link25-reversed, link25-reversed-2, link13-2]
   manually_defined: false
   name: Datacenter San Francisco
   operator: all
@@ -603,7 +603,7 @@
     atlantic-r28-washington, atlantic-r20-boston-1, atlantic-r20-richmond-2, atlantic-r26-boston-3,
     atlantic-r20-boston-2, atlantic-r20-richmond-1, europe-link30-2, europe-link31-2,
     europe-link35-2, europe-link35-3, atlantic-r26-boston-4-inverted, link25-2, link25-3,
-    link25-dallas2, link25-reversed, link25-reversed-2]
+    link25-dallas2, link25-reversed, link25-reversed-2, link13-2]
   manually_defined: false
   name: Datacenter New York
   operator: all
@@ -713,7 +713,7 @@
     atlantic-r28-washington, atlantic-r20-boston-1, atlantic-r20-richmond-2, atlantic-r26-boston-3,
     atlantic-r20-boston-2, atlantic-r20-richmond-1, europe-link30-2, europe-link31-2,
     europe-link35-2, europe-link35-3, atlantic-r26-boston-4-inverted, link25-2, link25-3,
-    link25-dallas2, link25-reversed, link25-reversed-2]
+    link25-dallas2, link25-reversed, link25-reversed-2, link13-2]
   manually_defined: false
   name: Datacenter Chicago
   operator: all
@@ -823,8 +823,8 @@
   service_operating_system_match: inclusion
   service_vendor: ''
   service_vendor_match: inclusion
-  target_services: ['Regression Workflow P: large workflow (scalability)', '[Regression
-      Workflow 9: Operational Data Backup] Retrieve Operational Data']
+  target_services: ['[Regression Workflow 9: Operational Data Backup] Retrieve Operational
+      Data', 'Regression Workflow P: large workflow (scalability)']
   tasks: []
   type: pool
   user_description: ''

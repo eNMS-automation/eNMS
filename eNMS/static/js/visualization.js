@@ -364,11 +364,12 @@ function processNetwork(network) {
     ids.forEach(parallelLinks.add, parallelLinks);
     const [source_id, destination_id] = endpoints.split("/");
     network.link.push({
+      type: "bundle",
       name: `Bundle:${ids.join("-")}`,
       id: ids.join("-"),
-      color: "#FFFFFF",
-      source_id: source_id,
-      destination_id: destination_id,
+      color: "#FF1493",
+      source_id: parseInt(source_id),
+      destination_id: parseInt(destination_id),
       ...bundleCoordinates[endpoints],
     });
   }
@@ -504,7 +505,7 @@ function showFilteredTable(id, type, constraints) {
         </form>
       </div>`,
     id: id,
-    title: `Filtered ${type}s`,
+    title: `Colocated ${type}s`,
     callback: function () {
       // eslint-disable-next-line new-cap
       new tables[type](type, null, null, id, constraints);
@@ -536,7 +537,14 @@ function create3dGraphNetwork(container) {
       selectedObject = node;
     })
     .onLinkHover((link) => (network.style.cursor = link ? "pointer" : null))
-    .onLinkClick((link) => showTypePanel("link", link.id))
+    .onLinkClick((link) => {
+      if (link.type == "bundle") {
+        const constraints = { id: `^(${link.id.split("-").join("|")})$`, id_filter: "regex" };
+        showFilteredTable(link.id, "link", constraints);
+      } else {
+        showTypePanel("link", link.id);
+      }
+    })
     .linkWidth(viewSettings.link_width)
     .linkOpacity(viewSettings.link_opacity)
     .linkCurveRotation("rotation");

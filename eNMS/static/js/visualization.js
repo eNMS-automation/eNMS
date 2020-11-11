@@ -338,6 +338,25 @@ function processNetwork(network) {
       (device) => !colocatedDevices.has(device.id)
     );
   }
+  let links = {};
+  for (const link of network.link) {
+    const key = [link.source_id, link.destination_id].sort().join("/");
+    links[key] = links[key] ? [...links[key], link.id] : [link.id];
+  }
+  let parallelLinks = new Set();
+  for (const [endpoints, ids] of Object.entries(links)) {
+    if (ids.length == 1) continue;
+    ids.forEach(parallelLinks.add, parallelLinks);
+    const [source_id, destination_id] = endpoints.split("/");
+    network.link.push({
+      id: ids.join("-"),
+      source_id: source_id,
+      destination_id: destination_id,
+    });
+  }
+  network.link = network.link.filter(
+    (link) => !parallelLinks.has(link.id)
+  );
 }
 
 function displayNetwork({ noAlert, withCluster }) {

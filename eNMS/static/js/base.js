@@ -105,6 +105,14 @@ function processResults(callback, results) {
   }
 }
 
+export function observeMutations(container, target, callback) {
+  new (window.MutationObserver || window.WebKitMutationObserver)((mutations) => {
+    mutations.forEach((mutation) => {
+      $(mutation.addedNodes).find(target).each((_, node) => callback(node));
+    });
+  }).observe(container, { childList: true, subtree: true });
+}
+
 export const call = function ({ url, data, form, callback }) {
   let params = {
     type: "POST",

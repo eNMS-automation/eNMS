@@ -236,11 +236,11 @@ class Link(Object):
                 for property in ("id", "type", "name", "color")
             },
             **{
-                f"source_{property}": getattr(self.source, property)
+                f"source_{property}": getattr(self.source, property, None)
                 for property in node_properties
             },
             **{
-                f"destination_{property}": getattr(self.destination, property)
+                f"destination_{property}": getattr(self.destination, property, None)
                 for property in node_properties
             },
         }

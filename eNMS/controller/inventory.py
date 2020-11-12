@@ -250,8 +250,8 @@ class InventoryController(BaseController):
     def view_filtering(self, **kwargs):
         return {
             f"{model}s": [
-                d.view_properties
-                for d in db.session.query(models[model])
+                instance.view_properties
+                for instance in db.session.query(models[model])
                 .filter(and_(*self.build_filtering_constraints(model, **form)))
                 .all()
             ]

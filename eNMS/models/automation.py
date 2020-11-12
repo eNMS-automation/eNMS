@@ -387,6 +387,8 @@ class Run(AbstractBase):
         if not kwargs.get("parent_runtime"):
             self.parent_runtime = self.runtime
             self.path = str(self.service.id)
+        elif self.parent_device:
+            self.path = self.parent.path
         else:
             self.path = f"{self.parent.path}>{self.service.id}"
         if not self.start_services:
@@ -668,6 +670,7 @@ class Run(AbstractBase):
                 return {"success": False, "result": result, "runtime": self.runtime}
             for device in self.devices:
                 key = "success" if self.device_iteration(payload, device) else "failure"
+                self.write_state(f"progress/device/{key}", 1, "increment")
                 summary[key].append(device.name)
             return {
                 "success": not summary["failure"],

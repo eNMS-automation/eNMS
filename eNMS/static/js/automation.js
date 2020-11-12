@@ -255,7 +255,19 @@ export const showRuntimePanel = function (type, service, runtime, table, newRunt
               id="controls-${table}-${service.id}"
               class="navbar navbar-default nav-controls"
               role="navigation"
-            ></nav>
+            >
+              <button
+                style="background:transparent; border:none; 
+                color:transparent; width: 250px;"
+                type="button"
+              >
+                <select
+                  id="runtimes-${panelId}"
+                  name="runtimes"
+                  class="form-control"
+                ></select>
+              </button>
+            </nav>
             <table
               id="table-${table}-${service.id}"
               class="table table-striped table-bordered table-hover"

@@ -113,7 +113,7 @@ export class Table {
                 e.stopPropagation();
               });
           });
-        $(`#controls-${self.id}`).html(self.controls);
+        $(`#controls-${self.id}`).append(self.controls);
         self.postProcessing();
       },
       ajax: {

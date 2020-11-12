@@ -14,6 +14,7 @@ import {
   cantorPairing,
   configureNamespace,
   notify,
+  observeMutations,
   openPanel,
   showTypePanel,
 } from "./base.js";
@@ -168,14 +169,11 @@ function showResult(id) {
               }
             },
           };
-          let editor = new JSONEditor(
-            document.getElementById(`content-${id}`),
-            options,
-            jsonResult
-          );
-          document.querySelectorAll(".jsoneditor-string").forEach((el) => {
-            el.innerText = el.innerText.replace(/(?:\\n)/g, "\n");
+          const content = document.getElementById(`content-${id}`);
+          observeMutations(content, ".jsoneditor-string", function (element) {
+            element.innerText = element.innerText.replace(/(?:\\n)/g, "\n");
           });
+          let editor = new JSONEditor(content, options, jsonResult);
         },
       });
     },

@@ -59,6 +59,8 @@ two new environment variables: ENMS_USER and ENMS_PASSWORD (same as scheduler)
 the task instead of the admin user.
 - Add a cap for number of threads when running a service with multiprocessing enabled. Maximum number 
 of threads configurable from settings.json > automation > max process.
+- Add runtimes select list in service results window, so you can visualize service results in workflow
+builder.
 
 Version 3.22.4
 --------------

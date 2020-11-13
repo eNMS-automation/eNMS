@@ -409,7 +409,7 @@ function displayResultsTable(service, runtime, _, type) {
   type = type ?? "result";
   const table = tableInstances[`result-${service.id}`];
   if (table) {
-    table.runtime = runtime;
+    table.constraints.parent_runtime = runtime;
     refreshTable(`result-${service.id}`);
   } else {
     const constraints = {service_id: service.id, parent_runtime: runtime || currentRuntime};

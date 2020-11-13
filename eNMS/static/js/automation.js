@@ -619,17 +619,17 @@ export function showRunServicePanel({ instance, type }) {
     size: "900px 300px",
     id: panelId,
     callback: function () {
-      $(`#targets-type-${panelId}`).val(type || instance.type);
+      $(`#run_service-type-${panelId}`).val(type || instance.type);
       if (type) {
         call({
           url: `/filtering/${type}`,
           data: { form: serializeForm(`#search-form-${type}`), bulk: true },
           callback: function (instances) {
-            $(`#targets-${panelId}`).val(instances.join("-"));
+            $(`#run_service-targets-${panelId}`).val(instances.join("-"));
           },
         });
       } else {
-        $(`#targets-${panelId}`).val(instance.id);
+        $(`#run_service-targets-${panelId}`).val(instance.id);
       }
     },
   });

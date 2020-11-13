@@ -1298,7 +1298,7 @@ function bulkDeletion(tableId, model) {
 function bulkEdit(formId, model, table) {
   call({
     url: `/bulk_edit/${model}`,
-    form: `edit-${formId}-form`,
+    form: `${formId}-form`,
     callback: function (number) {
       refreshTable(table);
       $(`#${formId}`).remove();

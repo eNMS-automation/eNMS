@@ -63,7 +63,9 @@ class DeviceConnectionForm(BaseForm):
 
 
 class ObjectForm(BaseForm):
+    action = "eNMS.base.processData"
     form_type = HiddenField(default="object")
+    id = HiddenField()
     name = StringField("Name", [InputRequired()])
     public = BooleanField("Public", default=False)
     description = StringField("Description")
@@ -74,9 +76,7 @@ class ObjectForm(BaseForm):
 
 
 class DeviceForm(ObjectForm):
-    template = "object"
     form_type = HiddenField(default="device")
-    id = HiddenField()
     icon = SelectField(
         "Icon",
         choices=(
@@ -116,7 +116,6 @@ class DeviceDataForm(BaseForm):
 class LinkForm(ObjectForm):
     template = "object"
     form_type = HiddenField(default="link")
-    id = HiddenField()
     source = InstanceField("Source", [InputRequired()], model="device")
     destination = InstanceField("Destination", [InputRequired()], model="device")
     color = StringField("Color")

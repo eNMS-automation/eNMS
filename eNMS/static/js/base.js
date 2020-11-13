@@ -680,7 +680,7 @@ function processData(type, id) {
   }
   call({
     url: `/update/${type}`,
-    form: id ? `edit-${type}-form-${id}` : `edit-${type}-form`,
+    form: id ? `${type}-form-${id}` : `${type}-form`,
     callback: (instance) => {
       const tableType =
         type.includes("service") || type == "workflow" ? "service" : type;

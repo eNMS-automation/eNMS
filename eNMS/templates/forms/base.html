@@ -1,17 +1,16 @@
 <form
   id="{{ form_type }}-form"
-  class="form-horizontal form-label-left"
+  class="form-horizontal form-label-left add-id"
   method="post"
   autocomplete="off"
 >
   <div class="modal-body">
     <div class="form-group">
       <div id="content" class="add-id" style="height: 100%;"></div>
-      {% for field in form %} {% set id = "{}-{}".format(form_type, field.name) if
-      "filtering" in form_type else field.name %} {% set class = "form-control-bool" if
+      {% for field in form %} {% set id = "{}-{}".format(form_type, field.name) %} {% set class = "form-control-bool" if
       field.type == "BooleanField" else "form-control" %} {% if field.widget.input_type
-      == 'hidden' %} {{ field() }} {% elif field.type == "JsonField" %} {{ field(id=id,
-      class=class) }} {% else %} {% if field.render_kw and "help" in field.render_kw %}
+      == 'hidden' %} {{ field(id=id,
+        class="add-id") }} {% else %} {% if field.render_kw and "help" in field.render_kw %}
       <label
         class="control-label col-md-3 col-sm-3 col-xs-12"
         help="{{ field.render_kw['help'] }}"
@@ -23,7 +22,8 @@
       <label class="control-label col-md-3 col-sm-3 col-xs-12">{{ field.label }}</label>
       {% endif %}
       <div class="col-md-9 col-sm-9 col-xs-12">
-        {{ field(id=id, class=class) }}
+        {{ field(id=id, class="collapsed {} add-id".format(class),
+        checked=field.default) }}
       </div>
       <br /><br />
       {% endif %} {% endfor %}
@@ -31,8 +31,8 @@
     <center>
       <button
         type="button"
-        class="btn btn-success"
-        onclick="{{ action }}('{{ form_type }}')"
+        class="btn btn-success add-id btn-id"
+        value="{{ action }}"
       >
         Confirm
       </button>

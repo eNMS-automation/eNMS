@@ -882,7 +882,6 @@ function getWorkflowState(periodic) {
 
 function getWorkflowTree() {
   openPanel({
-    name: "workflow_tree",
     title: `${workflow.scoped_name} - Tree Structure`,
     content: `
       <div class="modal-body">

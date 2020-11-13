@@ -412,7 +412,8 @@ function displayResultsTable(service, runtime, _, type) {
     table.runtime = runtime;
     refreshTable(`result-${service.id}`);
   } else {
-    new tables[type](type, runtime || currentRuntime, service.id, {service_id: service.id});
+    const constraints = {service_id: service.id, parent_runtime: runtime || currentRuntime};
+    new tables[type](type, service.id, constraints);
   }
 }
 

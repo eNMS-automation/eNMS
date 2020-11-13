@@ -514,7 +514,7 @@ function showFilteredTable(id, type, constraints) {
     title: `Colocated ${type}s`,
     callback: function () {
       // eslint-disable-next-line new-cap
-      new tables[type](type, null, null, id, constraints);
+      new tables[type](type, id, constraints);
     },
   });
 }

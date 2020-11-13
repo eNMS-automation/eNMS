@@ -24,9 +24,8 @@ let waitForSearch = false;
 $.fn.dataTable.ext.errMode = "none";
 
 export class Table {
-  constructor(type, runtime, id, constraints) {
+  constructor(type, id, constraints) {
     let self = this;
-    this.runtime = runtime;
     this.type = type;
     this.columns = tableProperties[this.type];
     this.constraints = constraints;

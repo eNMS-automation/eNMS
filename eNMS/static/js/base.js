@@ -528,7 +528,7 @@ function showServicePanel(type, id, mode) {
   $(".buttonFinish,.buttonNext,.buttonPrevious").hide();
   $(id ? `#${type}-wizard-${id}` : `#${type}-wizard`).smartWizard("fixHeight");
   if (mode == "run") {
-    $(`#${type}-edit-action-${id}`)
+    $(`#${type}-action-btn-${id}`)
       .removeClass("btn-success")
       .addClass("btn-primary")
       .attr("onclick", `eNMS.automation.parameterizedRun('${type}', ${id})`)
@@ -577,7 +577,7 @@ export function showTypePanel(type, id, mode, tableId) {
               `Edit all ${instances.length} ${model}s in table in bulk`
             );
             for (const property of Object.keys(formProperties[panel.id])) {
-              $(`#${type}-edit-action`)
+              $(`#${type}-action-btn`)
                 .attr(
                   "onclick",
                   `eNMS.table.bulkEdit('${type}', '${model}', '${tableId}')`

@@ -370,13 +370,14 @@ class BaseController:
             },
         }
 
-    def compare(self, type, device_name, v1, v2, context_lines):
+    def compare(self, type, id, v1, v2, context_lines):
         if type in ("result", "device_result"):
             first = self.str_dict(getattr(db.fetch("result", id=v1), "result"))
             second = self.str_dict(getattr(db.fetch("result", id=v2), "result"))
         else:
-            result1, v1 = self.get_git_network_data(device_name, v1)
-            result2, v2 = self.get_git_network_data(device_name, v2)
+            device = db.fetch("device", id=id)
+            result1, v1 = self.get_git_network_data(device.name, v1)
+            result2, v2 = self.get_git_network_data(device.name, v2)
             first, second = result1[type], result2[type]
         return "\n".join(
             unified_diff(

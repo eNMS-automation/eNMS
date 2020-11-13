@@ -282,13 +282,6 @@ class Result(AbstractBase):
         constraints = []
         if kwargs.get("rest_api_request", False):
             return []
-        if not kwargs.get("full_result"):
-            constraints.append(
-                getattr(
-                    models["result"],
-                    "device" if kwargs["instance"]["type"] == "device" else "service",
-                ).has(id=kwargs["instance"]["id"])
-            )
         if kwargs.get("runtime"):
             constraints.append(models["result"].parent_runtime == kwargs["runtime"])
         return constraints

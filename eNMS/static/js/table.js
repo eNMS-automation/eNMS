@@ -24,12 +24,12 @@ let waitForSearch = false;
 $.fn.dataTable.ext.errMode = "none";
 
 export class Table {
-  constructor(type, instance, runtime, id, constraints) {
+  constructor(type, runtime, id, constraints) {
     let self = this;
-    this.instance = instance;
     this.runtime = runtime;
     this.type = type;
     this.columns = tableProperties[this.type];
+    this.constraints = constraints;
     let visibleColumns = localStorage.getItem(`table/${this.type}`);
     if (visibleColumns) visibleColumns = visibleColumns.split(",");
     this.columns.forEach((column) => {
@@ -124,15 +124,11 @@ export class Table {
           Object.assign(d, {
             form: serializeForm(`#search-form-${this.id}`),
             constraints: constraints,
-            instance: this.instance,
             columns: this.columns,
             type: this.type,
             export: self.csvExport,
           });
           Object.assign(d, self.filteringData);
-          if (this.runtime) {
-            d.runtime = $(`#runtimes-${this.instance.id}`).val() || this.runtime;
-          }
           return JSON.stringify(d);
         },
         dataSrc: function (result) {
@@ -885,11 +881,10 @@ tables.result = class ResultTable extends Table {
   }
 
   get controls() {
-    const instance = JSON.stringify(this.instance).replace(/"/g, "'");
     return [
       `<button
         class="btn btn-info"
-        onclick="eNMS.automation.compare('${this.type}', ${instance})"
+        onclick="eNMS.automation.compare('${this.type}', ${this.constraints.service_id})"
         data-tooltip="Compare"
         type="button"
       >

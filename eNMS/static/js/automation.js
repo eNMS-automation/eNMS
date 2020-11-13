@@ -33,10 +33,10 @@ function openServicePanel(bulk) {
   showTypePanel($("#service-type").val(), null, bulk ? "bulk" : null, "service");
 }
 
-export function compare(type, instance) {
+export function compare(type, instanceId) {
   const objectType = type.includes("result") ? "result" : type;
-  const v1 = $(`input[name=v1-${type}-${instance.id}]:checked`).val();
-  const v2 = $(`input[name=v2-${type}-${instance.id}]:checked`).val();
+  const v1 = $(`input[name=v1-${type}-${instanceId}]:checked`).val();
+  const v2 = $(`input[name=v2-${type}-${instanceId}]:checked`).val();
   if (!v1 || !v2) {
     notify("Select two versions to compare first.", "error", 5);
   } else if (v1 == v2) {
@@ -88,7 +88,7 @@ export function compare(type, instance) {
             let value = valueToLabel[this.value];
             if (value == "All") value = 999999;
             call({
-              url: `/compare/${objectType}/${instance.name}/${v1}/${v2}/${value}`,
+              url: `/compare/${objectType}/${instanceId}/${v1}/${v2}/${value}`,
               callback: (result) => {
                 let diff2htmlUi = new Diff2HtmlUI({ diff: result });
                 $(`#diff-type-${cantorId}`)
@@ -412,7 +412,7 @@ function displayResultsTable(service, runtime, _, type) {
     table.runtime = runtime;
     refreshTable(`result-${service.id}`);
   } else {
-    new tables[type](type, service, runtime || currentRuntime, service.id);
+    new tables[type](type, runtime || currentRuntime, service.id, {service_id: service.id});
   }
 }
 

@@ -394,7 +394,7 @@ function showGitHistory(device) {
                 $(`#compare-${device.id}-btn`)
                   .unbind("click")
                   .on("click", function () {
-                    compare(configurationProperty, device);
+                    compare(configurationProperty, device.id);
                   });
                 commits[configurationProperty].forEach((commit) => {
                   table.row.add([
@@ -464,7 +464,7 @@ function showDeviceResultsPanel(device) {
     title: `Results - ${device.name}`,
     callback: function () {
       // eslint-disable-next-line new-cap
-      new tables["device_result"]("device_result", device, null, device.id);
+      new tables["device_result"]("device_result", null, device.id, {device_id: device.id});
     },
   });
 }

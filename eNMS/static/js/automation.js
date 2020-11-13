@@ -454,7 +454,7 @@ export const normalRun = function (id) {
 function parameterizedRun(type, id) {
   call({
     url: `/run_service/${id}`,
-    form: `edit-${type}-form-${id}`,
+    form: `${type}-form-${id}`,
     callback: function (result) {
       $(`#${type}-${id}`).remove();
       runLogic(result);

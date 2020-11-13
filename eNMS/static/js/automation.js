@@ -298,7 +298,7 @@ export const showRuntimePanel = function (type, service, runtime, table, newRunt
           }
           $(`#runtimes-${panelId}`).val(runtime).selectpicker("refresh");
           $(`#runtimes-${panelId}`).on("change", function () {
-            displayFunction(service, this.value, true, table);
+            displayFunction(service, this.value, true, table, true);
           });
           displayFunction(service, runtime, null, table);
         },
@@ -404,12 +404,11 @@ function displayResultsTree(service, runtime) {
   });
 }
 
-function displayResultsTable(service, runtime, _, type) {
+function displayResultsTable(service, runtime, _, type, refresh) {
   // eslint-disable-next-line new-cap
   type = type ?? "result";
-  const table = tableInstances[`result-${service.id}`];
-  if (table) {
-    table.constraints.parent_runtime = runtime;
+  if (refresh) {
+    tableInstances[`result-${service.id}`].constraints.parent_runtime = runtime;
     refreshTable(`result-${service.id}`);
   } else {
     const constraints = {service_id: service.id, parent_runtime: runtime || currentRuntime};

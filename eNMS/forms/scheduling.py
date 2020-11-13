@@ -30,7 +30,7 @@ class EventForm(BaseForm):
 
 @configure_relationships("devices", "pools", "service")
 class TaskForm(BaseForm):
-    template = "object"
+    action = "eNMS.base.processData"
     form_type = HiddenField(default="task")
     id = HiddenField()
     name = StringField("Name", [InputRequired()])

@@ -114,7 +114,7 @@ class DeviceDataForm(BaseForm):
 
 
 class LinkForm(ObjectForm):
-    template = "object"
+    action = "eNMS.base.processData"
     form_type = HiddenField(default="link")
     source = InstanceField("Source", [InputRequired()], model="device")
     destination = InstanceField("Destination", [InputRequired()], model="device")

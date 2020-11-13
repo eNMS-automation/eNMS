@@ -51,7 +51,7 @@ class ResultLogDeletionForm(BaseForm):
 
 
 class ServerForm(BaseForm):
-    template = "object"
+    action = "eNMS.base.processData"
     form_type = HiddenField(default="server")
     id = HiddenField()
     name = StringField("Name", [InputRequired()])
@@ -61,7 +61,7 @@ class ServerForm(BaseForm):
 
 
 class CredentialForm(BaseForm):
-    template = "object"
+    action = "eNMS.base.processData"
     form_type = HiddenField(default="credential")
     id = HiddenField()
     name = StringField("Name", [InputRequired()])
@@ -91,7 +91,7 @@ class ImportService(BaseForm):
 
 
 class ChangelogForm(BaseForm):
-    template = "object"
+    action = "eNMS.base.processData"
     form_type = HiddenField(default="changelog")
     id = HiddenField()
     severity = SelectField(
@@ -109,7 +109,7 @@ class ChangelogForm(BaseForm):
 
 def init_variable_forms(app):
     class RbacForm(BaseForm):
-        template = "object"
+        action = "eNMS.base.processData"
         form_type = HiddenField(default="rbac")
         id = HiddenField()
         name = StringField("Name", [InputRequired()])

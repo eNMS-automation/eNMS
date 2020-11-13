@@ -312,12 +312,6 @@ class NapalmForm(ConnectionForm):
     }
 
 
-class RunForm(BaseForm):
-    template = "object"
-    form_type = HiddenField(default="run")
-    id = HiddenField()
-
-
 class RestartWorkflowForm(BaseForm):
     action = "eNMS.workflow.restartWorkflow"
     form_type = HiddenField(default="restart_workflow")
@@ -367,7 +361,7 @@ class WorkflowLabelForm(BaseForm):
 
 
 class WorkflowEdgeForm(BaseForm):
-    template = "object"
+    action = "eNMS.base.processData"
     form_type = HiddenField(default="workflow_edge")
     id = HiddenField()
     label = StringField()

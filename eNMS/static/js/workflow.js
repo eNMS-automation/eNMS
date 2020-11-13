@@ -884,7 +884,18 @@ function getWorkflowTree() {
   openPanel({
     name: "workflow_tree",
     title: `${workflow.scoped_name} - Tree Structure`,
-    id: workflow.id,
+    content: `
+      <div class="modal-body">
+        <input
+          type="text"
+          class="form-control"
+          id="tree-search-${workflow.id}"
+          placeholder="Search"
+        >
+        <hr />
+        <div id="workflow-tree-${workflow.id}"></div>
+        <input type="hidden" name="services" id="services" />
+      </div>`,
     callback: function () {
       call({
         url: `/get_workflow_tree/${currentPath}`,
@@ -933,10 +944,10 @@ function getWorkflowTree() {
             },
           });
           let timer = false;
-          $("#workflow-tree-search").keyup(function (event) {
+          $(`#tree-search-${workflow.id}`).keyup(function () {
             if (timer) clearTimeout(timer);
             timer = setTimeout(function () {
-              const searchValue = $("#workflow-tree-search").val();
+              const searchValue = $(`#tree-search-${workflow.id}`).val();
               $(`#workflow-tree-${workflow.id}`).jstree(true).search(searchValue);
             }, 500);
           });

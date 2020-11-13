@@ -246,7 +246,7 @@ In Mattermost, if the ``Mattermost Channel`` is not set, the default ``Town Squa
 Using python code in the service panel
 --------------------------------------
 
-There are two types of field in the service panel where the user is allowed to use pure python code:
+There are two types of fields in the service panel where the user is allowed to use pure python code:
 substitution fields (light blue background) and python fields (light red background).
 In these fields, you can use any python code, including a number of **variables** that are made available
 to the user.
@@ -259,6 +259,34 @@ Variables
   - **Meaning**: this is the device on which the service is running.
   - **Type** Database Object.
   - **Available**: when the service is running on a device.
+  - **Properties**: member attributes which can be referenced as ``{{device.property}}``, such as ``{{device.name}}`` or
+    ``{{device.ip_address}}``, inside of forms. The following base properties are
+    supported:
+
+    - device.name
+    - device.subtype
+    - device.description
+    - device.model
+    - device.location
+    - device.vendor
+    - device.operating_system
+    - device.os_version
+    - device.ip_address
+    - device.latitude
+    - device.longitude
+    - device.port
+    - device.configuration
+    - device.last_failure (last failure timestamp for configuration collection)
+    - device.last_status (last status timestamp for configuration collection)
+    - device.last_update (last update timestamp for configuration collection)
+    - device.last_runtime (last runtime timestamp for configuration collection)
+    - device.last_duration (last time duration for configuration collection)
+
+    .. toctree::
+      :maxdepth: 2
+      :titlesonly:
+
+      custom_properties.rst
 
 - ``devices``
 

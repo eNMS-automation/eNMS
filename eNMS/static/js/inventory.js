@@ -7,7 +7,7 @@ echarts: false
 theme: false
 */
 
-import { compare } from "./automation.js";
+import { displayDiff } from "./automation.js";
 import {
   call,
   configureNamespace,
@@ -394,7 +394,7 @@ function showGitHistory(device) {
                 $(`#compare-${device.id}-btn`)
                   .unbind("click")
                   .on("click", function () {
-                    compare(configurationProperty, device.id);
+                    displayDiff(configurationProperty, device.id);
                   });
                 commits[configurationProperty].forEach((commit) => {
                   table.row.add([

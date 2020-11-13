@@ -33,7 +33,7 @@ function openServicePanel(bulk) {
   showTypePanel($("#service-type").val(), null, bulk ? "bulk" : null, "service");
 }
 
-export function compare(type, instanceId) {
+export function displayDiff(type, instanceId) {
   const objectType = type.includes("result") ? "result" : type;
   const v1 = $(`input[name=v1-${type}-${instanceId}]:checked`).val();
   const v2 = $(`input[name=v2-${type}-${instanceId}]:checked`).val();
@@ -649,7 +649,7 @@ function runServicesOnTargets(id) {
 }
 
 configureNamespace("automation", [
-  compare,
+  displayDiff,
   copyClipboard,
   deleteCorruptedEdges,
   displayCalendar,

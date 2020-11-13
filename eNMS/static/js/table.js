@@ -880,10 +880,11 @@ tables.result = class ResultTable extends Table {
   }
 
   get controls() {
+    const id = this.constraints.service_id || this.constraints.device_id
     return [
       `<button
         class="btn btn-info"
-        onclick="eNMS.automation.compare('${this.type}', ${this.constraints.service_id})"
+        onclick="eNMS.automation.displayDiff('${this.type}', ${id})"
         data-tooltip="Compare"
         type="button"
       >

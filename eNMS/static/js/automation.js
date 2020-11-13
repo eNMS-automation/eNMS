@@ -19,7 +19,7 @@ import {
   serializeForm,
   showTypePanel,
 } from "./base.js";
-import { tables } from "./table.js";
+import { refreshTable, tableInstances, tables } from "./table.js";
 import {
   arrowHistory,
   arrowPointer,
@@ -404,10 +404,16 @@ function displayResultsTree(service, runtime) {
   });
 }
 
-function displayResultsTable(service, runtime, _, table) {
+function displayResultsTable(service, runtime, _, type) {
   // eslint-disable-next-line new-cap
-  table = table ?? "result";
-  new tables[table](table, service, runtime || currentRuntime, service.id);
+  type = type ?? "result";
+  const table = tableInstances[`result-${service.id}`];
+  if (table) {
+    table.runtime = runtime;
+    refreshTable(`result-${service.id}`);
+  } else {
+    new tables[type](type, service, runtime || currentRuntime, service.id);
+  }
 }
 
 function refreshLogs(service, runtime, editor, first, wasRefreshed, line) {

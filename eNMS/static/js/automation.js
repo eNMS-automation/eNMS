@@ -290,9 +290,6 @@ export const showRuntimePanel = function (type, service, runtime, table, newRunt
               $("<option></option>").attr("value", runtime[0]).text(runtime[1])
             );
           });
-          if (!runtime && page == "workflow_builder") {
-            runtime = $("#current-runtime").val();
-          }
           if (!runtime || ["normal", "latest"].includes(runtime)) {
             runtime = runtimes[runtimes.length - 1][0];
           }

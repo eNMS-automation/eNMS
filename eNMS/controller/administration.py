@@ -64,17 +64,16 @@ class AdministrationController(BaseController):
         path = Path(self.path / "files" / "services" / service.filename)
         path.mkdir(parents=True, exist_ok=True)
         services = service.deep_services if service.type == "workflow" else [service]
-        services = [service.to_dict(export=True) for service in services]
-        for service_dict in services:
-            for relation in ("devices", "pools", "events"):
-                service_dict.pop(relation)
+        services = [
+            service.get_properties(export=True, private_properties=True)
+            for service in services
+        ]
         with open(path / "service.yaml", "w") as file:
             yaml.dump(services, file)
         if service.type == "workflow":
+            edges = [edge.to_dict(export=True) for edge in service.deep_edges]
             with open(path / "workflow_edge.yaml", "w") as file:
-                yaml.dump(
-                    [edge.to_dict(export=True) for edge in service.deep_edges], file
-                )
+                yaml.dump(edges, file)
         with open_tar(f"{path}.tgz", "w:gz") as tar:
             tar.add(path, arcname=service.filename)
         rmtree(path, ignore_errors=True)

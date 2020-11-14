@@ -64,8 +64,9 @@ class AdministrationController(BaseController):
         path = Path(self.path / "files" / "services" / service.filename)
         path.mkdir(parents=True, exist_ok=True)
         services = service.deep_services if service.type == "workflow" else [service]
+        exclude = ("target_devices", "target_pools", "pools", "events")
         services = [
-            service.get_properties(export=True, private_properties=True)
+            service.to_dict(export=True, private_properties=True, exclude=exclude)
             for service in services
         ]
         with open(path / "service.yaml", "w") as file:

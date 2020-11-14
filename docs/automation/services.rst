@@ -294,6 +294,27 @@ Variables
   - **Type**: List of database objects.
   - **Available**: Always.
 
+- ``link``
+
+  - **Meaning**: this is a link between devices
+  - **Type**: Database Object.
+  - **Available**: when the service is running on a device.
+  - **Properties**: member attributes which can be referenced as ``{{link.property}}``, such as ``{{link.model}}`` or
+    ``{{link.source_name}}``, inside of forms. The following base properties are supported:
+
+    - link.name
+    - link.description
+    - link.subtype
+    - link.model
+    - link.source_name (source device name)
+    - link.destination_name (destination device name)
+
+    .. toctree::
+      :maxdepth: 2
+      :titlesonly:
+
+      custom_properties.rst
+
 - ``get_result`` (see :ref:`get_result`)
 
   - **Meaning**: Fetch the result of a service in the workflow that has already been executed.

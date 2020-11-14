@@ -104,13 +104,13 @@ function showImportServicePanel() {
       call({
         url: "/get_exported_services",
         callback: function (services) {
-          let list = document.getElementById("import_services");
+          let list = document.getElementById("import_service-service");
           services.forEach((item) => {
             let option = document.createElement("option");
             option.textContent = option.value = item;
             list.appendChild(option);
           });
-          $("#import_services").selectpicker("refresh");
+          $("#import_service-service").selectpicker("refresh");
         },
       });
     },
@@ -119,7 +119,7 @@ function showImportServicePanel() {
 
 function importService() {
   call({
-    url: `/import_service/${$("#import_services").val()}`,
+    url: `/import_service/${$("#import_service-service").val()}`,
     title: "Import Service",
     callback: function (result) {
       notify("Service Import successful.", "success", 5, true);

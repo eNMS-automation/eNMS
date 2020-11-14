@@ -87,7 +87,7 @@ class LoginForm(BaseForm):
 class ImportService(BaseForm):
     action = "eNMS.administration.importService"
     form_type = HiddenField(default="import_service")
-    import_services = SelectField("Service", choices=())
+    service = SelectField("Service", choices=())
 
 
 class ChangelogForm(BaseForm):

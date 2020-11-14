@@ -250,8 +250,22 @@ function showFileUploadPanel(folder) {
 
 function displayFiles() {
   openPanel({
-    name: "files",
     title: "Files",
+    content: `
+      <nav
+        class="navbar navbar-default nav-controls"
+        role="navigation"
+        style="margin-top: 5px;"
+      >
+        <button
+          type="button"
+          class="btn btn-primary"
+          onclick="eNMS.administration.createNewFolder()"
+        >
+          <span class="glyphicon glyphicon-folder-open"></span>
+        </button>
+      </nav>
+      <div id="files-tree" style="height: 500px;"></div>`,
     callback: function () {
       $("#files-tree").jstree({
         core: {

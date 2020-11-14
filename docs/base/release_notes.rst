@@ -61,6 +61,7 @@ the task instead of the admin user.
 of threads configurable from settings.json > automation > max process.
 - Add runtimes select list in service results window, so you can visualize service results in workflow
 builder.
+- Include private properties (custom password, ...) when exporting a service.
 
 Version 3.22.4
 --------------

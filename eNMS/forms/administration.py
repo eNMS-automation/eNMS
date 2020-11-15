@@ -69,12 +69,13 @@ class CredentialForm(BaseForm):
         "Type", choices=(("password", "Username / Password"), ("key", "SSH Key"))
     )
     description = StringField("Description")
+    device_pools = MultipleInstanceField("Devices", model="pool")
+    user_pools = MultipleInstanceField("Users", model="pool")
+    priority = IntegerField("Priority", default=1)
     username = StringField("Username")
     password = PasswordField("Password")
     enable_password = PasswordField("'Enable' Password")
-    priority = IntegerField("Priority", default=1)
-    device_pools = MultipleInstanceField("Devices", model="pool")
-    user_pools = MultipleInstanceField("Users", model="pool")
+    private_key = StringField(widget=TextArea(), render_kw={"rows": 10})
 
 
 class LoginForm(BaseForm):

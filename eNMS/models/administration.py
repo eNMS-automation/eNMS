@@ -119,6 +119,7 @@ class Credential(AbstractBase):
     description = db.Column(db.SmallString)
     username = db.Column(db.SmallString)
     password = db.Column(db.SmallString)
+    private_key = db.Column(db.LargeString)
     enable_password = db.Column(db.SmallString)
     priority = db.Column(Integer, default=1)
     device_pools = relationship(

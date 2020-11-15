@@ -464,7 +464,7 @@ function showDeviceResultsPanel(device) {
     title: `Results - ${device.name}`,
     callback: function () {
       // eslint-disable-next-line new-cap
-      new tables["device_result"]("device_result", device.id, {device_id: device.id});
+      new tables["device_result"]("device_result", device.id, { device_id: device.id });
     },
   });
 }

@@ -345,13 +345,13 @@ function displayFiles() {
 
 export function showCredentialPanel(id) {
   const postfix = id ? `-${id}` : "";
-  $(`#credential-subtype${postfix}`).change(function () {
-    if (this.value == "password") {
-
-    } else {
-
-    }
-  }).trigger("change");
+  $(`#credential-subtype${postfix}`)
+    .change(function () {
+      if (this.value == "password") {
+      } else {
+      }
+    })
+    .trigger("change");
 }
 
 configureNamespace("administration", [

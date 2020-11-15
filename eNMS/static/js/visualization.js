@@ -184,7 +184,7 @@ function createNode2d(node) {
   marker.node_id = node.id;
   markersArray.push(marker);
   marker.on("click", function (e) {
-    leftClickBinding("device", node.id, node.type == "site")
+    leftClickBinding("device", node.id, node.type == "site");
   });
   marker.on("contextmenu", function (e) {
     $(".menu").hide();

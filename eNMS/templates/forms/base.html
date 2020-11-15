@@ -7,10 +7,11 @@
   <div class="modal-body">
     <div class="form-group">
       <div id="content" class="add-id" style="height: 100%;"></div>
-      {% for field in form %} {% set id = "{}-{}".format(form_type, field.name) %} {% set class = "form-control-bool" if
-      field.type == "BooleanField" else "form-control" %} {% if field.widget.input_type
-      == 'hidden' %} {{ field(id=id,
-        class="add-id") }} {% else %} {% if field.render_kw and "help" in field.render_kw %}
+      {% for field in form %} {% set id = "{}-{}".format(form_type, field.name) %} {%
+      set class = "form-control-bool" if field.type == "BooleanField" else
+      "form-control" %} {% if field.widget.input_type == 'hidden' %} {{ field(id=id,
+      class="add-id") }} {% else %} {% if field.render_kw and "help" in field.render_kw
+      %}
       <label
         class="control-label col-md-3 col-sm-3 col-xs-12"
         help="{{ field.render_kw['help'] }}"

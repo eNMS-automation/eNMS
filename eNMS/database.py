@@ -3,7 +3,6 @@ from contextlib import contextmanager
 from flask_login import current_user
 from json import loads
 from logging import error
-from operator import attrgetter
 from os import getenv
 from sqlalchemy import (
     Boolean,
@@ -343,20 +342,6 @@ class Database:
             if user.is_authenticated and not user.is_admin:
                 query = models[model].rbac_filter(query, rbac, user)
         return query
-
-    def get_device_credential(self, user, device):
-        pool_alias = aliased(models["pool"])
-        return max(
-            db.session.query(models["credential"])
-            .join(models["pool"], models["credential"].user_pools)
-            .join(models["user"], models["pool"].users)
-            .join(pool_alias, models["credential"].device_pools)
-            .join(models["device"], pool_alias.devices)
-            .filter(models["user"].name == user)
-            .filter(models["device"].name == device)
-            .all(),
-            key=attrgetter("priority"),
-        )
 
     def fetch_all(self, model, **kwargs):
         return self.fetch(model, allow_none=True, all_matches=True, **kwargs)

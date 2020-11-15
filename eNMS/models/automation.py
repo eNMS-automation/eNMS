@@ -9,6 +9,7 @@ from json.decoder import JSONDecodeError
 from multiprocessing.pool import ThreadPool
 from napalm import get_network_driver
 from netmiko import ConnectHandler
+from operator import attrgetter
 from os import getenv
 from paramiko import SFTPClient
 from re import compile, search
@@ -992,7 +993,18 @@ class Run(AbstractBase):
         return results
 
     def get_credentials(self, device):
-        credential = db.get_device_credential(self.creator, device.name)
+        pool_alias = aliased(models["pool"])
+        credential = max(
+            db.session.query(models["credential"])
+            .join(models["pool"], models["credential"].user_pools)
+            .join(models["user"], models["pool"].users)
+            .join(pool_alias, models["credential"].device_pools)
+            .join(models["device"], pool_alias.devices)
+            .filter(models["user"].name == self.creator)
+            .filter(models["device"].name == device.name)
+            .all(),
+            key=attrgetter("priority"),
+        )
         if self.credentials == "device":
             username = credential.username
             password = app.get_password(credential.password)

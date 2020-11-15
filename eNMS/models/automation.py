@@ -991,20 +991,24 @@ class Run(AbstractBase):
             }
         return results
 
-    def get_credentials(self, credential):
+    def get_credentials(self, device):
+        credential = db.get_device_credential(self.creator, device.name)
         if self.credentials == "device":
-            return credential.username, app.get_password(credential.password)
+            username = credential.username
+            password = app.get_password(credential.password)
         elif self.credentials == "user":
             user = db.fetch("user", name=self.creator)
-            return user.name, app.get_password(user.password)
+            username, password = user.name, app.get_password(user.password)
         else:
-            custom_password = app.get_password(self.custom_password)
-            substituted_password = self.sub(custom_password, locals())
-            if custom_password != substituted_password:
+            username = self.sub(self.custom_username, locals())
+            password = app.get_password(self.custom_password)
+            substituted_password = self.sub(password, locals())
+            if password != substituted_password:
                 if substituted_password.startswith("b'"):
                     substituted_password = substituted_password[2:-1]
-                custom_password = app.get_password(substituted_password)
-            return self.sub(self.custom_username, locals()), custom_password
+                password = app.get_password(substituted_password)
+        enable_password = app.get_password(credential.enable_password)
+        return username, password, enable_password
 
     def convert_result(self, result):
         if self.conversion_method == "none" or "result" not in result:
@@ -1226,8 +1230,7 @@ class Run(AbstractBase):
             change_log=False,
             logger="security",
         )
-        device_credential = db.get_device_credential(self.creator, device.name)
-        username, password = self.get_credentials(device_credential)
+        username, password, enable_password = self.get_credentials(device)
         driver = device.netmiko_driver if self.use_device_driver else self.driver
         netmiko_connection = ConnectHandler(
             device_type=driver,
@@ -1235,7 +1238,7 @@ class Run(AbstractBase):
             port=device.port,
             username=username,
             password=password,
-            secret=app.get_password(device_credential.enable_password),
+            secret=enable_password,
             fast_cli=self.fast_cli,
             timeout=self.timeout,
             global_delay_factor=self.global_delay_factor,
@@ -1264,8 +1267,7 @@ class Run(AbstractBase):
             change_log=False,
             logger="security",
         )
-        device_credential = db.get_device_credential(self.creator, device.name)
-        username, password = self.get_credentials(device_credential)
+        username, password, _ = self.get_credentials(device)
         connection = Scrapli(
             transport=self.transport,
             platform=device.scrapli_driver if self.use_device_driver else self.driver,
@@ -1291,14 +1293,12 @@ class Run(AbstractBase):
             change_log=False,
             logger="security",
         )
-        device_credential = db.get_device_credential(self.creator, device.name)
-        username, password = self.get_credentials(device_credential)
+        username, password, enable_password = self.get_credentials(device)
         optional_args = self.service.optional_args
         if not optional_args:
             optional_args = {}
         if "secret" not in optional_args:
-            secret = app.get_password(device_credential.enable_password)
-            optional_args["secret"] = secret
+            optional_args["secret"] = enable_password
         driver = get_network_driver(
             device.napalm_driver if self.use_device_driver else self.driver
         )

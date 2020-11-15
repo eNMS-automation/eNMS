@@ -3,7 +3,7 @@ from copy import deepcopy
 from datetime import datetime
 from functools import partial
 from importlib import __import__ as importlib_import
-from io import BytesIO
+from io import BytesIO, StringIO
 from json import dump, load, loads
 from json.decoder import JSONDecodeError
 from multiprocessing.pool import ThreadPool
@@ -11,7 +11,7 @@ from napalm import get_network_driver
 from netmiko import ConnectHandler
 from operator import attrgetter
 from os import getenv
-from paramiko import SFTPClient
+from paramiko import RSAKey, SFTPClient
 from re import compile, search
 from requests import post
 from scp import SCPClient
@@ -1011,7 +1011,9 @@ class Run(AbstractBase):
             if credential.subtype == "password":
                 credentials["password"] = app.get_password(credential.password)
             else:
-                credentials["password"] = "key"
+                private_key = app.get_password(credential.private_key)
+                pkey = RSAKey.from_private_key(StringIO(private_key))
+                credentials.update({"pkey": pkey, "use_keys": True})
         elif self.credentials == "user":
             user = db.fetch("user", name=self.creator)
             credentials["username"] = user.name

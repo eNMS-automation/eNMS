@@ -993,6 +993,7 @@ class Run(AbstractBase):
         return results
 
     def get_credentials(self, device):
+        credentials = {}
         pool_alias = aliased(models["pool"])
         credential = max(
             db.session.query(models["credential"])
@@ -1006,21 +1007,26 @@ class Run(AbstractBase):
             key=attrgetter("priority"),
         )
         if self.credentials == "device":
-            username = credential.username
-            password = app.get_password(credential.password)
+            credentials["username"] = credential.username
+            if credential.subtype == "password":
+                credentials["password"] = app.get_password(credential.password)
+            else:
+                credentials["password"] = "key"
         elif self.credentials == "user":
             user = db.fetch("user", name=self.creator)
-            username, password = user.name, app.get_password(user.password)
+            credentials["username"] = user.name
+            credentials["password"] = app.get_password(user.password)
         else:
-            username = self.sub(self.custom_username, locals())
+            credentials["username"] = self.sub(self.custom_username, locals())
             password = app.get_password(self.custom_password)
             substituted_password = self.sub(password, locals())
             if password != substituted_password:
                 if substituted_password.startswith("b'"):
                     substituted_password = substituted_password[2:-1]
                 password = app.get_password(substituted_password)
-        enable_password = app.get_password(credential.enable_password)
-        return username, password, enable_password
+            credentials["password"] = password
+        credentials["secret"] = app.get_password(credential.enable_password)
+        return credentials
 
     def convert_result(self, result):
         if self.conversion_method == "none" or "result" not in result:
@@ -1305,21 +1311,20 @@ class Run(AbstractBase):
             change_log=False,
             logger="security",
         )
-        username, password, enable_password = self.get_credentials(device)
+        credentials = self.get_credentials(device)
         optional_args = self.service.optional_args
         if not optional_args:
             optional_args = {}
         if "secret" not in optional_args:
-            optional_args["secret"] = enable_password
+            optional_args["secret"] = credentials.pop("secret")
         driver = get_network_driver(
             device.napalm_driver if self.use_device_driver else self.driver
         )
         napalm_connection = driver(
             hostname=device.ip_address,
-            username=username,
-            password=password,
             timeout=self.timeout,
             optional_args=optional_args,
+            **credentials
         )
         napalm_connection.open()
         app.connections_cache["napalm"][self.parent_runtime][

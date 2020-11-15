@@ -155,12 +155,13 @@
     ]
   ],
   "private_properties": [
-    "password",
-    "enable_password",
     "custom_password",
-    "netbox_token",
+    "enable_password",
     "librenms_token",
-    "opennms_password"
+    "netbox_token",
+    "opennms_password",
+    "password",
+    "private_key"
   ],
   "dont_serialize": { "device": ["configuration"] }
 }

@@ -1264,7 +1264,8 @@ class Run(AbstractBase):
             change_log=False,
             logger="security",
         )
-        username, password = self.get_credentials(device)
+        device_credential = db.get_device_credential(self.creator, device.name)
+        username, password = self.get_credentials(device_credential)
         connection = Scrapli(
             transport=self.transport,
             platform=device.scrapli_driver if self.use_device_driver else self.driver,
@@ -1290,12 +1291,14 @@ class Run(AbstractBase):
             change_log=False,
             logger="security",
         )
-        username, password = self.get_credentials(device)
+        device_credential = db.get_device_credential(self.creator, device.name)
+        username, password = self.get_credentials(device_credential)
         optional_args = self.service.optional_args
         if not optional_args:
             optional_args = {}
         if "secret" not in optional_args:
-            optional_args["secret"] = device.enable_password
+            secret = app.get_password(device_credential.enable_password)
+            optional_args["secret"] = secret
         driver = get_network_driver(
             device.napalm_driver if self.use_device_driver else self.driver
         )

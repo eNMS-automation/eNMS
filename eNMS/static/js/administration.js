@@ -348,7 +348,9 @@ export function showCredentialPanel(id) {
   $(`#credential-subtype${postfix}`)
     .change(function () {
       if (this.value == "password") {
+        $(`#credential-private_key-div${postfix}`).hide()
       } else {
+        $(`#credential-password-div${postfix}`).hide()
       }
     })
     .trigger("change");

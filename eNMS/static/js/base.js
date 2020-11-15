@@ -555,6 +555,7 @@ export function showInstancePanel(type, id, mode, tableId) {
       if (type == "workflow" || type.includes("service")) {
         showServicePanel(type, id, mode);
       }
+      if (type == "credential") showCredentialPanel(id);
       if (id) {
         const properties = type === "pool" ? "_properties" : "";
         call({
@@ -566,7 +567,6 @@ export function showInstancePanel(type, id, mode, tableId) {
             if (type.includes("service") || type == "workflow") {
               configureServicePanel(type, id, mode);
             }
-            if (type == "credential") showCredentialPanel(id);
           },
         });
       } else if (mode == "bulk") {

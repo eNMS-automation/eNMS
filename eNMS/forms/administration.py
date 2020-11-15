@@ -73,8 +73,8 @@ class CredentialForm(BaseForm):
     user_pools = MultipleInstanceField("Users", model="pool")
     priority = IntegerField("Priority", default=1)
     username = StringField("Username")
-    password = PasswordField("Password")
     enable_password = PasswordField("'Enable' Password")
+    password = PasswordField("Password")
     private_key = StringField(widget=TextArea(), render_kw={"rows": 10})
 
 

@@ -642,7 +642,7 @@ function updateProperty(instance, el, property, value, type) {
     if (propertyType == "multiselect-string") {
       value = value ? JSON.parse(value.replace(/'/g, `"`)) : [];
     }
-    el.selectpicker("val", value);
+    el.selectpicker("val", value).trigger("change");
     el.selectpicker("render");
   } else if (propertyType == "object-list") {
     value.forEach((o) => el.append(new Option(o.name, o.id)));

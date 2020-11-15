@@ -1248,21 +1248,18 @@ class Run(AbstractBase):
             change_log=False,
             logger="security",
         )
-        username, password, enable_password = self.get_credentials(device)
         driver = device.netmiko_driver if self.use_device_driver else self.driver
         netmiko_connection = ConnectHandler(
             device_type=driver,
             ip=device.ip_address,
             port=device.port,
-            username=username,
-            password=password,
-            secret=enable_password,
             fast_cli=self.fast_cli,
             timeout=self.timeout,
             global_delay_factor=self.global_delay_factor,
             session_log=BytesIO(),
             global_cmd_verify=False,
             use_keys=self.use_host_keys,
+            **self.get_credentials(device)
         )
         if self.enable_mode:
             netmiko_connection.enable()
@@ -1285,13 +1282,13 @@ class Run(AbstractBase):
             change_log=False,
             logger="security",
         )
-        username, password, _ = self.get_credentials(device)
+        credentials = self.get_credentials(device)
         connection = Scrapli(
             transport=self.transport,
             platform=device.scrapli_driver if self.use_device_driver else self.driver,
             host=device.ip_address,
-            auth_username=username,
-            auth_password=password,
+            auth_username=credentials["username"],
+            auth_password=credentials["password"],
             auth_private_key=False,
             auth_strict_key=False,
         )

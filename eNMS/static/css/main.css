@@ -644,14 +644,17 @@ fieldset {
   left: auto;
 }
 
+.wizard_horizontal ul.wizard_steps li a {
+  text-decoration: none;
+}
+
+.wizard_horizontal ul.wizard_steps li a:hover span.step_descr {
+  text-decoration: underline;
+}
+
 .progress.progress_sm,
 .progress.progress_sm .progress-bar {
   height: 10px !important;
-}
-
-.step_no {
-  background: #34495e;
-  color: #fff;
 }
 
 .form_wizard .loader,

@@ -348,11 +348,11 @@ export function showCredentialPanel(id) {
   $(`#credential-subtype${postfix}`)
     .change(function () {
       if (this.value == "password") {
-        $(`#credential-private_key-div${postfix}`).hide()
-        $(`#credential-password-div${postfix}`).show()
+        $(`#credential-private_key-div${postfix}`).hide();
+        $(`#credential-password-div${postfix}`).show();
       } else {
-        $(`#credential-password-div${postfix}`).hide()
-        $(`#credential-private_key-div${postfix}`).show()
+        $(`#credential-password-div${postfix}`).hide();
+        $(`#credential-private_key-div${postfix}`).show();
       }
     })
     .trigger("change");

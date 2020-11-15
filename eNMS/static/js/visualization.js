@@ -20,7 +20,7 @@ import {
   createTooltip,
   notify,
   serializeForm,
-  showTypePanel,
+  showInstancePanel,
   openPanel,
 } from "./base.js";
 import { showConnectionPanel, showDeviceData } from "./inventory.js";
@@ -475,7 +475,7 @@ function leftClickBinding(type, id, bundle) {
     const constraints = { id: `^(${id.split("-").join("|")})$`, id_filter: "regex" };
     showFilteredTable(id, type, constraints);
   } else {
-    showTypePanel(type, id);
+    showInstancePanel(type, id);
   }
 }
 
@@ -536,7 +536,7 @@ function create3dGraphNetwork(container) {
       const ratio = 1 + 100 / Math.hypot(node.x, node.y, node.z);
       const position = { x: node.x * ratio, y: node.y * ratio, z: node.z * ratio };
       graph.cameraPosition(position, node, 1500);
-      setTimeout(() => showTypePanel(node.type, node.id), 1550);
+      setTimeout(() => showInstancePanel(node.type, node.id), 1550);
     })
     .onNodeRightClick((node) => {
       $(".menu").show();
@@ -604,7 +604,7 @@ export function initView() {
     },
   });
   Object.assign(action, {
-    Properties: (o) => showTypePanel(o.type, o.id),
+    Properties: (o) => showInstancePanel(o.type, o.id),
     Connect: (d) => showConnectionPanel(d),
     Configuration: (d) => showDeviceData(d),
     "Run Service": (d) => showRunServicePanel({ instance: d }),

@@ -19,7 +19,7 @@ import {
   copyToClipboard,
   notify,
   openPanel,
-  showTypePanel,
+  showInstancePanel,
   userIsActive,
 } from "./base.js";
 import { clearSearch, tableInstances } from "./table.js";
@@ -124,7 +124,7 @@ export function displayWorkflow(workflowData) {
     } else if (node.type == "workflow") {
       switchToWorkflow(`${currentPath}>${node.id}`, null, $("#current-runtime").val());
     } else {
-      showTypePanel(node.type, node.id);
+      showInstancePanel(node.type, node.id);
     }
   });
   for (const objectType of ["Node", "Edge"]) {
@@ -618,11 +618,11 @@ function addServicePanel() {
 function createNew(mode) {
   creationMode = mode;
   if (mode == "create_workflow") {
-    showTypePanel("workflow");
+    showInstancePanel("workflow");
   } else if (mode == "duplicate_workflow") {
-    showTypePanel("workflow", workflow.id, "duplicate");
+    showInstancePanel("workflow", workflow.id, "duplicate");
   } else {
-    showTypePanel($("#service-type").val());
+    showInstancePanel($("#service-type").val());
   }
 }
 
@@ -637,7 +637,7 @@ Object.assign(action, {
   "Create Workflow": () => createNew("create_workflow"),
   "Duplicate Workflow": () => createNew("duplicate_workflow"),
   "Create New Service": () => createNew("create_service"),
-  "Edit Workflow": () => showTypePanel("workflow", workflow.id),
+  "Edit Workflow": () => showInstancePanel("workflow", workflow.id),
   "Restart Workflow from Here": (service) =>
     showRestartWorkflowPanel(workflow, service),
   "Workflow Results Tree": () => showRuntimePanel("results", workflow),
@@ -658,7 +658,7 @@ Object.assign(action, {
     openPanel({ name: "workflow_label", title: "Create a new label" }),
   "Edit Label": editLabel,
   "Edit Edge": (edge) => {
-    showTypePanel("workflow_edge", edge.id);
+    showInstancePanel("workflow_edge", edge.id);
   },
   Skip: () => skipServices(),
   "Zoom In": () => graph.zoom(0.2),
@@ -703,7 +703,7 @@ function editLabel(label) {
 function runWorkflow(withUpdates) {
   resetDisplay();
   if (withUpdates) {
-    showTypePanel("workflow", workflow.id, "run");
+    showInstancePanel("workflow", workflow.id, "run");
   } else {
     normalRun(workflow.id);
   }
@@ -922,7 +922,7 @@ function getWorkflowTree() {
                     <button
                       type="button"
                       class="btn btn-xs btn-primary"
-                      onclick='eNMS.base.showTypePanel("service", ${node.data.id})'
+                      onclick='eNMS.base.showInstancePanel("service", ${node.data.id})'
                     >
                       <span class="glyphicon glyphicon-edit"></span>
                     </button>

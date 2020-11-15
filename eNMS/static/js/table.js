@@ -271,7 +271,7 @@ export class Table {
     return `
       <button
         class="btn btn-primary"
-        onclick="eNMS.base.showTypePanel('${this.type}')"
+        onclick="eNMS.base.showInstancePanel('${this.type}')"
         data-tooltip="New"
         type="button"
       >
@@ -332,7 +332,7 @@ export class Table {
     const showPanelFunction =
       panelType == "service"
         ? "automation.openServicePanel(true)"
-        : `base.showTypePanel('${panelType}', null, 'bulk', '${this.id}')`;
+        : `base.showInstancePanel('${panelType}', null, 'bulk', '${this.id}')`;
     return `
       <button
         class="btn btn-primary"
@@ -441,13 +441,13 @@ tables.device = class DeviceTable extends Table {
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-primary"
-          onclick="eNMS.base.showTypePanel('device', '${row.id}')" data-tooltip="Edit"
+          onclick="eNMS.base.showInstancePanel('device', '${row.id}')" data-tooltip="Edit"
             ><span class="glyphicon glyphicon-edit"></span
           ></button>
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-primary"
-          onclick="eNMS.base.showTypePanel('device', '${row.id}', 'duplicate')"
+          onclick="eNMS.base.showInstancePanel('device', '${row.id}', 'duplicate')"
           data-tooltip="Duplicate"
             ><span class="glyphicon glyphicon-duplicate"></span
           ></button>
@@ -533,7 +533,7 @@ tables.configuration = class ConfigurationTable extends Table {
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-primary"
-          onclick="eNMS.base.showTypePanel('device', '${row.id}')" data-tooltip="Edit"
+          onclick="eNMS.base.showInstancePanel('device', '${row.id}')" data-tooltip="Edit"
             ><span class="glyphicon glyphicon-edit"></span
           ></button>
         </li>
@@ -560,13 +560,13 @@ tables.link = class LinkTable extends Table {
       <ul class="pagination pagination-lg" style="margin: 0px; width: 120px">
         <li>
           <button type="button" class="btn btn-sm btn-primary"
-          onclick="eNMS.base.showTypePanel('link', '${row.id}')" data-tooltip="Edit"
+          onclick="eNMS.base.showInstancePanel('link', '${row.id}')" data-tooltip="Edit"
             ><span class="glyphicon glyphicon-edit"></span
           ></button>
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-primary"
-          onclick="eNMS.base.showTypePanel('link', '${row.id}', 'duplicate')"
+          onclick="eNMS.base.showInstancePanel('link', '${row.id}', 'duplicate')"
           data-tooltip="Duplicate"
             ><span class="glyphicon glyphicon-duplicate"></span
           ></button>
@@ -641,13 +641,13 @@ tables.pool = class PoolTable extends Table {
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-primary"
-          onclick="eNMS.base.showTypePanel('pool', '${row.id}')" data-tooltip="Edit"
+          onclick="eNMS.base.showInstancePanel('pool', '${row.id}')" data-tooltip="Edit"
             ><span class="glyphicon glyphicon-edit"></span
           ></button>
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-primary"
-          onclick="eNMS.base.showTypePanel('pool', '${row.id}', 'duplicate')"
+          onclick="eNMS.base.showInstancePanel('pool', '${row.id}', 'duplicate')"
           data-tooltip="Duplicate"
             ><span class="glyphicon glyphicon-duplicate"></span
           ></button>
@@ -772,7 +772,7 @@ tables.service = class ServiceTable extends Table {
           <button
             type="button"
             class="btn btn-sm btn-primary"
-            onclick="eNMS.base.showTypePanel('${row.type}', '${row.id}')"
+            onclick="eNMS.base.showInstancePanel('${row.type}', '${row.id}')"
             data-tooltip="Edit"
           ><span class="glyphicon glyphicon-edit"></span></button>
         </li>
@@ -790,7 +790,7 @@ tables.service = class ServiceTable extends Table {
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-success"
-          onclick="eNMS.base.showTypePanel('${row.type}', '${row.id}', 'run')"
+          onclick="eNMS.base.showInstancePanel('${row.type}', '${row.id}', 'run')"
           data-tooltip="Parameterized Run"
             ><span class="glyphicon glyphicon-play-circle"></span
           ></button>
@@ -990,13 +990,13 @@ tables.task = class TaskTable extends Table {
       `<ul class="pagination pagination-lg" style="margin: 0px;">
         <li>
           <button type="button" class="btn btn-sm btn-primary"
-          onclick="eNMS.base.showTypePanel('task', '${row.id}')" data-tooltip="Edit"
+          onclick="eNMS.base.showInstancePanel('task', '${row.id}')" data-tooltip="Edit"
             ><span class="glyphicon glyphicon-edit"></span
           ></button>
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-primary"
-          onclick="eNMS.base.showTypePanel('task', '${row.id}', 'duplicate')"
+          onclick="eNMS.base.showInstancePanel('task', '${row.id}', 'duplicate')"
           data-tooltip="Duplicate">
           <span class="glyphicon glyphicon-duplicate"></span></button>
         </li>
@@ -1038,13 +1038,13 @@ tables.user = class UserTable extends Table {
       <ul class="pagination pagination-lg" style="margin: 0px;">
         <li>
           <button type="button" class="btn btn-sm btn-primary"
-          onclick="eNMS.base.showTypePanel('user', '${row.id}')" data-tooltip="Edit"
+          onclick="eNMS.base.showInstancePanel('user', '${row.id}')" data-tooltip="Edit"
             ><span class="glyphicon glyphicon-edit"></span
           ></button>
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-primary"
-          onclick="eNMS.base.showTypePanel('user', '${row.id}', 'duplicate')"
+          onclick="eNMS.base.showInstancePanel('user', '${row.id}', 'duplicate')"
           data-tooltip="Duplicate"
             ><span class="glyphicon glyphicon-duplicate"></span
           ></button>
@@ -1074,13 +1074,13 @@ tables.access = class AccessTable extends Table {
       <ul class="pagination pagination-lg" style="margin: 0px;">
         <li>
           <button type="button" class="btn btn-sm btn-primary"
-          onclick="eNMS.base.showTypePanel('access', '${row.id}')" data-tooltip="Edit"
+          onclick="eNMS.base.showInstancePanel('access', '${row.id}')" data-tooltip="Edit"
             ><span class="glyphicon glyphicon-edit"></span
           ></button>
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-primary"
-          onclick="eNMS.base.showTypePanel('access', '${row.id}', 'duplicate')"
+          onclick="eNMS.base.showInstancePanel('access', '${row.id}', 'duplicate')"
           data-tooltip="Duplicate"
             ><span class="glyphicon glyphicon-duplicate"></span
           ></button>
@@ -1110,12 +1110,12 @@ tables.credential = class CredentialTable extends Table {
       <ul class="pagination pagination-lg" style="margin: 0px;">
         <li>
           <button type="button" class="btn btn-sm btn-primary"
-          onclick="eNMS.base.showTypePanel('credential', '${row.id}')"
+          onclick="eNMS.base.showInstancePanel('credential', '${row.id}')"
           data-tooltip="Edit"><span class="glyphicon glyphicon-edit"></span></button>
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-primary"
-          onclick="eNMS.base.showTypePanel('credential', '${row.id}', 'duplicate')"
+          onclick="eNMS.base.showInstancePanel('credential', '${row.id}', 'duplicate')"
           data-tooltip="Duplicate"
             ><span class="glyphicon glyphicon-duplicate"></span
           ></button>
@@ -1145,13 +1145,13 @@ tables.server = class ServerTable extends Table {
       <ul class="pagination pagination-lg" style="margin: 0px;">
         <li>
           <button type="button" class="btn btn-sm btn-primary"
-          onclick="eNMS.base.showTypePanel('server', '${row.id}')" data-tooltip="Edit"
+          onclick="eNMS.base.showInstancePanel('server', '${row.id}')" data-tooltip="Edit"
             ><span class="glyphicon glyphicon-edit"></span
           ></button>
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-primary"
-          onclick="eNMS.base.showTypePanel('server', '${row.id}', 'duplicate')"
+          onclick="eNMS.base.showInstancePanel('server', '${row.id}', 'duplicate')"
           data-tooltip="Duplicate"
             ><span class="glyphicon glyphicon-duplicate"></span
           ></button>
@@ -1216,13 +1216,13 @@ tables.event = class EventTable extends Table {
       <ul class="pagination pagination-lg" style="margin: 0px; width: 150px">
         <li>
           <button type="button" class="btn btn-sm btn-primary"
-          onclick="eNMS.base.showTypePanel('event', '${row.id}')"
+          onclick="eNMS.base.showInstancePanel('event', '${row.id}')"
           data-tooltip="Edit"><span class="glyphicon glyphicon-edit">
           </span></button>
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-primary"
-          onclick="eNMS.base.showTypePanel('event', '${row.id}', 'duplicate')"
+          onclick="eNMS.base.showInstancePanel('event', '${row.id}', 'duplicate')"
           data-tooltip="Duplicate">
           <span class="glyphicon glyphicon-duplicate"></span></button>
         </li>

@@ -17,7 +17,7 @@ import {
   observeMutations,
   openPanel,
   serializeForm,
-  showTypePanel,
+  showInstancePanel,
 } from "./base.js";
 import { refreshTable, tableInstances, tables } from "./table.js";
 import {
@@ -30,7 +30,7 @@ import {
 } from "./workflow.js";
 
 function openServicePanel(bulk) {
-  showTypePanel($("#service-type").val(), null, bulk ? "bulk" : null, "service");
+  showInstancePanel($("#service-type").val(), null, bulk ? "bulk" : null, "service");
 }
 
 export function displayDiff(type, instanceId) {
@@ -559,7 +559,7 @@ function displayCalendar(calendarType) {
             selectHelper: true,
             eventClick: function (e) {
               if (calendarType == "task") {
-                showTypePanel("task", e.id);
+                showInstancePanel("task", e.id);
               } else {
                 showRuntimePanel("results", e.service, e.runtime, "result");
               }
@@ -583,10 +583,10 @@ function schedulerAction(action) {
 }
 
 Object.assign(action, {
-  Edit: (service) => showTypePanel(service.type, service.id),
-  Duplicate: (service) => showTypePanel(service.type, service.id, "duplicate"),
+  Edit: (service) => showInstancePanel(service.type, service.id),
+  Duplicate: (service) => showInstancePanel(service.type, service.id, "duplicate"),
   Run: (service) => normalRun(service.id),
-  "Parameterized Run": (service) => showTypePanel(service.type, service.id, "run"),
+  "Parameterized Run": (service) => showInstancePanel(service.type, service.id, "run"),
   Logs: (service) => showRuntimePanel("logs", service, currentRuntime),
   Results: (service) => showRuntimePanel("results", service, currentRuntime, "result"),
   Backward: () => switchToWorkflow(arrowHistory[arrowPointer - 1], "left"),

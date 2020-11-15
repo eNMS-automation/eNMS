@@ -544,7 +544,7 @@ function configureServicePanel(type, id, mode) {
   }
 }
 
-export function showTypePanel(type, id, mode, tableId) {
+export function showInstancePanel(type, id, mode, tableId) {
   openPanel({
     name: type,
     id: id,
@@ -935,5 +935,5 @@ configureNamespace("base", [
   processInstance,
   showAllAlerts,
   showDeletionPanel,
-  showTypePanel,
+  showInstancePanel,
 ]);

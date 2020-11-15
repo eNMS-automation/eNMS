@@ -1012,8 +1012,7 @@ class Run(AbstractBase):
                 credentials["password"] = app.get_password(credential.password)
             else:
                 private_key = app.get_password(credential.private_key)
-                pkey = RSAKey.from_private_key(StringIO(private_key))
-                credentials.update({"pkey": pkey, "use_keys": True})
+                credentials["pkey"] = RSAKey.from_private_key(StringIO(private_key))
         elif self.credentials == "user":
             user = db.fetch("user", name=self.creator)
             credentials["username"] = user.name

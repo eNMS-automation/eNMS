@@ -140,6 +140,7 @@ class Service(AbstractBase):
 
     def __init__(self, **kwargs):
         kwargs.pop("status", None)
+        kwargs["update_pools"] = True
         super().__init__(**kwargs)
         if "name" not in kwargs:
             self.set_name()

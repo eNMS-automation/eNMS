@@ -1444,7 +1444,7 @@
     b: [1, 2, '3']
   custom_multiselect: [a, c]
   custom_select: b
-  default_access: creator
+  default_access: public
   description: france
   down: false
   icon: router
@@ -1454,7 +1454,7 @@
   last_configuration_runtime: Never
   last_configuration_status: Never
   last_configuration_update: Never
-  last_modified: ''
+  last_modified: '2020-11-16 05:46:50.709114'
   last_operational_data_duration: Never
   last_operational_data_failure: Never
   last_operational_data_runtime: Never
@@ -1469,7 +1469,7 @@
   location: france
   longitude: '4.533886327086546'
   model: ''
-  name: router10
+  name: router10 (public)
   napalm_driver: ios
   netmiko_driver: cisco_ios
   operating_system: IOS
@@ -1804,7 +1804,7 @@
     b: [1, 2, '3']
   custom_multiselect: [a, c]
   custom_select: b
-  default_access: creator
+  default_access: public
   description: eastern europe
   down: false
   icon: router
@@ -1814,7 +1814,7 @@
   last_configuration_runtime: Never
   last_configuration_status: Never
   last_configuration_update: Never
-  last_modified: ''
+  last_modified: '2020-11-16 05:46:58.341050'
   last_operational_data_duration: Never
   last_operational_data_failure: Never
   last_operational_data_runtime: Never
@@ -1829,7 +1829,7 @@
   location: eastern europe
   longitude: '12.041475611784332'
   model: ''
-  name: router18
+  name: router18 (public)
   napalm_driver: ios
   netmiko_driver: cisco_ios
   operating_system: IOS-XR

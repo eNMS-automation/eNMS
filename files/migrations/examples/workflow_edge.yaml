@@ -792,17 +792,19 @@
     Workflow S: conditional skip query in failed and discard mode] Skip Washington
     with Skip value == False', subtype: failure, type: workflow_edge, workflow: 'Regression
     Workflow S: conditional skip query in failed and discard mode'}
-- {color: green, destination: '[Regression Workflow 4: link neighbors mechanism] Test
-    get_neighbors function', label: success, source: '[Shared] Start', subtype: success,
-  type: workflow_edge, workflow: 'Regression Workflow 4: link neighbors mechanism'}
-- {color: green, destination: '[Regression Workflow 4: link neighbors mechanism] Iterate
-    over neighbors of workflow device', label: success, source: '[Regression Workflow
-    4: link neighbors mechanism] Test get_neighbors function', subtype: success, type: workflow_edge,
-  workflow: 'Regression Workflow 4: link neighbors mechanism'}
+- {color: green, destination: '[Regression Workflow 4: link neighbors mechanism (public)]
+    Test get_neighbors function', label: success, source: '[Shared] Start', subtype: success,
+  type: workflow_edge, workflow: 'Regression Workflow 4: link neighbors mechanism
+    (public)'}
+- {color: green, destination: '[Regression Workflow 4: link neighbors mechanism (public)]
+    Iterate over neighbors of workflow device', label: success, source: '[Regression
+    Workflow 4: link neighbors mechanism (public)] Test get_neighbors function', subtype: success,
+  type: workflow_edge, workflow: 'Regression Workflow 4: link neighbors mechanism
+    (public)'}
 - {color: green, destination: '[Shared] End', label: success, source: '[Regression
-    Workflow 4: link neighbors mechanism] Iterate over neighbors of workflow device',
-  subtype: success, type: workflow_edge, workflow: 'Regression Workflow 4: link neighbors
-    mechanism'}
+    Workflow 4: link neighbors mechanism (public)] Iterate over neighbors of workflow
+    device', subtype: success, type: workflow_edge, workflow: 'Regression Workflow
+    4: link neighbors mechanism (public)'}
 - {color: green, destination: '[Regression Workflow D: Prompts] Check VRF (NOVRF)
     exists', label: success, source: '[Shared] Start', subtype: success, type: workflow_edge,
   workflow: 'Regression Workflow D: Prompts'}

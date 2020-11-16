@@ -165,6 +165,7 @@
     "/table/access",
     "/table/changelog",
     "/table/configuration",
+    "/table/credential",
     "/table/device",
     "/table/event",
     "/table/pool",

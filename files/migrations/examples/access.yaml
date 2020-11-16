@@ -25,10 +25,10 @@
     /form/upload_files, /form/user, /form/user_relation_filtering, /form/workflow,
     /form/workflow_edge, /form/workflow_label, /login, /logout, /rest/configuration,
     /rest/instance, /rest/query, /rest/result, /rest/search, /table/access, /table/changelog,
-    /table/configuration, /table/device, /table/event, /table/pool, /table/link, /table/run,
-    /table/server, /table/service, /table/session, /table/task, /table/user, /view_service_results,
-    /visualization/geographical_view, /visualization/logical_view, /workflow_builder,
-    /form/panel, /template/form, /template/devices]
+    /table/configuration, /table/credential, /table/device, /table/event, /table/pool,
+    /table/link, /table/run, /table/server, /table/service, /table/session, /table/task,
+    /table/user, /view_service_results, /visualization/geographical_view, /visualization/logical_view,
+    /workflow_builder, /form/panel, /template/form, /template/devices]
   menu: [Home, Administration, Inventory, Visualization, Automation, Scheduling, Template]
   name: Full Access to Everything
   pages: [Access, Credentials, Dashboard, Changelog, Sessions, Users, Servers, Devices,

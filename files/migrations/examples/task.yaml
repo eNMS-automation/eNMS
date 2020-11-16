@@ -1,6 +1,6 @@
 - creator: ''
   crontab_expression: ''
-  default_access: ''
+  default_access: 'creator'
   description: Back-up device configurations
   devices: []
   end_date: ''
@@ -17,7 +17,7 @@
   type: task
 - creator: ''
   crontab_expression: ''
-  default_access: ''
+  default_access: 'creator'
   description: Monitor eNMS cluster
   devices: []
   end_date: ''
@@ -34,7 +34,7 @@
   type: task
 - creator: ''
   crontab_expression: ''
-  default_access: ''
+  default_access: 'creator'
   description: ''
   devices: [PaloAlto, Austin]
   end_date: ''

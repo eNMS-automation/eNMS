@@ -3,7 +3,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: Start point of a workflow
@@ -162,7 +162,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: End point of a workflow
@@ -330,7 +330,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: Monitor eNMS cluster
@@ -397,7 +397,7 @@
   conversion_method: none
   creator: admin
   custom_integer: 0
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: Example
@@ -472,7 +472,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: Configure BGP Peering with Napalm
@@ -546,7 +546,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: Configuration Backup using NAPALM
@@ -627,7 +627,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -709,7 +709,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -806,7 +806,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -889,7 +889,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -982,7 +982,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: Create a VRF "test" with Napalm
@@ -1052,7 +1052,7 @@
   content_match_regex: false
   conversion_method: text
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: Use REST call is_alive
@@ -1134,7 +1134,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: 'Getter: get_facts'
@@ -1209,7 +1209,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: 'Getter: get_interfaces'
@@ -1283,7 +1283,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: 'Getter: get_interfaces_ip'
@@ -1358,7 +1358,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: 'Getter: get_config'
@@ -1427,7 +1427,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: Process Payload in example workflow
@@ -1489,7 +1489,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: Add devices to the payload
@@ -1566,7 +1566,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -1652,7 +1652,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: Payload Variables Extraction with Regex/TextFSM
@@ -1741,7 +1741,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -1817,7 +1817,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -1910,7 +1910,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -2004,7 +2004,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -2095,7 +2095,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -2177,7 +2177,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -2241,7 +2241,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -2315,7 +2315,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -2405,7 +2405,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -2495,7 +2495,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -2582,7 +2582,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -2659,7 +2659,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -2735,7 +2735,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -2813,7 +2813,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -2889,7 +2889,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -2962,7 +2962,7 @@
   content_match_regex: false
   conversion_method: json
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -3029,7 +3029,7 @@
   content_match_regex: true
   conversion_method: text
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -3095,7 +3095,7 @@
   content_match_regex: false
   conversion_method: json
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -3167,7 +3167,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -3257,7 +3257,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -3347,7 +3347,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -3437,7 +3437,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -3520,7 +3520,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -3588,7 +3588,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -3668,7 +3668,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -3749,7 +3749,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -3819,7 +3819,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -3900,7 +3900,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -3986,7 +3986,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: Poll configuration and push to gitlab
@@ -4059,7 +4059,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: is_alive
   delete_spaces_before_matching: false
   description: Create and delete a VRF with Netmiko
@@ -4166,7 +4166,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: Create and delete a VRF with Napalm
@@ -4245,7 +4245,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: REST call, Napalm getters, etc
@@ -4326,7 +4326,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: Test the payload extraction and validation mechanisms
@@ -4447,7 +4447,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: Test the inner workflow system
@@ -4527,7 +4527,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: Workflow with separate failure - success path
@@ -4600,7 +4600,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -4678,7 +4678,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -4769,7 +4769,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -4881,7 +4881,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -4976,7 +4976,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -5055,7 +5055,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -5159,7 +5159,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -5239,7 +5239,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -5309,7 +5309,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -5387,7 +5387,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -5488,7 +5488,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -5580,7 +5580,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -5649,7 +5649,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -5716,7 +5716,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -5786,7 +5786,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -5854,7 +5854,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -5925,7 +5925,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -5997,7 +5997,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -6088,7 +6088,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -6179,7 +6179,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -6264,7 +6264,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -6352,7 +6352,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -6419,7 +6419,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -6492,7 +6492,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -6578,7 +6578,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -6643,7 +6643,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -6708,7 +6708,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -6779,7 +6779,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -6862,7 +6862,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -6927,7 +6927,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -6991,7 +6991,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -7056,7 +7056,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -7121,7 +7121,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -7190,7 +7190,7 @@
   content_match_regex: true
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -7258,7 +7258,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -7326,7 +7326,7 @@
   content_match_regex: true
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -7393,7 +7393,7 @@
   content_match_regex: true
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: true
   description: ''
@@ -7460,7 +7460,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -7528,7 +7528,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: is_alive
   delete_spaces_before_matching: false
   description: ''
@@ -7612,7 +7612,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -7678,7 +7678,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -7742,7 +7742,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -7804,7 +7804,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -7871,7 +7871,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -7947,7 +7947,7 @@
   content_match_regex: true
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -8017,7 +8017,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -8098,7 +8098,7 @@
   conversion_method: none
   count: 5
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -8168,7 +8168,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -8232,7 +8232,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -8310,7 +8310,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -8396,7 +8396,7 @@
   content_match_regex: false
   conversion_method: text
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: Use REST call is_alive
@@ -8474,7 +8474,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -8574,7 +8574,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -8667,7 +8667,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -8732,7 +8732,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -8796,7 +8796,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -8867,7 +8867,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -8939,7 +8939,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -9011,7 +9011,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -9083,7 +9083,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -9151,7 +9151,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -9237,7 +9237,7 @@
   content_match_regex: false
   conversion_method: text
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: Use REST call is_alive
@@ -9317,7 +9317,7 @@
   content_match_regex: false
   conversion_method: text
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: Use REST call is_alive
@@ -9391,7 +9391,7 @@
   content_match_regex: false
   conversion_method: text
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: Use REST call is_alive
@@ -9465,7 +9465,7 @@
   content_match_regex: false
   conversion_method: text
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: Use REST call is_alive
@@ -9539,7 +9539,7 @@
   content_match_regex: false
   conversion_method: text
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: Use REST call is_alive
@@ -9619,7 +9619,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -9710,7 +9710,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -9801,7 +9801,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -9892,7 +9892,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -9983,7 +9983,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -10074,7 +10074,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -10158,7 +10158,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -10222,7 +10222,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -10286,7 +10286,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -10350,7 +10350,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -10414,7 +10414,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -10478,7 +10478,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -10542,7 +10542,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -10606,7 +10606,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -10671,7 +10671,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -10746,7 +10746,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -10828,7 +10828,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -10907,7 +10907,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -10991,7 +10991,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -11071,7 +11071,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -11153,7 +11153,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -11226,7 +11226,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -11292,7 +11292,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -11362,7 +11362,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -11431,7 +11431,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -11502,7 +11502,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -11585,7 +11585,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -11657,7 +11657,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -11729,7 +11729,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -11801,7 +11801,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -11874,7 +11874,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -11961,7 +11961,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -12051,7 +12051,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -12130,7 +12130,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -12214,7 +12214,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -12300,7 +12300,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -12373,7 +12373,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -12447,7 +12447,7 @@
   custom_password: ''
   custom_username: '{{ get_result("Credentials encryption", device=device.name)["username"]
     }}'
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -12531,7 +12531,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -12602,7 +12602,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -12689,7 +12689,7 @@
   content_match_regex: false
   conversion_method: text
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: Use REST call is_alive
@@ -12769,7 +12769,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -12837,7 +12837,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -12912,7 +12912,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -12996,7 +12996,7 @@
   content_match_regex: false
   conversion_method: text
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: Use REST call is_alive
@@ -13069,7 +13069,7 @@
   content_match_regex: false
   conversion_method: text
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: Use REST call is_alive
@@ -13142,7 +13142,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -13233,7 +13233,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -13300,7 +13300,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -13366,7 +13366,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -13431,7 +13431,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -13501,7 +13501,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -13589,7 +13589,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -13656,7 +13656,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -13725,7 +13725,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -13793,7 +13793,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -13859,7 +13859,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -13925,7 +13925,7 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
@@ -13997,7 +13997,7 @@
   credentials: device
   custom_password: ''
   custom_username: ''
-  default_access: ''
+  default_access: 'creator'
   definition: Definition
   delay_factor: 1.0
   delete_spaces_before_matching: false

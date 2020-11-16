@@ -351,26 +351,27 @@ function processNetwork(network) {
       .sort()
       .join("/");
     links[key] = links[key] ? [...links[key], link.id] : [link.id];
-    if (!bundleCoordinates[key])
+    if (!bundleCoordinates[key]) {
       bundleCoordinates[key] = {
         source_latitude: link.source_latitude,
         source_longitude: link.source_longitude,
         destination_latitude: link.destination_latitude,
         destination_longitude: link.destination_longitude,
       };
+    }
   }
   let parallelLinks = new Set();
   for (const [endpoints, ids] of Object.entries(links)) {
     if (ids.length == 1) continue;
     ids.forEach(parallelLinks.add, parallelLinks);
-    const [source_id, destination_id] = endpoints.split("/");
+    const [sourceId, destinationId] = endpoints.split("/");
     network.links.push({
       type: "bundle",
       name: "Colocated links",
       id: ids.join("-"),
       color: "#FF1493",
-      source_id: parseInt(source_id),
-      destination_id: parseInt(destination_id),
+      source_id: parseInt(sourceId),
+      destination_id: parseInt(destinationId),
       ...bundleCoordinates[endpoints],
     });
   }

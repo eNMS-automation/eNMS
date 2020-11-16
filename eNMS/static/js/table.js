@@ -535,9 +535,9 @@ tables.configuration = class ConfigurationTable extends Table {
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-primary"
-          onclick="eNMS.base.showInstancePanel('device', '${row.id}')" data-tooltip="Edit"
-            ><span class="glyphicon glyphicon-edit"></span
-          ></button>
+          onclick="eNMS.base.showInstancePanel('device', '${row.id}')"
+          data-tooltip="Edit"><span class="glyphicon glyphicon-edit">
+          </span></button>
         </li>
       </ul>`;
   }

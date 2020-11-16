@@ -571,8 +571,8 @@
   device_vendor_match: inclusion
   devices: [Jackson, PaloAlto, Washington, Chicago, SanJose, SanDiego, Dallas, Philadelphia,
     Atlanta, Baltimore, Cleveland, Cincinnati, Cambridge, Minneapolis, Sacramento,
-    SanFrancisco, Orange, Oakland, Dallas-2, Dallas-3, Dallas-4, Jackson-2, Oakland-2,
-    router20 (admin), router23 (admin)]
+    SanFrancisco, Orange, Oakland, router20 (admin), router23 (admin), Dallas-2, Dallas-3,
+    Dallas-4, Jackson-2, Oakland-2]
   last_modified: '2020-09-21 06:22:57.467002'
   link_color: ''
   link_color_match: inclusion
@@ -684,7 +684,7 @@
   device_vendor_match: inclusion
   devices: [Austin, Washington, Chicago, SanDiego, Philadelphia, Detroit, Richmond,
     Baltimore, Cincinnati, Cambridge, Minneapolis, SanFrancisco, router10 (public),
-    router18 (public), Austin-2, Austin-3, router20 (admin), router23 (admin)]
+    router18 (public), router20 (admin), router23 (admin), Austin-2, Austin-3]
   last_modified: '2020-09-21 06:22:36.450390'
   link_color: ''
   link_color_match: inclusion
@@ -831,8 +831,8 @@
   service_operating_system_match: inclusion
   service_vendor: ''
   service_vendor_match: inclusion
-  target_services: ['Regression Workflow P: large workflow (scalability)', '[Regression
-      Workflow 9: Operational Data Backup (admin)] Retrieve Operational Data']
+  target_services: ['[Regression Workflow 9: Operational Data Backup (admin)] Retrieve
+      Operational Data', 'Regression Workflow P: large workflow (scalability)']
   tasks: []
   type: pool
   user_description: ''

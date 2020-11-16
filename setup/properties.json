@@ -716,11 +716,13 @@
       {
         "data": "name",
         "title": "Username",
-        "search": "text"
+        "search": "text",
+        "width": "150px"
       },
       {
         "data": "description",
         "title": "Description",
+        "width": "400px",
         "search": "text"
       },
       {

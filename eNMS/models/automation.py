@@ -386,7 +386,7 @@ class Run(AbstractBase):
     @classmethod
     def rbac_filter(cls, query, mode, user):
         public_services = query.join(cls.service).filter(
-            models["service"].public == true()
+            models["service"].default_access == "public"
         )
         pool_alias = aliased(models["pool"])
         return public_services.union(

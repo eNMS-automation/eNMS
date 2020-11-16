@@ -62,7 +62,7 @@ class User(AbstractBase, UserMixin):
         super().update(**kwargs)
         self.update_rbac()
 
-    def update_rbac(self):
+    def update_rbac(self, access=None):
         if self.is_admin:
             return
         user_access = (
@@ -72,6 +72,8 @@ class User(AbstractBase, UserMixin):
             .filter(models["user"].name == self.name)
             .all()
         )
+        if access and access not in user_access:
+            user_access.append(access)
         for property in rbac:
             access_value = (getattr(access, property) for access in user_access)
             setattr(self, property, list(set(chain.from_iterable(access_value))))
@@ -105,7 +107,7 @@ class Access(AbstractBase):
         old_users = self.get_users()
         super().update(**kwargs)
         for user in old_users | self.get_users():
-            user.update_rbac()
+            user.update_rbac(self)
 
 
 @db.set_custom_properties

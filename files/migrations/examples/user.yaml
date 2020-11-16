@@ -1,17 +1,17 @@
-- {authentication: database, description: '', email: admin@enms.io, groups: '', is_admin: true,
-  name: admin, password: JGFyZ29uMmlkJHY9MTkkbT0xMDI0MDAsdD0yLHA9OCRNaWFrOVA3Zit6OW5qSEd1RmVLOGR3JEhLWk5VWnVpMnlObkt5QnRHNFR4WEE=,
+- {authentication: database, description: '', email: admin@enms.io, groups: admin,
+  is_admin: true, name: admin, password: JGFyZ29uMmlkJHY9MTkkbT0xMDI0MDAsdD0yLHA9OCRNaWFrOVA3Zit6OW5qSEd1RmVLOGR3JEhLWk5VWnVpMnlObkt5QnRHNFR4WEE=,
   small_menu: false, theme: default, type: user}
 - {authentication: database, description: '', email: read-only@enms.io, groups: '',
   is_admin: false, name: readonly, password: JGFyZ29uMmlkJHY9MTkkbT0xMDI0MDAsdD0yLHA9OCQrcjkzTHNXWUU4SjRiODNaVytzOTV3JG5FNXFiU3B2QWM1ZUpyYWdwSlBycXc=,
   small_menu: false, theme: default, type: user}
-- {authentication: database, description: '', email: chicago@enms.io, groups: '',
+- {authentication: database, description: '', email: chicago@enms.io, groups: 'chicago,usa',
   is_admin: false, name: chicago, password: JGFyZ29uMmlkJHY9MTkkbT0xMDI0MDAsdD0yLHA9OCRuRFBHV0t2MXZwY3lwbFJxYlEyQjBBJDd4dDllRzRVT240Y3E4U0x6K3NLb0E=,
   small_menu: false, theme: default, type: user}
-- {authentication: database, description: '', email: sf@enms.io, groups: '', is_admin: false,
-  name: sf, password: JGFyZ29uMmlkJHY9MTkkbT0xMDI0MDAsdD0yLHA9OCRqdEU2UjRpeDF0cGJhKzNkKzM5dnJRJFVWck4yNnR6MUoyTktrNHVWMTUwZ0E=,
+- {authentication: database, description: '', email: sf@enms.io, groups: 'san-francisco,usa',
+  is_admin: false, name: sf, password: JGFyZ29uMmlkJHY9MTkkbT0xMDI0MDAsdD0yLHA9OCRqdEU2UjRpeDF0cGJhKzNkKzM5dnJRJFVWck4yNnR6MUoyTktrNHVWMTUwZ0E=,
   small_menu: false, theme: default, type: user}
-- {authentication: database, description: '', email: ny@enms.io, groups: '', is_admin: false,
-  name: ny, password: JGFyZ29uMmlkJHY9MTkkbT0xMDI0MDAsdD0yLHA9OCQxanBIcUZWcUxVVW9SY2g1ajFIS09RJEpMM1MxVEM1a3NJeTlMSGpRLzVvM3c=,
+- {authentication: database, description: '', email: ny@enms.io, groups: 'new-york,usa',
+  is_admin: false, name: ny, password: JGFyZ29uMmlkJHY9MTkkbT0xMDI0MDAsdD0yLHA9OCQxanBIcUZWcUxVVW9SY2g1ajFIS09RJEpMM1MxVEM1a3NJeTlMSGpRLzVvM3c=,
   small_menu: false, theme: default, type: user}
 - {authentication: database, description: "The 'nadmin' user is not an admin, but\
     \ it has access to all menus, endpoints and instances (via the \"All objects\"\

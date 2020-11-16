@@ -1,4 +1,5 @@
-- completion_time: 1
+- access_groups: ''
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -160,7 +161,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- completion_time: 1
+- access_groups: ''
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -331,7 +333,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- completion_time: 1
+- access_groups: ''
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -394,6 +397,7 @@
 - a_dict: {}
   a_float: 5.0
   a_list: []
+  access_groups: ''
   an_integer: 10
   boolean1: true
   boolean2: false
@@ -470,7 +474,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- close_connection: false
+- access_groups: ''
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -545,7 +550,8 @@
   vendor: ''
   vrf_name: configure_BGP_test
   waiting_time: 100
-- close_connection: false
+- access_groups: ''
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -624,7 +630,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- close_connection: false
+- access_groups: ''
+  close_connection: false
   commit_configuration: false
   completion_time: 1
   config_mode: false
@@ -707,7 +714,8 @@
   validation_method: text
   vendor: Arista
   waiting_time: 0
-- auto_find_prompt: true
+- access_groups: ''
+  auto_find_prompt: true
   close_connection: true
   command: show vrf
   completion_time: 1
@@ -803,7 +811,8 @@
   validation_method: text
   vendor: Arista
   waiting_time: 0
-- close_connection: false
+- access_groups: ''
+  close_connection: false
   commit_configuration: false
   completion_time: 1
   config_mode: false
@@ -887,7 +896,8 @@
   validation_method: text
   vendor: Arista
   waiting_time: 1
-- auto_find_prompt: true
+- access_groups: ''
+  auto_find_prompt: true
   close_connection: false
   command: show vrf
   completion_time: 1
@@ -981,7 +991,8 @@
   validation_method: text
   vendor: Arista
   waiting_time: 0
-- action: load_merge_candidate
+- access_groups: ''
+  action: load_merge_candidate
   close_connection: false
   completion_time: 1
   content: "vrf instance napalm\r\n"
@@ -1056,7 +1067,8 @@
   validation_method: text
   vendor: Arista
   waiting_time: 0
-- call_type: GET
+- access_groups: ''
+  call_type: GET
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -1136,7 +1148,8 @@
   vendor: ''
   verify_ssl_certificate: true
   waiting_time: 0
-- close_connection: false
+- access_groups: ''
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -1211,7 +1224,8 @@
   validation_method: dict_included
   vendor: ''
   waiting_time: 0
-- close_connection: false
+- access_groups: ''
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -1285,7 +1299,8 @@
   validation_method: dict_included
   vendor: ''
   waiting_time: 0
-- close_connection: false
+- access_groups: ''
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -1360,7 +1375,8 @@
   validation_method: dict_included
   vendor: ''
   waiting_time: 0
-- close_connection: false
+- access_groups: ''
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -1433,7 +1449,8 @@
   validation_method: dict_included
   vendor: ''
   waiting_time: 0
-- completion_time: 1
+- access_groups: ''
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -1495,7 +1512,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- completion_time: 1
+- access_groups: ''
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -1565,7 +1583,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- auto_find_prompt: true
+- access_groups: ''
+  auto_find_prompt: true
   close_connection: true
   command: show ip route
   completion_time: 1
@@ -1658,7 +1677,8 @@
   validation_method: text
   vendor: Arista
   waiting_time: 0
-- completion_time: 1
+- access_groups: ''
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -1743,7 +1763,8 @@
   variable3: textfsm_variable
   vendor: ''
   waiting_time: 0
-- close_connection: false
+- access_groups: ''
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -1816,7 +1837,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- auto_find_prompt: true
+- access_groups: ''
+  auto_find_prompt: true
   close_connection: false
   command: show vrf
   completion_time: 1
@@ -1909,7 +1931,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- auto_find_prompt: true
+- access_groups: ''
+  auto_find_prompt: true
   close_connection: false
   command: show vrf
   completion_time: 1
@@ -2001,7 +2024,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- close_connection: false
+- access_groups: ''
+  close_connection: false
   command: show vrf a
   completion_time: 1
   config_mode: false
@@ -2092,7 +2116,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- close_connection: false
+- access_groups: ''
+  close_connection: false
   command: show vrf
   completion_time: 1
   config_mode: false
@@ -2183,7 +2208,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- completion_time: 1
+- access_groups: ''
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -2247,7 +2273,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- completion_time: 1
+- access_groups: ''
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -2314,7 +2341,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- auto_find_prompt: true
+- access_groups: ''
+  auto_find_prompt: true
   close_connection: false
   command: show vrf {{iteration_simple}}
   completion_time: 1
@@ -2404,7 +2432,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- auto_find_prompt: true
+- access_groups: ''
+  auto_find_prompt: true
   close_connection: false
   command: show vrf test
   completion_time: 1
@@ -2494,7 +2523,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- auto_find_prompt: true
+- access_groups: ''
+  auto_find_prompt: true
   close_connection: false
   command: show vrf {{get_result("Modify payload (per device)", device=device.name)["duration"]}}
   completion_time: 1
@@ -2584,7 +2614,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- close_connection: false
+- access_groups: ''
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -2661,7 +2692,8 @@
   validation_method: dict_equal
   vendor: ''
   waiting_time: 0
-- close_connection: false
+- access_groups: ''
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -2737,7 +2769,8 @@
   validation_method: dict_included
   vendor: ''
   waiting_time: 0
-- close_connection: false
+- access_groups: ''
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -2815,7 +2848,8 @@
   validation_method: dict_included
   vendor: ''
   waiting_time: 0
-- close_connection: false
+- access_groups: ''
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -2891,7 +2925,8 @@
   validation_method: dict_equal
   vendor: ''
   waiting_time: 0
-- close_connection: false
+- access_groups: ''
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -2967,7 +3002,8 @@
   validation_method: dict_included
   vendor: ''
   waiting_time: 0
-- arguments: ''
+- access_groups: ''
+  arguments: ''
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -3034,7 +3070,8 @@
   validation_method: dict_included
   vendor: ''
   waiting_time: 0
-- arguments: ''
+- access_groups: ''
+  arguments: ''
   completion_time: 1
   content_match: ip address\s.*/24
   content_match_regex: true
@@ -3100,7 +3137,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- arguments: ''
+- access_groups: ''
+  arguments: ''
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -3166,7 +3204,8 @@
   validation_method: dict_included
   vendor: ''
   waiting_time: 0
-- auto_find_prompt: true
+- access_groups: ''
+  auto_find_prompt: true
   close_connection: false
   command: show version
   completion_time: 1
@@ -3258,7 +3297,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- auto_find_prompt: true
+- access_groups: ''
+  auto_find_prompt: true
   close_connection: false
   command: show interface {{non_default_iteration_value_name}}
   completion_time: 1
@@ -3348,7 +3388,8 @@
   validation_method: text
   vendor: Arista
   waiting_time: 0
-- auto_find_prompt: true
+- access_groups: ''
+  auto_find_prompt: true
   close_connection: false
   command: show interface {{iteration_value}}
   completion_time: 1
@@ -3438,7 +3479,8 @@
   validation_method: text
   vendor: Arista
   waiting_time: 0
-- auto_find_prompt: true
+- access_groups: ''
+  auto_find_prompt: true
   close_connection: false
   command: show interface {{iteration_value}}
   completion_time: 1
@@ -3528,7 +3570,8 @@
   validation_method: text
   vendor: Arista
   waiting_time: 0
-- completion_time: 1
+- access_groups: ''
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -3596,7 +3639,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- completion_time: 1
+- access_groups: ''
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -3676,7 +3720,8 @@
   variable3: dict
   vendor: ''
   waiting_time: 0
-- completion_time: 1
+- access_groups: ''
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -3756,7 +3801,8 @@
   variable3: dict
   vendor: ''
   waiting_time: 0
-- call_type: GET
+- access_groups: ''
+  call_type: GET
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -3827,7 +3873,8 @@
   vendor: ''
   verify_ssl_certificate: false
   waiting_time: 0
-- completion_time: 1
+- access_groups: ''
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -3901,7 +3948,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- auto_find_prompt: true
+- access_groups: ''
+  auto_find_prompt: true
   close_connection: false
   command: show interface {{get_var('iteration_value')}}
   completion_time: 1
@@ -3993,7 +4041,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- close_connection: false
+- access_groups: ''
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -4066,7 +4115,8 @@
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
-- close_connection: false
+- access_groups: ''
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -4173,7 +4223,8 @@
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
-- close_connection: false
+- access_groups: ''
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -4252,7 +4303,8 @@
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
-- close_connection: false
+- access_groups: ''
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -4333,7 +4385,8 @@
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
-- close_connection: false
+- access_groups: ''
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -4454,7 +4507,8 @@
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
-- close_connection: false
+- access_groups: ''
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -4534,7 +4588,8 @@
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
-- close_connection: false
+- access_groups: ''
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -4607,7 +4662,8 @@
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
-- close_connection: false
+- access_groups: ''
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -4685,7 +4741,8 @@
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
-- close_connection: false
+- access_groups: ''
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -4776,7 +4833,8 @@
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
-- close_connection: false
+- access_groups: ''
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -4888,7 +4946,8 @@
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
-- close_connection: false
+- access_groups: ''
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -4983,7 +5042,8 @@
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
-- close_connection: false
+- access_groups: ''
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -5062,7 +5122,8 @@
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
-- close_connection: false
+- access_groups: ''
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -5166,7 +5227,8 @@
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
-- close_connection: false
+- access_groups: ''
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -5246,7 +5308,8 @@
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
-- close_connection: false
+- access_groups: ''
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -5316,7 +5379,8 @@
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
-- close_connection: false
+- access_groups: ''
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -5388,7 +5452,8 @@
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
-- auto_find_prompt: true
+- access_groups: ''
+  auto_find_prompt: true
   close_connection: false
   command: show interfaces
   completion_time: 1
@@ -5477,7 +5542,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- add_header: true
+- access_groups: ''
+  add_header: true
   close_connection: true
   commands:
   - {prefix: shusers, value: show run}
@@ -5589,7 +5655,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- close_connection: false
+- access_groups: ''
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -5658,7 +5725,8 @@
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
-- close_connection: false
+- access_groups: ''
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -5725,7 +5793,8 @@
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
-- call_type: GET
+- access_groups: ''
+  call_type: GET
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -5795,7 +5864,8 @@
   vendor: ''
   verify_ssl_certificate: false
   waiting_time: 0
-- close_connection: false
+- access_groups: ''
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -5863,7 +5933,8 @@
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
-- call_type: GET
+- access_groups: ''
+  call_type: GET
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -5934,7 +6005,8 @@
   vendor: ''
   verify_ssl_certificate: false
   waiting_time: 0
-- close_connection: false
+- access_groups: ''
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -6000,7 +6072,8 @@
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
-- auto_find_prompt: true
+- access_groups: ''
+  auto_find_prompt: true
   close_connection: false
   command: ''
   completion_time: 1
@@ -6091,7 +6164,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- auto_find_prompt: true
+- access_groups: ''
+  auto_find_prompt: true
   close_connection: false
   command: ''
   completion_time: 1
@@ -6182,7 +6256,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- auto_find_prompt: true
+- access_groups: ''
+  auto_find_prompt: true
   close_connection: false
   command: ''
   completion_time: 1
@@ -6273,7 +6348,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- close_connection: false
+- access_groups: ''
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -6361,7 +6437,8 @@
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
-- close_connection: false
+- access_groups: ''
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -6428,7 +6505,8 @@
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
-- close_connection: false
+- access_groups: ''
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -6495,7 +6573,8 @@
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
-- auto_find_prompt: true
+- access_groups: ''
+  auto_find_prompt: true
   close_connection: false
   command: show vrf
   completion_time: 1
@@ -6587,7 +6666,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- arguments: ''
+- access_groups: ''
+  arguments: ''
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -6652,7 +6732,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- close_connection: false
+- access_groups: ''
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -6718,7 +6799,8 @@
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
-- completion_time: 1
+- access_groups: ''
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -6782,7 +6864,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- auto_find_prompt: true
+- access_groups: ''
+  auto_find_prompt: true
   close_connection: false
   command: show vrf {{command_dict["command"]}}
   completion_time: 1
@@ -6871,7 +6954,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- close_connection: false
+- access_groups: ''
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -6937,7 +7021,8 @@
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
-- completion_time: 1
+- access_groups: ''
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -7000,7 +7085,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- close_connection: false
+- access_groups: ''
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -7066,7 +7152,8 @@
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
-- completion_time: 1
+- access_groups: ''
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -7131,7 +7218,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- completion_time: 1
+- access_groups: ''
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -7200,7 +7288,8 @@
   validation_method: dict_included
   vendor: ''
   waiting_time: 0
-- completion_time: 1
+- access_groups: ''
+  completion_time: 1
   content_match: (\d\.){3}\d
   content_match_regex: true
   conversion_method: none
@@ -7268,7 +7357,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- completion_time: 1
+- access_groups: ''
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -7336,7 +7426,8 @@
   validation_method: dict_included
   vendor: ''
   waiting_time: 0
-- completion_time: 1
+- access_groups: ''
+  completion_time: 1
   content_match: (\d\.){3}\d
   content_match_regex: true
   conversion_method: none
@@ -7403,7 +7494,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- completion_time: 1
+- access_groups: ''
+  completion_time: 1
   content_match: \[1,2,False,1.*\]
   content_match_regex: true
   conversion_method: none
@@ -7470,7 +7562,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- completion_time: 1
+- access_groups: ''
+  completion_time: 1
   content_match: '{"a": ["o", True, 4], "prefix_length": 24, "failed": 0}'
   content_match_regex: false
   conversion_method: none
@@ -7537,7 +7630,8 @@
   validation_method: dict_included
   vendor: ''
   waiting_time: 0
-- close_connection: false
+- access_groups: ''
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -7622,7 +7716,8 @@
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
-- completion_time: 1
+- access_groups: ''
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -7688,7 +7783,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- completion_time: 1
+- access_groups: ''
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -7752,7 +7848,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- completion_time: 1
+- access_groups: ''
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -7813,7 +7910,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- close_connection: false
+- access_groups: ''
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -7880,7 +7978,8 @@
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
-- close_connection: false
+- access_groups: ''
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -7956,7 +8055,8 @@
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
-- command: ps -ef
+- access_groups: ''
+  command: ps -ef
   completion_time: 1
   content_match: python\d
   content_match_regex: true
@@ -8021,7 +8121,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- auto_find_prompt: false
+- access_groups: ''
+  auto_find_prompt: false
   close_connection: false
   completion_time: 1
   config_mode: false
@@ -8107,7 +8208,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- completion_time: 1
+- access_groups: ''
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -8177,7 +8279,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- close_connection: false
+- access_groups: ''
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -8242,7 +8345,8 @@
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
-- completion_time: 1
+- access_groups: ''
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -8313,7 +8417,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- auto_find_prompt: true
+- access_groups: ''
+  auto_find_prompt: true
   close_connection: false
   command: ps -ef
   completion_time: 1
@@ -8405,7 +8510,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- call_type: GET
+- access_groups: ''
+  call_type: GET
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -8477,7 +8583,8 @@
   vendor: ''
   verify_ssl_certificate: true
   waiting_time: 0
-- auto_find_prompt: true
+- access_groups: ''
+  auto_find_prompt: true
   close_connection: false
   command: show version
   completion_time: 1
@@ -8565,7 +8672,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- add_header: true
+- access_groups: ''
+  add_header: true
   close_connection: false
   commands:
   - {prefix: '', value: show run}
@@ -8676,7 +8784,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- add_commit: true
+- access_groups: ''
+  add_commit: true
   commit_message: Automatic commit (configurations)
   completion_time: 1
   content_match: ''
@@ -8745,7 +8854,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- completion_time: 1
+- access_groups: ''
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -8808,7 +8918,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- close_connection: false
+- access_groups: ''
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -8875,7 +8986,8 @@
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
-- close_connection: false
+- access_groups: ''
+  close_connection: false
   commands: "show run\r\nshow vrf"
   completion_time: 1
   content_match: ''
@@ -8947,7 +9059,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- close_connection: false
+- access_groups: ''
+  close_connection: false
   commands: vrf instance TEST-VRF
   completion_time: 1
   content_match: ''
@@ -9019,7 +9132,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- close_connection: false
+- access_groups: ''
+  close_connection: false
   commands: "show run\r\nshow vrf"
   completion_time: 1
   content_match: ''
@@ -9091,7 +9205,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- close_connection: false
+- access_groups: ''
+  close_connection: false
   commands: no vrf instance TEST-VRF
   completion_time: 1
   content_match: ''
@@ -9163,7 +9278,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- close_connection: false
+- access_groups: ''
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -9249,7 +9365,8 @@
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
-- call_type: GET
+- access_groups: ''
+  call_type: GET
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -9329,7 +9446,8 @@
   vendor: ''
   verify_ssl_certificate: true
   waiting_time: 0
-- call_type: GET
+- access_groups: ''
+  call_type: GET
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -9403,7 +9521,8 @@
   vendor: ''
   verify_ssl_certificate: true
   waiting_time: 0
-- call_type: GET
+- access_groups: ''
+  call_type: GET
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -9477,7 +9596,8 @@
   vendor: ''
   verify_ssl_certificate: true
   waiting_time: 0
-- call_type: GET
+- access_groups: ''
+  call_type: GET
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -9551,7 +9671,8 @@
   vendor: ''
   verify_ssl_certificate: true
   waiting_time: 0
-- call_type: GET
+- access_groups: ''
+  call_type: GET
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -9625,7 +9746,8 @@
   vendor: ''
   verify_ssl_certificate: true
   waiting_time: 0
-- auto_find_prompt: true
+- access_groups: ''
+  auto_find_prompt: true
   close_connection: false
   command: show vrf
   completion_time: 1
@@ -9716,7 +9838,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- auto_find_prompt: true
+- access_groups: ''
+  auto_find_prompt: true
   close_connection: false
   command: show vrf
   completion_time: 1
@@ -9807,7 +9930,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- auto_find_prompt: true
+- access_groups: ''
+  auto_find_prompt: true
   close_connection: false
   command: show vrf
   completion_time: 1
@@ -9898,7 +10022,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- auto_find_prompt: true
+- access_groups: ''
+  auto_find_prompt: true
   close_connection: false
   command: show vrf
   completion_time: 1
@@ -9989,7 +10114,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- auto_find_prompt: true
+- access_groups: ''
+  auto_find_prompt: true
   close_connection: false
   command: show vrf
   completion_time: 1
@@ -10080,7 +10206,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- auto_find_prompt: true
+- access_groups: ''
+  auto_find_prompt: true
   close_connection: false
   command: show vrf
   completion_time: 1
@@ -10171,7 +10298,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- completion_time: 1
+- access_groups: ''
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -10235,7 +10363,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- completion_time: 1
+- access_groups: ''
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -10299,7 +10428,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- completion_time: 1
+- access_groups: ''
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -10363,7 +10493,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- completion_time: 1
+- access_groups: ''
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -10427,7 +10558,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- completion_time: 1
+- access_groups: ''
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -10491,7 +10623,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- completion_time: 1
+- access_groups: ''
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -10555,7 +10688,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- completion_time: 1
+- access_groups: ''
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -10619,7 +10753,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- completion_time: 1
+- access_groups: ''
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -10683,7 +10818,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- close_connection: false
+- access_groups: ''
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -10752,7 +10888,8 @@
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
-- auto_find_prompt: true
+- access_groups: ''
+  auto_find_prompt: true
   close_connection: false
   command: dir enms_files
   completion_time: 1
@@ -10841,7 +10978,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- completion_time: 1
+- access_groups: ''
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -10913,7 +11051,8 @@
   vendor: ''
   waiting_time: 0
   window_size: 1073741824
-- auto_find_prompt: true
+- access_groups: ''
+  auto_find_prompt: true
   close_connection: false
   command: dir enms_files
   completion_time: 1
@@ -11004,7 +11143,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- completion_time: 1
+- access_groups: ''
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -11077,7 +11217,8 @@
   vendor: ''
   waiting_time: 0
   window_size: 1073741824
-- auto_find_prompt: true
+- access_groups: ''
+  auto_find_prompt: true
   close_connection: false
   command: delete flash:/enms_files/*.bin
   completion_time: 1
@@ -11166,7 +11307,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- completion_time: 1
+- access_groups: ''
+  completion_time: 1
   content_match: No such file or directory
   content_match_regex: false
   conversion_method: none
@@ -11238,7 +11380,8 @@
   vendor: ''
   waiting_time: 0
   window_size: 1073741824
-- close_connection: false
+- access_groups: ''
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -11305,7 +11448,8 @@
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
-- completion_time: 1
+- access_groups: ''
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -11375,7 +11519,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- completion_time: 1
+- access_groups: ''
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -11444,7 +11589,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- completion_time: 1
+- access_groups: ''
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -11514,7 +11660,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- close_connection: false
+- access_groups: ''
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -11598,7 +11745,8 @@
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
-- completion_time: 1
+- access_groups: ''
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -11670,7 +11818,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- completion_time: 1
+- access_groups: ''
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -11742,7 +11891,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- completion_time: 1
+- access_groups: ''
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -11814,7 +11964,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- completion_time: 1
+- access_groups: ''
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -11886,7 +12037,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- close_connection: false
+- access_groups: ''
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -11974,7 +12126,8 @@
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
-- completion_time: 1
+- access_groups: ''
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -12065,7 +12218,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- call_type: GET
+- access_groups: ''
+  call_type: GET
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -12139,7 +12293,8 @@
   vendor: ''
   verify_ssl_certificate: false
   waiting_time: 0
-- auto_find_prompt: true
+- access_groups: ''
+  auto_find_prompt: true
   close_connection: false
   command: show vrf
   completion_time: 1
@@ -12229,7 +12384,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- close_connection: false
+- access_groups: ''
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -12316,7 +12472,8 @@
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
-- completion_time: 1
+- access_groups: ''
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -12389,7 +12546,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- completion_time: 1
+- access_groups: ''
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -12455,7 +12613,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- auto_find_prompt: true
+- access_groups: ''
+  auto_find_prompt: true
   close_connection: false
   command: show vrf
   completion_time: 1
@@ -12547,7 +12706,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- completion_time: 1
+- access_groups: ''
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -12617,7 +12777,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- close_connection: false
+- access_groups: ''
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -12704,7 +12865,8 @@
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
-- call_type: GET
+- access_groups: ''
+  call_type: GET
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -12785,7 +12947,8 @@
   vendor: ''
   verify_ssl_certificate: true
   waiting_time: 0
-- completion_time: 1
+- access_groups: ''
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -12853,7 +13016,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- completion_time: 1
+- access_groups: ''
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -12921,7 +13085,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- auto_find_prompt: true
+- access_groups: ''
+  auto_find_prompt: true
   close_connection: false
   command: show vrf
   completion_time: 1
@@ -13011,7 +13176,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- call_type: GET
+- access_groups: ''
+  call_type: GET
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -13084,7 +13250,8 @@
   vendor: ''
   verify_ssl_certificate: true
   waiting_time: 0
-- call_type: GET
+- access_groups: ''
+  call_type: GET
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -13157,7 +13324,8 @@
   vendor: ''
   verify_ssl_certificate: true
   waiting_time: 0
-- close_connection: false
+- access_groups: ''
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -13248,7 +13416,8 @@
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
-- close_connection: false
+- access_groups: ''
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -13316,7 +13485,8 @@
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
-- completion_time: 1
+- access_groups: ''
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -13381,7 +13551,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- close_connection: false
+- access_groups: ''
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -13447,7 +13618,8 @@
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
-- completion_time: 1
+- access_groups: ''
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -13516,7 +13688,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- close_connection: false
+- access_groups: ''
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -13605,7 +13778,8 @@
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
-- completion_time: 1
+- access_groups: ''
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -13671,7 +13845,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- close_connection: false
+- access_groups: ''
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -13740,7 +13915,8 @@
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
-- close_connection: false
+- access_groups: ''
+  close_connection: false
   completion_time: 1
   content_match: ''
   content_match_regex: false
@@ -13809,7 +13985,8 @@
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
-- completion_time: 1
+- access_groups: ''
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -13875,7 +14052,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- completion_time: 1
+- access_groups: ''
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -13941,7 +14119,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- completion_time: 1
+- access_groups: ''
+  completion_time: 1
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -14006,7 +14185,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- auto_find_prompt: true
+- access_groups: ''
+  auto_find_prompt: true
   close_connection: false
   command: show run
   completion_time: 1

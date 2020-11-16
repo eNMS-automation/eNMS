@@ -1,4 +1,5 @@
-- creator: ''
+- access_groups: ''
+  creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -43,7 +44,8 @@
   subtype: ''
   type: device
   vendor: Cisco
-- creator: ''
+- access_groups: ''
+  creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -88,7 +90,8 @@
   subtype: ''
   type: device
   vendor: Cisco
-- creator: ''
+- access_groups: ''
+  creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -133,7 +136,8 @@
   subtype: ''
   type: device
   vendor: Arista
-- creator: ''
+- access_groups: ''
+  creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -178,7 +182,8 @@
   subtype: ''
   type: device
   vendor: Arista
-- creator: ''
+- access_groups: ''
+  creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -223,7 +228,8 @@
   subtype: ''
   type: device
   vendor: Cisco
-- creator: ''
+- access_groups: ''
+  creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -268,7 +274,8 @@
   subtype: ''
   type: device
   vendor: Cisco
-- creator: ''
+- access_groups: ''
+  creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -313,7 +320,8 @@
   subtype: ''
   type: device
   vendor: Cisco
-- creator: ''
+- access_groups: ''
+  creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -358,7 +366,8 @@
   subtype: ''
   type: device
   vendor: Cisco
-- creator: ''
+- access_groups: ''
+  creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -403,7 +412,8 @@
   subtype: ''
   type: device
   vendor: Cisco
-- creator: ''
+- access_groups: ''
+  creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -448,7 +458,8 @@
   subtype: ''
   type: device
   vendor: Cisco
-- creator: ''
+- access_groups: ''
+  creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -493,7 +504,8 @@
   subtype: ''
   type: device
   vendor: Cisco
-- creator: ''
+- access_groups: ''
+  creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -538,7 +550,8 @@
   subtype: ''
   type: device
   vendor: Cisco
-- creator: ''
+- access_groups: ''
+  creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -583,7 +596,8 @@
   subtype: ''
   type: device
   vendor: Cisco
-- creator: ''
+- access_groups: ''
+  creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -628,7 +642,8 @@
   subtype: ''
   type: device
   vendor: Cisco
-- creator: ''
+- access_groups: ''
+  creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -673,7 +688,8 @@
   subtype: ''
   type: device
   vendor: Cisco
-- creator: ''
+- access_groups: ''
+  creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -718,7 +734,8 @@
   subtype: ''
   type: device
   vendor: Juniper
-- creator: ''
+- access_groups: ''
+  creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -763,7 +780,8 @@
   subtype: ''
   type: device
   vendor: Juniper
-- creator: ''
+- access_groups: ''
+  creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -808,7 +826,8 @@
   subtype: ''
   type: device
   vendor: Juniper
-- creator: ''
+- access_groups: ''
+  creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -853,7 +872,8 @@
   subtype: ''
   type: device
   vendor: Juniper
-- creator: ''
+- access_groups: ''
+  creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -898,7 +918,8 @@
   subtype: ''
   type: device
   vendor: Juniper
-- creator: ''
+- access_groups: ''
+  creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -943,7 +964,8 @@
   subtype: ''
   type: device
   vendor: Juniper
-- creator: ''
+- access_groups: ''
+  creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -988,7 +1010,8 @@
   subtype: ''
   type: device
   vendor: Juniper
-- creator: ''
+- access_groups: ''
+  creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -1033,7 +1056,8 @@
   subtype: ''
   type: device
   vendor: Juniper
-- creator: ''
+- access_groups: ''
+  creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -1078,7 +1102,8 @@
   subtype: ''
   type: device
   vendor: Juniper
-- creator: ''
+- access_groups: ''
+  creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -1123,7 +1148,8 @@
   subtype: ''
   type: device
   vendor: Juniper
-- creator: ''
+- access_groups: ''
+  creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -1168,7 +1194,8 @@
   subtype: ''
   type: device
   vendor: Cisco
-- creator: ''
+- access_groups: ''
+  creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -1213,7 +1240,8 @@
   subtype: ''
   type: device
   vendor: Cisco
-- creator: ''
+- access_groups: ''
+  creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -1258,7 +1286,8 @@
   subtype: router
   type: device
   vendor: Cisco
-- creator: ''
+- access_groups: ''
+  creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -1303,7 +1332,8 @@
   subtype: router
   type: device
   vendor: Cisco
-- creator: ''
+- access_groups: ''
+  creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -1348,7 +1378,8 @@
   subtype: router
   type: device
   vendor: Cisco
-- creator: ''
+- access_groups: ''
+  creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -1393,7 +1424,8 @@
   subtype: router
   type: device
   vendor: Cisco
-- creator: ''
+- access_groups: ''
+  creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -1438,7 +1470,8 @@
   subtype: router
   type: device
   vendor: Cisco
-- creator: ''
+- access_groups: ''
+  creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -1483,7 +1516,8 @@
   subtype: router
   type: device
   vendor: Cisco
-- creator: ''
+- access_groups: ''
+  creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -1528,7 +1562,8 @@
   subtype: router
   type: device
   vendor: Cisco
-- creator: ''
+- access_groups: ''
+  creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -1573,7 +1608,8 @@
   subtype: router
   type: device
   vendor: Cisco
-- creator: ''
+- access_groups: ''
+  creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -1618,7 +1654,8 @@
   subtype: router
   type: device
   vendor: Cisco
-- creator: ''
+- access_groups: ''
+  creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -1663,7 +1700,8 @@
   subtype: router
   type: device
   vendor: Cisco
-- creator: ''
+- access_groups: ''
+  creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -1708,7 +1746,8 @@
   subtype: router
   type: device
   vendor: Cisco
-- creator: ''
+- access_groups: ''
+  creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -1753,7 +1792,8 @@
   subtype: router
   type: device
   vendor: Cisco
-- creator: ''
+- access_groups: ''
+  creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -1798,7 +1838,8 @@
   subtype: router
   type: device
   vendor: Cisco
-- creator: ''
+- access_groups: ''
+  creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -1843,7 +1884,8 @@
   subtype: router
   type: device
   vendor: Cisco
-- creator: ''
+- access_groups: ''
+  creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -1888,7 +1930,8 @@
   subtype: router
   type: device
   vendor: Cisco
-- creator: ''
+- access_groups: ''
+  creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -1933,7 +1976,8 @@
   subtype: router
   type: device
   vendor: Juniper
-- creator: ''
+- access_groups: ''
+  creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -1978,7 +2022,8 @@
   subtype: router
   type: device
   vendor: Juniper
-- creator: ''
+- access_groups: ''
+  creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -2023,7 +2068,8 @@
   subtype: router
   type: device
   vendor: Juniper
-- creator: ''
+- access_groups: ''
+  creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -2068,7 +2114,8 @@
   subtype: router
   type: device
   vendor: Juniper
-- creator: ''
+- access_groups: ''
+  creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -2113,7 +2160,8 @@
   subtype: router
   type: device
   vendor: Juniper
-- creator: ''
+- access_groups: ''
+  creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -2158,7 +2206,8 @@
   subtype: router
   type: device
   vendor: Juniper
-- creator: ''
+- access_groups: ''
+  creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -2203,7 +2252,8 @@
   subtype: router
   type: device
   vendor: Juniper
-- creator: ''
+- access_groups: ''
+  creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -2248,7 +2298,8 @@
   subtype: router
   type: device
   vendor: Juniper
-- creator: ''
+- access_groups: ''
+  creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -2293,7 +2344,8 @@
   subtype: router
   type: device
   vendor: Juniper
-- creator: ''
+- access_groups: ''
+  creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -2338,7 +2390,8 @@
   subtype: router
   type: device
   vendor: Juniper
-- creator: ''
+- access_groups: ''
+  creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -2383,7 +2436,8 @@
   subtype: router
   type: device
   vendor: Cisco
-- creator: ''
+- access_groups: ''
+  creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -2428,7 +2482,8 @@
   subtype: router
   type: device
   vendor: Cisco
-- creator: ''
+- access_groups: ''
+  creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -2473,7 +2528,8 @@
   subtype: router
   type: device
   vendor: Cisco
-- creator: ''
+- access_groups: ''
+  creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -2518,7 +2574,8 @@
   subtype: router
   type: device
   vendor: Cisco
-- creator: ''
+- access_groups: ''
+  creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -2563,7 +2620,8 @@
   subtype: router
   type: device
   vendor: Cisco
-- creator: ''
+- access_groups: ''
+  creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -2608,7 +2666,8 @@
   subtype: router
   type: device
   vendor: Cisco
-- creator: ''
+- access_groups: ''
+  creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -2653,7 +2712,8 @@
   subtype: router
   type: device
   vendor: Cisco
-- creator: ''
+- access_groups: ''
+  creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -2698,7 +2758,8 @@
   subtype: router
   type: device
   vendor: Cisco
-- creator: ''
+- access_groups: ''
+  creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -2743,7 +2804,8 @@
   subtype: ''
   type: device
   vendor: linux
-- creator: ''
+- access_groups: ''
+  creator: ''
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -2788,7 +2850,8 @@
   subtype: ''
   type: device
   vendor: Cisco
-- creator: admin
+- access_groups: ''
+  creator: admin
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -2833,7 +2896,8 @@
   subtype: ''
   type: device
   vendor: Cisco
-- creator: admin
+- access_groups: ''
+  creator: admin
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -2878,7 +2942,8 @@
   subtype: ''
   type: device
   vendor: Cisco
-- creator: admin
+- access_groups: ''
+  creator: admin
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -2923,7 +2988,8 @@
   subtype: ''
   type: device
   vendor: Cisco
-- creator: admin
+- access_groups: ''
+  creator: admin
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -2968,7 +3034,8 @@
   subtype: ''
   type: device
   vendor: Arista
-- creator: admin
+- access_groups: ''
+  creator: admin
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -3013,7 +3080,8 @@
   subtype: ''
   type: device
   vendor: Arista
-- creator: admin
+- access_groups: ''
+  creator: admin
   custom_json:
     a: c
     b: [1, 2, '3']
@@ -3058,7 +3126,8 @@
   subtype: ''
   type: device
   vendor: Cisco
-- creator: admin
+- access_groups: ''
+  creator: admin
   custom_json:
     a: c
     b: [1, 2, '3']

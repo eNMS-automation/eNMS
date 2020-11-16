@@ -11,13 +11,13 @@
   name: Configuration Poller
   pools: []
   scheduling_mode: standard
-  service: 'Regression Workflow 9: Operational Data Backup'
+  service: 'Regression Workflow 9: Operational Data Backup (admin)'
   service_id: 49
   start_date: 09/10/2019 21:17:13
   type: task
 - creator: ''
   crontab_expression: ''
-  default_access: creator
+  default_access: admin
   description: Monitor eNMS cluster
   devices: []
   end_date: ''
@@ -25,16 +25,16 @@
   frequency_unit: seconds
   initial_payload: {}
   last_scheduled_by: ''
-  name: Cluster Monitoring
+  name: Cluster Monitoring (admin)
   pools: []
   scheduling_mode: standard
   service: cluster_monitoring
   service_id: 3
-  start_date: ''
+  start_date: 01/11/2020 12:05:19
   type: task
 - creator: ''
   crontab_expression: ''
-  default_access: creator
+  default_access: public
   description: ''
   devices: [PaloAlto, Austin]
   end_date: ''
@@ -42,7 +42,7 @@
   frequency_unit: seconds
   initial_payload: {}
   last_scheduled_by: ''
-  name: Scrapli RBAC scheduling
+  name: Scrapli RBAC scheduling (public)
   pools: []
   scheduling_mode: standard
   service: 'Regression Workflow O: Scrapli'

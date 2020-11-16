@@ -188,31 +188,33 @@
 - {color: red, destination: '[Shared] Example Service (does nothing)', label: failure,
   source: '[Shared] NAPALM: Get interfaces', subtype: failure, type: workflow_edge,
   workflow: 'Regression Workflow 2: Separate Failure - Success paths'}
-- {color: green, destination: '[Regression Workflow C: Advanced multiprocessing] Show
-    version with multiprocessing', label: success, source: '[Shared] Start', subtype: success,
-  type: workflow_edge, workflow: 'Regression Workflow C: Advanced multiprocessing'}
-- {color: green, destination: '[Regression Workflow C: Advanced multiprocessing] napalm_configure_bgp_1',
-  label: success, source: '[Shared] Example Service (does nothing)', subtype: success,
-  type: workflow_edge, workflow: 'Regression Workflow C: Advanced multiprocessing'}
-- {color: green, destination: '[Shared] REST API: call *is_alive* endpoint', label: success,
-  source: '[Regression Workflow C: Advanced multiprocessing] napalm_configure_bgp_1',
+- {color: green, destination: '[Regression Workflow C: Advanced multiprocessing (admin)]
+    Show version with multiprocessing', label: success, source: '[Shared] Start',
   subtype: success, type: workflow_edge, workflow: 'Regression Workflow C: Advanced
-    multiprocessing'}
+    multiprocessing (admin)'}
+- {color: green, destination: '[Regression Workflow C: Advanced multiprocessing (admin)]
+    napalm_configure_bgp_1', label: success, source: '[Shared] Example Service (does
+    nothing)', subtype: success, type: workflow_edge, workflow: 'Regression Workflow
+    C: Advanced multiprocessing (admin)'}
+- {color: green, destination: '[Shared] REST API: call *is_alive* endpoint', label: success,
+  source: '[Regression Workflow C: Advanced multiprocessing (admin)] napalm_configure_bgp_1',
+  subtype: success, type: workflow_edge, workflow: 'Regression Workflow C: Advanced
+    multiprocessing (admin)'}
 - {color: red, destination: '[Shared] REST API: call *is_alive* endpoint', label: failure,
-  source: '[Regression Workflow C: Advanced multiprocessing] Show version with multiprocessing',
-  subtype: failure, type: workflow_edge, workflow: 'Regression Workflow C: Advanced
-    multiprocessing'}
+  source: '[Regression Workflow C: Advanced multiprocessing (admin)] Show version
+    with multiprocessing', subtype: failure, type: workflow_edge, workflow: 'Regression
+    Workflow C: Advanced multiprocessing (admin)'}
 - {color: green, destination: '[Shared] End', label: success, source: '[Shared] REST
     API: call *is_alive* endpoint', subtype: success, type: workflow_edge, workflow: 'Regression
-    Workflow C: Advanced multiprocessing'}
+    Workflow C: Advanced multiprocessing (admin)'}
 - {color: blue, destination: '[Shared] REST API: call *is_alive* endpoint', label: prerequisite,
-  source: '[Regression Workflow C: Advanced multiprocessing] Show version with multiprocessing',
-  subtype: prerequisite, type: workflow_edge, workflow: 'Regression Workflow C: Advanced
-    multiprocessing'}
+  source: '[Regression Workflow C: Advanced multiprocessing (admin)] Show version
+    with multiprocessing', subtype: prerequisite, type: workflow_edge, workflow: 'Regression
+    Workflow C: Advanced multiprocessing (admin)'}
 - {color: blue, destination: '[Shared] REST API: call *is_alive* endpoint', label: prerequisite,
-  source: '[Regression Workflow C: Advanced multiprocessing] napalm_configure_bgp_1',
+  source: '[Regression Workflow C: Advanced multiprocessing (admin)] napalm_configure_bgp_1',
   subtype: prerequisite, type: workflow_edge, workflow: 'Regression Workflow C: Advanced
-    multiprocessing'}
+    multiprocessing (admin)'}
 - {color: green, destination: '[Shared] Modify Payload for Iteration', label: success,
   source: '[Shared] Start', subtype: success, type: workflow_edge, workflow: 'Regression
     Workflow E: Iteration Targets'}
@@ -307,9 +309,9 @@
 - {color: green, destination: '[Shared] End', label: success, source: '[Shared] Example
     Service (does nothing)', subtype: success, type: workflow_edge, workflow: 'Regression
     Workflow 2: Separate Failure - Success paths'}
-- {color: green, destination: '[Regression Workflow 9: Operational Data Backup] Configuration
-    Backup (NAPALM)', label: success, source: '[Shared] Start', subtype: success,
-  type: workflow_edge, workflow: 'Regression Workflow 9: Operational Data Backup'}
+- {color: green, destination: '[Regression Workflow 9: Operational Data Backup (admin)]
+    Configuration Backup (NAPALM)', label: success, source: '[Shared] Start', subtype: success,
+  type: workflow_edge, workflow: 'Regression Workflow 9: Operational Data Backup (admin)'}
 - {color: green, destination: '[Regression Workflow F: Workflow of Workflows] Regression
     Workflow F S1: Subworkflow of Workflow', label: success, source: '[Regression
     Workflow F: Workflow of Workflows] Regression Workflow F S2: Access Variables
@@ -345,7 +347,7 @@
     Workflow F: Workflow of Workflows'}
 - {color: green, destination: '[Shared] Example Service (does nothing)', label: success,
   source: '[Shared] Start', subtype: success, type: workflow_edge, workflow: 'Regression
-    Workflow C: Advanced multiprocessing'}
+    Workflow C: Advanced multiprocessing (admin)'}
 - {color: red, destination: '[Regression Workflow F: Workflow of Workflows] Regression
     Workflow 5: VRF creation and deletion with Napalm', label: failure, source: '[Regression
     Workflow F: Workflow of Workflows] Show interfaces with Netmiko', subtype: failure,
@@ -601,24 +603,24 @@
     Show vrf with python query', label: success, source: '[Regression Workflow A:
     get_var, set_var, get_result] Show vrf with payload helper', subtype: success,
   type: workflow_edge, workflow: 'Regression Workflow A: get_var, set_var, get_result'}
-- {color: green, destination: '[Regression Workflow 9: Operational Data Backup] Get
-    Configuration', label: success, source: '[Shared] Start', subtype: success, type: workflow_edge,
-  workflow: 'Regression Workflow 9: Operational Data Backup'}
-- {color: green, destination: '[Regression Workflow 9: Operational Data Backup] Retrieve
-    Operational Data', label: success, source: '[Regression Workflow 9: Operational
-    Data Backup] Get Configuration', subtype: success, type: workflow_edge, workflow: 'Regression
-    Workflow 9: Operational Data Backup'}
-- {color: green, destination: '[Regression Workflow 9: Operational Data Backup] Push
-    Configurations to Git', label: success, source: '[Regression Workflow 9: Operational
-    Data Backup] Retrieve Operational Data', subtype: success, type: workflow_edge,
-  workflow: 'Regression Workflow 9: Operational Data Backup'}
-- {color: green, destination: '[Regression Workflow 9: Operational Data Backup] Push
-    Configurations to Git', label: success, source: '[Regression Workflow 9: Operational
-    Data Backup] Configuration Backup (NAPALM)', subtype: success, type: workflow_edge,
-  workflow: 'Regression Workflow 9: Operational Data Backup'}
+- {color: green, destination: '[Regression Workflow 9: Operational Data Backup (admin)]
+    Get Configuration', label: success, source: '[Shared] Start', subtype: success,
+  type: workflow_edge, workflow: 'Regression Workflow 9: Operational Data Backup (admin)'}
+- {color: green, destination: '[Regression Workflow 9: Operational Data Backup (admin)]
+    Retrieve Operational Data', label: success, source: '[Regression Workflow 9: Operational
+    Data Backup (admin)] Get Configuration', subtype: success, type: workflow_edge,
+  workflow: 'Regression Workflow 9: Operational Data Backup (admin)'}
+- {color: green, destination: '[Regression Workflow 9: Operational Data Backup (admin)]
+    Push Configurations to Git', label: success, source: '[Regression Workflow 9:
+    Operational Data Backup (admin)] Retrieve Operational Data', subtype: success,
+  type: workflow_edge, workflow: 'Regression Workflow 9: Operational Data Backup (admin)'}
+- {color: green, destination: '[Regression Workflow 9: Operational Data Backup (admin)]
+    Push Configurations to Git', label: success, source: '[Regression Workflow 9:
+    Operational Data Backup (admin)] Configuration Backup (NAPALM)', subtype: success,
+  type: workflow_edge, workflow: 'Regression Workflow 9: Operational Data Backup (admin)'}
 - {color: green, destination: '[Shared] End', label: success, source: '[Regression
-    Workflow 9: Operational Data Backup] Push Configurations to Git', subtype: success,
-  type: workflow_edge, workflow: 'Regression Workflow 9: Operational Data Backup'}
+    Workflow 9: Operational Data Backup (admin)] Push Configurations to Git', subtype: success,
+  type: workflow_edge, workflow: 'Regression Workflow 9: Operational Data Backup (admin)'}
 - {color: green, destination: '[Regression Workflow L: superworkflow] Post Placeholder
     Processing', label: success, source: '[Shared] Placeholder', subtype: success,
   type: workflow_edge, workflow: 'Regression Workflow L: superworkflow'}

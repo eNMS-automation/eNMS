@@ -55,7 +55,7 @@ class ServerForm(BaseForm):
     form_type = HiddenField(default="server")
     id = HiddenField()
     name = StringField("Name", [InputRequired()])
-    description = StringField("Description")
+    description = StringField(widget=TextArea(), render_kw={"rows": 6})
     ip_address = StringField("IP address")
     weight = IntegerField("Weigth")
 
@@ -68,7 +68,7 @@ class CredentialForm(BaseForm):
     subtype = SelectField(
         "Type", choices=(("password", "Username / Password"), ("key", "SSH Key"))
     )
-    description = StringField("Description")
+    description = StringField(widget=TextArea(), render_kw={"rows": 6})
     device_pools = MultipleInstanceField("Devices", model="pool")
     user_pools = MultipleInstanceField("Users", model="pool")
     priority = IntegerField("Priority", default=1)
@@ -118,6 +118,14 @@ def init_variable_forms(app):
 
     class UserForm(RbacForm):
         form_type = HiddenField(default="user")
+        description = StringField(widget=TextArea(), render_kw={"rows": 6})
+        groups = StringField("Groups")
+        theme = SelectField(
+            "Theme",
+            choices=[
+                (theme, values["name"]) for theme, values in themes["themes"].items()
+            ],
+        )
         authentication = SelectField(
             "Authentication",
             choices=[
@@ -126,22 +134,13 @@ def init_variable_forms(app):
             ],
         )
         password = PasswordField("Password")
-        description = StringField("Description")
-        groups = StringField("Groups")
         is_admin = BooleanField(default=False)
-
-        theme = SelectField(
-            "Theme",
-            choices=[
-                (theme, values["name"]) for theme, values in themes["themes"].items()
-            ],
-        )
 
     @configure_relationships("users")
     class AccessForm(RbacForm):
         template = "access"
         form_type = HiddenField(default="access")
-        description = StringField("Description")
+        description = StringField(widget=TextArea(), render_kw={"rows": 6})
         menu = SelectMultipleField("Menu", choices=choices(list(app.rbac["menu"])))
         pages = SelectMultipleField("Pages", choices=choices(app.rbac["pages"]))
         upper_menu = SelectMultipleField(

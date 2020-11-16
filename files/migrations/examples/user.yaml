@@ -13,8 +13,16 @@
 - {authentication: database, description: '', email: ny@enms.io, groups: '', is_admin: false,
   name: ny, password: JGFyZ29uMmlkJHY9MTkkbT0xMDI0MDAsdD0yLHA9OCQxanBIcUZWcUxVVW9SY2g1ajFIS09RJEpMM1MxVEM1a3NJeTlMSGpRLzVvM3c=,
   small_menu: false, theme: default, type: user}
-- {authentication: database, description: '', email: Non-admin user with full access
-    rights, groups: '', is_admin: false, name: nadmin, password: JGFyZ29uMmlkJHY9MTkkbT0xMDI0MDAsdD0yLHA9OCRlRTlwYlcxdHpWbHJMU1VFb0JTQ0VBJDJHT3dDeEQwRU5jRitIcXhyV3Fsanc=,
+- {authentication: database, description: "The 'nadmin' user is not an admin, but\
+    \ it has access to all menus, endpoints and instances (via the \"All objects\"\
+    \ pool).\r\nHowever, it should not have access to the instances whose default\
+    \ access is set to \"Admin users only\", namely:\r\n- router20 and router23\r\n\
+    - europe-link4 and europe-link40\r\n- \"Non-admin user pool\" which coincidentally\
+    \ is used to set up the access for nadmin itself (nadmin shouldn't be able to\
+    \ modify its own access rights by modifying this pool)\r\n- \"Operational Data\
+    \ Backup\" and \"Advanced Multiprocessing\" workflows\r\n- The \"Cluster Monitoring\"\
+    \ task", email: Non-admin user with full access rights, groups: '', is_admin: false,
+  name: nadmin, password: JGFyZ29uMmlkJHY9MTkkbT0xMDI0MDAsdD0yLHA9OCRlRTlwYlcxdHpWbHJMU1VFb0JTQ0VBJDJHT3dDeEQwRU5jRitIcXhyV3Fsanc=,
   small_menu: false, theme: default, type: user}
 - {authentication: database, description: Access to UI but no instances, email: '',
   groups: '', is_admin: false, name: ui, password: JGFyZ29uMmlkJHY9MTkkbT0xMDI0MDAsdD0yLHA9OCRZU3pGT0NjazVQd2ZJeVJFYUsxMVRnJHBhS2pzcFU5YkwzWlJ6MDV2T1FwWkE=,

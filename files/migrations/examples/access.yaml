@@ -54,7 +54,7 @@
     /web_connection, /process_form_data]
   type: access
   upper_menu: [Admin, Settings, Files]
-  user_pools: [Non-admin user pool]
+  user_pools: [Non-admin user pool (admin)]
 - access_pools: [Links 0 through 5 - Non-public pool - Access set up]
   access_type: "['Read', 'Edit']"
   delete_requests: []

@@ -104,23 +104,16 @@
                   {{ form.name(id=form_type + '-name', class="form-control
                   readonly-when-run add-id required") }}
                 </div>
+                {{ form.default_access.label() }}
+                <div class="form-group">
+                  {{ form.default_access(id=form_type + '-default_access', class="form-control
+                  readonly-when-run add-id required") }}
+                </div>
                 {{ form.type.label() }}
                 <div class="form-group">
                   {{ form.type(id=form_type + '-class', class="form-control
                   readonly-when-run add-id") }}
                 </div>
-                <fieldset class="readonly-when-run">
-                  <div class="item">
-                    <input
-                      id="{{ form_type }}-public"
-                      name="public"
-                      class="add-id"
-                      type="checkbox"
-                      value="y"
-                    />
-                    {{ form.public.label() }}
-                  </div>
-                </fieldset>
                 <fieldset class="readonly-when-run">
                   <div class="item">
                     <input

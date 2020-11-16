@@ -1712,7 +1712,7 @@
   device_vendor_invert: false
   device_vendor_match: inclusion
   devices: []
-  last_modified: '2020-11-16 05:00:54.804278'
+  last_modified: '2020-11-16 13:27:54.526298'
   link_color: ''
   link_color_invert: false
   link_color_match: inclusion
@@ -1778,7 +1778,7 @@
   user_name: ^ui$
   user_name_invert: false
   user_name_match: regex
-  users: [ui]
+  users: [ui, ny, sf, chicago]
 - access_groups: ''
   creator: admin
   default_access: admin

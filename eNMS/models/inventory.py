@@ -365,9 +365,9 @@ class Pool(AbstractBase):
                     if self.compute(model)
                     else []
                 )
+                setattr(self, f"{model}s", instances)
             else:
                 instances = getattr(self, f"{model}s")
-            setattr(self, f"{model}s", instances)
             setattr(self, f"{model}_number", len(instances))
 
     @classmethod

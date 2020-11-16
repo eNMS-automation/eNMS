@@ -218,25 +218,25 @@ class InventoryController(BaseController):
         info("Inventory import: Done.")
         return result
 
-    def save_pool_objects(self, pool_id, **kwargs):
+    def save_pool_instances(self, pool_id, **kwargs):
         pool = db.fetch("pool", id=pool_id)
-        for obj_type in ("device", "link"):
-            string_objects = kwargs[f"string_{obj_type}s"]
-            if string_objects:
-                objects = []
-                for name in [obj.strip() for obj in string_objects.split(",")]:
-                    obj = db.fetch(obj_type, allow_none=True, name=name)
-                    if not obj:
+        for model in pool.models:
+            string_instances = kwargs[f"string_{model}s"]
+            if string_instances:
+                instances = []
+                for name in [instance.strip() for instance in string_instances.split(",")]:
+                    instance = db.fetch(model, allow_none=True, name=name)
+                    if not instance:
                         return {
-                            "alert": f"{obj_type.capitalize()} '{name}' does not exist."
+                            "alert": f"{model.capitalize()} '{name}' does not exist."
                         }
-                    if obj not in objects:
-                        objects.append(obj)
+                    if instance not in instances:
+                        instances.append(instance)
             else:
-                instances = kwargs.get(f"{obj_type}s", [])
-                objects = db.objectify(obj_type, instances)
-            setattr(pool, f"{obj_type}_number", len(objects))
-            setattr(pool, f"{obj_type}s", objects)
+                instances = kwargs.get(f"{model}s", [])
+                instances = db.objectify(model, instances)
+            setattr(pool, f"{model}_number", len(instances))
+            setattr(pool, f"{model}s", instances)
         pool.last_modified = self.get_time()
         return pool.serialized
 

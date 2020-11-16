@@ -880,8 +880,8 @@
   service_operating_system_match: inclusion
   service_vendor: ''
   service_vendor_match: inclusion
-  target_services: ['Regression Workflow P: large workflow (scalability)', '[Regression
-      Workflow 9: Operational Data Backup (admin)] Retrieve Operational Data']
+  target_services: ['[Regression Workflow 9: Operational Data Backup (admin)] Retrieve
+      Operational Data', 'Regression Workflow P: large workflow (scalability)']
   tasks: []
   type: pool
   user_description: ''
@@ -1733,6 +1733,7 @@
   default_access: creator
   description: ''
   device_access_groups: ''
+  device_access_groups_invert: false
   device_access_groups_match: inclusion
   device_configuration: ''
   device_configuration_invert: false
@@ -1798,8 +1799,9 @@
   device_vendor_invert: false
   device_vendor_match: inclusion
   devices: []
-  last_modified: '2020-11-16 13:54:39.649795'
+  last_modified: '2020-11-16 14:01:21.422896'
   link_access_groups: ''
+  link_access_groups_invert: false
   link_access_groups_match: inclusion
   link_color: ''
   link_color_invert: false
@@ -1832,11 +1834,12 @@
   link_vendor_invert: false
   link_vendor_match: inclusion
   links: []
-  manually_defined: false
+  manually_defined: true
   name: Users with UI access
   operator: all
   property1: CP
   service_access_groups: ''
+  service_access_groups_invert: false
   service_access_groups_match: inclusion
   service_creator: ''
   service_creator_invert: false

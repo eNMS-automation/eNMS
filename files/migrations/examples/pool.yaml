@@ -1,5 +1,5 @@
 - creator: ''
-  default_access: 'creator'
+  default_access: creator
   description: All objects
   device_configuration: ''
   device_configuration_match: inclusion
@@ -116,7 +116,7 @@
   user_name_match: regex
   users: [admin, readonly, chicago, sf, ny, nadmin]
 - creator: ''
-  default_access: 'creator'
+  default_access: creator
   description: All devices
   device_configuration: ''
   device_configuration_invert: false
@@ -258,7 +258,7 @@
   user_name_match: inclusion
   users: []
 - creator: ''
-  default_access: 'creator'
+  default_access: creator
   description: All links
   device_configuration: ''
   device_configuration_invert: false
@@ -407,7 +407,7 @@
   user_name_match: inclusion
   users: []
 - creator: ''
-  default_access: 'creator'
+  default_access: creator
   description: Datacenter San Francisco
   device_configuration: ''
   device_configuration_match: inclusion
@@ -521,7 +521,7 @@
   user_name_match: inclusion
   users: []
 - creator: ''
-  default_access: 'creator'
+  default_access: creator
   description: Datacenter New York
   device_configuration: ''
   device_configuration_match: inclusion
@@ -632,7 +632,7 @@
   user_name_match: inclusion
   users: []
 - creator: ''
-  default_access: 'creator'
+  default_access: creator
   description: Datacenter Chicago
   device_configuration: ''
   device_configuration_match: inclusion
@@ -742,7 +742,7 @@
   user_name_match: inclusion
   users: []
 - creator: ''
-  default_access: 'creator'
+  default_access: creator
   description: ''
   device_configuration: ''
   device_configuration_match: inclusion
@@ -837,7 +837,7 @@
   user_name_match: inclusion
   users: []
 - creator: ''
-  default_access: 'creator'
+  default_access: creator
   description: ''
   device_configuration: ''
   device_configuration_match: inclusion
@@ -931,7 +931,7 @@
   user_name_match: inclusion
   users: []
 - creator: ''
-  default_access: 'creator'
+  default_access: creator
   description: ''
   device_configuration: ''
   device_configuration_match: inclusion
@@ -1025,7 +1025,7 @@
   user_name_match: inclusion
   users: []
 - creator: ''
-  default_access: 'creator'
+  default_access: creator
   description: ''
   device_configuration: ''
   device_configuration_match: inclusion
@@ -1119,7 +1119,7 @@
   user_name_match: inclusion
   users: [nadmin]
 - creator: ''
-  default_access: 'creator'
+  default_access: creator
   description: ''
   device_configuration: ''
   device_configuration_match: inclusion
@@ -1213,7 +1213,7 @@
   user_name_match: inclusion
   users: [ny]
 - creator: ''
-  default_access: 'creator'
+  default_access: creator
   description: ''
   device_configuration: ''
   device_configuration_match: inclusion
@@ -1307,7 +1307,7 @@
   user_name_match: inclusion
   users: [readonly]
 - creator: admin
-  default_access: 'creator'
+  default_access: creator
   description: ''
   device_configuration: ''
   device_configuration_match: inclusion
@@ -1409,7 +1409,7 @@
   user_name_match: inclusion
   users: []
 - creator: admin
-  default_access: 'creator'
+  default_access: creator
   description: ''
   device_configuration: ''
   device_configuration_invert: false

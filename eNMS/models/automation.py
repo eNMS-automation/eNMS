@@ -196,7 +196,7 @@ class Service(AbstractBase):
     @classmethod
     def rbac_filter(cls, query, mode, user):
         pool_alias = aliased(models["pool"])
-        return query.filter(cls.public == true()).union(
+        return query.filter(cls.default_access == "public").union(
             query.join(cls.pools)
             .join(models["access"], models["pool"].access)
             .join(pool_alias, models["access"].user_pools)

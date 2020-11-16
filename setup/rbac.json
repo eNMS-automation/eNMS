@@ -51,6 +51,7 @@
   },
   "pages": [
     "Access",
+    "Credentials",
     "Dashboard",
     "Changelog",
     "Sessions",

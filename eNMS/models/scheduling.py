@@ -61,7 +61,7 @@ class Task(AbstractBase):
     @classmethod
     def rbac_filter(cls, query, mode, user):
         public_tasks = query.join(cls.service).filter(
-            models["service"].public == true()
+            models["service"].default_access == "public"
         )
         pool_alias = aliased(models["pool"])
         return public_tasks.union(

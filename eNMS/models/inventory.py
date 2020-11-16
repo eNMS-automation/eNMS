@@ -3,7 +3,6 @@ from sqlalchemy import and_, Boolean, ForeignKey, Integer, or_
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.orm import aliased, backref, relationship
 from sqlalchemy.schema import UniqueConstraint
-from sqlalchemy.sql.expression import true
 
 from eNMS import app
 from eNMS.models import models

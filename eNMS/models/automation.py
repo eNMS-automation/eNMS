@@ -18,7 +18,6 @@ from scp import SCPClient
 from sqlalchemy import Boolean, ForeignKey, Index, Integer, or_
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.orm import aliased, relationship
-from sqlalchemy.sql.expression import true
 from threading import Thread
 from time import sleep
 from traceback import format_exc

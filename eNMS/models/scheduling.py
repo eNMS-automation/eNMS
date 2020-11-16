@@ -7,7 +7,6 @@ from sqlalchemy import Boolean, case, ForeignKey, Integer
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy.orm import aliased, relationship
-from sqlalchemy.sql.expression import true
 
 from eNMS import app
 from eNMS.database import db

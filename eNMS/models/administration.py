@@ -9,6 +9,7 @@ from eNMS import app
 from eNMS.database import db
 from eNMS.models import models
 from eNMS.models.base import AbstractBase
+from eNMS.setup import rbac
 
 
 @db.set_custom_properties
@@ -71,11 +72,9 @@ class User(AbstractBase, UserMixin):
             .filter(models["user"].name == self.name)
             .all()
         )
-        for request_type in ("get", "post", "delete"):
-            allowed_endpoints, property = set(), f"{request_type}_requests"
-            for access in user_access:
-                allowed_endpoints |= set(getattr(access, property))
-            setattr(self, property, list(allowed_endpoints))
+        for property in rbac:
+            access_value = (getattr(access, property) for access in user_access)
+            setattr(self, property, list(set(chain.from_iterable(access_value))))
 
 
 @db.set_custom_properties

@@ -1260,7 +1260,7 @@ class Run(AbstractBase):
             session_log=BytesIO(),
             global_cmd_verify=False,
             use_keys=self.use_host_keys,
-            **self.get_credentials(device)
+            **self.get_credentials(device),
         )
         if self.enable_mode:
             netmiko_connection.enable()
@@ -1322,7 +1322,7 @@ class Run(AbstractBase):
             hostname=device.ip_address,
             timeout=self.timeout,
             optional_args=optional_args,
-            **credentials
+            **credentials,
         )
         napalm_connection.open()
         app.connections_cache["napalm"][self.parent_runtime][

@@ -150,7 +150,7 @@ function desktopConnection(id) {
 
 function savePoolObjects(id) {
   call({
-    url: `/save_pool_objects/${id}`,
+    url: `/save_pool_instances/${id}`,
     form: `pool-objects-form-${id}`,
     callback: function () {
       tableInstances.pool.table.ajax.reload(null, false);

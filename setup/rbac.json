@@ -242,7 +242,7 @@
     "/run_service_on_targets",
     "/save_file",
     "/save_visualization_parameters",
-    "/save_pool_objects",
+    "/save_pool_instances",
     "/save_positions",
     "/save_settings",
     "/scan_cluster",

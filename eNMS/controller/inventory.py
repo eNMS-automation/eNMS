@@ -224,7 +224,9 @@ class InventoryController(BaseController):
             string_instances = kwargs[f"string_{model}s"]
             if string_instances:
                 instances = []
-                for name in [instance.strip() for instance in string_instances.split(",")]:
+                for name in [
+                    instance.strip() for instance in string_instances.split(",")
+                ]:
                     instance = db.fetch(model, allow_none=True, name=name)
                     if not instance:
                         return {
@@ -233,8 +235,7 @@ class InventoryController(BaseController):
                     if instance not in instances:
                         instances.append(instance)
             else:
-                instances = kwargs.get(f"{model}s", [])
-                instances = db.objectify(model, instances)
+                instances = db.objectify(model, kwargs.get(f"{model}s", []))
             setattr(pool, f"{model}_number", len(instances))
             setattr(pool, f"{model}s", instances)
         pool.last_modified = self.get_time()

@@ -360,13 +360,15 @@ class Pool(AbstractBase):
     def compute_pool(self):
         for model in self.models:
             if not self.manually_defined:
-                objects = (
+                instances = (
                     list(filter(self.object_match, db.fetch_all(model)))
                     if self.compute(model)
                     else []
                 )
-            setattr(self, f"{model}s", objects)
-            setattr(self, f"{model}_number", len(objects))
+            else:
+                instances = getattr(self, f"{model}s")
+            setattr(self, f"{model}s", instances)
+            setattr(self, f"{model}_number", len(instances))
 
     @classmethod
     def rbac_filter(cls, query, mode, user):

@@ -24,7 +24,8 @@
       },
       "view": {
         "logical": {
-          "background": "#FFFFFF"
+          "background": "#FFFFFF",
+          "sphere": "#FFFFFF"
         }
       },
       "workflow": {
@@ -69,7 +70,8 @@
       },
       "view": {
         "logical": {
-          "background": "#000000"
+          "background": "#000000",
+          "sphere": "#000000"
         }
       },
       "workflow": {

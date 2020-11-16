@@ -579,6 +579,7 @@ function create3dGraphNetwork(container) {
         new THREE.SphereGeometry(7),
         new THREE.MeshBasicMaterial({
           depthWrite: false,
+          color: theme.view.logical.sphere,
         })
       );
       const sprite = new THREE.Sprite(

@@ -53,7 +53,7 @@ class Service(AbstractBase):
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.SmallString, unique=True)
     creator = db.Column(db.SmallString)
-    groups = db.Column(db.LargeString)
+    access_groups = db.Column(db.LargeString)
     default_access = db.Column(db.SmallString)
     shared = db.Column(Boolean, default=False)
     scoped_name = db.Column(db.SmallString, index=True)

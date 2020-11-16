@@ -52,6 +52,8 @@ class Service(AbstractBase):
     __mapper_args__ = {"polymorphic_identity": "service", "polymorphic_on": type}
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.SmallString, unique=True)
+    creator = db.Column(db.SmallString)
+    groups = db.Column(db.LargeString)
     default_access = db.Column(db.SmallString)
     shared = db.Column(Boolean, default=False)
     scoped_name = db.Column(db.SmallString, index=True)
@@ -67,7 +69,6 @@ class Service(AbstractBase):
     vendor = db.Column(db.SmallString)
     operating_system = db.Column(db.SmallString)
     waiting_time = db.Column(Integer, default=0)
-    creator = db.Column(db.SmallString, default="")
     workflows = relationship(
         "Workflow", secondary=db.service_workflow_table, back_populates="services"
     )

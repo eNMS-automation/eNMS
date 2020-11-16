@@ -74,6 +74,7 @@ class ObjectForm(BaseForm):
             ("admin", "Admin Users only"),
         )
     )
+    groups = StringField("Groups")
     description = StringField("Description")
     subtype = StringField("Subtype")
     location = StringField("Location")
@@ -140,6 +141,7 @@ class PoolForm(BaseForm):
             ("admin", "Admin Users only"),
         )
     )
+    groups = StringField("Groups")
     description = StringField("Description")
     operator = SelectField(
         "Type of match",

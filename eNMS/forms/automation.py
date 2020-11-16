@@ -23,6 +23,7 @@ class ServiceForm(BaseForm):
     id = HiddenField()
     name = StringField("Name")
     type = StringField("Service Type")
+    groups = StringField("Groups")
     shared = BooleanField("Shared")
     scoped_name = StringField("Scoped Name", [InputRequired()])
     description = StringField("Description")

@@ -84,7 +84,13 @@ class ServiceForm(BaseForm):
             ("failure", "Run on failure only"),
         )
     )
-    public = BooleanField("Public")
+    default_access = SelectField(
+        choices=(
+            ("creator", "Creator only"),
+            ("public", "Public (all users)"),
+            ("admin", "Admin Users only"),
+        )
+    )
     log_level = SelectField(
         "Logging",
         choices=((0, "Disable logging"), *enumerate(app.log_levels, 1)),

@@ -67,7 +67,13 @@ class ObjectForm(BaseForm):
     form_type = HiddenField(default="object")
     id = HiddenField()
     name = StringField("Name", [InputRequired()])
-    public = BooleanField("Public", default=False)
+    default_access = SelectField(
+        choices=(
+            ("creator", "Creator only"),
+            ("public", "Public (all users)"),
+            ("admin", "Admin Users only"),
+        )
+    )
     description = StringField("Description")
     subtype = StringField("Subtype")
     location = StringField("Location")
@@ -127,7 +133,13 @@ class PoolForm(BaseForm):
     form_type = HiddenField(default="pool")
     id = HiddenField()
     name = StringField("Name", [InputRequired()])
-    public = BooleanField("Public", default=False)
+    default_access = SelectField(
+        choices=(
+            ("creator", "Creator only"),
+            ("public", "Public (all users)"),
+            ("admin", "Admin Users only"),
+        )
+    )
     description = StringField("Description")
     operator = SelectField(
         "Type of match",

@@ -34,6 +34,13 @@ class TaskForm(BaseForm):
     form_type = HiddenField(default="task")
     id = HiddenField()
     name = StringField("Name", [InputRequired()])
+    default_access = SelectField(
+        choices=(
+            ("creator", "Creator only"),
+            ("public", "Public (all users)"),
+            ("admin", "Admin Users only"),
+        )
+    )
     scheduling_mode = SelectField(
         "Scheduling Mode",
         choices=(("cron", "Crontab Scheduling"), ("standard", "Standard Scheduling")),

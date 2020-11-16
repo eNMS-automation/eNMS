@@ -175,8 +175,9 @@ class AdministrationController(BaseController):
                         info("\n".join(format_exc().splitlines()))
                         status = "Partial import (see logs)."
         db.session.commit()
-        for service in db.fetch_all("service"):
-            service.update()
+        for model in ("access", "service"):
+            for instance in db.fetch_all(model):
+                instance.update()
         if not kwargs.get("skip_pool_update"):
             for pool in db.fetch_all("pool"):
                 pool.compute_pool()

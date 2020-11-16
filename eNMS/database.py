@@ -340,7 +340,6 @@ class Database:
             else:
                 user = self.fetch("user", name=username or "admin")
             if user.is_authenticated and not user.is_admin:
-                query = query.filter(models[model].default_access != "admin")
                 query = models[model].rbac_filter(query, rbac, user)
         return query
 

@@ -114,7 +114,7 @@
   user_groups_match: inclusion
   user_name: .*
   user_name_match: regex
-  users: [admin, readonly, chicago, sf, ny, nadmin]
+  users: [admin, readonly, chicago, sf, ny, nadmin, ui]
 - creator: ''
   default_access: creator
   description: All devices
@@ -1541,4 +1541,138 @@
   user_name: .*
   user_name_invert: false
   user_name_match: regex
-  users: [admin, readonly, chicago, sf, ny, nadmin]
+  users: [admin, readonly, chicago, sf, ny, nadmin, ui]
+- creator: admin
+  default_access: creator
+  description: ''
+  device_configuration: ''
+  device_configuration_invert: false
+  device_configuration_match: inclusion
+  device_creator: ''
+  device_creator_invert: false
+  device_creator_match: inclusion
+  device_description: ''
+  device_description_invert: false
+  device_description_match: inclusion
+  device_icon: ''
+  device_icon_invert: false
+  device_icon_match: inclusion
+  device_ip_address: ''
+  device_ip_address_invert: false
+  device_ip_address_match: inclusion
+  device_latitude: ''
+  device_latitude_invert: false
+  device_latitude_match: inclusion
+  device_location: ''
+  device_location_invert: false
+  device_location_match: inclusion
+  device_longitude: ''
+  device_longitude_invert: false
+  device_longitude_match: inclusion
+  device_model: ''
+  device_model_invert: false
+  device_model_match: inclusion
+  device_name: ''
+  device_name_invert: false
+  device_name_match: inclusion
+  device_napalm_driver: ''
+  device_napalm_driver_invert: false
+  device_napalm_driver_match: inclusion
+  device_netmiko_driver: ''
+  device_netmiko_driver_invert: false
+  device_netmiko_driver_match: inclusion
+  device_operating_system: ''
+  device_operating_system_invert: false
+  device_operating_system_match: inclusion
+  device_operational_data: ''
+  device_operational_data_invert: false
+  device_operational_data_match: inclusion
+  device_os_version: ''
+  device_os_version_invert: false
+  device_os_version_match: inclusion
+  device_port: ''
+  device_port_invert: false
+  device_port_match: inclusion
+  device_property1: ''
+  device_property1_invert: false
+  device_property1_match: inclusion
+  device_scrapli_driver: ''
+  device_scrapli_driver_invert: false
+  device_scrapli_driver_match: inclusion
+  device_specialized_data: ''
+  device_specialized_data_invert: false
+  device_specialized_data_match: inclusion
+  device_subtype: ''
+  device_subtype_invert: false
+  device_subtype_match: inclusion
+  device_vendor: ''
+  device_vendor_invert: false
+  device_vendor_match: inclusion
+  devices: []
+  last_modified: '2020-11-16 05:00:54.804278'
+  link_color: ''
+  link_color_invert: false
+  link_color_match: inclusion
+  link_creator: ''
+  link_creator_invert: false
+  link_creator_match: inclusion
+  link_description: ''
+  link_description_invert: false
+  link_description_match: inclusion
+  link_destination_name: ''
+  link_destination_name_invert: false
+  link_destination_name_match: inclusion
+  link_location: ''
+  link_location_invert: false
+  link_location_match: inclusion
+  link_model: ''
+  link_model_invert: false
+  link_model_match: inclusion
+  link_name: ''
+  link_name_invert: false
+  link_name_match: inclusion
+  link_source_name: ''
+  link_source_name_invert: false
+  link_source_name_match: inclusion
+  link_subtype: ''
+  link_subtype_invert: false
+  link_subtype_match: inclusion
+  link_vendor: ''
+  link_vendor_invert: false
+  link_vendor_match: inclusion
+  links: []
+  manually_defined: false
+  name: Users with UI access
+  operator: all
+  property1: CP
+  service_creator: ''
+  service_creator_invert: false
+  service_creator_match: inclusion
+  service_description: ''
+  service_description_invert: false
+  service_description_match: inclusion
+  service_name: ''
+  service_name_invert: false
+  service_name_match: inclusion
+  service_operating_system: ''
+  service_operating_system_invert: false
+  service_operating_system_match: inclusion
+  service_vendor: ''
+  service_vendor_invert: false
+  service_vendor_match: inclusion
+  target_services: []
+  tasks: []
+  type: pool
+  user_description: ''
+  user_description_invert: false
+  user_description_match: inclusion
+  user_email: ''
+  user_email_invert: false
+  user_email_match: inclusion
+  user_groups: ''
+  user_groups_invert: false
+  user_groups_match: inclusion
+  user_name: ^ui$
+  user_name_invert: false
+  user_name_match: regex
+  users: [ui]

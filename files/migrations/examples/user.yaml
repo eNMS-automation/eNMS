@@ -16,3 +16,6 @@
 - {authentication: database, description: '', email: Non-admin user with full access
     rights, groups: '', is_admin: false, name: nadmin, password: JGFyZ29uMmlkJHY9MTkkbT0xMDI0MDAsdD0yLHA9OCRlRTlwYlcxdHpWbHJMU1VFb0JTQ0VBJDJHT3dDeEQwRU5jRitIcXhyV3Fsanc=,
   small_menu: false, theme: default, type: user}
+- {authentication: database, description: Access to UI but no instances, email: '',
+  groups: '', is_admin: false, name: ui, password: JGFyZ29uMmlkJHY9MTkkbT0xMDI0MDAsdD0yLHA9OCRZU3pGT0NjazVQd2ZJeVJFYUsxMVRnJHBhS2pzcFU5YkwzWlJ6MDV2T1FwWkE=,
+  small_menu: false, theme: default, type: user}

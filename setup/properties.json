@@ -929,6 +929,7 @@
       "name",
       "description",
       "creator",
+      "access_groups",
       "subtype",
       "model",
       "location",
@@ -949,6 +950,7 @@
       "name",
       "description",
       "creator",
+      "access_groups",
       "subtype",
       "model",
       "location",
@@ -957,7 +959,14 @@
       "source_name",
       "destination_name"
     ],
-    "service": ["name", "description", "creator", "vendor", "operating_system"],
+    "service": [
+      "name",
+      "description",
+      "creator",
+      "access_groups",
+      "vendor",
+      "operating_system"
+    ],
     "user": ["name", "description", "groups", "email"]
   }
 }

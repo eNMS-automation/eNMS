@@ -41,6 +41,7 @@ def configure_pool_object_form(cls):
     cls.models = ("devices", "links", "services", "users")
     for model in cls.models:
         setattr(cls, model, MultipleInstanceField(model))
+        form_properties["pool_objects"][model] = {"type": "object-list"}
         setattr(
             cls,
             f"string_{model}",

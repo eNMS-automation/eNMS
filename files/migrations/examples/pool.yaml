@@ -1,4 +1,5 @@
 - creator: ''
+  default_access: ''
   description: All objects
   device_configuration: ''
   device_configuration_match: inclusion
@@ -92,7 +93,6 @@
   name: All objects
   operator: all
   property1: CP
-  public: false
   service_creator: ''
   service_creator_match: inclusion
   service_description: ''
@@ -116,6 +116,7 @@
   user_name_match: regex
   users: [admin, readonly, chicago, sf, ny, nadmin]
 - creator: ''
+  default_access: ''
   description: All devices
   device_configuration: ''
   device_configuration_invert: false
@@ -225,7 +226,6 @@
   name: All devices
   operator: all
   property1: CP
-  public: false
   service_creator: ''
   service_creator_invert: false
   service_creator_match: inclusion
@@ -258,6 +258,7 @@
   user_name_match: inclusion
   users: []
 - creator: ''
+  default_access: ''
   description: All links
   device_configuration: ''
   device_configuration_invert: false
@@ -374,7 +375,6 @@
   name: All links
   operator: all
   property1: CP
-  public: false
   service_creator: ''
   service_creator_invert: false
   service_creator_match: inclusion
@@ -407,6 +407,7 @@
   user_name_match: inclusion
   users: []
 - creator: ''
+  default_access: ''
   description: Datacenter San Francisco
   device_configuration: ''
   device_configuration_match: inclusion
@@ -497,7 +498,6 @@
   name: Datacenter San Francisco
   operator: all
   property1: CP
-  public: false
   service_creator: ''
   service_creator_match: inclusion
   service_description: ''
@@ -521,6 +521,7 @@
   user_name_match: inclusion
   users: []
 - creator: ''
+  default_access: ''
   description: Datacenter New York
   device_configuration: ''
   device_configuration_match: inclusion
@@ -608,7 +609,6 @@
   name: Datacenter New York
   operator: all
   property1: CP
-  public: false
   service_creator: ''
   service_creator_match: inclusion
   service_description: ''
@@ -632,6 +632,7 @@
   user_name_match: inclusion
   users: []
 - creator: ''
+  default_access: ''
   description: Datacenter Chicago
   device_configuration: ''
   device_configuration_match: inclusion
@@ -718,7 +719,6 @@
   name: Datacenter Chicago
   operator: all
   property1: CP
-  public: false
   service_creator: ''
   service_creator_match: inclusion
   service_description: ''
@@ -742,6 +742,7 @@
   user_name_match: inclusion
   users: []
 - creator: ''
+  default_access: ''
   description: ''
   device_configuration: ''
   device_configuration_match: inclusion
@@ -812,7 +813,6 @@
   name: Washington
   operator: all
   property1: CP
-  public: false
   service_creator: ''
   service_creator_match: inclusion
   service_description: ''
@@ -837,6 +837,7 @@
   user_name_match: inclusion
   users: []
 - creator: ''
+  default_access: ''
   description: ''
   device_configuration: ''
   device_configuration_match: inclusion
@@ -907,7 +908,6 @@
   name: Links 0 through 5 - Non-public pool - Access set up
   operator: all
   property1: CP
-  public: false
   service_creator: ''
   service_creator_match: inclusion
   service_description: ''
@@ -931,6 +931,7 @@
   user_name_match: inclusion
   users: []
 - creator: ''
+  default_access: ''
   description: ''
   device_configuration: ''
   device_configuration_match: inclusion
@@ -1001,7 +1002,6 @@
   name: Links 6 through 9 - Public pools
   operator: all
   property1: CP
-  public: true
   service_creator: ''
   service_creator_match: inclusion
   service_description: ''
@@ -1025,6 +1025,7 @@
   user_name_match: inclusion
   users: []
 - creator: ''
+  default_access: ''
   description: ''
   device_configuration: ''
   device_configuration_match: inclusion
@@ -1095,7 +1096,6 @@
   name: Non-admin user pool
   operator: all
   property1: CP
-  public: false
   service_creator: ''
   service_creator_match: inclusion
   service_description: ''
@@ -1119,6 +1119,7 @@
   user_name_match: inclusion
   users: [nadmin]
 - creator: ''
+  default_access: ''
   description: ''
   device_configuration: ''
   device_configuration_match: inclusion
@@ -1189,7 +1190,6 @@
   name: User ny
   operator: all
   property1: CP
-  public: false
   service_creator: ''
   service_creator_match: inclusion
   service_description: ''
@@ -1213,6 +1213,7 @@
   user_name_match: inclusion
   users: [ny]
 - creator: ''
+  default_access: ''
   description: ''
   device_configuration: ''
   device_configuration_match: inclusion
@@ -1283,7 +1284,6 @@
   name: User readonly
   operator: all
   property1: CP
-  public: false
   service_creator: ''
   service_creator_match: inclusion
   service_description: ''
@@ -1307,6 +1307,7 @@
   user_name_match: inclusion
   users: [readonly]
 - creator: admin
+  default_access: ''
   description: ''
   device_configuration: ''
   device_configuration_match: inclusion
@@ -1385,7 +1386,6 @@
   name: 'Pool Invert Mechanism: ~router in name, ~link[1-9] in name'
   operator: all
   property1: CP
-  public: false
   service_creator: ''
   service_creator_match: inclusion
   service_description: ''
@@ -1409,6 +1409,7 @@
   user_name_match: inclusion
   users: []
 - creator: admin
+  default_access: ''
   description: ''
   device_configuration: ''
   device_configuration_invert: false
@@ -1510,7 +1511,6 @@
   name: All users
   operator: all
   property1: CP
-  public: false
   service_creator: ''
   service_creator_invert: false
   service_creator_match: inclusion

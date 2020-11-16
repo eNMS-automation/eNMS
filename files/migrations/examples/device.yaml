@@ -4,6 +4,7 @@
     b: [1, 2, '3']
   custom_multiselect: [a, c]
   custom_select: b
+  default_access: ''
   description: Jackson
   down: false
   icon: router
@@ -37,7 +38,6 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  public: false
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -49,6 +49,7 @@
     b: [1, 2, '3']
   custom_multiselect: [a, c]
   custom_select: b
+  default_access: ''
   description: PaloAlto
   down: false
   icon: router
@@ -82,7 +83,6 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  public: false
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -94,6 +94,7 @@
     b: [1, 2, '3']
   custom_multiselect: [a, c]
   custom_select: b
+  default_access: ''
   description: Austin
   down: false
   icon: router
@@ -127,7 +128,6 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  public: false
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -139,6 +139,7 @@
     b: [1, 2, '3']
   custom_multiselect: [a, c]
   custom_select: b
+  default_access: ''
   description: Washington
   down: false
   icon: router
@@ -172,7 +173,6 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  public: false
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -184,6 +184,7 @@
     b: [1, 2, '3']
   custom_multiselect: [a, c]
   custom_select: b
+  default_access: ''
   description: Chicago
   down: false
   icon: router
@@ -217,7 +218,6 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  public: false
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -229,6 +229,7 @@
     b: [1, 2, '3']
   custom_multiselect: [a, c]
   custom_select: b
+  default_access: ''
   description: SanJose
   down: false
   icon: router
@@ -262,7 +263,6 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  public: false
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -274,6 +274,7 @@
     b: [1, 2, '3']
   custom_multiselect: [a, c]
   custom_select: b
+  default_access: ''
   description: SanDiego
   down: false
   icon: router
@@ -307,7 +308,6 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  public: false
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -319,6 +319,7 @@
     b: [1, 2, '3']
   custom_multiselect: [a, c]
   custom_select: b
+  default_access: ''
   description: Dallas
   down: false
   icon: router
@@ -352,7 +353,6 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  public: false
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -364,6 +364,7 @@
     b: [1, 2, '3']
   custom_multiselect: [a, c]
   custom_select: b
+  default_access: ''
   description: Philadelphia
   down: false
   icon: router
@@ -397,7 +398,6 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  public: false
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -409,6 +409,7 @@
     b: [1, 2, '3']
   custom_multiselect: [a, c]
   custom_select: b
+  default_access: ''
   description: LosAngeles
   down: false
   icon: optical_switch
@@ -442,7 +443,6 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  public: false
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -454,6 +454,7 @@
     b: [1, 2, '3']
   custom_multiselect: [a, c]
   custom_select: b
+  default_access: ''
   description: Detroit
   down: false
   icon: router
@@ -487,7 +488,6 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  public: false
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -499,6 +499,7 @@
     b: [1, 2, '3']
   custom_multiselect: [a, c]
   custom_select: b
+  default_access: ''
   description: Richmond
   down: false
   icon: router
@@ -532,7 +533,6 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  public: false
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -544,6 +544,7 @@
     b: [1, 2, '3']
   custom_multiselect: [a, c]
   custom_select: b
+  default_access: ''
   description: Atlanta
   down: false
   icon: router
@@ -577,7 +578,6 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  public: false
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -589,6 +589,7 @@
     b: [1, 2, '3']
   custom_multiselect: [a, c]
   custom_select: b
+  default_access: ''
   description: Boston
   down: false
   icon: router
@@ -622,7 +623,6 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  public: false
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -634,6 +634,7 @@
     b: [1, 2, '3']
   custom_multiselect: [a, c]
   custom_select: b
+  default_access: ''
   description: Houston
   down: false
   icon: router
@@ -667,7 +668,6 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  public: false
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -679,6 +679,7 @@
     b: [1, 2, '3']
   custom_multiselect: [a, c]
   custom_select: b
+  default_access: ''
   description: Baltimore
   down: false
   icon: router
@@ -712,7 +713,6 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  public: false
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -724,6 +724,7 @@
     b: [1, 2, '3']
   custom_multiselect: [a, c]
   custom_select: b
+  default_access: ''
   description: Cleveland
   down: false
   icon: router
@@ -757,7 +758,6 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  public: false
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -769,6 +769,7 @@
     b: [1, 2, '3']
   custom_multiselect: [a, c]
   custom_select: b
+  default_access: ''
   description: Columbus
   down: false
   icon: router
@@ -802,7 +803,6 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  public: false
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -814,6 +814,7 @@
     b: [1, 2, '3']
   custom_multiselect: [a, c]
   custom_select: b
+  default_access: ''
   description: Cincinnati
   down: false
   icon: router
@@ -847,7 +848,6 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  public: false
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -859,6 +859,7 @@
     b: [1, 2, '3']
   custom_multiselect: [a, c]
   custom_select: b
+  default_access: ''
   description: Cambridge
   down: false
   icon: router
@@ -892,7 +893,6 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  public: false
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -904,6 +904,7 @@
     b: [1, 2, '3']
   custom_multiselect: [a, c]
   custom_select: b
+  default_access: ''
   description: Minneapolis
   down: false
   icon: router
@@ -937,7 +938,6 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  public: false
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -949,6 +949,7 @@
     b: [1, 2, '3']
   custom_multiselect: [a, c]
   custom_select: b
+  default_access: ''
   description: NewYork
   down: false
   icon: router
@@ -982,7 +983,6 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  public: false
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -994,6 +994,7 @@
     b: [1, 2, '3']
   custom_multiselect: [a, c]
   custom_select: b
+  default_access: ''
   description: Sacramento
   down: false
   icon: router
@@ -1027,7 +1028,6 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  public: false
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -1039,6 +1039,7 @@
     b: [1, 2, '3']
   custom_multiselect: [a, c]
   custom_select: b
+  default_access: ''
   description: SanFrancisco
   down: false
   icon: router
@@ -1072,7 +1073,6 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  public: false
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -1084,6 +1084,7 @@
     b: [1, 2, '3']
   custom_multiselect: [a, c]
   custom_select: b
+  default_access: ''
   description: Orange
   down: false
   icon: router
@@ -1117,7 +1118,6 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  public: false
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -1129,6 +1129,7 @@
     b: [1, 2, '3']
   custom_multiselect: [a, c]
   custom_select: b
+  default_access: ''
   description: Oakland
   down: false
   icon: router
@@ -1162,7 +1163,6 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  public: false
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -1174,6 +1174,7 @@
     b: [1, 2, '3']
   custom_multiselect: [a, c]
   custom_select: b
+  default_access: ''
   description: Denver
   down: false
   icon: router
@@ -1207,7 +1208,6 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  public: false
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -1219,6 +1219,7 @@
     b: [1, 2, '3']
   custom_multiselect: [a, c]
   custom_select: b
+  default_access: ''
   description: france
   down: false
   icon: router
@@ -1252,7 +1253,6 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  public: false
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -1264,6 +1264,7 @@
     b: [1, 2, '3']
   custom_multiselect: [a, c]
   custom_select: b
+  default_access: ''
   description: france
   down: false
   icon: router
@@ -1297,7 +1298,6 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  public: false
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -1309,6 +1309,7 @@
     b: [1, 2, '3']
   custom_multiselect: [a, c]
   custom_select: b
+  default_access: ''
   description: france
   down: false
   icon: router
@@ -1342,7 +1343,6 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  public: false
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -1354,6 +1354,7 @@
     b: [1, 2, '3']
   custom_multiselect: [a, c]
   custom_select: b
+  default_access: ''
   description: eastern europe
   down: false
   icon: router
@@ -1387,7 +1388,6 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  public: false
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -1399,6 +1399,7 @@
     b: [1, 2, '3']
   custom_multiselect: [a, c]
   custom_select: b
+  default_access: ''
   description: france
   down: false
   icon: router
@@ -1432,7 +1433,6 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  public: false
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -1444,6 +1444,7 @@
     b: [1, 2, '3']
   custom_multiselect: [a, c]
   custom_select: b
+  default_access: ''
   description: france
   down: false
   icon: router
@@ -1477,7 +1478,6 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  public: false
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -1489,6 +1489,7 @@
     b: [1, 2, '3']
   custom_multiselect: [a, c]
   custom_select: b
+  default_access: ''
   description: france
   down: false
   icon: router
@@ -1522,7 +1523,6 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  public: false
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -1534,6 +1534,7 @@
     b: [1, 2, '3']
   custom_multiselect: [a, c]
   custom_select: b
+  default_access: ''
   description: eastern europe
   down: false
   icon: router
@@ -1567,7 +1568,6 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  public: false
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -1579,6 +1579,7 @@
     b: [1, 2, '3']
   custom_multiselect: [a, c]
   custom_select: b
+  default_access: ''
   description: france
   down: false
   icon: router
@@ -1612,7 +1613,6 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  public: false
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -1624,6 +1624,7 @@
     b: [1, 2, '3']
   custom_multiselect: [a, c]
   custom_select: b
+  default_access: ''
   description: eastern europe
   down: false
   icon: router
@@ -1657,7 +1658,6 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  public: false
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -1669,6 +1669,7 @@
     b: [1, 2, '3']
   custom_multiselect: [a, c]
   custom_select: b
+  default_access: ''
   description: eastern europe
   down: false
   icon: router
@@ -1702,7 +1703,6 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  public: false
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -1714,6 +1714,7 @@
     b: [1, 2, '3']
   custom_multiselect: [a, c]
   custom_select: b
+  default_access: ''
   description: france
   down: false
   icon: router
@@ -1747,7 +1748,6 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  public: false
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -1759,6 +1759,7 @@
     b: [1, 2, '3']
   custom_multiselect: [a, c]
   custom_select: b
+  default_access: ''
   description: france
   down: false
   icon: router
@@ -1792,7 +1793,6 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  public: false
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -1804,6 +1804,7 @@
     b: [1, 2, '3']
   custom_multiselect: [a, c]
   custom_select: b
+  default_access: ''
   description: eastern europe
   down: false
   icon: router
@@ -1837,7 +1838,6 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  public: false
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -1849,6 +1849,7 @@
     b: [1, 2, '3']
   custom_multiselect: [a, c]
   custom_select: b
+  default_access: ''
   description: eastern europe
   down: false
   icon: router
@@ -1882,7 +1883,6 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  public: false
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -1894,6 +1894,7 @@
     b: [1, 2, '3']
   custom_multiselect: [a, c]
   custom_select: b
+  default_access: ''
   description: eastern europe
   down: false
   icon: router
@@ -1927,7 +1928,6 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  public: false
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -1939,6 +1939,7 @@
     b: [1, 2, '3']
   custom_multiselect: [a, c]
   custom_select: b
+  default_access: ''
   description: eastern europe
   down: false
   icon: router
@@ -1972,7 +1973,6 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  public: false
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -1984,6 +1984,7 @@
     b: [1, 2, '3']
   custom_multiselect: [a, c]
   custom_select: b
+  default_access: ''
   description: eastern europe
   down: false
   icon: router
@@ -2017,7 +2018,6 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  public: false
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -2029,6 +2029,7 @@
     b: [1, 2, '3']
   custom_multiselect: [a, c]
   custom_select: b
+  default_access: ''
   description: eastern europe
   down: false
   icon: router
@@ -2062,7 +2063,6 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  public: false
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -2074,6 +2074,7 @@
     b: [1, 2, '3']
   custom_multiselect: [a, c]
   custom_select: b
+  default_access: ''
   description: eastern europe
   down: false
   icon: router
@@ -2107,7 +2108,6 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  public: false
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -2119,6 +2119,7 @@
     b: [1, 2, '3']
   custom_multiselect: [a, c]
   custom_select: b
+  default_access: ''
   description: france
   down: false
   icon: router
@@ -2152,7 +2153,6 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  public: false
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -2164,6 +2164,7 @@
     b: [1, 2, '3']
   custom_multiselect: [a, c]
   custom_select: b
+  default_access: ''
   description: france
   down: false
   icon: router
@@ -2197,7 +2198,6 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  public: false
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -2209,6 +2209,7 @@
     b: [1, 2, '3']
   custom_multiselect: [a, c]
   custom_select: b
+  default_access: ''
   description: france
   down: false
   icon: router
@@ -2242,7 +2243,6 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  public: false
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -2254,6 +2254,7 @@
     b: [1, 2, '3']
   custom_multiselect: [a, c]
   custom_select: b
+  default_access: ''
   description: spain
   down: false
   icon: router
@@ -2287,7 +2288,6 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  public: false
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -2299,6 +2299,7 @@
     b: [1, 2, '3']
   custom_multiselect: [a, c]
   custom_select: b
+  default_access: ''
   description: spain
   down: false
   icon: router
@@ -2332,7 +2333,6 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  public: false
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -2344,6 +2344,7 @@
     b: [1, 2, '3']
   custom_multiselect: [a, c]
   custom_select: b
+  default_access: ''
   description: spain
   down: false
   icon: router
@@ -2377,7 +2378,6 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  public: false
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -2389,6 +2389,7 @@
     b: [1, 2, '3']
   custom_multiselect: [a, c]
   custom_select: b
+  default_access: ''
   description: spain
   down: false
   icon: router
@@ -2422,7 +2423,6 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  public: false
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -2434,6 +2434,7 @@
     b: [1, 2, '3']
   custom_multiselect: [a, c]
   custom_select: b
+  default_access: ''
   description: spain
   down: false
   icon: router
@@ -2467,7 +2468,6 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  public: false
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -2479,6 +2479,7 @@
     b: [1, 2, '3']
   custom_multiselect: [a, c]
   custom_select: b
+  default_access: ''
   description: spain
   down: false
   icon: router
@@ -2512,7 +2513,6 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  public: false
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -2524,6 +2524,7 @@
     b: [1, 2, '3']
   custom_multiselect: [a, c]
   custom_select: b
+  default_access: ''
   description: eastern europe
   down: false
   icon: router
@@ -2557,7 +2558,6 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  public: false
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -2569,6 +2569,7 @@
     b: [1, 2, '3']
   custom_multiselect: [a, c]
   custom_select: b
+  default_access: ''
   description: spain
   down: false
   icon: router
@@ -2602,7 +2603,6 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  public: false
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -2614,6 +2614,7 @@
     b: [1, 2, '3']
   custom_multiselect: [a, c]
   custom_select: b
+  default_access: ''
   description: spain
   down: false
   icon: router
@@ -2647,7 +2648,6 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  public: false
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -2659,6 +2659,7 @@
     b: [1, 2, '3']
   custom_multiselect: [a, c]
   custom_select: b
+  default_access: ''
   description: spain
   down: false
   icon: router
@@ -2692,7 +2693,6 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  public: false
   reachable: true
   scrapli_driver: cisco_iosxe
   subtype: router
@@ -2704,6 +2704,7 @@
     b: [1, 2, '3']
   custom_multiselect: [a, c]
   custom_select: b
+  default_access: ''
   description: Washington
   down: false
   icon: router
@@ -2737,7 +2738,6 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  public: false
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -2749,6 +2749,7 @@
     b: [1, 2, '3']
   custom_multiselect: [a, c]
   custom_select: b
+  default_access: ''
   description: Denver
   down: false
   icon: router
@@ -2782,7 +2783,6 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  public: false
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -2794,6 +2794,7 @@
     b: [1, 2, '3']
   custom_multiselect: [a, c]
   custom_select: b
+  default_access: ''
   description: Dallas
   down: false
   icon: router
@@ -2827,7 +2828,6 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  public: false
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -2839,6 +2839,7 @@
     b: [1, 2, '3']
   custom_multiselect: [a, c]
   custom_select: b
+  default_access: ''
   description: Dallas
   down: false
   icon: router
@@ -2872,7 +2873,6 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  public: false
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -2884,6 +2884,7 @@
     b: [1, 2, '3']
   custom_multiselect: [a, c]
   custom_select: b
+  default_access: ''
   description: Dallas
   down: false
   icon: router
@@ -2917,7 +2918,6 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  public: false
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -2929,6 +2929,7 @@
     b: [1, 2, '3']
   custom_multiselect: [a, c]
   custom_select: b
+  default_access: ''
   description: Austin
   down: false
   icon: router
@@ -2962,7 +2963,6 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  public: false
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -2974,6 +2974,7 @@
     b: [1, 2, '3']
   custom_multiselect: [a, c]
   custom_select: b
+  default_access: ''
   description: Austin
   down: false
   icon: router
@@ -3007,7 +3008,6 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  public: false
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -3019,6 +3019,7 @@
     b: [1, 2, '3']
   custom_multiselect: [a, c]
   custom_select: b
+  default_access: ''
   description: Jackson
   down: false
   icon: router
@@ -3052,7 +3053,6 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  public: false
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''
@@ -3064,6 +3064,7 @@
     b: [1, 2, '3']
   custom_multiselect: [a, c]
   custom_select: b
+  default_access: ''
   description: Oakland
   down: false
   icon: router
@@ -3097,7 +3098,6 @@
   property1: 10.145.14.1
   property2: CP
   property3: ''
-  public: false
   reachable: true
   scrapli_driver: arista_eos
   subtype: ''

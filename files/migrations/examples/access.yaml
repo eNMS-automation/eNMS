@@ -181,3 +181,15 @@
   type: access
   upper_menu: [Admin, Settings, Files]
   user_pools: [Users with UI access]
+- access_pools: [USA services]
+  access_type: "['Read', 'Edit', 'Run', 'Schedule', 'Connect', 'Use as target']"
+  delete_requests: []
+  description: USA users have access to all services created by other US users
+  get_requests: []
+  menu: []
+  name: All services created by USA users
+  pages: []
+  post_requests: []
+  type: access
+  upper_menu: []
+  user_pools: [Users with UI access]

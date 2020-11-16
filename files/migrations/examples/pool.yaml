@@ -2,6 +2,8 @@
   creator: ''
   default_access: creator
   description: All objects
+  device_access_groups: ''
+  device_access_groups_match: inclusion
   device_configuration: ''
   device_configuration_match: inclusion
   device_creator: ''
@@ -54,6 +56,8 @@
     router31, router32, router33, router34, router35, router36, router37, Server 2,
     Aserver, Dallas-2, Dallas-3, Dallas-4, Austin-2, Austin-3, Jackson-2, Oakland-2]
   last_modified: '2020-09-19 07:12:54.590340'
+  link_access_groups: ''
+  link_access_groups_match: inclusion
   link_color: ''
   link_color_match: inclusion
   link_creator: ''
@@ -95,6 +99,8 @@
   name: All objects
   operator: all
   property1: CP
+  service_access_groups: ''
+  service_access_groups_match: inclusion
   service_creator: ''
   service_creator_match: inclusion
   service_description: ''
@@ -121,6 +127,8 @@
   creator: ''
   default_access: creator
   description: All devices
+  device_access_groups: ''
+  device_access_groups_match: inclusion
   device_configuration: ''
   device_configuration_invert: false
   device_configuration_match: inclusion
@@ -194,6 +202,8 @@
     router31, router32, router33, router34, router35, router36, router37, Server 2,
     Aserver, Dallas-2, Dallas-3, Dallas-4, Austin-2, Austin-3, Jackson-2, Oakland-2]
   last_modified: '2020-11-04 04:09:36.824587'
+  link_access_groups: ''
+  link_access_groups_match: inclusion
   link_color: ''
   link_color_invert: false
   link_color_match: inclusion
@@ -229,6 +239,8 @@
   name: All devices
   operator: all
   property1: CP
+  service_access_groups: ''
+  service_access_groups_match: inclusion
   service_creator: ''
   service_creator_invert: false
   service_creator_match: inclusion
@@ -264,6 +276,8 @@
   creator: ''
   default_access: creator
   description: All links
+  device_access_groups: ''
+  device_access_groups_match: inclusion
   device_configuration: ''
   device_configuration_invert: false
   device_configuration_match: inclusion
@@ -329,6 +343,8 @@
   device_vendor_match: inclusion
   devices: []
   last_modified: '2020-11-04 04:09:46.618445'
+  link_access_groups: ''
+  link_access_groups_match: inclusion
   link_color: ''
   link_color_invert: false
   link_color_match: inclusion
@@ -380,6 +396,8 @@
   name: All links
   operator: all
   property1: CP
+  service_access_groups: ''
+  service_access_groups_match: inclusion
   service_creator: ''
   service_creator_invert: false
   service_creator_match: inclusion
@@ -415,6 +433,8 @@
   creator: ''
   default_access: creator
   description: Datacenter San Francisco
+  device_access_groups: ''
+  device_access_groups_match: inclusion
   device_configuration: ''
   device_configuration_match: inclusion
   device_creator: ''
@@ -465,6 +485,8 @@
     router29, router30, router31, router32, router33, router34, router35, router36,
     router37, Server 2, Aserver]
   last_modified: '2020-09-21 06:22:51.921859'
+  link_access_groups: ''
+  link_access_groups_match: inclusion
   link_color: ''
   link_color_match: inclusion
   link_creator: ''
@@ -506,6 +528,8 @@
   name: Datacenter San Francisco
   operator: all
   property1: CP
+  service_access_groups: ''
+  service_access_groups_match: inclusion
   service_creator: ''
   service_creator_match: inclusion
   service_description: ''
@@ -532,6 +556,8 @@
   creator: ''
   default_access: creator
   description: Datacenter New York
+  device_access_groups: ''
+  device_access_groups_match: inclusion
   device_configuration: ''
   device_configuration_match: inclusion
   device_creator: ''
@@ -579,6 +605,8 @@
     SanFrancisco, Orange, Oakland, router20 (admin), router23 (admin), Dallas-2, Dallas-3,
     Dallas-4, Jackson-2, Oakland-2]
   last_modified: '2020-09-21 06:22:57.467002'
+  link_access_groups: ''
+  link_access_groups_match: inclusion
   link_color: ''
   link_color_match: inclusion
   link_creator: ''
@@ -620,6 +648,8 @@
   name: Datacenter New York
   operator: all
   property1: CP
+  service_access_groups: ''
+  service_access_groups_match: inclusion
   service_creator: ''
   service_creator_match: inclusion
   service_description: ''
@@ -646,6 +676,8 @@
   creator: ''
   default_access: creator
   description: Datacenter Chicago
+  device_access_groups: ''
+  device_access_groups_match: inclusion
   device_configuration: ''
   device_configuration_match: inclusion
   device_creator: ''
@@ -692,6 +724,8 @@
     Baltimore, Cincinnati, Cambridge, Minneapolis, SanFrancisco, router10 (public),
     router18 (public), router20 (admin), router23 (admin), Austin-2, Austin-3]
   last_modified: '2020-09-21 06:22:36.450390'
+  link_access_groups: ''
+  link_access_groups_match: inclusion
   link_color: ''
   link_color_match: inclusion
   link_creator: ''
@@ -733,6 +767,8 @@
   name: Datacenter Chicago
   operator: all
   property1: CP
+  service_access_groups: ''
+  service_access_groups_match: inclusion
   service_creator: ''
   service_creator_match: inclusion
   service_description: ''
@@ -759,6 +795,8 @@
   creator: ''
   default_access: creator
   description: ''
+  device_access_groups: ''
+  device_access_groups_match: inclusion
   device_configuration: ''
   device_configuration_match: inclusion
   device_creator: ''
@@ -803,6 +841,8 @@
   device_vendor_match: inclusion
   devices: [Washington]
   last_modified: '2019-10-25 14:45:46.418406'
+  link_access_groups: ''
+  link_access_groups_match: inclusion
   link_color: ''
   link_color_match: inclusion
   link_creator: ''
@@ -828,6 +868,8 @@
   name: Washington
   operator: all
   property1: CP
+  service_access_groups: ''
+  service_access_groups_match: inclusion
   service_creator: ''
   service_creator_match: inclusion
   service_description: ''
@@ -838,8 +880,8 @@
   service_operating_system_match: inclusion
   service_vendor: ''
   service_vendor_match: inclusion
-  target_services: ['[Regression Workflow 9: Operational Data Backup (admin)] Retrieve
-      Operational Data', 'Regression Workflow P: large workflow (scalability)']
+  target_services: ['Regression Workflow P: large workflow (scalability)', '[Regression
+      Workflow 9: Operational Data Backup (admin)] Retrieve Operational Data']
   tasks: []
   type: pool
   user_description: ''
@@ -855,6 +897,8 @@
   creator: ''
   default_access: creator
   description: ''
+  device_access_groups: ''
+  device_access_groups_match: inclusion
   device_configuration: ''
   device_configuration_match: inclusion
   device_creator: ''
@@ -899,6 +943,8 @@
   device_vendor_match: inclusion
   devices: []
   last_modified: '2020-06-18 03:08:09.159229'
+  link_access_groups: ''
+  link_access_groups_match: inclusion
   link_color: ''
   link_color_match: inclusion
   link_creator: ''
@@ -924,6 +970,8 @@
   name: Links 0 through 5 - Non-public pool - Access set up
   operator: all
   property1: CP
+  service_access_groups: ''
+  service_access_groups_match: inclusion
   service_creator: ''
   service_creator_match: inclusion
   service_description: ''
@@ -950,6 +998,8 @@
   creator: ''
   default_access: public
   description: ''
+  device_access_groups: ''
+  device_access_groups_match: inclusion
   device_configuration: ''
   device_configuration_invert: false
   device_configuration_match: inclusion
@@ -1015,6 +1065,8 @@
   device_vendor_match: inclusion
   devices: []
   last_modified: '2020-11-16 05:45:30.194719'
+  link_access_groups: ''
+  link_access_groups_match: inclusion
   link_color: ''
   link_color_invert: false
   link_color_match: inclusion
@@ -1050,6 +1102,8 @@
   name: Links 6 through 9 - Public pools
   operator: all
   property1: CP
+  service_access_groups: ''
+  service_access_groups_match: inclusion
   service_creator: ''
   service_creator_invert: false
   service_creator_match: inclusion
@@ -1085,6 +1139,8 @@
   creator: ''
   default_access: admin
   description: ''
+  device_access_groups: ''
+  device_access_groups_match: inclusion
   device_configuration: ''
   device_configuration_invert: false
   device_configuration_match: inclusion
@@ -1150,6 +1206,8 @@
   device_vendor_match: inclusion
   devices: []
   last_modified: '2020-11-16 06:02:20.440720'
+  link_access_groups: ''
+  link_access_groups_match: inclusion
   link_color: ''
   link_color_invert: false
   link_color_match: inclusion
@@ -1185,6 +1243,8 @@
   name: Non-admin user pool (admin)
   operator: all
   property1: CP
+  service_access_groups: ''
+  service_access_groups_match: inclusion
   service_creator: ''
   service_creator_invert: false
   service_creator_match: inclusion
@@ -1220,6 +1280,8 @@
   creator: ''
   default_access: creator
   description: ''
+  device_access_groups: ''
+  device_access_groups_match: inclusion
   device_configuration: ''
   device_configuration_match: inclusion
   device_creator: ''
@@ -1264,6 +1326,8 @@
   device_vendor_match: inclusion
   devices: []
   last_modified: '2020-09-21 06:31:33.876612'
+  link_access_groups: ''
+  link_access_groups_match: inclusion
   link_color: ''
   link_color_match: inclusion
   link_creator: ''
@@ -1289,6 +1353,8 @@
   name: User ny
   operator: all
   property1: CP
+  service_access_groups: ''
+  service_access_groups_match: inclusion
   service_creator: ''
   service_creator_match: inclusion
   service_description: ''
@@ -1315,6 +1381,8 @@
   creator: ''
   default_access: creator
   description: ''
+  device_access_groups: ''
+  device_access_groups_match: inclusion
   device_configuration: ''
   device_configuration_match: inclusion
   device_creator: ''
@@ -1359,6 +1427,8 @@
   device_vendor_match: inclusion
   devices: []
   last_modified: '2020-09-21 08:57:14.927608'
+  link_access_groups: ''
+  link_access_groups_match: inclusion
   link_color: ''
   link_color_match: inclusion
   link_creator: ''
@@ -1384,6 +1454,8 @@
   name: User readonly
   operator: all
   property1: CP
+  service_access_groups: ''
+  service_access_groups_match: inclusion
   service_creator: ''
   service_creator_match: inclusion
   service_description: ''
@@ -1410,6 +1482,8 @@
   creator: admin
   default_access: creator
   description: ''
+  device_access_groups: ''
+  device_access_groups_match: inclusion
   device_configuration: ''
   device_configuration_match: inclusion
   device_creator: ''
@@ -1459,6 +1533,8 @@
     SanFrancisco, Orange, Oakland, Denver, Server 2, Aserver, Dallas-2, Dallas-3,
     Dallas-4, Austin-2, Austin-3, Jackson-2, Oakland-2]
   last_modified: '2020-09-26 00:47:22.329360'
+  link_access_groups: ''
+  link_access_groups_match: inclusion
   link_color: ''
   link_color_match: inclusion
   link_creator: ''
@@ -1487,6 +1563,8 @@
   name: 'Pool Invert Mechanism: ~router in name, ~link[1-9] in name'
   operator: all
   property1: CP
+  service_access_groups: ''
+  service_access_groups_match: inclusion
   service_creator: ''
   service_creator_match: inclusion
   service_description: ''
@@ -1513,6 +1591,8 @@
   creator: admin
   default_access: creator
   description: ''
+  device_access_groups: ''
+  device_access_groups_match: inclusion
   device_configuration: ''
   device_configuration_invert: false
   device_configuration_match: inclusion
@@ -1578,6 +1658,8 @@
   device_vendor_match: inclusion
   devices: []
   last_modified: '2020-11-04 04:10:00.565904'
+  link_access_groups: ''
+  link_access_groups_match: inclusion
   link_color: ''
   link_color_invert: false
   link_color_match: inclusion
@@ -1613,6 +1695,8 @@
   name: All users
   operator: all
   property1: CP
+  service_access_groups: ''
+  service_access_groups_match: inclusion
   service_creator: ''
   service_creator_invert: false
   service_creator_match: inclusion
@@ -1648,6 +1732,8 @@
   creator: admin
   default_access: creator
   description: ''
+  device_access_groups: ''
+  device_access_groups_match: inclusion
   device_configuration: ''
   device_configuration_invert: false
   device_configuration_match: inclusion
@@ -1712,7 +1798,9 @@
   device_vendor_invert: false
   device_vendor_match: inclusion
   devices: []
-  last_modified: '2020-11-16 13:27:54.526298'
+  last_modified: '2020-11-16 13:54:39.649795'
+  link_access_groups: ''
+  link_access_groups_match: inclusion
   link_color: ''
   link_color_invert: false
   link_color_match: inclusion
@@ -1748,6 +1836,8 @@
   name: Users with UI access
   operator: all
   property1: CP
+  service_access_groups: ''
+  service_access_groups_match: inclusion
   service_creator: ''
   service_creator_invert: false
   service_creator_match: inclusion
@@ -1778,11 +1868,14 @@
   user_name: ^ui$
   user_name_invert: false
   user_name_match: regex
-  users: [ui, ny, sf, chicago]
+  users: [ui, sf, ny, chicago]
 - access_groups: ''
   creator: admin
   default_access: admin
   description: ''
+  device_access_groups: ''
+  device_access_groups_invert: false
+  device_access_groups_match: inclusion
   device_configuration: ''
   device_configuration_invert: false
   device_configuration_match: inclusion
@@ -1847,7 +1940,10 @@
   device_vendor_invert: false
   device_vendor_match: inclusion
   devices: []
-  last_modified: '2020-11-16 12:37:58.197744'
+  last_modified: '2020-11-16 13:54:54.150791'
+  link_access_groups: ''
+  link_access_groups_invert: false
+  link_access_groups_match: inclusion
   link_color: ''
   link_color_invert: false
   link_color_match: inclusion
@@ -1883,6 +1979,9 @@
   name: USA services
   operator: all
   property1: CP
+  service_access_groups: usa
+  service_access_groups_invert: false
+  service_access_groups_match: inclusion
   service_creator: ''
   service_creator_invert: false
   service_creator_match: inclusion
@@ -1907,7 +2006,7 @@
   user_email: ''
   user_email_invert: false
   user_email_match: inclusion
-  user_groups: ',usa,'
+  user_groups: ''
   user_groups_invert: false
   user_groups_match: regex
   user_name: ''

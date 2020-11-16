@@ -75,7 +75,7 @@ class AbstractBase(db.base):
             setattr(self, property, value)
         if not kwargs.get("update_pools"):
             return
-        for pool in db.fetch_all("pool"):
+        for pool in db.fetch_all("pool", rbac=None):
             if pool.manually_defined or not pool.compute(self.class_type):
                 continue
             match = pool.object_match(self)

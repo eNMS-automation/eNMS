@@ -41,81 +41,98 @@
     'Regression Workflow 1: VRF creation and deletion with Netmiko': &id002 [-383,
       -95]
     'Regression Workflow 1: link neighbors mechanism': &id001 [-273, -126]
-    'Regression Workflow 2: Separate Failure - Success paths': &id013 [-327, -20]
-    'Regression Workflow 3: Napalm getters (postprocessing)': &id010 [-316, 80]
+    'Regression Workflow 2: Separate Failure - Success paths': &id020 [-327, -20]
+    'Regression Workflow 3: Napalm getters (postprocessing)': &id015 [-316, 80]
     'Regression Workflow 4: Link Neighbors Mechanism (public)': *id001
     'Regression Workflow 4: VRF creation and deletion with Netmiko': *id002
     'Regression Workflow 4: link neighbors mechanism': *id001
     'Regression Workflow 4: link neighbors mechanism (public)': *id001
     'Regression Workflow 5: VRF creation and deletion with Napalm': !!python/tuple [
       0, 0]
-    'Regression Workflow 6: Ansible with Validation': &id007 [-557, -5]
+    'Regression Workflow 6: Ansible with Validation': &id008 [-557, -5]
     'Regression Workflow 7: Payload Extraction & Validation': !!python/tuple [0, 0]
     'Regression Workflow 8: Payload Extraction with Operations': !!python/tuple [
       0, 0]
     'Regression Workflow 9: Operational Data Backup': &id003 [-648, 121]
     'Regression Workflow 9: Operational Data Backup (admin)': *id003
-    'Regression Workflow A: get_var, set_var, get_result': &id016 [-506, -55]
+    'Regression Workflow A: get_var, set_var, get_result': &id027 [-506, -55]
     'Regression Workflow B: Napalm getters validation': !!python/tuple [0, 0]
     'Regression Workflow C: Advanced multiprocessing': &id004 [-492, -39]
     'Regression Workflow C: Advanced multiprocessing (admin)': *id004
-    'Regression Workflow D: Prompts': &id011 [-397, 136]
-    'Regression Workflow E: Iteration Targets': &id009 [-342, -252]
+    'Regression Workflow D: Prompts': &id016 [-397, 136]
+    'Regression Workflow E: Iteration Targets': &id014 [-342, -252]
     'Regression Workflow F S1: Subworkflow of Workflow': !!python/tuple [0, 0]
     'Regression Workflow F S2: Access Variables from Parent Workflow': !!python/tuple [
       0, 0]
-    'Regression Workflow F: Workflow of Workflows': &id018 [-965, 194]
-    'Regression Workflow G: run methods (BFS)': &id008 [-404, 147]
-    'Regression Workflow H: shared service in multiple subworkflows': &id014 [55,
+    'Regression Workflow F: Workflow of Workflows': &id029 [-965, 194]
+    'Regression Workflow G: run methods (BFS)': &id010 [-404, 147]
+    'Regression Workflow H: shared service in multiple subworkflows': &id021 [55,
       266]
-    'Regression Workflow I: Iteration Targets Advanced': &id006 [-131, -24]
-    'Regression Workflow J: Workflow and Subworkflow Iteration': &id017 [0, 0]
-    'Regression Workflow K: preprocessing and postprocessing': &id012 [-197, -37]
-    'Regression Workflow L: superworkflow': &id015 [-179, 6]
-    'Regression Workflow M: Unix command & shell, ping, - jump on connect - mechanism': [
+    'Regression Workflow I: Iteration Targets Advanced': &id007 [-131, -24]
+    'Regression Workflow J: Workflow and Subworkflow Iteration': &id028 [0, 0]
+    'Regression Workflow K: preprocessing and postprocessing': &id017 [-197, -37]
+    'Regression Workflow L: superworkflow': &id024 [-179, 6]
+    'Regression Workflow M: Unix command & shell, ping, - jump on connect - mechanism': &id026 [
       -382, 39]
     'Regression Workflow M: Unix command & shell, ping, jump server': [-341, 17]
-    'Regression Workflow N: Topology Import (netbox, librenms, opennms)': [-141, 21]
-    'Regression Workflow O: Scrapli': [-192, 31]
-    'Regression Workflow P: large workflow (scalability)': &id019 [-437, -191]
-    'Regression Workflow Q: File transfer': [-479, -89]
-    'Regression Workflow R: skip services in service by service mode': &id020 [-336,
-      -35]
-    'Regression Workflow S: conditional skip query in failed and discard mode': &id005 [
+    'Regression Workflow N: Topology Import (netbox, librenms, opennms)': &id025 [
+      -141, 21]
+    'Regression Workflow O: Scrapli': &id019 [-192, 31]
+    'Regression Workflow P: large workflow (scalability)': &id018 [-437, -191]
+    'Regression Workflow Q: File transfer': &id011 [-479, -89]
+    'Regression Workflow R: Skip Services in SxS mode': &id005 [-336, -35]
+    'Regression Workflow R: skip services in service by service mode': *id005
+    'Regression Workflow S: conditional skip query in failed and discard mode': &id006 [
       -205, -81]
-    'Regression Workflow S: conditional skip query with skip value set to False': *id005
+    'Regression Workflow S: conditional skip query with skip value set to False': *id006
     'Regression Workflow T: global variables': [-277, -147]
-    'Regression Workflow T: global variables and post-run pool update': [-277, -147]
+    'Regression Workflow T: global variables and post-run pool update': &id013 [-277,
+      -147]
     'Regression Workflow T: link neighbors mechanism': *id001
-    'Regression Workflow U: fork based on value with skip discard mode': [-477, 154]
-    'Regression Workflow V: skip query with device in run once mode': [-412, -72]
+    'Regression Workflow U: fork based on value with skip discard mode': &id012 [
+      -477, 154]
+    'Regression Workflow V: skip query with device in run once mode': &id022 [-412,
+      -72]
     'Regression Workflow V: skip query with device in subworkflow SxS': [-71, -2]
     'Regression Workflow W: disable result creation mode': [-295, -141]
-    'Regression Workflow W: skip, discard and disable result creation mechanism': [
+    'Regression Workflow W: skip, discard and disable result creation mechanism': &id023 [
       -295, -141]
-    'Regression Workflow X: Credentials (password & key, priority)': [-157, 96]
-    'Regression Workflow: Advanced Iteration Targets': *id006
+    'Regression Workflow X: Credentials (password & key, priority)': &id009 [-157,
+      96]
+    'Regression Workflow: Advanced Iteration Targets': *id007
     'Regression Workflow: Advanced Multiprocessing (admin)': *id004
-    'Regression Workflow: Ansible with Validation': *id007
-    'Regression Workflow: DxD and SxS Run Methods': *id008
-    'Regression Workflow: Iteration Targets Mechanism': *id009
+    'Regression Workflow: Ansible with Validation': *id008
+    'Regression Workflow: Conditional Skip Query in Failed and Discard Modes': *id006
+    'Regression Workflow: Credentials (Password & Key, Priority Mechanism)': *id009
+    'Regression Workflow: DxD and SxS Run Methods': *id010
+    'Regression Workflow: File Transfer Mechanism': *id011
+    'Regression Workflow: Fork based on value with Skip Discard Mechanism': *id012
+    'Regression Workflow: Global Variables and post-run Pool Update Mechanism': *id013
+    'Regression Workflow: Iteration Targets Mechanism': *id014
     'Regression Workflow: Link Neighbors Mechanism (public)': *id001
-    'Regression Workflow: Napalm Getters and Postprocessing': *id010
-    'Regression Workflow: Netmiko Prompts': *id011
+    'Regression Workflow: Napalm Getters and Postprocessing': *id015
+    'Regression Workflow: Netmiko Prompts': *id016
     'Regression Workflow: Operational Data Backup (admin)': *id003
-    'Regression Workflow: Preprocessing and Postprocessing': *id012
-    'Regression Workflow: Separate Failure - Success Paths': *id013
-    'Regression Workflow: Shared Service in Multiple Subworkflows': *id014
-    'Regression Workflow: Superworkflow': *id015
-    'Regression Workflow: Using get_var, set_var, get_result functions': *id016
+    'Regression Workflow: Preprocessing and Postprocessing': *id017
+    'Regression Workflow: Scalability Test (large workflow)': *id018
+    'Regression Workflow: Scrapli': *id019
+    'Regression Workflow: Separate Failure - Success Paths': *id020
+    'Regression Workflow: Shared Service in Multiple Subworkflows': *id021
+    'Regression Workflow: Skip Query with device in Run Once Mode': *id022
+    'Regression Workflow: Skip Services in SxS mode': *id005
+    'Regression Workflow: Skip, Discard and Disable Result Creation Mechanism': *id023
+    'Regression Workflow: Superworkflow': *id024
+    'Regression Workflow: Topology Import (netbox, librenms, opennms)': *id025
+    'Regression Workflow: Unix Command & Chell, Ping Service, Jump on Connect mechanism': *id026
+    'Regression Workflow: Using get_var, set_var, get_result functions': *id027
     'Regression Workflow: VRF Creation and Deletion with Netmiko': *id002
-    'Regression Workflow: Workflow and Subworkflow Iteration': *id017
-    'Regression Workflow: Workflow of Workflows': *id018
-    'Regression workflow P: large workflow (scalability)': *id019
+    'Regression Workflow: Workflow and Subworkflow Iteration': *id028
+    'Regression Workflow: Workflow of Workflows': *id029
+    'Regression workflow P: large workflow (scalability)': *id018
     Subworkflow 1: !!python/tuple [0, 0]
     Subworkflow 2: !!python/tuple [0, 0]
     Workflow  in device by device mode: !!python/tuple [0, 0]
-    'Workflow Regression R: skip services in service by service mode': *id020
+    'Workflow Regression R: skip services in service by service mode': *id005
     'Workflow Regression S: conditional skip query with skip value set to False': [
       -183, -152]
     Workflow in service by service mode (workflow targets): !!python/tuple [0, 0]
@@ -123,79 +140,82 @@
     Workflow with device and value iteration: [0, 0]
     Workflow with iteration target subworkflows: [-118, 4]
     Workflow with iteration targets: [0, 0]
-    '[Regression Workflow F: Workflow of Workflows] Regression Workflow 5: VRF creation and deletion with Napalm': &id023 [
+    '[Regression Workflow F: Workflow of Workflows] Regression Workflow 5: VRF creation and deletion with Napalm': &id032 [
       -684, -34]
-    '[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow of Workflow': &id022 [
+    '[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow of Workflow': &id031 [
       -418, -147]
-    '[Regression Workflow F: Workflow of Workflows] Regression Workflow F S2: Access Variables from Parent Workflow': &id021 [
+    '[Regression Workflow F: Workflow of Workflows] Regression Workflow F S2: Access Variables from Parent Workflow': &id030 [
       -253, -110]
-    '[Regression Workflow F: Workflow of Workflows] Regression Workflow: Access Variables from Parent Workflow': *id021
-    '[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow of Workflows': *id022
-    '[Regression Workflow F: Workflow of Workflows] Regression Workflow: VRF Creation and Deletion with Napalm': *id023
-    '[Regression Workflow G: run methods (BFS)] Workflow  in device by device mode': &id025 [
+    '[Regression Workflow F: Workflow of Workflows] Regression Workflow: Access Variables from Parent Workflow': *id030
+    '[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow of Workflows': *id031
+    '[Regression Workflow F: Workflow of Workflows] Regression Workflow: VRF Creation and Deletion with Napalm': *id032
+    '[Regression Workflow G: run methods (BFS)] Workflow  in device by device mode': &id034 [
       0, 0]
-    '[Regression Workflow G: run methods (BFS)] Workflow in service by service mode (workflow targets)': &id026 [
+    '[Regression Workflow G: run methods (BFS)] Workflow in service by service mode (workflow targets)': &id035 [
       -2, 14]
-    '[Regression Workflow G: run methods (BFS)] Workflow in service targets mode': &id027 [
+    '[Regression Workflow G: run methods (BFS)] Workflow in service targets mode': &id036 [
       0, 0]
-    '[Regression Workflow H: shared service in multiple subworkflows] Subworkflow 1': &id028 [
+    '[Regression Workflow H: shared service in multiple subworkflows] Subworkflow 1': &id037 [
       -118, 0]
-    '[Regression Workflow H: shared service in multiple subworkflows] Subworkflow 2': &id029 [
+    '[Regression Workflow H: shared service in multiple subworkflows] Subworkflow 2': &id038 [
       0, 0]
-    '[Regression Workflow J: Workflow and Subworkflow Iteration] Subworkflow Iteration': &id030 [
+    '[Regression Workflow J: Workflow and Subworkflow Iteration] Subworkflow Iteration': &id041 [
       0, 0]
-    '[Regression Workflow V: skip query with device in run once mode] Subworkflow in SxS mode - workflow targets': [
+    '[Regression Workflow V: skip query with device in run once mode] Subworkflow in SxS mode - workflow targets': &id039 [
       -77, -17]
-    '[Regression Workflow W: disable result creation mode] Workflow in DxD mode': &id024 [
+    '[Regression Workflow W: disable result creation mode] Workflow in DxD mode': &id033 [
       0, 0]
-    '[Regression Workflow W: skip, discard and disable result creation mechanism] Workflow in DxD mode': *id024
-    '[Regression Workflow W: skip, discard and disable result creation mechanism] Workflow in SxS mode': [
+    '[Regression Workflow W: skip, discard and disable result creation mechanism] Workflow in DxD mode': *id033
+    '[Regression Workflow W: skip, discard and disable result creation mechanism] Workflow in SxS mode': &id040 [
       0, 0]
-    '[Regression Workflow: DxD and SxS Run Methods] Workflow  in device by device mode': *id025
-    '[Regression Workflow: DxD and SxS Run Methods] Workflow in service by service mode (workflow targets)': *id026
-    '[Regression Workflow: DxD and SxS Run Methods] Workflow in service targets mode': *id027
-    '[Regression Workflow: Shared Service in Multiple Subworkflows] Subworkflow 1': *id028
-    '[Regression Workflow: Shared Service in Multiple Subworkflows] Subworkflow 2': *id029
-    '[Regression Workflow: Workflow and Subworkflow Iteration] Subworkflow Iteration': *id030
-    '[Regression Workflow: Workflow of Workflows] Regression Workflow: Access Variables from Parent Workflow': *id021
-    '[Regression Workflow: Workflow of Workflows] Regression Workflow: Subworkflow of Workflows': *id022
-    '[Regression Workflow: Workflow of Workflows] Regression Workflow: VRF Creation and Deletion with Napalm': *id023
+    '[Regression Workflow: DxD and SxS Run Methods] Workflow  in device by device mode': *id034
+    '[Regression Workflow: DxD and SxS Run Methods] Workflow in service by service mode (workflow targets)': *id035
+    '[Regression Workflow: DxD and SxS Run Methods] Workflow in service targets mode': *id036
+    '[Regression Workflow: Shared Service in Multiple Subworkflows] Subworkflow 1': *id037
+    '[Regression Workflow: Shared Service in Multiple Subworkflows] Subworkflow 2': *id038
+    '[Regression Workflow: Skip Query with device in Run Once Mode] Subworkflow in SxS mode - workflow targets': *id039
+    '[Regression Workflow: Skip, Discard and Disable Result Creation Mechanism] Workflow in DxD mode': *id033
+    '[Regression Workflow: Skip, Discard and Disable Result Creation Mechanism] Workflow in SxS mode': *id040
+    '[Regression Workflow: Workflow and Subworkflow Iteration] Subworkflow Iteration': *id041
+    '[Regression Workflow: Workflow of Workflows] Regression Workflow: Access Variables from Parent Workflow': *id030
+    '[Regression Workflow: Workflow of Workflows] Regression Workflow: Subworkflow of Workflows': *id031
+    '[Regression Workflow: Workflow of Workflows] Regression Workflow: VRF Creation and Deletion with Napalm': *id032
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow 7: Payload Extraction & Validation'
-    : &id031 [-115, -305]
+    : &id042 [-115, -305]
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow 8: Payload Extraction with Operations'
-    : &id032 [-661, -226]
+    : &id043 [-661, -226]
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow B: Napalm getters validation'
-    : &id033 [-604, 9]
+    : &id044 [-604, 9]
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow 7: Payload Extraction & Validation'
-    : *id031
+    : *id042
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow 8: Payload Extraction with Operations'
-    : *id032
+    : *id043
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow B: Napalm getters validation'
-    : *id033
+    : *id044
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow: Napalm Getters Validation'
-    : *id033
+    : *id044
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow: Payload Extraction & Validation'
-    : *id031
+    : *id042
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow: Payload Extraction with Operations'
-    : *id032
+    : *id043
     ? '[[Regression Workflow: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow: Napalm Getters Validation'
-    : *id033
+    : *id044
     ? '[[Regression Workflow: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow: Payload Extraction & Validation'
-    : *id031
+    : *id042
     ? '[[Regression Workflow: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow: Payload Extraction with Operations'
-    : *id032
+    : *id043
     iteration_devices_workflow: ['-164', '15']
   postprocessing: ''
   postprocessing_mode: always
@@ -260,87 +280,104 @@
   positions:
     Iteration Services Test Workflow: ['-9', '294']
     'Regression Workflow 1: Netmiko with validation and retries': [115, 3]
-    'Regression Workflow 1: VRF creation and deletion with Netmiko': &id035 [-383,
+    'Regression Workflow 1: VRF creation and deletion with Netmiko': &id046 [-383,
       167]
-    'Regression Workflow 1: link neighbors mechanism': &id034 [713, 86]
-    'Regression Workflow 2: Separate Failure - Success paths': &id046 [737, 276]
-    'Regression Workflow 3: Napalm getters (postprocessing)': &id043 [703, 150]
-    'Regression Workflow 4: Link Neighbors Mechanism (public)': *id034
-    'Regression Workflow 4: VRF creation and deletion with Netmiko': *id035
-    'Regression Workflow 4: link neighbors mechanism': *id034
-    'Regression Workflow 4: link neighbors mechanism (public)': *id034
+    'Regression Workflow 1: link neighbors mechanism': &id045 [713, 86]
+    'Regression Workflow 2: Separate Failure - Success paths': &id064 [737, 276]
+    'Regression Workflow 3: Napalm getters (postprocessing)': &id059 [703, 150]
+    'Regression Workflow 4: Link Neighbors Mechanism (public)': *id045
+    'Regression Workflow 4: VRF creation and deletion with Netmiko': *id046
+    'Regression Workflow 4: link neighbors mechanism': *id045
+    'Regression Workflow 4: link neighbors mechanism (public)': *id045
     'Regression Workflow 5: VRF creation and deletion with Napalm': !!python/tuple [
       0, 0]
-    'Regression Workflow 6: Ansible with Validation': &id040 [567, -24]
+    'Regression Workflow 6: Ansible with Validation': &id052 [567, -24]
     'Regression Workflow 7: Payload Extraction & Validation': !!python/tuple [0, 0]
     'Regression Workflow 8: Payload Extraction with Operations': !!python/tuple [
       0, 0]
-    'Regression Workflow 9: Operational Data Backup': &id036 [290, 314]
-    'Regression Workflow 9: Operational Data Backup (admin)': *id036
-    'Regression Workflow A: get_var, set_var, get_result': &id049 [-528, 25]
+    'Regression Workflow 9: Operational Data Backup': &id047 [290, 314]
+    'Regression Workflow 9: Operational Data Backup (admin)': *id047
+    'Regression Workflow A: get_var, set_var, get_result': &id071 [-528, 25]
     'Regression Workflow B: Napalm getters validation': !!python/tuple [0, 0]
-    'Regression Workflow C: Advanced multiprocessing': &id037 [505, -10]
-    'Regression Workflow C: Advanced multiprocessing (admin)': *id037
-    'Regression Workflow D: Prompts': &id044 [608, 90]
-    'Regression Workflow E: Iteration Targets': &id042 [-334, 29]
+    'Regression Workflow C: Advanced multiprocessing': &id048 [505, -10]
+    'Regression Workflow C: Advanced multiprocessing (admin)': *id048
+    'Regression Workflow D: Prompts': &id060 [608, 90]
+    'Regression Workflow E: Iteration Targets': &id058 [-334, 29]
     'Regression Workflow F S1: Subworkflow of Workflow': !!python/tuple [0, 0]
     'Regression Workflow F S2: Access Variables from Parent Workflow': !!python/tuple [
       0, 0]
-    'Regression Workflow F: Workflow of Workflows': &id051 [-934, 289]
-    'Regression Workflow G: run methods (BFS)': &id041 [638, 130]
-    'Regression Workflow H: shared service in multiple subworkflows': &id047 [688,
+    'Regression Workflow F: Workflow of Workflows': &id073 [-934, 289]
+    'Regression Workflow G: run methods (BFS)': &id054 [638, 130]
+    'Regression Workflow H: shared service in multiple subworkflows': &id065 [688,
       -88]
-    'Regression Workflow I: Iteration Targets Advanced': &id039 [350, -6]
-    'Regression Workflow J: Workflow and Subworkflow Iteration': &id050 [500, 0]
-    'Regression Workflow K: preprocessing and postprocessing': &id045 [619, 353]
-    'Regression Workflow L: superworkflow': &id048 [730, 218]
-    'Regression Workflow M: Unix command & shell, ping, - jump on connect - mechanism': [
+    'Regression Workflow I: Iteration Targets Advanced': &id051 [350, -6]
+    'Regression Workflow J: Workflow and Subworkflow Iteration': &id072 [500, 0]
+    'Regression Workflow K: preprocessing and postprocessing': &id061 [619, 353]
+    'Regression Workflow L: superworkflow': &id068 [730, 218]
+    'Regression Workflow M: Unix command & shell, ping, - jump on connect - mechanism': &id070 [
       560, 9]
     'Regression Workflow M: Unix command & shell, ping, jump server': [560, 9]
-    'Regression Workflow N: Topology Import (netbox, librenms, opennms)': [636, 24]
-    'Regression Workflow O: Scrapli': [628, 113]
-    'Regression Workflow P: large workflow (scalability)': &id052 [483, -268]
-    'Regression Workflow Q: File transfer': [576, 135]
-    'Regression Workflow R: skip services in service by service mode': &id053 [500,
-      0]
-    'Regression Workflow S: conditional skip query in failed and discard mode': &id038 [
+    'Regression Workflow N: Topology Import (netbox, librenms, opennms)': &id069 [
+      636, 24]
+    'Regression Workflow O: Scrapli': &id063 [628, 113]
+    'Regression Workflow P: large workflow (scalability)': &id062 [483, -268]
+    'Regression Workflow Q: File transfer': &id055 [576, 135]
+    'Regression Workflow R: Skip Services in SxS mode': &id049 [500, 0]
+    'Regression Workflow R: skip services in service by service mode': *id049
+    'Regression Workflow S: conditional skip query in failed and discard mode': &id050 [
       640, -155]
-    'Regression Workflow S: conditional skip query with skip value set to False': *id038
+    'Regression Workflow S: conditional skip query with skip value set to False': *id050
     'Regression Workflow T: global variables': [569, -66]
-    'Regression Workflow T: global variables and post-run pool update': [569, -66]
-    'Regression Workflow T: link neighbors mechanism': *id034
-    'Regression Workflow U: fork based on value with skip discard mode': [645, 270]
-    'Regression Workflow V: skip query with device in run once mode': [670, 159]
+    'Regression Workflow T: global variables and post-run pool update': &id057 [569,
+      -66]
+    'Regression Workflow T: link neighbors mechanism': *id045
+    'Regression Workflow U: fork based on value with skip discard mode': &id056 [
+      645, 270]
+    'Regression Workflow V: skip query with device in run once mode': &id066 [670,
+      159]
     'Regression Workflow V: skip query with device in subworkflow SxS': [572, -3]
     'Regression Workflow W: disable result creation mode': [529, -52]
-    'Regression Workflow W: skip, discard and disable result creation mechanism': [
+    'Regression Workflow W: skip, discard and disable result creation mechanism': &id067 [
       547, -96]
-    'Regression Workflow X: Credentials (password & key, priority)': [590, 124]
-    'Regression Workflow: Advanced Iteration Targets': *id039
-    'Regression Workflow: Advanced Multiprocessing (admin)': *id037
-    'Regression Workflow: Ansible with Validation': *id040
-    'Regression Workflow: DxD and SxS Run Methods': *id041
-    'Regression Workflow: Iteration Targets Mechanism': *id042
-    'Regression Workflow: Link Neighbors Mechanism (public)': *id034
-    'Regression Workflow: Napalm Getters and Postprocessing': *id043
-    'Regression Workflow: Netmiko Prompts': *id044
-    'Regression Workflow: Operational Data Backup (admin)': *id036
-    'Regression Workflow: Preprocessing and Postprocessing': *id045
-    'Regression Workflow: Separate Failure - Success Paths': *id046
-    'Regression Workflow: Shared Service in Multiple Subworkflows': *id047
-    'Regression Workflow: Superworkflow': *id048
-    'Regression Workflow: Using get_var, set_var, get_result functions': *id049
-    'Regression Workflow: VRF Creation and Deletion with Netmiko': *id035
-    'Regression Workflow: Workflow and Subworkflow Iteration': *id050
-    'Regression Workflow: Workflow of Workflows': *id051
-    'Regression workflow P: large workflow (scalability)': *id052
+    'Regression Workflow X: Credentials (password & key, priority)': &id053 [590,
+      124]
+    'Regression Workflow: Advanced Iteration Targets': *id051
+    'Regression Workflow: Advanced Multiprocessing (admin)': *id048
+    'Regression Workflow: Ansible with Validation': *id052
+    'Regression Workflow: Conditional Skip Query in Failed and Discard Modes': *id050
+    'Regression Workflow: Credentials (Password & Key, Priority Mechanism)': *id053
+    'Regression Workflow: DxD and SxS Run Methods': *id054
+    'Regression Workflow: File Transfer Mechanism': *id055
+    'Regression Workflow: Fork based on value with Skip Discard Mechanism': *id056
+    'Regression Workflow: Global Variables and post-run Pool Update Mechanism': *id057
+    'Regression Workflow: Iteration Targets Mechanism': *id058
+    'Regression Workflow: Link Neighbors Mechanism (public)': *id045
+    'Regression Workflow: Napalm Getters and Postprocessing': *id059
+    'Regression Workflow: Netmiko Prompts': *id060
+    'Regression Workflow: Operational Data Backup (admin)': *id047
+    'Regression Workflow: Preprocessing and Postprocessing': *id061
+    'Regression Workflow: Scalability Test (large workflow)': *id062
+    'Regression Workflow: Scrapli': *id063
+    'Regression Workflow: Separate Failure - Success Paths': *id064
+    'Regression Workflow: Shared Service in Multiple Subworkflows': *id065
+    'Regression Workflow: Skip Query with device in Run Once Mode': *id066
+    'Regression Workflow: Skip Services in SxS mode': *id049
+    'Regression Workflow: Skip, Discard and Disable Result Creation Mechanism': *id067
+    'Regression Workflow: Superworkflow': *id068
+    'Regression Workflow: Topology Import (netbox, librenms, opennms)': *id069
+    'Regression Workflow: Unix Command & Chell, Ping Service, Jump on Connect mechanism': *id070
+    'Regression Workflow: Using get_var, set_var, get_result functions': *id071
+    'Regression Workflow: VRF Creation and Deletion with Netmiko': *id046
+    'Regression Workflow: Workflow and Subworkflow Iteration': *id072
+    'Regression Workflow: Workflow of Workflows': *id073
+    'Regression workflow P: large workflow (scalability)': *id062
     Subworkflow 1: !!python/tuple [0, 0]
     Subworkflow 2: !!python/tuple [0, 0]
     T: !!python/tuple [500, 0]
     TEST: !!python/tuple [500, 0]
     TEST2: !!python/tuple [500, 0]
     Workflow  in device by device mode: !!python/tuple [0, 0]
-    'Workflow Regression R: skip services in service by service mode': *id053
+    'Workflow Regression R: skip services in service by service mode': *id049
     'Workflow Regression S: conditional skip query with skip value set to False': [
       640, -155]
     Workflow in service by service mode (workflow targets): !!python/tuple [0, 0]
@@ -348,85 +385,89 @@
     Workflow with device and value iteration: [500, 0]
     Workflow with iteration target subworkflows: [617, 0]
     Workflow with iteration targets: [500, 0]
-    '[Regression Workflow F: Workflow of Workflows] Regression Workflow 5: VRF creation and deletion with Napalm': &id056 [
+    '[Regression Workflow F: Workflow of Workflows] Regression Workflow 5: VRF creation and deletion with Napalm': &id076 [
       -696, 47]
-    '[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow of Workflow': &id055 [
+    '[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow of Workflow': &id075 [
       -447, 191]
-    '[Regression Workflow F: Workflow of Workflows] Regression Workflow F S2: Access Variables from Parent Workflow': &id054 [
+    '[Regression Workflow F: Workflow of Workflows] Regression Workflow F S2: Access Variables from Parent Workflow': &id074 [
       -274, 112]
-    '[Regression Workflow F: Workflow of Workflows] Regression Workflow: Access Variables from Parent Workflow': *id054
-    '[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow of Workflows': *id055
-    '[Regression Workflow F: Workflow of Workflows] Regression Workflow: VRF Creation and Deletion with Napalm': *id056
-    '[Regression Workflow G: run methods (BFS)] Workflow  in device by device mode': &id058 [
+    '[Regression Workflow F: Workflow of Workflows] Regression Workflow: Access Variables from Parent Workflow': *id074
+    '[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow of Workflows': *id075
+    '[Regression Workflow F: Workflow of Workflows] Regression Workflow: VRF Creation and Deletion with Napalm': *id076
+    '[Regression Workflow G: run methods (BFS)] Workflow  in device by device mode': &id078 [
       500, 0]
-    '[Regression Workflow G: run methods (BFS)] Workflow in service by service mode (workflow targets)': &id059 [
+    '[Regression Workflow G: run methods (BFS)] Workflow in service by service mode (workflow targets)': &id079 [
       500, 0]
-    '[Regression Workflow G: run methods (BFS)] Workflow in service targets mode': &id060 [
+    '[Regression Workflow G: run methods (BFS)] Workflow in service targets mode': &id080 [
       500, 0]
-    '[Regression Workflow H: shared service in multiple subworkflows] Subworkflow 1': &id061 [
+    '[Regression Workflow H: shared service in multiple subworkflows] Subworkflow 1': &id081 [
       610, 4]
-    '[Regression Workflow H: shared service in multiple subworkflows] Subworkflow 2': &id062 [
+    '[Regression Workflow H: shared service in multiple subworkflows] Subworkflow 2': &id082 [
       500, 0]
-    '[Regression Workflow J: Workflow and Subworkflow Iteration] Subworkflow Iteration': &id063 [
+    '[Regression Workflow J: Workflow and Subworkflow Iteration] Subworkflow Iteration': &id086 [
       500, 0]
     '[Regression Workflow V: skip query with device in run once mode] Subworkflow in SxS mode': !!python/tuple [
       500, 0]
-    '[Regression Workflow V: skip query with device in run once mode] Subworkflow in SxS mode - service targets': !!python/tuple [
+    '[Regression Workflow V: skip query with device in run once mode] Subworkflow in SxS mode - service targets': &id083 !!python/tuple [
       500, 0]
-    '[Regression Workflow V: skip query with device in run once mode] Subworkflow in SxS mode - workflow targets': [
+    '[Regression Workflow V: skip query with device in run once mode] Subworkflow in SxS mode - workflow targets': &id084 [
       521, -13]
-    '[Regression Workflow W: disable result creation mode] Workflow in DxD mode': &id057 [
+    '[Regression Workflow W: disable result creation mode] Workflow in DxD mode': &id077 [
       500, 0]
     '[Regression Workflow W: disable result creation mode] Workflow in SxS mode': !!python/tuple [
       500, 0]
-    '[Regression Workflow W: skip, discard and disable result creation mechanism] Workflow in DxD mode': *id057
-    '[Regression Workflow W: skip, discard and disable result creation mechanism] Workflow in SxS mode': [
+    '[Regression Workflow W: skip, discard and disable result creation mechanism] Workflow in DxD mode': *id077
+    '[Regression Workflow W: skip, discard and disable result creation mechanism] Workflow in SxS mode': &id085 [
       500, 0]
-    '[Regression Workflow: DxD and SxS Run Methods] Workflow  in device by device mode': *id058
-    '[Regression Workflow: DxD and SxS Run Methods] Workflow in service by service mode (workflow targets)': *id059
-    '[Regression Workflow: DxD and SxS Run Methods] Workflow in service targets mode': *id060
-    '[Regression Workflow: Shared Service in Multiple Subworkflows] Subworkflow 1': *id061
-    '[Regression Workflow: Shared Service in Multiple Subworkflows] Subworkflow 2': *id062
-    '[Regression Workflow: Workflow and Subworkflow Iteration] Subworkflow Iteration': *id063
-    '[Regression Workflow: Workflow of Workflows] Regression Workflow: Access Variables from Parent Workflow': *id054
-    '[Regression Workflow: Workflow of Workflows] Regression Workflow: Subworkflow of Workflows': *id055
-    '[Regression Workflow: Workflow of Workflows] Regression Workflow: VRF Creation and Deletion with Napalm': *id056
+    '[Regression Workflow: DxD and SxS Run Methods] Workflow  in device by device mode': *id078
+    '[Regression Workflow: DxD and SxS Run Methods] Workflow in service by service mode (workflow targets)': *id079
+    '[Regression Workflow: DxD and SxS Run Methods] Workflow in service targets mode': *id080
+    '[Regression Workflow: Shared Service in Multiple Subworkflows] Subworkflow 1': *id081
+    '[Regression Workflow: Shared Service in Multiple Subworkflows] Subworkflow 2': *id082
+    '[Regression Workflow: Skip Query with device in Run Once Mode] Subworkflow in SxS mode - service targets': *id083
+    '[Regression Workflow: Skip Query with device in Run Once Mode] Subworkflow in SxS mode - workflow targets': *id084
+    '[Regression Workflow: Skip, Discard and Disable Result Creation Mechanism] Workflow in DxD mode': *id077
+    '[Regression Workflow: Skip, Discard and Disable Result Creation Mechanism] Workflow in SxS mode': *id085
+    '[Regression Workflow: Workflow and Subworkflow Iteration] Subworkflow Iteration': *id086
+    '[Regression Workflow: Workflow of Workflows] Regression Workflow: Access Variables from Parent Workflow': *id074
+    '[Regression Workflow: Workflow of Workflows] Regression Workflow: Subworkflow of Workflows': *id075
+    '[Regression Workflow: Workflow of Workflows] Regression Workflow: VRF Creation and Deletion with Napalm': *id076
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow 7: Payload Extraction & Validation'
-    : &id064 [279, 262]
+    : &id087 [279, 262]
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow 8: Payload Extraction with Operations'
-    : &id065 [-688, -153]
+    : &id088 [-688, -153]
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow B: Napalm getters validation'
-    : &id066 [-600, 63]
+    : &id089 [-600, 63]
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow 7: Payload Extraction & Validation'
-    : *id064
+    : *id087
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow 8: Payload Extraction with Operations'
-    : *id065
+    : *id088
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow B: Napalm getters validation'
-    : *id066
+    : *id089
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow: Napalm Getters Validation'
-    : *id066
+    : *id089
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow: Payload Extraction & Validation'
-    : *id064
+    : *id087
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow: Payload Extraction with Operations'
-    : *id065
+    : *id088
     ? '[[Regression Workflow: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow: Napalm Getters Validation'
-    : *id066
+    : *id089
     ? '[[Regression Workflow: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow: Payload Extraction & Validation'
-    : *id064
+    : *id087
     ? '[[Regression Workflow: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow: Payload Extraction with Operations'
-    : *id065
+    : *id088
     iteration_devices_workflow: ['651', '20']
   postprocessing: ''
   postprocessing_mode: always
@@ -562,11 +603,11 @@
   operating_system: ''
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow 2: Separate Failure - Success paths': &id068 [741, 106]
-    'Regression Workflow C: Advanced multiprocessing': &id067 [-266, -204]
-    'Regression Workflow C: Advanced multiprocessing (admin)': *id067
-    'Regression Workflow: Advanced Multiprocessing (admin)': *id067
-    'Regression Workflow: Separate Failure - Success Paths': *id068
+    'Regression Workflow 2: Separate Failure - Success paths': &id091 [741, 106]
+    'Regression Workflow C: Advanced multiprocessing': &id090 [-266, -204]
+    'Regression Workflow C: Advanced multiprocessing (admin)': *id090
+    'Regression Workflow: Advanced Multiprocessing (admin)': *id090
+    'Regression Workflow: Separate Failure - Success Paths': *id091
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -641,9 +682,9 @@
   optional_args: {}
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow C: Advanced multiprocessing': &id069 [299, -170]
-    'Regression Workflow C: Advanced multiprocessing (admin)': *id069
-    'Regression Workflow: Advanced Multiprocessing (admin)': *id069
+    'Regression Workflow C: Advanced multiprocessing': &id092 [299, -170]
+    'Regression Workflow C: Advanced multiprocessing (admin)': *id092
+    'Regression Workflow: Advanced Multiprocessing (admin)': *id092
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -717,9 +758,9 @@
   optional_args: {}
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow 9: Operational Data Backup': &id070 [-259, 351]
-    'Regression Workflow 9: Operational Data Backup (admin)': *id070
-    'Regression Workflow: Operational Data Backup (admin)': *id070
+    'Regression Workflow 9: Operational Data Backup': &id093 [-259, 351]
+    'Regression Workflow 9: Operational Data Backup (admin)': *id093
+    'Regression Workflow: Operational Data Backup (admin)': *id093
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -804,10 +845,10 @@
   operating_system: eos
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow 1: VRF creation and deletion with Netmiko': &id071 [-38,
+    'Regression Workflow 1: VRF creation and deletion with Netmiko': &id094 [-38,
       -86]
-    'Regression Workflow 4: VRF creation and deletion with Netmiko': *id071
-    'Regression Workflow: VRF Creation and Deletion with Netmiko': *id071
+    'Regression Workflow 4: VRF creation and deletion with Netmiko': *id094
+    'Regression Workflow: VRF Creation and Deletion with Netmiko': *id094
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -897,13 +938,13 @@
   pools: ['All instances (devices, links, services and users)']
   positions:
     Iteration Services Test Workflow: ['147', '-14']
-    'Regression Workflow 1: VRF creation and deletion with Netmiko': &id072 [445,
+    'Regression Workflow 1: VRF creation and deletion with Netmiko': &id095 [445,
       -37]
     'Regression Workflow 2: Separate Failure - Success paths': ['84', '-3']
-    'Regression Workflow 4: VRF creation and deletion with Netmiko': *id072
+    'Regression Workflow 4: VRF creation and deletion with Netmiko': *id095
     'Regression Workflow 5: VRF creation and deletion with Napalm': ['0', '-50']
     'Regression Workflow A: get_var, set_var, get_result': ['355', '-25']
-    'Regression Workflow: VRF Creation and Deletion with Netmiko': *id072
+    'Regression Workflow: VRF Creation and Deletion with Netmiko': *id095
     iteration_devices_workflow: ['414', '-154']
   postprocessing: ''
   postprocessing_mode: always
@@ -987,11 +1028,11 @@
   operating_system: eos
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow 1: VRF creation and deletion with Netmiko': &id073 [476,
+    'Regression Workflow 1: VRF creation and deletion with Netmiko': &id096 [476,
       119]
-    'Regression Workflow 4: VRF creation and deletion with Netmiko': *id073
+    'Regression Workflow 4: VRF creation and deletion with Netmiko': *id096
     'Regression Workflow 5: VRF creation and deletion with Napalm': ['0', '50']
-    'Regression Workflow: VRF Creation and Deletion with Netmiko': *id073
+    'Regression Workflow: VRF Creation and Deletion with Netmiko': *id096
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -1080,13 +1121,13 @@
   operating_system: eos
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow 1: VRF creation and deletion with Netmiko': &id074 [-10,
+    'Regression Workflow 1: VRF creation and deletion with Netmiko': &id097 [-10,
       157]
-    'Regression Workflow 2: Separate Failure - Success paths': &id075 [-194, 225]
-    'Regression Workflow 4: VRF creation and deletion with Netmiko': *id074
+    'Regression Workflow 2: Separate Failure - Success paths': &id098 [-194, 225]
+    'Regression Workflow 4: VRF creation and deletion with Netmiko': *id097
     'Regression Workflow 5: VRF creation and deletion with Napalm': ['0', '150']
-    'Regression Workflow: Separate Failure - Success Paths': *id075
-    'Regression Workflow: VRF Creation and Deletion with Netmiko': *id074
+    'Regression Workflow: Separate Failure - Success Paths': *id098
+    'Regression Workflow: VRF Creation and Deletion with Netmiko': *id097
     iteration_devices_workflow: ['337', '-145']
   postprocessing: ''
   postprocessing_mode: always
@@ -1165,10 +1206,10 @@
   optional_args: {}
   pools: ['All instances (devices, links, services and users)']
   positions:
-    '[Regression Workflow F: Workflow of Workflows] Regression Workflow 5: VRF creation and deletion with Napalm': &id076 [
+    '[Regression Workflow F: Workflow of Workflows] Regression Workflow 5: VRF creation and deletion with Napalm': &id099 [
       -374, -164]
-    '[Regression Workflow F: Workflow of Workflows] Regression Workflow: VRF Creation and Deletion with Napalm': *id076
-    '[Regression Workflow: Workflow of Workflows] Regression Workflow: VRF Creation and Deletion with Napalm': *id076
+    '[Regression Workflow F: Workflow of Workflows] Regression Workflow: VRF Creation and Deletion with Napalm': *id099
+    '[Regression Workflow: Workflow of Workflows] Regression Workflow: VRF Creation and Deletion with Napalm': *id099
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -1241,20 +1282,21 @@
     c: ['1', '2', '3']
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow 2: Separate Failure - Success paths': &id079 [374, 278]
+    'Regression Workflow 2: Separate Failure - Success paths': &id103 [374, 278]
     'Regression Workflow 3: Napalm getters (postprocessing)': ['-50', '0']
-    'Regression Workflow A: get_var, set_var, get_result': &id081 [-10, 157]
-    'Regression Workflow C: Advanced multiprocessing': &id077 [386, 124]
-    'Regression Workflow C: Advanced multiprocessing (admin)': *id077
-    'Regression Workflow D: Prompts': &id078 [405, -103]
-    'Regression Workflow L: superworkflow': &id080 [162, -126]
-    'Regression Workflow P: large workflow (scalability)': &id082 [-415, -115]
-    'Regression Workflow: Advanced Multiprocessing (admin)': *id077
-    'Regression Workflow: Netmiko Prompts': *id078
-    'Regression Workflow: Separate Failure - Success Paths': *id079
-    'Regression Workflow: Superworkflow': *id080
-    'Regression Workflow: Using get_var, set_var, get_result functions': *id081
-    'Regression workflow P: large workflow (scalability)': *id082
+    'Regression Workflow A: get_var, set_var, get_result': &id105 [-10, 157]
+    'Regression Workflow C: Advanced multiprocessing': &id100 [386, 124]
+    'Regression Workflow C: Advanced multiprocessing (admin)': *id100
+    'Regression Workflow D: Prompts': &id101 [405, -103]
+    'Regression Workflow L: superworkflow': &id104 [162, -126]
+    'Regression Workflow P: large workflow (scalability)': &id102 [-415, -115]
+    'Regression Workflow: Advanced Multiprocessing (admin)': *id100
+    'Regression Workflow: Netmiko Prompts': *id101
+    'Regression Workflow: Scalability Test (large workflow)': *id102
+    'Regression Workflow: Separate Failure - Success Paths': *id103
+    'Regression Workflow: Superworkflow': *id104
+    'Regression Workflow: Using get_var, set_var, get_result functions': *id105
+    'Regression workflow P: large workflow (scalability)': *id102
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -1327,12 +1369,12 @@
   optional_args: {}
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow 2: Separate Failure - Success paths': &id084 [-102, -130]
-    'Regression Workflow 3: Napalm getters (postprocessing)': &id083 [-154, -70]
+    'Regression Workflow 2: Separate Failure - Success paths': &id107 [-102, -130]
+    'Regression Workflow 3: Napalm getters (postprocessing)': &id106 [-154, -70]
     'Regression Workflow A: get_var, set_var, get_result': ['39', '-32']
     'Regression Workflow F: Workflow of Workflows': [3, -51]
-    'Regression Workflow: Napalm Getters and Postprocessing': *id083
-    'Regression Workflow: Separate Failure - Success Paths': *id084
+    'Regression Workflow: Napalm Getters and Postprocessing': *id106
+    'Regression Workflow: Separate Failure - Success Paths': *id107
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -1405,12 +1447,12 @@
   optional_args: {}
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow 2: Separate Failure - Success paths': &id086 [611, -72]
-    'Regression Workflow 3: Napalm getters (postprocessing)': &id085 [-166, 303]
-    'Regression Workflow F: Workflow of Workflows': &id087 [-336, 217]
-    'Regression Workflow: Napalm Getters and Postprocessing': *id085
-    'Regression Workflow: Separate Failure - Success Paths': *id086
-    'Regression Workflow: Workflow of Workflows': *id087
+    'Regression Workflow 2: Separate Failure - Success paths': &id109 [611, -72]
+    'Regression Workflow 3: Napalm getters (postprocessing)': &id108 [-166, 303]
+    'Regression Workflow F: Workflow of Workflows': &id110 [-336, 217]
+    'Regression Workflow: Napalm Getters and Postprocessing': *id108
+    'Regression Workflow: Separate Failure - Success Paths': *id109
+    'Regression Workflow: Workflow of Workflows': *id110
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -1483,9 +1525,9 @@
   optional_args: {}
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow 3: Napalm getters (postprocessing)': &id088 [303, 43]
+    'Regression Workflow 3: Napalm getters (postprocessing)': &id111 [303, 43]
     'Regression Workflow F: Workflow of Workflows': [3, -51]
-    'Regression Workflow: Napalm Getters and Postprocessing': *id088
+    'Regression Workflow: Napalm Getters and Postprocessing': *id111
   postprocessing: "# Will change the IPv6 of the Management Interface to ::1\r\nip_address\
     \ = get_var(\"value that does not exist\", default=\"::1\")\r\nresults[\"result\"\
     ][\"get_interfaces_ip\"][\"Management1\"][\"ipv6\"] = ip_address"
@@ -1560,9 +1602,9 @@
   optional_args: {}
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow 3: Napalm getters (postprocessing)': &id089 [652, -22]
+    'Regression Workflow 3: Napalm getters (postprocessing)': &id112 [652, -22]
     'Regression Workflow F: Workflow of Workflows': [3, -51]
-    'Regression Workflow: Napalm Getters and Postprocessing': *id089
+    'Regression Workflow: Napalm Getters and Postprocessing': *id112
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -1628,9 +1670,9 @@
   operating_system: ''
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow 3: Napalm getters (postprocessing)': &id090 [424, 229]
+    'Regression Workflow 3: Napalm getters (postprocessing)': &id113 [424, 229]
     'Regression Workflow F: Workflow of Workflows': [3, -51]
-    'Regression Workflow: Napalm Getters and Postprocessing': *id090
+    'Regression Workflow: Napalm Getters and Postprocessing': *id113
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -1693,10 +1735,10 @@
   pools: ['All instances (devices, links, services and users)']
   positions:
     Iteration Services Test Workflow: ['3', '-144']
-    'Regression Workflow E: Iteration Targets': &id091 [-195, -168]
-    'Regression Workflow F: Workflow of Workflows': &id092 [-790, 110]
-    'Regression Workflow: Iteration Targets Mechanism': *id091
-    'Regression Workflow: Workflow of Workflows': *id092
+    'Regression Workflow E: Iteration Targets': &id114 [-195, -168]
+    'Regression Workflow F: Workflow of Workflows': &id115 [-790, 110]
+    'Regression Workflow: Iteration Targets Mechanism': *id114
+    'Regression Workflow: Workflow of Workflows': *id115
     Workflow with iteration target subworkflows: [283, -152]
   postprocessing: ''
   postprocessing_mode: always
@@ -1789,16 +1831,16 @@
   positions:
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow 7: Payload Extraction & Validation'
-    : &id093 [49, -207]
+    : &id116 [49, -207]
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow 7: Payload Extraction & Validation'
-    : *id093
+    : *id116
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow: Payload Extraction & Validation'
-    : *id093
+    : *id116
     ? '[[Regression Workflow: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow: Payload Extraction & Validation'
-    : *id093
+    : *id116
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -1884,16 +1926,16 @@
   positions:
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow 7: Payload Extraction & Validation'
-    : &id094 [130, -95]
+    : &id117 [130, -95]
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow 7: Payload Extraction & Validation'
-    : *id094
+    : *id117
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow: Payload Extraction & Validation'
-    : *id094
+    : *id117
     ? '[[Regression Workflow: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow: Payload Extraction & Validation'
-    : *id094
+    : *id117
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -1968,10 +2010,10 @@
   optional_args: {}
   pools: ['All instances (devices, links, services and users)']
   positions:
-    '[Regression Workflow F: Workflow of Workflows] Regression Workflow 5: VRF creation and deletion with Napalm': &id095 [
+    '[Regression Workflow F: Workflow of Workflows] Regression Workflow 5: VRF creation and deletion with Napalm': &id118 [
       287, 136]
-    '[Regression Workflow F: Workflow of Workflows] Regression Workflow: VRF Creation and Deletion with Napalm': *id095
-    '[Regression Workflow: Workflow of Workflows] Regression Workflow: VRF Creation and Deletion with Napalm': *id095
+    '[Regression Workflow F: Workflow of Workflows] Regression Workflow: VRF Creation and Deletion with Napalm': *id118
+    '[Regression Workflow: Workflow of Workflows] Regression Workflow: VRF Creation and Deletion with Napalm': *id118
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -2061,10 +2103,10 @@
   positions:
     'Regression Workflow A: get_var, set_var, get_result': ['266', '161']
     'Regression Workflow C: Advanced multiprocessing': [123, -187]
-    '[Regression Workflow F: Workflow of Workflows] Regression Workflow 5: VRF creation and deletion with Napalm': &id096 [
+    '[Regression Workflow F: Workflow of Workflows] Regression Workflow 5: VRF creation and deletion with Napalm': &id119 [
       267, -146]
-    '[Regression Workflow F: Workflow of Workflows] Regression Workflow: VRF Creation and Deletion with Napalm': *id096
-    '[Regression Workflow: Workflow of Workflows] Regression Workflow: VRF Creation and Deletion with Napalm': *id096
+    '[Regression Workflow F: Workflow of Workflows] Regression Workflow: VRF Creation and Deletion with Napalm': *id119
+    '[Regression Workflow: Workflow of Workflows] Regression Workflow: VRF Creation and Deletion with Napalm': *id119
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -2155,10 +2197,10 @@
   operating_system: ''
   pools: ['All instances (devices, links, services and users)']
   positions:
-    '[Regression Workflow F: Workflow of Workflows] Regression Workflow 5: VRF creation and deletion with Napalm': &id097 [
+    '[Regression Workflow F: Workflow of Workflows] Regression Workflow 5: VRF creation and deletion with Napalm': &id120 [
       -348, 160]
-    '[Regression Workflow F: Workflow of Workflows] Regression Workflow: VRF Creation and Deletion with Napalm': *id097
-    '[Regression Workflow: Workflow of Workflows] Regression Workflow: VRF Creation and Deletion with Napalm': *id097
+    '[Regression Workflow F: Workflow of Workflows] Regression Workflow: VRF Creation and Deletion with Napalm': *id120
+    '[Regression Workflow: Workflow of Workflows] Regression Workflow: VRF Creation and Deletion with Napalm': *id120
     iteration_devices_workflow: ['245', '32']
   postprocessing: ''
   postprocessing_mode: always
@@ -2251,8 +2293,8 @@
   operating_system: ''
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow D: Prompts': &id098 [22, -74]
-    'Regression Workflow: Netmiko Prompts': *id098
+    'Regression Workflow D: Prompts': &id121 [22, -74]
+    'Regression Workflow: Netmiko Prompts': *id121
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -2344,8 +2386,8 @@
   operating_system: ''
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow D: Prompts': &id099 [350, 108]
-    'Regression Workflow: Netmiko Prompts': *id099
+    'Regression Workflow D: Prompts': &id122 [350, 108]
+    'Regression Workflow: Netmiko Prompts': *id122
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -2415,8 +2457,8 @@
   operating_system: ''
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow A: get_var, set_var, get_result': &id100 [-376, -138]
-    'Regression Workflow: Using get_var, set_var, get_result functions': *id100
+    'Regression Workflow A: get_var, set_var, get_result': &id123 [-376, -138]
+    'Regression Workflow: Using get_var, set_var, get_result functions': *id123
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -2481,8 +2523,8 @@
   operating_system: ''
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow A: get_var, set_var, get_result': &id101 [0, -144]
-    'Regression Workflow: Using get_var, set_var, get_result functions': *id101
+    'Regression Workflow A: get_var, set_var, get_result': &id124 [0, -144]
+    'Regression Workflow: Using get_var, set_var, get_result functions': *id124
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -2571,8 +2613,8 @@
   operating_system: ''
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow A: get_var, set_var, get_result': &id102 [474, -11]
-    'Regression Workflow: Using get_var, set_var, get_result functions': *id102
+    'Regression Workflow A: get_var, set_var, get_result': &id125 [474, -11]
+    'Regression Workflow: Using get_var, set_var, get_result functions': *id125
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -2663,8 +2705,8 @@
   operating_system: ''
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow A: get_var, set_var, get_result': &id103 [425, 190]
-    'Regression Workflow: Using get_var, set_var, get_result functions': *id103
+    'Regression Workflow A: get_var, set_var, get_result': &id126 [425, 190]
+    'Regression Workflow: Using get_var, set_var, get_result functions': *id126
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -2755,8 +2797,8 @@
   operating_system: ''
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow A: get_var, set_var, get_result': &id104 [-445, 128]
-    'Regression Workflow: Using get_var, set_var, get_result functions': *id104
+    'Regression Workflow A: get_var, set_var, get_result': &id127 [-445, 128]
+    'Regression Workflow: Using get_var, set_var, get_result functions': *id127
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -2837,16 +2879,16 @@
   positions:
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow B: Napalm getters validation'
-    : &id105 [-405, -99]
+    : &id128 [-405, -99]
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow B: Napalm getters validation'
-    : *id105
+    : *id128
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow: Napalm Getters Validation'
-    : *id105
+    : *id128
     ? '[[Regression Workflow: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow: Napalm Getters Validation'
-    : *id105
+    : *id128
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -2923,16 +2965,16 @@
   positions:
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow B: Napalm getters validation'
-    : &id106 [18, -122]
+    : &id129 [18, -122]
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow B: Napalm getters validation'
-    : *id106
+    : *id129
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow: Napalm Getters Validation'
-    : *id106
+    : *id129
     ? '[[Regression Workflow: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow: Napalm Getters Validation'
-    : *id106
+    : *id129
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -3008,28 +3050,28 @@
   positions:
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow 8: Payload Extraction with Operations'
-    : &id107 [-348, -240]
+    : &id130 [-348, -240]
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow B: Napalm getters validation'
-    : &id108 [581, 136]
+    : &id131 [581, 136]
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow 8: Payload Extraction with Operations'
-    : *id107
+    : *id130
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow B: Napalm getters validation'
-    : *id108
+    : *id131
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow: Napalm Getters Validation'
-    : *id108
+    : *id131
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow: Payload Extraction with Operations'
-    : *id107
+    : *id130
     ? '[[Regression Workflow: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow: Napalm Getters Validation'
-    : *id108
+    : *id131
     ? '[[Regression Workflow: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow: Payload Extraction with Operations'
-    : *id107
+    : *id130
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -3106,16 +3148,16 @@
   positions:
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow B: Napalm getters validation'
-    : &id109 [-45, 144]
+    : &id132 [-45, 144]
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow B: Napalm getters validation'
-    : *id109
+    : *id132
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow: Napalm Getters Validation'
-    : *id109
+    : *id132
     ? '[[Regression Workflow: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow: Napalm Getters Validation'
-    : *id109
+    : *id132
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -3192,16 +3234,16 @@
   positions:
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow B: Napalm getters validation'
-    : &id110 [535, -147]
+    : &id133 [535, -147]
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow B: Napalm getters validation'
-    : *id110
+    : *id133
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow: Napalm Getters Validation'
-    : *id110
+    : *id133
     ? '[[Regression Workflow: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow: Napalm Getters Validation'
-    : *id110
+    : *id133
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -3272,9 +3314,9 @@
   playbook_path: /media/sf_shared/eNMS/files/playbooks/arista_show_version.yml
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow 6: Ansible with Validation': &id111 [-107, 153]
+    'Regression Workflow 6: Ansible with Validation': &id134 [-107, 153]
     'Regression Workflow B: Napalm getters validation': [-30, 126]
-    'Regression Workflow: Ansible with Validation': *id111
+    'Regression Workflow: Ansible with Validation': *id134
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -3341,8 +3383,8 @@
   playbook_path: /media/sf_shared/eNMS/files/playbooks/arista_show_running_config.yml
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow 6: Ansible with Validation': &id112 [179, -62]
-    'Regression Workflow: Ansible with Validation': *id112
+    'Regression Workflow 6: Ansible with Validation': &id135 [179, -62]
+    'Regression Workflow: Ansible with Validation': *id135
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -3409,8 +3451,8 @@
   playbook_path: /media/sf_shared/eNMS/files/playbooks/arista_show_running_config.yml
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow 6: Ansible with Validation': &id113 [486, 173]
-    'Regression Workflow: Ansible with Validation': *id113
+    'Regression Workflow 6: Ansible with Validation': &id136 [486, 173]
+    'Regression Workflow: Ansible with Validation': *id136
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -3494,10 +3536,10 @@
   operating_system: ''
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow C: Advanced multiprocessing': &id114 [-315, 157]
-    'Regression Workflow C: Advanced multiprocessing (admin)': *id114
+    'Regression Workflow C: Advanced multiprocessing': &id137 [-315, 157]
+    'Regression Workflow C: Advanced multiprocessing (admin)': *id137
     'Regression Workflow F: Workflow of Workflows': [678, 52]
-    'Regression Workflow: Advanced Multiprocessing (admin)': *id114
+    'Regression Workflow: Advanced Multiprocessing (admin)': *id137
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -3588,8 +3630,8 @@
   operating_system: eos
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow E: Iteration Targets': &id115 [240, -144]
-    'Regression Workflow: Iteration Targets Mechanism': *id115
+    'Regression Workflow E: Iteration Targets': &id138 [240, -144]
+    'Regression Workflow: Iteration Targets Mechanism': *id138
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -3680,8 +3722,8 @@
   operating_system: eos
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow E: Iteration Targets': &id116 [572, -4]
-    'Regression Workflow: Iteration Targets Mechanism': *id116
+    'Regression Workflow E: Iteration Targets': &id139 [572, -4]
+    'Regression Workflow: Iteration Targets Mechanism': *id139
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -3772,8 +3814,8 @@
   operating_system: eos
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow E: Iteration Targets': &id117 [556, 123]
-    'Regression Workflow: Iteration Targets Mechanism': *id117
+    'Regression Workflow E: Iteration Targets': &id140 [556, 123]
+    'Regression Workflow: Iteration Targets Mechanism': *id140
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -3846,16 +3888,16 @@
   positions:
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow 8: Payload Extraction with Operations'
-    : &id118 [118, -243]
+    : &id141 [118, -243]
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow 8: Payload Extraction with Operations'
-    : *id118
+    : *id141
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow: Payload Extraction with Operations'
-    : *id118
+    : *id141
     ? '[[Regression Workflow: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow: Payload Extraction with Operations'
-    : *id118
+    : *id141
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -3933,16 +3975,16 @@
   positions:
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow 8: Payload Extraction with Operations'
-    : &id119 [619, -236]
+    : &id142 [619, -236]
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow 8: Payload Extraction with Operations'
-    : *id119
+    : *id142
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow: Payload Extraction with Operations'
-    : *id119
+    : *id142
     ? '[[Regression Workflow: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow: Payload Extraction with Operations'
-    : *id119
+    : *id142
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -4023,16 +4065,16 @@
   positions:
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow 8: Payload Extraction with Operations'
-    : &id120 [600, 70]
+    : &id143 [600, 70]
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow 8: Payload Extraction with Operations'
-    : *id120
+    : *id143
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow: Payload Extraction with Operations'
-    : *id120
+    : *id143
     ? '[[Regression Workflow: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow: Payload Extraction with Operations'
-    : *id120
+    : *id143
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -4106,8 +4148,8 @@
   payload: {}
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow E: Iteration Targets': &id121 [-135, 91]
-    'Regression Workflow: Iteration Targets Mechanism': *id121
+    'Regression Workflow E: Iteration Targets': &id144 [-135, 91]
+    'Regression Workflow: Iteration Targets Mechanism': *id144
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -4176,10 +4218,10 @@
   pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow F: Workflow of Workflows': [-179, 146]
-    '[Regression Workflow F: Workflow of Workflows] Regression Workflow F S2: Access Variables from Parent Workflow': &id122 [
+    '[Regression Workflow F: Workflow of Workflows] Regression Workflow F S2: Access Variables from Parent Workflow': &id145 [
       240, -101]
-    '[Regression Workflow F: Workflow of Workflows] Regression Workflow: Access Variables from Parent Workflow': *id122
-    '[Regression Workflow: Workflow of Workflows] Regression Workflow: Access Variables from Parent Workflow': *id122
+    '[Regression Workflow F: Workflow of Workflows] Regression Workflow: Access Variables from Parent Workflow': *id145
+    '[Regression Workflow: Workflow of Workflows] Regression Workflow: Access Variables from Parent Workflow': *id145
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -4273,10 +4315,10 @@
   operating_system: ''
   pools: ['All instances (devices, links, services and users)']
   positions:
-    '[Regression Workflow F: Workflow of Workflows] Regression Workflow F S2: Access Variables from Parent Workflow': &id123 [
+    '[Regression Workflow F: Workflow of Workflows] Regression Workflow F S2: Access Variables from Parent Workflow': &id146 [
       244, 113]
-    '[Regression Workflow F: Workflow of Workflows] Regression Workflow: Access Variables from Parent Workflow': *id123
-    '[Regression Workflow: Workflow of Workflows] Regression Workflow: Access Variables from Parent Workflow': *id123
+    '[Regression Workflow F: Workflow of Workflows] Regression Workflow: Access Variables from Parent Workflow': *id146
+    '[Regression Workflow: Workflow of Workflows] Regression Workflow: Access Variables from Parent Workflow': *id146
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -4536,8 +4578,8 @@
   operating_system: eos
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow F: Workflow of Workflows': &id124 [152, 75]
-    'Regression Workflow: Workflow of Workflows': *id124
+    'Regression Workflow F: Workflow of Workflows': &id147 [152, 75]
+    'Regression Workflow: Workflow of Workflows': *id147
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -4733,10 +4775,10 @@
   operating_system: ''
   pools: ['All instances (devices, links, services and users)']
   positions:
-    '[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow of Workflow': &id125 [
+    '[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow of Workflow': &id148 [
       134, -147]
-    '[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow of Workflows': *id125
-    '[Regression Workflow: Workflow of Workflows] Regression Workflow: Subworkflow of Workflows': *id125
+    '[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow of Workflows': *id148
+    '[Regression Workflow: Workflow of Workflows] Regression Workflow: Subworkflow of Workflows': *id148
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -5178,10 +5220,10 @@
   operating_system: ''
   pools: ['All instances (devices, links, services and users)']
   positions:
-    '[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow of Workflow': &id126 [
+    '[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow of Workflow': &id149 [
       678, 11]
-    '[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow of Workflows': *id126
-    '[Regression Workflow: Workflow of Workflows] Regression Workflow: Subworkflow of Workflows': *id126
+    '[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow of Workflows': *id149
+    '[Regression Workflow: Workflow of Workflows] Regression Workflow: Subworkflow of Workflows': *id149
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -5538,10 +5580,10 @@
   operating_system: ''
   pools: ['All instances (devices, links, services and users)']
   positions:
-    '[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow of Workflow': &id127 [
+    '[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow of Workflow': &id150 [
       135, 187]
-    '[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow of Workflows': *id127
-    '[Regression Workflow: Workflow of Workflows] Regression Workflow: Subworkflow of Workflows': *id127
+    '[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow of Workflows': *id150
+    '[Regression Workflow: Workflow of Workflows] Regression Workflow: Subworkflow of Workflows': *id150
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -5620,8 +5662,8 @@
   operating_system: ''
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow F: Workflow of Workflows': &id128 [164, 375]
-    'Regression Workflow: Workflow of Workflows': *id128
+    'Regression Workflow F: Workflow of Workflows': &id151 [164, 375]
+    'Regression Workflow: Workflow of Workflows': *id151
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -5692,8 +5734,8 @@
   operating_system: ''
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow F: Workflow of Workflows': &id129 [-655, 369]
-    'Regression Workflow: Workflow of Workflows': *id129
+    'Regression Workflow F: Workflow of Workflows': &id152 [-655, 369]
+    'Regression Workflow: Workflow of Workflows': *id152
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -5783,8 +5825,8 @@
   operating_system: ''
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow F: Workflow of Workflows': &id130 [-408, 34]
-    'Regression Workflow: Workflow of Workflows': *id130
+    'Regression Workflow F: Workflow of Workflows': &id153 [-408, 34]
+    'Regression Workflow: Workflow of Workflows': *id153
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -5885,9 +5927,9 @@
   operating_system: ''
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow 9: Operational Data Backup': &id131 [-125, 15]
-    'Regression Workflow 9: Operational Data Backup (admin)': *id131
-    'Regression Workflow: Operational Data Backup (admin)': *id131
+    'Regression Workflow 9: Operational Data Backup': &id154 [-125, 15]
+    'Regression Workflow 9: Operational Data Backup (admin)': *id154
+    'Regression Workflow: Operational Data Backup (admin)': *id154
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -6040,8 +6082,8 @@
   operating_system: ''
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow G: run methods (BFS)': &id132 [-296, -98]
-    'Regression Workflow: DxD and SxS Run Methods': *id132
+    'Regression Workflow G: run methods (BFS)': &id155 [-296, -98]
+    'Regression Workflow: DxD and SxS Run Methods': *id155
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -6111,8 +6153,8 @@
   payload: {}
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow G: run methods (BFS)': &id133 [-135, 189]
-    'Regression Workflow: DxD and SxS Run Methods': *id133
+    'Regression Workflow G: run methods (BFS)': &id156 [-135, 189]
+    'Regression Workflow: DxD and SxS Run Methods': *id156
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -6181,8 +6223,8 @@
   operating_system: ''
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow G: run methods (BFS)': &id134 [123, -96]
-    'Regression Workflow: DxD and SxS Run Methods': *id134
+    'Regression Workflow G: run methods (BFS)': &id157 [123, -96]
+    'Regression Workflow: DxD and SxS Run Methods': *id157
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -6254,8 +6296,8 @@
   payload: {}
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow G: run methods (BFS)': &id135 [254, 163]
-    'Regression Workflow: DxD and SxS Run Methods': *id135
+    'Regression Workflow G: run methods (BFS)': &id158 [254, 163]
+    'Regression Workflow: DxD and SxS Run Methods': *id158
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -6324,8 +6366,8 @@
   operating_system: ''
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow G: run methods (BFS)': &id136 [622, -89]
-    'Regression Workflow: DxD and SxS Run Methods': *id136
+    'Regression Workflow G: run methods (BFS)': &id159 [622, -89]
+    'Regression Workflow: DxD and SxS Run Methods': *id159
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -6412,9 +6454,9 @@
   operating_system: ''
   pools: ['All instances (devices, links, services and users)']
   positions:
-    '[Regression Workflow G: run methods (BFS)] Workflow  in device by device mode': &id137 [
+    '[Regression Workflow G: run methods (BFS)] Workflow  in device by device mode': &id160 [
       248, -94]
-    '[Regression Workflow: DxD and SxS Run Methods] Workflow  in device by device mode': *id137
+    '[Regression Workflow: DxD and SxS Run Methods] Workflow  in device by device mode': *id160
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -6505,9 +6547,9 @@
   operating_system: ''
   pools: ['All instances (devices, links, services and users)']
   positions:
-    '[Regression Workflow G: run methods (BFS)] Workflow in service by service mode (workflow targets)': &id138 [
+    '[Regression Workflow G: run methods (BFS)] Workflow in service by service mode (workflow targets)': &id161 [
       239, -108]
-    '[Regression Workflow: DxD and SxS Run Methods] Workflow in service by service mode (workflow targets)': *id138
+    '[Regression Workflow: DxD and SxS Run Methods] Workflow in service by service mode (workflow targets)': *id161
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -6598,9 +6640,9 @@
   operating_system: ''
   pools: ['All instances (devices, links, services and users)']
   positions:
-    '[Regression Workflow G: run methods (BFS)] Workflow in service targets mode': &id139 [
+    '[Regression Workflow G: run methods (BFS)] Workflow in service targets mode': &id162 [
       234, -86]
-    '[Regression Workflow: DxD and SxS Run Methods] Workflow in service targets mode': *id139
+    '[Regression Workflow: DxD and SxS Run Methods] Workflow in service targets mode': *id162
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -6761,9 +6803,9 @@
   operating_system: ''
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow H: shared service in multiple subworkflows': &id140 [-241,
+    'Regression Workflow H: shared service in multiple subworkflows': &id163 [-241,
       197]
-    'Regression Workflow: Shared Service in Multiple Subworkflows': *id140
+    'Regression Workflow: Shared Service in Multiple Subworkflows': *id163
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -6831,9 +6873,9 @@
   operating_system: ''
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow H: shared service in multiple subworkflows': &id141 [548,
+    'Regression Workflow H: shared service in multiple subworkflows': &id164 [548,
       48]
-    'Regression Workflow: Shared Service in Multiple Subworkflows': *id141
+    'Regression Workflow: Shared Service in Multiple Subworkflows': *id164
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -6919,12 +6961,12 @@
   operating_system: ''
   pools: ['All instances (devices, links, services and users)']
   positions:
-    '[Regression Workflow H: shared service in multiple subworkflows] Subworkflow 1': &id142 [
+    '[Regression Workflow H: shared service in multiple subworkflows] Subworkflow 1': &id165 [
       167, -185]
-    '[Regression Workflow H: shared service in multiple subworkflows] Subworkflow 2': &id143 [
+    '[Regression Workflow H: shared service in multiple subworkflows] Subworkflow 2': &id166 [
       243, -104]
-    '[Regression Workflow: Shared Service in Multiple Subworkflows] Subworkflow 1': *id142
-    '[Regression Workflow: Shared Service in Multiple Subworkflows] Subworkflow 2': *id143
+    '[Regression Workflow: Shared Service in Multiple Subworkflows] Subworkflow 1': *id165
+    '[Regression Workflow: Shared Service in Multiple Subworkflows] Subworkflow 2': *id166
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -6997,8 +7039,8 @@
   playbook_path: /media/sf_shared/eNMS/files/playbooks/simple_playbook.yml
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow 6: Ansible with Validation': &id144 [-536, 192]
-    'Regression Workflow: Ansible with Validation': *id144
+    'Regression Workflow 6: Ansible with Validation': &id167 [-536, 192]
+    'Regression Workflow: Ansible with Validation': *id167
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -7127,8 +7169,8 @@
   operating_system: ''
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow I: Iteration Targets Advanced': &id145 [132, -202]
-    'Regression Workflow: Advanced Iteration Targets': *id145
+    'Regression Workflow I: Iteration Targets Advanced': &id168 [132, -202]
+    'Regression Workflow: Advanced Iteration Targets': *id168
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -7214,8 +7256,8 @@
   operating_system: ''
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow I: Iteration Targets Advanced': &id146 [135, 100]
-    'Regression Workflow: Advanced Iteration Targets': *id146
+    'Regression Workflow I: Iteration Targets Advanced': &id169 [135, 100]
+    'Regression Workflow: Advanced Iteration Targets': *id169
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -7351,8 +7393,8 @@
   operating_system: ''
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow J: Workflow and Subworkflow Iteration': &id147 [226, -76]
-    'Regression Workflow: Workflow and Subworkflow Iteration': *id147
+    'Regression Workflow J: Workflow and Subworkflow Iteration': &id170 [226, -76]
+    'Regression Workflow: Workflow and Subworkflow Iteration': *id170
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -7418,8 +7460,8 @@
   operating_system: ''
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow J: Workflow and Subworkflow Iteration': &id148 [218, 171]
-    'Regression Workflow: Workflow and Subworkflow Iteration': *id148
+    'Regression Workflow J: Workflow and Subworkflow Iteration': &id171 [218, 171]
+    'Regression Workflow: Workflow and Subworkflow Iteration': *id171
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -7485,9 +7527,9 @@
   operating_system: ''
   pools: ['All instances (devices, links, services and users)']
   positions:
-    '[Regression Workflow J: Workflow and Subworkflow Iteration] Subworkflow Iteration': &id149 [
+    '[Regression Workflow J: Workflow and Subworkflow Iteration] Subworkflow Iteration': &id172 [
       231, -87]
-    '[Regression Workflow: Workflow and Subworkflow Iteration] Subworkflow Iteration': *id149
+    '[Regression Workflow: Workflow and Subworkflow Iteration] Subworkflow Iteration': *id172
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -7556,16 +7598,16 @@
   positions:
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow 7: Payload Extraction & Validation'
-    : &id150 [-338, -9]
+    : &id173 [-338, -9]
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow 7: Payload Extraction & Validation'
-    : *id150
+    : *id173
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow: Payload Extraction & Validation'
-    : *id150
+    : *id173
     ? '[[Regression Workflow: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow: Payload Extraction & Validation'
-    : *id150
+    : *id173
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -7634,16 +7676,16 @@
   positions:
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow 7: Payload Extraction & Validation'
-    : &id151 [-236, 214]
+    : &id174 [-236, 214]
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow 7: Payload Extraction & Validation'
-    : *id151
+    : *id174
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow: Payload Extraction & Validation'
-    : *id151
+    : *id174
     ? '[[Regression Workflow: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow: Payload Extraction & Validation'
-    : *id151
+    : *id174
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -7713,16 +7755,16 @@
   positions:
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow 7: Payload Extraction & Validation'
-    : &id152 [679, -114]
+    : &id175 [679, -114]
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow 7: Payload Extraction & Validation'
-    : *id152
+    : *id175
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow: Payload Extraction & Validation'
-    : *id152
+    : *id175
     ? '[[Regression Workflow: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow: Payload Extraction & Validation'
-    : *id152
+    : *id175
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -7790,16 +7832,16 @@
   positions:
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow 7: Payload Extraction & Validation'
-    : &id153 [808, 157]
+    : &id176 [808, 157]
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow 7: Payload Extraction & Validation'
-    : *id153
+    : *id176
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow: Payload Extraction & Validation'
-    : *id153
+    : *id176
     ? '[[Regression Workflow: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow: Payload Extraction & Validation'
-    : *id153
+    : *id176
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -7867,16 +7909,16 @@
   positions:
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow 8: Payload Extraction with Operations'
-    : &id154 [5, 75]
+    : &id177 [5, 75]
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow 8: Payload Extraction with Operations'
-    : *id154
+    : *id177
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow: Payload Extraction with Operations'
-    : *id154
+    : *id177
     ? '[[Regression Workflow: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow: Payload Extraction with Operations'
-    : *id154
+    : *id177
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -7944,16 +7986,16 @@
   positions:
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow 8: Payload Extraction with Operations'
-    : &id155 [-461, 60]
+    : &id178 [-461, 60]
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow 8: Payload Extraction with Operations'
-    : *id155
+    : *id178
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow: Payload Extraction with Operations'
-    : *id155
+    : *id178
     ? '[[Regression Workflow: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow: Payload Extraction with Operations'
-    : *id155
+    : *id178
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -8103,8 +8145,8 @@
   operating_system: ''
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow K: preprocessing and postprocessing': &id156 [-26, 123]
-    'Regression Workflow: Preprocessing and Postprocessing': *id156
+    'Regression Workflow K: preprocessing and postprocessing': &id179 [-26, 123]
+    'Regression Workflow: Preprocessing and Postprocessing': *id179
   postprocessing: "results[\"postprocessing\"] = f\"Value set with postprocessing\
     \ for {device.name}\"\r\n\r\ndef test():\r\n  \treturn device.operating_system\r\
     \n\r\nclass Test():\r\n  device = device.name\r\n\r\nset_var(\"func\", test, device=device.name)\r\
@@ -8172,8 +8214,8 @@
   operating_system: ''
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow K: preprocessing and postprocessing': &id157 [558, 152]
-    'Regression Workflow: Preprocessing and Postprocessing': *id157
+    'Regression Workflow K: preprocessing and postprocessing': &id180 [558, 152]
+    'Regression Workflow: Preprocessing and Postprocessing': *id180
   postprocessing: "results[\"SHOULD BE THERE\"] = \"NO BUG\"\r\n\r\nresults[\"func_result\"\
     ] = func()\r\nresults[\"cls_result\"] = cls().device"
   postprocessing_mode: failure
@@ -8237,8 +8279,8 @@
   operating_system: ''
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow L: superworkflow': &id158 [511, -111]
-    'Regression Workflow: Superworkflow': *id158
+    'Regression Workflow L: superworkflow': &id181 [511, -111]
+    'Regression Workflow: Superworkflow': *id181
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -8361,14 +8403,15 @@
       content: "This service uses the password admin in the \"Jump on Connect\" section\
         \ :\r\nthis password must be set to \"admin\" after database reload."
       positions: [392, 270]
-  last_modified: '2020-03-28 05:44:29.135775'
+  last_modified: '2020-11-17 09:52:52.087594'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: 'Regression Workflow M: Unix command & shell, ping, - jump on connect - mechanism'
+  name: 'Regression Workflow: Unix Command & Chell, Ping Service, Jump on Connect
+    mechanism'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -8381,17 +8424,17 @@
   reply_to: ''
   reserved: false
   run_method: per_service_with_service_targets
-  scoped_name: 'Regression Workflow M: Unix command & shell, ping, - jump on connect
-    - mechanism'
+  scoped_name: 'Regression Workflow: Unix Command & Chell, Ping Service, Jump on Connect
+    mechanism'
   send_notification: false
   send_notification_method: mail
-  services: ['[Shared] Start', '[Shared] End', '[Regression Workflow M: Unix command
-      & shell, ping, - jump on connect - mechanism] Unix command: ps -ef | grep test',
-    '[Regression Workflow M: Unix command & shell, ping, - jump on connect - mechanism]
-      Unix shell: ping eNMS server from remote server', '[Regression Workflow M: Unix
-      command & shell, ping, - jump on connect - mechanism] Ping Washington', '[Regression
-      Workflow M: Unix command & shell, ping, - jump on connect - mechanism] Validation:
-      jump on server 2 from Washington']
+  services: ['[Shared] Start', '[Shared] End', '[Regression Workflow: Unix Command
+      & Chell, Ping Service, Jump on Connect mechanism] Unix command: ps -ef | grep
+      test', '[Regression Workflow: Unix Command & Chell, Ping Service, Jump on Connect
+      mechanism] Unix shell: ping eNMS server from remote server', '[Regression Workflow:
+      Unix Command & Chell, Ping Service, Jump on Connect mechanism] Ping Washington',
+    '[Regression Workflow: Unix Command & Chell, Ping Service, Jump on Connect mechanism]
+      Validation: jump on server 2 from Washington']
   shared: false
   skip: {}
   skip_query: ''
@@ -8439,17 +8482,18 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression Workflow M: Unix command & shell, ping, - jump on connect - mechanism]
-    Unix command: ps -ef | grep test'
+  name: '[Regression Workflow: Unix Command & Chell, Ping Service, Jump on Connect
+    mechanism] Unix command: ps -ef | grep test'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow M: Unix command & shell, ping, - jump on connect - mechanism': [
+    'Regression Workflow M: Unix command & shell, ping, - jump on connect - mechanism': &id182 [
       -177, -94]
     'Regression Workflow M: Unix command & shell, ping, jump server': [-148, -126]
+    'Regression Workflow: Unix Command & Chell, Ping Service, Jump on Connect mechanism': *id182
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -8516,17 +8560,18 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression Workflow M: Unix command & shell, ping, - jump on connect - mechanism]
-    Unix shell: ping eNMS server from remote server'
+  name: '[Regression Workflow: Unix Command & Chell, Ping Service, Jump on Connect
+    mechanism] Unix shell: ping eNMS server from remote server'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow M: Unix command & shell, ping, - jump on connect - mechanism': [
+    'Regression Workflow M: Unix command & shell, ping, - jump on connect - mechanism': &id183 [
       -113, 220]
     'Regression Workflow M: Unix command & shell, ping, jump server': [-76, 172]
+    'Regression Workflow: Unix Command & Chell, Ping Service, Jump on Connect mechanism': *id183
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -8592,8 +8637,8 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression Workflow M: Unix command & shell, ping, - jump on connect - mechanism]
-    Ping Washington'
+  name: '[Regression Workflow: Unix Command & Chell, Ping Service, Jump on Connect
+    mechanism] Ping Washington'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -8602,9 +8647,10 @@
   pools: ['All instances (devices, links, services and users)']
   ports: '22'
   positions:
-    'Regression Workflow M: Unix command & shell, ping, - jump on connect - mechanism': [
+    'Regression Workflow M: Unix command & shell, ping, - jump on connect - mechanism': &id184 [
       200, -71]
     'Regression Workflow M: Unix command & shell, ping, jump server': [182, -134]
+    'Regression Workflow: Unix Command & Chell, Ping Service, Jump on Connect mechanism': *id184
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -8657,14 +8703,14 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels: {}
-  last_modified: '2020-03-28 05:38:47.400912'
+  last_modified: '2020-11-17 09:52:57.248874'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: 'Regression Workflow N: Topology Import (netbox, librenms, opennms)'
+  name: 'Regression Workflow: Topology Import (netbox, librenms, opennms)'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -8677,10 +8723,10 @@
   reply_to: ''
   reserved: false
   run_method: per_service_with_service_targets
-  scoped_name: 'Regression Workflow N: Topology Import (netbox, librenms, opennms)'
+  scoped_name: 'Regression Workflow: Topology Import (netbox, librenms, opennms)'
   send_notification: false
   send_notification_method: mail
-  services: ['[Shared] Start', '[Shared] End', '[Regression Workflow N: Topology Import
+  services: ['[Shared] Start', '[Shared] End', '[Regression Workflow: Topology Import
       (netbox, librenms, opennms)] OpenNMS Import']
   shared: false
   skip: {}
@@ -8731,7 +8777,7 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression Workflow N: Topology Import (netbox, librenms, opennms)] OpenNMS
+  name: '[Regression Workflow: Topology Import (netbox, librenms, opennms)] OpenNMS
     Import'
   negative_logic: false
   netbox_address: http://0.0.0.0:8000
@@ -8745,7 +8791,9 @@
   operating_system: ''
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow N: Topology Import (netbox, librenms, opennms)': [113, -104]
+    'Regression Workflow N: Topology Import (netbox, librenms, opennms)': &id185 [
+      113, -104]
+    'Regression Workflow: Topology Import (netbox, librenms, opennms)': *id185
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -8821,17 +8869,18 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression Workflow M: Unix command & shell, ping, - jump on connect - mechanism]
-    Validation: jump on server 2 from Washington'
+  name: '[Regression Workflow: Unix Command & Chell, Ping Service, Jump on Connect
+    mechanism] Validation: jump on server 2 from Washington'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow M: Unix command & shell, ping, - jump on connect - mechanism': [
+    'Regression Workflow M: Unix command & shell, ping, - jump on connect - mechanism': &id186 [
       358, 190]
     'Regression Workflow M: Unix command & shell, ping, jump server': [338, 138]
+    'Regression Workflow: Unix Command & Chell, Ping Service, Jump on Connect mechanism': *id186
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -8907,8 +8956,8 @@
     c: ['1', '2', '3']
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow L: superworkflow': &id159 [227, 151]
-    'Regression Workflow: Superworkflow': *id159
+    'Regression Workflow L: superworkflow': &id187 [227, 151]
+    'Regression Workflow: Superworkflow': *id187
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -9094,9 +9143,9 @@
   operating_system: ''
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow 9: Operational Data Backup': &id160 [-455, 15]
-    'Regression Workflow 9: Operational Data Backup (admin)': *id160
-    'Regression Workflow: Operational Data Backup (admin)': *id160
+    'Regression Workflow 9: Operational Data Backup': &id188 [-455, 15]
+    'Regression Workflow 9: Operational Data Backup (admin)': *id188
+    'Regression Workflow: Operational Data Backup (admin)': *id188
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -9180,9 +9229,9 @@
   operating_system: ''
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow 9: Operational Data Backup': &id161 [148, 191]
-    'Regression Workflow 9: Operational Data Backup (admin)': *id161
-    'Regression Workflow: Operational Data Backup (admin)': *id161
+    'Regression Workflow 9: Operational Data Backup': &id189 [148, 191]
+    'Regression Workflow 9: Operational Data Backup (admin)': *id189
+    'Regression Workflow: Operational Data Backup (admin)': *id189
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -9247,8 +9296,8 @@
   operating_system: ''
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow L: superworkflow': &id162 [606, 47]
-    'Regression Workflow: Superworkflow': *id162
+    'Regression Workflow L: superworkflow': &id190 [606, 47]
+    'Regression Workflow: Superworkflow': *id190
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -9300,14 +9349,14 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels: {}
-  last_modified: '2020-07-19 03:57:28.779641'
+  last_modified: '2020-11-17 09:53:01.136153'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: 'Regression Workflow O: Scrapli'
+  name: 'Regression Workflow: Scrapli'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -9320,13 +9369,13 @@
   reply_to: ''
   reserved: false
   run_method: per_device
-  scoped_name: 'Regression Workflow O: Scrapli'
+  scoped_name: 'Regression Workflow: Scrapli'
   send_notification: false
   send_notification_method: mail
-  services: ['[Shared] Start', '[Shared] End', '[Regression Workflow O: Scrapli] Check
-      running configuration', '[Regression Workflow O: Scrapli] Configure VRF TEST-VRF',
-    '[Regression Workflow O: Scrapli] Check that TEST-VRF is configured', '[Regression
-      Workflow O: Scrapli] Decommission VRF TEST-VRF']
+  services: ['[Shared] Start', '[Shared] End', '[Regression Workflow: Scrapli] Check
+      running configuration', '[Regression Workflow: Scrapli] Configure VRF TEST-VRF',
+    '[Regression Workflow: Scrapli] Check that TEST-VRF is configured', '[Regression
+      Workflow: Scrapli] Decommission VRF TEST-VRF']
   shared: false
   skip: {}
   skip_query: ''
@@ -9380,14 +9429,15 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression Workflow O: Scrapli] Check running configuration'
+  name: '[Regression Workflow: Scrapli] Check running configuration'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow O: Scrapli': [-33, -167]
+    'Regression Workflow O: Scrapli': &id191 [-33, -167]
+    'Regression Workflow: Scrapli': *id191
   postprocessing: results["success"] = "TEST-VRF" not in results["result"]
   postprocessing_mode: always
   preprocessing: ''
@@ -9453,14 +9503,15 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression Workflow O: Scrapli] Configure VRF TEST-VRF'
+  name: '[Regression Workflow: Scrapli] Configure VRF TEST-VRF'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow O: Scrapli': [402, -161]
+    'Regression Workflow O: Scrapli': &id192 [402, -161]
+    'Regression Workflow: Scrapli': *id192
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -9526,14 +9577,15 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression Workflow O: Scrapli] Check that TEST-VRF is configured'
+  name: '[Regression Workflow: Scrapli] Check that TEST-VRF is configured'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow O: Scrapli': [6, 112]
+    'Regression Workflow O: Scrapli': &id193 [6, 112]
+    'Regression Workflow: Scrapli': *id193
   postprocessing: results["success"] = "TEST-VRF" in results["result"]
   postprocessing_mode: always
   preprocessing: ''
@@ -9599,14 +9651,15 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression Workflow O: Scrapli] Decommission VRF TEST-VRF'
+  name: '[Regression Workflow: Scrapli] Decommission VRF TEST-VRF'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow O: Scrapli': [373, 107]
+    'Regression Workflow O: Scrapli': &id194 [373, 107]
+    'Regression Workflow: Scrapli': *id194
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -9660,14 +9713,14 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels: {}
-  last_modified: '2020-07-24 03:31:58.475229'
+  last_modified: '2020-11-17 09:53:21.653882'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
   max_processes: 8
   maximum_runs: 1
   multiprocessing: true
-  name: 'Regression Workflow P: large workflow (scalability)'
+  name: 'Regression Workflow: Scalability Test (large workflow)'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -9680,30 +9733,31 @@
   reply_to: ''
   reserved: false
   run_method: per_device
-  scoped_name: 'Regression Workflow P: large workflow (scalability)'
+  scoped_name: 'Regression Workflow: Scalability Test (large workflow)'
   send_notification: false
   send_notification_method: mail
   services: ['[Shared] Start', '[Shared] End', '[Shared] REST API: call *is_alive*
-      endpoint', '[Regression Workflow P: large workflow (scalability)] REST API:
-      call *is_alive* endpoint', '[Regression Workflow P: large workflow (scalability)]
-      REST API: call *is_alive* endpoint 2', '[Regression Workflow P: large workflow
-      (scalability)] REST API: call *is_alive* endpoint 3', '[Regression Workflow
-      P: large workflow (scalability)] REST API: call *is_alive* endpoint 4', '[Regression
-      Workflow P: large workflow (scalability)] REST API: call *is_alive* endpoint
-      5', '[Regression Workflow P: large workflow (scalability)] Show vrf with netmiko
-      1', '[Regression Workflow P: large workflow (scalability)] Show vrf with netmiko
-      2', '[Regression Workflow P: large workflow (scalability)] Show vrf with netmiko
-      3', '[Regression Workflow P: large workflow (scalability)] Show vrf with netmiko
-      4', '[Regression Workflow P: large workflow (scalability)] Show vrf with netmiko
-      5', '[Regression Workflow P: large workflow (scalability)] Show vrf with netmiko
-      6', '[Regression Workflow P: large workflow (scalability)] Sleep with python',
-    '[Regression Workflow P: large workflow (scalability)] Sleep with python 2', '[Regression
-      Workflow P: large workflow (scalability)] Sleep with python 3', '[Regression
-      Workflow P: large workflow (scalability)] Sleep with python 4', '[Regression
-      Workflow P: large workflow (scalability)] Sleep with python 5', '[Regression
-      Workflow P: large workflow (scalability)] Sleep with python 6', '[Regression
-      Workflow P: large workflow (scalability)] Sleep with python 7', '[Regression
-      Workflow P: large workflow (scalability)] Sleep with python 8']
+      endpoint', '[Regression Workflow: Scalability Test (large workflow)] REST API:
+      call *is_alive* endpoint', '[Regression Workflow: Scalability Test (large workflow)]
+      REST API: call *is_alive* endpoint 2', '[Regression Workflow: Scalability Test
+      (large workflow)] REST API: call *is_alive* endpoint 3', '[Regression Workflow:
+      Scalability Test (large workflow)] REST API: call *is_alive* endpoint 4', '[Regression
+      Workflow: Scalability Test (large workflow)] REST API: call *is_alive* endpoint
+      5', '[Regression Workflow: Scalability Test (large workflow)] Show vrf with
+      netmiko 1', '[Regression Workflow: Scalability Test (large workflow)] Show vrf
+      with netmiko 2', '[Regression Workflow: Scalability Test (large workflow)] Show
+      vrf with netmiko 3', '[Regression Workflow: Scalability Test (large workflow)]
+      Show vrf with netmiko 4', '[Regression Workflow: Scalability Test (large workflow)]
+      Show vrf with netmiko 5', '[Regression Workflow: Scalability Test (large workflow)]
+      Show vrf with netmiko 6', '[Regression Workflow: Scalability Test (large workflow)]
+      Sleep with python', '[Regression Workflow: Scalability Test (large workflow)]
+      Sleep with python 2', '[Regression Workflow: Scalability Test (large workflow)]
+      Sleep with python 3', '[Regression Workflow: Scalability Test (large workflow)]
+      Sleep with python 4', '[Regression Workflow: Scalability Test (large workflow)]
+      Sleep with python 5', '[Regression Workflow: Scalability Test (large workflow)]
+      Sleep with python 6', '[Regression Workflow: Scalability Test (large workflow)]
+      Sleep with python 7', '[Regression Workflow: Scalability Test (large workflow)]
+      Sleep with python 8']
   shared: false
   skip: {}
   skip_query: ''
@@ -9755,7 +9809,7 @@
   max_processes: 5
   maximum_runs: 1
   multiprocessing: true
-  name: '[Regression Workflow P: large workflow (scalability)] REST API: call *is_alive*
+  name: '[Regression Workflow: Scalability Test (large workflow)] REST API: call *is_alive*
     endpoint'
   negative_logic: false
   notification_header: ''
@@ -9774,8 +9828,9 @@
     'Regression Workflow C: Advanced multiprocessing': [340, 109]
     'Regression Workflow D: Prompts': [405, -103]
     'Regression Workflow L: superworkflow': [162, -126]
-    'Regression Workflow P: large workflow (scalability)': &id163 [-404, -20]
-    'Regression workflow P: large workflow (scalability)': *id163
+    'Regression Workflow P: large workflow (scalability)': &id195 [-404, -20]
+    'Regression Workflow: Scalability Test (large workflow)': *id195
+    'Regression workflow P: large workflow (scalability)': *id195
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -9836,7 +9891,7 @@
   max_processes: 5
   maximum_runs: 1
   multiprocessing: true
-  name: '[Regression Workflow P: large workflow (scalability)] REST API: call *is_alive*
+  name: '[Regression Workflow: Scalability Test (large workflow)] REST API: call *is_alive*
     endpoint 2'
   negative_logic: false
   notification_header: ''
@@ -9849,8 +9904,9 @@
     c: ['1', '2', '3']
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow P: large workflow (scalability)': &id164 [-406, 73]
-    'Regression workflow P: large workflow (scalability)': *id164
+    'Regression Workflow P: large workflow (scalability)': &id196 [-406, 73]
+    'Regression Workflow: Scalability Test (large workflow)': *id196
+    'Regression workflow P: large workflow (scalability)': *id196
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -9911,7 +9967,7 @@
   max_processes: 5
   maximum_runs: 1
   multiprocessing: true
-  name: '[Regression Workflow P: large workflow (scalability)] REST API: call *is_alive*
+  name: '[Regression Workflow: Scalability Test (large workflow)] REST API: call *is_alive*
     endpoint 3'
   negative_logic: false
   notification_header: ''
@@ -9924,8 +9980,9 @@
     c: ['1', '2', '3']
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow P: large workflow (scalability)': &id165 [-402, 156]
-    'Regression workflow P: large workflow (scalability)': *id165
+    'Regression Workflow P: large workflow (scalability)': &id197 [-402, 156]
+    'Regression Workflow: Scalability Test (large workflow)': *id197
+    'Regression workflow P: large workflow (scalability)': *id197
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -9986,7 +10043,7 @@
   max_processes: 5
   maximum_runs: 1
   multiprocessing: true
-  name: '[Regression Workflow P: large workflow (scalability)] REST API: call *is_alive*
+  name: '[Regression Workflow: Scalability Test (large workflow)] REST API: call *is_alive*
     endpoint 4'
   negative_logic: false
   notification_header: ''
@@ -9999,8 +10056,9 @@
     c: ['1', '2', '3']
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow P: large workflow (scalability)': &id166 [-94, 200]
-    'Regression workflow P: large workflow (scalability)': *id166
+    'Regression Workflow P: large workflow (scalability)': &id198 [-94, 200]
+    'Regression Workflow: Scalability Test (large workflow)': *id198
+    'Regression workflow P: large workflow (scalability)': *id198
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -10061,7 +10119,7 @@
   max_processes: 5
   maximum_runs: 1
   multiprocessing: true
-  name: '[Regression Workflow P: large workflow (scalability)] REST API: call *is_alive*
+  name: '[Regression Workflow: Scalability Test (large workflow)] REST API: call *is_alive*
     endpoint 5'
   negative_logic: false
   notification_header: ''
@@ -10074,8 +10132,9 @@
     c: ['1', '2', '3']
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow P: large workflow (scalability)': &id167 [-94, 109]
-    'Regression workflow P: large workflow (scalability)': *id167
+    'Regression Workflow P: large workflow (scalability)': &id199 [-94, 109]
+    'Regression Workflow: Scalability Test (large workflow)': *id199
+    'Regression workflow P: large workflow (scalability)': *id199
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -10155,7 +10214,7 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression Workflow P: large workflow (scalability)] Show vrf with netmiko
+  name: '[Regression Workflow: Scalability Test (large workflow)] Show vrf with netmiko
     1'
   negative_logic: false
   notification_header: ''
@@ -10163,8 +10222,9 @@
   operating_system: ''
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow P: large workflow (scalability)': &id168 [-117, 5]
-    'Regression workflow P: large workflow (scalability)': *id168
+    'Regression Workflow P: large workflow (scalability)': &id200 [-117, 5]
+    'Regression Workflow: Scalability Test (large workflow)': *id200
+    'Regression workflow P: large workflow (scalability)': *id200
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -10247,7 +10307,7 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression Workflow P: large workflow (scalability)] Show vrf with netmiko
+  name: '[Regression Workflow: Scalability Test (large workflow)] Show vrf with netmiko
     2'
   negative_logic: false
   notification_header: ''
@@ -10255,8 +10315,9 @@
   operating_system: ''
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow P: large workflow (scalability)': &id169 [-81, -125]
-    'Regression workflow P: large workflow (scalability)': *id169
+    'Regression Workflow P: large workflow (scalability)': &id201 [-81, -125]
+    'Regression Workflow: Scalability Test (large workflow)': *id201
+    'Regression workflow P: large workflow (scalability)': *id201
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -10339,7 +10400,7 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression Workflow P: large workflow (scalability)] Show vrf with netmiko
+  name: '[Regression Workflow: Scalability Test (large workflow)] Show vrf with netmiko
     3'
   negative_logic: false
   notification_header: ''
@@ -10347,8 +10408,9 @@
   operating_system: ''
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow P: large workflow (scalability)': &id170 [-89, -196]
-    'Regression workflow P: large workflow (scalability)': *id170
+    'Regression Workflow P: large workflow (scalability)': &id202 [-89, -196]
+    'Regression Workflow: Scalability Test (large workflow)': *id202
+    'Regression workflow P: large workflow (scalability)': *id202
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -10431,7 +10493,7 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression Workflow P: large workflow (scalability)] Show vrf with netmiko
+  name: '[Regression Workflow: Scalability Test (large workflow)] Show vrf with netmiko
     4'
   negative_logic: false
   notification_header: ''
@@ -10439,8 +10501,9 @@
   operating_system: ''
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow P: large workflow (scalability)': &id171 [183, -222]
-    'Regression workflow P: large workflow (scalability)': *id171
+    'Regression Workflow P: large workflow (scalability)': &id203 [183, -222]
+    'Regression Workflow: Scalability Test (large workflow)': *id203
+    'Regression workflow P: large workflow (scalability)': *id203
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -10523,7 +10586,7 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression Workflow P: large workflow (scalability)] Show vrf with netmiko
+  name: '[Regression Workflow: Scalability Test (large workflow)] Show vrf with netmiko
     5'
   negative_logic: false
   notification_header: ''
@@ -10531,8 +10594,9 @@
   operating_system: ''
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow P: large workflow (scalability)': &id172 [188, -130]
-    'Regression workflow P: large workflow (scalability)': *id172
+    'Regression Workflow P: large workflow (scalability)': &id204 [188, -130]
+    'Regression Workflow: Scalability Test (large workflow)': *id204
+    'Regression workflow P: large workflow (scalability)': *id204
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -10615,7 +10679,7 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression Workflow P: large workflow (scalability)] Show vrf with netmiko
+  name: '[Regression Workflow: Scalability Test (large workflow)] Show vrf with netmiko
     6'
   negative_logic: false
   notification_header: ''
@@ -10623,8 +10687,9 @@
   operating_system: ''
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow P: large workflow (scalability)': &id173 [190, -36]
-    'Regression workflow P: large workflow (scalability)': *id173
+    'Regression Workflow P: large workflow (scalability)': &id205 [190, -36]
+    'Regression Workflow: Scalability Test (large workflow)': *id205
+    'Regression workflow P: large workflow (scalability)': *id205
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -10686,15 +10751,16 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression Workflow P: large workflow (scalability)] Sleep with python'
+  name: '[Regression Workflow: Scalability Test (large workflow)] Sleep with python'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow P: large workflow (scalability)': &id174 [194, 47]
-    'Regression workflow P: large workflow (scalability)': *id174
+    'Regression Workflow P: large workflow (scalability)': &id206 [194, 47]
+    'Regression Workflow: Scalability Test (large workflow)': *id206
+    'Regression workflow P: large workflow (scalability)': *id206
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -10751,15 +10817,17 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression Workflow P: large workflow (scalability)] Sleep with python 2'
+  name: '[Regression Workflow: Scalability Test (large workflow)] Sleep with python
+    2'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow P: large workflow (scalability)': &id175 [203, 127]
-    'Regression workflow P: large workflow (scalability)': *id175
+    'Regression Workflow P: large workflow (scalability)': &id207 [203, 127]
+    'Regression Workflow: Scalability Test (large workflow)': *id207
+    'Regression workflow P: large workflow (scalability)': *id207
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -10816,15 +10884,17 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression Workflow P: large workflow (scalability)] Sleep with python 3'
+  name: '[Regression Workflow: Scalability Test (large workflow)] Sleep with python
+    3'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow P: large workflow (scalability)': &id176 [207, 230]
-    'Regression workflow P: large workflow (scalability)': *id176
+    'Regression Workflow P: large workflow (scalability)': &id208 [207, 230]
+    'Regression Workflow: Scalability Test (large workflow)': *id208
+    'Regression workflow P: large workflow (scalability)': *id208
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -10881,15 +10951,17 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression Workflow P: large workflow (scalability)] Sleep with python 4'
+  name: '[Regression Workflow: Scalability Test (large workflow)] Sleep with python
+    4'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow P: large workflow (scalability)': &id177 [476, 232]
-    'Regression workflow P: large workflow (scalability)': *id177
+    'Regression Workflow P: large workflow (scalability)': &id209 [476, 232]
+    'Regression Workflow: Scalability Test (large workflow)': *id209
+    'Regression workflow P: large workflow (scalability)': *id209
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -10946,15 +11018,17 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression Workflow P: large workflow (scalability)] Sleep with python 5'
+  name: '[Regression Workflow: Scalability Test (large workflow)] Sleep with python
+    5'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow P: large workflow (scalability)': &id178 [471, 142]
-    'Regression workflow P: large workflow (scalability)': *id178
+    'Regression Workflow P: large workflow (scalability)': &id210 [471, 142]
+    'Regression Workflow: Scalability Test (large workflow)': *id210
+    'Regression workflow P: large workflow (scalability)': *id210
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -11011,15 +11085,17 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression Workflow P: large workflow (scalability)] Sleep with python 6'
+  name: '[Regression Workflow: Scalability Test (large workflow)] Sleep with python
+    6'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow P: large workflow (scalability)': &id179 [476, 44]
-    'Regression workflow P: large workflow (scalability)': *id179
+    'Regression Workflow P: large workflow (scalability)': &id211 [476, 44]
+    'Regression Workflow: Scalability Test (large workflow)': *id211
+    'Regression workflow P: large workflow (scalability)': *id211
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -11076,15 +11152,17 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression Workflow P: large workflow (scalability)] Sleep with python 7'
+  name: '[Regression Workflow: Scalability Test (large workflow)] Sleep with python
+    7'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow P: large workflow (scalability)': &id180 [469, -50]
-    'Regression workflow P: large workflow (scalability)': *id180
+    'Regression Workflow P: large workflow (scalability)': &id212 [469, -50]
+    'Regression Workflow: Scalability Test (large workflow)': *id212
+    'Regression workflow P: large workflow (scalability)': *id212
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -11141,15 +11219,17 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression Workflow P: large workflow (scalability)] Sleep with python 8'
+  name: '[Regression Workflow: Scalability Test (large workflow)] Sleep with python
+    8'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow P: large workflow (scalability)': &id181 [467, -163]
-    'Regression workflow P: large workflow (scalability)': *id181
+    'Regression Workflow P: large workflow (scalability)': &id213 [467, -163]
+    'Regression Workflow: Scalability Test (large workflow)': *id213
+    'Regression workflow P: large workflow (scalability)': *id213
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -11201,14 +11281,14 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels: {}
-  last_modified: '2020-07-24 10:10:19.457888'
+  last_modified: '2020-11-17 09:53:31.266448'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: 'Regression Workflow Q: File transfer'
+  name: 'Regression Workflow: File Transfer Mechanism'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -11221,15 +11301,16 @@
   reply_to: ''
   reserved: false
   run_method: per_device
-  scoped_name: 'Regression Workflow Q: File transfer'
+  scoped_name: 'Regression Workflow: File Transfer Mechanism'
   send_notification: false
   send_notification_method: mail
-  services: ['[Shared] Start', '[Shared] End', '[Regression Workflow Q: File transfer]
-      Check that test file does not exist', '[Regression Workflow Q: File transfer]
-      Transfer a.bin', '[Regression Workflow Q: File transfer] Check that test file
-      does exist', '[Regression Workflow Q: File transfer] Transfer bc.bin and bd.bin
-      with glob option', '[Regression Workflow Q: File transfer] Delete all transferred
-      files', '[Regression Workflow Q: File transfer] Transfer non-existing file']
+  services: ['[Shared] Start', '[Shared] End', '[Regression Workflow: File Transfer
+      Mechanism] Check that test file does not exist', '[Regression Workflow: File
+      Transfer Mechanism] Transfer a.bin', '[Regression Workflow: File Transfer Mechanism]
+      Check that test file does exist', '[Regression Workflow: File Transfer Mechanism]
+      Transfer bc.bin and bd.bin with glob option', '[Regression Workflow: File Transfer
+      Mechanism] Delete all transferred files', '[Regression Workflow: File Transfer
+      Mechanism] Transfer non-existing file']
   shared: false
   skip: {}
   skip_query: ''
@@ -11297,14 +11378,16 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression Workflow Q: File transfer] Check that test file does not exist'
+  name: '[Regression Workflow: File Transfer Mechanism] Check that test file does
+    not exist'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow Q: File transfer': [-171, -148]
+    'Regression Workflow Q: File transfer': &id214 [-171, -148]
+    'Regression Workflow: File Transfer Mechanism': *id214
   postprocessing: results["success"] = "a.bin" not in results["result"]
   postprocessing_mode: always
   preprocessing: ''
@@ -11372,14 +11455,15 @@
   maximum_runs: 1
   missing_host_key_policy: true
   multiprocessing: false
-  name: '[Regression Workflow Q: File transfer] Transfer a.bin'
+  name: '[Regression Workflow: File Transfer Mechanism] Transfer a.bin'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow Q: File transfer': [-21, 255]
+    'Regression Workflow Q: File transfer': &id215 [-21, 255]
+    'Regression Workflow: File Transfer Mechanism': *id215
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -11460,14 +11544,16 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression Workflow Q: File transfer] Check that test file does exist'
+  name: '[Regression Workflow: File Transfer Mechanism] Check that test file does
+    exist'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow Q: File transfer': [362, 239]
+    'Regression Workflow Q: File transfer': &id216 [362, 239]
+    'Regression Workflow: File Transfer Mechanism': *id216
   postprocessing: "simple_file = \"a.bin\" in results[\"result\"]\r\nglob_files =\
     \ \"bc.bin\" in results[\"result\"] and \"bd.bin\" in results[\"result\"]\r\n\
     results[\"success\"] = simple_file and glob_files"
@@ -11537,15 +11623,16 @@
   maximum_runs: 1
   missing_host_key_policy: true
   multiprocessing: false
-  name: '[Regression Workflow Q: File transfer] Transfer bc.bin and bd.bin with glob
-    option'
+  name: '[Regression Workflow: File Transfer Mechanism] Transfer bc.bin and bd.bin
+    with glob option'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow Q: File transfer': [187, -140]
+    'Regression Workflow Q: File transfer': &id217 [187, -140]
+    'Regression Workflow: File Transfer Mechanism': *id217
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -11626,14 +11713,15 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression Workflow Q: File transfer] Delete all transferred files'
+  name: '[Regression Workflow: File Transfer Mechanism] Delete all transferred files'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow Q: File transfer': [517, -138]
+    'Regression Workflow Q: File transfer': &id218 [517, -138]
+    'Regression Workflow: File Transfer Mechanism': *id218
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -11701,14 +11789,15 @@
   maximum_runs: 1
   missing_host_key_policy: true
   multiprocessing: false
-  name: '[Regression Workflow Q: File transfer] Transfer non-existing file'
+  name: '[Regression Workflow: File Transfer Mechanism] Transfer non-existing file'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow Q: File transfer': [-332, 180]
+    'Regression Workflow Q: File transfer': &id219 [-332, 180]
+    'Regression Workflow: File Transfer Mechanism': *id219
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -11763,14 +11852,14 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels: {}
-  last_modified: '2020-09-25 12:33:43.778754'
+  last_modified: '2020-11-17 09:53:46.809648'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: 'Regression Workflow R: skip services in service by service mode'
+  name: 'Regression Workflow: Skip Services in SxS mode'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -11783,13 +11872,12 @@
   reply_to: ''
   reserved: false
   run_method: per_service_with_workflow_targets
-  scoped_name: 'Regression Workflow R: skip services in service by service mode'
+  scoped_name: 'Regression Workflow: Skip Services in SxS mode'
   send_notification: false
   send_notification_method: mail
-  services: ['[Shared] Start', '[Shared] End', '[Regression Workflow R: skip services
-      in service by service mode] Partial failure', '[Regression Workflow R: skip
-      services in service by service mode] Last service', '[Regression Workflow R:
-      skip services in service by service mode] Skipped service']
+  services: ['[Shared] Start', '[Shared] End', '[Regression Workflow: Skip Services
+      in SxS mode] Partial failure', '[Regression Workflow: Skip Services in SxS mode]
+      Last service', '[Regression Workflow: Skip Services in SxS mode] Skipped service']
   shared: false
   skip: {}
   skip_query: ''
@@ -11836,17 +11924,17 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression Workflow R: skip services in service by service mode] Partial
-    failure'
+  name: '[Regression Workflow: Skip Services in SxS mode] Partial failure'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow R: skip services in service by service mode': &id182 [-124,
-      -154]
-    'Workflow Regression R: skip services in service by service mode': *id182
+    'Regression Workflow R: Skip Services in SxS mode': &id220 [-124, -154]
+    'Regression Workflow R: skip services in service by service mode': *id220
+    'Regression Workflow: Skip Services in SxS mode': *id220
+    'Workflow Regression R: skip services in service by service mode': *id220
   postprocessing: results["success"] = device.name == "Washington"
   postprocessing_mode: always
   preprocessing: ''
@@ -11907,16 +11995,17 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression Workflow R: skip services in service by service mode] Last service'
+  name: '[Regression Workflow: Skip Services in SxS mode] Last service'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow R: skip services in service by service mode': &id183 [304,
-      -102]
-    'Workflow Regression R: skip services in service by service mode': *id183
+    'Regression Workflow R: Skip Services in SxS mode': &id221 [304, -102]
+    'Regression Workflow R: skip services in service by service mode': *id221
+    'Regression Workflow: Skip Services in SxS mode': *id221
+    'Workflow Regression R: skip services in service by service mode': *id221
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -11977,17 +12066,17 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression Workflow R: skip services in service by service mode] Skipped
-    service'
+  name: '[Regression Workflow: Skip Services in SxS mode] Skipped service'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow R: skip services in service by service mode': &id184 [12,
-      179]
-    'Workflow Regression R: skip services in service by service mode': *id184
+    'Regression Workflow R: Skip Services in SxS mode': &id222 [12, 179]
+    'Regression Workflow R: skip services in service by service mode': *id222
+    'Regression Workflow: Skip Services in SxS mode': *id222
+    'Workflow Regression R: skip services in service by service mode': *id222
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -12056,14 +12145,14 @@
       content: "Must be tested both in:\r\n- device by device mode\r\n- service by\
         \ service with workflow targets mode"
       positions: [273, 201]
-  last_modified: '2020-09-24 07:43:51.294198'
+  last_modified: '2020-11-17 09:54:14.128338'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: 'Regression Workflow S: conditional skip query in failed and discard mode'
+  name: 'Regression Workflow: Conditional Skip Query in Failed and Discard Modes'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -12076,17 +12165,17 @@
   reply_to: ''
   reserved: false
   run_method: per_service_with_workflow_targets
-  scoped_name: 'Regression Workflow S: conditional skip query in failed and discard
-    mode'
+  scoped_name: 'Regression Workflow: Conditional Skip Query in Failed and Discard
+    Modes'
   send_notification: false
   send_notification_method: mail
-  services: ['[Shared] Start', '[Shared] End', '[Regression Workflow S: conditional
-      skip query in failed and discard mode] Skip Washington with Skip value == False',
-    '[Regression Workflow S: conditional skip query in failed and discard mode] Post-success
-      service', '[Regression Workflow S: conditional skip query in failed and discard
-      mode] Post-failure service', '[Regression Workflow S: conditional skip query
-      in failed and discard mode] Final service', '[Regression Workflow S: conditional
-      skip query in failed and discard mode] Skip router5-7 in discard mode']
+  services: ['[Shared] Start', '[Shared] End', '[Regression Workflow: Conditional
+      Skip Query in Failed and Discard Modes] Skip Washington with Skip value == False',
+    '[Regression Workflow: Conditional Skip Query in Failed and Discard Modes] Post-success
+      service', '[Regression Workflow: Conditional Skip Query in Failed and Discard
+      Modes] Post-failure service', '[Regression Workflow: Conditional Skip Query
+      in Failed and Discard Modes] Final service', '[Regression Workflow: Conditional
+      Skip Query in Failed and Discard Modes] Skip router5-7 in discard mode']
   shared: false
   skip: {}
   skip_query: ''
@@ -12133,7 +12222,7 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression Workflow S: conditional skip query in failed and discard mode]
+  name: '[Regression Workflow: Conditional Skip Query in Failed and Discard Modes]
     Skip Washington with Skip value == False'
   negative_logic: false
   notification_header: ''
@@ -12141,9 +12230,10 @@
   operating_system: ''
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow S: conditional skip query in failed and discard mode': &id185 [
+    'Regression Workflow S: conditional skip query in failed and discard mode': &id223 [
       -242, 237]
-    'Regression Workflow S: conditional skip query with skip value set to False': *id185
+    'Regression Workflow S: conditional skip query with skip value set to False': *id223
+    'Regression Workflow: Conditional Skip Query in Failed and Discard Modes': *id223
     'Workflow Regression S: conditional skip query with skip value set to False': [
       -149, -30]
   postprocessing: ''
@@ -12206,7 +12296,7 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression Workflow S: conditional skip query in failed and discard mode]
+  name: '[Regression Workflow: Conditional Skip Query in Failed and Discard Modes]
     Post-success service'
   negative_logic: false
   notification_header: ''
@@ -12214,9 +12304,10 @@
   operating_system: ''
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow S: conditional skip query in failed and discard mode': &id186 [
+    'Regression Workflow S: conditional skip query in failed and discard mode': &id224 [
       412, 108]
-    'Regression Workflow S: conditional skip query with skip value set to False': *id186
+    'Regression Workflow S: conditional skip query with skip value set to False': *id224
+    'Regression Workflow: Conditional Skip Query in Failed and Discard Modes': *id224
     'Workflow Regression S: conditional skip query with skip value set to False': [
       264, -16]
   postprocessing: ''
@@ -12279,7 +12370,7 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression Workflow S: conditional skip query in failed and discard mode]
+  name: '[Regression Workflow: Conditional Skip Query in Failed and Discard Modes]
     Post-failure service'
   negative_logic: false
   notification_header: ''
@@ -12287,9 +12378,10 @@
   operating_system: ''
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow S: conditional skip query in failed and discard mode': &id187 [
+    'Regression Workflow S: conditional skip query in failed and discard mode': &id225 [
       605, 248]
-    'Regression Workflow S: conditional skip query with skip value set to False': *id187
+    'Regression Workflow S: conditional skip query with skip value set to False': *id225
+    'Regression Workflow: Conditional Skip Query in Failed and Discard Modes': *id225
     'Workflow Regression S: conditional skip query with skip value set to False': [
       208, 194]
   postprocessing: ''
@@ -12352,7 +12444,7 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression Workflow S: conditional skip query in failed and discard mode]
+  name: '[Regression Workflow: Conditional Skip Query in Failed and Discard Modes]
     Final service'
   negative_logic: false
   notification_header: ''
@@ -12360,9 +12452,10 @@
   operating_system: ''
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow S: conditional skip query in failed and discard mode': &id188 [
+    'Regression Workflow S: conditional skip query in failed and discard mode': &id226 [
       660, 13]
-    'Regression Workflow S: conditional skip query with skip value set to False': *id188
+    'Regression Workflow S: conditional skip query with skip value set to False': *id226
+    'Regression Workflow: Conditional Skip Query in Failed and Discard Modes': *id226
     'Workflow Regression S: conditional skip query with skip value set to False': [
       636, 63]
   postprocessing: ''
@@ -12522,12 +12615,12 @@
   operating_system: ''
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow 1: link neighbors mechanism': &id189 [-20, 30]
-    'Regression Workflow 4: Link Neighbors Mechanism (public)': *id189
-    'Regression Workflow 4: link neighbors mechanism': *id189
-    'Regression Workflow 4: link neighbors mechanism (public)': *id189
-    'Regression Workflow T: link neighbors mechanism': *id189
-    'Regression Workflow: Link Neighbors Mechanism (public)': *id189
+    'Regression Workflow 1: link neighbors mechanism': &id227 [-20, 30]
+    'Regression Workflow 4: Link Neighbors Mechanism (public)': *id227
+    'Regression Workflow 4: link neighbors mechanism': *id227
+    'Regression Workflow 4: link neighbors mechanism (public)': *id227
+    'Regression Workflow T: link neighbors mechanism': *id227
+    'Regression Workflow: Link Neighbors Mechanism (public)': *id227
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -12621,12 +12714,12 @@
   payload: {}
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow 1: link neighbors mechanism': &id190 [401, -181]
-    'Regression Workflow 4: Link Neighbors Mechanism (public)': *id190
-    'Regression Workflow 4: link neighbors mechanism': *id190
-    'Regression Workflow 4: link neighbors mechanism (public)': *id190
-    'Regression Workflow T: link neighbors mechanism': *id190
-    'Regression Workflow: Link Neighbors Mechanism (public)': *id190
+    'Regression Workflow 1: link neighbors mechanism': &id228 [401, -181]
+    'Regression Workflow 4: Link Neighbors Mechanism (public)': *id228
+    'Regression Workflow 4: link neighbors mechanism': *id228
+    'Regression Workflow 4: link neighbors mechanism (public)': *id228
+    'Regression Workflow T: link neighbors mechanism': *id228
+    'Regression Workflow: Link Neighbors Mechanism (public)': *id228
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -12714,8 +12807,8 @@
   pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow 1: Netmiko with validation and retries': [-142, -137]
-    'Regression Workflow D: Prompts': &id191 [-291, -104]
-    'Regression Workflow: Netmiko Prompts': *id191
+    'Regression Workflow D: Prompts': &id229 [-291, -104]
+    'Regression Workflow: Netmiko Prompts': *id229
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -12791,14 +12884,14 @@
       content: "We encrypt credentials with the \"encrypt\" function.\r\nTo be decrypted\
         \ in the next service via\r\ncustom credentials variable substitution."
       positions: [73, -121]
-  last_modified: '2020-09-26 03:33:45.116553'
+  last_modified: '2020-11-17 09:54:33.239998'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: 'Regression Workflow T: global variables and post-run pool update'
+  name: 'Regression Workflow: Global Variables and post-run Pool Update Mechanism'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -12811,14 +12904,14 @@
   reply_to: ''
   reserved: false
   run_method: per_service_with_workflow_targets
-  scoped_name: 'Regression Workflow T: global variables and post-run pool update'
+  scoped_name: 'Regression Workflow: Global Variables and post-run Pool Update Mechanism'
   send_notification: false
   send_notification_method: mail
-  services: ['[Shared] Start', '[Shared] End', '[Regression Workflow T: global variables
-      and post-run pool update] Functions fetch and fetch_all', '[Regression Workflow
-      T: global variables and post-run pool update] Credentials encryption', '[Regression
-      Workflow T: global variables and post-run pool update] Show vrf with custom
-      encrypted credentials']
+  services: ['[Shared] Start', '[Shared] End', '[Regression Workflow: Global Variables
+      and post-run Pool Update Mechanism] Functions fetch and fetch_all', '[Regression
+      Workflow: Global Variables and post-run Pool Update Mechanism] Credentials encryption',
+    '[Regression Workflow: Global Variables and post-run Pool Update Mechanism] Show
+      vrf with custom encrypted credentials']
   shared: false
   skip: {}
   skip_query: ''
@@ -12865,8 +12958,8 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression Workflow T: global variables and post-run pool update] Functions
-    fetch and fetch_all'
+  name: '[Regression Workflow: Global Variables and post-run Pool Update Mechanism]
+    Functions fetch and fetch_all'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -12874,7 +12967,9 @@
   pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow T: global variables': [-180, 198]
-    'Regression Workflow T: global variables and post-run pool update': [-153, 159]
+    'Regression Workflow T: global variables and post-run pool update': &id230 [-153,
+      159]
+    'Regression Workflow: Global Variables and post-run Pool Update Mechanism': *id230
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -12939,8 +13034,8 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression Workflow T: global variables and post-run pool update] Credentials
-    encryption'
+  name: '[Regression Workflow: Global Variables and post-run Pool Update Mechanism]
+    Credentials encryption'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -12948,7 +13043,9 @@
   pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow T: global variables': [42, -43]
-    'Regression Workflow T: global variables and post-run pool update': [42, -43]
+    'Regression Workflow T: global variables and post-run pool update': &id231 [42,
+      -43]
+    'Regression Workflow: Global Variables and post-run Pool Update Mechanism': *id231
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -13028,8 +13125,8 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression Workflow T: global variables and post-run pool update] Show vrf
-    with custom encrypted credentials'
+  name: '[Regression Workflow: Global Variables and post-run Pool Update Mechanism]
+    Show vrf with custom encrypted credentials'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -13037,7 +13134,9 @@
   pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow T: global variables': [487, 104]
-    'Regression Workflow T: global variables and post-run pool update': [487, 104]
+    'Regression Workflow T: global variables and post-run pool update': &id232 [487,
+      104]
+    'Regression Workflow: Global Variables and post-run Pool Update Mechanism': *id232
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -13099,7 +13198,7 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression Workflow S: conditional skip query in failed and discard mode]
+  name: '[Regression Workflow: Conditional Skip Query in Failed and Discard Modes]
     Skip router5-7 in discard mode'
   negative_logic: false
   notification_header: ''
@@ -13107,9 +13206,10 @@
   operating_system: ''
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow S: conditional skip query in failed and discard mode': &id192 [
+    'Regression Workflow S: conditional skip query in failed and discard mode': &id233 [
       -215, 70]
-    'Regression Workflow S: conditional skip query with skip value set to False': *id192
+    'Regression Workflow S: conditional skip query with skip value set to False': *id233
+    'Regression Workflow: Conditional Skip Query in Failed and Discard Modes': *id233
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -13181,14 +13281,14 @@
         \ edge after skip service)\r\n- 2 devices discarded in the lower path (0 device\
         \ in the failure edge after skip service)"
       positions: [-12, 193]
-  last_modified: '2020-10-01 03:46:14.605330'
+  last_modified: '2020-11-17 09:54:53.432131'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: 'Regression Workflow U: fork based on value with skip discard mode'
+  name: 'Regression Workflow: Fork based on value with Skip Discard Mechanism'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -13201,17 +13301,17 @@
   reply_to: ''
   reserved: false
   run_method: per_device
-  scoped_name: 'Regression Workflow U: fork based on value with skip discard mode'
+  scoped_name: 'Regression Workflow: Fork based on value with Skip Discard Mechanism'
   send_notification: false
   send_notification_method: mail
-  services: ['[Shared] Start', '[Shared] End', '[Regression Workflow U: fork based
-      on value with skip discard mode] REST API: call *is_alive* endpoint', '[Regression
-      Workflow U: fork based on value with skip discard mode] Arista devices', '[Regression
-      Workflow U: fork based on value with skip discard mode] Juniper devices', '[Regression
-      Workflow U: fork based on value with skip discard mode] Show VRF', '[Regression
-      Workflow U: fork based on value with skip discard mode] is_alive endpoint',
-    '[Regression Workflow U: fork based on value with skip discard mode] is_alive
-      endpoint 2: Skipped']
+  services: ['[Shared] Start', '[Shared] End', '[Regression Workflow: Fork based on
+      value with Skip Discard Mechanism] REST API: call *is_alive* endpoint', '[Regression
+      Workflow: Fork based on value with Skip Discard Mechanism] Arista devices',
+    '[Regression Workflow: Fork based on value with Skip Discard Mechanism] Juniper
+      devices', '[Regression Workflow: Fork based on value with Skip Discard Mechanism]
+      Show VRF', '[Regression Workflow: Fork based on value with Skip Discard Mechanism]
+      is_alive endpoint', '[Regression Workflow: Fork based on value with Skip Discard
+      Mechanism] is_alive endpoint 2: Skipped']
   shared: false
   skip: {}
   skip_query: ''
@@ -13260,7 +13360,7 @@
   max_processes: 5
   maximum_runs: 1
   multiprocessing: true
-  name: '[Regression Workflow U: fork based on value with skip discard mode] REST
+  name: '[Regression Workflow: Fork based on value with Skip Discard Mechanism] REST
     API: call *is_alive* endpoint'
   negative_logic: false
   notification_header: ''
@@ -13279,9 +13379,11 @@
     'Regression Workflow C: Advanced multiprocessing': [386, 124]
     'Regression Workflow D: Prompts': [405, -103]
     'Regression Workflow L: superworkflow': [162, -126]
-    'Regression Workflow P: large workflow (scalability)': &id193 [-415, -115]
-    'Regression Workflow U: fork based on value with skip discard mode': [-354, -22]
-    'Regression workflow P: large workflow (scalability)': *id193
+    'Regression Workflow P: large workflow (scalability)': &id235 [-415, -115]
+    'Regression Workflow U: fork based on value with skip discard mode': &id234 [
+      -354, -22]
+    'Regression Workflow: Fork based on value with Skip Discard Mechanism': *id234
+    'Regression workflow P: large workflow (scalability)': *id235
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -13340,7 +13442,7 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression Workflow U: fork based on value with skip discard mode] Arista
+  name: '[Regression Workflow: Fork based on value with Skip Discard Mechanism] Arista
     devices'
   negative_logic: false
   notification_header: ''
@@ -13348,7 +13450,9 @@
   operating_system: ''
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow U: fork based on value with skip discard mode': [47, -29]
+    'Regression Workflow U: fork based on value with skip discard mode': &id236 [
+      47, -29]
+    'Regression Workflow: Fork based on value with Skip Discard Mechanism': *id236
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -13409,7 +13513,7 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression Workflow U: fork based on value with skip discard mode] Juniper
+  name: '[Regression Workflow: Fork based on value with Skip Discard Mechanism] Juniper
     devices'
   negative_logic: false
   notification_header: ''
@@ -13417,7 +13521,9 @@
   operating_system: ''
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow U: fork based on value with skip discard mode': [-430, 342]
+    'Regression Workflow U: fork based on value with skip discard mode': &id237 [
+      -430, 342]
+    'Regression Workflow: Fork based on value with Skip Discard Mechanism': *id237
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -13499,7 +13605,7 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression Workflow U: fork based on value with skip discard mode] Show
+  name: '[Regression Workflow: Fork based on value with Skip Discard Mechanism] Show
     VRF'
   negative_logic: false
   notification_header: ''
@@ -13507,7 +13613,9 @@
   operating_system: ''
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow U: fork based on value with skip discard mode': [574, 0]
+    'Regression Workflow U: fork based on value with skip discard mode': &id238 [
+      574, 0]
+    'Regression Workflow: Fork based on value with Skip Discard Mechanism': *id238
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -13571,7 +13679,7 @@
   max_processes: 5
   maximum_runs: 1
   multiprocessing: true
-  name: '[Regression Workflow U: fork based on value with skip discard mode] is_alive
+  name: '[Regression Workflow: Fork based on value with Skip Discard Mechanism] is_alive
     endpoint'
   negative_logic: false
   notification_header: ''
@@ -13584,7 +13692,9 @@
     c: ['1', '2', '3']
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow U: fork based on value with skip discard mode': [437, 78]
+    'Regression Workflow U: fork based on value with skip discard mode': &id239 [
+      437, 78]
+    'Regression Workflow: Fork based on value with Skip Discard Mechanism': *id239
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -13645,7 +13755,7 @@
   max_processes: 5
   maximum_runs: 1
   multiprocessing: true
-  name: '[Regression Workflow U: fork based on value with skip discard mode] is_alive
+  name: '[Regression Workflow: Fork based on value with Skip Discard Mechanism] is_alive
     endpoint 2: Skipped'
   negative_logic: false
   notification_header: ''
@@ -13658,7 +13768,9 @@
     c: ['1', '2', '3']
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow U: fork based on value with skip discard mode': [32, 431]
+    'Regression Workflow U: fork based on value with skip discard mode': &id240 [
+      32, 431]
+    'Regression Workflow: Fork based on value with Skip Discard Mechanism': *id240
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -13735,14 +13847,14 @@
         \ considered a failure for the workflow.\r\nAustin should move along the failure\
         \ edge, and\r\nWashington should move along the success edge."
       positions: [-201, 295]
-  last_modified: '2020-10-01 03:45:17.850234'
+  last_modified: '2020-11-17 09:55:13.792368'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: 'Regression Workflow V: skip query with device in run once mode'
+  name: 'Regression Workflow: Skip Query with device in Run Once Mode'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -13755,13 +13867,13 @@
   reply_to: ''
   reserved: false
   run_method: per_device
-  scoped_name: 'Regression Workflow V: skip query with device in run once mode'
+  scoped_name: 'Regression Workflow: Skip Query with device in Run Once Mode'
   send_notification: false
   send_notification_method: mail
-  services: ['[Shared] Start', '[Shared] End', '[Regression Workflow V: skip query
-      with device in run once mode] Subworkflow in SxS mode - workflow targets', '[Regression
-      Workflow V: skip query with device in run once mode] Python service in run once
-      mode', '[Regression Workflow V: skip query with device in run once mode] Subworkflow
+  services: ['[Shared] Start', '[Shared] End', '[Regression Workflow: Skip Query with
+      device in Run Once Mode] Subworkflow in SxS mode - workflow targets', '[Regression
+      Workflow: Skip Query with device in Run Once Mode] Python service in run once
+      mode', '[Regression Workflow: Skip Query with device in Run Once Mode] Subworkflow
       in SxS mode - service targets']
   shared: false
   skip: {}
@@ -13811,7 +13923,7 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression Workflow V: skip query with device in run once mode] Subworkflow
+  name: '[Regression Workflow: Skip Query with device in Run Once Mode] Subworkflow
     in SxS mode - workflow targets'
   negative_logic: false
   notification_header: ''
@@ -13819,7 +13931,9 @@
   operating_system: ''
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow V: skip query with device in run once mode': [-221, 154]
+    'Regression Workflow V: skip query with device in run once mode': &id241 [-221,
+      154]
+    'Regression Workflow: Skip Query with device in Run Once Mode': *id241
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -13829,8 +13943,8 @@
   scoped_name: Subworkflow in SxS mode - workflow targets
   send_notification: false
   send_notification_method: mail
-  services: ['[Shared] Start', '[Shared] End', '[[Regression Workflow V: skip query
-      with device in run once mode] Subworkflow in SxS mode - workflow targets] Fail
+  services: ['[Shared] Start', '[Shared] End', '[[Regression Workflow: Skip Query
+      with device in Run Once Mode] Subworkflow in SxS mode - workflow targets] Fail
       Austin']
   shared: false
   skip: {}
@@ -13878,7 +13992,7 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression Workflow V: skip query with device in run once mode] Python service
+  name: '[Regression Workflow: Skip Query with device in Run Once Mode] Python service
     in run once mode'
   negative_logic: false
   notification_header: ''
@@ -13886,7 +14000,9 @@
   operating_system: ''
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow V: skip query with device in run once mode': [-31, 3]
+    'Regression Workflow V: skip query with device in run once mode': &id242 [-31,
+      3]
+    'Regression Workflow: Skip Query with device in Run Once Mode': *id242
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -13946,7 +14062,7 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression Workflow V: skip query with device in run once mode] Subworkflow
+  name: '[Regression Workflow: Skip Query with device in Run Once Mode] Subworkflow
     in SxS mode - service targets'
   negative_logic: false
   notification_header: ''
@@ -13954,7 +14070,9 @@
   operating_system: ''
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow V: skip query with device in run once mode': [342, 205]
+    'Regression Workflow V: skip query with device in run once mode': &id243 [342,
+      205]
+    'Regression Workflow: Skip Query with device in Run Once Mode': *id243
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -14011,7 +14129,7 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[[Regression Workflow V: skip query with device in run once mode] Subworkflow
+  name: '[[Regression Workflow: Skip Query with device in Run Once Mode] Subworkflow
     in SxS mode - workflow targets] Fail Austin'
   negative_logic: false
   notification_header: ''
@@ -14019,8 +14137,9 @@
   operating_system: ''
   pools: ['All instances (devices, links, services and users)']
   positions:
-    '[Regression Workflow V: skip query with device in run once mode] Subworkflow in SxS mode - workflow targets': [
+    '[Regression Workflow V: skip query with device in run once mode] Subworkflow in SxS mode - workflow targets': &id244 [
       230, -19]
+    '[Regression Workflow: Skip Query with device in Run Once Mode] Subworkflow in SxS mode - workflow targets': *id244
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -14096,14 +14215,14 @@
         \ in DxD and SxS with workflow targets mode.\r\nRuns on: PaloAlto, Washington,\
         \ Austin"
       positions: [104, -127]
-  last_modified: '2020-10-01 04:06:50.783995'
+  last_modified: '2020-11-17 09:55:30.729053'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: 'Regression Workflow W: skip, discard and disable result creation mechanism'
+  name: 'Regression Workflow: Skip, Discard and Disable Result Creation Mechanism'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -14116,15 +14235,15 @@
   reply_to: ''
   reserved: false
   run_method: per_service_with_workflow_targets
-  scoped_name: 'Regression Workflow W: skip, discard and disable result creation mechanism'
+  scoped_name: 'Regression Workflow: Skip, Discard and Disable Result Creation Mechanism'
   send_notification: false
   send_notification_method: mail
-  services: ['[Shared] Start', '[Shared] End', '[Regression Workflow W: skip, discard
-      and disable result creation mechanism] Pre-service with result creation disabled',
-    '[Regression Workflow W: skip, discard and disable result creation mechanism]
-      Workflow in DxD mode', '[Regression Workflow W: skip, discard and disable result
-      creation mechanism] Workflow in SxS mode', '[Regression Workflow W: skip, discard
-      and disable result creation mechanism] Service in run once mode']
+  services: ['[Shared] Start', '[Shared] End', '[Regression Workflow: Skip, Discard
+      and Disable Result Creation Mechanism] Pre-service with result creation disabled',
+    '[Regression Workflow: Skip, Discard and Disable Result Creation Mechanism] Workflow
+      in DxD mode', '[Regression Workflow: Skip, Discard and Disable Result Creation
+      Mechanism] Workflow in SxS mode', '[Regression Workflow: Skip, Discard and Disable
+      Result Creation Mechanism] Service in run once mode']
   shared: false
   skip: {}
   skip_query: ''
@@ -14171,7 +14290,7 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression Workflow W: skip, discard and disable result creation mechanism]
+  name: '[Regression Workflow: Skip, Discard and Disable Result Creation Mechanism]
     Pre-service with result creation disabled'
   negative_logic: false
   notification_header: ''
@@ -14180,8 +14299,9 @@
   pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow W: disable result creation mode': [-312, -10]
-    'Regression Workflow W: skip, discard and disable result creation mechanism': [
+    'Regression Workflow W: skip, discard and disable result creation mechanism': &id245 [
       -254, -15]
+    'Regression Workflow: Skip, Discard and Disable Result Creation Mechanism': *id245
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -14240,7 +14360,7 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression Workflow W: skip, discard and disable result creation mechanism]
+  name: '[Regression Workflow: Skip, Discard and Disable Result Creation Mechanism]
     Workflow in DxD mode'
   negative_logic: false
   notification_header: ''
@@ -14249,8 +14369,9 @@
   pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow W: disable result creation mode': [-174, 154]
-    'Regression Workflow W: skip, discard and disable result creation mechanism': [
+    'Regression Workflow W: skip, discard and disable result creation mechanism': &id246 [
       -231, 149]
+    'Regression Workflow: Skip, Discard and Disable Result Creation Mechanism': *id246
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -14260,8 +14381,8 @@
   scoped_name: Workflow in DxD mode
   send_notification: false
   send_notification_method: mail
-  services: ['[Shared] Start', '[Shared] End', '[[Regression Workflow W: skip, discard
-      and disable result creation mechanism] Workflow in DxD mode] Fail Austin']
+  services: ['[Shared] Start', '[Shared] End', '[[Regression Workflow: Skip, Discard
+      and Disable Result Creation Mechanism] Workflow in DxD mode] Fail Austin']
   shared: false
   skip: {}
   skip_query: device.name == "PaloAlto"
@@ -14310,7 +14431,7 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression Workflow W: skip, discard and disable result creation mechanism]
+  name: '[Regression Workflow: Skip, Discard and Disable Result Creation Mechanism]
     Workflow in SxS mode'
   negative_logic: false
   notification_header: ''
@@ -14319,8 +14440,9 @@
   pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow W: disable result creation mode': [442, 205]
-    'Regression Workflow W: skip, discard and disable result creation mechanism': [
+    'Regression Workflow W: skip, discard and disable result creation mechanism': &id247 [
       379, 130]
+    'Regression Workflow: Skip, Discard and Disable Result Creation Mechanism': *id247
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -14330,8 +14452,8 @@
   scoped_name: Workflow in SxS mode
   send_notification: false
   send_notification_method: mail
-  services: ['[Shared] Start', '[Shared] End', '[[Regression Workflow W: skip, discard
-      and disable result creation mechanism] Workflow in SxS mode] Fail PaloAlto']
+  services: ['[Shared] Start', '[Shared] End', '[[Regression Workflow: Skip, Discard
+      and Disable Result Creation Mechanism] Workflow in SxS mode] Fail PaloAlto']
   shared: false
   skip: {}
   skip_query: device.name == "Austin"
@@ -14378,7 +14500,7 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression Workflow W: skip, discard and disable result creation mechanism]
+  name: '[Regression Workflow: Skip, Discard and Disable Result Creation Mechanism]
     Service in run once mode'
   negative_logic: false
   notification_header: ''
@@ -14387,8 +14509,9 @@
   pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow W: disable result creation mode': [101, -37]
-    'Regression Workflow W: skip, discard and disable result creation mechanism': [
+    'Regression Workflow W: skip, discard and disable result creation mechanism': &id248 [
       103, -43]
+    'Regression Workflow: Skip, Discard and Disable Result Creation Mechanism': *id248
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -14445,7 +14568,7 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[[Regression Workflow W: skip, discard and disable result creation mechanism]
+  name: '[[Regression Workflow: Skip, Discard and Disable Result Creation Mechanism]
     Workflow in DxD mode] Fail Austin'
   negative_logic: false
   notification_header: ''
@@ -14453,9 +14576,10 @@
   operating_system: ''
   pools: ['All instances (devices, links, services and users)']
   positions:
-    '[Regression Workflow W: disable result creation mode] Workflow in DxD mode': &id194 [
+    '[Regression Workflow W: disable result creation mode] Workflow in DxD mode': &id249 [
       224, -51]
-    '[Regression Workflow W: skip, discard and disable result creation mechanism] Workflow in DxD mode': *id194
+    '[Regression Workflow W: skip, discard and disable result creation mechanism] Workflow in DxD mode': *id249
+    '[Regression Workflow: Skip, Discard and Disable Result Creation Mechanism] Workflow in DxD mode': *id249
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -14512,7 +14636,7 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[[Regression Workflow W: skip, discard and disable result creation mechanism]
+  name: '[[Regression Workflow: Skip, Discard and Disable Result Creation Mechanism]
     Workflow in SxS mode] Fail PaloAlto'
   negative_logic: false
   notification_header: ''
@@ -14520,8 +14644,9 @@
   operating_system: ''
   pools: ['All instances (devices, links, services and users)']
   positions:
-    '[Regression Workflow W: skip, discard and disable result creation mechanism] Workflow in SxS mode': [
+    '[Regression Workflow W: skip, discard and disable result creation mechanism] Workflow in SxS mode': &id250 [
       220, -28]
+    '[Regression Workflow: Skip, Discard and Disable Result Creation Mechanism] Workflow in SxS mode': *id250
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -14675,14 +14800,14 @@
         \ the server logs should say \"authentication (publickey)\"\r\nand for Washington,\
         \ \"authentication (keyboard-interactive)\"."
       positions: ['245', '-100']
-  last_modified: '2020-11-17 09:15:10.742252'
+  last_modified: '2020-11-17 09:55:47.108646'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: 'Regression Workflow X: Credentials (password & key, priority)'
+  name: 'Regression Workflow: Credentials (Password & Key, Priority Mechanism)'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -14695,11 +14820,11 @@
   reply_to: ''
   reserved: false
   run_method: per_device
-  scoped_name: 'Regression Workflow X: Credentials (password & key, priority)'
+  scoped_name: 'Regression Workflow: Credentials (Password & Key, Priority Mechanism)'
   send_notification: false
   send_notification_method: mail
-  services: ['[Shared] Start', '[Shared] End', '[Regression Workflow X: Credentials
-      (password & key, priority)] Show interfaces with netmiko']
+  services: ['[Shared] Start', '[Shared] End', '[Regression Workflow: Credentials
+      (Password & Key, Priority Mechanism)] Show interfaces with netmiko']
   shared: false
   skip: {}
   skip_query: ''
@@ -14767,15 +14892,17 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression Workflow X: Credentials (password & key, priority)] Show interfaces
-    with netmiko'
+  name: '[Regression Workflow: Credentials (Password & Key, Priority Mechanism)] Show
+    interfaces with netmiko'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow X: Credentials (password & key, priority)': [220, 52]
+    'Regression Workflow X: Credentials (password & key, priority)': &id251 [220,
+      52]
+    'Regression Workflow: Credentials (Password & Key, Priority Mechanism)': *id251
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''

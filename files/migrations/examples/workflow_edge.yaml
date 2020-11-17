@@ -544,39 +544,39 @@
 - {color: green, destination: '[Shared] REST API: call *is_alive* endpoint', label: success,
   source: '[Shared] Start', subtype: success, type: workflow_edge, workflow: 'Regression
     Workflow: Superworkflow'}
-- {color: green, destination: '[Regression Workflow M: Unix command & shell, ping,
-    - jump on connect - mechanism] Unix command: ps -ef | grep test', label: success,
+- {color: green, destination: '[Regression Workflow: Unix Command & Chell, Ping Service,
+    Jump on Connect mechanism] Unix command: ps -ef | grep test', label: success,
   source: '[Shared] Start', subtype: success, type: workflow_edge, workflow: 'Regression
-    Workflow M: Unix command & shell, ping, - jump on connect - mechanism'}
-- {color: green, destination: '[Regression Workflow M: Unix command & shell, ping,
-    - jump on connect - mechanism] Unix shell: ping eNMS server from remote server',
-  label: success, source: '[Regression Workflow M: Unix command & shell, ping, - jump
-    on connect - mechanism] Unix command: ps -ef | grep test', subtype: success, type: workflow_edge,
-  workflow: 'Regression Workflow M: Unix command & shell, ping, - jump on connect
-    - mechanism'}
-- {color: green, destination: '[Regression Workflow M: Unix command & shell, ping,
-    - jump on connect - mechanism] Ping Washington', label: success, source: '[Regression
-    Workflow M: Unix command & shell, ping, - jump on connect - mechanism] Unix shell:
-    ping eNMS server from remote server', subtype: success, type: workflow_edge, workflow: 'Regression
-    Workflow M: Unix command & shell, ping, - jump on connect - mechanism'}
-- {color: green, destination: '[Regression Workflow N: Topology Import (netbox, librenms,
+    Workflow: Unix Command & Chell, Ping Service, Jump on Connect mechanism'}
+- {color: green, destination: '[Regression Workflow: Unix Command & Chell, Ping Service,
+    Jump on Connect mechanism] Unix shell: ping eNMS server from remote server', label: success,
+  source: '[Regression Workflow: Unix Command & Chell, Ping Service, Jump on Connect
+    mechanism] Unix command: ps -ef | grep test', subtype: success, type: workflow_edge,
+  workflow: 'Regression Workflow: Unix Command & Chell, Ping Service, Jump on Connect
+    mechanism'}
+- {color: green, destination: '[Regression Workflow: Unix Command & Chell, Ping Service,
+    Jump on Connect mechanism] Ping Washington', label: success, source: '[Regression
+    Workflow: Unix Command & Chell, Ping Service, Jump on Connect mechanism] Unix
+    shell: ping eNMS server from remote server', subtype: success, type: workflow_edge,
+  workflow: 'Regression Workflow: Unix Command & Chell, Ping Service, Jump on Connect
+    mechanism'}
+- {color: green, destination: '[Regression Workflow: Topology Import (netbox, librenms,
     opennms)] OpenNMS Import', label: success, source: '[Shared] Start', subtype: success,
-  type: workflow_edge, workflow: 'Regression Workflow N: Topology Import (netbox,
-    librenms, opennms)'}
+  type: workflow_edge, workflow: 'Regression Workflow: Topology Import (netbox, librenms,
+    opennms)'}
 - {color: green, destination: '[Shared] End', label: success, source: '[Regression
-    Workflow N: Topology Import (netbox, librenms, opennms)] OpenNMS Import', subtype: success,
-  type: workflow_edge, workflow: 'Regression Workflow N: Topology Import (netbox,
-    librenms, opennms)'}
-- {color: green, destination: '[Regression Workflow M: Unix command & shell, ping,
-    - jump on connect - mechanism] Validation: jump on server 2 from Washington',
-  label: success, source: '[Regression Workflow M: Unix command & shell, ping, - jump
-    on connect - mechanism] Ping Washington', subtype: success, type: workflow_edge,
-  workflow: 'Regression Workflow M: Unix command & shell, ping, - jump on connect
-    - mechanism'}
+    Workflow: Topology Import (netbox, librenms, opennms)] OpenNMS Import', subtype: success,
+  type: workflow_edge, workflow: 'Regression Workflow: Topology Import (netbox, librenms,
+    opennms)'}
+- {color: green, destination: '[Regression Workflow: Unix Command & Chell, Ping Service,
+    Jump on Connect mechanism] Validation: jump on server 2 from Washington', label: success,
+  source: '[Regression Workflow: Unix Command & Chell, Ping Service, Jump on Connect
+    mechanism] Ping Washington', subtype: success, type: workflow_edge, workflow: 'Regression
+    Workflow: Unix Command & Chell, Ping Service, Jump on Connect mechanism'}
 - {color: green, destination: '[Shared] End', label: success, source: '[Regression
-    Workflow M: Unix command & shell, ping, - jump on connect - mechanism] Validation:
+    Workflow: Unix Command & Chell, Ping Service, Jump on Connect mechanism] Validation:
     jump on server 2 from Washington', subtype: success, type: workflow_edge, workflow: 'Regression
-    Workflow M: Unix command & shell, ping, - jump on connect - mechanism'}
+    Workflow: Unix Command & Chell, Ping Service, Jump on Connect mechanism'}
 - {color: green, destination: '[Regression Workflow: Ansible with Validation] Ansible
     Workflow: Arista show version', label: success, source: '[Regression Workflow:
     Ansible with Validation] Simple Playbook', subtype: success, type: workflow_edge,
@@ -625,173 +625,168 @@
 - {color: green, destination: '[Shared] End', label: success, source: '[Regression
     Workflow: Superworkflow] Post Placeholder Processing', subtype: success, type: workflow_edge,
   workflow: 'Regression Workflow: Superworkflow'}
-- {color: green, destination: '[Regression Workflow O: Scrapli] Check running configuration',
+- {color: green, destination: '[Regression Workflow: Scrapli] Check running configuration',
   label: success, source: '[Shared] Start', subtype: success, type: workflow_edge,
-  workflow: 'Regression Workflow O: Scrapli'}
-- {color: green, destination: '[Regression Workflow O: Scrapli] Configure VRF TEST-VRF',
-  label: success, source: '[Regression Workflow O: Scrapli] Check running configuration',
-  subtype: success, type: workflow_edge, workflow: 'Regression Workflow O: Scrapli'}
-- {color: green, destination: '[Regression Workflow O: Scrapli] Check that TEST-VRF
-    is configured', label: success, source: '[Regression Workflow O: Scrapli] Configure
-    VRF TEST-VRF', subtype: success, type: workflow_edge, workflow: 'Regression Workflow
-    O: Scrapli'}
-- {color: green, destination: '[Regression Workflow O: Scrapli] Decommission VRF TEST-VRF',
-  label: success, source: '[Regression Workflow O: Scrapli] Check that TEST-VRF is
-    configured', subtype: success, type: workflow_edge, workflow: 'Regression Workflow
-    O: Scrapli'}
+  workflow: 'Regression Workflow: Scrapli'}
+- {color: green, destination: '[Regression Workflow: Scrapli] Configure VRF TEST-VRF',
+  label: success, source: '[Regression Workflow: Scrapli] Check running configuration',
+  subtype: success, type: workflow_edge, workflow: 'Regression Workflow: Scrapli'}
+- {color: green, destination: '[Regression Workflow: Scrapli] Check that TEST-VRF
+    is configured', label: success, source: '[Regression Workflow: Scrapli] Configure
+    VRF TEST-VRF', subtype: success, type: workflow_edge, workflow: 'Regression Workflow:
+    Scrapli'}
+- {color: green, destination: '[Regression Workflow: Scrapli] Decommission VRF TEST-VRF',
+  label: success, source: '[Regression Workflow: Scrapli] Check that TEST-VRF is configured',
+  subtype: success, type: workflow_edge, workflow: 'Regression Workflow: Scrapli'}
 - {color: green, destination: '[Shared] End', label: success, source: '[Regression
-    Workflow O: Scrapli] Decommission VRF TEST-VRF', subtype: success, type: workflow_edge,
-  workflow: 'Regression Workflow O: Scrapli'}
+    Workflow: Scrapli] Decommission VRF TEST-VRF', subtype: success, type: workflow_edge,
+  workflow: 'Regression Workflow: Scrapli'}
 - {color: green, destination: '[Shared] REST API: call *is_alive* endpoint', label: success,
   source: '[Shared] Start', subtype: success, type: workflow_edge, workflow: 'Regression
-    Workflow P: large workflow (scalability)'}
-- {color: green, destination: '[Regression Workflow P: large workflow (scalability)]
+    Workflow: Scalability Test (large workflow)'}
+- {color: green, destination: '[Regression Workflow: Scalability Test (large workflow)]
     REST API: call *is_alive* endpoint', label: success, source: '[Shared] REST API:
     call *is_alive* endpoint', subtype: success, type: workflow_edge, workflow: 'Regression
-    Workflow P: large workflow (scalability)'}
-- {color: green, destination: '[Regression Workflow P: large workflow (scalability)]
-    REST API: call *is_alive* endpoint 2', label: success, source: '[Regression Workflow
-    P: large workflow (scalability)] REST API: call *is_alive* endpoint', subtype: success,
-  type: workflow_edge, workflow: 'Regression Workflow P: large workflow (scalability)'}
-- {color: green, destination: '[Regression Workflow P: large workflow (scalability)]
-    REST API: call *is_alive* endpoint 3', label: success, source: '[Regression Workflow
-    P: large workflow (scalability)] REST API: call *is_alive* endpoint 2', subtype: success,
-  type: workflow_edge, workflow: 'Regression Workflow P: large workflow (scalability)'}
-- {color: green, destination: '[Regression Workflow P: large workflow (scalability)]
-    REST API: call *is_alive* endpoint 4', label: success, source: '[Regression Workflow
-    P: large workflow (scalability)] REST API: call *is_alive* endpoint 3', subtype: success,
-  type: workflow_edge, workflow: 'Regression Workflow P: large workflow (scalability)'}
-- {color: green, destination: '[Regression Workflow P: large workflow (scalability)]
-    REST API: call *is_alive* endpoint 5', label: success, source: '[Regression Workflow
-    P: large workflow (scalability)] REST API: call *is_alive* endpoint 4', subtype: success,
-  type: workflow_edge, workflow: 'Regression Workflow P: large workflow (scalability)'}
-- {color: green, destination: '[Regression Workflow P: large workflow (scalability)]
-    Show vrf with netmiko 1', label: success, source: '[Regression Workflow P: large
-    workflow (scalability)] REST API: call *is_alive* endpoint 5', subtype: success,
-  type: workflow_edge, workflow: 'Regression Workflow P: large workflow (scalability)'}
-- {color: green, destination: '[Regression Workflow P: large workflow (scalability)]
-    Show vrf with netmiko 2', label: success, source: '[Regression Workflow P: large
-    workflow (scalability)] Show vrf with netmiko 1', subtype: success, type: workflow_edge,
-  workflow: 'Regression Workflow P: large workflow (scalability)'}
-- {color: green, destination: '[Regression Workflow P: large workflow (scalability)]
-    Show vrf with netmiko 3', label: success, source: '[Regression Workflow P: large
-    workflow (scalability)] Show vrf with netmiko 2', subtype: success, type: workflow_edge,
-  workflow: 'Regression Workflow P: large workflow (scalability)'}
-- {color: green, destination: '[Regression Workflow P: large workflow (scalability)]
-    Show vrf with netmiko 4', label: success, source: '[Regression Workflow P: large
-    workflow (scalability)] Show vrf with netmiko 3', subtype: success, type: workflow_edge,
-  workflow: 'Regression Workflow P: large workflow (scalability)'}
-- {color: green, destination: '[Regression Workflow P: large workflow (scalability)]
-    Show vrf with netmiko 5', label: success, source: '[Regression Workflow P: large
-    workflow (scalability)] Show vrf with netmiko 4', subtype: success, type: workflow_edge,
-  workflow: 'Regression Workflow P: large workflow (scalability)'}
-- {color: green, destination: '[Regression Workflow P: large workflow (scalability)]
-    Show vrf with netmiko 6', label: success, source: '[Regression Workflow P: large
-    workflow (scalability)] Show vrf with netmiko 5', subtype: success, type: workflow_edge,
-  workflow: 'Regression Workflow P: large workflow (scalability)'}
-- {color: green, destination: '[Regression Workflow P: large workflow (scalability)]
-    Sleep with python', label: success, source: '[Regression Workflow P: large workflow
-    (scalability)] Show vrf with netmiko 6', subtype: success, type: workflow_edge,
-  workflow: 'Regression Workflow P: large workflow (scalability)'}
-- {color: green, destination: '[Regression Workflow P: large workflow (scalability)]
-    Sleep with python 2', label: success, source: '[Regression Workflow P: large workflow
-    (scalability)] Sleep with python', subtype: success, type: workflow_edge, workflow: 'Regression
-    Workflow P: large workflow (scalability)'}
-- {color: green, destination: '[Regression Workflow P: large workflow (scalability)]
-    Sleep with python 3', label: success, source: '[Regression Workflow P: large workflow
-    (scalability)] Sleep with python 2', subtype: success, type: workflow_edge, workflow: 'Regression
-    Workflow P: large workflow (scalability)'}
-- {color: green, destination: '[Regression Workflow P: large workflow (scalability)]
-    Sleep with python 4', label: success, source: '[Regression Workflow P: large workflow
-    (scalability)] Sleep with python 3', subtype: success, type: workflow_edge, workflow: 'Regression
-    Workflow P: large workflow (scalability)'}
-- {color: green, destination: '[Regression Workflow P: large workflow (scalability)]
-    Sleep with python 5', label: success, source: '[Regression Workflow P: large workflow
-    (scalability)] Sleep with python 4', subtype: success, type: workflow_edge, workflow: 'Regression
-    Workflow P: large workflow (scalability)'}
-- {color: green, destination: '[Regression Workflow P: large workflow (scalability)]
-    Sleep with python 6', label: success, source: '[Regression Workflow P: large workflow
-    (scalability)] Sleep with python 5', subtype: success, type: workflow_edge, workflow: 'Regression
-    Workflow P: large workflow (scalability)'}
-- {color: green, destination: '[Regression Workflow P: large workflow (scalability)]
-    Sleep with python 7', label: success, source: '[Regression Workflow P: large workflow
-    (scalability)] Sleep with python 6', subtype: success, type: workflow_edge, workflow: 'Regression
-    Workflow P: large workflow (scalability)'}
-- {color: green, destination: '[Regression Workflow P: large workflow (scalability)]
-    Sleep with python 8', label: success, source: '[Regression Workflow P: large workflow
-    (scalability)] Sleep with python 7', subtype: success, type: workflow_edge, workflow: 'Regression
-    Workflow P: large workflow (scalability)'}
+    Workflow: Scalability Test (large workflow)'}
+- {color: green, destination: '[Regression Workflow: Scalability Test (large workflow)]
+    REST API: call *is_alive* endpoint 2', label: success, source: '[Regression Workflow:
+    Scalability Test (large workflow)] REST API: call *is_alive* endpoint', subtype: success,
+  type: workflow_edge, workflow: 'Regression Workflow: Scalability Test (large workflow)'}
+- {color: green, destination: '[Regression Workflow: Scalability Test (large workflow)]
+    REST API: call *is_alive* endpoint 3', label: success, source: '[Regression Workflow:
+    Scalability Test (large workflow)] REST API: call *is_alive* endpoint 2', subtype: success,
+  type: workflow_edge, workflow: 'Regression Workflow: Scalability Test (large workflow)'}
+- {color: green, destination: '[Regression Workflow: Scalability Test (large workflow)]
+    REST API: call *is_alive* endpoint 4', label: success, source: '[Regression Workflow:
+    Scalability Test (large workflow)] REST API: call *is_alive* endpoint 3', subtype: success,
+  type: workflow_edge, workflow: 'Regression Workflow: Scalability Test (large workflow)'}
+- {color: green, destination: '[Regression Workflow: Scalability Test (large workflow)]
+    REST API: call *is_alive* endpoint 5', label: success, source: '[Regression Workflow:
+    Scalability Test (large workflow)] REST API: call *is_alive* endpoint 4', subtype: success,
+  type: workflow_edge, workflow: 'Regression Workflow: Scalability Test (large workflow)'}
+- {color: green, destination: '[Regression Workflow: Scalability Test (large workflow)]
+    Show vrf with netmiko 1', label: success, source: '[Regression Workflow: Scalability
+    Test (large workflow)] REST API: call *is_alive* endpoint 5', subtype: success,
+  type: workflow_edge, workflow: 'Regression Workflow: Scalability Test (large workflow)'}
+- {color: green, destination: '[Regression Workflow: Scalability Test (large workflow)]
+    Show vrf with netmiko 2', label: success, source: '[Regression Workflow: Scalability
+    Test (large workflow)] Show vrf with netmiko 1', subtype: success, type: workflow_edge,
+  workflow: 'Regression Workflow: Scalability Test (large workflow)'}
+- {color: green, destination: '[Regression Workflow: Scalability Test (large workflow)]
+    Show vrf with netmiko 3', label: success, source: '[Regression Workflow: Scalability
+    Test (large workflow)] Show vrf with netmiko 2', subtype: success, type: workflow_edge,
+  workflow: 'Regression Workflow: Scalability Test (large workflow)'}
+- {color: green, destination: '[Regression Workflow: Scalability Test (large workflow)]
+    Show vrf with netmiko 4', label: success, source: '[Regression Workflow: Scalability
+    Test (large workflow)] Show vrf with netmiko 3', subtype: success, type: workflow_edge,
+  workflow: 'Regression Workflow: Scalability Test (large workflow)'}
+- {color: green, destination: '[Regression Workflow: Scalability Test (large workflow)]
+    Show vrf with netmiko 5', label: success, source: '[Regression Workflow: Scalability
+    Test (large workflow)] Show vrf with netmiko 4', subtype: success, type: workflow_edge,
+  workflow: 'Regression Workflow: Scalability Test (large workflow)'}
+- {color: green, destination: '[Regression Workflow: Scalability Test (large workflow)]
+    Show vrf with netmiko 6', label: success, source: '[Regression Workflow: Scalability
+    Test (large workflow)] Show vrf with netmiko 5', subtype: success, type: workflow_edge,
+  workflow: 'Regression Workflow: Scalability Test (large workflow)'}
+- {color: green, destination: '[Regression Workflow: Scalability Test (large workflow)]
+    Sleep with python', label: success, source: '[Regression Workflow: Scalability
+    Test (large workflow)] Show vrf with netmiko 6', subtype: success, type: workflow_edge,
+  workflow: 'Regression Workflow: Scalability Test (large workflow)'}
+- {color: green, destination: '[Regression Workflow: Scalability Test (large workflow)]
+    Sleep with python 2', label: success, source: '[Regression Workflow: Scalability
+    Test (large workflow)] Sleep with python', subtype: success, type: workflow_edge,
+  workflow: 'Regression Workflow: Scalability Test (large workflow)'}
+- {color: green, destination: '[Regression Workflow: Scalability Test (large workflow)]
+    Sleep with python 3', label: success, source: '[Regression Workflow: Scalability
+    Test (large workflow)] Sleep with python 2', subtype: success, type: workflow_edge,
+  workflow: 'Regression Workflow: Scalability Test (large workflow)'}
+- {color: green, destination: '[Regression Workflow: Scalability Test (large workflow)]
+    Sleep with python 4', label: success, source: '[Regression Workflow: Scalability
+    Test (large workflow)] Sleep with python 3', subtype: success, type: workflow_edge,
+  workflow: 'Regression Workflow: Scalability Test (large workflow)'}
+- {color: green, destination: '[Regression Workflow: Scalability Test (large workflow)]
+    Sleep with python 5', label: success, source: '[Regression Workflow: Scalability
+    Test (large workflow)] Sleep with python 4', subtype: success, type: workflow_edge,
+  workflow: 'Regression Workflow: Scalability Test (large workflow)'}
+- {color: green, destination: '[Regression Workflow: Scalability Test (large workflow)]
+    Sleep with python 6', label: success, source: '[Regression Workflow: Scalability
+    Test (large workflow)] Sleep with python 5', subtype: success, type: workflow_edge,
+  workflow: 'Regression Workflow: Scalability Test (large workflow)'}
+- {color: green, destination: '[Regression Workflow: Scalability Test (large workflow)]
+    Sleep with python 7', label: success, source: '[Regression Workflow: Scalability
+    Test (large workflow)] Sleep with python 6', subtype: success, type: workflow_edge,
+  workflow: 'Regression Workflow: Scalability Test (large workflow)'}
+- {color: green, destination: '[Regression Workflow: Scalability Test (large workflow)]
+    Sleep with python 8', label: success, source: '[Regression Workflow: Scalability
+    Test (large workflow)] Sleep with python 7', subtype: success, type: workflow_edge,
+  workflow: 'Regression Workflow: Scalability Test (large workflow)'}
 - {color: green, destination: '[Shared] End', label: success, source: '[Regression
-    Workflow P: large workflow (scalability)] Sleep with python 8', subtype: success,
-  type: workflow_edge, workflow: 'Regression Workflow P: large workflow (scalability)'}
-- {color: green, destination: '[Regression Workflow Q: File transfer] Transfer a.bin',
-  label: success, source: '[Regression Workflow Q: File transfer] Check that test
-    file does not exist', subtype: success, type: workflow_edge, workflow: 'Regression
-    Workflow Q: File transfer'}
-- {color: green, destination: '[Regression Workflow Q: File transfer] Transfer bc.bin
-    and bd.bin with glob option', label: success, source: '[Regression Workflow Q:
-    File transfer] Transfer a.bin', subtype: success, type: workflow_edge, workflow: 'Regression
-    Workflow Q: File transfer'}
-- {color: green, destination: '[Regression Workflow Q: File transfer] Check that test
-    file does exist', label: success, source: '[Regression Workflow Q: File transfer]
-    Transfer bc.bin and bd.bin with glob option', subtype: success, type: workflow_edge,
-  workflow: 'Regression Workflow Q: File transfer'}
-- {color: green, destination: '[Regression Workflow Q: File transfer] Delete all transferred
-    files', label: success, source: '[Regression Workflow Q: File transfer] Check
-    that test file does exist', subtype: success, type: workflow_edge, workflow: 'Regression
-    Workflow Q: File transfer'}
+    Workflow: Scalability Test (large workflow)] Sleep with python 8', subtype: success,
+  type: workflow_edge, workflow: 'Regression Workflow: Scalability Test (large workflow)'}
+- {color: green, destination: '[Regression Workflow: File Transfer Mechanism] Transfer
+    a.bin', label: success, source: '[Regression Workflow: File Transfer Mechanism]
+    Check that test file does not exist', subtype: success, type: workflow_edge, workflow: 'Regression
+    Workflow: File Transfer Mechanism'}
+- {color: green, destination: '[Regression Workflow: File Transfer Mechanism] Transfer
+    bc.bin and bd.bin with glob option', label: success, source: '[Regression Workflow:
+    File Transfer Mechanism] Transfer a.bin', subtype: success, type: workflow_edge,
+  workflow: 'Regression Workflow: File Transfer Mechanism'}
+- {color: green, destination: '[Regression Workflow: File Transfer Mechanism] Check
+    that test file does exist', label: success, source: '[Regression Workflow: File
+    Transfer Mechanism] Transfer bc.bin and bd.bin with glob option', subtype: success,
+  type: workflow_edge, workflow: 'Regression Workflow: File Transfer Mechanism'}
+- {color: green, destination: '[Regression Workflow: File Transfer Mechanism] Delete
+    all transferred files', label: success, source: '[Regression Workflow: File Transfer
+    Mechanism] Check that test file does exist', subtype: success, type: workflow_edge,
+  workflow: 'Regression Workflow: File Transfer Mechanism'}
 - {color: green, destination: '[Shared] End', label: success, source: '[Regression
-    Workflow Q: File transfer] Delete all transferred files', subtype: success, type: workflow_edge,
-  workflow: 'Regression Workflow Q: File transfer'}
-- {color: green, destination: '[Regression Workflow Q: File transfer] Transfer non-existing
-    file', label: success, source: '[Shared] Start', subtype: success, type: workflow_edge,
-  workflow: 'Regression Workflow Q: File transfer'}
-- {color: green, destination: '[Regression Workflow Q: File transfer] Check that test
-    file does not exist', label: success, source: '[Regression Workflow Q: File transfer]
-    Transfer non-existing file', subtype: success, type: workflow_edge, workflow: 'Regression
-    Workflow Q: File transfer'}
-- {color: green, destination: '[Regression Workflow R: skip services in service by
-    service mode] Partial failure', label: success, source: '[Shared] Start', subtype: success,
-  type: workflow_edge, workflow: 'Regression Workflow R: skip services in service
-    by service mode'}
-- {color: green, destination: '[Regression Workflow R: skip services in service by
-    service mode] Skipped service', label: success, source: '[Regression Workflow
-    R: skip services in service by service mode] Partial failure', subtype: success,
-  type: workflow_edge, workflow: 'Regression Workflow R: skip services in service
-    by service mode'}
-- {color: green, destination: '[Regression Workflow R: skip services in service by
-    service mode] Last service', label: success, source: '[Regression Workflow R:
-    skip services in service by service mode] Skipped service', subtype: success,
-  type: workflow_edge, workflow: 'Regression Workflow R: skip services in service
-    by service mode'}
+    Workflow: File Transfer Mechanism] Delete all transferred files', subtype: success,
+  type: workflow_edge, workflow: 'Regression Workflow: File Transfer Mechanism'}
+- {color: green, destination: '[Regression Workflow: File Transfer Mechanism] Transfer
+    non-existing file', label: success, source: '[Shared] Start', subtype: success,
+  type: workflow_edge, workflow: 'Regression Workflow: File Transfer Mechanism'}
+- {color: green, destination: '[Regression Workflow: File Transfer Mechanism] Check
+    that test file does not exist', label: success, source: '[Regression Workflow:
+    File Transfer Mechanism] Transfer non-existing file', subtype: success, type: workflow_edge,
+  workflow: 'Regression Workflow: File Transfer Mechanism'}
+- {color: green, destination: '[Regression Workflow: Skip Services in SxS mode] Partial
+    failure', label: success, source: '[Shared] Start', subtype: success, type: workflow_edge,
+  workflow: 'Regression Workflow: Skip Services in SxS mode'}
+- {color: green, destination: '[Regression Workflow: Skip Services in SxS mode] Skipped
+    service', label: success, source: '[Regression Workflow: Skip Services in SxS
+    mode] Partial failure', subtype: success, type: workflow_edge, workflow: 'Regression
+    Workflow: Skip Services in SxS mode'}
+- {color: green, destination: '[Regression Workflow: Skip Services in SxS mode] Last
+    service', label: success, source: '[Regression Workflow: Skip Services in SxS
+    mode] Skipped service', subtype: success, type: workflow_edge, workflow: 'Regression
+    Workflow: Skip Services in SxS mode'}
 - {color: green, destination: '[Shared] End', label: success, source: '[Regression
-    Workflow R: skip services in service by service mode] Last service', subtype: success,
-  type: workflow_edge, workflow: 'Regression Workflow R: skip services in service
-    by service mode'}
-- {color: green, destination: '[Regression Workflow S: conditional skip query in failed
-    and discard mode] Post-success service', label: success, source: '[Regression
-    Workflow S: conditional skip query in failed and discard mode] Skip Washington
+    Workflow: Skip Services in SxS mode] Last service', subtype: success, type: workflow_edge,
+  workflow: 'Regression Workflow: Skip Services in SxS mode'}
+- {color: green, destination: '[Regression Workflow: Conditional Skip Query in Failed
+    and Discard Modes] Post-success service', label: success, source: '[Regression
+    Workflow: Conditional Skip Query in Failed and Discard Modes] Skip Washington
     with Skip value == False', subtype: success, type: workflow_edge, workflow: 'Regression
-    Workflow S: conditional skip query in failed and discard mode'}
-- {color: green, destination: '[Regression Workflow S: conditional skip query in failed
-    and discard mode] Final service', label: success, source: '[Regression Workflow
-    S: conditional skip query in failed and discard mode] Post-success service', subtype: success,
-  type: workflow_edge, workflow: 'Regression Workflow S: conditional skip query in
-    failed and discard mode'}
-- {color: green, destination: '[Regression Workflow S: conditional skip query in failed
-    and discard mode] Final service', label: success, source: '[Regression Workflow
-    S: conditional skip query in failed and discard mode] Post-failure service', subtype: success,
-  type: workflow_edge, workflow: 'Regression Workflow S: conditional skip query in
-    failed and discard mode'}
+    Workflow: Conditional Skip Query in Failed and Discard Modes'}
+- {color: green, destination: '[Regression Workflow: Conditional Skip Query in Failed
+    and Discard Modes] Final service', label: success, source: '[Regression Workflow:
+    Conditional Skip Query in Failed and Discard Modes] Post-success service', subtype: success,
+  type: workflow_edge, workflow: 'Regression Workflow: Conditional Skip Query in Failed
+    and Discard Modes'}
+- {color: green, destination: '[Regression Workflow: Conditional Skip Query in Failed
+    and Discard Modes] Final service', label: success, source: '[Regression Workflow:
+    Conditional Skip Query in Failed and Discard Modes] Post-failure service', subtype: success,
+  type: workflow_edge, workflow: 'Regression Workflow: Conditional Skip Query in Failed
+    and Discard Modes'}
 - {color: green, destination: '[Shared] End', label: success, source: '[Regression
-    Workflow S: conditional skip query in failed and discard mode] Final service',
-  subtype: success, type: workflow_edge, workflow: 'Regression Workflow S: conditional
-    skip query in failed and discard mode'}
-- {color: red, destination: '[Regression Workflow S: conditional skip query in failed
-    and discard mode] Post-failure service', label: failure, source: '[Regression
-    Workflow S: conditional skip query in failed and discard mode] Skip Washington
+    Workflow: Conditional Skip Query in Failed and Discard Modes] Final service',
+  subtype: success, type: workflow_edge, workflow: 'Regression Workflow: Conditional
+    Skip Query in Failed and Discard Modes'}
+- {color: red, destination: '[Regression Workflow: Conditional Skip Query in Failed
+    and Discard Modes] Post-failure service', label: failure, source: '[Regression
+    Workflow: Conditional Skip Query in Failed and Discard Modes] Skip Washington
     with Skip value == False', subtype: failure, type: workflow_edge, workflow: 'Regression
-    Workflow S: conditional skip query in failed and discard mode'}
+    Workflow: Conditional Skip Query in Failed and Discard Modes'}
 - {color: green, destination: '[Regression Workflow: Link Neighbors Mechanism (public)]
     Test get_neighbors function', label: success, source: '[Shared] Start', subtype: success,
   type: workflow_edge, workflow: 'Regression Workflow: Link Neighbors Mechanism (public)'}
@@ -810,188 +805,188 @@
     Prompt Service', label: success, source: '[Regression Workflow: Netmiko Prompts]
     Check VRF (NOVRF) exists', subtype: success, type: workflow_edge, workflow: 'Regression
     Workflow: Netmiko Prompts'}
-- {color: green, destination: '[Regression Workflow T: global variables and post-run
-    pool update] Functions fetch and fetch_all', label: success, source: '[Shared]
-    Start', subtype: success, type: workflow_edge, workflow: 'Regression Workflow
-    T: global variables and post-run pool update'}
-- {color: green, destination: '[Regression Workflow T: global variables and post-run
-    pool update] Credentials encryption', label: success, source: '[Regression Workflow
-    T: global variables and post-run pool update] Functions fetch and fetch_all',
-  subtype: success, type: workflow_edge, workflow: 'Regression Workflow T: global
-    variables and post-run pool update'}
-- {color: green, destination: '[Regression Workflow T: global variables and post-run
-    pool update] Show vrf with custom encrypted credentials', label: success, source: '[Regression
-    Workflow T: global variables and post-run pool update] Credentials encryption',
-  subtype: success, type: workflow_edge, workflow: 'Regression Workflow T: global
-    variables and post-run pool update'}
+- {color: green, destination: '[Regression Workflow: Global Variables and post-run
+    Pool Update Mechanism] Functions fetch and fetch_all', label: success, source: '[Shared]
+    Start', subtype: success, type: workflow_edge, workflow: 'Regression Workflow:
+    Global Variables and post-run Pool Update Mechanism'}
+- {color: green, destination: '[Regression Workflow: Global Variables and post-run
+    Pool Update Mechanism] Credentials encryption', label: success, source: '[Regression
+    Workflow: Global Variables and post-run Pool Update Mechanism] Functions fetch
+    and fetch_all', subtype: success, type: workflow_edge, workflow: 'Regression Workflow:
+    Global Variables and post-run Pool Update Mechanism'}
+- {color: green, destination: '[Regression Workflow: Global Variables and post-run
+    Pool Update Mechanism] Show vrf with custom encrypted credentials', label: success,
+  source: '[Regression Workflow: Global Variables and post-run Pool Update Mechanism]
+    Credentials encryption', subtype: success, type: workflow_edge, workflow: 'Regression
+    Workflow: Global Variables and post-run Pool Update Mechanism'}
 - {color: green, destination: '[Shared] End', label: success, source: '[Regression
-    Workflow T: global variables and post-run pool update] Show vrf with custom encrypted
-    credentials', subtype: success, type: workflow_edge, workflow: 'Regression Workflow
-    T: global variables and post-run pool update'}
-- {color: green, destination: '[Regression Workflow S: conditional skip query in failed
-    and discard mode] Skip router5-7 in discard mode', label: success, source: '[Shared]
-    Start', subtype: success, type: workflow_edge, workflow: 'Regression Workflow
-    S: conditional skip query in failed and discard mode'}
-- {color: green, destination: '[Regression Workflow S: conditional skip query in failed
-    and discard mode] Skip Washington with Skip value == False', label: success, source: '[Regression
-    Workflow S: conditional skip query in failed and discard mode] Skip router5-7
-    in discard mode', subtype: success, type: workflow_edge, workflow: 'Regression
-    Workflow S: conditional skip query in failed and discard mode'}
-- {color: red, destination: '[Regression Workflow S: conditional skip query in failed
-    and discard mode] Skip Washington with Skip value == False', label: failure, source: '[Regression
-    Workflow S: conditional skip query in failed and discard mode] Skip router5-7
-    in discard mode', subtype: failure, type: workflow_edge, workflow: 'Regression
-    Workflow S: conditional skip query in failed and discard mode'}
-- {color: green, destination: '[Regression Workflow U: fork based on value with skip
-    discard mode] REST API: call *is_alive* endpoint', label: success, source: '[Shared]
-    Start', subtype: success, type: workflow_edge, workflow: 'Regression Workflow
-    U: fork based on value with skip discard mode'}
-- {color: green, destination: '[Regression Workflow U: fork based on value with skip
-    discard mode] Juniper devices', label: success, source: '[Regression Workflow
-    U: fork based on value with skip discard mode] REST API: call *is_alive* endpoint',
-  subtype: success, type: workflow_edge, workflow: 'Regression Workflow U: fork based
-    on value with skip discard mode'}
-- {color: green, destination: '[Regression Workflow U: fork based on value with skip
-    discard mode] Arista devices', label: success, source: '[Regression Workflow U:
-    fork based on value with skip discard mode] REST API: call *is_alive* endpoint',
-  subtype: success, type: workflow_edge, workflow: 'Regression Workflow U: fork based
-    on value with skip discard mode'}
-- {color: green, destination: '[Regression Workflow U: fork based on value with skip
-    discard mode] Show VRF', label: success, source: '[Regression Workflow U: fork
-    based on value with skip discard mode] Arista devices', subtype: success, type: workflow_edge,
-  workflow: 'Regression Workflow U: fork based on value with skip discard mode'}
-- {color: red, destination: '[Regression Workflow U: fork based on value with skip
-    discard mode] is_alive endpoint', label: failure, source: '[Regression Workflow
-    U: fork based on value with skip discard mode] Arista devices', subtype: failure,
-  type: workflow_edge, workflow: 'Regression Workflow U: fork based on value with
-    skip discard mode'}
-- {color: red, destination: '[Shared] End', label: failure, source: '[Regression Workflow
-    U: fork based on value with skip discard mode] is_alive endpoint', subtype: failure,
-  type: workflow_edge, workflow: 'Regression Workflow U: fork based on value with
-    skip discard mode'}
-- {color: red, destination: '[Shared] End', label: failure, source: '[Regression Workflow
-    U: fork based on value with skip discard mode] Show VRF', subtype: failure, type: workflow_edge,
-  workflow: 'Regression Workflow U: fork based on value with skip discard mode'}
+    Workflow: Global Variables and post-run Pool Update Mechanism] Show vrf with custom
+    encrypted credentials', subtype: success, type: workflow_edge, workflow: 'Regression
+    Workflow: Global Variables and post-run Pool Update Mechanism'}
+- {color: green, destination: '[Regression Workflow: Conditional Skip Query in Failed
+    and Discard Modes] Skip router5-7 in discard mode', label: success, source: '[Shared]
+    Start', subtype: success, type: workflow_edge, workflow: 'Regression Workflow:
+    Conditional Skip Query in Failed and Discard Modes'}
+- {color: green, destination: '[Regression Workflow: Conditional Skip Query in Failed
+    and Discard Modes] Skip Washington with Skip value == False', label: success,
+  source: '[Regression Workflow: Conditional Skip Query in Failed and Discard Modes]
+    Skip router5-7 in discard mode', subtype: success, type: workflow_edge, workflow: 'Regression
+    Workflow: Conditional Skip Query in Failed and Discard Modes'}
+- {color: red, destination: '[Regression Workflow: Conditional Skip Query in Failed
+    and Discard Modes] Skip Washington with Skip value == False', label: failure,
+  source: '[Regression Workflow: Conditional Skip Query in Failed and Discard Modes]
+    Skip router5-7 in discard mode', subtype: failure, type: workflow_edge, workflow: 'Regression
+    Workflow: Conditional Skip Query in Failed and Discard Modes'}
+- {color: green, destination: '[Regression Workflow: Fork based on value with Skip
+    Discard Mechanism] REST API: call *is_alive* endpoint', label: success, source: '[Shared]
+    Start', subtype: success, type: workflow_edge, workflow: 'Regression Workflow:
+    Fork based on value with Skip Discard Mechanism'}
+- {color: green, destination: '[Regression Workflow: Fork based on value with Skip
+    Discard Mechanism] Juniper devices', label: success, source: '[Regression Workflow:
+    Fork based on value with Skip Discard Mechanism] REST API: call *is_alive* endpoint',
+  subtype: success, type: workflow_edge, workflow: 'Regression Workflow: Fork based
+    on value with Skip Discard Mechanism'}
+- {color: green, destination: '[Regression Workflow: Fork based on value with Skip
+    Discard Mechanism] Arista devices', label: success, source: '[Regression Workflow:
+    Fork based on value with Skip Discard Mechanism] REST API: call *is_alive* endpoint',
+  subtype: success, type: workflow_edge, workflow: 'Regression Workflow: Fork based
+    on value with Skip Discard Mechanism'}
+- {color: green, destination: '[Regression Workflow: Fork based on value with Skip
+    Discard Mechanism] Show VRF', label: success, source: '[Regression Workflow: Fork
+    based on value with Skip Discard Mechanism] Arista devices', subtype: success,
+  type: workflow_edge, workflow: 'Regression Workflow: Fork based on value with Skip
+    Discard Mechanism'}
+- {color: red, destination: '[Regression Workflow: Fork based on value with Skip Discard
+    Mechanism] is_alive endpoint', label: failure, source: '[Regression Workflow:
+    Fork based on value with Skip Discard Mechanism] Arista devices', subtype: failure,
+  type: workflow_edge, workflow: 'Regression Workflow: Fork based on value with Skip
+    Discard Mechanism'}
+- {color: red, destination: '[Shared] End', label: failure, source: '[Regression Workflow:
+    Fork based on value with Skip Discard Mechanism] is_alive endpoint', subtype: failure,
+  type: workflow_edge, workflow: 'Regression Workflow: Fork based on value with Skip
+    Discard Mechanism'}
+- {color: red, destination: '[Shared] End', label: failure, source: '[Regression Workflow:
+    Fork based on value with Skip Discard Mechanism] Show VRF', subtype: failure,
+  type: workflow_edge, workflow: 'Regression Workflow: Fork based on value with Skip
+    Discard Mechanism'}
 - {color: green, destination: '[Shared] End', label: success, source: '[Regression
-    Workflow U: fork based on value with skip discard mode] Show VRF', subtype: success,
-  type: workflow_edge, workflow: 'Regression Workflow U: fork based on value with
-    skip discard mode'}
+    Workflow: Fork based on value with Skip Discard Mechanism] Show VRF', subtype: success,
+  type: workflow_edge, workflow: 'Regression Workflow: Fork based on value with Skip
+    Discard Mechanism'}
 - {color: green, destination: '[Shared] End', label: success, source: '[Regression
-    Workflow U: fork based on value with skip discard mode] is_alive endpoint', subtype: success,
-  type: workflow_edge, workflow: 'Regression Workflow U: fork based on value with
-    skip discard mode'}
+    Workflow: Fork based on value with Skip Discard Mechanism] is_alive endpoint',
+  subtype: success, type: workflow_edge, workflow: 'Regression Workflow: Fork based
+    on value with Skip Discard Mechanism'}
 - {color: green, destination: '[Shared] End', label: success, source: '[Regression
-    Workflow U: fork based on value with skip discard mode] is_alive endpoint 2: Skipped',
-  subtype: success, type: workflow_edge, workflow: 'Regression Workflow U: fork based
-    on value with skip discard mode'}
-- {color: red, destination: '[Shared] End', label: failure, source: '[Regression Workflow
-    U: fork based on value with skip discard mode] is_alive endpoint 2: Skipped',
-  subtype: failure, type: workflow_edge, workflow: 'Regression Workflow U: fork based
-    on value with skip discard mode'}
-- {color: green, destination: '[Regression Workflow U: fork based on value with skip
-    discard mode] is_alive endpoint 2: Skipped', label: success, source: '[Regression
-    Workflow U: fork based on value with skip discard mode] Juniper devices', subtype: success,
-  type: workflow_edge, workflow: 'Regression Workflow U: fork based on value with
-    skip discard mode'}
-- {color: red, destination: '[Shared] End', label: failure, source: '[Regression Workflow
-    U: fork based on value with skip discard mode] Juniper devices', subtype: failure,
-  type: workflow_edge, workflow: 'Regression Workflow U: fork based on value with
-    skip discard mode'}
-- {color: green, destination: '[Regression Workflow V: skip query with device in run
-    once mode] Python service in run once mode', label: success, source: '[Shared]
-    Start', subtype: success, type: workflow_edge, workflow: 'Regression Workflow
-    V: skip query with device in run once mode'}
-- {color: green, destination: '[Regression Workflow V: skip query with device in run
-    once mode] Subworkflow in SxS mode - workflow targets', label: success, source: '[Regression
-    Workflow V: skip query with device in run once mode] Python service in run once
-    mode', subtype: success, type: workflow_edge, workflow: 'Regression Workflow V:
-    skip query with device in run once mode'}
-- {color: green, destination: '[Regression Workflow V: skip query with device in run
-    once mode] Subworkflow in SxS mode - service targets', label: success, source: '[Regression
-    Workflow V: skip query with device in run once mode] Subworkflow in SxS mode -
-    workflow targets', subtype: success, type: workflow_edge, workflow: 'Regression
-    Workflow V: skip query with device in run once mode'}
+    Workflow: Fork based on value with Skip Discard Mechanism] is_alive endpoint 2:
+    Skipped', subtype: success, type: workflow_edge, workflow: 'Regression Workflow:
+    Fork based on value with Skip Discard Mechanism'}
+- {color: red, destination: '[Shared] End', label: failure, source: '[Regression Workflow:
+    Fork based on value with Skip Discard Mechanism] is_alive endpoint 2: Skipped',
+  subtype: failure, type: workflow_edge, workflow: 'Regression Workflow: Fork based
+    on value with Skip Discard Mechanism'}
+- {color: green, destination: '[Regression Workflow: Fork based on value with Skip
+    Discard Mechanism] is_alive endpoint 2: Skipped', label: success, source: '[Regression
+    Workflow: Fork based on value with Skip Discard Mechanism] Juniper devices', subtype: success,
+  type: workflow_edge, workflow: 'Regression Workflow: Fork based on value with Skip
+    Discard Mechanism'}
+- {color: red, destination: '[Shared] End', label: failure, source: '[Regression Workflow:
+    Fork based on value with Skip Discard Mechanism] Juniper devices', subtype: failure,
+  type: workflow_edge, workflow: 'Regression Workflow: Fork based on value with Skip
+    Discard Mechanism'}
+- {color: green, destination: '[Regression Workflow: Skip Query with device in Run
+    Once Mode] Python service in run once mode', label: success, source: '[Shared]
+    Start', subtype: success, type: workflow_edge, workflow: 'Regression Workflow:
+    Skip Query with device in Run Once Mode'}
+- {color: green, destination: '[Regression Workflow: Skip Query with device in Run
+    Once Mode] Subworkflow in SxS mode - workflow targets', label: success, source: '[Regression
+    Workflow: Skip Query with device in Run Once Mode] Python service in run once
+    mode', subtype: success, type: workflow_edge, workflow: 'Regression Workflow:
+    Skip Query with device in Run Once Mode'}
+- {color: green, destination: '[Regression Workflow: Skip Query with device in Run
+    Once Mode] Subworkflow in SxS mode - service targets', label: success, source: '[Regression
+    Workflow: Skip Query with device in Run Once Mode] Subworkflow in SxS mode - workflow
+    targets', subtype: success, type: workflow_edge, workflow: 'Regression Workflow:
+    Skip Query with device in Run Once Mode'}
 - {color: green, destination: '[Shared] End', label: success, source: '[Regression
-    Workflow V: skip query with device in run once mode] Subworkflow in SxS mode -
-    service targets', subtype: success, type: workflow_edge, workflow: 'Regression
-    Workflow V: skip query with device in run once mode'}
-- {color: red, destination: '[Regression Workflow V: skip query with device in run
-    once mode] Subworkflow in SxS mode - workflow targets', label: failure, source: '[Regression
-    Workflow V: skip query with device in run once mode] Python service in run once
-    mode', subtype: failure, type: workflow_edge, workflow: 'Regression Workflow V:
-    skip query with device in run once mode'}
-- {color: red, destination: '[Regression Workflow V: skip query with device in run
-    once mode] Subworkflow in SxS mode - service targets', label: failure, source: '[Regression
-    Workflow V: skip query with device in run once mode] Subworkflow in SxS mode -
-    workflow targets', subtype: failure, type: workflow_edge, workflow: 'Regression
-    Workflow V: skip query with device in run once mode'}
-- {color: green, destination: '[[Regression Workflow V: skip query with device in
-    run once mode] Subworkflow in SxS mode - workflow targets] Fail Austin', label: success,
+    Workflow: Skip Query with device in Run Once Mode] Subworkflow in SxS mode - service
+    targets', subtype: success, type: workflow_edge, workflow: 'Regression Workflow:
+    Skip Query with device in Run Once Mode'}
+- {color: red, destination: '[Regression Workflow: Skip Query with device in Run Once
+    Mode] Subworkflow in SxS mode - workflow targets', label: failure, source: '[Regression
+    Workflow: Skip Query with device in Run Once Mode] Python service in run once
+    mode', subtype: failure, type: workflow_edge, workflow: 'Regression Workflow:
+    Skip Query with device in Run Once Mode'}
+- {color: red, destination: '[Regression Workflow: Skip Query with device in Run Once
+    Mode] Subworkflow in SxS mode - service targets', label: failure, source: '[Regression
+    Workflow: Skip Query with device in Run Once Mode] Subworkflow in SxS mode - workflow
+    targets', subtype: failure, type: workflow_edge, workflow: 'Regression Workflow:
+    Skip Query with device in Run Once Mode'}
+- {color: green, destination: '[[Regression Workflow: Skip Query with device in Run
+    Once Mode] Subworkflow in SxS mode - workflow targets] Fail Austin', label: success,
   source: '[Shared] Start', subtype: success, type: workflow_edge, workflow: '[Regression
-    Workflow V: skip query with device in run once mode] Subworkflow in SxS mode -
-    workflow targets'}
+    Workflow: Skip Query with device in Run Once Mode] Subworkflow in SxS mode - workflow
+    targets'}
 - {color: green, destination: '[Shared] End', label: success, source: '[[Regression
-    Workflow V: skip query with device in run once mode] Subworkflow in SxS mode -
-    workflow targets] Fail Austin', subtype: success, type: workflow_edge, workflow: '[Regression
-    Workflow V: skip query with device in run once mode] Subworkflow in SxS mode -
-    workflow targets'}
-- {color: green, destination: '[Regression Workflow W: skip, discard and disable result
-    creation mechanism] Pre-service with result creation disabled', label: success,
+    Workflow: Skip Query with device in Run Once Mode] Subworkflow in SxS mode - workflow
+    targets] Fail Austin', subtype: success, type: workflow_edge, workflow: '[Regression
+    Workflow: Skip Query with device in Run Once Mode] Subworkflow in SxS mode - workflow
+    targets'}
+- {color: green, destination: '[Regression Workflow: Skip, Discard and Disable Result
+    Creation Mechanism] Pre-service with result creation disabled', label: success,
   source: '[Shared] Start', subtype: success, type: workflow_edge, workflow: 'Regression
-    Workflow W: skip, discard and disable result creation mechanism'}
-- {color: green, destination: '[Regression Workflow W: skip, discard and disable result
-    creation mechanism] Workflow in DxD mode', label: success, source: '[Regression
-    Workflow W: skip, discard and disable result creation mechanism] Pre-service with
+    Workflow: Skip, Discard and Disable Result Creation Mechanism'}
+- {color: green, destination: '[Regression Workflow: Skip, Discard and Disable Result
+    Creation Mechanism] Workflow in DxD mode', label: success, source: '[Regression
+    Workflow: Skip, Discard and Disable Result Creation Mechanism] Pre-service with
     result creation disabled', subtype: success, type: workflow_edge, workflow: 'Regression
-    Workflow W: skip, discard and disable result creation mechanism'}
-- {color: green, destination: '[Regression Workflow W: skip, discard and disable result
-    creation mechanism] Service in run once mode', label: success, source: '[Regression
-    Workflow W: skip, discard and disable result creation mechanism] Workflow in DxD
-    mode', subtype: success, type: workflow_edge, workflow: 'Regression Workflow W:
-    skip, discard and disable result creation mechanism'}
-- {color: green, destination: '[Regression Workflow W: skip, discard and disable result
-    creation mechanism] Workflow in SxS mode', label: success, source: '[Regression
-    Workflow W: skip, discard and disable result creation mechanism] Service in run
-    once mode', subtype: success, type: workflow_edge, workflow: 'Regression Workflow
-    W: skip, discard and disable result creation mechanism'}
+    Workflow: Skip, Discard and Disable Result Creation Mechanism'}
+- {color: green, destination: '[Regression Workflow: Skip, Discard and Disable Result
+    Creation Mechanism] Service in run once mode', label: success, source: '[Regression
+    Workflow: Skip, Discard and Disable Result Creation Mechanism] Workflow in DxD
+    mode', subtype: success, type: workflow_edge, workflow: 'Regression Workflow:
+    Skip, Discard and Disable Result Creation Mechanism'}
+- {color: green, destination: '[Regression Workflow: Skip, Discard and Disable Result
+    Creation Mechanism] Workflow in SxS mode', label: success, source: '[Regression
+    Workflow: Skip, Discard and Disable Result Creation Mechanism] Service in run
+    once mode', subtype: success, type: workflow_edge, workflow: 'Regression Workflow:
+    Skip, Discard and Disable Result Creation Mechanism'}
 - {color: green, destination: '[Shared] End', label: success, source: '[Regression
-    Workflow W: skip, discard and disable result creation mechanism] Workflow in SxS
-    mode', subtype: success, type: workflow_edge, workflow: 'Regression Workflow W:
-    skip, discard and disable result creation mechanism'}
-- {color: green, destination: '[[Regression Workflow W: skip, discard and disable
-    result creation mechanism] Workflow in DxD mode] Fail Austin', label: success,
-  source: '[Shared] Start', subtype: success, type: workflow_edge, workflow: '[Regression
-    Workflow W: skip, discard and disable result creation mechanism] Workflow in DxD
-    mode'}
+    Workflow: Skip, Discard and Disable Result Creation Mechanism] Workflow in SxS
+    mode', subtype: success, type: workflow_edge, workflow: 'Regression Workflow:
+    Skip, Discard and Disable Result Creation Mechanism'}
+- {color: green, destination: '[[Regression Workflow: Skip, Discard and Disable Result
+    Creation Mechanism] Workflow in DxD mode] Fail Austin', label: success, source: '[Shared]
+    Start', subtype: success, type: workflow_edge, workflow: '[Regression Workflow:
+    Skip, Discard and Disable Result Creation Mechanism] Workflow in DxD mode'}
 - {color: green, destination: '[Shared] End', label: success, source: '[[Regression
-    Workflow W: skip, discard and disable result creation mechanism] Workflow in DxD
+    Workflow: Skip, Discard and Disable Result Creation Mechanism] Workflow in DxD
     mode] Fail Austin', subtype: success, type: workflow_edge, workflow: '[Regression
-    Workflow W: skip, discard and disable result creation mechanism] Workflow in DxD
+    Workflow: Skip, Discard and Disable Result Creation Mechanism] Workflow in DxD
     mode'}
-- {color: red, destination: '[Regression Workflow W: skip, discard and disable result
-    creation mechanism] Service in run once mode', label: failure, source: '[Regression
-    Workflow W: skip, discard and disable result creation mechanism] Workflow in DxD
-    mode', subtype: failure, type: workflow_edge, workflow: 'Regression Workflow W:
-    skip, discard and disable result creation mechanism'}
-- {color: green, destination: '[[Regression Workflow W: skip, discard and disable
-    result creation mechanism] Workflow in SxS mode] Fail PaloAlto', label: success,
-  source: '[Shared] Start', subtype: success, type: workflow_edge, workflow: '[Regression
-    Workflow W: skip, discard and disable result creation mechanism] Workflow in SxS
-    mode'}
+- {color: red, destination: '[Regression Workflow: Skip, Discard and Disable Result
+    Creation Mechanism] Service in run once mode', label: failure, source: '[Regression
+    Workflow: Skip, Discard and Disable Result Creation Mechanism] Workflow in DxD
+    mode', subtype: failure, type: workflow_edge, workflow: 'Regression Workflow:
+    Skip, Discard and Disable Result Creation Mechanism'}
+- {color: green, destination: '[[Regression Workflow: Skip, Discard and Disable Result
+    Creation Mechanism] Workflow in SxS mode] Fail PaloAlto', label: success, source: '[Shared]
+    Start', subtype: success, type: workflow_edge, workflow: '[Regression Workflow:
+    Skip, Discard and Disable Result Creation Mechanism] Workflow in SxS mode'}
 - {color: green, destination: '[Shared] End', label: success, source: '[[Regression
-    Workflow W: skip, discard and disable result creation mechanism] Workflow in SxS
+    Workflow: Skip, Discard and Disable Result Creation Mechanism] Workflow in SxS
     mode] Fail PaloAlto', subtype: success, type: workflow_edge, workflow: '[Regression
-    Workflow W: skip, discard and disable result creation mechanism] Workflow in SxS
+    Workflow: Skip, Discard and Disable Result Creation Mechanism] Workflow in SxS
     mode'}
-- {color: red, destination: '[Shared] End', label: failure, source: '[Regression Workflow
-    W: skip, discard and disable result creation mechanism] Workflow in SxS mode',
-  subtype: failure, type: workflow_edge, workflow: 'Regression Workflow W: skip, discard
-    and disable result creation mechanism'}
-- {color: green, destination: '[Regression Workflow X: Credentials (password & key,
-    priority)] Show interfaces with netmiko', label: success, source: '[Shared] Start',
-  subtype: success, type: workflow_edge, workflow: 'Regression Workflow X: Credentials
-    (password & key, priority)'}
+- {color: red, destination: '[Shared] End', label: failure, source: '[Regression Workflow:
+    Skip, Discard and Disable Result Creation Mechanism] Workflow in SxS mode', subtype: failure,
+  type: workflow_edge, workflow: 'Regression Workflow: Skip, Discard and Disable Result
+    Creation Mechanism'}
+- {color: green, destination: '[Regression Workflow: Credentials (Password & Key,
+    Priority Mechanism)] Show interfaces with netmiko', label: success, source: '[Shared]
+    Start', subtype: success, type: workflow_edge, workflow: 'Regression Workflow:
+    Credentials (Password & Key, Priority Mechanism)'}
 - {color: green, destination: '[Shared] End', label: success, source: '[Regression
-    Workflow X: Credentials (password & key, priority)] Show interfaces with netmiko',
-  subtype: success, type: workflow_edge, workflow: 'Regression Workflow X: Credentials
-    (password & key, priority)'}
+    Workflow: Credentials (Password & Key, Priority Mechanism)] Show interfaces with
+    netmiko', subtype: success, type: workflow_edge, workflow: 'Regression Workflow:
+    Credentials (Password & Key, Priority Mechanism)'}

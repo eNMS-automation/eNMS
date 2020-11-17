@@ -693,8 +693,8 @@ function editLabel(label) {
   openPanel({
     name: "workflow_label",
     callback: () => {
-      $("#text").val(label.label);
-      $("#alignment").val(label.font.align).selectpicker("refresh");
+      $("#workflow_label-text").val(label.label);
+      $("#workflow_label-alignment").val(label.font.align).selectpicker("refresh");
       currLabel = label;
     },
   });

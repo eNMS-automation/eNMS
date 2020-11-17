@@ -692,6 +692,7 @@ function createLabel() {
 function editLabel(label) {
   openPanel({
     name: "workflow_label",
+    title: "Edit label",
     callback: () => {
       $("#workflow_label-text").val(label.label);
       $("#workflow_label-alignment").val(label.font.align).selectpicker("refresh");

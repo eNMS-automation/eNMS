@@ -91,7 +91,7 @@
     'Regression Workflow W: disable result creation mode': [-295, -141]
     'Regression Workflow W: skip, discard and disable result creation mechanism': [
       -295, -141]
-    'Regression Workflow X: Credentials (password & key, priority)': [0, 0]
+    'Regression Workflow X: Credentials (password & key, priority)': [-157, 96]
     'Regression workflow P: large workflow (scalability)': *id006
     Subworkflow 1: !!python/tuple [0, 0]
     Subworkflow 2: !!python/tuple [0, 0]
@@ -255,7 +255,7 @@
     'Regression Workflow W: disable result creation mode': [529, -52]
     'Regression Workflow W: skip, discard and disable result creation mechanism': [
       547, -96]
-    'Regression Workflow X: Credentials (password & key, priority)': [500, 0]
+    'Regression Workflow X: Credentials (password & key, priority)': [590, 124]
     'Regression workflow P: large workflow (scalability)': *id014
     Subworkflow 1: !!python/tuple [0, 0]
     Subworkflow 2: !!python/tuple [0, 0]
@@ -14302,8 +14302,18 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  labels: {}
-  last_modified: '2020-11-17 09:04:39.994872'
+  labels:
+    86737c37-94b1-4c51-8f57-9cfcd32caf5a:
+      alignment: left
+      content: "This workflow runs on Washington, Austin, Austin-2 and Austin-3.\r\
+        \n- Washington will use \"Router Credentials - Password\" (correct credentials).\r\
+        \n- Austin and Austin-2 will match both \"Router Credentials - Password\"\r\
+        \n and \"Router Credentials - SSH Key\", but the SSH key has higher priority\r\
+        \nso they should use that to log in.\r\n- Austin-3 will match all credentials\
+        \ but \"Router Credentials - Wrong Password\"\r\nhas higher priority, so it\
+        \ should be used and\r\nthe connection should fail."
+      positions: [245, -100]
+  last_modified: '2020-11-17 09:15:10.742252'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -14332,7 +14342,7 @@
   skip: {}
   skip_query: ''
   skip_value: 'True'
-  target_devices: []
+  target_devices: [Washington]
   target_pools: [Credentials pool - Austin devices]
   time_between_retries: 10
   type: workflow
@@ -14403,7 +14413,7 @@
   operating_system: ''
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow X: Credentials (password & key, priority)': [235, -87]
+    'Regression Workflow X: Credentials (password & key, priority)': [220, 52]
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''

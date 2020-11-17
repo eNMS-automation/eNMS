@@ -101,13 +101,13 @@
   description: Austin
   down: false
   icon: router
-  ip_address: 192.168.105.9
+  ip_address: 192.168.56.50
   last_configuration_duration: Never
   last_configuration_failure: Never
   last_configuration_runtime: Never
   last_configuration_status: Never
   last_configuration_update: Never
-  last_modified: ''
+  last_modified: '2020-11-17 09:18:35.709652'
   last_operational_data_duration: Never
   last_operational_data_failure: Never
   last_operational_data_runtime: Never
@@ -2999,13 +2999,13 @@
   description: Austin
   down: false
   icon: router
-  ip_address: 192.168.105.9
+  ip_address: 192.168.56.50
   last_configuration_duration: Never
   last_configuration_failure: Never
   last_configuration_runtime: Never
   last_configuration_status: Never
   last_configuration_update: Never
-  last_modified: '2020-11-06 04:49:46.192297'
+  last_modified: '2020-11-17 09:18:39.830009'
   last_operational_data_duration: Never
   last_operational_data_failure: Never
   last_operational_data_runtime: Never
@@ -3045,13 +3045,13 @@
   description: Austin
   down: false
   icon: router
-  ip_address: 192.168.105.9
+  ip_address: 192.168.56.50
   last_configuration_duration: Never
   last_configuration_failure: Never
   last_configuration_runtime: Never
   last_configuration_status: Never
   last_configuration_update: Never
-  last_modified: '2020-11-06 04:49:50.515386'
+  last_modified: '2020-11-17 09:18:47.192385'
   last_operational_data_duration: Never
   last_operational_data_failure: Never
   last_operational_data_runtime: Never

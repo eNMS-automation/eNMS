@@ -1341,6 +1341,7 @@ function displayRelationTable(type, instance) {
         </form>
       </div>`,
     id: instance.id,
+    size: "1200 600",
     title: `${instance.name} - ${type}s`,
     callback: function () {
       // eslint-disable-next-line new-cap

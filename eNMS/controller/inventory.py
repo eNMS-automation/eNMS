@@ -220,6 +220,7 @@ class InventoryController(BaseController):
 
     def save_pool_instances(self, pool_id, **kwargs):
         pool = db.fetch("pool", id=pool_id)
+        pool_users = set(pool.users)
         for model in pool.models:
             string_instances = kwargs[f"string_{model}s"]
             if string_instances:
@@ -238,6 +239,9 @@ class InventoryController(BaseController):
                 instances = db.objectify(model, kwargs.get(f"{model}s", []))
             setattr(pool, f"{model}_number", len(instances))
             setattr(pool, f"{model}s", instances)
+        db.session.commit()
+        for user in pool_users | set(pool.users):
+            user.update_rbac()
         pool.last_modified = self.get_time()
         return pool.serialized
 

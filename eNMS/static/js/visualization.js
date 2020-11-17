@@ -690,10 +690,11 @@ function openVisualizationPanel() {
       call({
         url: "/get_visualization_parameters",
         callback: (pools) => {
+          const fieldId = "#visualization_parameters-default_pools";
           pools.forEach((pool) => {
-            $("#default_pools").append(new Option(pool.name, pool.id, false, false));
+            $(fieldId).append(new Option(pool.name, pool.id, false, false));
           });
-          $("#default_pools")
+          $(fieldId)
             .val(pools.map((pool) => pool.id))
             .trigger("change");
         },

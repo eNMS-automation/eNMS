@@ -16,7 +16,7 @@ table.display td.center {
 
 /* Align "Show 1 to 10 of X entries to the right */
 .dataTables_info {
-  font-size: 15px;
+  font-size: 14px;
   margin-right: 8px;
   margin-top: -10px;
   float: right;

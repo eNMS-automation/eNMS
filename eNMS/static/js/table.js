@@ -24,8 +24,9 @@ let waitForSearch = false;
 $.fn.dataTable.ext.errMode = "none";
 
 export class Table {
-  constructor(type, id, constraints) {
+  constructor(type, id, constraints, relation) {
     let self = this;
+    this.relation = relation;
     this.type = type;
     this.columns = tableProperties[this.type];
     this.constraints = constraints;
@@ -354,7 +355,7 @@ export class Table {
         data-tooltip="Bulk Deletion"
         type="button"
       >
-        <span class="glyphicon glyphicon-trash"></span>
+        <span class="glyphicon glyphicon-${this.relation ? 'remove' : 'trash'}"></span>
       </button>`;
   }
 
@@ -363,8 +364,8 @@ export class Table {
       <li>
         <button type="button" class="btn btn-sm btn-danger"
         onclick="eNMS.base.showDeletionPanel(${row.instance})" data-tooltip="Delete"
-          ><span class="glyphicon glyphicon-trash"></span
-        ></button>
+          ><span class="glyphicon glyphicon-${this.relation ? 'remove' : 'trash'}">
+          </span></button>
       </li>`;
   }
 
@@ -1344,8 +1345,9 @@ function displayRelationTable(type, instance) {
     size: "1200 600",
     title: `${instance.name} - ${type}s`,
     callback: function () {
+      const constraints = {[`${instance.type}s`]: [instance.id]};
       // eslint-disable-next-line new-cap
-      new tables[type](type, instance.id, {[`${instance.type}s`]: [instance.id]});
+      new tables[type](type, instance.id, constraints, instance);
     },
   });
   

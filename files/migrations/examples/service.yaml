@@ -14311,8 +14311,11 @@
         \n and \"Router Credentials - SSH Key\", but the SSH key has higher priority\r\
         \nso they should use that to log in.\r\n- Austin-3 will match all credentials\
         \ but \"Router Credentials - Wrong Password\"\r\nhas higher priority, so it\
-        \ should be used and\r\nthe connection should fail."
-      positions: [245, -100]
+        \ should be used and\r\nthe connection should fail.\r\n\r\nAll devices but\
+        \ Austin-3 should pass. For Austin and Austin-2,\r\nthe authentication in\
+        \ the server logs should say \"authentication (publickey)\"\r\nand for Washington,\
+        \ \"authentication (keyboard-interactive)\"."
+      positions: ['245', '-100']
   last_modified: '2020-11-17 09:15:10.742252'
   log_level: 1
   mail_recipient: ''

@@ -62,6 +62,17 @@ of threads configurable from settings.json > automation > max process.
 - Add runtimes select list in service results window, so you can visualize service results in workflow
 builder.
 - Include private properties (custom password, ...) when exporting a service.
+- RBAC and Credentials:
+* Credentials can be either username / password or SSH key. Both passwords and SSH key are stored in the Vault (no key file
+stored on the unix server).
+* Credentials also have an "Enable Password" field to go to enable mode after logging in.
+* Credentials have a priority field; credential object with higher priority is used if multiple available credentials.
+* Credentials have two pools: user pool to define which users can use the credentials, and device pools to define which
+devices the credential can be used for.
+* User "groups" property is now a field. This field can be used to define user pools. Services have the same "groups" property.
+When creating a new service, the groups field will be automatically set to the user groups. This allows services to be automatically
+added to the appriopriate pool of services, if the pool of services is defined based on that group property.
+
 
 Version 3.22.4
 --------------

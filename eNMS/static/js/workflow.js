@@ -679,7 +679,7 @@ function createLabel() {
     ? [mousePosition.x, mousePosition.y]
     : [0, 0];
   call({
-    url: `/create_label/${workflow.id}/${pos[0]}/${pos[1]}/${currLabel.id}`,
+    url: `/create_label/${workflow.id}/${pos[0]}/${pos[1]}/${currLabel?.id}`,
     form: "workflow_label-form",
     callback: function (result) {
       drawLabel(result.id, result);

@@ -586,8 +586,8 @@ tables.pool = class PoolTable extends Table {
       row.objectNumber += `${row[`${model}_number`]} ${model}s`;
       if (model !== "user") row.objectNumber += " - ";
     }
-    row.devices = `<b><a href="#" onclick="eNMS.table.displayRelationTable("device",
-      '${this.instance}')">Devices</a></b>`;
+    row.devices = `<b><a href="#" onclick="eNMS.table.displayRelationTable(
+      'device', ${row.instance})">Devices</a></b>`;
     return row;
   }
 
@@ -1322,29 +1322,28 @@ function displayRelationTable(type, instance) {
       <div class="modal-body">
         <div id="tooltip-overlay" class="overlay"></div>
         <form
-          id="search-form-${type}-${id}"
+          id="search-form-${type}-${instance.id}"
           class="form-horizontal form-label-left"
           method="post"
         >
           <nav
-            id="controls-${type}-${id}"
+            id="controls-${type}-${instance.id}"
             class="navbar navbar-default nav-controls"
             role="navigation"
           ></nav>
           <table
-            id="table-${type}-${id}"
+            id="table-${type}-${instance.id}"
             class="table table-striped table-bordered table-hover"
             cellspacing="0"
             width="100%"
           ></table>
         </form>
       </div>`,
-    id: id,
-    type: type,
-    title: `${type}`,
+    id: instance.id,
+    title: `${instance.name} - ${type}s`,
     callback: function () {
       // eslint-disable-next-line new-cap
-      new tables[type](type, id, {pool_id: id});
+      new tables[type](type, instance.id, {[`${instance.type}_id`]: instance.id});
     },
   });
   

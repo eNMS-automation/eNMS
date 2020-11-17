@@ -11,7 +11,7 @@
   name: Configuration Poller
   pools: []
   scheduling_mode: standard
-  service: 'Regression Workflow 9: Operational Data Backup (admin)'
+  service: 'Regression Workflow: Operational Data Backup (admin)'
   service_id: 49
   start_date: 09/10/2019 21:17:13
   type: task

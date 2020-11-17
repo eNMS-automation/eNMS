@@ -586,8 +586,8 @@ tables.pool = class PoolTable extends Table {
       row.objectNumber += `${row[`${model}_number`]} ${model}s`;
       if (model !== "user") row.objectNumber += " - ";
     }
-    row.devices = `<b><a href="#" onclick="eNMS.table.displayRelationTable(
-      '${this.id}', ${row.id})">Devices</a></b>`;
+    row.devices = `<b><a href="#" onclick="eNMS.table.displayRelationTable("device",
+      '${this.instance}')">Devices</a></b>`;
     return row;
   }
 
@@ -1315,8 +1315,39 @@ function bulkEdit(formId, model, table) {
   });
 }
 
-function displayRelationTable(id1, id2) {
-  console.log(id1, id2);
+function displayRelationTable(type, instance) {
+  openPanel({
+    name: "table",
+    content: `
+      <div class="modal-body">
+        <div id="tooltip-overlay" class="overlay"></div>
+        <form
+          id="search-form-${type}-${id}"
+          class="form-horizontal form-label-left"
+          method="post"
+        >
+          <nav
+            id="controls-${type}-${id}"
+            class="navbar navbar-default nav-controls"
+            role="navigation"
+          ></nav>
+          <table
+            id="table-${type}-${id}"
+            class="table table-striped table-bordered table-hover"
+            cellspacing="0"
+            width="100%"
+          ></table>
+        </form>
+      </div>`,
+    id: id,
+    type: type,
+    title: `${type}`,
+    callback: function () {
+      // eslint-disable-next-line new-cap
+      new tables[type](type, id, {pool_id: id});
+    },
+  });
+  
 }
 
 configureNamespace("table", [

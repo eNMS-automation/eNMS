@@ -445,6 +445,11 @@
         "width": "100px"
       },
       {
+        "data": "devices",
+        "title": "Devices",
+        "search": "text"
+      },
+      {
         "data": "objectNumber",
         "title": "Object Count",
         "width": "150px",

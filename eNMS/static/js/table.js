@@ -586,6 +586,8 @@ tables.pool = class PoolTable extends Table {
       row.objectNumber += `${row[`${model}_number`]} ${model}s`;
       if (model !== "user") row.objectNumber += " - ";
     }
+    row.devices = `<b><a href="#" onclick="eNMS.table.displayRelationTable(
+      '${this.id}', ${row.id})">Devices</a></b>`;
     return row;
   }
 
@@ -1313,10 +1315,15 @@ function bulkEdit(formId, model, table) {
   });
 }
 
+function displayRelationTable(id1, id2) {
+  console.log(id1, id2);
+}
+
 configureNamespace("table", [
   bulkDeletion,
   bulkEdit,
   clearSearch,
+  displayRelationTable,
   exportTable,
   refreshTable,
   showBulkDeletionPanel,

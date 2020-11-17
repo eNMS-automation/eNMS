@@ -203,12 +203,13 @@ export class Table {
         : "visible" in column
         ? column.visible
         : true;
-      $("#column-display").append(
+      $(`#column-display-${this.id}`).append(
         new Option(column.title || column.data, column.data, visible, visible)
       );
     });
-    $("#column-display").selectpicker("refresh");
-    $("#column-display").on("change", function () {
+    console.log(this.id)
+    $(`#column-display-${this.id}`).selectpicker("refresh");
+    $(`#column-display-${this.id}`).on("change", function () {
       self.columns.forEach((col) => {
         self.table.column(`${col.name}:name`).visible($(this).val().includes(col.data));
       });
@@ -257,7 +258,7 @@ export class Table {
         type="button"
       >
         <select multiple
-          id="column-display"
+          id="column-display-${this.id}"
           title="Columns"
           class="form-control"
           data-size="20"
@@ -1343,7 +1344,7 @@ function displayRelationTable(type, instance) {
     title: `${instance.name} - ${type}s`,
     callback: function () {
       // eslint-disable-next-line new-cap
-      new tables[type](type, instance.id, {[`${instance.type}_id`]: instance.id});
+      new tables[type](type, instance.id, {[`${instance.type}s`]: [instance.id]});
     },
   });
   

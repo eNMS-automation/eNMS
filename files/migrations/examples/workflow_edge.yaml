@@ -991,3 +991,11 @@
     W: skip, discard and disable result creation mechanism] Workflow in SxS mode',
   subtype: failure, type: workflow_edge, workflow: 'Regression Workflow W: skip, discard
     and disable result creation mechanism'}
+- {color: green, destination: '[Regression Workflow X: Credentials (password & key,
+    priority)] Show interfaces with netmiko', label: success, source: '[Shared] Start',
+  subtype: success, type: workflow_edge, workflow: 'Regression Workflow X: Credentials
+    (password & key, priority)'}
+- {color: green, destination: '[Shared] End', label: success, source: '[Regression
+    Workflow X: Credentials (password & key, priority)] Show interfaces with netmiko',
+  subtype: success, type: workflow_edge, workflow: 'Regression Workflow X: Credentials
+    (password & key, priority)'}

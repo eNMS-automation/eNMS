@@ -34,7 +34,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     Iteration Services Test Workflow: ['-359', '-163']
     'Regression Workflow 1: Netmiko with validation and retries': [-385, 11]
@@ -91,6 +91,7 @@
     'Regression Workflow W: disable result creation mode': [-295, -141]
     'Regression Workflow W: skip, discard and disable result creation mechanism': [
       -295, -141]
+    'Regression Workflow X: Credentials (password & key, priority)': [0, 0]
     'Regression workflow P: large workflow (scalability)': *id006
     Subworkflow 1: !!python/tuple [0, 0]
     Subworkflow 2: !!python/tuple [0, 0]
@@ -197,7 +198,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     Iteration Services Test Workflow: ['-9', '294']
     'Regression Workflow 1: Netmiko with validation and retries': [115, 3]
@@ -254,6 +255,7 @@
     'Regression Workflow W: disable result creation mode': [529, -52]
     'Regression Workflow W: skip, discard and disable result creation mechanism': [
       547, -96]
+    'Regression Workflow X: Credentials (password & key, priority)': [500, 0]
     'Regression workflow P: large workflow (scalability)': *id014
     Subworkflow 1: !!python/tuple [0, 0]
     Subworkflow 2: !!python/tuple [0, 0]
@@ -369,7 +371,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -442,7 +444,7 @@
   number_in_range: 7
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow 2: Separate Failure - Success paths': [741, 106]
     'Regression Workflow C: Advanced multiprocessing': &id017 [-266, -204]
@@ -519,7 +521,7 @@
   number_of_retries: 0
   operating_system: ''
   optional_args: {}
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow C: Advanced multiprocessing': &id018 [299, -170]
     'Regression Workflow C: Advanced multiprocessing (admin)': *id018
@@ -594,7 +596,7 @@
   number_of_retries: 0
   operating_system: ''
   optional_args: {}
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow 9: Operational Data Backup': &id019 [-259, 351]
     'Regression Workflow 9: Operational Data Backup (admin)': *id019
@@ -680,7 +682,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: eos
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow 1: VRF creation and deletion with Netmiko': &id020 [-38,
       -86]
@@ -771,7 +773,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: eos
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     Iteration Services Test Workflow: ['147', '-14']
     'Regression Workflow 1: VRF creation and deletion with Netmiko': &id021 [445,
@@ -861,7 +863,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: eos
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow 1: VRF creation and deletion with Netmiko': &id022 [476,
       119]
@@ -953,7 +955,7 @@
   notification_header: ''
   number_of_retries: 2
   operating_system: eos
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow 1: VRF creation and deletion with Netmiko': &id023 [-10,
       157]
@@ -1036,7 +1038,7 @@
   number_of_retries: 0
   operating_system: eos
   optional_args: {}
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     '[Regression Workflow F: Workflow of Workflows] Regression Workflow 5: VRF creation and deletion with Napalm': [
       -374, -164]
@@ -1110,7 +1112,7 @@
   payload:
     a: b
     c: ['1', '2', '3']
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow 2: Separate Failure - Success paths': [374, 278]
     'Regression Workflow 3: Napalm getters (postprocessing)': ['-50', '0']
@@ -1191,7 +1193,7 @@
   number_of_retries: 0
   operating_system: ''
   optional_args: {}
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow 2: Separate Failure - Success paths': [-102, -130]
     'Regression Workflow 3: Napalm getters (postprocessing)': [-154, -70]
@@ -1267,7 +1269,7 @@
   number_of_retries: 0
   operating_system: ''
   optional_args: {}
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow 2: Separate Failure - Success paths': [611, -72]
     'Regression Workflow 3: Napalm getters (postprocessing)': [-166, 303]
@@ -1342,7 +1344,7 @@
   number_of_retries: 0
   operating_system: ''
   optional_args: {}
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow 3: Napalm getters (postprocessing)': [303, 43]
     'Regression Workflow F: Workflow of Workflows': [3, -51]
@@ -1418,7 +1420,7 @@
   number_of_retries: 0
   operating_system: ''
   optional_args: {}
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow 3: Napalm getters (postprocessing)': [652, -22]
     'Regression Workflow F: Workflow of Workflows': [3, -51]
@@ -1485,7 +1487,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow 3: Napalm getters (postprocessing)': [424, 229]
     'Regression Workflow F: Workflow of Workflows': [3, -51]
@@ -1548,7 +1550,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     Iteration Services Test Workflow: ['3', '-144']
     'Regression Workflow E: Iteration Targets': [-195, -168]
@@ -1642,7 +1644,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: eos
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow 7: Payload Extraction & Validation'
@@ -1729,7 +1731,7 @@
   operation1: __setitem__
   operation2: __setitem__
   operation3: __setitem__
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow 7: Payload Extraction & Validation'
@@ -1806,7 +1808,7 @@
   number_of_retries: 0
   operating_system: ''
   optional_args: {}
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     '[Regression Workflow F: Workflow of Workflows] Regression Workflow 5: VRF creation and deletion with Napalm': [
       287, 136]
@@ -1895,7 +1897,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow A: get_var, set_var, get_result': ['266', '161']
     'Regression Workflow C: Advanced multiprocessing': [123, -187]
@@ -1989,7 +1991,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     '[Regression Workflow F: Workflow of Workflows] Regression Workflow 5: VRF creation and deletion with Napalm': [
       -348, 160]
@@ -2083,7 +2085,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow D: Prompts': [22, -74]
   postprocessing: ''
@@ -2175,7 +2177,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow D: Prompts': [350, 108]
   postprocessing: ''
@@ -2245,7 +2247,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow A: get_var, set_var, get_result': [-376, -138]
   postprocessing: ''
@@ -2310,7 +2312,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow A: get_var, set_var, get_result': [0, -144]
   postprocessing: ''
@@ -2399,7 +2401,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow A: get_var, set_var, get_result': [474, -11]
   postprocessing: ''
@@ -2490,7 +2492,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow A: get_var, set_var, get_result': [425, 190]
   postprocessing: ''
@@ -2581,7 +2583,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow A: get_var, set_var, get_result': [-445, 128]
   postprocessing: ''
@@ -2660,7 +2662,7 @@
   number_of_retries: 0
   operating_system: ''
   optional_args: {}
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow B: Napalm getters validation'
@@ -2737,7 +2739,7 @@
   number_of_retries: 0
   operating_system: ''
   optional_args: {}
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow B: Napalm getters validation'
@@ -2813,7 +2815,7 @@
   number_of_retries: 0
   operating_system: ''
   optional_args: {}
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow 8: Payload Extraction with Operations'
@@ -2893,7 +2895,7 @@
   number_of_retries: 0
   operating_system: ''
   optional_args: {}
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow B: Napalm getters validation'
@@ -2970,7 +2972,7 @@
   number_of_retries: 0
   operating_system: ''
   optional_args: {}
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow B: Napalm getters validation'
@@ -3043,7 +3045,7 @@
   options: {}
   pass_device_properties: true
   playbook_path: /media/sf_shared/eNMS/files/playbooks/arista_show_version.yml
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow 6: Ansible with Validation': [-107, 153]
     'Regression Workflow B: Napalm getters validation': [-30, 126]
@@ -3111,7 +3113,7 @@
   options: {}
   pass_device_properties: true
   playbook_path: /media/sf_shared/eNMS/files/playbooks/arista_show_running_config.yml
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow 6: Ansible with Validation': [179, -62]
   postprocessing: ''
@@ -3178,7 +3180,7 @@
   options: {}
   pass_device_properties: true
   playbook_path: /media/sf_shared/eNMS/files/playbooks/arista_show_running_config.yml
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow 6: Ansible with Validation': [486, 173]
   postprocessing: ''
@@ -3262,7 +3264,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow C: Advanced multiprocessing': &id026 [-315, 157]
     'Regression Workflow C: Advanced multiprocessing (admin)': *id026
@@ -3355,7 +3357,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: eos
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow E: Iteration Targets': [240, -144]
   postprocessing: ''
@@ -3446,7 +3448,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: eos
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow E: Iteration Targets': [572, -4]
   postprocessing: ''
@@ -3537,7 +3539,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: eos
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow E: Iteration Targets': [556, 123]
   postprocessing: ''
@@ -3608,7 +3610,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow 8: Payload Extraction with Operations'
@@ -3686,7 +3688,7 @@
   operation1: __setitem__
   operation2: append
   operation3: update
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow 8: Payload Extraction with Operations'
@@ -3767,7 +3769,7 @@
   operation1: append
   operation2: extend
   operation3: update
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow 8: Payload Extraction with Operations'
@@ -3843,7 +3845,7 @@
   params: {}
   password: ''
   payload: {}
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow E: Iteration Targets': [-135, 91]
   postprocessing: ''
@@ -3911,7 +3913,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow F: Workflow of Workflows': [-179, 146]
     '[Regression Workflow F: Workflow of Workflows] Regression Workflow F S2: Access Variables from Parent Workflow': [
@@ -4007,7 +4009,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     '[Regression Workflow F: Workflow of Workflows] Regression Workflow F S2: Access Variables from Parent Workflow': [
       244, 113]
@@ -4083,7 +4085,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow F S1: Subworkflow of Workflow': [200, -205]
   postprocessing: ''
@@ -4190,7 +4192,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: eos
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow F: Workflow of Workflows': [-423, -31]
   postprocessing: ''
@@ -4268,7 +4270,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: eos
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow F: Workflow of Workflows': [152, 75]
   postprocessing: ''
@@ -4354,7 +4356,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: eos
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow F: Workflow of Workflows': [464, 224]
   postprocessing: ''
@@ -4464,7 +4466,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     '[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow of Workflow': [
       134, -147]
@@ -4555,7 +4557,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: eos
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -4632,7 +4634,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -4711,7 +4713,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -4800,7 +4802,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -4907,7 +4909,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     '[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow of Workflow': [
       678, 11]
@@ -5010,7 +5012,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -5090,7 +5092,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -5195,7 +5197,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -5266,7 +5268,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     '[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow of Workflow': [
       135, 187]
@@ -5347,7 +5349,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow F: Workflow of Workflows': [164, 375]
   postprocessing: ''
@@ -5418,7 +5420,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow F: Workflow of Workflows': [-655, 369]
   postprocessing: ''
@@ -5509,7 +5511,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow F: Workflow of Workflows': [-408, 34]
   postprocessing: ''
@@ -5610,7 +5612,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow 9: Operational Data Backup': &id027 [-125, 15]
     'Regression Workflow 9: Operational Data Backup (admin)': *id027
@@ -5693,7 +5695,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -5764,7 +5766,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow G: run methods (BFS)': [-296, -98]
   postprocessing: ''
@@ -5834,7 +5836,7 @@
   params: {}
   password: ''
   payload: {}
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow G: run methods (BFS)': [-135, 189]
   postprocessing: ''
@@ -5903,7 +5905,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow G: run methods (BFS)': [123, -96]
   postprocessing: ''
@@ -5975,7 +5977,7 @@
   params: {}
   password: ''
   payload: {}
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow G: run methods (BFS)': [254, 163]
   postprocessing: ''
@@ -6043,7 +6045,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow G: run methods (BFS)': [622, -89]
   postprocessing: ''
@@ -6130,7 +6132,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     '[Regression Workflow G: run methods (BFS)] Workflow  in device by device mode': [
       248, -94]
@@ -6222,7 +6224,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     '[Regression Workflow G: run methods (BFS)] Workflow in service by service mode (workflow targets)': [
       239, -108]
@@ -6314,7 +6316,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     '[Regression Workflow G: run methods (BFS)] Workflow in service targets mode': [
       234, -86]
@@ -6408,7 +6410,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -6476,7 +6478,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow H: shared service in multiple subworkflows': [-241, 197]
   postprocessing: ''
@@ -6544,7 +6546,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow H: shared service in multiple subworkflows': [548, 48]
   postprocessing: ''
@@ -6630,7 +6632,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     '[Regression Workflow H: shared service in multiple subworkflows] Subworkflow 1': [
       167, -185]
@@ -6706,7 +6708,7 @@
   options: {}
   pass_device_properties: false
   playbook_path: /media/sf_shared/eNMS/files/playbooks/simple_playbook.yml
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow 6: Ansible with Validation': [-536, 192]
   postprocessing: ''
@@ -6770,7 +6772,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -6835,7 +6837,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow I: Iteration Targets Advanced': [132, -202]
   postprocessing: ''
@@ -6921,7 +6923,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow I: Iteration Targets Advanced': [135, 100]
   postprocessing: ''
@@ -6992,7 +6994,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -7057,7 +7059,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow J: Workflow and Subworkflow Iteration': [226, -76]
   postprocessing: ''
@@ -7123,7 +7125,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow J: Workflow and Subworkflow Iteration': [218, 171]
   postprocessing: ''
@@ -7189,7 +7191,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     '[Regression Workflow J: Workflow and Subworkflow Iteration] Subworkflow Iteration': [
       231, -87]
@@ -7257,7 +7259,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow 7: Payload Extraction & Validation'
@@ -7326,7 +7328,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow 7: Payload Extraction & Validation'
@@ -7396,7 +7398,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow 7: Payload Extraction & Validation'
@@ -7464,7 +7466,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow 7: Payload Extraction & Validation'
@@ -7532,7 +7534,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow 8: Payload Extraction with Operations'
@@ -7600,7 +7602,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow 8: Payload Extraction with Operations'
@@ -7686,7 +7688,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -7752,7 +7754,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow K: preprocessing and postprocessing': [-26, 123]
   postprocessing: "results[\"postprocessing\"] = f\"Value set with postprocessing\
@@ -7820,7 +7822,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow K: preprocessing and postprocessing': [558, 152]
   postprocessing: "results[\"SHOULD BE THERE\"] = \"NO BUG\"\r\n\r\nresults[\"func_result\"\
@@ -7884,7 +7886,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow L: superworkflow': [511, -111]
   postprocessing: ''
@@ -7948,7 +7950,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -8021,7 +8023,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -8093,7 +8095,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow M: Unix command & shell, ping, - jump on connect - mechanism': [
       -177, -94]
@@ -8170,7 +8172,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow M: Unix command & shell, ping, - jump on connect - mechanism': [
       -113, 220]
@@ -8247,7 +8249,7 @@
   number_of_retries: 0
   operating_system: ''
   packet_size: 56
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   ports: '22'
   positions:
     'Regression Workflow M: Unix command & shell, ping, - jump on connect - mechanism': [
@@ -8317,7 +8319,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -8391,7 +8393,7 @@
   opennms_login: demo
   opennms_password: ''
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow N: Topology Import (netbox, librenms, opennms)': [113, -104]
   postprocessing: ''
@@ -8475,7 +8477,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow M: Unix command & shell, ping, - jump on connect - mechanism': [
       358, 190]
@@ -8553,7 +8555,7 @@
   payload:
     a: b
     c: ['1', '2', '3']
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow L: superworkflow': [227, 151]
   postprocessing: ''
@@ -8640,7 +8642,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -8739,7 +8741,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow 9: Operational Data Backup': &id028 [-455, 15]
     'Regression Workflow 9: Operational Data Backup (admin)': *id028
@@ -8824,7 +8826,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow 9: Operational Data Backup': &id029 [148, 191]
     'Regression Workflow 9: Operational Data Backup (admin)': *id029
@@ -8890,7 +8892,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow L: superworkflow': [606, 47]
   postprocessing: ''
@@ -8956,7 +8958,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -9029,7 +9031,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow O: Scrapli': [-33, -167]
   postprocessing: results["success"] = "TEST-VRF" not in results["result"]
@@ -9102,7 +9104,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow O: Scrapli': [402, -161]
   postprocessing: ''
@@ -9175,7 +9177,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow O: Scrapli': [6, 112]
   postprocessing: results["success"] = "TEST-VRF" in results["result"]
@@ -9248,7 +9250,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow O: Scrapli': [373, 107]
   postprocessing: ''
@@ -9316,7 +9318,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -9353,9 +9355,10 @@
   skip_query: ''
   skip_value: 'True'
   target_devices: []
-  target_pools: [All objects, All devices, All links, Datacenter San Francisco, Datacenter
-      New York, Datacenter Chicago, Washington, Links 0 through 5 - Non-public pool
-      - Access set up, Links 6 through 9 - Public pools]
+  target_pools: ['All instances (devices, links, services and users)', All devices,
+    All links, Datacenter San Francisco, Datacenter New York, Datacenter Chicago,
+    Washington, Links 0 through 5 - Non-public pool - Access set up, Links 6 through
+      9 - Public pools]
   time_between_retries: 10
   type: workflow
   update_pools_after_running: false
@@ -9409,7 +9412,7 @@
   payload:
     a: b
     c: ['1', '2', '3']
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow 2: Separate Failure - Success paths': [374, 278]
     'Regression Workflow 3: Napalm getters (postprocessing)': ['-50', '0']
@@ -9490,7 +9493,7 @@
   payload:
     a: b
     c: ['1', '2', '3']
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow P: large workflow (scalability)': &id031 [-406, 73]
     'Regression workflow P: large workflow (scalability)': *id031
@@ -9565,7 +9568,7 @@
   payload:
     a: b
     c: ['1', '2', '3']
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow P: large workflow (scalability)': &id032 [-402, 156]
     'Regression workflow P: large workflow (scalability)': *id032
@@ -9640,7 +9643,7 @@
   payload:
     a: b
     c: ['1', '2', '3']
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow P: large workflow (scalability)': &id033 [-94, 200]
     'Regression workflow P: large workflow (scalability)': *id033
@@ -9715,7 +9718,7 @@
   payload:
     a: b
     c: ['1', '2', '3']
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow P: large workflow (scalability)': &id034 [-94, 109]
     'Regression workflow P: large workflow (scalability)': *id034
@@ -9804,7 +9807,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow P: large workflow (scalability)': &id035 [-117, 5]
     'Regression workflow P: large workflow (scalability)': *id035
@@ -9896,7 +9899,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow P: large workflow (scalability)': &id036 [-81, -125]
     'Regression workflow P: large workflow (scalability)': *id036
@@ -9988,7 +9991,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow P: large workflow (scalability)': &id037 [-89, -196]
     'Regression workflow P: large workflow (scalability)': *id037
@@ -10080,7 +10083,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow P: large workflow (scalability)': &id038 [183, -222]
     'Regression workflow P: large workflow (scalability)': *id038
@@ -10172,7 +10175,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow P: large workflow (scalability)': &id039 [188, -130]
     'Regression workflow P: large workflow (scalability)': *id039
@@ -10264,7 +10267,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow P: large workflow (scalability)': &id040 [190, -36]
     'Regression workflow P: large workflow (scalability)': *id040
@@ -10334,7 +10337,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow P: large workflow (scalability)': &id041 [194, 47]
     'Regression workflow P: large workflow (scalability)': *id041
@@ -10399,7 +10402,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow P: large workflow (scalability)': &id042 [203, 127]
     'Regression workflow P: large workflow (scalability)': *id042
@@ -10464,7 +10467,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow P: large workflow (scalability)': &id043 [207, 230]
     'Regression workflow P: large workflow (scalability)': *id043
@@ -10529,7 +10532,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow P: large workflow (scalability)': &id044 [476, 232]
     'Regression workflow P: large workflow (scalability)': *id044
@@ -10594,7 +10597,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow P: large workflow (scalability)': &id045 [471, 142]
     'Regression workflow P: large workflow (scalability)': *id045
@@ -10659,7 +10662,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow P: large workflow (scalability)': &id046 [476, 44]
     'Regression workflow P: large workflow (scalability)': *id046
@@ -10724,7 +10727,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow P: large workflow (scalability)': &id047 [469, -50]
     'Regression workflow P: large workflow (scalability)': *id047
@@ -10789,7 +10792,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow P: large workflow (scalability)': &id048 [467, -163]
     'Regression workflow P: large workflow (scalability)': *id048
@@ -10856,7 +10859,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -10945,7 +10948,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow Q: File transfer': [-171, -148]
   postprocessing: results["success"] = "a.bin" not in results["result"]
@@ -11020,7 +11023,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow Q: File transfer': [-21, 255]
   postprocessing: ''
@@ -11108,7 +11111,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow Q: File transfer': [362, 239]
   postprocessing: "simple_file = \"a.bin\" in results[\"result\"]\r\nglob_files =\
@@ -11186,7 +11189,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow Q: File transfer': [187, -140]
   postprocessing: ''
@@ -11274,7 +11277,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow Q: File transfer': [517, -138]
   postprocessing: ''
@@ -11349,7 +11352,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow Q: File transfer': [-332, 180]
   postprocessing: ''
@@ -11418,7 +11421,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -11485,7 +11488,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow R: skip services in service by service mode': &id049 [-124,
       -154]
@@ -11555,7 +11558,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow R: skip services in service by service mode': &id050 [304,
       -102]
@@ -11626,7 +11629,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow R: skip services in service by service mode': &id051 [12,
       179]
@@ -11711,7 +11714,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -11782,7 +11785,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow S: conditional skip query in failed and discard mode': &id052 [
       -242, 237]
@@ -11855,7 +11858,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow S: conditional skip query in failed and discard mode': &id053 [
       412, 108]
@@ -11928,7 +11931,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow S: conditional skip query in failed and discard mode': &id054 [
       605, 248]
@@ -12001,7 +12004,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow S: conditional skip query in failed and discard mode': &id055 [
       660, 13]
@@ -12097,7 +12100,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -12163,7 +12166,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow 1: link neighbors mechanism': &id056 [-20, 30]
     'Regression Workflow 4: link neighbors mechanism': *id056
@@ -12260,7 +12263,7 @@
   params: {}
   password: ''
   payload: {}
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow 1: link neighbors mechanism': &id057 [401, -181]
     'Regression Workflow 4: link neighbors mechanism': *id057
@@ -12350,7 +12353,7 @@
   notification_header: ''
   number_of_retries: 2
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow 1: Netmiko with validation and retries': [-142, -137]
     'Regression Workflow D: Prompts': [-291, -104]
@@ -12441,7 +12444,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -12509,7 +12512,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow T: global variables': [-180, 198]
     'Regression Workflow T: global variables and post-run pool update': [-153, 159]
@@ -12583,7 +12586,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow T: global variables': [42, -43]
     'Regression Workflow T: global variables and post-run pool update': [42, -43]
@@ -12672,7 +12675,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow T: global variables': [487, 104]
     'Regression Workflow T: global variables and post-run pool update': [487, 104]
@@ -12743,7 +12746,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow S: conditional skip query in failed and discard mode': &id058 [
       -215, 70]
@@ -12831,7 +12834,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -12909,7 +12912,7 @@
   payload:
     a: b
     c: ['1', '2', '3']
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow 2: Separate Failure - Success paths': [374, 278]
     'Regression Workflow 3: Napalm getters (postprocessing)': ['-50', '0']
@@ -12984,7 +12987,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow U: fork based on value with skip discard mode': [47, -29]
   postprocessing: ''
@@ -13053,7 +13056,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow U: fork based on value with skip discard mode': [-430, 342]
   postprocessing: ''
@@ -13143,7 +13146,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow U: fork based on value with skip discard mode': [574, 0]
   postprocessing: ''
@@ -13220,7 +13223,7 @@
   payload:
     a: b
     c: ['1', '2', '3']
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow U: fork based on value with skip discard mode': [437, 78]
   postprocessing: ''
@@ -13294,7 +13297,7 @@
   payload:
     a: b
     c: ['1', '2', '3']
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow U: fork based on value with skip discard mode': [32, 431]
   postprocessing: ''
@@ -13385,7 +13388,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -13455,7 +13458,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow V: skip query with device in run once mode': [-221, 154]
   postprocessing: ''
@@ -13522,7 +13525,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow V: skip query with device in run once mode': [-31, 3]
   postprocessing: ''
@@ -13590,7 +13593,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow V: skip query with device in run once mode': [342, 205]
   postprocessing: ''
@@ -13655,7 +13658,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     '[Regression Workflow V: skip query with device in run once mode] Subworkflow in SxS mode - workflow targets': [
       230, -19]
@@ -13746,7 +13749,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -13815,7 +13818,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow W: disable result creation mode': [-312, -10]
     'Regression Workflow W: skip, discard and disable result creation mechanism': [
@@ -13884,7 +13887,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow W: disable result creation mode': [-174, 154]
     'Regression Workflow W: skip, discard and disable result creation mechanism': [
@@ -13954,7 +13957,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow W: disable result creation mode': [442, 205]
     'Regression Workflow W: skip, discard and disable result creation mechanism': [
@@ -14022,7 +14025,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow W: disable result creation mode': [101, -37]
     'Regression Workflow W: skip, discard and disable result creation mechanism': [
@@ -14089,7 +14092,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     '[Regression Workflow W: disable result creation mode] Workflow in DxD mode': &id060 [
       224, -51]
@@ -14156,7 +14159,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions:
     '[Regression Workflow W: skip, discard and disable result creation mechanism] Workflow in SxS mode': [
       220, -28]
@@ -14242,7 +14245,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: [All objects]
+  pools: ['All instances (devices, links, services and users)']
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -14261,6 +14264,163 @@
   strip_command: true
   strip_prompt: true
   target_devices: [Washington]
+  target_pools: []
+  time_between_retries: 10
+  timeout: 10.0
+  type: netmiko_validation_service
+  update_pools_after_running: false
+  update_target_pools: false
+  use_device_driver: true
+  use_genie: false
+  use_host_keys: false
+  validation_condition: none
+  validation_method: text
+  vendor: ''
+  waiting_time: 0
+- access_groups: admin
+  close_connection: false
+  completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  default_access: creator
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  events: []
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  labels: {}
+  last_modified: '2020-11-17 09:04:39.994872'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: 'Regression Workflow X: Credentials (password & key, priority)'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: ['All instances (devices, links, services and users)']
+  positions: {}
+  postprocessing: ''
+  postprocessing_mode: always
+  preprocessing: ''
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: 'Regression Workflow X: Credentials (password & key, priority)'
+  send_notification: false
+  send_notification_method: mail
+  services: ['[Shared] Start', '[Shared] End', '[Regression Workflow X: Credentials
+      (password & key, priority)] Show interfaces with netmiko']
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: 'True'
+  target_devices: []
+  target_pools: [Credentials pool - Austin devices]
+  time_between_retries: 10
+  type: workflow
+  update_pools_after_running: false
+  update_target_pools: false
+  validation_condition: none
+  validation_method: text
+  vendor: ''
+  waiting_time: 0
+  workflow_category: Example workflow(s)
+- access_groups: admin
+  auto_find_prompt: true
+  close_connection: false
+  command: show interfaces
+  completion_time: 1
+  config_mode: false
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credentials: device
+  custom_password: ''
+  custom_username: ''
+  default_access: creator
+  definition: Definition
+  delay_factor: 1.0
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  driver: a10
+  enable_mode: true
+  events: []
+  exit_command: exit
+  expect_password_prompt: password
+  expect_prompt: admin.*$
+  expect_string: ''
+  expect_username_prompt: 'username:'
+  fast_cli: false
+  global_delay_factor: 1.0
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  jump_command: ssh jump_server_IP
+  jump_on_connect: false
+  jump_password: ''
+  jump_username: ''
+  last_modified: '2020-11-17 09:04:17.856544'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Regression Workflow X: Credentials (password & key, priority)] Show interfaces
+    with netmiko'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: ['All instances (devices, links, services and users)']
+  positions:
+    'Regression Workflow X: Credentials (password & key, priority)': [235, -87]
+  postprocessing: ''
+  postprocessing_mode: always
+  preprocessing: ''
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: Show interfaces with netmiko
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: 'True'
+  start_new_connection: false
+  strip_command: true
+  strip_prompt: true
+  target_devices: []
   target_pools: []
   time_between_retries: 10
   timeout: 10.0

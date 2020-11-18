@@ -27,7 +27,7 @@ export class Table {
   constructor(type, id, constraints, relation) {
     let self = this;
     this.relation = relation;
-    if(relation) this.relationString = JSON.stringify(relation).replace(/"/g, "'");
+    if (relation) this.relationString = JSON.stringify(relation).replace(/"/g, "'");
     this.type = type;
     this.columns = tableProperties[this.type];
     this.constraints = constraints;
@@ -355,17 +355,19 @@ export class Table {
         data-tooltip="Bulk Deletion"
         type="button"
       >
-        <span class="glyphicon glyphicon-${this.relation ? 'remove' : 'trash'}"></span>
+        <span class="glyphicon glyphicon-${this.relation ? "remove" : "trash"}"></span>
       </button>`;
   }
 
   deleteInstanceButton(row) {
+    const onClick = this.relation
+      ? `eNMS.base.showRemovalPanel(${row.instance}, ${this.relationString})`
+      : `eNMS.base.showDeletionPanel(${row.instance})`;
     return `
       <li>
         <button type="button" class="btn btn-sm btn-danger"
-        onclick="eNMS.base.showDeletionPanel(${row.instance}, ${this.relationString})"
-        data-tooltip="Delete"><span class="glyphicon
-        glyphicon-${this.relation ? 'remove' : 'trash'}"></span></button>
+        onclick="${onClick}" data-tooltip="Delete"><span class="glyphicon
+        glyphicon-${this.relation ? "remove" : "trash"}"></span></button>
       </li>`;
   }
 
@@ -1345,12 +1347,11 @@ function displayRelationTable(type, instance) {
     size: "1200 600",
     title: `${instance.name} - ${type}s`,
     callback: function () {
-      const constraints = {[`${instance.type}s`]: [instance.id]};
+      const constraints = { [`${instance.type}s`]: [instance.id] };
       // eslint-disable-next-line new-cap
       new tables[type](type, instance.id, constraints, instance);
     },
   });
-  
 }
 
 configureNamespace("table", [

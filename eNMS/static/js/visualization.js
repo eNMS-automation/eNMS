@@ -253,7 +253,7 @@ function createLink2d(link) {
   const pointList = [pointA, pointB];
   const polyline = new L.Polyline(pointList, {
     color: link.color,
-    weight: 2,
+    weight: 3,
     opacity: 1,
     smoothFactor: 1,
   });

@@ -686,7 +686,8 @@ tables.service = class ServiceTable extends Table {
         ? row.scoped_name
         : row.dbName;
     row.devices = `<b><a href="#" onclick="eNMS.table.displayRelationTable(
-      'device', ${row.instance}, 'target_services')">Devices</a></b>`;
+      'device', ${row.instance}, {from: 'target_services', to: 'target_devices'})">
+      Devices</a></b>`;
     return row;
   }
 
@@ -1349,10 +1350,9 @@ function displayRelationTable(type, instance, relation) {
     size: "1200 600",
     title: `${instance.name} - ${type}s`,
     callback: function () {
-      const constraints = { [`${relation}`]: [instance.id] };
-      console.log(constraints)
+      const constraints = { [`${relation.from}`]: [instance.id] };
       // eslint-disable-next-line new-cap
-      new tables[type](type, instance.id, constraints, instance);
+      new tables[type](type, instance.id, constraints, { relation, ...instance });
     },
   });
 }

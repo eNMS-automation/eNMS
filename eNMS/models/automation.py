@@ -75,7 +75,9 @@ class Service(AbstractBase):
     device_query = db.Column(db.LargeString)
     device_query_property = db.Column(db.SmallString, default="ip_address")
     target_devices = relationship(
-        "Device", secondary=db.service_target_device_table, back_populates="services"
+        "Device",
+        secondary=db.service_target_device_table,
+        back_populates="target_services",
     )
     target_pools = relationship(
         "Pool", secondary=db.service_target_pool_table, back_populates="target_services"
@@ -1448,4 +1450,3 @@ class Run(AbstractBase):
         }
         with open(path / "timestamps.json", "w") as file:
             dump(data, file, indent=4)
-       

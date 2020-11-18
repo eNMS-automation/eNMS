@@ -182,7 +182,7 @@ const deleteInstance = function (type, id) {
 function removeInstance(tableId, instance, relation) {
   call({
     url: "/remove_instance",
-    data: {instance, relation},
+    data: { instance, relation },
     callback: function () {
       tableInstances[tableId].table
         .row($(`#${instance.id}`))
@@ -190,11 +190,14 @@ function removeInstance(tableId, instance, relation) {
         .draw(false);
       notify(
         `${instance.type.toUpperCase()} '${instance.name}' remove from
-        ${relation.type.toUpperCase()} '${relation.name}'.`, "success", 5, true
+        ${relation.type.toUpperCase()} '${relation.name}'.`,
+        "success",
+        5,
+        true
       );
     },
   });
-};
+}
 
 export function downloadFile(name, content, type) {
   let link = document.createElement("a");

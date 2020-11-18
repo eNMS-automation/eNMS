@@ -511,7 +511,7 @@ class BaseController:
     def remove_instance(self, **kwargs):
         instance = db.fetch(kwargs["instance"]["type"], id=kwargs["instance"]["id"])
         target = db.fetch(kwargs["relation"]["type"], id=kwargs["relation"]["id"])
-        getattr(target, f"{kwargs['instance']['type']}s").remove(instance)
+        getattr(target, kwargs["relation"]["relation"]["to"]).remove(instance)
 
     def send_email(
         self,

@@ -513,6 +513,13 @@ class BaseController:
         target = db.fetch(kwargs["relation"]["type"], id=kwargs["relation"]["id"])
         getattr(target, kwargs["relation"]["relation"]["to"]).remove(instance)
 
+    def bulk_removal(self, table, target_type, target_id, target_property, **kwargs):
+        target = db.fetch(target_type, id=target_id)
+        instances = self.filtering(table, bulk=True, form=kwargs)
+        for instance in instances:
+            getattr(target, target_property).remove(instance)
+        return len(instances)
+
     def send_email(
         self,
         subject,

@@ -183,6 +183,7 @@
     "/add_service_to_workflow",
     "/bulk_deletion",
     "/bulk_edit",
+    "/bulk_removal",
     "/copy_service_in_workflow",
     "/calendar_init",
     "/clear_results",

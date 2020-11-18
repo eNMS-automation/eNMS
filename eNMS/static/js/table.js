@@ -349,7 +349,7 @@ export class Table {
   bulkDeletionButton() {
     const type = this.modelFiltering || this.type;
     const onClick = this.relation
-      ? `eNMS.table.bulkRemoval('${this.id}', ${this.relationString})`
+      ? `eNMS.table.bulkRemoval('${this.id}', '${type}', ${this.relationString})`
       : `eNMS.table.showBulkDeletionPanel('${this.id}', '${type}')`;
     return `
       <button
@@ -1311,8 +1311,15 @@ function bulkDeletion(tableId, model) {
   });
 }
 
-function bulkRemoval(tableId, model) {
-
+function bulkRemoval(tableId, model, instance) {
+  const target = `${instance.type}/${instance.id}/${instance.relation.to}`;
+  call({
+    url: `/bulk_removal/${model}/${target}`,
+    form: `search-form-${tableId}`,
+    callback: function () {
+      refreshTable(tableId);
+    },
+  });
 }
 
 function bulkEdit(formId, model, table) {

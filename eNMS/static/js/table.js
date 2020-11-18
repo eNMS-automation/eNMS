@@ -1302,6 +1302,15 @@ function showBulkDeletionPanel(tableId, model) {
 }
 
 function showAddInstancePanel(tableId, model, relation) {
+  openPanel({
+    name: `add_${model}s`,
+    size: "800 300",
+    title: `Add ${model}s to ${relation.name}`,
+    id: tableId,
+    callback: function () {
+      console.log("test");
+    },
+  });
   console.log(tableId, model, relation);
 }
 

@@ -1,4 +1,5 @@
 from copy import deepcopy
+from wtforms.widgets import TextArea
 
 from eNMS import app
 from eNMS.forms import BaseForm
@@ -63,13 +64,22 @@ def filtering_form_generator():
 
 
 def add_instance_form_generator():
-    for model in models:
+    for model in ("device", "link", "user", "service"):
         relationships[f"add_{model}s"][f"{model}s"] = {"type": "object-list"}
-        type(f"{model}RelationshipFilteringForm", (BaseForm,), {
-            "form_type": HiddenField(default=f"add_{model}s"),
-            f"{model}s": MultipleInstanceField(model)
-        }
-            )
+        type(
+            f"{model}RelationshipFilteringForm",
+            (BaseForm,),
+            {
+                "form_type": HiddenField(default=f"add_{model}s"),
+                f"{model}s": MultipleInstanceField(
+                    model,
+                ),
+                f"string_{model}s": StringField(
+                    widget=TextArea(), render_kw={"rows": 8}
+                ),
+            },
+        )
+
 
 filtering_form_generator()
 add_instance_form_generator()

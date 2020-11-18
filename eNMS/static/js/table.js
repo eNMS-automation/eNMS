@@ -1312,13 +1312,18 @@ function bulkDeletion(tableId, model) {
 }
 
 function bulkRemoval(tableId, model, instance) {
-  const target = `${instance.type}/${instance.id}/
-    ${instance.relation.to}/${instance.relation.from}`;
+  const relation = `${instance.relation.to}/${instance.relation.from}`;
   call({
-    url: `/bulk_removal/${model}/${target}`,
+    url: `/bulk_removal/${model}/${instance.type}/${instance.id}/${relation}`,
     form: `search-form-${tableId}`,
-    callback: function () {
+    callback: function (number) {
       refreshTable(tableId);
+      notify(
+        `${number} ${model}s removed from ${instance.type} '${instance.name}'.`,
+        "success",
+        5,
+        true
+      );
     },
   });
 }

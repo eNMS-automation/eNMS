@@ -270,13 +270,15 @@ export class Table {
 
   createNewButton() {
     const onClick = this.relation
-      ? `eNMS.table.showAddInstancePanel('${this.id}', '${this.type}', ${this.relationString})`
+      ? `eNMS.table.showAddInstancePanel(
+          '${this.id}', '${this.type}', ${this.relationString}
+        )`
       : `eNMS.base.showInstancePanel('${this.type}')`;
     return `
       <button
         class="btn btn-primary"
         onclick="${onClick}"
-        data-tooltip="${this.relation ? 'Add' : 'New'}"
+        data-tooltip="${this.relation ? "Add" : "New"}"
         type="button"
       >
         <span class="glyphicon glyphicon-plus"></span>
@@ -366,7 +368,9 @@ export class Table {
 
   deleteInstanceButton(row) {
     const onClick = this.relation
-      ? `eNMS.base.removeInstance('${this.id}', ${row.instance}, ${this.relationString})`
+      ? `eNMS.base.removeInstance(
+          '${this.id}', ${row.instance}, ${this.relationString}
+        )`
       : `eNMS.base.showDeletionPanel(${row.instance})`;
     return `
       <li>
@@ -1378,7 +1382,7 @@ function displayRelationTable(type, instance, relation) {
 }
 
 for (const [type, table] of Object.entries(tables)) {
-  table.prototype.type = type
+  table.prototype.type = type;
 }
 
 configureNamespace("table", [

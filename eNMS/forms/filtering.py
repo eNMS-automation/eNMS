@@ -69,6 +69,7 @@ def add_instance_form_generator():
             "type": "object-list",
             "model": model,
         }
+        # remove save_pool_instances
         type(
             f"{model}RelationshipFilteringForm",
             (BaseForm,),

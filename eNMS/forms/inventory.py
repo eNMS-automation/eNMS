@@ -1,5 +1,4 @@
 from wtforms.validators import InputRequired
-from wtforms.widgets import TextArea
 
 from eNMS import app
 from eNMS.forms import BaseForm, choices, form_properties

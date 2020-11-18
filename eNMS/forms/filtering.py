@@ -65,15 +65,16 @@ def filtering_form_generator():
 
 def add_instance_form_generator():
     for model in ("device", "link", "user", "service"):
-        relationships[f"add_{model}s"][f"{model}s"] = {"type": "object-list"}
+        relationships[f"add_{model}s"][f"{model}s"] = {
+            "type": "object-list",
+            "model": model,
+        }
         type(
             f"{model}RelationshipFilteringForm",
             (BaseForm,),
             {
                 "form_type": HiddenField(default=f"add_{model}s"),
-                f"{model}s": MultipleInstanceField(
-                    model,
-                ),
+                f"{model}s": MultipleInstanceField(model, model=model),
                 f"string_{model}s": StringField(
                     widget=TextArea(), render_kw={"rows": 8}
                 ),

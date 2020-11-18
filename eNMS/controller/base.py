@@ -454,7 +454,8 @@ class BaseController:
         query = db.query(model)
         total_records, query = query.count(), query.filter(and_(*constraints))
         if bulk:
-            return [obj.id for obj in query.all()]
+            instances = query.all()
+            return instances if bulk == "object" else [obj.id for obj in instances]
         ordering = getattr(
             getattr(
                 table,
@@ -515,7 +516,7 @@ class BaseController:
 
     def bulk_removal(self, table, target_type, target_id, target_property, **kwargs):
         target = db.fetch(target_type, id=target_id)
-        instances = self.filtering(table, bulk=True, form=kwargs)
+        instances = self.filtering(table, bulk="object", form=kwargs)
         for instance in instances:
             getattr(target, target_property).remove(instance)
         return len(instances)

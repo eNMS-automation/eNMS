@@ -738,7 +738,8 @@ class Run(AbstractBase):
                 results["devices"] = {}
                 for result in self.results:
                     results["devices"][result.device.name] = result.result
-        if not self.disable_result_creation:
+        create_failed_results = self.disable_result_creation and not self.success
+        if not self.disable_result_creation or create_failed_results:
             db.factory("result", result=results, commit=commit, **result_kw)
         return results
 

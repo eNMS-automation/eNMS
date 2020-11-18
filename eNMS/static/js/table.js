@@ -269,11 +269,14 @@ export class Table {
   }
 
   createNewButton() {
+    const onClick = this.relation
+      ? `eNMS.table.showAddInstancePanel('${this.id}', '${this.type}', ${this.relationString})`
+      : `eNMS.base.showInstancePanel('${this.type}')`;
     return `
       <button
         class="btn btn-primary"
-        onclick="eNMS.base.showInstancePanel('${this.type}')"
-        data-tooltip="New"
+        onclick="${onClick}"
+        data-tooltip="${this.relation ? 'Add' : 'New'}"
         type="button"
       >
         <span class="glyphicon glyphicon-plus"></span>
@@ -1298,6 +1301,10 @@ function showBulkDeletionPanel(tableId, model) {
   });
 }
 
+function showAddInstancePanel(tableId, model, relation) {
+  console.log(tableId, model, relation);
+}
+
 function bulkDeletion(tableId, model) {
   call({
     url: `/bulk_deletion/${model}`,
@@ -1386,5 +1393,6 @@ configureNamespace("table", [
   displayRelationTable,
   exportTable,
   refreshTable,
+  showAddInstancePanel,
   showBulkDeletionPanel,
 ]);

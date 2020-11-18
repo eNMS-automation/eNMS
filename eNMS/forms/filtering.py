@@ -62,4 +62,14 @@ def filtering_form_generator():
         type(f"{form_type}FilteringForm", (BaseForm,), form)
 
 
+def add_instance_form_generator():
+    for model in models:
+        relationships[f"add_{model}s"][f"{model}s"] = {"type": "object-list"}
+        type(f"{model}RelationshipFilteringForm", (BaseForm,), {
+            "form_type": HiddenField(default=f"add_{model}s"),
+            f"{model}s": MultipleInstanceField(model)
+        }
+            )
+
 filtering_form_generator()
+add_instance_form_generator()

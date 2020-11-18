@@ -412,7 +412,7 @@ function displayResultsTable(service, runtime, _, type, refresh) {
       service_id: service.id,
       parent_runtime: runtime || currentRuntime,
     };
-    new tables[type](type, service.id, constraints);
+    new tables[type](service.id, constraints);
   }
 }
 

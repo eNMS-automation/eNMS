@@ -24,11 +24,10 @@ let waitForSearch = false;
 $.fn.dataTable.ext.errMode = "none";
 
 export class Table {
-  constructor(type, id, constraints, relation) {
+  constructor(id, constraints, relation) {
     let self = this;
     this.relation = relation;
     if (relation) this.relationString = JSON.stringify(relation).replace(/"/g, "'");
-    this.type = type;
     this.columns = tableProperties[this.type];
     this.constraints = constraints;
     let visibleColumns = localStorage.getItem(`table/${this.type}`);
@@ -1370,9 +1369,13 @@ function displayRelationTable(type, instance, relation) {
     callback: function () {
       const constraints = { [`${relation.from}`]: [instance.id] };
       // eslint-disable-next-line new-cap
-      new tables[type](type, instance.id, constraints, { relation, ...instance });
+      new tables[type](instance.id, constraints, { relation, ...instance });
     },
   });
+}
+
+for (const [type, table] of Object.entries(tables)) {
+  table.prototype.type = type
 }
 
 configureNamespace("table", [

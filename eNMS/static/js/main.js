@@ -129,7 +129,7 @@ $(document).ready(function () {
   initSidebar();
   if (page.includes("table")) {
     const type = page.split("/")[1];
-    new tables[type](type);
+    new tables[type]();
   } else if (page == "workflow_builder") {
     initWorkflowBuilder();
   } else if (page.includes("view")) {

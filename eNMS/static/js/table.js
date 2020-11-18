@@ -348,10 +348,13 @@ export class Table {
 
   bulkDeletionButton() {
     const type = this.modelFiltering || this.type;
+    const onClick = this.relation
+      ? `eNMS.table.bulkRemoval('${this.id}', ${this.relationString})`
+      : `eNMS.table.showBulkDeletionPanel('${this.id}', '${type}')`;
     return `
       <button
         class="btn btn-danger"
-        onclick="eNMS.table.showBulkDeletionPanel('${this.id}', '${type}')"
+        onclick="${onClick}"
         data-tooltip="Bulk Deletion"
         type="button"
       >
@@ -591,7 +594,8 @@ tables.pool = class PoolTable extends Table {
       if (model !== "user") row.objectNumber += " - ";
     }
     row.devices = `<b><a href="#" onclick="eNMS.table.displayRelationTable(
-      'device', ${row.instance})">Devices</a></b>`;
+      'device', ${row.instance}, {from: 'pools', to: 'devices'})">
+      Devices</a></b>`;
     return row;
   }
 
@@ -1290,7 +1294,7 @@ function showBulkDeletionPanel(tableId, model) {
           </button>
         </center>
       </div><br>`,
-    title: "Bulk Deletion: x items",
+    title: "Bulk Deletion (delete all items in table)",
     size: "auto",
   });
 }
@@ -1305,6 +1309,10 @@ function bulkDeletion(tableId, model) {
       notify(`${number} items deleted.`, "success", 5, true);
     },
   });
+}
+
+function bulkRemoval(tableId, model) {
+
 }
 
 function bulkEdit(formId, model, table) {
@@ -1357,6 +1365,7 @@ function displayRelationTable(type, instance, relation) {
 configureNamespace("table", [
   bulkDeletion,
   bulkEdit,
+  bulkRemoval,
   clearSearch,
   displayRelationTable,
   exportTable,

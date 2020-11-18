@@ -514,7 +514,8 @@ class BaseController:
         target = db.fetch(kwargs["relation"]["type"], id=kwargs["relation"]["id"])
         getattr(target, kwargs["relation"]["relation"]["to"]).remove(instance)
 
-    def bulk_removal(self, table, target_type, target_id, target_property, **kwargs):
+    def bulk_removal(self, table, target_type, target_id, target_property, constraint_property, **kwargs):
+        kwargs[constraint_property] = [target_id]
         target = db.fetch(target_type, id=target_id)
         instances = self.filtering(table, bulk="object", form=kwargs)
         for instance in instances:

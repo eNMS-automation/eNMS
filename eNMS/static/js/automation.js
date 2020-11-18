@@ -623,13 +623,11 @@ export function showRunServicePanel({ instance, type }) {
     id: panelId,
     callback: function () {
       $(`#run_service-type-${panelId}`).val(type || instance.type);
-      console.log({ form: serializeForm(`#search-form-${type}`), bulk: true })
       if (type) {
         call({
           url: `/filtering/${type}`,
           data: { form: serializeForm(`#search-form-${type}`), bulk: true },
           callback: function (instances) {
-            console.log(instances)
             $(`#run_service-targets-${panelId}`).val(instances.join("-"));
           },
         });

@@ -361,7 +361,7 @@ export class Table {
 
   deleteInstanceButton(row) {
     const onClick = this.relation
-      ? `eNMS.base.removeInstance(${row.instance}, ${this.relationString})`
+      ? `eNMS.base.removeInstance('${this.id}', ${row.instance}, ${this.relationString})`
       : `eNMS.base.showDeletionPanel(${row.instance})`;
     return `
       <li>

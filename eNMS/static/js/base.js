@@ -179,18 +179,19 @@ const deleteInstance = function (type, id) {
   });
 };
 
-const removeInstance = function (instance, relation) {
+function removeInstance(tableId, instance, relation) {
   call({
     url: "/remove_instance",
     data: {instance, relation},
-    callback: function (result) {
-      $(`#instance_deletion-${id}`).remove();
-      tableInstances[type].table
-        .row($(`#${id}`))
+    callback: function () {
+      tableInstances[tableId].table
+        .row($(`#${instance.id}`))
         .remove()
         .draw(false);
-      const name = result.name ? `'${result.name}'` : "";
-      notify(`${type.toUpperCase()} ${name} deleted.`, "success", 5, true);
+      notify(
+        `${instance.type.toUpperCase()} '${instance.name}' remove from
+        ${relation.type.toUpperCase()} '${relation.name}'.`, "success", 5, true
+      );
     },
   });
 };

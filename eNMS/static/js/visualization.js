@@ -262,15 +262,19 @@ function createLink2d(link) {
   polyline.on("click", function (e) {
     leftClickBinding("link", this.link_id, link.type == "bundle");
   });
-  polyline.on("contextmenu", function (e) {
-    $(".menu").hide();
-    $(".rc-link-menu").show();
-    selectedObject = link;
-  });
+  polyline.on("contextmenu", () => linkRightClickBinding(link));
   polyline.bindTooltip(link.name, {
     permanent: false,
   });
   polyline.addTo(map);
+}
+
+function linkRightClickBinding(link) {
+  $(".menu").hide();
+  if (link.type != "bundle") {
+    $(".rc-link-menu").show();
+    selectedObject = link;
+  }
 }
 
 function deleteAllDevices() {
@@ -545,6 +549,7 @@ function create3dGraphNetwork(container) {
     })
     .onLinkHover((link) => (network.style.cursor = link ? "pointer" : null))
     .onLinkClick((link) => leftClickBinding("link", link.id, link.type == "bundle"))
+    .onLinkRightClick((link) => linkRightClickBinding(link))
     .linkWidth(viewSettings.link_width)
     .linkOpacity(viewSettings.link_opacity)
     .linkCurveRotation("rotation");

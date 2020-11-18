@@ -157,7 +157,7 @@ export function serializeForm(form) {
   return result;
 }
 
-export const deleteInstance = function (type, id) {
+const deleteInstance = function (type, id) {
   call({
     url: `/delete_instance/${type}/${id}`,
     callback: function (result) {
@@ -337,7 +337,32 @@ export function createTooltip({
   }
 }
 
-export function showDeletionPanel(instance, relation) {
+function showDeletionPanel(instance) {
+  openPanel({
+    name: "instance_deletion",
+    content: `
+      <div class="modal-body">
+        Are you sure you want to permanently remove this item ?
+      </div>
+      <div class="modal-footer">
+        <center>
+          <button
+            type="button"
+            class="btn btn-danger"
+            onclick="eNMS.base.deleteInstance('${instance.type}', ${instance.id})"
+          >
+            Delete
+          </button>
+        </center>
+      </div><br>`,
+    title: `Delete ${instance.name}`,
+    size: "auto",
+    id: instance.id,
+  });
+}
+
+function showRemovalPanel(instance, relation) {
+  console.log(instance, relation)
   openPanel({
     name: "instance_deletion",
     content: `
@@ -941,4 +966,5 @@ configureNamespace("base", [
   showAllAlerts,
   showDeletionPanel,
   showInstancePanel,
+  showRemovalPanel,
 ]);

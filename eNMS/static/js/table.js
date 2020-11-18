@@ -27,6 +27,7 @@ export class Table {
   constructor(type, id, constraints, relation) {
     let self = this;
     this.relation = relation;
+    if(relation) this.relationString = JSON.stringify(relation).replace(/"/g, "'");
     this.type = type;
     this.columns = tableProperties[this.type];
     this.constraints = constraints;
@@ -363,9 +364,9 @@ export class Table {
     return `
       <li>
         <button type="button" class="btn btn-sm btn-danger"
-        onclick="eNMS.base.showDeletionPanel(${row.instance})" data-tooltip="Delete"
-          ><span class="glyphicon glyphicon-${this.relation ? 'remove' : 'trash'}">
-          </span></button>
+        onclick="eNMS.base.showDeletionPanel(${row.instance}, ${this.relationString})"
+        data-tooltip="Delete"><span class="glyphicon
+        glyphicon-${this.relation ? 'remove' : 'trash'}"></span></button>
       </li>`;
   }
 

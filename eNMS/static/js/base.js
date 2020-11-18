@@ -337,7 +337,7 @@ export function createTooltip({
   }
 }
 
-export function showDeletionPanel(instance) {
+export function showDeletionPanel(instance, relation) {
   openPanel({
     name: "instance_deletion",
     content: `

@@ -674,17 +674,14 @@ tables.pool = class PoolTable extends Table {
 
 tables.service = class ServiceTable extends Table {
   addRow(kwargs) {
-    const dbName = kwargs.properties.name;
-    delete kwargs.properties.name;
     let row = super.addRow(kwargs);
-    row.dbName = dbName;
     row.name =
       row.type === "workflow"
         ? `<b><a href="#" onclick="eNMS.workflow.filterWorkflowTable(
       '${this.id}', ${row.id})">${row.scoped_name}</a></b>`
         : $("#parent-filtering").val() == "true"
         ? row.scoped_name
-        : row.dbName;
+        : row.name;
     row.devices = `<b><a href="#" onclick="eNMS.table.displayRelationTable(
       'device', ${row.instance}, {from: 'target_services', to: 'target_devices'})">
       Devices</a></b>`;

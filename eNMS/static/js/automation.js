@@ -644,6 +644,7 @@ function runServicesOnTargets(id) {
     form: `run_service-form-${id}`,
     callback: function (result) {
       runLogic(result);
+      $(`#run_service-${id}`).remove();
     },
   });
 }

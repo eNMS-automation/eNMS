@@ -209,7 +209,6 @@ export class Table {
         new Option(column.title || column.data, column.data, visible, visible)
       );
     });
-    console.log(this.id)
     $(`#column-display-${this.id}`).selectpicker("refresh");
     $(`#column-display-${this.id}`).on("change", function () {
       self.columns.forEach((col) => {

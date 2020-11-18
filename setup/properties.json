@@ -505,6 +505,11 @@
         "width": "100px"
       },
       {
+        "data": "devices",
+        "title": "Devices",
+        "width": "100px"
+      },
+      {
         "data": "buttons",
         "width": "260px",
         "orderable": false,

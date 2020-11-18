@@ -78,7 +78,7 @@ class Device(Object):
     napalm_driver = db.Column(db.TinyString, default="ios")
     scrapli_driver = db.Column(db.TinyString, default="cisco_iosxe")
     configuration = db.Column(db.LargeString, info={"log_change": False})
-    services = relationship(
+    target_services = relationship(
         "Service",
         secondary=db.service_target_device_table,
         back_populates="target_devices",

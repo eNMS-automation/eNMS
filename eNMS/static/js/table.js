@@ -685,6 +685,8 @@ tables.service = class ServiceTable extends Table {
         : $("#parent-filtering").val() == "true"
         ? row.scoped_name
         : row.dbName;
+    row.devices = `<b><a href="#" onclick="eNMS.table.displayRelationTable(
+      'device', ${row.instance}, 'target_services')">Devices</a></b>`;
     return row;
   }
 
@@ -1319,7 +1321,7 @@ function bulkEdit(formId, model, table) {
   });
 }
 
-function displayRelationTable(type, instance) {
+function displayRelationTable(type, instance, relation) {
   openPanel({
     name: "table",
     content: `
@@ -1347,7 +1349,8 @@ function displayRelationTable(type, instance) {
     size: "1200 600",
     title: `${instance.name} - ${type}s`,
     callback: function () {
-      const constraints = { [`${instance.type}s`]: [instance.id] };
+      const constraints = { [`${relation}`]: [instance.id] };
+      console.log(constraints)
       // eslint-disable-next-line new-cap
       new tables[type](type, instance.id, constraints, instance);
     },

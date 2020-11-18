@@ -179,6 +179,22 @@ const deleteInstance = function (type, id) {
   });
 };
 
+const removeInstance = function (instance, relation) {
+  call({
+    url: "/remove_instance",
+    data: {instance, relation},
+    callback: function (result) {
+      $(`#instance_deletion-${id}`).remove();
+      tableInstances[type].table
+        .row($(`#${id}`))
+        .remove()
+        .draw(false);
+      const name = result.name ? `'${result.name}'` : "";
+      notify(`${type.toUpperCase()} ${name} deleted.`, "success", 5, true);
+    },
+  });
+};
+
 export function downloadFile(name, content, type) {
   let link = document.createElement("a");
   link.setAttribute(
@@ -338,31 +354,6 @@ export function createTooltip({
 }
 
 function showDeletionPanel(instance) {
-  openPanel({
-    name: "instance_deletion",
-    content: `
-      <div class="modal-body">
-        Are you sure you want to permanently remove this item ?
-      </div>
-      <div class="modal-footer">
-        <center>
-          <button
-            type="button"
-            class="btn btn-danger"
-            onclick="eNMS.base.deleteInstance('${instance.type}', ${instance.id})"
-          >
-            Delete
-          </button>
-        </center>
-      </div><br>`,
-    title: `Delete ${instance.name}`,
-    size: "auto",
-    id: instance.id,
-  });
-}
-
-function showRemovalPanel(instance, relation) {
-  console.log(instance, relation)
   openPanel({
     name: "instance_deletion",
     content: `
@@ -963,8 +954,8 @@ configureNamespace("base", [
   openPanel,
   processData,
   processInstance,
+  removeInstance,
   showAllAlerts,
   showDeletionPanel,
   showInstancePanel,
-  showRemovalPanel,
 ]);

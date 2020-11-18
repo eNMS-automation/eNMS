@@ -1312,7 +1312,8 @@ function bulkDeletion(tableId, model) {
 }
 
 function bulkRemoval(tableId, model, instance) {
-  const target = `${instance.type}/${instance.id}/${instance.relation.to}/${instance.relation.from}`;
+  const target = `${instance.type}/${instance.id}/
+    ${instance.relation.to}/${instance.relation.from}`;
   call({
     url: `/bulk_removal/${model}/${target}`,
     form: `search-form-${tableId}`,

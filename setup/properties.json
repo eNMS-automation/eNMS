@@ -447,7 +447,7 @@
       {
         "data": "devices",
         "title": "Devices",
-        "search": "text"
+        "width": "100px"
       },
       {
         "data": "objectNumber",

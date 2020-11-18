@@ -230,6 +230,7 @@
     "/migration_export",
     "/migration_import",
     "/multiselect_filtering",
+    "/remove_instance",
     "/reset_status",
     "/rest/create_pool",
     "/rest/instance",

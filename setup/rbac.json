@@ -124,7 +124,6 @@
     "/form/pool",
     "/form/pool_filtering",
     "/form/pool_relation_filtering",
-    "/form/pool_objects",
     "/form/python_snippet_service",
     "/form/rest_call_service",
     "/form/restart_workflow",

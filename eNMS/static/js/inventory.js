@@ -148,46 +148,6 @@ function desktopConnection(id) {
   });
 }
 
-function savePoolObjects(id) {
-  call({
-    url: `/save_pool_instances/${id}`,
-    form: `pool-objects-form-${id}`,
-    callback: function () {
-      tableInstances.pool.table.ajax.reload(null, false);
-      notify("Changes to pool saved.", "success", 5, true);
-      $(`#pool_objects-${id}`).remove();
-    },
-  });
-}
-
-function showPoolObjectsPanel(id) {
-  openPanel({
-    name: "pool_objects",
-    title: "Pool Objects",
-    id: id,
-    callback: function () {
-      call({
-        url: `/get/pool/${id}`,
-        callback: function (pool) {
-          if (pool.devices.length > 1000 || pool.links.length > 1000) {
-            notify("Too many objects to display.", "error", 5);
-          } else {
-            for (const type of ["device", "link", "service", "user"]) {
-              initSelect($(`#${type}s-${id}`), type, `pool_objects-${id}`);
-              pool[`${type}s`].forEach((o) => {
-                $(`#${type}s-${id}`).append(new Option(o.name, o.id));
-              });
-              $(`#${type}s-${id}`)
-                .val(pool[`${type}s`].map((n) => n.id))
-                .trigger("change");
-            }
-          }
-        },
-      });
-    },
-  });
-}
-
 function updatePools(pool) {
   notify("Pool Update initiated...", "success", 5, true);
   const endpoint = pool ? `/update_pool/${pool}` : "/update_all_pools";
@@ -516,7 +476,6 @@ configureNamespace("inventory", [
   showConnectionPanel,
   webConnection,
   savePoolObjects,
-  showPoolObjectsPanel,
   updatePools,
   showGitHistory,
   showDeviceData,

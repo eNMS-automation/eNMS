@@ -639,15 +639,6 @@ tables.pool = class PoolTable extends Table {
           <span class="glyphicon glyphicon-eye-open"></span></button>
         </li>
         <li>
-          <button
-            type="button"
-            class="btn btn-sm btn-primary"
-            onclick="eNMS.inventory.showPoolObjectsPanel('${row.id}')"
-            data-tooltip="Pool Objects"
-          ><span class="glyphicon glyphicon-wrench"></span
-          ></button>
-        </li>
-        <li>
           <button type="button" class="btn btn-sm btn-primary"
           onclick="eNMS.inventory.updatePools('${row.id}')"
           data-tooltip="Update"><span class="glyphicon glyphicon-refresh">

@@ -75,7 +75,12 @@ def add_instance_form_generator():
             (BaseForm,),
             {
                 "form_type": HiddenField(default=f"add_{model}s"),
-                f"{model}s": MultipleInstanceField(model, model=model),
+                "action": "eNMS.base.addInstancesToRelation",
+                "model": HiddenField(default=model),
+                "relation_id": HiddenField(),
+                "relation_type": HiddenField(),
+                "property": HiddenField(),
+                f"{model}s": MultipleInstanceField(f"{model}s", model=model),
                 f"string_{model}s": StringField(
                     widget=TextArea(), render_kw={"rows": 8}
                 ),

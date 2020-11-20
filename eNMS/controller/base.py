@@ -514,6 +514,9 @@ class BaseController:
         target = db.fetch(kwargs["relation"]["type"], id=kwargs["relation"]["id"])
         getattr(target, kwargs["relation"]["relation"]["to"]).remove(instance)
 
+    def add_instances_in_bulk(self, **kwargs):
+        print(kwargs)
+
     def bulk_removal(
         self,
         table,

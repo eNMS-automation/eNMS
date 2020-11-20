@@ -567,6 +567,16 @@ function configureServicePanel(type, id, mode) {
   }
 }
 
+function addInstancesToRelation(type, id) {
+  call({
+    url: `/add_instances_in_bulk`,
+    form: `add_${type}s-form-${id}`,
+    callback: () => {
+
+    },
+  })
+}
+
 export function showInstancePanel(type, id, mode, tableId) {
   openPanel({
     name: type,
@@ -948,6 +958,7 @@ function fullScreen() {
 }
 
 configureNamespace("base", [
+  addInstancesToRelation,
   call,
   clearAlerts,
   copyToClipboard,

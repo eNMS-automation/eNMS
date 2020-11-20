@@ -1302,6 +1302,12 @@ function showAddInstancePanel(tableId, model, relation) {
     size: "800 300",
     title: `Add ${model}s to ${relation.name}`,
     id: tableId,
+    type: model,
+    callback: () => {
+      $(`#add_${model}s-relation_id-${tableId}`).val(relation.id);
+      $(`#add_${model}s-relation_type-${tableId}`).val(relation.type);
+      $(`#add_${model}s-property-${tableId}`).val(relation.relation.to);
+    }
   });
 }
 

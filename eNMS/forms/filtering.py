@@ -80,9 +80,7 @@ def add_instance_form_generator():
                 "relation_type": HiddenField(),
                 "property": HiddenField(),
                 "instances": MultipleInstanceField(f"{model}s", model=model),
-                "names": StringField(
-                    widget=TextArea(), render_kw={"rows": 8}
-                ),
+                "names": StringField(widget=TextArea(), render_kw={"rows": 8}),
             },
         )
 

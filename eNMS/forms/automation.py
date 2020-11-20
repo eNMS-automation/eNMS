@@ -32,7 +32,7 @@ class ServiceForm(BaseForm):
         "Query Property Type", choices=(("name", "Name"), ("ip_address", "IP address"))
     )
     devices = MultipleInstanceField("Devices")
-    disable_result_creation = BooleanField("Disable Creation of Results if Successful")
+    disable_result_creation = BooleanField("Save only failed results")
     pools = MultipleInstanceField("Pools")
     update_pools = BooleanField("Update pools before running")
     workflows = MultipleInstanceField("Workflows")

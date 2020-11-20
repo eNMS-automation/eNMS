@@ -218,33 +218,6 @@ class InventoryController(BaseController):
         info("Inventory import: Done.")
         return result
 
-    def save_pool_instances(self, pool_id, **kwargs):
-        pool = db.fetch("pool", id=pool_id)
-        pool_users = set(pool.users)
-        for model in pool.models:
-            string_instances = kwargs[f"string_{model}s"]
-            if string_instances:
-                instances = []
-                for name in [
-                    instance.strip() for instance in string_instances.split(",")
-                ]:
-                    instance = db.fetch(model, allow_none=True, name=name)
-                    if not instance:
-                        return {
-                            "alert": f"{model.capitalize()} '{name}' does not exist."
-                        }
-                    if instance not in instances:
-                        instances.append(instance)
-            else:
-                instances = db.objectify(model, kwargs.get(f"{model}s", []))
-            setattr(pool, f"{model}_number", len(instances))
-            setattr(pool, f"{model}s", instances)
-        db.session.commit()
-        for user in pool_users | set(pool.users):
-            user.update_rbac()
-        pool.last_modified = self.get_time()
-        return pool.serialized
-
     def update_pool(self, pool_id):
         db.fetch("pool", id=int(pool_id)).compute_pool()
 

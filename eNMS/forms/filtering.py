@@ -69,7 +69,6 @@ def add_instance_form_generator():
             "type": "object-list",
             "model": model,
         }
-        # remove save_pool_instances
         type(
             f"{model}RelationshipFilteringForm",
             (BaseForm,),
@@ -80,8 +79,8 @@ def add_instance_form_generator():
                 "relation_id": HiddenField(),
                 "relation_type": HiddenField(),
                 "property": HiddenField(),
-                f"{model}s": MultipleInstanceField(f"{model}s", model=model),
-                f"string_{model}s": StringField(
+                "instances": MultipleInstanceField(f"{model}s", model=model),
+                "names": StringField(
                     widget=TextArea(), render_kw={"rows": 8}
                 ),
             },

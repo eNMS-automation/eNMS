@@ -515,6 +515,29 @@ class BaseController:
         getattr(target, kwargs["relation"]["relation"]["to"]).remove(instance)
 
     def add_instances_in_bulk(self, **kwargs):
+        target = db.fetch(kwargs["relation_type"], id=kwargs["relation_id"])
+        model, property = kwargs["model"], kwargs["property"]
+        instances = set()
+        if kwargs["names"]:
+            for name in [
+                instance.strip() for instance in kwargs["names"].split(",")
+            ]:
+                instance = db.fetch(model, allow_none=True, name=name)
+                if not instance:
+                    return {
+                        "alert": f"{model.capitalize()} '{name}' does not exist."
+                    }
+                if instance not in instances:
+                    instances.append(instance)
+            else:
+                instances = db.objectify(model, kwargs.get(f"{model}s", []))
+            setattr(pool, f"{model}_number", len(instances))
+            setattr(pool, f"{model}s", instances)
+        db.session.commit()
+        for user in pool_users | set(pool.users):
+            user.update_rbac()
+        pool.last_modified = self.get_time()
+        return pool.serialized
         print(kwargs)
 
     def bulk_removal(

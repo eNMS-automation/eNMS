@@ -517,7 +517,7 @@ class BaseController:
     def add_instances_in_bulk(self, **kwargs):
         target = db.fetch(kwargs["relation_type"], id=kwargs["relation_id"])
         model, property = kwargs["model"], kwargs["property"]
-        instances = set(db.objectify(model, kwargs["ids"]))
+        instances = set(db.objectify(model, kwargs["instances"]))
         if kwargs["names"]:
             for name in [instance.strip() for instance in kwargs["names"].split(",")]:
                 instance = db.fetch(model, allow_none=True, name=name)
@@ -527,7 +527,7 @@ class BaseController:
         for instance in instances:
             getattr(target, property).append(instance)
         target.last_modified = self.get_time()
-        return target.serialized
+        return {"number": len(instances), "target": target.base_properties}
 
     def bulk_removal(
         self,

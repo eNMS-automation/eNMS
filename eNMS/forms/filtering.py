@@ -65,7 +65,7 @@ def filtering_form_generator():
 
 def add_instance_form_generator():
     for model in ("device", "link", "user", "service"):
-        relationships[f"add_{model}s"][f"{model}s"] = {
+        relationships[f"add_{model}s"]["instances"] = {
             "type": "object-list",
             "model": model,
         }

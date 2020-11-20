@@ -17,7 +17,7 @@ user: false
 */
 
 import { showCredentialPanel } from "./administration.js";
-import { tableInstances } from "./table.js";
+import { refreshTable, tableInstances } from "./table.js";
 import { creationMode, processWorkflowData, workflow } from "./workflow.js";
 
 export let editors = {};
@@ -567,12 +567,29 @@ function configureServicePanel(type, id, mode) {
   }
 }
 
+function showAddInstancePanel(tableId, model, relation) {
+  openPanel({
+    name: `add_${model}s`,
+    size: "800 300",
+    title: `Add ${model}s to ${relation.name}`,
+    id: tableId,
+    type: model,
+    callback: () => {
+      $(`#add_${model}s-relation_id-${tableId}`).val(relation.id);
+      $(`#add_${model}s-relation_type-${tableId}`).val(relation.type);
+      $(`#add_${model}s-property-${tableId}`).val(relation.relation.to);
+    }
+  });
+}
+
 function addInstancesToRelation(type, id) {
   call({
     url: `/add_instances_in_bulk`,
     form: `add_${type}s-form-${id}`,
-    callback: () => {
-
+    callback: (result) => {
+      $(`#add_${type}s-${id}`).remove();
+      refreshTable(id);
+      notify(`${result.number} ${type}s added to ${result.target.type} '${result.target.name}'.`, "success", 5, true);
     },
   })
 }
@@ -970,6 +987,7 @@ configureNamespace("base", [
   processData,
   processInstance,
   removeInstance,
+  showAddInstancePanel,
   showAllAlerts,
   showDeletionPanel,
   showInstancePanel,

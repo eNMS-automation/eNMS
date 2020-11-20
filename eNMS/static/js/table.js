@@ -270,7 +270,7 @@ export class Table {
 
   createNewButton() {
     const onClick = this.relation
-      ? `eNMS.table.showAddInstancePanel(
+      ? `eNMS.base.showAddInstancePanel(
           '${this.id}', '${this.type}', ${this.relationString}
         )`
       : `eNMS.base.showInstancePanel('${this.type}')`;
@@ -1296,21 +1296,6 @@ function showBulkDeletionPanel(tableId, model) {
   });
 }
 
-function showAddInstancePanel(tableId, model, relation) {
-  openPanel({
-    name: `add_${model}s`,
-    size: "800 300",
-    title: `Add ${model}s to ${relation.name}`,
-    id: tableId,
-    type: model,
-    callback: () => {
-      $(`#add_${model}s-relation_id-${tableId}`).val(relation.id);
-      $(`#add_${model}s-relation_type-${tableId}`).val(relation.type);
-      $(`#add_${model}s-property-${tableId}`).val(relation.relation.to);
-    }
-  });
-}
-
 function bulkDeletion(tableId, model) {
   call({
     url: `/bulk_deletion/${model}`,
@@ -1399,6 +1384,5 @@ configureNamespace("table", [
   displayRelationTable,
   exportTable,
   refreshTable,
-  showAddInstancePanel,
   showBulkDeletionPanel,
 ]);

@@ -524,6 +524,7 @@ class BaseController:
                 if not instance:
                     return {"alert": f"{model.capitalize()} '{name}' does not exist."}
                 instances.add(instance)
+        instances = instances - set(getattr(target, property))
         for instance in instances:
             getattr(target, property).append(instance)
         target.last_modified = self.get_time()

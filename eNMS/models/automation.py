@@ -1046,7 +1046,7 @@ class Run(AbstractBase):
             elif self.conversion_method == "json":
                 result["result"] = loads(result["result"])
             elif self.conversion_method == "xml":
-                result["result"] = parse(result["result"])
+                result["result"] = parse(result["result"], force_list=True)
         except (ExpatError, JSONDecodeError) as exc:
             result = {
                 "success": False,

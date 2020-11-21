@@ -53,7 +53,7 @@ class User(AbstractBase, UserMixin):
     def configure_events(cls):
         @event.listens_for(cls, 'after_update')
         def before_update(_, __, target):
-            db.update_rbac.append(target.id)
+            db.update_user_rbac.add(target.id)
 
     def get_id(self):
         return self.name
@@ -68,7 +68,7 @@ class User(AbstractBase, UserMixin):
         super().update(**kwargs)
         self.update_rbac()
 
-    def update_rbac(self, access=None):
+    def update_rbac(self):
         if self.is_admin:
             return
         user_access = (
@@ -78,8 +78,6 @@ class User(AbstractBase, UserMixin):
             .filter(models["user"].name == self.name)
             .all()
         )
-        if access and access not in user_access:
-            user_access.append(access)
         for property in rbac:
             access_value = (getattr(access, property) for access in user_access)
             setattr(self, property, list(set(chain.from_iterable(access_value))))
@@ -112,8 +110,7 @@ class Access(AbstractBase):
     def update(self, **kwargs):
         old_users = self.get_users()
         super().update(**kwargs)
-        for user in old_users | self.get_users():
-            user.update_rbac(self)
+        db.update_user_rbac |= {user.id for user in old_users | self.get_users()}
 
 
 @db.set_custom_properties

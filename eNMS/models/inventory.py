@@ -336,11 +336,8 @@ class Pool(AbstractBase):
                 setattr(target, f"{value.type}_number", number)
 
     def update(self, **kwargs):
-        old_users = set(self.users)
         super().update(**kwargs)
         self.compute_pool()
-        for user in old_users | set(self.users):
-            user.update_rbac()
 
     def property_match(self, obj, property):
         pool_value = getattr(self, f"{obj.class_type}_{property}")

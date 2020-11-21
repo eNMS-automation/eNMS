@@ -325,6 +325,7 @@ class Pool(AbstractBase):
     @classmethod
     def configure_events(cls):
         for model in cls.models:
+
             @event.listens_for(getattr(cls, f"{model}s"), "append")
             def append(target, value, _):
                 number = getattr(target, f"{value.type}_number") + 1

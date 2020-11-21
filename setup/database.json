@@ -1,4 +1,21 @@
 {
+  "engine": {
+    "common": {
+      "convert_unicode": true,
+      "pool_pre_ping": true,
+      "pool_recycle": 3600
+    },
+    "mysql": {
+      "max_overflow": 10,
+      "pool_size": 1000,
+      "isolation_level": "READ COMMITTED"
+    },
+    "sqlite": {
+      "connect_args": {
+        "check_same_thread": false
+      }
+    }
+  },
   "columns": {
     "length": {
       "tiny_string_length": 64,

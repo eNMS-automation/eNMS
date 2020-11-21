@@ -51,8 +51,6 @@
     }
   },
   "database": {
-    "max_overflow": 10,
-    "pool_size": 1000,
     "retry": {
       "commit": {
         "number": 10,

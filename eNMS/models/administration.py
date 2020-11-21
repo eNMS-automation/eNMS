@@ -51,7 +51,7 @@ class User(AbstractBase, UserMixin):
 
     @classmethod
     def configure_events(cls):
-        @event.listens_for(cls, 'after_update')
+        @event.listens_for(cls, "after_update")
         def before_update(_, __, target):
             db.update_user_rbac.add(target.id)
 

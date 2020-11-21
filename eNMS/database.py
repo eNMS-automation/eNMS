@@ -67,22 +67,8 @@ class Database:
             return loads(input)
 
     def configure_engine(self):
-        engine_parameters = {
-            "convert_unicode": True,
-            "pool_pre_ping": True,
-            "pool_recycle": 3600,
-        }
-        if self.dialect == "mysql":
-            engine_parameters.update(
-                {
-                    "max_overflow": settings["database"]["max_overflow"],
-                    "pool_size": settings["database"]["pool_size"],
-                    "isolation_level": "READ COMMITTED",
-                }
-            )
-        elif self.dialect == "sqlite":
-            engine_parameters["connect_args"] = {"check_same_thread": False}
-        return create_engine(self.database_url, **engine_parameters)
+        parameters = {**self.engine["common"], **self.engine[self.dialect]}
+        return create_engine(self.database_url, **parameters)
 
     def configure_columns(self):
         class CustomPickleType(PickleType):

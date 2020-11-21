@@ -89,7 +89,7 @@ class Server(Flask):
         self.config.update(
             {
                 "DEBUG": mode != "production",
-                "SECRET_KEY": getenv("SECRET_KEY", "get-a-real-key"),
+                "SECRET_KEY": getenv("SECRET_KEY", "secret_key"),
                 "WTF_CSRF_TIME_LIMIT": None,
                 "ERROR_404_HELP": False,
                 "MAX_CONTENT_LENGTH": 20 * 1024 * 1024,

@@ -12,7 +12,7 @@ from uuid import uuid4
 class Server(Flask):
     def __init__(self):
         super().__init__(__name__)
-        self.config["SECRET_KEY"] = "secret"
+        self.config["SECRET_KEY"] = getenv("TERMINAL_SECRET_KEY", "secret_key")
         self.socketio = SocketIO(self)
         self.configure_routes()
 

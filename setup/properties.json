@@ -447,26 +447,22 @@
       {
         "data": "devices",
         "title": "Devices",
-        "width": "100px",
-        "visible": false
+        "width": "100px"
       },
       {
         "data": "links",
         "title": "Links",
-        "width": "100px",
-        "visible": false
+        "width": "100px"
       },
       {
         "data": "users",
         "title": "Users",
-        "width": "100px",
-        "visible": false
+        "width": "100px"
       },
       {
         "data": "services",
         "title": "Services",
-        "width": "100px",
-        "visible": false
+        "width": "100px"
       },
       {
         "data": "objectNumber",

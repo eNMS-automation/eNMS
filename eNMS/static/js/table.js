@@ -600,7 +600,7 @@ tables.pool = class PoolTable extends Table {
       if (model !== "user") row.objectNumber += " - ";
       row[`${model}s`] = `<b><a href="#" onclick="eNMS.table.displayRelationTable(
         '${model}', ${row.instance}, {from: 'pools', to: '${model}s'})">
-        ${model.charAt(0).toUpperCase() + model.slice(1)}</a></b>`;
+        ${model.charAt(0).toUpperCase() + model.slice(1)}s</a></b>`;
     }
     return row;
   }

@@ -225,27 +225,6 @@ class Database:
                     ),
                 ),
             )
-        for target_type in ("device", "pool"):
-            setattr(
-                self,
-                f"service_target_{target_type}_table",
-                Table(
-                    f"service_target_{target_type}_association",
-                    self.base.metadata,
-                    Column(
-                        "service_id",
-                        Integer,
-                        ForeignKey("service.id"),
-                        primary_key=True,
-                    ),
-                    Column(
-                        f"{target_type}_id",
-                        Integer,
-                        ForeignKey(f"{target_type}.id"),
-                        primary_key=True,
-                    ),
-                ),
-            )
         for association in ("access_user_pools", "access_model_pools"):
             setattr(
                 self,

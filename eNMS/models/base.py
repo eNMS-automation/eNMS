@@ -82,10 +82,8 @@ class AbstractBase(db.base):
             relation, number = f"{self.class_type}s", f"{self.class_type}_number"
             if match and self not in getattr(pool, relation):
                 getattr(pool, relation).append(self)
-                setattr(pool, number, getattr(pool, number) + 1)
             if self in getattr(pool, relation) and not match:
                 getattr(pool, relation).remove(self)
-                setattr(pool, number, getattr(pool, number) - 1)
 
     def delete(self):
         pass

@@ -1,5 +1,5 @@
 from re import search, sub
-from sqlalchemy import and_, Boolean, ForeignKey, Integer, or_
+from sqlalchemy import and_, Boolean, event, ForeignKey, Integer, or_
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.orm import aliased, backref, relationship
 from sqlalchemy.schema import UniqueConstraint
@@ -321,6 +321,19 @@ class Pool(AbstractBase):
         secondary=db.credential_user_pools_table,
         back_populates="user_pools",
     )
+
+    @classmethod
+    def configure_events(cls):
+        for model in cls.models:
+            @event.listens_for(getattr(cls, f"{model}s"), "append")
+            def append(target, value, initiator):
+                number = getattr(target, f"{value.type}_number") + 1
+                setattr(target, f"{value.type}_number", number)
+
+            @event.listens_for(getattr(cls, f"{model}s"), "remove")
+            def remove(target, value, initiator):
+                number = getattr(target, f"{value.type}_number") - 1
+                setattr(target, f"{value.type}_number", number)
 
     def update(self, **kwargs):
         old_users = set(self.users)

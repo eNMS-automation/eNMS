@@ -326,12 +326,12 @@ class Pool(AbstractBase):
     def configure_events(cls):
         for model in cls.models:
             @event.listens_for(getattr(cls, f"{model}s"), "append")
-            def append(target, value, initiator):
+            def append(target, value, _):
                 number = getattr(target, f"{value.type}_number") + 1
                 setattr(target, f"{value.type}_number", number)
 
             @event.listens_for(getattr(cls, f"{model}s"), "remove")
-            def remove(target, value, initiator):
+            def remove(target, value, _):
                 number = getattr(target, f"{value.type}_number") - 1
                 setattr(target, f"{value.type}_number", number)
 

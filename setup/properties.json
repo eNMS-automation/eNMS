@@ -424,7 +424,8 @@
         "data": "last_modified",
         "title": "Last modified",
         "search": "text",
-        "width": "150px"
+        "width": "150px",
+        "visible": false
       },
       {
         "data": "creator",
@@ -436,7 +437,8 @@
         "data": "description",
         "title": "Description",
         "search": "text",
-        "orderable": false
+        "orderable": false,
+        "visible": false
       },
       {
         "data": "manually_defined",

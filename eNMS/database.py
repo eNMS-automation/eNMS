@@ -210,14 +210,14 @@ class Database:
                     f"{association_name}_association",
                     self.base.metadata,
                     Column(
-                        f"{model1['column']}_id",
+                        model1['column'],
                         Integer,
                         ForeignKey(
                             f"{model1['foreign_key']}.id", **model1.get("kwargs", {})
                         ),
                     ),
                     Column(
-                        f"{model2['column']}_id",
+                        model2['column'],
                         Integer,
                         ForeignKey(
                             f"{model2['foreign_key']}.id", **model2.get("kwargs", {})
@@ -225,12 +225,6 @@ class Database:
                     ),
                 ),
             )
-        self.originals_association = Table(
-            "originals_association",
-            self.base.metadata,
-            Column("original_id", Integer, ForeignKey("service.id"), primary_key=True),
-            Column("child_id", Integer, ForeignKey("service.id"), primary_key=True),
-        )
         for target_type in ("device", "pool"):
             setattr(
                 self,

@@ -87,9 +87,9 @@ class Service(AbstractBase):
     )
     originals = relationship(
         "Service",
-        secondary=db.originals_association,
-        primaryjoin=id == db.originals_association.c.original_id,
-        secondaryjoin=id == db.originals_association.c.child_id,
+        secondary=db.originals_association_table,
+        primaryjoin=id == db.originals_association_table.c.original_id,
+        secondaryjoin=id == db.originals_association_table.c.child_id,
         backref="children",
     )
     update_target_pools = db.Column(Boolean, default=False)

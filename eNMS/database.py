@@ -158,6 +158,12 @@ class Database:
                     "list": relation.uselist,
                 }
 
+        @event.listens_for(self.session, "before_commit")
+        def before_commit(session):
+            for user_id in self.update_rbac:
+                self.fetch("user", id=user_id).update_rbac()
+            self.update_rbac = []
+
     def configure_model_events(self, app):
         @event.listens_for(self.base, "after_insert", propagate=True)
         def log_instance_creation(mapper, connection, target):
@@ -199,7 +205,6 @@ class Database:
                         f"'{hist.deleted[0] if hist.deleted else None}' => "
                         f"'{hist.added[0] if hist.added else None}'"
                     )
-                changelog.append(change)
             if changelog:
                 name, changes = (
                     getattr(target, "name", target.id),
@@ -207,6 +212,7 @@ class Database:
                 )
                 app.log("info", f"UPDATE: {target.type} '{name}': ({changes})")
 
+        self.update_rbac = []
         for model in models.values():
             if "configure_events" in vars(model):
                 model.configure_events()

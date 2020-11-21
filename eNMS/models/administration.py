@@ -2,7 +2,7 @@ from datetime import datetime
 from flask_login import UserMixin
 from itertools import chain
 from passlib.hash import argon2
-from sqlalchemy import Boolean, Integer
+from sqlalchemy import Boolean, event, Integer
 from sqlalchemy.orm import relationship
 
 from eNMS import app
@@ -48,6 +48,12 @@ class User(AbstractBase, UserMixin):
     )
     pools = relationship("Pool", secondary=db.pool_user_table, back_populates="users")
     is_admin = db.Column(Boolean, default=False)
+
+    @classmethod
+    def configure_events(cls):
+        @event.listens_for(cls, 'after_update')
+        def before_update(_, __, target):
+            db.update_rbac.append(target.id)
 
     def get_id(self):
         return self.name

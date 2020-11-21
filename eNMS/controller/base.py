@@ -111,7 +111,7 @@ class BaseController:
         self.init_services()
         db.base.metadata.create_all(bind=db.engine)
         configure_mappers()
-        db.configure_application_events(self)
+        db.configure_model_events(self)
         if self.cli_command:
             return
         self.init_forms()

@@ -158,7 +158,7 @@ class Database:
                     "list": relation.uselist,
                 }
 
-    def configure_application_events(self, app):
+    def configure_model_events(self, app):
         @event.listens_for(self.base, "after_insert", propagate=True)
         def log_instance_creation(mapper, connection, target):
             if hasattr(target, "name") and target.type != "run":
@@ -208,7 +208,8 @@ class Database:
                 app.log("info", f"UPDATE: {target.type} '{name}': ({changes})")
 
         for model in models.values():
-            model.configure_events()
+            if "configure_events" in vars(model):
+                model.configure_events()
 
     def configure_associations(self):
         for r1, r2 in self.many_to_many_relationships:

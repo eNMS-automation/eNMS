@@ -128,12 +128,12 @@ class Credential(AbstractBase):
     priority = db.Column(Integer, default=1)
     device_pools = relationship(
         "Pool",
-        secondary=db.credential_device_pools_table,
+        secondary=db.credential_device_table,
         back_populates="credential_devices",
     )
     user_pools = relationship(
         "Pool",
-        secondary=db.credential_user_pools_table,
+        secondary=db.credential_user_table,
         back_populates="credential_users",
     )
 

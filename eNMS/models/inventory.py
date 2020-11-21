@@ -313,12 +313,12 @@ class Pool(AbstractBase):
     )
     credential_devices = relationship(
         "Credential",
-        secondary=db.credential_device_pools_table,
+        secondary=db.credential_device_table,
         back_populates="device_pools",
     )
     credential_users = relationship(
         "Credential",
-        secondary=db.credential_user_pools_table,
+        secondary=db.credential_user_table,
         back_populates="user_pools",
     )
 

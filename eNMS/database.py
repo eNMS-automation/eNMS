@@ -265,7 +265,7 @@ class Database:
         for model in ("device", "user"):
             setattr(
                 self,
-                f"credential_{model}_pools_table",
+                f"credential_{model}_table",
                 Table(
                     f"credential_{model}_association",
                     self.base.metadata,
@@ -384,6 +384,8 @@ class Database:
                     self.session.commit()
                     break
                 except Exception as exc:
+                    from traceback import format_exc
+                    print(format_exc())
                     error(f"Commit n°{index} failed ({exc})")
                     self.session.rollback()
                     if index == self.retry_commit_number - 1:

@@ -1,4 +1,11 @@
 {
+  "columns": {
+    "length": {
+      "tiny_string_length": 64,
+      "small_string_length": 255,
+      "large_string_length": 32768
+    }
+  },  
   "import_export_models": [
     "user",
     "device",

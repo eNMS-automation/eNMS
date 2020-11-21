@@ -94,9 +94,9 @@ class Database:
         if self.dialect == "postgresql":
             self.LargeString = Text
         else:
-            self.LargeString = Text(settings["database"]["large_string_length"])
-        self.SmallString = String(settings["database"]["small_string_length"])
-        self.TinyString = String(settings["database"]["tiny_string_length"])
+            self.LargeString = Text(self.columns["length"]["large_string_length"])
+        self.SmallString = String(self.columns["length"]["small_string_length"])
+        self.TinyString = String(self.columns["length"]["tiny_string_length"])
 
         default_ctypes = {
             self.Dict: {},

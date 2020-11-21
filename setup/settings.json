@@ -51,7 +51,6 @@
     }
   },
   "database": {
-    "large_string_length": 32768,
     "max_overflow": 10,
     "pool_size": 1000,
     "retry": {
@@ -63,9 +62,7 @@
         "number": 3,
         "time": 3
       }
-    },
-    "small_string_length": 255,
-    "tiny_string_length": 64
+    }
   },
   "mail": {
     "port": 587,

@@ -50,18 +50,6 @@
       }
     }
   },
-  "database": {
-    "retry": {
-      "commit": {
-        "number": 10,
-        "time": 5
-      },
-      "fetch": {
-        "number": 3,
-        "time": 3
-      }
-    }
-  },
   "mail": {
     "port": 587,
     "reply_to": "antoine.fourmy@gmail.com",

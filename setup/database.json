@@ -22,7 +22,19 @@
       "small_string_length": 255,
       "large_string_length": 32768
     }
-  },  
+  },
+  "transactions": {
+    "retry": {
+      "commit": {
+        "number": 10,
+        "time": 5
+      },
+      "fetch": {
+        "number": 3,
+        "time": 3
+      }
+    }
+  },
   "import_export_models": [
     "user",
     "device",

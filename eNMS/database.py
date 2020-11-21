@@ -39,7 +39,8 @@ class Database:
         self.dialect = self.database_url.split(":")[0]
         self.rbac_error = type("RbacError", (Exception,), {})
         self.configure_columns()
-        self.engine = self.configure_engine()
+        engine_parameters = {**self.engine["common"], **self.engine[self.dialect]}
+        self.engine = create_engine(self.database_url, **engine_parameters)
         self.session = scoped_session(sessionmaker(autoflush=False, bind=self.engine))
         self.base = declarative_base()
         self.configure_associations()
@@ -55,7 +56,7 @@ class Database:
             "str": str,
             "date": str,
         }
-        for retry_type, values in settings["database"]["retry"].items():
+        for retry_type, values in self.transactions["retry"].items():
             for parameter, number in values.items():
                 setattr(self, f"retry_{retry_type}_{parameter}", number)
 
@@ -65,10 +66,6 @@ class Database:
             return literal_eval(input)
         except Exception:
             return loads(input)
-
-    def configure_engine(self):
-        parameters = {**self.engine["common"], **self.engine[self.dialect]}
-        return create_engine(self.database_url, **parameters)
 
     def configure_columns(self):
         class CustomPickleType(PickleType):

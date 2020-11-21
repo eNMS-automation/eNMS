@@ -598,10 +598,10 @@ tables.pool = class PoolTable extends Table {
     for (const model of ["device", "link", "service", "user"]) {
       row.objectNumber += `${row[`${model}_number`]} ${model}s`;
       if (model !== "user") row.objectNumber += " - ";
+      row[`${model}s`] = `<b><a href="#" onclick="eNMS.table.displayRelationTable(
+        '${model}', ${row.instance}, {from: 'pools', to: '${model}s'})">
+        ${model.charAt(0).toUpperCase() + model.slice(1)}</a></b>`;
     }
-    row.devices = `<b><a href="#" onclick="eNMS.table.displayRelationTable(
-      'device', ${row.instance}, {from: 'pools', to: 'devices'})">
-      Devices</a></b>`;
     return row;
   }
 
@@ -635,7 +635,7 @@ tables.pool = class PoolTable extends Table {
 
   buttons(row) {
     return `
-      <ul class="pagination pagination-lg" style="margin: 0px; width: 270px">
+      <ul class="pagination pagination-lg" style="margin: 0px; width: 240px">
         <li>
           <button type="button" class="btn btn-sm btn-info"
           onclick="eNMS.visualization.showPoolView('${row.id}')"

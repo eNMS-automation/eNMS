@@ -447,7 +447,26 @@
       {
         "data": "devices",
         "title": "Devices",
-        "width": "100px"
+        "width": "100px",
+        "visible": false
+      },
+      {
+        "data": "links",
+        "title": "Links",
+        "width": "100px",
+        "visible": false
+      },
+      {
+        "data": "users",
+        "title": "Users",
+        "width": "100px",
+        "visible": false
+      },
+      {
+        "data": "services",
+        "title": "Services",
+        "width": "100px",
+        "visible": false
       },
       {
         "data": "objectNumber",
@@ -457,7 +476,7 @@
       },
       {
         "data": "buttons",
-        "width": "270px",
+        "width": "240px",
         "orderable": false,
         "export": false
       }

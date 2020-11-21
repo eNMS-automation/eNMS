@@ -73,6 +73,18 @@ devices the credential can be used for.
 When creating a new service, the groups field will be automatically set to the user groups. This allows services to be automatically
 added to the appriopriate pool of services, if the pool of services is defined based on that group property.
 
+Test:
+- test that notification mechanism still works
+- test that the new web SSH mechanism works
+- test that the workflow mechanism in both DxD and SxS still works
+- test the skip mechanism, and in particular the behavior of the new discard option
+- test the iteration mechanism (both iteration on value and iteration on devices). Tests that the connection
+is cached and reused for iteration values.
+- test the device query mechanism.
+- user rbac (access to UI + access to models) is properly updated when one of its associated pool OR access
+is modified.
+- when a service is renamed, the custom password still works.
+
 
 Version 3.22.4
 --------------

@@ -120,76 +120,120 @@
     ],
     "workflow_edge": ["id", "source_id", "destination_id", "workflow_id"]
   },
-  "many_to_many_relationships": [
-    [
-      {
-        "model": "pool"
+  "many_to_many_relationships": {
+    "pool_device": {
+      "model1": {
+        "column": "pool_id",
+        "foreign_key": "pool"
       },
-      { "model": "device" }
-    ],
-    [
-      {
-        "model": "pool"
+      "model2": {
+        "column": "device_id",
+        "foreign_key": "device"
+      }
+    },
+    "pool_link": {
+      "model1": {
+        "column": "pool_id",
+        "foreign_key": "pool"
       },
-      { "model": "link" }
-    ],
-    [
-      {
-        "model": "pool"
+      "model2": {
+        "column": "link_id",
+        "foreign_key": "link"
+      }
+    },
+    "pool_service": {
+      "model1": {
+        "column": "pool_id",
+        "foreign_key": "pool"
       },
-      { "model": "service" }
-    ],
-    [
-      {
-        "model": "pool"
+      "model2": {
+        "column": "service_id",
+        "foreign_key": "service"
+      }
+    },
+    "pool_user": {
+      "model1": {
+        "column": "pool_id",
+        "foreign_key": "pool"
       },
-      { "model": "user" }
-    ],
-    [
-      {
-        "model": "run",
+      "model2": {
+        "column": "user_id",
+        "foreign_key": "user"
+      }
+    },
+    "run_device": {
+      "model1": {
+        "column": "run_id",
+        "foreign_key": "run",
         "kwargs": { "ondelete": "cascade" }
       },
-      { "model": "device" }
-    ],
-    [
-      {
-        "model": "run",
+      "model2": {
+        "column": "device_id",
+        "foreign_key": "device"
+      }
+    },
+    "run_pool": {
+      "model1": {
+        "column": "run_id",
+        "foreign_key": "run",
         "kwargs": { "ondelete": "cascade" }
       },
-      { "model": "pool" }
-    ],
-    [
-      {
-        "model": "service"
+      "model2": {
+        "column": "pool_id",
+        "foreign_key": "pool"
+      }
+    },
+    "service_device": {
+      "model1": {
+        "column": "service_id",
+        "foreign_key": "service"
       },
-      { "model": "device" }
-    ],
-    [
-      {
-        "model": "service"
+      "model2": {
+        "column": "device_id",
+        "foreign_key": "device"
+      }
+    },
+    "service_pool": {
+      "model1": {
+        "column": "service_id",
+        "foreign_key": "service"
       },
-      { "model": "pool" }
-    ],
-    [
-      {
-        "model": "service"
+      "model2": {
+        "column": "pool_id",
+        "foreign_key": "pool"
+      }
+    },
+    "service_workflow": {
+      "model1": {
+        "column": "service_id",
+        "foreign_key": "service"
       },
-      { "model": "workflow" }
-    ],
-    [
-      {
-        "model": "task"
+      "model2": {
+        "column": "workflow_id",
+        "foreign_key": "workflow"
+      }
+    },
+    "task_device": {
+      "model1": {
+        "column": "task_id",
+        "foreign_key": "task"
       },
-      { "model": "device" }
-    ],
-    [
-      {
-        "model": "task"
+      "model2": {
+        "column": "device_id",
+        "foreign_key": "device"
+      }
+    },
+    "task_pool": {
+      "model1": {
+        "column": "task_id",
+        "foreign_key": "task"
       },
-      { "model": "pool" }
-    ]
-  ],
+      "model2": {
+        "column": "pool_id",
+        "foreign_key": "pool"
+      }
+    }
+  },
   "private_properties": [
     "custom_password",
     "enable_password",

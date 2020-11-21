@@ -201,17 +201,28 @@ class Database:
                 model.configure_events()
 
     def configure_associations(self):
-        for r1, r2 in self.many_to_many_relationships:
-            model1, model2 = r1["model"], r2["model"]
-            kw1, kw2 = r1.get("kwargs", {}), r2.get("kwargs", {})
+        for association_name, association in self.many_to_many_relationships.items():
+            model1, model2 = association["model1"], association["model2"]
             setattr(
                 self,
-                f"{model1}_{model2}_table",
+                f"{association_name}_table",
                 Table(
-                    f"{model1}_{model2}_association",
+                    f"{association_name}_association",
                     self.base.metadata,
-                    Column(f"{model1}_id", Integer, ForeignKey(f"{model1}.id", **kw1)),
-                    Column(f"{model2}_id", Integer, ForeignKey(f"{model2}.id", **kw2)),
+                    Column(
+                        f"{model1['column']}_id",
+                        Integer,
+                        ForeignKey(
+                            f"{model1['foreign_key']}.id", **model1.get("kwargs", {})
+                        ),
+                    ),
+                    Column(
+                        f"{model2['column']}_id",
+                        Integer,
+                        ForeignKey(
+                            f"{model2['foreign_key']}.id", **model2.get("kwargs", {})
+                        ),
+                    ),
                 ),
             )
         self.originals_association = Table(

@@ -207,18 +207,8 @@ class Database:
                 )
                 app.log("info", f"UPDATE: {target.type} '{name}': ({changes})")
 
-        if app.use_vault:
-
-            @event.listens_for(models["service"].name, "set", propagate=True)
-            def vault_update(target, new_value, old_value, *_):
-                path = f"secret/data/{target.type}/{old_value}/password"
-                data = app.vault_client.read(path)
-                if not data:
-                    return
-                app.vault_client.write(
-                    f"secret/data/{target.type}/{new_value}/password",
-                    data={"password": data["data"]["data"]["password"]},
-                )
+        for model in models.values():
+            model.configure_events()
 
     def configure_associations(self):
         for r1, r2 in self.many_to_many_relationships:

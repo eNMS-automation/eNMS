@@ -51,6 +51,10 @@ class AbstractBase(db.base):
     def filtering_constraints(cls, **_):
         return []
 
+    @classmethod
+    def configure_events(cls):
+        pass
+
     @property
     def ui_name(self):
         return self.name

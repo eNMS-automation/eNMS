@@ -189,7 +189,7 @@ function removeInstance(tableId, instance, relation) {
         .remove()
         .draw(false);
       notify(
-        `${instance.type.toUpperCase()} '${instance.name}' remove from
+        `${instance.type.toUpperCase()} '${instance.name}' removed from
         ${relation.type.toUpperCase()} '${relation.name}'.`,
         "success",
         5,

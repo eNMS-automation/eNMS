@@ -29,11 +29,6 @@ class AdminForm(BaseForm):
     form_type = HiddenField(default="administration")
 
 
-class FilesForm(BaseForm):
-    template = "files"
-    form_type = HiddenField(default="files")
-
-
 class UploadFilesForm(BaseForm):
     template = "upload_files"
     folder = HiddenField()

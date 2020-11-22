@@ -210,13 +210,13 @@ class Database:
                 model.configure_events()
 
     def configure_associations(self):
-        for association_name, association in self.many_to_many_relationships.items():
+        for name, association in self.relationships["associations"].items():
             model1, model2 = association["model1"], association["model2"]
             setattr(
                 self,
-                f"{association_name}_table",
+                f"{name}_table",
                 Table(
-                    f"{association_name}_association",
+                    f"{name}_association",
                     self.base.metadata,
                     Column(
                         model1["column"],

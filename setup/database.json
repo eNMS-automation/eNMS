@@ -120,187 +120,191 @@
     ],
     "workflow_edge": ["id", "source_id", "destination_id", "workflow_id"]
   },
-  "many_to_many_relationships": {
-    "pool_device": {
-      "model1": {
-        "column": "pool_id",
-        "foreign_key": "pool"
+  "relationships": {
+    "associations": {
+      "pool_device": {
+        "model1": {
+          "column": "pool_id",
+          "foreign_key": "pool",
+          "property": "pools"
+        },
+        "model2": {
+          "column": "device_id",
+          "foreign_key": "device",
+          "property": "device"
+        }
       },
-      "model2": {
-        "column": "device_id",
-        "foreign_key": "device"
-      }
-    },
-    "pool_link": {
-      "model1": {
-        "column": "pool_id",
-        "foreign_key": "pool"
+      "pool_link": {
+        "model1": {
+          "column": "pool_id",
+          "foreign_key": "pool"
+        },
+        "model2": {
+          "column": "link_id",
+          "foreign_key": "link"
+        }
       },
-      "model2": {
-        "column": "link_id",
-        "foreign_key": "link"
-      }
-    },
-    "pool_service": {
-      "model1": {
-        "column": "pool_id",
-        "foreign_key": "pool"
+      "pool_service": {
+        "model1": {
+          "column": "pool_id",
+          "foreign_key": "pool"
+        },
+        "model2": {
+          "column": "service_id",
+          "foreign_key": "service"
+        }
       },
-      "model2": {
-        "column": "service_id",
-        "foreign_key": "service"
-      }
-    },
-    "pool_user": {
-      "model1": {
-        "column": "pool_id",
-        "foreign_key": "pool"
+      "pool_user": {
+        "model1": {
+          "column": "pool_id",
+          "foreign_key": "pool"
+        },
+        "model2": {
+          "column": "user_id",
+          "foreign_key": "user"
+        }
       },
-      "model2": {
-        "column": "user_id",
-        "foreign_key": "user"
-      }
-    },
-    "run_device": {
-      "model1": {
-        "column": "run_id",
-        "foreign_key": "run",
-        "kwargs": { "ondelete": "cascade" }
+      "run_device": {
+        "model1": {
+          "column": "run_id",
+          "foreign_key": "run",
+          "kwargs": { "ondelete": "cascade" }
+        },
+        "model2": {
+          "column": "device_id",
+          "foreign_key": "device"
+        }
       },
-      "model2": {
-        "column": "device_id",
-        "foreign_key": "device"
-      }
-    },
-    "run_pool": {
-      "model1": {
-        "column": "run_id",
-        "foreign_key": "run",
-        "kwargs": { "ondelete": "cascade" }
+      "run_pool": {
+        "model1": {
+          "column": "run_id",
+          "foreign_key": "run",
+          "kwargs": { "ondelete": "cascade" }
+        },
+        "model2": {
+          "column": "pool_id",
+          "foreign_key": "pool"
+        }
       },
-      "model2": {
-        "column": "pool_id",
-        "foreign_key": "pool"
-      }
-    },
-    "service_device": {
-      "model1": {
-        "column": "service_id",
-        "foreign_key": "service"
+      "service_device": {
+        "model1": {
+          "column": "service_id",
+          "foreign_key": "service"
+        },
+        "model2": {
+          "column": "device_id",
+          "foreign_key": "device"
+        }
       },
-      "model2": {
-        "column": "device_id",
-        "foreign_key": "device"
-      }
-    },
-    "service_pool": {
-      "model1": {
-        "column": "service_id",
-        "foreign_key": "service"
+      "service_pool": {
+        "model1": {
+          "column": "service_id",
+          "foreign_key": "service"
+        },
+        "model2": {
+          "column": "pool_id",
+          "foreign_key": "pool"
+        }
       },
-      "model2": {
-        "column": "pool_id",
-        "foreign_key": "pool"
-      }
-    },
-    "service_workflow": {
-      "model1": {
-        "column": "service_id",
-        "foreign_key": "service"
+      "service_workflow": {
+        "model1": {
+          "column": "service_id",
+          "foreign_key": "service"
+        },
+        "model2": {
+          "column": "workflow_id",
+          "foreign_key": "workflow"
+        }
       },
-      "model2": {
-        "column": "workflow_id",
-        "foreign_key": "workflow"
-      }
-    },
-    "task_device": {
-      "model1": {
-        "column": "task_id",
-        "foreign_key": "task"
+      "task_device": {
+        "model1": {
+          "column": "task_id",
+          "foreign_key": "task"
+        },
+        "model2": {
+          "column": "device_id",
+          "foreign_key": "device"
+        }
       },
-      "model2": {
-        "column": "device_id",
-        "foreign_key": "device"
-      }
-    },
-    "task_pool": {
-      "model1": {
-        "column": "task_id",
-        "foreign_key": "task"
+      "task_pool": {
+        "model1": {
+          "column": "task_id",
+          "foreign_key": "task"
+        },
+        "model2": {
+          "column": "pool_id",
+          "foreign_key": "pool"
+        }
       },
-      "model2": {
-        "column": "pool_id",
-        "foreign_key": "pool"
-      }
-    },
-    "originals_association": {
-      "model1": {
-        "column": "original_id",
-        "foreign_key": "service"
+      "originals_association": {
+        "model1": {
+          "column": "original_id",
+          "foreign_key": "service"
+        },
+        "model2": {
+          "column": "child_id",
+          "foreign_key": "service"
+        }
       },
-      "model2": {
-        "column": "child_id",
-        "foreign_key": "service"
-      }
-    },
-    "service_target_device": {
-      "model1": {
-        "column": "service_id",
-        "foreign_key": "service"
+      "service_target_device": {
+        "model1": {
+          "column": "service_id",
+          "foreign_key": "service"
+        },
+        "model2": {
+          "column": "device_id",
+          "foreign_key": "device"
+        }
       },
-      "model2": {
-        "column": "device_id",
-        "foreign_key": "device"
-      }
-    },
-    "service_target_pool": {
-      "model1": {
-        "column": "service_id",
-        "foreign_key": "service"
+      "service_target_pool": {
+        "model1": {
+          "column": "service_id",
+          "foreign_key": "service"
+        },
+        "model2": {
+          "column": "pool_id",
+          "foreign_key": "pool"
+        }
       },
-      "model2": {
-        "column": "pool_id",
-        "foreign_key": "pool"
-      }
-    },
-    "access_user_pools": {
-      "model1": {
-        "column": "access_id",
-        "foreign_key": "access"
+      "access_user_pools": {
+        "model1": {
+          "column": "access_id",
+          "foreign_key": "access"
+        },
+        "model2": {
+          "column": "pool_id",
+          "foreign_key": "pool"
+        }
       },
-      "model2": {
-        "column": "pool_id",
-        "foreign_key": "pool"
-      }
-    },
-    "access_model_pools": {
-      "model1": {
-        "column": "access_id",
-        "foreign_key": "access"
+      "access_model_pools": {
+        "model1": {
+          "column": "access_id",
+          "foreign_key": "access"
+        },
+        "model2": {
+          "column": "pool_id",
+          "foreign_key": "pool"
+        }
       },
-      "model2": {
-        "column": "pool_id",
-        "foreign_key": "pool"
-      }
-    },
-    "credential_device": {
-      "model1": {
-        "column": "credential_id",
-        "foreign_key": "credential"
+      "credential_device": {
+        "model1": {
+          "column": "credential_id",
+          "foreign_key": "credential"
+        },
+        "model2": {
+          "column": "pool_id",
+          "foreign_key": "pool"
+        }
       },
-      "model2": {
-        "column": "pool_id",
-        "foreign_key": "pool"
-      }
-    },
-    "credential_user": {
-      "model1": {
-        "column": "credential_id",
-        "foreign_key": "credential"
-      },
-      "model2": {
-        "column": "pool_id",
-        "foreign_key": "pool"
+      "credential_user": {
+        "model1": {
+          "column": "credential_id",
+          "foreign_key": "credential"
+        },
+        "model2": {
+          "column": "pool_id",
+          "foreign_key": "pool"
+        }
       }
     }
   },

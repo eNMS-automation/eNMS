@@ -406,7 +406,7 @@ tables.device = class DeviceTable extends Table {
     });
     for (const model of ["service", "task", "pool"]) {
       row[`${model}s`] = `<b><a href="#" onclick="eNMS.table.displayRelationTable(
-        '${model}', ${row.instance}, {from: 'devices', to: '${model}s'})">
+        '${model}', ${row.instance}, {from: 'target_devices', to: '${model}s'})">
         ${model.charAt(0).toUpperCase() + model.slice(1)}s</a></b>`;
     }
     return row;

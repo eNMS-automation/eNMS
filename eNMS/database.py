@@ -225,27 +225,6 @@ class Database:
                     ),
                 ),
             )
-        for association in ("access_user_pools", "access_model_pools"):
-            setattr(
-                self,
-                f"{association}_table",
-                Table(
-                    f"{association}_association",
-                    self.base.metadata,
-                    Column(
-                        "access_id",
-                        Integer,
-                        ForeignKey("access.id"),
-                        primary_key=True,
-                    ),
-                    Column(
-                        "pool_id",
-                        Integer,
-                        ForeignKey("pool.id"),
-                        primary_key=True,
-                    ),
-                ),
-            )
         for model in ("device", "user"):
             setattr(
                 self,

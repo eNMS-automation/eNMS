@@ -262,6 +262,26 @@
         "column": "pool_id",
         "foreign_key": "pool"
       }
+    },
+    "access_user_pools": {
+      "model1": {
+        "column": "access_id",
+        "foreign_key": "access"
+      },
+      "model2": {
+        "column": "pool_id",
+        "foreign_key": "pool"
+      }
+    },
+    "access_model_pools": {
+      "model1": {
+        "column": "access_id",
+        "foreign_key": "access"
+      },
+      "model2": {
+        "column": "pool_id",
+        "foreign_key": "pool"
+      }
     }
   },
   "private_properties": [

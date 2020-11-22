@@ -333,6 +333,18 @@ export class Table {
       </button>`;
   }
 
+  copyTableButton() {
+    return `
+      <button
+        class="btn btn-info"
+        onclick="eNMS.table.copySelectionToClipboard('${this.id}')"
+        data-tooltip="Copy Selection to Clipboard"
+        type="button"
+      >
+      <span class="glyphicon glyphicon-pencil"></span>
+    </button>`;
+  }
+
   bulkEditButton() {
     const panelType = this.modelFiltering || this.type;
     const showPanelFunction =
@@ -418,6 +430,7 @@ tables.device = class DeviceTable extends Table {
       this.refreshTableButton(),
       this.searchTableButton(),
       this.clearSearchButton(),
+      this.copyTableButton(),
       this.createNewButton(),
       this.bulkEditButton(),
       this.exportTableButton(),
@@ -528,6 +541,7 @@ tables.configuration = class ConfigurationTable extends Table {
       >`,
       this.refreshTableButton(),
       this.clearSearchButton(),
+      this.copyTableButton(),
       this.bulkEditButton(),
       this.exportTableButton(),
       this.bulkDeletionButton(),
@@ -576,6 +590,7 @@ tables.link = class LinkTable extends Table {
       this.refreshTableButton(),
       this.searchTableButton(),
       this.clearSearchButton(),
+      this.copyTableButton(),
       this.createNewButton(),
       this.bulkEditButton(),
       this.exportTableButton(),
@@ -624,6 +639,7 @@ tables.pool = class PoolTable extends Table {
       this.refreshTableButton(),
       this.searchTableButton(),
       this.clearSearchButton(),
+      this.copyTableButton(),
       this.createNewButton(),
       this.exportTableButton(),
       ` <button
@@ -723,10 +739,7 @@ tables.service = class ServiceTable extends Table {
           <option value="false">Display all services</option>
         </select>
       </button>
-      </input>`,
-      this.searchTableButton(),
-      this.clearSearchButton(),
-      `
+      </input>
       <button
         class="btn btn-info"
         onclick="eNMS.table.refreshTable('service', true)"
@@ -734,7 +747,11 @@ tables.service = class ServiceTable extends Table {
         type="button"
       >
         <span class="glyphicon glyphicon-refresh"></span>
-      </button>
+      </button>`,
+      this.searchTableButton(),
+      this.clearSearchButton(),
+      this.copyTableButton(),
+      `
       <a
         id="left-arrow"
         class="btn btn-info disabled"
@@ -1063,6 +1080,7 @@ tables.user = class UserTable extends Table {
       this.refreshTableButton(),
       this.searchTableButton(),
       this.clearSearchButton(),
+      this.copyTableButton(),
       this.createNewButton(),
       this.bulkEditButton(),
       this.exportTableButton(),

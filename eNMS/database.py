@@ -28,7 +28,7 @@ from sqlalchemy.orm.collections import InstrumentedList
 from time import sleep
 
 from eNMS.models import model_properties, models, property_types, relationships
-from eNMS.setup import database as database_settings, properties, settings
+from eNMS.setup import database as database_settings, properties
 
 
 class Database:
@@ -62,7 +62,7 @@ class Database:
 
     def create_metabase(self):
         class SubDeclarativeMeta(DeclarativeMeta):
-            def __init__(cls, *args):
+            def __init__(cls, *args):  # noqa: N805
                 DeclarativeMeta.__init__(cls, *args)
                 if hasattr(cls, "database_init"):
                     cls.database_init()

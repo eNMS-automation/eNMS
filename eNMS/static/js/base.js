@@ -578,7 +578,7 @@ function showAddInstancePanel(tableId, model, relation) {
       $(`#add_${model}s-relation_id-${tableId}`).val(relation.id);
       $(`#add_${model}s-relation_type-${tableId}`).val(relation.type);
       $(`#add_${model}s-property-${tableId}`).val(relation.relation.to);
-    }
+    },
   });
 }
 
@@ -589,9 +589,15 @@ function addInstancesToRelation(type, id) {
     callback: (result) => {
       $(`#add_${type}s-${id}`).remove();
       refreshTable(id);
-      notify(`${result.number} ${type}s added to ${result.target.type} '${result.target.name}'.`, "success", 5, true);
+      notify(
+        `${result.number} ${type}s added to
+        ${result.target.type} '${result.target.name}'.`,
+        "success",
+        5,
+        true
+      );
     },
-  })
+  });
 }
 
 export function showInstancePanel(type, id, mode, tableId) {

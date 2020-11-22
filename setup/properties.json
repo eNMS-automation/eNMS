@@ -547,8 +547,15 @@
       },
       {
         "data": "devices",
-        "title": "Devices",
-        "width": "100px"
+        "title": "Target Devices",
+        "width": "100px",
+        "visible": false
+      },
+      {
+        "data": "pools",
+        "title": "Target Pools",
+        "width": "100px",
+        "visible": false
       },
       {
         "data": "buttons",

@@ -696,9 +696,11 @@ tables.service = class ServiceTable extends Table {
         : $("#parent-filtering").val() == "true"
         ? row.scoped_name
         : row.name;
-    row.devices = `<b><a href="#" onclick="eNMS.table.displayRelationTable(
-      'device', ${row.instance}, {from: 'target_services', to: 'target_devices'})">
-      Devices</a></b>`;
+    for (const model of ["device", "pool"]) {
+      row[`${model}s`] = `<b><a href="#" onclick="eNMS.table.displayRelationTable(
+        '${model}', ${row.instance}, {from: 'target_services', to: 'target_${model}s'})">
+        ${model.charAt(0).toUpperCase() + model.slice(1)}</a></b>`;
+    }
     return row;
   }
 

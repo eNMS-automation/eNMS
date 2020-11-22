@@ -73,6 +73,9 @@ devices the credential can be used for.
 When creating a new service, the groups field will be automatically set to the user groups. This allows services to be automatically
 added to the appriopriate pool of services, if the pool of services is defined based on that group property.
 - move the database section of settings.json to database.json
+- New color property for edges. Impact on migration files: all workflow edges must have a color, or
+they will be grey by default. Need to parse the workflow edge file and add color with the following mapping:
+{"success": "green", "failure": "red", "prerequisite": "blue"}
 
 Test:
 - test that notification mechanism still works

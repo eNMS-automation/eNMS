@@ -787,7 +787,7 @@ tables.service = class ServiceTable extends Table {
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-primary"
-          onclick="eNMS.automation.exportService('${row.id}')" data-tooltip="Export"
+          onclick="location.href='/export_service/${row.id}'" data-tooltip="Export"
             ><span class="glyphicon glyphicon-upload"></span
           ></button>
         </li>

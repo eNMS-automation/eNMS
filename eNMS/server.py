@@ -301,6 +301,11 @@ class Server(Flask):
         def download_file(path):
             return send_file(f"/{path}", as_attachment=True)
 
+        @blueprint.route("/export_service/<int:id>")
+        @self.monitor_requests
+        def export_service(id):
+            return send_file(f"/{app.export_service(id)}.tgz", as_attachment=True)
+
         @blueprint.route("/<path:_>")
         @self.monitor_requests
         def get_requests_sink(_):

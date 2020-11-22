@@ -78,6 +78,7 @@ class AdministrationController(BaseController):
         with open_tar(f"{path}.tgz", "w:gz") as tar:
             tar.add(path, arcname=service.filename)
         rmtree(path, ignore_errors=True)
+        return path
 
     def get_cluster_status(self):
         return [server.status for server in db.fetch_all("server")]

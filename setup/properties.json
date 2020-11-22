@@ -229,6 +229,21 @@
         "visible": false
       },
       {
+        "data": "services",
+        "title": "Services",
+        "width": "80px"
+      },
+      {
+        "data": "tasks",
+        "title": "Tasks",
+        "width": "80px"
+      },
+      {
+        "data": "pools",
+        "title": "Pools",
+        "width": "80px"
+      },
+      {
         "data": "buttons",
         "width": "270px",
         "orderable": false,

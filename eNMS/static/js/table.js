@@ -699,7 +699,7 @@ tables.service = class ServiceTable extends Table {
     for (const model of ["device", "pool"]) {
       row[`${model}s`] = `<b><a href="#" onclick="eNMS.table.displayRelationTable(
         '${model}', ${row.instance}, {from: 'target_services', to: 'target_${model}s'})">
-        ${model.charAt(0).toUpperCase() + model.slice(1)}</a></b>`;
+        ${model.charAt(0).toUpperCase() + model.slice(1)}s</a></b>`;
     }
     return row;
   }
@@ -968,6 +968,11 @@ tables.task = class TaskTable extends Table {
       row.periodicity = `${row.frequency} ${row.frequency_unit}`;
     } else {
       row.periodicity = row.crontab_expression;
+    }
+    for (const model of ["device", "pool"]) {
+      row[`${model}s`] = `<b><a href="#" onclick="eNMS.table.displayRelationTable(
+        '${model}', ${row.instance}, {from: 'tasks', to: '${model}s'})">
+        ${model.charAt(0).toUpperCase() + model.slice(1)}s</a></b>`;
     }
     return row;
   }

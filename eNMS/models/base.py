@@ -79,11 +79,10 @@ class AbstractBase(db.base):
             if pool.manually_defined or not pool.compute(self.class_type):
                 continue
             match = pool.object_match(self)
-            relation, number = f"{self.class_type}s", f"{self.class_type}_number"
-            if match and self not in getattr(pool, relation):
-                getattr(pool, relation).append(self)
-            if self in getattr(pool, relation) and not match:
-                getattr(pool, relation).remove(self)
+            if match and self not in getattr(pool, f"{self.class_type}s"):
+                getattr(pool, f"{self.class_type}s").append(self)
+            if self in getattr(pool, f"{self.class_type}s") and not match:
+                getattr(pool, f"{self.class_type}s").remove(self)
 
     def delete(self):
         pass

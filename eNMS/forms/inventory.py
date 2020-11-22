@@ -14,28 +14,6 @@ from eNMS.forms.fields import (
 )
 
 
-def configure_pool_form(cls):
-    cls.models = ("device", "link", "service", "user")
-    for model in cls.models:
-        setattr(cls, f"{model}_properties", app.properties["filtering"][model])
-        for property in app.properties["filtering"][model]:
-            setattr(cls, f"{model}_{property}", StringField(property))
-            setattr(cls, f"{model}_{property}_invert", BooleanField(property))
-            form_properties["pool"][f"{model}_{property}_invert"] = {"type": "bool"}
-            setattr(
-                cls,
-                f"{model}_{property}_match",
-                SelectField(
-                    choices=(
-                        ("inclusion", "Inclusion"),
-                        ("equality", "Equality"),
-                        ("regex", "Regular Expression"),
-                    )
-                ),
-            )
-    return cls
-
-
 class DeviceConnectionForm(BaseForm):
     template = "device_connection"
     form_type = HiddenField(default="device_connection")
@@ -115,7 +93,6 @@ class LinkForm(ObjectForm):
     color = StringField("Color")
 
 
-@configure_pool_form
 class PoolForm(BaseForm):
     template = "pool"
     form_type = HiddenField(default="pool")
@@ -138,6 +115,27 @@ class PoolForm(BaseForm):
         ),
     )
     manually_defined = BooleanField("Manually defined (won't be automatically updated)")
+
+    @classmethod
+    def form_init(cls):
+        cls.models = ("device", "link", "service", "user")
+        for model in cls.models:
+            setattr(cls, f"{model}_properties", app.properties["filtering"][model])
+            for property in app.properties["filtering"][model]:
+                setattr(cls, f"{model}_{property}", StringField(property))
+                setattr(cls, f"{model}_{property}_invert", BooleanField(property))
+                form_properties["pool"][f"{model}_{property}_invert"] = {"type": "bool"}
+                setattr(
+                    cls,
+                    f"{model}_{property}_match",
+                    SelectField(
+                        choices=(
+                            ("inclusion", "Inclusion"),
+                            ("equality", "Equality"),
+                            ("regex", "Regular Expression"),
+                        )
+                    ),
+                )
 
 
 class ExcelImportForm(BaseForm):

@@ -47,18 +47,6 @@ class Object(AbstractBase):
         )
 
 
-def set_configuration_properties(Device):
-    for property in app.configuration_properties:
-        for timestamp in app.configuration_timestamps:
-            setattr(
-                Device,
-                f"last_{property}_{timestamp}",
-                db.Column(db.SmallString, default="Never"),
-            )
-    return Device
-
-
-@set_configuration_properties
 class Device(Object):
 
     __tablename__ = class_type = "device"
@@ -97,6 +85,17 @@ class Device(Object):
     sessions = relationship(
         "Session", back_populates="device", cascade="all, delete-orphan"
     )
+
+    @classmethod
+    def database_init(cls):
+        for property in app.configuration_properties:
+            for timestamp in app.configuration_timestamps:
+                setattr(
+                    cls,
+                    f"last_{property}_{timestamp}",
+                    db.Column(db.SmallString, default="Never"),
+                )
+        return cls
 
     def get_neighbors(self, object_type, direction="both", **link_constraints):
         filters = [models["link"].destination == self, models["link"].source == self]

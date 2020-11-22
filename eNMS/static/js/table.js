@@ -1028,6 +1028,15 @@ tables.task = class TaskTable extends Table {
 };
 
 tables.user = class UserTable extends Table {
+
+  addRow(kwargs) {
+    let row = super.addRow(kwargs);
+    row.pools = `<b><a href="#" onclick="eNMS.table.displayRelationTable(
+      'pool', ${row.instance}, {from: 'users', to: 'pools'})">
+      Pools</a></b>`;
+    return row;
+  }
+
   get controls() {
     return [
       this.columnDisplay(),

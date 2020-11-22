@@ -763,6 +763,11 @@
         "search": "text"
       },
       {
+        "data": "pools",
+        "title": "Pools",
+        "width": "80px"
+      },
+      {
         "data": "buttons",
         "width": "130px",
         "orderable": false,

@@ -449,22 +449,22 @@
       {
         "data": "devices",
         "title": "Devices",
-        "width": "100px"
+        "width": "80px"
       },
       {
         "data": "links",
         "title": "Links",
-        "width": "100px"
+        "width": "80px"
       },
       {
         "data": "users",
         "title": "Users",
-        "width": "100px"
+        "width": "80px"
       },
       {
         "data": "services",
         "title": "Services",
-        "width": "100px"
+        "width": "80px"
       },
       {
         "data": "objectNumber",

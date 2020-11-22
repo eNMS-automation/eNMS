@@ -257,30 +257,6 @@ class Link(Object):
         super().update(**kwargs)
 
 
-def set_pool_properties(Pool):
-    for model in Pool.models:
-        for property in properties["filtering"][model]:
-            setattr(Pool, f"{model}_{property}", db.Column(db.LargeString))
-            setattr(
-                Pool,
-                f"{model}_{property}_match",
-                db.Column(db.TinyString, default="inclusion"),
-            )
-            setattr(Pool, f"{model}_{property}_invert", db.Column(Boolean))
-        setattr(
-            Pool,
-            f"{model}s",
-            relationship(
-                model.capitalize(),
-                secondary=getattr(db, f"pool_{model}_table"),
-                back_populates="pools",
-            ),
-        )
-        setattr(Pool, f"{model}_number", db.Column(Integer, default=0))
-    return Pool
-
-
-@set_pool_properties
 class Pool(AbstractBase):
 
     __tablename__ = type = "pool"
@@ -332,6 +308,28 @@ class Pool(AbstractBase):
             def remove(target, value, _):
                 number = getattr(target, f"{value.class_type}_number")
                 setattr(target, f"{value.type}_number", number - 1)
+
+    @classmethod
+    def database_init(cls):
+        for model in cls.models:
+            for property in properties["filtering"][model]:
+                setattr(cls, f"{model}_{property}", db.Column(db.LargeString))
+                setattr(
+                    cls,
+                    f"{model}_{property}_match",
+                    db.Column(db.TinyString, default="inclusion"),
+                )
+                setattr(cls, f"{model}_{property}_invert", db.Column(Boolean))
+            setattr(
+                cls,
+                f"{model}s",
+                relationship(
+                    model.capitalize(),
+                    secondary=getattr(db, f"pool_{model}_table"),
+                    back_populates="pools",
+                ),
+            )
+            setattr(cls, f"{model}_number", db.Column(Integer, default=0))
 
     def update(self, **kwargs):
         super().update(**kwargs)

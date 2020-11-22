@@ -63,9 +63,10 @@ class Database:
     def create_metabase(self):
         class SubDeclarativeMeta(DeclarativeMeta):
             def __init__(cls, *args):
-                model = DeclarativeMeta.__init__(cls, *args)
+                DeclarativeMeta.__init__(cls, *args)
+                if hasattr(cls, "database_init"):
+                    cls.database_init()
                 self.set_custom_properties(cls)
-                return model
 
         return SubDeclarativeMeta
 

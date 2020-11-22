@@ -44,7 +44,6 @@ from eNMS.models.scheduling import Task  # noqa: F401
 from eNMS.models.administration import User  # noqa: F401
 
 
-@db.set_custom_properties
 class Service(AbstractBase):
 
     __tablename__ = class_type = "service"

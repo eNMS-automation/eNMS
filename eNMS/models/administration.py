@@ -12,7 +12,6 @@ from eNMS.models.base import AbstractBase
 from eNMS.setup import rbac
 
 
-@db.set_custom_properties
 class Server(AbstractBase):
 
     __tablename__ = type = "server"
@@ -24,7 +23,6 @@ class Server(AbstractBase):
     status = db.Column(db.TinyString, default="down")
 
 
-@db.set_custom_properties
 class User(AbstractBase, UserMixin):
 
     __tablename__ = type = class_type = "user"
@@ -83,7 +81,6 @@ class User(AbstractBase, UserMixin):
             setattr(self, property, list(set(chain.from_iterable(access_value))))
 
 
-@db.set_custom_properties
 class Access(AbstractBase):
 
     __tablename__ = type = "access"
@@ -113,7 +110,6 @@ class Access(AbstractBase):
         db.update_user_rbac |= {user.id for user in old_users | self.get_users()}
 
 
-@db.set_custom_properties
 class Credential(AbstractBase):
 
     __tablename__ = type = "credential"
@@ -138,7 +134,6 @@ class Credential(AbstractBase):
     )
 
 
-@db.set_custom_properties
 class Changelog(AbstractBase):
 
     __tablename__ = "changelog"

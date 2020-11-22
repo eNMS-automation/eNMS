@@ -14,7 +14,6 @@ from eNMS.models import models
 from eNMS.models.base import AbstractBase
 
 
-@db.set_custom_properties
 class Task(AbstractBase):
 
     __tablename__ = type = "task"
@@ -111,7 +110,6 @@ class Task(AbstractBase):
         return result
 
 
-@db.set_custom_properties
 class Event(AbstractBase):
 
     __tablename__ = type = "event"

@@ -20,7 +20,7 @@ from sqlalchemy import (
 )
 from sqlalchemy.dialects.mysql.base import MSMediumBlob
 from sqlalchemy.ext.associationproxy import ASSOCIATION_PROXY
-from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.ext.declarative import declarative_base, DeclarativeMeta
 from sqlalchemy.ext.mutable import MutableDict, MutableList
 from sqlalchemy.orm import scoped_session, sessionmaker
 from sqlalchemy.types import JSON
@@ -42,7 +42,7 @@ class Database:
         engine_parameters = {**self.engine["common"], **self.engine[self.dialect]}
         self.engine = create_engine(self.database_url, **engine_parameters)
         self.session = scoped_session(sessionmaker(autoflush=False, bind=self.engine))
-        self.base = declarative_base()
+        self.base = declarative_base(metaclass=self.create_metabase())
         self.configure_associations()
         self.configure_events()
         self.field_conversion = {
@@ -59,6 +59,15 @@ class Database:
         for retry_type, values in self.transactions["retry"].items():
             for parameter, number in values.items():
                 setattr(self, f"retry_{retry_type}_{parameter}", number)
+
+    def create_metabase(self):
+        class SubDeclarativeMeta(DeclarativeMeta):
+            def __init__(cls, classname, bases, dict_):
+                result = DeclarativeMeta.__init__(cls, classname, bases, dict_)
+                self.set_custom_properties(cls)
+                return result
+
+        return SubDeclarativeMeta
 
     @staticmethod
     def dict_conversion(input):
@@ -210,14 +219,14 @@ class Database:
                     f"{association_name}_association",
                     self.base.metadata,
                     Column(
-                        model1['column'],
+                        model1["column"],
                         Integer,
                         ForeignKey(
                             f"{model1['foreign_key']}.id", **model1.get("kwargs", {})
                         ),
                     ),
                     Column(
-                        model2['column'],
+                        model2["column"],
                         Integer,
                         ForeignKey(
                             f"{model2['foreign_key']}.id", **model2.get("kwargs", {})
@@ -345,7 +354,9 @@ class Database:
             self.session.close()
 
     def set_custom_properties(self, table):
-        model = table.__tablename__
+        model = getattr(table, "__tablename__", None)
+        if not model:
+            return
         for property, values in properties["custom"].get(model, {}).items():
             if values.get("private", False):
                 kwargs = {}

@@ -59,7 +59,6 @@ def set_configuration_properties(Device):
 
 
 @set_configuration_properties
-@db.set_custom_properties
 class Device(Object):
 
     __tablename__ = class_type = "device"
@@ -199,7 +198,6 @@ class Device(Object):
         return f"{self.name} ({self.model})" if self.model else self.name
 
 
-@db.set_custom_properties
 class Link(Object):
 
     __tablename__ = class_type = "link"
@@ -283,7 +281,6 @@ def set_pool_properties(Pool):
 
 
 @set_pool_properties
-@db.set_custom_properties
 class Pool(AbstractBase):
 
     __tablename__ = type = "pool"

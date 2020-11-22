@@ -105,7 +105,16 @@ class MetaForm(FormMeta):
 
 
 class BaseForm(FlaskForm, metaclass=MetaForm):
-    pass
+    @classmethod
+    def configure_relationships(cls, *models):
+        form_type = cls.form_type.kwargs["default"]
+        for related_model, relation in relationships[form_type].items():
+            if related_model not in models:
+                continue
+            field = MultipleInstanceField if relation["list"] else InstanceField
+            field_type = "object-list" if relation["list"] else "object"
+            form_properties[form_type][related_model] = {"type": field_type}
+            setattr(cls, related_model, field())
 
 
 def form_postprocessing(form, form_data):
@@ -135,17 +144,3 @@ def form_postprocessing(form, form_data):
 
 def choices(iterable):
     return [(choice, choice) for choice in iterable]
-
-
-def configure_relationships(*models):
-    def configure_class_relationships(cls):
-        form_type = cls.form_type.kwargs["default"]
-        for related_model, relation in relationships[form_type].items():
-            if related_model not in models:
-                continue
-            field = MultipleInstanceField if relation["list"] else InstanceField
-            field_type = "object-list" if relation["list"] else "object"
-            form_properties[form_type][related_model] = {"type": field_type}
-            setattr(cls, related_model, field())
-
-    return configure_class_relationships

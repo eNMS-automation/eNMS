@@ -1,7 +1,7 @@
 from wtforms.validators import InputRequired
 from wtforms.widgets import TextArea
 
-from eNMS.forms import BaseForm, choices, configure_relationships
+from eNMS.forms import BaseForm, choices
 from eNMS.forms.fields import (
     BooleanField,
     HiddenField,
@@ -131,7 +131,6 @@ def init_variable_forms(app):
         password = PasswordField("Password")
         is_admin = BooleanField(default=False)
 
-    @configure_relationships("users")
     class AccessForm(RbacForm):
         template = "access"
         form_type = HiddenField(default="access")
@@ -159,6 +158,10 @@ def init_variable_forms(app):
             ),
         )
         relations = ["pools", "services"]
+
+        @classmethod
+        def form_init(cls):
+            cls.configure_relationships("users")
 
     class DatabaseMigrationsForm(BaseForm):
         template = "database_migration"

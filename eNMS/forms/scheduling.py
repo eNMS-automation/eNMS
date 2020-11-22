@@ -1,6 +1,6 @@
 from wtforms.validators import InputRequired
 
-from eNMS.forms import BaseForm, configure_relationships
+from eNMS.forms import BaseForm
 from eNMS.forms.fields import (
     BooleanField,
     DictField,
@@ -11,7 +11,6 @@ from eNMS.forms.fields import (
 )
 
 
-@configure_relationships("service")
 class EventForm(BaseForm):
     template = "event"
     form_type = HiddenField(default="event")
@@ -20,13 +19,13 @@ class EventForm(BaseForm):
 
     @classmethod
     def form_init(cls):
+        cls.configure_relationships("service")
         cls.properties = ("log_source", "log_content")
         for property in ("log_source", "log_content"):
             setattr(cls, property, StringField(property))
             setattr(cls, property + "_regex", BooleanField("Regex"))
 
 
-@configure_relationships("devices", "pools", "service")
 class TaskForm(BaseForm):
     action = "eNMS.base.processData"
     form_type = HiddenField(default="task")
@@ -58,6 +57,10 @@ class TaskForm(BaseForm):
     )
     crontab_expression = StringField("Crontab Expression")
     initial_payload = DictField("Payload")
+
+    @classmethod
+    def form_init(cls):
+        cls.configure_relationships("devices", "pools", "service")
 
     def validate(self):
         valid_form = super().validate()

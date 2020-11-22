@@ -562,6 +562,14 @@ tables.configuration = class ConfigurationTable extends Table {
 };
 
 tables.link = class LinkTable extends Table {
+  addRow(properties) {
+    let row = super.addRow(properties);
+    row.pools = `<b><a href="#" onclick="eNMS.table.displayRelationTable(
+      'pool', ${row.instance}, {from: 'links', to: 'pools'})">
+      Pools</a></b>`;
+    return row;
+  }
+
   get controls() {
     return [
       this.columnDisplay(),

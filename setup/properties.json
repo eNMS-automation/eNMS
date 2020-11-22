@@ -231,17 +231,20 @@
       {
         "data": "services",
         "title": "Services",
-        "width": "80px"
+        "width": "80px",
+        "visible": false
       },
       {
         "data": "tasks",
         "title": "Tasks",
-        "width": "80px"
+        "width": "80px",
+        "visible": false
       },
       {
         "data": "pools",
         "title": "Pools",
-        "width": "80px"
+        "width": "80px",
+        "visible": false
       },
       {
         "data": "buttons",
@@ -420,6 +423,12 @@
         "data": "property1",
         "title": "Property 1",
         "search": "text",
+        "visible": false
+      },
+      {
+        "data": "pools",
+        "title": "Pools",
+        "width": "80px",
         "visible": false
       },
       {

@@ -118,11 +118,10 @@ function buildLinks(result, id) {
   return `
     <div class="modal-body">
       <div class="input-group" style="width: 500px">
-        <input id="link-${id}" type="text" class="form-control"
-        value='${link}'>
+        <input id="link-${id}" type="text" class="form-control" value='${link}'>
         <span class="input-group-btn">
           <button class="btn btn-default"
-            onclick="eNMS.base.copyToClipboard('link-${id}', true)"
+            onclick="eNMS.base.copyToClipboard({text: 'link-${id}', isId: true})"
             type="button"
           >
             <span class="glyphicon glyphicon-copy"></span>

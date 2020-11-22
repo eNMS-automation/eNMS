@@ -482,6 +482,8 @@ class BaseController:
             table_result["full_result"] = [
                 obj.table_properties(**kwargs) for obj in query.all()
             ]
+        if kwargs.get("clipboard"):
+            table_result["full_result"] = ",".join(obj.name for obj in query.all())
         return table_result
 
     def allowed_file(self, name, allowed_modules):

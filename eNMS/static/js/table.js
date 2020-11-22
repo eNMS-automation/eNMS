@@ -6,6 +6,7 @@ tableProperties: false
 import {
   call,
   configureNamespace,
+  copyToClipboard,
   createTooltip,
   createTooltips,
   downloadFile,
@@ -127,6 +128,7 @@ export class Table {
             columns: this.columns,
             type: this.type,
             export: self.csvExport,
+            clipboard: self.copyClipboard,
           });
           Object.assign(d, self.filteringData);
           return JSON.stringify(d);
@@ -139,6 +141,10 @@ export class Table {
           if (self.csvExport) {
             self.exportTable(result.full_result);
             self.csvExport = false;
+          }
+          if (self.copyClipboard) {
+            copyToClipboard({text: result.full_result, includeText: false});
+            self.copyClipboard = false;
           }
           return result.data.map((instance) =>
             self.addRow({ properties: instance, tableId: self.id })
@@ -1302,6 +1308,12 @@ export const clearSearch = function (tableId, notification) {
   if (notification) notify("Search parameters cleared.", "success", 5);
 };
 
+function copySelectionToClipboard(tableId) {
+  let table = tableInstances[tableId];
+  table.copyClipboard = true;
+  refreshTable(tableId);
+}
+
 function exportTable(tableId) {
   let table = tableInstances[tableId];
   table.csvExport = true;
@@ -1428,6 +1440,7 @@ configureNamespace("table", [
   bulkEdit,
   bulkRemoval,
   clearSearch,
+  copySelectionToClipboard,
   displayRelationTable,
   exportTable,
   refreshTable,

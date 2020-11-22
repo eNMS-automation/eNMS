@@ -775,7 +775,7 @@ function processData(type, id) {
   };
 })(jQuery);
 
-export function copyToClipboard(text, isId) {
+export function copyToClipboard({text, isId, includeText=true}) {
   if (isId) text = $(`#${text}`).val();
   let dummy = document.createElement("textarea");
   document.body.appendChild(dummy);
@@ -783,7 +783,7 @@ export function copyToClipboard(text, isId) {
   dummy.select();
   document.execCommand("copy");
   document.body.removeChild(dummy);
-  notify(`Copied to Clipboard: ${text}`, "success", 5);
+  notify(`Copied to Clipboard${includeText ? `: ${text}` : "."}`, "success", 5);
 }
 
 (function ($, window) {

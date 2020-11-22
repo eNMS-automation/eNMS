@@ -76,7 +76,7 @@
     "/download_file",
     "/form/access",
     "/form/access_relation_filtering",
-    "/form/add_services",
+    "/form/add_services_to_workflow",
     "/form/administration",
     "/form/alerts_table",
     "/form/ansible_playbook_service",

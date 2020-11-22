@@ -333,8 +333,8 @@ class FileForm(BaseForm):
 
 
 class AddServiceForm(BaseForm):
-    form_type = HiddenField(default="add_services")
-    template = "add_services"
+    form_type = HiddenField(default="add_services_to_workflow")
+    template = "add_services_to_workflow"
     mode = SelectField(
         "Mode",
         choices=(

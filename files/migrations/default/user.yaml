@@ -1,7 +1,7 @@
 - authentication: database
   email: admin@enms.io
   get_requests: [/view_service_results, /table/user, /table/device, /form/unix_command_service,
-    /form/pool_objects, /form/add_services, /form/rest_call_service, /form/swiss_army_knife_service,
+    /form/pool_objects, /form/add_services_to_workflow, /form/rest_call_service, /form/swiss_army_knife_service,
     /table/session, /form/changelog, /table/server, /form/device_filtering, /download_file,
     /form/device, /form/napalm_traceroute_service, /form/netmiko_prompts_service,
     /form/napalm_getters_service, /form/python_snippet_service, /form/slack_notification_service,

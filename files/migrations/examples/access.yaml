@@ -3,7 +3,7 @@
   delete_requests: [/rest/instance]
   description: Full Access to Everything
   get_requests: [/dashboard, /download_file, /form/access, /form/access_relation_filtering,
-    /form/add_services, /form/administration, /form/alerts_table, /form/ansible_playbook_service,
+    /form/add_services_to_workflow, /form/administration, /form/alerts_table, /form/ansible_playbook_service,
     /form/calendar, /form/changelog, /form/compare, /form/configure_bgp_service, /form/netmiko_backup_service,
     /form/database_deletion, /form/database_migration, /form/device, /form/device_connection,
     /form/device_data, /form/device_filtering, /form/device_relation_filtering, /form/event,
@@ -71,7 +71,7 @@
   access_type: "['Read']"
   delete_requests: []
   description: All menu entries and GET requests, all non-editing POST requests.
-  get_requests: [/dashboard, /download_file, /form/add_services, /form/administration,
+  get_requests: [/dashboard, /download_file, /form/add_services_to_workflow, /form/administration,
     /form/alerts_table, /form/ansible_playbook_service, /form/calendar, /form/changelog,
     /form/compare, /form/configure_bgp_service, /form/netmiko_backup_service, /form/database_deletion,
     /form/database_migration, /form/device, /form/device_connection, /form/device_data,
@@ -129,7 +129,7 @@
   delete_requests: [/rest/instance]
   description: Access to all menu pages and HTTP requests
   get_requests: [/dashboard, /download_file, /form/access, /form/access_relation_filtering,
-    /form/add_services, /form/administration, /form/alerts_table, /form/ansible_playbook_service,
+    /form/add_services_to_workflow, /form/administration, /form/alerts_table, /form/ansible_playbook_service,
     /form/calendar, /form/changelog, /form/compare, /form/configure_bgp_service, /form/netmiko_backup_service,
     /form/database_deletion, /form/database_migration, /form/device, /form/device_connection,
     /form/device_data, /form/device_filtering, /form/device_relation_filtering, /form/event,

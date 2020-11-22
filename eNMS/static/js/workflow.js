@@ -344,7 +344,7 @@ function addServicesToWorkflow() {
     form: "add-services-form",
     callback: function (result) {
       workflow.last_modified = result.update_time;
-      $("#add_services").remove();
+      $("#add_services_to_workflow").remove();
       result.services.map(updateWorkflowService);
     },
   });
@@ -567,7 +567,7 @@ function savePositions() {
 
 function addServicePanel() {
   openPanel({
-    name: "add_services",
+    name: "add_services_to_workflow",
     callback: function () {
       $("#service-tree").jstree({
         core: {

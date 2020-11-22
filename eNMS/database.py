@@ -225,27 +225,6 @@ class Database:
                     ),
                 ),
             )
-        for model in ("device", "user"):
-            setattr(
-                self,
-                f"credential_{model}_table",
-                Table(
-                    f"credential_{model}_association",
-                    self.base.metadata,
-                    Column(
-                        "credential_id",
-                        Integer,
-                        ForeignKey("credential.id"),
-                        primary_key=True,
-                    ),
-                    Column(
-                        "pool_id",
-                        Integer,
-                        ForeignKey("pool.id"),
-                        primary_key=True,
-                    ),
-                ),
-            )
 
     def fetch(
         self,

@@ -282,6 +282,26 @@
         "column": "pool_id",
         "foreign_key": "pool"
       }
+    },
+    "credential_device": {
+      "model1": {
+        "column": "credential_id",
+        "foreign_key": "credential"
+      },
+      "model2": {
+        "column": "pool_id",
+        "foreign_key": "pool"
+      }
+    },
+    "credential_user": {
+      "model1": {
+        "column": "credential_id",
+        "foreign_key": "credential"
+      },
+      "model2": {
+        "column": "pool_id",
+        "foreign_key": "pool"
+      }
     }
   },
   "private_properties": [

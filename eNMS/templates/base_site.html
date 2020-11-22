@@ -89,7 +89,7 @@
     <div id="sidebar" class="left_column">
       <center>
         {% set logo_size = "17" if current_user.small_menu else "30" %}
-        <h3 id="eNMS" class="logo" style="font-size:{{ logo_size }}px">
+        <h3 id="eNMS" class="logo unselectable" style="font-size:{{ logo_size }}px">
           eNMS
         </h3>
         <img
@@ -98,7 +98,11 @@
           style="width: 30px; display: none;"
         />
         {% set version_size = "15" if current_user.small_menu else "20" %}
-        <h3 id="eNMS-version" class="version" style="font-size: {{ version_size }}px;">
+        <h3
+          id="eNMS-version"
+          class="version unselectable"
+          style="font-size: {{ version_size }}px;"
+        >
           v{{ version }}
         </h3>
       </center>

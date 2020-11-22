@@ -117,7 +117,7 @@ function initSidebar() {
 configureNamespace("main", [switchTheme]);
 
 $(document).ready(function () {
-  $("#eNMS").on("click", function(event) {
+  $("#eNMS").on("click", function (event) {
     if (!event.ctrlKey || !event.shiftKey || !user.is_admin) return;
   });
   NProgress.start();

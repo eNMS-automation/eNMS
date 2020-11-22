@@ -775,7 +775,7 @@ function processData(type, id) {
   };
 })(jQuery);
 
-export function copyToClipboard({text, isId, includeText=true}) {
+export function copyToClipboard({ text, isId, includeText = true }) {
   if (isId) text = $(`#${text}`).val();
   let dummy = document.createElement("textarea");
   document.body.appendChild(dummy);

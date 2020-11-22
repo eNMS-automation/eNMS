@@ -143,7 +143,7 @@ export class Table {
             self.csvExport = false;
           }
           if (self.copyClipboard) {
-            copyToClipboard({text: result.full_result, includeText: false});
+            copyToClipboard({ text: result.full_result, includeText: false });
             self.copyClipboard = false;
           }
           return result.data.map((instance) =>
@@ -720,7 +720,9 @@ tables.service = class ServiceTable extends Table {
         : row.name;
     for (const model of ["device", "pool"]) {
       row[`${model}s`] = `<b><a href="#" onclick="eNMS.table.displayRelationTable(
-        '${model}', ${row.instance}, {from: 'target_services', to: 'target_${model}s'})">
+        '${model}', ${
+        row.instance
+      }, {from: 'target_services', to: 'target_${model}s'})">
         ${model.charAt(0).toUpperCase() + model.slice(1)}s</a></b>`;
     }
     return row;
@@ -1071,7 +1073,6 @@ tables.task = class TaskTable extends Table {
 };
 
 tables.user = class UserTable extends Table {
-
   addRow(kwargs) {
     let row = super.addRow(kwargs);
     row.pools = `<b><a href="#" onclick="eNMS.table.displayRelationTable(

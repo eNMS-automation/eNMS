@@ -116,30 +116,30 @@ class BaseForm(FlaskForm, metaclass=MetaForm):
             form_properties[form_type][related_model] = {"type": field_type}
             setattr(cls, related_model, field())
 
-
-def form_postprocessing(form, form_data):
-    data = {**form_data.to_dict(), **{"user": current_user}}
-    if request.files:
-        data["file"] = request.files["file"]
-    for property, field in form_properties[form_data.get("form_type")].items():
-        if field["type"] in ("object-list", "multiselect", "multiselect-string"):
-            value = form_data.getlist(property)
-            if field["type"] == "multiselect-string":
-                value = str(value)
-            data[property] = value
-        elif field["type"] == "object":
-            data[property] = form_data.get(property)
-        elif field["type"] == "field-list":
-            data[property] = []
-            for entry in getattr(form, property).entries:
-                properties = entry.data
-                properties.pop("csrf_token")
-                data[property].append(properties)
-        elif field["type"] == "bool":
-            data[property] = property in form_data
-        elif field["type"] in db.field_conversion and property in data:
-            data[property] = db.field_conversion[field["type"]](form_data[property])
-    return data
+    @classmethod
+    def form_postprocessing(cls, form_data):
+        data = {**form_data.to_dict(), **{"user": current_user}}
+        if request.files:
+            data["file"] = request.files["file"]
+        for property, field in form_properties[form_data.get("form_type")].items():
+            if field["type"] in ("object-list", "multiselect", "multiselect-string"):
+                value = form_data.getlist(property)
+                if field["type"] == "multiselect-string":
+                    value = str(value)
+                data[property] = value
+            elif field["type"] == "object":
+                data[property] = form_data.get(property)
+            elif field["type"] == "field-list":
+                data[property] = []
+                for entry in getattr(cls, property).entries:
+                    properties = entry.data
+                    properties.pop("csrf_token")
+                    data[property].append(properties)
+            elif field["type"] == "bool":
+                data[property] = property in form_data
+            elif field["type"] in db.field_conversion and property in data:
+                data[property] = db.field_conversion[field["type"]](form_data[property])
+        return data
 
 
 def choices(iterable):

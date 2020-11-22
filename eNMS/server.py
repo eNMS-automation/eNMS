@@ -34,7 +34,6 @@ from eNMS.database import db
 from eNMS.forms import (
     form_actions,
     form_classes,
-    form_postprocessing,
     form_properties,
     form_templates,
 )
@@ -324,7 +323,7 @@ class Server(Flask):
                 form = form_classes[form_type](request.form)
                 if not form.validate_on_submit():
                     return jsonify({"invalid_form": True, **{"errors": form.errors}})
-                kwargs = form_postprocessing(form, request.form)
+                kwargs = form.form_postprocessing(request.form)
             else:
                 kwargs = request.form
             try:

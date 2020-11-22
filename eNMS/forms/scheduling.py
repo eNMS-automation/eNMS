@@ -11,21 +11,19 @@ from eNMS.forms.fields import (
 )
 
 
-def configure_form(cls):
-    cls.properties = ("log_source", "log_content")
-    for property in ("log_source", "log_content"):
-        setattr(cls, property, StringField(property))
-        setattr(cls, property + "_regex", BooleanField("Regex"))
-    return cls
-
-
 @configure_relationships("service")
-@configure_form
 class EventForm(BaseForm):
     template = "event"
     form_type = HiddenField(default="event")
     id = HiddenField()
     name = StringField("Name", [InputRequired()])
+
+    @classmethod
+    def form_init(cls):
+        cls.properties = ("log_source", "log_content")
+        for property in ("log_source", "log_content"):
+            setattr(cls, property, StringField(property))
+            setattr(cls, property + "_regex", BooleanField("Regex"))
 
 
 @configure_relationships("devices", "pools", "service")

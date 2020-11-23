@@ -58,6 +58,7 @@ class BaseController:
     property_names = {}
 
     def __init__(self):
+        self.pre_init()
         self.settings = settings
         self.rbac = rbac
         self.properties = properties
@@ -78,6 +79,7 @@ class BaseController:
         self.init_redis()
         self.init_scheduler()
         self.init_connection_pools()
+        self.post_init()
 
     def init_encryption(self):
         self.fernet_encryption = environ.get("FERNET_KEY")

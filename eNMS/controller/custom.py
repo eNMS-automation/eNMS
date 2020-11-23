@@ -12,6 +12,12 @@ except ImportError as exc:
 
 
 class CustomController:
+    def pre_init(self):
+        pass
+
+    def post_init(self):
+        pass
+
     def ldap_authentication(self, user, name, password):
         if not hasattr(self, "ldap_server"):
             self.ldap_server = Server(environ.get("LDAP_ADDR"))

@@ -7,8 +7,10 @@
   <div class="modal-body">
     <div class="form-group">
       <div id="content" class="add-id" style="height: 100%;"></div>
-      {% for field in form %} {% set id = "{}-{}".format(form_type, field.name) %}
-      <div id="{{ id }}-div" class="add-id">
+      {% for field in form %} {% set id = "{}-{}".format(form_type, field.name) %} {%
+      set style = "height: {}px".format(field.render_kw["rows"]*20 + 17) if "TextArea" in
+      field.widget|string else "" %}
+      <div id="{{ id }}-div" class="add-id" style="{{ style }}">
         {% set class = "form-control-bool" if field.type == "BooleanField" else
         "form-control" %} {% if field.widget.input_type == 'hidden' %} {{ field(id=id,
         class="add-id") }} {% else %} {% if field.render_kw and "help" in
@@ -25,6 +27,7 @@
           >{{ field.label }}</label
         >
         {% endif %}
+
         <div class="col-md-9 col-sm-9 col-xs-12">
           {{ field(id=id, class="collapsed {} add-id".format(class),
           checked=field.default) }}

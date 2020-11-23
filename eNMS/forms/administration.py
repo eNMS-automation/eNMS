@@ -70,7 +70,7 @@ class CredentialForm(BaseForm):
     subtype = SelectField(
         "Type", choices=(("password", "Username / Password"), ("key", "SSH Key"))
     )
-    description = StringField(widget=TextArea(), render_kw={"rows": 6})
+    description = StringField(widget=TextArea(), render_kw={"rows": 13})
     device_pools = MultipleInstanceField("Devices", model="pool")
     user_pools = MultipleInstanceField("Users", model="pool")
     priority = IntegerField("Priority", default=1)

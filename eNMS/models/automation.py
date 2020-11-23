@@ -730,7 +730,7 @@ class Run(AbstractBase):
             if self.parent_runtime == self.runtime and not self.target_devices:
                 error = (
                     "The service 'Run method' is set to 'Per device' mode, "
-                    "but no targets have been selected (in Step 3 > Targets)."
+                    "but no targets have been selected (in Step 3 > Targets)"
                 )
                 self.log("error", error)
                 return {"success": False, "runtime": self.runtime, "result": error}
@@ -1030,11 +1030,11 @@ class Run(AbstractBase):
         )
         credential_type = self.original.credential_type
         if credential_type != "any":
-            query = query.filter(models["credential"].credential_type == credential_type)
-        credential = max(
-            query.all(),
-            key=attrgetter("priority"),
-        )
+            query = query.filter(models["credential"].role == credential_type)
+        credential = max(query.all(), key=attrgetter("priority"), default=None)
+        if not credential:
+            raise Exception(f"No matching credentials found for DEVICE '{device.name}'")
+        self.log("info", f"Using '{credential.name}' credentials for '{device.name}'")
         if self.credentials == "device":
             credentials["username"] = credential.username
             if credential.subtype == "password":
@@ -1255,7 +1255,7 @@ class Run(AbstractBase):
                 setattr(connection, property, service_value)
         try:
             if not hasattr(connection, "check_config_mode"):
-                self.log("error", "Netmiko 'check_config_mode' method is missing.")
+                self.log("error", "Netmiko 'check_config_mode' method is missing")
                 return connection
             mode = connection.check_config_mode()
             if mode and not self.config_mode:

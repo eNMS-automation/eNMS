@@ -5,6 +5,8 @@ Release Notes
 Version 4.0.0
 -------------
 
+- Add relation mechanism in table for scalability to replace and extend pool objects. Add "copy to clipboard" mechanism
+in table controls.
 - Add 3D network view and 3D logical view. Add default pools mechanism for large networks.
 - Update endpoint in migration files: view/network and view/site no longer exists. Must be replaced with
 visualization/geographical_view and visualization/logical_view
@@ -72,6 +74,9 @@ devices the credential can be used for.
 * User "groups" property is now a field. This field can be used to define user pools. Services have the same "groups" property.
 When creating a new service, the groups field will be automatically set to the user groups. This allows services to be automatically
 added to the appriopriate pool of services, if the pool of services is defined based on that group property.
+* Credentials can be either "Read - Write" (default) or "Read only". In a top-level service, new "credential type" field
+to choose between "Any", "Read-only" and "Read-write" in order to define which credentials should be used when running
+the service.
 - move the database section of settings.json to database.json
 - New color property for edges. Impact on migration files: all workflow edges must have a color, or
 they will be grey by default. Need to parse the workflow edge file and add color with the following mapping:

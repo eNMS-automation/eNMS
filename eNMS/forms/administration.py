@@ -58,6 +58,7 @@ class ServerForm(BaseForm):
 class CredentialForm(BaseForm):
     action = "eNMS.base.processData"
     form_type = HiddenField(default="credential")
+    description = StringField(widget=TextArea(), render_kw={"rows": 13})
     id = HiddenField()
     name = StringField("Name", [InputRequired()])
     role = SelectField(
@@ -70,7 +71,7 @@ class CredentialForm(BaseForm):
     subtype = SelectField(
         "Type", choices=(("password", "Username / Password"), ("key", "SSH Key"))
     )
-    description = StringField(widget=TextArea(), render_kw={"rows": 13})
+    
     device_pools = MultipleInstanceField("Devices", model="pool")
     user_pools = MultipleInstanceField("Users", model="pool")
     priority = IntegerField("Priority", default=1)
@@ -116,11 +117,11 @@ def init_variable_forms(app):
         form_type = HiddenField(default="rbac")
         id = HiddenField()
         name = StringField("Name", [InputRequired()])
+        description = StringField(widget=TextArea(), render_kw={"rows": 6})
         email = StringField("Email")
 
     class UserForm(RbacForm):
         form_type = HiddenField(default="user")
-        description = StringField(widget=TextArea(), render_kw={"rows": 6})
         groups = StringField("Groups")
         theme = SelectField(
             "Theme",
@@ -141,7 +142,6 @@ def init_variable_forms(app):
     class AccessForm(RbacForm):
         template = "access"
         form_type = HiddenField(default="access")
-        description = StringField(widget=TextArea(), render_kw={"rows": 6})
         menu = SelectMultipleField("Menu", choices=choices(list(app.rbac["menu"])))
         pages = SelectMultipleField("Pages", choices=choices(app.rbac["pages"]))
         upper_menu = SelectMultipleField(

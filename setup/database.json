@@ -57,6 +57,7 @@
       "destination",
       "destination_id",
       "pools",
+      "target_services",
       "tasks",
       "users"
     ],

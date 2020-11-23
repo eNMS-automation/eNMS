@@ -61,6 +61,7 @@ class Service(AbstractBase):
     number_of_retries = db.Column(Integer, default=0)
     time_between_retries = db.Column(Integer, default=10)
     max_number_of_retries = db.Column(Integer, default=100)
+    credential_type = db.Column(db.SmallString, default="any")
     positions = db.Column(db.Dict, info={"log_change": False})
     disable_result_creation = db.Column(Boolean, default=False)
     tasks = relationship("Task", back_populates="service", cascade="all,delete")

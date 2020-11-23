@@ -115,7 +115,7 @@ class Credential(AbstractBase):
     __tablename__ = type = "credential"
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.SmallString, unique=True)
-    role = db.Column(db.SmallString, default="any")
+    role = db.Column(db.SmallString, default="read-write")
     subtype = db.Column(db.SmallString, default="password")
     description = db.Column(db.SmallString)
     username = db.Column(db.SmallString)

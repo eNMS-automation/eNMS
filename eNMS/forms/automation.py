@@ -56,6 +56,13 @@ class ServiceForm(BaseForm):
     number_of_retries = IntegerField("Number of retries", default=0)
     time_between_retries = IntegerField("Time between retries (in seconds)", default=10)
     max_number_of_retries = IntegerField("Maximum number of retries", default=100)
+    credential_type = SelectField(
+        choices=(
+            ("any", "Any"),
+            ("read-write", "Read Write"),
+            ("read-only", "Read Only"),  
+        )
+    )
     maximum_runs = IntegerField("Maximum number of runs", default=1)
     skip_query = StringField(
         "Skip Query (Python)", python=True, widget=TextArea(), render_kw={"rows": 2}

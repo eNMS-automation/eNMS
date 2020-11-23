@@ -171,6 +171,11 @@
                   {{ form.max_number_of_retries(id=form_type + '-max_number_of_retries',
                   class="form-control add-id") }}
                 </div>
+                {{ form.credential_type.label() }}
+                <div class="form-group">
+                  {{ form.credential_type(id=form_type + '-credential_type',
+                  class="form-control add-id") }}
+                </div>
                 {{ form.log_level.label() }}
                 <div class="form-group">
                   {{ form.log_level(id=form_type + '-log_level', class="form-control

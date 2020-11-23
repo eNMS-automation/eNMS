@@ -57,6 +57,7 @@ class ServiceForm(BaseForm):
     time_between_retries = IntegerField("Time between retries (in seconds)", default=10)
     max_number_of_retries = IntegerField("Maximum number of retries", default=100)
     credential_type = SelectField(
+        "Type of Credentials",
         choices=(
             ("any", "Any"),
             ("read-write", "Read Write"),

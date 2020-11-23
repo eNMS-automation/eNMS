@@ -60,6 +60,14 @@ class CredentialForm(BaseForm):
     form_type = HiddenField(default="credential")
     id = HiddenField()
     name = StringField("Name", [InputRequired()])
+    role = SelectField(
+        "Role",
+        choices=(
+            ("any", "Any"),
+            ("read-only", "Read Only"),
+            ("read-write", "Read Write"),
+        ),
+    )
     subtype = SelectField(
         "Type", choices=(("password", "Username / Password"), ("key", "SSH Key"))
     )

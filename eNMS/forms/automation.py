@@ -61,8 +61,8 @@ class ServiceForm(BaseForm):
         choices=(
             ("any", "Any"),
             ("read-write", "Read Write"),
-            ("read-only", "Read Only"),  
-        )
+            ("read-only", "Read Only"),
+        ),
     )
     maximum_runs = IntegerField("Maximum number of runs", default=1)
     skip_query = StringField(

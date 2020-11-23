@@ -1019,7 +1019,7 @@ class Run(AbstractBase):
     def get_credentials(self, device):
         credentials = {}
         pool_alias = aliased(models["pool"])
-        credential = max(
+        query = (
             db.session.query(models["credential"])
             .join(models["pool"], models["credential"].user_pools)
             .join(models["user"], models["pool"].users)
@@ -1027,7 +1027,12 @@ class Run(AbstractBase):
             .join(models["device"], pool_alias.devices)
             .filter(models["user"].name == self.creator)
             .filter(models["device"].name == device.name)
-            .all(),
+        )
+        credential_type = self.original.credential_type
+        if credential_type != "any":
+            query = query.filter(models["credential"].credential_type == credential_type)
+        credential = max(
+            query.all(),
             key=attrgetter("priority"),
         )
         if self.credentials == "device":

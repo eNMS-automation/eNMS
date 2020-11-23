@@ -64,7 +64,7 @@ class CredentialForm(BaseForm):
         "Role",
         choices=(
             ("read-write", "Read Write"),
-            ("read-only", "Read Only"),  
+            ("read-only", "Read Only"),
         ),
     )
     subtype = SelectField(

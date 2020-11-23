@@ -14971,17 +14971,17 @@
     16752478-6639-43a8-a2c5-e5dedd826184:
       alignment: left
       content: "This workflow must be tested with all different types of credential:\
-        \ \r\n- Credential type \"any\" (default) should work as described above:\r\
-        \n3 pass, 1 fail (Austin-3).\r\n- Credential type \"read-only\": Washington\
-        \ should fail with the exception\r\n\"No matching credentials found\", because\
-        \ its associated credential\r\nis set to read-write.\r\nHowever, Austin3 should\
-        \ pass along with Austin and Austin-2\r\nbecause the Austin-3 \"wrong credentials\"\
-        \ is also set to read-write,\r\nso Austin-3 will use the right credential\r\
-        \neven though they have lower priority.\r\n- Credential type \"read-write\"\
-        : Austin and Austin-2 should use the\r\npassword-based credential instead\
-        \ of the key-based credential\r\nbecause it is set to read-only.\r\nAustin-3\
-        \ should use the wrong credentials and fail."
-      positions: [486, -109]
+        \ \r\n- Credential type \"any\" (default) should work as described on the\
+        \ left:\r\n3 pass, 1 fail (Austin-3).\r\n- Credential type \"read-only\":\
+        \ Washington should fail with the exception\r\n\"No matching credentials found\"\
+        , because its associated credential\r\nis set to read-write.\r\nHowever, Austin3\
+        \ should pass along with Austin and Austin-2\r\nbecause the Austin-3 \"wrong\
+        \ credentials\" is also set to read-write,\r\nso Austin-3 will use the right\
+        \ credential (SSH key) even though\r\nit has lower priority.\r\n- Credential\
+        \ type \"read-write\": Austin and Austin-2 should use the\r\npassword-based\
+        \ credential instead of the key-based credential\r\nbecause it is set to read-only.\r\
+        \nAustin-3 should use the wrong credentials and fail."
+      positions: ['486', '-109']
     86737c37-94b1-4c51-8f57-9cfcd32caf5a:
       alignment: left
       content: "This workflow runs on Washington, Austin, Austin-2 and Austin-3.\r\
@@ -14993,9 +14993,10 @@
         \ should be used and\r\nthe connection should fail.\r\n\r\nAll devices but\
         \ Austin-3 should pass. For Austin and Austin-2,\r\nthe authentication in\
         \ the server logs should say \"authentication (publickey)\"\r\nand for Washington,\
-        \ \"authentication (keyboard-interactive)\"."
-      positions: [-71, -110]
-  last_modified: '2020-11-23 08:39:36.902445'
+        \ \"authentication (keyboard-interactive)\".\r\nThe logs also indicate which\
+        \ credentials were used."
+      positions: ['-71', '-110']
+  last_modified: '2020-11-23 08:50:09.740360'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100

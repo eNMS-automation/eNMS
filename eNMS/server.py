@@ -371,28 +371,6 @@ class Server(Flask):
 
         api = Api(self, decorators=[self.csrf.exempt])
 
-        class CreatePool(Resource):
-            decorators = [self.auth.login_required, self.monitor_rest_request]
-
-            def post(self):
-                data = request.get_json(force=True)
-                db.factory(
-                    "pool",
-                    **{
-                        "name": data["name"],
-                        "devices": [
-                            db.fetch("device", name=name).id
-                            for name in data.get("devices", "")
-                        ],
-                        "links": [
-                            db.fetch("link", name=name).id
-                            for name in data.get("links", "")
-                        ],
-                        "manually_defined": True,
-                    },
-                )
-                return data
-
         class Heartbeat(Resource):
             def get(self):
                 return {
@@ -596,7 +574,7 @@ class Server(Flask):
                 ),
                 f"/rest/{endpoint}",
             )
-        api.add_resource(CreatePool, "/rest/create_pool")
+
         api.add_resource(Heartbeat, "/rest/is_alive")
         api.add_resource(RunService, "/rest/run_service")
         api.add_resource(RunTask, "/rest/run_task")

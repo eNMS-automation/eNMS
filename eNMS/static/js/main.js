@@ -11,6 +11,7 @@ import {
   configureNamespace,
   createTooltips,
   detectUserInactivity,
+  openPanel,
 } from "./base.js";
 import { initDashboard } from "./inventory.js";
 import { tables } from "./table.js";
@@ -119,6 +120,14 @@ configureNamespace("main", [switchTheme]);
 $(document).ready(function () {
   $("#eNMS").on("click", function (event) {
     if (!event.ctrlKey || !event.shiftKey || !user.is_admin) return;
+    openPanel({
+      name: "debug",
+      title: "Debug Panel",
+      size: "700px 600px",
+      callback: function () {
+        console.log("debug")
+      },
+    });
   });
   NProgress.start();
   const alerts = localStorage.getItem("alerts");

@@ -39,6 +39,7 @@ class DebugForm(BaseForm):
         widget=TextArea(),
         render_kw={"rows": 15},
     )
+    output = StringField("Output", widget=TextArea(), render_kw={"rows": 16})
 
 
 class UploadFilesForm(BaseForm):

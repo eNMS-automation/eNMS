@@ -47,6 +47,7 @@ function runDebugCode() {
     url: "/run_debug_code",
     form: "debug-form",
     callback: function (result) {
+      $("#debug-output").val(result);
       notify("Code executed successfully.", "success", 5, true);
     },
   });

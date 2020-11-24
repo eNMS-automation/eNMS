@@ -229,7 +229,10 @@ class AdministrationController(BaseController):
     def run_debug_code(self, **kwargs):
         result = StringIO()
         with redirect_stdout(result):
-            exec(kwargs["code"])
+            try:
+                exec(kwargs["code"])
+            except Exception:
+                return format_exc()
         return result.getvalue()
 
     def save_file(self, filepath, **kwargs):

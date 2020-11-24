@@ -48,10 +48,16 @@ export function openDebugPanel() {
     title: "Debug Panel",
     size: "1200px 600px",
     callback: function () {
-      $("#debug-snippets").on("change", function() {
-        const value = debugSnippets[this.value].content.join("\n");
-        editors[undefined]["code"].setValue(value);
+      call({
+        url: "/load_debug_snippets",
+        callback: function (snippets) {
+          $("#debug-snippets").on("change", function() {
+            const value = snippets[this.value].content.join("\n");
+            editors[undefined]["code"].setValue(value);
+          });
+        },
       });
+
     }
   });
 }

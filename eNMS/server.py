@@ -39,7 +39,7 @@ from eNMS.forms import (
 )
 from eNMS.forms.administration import init_variable_forms, LoginForm
 from eNMS.models import models, property_types, relationships
-from eNMS.setup import debug, properties, rbac, themes, update_file, visualization
+from eNMS.setup import properties, rbac, themes, update_file, visualization
 
 
 class Server(Flask):
@@ -142,7 +142,6 @@ class Server(Flask):
         def inject_properties():
             return {
                 "configuration_properties": app.configuration_properties,
-                "debug": debug,
                 "form_properties": form_properties,
                 "menu": rbac["menu"],
                 "names": app.property_names,

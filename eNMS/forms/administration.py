@@ -32,9 +32,7 @@ class AdminForm(BaseForm):
 class DebugForm(BaseForm):
     template = "debug"
     form_type = HiddenField(default="debug")
-    snippets = SelectField(
-        choices=list((name, snippet["title"]) for name, snippet in debug.items()),
-    )
+    snippets = SelectField(choices=())
     code = StringField(
         "Python Code",
         type="code",

@@ -301,12 +301,12 @@ class Pool(AbstractBase):
             @event.listens_for(getattr(cls, f"{model}s"), "append")
             def append(target, value, _):
                 number = getattr(target, f"{value.class_type}_number") or 0
-                setattr(target, f"{value.type}_number", number + 1)
+                setattr(target, f"{value.class_type}_number", number + 1)
 
             @event.listens_for(getattr(cls, f"{model}s"), "remove")
             def remove(target, value, _):
                 number = getattr(target, f"{value.class_type}_number")
-                setattr(target, f"{value.type}_number", number - 1)
+                setattr(target, f"{value.class_type}_number", number - 1)
 
     @classmethod
     def database_init(cls):

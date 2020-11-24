@@ -22,7 +22,7 @@ class Object(AbstractBase):
     default_access = db.Column(db.SmallString)
     last_modified = db.Column(db.TinyString, info={"log_change": False})
     subtype = db.Column(db.SmallString)
-    description = db.Column(db.SmallString)
+    description = db.Column(db.LargeString)
     model = db.Column(db.SmallString)
     location = db.Column(db.SmallString)
     vendor = db.Column(db.SmallString)
@@ -267,7 +267,7 @@ class Pool(AbstractBase):
     access_groups = db.Column(db.LargeString)
     default_access = db.Column(db.SmallString)
     last_modified = db.Column(db.TinyString, info={"log_change": False})
-    description = db.Column(db.SmallString)
+    description = db.Column(db.LargeString)
     operator = db.Column(db.TinyString, default="all")
     target_services = relationship(
         "Service", secondary=db.service_target_pool_table, back_populates="target_pools"

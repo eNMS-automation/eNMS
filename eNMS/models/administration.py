@@ -17,7 +17,7 @@ class Server(AbstractBase):
     __tablename__ = type = "server"
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.SmallString, unique=True)
-    description = db.Column(db.SmallString)
+    description = db.Column(db.LargeString)
     ip_address = db.Column(db.TinyString)
     weight = db.Column(Integer, default=1)
     status = db.Column(db.TinyString, default="down")
@@ -28,7 +28,7 @@ class User(AbstractBase, UserMixin):
     __tablename__ = type = class_type = "user"
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.SmallString, unique=True)
-    description = db.Column(db.SmallString)
+    description = db.Column(db.LargeString)
     groups = db.Column(db.LargeString)
     is_admin = db.Column(Boolean, default=False)
     email = db.Column(db.SmallString)
@@ -86,7 +86,7 @@ class Access(AbstractBase):
     __tablename__ = type = "access"
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.SmallString, unique=True)
-    description = db.Column(db.SmallString)
+    description = db.Column(db.LargeString)
     menu = db.Column(db.List)
     pages = db.Column(db.List)
     upper_menu = db.Column(db.List)
@@ -117,7 +117,7 @@ class Credential(AbstractBase):
     name = db.Column(db.SmallString, unique=True)
     role = db.Column(db.SmallString, default="read-write")
     subtype = db.Column(db.SmallString, default="password")
-    description = db.Column(db.SmallString)
+    description = db.Column(db.LargeString)
     username = db.Column(db.SmallString)
     password = db.Column(db.SmallString)
     private_key = db.Column(db.LargeString)

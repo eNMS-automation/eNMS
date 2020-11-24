@@ -20,7 +20,7 @@ class Task(AbstractBase):
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.SmallString, unique=True)
     default_access = db.Column(db.SmallString)
-    description = db.Column(db.SmallString)
+    description = db.Column(db.LargeString)
     creator = db.Column(db.SmallString)
     last_scheduled_by = db.Column(db.SmallString)
     scheduling_mode = db.Column(db.TinyString, default="standard")

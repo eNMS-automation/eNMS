@@ -14,7 +14,7 @@ from eNMS.forms.fields import (
     SelectMultipleField,
     SelectMultipleStringField,
 )
-from eNMS.setup import debug, settings, themes
+from eNMS.setup import settings, themes
 
 
 class SettingsForm(BaseForm):

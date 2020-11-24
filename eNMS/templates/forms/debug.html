@@ -6,6 +6,8 @@
 >
   {{ form.hidden_tag() }}
   <div class="modal-body">
+    <center>{{ form.snippets(id="debug-snippets") }}</center>
+    <br /><br />
     <div class="col-md-6 col-sm-6 col-xs-12">
       <center>{{ form.code.label() }}</center>
       {{ form.code() }}

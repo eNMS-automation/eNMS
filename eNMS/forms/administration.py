@@ -32,6 +32,13 @@ class AdminForm(BaseForm):
 class DebugForm(BaseForm):
     template = "debug"
     form_type = HiddenField(default="debug")
+    snippets = SelectField(
+        choices=(
+            ("custom", "Custom snippet (empty)"),
+            ("getsizeof", "Get size of"),
+            ("guppy", "Guppy"),
+        ),
+    )
     code = StringField(
         "Python Code",
         type="code",

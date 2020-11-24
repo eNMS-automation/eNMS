@@ -1,18 +1,20 @@
-from passlib.hash import argon2
 from collections import defaultdict
+from contextlib import redirect_stdout
+from datetime import datetime
+from io import StringIO
 from ipaddress import IPv4Network
 from json import dump
 from logging import info
 from os import listdir, makedirs, remove
 from os.path import exists, getmtime
+from passlib.hash import argon2
 from pathlib import Path
-from shutil import rmtree
 from requests import get as http_get
 from ruamel import yaml
+from shutil import rmtree
 from tarfile import open as open_tar
 from time import ctime
 from traceback import format_exc
-from datetime import datetime
 
 from eNMS.controller.base import BaseController
 from eNMS.database import db
@@ -225,7 +227,10 @@ class AdministrationController(BaseController):
             db.session.commit()
 
     def run_debug_code(self, **kwargs):
-        return "ok"
+        result = StringIO()
+        with redirect_stdout(result):
+            exec(kwargs["code"])
+        return result.getvalue()
 
     def save_file(self, filepath, **kwargs):
         if kwargs.get("file_content"):

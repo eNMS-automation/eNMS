@@ -42,6 +42,19 @@ function showSettings() {
   });
 }
 
+export function openDebugPanel() {
+  openPanel({
+    name: "debug",
+    title: "Debug Panel",
+    size: "1200px 600px",
+    callback: function () {
+      $("#debug-snippets").on("change", function() {
+        editors[undefined]["code"].setValue(this.value);
+      });
+    }
+  });
+}
+
 function runDebugCode() {
   call({
     url: "/run_debug_code",

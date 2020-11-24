@@ -27,11 +27,18 @@ class SettingsForm(BaseForm):
 class AdminForm(BaseForm):
     template = "administration"
     form_type = HiddenField(default="administration")
-    description = StringField(widget=TextArea(), render_kw={"rows": 15})
 
 
 class DebugForm(BaseForm):
+    template = "debug"
     form_type = HiddenField(default="debug")
+    code = StringField(
+        "Python Code",
+        type="code",
+        python=True,
+        widget=TextArea(),
+        render_kw={"rows": 15},
+    )
 
 
 class UploadFilesForm(BaseForm):

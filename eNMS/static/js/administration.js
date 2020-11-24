@@ -42,6 +42,10 @@ function showSettings() {
   });
 }
 
+function runDebugCode() {
+  console.log("test")
+}
+
 function getClusterStatus() {
   call({
     url: "/get_cluster_status",

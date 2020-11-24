@@ -1,0 +1,25 @@
+<form
+  id="debug-form"
+  class="form-horizontal form-label-left"
+  method="post"
+  autocomplete="off"
+>
+  {{ form.hidden_tag() }}
+  <div class="modal-body">
+    <div>
+      <center>{{ form.code.label() }}</center>
+      {{ form.code() }}
+    </div>
+    <div class="form-group">
+      <div class="col-md-e col-sm-9 col-xs-12 col-md-offset-5">
+        <button
+          type="button"
+          class="btn btn-primary"
+          onclick="eNMS.administration.migrationsImport()"
+        >
+          Run Code
+        </button>
+      </div>
+    </div>
+  </div>
+</form>

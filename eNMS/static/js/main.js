@@ -123,10 +123,7 @@ $(document).ready(function () {
     openPanel({
       name: "debug",
       title: "Debug Panel",
-      size: "700px 600px",
-      callback: function () {
-        console.log("debug")
-      },
+      size: "1200px 600px",
     });
   });
   NProgress.start();

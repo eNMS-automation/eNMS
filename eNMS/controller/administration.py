@@ -18,8 +18,7 @@ from traceback import format_exc
 
 from eNMS.controller.base import BaseController
 from eNMS.database import db
-from eNMS.models import models
-from eNMS.models import relationships
+from eNMS.models import models, relationships
 
 
 class AdministrationController(BaseController):
@@ -230,7 +229,8 @@ class AdministrationController(BaseController):
         result = StringIO()
         with redirect_stdout(result):
             try:
-                exec(kwargs["code"])
+                environment = {"app": self, "db": db, "models": models}
+                exec(kwargs["code"], environment)
             except Exception:
                 return format_exc()
         return result.getvalue()

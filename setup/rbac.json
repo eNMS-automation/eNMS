@@ -240,6 +240,7 @@
     "/rest/run_task",
     "/rest/topology",
     "/result_log_deletion",
+    "/run_debug_code",
     "/run_service",
     "/run_service_on_targets",
     "/save_file",

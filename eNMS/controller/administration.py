@@ -224,6 +224,9 @@ class AdministrationController(BaseController):
             session_query.delete(synchronize_session=False)
             db.session.commit()
 
+    def run_debug_code(self, **kwargs):
+        return "ok"
+
     def save_file(self, filepath, **kwargs):
         if kwargs.get("file_content"):
             with open(Path(filepath.replace(">", "/")), "w") as file:

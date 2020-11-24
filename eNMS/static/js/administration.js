@@ -43,7 +43,13 @@ function showSettings() {
 }
 
 function runDebugCode() {
-  console.log("test")
+  call({
+    url: "/run_debug_code",
+    form: "debug-form",
+    callback: function (result) {
+      notify("Code executed successfully.", "success", 5, true);
+    },
+  });
 }
 
 function getClusterStatus() {
@@ -374,6 +380,7 @@ configureNamespace("administration", [
   migrationsExport,
   migrationsImport,
   resultLogDeletion,
+  runDebugCode,
   saveSettings,
   saveFile,
   scanCluster,

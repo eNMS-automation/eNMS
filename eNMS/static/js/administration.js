@@ -51,14 +51,18 @@ export function openDebugPanel() {
       call({
         url: "/load_debug_snippets",
         callback: function (snippets) {
-          $("#debug-snippets").on("change", function() {
-            const value = snippets[this.value].content.join("\n");
-            editors[undefined]["code"].setValue(value);
-          });
+          for (const name of Object.keys(snippets)) {
+            $("#debug-snippets").append(`<option value="${name}">${name}</option>`);
+          }
+          $("#debug-snippets")
+            .on("change", function () {
+              const value = snippets[this.value];
+              editors[undefined]["code"].setValue(value);
+            })
+            .selectpicker("refresh");
         },
       });
-
-    }
+    },
   });
 }
 

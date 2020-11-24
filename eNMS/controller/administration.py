@@ -121,7 +121,7 @@ class AdministrationController(BaseController):
         snippets = {}
         for path in Path(self.path / "files" / "snippets").glob("**/*.py"):
             with open(path, "r") as file:
-                snippets[path.stem] = file.read()
+                snippets[path.name] = file.read()
         return snippets
 
     def migration_export(self, **kwargs):

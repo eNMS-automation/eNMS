@@ -199,17 +199,20 @@ class AdministrationController(BaseController):
         rmtree(path / service_name, ignore_errors=True)
         return status
 
-    def objectify(self, model, obj):
+    def objectify(self, model, instance):
         for property, relation in relationships[model].items():
-            if property not in obj:
+            if property not in instance:
                 continue
             elif relation["list"]:
-                obj[property] = [
-                    db.fetch(relation["model"], name=name).id for name in obj[property]
+                instance[property] = [
+                    db.fetch(relation["model"], name=name).id
+                    for name in instance[property]
                 ]
             else:
-                obj[property] = db.fetch(relation["model"], name=obj[property]).id
-        return obj
+                instance[property] = db.fetch(
+                    relation["model"], name=instance[property]
+                ).id
+        return instance
 
     def result_log_deletion(self, **kwargs):
         date_time_object = datetime.strptime(kwargs["date_time"], "%d/%m/%Y %H:%M:%S")

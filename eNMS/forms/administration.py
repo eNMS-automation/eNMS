@@ -14,7 +14,7 @@ from eNMS.forms.fields import (
     SelectMultipleField,
     SelectMultipleStringField,
 )
-from eNMS.setup import settings, themes
+from eNMS.setup import debug, settings, themes
 
 
 class SettingsForm(BaseForm):
@@ -33,11 +33,7 @@ class DebugForm(BaseForm):
     template = "debug"
     form_type = HiddenField(default="debug")
     snippets = SelectField(
-        choices=(
-            ("custom", "Custom snippet (empty)"),
-            ("getsizeof", "Get size of"),
-            ("guppy", "Guppy"),
-        ),
+        choices=list((name, snippet["title"]) for name, snippet in debug.items()),
     )
     code = StringField(
         "Python Code",

@@ -1,0 +1,10 @@
+{
+  "empty": {
+    "title": "Custom snippet (empty)",
+    "content": ""
+  },
+  "getsizeof": {
+    "title": "Get size of",
+    "content": "ok"
+  }
+}

@@ -49,7 +49,7 @@ export function openDebugPanel() {
     size: "1200px 600px",
     callback: function () {
       $("#debug-snippets").on("change", function() {
-        editors[undefined]["code"].setValue(this.value);
+        editors[undefined]["code"].setValue(debugSnippets[this.value]);
       });
     }
   });

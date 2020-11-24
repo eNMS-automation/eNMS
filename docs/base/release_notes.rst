@@ -82,6 +82,7 @@ the service.
 they will be grey by default. Need to parse the workflow edge file and add color with the following mapping:
 {"success": "green", "failure": "red", "prerequisite": "blue"}
 - Export service now exports to user browser besides exporting the tgz to the VM.
+- Remove Create Pool endpoint in the rest API
 
 Test:
 - test that notification mechanism still works

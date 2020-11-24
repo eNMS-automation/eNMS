@@ -279,6 +279,8 @@ export class Table {
       ? `eNMS.base.showAddInstancePanel(
           '${this.id}', '${this.type}', ${this.relationString}
         )`
+      : this.type == "service"
+      ? `eNMS.automation.openServicePanel()`
       : `eNMS.base.showInstancePanel('${this.type}')`;
     return `
       <button
@@ -776,15 +778,8 @@ tables.service = class ServiceTable extends Table {
       >
         <span class="glyphicon glyphicon-chevron-right"></span>
       </a>`,
+      this.createNewButton(),
       `
-      <button
-        class="btn btn-primary"
-        onclick="eNMS.automation.openServicePanel()"
-        data-tooltip="New"
-        type="button"
-      >
-        <span class="glyphicon glyphicon-plus"></span>
-      </button>
       <button
         style="background:transparent; border:none; 
         color:transparent; width: 200px;"

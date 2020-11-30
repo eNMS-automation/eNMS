@@ -1,4 +1,19 @@
+# This script monitors the memory usage of a few controller variables used
+# for storing data, like the network connections cache (stores netmiko,
+# napalm and scrapli connections) and the logs cache (stores service logs).
+# Memory usage of these variables should not grow over time are their content
+# is supposed to be deleted when no longer useful.
+
 from sys import getsizeof
 
-for variable in ("connections_cache", "service_db", "run_db", "run_logs"):
-	print(f"{variable} memory usage: {getsizeof(getattr(app, variable))}")
+VARIABLES = {
+    "connections_cache": "Network Connections Cache",
+    "service_db": "Service Run cache",
+    "run_db": "Run State Cache",
+    "run_logs": "Run Logs Cache",
+}
+
+print("MEMORY USAGE :", end="\n\n")
+for variable, function in VARIABLES.items():
+    size = getsizeof(getattr(app, variable))
+    print(f"{function} ({variable}): {size} bytes")

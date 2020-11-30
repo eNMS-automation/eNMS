@@ -1,11 +1,21 @@
 # Uses the "pympler" module for profiling memory.
 
+from operator import itemgetter
 from pympler import muppy, summary
 
-MODULES = ["netmiko", "napalm"]
+MODULES = ["netmiko", "napalm", "sqlalchemy"]
 
-profile = summary.summarize(muppy.get_objects())
+profile = sorted(
+    (
+        object_
+        for object_ in summary.summarize(muppy.get_objects())
+        if any(module in object_[0] for module in MODULES)
+    ),
+    key=itemgetter(2),
+    reverse=True
+)
 
 for object_ in profile:
-    if any(module in object_[0] for module in MODULES):
-        print("{}: {} objects | size: {} bytes".format(*object_))
+    print(f"Name: {object_[0]}")
+    print(f"Number of objects: {object_[1]}")
+    print(f"Total size: {object_[2]}")

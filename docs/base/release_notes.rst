@@ -5,8 +5,16 @@ Release Notes
 Version 4.0.0
 -------------
 
-- Add relation mechanism in table for scalability to replace and extend pool objects. Add "copy to clipboard" mechanism
-in table controls.
+- Add bulk deletion and bulk edit mechanism for tables
+* Bulk edit (edit all instances filtered in tables)
+* Bulk deletion (delete all instances filtered in tables)
+- Add "copy to clipboard" mechanism to get comma-separated list of names of all filtered instances.
+- Add relation mechanism in table for scalability
+* For each table, add link to relation table
+* Replaces the old "Pool Objects" window in the pool table.
+* New mechanism to add instances to a "relation table", both by individual selection and in bulk by copy pasting a list of names.
+* New mechanism to remove selection from a relation table.
+
 - Add 3D network view and 3D logical view. Add default pools mechanism for large networks.
 - Update endpoint in migration files: view/network and view/site no longer exists. Must be replaced with
 visualization/geographical_view and visualization/logical_view
@@ -53,7 +61,6 @@ edit / new mechanism: highlight to teleport to any service. Makes it easier to w
 - Replace gotty with pure python implementation. Save session output with webssh. Need to set ENMS_USER and ENMS_PASSWORD
 like with the scheduler to save the session via REST API. For this to work, admin credentials must be defined via
 two new environment variables: ENMS_USER and ENMS_PASSWORD (same as scheduler)
-- Add bulk deletion and bulk edit mechanism for tables
 - Add "run service on targets mechanism" in device table and network visualization pages
 - Fix bug connection not cached when using iteration values with a standalone service
 - Fix bug when exporting table to .csv - column shift if comma in property value
@@ -84,6 +91,8 @@ the service.
 - Add python snippet mechanism to troubleshooting (ctrl + alt + click on upper left logo)
 
 Test:
+- test new bulk edit, bulk delete, copy clipboard mechanism
+- test new relation table mechanism with add to relation (individual and bulk selection) and remove from relation.
 - test that notification mechanism still works
 - test that the new web SSH mechanism works
 - test that the workflow mechanism in both DxD and SxS still works

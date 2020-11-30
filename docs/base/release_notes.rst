@@ -5,6 +5,9 @@ Release Notes
 Version 4.0.0
 -------------
 
+- Add "run service on targets mechanism"
+* run service on a single device and in bulk from service page
+* run service on a single device and in bulk from visualization pages
 - Add bulk deletion and bulk edit mechanism for tables
 * Bulk edit (edit all instances filtered in tables)
 * Bulk deletion (delete all instances filtered in tables)
@@ -14,11 +17,14 @@ Version 4.0.0
 * Replaces the old "Pool Objects" window in the pool table.
 * New mechanism to add instances to a "relation table", both by individual selection and in bulk by copy pasting a list of names.
 * New mechanism to remove selection from a relation table.
+- Add 3D network view and 3D logical view.
+* Add right click menu for property, configuration, run service
+* Add default pools mechanism for large networks.
+* Add run service in bulk on all currently displayed devices mechanism
+- Move all visualization settings from settings.json > "visualization" to dedicated visualization.json
 
-- Add 3D network view and 3D logical view. Add default pools mechanism for large networks.
-- Update endpoint in migration files: view/network and view/site no longer exists. Must be replaced with
-visualization/geographical_view and visualization/logical_view
-- Update settings.json with new geographical / logical view settings (key "view" -> "visualization")
+TEST 2D
+
 - Make the error page colors confiurable per theme (move css colors to theme specific CSS file)
 - Update the dark theme to display input / list in grey instead of white (too much contrast)
 - Use the log level of the parameterized run instead of always using the service log level
@@ -61,7 +67,6 @@ edit / new mechanism: highlight to teleport to any service. Makes it easier to w
 - Replace gotty with pure python implementation. Save session output with webssh. Need to set ENMS_USER and ENMS_PASSWORD
 like with the scheduler to save the session via REST API. For this to work, admin credentials must be defined via
 two new environment variables: ENMS_USER and ENMS_PASSWORD (same as scheduler)
-- Add "run service on targets mechanism" in device table and network visualization pages
 - Fix bug connection not cached when using iteration values with a standalone service
 - Fix bug when exporting table to .csv - column shift if comma in property value
 - When scheduling a task, the creator of the service run is not properly set to the user who scheduled
@@ -103,6 +108,10 @@ is cached and reused for iteration values.
 - user rbac (access to UI + access to models) is properly updated when one of its associated pool OR access
 is modified.
 - when a service is renamed, the custom password still works.
+
+Migration:
+- Update endpoint: view/network and view/site no longer exists, to be replaced with 
+visualization/geographical_view and visualization/logical_view
 
 
 Version 3.22.4

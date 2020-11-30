@@ -46,7 +46,7 @@ export function openDebugPanel() {
   openPanel({
     name: "debug",
     title: "Debug Panel",
-    size: "1200px 600px",
+    size: "1200px 500px",
     callback: function () {
       call({
         url: "/load_debug_snippets",

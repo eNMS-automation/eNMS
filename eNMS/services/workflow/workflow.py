@@ -229,9 +229,11 @@ class WorkflowEdge(AbstractBase):
     __table_args__ = (
         UniqueConstraint(subtype, source_id, destination_id, workflow_id),
     )
+    color_mapping = {"success": "green", "failure": "red", "prerequisite": "blue"}
 
     def __init__(self, **kwargs):
         self.label = kwargs["subtype"]
+        self.color = self.color_mapping[kwargs["subtype"]]
         super().__init__(**kwargs)
 
     @property

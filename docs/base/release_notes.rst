@@ -78,9 +78,7 @@ added to the appriopriate pool of services, if the pool of services is defined b
 to choose between "Any", "Read-only" and "Read-write" in order to define which credentials should be used when running
 the service.
 - move the database section of settings.json to database.json
-- New color property for edges. Impact on migration files: all workflow edges must have a color, or
-they will be grey by default. Need to parse the workflow edge file and add color with the following mapping:
-{"success": "green", "failure": "red", "prerequisite": "blue"}
+- New color property for workflow edges.
 - Export service now exports to user browser besides exporting the tgz to the VM.
 - Remove Create Pool endpoint in the rest API
 - Add python snippet mechanism to troubleshooting (ctrl + alt + click on upper left logo)

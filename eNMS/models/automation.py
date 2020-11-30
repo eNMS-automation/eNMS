@@ -478,7 +478,7 @@ class Run(AbstractBase):
     @property
     def stop(self):
         if app.redis_queue:
-            return bool(app.redis("get", f"stop/{self.runtime}"))
+            return bool(app.redis("get", f"stop/{self.parent_runtime}"))
         else:
             return app.run_stop[self.parent_runtime]
 

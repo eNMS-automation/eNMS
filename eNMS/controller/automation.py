@@ -508,7 +508,7 @@ class AutomationController(BaseController):
         run = db.fetch("run", allow_none=True, runtime=runtime)
         if run and run.status == "Running":
             if self.redis_queue:
-                self.redis("set", f"stop/{runtime}", "true")
+                self.redis("set", f"stop/{run.parent_runtime}", "true")
             else:
                 self.run_stop[run.parent_runtime] = True
             return True

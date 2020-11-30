@@ -2,5 +2,10 @@
 
 from pympler import muppy, summary
 
+MODULES = ["netmiko", "napalm"]
+
 profile = summary.summarize(muppy.get_objects())
-summary.print_(profile, limit=100)
+
+for object_ in profile:
+    if any(module in object_[0] for module in MODULES):
+        print("{}: {} objects | size: {} bytes".format(*object_))

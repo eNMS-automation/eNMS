@@ -16,17 +16,15 @@
       <center>{{ form.output.label() }}</center>
       {{ form.output(id="debug-output", style="width: 100%;") }}
     </div>
-    <br /><br /><br /><br />
-    <div class="form-group">
-      <div class="col-md-e col-sm-9 col-xs-12 col-md-offset-5">
-        <button
-          type="button"
-          class="btn btn-primary"
-          onclick="eNMS.administration.runDebugCode()"
-        >
-          Run Code
-        </button>
-      </div>
-    </div>
+    <center>
+      <button
+        style="margin-top: 20px;"
+        type="button"
+        class="btn btn-primary"
+        onclick="eNMS.administration.runDebugCode()"
+      >
+        Run Code
+      </button>
+    </center>
   </div>
 </form>

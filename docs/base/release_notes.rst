@@ -52,7 +52,6 @@ the configuration table.
 - Add ability to hard-code logic to mask password hashes when config is displayed in custom controller.
 - Add workflow tree in the workflow builder to visualize workflow and subworkflows as a tree with buttons:
 edit / new mechanism: highlight to teleport to any service. Makes it easier to work with large multi-level workflows.
-
 - Replace gotty with pure python implementation. Save session output with webssh. Need to set ENMS_USER and ENMS_PASSWORD
 like with the scheduler to save the session via REST API. For this to work, admin credentials must be defined via
 two new environment variables: ENMS_USER and ENMS_PASSWORD (same as scheduler)
@@ -64,7 +63,12 @@ the task instead of the admin user.
 of threads configurable from settings.json > automation > max process.
 - Add runtimes select list in service results window, so you can visualize service results in workflow
 builder.
-- Include private properties (custom password, ...) when exporting a service.
+- Include private properties (custom password, ...) when exporting a service, or migration files.
+- New color property for workflow edges.
+- Export service now exports to user browser besides exporting the tgz to the VM.
+- Remove Create Pool endpoint in the rest API
+- Add python snippet mechanism to troubleshooting (ctrl + alt + click on upper left logo)
+
 - Refactoring of the rbac system:
   * Use pools extension to user and services to define user access.
   * Remove "group" table (a group is a pool of users)
@@ -82,11 +86,8 @@ builder.
   * Credentials can be either "Read - Write" (default) or "Read only". In a top-level service, new "credential type" field
   to choose between "Any", "Read-only" and "Read-write" in order to define which credentials should be used when running
   the service.
-- move the database section of settings.json to database.json
-- New color property for workflow edges.
-- Export service now exports to user browser besides exporting the tgz to the VM.
-- Remove Create Pool endpoint in the rest API
-- Add python snippet mechanism to troubleshooting (ctrl + alt + click on upper left logo)
+
+
 
 Test:
 - test new bulk edit, bulk delete, copy clipboard mechanism
@@ -112,7 +113,11 @@ is modified.
 - test that service logs works properly (was refactored from scratch)
 - test new "per configuration property timestamp" mechanism for configuration management mechanism.
 - test new mechanism to mask passwords when displaying configuration via custom controller function
+- test export table to csv mechanism
 - when a service is renamed, the custom password still works.
+- test that connections are cached when using iteration values on standalone service.
+- test that when scheduling task, run creator is set to user who scheduled task.
+- test new "maximum number of thread" mechanism
 
 Migration:
 - Update endpoint: view/network and view/site no longer exists, to be replaced with 
@@ -125,6 +130,7 @@ is per workflow and not a property of the service itself)
 - In service.yaml, "No Validation" is now part of the "Validation Condition" section. This means that all services
 where "validation_method" is set to "none", it must be replaced with "text" and "validation_condition"
 must be set to "none" instead.
+- Add ENMS_USER and ENMS_PASSWORD (admin credentials) to environment variables.
 
 
 Version 3.22.4

@@ -87,8 +87,6 @@ builder.
   to choose between "Any", "Read-only" and "Read-write" in order to define which credentials should be used when running
   the service.
 
-
-
 Test:
 - test new bulk edit, bulk delete, copy clipboard mechanism
 - test new relation table mechanism with add to relation (individual and bulk selection) and remove from relation.
@@ -118,6 +116,7 @@ is modified.
 - test that connections are cached when using iteration values on standalone service.
 - test that when scheduling task, run creator is set to user who scheduled task.
 - test new "maximum number of thread" mechanism
+- test new troubleshooting snippet mechanism
 
 Migration:
 - Update endpoint: view/network and view/site no longer exists, to be replaced with 
@@ -131,6 +130,7 @@ is per workflow and not a property of the service itself)
 where "validation_method" is set to "none", it must be replaced with "text" and "validation_condition"
 must be set to "none" instead.
 - Add ENMS_USER and ENMS_PASSWORD (admin credentials) to environment variables.
+- The create_pool endpoint has been removed, make sure the /instance/pool endpoint is used instead.
 
 
 Version 3.22.4

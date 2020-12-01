@@ -5,6 +5,7 @@ Release Notes
 Version 4.0.0
 -------------
 
+- Extend pool for users and services.
 - Add "run service on targets mechanism"
   * run service on a single device and in bulk from service page
   * run service on a single device and in bulk from visualization pages
@@ -31,32 +32,25 @@ Version 4.0.0
 - Web / Desktop connection to a device is now restrictable to make the users provide their own credentials
 => e.g to prevent inventory device credentials from being used to connect to devices
 - Configuration git diff: indicate which is V1 and which is V2. Option to display more context lines, including all of it.
-
 - Improve display of Json property in form (make them collapsed by default)
 - Update to new version of Vis.Js (potential workflow builder impact)
-- Add mechanism to disable result creation (e.g for config collection workflow)
-- Extend pool for users and services. The "devices" and "pools" relationship with services have to be renamed
-"target_devices" and "target_pools" in the service.yaml file.
-- Change syntax of many to many relationship in database.json
-- Refactor rbac system to use pools extension to user and services to define user access. Remove "group" model.
-Add "groups" property to user and add "creator" property for pools, devices and links.
+- Add mechanism to save only failed results (e.g for config collection workflow)
+- New database.json to define engine parameters, import / export properties, many to many relationship, etc.
 - Fork based on string value instead of just True / False: new discard mode for the skip mechanism. When using discard,
 devices do not follow any edge after the skipped service.
 - Refactor skip property so that it is no longer a property of the service to avoid side effect of skipping shared services.
-In the migration files, the skip property must be removed: it will not be migrated.
 - Add new option in pool to invert logic for each property.
-- Rename "update_pools" to "update_target_pools". Migration files must be updated.
 - New Option "Update pools after running" for workflow like the configuration management workflow.
 - Refactor skip mechanism to work with run once mode service.
 - Don't reset run status when running a CLI command with CLI plugins
 - Refactor log mechanism to send log to client bit by bit, instead of all run logs at each refresh request
 - "No validation" in the service panel is now an option of the "validation condition" instead of the
-"validation method". For the migration files, this means that for all services where "validation_method" is set to
-"none", it must be replaced with "text" and "validation_condition" must be set to "none" instead.
+"validation method". Migration impact.
 - The timestamps like "last runtime", "last failure", etc are now per configuration property. The timestamps are
 all stored per device in a json.file called "timestamps.json". These timestamps properties have been added to
 the configuration table.
 - Add ability to hard-code logic to mask password hashes when config is displayed in custom controller.
+
 - Add workflow tree in the workflow builder to visualize workflow and subworkflows as a tree with buttons:
 edit / new mechanism: highlight to teleport to any service. Makes it easier to work with large multi-level workflows.
 - Replace gotty with pure python implementation. Save session output with webssh. Need to set ENMS_USER and ENMS_PASSWORD
@@ -71,19 +65,23 @@ of threads configurable from settings.json > automation > max process.
 - Add runtimes select list in service results window, so you can visualize service results in workflow
 builder.
 - Include private properties (custom password, ...) when exporting a service.
-- RBAC and Credentials:
-* Credentials can be either username / password or SSH key. Both passwords and SSH key are stored in the Vault (no key file
-stored on the unix server).
-* Credentials also have an "Enable Password" field to go to enable mode after logging in.
-* Credentials have a priority field; credential object with higher priority is used if multiple available credentials.
-* Credentials have two pools: user pool to define which users can use the credentials, and device pools to define which
-devices the credential can be used for.
-* User "groups" property is now a field. This field can be used to define user pools. Services have the same "groups" property.
-When creating a new service, the groups field will be automatically set to the user groups. This allows services to be automatically
-added to the appriopriate pool of services, if the pool of services is defined based on that group property.
-* Credentials can be either "Read - Write" (default) or "Read only". In a top-level service, new "credential type" field
-to choose between "Any", "Read-only" and "Read-write" in order to define which credentials should be used when running
-the service.
+- Refactoring of the rbac system:
+  * Use pools extension to user and services to define user access.
+  * Remove "group" table (a group is a pool of users)
+  * Add "groups" property to user and add "creator" property for pools, devices and links.
+- New Credentials mechanism:
+  * Credentials can be either username / password or SSH key. Both passwords and SSH key are stored in the Vault (no key file
+  stored on the unix server).
+  * Credentials also have an "Enable Password" field to go to enable mode after logging in.
+  * Credentials have a priority field; credential object with higher priority is used if multiple available credentials.
+  * Credentials have two pools: user pool to define which users can use the credentials, and device pools to define which
+  devices the credential can be used for.
+  * User "groups" property is now a field. This field can be used to define user pools. Services have the same "groups" property.
+  When creating a new service, the groups field will be automatically set to the user groups. This allows services to be automatically
+  added to the appriopriate pool of services, if the pool of services is defined based on that group property.
+  * Credentials can be either "Read - Write" (default) or "Read only". In a top-level service, new "credential type" field
+  to choose between "Any", "Read-only" and "Read-write" in order to define which credentials should be used when running
+  the service.
 - move the database section of settings.json to database.json
 - New color property for workflow edges.
 - Export service now exports to user browser besides exporting the tgz to the VM.
@@ -99,18 +97,33 @@ network filtering mechanism, run service mechanism, etc)
 - test that notification mechanism still works
 - test that the new web SSH mechanism works, make sure that the session saving mechanism works as intended.
 - test that the workflow mechanism in both DxD and SxS still works
-- test the skip mechanism, and in particular the behavior of the new discard option
+- test the skip mechanism:
+  * test skip of shared service only affects workflow from which service is skipped
+  * test new discard option
+  * test that skip works fine with services in "run once" mode.
 - test the iteration mechanism (both iteration on value and iteration on devices). Tests that the connection
 is cached and reused for iteration values.
 - test the device query mechanism.
 - user rbac (access to UI + access to models) is properly updated when one of its associated pool OR access
 is modified.
+- test new credentials mechanism
+- test new option in pool to invert logic
+- test new "update pools after running mechanism"
+- test that service logs works properly (was refactored from scratch)
+- test new "per configuration property timestamp" mechanism for configuration management mechanism.
 - when a service is renamed, the custom password still works.
 
 Migration:
 - Update endpoint: view/network and view/site no longer exists, to be replaced with 
 visualization/geographical_view and visualization/logical_view
 - Configure the new visualization.json file, remove visualization settings from settings.json
+- In the service.yaml file, the "devices" and "pools" relationship with services have to be renamed
+"target_devices" and "target_pools". Besides, "update_pools" must be renamed to "update_target_pools".
+- In service.yaml, remove the skip property: it will not be migrated (refactoring of skip mechanism so that skip
+is per workflow and not a property of the service itself)
+- In service.yaml, "No Validation" is now part of the "Validation Condition" section. This means that all services
+where "validation_method" is set to "none", it must be replaced with "text" and "validation_condition"
+must be set to "none" instead.
 
 
 Version 3.22.4

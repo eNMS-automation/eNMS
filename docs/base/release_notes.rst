@@ -6,37 +6,32 @@ Version 4.0.0
 -------------
 
 - Add "run service on targets mechanism"
-* run service on a single device and in bulk from service page
-* run service on a single device and in bulk from visualization pages
+  * run service on a single device and in bulk from service page
+  * run service on a single device and in bulk from visualization pages
 - Add bulk deletion and bulk edit mechanism for tables
-* Bulk edit (edit all instances filtered in tables)
-* Bulk deletion (delete all instances filtered in tables)
+  * Bulk edit (edit all instances filtered in tables)
+  * Bulk deletion (delete all instances filtered in tables)
 - Add "copy to clipboard" mechanism to get comma-separated list of names of all filtered instances.
 - Add relation mechanism in table for scalability
-* For each table, add link to relation table
-* Replaces the old "Pool Objects" window in the pool table.
-* New mechanism to add instances to a "relation table", both by individual selection and in bulk by copy pasting a list of names.
-* New mechanism to remove selection from a relation table.
+  * For each table, add link to relation table
+  * Replaces the old "Pool Objects" window in the pool table.
+  * New mechanism to add instances to a "relation table", both by individual selection and in bulk by copy pasting a list of names.
+  * New mechanism to remove selection from a relation table.
 - Add 3D network view and 3D logical view.
-* Add right click menu for property, configuration, run service
-* Add default pools mechanism for large networks.
-* Add run service in bulk on all currently displayed devices mechanism
+  * Add right click menu for property, configuration, run service
+  * Add default pools mechanism for large networks.
+  * Add run service in bulk on all currently displayed devices mechanism
 - Move all visualization settings from settings.json > "visualization" to dedicated visualization.json
-
-TEST 2D
-
 - Make the error page colors confiurable per theme (move css colors to theme specific CSS file)
-- Update the dark theme to display input / list in grey instead of white (too much contrast)
 - Use the log level of the parameterized run instead of always using the service log level
 - Change field syntax for context help to be 'help="path"' instead of using render_kw={"help": ...}
 - Don't update the "creator" field when an existing object is edited
 - Add new function "get_neighbors" to retrieve neighboring devices or links of a device
 - Refactor the migration import mechanism to better handle class relationships
-- Web / Desktop connection to a device is now restrict-able to make the users provide their own credentials
+- Web / Desktop connection to a device is now restrictable to make the users provide their own credentials
 => e.g to prevent inventory device credentials from being used to connect to devices
-- Fix position of sorting icon in table so it doesn't eat space of the search bar
-- Make the options "Accept only one client" and "Share session with all clients" incompatible in the device connection form
 - Configuration git diff: indicate which is V1 and which is V2. Option to display more context lines, including all of it.
+
 - Improve display of Json property in form (make them collapsed by default)
 - Update to new version of Vis.Js (potential workflow builder impact)
 - Add mechanism to disable result creation (e.g for config collection workflow)
@@ -98,8 +93,11 @@ the service.
 Test:
 - test new bulk edit, bulk delete, copy clipboard mechanism
 - test new relation table mechanism with add to relation (individual and bulk selection) and remove from relation.
+- test new logical and geographical views (right-click menu, scalability with 10K+ devices, default pools mechanism,
+network filtering mechanism, run service mechanism, etc)
+- test new get_neighbors function, including using get_neighbors output for service iteration
 - test that notification mechanism still works
-- test that the new web SSH mechanism works
+- test that the new web SSH mechanism works, make sure that the session saving mechanism works as intended.
 - test that the workflow mechanism in both DxD and SxS still works
 - test the skip mechanism, and in particular the behavior of the new discard option
 - test the iteration mechanism (both iteration on value and iteration on devices). Tests that the connection
@@ -112,6 +110,7 @@ is modified.
 Migration:
 - Update endpoint: view/network and view/site no longer exists, to be replaced with 
 visualization/geographical_view and visualization/logical_view
+- Configure the new visualization.json file, remove visualization settings from settings.json
 
 
 Version 3.22.4

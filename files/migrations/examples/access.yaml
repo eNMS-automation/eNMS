@@ -62,7 +62,7 @@
   description: ''
   get_requests: []
   menu: []
-  name: Pool link 0-5 (EDIT) (links 6-9 should be available via public pool of links)
+  name: Pool link 0-5 (EDIT) for user ny
   pages: []
   post_requests: []
   type: access
@@ -113,10 +113,9 @@
   upper_menu: [Admin, Settings, Files]
   user_pools: [User readonly]
 - access_pools: [Datacenter New York]
-  access_type: "['Read']"
+  access_type: "['Read', 'Connect']"
   delete_requests: []
-  description: 'ny york user should have access to: all devices in datacenter new
-    york (READ + CONNECT), all links (EDIT for link 0-5 + 6-9, READ for the rest)'
+  description: ''
   get_requests: []
   menu: []
   name: New York Pool Access for user ny

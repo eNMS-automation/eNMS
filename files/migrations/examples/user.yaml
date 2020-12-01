@@ -10,8 +10,12 @@
 - {authentication: database, description: '', email: sf@enms.io, groups: 'san-francisco,usa',
   is_admin: false, name: sf, password: JGFyZ29uMmlkJHY9MTkkbT0xMDI0MDAsdD0yLHA9OCRqdEU2UjRpeDF0cGJhKzNkKzM5dnJRJFVWck4yNnR6MUoyTktrNHVWMTUwZ0E=,
   small_menu: false, theme: default, type: user}
-- {authentication: database, description: '', email: ny@enms.io, groups: 'new-york,usa',
-  is_admin: false, name: ny, password: JGFyZ29uMmlkJHY9MTkkbT0xMDI0MDAsdD0yLHA9OCQxanBIcUZWcUxVVW9SY2g1ajFIS09RJEpMM1MxVEM1a3NJeTlMSGpRLzVvM3c=,
+- {authentication: database, description: "\"ny\" york user should have access to:\r\
+    \n- all devices in datacenter new york (READ + CONNECT)\r\n- all links: \r\n*\
+    \ EDIT for link 0-5 (via Access \"Pool link 0-5 (EDIT) for user ny\")\r\n* EDIT\
+    \ for links 6-9 (because public pool of links)\r\n* READ for the rest (via the\
+    \ pool \"Datacenter New York\")", email: ny@enms.io, groups: 'new-york,usa', is_admin: false,
+  name: ny, password: JGFyZ29uMmlkJHY9MTkkbT0xMDI0MDAsdD0yLHA9OCQxanBIcUZWcUxVVW9SY2g1ajFIS09RJEpMM1MxVEM1a3NJeTlMSGpRLzVvM3c=,
   small_menu: false, theme: default, type: user}
 - {authentication: database, description: "The 'nadmin' user is not an admin, but\
     \ it has access to all menus, endpoints and instances (via the \"All objects\"\

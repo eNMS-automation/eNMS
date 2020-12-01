@@ -453,8 +453,10 @@ class BaseController:
         except regex_error:
             return {"error": "Invalid regular expression as search parameter."}
         constraints.extend(table.filtering_constraints(**kwargs))
-        query = db.query(model)
+        query = db.session.query(models[model])
         total_records, query = query.count(), query.filter(and_(*constraints))
+        if not current_user.is_admin:
+            query = table.rbac_filter(query, "read", current_user)
         if bulk:
             instances = query.all()
             return instances if bulk == "object" else [obj.id for obj in instances]

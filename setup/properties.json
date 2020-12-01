@@ -223,6 +223,12 @@
         "visible": false
       },
       {
+        "data": "default_access",
+        "title": "Default Access",
+        "search": "text",
+        "visible": false
+      },
+      {
         "data": "property1",
         "title": "Property 1",
         "search": "text",
@@ -420,6 +426,12 @@
         "orderable": false
       },
       {
+        "data": "default_access",
+        "title": "Default Access",
+        "search": "text",
+        "visible": false
+      },
+      {
         "data": "property1",
         "title": "Property 1",
         "search": "text",
@@ -469,6 +481,12 @@
         "title": "Manually defined",
         "search": "bool",
         "width": "100px"
+      },
+      {
+        "data": "default_access",
+        "title": "Default Access",
+        "search": "text",
+        "visible": false
       },
       {
         "data": "devices",
@@ -544,6 +562,12 @@
         "title": "Status",
         "search": "text",
         "width": "100px"
+      },
+      {
+        "data": "default_access",
+        "title": "Default Access",
+        "search": "text",
+        "visible": false
       },
       {
         "data": "devices",
@@ -762,6 +786,12 @@
         "search": "text",
         "width": "150px",
         "orderable": false
+      },
+      {
+        "data": "default_access",
+        "title": "Default Access",
+        "search": "text",
+        "visible": false
       },
       {
         "data": "devices",

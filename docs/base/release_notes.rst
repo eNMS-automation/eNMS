@@ -73,7 +73,9 @@ builder.
   * Use pools extension to user and services to define user access.
   * Add new "default access" property to choose between creator, admin, and public
   * Remove "group" table (a group is a pool of users)
-  * Add "groups" property to user and add "creator" property for pools, devices and links.
+  * Add "groups" property to user and add "creator" property for pools, devices and links. By defining pools of services
+  based on the group property, and autofilling the groups property of an object when it is created with the user "groups",
+  objects can be automatically added to the pool of services of the appropriate groups.
 - New Credentials mechanism:
   * Credentials can be either username / password or SSH key. Both passwords and SSH key are stored in the Vault (no key file
   stored on the unix server).

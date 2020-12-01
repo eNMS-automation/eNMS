@@ -882,6 +882,7 @@ function getWorkflowState(periodic) {
 }
 
 function getWorkflowTree() {
+  const workflowId = workflow.id;
   openPanel({
     title: `${workflow.scoped_name} - Tree Structure`,
     content: `
@@ -889,18 +890,18 @@ function getWorkflowTree() {
         <input
           type="text"
           class="form-control"
-          id="tree-search-${workflow.id}"
+          id="tree-search-${workflowId}"
           placeholder="Search"
         >
         <hr />
-        <div id="workflow-tree-${workflow.id}"></div>
+        <div id="workflow-tree-${workflowId}"></div>
         <input type="hidden" name="services" id="services" />
       </div>`,
     callback: function () {
       call({
         url: `/get_workflow_tree/${currentPath}`,
         callback: function (data) {
-          $(`#workflow-tree-${workflow.id}`).jstree({
+          $(`#workflow-tree-${workflowId}`).jstree({
             core: {
               animation: 100,
               themes: { stripes: true },
@@ -944,11 +945,11 @@ function getWorkflowTree() {
             },
           });
           let timer = false;
-          $(`#tree-search-${workflow.id}`).keyup(function () {
+          $(`#tree-search-${workflowId}`).keyup(function () {
             if (timer) clearTimeout(timer);
             timer = setTimeout(function () {
-              const searchValue = $(`#tree-search-${workflow.id}`).val();
-              $(`#workflow-tree-${workflow.id}`).jstree(true).search(searchValue);
+              const searchValue = $(`#tree-search-${workflowId}`).val();
+              $(`#workflow-tree-${workflowId}`).jstree(true).search(searchValue);
             }, 500);
           });
         },

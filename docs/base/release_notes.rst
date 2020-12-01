@@ -71,6 +71,7 @@ builder.
 
 - Refactoring of the rbac system:
   * Use pools extension to user and services to define user access.
+  * Add new "default access" property to choose between creator, admin, and public
   * Remove "group" table (a group is a pool of users)
   * Add "groups" property to user and add "creator" property for pools, devices and links.
 - New Credentials mechanism:

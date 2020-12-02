@@ -51,21 +51,15 @@ class RestCallService(Service):
             kwargs["json"] = run.sub(run.payload, local_variables)
         call = getattr(app.request_session, run.call_type.lower())
         response = call(rest_url, **kwargs)
-        if response.status_code not in range(200, 300):
-            result = {
-                "success": False,
-                "response_code": response.status_code,
-                "response": response.text,
-            }
-            if response.status_code == 401:
-                result["result"] = "Wrong credentials supplied."
-            return result
-        return {
+        result = {
             "url": rest_url,
             "status_code": response.status_code,
             "headers": dict(response.headers),
             "result": response.text,
         }
+        if response.status_code not in range(200, 300):
+            result["success"] = False
+        return result
 
 
 class RestCallForm(ServiceForm):

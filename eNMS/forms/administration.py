@@ -72,9 +72,9 @@ class ServerForm(BaseForm):
 class CredentialForm(BaseForm):
     action = "eNMS.base.processData"
     form_type = HiddenField(default="credential")
-    description = StringField(widget=TextArea(), render_kw={"rows": 13})
     id = HiddenField()
     name = StringField("Name", [InputRequired()])
+    description = StringField(widget=TextArea(), render_kw={"rows": 13})
     role = SelectField(
         "Role",
         choices=(

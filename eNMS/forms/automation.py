@@ -161,7 +161,7 @@ class ServiceForm(BaseForm):
         forbidden_name_error = self.scoped_name.data in ("Start", "End", "Placeholder")
         if forbidden_name_error:
             self.name.errors.append("This name is not allowed.")
-        conversion_validation_mismatch = (
+        conversion_validation_mismatch = self.validation_condition.data != "none" and (
             self.conversion_method.data == "text"
             and "dict" in self.validation_method.data
             or self.conversion_method.data in ("xml", "json")

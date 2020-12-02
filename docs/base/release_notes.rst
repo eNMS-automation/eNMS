@@ -123,6 +123,7 @@ is modified.
 - test new troubleshooting snippet mechanism
 - test performances and scalability compared to last version (no improvements to be expected as no work as made on performances,
 but we have to make sure it's not worse).
+- test rest call services as the rest service was refactored.
 
 Migration:
 - Update endpoint: view/network and view/site no longer exists, to be replaced with 

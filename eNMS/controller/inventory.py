@@ -35,6 +35,15 @@ class InventoryController(BaseController):
         end = self.settings["ssh"]["end_port"]
         return start + int(self.ssh_port) % (end - start)
 
+    def get_credentials(self, device, **kwargs):
+        if kwargs["credentials"] == "device":
+            credentials = device.get_credentials("any")
+            return credentials.username, self.get_password(credentials.password)
+        elif kwargs["credentials"] == "user":
+            return current_user.name, self.get_password(current_user.password)
+        else:
+            return kwargs["username"], kwargs["password"]
+
     def web_connection(self, device_id, **kwargs):
         if not self.settings["ssh"]["credentials"][kwargs["credentials"]]:
             return {"alert": "Unauthorized authentication method."}
@@ -58,21 +67,8 @@ class InventoryController(BaseController):
             "ENMS_PASSWORD": getenv("ENMS_PASSWORD", "admin"),
         }
         if "authentication" in kwargs:
-            environment.update(
-                zip(
-                    ("USERNAME", "PASSWORD"),
-                    (
-                        (device.username, self.get_password(device.password))
-                        if kwargs["credentials"] == "device"
-                        else (
-                            current_user.name,
-                            self.get_password(current_user.password),
-                        )
-                        if kwargs["credentials"] == "user"
-                        else (kwargs["username"], kwargs["password"])
-                    ),
-                )
-            )
+            credentials = self.get_credentials(device, **kwargs)
+            environment.update(zip(("USERNAME", "PASSWORD"), credentials))
         Popen(command, cwd=self.path / "terminal", env=environment)
         return {
             "device": device.name,
@@ -85,13 +81,6 @@ class InventoryController(BaseController):
         if not self.settings["ssh"]["credentials"][kwargs["credentials"]]:
             return {"alert": "Unauthorized authentication method."}
         device = db.fetch("device", id=id, rbac="connect")
-        credentials = (
-            (device.username, self.get_password(device.password))
-            if kwargs["credentials"] == "device"
-            else (current_user.name, self.get_password(current_user.password))
-            if kwargs["credentials"] == "user"
-            else (kwargs["username"], kwargs["password"])
-        )
         uuid, port = str(uuid4()), self.get_ssh_port()
         session = db.factory(
             "session",
@@ -102,6 +91,7 @@ class InventoryController(BaseController):
         )
         db.session.commit()
         try:
+            credentials = self.get_credentials(device, **kwargs)
             args = (session.id, uuid, port)
             ssh_connection = SshConnection(device.ip_address, credentials, *args)
             Thread(target=ssh_connection.start_session, args=args).start()

@@ -1,6 +1,7 @@
 from collections import defaultdict
 from contextlib import redirect_stdout
 from datetime import datetime
+from flask_login import current_user
 from io import StringIO
 from ipaddress import IPv4Network
 from json import dump
@@ -236,6 +237,8 @@ class AdministrationController(BaseController):
             db.session.commit()
 
     def run_debug_code(self, **kwargs):
+        if not current_user.is_admin:
+            return False
         result = StringIO()
         with redirect_stdout(result):
             try:

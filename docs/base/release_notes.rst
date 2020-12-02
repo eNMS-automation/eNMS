@@ -68,6 +68,7 @@ builder.
 - Export service now exports to user browser besides exporting the tgz to the VM.
 - Remove Create Pool endpoint in the rest API
 - Add python snippet mechanism to troubleshooting (ctrl + alt + click on upper left logo)
+- Refactor REST service in case status code is not in (200, 300) to fix validation bug
 - Refactoring of the rbac system:
   * Use pools extension to user and services to define user access.
   * Add new "default access" property to choose between creator, admin, and public
@@ -136,6 +137,10 @@ where "validation_method" is set to "none", it must be replaced with "text" and 
 must be set to "none" instead.
 - Add ENMS_USER and ENMS_PASSWORD (admin credentials) to environment variables.
 - The create_pool endpoint has been removed, make sure the /instance/pool endpoint is used instead.
+- The Rest service has been refactored in case the response is not in range 200 - 300: the "response_code" key
+is now "status_code", and "response" key becomes "result" (consistent with the case where the
+rest call is successful). Need to check these keys in the migration files, i.e for services that use
+these keys as part of the post-processing or as part of the workflow later one.
 
 
 Version 3.22.4

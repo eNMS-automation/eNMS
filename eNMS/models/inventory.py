@@ -1,3 +1,5 @@
+from flask_login import current_user
+from operator import attrgetter
 from re import search, sub
 from sqlalchemy import and_, Boolean, event, ForeignKey, Integer, or_
 from sqlalchemy.ext.associationproxy import association_proxy
@@ -96,6 +98,26 @@ class Device(Object):
                     db.Column(db.SmallString, default="Never"),
                 )
         return cls
+
+    def get_credentials(self, credential_type="any", username=None):
+        if not username:
+            username = current_user.name
+        pool_alias = aliased(models["pool"])
+        query = (
+            db.session.query(models["credential"])
+            .join(models["pool"], models["credential"].user_pools)
+            .join(models["user"], models["pool"].users)
+            .join(pool_alias, models["credential"].device_pools)
+            .join(models["device"], pool_alias.devices)
+            .filter(models["user"].name == username)
+            .filter(models["device"].name == self.name)
+        )
+        if credential_type != "any":
+            query = query.filter(models["credential"].role == credential_type)
+        credentials = max(query.all(), key=attrgetter("priority"), default=None)
+        if not credentials:
+            raise Exception(f"No matching credentials found for DEVICE '{self.name}'")
+        return credentials
 
     def get_neighbors(self, object_type, direction="both", **link_constraints):
         filters = [models["link"].destination == self, models["link"].source == self]

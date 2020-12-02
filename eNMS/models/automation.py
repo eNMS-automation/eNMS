@@ -9,7 +9,6 @@ from json.decoder import JSONDecodeError
 from multiprocessing.pool import ThreadPool
 from napalm import get_network_driver
 from netmiko import ConnectHandler
-from operator import attrgetter
 from os import getenv
 from paramiko import RSAKey, SFTPClient
 from re import compile, search
@@ -1017,46 +1016,31 @@ class Run(AbstractBase):
         return results
 
     def get_credentials(self, device):
-        credentials = {}
-        pool_alias = aliased(models["pool"])
-        query = (
-            db.session.query(models["credential"])
-            .join(models["pool"], models["credential"].user_pools)
-            .join(models["user"], models["pool"].users)
-            .join(pool_alias, models["credential"].device_pools)
-            .join(models["device"], pool_alias.devices)
-            .filter(models["user"].name == self.creator)
-            .filter(models["device"].name == device.name)
-        )
-        credential_type = self.original.credential_type
-        if credential_type != "any":
-            query = query.filter(models["credential"].role == credential_type)
-        credential = max(query.all(), key=attrgetter("priority"), default=None)
-        if not credential:
-            raise Exception(f"No matching credentials found for DEVICE '{device.name}'")
-        self.log("info", f"Using '{credential.name}' credentials for '{device.name}'")
+        result, credential_type = {}, self.original.credential_type
+        credentials = device.get_credentials(credential_type, self.creator)
+        self.log("info", f"Using '{credentials.name}' credentials for '{device.name}'")
         if self.credentials == "device":
-            credentials["username"] = credential.username
-            if credential.subtype == "password":
-                credentials["password"] = app.get_password(credential.password)
+            result["username"] = credentials.username
+            if credentials.subtype == "password":
+                result["password"] = app.get_password(credentials.password)
             else:
-                private_key = app.get_password(credential.private_key)
-                credentials["pkey"] = RSAKey.from_private_key(StringIO(private_key))
+                private_key = app.get_password(credentials.private_key)
+                result["pkey"] = RSAKey.from_private_key(StringIO(private_key))
         elif self.credentials == "user":
             user = db.fetch("user", name=self.creator)
-            credentials["username"] = user.name
-            credentials["password"] = app.get_password(user.password)
+            result["username"] = user.name
+            result["password"] = app.get_password(user.password)
         else:
-            credentials["username"] = self.sub(self.custom_username, locals())
+            result["username"] = self.sub(self.custom_username, locals())
             password = app.get_password(self.custom_password)
             substituted_password = self.sub(password, locals())
             if password != substituted_password:
                 if substituted_password.startswith("b'"):
                     substituted_password = substituted_password[2:-1]
                 password = app.get_password(substituted_password)
-            credentials["password"] = password
-        credentials["secret"] = app.get_password(credential.enable_password)
-        return credentials
+            result["password"] = password
+        result["secret"] = app.get_password(credentials.enable_password)
+        return result
 
     def convert_result(self, result):
         if self.conversion_method == "none" or "result" not in result:

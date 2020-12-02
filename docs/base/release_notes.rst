@@ -97,7 +97,8 @@ network filtering mechanism, run service mechanism, etc)
 - test new get_neighbors function, including using get_neighbors output for service iteration
 - test that notification mechanism still works
 - test that the new web SSH mechanism works, make sure that the session saving mechanism works as intended.
-- test that the workflow mechanism in both DxD and SxS still works
+- test that the workflow mechanism in both DxD and SxS still works: the workflow algorithm was refactored and
+  DxD / SxS now uses the same function.
 - test the skip mechanism:
   * test skip of shared service only affects workflow from which service is skipped
   * test new discard option

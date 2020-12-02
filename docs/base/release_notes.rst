@@ -6,6 +6,11 @@ Version 4.0.0
 -------------
 
 - Extend pool for users and services.
+- Add relation mechanism in table for scalability
+  * For each table, add link to relation table
+  * Replaces the old "Pool Objects" window in the pool table.
+  * New mechanism to add instances to a "relation table", both by individual selection and in bulk by copy pasting a list of names.
+  * New mechanism to remove selection from a relation table.
 - Add "run service on targets mechanism"
   * run service on a single device and in bulk from service page
   * run service on a single device and in bulk from visualization pages
@@ -13,11 +18,6 @@ Version 4.0.0
   * Bulk edit (edit all instances filtered in tables)
   * Bulk deletion (delete all instances filtered in tables)
 - Add "copy to clipboard" mechanism to get comma-separated list of names of all filtered instances.
-- Add relation mechanism in table for scalability
-  * For each table, add link to relation table
-  * Replaces the old "Pool Objects" window in the pool table.
-  * New mechanism to add instances to a "relation table", both by individual selection and in bulk by copy pasting a list of names.
-  * New mechanism to remove selection from a relation table.
 - Add 3D network view and 3D logical view.
   * Add right click menu for property, configuration, run service
   * Add default pools mechanism for large networks.
@@ -68,7 +68,6 @@ builder.
 - Export service now exports to user browser besides exporting the tgz to the VM.
 - Remove Create Pool endpoint in the rest API
 - Add python snippet mechanism to troubleshooting (ctrl + alt + click on upper left logo)
-
 - Refactoring of the rbac system:
   * Use pools extension to user and services to define user access.
   * Add new "default access" property to choose between creator, admin, and public
@@ -120,6 +119,8 @@ is modified.
 - test that when scheduling task, run creator is set to user who scheduled task.
 - test new "maximum number of thread" mechanism
 - test new troubleshooting snippet mechanism
+- test performances and scalability compared to last version (no improvements to be expected as no work as made on performances,
+but we have to make sure it's not worse).
 
 Migration:
 - Update endpoint: view/network and view/site no longer exists, to be replaced with 

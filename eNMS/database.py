@@ -282,9 +282,11 @@ class Database:
         return [self.fetch(model, id=object_id) for object_id in object_list]
 
     def delete(self, model, allow_none=False, **kwargs):
-        instance = self.session.query(models[model]).filter_by(**kwargs).first()
-        if allow_none and not instance:
-            return None
+        instance = self.query(model, rbac="edit").filter_by(**kwargs).first()
+        if not instance:
+            if allow_none:
+                return
+            raise self.rbac_error
         return self.delete_instance(instance)
 
     def delete_instance(self, instance):

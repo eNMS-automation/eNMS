@@ -177,16 +177,20 @@ class ServiceForm(BaseForm):
                 f" and the validation method to '{self.validation_method.data}' :"
                 " these do not match."
             )
-        if self.max_processes.data > app.settings["automation"]["max_process"]:
+        too_many_threads_error = (
+            self.max_processes.data > app.settings["automation"]["max_process"]
+        )
+        if too_many_threads_error:
             self.max_processes.errors.append(
-                "The number of threads used for multiprocessing"
-                f"must be less than {app.settings['automation']['max_process']}"
+                "The number of threads used for multiprocessing must be "
+                f"less than {app.settings['automation']['max_process']}."
             )
         return (
             valid_form
             and not no_recipient_error
             and not conversion_validation_mismatch
             and not forbidden_name_error
+            and not too_many_threads_error
         )
 
 

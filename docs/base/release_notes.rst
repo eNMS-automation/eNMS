@@ -89,6 +89,7 @@ builder.
   * Credentials can be either "Read - Write" (default) or "Read only". In a top-level service, new "credential type" field
   to choose between "Any", "Read-only" and "Read-write" in order to define which credentials should be used when running
   the service.
+- The skip values were renamed from "True" / "False" to "Success" / "Failure".
 
 Test:
 - test new bulk edit, bulk delete, copy clipboard mechanism
@@ -144,6 +145,8 @@ rest call is successful). Need to check these keys in the migration files, i.e f
 these keys as part of the post-processing or as part of the workflow later one.
 - Whenever the "Use host keys" option is used, need to create a credential object instead with the key.
 The "Use host key" option in all connection services no longer exists.
+- In service.yaml, the "skip_value" property is "success" / "failure" instead of "True" / "False"
+(skip_value: 'True' -> skip_value: 'success' / skip_value: 'False' -> skip_value: 'failure')
 
 
 Version 3.22.4

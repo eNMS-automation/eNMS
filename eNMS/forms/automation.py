@@ -177,6 +177,11 @@ class ServiceForm(BaseForm):
                 f" and the validation method to '{self.validation_method.data}' :"
                 " these do not match."
             )
+        if self.max_processes.data > app.settings["automation"]["max_process"]:
+            self.max_processes.errors.append(
+                "The number of threads used for multiprocessing"
+                f"must be less than {app.settings['automation']['max_process']}"
+            )
         return (
             valid_form
             and not no_recipient_error

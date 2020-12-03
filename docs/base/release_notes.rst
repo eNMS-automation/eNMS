@@ -142,6 +142,8 @@ must be set to "none" instead.
 is now "status_code", and "response" key becomes "result" (consistent with the case where the
 rest call is successful). Need to check these keys in the migration files, i.e for services that use
 these keys as part of the post-processing or as part of the workflow later one.
+- Whenever the "Use host keys" option is used, need to create a credential object instead with the key.
+The "Use host key" option in all connection services no longer exists.
 
 
 Version 3.22.4

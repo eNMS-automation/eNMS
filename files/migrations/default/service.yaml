@@ -46,7 +46,7 @@
   shared: true
   skip: {}
   skip_query: ''
-  skip_value: 'True'
+  skip_value: 'success'
   time_between_retries: 10
   type: swiss_army_knife_service
   update_target_pools: false
@@ -101,7 +101,7 @@
   shared: true
   skip: {}
   skip_query: ''
-  skip_value: 'True'
+  skip_value: 'success'
   time_between_retries: 10
   type: swiss_army_knife_service
   update_target_pools: false
@@ -155,7 +155,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'True'
+  skip_value: 'success'
   time_between_retries: 10
   type: swiss_army_knife_service
   update_target_pools: false
@@ -210,7 +210,7 @@
   shared: true
   skip: {}
   skip_query: ''
-  skip_value: 'True'
+  skip_value: 'success'
   time_between_retries: 10
   type: swiss_army_knife_service
   update_target_pools: false

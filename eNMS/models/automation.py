@@ -695,16 +695,15 @@ class Run(AbstractBase):
             if skip_device:
                 if device:
                     self.write_state("progress/device/skipped", 1, "increment")
-                if self.skip_value == "Discard":
+                if self.skip_value == "discard":
                     continue
                 device_results = {
                     "device_target": getattr(device, "name", None),
                     "runtime": app.get_time(),
                     "result": "skipped",
                     "duration": "0:00:00",
-                    "success": self.skip_value == "True",
+                    "success": self.skip_value == "success",
                 }
-                summary_key = "success" if self.skip_value == "True" else "failure"
                 skipped_targets.append(device.name)
                 self.create_result(device_results, device, commit=False)
                 results.append(device_results)
@@ -721,8 +720,7 @@ class Run(AbstractBase):
             for key in ("success", "failure"):
                 device_number = len(results["summary"][key])
                 self.write_state(f"progress/device/{key}", device_number)
-            skipped_key = "success" if self.skip_value == "True" else "failure"
-            summary[skipped_key].extend(skipped_targets)
+            summary[self.skip_value].extend(skipped_targets)
             return results
         else:
             if self.parent_runtime == self.runtime and not self.target_devices:

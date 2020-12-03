@@ -121,7 +121,7 @@ class Workflow(Service):
             number_of_runs[service.name] += 1
             visited.add(service)
             if service in (start, end) or service.skip.get(self.name, False):
-                success = True if service.skip_value == "True" else False
+                success = service.skip_value == "success"
                 results = {"result": "skipped", "success": success}
                 if tracking_bfs or device:
                     results["summary"] = {

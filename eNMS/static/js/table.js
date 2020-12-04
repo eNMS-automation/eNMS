@@ -96,8 +96,8 @@ export class Table {
                   style="width: 100%; height: 30px; margin-top: 5px"
                 >
                   <option value="">Any</option>
-                  <option value="bool-true">True</option>
-                  <option value="bool-false">False</option>
+                  <option value="bool-true">${data?.search_labels?.true || "True"}</option>
+                  <option value="bool-false">${data?.search_labels?.false || "False"}</option>
                 </select>`;
             }
             $(element)

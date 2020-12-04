@@ -75,10 +75,6 @@ class AutomationController(BaseController):
         db.fetch("workflow", id=workflow_id).last_modified = now
         return {"edge": workflow_edge, "update_time": now}
 
-    def add_service_to_workflow(self, workflow, service):
-        workflow = db.fetch("workflow", id=workflow)
-        workflow.services.append(db.fetch("service", id=service))
-
     def calendar_init(self, type):
         results = {}
         for instance in db.fetch_all(type):

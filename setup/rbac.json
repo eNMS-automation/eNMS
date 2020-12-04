@@ -180,7 +180,6 @@
   "post_requests": [
     "/add_edge",
     "/add_instances_in_bulk",
-    "/add_service_to_workflow",
     "/bulk_deletion",
     "/bulk_edit",
     "/bulk_removal",

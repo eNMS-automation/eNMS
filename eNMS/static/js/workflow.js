@@ -311,18 +311,13 @@ export function processWorkflowData(instance, id) {
   } else if (!instance.type) {
     edges.update(edgeToEdge(instance));
   } else if (instance.type.includes("service") || instance.type == "workflow") {
-    if (id) {
-      if (workflow.id == id) return;
-      nodes.update(serviceToNode(instance));
-      let serviceIndex = workflow.services.findIndex((s) => s.id == instance.id);
-      workflow.services[serviceIndex] = instance;
+    if (!instance.workflows.some((w) => w.id == workflow.id)) return;
+    let serviceIndex = workflow.services.findIndex((s) => s.id == instance.id);
+    nodes.update(serviceToNode(instance));
+    if (serviceIndex == -1) {
+      workflow.services.push(instance);
     } else {
-      call({
-        url: `/add_service_to_workflow/${workflow.id}/${instance.id}`,
-        callback: function () {
-          updateWorkflowService(instance);
-        },
-      });
+      workflow.services[serviceIndex] = instance;
     }
     drawIterationEdge(instance);
   }

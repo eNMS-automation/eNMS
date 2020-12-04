@@ -2019,7 +2019,7 @@
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
-  max_processes: 50
+  max_processes: 15
   maximum_runs: 1
   multiprocessing: false
   name: '[[Regression Workflow: Workflow of Workflows] Regression Workflow: VRF Creation
@@ -2112,7 +2112,7 @@
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
-  max_processes: 50
+  max_processes: 15
   maximum_runs: 1
   multiprocessing: false
   name: '[[Regression Workflow: Workflow of Workflows] Regression Workflow: VRF Creation
@@ -2209,7 +2209,7 @@
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
-  max_processes: 50
+  max_processes: 15
   maximum_runs: 1
   multiprocessing: false
   name: '[[Regression Workflow: Workflow of Workflows] Regression Workflow: VRF Creation
@@ -2307,7 +2307,7 @@
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
-  max_processes: 50
+  max_processes: 15
   maximum_runs: 2
   multiprocessing: false
   name: '[Regression Workflow: Netmiko Prompts] Test Netmiko Prompt Service'
@@ -2401,7 +2401,7 @@
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
-  max_processes: 50
+  max_processes: 15
   maximum_runs: 1
   multiprocessing: false
   name: '[Regression Workflow: Netmiko Prompts] Test netmiko prompts pass'
@@ -2472,7 +2472,7 @@
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
-  max_processes: 50
+  max_processes: 15
   maximum_runs: 1
   multiprocessing: false
   name: '[Regression Workflow: Using get_var, set_var, get_result functions] Modify
@@ -2539,7 +2539,7 @@
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
-  max_processes: 50
+  max_processes: 15
   maximum_runs: 1
   multiprocessing: false
   name: '[Regression Workflow: Using get_var, set_var, get_result functions] Modify
@@ -2630,7 +2630,7 @@
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
-  max_processes: 50
+  max_processes: 15
   maximum_runs: 1
   multiprocessing: false
   name: '[Regression Workflow: Using get_var, set_var, get_result functions] Show
@@ -2723,7 +2723,7 @@
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
-  max_processes: 50
+  max_processes: 15
   maximum_runs: 1
   multiprocessing: false
   name: '[Regression Workflow: Using get_var, set_var, get_result functions] Show
@@ -2816,7 +2816,7 @@
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
-  max_processes: 50
+  max_processes: 15
   maximum_runs: 1
   multiprocessing: false
   name: '[Regression Workflow: Using get_var, set_var, get_result functions] show
@@ -2895,7 +2895,7 @@
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
-  max_processes: 50
+  max_processes: 15
   maximum_runs: 1
   multiprocessing: false
   name: '[[[Regression Workflow: Workflow of Workflows] Regression Workflow: Subworkflow
@@ -2982,7 +2982,7 @@
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
-  max_processes: 50
+  max_processes: 15
   maximum_runs: 1
   multiprocessing: false
   name: '[[[Regression Workflow: Workflow of Workflows] Regression Workflow: Subworkflow
@@ -3070,7 +3070,7 @@
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
-  max_processes: 50
+  max_processes: 15
   maximum_runs: 1
   multiprocessing: false
   name: '[Shared] Getters Workflow: Interface IP'
@@ -3167,7 +3167,7 @@
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
-  max_processes: 50
+  max_processes: 15
   maximum_runs: 1
   multiprocessing: false
   name: '[[[Regression Workflow: Workflow of Workflows] Regression Workflow: Subworkflow
@@ -3254,7 +3254,7 @@
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
-  max_processes: 50
+  max_processes: 15
   maximum_runs: 1
   multiprocessing: false
   name: '[[[Regression Workflow: Workflow of Workflows] Regression Workflow: Subworkflow
@@ -3336,7 +3336,7 @@
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
-  max_processes: 50
+  max_processes: 15
   maximum_runs: 2
   multiprocessing: false
   name: '[Regression Workflow: Ansible with Validation] Ansible Workflow: Arista show
@@ -3406,7 +3406,7 @@
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
-  max_processes: 50
+  max_processes: 15
   maximum_runs: 1
   multiprocessing: false
   name: '[Regression Workflow: Ansible with Validation] Ansible Workflow: Arista show
@@ -3475,7 +3475,7 @@
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
-  max_processes: 50
+  max_processes: 15
   maximum_runs: 1
   multiprocessing: false
   name: '[Regression Workflow: Ansible with Validation] Ansible Workflow: Arista show
@@ -3917,7 +3917,7 @@
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
-  max_processes: 50
+  max_processes: 15
   maximum_runs: 1
   multiprocessing: true
   name: '[[[Regression Workflow: Workflow of Workflows] Regression Workflow: Subworkflow
@@ -4002,7 +4002,7 @@
   match_type2: none
   match_type3: none
   max_number_of_retries: 100
-  max_processes: 50
+  max_processes: 15
   maximum_runs: 1
   multiprocessing: true
   name: '[[[Regression Workflow: Workflow of Workflows] Regression Workflow: Subworkflow
@@ -4093,7 +4093,7 @@
   match_type2: none
   match_type3: none
   max_number_of_retries: 100
-  max_processes: 50
+  max_processes: 15
   maximum_runs: 1
   multiprocessing: true
   name: '[[[Regression Workflow: Workflow of Workflows] Regression Workflow: Subworkflow
@@ -4180,7 +4180,7 @@
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
-  max_processes: 50
+  max_processes: 15
   maximum_runs: 1
   multiprocessing: false
   name: '[Regression Workflow: Iteration Targets Mechanism] Iteration Targets Workflow
@@ -4252,7 +4252,7 @@
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
-  max_processes: 50
+  max_processes: 15
   maximum_runs: 1
   multiprocessing: false
   name: '[[Regression Workflow: Workflow of Workflows] Regression Workflow: Access
@@ -4351,7 +4351,7 @@
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
-  max_processes: 50
+  max_processes: 15
   maximum_runs: 1
   multiprocessing: false
   name: '[[Regression Workflow: Workflow of Workflows] Regression Workflow: Access
@@ -5880,7 +5880,7 @@
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
-  max_processes: 50
+  max_processes: 15
   maximum_runs: 1
   multiprocessing: false
   name: '[Regression Workflow: Workflow of Workflows] Show interfaces with Netmiko'
@@ -5982,7 +5982,7 @@
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
-  max_processes: 50
+  max_processes: 15
   maximum_runs: 1
   multiprocessing: false
   name: '[Regression Workflow: Operational Data Backup (admin)] Retrieve Operational
@@ -6068,7 +6068,7 @@
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
-  max_processes: 50
+  max_processes: 15
   maximum_runs: 1
   multiprocessing: false
   name: 'Regression Workflow: DxD and SxS Run Methods'
@@ -6139,7 +6139,7 @@
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
-  max_processes: 50
+  max_processes: 15
   maximum_runs: 1
   multiprocessing: false
   name: '[Regression Workflow: DxD and SxS Run Methods] Workflow  in device by device
@@ -6209,7 +6209,7 @@
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
-  max_processes: 50
+  max_processes: 15
   maximum_runs: 1
   multiprocessing: false
   name: '[Regression Workflow: DxD and SxS Run Methods] Service in run once mode'
@@ -6282,7 +6282,7 @@
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
-  max_processes: 50
+  max_processes: 15
   maximum_runs: 1
   multiprocessing: false
   name: '[Regression Workflow: DxD and SxS Run Methods] Workflow in service by service
@@ -6353,7 +6353,7 @@
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
-  max_processes: 50
+  max_processes: 15
   maximum_runs: 1
   multiprocessing: false
   name: '[Regression Workflow: DxD and SxS Run Methods] Service in Run once per device
@@ -6427,7 +6427,7 @@
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
-  max_processes: 50
+  max_processes: 15
   maximum_runs: 1
   multiprocessing: false
   name: '[Regression Workflow: DxD and SxS Run Methods] Workflow in service targets
@@ -6516,7 +6516,7 @@
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
-  max_processes: 50
+  max_processes: 15
   maximum_runs: 1
   multiprocessing: false
   name: '[[Regression Workflow: DxD and SxS Run Methods] Workflow  in device by device
@@ -6610,7 +6610,7 @@
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
-  max_processes: 50
+  max_processes: 15
   maximum_runs: 1
   multiprocessing: false
   name: '[[Regression Workflow: DxD and SxS Run Methods] Workflow in service by service
@@ -6704,7 +6704,7 @@
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
-  max_processes: 50
+  max_processes: 15
   maximum_runs: 1
   multiprocessing: false
   name: '[[Regression Workflow: DxD and SxS Run Methods] Workflow in service targets
@@ -6801,7 +6801,7 @@
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
-  max_processes: 50
+  max_processes: 15
   maximum_runs: 1
   multiprocessing: false
   name: 'Regression Workflow: Shared Service in Multiple Subworkflows'
@@ -6869,7 +6869,7 @@
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
-  max_processes: 50
+  max_processes: 15
   maximum_runs: 1
   multiprocessing: false
   name: '[Regression Workflow: Shared Service in Multiple Subworkflows] Subworkflow
@@ -6940,7 +6940,7 @@
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
-  max_processes: 50
+  max_processes: 15
   maximum_runs: 1
   multiprocessing: false
   name: '[Regression Workflow: Shared Service in Multiple Subworkflows] Subworkflow
@@ -7030,7 +7030,7 @@
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
-  max_processes: 50
+  max_processes: 15
   maximum_runs: 1
   multiprocessing: false
   name: '[Shared] Shared Service for Regression Workflow H'
@@ -12951,7 +12951,7 @@
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
-  max_processes: 50
+  max_processes: 15
   maximum_runs: 1
   multiprocessing: false
   name: '[Regression Workflow: Netmiko Prompts] Check VRF (NOVRF) exists'

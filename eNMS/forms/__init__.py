@@ -21,10 +21,8 @@ from eNMS.forms.fields import (
 )
 from eNMS.models import property_types, relationships
 
-form_actions = {}
 form_classes = {}
 form_properties = defaultdict(dict)
-form_templates = {}
 
 
 class MetaForm(FormMeta):
@@ -63,8 +61,6 @@ class MetaForm(FormMeta):
             setattr(form, property, field)
             attrs[property] = field
         form_classes[form_type] = form
-        form_templates[form_type] = getattr(form, "template", "base")
-        form_actions[form_type] = getattr(form, "action", None)
         properties = {}
         for field_name, field in attrs.items():
             if not isinstance(field, UnboundField):

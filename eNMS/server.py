@@ -31,12 +31,7 @@ from uuid import getnode
 
 from eNMS import app
 from eNMS.database import db
-from eNMS.forms import (
-    form_actions,
-    form_classes,
-    form_properties,
-    form_templates,
-)
+from eNMS.forms import form_classes, form_properties
 from eNMS.forms.administration import init_variable_forms, LoginForm
 from eNMS.models import models, property_types, relationships
 from eNMS.setup import properties, rbac, themes, update_file, visualization
@@ -275,12 +270,13 @@ class Server(Flask):
         @blueprint.route("/form/<form_type>")
         @self.monitor_requests
         def form(form_type):
+            form_class = form_classes[form_type]
             return render_template(
-                f"forms/{form_templates.get(form_type, 'base')}.html",
+                f"forms/{getattr(form_class, 'template', 'base')}.html",
                 **{
                     "endpoint": f"forms/{form_type}",
-                    "action": form_actions.get(form_type),
-                    "form": form_classes[form_type](request.form),
+                    "action": getattr(form, "action", None),
+                    "form": form_class(request.form),
                     "form_type": form_type,
                 },
             )

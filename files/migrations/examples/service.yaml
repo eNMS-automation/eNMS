@@ -230,7 +230,7 @@
   shared: true
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   target_devices: []
   target_pools: []
   time_between_retries: 10
@@ -483,7 +483,7 @@
   shared: true
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   target_devices: []
   target_pools: []
   time_between_retries: 10
@@ -545,7 +545,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   target_devices: []
   target_pools: []
   time_between_retries: 10
@@ -625,7 +625,7 @@
   shared: true
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   string1: cisco
   string2: s2
   target_devices: [Washington]
@@ -703,7 +703,7 @@
   shared: false
   skip: {'Regression Workflow C: Advanced multiprocessing': true}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   start_new_connection: false
   target_devices: [Washington]
   target_pools: []
@@ -711,7 +711,6 @@
   type: configure_bgp_service
   update_pools_after_running: false
   update_target_pools: false
-  use_host_keys: false
   validation_condition: none
   validation_method: text
   vendor: ''
@@ -784,7 +783,7 @@
   shared: false
   skip: {'Regression Workflow 9: Operational Data Backup': true}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   start_new_connection: false
   target_devices: []
   target_pools: []
@@ -794,7 +793,6 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
-  use_host_keys: false
   validation_condition: none
   validation_method: text
   vendor: ''
@@ -868,7 +866,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   start_new_connection: false
   strip_command: false
   strip_prompt: false
@@ -880,7 +878,6 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
-  use_host_keys: false
   validation_condition: none
   validation_method: text
   vendor: Arista
@@ -966,7 +963,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   start_new_connection: false
   strip_command: true
   strip_prompt: true
@@ -979,7 +976,6 @@
   update_target_pools: false
   use_device_driver: true
   use_genie: false
-  use_host_keys: false
   validation_condition: success
   validation_method: text
   vendor: Arista
@@ -1054,7 +1050,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   start_new_connection: false
   strip_command: false
   strip_prompt: false
@@ -1066,7 +1062,6 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
-  use_host_keys: false
   validation_condition: none
   validation_method: text
   vendor: Arista
@@ -1151,7 +1146,7 @@
   shared: true
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   start_new_connection: true
   strip_command: true
   strip_prompt: true
@@ -1164,7 +1159,6 @@
   update_target_pools: false
   use_device_driver: true
   use_genie: false
-  use_host_keys: false
   validation_condition: success
   validation_method: text
   vendor: Arista
@@ -1233,7 +1227,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   start_new_connection: false
   target_devices: [Austin, Washington]
   target_pools: []
@@ -1243,7 +1237,6 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
-  use_host_keys: false
   validation_condition: none
   validation_method: text
   vendor: Arista
@@ -1322,7 +1315,7 @@
   shared: true
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   target_devices: [Columbus]
   target_pools: []
   time_between_retries: 10
@@ -1400,7 +1393,7 @@
   shared: true
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   start_new_connection: false
   target_devices: [Austin, Washington]
   target_pools: []
@@ -1410,7 +1403,6 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
-  use_host_keys: false
   validation_condition: success
   validation_method: dict_included
   vendor: ''
@@ -1479,7 +1471,7 @@
   shared: true
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   start_new_connection: false
   target_devices: [Austin, Washington]
   target_pools: []
@@ -1489,7 +1481,6 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
-  use_host_keys: false
   validation_condition: success
   validation_method: dict_included
   vendor: ''
@@ -1557,7 +1548,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   start_new_connection: false
   target_devices: [Austin, Washington]
   target_pools: []
@@ -1567,7 +1558,6 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
-  use_host_keys: false
   validation_condition: success
   validation_method: dict_included
   vendor: ''
@@ -1633,7 +1623,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   start_new_connection: false
   target_devices: [Austin, Washington]
   target_pools: []
@@ -1643,7 +1633,6 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
-  use_host_keys: false
   validation_condition: success
   validation_method: dict_included
   vendor: ''
@@ -1702,7 +1691,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   target_devices: [Austin, Washington]
   target_pools: []
   time_between_retries: 10
@@ -1770,7 +1759,7 @@
   shared: true
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   source_code: "# Interfaces 1\r\ntargets = ['Loopback101', 'Loopback15'] if device.name\
     \ == \"Washington\" else ['Loopback9', 'Loopback1000']\r\nset_var('Interfaces\
     \ 1', targets, device=device.name)\r\n\r\n# Derived Devices\r\nset_var(\"Derived\
@@ -1872,7 +1861,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   start_new_connection: false
   strip_command: true
   strip_prompt: true
@@ -1885,7 +1874,6 @@
   update_target_pools: false
   use_device_driver: true
   use_genie: false
-  use_host_keys: false
   validation_condition: success
   validation_method: text
   vendor: Arista
@@ -1971,7 +1959,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   target_devices: []
   target_pools: []
   time_between_retries: 10
@@ -2047,7 +2035,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   start_new_connection: false
   target_devices: []
   target_pools: []
@@ -2057,7 +2045,6 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
-  use_host_keys: false
   validation_condition: none
   validation_method: text
   vendor: ''
@@ -2141,7 +2128,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   start_new_connection: false
   strip_command: true
   strip_prompt: true
@@ -2154,7 +2141,6 @@
   update_target_pools: false
   use_device_driver: true
   use_genie: false
-  use_host_keys: false
   validation_condition: success
   validation_method: text
   vendor: ''
@@ -2237,7 +2223,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   start_new_connection: false
   strip_command: true
   strip_prompt: true
@@ -2250,7 +2236,6 @@
   update_target_pools: false
   use_device_driver: true
   use_genie: false
-  use_host_keys: false
   validation_condition: success
   validation_method: text
   vendor: ''
@@ -2334,7 +2319,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   start_new_connection: false
   target_devices: [Washington]
   target_pools: []
@@ -2344,7 +2329,6 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
-  use_host_keys: false
   validation_condition: success
   validation_method: text
   vendor: ''
@@ -2428,7 +2412,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   start_new_connection: false
   target_devices: []
   target_pools: []
@@ -2438,7 +2422,6 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
-  use_host_keys: false
   validation_condition: success
   validation_method: text
   vendor: ''
@@ -2497,7 +2480,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   source_code: "set_var(\"global_variable\", value=1050)\r\nset_var(\"variable\",\
     \ \"variable_in_variables\")\r\nsave_result(success=True, result={})"
   target_devices: []
@@ -2564,7 +2547,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   source_code: "set_var(\"variable1\", 999, device=device.name)\r\nset_var(\"variable2\"\
     , \"1000\", device=device.name, section=\"variables\")\r\nset_var(\"iteration_simple\"\
     , \"192.168.56.50\")\r\ndevices = [\"Boston\", \"Cincinnati\"] if device.name\
@@ -2655,7 +2638,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   start_new_connection: false
   strip_command: true
   strip_prompt: true
@@ -2668,7 +2651,6 @@
   update_target_pools: false
   use_device_driver: true
   use_genie: false
-  use_host_keys: false
   validation_condition: success
   validation_method: text
   vendor: ''
@@ -2748,7 +2730,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   start_new_connection: false
   strip_command: true
   strip_prompt: true
@@ -2761,7 +2743,6 @@
   update_target_pools: false
   use_device_driver: true
   use_genie: false
-  use_host_keys: false
   validation_condition: success
   validation_method: text
   vendor: ''
@@ -2841,7 +2822,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   start_new_connection: false
   strip_command: true
   strip_prompt: true
@@ -2854,7 +2835,6 @@
   update_target_pools: false
   use_device_driver: true
   use_genie: false
-  use_host_keys: false
   validation_condition: success
   validation_method: text
   vendor: ''
@@ -2932,7 +2912,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   start_new_connection: false
   target_devices: []
   target_pools: []
@@ -2942,7 +2922,6 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
-  use_host_keys: false
   validation_condition: success
   validation_method: dict_equal
   vendor: ''
@@ -3019,7 +2998,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   start_new_connection: false
   target_devices: []
   target_pools: []
@@ -3029,7 +3008,6 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
-  use_host_keys: false
   validation_condition: success
   validation_method: dict_included
   vendor: ''
@@ -3117,7 +3095,7 @@
   shared: true
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   start_new_connection: false
   target_devices: []
   target_pools: []
@@ -3127,7 +3105,6 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
-  use_host_keys: false
   validation_condition: success
   validation_method: dict_included
   vendor: ''
@@ -3204,7 +3181,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   start_new_connection: false
   target_devices: []
   target_pools: []
@@ -3214,7 +3191,6 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
-  use_host_keys: false
   validation_condition: success
   validation_method: dict_equal
   vendor: ''
@@ -3291,7 +3267,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   start_new_connection: false
   target_devices: []
   target_pools: []
@@ -3301,7 +3277,6 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
-  use_host_keys: false
   validation_condition: success
   validation_method: dict_included
   vendor: ''
@@ -3365,7 +3340,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   target_devices: [Washington]
   target_pools: []
   time_between_retries: 10
@@ -3434,7 +3409,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   target_devices: []
   target_pools: []
   time_between_retries: 10
@@ -3503,7 +3478,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   target_devices: []
   target_pools: []
   time_between_retries: 10
@@ -3591,7 +3566,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   start_new_connection: false
   strip_command: true
   strip_prompt: true
@@ -3604,7 +3579,6 @@
   update_target_pools: false
   use_device_driver: true
   use_genie: false
-  use_host_keys: false
   validation_condition: success
   validation_method: text
   vendor: ''
@@ -3684,7 +3658,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   start_new_connection: false
   strip_command: true
   strip_prompt: true
@@ -3697,7 +3671,6 @@
   update_target_pools: false
   use_device_driver: true
   use_genie: false
-  use_host_keys: false
   validation_condition: success
   validation_method: text
   vendor: Arista
@@ -3777,7 +3750,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   start_new_connection: false
   strip_command: true
   strip_prompt: true
@@ -3790,7 +3763,6 @@
   update_target_pools: false
   use_device_driver: true
   use_genie: false
-  use_host_keys: false
   validation_condition: success
   validation_method: text
   vendor: Arista
@@ -3870,7 +3842,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   start_new_connection: false
   strip_command: true
   strip_prompt: true
@@ -3883,7 +3855,6 @@
   update_target_pools: false
   use_device_driver: true
   use_genie: false
-  use_host_keys: false
   validation_condition: success
   validation_method: text
   vendor: Arista
@@ -3953,7 +3924,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   source_code: "set_var(\"list\", [1, 2], device=device.name)\r\nset_var(\"dict\"\
     , {\"a\": [\"o\", True, 4]}, device=device.name)\r\nsave_result(success=True,\
     \ result={})"
@@ -4044,7 +4015,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   target_devices: []
   target_pools: []
   time_between_retries: 10
@@ -4135,7 +4106,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   target_devices: []
   target_pools: []
   time_between_retries: 10
@@ -4209,7 +4180,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   target_devices: []
   target_pools: []
   time_between_retries: 10
@@ -4281,7 +4252,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   source_code: "result = {\r\n \"get_var\": get_var(\"Interfaces 2\"),\r\n\"version\
     \ in parent workflow\": get_result(\"Show interfaces with Netmiko\", device=device.name,\
     \ workflow=\"Regression Workflow F: Workflow of Workflows\"),\r\n\"napalm workflow\
@@ -4379,7 +4350,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   start_new_connection: false
   strip_command: true
   strip_prompt: true
@@ -4392,7 +4363,6 @@
   update_target_pools: false
   use_device_driver: true
   use_genie: false
-  use_host_keys: false
   validation_condition: success
   validation_method: text
   vendor: ''
@@ -4460,7 +4430,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   target_devices: [Washington]
   target_pools: []
   time_between_retries: 10
@@ -4568,7 +4538,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   superworkflow: 'Regression Workflow: Superworkflow'
   target_devices: [Austin, Washington]
   target_pools: []
@@ -4651,7 +4621,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   target_devices: [Washington]
   target_pools: []
   time_between_retries: 10
@@ -4734,7 +4704,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   target_devices: [Washington, Atlanta]
   target_pools: []
   time_between_retries: 10
@@ -4858,7 +4828,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   target_devices: [Washington]
   target_pools: []
   time_between_retries: 10
@@ -4940,7 +4910,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   target_devices: [Austin, Washington]
   target_pools: []
   time_between_retries: 10
@@ -5015,7 +4985,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   target_devices: [Washington, Philadelphia, LosAngeles]
   target_pools: []
   time_between_retries: 10
@@ -5095,7 +5065,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   target_devices: [Washington]
   target_pools: []
   time_between_retries: 10
@@ -5189,7 +5159,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   target_devices: [Washington, Chicago]
   target_pools: []
   time_between_retries: 10
@@ -5304,7 +5274,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   target_devices: [Austin, Washington]
   target_pools: []
   time_between_retries: 10
@@ -5401,7 +5371,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   target_devices: [Austin, Washington]
   target_pools: []
   time_between_retries: 10
@@ -5480,7 +5450,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   target_devices: [Jackson, PaloAlto, Austin, Washington, Chicago, SanJose, SanDiego,
     Dallas, Houston, Baltimore, Cleveland, Cincinnati, Minneapolis, Sacramento, SanFrancisco,
     Oakland, Denver]
@@ -5588,7 +5558,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   target_devices: [Austin, Washington]
   target_pools: []
   time_between_retries: 10
@@ -5671,7 +5641,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   target_devices: [Washington]
   target_pools: []
   time_between_retries: 10
@@ -5744,7 +5714,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   target_devices: []
   target_pools: []
   time_between_retries: 10
@@ -5818,7 +5788,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   target_devices: [Washington]
   target_pools: []
   time_between_retries: 10
@@ -5904,7 +5874,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   start_new_connection: false
   strip_command: true
   strip_prompt: true
@@ -5917,7 +5887,6 @@
   update_target_pools: false
   use_device_driver: true
   use_genie: false
-  use_host_keys: false
   validation_condition: none
   validation_method: text
   vendor: ''
@@ -6022,7 +5991,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   start_new_connection: false
   target_devices: []
   target_pools: [Washington]
@@ -6032,7 +6001,6 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
-  use_host_keys: false
   validation_condition: none
   validation_method: text
   vendor: ''
@@ -6096,7 +6064,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   target_devices: [Austin, Washington]
   target_pools: []
   time_between_retries: 10
@@ -6166,7 +6134,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   target_devices: []
   target_pools: []
   time_between_retries: 10
@@ -6237,7 +6205,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   target_devices: []
   target_pools: []
   time_between_retries: 10
@@ -6310,7 +6278,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   target_devices: []
   target_pools: []
   time_between_retries: 10
@@ -6382,7 +6350,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   target_devices: []
   target_pools: []
   time_between_retries: 10
@@ -6454,7 +6422,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   target_devices: []
   target_pools: []
   time_between_retries: 10
@@ -6542,7 +6510,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   start_new_connection: false
   strip_command: true
   strip_prompt: true
@@ -6555,7 +6523,6 @@
   update_target_pools: false
   use_device_driver: true
   use_genie: false
-  use_host_keys: false
   validation_condition: none
   validation_method: text
   vendor: ''
@@ -6636,7 +6603,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   start_new_connection: false
   strip_command: true
   strip_prompt: true
@@ -6649,7 +6616,6 @@
   update_target_pools: false
   use_device_driver: true
   use_genie: false
-  use_host_keys: false
   validation_condition: none
   validation_method: text
   vendor: ''
@@ -6730,7 +6696,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   start_new_connection: false
   strip_command: true
   strip_prompt: true
@@ -6743,7 +6709,6 @@
   update_target_pools: false
   use_device_driver: true
   use_genie: false
-  use_host_keys: false
   validation_condition: none
   validation_method: text
   vendor: ''
@@ -6826,7 +6791,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   target_devices: [PaloAlto]
   target_pools: []
   time_between_retries: 10
@@ -6897,7 +6862,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   target_devices: []
   target_pools: []
   time_between_retries: 10
@@ -6968,7 +6933,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   target_devices: []
   target_pools: []
   time_between_retries: 10
@@ -7058,7 +7023,7 @@
   shared: true
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   start_new_connection: false
   strip_command: true
   strip_prompt: true
@@ -7071,7 +7036,6 @@
   update_target_pools: false
   use_device_driver: true
   use_genie: false
-  use_host_keys: false
   validation_condition: success
   validation_method: text
   vendor: ''
@@ -7133,7 +7097,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   target_devices: []
   target_pools: []
   time_between_retries: 10
@@ -7200,7 +7164,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   target_devices: [Washington]
   target_pools: []
   time_between_retries: 10
@@ -7265,7 +7229,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   source_code: "results[\"success\"] = True\r\nresults[\"result\"] = {\r\n  \"dict_iteration\"\
     : {\r\n    \"variable1\": {\"command\": \"test\"},\r\n    \"variable2\": {\"command\"\
     : \"test2\"}\r\n  }\r\n}"
@@ -7353,7 +7317,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   start_new_connection: false
   strip_command: true
   strip_prompt: true
@@ -7366,7 +7330,6 @@
   update_target_pools: false
   use_device_driver: true
   use_genie: false
-  use_host_keys: false
   validation_condition: none
   validation_method: text
   vendor: ''
@@ -7427,7 +7390,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   target_devices: [Washington]
   target_pools: []
   time_between_retries: 10
@@ -7492,7 +7455,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   source_code: "result={\"top_level\": top_level_iteration}\r\nresults[\"result\"\
     ] = result\r\nresults[\"success\"] = True"
   target_devices: []
@@ -7562,7 +7525,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   target_devices: []
   target_pools: []
   time_between_retries: 10
@@ -7629,7 +7592,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   source_code: "result={\"top_level\": top_level_iteration, \"subworkflow\": subworkflow_iteration}\r\
     \nresults[\"success\"] = True\r\nresults[\"result\"] = result\r\n"
   target_devices: []
@@ -7708,7 +7671,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   source_code: "result = {}\r\nresults[\"success\"] = True\r\nresults[\"result\"]\
     \ = get_result(\"Payload Extraction\", device.name)[\"result\"][\"regex_variable\"\
     ]"
@@ -7787,7 +7750,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   source_code: "result = {}\r\nresults[\"success\"] = True\r\nresults[\"result\"]\
     \ = get_result(\"Payload Extraction\", device.name)[\"result\"][\"textfsm_variable\"\
     ][\"value\"][0][1]"
@@ -7867,7 +7830,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   source_code: "result = {}\r\nresults[\"success\"] = True\r\nresults[\"result\"]\
     \ = {\"value\": get_var(\"regex_variable\", device=device.name)}"
   target_devices: []
@@ -7945,7 +7908,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   source_code: "result = {}\r\nresults[\"success\"] = True\r\nresults[\"result\"]\
     \ = get_var(\"textfsm_variable\", device=device.name)[0][1]"
   target_devices: []
@@ -8023,7 +7986,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   source_code: "result = {}\r\nresults[\"success\"] = True\r\nresults[\"result\"]\
     \ = get_var(\"list\", device=device.name)"
   target_devices: []
@@ -8101,7 +8064,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   source_code: "result = {}\r\nresults[\"success\"] = True\r\nresults[\"result\"]\
     \ = get_var(\"dict\", device=device.name)"
   target_devices: []
@@ -8188,7 +8151,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   superworkflow: 'Regression Workflow: Superworkflow'
   target_devices: [Washington, Chicago]
   target_pools: []
@@ -8257,7 +8220,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   source_code: "result = {}\r\nresults[\"success\"] = True\r\nresults[\"result\"]\
     \ = test"
   target_devices: []
@@ -8325,7 +8288,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   source_code: "results[\"integer\"] = 10 + integer\r\nresults[\"success\"] = False"
   target_devices: []
   target_pools: []
@@ -8390,7 +8353,7 @@
   shared: true
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   target_devices: []
   target_pools: []
   time_between_retries: 10
@@ -8458,7 +8421,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   target_devices: [SanJose, SanDiego]
   target_pools: []
   time_between_retries: 10
@@ -8537,7 +8500,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   target_devices: []
   target_pools: []
   time_between_retries: 10
@@ -8606,7 +8569,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   target_devices: [Washington, LosAngeles]
   target_pools: []
   time_between_retries: 10
@@ -8685,7 +8648,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   source_code: "#!/bin/bash\r\nping_result=`ping -c 5 192.168.56.102`  # Needs privileged\
     \ mode\r\nreturn_code=$?\r\nif [ $return_code -ne 0 ]; then\r\n    exit $return_code\
     \  # Indicating Failure\r\nelse\r\n    echo -e \"$ping_result\"\r\n    exit 0\r\
@@ -8701,7 +8664,6 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: false
-  use_host_keys: false
   validation_condition: success
   validation_method: text
   vendor: ''
@@ -8766,7 +8728,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   target_devices: [Washington]
   target_pools: []
   time_between_retries: 10
@@ -8834,7 +8796,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   target_devices: []
   target_pools: []
   time_between_retries: 10
@@ -8910,7 +8872,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   target_devices: []
   target_pools: []
   time_between_retries: 10
@@ -8998,7 +8960,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   start_new_connection: false
   strip_command: true
   strip_prompt: true
@@ -9011,7 +8973,6 @@
   update_target_pools: false
   use_device_driver: true
   use_genie: false
-  use_host_keys: false
   validation_condition: success
   validation_method: text
   vendor: ''
@@ -9077,7 +9038,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   target_devices: [Columbus]
   target_pools: []
   time_between_retries: 10
@@ -9163,7 +9124,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   start_new_connection: false
   strip_command: true
   strip_prompt: true
@@ -9176,7 +9137,6 @@
   update_target_pools: false
   use_device_driver: true
   use_genie: false
-  use_host_keys: false
   validation_condition: none
   validation_method: text
   vendor: ''
@@ -9280,7 +9240,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   start_new_connection: false
   target_devices: []
   target_pools: []
@@ -9290,7 +9250,6 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
-  use_host_keys: false
   validation_condition: none
   validation_method: text
   vendor: ''
@@ -9356,7 +9315,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   target_devices: []
   target_pools: []
   time_between_retries: 10
@@ -9420,7 +9379,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   source_code: "result = {}\r\nresults[\"success\"] = True\r\nresults[\"result\"]\
     \ = get_result(placeholder.name)[\"summary\"]"
   target_devices: []
@@ -9490,7 +9449,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   target_devices: [Washington]
   target_pools: []
   time_between_retries: 10
@@ -9562,7 +9521,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   start_new_connection: false
   target_devices: []
   target_pools: []
@@ -9572,7 +9531,6 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
-  use_host_keys: false
   validation_condition: none
   validation_method: text
   vendor: ''
@@ -9637,7 +9595,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   start_new_connection: false
   target_devices: []
   target_pools: []
@@ -9647,7 +9605,6 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
-  use_host_keys: false
   validation_condition: none
   validation_method: text
   vendor: ''
@@ -9712,7 +9669,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   start_new_connection: false
   target_devices: []
   target_pools: []
@@ -9722,7 +9679,6 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
-  use_host_keys: false
   validation_condition: none
   validation_method: text
   vendor: ''
@@ -9787,7 +9743,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   start_new_connection: false
   target_devices: []
   target_pools: []
@@ -9797,7 +9753,6 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
-  use_host_keys: false
   validation_condition: none
   validation_method: text
   vendor: ''
@@ -9877,7 +9832,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   target_devices: []
   target_pools: ['All instances (devices, links, services and users)', All devices,
     All links, Datacenter San Francisco, Datacenter New York, Datacenter Chicago,
@@ -9961,7 +9916,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   target_devices: []
   target_pools: []
   time_between_retries: 10
@@ -10038,7 +9993,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   target_devices: []
   target_pools: []
   time_between_retries: 10
@@ -10115,7 +10070,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   target_devices: []
   target_pools: []
   time_between_retries: 10
@@ -10192,7 +10147,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   target_devices: []
   target_pools: []
   time_between_retries: 10
@@ -10269,7 +10224,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   target_devices: []
   target_pools: []
   time_between_retries: 10
@@ -10359,7 +10314,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   start_new_connection: false
   strip_command: true
   strip_prompt: true
@@ -10372,7 +10327,6 @@
   update_target_pools: false
   use_device_driver: true
   use_genie: false
-  use_host_keys: false
   validation_condition: none
   validation_method: text
   vendor: ''
@@ -10453,7 +10407,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   start_new_connection: false
   strip_command: true
   strip_prompt: true
@@ -10466,7 +10420,6 @@
   update_target_pools: false
   use_device_driver: true
   use_genie: false
-  use_host_keys: false
   validation_condition: none
   validation_method: text
   vendor: ''
@@ -10547,7 +10500,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   start_new_connection: false
   strip_command: true
   strip_prompt: true
@@ -10560,7 +10513,6 @@
   update_target_pools: false
   use_device_driver: true
   use_genie: false
-  use_host_keys: false
   validation_condition: none
   validation_method: text
   vendor: ''
@@ -10641,7 +10593,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   start_new_connection: false
   strip_command: true
   strip_prompt: true
@@ -10654,7 +10606,6 @@
   update_target_pools: false
   use_device_driver: true
   use_genie: false
-  use_host_keys: false
   validation_condition: none
   validation_method: text
   vendor: ''
@@ -10735,7 +10686,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   start_new_connection: false
   strip_command: true
   strip_prompt: true
@@ -10748,7 +10699,6 @@
   update_target_pools: false
   use_device_driver: true
   use_genie: false
-  use_host_keys: false
   validation_condition: none
   validation_method: text
   vendor: ''
@@ -10829,7 +10779,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   start_new_connection: false
   strip_command: true
   strip_prompt: true
@@ -10842,7 +10792,6 @@
   update_target_pools: false
   use_device_driver: true
   use_genie: false
-  use_host_keys: false
   validation_condition: none
   validation_method: text
   vendor: ''
@@ -10901,7 +10850,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   source_code: "from time import sleep\r\nsleep(1)\r\n\r\nresult = {}\r\nresults[\"\
     success\"] = True\r\nresults[\"result\"] = result"
   target_devices: []
@@ -10969,7 +10918,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   source_code: "from time import sleep\r\nsleep(1)\r\n\r\nresult = {}\r\nresults[\"\
     success\"] = True\r\nresults[\"result\"] = result"
   target_devices: []
@@ -11037,7 +10986,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   source_code: "from time import sleep\r\nsleep(1)\r\n\r\nresult = {}\r\nresults[\"\
     success\"] = True\r\nresults[\"result\"] = result"
   target_devices: []
@@ -11105,7 +11054,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   source_code: "from time import sleep\r\nsleep(1)\r\n\r\nresult = {}\r\nresults[\"\
     success\"] = True\r\nresults[\"result\"] = result"
   target_devices: []
@@ -11173,7 +11122,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   source_code: "from time import sleep\r\nsleep(1)\r\n\r\nresult = {}\r\nresults[\"\
     success\"] = True\r\nresults[\"result\"] = result"
   target_devices: []
@@ -11241,7 +11190,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   source_code: "from time import sleep\r\nsleep(1)\r\n\r\nresult = {}\r\nresults[\"\
     success\"] = True\r\nresults[\"result\"] = result"
   target_devices: []
@@ -11309,7 +11258,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   source_code: "from time import sleep\r\nsleep(1)\r\n\r\nresult = {}\r\nresults[\"\
     success\"] = True\r\nresults[\"result\"] = result"
   target_devices: []
@@ -11377,7 +11326,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   source_code: "from time import sleep\r\nsleep(1)\r\n\r\nresult = {}\r\nresults[\"\
     success\"] = True\r\nresults[\"result\"] = result"
   target_devices: []
@@ -11450,7 +11399,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   target_devices: [Washington]
   target_pools: []
   time_between_retries: 10
@@ -11537,7 +11486,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   start_new_connection: false
   strip_command: true
   strip_prompt: true
@@ -11550,7 +11499,6 @@
   update_target_pools: false
   use_device_driver: true
   use_genie: false
-  use_host_keys: false
   validation_condition: none
   validation_method: text
   vendor: ''
@@ -11615,7 +11563,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   source_file: /media/sf_shared/eNMS/tests/file_transfer/a.bin
   source_file_includes_globbing: false
   target_devices: []
@@ -11707,7 +11655,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   start_new_connection: false
   strip_command: true
   strip_prompt: true
@@ -11720,7 +11668,6 @@
   update_target_pools: false
   use_device_driver: true
   use_genie: false
-  use_host_keys: false
   validation_condition: none
   validation_method: text
   vendor: ''
@@ -11786,7 +11733,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   source_file: /media/sf_shared/eNMS/tests/file_transfer/?[c|d].bi*
   source_file_includes_globbing: true
   target_devices: [Washington]
@@ -11875,7 +11822,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   start_new_connection: false
   strip_command: true
   strip_prompt: true
@@ -11888,7 +11835,6 @@
   update_target_pools: false
   use_device_driver: true
   use_genie: false
-  use_host_keys: false
   validation_condition: none
   validation_method: text
   vendor: ''
@@ -11953,7 +11899,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   source_file: /media/test.bin
   source_file_includes_globbing: false
   target_devices: []
@@ -12024,7 +11970,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   target_devices: [Austin, Washington, Chicago]
   target_pools: []
   time_between_retries: 10
@@ -12091,7 +12037,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   source_code: "# Availble variables: device, results, run\r\n# Returning state:\r\
     \n#    results[\"success\"] = True\r\n#    results[\"result\"] = <return data>\r\
     \n# Logging: log(level, text)\r\n#    log(\"info\", \"My log message\")\r\n# Exit\
@@ -12163,7 +12109,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   source_code: "# Availble variables: device, results, run\r\n# Returning state:\r\
     \n#    results[\"success\"] = True\r\n#    results[\"result\"] = <return data>\r\
     \n# Logging: log(level, text)\r\n#    log(\"info\", \"My log message\")\r\n# Exit\
@@ -12235,7 +12181,7 @@
   shared: false
   skip: {'Regression Workflow R: skip services in service by service mode': true}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   source_code: "# Availble variables: device, results, run\r\n# Returning state:\r\
     \n#    results[\"success\"] = True\r\n#    results[\"result\"] = <return data>\r\
     \n# Logging: log(level, text)\r\n#    log(\"info\", \"My log message\")\r\n# Exit\
@@ -12326,7 +12272,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   target_devices: [PaloAlto, Austin, Washington, router5, router6, router7]
   target_pools: []
   time_between_retries: 10
@@ -12396,7 +12342,7 @@
   shared: false
   skip: {}
   skip_query: device.name == "Washington"
-  skip_value: 'failure'
+  skip_value: failure
   source_code: "# Availble variables: device, results, run\r\n# Returning state:\r\
     \n#    results[\"success\"] = True\r\n#    results[\"result\"] = <return data>\r\
     \n# Logging: log(level, text)\r\n#    log(\"info\", \"My log message\")\r\n# Exit\
@@ -12471,7 +12417,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   source_code: "# Availble variables: device, results, run\r\n# Returning state:\r\
     \n#    results[\"success\"] = True\r\n#    results[\"result\"] = <return data>\r\
     \n# Logging: log(level, text)\r\n#    log(\"info\", \"My log message\")\r\n# Exit\
@@ -12546,7 +12492,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   source_code: "# Availble variables: device, results, run\r\n# Returning state:\r\
     \n#    results[\"success\"] = True\r\n#    results[\"result\"] = <return data>\r\
     \n# Logging: log(level, text)\r\n#    log(\"info\", \"My log message\")\r\n# Exit\
@@ -12621,7 +12567,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   source_code: "# Availble variables: device, results, run\r\n# Returning state:\r\
     \n#    results[\"success\"] = True\r\n#    results[\"result\"] = <return data>\r\
     \n# Logging: log(level, text)\r\n#    log(\"info\", \"My log message\")\r\n# Exit\
@@ -12716,7 +12662,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   target_devices: [Dallas]
   target_pools: []
   time_between_retries: 10
@@ -12786,7 +12732,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   source_code: "def names(instances):\r\n  return {instance.name for instance in instances}\r\
     \n\r\nresult = {}\r\n# neighbors in both direction\r\nresults[\"result\"] = {\r\
     \n  \t\"direction=both, device\": names(device.get_neighbors(\"device\")),\r\n\
@@ -12887,7 +12833,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   target_devices: []
   target_pools: []
   time_between_retries: 10
@@ -12976,7 +12922,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   start_new_connection: false
   strip_command: true
   strip_prompt: true
@@ -12989,7 +12935,6 @@
   update_target_pools: false
   use_device_driver: true
   use_genie: false
-  use_host_keys: false
   validation_condition: success
   validation_method: text
   vendor: ''
@@ -13071,7 +13016,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   target_devices: [PaloAlto, Washington]
   target_pools: []
   time_between_retries: 10
@@ -13139,7 +13084,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   source_code: "result = {}\r\nsuccess = True\r\nresults[\"result\"] = result\r\n\r\
     \ntry:\r\n    fetch(\"user\", name=\"admin\")\r\n    success = False\r\nexcept:\r\
     \n    pass\r\n\r\ntry:\r\n    fetch(\"access\", name=\"Full Access to Everything\"\
@@ -13216,7 +13161,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   source_code: "result = {}\r\nresults[\"success\"] = True\r\nresults[\"username\"\
     ] = \"admin\"\r\nresults[\"password\"] = encrypt(\"admin\")\r\nresults[\"result\"\
     ] = result"
@@ -13308,7 +13253,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   start_new_connection: false
   strip_command: true
   strip_prompt: true
@@ -13321,7 +13266,6 @@
   update_target_pools: false
   use_device_driver: true
   use_genie: false
-  use_host_keys: false
   validation_condition: none
   validation_method: text
   vendor: ''
@@ -13476,7 +13420,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   target_devices: [Austin, Washington, Baltimore, Cincinnati, Cambridge]
   target_pools: []
   time_between_retries: 10
@@ -13559,7 +13503,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   target_devices: []
   target_pools: []
   time_between_retries: 10
@@ -13793,7 +13737,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   start_new_connection: false
   strip_command: true
   strip_prompt: true
@@ -13806,7 +13750,6 @@
   update_target_pools: false
   use_device_driver: true
   use_genie: false
-  use_host_keys: false
   validation_condition: none
   validation_method: text
   vendor: ''
@@ -13874,7 +13817,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   target_devices: []
   target_pools: []
   time_between_retries: 10
@@ -14046,7 +13989,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   target_devices: [PaloAlto, Austin, Washington]
   target_pools: []
   time_between_retries: 10
@@ -14185,7 +14128,7 @@
   shared: false
   skip: {}
   skip_query: device.name == "Washington"
-  skip_value: 'failure'
+  skip_value: failure
   source_code: "result = {}\r\nfor device in devices:\r\n  results.setdefault(\"devices\"\
     , []).append(device.name)\r\nresults[\"success\"] = True\r\nresults[\"result\"\
     ] = result"
@@ -14257,7 +14200,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   target_devices: []
   target_pools: []
   time_between_retries: 10
@@ -14324,7 +14267,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   source_code: "# Availble variables: device, results, run\r\n# Returning state:\r\
     \n#    results[\"success\"] = True\r\n#    results[\"result\"] = <return data>\r\
     \n# Logging: log(level, text)\r\n#    log(\"info\", \"My log message\")\r\n# Exit\
@@ -14420,7 +14363,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   target_devices: [PaloAlto, Austin, Washington]
   target_pools: []
   time_between_retries: 10
@@ -14488,7 +14431,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   source_code: "result = {}\r\nresults[\"success\"] = True\r\nresults[\"result\"]\
     \ = result"
   target_devices: []
@@ -14561,7 +14504,7 @@
   shared: false
   skip: {}
   skip_query: device.name == "PaloAlto"
-  skip_value: 'failure'
+  skip_value: failure
   target_devices: []
   target_pools: []
   time_between_retries: 10
@@ -14701,7 +14644,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   source_code: "result = {}\r\nresults[\"success\"] = True\r\nresults[\"result\"]\
     \ = result"
   target_devices: []
@@ -14770,7 +14713,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   source_code: "result = {}\r\nresults[\"success\"] = device.name == \"Washington\"\
     \r\nresults[\"result\"] = result"
   target_devices: []
@@ -14838,7 +14781,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   source_code: "result = {}\r\nresults[\"success\"] = device.name != \"PaloAlto\"\r\
     \nresults[\"result\"] = result"
   target_devices: []
@@ -14923,7 +14866,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   start_new_connection: false
   strip_command: true
   strip_prompt: true
@@ -14936,7 +14879,6 @@
   update_target_pools: false
   use_device_driver: true
   use_genie: false
-  use_host_keys: false
   validation_condition: none
   validation_method: text
   vendor: ''
@@ -15024,7 +14966,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   target_devices: [Washington]
   target_pools: [Credentials pool - Austin devices]
   time_between_retries: 10
@@ -15112,7 +15054,7 @@
   shared: false
   skip: {}
   skip_query: ''
-  skip_value: 'success'
+  skip_value: success
   start_new_connection: false
   strip_command: true
   strip_prompt: true
@@ -15125,7 +15067,6 @@
   update_target_pools: false
   use_device_driver: true
   use_genie: false
-  use_host_keys: false
   validation_condition: none
   validation_method: text
   vendor: ''

@@ -354,7 +354,7 @@
         "data": "success",
         "title": "Status",
         "search": "bool",
-        "search_labels": {"true": "Success", "false": "Failure"},
+        "search_labels": { "true": "Success", "false": "Failure" },
         "width": "80px",
         "orderable": false
       },
@@ -666,7 +666,7 @@
         "data": "success",
         "title": "Status",
         "search": "bool",
-        "search_labels": {"true": "Success", "false": "Failure"},
+        "search_labels": { "true": "Success", "false": "Failure" },
         "width": "80px",
         "orderable": false
       },

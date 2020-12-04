@@ -270,13 +270,15 @@ class Server(Flask):
         @blueprint.route("/form/<form_type>")
         @self.monitor_requests
         def form(form_type):
-            form_class = form_classes[form_type]
+            form = form_classes[form_type](request.form)
             return render_template(
-                f"forms/{getattr(form_class, 'template', 'base')}.html",
+                f"forms/{getattr(form, 'template', 'base')}.html",
                 **{
                     "endpoint": f"forms/{form_type}",
                     "action": getattr(form, "action", None),
-                    "form": form_class(request.form),
+                    "button_label": getattr(form, "button_label", "Confirm"),
+                    "button_class": getattr(form, "button_class", "success"),
+                    "form": form,
                     "form_type": form_type,
                 },
             )

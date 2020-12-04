@@ -364,6 +364,8 @@ class AddServiceForm(BaseForm):
 
 class RunServiceForm(BaseForm):
     action = "eNMS.automation.runServicesOnTargets"
+    button_label = "Run Service"
+    button_class = "primary"
     form_type = HiddenField(default="run_service")
     targets = HiddenField()
     type = HiddenField()

@@ -518,10 +518,14 @@ class BaseController:
     def remove_instance(self, **kwargs):
         instance = db.fetch(kwargs["instance"]["type"], id=kwargs["instance"]["id"])
         target = db.fetch(kwargs["relation"]["type"], id=kwargs["relation"]["id"])
+        if target.type == "pool" and not target.manually_defined:
+            return {"alert": "Removing an object from a dynamic pool is an allowed."}
         getattr(target, kwargs["relation"]["relation"]["to"]).remove(instance)
 
     def add_instances_in_bulk(self, **kwargs):
         target = db.fetch(kwargs["relation_type"], id=kwargs["relation_id"])
+        if target.type == "pool" and not target.manually_defined:
+            return {"alert": "Adding objects to a dynamic pool is not allowed."}
         model, property = kwargs["model"], kwargs["property"]
         instances = set(db.objectify(model, kwargs["instances"]))
         if kwargs["names"]:
@@ -547,6 +551,8 @@ class BaseController:
     ):
         kwargs[constraint_property] = [target_id]
         target = db.fetch(target_type, id=target_id)
+        if target.type == "pool" and not target.manually_defined:
+            return {"alert": "Removing objects from a dynamic pool is an allowed."}
         instances = self.filtering(table, bulk="object", form=kwargs)
         for instance in instances:
             getattr(target, target_property).remove(instance)

@@ -480,6 +480,7 @@
       {
         "data": "manually_defined",
         "title": "Manually defined",
+        "orderable": false,
         "search": "bool",
         "width": "100px"
       },

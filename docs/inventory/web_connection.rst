@@ -100,8 +100,6 @@ The following window will pop up:
 You can configure the following parameters :
 
 - Property used for the connection: by default, eNMS uses the IP address but you can also select to use the name, or any custom property.
-- Accept only one client: the first client will be allowed, all others will be rejected when trying to access the terminal URL.
-- Share session with all clients: a single process will be shared across all clients with tmux (terminal multiplexing), such that all clients will share the same session (same screen).
 - Automatically authenticate (SSH only): eNMS will use the credentials stored in the Vault (production mode) or the database (test mode) to automatically authenticate to the network device. eNMS uses ``sshpass`` for the authentication: it must be installed if you activate the automatic authentication (``sudo apt-get install sshpass``). By default, eNMS uses the user credentials for the authentication (the ones you use to log in to eNMS). However, it can be configured to use the device credentials instead (the credentials that you can specify when creating a new device).
 - Protocol: SSH or Telnet.
 

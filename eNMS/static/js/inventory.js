@@ -228,7 +228,7 @@ function displayNetworkData(type, id, result, datetime) {
           </button>
         </nav>
         <div class="x_title">
-          <h4 class="text-center" style="color:#FFF">${datetime}</h4>
+          <h4 class="text-center" style="color:#FFF">${datetime || ""}</h4>
         </div>
         <div id="content-${id}"></div>
       </div>`,

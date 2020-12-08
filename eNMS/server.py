@@ -318,7 +318,7 @@ class Server(Flask):
             if f"/{endpoint}" not in app.rbac["post_requests"]:
                 return jsonify({"alert": "Invalid POST request."})
             if not admin_user and f"/{endpoint}" not in current_user.post_requests:
-                return jsonify({"alert": "Error 403 Forbidden."})
+                return jsonify({"alert": "Error 403 - Operation not allowed."})
             form_type = request.form.get("form_type")
             if request.json:
                 kwargs = request.json

@@ -923,8 +923,8 @@
   service_operating_system_match: inclusion
   service_vendor: ''
   service_vendor_match: inclusion
-  target_services: ['Regression Workflow: Scalability Test (large workflow)', '[Regression
-      Workflow: Operational Data Backup (admin)] Retrieve Operational Data']
+  target_services: ['[Regression Workflow: Operational Data Backup (admin)] Retrieve
+      Operational Data', 'Regression Workflow: Scalability Test (large workflow)']
   tasks: []
   type: pool
   user_description: ''
@@ -1563,7 +1563,7 @@
   user_name: ''
   user_name_invert: false
   user_name_match: inclusion
-  users: [demo, readonly]
+  users: [readonly, demo]
 - access_groups: ''
   creator: admin
   default_access: creator

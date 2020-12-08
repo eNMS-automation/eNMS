@@ -132,6 +132,7 @@
     "/form/result",
     "/form/result_log_deletion",
     "/form/run_relation_filtering",
+    "/form/run_service",
     "/form/scrapli_service",
     "/form/server",
     "/form/service_filtering",

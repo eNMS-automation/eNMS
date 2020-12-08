@@ -111,7 +111,7 @@
     /switch_menu, /switch_theme, /filtering, /view_filtering]
   type: access
   upper_menu: [Admin, Settings, Files]
-  user_pools: [User readonly]
+  user_pools: [Read-only users]
 - access_pools: [Datacenter New York]
   access_type: "['Read', 'Connect']"
   delete_requests: []

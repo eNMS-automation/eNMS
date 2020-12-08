@@ -1,8 +1,8 @@
 - {authentication: database, description: '', email: admin@enms.io, groups: admin,
   is_admin: true, name: admin, password: JGFyZ29uMmlkJHY9MTkkbT0xMDI0MDAsdD0yLHA9OCRNaWFrOVA3Zit6OW5qSEd1RmVLOGR3JEhLWk5VWnVpMnlObkt5QnRHNFR4WEE=,
   small_menu: false, theme: default, type: user}
-- {authentication: database, description: '', email: read-only@enms.io, groups: '',
-  is_admin: false, name: readonly, password: JGFyZ29uMmlkJHY9MTkkbT0xMDI0MDAsdD0yLHA9OCQrcjkzTHNXWUU4SjRiODNaVytzOTV3JG5FNXFiU3B2QWM1ZUpyYWdwSlBycXc=,
+- {authentication: database, description: Read Only user, email: read-only@enms.io,
+  groups: '', is_admin: false, name: readonly, password: JGFyZ29uMmlkJHY9MTkkbT0xMDI0MDAsdD0yLHA9OCQrcjkzTHNXWUU4SjRiODNaVytzOTV3JG5FNXFiU3B2QWM1ZUpyYWdwSlBycXc=,
   small_menu: false, theme: default, type: user}
 - {authentication: database, description: '', email: chicago@enms.io, groups: 'chicago,usa',
   is_admin: false, name: chicago, password: JGFyZ29uMmlkJHY9MTkkbT0xMDI0MDAsdD0yLHA9OCRuRFBHV0t2MXZwY3lwbFJxYlEyQjBBJDd4dDllRzRVT240Y3E4U0x6K3NLb0E=,
@@ -30,4 +30,7 @@
   small_menu: false, theme: default, type: user}
 - {authentication: database, description: Access to UI but no instances, email: '',
   groups: '', is_admin: false, name: ui, password: JGFyZ29uMmlkJHY9MTkkbT0xMDI0MDAsdD0yLHA9OCRZU3pGT0NjazVQd2ZJeVJFYUsxMVRnJHBhS2pzcFU5YkwzWlJ6MDV2T1FwWkE=,
+  small_menu: false, theme: default, type: user}
+- {authentication: database, description: Read Only user, email: demo@enms.io, groups: '',
+  is_admin: false, name: demo, password: JGFyZ29uMmlkJHY9MTkkbT0xMDI0MDAsdD0yLHA9OCQwM3FQc1pieTNwdnpmZytCOEw1M3JnJHVPYjJ0RGdjUU45MUI2TEdPYkhOaVE=,
   small_menu: false, theme: default, type: user}

@@ -240,10 +240,3 @@ class WorkflowEdge(AbstractBase):
         self.label = kwargs["subtype"]
         self.color = self.color_mapping[kwargs["subtype"]]
         super().__init__(**kwargs)
-
-    @property
-    def ui_name(self):
-        return (
-            f"Edge from '{self.source.name}' to '{self.destination}'"
-            f" in {self.workflow.name}"
-        )

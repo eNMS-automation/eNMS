@@ -58,10 +58,11 @@ class AutomationController(BaseController):
     run_stop = defaultdict(bool)
 
     def add_edge(self, workflow_id, subtype, source, destination):
+        now = self.get_time()
         workflow_edge = self.update(
             "workflow_edge",
             **{
-                "name": f"{workflow_id}-{subtype}:{source}->{destination}",
+                "name": now,
                 "workflow": workflow_id,
                 "subtype": subtype,
                 "source": source,
@@ -71,7 +72,6 @@ class AutomationController(BaseController):
         if "alert" in workflow_edge:
             return workflow_edge
         db.session.commit()
-        now = self.get_time()
         db.fetch("workflow", id=workflow_id).last_modified = now
         return {"edge": workflow_edge, "update_time": now}
 

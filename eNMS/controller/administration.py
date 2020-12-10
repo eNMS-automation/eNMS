@@ -158,17 +158,18 @@ class AdministrationController(BaseController):
                         if property in db.private_properties:
                             instance[property] = self.get_password(value)
                     try:
-                        instance_id = db.factory(
+                        instance = db.factory(
                             instance_type,
-                            commit=True,
+                            migration_import=True,
                             **instance,
-                        ).id
-                        relations[instance_type][instance_id] = relation_dict
+                        )
+                        relations[instance_type][instance.name] = relation_dict
                     except Exception:
                         info(f"{str(instance)} could not be imported:\n{format_exc()}")
                         status = "Partial import (see logs)."
+            db.session.commit()
         for model, instances in relations.items():
-            for instance_id, related_models in instances.items():
+            for instance_name, related_models in instances.items():
                 for property, value in related_models.items():
                     if not value:
                         continue
@@ -180,7 +181,7 @@ class AdministrationController(BaseController):
                     else:
                         value = db.fetch(relation["model"], name=value)
                     try:
-                        setattr(db.fetch(model, id=instance_id), property, value)
+                        setattr(db.fetch(model, name=instance_name), property, value)
                     except Exception:
                         info("\n".join(format_exc().splitlines()))
                         status = "Partial import (see logs)."

@@ -3,6 +3,7 @@ from sqlalchemy import Boolean, ForeignKey, Integer
 from sqlalchemy.orm import backref, relationship
 from sqlalchemy.schema import UniqueConstraint
 
+from eNMS import app
 from eNMS.database import db
 from eNMS.models.base import AbstractBase
 from eNMS.forms.automation import ServiceForm
@@ -34,11 +35,13 @@ class Workflow(Service):
     __mapper_args__ = {"polymorphic_identity": "workflow"}
 
     def __init__(self, **kwargs):
-        start = db.fetch("service", scoped_name="Start")
-        end = db.fetch("service", scoped_name="End")
-        self.services.extend([start, end])
+        migration_import = kwargs.pop("migration_import", False)
+        if not migration_import:
+            start = db.fetch("service", scoped_name="Start")
+            end = db.fetch("service", scoped_name="End")
+            self.services.extend([start, end])
         super().__init__(**kwargs)
-        if self.name not in end.positions:
+        if not migration_import and self.name not in end.positions:
             end.positions[self.name] = (500, 0)
 
     def delete(self):
@@ -205,6 +208,7 @@ class WorkflowEdge(AbstractBase):
 
     __tablename__ = type = "workflow_edge"
     id = db.Column(Integer, primary_key=True)
+    name = db.Column(db.SmallString, unique=True)
     label = db.Column(db.SmallString)
     color = db.Column(db.SmallString)
     subtype = db.Column(db.SmallString)
@@ -232,12 +236,13 @@ class WorkflowEdge(AbstractBase):
     color_mapping = {"success": "green", "failure": "red", "prerequisite": "blue"}
 
     def __init__(self, **kwargs):
+        self.name = app.get_time()
         self.label = kwargs["subtype"]
         self.color = self.color_mapping[kwargs["subtype"]]
         super().__init__(**kwargs)
 
     @property
-    def name(self):
+    def ui_name(self):
         return (
             f"Edge from '{self.source.name}' to '{self.destination}'"
             f" in {self.workflow.name}"

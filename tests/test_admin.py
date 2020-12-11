@@ -14,6 +14,7 @@ ignored_endpoints = [
     "/form/instance_deletion",
     "/form/logs",
     "/form/result",
+    "/form/session_log",
     "/form/table",
     "/form/tree",
     "/form/workflow_tree",

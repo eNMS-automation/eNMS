@@ -137,6 +137,7 @@
     "/form/server",
     "/form/service_filtering",
     "/form/service_relation_filtering",
+    "/form/session_log",
     "/form/settings_panel",
     "/form/slack_notification_service",
     "/form/swiss_army_knife_service",

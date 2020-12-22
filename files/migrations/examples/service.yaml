@@ -114,7 +114,7 @@
     'Regression Workflow: Napalm Getters and Postprocessing': *id014
     'Regression Workflow: Netmiko Prompts': *id015
     'Regression Workflow: Operational Data Backup (admin)': *id003
-    'Regression Workflow: Optional Prerequisite Services': [-369, 252]
+    'Regression Workflow: Optional Prerequisite Services': [-356, 121]
     'Regression Workflow: Preprocessing and Postprocessing': *id016
     'Regression Workflow: Scalability Test (large workflow)': *id017
     'Regression Workflow: Scrapli': *id018
@@ -358,7 +358,7 @@
     'Regression Workflow: Napalm Getters and Postprocessing': *id057
     'Regression Workflow: Netmiko Prompts': *id058
     'Regression Workflow: Operational Data Backup (admin)': *id046
-    'Regression Workflow: Optional Prerequisite Services': [700, 215]
+    'Regression Workflow: Optional Prerequisite Services': [734, 171]
     'Regression Workflow: Preprocessing and Postprocessing': *id059
     'Regression Workflow: Scalability Test (large workflow)': *id060
     'Regression Workflow: Scrapli': *id061
@@ -15102,11 +15102,16 @@
   labels:
     f721f743-3dd8-40a2-a5eb-5680a80b50da:
       alignment: left
-      content: "Optional Prerequisite Use-Case : the first service will split devices\
-        \ on two different path. The failure path will test iteration with device\
-        \ query + iteration values.\r\n\"Last Service\""
-      positions: [121, -82]
-  last_modified: '2020-12-22 02:11:46.228915'
+      content: "Optional Prerequisite Use-Case : the first service will split devices\r\
+        \non two different paths.\r\nThe failure path will test iteration with device\
+        \ query + iteration values.\r\n\"Last Service\" must always run last, i.e\
+        \ after both the \"Dispatch\" service\r\nand the \"Post-iteration\" service.\r\
+        \nHowever, in this use-case, the \"failure path\" is not always guaranteed\
+        \ to run,\r\nas there may not be any failure. Prerequisite edges don't work,\
+        \ as the \"Post-iteration\" service\r\nis only a prerequisite if there are\
+        \ any devices on the failure path."
+      positions: [199, 129]
+  last_modified: '2020-12-22 02:15:18.461006'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -15188,7 +15193,7 @@
   operating_system: ''
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow: Optional Prerequisite Services': [-148, 310]
+    'Regression Workflow: Optional Prerequisite Services': [-342, 317]
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -15253,7 +15258,7 @@
   operating_system: ''
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow: Optional Prerequisite Services': [374, 298]
+    'Regression Workflow: Optional Prerequisite Services': [644, 318]
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -15319,7 +15324,7 @@
   operating_system: ''
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow: Optional Prerequisite Services': [-158, 21]
+    'Regression Workflow: Optional Prerequisite Services': [-214, -47]
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -15384,7 +15389,7 @@
   operating_system: ''
   pools: ['All instances (devices, links, services and users)']
   positions:
-    'Regression Workflow: Optional Prerequisite Services': [352, 47]
+    'Regression Workflow: Optional Prerequisite Services': [601, -27]
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''

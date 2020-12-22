@@ -1080,3 +1080,33 @@
   source: '[Regression Workflow: Credentials (Password & Key, Priority Mechanism)]
     Show interfaces with netmiko', subtype: success, type: workflow_edge, workflow: 'Regression
     Workflow: Credentials (Password & Key, Priority Mechanism)'}
+- {color: green, destination: '[Regression Workflow: Optional Prerequisite Services]
+    Dispatch Devices', label: success, name: '2020-12-22 02:07:38.580879', source: '[Shared]
+    Start', subtype: success, type: workflow_edge, workflow: 'Regression Workflow:
+    Optional Prerequisite Services'}
+- {color: red, destination: '[Regression Workflow: Optional Prerequisite Services]
+    Failure case: device + value iteration', label: failure, name: '2020-12-22 02:09:17.056458',
+  source: '[Regression Workflow: Optional Prerequisite Services] Dispatch Devices',
+  subtype: failure, type: workflow_edge, workflow: 'Regression Workflow: Optional
+    Prerequisite Services'}
+- {color: red, destination: '[Regression Workflow: Optional Prerequisite Services]
+    Post-Iteration Service', label: failure, name: '2020-12-22 02:09:18.643428', source: '[Regression
+    Workflow: Optional Prerequisite Services] Failure case: device + value iteration',
+  subtype: failure, type: workflow_edge, workflow: 'Regression Workflow: Optional
+    Prerequisite Services'}
+- {color: green, destination: '[Regression Workflow: Optional Prerequisite Services]
+    Post-Iteration Service', label: success, name: '2020-12-22 02:09:23.206910', source: '[Regression
+    Workflow: Optional Prerequisite Services] Failure case: device + value iteration',
+  subtype: success, type: workflow_edge, workflow: 'Regression Workflow: Optional
+    Prerequisite Services'}
+- {color: green, destination: '[Regression Workflow: Optional Prerequisite Services]
+    Last Service', label: success, name: '2020-12-22 02:09:40.246271', source: '[Regression
+    Workflow: Optional Prerequisite Services] Post-Iteration Service', subtype: success,
+  type: workflow_edge, workflow: 'Regression Workflow: Optional Prerequisite Services'}
+- {color: green, destination: '[Regression Workflow: Optional Prerequisite Services]
+    Last Service', label: success, name: '2020-12-22 02:09:42.937429', source: '[Regression
+    Workflow: Optional Prerequisite Services] Dispatch Devices', subtype: success,
+  type: workflow_edge, workflow: 'Regression Workflow: Optional Prerequisite Services'}
+- {color: green, destination: '[Shared] End', label: success, name: '2020-12-22 02:09:43.704992',
+  source: '[Regression Workflow: Optional Prerequisite Services] Last Service', subtype: success,
+  type: workflow_edge, workflow: 'Regression Workflow: Optional Prerequisite Services'}

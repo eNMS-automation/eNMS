@@ -114,6 +114,7 @@
     'Regression Workflow: Napalm Getters and Postprocessing': *id014
     'Regression Workflow: Netmiko Prompts': *id015
     'Regression Workflow: Operational Data Backup (admin)': *id003
+    'Regression Workflow: Optional Prerequisite Services': [-369, 252]
     'Regression Workflow: Preprocessing and Postprocessing': *id016
     'Regression Workflow: Scalability Test (large workflow)': *id017
     'Regression Workflow: Scrapli': *id018
@@ -357,6 +358,7 @@
     'Regression Workflow: Napalm Getters and Postprocessing': *id057
     'Regression Workflow: Netmiko Prompts': *id058
     'Regression Workflow: Operational Data Backup (admin)': *id046
+    'Regression Workflow: Optional Prerequisite Services': [700, 215]
     'Regression Workflow: Preprocessing and Postprocessing': *id059
     'Regression Workflow: Scalability Test (large workflow)': *id060
     'Regression Workflow: Scrapli': *id061
@@ -15067,6 +15069,343 @@
   update_target_pools: false
   use_device_driver: true
   use_genie: false
+  validation_condition: none
+  validation_method: text
+  vendor: ''
+  waiting_time: 0
+- access_groups: admin
+  close_connection: false
+  completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credential_type: any
+  default_access: creator
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  events: []
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  labels:
+    f721f743-3dd8-40a2-a5eb-5680a80b50da:
+      alignment: left
+      content: "Optional Prerequisite Use-Case : the first service will split devices\
+        \ on two different path. The failure path will test iteration with device\
+        \ query + iteration values.\r\n\"Last Service\""
+      positions: [121, -82]
+  last_modified: '2020-12-22 02:11:46.228915'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: 'Regression Workflow: Optional Prerequisite Services'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: ['All instances (devices, links, services and users)']
+  positions: {}
+  postprocessing: ''
+  postprocessing_mode: always
+  preprocessing: ''
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: 'Regression Workflow: Optional Prerequisite Services'
+  send_notification: false
+  send_notification_method: mail
+  services: ['[Shared] Start', '[Shared] End', '[Regression Workflow: Optional Prerequisite
+      Services] Dispatch Devices', '[Regression Workflow: Optional Prerequisite Services]
+      Last Service', '[Regression Workflow: Optional Prerequisite Services] Failure
+      case: device + value iteration', '[Regression Workflow: Optional Prerequisite
+      Services] Post-Iteration Service']
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: success
+  target_devices: []
+  target_pools: []
+  time_between_retries: 10
+  type: workflow
+  update_pools_after_running: false
+  update_target_pools: false
+  validation_condition: none
+  validation_method: text
+  vendor: ''
+  waiting_time: 0
+  workflow_category: Example workflow(s)
+- access_groups: admin
+  completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credential_type: any
+  default_access: creator
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  events: []
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2020-12-22 02:07:34.083316'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Regression Workflow: Optional Prerequisite Services] Dispatch Devices'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: ['All instances (devices, links, services and users)']
+  positions:
+    'Regression Workflow: Optional Prerequisite Services': [-148, 310]
+  postprocessing: ''
+  postprocessing_mode: always
+  preprocessing: ''
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: Dispatch Devices
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: success
+  source_code: "result = {}\r\nresults[\"success\"] = device.name == \"Washington\"\
+    \r\nresults[\"result\"] = result"
+  target_devices: []
+  target_pools: []
+  time_between_retries: 10
+  type: python_snippet_service
+  update_pools_after_running: false
+  update_target_pools: false
+  validation_condition: none
+  validation_method: text
+  vendor: ''
+  waiting_time: 0
+- access_groups: admin
+  completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credential_type: any
+  default_access: creator
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  events: []
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2020-12-22 02:08:35.787494'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Regression Workflow: Optional Prerequisite Services] Last Service'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: ['All instances (devices, links, services and users)']
+  positions:
+    'Regression Workflow: Optional Prerequisite Services': [374, 298]
+  postprocessing: ''
+  postprocessing_mode: always
+  preprocessing: ''
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: Last Service
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: success
+  source_code: "# Click on \"i\" to right of \"Source Code\" for examples.\r\n\r\n\
+    result = {}\r\nresults[\"success\"] = True\r\nresults[\"result\"] = result"
+  target_devices: []
+  target_pools: []
+  time_between_retries: 10
+  type: python_snippet_service
+  update_pools_after_running: false
+  update_target_pools: false
+  validation_condition: none
+  validation_method: text
+  vendor: ''
+  waiting_time: 0
+- access_groups: admin
+  completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credential_type: any
+  default_access: creator
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  events: []
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2020-12-22 02:09:00.371865'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Regression Workflow: Optional Prerequisite Services] Failure case: device
+    + value iteration'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: ['All instances (devices, links, services and users)']
+  positions:
+    'Regression Workflow: Optional Prerequisite Services': [-158, 21]
+  postprocessing: ''
+  postprocessing_mode: always
+  preprocessing: ''
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: 'Failure case: device + value iteration'
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: success
+  source_code: "# Click on \"i\" to right of \"Source Code\" for examples.\r\n\r\n\
+    result = {}\r\nresults[\"success\"] = True\r\nresults[\"result\"] = result"
+  target_devices: []
+  target_pools: []
+  time_between_retries: 10
+  type: python_snippet_service
+  update_pools_after_running: false
+  update_target_pools: false
+  validation_condition: none
+  validation_method: text
+  vendor: ''
+  waiting_time: 0
+- access_groups: admin
+  completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credential_type: any
+  default_access: creator
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  events: []
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2020-12-22 02:09:11.818342'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Regression Workflow: Optional Prerequisite Services] Post-Iteration Service'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: ['All instances (devices, links, services and users)']
+  positions:
+    'Regression Workflow: Optional Prerequisite Services': [352, 47]
+  postprocessing: ''
+  postprocessing_mode: always
+  preprocessing: ''
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: Post-Iteration Service
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: success
+  source_code: "# Click on \"i\" to right of \"Source Code\" for examples.\r\n\r\n\
+    result = {}\r\nresults[\"success\"] = True\r\nresults[\"result\"] = result"
+  target_devices: []
+  target_pools: []
+  time_between_retries: 10
+  type: python_snippet_service
+  update_pools_after_running: false
+  update_target_pools: false
   validation_condition: none
   validation_method: text
   vendor: ''

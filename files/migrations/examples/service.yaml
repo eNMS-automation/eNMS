@@ -15103,15 +15103,15 @@
     f721f743-3dd8-40a2-a5eb-5680a80b50da:
       alignment: left
       content: "Optional Prerequisite Use-Case : the first service will split devices\r\
-        \non two different paths.\r\nThe failure path will test iteration with device\
-        \ query + iteration values.\r\n\"Last Service\" must always run last, i.e\
-        \ after both the \"Dispatch\" service\r\nand the \"Post-iteration\" service.\r\
-        \nHowever, in this use-case, the \"failure path\" is not always guaranteed\
-        \ to run,\r\nas there may not be any failure. Prerequisite edges don't work,\
-        \ as the \"Post-iteration\" service\r\nis only a prerequisite if there are\
-        \ any devices on the failure path."
-      positions: [199, 129]
-  last_modified: '2020-12-22 02:15:18.461006'
+        \non two different paths. The failure path will test iteration with device\r\
+        \nquery + iteration values. \"Last Service\" must always run last, i.e after\r\
+        \nboth the \"Dispatch\" service and the \"Post-iteration\" service.\r\nHowever,\
+        \ in this use-case, the \"failure path\" is not always guaranteed\r\nto run,\
+        \ as there may not be any failure. Prerequisite edges don't work,\r\nas the\
+        \ \"Post-iteration\" service is only a prerequisite if there are any\r\ndevices\
+        \ on the failure path."
+      positions: [169, 120]
+  last_modified: '2020-12-22 02:19:04.173232'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -15143,7 +15143,7 @@
   skip: {}
   skip_query: ''
   skip_value: success
-  target_devices: []
+  target_devices: [PaloAlto, Austin, Washington, Jackson]
   target_pools: []
   time_between_retries: 10
   type: workflow
@@ -15179,7 +15179,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2020-12-22 02:07:34.083316'
+  last_modified: '2020-12-22 05:26:18.550097'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -15207,8 +15207,8 @@
   skip: {}
   skip_query: ''
   skip_value: success
-  source_code: "result = {}\r\nresults[\"success\"] = device.name == \"Washington\"\
-    \r\nresults[\"result\"] = result"
+  source_code: "result = {}\r\nresults[\"success\"] = device.name in (\"Washington\"\
+    , \"Jackson\")\r\nresults[\"result\"] = result"
   target_devices: []
   target_pools: []
   time_between_retries: 10
@@ -15305,11 +15305,11 @@
   include_device_results: false
   include_link_in_summary: false
   initial_payload: {}
-  iteration_devices: ''
+  iteration_devices: '["PaloAlto", "Atlanta"]'
   iteration_devices_property: name
-  iteration_values: ''
+  iteration_values: ("v1", "v2", "v3")
   iteration_variable_name: iteration_value
-  last_modified: '2020-12-22 02:09:00.371865'
+  last_modified: '2020-12-22 05:29:35.324665'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -15339,7 +15339,8 @@
   skip_query: ''
   skip_value: success
   source_code: "# Click on \"i\" to right of \"Source Code\" for examples.\r\n\r\n\
-    result = {}\r\nresults[\"success\"] = True\r\nresults[\"result\"] = result"
+    result = {}\r\nresults[\"success\"] = parent_device.name == \"Austin\"\r\nresults[\"\
+    result\"] = result"
   target_devices: []
   target_pools: []
   time_between_retries: 10

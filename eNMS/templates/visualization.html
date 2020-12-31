@@ -69,6 +69,14 @@
 </ul>
 <nav class="navbar navbar-default controls nav-controls" role="navigation">
   <button
+    type="button"
+    class="btn btn-primary"
+    onclick="eNMS.visualization.switchLogicalMode()"
+    data-tooltip="Change Mode"
+  >
+    <span id="mode-icon" class="glyphicon glyphicon-move"></span>
+  </button>
+  <button
     style="margin-left: 5px;"
     type="button"
     id="device-filtering"

@@ -58,7 +58,7 @@ const objects = [];
 function init() {
   camera = new THREE.PerspectiveCamera(
     45,
-    window.innerWidth / window.innerHeight,
+    $(".main_frame").width() / $(".main_frame").height(),
     1,
     10000
   );
@@ -105,16 +105,16 @@ function init() {
 }
 
 function onWindowResize() {
-  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.aspect = $(".main_frame").width() / $(".main_frame").height();
   camera.updateProjectionMatrix();
-  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setSize($(".main_frame").width(), $(".main_frame").height());
 }
 
 function onDocumentMouseMove(event) {
   event.preventDefault();
   mouse.set(
-    (event.clientX / window.innerWidth) * 2 - 1,
-    -(event.clientY / window.innerHeight) * 2 + 1
+    (event.clientX / $(".main_frame").width()) * 2 - 1,
+    -(event.clientY / $(".main_frame").height()) * 2 + 1
   );
   raycaster.setFromCamera(mouse, camera);
   const intersects = raycaster.intersectObjects(objects);
@@ -129,8 +129,8 @@ function onDocumentMouseMove(event) {
 function onDocumentMouseDown(event) {
   event.preventDefault();
   mouse.set(
-    (event.clientX / window.innerWidth) * 2 - 1,
-    -(event.clientY / window.innerHeight) * 2 + 1
+    (event.clientX / $(".main_frame").width()) * 2 - 1,
+    -(event.clientY / $(".main_frame").height()) * 2 + 1
   );
   raycaster.setFromCamera(mouse, camera);
   const intersects = raycaster.intersectObjects(objects);

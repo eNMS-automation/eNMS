@@ -558,39 +558,6 @@ function displayNetwork({ noAlert, withCluster }) {
   });
 }
 
-function showPoolView(poolId) {
-  jsPanel.create({
-    id: `pool-view-${poolId}`,
-    container: ".right_column",
-    theme: "none",
-    border: "medium",
-    headerTitle: "Site view",
-    position: "center-top 0 58",
-    contentSize: "1000 600",
-    content: `
-      <div id="network-${poolId}" style="height:100%; width:100%;"></div>
-    `,
-    dragit: {
-      opacity: 0.7,
-      containment: [5, 5, 5, 5],
-    },
-  });
-  call({
-    url: `/get/pool/${poolId}`,
-    callback: function (pool) {
-      $(`#network-${poolId}`).contextMenu({
-        menuSelector: "#contextMenu",
-        menuSelected: function (selectedMenu) {
-          const row = selectedMenu.text();
-          action[row](selectedObject);
-        },
-      });
-      const graph = create3dGraphNetwork(`network-${poolId}`);
-      update3dGraphData(graph, pool);
-    },
-  });
-}
-
 function changeCursor(click) {
   const instance = viewer.scene.pick(click.endPosition);
   document.body.style.cursor = instance ? "pointer" : "default";
@@ -851,5 +818,4 @@ configureNamespace("visualization", [
   displayNetwork,
   openVisualizationPanel,
   saveParameters,
-  showPoolView,
 ]);

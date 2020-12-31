@@ -137,6 +137,7 @@ function onDocumentMouseMove(event) {
 
 function onDocumentMouseUp(event) {
   currentCube = null;
+  controls.enabled = true;
 }
 
 function onDocumentMouseDown(event) {
@@ -150,6 +151,7 @@ function onDocumentMouseDown(event) {
   if (intersects.length > 0) {
     const intersect = intersects[0];
     if (intersect.object !== plane) {
+      controls.enabled = false;
       currentCube = intersect.object;
     }
   }
@@ -173,7 +175,7 @@ function onDocumentKeyUp(event) {
 
 function initLogicalFramework() {
   init();
-  render()
+  render();
 }
 
 function initGeographicalFramework() {

@@ -56,6 +56,7 @@ let rollOverMesh;
 let rollOverMaterial;
 let cubeGeo;
 let cubeMaterial;
+let currentCube;
 
 const objects = [];
 
@@ -74,15 +75,16 @@ function init() {
   rollOverMaterial = new THREE.MeshBasicMaterial({
     color: 0xff0000,
     opacity: 0.5,
-    transparent: true,
+    transparent: false,
   });
-  rollOverMesh = new THREE.Mesh(rollOverGeo, rollOverMaterial);
-  scene.add(rollOverMesh);
   cubeGeo = new THREE.BoxBufferGeometry(50, 50, 50);
   cubeMaterial = new THREE.MeshLambertMaterial({
     color: 0xfeb74c,
     map: new THREE.TextureLoader().load("textures/square-outline-textured.png"),
   });
+  rollOverMesh = new THREE.Mesh(cubeGeo, cubeMaterial);
+  objects.push(rollOverMesh);
+  scene.add(rollOverMesh);
   const gridHelper = new THREE.GridHelper(1000, 20);
   scene.add(gridHelper);
   raycaster = new THREE.Raycaster();
@@ -101,6 +103,7 @@ function init() {
   document.getElementById("map").appendChild(renderer.domElement);
   document.addEventListener("mousemove", onDocumentMouseMove, false);
   document.addEventListener("mousedown", onDocumentMouseDown, false);
+  document.addEventListener("mouseup", onDocumentMouseUp, false);
   document.addEventListener("keydown", onDocumentKeyDown, false);
   document.addEventListener("keyup", onDocumentKeyUp, false);
   window.addEventListener("resize", onWindowResize, false);
@@ -124,12 +127,16 @@ function onDocumentMouseMove(event) {
   );
   raycaster.setFromCamera(mouse, camera);
   const intersects = raycaster.intersectObjects(objects);
-  if (intersects.length > 0) {
+  if (intersects.length > 0 && currentCube) {
     const intersect = intersects[0];
-    rollOverMesh.position.copy(intersect.point).add(intersect.face.normal);
-    rollOverMesh.position.divideScalar(50).floor().multiplyScalar(50).addScalar(25);
+    currentCube.position.copy(intersect.point).add(intersect.face.normal);
+    currentCube.position.divideScalar(50).floor().multiplyScalar(50).addScalar(25);
   }
   render()
+}
+
+function onDocumentMouseUp(event) {
+  currentCube = null;
 }
 
 function onDocumentMouseDown(event) {
@@ -142,19 +149,9 @@ function onDocumentMouseDown(event) {
   const intersects = raycaster.intersectObjects(objects);
   if (intersects.length > 0) {
     const intersect = intersects[0];
-    if (isShiftDown) {
-      if (intersect.object !== plane) {
-        scene.remove(intersect.object);
-        objects.splice(objects.indexOf(intersect.object), 1);
-      }
-    } else {
-      const voxel = new THREE.Mesh(cubeGeo, cubeMaterial);
-      voxel.position.copy(intersect.point).add(intersect.face.normal);
-      voxel.position.divideScalar(50).floor().multiplyScalar(50).addScalar(25);
-      scene.add(voxel);
-      objects.push(voxel);
+    if (intersect.object !== plane) {
+      currentCube = intersect.object;
     }
-    render()
   }
 }
 

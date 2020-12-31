@@ -676,7 +676,7 @@ tables.pool = class PoolTable extends Table {
 
   buttons(row) {
     return `
-      <ul class="pagination pagination-lg" style="margin: 0px; width: 240px">
+      <ul class="pagination pagination-lg" style="margin: 0px; width: 200px">
         <li>
           <button type="button" class="btn btn-sm btn-primary"
           onclick="eNMS.inventory.updatePools('${row.id}')"

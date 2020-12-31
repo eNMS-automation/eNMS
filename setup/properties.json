@@ -518,7 +518,7 @@
       },
       {
         "data": "buttons",
-        "width": "240px",
+        "width": "200px",
         "orderable": false,
         "export": false
       }

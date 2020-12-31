@@ -45,6 +45,7 @@ let polylines;
 let labels;
 
 let camera, scene, renderer;
+let controls
 let plane;
 let mouse,
   raycaster,
@@ -96,9 +97,19 @@ function init() {
   renderer = new THREE.WebGLRenderer({ antialias: true });
   renderer.setPixelRatio(window.devicePixelRatio);
   renderer.setSize($(".main_frame").width(), $(".main_frame").height());
-  const controls = new THREE.OrbitControls( camera, renderer.domElement );
-  controls.addEventListener( 'change', render);
-  controls.update();
+  controls = new THREE.MapControls( camera, renderer.domElement );
+
+  controls.addEventListener( 'change', render );
+
+  controls.enableDamping = true;
+  controls.dampingFactor = 0.05;
+
+  controls.screenSpacePanning = false;
+
+  controls.minDistance = 100;
+  controls.maxDistance = 500;
+
+  controls.maxPolarAngle = Math.PI / 2;
   document.getElementById("map").appendChild(renderer.domElement);
   document.addEventListener("mousemove", onDocumentMouseMove, false);
   document.addEventListener("mousedown", onDocumentMouseDown, false);

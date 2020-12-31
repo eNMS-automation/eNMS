@@ -44,15 +44,18 @@ let handler;
 let polylines;
 let labels;
 
-let camera, scene, renderer;
+let camera;
+let scene;
+let renderer;
 let controls
 let plane;
-let mouse,
-  raycaster,
-  isShiftDown = false;
-
-let rollOverMesh, rollOverMaterial;
-let cubeGeo, cubeMaterial;
+let mouse;
+let raycaster;
+let isShiftDown = false;
+let rollOverMesh;
+let rollOverMaterial;
+let cubeGeo;
+let cubeMaterial;
 
 const objects = [];
 
@@ -89,26 +92,11 @@ function init() {
   plane = new THREE.Mesh(geometry, new THREE.MeshBasicMaterial({ visible: false }));
   scene.add(plane);
   objects.push(plane);
-  const ambientLight = new THREE.AmbientLight(0x606060);
-  scene.add(ambientLight);
-  const directionalLight = new THREE.DirectionalLight(0xffffff);
-  directionalLight.position.set(1, 0.75, 0.5).normalize();
-  scene.add(directionalLight);
   renderer = new THREE.WebGLRenderer({ antialias: true });
   renderer.setPixelRatio(window.devicePixelRatio);
   renderer.setSize($(".main_frame").width(), $(".main_frame").height());
   controls = new THREE.MapControls( camera, renderer.domElement );
-
   controls.addEventListener( 'change', render );
-
-  controls.enableDamping = true;
-  controls.dampingFactor = 0.05;
-
-  controls.screenSpacePanning = false;
-
-  controls.minDistance = 100;
-  controls.maxDistance = 500;
-
   controls.maxPolarAngle = Math.PI / 2;
   document.getElementById("map").appendChild(renderer.domElement);
   document.addEventListener("mousemove", onDocumentMouseMove, false);

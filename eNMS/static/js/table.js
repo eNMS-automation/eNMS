@@ -678,12 +678,6 @@ tables.pool = class PoolTable extends Table {
     return `
       <ul class="pagination pagination-lg" style="margin: 0px; width: 240px">
         <li>
-          <button type="button" class="btn btn-sm btn-info"
-          onclick="eNMS.visualization.showPoolView('${row.id}')"
-          data-tooltip="Internal View">
-          <span class="glyphicon glyphicon-eye-open"></span></button>
-        </li>
-        <li>
           <button type="button" class="btn btn-sm btn-primary"
           onclick="eNMS.inventory.updatePools('${row.id}')"
           data-tooltip="Update"><span class="glyphicon glyphicon-refresh">

@@ -95,8 +95,8 @@ function init() {
   scene.add(directionalLight);
   renderer = new THREE.WebGLRenderer({ antialias: true });
   renderer.setPixelRatio(window.devicePixelRatio);
-  renderer.setSize(window.innerWidth, window.innerHeight);
-  document.body.appendChild(renderer.domElement);
+  renderer.setSize($(".main_frame").width(), $(".main_frame").height());
+  document.getElementById("map").appendChild(renderer.domElement);
   document.addEventListener("mousemove", onDocumentMouseMove, false);
   document.addEventListener("mousedown", onDocumentMouseDown, false);
   document.addEventListener("keydown", onDocumentKeyDown, false);
@@ -123,7 +123,7 @@ function onDocumentMouseMove(event) {
     rollOverMesh.position.copy(intersect.point).add(intersect.face.normal);
     rollOverMesh.position.divideScalar(50).floor().multiplyScalar(50).addScalar(25);
   }
-  render();
+  renderer.render(scene, camera);
 }
 
 function onDocumentMouseDown(event) {
@@ -148,7 +148,7 @@ function onDocumentMouseDown(event) {
       scene.add(voxel);
       objects.push(voxel);
     }
-    render();
+    renderer.render(scene, camera);
   }
 }
 
@@ -168,13 +168,9 @@ function onDocumentKeyUp(event) {
   }
 }
 
-function render() {
-  renderer.render(scene, camera);
-}
-
 function initLogicalFramework() {
   init();
-  render();
+  renderer.render(scene, camera);
 }
 
 function initGeographicalFramework() {

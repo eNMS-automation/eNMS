@@ -127,7 +127,7 @@ function onDocumentMouseMove(event) {
   );
   raycaster.setFromCamera(mouse, camera);
   const intersects = raycaster.intersectObjects(objects);
-  if (intersects.length > 0 && currentCube) {
+  if (intersects.length > 0 && currentCube && intersects[0].object == plane) {
     const intersect = intersects[0];
     currentCube.position.copy(intersect.point).add(intersect.face.normal);
     currentCube.position.divideScalar(50).floor().multiplyScalar(50).addScalar(25);

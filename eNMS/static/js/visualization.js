@@ -69,7 +69,7 @@ function init() {
   camera.position.set(500, 800, 1300);
   camera.lookAt(0, 0, 0);
   scene = new THREE.Scene();
-  scene.background = new THREE.Color(0xf0f0f0);
+  scene.background = new THREE.Color(0xffffff);
   const rollOverGeo = new THREE.BoxBufferGeometry(50, 50, 50);
   rollOverMaterial = new THREE.MeshBasicMaterial({
     color: 0xff0000,
@@ -119,8 +119,8 @@ function onWindowResize() {
 function onDocumentMouseMove(event) {
   event.preventDefault();
   mouse.set(
-    (event.clientX / $(".main_frame").width()) * 2 - 1,
-    -(event.clientY / $(".main_frame").height()) * 2 + 1
+    ((event.clientX - 250) / $(".main_frame").width()) * 2 - 1,
+    -((event.clientY - 70) / $(".main_frame").height()) * 2 + 1
   );
   raycaster.setFromCamera(mouse, camera);
   const intersects = raycaster.intersectObjects(objects);
@@ -129,14 +129,14 @@ function onDocumentMouseMove(event) {
     rollOverMesh.position.copy(intersect.point).add(intersect.face.normal);
     rollOverMesh.position.divideScalar(50).floor().multiplyScalar(50).addScalar(25);
   }
-  renderer.render(scene, camera);
+  render()
 }
 
 function onDocumentMouseDown(event) {
   event.preventDefault();
   mouse.set(
-    (event.clientX / $(".main_frame").width()) * 2 - 1,
-    -(event.clientY / $(".main_frame").height()) * 2 + 1
+    ((event.clientX - 250) / $(".main_frame").width()) * 2 - 1,
+    -((event.clientY - 70) / $(".main_frame").height()) * 2 + 1
   );
   raycaster.setFromCamera(mouse, camera);
   const intersects = raycaster.intersectObjects(objects);
@@ -154,7 +154,7 @@ function onDocumentMouseDown(event) {
       scene.add(voxel);
       objects.push(voxel);
     }
-    renderer.render(scene, camera);
+    render()
   }
 }
 
@@ -176,7 +176,7 @@ function onDocumentKeyUp(event) {
 
 function initLogicalFramework() {
   init();
-  renderer.render(scene, camera);
+  render()
 }
 
 function initGeographicalFramework() {

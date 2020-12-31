@@ -30,6 +30,7 @@
       "icon": "map-marker",
       "pages": {
         "Geographical View": "/visualization/geographical_view",
+        "Force-directed View": "/visualization/force_directed_view",
         "Logical View": "/visualization/logical_view"
       }
     },
@@ -62,7 +63,7 @@
     "Links",
     "Pools",
     "Geographical View",
-    "Logical View",
+    "Force-directed View",
     "Services",
     "Workflow Builder",
     "Results",
@@ -179,7 +180,7 @@
     "/table/user",
     "/view_service_results",
     "/visualization/geographical_view",
-    "/visualization/logical_view",
+    "/visualization/force_directed_view",
     "/workflow_builder"
   ],
   "post_requests": [

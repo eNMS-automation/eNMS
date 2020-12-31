@@ -19,7 +19,7 @@ select devices and links instead of using criteria based on properties.
    :alt: Pool Management
    :align: center
 
-A logical view of a pool can be displayed using the ``Internal View`` button.
+A Force-directed View of a pool can be displayed using the ``Internal View`` button.
 
 .. image:: /_static/inventory/pools/pool_visualization.png
    :alt: Pool Internal View

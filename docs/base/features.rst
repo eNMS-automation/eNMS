@@ -33,7 +33,7 @@ Colocated devices can be grouped into geographical sites (campus, datacenter, ..
 and displayed logically with a force-directed layout.
 
 .. image:: /_static/base/site_view.png
-   :alt: Logical view
+   :alt: Force-directed View
    :align: center
 
 Workflows

@@ -18,7 +18,7 @@ Version 4.0.0
   * Bulk edit (edit all instances filtered in tables)
   * Bulk deletion (delete all instances filtered in tables)
 - Add "copy to clipboard" mechanism to get comma-separated list of names of all filtered instances.
-- Add 3D network view and 3D logical view.
+- Add 3D network view and 3D Force-directed View.
   * Add right click menu for property, configuration, run service
   * Add default pools mechanism for large networks.
   * Add run service in bulk on all currently displayed devices mechanism
@@ -128,7 +128,7 @@ but we have to make sure it's not worse).
 
 Migration:
 - Update endpoint: view/network and view/site no longer exists, to be replaced with 
-visualization/geographical_view and visualization/logical_view
+visualization/geographical_view and visualization/force_directed_view
 - Configure the new visualization.json file, remove visualization settings from settings.json
 - In the service.yaml file, the "devices" and "pools" relationship with services have to be renamed
 "target_devices" and "target_pools". Besides, "update_pools" must be renamed to "update_target_pools".

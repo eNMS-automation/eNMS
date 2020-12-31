@@ -22,7 +22,7 @@
 {% endblock stylesheets %} {% block content %}
 <form id="search-form-device" class="overlay"></form>
 <form id="search-form-link" class="overlay"></form>
-{% if endpoint == "logical_view" %}
+{% if endpoint == "force_directed_view" %}
 <div id="network"></div>
 {% else %}
 <div id="map"></div>
@@ -106,7 +106,7 @@
   </button>
 </nav>
 {% endblock content %} {% block javascripts %} {{ super()}} {% if endpoint ==
-"logical_view" %}
+"force_directed_view" %}
 <script src="{{ url_for('static', filename='lib/3d-force-graph/three.min.js') }}"></script>
 <script src="{{ url_for('static', filename='lib/3d-force-graph/three-spritetext.min.js') }}"></script>
 <script src="{{ url_for('static', filename='lib/3d-force-graph/3d-force-graph.min.js') }}"></script>

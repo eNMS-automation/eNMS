@@ -345,7 +345,7 @@ function processNetwork(network) {
   let links = {};
   let bundleCoordinates = {};
   for (const link of network.links) {
-    const key = (page == "logical_view"
+    const key = (page == "force_directed_view"
       ? [link.source_id, link.destination_id]
       : [
           `${link.source_latitude}/${link.source_longitude}`,
@@ -397,7 +397,7 @@ function displayNetwork({ noAlert, withCluster }) {
     data: data,
     callback: function (network) {
       processNetwork(network);
-      if (page == "logical_view") {
+      if (page == "force_directed_view") {
         if (
           network.devices.length > maximumSize.node ||
           network.links.length > maximumSize.link
@@ -633,7 +633,7 @@ export function initView() {
       title: `${type.charAt(0).toUpperCase() + type.slice(1)} Filtering`,
     });
   }
-  if (page == "logical_view") {
+  if (page == "force_directed_view") {
     create3dGraphNetwork("network");
     notify("Loading network...", "success", 5);
   } else {

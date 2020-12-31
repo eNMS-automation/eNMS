@@ -51,9 +51,7 @@ let controls
 let plane;
 let mouse;
 let raycaster;
-let isShiftDown = false;
 let rollOverMesh;
-let rollOverMaterial;
 let cubeGeo;
 let cubeMaterial;
 let currentCube;
@@ -71,16 +69,11 @@ function init() {
   camera.lookAt(0, 0, 0);
   scene = new THREE.Scene();
   scene.background = new THREE.Color(0xffffff);
-  const rollOverGeo = new THREE.BoxBufferGeometry(50, 50, 50);
-  rollOverMaterial = new THREE.MeshBasicMaterial({
-    color: 0xff0000,
-    opacity: 0.5,
-    transparent: false,
-  });
   cubeGeo = new THREE.BoxBufferGeometry(50, 50, 50);
   cubeMaterial = new THREE.MeshLambertMaterial({
     color: 0xfeb74c,
-    map: new THREE.TextureLoader().load("textures/square-outline-textured.png"),
+    opacity: 0.8,
+    transparent: true,
   });
   rollOverMesh = new THREE.Mesh(cubeGeo, cubeMaterial);
   objects.push(rollOverMesh);
@@ -135,7 +128,7 @@ function onDocumentMouseMove(event) {
   render()
 }
 
-function onDocumentMouseUp(event) {
+function onDocumentMouseUp() {
   currentCube = null;
   controls.enabled = true;
 }

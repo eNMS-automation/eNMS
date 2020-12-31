@@ -96,12 +96,19 @@ function init() {
   renderer = new THREE.WebGLRenderer({ antialias: true });
   renderer.setPixelRatio(window.devicePixelRatio);
   renderer.setSize($(".main_frame").width(), $(".main_frame").height());
+  const controls = new THREE.OrbitControls( camera, renderer.domElement );
+  controls.addEventListener( 'change', render);
+  controls.update();
   document.getElementById("map").appendChild(renderer.domElement);
   document.addEventListener("mousemove", onDocumentMouseMove, false);
   document.addEventListener("mousedown", onDocumentMouseDown, false);
   document.addEventListener("keydown", onDocumentKeyDown, false);
   document.addEventListener("keyup", onDocumentKeyUp, false);
   window.addEventListener("resize", onWindowResize, false);
+}
+
+function render() {
+  renderer.render(scene, camera);
 }
 
 function onWindowResize() {

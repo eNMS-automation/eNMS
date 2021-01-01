@@ -14,11 +14,6 @@ intrinsic (Safari) - moz (Firefox) - webkit (Chrome) */
   transform: translate(-50%, 0);
 }
 
-.navbar-custom {
-  float: left;
-  padding: 7px 7px;
-}
-
 .controls_mode {
   float: left;
   margin-right: 10px;

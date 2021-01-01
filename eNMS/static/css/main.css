@@ -324,6 +324,11 @@ a {
   line-height: 32px;
 }
 
+.navbar-custom {
+  float: left;
+  padding: 7px 7px;
+}
+
 .nav.top_menu > li > a {
   padding: 10px 15px;
   color: #34495e !important;

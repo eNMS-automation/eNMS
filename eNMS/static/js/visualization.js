@@ -64,7 +64,6 @@ function displayView() {
   call({
     url: `/get/view/${currentView}`,
     callback: function (view) {
-      console.log(view)
       camera = new THREE.PerspectiveCamera(
         45,
         $(".main_frame").width() / $(".main_frame").height(),
@@ -98,10 +97,10 @@ function displayView() {
       renderer = new THREE.WebGLRenderer({ antialias: true });
       renderer.setPixelRatio(window.devicePixelRatio);
       renderer.setSize($(".main_frame").width(), $(".main_frame").height());
+      document.getElementById("map").appendChild(renderer.domElement);
       controls = new THREE.MapControls(camera, renderer.domElement);
       controls.addEventListener("change", render);
       controls.maxPolarAngle = Math.PI / 2;
-      document.getElementById("map").appendChild(renderer.domElement);
       document.addEventListener("mousemove", onDocumentMouseMove, false);
       document.addEventListener("mousedown", onDocumentMouseDown, false);
       document.addEventListener("mouseup", onDocumentMouseUp, false);
@@ -174,7 +173,6 @@ function onWindowResize() {
 }
 
 function onDocumentMouseMove(event) {
-  event.preventDefault();
   mouse.set(
     ((event.clientX - 250) / $(".main_frame").width()) * 2 - 1,
     -((event.clientY - 70) / $(".main_frame").height()) * 2 + 1
@@ -195,7 +193,6 @@ function onDocumentMouseUp() {
 }
 
 function onDocumentMouseDown(event) {
-  event.preventDefault();
   mouse.set(
     ((event.clientX - 250) / $(".main_frame").width()) * 2 - 1,
     -((event.clientY - 70) / $(".main_frame").height()) * 2 + 1

@@ -60,48 +60,56 @@ let currentCube;
 
 const objects = [];
 
-function switchToView() {
-  camera = new THREE.PerspectiveCamera(
-    45,
-    $(".main_frame").width() / $(".main_frame").height(),
-    1,
-    10000
-  );
-  camera.position.set(500, 800, 1300);
-  camera.lookAt(0, 0, 0);
-  scene = new THREE.Scene();
-  scene.background = new THREE.Color(0xffffff);
-  cubeGeo = new THREE.BoxBufferGeometry(50, 50, 50);
-  cubeMaterial = new THREE.MeshLambertMaterial({
-    color: 0xfeb74c,
-    opacity: 0.8,
-    transparent: true,
+function displayView() {
+  call({
+    url: `/get/view/${currentView}`,
+    callback: function (view) {
+      console.log(view)
+      camera = new THREE.PerspectiveCamera(
+        45,
+        $(".main_frame").width() / $(".main_frame").height(),
+        1,
+        10000
+      );
+      camera.position.set(500, 800, 1300);
+      camera.lookAt(0, 0, 0);
+      scene = new THREE.Scene();
+      scene.background = new THREE.Color(0xffffff);
+      cubeGeo = new THREE.BoxBufferGeometry(50, 50, 50);
+      cubeMaterial = new THREE.MeshLambertMaterial({
+        color: 0xfeb74c,
+        opacity: 0.8,
+        transparent: true,
+      });
+      rollOverMesh = new THREE.Mesh(cubeGeo, cubeMaterial);
+      objects.push(rollOverMesh);
+      scene.add(rollOverMesh);
+      if (view.display_grid) {
+        const gridHelper = new THREE.GridHelper(view.grid_size, view.grid_rows);
+        scene.add(gridHelper);
+      }
+      raycaster = new THREE.Raycaster();
+      mouse = new THREE.Vector2();
+      const geometry = new THREE.PlaneBufferGeometry(1000, 1000);
+      geometry.rotateX(-Math.PI / 2);
+      plane = new THREE.Mesh(geometry, new THREE.MeshBasicMaterial({ visible: false }));
+      scene.add(plane);
+      objects.push(plane);
+      renderer = new THREE.WebGLRenderer({ antialias: true });
+      renderer.setPixelRatio(window.devicePixelRatio);
+      renderer.setSize($(".main_frame").width(), $(".main_frame").height());
+      controls = new THREE.MapControls(camera, renderer.domElement);
+      controls.addEventListener("change", render);
+      controls.maxPolarAngle = Math.PI / 2;
+      document.getElementById("map").appendChild(renderer.domElement);
+      document.addEventListener("mousemove", onDocumentMouseMove, false);
+      document.addEventListener("mousedown", onDocumentMouseDown, false);
+      document.addEventListener("mouseup", onDocumentMouseUp, false);
+      window.addEventListener("resize", onWindowResize, false);
+      updateRightClickBindings(controls);
+      render();
+    }
   });
-  rollOverMesh = new THREE.Mesh(cubeGeo, cubeMaterial);
-  objects.push(rollOverMesh);
-  scene.add(rollOverMesh);
-  const gridHelper = new THREE.GridHelper(1000, 20);
-  scene.add(gridHelper);
-  raycaster = new THREE.Raycaster();
-  mouse = new THREE.Vector2();
-  const geometry = new THREE.PlaneBufferGeometry(1000, 1000);
-  geometry.rotateX(-Math.PI / 2);
-  plane = new THREE.Mesh(geometry, new THREE.MeshBasicMaterial({ visible: false }));
-  scene.add(plane);
-  objects.push(plane);
-  renderer = new THREE.WebGLRenderer({ antialias: true });
-  renderer.setPixelRatio(window.devicePixelRatio);
-  renderer.setSize($(".main_frame").width(), $(".main_frame").height());
-  controls = new THREE.MapControls(camera, renderer.domElement);
-  controls.addEventListener("change", render);
-  controls.maxPolarAngle = Math.PI / 2;
-  document.getElementById("map").appendChild(renderer.domElement);
-  document.addEventListener("mousemove", onDocumentMouseMove, false);
-  document.addEventListener("mousedown", onDocumentMouseDown, false);
-  document.addEventListener("mouseup", onDocumentMouseUp, false);
-  window.addEventListener("resize", onWindowResize, false);
-  updateRightClickBindings(controls);
-  render();
 }
 
 function initLogicalFramework() {
@@ -116,11 +124,11 @@ function initLogicalFramework() {
       }
       if (currentView && views.some((w) => w.id == currentView.split(">")[0])) {
         $("#current-view").val(currentView.split(">")[0]);
-        switchToView(currentView);
+        displayView(currentView);
       } else {
         currentView = $("#current-view").val();
         if (currentView) {
-          switchToView(currentView);
+          displayView(currentView);
         } else {
           notify("No view has been created yet.", "error", 5);
         }
@@ -141,7 +149,7 @@ function createNewView(mode) {
   } else if (mode == "duplicate") {
     showInstancePanel("view", currentView.id, "duplicate");
   } else {
-    showInstancePanel("view", currentView.id);
+    showInstancePanel("view", currentView);
   }
 }
 

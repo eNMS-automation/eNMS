@@ -161,3 +161,6 @@ class LogicalViewForm(BaseForm):
     form_type = HiddenField(default="view")
     id = HiddenField()
     name = StringField("Name", [InputRequired()])
+    display_grid = BooleanField("Display Grid", default=True)
+    grid_size = IntegerField("Grid Size", default=1000)
+    grid_rows = IntegerField("Grid Rows", default=20)

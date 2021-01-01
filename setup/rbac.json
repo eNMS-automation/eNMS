@@ -30,8 +30,8 @@
       "icon": "map-marker",
       "pages": {
         "Geographical View": "/visualization/geographical_view",
-        "Force-directed View": "/visualization/force_directed_view",
-        "Logical View": "/visualization/logical_view"
+        "Logical View": "/visualization/logical_view",
+        "Force-directed View": "/visualization/force_directed_view"
       }
     },
     "Automation": {

@@ -138,12 +138,12 @@ function initLogicalFramework() {
 function createNewView(mode) {
   if (mode == "create") {
     showInstancePanel("view");
+  } else if (!currentView) {
+    notify("No view has been created yet.", "error", 5);
   } else if (mode == "duplicate") {
     showInstancePanel("view", currentView.id, "duplicate");
-  } else if (currentView) {
-    showInstancePanel("view", currentView.id);
   } else {
-    notify("No view has been created yet.", "error", 5);
+    showInstancePanel("view", currentView.id);
   }
 }
 

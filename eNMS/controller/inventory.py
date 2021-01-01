@@ -29,7 +29,12 @@ class InventoryController(BaseController):
     def create_view_label(self, view_id, **kwargs):
         view = db.fetch("view", id=view_id, rbac="edit")
         label_id = str(uuid4())
-        return True
+        label = {
+            "positions": [0, 0, 0],
+            "content": kwargs["text"],
+        }
+        view.labels[label_id] = label
+        return {"id": label_id, **label}
 
     def get_ssh_port(self):
         if self.redis_queue:

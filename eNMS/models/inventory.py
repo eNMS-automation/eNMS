@@ -436,3 +436,4 @@ class View(AbstractBase):
     display_grid = db.Column(Boolean)
     grid_size = db.Column(Integer)
     grid_rows = db.Column(Integer)
+    labels = db.Column(db.Dict, info={"log_change": False})

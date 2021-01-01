@@ -156,8 +156,15 @@ function createLabel() {
   call({
     url: `/create_view_label/${currentView}`,
     form: "view_label-form",
-    callback: function (result) {
+    callback: function (label) {
       $("#view_label").remove();
+      const div = document.createElement("div");
+      div.className = 'label';
+      div.textContent = 'Moon';
+      div.style.marginTop = '-1em';
+      const label = new CSS2DObject(div);
+      label.position.set(0, 0, 0);
+      scene.add(label);
       notify("Label created.", "success", 5);
     },
   });
@@ -166,7 +173,8 @@ function createLabel() {
 function updateRightClickBindings(controls) {
   Object.assign(action, {
     "Create View": () => createNewView("create"),
-    "Create Label": () => createLabel(),
+    "Create Label": () =>
+      openPanel({ name: "view_label", title: "Create New Label" }),
     "Edit View": () => createNewView("edit"),
     "Duplicate View": () => createNewView("duplicate"),
     "Zoom In": () => controls?.dollyOut(),
@@ -856,6 +864,7 @@ function openVisualizationPanel() {
 
 configureNamespace("visualization", [
   clearSearch,
+  createLabel,
   displayNetwork,
   openVisualizationPanel,
   saveParameters,

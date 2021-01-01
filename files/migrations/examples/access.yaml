@@ -29,12 +29,13 @@
     /table/access, /table/changelog, /table/configuration, /table/credential, /table/device,
     /table/event, /table/pool, /table/link, /table/run, /table/server, /table/service,
     /table/session, /table/task, /table/user, /view_service_results, /visualization/geographical_view,
-    /visualization/force_directed_view, /workflow_builder, /form/panel, /template/form, /template/devices]
+    /visualization/force_directed_view, /workflow_builder, /form/panel, /template/form,
+    /template/devices]
   menu: [Home, Administration, Inventory, Visualization, Automation, Scheduling, Template]
   name: Full Access to Everything
   pages: [Access, Credentials, Dashboard, Changelog, Sessions, Users, Servers, Devices,
-    Configurations, Links, Pools, Geographical View, Force-directed View, Services, Workflow
-      Builder, Results, Tasks, Events, Page, Subpage]
+    Configurations, Links, Pools, Geographical View, Force-directed View, Services,
+    Workflow Builder, Results, Tasks, Events, Page, Subpage]
   post_requests: [/add_edge, /add_instances_in_bulk, /bulk_deletion, /bulk_edit, /bulk_removal,
     /copy_service_in_workflow, /calendar_init, /clear_results, /clear_configurations,
     /compare, /counters, /count_models, /create_label, /database_deletion, /delete_corrupted_edges,
@@ -99,12 +100,13 @@
     /table/access, /table/changelog, /table/configuration, /table/credential, /table/device,
     /table/event, /table/pool, /table/link, /table/run, /table/server, /table/service,
     /table/session, /table/task, /table/user, /view_service_results, /visualization/geographical_view,
-    /visualization/force_directed_view, /workflow_builder, /form/panel, /template/form, /template/devices]
+    /visualization/force_directed_view, /workflow_builder, /form/panel, /template/form,
+    /template/devices]
   menu: [Home, Administration, Inventory, Visualization, Automation, Scheduling]
   name: Read-Only Profile
   pages: [Access, Credentials, Dashboard, Changelog, Sessions, Users, Servers, Devices,
-    Configurations, Links, Pools, Geographical View, Force-directed View, Services, Workflow
-      Builder, Results, Tasks, Events]
+    Configurations, Links, Pools, Geographical View, Force-directed View, Services,
+    Workflow Builder, Results, Tasks, Events]
   post_requests: [/calendar_init, /compare, /counters, /count_models, /edit_file,
     /get, /get_all, /get_cluster_status, /get_git_history, /get_device_network_data,
     /get_device_logs, /get_exported_services, /get_git_network_data, /get_migration_folders,
@@ -158,12 +160,13 @@
     /table/access, /table/changelog, /table/configuration, /table/credential, /table/device,
     /table/event, /table/pool, /table/link, /table/run, /table/server, /table/service,
     /table/session, /table/task, /table/user, /view_service_results, /visualization/geographical_view,
-    /visualization/force_directed_view, /workflow_builder, /form/panel, /template/form, /template/devices]
+    /visualization/force_directed_view, /workflow_builder, /form/panel, /template/form,
+    /template/devices]
   menu: [Home, Administration, Inventory, Visualization, Automation, Scheduling, Template]
   name: Full UI + HTTP access
   pages: [Access, Credentials, Dashboard, Changelog, Sessions, Users, Servers, Devices,
-    Configurations, Links, Pools, Geographical View, Force-directed View, Services, Workflow
-      Builder, Results, Tasks, Events, Page, Subpage]
+    Configurations, Links, Pools, Geographical View, Force-directed View, Services,
+    Workflow Builder, Results, Tasks, Events, Page, Subpage]
   post_requests: [/add_edge, /add_instances_in_bulk, /bulk_deletion, /bulk_edit, /bulk_removal,
     /copy_service_in_workflow, /calendar_init, /clear_results, /clear_configurations,
     /compare, /counters, /count_models, /create_label, /database_deletion, /delete_corrupted_edges,

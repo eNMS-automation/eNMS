@@ -626,46 +626,55 @@ function getResultLink(service, device) {
   copyToClipboard({ text: link });
 }
 
-Object.assign(action, {
-  "Run Workflow": () => runWorkflow(),
-  "Parameterized Workflow Run": () => runWorkflow(true),
-  "Create Workflow": () => createNew("create_workflow"),
-  "Duplicate Workflow": () => createNew("duplicate_workflow"),
-  "Create New Service": () => createNew("create_service"),
-  "Edit Workflow": () => showInstancePanel("workflow", workflow.id),
-  "Restart Workflow from Here": (service) =>
-    showRestartWorkflowPanel(workflow, service),
-  "Workflow Results Tree": () => showRuntimePanel("results", workflow),
-  "Workflow Results Table": () =>
-    showRuntimePanel("results", workflow, null, "full_result"),
-  "Workflow Logs": () => showRuntimePanel("logs", workflow),
-  "Add to Workflow": addServicePanel,
-  "Stop Workflow": () => stopWorkflow(),
-  Delete: deleteSelection,
-  "Service Name": (service) => copyToClipboard({ text: service.name }),
-  "Top-level Result": getResultLink,
-  "Per-device Result": (node) => getResultLink(node, true),
-  "Create 'Success' edge": () => switchMode("success"),
-  "Create 'Failure' edge": () => switchMode("failure"),
-  "Create 'Prerequisite' edge": () => switchMode("prerequisite"),
-  "Move Nodes": () => switchMode("motion"),
-  "Create Label": () =>
-    openPanel({ name: "workflow_label", title: "Create a new label" }),
-  "Edit Label": editLabel,
-  "Edit Edge": (edge) => {
-    showInstancePanel("workflow_edge", edge.id);
-  },
-  Skip: () => skipServices(),
-  "Zoom In": () => graph.zoom(0.2),
-  "Zoom Out": () => graph.zoom(-0.2),
-  "Enter Workflow": (node) => switchToWorkflow(`${currentPath}>${node.id}`),
-  Backward: () => switchToWorkflow(arrowHistory[arrowPointer - 1], "left"),
-  Forward: () => switchToWorkflow(arrowHistory[arrowPointer + 1], "right"),
-  Upward: () => {
-    const parentPath = currentPath.split(">").slice(0, -1).join(">");
-    if (parentPath) switchToWorkflow(parentPath);
-  },
-});
+function updateRightClickBindings() {
+  Object.assign(action, {
+    "Run Workflow": () => runWorkflow(),
+    "Parameterized Workflow Run": () => runWorkflow(true),
+    "Create Workflow": () => createNew("create_workflow"),
+    "Duplicate Workflow": () => createNew("duplicate_workflow"),
+    "Create New Service": () => createNew("create_service"),
+    "Edit Workflow": () => showInstancePanel("workflow", workflow.id),
+    "Restart Workflow from Here": (service) =>
+      showRestartWorkflowPanel(workflow, service),
+    "Workflow Results Tree": () => showRuntimePanel("results", workflow),
+    "Workflow Results Table": () =>
+      showRuntimePanel("results", workflow, null, "full_result"),
+    "Workflow Logs": () => showRuntimePanel("logs", workflow),
+    "Add to Workflow": addServicePanel,
+    "Stop Workflow": () => stopWorkflow(),
+    Delete: deleteSelection,
+    "Service Name": (service) => copyToClipboard({ text: service.name }),
+    "Top-level Result": getResultLink,
+    "Per-device Result": (node) => getResultLink(node, true),
+    "Create 'Success' edge": () => switchMode("success"),
+    "Create 'Failure' edge": () => switchMode("failure"),
+    "Create 'Prerequisite' edge": () => switchMode("prerequisite"),
+    "Move Nodes": () => switchMode("motion"),
+    "Create Label": () =>
+      openPanel({ name: "workflow_label", title: "Create a new label" }),
+    "Edit Label": editLabel,
+    "Edit Edge": (edge) => {
+      showInstancePanel("workflow_edge", edge.id);
+    },
+    Skip: () => skipServices(),
+    "Zoom In": () => graph.zoom(0.2),
+    "Zoom Out": () => graph.zoom(-0.2),
+    "Enter Workflow": (node) => switchToWorkflow(`${currentPath}>${node.id}`),
+    Backward: () => switchToWorkflow(arrowHistory[arrowPointer - 1], "left"),
+    Forward: () => switchToWorkflow(arrowHistory[arrowPointer + 1], "right"),
+    Upward: () => {
+      const parentPath = currentPath.split(">").slice(0, -1).join(">");
+      if (parentPath) switchToWorkflow(parentPath);
+    },
+  });
+  $("#network").contextMenu({
+    menuSelector: "#contextMenu",
+    menuSelected: function (selectedMenu) {
+      const row = selectedMenu.text();
+      action[row](selectedObject);
+    },
+  });
+}
 
 function createLabel() {
   const pos = currLabel
@@ -1006,13 +1015,7 @@ export function initWorkflowBuilder() {
       getWorkflowState(true);
     },
   });
-  $("#network").contextMenu({
-    menuSelector: "#contextMenu",
-    menuSelected: function (selectedMenu) {
-      const row = selectedMenu.text();
-      action[row](selectedObject);
-    },
-  });
+  updateRightClickBindings();
 }
 
 configureNamespace("workflow", [

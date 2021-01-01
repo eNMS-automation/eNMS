@@ -137,6 +137,8 @@ Object.assign(action, {
   "Create View": () => showInstancePanel("logical_view"),
   "Edit View": () => showInstancePanel("logical_view", currentView.id),
   "Duplicate View": () => showInstancePanel("logical_view", currentView.id, "duplicate"),
+  "Zoom in": () => controls.onMouseWheel(),
+  "Zoom out": () => controls.onMouseWheel(),
 })
 
 function render() {

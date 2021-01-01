@@ -47,7 +47,7 @@ let labels;
 let camera;
 let scene;
 let renderer;
-let controls
+let controls;
 let plane;
 let mouse;
 let raycaster;
@@ -90,8 +90,8 @@ function init() {
   renderer = new THREE.WebGLRenderer({ antialias: true });
   renderer.setPixelRatio(window.devicePixelRatio);
   renderer.setSize($(".main_frame").width(), $(".main_frame").height());
-  controls = new THREE.MapControls( camera, renderer.domElement );
-  controls.addEventListener( 'change', render );
+  controls = new THREE.MapControls(camera, renderer.domElement);
+  controls.addEventListener("change", render);
   controls.maxPolarAngle = Math.PI / 2;
   document.getElementById("map").appendChild(renderer.domElement);
   document.addEventListener("mousemove", onDocumentMouseMove, false);
@@ -125,7 +125,7 @@ function onDocumentMouseMove(event) {
     currentCube.position.copy(intersect.point).add(intersect.face.normal);
     currentCube.position.divideScalar(50).floor().multiplyScalar(50).addScalar(25);
   }
-  render()
+  render();
 }
 
 function onDocumentMouseUp() {

@@ -108,164 +108,163 @@
 </nav>
 {% else %}
 <div class="controls">
-<nav class="navbar navbar-default navbar-custom" role="navigation">
-  <div style="width: 690px; margin: 0px;">
-    <div style="width: 70%; float: left;">
-      <select
-        id="current-workflow"
-        class="form-control"
-        data-dropdown-align-right="true"
-        data-size="20"
-      ></select>
+  <nav class="navbar navbar-default navbar-custom" role="navigation">
+    <div style="width: 690px; margin: 0px;">
+      <div style="width: 70%; float: left;">
+        <select
+          id="current-workflow"
+          class="form-control"
+          data-dropdown-align-right="true"
+          data-size="20"
+        ></select>
+      </div>
+      <div style="width: 30%; float: left; padding-left: 5px;">
+        <select id="current-runtime" class="form-control" data-size="20"></select>
+      </div>
     </div>
-    <div style="width: 30%; float: left; padding-left: 5px;">
-      <select id="current-runtime" class="form-control" data-size="20"></select>
-    </div>
-  </div>
-  <ul class="pagination" style="margin: 0px; padding-top: 5px;">
-    <li>
-      <a
-        onclick="action['Edit Workflow']()"
-        data-tooltip="Edit Workflow"
-        style="cursor: pointer;"
-        ><span class="glyphicon glyphicon-edit cursor"></span
-      ></a>
-    </li>
-    <li>
-      <a
-        onclick="action['Duplicate Workflow']()"
-        data-tooltip="Duplicate Workflow"
-        style="cursor: pointer;"
-        ><span class="glyphicon glyphicon-duplicate"></span
-      ></a>
-    </li>
-    <li>
-      <a
-        onclick="action['Create Workflow']()"
-        data-tooltip="Create Top Level Workflow"
-        style="cursor: pointer;"
-        ><span class="glyphicon glyphicon-plus"></span
-      ></a>
-    </li>
-    <li>
-      <a
-        onclick="action['Add to Workflow']()"
-        data-tooltip="Add to Workflow"
-        style="cursor: pointer;"
-        ><span class="glyphicon glyphicon-book"></span
-      ></a>
-    </li>
-    <li>
-      <a
-        onclick="action['Create Label']()"
-        data-tooltip="Create Label"
-        style="cursor: pointer;"
-        ><span class="glyphicon glyphicon-font"></span
-      ></a>
-    </li>
-    <li>
-      <a onclick="action['Skip']()" data-tooltip="Skip" style="cursor: pointer;"
-        ><span class="glyphicon glyphicon-ban-circle"></span
-      ></a>
-    </li>
-    <li>
-      <a onclick="action['Delete']()" data-tooltip="Delete" style="cursor: pointer;"
-        ><span class="glyphicon glyphicon-trash"></span
-      ></a>
-    </li>
-    <li>
-      <a
-        onclick="action['Workflow Logs']()"
-        data-tooltip="Workflow Logs"
-        style="cursor: pointer;"
-        ><span class="glyphicon glyphicon-list"></span
-      ></a>
-    </li>
-    <li>
-      <a
-        onclick="action['Workflow Results Tree']()"
-        data-tooltip="Workflow Results"
-        style="cursor: pointer;"
-        ><span class="glyphicon glyphicon-list-alt"></span
-      ></a>
-    </li>
-  </ul>
-  <ul class="pagination" style="margin: 0px;">
-    <li>
-      <a
-        onclick="eNMS.workflow.getWorkflowTree()"
-        data-tooltip="Workflow Tree"
-        style="cursor: pointer;"
-        ><span class="glyphicon glyphicon-tree-conifer"></span
-      ></a>
-    </li>
-    <li>
-      <a onclick="action['Zoom In']()" data-tooltip="Zoom In" style="cursor: pointer;"
-        ><span class="glyphicon glyphicon-zoom-in"></span
-      ></a>
-    </li>
-    <li>
-      <a
-        onclick="action['Zoom Out']()"
-        data-tooltip="Zoom Out"
-        style="cursor: pointer;"
-        ><span class="glyphicon glyphicon-zoom-out"></span
-      ></a>
-    </li>
-    <li>
-      <a
-        onclick="action['Run Workflow']()"
-        data-tooltip="Run Workflow"
-        style="cursor: pointer;"
-        ><span class="glyphicon glyphicon-play"></span
-      ></a>
-    </li>
-    <li>
-      <a
-        onclick="action['Parameterized Workflow Run']()"
-        data-tooltip="Parameterized Run"
-        style="cursor: pointer;"
-        ><span class="glyphicon glyphicon-play-circle"></span
-      ></a>
-    </li>
-    <li>
-      <a
-        onclick="action['Stop Workflow']()"
-        data-tooltip="Stop Workflow"
-        style="cursor: pointer;"
-        ><span class="glyphicon glyphicon-stop"></span
-      ></a>
-    </li>
-    <li id="left-arrow">
-      <a
-        onclick="action['Backward']()"
-        data-tooltip="Previous Workflow"
-        style="cursor: pointer;"
-        ><span class="glyphicon glyphicon-chevron-left"></span
-      ></a>
-    </li>
-    <li id="up-arrow">
-      <a
-        onclick="action['Upward']()"
-        data-tooltip="Switch to Parent Workflow"
-        style="cursor: pointer;"
-        ><span class="glyphicon glyphicon-chevron-up"></span
-      ></a>
-    </li>
-    <li id="right-arrow">
-      <a
-        onclick="action['Forward']()"
-        data-tooltip="Next Workflow"
-        style="cursor: pointer;"
-        ><span class="glyphicon glyphicon-chevron-right"></span
-      ></a>
-    </li>
-  </ul>
-</nav>
+    <ul class="pagination" style="margin: 0px; padding-top: 5px;">
+      <li>
+        <a
+          onclick="action['Edit Workflow']()"
+          data-tooltip="Edit Workflow"
+          style="cursor: pointer;"
+          ><span class="glyphicon glyphicon-edit cursor"></span
+        ></a>
+      </li>
+      <li>
+        <a
+          onclick="action['Duplicate Workflow']()"
+          data-tooltip="Duplicate Workflow"
+          style="cursor: pointer;"
+          ><span class="glyphicon glyphicon-duplicate"></span
+        ></a>
+      </li>
+      <li>
+        <a
+          onclick="action['Create Workflow']()"
+          data-tooltip="Create Top Level Workflow"
+          style="cursor: pointer;"
+          ><span class="glyphicon glyphicon-plus"></span
+        ></a>
+      </li>
+      <li>
+        <a
+          onclick="action['Add to Workflow']()"
+          data-tooltip="Add to Workflow"
+          style="cursor: pointer;"
+          ><span class="glyphicon glyphicon-book"></span
+        ></a>
+      </li>
+      <li>
+        <a
+          onclick="action['Create Label']()"
+          data-tooltip="Create Label"
+          style="cursor: pointer;"
+          ><span class="glyphicon glyphicon-font"></span
+        ></a>
+      </li>
+      <li>
+        <a onclick="action['Skip']()" data-tooltip="Skip" style="cursor: pointer;"
+          ><span class="glyphicon glyphicon-ban-circle"></span
+        ></a>
+      </li>
+      <li>
+        <a onclick="action['Delete']()" data-tooltip="Delete" style="cursor: pointer;"
+          ><span class="glyphicon glyphicon-trash"></span
+        ></a>
+      </li>
+      <li>
+        <a
+          onclick="action['Workflow Logs']()"
+          data-tooltip="Workflow Logs"
+          style="cursor: pointer;"
+          ><span class="glyphicon glyphicon-list"></span
+        ></a>
+      </li>
+      <li>
+        <a
+          onclick="action['Workflow Results Tree']()"
+          data-tooltip="Workflow Results"
+          style="cursor: pointer;"
+          ><span class="glyphicon glyphicon-list-alt"></span
+        ></a>
+      </li>
+    </ul>
+    <ul class="pagination" style="margin: 0px;">
+      <li>
+        <a
+          onclick="eNMS.workflow.getWorkflowTree()"
+          data-tooltip="Workflow Tree"
+          style="cursor: pointer;"
+          ><span class="glyphicon glyphicon-tree-conifer"></span
+        ></a>
+      </li>
+      <li>
+        <a onclick="action['Zoom In']()" data-tooltip="Zoom In" style="cursor: pointer;"
+          ><span class="glyphicon glyphicon-zoom-in"></span
+        ></a>
+      </li>
+      <li>
+        <a
+          onclick="action['Zoom Out']()"
+          data-tooltip="Zoom Out"
+          style="cursor: pointer;"
+          ><span class="glyphicon glyphicon-zoom-out"></span
+        ></a>
+      </li>
+      <li>
+        <a
+          onclick="action['Run Workflow']()"
+          data-tooltip="Run Workflow"
+          style="cursor: pointer;"
+          ><span class="glyphicon glyphicon-play"></span
+        ></a>
+      </li>
+      <li>
+        <a
+          onclick="action['Parameterized Workflow Run']()"
+          data-tooltip="Parameterized Run"
+          style="cursor: pointer;"
+          ><span class="glyphicon glyphicon-play-circle"></span
+        ></a>
+      </li>
+      <li>
+        <a
+          onclick="action['Stop Workflow']()"
+          data-tooltip="Stop Workflow"
+          style="cursor: pointer;"
+          ><span class="glyphicon glyphicon-stop"></span
+        ></a>
+      </li>
+      <li id="left-arrow">
+        <a
+          onclick="action['Backward']()"
+          data-tooltip="Previous Workflow"
+          style="cursor: pointer;"
+          ><span class="glyphicon glyphicon-chevron-left"></span
+        ></a>
+      </li>
+      <li id="up-arrow">
+        <a
+          onclick="action['Upward']()"
+          data-tooltip="Switch to Parent Workflow"
+          style="cursor: pointer;"
+          ><span class="glyphicon glyphicon-chevron-up"></span
+        ></a>
+      </li>
+      <li id="right-arrow">
+        <a
+          onclick="action['Forward']()"
+          data-tooltip="Next Workflow"
+          style="cursor: pointer;"
+          ><span class="glyphicon glyphicon-chevron-right"></span
+        ></a>
+      </li>
+    </ul>
+  </nav>
 </div>
-{% endif %}
-{% endblock content %} {% block javascripts %} {{ super()}} {% if endpoint !=
-"geographical_view" %}
+{% endif %} {% endblock content %} {% block javascripts %} {{ super()}} {% if endpoint
+!= "geographical_view" %}
 <script src="{{ url_for('static', filename='lib/three/three.min.js') }}"></script>
 <script src="{{ url_for('static', filename='lib/three/orbitControls.min.js') }}"></script>
 {% endif %} {% if endpoint == "force_directed_view" %}

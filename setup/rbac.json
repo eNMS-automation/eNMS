@@ -197,6 +197,7 @@
     "/counters",
     "/count_models",
     "/create_label",
+    "/create_view_label",
     "/database_deletion",
     "/delete_corrupted_edges",
     "/delete_instance",

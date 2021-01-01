@@ -152,9 +152,21 @@ function createNewView(mode) {
   }
 }
 
+function createLabel() {
+  call({
+    url: `/create_view_label/${currentView}`,
+    form: "view_label-form",
+    callback: function (result) {
+      $("#view_label").remove();
+      notify("Label created.", "success", 5);
+    },
+  });
+}
+
 function updateRightClickBindings(controls) {
   Object.assign(action, {
     "Create View": () => createNewView("create"),
+    "Create Label": () => createLabel(),
     "Edit View": () => createNewView("edit"),
     "Duplicate View": () => createNewView("duplicate"),
     "Zoom In": () => controls?.dollyOut(),

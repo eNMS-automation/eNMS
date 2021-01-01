@@ -1,4 +1,5 @@
 from wtforms.validators import InputRequired
+from wtforms.widgets import TextArea
 
 from eNMS import app
 from eNMS.forms import BaseForm, choices, form_properties
@@ -164,3 +165,9 @@ class LogicalViewForm(BaseForm):
     display_grid = BooleanField("Display Grid", default=True)
     grid_size = IntegerField("Grid Size", default=1000)
     grid_rows = IntegerField("Grid Rows", default=20)
+
+
+class ViewLabelForm(BaseForm):
+    form_type = HiddenField(default="view_label")
+    action = "eNMS.visualization.createLabel"
+    text = StringField(widget=TextArea(), render_kw={"rows": 15})

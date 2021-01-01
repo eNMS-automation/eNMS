@@ -26,6 +26,11 @@ class InventoryController(BaseController):
     configuration_properties = {"configuration": "Configuration"}
     configuration_timestamps = ("status", "update", "failure", "runtime", "duration")
 
+    def create_view_label(self, view_id, **kwargs):
+        view = db.fetch("view", id=view_id, rbac="edit")
+        label_id = str(uuid4())
+        return True
+
     def get_ssh_port(self):
         if self.redis_queue:
             self.ssh_port = self.redis("incr", "ssh_port", 1)

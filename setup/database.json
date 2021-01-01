@@ -44,7 +44,8 @@
     "workflow_edge",
     "task",
     "access",
-    "credential"
+    "credential",
+    "view"
   ],
   "dont_migrate": {
     "device": [

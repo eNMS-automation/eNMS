@@ -124,7 +124,7 @@ function initLogicalFramework() {
         if (currentView) {
           switchToView(currentView);
         } else {
-          notify("No logical view has been created yet.", "error", 5);
+          notify("No view has been created yet.", "error", 5);
         }
       }
       $("#current-view").selectpicker({
@@ -134,12 +134,22 @@ function initLogicalFramework() {
   });
 }
 
+function createNewView(mode) {
+  if (mode == "create") {
+    showInstancePanel("view");
+  } else if (mode == "duplicate") {
+    showInstancePanel("view", currentView.id, "duplicate");
+  } else {
+    showInstancePanel("view", currentView.id);
+  }
+}
+
 function updateRightClickBindings(controls) {
   console.log(controls)
   Object.assign(action, {
-    "Create View": () => showInstancePanel("logical_view"),
-    "Edit View": () => showInstancePanel("logical_view", currentView.id),
-    "Duplicate View": () => showInstancePanel("logical_view", currentView.id, "duplicate"),
+    "Create View": () => createNewView("create"),
+    "Edit View": () => createNewView("edit"),
+    "Duplicate View": () => createNewView("duplicate"),
     "Zoom In": () => controls.dollyOut(),
     "Zoom Out": () => controls.dollyIn(),
   });

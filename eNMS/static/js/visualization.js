@@ -102,6 +102,7 @@ function switchToView() {
   document.addEventListener("keydown", onDocumentKeyDown, false);
   document.addEventListener("keyup", onDocumentKeyUp, false);
   window.addEventListener("resize", onWindowResize, false);
+  updateRightClickBindings(controls);
   render();
 }
 
@@ -133,13 +134,16 @@ function initLogicalFramework() {
   });
 }
 
-Object.assign(action, {
-  "Create View": () => showInstancePanel("logical_view"),
-  "Edit View": () => showInstancePanel("logical_view", currentView.id),
-  "Duplicate View": () => showInstancePanel("logical_view", currentView.id, "duplicate"),
-  "Zoom in": () => controls.onMouseWheel(),
-  "Zoom out": () => controls.onMouseWheel(),
-})
+function updateRightClickBindings(controls) {
+  console.log(controls)
+  Object.assign(action, {
+    "Create View": () => showInstancePanel("logical_view"),
+    "Edit View": () => showInstancePanel("logical_view", currentView.id),
+    "Duplicate View": () => showInstancePanel("logical_view", currentView.id, "duplicate"),
+    "Zoom In": () => controls.dollyOut(),
+    "Zoom Out": () => controls.dollyIn(),
+  });
+}
 
 function render() {
   renderer.render(scene, camera);

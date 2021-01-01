@@ -109,7 +109,7 @@
 {% else %}
 <div class="controls">
   <nav class="navbar navbar-default navbar-custom" role="navigation">
-    <div style="width: 690px; margin: 0px;">
+    <div style="width: 460px; margin: 0px;">
       <select
         id="current-view"
         class="form-control"
@@ -159,33 +159,10 @@
         ></a>
       </li>
       <li>
-        <a onclick="action['Skip']()" data-tooltip="Skip" style="cursor: pointer;"
-          ><span class="glyphicon glyphicon-ban-circle"></span
-        ></a>
-      </li>
-      <li>
         <a onclick="action['Delete']()" data-tooltip="Delete" style="cursor: pointer;"
           ><span class="glyphicon glyphicon-trash"></span
         ></a>
       </li>
-      <li>
-        <a
-          onclick="action['Workflow Logs']()"
-          data-tooltip="Workflow Logs"
-          style="cursor: pointer;"
-          ><span class="glyphicon glyphicon-list"></span
-        ></a>
-      </li>
-      <li>
-        <a
-          onclick="action['Workflow Results Tree']()"
-          data-tooltip="Workflow Results"
-          style="cursor: pointer;"
-          ><span class="glyphicon glyphicon-list-alt"></span
-        ></a>
-      </li>
-    </ul>
-    <ul class="pagination" style="margin: 0px;">
       <li>
         <a
           onclick="eNMS.workflow.getWorkflowTree()"
@@ -205,30 +182,6 @@
           data-tooltip="Zoom Out"
           style="cursor: pointer;"
           ><span class="glyphicon glyphicon-zoom-out"></span
-        ></a>
-      </li>
-      <li>
-        <a
-          onclick="action['Run Workflow']()"
-          data-tooltip="Run Workflow"
-          style="cursor: pointer;"
-          ><span class="glyphicon glyphicon-play"></span
-        ></a>
-      </li>
-      <li>
-        <a
-          onclick="action['Parameterized Workflow Run']()"
-          data-tooltip="Parameterized Run"
-          style="cursor: pointer;"
-          ><span class="glyphicon glyphicon-play-circle"></span
-        ></a>
-      </li>
-      <li>
-        <a
-          onclick="action['Stop Workflow']()"
-          data-tooltip="Stop Workflow"
-          style="cursor: pointer;"
-          ><span class="glyphicon glyphicon-stop"></span
         ></a>
       </li>
       <li id="left-arrow">

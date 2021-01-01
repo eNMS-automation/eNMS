@@ -25,6 +25,7 @@ import {
 } from "./base.js";
 import { showConnectionPanel, showDeviceData } from "./inventory.js";
 import { tables } from "./table.js";
+import { currentRuntime } from "./workflow.js";
 
 let graph;
 let dimension;
@@ -44,6 +45,7 @@ let handler;
 let polylines;
 let labels;
 
+let currentView = localStorage.getItem("view");
 let camera;
 let scene;
 let renderer;
@@ -58,7 +60,7 @@ let currentCube;
 
 const objects = [];
 
-function init() {
+function switchToView() {
   camera = new THREE.PerspectiveCamera(
     45,
     $(".main_frame").width() / $(".main_frame").height(),
@@ -100,10 +102,35 @@ function init() {
   document.addEventListener("keydown", onDocumentKeyDown, false);
   document.addEventListener("keyup", onDocumentKeyUp, false);
   window.addEventListener("resize", onWindowResize, false);
+  render();
 }
 
-function initLogicalView() {
-  init();
+function initLogicalFramework() {
+  call({
+    url: "/get_all/logical_view",
+    callback: function (views) {
+      views.sort((a, b) => a.name.localeCompare(b.name));
+      for (let i = 0; i < views.length; i++) {
+        $("#current-view").append(
+          `<option value="${views[i].id}">${views[i].name}</option>`
+        );
+      }
+      if (currentView && views.some((w) => w.id == currentView.split(">")[0])) {
+        $("#current-view").val(currentView.split(">")[0]);
+        switchToView(currentView);
+      } else {
+        currentView = $("#current-view").val();
+        if (currentView) {
+          switchToView(currentView);
+        } else {
+          notify("No logical view has been created yet.", "error", 5);
+        }
+      }
+      $("#current-view").selectpicker({
+        liveSearch: true,
+      });
+    },
+  });
 }
 
 function render() {
@@ -168,11 +195,6 @@ function onDocumentKeyUp(event) {
       isShiftDown = false;
       break;
   }
-}
-
-function initLogicalFramework() {
-  init();
-  render();
 }
 
 function initGeographicalFramework() {

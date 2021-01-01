@@ -57,6 +57,7 @@ let rollOverMesh;
 let cubeGeo;
 let cubeMaterial;
 let currentCube;
+let labelRenderer;
 
 const objects = [];
 
@@ -83,10 +84,20 @@ function displayView() {
       rollOverMesh = new THREE.Mesh(cubeGeo, cubeMaterial);
       objects.push(rollOverMesh);
       scene.add(rollOverMesh);
+      const div = document.createElement("div");
+      div.className = 'label';
+      div.textContent = 'MoonDZEFSFSFSFESFSEFESFESFESFEF';
+      div.style.marginTop = '-1em';
+      const label = new CSS2DObject(div);
+      label.position.set(0, 0, 0);
+      rollOverMesh.add(label);
       if (view.display_grid) {
         const gridHelper = new THREE.GridHelper(view.grid_size, view.grid_rows);
         scene.add(gridHelper);
       }
+      labelRenderer = new CSS2DRenderer();
+      labelRenderer.setSize($(".main_frame").width(), $(".main_frame").height());
+      labelRenderer.domElement.style.position = 'absolute';
       raycaster = new THREE.Raycaster();
       mouse = new THREE.Vector2();
       const geometry = new THREE.PlaneBufferGeometry(1000, 1000);
@@ -97,8 +108,9 @@ function displayView() {
       renderer = new THREE.WebGLRenderer({ antialias: true });
       renderer.setPixelRatio(window.devicePixelRatio);
       renderer.setSize($(".main_frame").width(), $(".main_frame").height());
+      document.getElementById("map").appendChild(labelRenderer.domElement);
       document.getElementById("map").appendChild(renderer.domElement);
-      controls = new THREE.MapControls(camera, renderer.domElement);
+      controls = new THREE.MapControls(camera, labelRenderer.domElement);
       controls.addEventListener("change", render);
       controls.maxPolarAngle = Math.PI / 2;
       document.addEventListener("mousemove", onDocumentMouseMove, false);
@@ -156,7 +168,7 @@ function createLabel() {
   call({
     url: `/create_view_label/${currentView}`,
     form: "view_label-form",
-    callback: function (label) {
+    callback: function (result) {
       $("#view_label").remove();
       const div = document.createElement("div");
       div.className = 'label';
@@ -164,7 +176,7 @@ function createLabel() {
       div.style.marginTop = '-1em';
       const label = new CSS2DObject(div);
       label.position.set(0, 0, 0);
-      scene.add(label);
+      rollOverMesh.add(label);
       notify("Label created.", "success", 5);
     },
   });
@@ -184,12 +196,13 @@ function updateRightClickBindings(controls) {
 
 function render() {
   renderer.render(scene, camera);
+  labelRenderer.render(scene, camera);
 }
 
 function onWindowResize() {
   camera.aspect = $(".main_frame").width() / $(".main_frame").height();
   camera.updateProjectionMatrix();
-  renderer.setSize($(".main_frame").width(), $(".main_frame").height());
+  labelRenderer.setSize($(".main_frame").width(), $(".main_frame").height());
 }
 
 function onDocumentMouseMove(event) {

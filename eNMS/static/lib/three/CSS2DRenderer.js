@@ -89,7 +89,7 @@ var CSS2DRenderer = function () {
 			object.onBeforeRender( _this, scene, camera );
 
 			vector.setFromMatrixPosition( object.matrixWorld );
-			vector.applyTHREE.Matrix4( viewProjectionMatrix );
+			vector.applyMatrix4( viewProjectionMatrix );
 
 			var element = object.element;
 			var style = 'translate(-50%,-50%) translate(' + ( vector.x * _widthHalf + _widthHalf ) + 'px,' + ( - vector.y * _heightHalf + _heightHalf ) + 'px)';

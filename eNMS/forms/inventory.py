@@ -154,3 +154,10 @@ class VisualizationForm(BaseForm):
     action = "eNMS.visualization.saveParameters"
     form_type = HiddenField(default="visualization_parameters")
     default_pools = MultipleInstanceField("Pools", model="pool")
+
+
+class LogicalViewForm(BaseForm):
+    action = "eNMS.base.processData"
+    form_type = HiddenField(default="logical_view")
+    id = HiddenField()
+    name = StringField("Name", [InputRequired()])

@@ -102,6 +102,10 @@ function init() {
   window.addEventListener("resize", onWindowResize, false);
 }
 
+function initLogicalView() {
+  init();
+}
+
 function render() {
   renderer.render(scene, camera);
 }

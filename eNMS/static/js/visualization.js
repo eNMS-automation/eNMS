@@ -85,9 +85,9 @@ function displayView() {
       objects.push(rollOverMesh);
       scene.add(rollOverMesh);
       const div = document.createElement("div");
-      div.className = 'label';
-      div.textContent = 'MoonDZEFSFSFSFESFSEFESFESFESFEF';
-      div.style.marginTop = '-1em';
+      div.className = "label";
+      div.textContent = "MoonDZEFSFSFSFESFSEFESFESFESFEF";
+      div.style.marginTop = "-1em";
       const label = new CSS2DObject(div);
       label.position.set(0, 0, 0);
       rollOverMesh.add(label);
@@ -97,7 +97,7 @@ function displayView() {
       }
       labelRenderer = new CSS2DRenderer();
       labelRenderer.setSize($(".main_frame").width(), $(".main_frame").height());
-      labelRenderer.domElement.style.position = 'absolute';
+      labelRenderer.domElement.style.position = "absolute";
       raycaster = new THREE.Raycaster();
       mouse = new THREE.Vector2();
       const geometry = new THREE.PlaneBufferGeometry(1000, 1000);
@@ -119,7 +119,7 @@ function displayView() {
       window.addEventListener("resize", onWindowResize, false);
       updateRightClickBindings(controls);
       render();
-    }
+    },
   });
 }
 
@@ -171,9 +171,9 @@ function createLabel() {
     callback: function (result) {
       $("#view_label").remove();
       const div = document.createElement("div");
-      div.className = 'label';
-      div.textContent = 'Moon';
-      div.style.marginTop = '-1em';
+      div.className = "label";
+      div.textContent = "Moon";
+      div.style.marginTop = "-1em";
       const label = new CSS2DObject(div);
       label.position.set(0, 0, 0);
       rollOverMesh.add(label);
@@ -185,8 +185,7 @@ function createLabel() {
 function updateRightClickBindings(controls) {
   Object.assign(action, {
     "Create View": () => createNewView("create"),
-    "Create Label": () =>
-      openPanel({ name: "view_label", title: "Create New Label" }),
+    "Create Label": () => openPanel({ name: "view_label", title: "Create New Label" }),
     "Edit View": () => createNewView("edit"),
     "Duplicate View": () => createNewView("duplicate"),
     "Zoom In": () => controls?.dollyOut(),

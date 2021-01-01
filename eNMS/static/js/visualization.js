@@ -99,8 +99,6 @@ function switchToView() {
   document.addEventListener("mousemove", onDocumentMouseMove, false);
   document.addEventListener("mousedown", onDocumentMouseDown, false);
   document.addEventListener("mouseup", onDocumentMouseUp, false);
-  document.addEventListener("keydown", onDocumentKeyDown, false);
-  document.addEventListener("keyup", onDocumentKeyUp, false);
   window.addEventListener("resize", onWindowResize, false);
   updateRightClickBindings(controls);
   render();
@@ -202,22 +200,6 @@ function onDocumentMouseDown(event) {
       controls.enabled = false;
       currentCube = intersect.object;
     }
-  }
-}
-
-function onDocumentKeyDown(event) {
-  switch (event.keyCode) {
-    case 16:
-      isShiftDown = true;
-      break;
-  }
-}
-
-function onDocumentKeyUp(event) {
-  switch (event.keyCode) {
-    case 16:
-      isShiftDown = false;
-      break;
   }
 }
 

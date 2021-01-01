@@ -108,7 +108,7 @@ function switchToView() {
 
 function initLogicalFramework() {
   call({
-    url: "/get_all/logical_view",
+    url: "/get_all/view",
     callback: function (views) {
       views.sort((a, b) => a.name.localeCompare(b.name));
       for (let i = 0; i < views.length; i++) {
@@ -130,6 +130,7 @@ function initLogicalFramework() {
       $("#current-view").selectpicker({
         liveSearch: true,
       });
+      updateRightClickBindings(controls);
     },
   });
 }
@@ -139,19 +140,20 @@ function createNewView(mode) {
     showInstancePanel("view");
   } else if (mode == "duplicate") {
     showInstancePanel("view", currentView.id, "duplicate");
-  } else {
+  } else if (currentView) {
     showInstancePanel("view", currentView.id);
+  } else {
+    notify("No view has been created yet.", "error", 5);
   }
 }
 
 function updateRightClickBindings(controls) {
-  console.log(controls)
   Object.assign(action, {
     "Create View": () => createNewView("create"),
     "Edit View": () => createNewView("edit"),
     "Duplicate View": () => createNewView("duplicate"),
-    "Zoom In": () => controls.dollyOut(),
-    "Zoom Out": () => controls.dollyIn(),
+    "Zoom In": () => controls?.dollyOut(),
+    "Zoom Out": () => controls?.dollyIn(),
   });
 }
 

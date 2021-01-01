@@ -427,9 +427,9 @@ class Session(AbstractBase):
     device_name = association_proxy("device", "name")
 
 
-class LogicalView(AbstractBase):
+class View(AbstractBase):
 
-    __tablename__ = type = "logical_view"
+    __tablename__ = type = "view"
     private = True
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.SmallString, unique=True)

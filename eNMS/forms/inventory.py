@@ -158,6 +158,6 @@ class VisualizationForm(BaseForm):
 
 class LogicalViewForm(BaseForm):
     action = "eNMS.base.processData"
-    form_type = HiddenField(default="logical_view")
+    form_type = HiddenField(default="view")
     id = HiddenField()
     name = StringField("Name", [InputRequired()])

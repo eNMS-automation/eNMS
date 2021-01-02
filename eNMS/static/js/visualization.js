@@ -56,8 +56,10 @@ let plane;
 let mouse;
 let raycaster;
 let currentCube;
+let group;
 let labelRenderer;
 let objects = [];
+let enableSelection;
 
 function displayView(currentPath) {
   const [viewId] = currentPath.split(">").slice(-1);
@@ -80,49 +82,38 @@ function displayView(currentPath) {
       labelRenderer.domElement.style.position = "absolute";
       raycaster = new THREE.Raycaster();
       mouse = new THREE.Vector2();
-      const geometry = new THREE.PlaneBufferGeometry(1000, 1000);
-      geometry.rotateX(-Math.PI / 2);
+      group = new THREE.Group();
+      scene.add( group );
 
-      for ( let i = 0; i < 200; i ++ ) {
-
-        const object = new THREE.Mesh( geometry, new THREE.MeshLambertMaterial( { color: Math.random() * 0xffffff } ) );
-
-        object.position.x = Math.random() * 1000 - 500;
-        object.position.y = Math.random() * 600 - 300;
-        object.position.z = Math.random() * 800 - 400;
-
-        object.rotation.x = Math.random() * 2 * Math.PI;
-        object.rotation.y = Math.random() * 2 * Math.PI;
-        object.rotation.z = Math.random() * 2 * Math.PI;
-
-        object.scale.x = Math.random() * 2 + 1;
-        object.scale.y = Math.random() * 2 + 1;
-        object.scale.z = Math.random() * 2 + 1;
-
-        object.castShadow = true;
-        object.receiveShadow = true;
-
-        scene.add( object );
-
-        objects.push( object );
-
-      }
       //view.devices.map(drawNode);
       const container = document.getElementById("map");
       renderer = new THREE.WebGLRenderer({ antialias: true });
       renderer.setPixelRatio(window.devicePixelRatio);
       renderer.setSize($(".main_frame").width(), $(".main_frame").height());
-      document.getElementById("map").appendChild(labelRenderer.domElement);
-      document.getElementById("map").appendChild(renderer.domElement);
-      controls = new THREE.MapControls(camera, labelRenderer.domElement);
+      //container.appendChild(labelRenderer.domElement);
+      container.appendChild(renderer.domElement);
+
+      controls = new THREE.OrbitControls(camera, renderer.domElement);
       controls.addEventListener("change", render);
       controls.maxPolarAngle = Math.PI / 2;
-      dragControls = new DragControls([...objects], camera, renderer.domElement);
-      dragControls.addEventListener("drag", render);
-      document.addEventListener("click", onClick, false);
-      document.addEventListener("mousedown", onDocumentMouseDown, false);
-      document.addEventListener("mouseup", onDocumentMouseUp, false);
+
+      const geometry = new THREE.BoxBufferGeometry( 200, 200, 200 );
+      const material = new THREE.MeshLambertMaterial( { transparent: true } );
+      const mesh = new THREE.Mesh( geometry, material );
+      scene.add( mesh );
+
+      dragControls = new DragControls([mesh], camera, renderer.domElement);
+      dragControls.addEventListener( 'drag', render );
+      dragControls.addEventListener( 'change', render );
+      dragControls.deactivate();
+
+
+      //dragControls.addEventListener("drag", render);
+      //document.addEventListener( 'click', onClick, false );
+      //document.addEventListener("mousedown", onDocumentMouseDown, false);
+      //document.addEventListener("mouseup", onDocumentMouseUp, false);
       window.addEventListener("resize", onWindowResize, false);
+
       updateRightClickBindings(controls);
       render();
     },
@@ -159,24 +150,6 @@ function drawLabel({
   };
   labelObject.position.set(0, 0, 0);
   target.add(labelObject);
-}
-
-function onClick(event) {
-  event.preventDefault();
-  const draggableObjects = dragControls.getObjects();
-  draggableObjects.length = 0;
-  mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-  mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-  raycaster.setFromCamera(mouse, camera);
-  const intersections = raycaster.intersectObjects(objects, true);
-  console.log(intersections)
-  if (intersections.length > 0) {
-    const object = intersections[0].object;
-    //object.material.emissive.set(0x000000);
-    scene.attach(object);
-    dragControls.transformGroup = true;
-  }
-  render();
 }
 
 function initLogicalFramework() {
@@ -280,6 +253,56 @@ function onWindowResize() {
   camera.aspect = $(".main_frame").width() / $(".main_frame").height();
   camera.updateProjectionMatrix();
   labelRenderer.setSize($(".main_frame").width(), $(".main_frame").height());
+}
+
+
+
+function onClick( event ) {
+
+  if ( enableSelection === true ) {
+
+    const draggableObjects = dragControls.getObjects();
+    draggableObjects.length = 0;
+
+    mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+    mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+
+    raycaster.setFromCamera( mouse, camera );
+
+    const intersections = raycaster.intersectObjects( objects, true );
+
+    if ( intersections.length > 0 ) {
+
+      const object = intersections[ 0 ].object;
+
+      if ( group.children.includes( object ) === true ) {
+
+        object.material.emissive.set( 0x000000 );
+        scene.attach( object );
+
+      } else {
+
+        object.material.emissive.set( 0xaaaaaa );
+        group.attach( object );
+
+      }
+
+      dragControls.transformGroup = true;
+      draggableObjects.push( group );
+
+    }
+
+    if ( group.children.length === 0 ) {
+
+      dragControls.transformGroup = false;
+      draggableObjects.push( ...objects );
+
+    }
+
+  }
+
+  render();
+
 }
 
 function onDocumentMouseUp() {

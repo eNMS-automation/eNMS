@@ -307,6 +307,26 @@
           "column": "pool_id",
           "foreign_key": "pool"
         }
+      },
+      "view_device": {
+        "model1": {
+          "column": "view_id",
+          "foreign_key": "view"
+        },
+        "model2": {
+          "column": "device_id",
+          "foreign_key": "device"
+        }
+      },
+      "view_link": {
+        "model1": {
+          "column": "view_id",
+          "foreign_key": "view"
+        },
+        "model2": {
+          "column": "link_id",
+          "foreign_key": "link"
+        }
       }
     }
   },

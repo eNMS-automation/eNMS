@@ -84,6 +84,9 @@ class Device(Object):
     pools = relationship(
         "Pool", secondary=db.pool_device_table, back_populates="devices"
     )
+    views = relationship(
+        "View", secondary=db.view_device_table, back_populates="devices"
+    )
     sessions = relationship(
         "Session", back_populates="device", cascade="all, delete-orphan"
     )
@@ -242,6 +245,9 @@ class Link(Object):
     )
     destination_name = association_proxy("destination", "name")
     pools = relationship("Pool", secondary=db.pool_link_table, back_populates="links")
+    views = relationship(
+        "View", secondary=db.view_link_table, back_populates="links"
+    )
     __table_args__ = (UniqueConstraint(name, source_id, destination_id),)
 
     def __init__(self, **kwargs):
@@ -437,3 +443,9 @@ class View(AbstractBase):
     grid_size = db.Column(Integer)
     grid_rows = db.Column(Integer)
     labels = db.Column(db.Dict, info={"log_change": False})
+    devices = relationship(
+        "Device", secondary=db.view_device_table, back_populates="views"
+    )
+    links = relationship(
+        "Link", secondary=db.view_link_table, back_populates="views"
+    )

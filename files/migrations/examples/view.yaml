@@ -1,1 +1,8 @@
-- {name: 'Regression View: Basic Example', type: view}
+- devices: []
+  display_grid: true
+  grid_rows: 20
+  grid_size: 1000
+  labels: {}
+  links: []
+  name: 'Regression View: Basic Example'
+  type: view

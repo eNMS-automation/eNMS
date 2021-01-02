@@ -171,3 +171,10 @@ class ViewLabelForm(BaseForm):
     form_type = HiddenField(default="view_label")
     action = "eNMS.visualization.createLabel"
     text = StringField(widget=TextArea(), render_kw={"rows": 15})
+
+
+class AddObjectsForm(BaseForm):
+    form_type = HiddenField(default="add_objects_to_view")
+    action = "eNMS.visualization.addObjectsToView"
+    devices = MultipleInstanceField("Devices", model="device")
+    links = MultipleInstanceField("Links", model="link")

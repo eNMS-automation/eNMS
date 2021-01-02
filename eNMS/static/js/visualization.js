@@ -179,7 +179,7 @@ function createLabel() {
   call({
     url: `/create_view_label/${currentView}`,
     form: "view_label-form",
-    callback: function (result) {
+    callback: function () {
       $("#view_label").remove();
       const div = document.createElement("div");
       div.className = "label";
@@ -193,8 +193,19 @@ function createLabel() {
   });
 }
 
+function addObjectPanel() {
+  openPanel({
+    name: "add_objects_to_view",
+    title: "Add Objects to View",
+    size: "800 350",
+    callback: function () {
+    },
+  });
+}
+
 function updateRightClickBindings(controls) {
   Object.assign(action, {
+    "Add to View": addObjectPanel,
     "Create View": () => createNewView("create"),
     "Create Label": () => openPanel({ name: "view_label", title: "Create New Label" }),
     "Edit View": () => createNewView("edit"),

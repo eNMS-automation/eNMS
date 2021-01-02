@@ -86,7 +86,7 @@ function displayView() {
       scene.add(rollOverMesh);
       const div = document.createElement("div");
       div.className = "label";
-      div.textContent = "MoonDZEFSFSFSFESFSEFESFESFESFEF";
+      div.textContent = "Router1-Router2";
       div.style.marginTop = "-1em";
       const label = new CSS2DObject(div);
       label.position.set(0, 0, 0);

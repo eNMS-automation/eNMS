@@ -84,13 +84,7 @@ function displayView() {
       rollOverMesh = new THREE.Mesh(cubeGeo, cubeMaterial);
       objects.push(rollOverMesh);
       scene.add(rollOverMesh);
-      const div = document.createElement("div");
-      div.className = "label";
-      div.textContent = "Router1-Router2";
-      div.style.marginTop = "-1em";
-      const label = new CSS2DObject(div);
-      label.position.set(0, 0, 0);
-      rollOverMesh.add(label);
+      drawLabel({ target: rollOverMesh });
       if (view.display_grid) {
         const gridHelper = new THREE.GridHelper(view.grid_size, view.grid_rows);
         scene.add(gridHelper);
@@ -121,6 +115,19 @@ function displayView() {
       render();
     },
   });
+}
+
+function drawLabel({
+  target = scene,
+  style = { marginTop: "-1em", color: "#000000" },
+} = {}) {
+  const div = document.createElement("div");
+  div.className = "label";
+  div.textContent = "Router1-Router2";
+  Object.assign(div.style, style);
+  const label = new CSS2DObject(div);
+  label.position.set(0, 0, 0);
+  target.add(label);
 }
 
 function initLogicalFramework() {

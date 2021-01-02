@@ -116,6 +116,14 @@
 </nav>
 {% else %}
 <div class="controls">
+  <button
+    type="button"
+    class="btn btn-lg btn-primary"
+    onclick="eNMS.visualization.switchMode()"
+    data-tooltip="Change Mode"
+  >
+    <span id="mode-icon" class="glyphicon glyphicon-move"></span>
+  </button>
   <nav class="navbar navbar-default navbar-custom" role="navigation">
     <div style="width: 460px; margin: 0px;">
       <select

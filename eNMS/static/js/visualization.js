@@ -45,6 +45,7 @@ let handler;
 let polylines;
 let labels;
 
+let currentMode = "map";
 let currentPath = localStorage.getItem("view");
 let currentView;
 let camera;
@@ -106,18 +107,22 @@ function displayView(currentPath) {
       dragControls.addEventListener("drag", render);
       dragControls.addEventListener("change", render);
       dragControls.addEventListener("dragend", function() { console.log("test")});
-      //dragControls.deactivate();
-
-      //dragControls.addEventListener("drag", render);
-      //document.addEventListener( 'click', onClick, false );
-      //document.addEventListener("mousedown", onDocumentMouseDown, false);
-      //document.addEventListener("mouseup", onDocumentMouseUp, false);
+      document.addEventListener("mousedown", onDocumentMouseDown, false);
       window.addEventListener("resize", onWindowResize, false);
 
       updateRightClickBindings(controls);
       render();
     },
   });
+}
+
+function switchMode() {
+  currentMode = currentMode == "drag" ? "map" : "drag";
+  if (currentMode == "drag") {
+    dragControls.activate();
+  } else {
+    dragControls.deactivate();
+  }
 }
 
 function drawNode(device) {
@@ -255,57 +260,10 @@ function onWindowResize() {
   labelRenderer.setSize($(".main_frame").width(), $(".main_frame").height());
 }
 
-function onClick(event) {
-  if (enableSelection === true) {
-    const draggableObjects = dragControls.getObjects();
-    draggableObjects.length = 0;
-    mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-    mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-    raycaster.setFromCamera(mouse, camera);
-    const intersections = raycaster.intersectObjects(objects, true);
-    if (intersections.length > 0) {
-      const object = intersections[0].object;
-      if (group.children.includes(object) === true) {
-        object.material.emissive.set(0x000000);
-        scene.attach(object);
-      } else {
-        object.material.emissive.set(0xaaaaaa);
-        group.attach(object);
-      }
-      dragControls.transformGroup = true;
-      draggableObjects.push(group);
-    }
-    if (group.children.length === 0) {
-      dragControls.transformGroup = false;
-      draggableObjects.push(...objects);
-    }
-  }
-  render();
-}
-
-function onDocumentMouseUp() {
-  currentCube = null;
-  controls.enabled = true;
-}
-
 function onDocumentMouseDown(event) {
-  mouse.set(
-    ((event.clientX - 250) / $(".main_frame").width()) * 2 - 1,
-    -((event.clientY - 70) / $(".main_frame").height()) * 2 + 1
-  );
-  raycaster.setFromCamera(mouse, camera);
-  const intersects = raycaster.intersectObjects(objects);
-  console.log(!intersects.length);
   if (!intersects.length || intersects?.[0]?.object == plane) {
     $(".rc-object-menu").hide();
     $(".global").show();
-  }
-  if (intersects.length > 0) {
-    const intersect = intersects[0];
-    if (intersect.object !== plane) {
-      controls.enabled = false;
-      currentCube = intersect.object;
-    }
   }
 }
 
@@ -950,4 +908,5 @@ configureNamespace("visualization", [
   displayNetwork,
   openVisualizationPanel,
   saveParameters,
+  switchMode,
 ]);

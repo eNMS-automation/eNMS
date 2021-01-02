@@ -58,8 +58,7 @@ let cubeGeo;
 let cubeMaterial;
 let currentCube;
 let labelRenderer;
-
-const objects = [];
+let objects = [];
 
 function displayView() {
   call({
@@ -75,16 +74,6 @@ function displayView() {
       camera.lookAt(0, 0, 0);
       scene = new THREE.Scene();
       scene.background = new THREE.Color(0xffffff);
-      cubeGeo = new THREE.BoxBufferGeometry(50, 50, 50);
-      cubeMaterial = new THREE.MeshLambertMaterial({
-        color: 0xfeb74c,
-        opacity: 0.8,
-        transparent: true,
-      });
-      rollOverMesh = new THREE.Mesh(cubeGeo, cubeMaterial);
-      objects.push(rollOverMesh);
-      scene.add(rollOverMesh);
-      drawLabel({ target: rollOverMesh });
       if (view.display_grid) {
         const gridHelper = new THREE.GridHelper(view.grid_size, view.grid_rows);
         scene.add(gridHelper);
@@ -117,6 +106,18 @@ function displayView() {
   });
 }
 
+function drawNode() {
+  cubeGeo = new THREE.BoxBufferGeometry(50, 50, 50);
+  cubeMaterial = new THREE.MeshLambertMaterial({
+    color: 0xfeb74c,
+    opacity: 0.8,
+    transparent: true,
+  });
+  rollOverMesh = new THREE.Mesh(cubeGeo, cubeMaterial);
+  objects.push(rollOverMesh);
+  scene.add(rollOverMesh);
+}
+
 function drawLabel({
   target = scene,
   style = { marginTop: "-1em", color: "#000000" },
@@ -126,6 +127,9 @@ function drawLabel({
   div.textContent = "Router1-Router2";
   Object.assign(div.style, style);
   const label = new CSS2DObject(div);
+  div.onclick = function() {
+    console.log("test");
+  }
   label.position.set(0, 0, 0);
   target.add(label);
 }

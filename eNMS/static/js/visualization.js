@@ -104,6 +104,7 @@ function displayView(currentPath) {
       document.addEventListener("mouseup", onDocumentMouseUp, false);
       window.addEventListener("resize", onWindowResize, false);
       updateRightClickBindings(controls);
+      view.devices.map(drawNode);
       render();
     },
   });
@@ -213,6 +214,8 @@ function addObjectsToView() {
     callback: function (result) {
       currentView.last_modified = result.update_time;
       $("#add_objects_to_view").remove();
+      result.devices.map(drawNode)
+      notify("Objects successfully added to the view.", "success", 5);
     },
   });
 }

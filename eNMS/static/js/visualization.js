@@ -86,26 +86,21 @@ function displayView(currentPath) {
       group = new THREE.Group();
       scene.add(group);
 
-      //view.devices.map(drawNode);
+      view.devices.map(drawNode);
       const container = document.getElementById("map");
       renderer = new THREE.WebGLRenderer({ antialias: true });
       renderer.setPixelRatio(window.devicePixelRatio);
       renderer.setSize($(".main_frame").width(), $(".main_frame").height());
-      //container.appendChild(labelRenderer.domElement);
+      
       container.appendChild(renderer.domElement);
+      container.appendChild(labelRenderer.domElement);
 
       controls = new THREE.OrbitControls(camera, renderer.domElement);
       controls.addEventListener("change", render);
       controls.maxPolarAngle = Math.PI / 2;
 
-      const geometry = new THREE.BoxBufferGeometry(200, 200, 200);
-      const material = new THREE.MeshLambertMaterial({ transparent: true });
-      const mesh = new THREE.Mesh(geometry, material);
-      scene.add(mesh);
-
-      dragControls = new DragControls([mesh], camera, renderer.domElement);
+      dragControls = new DragControls(objects, camera, renderer.domElement);
       dragControls.addEventListener("drag", render);
-      dragControls.addEventListener("change", render);
       dragControls.addEventListener("dragend", function() { console.log("test")});
       document.addEventListener("mousedown", onDocumentMouseDown, false);
       window.addEventListener("resize", onWindowResize, false);
@@ -261,10 +256,12 @@ function onWindowResize() {
 }
 
 function onDocumentMouseDown(event) {
+  /*
   if (!intersects.length || intersects?.[0]?.object == plane) {
     $(".rc-object-menu").hide();
     $(".global").show();
   }
+  */
 }
 
 function initGeographicalFramework() {

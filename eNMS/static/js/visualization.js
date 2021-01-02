@@ -54,9 +54,6 @@ let controls;
 let plane;
 let mouse;
 let raycaster;
-let rollOverMesh;
-let cubeGeo;
-let cubeMaterial;
 let currentCube;
 let labelRenderer;
 let objects = [];
@@ -111,15 +108,17 @@ function displayView(currentPath) {
 }
 
 function drawNode() {
-  cubeGeo = new THREE.BoxBufferGeometry(50, 50, 50);
-  cubeMaterial = new THREE.MeshLambertMaterial({
-    color: 0xfeb74c,
-    opacity: 0.8,
-    transparent: true,
-  });
-  rollOverMesh = new THREE.Mesh(cubeGeo, cubeMaterial);
-  objects.push(rollOverMesh);
-  scene.add(rollOverMesh);
+  const node = new THREE.Mesh(
+    new THREE.BoxBufferGeometry(50, 50, 50),
+    new THREE.MeshLambertMaterial({
+      color: 0xfeb74c,
+      opacity: 0.8,
+      transparent: true,
+    })
+  );
+  drawLabel({ target: node });
+  objects.push(node);
+  scene.add(node);
 }
 
 function drawLabel({
@@ -131,9 +130,9 @@ function drawLabel({
   div.textContent = "Router1-Router2";
   Object.assign(div.style, style);
   const label = new CSS2DObject(div);
-  div.onclick = function() {
+  div.onclick = function () {
     console.log("test");
-  }
+  };
   label.position.set(0, 0, 0);
   target.add(label);
 }
@@ -191,7 +190,6 @@ function createLabel() {
       div.style.marginTop = "-1em";
       const label = new CSS2DObject(div);
       label.position.set(0, 0, 0);
-      rollOverMesh.add(label);
       notify("Label created.", "success", 5);
     },
   });
@@ -202,8 +200,7 @@ function addObjectPanel() {
     name: "add_objects_to_view",
     title: "Add Objects to View",
     size: "800 350",
-    callback: function () {
-    },
+    callback: function () {},
   });
 }
 
@@ -214,7 +211,7 @@ function addObjectsToView() {
     callback: function (result) {
       currentView.last_modified = result.update_time;
       $("#add_objects_to_view").remove();
-      result.devices.map(drawNode)
+      result.devices.map(drawNode);
       notify("Objects successfully added to the view.", "success", 5);
     },
   });

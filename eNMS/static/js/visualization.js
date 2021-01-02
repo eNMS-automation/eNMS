@@ -51,6 +51,7 @@ let camera;
 let scene;
 let renderer;
 let controls;
+let dragControls;
 let plane;
 let mouse;
 let raycaster;
@@ -81,9 +82,33 @@ function displayView(currentPath) {
       mouse = new THREE.Vector2();
       const geometry = new THREE.PlaneBufferGeometry(1000, 1000);
       geometry.rotateX(-Math.PI / 2);
-      plane = new THREE.Mesh(geometry, new THREE.MeshBasicMaterial({ visible: false }));
-      scene.add(plane);
-      objects.push(plane);
+
+      for ( let i = 0; i < 200; i ++ ) {
+
+        const object = new THREE.Mesh( geometry, new THREE.MeshLambertMaterial( { color: Math.random() * 0xffffff } ) );
+
+        object.position.x = Math.random() * 1000 - 500;
+        object.position.y = Math.random() * 600 - 300;
+        object.position.z = Math.random() * 800 - 400;
+
+        object.rotation.x = Math.random() * 2 * Math.PI;
+        object.rotation.y = Math.random() * 2 * Math.PI;
+        object.rotation.z = Math.random() * 2 * Math.PI;
+
+        object.scale.x = Math.random() * 2 + 1;
+        object.scale.y = Math.random() * 2 + 1;
+        object.scale.z = Math.random() * 2 + 1;
+
+        object.castShadow = true;
+        object.receiveShadow = true;
+
+        scene.add( object );
+
+        objects.push( object );
+
+      }
+      //view.devices.map(drawNode);
+      const container = document.getElementById("map");
       renderer = new THREE.WebGLRenderer({ antialias: true });
       renderer.setPixelRatio(window.devicePixelRatio);
       renderer.setSize($(".main_frame").width(), $(".main_frame").height());
@@ -92,13 +117,13 @@ function displayView(currentPath) {
       controls = new THREE.MapControls(camera, labelRenderer.domElement);
       controls.addEventListener("change", render);
       controls.maxPolarAngle = Math.PI / 2;
-      const dragControls = new DragControls( [ ... objects ], camera, renderer.domElement );
+      dragControls = new DragControls([...objects], camera, renderer.domElement);
       dragControls.addEventListener("drag", render);
+      document.addEventListener("click", onClick, false);
       document.addEventListener("mousedown", onDocumentMouseDown, false);
       document.addEventListener("mouseup", onDocumentMouseUp, false);
       window.addEventListener("resize", onWindowResize, false);
       updateRightClickBindings(controls);
-      view.devices.map(drawNode);
       render();
     },
   });
@@ -113,6 +138,7 @@ function drawNode(device) {
       transparent: true,
     })
   );
+  node.position.set(device.id * 100, device.id * 100, device.id * 100);
   drawLabel({ target: node, label: device.name });
   objects.push(node);
   scene.add(node);
@@ -133,6 +159,24 @@ function drawLabel({
   };
   labelObject.position.set(0, 0, 0);
   target.add(labelObject);
+}
+
+function onClick(event) {
+  event.preventDefault();
+  const draggableObjects = dragControls.getObjects();
+  draggableObjects.length = 0;
+  mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+  mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+  raycaster.setFromCamera(mouse, camera);
+  const intersections = raycaster.intersectObjects(objects, true);
+  console.log(intersections)
+  if (intersections.length > 0) {
+    const object = intersections[0].object;
+    //object.material.emissive.set(0x000000);
+    scene.attach(object);
+    dragControls.transformGroup = true;
+  }
+  render();
 }
 
 function initLogicalFramework() {
@@ -250,7 +294,7 @@ function onDocumentMouseDown(event) {
   );
   raycaster.setFromCamera(mouse, camera);
   const intersects = raycaster.intersectObjects(objects);
-  console.log(!intersects.length)
+  console.log(!intersects.length);
   if (!intersects.length || intersects?.[0]?.object == plane) {
     $(".rc-object-menu").hide();
     $(".global").show();

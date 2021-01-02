@@ -95,17 +95,17 @@ export function displayWorkflow(workflowData) {
       const edge = this.getEdgeAt(properties.pointer.DOM);
       if (typeof node !== "undefined" && !ends.has(node)) {
         graph.selectNodes([node]);
-        $(".menu-entry ").hide();
+        $(".menu-entry").hide();
         $(`.${node.length == 36 ? "label" : "node"}-selection`).show();
         selectedObject = nodes.get(node);
         $(".workflow-selection").toggle(selectedObject.type == "workflow");
       } else if (typeof edge !== "undefined" && !ends.has(node)) {
         graph.selectEdges([edge]);
-        $(".menu-entry ").hide();
+        $(".menu-entry").hide();
         $(".edge-selection").show();
         selectedObject = edges.get(edge);
       } else {
-        $(".menu-entry ").hide();
+        $(".menu-entry").hide();
         $(".global").show();
       }
     } else {

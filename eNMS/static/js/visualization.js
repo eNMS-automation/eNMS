@@ -107,7 +107,7 @@ function displayView(currentPath) {
   });
 }
 
-function drawNode() {
+function drawNode(device) {
   const node = new THREE.Mesh(
     new THREE.BoxBufferGeometry(50, 50, 50),
     new THREE.MeshLambertMaterial({
@@ -116,25 +116,26 @@ function drawNode() {
       transparent: true,
     })
   );
-  drawLabel({ target: node });
+  drawLabel({ target: node, label: device.name });
   objects.push(node);
   scene.add(node);
 }
 
 function drawLabel({
+  label,
   target = scene,
-  style = { marginTop: "-1em", color: "#000000" },
+  style = { marginTop: "-1em", color: "#FF0000" },
 } = {}) {
   const div = document.createElement("div");
   div.className = "label";
-  div.textContent = "Router1-Router2";
+  div.textContent = label;
   Object.assign(div.style, style);
-  const label = new CSS2DObject(div);
+  const labelObject = new CSS2DObject(div);
   div.onclick = function () {
     console.log("test");
   };
-  label.position.set(0, 0, 0);
-  target.add(label);
+  labelObject.position.set(0, 0, 0);
+  target.add(labelObject);
 }
 
 function initLogicalFramework() {
@@ -267,6 +268,11 @@ function onDocumentMouseDown(event) {
   );
   raycaster.setFromCamera(mouse, camera);
   const intersects = raycaster.intersectObjects(objects);
+  console.log(!intersects.length)
+  if (!intersects.length || intersects?.[0]?.object == plane) {
+    $(".rc-object-menu").hide();
+    $(".global").show();
+  }
   if (intersects.length > 0) {
     const intersect = intersects[0];
     if (intersect.object !== plane) {

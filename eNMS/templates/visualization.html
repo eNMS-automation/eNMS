@@ -58,14 +58,20 @@
     </ul>
   </li>
   {% endif %}
-  <li class="menu rc-device-menu rc-link-menu rc-site-menu">
+
+  {% if endpoint == "logical_view" %}
+  <li class="menu global">
+    <a tabindex="-1" href="#">Edit View</a>
+  </li>
+  {% endif %}
+  <li class="menu rc-object-menu rc-device-menu rc-link-menu rc-site-menu">
     <a tabindex="-1" href="#">Properties</a>
   </li>
-  <li class="menu rc-device-menu"><a tabindex="-1" href="#">Connect</a></li>
-  <li class="menu rc-device-menu">
+  <li class="menu rc-object-menu rc-device-menu"><a tabindex="-1" href="#">Connect</a></li>
+  <li class="menu rc-object-menu rc-device-menu">
     <a tabindex="-1" href="#">Configuration</a>
   </li>
-  <li class="menu rc-device-menu"><a tabindex="-1" href="#">Run Service</a></li>
+  <li class="menu rc-object-menu rc-device-menu"><a tabindex="-1" href="#">Run Service</a></li>
 </ul>
 {% if endpoint != "logical_view" %}
 <nav class="navbar navbar-default controls nav-controls" role="navigation">

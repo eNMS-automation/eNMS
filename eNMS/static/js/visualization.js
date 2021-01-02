@@ -210,8 +210,8 @@ function addObjectsToView() {
   call({
     url: `/add_objects_to_view/${currentView.id}`,
     form: "add_objects_to_view-form",
-    callback: function (updateTime) {
-      currentView.last_modified = updateTime;
+    callback: function (result) {
+      currentView.last_modified = result.update_time;
       $("#add_objects_to_view").remove();
     },
   });

@@ -27,10 +27,11 @@ class InventoryController(BaseController):
     configuration_timestamps = ("status", "update", "failure", "runtime", "duration")
 
     def add_objects_to_view(self, view_id, **kwargs):
-        view = db.fetch("view", id=view_id)
+        view, result = db.fetch("view", id=view_id), {"update_time": self.get_time()}
         for model in ("device", "link"):
-            getattr(view, f"{model}s").extend(db.objectify(model, kwargs[f"{model}s"]))
-        return self.get_time()
+            result[model] = db.objectify(model, kwargs[f"{model}s"])
+            getattr(view, f"{model}s").extend(result[model])
+        return result
 
     def create_view_label(self, view_id, **kwargs):
         view = db.fetch("view", id=view_id, rbac="edit")

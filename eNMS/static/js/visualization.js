@@ -80,16 +80,16 @@ function displayView(currentPath) {
       renderer = new THREE.WebGLRenderer({ antialias: true });
       renderer.setPixelRatio(window.devicePixelRatio);
       renderer.setSize($(".main_frame").width(), $(".main_frame").height());
-      
-      container.appendChild(renderer.domElement);
       container.appendChild(labelRenderer.domElement);
-
-      controls = new THREE.OrbitControls(camera, renderer.domElement);
+      container.appendChild(renderer.domElement);
+      controls = new THREE.OrbitControls(camera, labelRenderer.domElement);
       controls.addEventListener("change", render);
       controls.maxPolarAngle = Math.PI / 2;
-
-      dragControls = new DragControls(objects, camera, renderer.domElement);
-      dragControls.addEventListener("drag", render);
+      dragControls = new DragControls(objects, camera, labelRenderer.domElement);
+      dragControls.addEventListener ( 'drag', function( event ){
+        event.object.position.z = 0; 
+        render()
+       })
       dragControls.addEventListener("dragend", function() { console.log("test")});
       document.addEventListener("mousedown", onDocumentMouseDown, false);
       window.addEventListener("resize", onWindowResize, false);
@@ -111,9 +111,9 @@ function switchMode() {
 
 function drawNode(device) {
   const node = new THREE.Mesh(
-    new THREE.BoxBufferGeometry(50, 50, 50),
-    new THREE.MeshLambertMaterial({
-      color: 0xfeb74c,
+    new THREE.CylinderGeometry( 30, 30, 20, 32 ),
+    new THREE.MeshBasicMaterial({
+      color: 0x3c8c8c,
       opacity: 0.8,
       transparent: true,
     })

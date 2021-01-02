@@ -186,6 +186,7 @@
   "post_requests": [
     "/add_edge",
     "/add_instances_in_bulk",
+    "/add_objects_to_view",
     "/bulk_deletion",
     "/bulk_edit",
     "/bulk_removal",

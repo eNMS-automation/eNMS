@@ -439,6 +439,7 @@ class View(AbstractBase):
     private = True
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.SmallString, unique=True)
+    last_modified = db.Column(db.TinyString, info={"log_change": False})
     display_grid = db.Column(Boolean)
     grid_size = db.Column(Integer)
     grid_rows = db.Column(Integer)

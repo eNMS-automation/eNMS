@@ -45,7 +45,8 @@ let handler;
 let polylines;
 let labels;
 
-let currentView = localStorage.getItem("view");
+let currentPath = localStorage.getItem("view");
+let currentView;
 let camera;
 let scene;
 let renderer;
@@ -60,10 +61,12 @@ let currentCube;
 let labelRenderer;
 let objects = [];
 
-function displayView() {
+function displayView(currentPath) {
+  const [viewId] = currentPath.split(">").slice(-1);
   call({
-    url: `/get/view/${currentView}`,
+    url: `/get/view/${viewId}`,
     callback: function (view) {
+      currentView = view;
       camera = new THREE.PerspectiveCamera(
         45,
         $(".main_frame").width() / $(".main_frame").height(),
@@ -144,13 +147,13 @@ function initLogicalFramework() {
           `<option value="${views[i].id}">${views[i].name}</option>`
         );
       }
-      if (currentView && views.some((w) => w.id == currentView.split(">")[0])) {
-        $("#current-view").val(currentView.split(">")[0]);
-        displayView(currentView);
+      if (currentPath && views.some((w) => w.id == currentPath.split(">")[0])) {
+        $("#current-view").val(currentPath.split(">")[0]);
+        displayView(currentPath);
       } else {
-        currentView = $("#current-view").val();
-        if (currentView) {
-          displayView(currentView);
+        currentPath = $("#current-view").val();
+        if (currentPath) {
+          displayView(currentPath);
         } else {
           notify("No view has been created yet.", "error", 5);
         }
@@ -171,13 +174,13 @@ function createNewView(mode) {
   } else if (mode == "duplicate") {
     showInstancePanel("view", currentView.id, "duplicate");
   } else {
-    showInstancePanel("view", currentView);
+    showInstancePanel("view", currentView.id);
   }
 }
 
 function createLabel() {
   call({
-    url: `/create_view_label/${currentView}`,
+    url: `/create_view_label/${currentView.id}`,
     form: "view_label-form",
     callback: function () {
       $("#view_label").remove();
@@ -199,6 +202,17 @@ function addObjectPanel() {
     title: "Add Objects to View",
     size: "800 350",
     callback: function () {
+    },
+  });
+}
+
+function addObjectsToView() {
+  call({
+    url: `/add_objects_to_view/${currentView.id}`,
+    form: "add-services-form",
+    callback: function (result) {
+      currentView.last_modified = result.update_time;
+      $("#add_objects_to_view").remove();
     },
   });
 }
@@ -897,6 +911,7 @@ function openVisualizationPanel() {
 }
 
 configureNamespace("visualization", [
+  addObjectsToView,
   clearSearch,
   createLabel,
   displayNetwork,

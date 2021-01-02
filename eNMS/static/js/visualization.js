@@ -74,10 +74,6 @@ function displayView(currentPath) {
       camera.lookAt(0, 0, 0);
       scene = new THREE.Scene();
       scene.background = new THREE.Color(0xffffff);
-      if (view.display_grid) {
-        const gridHelper = new THREE.GridHelper(view.grid_size, view.grid_rows);
-        scene.add(gridHelper);
-      }
       labelRenderer = new CSS2DRenderer();
       labelRenderer.setSize($(".main_frame").width(), $(".main_frame").height());
       labelRenderer.domElement.style.position = "absolute";
@@ -96,7 +92,8 @@ function displayView(currentPath) {
       controls = new THREE.MapControls(camera, labelRenderer.domElement);
       controls.addEventListener("change", render);
       controls.maxPolarAngle = Math.PI / 2;
-      document.addEventListener("mousemove", onDocumentMouseMove, false);
+      const dragControls = new DragControls( [ ... objects ], camera, renderer.domElement );
+      dragControls.addEventListener("drag", render);
       document.addEventListener("mousedown", onDocumentMouseDown, false);
       document.addEventListener("mouseup", onDocumentMouseUp, false);
       window.addEventListener("resize", onWindowResize, false);
@@ -239,21 +236,6 @@ function onWindowResize() {
   camera.aspect = $(".main_frame").width() / $(".main_frame").height();
   camera.updateProjectionMatrix();
   labelRenderer.setSize($(".main_frame").width(), $(".main_frame").height());
-}
-
-function onDocumentMouseMove(event) {
-  mouse.set(
-    ((event.clientX - 250) / $(".main_frame").width()) * 2 - 1,
-    -((event.clientY - 70) / $(".main_frame").height()) * 2 + 1
-  );
-  raycaster.setFromCamera(mouse, camera);
-  const intersects = raycaster.intersectObjects(objects);
-  if (intersects.length > 0 && currentCube && intersects[0].object == plane) {
-    const intersect = intersects[0];
-    currentCube.position.copy(intersect.point).add(intersect.face.normal);
-    currentCube.position.divideScalar(50).floor().multiplyScalar(50).addScalar(25);
-  }
-  render();
 }
 
 function onDocumentMouseUp() {

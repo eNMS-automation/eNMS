@@ -220,6 +220,7 @@
 {% endif %} {% endblock content %} {% block javascripts %} {{ super()}} {% if endpoint
 != "geographical_view" %}
 <script src="{{ url_for('static', filename='lib/three/three.min.js') }}"></script>
+<script src="{{ url_for('static', filename='lib/three/drag-controls.min.js') }}"></script>
 <script src="{{ url_for('static', filename='lib/three/orbitControls.min.js') }}"></script>
 <script src="{{ url_for('static', filename='lib/three/CSS2DRenderer.js') }}"></script>
 {% endif %} {% if endpoint == "force_directed_view" %}

@@ -53,14 +53,8 @@ let scene;
 let renderer;
 let controls;
 let dragControls;
-let plane;
-let mouse;
-let raycaster;
-let currentCube;
-let group;
 let labelRenderer;
 let objects = [];
-let enableSelection;
 
 function displayView(currentPath) {
   const [viewId] = currentPath.split(">").slice(-1);
@@ -81,11 +75,6 @@ function displayView(currentPath) {
       labelRenderer = new CSS2DRenderer();
       labelRenderer.setSize($(".main_frame").width(), $(".main_frame").height());
       labelRenderer.domElement.style.position = "absolute";
-      raycaster = new THREE.Raycaster();
-      mouse = new THREE.Vector2();
-      group = new THREE.Group();
-      scene.add(group);
-
       view.devices.map(drawNode);
       const container = document.getElementById("map");
       renderer = new THREE.WebGLRenderer({ antialias: true });

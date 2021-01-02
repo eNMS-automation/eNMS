@@ -83,7 +83,7 @@ function displayView(currentPath) {
       raycaster = new THREE.Raycaster();
       mouse = new THREE.Vector2();
       group = new THREE.Group();
-      scene.add( group );
+      scene.add(group);
 
       //view.devices.map(drawNode);
       const container = document.getElementById("map");
@@ -97,16 +97,16 @@ function displayView(currentPath) {
       controls.addEventListener("change", render);
       controls.maxPolarAngle = Math.PI / 2;
 
-      const geometry = new THREE.BoxBufferGeometry( 200, 200, 200 );
-      const material = new THREE.MeshLambertMaterial( { transparent: true } );
-      const mesh = new THREE.Mesh( geometry, material );
-      scene.add( mesh );
+      const geometry = new THREE.BoxBufferGeometry(200, 200, 200);
+      const material = new THREE.MeshLambertMaterial({ transparent: true });
+      const mesh = new THREE.Mesh(geometry, material);
+      scene.add(mesh);
 
       dragControls = new DragControls([mesh], camera, renderer.domElement);
-      dragControls.addEventListener( 'drag', render );
-      dragControls.addEventListener( 'change', render );
-      dragControls.deactivate();
-
+      dragControls.addEventListener("drag", render);
+      dragControls.addEventListener("change", render);
+      dragControls.addEventListener("dragend", function() { console.log("test")});
+      //dragControls.deactivate();
 
       //dragControls.addEventListener("drag", render);
       //document.addEventListener( 'click', onClick, false );
@@ -255,54 +255,32 @@ function onWindowResize() {
   labelRenderer.setSize($(".main_frame").width(), $(".main_frame").height());
 }
 
-
-
-function onClick( event ) {
-
-  if ( enableSelection === true ) {
-
+function onClick(event) {
+  if (enableSelection === true) {
     const draggableObjects = dragControls.getObjects();
     draggableObjects.length = 0;
-
-    mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-    mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
-
-    raycaster.setFromCamera( mouse, camera );
-
-    const intersections = raycaster.intersectObjects( objects, true );
-
-    if ( intersections.length > 0 ) {
-
-      const object = intersections[ 0 ].object;
-
-      if ( group.children.includes( object ) === true ) {
-
-        object.material.emissive.set( 0x000000 );
-        scene.attach( object );
-
+    mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+    mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+    raycaster.setFromCamera(mouse, camera);
+    const intersections = raycaster.intersectObjects(objects, true);
+    if (intersections.length > 0) {
+      const object = intersections[0].object;
+      if (group.children.includes(object) === true) {
+        object.material.emissive.set(0x000000);
+        scene.attach(object);
       } else {
-
-        object.material.emissive.set( 0xaaaaaa );
-        group.attach( object );
-
+        object.material.emissive.set(0xaaaaaa);
+        group.attach(object);
       }
-
       dragControls.transformGroup = true;
-      draggableObjects.push( group );
-
+      draggableObjects.push(group);
     }
-
-    if ( group.children.length === 0 ) {
-
+    if (group.children.length === 0) {
       dragControls.transformGroup = false;
-      draggableObjects.push( ...objects );
-
+      draggableObjects.push(...objects);
     }
-
   }
-
   render();
-
 }
 
 function onDocumentMouseUp() {

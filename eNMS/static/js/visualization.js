@@ -76,8 +76,7 @@ function displayView(currentPath) {
       camera.lookAt(0, 0, 0);
       scene = new THREE.Scene();
       scene.background = new THREE.Color(0xffffff);
-
-      const helper = new THREE.GridHelper(2000, 100);
+      const helper = new THREE.GridHelper(view.grid_size, view.grid_rows);
       helper.material.opacity = 0.5;
       helper.material.transparent = true;
       scene.add(helper);
@@ -130,10 +129,9 @@ function drawNode(device) {
 
 function getIntersects(event) {
   const menuWidth = $(".left_column").is(":visible") ? $(".left_column").width() : 0;
-  pointer.set(
-    ((event.clientX - menuWidth - 15) / $(".main_frame").width()) * 2 - 1,
-    -((event.clientY - 70) / $(".main_frame").height()) * 2 + 1
-  );
+  const width = ((event.clientX - menuWidth - 15) / $(".main_frame").width()) * 2 - 1;
+  const height = -((event.clientY - 70) / $(".main_frame").height()) * 2 + 1;
+  pointer.set(width, height);
   raycaster.setFromCamera(pointer, camera);
   return raycaster.intersectObjects(objects);
 }

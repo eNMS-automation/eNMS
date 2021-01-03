@@ -52,7 +52,6 @@ let camera;
 let scene;
 let renderer;
 let controls;
-let dragControls;
 let labelRenderer;
 let objects = [];
 
@@ -68,8 +67,8 @@ function displayView(currentPath) {
         1,
         10000
       );
-      camera.position.set(500, 800, 1300);
-      camera.lookAt(0, 0, 0);
+      camera.position.set( 500, 800, 1300 );
+      camera.lookAt( 0, 0, 0 );
       scene = new THREE.Scene();
       scene.background = new THREE.Color(0xffffff);
       labelRenderer = new CSS2DRenderer();
@@ -85,12 +84,6 @@ function displayView(currentPath) {
       controls = new THREE.OrbitControls(camera, labelRenderer.domElement);
       controls.addEventListener("change", render);
       controls.maxPolarAngle = Math.PI / 2;
-      dragControls = new DragControls(objects, camera, labelRenderer.domElement);
-      dragControls.addEventListener ( 'drag', function( event ){
-        event.object.position.z = 0; 
-        render()
-       })
-      dragControls.addEventListener("dragend", function() { console.log("test")});
       document.addEventListener("mousedown", onDocumentMouseDown, false);
       window.addEventListener("resize", onWindowResize, false);
 
@@ -101,12 +94,6 @@ function displayView(currentPath) {
 }
 
 function switchMode() {
-  currentMode = currentMode == "drag" ? "map" : "drag";
-  if (currentMode == "drag") {
-    dragControls.activate();
-  } else {
-    dragControls.deactivate();
-  }
 }
 
 function drawNode(device) {

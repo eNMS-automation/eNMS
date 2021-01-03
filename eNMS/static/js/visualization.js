@@ -52,6 +52,7 @@ let camera;
 let scene;
 let renderer;
 let controls;
+let transformControls;
 let labelRenderer;
 let objects = [];
 
@@ -74,7 +75,6 @@ function displayView(currentPath) {
       labelRenderer = new CSS2DRenderer();
       labelRenderer.setSize($(".main_frame").width(), $(".main_frame").height());
       labelRenderer.domElement.style.position = "absolute";
-      view.devices.map(drawNode);
       const container = document.getElementById("map");
       renderer = new THREE.WebGLRenderer({ antialias: true });
       renderer.setPixelRatio(window.devicePixelRatio);
@@ -86,8 +86,15 @@ function displayView(currentPath) {
       controls.maxPolarAngle = Math.PI / 2;
       document.addEventListener("mousedown", onDocumentMouseDown, false);
       window.addEventListener("resize", onWindowResize, false);
-
+      console.log("test")
+      transformControls = new TransformControls( camera, labelRenderer.domElement );
+      transformControls.addEventListener( 'change', render );
+      transformControls.addEventListener( 'dragging-changed', function ( event ) {
+        controls.enabled = ! event.value;
+      });
+      scene.add( transformControls );
       updateRightClickBindings(controls);
+      view.devices.map(drawNode);
       render();
     },
   });
@@ -109,6 +116,7 @@ function drawNode(device) {
   drawLabel({ target: node, label: device.name });
   objects.push(node);
   scene.add(node);
+  transformControls.attach(node);
 }
 
 function drawLabel({
@@ -222,7 +230,7 @@ function updateRightClickBindings(controls) {
 
 function render() {
   renderer.render(scene, camera);
-  labelRenderer.render(scene, camera);
+  //labelRenderer.render(scene, camera);
 }
 
 function onWindowResize() {

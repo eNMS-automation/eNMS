@@ -1,8 +1,9 @@
 - devices: []
   display_grid: true
-  grid_rows: 20
-  grid_size: 1000
+  grid_rows: 100
+  grid_size: 2000
   labels: {}
+  last_modified: '2021-01-03 09:23:38.703321'
   links: []
   name: 'Regression View: Basic Example'
   type: view

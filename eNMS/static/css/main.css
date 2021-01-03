@@ -760,6 +760,24 @@ We cannot use 100% because main_frame is not set to 100%
   width: -webkit-max-content;
 }
 
+/* Cross-browser compatibility for width: fit-content needed 
+intrinsic (Safari) - moz (Firefox) - webkit (Chrome) */
+.controls {
+  z-index: 3;
+  top: 75px;
+  position: absolute;
+  width: intrinsic;
+  width: -moz-max-content;
+  width: -webkit-max-content;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+
+.controls_mode {
+  float: left;
+  margin-right: 10px;
+}
+
 .glyphicon-center {
   position: absolute;
   top: 50%;

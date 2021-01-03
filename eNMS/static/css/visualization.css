@@ -2,19 +2,6 @@
   z-index: 2;
 }
 
-/* Cross-browser compatibility for width: fit-content needed 
-intrinsic (Safari) - moz (Firefox) - webkit (Chrome) */
-.controls {
-  z-index: 3;
-  top: 75px;
-  position: absolute;
-  width: intrinsic;
-  width: -moz-max-content;
-  width: -webkit-max-content;
-  left: 50%;
-  transform: translate(-50%, 0);
-}
-
 .btn-search {
   padding: 10 10;
   width: 100px;

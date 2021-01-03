@@ -2,23 +2,6 @@
   height: calc(100vh - 80px);
 }
 
-/* Cross-browser compatibility for width: fit-content needed 
-intrinsic (Safari) - moz (Firefox) - webkit (Chrome) */
-.controls {
-  z-index: 1;
-  position: absolute;
-  width: intrinsic;
-  width: -moz-max-content;
-  width: -webkit-max-content;
-  left: 50%;
-  transform: translate(-50%, 0);
-}
-
-.controls_mode {
-  float: left;
-  margin-right: 10px;
-}
-
 /* Prevent Chrome from highlight the workflow builder div with an outline */
 *:focus {
   outline: none;

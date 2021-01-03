@@ -120,36 +120,16 @@
     <table class="table" cellspacing="0" style="margin: 0px;" width="100%">
       <tbody>
         <tr>
-          <td style="text-align: center; vertical-align: middle;">
-            <button
-              type="button"
-              class="btn btn-primary"
-              onclick="action['Create New Service']()"
-              data-tooltip="Create New Service"
-            >
-              <span class="glyphicon glyphicon-plus"></span>
-            </button>
-          </td>
           <td style="min-width: 200px;">
-            <select
-              id="service-type"
-              class="form-control"
-              data-width="200px"
-              data-size="20"
-            ></select>
+            <select id="transform-mode" class="form-control">
+              <option value="select">Select</option>
+              <option value="translate">Translate</option>
+              <option value="scale">Scale</option>
+              <option value="rotate">Rotate</option>
+            </select>
           </td>
         </tr>
         <tr>
-          <td style="text-align: center;">
-            <button
-              type="button"
-              class="btn btn-primary"
-              onclick="eNMS.workflow.switchMode()"
-              data-tooltip="Change Mode"
-            >
-              <span id="mode-icon" class="glyphicon glyphicon-move"></span>
-            </button>
-          </td>
           <td style="min-width: 200px;">
             <select id="edge-type" class="form-control">
               <option value="success">Success</option>

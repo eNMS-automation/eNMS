@@ -201,6 +201,7 @@ function initLogicalFramework() {
       updateRightClickBindings(controls);
     },
   });
+  $("#transform-mode").selectpicker();
 }
 
 function createNewView(mode) {

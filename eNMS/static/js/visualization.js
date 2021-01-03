@@ -87,9 +87,7 @@ function displayView(currentPath) {
       controls.addEventListener("change", render);
       controls.maxPolarAngle = Math.PI / 2;
       document.addEventListener("mousedown", onDocumentMouseDown, false);
-      document.addEventListener("pointermove", onPointerMove, false);
       window.addEventListener("resize", onWindowResize, false);
-      console.log("test");
       transformControls = new TransformControls(camera, labelRenderer.domElement);
       transformControls.addEventListener("change", render);
       transformControls.addEventListener("dragging-changed", function (event) {
@@ -121,9 +119,11 @@ function drawNode(device) {
   transformControls.attach(node);
 }
 
-function onPointerMove(event) {
-  pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
-  pointer.y = -(event.clientY / window.innerHeight) * 2 + 1;
+function onDocumentMouseDown(event) {
+  pointer.set(
+    ((event.clientX - 250) / $(".main_frame").width()) * 2 - 1,
+    -((event.clientY - 70) / $(".main_frame").height()) * 2 + 1
+  );
   raycaster.setFromCamera(pointer, camera);
   const intersects = raycaster.intersectObjects(objects);
   if (intersects.length > 0) {
@@ -131,6 +131,10 @@ function onPointerMove(event) {
     if (object !== transformControls.object) {
       transformControls.attach(object);
     }
+  }
+  if (!intersects.length) {
+    $(".rc-object-menu").hide();
+    $(".global").show();
   }
 }
 
@@ -252,15 +256,6 @@ function onWindowResize() {
   camera.aspect = $(".main_frame").width() / $(".main_frame").height();
   camera.updateProjectionMatrix();
   labelRenderer.setSize($(".main_frame").width(), $(".main_frame").height());
-}
-
-function onDocumentMouseDown(event) {
-  /*
-  if (!intersects.length || intersects?.[0]?.object == plane) {
-    $(".rc-object-menu").hide();
-    $(".global").show();
-  }
-  */
 }
 
 function initGeographicalFramework() {

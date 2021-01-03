@@ -129,8 +129,9 @@ function drawNode(device) {
 }
 
 function getIntersects(event) {
+  const menuWidth = $(".left_column").is(":visible") ? $(".left_column").width() : 0;
   pointer.set(
-    ((event.clientX - 250) / $(".main_frame").width()) * 2 - 1,
+    ((event.clientX - menuWidth - 15) / $(".main_frame").width()) * 2 - 1,
     -((event.clientY - 70) / $(".main_frame").height()) * 2 + 1
   );
   raycaster.setFromCamera(pointer, camera);

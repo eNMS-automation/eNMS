@@ -74,6 +74,12 @@ function displayView(currentPath) {
       camera.lookAt(0, 0, 0);
       scene = new THREE.Scene();
       scene.background = new THREE.Color(0xffffff);
+
+      const helper = new THREE.GridHelper(2000, 100);
+      helper.material.opacity = 0.5;
+      helper.material.transparent = true;
+      scene.add(helper);
+
       labelRenderer = new CSS2DRenderer();
       labelRenderer.setSize($(".main_frame").width(), $(".main_frame").height());
       labelRenderer.domElement.style.position = "absolute";
@@ -126,7 +132,10 @@ function onDocumentMouseDown(event) {
   );
   raycaster.setFromCamera(pointer, camera);
   const intersects = raycaster.intersectObjects(objects);
+  document.body.style.cursor = intersects.length > 0 ? "pointer" : "default";
+  console.log(document.body.style.cursor)
   if (intersects.length > 0) {
+    
     const object = intersects[0].object;
     if (object !== transformControls.object) {
       transformControls.attach(object);

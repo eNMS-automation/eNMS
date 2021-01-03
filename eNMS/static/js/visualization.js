@@ -120,7 +120,7 @@ function drawNode(device) {
       transparent: true,
     })
   );
-  node.position.set(device.id * 100, device.id * 100, device.id * 100);
+  node.position.set(0, 0, 0);
   drawLabel({ target: node, label: device.name });
   objects.push(node);
   scene.add(node);

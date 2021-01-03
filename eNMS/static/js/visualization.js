@@ -109,7 +109,9 @@ function displayView(currentPath) {
   });
 }
 
-function switchMode() {}
+function switchMode() {
+  transformControls.setMode( "scale" );
+}
 
 function drawNode(device) {
   const node = new THREE.Mesh(

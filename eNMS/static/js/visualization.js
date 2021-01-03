@@ -68,8 +68,8 @@ function displayView(currentPath) {
         1,
         10000
       );
-      camera.position.set( 500, 800, 1300 );
-      camera.lookAt( 0, 0, 0 );
+      camera.position.set(500, 800, 1300);
+      camera.lookAt(0, 0, 0);
       scene = new THREE.Scene();
       scene.background = new THREE.Color(0xffffff);
       labelRenderer = new CSS2DRenderer();
@@ -86,13 +86,13 @@ function displayView(currentPath) {
       controls.maxPolarAngle = Math.PI / 2;
       document.addEventListener("mousedown", onDocumentMouseDown, false);
       window.addEventListener("resize", onWindowResize, false);
-      console.log("test")
-      transformControls = new TransformControls( camera, labelRenderer.domElement );
-      transformControls.addEventListener( 'change', render );
-      transformControls.addEventListener( 'dragging-changed', function ( event ) {
-        controls.enabled = ! event.value;
+      console.log("test");
+      transformControls = new TransformControls(camera, labelRenderer.domElement);
+      transformControls.addEventListener("change", render);
+      transformControls.addEventListener("dragging-changed", function (event) {
+        controls.enabled = !event.value;
       });
-      scene.add( transformControls );
+      scene.add(transformControls);
       updateRightClickBindings(controls);
       view.devices.map(drawNode);
       render();
@@ -100,12 +100,11 @@ function displayView(currentPath) {
   });
 }
 
-function switchMode() {
-}
+function switchMode() {}
 
 function drawNode(device) {
   const node = new THREE.Mesh(
-    new THREE.CylinderGeometry( 30, 30, 20, 32 ),
+    new THREE.CylinderGeometry(30, 30, 20, 32),
     new THREE.MeshBasicMaterial({
       color: 0x3c8c8c,
       opacity: 0.8,

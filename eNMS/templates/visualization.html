@@ -116,31 +116,6 @@
 </nav>
 {% else %}
 <div class="controls">
-  <div class="controls_mode navbar navbar-default">
-    <table class="table" cellspacing="0" style="margin: 0px;" width="100%">
-      <tbody>
-        <tr>
-          <td style="min-width: 200px;">
-            <select id="transform-mode" class="form-control">
-              <option value="select">Select</option>
-              <option value="translate">Translate</option>
-              <option value="scale">Scale</option>
-              <option value="rotate">Rotate</option>
-            </select>
-          </td>
-        </tr>
-        <tr>
-          <td style="min-width: 200px;">
-            <select id="edge-type" class="form-control">
-              <option value="success">Success</option>
-              <option value="failure">Failure</option>
-              <option value="prerequisite">Prerequisite</option>
-            </select>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
   <nav class="navbar navbar-default navbar-custom" role="navigation">
     <div style="width: 460px; margin: 0px;">
       <select
@@ -239,6 +214,37 @@
           data-tooltip="Next Workflow"
           style="cursor: pointer;"
           ><span class="glyphicon glyphicon-chevron-right"></span
+        ></a>
+      </li>
+    </ul>
+    <ul class="pagination" style="margin: 0px;">
+      <li>
+        <a
+          onclick="eNMS.workflow.getWorkflowTree()"
+          data-tooltip="Workflow Tree"
+          style="cursor: pointer;"
+          ><span class="glyphicon glyphicon-tree-conifer"></span
+        ></a>
+      </li>
+      <li>
+        <a onclick="action['Zoom In']()" data-tooltip="Zoom In" style="cursor: pointer;"
+          ><span class="glyphicon glyphicon-zoom-in"></span
+        ></a>
+      </li>
+      <li>
+        <a
+          onclick="action['Zoom Out']()"
+          data-tooltip="Zoom Out"
+          style="cursor: pointer;"
+          ><span class="glyphicon glyphicon-zoom-out"></span
+        ></a>
+      </li>
+      <li>
+        <a
+          onclick="action['Run Workflow']()"
+          data-tooltip="Run Workflow"
+          style="cursor: pointer;"
+          ><span class="glyphicon glyphicon-play"></span
         ></a>
       </li>
     </ul>

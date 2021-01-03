@@ -87,7 +87,7 @@ function displayView(currentPath) {
       controls.addEventListener("change", render);
       controls.maxPolarAngle = Math.PI / 2;
       document.addEventListener("mousedown", onDocumentMouseDown, false);
-      document.addEventListener( 'pointermove', onPointerMove, false );
+      document.addEventListener("pointermove", onPointerMove, false);
       window.addEventListener("resize", onWindowResize, false);
       console.log("test");
       transformControls = new TransformControls(camera, labelRenderer.domElement);
@@ -121,22 +121,17 @@ function drawNode(device) {
   transformControls.attach(node);
 }
 
-function onPointerMove( event ) {
-  pointer.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-  pointer.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
-
-  raycaster.setFromCamera( pointer, camera );
-
-  const intersects = raycaster.intersectObjects( objects );
-  console.log(intersects)
-  if ( intersects.length > 0 ) {
-    const object = intersects[ 0 ].object;
-    if ( object !== transformControls.object ) {
-      transformControls.attach( object );
+function onPointerMove(event) {
+  pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
+  pointer.y = -(event.clientY / window.innerHeight) * 2 + 1;
+  raycaster.setFromCamera(pointer, camera);
+  const intersects = raycaster.intersectObjects(objects);
+  if (intersects.length > 0) {
+    const object = intersects[0].object;
+    if (object !== transformControls.object) {
+      transformControls.attach(object);
     }
-
   }
-
 }
 
 function drawLabel({

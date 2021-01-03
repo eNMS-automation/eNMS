@@ -49,14 +49,14 @@ let currentMode = "map";
 let currentPath = localStorage.getItem("view");
 let currentView;
 let camera;
-const raycaster = new THREE.Raycaster();
-const pointer = new THREE.Vector2();
 let scene;
 let renderer;
 let controls;
 let transformControls;
 let labelRenderer;
 let objects = [];
+let pointer;
+let raycaster;
 
 function displayView(currentPath) {
   const [viewId] = currentPath.split(">").slice(-1);
@@ -70,6 +70,8 @@ function displayView(currentPath) {
         1,
         10000
       );
+      raycaster = new THREE.Raycaster();
+      pointer = new THREE.Vector2();
       camera.position.set(500, 800, 1300);
       camera.lookAt(0, 0, 0);
       scene = new THREE.Scene();
@@ -92,7 +94,8 @@ function displayView(currentPath) {
       controls = new THREE.OrbitControls(camera, labelRenderer.domElement);
       controls.addEventListener("change", render);
       controls.maxPolarAngle = Math.PI / 2;
-      document.addEventListener("mousedown", onDocumentMouseDown, false);
+      document.addEventListener("mousedown", onMouseDown, false);
+      document.addEventListener("mousemove", onMouseMove, false);
       window.addEventListener("resize", onWindowResize, false);
       transformControls = new TransformControls(camera, labelRenderer.domElement);
       transformControls.addEventListener("change", render);
@@ -125,15 +128,14 @@ function drawNode(device) {
   transformControls.attach(node);
 }
 
-function onDocumentMouseDown(event) {
+function onMouseDown(event) {
   pointer.set(
     ((event.clientX - 250) / $(".main_frame").width()) * 2 - 1,
     -((event.clientY - 70) / $(".main_frame").height()) * 2 + 1
   );
   raycaster.setFromCamera(pointer, camera);
   const intersects = raycaster.intersectObjects(objects);
-  document.body.style.cursor = intersects.length > 0 ? "pointer" : "default";
-  console.log(document.body.style.cursor)
+  
   if (intersects.length > 0) {
     
     const object = intersects[0].object;
@@ -145,6 +147,16 @@ function onDocumentMouseDown(event) {
     $(".rc-object-menu").hide();
     $(".global").show();
   }
+}
+
+function onMouseMove(event) {
+  pointer.set(
+    ((event.clientX - 250) / $(".main_frame").width()) * 2 - 1,
+    -((event.clientY - 70) / $(".main_frame").height()) * 2 + 1
+  );
+  raycaster.setFromCamera(pointer, camera);
+  const intersects = raycaster.intersectObjects(objects);
+  document.body.style.cursor = intersects.length > 0 ? "pointer" : "default";
 }
 
 function drawLabel({

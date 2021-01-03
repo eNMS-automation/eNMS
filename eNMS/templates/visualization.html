@@ -117,7 +117,7 @@
 {% else %}
 <div class="controls">
   <nav class="navbar navbar-default navbar-custom" role="navigation">
-    <div style="width: 460px; margin: 0px;">
+    <div style="width: 615px; margin: 0px;">
       <select
         id="current-view"
         class="form-control"
@@ -125,6 +125,28 @@
         data-size="20"
       ></select>
     </div>
+    <ul class="pagination" style="margin: 0px;">
+      <li>
+        <a onclick="action['Switch Mode']('select')" data-tooltip="Zoom In" style="cursor: pointer;"
+          ><span class="glyphicon glyphicon-screenshot"></span
+        ></a>
+      </li>
+      <li>
+        <a onclick="action['Switch Mode']('translate')" data-tooltip="Zoom In" style="cursor: pointer;"
+          ><span class="glyphicon glyphicon-random"></span
+        ></a>
+      </li>
+      <li>
+        <a onclick="action['Switch Mode']('scale')" data-tooltip="Zoom In" style="cursor: pointer;"
+          ><span class="glyphicon glyphicon-resize-full"></span
+        ></a>
+      </li>
+      <li>
+        <a onclick="action['Switch Mode']('rotate')" data-tooltip="Zoom In" style="cursor: pointer;"
+          ><span class="glyphicon glyphicon-repeat"></span
+        ></a>
+      </li>
+    </ul>
     <ul class="pagination" style="margin: 0px; padding-top: 5px;">
       <li>
         <a
@@ -214,28 +236,6 @@
           data-tooltip="Next Workflow"
           style="cursor: pointer;"
           ><span class="glyphicon glyphicon-chevron-right"></span
-        ></a>
-      </li>
-    </ul>
-    <ul class="pagination" style="margin: 0px;">
-      <li>
-        <a onclick="action['Switch Mode']('select')" data-tooltip="Zoom In" style="cursor: pointer;"
-          ><span class="glyphicon glyphicon-zoom-in"></span
-        ></a>
-      </li>
-      <li>
-        <a onclick="action['Switch Mode']('translate')" data-tooltip="Zoom In" style="cursor: pointer;"
-          ><span class="glyphicon glyphicon-zoom-in"></span
-        ></a>
-      </li>
-      <li>
-        <a onclick="action['Switch Mode']('scale')" data-tooltip="Zoom In" style="cursor: pointer;"
-          ><span class="glyphicon glyphicon-zoom-in"></span
-        ></a>
-      </li>
-      <li>
-        <a onclick="action['Switch Mode']('rotate')" data-tooltip="Zoom In" style="cursor: pointer;"
-          ><span class="glyphicon glyphicon-repeat"></span
         ></a>
       </li>
     </ul>

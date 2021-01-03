@@ -128,16 +128,18 @@ function drawNode(device) {
   transformControls.attach(node);
 }
 
-function onMouseDown(event) {
+function getIntersects(event) {
   pointer.set(
     ((event.clientX - 250) / $(".main_frame").width()) * 2 - 1,
     -((event.clientY - 70) / $(".main_frame").height()) * 2 + 1
   );
   raycaster.setFromCamera(pointer, camera);
-  const intersects = raycaster.intersectObjects(objects);
-  
+  return raycaster.intersectObjects(objects);
+}
+
+function onMouseDown(event) {
+  const intersects = getIntersects(event);
   if (intersects.length > 0) {
-    
     const object = intersects[0].object;
     if (object !== transformControls.object) {
       transformControls.attach(object);
@@ -150,12 +152,7 @@ function onMouseDown(event) {
 }
 
 function onMouseMove(event) {
-  pointer.set(
-    ((event.clientX - 250) / $(".main_frame").width()) * 2 - 1,
-    -((event.clientY - 70) / $(".main_frame").height()) * 2 + 1
-  );
-  raycaster.setFromCamera(pointer, camera);
-  const intersects = raycaster.intersectObjects(objects);
+  const intersects = getIntersects(event);
   document.body.style.cursor = intersects.length > 0 ? "pointer" : "default";
 }
 

@@ -219,32 +219,23 @@
     </ul>
     <ul class="pagination" style="margin: 0px;">
       <li>
-        <a
-          onclick="eNMS.workflow.getWorkflowTree()"
-          data-tooltip="Workflow Tree"
-          style="cursor: pointer;"
-          ><span class="glyphicon glyphicon-tree-conifer"></span
-        ></a>
-      </li>
-      <li>
-        <a onclick="action['Zoom In']()" data-tooltip="Zoom In" style="cursor: pointer;"
+        <a onclick="action['Switch Mode']('select')" data-tooltip="Zoom In" style="cursor: pointer;"
           ><span class="glyphicon glyphicon-zoom-in"></span
         ></a>
       </li>
       <li>
-        <a
-          onclick="action['Zoom Out']()"
-          data-tooltip="Zoom Out"
-          style="cursor: pointer;"
-          ><span class="glyphicon glyphicon-zoom-out"></span
+        <a onclick="action['Switch Mode']('translate')" data-tooltip="Zoom In" style="cursor: pointer;"
+          ><span class="glyphicon glyphicon-zoom-in"></span
         ></a>
       </li>
       <li>
-        <a
-          onclick="action['Run Workflow']()"
-          data-tooltip="Run Workflow"
-          style="cursor: pointer;"
-          ><span class="glyphicon glyphicon-play"></span
+        <a onclick="action['Switch Mode']('scale')" data-tooltip="Zoom In" style="cursor: pointer;"
+          ><span class="glyphicon glyphicon-zoom-in"></span
+        ></a>
+      </li>
+      <li>
+        <a onclick="action['Switch Mode']('rotate')" data-tooltip="Zoom In" style="cursor: pointer;"
+          ><span class="glyphicon glyphicon-repeat"></span
         ></a>
       </li>
     </ul>

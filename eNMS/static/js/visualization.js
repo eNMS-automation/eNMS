@@ -81,7 +81,6 @@ function displayView(currentPath) {
       helper.material.opacity = 0.5;
       helper.material.transparent = true;
       scene.add(helper);
-
       labelRenderer = new CSS2DRenderer();
       labelRenderer.setSize($(".main_frame").width(), $(".main_frame").height());
       labelRenderer.domElement.style.position = "absolute";
@@ -105,7 +104,7 @@ function displayView(currentPath) {
       });
       scene.add(transformControls);
       updateRightClickBindings(controls);
-      view.devices.map(drawNode);
+      // view.devices.map(drawNode);
       switchMode("select")
       render();
     },
@@ -278,7 +277,7 @@ function addObjectsToView() {
     callback: function (result) {
       currentView.last_modified = result.update_time;
       $("#add_objects_to_view").remove();
-      result.devices.map(drawNode);
+      result.nodes.map(drawNode);
       notify("Objects successfully added to the view.", "success", 5);
     },
   });

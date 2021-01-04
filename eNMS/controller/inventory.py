@@ -29,9 +29,12 @@ class InventoryController(BaseController):
     def add_objects_to_view(self, view_id, **kwargs):
         view, result = db.fetch("view", id=view_id), {"update_time": self.get_time()}
         for model in ("device", "link"):
-            instances = db.objectify(model, kwargs[f"{model}s"])
-            result[model] = [instance.serialized for instance in instances]
-            getattr(view, f"{model}s").extend(instances)
+            view_model = "nodes" if model == "device" else "lines"
+            result[view_model] = []
+            for model_id in kwargs[f"{model}s"]:
+                node = db.factory("node", device_id=model_id)
+                result[view_model].append(node.serialized)
+                getattr(view, view_model).append(node)
         return result
 
     def create_view_label(self, view_id, **kwargs):

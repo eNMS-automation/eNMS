@@ -433,9 +433,10 @@ class Node(AbstractBase):
     type = db.Column(db.SmallString)
     __mapper_args__ = {"polymorphic_identity": "node", "polymorphic_on": type}
     id = db.Column(Integer, primary_key=True)
+    name = db.Column(db.SmallString, unique=True)
     device_id = db.Column(Integer, ForeignKey("device.id"))
     device = relationship("Device", foreign_keys="Node.device_id")
-    name = association_proxy("device", "name")
+    device_name = association_proxy("device", "name")
     view_id = db.Column(Integer, ForeignKey("node.id", ondelete="cascade"))
     view = relationship(
         "View", remote_side=[id], foreign_keys=view_id, back_populates="nodes"
@@ -443,6 +444,11 @@ class Node(AbstractBase):
     x = db.Column(Float, default=0.)
     y = db.Column(Float, default=0.)
     z = db.Column(Float, default=0.)
+
+    def __init__(self, **kwargs):
+        if "name" not in kwargs:
+            self.name = f"{self.view}-{self.device_name}"
+        super().__init__(**kwargs)
 
 
 class Line(AbstractBase):
@@ -461,7 +467,6 @@ class View(Node):
     __mapper_args__ = {"polymorphic_identity": "view"}
     parent_type = "node"
     id = db.Column(Integer, ForeignKey(Node.id), primary_key=True)
-    name = db.Column(db.SmallString, unique=True)
     last_modified = db.Column(db.TinyString, info={"log_change": False})
     display_grid = db.Column(Boolean)
     grid_size = db.Column(Integer)

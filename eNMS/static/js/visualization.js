@@ -114,7 +114,7 @@ function displayView(currentPath) {
 
 function savePositions() {
   call({
-    url: `/save_view_positions/${currentView.id}`,
+    url: `/save_view_positions`,
     data: Object.fromEntries(
       Object.entries(nodes).map(([nodeId, node]) => [nodeId, node.position])
     ),
@@ -147,7 +147,7 @@ function drawNode(device) {
       transparent: true,
     })
   );
-  node.position.set(0, 0, 0);
+  node.position.set(device.x, device.y, device.z);
   drawLabel({ target: node, label: device.name });
   nodes[device.id] = node;
   objects.push(node);

@@ -104,7 +104,7 @@ function displayView(currentPath) {
       });
       scene.add(transformControls);
       updateRightClickBindings(controls);
-      // view.devices.map(drawNode);
+      view.nodes.map(drawNode);
       switchMode("select")
       render();
     },

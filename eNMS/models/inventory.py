@@ -430,13 +430,12 @@ class Session(AbstractBase):
 class Node(AbstractBase):
 
     __tablename__ = "node"
-    private = True
     type = db.Column(db.SmallString)
     __mapper_args__ = {"polymorphic_identity": "node", "polymorphic_on": type}
     id = db.Column(Integer, primary_key=True)
     device_id = db.Column(Integer, ForeignKey("device.id"))
     device = relationship("Device", foreign_keys="Node.device_id")
-    device_name = association_proxy("device", "name")
+    name = association_proxy("device", "name")
     view_id = db.Column(Integer, ForeignKey("node.id", ondelete="cascade"))
     view = relationship(
         "View", remote_side=[id], foreign_keys=view_id, back_populates="nodes"
@@ -461,7 +460,6 @@ class View(Node):
     __tablename__ = class_type = "view"
     __mapper_args__ = {"polymorphic_identity": "view"}
     parent_type = "node"
-    private = True
     id = db.Column(Integer, ForeignKey(Node.id), primary_key=True)
     name = db.Column(db.SmallString, unique=True)
     last_modified = db.Column(db.TinyString, info={"log_change": False})

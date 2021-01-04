@@ -1,0 +1,11 @@
+- display_grid: true
+  grid_rows: 100
+  grid_size: 2000
+  labels: {}
+  last_modified: '2021-01-04 09:21:18.073774'
+  name: 'Regression View : Basic Example'
+  nodes: []
+  type: view
+  x: 0.0
+  y: 0.0
+  z: 0.0

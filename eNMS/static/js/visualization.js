@@ -56,6 +56,7 @@ let controls;
 let transformControls;
 let labelRenderer;
 let objects = [];
+let nodes = {};
 let pointer;
 let raycaster;
 
@@ -105,17 +106,18 @@ function displayView(currentPath) {
       scene.add(transformControls);
       updateRightClickBindings(controls);
       view.nodes.map(drawNode);
-      switchMode("select")
+      switchMode("select");
       render();
     },
   });
 }
 
 function savePositions() {
-  const positions = {};
   call({
     url: `/save_view_positions/${currentView.id}`,
-    data: positions,
+    data: Object.fromEntries(
+      Object.entries(nodes).map(([nodeId, node]) => [nodeId, node.position])
+    ),
     callback: function (updateTime) {
       console.log(updateTime);
       if (updateTime) currentView.last_modified = updateTime;
@@ -147,6 +149,7 @@ function drawNode(device) {
   );
   node.position.set(0, 0, 0);
   drawLabel({ target: node, label: device.name });
+  nodes[device.id] = node;
   objects.push(node);
   scene.add(node);
   transformControls.attach(node);

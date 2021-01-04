@@ -32,9 +32,8 @@ class InventoryController(BaseController):
             view_model = "nodes" if model == "device" else "lines"
             result[view_model] = []
             for model_id in kwargs[f"{model}s"]:
-                node = db.factory("node", device_id=model_id)
+                node = db.factory("node", device=model_id, view=view_id)
                 result[view_model].append(node.serialized)
-                getattr(view, view_model).append(node)
         return result
 
     def create_view_label(self, view_id, **kwargs):

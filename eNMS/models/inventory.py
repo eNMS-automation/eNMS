@@ -446,9 +446,9 @@ class Node(AbstractBase):
     z = db.Column(Float, default=0.)
 
     def __init__(self, **kwargs):
+        super().__init__(**kwargs)
         if "name" not in kwargs:
             self.name = f"{self.view}-{self.device_name}"
-        super().__init__(**kwargs)
 
 
 class Line(AbstractBase):

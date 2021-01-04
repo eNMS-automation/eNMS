@@ -435,6 +435,10 @@ class Node(AbstractBase):
     device_id = db.Column(Integer, ForeignKey("device.id"))
     device = relationship("Device", foreign_keys="Node.device_id")
     device_name = association_proxy("device", "name")
+    view_id = db.Column(Integer, ForeignKey("node.id", ondelete="cascade"))
+    view = relationship(
+        "View", remote_side=[id], foreign_keys=view_id, back_populates="nodes"
+    )
     x = db.Column(Float, default=0.)
     y = db.Column(Float, default=0.)
     z = db.Column(Float, default=0.)
@@ -462,8 +466,4 @@ class View(Node):
     grid_size = db.Column(Integer)
     grid_rows = db.Column(Integer)
     labels = db.Column(db.Dict, info={"log_change": False})
-    parent_id = db.Column(Integer, ForeignKey("view.id", ondelete="cascade"))
-    parent = relationship(
-        "View", remote_side=[id], foreign_keys="View.view_id", back_populates="nodes"
-    )
-    nodes = relationship("Node", foreign_keys="View.parent_id")
+    nodes = relationship("Node", foreign_keys="Node.view_id")

@@ -84,9 +84,6 @@ class Device(Object):
     pools = relationship(
         "Pool", secondary=db.pool_device_table, back_populates="devices"
     )
-    views = relationship(
-        "View", secondary=db.view_device_table, back_populates="devices"
-    )
     sessions = relationship(
         "Session", back_populates="device", cascade="all, delete-orphan"
     )
@@ -245,7 +242,6 @@ class Link(Object):
     )
     destination_name = association_proxy("destination", "name")
     pools = relationship("Pool", secondary=db.pool_link_table, back_populates="links")
-    views = relationship("View", secondary=db.view_link_table, back_populates="links")
     __table_args__ = (UniqueConstraint(name, source_id, destination_id),)
 
     def __init__(self, **kwargs):
@@ -444,6 +440,16 @@ class Node(AbstractBase):
     z = db.Column(Float, default=0.)
 
 
+class Line(AbstractBase):
+
+    __tablename__ = type = "line"
+    private = True
+    id = db.Column(Integer, primary_key=True)
+    link_id = db.Column(Integer, ForeignKey("link.id"))
+    link = relationship("Link", foreign_keys="Line.link_id")
+    link_name = association_proxy("link", "name")
+
+
 class View(Node):
 
     __tablename__ = class_type = "view"
@@ -456,7 +462,8 @@ class View(Node):
     grid_size = db.Column(Integer)
     grid_rows = db.Column(Integer)
     labels = db.Column(db.Dict, info={"log_change": False})
-    devices = relationship(
-        "Device", secondary=db.view_device_table, back_populates="views"
+    parent_id = db.Column(Integer, ForeignKey("view.id", ondelete="cascade"))
+    parent = relationship(
+        "View", remote_side=[id], foreign_keys="View.view_id", back_populates="nodes"
     )
-    links = relationship("Link", secondary=db.view_link_table, back_populates="views")
+    nodes = relationship("Node", foreign_keys="View.parent_id")

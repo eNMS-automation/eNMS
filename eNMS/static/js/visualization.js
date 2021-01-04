@@ -48,6 +48,7 @@ let labels;
 let currentMode = "select";
 let currentPath = localStorage.getItem("view");
 let currentView;
+let selectedObjects = [];
 let camera;
 let scene;
 let renderer;
@@ -121,7 +122,6 @@ function switchMode(mode) {
     scene.add(transformControls);
     transformControls.setMode(mode);
   }
-  
 }
 
 function drawNode(device) {
@@ -153,9 +153,14 @@ function onMouseDown(event) {
   const intersects = getIntersects(event);
   if (intersects.length > 0) {
     const object = intersects[0].object;
-    if (object !== transformControls.object) {
+    if (currentMode == "select") {
+      object.material.color.set(0xff0000);
+      selectedObject.push(object);
+    } else if (object !== transformControls.object) {
       transformControls.attach(object);
     }
+  } else {
+    // remove selection, back to default color
   }
   if (!intersects.length) {
     $(".rc-object-menu").hide();

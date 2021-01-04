@@ -45,7 +45,7 @@ let handler;
 let polylines;
 let labels;
 
-let currentMode = "map";
+let currentMode = "select";
 let currentPath = localStorage.getItem("view");
 let currentView;
 let camera;
@@ -104,12 +104,15 @@ function displayView(currentPath) {
       scene.add(transformControls);
       updateRightClickBindings(controls);
       view.devices.map(drawNode);
+      switchMode("select")
       render();
     },
   });
 }
 
 function switchMode(mode) {
+  $(`#btn-${currentMode},#btn-${mode}`).toggleClass("active");
+  currentMode = mode;
   transformControls.enabled = mode != "select";
   if (mode == "select") {
     scene.remove(transformControls);

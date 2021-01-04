@@ -109,8 +109,16 @@ function displayView(currentPath) {
   });
 }
 
-function switchMode() {
-  transformControls.setMode( "scale" );
+function switchMode(mode) {
+  transformControls.enabled = mode != "select";
+  if (mode == "select") {
+    scene.remove(transformControls);
+    transformControls.detach();
+  } else {
+    scene.add(transformControls);
+    transformControls.setMode(mode);
+  }
+  
 }
 
 function drawNode(device) {
@@ -262,6 +270,7 @@ function updateRightClickBindings(controls) {
     "Create Label": () => openPanel({ name: "view_label", title: "Create New Label" }),
     "Edit View": () => createNewView("edit"),
     "Duplicate View": () => createNewView("duplicate"),
+    "Switch Mode": switchMode,
     "Zoom In": () => controls?.dollyOut(),
     "Zoom Out": () => controls?.dollyIn(),
   });

@@ -1,7 +1,7 @@
 from flask_login import current_user
 from operator import attrgetter
 from re import search, sub
-from sqlalchemy import and_, Boolean, event, ForeignKey, Integer, or_
+from sqlalchemy import and_, Boolean, event, Float, ForeignKey, Integer, or_
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.orm import aliased, backref, relationship
 from sqlalchemy.schema import UniqueConstraint
@@ -245,9 +245,7 @@ class Link(Object):
     )
     destination_name = association_proxy("destination", "name")
     pools = relationship("Pool", secondary=db.pool_link_table, back_populates="links")
-    views = relationship(
-        "View", secondary=db.view_link_table, back_populates="links"
-    )
+    views = relationship("View", secondary=db.view_link_table, back_populates="links")
     __table_args__ = (UniqueConstraint(name, source_id, destination_id),)
 
     def __init__(self, **kwargs):
@@ -433,11 +431,25 @@ class Session(AbstractBase):
     device_name = association_proxy("device", "name")
 
 
-class View(AbstractBase):
+class Node(AbstractBase):
 
-    __tablename__ = type = "view"
+    __tablename__ = type = "node"
     private = True
     id = db.Column(Integer, primary_key=True)
+    device_id = db.Column(Integer, ForeignKey("device.id"))
+    device = relationship("Device", foreign_keys="Node.device_id")
+    device_name = association_proxy("device", "name")
+    x = db.Column(Float, default=0.)
+    y = db.Column(Float, default=0.)
+    z = db.Column(Float, default=0.)
+
+
+class View(Node):
+
+    __tablename__ = class_type = "view"
+    __mapper_args__ = {"polymorphic_identity": "view"}
+    private = True
+    id = db.Column(Integer, ForeignKey(Node.id), primary_key=True)
     name = db.Column(db.SmallString, unique=True)
     last_modified = db.Column(db.TinyString, info={"log_change": False})
     display_grid = db.Column(Boolean)
@@ -447,6 +459,4 @@ class View(AbstractBase):
     devices = relationship(
         "Device", secondary=db.view_device_table, back_populates="views"
     )
-    links = relationship(
-        "Link", secondary=db.view_link_table, back_populates="views"
-    )
+    links = relationship("Link", secondary=db.view_link_table, back_populates="views")

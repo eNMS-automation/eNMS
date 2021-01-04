@@ -226,6 +226,10 @@ class InventoryController(BaseController):
         info("Inventory import: Done.")
         return result
 
+    def save_view_positions(self, view_id):
+        view = db.fetch("view", id=view_id)
+        return self.get_time()
+
     def update_pool(self, pool_id):
         db.fetch("pool", id=int(pool_id)).compute_pool()
 

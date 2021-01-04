@@ -254,6 +254,7 @@
     "/save_visualization_parameters",
     "/save_positions",
     "/save_settings",
+    "/save_view_positions",
     "/scan_cluster",
     "/scan_playbook_folder",
     "/search_workflow_services",

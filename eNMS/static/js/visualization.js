@@ -100,6 +100,7 @@ function displayView(currentPath) {
       transformControls = new TransformControls(camera, labelRenderer.domElement);
       transformControls.addEventListener("change", render);
       transformControls.addEventListener("dragging-changed", function (event) {
+        if (!event.value) savePositions();
         controls.enabled = !event.value;
       });
       scene.add(transformControls);
@@ -107,6 +108,18 @@ function displayView(currentPath) {
       view.devices.map(drawNode);
       switchMode("select")
       render();
+    },
+  });
+}
+
+function savePositions() {
+  const positions = {};
+  call({
+    url: `/save_view_positions/${currentView.id}`,
+    data: positions,
+    callback: function (updateTime) {
+      console.log(updateTime);
+      if (updateTime) currentView.last_modified = updateTime;
     },
   });
 }
@@ -155,7 +168,7 @@ function onMouseDown(event) {
     const object = intersects[0].object;
     if (currentMode == "select") {
       object.material.color.set(0xff0000);
-      selectedObject.push(object);
+      selectedObjects.push(object);
     } else if (object !== transformControls.object) {
       transformControls.attach(object);
     }

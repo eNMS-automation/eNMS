@@ -129,24 +129,6 @@ function webConnection(id) {
   });
 }
 
-function desktopConnection(id) {
-  notify("Starting SSH connection to the device...", "success", 3, true);
-  call({
-    url: `/desktop_connection/${id}`,
-    form: `connection-parameters-form-${id}`,
-    callback: function (result) {
-      let loc = window.location;
-      if (result.error) {
-        notify(`Error: ${result.error}`, "error", 10, true);
-      } else {
-        const link = `${result.username}@${loc.hostname}:${result.port}`;
-        const message = `Click here to connect to ${result.device_name}.`;
-        notify(`<a href='ssh://${link}'>${message}</a>`, "success", 15, true);
-      }
-    },
-  });
-}
-
 function updatePools(pool) {
   notify("Pool Update initiated...", "success", 5, true);
   const endpoint = pool ? `/update_pool/${pool}` : "/update_all_pools";
@@ -471,7 +453,6 @@ function importTopology() {
 configureNamespace("inventory", [
   downloadNetworkData,
   exportTopology,
-  desktopConnection,
   showConnectionPanel,
   webConnection,
   updatePools,

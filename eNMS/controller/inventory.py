@@ -97,33 +97,6 @@ class InventoryController(BaseController):
             "redirection": self.settings["ssh"]["port_redirection"],
         }
 
-    def desktop_connection(self, id, **kwargs):
-        if not self.settings["ssh"]["credentials"][kwargs["credentials"]]:
-            return {"alert": "Unauthorized authentication method."}
-        device = db.fetch("device", id=id, rbac="connect")
-        uuid, port = str(uuid4()), self.get_ssh_port()
-        session = db.factory(
-            "session",
-            name=uuid,
-            user=current_user.name,
-            timestamp=self.get_time(),
-            device=device.id,
-        )
-        db.session.commit()
-        try:
-            credentials = self.get_credentials(device, **kwargs)
-            args = (session.id, uuid, port)
-            ssh_connection = SshConnection(device.ip_address, credentials, *args)
-            Thread(target=ssh_connection.start_session, args=args).start()
-            return {
-                "port": port,
-                "username": uuid,
-                "device_name": device.name,
-                "device_ip": device.ip_address,
-            }
-        except Exception as exc:
-            return {"error": exc.args}
-
     def get_device_logs(self, device_id):
         device_logs = [
             log.name

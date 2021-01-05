@@ -39,14 +39,8 @@
       "pages": {
         "Services": "/table/service",
         "Workflow Builder": "/workflow_builder",
+        "Scheduling": "/table/task",
         "Results": "/table/run"
-      }
-    },
-    "Scheduling": {
-      "icon": "clock-o",
-      "pages": {
-        "Tasks": "/table/task",
-        "Events": "/table/event"
       }
     }
   },
@@ -67,8 +61,7 @@
     "Services",
     "Workflow Builder",
     "Results",
-    "Tasks",
-    "Events"
+    "Tasks"
   ],
   "upper_menu": ["Admin", "Settings", "Files"],
   "delete_requests": ["/rest/instance"],
@@ -94,9 +87,6 @@
     "/form/device_data",
     "/form/device_filtering",
     "/form/device_relation_filtering",
-    "/form/event",
-    "/form/event_filtering",
-    "/form/event_relation_filtering",
     "/form/example_service",
     "/form/excel_export",
     "/form/excel_import",
@@ -169,7 +159,6 @@
     "/table/configuration",
     "/table/credential",
     "/table/device",
-    "/table/event",
     "/table/pool",
     "/table/link",
     "/table/run",

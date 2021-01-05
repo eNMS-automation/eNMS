@@ -116,11 +116,7 @@ While services can be run directly and immediately from the UI, you can also sch
 
 [![Calendar](docs/_static/base/calendar.png)](https://enms.readthedocs.io/en/develop/automation/execution.html)
 
-Services can also be executed programmatically:
-  - eNMS has a REST API and a CLI interface that can be used to create, update and delete any type of objects,
-    but also to trigger the execution of a service.
-  - eNMS can be configured as a Syslog server, and rules can be created for syslog messages
-    to trigger the execution of a service.
+Services can also be executed programmatically: eNMS has a REST API and a CLI interface that can be used to create, update and delete any type of objects, but also to trigger the execution of a service.
 
 - Docs: _[Scheduling](https://enms.readthedocs.io/en/develop/automation/execution.html)_, _[REST API](https://enms.readthedocs.io/en/develop/advanced/rest_api.html)_
 

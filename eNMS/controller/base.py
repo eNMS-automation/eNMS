@@ -40,7 +40,6 @@ except ImportError as exc:
 
 from eNMS.database import db
 from eNMS.models import models, model_properties, relationships
-from eNMS.controller.syslog import SyslogServer
 from eNMS.setup import database, logging, properties, rbac, settings
 
 
@@ -72,8 +71,6 @@ class BaseController:
         self.use_vault = settings["vault"]["use_vault"]
         if self.use_vault:
             self.init_vault_client()
-        if settings["syslog"]["active"]:
-            self.init_syslog_server()
         if settings["paths"]["custom_code"]:
             sys_path.append(settings["paths"]["custom_code"])
         self.fetch_version()
@@ -277,12 +274,6 @@ class BaseController:
         if self.vault_client.sys.is_sealed() and self.settings["vault"]["unseal_vault"]:
             keys = [getenv(f"UNSEAL_VAULT_KEY{i}") for i in range(1, 6)]
             self.vault_client.sys.submit_unseal_keys(filter(None, keys))
-
-    def init_syslog_server(self):
-        self.syslog_server = SyslogServer(
-            self.settings["syslog"]["address"], self.settings["syslog"]["port"]
-        )
-        self.syslog_server.start()
 
     def redis(self, operation, *args, **kwargs):
         try:

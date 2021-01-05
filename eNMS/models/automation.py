@@ -64,7 +64,6 @@ class Service(AbstractBase):
     positions = db.Column(db.Dict, info={"log_change": False})
     disable_result_creation = db.Column(Boolean, default=False)
     tasks = relationship("Task", back_populates="service", cascade="all,delete")
-    events = relationship("Event", back_populates="service", cascade="all,delete")
     vendor = db.Column(db.SmallString)
     operating_system = db.Column(db.SmallString)
     waiting_time = db.Column(Integer, default=0)

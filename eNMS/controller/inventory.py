@@ -15,7 +15,6 @@ from xlwt import Workbook
 
 
 from eNMS.controller.base import BaseController
-from eNMS.controller.ssh import SshConnection
 from eNMS.database import db
 from eNMS.models import models, model_properties, property_types
 

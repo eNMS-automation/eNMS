@@ -91,10 +91,6 @@
   },
   "ssh": {
     "bypass_key_prompt": true,
-    "enabled": {
-      "desktop": true,
-      "web": true
-    },
     "credentials": {
       "device": true,
       "user": true,

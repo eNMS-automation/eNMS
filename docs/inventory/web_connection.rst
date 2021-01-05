@@ -72,16 +72,6 @@ Ignore fingerprint prompt
 If the remote device is not in ``~/.ssh/known_hosts``, ``ssh`` prompts the user to add ssh fingerprint to ``known_hosts`` file, causing GoTTY to fail. 
 To bypass that prompt, you can set the ``bypass_key_prompt`` to ``true`` in the :ref:`ssh section <ssh-settings>` in the settings to run the ``ssh`` command with the options ``-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null``.
 
-
-Connect to a device
--------------------
-
-The connection dialog shows two options to connect to a device:
-
-- Web Session - allows the interaction with the device using the web browser on a separate tab.
-- Desktop Session - will generate and download a shortcut that will open the SSH client on the local PC.
-  Requires for the entire port range as defined in the :ref:`ssh section <ssh-settings>` in the settings to be accessible from the client.
-
 From the device management table
 ********************************
 

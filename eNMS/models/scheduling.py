@@ -108,31 +108,3 @@ class Task(AbstractBase):
             return {"alert": "Scheduler Unreachable: the task cannot be scheduled."}
         self.is_active = result.get("active", False)
         return result
-
-
-class Event(AbstractBase):
-
-    __tablename__ = type = "event"
-    id = db.Column(Integer, primary_key=True)
-    name = db.Column(db.SmallString, unique=True)
-    log_source = db.Column(db.SmallString)
-    log_source_regex = db.Column(Boolean, default=False)
-    log_content = db.Column(db.SmallString)
-    log_content_regex = db.Column(Boolean, default=False)
-    service_id = db.Column(Integer, ForeignKey("service.id"))
-    service = relationship("Service", back_populates="events")
-    service_name = association_proxy("service", "name")
-
-    def match_log(self, source, content):
-        source_match = (
-            search(self.log_source, source)
-            if self.log_source_regex
-            else self.log_source in source
-        )
-        content_match = (
-            search(self.log_content, content)
-            if self.log_content_regex
-            else self.log_content in content
-        )
-        if source_match and content_match:
-            self.service.run()

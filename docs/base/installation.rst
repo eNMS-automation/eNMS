@@ -261,13 +261,6 @@ Settings ``ssh`` section
 - ``start_port`` (default: ``9000``)
 - ``end_port`` (default: ``91000``)
 
-Settings ``syslog`` section
-*****************************
-
-- ``active`` (default: ``false``)
-- ``address`` (default: ``"0.0.0.0"``)
-- ``port`` (default: ``514``)
-
 Settings ``tacacs`` section
 *****************************
 

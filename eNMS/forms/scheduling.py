@@ -11,21 +11,6 @@ from eNMS.forms.fields import (
 )
 
 
-class EventForm(BaseForm):
-    template = "event"
-    form_type = HiddenField(default="event")
-    id = HiddenField()
-    name = StringField("Name", [InputRequired()])
-
-    @classmethod
-    def form_init(cls):
-        cls.configure_relationships("service")
-        cls.properties = ("log_source", "log_content")
-        for property in ("log_source", "log_content"):
-            setattr(cls, property, StringField(property))
-            setattr(cls, property + "_regex", BooleanField("Regex"))
-
-
 class TaskForm(BaseForm):
     action = "eNMS.base.processData"
     form_type = HiddenField(default="task")

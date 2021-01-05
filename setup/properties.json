@@ -999,37 +999,6 @@
         "orderable": false,
         "export": false
       }
-    ],
-    "event": [
-      {
-        "data": "name",
-        "title": "Name",
-        "search": "text"
-      },
-      {
-        "data": "service_name",
-        "title": "Service",
-        "search": "text",
-        "orderable": false
-      },
-      {
-        "data": "log_source",
-        "title": "Log",
-        "search": "text",
-        "orderable": false
-      },
-      {
-        "data": "log_content",
-        "title": "Content",
-        "search": "text",
-        "orderable": false
-      },
-      {
-        "data": "buttons",
-        "width": "120px",
-        "orderable": false,
-        "export": false
-      }
     ]
   },
   "filtering": {

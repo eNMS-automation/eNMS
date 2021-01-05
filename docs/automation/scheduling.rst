@@ -60,23 +60,3 @@ need to be adjusted depending on the local time zone - and Daylight Savings Time
       - Crontab - hour value is either **13:00 or 14:00** depending on the time of the year! ::
 
          0 13 * * 1,3,5
-
-Syslog-triggered automation
----------------------------
-
-eNMS can be configured to receive Syslog messages, and run a service upon receiving a message that
-matches a particular pattern.
-
-From :guilabel:`Scheduling / Events`, you can create these pattern-matching rules.
-
-A rule is defined by the following properties:
-
-  - Name
-  - Source IP: the IP address of the source.
-  - Content: the content of the log.
-  - Service: which service is triggered when the rule is matched by an incoming log.
-
-For an incoming Syslog message to match the rule, both the "Source IP" and "Content" fields must match.
-The match can be configured to be a regular expression.
-
-.. note:: When a field is left blank, it is considered a match.

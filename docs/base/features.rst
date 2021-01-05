@@ -77,9 +77,5 @@ or periodically by defining a frequency or a CRON expression. All scheduled task
   :alt: Calendar
   :align: center
 
-Services can also be executed programmatically:
-
-  - eNMS has a REST API and a CLI interface that can be used to create, update and delete any type of objects,
-    but also to trigger the execution of a service.
-  - eNMS can be configured as a Syslog server, and rules can be created for syslog messages
-    to trigger the execution of a service.
+Services can also be executed programmatically: eNMS has a REST API and a CLI interface that can be used to create,
+update and delete any type of objects, but also to trigger the execution of a service.

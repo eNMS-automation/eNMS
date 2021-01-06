@@ -902,7 +902,7 @@ function getAlerts(preview) {
           <a style="word-wrap: break-word; color: #FFFFFF">
           <span class="time" style="font-size: ${fontSize}">
             ${alert[3]}
-          </span>
+          </span><br />
           <span>${alert[0]}</span>
           </a>
         </li>`;

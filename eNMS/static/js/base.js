@@ -24,6 +24,7 @@ export let editors = {};
 export let jsonEditors = {};
 export let userIsActive = true;
 let topZ = 1000;
+let triggerMenu;
 
 export function detectUserInactivity() {
   let timer;
@@ -786,13 +787,15 @@ export function copyToClipboard({ text, isId, includeText = true }) {
   notify(`Copied to Clipboard${includeText ? `: ${text}` : "."}`, "success", 5);
 }
 
+export function setTriggerMenu(value) {
+  triggerMenu = value;
+}
+
 (function ($, window) {
   $.fn.contextMenu = function (settings) {
     return this.each(function () {
       $(this).on("contextmenu", function (e) {
-        if (e.ctrlKey) {
-          return;
-        }
+        if (e.ctrlKey || !triggerMenu) return;
         const $menu = $(settings.menuSelector)
           .show()
           .css({

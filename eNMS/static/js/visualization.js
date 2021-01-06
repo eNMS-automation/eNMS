@@ -18,13 +18,13 @@ import {
   configureNamespace,
   createTooltip,
   notify,
-  serializeForm,
-  showInstancePanel,
   openPanel,
+  serializeForm,
+  setTriggerMenu,
+  showInstancePanel,
 } from "./base.js";
 import { showConnectionPanel, showDeviceData } from "./inventory.js";
 import { tables } from "./table.js";
-import { currentRuntime } from "./workflow.js";
 
 let graph;
 let dimension;
@@ -118,7 +118,6 @@ function savePositions() {
       Object.entries(nodes).map(([nodeId, node]) => [nodeId, node.position])
     ),
     callback: function (updateTime) {
-      console.log(updateTime);
       if (updateTime) currentView.last_modified = updateTime;
     },
   });
@@ -179,6 +178,7 @@ function onMouseDown(event) {
     })
     selectedObjects = [];
   }
+  setTriggerMenu(true);
   if (!intersects.length) {
     $(".rc-object-menu").hide();
     $(".global").show();
@@ -187,6 +187,7 @@ function onMouseDown(event) {
 }
 
 function onMouseMove(event) {
+  setTriggerMenu(false);
   const intersects = getIntersects(event);
   document.body.style.cursor = intersects.length > 0 ? "pointer" : "default";
 }

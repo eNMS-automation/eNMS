@@ -146,7 +146,7 @@ function drawNode(device) {
       transparent: true,
     })
   );
-  node.position.set(device.x, device.y, device.z);
+  node.position.set(device.x, Math.max(device.y, 10), device.z);
   drawLabel({ target: node, label: device.name });
   nodes[device.id] = node;
   objects.push(node);
@@ -174,12 +174,16 @@ function onMouseDown(event) {
       transformControls.attach(object);
     }
   } else {
-    // remove selection, back to default color
+    selectedObjects.map((object) => {
+      object.material.color.set(0x3c8c8c);
+    })
+    selectedObjects = [];
   }
   if (!intersects.length) {
     $(".rc-object-menu").hide();
     $(".global").show();
   }
+  render();
 }
 
 function onMouseMove(event) {

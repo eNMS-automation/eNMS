@@ -4,7 +4,6 @@ action: false
 Cesium: false
 defaultPools: false
 ForceGraph3D: false
-jsPanel: false
 L: false
 page: false
 SpriteText: false

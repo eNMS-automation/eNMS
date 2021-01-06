@@ -24,7 +24,7 @@ export let editors = {};
 export let jsonEditors = {};
 export let userIsActive = true;
 let topZ = 1000;
-let triggerMenu;
+let triggerMenu = true;
 
 export function detectUserInactivity() {
   let timer;
@@ -801,7 +801,7 @@ export function setTriggerMenu(value) {
           .css({
             position: "absolute",
             left: getMenuPosition(e.clientX, "width", "scrollLeft"),
-            top: getMenuPosition(e.clientY, "height", "scrollTop"),
+            top: getMenuPosition(e.clientY, "height", "scrollTop") + 60,
           })
           .off("click")
           .on("click", "a", function (e) {

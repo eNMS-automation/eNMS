@@ -147,6 +147,8 @@ these keys as part of the post-processing or as part of the workflow later one.
 The "Use host key" option in all connection services no longer exists.
 - In service.yaml, the "skip_value" property is "success" / "failure" instead of "True" / "False"
 (skip_value: 'True' -> skip_value: 'success' / skip_value: 'False' -> skip_value: 'failure')
+- In service.yaml, all references to devices via "self.devices" must use "self.target_devices" instead as the row
+was renamed in the Service table.
 
 
 Version 3.22.4

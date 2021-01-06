@@ -64,6 +64,9 @@ function displayView(currentPath) {
   call({
     url: `/get/view/${viewId}`,
     callback: function (view) {
+      nodes = {};
+      objects = [];
+      selectedObject = [];
       currentView = view;
       camera = new THREE.PerspectiveCamera(
         45,
@@ -85,6 +88,7 @@ function displayView(currentPath) {
       labelRenderer.setSize($(".main_frame").width(), $(".main_frame").height());
       labelRenderer.domElement.style.position = "absolute";
       const container = document.getElementById("map");
+      $("#map").empty();
       renderer = new THREE.WebGLRenderer({ antialias: true });
       renderer.setPixelRatio(window.devicePixelRatio);
       renderer.setSize($(".main_frame").width(), $(".main_frame").height());
@@ -175,7 +179,7 @@ function onMouseDown(event) {
   } else {
     selectedObjects.map((object) => {
       object.material.color.set(0x3c8c8c);
-    })
+    });
     selectedObjects = [];
   }
   setTriggerMenu(true);
@@ -230,9 +234,13 @@ function initLogicalFramework() {
           notify("No view has been created yet.", "error", 5);
         }
       }
-      $("#current-view").selectpicker({
-        liveSearch: true,
-      });
+      $("#current-view")
+        .on("change", function () {
+          if (this.value != currentView.id) displayView(this.value);
+        })
+        .selectpicker({
+          liveSearch: true,
+        });
       updateRightClickBindings(controls);
     },
   });

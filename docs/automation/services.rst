@@ -288,12 +288,6 @@ Variables
 
       custom_properties.rst
 
-- ``devices``
-
-  - **Meaning**: the full list of devices for the service.
-  - **Type**: List of database objects.
-  - **Available**: Always.
-
 - ``link``
 
   - **Meaning**: this is a link between devices
@@ -417,6 +411,18 @@ available.  Device specific variables override global variables of the same name
         filename=filename,
         file_content=file_content
     )
+
+- ``target_devices``
+
+  - **Meaning**: the full list of devices for the service.
+  - **Type**: List of database objects.
+  - **Available**: Always.
+
+- ``target_pools``
+
+  - **Meaning**: the full list of pools for the service.
+  - **Type**: List of database objects.
+  - **Available**: Always.
 
 - ``workflow``
 

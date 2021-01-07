@@ -109,7 +109,7 @@ function displayView(currentPath) {
 
 function createPlan() {
   call({
-    url: "/create_view_plan",
+    url: `/create_view_plan/${currentView.id}`,
     form: "view_plan",
     callback: function (result) {
       currentView.last_modified = result;
@@ -147,8 +147,14 @@ function switchMode(mode) {
 }
 
 function drawNode(node) {
+  let geometry;
+  if (node.type == "plan") {
+    geometry = new THREE.PlaneGeometry(5, 20, 32);
+  } else {
+    geometry = new THREE.CylinderGeometry(30, 30, 20, 32);
+  }
   const mesh = new THREE.Mesh(
-    new THREE.CylinderGeometry(30, 30, 20, 32),
+    geometry,
     new THREE.MeshBasicMaterial({
       color: 0x3c8c8c,
       opacity: 0.8,

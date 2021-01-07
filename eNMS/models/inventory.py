@@ -462,6 +462,14 @@ class Node(ViewObject):
     device_name = association_proxy("device", "name")
 
 
+class Plan(ViewObject):
+
+    __tablename__ = class_type = "plan"
+    __mapper_args__ = {"polymorphic_identity": "plan"}
+    parent_type = "view_object"
+    id = db.Column(Integer, ForeignKey(ViewObject.id), primary_key=True)
+
+
 class Line(ViewObject):
 
     __tablename__ = class_type = "line"

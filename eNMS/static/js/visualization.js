@@ -112,10 +112,17 @@ function displayView(currentPath) {
 }
 
 function createPlan() {
-  const helper = new THREE.GridHelper(view.grid_size, view.grid_rows);
-  helper.material.opacity = 0.5;
-  helper.material.transparent = true;
-  scene.add(helper);
+  call({
+    url: "/create_view_plan",
+    form: "view_plan",
+    callback: function (result) {
+      currentView.last_modified = result;
+      const helper = new THREE.GridHelper(result.size, result.rows);
+      helper.material.opacity = result.opacity;
+      helper.material.transparent = true;
+      scene.add(helper);
+    },
+  });
 }
 
 function savePositions() {

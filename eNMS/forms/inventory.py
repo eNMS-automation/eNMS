@@ -5,6 +5,7 @@ from eNMS import app
 from eNMS.forms import BaseForm, choices, form_properties
 from eNMS.forms.fields import (
     BooleanField,
+    FloatField,
     HiddenField,
     InstanceField,
     IntegerField,
@@ -170,11 +171,12 @@ class ViewLabelForm(BaseForm):
     text = StringField(widget=TextArea(), render_kw={"rows": 15})
 
 
-class ViewLabelForm(BaseForm):
+class ViewPlanForm(BaseForm):
     form_type = HiddenField(default="view_plan")
     action = "eNMS.visualization.createPlan"
-    size = IntegerField("Grid Size", default=2000)
-    rows = IntegerField("Grid Rows", default=100)
+    size = IntegerField("Size", default=2000)
+    rows = IntegerField("Number of Rows", default=100)
+    opacity = FloatField("Opacity", default=1.)
 
 
 class AddObjectsForm(BaseForm):

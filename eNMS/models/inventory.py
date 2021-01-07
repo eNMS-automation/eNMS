@@ -445,11 +445,6 @@ class ViewObject(AbstractBase):
     y = db.Column(Float, default=0.0)
     z = db.Column(Float, default=0.0)
 
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-        if "name" not in kwargs:
-            self.name = f"{self.view}-{self.device_name}"
-
 
 class Node(ViewObject):
 
@@ -461,13 +456,9 @@ class Node(ViewObject):
     device = relationship("Device", foreign_keys="Node.device_id")
     device_name = association_proxy("device", "name")
 
-
-class Plan(ViewObject):
-
-    __tablename__ = class_type = "plan"
-    __mapper_args__ = {"polymorphic_identity": "plan"}
-    parent_type = "view_object"
-    id = db.Column(Integer, ForeignKey(ViewObject.id), primary_key=True)
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.name = f"[{self.view}] {self.device_name}"
 
 
 class Line(ViewObject):
@@ -479,6 +470,26 @@ class Line(ViewObject):
     link_id = db.Column(Integer, ForeignKey("link.id"))
     link = relationship("Link", foreign_keys="Line.link_id")
     link_name = association_proxy("link", "name")
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.name = f"[{self.view}] {self.link_name}"
+
+
+class Plan(ViewObject):
+
+    __tablename__ = class_type = "plan"
+    __mapper_args__ = {"polymorphic_identity": "plan"}
+    parent_type = "view_object"
+    id = db.Column(Integer, ForeignKey(ViewObject.id), primary_key=True)
+
+
+class Label(ViewObject):
+
+    __tablename__ = class_type = "label"
+    __mapper_args__ = {"polymorphic_identity": "label"}
+    parent_type = "view_object"
+    id = db.Column(Integer, ForeignKey(ViewObject.id), primary_key=True)
 
 
 class View(ViewObject):

@@ -146,8 +146,11 @@ function switchMode(mode) {
 function drawNode(node) {
   let geometry, material;
   if (node.type == "plan") {
-    geometry = new THREE.PlaneGeometry(5, 20, 32);
-    material = new THREE.MeshBasicMaterial({ color: 0xffff00, side: THREE.DoubleSide });
+    geometry = new THREE.BoxGeometry(1000, 1000, 3);
+    for ( var i = 0; i < geometry.faces.length; i ++ ) {
+        geometry.faces[ i ].color.setHex( Math.random() * 0xffffff );
+    }
+    material = new THREE.MeshBasicMaterial({ color: 0xffffff, vertexColors: true });
   } else {
     material = new THREE.MeshBasicMaterial({
       color: 0x3c8c8c,
@@ -158,11 +161,13 @@ function drawNode(node) {
   }
   const mesh = new THREE.Mesh(geometry, material);
   mesh.position.set(node.x, Math.max(node.y, 10), node.z);
+  if (node.type == "plan")mesh.rotation.x = Math.PI / 2;
   drawLabel({ target: mesh, label: node.name });
   nodes[node.id] = mesh;
   objects.push(mesh);
   scene.add(mesh);
   transformControls.attach(mesh);
+  render()
 }
 
 function getIntersects(event) {

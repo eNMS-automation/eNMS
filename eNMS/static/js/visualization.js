@@ -68,12 +68,8 @@ function displayView(currentPath) {
       objects = [];
       selectedObject = [];
       currentView = view;
-      camera = new THREE.PerspectiveCamera(
-        45,
-        $(".main_frame").width() / $(".main_frame").height(),
-        1,
-        10000
-      );
+      const aspect = $(".main_frame").width() / $(".main_frame").height();
+      camera = new THREE.PerspectiveCamera(45, aspect, 1, 10000);
       raycaster = new THREE.Raycaster();
       pointer = new THREE.Vector2();
       camera.position.set(500, 800, 1300);
@@ -104,7 +100,7 @@ function displayView(currentPath) {
       });
       scene.add(transformControls);
       updateRightClickBindings(controls);
-      view.nodes.map(drawNode);
+      view.objects.map(drawNode);
       switchMode("select");
       render();
     },
@@ -150,8 +146,8 @@ function switchMode(mode) {
   }
 }
 
-function drawNode(device) {
-  const node = new THREE.Mesh(
+function drawNode(node) {
+  const mesh = new THREE.Mesh(
     new THREE.CylinderGeometry(30, 30, 20, 32),
     new THREE.MeshBasicMaterial({
       color: 0x3c8c8c,
@@ -159,12 +155,12 @@ function drawNode(device) {
       transparent: true,
     })
   );
-  node.position.set(device.x, Math.max(device.y, 10), device.z);
-  drawLabel({ target: node, label: device.name });
-  nodes[device.id] = node;
-  objects.push(node);
-  scene.add(node);
-  transformControls.attach(node);
+  mesh.position.set(node.x, Math.max(node.y, 10), node.z);
+  drawLabel({ target: mesh, label: node.name });
+  nodes[device.id] = mesh;
+  objects.push(mesh);
+  scene.add(mesh);
+  transformControls.attach(mesh);
 }
 
 function getIntersects(event) {

@@ -176,7 +176,7 @@ class ViewPlanForm(BaseForm):
     action = "eNMS.visualization.createPlan"
     size = IntegerField("Size", default=2000)
     rows = IntegerField("Number of Rows", default=100)
-    opacity = FloatField("Opacity", default=1.)
+    opacity = FloatField("Opacity", default=1.0)
 
 
 class AddObjectsForm(BaseForm):

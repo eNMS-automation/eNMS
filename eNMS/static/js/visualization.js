@@ -113,10 +113,7 @@ function createPlan() {
     form: "view_plan",
     callback: function (result) {
       currentView.last_modified = result;
-      const helper = new THREE.GridHelper(result.size, result.rows);
-      helper.material.opacity = result.opacity;
-      helper.material.transparent = true;
-      scene.add(helper);
+      drawNode(result.plan);
     },
   });
 }
@@ -147,20 +144,19 @@ function switchMode(mode) {
 }
 
 function drawNode(node) {
-  let geometry;
+  let geometry, material;
   if (node.type == "plan") {
     geometry = new THREE.PlaneGeometry(5, 20, 32);
+    material = new THREE.MeshBasicMaterial({ color: 0xffff00, side: THREE.DoubleSide });
   } else {
-    geometry = new THREE.CylinderGeometry(30, 30, 20, 32);
-  }
-  const mesh = new THREE.Mesh(
-    geometry,
-    new THREE.MeshBasicMaterial({
+    material = new THREE.MeshBasicMaterial({
       color: 0x3c8c8c,
       opacity: 0.8,
       transparent: true,
-    })
-  );
+    });
+    geometry = new THREE.CylinderGeometry(30, 30, 20, 32);
+  }
+  const mesh = new THREE.Mesh(geometry, material);
   mesh.position.set(node.x, Math.max(node.y, 10), node.z);
   drawLabel({ target: mesh, label: node.name });
   nodes[node.id] = mesh;

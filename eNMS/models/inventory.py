@@ -441,9 +441,9 @@ class ViewObject(AbstractBase):
     view = relationship(
         "View", remote_side=[id], foreign_keys=view_id, back_populates="objects"
     )
-    x = db.Column(Float, default=0.)
-    y = db.Column(Float, default=0.)
-    z = db.Column(Float, default=0.)
+    x = db.Column(Float, default=0.0)
+    y = db.Column(Float, default=0.0)
+    z = db.Column(Float, default=0.0)
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)

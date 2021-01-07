@@ -964,6 +964,7 @@ configureNamespace("visualization", [
   addObjectsToView,
   clearSearch,
   createLabel,
+  createPlan,
   displayNetwork,
   openVisualizationPanel,
   saveParameters,

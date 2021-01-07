@@ -468,8 +468,4 @@ class View(Node):
     parent_type = "node"
     id = db.Column(Integer, ForeignKey(Node.id), primary_key=True)
     last_modified = db.Column(db.TinyString, info={"log_change": False})
-    display_grid = db.Column(Boolean)
-    grid_size = db.Column(Integer)
-    grid_rows = db.Column(Integer)
-    labels = db.Column(db.Dict, info={"log_change": False})
     nodes = relationship("Node", foreign_keys="Node.view_id")

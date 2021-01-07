@@ -162,15 +162,19 @@ class LogicalViewForm(BaseForm):
     form_type = HiddenField(default="view")
     id = HiddenField()
     name = StringField("Name", [InputRequired()])
-    display_grid = BooleanField("Display Grid", default=True)
-    grid_size = IntegerField("Grid Size", default=2000)
-    grid_rows = IntegerField("Grid Rows", default=100)
 
 
 class ViewLabelForm(BaseForm):
     form_type = HiddenField(default="view_label")
     action = "eNMS.visualization.createLabel"
     text = StringField(widget=TextArea(), render_kw={"rows": 15})
+
+
+class ViewLabelForm(BaseForm):
+    form_type = HiddenField(default="view_plan")
+    action = "eNMS.visualization.createPlan"
+    size = IntegerField("Grid Size", default=2000)
+    rows = IntegerField("Grid Rows", default=100)
 
 
 class AddObjectsForm(BaseForm):

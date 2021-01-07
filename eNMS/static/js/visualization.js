@@ -120,7 +120,7 @@ function createPlan() {
 
 function savePositions() {
   call({
-    url: `/save_view_positions`,
+    url: "/save_view_positions",
     data: Object.fromEntries(
       Object.entries(nodes).map(([nodeId, node]) => [nodeId, node.position])
     ),
@@ -161,12 +161,11 @@ function drawNode(node) {
   }
   const mesh = new THREE.Mesh(geometry, material);
   mesh.position.set(node.x, Math.max(node.y, 10), node.z);
-  if (node.type == "plan")mesh.rotation.x = Math.PI / 2;
+  if (node.type == "plan") mesh.rotation.x = Math.PI / 2;
   drawLabel({ target: mesh, label: node.name });
   nodes[node.id] = mesh;
   objects.push(mesh);
   scene.add(mesh);
-  transformControls.attach(mesh);
   render()
 }
 

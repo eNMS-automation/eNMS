@@ -208,7 +208,7 @@ class InventoryController(BaseController):
 
     def save_view_positions(self, **kwargs):
         for node_id, position in kwargs.items():
-            db.factory("node", id=node_id, **position)
+            db.factory("view_object", id=node_id, **position)
         return self.get_time()
 
     def update_pool(self, pool_id):

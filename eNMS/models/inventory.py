@@ -427,19 +427,19 @@ class Session(AbstractBase):
     device_name = association_proxy("device", "name")
 
 
-class Node(AbstractBase):
+class ViewObject(AbstractBase):
 
-    __tablename__ = "node"
+    __tablename__ = "view_object"
     type = db.Column(db.SmallString)
-    __mapper_args__ = {"polymorphic_identity": "node", "polymorphic_on": type}
+    __mapper_args__ = {"polymorphic_identity": "view_object", "polymorphic_on": type}
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.SmallString, unique=True)
     device_id = db.Column(Integer, ForeignKey("device.id"))
-    device = relationship("Device", foreign_keys="Node.device_id")
+    device = relationship("Device", foreign_keys="ViewObject.device_id")
     device_name = association_proxy("device", "name")
-    view_id = db.Column(Integer, ForeignKey("node.id", ondelete="cascade"))
+    view_id = db.Column(Integer, ForeignKey("view_object.id", ondelete="cascade"))
     view = relationship(
-        "View", remote_side=[id], foreign_keys=view_id, back_populates="nodes"
+        "View", remote_side=[id], foreign_keys=view_id, back_populates="objects"
     )
     x = db.Column(Float, default=0.)
     y = db.Column(Float, default=0.)
@@ -451,21 +451,33 @@ class Node(AbstractBase):
             self.name = f"{self.view}-{self.device_name}"
 
 
-class Line(AbstractBase):
+class Node(ViewObject):
 
-    __tablename__ = type = "line"
-    private = True
-    id = db.Column(Integer, primary_key=True)
+    __tablename__ = class_type = "node"
+    __mapper_args__ = {"polymorphic_identity": "node"}
+    parent_type = "view_object"
+    id = db.Column(Integer, ForeignKey(ViewObject.id), primary_key=True)
+    device_id = db.Column(Integer, ForeignKey("device.id"))
+    device = relationship("Device", foreign_keys="Node.device_id")
+    device_name = association_proxy("device", "name")
+
+
+class Line(ViewObject):
+
+    __tablename__ = class_type = "line"
+    __mapper_args__ = {"polymorphic_identity": "line"}
+    parent_type = "view_object"
+    id = db.Column(Integer, ForeignKey(ViewObject.id), primary_key=True)
     link_id = db.Column(Integer, ForeignKey("link.id"))
     link = relationship("Link", foreign_keys="Line.link_id")
     link_name = association_proxy("link", "name")
 
 
-class View(Node):
+class View(ViewObject):
 
     __tablename__ = class_type = "view"
     __mapper_args__ = {"polymorphic_identity": "view"}
-    parent_type = "node"
-    id = db.Column(Integer, ForeignKey(Node.id), primary_key=True)
+    parent_type = "view_object"
+    id = db.Column(Integer, ForeignKey(ViewObject.id), primary_key=True)
     last_modified = db.Column(db.TinyString, info={"log_change": False})
-    nodes = relationship("Node", foreign_keys="Node.view_id")
+    objects = relationship("ViewObject", foreign_keys="ViewObject.view_id")

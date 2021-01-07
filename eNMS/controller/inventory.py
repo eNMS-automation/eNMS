@@ -45,6 +45,9 @@ class InventoryController(BaseController):
         view.labels[label_id] = label
         return {"id": label_id, **label}
 
+    def create_view_plan(self, view_id, **kwargs):
+        return {"time": self.get_time(), **db.factory("plan", **kwargs)}
+
     def get_ssh_port(self):
         if self.redis_queue:
             self.ssh_port = self.redis("incr", "ssh_port", 1)

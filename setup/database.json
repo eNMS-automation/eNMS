@@ -45,8 +45,7 @@
     "task",
     "access",
     "credential",
-    "node",
-    "line"
+    "view_object"
   ],
   "dont_migrate": {
     "device": [

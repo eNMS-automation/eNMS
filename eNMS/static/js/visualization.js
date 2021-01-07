@@ -57,6 +57,7 @@ let labelRenderer;
 let objects = [];
 let nodes = {};
 let pointer;
+let activeControls = false;
 let raycaster;
 
 function displayView(currentPath) {
@@ -98,6 +99,12 @@ function displayView(currentPath) {
         if (!event.value) savePositions();
         controls.enabled = !event.value;
       });
+      transformControls.addEventListener("mouseUp", function() {
+        activeControls = false;
+      });
+      transformControls.addEventListener("mouseDown", function() {
+        activeControls = true;
+      });
       scene.add(transformControls);
       updateRightClickBindings(controls);
       view.objects.map(drawNode);
@@ -105,6 +112,32 @@ function displayView(currentPath) {
       render();
     },
   });
+}
+
+function onMouseDown(event) {
+  const intersects = getIntersects(event);
+  if (intersects.length > 0) {
+    const object = intersects[0].object;
+    if (currentMode == "select") {
+      object.material.color.set(0xff0000);
+      selectedObjects.push(object);
+    } else if (!activeControls && object !== transformControls.object) {
+      transformControls.attach(object);
+    }
+  } else {
+    activeControls = false;
+    transformControls.detach(transformControls.object);
+    selectedObjects.map((object) => {
+      object.material.color.set(0x3c8c8c);
+    });
+    selectedObjects = [];
+  }
+  setTriggerMenu(true);
+  if (!intersects.length) {
+    $(".rc-object-menu").hide();
+    $(".global").show();
+  }
+  render();
 }
 
 function createPlan() {
@@ -176,30 +209,6 @@ function getIntersects(event) {
   pointer.set(width, height);
   raycaster.setFromCamera(pointer, camera);
   return raycaster.intersectObjects(objects);
-}
-
-function onMouseDown(event) {
-  const intersects = getIntersects(event);
-  if (intersects.length > 0) {
-    const object = intersects[0].object;
-    if (currentMode == "select") {
-      object.material.color.set(0xff0000);
-      selectedObjects.push(object);
-    } else if (object !== transformControls.object) {
-      transformControls.attach(object);
-    }
-  } else {
-    selectedObjects.map((object) => {
-      object.material.color.set(0x3c8c8c);
-    });
-    selectedObjects = [];
-  }
-  setTriggerMenu(true);
-  if (!intersects.length) {
-    $(".rc-object-menu").hide();
-    $(".global").show();
-  }
-  render();
 }
 
 function onMouseMove(event) {

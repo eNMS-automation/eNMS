@@ -157,7 +157,7 @@ function drawNode(node) {
   );
   mesh.position.set(node.x, Math.max(node.y, 10), node.z);
   drawLabel({ target: mesh, label: node.name });
-  nodes[device.id] = mesh;
+  nodes[node.id] = mesh;
   objects.push(mesh);
   scene.add(mesh);
   transformControls.attach(mesh);

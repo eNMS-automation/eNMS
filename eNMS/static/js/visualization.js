@@ -80,10 +80,6 @@ function displayView(currentPath) {
       camera.lookAt(0, 0, 0);
       scene = new THREE.Scene();
       scene.background = new THREE.Color(0xffffff);
-      const helper = new THREE.GridHelper(view.grid_size, view.grid_rows);
-      helper.material.opacity = 0.5;
-      helper.material.transparent = true;
-      scene.add(helper);
       labelRenderer = new CSS2DRenderer();
       labelRenderer.setSize($(".main_frame").width(), $(".main_frame").height());
       labelRenderer.domElement.style.position = "absolute";
@@ -113,6 +109,13 @@ function displayView(currentPath) {
       render();
     },
   });
+}
+
+function createPlan() {
+  const helper = new THREE.GridHelper(view.grid_size, view.grid_rows);
+  helper.material.opacity = 0.5;
+  helper.material.transparent = true;
+  scene.add(helper);
 }
 
 function savePositions() {
@@ -303,6 +306,7 @@ function updateRightClickBindings(controls) {
     "Add to View": addObjectPanel,
     "Create View": () => createNewView("create"),
     "Create Label": () => openPanel({ name: "view_label", title: "Create New Label" }),
+    "Create Plan": () => openPanel({ name: "view_plan", title: "Create New Plan" }),
     "Edit View": () => createNewView("edit"),
     "Duplicate View": () => createNewView("duplicate"),
     "Switch Mode": switchMode,

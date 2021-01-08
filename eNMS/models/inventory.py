@@ -434,9 +434,6 @@ class ViewObject(AbstractBase):
     __mapper_args__ = {"polymorphic_identity": "view_object", "polymorphic_on": type}
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.SmallString, unique=True)
-    device_id = db.Column(Integer, ForeignKey("device.id"))
-    device = relationship("Device", foreign_keys="ViewObject.device_id")
-    device_name = association_proxy("device", "name")
     view_id = db.Column(Integer, ForeignKey("view_object.id", ondelete="cascade"))
     view = relationship(
         "View", remote_side=[id], foreign_keys=view_id, back_populates="objects"

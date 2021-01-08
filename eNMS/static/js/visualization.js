@@ -212,7 +212,7 @@ function drawNode(node) {
   if (node.type == "plan") mesh.rotation.x = Math.PI / 2;
   drawLabel({ target: mesh, label: node.name });
   nodes[node.id] = mesh;
-  mesh.userData.id = node.id;
+  mesh.userData = node;
   objects.push(mesh);
   scene.add(mesh);
   render()

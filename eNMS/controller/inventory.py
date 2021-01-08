@@ -46,14 +46,13 @@ class InventoryController(BaseController):
         return {"id": label_id, **label}
 
     def create_view_plan(self, view_id, **kwargs):
-        return {
-            "time": self.get_time(),
-            "plan": db.factory("plan", view=view_id, **kwargs).serialized,
-        }
+        plan = db.factory("plan", view=view_id, **kwargs)
+        db.session.flush()
+        return {"time": self.get_time(), "plan": plan.serialized}
 
     def delete_view_selection(self, selection):
-        for object_id in selection:
-            db.delete("view_object", object_id)
+        for instance in selection:
+            db.delete("view_object", id=instance["id"])
         return self.get_time()
 
     def get_ssh_port(self):

@@ -51,8 +51,8 @@ class InventoryController(BaseController):
         return {"time": self.get_time(), "plan": plan.serialized}
 
     def delete_view_selection(self, selection):
-        for instance in selection:
-            db.delete("view_object", id=instance["id"])
+        for instance_id in selection:
+            db.delete("view_object", id=instance_id)
         return self.get_time()
 
     def get_ssh_port(self):

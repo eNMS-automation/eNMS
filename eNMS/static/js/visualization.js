@@ -90,8 +90,8 @@ function displayView(currentPath) {
       controls = new THREE.OrbitControls(camera, labelRenderer.domElement);
       controls.addEventListener("change", render);
       controls.maxPolarAngle = Math.PI / 2;
-      document.addEventListener("mousedown", onMouseDown, false);
-      document.addEventListener("mousemove", onMouseMove, false);
+      container.addEventListener("mousedown", onMouseDown, false);
+      container.addEventListener("mousemove", onMouseMove, false);
       window.addEventListener("resize", onWindowResize, false);
       transformControls = new TransformControls(camera, labelRenderer.domElement);
       transformControls.addEventListener("change", render);
@@ -147,8 +147,23 @@ function createPlan() {
     callback: function (result) {
       currentView.last_modified = result;
       drawNode(result.plan);
+      $("#view_plan").remove();
     },
   });
+}
+
+function deleteSelection() {
+  call({
+    url: "/delete_view_selection",
+    data: selectedObjects,
+    callback: function (result) {
+      currentView.last_modified = result.update_time;
+      selectedObjects.map(deleteNode);
+    },
+  });
+}
+
+function deleteNode(node) {
 }
 
 function savePositions() {
@@ -326,6 +341,7 @@ function updateRightClickBindings(controls) {
     "Create Label": () => openPanel({ name: "view_label", title: "Create New Label" }),
     "Create Plan": () => openPanel({ name: "view_plan", title: "Create New Plan" }),
     "Edit View": () => createNewView("edit"),
+    "Delete": () => deleteSelection(),
     "Duplicate View": () => createNewView("duplicate"),
     "Switch Mode": switchMode,
     "Zoom In": () => controls?.dollyOut(),

@@ -54,7 +54,6 @@ let renderer;
 let controls;
 let transformControls;
 let labelRenderer;
-let objects = [];
 let nodes = {};
 let pointer;
 let activeControls = false;
@@ -66,7 +65,6 @@ function displayView(currentPath) {
     url: `/get/view/${viewId}`,
     callback: function (view) {
       nodes = {};
-      objects = [];
       selectedObject = [];
       currentView = view;
       const aspect = $(".main_frame").width() / $(".main_frame").height();
@@ -218,7 +216,6 @@ function drawNode(node) {
   drawLabel({ target: mesh, label: node.name });
   nodes[node.id] = mesh;
   mesh.userData = node;
-  objects.push(mesh);
   scene.add(mesh);
   render()
 }
@@ -229,7 +226,7 @@ function getIntersects(event) {
   const height = -((event.clientY - 70) / $(".main_frame").height()) * 2 + 1;
   pointer.set(width, height);
   raycaster.setFromCamera(pointer, camera);
-  return raycaster.intersectObjects(objects);
+  return raycaster.intersectObjects(scene.children);
 }
 
 function onMouseMove(event) {

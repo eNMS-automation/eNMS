@@ -174,6 +174,7 @@ class ViewLabelForm(BaseForm):
 class ViewPlanForm(BaseForm):
     form_type = HiddenField(default="view_plan")
     action = "eNMS.visualization.createPlan"
+    name = StringField("Name", [InputRequired()])
     size = IntegerField("Size", default=2000)
     rows = IntegerField("Number of Rows", default=100)
     opacity = FloatField("Opacity", default=1.0)

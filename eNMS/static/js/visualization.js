@@ -143,7 +143,7 @@ function onMouseDown(event) {
 function createPlan() {
   call({
     url: `/create_view_plan/${currentView.id}`,
-    form: "view_plan",
+    form: "view_plan-form",
     callback: function (result) {
       currentView.last_modified = result;
       drawNode(result.plan);

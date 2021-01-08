@@ -53,7 +53,7 @@ class InventoryController(BaseController):
 
     def delete_view_selection(self, selection):
         for object_id in selection:
-            db.delete("view_object", selection)
+            db.delete("view_object", object_id)
         return self.get_time()
 
     def get_ssh_port(self):

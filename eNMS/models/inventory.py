@@ -445,6 +445,11 @@ class ViewObject(AbstractBase):
     y = db.Column(Float, default=0.0)
     z = db.Column(Float, default=0.0)
 
+    def update(self, **kwargs):
+        super().update(**kwargs)
+        if self.view and "name" in kwargs:
+            self.name = f"[{self.view}] {kwargs['name']}"
+
 
 class Node(ViewObject):
 

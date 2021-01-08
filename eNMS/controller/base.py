@@ -299,9 +299,8 @@ class BaseController:
                 log = full_log[start_line:]
         return log
 
-    def delete_instance(self, model, instance_ids):
-        for instance_id in instance_ids.split("-"):
-            return db.delete(model, id=instance_id)
+    def delete_instance(self, model, instance_id):
+        return db.delete(model, id=instance_id)
 
     def get(self, model, id):
         return db.fetch(model, id=id).serialized

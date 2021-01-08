@@ -51,6 +51,11 @@ class InventoryController(BaseController):
             "plan": db.factory("plan", view=view_id, **kwargs).serialized,
         }
 
+    def delete_view_selection(self, selection):
+        for object_id in selection:
+            db.delete("view_object", selection)
+        return self.get_time()
+
     def get_ssh_port(self):
         if self.redis_queue:
             self.ssh_port = self.redis("incr", "ssh_port", 1)

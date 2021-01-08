@@ -155,9 +155,9 @@ function createPlan() {
 function deleteSelection() {
   call({
     url: "/delete_view_selection",
-    data: selectedObjects,
-    callback: function (result) {
-      currentView.last_modified = result.update_time;
+    data: {"selection": selectedObjects.map((mesh) => mesh.userData.id)},
+    callback: function (updateTime) {
+      currentView.last_modified = updateTime;
       selectedObjects.map(deleteNode);
     },
   });
@@ -212,6 +212,7 @@ function drawNode(node) {
   if (node.type == "plan") mesh.rotation.x = Math.PI / 2;
   drawLabel({ target: mesh, label: node.name });
   nodes[node.id] = mesh;
+  mesh.userData.id = node.id;
   objects.push(mesh);
   scene.add(mesh);
   render()

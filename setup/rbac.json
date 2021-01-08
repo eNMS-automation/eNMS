@@ -192,6 +192,7 @@
     "/database_deletion",
     "/delete_corrupted_edges",
     "/delete_instance",
+    "/delete_view_selection",
     "/delete_workflow_selection",
     "/duplicate_workflow",
     "/export_service",

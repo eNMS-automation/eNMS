@@ -112,8 +112,7 @@ class BaseForm(FlaskForm, metaclass=MetaForm):
             form_properties[form_type][related_model] = {"type": field_type}
             setattr(cls, related_model, field())
 
-    @classmethod
-    def form_postprocessing(cls, form_data):
+    def form_postprocessing(self, form_data):
         data = {**form_data.to_dict(), **{"user": current_user}}
         if request.files:
             data["file"] = request.files["file"]
@@ -127,7 +126,7 @@ class BaseForm(FlaskForm, metaclass=MetaForm):
                 data[property] = form_data.get(property)
             elif field["type"] == "field-list":
                 data[property] = []
-                for entry in getattr(cls, property).entries:
+                for entry in getattr(self, property):
                     properties = entry.data
                     properties.pop("csrf_token")
                     data[property].append(properties)

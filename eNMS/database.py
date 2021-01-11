@@ -39,8 +39,11 @@ class Database:
         self.dialect = self.database_url.split(":")[0]
         self.rbac_error = type("RbacError", (Exception,), {})
         self.configure_columns()
-        engine_parameters = {**self.engine["common"], **self.engine[self.dialect]}
-        self.engine = create_engine(self.database_url, **engine_parameters)
+        self.engine = create_engine(
+            self.database_url,
+            **self.engine["common"],
+            **self.engine.get(self.dialect, {}),
+        )
         self.session = scoped_session(sessionmaker(autoflush=False, bind=self.engine))
         self.base = declarative_base(metaclass=self.create_metabase())
         self.configure_associations()

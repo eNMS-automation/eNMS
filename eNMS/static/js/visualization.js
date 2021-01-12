@@ -201,11 +201,10 @@ function drawNode(node) {
     geometry = new THREE.BoxGeometry(1000, 1000, 8);
     material = new THREE.MeshBasicMaterial({ map: texture });
   } else if (node.type == "label") {
-    geometry = new THREE.BoxGeometry(10, 10, 10);
+    geometry = new THREE.SphereGeometry(5, 32, 32);
     material = new THREE.MeshBasicMaterial({
       transparent: true,
-      emissive: 0xffffff,
-      alphaTest: 1,
+      opacity: 0.3,
     });
   } else {
     material = new THREE.MeshBasicMaterial({
@@ -246,7 +245,7 @@ function onMouseMove(event) {
 function drawLabel(node, mesh) {
   const div = document.createElement("div");
   div.className = "label";
-  const style = { marginTop: "-1em", color: "#FF0000" }
+  const style = { marginTop: "-1em", color: "#FF0000" };
   div.textContent = node.type == "label" ? node.text : node.name;
   Object.assign(div.style, style);
   const labelObject = new CSS2DObject(div);

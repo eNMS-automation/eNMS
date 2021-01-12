@@ -97,10 +97,10 @@ function displayView(currentPath) {
         if (!event.value) savePositions();
         controls.enabled = !event.value;
       });
-      transformControls.addEventListener("mouseUp", function() {
+      transformControls.addEventListener("mouseUp", function () {
         activeControls = false;
       });
-      transformControls.addEventListener("mouseDown", function() {
+      transformControls.addEventListener("mouseDown", function () {
         activeControls = true;
       });
       scene.add(transformControls);
@@ -126,7 +126,7 @@ function onMouseDown(event) {
     activeControls = false;
     transformControls.detach(transformControls.object);
     selectedObjects.map((object) => {
-      object.material.color.set(0x3c8c8c);
+      object.material.color.set(0xffffff);
     });
     selectedObjects = [];
   }
@@ -153,7 +153,7 @@ function createPlan() {
 function deleteSelection() {
   call({
     url: "/delete_view_selection",
-    data: {"selection": selectedObjects.map((mesh) => mesh.userData.id)},
+    data: { selection: selectedObjects.map((mesh) => mesh.userData.id) },
     callback: function (updateTime) {
       selectedObjects.map(deleteMesh);
       selectedObjects = [];
@@ -197,11 +197,9 @@ function switchMode(mode) {
 function drawNode(node) {
   let geometry, material;
   if (node.type == "plan") {
-    geometry = new THREE.BoxGeometry(1000, 1000, 3);
-    for ( var i = 0; i < geometry.faces.length; i ++ ) {
-        geometry.faces[ i ].color.setHex( Math.random() * 0xffffff );
-    }
-    material = new THREE.MeshBasicMaterial({ color: 0xffffff, vertexColors: true });
+    const texture = new THREE.TextureLoader().load("/static/img/textures/floor3.jpg");
+    geometry = new THREE.BoxGeometry(1000, 1000, 10);
+    material = new THREE.MeshBasicMaterial({ map: texture });
   } else {
     material = new THREE.MeshBasicMaterial({
       color: 0x3c8c8c,
@@ -217,7 +215,7 @@ function drawNode(node) {
   nodes[node.id] = mesh;
   mesh.userData = node;
   scene.add(mesh);
-  render()
+  render();
 }
 
 function getIntersects(event) {
@@ -344,7 +342,7 @@ function updateRightClickBindings(controls) {
     "Create Label": () => openPanel({ name: "view_label", title: "Create New Label" }),
     "Create Plan": () => openPanel({ name: "view_plan", title: "Create New Plan" }),
     "Edit View": () => createNewView("edit"),
-    "Delete": () => deleteSelection(),
+    Delete: () => deleteSelection(),
     "Duplicate View": () => createNewView("duplicate"),
     "Switch Mode": switchMode,
     "Zoom In": () => controls?.dollyOut(),

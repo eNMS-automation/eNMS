@@ -35,20 +35,10 @@ class InventoryController(BaseController):
                 result[f"{model}s"].append(node.serialized)
         return result
 
-    def create_view_label(self, view_id, **kwargs):
-        view = db.fetch("view", id=view_id, rbac="edit")
-        label_id = str(uuid4())
-        label = {
-            "positions": [0, 0, 0],
-            "content": kwargs["text"],
-        }
-        view.labels[label_id] = label
-        return {"id": label_id, **label}
-
-    def create_view_plan(self, view_id, **kwargs):
-        plan = db.factory("plan", view=view_id, **kwargs)
+    def create_view_object(self, type, view_id, **kwargs):
+        plan = db.factory(type, view=view_id, **kwargs)
         db.session.flush()
-        return {"time": self.get_time(), "plan": plan.serialized}
+        return {"time": self.get_time(), type: plan.serialized}
 
     def delete_view_selection(self, selection):
         for instance_id in selection:

@@ -141,7 +141,7 @@ function onMouseDown(event) {
 
 function createPlan() {
   call({
-    url: `/create_view_plan/${currentView.id}`,
+    url: `/create_view_object/plan/${currentView.id}`,
     form: "view_plan-form",
     callback: function (result) {
       currentView.last_modified = result;
@@ -302,7 +302,7 @@ function createNewView(mode) {
 
 function createLabel() {
   call({
-    url: `/create_view_label/${currentView.id}`,
+    url: `/create_view_object/label/${currentView.id}`,
     form: "view_label-form",
     callback: function () {
       $("#view_label").remove();

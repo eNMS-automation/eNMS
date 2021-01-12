@@ -446,6 +446,8 @@ class ViewObject(AbstractBase):
         super().update(**kwargs)
         if self.view and "name" in kwargs:
             self.name = f"[{self.view}] {kwargs['name']}"
+        else:
+            self.name = app.get_time()
 
 
 class Node(ViewObject):
@@ -492,6 +494,7 @@ class Label(ViewObject):
     __mapper_args__ = {"polymorphic_identity": "label"}
     parent_type = "view_object"
     id = db.Column(Integer, ForeignKey(ViewObject.id), primary_key=True)
+    text = db.Column(db.SmallString)
 
 
 class View(ViewObject):

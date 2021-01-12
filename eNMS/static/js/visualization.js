@@ -145,7 +145,7 @@ function createPlan() {
     form: "view_plan-form",
     callback: function (result) {
       currentView.last_modified = result;
-      drawNode(result.plan);
+      drawNode(result.node);
       $("#view_plan").remove();
     },
   });
@@ -200,6 +200,13 @@ function drawNode(node) {
   if (node.type == "plan") {
     geometry = new THREE.BoxGeometry(1000, 1000, 8);
     material = new THREE.MeshBasicMaterial({ map: texture });
+  } else if (node.type == "label") {
+    geometry = new THREE.BoxGeometry(10, 10, 10);
+    material = new THREE.MeshBasicMaterial({
+      transparent: true,
+      emissive: 0xffffff,
+      alphaTest: 1,
+    });
   } else {
     material = new THREE.MeshBasicMaterial({
       color: 0x3c8c8c,
@@ -213,7 +220,7 @@ function drawNode(node) {
   if (node.type == "plan") {
     mesh.rotation.x = Math.PI / 2;
   } else {
-    drawLabel({ target: mesh, label: node.name });
+    drawLabel(node, mesh);
   }
   nodes[node.id] = mesh;
   mesh.userData = node;
@@ -236,21 +243,15 @@ function onMouseMove(event) {
   document.body.style.cursor = intersects.length > 0 ? "pointer" : "default";
 }
 
-function drawLabel({
-  label,
-  target,
-  style = { marginTop: "-1em", color: "#FF0000" },
-} = {}) {
+function drawLabel(node, mesh) {
   const div = document.createElement("div");
   div.className = "label";
-  div.textContent = label;
+  const style = { marginTop: "-1em", color: "#FF0000" }
+  div.textContent = node.type == "label" ? node.text : node.name;
   Object.assign(div.style, style);
   const labelObject = new CSS2DObject(div);
-  div.onclick = function () {
-    console.log("test");
-  };
   labelObject.position.set(0, 0, 0);
-  target.add(labelObject);
+  mesh.add(labelObject);
 }
 
 function initLogicalFramework() {
@@ -304,14 +305,9 @@ function createLabel() {
   call({
     url: `/create_view_object/label/${currentView.id}`,
     form: "view_label-form",
-    callback: function () {
+    callback: function (result) {
       $("#view_label").remove();
-      const div = document.createElement("div");
-      div.className = "label";
-      div.textContent = "Moon";
-      div.style.marginTop = "-1em";
-      const label = new CSS2DObject(div);
-      label.position.set(0, 0, 0);
+      drawNode(result.node);
       notify("Label created.", "success", 5);
     },
   });

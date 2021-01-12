@@ -36,9 +36,9 @@ class InventoryController(BaseController):
         return result
 
     def create_view_object(self, type, view_id, **kwargs):
-        plan = db.factory(type, view=view_id, **kwargs)
+        node = db.factory(type, view=view_id, **kwargs)
         db.session.flush()
-        return {"time": self.get_time(), type: plan.serialized}
+        return {"time": self.get_time(), "node": node.serialized}
 
     def delete_view_selection(self, selection):
         for instance_id in selection:

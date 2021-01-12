@@ -210,8 +210,11 @@ function drawNode(node) {
   }
   const mesh = new THREE.Mesh(geometry, material);
   mesh.position.set(node.x, Math.max(node.y, 10), node.z);
-  if (node.type == "plan") mesh.rotation.x = Math.PI / 2;
-  drawLabel({ target: mesh, label: node.name });
+  if (node.type == "plan") {
+    mesh.rotation.x = Math.PI / 2;
+  } else {
+    drawLabel({ target: mesh, label: node.name });
+  }
   nodes[node.id] = mesh;
   mesh.userData = node;
   scene.add(mesh);
@@ -235,7 +238,7 @@ function onMouseMove(event) {
 
 function drawLabel({
   label,
-  target = scene,
+  target,
   style = { marginTop: "-1em", color: "#FF0000" },
 } = {}) {
   const div = document.createElement("div");
@@ -353,7 +356,7 @@ function updateRightClickBindings(controls) {
 
 function render() {
   renderer.render(scene, camera);
-  //labelRenderer.render(scene, camera);
+  labelRenderer.render(scene, camera);
 }
 
 function onWindowResize() {

@@ -58,7 +58,7 @@ let nodes = {};
 let pointer;
 let activeControls = false;
 let raycaster;
-const texture = new THREE.TextureLoader().load("/static/img/textures/floor3.jpg");
+let texture;
 
 function displayView(currentPath) {
   const [viewId] = currentPath.split(">").slice(-1);
@@ -198,7 +198,7 @@ function switchMode(mode) {
 function drawNode(node) {
   let geometry, material;
   if (node.type == "plan") {
-    geometry = new THREE.BoxGeometry(1000, 1000, 10);
+    geometry = new THREE.BoxGeometry(1000, 1000, 8);
     material = new THREE.MeshBasicMaterial({ map: texture });
   } else {
     material = new THREE.MeshBasicMaterial({
@@ -251,6 +251,7 @@ function drawLabel({
 }
 
 function initLogicalFramework() {
+  texture = new THREE.TextureLoader().load("/static/img/textures/floor3.jpg");
   call({
     url: "/get_all/view",
     callback: function (views) {

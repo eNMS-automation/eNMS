@@ -405,7 +405,11 @@ class BaseController:
                 constraint = getattr(table, property) == (value == "bool-true")
             elif filter_value == "equality":
                 constraint = getattr(table, property) == value
-            elif not filter_value or filter_value == "inclusion" or db.dialect == "sqlite":
+            elif (
+                not filter_value
+                or filter_value == "inclusion"
+                or db.dialect == "sqlite"
+            ):
                 constraint = getattr(table, property).contains(value)
             else:
                 compile(value)
@@ -435,7 +439,9 @@ class BaseController:
             if not relation_ids:
                 continue
             related_table = models[relation_properties["model"]]
-            query = query.join(related_table, getattr(table, related_model)).filter(related_table.id.in_(relation_ids))
+            query = query.join(related_table, getattr(table, related_model)).filter(
+                related_table.id.in_(relation_ids)
+            )
         return query
 
     def filtering(self, model, bulk=False, **kwargs):

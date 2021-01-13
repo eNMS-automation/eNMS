@@ -26,7 +26,7 @@ def filtering_form_generator():
             "properties": sorted(relations),
             "object_type": form_type,
             "form_type": HiddenField(default=f"{form_type}_relation_filtering"),
-            **relations
+            **relations,
         }
         type(f"{form_type}RelationshipFilteringForm", (BaseForm,), relation_form)
         form = deepcopy(relation_form)

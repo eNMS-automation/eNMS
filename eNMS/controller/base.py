@@ -400,12 +400,12 @@ class BaseController:
             value = constraint_dict.get(property)
             if not value:
                 continue
-            filter = constraint_dict.get(f"{property}_filter")
+            filter_value = constraint_dict.get(f"{property}_filter")
             if value in ("bool-true", "bool-false"):
                 constraint = getattr(table, property) == (value == "bool-true")
-            elif filter == "equality":
+            elif filter_value == "equality":
                 constraint = getattr(table, property) == value
-            elif not filter or filter == "inclusion" or db.dialect == "sqlite":
+            elif not filter_value or filter_value == "inclusion" or db.dialect == "sqlite":
                 constraint = getattr(table, property).contains(value)
             else:
                 compile(value)
@@ -432,23 +432,10 @@ class BaseController:
         constraint_dict = {**kwargs["form"], **kwargs.get("constraints", {})}
         for related_model, relation_properties in relationships[model].items():
             relation_ids = [int(id) for id in constraint_dict.get(related_model, [])]
-            related_table = models[relation_properties["model"]]
-            filter_value = constraint_dict.get(f"{related_model}_filter")
             if not relation_ids:
                 continue
-            elif relation_properties["list"]:
-                if filter_value == "all":
-                    query = query.join(related_table, getattr(table, related_model))
-                    query = query.filter(related_table.id.in_(relation_ids))
-                else:
-                    operator = "notin_" if filter_value == "not_any" else "in_"
-                    query = query.join(related_table, getattr(table, related_model))
-                    query = query.filter(getattr(related_table.id, operator)(relation_ids))
-            else:
-                constraint = or_(
-                    getattr(table, related_model).has(id=relation_id)
-                    for relation_id in relation_ids
-                )
+            related_table = models[relation_properties["model"]]
+            query = query.join(related_table, getattr(table, related_model)).filter(related_table.id.in_(relation_ids))
         return query
 
     def filtering(self, model, bulk=False, **kwargs):

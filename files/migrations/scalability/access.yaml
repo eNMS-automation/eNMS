@@ -56,13 +56,14 @@
   type: access
   upper_menu: [Admin, Settings, Files]
   user_pools: [All users]
-- access_pools: [Device 2K, Device 4K, Device 6K, Device 18K]
+- access_pools: [Device 2K, Device 4K, Device 6K, Device 18K, Device 8K, 'Device [3K
+      - 5K]', 'Device [17K - 19K]']
   access_type: "['Read']"
   delete_requests: []
-  description: ''
+  description: Should grand access to [2K - 6K], 8K, [17K - 19K] = 9K devices in total.
   get_requests: []
   menu: []
-  name: Access 2K, 4K, 6K, 18K
+  name: Access [2K - 6K], 8K, [17K - 19K]
   pages: []
   post_requests: []
   type: access

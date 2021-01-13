@@ -178,11 +178,13 @@ class AdministrationController(BaseController):
                         continue
                     relation = relationships[model][property]
                     if relation["list"]:
-                        value = [
-                            db.fetch(relation["model"], name=name) for name in value
-                        ]
+                        related_instances = (
+                            db.fetch(relation["model"], name=name, allow_none=True)
+                            for name in value
+                        )
+                        value = list(filter(None, related_instances))
                     else:
-                        value = db.fetch(relation["model"], name=value)
+                        value = db.fetch(relation["model"], name=value, allow_none=True)
                     try:
                         setattr(db.fetch(model, name=instance_name), property, value)
                     except Exception:

@@ -192,6 +192,7 @@ class Database:
                         deleted = [x for x in hist.deleted[0] if x not in hist.added[0]]
                     else:
                         added, deleted = hist.added, hist.deleted
+                    print(added, deleted)
                     if deleted:
                         change += f"DELETED: {deleted}"
                     if added:
@@ -201,6 +202,7 @@ class Database:
                         f"'{hist.deleted[0] if hist.deleted else None}' => "
                         f"'{hist.added[0] if hist.added else None}'"
                     )
+                changelog.append(change)
             if changelog:
                 name, changes = (
                     getattr(target, "name", target.id),

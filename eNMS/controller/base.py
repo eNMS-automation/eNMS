@@ -412,26 +412,6 @@ class BaseController:
                 regex_operator = "regexp" if db.dialect == "mysql" else "~"
                 constraint = getattr(table, property).op(regex_operator)(value)
             constraints.append(constraint)
-        for related_model, relation_properties in relationships[model].items():
-            relation_ids = [int(id) for id in constraint_dict.get(related_model, [])]
-            filter = constraint_dict.get(f"{related_model}_filter")
-            if filter == "none":
-                constraint = ~getattr(table, related_model).any()
-            elif not relation_ids:
-                continue
-            elif relation_properties["list"]:
-                constraint = (and_ if filter == "all" else or_)(
-                    getattr(table, related_model).any(id=relation_id)
-                    for relation_id in relation_ids
-                )
-                if filter == "not_any":
-                    constraint = ~constraint
-            else:
-                constraint = or_(
-                    getattr(table, related_model).has(id=relation_id)
-                    for relation_id in relation_ids
-                )
-            constraints.append(constraint)
         return constraints
 
     def multiselect_filtering(self, model, **params):
@@ -447,6 +427,32 @@ class BaseController:
             "total_count": results.count(),
         }
 
+    def build_relationship_constraints(self, query, model, **kwargs):
+        table = models[model]
+        constraint_dict = {**kwargs["form"], **kwargs.get("constraints", {})}
+        for related_model, relation_properties in relationships[model].items():
+            relation_ids = [int(id) for id in constraint_dict.get(related_model, [])]
+            related_table = models[relation_properties["model"]]
+            filter_value = constraint_dict.get(f"{related_model}_filter")
+            if filter_value == "none":
+                constraint = ~getattr(table, related_model).any()
+            elif not relation_ids:
+                continue
+            elif relation_properties["list"]:
+                if filter_value == "all":
+                    pass
+                else:
+                    query = query.join(related_table, getattr(table, related_model))
+                    query = query.filter(related_table.id.in_(relation_ids))
+                if filter_value == "not_any":
+                    constraint = ~constraint
+            else:
+                constraint = or_(
+                    getattr(table, related_model).has(id=relation_id)
+                    for relation_id in relation_ids
+                )
+        return query
+
     def filtering(self, model, bulk=False, **kwargs):
         table = models[model]
         try:
@@ -455,6 +461,7 @@ class BaseController:
             return {"error": "Invalid regular expression as search parameter."}
         constraints.extend(table.filtering_constraints(**kwargs))
         query = db.session.query(models[model])
+        query = self.build_relationship_constraints(query, model, **kwargs)
         total_records, query = query.count(), query.filter(and_(*constraints))
         if not current_user.is_admin:
             query = table.rbac_filter(query, "read", current_user)

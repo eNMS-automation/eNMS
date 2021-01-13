@@ -434,18 +434,16 @@ class BaseController:
             relation_ids = [int(id) for id in constraint_dict.get(related_model, [])]
             related_table = models[relation_properties["model"]]
             filter_value = constraint_dict.get(f"{related_model}_filter")
-            if filter_value == "none":
-                constraint = ~getattr(table, related_model).any()
-            elif not relation_ids:
+            if not relation_ids:
                 continue
             elif relation_properties["list"]:
                 if filter_value == "all":
-                    pass
-                else:
                     query = query.join(related_table, getattr(table, related_model))
                     query = query.filter(related_table.id.in_(relation_ids))
-                if filter_value == "not_any":
-                    constraint = ~constraint
+                else:
+                    operator = "notin_" if filter_value == "not_any" else "in_"
+                    query = query.join(related_table, getattr(table, related_model))
+                    query = query.filter(getattr(related_table.id, operator)(relation_ids))
             else:
                 constraint = or_(
                     getattr(table, related_model).has(id=relation_id)

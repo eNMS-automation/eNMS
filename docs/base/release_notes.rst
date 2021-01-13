@@ -10,6 +10,8 @@ Version 4.0.1
 - Remove "All", "None" and "Unrelated" options in relationship filtering
 - Use join instead of subqueries to improve relationship filtering scalability
 - Add "/form/..." endpoint in rbac files when instantiating custom services
+- Fix changelog like pool update not logged bug
+- Fix workflow tree mechanism from workflow with superworkflow bug
 
 Version 4.0.0
 -------------

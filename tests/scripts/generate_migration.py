@@ -23,15 +23,19 @@ def generate_migration_file(project):
         for index in range(1, 30)
     ]
 
-    services.extend([
-        {
-            "name": f"w{index}",
-            "scoped_name": f"w{index}",
-            "type": "workflow",
-            "services": list(set(f"[Shared] s{randrange(1, 30)}" for _ in range(3)))
-        }
-        for index in range(1, 5)
-    ])
+    services.extend(
+        [
+            {
+                "name": f"w{index}",
+                "scoped_name": f"w{index}",
+                "type": "workflow",
+                "services": list(
+                    set(f"[Shared] s{randrange(1, 30)}" for _ in range(3))
+                ),
+            }
+            for index in range(1, 5)
+        ]
+    )
 
     with open(path / f"service.yaml", "w") as migration_file:
         yaml.dump(services, migration_file)

@@ -149,9 +149,10 @@ class InventoryController(BaseController):
     def get_session_log(self, session_id):
         return db.fetch("session", id=session_id).content
 
-    def counters(self, property, type):
+    def counters(self, property, model):
         return Counter(
-            str(getattr(instance, property)) for instance in db.fetch_all(type)
+            value[0]
+            for value in db.session.query(getattr(models[model], property)).all()
         )
 
     def export_topology(self, **kwargs):

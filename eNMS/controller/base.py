@@ -365,10 +365,7 @@ class BaseController:
                 model: db.query(model).count() for model in properties["dashboard"]
             },
             "properties": {
-                model: Counter(
-                    str(getattr(instance, properties["dashboard"][model][0]))
-                    for instance in db.fetch_all(model)
-                )
+                model: self.counters(properties["dashboard"][model][0], model)
                 for model in properties["dashboard"]
             },
         }

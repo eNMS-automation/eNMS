@@ -39,12 +39,12 @@
     "user",
     "device",
     "link",
-    "pool",
     "service",
     "workflow_edge",
     "task",
     "access",
-    "credential"
+    "credential",
+    "pool"
   ],
   "dont_migrate": {
     "device": [

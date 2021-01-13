@@ -354,7 +354,8 @@ class Pool(AbstractBase):
 
     def update(self, **kwargs):
         super().update(**kwargs)
-        self.compute_pool()
+        if kwargs.get("update_pools", True):
+            self.compute_pool()
 
     def property_match(self, obj, property):
         pool_value = getattr(self, f"{obj.class_type}_{property}")

@@ -163,6 +163,7 @@ class AdministrationController(BaseController):
                             instance_type,
                             migration_import=True,
                             no_fetch=empty_database,
+                            update_pools=False,
                             **instance,
                         )
                         relations[instance_type][instance.name] = relation_dict

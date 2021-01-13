@@ -150,10 +150,7 @@ class InventoryController(BaseController):
         return db.fetch("session", id=session_id).content
 
     def counters(self, property, model):
-        return Counter(
-            value[0]
-            for value in db.session.query(getattr(models[model], property)).all()
-        )
+        return Counter(v for v, in db.session.query(getattr(models[model], property)))
 
     def export_topology(self, **kwargs):
         workbook = Workbook()

@@ -2,6 +2,15 @@
 Release Notes
 =============
 
+Version 4.0.1
+-------------
+
+- Don't update pool during migration import
+- Add scalability migration files
+- Remove "All", "None" and "Unrelated" options in relationship filtering
+- Use join instead of subqueries to improve relationship filtering scalability
+- Add "/form/..." endpoint in rbac files when instantiating custom services
+
 Version 4.0.0
 -------------
 

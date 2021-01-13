@@ -28,7 +28,7 @@ from smtplib import SMTP
 from string import punctuation
 from sqlalchemy import and_, or_
 from sqlalchemy.exc import IntegrityError, InvalidRequestError
-from sqlalchemy.orm import configure_mappers
+from sqlalchemy.orm import aliased, configure_mappers
 from sys import path as sys_path
 from uuid import getnode
 from warnings import warn
@@ -438,7 +438,7 @@ class BaseController:
             relation_ids = [int(id) for id in constraint_dict.get(related_model, [])]
             if not relation_ids:
                 continue
-            related_table = models[relation_properties["model"]]
+            related_table = aliased(models[relation_properties["model"]])
             query = query.join(related_table, getattr(table, related_model)).filter(
                 related_table.id.in_(relation_ids)
             )

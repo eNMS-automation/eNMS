@@ -192,7 +192,6 @@ class Database:
                         deleted = [x for x in hist.deleted[0] if x not in hist.added[0]]
                     else:
                         added, deleted = hist.added, hist.deleted
-                    print(added, deleted)
                     if deleted:
                         change += f"DELETED: {deleted}"
                     if added:

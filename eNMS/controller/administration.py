@@ -171,6 +171,7 @@ class AdministrationController(BaseController):
                         info(f"{str(instance)} could not be imported:\n{format_exc()}")
                         status = "Partial import (see logs)."
             db.session.commit()
+        print("import done")
         for model, instances in relations.items():
             for instance_name, related_models in instances.items():
                 for property, value in related_models.items():
@@ -188,10 +189,12 @@ class AdministrationController(BaseController):
                     except Exception:
                         info("\n".join(format_exc().splitlines()))
                         status = "Partial import (see logs)."
+        print("commit relation")
         db.session.commit()
         for model in ("access", "service"):
             for instance in db.fetch_all(model):
                 instance.update()
+        print("update done")
         if not kwargs.get("skip_pool_update"):
             for pool in db.fetch_all("pool"):
                 pool.compute_pool()

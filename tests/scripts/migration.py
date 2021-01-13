@@ -3,7 +3,7 @@ from ruamel import yaml
 
 
 import_classes = [
-    "device",
+    "link",
 ]
 
 
@@ -16,7 +16,12 @@ def update_property(project, value=None, types=None):
             objects = yaml.load(migration_file)
         result = []
         for obj in objects:
-            result.append({"name": obj["name"]})
+            result.append(
+                {
+                    property: obj[property]
+                    for property in ("name", "source", "destination")
+                }
+            )
         with open(path / f"{instance_type}.yaml", "w") as migration_file:
             yaml.dump(result, migration_file)
 

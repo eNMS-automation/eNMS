@@ -313,7 +313,7 @@ class Database:
             for instance in self.fetch_all(model)
         ]
 
-    def factory(self, _class, commit=False, **kwargs):
+    def factory(self, _class, commit=False, no_fetch=False, **kwargs):
         def transaction(_class, **kwargs):
             characters = set(kwargs.get("name", "") + kwargs.get("scoped_name", ""))
             if set("/\\'" + '"') & characters:
@@ -321,7 +321,7 @@ class Database:
             instance, instance_id = None, kwargs.pop("id", 0)
             if instance_id:
                 instance = self.fetch(_class, id=instance_id, rbac="edit")
-            elif "name" in kwargs:
+            elif "name" in kwargs and not no_fetch:
                 instance = self.fetch(
                     _class, allow_none=True, name=kwargs["name"], rbac="edit"
                 )

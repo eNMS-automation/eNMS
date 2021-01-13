@@ -141,7 +141,8 @@ class AdministrationController(BaseController):
 
     def migration_import(self, folder="migrations", **kwargs):
         status, models = "Import successful.", kwargs["import_export_types"]
-        if kwargs.get("empty_database_before_import", False):
+        empty_database = kwargs.get("empty_database_before_import", False)
+        if empty_database:
             db.delete_all(*models)
         relations = defaultdict(lambda: defaultdict(dict))
         for model in models:
@@ -161,6 +162,7 @@ class AdministrationController(BaseController):
                         instance = db.factory(
                             instance_type,
                             migration_import=True,
+                            no_fetch=empty_database,
                             **instance,
                         )
                         relations[instance_type][instance.name] = relation_dict

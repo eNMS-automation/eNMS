@@ -12,6 +12,5 @@
   pools: []
   scheduling_mode: standard
   service: cluster_monitoring
-  service_id: 3
   start_date: ''
   type: task

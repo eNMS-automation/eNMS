@@ -101,6 +101,7 @@
       "access",
       "id",
       "service_name",
+      "service_id",
       "next_run_time",
       "is_active",
       "time_before_next_run",

@@ -249,7 +249,9 @@ class Database:
         username=None,
         **kwargs,
     ):
-        query = self.query(model, rbac, username=username).filter_by(**kwargs)
+        query, table = self.query(model, rbac, username=username), models[model]
+        constraints = (getattr(table, key) == value for key, value in kwargs.items())
+        query = query.filter(*constraints)
         for index in range(self.retry_fetch_number):
             try:
                 result = query.all() if all_matches else query.first()

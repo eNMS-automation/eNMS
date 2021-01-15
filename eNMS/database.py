@@ -240,6 +240,17 @@ class Database:
                 ),
             )
 
+    def query(self, model, rbac="read", username=None):
+        query = self.session.query(models[model])
+        if rbac and model != "user":
+            if current_user:
+                user = current_user
+            else:
+                user = self.fetch("user", name=username or "admin")
+            if user.is_authenticated and not user.is_admin:
+                query = models[model].rbac_filter(query, rbac, user)
+        return query
+
     def fetch(
         self,
         model,
@@ -270,30 +281,15 @@ class Database:
                 f"with the following characteristics: {kwargs}"
             )
 
-    def query(self, model, rbac="read", username=None):
-        query = self.session.query(models[model])
-        if rbac and model != "user":
-            if current_user:
-                user = current_user
-            else:
-                user = self.fetch("user", name=username or "admin")
-            if user.is_authenticated and not user.is_admin:
-                query = models[model].rbac_filter(query, rbac, user)
-        return query
+    def delete(self, model, **kwargs):
+        instance = self.fetch(model, rbac="edit", **kwargs)
+        return self.delete_instance(instance)
 
     def fetch_all(self, model, **kwargs):
         return self.fetch(model, allow_none=True, all_matches=True, **kwargs)
 
     def objectify(self, model, object_list):
         return [self.fetch(model, id=object_id) for object_id in object_list]
-
-    def delete(self, model, allow_none=False, **kwargs):
-        instance = self.query(model, rbac="edit").filter_by(**kwargs).first()
-        if not instance:
-            if allow_none:
-                return
-            raise self.rbac_error
-        return self.delete_instance(instance)
 
     def delete_instance(self, instance):
         try:

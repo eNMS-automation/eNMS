@@ -32,13 +32,6 @@ class ObjectForm(BaseForm):
     form_type = HiddenField(default="object")
     id = HiddenField()
     name = StringField("Name", [InputRequired()])
-    default_access = SelectField(
-        choices=(
-            ("creator", "Creator only"),
-            ("public", "Public (all users)"),
-            ("admin", "Admin Users only"),
-        )
-    )
     access_groups = StringField("Groups")
     description = StringField("Description")
     subtype = StringField("Subtype")
@@ -98,13 +91,7 @@ class PoolForm(BaseForm):
     form_type = HiddenField(default="pool")
     id = HiddenField()
     name = StringField("Name", [InputRequired()])
-    default_access = SelectField(
-        choices=(
-            ("creator", "Creator only"),
-            ("public", "Public (all users)"),
-            ("admin", "Admin Users only"),
-        )
-    )
+    admin_only = BooleanField("Pool visible to admin users only")
     access_groups = StringField("Groups")
     description = StringField("Description")
     operator = SelectField(

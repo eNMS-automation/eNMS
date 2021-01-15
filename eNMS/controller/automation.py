@@ -491,7 +491,7 @@ class AutomationController(BaseController):
         for id, position in kwargs.items():
             new_position = [position["x"], position["y"]]
             if "-" not in id:
-                service = db.fetch("service", id=id, rbac="edit")
+                service = db.fetch("service", id=id, rbac=None)
                 old_position = service.positions.get(workflow.name)
                 service.positions[workflow.name] = new_position
             elif id in workflow.labels:

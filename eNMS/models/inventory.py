@@ -398,16 +398,7 @@ class Pool(AbstractBase):
 
     @classmethod
     def rbac_filter(cls, query, mode, user):
-        pool_alias = aliased(models["pool"])
-        return (
-            query.join(cls.access)
-            .join(pool_alias, models["access"].user_pools)
-            .join(models["user"], pool_alias.users)
-            .filter(cls.admin_only == False)
-            .filter(models["access"].access_type.contains(mode))
-            .filter(models["user"].name == user.name)
-            .distinct()
-        )
+        return query.filter(cls.admin_only == False)
 
 
 class Session(AbstractBase):

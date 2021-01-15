@@ -1,5 +1,5 @@
 from pathlib import Path
-from random import choice, randrange, uniform
+from random import choice, randrange
 from ruamel import yaml
 
 service_type = [
@@ -37,7 +37,7 @@ def generate_migration_file(project):
         ]
     )
 
-    with open(path / f"service.yaml", "w") as migration_file:
+    with open(path / "service.yaml", "w") as migration_file:
         yaml.dump(services, migration_file)
 
 

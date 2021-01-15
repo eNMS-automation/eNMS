@@ -1,6 +1,5 @@
 from base64 import b64decode, b64encode
 from click import get_current_context
-from collections import Counter
 from cryptography.fernet import Fernet
 from datetime import datetime
 from difflib import unified_diff
@@ -26,7 +25,7 @@ from requests.adapters import HTTPAdapter
 from requests.packages.urllib3.util.retry import Retry
 from smtplib import SMTP
 from string import punctuation
-from sqlalchemy import and_, or_
+from sqlalchemy import and_
 from sqlalchemy.exc import IntegrityError, InvalidRequestError
 from sqlalchemy.orm import aliased, configure_mappers
 from sys import path as sys_path

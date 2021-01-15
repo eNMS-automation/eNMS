@@ -5,6 +5,7 @@ from sqlalchemy import and_, Boolean, event, ForeignKey, Integer, or_
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.orm import aliased, backref, relationship
 from sqlalchemy.schema import UniqueConstraint
+from sqlalchemy.sql.expression import false
 
 from eNMS import app
 from eNMS.models import models
@@ -398,7 +399,7 @@ class Pool(AbstractBase):
 
     @classmethod
     def rbac_filter(cls, query, mode, user):
-        return query.filter(cls.admin_only == False)
+        return query.filter(cls.admin_only == false())
 
 
 class Session(AbstractBase):

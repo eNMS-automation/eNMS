@@ -42,8 +42,9 @@ class Task(AbstractBase):
 
     def update(self, **kwargs):
         super().update(**kwargs)
-        db.session.commit()
-        self.schedule(mode="schedule" if self.is_active else "pause")
+        if not kwargs.get("import_mechanism", False):
+            db.session.commit()
+            self.schedule(mode="schedule" if self.is_active else "pause")
 
     def delete(self):
         post(f"{app.scheduler_address}/delete_job/{self.id}")

@@ -353,7 +353,7 @@ class Pool(AbstractBase):
 
     def update(self, **kwargs):
         super().update(**kwargs)
-        if kwargs.get("update_pools", True):
+        if not kwargs.get("import_mechanism", False):
             self.compute_pool()
 
     def property_match(self, obj, property):

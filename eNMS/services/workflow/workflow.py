@@ -37,8 +37,8 @@ class Workflow(Service):
     def __init__(self, **kwargs):
         migration_import = kwargs.pop("migration_import", False)
         if not migration_import:
-            start = db.fetch("service", scoped_name="Start")
-            end = db.fetch("service", scoped_name="End")
+            start = db.fetch("service", scoped_name="Start", rbac=None)
+            end = db.fetch("service", scoped_name="End", rbac=None)
             self.services.extend([start, end])
         super().__init__(**kwargs)
         if not migration_import and self.name not in end.positions:

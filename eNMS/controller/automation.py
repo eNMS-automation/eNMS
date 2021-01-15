@@ -59,8 +59,10 @@ class AutomationController(BaseController):
 
     def add_edge(self, workflow_id, subtype, source, destination):
         now = self.get_time()
+        workflow = db.fetch("workflow", id=workflow_id, rbac="edit")
         workflow_edge = self.update(
             "workflow_edge",
+            rbac=None,
             **{
                 "name": now,
                 "workflow": workflow_id,
@@ -69,10 +71,8 @@ class AutomationController(BaseController):
                 "destination": destination,
             },
         )
-        if "alert" in workflow_edge:
-            return workflow_edge
         db.session.commit()
-        db.fetch("workflow", id=workflow_id).last_modified = now
+        workflow.last_modified = now
         return {"edge": workflow_edge, "update_time": now}
 
     def calendar_init(self, type):

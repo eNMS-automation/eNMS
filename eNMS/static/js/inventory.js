@@ -26,28 +26,30 @@ const ansiEscapeRegex = new RegExp(
   "g"
 );
 
-function drawDiagrams(diagram, result) {
+let diagrams = {};
+
+function drawDiagrams(type, objects, property) {
+  let data = [];
+  let legend = [];
+  for (let [key, value] of Object.entries(objects)) {
+    key = key || "Empty string";
+    data.push({
+      value: value,
+      name: key,
+    });
+    legend.push(key);
+  }
+  const result = { data: data, legend: legend };
+  if (Object.keys(result.data).length > 100) {
+    return notify(`Too much data to display for ${type}s "${property}".`, "error", 5);
+  }
   let options = { ...settings.dashboard, ...theme.dashboard };
   options.series[0].data = result.data;
   Object.assign(options.legend, {
     data: result.legend,
     show: result.legend.length < 10,
   });
-  diagram.setOption(options);
-}
-
-function parseData(data) {
-  let result = [];
-  let legend = [];
-  for (let [key, value] of Object.entries(data)) {
-    key = key || "Empty string";
-    result.push({
-      value: value,
-      name: key,
-    });
-    legend.push(key);
-  }
-  return { data: result, legend: legend };
+  diagrams[type].setOption(options);
 }
 
 export function showConnectionPanel(device) {
@@ -71,7 +73,6 @@ export function showConnectionPanel(device) {
 }
 
 export function initDashboard() {
-  const diagrams = {};
   const defaultProperties = {
     device: "model",
     link: "model",
@@ -88,8 +89,8 @@ export function initDashboard() {
       }
       for (const [type, objects] of Object.entries(result.properties)) {
         const diagram = echarts.init(document.getElementById(type));
-        drawDiagrams(diagram, parseData(objects));
         diagrams[type] = diagram;
+        drawDiagrams(type, objects, defaultProperties[type]);
       }
     },
   });
@@ -98,10 +99,11 @@ export function initDashboard() {
     $(`#${type}-properties`)
       .selectpicker()
       .on("change", function () {
+        const property = this.value;
         call({
-          url: `/counters/${this.value}/${type}`,
+          url: `/counters/${property}/${type}`,
           callback: function (objects) {
-            drawDiagrams(diagrams[type], parseData(objects));
+            drawDiagrams(type, objects, property);
           },
         });
       });

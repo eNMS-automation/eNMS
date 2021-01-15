@@ -36,16 +36,16 @@ class Object(AbstractBase):
 
     @classmethod
     def rbac_filter(cls, query, mode, user):
-        query = query.filter(cls.default_access != "admin")
         pool_alias = aliased(models["pool"])
-        return query.filter(cls.default_access == "public").union(
+        return (
             query.join(cls.pools)
             .join(models["access"], models["pool"].access)
             .join(pool_alias, models["access"].user_pools)
             .join(models["user"], pool_alias.users)
+            .filter(cls.default_access != "admin")
             .filter(models["access"].access_type.contains(mode))
-            .filter(models["user"].name == user.name),
-            query.filter(cls.creator == user.name),
+            .filter(models["user"].name == user.name)
+            .distinct()
         )
 
 
@@ -400,15 +400,15 @@ class Pool(AbstractBase):
 
     @classmethod
     def rbac_filter(cls, query, mode, user):
-        query = query.filter(cls.default_access != "admin")
         pool_alias = aliased(models["pool"])
-        return query.filter(cls.default_access == "public").union(
+        return (
             query.join(cls.access)
             .join(pool_alias, models["access"].user_pools)
             .join(models["user"], pool_alias.users)
+            .filter(cls.default_access != "admin")
             .filter(models["access"].access_type.contains(mode))
-            .filter(models["user"].name == user.name),
-            query.filter(cls.creator == user.name),
+            .filter(models["user"].name == user.name)
+            .distinct()
         )
 
 

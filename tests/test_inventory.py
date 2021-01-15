@@ -102,7 +102,7 @@ def test_link_deletion(user_client):
 pool1 = {
     "form_type": "pool",
     "name": "pool1",
-    "default_access": "public",
+    "admin_only": False,
     "operator": "all",
     "device_location": "france|spain",
     "device_location_match": "regex",
@@ -113,7 +113,7 @@ pool1 = {
 pool2 = {
     "form_type": "pool",
     "name": "pool2",
-    "default_access": "public",
+    "admin_only": False,
     "operator": "all",
     "device_location": "france",
     "link_name": "l.*k\\S3",

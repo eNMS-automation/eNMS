@@ -223,12 +223,6 @@
         "visible": false
       },
       {
-        "data": "default_access",
-        "title": "Default Access",
-        "search": "text",
-        "visible": false
-      },
-      {
         "data": "property1",
         "title": "Property 1",
         "search": "text",
@@ -427,12 +421,6 @@
         "orderable": false
       },
       {
-        "data": "default_access",
-        "title": "Default Access",
-        "search": "text",
-        "visible": false
-      },
-      {
         "data": "property1",
         "title": "Property 1",
         "search": "text",
@@ -485,9 +473,9 @@
         "width": "100px"
       },
       {
-        "data": "default_access",
-        "title": "Default Access",
-        "search": "text",
+        "data": "admin_only",
+        "title": "Admin Only",
+        "search": "bool",
         "visible": false
       },
       {

@@ -10,7 +10,7 @@ from uuid import uuid4
 from warnings import warn
 
 try:
-    from scrapli.factory import CORE_PLATFORM_MAP
+    from scrapli.factory import SYNC_CORE_PLATFORM_MAP
 except ImportError as exc:
     CORE_PLATFORM_MAP = {"cisco_iosxe": "cisco_iosxe"}
     warn(f"Couldn't import scrapli module ({exc})")
@@ -47,7 +47,7 @@ class AutomationController(BaseController):
         ("get_ipv6_neighbors_table", "IPv6"),
         ("is_alive", "Is alive"),
     )
-    SCRAPLI_DRIVERS = CORE_PLATFORM_MAP
+    SCRAPLI_DRIVERS = SYNC_CORE_PLATFORM_MAP
 
     connections_cache = {
         library: defaultdict(dict) for library in ("netmiko", "napalm", "scrapli")

@@ -47,12 +47,6 @@ class User(AbstractBase, UserMixin):
     pools = relationship("Pool", secondary=db.pool_user_table, back_populates="users")
     is_admin = db.Column(Boolean, default=False)
 
-    @classmethod
-    def configure_events(cls):
-        @event.listens_for(cls, "after_update")
-        def before_update(_, __, target):
-            db.update_user_rbac.add(target.id)
-
     def get_id(self):
         return self.name
 
@@ -64,11 +58,13 @@ class User(AbstractBase, UserMixin):
         ):
             kwargs["password"] = argon2.hash(kwargs["password"])
         super().update(**kwargs)
-        self.update_rbac()
+        if not kwargs.get("import_mechanism", False):
+            self.update_rbac()
 
     def update_rbac(self):
         if self.is_admin:
             return
+        db.session.commit()
         user_access = (
             db.session.query(models["access"])
             .join(models["pool"], models["access"].user_pools)
@@ -107,7 +103,8 @@ class Access(AbstractBase):
     def update(self, **kwargs):
         old_users = self.get_users()
         super().update(**kwargs)
-        db.update_user_rbac |= {user.id for user in old_users | self.get_users()}
+        for user in old_users | self.get_users():
+            user.update_rbac()
 
 
 class Credential(AbstractBase):

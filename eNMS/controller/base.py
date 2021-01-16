@@ -264,8 +264,6 @@ class BaseController:
                 if not load_examples and "examples" in str(file):
                     continue
                 info(f"Loading service: {file}")
-                if file.stem != "workflow":
-                    self.rbac["get_requests"].append(f"/form/{file.stem}_service")
                 spec = spec_from_file_location(file.stem, str(file))
                 try:
                     spec.loader.exec_module(module_from_spec(spec))

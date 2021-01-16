@@ -145,6 +145,11 @@ class Service(AbstractBase):
         if "name" not in kwargs:
             self.set_name()
 
+    @classmethod
+    def database_init(cls):
+        if cls.__tablename__ != "service" and "service" in cls.__tablename__:
+            app.rbac["get_requests"].append(f"/form/{cls.__tablename__}")
+
     def get_originals(self, workflow):
         if workflow.workflows:
             return set().union(*(self.get_originals(w) for w in workflow.workflows))

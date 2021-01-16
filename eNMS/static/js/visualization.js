@@ -198,6 +198,7 @@ function createNode2d(node) {
 }
 
 function createLink(link) {
+  if (!link.destination_id || !link.source_id) return;
   linksProperties[link.id] = link;
   (dimension == "2D" ? createLink2d : createLink3d)(link);
 }

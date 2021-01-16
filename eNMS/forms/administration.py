@@ -66,7 +66,7 @@ class ServerForm(BaseForm):
     name = StringField("Name", [InputRequired()])
     description = StringField(widget=TextArea(), render_kw={"rows": 6})
     ip_address = StringField("IP address")
-    weight = IntegerField("Weigth")
+    weight = IntegerField("Weigth", default=1)
 
 
 class CredentialForm(BaseForm):

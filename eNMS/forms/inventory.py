@@ -81,8 +81,8 @@ class DeviceDataForm(BaseForm):
 class LinkForm(ObjectForm):
     action = "eNMS.base.processData"
     form_type = HiddenField(default="link")
-    source = InstanceField("Source", [InputRequired()], model="device")
-    destination = InstanceField("Destination", [InputRequired()], model="device")
+    source = InstanceField("Source", model="device")
+    destination = InstanceField("Destination", model="device")
     color = StringField("Color")
 
 

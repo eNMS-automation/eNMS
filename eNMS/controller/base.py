@@ -512,6 +512,7 @@ class BaseController:
         if target.type == "pool" and not target.manually_defined:
             return {"alert": "Removing an object from a dynamic pool is an allowed."}
         getattr(target, kwargs["relation"]["relation"]["to"]).remove(instance)
+        self.update_rbac(instance)
 
     def add_instances_in_bulk(self, **kwargs):
         target = db.fetch(kwargs["relation_type"], id=kwargs["relation_id"])
@@ -529,6 +530,7 @@ class BaseController:
         for instance in instances:
             getattr(target, property).append(instance)
         target.last_modified = self.get_time()
+        self.update_rbac(*instances)
         return {"number": len(instances), "target": target.base_properties}
 
     def bulk_removal(
@@ -547,7 +549,14 @@ class BaseController:
         instances = self.filtering(table, bulk="object", form=kwargs)
         for instance in instances:
             getattr(target, target_property).remove(instance)
+        self.update_rbac(*instances)
         return len(instances)
+
+    def update_rbac(self, *instances):
+        for instance in instances:
+            if instance.type != "user":
+                continue
+            instance.update_rbac()
 
     def send_email(
         self,

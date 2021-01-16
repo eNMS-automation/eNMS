@@ -352,9 +352,12 @@ class Pool(AbstractBase):
             setattr(cls, f"{model}_number", db.Column(Integer, default=0))
 
     def update(self, **kwargs):
+        old_users = set(self.users)
         super().update(**kwargs)
         if not kwargs.get("import_mechanism", False):
             self.compute_pool()
+            for user in set(self.users) | old_users:
+                user.update_rbac()
 
     def property_match(self, obj, property):
         pool_value = getattr(self, f"{obj.class_type}_{property}")

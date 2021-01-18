@@ -20,6 +20,7 @@ from eNMS.forms.fields import (
 class ServiceForm(BaseForm):
     template = "service"
     form_type = HiddenField(default="service")
+    get_request_allowed = False
     id = HiddenField()
     name = StringField("Name")
     type = StringField("Service Type")
@@ -196,6 +197,7 @@ class ServiceForm(BaseForm):
 
 class ConnectionForm(ServiceForm):
     form_type = HiddenField(default="connection")
+    get_request_allowed = False
     abstract_service = True
     credentials = SelectField(
         "Credentials",

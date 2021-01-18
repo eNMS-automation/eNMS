@@ -97,6 +97,8 @@ class MetaForm(FormMeta):
             if getattr(base, "abstract_service", False):
                 form.service_fields.extend(form_properties[base_form_type])
             form_properties[form_type].update(form_properties[base_form_type])
+        if getattr(form, "get_request_allowed", True):
+            app.rbac["get_requests"].append(f"/form/{form_type}")
         return form
 
 

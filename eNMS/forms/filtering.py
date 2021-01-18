@@ -14,6 +14,8 @@ from eNMS.models import models, relationships
 
 def filtering_form_generator():
     for form_type in models:
+        if form_type not in ("device", "link", "pool", "run", "service", "task", "user"):
+            continue
         properties, relations = app.properties["filtering"].get(form_type, []), {}
         for model, relation in relationships[form_type].items():
             if model in ("edges", "results"):

@@ -12,7 +12,7 @@ from warnings import warn
 try:
     from scrapli.factory import SYNC_CORE_PLATFORM_MAP
 except ImportError as exc:
-    CORE_PLATFORM_MAP = {"cisco_iosxe": "cisco_iosxe"}
+    SYNC_CORE_PLATFORM_MAP = {"cisco_iosxe": "cisco_iosxe"}
     warn(f"Couldn't import scrapli module ({exc})")
 
 from eNMS.controller.base import BaseController

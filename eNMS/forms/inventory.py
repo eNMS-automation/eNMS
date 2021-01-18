@@ -30,6 +30,7 @@ class DeviceConnectionForm(BaseForm):
 class ObjectForm(BaseForm):
     action = "eNMS.base.processData"
     form_type = HiddenField(default="object")
+    get_request_allowed = False
     id = HiddenField()
     name = StringField("Name", [InputRequired()])
     access_groups = StringField("Groups")

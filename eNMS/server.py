@@ -72,6 +72,7 @@ class Server(Flask):
                     not current_user.is_admin
                     and request.method == "GET"
                     and request.path not in current_user.get_requests
+                    and not request.path.startswith("/help/")
                 ):
                     return render_template("error.html", error=403), 403
                 return function(*args, **kwargs)

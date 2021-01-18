@@ -1,6 +1,6 @@
 - access_groups: ''
+  admin_only: false
   creator: ''
-  default_access: creator
   description: All objects
   device_access_groups: ''
   device_access_groups_invert: false
@@ -167,8 +167,8 @@
   user_name_match: regex
   users: [admin, readonly, chicago, sf, ny, nadmin, ui, demo]
 - access_groups: ''
+  admin_only: false
   creator: ''
-  default_access: creator
   description: All devices
   device_access_groups: ''
   device_access_groups_match: inclusion
@@ -316,8 +316,8 @@
   user_name_match: inclusion
   users: []
 - access_groups: ''
+  admin_only: false
   creator: ''
-  default_access: creator
   description: All links
   device_access_groups: ''
   device_access_groups_match: inclusion
@@ -473,8 +473,8 @@
   user_name_match: inclusion
   users: []
 - access_groups: ''
+  admin_only: false
   creator: ''
-  default_access: creator
   description: Datacenter San Francisco
   device_access_groups: ''
   device_access_groups_match: inclusion
@@ -596,8 +596,8 @@
   user_name_match: inclusion
   users: []
 - access_groups: ''
+  admin_only: false
   creator: ''
-  default_access: creator
   description: Datacenter New York
   device_access_groups: ''
   device_access_groups_match: inclusion
@@ -716,8 +716,8 @@
   user_name_match: inclusion
   users: []
 - access_groups: ''
+  admin_only: false
   creator: ''
-  default_access: creator
   description: Datacenter Chicago
   device_access_groups: ''
   device_access_groups_match: inclusion
@@ -835,8 +835,8 @@
   user_name_match: inclusion
   users: []
 - access_groups: ''
+  admin_only: false
   creator: ''
-  default_access: creator
   description: ''
   device_access_groups: ''
   device_access_groups_match: inclusion
@@ -923,8 +923,8 @@
   service_operating_system_match: inclusion
   service_vendor: ''
   service_vendor_match: inclusion
-  target_services: ['[Regression Workflow: Operational Data Backup (admin)] Retrieve
-      Operational Data', 'Regression Workflow: Scalability Test (large workflow)']
+  target_services: ['Regression Workflow: Scalability Test (large workflow)', '[Regression
+      Workflow: Operational Data Backup (admin)] Retrieve Operational Data']
   tasks: []
   type: pool
   user_description: ''
@@ -937,8 +937,8 @@
   user_name_match: inclusion
   users: []
 - access_groups: ''
+  admin_only: false
   creator: ''
-  default_access: creator
   description: ''
   device_access_groups: ''
   device_access_groups_match: inclusion
@@ -1038,8 +1038,8 @@
   user_name_match: inclusion
   users: []
 - access_groups: ''
+  admin_only: false
   creator: ''
-  default_access: public
   description: ''
   device_access_groups: ''
   device_access_groups_match: inclusion
@@ -1179,8 +1179,8 @@
   user_name_match: inclusion
   users: []
 - access_groups: ''
+  admin_only: false
   creator: ''
-  default_access: admin
   description: ''
   device_access_groups: ''
   device_access_groups_match: inclusion
@@ -1320,8 +1320,8 @@
   user_name_match: inclusion
   users: [nadmin]
 - access_groups: ''
+  admin_only: false
   creator: ''
-  default_access: creator
   description: ''
   device_access_groups: ''
   device_access_groups_match: inclusion
@@ -1421,8 +1421,8 @@
   user_name_match: inclusion
   users: [ny]
 - access_groups: ''
+  admin_only: false
   creator: ''
-  default_access: creator
   description: ''
   device_access_groups: ''
   device_access_groups_invert: false
@@ -1565,8 +1565,8 @@
   user_name_match: inclusion
   users: [readonly, demo]
 - access_groups: ''
+  admin_only: false
   creator: admin
-  default_access: creator
   description: ''
   device_access_groups: ''
   device_access_groups_match: inclusion
@@ -1674,8 +1674,8 @@
   user_name_match: inclusion
   users: []
 - access_groups: ''
+  admin_only: false
   creator: admin
-  default_access: creator
   description: ''
   device_access_groups: ''
   device_access_groups_match: inclusion
@@ -1815,8 +1815,8 @@
   user_name_match: regex
   users: [admin, readonly, chicago, sf, ny, nadmin, ui, demo]
 - access_groups: ''
+  admin_only: false
   creator: admin
-  default_access: creator
   description: ''
   device_access_groups: ''
   device_access_groups_invert: false
@@ -1959,8 +1959,8 @@
   user_name_match: regex
   users: [ui, sf, ny, chicago]
 - access_groups: ''
+  admin_only: false
   creator: admin
-  default_access: admin
   description: ''
   device_access_groups: ''
   device_access_groups_invert: false
@@ -2103,8 +2103,8 @@
   user_name_match: inclusion
   users: []
 - access_groups: admin
+  admin_only: false
   creator: admin
-  default_access: creator
   description: Used for testing credentials
   device_access_groups: ''
   device_access_groups_invert: false
@@ -2247,8 +2247,8 @@
   user_name_match: inclusion
   users: []
 - access_groups: admin
+  admin_only: false
   creator: admin
-  default_access: creator
   description: "Used for testing credentials\t"
   device_access_groups: ''
   device_access_groups_invert: false

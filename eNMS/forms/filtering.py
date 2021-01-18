@@ -9,7 +9,7 @@ from eNMS.forms.fields import (
     SelectField,
     StringField,
 )
-from eNMS.models import models, relationships
+from eNMS.models import relationships
 
 
 def filtering_form_generator():

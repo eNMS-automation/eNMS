@@ -405,7 +405,9 @@ class BaseController:
                 or filter_value == "inclusion"
                 or db.dialect == "sqlite"
             ):
-                constraint = getattr(table, property).contains(value, autoescape=True)
+                constraint = getattr(table, property).contains(
+                    value, autoescape=isinstance(value, str)
+                )
             else:
                 compile(value)
                 regex_operator = "regexp" if db.dialect == "mysql" else "~"

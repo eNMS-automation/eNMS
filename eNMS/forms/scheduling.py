@@ -2,7 +2,6 @@ from wtforms.validators import InputRequired
 
 from eNMS.forms import BaseForm
 from eNMS.forms.fields import (
-    BooleanField,
     DictField,
     HiddenField,
     IntegerField,

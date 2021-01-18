@@ -1,6 +1,5 @@
 from flask_login import current_user
 from functools import wraps
-from re import search
 from requests import get, post
 from requests.exceptions import ConnectionError, MissingSchema, ReadTimeout
 from sqlalchemy import Boolean, case, ForeignKey, Integer

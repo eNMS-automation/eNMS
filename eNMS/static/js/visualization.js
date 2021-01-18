@@ -2,6 +2,8 @@
 global
 action: false
 Cesium: false
+CSS2DObject: false
+CSS2DRenderer: false
 defaultPools: false
 ForceGraph3D: false
 L: false
@@ -9,6 +11,7 @@ page: false
 SpriteText: false
 theme: false
 THREE: false
+TransformControls: false
 visualization: false
 */
 
@@ -196,7 +199,8 @@ function switchMode(mode) {
 }
 
 function drawNode(node) {
-  let geometry, material;
+  let geometry;
+  let material;
   if (node.type == "plan") {
     geometry = new THREE.BoxGeometry(1000, 1000, 8);
     material = new THREE.MeshBasicMaterial({ map: texture });

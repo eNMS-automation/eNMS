@@ -6,7 +6,6 @@ from logging import info
 from os import getenv
 from sqlalchemy import and_
 from subprocess import Popen
-from threading import Thread
 from uuid import uuid4
 from werkzeug.utils import secure_filename
 from xlrd import open_workbook

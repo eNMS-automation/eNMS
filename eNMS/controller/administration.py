@@ -141,7 +141,8 @@ class AdministrationController(BaseController):
 
     def migration_import(self, folder="migrations", **kwargs):
         status, models = "Import successful.", kwargs["import_export_types"]
-        if kwargs.get("empty_database_before_import", False):
+        empty_database = kwargs.get("empty_database_before_import", False)
+        if empty_database:
             db.delete_all(*models)
         relations = defaultdict(lambda: defaultdict(dict))
         for model in models:
@@ -161,6 +162,9 @@ class AdministrationController(BaseController):
                         instance = db.factory(
                             instance_type,
                             migration_import=True,
+                            no_fetch=empty_database,
+                            update_pools=False,
+                            import_mechanism=True,
                             **instance,
                         )
                         relations[instance_type][instance.name] = relation_dict
@@ -175,11 +179,13 @@ class AdministrationController(BaseController):
                         continue
                     relation = relationships[model][property]
                     if relation["list"]:
-                        value = [
-                            db.fetch(relation["model"], name=name) for name in value
-                        ]
+                        related_instances = (
+                            db.fetch(relation["model"], name=name, allow_none=True)
+                            for name in value
+                        )
+                        value = list(filter(None, related_instances))
                     else:
-                        value = db.fetch(relation["model"], name=value)
+                        value = db.fetch(relation["model"], name=value, allow_none=True)
                     try:
                         setattr(db.fetch(model, name=instance_name), property, value)
                     except Exception:

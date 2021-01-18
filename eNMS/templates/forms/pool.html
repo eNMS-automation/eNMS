@@ -12,11 +12,12 @@
         {{ form.name(id="pool-name", class="form-control required add-id",
         placeholder="Name") }}
       </div>
-      <label>Default Access</label>
-      <div class="form-group">
-        {{ form.default_access(id="pool-default_access", class="form-control required
-        add-id") }}
-      </div>
+      <fieldset>
+        <div class="item">
+          {{ form.admin_only(id="pool-admin_only", class="add-id") }}
+          <label>Admin only (pool is only visible to admin users)</label>
+        </div>
+      </fieldset>
       <label>Groups</label>
       <div class="form-group">
         {{ form.access_groups(id="pool-access_groups", class="form-control required

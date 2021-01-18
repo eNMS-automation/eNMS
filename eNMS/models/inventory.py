@@ -5,6 +5,7 @@ from sqlalchemy import and_, Boolean, event, Float, ForeignKey, Integer, or_
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.orm import aliased, backref, relationship
 from sqlalchemy.schema import UniqueConstraint
+from sqlalchemy.sql.expression import false
 
 from eNMS import app
 from eNMS.models import models
@@ -21,7 +22,6 @@ class Object(AbstractBase):
     id = db.Column(Integer, primary_key=True)
     creator = db.Column(db.SmallString)
     access_groups = db.Column(db.LargeString)
-    default_access = db.Column(db.SmallString)
     last_modified = db.Column(db.TinyString, info={"log_change": False})
     subtype = db.Column(db.SmallString)
     description = db.Column(db.LargeString)
@@ -36,16 +36,15 @@ class Object(AbstractBase):
 
     @classmethod
     def rbac_filter(cls, query, mode, user):
-        query = query.filter(cls.default_access != "admin")
         pool_alias = aliased(models["pool"])
-        return query.filter(cls.default_access == "public").union(
+        return (
             query.join(cls.pools)
             .join(models["access"], models["pool"].access)
             .join(pool_alias, models["access"].user_pools)
             .join(models["user"], pool_alias.users)
             .filter(models["access"].access_type.contains(mode))
-            .filter(models["user"].name == user.name),
-            query.filter(cls.creator == user.name),
+            .filter(models["user"].name == user.name)
+            .distinct()
         )
 
 
@@ -287,7 +286,7 @@ class Pool(AbstractBase):
     manually_defined = db.Column(Boolean, default=False)
     creator = db.Column(db.SmallString)
     access_groups = db.Column(db.LargeString)
-    default_access = db.Column(db.SmallString)
+    admin_only = db.Column(Boolean, default=False)
     last_modified = db.Column(db.TinyString, info={"log_change": False})
     description = db.Column(db.LargeString)
     operator = db.Column(db.TinyString, default="all")
@@ -353,8 +352,12 @@ class Pool(AbstractBase):
             setattr(cls, f"{model}_number", db.Column(Integer, default=0))
 
     def update(self, **kwargs):
+        old_users = set(self.users)
         super().update(**kwargs)
-        self.compute_pool()
+        if not kwargs.get("import_mechanism", False):
+            self.compute_pool()
+            for user in set(self.users) | old_users:
+                user.update_rbac()
 
     def property_match(self, obj, property):
         pool_value = getattr(self, f"{obj.class_type}_{property}")
@@ -399,16 +402,7 @@ class Pool(AbstractBase):
 
     @classmethod
     def rbac_filter(cls, query, mode, user):
-        query = query.filter(cls.default_access != "admin")
-        pool_alias = aliased(models["pool"])
-        return query.filter(cls.default_access == "public").union(
-            query.join(cls.access)
-            .join(pool_alias, models["access"].user_pools)
-            .join(models["user"], pool_alias.users)
-            .filter(models["access"].access_type.contains(mode))
-            .filter(models["user"].name == user.name),
-            query.filter(cls.creator == user.name),
-        )
+        return query.filter(cls.admin_only == false())
 
 
 class Session(AbstractBase):

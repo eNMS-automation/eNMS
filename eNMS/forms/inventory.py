@@ -32,15 +32,9 @@ class DeviceConnectionForm(BaseForm):
 class ObjectForm(BaseForm):
     action = "eNMS.base.processData"
     form_type = HiddenField(default="object")
+    get_request_allowed = False
     id = HiddenField()
     name = StringField("Name", [InputRequired()])
-    default_access = SelectField(
-        choices=(
-            ("creator", "Creator only"),
-            ("public", "Public (all users)"),
-            ("admin", "Admin Users only"),
-        )
-    )
     access_groups = StringField("Groups")
     description = StringField("Description")
     subtype = StringField("Subtype")
@@ -90,8 +84,8 @@ class DeviceDataForm(BaseForm):
 class LinkForm(ObjectForm):
     action = "eNMS.base.processData"
     form_type = HiddenField(default="link")
-    source = InstanceField("Source", [InputRequired()], model="device")
-    destination = InstanceField("Destination", [InputRequired()], model="device")
+    source = InstanceField("Source", model="device")
+    destination = InstanceField("Destination", model="device")
     color = StringField("Color")
 
 
@@ -100,13 +94,7 @@ class PoolForm(BaseForm):
     form_type = HiddenField(default="pool")
     id = HiddenField()
     name = StringField("Name", [InputRequired()])
-    default_access = SelectField(
-        choices=(
-            ("creator", "Creator only"),
-            ("public", "Public (all users)"),
-            ("admin", "Admin Users only"),
-        )
-    )
+    admin_only = BooleanField("Pool visible to admin users only")
     access_groups = StringField("Groups")
     description = StringField("Description")
     operator = SelectField(

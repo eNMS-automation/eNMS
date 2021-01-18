@@ -153,7 +153,6 @@ class Service(AbstractBase):
     def update(self, **kwargs):
         if "scoped_name" in kwargs and kwargs.get("scoped_name") != self.scoped_name:
             self.set_name(kwargs["scoped_name"])
-        kwargs["update_pools"] = True
         super().update(**kwargs)
         self.originals = list(self.get_originals(self))
 

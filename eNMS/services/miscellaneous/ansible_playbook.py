@@ -26,6 +26,7 @@ class AnsiblePlaybookService(Service):
     arguments = db.Column(db.SmallString)
     options = db.Column(db.Dict)
     pass_device_properties = db.Column(Boolean, default=False)
+    credentials = db.Column(db.SmallString, default="device")
 
     exit_codes = {
         "0": "OK or no hosts matched",
@@ -44,8 +45,9 @@ class AnsiblePlaybookService(Service):
         arguments = run.sub(run.arguments, locals()).split()
         command, extra_args = ["ansible-playbook"], {}
         if run.pass_device_properties:
-            extra_args = device.get_properties()
-            extra_args["password"] = app.get_password(device.password)
+            credentials = run.get_credentials(device)
+            credentials.pop("pkey", None)
+            extra_args = {**device.get_properties(), **credentials}
         if run.options:
             extra_args.update(run.sub(run.options, locals()))
         if extra_args:
@@ -94,6 +96,13 @@ class AnsiblePlaybookForm(ServiceForm):
     pass_device_properties = BooleanField(
         "Pass Device Inventory Properties (to be used "
         "in the playbook as {{name}} or {{ip_address}})"
+    )
+    credentials = SelectField(
+        "Credentials",
+        choices=(
+            ("device", "Device Credentials"),
+            ("user", "User Credentials"),
+        ),
     )
     options = DictField(
         "Options (passed to ansible as -e extra args)",

@@ -59,7 +59,7 @@ class AbstractBase(db.base):
     def base_properties(self):
         return {p: getattr(self, p) for p in ("id", "name", "type")}
 
-    def update(self, **kwargs):
+    def update(self, rbac="edit", **kwargs):
         relation = relationships[self.__tablename__]
         for property, value in kwargs.items():
             if not hasattr(self, property):
@@ -67,9 +67,9 @@ class AbstractBase(db.base):
             property_type = property_types.get(property, None)
             if property in relation:
                 if relation[property]["list"]:
-                    value = db.objectify(relation[property]["model"], value)
+                    value = db.objectify(relation[property]["model"], value, rbac=rbac)
                 elif value:
-                    value = db.fetch(relation[property]["model"], id=value)
+                    value = db.fetch(relation[property]["model"], id=value, rbac=rbac)
             if property_type == "bool":
                 value = value not in (False, "false")
             setattr(self, property, value)

@@ -783,7 +783,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: {'Regression Workflow 9: Operational Data Backup': true}
+  skip: {'Regression Workflow 9: Operational Data Backup': true, 'Regression Workflow: Operational Data Backup (admin)': true}
   skip_query: ''
   skip_value: success
   start_new_connection: false
@@ -3291,6 +3291,7 @@
   conversion_method: json
   creator: admin
   credential_type: any
+  credentials: device
   default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
@@ -3361,6 +3362,7 @@
   conversion_method: text
   creator: admin
   credential_type: any
+  credentials: device
   default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
@@ -3430,6 +3432,7 @@
   conversion_method: json
   creator: admin
   credential_type: any
+  credentials: device
   default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
@@ -4400,7 +4403,7 @@
       content: "This workflow calls netmiko and napalm backup services.\r\nThe devices\
         \ must be defined in the service, not in the workflow."
       positions: [-280, 128]
-  last_modified: '2020-11-17 09:47:33.810577'
+  last_modified: '2021-01-14 03:31:12.994798'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -7050,6 +7053,7 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  credentials: device
   default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
@@ -9315,7 +9319,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: {}
+  skip: {'Regression Workflow: Operational Data Backup (admin)': true}
   skip_query: ''
   skip_value: success
   target_devices: []

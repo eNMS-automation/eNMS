@@ -10,9 +10,9 @@ from uuid import uuid4
 from warnings import warn
 
 try:
-    from scrapli.factory import CORE_PLATFORM_MAP
+    from scrapli.factory import SYNC_CORE_PLATFORM_MAP
 except ImportError as exc:
-    CORE_PLATFORM_MAP = {"cisco_iosxe": "cisco_iosxe"}
+    SYNC_CORE_PLATFORM_MAP = {"cisco_iosxe": "cisco_iosxe"}
     warn(f"Couldn't import scrapli module ({exc})")
 
 from eNMS.controller.base import BaseController
@@ -47,7 +47,7 @@ class AutomationController(BaseController):
         ("get_ipv6_neighbors_table", "IPv6"),
         ("is_alive", "Is alive"),
     )
-    SCRAPLI_DRIVERS = CORE_PLATFORM_MAP
+    SCRAPLI_DRIVERS = SYNC_CORE_PLATFORM_MAP
 
     connections_cache = {
         library: defaultdict(dict) for library in ("netmiko", "napalm", "scrapli")
@@ -59,8 +59,10 @@ class AutomationController(BaseController):
 
     def add_edge(self, workflow_id, subtype, source, destination):
         now = self.get_time()
+        workflow = db.fetch("workflow", id=workflow_id, rbac="edit")
         workflow_edge = self.update(
             "workflow_edge",
+            rbac=None,
             **{
                 "name": now,
                 "workflow": workflow_id,
@@ -69,10 +71,8 @@ class AutomationController(BaseController):
                 "destination": destination,
             },
         )
-        if "alert" in workflow_edge:
-            return workflow_edge
         db.session.commit()
-        db.fetch("workflow", id=workflow_id).last_modified = now
+        workflow.last_modified = now
         return {"edge": workflow_edge, "update_time": now}
 
     def calendar_init(self, type):
@@ -491,7 +491,7 @@ class AutomationController(BaseController):
         for id, position in kwargs.items():
             new_position = [position["x"], position["y"]]
             if "-" not in id:
-                service = db.fetch("service", id=id, rbac="edit")
+                service = db.fetch("service", id=id, rbac=None)
                 old_position = service.positions.get(workflow.name)
                 service.positions[workflow.name] = new_position
             elif id in workflow.labels:

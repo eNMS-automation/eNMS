@@ -9,11 +9,11 @@ from eNMS.forms.fields import (
     SelectField,
     StringField,
 )
-from eNMS.models import models, relationships
+from eNMS.models import relationships
 
 
 def filtering_form_generator():
-    for form_type in models:
+    for form_type in ("device", "link", "pool", "run", "service", "task", "user"):
         properties, relations = app.properties["filtering"].get(form_type, []), {}
         for model, relation in relationships[form_type].items():
             if model in ("edges", "results"):
@@ -26,20 +26,7 @@ def filtering_form_generator():
             "properties": sorted(relations),
             "object_type": form_type,
             "form_type": HiddenField(default=f"{form_type}_relation_filtering"),
-            **{
-                **relations,
-                **{
-                    f"{relation}_filter": SelectField(
-                        choices=(
-                            ("any", "Any"),
-                            ("all", "All"),
-                            ("not_any", "Unrelated"),
-                            ("none", "None"),
-                        )
-                    )
-                    for relation in relations
-                },
-            },
+            **relations,
         }
         type(f"{form_type}RelationshipFilteringForm", (BaseForm,), relation_form)
         form = deepcopy(relation_form)

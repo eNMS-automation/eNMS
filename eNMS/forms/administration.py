@@ -66,7 +66,7 @@ class ServerForm(BaseForm):
     name = StringField("Name", [InputRequired()])
     description = StringField(widget=TextArea(), render_kw={"rows": 6})
     ip_address = StringField("IP address")
-    weight = IntegerField("Weigth")
+    weight = IntegerField("Weigth", default=1)
 
 
 class CredentialForm(BaseForm):
@@ -96,6 +96,7 @@ class CredentialForm(BaseForm):
 
 class LoginForm(BaseForm):
     form_type = HiddenField(default="login")
+    get_request_allowed = False
     authentication_method = SelectField("Authentication Method", choices=())
     name = StringField("Name", [InputRequired()])
     password = PasswordField("Password", [InputRequired()])
@@ -128,6 +129,7 @@ def init_variable_forms(app):
     class RbacForm(BaseForm):
         action = "eNMS.base.processData"
         form_type = HiddenField(default="rbac")
+        get_request_allowed = False
         id = HiddenField()
         name = StringField("Name", [InputRequired()])
         description = StringField(widget=TextArea(), render_kw={"rows": 6})

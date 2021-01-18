@@ -39,13 +39,13 @@
     "user",
     "device",
     "link",
-    "pool",
     "service",
     "workflow_edge",
     "task",
     "access",
     "credential",
-    "view_object"
+    "view_object",
+    "pool"
   ],
   "dont_migrate": {
     "device": [
@@ -102,6 +102,7 @@
       "access",
       "id",
       "service_name",
+      "service_id",
       "next_run_time",
       "is_active",
       "time_before_next_run",

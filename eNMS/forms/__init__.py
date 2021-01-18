@@ -31,6 +31,8 @@ class MetaForm(FormMeta):
             return type.__new__(cls, name, bases, attrs)
         form_type = attrs["form_type"].kwargs["default"]
         form = type.__new__(cls, name, bases, attrs)
+        if form.__dict__.get("get_request_allowed", True):
+            app.rbac["get_requests"].append(f"/form/{form_type}")
         if hasattr(form, "form_init"):
             form.form_init()
         if not hasattr(form, "custom_properties"):

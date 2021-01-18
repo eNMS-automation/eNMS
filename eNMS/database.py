@@ -154,12 +154,6 @@ class Database:
                     "list": relation.uselist,
                 }
 
-        @event.listens_for(self.session, "before_commit")
-        def before_commit(session):
-            for user_id in self.update_user_rbac:
-                self.fetch("user", id=user_id).update_rbac()
-            self.update_user_rbac.clear()
-
     def configure_model_events(self, app):
         @event.listens_for(self.base, "after_insert", propagate=True)
         def log_instance_creation(mapper, connection, target):
@@ -201,6 +195,7 @@ class Database:
                         f"'{hist.deleted[0] if hist.deleted else None}' => "
                         f"'{hist.added[0] if hist.added else None}'"
                     )
+                changelog.append(change)
             if changelog:
                 name, changes = (
                     getattr(target, "name", target.id),
@@ -208,7 +203,6 @@ class Database:
                 )
                 app.log("info", f"UPDATE: {target.type} '{name}': ({changes})")
 
-        self.update_user_rbac = set()
         for model in models.values():
             if "configure_events" in vars(model):
                 model.configure_events()
@@ -239,6 +233,17 @@ class Database:
                 ),
             )
 
+    def query(self, model, rbac="read", username=None):
+        query = self.session.query(models[model])
+        if rbac and model != "user":
+            if current_user:
+                user = current_user
+            else:
+                user = self.fetch("user", name=username or "admin")
+            if user.is_authenticated and not user.is_admin:
+                query = models[model].rbac_filter(query, rbac, user)
+        return query
+
     def fetch(
         self,
         model,
@@ -248,7 +253,9 @@ class Database:
         username=None,
         **kwargs,
     ):
-        query = self.query(model, rbac, username=username).filter_by(**kwargs)
+        query = self.query(model, rbac, username=username).filter(
+            *(getattr(models[model], key) == value for key, value in kwargs.items())
+        )
         for index in range(self.retry_fetch_number):
             try:
                 result = query.all() if all_matches else query.first()
@@ -267,30 +274,15 @@ class Database:
                 f"with the following characteristics: {kwargs}"
             )
 
-    def query(self, model, rbac="read", username=None):
-        query = self.session.query(models[model])
-        if rbac and model != "user":
-            if current_user:
-                user = current_user
-            else:
-                user = self.fetch("user", name=username or "admin")
-            if user.is_authenticated and not user.is_admin:
-                query = models[model].rbac_filter(query, rbac, user)
-        return query
+    def delete(self, model, **kwargs):
+        instance = self.fetch(model, rbac="edit", **kwargs)
+        return self.delete_instance(instance)
 
     def fetch_all(self, model, **kwargs):
         return self.fetch(model, allow_none=True, all_matches=True, **kwargs)
 
-    def objectify(self, model, object_list):
-        return [self.fetch(model, id=object_id) for object_id in object_list]
-
-    def delete(self, model, allow_none=False, **kwargs):
-        instance = self.query(model, rbac="edit").filter_by(**kwargs).first()
-        if not instance:
-            if allow_none:
-                return
-            raise self.rbac_error
-        return self.delete_instance(instance)
+    def objectify(self, model, object_list, **kwargs):
+        return [self.fetch(model, id=object_id, **kwargs) for object_id in object_list]
 
     def delete_instance(self, instance):
         try:
@@ -313,7 +305,7 @@ class Database:
             for instance in self.fetch_all(model)
         ]
 
-    def factory(self, _class, commit=False, **kwargs):
+    def factory(self, _class, commit=False, no_fetch=False, **kwargs):
         def transaction(_class, **kwargs):
             characters = set(kwargs.get("name", "") + kwargs.get("scoped_name", ""))
             if set("/\\'" + '"') & characters:
@@ -321,7 +313,7 @@ class Database:
             instance, instance_id = None, kwargs.pop("id", 0)
             if instance_id:
                 instance = self.fetch(_class, id=instance_id, rbac="edit")
-            elif "name" in kwargs:
+            elif "name" in kwargs and not no_fetch:
                 instance = self.fetch(
                     _class, allow_none=True, name=kwargs["name"], rbac="edit"
                 )

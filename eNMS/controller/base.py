@@ -1,6 +1,5 @@
 from base64 import b64decode, b64encode
 from click import get_current_context
-from collections import Counter
 from cryptography.fernet import Fernet
 from datetime import datetime
 from difflib import unified_diff
@@ -26,9 +25,9 @@ from requests.adapters import HTTPAdapter
 from requests.packages.urllib3.util.retry import Retry
 from smtplib import SMTP
 from string import punctuation
-from sqlalchemy import and_, or_
+from sqlalchemy import and_
 from sqlalchemy.exc import IntegrityError, InvalidRequestError
-from sqlalchemy.orm import configure_mappers
+from sqlalchemy.orm import aliased, configure_mappers
 from sys import path as sys_path
 from uuid import getnode
 from warnings import warn
@@ -262,7 +261,7 @@ class BaseController:
                 if not load_examples and "examples" in str(file):
                     continue
                 info(f"Loading service: {file}")
-                spec = spec_from_file_location(str(file).split("/")[-1][:-3], str(file))
+                spec = spec_from_file_location(file.stem, str(file))
                 try:
                     spec.loader.exec_module(module_from_spec(spec))
                 except InvalidRequestError as exc:
@@ -355,10 +354,7 @@ class BaseController:
                 model: db.query(model).count() for model in properties["dashboard"]
             },
             "properties": {
-                model: Counter(
-                    str(getattr(instance, properties["dashboard"][model][0]))
-                    for instance in db.fetch_all(model)
-                )
+                model: self.counters(properties["dashboard"][model][0], model)
                 for model in properties["dashboard"]
             },
         }
@@ -390,37 +386,23 @@ class BaseController:
             value = constraint_dict.get(property)
             if not value:
                 continue
-            filter = constraint_dict.get(f"{property}_filter")
+            filter_value = constraint_dict.get(f"{property}_filter")
             if value in ("bool-true", "bool-false"):
                 constraint = getattr(table, property) == (value == "bool-true")
-            elif filter == "equality":
+            elif filter_value == "equality":
                 constraint = getattr(table, property) == value
-            elif not filter or filter == "inclusion" or db.dialect == "sqlite":
-                constraint = getattr(table, property).contains(value)
+            elif (
+                not filter_value
+                or filter_value == "inclusion"
+                or db.dialect == "sqlite"
+            ):
+                constraint = getattr(table, property).contains(
+                    value, autoescape=isinstance(value, str)
+                )
             else:
                 compile(value)
                 regex_operator = "regexp" if db.dialect == "mysql" else "~"
                 constraint = getattr(table, property).op(regex_operator)(value)
-            constraints.append(constraint)
-        for related_model, relation_properties in relationships[model].items():
-            relation_ids = [int(id) for id in constraint_dict.get(related_model, [])]
-            filter = constraint_dict.get(f"{related_model}_filter")
-            if filter == "none":
-                constraint = ~getattr(table, related_model).any()
-            elif not relation_ids:
-                continue
-            elif relation_properties["list"]:
-                constraint = (and_ if filter == "all" else or_)(
-                    getattr(table, related_model).any(id=relation_id)
-                    for relation_id in relation_ids
-                )
-                if filter == "not_any":
-                    constraint = ~constraint
-            else:
-                constraint = or_(
-                    getattr(table, related_model).has(id=relation_id)
-                    for relation_id in relation_ids
-                )
             constraints.append(constraint)
         return constraints
 
@@ -437,6 +419,19 @@ class BaseController:
             "total_count": results.count(),
         }
 
+    def build_relationship_constraints(self, query, model, **kwargs):
+        table = models[model]
+        constraint_dict = {**kwargs["form"], **kwargs.get("constraints", {})}
+        for related_model, relation_properties in relationships[model].items():
+            relation_ids = [int(id) for id in constraint_dict.get(related_model, [])]
+            if not relation_ids:
+                continue
+            related_table = aliased(models[relation_properties["model"]])
+            query = query.join(related_table, getattr(table, related_model)).filter(
+                related_table.id.in_(relation_ids)
+            )
+        return query
+
     def filtering(self, model, bulk=False, **kwargs):
         table = models[model]
         try:
@@ -444,10 +439,8 @@ class BaseController:
         except regex_error:
             return {"error": "Invalid regular expression as search parameter."}
         constraints.extend(table.filtering_constraints(**kwargs))
-        query = db.session.query(models[model])
+        query = self.build_relationship_constraints(db.query(model), model, **kwargs)
         total_records, query = query.count(), query.filter(and_(*constraints))
-        if not current_user.is_admin:
-            query = table.rbac_filter(query, "read", current_user)
         if bulk:
             instances = query.all()
             return instances if bulk == "object" else [obj.id for obj in instances]
@@ -512,6 +505,7 @@ class BaseController:
         if target.type == "pool" and not target.manually_defined:
             return {"alert": "Removing an object from a dynamic pool is an allowed."}
         getattr(target, kwargs["relation"]["relation"]["to"]).remove(instance)
+        self.update_rbac(instance)
 
     def add_instances_in_bulk(self, **kwargs):
         target = db.fetch(kwargs["relation_type"], id=kwargs["relation_id"])
@@ -529,6 +523,7 @@ class BaseController:
         for instance in instances:
             getattr(target, property).append(instance)
         target.last_modified = self.get_time()
+        self.update_rbac(*instances)
         return {"number": len(instances), "target": target.base_properties}
 
     def bulk_removal(
@@ -547,7 +542,14 @@ class BaseController:
         instances = self.filtering(table, bulk="object", form=kwargs)
         for instance in instances:
             getattr(target, target_property).remove(instance)
+        self.update_rbac(*instances)
         return len(instances)
+
+    def update_rbac(self, *instances):
+        for instance in instances:
+            if instance.type != "user":
+                continue
+            instance.update_rbac()
 
     def send_email(
         self,

@@ -251,7 +251,11 @@ export function openPanel({
   size,
   url,
 }) {
-  if (!user.is_admin && !user.get_requests.includes(url || `/form/${name}`)) {
+  if (
+    !user.is_admin &&
+    !user.get_requests.includes(url || `/form/${name}`) &&
+    !url.startsWith("../help/")
+  ) {
     return notify("Error 403 - Operation not allowed.", "error", 5);
   }
   const panelId = id ? `${name}-${id}` : name;

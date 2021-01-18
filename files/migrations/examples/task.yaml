@@ -12,7 +12,6 @@
   pools: []
   scheduling_mode: standard
   service: 'Regression Workflow: Operational Data Backup (admin)'
-  service_id: 49
   start_date: 09/10/2019 21:17:13
   type: task
 - creator: ''
@@ -29,7 +28,6 @@
   pools: []
   scheduling_mode: standard
   service: cluster_monitoring
-  service_id: 3
   start_date: 01/11/2020 12:05:19
   type: task
 - creator: ''
@@ -46,6 +44,5 @@
   pools: []
   scheduling_mode: standard
   service: 'Regression Workflow: Scrapli'
-  service_id: 111
   start_date: 30/06/2020 09:15:18
   type: task

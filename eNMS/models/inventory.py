@@ -44,7 +44,7 @@ class Object(AbstractBase):
             .join(models["user"], pool_alias.users)
             .filter(models["access"].access_type.contains(mode))
             .filter(models["user"].name == user.name)
-            .distinct()
+            .group_by(cls.id)
         )
 
 

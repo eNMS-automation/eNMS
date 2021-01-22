@@ -29,8 +29,8 @@
     "Visualization": {
       "icon": "map-marker",
       "pages": {
-        "Geographical View": "/visualization/geographical_view",
-        "Logical View": "/visualization/logical_view"
+        "Geographical View": "/geographical_view",
+        "Logical View": "/logical_view"
       }
     },
     "Automation": {
@@ -109,8 +109,8 @@
     "/task_table",
     "/user_table",
     "/view_service_results",
-    "/visualization/geographical_view",
-    "/visualization/logical_view",
+    "/geographical_view",
+    "/logical_view",
     "/workflow_builder"
   ],
   "post_requests": [

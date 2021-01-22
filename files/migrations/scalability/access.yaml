@@ -19,7 +19,7 @@
     /rest/search, /access_table, /changelog_table, /configuration_table, /credential_table,
     /device_table, /event_table, /pool_table, /link_table, /run_table, /server_table,
     /service_table, /session_table, /task_table, /user_table, /view_service_results,
-    /visualization/geographical_view, /visualization/logical_view, /workflow_builder,
+    /geographical_view, /logical_view, /workflow_builder,
     /form/napalm_configuration_service, /form/napalm_rollback_service, /form/netmiko_configuration_service,
     /form/napalm_backup_service, /form/netmiko_backup_service, /form/napalm_getters_service,
     /form/netmiko_prompts_service, /form/netmiko_validation_service, /form/scrapli_service,

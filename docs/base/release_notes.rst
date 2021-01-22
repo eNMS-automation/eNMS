@@ -139,7 +139,7 @@ but we have to make sure it's not worse).
 
 Migration:
 - Update endpoint: view/network and view/site no longer exists, to be replaced with 
-visualization/geographical_view and visualization/logical_view
+geographical_view and logical_view
 - Configure the new visualization.json file, remove visualization settings from settings.json
 - In the service.yaml file, the "devices" and "pools" relationship with services have to be renamed
 "target_devices" and "target_pools". Besides, "update_pools" must be renamed to "update_target_pools".

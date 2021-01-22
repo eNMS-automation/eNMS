@@ -9,7 +9,7 @@
     /rest/search, /access_table, /changelog_table, /configuration_table, /credential_table,
     /device_table, /event_table, /pool_table, /link_table, /run_table, /server_table,
     /service_table, /session_table, /task_table, /user_table, /view_service_results,
-    /visualization/geographical_view, /visualization/logical_view, /workflow_builder,
+    /geographical_view, /logical_view, /workflow_builder,
     /form/netmiko, /form/restart_workflow, /form/file, /form/add_services_to_workflow,
     /form/run_service, /form/workflow_label, /form/workflow_edge, /form/napalm_configuration_service,
     /form/napalm_rollback_service, /form/netmiko_configuration_service, /form/napalm_backup_service,
@@ -103,8 +103,8 @@
     /rest/configuration, /rest/instance, /rest/query, /rest/result, /rest/search,
     /access_table, /changelog_table, /configuration_table, /credential_table, /device_table,
     /event_table, /pool_table, /link_table, /run_table, /server_table, /service_table,
-    /session_table, /task_table, /user_table, /view_service_results, /visualization/geographical_view,
-    /visualization/logical_view, /workflow_builder, /form/panel, /template/form, /template/devices]
+    /session_table, /task_table, /user_table, /view_service_results, /geographical_view,
+    /logical_view, /workflow_builder, /form/panel, /template/form, /template/devices]
   menu: [Home, Administration, Inventory, Visualization, Automation, Scheduling]
   name: Read-Only Profile
   pages: [Access, Credentials, Dashboard, Changelog, Sessions, Users, Servers, Devices,
@@ -143,7 +143,7 @@
     /rest/search, /access_table, /changelog_table, /configuration_table, /credential_table,
     /device_table, /event_table, /pool_table, /link_table, /run_table, /server_table,
     /service_table, /session_table, /task_table, /user_table, /view_service_results,
-    /visualization/geographical_view, /visualization/logical_view, /workflow_builder,
+    /geographical_view, /logical_view, /workflow_builder,
     /form/netmiko, /form/restart_workflow, /form/file, /form/add_services_to_workflow,
     /form/run_service, /form/workflow_label, /form/workflow_edge, /form/napalm_configuration_service,
     /form/napalm_rollback_service, /form/netmiko_configuration_service, /form/napalm_backup_service,

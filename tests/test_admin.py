@@ -42,7 +42,7 @@ def test_urls(user_client):
     test_authentication(user_client)
 
 
-@check_pages("table_user")
+@check_pages("user_table")
 def test_user_management(user_client):
     number_of_users = len(db.fetch_all("user"))
     for user in ("user1", "user2", "user3"):

@@ -25,16 +25,16 @@ function doc(page) {
   let endpoint = {
     administration: "base/installation.html",
     dashboard: "base/features.html",
-    "table/configuration": "advanced/configuration_management.html",
-    "table/device": "inventory/network_creation.html",
-    "table/event": "automation/scheduling.html",
-    "table/link": "inventory/network_creation.html",
-    "table/changelog": "advanced/administration.html",
-    "table/pool": "inventory/pools.html",
-    "table/run": "automation/services.html",
-    "table/service": "automation/services.html",
-    "table/task": "automation/scheduling.html",
-    "table/user": "advanced/administration.html",
+    table_configuration: "advanced/configuration_management.html",
+    table_device: "inventory/network_creation.html",
+    table_event: "automation/scheduling.html",
+    table_link: "inventory/network_creation.html",
+    table_changelog: "advanced/administration.html",
+    table_pool: "inventory/pools.html",
+    table_run: "automation/services.html",
+    table_service: "automation/services.html",
+    table_task: "automation/scheduling.html",
+    table_user: "advanced/administration.html",
     view: "inventory/network_visualization.html",
     workflow_builder: "automation/workflows.html",
   }[page];
@@ -133,7 +133,7 @@ $(document).ready(function () {
   $("#theme").selectpicker();
   initSidebar();
   if (page.includes("table")) {
-    const type = page.split("/")[1];
+    const type = page.split("_")[1];
     new tables[type]();
   } else if (page == "workflow_builder") {
     initWorkflowBuilder();

@@ -4,26 +4,26 @@
       "icon": "home",
       "pages": {
         "Dashboard": "/dashboard",
-        "Changelog": "/table/changelog",
-        "Sessions": "/table/session"
+        "Changelog": "/table_changelog",
+        "Sessions": "/table_session"
       }
     },
     "Administration": {
       "icon": "users",
       "pages": {
-        "Users": "/table/user",
-        "Servers": "/table/server",
-        "Access": "/table/access",
-        "Credentials": "/table/credential"
+        "Users": "/table_user",
+        "Servers": "/table_server",
+        "Access": "/table_access",
+        "Credentials": "/table_credential"
       }
     },
     "Inventory": {
       "icon": "database",
       "pages": {
-        "Devices": "/table/device",
-        "Configurations": "/table/configuration",
-        "Links": "/table/link",
-        "Pools": "/table/pool"
+        "Devices": "/table_device",
+        "Configurations": "/table_configuration",
+        "Links": "/table_link",
+        "Pools": "/table_pool"
       }
     },
     "Visualization": {
@@ -36,16 +36,16 @@
     "Automation": {
       "icon": "sitemap",
       "pages": {
-        "Services": "/table/service",
+        "Services": "/table_service",
         "Workflow Builder": "/workflow_builder",
-        "Results": "/table/run"
+        "Results": "/table_run"
       }
     },
     "Scheduling": {
       "icon": "clock-o",
       "pages": {
-        "Tasks": "/table/task",
-        "Events": "/table/event"
+        "Tasks": "/table_task",
+        "Events": "/table_event"
       }
     }
   },
@@ -94,20 +94,20 @@
     "/rest/query",
     "/rest/result",
     "/rest/search",
-    "/table/access",
-    "/table/changelog",
-    "/table/configuration",
-    "/table/credential",
-    "/table/device",
-    "/table/event",
-    "/table/pool",
-    "/table/link",
-    "/table/run",
-    "/table/server",
-    "/table/service",
-    "/table/session",
-    "/table/task",
-    "/table/user",
+    "/table_access",
+    "/table_changelog",
+    "/table_configuration",
+    "/table_credential",
+    "/table_device",
+    "/table_event",
+    "/table_pool",
+    "/table_link",
+    "/table_run",
+    "/table_server",
+    "/table_service",
+    "/table_session",
+    "/table_task",
+    "/table_user",
     "/view_service_results",
     "/visualization/geographical_view",
     "/visualization/logical_view",

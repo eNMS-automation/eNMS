@@ -442,32 +442,27 @@ class BaseController:
         return query
 
     def filtering(self, model, bulk=False, **kwargs):
-        table = models[model]
+        table, query = models[model], db.query(model)
+        total_records = query.with_entities(table.id).count()
         try:
             constraints = self.build_filtering_constraints(model, **kwargs)
         except regex_error:
             return {"error": "Invalid regular expression as search parameter."}
         constraints.extend(table.filtering_constraints(**kwargs))
-        query = self.build_relationship_constraints(db.query(model), model, **kwargs)
-        total_records, query = query.count(), query.filter(and_(*constraints))
+        query = self.build_relationship_constraints(query, model, **kwargs)
+        query = query.filter(and_(*constraints))
+        filtered_records = query.with_entities(table.id).count()
         if bulk:
             instances = query.all()
             return instances if bulk == "object" else [obj.id for obj in instances]
-        ordering = getattr(
-            getattr(
-                table,
-                kwargs["columns"][int(kwargs["order"][0]["column"])]["data"],
-                None,
-            ),
-            kwargs["order"][0]["dir"],
-            None,
-        )
+        data = kwargs["columns"][int(kwargs["order"][0]["column"])]["data"]
+        ordering = getattr(getattr(table, data, None), kwargs["order"][0]["dir"], None)
         if ordering:
             query = query.order_by(ordering())
         table_result = {
             "draw": int(kwargs["draw"]),
             "recordsTotal": total_records,
-            "recordsFiltered": query.count(),
+            "recordsFiltered": filtered_records,
             "data": [
                 obj.table_properties(**kwargs)
                 for obj in query.limit(int(kwargs["length"]))

@@ -360,7 +360,8 @@ class BaseController:
     def count_models(self):
         return {
             "counters": {
-                model: db.query(model).count() for model in properties["dashboard"]
+                model: db.query(model).with_entities(models[model].id).count()
+                for model in properties["dashboard"]
             },
             "properties": {
                 model: self.counters(properties["dashboard"][model][0], model)

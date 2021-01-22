@@ -174,8 +174,8 @@ class ServiceForm(BaseForm):
         )
         if conversion_validation_mismatch:
             self.conversion_method.errors.append(
-                f"The conversion method is set to '{self.conversion_method.data}'"
-                f" and the validation method to '{self.validation_method.data}' :"
+                f"The conversion method is set to {self.conversion_method.label}"
+                f" and the validation method to {self.validation_method.label} :"
                 " these do not match."
             )
         empty_validation = self.validation_condition.data != "none" and (
@@ -186,7 +186,7 @@ class ServiceForm(BaseForm):
         )
         if empty_validation:
             self.content_match.errors.append(
-                f"The validation method is set to '{self.validation_method.data}'"
+                f"The validation method is set to {self.validation_method.label}"
                 f" and the 'Content Match' value is empty: these do no match."
             )
         too_many_threads_error = (

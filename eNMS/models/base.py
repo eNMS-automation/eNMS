@@ -73,7 +73,7 @@ class AbstractBase(db.base):
             if property_type == "bool":
                 value = value not in (False, "false")
             setattr(self, property, value)
-        if not kwargs.get("update_pools"):
+        if not kwargs.get("update_pools") or not hasattr(self, "class_type"):
             return
         for pool in db.fetch_all("pool", rbac=None):
             if pool.manually_defined or not pool.compute(self.class_type):

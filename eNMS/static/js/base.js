@@ -220,8 +220,10 @@ export function downloadFile(name, content, type) {
 
 export function createTooltips() {
   $("[data-tooltip]").each(function () {
+    const id = `tooltip-${$(this).attr("data-tooltip").replace(/\s/g, "")}`;
     jsPanel.tooltip.create({
-      id: `tooltip-${$(this).attr("data-tooltip").replace(/\s/g, "")}`,
+      id: id,
+      callback: () => setTimeout(() => $(`#${id}`).fadeOut(1000), 2500),
       content: `<p style="margin-right: 10px; margin-left: 10px; color: black">
         <b>${$(this).attr("data-tooltip")}</b></p>`,
       contentSize: "auto",

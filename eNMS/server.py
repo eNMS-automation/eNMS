@@ -247,14 +247,14 @@ class Server(Flask):
             logout_user()
             return redirect(url_for("blueprint.route", page="login"))
 
-        @blueprint.route("/table_<table_type>")
+        @blueprint.route("/<table_type>_table")
         @self.monitor_requests
         def table(table_type):
             return render_template(
-                "table.html", **{"endpoint": f"table_{table_type}", "type": table_type}
+                "table.html", **{"endpoint": f"{table_type}_table", "type": table_type}
             )
 
-        @blueprint.route("/visualization/<view_type>")
+        @blueprint.route("/<view_type>_view")
         @self.monitor_requests
         def view(view_type):
             return render_template(

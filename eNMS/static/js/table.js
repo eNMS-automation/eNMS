@@ -31,7 +31,7 @@ export class Table {
     if (relation) this.relationString = JSON.stringify(relation).replace(/"/g, "'");
     this.columns = tableProperties[this.type];
     this.constraints = constraints;
-    let visibleColumns = localStorage.getItem(`table_${this.type}`);
+    let visibleColumns = localStorage.getItem(`${this.type}_table`);
     if (visibleColumns) visibleColumns = visibleColumns.split(",");
     this.columns.forEach((column) => {
       if (visibleColumns) column.visible = visibleColumns.includes(column.data);
@@ -207,7 +207,7 @@ export class Table {
     }
     this.createfilteringTooltips();
     createTooltips();
-    const visibleColumns = localStorage.getItem(`table_${this.type}`);
+    const visibleColumns = localStorage.getItem(`${this.type}_table`);
     this.columns.forEach((column) => {
       const visible = visibleColumns
         ? visibleColumns.split(",").includes(column.name)
@@ -225,7 +225,7 @@ export class Table {
       });
       self.table.ajax.reload(null, false);
       self.createfilteringTooltips();
-      localStorage.setItem(`table_${self.type}`, $(this).val());
+      localStorage.setItem(`${self.type}_table`, $(this).val());
     });
     self.table.columns.adjust();
   }

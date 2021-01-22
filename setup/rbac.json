@@ -4,26 +4,26 @@
       "icon": "home",
       "pages": {
         "Dashboard": "/dashboard",
-        "Changelog": "/table_changelog",
-        "Sessions": "/table_session"
+        "Changelog": "/changelog_table",
+        "Sessions": "/session_table"
       }
     },
     "Administration": {
       "icon": "users",
       "pages": {
-        "Users": "/table_user",
-        "Servers": "/table_server",
-        "Access": "/table_access",
-        "Credentials": "/table_credential"
+        "Users": "/user_table",
+        "Servers": "/server_table",
+        "Access": "/access_table",
+        "Credentials": "/credential_table"
       }
     },
     "Inventory": {
       "icon": "database",
       "pages": {
-        "Devices": "/table_device",
-        "Configurations": "/table_configuration",
-        "Links": "/table_link",
-        "Pools": "/table_pool"
+        "Devices": "/device_table",
+        "Configurations": "/configuration_table",
+        "Links": "/link_table",
+        "Pools": "/pool_table"
       }
     },
     "Visualization": {
@@ -36,16 +36,16 @@
     "Automation": {
       "icon": "sitemap",
       "pages": {
-        "Services": "/table_service",
+        "Services": "/service_table",
         "Workflow Builder": "/workflow_builder",
-        "Results": "/table_run"
+        "Results": "/run_table"
       }
     },
     "Scheduling": {
       "icon": "clock-o",
       "pages": {
-        "Tasks": "/table_task",
-        "Events": "/table_event"
+        "Tasks": "/task_table",
+        "Events": "/event_table"
       }
     }
   },
@@ -94,20 +94,20 @@
     "/rest/query",
     "/rest/result",
     "/rest/search",
-    "/table_access",
-    "/table_changelog",
-    "/table_configuration",
-    "/table_credential",
-    "/table_device",
-    "/table_event",
-    "/table_pool",
-    "/table_link",
-    "/table_run",
-    "/table_server",
-    "/table_service",
-    "/table_session",
-    "/table_task",
-    "/table_user",
+    "/access_table",
+    "/changelog_table",
+    "/configuration_table",
+    "/credential_table",
+    "/device_table",
+    "/event_table",
+    "/pool_table",
+    "/link_table",
+    "/run_table",
+    "/server_table",
+    "/service_table",
+    "/session_table",
+    "/task_table",
+    "/user_table",
     "/view_service_results",
     "/visualization/geographical_view",
     "/visualization/logical_view",

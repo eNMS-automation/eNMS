@@ -2,6 +2,7 @@
   "menu": {
     "Home": {
       "icon": "home",
+      "rbac": "all",
       "pages": {
         "Dashboard": "/dashboard",
         "Changelog": "/changelog_table",
@@ -10,6 +11,7 @@
     },
     "Administration": {
       "icon": "users",
+      "rbac": "admin",
       "pages": {
         "Users": "/user_table",
         "Servers": "/server_table",
@@ -19,6 +21,7 @@
     },
     "Inventory": {
       "icon": "database",
+      "rbac": "access",
       "pages": {
         "Devices": "/device_table",
         "Configurations": "/configuration_table",
@@ -28,6 +31,7 @@
     },
     "Visualization": {
       "icon": "map-marker",
+      "rbac": "access",
       "pages": {
         "Geographical View": "/geographical_view",
         "Logical View": "/logical_view"
@@ -35,6 +39,7 @@
     },
     "Automation": {
       "icon": "sitemap",
+      "rbac": "access",
       "pages": {
         "Services": "/service_table",
         "Workflow Builder": "/workflow_builder",
@@ -43,6 +48,7 @@
     },
     "Scheduling": {
       "icon": "clock-o",
+      "rbac": "access",
       "pages": {
         "Tasks": "/task_table",
         "Events": "/event_table"
@@ -52,7 +58,7 @@
   "pages": {
     "Access": "admin",
     "Credentials": "admin",
-    "Dashboard": "access",
+    "Dashboard": "all",
     "Changelog": "access",
     "Sessions": "access",
     "Users": "admin",
@@ -78,7 +84,7 @@
     "/rest/instance": "access"
   },
   "get_requests": {
-    "/dashboard": "access",
+    "/dashboard": "all",
     "/download_file": "access",
     "/form/alerts_table": "all",
     "/form/calendar": "all",
@@ -130,8 +136,8 @@
     "/clear_results": "access",
     "/clear_configurations": "access",
     "/compare": "access",
-    "/counters": "access",
-    "/count_models": "access",
+    "/counters": "all",
+    "/count_models": "all",
     "/create_label": "access",
     "/database_deletion": "access",
     "/delete_corrupted_edges": "access",

@@ -128,7 +128,9 @@ class ChangelogForm(BaseForm):
 def init_variable_forms(app):
     def filter_rbac(rbac_key):
         return [
-            (k, k) for k, access in app.rbac[rbac_key].items() if access == "access"
+            (key, key)
+            for key, access in app.rbac[rbac_key].items()
+            if access == "access"
         ]
 
     class RbacForm(BaseForm):
@@ -162,7 +164,14 @@ def init_variable_forms(app):
     class AccessForm(RbacForm):
         template = "access"
         form_type = HiddenField(default="access")
-        menu = SelectMultipleField("Menu", choices=choices(list(app.rbac["menu"])))
+        menu = SelectMultipleField(
+            "Menu",
+            choices=[
+                (key, key)
+                for key, values in app.rbac["menu"].items()
+                if values["rbac"] == "access"
+            ],
+        )
         pages = SelectMultipleField("Pages", choices=filter_rbac("pages"))
         upper_menu = SelectMultipleField(
             "Upper Menu",

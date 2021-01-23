@@ -126,6 +126,11 @@ class ChangelogForm(BaseForm):
 
 
 def init_variable_forms(app):
+    def filter_rbac(rbac_key):
+        return [
+            (k, k) for k, access in app.rbac[rbac_key].items() if access == "access"
+        ]
+
     class RbacForm(BaseForm):
         action = "eNMS.base.processData"
         form_type = HiddenField(default="rbac")
@@ -158,18 +163,19 @@ def init_variable_forms(app):
         template = "access"
         form_type = HiddenField(default="access")
         menu = SelectMultipleField("Menu", choices=choices(list(app.rbac["menu"])))
-        pages = SelectMultipleField("Pages", choices=choices(app.rbac["pages"]))
+        pages = SelectMultipleField("Pages", choices=filter_rbac("pages"))
         upper_menu = SelectMultipleField(
-            "Upper Menu", choices=choices(app.rbac["upper_menu"])
+            "Upper Menu",
+            choices=filter_rbac("upper_menu"),
         )
         get_requests = SelectMultipleField(
-            "GET requests", choices=choices(app.rbac["get_requests"])
+            "GET requests", choices=filter_rbac("get_requests")
         )
         post_requests = SelectMultipleField(
-            "POST requests", choices=choices(app.rbac["post_requests"])
+            "POST requests", choices=filter_rbac("post_requests")
         )
         delete_requests = SelectMultipleField(
-            "DELETE requests", choices=choices(app.rbac["delete_requests"])
+            "DELETE requests", choices=filter_rbac("delete_requests")
         )
         user_pools = MultipleInstanceField("pool")
         access_pools = MultipleInstanceField("pool")

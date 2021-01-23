@@ -4,76 +4,110 @@
       "icon": "home",
       "rbac": "all",
       "pages": {
-        "Dashboard": "/dashboard",
-        "Changelog": "/changelog_table",
-        "Sessions": "/session_table"
+        "Dashboard": {
+          "endpoint": "/dashboard",
+          "rbac": "all"
+        },
+        "Changelog": {
+          "endpoint": "/changelog_table",
+          "rbac": "access"
+        },
+        "Sessions": {
+          "endpoint": "/session_table",
+          "rbac": "access"
+        }
       }
     },
     "Administration": {
       "icon": "users",
       "rbac": "admin",
       "pages": {
-        "Users": "/user_table",
-        "Servers": "/server_table",
-        "Access": "/access_table",
-        "Credentials": "/credential_table"
+        "Users": {
+          "endpoint": "/user_table",
+          "rbac": "admin"
+        },
+        "Servers": {
+          "endpoint": "/server_table",
+          "rbac": "admin"
+        },
+        "Access": {
+          "endpoint": "/access_table",
+          "rbac": "admin"
+        },
+        "Credentials": {
+          "endpoint": "/credential_table",
+          "rbac": "admin"
+        }
       }
     },
     "Inventory": {
       "icon": "database",
       "rbac": "access",
       "pages": {
-        "Devices": "/device_table",
-        "Configurations": "/configuration_table",
-        "Links": "/link_table",
-        "Pools": "/pool_table"
+        "Devices": {
+          "endpoint": "/device_table",
+          "rbac": "access"
+        },
+        "Configurations": {
+          "endpoint": "/configuration_table",
+          "rbac": "access"
+        },
+        "Links": {
+          "endpoint": "/link_table",
+          "rbac": "access"
+        },
+        "Pools": {
+          "endpoint": "/pool_table",
+          "rbac": "access"
+        }
       }
     },
     "Visualization": {
       "icon": "map-marker",
       "rbac": "access",
       "pages": {
-        "Geographical View": "/geographical_view",
-        "Logical View": "/logical_view"
+        "Geographical View": {
+          "endpoint": "/geographical_view",
+          "rbac": "access"
+        },
+        "Logical View": {
+          "endpoint": "/logical_view",
+          "rbac": "access"
+        }
       }
     },
     "Automation": {
       "icon": "sitemap",
       "rbac": "access",
       "pages": {
-        "Services": "/service_table",
-        "Workflow Builder": "/workflow_builder",
-        "Results": "/run_table"
+        "Services": {
+          "endpoint": "/service_table",
+          "rbac": "access"
+        },
+        "Workflow Builder": {
+          "endpoint": "/workflow_builder",
+          "rbac": "access"
+        },
+        "Results": {
+          "endpoint": "/run_table",
+          "rbac": "access"
+        }
       }
     },
     "Scheduling": {
       "icon": "clock-o",
       "rbac": "access",
       "pages": {
-        "Tasks": "/task_table",
-        "Events": "/event_table"
+        "Tasks": {
+          "endpoint": "/task_table",
+          "rbac": "access"
+        },
+        "Events": {
+          "endpoint": "/event_table",
+          "rbac": "access"
+        }
       }
     }
-  },
-  "pages": {
-    "Access": "admin",
-    "Credentials": "admin",
-    "Dashboard": "all",
-    "Changelog": "access",
-    "Sessions": "access",
-    "Users": "admin",
-    "Servers": "admin",
-    "Devices": "access",
-    "Configurations": "access",
-    "Links": "access",
-    "Pools": "access",
-    "Geographical View": "access",
-    "Logical View": "access",
-    "Services": "access",
-    "Workflow Builder": "access",
-    "Results": "access",
-    "Tasks": "access",
-    "Events": "access"
   },
   "upper_menu": {
     "Admin": "admin",

@@ -157,19 +157,6 @@ def init_variable_forms(app):
     class AccessForm(RbacForm):
         template = "access"
         form_type = HiddenField(default="access")
-        menu = SelectMultipleField(
-            "Menu",
-            choices=[
-                (key, key)
-                for key, values in app.rbac["menu"].items()
-                if values["rbac"] == "access"
-            ],
-        )
-        pages = SelectMultipleField("Pages", choices=filter_rbac("pages"))
-        upper_menu = SelectMultipleField(
-            "Upper Menu",
-            choices=filter_rbac("upper_menu"),
-        )
         user_pools = MultipleInstanceField("pool")
         access_pools = MultipleInstanceField("pool")
         access_type = SelectMultipleStringField(
@@ -185,9 +172,20 @@ def init_variable_forms(app):
             cls.configure_relationships("users")
             keys = ("get_requests", "post_requests", "delete_requests", "upper_menu")
             for key in keys:
-                choices = [(k, k) for k, v in app.rbac[key].items() if v == "access"]
+                values = [(k, k) for k, v in app.rbac[key].items() if v == "access"]
                 field_name = " ".join(key.split("_")).capitalize()
-                setattr(cls, key, SelectMultipleField(field_name, choices=choices))
+                setattr(cls, key, SelectMultipleField(field_name, choices=values))
+            menus, pages = [], []
+            for category, values in app.rbac["menu"].items():
+                if values["rbac"] != "access":
+                    continue
+                menus.append(category)
+                for page, page_values in values["pages"].items():
+                    if page_values["rbac"] != "access":
+                        continue
+                pages.append(page)
+            setattr(cls, "menu", SelectMultipleField("Menu", choices=choices(menus)))
+            setattr(cls, "pages", SelectMultipleField("Pages", choices=choices(pages)))
 
     class DatabaseMigrationsForm(BaseForm):
         template = "database_migration"

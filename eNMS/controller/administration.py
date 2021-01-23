@@ -244,8 +244,6 @@ class AdministrationController(BaseController):
             db.session.commit()
 
     def run_debug_code(self, **kwargs):
-        if not current_user.is_admin:
-            return False
         result = StringIO()
         with redirect_stdout(result):
             try:

@@ -118,9 +118,19 @@
               </a>
               <ul class="nav child_menu">
                 {% for page, data in category["pages"].items() %} {% if user.is_admin or
-                page in user.pages %} 
+                page in user.pages %} {% if "subpages" in data %}
+                <li>
+                  <a>{{ page }}<span class="fa fa-chevron-down"></span></a>
+                  <ul class="nav child_menu">
+                    {% for subpage, subpage_values in data["subpages"].items() %} {% if user.is_admin or
+                    subpage in user.pages %}
+                    <li><a href="{{ subpage_values['endpoint'] }}">{{ subpage }}</a></li>
+                    {% endif %} {% endfor %}
+                  </ul>
+                </li>
+                {% else %}
                 <li><a href="{{ data['endpoint'] }}">{{ page }}</a></li>
-                {% endif %} {% endfor %}
+                {% endif %} {% endif %} {% endfor %}
               </ul>
             </li>
             {% endif %} {% endfor %}

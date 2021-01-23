@@ -126,13 +126,6 @@ class ChangelogForm(BaseForm):
 
 
 def init_variable_forms(app):
-    def filter_rbac(rbac_key):
-        return [
-            (key, key)
-            for key, access in app.rbac[rbac_key].items()
-            if access == "access"
-        ]
-
     class RbacForm(BaseForm):
         action = "eNMS.base.processData"
         form_type = HiddenField(default="rbac")
@@ -177,15 +170,6 @@ def init_variable_forms(app):
             "Upper Menu",
             choices=filter_rbac("upper_menu"),
         )
-        get_requests = SelectMultipleField(
-            "GET requests", choices=filter_rbac("get_requests")
-        )
-        post_requests = SelectMultipleField(
-            "POST requests", choices=filter_rbac("post_requests")
-        )
-        delete_requests = SelectMultipleField(
-            "DELETE requests", choices=filter_rbac("delete_requests")
-        )
         user_pools = MultipleInstanceField("pool")
         access_pools = MultipleInstanceField("pool")
         access_type = SelectMultipleStringField(
@@ -199,6 +183,11 @@ def init_variable_forms(app):
         @classmethod
         def form_init(cls):
             cls.configure_relationships("users")
+            keys = ("get_requests", "post_requests", "delete_requests", "upper_menu")
+            for key in keys:
+                choices = [(k, k) for k, v in app.rbac[key].items() if v == "access"]
+                field_name = " ".join(key.split("_")).capitalize()
+                setattr(cls, key, SelectMultipleField(field_name, choices=choices))
 
     class DatabaseMigrationsForm(BaseForm):
         template = "database_migration"

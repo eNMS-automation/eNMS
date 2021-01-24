@@ -110,7 +110,7 @@
         <div class="menu_section">
           <ul class="nav side-menu">
             {% for label, category in menu.items() %} {% if user.is_admin or label in
-            user.menu %}
+            user.menu or category["rbac"] == "all" %}
             <li>
               <a
                 ><i class="fa fa-{{ category['icon'] }}"></i>{{ label }}
@@ -118,12 +118,12 @@
               </a>
               <ul class="nav child_menu">
                 {% for page, data in category["pages"].items() %} {% if user.is_admin or
-                page in user.pages %} {% if "subpages" in data %}
+                page in user.pages or data["rbac"] == "all" %} {% if "subpages" in data %}
                 <li>
                   <a>{{ page }}<span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
                     {% for subpage, subpage_values in data["subpages"].items() %} {% if user.is_admin or
-                    subpage in user.pages %}
+                    subpage in user.pages or subpage_values["rbac"] == "all" %}
                     <li><a href="{{ subpage_values['endpoint'] }}">{{ subpage }}</a></li>
                     {% endif %} {% endfor %}
                   </ul>
@@ -239,7 +239,7 @@
                     &nbsp;Files
                   </a>
                 </li>
-                {% endif %} {% if user.is_admin or "Settings" in user.upper_menu %}
+                {% endif %} {% if user.is_admin %}
                 <li class="nav-item">
                   <a
                     onclick="eNMS.administration.showSettings()"
@@ -253,7 +253,7 @@
                     &nbsp;Settings
                   </a>
                 </li>
-                {% endif %} {% if user.is_admin or "Admin" in user.upper_menu %}
+                {% endif %} {% if user.is_admin %}
                 <li class="nav-item">
                   <a
                     onclick="eNMS.base.openPanel({

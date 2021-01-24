@@ -101,6 +101,12 @@ class MetaForm(FormMeta):
             form_properties[form_type].update(form_properties[base_form_type])
         return form
 
+    def __setattr__(self, field, value):
+        if hasattr(value, "field_class") and "multiselect" in value.field_class.type:
+            form_type = self.form_type.kwargs["default"]
+            form_properties[form_type][field] = {"type": value.field_class.type}
+        return super().__setattr__(field, value)
+
 
 class BaseForm(FlaskForm, metaclass=MetaForm):
     @classmethod

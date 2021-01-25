@@ -268,7 +268,7 @@ class Server(Flask):
         def workflow_builder():
             return render_template("workflow.html", endpoint="workflow_builder")
 
-        @blueprint.route("/form/<form_type>")
+        @blueprint.route("/<form_type>_form")
         @self.monitor_requests
         def form(form_type):
             form = form_classes[form_type](request.form)

@@ -254,7 +254,7 @@ export function openPanel({
 }) {
   if (
     !user.is_admin &&
-    !user.get_requests.includes(url || `/form/${name}`) &&
+    !user.get_requests.includes(url || `/${name}_form`) &&
     !url.startsWith("../help/")
   ) {
     return notify("Error 403 - Operation not allowed.", "error", 5);
@@ -290,7 +290,7 @@ export function openPanel({
     kwargs.content = content;
   } else {
     kwargs.contentAjax = {
-      url: url || `../form/${name}`,
+      url: url || `../${name}_form`,
       done: function (panel) {
         panel.content.innerHTML = this.responseText;
         preprocessForm(panel, id, type, duplicate);

@@ -9,9 +9,21 @@ Version 4.0.1
 - Add scalability migration files
 - Remove "All", "None" and "Unrelated" options in relationship filtering
 - Use join instead of subqueries to improve relationship filtering scalability
-- Add "/form/..." endpoint in rbac files when instantiating custom services
+- Add form endpoints in rbac files when instantiating custom services
 - Fix changelog like pool update not logged bug
 - Fix workflow tree mechanism from workflow with superworkflow bug
+
+- Change of all GET endpoints to no longer contain backslash:
+* renaming /table/{type} to {type}_table
+* renaming of /form/{form_type} to "{form_type}_form
+Everything that comes after backslash is considered to be an argument (*args)
+See if plugins are impacted.
+- Change of rbac.json structure: list becomes dict, each line can have one of three values:
+* "admin" (not part of RBAC, only admin have access, e.g admin panel, migration etc)
+* "all" (not part of RBAC, everyone has access, e.g dashboard, login, logout etc)
+* "access" (access restricted by RBAC, used to populate access form)
+Impact on plugins: the settings.json "rbac" section has to be updated accordingly.
+
 
 Version 4.0.0
 -------------

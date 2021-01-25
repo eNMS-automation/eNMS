@@ -183,7 +183,7 @@ def init_variable_forms(app):
                 for page, page_values in values["pages"].items():
                     if page_values["rbac"] != "access":
                         continue
-                pages.append(page)
+                    pages.append(page)
             setattr(cls, "menu", SelectMultipleField("Menu", choices=choices(menus)))
             setattr(cls, "pages", SelectMultipleField("Pages", choices=choices(pages)))
 

@@ -201,7 +201,7 @@ export class Table {
           at: "center-bottom",
           offsetY: 18,
         },
-        url: `../form/${this.type}_relation_filtering`,
+        url: `../${this.type}_relation_filtering_form`,
         title: "Relationship-based Filtering",
       });
     }

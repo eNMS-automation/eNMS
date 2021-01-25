@@ -105,24 +105,9 @@ class Server(Flask):
         )
 
     def register_plugins(self):
-        for plugin_path in Path(app.settings["app"]["plugin_path"]).iterdir():
-            if not Path(plugin_path / "settings.json").exists():
-                continue
-            try:
-                with open(plugin_path / "settings.json", "r") as file:
-                    settings = load(file)
-                if not settings["active"]:
-                    continue
-                module = import_module(f"eNMS.plugins.{plugin_path.stem}")
-                module.Plugin(self, app, db, **settings)
-                for setup_file in ("database", "properties", "rbac"):
-                    update_file(getattr(app, setup_file), settings.get(setup_file, {}))
-            except Exception as exc:
-                app.log("error", f"Could not load plugin '{plugin_path.stem}' ({exc})")
-                continue
-            app.log("info", f"Loading plugin: {settings['name']}")
+        for plugin in app.plugins.values():
+            plugin["module"].Plugin(self, app, db, **plugin["settings"])
         init_variable_forms(app)
-        db.base.metadata.create_all(bind=db.engine)
 
     def register_extensions(self):
         self.auth = HTTPBasicAuth()

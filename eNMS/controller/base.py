@@ -40,7 +40,7 @@ except ImportError as exc:
 from eNMS.database import db
 from eNMS.models import models, model_properties, relationships
 from eNMS.controller.syslog import SyslogServer
-from eNMS.setup import database, logging, properties, rbac, settings
+from eNMS.setup import database, logging, properties, rbac, settings, update_file
 
 
 class BaseController:
@@ -109,6 +109,7 @@ class BaseController:
         return str(self.decrypt(password), "utf-8")
 
     def initialize_database(self):
+        self.init_plugins()
         self.init_services()
         db.base.metadata.create_all(bind=db.engine)
         configure_mappers()
@@ -261,6 +262,27 @@ class BaseController:
 
     def init_scheduler(self):
         self.scheduler_address = getenv("SCHEDULER_ADDR")
+
+    def init_plugins(self):
+        self.plugins = {}
+        for plugin_path in Path(self.settings["app"]["plugin_path"]).iterdir():
+            if not Path(plugin_path / "settings.json").exists():
+                continue
+            try:
+                with open(plugin_path / "settings.json", "r") as file:
+                    settings = load(file)
+                if not settings["active"]:
+                    continue
+                self.plugins[plugin_path.stem] = {
+                    "settings": settings,
+                    "module": import_module(f"eNMS.plugins.{plugin_path.stem}")
+                }
+                for setup_file in ("database", "properties", "rbac"):
+                    update_file(getattr(self, setup_file), settings.get(setup_file, {}))
+            except Exception as exc:
+                error(f"Could not load plugin '{plugin_path.stem}' ({exc})")
+                continue
+            info(f"Loading plugin: {settings['name']}")
 
     def init_services(self):
         path_services = [self.path / "eNMS" / "services"]

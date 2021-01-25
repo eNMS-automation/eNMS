@@ -59,7 +59,6 @@ class BaseController:
     def __init__(self):
         self.pre_init()
         self.settings = settings
-        self.rbac = rbac
         self.properties = properties
         self.database = database
         self.logging = logging
@@ -67,6 +66,7 @@ class BaseController:
         self.load_custom_properties()
         self.load_configuration_properties()
         self.path = Path.cwd()
+        self.init_rbac()
         self.init_encryption()
         self.use_vault = settings["vault"]["use_vault"]
         if self.use_vault:
@@ -233,6 +233,16 @@ class BaseController:
         for file in (self.path / "eNMS" / "forms").glob("**/*.py"):
             spec = spec_from_file_location(str(file).split("/")[-1][:-3], str(file))
             spec.loader.exec_module(module_from_spec(spec))
+
+    def init_rbac(self):
+        self.rbac = {"pages": [], **rbac}
+        for _, category in rbac["menu"].items():
+            for page, page_values in category["pages"].items():
+                if page_values["rbac"] == "access":
+                    self.rbac["pages"].append(page)
+                for subpage, subpage_values in page_values.get("subpages", {}).items():
+                    if subpage_values["rbac"] == "access":
+                        self.rbac["pages"].append(subpage)
 
     def init_redis(self):
         host = getenv("REDIS_ADDR")

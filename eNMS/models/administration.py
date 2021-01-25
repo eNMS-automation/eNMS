@@ -9,7 +9,6 @@ from eNMS import app
 from eNMS.database import db
 from eNMS.models import models
 from eNMS.models.base import AbstractBase
-from eNMS.setup import rbac
 
 
 class Server(AbstractBase):
@@ -72,7 +71,7 @@ class User(AbstractBase, UserMixin):
             .filter(models["user"].name == self.name)
             .all()
         )
-        for property in rbac:
+        for property in app.rbac:
             access_value = (getattr(access, property) for access in user_access)
             setattr(self, property, list(set(chain.from_iterable(access_value))))
 

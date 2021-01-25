@@ -40,7 +40,7 @@ except ImportError as exc:
 from eNMS.database import db
 from eNMS.models import models, model_properties, relationships
 from eNMS.controller.syslog import SyslogServer
-from eNMS.setup import database, logging, properties, rbac, settings, update_file
+from eNMS.setup import database, logging, properties, rbac, settings
 
 
 class BaseController:
@@ -263,6 +263,21 @@ class BaseController:
     def init_scheduler(self):
         self.scheduler_address = getenv("SCHEDULER_ADDR")
 
+    def update_settings(self, old, new):
+        for key, value in new.items():
+            if key not in old:
+                old[key] = value
+            else:
+                old_value = old[key]
+                if isinstance(old_value, list):
+                    old_value.extend(value)
+                elif isinstance(old_value, dict):
+                    self.update_file(old_value, value)
+                else:
+                    old[key] = value
+
+        return old
+
     def init_plugins(self):
         self.plugins = {}
         for plugin_path in Path(self.settings["app"]["plugin_path"]).iterdir():
@@ -278,7 +293,8 @@ class BaseController:
                     "module": import_module(f"eNMS.plugins.{plugin_path.stem}")
                 }
                 for setup_file in ("database", "properties", "rbac"):
-                    update_file(getattr(self, setup_file), settings.get(setup_file, {}))
+                    property = getattr(self, setup_file)
+                    self.update_settings(property, settings.get(setup_file, {}))
             except Exception as exc:
                 error(f"Could not load plugin '{plugin_path.stem}' ({exc})")
                 continue

@@ -34,7 +34,7 @@ from eNMS.database import db
 from eNMS.forms import form_classes, form_properties
 from eNMS.forms.administration import init_variable_forms, LoginForm
 from eNMS.models import models, property_types, relationships
-from eNMS.setup import properties, rbac, themes, update_file, visualization
+from eNMS.setup import properties, rbac, themes, visualization
 
 
 class Server(Flask):

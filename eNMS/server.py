@@ -68,16 +68,16 @@ class Server(Flask):
                 )
                 return redirect(url_for("blueprint.route", page="login"))
             else:
-                method, endpoint, *_ = request.method.lower(), request.path.split("/")
+                method, endpoint = request.method.lower(), f"/{request.path.split('/')[1]}"
                 endpoint_rbac = rbac[f"{method}_requests"].get(endpoint)
                 if not endpoint_rbac:
                     if method == "post":
                         return jsonify({"alert": "Invalid POST request."})
                     else:
                         return render_template("error.html", error=404), 404
-                if not current_user.admin and (
+                if not current_user.is_admin and (
                     endpoint_rbac == "admin"
-                    or endpoint_rbac != "all"
+                    or endpoint_rbac == "access"
                     and endpoint not in getattr(current_user, f"{method}_requests")
                 ):
                     if method == "post":
@@ -323,7 +323,8 @@ class Server(Flask):
         @blueprint.route("/<path:page>", methods=["POST"])
         @self.monitor_requests
         def route(page):
-            form_type, endpoint, *args = request.form.get("form_type"), page.split("/")
+            form_type = request.form.get("form_type")
+            endpoint, *args = page.split("/")
             if request.json:
                 kwargs = request.json
             elif form_type:

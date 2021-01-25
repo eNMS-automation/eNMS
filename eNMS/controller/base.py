@@ -272,7 +272,7 @@ class BaseController:
                 if isinstance(old_value, list):
                     old_value.extend(value)
                 elif isinstance(old_value, dict):
-                    self.update_file(old_value, value)
+                    self.update_settings(old_value, value)
                 else:
                     old[key] = value
 

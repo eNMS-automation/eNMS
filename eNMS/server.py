@@ -32,9 +32,9 @@ from uuid import getnode
 from eNMS import app
 from eNMS.database import db
 from eNMS.forms import form_classes, form_properties
-from eNMS.forms.administration import init_variable_forms, LoginForm
+from eNMS.forms.administration import LoginForm
 from eNMS.models import models, property_types, relationships
-from eNMS.setup import properties, rbac, themes, visualization
+from eNMS.setup import properties, themes, visualization
 
 
 class Server(Flask):
@@ -69,7 +69,7 @@ class Server(Flask):
                 return redirect(url_for("blueprint.route", page="login"))
             else:
                 method, endpoint = request.method.lower(), f"/{request.path.split('/')[1]}"
-                endpoint_rbac = rbac[f"{method}_requests"].get(endpoint)
+                endpoint_rbac = app.rbac[f"{method}_requests"].get(endpoint)
                 if not endpoint_rbac:
                     if method == "post":
                         return jsonify({"alert": "Invalid POST request."})
@@ -107,7 +107,6 @@ class Server(Flask):
     def register_plugins(self):
         for plugin in app.plugins.values():
             plugin["module"].Plugin(self, app, db, **plugin["settings"])
-        init_variable_forms(app)
 
     def register_extensions(self):
         self.auth = HTTPBasicAuth()
@@ -133,7 +132,7 @@ class Server(Flask):
             return {
                 "configuration_properties": app.configuration_properties,
                 "form_properties": form_properties,
-                "menu": rbac["menu"],
+                "menu": app.rbac["menu"],
                 "names": app.property_names,
                 "property_types": property_types,
                 "relations": list(set(chain.from_iterable(relationships.values()))),

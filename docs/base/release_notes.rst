@@ -23,6 +23,7 @@ See if plugins are impacted.
 * "all" (not part of RBAC, everyone has access, e.g dashboard, login, logout etc)
 * "access" (access restricted by RBAC, used to populate access form)
 Impact on plugins: the settings.json "rbac" section has to be updated accordingly.
+- Add RBAC support for nested submenus
 
 
 Version 4.0.0

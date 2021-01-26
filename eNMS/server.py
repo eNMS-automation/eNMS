@@ -19,11 +19,8 @@ from flask_login import current_user, LoginManager, login_user, logout_user
 from flask_restful import abort as rest_abort, Api, Resource
 from flask_wtf.csrf import CSRFProtect
 from functools import wraps
-from importlib import import_module
 from itertools import chain
-from json import load
 from os import getenv
-from pathlib import Path
 from threading import Thread
 from time import sleep
 from traceback import format_exc
@@ -68,7 +65,10 @@ class Server(Flask):
                 )
                 return redirect(url_for("blueprint.route", page="login"))
             else:
-                method, endpoint = request.method.lower(), f"/{request.path.split('/')[1]}"
+                method, endpoint = (
+                    request.method.lower(),
+                    f"/{request.path.split('/')[1]}",
+                )
                 endpoint_rbac = app.rbac[f"{method}_requests"].get(endpoint)
                 if not endpoint_rbac:
                     if method == "post":

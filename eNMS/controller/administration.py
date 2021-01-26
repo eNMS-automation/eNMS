@@ -1,7 +1,6 @@
 from collections import defaultdict
 from contextlib import redirect_stdout
 from datetime import datetime
-from flask_login import current_user
 from io import StringIO
 from ipaddress import IPv4Network
 from json import dump

@@ -141,9 +141,7 @@ class UserForm(RbacForm):
     groups = StringField("Groups")
     theme = SelectField(
         "Theme",
-        choices=[
-            (theme, values["name"]) for theme, values in themes["themes"].items()
-        ],
+        choices=[(theme, values["name"]) for theme, values in themes["themes"].items()],
     )
     authentication = SelectField(
         "Authentication",

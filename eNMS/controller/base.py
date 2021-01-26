@@ -290,7 +290,7 @@ class BaseController:
                     continue
                 self.plugins[plugin_path.stem] = {
                     "settings": settings,
-                    "module": import_module(f"eNMS.plugins.{plugin_path.stem}")
+                    "module": import_module(f"eNMS.plugins.{plugin_path.stem}"),
                 }
                 for setup_file in ("database", "properties", "rbac"):
                     property = getattr(self, setup_file)

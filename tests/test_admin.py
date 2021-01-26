@@ -38,7 +38,6 @@ def test_urls(user_client):
         if any(endpoint in page for endpoint in ignored_endpoints):
             continue
         r = user_client.get(page, follow_redirects=True)
-        print(page, r.status_code)
         assert r.status_code == 200
     r = user_client.get("/logout", follow_redirects=True)
     test_authentication(user_client)

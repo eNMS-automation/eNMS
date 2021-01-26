@@ -155,8 +155,7 @@
       "status",
       "frequency",
       "frequency_unit",
-      "crontab_expression",
-      "service_name"
+      "crontab_expression"
     ]
   },
   "tables": {

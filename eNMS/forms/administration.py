@@ -179,13 +179,21 @@ class AccessForm(RbacForm):
             setattr(cls, key, SelectMultipleField(field_name, choices=values))
         menus, pages = [], []
         for category, values in app.rbac["menu"].items():
-            if values["rbac"] != "access":
+            if values["rbac"] == "admin":
                 continue
-            menus.append(category)
+            if values["rbac"] == "access":
+                menus.append(category)
             for page, page_values in values["pages"].items():
-                if page_values["rbac"] != "access":
+                if page_values["rbac"] == "admin":
                     continue
-                pages.append(page)
+                if page_values["rbac"] == "access":
+                    pages.append(page)
+                subpages = page_values.get("subpages", {})
+                for subpage, subpage_values in subpages.items():
+                    if subpage_values["rbac"] == "admin":
+                        continue
+                    if subpage_values["rbac"] == "access":
+                        pages.append(subpage)
         setattr(cls, "menu", SelectMultipleField("Menu", choices=choices(menus)))
         setattr(cls, "pages", SelectMultipleField("Pages", choices=choices(pages)))
 

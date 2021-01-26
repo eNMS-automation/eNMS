@@ -5,19 +5,20 @@ from tests.conftest import check_pages
 
 ignored_endpoints = [
     "/download",
-    "/form/alerts_table",
-    "/form/calendar",
-    "/form/compare",
-    "/form/device_data",
-    "/form/files",
-    "/form/git_history",
-    "/form/instance_deletion",
-    "/form/logs",
-    "/form/result",
-    "/form/session_log",
-    "/form/table",
-    "/form/tree",
-    "/form/workflow_tree",
+    "/alerts_table_form",
+    "/calendar_form",
+    "/compare_form",
+    "/device_data_form",
+    "/export_service",
+    "/files_form",
+    "/git_history_form",
+    "/instance_deletion_form",
+    "/logs_form",
+    "/result_form",
+    "/session_log_form",
+    "/table_form",
+    "/tree_form",
+    "/workflow_tree_form",
     "/logout",
     "/rest/",
     "/view_service_results",
@@ -37,6 +38,7 @@ def test_urls(user_client):
         if any(endpoint in page for endpoint in ignored_endpoints):
             continue
         r = user_client.get(page, follow_redirects=True)
+        print(page, r.status_code)
         assert r.status_code == 200
     r = user_client.get("/logout", follow_redirects=True)
     test_authentication(user_client)

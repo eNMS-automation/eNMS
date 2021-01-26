@@ -2,12 +2,12 @@
   access_type: "['Read', 'Edit', 'Run', 'Schedule', 'Connect', 'Use as target']"
   delete_requests: [/rest/instance]
   description: Full Access to Everything
-  get_requests: [/download_file, /compare_form, /device_data_form, /files_form, /git_history_form,
-    /instance_deletion_form, /logs_form, /result_form, /session_log_form, /table_form,
-    /tree_form, /workflow_tree_form, /rest/configuration, /rest/instance, /rest/query,
-    /rest/result, /rest/search, /changelog_table, /configuration_table, /device_table,
-    /event_table, /pool_table, /link_table, /run_table, /service_table, /session_table,
-    /task_table, /view_service_results, /geographical_view, /logical_view, /workflow_builder,
+  get_requests: [/changelog_table, /compare_form, /configuration_table, /device_data_form,
+    /device_table, /download_file, /event_table, /export_service, /files_form, /geographical_view,
+    /git_history_form, /instance_deletion_form, /link_table, /logical_view, /logs_form,
+    /pool_table, /rest/configuration, /rest/instance, /rest/query, /rest/result, /rest/search,
+    /result_form, /run_table, /service_table, /session_log_form, /session_table, /table_form,
+    /task_table, /tree_form, /view_service_results, /workflow_builder, /workflow_tree_form,
     /custom_form, /panel_form, /template_form, /template_devices, /netmiko_form, /restart_workflow_form,
     /file_form, /add_services_to_workflow_form, /run_service_form, /workflow_label_form,
     /workflow_edge_form, /napalm_configuration_service_form, /napalm_rollback_service_form,
@@ -22,13 +22,14 @@
     /payload_validation_service_form, /python_snippet_service_form, /workflow_form,
     /settings_panel_form, /administration_form, /debug_form, /upload_files_form, /result_log_deletion_form,
     /server_form, /credential_form, /import_service_form, /changelog_form, /user_form,
-    /access_form, /device_relation_filtering_form, /device_filtering_form, /link_relation_filtering_form,
-    /link_filtering_form, /pool_relation_filtering_form, /pool_filtering_form, /run_relation_filtering_form,
-    /run_filtering_form, /service_relation_filtering_form, /service_filtering_form,
-    /task_relation_filtering_form, /task_filtering_form, /user_relation_filtering_form,
-    /user_filtering_form, /add_devices_form, /add_links_form, /add_users_form, /add_services_form,
-    /device_connection_form, /device_form, /link_form, /pool_form, /excel_import_form,
-    /excel_export_form, /visualization_parameters_form, /event_form, /task_form]
+    /access_form, /database_migration_form, /database_deletion_form, /device_relation_filtering_form,
+    /device_filtering_form, /link_relation_filtering_form, /link_filtering_form, /pool_relation_filtering_form,
+    /pool_filtering_form, /run_relation_filtering_form, /run_filtering_form, /service_relation_filtering_form,
+    /service_filtering_form, /task_relation_filtering_form, /task_filtering_form,
+    /user_relation_filtering_form, /user_filtering_form, /add_devices_form, /add_links_form,
+    /add_users_form, /add_services_form, /device_connection_form, /device_form, /link_form,
+    /pool_form, /excel_import_form, /excel_export_form, /visualization_parameters_form,
+    /event_form, /task_form]
   menu: [Inventory, Visualization, Automation, Scheduling, Template]
   name: Full Access to Everything
   pages: [Changelog, Sessions, Devices, Configurations, Links, Pools, Geographical
@@ -36,9 +37,9 @@
     Subpage, Devices]
   post_requests: [/add_edge, /add_instances_in_bulk, /bulk_deletion, /bulk_edit, /bulk_removal,
     /copy_service_in_workflow, /clear_results, /clear_configurations, /compare, /create_label,
-    /database_deletion, /delete_corrupted_edges, /delete_instance, /delete_workflow_selection,
-    /desktop_connection, /duplicate_workflow, /export_service, /export_topology, /delete_file,
-    /edit_file, /get, /get_all, /get_cluster_status, /get_git_history, /get_device_network_data,
+    /delete_corrupted_edges, /delete_instance, /delete_workflow_selection, /desktop_connection,
+    /duplicate_workflow, /export_service, /export_topology, /delete_file, /edit_file,
+    /get, /get_all, /get_cluster_status, /get_git_history, /get_device_network_data,
     /get_device_logs, /get_exported_services, /get_git_network_data, /get_migration_folders,
     /get_service_logs, /get_properties, /get_result, /get_runtimes, /get_view_topology,
     /get_service_state, /get_session_log, /get_top_level_workflows, /get_tree_files,
@@ -128,12 +129,12 @@
   access_type: '[]'
   delete_requests: [/rest/instance]
   description: Access to all menu pages and HTTP requests
-  get_requests: [/download_file, /compare_form, /device_data_form, /files_form, /git_history_form,
-    /instance_deletion_form, /logs_form, /result_form, /session_log_form, /table_form,
-    /tree_form, /workflow_tree_form, /rest/configuration, /rest/instance, /rest/query,
-    /rest/result, /rest/search, /changelog_table, /configuration_table, /device_table,
-    /event_table, /pool_table, /link_table, /run_table, /service_table, /session_table,
-    /task_table, /view_service_results, /geographical_view, /logical_view, /workflow_builder,
+  get_requests: [/changelog_table, /compare_form, /configuration_table, /device_data_form,
+    /device_table, /download_file, /event_table, /export_service, /files_form, /geographical_view,
+    /git_history_form, /instance_deletion_form, /link_table, /logical_view, /logs_form,
+    /pool_table, /rest/configuration, /rest/instance, /rest/query, /rest/result, /rest/search,
+    /result_form, /run_table, /service_table, /session_log_form, /session_table, /table_form,
+    /task_table, /tree_form, /view_service_results, /workflow_builder, /workflow_tree_form,
     /custom_form, /panel_form, /template_form, /template_devices, /netmiko_form, /restart_workflow_form,
     /file_form, /add_services_to_workflow_form, /run_service_form, /workflow_label_form,
     /workflow_edge_form, /napalm_configuration_service_form, /napalm_rollback_service_form,
@@ -148,13 +149,14 @@
     /payload_validation_service_form, /python_snippet_service_form, /workflow_form,
     /settings_panel_form, /administration_form, /debug_form, /upload_files_form, /result_log_deletion_form,
     /server_form, /credential_form, /import_service_form, /changelog_form, /user_form,
-    /access_form, /device_relation_filtering_form, /device_filtering_form, /link_relation_filtering_form,
-    /link_filtering_form, /pool_relation_filtering_form, /pool_filtering_form, /run_relation_filtering_form,
-    /run_filtering_form, /service_relation_filtering_form, /service_filtering_form,
-    /task_relation_filtering_form, /task_filtering_form, /user_relation_filtering_form,
-    /user_filtering_form, /add_devices_form, /add_links_form, /add_users_form, /add_services_form,
-    /device_connection_form, /device_form, /link_form, /pool_form, /excel_import_form,
-    /excel_export_form, /visualization_parameters_form, /event_form, /task_form]
+    /access_form, /database_migration_form, /database_deletion_form, /device_relation_filtering_form,
+    /device_filtering_form, /link_relation_filtering_form, /link_filtering_form, /pool_relation_filtering_form,
+    /pool_filtering_form, /run_relation_filtering_form, /run_filtering_form, /service_relation_filtering_form,
+    /service_filtering_form, /task_relation_filtering_form, /task_filtering_form,
+    /user_relation_filtering_form, /user_filtering_form, /add_devices_form, /add_links_form,
+    /add_users_form, /add_services_form, /device_connection_form, /device_form, /link_form,
+    /pool_form, /excel_import_form, /excel_export_form, /visualization_parameters_form,
+    /event_form, /task_form]
   menu: [Inventory, Visualization, Automation, Scheduling, Template]
   name: Full UI + HTTP access
   pages: [Changelog, Sessions, Devices, Configurations, Links, Pools, Geographical
@@ -162,9 +164,9 @@
     Subpage, Devices]
   post_requests: [/add_edge, /add_instances_in_bulk, /bulk_deletion, /bulk_edit, /bulk_removal,
     /copy_service_in_workflow, /clear_results, /clear_configurations, /compare, /create_label,
-    /database_deletion, /delete_corrupted_edges, /delete_instance, /delete_workflow_selection,
-    /desktop_connection, /duplicate_workflow, /export_service, /export_topology, /delete_file,
-    /edit_file, /get, /get_all, /get_cluster_status, /get_git_history, /get_device_network_data,
+    /delete_corrupted_edges, /delete_instance, /delete_workflow_selection, /desktop_connection,
+    /duplicate_workflow, /export_service, /export_topology, /delete_file, /edit_file,
+    /get, /get_all, /get_cluster_status, /get_git_history, /get_device_network_data,
     /get_device_logs, /get_exported_services, /get_git_network_data, /get_migration_folders,
     /get_service_logs, /get_properties, /get_result, /get_runtimes, /get_view_topology,
     /get_service_state, /get_session_log, /get_top_level_workflows, /get_tree_files,

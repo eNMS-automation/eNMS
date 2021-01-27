@@ -1348,9 +1348,10 @@ class Run(AbstractBase):
             logger="security",
         )
         credentials = self.get_credentials(device)
-        if device.netconf_driver != None:
+        if device.netconf_driver is not None:
             driver_name = device.netconf_driver
-        else: driver_name = 'default'
+        else:
+            driver_name = 'default'
         device_params = {"name": driver_name}
         ncclient_connection = manager.connect(
             host=device.ip_address,
@@ -1377,7 +1378,7 @@ class Run(AbstractBase):
                 return connection
             else:
                 self.disconnect(library, device, connection)
-        if library == "ncclient":
+        elif library == "ncclient":
             if connection.connected:
                 return connection
             else:
@@ -1397,14 +1398,14 @@ class Run(AbstractBase):
         return cache.get(device)
 
     def close_device_connection(self, device):
-        for library in ("netmiko", "napalm", "scrapli","ncclient"):
+        for library in ("netmiko", "napalm", "scrapli", "ncclient"):
             connection = self.get_connection(library, device)
             if connection:
                 self.disconnect(library, device, connection)
 
     def close_remaining_connections(self):
         threads = []
-        for library in ("netmiko", "napalm", "scrapli","ncclient"):
+        for library in ("netmiko", "napalm", "scrapli", "ncclient"):
             devices = list(app.connections_cache[library][self.runtime])
             for device in devices:
                 connection = app.connections_cache[library][self.runtime][device]
@@ -1420,7 +1421,7 @@ class Run(AbstractBase):
         try:
             if library == "netmiko":
                 connection.disconnect()
-            if library == "ncclient":
+            elif library == "ncclient":
                 connection.close_session()
             else:
                 connection.close()
@@ -1452,7 +1453,14 @@ class Run(AbstractBase):
         for (send, expect) in zip(commands[::2], commands[1::2]):
             if not send or not expect:
                 continue
-            self.log("info", f"Sent '{send}', waiting for '{expect}'", device)
+## --- begin ien-AP - Marc/Stephan - mask jump password log
+            self.log(
+                "info",
+                f"Sent '{send if send != commands[4] else 'jump on connect password'}'"
+                f", waiting for '{expect}'",
+                device,
+            )
+## --- end ien-AP - Marc/Stephan - mask jump password log
             connection.send_command(
                 send,
                 expect_string=expect,

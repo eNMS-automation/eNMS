@@ -233,8 +233,9 @@ class Database:
                 ),
             )
 
-    def query(self, model, rbac="read", username=None):
-        query = self.session.query(models[model])
+    def query(self, model, rbac="read", username=None, property=None):
+        entity = getattr(models[model], property) if property else models[model]
+        query = self.session.query(entity)
         if rbac and model != "user":
             if current_user:
                 user = current_user

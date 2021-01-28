@@ -31,6 +31,7 @@ from sqlalchemy.orm import aliased, configure_mappers
 from sys import path as sys_path
 from uuid import getnode
 from warnings import warn
+import atexit
 
 try:
     from hvac import Client as VaultClient
@@ -692,3 +693,8 @@ class BaseController:
                 for property in self.configuration_properties
             ):
                 pool.compute_pool()
+
+
+@atexit.register
+def cleanup():
+    db.engine.dispose()  # gracefully close database connections

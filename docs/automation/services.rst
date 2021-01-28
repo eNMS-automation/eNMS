@@ -286,7 +286,7 @@ Variables
       :maxdepth: 2
       :titlesonly:
 
-      custom_properties.rst
+      custom_device_properties.rst
 
 - ``link``
 
@@ -307,7 +307,7 @@ Variables
       :maxdepth: 2
       :titlesonly:
 
-      custom_properties.rst
+      custom_link_properties.rst
 
 - ``get_result`` (see :ref:`get_result`)
 

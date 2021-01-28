@@ -49,12 +49,15 @@ class InventoryController(BaseController):
             return {"alert": "Unauthorized authentication method."}
         device = db.fetch("device", id=device_id, rbac="connect")
         port, endpoint = self.get_ssh_port(), str(uuid4())
-        command = f"flask run -h 0.0.0.0 -p {port}".split()
+        command = f"python3 flask run -h 0.0.0.0 -p {port}"
         if self.settings["ssh"]["bypass_key_prompt"]:
             options = "-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
         else:
             options = ""
         environment = {
+            **{key: str(value) for key, value in self.settings["ssh"]["web"].items()},
+            "LC_ALL": "en_US.utf-8",
+            "APP_ADDRESS": self.settings["app"]["address"],
             "DEVICE": str(device.id),
             "ENDPOINT": endpoint,
             "FLASK_APP": "app.py",
@@ -69,7 +72,7 @@ class InventoryController(BaseController):
         if "authentication" in kwargs:
             credentials = self.get_credentials(device, **kwargs)
             environment.update(zip(("USERNAME", "PASSWORD"), credentials))
-        Popen(command, cwd=self.path / "terminal", env=environment)
+        Popen(command, shell=True, cwd=self.path / "terminal", env=environment)
         return {
             "device": device.name,
             "port": port,

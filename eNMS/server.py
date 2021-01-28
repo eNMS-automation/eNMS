@@ -65,10 +65,8 @@ class Server(Flask):
                 )
                 return redirect(url_for("blueprint.route", page="login"))
             else:
-                method, endpoint = (
-                    request.method.lower(),
-                    f"/{request.path.split('/')[1]}",
-                )
+                method = request.method.lower()
+                endpoint = f"/{request.path.split('/')[1]}"
                 endpoint_rbac = app.rbac[f"{method}_requests"].get(endpoint)
                 if not endpoint_rbac:
                     if method == "post":

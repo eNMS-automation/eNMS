@@ -278,7 +278,7 @@ class NetconfForm(ConnectionForm):
             ("candidate", "Candidate"),
             ("startup", "Startup"),
             ("dest_url", "Destination URL"),
-            ),
+        ),
         label='Copy Destination',
         validate_choice=False
     )

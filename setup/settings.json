@@ -1,6 +1,6 @@
 {
   "app": {
-    "address": "",
+    "address": "http://127.0.0.1:5000",
     "config_mode": "debug",
     "startup_migration": "examples",
     "documentation_url": "https://enms.readthedocs.io/en/latest/",

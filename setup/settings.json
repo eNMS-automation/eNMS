@@ -90,6 +90,11 @@
     "channel": ""
   },
   "ssh": {
+    "web": {
+      "LC_ALL": "en_US.utf-8",
+      "CORS_ALLOWED_ORIGINS": "*",
+      "VERIFY_CERTIFICATE": false
+    },
     "bypass_key_prompt": true,
     "enabled": {
       "desktop": true,

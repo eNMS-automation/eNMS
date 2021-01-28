@@ -13,7 +13,9 @@ class Server(Flask):
     def __init__(self):
         super().__init__(__name__)
         self.config["SECRET_KEY"] = getenv("TERMINAL_SECRET_KEY", "secret_key")
-        self.socketio = SocketIO(self)
+        self.socketio = SocketIO(
+            self, cors_allowed_origins=getenv("CORS_ALLOWED_ORIGINS")
+        )
         self.configure_routes()
 
     def send_data(self):
@@ -31,7 +33,7 @@ class Server(Flask):
         def shutdown():
             request.environ.get("werkzeug.server.shutdown")()
             post(
-                "http://127.0.0.1:5000/rest/instance/session",
+                f"{getenv('APP_ADDRESS')}/rest/instance/session",
                 json={
                     "content": request.json,
                     "device_id": getenv("DEVICE"),
@@ -40,6 +42,7 @@ class Server(Flask):
                     "user": getenv("USER"),
                 },
                 auth=HTTPBasicAuth(getenv("ENMS_USER"), getenv("ENMS_PASSWORD")),
+                verify=False if getenv('VERIFY_CERTIFICATE', True) == "False" else True
             )
             return jsonify(True)
 

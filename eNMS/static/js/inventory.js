@@ -121,9 +121,9 @@ function webConnection(id) {
       const link = result.redirection
         ? `${url}/terminal${result.port}`
         : `${url}:${result.port}`;
-      setTimeout(() => openUrl(`${link}/${result.endpoint}`), 500);
+      setTimeout(() => openUrl(`${link}/${result.endpoint}`), 1200);
       const message = `Click here to connect to ${result.device}.`;
-      notify(`<a target='_blank' href='${link}'>${message}</a>`, "success", 15, true);
+      notify(`<a target='_blank' href='${link}/${result.endpoint}'>${message}</a>`, "success", 15, true);
       const warning = `Don't forget to turn off the pop-up blocker !`;
       notify(warning, "error", 15);
       $(`#connection-${id}`).remove();

@@ -7,10 +7,11 @@ Terminal: false
 
 const terminal = new Terminal({ cursorBlink: true });
 const fitAddon = new FitAddon.FitAddon();
-const socket = io.connect("/terminal");
+const terminalPortString = window.location.pathname.split("/")[1]
+const socket = io("/terminal", {path: `/${terminalPortString}/socket.io`});
 let terminalContent = "";
 
-function initTerminal() {
+function initTerminal() {  
   terminal.loadAddon(fitAddon);
   terminal.open(document.getElementById("terminal"));
   fitAddon.fit();
@@ -23,7 +24,7 @@ function initTerminal() {
 
 window.onunload = function () {
   navigator.sendBeacon(
-    "/shutdown",
+    `/${terminalPortString}/shutdown`,
     new Blob([JSON.stringify(terminalContent)], {
       type: "application/json",
     })

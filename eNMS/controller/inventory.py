@@ -55,8 +55,7 @@ class InventoryController(BaseController):
         else:
             options = ""
         environment = {
-            **{key: str(value) for key, value in self.settings["ssh"]["web"].items()},
-            "LC_ALL": "en_US.utf-8",
+            **{key: str(value) for key, value in self.settings["ssh"]["web"].items()},            
             "APP_ADDRESS": self.settings["app"]["address"],
             "DEVICE": str(device.id),
             "ENDPOINT": endpoint,

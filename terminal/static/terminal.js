@@ -11,7 +11,7 @@ const terminalPortString = window.location.pathname.split("/")[1]
 const socket = io("/terminal", {path: `/${terminalPortString}/socket.io`});
 let terminalContent = "";
 
-function initTerminal() {  
+function initTerminal() {
   terminal.loadAddon(fitAddon);
   terminal.open(document.getElementById("terminal"));
   fitAddon.fit();

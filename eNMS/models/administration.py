@@ -39,10 +39,8 @@ class User(AbstractBase, UserMixin):
     get_requests = db.Column(db.List)
     post_requests = db.Column(db.List)
     delete_requests = db.Column(db.List)
-    small_menu = db.Column(Boolean, default=False, info={"dont_track_changes": True})
-    theme = db.Column(
-        db.TinyString, default="default", info={"dont_track_changes": True}
-    )
+    small_menu = db.Column(Boolean, default=False, info={"log_change": False})
+    theme = db.Column(db.TinyString, default="default", info={"log_change": False})
     pools = relationship("Pool", secondary=db.pool_user_table, back_populates="users")
     is_admin = db.Column(Boolean, default=False)
 

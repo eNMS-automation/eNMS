@@ -409,18 +409,6 @@ class BaseController:
             )
         return logger_settings
 
-    def count_models(self):
-        return {
-            "counters": {
-                model: db.query(model).with_entities(models[model].id).count()
-                for model in properties["dashboard"]
-            },
-            "properties": {
-                model: self.counters(properties["dashboard"][model][0], model)
-                for model in properties["dashboard"]
-            },
-        }
-
     def compare(self, type, id, v1, v2, context_lines):
         if type in ("result", "device_result"):
             first = self.str_dict(getattr(db.fetch("result", id=v1), "result"))

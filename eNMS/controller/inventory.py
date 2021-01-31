@@ -18,6 +18,7 @@ from eNMS.controller.base import BaseController
 from eNMS.controller.ssh import SshConnection
 from eNMS.database import db
 from eNMS.models import models, model_properties, property_types
+from eNMS.setup import properties
 
 
 class InventoryController(BaseController):
@@ -151,8 +152,20 @@ class InventoryController(BaseController):
     def get_session_log(self, session_id):
         return db.fetch("session", id=session_id).content
 
+    def count_models(self):
+        return {
+            "counters": {
+                model: db.query(model).with_entities(models[model].id).count()
+                for model in properties["dashboard"]
+            },
+            "properties": {
+                model: self.counters(properties["dashboard"][model][0], model)
+                for model in properties["dashboard"]
+            },
+        }
+
     def counters(self, property, model):
-        return Counter(v for v, in db.session.query(getattr(models[model], property)))
+        return Counter(v for v, in db.query(model, property=property))
 
     def export_topology(self, **kwargs):
         workbook = Workbook()

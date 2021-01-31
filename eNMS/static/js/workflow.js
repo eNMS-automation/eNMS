@@ -94,13 +94,13 @@ export function displayWorkflow(workflowData) {
       const node = this.getNodeAt(properties.pointer.DOM);
       const edge = this.getEdgeAt(properties.pointer.DOM);
       if (typeof node !== "undefined" && !ends.has(node)) {
-        graph.selectNodes([node]);
+        graph.selectNodes([node, ...graph.getSelectedNodes()]);
         $(".menu-entry ").hide();
         $(`.${node.length == 36 ? "label" : "node"}-selection`).show();
         selectedObject = nodes.get(node);
         $(".workflow-selection").toggle(selectedObject.type == "workflow");
       } else if (typeof edge !== "undefined" && !ends.has(node)) {
-        graph.selectEdges([edge]);
+        graph.selectEdges([edge, ...graph.getSelectedEdges()]);
         $(".menu-entry ").hide();
         $(".edge-selection").show();
         selectedObject = edges.get(edge);
@@ -633,8 +633,7 @@ Object.assign(action, {
   "Duplicate Workflow": () => createNew("duplicate_workflow"),
   "Create New Service": () => createNew("create_service"),
   "Edit Workflow": () => showInstancePanel("workflow", workflow.id),
-  "Restart Workflow from Here": (service) =>
-    showRestartWorkflowPanel(workflow, service),
+  "Restart Workflow from Here": showRestartWorkflowPanel,
   "Workflow Results Tree": () => showRuntimePanel("results", workflow),
   "Workflow Results Table": () =>
     showRuntimePanel("results", workflow, null, "full_result"),
@@ -705,24 +704,28 @@ function runWorkflow(withUpdates) {
   }
 }
 
-function showRestartWorkflowPanel(workflow, service) {
+function showRestartWorkflowPanel() {
   openPanel({
     name: "restart_workflow",
-    title: `Restart Workflow '${workflow.name}' from '${service.name}'`,
+    title: `Restart Workflow '${workflow.name}'`,
     id: workflow.id,
     callback: function () {
-      $("#start_services").append(new Option(service.name, service.id));
-      $("#start_services").val(service.id).trigger("change");
+      $(`#restart_workflow-start_services-${workflow.id}`).val(
+        graph
+          .getSelectedNodes()
+          .filter((node) => !ends.has(node))
+          .join("-")
+      );
       call({
         url: `/get_runtimes/service/${workflow.id}`,
         callback: function (runtimes) {
+          const id = `#restart_workflow-restart_runtime-${workflow.id}`;
           runtimes.forEach((runtime) => {
-            $("#restart_runtime").append(
-              $("<option></option>").attr("value", runtime[0]).text(runtime[1])
-            );
+            $(id).append(new Option(runtime[0], runtime[1]));
           });
-          $("#restart_runtime").val(runtimes[runtimes.length - 1]);
-          $("#restart_runtime").selectpicker("refresh");
+          $(id)
+            .val(runtimes[runtimes.length - 1])
+            .selectpicker("refresh");
         },
       });
     },
@@ -732,7 +735,7 @@ function showRestartWorkflowPanel(workflow, service) {
 function restartWorkflow() {
   call({
     url: `/run_service/${currentPath}`,
-    form: `restart_workflow-form`,
+    form: `restart_workflow-form-${workflow.id}`,
     callback: function (result) {
       $(`#restart_workflow-${workflow.id}`).remove();
       runLogic(result);

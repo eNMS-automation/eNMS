@@ -250,7 +250,7 @@ class Server(Flask):
         def view(view_type):
             return render_template(
                 "visualization.html",
-                endpoint=view_type,
+                endpoint=f"{view_type}_view",
                 default_pools=app.get_visualization_parameters(),
             )
 

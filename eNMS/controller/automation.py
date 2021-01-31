@@ -461,6 +461,8 @@ class AutomationController(BaseController):
         return run.run({**initial_payload, **kwargs})
 
     def run_service(self, path, **kwargs):
+        if isinstance(kwargs.get("start_services"), str):
+            kwargs["start_services"] = kwargs["start_services"].split("-")
         service_id = str(path).split(">")[-1]
         for property in ("user", "csrf_token", "form_type"):
             kwargs.pop(property, None)

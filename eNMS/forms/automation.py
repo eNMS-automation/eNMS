@@ -354,7 +354,7 @@ class NapalmForm(ConnectionForm):
 class RestartWorkflowForm(BaseForm):
     action = "eNMS.workflow.restartWorkflow"
     form_type = HiddenField(default="restart_workflow")
-    start_services = MultipleInstanceField("Services", model="service")
+    start_services = HiddenField()
     restart_runtime = SelectField("Restart Runtime", choices=(), validation=False)
 
 

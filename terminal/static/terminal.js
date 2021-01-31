@@ -2,13 +2,14 @@
 global
 FitAddon: false
 io: false
+redirection: false
 Terminal: false
 */
 
 const terminal = new Terminal({ cursorBlink: true });
 const fitAddon = new FitAddon.FitAddon();
-const terminalPortString = window.location.pathname.split("/")[1]
-const socket = io("/terminal", {path: `/${terminalPortString}/socket.io`});
+const url = redirection ? `/${window.location.pathname.split("/")[1]}` : "";
+const socket = io("/terminal", { path: `${url}/socket.io` });
 let terminalContent = "";
 
 function initTerminal() {
@@ -24,7 +25,7 @@ function initTerminal() {
 
 window.onunload = function () {
   navigator.sendBeacon(
-    `/${terminalPortString}/shutdown`,
+    `${url}/shutdown`,
     new Blob([JSON.stringify(terminalContent)], {
       type: "application/json",
     })

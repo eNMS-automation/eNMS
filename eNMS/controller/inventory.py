@@ -56,18 +56,19 @@ class InventoryController(BaseController):
         else:
             options = ""
         environment = {
-            **{key: str(value) for key, value in self.settings["ssh"]["web"].items()},            
+            **{key: str(value) for key, value in self.settings["ssh"]["web"].items()},
             "APP_ADDRESS": self.settings["app"]["address"],
             "DEVICE": str(device.id),
             "ENDPOINT": endpoint,
+            "ENMS_USER": getenv("ENMS_USER", "admin"),
+            "ENMS_PASSWORD": getenv("ENMS_PASSWORD", "admin"),
             "FLASK_APP": "app.py",
             "IP_ADDRESS": getattr(device, kwargs["address"]),
             "OPTIONS": options,
             "PORT": str(device.port),
             "PROTOCOL": kwargs["protocol"],
+            "REDIRECTION": str(self.settings["ssh"]["port_redirection"]),
             "USER": current_user.name,
-            "ENMS_USER": getenv("ENMS_USER", "admin"),
-            "ENMS_PASSWORD": getenv("ENMS_PASSWORD", "admin"),
         }
         if "authentication" in kwargs:
             credentials = self.get_credentials(device, **kwargs)

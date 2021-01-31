@@ -27,7 +27,8 @@ class Server(Flask):
     def configure_routes(self):
         @self.route(f"/{getenv('ENDPOINT')}")
         def index():
-            return render_template("index.html")
+            redirection = getenv("REDIRECTION") == "True"
+            return render_template("index.html", redirection=redirection)
 
         @self.route("/shutdown", methods=["POST"])
         def shutdown():
@@ -42,7 +43,7 @@ class Server(Flask):
                     "user": getenv("USER"),
                 },
                 auth=HTTPBasicAuth(getenv("ENMS_USER"), getenv("ENMS_PASSWORD")),
-                verify=False if getenv('VERIFY_CERTIFICATE', True) == "False" else True
+                verify=False if getenv("VERIFY_CERTIFICATE", True) == "False" else True,
             )
             return jsonify(True)
 

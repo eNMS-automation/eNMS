@@ -386,7 +386,7 @@ class Database:
         return table
 
     def cleanup(self):
-        db.engine.dispose()  # gracefully close database connections
+        self.engine.dispose()  # gracefully close database connections
 
 
 db = Database()

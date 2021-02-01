@@ -1412,7 +1412,7 @@ class Run(AbstractBase):
                 continue
             self.log(
                 "info",
-                f"Sent '{send if send != commands[4] else 'jump on connect password'}'",
+                f"Sent '{send if send != commands[4] else 'jump on connect password'}'"
                 f", waiting for '{expect}'",
             )
             connection.send_command(

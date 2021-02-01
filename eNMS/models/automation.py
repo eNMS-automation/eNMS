@@ -1414,7 +1414,6 @@ class Run(AbstractBase):
                 "info",
                 f"Sent '{send if send != commands[4] else 'jump on connect password'}'",
                 f", waiting for '{expect}'",
-                device,
             )
             connection.send_command(
                 send,

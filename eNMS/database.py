@@ -26,6 +26,7 @@ from sqlalchemy.orm import scoped_session, sessionmaker
 from sqlalchemy.types import JSON
 from sqlalchemy.orm.collections import InstrumentedList
 from time import sleep
+import atexit
 
 from eNMS.models import model_properties, models, property_types, relationships
 from eNMS.setup import database as database_settings, properties
@@ -385,3 +386,8 @@ class Database:
 
 
 db = Database()
+
+
+@atexit.register
+def cleanup():
+    db.engine.dispose()  # gracefully close database connections

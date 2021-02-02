@@ -26,6 +26,7 @@ from sqlalchemy.orm import scoped_session, sessionmaker
 from sqlalchemy.types import JSON
 from sqlalchemy.orm.collections import InstrumentedList
 from time import sleep
+from atexit import register
 
 from eNMS.models import model_properties, models, property_types, relationships
 from eNMS.setup import database as database_settings, properties
@@ -62,6 +63,7 @@ class Database:
         for retry_type, values in self.transactions["retry"].items():
             for parameter, number in values.items():
                 setattr(self, f"retry_{retry_type}_{parameter}", number)
+        register(self.cleanup)
 
     def create_metabase(self):
         class SubDeclarativeMeta(DeclarativeMeta):
@@ -383,6 +385,9 @@ class Database:
                 self.dont_migrate[model].append(property)
             setattr(table, property, column)
         return table
+
+    def cleanup(self):
+        self.engine.dispose()  # gracefully close database connections
 
 
 db = Database()

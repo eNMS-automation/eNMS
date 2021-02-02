@@ -293,7 +293,7 @@ class Pool(AbstractBase):
     target_services = relationship(
         "Service", secondary=db.service_target_pool_table, back_populates="target_pools"
     )
-    visualization_default = db.Column(Boolean)
+    visualization_default = db.Column(Boolean, default=False)
     runs = relationship(
         "Run", secondary=db.run_pool_table, back_populates="target_pools"
     )
@@ -339,7 +339,9 @@ class Pool(AbstractBase):
                     f"{model}_{property}_match",
                     db.Column(db.TinyString, default="inclusion"),
                 )
-                setattr(cls, f"{model}_{property}_invert", db.Column(Boolean))
+                setattr(
+                    cls, f"{model}_{property}_invert", db.Column(Boolean, default=False)
+                )
             setattr(
                 cls,
                 f"{model}s",

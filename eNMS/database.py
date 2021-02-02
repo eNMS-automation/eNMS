@@ -1,4 +1,5 @@
 from ast import literal_eval
+from atexit import register
 from contextlib import contextmanager
 from flask_login import current_user
 from json import loads
@@ -23,10 +24,9 @@ from sqlalchemy.ext.associationproxy import ASSOCIATION_PROXY
 from sqlalchemy.ext.declarative import declarative_base, DeclarativeMeta
 from sqlalchemy.ext.mutable import MutableDict, MutableList
 from sqlalchemy.orm import scoped_session, sessionmaker
-from sqlalchemy.types import JSON
 from sqlalchemy.orm.collections import InstrumentedList
+from sqlalchemy.types import JSON
 from time import sleep
-from atexit import register
 
 from eNMS.models import model_properties, models, property_types, relationships
 from eNMS.setup import database as database_settings, properties
@@ -387,7 +387,7 @@ class Database:
         return table
 
     def cleanup(self):
-        self.engine.dispose()  # gracefully close database connections
+        self.engine.dispose()
 
 
 db = Database()

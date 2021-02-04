@@ -182,12 +182,12 @@ class ServiceForm(BaseForm):
             self.validation_method.data == "text"
             and not self.content_match.data
             or self.validation_method.data == "dict_included"
-            and self.content_match.data == "{}"
+            and self.dict_match.data == "{}"
         )
         if empty_validation:
             self.content_match.errors.append(
-                f"The validation method is set to {self.validation_method.label}"
-                f" and the 'Content Match' value is empty: these do no match."
+                f"The validation method is set to '{self.validation_method.data}'"
+                f" and the matching value is empty: these do no match."
             )
         too_many_threads_error = (
             self.max_processes.data > app.settings["automation"]["max_process"]

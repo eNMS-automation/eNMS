@@ -785,6 +785,14 @@ tables.service = class ServiceTable extends Table {
       >
         <select id="service-type" class="form-control"></select>
       </button>`,
+      `<button
+        class="btn btn-primary"
+        onclick="eNMS.automation.showImportServicePanel()"
+        data-tooltip="Import Service"
+        type="button"
+      >
+        <span class="glyphicon glyphicon-circle-arrow-down"></span>
+      </button>`,
       this.bulkEditButton(),
       this.exportTableButton(),
       this.bulkDeletionButton(),

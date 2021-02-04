@@ -648,6 +648,28 @@ function runServicesOnTargets(id) {
   });
 }
 
+function showImportServicePanel() {
+  openPanel({
+    name: "import_service",
+    title: "Import Service",
+    size: "600 300",
+    callback: () => {
+      call({
+        url: "/get_exported_services",
+        callback: function (services) {
+          let list = document.getElementById("import_service-service");
+          services.forEach((item) => {
+            let option = document.createElement("option");
+            option.textContent = option.value = item;
+            list.appendChild(option);
+          });
+          $("#import_service-service").selectpicker("refresh");
+        },
+      });
+    },
+  });
+}
+
 configureNamespace("automation", [
   displayDiff,
   copyClipboard,
@@ -662,6 +684,7 @@ configureNamespace("automation", [
   resumeTask,
   runServicesOnTargets,
   schedulerAction,
+  showImportServicePanel,
   showResult,
   showRunServicePanel,
   showRuntimePanel,

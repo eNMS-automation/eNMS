@@ -69,20 +69,30 @@ class Server(Flask):
                 endpoint = f"/{request.path.split('/')[1]}"
                 endpoint_rbac = app.rbac[f"{method}_requests"].get(endpoint)
                 if not endpoint_rbac:
-                    if method == "post":
-                        return jsonify({"alert": "Invalid POST request."})
-                    else:
-                        return render_template("error.html", error=404), 404
-                if not current_user.is_admin and (
+                    error = 404
+                elif not current_user.is_admin and (
                     endpoint_rbac == "admin"
                     or endpoint_rbac == "access"
                     and endpoint not in getattr(current_user, f"{method}_requests")
                 ):
-                    if method == "post":
-                        return jsonify({"alert": "Error 403 - Operation not allowed."})
-                    else:
-                        return render_template("error.html", error=403), 403
-                return function(*args, **kwargs)
+                    error = 403
+                else:
+                    try:
+                        return function(*args, **kwargs)
+                    except db.rbac_error:
+                        error = 403
+                    except Exception:
+                        error = 500
+                        app.log("error", format_exc(), change_log=False)
+                if method == "get":
+                    return render_template("error.html", error=error), error
+                else:
+                    message = {
+                        403: "Operation not allowed.",
+                        404: "Invalid POST request.",
+                        500: "Internal Server Error.",
+                    }[error]
+                    return jsonify({"alert": f"Error {error} - {message}"})
 
         return decorated_function
 
@@ -316,15 +326,8 @@ class Server(Flask):
                 kwargs = form.form_postprocessing(request.form)
             else:
                 kwargs = request.form
-            try:
-                with db.session_scope():
-                    result = getattr(app, endpoint)(*args, **kwargs)
-            except db.rbac_error:
-                result = {"alert": "Error 403 - Operation not allowed."}
-            except Exception:
-                app.log("error", format_exc(), change_log=False)
-                result = {"alert": "Error 500 - Internal Server Error"}
-            return jsonify(result)
+            with db.session_scope():
+                return jsonify(getattr(app, endpoint)(*args, **kwargs))
 
         self.register_blueprint(blueprint)
 

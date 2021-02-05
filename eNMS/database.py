@@ -176,7 +176,7 @@ class Database:
                     getattr(target, "private", False)
                     or not getattr(target, "log_changes", True)
                     or not getattr(state.class_, attr.key).info.get("log_change", True)
-                    or attr.key in self.private_properties
+                    or attr.key in self.private_properties_list
                     or not hist.has_changes()
                 ):
                     continue
@@ -208,6 +208,24 @@ class Database:
         for model in models.values():
             if "configure_events" in vars(model):
                 model.configure_events()
+
+        if app.use_vault:
+            for model in db.private_properties:
+
+                @event.listens_for(models[model].name, "set", propagate=True)
+                def vault_update(target, new_name, old_name, *_):
+                    if new_name == old_name:
+                        return
+                    for property in db.private_properties[target.class_type]:
+                        path = f"secret/data/{target.type}"
+                        data = app.vault_client.read(f"{path}/{old_name}/{property}")
+                        if not data:
+                            return
+                        app.vault_client.write(
+                            f"{path}/{new_name}/{property}",
+                            data={property: data["data"]["data"][property]},
+                        )
+                        app.vault_client.delete(f"{path}/{old_name}")
 
     def configure_associations(self):
         for name, association in self.relationships["associations"].items():

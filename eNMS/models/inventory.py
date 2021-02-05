@@ -17,6 +17,7 @@ from eNMS.setup import properties
 class Object(AbstractBase):
 
     __tablename__ = "object"
+    pool_model = True
     type = db.Column(db.SmallString)
     __mapper_args__ = {"polymorphic_identity": "object", "polymorphic_on": type}
     id = db.Column(Integer, primary_key=True)

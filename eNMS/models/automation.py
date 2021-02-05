@@ -14,7 +14,7 @@ from paramiko import RSAKey, SFTPClient
 from re import compile, search
 from requests import post
 from scp import SCPClient
-from sqlalchemy import Boolean, event, ForeignKey, Index, Integer, or_
+from sqlalchemy import Boolean, ForeignKey, Index, Integer, or_
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.orm import aliased, relationship
 from threading import Thread
@@ -46,6 +46,7 @@ from eNMS.models.administration import User  # noqa: F401
 class Service(AbstractBase):
 
     __tablename__ = class_type = "service"
+    pool_model = True
     type = db.Column(db.SmallString)
     __mapper_args__ = {"polymorphic_identity": "service", "polymorphic_on": type}
     id = db.Column(Integer, primary_key=True)
@@ -189,22 +190,6 @@ class Service(AbstractBase):
         if workflow:
             workflow.services.append(service)
         return service
-
-    @classmethod
-    def configure_events(cls):
-        if not app.use_vault:
-            return
-
-        @event.listens_for(cls.name, "set", propagate=True)
-        def vault_update(target, new_value, old_value, *_):
-            path = f"secret/data/{target.type}/{old_value}/password"
-            data = app.vault_client.read(path)
-            if not data:
-                return
-            app.vault_client.write(
-                f"secret/data/{target.type}/{new_value}/password",
-                data={"password": data["data"]["data"]["password"]},
-            )
 
     @property
     def filename(self):
@@ -595,7 +580,7 @@ class Run(AbstractBase):
                 "run": {
                     k: v
                     for k, v in self.properties.items()
-                    if k not in db.private_properties
+                    if k not in db.private_properties_list
                 },
                 "service": self.service.get_properties(exclude=["positions"]),
             }

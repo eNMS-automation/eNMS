@@ -29,6 +29,7 @@ from sqlalchemy import and_
 from sqlalchemy.exc import IntegrityError, InvalidRequestError
 from sqlalchemy.orm import aliased, configure_mappers
 from sys import path as sys_path
+from traceback import format_exc
 from uuid import getnode
 from warnings import warn
 
@@ -110,6 +111,7 @@ class BaseController:
 
     def initialize_database(self):
         self.init_plugins()
+        db.private_properties_list = list(set(sum(db.private_properties.values(), [])))
         self.init_services()
         db.base.metadata.create_all(bind=db.engine)
         configure_mappers()
@@ -181,7 +183,9 @@ class BaseController:
                 self.property_names[property] = pretty_name
                 model_properties[model].append(property)
                 if property_dict.get("private"):
-                    db.private_properties.append(property)
+                    if model not in db.private_properties:
+                        db.private_properties[model] = []
+                    db.private_properties[model].append(property)
                 if model == "device" and property_dict.get("configuration"):
                     self.configuration_properties[property] = pretty_name
 
@@ -392,6 +396,7 @@ class BaseController:
             db.session.rollback()
             if isinstance(exc, IntegrityError):
                 return {"alert": f"There is already a {type} with the same parameters."}
+            self.log("error", format_exc())
             return {"alert": str(exc)}
 
     def log(self, severity, content, user=None, change_log=True, logger="root"):

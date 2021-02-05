@@ -39,6 +39,7 @@ class Database:
         self.database_url = getenv("DATABASE_URL", "sqlite:///database.db")
         self.dialect = self.database_url.split(":")[0]
         self.rbac_error = type("RbacError", (Exception,), {})
+        self.private_properties_set = set()
         self.configure_columns()
         self.engine = create_engine(
             self.database_url,
@@ -176,7 +177,7 @@ class Database:
                     getattr(target, "private", False)
                     or not getattr(target, "log_changes", True)
                     or not getattr(state.class_, attr.key).info.get("log_change", True)
-                    or attr.key in self.private_properties_list
+                    or attr.key in self.private_properties_set
                     or not hist.has_changes()
                 ):
                     continue

@@ -111,8 +111,8 @@ class BaseController:
 
     def initialize_database(self):
         self.init_plugins()
-        db.private_properties_list = list(set(sum(db.private_properties.values(), [])))
         self.init_services()
+        db.private_properties_set |= set(sum(db.private_properties.values(), []))
         db.base.metadata.create_all(bind=db.engine)
         configure_mappers()
         db.configure_model_events(self)
@@ -299,8 +299,8 @@ class BaseController:
                 for setup_file in ("database", "properties", "rbac"):
                     property = getattr(self, setup_file)
                     self.update_settings(property, settings.get(setup_file, {}))
-            except Exception as exc:
-                error(f"Could not load plugin '{plugin_path.stem}' ({exc})")
+            except Exception:
+                error(f"Could not load plugin '{plugin_path.stem}':\n{format_exc()}")
                 continue
             info(f"Loading plugin: {settings['name']}")
 

@@ -426,7 +426,7 @@ function refreshLogs(service, runtime, editor, first, wasRefreshed, line) {
         editor.replaceRange(`\n${result.logs}`, CodeMirror.Pos(editor.lineCount()));
         editor.setCursor(editor.lineCount(), 0);
       } else if (first || !result.refresh) {
-        editor.setValue(result.logs);
+        editor.setValue(`Gathering logs for '${service.name}'...\n\n${result.logs}`);
         editor.refresh();
       }
       if (first || result.refresh) {

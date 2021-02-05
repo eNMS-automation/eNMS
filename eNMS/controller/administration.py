@@ -162,7 +162,7 @@ class AdministrationController(BaseController):
                             instance_type,
                             migration_import=True,
                             no_fetch=empty_database,
-                            update_pools=False,
+                            update_pools=kwargs.get("update_pools", False),
                             import_mechanism=True,
                             **instance,
                         )
@@ -191,9 +191,10 @@ class AdministrationController(BaseController):
                         info("\n".join(format_exc().splitlines()))
                         status = "Partial import (see logs)."
         db.session.commit()
-        for model in ("access", "service"):
-            for instance in db.fetch_all(model):
-                instance.update()
+        if not kwargs.get("skip_model_update"):
+            for model in ("access", "service"):
+                for instance in db.fetch_all(model):
+                    instance.update()
         if not kwargs.get("skip_pool_update"):
             for pool in db.fetch_all("pool"):
                 pool.compute_pool()
@@ -209,6 +210,9 @@ class AdministrationController(BaseController):
                 folder="services",
                 name=service_name,
                 import_export_types=["service", "workflow_edge"],
+                skip_pool_update=True,
+                skip_model_update=True,
+                update_pools=True,
             )
         rmtree(path / service_name, ignore_errors=True)
         return status

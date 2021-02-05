@@ -850,7 +850,7 @@ class Run(AbstractBase):
                     payload.update(old_result["payload"])
             if self.service.iteration_values:
                 targets_results = {}
-                targets = self.eval(self.service.iteration_values, **locals())[0]
+                targets = list(self.eval(self.service.iteration_values, **locals())[0])
                 if not isinstance(targets, dict):
                     targets = dict(zip(map(str, targets), targets))
                 for target_name, target_value in targets.items():

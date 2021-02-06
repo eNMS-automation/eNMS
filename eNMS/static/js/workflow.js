@@ -86,10 +86,7 @@ export function displayWorkflow(workflowData) {
   graph.on("oncontext", function (properties) {
     if (triggerMenu) {
       // eslint-disable-next-line new-cap
-      mousePosition = graph.DOMtoCanvas({
-        x: properties.event.offsetX,
-        y: properties.event.offsetY,
-      });
+      mousePosition = properties.pointer.canvas;
       properties.event.preventDefault();
       const node = this.getNodeAt(properties.pointer.DOM);
       const edge = this.getEdgeAt(properties.pointer.DOM);
@@ -114,13 +111,14 @@ export function displayWorkflow(workflowData) {
     }
   });
   graph.on("doubleClick", function (event) {
+    mousePosition = event.pointer.canvas;
     event.event.preventDefault();
     let node = nodes.get(this.getNodeAt(event.pointer.DOM));
     if (["Placeholder", "Start", "End"].includes(node.name)) node = currentPlaceholder;
     if (!node || !node.id) {
       return;
     } else if (node.type == "label") {
-      showLabelPanel(node);
+      showLabelPanel({label: node, usePosition: true});
     } else if (node.type == "workflow") {
       switchToWorkflow(`${currentPath}>${node.id}`, null, $("#current-runtime").val());
     } else {

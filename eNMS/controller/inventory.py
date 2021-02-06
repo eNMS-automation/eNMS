@@ -233,9 +233,9 @@ class InventoryController(BaseController):
         return {
             f"{model}s": [
                 instance.view_properties
-                for instance in db.session.query(models[model])
-                .filter(and_(*self.build_filtering_constraints(model, **form)))
-                .all()
+                for instance in self.build_relationship_constraints(
+                    db.query(model), model, **form
+                ).all()
             ]
             for model, form in kwargs.items()
         }

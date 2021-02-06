@@ -118,7 +118,7 @@ export function displayWorkflow(workflowData) {
     if (!node || !node.id) {
       return;
     } else if (node.type == "label") {
-      showLabelPanel({label: node, usePosition: true});
+      showLabelPanel({ label: node, usePosition: true });
     } else if (node.type == "workflow") {
       switchToWorkflow(`${currentPath}>${node.id}`, null, $("#current-runtime").val());
     } else {

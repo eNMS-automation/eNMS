@@ -66,7 +66,7 @@ let ends = new Set();
 let currentMode = "motion";
 export let creationMode;
 let mousePosition;
-let currLabel;
+let currentLabel;
 let triggerMenu;
 let currentPlaceholder;
 let placeholder;
@@ -120,7 +120,7 @@ export function displayWorkflow(workflowData) {
     if (!node || !node.id) {
       return;
     } else if (node.type == "label") {
-      editLabel(node);
+      showLabelPanel(node);
     } else if (node.type == "workflow") {
       switchToWorkflow(`${currentPath}>${node.id}`, null, $("#current-runtime").val());
     } else {
@@ -648,9 +648,9 @@ Object.assign(action, {
   "Create 'Failure' edge": () => switchMode("failure"),
   "Create 'Prerequisite' edge": () => switchMode("prerequisite"),
   "Move Nodes": () => switchMode("motion"),
-  "Create Label": () =>
-    openPanel({ name: "workflow_label", title: "Create a new label" }),
-  "Edit Label": editLabel,
+  "Create Label": () => showLabelPanel({ usePosition: true }),
+  "Create Label Button": () => showLabelPanel({ usePosition: false }),
+  "Edit Label": (label) => showLabelPanel({ label: label, usePosition: true }),
   "Edit Edge": (edge) => {
     showInstancePanel("workflow_edge", edge.id);
   },
@@ -666,31 +666,32 @@ Object.assign(action, {
   },
 });
 
+function showLabelPanel({ label, usePosition }) {
+  if (!usePosition) mousePosition = null;
+  openPanel({
+    name: "workflow_label",
+    title: label ? "Edit label" : "Create a new label",
+    callback: () => {
+      if (label) {
+        $("#workflow_label-text").val(label.label);
+        $("#workflow_label-alignment").val(label.font.align).selectpicker("refresh");
+        currentLabel = label;
+      } else {
+        currentLabel = null;
+      }
+    },
+  });
+}
+
 function createLabel() {
-  const pos = currLabel
-    ? [currLabel.x, currLabel.y]
-    : mousePosition
-    ? [mousePosition.x, mousePosition.y]
-    : [0, 0];
+  const pos = mousePosition ? [mousePosition.x, mousePosition.y] : [0, 0];
   call({
-    url: `/create_label/${workflow.id}/${pos[0]}/${pos[1]}/${currLabel?.id}`,
+    url: `/create_label/${workflow.id}/${pos[0]}/${pos[1]}/${currentLabel?.id}`,
     form: "workflow_label-form",
     callback: function (result) {
       drawLabel(result.id, result);
       $("#workflow_label").remove();
       notify("Label created.", "success", 5);
-    },
-  });
-}
-
-function editLabel(label) {
-  openPanel({
-    name: "workflow_label",
-    title: "Edit label",
-    callback: () => {
-      $("#workflow_label-text").val(label.label);
-      $("#workflow_label-alignment").val(label.font.align).selectpicker("refresh");
-      currLabel = label;
     },
   });
 }

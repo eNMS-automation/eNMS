@@ -798,7 +798,7 @@ class Run(AbstractBase):
                     self.log("error", str(exc), device)
                     result = "\n".join(format_exc().splitlines())
                     results = {"success": False, "result": result}
-                self.convert_result(results)
+                results = self.convert_result(results)
                 if "success" not in results:
                     results["success"] = True
                 if self.service.postprocessing and (

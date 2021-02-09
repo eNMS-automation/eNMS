@@ -14,7 +14,7 @@
     /form/user, /form/link_filtering, /form/pool, /table_group, /form/pool_filtering,
     /form/run_filtering, /form/napalm_backup_service, /task_table, /form/workflow_edge,
     /form/service_filtering, /form/database_deletion, /form/task_filtering, /form/group,
-    /form/excel_export, /form/payload_extraction_service, /form/configure_bgp_service,
+    /form/excel_export, /form/data_extraction_service, /form/configure_bgp_service,
     /dashboard, /form/file, /form/task, /pool_table, /form/generic_file_transfer_service,
     /form/netmiko_configuration_service, /form/mail_notification_service, /form/upload_files,
     /run_table, /workflow_builder, /form/link, /form/netmiko_file_transfer_service,

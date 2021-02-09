@@ -10,10 +10,10 @@ from eNMS.forms.fields import HiddenField, SelectField, StringField
 from eNMS.models.automation import Service
 
 
-class PayloadExtractionService(Service):
+class DataExtractionService(Service):
 
-    __tablename__ = "payload_extraction_service"
-    pretty_name = "Payload Extraction"
+    __tablename__ = "data_extraction_service"
+    pretty_name = "Data Extraction"
     id = db.Column(Integer, ForeignKey("service.id"), primary_key=True)
     variable1 = db.Column(db.SmallString)
     query1 = db.Column(db.SmallString)
@@ -31,7 +31,7 @@ class PayloadExtractionService(Service):
     match3 = db.Column(db.LargeString)
     operation3 = db.Column(db.SmallString, default="__setitem__")
 
-    __mapper_args__ = {"polymorphic_identity": "payload_extraction_service"}
+    __mapper_args__ = {"polymorphic_identity": "data_extraction_service"}
 
     def job(self, run, payload, device=None):
         result, success = {}, True
@@ -84,8 +84,8 @@ operation_choices = (
 )
 
 
-class PayloadExtractionForm(ServiceForm):
-    form_type = HiddenField(default="payload_extraction_service")
+class DataExtractionForm(ServiceForm):
+    form_type = HiddenField(default="data_extraction_service")
     variable1 = StringField("Variable Name")
     query1 = StringField("Python Extraction Query", python=True)
     match_type1 = SelectField("Post Processing", choices=match_choices)

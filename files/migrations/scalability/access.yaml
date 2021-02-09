@@ -28,7 +28,7 @@
     /form/swiss_army_knife_service, /form/topology_import_service, /form/napalm_ping_service,
     /form/napalm_traceroute_service, /form/ping_service, /form/mail_notification_service,
     /form/mattermost_notification_service, /form/slack_notification_service, /form/unix_command_service,
-    /form/unix_shell_script_service, /form/payload_extraction_service, /form/python_snippet_service,
+    /form/unix_shell_script_service, /form/data_extraction_service, /form/python_snippet_service,
     /form/panel, /template/form, /template/devices]
   menu: [Home, Administration, Inventory, Visualization, Automation, Scheduling, Template]
   name: Full UI Access

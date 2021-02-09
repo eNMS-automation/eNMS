@@ -236,7 +236,11 @@ class WorkflowEdge(AbstractBase):
     color_mapping = {"success": "green", "failure": "red", "prerequisite": "blue"}
 
     def __init__(self, **kwargs):
-        self.name = app.get_time()
         self.label = kwargs["subtype"]
         self.color = self.color_mapping[kwargs["subtype"]]
         super().__init__(**kwargs)
+
+    def update(self, **kwargs):
+        super().update(**kwargs)
+        if "name" not in kwargs:
+            self.name = f"[{self.workflow}] {app.get_time()}"

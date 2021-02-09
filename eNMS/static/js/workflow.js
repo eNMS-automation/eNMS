@@ -922,7 +922,9 @@ function getWorkflowTree() {
                     <button
                       type="button"
                       class="btn btn-xs btn-primary"
-                      onclick='eNMS.base.showInstancePanel("service", ${node.data.id})'
+                      onclick='eNMS.base.showInstancePanel(
+                        "${node.data.type}", ${node.data.id}
+                      )'
                     >
                       <span class="glyphicon glyphicon-edit"></span>
                     </button>

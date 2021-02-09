@@ -85,13 +85,6 @@ class Service(AbstractBase):
     pools = relationship(
         "Pool", secondary=db.pool_service_table, back_populates="services"
     )
-    originals = relationship(
-        "Service",
-        secondary=db.originals_association_table,
-        primaryjoin=id == db.originals_association_table.c.original_id,
-        secondaryjoin=id == db.originals_association_table.c.child_id,
-        backref="children",
-    )
     update_target_pools = db.Column(Boolean, default=False)
     update_pools_after_running = db.Column(Boolean, default=False)
     send_notification = db.Column(Boolean, default=False)
@@ -146,17 +139,10 @@ class Service(AbstractBase):
         if "name" not in kwargs:
             self.set_name()
 
-    def get_originals(self, workflow):
-        if workflow.workflows:
-            return set().union(*(self.get_originals(w) for w in workflow.workflows))
-        else:
-            return {self, workflow}
-
     def update(self, **kwargs):
         if "scoped_name" in kwargs and kwargs.get("scoped_name") != self.scoped_name:
             self.set_name(kwargs["scoped_name"])
         super().update(**kwargs)
-        self.originals = list(self.get_originals(self))
 
     @classmethod
     def filtering_constraints(cls, **kwargs):

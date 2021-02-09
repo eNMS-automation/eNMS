@@ -85,11 +85,9 @@
     ],
     "service": [
       "access",
-      "children",
       "id",
       "sources",
       "destinations",
-      "originals",
       "status",
       "superworkflow_id",
       "tasks",

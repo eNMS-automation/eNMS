@@ -9,6 +9,7 @@ flask_wtf
 gitpython
 gunicorn
 napalm
+ncclient
 netmiko
 passlib
 pathlib

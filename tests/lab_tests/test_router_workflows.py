@@ -13,7 +13,7 @@ def test_configuration_workflow(user_client: FlaskClient):
 
 @check_pages("workflow_table")
 def test_extraction_validation_workflow(user_client: FlaskClient):
-    workflow = db.fetch("workflow", name="payload_extraction_validation_worflow")
+    workflow = db.fetch("workflow", name="data_extraction_validation_worflow")
     assert workflow.run()[0]["success"]
 
 

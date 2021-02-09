@@ -1348,9 +1348,10 @@ class Run(AbstractBase):
             logger="security",
         )
         credentials = self.get_credentials(device)
-        if device.netconf_driver != None:
+        if device.netconf_driver is not None:
             driver_name = device.netconf_driver
-        else: driver_name = 'default'
+        else:
+            driver_name = "default"
         device_params = {"name": driver_name}
         ncclient_connection = manager.connect(
             host=device.ip_address,
@@ -1358,8 +1359,8 @@ class Run(AbstractBase):
             hostkey_verify=False,
             look_for_keys=False,
             device_params=device_params,
-            username=credentials['username'],
-            password=credentials['password']
+            username=credentials["username"],
+            password=credentials["password"],
         )
         app.connections_cache["ncclient"][self.parent_runtime][
             device.name
@@ -1397,14 +1398,14 @@ class Run(AbstractBase):
         return cache.get(device)
 
     def close_device_connection(self, device):
-        for library in ("netmiko", "napalm", "scrapli","ncclient"):
+        for library in ("netmiko", "napalm", "scrapli", "ncclient"):
             connection = self.get_connection(library, device)
             if connection:
                 self.disconnect(library, device, connection)
 
     def close_remaining_connections(self):
         threads = []
-        for library in ("netmiko", "napalm", "scrapli","ncclient"):
+        for library in ("netmiko", "napalm", "scrapli", "ncclient"):
             devices = list(app.connections_cache[library][self.runtime])
             for device in devices:
                 connection = app.connections_cache[library][self.runtime][device]

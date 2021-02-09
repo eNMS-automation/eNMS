@@ -1,4 +1,5 @@
 from ast import literal_eval
+from atexit import register
 from contextlib import contextmanager
 from flask_login import current_user
 from json import loads
@@ -23,8 +24,8 @@ from sqlalchemy.ext.associationproxy import ASSOCIATION_PROXY
 from sqlalchemy.ext.declarative import declarative_base, DeclarativeMeta
 from sqlalchemy.ext.mutable import MutableDict, MutableList
 from sqlalchemy.orm import scoped_session, sessionmaker
-from sqlalchemy.types import JSON
 from sqlalchemy.orm.collections import InstrumentedList
+from sqlalchemy.types import JSON
 from time import sleep
 
 from eNMS.models import model_properties, models, property_types, relationships
@@ -38,6 +39,7 @@ class Database:
         self.database_url = getenv("DATABASE_URL", "sqlite:///database.db")
         self.dialect = self.database_url.split(":")[0]
         self.rbac_error = type("RbacError", (Exception,), {})
+        self.private_properties_set = set()
         self.configure_columns()
         self.engine = create_engine(
             self.database_url,
@@ -62,6 +64,7 @@ class Database:
         for retry_type, values in self.transactions["retry"].items():
             for parameter, number in values.items():
                 setattr(self, f"retry_{retry_type}_{parameter}", number)
+        register(self.cleanup)
 
     def create_metabase(self):
         class SubDeclarativeMeta(DeclarativeMeta):
@@ -174,7 +177,7 @@ class Database:
                     getattr(target, "private", False)
                     or not getattr(target, "log_changes", True)
                     or not getattr(state.class_, attr.key).info.get("log_change", True)
-                    or attr.key in self.private_properties
+                    or attr.key in self.private_properties_set
                     or not hist.has_changes()
                 ):
                     continue
@@ -207,6 +210,24 @@ class Database:
             if "configure_events" in vars(model):
                 model.configure_events()
 
+        if app.use_vault:
+            for model in db.private_properties:
+
+                @event.listens_for(models[model].name, "set", propagate=True)
+                def vault_update(target, new_name, old_name, *_):
+                    if new_name == old_name:
+                        return
+                    for property in db.private_properties[target.class_type]:
+                        path = f"secret/data/{target.type}"
+                        data = app.vault_client.read(f"{path}/{old_name}/{property}")
+                        if not data:
+                            return
+                        app.vault_client.write(
+                            f"{path}/{new_name}/{property}",
+                            data={property: data["data"]["data"][property]},
+                        )
+                        app.vault_client.delete(f"{path}/{old_name}")
+
     def configure_associations(self):
         for name, association in self.relationships["associations"].items():
             model1, model2 = association["model1"], association["model2"]
@@ -233,8 +254,9 @@ class Database:
                 ),
             )
 
-    def query(self, model, rbac="read", username=None):
-        query = self.session.query(models[model])
+    def query(self, model, rbac="read", username=None, property=None):
+        entity = getattr(models[model], property) if property else models[model]
+        query = self.session.query(entity)
         if rbac and model != "user":
             if current_user:
                 user = current_user
@@ -382,6 +404,9 @@ class Database:
                 self.dont_migrate[model].append(property)
             setattr(table, property, column)
         return table
+
+    def cleanup(self):
+        self.engine.dispose()
 
 
 db = Database()

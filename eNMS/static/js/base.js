@@ -220,8 +220,10 @@ export function downloadFile(name, content, type) {
 
 export function createTooltips() {
   $("[data-tooltip]").each(function () {
+    const id = `tooltip-${$(this).attr("data-tooltip").replace(/\s/g, "")}`;
     jsPanel.tooltip.create({
-      id: `tooltip-${$(this).attr("data-tooltip").replace(/\s/g, "")}`,
+      id: id,
+      callback: () => setTimeout(() => $(`#${id}`).fadeOut(1000), 2500),
       content: `<p style="margin-right: 10px; margin-left: 10px; color: black">
         <b>${$(this).attr("data-tooltip")}</b></p>`,
       contentSize: "auto",
@@ -249,12 +251,9 @@ export function openPanel({
   content,
   size,
   url,
+  rbac = true,
 }) {
-  if (
-    !user.is_admin &&
-    !user.get_requests.includes(url || `/form/${name}`) &&
-    !url.startsWith("../help/")
-  ) {
+  if (rbac && !user.is_admin && !user.get_requests.includes(url || `/${name}_form`)) {
     return notify("Error 403 - Operation not allowed.", "error", 5);
   }
   const panelId = id ? `${name}-${id}` : name;
@@ -288,7 +287,7 @@ export function openPanel({
     kwargs.content = content;
   } else {
     kwargs.contentAjax = {
-      url: url || `../form/${name}`,
+      url: url || `../${name}_form`,
       done: function (panel) {
         panel.content.innerHTML = this.responseText;
         preprocessForm(panel, id, type, duplicate);
@@ -433,6 +432,7 @@ export function preprocessForm(panel, id, type, duplicate) {
             editor.setSize("100%", "fit-content");
           });
         },
+        rbac: false,
       });
     });
     $(el).append(button);

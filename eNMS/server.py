@@ -19,11 +19,8 @@ from flask_login import current_user, LoginManager, login_user, logout_user
 from flask_restful import abort as rest_abort, Api, Resource
 from flask_wtf.csrf import CSRFProtect
 from functools import wraps
-from importlib import import_module
 from itertools import chain
-from json import load
 from os import getenv
-from pathlib import Path
 from threading import Thread
 from time import sleep
 from traceback import format_exc
@@ -32,9 +29,9 @@ from uuid import getnode
 from eNMS import app
 from eNMS.database import db
 from eNMS.forms import form_classes, form_properties
-from eNMS.forms.administration import init_variable_forms, LoginForm
+from eNMS.forms.administration import LoginForm
 from eNMS.models import models, property_types, relationships
-from eNMS.setup import properties, rbac, themes, update_file, visualization
+from eNMS.setup import properties, themes, visualization
 
 
 class Server(Flask):
@@ -68,14 +65,34 @@ class Server(Flask):
                 )
                 return redirect(url_for("blueprint.route", page="login"))
             else:
-                if (
-                    not current_user.is_admin
-                    and request.method == "GET"
-                    and request.path not in current_user.get_requests
-                    and not request.path.startswith("/help/")
+                method = request.method.lower()
+                endpoint = f"/{request.path.split('/')[1]}"
+                endpoint_rbac = app.rbac[f"{method}_requests"].get(endpoint)
+                if not endpoint_rbac:
+                    error = 404
+                elif not current_user.is_admin and (
+                    endpoint_rbac == "admin"
+                    or endpoint_rbac == "access"
+                    and endpoint not in getattr(current_user, f"{method}_requests")
                 ):
-                    return render_template("error.html", error=403), 403
-                return function(*args, **kwargs)
+                    error = 403
+                else:
+                    try:
+                        return function(*args, **kwargs)
+                    except db.rbac_error:
+                        error = 403
+                    except Exception:
+                        error = 500
+                        app.log("error", format_exc(), change_log=False)
+                if method == "get":
+                    return render_template("error.html", error=error), error
+                else:
+                    message = {
+                        403: "Operation not allowed.",
+                        404: "Invalid POST request.",
+                        500: "Internal Server Error.",
+                    }[error]
+                    return jsonify({"alert": f"Error {error} - {message}"})
 
         return decorated_function
 
@@ -96,24 +113,8 @@ class Server(Flask):
         )
 
     def register_plugins(self):
-        for plugin_path in Path(app.settings["app"]["plugin_path"]).iterdir():
-            if not Path(plugin_path / "settings.json").exists():
-                continue
-            try:
-                with open(plugin_path / "settings.json", "r") as file:
-                    settings = load(file)
-                if not settings["active"]:
-                    continue
-                module = import_module(f"eNMS.plugins.{plugin_path.stem}")
-                module.Plugin(self, app, db, **settings)
-                for setup_file in ("database", "properties", "rbac"):
-                    update_file(getattr(app, setup_file), settings.get(setup_file, {}))
-            except Exception as exc:
-                app.log("error", f"Could not load plugin '{plugin_path.stem}' ({exc})")
-                continue
-            app.log("info", f"Loading plugin: {settings['name']}")
-        init_variable_forms(app)
-        db.base.metadata.create_all(bind=db.engine)
+        for plugin in app.plugins.values():
+            plugin["module"].Plugin(self, app, db, **plugin["settings"])
 
     def register_extensions(self):
         self.auth = HTTPBasicAuth()
@@ -139,7 +140,7 @@ class Server(Flask):
             return {
                 "configuration_properties": app.configuration_properties,
                 "form_properties": form_properties,
-                "menu": rbac["menu"],
+                "menu": app.rbac["menu"],
                 "names": app.property_names,
                 "property_types": property_types,
                 "relations": list(set(chain.from_iterable(relationships.values()))),
@@ -247,19 +248,19 @@ class Server(Flask):
             logout_user()
             return redirect(url_for("blueprint.route", page="login"))
 
-        @blueprint.route("/table/<table_type>")
+        @blueprint.route("/<table_type>_table")
         @self.monitor_requests
         def table(table_type):
             return render_template(
-                "table.html", **{"endpoint": f"table/{table_type}", "type": table_type}
+                "table.html", **{"endpoint": f"{table_type}_table", "type": table_type}
             )
 
-        @blueprint.route("/visualization/<view_type>")
+        @blueprint.route("/<view_type>_view")
         @self.monitor_requests
         def view(view_type):
             return render_template(
                 "visualization.html",
-                endpoint=view_type,
+                endpoint=f"{view_type}_view",
                 default_pools=app.get_visualization_parameters(),
             )
 
@@ -268,7 +269,7 @@ class Server(Flask):
         def workflow_builder():
             return render_template("workflow.html", endpoint="workflow_builder")
 
-        @blueprint.route("/form/<form_type>")
+        @blueprint.route("/<form_type>_form")
         @self.monitor_requests
         def form(form_type):
             form = form_classes[form_type](request.form)
@@ -314,13 +315,8 @@ class Server(Flask):
         @blueprint.route("/<path:page>", methods=["POST"])
         @self.monitor_requests
         def route(page):
-            endpoint, *args = page.split("/")
-            admin_user = current_user.is_admin
-            if f"/{endpoint}" not in app.rbac["post_requests"]:
-                return jsonify({"alert": "Invalid POST request."})
-            if not admin_user and f"/{endpoint}" not in current_user.post_requests:
-                return jsonify({"alert": "Error 403 - Operation not allowed."})
             form_type = request.form.get("form_type")
+            endpoint, *args = page.split("/")
             if request.json:
                 kwargs = request.json
             elif form_type:
@@ -330,15 +326,8 @@ class Server(Flask):
                 kwargs = form.form_postprocessing(request.form)
             else:
                 kwargs = request.form
-            try:
-                with db.session_scope():
-                    result = getattr(app, endpoint)(*args, **kwargs)
-            except db.rbac_error:
-                result = {"alert": "Error 403 - Operation not allowed."}
-            except Exception:
-                app.log("error", format_exc(), change_log=False)
-                result = {"alert": "Error 500 - Internal Server Error"}
-            return jsonify(result)
+            with db.session_scope():
+                return jsonify(getattr(app, endpoint)(*args, **kwargs))
 
         self.register_blueprint(blueprint)
 
@@ -438,9 +427,7 @@ class Server(Flask):
                         continue
                     try:
                         object_data = app.objectify(model, instance)
-                        object_data["update_pools"] = instance.get(
-                            "update_pools", model in properties["filtering"]
-                        )
+                        object_data["update_pools"] = instance.get("update_pools", True)
                         instance = db.factory(model, **object_data)
                         result["success"].append(instance.name)
                     except Exception:

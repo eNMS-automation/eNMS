@@ -7,7 +7,7 @@ from eNMS.database import db
 from tests.conftest import check_pages
 
 
-@check_pages("table/device")
+@check_pages("device_table")
 def test_rest_api_basic(user_client: FlaskClient):
     number_of_devices = len(db.fetch_all("device"))
     post(

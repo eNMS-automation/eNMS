@@ -151,13 +151,7 @@
       "time_between_retries"
     ],
     "user": ["name"],
-    "task": [
-      "status",
-      "frequency",
-      "frequency_unit",
-      "crontab_expression",
-      "service_name"
-    ]
+    "task": ["status", "frequency", "frequency_unit", "crontab_expression"]
   },
   "tables": {
     "device": [

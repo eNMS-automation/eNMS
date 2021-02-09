@@ -29,6 +29,7 @@ from sqlalchemy import and_
 from sqlalchemy.exc import IntegrityError, InvalidRequestError
 from sqlalchemy.orm import aliased, configure_mappers
 from sys import path as sys_path
+from traceback import format_exc
 from uuid import getnode
 from warnings import warn
 
@@ -59,7 +60,6 @@ class BaseController:
     def __init__(self):
         self.pre_init()
         self.settings = settings
-        self.rbac = rbac
         self.properties = properties
         self.database = database
         self.logging = logging
@@ -67,6 +67,7 @@ class BaseController:
         self.load_custom_properties()
         self.load_configuration_properties()
         self.path = Path.cwd()
+        self.init_rbac()
         self.init_encryption()
         self.use_vault = settings["vault"]["use_vault"]
         if self.use_vault:
@@ -109,7 +110,9 @@ class BaseController:
         return str(self.decrypt(password), "utf-8")
 
     def initialize_database(self):
+        self.init_plugins()
         self.init_services()
+        db.private_properties_set |= set(sum(db.private_properties.values(), []))
         db.base.metadata.create_all(bind=db.engine)
         configure_mappers()
         db.configure_model_events(self)
@@ -180,7 +183,9 @@ class BaseController:
                 self.property_names[property] = pretty_name
                 model_properties[model].append(property)
                 if property_dict.get("private"):
-                    db.private_properties.append(property)
+                    if model not in db.private_properties:
+                        db.private_properties[model] = []
+                    db.private_properties[model].append(property)
                 if model == "device" and property_dict.get("configuration"):
                     self.configuration_properties[property] = pretty_name
 
@@ -234,6 +239,16 @@ class BaseController:
             spec = spec_from_file_location(str(file).split("/")[-1][:-3], str(file))
             spec.loader.exec_module(module_from_spec(spec))
 
+    def init_rbac(self):
+        self.rbac = {"pages": [], **rbac}
+        for _, category in rbac["menu"].items():
+            for page, page_values in category["pages"].items():
+                if page_values["rbac"] == "access":
+                    self.rbac["pages"].append(page)
+                for subpage, subpage_values in page_values.get("subpages", {}).items():
+                    if subpage_values["rbac"] == "access":
+                        self.rbac["pages"].append(subpage)
+
     def init_redis(self):
         host = getenv("REDIS_ADDR")
         self.redis_queue = (
@@ -251,6 +266,43 @@ class BaseController:
 
     def init_scheduler(self):
         self.scheduler_address = getenv("SCHEDULER_ADDR")
+
+    def update_settings(self, old, new):
+        for key, value in new.items():
+            if key not in old:
+                old[key] = value
+            else:
+                old_value = old[key]
+                if isinstance(old_value, list):
+                    old_value.extend(value)
+                elif isinstance(old_value, dict):
+                    self.update_settings(old_value, value)
+                else:
+                    old[key] = value
+
+        return old
+
+    def init_plugins(self):
+        self.plugins = {}
+        for plugin_path in Path(self.settings["app"]["plugin_path"]).iterdir():
+            if not Path(plugin_path / "settings.json").exists():
+                continue
+            try:
+                with open(plugin_path / "settings.json", "r") as file:
+                    settings = load(file)
+                if not settings["active"]:
+                    continue
+                self.plugins[plugin_path.stem] = {
+                    "settings": settings,
+                    "module": import_module(f"eNMS.plugins.{plugin_path.stem}"),
+                }
+                for setup_file in ("database", "properties", "rbac"):
+                    property = getattr(self, setup_file)
+                    self.update_settings(property, settings.get(setup_file, {}))
+            except Exception:
+                error(f"Could not load plugin '{plugin_path.stem}':\n{format_exc()}")
+                continue
+            info(f"Loading plugin: {settings['name']}")
 
     def init_services(self):
         path_services = [self.path / "eNMS" / "services"]
@@ -321,15 +373,19 @@ class BaseController:
 
     def update(self, type, **kwargs):
         try:
-            must_be_new = kwargs.get("id") == ""
+            kwargs.update(
+                {
+                    "last_modified": self.get_time(),
+                    "update_pools": True,
+                    "must_be_new": kwargs.get("id") == "",
+                }
+            )
             for arg in ("name", "scoped_name"):
                 if arg in kwargs:
                     kwargs[arg] = kwargs[arg].strip()
-            kwargs["last_modified"] = self.get_time()
-            kwargs["update_pools"] = type in properties["filtering"]
-            if must_be_new:
+            if kwargs["must_be_new"]:
                 kwargs["creator"] = kwargs["user"] = getattr(current_user, "name", "")
-            instance = db.factory(type, must_be_new=must_be_new, **kwargs)
+            instance = db.factory(type, **kwargs)
             if kwargs.get("copy"):
                 db.fetch(type, id=kwargs["copy"]).duplicate(clone=instance)
             db.session.flush()
@@ -340,6 +396,7 @@ class BaseController:
             db.session.rollback()
             if isinstance(exc, IntegrityError):
                 return {"alert": f"There is already a {type} with the same parameters."}
+            self.log("error", format_exc())
             return {"alert": str(exc)}
 
     def log(self, severity, content, user=None, change_log=True, logger="root"):
@@ -356,17 +413,6 @@ class BaseController:
                 },
             )
         return logger_settings
-
-    def count_models(self):
-        return {
-            "counters": {
-                model: db.query(model).count() for model in properties["dashboard"]
-            },
-            "properties": {
-                model: self.counters(properties["dashboard"][model][0], model)
-                for model in properties["dashboard"]
-            },
-        }
 
     def compare(self, type, id, v1, v2, context_lines):
         if type in ("result", "device_result"):
@@ -442,32 +488,27 @@ class BaseController:
         return query
 
     def filtering(self, model, bulk=False, **kwargs):
-        table = models[model]
+        table, query = models[model], db.query(model)
+        total_records = query.with_entities(table.id).count()
         try:
             constraints = self.build_filtering_constraints(model, **kwargs)
         except regex_error:
             return {"error": "Invalid regular expression as search parameter."}
         constraints.extend(table.filtering_constraints(**kwargs))
-        query = self.build_relationship_constraints(db.query(model), model, **kwargs)
-        total_records, query = query.count(), query.filter(and_(*constraints))
+        query = self.build_relationship_constraints(query, model, **kwargs)
+        query = query.filter(and_(*constraints))
+        filtered_records = query.with_entities(table.id).count()
         if bulk:
             instances = query.all()
             return instances if bulk == "object" else [obj.id for obj in instances]
-        ordering = getattr(
-            getattr(
-                table,
-                kwargs["columns"][int(kwargs["order"][0]["column"])]["data"],
-                None,
-            ),
-            kwargs["order"][0]["dir"],
-            None,
-        )
+        data = kwargs["columns"][int(kwargs["order"][0]["column"])]["data"]
+        ordering = getattr(getattr(table, data, None), kwargs["order"][0]["dir"], None)
         if ordering:
             query = query.order_by(ordering())
         table_result = {
             "draw": int(kwargs["draw"]),
             "recordsTotal": total_records,
-            "recordsFiltered": query.count(),
+            "recordsFiltered": filtered_records,
             "data": [
                 obj.table_properties(**kwargs)
                 for obj in query.limit(int(kwargs["length"]))

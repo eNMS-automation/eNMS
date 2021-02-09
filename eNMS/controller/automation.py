@@ -450,7 +450,7 @@ class AutomationController(BaseController):
             run_kwargs["restart_run"] = restart_run
         service = db.fetch("service", id=service)
         service.status = "Running"
-        initial_payload = service.initial_payload
+        initial_payload = kwargs.get("initial_payload", service.initial_payload)
         if service.type == "workflow" and service.superworkflow:
             run_kwargs["placeholder"] = run_kwargs["start_service"] = service.id
             service = service.superworkflow
@@ -462,6 +462,8 @@ class AutomationController(BaseController):
         return run.run({**initial_payload, **kwargs})
 
     def run_service(self, path, **kwargs):
+        if isinstance(kwargs.get("start_services"), str):
+            kwargs["start_services"] = kwargs["start_services"].split("-")
         service_id = str(path).split(">")[-1]
         for property in ("user", "csrf_token", "form_type"):
             kwargs.pop(property, None)

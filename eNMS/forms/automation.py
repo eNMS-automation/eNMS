@@ -174,9 +174,20 @@ class ServiceForm(BaseForm):
         )
         if conversion_validation_mismatch:
             self.conversion_method.errors.append(
-                f"The conversion method is set to '{self.conversion_method.data}'"
-                f" and the validation method to '{self.validation_method.data}' :"
+                f"The conversion method is set to {self.conversion_method.label}"
+                f" and the validation method to {self.validation_method.label} :"
                 " these do not match."
+            )
+        empty_validation = self.validation_condition.data != "none" and (
+            self.validation_method.data == "text"
+            and not self.content_match.data
+            or self.validation_method.data == "dict_included"
+            and self.dict_match.data == "{}"
+        )
+        if empty_validation:
+            self.content_match.errors.append(
+                f"The validation method is set to '{self.validation_method.data}'"
+                f" and the matching value is empty: these do no match."
             )
         too_many_threads_error = (
             self.max_processes.data > app.settings["automation"]["max_process"]
@@ -188,9 +199,10 @@ class ServiceForm(BaseForm):
             )
         return (
             valid_form
-            and not no_recipient_error
             and not conversion_validation_mismatch
+            and not empty_validation
             and not forbidden_name_error
+            and not no_recipient_error
             and not too_many_threads_error
         )
 
@@ -342,7 +354,7 @@ class NapalmForm(ConnectionForm):
 class RestartWorkflowForm(BaseForm):
     action = "eNMS.workflow.restartWorkflow"
     form_type = HiddenField(default="restart_workflow")
-    start_services = MultipleInstanceField("Services", model="service")
+    start_services = HiddenField()
     restart_runtime = SelectField("Restart Runtime", choices=(), validation=False)
 
 

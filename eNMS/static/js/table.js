@@ -31,7 +31,7 @@ export class Table {
     if (relation) this.relationString = JSON.stringify(relation).replace(/"/g, "'");
     this.columns = tableProperties[this.type];
     this.constraints = constraints;
-    let visibleColumns = localStorage.getItem(`table/${this.type}`);
+    let visibleColumns = localStorage.getItem(`${this.type}_table`);
     if (visibleColumns) visibleColumns = visibleColumns.split(",");
     this.columns.forEach((column) => {
       if (visibleColumns) column.visible = visibleColumns.includes(column.data);
@@ -201,13 +201,13 @@ export class Table {
           at: "center-bottom",
           offsetY: 18,
         },
-        url: `../form/${this.type}_relation_filtering`,
+        url: `../${this.type}_relation_filtering_form`,
         title: "Relationship-based Filtering",
       });
     }
     this.createfilteringTooltips();
     createTooltips();
-    const visibleColumns = localStorage.getItem(`table/${this.type}`);
+    const visibleColumns = localStorage.getItem(`${this.type}_table`);
     this.columns.forEach((column) => {
       const visible = visibleColumns
         ? visibleColumns.split(",").includes(column.name)
@@ -225,7 +225,7 @@ export class Table {
       });
       self.table.ajax.reload(null, false);
       self.createfilteringTooltips();
-      localStorage.setItem(`table/${self.type}`, $(this).val());
+      localStorage.setItem(`${self.type}_table`, $(this).val());
     });
     self.table.columns.adjust();
   }
@@ -784,6 +784,14 @@ tables.service = class ServiceTable extends Table {
         type="button"
       >
         <select id="service-type" class="form-control"></select>
+      </button>`,
+      `<button
+        class="btn btn-primary"
+        onclick="eNMS.automation.showImportServicePanel()"
+        data-tooltip="Import Service"
+        type="button"
+      >
+        <span class="glyphicon glyphicon-circle-arrow-down"></span>
       </button>`,
       this.bulkEditButton(),
       this.exportTableButton(),

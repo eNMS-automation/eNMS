@@ -1,6 +1,7 @@
 from wtforms.validators import InputRequired
 from wtforms.widgets import TextArea
 
+from eNMS import app
 from eNMS.forms import BaseForm, choices
 from eNMS.forms.fields import (
     BooleanField,
@@ -125,85 +126,96 @@ class ChangelogForm(BaseForm):
     content = StringField(widget=TextArea(), render_kw={"rows": 10})
 
 
-def init_variable_forms(app):
-    class RbacForm(BaseForm):
-        action = "eNMS.base.processData"
-        form_type = HiddenField(default="rbac")
-        get_request_allowed = False
-        id = HiddenField()
-        name = StringField("Name", [InputRequired()])
-        description = StringField(widget=TextArea(), render_kw={"rows": 6})
-        email = StringField("Email")
+class RbacForm(BaseForm):
+    action = "eNMS.base.processData"
+    form_type = HiddenField(default="rbac")
+    get_request_allowed = False
+    id = HiddenField()
+    name = StringField("Name", [InputRequired()])
+    description = StringField(widget=TextArea(), render_kw={"rows": 6})
+    email = StringField("Email")
 
-    class UserForm(RbacForm):
-        form_type = HiddenField(default="user")
-        groups = StringField("Groups")
-        theme = SelectField(
-            "Theme",
-            choices=[
-                (theme, values["name"]) for theme, values in themes["themes"].items()
-            ],
-        )
-        authentication = SelectField(
-            "Authentication",
-            choices=[
-                (method, values["display_name"])
-                for method, values in settings["authentication"]["methods"].items()
-            ],
-        )
-        password = PasswordField("Password")
-        is_admin = BooleanField(default=False)
 
-    class AccessForm(RbacForm):
-        template = "access"
-        form_type = HiddenField(default="access")
-        menu = SelectMultipleField("Menu", choices=choices(list(app.rbac["menu"])))
-        pages = SelectMultipleField("Pages", choices=choices(app.rbac["pages"]))
-        upper_menu = SelectMultipleField(
-            "Upper Menu", choices=choices(app.rbac["upper_menu"])
-        )
-        get_requests = SelectMultipleField(
-            "GET requests", choices=choices(app.rbac["get_requests"])
-        )
-        post_requests = SelectMultipleField(
-            "POST requests", choices=choices(app.rbac["post_requests"])
-        )
-        delete_requests = SelectMultipleField(
-            "DELETE requests", choices=choices(app.rbac["delete_requests"])
-        )
-        user_pools = MultipleInstanceField("pool")
-        access_pools = MultipleInstanceField("pool")
-        access_type = SelectMultipleStringField(
-            "Access Type",
-            choices=choices(
-                ["Read", "Edit", "Run", "Schedule", "Connect", "Use as target"]
-            ),
-        )
-        relations = ["pools", "services"]
+class UserForm(RbacForm):
+    form_type = HiddenField(default="user")
+    groups = StringField("Groups")
+    theme = SelectField(
+        "Theme",
+        choices=[(theme, values["name"]) for theme, values in themes["themes"].items()],
+    )
+    authentication = SelectField(
+        "Authentication",
+        choices=[
+            (method, values["display_name"])
+            for method, values in settings["authentication"]["methods"].items()
+        ],
+    )
+    password = PasswordField("Password")
+    is_admin = BooleanField(default=False)
 
-        @classmethod
-        def form_init(cls):
-            cls.configure_relationships("users")
 
-    class DatabaseMigrationsForm(BaseForm):
-        template = "database_migration"
-        form_type = HiddenField(default="database_migration")
-        empty_database_before_import = BooleanField("Empty Database before Import")
-        skip_pool_update = BooleanField(
-            "Skip the Pool update after Import", default="checked"
-        )
-        export_private_properties = BooleanField(
-            "Include private properties", default="checked"
-        )
-        export_choices = [(p, p) for p in app.database["import_export_models"]]
-        import_export_types = SelectMultipleField(
-            "Instances to migrate", choices=export_choices
-        )
+class AccessForm(RbacForm):
+    template = "access"
+    form_type = HiddenField(default="access")
+    user_pools = MultipleInstanceField("pool")
+    access_pools = MultipleInstanceField("pool")
+    access_type = SelectMultipleStringField(
+        "Access Type",
+        choices=choices(
+            ["Read", "Edit", "Run", "Schedule", "Connect", "Use as target"]
+        ),
+    )
+    relations = ["pools", "services"]
 
-    class DatabaseDeletionForm(BaseForm):
-        action = "eNMS.administration.databaseDeletion"
-        form_type = HiddenField(default="database_deletion")
-        deletion_choices = [(p, p) for p in app.database["import_export_models"]]
-        deletion_types = SelectMultipleField(
-            "Instances to delete", choices=deletion_choices
-        )
+    @classmethod
+    def form_init(cls):
+        cls.configure_relationships("users")
+        keys = ("get_requests", "post_requests", "delete_requests", "upper_menu")
+        for key in keys:
+            values = [(k, k) for k, v in app.rbac[key].items() if v == "access"]
+            field_name = " ".join(key.split("_")).capitalize()
+            setattr(cls, key, SelectMultipleField(field_name, choices=values))
+        menus, pages = [], []
+        for category, values in app.rbac["menu"].items():
+            if values["rbac"] == "admin":
+                continue
+            if values["rbac"] == "access":
+                menus.append(category)
+            for page, page_values in values["pages"].items():
+                if page_values["rbac"] == "admin":
+                    continue
+                if page_values["rbac"] == "access":
+                    pages.append(page)
+                subpages = page_values.get("subpages", {})
+                for subpage, subpage_values in subpages.items():
+                    if subpage_values["rbac"] == "admin":
+                        continue
+                    if subpage_values["rbac"] == "access":
+                        pages.append(subpage)
+        setattr(cls, "menu", SelectMultipleField("Menu", choices=choices(menus)))
+        setattr(cls, "pages", SelectMultipleField("Pages", choices=choices(pages)))
+
+
+class DatabaseMigrationsForm(BaseForm):
+    template = "database_migration"
+    form_type = HiddenField(default="database_migration")
+    empty_database_before_import = BooleanField("Empty Database before Import")
+    skip_pool_update = BooleanField(
+        "Skip the Pool update after Import", default="checked"
+    )
+    export_private_properties = BooleanField(
+        "Include private properties", default="checked"
+    )
+    export_choices = [(p, p) for p in app.database["import_export_models"]]
+    import_export_types = SelectMultipleField(
+        "Instances to migrate", choices=export_choices
+    )
+
+
+class DatabaseDeletionForm(BaseForm):
+    action = "eNMS.administration.databaseDeletion"
+    form_type = HiddenField(default="database_deletion")
+    deletion_choices = [(p, p) for p in app.database["import_export_models"]]
+    deletion_types = SelectMultipleField(
+        "Instances to delete", choices=deletion_choices
+    )

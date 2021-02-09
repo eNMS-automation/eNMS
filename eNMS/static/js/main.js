@@ -25,18 +25,18 @@ function doc(page) {
   let endpoint = {
     administration: "base/installation.html",
     dashboard: "base/features.html",
-    "table/configuration": "advanced/configuration_management.html",
-    "table/device": "inventory/network_creation.html",
-    "table/event": "automation/scheduling.html",
-    "table/link": "inventory/network_creation.html",
-    "table/changelog": "advanced/administration.html",
-    "table/pool": "inventory/pools.html",
-    "table/run": "automation/services.html",
-    "table/service": "automation/services.html",
-    "table/task": "automation/scheduling.html",
-    "table/user": "advanced/administration.html",
-    view: "inventory/network_visualization.html",
-    workflow_builder: "automation/workflows.html",
+    configuration_table: "advanced/configuration_management.html",
+    device_table: "inventory/network_creation.html",
+    event_table: "automation/scheduling.html",
+    link_table: "inventory/network_creation.html",
+    changelog_table: "advanced/administration.html",
+    pool_table: "inventory/pools.html",
+    run_table: "automation/services.html",
+    service_table: "automation/services.html",
+    task_table: "automation/scheduling.html",
+    user_table: "advanced/administration.html",
+    view_table: "inventory/network_visualization.html",
+    workflow_builder_table: "automation/workflows.html",
   }[page];
   $("#doc-link").attr("href", `${settings.app.documentation_url}${endpoint || ""}`);
 }
@@ -133,7 +133,7 @@ $(document).ready(function () {
   $("#theme").selectpicker();
   initSidebar();
   if (page.includes("table")) {
-    const type = page.split("/")[1];
+    const type = page.split("_")[0];
     new tables[type]();
   } else if (page == "workflow_builder") {
     initWorkflowBuilder();

@@ -596,7 +596,7 @@ export function initView() {
         at: "center-bottom",
         offsetY: 10,
       },
-      url: `../form/${type}_filtering`,
+      url: `../${type}_filtering_form`,
       title: `${type.charAt(0).toUpperCase() + type.slice(1)} Filtering`,
     });
   }

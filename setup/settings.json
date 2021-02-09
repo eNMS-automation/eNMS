@@ -1,6 +1,6 @@
 {
   "app": {
-    "address": "",
+    "address": "http://192.168.56.102",
     "config_mode": "debug",
     "startup_migration": "examples",
     "documentation_url": "https://enms.readthedocs.io/en/latest/",
@@ -90,6 +90,11 @@
     "channel": ""
   },
   "ssh": {
+    "web": {
+      "LC_ALL": "en_US.utf-8",
+      "CORS_ALLOWED_ORIGINS": "*",
+      "VERIFY_CERTIFICATE": false
+    },
     "bypass_key_prompt": true,
     "enabled": {
       "desktop": true,

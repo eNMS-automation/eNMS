@@ -5,6 +5,7 @@ flask
 flask_httpauth
 flask_login
 flask-restful
+flask-socketio
 flask_wtf
 gitpython
 gunicorn

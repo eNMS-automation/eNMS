@@ -9,7 +9,6 @@ from eNMS import app
 from eNMS.database import db
 from eNMS.models import models
 from eNMS.models.base import AbstractBase
-from eNMS.setup import rbac
 
 
 class Server(AbstractBase):
@@ -26,6 +25,7 @@ class Server(AbstractBase):
 class User(AbstractBase, UserMixin):
 
     __tablename__ = type = class_type = "user"
+    pool_model = True
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.SmallString, unique=True)
     description = db.Column(db.LargeString)
@@ -40,10 +40,8 @@ class User(AbstractBase, UserMixin):
     get_requests = db.Column(db.List)
     post_requests = db.Column(db.List)
     delete_requests = db.Column(db.List)
-    small_menu = db.Column(Boolean, default=False, info={"dont_track_changes": True})
-    theme = db.Column(
-        db.TinyString, default="default", info={"dont_track_changes": True}
-    )
+    small_menu = db.Column(Boolean, default=False, info={"log_change": False})
+    theme = db.Column(db.TinyString, default="default", info={"log_change": False})
     pools = relationship("Pool", secondary=db.pool_user_table, back_populates="users")
     is_admin = db.Column(Boolean, default=False)
 
@@ -72,14 +70,14 @@ class User(AbstractBase, UserMixin):
             .filter(models["user"].name == self.name)
             .all()
         )
-        for property in rbac:
+        for property in app.rbac:
             access_value = (getattr(access, property) for access in user_access)
             setattr(self, property, list(set(chain.from_iterable(access_value))))
 
 
 class Access(AbstractBase):
 
-    __tablename__ = type = "access"
+    __tablename__ = type = class_type = "access"
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.SmallString, unique=True)
     description = db.Column(db.LargeString)
@@ -109,7 +107,7 @@ class Access(AbstractBase):
 
 class Credential(AbstractBase):
 
-    __tablename__ = type = "credential"
+    __tablename__ = type = class_type = "credential"
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.SmallString, unique=True)
     role = db.Column(db.SmallString, default="read-write")

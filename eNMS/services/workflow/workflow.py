@@ -57,6 +57,8 @@ class Workflow(Service):
                 service.set_name()
             if old_name in service.positions:
                 service.positions[self.name] = service.positions[old_name]
+        for edge in self.edges:
+            edge.set_name()
 
     def duplicate(self, workflow=None, clone=None):
         if not clone:
@@ -242,5 +244,7 @@ class WorkflowEdge(AbstractBase):
 
     def update(self, **kwargs):
         super().update(**kwargs)
-        if "name" not in kwargs:
-            self.name = f"[{self.workflow}] {app.get_time()}"
+        self.set_name(kwargs.get("name"))
+
+    def set_name(self, name=None):
+        self.name = name or f"[{self.workflow}] {app.get_time()}"

@@ -578,7 +578,9 @@ class Run(AbstractBase):
                 or len(self.target_devices) > 1
                 or self.run_method == "once"
             ):
-                results = self.create_result(results)
+                results = self.create_result(
+                    results, run_result=self.runtime == self.parent_runtime
+                )
             if app.redis_queue and self.runtime == self.parent_runtime:
                 app.redis("delete", *(app.redis("keys", f"{self.runtime}/*") or []))
         return results
@@ -727,7 +729,7 @@ class Run(AbstractBase):
                 "runtime": self.runtime,
             }
 
-    def create_result(self, results, device=None, commit=True):
+    def create_result(self, results, device=None, commit=True, run_result=False):
         self.success = results["success"]
         results = self.make_results_json_compliant(results)
         result_kw = {
@@ -756,7 +758,7 @@ class Run(AbstractBase):
                 for result in self.results:
                     results["devices"][result.device.name] = result.result
         create_failed_results = self.disable_result_creation and not self.success
-        if not self.disable_result_creation or create_failed_results:
+        if not self.disable_result_creation or create_failed_results or run_result:
             db.factory("result", result=results, commit=commit, **result_kw)
         return results
 

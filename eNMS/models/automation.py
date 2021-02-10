@@ -142,6 +142,8 @@ class Service(AbstractBase):
     def update(self, **kwargs):
         if "scoped_name" in kwargs and kwargs.get("scoped_name") != self.scoped_name:
             self.set_name(kwargs["scoped_name"])
+        if self.positions and "positions" in kwargs:
+            kwargs["positions"] = {**self.positions, **kwargs["positions"]}
         super().update(**kwargs)
 
     @classmethod

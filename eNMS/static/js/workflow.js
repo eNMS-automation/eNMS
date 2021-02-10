@@ -17,6 +17,7 @@ import {
   call,
   configureNamespace,
   copyToClipboard,
+  createTooltips,
   notify,
   openPanel,
   showInstancePanel,
@@ -899,22 +900,27 @@ function getWorkflowTree() {
       call({
         url: `/get_workflow_tree/${currentPath}`,
         callback: function (data) {
-          $(`#workflow-tree-${workflowId}`).jstree({
-            core: {
-              animation: 100,
-              themes: { stripes: true },
-              data: data,
-            },
-            plugins: ["html_row", "search", "types", "wholerow"],
-            html_row: {
-              default: function (el, node) {
-                if (!node) return;
-                const service = JSON.stringify(node.data);
-                $(el).find("a").first().append(`
+          $(`#workflow-tree-${workflowId}`)
+            .bind("loaded.jstree", function (e, data) {
+              createTooltips();
+            })
+            .jstree({
+              core: {
+                animation: 100,
+                themes: { stripes: true },
+                data: data,
+              },
+              plugins: ["html_row", "search", "types", "wholerow"],
+              html_row: {
+                default: function (el, node) {
+                  if (!node) return;
+                  const service = JSON.stringify(node.data);
+                  $(el).find("a").first().append(`
                   <div style="position: absolute; top: 0px; right: 20px">
                     <button
                       type="button"
                       class="btn btn-xs btn-info"
+                      data-tooltip="Find"
                       onclick='eNMS.workflow.highlightService(${service})'
                     >
                       <span class="glyphicon glyphicon-screenshot"></span>
@@ -922,6 +928,7 @@ function getWorkflowTree() {
                     <button
                       type="button"
                       class="btn btn-xs btn-primary"
+                      data-tooltip="Edit"
                       onclick='eNMS.base.showInstancePanel(
                         "${node.data.type}", ${node.data.id}
                       )'
@@ -930,20 +937,20 @@ function getWorkflowTree() {
                     </button>
                   </div>
                 `);
+                },
               },
-            },
-            search: {
-              show_only_matches: true,
-            },
-            types: {
-              default: {
-                icon: "glyphicon glyphicon-file",
+              search: {
+                show_only_matches: true,
               },
-              workflow: {
-                icon: "fa fa-sitemap",
+              types: {
+                default: {
+                  icon: "glyphicon glyphicon-file",
+                },
+                workflow: {
+                  icon: "fa fa-sitemap",
+                },
               },
-            },
-          });
+            });
           let timer = false;
           $(`#tree-search-${workflowId}`).keyup(function () {
             if (timer) clearTimeout(timer);

@@ -19,8 +19,8 @@
         "site": [22, 22]
       },
       "layers": {
-        "osm": "http://{s}.tile.osm.org/{z}/{x}/{y}.png",
-        "gm": "http://mt0.google.com/vt/lyrs=y&hl=en&x={x}&y={y}&z={z}&s=Ga"
+        "osm": "https://{s}.tile.osm.org/{z}/{x}/{y}.png",
+        "gm": "https://mt0.google.com/vt/lyrs=y&hl=en&x={x}&y={y}&z={z}&s=Ga"
       }
     },
     "_3D": {
@@ -51,7 +51,7 @@
           "icon": "openStreetMap",
           "tooltip": "OpenStreetMap (OSM) is a collaborative project to create a free editable map of the world.\nhttp://www.openstreetmap.org",
           "type": "OpenStreetMapImageryProvider",
-          "args": { "url": "http://tile.openstreetmap.org/" }
+          "args": { "url": "https://tile.openstreetmap.org/" }
         },
         "Bing Maps Aerial": {
           "category": "High-Resolution Satellite View",

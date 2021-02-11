@@ -251,9 +251,15 @@ export function openPanel({
   content,
   size,
   url,
-  rbac = true,
+  checkRbac = true,
 }) {
-  if (rbac && !user.is_admin && !user.get_requests.includes(url || `/${name}_form`)) {
+  const endpoint = url || `/${name}_form`;
+  if (
+    checkRbac &&
+    !user.is_admin &&
+    !user.get_requests.includes(endpoint) &&
+    rbac.get_requests[endpoint] != "all"
+  ) {
     return notify("Error 403 - Operation not allowed.", "error", 5);
   }
   const panelId = id ? `${name}-${id}` : name;
@@ -432,7 +438,7 @@ export function preprocessForm(panel, id, type, duplicate) {
             editor.setSize("100%", "fit-content");
           });
         },
-        rbac: false,
+        checkRbac: false,
       });
     });
     $(el).append(button);

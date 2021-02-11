@@ -140,7 +140,7 @@ class Server(Flask):
             return {
                 "configuration_properties": app.configuration_properties,
                 "form_properties": form_properties,
-                "menu": app.rbac["menu"],
+                "rbac": app.rbac,
                 "names": app.property_names,
                 "property_types": property_types,
                 "relations": list(set(chain.from_iterable(relationships.values()))),

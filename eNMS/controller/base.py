@@ -500,7 +500,10 @@ class BaseController:
         filtered_records = query.with_entities(table.id).count()
         if bulk:
             instances = query.all()
-            return instances if bulk == "object" else [obj.id for obj in instances]
+            if bulk == "object":
+                return instances
+            else:
+                return [getattr(instance, bulk) for instance in instances]
         data = kwargs["columns"][int(kwargs["order"][0]["column"])]["data"]
         ordering = getattr(getattr(table, data, None), kwargs["order"][0]["dir"], None)
         if ordering:
@@ -530,7 +533,7 @@ class BaseController:
         return allowed_syntax and allowed_extension
 
     def bulk_deletion(self, table, **kwargs):
-        instances = self.filtering(table, bulk=True, form=kwargs)
+        instances = self.filtering(table, bulk="id", form=kwargs)
         for instance_id in instances:
             db.delete(table, id=instance_id)
         return len(instances)

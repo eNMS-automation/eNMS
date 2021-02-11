@@ -230,11 +230,6 @@ class InventoryController(BaseController):
 
     def view_filtering(self, **kwargs):
         return {
-            f"{model}s": [
-                instance.view_properties
-                for instance in self.build_relationship_constraints(
-                    db.query(model), model, **form
-                ).all()
-            ]
+            f"{model}s": self.filtering(model, **kwargs[model], bulk="view_properties")
             for model, form in kwargs.items()
         }

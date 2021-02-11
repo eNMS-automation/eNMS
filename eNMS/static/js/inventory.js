@@ -126,7 +126,7 @@ function webConnection(id) {
       notify(
         `<a target='_blank' href='${link}/${result.endpoint}'>${message}</a>`,
         "success",
-        15,
+        15
       );
       const warning = `Don't forget to turn off the pop-up blocker !`;
       notify(warning, "error", 15);

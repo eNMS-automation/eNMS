@@ -612,20 +612,28 @@ export function deleteCorruptedEdges() {
   });
 }
 
-export function showRunServicePanel({ instance, type }) {
-  const title = type ? `all ${type}s in table` : `${instance.type} '${instance.name}'`;
-  const panelId = type || instance.id;
+export function showRunServicePanel({ instance, tableId, type }) {
+  const table = tableInstances?.[tableId];
+  const targetType = type || instance.type;
+  const title = type
+    ? `all ${type}s`
+    : tableId
+    ? `all ${type}s in table`
+    : `${instance.type} '${instance.name}'`;
+  const panelId = type || tableId || instance.id;
   openPanel({
     name: "run_service",
     title: `Run service on ${title}`,
     size: "900px 300px",
     id: panelId,
     callback: function () {
-      $(`#run_service-type-${panelId}`).val(type || instance.type);
+      $(`#run_service-type-${panelId}`).val(targetType);
       if (type) {
+        let form = serializeForm(`#search-form-${panelId}`);
+        if (table) form = { ...form, ...table.constraints };
         call({
           url: `/filtering/${type}`,
-          data: { form: serializeForm(`#search-form-${type}`), bulk: true },
+          data: { form: form, bulk: "id" },
           callback: function (instances) {
             $(`#run_service-targets-${panelId}`).val(instances.join("-"));
           },

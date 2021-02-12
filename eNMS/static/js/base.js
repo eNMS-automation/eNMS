@@ -635,9 +635,13 @@ export function showInstancePanel(type, id, mode, tableId) {
         });
       } else if (mode == "bulk") {
         const model = type == "workflow" || type.includes("service") ? "service" : type;
+        const form = {
+          ...serializeForm(`#search-form-${tableId}`),
+          ...tableInstances[tableId].constraints,
+        };
         call({
           url: `/filtering/${model}`,
-          data: { form: serializeForm(`#search-form-${tableId}`), bulk: true },
+          data: { form: form, bulk: "id" },
           callback: function (instances) {
             $(`#${type}-id`).val(instances.join("-"));
             $(`#${type}-scoped_name,#${type}-name`).val("Bulk Edit");

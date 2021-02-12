@@ -299,7 +299,10 @@ export const switchToWorkflow = function (path, arrow, runtime, selection) {
   }
 };
 
-export function processWorkflowData(instance, id) {
+export function processWorkflowData(instance) {
+  if (instance.id == workflow.id) {
+    $("#current-workflow option:selected").text(instance.name).trigger("change");
+  }
   if (["create_workflow", "duplicate_workflow"].includes(creationMode)) {
     $("#current-workflow").append(
       `<option value="${instance.id}">${instance.name}</option>`

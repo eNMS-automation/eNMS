@@ -757,9 +757,10 @@ function processData(type, id) {
       const tableType = isService ? "service" : type;
       if (page.includes("table")) {
         tableInstances[tableType].table.ajax.reload(null, false);
+      } else if (page == "workflow_builder") {
+        processWorkflowData(instance, id);
       }
       $(id ? `#${type}-${id}` : `#${type}`).remove();
-      if (page == "workflow_builder") processWorkflowData(instance, id);
       notify(
         `${type.toUpperCase()} ${instance.name ? `'${instance.name}' ` : ""}${
           id ? "updated" : "created"

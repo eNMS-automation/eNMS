@@ -16,7 +16,6 @@ import { showRunServicePanel } from "./automation.js";
 import {
   call,
   configureNamespace,
-  createTooltip,
   notify,
   serializeForm,
   showInstancePanel,

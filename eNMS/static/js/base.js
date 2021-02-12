@@ -576,13 +576,6 @@ function showServicePanel(type, id, mode) {
   }
 }
 
-function configureServicePanel(type, id, mode) {
-  if (mode == "duplicate") {
-    $(`#${type}-shared-${id}`).prop("checked", false);
-    $(`#${type}-workflows-${id}`).val([workflow.id]).trigger("change");
-  }
-}
-
 function showAddInstancePanel(tableId, model, relation) {
   openPanel({
     name: `add_${model}s`,
@@ -621,9 +614,8 @@ export function showInstancePanel(type, id, mode, tableId) {
     name: type,
     id: id,
     callback: function (panel) {
-      if (type == "workflow" || type.includes("service")) {
-        showServicePanel(type, id, mode);
-      }
+      const isService = type.includes("service") || type == "workflow";
+      if (isService) showServicePanel(type, id, mode);
       if (type == "credential") showCredentialPanel(id);
       if (id) {
         const properties = type === "pool" ? "_properties" : "";
@@ -633,13 +625,14 @@ export function showInstancePanel(type, id, mode, tableId) {
             const action = mode ? mode.toUpperCase() : "EDIT";
             panel.setHeaderTitle(`${action} ${type} - ${instance.name}`);
             processInstance(type, instance);
-            if (type.includes("service") || type == "workflow") {
-              configureServicePanel(type, id, mode);
+            if (mode == "duplicate" && isService) {
+              $(`#${type}-shared-${id}`).prop("checked", false);
+              $(`#${type}-workflows-${id}`).val([workflow.id]).trigger("change");
             }
           },
         });
       } else if (mode == "bulk") {
-        const model = type == "workflow" || type.includes("service") ? "service" : type;
+        const model = isService ? "service" : type;
         const form = {
           ...serializeForm(`#search-form-${tableId}`),
           ...tableInstances[tableId].constraints,
@@ -684,7 +677,7 @@ export function showInstancePanel(type, id, mode, tableId) {
           $(`#${type}-workflows`).val(workflow.id).trigger("change");
         }
       }
-      if (type.includes("service") || type == "workflow") {
+      if (isService) {
         $(`#${type}-scoped_name`).focus();
         loadScript(`../static/js/services/${type}.js`, id);
       } else {
@@ -752,7 +745,8 @@ function processInstance(type, instance) {
 }
 
 function processData(type, id) {
-  if (type.includes("service") || type == "workflow") {
+  const isService = type.includes("service") || type == "workflow";
+  if (isService) {
     $(id ? `#${type}-workflows-${id}` : `#${type}-workflows`).prop("disabled", false);
     if (id) $(`#${type}-shared-${id}`).prop("disabled", false);
   }
@@ -760,8 +754,7 @@ function processData(type, id) {
     url: `/update/${type}`,
     form: id ? `${type}-form-${id}` : `${type}-form`,
     callback: (instance) => {
-      const tableType =
-        type.includes("service") || type == "workflow" ? "service" : type;
+      const tableType = isService ? "service" : type;
       if (page.includes("table")) {
         tableInstances[tableType].table.ajax.reload(null, false);
       }

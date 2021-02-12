@@ -386,7 +386,7 @@ function displayNetwork({ noAlert, withCluster }) {
   const maximumSize = visualization.logical.maximum_size;
   let data = {};
   for (let type of ["device", "link"]) {
-    let form = serializeForm(`#search-form-${type}`);
+    let form = serializeForm(`#filtering-form-${type}`);
     if (!form.pools) form.pools = defaultPools.map((p) => p.id);
     data[type] = { form: form };
   }
@@ -584,20 +584,15 @@ export function initView() {
     "Run Service": (d) => showRunServicePanel({ instance: d }),
   });
   for (let type of ["device", "link"]) {
-    createTooltip({
-      autoshow: true,
-      persistent: true,
+    openPanel({
       name: `${type}_filtering`,
-      target: `#${type}-filtering`,
-      container: `#search-form-${type}`,
-      size: "700 400",
-      position: {
-        my: "center-top",
-        at: "center-bottom",
-        offsetY: 10,
-      },
-      url: `../${type}_filtering_form`,
+      type: type,
       title: `${type.charAt(0).toUpperCase() + type.slice(1)} Filtering`,
+      size: "700 600",
+      onbeforeclose: function () {
+        $(this).css("visibility", "hidden");
+      },
+      css: { visibility: "hidden" },
     });
   }
   if (page == "logical_view") {
@@ -607,6 +602,10 @@ export function initView() {
     initGeographicalFramework();
   }
   displayNetwork({ noAlert: true });
+}
+
+function displayFilteringPanel(type) {
+  $(`#${type}_filtering`).css("visibility", "visible");
 }
 
 function update3dGraphData(graph, network) {
@@ -677,6 +676,7 @@ function openVisualizationPanel() {
 
 configureNamespace("visualization", [
   clearSearch,
+  displayFilteringPanel,
   displayNetwork,
   openVisualizationPanel,
   saveParameters,

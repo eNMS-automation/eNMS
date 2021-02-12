@@ -252,7 +252,9 @@ export function openPanel({
   content,
   size,
   url,
+  css,
   checkRbac = true,
+  ...other
 }) {
   const endpoint = url || `/${name}_form`;
   if (
@@ -289,6 +291,7 @@ export function openPanel({
     resizeit: {
       containment: 0,
     },
+    ...other,
   };
   if (content) {
     kwargs.content = content;
@@ -305,7 +308,8 @@ export function openPanel({
   }
   const panel = jsPanel.create(kwargs);
   if (callback && content) callback(content);
-  $(panel).css({ top: `${50 + $(window).scrollTop()}px`, position: "absolute" });
+  const position = { top: `${50 + $(window).scrollTop()}px`, position: "absolute" };
+  $(panel).css({ ...position, ...css });
 }
 
 export function createTooltip({
@@ -320,6 +324,7 @@ export function createTooltip({
   content,
   callback,
   size,
+  ...other
 }) {
   if ($(target).length) {
     let kwargs = {

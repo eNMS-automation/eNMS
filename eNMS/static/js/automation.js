@@ -620,7 +620,7 @@ export function showRunServicePanel({ instance, tableId, type }) {
     : tableId
     ? `all ${type}s in table`
     : `${instance.type} '${instance.name}'`;
-  const panelId = type || tableId || instance.id;
+  const panelId = tableId || instance?.id || type;
   openPanel({
     name: "run_service",
     title: `Run service on ${title}`,

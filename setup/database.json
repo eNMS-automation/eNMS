@@ -85,11 +85,9 @@
     ],
     "service": [
       "access",
-      "children",
       "id",
       "sources",
       "destinations",
-      "originals",
       "status",
       "superworkflow_id",
       "tasks",
@@ -310,14 +308,17 @@
       }
     }
   },
-  "private_properties": [
-    "custom_password",
-    "enable_password",
-    "librenms_token",
-    "netbox_token",
-    "opennms_password",
-    "password",
-    "private_key"
-  ],
+  "private_properties": {
+    "service": [
+      "custom_password",
+      "jump_password",
+      "librenms_token",
+      "netbox_token",
+      "opennms_password",
+      "password"
+    ],
+    "credential": ["enable_password", "password", "private_key"],
+    "user": ["password"]
+  },
   "dont_serialize": { "device": ["configuration"] }
 }

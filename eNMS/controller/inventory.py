@@ -4,7 +4,6 @@ from git import Repo
 from io import BytesIO
 from logging import info
 from os import getenv
-from sqlalchemy import and_
 from subprocess import Popen
 from threading import Thread
 from uuid import uuid4
@@ -231,11 +230,6 @@ class InventoryController(BaseController):
 
     def view_filtering(self, **kwargs):
         return {
-            f"{model}s": [
-                instance.view_properties
-                for instance in db.session.query(models[model])
-                .filter(and_(*self.build_filtering_constraints(model, **form)))
-                .all()
-            ]
+            f"{model}s": self.filtering(model, **kwargs[model], bulk="view_properties")
             for model, form in kwargs.items()
         }

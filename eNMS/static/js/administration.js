@@ -130,28 +130,6 @@ function migrationsImport() {
   });
 }
 
-function showImportServicePanel() {
-  openPanel({
-    name: "import_service",
-    title: "Import Service",
-    size: "600 300",
-    callback: () => {
-      call({
-        url: "/get_exported_services",
-        callback: function (services) {
-          let list = document.getElementById("import_service-service");
-          services.forEach((item) => {
-            let option = document.createElement("option");
-            option.textContent = option.value = item;
-            list.appendChild(option);
-          });
-          $("#import_service-service").selectpicker("refresh");
-        },
-      });
-    },
-  });
-}
-
 function importService() {
   call({
     url: `/import_service/${$("#import_service-service").val()}`,
@@ -412,6 +390,5 @@ configureNamespace("administration", [
   scanCluster,
   showSettings,
   showFileUploadPanel,
-  showImportServicePanel,
   showMigrationPanel,
 ]);

@@ -449,7 +449,9 @@ tables.device = class DeviceTable extends Table {
       ` <button
         type="button"
         class="btn btn-success"
-        onclick="eNMS.automation.showRunServicePanel({type: 'device'})"
+        onclick="eNMS.automation.showRunServicePanel(
+          {tableId: '${this.id}', type: '${this.type}'}
+        )"
         data-tooltip="Run service on all devices in table"
       >
         <span class="glyphicon glyphicon-play"></span>
@@ -665,7 +667,9 @@ tables.pool = class PoolTable extends Table {
       ` <button
         type="button"
         class="btn btn-success"
-        onclick="eNMS.automation.showRunServicePanel({type: 'pool'})"
+        onclick="eNMS.automation.showRunServicePanel(
+          {tableId: '${this.id}', type: '${this.type}'}
+        )"
         data-tooltip="Run service on all pools in table"
       >
         <span class="glyphicon glyphicon-play"></span>
@@ -784,6 +788,14 @@ tables.service = class ServiceTable extends Table {
         type="button"
       >
         <select id="service-type" class="form-control"></select>
+      </button>`,
+      `<button
+        class="btn btn-primary"
+        onclick="eNMS.automation.showImportServicePanel()"
+        data-tooltip="Import Service"
+        type="button"
+      >
+        <span class="glyphicon glyphicon-circle-arrow-down"></span>
       </button>`,
       this.bulkEditButton(),
       this.exportTableButton(),

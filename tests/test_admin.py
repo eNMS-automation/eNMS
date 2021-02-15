@@ -4,14 +4,15 @@ from eNMS.database import db
 from tests.conftest import check_pages
 
 ignored_endpoints = [
-    "/download",
     "/alerts_table_form",
     "/calendar_form",
     "/compare_form",
     "/device_data_form",
+    "/download",
     "/export_service",
     "/files_form",
     "/git_history_form",
+    "/help",
     "/instance_deletion_form",
     "/logs_form",
     "/result_form",

@@ -8,6 +8,7 @@ from eNMS.models import model_properties, property_types, relationships
 class AbstractBase(db.base):
 
     __abstract__ = True
+    pool_model = False
     model_properties = []
 
     def __init__(self, **kwargs):
@@ -20,7 +21,7 @@ class AbstractBase(db.base):
         return getattr(self, "name", str(self.id))
 
     def __getattribute__(self, property):
-        if property in db.private_properties:
+        if property in db.private_properties_set:
             if app.use_vault:
                 target = self.service if self.type == "run" else self
                 path = f"secret/data/{target.type}/{target.name}/{property}"
@@ -33,7 +34,7 @@ class AbstractBase(db.base):
             return super().__getattribute__(property)
 
     def __setattr__(self, property, value):
-        if property in db.private_properties:
+        if property in db.private_properties_set:
             if not value:
                 return
             value = app.encrypt_password(value).decode("utf-8")
@@ -59,7 +60,7 @@ class AbstractBase(db.base):
     def base_properties(self):
         return {p: getattr(self, p) for p in ("id", "name", "type")}
 
-    def update(self, rbac="edit", **kwargs):
+    def update(self, **kwargs):
         relation = relationships[self.__tablename__]
         for property, value in kwargs.items():
             if not hasattr(self, property):
@@ -67,13 +68,13 @@ class AbstractBase(db.base):
             property_type = property_types.get(property, None)
             if property in relation:
                 if relation[property]["list"]:
-                    value = db.objectify(relation[property]["model"], value, rbac=rbac)
+                    value = db.objectify(relation[property]["model"], value)
                 elif value:
-                    value = db.fetch(relation[property]["model"], id=value, rbac=rbac)
+                    value = db.fetch(relation[property]["model"], id=value)
             if property_type == "bool":
                 value = value not in (False, "false")
             setattr(self, property, value)
-        if not kwargs.get("update_pools") or not hasattr(self, "class_type"):
+        if not kwargs.get("update_pools") or not self.pool_model:
             return
         for pool in db.fetch_all("pool", rbac=None):
             if pool.manually_defined or not pool.compute(self.class_type):
@@ -94,7 +95,7 @@ class AbstractBase(db.base):
         no_migrate = db.dont_migrate.get(self.type, db.dont_migrate["service"])
         properties = list(model_properties[self.type])
         for property in properties:
-            if not private_properties and property in db.private_properties:
+            if not private_properties and property in db.private_properties_set:
                 continue
             if property in db.dont_serialize.get(self.type, []):
                 continue

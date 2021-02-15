@@ -1965,7 +1965,7 @@
   target_devices: []
   target_pools: []
   time_between_retries: 10
-  type: payload_extraction_service
+  type: data_extraction_service
   update_pools_after_running: false
   update_target_pools: false
   validation_condition: none
@@ -4024,7 +4024,7 @@
   target_devices: []
   target_pools: []
   time_between_retries: 10
-  type: payload_extraction_service
+  type: data_extraction_service
   update_pools_after_running: false
   update_target_pools: false
   validation_condition: none
@@ -4115,7 +4115,7 @@
   target_devices: []
   target_pools: []
   time_between_retries: 10
-  type: payload_extraction_service
+  type: data_extraction_service
   update_pools_after_running: false
   update_target_pools: false
   validation_condition: none

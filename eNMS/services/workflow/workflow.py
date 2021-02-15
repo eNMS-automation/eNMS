@@ -57,6 +57,8 @@ class Workflow(Service):
                 service.set_name()
             if old_name in service.positions:
                 service.positions[self.name] = service.positions[old_name]
+        for edge in self.edges:
+            edge.set_name()
 
     def duplicate(self, workflow=None, clone=None):
         if not clone:
@@ -236,7 +238,13 @@ class WorkflowEdge(AbstractBase):
     color_mapping = {"success": "green", "failure": "red", "prerequisite": "blue"}
 
     def __init__(self, **kwargs):
-        self.name = app.get_time()
         self.label = kwargs["subtype"]
         self.color = self.color_mapping[kwargs["subtype"]]
         super().__init__(**kwargs)
+
+    def update(self, **kwargs):
+        super().update(**kwargs)
+        self.set_name(kwargs.get("name"))
+
+    def set_name(self, name=None):
+        self.name = name or f"[{self.workflow}] {app.get_time()}"

@@ -29,6 +29,7 @@ from sqlalchemy import and_
 from sqlalchemy.exc import IntegrityError, InvalidRequestError
 from sqlalchemy.orm import aliased, configure_mappers
 from sys import path as sys_path
+from traceback import format_exc
 from uuid import getnode
 from warnings import warn
 
@@ -111,6 +112,7 @@ class BaseController:
     def initialize_database(self):
         self.init_plugins()
         self.init_services()
+        db.private_properties_set |= set(sum(db.private_properties.values(), []))
         db.base.metadata.create_all(bind=db.engine)
         configure_mappers()
         db.configure_model_events(self)
@@ -181,7 +183,9 @@ class BaseController:
                 self.property_names[property] = pretty_name
                 model_properties[model].append(property)
                 if property_dict.get("private"):
-                    db.private_properties.append(property)
+                    if model not in db.private_properties:
+                        db.private_properties[model] = []
+                    db.private_properties[model].append(property)
                 if model == "device" and property_dict.get("configuration"):
                     self.configuration_properties[property] = pretty_name
 
@@ -295,8 +299,8 @@ class BaseController:
                 for setup_file in ("database", "properties", "rbac"):
                     property = getattr(self, setup_file)
                     self.update_settings(property, settings.get(setup_file, {}))
-            except Exception as exc:
-                error(f"Could not load plugin '{plugin_path.stem}' ({exc})")
+            except Exception:
+                error(f"Could not load plugin '{plugin_path.stem}':\n{format_exc()}")
                 continue
             info(f"Loading plugin: {settings['name']}")
 
@@ -392,6 +396,7 @@ class BaseController:
             db.session.rollback()
             if isinstance(exc, IntegrityError):
                 return {"alert": f"There is already a {type} with the same parameters."}
+            self.log("error", format_exc())
             return {"alert": str(exc)}
 
     def log(self, severity, content, user=None, change_log=True, logger="root"):
@@ -495,7 +500,10 @@ class BaseController:
         filtered_records = query.with_entities(table.id).count()
         if bulk:
             instances = query.all()
-            return instances if bulk == "object" else [obj.id for obj in instances]
+            if bulk == "object":
+                return instances
+            else:
+                return [getattr(instance, bulk) for instance in instances]
         data = kwargs["columns"][int(kwargs["order"][0]["column"])]["data"]
         ordering = getattr(getattr(table, data, None), kwargs["order"][0]["dir"], None)
         if ordering:
@@ -525,7 +533,7 @@ class BaseController:
         return allowed_syntax and allowed_extension
 
     def bulk_deletion(self, table, **kwargs):
-        instances = self.filtering(table, bulk=True, form=kwargs)
+        instances = self.filtering(table, bulk="id", form=kwargs)
         for instance_id in instances:
             db.delete(table, id=instance_id)
         return len(instances)

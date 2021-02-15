@@ -8,13 +8,14 @@ from json import dump, load, loads
 from json.decoder import JSONDecodeError
 from multiprocessing.pool import ThreadPool
 from napalm import get_network_driver
+from ncclient import manager
 from netmiko import ConnectHandler
 from os import getenv
 from paramiko import RSAKey, SFTPClient
 from re import compile, search
 from requests import post
 from scp import SCPClient
-from sqlalchemy import Boolean, event, ForeignKey, Index, Integer, or_
+from sqlalchemy import Boolean, ForeignKey, Index, Integer, or_
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.orm import aliased, relationship
 from threading import Thread
@@ -46,6 +47,7 @@ from eNMS.models.administration import User  # noqa: F401
 class Service(AbstractBase):
 
     __tablename__ = class_type = "service"
+    pool_model = True
     type = db.Column(db.SmallString)
     __mapper_args__ = {"polymorphic_identity": "service", "polymorphic_on": type}
     id = db.Column(Integer, primary_key=True)
@@ -83,13 +85,6 @@ class Service(AbstractBase):
     )
     pools = relationship(
         "Pool", secondary=db.pool_service_table, back_populates="services"
-    )
-    originals = relationship(
-        "Service",
-        secondary=db.originals_association_table,
-        primaryjoin=id == db.originals_association_table.c.original_id,
-        secondaryjoin=id == db.originals_association_table.c.child_id,
-        backref="children",
     )
     update_target_pools = db.Column(Boolean, default=False)
     update_pools_after_running = db.Column(Boolean, default=False)
@@ -145,17 +140,12 @@ class Service(AbstractBase):
         if "name" not in kwargs:
             self.set_name()
 
-    def get_originals(self, workflow):
-        if workflow.workflows:
-            return set().union(*(self.get_originals(w) for w in workflow.workflows))
-        else:
-            return {self, workflow}
-
     def update(self, **kwargs):
         if "scoped_name" in kwargs and kwargs.get("scoped_name") != self.scoped_name:
             self.set_name(kwargs["scoped_name"])
+        if self.positions and "positions" in kwargs:
+            kwargs["positions"] = {**self.positions, **kwargs["positions"]}
         super().update(**kwargs)
-        self.originals = list(self.get_originals(self))
 
     @classmethod
     def filtering_constraints(cls, **kwargs):
@@ -183,28 +173,12 @@ class Service(AbstractBase):
             name = f"[{workflow.name}] {scoped_name}" if workflow else scoped_name
             if not db.fetch("service", allow_none=True, name=name):
                 service = super().duplicate(
-                    name=name, scoped_name=scoped_name, shared=False
+                    name=name, scoped_name=scoped_name, shared=False, update_pools=True
                 )
                 break
         if workflow:
             workflow.services.append(service)
         return service
-
-    @classmethod
-    def configure_events(cls):
-        if not app.use_vault:
-            return
-
-        @event.listens_for(cls.name, "set", propagate=True)
-        def vault_update(target, new_value, old_value, *_):
-            path = f"secret/data/{target.type}/{old_value}/password"
-            data = app.vault_client.read(path)
-            if not data:
-                return
-            app.vault_client.write(
-                f"secret/data/{target.type}/{new_value}/password",
-                data={"password": data["data"]["data"]["password"]},
-            )
 
     @property
     def filename(self):
@@ -595,7 +569,7 @@ class Run(AbstractBase):
                 "run": {
                     k: v
                     for k, v in self.properties.items()
-                    if k not in db.private_properties
+                    if k not in db.private_properties_set
                 },
                 "service": self.service.get_properties(exclude=["positions"]),
             }
@@ -605,7 +579,9 @@ class Run(AbstractBase):
                 or len(self.target_devices) > 1
                 or self.run_method == "once"
             ):
-                results = self.create_result(results)
+                results = self.create_result(
+                    results, run_result=self.runtime == self.parent_runtime
+                )
             if app.redis_queue and self.runtime == self.parent_runtime:
                 app.redis("delete", *(app.redis("keys", f"{self.runtime}/*") or []))
         return results
@@ -754,7 +730,7 @@ class Run(AbstractBase):
                 "runtime": self.runtime,
             }
 
-    def create_result(self, results, device=None, commit=True):
+    def create_result(self, results, device=None, commit=True, run_result=False):
         self.success = results["success"]
         results = self.make_results_json_compliant(results)
         result_kw = {
@@ -783,7 +759,7 @@ class Run(AbstractBase):
                 for result in self.results:
                     results["devices"][result.device.name] = result.result
         create_failed_results = self.disable_result_creation and not self.success
-        if not self.disable_result_creation or create_failed_results:
+        if not self.disable_result_creation or create_failed_results or run_result:
             db.factory("result", result=results, commit=commit, **result_kw)
         return results
 
@@ -813,7 +789,7 @@ class Run(AbstractBase):
                     self.log("error", str(exc), device)
                     result = "\n".join(format_exc().splitlines())
                     results = {"success": False, "result": result}
-                self.convert_result(results)
+                results = self.convert_result(results)
                 if "success" not in results:
                     results["success"] = True
                 if self.service.postprocessing and (
@@ -865,7 +841,7 @@ class Run(AbstractBase):
                     payload.update(old_result["payload"])
             if self.service.iteration_values:
                 targets_results = {}
-                targets = self.eval(self.service.iteration_values, **locals())[0]
+                targets = list(self.eval(self.service.iteration_values, **locals())[0])
                 if not isinstance(targets, dict):
                     targets = dict(zip(map(str, targets), targets))
                 for target_name, target_value in targets.items():
@@ -1230,18 +1206,6 @@ class Run(AbstractBase):
             if service_value:
                 setattr(connection, property, service_value)
         try:
-            if not hasattr(connection, "check_config_mode"):
-                self.log("error", "Netmiko 'check_config_mode' method is missing")
-                return connection
-            mode = connection.check_config_mode()
-            if mode and not self.config_mode:
-                connection.exit_config_mode()
-            elif self.config_mode and not mode:
-                connection.config_mode()
-        except Exception as exc:
-            self.log("error", f"Failed to honor the config mode {exc}")
-
-        try:
             if not hasattr(connection, "check_enable_mode"):
                 self.log("error", "Netmiko 'check_enable_mode' method is missing")
                 return connection
@@ -1253,6 +1217,17 @@ class Run(AbstractBase):
         except Exception as exc:
             self.log("error", f"Failed to honor the enable mode {exc}")
 
+        try:
+            if not hasattr(connection, "check_config_mode"):
+                self.log("error", "Netmiko 'check_config_mode' method is missing")
+                return connection
+            mode = connection.check_config_mode()
+            if mode and not self.config_mode:
+                connection.exit_config_mode()
+            elif self.config_mode and not mode:
+                connection.config_mode()
+        except Exception as exc:
+            self.log("error", f"Failed to honor the config mode {exc}")
         return connection
 
     def netmiko_connection(self, device):
@@ -1347,6 +1322,37 @@ class Run(AbstractBase):
         ] = napalm_connection
         return napalm_connection
 
+    def ncclient_connection(self, device):
+        connection = self.get_or_close_connection("ncclient", device.name)
+        if connection:
+            self.log("info", "Using cached ncclient connection", device)
+            return connection
+        self.log(
+            "info",
+            "OPENING ncclient connection",
+            device,
+            change_log=False,
+            logger="security",
+        )
+        credentials = self.get_credentials(device)
+        if device.netconf_driver is not None:
+            driver_name = device.netconf_driver
+        else: driver_name = 'default'
+        device_params = {"name": driver_name}
+        ncclient_connection = manager.connect(
+            host=device.ip_address,
+            port=830,
+            hostkey_verify=False,
+            look_for_keys=False,
+            device_params=device_params,
+            username=credentials['username'],
+            password=credentials['password']
+        )
+        app.connections_cache["ncclient"][self.parent_runtime][
+            device.name
+        ] = ncclient_connection
+        return ncclient_connection
+
     def get_or_close_connection(self, library, device):
         connection = self.get_connection(library, device)
         if not connection:
@@ -1355,6 +1361,11 @@ class Run(AbstractBase):
             return self.disconnect(library, device, connection)
         if library == "napalm":
             if connection.is_alive():
+                return connection
+            else:
+                self.disconnect(library, device, connection)
+        elif library == "ncclient":
+            if connection.connected:
                 return connection
             else:
                 self.disconnect(library, device, connection)
@@ -1373,14 +1384,14 @@ class Run(AbstractBase):
         return cache.get(device)
 
     def close_device_connection(self, device):
-        for library in ("netmiko", "napalm", "scrapli"):
+        for library in ("netmiko", "napalm", "scrapli","ncclient"):
             connection = self.get_connection(library, device)
             if connection:
                 self.disconnect(library, device, connection)
 
     def close_remaining_connections(self):
         threads = []
-        for library in ("netmiko", "napalm", "scrapli"):
+        for library in ("netmiko", "napalm", "scrapli","ncclient"):
             devices = list(app.connections_cache[library][self.runtime])
             for device in devices:
                 connection = app.connections_cache[library][self.runtime][device]
@@ -1394,7 +1405,12 @@ class Run(AbstractBase):
 
     def disconnect(self, library, device, connection):
         try:
-            connection.disconnect() if library == "netmiko" else connection.close()
+            if library == "netmiko":
+                connection.disconnect()
+            elif library == "ncclient":
+                connection.close_session()
+            else:
+                connection.close()
             app.connections_cache[library][self.parent_runtime].pop(device)
             self.log("info", f"Closed {library} connection", device)
         except Exception as exc:

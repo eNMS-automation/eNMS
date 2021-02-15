@@ -17,6 +17,7 @@ from eNMS.setup import properties
 class Object(AbstractBase):
 
     __tablename__ = "object"
+    pool_model = True
     type = db.Column(db.SmallString)
     __mapper_args__ = {"polymorphic_identity": "object", "polymorphic_on": type}
     id = db.Column(Integer, primary_key=True)
@@ -293,7 +294,7 @@ class Pool(AbstractBase):
     target_services = relationship(
         "Service", secondary=db.service_target_pool_table, back_populates="target_pools"
     )
-    visualization_default = db.Column(Boolean)
+    visualization_default = db.Column(Boolean, default=False)
     runs = relationship(
         "Run", secondary=db.run_pool_table, back_populates="target_pools"
     )
@@ -339,7 +340,9 @@ class Pool(AbstractBase):
                     f"{model}_{property}_match",
                     db.Column(db.TinyString, default="inclusion"),
                 )
-                setattr(cls, f"{model}_{property}_invert", db.Column(Boolean))
+                setattr(
+                    cls, f"{model}_{property}_invert", db.Column(Boolean, default=False)
+                )
             setattr(
                 cls,
                 f"{model}s",

@@ -126,8 +126,7 @@ function webConnection(id) {
       notify(
         `<a target='_blank' href='${link}/${result.endpoint}'>${message}</a>`,
         "success",
-        15,
-        true
+        15
       );
       const warning = `Don't forget to turn off the pop-up blocker !`;
       notify(warning, "error", 15);
@@ -148,7 +147,7 @@ function desktopConnection(id) {
       } else {
         const link = `${result.username}@${loc.hostname}:${result.port}`;
         const message = `Click here to connect to ${result.device_name}.`;
-        notify(`<a href='ssh://${link}'>${message}</a>`, "success", 15, true);
+        notify(`<a href='ssh://${link}'>${message}</a>`, "success", 15);
       }
     },
   });

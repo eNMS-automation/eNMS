@@ -25,6 +25,7 @@ class Server(AbstractBase):
 class User(AbstractBase, UserMixin):
 
     __tablename__ = type = class_type = "user"
+    pool_model = True
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.SmallString, unique=True)
     description = db.Column(db.LargeString)
@@ -76,7 +77,7 @@ class User(AbstractBase, UserMixin):
 
 class Access(AbstractBase):
 
-    __tablename__ = type = "access"
+    __tablename__ = type = class_type = "access"
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.SmallString, unique=True)
     description = db.Column(db.LargeString)
@@ -106,7 +107,7 @@ class Access(AbstractBase):
 
 class Credential(AbstractBase):
 
-    __tablename__ = type = "credential"
+    __tablename__ = type = class_type = "credential"
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.SmallString, unique=True)
     role = db.Column(db.SmallString, default="read-write")

@@ -8,7 +8,6 @@ from json import dump, load, loads
 from json.decoder import JSONDecodeError
 from multiprocessing.pool import ThreadPool
 from napalm import get_network_driver
-from ncclient import manager
 from netmiko import ConnectHandler
 from os import getenv
 from paramiko import RSAKey, SFTPClient
@@ -1322,37 +1321,6 @@ class Run(AbstractBase):
         ] = napalm_connection
         return napalm_connection
 
-    def ncclient_connection(self, device):
-        connection = self.get_or_close_connection("ncclient", device.name)
-        if connection:
-            self.log("info", "Using cached ncclient connection", device)
-            return connection
-        self.log(
-            "info",
-            "OPENING ncclient connection",
-            device,
-            change_log=False,
-            logger="security",
-        )
-        credentials = self.get_credentials(device)
-        if device.netconf_driver is not None:
-            driver_name = device.netconf_driver
-        else: driver_name = 'default'
-        device_params = {"name": driver_name}
-        ncclient_connection = manager.connect(
-            host=device.ip_address,
-            port=830,
-            hostkey_verify=False,
-            look_for_keys=False,
-            device_params=device_params,
-            username=credentials['username'],
-            password=credentials['password']
-        )
-        app.connections_cache["ncclient"][self.parent_runtime][
-            device.name
-        ] = ncclient_connection
-        return ncclient_connection
-
     def get_or_close_connection(self, library, device):
         connection = self.get_connection(library, device)
         if not connection:
@@ -1361,11 +1329,6 @@ class Run(AbstractBase):
             return self.disconnect(library, device, connection)
         if library == "napalm":
             if connection.is_alive():
-                return connection
-            else:
-                self.disconnect(library, device, connection)
-        elif library == "ncclient":
-            if connection.connected:
                 return connection
             else:
                 self.disconnect(library, device, connection)
@@ -1384,14 +1347,14 @@ class Run(AbstractBase):
         return cache.get(device)
 
     def close_device_connection(self, device):
-        for library in ("netmiko", "napalm", "scrapli","ncclient"):
+        for library in ("netmiko", "napalm", "scrapli"):
             connection = self.get_connection(library, device)
             if connection:
                 self.disconnect(library, device, connection)
 
     def close_remaining_connections(self):
         threads = []
-        for library in ("netmiko", "napalm", "scrapli","ncclient"):
+        for library in ("netmiko", "napalm", "scrapli"):
             devices = list(app.connections_cache[library][self.runtime])
             for device in devices:
                 connection = app.connections_cache[library][self.runtime][device]
@@ -1405,12 +1368,7 @@ class Run(AbstractBase):
 
     def disconnect(self, library, device, connection):
         try:
-            if library == "netmiko":
-                connection.disconnect()
-            elif library == "ncclient":
-                connection.close_session()
-            else:
-                connection.close()
+            connection.disconnect() if library == "netmiko" else connection.close()
             app.connections_cache[library][self.parent_runtime].pop(device)
             self.log("info", f"Closed {library} connection", device)
         except Exception as exc:

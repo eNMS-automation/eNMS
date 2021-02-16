@@ -139,7 +139,19 @@
       "number_of_retries",
       "time_between_retries"
     ],
-    "task": ["status", "frequency", "frequency_unit", "crontab_expression"]
+    "workflow": [
+      "vendor",
+      "operating_system",
+      "creator",
+      "send_notification",
+      "send_notification_method",
+      "multiprocessing",
+      "max_processes",
+      "number_of_retries",
+      "time_between_retries"
+    ],
+    "task": ["status", "frequency", "frequency_unit", "crontab_expression"],
+    "user": ["is_admin", "groups"]
   },
   "tables": {
     "device": [

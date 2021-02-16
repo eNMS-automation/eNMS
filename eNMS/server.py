@@ -213,8 +213,6 @@ class Server(Flask):
                     else:
                         log = f"Authentication failed for user '{username}'"
                 except Exception as exc:
-                    from traceback import format_exc
-                    print(format_exc())
                     log = f"Authentication error for user '{username}' ({exc})"
                 finally:
                     app.log("info" if success else "warning", log, logger="security")

@@ -1215,7 +1215,6 @@ class Run(AbstractBase):
                 connection.enable()
         except Exception as exc:
             self.log("error", f"Failed to honor the enable mode {exc}")
-
         try:
             if not hasattr(connection, "check_config_mode"):
                 self.log("error", "Netmiko 'check_config_mode' method is missing")

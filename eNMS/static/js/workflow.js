@@ -17,6 +17,7 @@ import {
   call,
   configureNamespace,
   copyToClipboard,
+  createTooltips,
   notify,
   openPanel,
   showInstancePanel,
@@ -66,7 +67,7 @@ let ends = new Set();
 let currentMode = "motion";
 export let creationMode;
 let mousePosition;
-let currLabel;
+let currentLabel;
 let triggerMenu;
 let currentPlaceholder;
 let placeholder;
@@ -86,22 +87,19 @@ export function displayWorkflow(workflowData) {
   graph.on("oncontext", function (properties) {
     if (triggerMenu) {
       // eslint-disable-next-line new-cap
-      mousePosition = graph.DOMtoCanvas({
-        x: properties.event.offsetX,
-        y: properties.event.offsetY,
-      });
+      mousePosition = properties.pointer.canvas;
       properties.event.preventDefault();
       const node = this.getNodeAt(properties.pointer.DOM);
       const edge = this.getEdgeAt(properties.pointer.DOM);
       if (typeof node !== "undefined" && !ends.has(node)) {
-        graph.selectNodes([node]);
-        $(".menu-entry").hide();
+        graph.selectNodes([node, ...graph.getSelectedNodes()]);
+        $(".menu-entry ").hide();
         $(`.${node.length == 36 ? "label" : "node"}-selection`).show();
         selectedObject = nodes.get(node);
         $(".workflow-selection").toggle(selectedObject.type == "workflow");
       } else if (typeof edge !== "undefined" && !ends.has(node)) {
-        graph.selectEdges([edge]);
-        $(".menu-entry").hide();
+        graph.selectEdges([edge, ...graph.getSelectedEdges()]);
+        $(".menu-entry ").hide();
         $(".edge-selection").show();
         selectedObject = edges.get(edge);
       } else {
@@ -114,13 +112,14 @@ export function displayWorkflow(workflowData) {
     }
   });
   graph.on("doubleClick", function (event) {
+    mousePosition = event.pointer.canvas;
     event.event.preventDefault();
     let node = nodes.get(this.getNodeAt(event.pointer.DOM));
     if (["Placeholder", "Start", "End"].includes(node.name)) node = currentPlaceholder;
     if (!node || !node.id) {
       return;
     } else if (node.type == "label") {
-      editLabel(node);
+      showLabelPanel({ label: node, usePosition: true });
     } else if (node.type == "workflow") {
       switchToWorkflow(`${currentPath}>${node.id}`, null, $("#current-runtime").val());
     } else {
@@ -300,7 +299,10 @@ export const switchToWorkflow = function (path, arrow, runtime, selection) {
   }
 };
 
-export function processWorkflowData(instance, id) {
+export function processWorkflowData(instance) {
+  if (instance.id == workflow.id) {
+    $("#current-workflow option:selected").text(instance.name).trigger("change");
+  }
   if (["create_workflow", "duplicate_workflow"].includes(creationMode)) {
     $("#current-workflow").append(
       `<option value="${instance.id}">${instance.name}</option>`
@@ -634,8 +636,7 @@ function updateRightClickBindings() {
     "Duplicate Workflow": () => createNew("duplicate_workflow"),
     "Create New Service": () => createNew("create_service"),
     "Edit Workflow": () => showInstancePanel("workflow", workflow.id),
-    "Restart Workflow from Here": (service) =>
-      showRestartWorkflowPanel(workflow, service),
+    "Restart Workflow from Here": showRestartWorkflowPanel,
     "Workflow Results Tree": () => showRuntimePanel("results", workflow),
     "Workflow Results Table": () =>
       showRuntimePanel("results", workflow, null, "full_result"),
@@ -650,9 +651,9 @@ function updateRightClickBindings() {
     "Create 'Failure' edge": () => switchMode("failure"),
     "Create 'Prerequisite' edge": () => switchMode("prerequisite"),
     "Move Nodes": () => switchMode("motion"),
-    "Create Label": () =>
-      openPanel({ name: "workflow_label", title: "Create a new label" }),
-    "Edit Label": editLabel,
+    "Create Label": () => showLabelPanel({ usePosition: true }),
+    "Create Label Button": () => showLabelPanel({ usePosition: false }),
+    "Edit Label": (label) => showLabelPanel({ label: label, usePosition: true }),
     "Edit Edge": (edge) => {
       showInstancePanel("workflow_edge", edge.id);
     },
@@ -676,31 +677,32 @@ function updateRightClickBindings() {
   });
 }
 
+function showLabelPanel({ label, usePosition }) {
+  if (!usePosition) mousePosition = null;
+  openPanel({
+    name: "workflow_label",
+    title: label ? "Edit label" : "Create a new label",
+    callback: () => {
+      if (label) {
+        $("#workflow_label-text").val(label.label);
+        $("#workflow_label-alignment").val(label.font.align).selectpicker("refresh");
+        currentLabel = label;
+      } else {
+        currentLabel = null;
+      }
+    },
+  });
+}
+
 function createLabel() {
-  const pos = currLabel
-    ? [currLabel.x, currLabel.y]
-    : mousePosition
-    ? [mousePosition.x, mousePosition.y]
-    : [0, 0];
+  const pos = mousePosition ? [mousePosition.x, mousePosition.y] : [0, 0];
   call({
-    url: `/create_label/${workflow.id}/${pos[0]}/${pos[1]}/${currLabel?.id}`,
+    url: `/create_label/${workflow.id}/${pos[0]}/${pos[1]}/${currentLabel?.id}`,
     form: "workflow_label-form",
     callback: function (result) {
       drawLabel(result.id, result);
       $("#workflow_label").remove();
       notify("Label created.", "success", 5);
-    },
-  });
-}
-
-function editLabel(label) {
-  openPanel({
-    name: "workflow_label",
-    title: "Edit label",
-    callback: () => {
-      $("#workflow_label-text").val(label.label);
-      $("#workflow_label-alignment").val(label.font.align).selectpicker("refresh");
-      currLabel = label;
     },
   });
 }
@@ -714,24 +716,28 @@ function runWorkflow(withUpdates) {
   }
 }
 
-function showRestartWorkflowPanel(workflow, service) {
+function showRestartWorkflowPanel() {
   openPanel({
     name: "restart_workflow",
-    title: `Restart Workflow '${workflow.name}' from '${service.name}'`,
+    title: `Restart Workflow '${workflow.name}'`,
     id: workflow.id,
     callback: function () {
-      $("#start_services").append(new Option(service.name, service.id));
-      $("#start_services").val(service.id).trigger("change");
+      $(`#restart_workflow-start_services-${workflow.id}`).val(
+        graph
+          .getSelectedNodes()
+          .filter((node) => !ends.has(node))
+          .join("-")
+      );
       call({
         url: `/get_runtimes/service/${workflow.id}`,
         callback: function (runtimes) {
+          const id = `#restart_workflow-restart_runtime-${workflow.id}`;
           runtimes.forEach((runtime) => {
-            $("#restart_runtime").append(
-              $("<option></option>").attr("value", runtime[0]).text(runtime[1])
-            );
+            $(id).append(new Option(runtime[0], runtime[1]));
           });
-          $("#restart_runtime").val(runtimes[runtimes.length - 1]);
-          $("#restart_runtime").selectpicker("refresh");
+          $(id)
+            .val(runtimes[runtimes.length - 1])
+            .selectpicker("refresh");
         },
       });
     },
@@ -741,7 +747,7 @@ function showRestartWorkflowPanel(workflow, service) {
 function restartWorkflow() {
   call({
     url: `/run_service/${currentPath}`,
-    form: `restart_workflow-form`,
+    form: `restart_workflow-form-${workflow.id}`,
     callback: function (result) {
       $(`#restart_workflow-${workflow.id}`).remove();
       runLogic(result);
@@ -906,22 +912,27 @@ function getWorkflowTree() {
       call({
         url: `/get_workflow_tree/${currentPath}`,
         callback: function (data) {
-          $(`#workflow-tree-${workflowId}`).jstree({
-            core: {
-              animation: 100,
-              themes: { stripes: true },
-              data: data,
-            },
-            plugins: ["html_row", "search", "types", "wholerow"],
-            html_row: {
-              default: function (el, node) {
-                if (!node) return;
-                const service = JSON.stringify(node.data);
-                $(el).find("a").first().append(`
+          $(`#workflow-tree-${workflowId}`)
+            .bind("loaded.jstree", function (e, data) {
+              createTooltips();
+            })
+            .jstree({
+              core: {
+                animation: 100,
+                themes: { stripes: true },
+                data: data,
+              },
+              plugins: ["html_row", "search", "types", "wholerow"],
+              html_row: {
+                default: function (el, node) {
+                  if (!node) return;
+                  const service = JSON.stringify(node.data);
+                  $(el).find("a").first().append(`
                   <div style="position: absolute; top: 0px; right: 20px">
                     <button
                       type="button"
                       class="btn btn-xs btn-info"
+                      data-tooltip="Find"
                       onclick='eNMS.workflow.highlightService(${service})'
                     >
                       <span class="glyphicon glyphicon-screenshot"></span>
@@ -929,26 +940,29 @@ function getWorkflowTree() {
                     <button
                       type="button"
                       class="btn btn-xs btn-primary"
-                      onclick='eNMS.base.showInstancePanel("service", ${node.data.id})'
+                      data-tooltip="Edit"
+                      onclick='eNMS.base.showInstancePanel(
+                        "${node.data.type}", ${node.data.id}
+                      )'
                     >
                       <span class="glyphicon glyphicon-edit"></span>
                     </button>
                   </div>
                 `);
+                },
               },
-            },
-            search: {
-              show_only_matches: true,
-            },
-            types: {
-              default: {
-                icon: "glyphicon glyphicon-file",
+              search: {
+                show_only_matches: true,
               },
-              workflow: {
-                icon: "fa fa-sitemap",
+              types: {
+                default: {
+                  icon: "glyphicon glyphicon-file",
+                },
+                workflow: {
+                  icon: "fa fa-sitemap",
+                },
               },
-            },
-          });
+            });
           let timer = false;
           $(`#tree-search-${workflowId}`).keyup(function () {
             if (timer) clearTimeout(timer);

@@ -12,3 +12,10 @@ preload_app = True
 raw_env = ["TERM=screen"]
 timeout = 3000
 workers = 2 * cpu_count() + 1 if getenv("REDIS_ADDR") else 1
+
+
+def post_fork(server, worker):
+    if preload_app:
+        from eNMS.database import db
+
+        db.engine.dispose()

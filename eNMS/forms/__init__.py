@@ -32,7 +32,7 @@ class MetaForm(FormMeta):
         form_type = attrs["form_type"].kwargs["default"]
         form = type.__new__(cls, name, bases, attrs)
         if form.__dict__.get("get_request_allowed", True):
-            app.rbac["get_requests"].append(f"/form/{form_type}")
+            app.rbac["get_requests"][f"/{form_type}_form"] = "access"
         if hasattr(form, "form_init"):
             form.form_init()
         if not hasattr(form, "custom_properties"):
@@ -44,7 +44,7 @@ class MetaForm(FormMeta):
         for property, values in form.custom_properties.items():
             if not values.get("form", True):
                 continue
-            if property in db.private_properties:
+            if property in db.private_properties_set:
                 field = PasswordField
             else:
                 field = {
@@ -78,9 +78,9 @@ class MetaForm(FormMeta):
                 app.property_names[field_name] = field.args[0]
             if (
                 issubclass(field.field_class, PasswordField)
-                and field_name not in db.private_properties
+                and field_name not in db.private_properties_set
             ):
-                db.private_properties.append(field_name)
+                db.private_properties_set.add(field_name)
         form_properties[form_type].update(properties)
         for property, value in properties.items():
             if property not in property_types and value["type"] != "field-list":
@@ -100,6 +100,12 @@ class MetaForm(FormMeta):
                 form.service_fields.extend(form_properties[base_form_type])
             form_properties[form_type].update(form_properties[base_form_type])
         return form
+
+    def __setattr__(self, field, value):
+        if hasattr(value, "field_class") and "multiselect" in value.field_class.type:
+            form_type = self.form_type.kwargs["default"]
+            form_properties[form_type][field] = {"type": value.field_class.type}
+        return super().__setattr__(field, value)
 
 
 class BaseForm(FlaskForm, metaclass=MetaForm):

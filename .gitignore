@@ -15,7 +15,8 @@ __pycache__/
 # created by eNMS
 logs
 network_data
-files/services
+files/services/*
+!files/services/.gitkeep
 *.tgz
 
 # venv

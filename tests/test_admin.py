@@ -4,20 +4,22 @@ from eNMS.database import db
 from tests.conftest import check_pages
 
 ignored_endpoints = [
+    "/alerts_table_form",
+    "/calendar_form",
+    "/compare_form",
+    "/device_data_form",
     "/download",
-    "/form/alerts_table",
-    "/form/calendar",
-    "/form/compare",
-    "/form/device_data",
-    "/form/files",
-    "/form/git_history",
-    "/form/instance_deletion",
-    "/form/logs",
-    "/form/result",
-    "/form/session_log",
-    "/form/table",
-    "/form/tree",
-    "/form/workflow_tree",
+    "/export_service",
+    "/files_form",
+    "/git_history_form",
+    "/help",
+    "/instance_deletion_form",
+    "/logs_form",
+    "/result_form",
+    "/session_log_form",
+    "/table_form",
+    "/tree_form",
+    "/workflow_tree_form",
     "/logout",
     "/rest/",
     "/view_service_results",
@@ -42,7 +44,7 @@ def test_urls(user_client):
     test_authentication(user_client)
 
 
-@check_pages("table/user")
+@check_pages("user_table")
 def test_user_management(user_client):
     number_of_users = len(db.fetch_all("user"))
     for user in ("user1", "user2", "user3"):

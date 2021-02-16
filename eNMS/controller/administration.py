@@ -1,7 +1,6 @@
 from collections import defaultdict
 from contextlib import redirect_stdout
 from datetime import datetime
-from flask_login import current_user
 from io import StringIO
 from ipaddress import IPv4Network
 from json import dump
@@ -27,7 +26,7 @@ class AdministrationController(BaseController):
         name, password = kwargs["name"], kwargs["password"]
         if not name or not password:
             return False
-        user = db.fetch("user", allow_none=True, name=name)
+        user = db.get_user(name)
         default_method = self.settings["authentication"]["default"]
         user_method = getattr(user, "authentication", default_method)
         method = kwargs.get("authentication_method", user_method)
@@ -156,14 +155,14 @@ class AdministrationController(BaseController):
                     for related_model, relation in relationships[instance_type].items():
                         relation_dict[related_model] = instance.pop(related_model, [])
                     for property, value in instance.items():
-                        if property in db.private_properties:
+                        if property in db.private_properties_set:
                             instance[property] = self.get_password(value)
                     try:
                         instance = db.factory(
                             instance_type,
                             migration_import=True,
                             no_fetch=empty_database,
-                            update_pools=False,
+                            update_pools=kwargs.get("update_pools", False),
                             import_mechanism=True,
                             **instance,
                         )
@@ -192,9 +191,10 @@ class AdministrationController(BaseController):
                         info("\n".join(format_exc().splitlines()))
                         status = "Partial import (see logs)."
         db.session.commit()
-        for model in ("access", "service"):
-            for instance in db.fetch_all(model):
-                instance.update()
+        if not kwargs.get("skip_model_update"):
+            for model in ("access", "service", "workflow_edge"):
+                for instance in db.fetch_all(model):
+                    instance.update()
         if not kwargs.get("skip_pool_update"):
             for pool in db.fetch_all("pool"):
                 pool.compute_pool()
@@ -210,6 +210,9 @@ class AdministrationController(BaseController):
                 folder="services",
                 name=service_name,
                 import_export_types=["service", "workflow_edge"],
+                skip_pool_update=True,
+                skip_model_update=True,
+                update_pools=True,
             )
         rmtree(path / service_name, ignore_errors=True)
         return status
@@ -244,8 +247,6 @@ class AdministrationController(BaseController):
             db.session.commit()
 
     def run_debug_code(self, **kwargs):
-        if not current_user.is_admin:
-            return False
         result = StringIO()
         with redirect_stdout(result):
             try:
@@ -286,11 +287,11 @@ class AdministrationController(BaseController):
                 continue
 
     def switch_menu(self, user_id):
-        user = db.fetch("user", id=user_id)
+        user = db.fetch("user", rbac=None, id=user_id)
         user.small_menu = not user.small_menu
 
     def switch_theme(self, user_id, theme):
-        db.fetch("user", id=user_id).theme = theme
+        db.fetch("user", rbac=None, id=user_id).theme = theme
 
     def upload_files(self, **kwargs):
         file = kwargs["file"]

@@ -426,7 +426,7 @@ function refreshLogs(service, runtime, editor, first, wasRefreshed, line) {
         editor.replaceRange(`\n${result.logs}`, CodeMirror.Pos(editor.lineCount()));
         editor.setCursor(editor.lineCount(), 0);
       } else if (first || !result.refresh) {
-        editor.setValue(result.logs);
+        editor.setValue(`Gathering logs for '${service.name}'...\n\n${result.logs}`);
         editor.refresh();
       }
       if (first || result.refresh) {
@@ -612,20 +612,28 @@ export function deleteCorruptedEdges() {
   });
 }
 
-export function showRunServicePanel({ instance, type }) {
-  const title = type ? `all ${type}s in table` : `${instance.type} '${instance.name}'`;
-  const panelId = type || instance.id;
+export function showRunServicePanel({ instance, tableId, type }) {
+  const table = tableInstances?.[tableId];
+  const targetType = type || instance.type;
+  const title = type
+    ? `all ${type}s`
+    : tableId
+    ? `all ${type}s in table`
+    : `${instance.type} '${instance.name}'`;
+  const panelId = tableId || instance?.id || type;
   openPanel({
     name: "run_service",
     title: `Run service on ${title}`,
     size: "900px 300px",
     id: panelId,
     callback: function () {
-      $(`#run_service-type-${panelId}`).val(type || instance.type);
+      $(`#run_service-type-${panelId}`).val(targetType);
       if (type) {
+        let form = serializeForm(`#search-form-${panelId}`);
+        if (table) form = { ...form, ...table.constraints };
         call({
           url: `/filtering/${type}`,
-          data: { form: serializeForm(`#search-form-${type}`), bulk: true },
+          data: { form: form, bulk: "id" },
           callback: function (instances) {
             $(`#run_service-targets-${panelId}`).val(instances.join("-"));
           },
@@ -648,6 +656,28 @@ function runServicesOnTargets(id) {
   });
 }
 
+function showImportServicePanel() {
+  openPanel({
+    name: "import_service",
+    title: "Import Service",
+    size: "600 300",
+    callback: () => {
+      call({
+        url: "/get_exported_services",
+        callback: function (services) {
+          let list = document.getElementById("import_service-service");
+          services.forEach((item) => {
+            let option = document.createElement("option");
+            option.textContent = option.value = item;
+            list.appendChild(option);
+          });
+          $("#import_service-service").selectpicker("refresh");
+        },
+      });
+    },
+  });
+}
+
 configureNamespace("automation", [
   displayDiff,
   copyClipboard,
@@ -662,6 +692,7 @@ configureNamespace("automation", [
   resumeTask,
   runServicesOnTargets,
   schedulerAction,
+  showImportServicePanel,
   showResult,
   showRunServicePanel,
   showRuntimePanel,

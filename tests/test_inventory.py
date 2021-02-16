@@ -39,7 +39,7 @@ def define_link(source: int, destination: int) -> ImmutableMultiDict:
     )
 
 
-@check_pages("table/device", "table/link", "visualization/geographical_view")
+@check_pages("device_table", "link_table", "geographical_view")
 def test_manual_object_creation(user_client):
     db.delete_all("device", "link")
     for number in range(10):
@@ -61,14 +61,14 @@ def create_from_file(client, file: str):
         client.post("/import_topology", data=data)
 
 
-@check_pages("table/device", "table/link", "visualization/geographical_view")
+@check_pages("device_table", "link_table", "geographical_view")
 def test_object_creation_europe(user_client):
     create_from_file(user_client, "europe.xls")
     assert len(db.fetch_all("device")) == 33
     assert len(db.fetch_all("link")) == 49
 
 
-@check_pages("table/device", "table/link", "visualization/geographical_view")
+@check_pages("device_table", "link_table", "geographical_view")
 def test_object_creation_type(user_client):
     create_from_file(user_client, "device_counters.xls")
     assert len(db.fetch_all("device")) == 27
@@ -79,7 +79,7 @@ routers = ["router" + str(i) for i in range(5, 20)]
 links = ["europe-link" + str(i) for i in range(4, 15)]
 
 
-@check_pages("table/device", "table/link", "visualization/geographical_view")
+@check_pages("device_table", "link_table", "geographical_view")
 def test_device_deletion(user_client):
     create_from_file(user_client, "europe.xls")
     for device_name in routers:
@@ -89,7 +89,7 @@ def test_device_deletion(user_client):
     assert len(db.fetch_all("link")) == 18
 
 
-@check_pages("table/device", "table/link", "visualization/geographical_view")
+@check_pages("device_table", "link_table", "geographical_view")
 def test_link_deletion(user_client):
     create_from_file(user_client, "europe.xls")
     for link_name in links:
@@ -129,7 +129,7 @@ def create_pool(pool: dict) -> dict:
     return pool
 
 
-@check_pages("table/device", "table/link", "visualization/geographical_view")
+@check_pages("device_table", "link_table", "geographical_view")
 def test_pool_management(user_client):
     create_from_file(user_client, "europe.xls")
     pool_number = len(db.fetch_all("pool"))

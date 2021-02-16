@@ -109,8 +109,8 @@
       <div id="sidebar-menu" class="hidden-print main_menu">
         <div class="menu_section">
           <ul class="nav side-menu">
-            {% for label, category in menu.items() %} {% if user.is_admin or label in
-            user.menu %}
+            {% for label, category in rbac["menu"].items() %} {% if user.is_admin or
+            label in user.menu or category["rbac"] == "all" %}
             <li>
               <a
                 ><i class="fa fa-{{ category['icon'] }}"></i>{{ label }}
@@ -118,18 +118,22 @@
               </a>
               <ul class="nav child_menu">
                 {% for page, data in category["pages"].items() %} {% if user.is_admin or
-                page in user.pages %} {% if data is mapping %}
+                page in user.pages or data["rbac"] == "all" %} {% if "subpages" in data
+                %}
                 <li>
                   <a>{{ page }}<span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
-                    {% for subpage, url in data.items() %} {% if user.is_admin or
-                    subpage in user.pages %}
-                    <li><a href="{{ url }}">{{ subpage }}</a></li>
+                    {% for subpage, subpage_values in data["subpages"].items() %} {% if
+                    user.is_admin or subpage in user.pages or subpage_values["rbac"] ==
+                    "all" %}
+                    <li>
+                      <a href="{{ subpage_values['endpoint'] }}">{{ subpage }}</a>
+                    </li>
                     {% endif %} {% endfor %}
                   </ul>
                 </li>
                 {% else %}
-                <li><a href="{{ data }}">{{ page }}</a></li>
+                <li><a href="{{ data['endpoint'] }}">{{ page }}</a></li>
                 {% endif %} {% endif %} {% endfor %}
               </ul>
             </li>
@@ -239,7 +243,7 @@
                     &nbsp;Files
                   </a>
                 </li>
-                {% endif %} {% if user.is_admin or "Settings" in user.upper_menu %}
+                {% endif %} {% if user.is_admin %}
                 <li class="nav-item">
                   <a
                     onclick="eNMS.administration.showSettings()"
@@ -253,7 +257,7 @@
                     &nbsp;Settings
                   </a>
                 </li>
-                {% endif %} {% if user.is_admin or "Admin" in user.upper_menu %}
+                {% endif %} {% if user.is_admin %}
                 <li class="nav-item">
                   <a
                     onclick="eNMS.base.openPanel({
@@ -296,6 +300,7 @@
       const tableProperties = {{ table_properties|tojson|safe }};
       const theme = {{ themes|tojson|safe }}.themes?.[user.theme];
       const visualization = {{ visualization|tojson|safe }};
+      const rbac = {{ rbac|tojson|safe }};
       let action = {};
       let settings = {{ settings|tojson|safe }};
       let csrf_token = "{{ csrf_token() }}";

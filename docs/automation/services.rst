@@ -158,8 +158,15 @@ for each device for ``Run method`` **Run the service once for each device**, and
 ``Run method`` **Run the service once**.
 
 
-Python Postprocessing
-"""""""""""""""""""""
+Conversion and Postprocessing
+"""""""""""""""""""""""""""""
+
+- ``Conversion Method`` The type of automatic conversion to perform on the service result.
+
+  - ``No conversion`` (default) Use the result with no modification.
+  - ``Text`` Convert the result to a python string.
+  - ``JSON`` Convert a string representing JSON data to a python dictionary.
+  - ``XML`` Convert a string representing XML data to a python dictionary.
 
 Python can be used to inspect or modify the service result.  This is typically used to perform complex validation or to
 extract values from the result for use in subsequent services.
@@ -191,13 +198,6 @@ Validation can consist of:
   - Text matching: looking for a string in the result, or matching the result against a regular expression.
   - Dictionary matching: check that a dictionary is included or equal to the result.
   - Anything else: you can use python code to change the result, including the value of the ``success`` key.
-
-- ``Conversion Method`` The type of automatic conversion to perform on the service result.
-
-  - ``No conversion`` (default) Use the result with no modification.
-  - ``Text`` Convert the result to a python string.
-  - ``JSON`` Convert a string representing JSON data to a python dictionary.
-  - ``XML`` Convert a string representing XML data to a python dictionary.
 
 - ``Validation Method`` The validation method depends on whether the result is a string or a dictionary.
 
@@ -286,7 +286,7 @@ Variables
       :maxdepth: 2
       :titlesonly:
 
-      custom_properties.rst
+      custom_device_properties.rst
 
 - ``link``
 
@@ -307,7 +307,7 @@ Variables
       :maxdepth: 2
       :titlesonly:
 
-      custom_properties.rst
+      custom_link_properties.rst
 
 - ``get_result`` (see :ref:`get_result`)
 

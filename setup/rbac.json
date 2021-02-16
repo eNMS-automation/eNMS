@@ -2,198 +2,255 @@
   "menu": {
     "Home": {
       "icon": "home",
+      "rbac": "all",
       "pages": {
-        "Dashboard": "/dashboard",
-        "Changelog": "/table/changelog",
-        "Sessions": "/table/session"
+        "Dashboard": {
+          "endpoint": "/dashboard",
+          "rbac": "all"
+        },
+        "Changelog": {
+          "endpoint": "/changelog_table",
+          "rbac": "access"
+        },
+        "Sessions": {
+          "endpoint": "/session_table",
+          "rbac": "access"
+        }
       }
     },
     "Administration": {
       "icon": "users",
+      "rbac": "admin",
       "pages": {
-        "Users": "/table/user",
-        "Servers": "/table/server",
-        "Access": "/table/access",
-        "Credentials": "/table/credential"
+        "Users": {
+          "endpoint": "/user_table",
+          "rbac": "admin"
+        },
+        "Servers": {
+          "endpoint": "/server_table",
+          "rbac": "admin"
+        },
+        "Access": {
+          "endpoint": "/access_table",
+          "rbac": "admin"
+        },
+        "Credentials": {
+          "endpoint": "/credential_table",
+          "rbac": "admin"
+        }
       }
     },
     "Inventory": {
       "icon": "database",
+      "rbac": "access",
       "pages": {
-        "Devices": "/table/device",
-        "Configurations": "/table/configuration",
-        "Links": "/table/link",
-        "Pools": "/table/pool"
+        "Devices": {
+          "endpoint": "/device_table",
+          "rbac": "access"
+        },
+        "Configurations": {
+          "endpoint": "/configuration_table",
+          "rbac": "access"
+        },
+        "Links": {
+          "endpoint": "/link_table",
+          "rbac": "access"
+        },
+        "Pools": {
+          "endpoint": "/pool_table",
+          "rbac": "access"
+        }
       }
     },
     "Visualization": {
       "icon": "map-marker",
+      "rbac": "access",
       "pages": {
-        "Geographical View": "/visualization/geographical_view",
-        "Logical View": "/visualization/logical_view",
-        "Force-directed View": "/visualization/force_directed_view"
+        "Geographical View": {
+          "endpoint": "/geographical_view",
+          "rbac": "access"
+        },
+        "Logical View": {
+          "endpoint": "/logical_view",
+          "rbac": "access"
+        },
+        "Force-directed View": {
+          "endpoint": "/force_directed_view",
+          "rbac": "access"
+        }
       }
     },
     "Automation": {
       "icon": "sitemap",
+      "rbac": "access",
       "pages": {
-        "Services": "/table/service",
-        "Workflow Builder": "/workflow_builder",
-        "Scheduling": "/table/task",
-        "Results": "/table/run"
+        "Services": {
+          "endpoint": "/service_table",
+          "rbac": "access"
+        },
+        "Workflow Builder": {
+          "endpoint": "/workflow_builder",
+          "rbac": "access"
+        },
+        "Results": {
+          "endpoint": "/run_table",
+          "rbac": "access"
+        }
+      }
+    },
+    "Scheduling": {
+      "icon": "clock-o",
+      "rbac": "access",
+      "pages": {
+        "Tasks": {
+          "endpoint": "/task_table",
+          "rbac": "access"
+        },
+        "Events": {
+          "endpoint": "/event_table",
+          "rbac": "access"
+        }
       }
     }
   },
-  "pages": [
-    "Access",
-    "Credentials",
-    "Dashboard",
-    "Changelog",
-    "Sessions",
-    "Users",
-    "Servers",
-    "Devices",
-    "Configurations",
-    "Links",
-    "Pools",
-    "Geographical View",
-    "Force-directed View",
-    "Services",
-    "Workflow Builder",
-    "Results",
-    "Tasks"
-  ],
-  "upper_menu": ["Admin", "Settings", "Files"],
-  "delete_requests": ["/rest/instance"],
-  "get_requests": [
-    "/dashboard",
-    "/download_file",
-    "/form/alerts_table",
-    "/form/calendar",
-    "/form/compare",
-    "/form/device_data",
-    "/form/files",
-    "/form/git_history",
-    "/form/instance_deletion",
-    "/form/logs",
-    "/form/result",
-    "/form/session_log",
-    "/form/table",
-    "/form/tree",
-    "/form/workflow_tree",
-    "/login",
-    "/logout",
-    "/rest/configuration",
-    "/rest/instance",
-    "/rest/query",
-    "/rest/result",
-    "/rest/search",
-    "/table/access",
-    "/table/changelog",
-    "/table/configuration",
-    "/table/credential",
-    "/table/device",
-    "/table/pool",
-    "/table/link",
-    "/table/run",
-    "/table/server",
-    "/table/service",
-    "/table/session",
-    "/table/task",
-    "/table/user",
-    "/view_service_results",
-    "/visualization/geographical_view",
-    "/visualization/force_directed_view",
-    "/workflow_builder"
-  ],
-  "post_requests": [
-    "/add_edge",
-    "/add_instances_in_bulk",
-    "/add_objects_to_view",
-    "/bulk_deletion",
-    "/bulk_edit",
-    "/bulk_removal",
-    "/copy_service_in_workflow",
-    "/calendar_init",
-    "/clear_results",
-    "/clear_configurations",
-    "/compare",
-    "/counters",
-    "/count_models",
-    "/create_label",
-    "/create_view_object",
-    "/database_deletion",
-    "/delete_corrupted_edges",
-    "/delete_instance",
-    "/delete_view_selection",
-    "/delete_workflow_selection",
-    "/duplicate_workflow",
-    "/export_service",
-    "/export_topology",
-    "/delete_file",
-    "/edit_file",
-    "/get",
-    "/get_all",
-    "/get_cluster_status",
-    "/get_git_history",
-    "/get_device_network_data",
-    "/get_device_logs",
-    "/get_exported_services",
-    "/get_git_network_data",
-    "/get_git_content",
-    "/get_migration_folders",
-    "/get_service_logs",
-    "/get_properties",
-    "/get_result",
-    "/get_runtimes",
-    "/get_view_topology",
-    "/get_service_state",
-    "/get_session_log",
-    "/get_top_level_workflows",
-    "/get_tree_files",
-    "/get_visualization_parameters",
-    "/get_workflow_results",
-    "/get_workflow_services",
-    "/get_workflow_tree",
-    "/import_service",
-    "/import_topology",
-    "/load_debug_snippets",
-    "/migration_export",
-    "/migration_import",
-    "/multiselect_filtering",
-    "/remove_instance",
-    "/reset_status",
-    "/rest/create_pool",
-    "/rest/instance",
-    "/rest/migrate",
-    "/rest/run_service",
-    "/rest/run_task",
-    "/rest/topology",
-    "/result_log_deletion",
-    "/run_debug_code",
-    "/run_service",
-    "/run_service_on_targets",
-    "/save_file",
-    "/save_visualization_parameters",
-    "/save_positions",
-    "/save_settings",
-    "/save_view_positions",
-    "/scan_cluster",
-    "/scan_playbook_folder",
-    "/search_workflow_services",
-    "/skip_services",
-    "/stop_workflow",
-    "/switch_menu",
-    "/switch_theme",
-    "/scheduler_action",
-    "/filtering",
-    "/task_action",
-    "/topology_import",
-    "/update",
-    "/update_pool",
-    "/update_all_pools",
-    "/upload_files",
-    "/view_filtering",
-    "/web_connection"
-  ]
+  "upper_menu": {
+    "Admin": "admin",
+    "Settings": "admin",
+    "Files": "access"
+  },
+  "delete_requests": {
+    "/rest/instance": "access"
+  },
+  "get_requests": {
+    "/access_table": "admin",
+    "/alerts_table_form": "all",
+    "/calendar_form": "all",
+    "/changelog_table": "access",
+    "/compare_form": "access",
+    "/configuration_table": "access",
+    "/credential_table": "admin",
+    "/dashboard": "all",
+    "/device_data_form": "access",
+    "/device_table": "access",
+    "/download_file": "access",
+    "/event_table": "access",
+    "/export_service": "access",
+    "/files_form": "access",
+    "/geographical_view": "access",
+    "/git_history_form": "access",
+    "/help": "all",
+    "/instance_deletion_form": "access",
+    "/link_table": "access",
+    "/logical_view": "access",
+    "/login": "all",
+    "/logout": "all",
+    "/logs_form": "access",
+    "/pool_table": "access",
+    "/rest/configuration": "access",
+    "/rest/instance": "access",
+    "/rest/query": "access",
+    "/rest/result": "access",
+    "/rest/search": "access",
+    "/result_form": "access",
+    "/run_table": "access",
+    "/server_table": "admin",
+    "/service_table": "access",
+    "/session_log_form": "access",
+    "/session_table": "access",
+    "/table_form": "access",
+    "/task_table": "access",
+    "/tree_form": "access",
+    "/user_table": "admin",
+    "/view_service_results": "access",
+    "/workflow_builder": "access",
+    "/workflow_tree_form": "access"
+  },
+  "post_requests": {
+    "/add_edge": "access",
+    "/add_instances_in_bulk": "access",
+    "/bulk_deletion": "access",
+    "/bulk_edit": "access",
+    "/bulk_removal": "access",
+    "/copy_service_in_workflow": "access",
+    "/calendar_init": "all",
+    "/clear_results": "access",
+    "/clear_configurations": "access",
+    "/compare": "access",
+    "/counters": "all",
+    "/count_models": "all",
+    "/create_label": "access",
+    "/database_deletion": "admin",
+    "/delete_corrupted_edges": "access",
+    "/delete_instance": "access",
+    "/delete_workflow_selection": "access",
+    "/desktop_connection": "access",
+    "/duplicate_workflow": "access",
+    "/export_service": "access",
+    "/export_topology": "access",
+    "/delete_file": "access",
+    "/edit_file": "access",
+    "/get": "access",
+    "/get_all": "access",
+    "/get_cluster_status": "access",
+    "/get_git_history": "access",
+    "/get_device_network_data": "access",
+    "/get_device_logs": "access",
+    "/get_exported_services": "access",
+    "/get_git_network_data": "access",
+    "/get_git_content": "admin",
+    "/get_migration_folders": "access",
+    "/get_service_logs": "access",
+    "/get_properties": "access",
+    "/get_result": "access",
+    "/get_runtimes": "access",
+    "/get_view_topology": "access",
+    "/get_service_state": "access",
+    "/get_session_log": "access",
+    "/get_top_level_workflows": "access",
+    "/get_tree_files": "access",
+    "/get_visualization_parameters": "access",
+    "/get_workflow_results": "access",
+    "/get_workflow_services": "access",
+    "/get_workflow_tree": "access",
+    "/import_service": "access",
+    "/import_topology": "admin",
+    "/load_debug_snippets": "admin",
+    "/migration_export": "admin",
+    "/migration_import": "admin",
+    "/multiselect_filtering": "all",
+    "/remove_instance": "access",
+    "/reset_status": "access",
+    "/rest/create_pool": "access",
+    "/rest/instance": "access",
+    "/rest/migrate": "admin",
+    "/rest/run_service": "access",
+    "/rest/run_task": "access",
+    "/rest/topology": "access",
+    "/result_log_deletion": "access",
+    "/run_debug_code": "admin",
+    "/run_service": "access",
+    "/run_service_on_targets": "access",
+    "/save_file": "access",
+    "/save_visualization_parameters": "access",
+    "/save_positions": "access",
+    "/save_settings": "admin",
+    "/scan_cluster": "access",
+    "/scan_playbook_folder": "access",
+    "/search_workflow_services": "access",
+    "/skip_services": "access",
+    "/stop_workflow": "access",
+    "/switch_menu": "all",
+    "/switch_theme": "all",
+    "/scheduler_action": "access",
+    "/filtering": "all",
+    "/task_action": "access",
+    "/topology_import": "access",
+    "/update": "access",
+    "/update_pool": "access",
+    "/update_all_pools": "access",
+    "/upload_files": "access",
+    "/view_filtering": "access",
+    "/web_connection": "access"
+  },
+  "admin_models": ["access", "credential", "server", "user"]
 }

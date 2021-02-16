@@ -1,6 +1,7 @@
 from datetime import datetime
 from flask import Flask, jsonify, render_template, request
 from flask_socketio import SocketIO
+from logging import ERROR, getLogger
 from os import getenv, read, write
 from pty import fork
 from requests import post
@@ -12,8 +13,11 @@ from uuid import uuid4
 class Server(Flask):
     def __init__(self):
         super().__init__(__name__)
+        getLogger("werkzeug").setLevel(ERROR)
         self.config["SECRET_KEY"] = getenv("TERMINAL_SECRET_KEY", "secret_key")
-        self.socketio = SocketIO(self)
+        self.socketio = SocketIO(
+            self, cors_allowed_origins=getenv("CORS_ALLOWED_ORIGINS")
+        )
         self.configure_routes()
 
     def send_data(self):
@@ -25,13 +29,14 @@ class Server(Flask):
     def configure_routes(self):
         @self.route(f"/{getenv('ENDPOINT')}")
         def index():
-            return render_template("index.html")
+            redirection = getenv("REDIRECTION") == "True"
+            return render_template("index.html", redirection=redirection)
 
         @self.route("/shutdown", methods=["POST"])
         def shutdown():
             request.environ.get("werkzeug.server.shutdown")()
             post(
-                "http://127.0.0.1:5000/rest/instance/session",
+                f"{getenv('APP_ADDRESS')}/rest/instance/session",
                 json={
                     "content": request.json,
                     "device_id": getenv("DEVICE"),
@@ -40,6 +45,7 @@ class Server(Flask):
                     "user": getenv("USER"),
                 },
                 auth=HTTPBasicAuth(getenv("ENMS_USER"), getenv("ENMS_PASSWORD")),
+                verify=False if getenv("VERIFY_CERTIFICATE", True) == "False" else True,
             )
             return jsonify(True)
 

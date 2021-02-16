@@ -34,7 +34,7 @@ scheduled_task = ImmutableMultiDict(
 )
 
 
-@check_pages("table/task")
+@check_pages("task_table")
 def test_netmiko_napalm_config(user_client):
     create_from_file(user_client, "europe.xls")
     user_client.post("/update/task", data=instant_task)
@@ -43,7 +43,7 @@ def test_netmiko_napalm_config(user_client):
     assert len(db.fetch_all("task")) == 5
 
 
-@check_pages("table/changelog")
+@check_pages("changelog_table")
 def test_create_logs(user_client):
     number_of_logs = len(db.fetch_all("changelog"))
     for i in range(10):

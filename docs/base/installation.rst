@@ -144,9 +144,10 @@ Settings ``app`` section
   not work consistently depending on your environment (nginx configuration, proxy, ...)
 - ``config_mode`` (default: ``"debug"``) Must be set to "debug" or "production".
 - ``startup_migration`` (default: ``"examples"``) Name of the migration to load when eNMS starts for the first time.
-By default, when eNMS loads for the first time, it will create a network topology and a number of services and workflows
-as examples of what you can do. You can set the migration to ``"default"`` instead, in which case eNMS will only load what
-is required for the application to function properly.
+
+  - By default, when eNMS loads for the first time, it will create a network topology and a number of services and workflows as examples of what you can do.
+  - You can set the migration to ``"default"`` instead, in which case eNMS will only load what is required for the application to function properly.
+
 - ``documentation_url`` (default: ``"https://enms.readthedocs.io/en/latest/"``) Can be changed if you want to host your
   own version of the documentation locally. Points to the online documentation by default.
 - ``git_repository`` (default: ``""``) Git is used as a version control system for device configurations: this variable
@@ -314,7 +315,23 @@ By default, the two loggers are configured:
 
 And these can be reconfigured here to forward through syslog to remote collection if desired.
 
-Additionally, the ``external loggers`` section allows for changing the log levels for the various libraries used by eNMS
+Additionally, the ``external loggers`` section allows for changing the log levels for the various libraries used by eNMS.
+
+With multiple gunicorn workers, please consider:
+  - Using ``Python WatchedFileHandler`` instead of the ``RotatingFileHandler``
+  - Configuring the LINUX ``logrotate`` utility to perform the desired log rotation
+
+.. code-block:: JSON
+
+  {
+  "handlers": {
+    "rotation": {
+      "level": "DEBUG",
+      "formatter": "standard",
+      "filename": "logs/enms.log",
+      "class": "logging.handlers.WatchedFileHandler"
+    }
+  }
 
 
 Properties file
@@ -337,11 +354,11 @@ properties.json custom device addition example:
             - "type":"string", *data type of attribute*
             - "default":"None", *default value of attribute*
             - "private": true *optional - is attribute hidden from user*
-            - "configuration": true *optional - creates a custom 'Inventory/Configurations' attribute
-            - "log_change" false *optional - disables logging when a changes is made to attribute
-            - "form": false *optional - disables option to edit attribute in Device User Interface
-            - "migrate": fasle *optional - choose if attribute should be consdered for migration
-            - "serialize": false *optional - whether it is passed to the front-end when the object itself is
+            - "configuration": true *optional* - creates a custom 'Inventory/Configurations' attribute
+            - "log_change" false *optional* - disables logging when a changes is made to attribute
+            - "form": false *optional* - disables option to edit attribute in Device User Interface
+            - "migrate": fasle *optional* - choose if attribute should be consdered for migration
+            - "serialize": false *optional* - whether it is passed to the front-end when the object itself is
     - Keys under ``"tables" : { "device" : [ {  & "tables" : { "configuration" : [ {``
         - Details which attributes to display in these table, add custom attributes here
         - Keys/Value pairs for tables
@@ -372,7 +389,7 @@ Environment variables
   - SLACK_TOKEN=slack_token
 
 Scheduler
----------
+#########
 
 The scheduler used for running tasks at a later time is a web application that is distinct from eNMS.
 It can be installed on the same server as eNMS, or a remote server.

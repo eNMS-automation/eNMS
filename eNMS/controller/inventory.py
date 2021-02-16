@@ -4,7 +4,6 @@ from git import Repo
 from io import BytesIO
 from logging import info
 from os import getenv
-from sqlalchemy import and_
 from subprocess import Popen
 from uuid import uuid4
 from werkzeug.utils import secure_filename
@@ -16,6 +15,7 @@ from xlwt import Workbook
 from eNMS.controller.base import BaseController
 from eNMS.database import db
 from eNMS.models import models, model_properties, property_types
+from eNMS.setup import properties
 
 
 class InventoryController(BaseController):
@@ -67,27 +67,30 @@ class InventoryController(BaseController):
             return {"alert": "Unauthorized authentication method."}
         device = db.fetch("device", id=device_id, rbac="connect")
         port, endpoint = self.get_ssh_port(), str(uuid4())
-        command = f"flask run -h 0.0.0.0 -p {port}".split()
+        command = f"python3 -m flask run -h 0.0.0.0 -p {port}"
         if self.settings["ssh"]["bypass_key_prompt"]:
             options = "-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
         else:
             options = ""
         environment = {
+            **{key: str(value) for key, value in self.settings["ssh"]["web"].items()},
+            "APP_ADDRESS": self.settings["app"]["address"],
             "DEVICE": str(device.id),
             "ENDPOINT": endpoint,
+            "ENMS_USER": getenv("ENMS_USER", "admin"),
+            "ENMS_PASSWORD": getenv("ENMS_PASSWORD", "admin"),
             "FLASK_APP": "app.py",
             "IP_ADDRESS": getattr(device, kwargs["address"]),
             "OPTIONS": options,
             "PORT": str(device.port),
             "PROTOCOL": kwargs["protocol"],
+            "REDIRECTION": str(self.settings["ssh"]["port_redirection"]),
             "USER": current_user.name,
-            "ENMS_USER": getenv("ENMS_USER", "admin"),
-            "ENMS_PASSWORD": getenv("ENMS_PASSWORD", "admin"),
         }
         if "authentication" in kwargs:
             credentials = self.get_credentials(device, **kwargs)
             environment.update(zip(("USERNAME", "PASSWORD"), credentials))
-        Popen(command, cwd=self.path / "terminal", env=environment)
+        Popen(command, shell=True, cwd=self.path / "terminal", env=environment)
         return {
             "device": device.name,
             "port": port,
@@ -140,8 +143,20 @@ class InventoryController(BaseController):
     def get_session_log(self, session_id):
         return db.fetch("session", id=session_id).content
 
+    def count_models(self):
+        return {
+            "counters": {
+                model: db.query(model).with_entities(models[model].id).count()
+                for model in properties["dashboard"]
+            },
+            "properties": {
+                model: self.counters(properties["dashboard"][model][0], model)
+                for model in properties["dashboard"]
+            },
+        }
+
     def counters(self, property, model):
-        return Counter(v for v, in db.session.query(getattr(models[model], property)))
+        return Counter(v for v, in db.query(model, property=property))
 
     def export_topology(self, **kwargs):
         workbook = Workbook()
@@ -211,11 +226,6 @@ class InventoryController(BaseController):
 
     def view_filtering(self, **kwargs):
         return {
-            f"{model}s": [
-                instance.view_properties
-                for instance in db.session.query(models[model])
-                .filter(and_(*self.build_filtering_constraints(model, **form)))
-                .all()
-            ]
+            f"{model}s": self.filtering(model, **kwargs[model], bulk="view_properties")
             for model, form in kwargs.items()
         }

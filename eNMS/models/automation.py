@@ -14,7 +14,7 @@ from paramiko import RSAKey, SFTPClient
 from re import compile, search
 from requests import post
 from scp import SCPClient
-from sqlalchemy import Boolean, event, ForeignKey, Index, Integer, or_
+from sqlalchemy import Boolean, ForeignKey, Index, Integer, or_
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.orm import aliased, relationship
 from threading import Thread
@@ -46,6 +46,7 @@ from eNMS.models.administration import User  # noqa: F401
 class Service(AbstractBase):
 
     __tablename__ = class_type = "service"
+    pool_model = True
     type = db.Column(db.SmallString)
     __mapper_args__ = {"polymorphic_identity": "service", "polymorphic_on": type}
     id = db.Column(Integer, primary_key=True)
@@ -82,13 +83,6 @@ class Service(AbstractBase):
     )
     pools = relationship(
         "Pool", secondary=db.pool_service_table, back_populates="services"
-    )
-    originals = relationship(
-        "Service",
-        secondary=db.originals_association_table,
-        primaryjoin=id == db.originals_association_table.c.original_id,
-        secondaryjoin=id == db.originals_association_table.c.child_id,
-        backref="children",
     )
     update_target_pools = db.Column(Boolean, default=False)
     update_pools_after_running = db.Column(Boolean, default=False)
@@ -144,17 +138,12 @@ class Service(AbstractBase):
         if "name" not in kwargs:
             self.set_name()
 
-    def get_originals(self, workflow):
-        if workflow.workflows:
-            return set().union(*(self.get_originals(w) for w in workflow.workflows))
-        else:
-            return {self, workflow}
-
     def update(self, **kwargs):
         if "scoped_name" in kwargs and kwargs.get("scoped_name") != self.scoped_name:
             self.set_name(kwargs["scoped_name"])
+        if self.positions and "positions" in kwargs:
+            kwargs["positions"] = {**self.positions, **kwargs["positions"]}
         super().update(**kwargs)
-        self.originals = list(self.get_originals(self))
 
     @classmethod
     def filtering_constraints(cls, **kwargs):
@@ -182,28 +171,12 @@ class Service(AbstractBase):
             name = f"[{workflow.name}] {scoped_name}" if workflow else scoped_name
             if not db.fetch("service", allow_none=True, name=name):
                 service = super().duplicate(
-                    name=name, scoped_name=scoped_name, shared=False
+                    name=name, scoped_name=scoped_name, shared=False, update_pools=True
                 )
                 break
         if workflow:
             workflow.services.append(service)
         return service
-
-    @classmethod
-    def configure_events(cls):
-        if not app.use_vault:
-            return
-
-        @event.listens_for(cls.name, "set", propagate=True)
-        def vault_update(target, new_value, old_value, *_):
-            path = f"secret/data/{target.type}/{old_value}/password"
-            data = app.vault_client.read(path)
-            if not data:
-                return
-            app.vault_client.write(
-                f"secret/data/{target.type}/{new_value}/password",
-                data={"password": data["data"]["data"]["password"]},
-            )
 
     @property
     def filename(self):
@@ -594,7 +567,7 @@ class Run(AbstractBase):
                 "run": {
                     k: v
                     for k, v in self.properties.items()
-                    if k not in db.private_properties
+                    if k not in db.private_properties_set
                 },
                 "service": self.service.get_properties(exclude=["positions"]),
             }
@@ -604,7 +577,9 @@ class Run(AbstractBase):
                 or len(self.target_devices) > 1
                 or self.run_method == "once"
             ):
-                results = self.create_result(results)
+                results = self.create_result(
+                    results, run_result=self.runtime == self.parent_runtime
+                )
             if app.redis_queue and self.runtime == self.parent_runtime:
                 app.redis("delete", *(app.redis("keys", f"{self.runtime}/*") or []))
         return results
@@ -753,7 +728,7 @@ class Run(AbstractBase):
                 "runtime": self.runtime,
             }
 
-    def create_result(self, results, device=None, commit=True):
+    def create_result(self, results, device=None, commit=True, run_result=False):
         self.success = results["success"]
         results = self.make_results_json_compliant(results)
         result_kw = {
@@ -782,7 +757,7 @@ class Run(AbstractBase):
                 for result in self.results:
                     results["devices"][result.device.name] = result.result
         create_failed_results = self.disable_result_creation and not self.success
-        if not self.disable_result_creation or create_failed_results:
+        if not self.disable_result_creation or create_failed_results or run_result:
             db.factory("result", result=results, commit=commit, **result_kw)
         return results
 
@@ -812,7 +787,7 @@ class Run(AbstractBase):
                     self.log("error", str(exc), device)
                     result = "\n".join(format_exc().splitlines())
                     results = {"success": False, "result": result}
-                self.convert_result(results)
+                results = self.convert_result(results)
                 if "success" not in results:
                     results["success"] = True
                 if self.service.postprocessing and (
@@ -864,7 +839,7 @@ class Run(AbstractBase):
                     payload.update(old_result["payload"])
             if self.service.iteration_values:
                 targets_results = {}
-                targets = self.eval(self.service.iteration_values, **locals())[0]
+                targets = list(self.eval(self.service.iteration_values, **locals())[0])
                 if not isinstance(targets, dict):
                     targets = dict(zip(map(str, targets), targets))
                 for target_name, target_value in targets.items():
@@ -1229,6 +1204,17 @@ class Run(AbstractBase):
             if service_value:
                 setattr(connection, property, service_value)
         try:
+            if not hasattr(connection, "check_enable_mode"):
+                self.log("error", "Netmiko 'check_enable_mode' method is missing")
+                return connection
+            mode = connection.check_enable_mode()
+            if mode and not self.enable_mode:
+                connection.exit_enable_mode()
+            elif self.enable_mode and not mode:
+                connection.enable()
+        except Exception as exc:
+            self.log("error", f"Failed to honor the enable mode {exc}")
+        try:
             if not hasattr(connection, "check_config_mode"):
                 self.log("error", "Netmiko 'check_config_mode' method is missing")
                 return connection
@@ -1409,7 +1395,11 @@ class Run(AbstractBase):
         for (send, expect) in zip(commands[::2], commands[1::2]):
             if not send or not expect:
                 continue
-            self.log("info", f"Sent '{send}', waiting for '{expect}'", device)
+            self.log(
+                "info",
+                f"Sent '{send if send != commands[4] else 'jump on connect password'}'"
+                f", waiting for '{expect}'",
+            )
             connection.send_command(
                 send,
                 expect_string=expect,

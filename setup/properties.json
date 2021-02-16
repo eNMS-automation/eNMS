@@ -139,18 +139,6 @@
       "number_of_retries",
       "time_between_retries"
     ],
-    "workflow": [
-      "vendor",
-      "operating_system",
-      "creator",
-      "send_notification",
-      "send_notification_method",
-      "multiprocessing",
-      "max_processes",
-      "number_of_retries",
-      "time_between_retries"
-    ],
-    "user": ["name"],
     "task": ["status", "frequency", "frequency_unit", "crontab_expression"]
   },
   "tables": {

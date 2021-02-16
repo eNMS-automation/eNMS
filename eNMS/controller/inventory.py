@@ -155,7 +155,9 @@ class InventoryController(BaseController):
     def count_models(self):
         return {
             "counters": {
-                model: db.query(model, rbac=None).with_entities(models[model].id).count()
+                model: db.query(model, rbac=None)
+                .with_entities(models[model].id)
+                .count()
                 for model in properties["dashboard"]
             },
             "properties": {

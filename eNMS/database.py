@@ -29,7 +29,7 @@ from sqlalchemy.types import JSON
 from time import sleep
 
 from eNMS.models import model_properties, models, property_types, relationships
-from eNMS.setup import database as database_settings, properties
+from eNMS.setup import database as database_settings, properties, rbac as rbac_settings
 
 
 class Database:
@@ -254,15 +254,17 @@ class Database:
                 ),
             )
 
+    def get_user(name):
+        return db.session.query(models["user"]).filter_by(name=name).one()
+
     def query(self, model, rbac="read", username=None, property=None):
         entity = getattr(models[model], property) if property else models[model]
         query = self.session.query(entity)
-        if rbac and model != "user":
-            if current_user:
-                user = current_user
-            else:
-                user = self.fetch("user", name=username or "admin")
+        if rbac:
+            user = current_user or self.get_user(username or "admin")
             if user.is_authenticated and not user.is_admin:
+                if model in rbac_settings["admin_models"]:
+                    raise self.rbac_error
                 query = models[model].rbac_filter(query, rbac, user)
         return query
 
@@ -328,6 +330,10 @@ class Database:
         ]
 
     def factory(self, _class, commit=False, no_fetch=False, **kwargs):
+        non_admin_user = not getattr(current_user, "is_admin", True)
+        if non_admin_user and _class in rbac_settings["admin_models"]:
+            raise self.rbac_error
+
         def transaction(_class, **kwargs):
             characters = set(kwargs.get("name", "") + kwargs.get("scoped_name", ""))
             if set("/\\'" + '"') & characters:

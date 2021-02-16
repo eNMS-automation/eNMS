@@ -128,11 +128,11 @@ class Server(Flask):
 
         @login_manager.user_loader
         def user_loader(name):
-            return db.fetch("user", allow_none=True, name=name)
+            return db.get_user(name)
 
         @login_manager.request_loader
         def request_loader(request):
-            return db.fetch("user", allow_none=True, name=request.form.get("name"))
+            return db.get_user(request.form.get("name"))
 
     def configure_context_processor(self):
         @self.context_processor

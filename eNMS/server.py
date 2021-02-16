@@ -185,8 +185,7 @@ class Server(Flask):
 
         @self.auth.get_password
         def get_password(username):
-            user = db.fetch("user", allow_none=True, name=username)
-            return getattr(user, "password", False)
+            return getattr(db.get_user(username), "password", False)
 
         @self.auth.error_handler
         def unauthorized():
@@ -214,6 +213,8 @@ class Server(Flask):
                     else:
                         log = f"Authentication failed for user '{username}'"
                 except Exception as exc:
+                    from traceback import format_exc
+                    print(format_exc())
                     log = f"Authentication error for user '{username}' ({exc})"
                 finally:
                     app.log("info" if success else "warning", log, logger="security")

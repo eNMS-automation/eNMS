@@ -119,7 +119,7 @@ class BaseController:
         if self.cli_command:
             return
         self.init_forms()
-        if not db.fetch("user", allow_none=True, name="admin"):
+        if not db.get_user("admin"):
             self.create_admin_user()
             self.migration_import(
                 name=self.settings["app"].get("startup_migration", "default"),
@@ -153,9 +153,11 @@ class BaseController:
         )
 
     def create_admin_user(self):
-        admin = db.factory("user", name="admin", is_admin=True, commit=True)
-        if not admin.password:
-            admin.update(password="admin")
+        admin_user = models["user"](name="admin", is_admin=True)
+        db.session.add(admin_user)
+        db.session.commit()
+        if not admin_user.password:
+            admin_user.update(password="admin")
 
     def update_credentials(self):
         with open(self.path / "files" / "spreadsheets" / "usa.xls", "rb") as file:

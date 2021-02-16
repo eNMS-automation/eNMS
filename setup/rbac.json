@@ -248,11 +248,5 @@
     "/view_filtering": "access",
     "/web_connection": "access"
   },
-  "admin_models": [
-    "access",
-    "changelog",
-    "credential",
-    "server",
-    "user"
-  ] 
+  "admin_models": ["access", "changelog", "credential", "server", "user"]
 }

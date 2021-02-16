@@ -254,8 +254,8 @@ class Database:
                 ),
             )
 
-    def get_user(name):
-        return db.session.query(models["user"]).filter_by(name=name).one()
+    def get_user(self, name):
+        return db.session.query(models["user"]).filter_by(name=name).first()
 
     def query(self, model, rbac="read", username=None, property=None):
         entity = getattr(models[model], property) if property else models[model]
@@ -330,10 +330,6 @@ class Database:
         ]
 
     def factory(self, _class, commit=False, no_fetch=False, **kwargs):
-        non_admin_user = not getattr(current_user, "is_admin", True)
-        if non_admin_user and _class in rbac_settings["admin_models"]:
-            raise self.rbac_error
-
         def transaction(_class, **kwargs):
             characters = set(kwargs.get("name", "") + kwargs.get("scoped_name", ""))
             if set("/\\'" + '"') & characters:

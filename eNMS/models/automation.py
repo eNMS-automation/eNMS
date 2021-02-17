@@ -418,9 +418,12 @@ class Run(AbstractBase):
         else:
             raise AttributeError
 
-    def result(self, device=None):
-        result = [r for r in self.results if r.device_name == device]
-        return result.pop() if result else None
+    def result(self, device=None, main=False):
+        for result in self.results:
+            if result.device_name == device:
+                return result
+        if main and len(self.results) == 1:
+            return self.results[0]
 
     @property
     def service_properties(self):

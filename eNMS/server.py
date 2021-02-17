@@ -292,7 +292,7 @@ class Server(Flask):
         @blueprint.route("/view_service_results/<int:id>")
         @self.monitor_requests
         def view_service_results(id):
-            result = db.fetch("run", id=id).result().result
+            result = db.fetch("run", id=id).result(main=True).result
             return f"<pre>{app.str_dict(result)}</pre>"
 
         @blueprint.route("/download_file/<path:path>")

@@ -473,7 +473,7 @@ class Server(Flask):
                 if errors:
                     return {"errors": errors}
                 if devices or pools:
-                    data.update({"devices": devices, "pools": pools})
+                    data.update({"target_devices": devices, "target_pools": pools})
                 data["runtime"] = runtime = app.get_time()
                 if handle_asynchronously:
                     Thread(target=app.run, args=(service.id,), kwargs=data).start()
@@ -494,9 +494,9 @@ class Server(Flask):
                     **task.initial_payload,
                 }
                 if task.devices:
-                    data["devices"] = [device.id for device in task.devices]
+                    data["target_devices"] = [device.id for device in task.devices]
                 if task.pools:
-                    data["pools"] = [pool.id for pool in task.pools]
+                    data["target_pools"] = [pool.id for pool in task.pools]
                 Thread(target=app.run, args=(task.service.id,), kwargs=data).start()
 
         class Topology(Resource):

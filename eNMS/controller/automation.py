@@ -5,7 +5,6 @@ from netmiko.ssh_dispatcher import CLASS_MAPPER, FILE_TRANSFER_MAP
 from operator import itemgetter
 from pathlib import Path
 from re import search, sub
-from requests import post
 from threading import Thread
 from uuid import uuid4
 from warnings import warn

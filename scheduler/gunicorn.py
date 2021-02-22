@@ -1,4 +1,4 @@
 bind = "0.0.0.0:5000"
-loglevel = "debug"
+loglevel = "info"
 timeout = 3000
 workers = 1

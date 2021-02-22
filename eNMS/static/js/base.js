@@ -756,7 +756,7 @@ function processData(type, id) {
     callback: (instance) => {
       const tableType = isService ? "service" : type;
       if (page.includes("table")) {
-        tableInstances[tableType].table.ajax.reload(null, false);
+        refreshTable(tableType);
       } else if (page == "workflow_builder") {
         processWorkflowData(instance, id);
       }

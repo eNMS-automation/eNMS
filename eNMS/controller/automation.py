@@ -513,10 +513,12 @@ class AutomationController(BaseController):
         playbooks = [[str(f) for f in path.glob(e)] for e in ("*.yaml", "*.yml")]
         return sorted(sum(playbooks, []))
 
-    def scheduler_action(self, action):
-        result = post(f"{self.scheduler_address}/bulk_action/{action}").json()
+    def scheduler_action(self, action, **kwargs):
+        tasks = self.filtering("task", bulk="object", form=kwargs)
+        ids = "-".join(str(task.id) for task in tasks)
+        result = post(f"{self.scheduler_address}/bulk_action/{action}/{ids}").json()
         if result:
-            for task in db.fetch_all("task"):
+            for task in tasks:
                 task.is_active = action == "resume"
         return result
 

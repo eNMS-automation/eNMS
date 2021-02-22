@@ -579,7 +579,7 @@ function schedulerAction(action) {
   call({
     url: `/scheduler_action/${action}`,
     callback: function () {
-      notify(`Scheduler ${action}d.`, "success", 5, true);
+      notify(`All tasks have been ${action}d.`, "success", 5, true);
     },
   });
 }

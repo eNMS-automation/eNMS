@@ -5,6 +5,7 @@ from netmiko.ssh_dispatcher import CLASS_MAPPER, FILE_TRANSFER_MAP
 from operator import itemgetter
 from pathlib import Path
 from re import search, sub
+from requests import post
 from threading import Thread
 from uuid import uuid4
 from warnings import warn
@@ -513,7 +514,7 @@ class AutomationController(BaseController):
         return sorted(sum(playbooks, []))
 
     def scheduler_action(self, action):
-        getattr(self.scheduler, action)()
+        return post(f"{self.scheduler_address}/bulk_action/{action}").json()
 
     def search_workflow_services(self, *args, **kwargs):
         return [

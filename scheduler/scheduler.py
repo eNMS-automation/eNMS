@@ -53,6 +53,12 @@ class Scheduler(Flask):
                 self.scheduler.remove_job(job_id)
             return jsonify(True)
 
+        @self.route("/bulk_action/<action>", methods=["POST"])
+        def bulk_action(action):
+            for job in self.scheduler.get_jobs():
+                getattr(self.scheduler, f"{action}_job")(job.id)
+            return jsonify(True)
+
         @self.route("/next_runtime/<task_id>")
         def next_runtime(task_id):
             job = self.scheduler.get_job(task_id)

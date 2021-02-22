@@ -579,6 +579,7 @@ function schedulerAction(action) {
   call({
     url: `/scheduler_action/${action}`,
     callback: function () {
+      refreshTable("task");
       notify(`All tasks have been ${action}d.`, "success", 5, true);
     },
   });

@@ -514,7 +514,11 @@ class AutomationController(BaseController):
         return sorted(sum(playbooks, []))
 
     def scheduler_action(self, action):
-        return post(f"{self.scheduler_address}/bulk_action/{action}").json()
+        result = post(f"{self.scheduler_address}/bulk_action/{action}").json()
+        if result:
+            for task in db.fetch_all("task"):
+                task.is_active = action == "resume"
+        return result
 
     def search_workflow_services(self, *args, **kwargs):
         return [

@@ -53,15 +53,6 @@ class Scheduler(Flask):
                 self.scheduler.remove_job(job_id)
             return jsonify(True)
 
-        @self.route("/bulk_action/<action>/<job_ids>", methods=["POST"])
-        def bulk_action(action, job_ids):
-            for job_id in job_ids.split("-"):
-                try:
-                    getattr(self.scheduler, f"{action}_job")(job_id)
-                except JobLookupError:
-                    continue
-            return jsonify(True)
-
         @self.route("/next_runtime/<task_id>")
         def next_runtime(task_id):
             job = self.scheduler.get_job(task_id)

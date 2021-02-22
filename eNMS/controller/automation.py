@@ -513,14 +513,12 @@ class AutomationController(BaseController):
         playbooks = [[str(f) for f in path.glob(e)] for e in ("*.yaml", "*.yml")]
         return sorted(sum(playbooks, []))
 
-    def scheduler_action(self, action, **kwargs):
-        tasks = self.filtering("task", bulk="object", form=kwargs)
-        ids = "-".join(str(task.id) for task in tasks)
-        result = post(f"{self.scheduler_address}/bulk_action/{action}/{ids}").json()
-        if result:
-            for task in tasks:
-                task.is_active = action == "resume"
-        return result
+    def task_action(self, mode, task_id):
+        return db.fetch("task", id=task_id, rbac="schedule").schedule(mode)
+
+    def scheduler_action(self, mode, **kwargs):
+        for task_id in self.filtering("task", bulk="id", form=kwargs):
+            self.task_action(mode, task_id)
 
     def search_workflow_services(self, *args, **kwargs):
         return [
@@ -556,6 +554,3 @@ class AutomationController(BaseController):
             else:
                 self.run_stop[run.parent_runtime] = True
             return True
-
-    def task_action(self, mode, task_id):
-        return db.fetch("task", id=task_id, rbac="schedule").schedule(mode)

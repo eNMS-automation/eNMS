@@ -503,6 +503,7 @@ function pauseTask(id) {
       $(`#pause-resume-${id}`)
         .attr("onclick", `eNMS.automation.resumeTask('${id}')`)
         .text("Resume");
+      refreshTable("task");
       notify("Task paused.", "success", 5);
     },
   });
@@ -515,6 +516,7 @@ function resumeTask(id) {
       $(`#pause-resume-${id}`)
         .attr("onclick", `eNMS.automation.pauseTask('${id}')`)
         .text("Pause");
+      refreshTable("task");
       notify("Task resumed.", "success", 5);
     },
   });

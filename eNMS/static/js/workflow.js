@@ -200,8 +200,8 @@ const rectangleSelection = (container, network, nodes) => {
 
   container.on("mousedown", function ({ which, pageX, pageY }) {
     const startX = pageX - this.offsetLeft + offsetLeft;
-    const startY = pageY - this.offsetTop + offsetTop
-    const node = graph.getNodeAt({x: startX, y: startY});
+    const startY = pageY - this.offsetTop + offsetTop;
+    const node = graph.getNodeAt({ x: startX, y: startY });
     if (currentMode != "motion" && !node) switchMode("motion", true);
     if (which === 3) {
       Object.assign(DOMRect, {

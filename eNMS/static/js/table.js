@@ -1327,7 +1327,7 @@ function exportTable(tableId) {
 }
 
 export const refreshTable = function (tableId, notification) {
-  if ($(`#${tableId}`).length) tableInstances[tableId].table.ajax.reload(null, false);
+  if ($(`#table-${tableId}`).length) tableInstances[tableId].table.ajax.reload(null, false);
   if (notification) notify("Table refreshed.", "success", 5);
 };
 

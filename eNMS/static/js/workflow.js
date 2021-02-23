@@ -362,6 +362,7 @@ function deleteSelection() {
       if (!selection.edges.includes(edge)) selection.edges.push(edge);
     });
   });
+  selection.edges = selection.edges.filter((edge) => edge > 0);
   call({
     url: `/delete_workflow_selection/${workflow.id}`,
     data: selection,

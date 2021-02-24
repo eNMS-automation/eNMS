@@ -133,6 +133,7 @@ export class Table {
             type: this.type,
             export: self.csvExport,
             clipboard: self.copyClipboard,
+            prefilter: self.id == "run",
           });
           Object.assign(d, self.filteringData);
           return JSON.stringify(d);

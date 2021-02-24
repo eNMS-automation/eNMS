@@ -257,9 +257,11 @@ class Database:
     def get_user(self, name):
         return db.session.query(models["user"]).filter_by(name=name).first()
 
-    def query(self, model, rbac="read", username=None, property=None):
+    def query(self, model, rbac="read", username=None, property=None, prefilter=False):
         entity = getattr(models[model], property) if property else models[model]
-        query = models[model].prefilter(self.session.query(entity))
+        query = self.session.query(entity)
+        if prefilter:
+            query = models[model].prefilter(query)
         if rbac:
             user = current_user or self.get_user(username or "admin")
             if user.is_authenticated and not user.is_admin:

@@ -130,8 +130,7 @@ ___
 
 ## Online content
 
-- You can follow us on _[Twitter](https://twitter.com/AutomationEnms)_ or _[Linkedin](https://www.linkedin.com/company/enms-automation)_ to receive notifications about new training content and releases.
-- You can join the `#enms` channel on the _[networktocode slack](https://networktocode.herokuapp.com/slack)_ for questions, feedback or feature requests.
+You can follow us on _[Twitter](https://twitter.com/AutomationEnms)_ or _[Linkedin](https://www.linkedin.com/company/enms-automation)_ to receive notifications about new training content and releases.
 
 ## Training Videos
 

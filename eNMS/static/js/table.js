@@ -45,8 +45,8 @@ export class Table {
       orderCellsTop: true,
       autoWidth: false,
       scrollX: true,
-      drawCallback: function() {
-        $(".paginate_button > a").on("focus", function() {
+      drawCallback: function () {
+        $(".paginate_button > a").on("focus", function () {
           $(this).blur();
         });
         createTooltips();
@@ -54,10 +54,10 @@ export class Table {
       sDom: "tilp",
       columns: this.columns,
       columnDefs: [{ className: "dt-center", targets: "_all" }],
-      initComplete: function() {
+      initComplete: function () {
         this.api()
           .columns()
-          .every(function(index) {
+          .every(function (index) {
             const data = self.columns[index];
             let element;
             const elementId = `${self.type}_filtering-${data.data}`;
@@ -106,15 +106,15 @@ export class Table {
             }
             $(element)
               .appendTo($(this.header()))
-              .on("keyup change", function() {
+              .on("keyup change", function () {
                 if (waitForSearch) return;
                 waitForSearch = true;
-                setTimeout(function() {
+                setTimeout(function () {
                   self.table.page(0).ajax.reload(null, false);
                   waitForSearch = false;
                 }, 500);
               })
-              .on("click", function(e) {
+              .on("click", function (e) {
                 e.stopPropagation();
               });
           });
@@ -138,7 +138,7 @@ export class Table {
           Object.assign(d, self.filteringData);
           return JSON.stringify(d);
         },
-        dataSrc: function(result) {
+        dataSrc: function (result) {
           if (result.error) {
             notify(result.error, "error", 5);
             return [];
@@ -220,13 +220,9 @@ export class Table {
       );
     });
     $(`#column-display-${this.id}`).selectpicker("refresh");
-    $(`#column-display-${this.id}`).on("change", function() {
+    $(`#column-display-${this.id}`).on("change", function () {
       self.columns.forEach((col) => {
-        self.table.column(`${col.name}:name`).visible(
-          $(this)
-            .val()
-            .includes(col.data)
-        );
+        self.table.column(`${col.name}:name`).visible($(this).val().includes(col.data));
       });
       self.table.ajax.reload(null, false);
       self.createfilteringTooltips();
@@ -544,7 +540,7 @@ tables.configuration = class ConfigurationTable extends Table {
         formatter: (value) => `Lines of context: ${value}`,
         tooltip: "always",
       })
-      .on("change", function() {
+      .on("change", function () {
         refreshTable("configuration");
       });
   }
@@ -865,7 +861,7 @@ tables.service = class ServiceTable extends Table {
     loadServiceTypes();
     $("#parent-filtering")
       .selectpicker()
-      .on("change", function() {
+      .on("change", function () {
         self.table.page(0).ajax.reload(null, false);
       });
   }
@@ -1310,14 +1306,10 @@ tables.event = class EventTable extends Table {
   }
 };
 
-export const clearSearch = function(tableId, notification) {
+export const clearSearch = function (tableId, notification) {
   $(`.search-input-${tableId},.search-list-${tableId}`).val("");
-  $(".search-relation-dd")
-    .val("any")
-    .selectpicker("refresh");
-  $(".search-relation")
-    .val([])
-    .trigger("change");
+  $(".search-relation-dd").val("any").selectpicker("refresh");
+  $(".search-relation").val([]).trigger("change");
   $(`.search-select-${tableId}`).val("inclusion");
   refreshTable(tableId);
   if (notification) notify("Search parameters cleared.", "success", 5);
@@ -1335,9 +1327,10 @@ function exportTable(tableId) {
   refreshTable(tableId);
 }
 
-export const refreshTable = function(tableId, notification) {
-  if ($(`#table-${tableId}`).length)
+export const refreshTable = function (tableId, notification) {
+  if ($(`#table-${tableId}`).length) {
     tableInstances[tableId].table.ajax.reload(null, false);
+  }
   if (notification) notify("Table refreshed.", "success", 5);
 };
 
@@ -1375,7 +1368,7 @@ function bulkDeletion(tableId, model) {
   call({
     url: `/bulk_deletion/${model}`,
     form: `search-form-${tableId}`,
-    callback: function(number) {
+    callback: function (number) {
       refreshTable(tableId);
       $(`#bulk_deletion-${tableId}`).remove();
       notify(`${number} items deleted.`, "success", 5, true);
@@ -1388,8 +1381,9 @@ function bulkRemoval(tableId, model, instance) {
   call({
     url: `/bulk_removal/${model}/${instance.type}/${instance.id}/${relation}`,
     form: `search-form-${tableId}`,
-    callback: function(number) {
+    callback: function (number) {
       refreshTable(tableId);
+      if (instance.type == "pool") refreshTable("pool");
       notify(
         `${number} ${model}s removed from ${instance.type} '${instance.name}'.`,
         "success",
@@ -1404,7 +1398,7 @@ function bulkEdit(formId, model, table) {
   call({
     url: `/bulk_edit/${model}`,
     form: `${formId}-form`,
-    callback: function(number) {
+    callback: function (number) {
       refreshTable(table);
       $(`#${formId}`).remove();
       notify(`${number} items modified.`, "success", 5, true);
@@ -1439,7 +1433,7 @@ function displayRelationTable(type, instance, relation) {
     id: instance.id,
     size: "1200 600",
     title: `${instance.name} - ${type}s`,
-    callback: function() {
+    callback: function () {
       const constraints = { [`${relation.from}`]: [instance.id] };
       // eslint-disable-next-line new-cap
       new tables[type](instance.id, constraints, { relation, ...instance });

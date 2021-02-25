@@ -1382,6 +1382,7 @@ function bulkRemoval(tableId, model, instance) {
     form: `search-form-${tableId}`,
     callback: function (number) {
       refreshTable(tableId);
+      if (instance.type == "pool") refreshTable("pool");
       notify(
         `${number} ${model}s removed from ${instance.type} '${instance.name}'.`,
         "success",

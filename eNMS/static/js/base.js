@@ -189,6 +189,7 @@ function removeInstance(tableId, instance, relation) {
         .row($(`#${instance.id}`))
         .remove()
         .draw(false);
+      if (relation.type == "pool") refreshTable("pool");
       notify(
         `${instance.type.toUpperCase()} '${instance.name}' removed from
         ${relation.type.toUpperCase()} '${relation.name}'.`,
@@ -598,6 +599,7 @@ function addInstancesToRelation(type, id) {
     callback: (result) => {
       $(`#add_${type}s-${id}`).remove();
       refreshTable(id);
+      if (result.target.type == "pool") refreshTable("pool");
       notify(
         `${result.number} ${type}s added to
         ${result.target.type} '${result.target.name}'.`,

@@ -391,7 +391,8 @@ class Server(Flask):
             decorators = [self.auth.login_required, self.monitor_rest_request]
 
             def get(self, name):
-                return db.fetch("device", name=name).configuration
+                config_name = request.args.to_dict().get("config_name", "configuration")
+                return getattr(db.fetch("device", name=name), config_name)
 
         class GetResult(Resource):
             decorators = [self.auth.login_required, self.monitor_rest_request]

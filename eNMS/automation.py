@@ -546,7 +546,7 @@ class ServiceRun:
         if service_log or logger and settings.get("service_log"):
             run_log = f"{app.get_time()} - {severity} - {log}"
             app.log_queue(self.parent_runtime, self.service.id, run_log)
-            if self.runtime != self.parent_runtime:
+            if not self.main_run:
                 app.log_queue(self.parent_runtime, self.run.service.id, run_log)
 
     def build_notification(self, results):

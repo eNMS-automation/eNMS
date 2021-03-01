@@ -45,7 +45,8 @@ class ServiceRun:
         self.workflow = None
         self.parent_device = None
         self.run = run
-        self.runtime = kwargs.get("runtime") or app.get_time()
+        self.parent_runtime = kwargs.get("parent_runtime")
+        self.runtime = app.get_time()
         for key, value in kwargs.items():
             setattr(self, key, value)
         if not kwargs.get("parent_runtime"):
@@ -54,12 +55,8 @@ class ServiceRun:
         elif self.parent_device:
             self.path = self.parent.path
         else:
-            self.path = f"{self.parent.path}>{self.service.id}"
+            self.path = f"{run.path}>{self.service.id}"
         self.start_run()
-
-    @property
-    def log_change(self):
-        return self.runtime == self.parent_runtime
 
     def __repr__(self):
         return f"{self.runtime}: SERVICE '{self.service}'"
@@ -67,12 +64,8 @@ class ServiceRun:
     def __getattr__(self, key):
         if key in self.__dict__:
             return self.__dict__[key]
-        elif key in self.__dict__.get("properties", {}):
-            return self.__dict__["properties"][key]
-        elif set(self.__dict__) & {"service_id", "service"}:
-            return getattr(self.service, key)
         else:
-            raise AttributeError
+            return getattr(self.run, key)
 
     def result(self, device=None, main=False):
         for result in self.results:
@@ -144,11 +137,14 @@ class ServiceRun:
             if app.run_db[self.parent_runtime].get(self.path):
                 return
             app.run_db[self.parent_runtime][self.path] = {}
-        if self.run.placeholder:
+        if getattr(self.run, "placeholder", None):
             for property in ("id", "scoped_name", "type"):
                 value = getattr(self.run.placeholder, property)
                 self.write_state(f"placeholder/{property}", value)
         self.write_state("success", True)
+
+    def get_state(self):
+        return self.run.get_state()
 
     def write_state(self, path, value, method=None):
         if app.redis_queue:
@@ -428,8 +424,8 @@ class ServiceRun:
                 try:
                     results = self.service.job(self, *args)
                 except Exception as exc:
-                    self.log("error", str(exc), device)
                     result = "\n".join(format_exc().splitlines())
+                    self.log("error", result, device)
                     results = {"success": False, "result": result}
                 results = self.convert_result(results)
                 if "success" not in results:

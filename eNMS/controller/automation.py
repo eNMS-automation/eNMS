@@ -254,21 +254,21 @@ class AutomationController(BaseController):
         state = run.state
 
         def rec(service, path=str(run.service_id)):
-            runs = db.fetch(
-                "run",
+            results = db.fetch(
+                "result",
                 parent_runtime=runtime,
                 allow_none=True,
                 all_matches=True,
                 service_id=service.id,
             )
-            if service.scoped_name in ("Start", "End") or not runs:
+            if service.scoped_name in ("Start", "End") or not results:
                 return
             progress = state.get(path, {}).get("progress")
             track_progress = progress and progress["device"]["total"]
             data = {"progress": progress["device"]} if track_progress else {}
-            color = "32CD32" if all(run.success for run in runs) else "FF6666"
+            color = "32CD32" if all(result.success for result in results) else "FF6666"
             result = {
-                "runtime": min(run.runtime for run in runs),
+                "runtime": min(result.runtime for result in results),
                 "data": {"properties": service.base_properties, **data},
                 "text": service.scoped_name,
                 "a_attr": {"style": f"color: #{color};width: 100%"},
@@ -277,9 +277,9 @@ class AutomationController(BaseController):
                 children_results = []
                 for child in service.services:
                     if child.scoped_name == "Placeholder":
-                        for run in runs:
-                            if run.placeholder:
-                                child = run.placeholder
+                        for result in results:
+                            if result.placeholder:
+                                child = result.placeholder
                                 break
                     child_results = rec(child, f"{path}>{child.id}")
                     if not child_results:

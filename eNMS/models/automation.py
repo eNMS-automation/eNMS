@@ -359,13 +359,6 @@ class Run(AbstractBase):
         super().__init__(**kwargs)
         if not self.creator:
             self.creator = self.parent.creator
-        if not kwargs.get("parent_runtime"):
-            self.parent_runtime = self.runtime
-            self.path = str(self.service.id)
-        elif self.parent_device:
-            self.path = self.parent.path
-        else:
-            self.path = f"{self.parent.path}>{self.service.id}"
         if not self.start_services:
             self.start_services = [db.fetch("service", scoped_name="Start").id]
 
@@ -472,11 +465,9 @@ class Run(AbstractBase):
         self.service_run = ServiceRun(
             self,
             payload=payload,
-            service=self.service,
             main_run=True,
-            restart_run=self.restart_run,
-            runtime=self.runtime,
-            start_services=self.start_services,
+            parent_runtime=self.runtime,
+            path=str(self.service.id),
         )
         return self.service_run.results
 

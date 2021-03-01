@@ -369,8 +369,8 @@ class Run(AbstractBase):
             self.start_services = [db.fetch("service", scoped_name="Start").id]
 
     @classmethod
-    def filtering_constraints(cls, **_):
-        return [cls.parent_runtime == cls.runtime]
+    def prefilter(cls, query):
+        return query.filter(cls.parent_runtime == cls.runtime)
 
     @classmethod
     def rbac_filter(cls, query, mode, user):
@@ -417,9 +417,12 @@ class Run(AbstractBase):
         else:
             raise AttributeError
 
-    def result(self, device=None):
-        result = [r for r in self.results if r.device_name == device]
-        return result.pop() if result else None
+    def result(self, device=None, main=False):
+        for result in self.results:
+            if result.device_name == device:
+                return result
+        if main and len(self.results) == 1:
+            return self.results[0]
 
     @property
     def service_properties(self):

@@ -292,7 +292,7 @@ class Server(Flask):
         @blueprint.route("/view_service_results/<int:id>")
         @self.monitor_requests
         def view_service_results(id):
-            result = db.fetch("run", id=id).result().result
+            result = db.fetch("run", id=id).result(main=True).result
             return f"<pre>{app.str_dict(result)}</pre>"
 
         @blueprint.route("/download_file/<path:path>")
@@ -391,7 +391,8 @@ class Server(Flask):
             decorators = [self.auth.login_required, self.monitor_rest_request]
 
             def get(self, name):
-                return db.fetch("device", name=name).configuration
+                property = request.args.to_dict().get("property", "configuration")
+                return getattr(db.fetch("device", name=name), property)
 
         class GetResult(Resource):
             decorators = [self.auth.login_required, self.monitor_rest_request]
@@ -473,7 +474,7 @@ class Server(Flask):
                 if errors:
                     return {"errors": errors}
                 if devices or pools:
-                    data.update({"devices": devices, "pools": pools})
+                    data.update({"target_devices": devices, "target_pools": pools})
                 data["runtime"] = runtime = app.get_time()
                 if handle_asynchronously:
                     Thread(target=app.run, args=(service.id,), kwargs=data).start()
@@ -494,9 +495,9 @@ class Server(Flask):
                     **task.initial_payload,
                 }
                 if task.devices:
-                    data["devices"] = [device.id for device in task.devices]
+                    data["target_devices"] = [device.id for device in task.devices]
                 if task.pools:
-                    data["pools"] = [pool.id for pool in task.pools]
+                    data["target_pools"] = [pool.id for pool in task.pools]
                 Thread(target=app.run, args=(task.service.id,), kwargs=data).start()
 
         class Topology(Resource):

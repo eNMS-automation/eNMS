@@ -49,6 +49,10 @@ class AbstractBase(db.base):
             super().__setattr__(property, value)
 
     @classmethod
+    def prefilter(cls, query):
+        return query
+
+    @classmethod
     def filtering_constraints(cls, **_):
         return []
 

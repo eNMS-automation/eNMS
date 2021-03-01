@@ -10,9 +10,11 @@ from uuid import uuid4
 from warnings import warn
 
 try:
-    from scrapli.factory import SYNC_CORE_PLATFORM_MAP
+    from scrapli import Scrapli
+
+    CORE_PLATFORM_MAP = {driver: driver for driver in Scrapli.CORE_PLATFORM_MAP}
 except ImportError as exc:
-    SYNC_CORE_PLATFORM_MAP = {"cisco_iosxe": "cisco_iosxe"}
+    CORE_PLATFORM_MAP = {"cisco_iosxe": "cisco_iosxe"}
     warn(f"Couldn't import scrapli module ({exc})")
 
 from eNMS.controller.base import BaseController
@@ -47,7 +49,7 @@ class AutomationController(BaseController):
         ("get_ipv6_neighbors_table", "IPv6"),
         ("is_alive", "Is alive"),
     )
-    SCRAPLI_DRIVERS = SYNC_CORE_PLATFORM_MAP
+    SCRAPLI_DRIVERS = CORE_PLATFORM_MAP
 
     connections_cache = {
         library: defaultdict(dict) for library in ("netmiko", "napalm", "scrapli")
@@ -510,8 +512,12 @@ class AutomationController(BaseController):
         playbooks = [[str(f) for f in path.glob(e)] for e in ("*.yaml", "*.yml")]
         return sorted(sum(playbooks, []))
 
-    def scheduler_action(self, action):
-        getattr(self.scheduler, action)()
+    def task_action(self, mode, task_id):
+        return db.fetch("task", id=task_id, rbac="schedule").schedule(mode)
+
+    def scheduler_action(self, mode, **kwargs):
+        for task_id in self.filtering("task", bulk="id", form=kwargs):
+            self.task_action(mode, task_id)
 
     def search_workflow_services(self, *args, **kwargs):
         return [
@@ -547,6 +553,3 @@ class AutomationController(BaseController):
             else:
                 self.run_stop[run.parent_runtime] = True
             return True
-
-    def task_action(self, mode, task_id):
-        return db.fetch("task", id=task_id, rbac="schedule").schedule(mode)

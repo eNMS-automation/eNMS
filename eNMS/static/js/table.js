@@ -133,6 +133,7 @@ export class Table {
             type: this.type,
             export: self.csvExport,
             clipboard: self.copyClipboard,
+            prefilter: self.id == "run",
           });
           Object.assign(d, self.filteringData);
           return JSON.stringify(d);
@@ -1027,7 +1028,7 @@ tables.task = class TaskTable extends Table {
         type="button"
         class="btn btn-success"
         onclick="eNMS.automation.schedulerAction('resume')"
-        data-tooltip="Resume all tasks"
+        data-tooltip="Bulk Resume"
       >
         <span class="glyphicon glyphicon-play"></span>
       </button>
@@ -1035,7 +1036,7 @@ tables.task = class TaskTable extends Table {
         type="button"
         class="btn btn-danger"
         onclick="eNMS.automation.schedulerAction('pause')"
-        data-tooltip="Pause all tasks"
+        data-tooltip="Bulk Pause"
       >
         <span class="glyphicon glyphicon-pause"></span>
       </button>`,
@@ -1327,7 +1328,9 @@ function exportTable(tableId) {
 }
 
 export const refreshTable = function (tableId, notification) {
-  tableInstances[tableId].table.ajax.reload(null, false);
+  if ($(`#table-${tableId}`).length) {
+    tableInstances[tableId].table.ajax.reload(null, false);
+  }
   if (notification) notify("Table refreshed.", "success", 5);
 };
 
@@ -1380,6 +1383,7 @@ function bulkRemoval(tableId, model, instance) {
     form: `search-form-${tableId}`,
     callback: function (number) {
       refreshTable(tableId);
+      if (instance.type == "pool") refreshTable("pool");
       notify(
         `${number} ${model}s removed from ${instance.type} '${instance.name}'.`,
         "success",

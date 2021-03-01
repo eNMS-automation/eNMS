@@ -15,6 +15,7 @@ database. Impact on:
 * service value and device iteration
 * service / workflow performances with large number of devices
 * workflow: all run modes / SxS & DxD
+* results display: automation / results page, workflow tree, result table, device result table.
 
 Version 4.0.1
 -------------

@@ -34,7 +34,7 @@ class NapalmBackupService(ConnectionService):
 
     __mapper_args__ = {"polymorphic_identity": "napalm_backup_service"}
 
-    def job(self, run, payload, device):
+    def job(self, run, device):
         path = Path.cwd() / "network_data" / device.name
         path.mkdir(parents=True, exist_ok=True)
         try:

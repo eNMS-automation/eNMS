@@ -23,7 +23,7 @@ class ScrapliService(ConnectionService):
 
     __mapper_args__ = {"polymorphic_identity": "scrapli_service"}
 
-    def job(self, run, payload, device):
+    def job(self, run, device):
         commands = run.sub(run.commands, locals()).splitlines()
         function = "send_configs" if run.is_configuration else "send_commands"
         result = getattr(run.scrapli_connection(device), function)(commands).result

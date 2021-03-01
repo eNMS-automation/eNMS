@@ -22,7 +22,7 @@ class GitService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "git_service"}
 
-    def job(self, run, payload, device=None):
+    def job(self, run, device=None):
         repo = Repo(
             Path.cwd() / self.git_repository
             if self.relative_path

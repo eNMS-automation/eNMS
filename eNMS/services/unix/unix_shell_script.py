@@ -37,7 +37,7 @@ class UnixShellScriptService(ConnectionService):
 
     __mapper_args__ = {"polymorphic_identity": "unix_shell_script_service"}
 
-    def job(self, run, payload, device):
+    def job(self, run, device):
         netmiko_connection = run.netmiko_connection(device)
         source_code = run.sub(run.source_code, locals())
         script_file_name = f"{run.space_deleter(app.get_time())}.sh"

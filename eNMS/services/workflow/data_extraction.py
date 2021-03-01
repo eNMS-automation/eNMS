@@ -33,7 +33,7 @@ class DataExtractionService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "data_extraction_service"}
 
-    def job(self, run, payload, device=None):
+    def job(self, run, device=None):
         result, success = {}, True
         for i in range(1, 4):
             variable = getattr(run, f"variable{i}")

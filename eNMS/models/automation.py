@@ -263,7 +263,6 @@ class Result(AbstractBase):
         self.runtime = kwargs["result"]["runtime"]
         self.duration = kwargs["result"]["duration"]
         super().__init__(**kwargs)
-        self.parent_runtime = self.run.parent_runtime
 
     def __repr__(self):
         return f"SERVICE '{self.service}' - DEVICE '{self.device} ({self.runtime})"

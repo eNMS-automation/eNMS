@@ -32,7 +32,7 @@ class TopologyImportService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "topology_import_service"}
 
-    def job(self, run, payload):
+    def job(self, run):
         getattr(self, f"query_{self.import_type}")()
         return {"success": True}
 

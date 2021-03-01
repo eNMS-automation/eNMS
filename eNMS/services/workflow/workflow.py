@@ -105,7 +105,7 @@ class Workflow(Service):
     def deep_edges(self):
         return sum([w.edges for w in self.deep_services if w.type == "workflow"], [])
 
-    def job(self, run, payload, device=None):
+    def job(self, run, device=None):
         number_of_runs = defaultdict(int)
         start = db.fetch("service", scoped_name="Start")
         end = db.fetch("service", scoped_name="End")
@@ -117,7 +117,7 @@ class Workflow(Service):
             targets[service.name] |= {device.name for device in start_targets}
         while services:
             if run.stop:
-                return {"payload": payload, "success": False, "result": "Stopped"}
+                return {"payload": run.payload, "success": False, "result": "Stopped"}
             service = services.pop()
             if number_of_runs[service.name] >= service.maximum_runs or any(
                 node not in visited
@@ -146,12 +146,13 @@ class Workflow(Service):
                 }
                 if tracking_bfs or device:
                     kwargs["target_devices"] = [
-                        db.fetch("device", name=name).id
+                        db.fetch("device", name=name)
                         for name in targets[service.name]
                     ]
                 if run.parent_device:
-                    kwargs["parent_device"] = run.parent_device.id
-                results = ServiceRun(run, payload=payload, **kwargs).results
+                    kwargs["parent_device"] = run.parent_device
+                print("RUN"*100, run.type, run)
+                results = ServiceRun(run, payload=run.payload, **kwargs).results
                 if not results:
                     continue
             status = "success" if results["success"] else "failure"
@@ -178,9 +179,9 @@ class Workflow(Service):
         if tracking_bfs or device:
             failed = list(targets[start.name] - targets[end.name])
             summary = {"success": list(targets[end.name]), "failure": failed}
-            results = {"payload": payload, "success": not failed, "summary": summary}
+            results = {"payload": run.payload, "success": not failed, "summary": summary}
         else:
-            results = {"payload": payload, "success": end in visited}
+            results = {"payload": run.payload, "success": end in visited}
         db.session.refresh(run)
         run.restart_run = restart_run
         return results

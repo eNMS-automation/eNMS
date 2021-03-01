@@ -17,6 +17,11 @@ database. Impact on:
 * workflow: all run modes / SxS & DxD
 * results display: automation / results page, workflow tree, result table, device result table.
 
+MIGRATION:
+
+In all services,
+def job(self, run, payload, device): -> def job(self, run, device):
+
 Version 4.0.1
 -------------
 

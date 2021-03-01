@@ -50,6 +50,7 @@ class ServiceRun:
         self.runtime = app.get_time()
         for key, value in kwargs.items():
             setattr(self, key, value)
+        self.parent_run = run if self.main_run else run.parent_run
         if not kwargs.get("parent_runtime"):
             self.parent_runtime = self.runtime
             self.path = str(self.service.id)
@@ -271,7 +272,7 @@ class ServiceRun:
 
     def device_run(self):
         self.target_devices = self.compute_devices()
-        if self.runtime == self.parent_runtime:
+        if self.main_run:
             allowed_targets = db.query(
                 "device", rbac="target", username=self.run.creator
             )
@@ -398,7 +399,7 @@ class ServiceRun:
                     results["devices"][result.device.name] = result.result
         create_failed_results = self.disable_result_creation and not self.success
         if not self.disable_result_creation or create_failed_results or run_result:
-            result_kw["run"] = self.run
+            result_kw["run"] = self.parent_run
             db.factory("result", result=results, commit=commit, **result_kw)
         return results
 

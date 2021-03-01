@@ -2,6 +2,12 @@
 Release Notes
 =============
 
+Version 4.1.0
+-------------
+
+- 3D Logical visualization
+- Remove Event Model and Syslog server
+
 Version 4.0.1
 -------------
 

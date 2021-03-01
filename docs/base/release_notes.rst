@@ -7,6 +7,14 @@ Version 4.1.0
 
 - 3D Logical visualization
 - Remove Event Model and Syslog server
+- Refactor of the run mechanism. When running a service, a single run is created and saved to the
+database. Impact on:
+* log level mechanism
+* workflow run, progress display in workflow builder
+* parameterized run
+* service value and device iteration
+* service / workflow performances with large number of devices
+* workflow: all run modes / SxS & DxD
 
 Version 4.0.1
 -------------

@@ -440,7 +440,6 @@ class ViewObject(AbstractBase):
 
     def update(self, **kwargs):
         super().update(**kwargs)
-        print(self.view, kwargs)
         if "name" in kwargs:
             prefix = f"[{self.view}] " if self.view else ""
             self.name = f"{prefix}{kwargs['name']}"

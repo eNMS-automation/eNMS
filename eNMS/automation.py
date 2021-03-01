@@ -224,7 +224,7 @@ class ServiceRun:
                 )
             if app.redis_queue and self.runtime == self.parent_runtime:
                 app.redis("delete", *(app.redis("keys", f"{self.runtime}/*") or []))
-        return results
+        self.results = results
 
     def make_results_json_compliant(self, results):
         def rec(value):
@@ -302,7 +302,7 @@ class ServiceRun:
             }
         self.write_state("progress/device/total", len(self.target_devices), "increment")
         non_skipped_targets, skipped_targets, results = [], [], []
-        skip_service = self.skip.get(self.workflow.name)
+        skip_service = self.skip.get(getattr(self.workflow, "name", None))
         if skip_service:
             self.write_state("status", "Skipped")
         for device in self.target_devices:
@@ -385,7 +385,6 @@ class ServiceRun:
             result_kw["parent_device"] = self.parent_device.id
         if device:
             result_kw["device"] = device.id
-        print(self.main_run)
         if self.main_run:
             services = list(app.run_logs.get(self.runtime, []))
             for service_id in services:
@@ -404,7 +403,6 @@ class ServiceRun:
         if not self.disable_result_creation or create_failed_results or run_result:
             result_kw["run"] = self.run
             db.factory("result", result=results, commit=commit, **result_kw)
-        print(results)
         return results
 
     def run_service_job(self, device):

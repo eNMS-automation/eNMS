@@ -474,8 +474,11 @@ class Run(AbstractBase):
             payload=payload,
             service=self.service,
             main_run=True,
+            restart_run=self.restart_run,
             runtime=self.runtime,
+            start_services=self.start_services,
         )
+        return self.service_run.results
 
     def update_netmiko_connection(self, connection):
         for property in ("fast_cli", "timeout", "global_delay_factor"):

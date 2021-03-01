@@ -421,7 +421,6 @@ function refreshLogs(service, runtime, editor, first, wasRefreshed, line) {
   call({
     url: `/get_service_logs/${service.id}/${runtime}/${line || 0}`,
     callback: function (result) {
-      console.log(result)
       if (!first && result.refresh && result.logs.length) {
         // eslint-disable-next-line new-cap
         editor.replaceRange(`\n${result.logs}`, CodeMirror.Pos(editor.lineCount()));

@@ -4,6 +4,7 @@ from sqlalchemy.orm import backref, relationship
 from sqlalchemy.schema import UniqueConstraint
 
 from eNMS import app
+from eNMS.automation import ServiceRun
 from eNMS.database import db
 from eNMS.models.base import AbstractBase
 from eNMS.forms.automation import ServiceForm
@@ -135,10 +136,10 @@ class Workflow(Service):
                     }
             else:
                 kwargs = {
-                    "service": run.placeholder.id
+                    "service": run.placeholder
                     if service.scoped_name == "Placeholder"
-                    else service.id,
-                    "workflow": self.id,
+                    else service,
+                    "workflow": self,
                     "restart_run": restart_run,
                     "parent": run,
                     "parent_runtime": run.parent_runtime,
@@ -148,10 +149,9 @@ class Workflow(Service):
                         db.fetch("device", name=name).id
                         for name in targets[service.name]
                     ]
-                if run.parent_device_id:
-                    kwargs["parent_device"] = run.parent_device_id
-                service_run = db.factory("run", commit=True, **kwargs)
-                results = service_run.run(payload)
+                if run.parent_device:
+                    kwargs["parent_device"] = run.parent_device.id
+                results = ServiceRun(run.run, payload=payload, **kwargs).results
                 if not results:
                     continue
             status = "success" if results["success"] else "failure"

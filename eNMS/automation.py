@@ -42,6 +42,7 @@ from eNMS.models import models
 
 class ServiceRun:
     def __init__(self, run, **kwargs):
+        self.main_run = False
         self.workflow = None
         self.parent_device = None
         self.run = run
@@ -211,7 +212,7 @@ class ServiceRun:
             }
             results["trigger"] = self.run.trigger
             if (
-                self.runtime == self.parent_runtime
+                self.main_run
                 or len(self.target_devices) > 1
                 or self.run_method == "once"
             ):
@@ -382,12 +383,12 @@ class ServiceRun:
         if device:
             result_kw["device"] = device.id
         if self.main_run:
-            services = list(app.run_logs.get(self.runtime, []))
+            services = list(app.run_logs.get(self.parent_runtime, []))
             for service_id in services:
-                logs = app.log_queue(self.runtime, service_id, mode="get")
+                logs = app.log_queue(self.parent_runtime, service_id, mode="get")
                 db.factory(
                     "service_log",
-                    runtime=self.runtime,
+                    runtime=self.parent_runtime,
                     service=service_id,
                     content="\n".join(logs or []),
                 )

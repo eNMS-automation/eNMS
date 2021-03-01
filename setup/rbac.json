@@ -92,22 +92,12 @@
           "endpoint": "/workflow_builder",
           "rbac": "access"
         },
-        "Results": {
-          "endpoint": "/run_table",
-          "rbac": "access"
-        }
-      }
-    },
-    "Scheduling": {
-      "icon": "clock-o",
-      "rbac": "access",
-      "pages": {
-        "Tasks": {
+        "Scheduling": {
           "endpoint": "/task_table",
           "rbac": "access"
         },
-        "Events": {
-          "endpoint": "/event_table",
+        "Results": {
+          "endpoint": "/run_table",
           "rbac": "access"
         }
       }

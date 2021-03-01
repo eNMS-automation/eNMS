@@ -84,7 +84,7 @@ class CredentialForm(BaseForm):
         ),
     )
     subtype = SelectField(
-        "Type", choices=(("password", "Username / Password"), ("key", "SSH Key"))
+        "Subtype", choices=(("password", "Username / Password"), ("key", "SSH Key"))
     )
     device_pools = MultipleInstanceField("Devices", model="pool")
     user_pools = MultipleInstanceField("Users", model="pool")

@@ -364,10 +364,6 @@ class Run(AbstractBase):
             self.start_services = [db.fetch("service", scoped_name="Start").id]
 
     @classmethod
-    def prefilter(cls, query):
-        return query.filter(cls.parent_runtime == cls.runtime)
-
-    @classmethod
     def rbac_filter(cls, query, mode, user):
         query = query.join(cls.service).filter(
             models["service"].default_access != "admin"

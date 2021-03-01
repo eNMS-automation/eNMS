@@ -440,8 +440,10 @@ class ViewObject(AbstractBase):
 
     def update(self, **kwargs):
         super().update(**kwargs)
-        if self.view and "name" in kwargs:
-            self.name = f"[{self.view}] {kwargs['name']}"
+        print(self.view, kwargs)
+        if "name" in kwargs:
+            prefix = f"[{self.view}] " if self.view else ""
+            self.name = f"{prefix}{kwargs['name']}" 
         else:
             self.name = app.get_time()
 

@@ -443,7 +443,7 @@ class ViewObject(AbstractBase):
         print(self.view, kwargs)
         if "name" in kwargs:
             prefix = f"[{self.view}] " if self.view else ""
-            self.name = f"{prefix}{kwargs['name']}" 
+            self.name = f"{prefix}{kwargs['name']}"
         else:
             self.name = app.get_time()
 

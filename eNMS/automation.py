@@ -39,8 +39,8 @@ from eNMS.database import db
 from eNMS.models.base import AbstractBase
 from eNMS.models import models
 
-class ServiceRun:
 
+class ServiceRun:
     def __init__(self, run, **kwargs):
         self.workflow = None
         self.parent_device = None
@@ -201,7 +201,9 @@ class ServiceRun:
             if self.runtime == self.parent_runtime:
                 self.state = state
                 self.close_remaining_connections()
-            if self.run.task and not (self.task.frequency or self.run.task.crontab_expression):
+            if self.run.task and not (
+                self.task.frequency or self.run.task.crontab_expression
+            ):
                 self.run.task.is_active = False
             results["properties"] = {
                 "run": {
@@ -273,7 +275,9 @@ class ServiceRun:
     def device_run(self):
         self.target_devices = self.compute_devices()
         if self.runtime == self.parent_runtime:
-            allowed_targets = db.query("device", rbac="target", username=self.run.creator)
+            allowed_targets = db.query(
+                "device", rbac="target", username=self.run.creator
+            )
             unauthorized_targets = set(self.target_devices) - set(allowed_targets)
             if unauthorized_targets:
                 result = (
@@ -346,8 +350,7 @@ class ServiceRun:
             if self.multiprocessing and len(non_skipped_targets) > 1:
                 processes = min(len(non_skipped_targets), self.max_processes)
                 process_args = [
-                    (device.id, self.runtime, results)
-                    for device in non_skipped_targets
+                    (device.id, self.runtime, results) for device in non_skipped_targets
                 ]
                 self.log("info", f"Starting a pool of {processes} threads")
                 with ThreadPool(processes=processes) as pool:
@@ -382,7 +385,8 @@ class ServiceRun:
             result_kw["parent_device"] = self.parent_device.id
         if device:
             result_kw["device"] = device.id
-        if self.parent_runtime == self.runtime and not device:
+        print(self.main_run)
+        if self.main_run:
             services = list(app.run_logs.get(self.runtime, []))
             for service_id in services:
                 logs = app.log_queue(self.runtime, service_id, mode="get")
@@ -783,7 +787,9 @@ class ServiceRun:
     def fetch(self, model, func="fetch", **kwargs):
         if model not in ("device", "link", "pool", "service"):
             raise db.rbac_error(f"Cannot fetch {model}s from workflow builder.")
-        return getattr(db, func)(model, rbac="edit", username=self.run.creator, **kwargs)
+        return getattr(db, func)(
+            model, rbac="edit", username=self.run.creator, **kwargs
+        )
 
     def global_variables(_self, **locals):  # noqa: N805
         payload, device = locals.get("payload", {}), locals.get("device")

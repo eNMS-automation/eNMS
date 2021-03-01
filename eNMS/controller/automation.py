@@ -250,7 +250,7 @@ class AutomationController(BaseController):
         ]
 
     def get_workflow_results(self, workflow, runtime):
-        run = db.fetch("run", runtime=runtime)
+        run = db.fetch("run", parent_runtime=runtime)
         state = run.state
 
         def rec(service, path=str(run.service_id)):

@@ -65,7 +65,7 @@ class ServiceRun:
         if key in self.__dict__:
             return self.__dict__[key]
         else:
-            return getattr(self.run, key)
+            return getattr(self.service, key)
 
     def result(self, device=None, main=False):
         for result in self.results:

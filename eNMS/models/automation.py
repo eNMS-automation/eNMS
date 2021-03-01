@@ -356,6 +356,7 @@ class Run(AbstractBase):
 
     def __init__(self, **kwargs):
         self.runtime = kwargs.get("runtime") or app.get_time()
+        self.parent_runtime = self.runtime
         super().__init__(**kwargs)
         if not self.creator:
             self.creator = self.parent.creator
@@ -465,9 +466,16 @@ class Run(AbstractBase):
         self.service_run = ServiceRun(
             self,
             payload=payload,
+            service=self.service,
             main_run=True,
+            restart_run=self.restart_run,
             parent_runtime=self.runtime,
             path=str(self.service.id),
+            placeholder=self.placeholder,
+            properties=self.properties,
+            start_services=self.start_services,
+            task=self.task,
+            trigger=self.trigger,
         )
         return self.service_run.results
 

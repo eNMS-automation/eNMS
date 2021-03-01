@@ -387,14 +387,6 @@ class Run(AbstractBase):
     def name(self):
         return repr(self)
 
-    @property
-    def original(self):
-        return self if not self.parent else self.parent.original
-
-    @property
-    def log_change(self):
-        return self.runtime == self.parent_runtime
-
     def __repr__(self):
         return f"{self.runtime}: SERVICE '{self.service}'"
 

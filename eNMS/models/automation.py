@@ -295,12 +295,6 @@ class ServiceLog(AbstractBase):
 class Run(AbstractBase):
 
     __tablename__ = type = "run"
-    __table_args__ = (
-        Index("ix_run_parent_runtime_0", "parent_runtime", "runtime"),
-        Index(
-            "ix_run_start_service_id_0", "start_service_id", "parent_runtime", "runtime"
-        ),
-    )
     private = True
     id = db.Column(Integer, primary_key=True)
     restart_run_id = db.Column(Integer, ForeignKey("run.id"))

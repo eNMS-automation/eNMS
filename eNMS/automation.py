@@ -482,7 +482,7 @@ class ServiceRun:
                     self.payload.update(old_result["payload"])
             if self.service.iteration_values:
                 targets_results = {}
-                targets = list(self.eval(self.service.iteration_values, **locals())[0])
+                targets = self.eval(self.service.iteration_values, **locals())[0]
                 if not isinstance(targets, dict):
                     targets = dict(zip(map(str, targets), targets))
                 for target_name, target_value in targets.items():
@@ -749,31 +749,30 @@ class ServiceRun:
     def get_result(self, service_name, device=None, workflow=None):
         def filter_run(query, property):
             query = query.filter(
-                models["run"].service.has(
+                models["result"].service.has(
                     getattr(models["service"], property) == service_name
                 )
             )
             return query.all()
 
-        def recursive_search(run: "Run"):
+        def recursive_search(run):
             if not run:
                 return None
-            query = db.session.query(models["run"]).filter(
-                models["run"].parent_runtime == run.parent_runtime
+            query = db.session.query(models["result"]).filter(
+                models["result"].parent_runtime == run.parent_runtime
             )
             if workflow or self.workflow:
                 name = workflow or self.workflow.name
                 query.filter(
-                    models["run"].workflow.has(models["workflow"].name == name)
+                    models["result"].workflow.has(models["workflow"].name == name)
                 )
-            runs = filter_run(query, "scoped_name") or filter_run(query, "name")
-            results = list(filter(None, [run.result(device) for run in runs]))
+            results = filter_run(query, "scoped_name") or filter_run(query, "name")
             if not results:
                 return recursive_search(run.restart_run)
             else:
                 return results.pop().result
 
-        return recursive_search(self)
+        return recursive_search(self.main_run)
 
     @staticmethod
     def _import(module, *args, **kwargs):
@@ -789,7 +788,7 @@ class ServiceRun:
         )
 
     def global_variables(_self, **locals):  # noqa: N805
-        payload, device = locals.get("payload", {}), locals.get("device")
+        payload, device = _self.payload, locals.get("device")
         variables = locals
         variables.update(payload.get("variables", {}))
         if device and "devices" in payload.get("variables", {}):

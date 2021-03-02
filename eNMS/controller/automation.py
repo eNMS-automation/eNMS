@@ -199,8 +199,8 @@ class AutomationController(BaseController):
         return db.fetch("result", id=id).result
 
     def get_runtimes(self, type, id):
-        runs = db.fetch("run", allow_none=True, all_matches=True, service_id=id)
-        return sorted(set((run.parent_runtime, run.parent_runtime) for run in runs))
+        results = db.fetch("result", allow_none=True, all_matches=True, service_id=id)
+        return sorted(set((result.parent_runtime,) * 2 for result in results))
 
     def get_service_logs(self, service, runtime, start_line):
         log_instance = db.fetch(
@@ -261,6 +261,7 @@ class AutomationController(BaseController):
                 all_matches=True,
                 service_id=service.id,
             )
+            print(service, results)
             if service.scoped_name in ("Start", "End") or not results:
                 return
             progress = state.get(path, {}).get("progress")

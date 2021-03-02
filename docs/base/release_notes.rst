@@ -15,7 +15,8 @@ database. Impact on:
 * service value and device iteration
 * service / workflow performances with large number of devices
 * workflow: all run modes / SxS & DxD
-* results display: automation / results page, workflow tree, result table, device result table.
+* results display: automation / results page, workflow tree, result table, device result table
+* get_var / set_var and get_result mechanism, including get_result along with restart mechanism
 
 MIGRATION:
 

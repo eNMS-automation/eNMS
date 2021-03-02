@@ -385,16 +385,6 @@ class Run(AbstractBase):
     def __repr__(self):
         return f"{self.runtime}: SERVICE '{self.service}'"
 
-    def __getattr__(self, key):
-        if key in self.__dict__:
-            return self.__dict__[key]
-        elif key in self.__dict__.get("properties", {}):
-            return self.__dict__["properties"][key]
-        elif set(self.__dict__) & {"service_id", "service"}:
-            return getattr(self.service, key)
-        else:
-            raise AttributeError
-
     def result(self, device=None, main=False):
         for result in self.results:
             if result.device_name == device:

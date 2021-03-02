@@ -1,41 +1,11 @@
-from builtins import __dict__ as builtins
-from copy import deepcopy
-from datetime import datetime
 from flask_login import current_user
-from functools import partial, wraps
-from importlib import __import__ as importlib_import
-from io import BytesIO, StringIO
-from json import dump, load, loads
-from json.decoder import JSONDecodeError
-from multiprocessing.pool import ThreadPool
-from napalm import get_network_driver
-from netmiko import ConnectHandler
-from os import getenv
-from paramiko import RSAKey, SFTPClient
-from re import compile, search
+from functools import wraps
 from requests import get, post
 from requests.exceptions import ConnectionError, MissingSchema, ReadTimeout
-from scp import SCPClient
-from sqlalchemy import Boolean, case, ForeignKey, Index, Integer, or_
+from sqlalchemy import Boolean, case, ForeignKey, Integer, or_
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy.orm import aliased, relationship
-from threading import Thread
-from time import sleep
-from traceback import format_exc
-from warnings import warn
-from xmltodict import parse
-from xml.parsers.expat import ExpatError
-
-try:
-    from scrapli import Scrapli
-except ImportError as exc:
-    warn(f"Couldn't import scrapli module ({exc})")
-
-try:
-    from slackclient import SlackClient
-except ImportError as exc:
-    warn(f"Couldn't import slackclient module ({exc})")
 
 from eNMS import app
 from eNMS.automation import ServiceRun

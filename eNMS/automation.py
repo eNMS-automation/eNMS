@@ -14,9 +14,6 @@ from paramiko import RSAKey, SFTPClient
 from re import compile, search
 from requests import post
 from scp import SCPClient
-from sqlalchemy import Boolean, ForeignKey, Index, Integer, or_
-from sqlalchemy.ext.associationproxy import association_proxy
-from sqlalchemy.orm import aliased, relationship
 from threading import Thread
 from time import sleep
 from traceback import format_exc
@@ -37,7 +34,6 @@ except ImportError as exc:
 
 from eNMS import app
 from eNMS.database import db
-from eNMS.models.base import AbstractBase
 from eNMS.models import models
 
 
@@ -427,7 +423,7 @@ class ServiceRun:
                         pass
                 try:
                     results = self.service.job(self, *args)
-                except Exception as exc:
+                except Exception:
                     result = "\n".join(format_exc().splitlines())
                     self.log("error", result, device)
                     results = {"success": False, "result": result}

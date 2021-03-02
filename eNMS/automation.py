@@ -20,6 +20,7 @@ from sqlalchemy.orm import aliased, relationship
 from threading import Thread
 from time import sleep
 from traceback import format_exc
+from types import GeneratorType
 from warnings import warn
 from xmltodict import parse
 from xml.parsers.expat import ExpatError
@@ -484,6 +485,8 @@ class ServiceRun:
                 targets_results = {}
                 targets = self.eval(self.service.iteration_values, **locals())[0]
                 if not isinstance(targets, dict):
+                    if isinstance(targets, (GeneratorType, map, filter)):
+                        targets = list(targets)
                     targets = dict(zip(map(str, targets), targets))
                 for target_name, target_value in targets.items():
                     self.payload_helper(

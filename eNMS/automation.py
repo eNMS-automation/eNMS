@@ -42,7 +42,7 @@ from eNMS.models import models
 
 class ServiceRun:
     def __init__(self, run, **kwargs):
-        self.main_run = False
+        self.is_main_run = False
         self.workflow = None
         self.parent_device = None
         self.run = run
@@ -50,7 +50,7 @@ class ServiceRun:
         self.runtime = app.get_time()
         for key, value in kwargs.items():
             setattr(self, key, value)
-        self.parent_run = run if self.main_run else run.parent_run
+        self.main_run = run if self.is_main_run else run.main_run
         if not kwargs.get("parent_runtime"):
             self.parent_runtime = self.runtime
             self.path = str(self.service.id)
@@ -89,7 +89,7 @@ class ServiceRun:
 
     @property
     def progress(self):
-        progress = self.get_state().get(self.path, {}).get("progress")
+        progress = self.main_run.get_state().get(self.path, {}).get("progress")
         try:
             progress = progress["device"]
             failure = int(progress.get("failure", 0))
@@ -145,9 +145,6 @@ class ServiceRun:
                 self.write_state(f"placeholder/{property}", value)
         self.write_state("success", True)
 
-    def get_state(self):
-        return self.run.get_state()
-
     def write_state(self, path, value, method=None):
         if app.redis_queue:
             if isinstance(value, bool):
@@ -183,7 +180,7 @@ class ServiceRun:
             results = {"success": False, "runtime": self.runtime, "result": result}
         finally:
             db.session.commit()
-            state = self.run.get_state()
+            state = self.main_run.get_state()
             self.status = state["status"] = "Aborted" if self.stop else "Completed"
             self.success = results["success"]
             if self.update_pools_after_running:
@@ -213,7 +210,7 @@ class ServiceRun:
             }
             results["trigger"] = self.run.trigger
             if (
-                self.main_run
+                self.is_main_run
                 or len(self.target_devices) > 1
                 or self.run_method == "once"
             ):
@@ -272,7 +269,7 @@ class ServiceRun:
 
     def device_run(self):
         self.target_devices = self.compute_devices()
-        if self.main_run:
+        if self.is_main_run:
             allowed_targets = db.query(
                 "device", rbac="target", username=self.run.creator
             )
@@ -383,7 +380,7 @@ class ServiceRun:
             result_kw["parent_device"] = self.parent_device.id
         if device:
             result_kw["device"] = device.id
-        if self.main_run:
+        if self.is_main_run:
             services = list(app.run_logs.get(self.parent_runtime, []))
             for service_id in services:
                 logs = app.log_queue(self.parent_runtime, service_id, mode="get")
@@ -399,7 +396,7 @@ class ServiceRun:
                     results["devices"][result.device.name] = result.result
         create_failed_results = self.disable_result_creation and not self.success
         if not self.disable_result_creation or create_failed_results or run_result:
-            result_kw["run"] = self.parent_run
+            result_kw["run"] = self.main_run
             db.factory("result", result=results, commit=commit, **result_kw)
         return results
 
@@ -548,7 +545,7 @@ class ServiceRun:
         if service_log or logger and settings.get("service_log"):
             run_log = f"{app.get_time()} - {severity} - {log}"
             app.log_queue(self.parent_runtime, self.service.id, run_log)
-            if not self.main_run:
+            if not self.is_main_run:
                 app.log_queue(self.parent_runtime, self.run.service.id, run_log)
 
     def build_notification(self, results):

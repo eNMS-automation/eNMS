@@ -450,7 +450,7 @@ class Run(AbstractBase):
             self,
             payload=payload,
             service=self.service,
-            main_run=True,
+            is_main_run=True,
             restart_run=self.restart_run,
             parent_runtime=self.runtime,
             path=str(self.service.id),

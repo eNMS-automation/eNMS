@@ -43,6 +43,7 @@ class ServiceRun:
         self.workflow = None
         self.parent_device = None
         self.run = run
+        self.creator = self.run.creator
         self.parent_runtime = kwargs.get("parent_runtime")
         self.runtime = app.get_time()
         for key, value in kwargs.items():
@@ -117,7 +118,7 @@ class ServiceRun:
         return devices
 
     def compute_devices(self):
-        service = self.run.placeholder or self.service
+        service = self.main_run.placeholder or self.service
         devices = set(self.target_devices)
         for pool in self.target_pools:
             devices |= set(pool.devices)
@@ -141,7 +142,7 @@ class ServiceRun:
             app.run_db[self.parent_runtime][self.path] = {}
         if getattr(self.run, "placeholder", None):
             for property in ("id", "scoped_name", "type"):
-                value = getattr(self.run.placeholder, property)
+                value = getattr(self.main_run.placeholder, property)
                 self.write_state(f"placeholder/{property}", value)
         self.write_state("success", True)
 
@@ -215,7 +216,7 @@ class ServiceRun:
                 or self.run_method == "once"
             ):
                 results = self.create_result(results, run_result=self.is_main_run)
-            if app.redis_queue and self.runtime == self.parent_runtime:
+            if app.redis_queue and self.is_main_run:
                 app.redis("delete", *(app.redis("keys", f"{self.runtime}/*") or []))
         self.results = results
 
@@ -268,13 +269,11 @@ class ServiceRun:
     def device_run(self):
         self.target_devices = self.compute_devices()
         if self.is_main_run:
-            allowed_targets = db.query(
-                "device", rbac="target", username=self.run.creator
-            )
+            allowed_targets = db.query("device", rbac="target", username=self.creator)
             unauthorized_targets = set(self.target_devices) - set(allowed_targets)
             if unauthorized_targets:
                 result = (
-                    f"Error 403: User '{self.run.creator}' is not allowed to use these"
+                    f"Error 403: User '{self.creator}' is not allowed to use these"
                     f" devices as targets: {', '.join(map(str, unauthorized_targets))}"
                 )
                 self.log("info", result, logger="security")
@@ -333,7 +332,7 @@ class ServiceRun:
             summary[self.skip_value].extend(skipped_targets)
             return results
         else:
-            if self.parent_runtime == self.runtime and not self.target_devices:
+            if self.is_main_run and not self.target_devices:
                 error = (
                     "The service 'Run method' is set to 'Per device' mode, "
                     "but no targets have been selected (in Step 3 > Targets)"
@@ -502,10 +501,7 @@ class ServiceRun:
             self.log("error", formatted_error, device)
         results["duration"] = str(datetime.now().replace(microsecond=0) - start)
         if device:
-            if (
-                getattr(self, "close_connection", False)
-                or self.runtime == self.parent_runtime
-            ):
+            if getattr(self, "close_connection", False) or self.is_main_run:
                 self.close_device_connection(device.name)
             status = "success" if results["success"] else "failure"
             self.write_state(f"progress/device/{status}", 1, "increment")
@@ -530,7 +526,7 @@ class ServiceRun:
         service_log=True,
     ):
         try:
-            log_level = int(self.run.log_level)
+            log_level = int(self.main_run.log_level)
         except Exception:
             log_level = 1
         if not log_level or severity not in app.log_levels[log_level - 1 :]:
@@ -538,15 +534,15 @@ class ServiceRun:
         if device:
             device_name = device if isinstance(device, str) else device.name
             log = f"DEVICE {device_name} - {log}"
-        log = f"USER {self.run.creator} - SERVICE {self.service.scoped_name} - {log}"
+        log = f"USER {self.creator} - SERVICE {self.service.scoped_name} - {log}"
         settings = app.log(
-            severity, log, user=self.run.creator, change_log=change_log, logger=logger
+            severity, log, user=self.creator, change_log=change_log, logger=logger
         )
         if service_log or logger and settings.get("service_log"):
             run_log = f"{app.get_time()} - {severity} - {log}"
             app.log_queue(self.parent_runtime, self.service.id, run_log)
             if not self.is_main_run:
-                app.log_queue(self.parent_runtime, self.run.service.id, run_log)
+                app.log_queue(self.parent_runtime, self.main_run.service.id, run_log)
 
     def build_notification(self, results):
         notification = {
@@ -620,8 +616,8 @@ class ServiceRun:
         return results
 
     def get_credentials(self, device):
-        result, credential_type = {}, self.run.credential_type
-        credentials = device.get_credentials(credential_type, self.run.creator)
+        result, credential_type = {}, self.main_run.service.credential_type
+        credentials = device.get_credentials(credential_type, self.creator)
         self.log("info", f"Using '{credentials.name}' credentials for '{device.name}'")
         if self.credentials == "device":
             result["username"] = credentials.username
@@ -631,7 +627,7 @@ class ServiceRun:
                 private_key = app.get_password(credentials.private_key)
                 result["pkey"] = RSAKey.from_private_key(StringIO(private_key))
         elif self.credentials == "user":
-            user = db.fetch("user", name=self.run.creator)
+            user = db.fetch("user", name=self.creator)
             result["username"] = user.name
             result["password"] = app.get_password(user.password)
         else:
@@ -779,9 +775,7 @@ class ServiceRun:
     def fetch(self, model, func="fetch", **kwargs):
         if model not in ("device", "link", "pool", "service"):
             raise db.rbac_error(f"Cannot fetch {model}s from workflow builder.")
-        return getattr(db, func)(
-            model, rbac="edit", username=self.run.creator, **kwargs
-        )
+        return getattr(db, func)(model, rbac="edit", username=self.creator, **kwargs)
 
     def global_variables(_self, **locals):  # noqa: N805
         payload, device = _self.payload, locals.get("device")
@@ -804,7 +798,7 @@ class ServiceRun:
                 "workflow": _self.workflow,
                 "set_var": partial(_self.payload_helper, payload),
                 "parent_device": _self.parent_device or device,
-                "placeholder": _self.run.placeholder,
+                "placeholder": _self.main_run.placeholder,
             }
         )
         return variables

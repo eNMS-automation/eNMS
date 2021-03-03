@@ -247,24 +247,17 @@ class ServiceRun:
             self.service.iteration_devices_property,
             **locals(),
         )
-        derived_run = db.factory(
-            "run",
-            commit=True,
-            **{
-                "service": self.service.id,
-                "target_devices": [
-                    derived_device.id for derived_device in derived_devices
-                ],
-                "workflow": self.workflow.id,
-                "parent_device": device.id,
-                "restart_run": self.restart_run,
-                "parent": self,
-                "parent_runtime": self.parent_runtime,
-            },
-        )
-        derived_run.properties = self.properties
-        success = derived_run.run()["success"]
-        return success
+        return ServiceRun(
+            self.run,
+            payload=self.payload,
+            service=self.service,
+            target_devices=derived_devices,
+            workflow=self.workflow,
+            parent_device=device,
+            restart_run=self.restart_run,
+            parent=self,
+            parent_runtime=self.parent_runtime,
+        ).results["success"]
 
     def device_run(self):
         self.target_devices = self.compute_devices()

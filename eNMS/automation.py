@@ -214,9 +214,7 @@ class ServiceRun:
                 or len(self.target_devices) > 1
                 or self.run_method == "once"
             ):
-                results = self.create_result(
-                    results, run_result=self.is_main_run
-                )
+                results = self.create_result(results, run_result=self.is_main_run)
             if app.redis_queue and self.runtime == self.parent_runtime:
                 app.redis("delete", *(app.redis("keys", f"{self.runtime}/*") or []))
         self.results = results
@@ -380,7 +378,7 @@ class ServiceRun:
             result_kw["parent_device"] = self.parent_device.id
         if device:
             result_kw["device"] = device.id
-        if self.is_main_run:
+        if self.is_main_run and not device:
             services = list(app.run_logs.get(self.parent_runtime, []))
             for service_id in services:
                 logs = app.log_queue(self.parent_runtime, service_id, mode="get")
@@ -390,7 +388,7 @@ class ServiceRun:
                     service=service_id,
                     content="\n".join(logs or []),
                 )
-            if self.run.trigger == "REST":
+            if self.main_run.trigger == "REST":
                 results["devices"] = {}
                 for result in self.results:
                     results["devices"][result.device.name] = result.result

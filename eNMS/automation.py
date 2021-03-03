@@ -48,8 +48,7 @@ class ServiceRun:
         for key, value in kwargs.items():
             setattr(self, key, value)
         self.main_run = run if self.is_main_run else run.main_run
-        if not kwargs.get("parent_runtime"):
-            self.parent_runtime = self.runtime
+        if self.is_main_run:
             self.path = str(self.service.id)
         elif self.parent_device:
             self.path = self.parent.path
@@ -194,29 +193,29 @@ class ServiceRun:
                 self.service.status = "Idle"
             now = datetime.now().replace(microsecond=0)
             results["duration"] = self.duration = str(now - start)
-            if self.runtime == self.parent_runtime:
-                self.state = state
+            if self.is_main_run:
+                self.main_run.state = state
                 self.close_remaining_connections()
-            if self.run.task and not (
-                self.task.frequency or self.run.task.crontab_expression
+            if self.main_run.task and not (
+                self.main_run.task.frequency or self.main_run.task.crontab_expression
             ):
-                self.run.task.is_active = False
+                self.main_run.task.is_active = False
             results["properties"] = {
                 "run": {
                     k: v
-                    for k, v in self.run.properties.items()
+                    for k, v in self.main_run.properties.items()
                     if k not in db.private_properties_set
                 },
                 "service": self.service.get_properties(exclude=["positions"]),
             }
-            results["trigger"] = self.run.trigger
+            results["trigger"] = self.main_run.trigger
             if (
                 self.is_main_run
                 or len(self.target_devices) > 1
                 or self.run_method == "once"
             ):
                 results = self.create_result(
-                    results, run_result=self.runtime == self.parent_runtime
+                    results, run_result=self.is_main_run
                 )
             if app.redis_queue and self.runtime == self.parent_runtime:
                 app.redis("delete", *(app.redis("keys", f"{self.runtime}/*") or []))

@@ -14,7 +14,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: true
-  events: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -105,6 +104,7 @@
     'Regression Workflow: Conditional Skip Query in Failed and Discard Modes': *id006
     'Regression Workflow: Credentials (Password & Key, Priority Mechanism)': [-157,
       96]
+    'Regression Workflow: Device Iteration': [-235, -81]
     'Regression Workflow: DxD and SxS Run Methods': *id009
     'Regression Workflow: File Transfer Mechanism': *id010
     'Regression Workflow: Fork based on value with Skip Discard Mechanism': *id011
@@ -258,7 +258,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: true
-  events: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -349,6 +348,7 @@
     'Regression Workflow: Conditional Skip Query in Failed and Discard Modes': *id049
     'Regression Workflow: Credentials (Password & Key, Priority Mechanism)': [590,
       124]
+    'Regression Workflow: Device Iteration': [699, 125]
     'Regression Workflow: DxD and SxS Run Methods': *id052
     'Regression Workflow: File Transfer Mechanism': *id053
     'Regression Workflow: Fork based on value with Skip Discard Mechanism': *id054
@@ -512,7 +512,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: true
-  events: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -581,7 +580,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: true
-  events: []
   exclusion_field: d
   impacting: true
   include_device_results: true
@@ -661,7 +659,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: true
-  events: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -739,7 +736,6 @@
   disable_result_creation: false
   display_only_failed_nodes: true
   driver: eos
-  events: []
   getters: [get_arp_table, get_interfaces]
   impacting: true
   include_device_results: true
@@ -826,7 +822,6 @@
   display_only_failed_nodes: true
   driver: arista_eos
   enable_mode: true
-  events: []
   exit_config_mode: true
   fast_cli: true
   global_delay_factor: 1.0
@@ -910,7 +905,6 @@
   display_only_failed_nodes: true
   driver: arista_eos
   enable_mode: true
-  events: []
   exit_command: ''
   expect_password_prompt: ''
   expect_prompt: ''
@@ -1009,7 +1003,6 @@
   display_only_failed_nodes: true
   driver: arista_eos
   enable_mode: true
-  events: []
   exit_config_mode: true
   fast_cli: true
   global_delay_factor: 1.0
@@ -1094,7 +1087,6 @@
   display_only_failed_nodes: true
   driver: arista_eos
   enable_mode: true
-  events: []
   exit_command: ''
   expect_password_prompt: ''
   expect_prompt: ''
@@ -1188,7 +1180,6 @@
   disable_result_creation: false
   display_only_failed_nodes: true
   driver: eos
-  events: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -1260,7 +1251,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: true
-  events: []
   headers: {}
   impacting: true
   include_device_results: true
@@ -1352,7 +1342,6 @@
   disable_result_creation: false
   display_only_failed_nodes: true
   driver: eos
-  events: []
   getters: [get_facts]
   impacting: true
   include_device_results: true
@@ -1430,7 +1419,6 @@
   disable_result_creation: false
   display_only_failed_nodes: true
   driver: eos
-  events: []
   getters: [get_interfaces]
   impacting: true
   include_device_results: true
@@ -1508,7 +1496,6 @@
   disable_result_creation: false
   display_only_failed_nodes: true
   driver: eos
-  events: []
   getters: [get_interfaces_ip]
   impacting: true
   include_device_results: true
@@ -1585,7 +1572,6 @@
   disable_result_creation: false
   display_only_failed_nodes: true
   driver: eos
-  events: []
   getters: [get_config]
   impacting: true
   include_device_results: true
@@ -1655,7 +1641,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: true
-  events: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -1720,7 +1705,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: true
-  events: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -1804,7 +1788,6 @@
   display_only_failed_nodes: true
   driver: arista_eos
   enable_mode: true
-  events: []
   exit_command: ''
   expect_password_prompt: ''
   expect_prompt: ''
@@ -1896,7 +1879,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: true
-  events: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -1996,7 +1978,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   driver: eos
-  events: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -2077,7 +2058,6 @@
   display_only_failed_nodes: false
   driver: arista_eos
   enable_mode: true
-  events: []
   exit_command: ''
   expect_password_prompt: ''
   expect_prompt: ''
@@ -2173,7 +2153,6 @@
   display_only_failed_nodes: false
   driver: arista_eos
   enable_mode: true
-  events: []
   exit_command: ''
   expect_password_prompt: ''
   expect_prompt: ''
@@ -2270,7 +2249,6 @@
   display_only_failed_nodes: false
   driver: a10
   enable_mode: true
-  events: []
   exit_command: ''
   expect_password_prompt: ''
   expect_prompt: ''
@@ -2363,7 +2341,6 @@
   display_only_failed_nodes: false
   driver: a10
   enable_mode: true
-  events: []
   exit_command: ''
   expect_password_prompt: ''
   expect_prompt: ''
@@ -2444,7 +2421,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -2511,7 +2487,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -2591,7 +2566,6 @@
   display_only_failed_nodes: false
   driver: arista_eos
   enable_mode: true
-  events: []
   exit_command: ''
   expect_password_prompt: ''
   expect_prompt: ''
@@ -2683,7 +2657,6 @@
   display_only_failed_nodes: false
   driver: a10
   enable_mode: true
-  events: []
   exit_command: ''
   expect_password_prompt: ''
   expect_prompt: ''
@@ -2775,7 +2748,6 @@
   display_only_failed_nodes: false
   driver: a10
   enable_mode: true
-  events: []
   exit_command: ''
   expect_password_prompt: ''
   expect_prompt: ''
@@ -2863,7 +2835,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   driver: eos
-  events: []
   getters: [is_alive]
   impacting: true
   include_device_results: true
@@ -2949,7 +2920,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   driver: eos
-  events: []
   getters: [get_facts]
   impacting: true
   include_device_results: true
@@ -3036,7 +3006,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   driver: eos
-  events: []
   getters: [get_interfaces_ip]
   impacting: true
   include_device_results: true
@@ -3132,7 +3101,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   driver: eos
-  events: []
   getters: [get_mac_address_table]
   impacting: true
   include_device_results: true
@@ -3218,7 +3186,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   driver: eos
-  events: []
   getters: [get_facts]
   impacting: true
   include_device_results: true
@@ -3301,7 +3268,6 @@
   dict_match: {host: '{{device.ip_address}}', unreachable: 0, use_ssl: true}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -3372,7 +3338,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -3442,7 +3407,6 @@
   dict_match: {action: debug, changed: false, failed: false}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -3520,7 +3484,6 @@
   display_only_failed_nodes: false
   driver: a10
   enable_mode: true
-  events: []
   exit_command: ''
   expect_password_prompt: ''
   expect_prompt: ''
@@ -3614,7 +3577,6 @@
   display_only_failed_nodes: true
   driver: arista_eos
   enable_mode: true
-  events: []
   exit_command: ''
   expect_password_prompt: ''
   expect_prompt: ''
@@ -3706,7 +3668,6 @@
   display_only_failed_nodes: true
   driver: arista_eos
   enable_mode: true
-  events: []
   exit_command: ''
   expect_password_prompt: ''
   expect_prompt: ''
@@ -3798,7 +3759,6 @@
   display_only_failed_nodes: true
   driver: arista_eos
   enable_mode: true
-  events: []
   exit_command: ''
   expect_password_prompt: ''
   expect_prompt: ''
@@ -3880,7 +3840,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -3959,7 +3918,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -4050,7 +4008,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -4142,7 +4099,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   headers: {}
   impacting: true
   include_device_results: true
@@ -4215,7 +4171,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -4303,7 +4258,6 @@
   display_only_failed_nodes: false
   driver: a10
   enable_mode: true
-  events: []
   exit_command: ''
   expect_password_prompt: ''
   expect_prompt: ''
@@ -4389,7 +4343,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: true
-  events: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -4464,7 +4417,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: true
-  events: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -4573,7 +4525,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: true
-  events: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -4655,7 +4606,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: true
-  events: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -4738,7 +4688,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: true
-  events: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -4862,7 +4811,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: true
-  events: []
   impacting: true
   include_device_results: true
   include_link_in_summary: true
@@ -4944,7 +4892,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -5019,7 +4966,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -5099,7 +5045,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -5193,7 +5138,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -5308,7 +5252,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -5405,7 +5348,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -5486,7 +5428,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -5592,7 +5533,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -5675,7 +5615,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -5748,7 +5687,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: true
   include_link_in_summary: false
@@ -5831,7 +5769,6 @@
   display_only_failed_nodes: false
   driver: a10
   enable_mode: true
-  events: []
   exit_command: ''
   expect_password_prompt: ''
   expect_prompt: ''
@@ -5933,7 +5870,6 @@
   display_only_failed_nodes: false
   driver: a10
   enable_mode: true
-  events: []
   exit_command: ''
   expect_password_prompt: ''
   expect_prompt: ''
@@ -6027,7 +5963,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -6098,7 +6033,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -6168,7 +6102,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   headers: {}
   impacting: true
   include_device_results: false
@@ -6241,7 +6174,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -6312,7 +6244,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   headers: {}
   impacting: true
   include_device_results: false
@@ -6386,7 +6317,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -6465,7 +6395,6 @@
   display_only_failed_nodes: false
   driver: a10
   enable_mode: true
-  events: []
   exit_command: ''
   expect_password_prompt: ''
   expect_prompt: ''
@@ -6558,7 +6487,6 @@
   display_only_failed_nodes: false
   driver: a10
   enable_mode: true
-  events: []
   exit_command: ''
   expect_password_prompt: ''
   expect_prompt: ''
@@ -6651,7 +6579,6 @@
   display_only_failed_nodes: false
   driver: a10
   enable_mode: true
-  events: []
   exit_command: ''
   expect_password_prompt: ''
   expect_prompt: ''
@@ -6735,7 +6662,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -6825,7 +6751,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -6896,7 +6821,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -6976,7 +6900,6 @@
   display_only_failed_nodes: false
   driver: a10
   enable_mode: true
-  events: []
   exit_command: ''
   expect_password_prompt: ''
   expect_prompt: ''
@@ -7063,7 +6986,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -7131,7 +7053,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -7198,7 +7119,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -7275,7 +7195,6 @@
   display_only_failed_nodes: false
   driver: arista_eos
   enable_mode: true
-  events: []
   exit_command: ''
   expect_password_prompt: ''
   expect_prompt: ''
@@ -7357,7 +7276,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -7424,7 +7342,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -7491,7 +7408,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -7559,7 +7475,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -7628,7 +7543,6 @@
     value: [1.1.1.1, 2.2.2.2, 3.3.3.3]
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -7707,7 +7621,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -7787,7 +7700,6 @@
     value: [1.1.1.1, 2.2.2.2, 3.3.3.3]
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -7865,7 +7777,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -7943,7 +7854,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -8021,7 +7931,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -8100,7 +8009,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -8186,7 +8094,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -8255,7 +8162,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -8322,7 +8228,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -8387,7 +8292,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -8456,7 +8360,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -8535,7 +8438,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -8611,7 +8513,6 @@
   display_only_failed_nodes: false
   driver: linux
   enable_mode: true
-  events: []
   expect_string: root.*#
   fast_cli: false
   global_delay_factor: 1.0
@@ -8691,7 +8592,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -8764,7 +8664,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -8830,7 +8729,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   import_type: opennms
   include_device_results: false
@@ -8915,7 +8813,6 @@
   display_only_failed_nodes: false
   driver: a10
   enable_mode: true
-  events: []
   exit_command: exit
   expect_password_prompt: 'admin.*:'
   expect_prompt: .*$
@@ -9000,7 +8897,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: true
-  events: []
   headers: {}
   impacting: true
   include_device_results: true
@@ -9084,7 +8980,6 @@
   display_only_failed_nodes: false
   driver: a10
   enable_mode: true
-  events: []
   exit_command: exit
   expect_password_prompt: password
   expect_prompt: admin.*$
@@ -9184,7 +9079,6 @@
   display_only_failed_nodes: false
   driver: a10
   enable_mode: true
-  events: []
   exit_command: ''
   expect_password_prompt: ''
   expect_prompt: ''
@@ -9278,7 +9172,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   git_repository: network_data
   impacting: true
   include_device_results: false
@@ -9348,7 +9241,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -9415,7 +9307,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -9489,7 +9380,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   driver: cisco_iosxe
-  events: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -9563,7 +9453,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   driver: arista_eos
-  events: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -9637,7 +9526,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   driver: cisco_iosxe
-  events: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -9711,7 +9599,6 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   driver: arista_eos
-  events: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -9780,7 +9667,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -9870,7 +9756,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: true
-  events: []
   headers: {}
   impacting: true
   include_device_results: true
@@ -9953,7 +9838,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: true
-  events: []
   headers: {}
   impacting: true
   include_device_results: true
@@ -10030,7 +9914,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: true
-  events: []
   headers: {}
   impacting: true
   include_device_results: true
@@ -10107,7 +9990,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: true
-  events: []
   headers: {}
   impacting: true
   include_device_results: true
@@ -10184,7 +10066,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: true
-  events: []
   headers: {}
   impacting: true
   include_device_results: true
@@ -10270,7 +10151,6 @@
   display_only_failed_nodes: false
   driver: a10
   enable_mode: true
-  events: []
   exit_command: exit
   expect_password_prompt: password
   expect_prompt: admin.*$
@@ -10363,7 +10243,6 @@
   display_only_failed_nodes: false
   driver: a10
   enable_mode: true
-  events: []
   exit_command: exit
   expect_password_prompt: password
   expect_prompt: admin.*$
@@ -10456,7 +10335,6 @@
   display_only_failed_nodes: false
   driver: a10
   enable_mode: true
-  events: []
   exit_command: exit
   expect_password_prompt: password
   expect_prompt: admin.*$
@@ -10549,7 +10427,6 @@
   display_only_failed_nodes: false
   driver: a10
   enable_mode: true
-  events: []
   exit_command: exit
   expect_password_prompt: password
   expect_prompt: admin.*$
@@ -10642,7 +10519,6 @@
   display_only_failed_nodes: false
   driver: a10
   enable_mode: true
-  events: []
   exit_command: exit
   expect_password_prompt: password
   expect_prompt: admin.*$
@@ -10735,7 +10611,6 @@
   display_only_failed_nodes: false
   driver: a10
   enable_mode: true
-  events: []
   exit_command: exit
   expect_password_prompt: password
   expect_prompt: admin.*$
@@ -10818,7 +10693,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -10885,7 +10759,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -10953,7 +10826,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -11021,7 +10893,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -11089,7 +10960,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -11157,7 +11027,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -11225,7 +11094,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -11293,7 +11161,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -11362,7 +11229,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -11443,7 +11309,6 @@
   display_only_failed_nodes: false
   driver: a10
   enable_mode: true
-  events: []
   exit_command: exit
   expect_password_prompt: password
   expect_prompt: admin.*$
@@ -11527,7 +11392,6 @@
   direction: put
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -11610,7 +11474,6 @@
   display_only_failed_nodes: false
   driver: a10
   enable_mode: true
-  events: []
   exit_command: exit
   expect_password_prompt: password
   expect_prompt: admin.*$
@@ -11696,7 +11559,6 @@
   direction: put
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -11780,7 +11642,6 @@
   display_only_failed_nodes: false
   driver: a10
   enable_mode: true
-  events: []
   exit_command: exit
   expect_password_prompt: password
   expect_prompt: admin.*$
@@ -11863,7 +11724,6 @@
   direction: put
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -11937,7 +11797,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -12004,7 +11863,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -12076,7 +11934,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -12148,7 +12005,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -12221,7 +12077,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -12306,7 +12161,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -12381,7 +12235,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -12456,7 +12309,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -12531,7 +12383,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -12607,7 +12458,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -12696,7 +12546,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -12792,7 +12641,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   headers: {}
   impacting: true
   include_device_results: false
@@ -12879,7 +12727,6 @@
   display_only_failed_nodes: false
   driver: a10
   enable_mode: true
-  events: []
   exit_command: ''
   expect_password_prompt: ''
   expect_prompt: ''
@@ -12962,7 +12809,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -13050,7 +12896,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -13127,7 +12972,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -13208,7 +13052,6 @@
   display_only_failed_nodes: false
   driver: a10
   enable_mode: true
-  events: []
   exit_command: exit
   expect_password_prompt: password
   expect_prompt: admin.*$
@@ -13292,7 +13135,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -13366,7 +13208,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -13455,7 +13296,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: true
-  events: []
   headers: {}
   impacting: true
   include_device_results: true
@@ -13539,7 +13379,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -13611,7 +13450,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -13693,7 +13531,6 @@
   display_only_failed_nodes: false
   driver: a10
   enable_mode: true
-  events: []
   exit_command: exit
   expect_password_prompt: password
   expect_prompt: admin.*$
@@ -13777,7 +13614,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: true
-  events: []
   headers: {}
   impacting: true
   include_device_results: true
@@ -13854,7 +13690,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: true
-  events: []
   headers: {}
   impacting: true
   include_device_results: true
@@ -13931,7 +13766,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -14024,7 +13858,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -14095,7 +13928,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -14165,7 +13997,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -14234,7 +14065,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -14307,7 +14137,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -14397,7 +14226,6 @@
   dict_match: {}
   disable_result_creation: true
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -14467,7 +14295,6 @@
   dict_match: {}
   disable_result_creation: true
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -14539,7 +14366,6 @@
   dict_match: {}
   disable_result_creation: true
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -14610,7 +14436,6 @@
   dict_match: {}
   disable_result_creation: true
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -14679,7 +14504,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -14748,7 +14572,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -14826,7 +14649,6 @@
   display_only_failed_nodes: false
   driver: a10
   enable_mode: true
-  events: []
   exit_command: exit
   expect_password_prompt: password
   expect_prompt: admin.*$
@@ -14906,7 +14728,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -15010,7 +14831,6 @@
   display_only_failed_nodes: false
   driver: a10
   enable_mode: true
-  events: []
   exit_command: exit
   expect_password_prompt: password
   expect_prompt: admin.*$
@@ -15094,7 +14914,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -15174,7 +14993,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -15239,7 +15057,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -15304,7 +15121,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -15371,7 +15187,6 @@
   dict_match: {}
   disable_result_creation: false
   display_only_failed_nodes: false
-  events: []
   impacting: true
   include_device_results: false
   include_link_in_summary: false
@@ -15402,6 +15217,142 @@
   reserved: false
   run_method: per_device
   scoped_name: Post-Iteration Service
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: success
+  source_code: "# Click on \"i\" to right of \"Source Code\" for examples.\r\n\r\n\
+    result = {}\r\nresults[\"success\"] = True\r\nresults[\"result\"] = result"
+  target_devices: []
+  target_pools: []
+  time_between_retries: 10
+  type: python_snippet_service
+  update_pools_after_running: false
+  update_target_pools: false
+  validation_condition: none
+  validation_method: text
+  vendor: ''
+  waiting_time: 0
+- access_groups: admin
+  close_connection: false
+  completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credential_type: any
+  default_access: creator
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  labels:
+    565d2938-6b9a-46c3-97b5-02fd4fa05e0b:
+      alignment: left
+      content: "This workflow runs on two devices: San Diego and Dallas.\r\nThe first\
+        \ service has [\"Washington\", \"Austin\"] as iteration devices.\r\nFour results\
+        \ are expected with San Diego / Dallas as parent devices."
+      positions: [250, -194]
+  last_modified: '2021-03-03 03:45:17.677751'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: 'Regression Workflow: Device Iteration'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: ['All instances (devices, links, services and users)']
+  positions: {}
+  postprocessing: ''
+  postprocessing_mode: always
+  preprocessing: ''
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: 'Regression Workflow: Device Iteration'
+  send_notification: false
+  send_notification_method: mail
+  services: ['[Shared] Start', '[Shared] End', '[Regression Workflow: Device Iteration]
+      Hard-coded iteration devices']
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: success
+  target_devices: [SanDiego, Dallas]
+  target_pools: []
+  time_between_retries: 10
+  type: workflow
+  update_pools_after_running: false
+  update_target_pools: false
+  validation_condition: none
+  validation_method: text
+  vendor: ''
+  waiting_time: 0
+  workflow_category: Example workflow(s)
+- access_groups: admin
+  completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credential_type: any
+  default_access: creator
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: '["Washington", "Austin"]'
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2021-03-03 03:43:39.735814'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Regression Workflow: Device Iteration] Hard-coded iteration devices'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: ['All instances (devices, links, services and users)']
+  positions:
+    'Regression Workflow: Device Iteration': [-233, 160]
+  postprocessing: ''
+  postprocessing_mode: always
+  preprocessing: ''
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: Hard-coded iteration devices
   send_notification: false
   send_notification_method: mail
   shared: false

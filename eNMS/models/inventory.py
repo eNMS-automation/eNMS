@@ -370,19 +370,18 @@ class Pool(AbstractBase):
                     for property in properties["filtering"][model]
                 ):
                     kwargs = {
-                        "form": {
-                            **{
-                                property: getattr(self, f"{model}_{property}")
-                                for property in properties["filtering"][model]
-                            },
-                            **{
-                                f"{property}_filter": getattr(
-                                    self, f"{model}_{property}_match"
-                                )
-                                for property in properties["filtering"][model]
-                            },
-                        }
+                        **{
+                            property: getattr(self, f"{model}_{property}")
+                            for property in properties["filtering"][model]
+                        },
+                        **{
+                            f"{property}_filter": getattr(
+                                self, f"{model}_{property}_match"
+                            )
+                            for property in properties["filtering"][model]
+                        },
                     }
+                    instances = app.filtering(model, bulk="object", form=kwargs)
                 else:
                     instances = []
                 setattr(self, f"{model}s", instances)

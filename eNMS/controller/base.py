@@ -445,7 +445,7 @@ class BaseController:
                 compile(value)
                 regex_operator = "~" if db.dialect == "postgresql" else "regexp"
                 constraint = row.op(regex_operator)(value)
-            if constraint_dict.get(f"{property}_invert") == "y":
+            if constraint_dict.get(f"{property}_invert"):
                 constraint = ~constraint
             constraints.append(constraint)
         return constraints

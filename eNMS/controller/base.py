@@ -431,22 +431,20 @@ class BaseController:
         table, constraints = models[model], []
         constraint_dict = {**kwargs["form"], **kwargs.get("constraints", {})}
         for property in model_properties[model]:
-            value = constraint_dict.get(property)
+            value, row = constraint_dict.get(property), getattr(table, property)
             if not value:
                 continue
             filter_value = constraint_dict.get(f"{property}_filter")
             if value in ("bool-true", "bool-false"):
-                constraint = getattr(table, property) == (value == "bool-true")
+                constraint = row == (value == "bool-true")
             elif filter_value == "equality":
-                constraint = getattr(table, property) == value
+                constraint = row == value
             elif not filter_value or filter_value == "inclusion":
-                constraint = getattr(table, property).contains(
-                    value, autoescape=isinstance(value, str)
-                )
+                constraint = row.contains(value, autoescape=isinstance(value, str))
             else:
                 compile(value)
                 regex_operator = "~" if db.dialect == "postgresql" else "regexp"
-                constraint = getattr(table, property).op(regex_operator)(value)
+                constraint = row.op(regex_operator)(value)
             constraints.append(constraint)
         return constraints
 

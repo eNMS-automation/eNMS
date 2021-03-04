@@ -8,7 +8,20 @@ Version 4.1.0
 - 3D Logical visualization
 - Remove Event Model and Syslog server
 - Refactor of the run mechanism. When running a service, a single run is created and saved to the
-database. Impact on:
+database.
+- Remove "operation" (any / all) property from pool
+- Change the way pool objects are computed: via SQL query instead of pure python:
+better performances expected for large pools.
+- Add regex support for SQLite
+
+MIGRATION:
+
+- In all services,
+def job(self, run, payload, device): -> def job(self, run, device):
+- Check that all "operator" property in pool.yaml are set to "all"
+
+To be tested:
+- Refactoring of the run mechanism:
 * log level mechanism
 * workflow run, progress display in workflow builder
 * parameterized run
@@ -17,11 +30,9 @@ database. Impact on:
 * workflow: all run modes / SxS & DxD
 * results display: automation / results page, workflow tree, result table, device result table
 * get_var / set_var and get_result mechanism, including get_result along with restart mechanism
-
-MIGRATION:
-
-In all services,
-def job(self, run, payload, device): -> def job(self, run, device):
+- Pool refactoring
+* dynamic pool content, inclusion / equality / regex
+* pool individual and global refresh mechanism in pool table
 
 Version 4.0.1
 -------------

@@ -377,7 +377,7 @@ class Pool(AbstractBase):
                             ),
                         }
                     )
-                instances = app.filtering(model, **kwargs) if kwargs else []
+                instances = app.filtering(model, **kwargs) if kwargs["form"] else []
                 setattr(self, f"{model}s", instances)
             else:
                 instances = getattr(self, f"{model}s")

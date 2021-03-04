@@ -290,7 +290,6 @@ class Pool(AbstractBase):
     admin_only = db.Column(Boolean, default=False)
     last_modified = db.Column(db.TinyString, info={"log_change": False})
     description = db.Column(db.LargeString)
-    operator = db.Column(db.TinyString, default="all")
     target_services = relationship(
         "Service", secondary=db.service_target_pool_table, back_populates="target_pools"
     )

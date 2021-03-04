@@ -97,13 +97,6 @@ class PoolForm(BaseForm):
     admin_only = BooleanField("Pool visible to admin users only")
     access_groups = StringField("Groups")
     description = StringField("Description")
-    operator = SelectField(
-        "Type of match",
-        choices=(
-            ("all", "Match if all properties match"),
-            ("any", "Match if any property matches"),
-        ),
-    )
     manually_defined = BooleanField("Manually defined (won't be automatically updated)")
 
     @classmethod

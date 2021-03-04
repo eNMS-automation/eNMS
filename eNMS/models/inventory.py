@@ -365,25 +365,19 @@ class Pool(AbstractBase):
     def compute_pool(self):
         for model in self.models:
             if not self.manually_defined:
-                if any(
-                    getattr(self, f"{model}_{property}")
-                    for property in properties["filtering"][model]
-                ):
-                    kwargs = {
-                        **{
-                            property: getattr(self, f"{model}_{property}")
-                            for property in properties["filtering"][model]
-                        },
-                        **{
+                kwargs = {"bulk": "object", "form": {}}
+                for property in properties["filtering"][model]:
+                    if not getattr(self, f"{model}_{property}"):
+                        continue
+                    kwargs["form"].update(
+                        {
+                            property: getattr(self, f"{model}_{property}"),
                             f"{property}_filter": getattr(
                                 self, f"{model}_{property}_match"
-                            )
-                            for property in properties["filtering"][model]
-                        },
-                    }
-                    instances = app.filtering(model, bulk="object", form=kwargs)
-                else:
-                    instances = []
+                            ),
+                        }
+                    )
+                instances = app.filtering(model, **kwargs) if kwargs else []
                 setattr(self, f"{model}s", instances)
             else:
                 instances = getattr(self, f"{model}s")

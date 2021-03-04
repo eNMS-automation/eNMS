@@ -481,6 +481,7 @@ class BaseController:
         return query
 
     def filtering(self, model, bulk=False, **kwargs):
+        print(kwargs)
         table, query = models[model], db.query(model)
         total_records = query.with_entities(table.id).count()
         try:

@@ -129,7 +129,7 @@ export class Table {
           let form = serializeForm(`#search-form-${this.id}`);
           for (const [key, value] of Object.entries(form)) {
             if (key.includes("_invert")) form[key] = value == "y";
-          };
+          }
           Object.assign(d, {
             form: serializeForm(`#search-form-${this.id}`),
             constraints: constraints,

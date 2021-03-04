@@ -376,7 +376,7 @@ class Pool(AbstractBase):
                             ),
                             f"{property}_invert": getattr(
                                 self, f"{model}_{property}_invert"
-                            )
+                            ),
                         }
                     )
                 instances = app.filtering(model, **kwargs) if kwargs["form"] else []

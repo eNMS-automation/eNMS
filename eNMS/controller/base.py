@@ -439,17 +439,13 @@ class BaseController:
                 constraint = getattr(table, property) == (value == "bool-true")
             elif filter_value == "equality":
                 constraint = getattr(table, property) == value
-            elif (
-                not filter_value
-                or filter_value == "inclusion"
-                or db.dialect == "sqlite"
-            ):
+            elif not filter_value or filter_value == "inclusion":
                 constraint = getattr(table, property).contains(
                     value, autoescape=isinstance(value, str)
                 )
             else:
                 compile(value)
-                regex_operator = "regexp" if db.dialect == "mysql" else "~"
+                regex_operator = "~" if db.dialect == "postgresql" else "regexp"
                 constraint = getattr(table, property).op(regex_operator)(value)
             constraints.append(constraint)
         return constraints

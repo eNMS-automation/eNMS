@@ -5,6 +5,7 @@ from flask_login import current_user
 from json import loads
 from logging import error
 from os import getenv
+from re import search
 from sqlalchemy import (
     Boolean,
     Column,
@@ -115,6 +116,15 @@ class Database:
         self.Column = CustomColumn
 
     def configure_events(self):
+        if self.dialect == "sqlite":
+
+            @event.listens_for(self.engine, "connect")
+            def do_begin(connection, _):
+                def regexp(pattern, value):
+                    return search(pattern, value) is not None
+
+                connection.create_function("regexp", 2, regexp)
+
         @event.listens_for(self.base, "mapper_configured", propagate=True)
         def model_inspection(mapper, model):
             name = model.__tablename__

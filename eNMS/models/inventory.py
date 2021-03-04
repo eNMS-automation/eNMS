@@ -362,41 +362,29 @@ class Pool(AbstractBase):
             for user in set(self.users) | old_users:
                 user.update_rbac()
 
-    def property_match(self, obj, property):
-        pool_value = getattr(self, f"{obj.class_type}_{property}")
-        object_value = str(getattr(obj, property))
-        match = getattr(self, f"{obj.class_type}_{property}_match")
-        invert = getattr(self, f"{obj.class_type}_{property}_invert")
-        if match == "inclusion":
-            result = pool_value in object_value
-        elif match == "equality":
-            result = pool_value == object_value
-        else:
-            result = bool(search(pool_value, object_value))
-        return not result if invert else result
-
-    def object_match(self, obj):
-        operator = all if self.operator == "all" else any
-        return operator(
-            self.property_match(obj, property)
-            for property in properties["filtering"][obj.class_type]
-            if getattr(self, f"{obj.class_type}_{property}")
-        )
-
-    def compute(self, model):
-        return any(
-            getattr(self, f"{model}_{property}")
-            for property in properties["filtering"][model]
-        )
-
     def compute_pool(self):
         for model in self.models:
             if not self.manually_defined:
-                instances = (
-                    list(filter(self.object_match, db.fetch_all(model)))
-                    if self.compute(model)
-                    else []
-                )
+                if any(
+                    getattr(self, f"{model}_{property}")
+                    for property in properties["filtering"][model]
+                ):
+                    kwargs = {
+                        "form": {
+                            **{
+                                property: getattr(self, f"{model}_{property}")
+                                for property in properties["filtering"][model]
+                            },
+                            **{
+                                f"{property}_filter": getattr(
+                                    self, f"{model}_{property}_match"
+                                )
+                                for property in properties["filtering"][model]
+                            },
+                        }
+                    }
+                else:
+                    instances = []
                 setattr(self, f"{model}s", instances)
             else:
                 instances = getattr(self, f"{model}s")

@@ -165,11 +165,9 @@ class Server(Flask):
             session = app.ssh_sessions[session_id]
             device = db.fetch("device", id=session["device"])
             username, password = session["credentials"]
-            address = getattr(device, session["form"]["address"])
+            address, options = getattr(device, session["form"]["address"]), ""
             if app.settings["ssh"]["bypass_key_prompt"]:
                 options = "-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
-            else:
-                options = ""
             process_id, session["file_descriptor"] = fork()
             if process_id:
                 task = partial(send_data, session_id, session["file_descriptor"])

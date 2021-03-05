@@ -115,19 +115,12 @@ function webConnection(id) {
     url: `/web_connection/${id}`,
     form: `connection-parameters-form-${id}`,
     callback: function (result) {
-      const url =
-        settings.app.address ||
-        `${window.location.protocol}//${window.location.hostname}`;
-      const link = result.redirection
-        ? `${url}/terminal${result.port}`
-        : `${url}:${result.port}`;
-      setTimeout(() => openUrl(`${link}/${result.endpoint}`), 2000);
+      const defaultUrl = `${window.location.protocol}//${window.location.hostname}`;
+      const baseUrl = settings.app.address || defaultUrl;
+      const link = `${baseUrl}/terminal/${result.endpoint}`;
+      setTimeout(() => openUrl(link), 2000);
       const message = `Click here to connect to ${result.device}.`;
-      notify(
-        `<a target='_blank' href='${link}/${result.endpoint}'>${message}</a>`,
-        "success",
-        15
-      );
+      notify(`<a target='_blank' href='${link}'>${message}</a>`, "success", 15);
       const warning = `Don't forget to turn off the pop-up blocker !`;
       notify(warning, "error", 15);
       $(`#connection-${id}`).remove();

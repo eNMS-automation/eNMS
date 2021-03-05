@@ -44,15 +44,6 @@ class InventoryController(BaseController):
             db.delete("view_object", id=instance_id)
         return self.get_time()
 
-    def get_ssh_port(self):
-        if self.redis_queue:
-            self.ssh_port = self.redis("incr", "ssh_port", 1)
-        else:
-            self.ssh_port += 1
-        start = self.settings["ssh"]["start_port"]
-        end = self.settings["ssh"]["end_port"]
-        return start + int(self.ssh_port) % (end - start)
-
     def get_credentials(self, device, **kwargs):
         if kwargs["credentials"] == "device":
             credentials = device.get_credentials("any")
@@ -66,36 +57,11 @@ class InventoryController(BaseController):
         if not self.settings["ssh"]["credentials"][kwargs["credentials"]]:
             return {"alert": "Unauthorized authentication method."}
         device = db.fetch("device", id=device_id, rbac="connect")
-        port, endpoint = self.get_ssh_port(), str(uuid4())
-        command = f"python3 -m flask run -h 0.0.0.0 -p {port}"
-        if self.settings["ssh"]["bypass_key_prompt"]:
-            options = "-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
-        else:
-            options = ""
-        environment = {
-            **{key: str(value) for key, value in self.settings["ssh"]["web"].items()},
-            "APP_ADDRESS": self.settings["app"]["address"],
-            "DEVICE": str(device.id),
-            "ENDPOINT": endpoint,
-            "ENMS_USER": getenv("ENMS_USER", "admin"),
-            "ENMS_PASSWORD": getenv("ENMS_PASSWORD", "admin"),
-            "FLASK_APP": "app.py",
-            "IP_ADDRESS": getattr(device, kwargs["address"]),
-            "OPTIONS": options,
-            "PORT": str(device.port),
-            "PROTOCOL": kwargs["protocol"],
-            "REDIRECTION": str(self.settings["ssh"]["port_redirection"]),
-            "USER": current_user.name,
-        }
         if "authentication" in kwargs:
             credentials = self.get_credentials(device, **kwargs)
-            environment.update(zip(("USERNAME", "PASSWORD"), credentials))
-        Popen(command, shell=True, cwd=self.path / "terminal", env=environment)
         return {
             "device": device.name,
-            "port": port,
-            "endpoint": endpoint,
-            "redirection": self.settings["ssh"]["port_redirection"],
+            "endpoint": str(uuid4()),
         }
 
     def get_device_logs(self, device_id):

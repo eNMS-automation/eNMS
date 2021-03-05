@@ -1,15 +1,15 @@
 /*
 global
+device: false
 FitAddon: false
 io: false
-redirection: false
+session: false
 Terminal: false
 */
 
 const terminal = new Terminal({ cursorBlink: true });
 const fitAddon = new FitAddon.FitAddon();
-const url = redirection ? `/${window.location.pathname.split("/")[1]}` : "";
-const socket = io("/terminal", { path: `${url}/socket.io` });
+const socket = io("/terminal", { query: `session=${session}&device=${device}` });
 let terminalContent = "";
 
 function initTerminal() {
@@ -25,7 +25,7 @@ function initTerminal() {
 
 window.onunload = function () {
   navigator.sendBeacon(
-    `${url}/shutdown`,
+    "/shutdown",
     new Blob([JSON.stringify(terminalContent)], {
       type: "application/json",
     })

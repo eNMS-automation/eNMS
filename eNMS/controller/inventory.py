@@ -20,7 +20,7 @@ from eNMS.setup import properties
 
 class InventoryController(BaseController):
 
-    ssh_port = -1
+    ssh_sessions = {}
     configuration_properties = {"configuration": "Configuration"}
     configuration_timestamps = ("status", "update", "failure", "runtime", "duration")
 
@@ -56,12 +56,15 @@ class InventoryController(BaseController):
     def web_connection(self, device_id, **kwargs):
         if not self.settings["ssh"]["credentials"][kwargs["credentials"]]:
             return {"alert": "Unauthorized authentication method."}
+        session = str(uuid4())
         device = db.fetch("device", id=device_id, rbac="connect")
+        self.ssh_sessions[session] = {"device": device, "form": kwargs}
         if "authentication" in kwargs:
             credentials = self.get_credentials(device, **kwargs)
+            self.ssh_sessions[session]["credentials"] = credentials
         return {
             "device": device.name,
-            "endpoint": str(uuid4()),
+            "endpoint": session,
         }
 
     def get_device_logs(self, device_id):

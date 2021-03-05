@@ -14,10 +14,6 @@ class Server(Flask):
     def __init__(self):
         super().__init__(__name__)
         getLogger("werkzeug").setLevel(ERROR)
-        self.config["SECRET_KEY"] = getenv("TERMINAL_SECRET_KEY", "secret_key")
-        self.socketio = SocketIO(
-            self, cors_allowed_origins=getenv("CORS_ALLOWED_ORIGINS")
-        )
         self.configure_routes()
 
     def send_data(self):
@@ -27,10 +23,6 @@ class Server(Flask):
             self.socketio.emit("output", output, namespace="/terminal")
 
     def configure_routes(self):
-        @self.route(f"/{getenv('ENDPOINT')}")
-        def index():
-            redirection = getenv("REDIRECTION") == "True"
-            return render_template("index.html", redirection=redirection)
 
         @self.route("/shutdown", methods=["POST"])
         def shutdown():

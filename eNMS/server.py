@@ -17,10 +17,13 @@ from flask import (
 from flask_httpauth import HTTPBasicAuth
 from flask_login import current_user, LoginManager, login_user, logout_user
 from flask_restful import abort as rest_abort, Api, Resource
+from flask_socketio import SocketIO
 from flask_wtf.csrf import CSRFProtect
 from functools import wraps
 from itertools import chain
-from os import getenv
+from os import getenv, read, write
+from pty import fork
+from subprocess import run
 from threading import Thread
 from time import sleep
 from traceback import format_exc
@@ -47,6 +50,7 @@ class Server(Flask):
         self.configure_authentication()
         self.configure_routes()
         self.configure_rest_api()
+        self.configure_terminal_socket()
 
     @staticmethod
     def monitor_requests(function):
@@ -120,6 +124,7 @@ class Server(Flask):
         self.auth = HTTPBasicAuth()
         self.csrf = CSRFProtect()
         self.csrf.init_app(self)
+        self.socketio = SocketIO(self)
 
     def configure_login_manager(self):
         login_manager = LoginManager()
@@ -133,6 +138,42 @@ class Server(Flask):
         @login_manager.request_loader
         def request_loader(request):
             return db.get_user(request.form.get("name"))
+
+    def configure_terminal_socket(self):
+
+        def send_data():
+            while True:
+                self.socketio.sleep(0.1)
+                output = read(self.file_descriptor, 1024).decode()
+                self.socketio.emit("output", output, namespace="/terminal")
+
+        @self.socketio.on("input", namespace="/terminal")
+        def input(data):
+            write(self.file_descriptor, data.encode())
+
+        @self.socketio.on("connect", namespace="/terminal")
+        def connect():
+            session = request.args.get("session")
+            device = db.fetch("device", id=request.args["device"])
+            if app.settings["ssh"]["bypass_key_prompt"]:
+                options = "-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
+            else:
+                options = ""
+            self.process_id, self.file_descriptor = fork()
+            if self.process_id:
+                self.socketio.start_background_task(target=send_data)
+            else:
+                port = f"-p {device.port}"
+                if getenv("PROTOCOL") == "telnet":
+                    command = f"telnet {device.ip_address}"
+                elif getenv("PASSWORD"):
+                    command = (
+                        f"sshpass -p {getenv('PASSWORD')} ssh {options} "
+                        f"{getenv('USERNAME')}@{device.ip_address} {port}"
+                    )
+                else:
+                    command = f"ssh {options} 192.168.56.50 -p 22"
+                run(command.split())
 
     def configure_context_processor(self):
         @self.context_processor
@@ -305,10 +346,10 @@ class Server(Flask):
         def export_service(id):
             return send_file(f"/{app.export_service(id)}.tgz", as_attachment=True)
 
-        @blueprint.route("/terminal/<terminal_id>")
+        @blueprint.route("/terminal/<int:device_id>/<session>")
         @self.monitor_requests
-        def ssh_connection(terminal_id):
-            return render_template("terminal.html", terminal_id=terminal_id)
+        def ssh_connection(device, session):
+            return render_template("terminal.html", session=session, device=device)
 
         @blueprint.route("/<path:_>")
         @self.monitor_requests

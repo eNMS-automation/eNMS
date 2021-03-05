@@ -117,7 +117,7 @@ function webConnection(id) {
     callback: function (result) {
       const defaultUrl = `${window.location.protocol}//${window.location.hostname}`;
       const baseUrl = settings.app.address || defaultUrl;
-      const link = `${baseUrl}/terminal/${result.endpoint}`;
+      const link = `${baseUrl}/terminal/${result.session}`;
       setTimeout(() => openUrl(link), 2000);
       const message = `Click here to connect to ${result.device}.`;
       notify(`<a target='_blank' href='${link}'>${message}</a>`, "success", 15);

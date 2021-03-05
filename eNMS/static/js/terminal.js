@@ -9,7 +9,7 @@ Terminal: false
 
 const terminal = new Terminal({ cursorBlink: true });
 const fitAddon = new FitAddon.FitAddon();
-const socket = io("/terminal", { query: `session=${session}&device=${device}` });
+const socket = io("/terminal", { query: `session=${session}` });
 let terminalContent = "";
 
 function initTerminal() {

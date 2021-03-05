@@ -23,7 +23,6 @@ class Server(Flask):
             self.socketio.emit("output", output, namespace="/terminal")
 
     def configure_routes(self):
-
         @self.route("/shutdown", methods=["POST"])
         def shutdown():
             request.environ.get("werkzeug.server.shutdown")()

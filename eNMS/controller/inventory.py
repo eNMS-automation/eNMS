@@ -58,14 +58,11 @@ class InventoryController(BaseController):
             return {"alert": "Unauthorized authentication method."}
         session = str(uuid4())
         device = db.fetch("device", id=device_id, rbac="connect")
-        self.ssh_sessions[session] = {"device": device, "form": kwargs}
+        self.ssh_sessions[session] = {"device": device.id, "form": kwargs}
         if "authentication" in kwargs:
             credentials = self.get_credentials(device, **kwargs)
             self.ssh_sessions[session]["credentials"] = credentials
-        return {
-            "device": device.name,
-            "endpoint": session,
-        }
+        return {"device": device.name, "session": session}
 
     def get_device_logs(self, device_id):
         device_logs = [

@@ -140,7 +140,6 @@ class Server(Flask):
             return db.get_user(request.form.get("name"))
 
     def configure_terminal_socket(self):
-
         def send_data():
             while True:
                 self.socketio.sleep(0.1)
@@ -153,8 +152,10 @@ class Server(Flask):
 
         @self.socketio.on("connect", namespace="/terminal")
         def connect():
-            session = request.args.get("session")
-            device = db.fetch("device", id=request.args["device"])
+            session = app.ssh_sessions[request.args["session"]]
+            device = db.fetch("device", id=session["device"])
+            username, password = session["credentials"]
+            address = getattr(device, session["form"]["address"])
             if app.settings["ssh"]["bypass_key_prompt"]:
                 options = "-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
             else:
@@ -164,15 +165,13 @@ class Server(Flask):
                 self.socketio.start_background_task(target=send_data)
             else:
                 port = f"-p {device.port}"
-                if getenv("PROTOCOL") == "telnet":
-                    command = f"telnet {device.ip_address}"
-                elif getenv("PASSWORD"):
-                    command = (
-                        f"sshpass -p {getenv('PASSWORD')} ssh {options} "
-                        f"{getenv('USERNAME')}@{device.ip_address} {port}"
-                    )
+                if session["form"]["protocol"] == "telnet":
+                    command = f"telnet {address}"
+                elif password:
+                    ssh_command = f"sshpass -p {password} ssh {options}"
+                    command = f"{ssh_command} {username}@{address} {port}"
                 else:
-                    command = f"ssh {options} 192.168.56.50 -p 22"
+                    command = f"ssh {options} {address} {port}"
                 run(command.split())
 
     def configure_context_processor(self):
@@ -346,10 +345,10 @@ class Server(Flask):
         def export_service(id):
             return send_file(f"/{app.export_service(id)}.tgz", as_attachment=True)
 
-        @blueprint.route("/terminal/<int:device_id>/<session>")
+        @blueprint.route("/terminal/<session>")
         @self.monitor_requests
-        def ssh_connection(device, session):
-            return render_template("terminal.html", session=session, device=device)
+        def ssh_connection(session):
+            return render_template("terminal.html", session=session)
 
         @blueprint.route("/<path:_>")
         @self.monitor_requests

@@ -13,6 +13,7 @@ database.
 - Change the way pool objects are computed: via SQL query instead of pure python:
 better performances expected for large pools.
 - Add regex support for SQLite
+- Add new "Invert" option for table filtering
 
 MIGRATION:
 

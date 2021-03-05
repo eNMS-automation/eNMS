@@ -143,8 +143,12 @@ class Server(Flask):
         def send_data(session, file_descriptor):
             while True:
                 self.socketio.sleep(0.1)
-                output = read(file_descriptor, 1024).decode()
-                self.socketio.emit("output", output, namespace="/terminal", room=session)
+                self.socketio.emit(
+                    "output",
+                    read(file_descriptor, 1024).decode(),
+                    namespace="/terminal",
+                    room=session,
+                )
 
         @self.socketio.on("input", namespace="/terminal")
         def input(data):
@@ -157,7 +161,8 @@ class Server(Flask):
 
         @self.socketio.on("connect", namespace="/terminal")
         def connect():
-            session = app.ssh_sessions[request.args["session"]]
+            session_id = request.args["session"]
+            session = app.ssh_sessions[session_id]
             device = db.fetch("device", id=session["device"])
             username, password = session["credentials"]
             address = getattr(device, session["form"]["address"])
@@ -167,7 +172,7 @@ class Server(Flask):
                 options = ""
             process_id, session["file_descriptor"] = fork()
             if process_id:
-                task = partial(send_data, request.args["session"], session["file_descriptor"])
+                task = partial(send_data, session_id, session["file_descriptor"])
                 self.socketio.start_background_task(target=task)
             else:
                 port = f"-p {device.port}"

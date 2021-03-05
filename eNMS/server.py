@@ -305,6 +305,11 @@ class Server(Flask):
         def export_service(id):
             return send_file(f"/{app.export_service(id)}.tgz", as_attachment=True)
 
+        @blueprint.route("/terminal/<terminal_id>")
+        @self.monitor_requests
+        def ssh_connection(terminal_id):
+            return render_template("terminal.html", terminal_id=terminal_id)
+
         @blueprint.route("/<path:_>")
         @self.monitor_requests
         def get_requests_sink(_):

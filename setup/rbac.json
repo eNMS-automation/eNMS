@@ -150,6 +150,7 @@
     "/session_table": "access",
     "/table_form": "access",
     "/task_table": "access",
+    "/terminal": "access",
     "/tree_form": "access",
     "/user_table": "admin",
     "/view_service_results": "access",

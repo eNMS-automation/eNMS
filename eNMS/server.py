@@ -17,9 +17,9 @@ from flask import (
 from flask_httpauth import HTTPBasicAuth
 from flask_login import current_user, LoginManager, login_user, logout_user
 from flask_restful import abort as rest_abort, Api, Resource
-from flask_socketio import SocketIO
+from flask_socketio import join_room, SocketIO
 from flask_wtf.csrf import CSRFProtect
-from functools import wraps
+from functools import partial, wraps
 from itertools import chain
 from os import getenv, read, write
 from pty import fork
@@ -140,15 +140,20 @@ class Server(Flask):
             return db.get_user(request.form.get("name"))
 
     def configure_terminal_socket(self):
-        def send_data():
+        def send_data(session, file_descriptor):
             while True:
                 self.socketio.sleep(0.1)
-                output = read(self.file_descriptor, 1024).decode()
-                self.socketio.emit("output", output, namespace="/terminal")
+                output = read(file_descriptor, 1024).decode()
+                self.socketio.emit("output", output, namespace="/terminal", room=session)
 
         @self.socketio.on("input", namespace="/terminal")
         def input(data):
-            write(self.file_descriptor, data.encode())
+            session = app.ssh_sessions[request.args["session"]]
+            write(session["file_descriptor"], data.encode())
+
+        @self.socketio.on("join", namespace="/terminal")
+        def on_join(session):
+            join_room(session)
 
         @self.socketio.on("connect", namespace="/terminal")
         def connect():
@@ -160,9 +165,10 @@ class Server(Flask):
                 options = "-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
             else:
                 options = ""
-            self.process_id, self.file_descriptor = fork()
-            if self.process_id:
-                self.socketio.start_background_task(target=send_data)
+            process_id, session["file_descriptor"] = fork()
+            if process_id:
+                task = partial(send_data, request.args["session"], session["file_descriptor"])
+                self.socketio.start_background_task(target=task)
             else:
                 port = f"-p {device.port}"
                 if session["form"]["protocol"] == "telnet":

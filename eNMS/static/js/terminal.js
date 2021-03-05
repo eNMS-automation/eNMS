@@ -17,6 +17,7 @@ function initTerminal() {
   terminal.open(document.getElementById("terminal"));
   fitAddon.fit();
   terminal.onKey((event) => socket.emit("input", event.key));
+  socket.emit('join', session);
   socket.on("output", (data) => {
     terminal.write(data);
     terminalContent += data;

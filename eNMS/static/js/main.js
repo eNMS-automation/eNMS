@@ -55,7 +55,7 @@ function switchTheme(theme) {
 function initSidebar() {
   $("#sidebar-menu")
     .find("a")
-    .on("click", function (ev) {
+    .on("click", function () {
       let $li = $(this).parent();
       if ($li.is(".active")) {
         $li.removeClass("active active-sm");
@@ -66,8 +66,10 @@ function initSidebar() {
           $("#sidebar-menu").find("li ul").slideUp();
         } else {
           if ($("body").is(".nav-sm")) {
-            $("#sidebar-menu").find("li").removeClass("active active-sm");
-            $("#sidebar-menu").find("li ul").slideUp();
+            if (!$li.parent().is(".child_menu")) {
+              $("#sidebar-menu").find("li").removeClass("active active-sm");
+              $("#sidebar-menu").find("li ul").slideUp();
+            }
           }
         }
         $li.addClass("active");

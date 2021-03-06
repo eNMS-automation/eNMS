@@ -153,6 +153,11 @@ body {
   color: #c4cfda;
 }
 
+/* Display icon in minimized submenu */
+.nav.child_menu span.fa {
+  display: block;
+}
+
 .active a span.fa {
   text-align: right !important;
   margin-right: 4px;

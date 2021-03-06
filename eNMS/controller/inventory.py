@@ -1,4 +1,5 @@
 from collections import Counter
+from datetime import datetime
 from flask_login import current_user
 from git import Repo
 from io import BytesIO
@@ -179,6 +180,10 @@ class InventoryController(BaseController):
             result = self.topology_import(file)
         info("Inventory import: Done.")
         return result
+
+    def save_session(self, session):
+        session = app.ssh_sessions.pop(session)
+        db.factory("session", content=request.json, name=str(uuid4()), device=session["device"], timestamp=str(datetime.now()), user=current_user.name)
 
     def save_view_positions(self, **kwargs):
         for node_id, position in kwargs.items():

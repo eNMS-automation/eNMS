@@ -1,5 +1,6 @@
 /*
 global
+csrfToken: false
 device: false
 FitAddon: false
 io: false
@@ -25,12 +26,17 @@ function initTerminal() {
 }
 
 window.onunload = function () {
-  navigator.sendBeacon(
-    `/save_session/${session}`,
-    new Blob([JSON.stringify(terminalContent)], {
-      type: "application/json",
-    })
-  );
+  fetch(`/save_session/${session}`, {
+    method: "POST", 
+    body: JSON.stringify({content: terminalContent}),            
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json; charset=UTF-8',
+      'X-CSRFToken': csrfToken,
+    },      
+    mode: 'cors',
+    keepalive: true,
+  });
 };
 
 initTerminal();

@@ -181,11 +181,11 @@ class InventoryController(BaseController):
         info("Inventory import: Done.")
         return result
 
-    def save_session(self, session):
-        session = self.ssh_sessions.pop(session)
+    def save_session(self, session_id, **kwargs):
+        session = self.ssh_sessions.pop(session_id)
         db.factory(
             "session",
-            content=request.json,
+            content=kwargs["content"],
             name=str(uuid4()),
             device=session["device"],
             timestamp=str(datetime.now()),

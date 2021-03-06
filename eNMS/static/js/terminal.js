@@ -25,7 +25,7 @@ function initTerminal() {
   });
 }
 
-window.onunload = function () {
+window.onbeforeunload = function () {
   fetch(`/save_session/${session}`, {
     method: "POST",
     body: JSON.stringify({ content: terminalContent }),

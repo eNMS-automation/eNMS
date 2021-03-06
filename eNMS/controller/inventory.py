@@ -182,15 +182,16 @@ class InventoryController(BaseController):
         return result
 
     def save_session(self, session_id, **kwargs):
-        session = self.ssh_sessions.pop(session_id)
-        db.factory(
-            "session",
-            content=kwargs["content"],
-            name=str(uuid4()),
-            device=session["device"],
-            timestamp=str(datetime.now()),
-            user=current_user.name,
-        )
+        session = self.ssh_sessions.pop(session_id, None)
+        if session:
+            db.factory(
+                "session",
+                content=kwargs["content"],
+                name=str(uuid4()),
+                device=session["device"],
+                timestamp=str(datetime.now()),
+                user=current_user.name,
+            )
 
     def save_view_positions(self, **kwargs):
         for node_id, position in kwargs.items():

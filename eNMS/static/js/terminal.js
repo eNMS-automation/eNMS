@@ -27,15 +27,9 @@ function initTerminal() {
 
 window.onunload = function () {
   fetch(`/save_session/${session}`, {
-    method: "POST", 
-    body: JSON.stringify({content: terminalContent}),            
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json; charset=UTF-8',
-      'X-CSRFToken': csrfToken,
-    },      
-    mode: 'cors',
-    keepalive: true,
+    method: "POST",
+    body: JSON.stringify({ content: terminalContent }),
+    headers: { "Content-Type": "application/json", "X-CSRFToken": csrfToken },
   });
 };
 

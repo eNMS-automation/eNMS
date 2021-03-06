@@ -516,11 +516,6 @@ class BaseController:
             table_result["full_result"] = ",".join(obj.name for obj in query.all())
         return table_result
 
-    def allowed_file(self, name, allowed_modules):
-        allowed_syntax = "." in name
-        allowed_extension = name.rsplit(".", 1)[1].lower() in allowed_modules
-        return allowed_syntax and allowed_extension
-
     def bulk_deletion(self, table, **kwargs):
         instances = self.filtering(table, bulk="id", form=kwargs)
         for instance_id in instances:

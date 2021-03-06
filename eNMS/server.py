@@ -162,7 +162,9 @@ class Server(Flask):
         @self.socketio.on("connect", namespace="/terminal")
         def connect():
             session_id = request.args["session"]
-            session = app.ssh_sessions[session_id]
+            session = app.ssh_sessions.get(session_id)
+            if not session:
+                return
             device = db.fetch("device", id=session["device"])
             username, password = session["credentials"]
             address, options = getattr(device, session["form"]["address"]), ""

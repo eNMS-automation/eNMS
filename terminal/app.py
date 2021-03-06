@@ -16,12 +16,6 @@ class Server(Flask):
         getLogger("werkzeug").setLevel(ERROR)
         self.configure_routes()
 
-    def send_data(self):
-        while True:
-            self.socketio.sleep(0.1)
-            output = read(self.file_descriptor, 1024).decode()
-            self.socketio.emit("output", output, namespace="/terminal")
-
     def configure_routes(self):
         @self.route("/shutdown", methods=["POST"])
         def shutdown():
@@ -39,28 +33,6 @@ class Server(Flask):
                 verify=False if getenv("VERIFY_CERTIFICATE", True) == "False" else True,
             )
             return jsonify(True)
-
-        @self.socketio.on("input", namespace="/terminal")
-        def input(data):
-            write(self.file_descriptor, data.encode())
-
-        @self.socketio.on("connect", namespace="/terminal")
-        def connect():
-            self.process_id, self.file_descriptor = fork()
-            if self.process_id:
-                self.socketio.start_background_task(target=self.send_data)
-            else:
-                port = f"-p {getenv('PORT')}"
-                if getenv("PROTOCOL") == "telnet":
-                    command = f"telnet {getenv('IP_ADDRESS')}"
-                elif getenv("PASSWORD"):
-                    command = (
-                        f"sshpass -p {getenv('PASSWORD')} ssh {getenv('OPTIONS')} "
-                        f"{getenv('USERNAME')}@{getenv('IP_ADDRESS')} {port}"
-                    )
-                else:
-                    command = f"ssh {getenv('OPTIONS')} {getenv('IP_ADDRESS')} {port}"
-                run(command.split())
 
 
 app = Server()

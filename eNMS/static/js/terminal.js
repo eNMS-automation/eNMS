@@ -26,7 +26,7 @@ function initTerminal() {
 
 window.onunload = function () {
   navigator.sendBeacon(
-    "/shutdown",
+    `/save_session/${session}`,
     new Blob([JSON.stringify(terminalContent)], {
       type: "application/json",
     })

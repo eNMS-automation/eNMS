@@ -1380,7 +1380,7 @@
   number_of_retries: 0
   operating_system: ''
   optional_args: {}
-  pools: ['All instances (devices, links, services and users)']
+  pools: []
   positions:
     'Regression Workflow 2: Separate Failure - Success paths': &id105 [-102, -130]
     'Regression Workflow 3: Napalm getters (postprocessing)': &id104 [-154, -70]
@@ -1447,7 +1447,7 @@
   iteration_devices_property: ip_address
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2019-10-02 10:14:58.959163'
+  last_modified: '2021-03-07 13:27:53.699477'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -1460,7 +1460,7 @@
   number_of_retries: 0
   operating_system: ''
   optional_args: {}
-  pools: []
+  pools: ['All instances (devices, links, services and users)']
   positions:
     'Regression Workflow 2: Separate Failure - Success paths': &id107 [611, -72]
     'Regression Workflow 3: Napalm getters (postprocessing)': &id106 [-166, 303]
@@ -1473,7 +1473,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
-  priority: 1
+  priority: 2
   reply_to: ''
   reserved: false
   run_method: per_device
@@ -1541,7 +1541,7 @@
   number_of_retries: 0
   operating_system: ''
   optional_args: {}
-  pools: ['All instances (devices, links, services and users)']
+  pools: []
   positions:
     'Regression Workflow 3: Napalm getters (postprocessing)': &id109 [303, 43]
     'Regression Workflow F: Workflow of Workflows': [3, -51]
@@ -1621,7 +1621,7 @@
   number_of_retries: 0
   operating_system: ''
   optional_args: {}
-  pools: ['All instances (devices, links, services and users)']
+  pools: []
   positions:
     'Regression Workflow 3: Napalm getters (postprocessing)': &id110 [652, -22]
     'Regression Workflow F: Workflow of Workflows': [3, -51]

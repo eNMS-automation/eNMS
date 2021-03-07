@@ -750,6 +750,10 @@ class ServiceRun:
                 query.filter(
                     models["result"].workflow.has(models["workflow"].name == name)
                 )
+            if device:
+                query.filter(
+                    models["result"].device.has(models["device"].name == device)
+                )
             results = filter_run(query, "scoped_name") or filter_run(query, "name")
             if not results:
                 return recursive_search(run.restart_run)

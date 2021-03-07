@@ -16,6 +16,7 @@ better performances expected for large pools.
 - Add new "Invert" option for table filtering
 - Move terminal application for web SSH feature inside the application
 - Fix submenu bug when the menu is minimized (gentelella bug)
+- Replace prerequisite edge with priority mechanism
 
 MIGRATION:
 

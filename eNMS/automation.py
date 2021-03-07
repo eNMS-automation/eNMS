@@ -360,7 +360,7 @@ class ServiceRun:
         self.success = results["success"]
         results = self.make_results_json_compliant(results)
         result_kw = {
-            "run": self,
+            "run": self.main_run,
             "service": self.service.id,
             "parent_runtime": self.parent_runtime,
         }
@@ -386,7 +386,6 @@ class ServiceRun:
                     results["devices"][result.device.name] = result.result
         create_failed_results = self.disable_result_creation and not self.success
         if not self.disable_result_creation or create_failed_results or run_result:
-            result_kw["run"] = self.main_run
             db.factory("result", result=results, commit=commit, **result_kw)
         return results
 

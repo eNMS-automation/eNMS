@@ -714,7 +714,6 @@ class ServiceRun:
         allow_none=False,
         default=None,
     ):
-        print(self.payload, name, value)
         payload = self.payload.setdefault("variables", {})
         if device:
             payload = payload.setdefault("devices", {})
@@ -723,7 +722,6 @@ class ServiceRun:
             payload = payload.setdefault(section, {})
         if value is None:
             value = default
-        print("OOO"*200, payload, value)
         value = getattr(payload, operation)(name, value)
         if operation == "get" and not allow_none and value is None:
             raise Exception(f"Payload Editor: {name} not found in {payload}.")

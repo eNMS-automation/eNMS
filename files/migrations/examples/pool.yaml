@@ -130,7 +130,6 @@
     link25-reversed-2, link13-2]
   manually_defined: false
   name: All instances (devices, links, services and users)
-  operator: all
   property1: CP
   service_access_groups: ''
   service_access_groups_invert: false
@@ -283,7 +282,6 @@
   links: []
   manually_defined: false
   name: All devices
-  operator: all
   property1: CP
   service_access_groups: ''
   service_access_groups_invert: false
@@ -444,7 +442,6 @@
     link25-reversed-2, link13-2]
   manually_defined: false
   name: All links
-  operator: all
   property1: CP
   service_access_groups: ''
   service_access_groups_invert: false
@@ -611,7 +608,6 @@
     link25-reversed-2, link13-2]
   manually_defined: false
   name: Datacenter San Francisco
-  operator: all
   property1: CP
   service_access_groups: ''
   service_access_groups_invert: false
@@ -721,7 +717,7 @@
   devices: [Jackson, PaloAlto, Washington, Chicago, SanJose, SanDiego, Dallas, Philadelphia,
     Atlanta, Baltimore, Cleveland, Cincinnati, Cambridge, Minneapolis, Sacramento,
     SanFrancisco, Orange, Oakland, router20 (admin), router23 (admin), Dallas-2, Dallas-3,
-    Dallas-4, Jackson-2, Oakland-2]
+    Dallas-4, Jackson-2, Oakland-2, Austin, LosAngeles, Aserver, Austin-2, Austin-3]
   last_modified: '2020-09-21 06:22:57.467002'
   link_access_groups: ''
   link_access_groups_invert: false
@@ -775,7 +771,6 @@
     link25-reversed-2, link13-2]
   manually_defined: false
   name: Datacenter New York
-  operator: all
   property1: CP
   service_access_groups: ''
   service_access_groups_invert: false
@@ -938,7 +933,6 @@
     link25-reversed-2, link13-2]
   manually_defined: false
   name: Datacenter Chicago
-  operator: all
   property1: CP
   service_access_groups: ''
   service_access_groups_invert: false
@@ -1083,7 +1077,6 @@
   links: []
   manually_defined: false
   name: Washington
-  operator: all
   property1: CP
   service_access_groups: ''
   service_access_groups_invert: false
@@ -1229,7 +1222,6 @@
   links: [link0, link1, link2, link3, link4, link5, europe-link5]
   manually_defined: false
   name: Links 0 through 5 - Non-public pool - Access set up
-  operator: all
   property1: CP
   service_access_groups: ''
   service_access_groups_invert: false
@@ -1374,7 +1366,6 @@
   links: [link6, link7, link8, link9, europe-link6, europe-link7, europe-link8, europe-link9]
   manually_defined: false
   name: Links 6 through 9 - Public pools
-  operator: all
   property1: CP
   service_access_groups: ''
   service_access_groups_invert: false
@@ -1519,7 +1510,6 @@
   links: []
   manually_defined: false
   name: Non-admin user pool (admin)
-  operator: all
   property1: CP
   service_access_groups: ''
   service_access_groups_invert: false
@@ -1664,7 +1654,6 @@
   links: []
   manually_defined: false
   name: User ny
-  operator: all
   property1: CP
   service_access_groups: ''
   service_access_groups_invert: false
@@ -1809,7 +1798,6 @@
   links: []
   manually_defined: false
   name: Read-only users
-  operator: all
   property1: CP
   service_access_groups: ''
   service_access_groups_invert: false
@@ -1960,7 +1948,6 @@
     atlantic-r26-boston-3, atlantic-r20-boston-2, atlantic-r20-richmond-1, atlantic-r26-boston-4-inverted]
   manually_defined: false
   name: 'Pool Invert Mechanism: ~router in name, ~link[1-9] in name'
-  operator: all
   property1: CP
   service_access_groups: ''
   service_access_groups_invert: false
@@ -2105,7 +2092,6 @@
   links: []
   manually_defined: false
   name: All users
-  operator: all
   property1: CP
   service_access_groups: ''
   service_access_groups_invert: false
@@ -2250,7 +2236,6 @@
   links: []
   manually_defined: true
   name: Users with UI access
-  operator: all
   property1: CP
   service_access_groups: ''
   service_access_groups_invert: false
@@ -2395,7 +2380,6 @@
   links: []
   manually_defined: false
   name: USA services
-  operator: all
   property1: CP
   service_access_groups: usa
   service_access_groups_invert: false
@@ -2540,7 +2524,6 @@
   links: []
   manually_defined: false
   name: Credentials pool - Austin devices
-  operator: all
   property1: CP
   service_access_groups: ''
   service_access_groups_invert: false
@@ -2685,7 +2668,6 @@
   links: []
   manually_defined: false
   name: Credentials pool - Austin-3 alone
-  operator: all
   property1: CP
   service_access_groups: ''
   service_access_groups_invert: false

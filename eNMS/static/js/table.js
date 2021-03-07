@@ -455,8 +455,8 @@ tables.device = class DeviceTable extends Table {
     });
     for (const model of ["service", "task", "pool"]) {
       row[`${model}s`] = `<b><a href="#" onclick="eNMS.table.displayRelationTable(
-        '${model}', ${row.instance}, {from: 'devices', to: '${model}s'})">
-        ${model.charAt(0).toUpperCase() + model.slice(1)}s</a></b>`;
+        '${model}', ${row.instance}, {parent: '${this.id}', from: 'devices',
+        to: '${model}s'})">${model.charAt(0).toUpperCase() + model.slice(1)}s</a></b>`;
     }
     return row;
   }
@@ -618,7 +618,7 @@ tables.link = class LinkTable extends Table {
   addRow(properties) {
     let row = super.addRow(properties);
     row.pools = `<b><a href="#" onclick="eNMS.table.displayRelationTable(
-      'pool', ${row.instance}, {from: 'links', to: 'pools'})">
+      'pool', ${row.instance}, {parent: '${this.id}', from: 'links', to: 'pools'})">
       Pools</a></b>`;
     return row;
   }
@@ -666,8 +666,8 @@ tables.pool = class PoolTable extends Table {
       row.objectNumber += `${row[`${model}_number`]} ${model}s`;
       if (model !== "user") row.objectNumber += " - ";
       row[`${model}s`] = `<b><a href="#" onclick="eNMS.table.displayRelationTable(
-        '${model}', ${row.instance}, {from: 'pools', to: '${model}s'})">
-        ${model.charAt(0).toUpperCase() + model.slice(1)}s</a></b>`;
+        '${model}', ${row.instance}, {parent: '${this.id}', from: 'pools',
+        to: '${model}s'})">${model.charAt(0).toUpperCase() + model.slice(1)}s</a></b>`;
     }
     return row;
   }
@@ -749,10 +749,9 @@ tables.service = class ServiceTable extends Table {
         : row.name;
     for (const model of ["device", "pool"]) {
       row[`${model}s`] = `<b><a href="#" onclick="eNMS.table.displayRelationTable(
-        '${model}', ${
-        row.instance
-      }, {from: 'target_services', to: 'target_${model}s'})">
-        ${model.charAt(0).toUpperCase() + model.slice(1)}s</a></b>`;
+        '${model}', ${row.instance}, {parent: '${this.id}', from: 'target_services',
+        to: 'target_${model}s'})">${model.charAt(0).toUpperCase() + model.slice(1)}s
+        </a></b>`;
     }
     return row;
   }
@@ -1026,8 +1025,8 @@ tables.task = class TaskTable extends Table {
     }
     for (const model of ["device", "pool"]) {
       row[`${model}s`] = `<b><a href="#" onclick="eNMS.table.displayRelationTable(
-        '${model}', ${row.instance}, {from: 'tasks', to: '${model}s'})">
-        ${model.charAt(0).toUpperCase() + model.slice(1)}s</a></b>`;
+        '${model}', ${row.instance}, {parent: '${this.id}', from: 'tasks',
+        to: '${model}s'})">${model.charAt(0).toUpperCase() + model.slice(1)}s</a></b>`;
     }
     return row;
   }
@@ -1106,7 +1105,7 @@ tables.user = class UserTable extends Table {
   addRow(kwargs) {
     let row = super.addRow(kwargs);
     row.pools = `<b><a href="#" onclick="eNMS.table.displayRelationTable(
-      'pool', ${row.instance}, {from: 'users', to: 'pools'})">
+      'pool', ${row.instance}, {parent: '${this.id}', from: 'users', to: 'pools'})">
       Pools</a></b>`;
     return row;
   }
@@ -1351,10 +1350,11 @@ function exportTable(tableId) {
   refreshTable(tableId);
 }
 
-export const refreshTable = function (tableId, notification) {
-  if ($(`#table-${tableId}`).length) {
-    tableInstances[tableId].table.ajax.reload(null, false);
-  }
+export const refreshTable = function (tableId, notification, updateParent) {
+  if (!$(`#table-${tableId}`).length) return;
+  tableInstances[tableId].table.ajax.reload(null, false);
+  const parentTable = tableInstances[tableId].relation?.relation?.parent;
+  if (updateParent && parentTable) refreshTable(parentTable);
   if (notification) notify("Table refreshed.", "success", 5);
 };
 
@@ -1393,7 +1393,7 @@ function bulkDeletion(tableId, model) {
     url: `/bulk_deletion/${model}`,
     form: `search-form-${tableId}`,
     callback: function (number) {
-      refreshTable(tableId);
+      refreshTable(tableId, false, true);
       $(`#bulk_deletion-${tableId}`).remove();
       notify(`${number} items deleted.`, "success", 5, true);
     },
@@ -1406,8 +1406,7 @@ function bulkRemoval(tableId, model, instance) {
     url: `/bulk_removal/${model}/${instance.type}/${instance.id}/${relation}`,
     form: `search-form-${tableId}`,
     callback: function (number) {
-      refreshTable(tableId);
-      if (instance.type == "pool") refreshTable("pool");
+      refreshTable(tableId, false, true);
       notify(
         `${number} ${model}s removed from ${instance.type} '${instance.name}'.`,
         "success",

@@ -186,11 +186,7 @@ function removeInstance(tableId, instance, relation) {
     url: "/remove_instance",
     data: { instance, relation },
     callback: function () {
-      tableInstances[tableId].table
-        .row($(`#${instance.id}`))
-        .remove()
-        .draw(false);
-      if (relation.type == "pool") refreshTable("pool");
+      refreshTable(tableId, false, true);
       notify(
         `${instance.type.toUpperCase()} '${instance.name}' removed from
         ${relation.type.toUpperCase()} '${relation.name}'.`,
@@ -599,8 +595,7 @@ function addInstancesToRelation(type, id) {
     form: `add_${type}s-form-${id}`,
     callback: (result) => {
       $(`#add_${type}s-${id}`).remove();
-      refreshTable(id);
-      if (result.target.type == "pool") refreshTable("pool");
+      refreshTable(id, false, true);
       notify(
         `${result.number} ${type}s added to
         ${result.target.type} '${result.target.name}'.`,

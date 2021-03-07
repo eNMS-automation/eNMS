@@ -119,10 +119,7 @@ class Workflow(Service):
             if run.stop:
                 return {"payload": run.payload, "success": False, "result": "Stopped"}
             service = services.pop()
-            if number_of_runs[service.name] >= service.maximum_runs or any(
-                node not in visited
-                for node, _ in service.neighbors(self, "source", "prerequisite")
-            ):
+            if number_of_runs[service.name] >= service.maximum_runs:
                 continue
             number_of_runs[service.name] += 1
             visited.add(service)
@@ -238,11 +235,10 @@ class WorkflowEdge(AbstractBase):
     __table_args__ = (
         UniqueConstraint(subtype, source_id, destination_id, workflow_id),
     )
-    color_mapping = {"success": "green", "failure": "red", "prerequisite": "blue"}
 
     def __init__(self, **kwargs):
         self.label = kwargs["subtype"]
-        self.color = self.color_mapping[kwargs["subtype"]]
+        self.color = "green" if kwargs["subtype"] == "success" else "red"
         super().__init__(**kwargs)
 
     def update(self, **kwargs):

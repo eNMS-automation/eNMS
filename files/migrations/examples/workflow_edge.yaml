@@ -54,16 +54,6 @@
     Napalm Getters and Postprocessing] 2021-03-03 03:42:25.668792', source: '[Regression
     Workflow: Napalm Getters and Postprocessing] process_payload1', subtype: success,
   type: workflow_edge, workflow: 'Regression Workflow: Napalm Getters and Postprocessing'}
-- {color: blue, destination: '[Regression Workflow: Napalm Getters and Postprocessing]
-    process_payload1', label: prerequisite, name: '[Regression Workflow: Napalm Getters
-    and Postprocessing] 2021-03-03 03:42:25.668822', source: '[Shared] NAPALM: Get
-    interfaces', subtype: prerequisite, type: workflow_edge, workflow: 'Regression
-    Workflow: Napalm Getters and Postprocessing'}
-- {color: blue, destination: '[Regression Workflow: Napalm Getters and Postprocessing]
-    process_payload1', label: prerequisite, name: '[Regression Workflow: Napalm Getters
-    and Postprocessing] 2021-03-03 03:42:25.668852', source: '[Shared] NAPALM: Get
-    Facts', subtype: prerequisite, type: workflow_edge, workflow: 'Regression Workflow:
-    Napalm Getters and Postprocessing'}
 - {color: green, destination: '[[[Regression Workflow: Workflow of Workflows] Regression
     Workflow: Subworkflow of Workflows] Regression Workflow: Payload Extraction &
     Validation] netmiko_show_ip_route', label: success, name: '[[[Regression Workflow:
@@ -267,16 +257,6 @@
     Advanced Multiprocessing (admin)] 2021-03-03 03:42:25.675483', source: '[Shared]
     REST API: call *is_alive* endpoint', subtype: success, type: workflow_edge, workflow: 'Regression
     Workflow: Advanced Multiprocessing (admin)'}
-- {color: blue, destination: '[Shared] REST API: call *is_alive* endpoint', label: prerequisite,
-  name: '[Regression Workflow: Advanced Multiprocessing (admin)] 2021-03-03 03:42:25.675513',
-  source: '[Regression Workflow: Advanced Multiprocessing (admin)] Show version with
-    multiprocessing', subtype: prerequisite, type: workflow_edge, workflow: 'Regression
-    Workflow: Advanced Multiprocessing (admin)'}
-- {color: blue, destination: '[Shared] REST API: call *is_alive* endpoint', label: prerequisite,
-  name: '[Regression Workflow: Advanced Multiprocessing (admin)] 2021-03-03 03:42:25.675542',
-  source: '[Regression Workflow: Advanced Multiprocessing (admin)] napalm_configure_bgp_1',
-  subtype: prerequisite, type: workflow_edge, workflow: 'Regression Workflow: Advanced
-    Multiprocessing (admin)'}
 - {color: green, destination: '[Shared] Modify Payload for Iteration', label: success,
   name: '[Regression Workflow: Iteration Targets Mechanism] 2021-03-03 03:42:25.676206',
   source: '[Shared] Start', subtype: success, type: workflow_edge, workflow: 'Regression

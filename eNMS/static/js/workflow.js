@@ -654,7 +654,6 @@ function updateRightClickBindings() {
     "Per-device Result": (node) => getResultLink(node, true),
     "Create 'Success' edge": () => switchMode("success"),
     "Create 'Failure' edge": () => switchMode("failure"),
-    "Create 'Prerequisite' edge": () => switchMode("prerequisite"),
     "Move Nodes": () => switchMode("motion"),
     "Create Label": () => showLabelPanel({ usePosition: true }),
     "Create Label Button": () => showLabelPanel({ usePosition: false }),

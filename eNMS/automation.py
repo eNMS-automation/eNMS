@@ -450,8 +450,8 @@ class ServiceRun:
                 elif retries:
                     sleep(self.time_between_retries)
             except Exception as exc:
-                self.log("error", str(exc), device)
                 result = "\n".join(format_exc().splitlines())
+                self.log("error", result, device)
                 results = {"success": False, "result": result}
         return results
 

@@ -28,7 +28,7 @@ class SwissArmyKnifeService(Service):
     def Placeholder(self, *args, **kwargs):  # noqa: N802
         return {"success": True}
 
-    def cluster_monitoring(self, run, payload):
+    def cluster_monitoring(self, run):
         protocol = app.settings["cluster"]["scan_protocol"]
         for instance in db.fetch_all("instance"):
             db.factory(
@@ -40,7 +40,7 @@ class SwissArmyKnifeService(Service):
             )
         return {"success": True}
 
-    def process_payload1(self, run, payload, device):
+    def process_payload1(self, run, device):
         get_facts = run.get_result("NAPALM: Get Facts", device.name)
         get_interfaces = run.get_result("NAPALM: Get interfaces", device.name)
         uptime_less_than_50000 = get_facts["result"]["get_facts"]["uptime"] < 50000

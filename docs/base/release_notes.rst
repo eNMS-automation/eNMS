@@ -15,6 +15,7 @@ better performances expected for large pools.
 - Add regex support for SQLite
 - Add new "Invert" option for table filtering
 - Move terminal application for web SSH feature inside the application
+- Fix submenu bug when the menu is minimized (gentelella bug)
 
 MIGRATION:
 

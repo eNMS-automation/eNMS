@@ -122,7 +122,6 @@ class BaseController:
                 name=self.settings["app"].get("startup_migration", "default"),
                 import_export_types=db.import_export_models,
             )
-            self.update_credentials()
             self.get_git_content()
         self.configure_server_id()
         self.reset_run_status()
@@ -155,10 +154,6 @@ class BaseController:
         db.session.commit()
         if not admin_user.password:
             admin_user.update(password="admin")
-
-    def update_credentials(self):
-        with open(self.path / "files" / "spreadsheets" / "usa.xls", "rb") as file:
-            self.topology_import(file)
 
     def get_git_content(self):
         repo = self.settings["app"]["git_repository"]

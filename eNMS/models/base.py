@@ -77,9 +77,9 @@ class AbstractBase(db.base):
         if not kwargs.get("update_pools") or not self.pool_model:
             return
         for pool in db.fetch_all("pool", rbac=None):
-            if pool.manually_defined or not pool.compute(self.class_type):
+            if pool.manually_defined:
                 continue
-            match = pool.object_match(self)
+            match = pool.match_instance(self)
             if match and self not in getattr(pool, f"{self.class_type}s"):
                 getattr(pool, f"{self.class_type}s").append(self)
             if self in getattr(pool, f"{self.class_type}s") and not match:

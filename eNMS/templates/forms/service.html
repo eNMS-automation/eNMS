@@ -156,6 +156,11 @@
                   {{ form.initial_payload(id=form_type + '-initial_payload',
                   class="form-control add-id") }}
                 </div>
+                {{ form.priority.label() }}
+                <div class="form-group">
+                  {{ form.priority(id=form_type + '-priority',
+                  class="form-control add-id") }}
+                </div>
                 {{ form.number_of_retries.label() }}
                 <div class="form-group">
                   {{ form.number_of_retries(id=form_type + '-number_of_retries',

@@ -1330,7 +1330,7 @@
   update_pools_after_running: false
   update_target_pools: false
   username: admin
-  validation_condition: success
+  validation_condition: none
   validation_method: text
   vendor: ''
   verify_ssl_certificate: true
@@ -1410,7 +1410,7 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
-  validation_condition: success
+  validation_condition: none
   validation_method: dict_included
   vendor: ''
   waiting_time: 0
@@ -1489,7 +1489,7 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
-  validation_condition: success
+  validation_condition: none
   validation_method: dict_included
   vendor: ''
   waiting_time: 0
@@ -1568,7 +1568,7 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
-  validation_condition: success
+  validation_condition: none
   validation_method: dict_included
   vendor: ''
   waiting_time: 0
@@ -1645,7 +1645,7 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
-  validation_condition: success
+  validation_condition: none
   validation_method: dict_included
   vendor: ''
   waiting_time: 0
@@ -1888,7 +1888,7 @@
   update_target_pools: false
   use_device_driver: true
   use_genie: false
-  validation_condition: success
+  validation_condition: none
   validation_method: text
   vendor: Arista
   waiting_time: 0
@@ -2343,7 +2343,7 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
-  validation_condition: success
+  validation_condition: none
   validation_method: text
   vendor: ''
   waiting_time: 0
@@ -2436,7 +2436,7 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
-  validation_condition: success
+  validation_condition: none
   validation_method: text
   vendor: ''
   waiting_time: 0
@@ -2665,7 +2665,7 @@
   update_target_pools: false
   use_device_driver: true
   use_genie: false
-  validation_condition: success
+  validation_condition: none
   validation_method: text
   vendor: ''
   waiting_time: 0
@@ -2757,7 +2757,7 @@
   update_target_pools: false
   use_device_driver: true
   use_genie: false
-  validation_condition: success
+  validation_condition: none
   validation_method: text
   vendor: ''
   waiting_time: 0
@@ -2849,7 +2849,7 @@
   update_target_pools: false
   use_device_driver: true
   use_genie: false
-  validation_condition: success
+  validation_condition: none
   validation_method: text
   vendor: ''
   waiting_time: 0
@@ -3596,7 +3596,7 @@
   update_target_pools: false
   use_device_driver: true
   use_genie: false
-  validation_condition: success
+  validation_condition: none
   validation_method: text
   vendor: ''
   waiting_time: 0
@@ -4206,7 +4206,7 @@
   update_pools_after_running: false
   update_target_pools: false
   username: admin
-  validation_condition: success
+  validation_condition: none
   validation_method: text
   vendor: ''
   verify_ssl_certificate: false
@@ -4380,7 +4380,7 @@
   update_target_pools: false
   use_device_driver: true
   use_genie: false
-  validation_condition: success
+  validation_condition: none
   validation_method: text
   vendor: ''
   waiting_time: 0
@@ -8092,7 +8092,7 @@
   type: python_snippet_service
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: success
+  validation_condition: none
   validation_method: dict_included
   vendor: ''
   waiting_time: 0
@@ -9066,7 +9066,7 @@
   update_pools_after_running: false
   update_target_pools: false
   username: admin
-  validation_condition: success
+  validation_condition: none
   validation_method: text
   vendor: ''
   verify_ssl_certificate: true
@@ -9944,7 +9944,7 @@
   update_pools_after_running: false
   update_target_pools: false
   username: admin
-  validation_condition: success
+  validation_condition: none
   validation_method: text
   vendor: ''
   verify_ssl_certificate: true
@@ -10021,7 +10021,7 @@
   update_pools_after_running: false
   update_target_pools: false
   username: admin
-  validation_condition: success
+  validation_condition: none
   validation_method: text
   vendor: ''
   verify_ssl_certificate: true
@@ -10098,7 +10098,7 @@
   update_pools_after_running: false
   update_target_pools: false
   username: admin
-  validation_condition: success
+  validation_condition: none
   validation_method: text
   vendor: ''
   verify_ssl_certificate: true
@@ -10175,7 +10175,7 @@
   update_pools_after_running: false
   update_target_pools: false
   username: admin
-  validation_condition: success
+  validation_condition: none
   validation_method: text
   vendor: ''
   verify_ssl_certificate: true
@@ -10252,7 +10252,7 @@
   update_pools_after_running: false
   update_target_pools: false
   username: admin
-  validation_condition: success
+  validation_condition: none
   validation_method: text
   vendor: ''
   verify_ssl_certificate: true
@@ -13531,7 +13531,7 @@
   update_pools_after_running: false
   update_target_pools: false
   username: admin
-  validation_condition: success
+  validation_condition: none
   validation_method: text
   vendor: ''
   verify_ssl_certificate: true
@@ -13845,7 +13845,7 @@
   update_pools_after_running: false
   update_target_pools: false
   username: admin
-  validation_condition: success
+  validation_condition: none
   validation_method: text
   vendor: ''
   verify_ssl_certificate: true
@@ -13922,7 +13922,7 @@
   update_pools_after_running: false
   update_target_pools: false
   username: admin
-  validation_condition: success
+  validation_condition: none
   validation_method: text
   vendor: ''
   verify_ssl_certificate: true

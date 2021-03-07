@@ -1,4 +1,5 @@
 from collections import defaultdict
+from heapq import heappop, heappush
 from sqlalchemy import Boolean, ForeignKey, Integer
 from sqlalchemy.orm import backref, relationship
 from sqlalchemy.schema import UniqueConstraint
@@ -109,16 +110,18 @@ class Workflow(Service):
         number_of_runs = defaultdict(int)
         start = db.fetch("service", scoped_name="Start")
         end = db.fetch("service", scoped_name="End")
-        services = [db.fetch("service", id=id) for id in run.start_services]
-        visited, targets, restart_run = set(), defaultdict(set), run.restart_run
-        tracking_bfs = run.run_method == "per_service_with_workflow_targets"
+        services, targets = [], defaultdict(set)
         start_targets = [device] if device else run.target_devices
-        for service in services:
+        for service_id in run.start_services:
+            service = db.fetch("service", id=service_id)
             targets[service.name] |= {device.name for device in start_targets}
+            heappush(services, (1 / service.priority, service))
+        visited, restart_run = set(), run.restart_run
+        tracking_bfs = run.run_method == "per_service_with_workflow_targets"
         while services:
             if run.stop:
                 return {"payload": run.payload, "success": False, "result": "Stopped"}
-            service = services.pop()
+            _, service = heappop(services)
             if number_of_runs[service.name] >= service.maximum_runs:
                 continue
             number_of_runs[service.name] += 1
@@ -164,7 +167,7 @@ class Workflow(Service):
                 ):
                     if tracking_bfs or device:
                         targets[successor.name] |= set(summary[edge_type])
-                    services.append(successor)
+                    heappush(services, ((1 / successor.priority, successor)))
                     if tracking_bfs or device:
                         run.write_state(
                             f"edges/{edge.id}", len(summary[edge_type]), "increment"

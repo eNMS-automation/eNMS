@@ -182,7 +182,7 @@ class Service(AbstractBase):
 
     def neighbors(self, workflow, direction, subtype):
         for edge in getattr(self, f"{direction}s"):
-            if edge.subtype == subtype and edge.workflow == workflow:
+            if edge.subtype == subtype and edge.workflow.name == workflow.name:
                 yield getattr(edge, direction), edge
 
 

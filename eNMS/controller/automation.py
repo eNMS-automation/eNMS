@@ -58,6 +58,7 @@ class AutomationController(BaseController):
     run_db = defaultdict(dict)
     run_logs = defaultdict(lambda: defaultdict(list))
     run_stop = defaultdict(bool)
+    run_instances = {}
 
     def add_edge(self, workflow_id, subtype, source, destination):
         now = self.get_time()

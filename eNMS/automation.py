@@ -46,6 +46,7 @@ class ServiceRun:
         self.creator = self.run.creator
         self.parent_runtime = kwargs.get("parent_runtime")
         self.runtime = app.get_time()
+        app.run_instances[self.runtime] = self
         for key, value in kwargs.items():
             setattr(self, key, value)
         self.main_run = run if self.is_main_run else run.main_run
@@ -56,6 +57,7 @@ class ServiceRun:
         else:
             self.path = f"{run.path}>{self.service.id}"
         self.start_run()
+        app.run_instances.pop(self.runtime)
 
     def __repr__(self):
         return f"{self.runtime}: SERVICE '{self.service}'"
@@ -238,7 +240,7 @@ class ServiceRun:
     def get_device_result(args):
         device_id, runtime, results = args
         device = db.fetch("device", id=device_id)
-        run = db.fetch("run", runtime=runtime)
+        run = app.run_instances[runtime]
         results.append(run.get_results(device))
 
     def device_iteration(self, device):
@@ -360,7 +362,7 @@ class ServiceRun:
         self.success = results["success"]
         results = self.make_results_json_compliant(results)
         result_kw = {
-            "run": self.main_run,
+            "run_id": self.main_run.id,
             "service": self.service.id,
             "parent_runtime": self.parent_runtime,
         }

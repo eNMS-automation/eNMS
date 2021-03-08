@@ -185,7 +185,6 @@ class Workflow(Service):
             }
         else:
             results = {"payload": run.payload, "success": end in visited}
-        db.session.refresh(run)
         run.restart_run = restart_run
         return results
 

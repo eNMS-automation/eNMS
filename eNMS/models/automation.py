@@ -325,8 +325,6 @@ class Run(AbstractBase):
         self.runtime = kwargs.get("runtime") or app.get_time()
         self.parent_runtime = self.runtime
         super().__init__(**kwargs)
-        if not self.creator:
-            self.creator = self.main_run.creator
         if not self.start_services:
             self.start_services = [db.fetch("service", scoped_name="Start").id]
 

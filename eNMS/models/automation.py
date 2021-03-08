@@ -148,6 +148,7 @@ class Service(AbstractBase):
                 break
         if workflow:
             workflow.services.append(service)
+        service.set_name()
         return service
 
     @property

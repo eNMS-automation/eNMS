@@ -2,7 +2,7 @@
 
 # Factory: create a new instance
 
-device = db.factory("device", name="test", model="IOS")
+device = db.factory("device", name="test", model="IOS", commit=True)
 print(f"Device '{device}' has been created")
 
 # Fetch: retrieve instance from database
@@ -20,6 +20,8 @@ print(f"New model: {device.model}")
 # Delete: erase instance from database
 
 db.delete("device", name="test")
+db.session.commit()
+
 get_deleted_device = db.fetch("device", name="test", allow_none=True)
 
 if get_deleted_device is None:

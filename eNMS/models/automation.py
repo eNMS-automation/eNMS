@@ -358,7 +358,7 @@ class Run(AbstractBase):
         self.runtime = kwargs.get("runtime") or app.get_time()
         super().__init__(**kwargs)
         if not self.creator:
-            self.creator = self.parent.creator
+            self.creator = getattr(self.parent, "creator", "")
         if not kwargs.get("parent_runtime"):
             self.parent_runtime = self.runtime
             self.path = str(self.service.id)

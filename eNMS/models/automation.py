@@ -137,8 +137,9 @@ class Service(AbstractBase):
         return constraints
 
     def duplicate(self, workflow=None):
-        for i in range(10):
-            number = f" ({i})" if i else ""
+        index = 0
+        while True:
+            number = f" ({index})" if index else ""
             scoped_name = f"{self.scoped_name}{number}"
             name = f"[{workflow.name}] {scoped_name}" if workflow else scoped_name
             if not db.fetch("service", allow_none=True, name=name):
@@ -146,6 +147,7 @@ class Service(AbstractBase):
                     name=name, scoped_name=scoped_name, shared=False, update_pools=True
                 )
                 break
+            index += 1
         if workflow:
             workflow.services.append(service)
         service.set_name()

@@ -37,7 +37,7 @@ class Workflow(Service):
     __mapper_args__ = {"polymorphic_identity": "workflow"}
 
     def __init__(self, **kwargs):
-        migration_import = kwargs.pop("migration_import", False)
+        migration_import = kwargs.get("migration_import", False)
         if not migration_import:
             start = db.fetch("service", scoped_name="Start", rbac=None)
             end = db.fetch("service", scoped_name="End", rbac=None)

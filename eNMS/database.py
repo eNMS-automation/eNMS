@@ -28,6 +28,7 @@ from sqlalchemy.orm import scoped_session, sessionmaker
 from sqlalchemy.orm.collections import InstrumentedList
 from sqlalchemy.types import JSON
 from time import sleep
+from traceback import format_exc
 
 from eNMS.models import model_properties, models, property_types, relationships
 from eNMS.setup import database as database_settings, properties, rbac as rbac_settings
@@ -366,8 +367,8 @@ class Database:
                     instance = transaction(_class, **kwargs)
                     self.session.commit()
                     break
-                except Exception as exc:
-                    error(f"Commit n°{index} failed ({exc})")
+                except Exception:
+                    error(f"Commit n°{index} failed ({format_exc()})")
                     self.session.rollback()
                     if index == self.retry_commit_number - 1:
                         raise exc

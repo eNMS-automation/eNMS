@@ -109,15 +109,13 @@ class Service(AbstractBase):
     def __init__(self, **kwargs):
         kwargs.pop("status", None)
         super().__init__(**kwargs)
-        if "name" not in kwargs:
-            self.set_name()
 
     def update(self, **kwargs):
-        if "scoped_name" in kwargs and kwargs.get("scoped_name") != self.scoped_name:
-            self.set_name(kwargs["scoped_name"])
         if self.positions and "positions" in kwargs:
             kwargs["positions"] = {**self.positions, **kwargs["positions"]}
         super().update(**kwargs)
+        if not kwargs.get("migration_import"):
+            self.set_name()
 
     @classmethod
     def filtering_constraints(cls, **kwargs):

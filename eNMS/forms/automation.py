@@ -198,12 +198,19 @@ class ServiceForm(BaseForm):
                 "The number of threads used for multiprocessing must be "
                 f"less than {app.settings['automation']['max_process']}."
             )
+        shared_service_error = not self.shared.data and len(self.workflows.data) > 1
+        if shared_service_error:
+            self.shared.errors.append(
+                "The 'shared' property is unticked, but the service belongs"
+                " to more than one workflow: this is incompatible."
+            )
         return (
             valid_form
             and not conversion_validation_mismatch
             and not empty_validation
             and not forbidden_name_error
             and not no_recipient_error
+            and not shared_service_error
             and not too_many_threads_error
         )
 

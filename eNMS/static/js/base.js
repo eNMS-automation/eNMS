@@ -543,10 +543,6 @@ function showServicePanel(type, id, mode) {
   typeInput.val(type).prop("disabled", true);
   $(id ? `#${type}-name-${id}` : `#${type}-name`).prop("disabled", true);
   if (id) {
-    if (mode == "duplicate") {
-      $(`#${type}-shared-${id}`).prop("checked", false);
-    }
-    $(`#${type}-shared-${id}`).prop("disabled", true);
     if (mode == "duplicate" && type == "workflow") {
       $(`#copy-${id}`).val(id);
     }
@@ -624,7 +620,6 @@ export function showInstancePanel(type, id, mode, tableId) {
             panel.setHeaderTitle(`${action} ${type} - ${instance.name}`);
             processInstance(type, instance);
             if (mode == "duplicate" && isService) {
-              $(`#${type}-shared-${id}`).prop("checked", false);
               $(`#${type}-workflows-${id}`).val([workflow.id]).trigger("change");
             }
           },
@@ -746,7 +741,6 @@ function processData(type, id) {
   const isService = type.includes("service") || type == "workflow";
   if (isService) {
     $(id ? `#${type}-workflows-${id}` : `#${type}-workflows`).prop("disabled", false);
-    if (id) $(`#${type}-shared-${id}`).prop("disabled", false);
   }
   call({
     url: `/update/${type}`,

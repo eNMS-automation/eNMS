@@ -17,6 +17,7 @@ better performances expected for large pools.
 - Move terminal application for web SSH feature inside the application
 - Fix submenu bug when the menu is minimized (gentelella bug)
 - Replace prerequisite edge with priority mechanism
+- Allow making non-shared service shared and vice-versa (if the shared service doesn't have more than one workflow).
 
 MIGRATION:
 

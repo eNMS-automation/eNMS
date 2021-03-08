@@ -44,6 +44,7 @@ class ServiceRun:
         self.parent_device = None
         self.run = run
         self.creator = self.run.creator
+        self.start_services = [1]
         self.parent_runtime = kwargs.get("parent_runtime")
         self.runtime = app.get_time()
         app.run_instances[self.runtime] = self

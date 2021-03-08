@@ -38,6 +38,7 @@ To be tested:
 - Pool refactoring
 * dynamic pool content, inclusion / equality / regex
 * pool individual and global refresh mechanism in pool table
+- Conversion shared - non shared for a service. Duplication of shared / non-shared service.
 
 Version 4.0.1
 -------------

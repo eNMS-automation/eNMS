@@ -110,7 +110,6 @@ class ServiceForm(BaseForm):
         "Logging",
         choices=((0, "Disable logging"), *enumerate(app.log_levels, 1)),
         default=1,
-        validation=False,
     )
     multiprocessing = BooleanField("Multiprocessing")
     max_processes = IntegerField("Maximum number of processes", default=15)
@@ -363,7 +362,7 @@ class RestartWorkflowForm(BaseForm):
     action = "eNMS.workflow.restartWorkflow"
     form_type = HiddenField(default="restart_workflow")
     start_services = HiddenField()
-    restart_runtime = SelectField("Restart Runtime", choices=(), validation=False)
+    restart_runtime = SelectField("Restart Runtime", validate_choice=False)
 
 
 class FileForm(BaseForm):

@@ -130,7 +130,9 @@ class AbstractBase(db.base):
 
     def duplicate(self, **kwargs):
         properties = {
-            k: v for (k, v) in self.get_properties().items() if k not in ("id", "name")
+            property: value
+            for property, value in self.get_properties().items()
+            if property not in ("id", "name")
         }
         instance = db.factory(self.type, **{**properties, **kwargs})
         return instance

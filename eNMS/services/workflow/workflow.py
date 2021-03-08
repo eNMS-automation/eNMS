@@ -65,6 +65,7 @@ class Workflow(Service):
     def duplicate(self, workflow=None, clone=None):
         if not clone:
             clone = super().duplicate(workflow)
+        clone.labels = self.labels
         clone_services = {}
         db.session.commit()
         for service in self.services:

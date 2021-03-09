@@ -18,6 +18,7 @@ better performances expected for large pools.
 - Fix submenu bug when the menu is minimized (gentelella bug)
 - Replace prerequisite edge with priority mechanism
 - Allow making non-shared service shared and vice-versa (if the shared service doesn't have more than one workflow).
+- Separate progress for main devices & iteration devices in workflow builder 
 
 MIGRATION:
 

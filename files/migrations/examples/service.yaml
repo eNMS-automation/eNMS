@@ -180,6 +180,8 @@
     '[Regression Workflow: Skip Query with device in Run Once Mode] Subworkflow in SxS mode - workflow targets': *id037
     '[Regression Workflow: Skip, Discard and Disable Result Creation Mechanism] Workflow in DxD mode': *id031
     '[Regression Workflow: Skip, Discard and Disable Result Creation Mechanism] Workflow in SxS mode': *id038
+    '[Regression Workflow: Workflow and Subworkflow Iteration] Subworkflow Device Iteration 2': [
+      0, 0]
     '[Regression Workflow: Workflow and Subworkflow Iteration] Subworkflow Iteration': *id039
     '[Regression Workflow: Workflow and Subworkflow Iteration] Subworkflow Value Iteration': *id039
     '[Regression Workflow: Workflow of Workflows] Regression Workflow: Access Variables from Parent Workflow': *id028
@@ -440,7 +442,7 @@
     '[Regression Workflow: Skip, Discard and Disable Result Creation Mechanism] Workflow in SxS mode': *id081
     '[Regression Workflow: Workflow and Subworkflow Iteration] Subworkflow Device Iteration': !!python/tuple [
       500, 0]
-    '[Regression Workflow: Workflow and Subworkflow Iteration] Subworkflow Device Iteration 2': !!python/tuple [
+    '[Regression Workflow: Workflow and Subworkflow Iteration] Subworkflow Device Iteration 2': [
       500, 0]
     '[Regression Workflow: Workflow and Subworkflow Iteration] Subworkflow Iteration': *id082
     '[Regression Workflow: Workflow and Subworkflow Iteration] Subworkflow Value Iteration': *id082
@@ -7402,11 +7404,13 @@
         \ tests iteration value with a subworkflow on 3 values:\r\n[1, 2, 3] (variable:\
         \ \"subworkflow_iteration\").\r\nThere should be 3 * 3 = 9 results, each result\
         \ containing a combination of \"top-level_iteration\"\r\nand \"subworkflow_iteration\"\
-        .\r\nFinally, the second subworkflow tests subworkflow device iteration, set\
-        \ to\r\n[\"PaloAlto\", \"Austin\"]. Expected: 3 * 2 + 3 = 9 results\r\n(3\
-        \ top-level for Washington, then 3 per iteration device).\r\nThis workflow\
-        \ must be tested both in DxD and SxS w/WF targets run mode."
-      positions: [218, 90]
+        .\r\nThe second subworkflow tests subworkflow device iteration in DxD mode,\r\
+        \nset to [\"PaloAlto\", \"Austin\"]. Expected: 3 * 2 + 3 = 9 results\r\n(3\
+        \ top-level for Washington, then 3 per iteration device).\r\nThe third subworkflow\
+        \ tests subworkflow device iteration in SxS w/ WF targets mode.\r\nExpected\
+        \ 3 results for the subworkflow, and 9 results for the service within it.\r\
+        \nThis workflow must be tested both in DxD and SxS w/ WF targets run mode."
+      positions: [212, 143]
     1aaeee9b-2ae3-428f-86c4-a0ddba662139:
       alignment: left
       content: "Iteration value retrieved from payload:\r\n\"get_var(\"device_iteration\"\
@@ -7422,7 +7426,7 @@
       alignment: left
       content: 'Hardcoded iteration values: [1, 2, 3]'
       positions: [-216, 445]
-  last_modified: '2021-03-09 03:17:30.475511'
+  last_modified: '2021-03-09 03:22:31.566419'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -7502,7 +7506,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: ['All instances (devices, links, services and users)']
+  pools: []
   positions:
     'Regression Workflow J: Workflow and Subworkflow Iteration': [226, -76]
     'Regression Workflow: Workflow and Subworkflow Iteration': [-246, 144]
@@ -15712,7 +15716,7 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels: {}
-  last_modified: '2021-03-09 03:16:32.268533'
+  last_modified: '2021-03-09 03:22:55.506987'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -15725,9 +15729,9 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: ['All instances (devices, links, services and users)']
+  pools: []
   positions:
-    'Regression Workflow: Workflow and Subworkflow Iteration': [599, 257]
+    'Regression Workflow: Workflow and Subworkflow Iteration': [626, 286]
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -15738,7 +15742,8 @@
   scoped_name: Subworkflow Device Iteration 2
   send_notification: false
   send_notification_method: mail
-  services: ['[Shared] Start', '[Shared] End']
+  services: ['[Shared] Start', '[Shared] End', '[[Regression Workflow: Workflow and
+      Subworkflow Iteration] Subworkflow Device Iteration 2] Service that does nothing']
   shared: false
   skip: {}
   skip_query: ''
@@ -15754,3 +15759,70 @@
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
+- access_groups: admin
+  completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credential_type: any
+  default_access: creator
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2021-03-09 03:22:49.943322'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[[Regression Workflow: Workflow and Subworkflow Iteration] Subworkflow Device
+    Iteration 2] Service that does nothing'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: ['All instances (devices, links, services and users)']
+  positions:
+    '[Regression Workflow: Workflow and Subworkflow Iteration] Subworkflow Device Iteration 2': [
+      233, -24]
+  postprocessing: ''
+  postprocessing_mode: always
+  preprocessing: ''
+  priority: 1
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: Service that does nothing
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: success
+  source_code: "\r\n# Click on \"i\" to right of \"Source Code\" for examples.\r\n\
+    \r\nresult = {}\r\nresults[\"success\"] = True\r\nresults[\"result\"] = result"
+  target_devices: []
+  target_pools: []
+  time_between_retries: 10
+  type: python_snippet_service
+  update_pools_after_running: false
+  update_target_pools: false
+  validation_condition: none
+  validation_method: text
+  vendor: ''
+  waiting_time: 0

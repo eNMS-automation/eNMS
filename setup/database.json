@@ -187,6 +187,17 @@
           "foreign_key": "pool"
         }
       },
+      "run_service": {
+        "model1": {
+          "column": "run_id",
+          "foreign_key": "run",
+          "kwargs": { "ondelete": "cascade" }
+        },
+        "model2": {
+          "column": "service_id",
+          "foreign_key": "service"
+        }
+      },
       "service_device": {
         "model1": {
           "column": "service_id",

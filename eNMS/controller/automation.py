@@ -2,7 +2,7 @@ from collections import defaultdict
 from flask_login import current_user
 from napalm._SUPPORTED_DRIVERS import SUPPORTED_DRIVERS
 from netmiko.ssh_dispatcher import CLASS_MAPPER, FILE_TRANSFER_MAP
-from operator import itemgetter
+from operator import attrgetter, itemgetter
 from pathlib import Path
 from re import search, sub
 from threading import Thread
@@ -19,6 +19,7 @@ except ImportError as exc:
 
 from eNMS.controller.base import BaseController
 from eNMS.database import db
+from eNMS.models import models
 
 
 class AutomationController(BaseController):
@@ -227,15 +228,13 @@ class AutomationController(BaseController):
         service = db.fetch("service", id=service_id, allow_none=True)
         if not service:
             raise db.rbac_error
-        runs = db.fetch_all("run", service_id=service_id)
-        if not runtime:
-            runtime = "latest"
-        if runs and runtime != "normal":
-            if runtime == "latest":
-                runtime = runs[-1].parent_runtime
-            latest_runs = [r for r in runs if r.parent_runtime == runtime]
-            if latest_runs:
-                state = latest_runs[0].get_state()
+        runs = db.query("run").filter(models["run"].services.any(id=service_id)).all()
+        if runtime != "normal" and runs:
+            if runtime == "latest":     
+                run = sorted(runs, key=attrgetter("runtime"))[0]
+            else:
+                run = db.fetch("run", parent_runtime=runtime)
+            state = run.get_state()
         return {
             "service": service.to_dict(include=["services", "edges", "superworkflow"]),
             "runtimes": sorted(set((r.parent_runtime, r.creator) for r in runs)),

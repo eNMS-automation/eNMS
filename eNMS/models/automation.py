@@ -80,17 +80,14 @@ class Service(AbstractBase):
     postprocessing = db.Column(db.LargeString)
     postprocessing_mode = db.Column(db.TinyString, default="always")
     log_level = db.Column(Integer, default=1)
-    runs = relationship(
-        "Run",
-        foreign_keys="[Run.service_id]",
-        back_populates="service",
-        cascade="all, delete-orphan",
-    )
     logs = relationship(
         "ServiceLog",
         foreign_keys="[ServiceLog.service_id]",
         back_populates="service",
         cascade="all, delete-orphan",
+    )
+    runs = relationship(
+        "Run", secondary=db.run_service_table, back_populates="services"
     )
     maximum_runs = db.Column(Integer, default=1)
     multiprocessing = db.Column(Boolean, default=False)
@@ -298,23 +295,18 @@ class Run(AbstractBase):
     )
     service_id = db.Column(Integer, ForeignKey("service.id"))
     service = relationship(
-        "Service", back_populates="runs", foreign_keys="Run.service_id"
+        "Service", foreign_keys="Run.service_id"
     )
     service_name = association_proxy(
         "service", "scoped_name", info={"name": "service_name"}
+    )
+    services = relationship(
+        "Service", secondary=db.run_service_table, back_populates="runs"
     )
     placeholder_id = db.Column(Integer, ForeignKey("service.id", ondelete="SET NULL"))
     placeholder = relationship("Service", foreign_keys="Run.placeholder_id")
     start_service_id = db.Column(Integer, ForeignKey("service.id", ondelete="SET NULL"))
     start_service = relationship("Service", foreign_keys="Run.start_service_id")
-    start_service_name = association_proxy(
-        "start_service", "scoped_name", info={"name": "start_service_name"}
-    )
-    workflow_id = db.Column(Integer, ForeignKey("workflow.id", ondelete="cascade"))
-    workflow = relationship("Workflow", foreign_keys="Run.workflow_id")
-    workflow_name = association_proxy(
-        "workflow", "scoped_name", info={"name": "workflow_name"}
-    )
     task_id = db.Column(Integer, ForeignKey("task.id", ondelete="SET NULL"))
     task = relationship("Task", foreign_keys="Run.task_id")
     state = db.Column(db.Dict, info={"log_change": False})

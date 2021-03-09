@@ -586,7 +586,7 @@
         "width": "100px"
       },
       {
-        "data": "start_service_name",
+        "data": "service_name",
         "title": "Service",
         "search": "text",
         "orderable": false

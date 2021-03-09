@@ -130,7 +130,7 @@
     'Regression Workflow: Unix Command & Chell, Ping Service, Jump on Connect mechanism': *id025
     'Regression Workflow: Using get_var, set_var, get_result functions': *id026
     'Regression Workflow: VRF Creation and Deletion with Netmiko': *id002
-    'Regression Workflow: Workflow and Subworkflow Iteration': [-195, 136]
+    'Regression Workflow: Workflow and Subworkflow Iteration': [-313, 364]
     'Regression Workflow: Workflow of Workflows': *id027
     'Regression workflow P: large workflow (scalability)': *id017
     Subworkflow 1: !!python/tuple [0, 0]
@@ -382,7 +382,7 @@
     'Regression Workflow: Unix Command & Chell, Ping Service, Jump on Connect mechanism': *id067
     'Regression Workflow: Using get_var, set_var, get_result functions': *id068
     'Regression Workflow: VRF Creation and Deletion with Netmiko': *id044
-    'Regression Workflow: Workflow and Subworkflow Iteration': [770, 126]
+    'Regression Workflow: Workflow and Subworkflow Iteration': [644, 233]
     'Regression Workflow: Workflow of Workflows': *id069
     'Regression workflow P: large workflow (scalability)': *id059
     Subworkflow 1: !!python/tuple [0, 0]
@@ -7418,17 +7418,17 @@
       content: "Iteration value retrieved from payload:\r\n\"get_var(\"device_iteration\"\
         , device=device.name)\"\r\nShould evaluate to \"[\"Atlanta\", \"SanFrancisco\"\
         ]\".\r\nWorkflow in SxS w/ WF targets mode."
-      positions: [688, 509]
+      positions: [684, 541]
     4a67748b-2d06-47fc-b648-39e02d6cf123:
       alignment: left
       content: "Hardcoded iteration values: [\"PaloAlto\", \"Austin\"]\r\nWorkflow\
         \ in DxD mode"
-      positions: [233, 567]
+      positions: [232, 582]
     7c717702-3a49-4a67-b1d0-c8471f149114:
       alignment: left
       content: 'Hardcoded iteration values: [1, 2, 3]'
-      positions: [-193, 568]
-  last_modified: '2021-03-09 03:33:12.014668'
+      positions: [-195, 578]
+  last_modified: '2021-03-09 06:58:01.850663'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -7511,7 +7511,7 @@
   pools: []
   positions:
     'Regression Workflow J: Workflow and Subworkflow Iteration': [226, -76]
-    'Regression Workflow: Workflow and Subworkflow Iteration': [-223, 267]
+    'Regression Workflow: Workflow and Subworkflow Iteration': [-210, 233]
   postprocessing: set_var("device_iteration", ["Atlanta", "SanFrancisco"], device=device.name)
   postprocessing_mode: always
   preprocessing: ''

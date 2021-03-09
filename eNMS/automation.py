@@ -40,6 +40,7 @@ from eNMS.models import models
 class ServiceRun:
     def __init__(self, run, **kwargs):
         self.is_main_run = False
+        self.iteration_run = False
         self.workflow = None
         self.parent_device = None
         self.run = run
@@ -50,7 +51,10 @@ class ServiceRun:
         app.run_instances[self.runtime] = self
         for key, value in kwargs.items():
             setattr(self, key, value)
+        self.progress_key = "iteration_device" if self.iteration_run else "device"
         self.main_run = run if self.is_main_run else run.main_run
+        if self.service not in self.main_run.services:
+            self.main_run.services.append(self.service)
         if self.is_main_run:
             self.path = str(self.service.id)
         else:
@@ -274,10 +278,11 @@ class ServiceRun:
                 self.log("info", result, logger="security")
                 return {"result": result, "success": False}
         summary = {"failure": [], "success": []}
-        if self.iteration_devices and not self.parent_device:
+        if self.iteration_devices and not self.iteration_run:
             if not self.workflow:
                 result = "Device iteration not allowed outside of a workflow"
                 return {"success": False, "result": result, "runtime": self.runtime}
+            self.write_state(f"progress/device/total", len(self.target_devices), "increment")
             for device in self.target_devices:
                 key = "success" if self.device_iteration(device) else "failure"
                 self.write_state(f"progress/device/{key}", 1, "increment")
@@ -287,7 +292,7 @@ class ServiceRun:
                 "summary": summary,
                 "runtime": self.runtime,
             }
-        self.write_state("progress/device/total", len(self.target_devices), "increment")
+        self.write_state(f"progress/{self.progress_key}/total", len(self.target_devices), "increment")
         non_skipped_targets, skipped_targets, results = [], [], []
         skip_service = self.skip.get(getattr(self.workflow, "name", None))
         if skip_service:
@@ -298,7 +303,7 @@ class ServiceRun:
                 skip_device = self.eval(self.skip_query, **locals())[0]
             if skip_device:
                 if device:
-                    self.write_state("progress/device/skipped", 1, "increment")
+                    self.write_state(f"progress/{self.progress_key}/skipped", 1, "increment")
                 if self.skip_value == "discard":
                     continue
                 device_results = {
@@ -323,7 +328,7 @@ class ServiceRun:
                 results["summary"] = summary
             for key in ("success", "failure"):
                 device_number = len(results["summary"][key])
-                self.write_state(f"progress/device/{key}", device_number)
+                self.write_state(f"progress/{self.progress_key}/{key}", device_number)
             summary[self.skip_value].extend(skipped_targets)
             return results
         else:
@@ -498,7 +503,7 @@ class ServiceRun:
             if getattr(self, "close_connection", False) or self.is_main_run:
                 self.close_device_connection(device.name)
             status = "success" if results["success"] else "failure"
-            self.write_state(f"progress/device/{status}", 1, "increment")
+            self.write_state(f"progress/{self.progress_key}/{status}", 1, "increment")
             self.create_result(
                 {"runtime": app.get_time(), **results}, device, commit=commit
             )

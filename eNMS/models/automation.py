@@ -294,9 +294,7 @@ class Run(AbstractBase):
         "Pool", secondary=db.run_pool_table, back_populates="runs"
     )
     service_id = db.Column(Integer, ForeignKey("service.id"))
-    service = relationship(
-        "Service", foreign_keys="Run.service_id"
-    )
+    service = relationship("Service", foreign_keys="Run.service_id")
     service_name = association_proxy(
         "service", "scoped_name", info={"name": "service_name"}
     )

@@ -4,10 +4,7 @@ from flask_login import current_user
 from git import Repo
 from io import BytesIO
 from logging import info
-from os import getenv
-from subprocess import Popen
 from uuid import uuid4
-from werkzeug.utils import secure_filename
 from xlrd import open_workbook
 from xlrd.biffh import XLRDError
 from xlwt import Workbook

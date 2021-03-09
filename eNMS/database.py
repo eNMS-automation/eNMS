@@ -367,7 +367,7 @@ class Database:
                     instance = transaction(_class, **kwargs)
                     self.session.commit()
                     break
-                except Exception:
+                except Exception as exc:
                     error(f"Commit n°{index} failed ({format_exc()})")
                     self.session.rollback()
                     if index == self.retry_commit_number - 1:

@@ -230,7 +230,7 @@ class AutomationController(BaseController):
             raise db.rbac_error
         runs = db.query("run").filter(models["run"].services.any(id=service_id)).all()
         if runtime != "normal" and runs:
-            if runtime == "latest":     
+            if runtime == "latest":
                 run = sorted(runs, key=attrgetter("runtime"))[0]
             else:
                 run = db.fetch("run", parent_runtime=runtime)

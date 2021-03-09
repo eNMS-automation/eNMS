@@ -383,9 +383,11 @@ class BaseController:
         except Exception as exc:
             db.session.rollback()
             if isinstance(exc, IntegrityError):
-                return {
-                    "alert": f"There is already a {instance.class_type} with the same parameters."
-                }
+                alert = (
+                    f"There is already a {instance.class_type} "
+                    "with the same parameters."
+                )
+                return {"alert": alert}
             self.log("error", format_exc())
             return {"alert": str(exc)}
 

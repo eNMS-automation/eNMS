@@ -130,7 +130,7 @@
     'Regression Workflow: Unix Command & Chell, Ping Service, Jump on Connect mechanism': *id025
     'Regression Workflow: Using get_var, set_var, get_result functions': *id026
     'Regression Workflow: VRF Creation and Deletion with Netmiko': *id002
-    'Regression Workflow: Workflow and Subworkflow Iteration': [-218, 13]
+    'Regression Workflow: Workflow and Subworkflow Iteration': [-195, 136]
     'Regression Workflow: Workflow of Workflows': *id027
     'Regression workflow P: large workflow (scalability)': *id017
     Subworkflow 1: !!python/tuple [0, 0]
@@ -180,6 +180,8 @@
     '[Regression Workflow: Skip Query with device in Run Once Mode] Subworkflow in SxS mode - workflow targets': *id037
     '[Regression Workflow: Skip, Discard and Disable Result Creation Mechanism] Workflow in DxD mode': *id031
     '[Regression Workflow: Skip, Discard and Disable Result Creation Mechanism] Workflow in SxS mode': *id038
+    '[Regression Workflow: Workflow and Subworkflow Iteration] Subworkflow Device Iteration': [
+      0, 0]
     '[Regression Workflow: Workflow and Subworkflow Iteration] Subworkflow Device Iteration 2': [
       0, 0]
     '[Regression Workflow: Workflow and Subworkflow Iteration] Subworkflow Iteration': *id039
@@ -380,7 +382,7 @@
     'Regression Workflow: Unix Command & Chell, Ping Service, Jump on Connect mechanism': *id067
     'Regression Workflow: Using get_var, set_var, get_result functions': *id068
     'Regression Workflow: VRF Creation and Deletion with Netmiko': *id044
-    'Regression Workflow: Workflow and Subworkflow Iteration': [747, 3]
+    'Regression Workflow: Workflow and Subworkflow Iteration': [770, 126]
     'Regression Workflow: Workflow of Workflows': *id069
     'Regression workflow P: large workflow (scalability)': *id059
     Subworkflow 1: !!python/tuple [0, 0]
@@ -440,7 +442,7 @@
     '[Regression Workflow: Skip Query with device in Run Once Mode] Subworkflow in SxS mode - workflow targets': *id080
     '[Regression Workflow: Skip, Discard and Disable Result Creation Mechanism] Workflow in DxD mode': *id073
     '[Regression Workflow: Skip, Discard and Disable Result Creation Mechanism] Workflow in SxS mode': *id081
-    '[Regression Workflow: Workflow and Subworkflow Iteration] Subworkflow Device Iteration': !!python/tuple [
+    '[Regression Workflow: Workflow and Subworkflow Iteration] Subworkflow Device Iteration': [
       500, 0]
     '[Regression Workflow: Workflow and Subworkflow Iteration] Subworkflow Device Iteration 2': [
       500, 0]
@@ -7410,23 +7412,23 @@
         \ tests subworkflow device iteration in SxS w/ WF targets mode.\r\nExpected\
         \ 3 results for the subworkflow, and 9 results for the service within it.\r\
         \nThis workflow must be tested both in DxD and SxS w/ WF targets run mode."
-      positions: [212, 143]
+      positions: [235, 266]
     1aaeee9b-2ae3-428f-86c4-a0ddba662139:
       alignment: left
       content: "Iteration value retrieved from payload:\r\n\"get_var(\"device_iteration\"\
         , device=device.name)\"\r\nShould evaluate to \"[\"Atlanta\", \"SanFrancisco\"\
         ]\".\r\nWorkflow in SxS w/ WF targets mode."
-      positions: [665, 386]
+      positions: [688, 509]
     4a67748b-2d06-47fc-b648-39e02d6cf123:
       alignment: left
       content: "Hardcoded iteration values: [\"PaloAlto\", \"Austin\"]\r\nWorkflow\
         \ in DxD mode"
-      positions: [210, 444]
+      positions: [233, 567]
     7c717702-3a49-4a67-b1d0-c8471f149114:
       alignment: left
       content: 'Hardcoded iteration values: [1, 2, 3]'
-      positions: [-216, 445]
-  last_modified: '2021-03-09 03:22:31.566419'
+      positions: [-193, 568]
+  last_modified: '2021-03-09 03:33:12.014668'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -7509,7 +7511,7 @@
   pools: []
   positions:
     'Regression Workflow J: Workflow and Subworkflow Iteration': [226, -76]
-    'Regression Workflow: Workflow and Subworkflow Iteration': [-246, 144]
+    'Regression Workflow: Workflow and Subworkflow Iteration': [-223, 267]
   postprocessing: set_var("device_iteration", ["Atlanta", "SanFrancisco"], device=device.name)
   postprocessing_mode: always
   preprocessing: ''
@@ -7578,7 +7580,7 @@
   pools: []
   positions:
     'Regression Workflow J: Workflow and Subworkflow Iteration': [218, 171]
-    'Regression Workflow: Workflow and Subworkflow Iteration': [-205, 354]
+    'Regression Workflow: Workflow and Subworkflow Iteration': [-182, 477]
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -15648,7 +15650,7 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels: {}
-  last_modified: '2021-03-09 03:03:38.800616'
+  last_modified: '2021-03-09 03:31:55.423493'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -15663,7 +15665,7 @@
   operating_system: ''
   pools: []
   positions:
-    'Regression Workflow: Workflow and Subworkflow Iteration': [210, 348]
+    'Regression Workflow: Workflow and Subworkflow Iteration': [233, 471]
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -15674,7 +15676,8 @@
   scoped_name: Subworkflow Device Iteration
   send_notification: false
   send_notification_method: mail
-  services: ['[Shared] Start', '[Shared] End']
+  services: ['[Shared] Start', '[Shared] End', '[[Regression Workflow: Workflow and
+      Subworkflow Iteration] Subworkflow Device Iteration] Service that does nothing']
   shared: false
   skip: {}
   skip_query: ''
@@ -15731,7 +15734,7 @@
   operating_system: ''
   pools: []
   positions:
-    'Regression Workflow: Workflow and Subworkflow Iteration': [626, 286]
+    'Regression Workflow: Workflow and Subworkflow Iteration': [649, 409]
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -15796,10 +15799,77 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: ['All instances (devices, links, services and users)']
+  pools: []
   positions:
     '[Regression Workflow: Workflow and Subworkflow Iteration] Subworkflow Device Iteration 2': [
       233, -24]
+  postprocessing: ''
+  postprocessing_mode: always
+  preprocessing: ''
+  priority: 1
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: Service that does nothing
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: success
+  source_code: "\r\n# Click on \"i\" to right of \"Source Code\" for examples.\r\n\
+    \r\nresult = {}\r\nresults[\"success\"] = True\r\nresults[\"result\"] = result"
+  target_devices: []
+  target_pools: []
+  time_between_retries: 10
+  type: python_snippet_service
+  update_pools_after_running: false
+  update_target_pools: false
+  validation_condition: none
+  validation_method: text
+  vendor: ''
+  waiting_time: 0
+- access_groups: admin
+  completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credential_type: any
+  default_access: creator
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2021-03-09 03:31:47.477556'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[[Regression Workflow: Workflow and Subworkflow Iteration] Subworkflow Device
+    Iteration] Service that does nothing'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions:
+    '[Regression Workflow: Workflow and Subworkflow Iteration] Subworkflow Device Iteration': [
+      241, -26]
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''

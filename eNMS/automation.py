@@ -53,8 +53,6 @@ class ServiceRun:
         self.main_run = run if self.is_main_run else run.main_run
         if self.is_main_run:
             self.path = str(self.service.id)
-        elif self.parent_device:
-            self.path = self.parent.path
         else:
             self.path = f"{run.path}>{self.service.id}"
         self.start_run()
@@ -252,6 +250,7 @@ class ServiceRun:
         )
         return ServiceRun(
             self.run,
+            iteration_run=True,
             payload=self.payload,
             service=self.service,
             target_devices=derived_devices,

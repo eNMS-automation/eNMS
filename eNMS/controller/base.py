@@ -47,6 +47,13 @@ class BaseController:
 
     log_levels = ["debug", "info", "warning", "error", "critical"]
 
+    status_log_level = {
+        200: "info",
+        403: "warning",
+        404: "info",
+        500: "error"
+    }
+
     rest_endpoints = [
         "get_cluster_status",
         "get_git_content",

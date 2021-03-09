@@ -38,6 +38,7 @@ from eNMS.setup import properties, themes, visualization
 
 
 class Server(Flask):
+
     def __init__(self, mode=None):
         static_folder = str(app.path / "eNMS" / "static")
         super().__init__(__name__, static_folder=static_folder)
@@ -56,10 +57,9 @@ class Server(Flask):
     def monitor_requests(function):
         @wraps(function)
         def decorated_function(*args, **kwargs):
+            remote_address = request.environ["REMOTE_ADDR"]
+            client_address = request.environ.get("HTTP_X_FORWARDED_FOR", remote_address)
             if not current_user.is_authenticated:
-                client_address = request.environ.get(
-                    "HTTP_X_FORWARDED_FOR", request.environ["REMOTE_ADDR"]
-                )
                 app.log(
                     "warning",
                     (
@@ -69,34 +69,44 @@ class Server(Flask):
                 )
                 return redirect(url_for("blueprint.route", page="login"))
             else:
-                method = request.method.lower()
+                username = current_user.name
                 endpoint = f"/{request.path.split('/')[1]}"
-                endpoint_rbac = app.rbac[f"{method}_requests"].get(endpoint)
+                request_property = f"{request.method.lower()}_requests"
+                endpoint_rbac = app.rbac[request_property].get(endpoint)
                 if not endpoint_rbac:
-                    error = 404
+                    status_code = 404
                 elif not current_user.is_admin and (
                     endpoint_rbac == "admin"
                     or endpoint_rbac == "access"
-                    and endpoint not in getattr(current_user, f"{method}_requests")
+                    and endpoint not in getattr(current_user, request_property)
                 ):
-                    error = 403
+                    status_code = 403
                 else:
                     try:
-                        return function(*args, **kwargs)
+                        result = function(*args, **kwargs)
+                        status_code = 200
                     except db.rbac_error:
-                        error = 403
+                        status_code = 403
                     except Exception:
-                        error = 500
-                        app.log("error", format_exc(), change_log=False)
-                if method == "get":
-                    return render_template("error.html", error=error), error
+                        status_code, traceback = 500, format_exc()
+                log = (
+                    f"USER: {username} ({client_address}) - "
+                    f"{request.method} {endpoint} - ({status_code})"
+                )
+                if status_code == 500:
+                    log += f"\n{traceback}"
+                app.log(app.status_log_level[status_code], log, change_log=False)
+                if status_code == 200:
+                    return result
+                elif request.method == "GET":
+                    return render_template("error.html", error=status_code), status_code
                 else:
                     message = {
                         403: "Operation not allowed.",
                         404: "Invalid POST request.",
                         500: "Internal Server Error.",
-                    }[error]
-                    return jsonify({"alert": f"Error {error} - {message}"})
+                    }[status_code]
+                    return jsonify({"alert": f"Error {status_code} - {message}"})
 
         return decorated_function
 

@@ -19,7 +19,8 @@ better performances expected for large pools.
 - Replace prerequisite edge with priority mechanism
 - Allow making non-shared service shared and vice-versa (if the shared service doesn't have more than one workflow).
 - Separate progress for main devices & iteration devices in workflow builder
-- HTTP requests logging: all requests are now logged by eNMS and not by werkzeug like before. 
+- HTTP requests logging: all requests are now logged by eNMS and not by werkzeug like before.
+=> fine grained controlled for what is logged for each request. The log now contains the username.
 
 MIGRATION:
 

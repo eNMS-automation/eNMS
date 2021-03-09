@@ -723,7 +723,7 @@
   validation_method: text
   vendor: ''
   vrf_name: configure_BGP_test
-  waiting_time: 100
+  waiting_time: 0
 - access_groups: ''
   close_connection: false
   completion_time: 1

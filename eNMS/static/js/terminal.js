@@ -1,7 +1,6 @@
 /*
 global
 csrfToken: false
-device: false
 FitAddon: false
 io: false
 session: false

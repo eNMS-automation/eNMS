@@ -4,7 +4,6 @@
 # memory by replacing "itemgetter(2)" with "itemgetter(1)".
 # The "MAX_RESULTS" variable limits the output to the first
 # MAX_RESULTS results.
-
 # flake8: noqa
 
 from operator import itemgetter

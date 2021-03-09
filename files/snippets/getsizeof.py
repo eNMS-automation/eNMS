@@ -3,7 +3,6 @@
 # napalm and scrapli connections) and the logs cache (stores service logs).
 # Memory usage of these variables should not grow over time are their content
 # is supposed to be deleted when no longer useful.
-
 # flake8: noqa
 
 from sys import getsizeof

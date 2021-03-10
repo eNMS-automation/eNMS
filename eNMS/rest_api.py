@@ -1,4 +1,6 @@
 from collections import defaultdict
+from flask_login import current_user
+from threading import Thread
 from traceback import format_exc
 from uuid import getnode
 
@@ -19,6 +21,7 @@ class RestApi:
         "POST": {
             "instance": "update_instance",
             "migrate": "migrate",
+            "run_service": "run_service",
         },
         "DELETE": {
             "instance": "delete_instance",
@@ -53,6 +56,45 @@ class RestApi:
 
     def migrate(self, direction, **kwargs):
         return getattr(app, f"migration_{direction}")(**kwargs)
+
+    def run_service(self, **kwargs):
+        print(current_user)
+        data = {
+            "trigger": "REST",
+            "creator": current_user.name,
+            **kwargs,
+        }
+        errors, devices, pools = [], [], []
+        service = db.fetch("service", name=data["name"], rbac="run")
+        handle_asynchronously = data.get("async", False)
+        for device_name in data.get("devices", ""):
+            device = db.fetch("device", name=device_name)
+            if device:
+                devices.append(device.id)
+            else:
+                errors.append(f"No device with the name '{device_name}'")
+        for device_ip in data.get("ip_addresses", ""):
+            device = db.fetch("device", ip_address=device_ip)
+            if device:
+                devices.append(device.id)
+            else:
+                errors.append(f"No device with the IP address '{device_ip}'")
+        for pool_name in data.get("pools", ""):
+            pool = db.fetch("pool", name=pool_name)
+            if pool:
+                pools.append(pool.id)
+            else:
+                errors.append(f"No pool with the name '{pool_name}'")
+        if errors:
+            return {"errors": errors}
+        if devices or pools:
+            data.update({"target_devices": devices, "target_pools": pools})
+        data["runtime"] = runtime = app.get_time()
+        if handle_asynchronously:
+            Thread(target=app.run, args=(service.id,), kwargs=data).start()
+            return {"errors": errors, "runtime": runtime}
+        else:
+            return {**app.run(service.id, **data), "errors": errors}
 
     def update_instance(self, model, **data):
         result = defaultdict(list)

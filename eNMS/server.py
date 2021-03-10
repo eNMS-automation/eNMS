@@ -428,47 +428,6 @@ class Server(Flask):
 
         api = Api(self, decorators=[self.csrf.exempt])
 
-        class RunService(Resource):
-            decorators = [self.monitor_rest_request]
-
-            def post(self):
-                data = {
-                    "trigger": "REST",
-                    "creator": request.authorization["username"],
-                    **request.get_json(force=True),
-                }
-                errors, devices, pools = [], [], []
-                service = db.fetch("service", name=data["name"], rbac="run")
-                handle_asynchronously = data.get("async", False)
-                for device_name in data.get("devices", ""):
-                    device = db.fetch("device", name=device_name)
-                    if device:
-                        devices.append(device.id)
-                    else:
-                        errors.append(f"No device with the name '{device_name}'")
-                for device_ip in data.get("ip_addresses", ""):
-                    device = db.fetch("device", ip_address=device_ip)
-                    if device:
-                        devices.append(device.id)
-                    else:
-                        errors.append(f"No device with the IP address '{device_ip}'")
-                for pool_name in data.get("pools", ""):
-                    pool = db.fetch("pool", name=pool_name)
-                    if pool:
-                        pools.append(pool.id)
-                    else:
-                        errors.append(f"No pool with the name '{pool_name}'")
-                if errors:
-                    return {"errors": errors}
-                if devices or pools:
-                    data.update({"target_devices": devices, "target_pools": pools})
-                data["runtime"] = runtime = app.get_time()
-                if handle_asynchronously:
-                    Thread(target=app.run, args=(service.id,), kwargs=data).start()
-                    return {"errors": errors, "runtime": runtime}
-                else:
-                    return {**app.run(service.id, **data), "errors": errors}
-
         class RunTask(Resource):
             decorators = [self.monitor_rest_request]
 
@@ -549,10 +508,8 @@ class Server(Flask):
                 f"/rest/{endpoint}",
             )
 
-        api.add_resource(RunService, "/rest/run_service")
         api.add_resource(RunTask, "/rest/run_task")
         api.add_resource(Search, "/rest/search")
-        api.add_resource(Migrate, "/rest/migrate/<string:direction>")
         api.add_resource(Topology, "/rest/topology/<string:direction>")
 
 

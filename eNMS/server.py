@@ -1,12 +1,9 @@
-from collections import defaultdict
 from datetime import timedelta
 from flask import (
     abort,
     Blueprint,
     Flask,
-    g,
     jsonify,
-    make_response,
     redirect,
     render_template,
     request,
@@ -23,7 +20,6 @@ from itertools import chain
 from os import getenv, read, write
 from pty import fork
 from subprocess import run
-from threading import Thread
 from time import sleep
 from traceback import format_exc
 

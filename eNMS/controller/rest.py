@@ -7,6 +7,18 @@ from eNMS.database import db
 
 
 class RestController(BaseController):
+
+    rest_routes = {
+        "GET": {
+            "is_alive": "is_alive",
+            "query": "query"
+        },
+        "POST": {
+            "instance": "update_instance"
+        },
+        "DELETE": {}
+    }
+
     def instance(self, model, **data):
         result = defaultdict(list)
         if not isinstance(data, list):

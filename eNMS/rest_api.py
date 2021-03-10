@@ -23,6 +23,7 @@ class RestApi:
             "migrate": "migrate",
             "run_service": "run_service",
             "run_task": "run_task",
+            "search": "search",
         },
         "DELETE": {
             "instance": "delete_instance",
@@ -118,6 +119,18 @@ class RestApi:
         if task.pools:
             data["target_pools"] = [pool.id for pool in task.pools]
         Thread(target=app.run, args=(task.service.id,), kwargs=data).start()
+
+    def search(self, **kwargs):
+        filtering_kwargs = {
+            "draw": 1,
+            "columns": [{"data": column} for column in kwargs["columns"]],
+            "order": [{"column": 0, "dir": "asc"}],
+            "start": 0,
+            "length": kwargs.get("maximum_return_records", 10),
+            "form": kwargs.get("search_criteria", {}),
+            "rest_api_request": True,
+        }
+        return app.filtering(kwargs["type"], **filtering_kwargs)["data"]
 
     def update_instance(self, model, **data):
         result = defaultdict(list)

@@ -428,13 +428,6 @@ class Server(Flask):
 
         api = Api(self, decorators=[self.csrf.exempt])
 
-        class Migrate(Resource):
-            decorators = [self.monitor_rest_request]
-
-            def post(self, direction):
-                kwargs = request.get_json(force=True)
-                return getattr(app, f"migration_{direction}")(**kwargs)
-
         class RunService(Resource):
             decorators = [self.monitor_rest_request]
 

@@ -16,8 +16,13 @@ class RestApi:
             "query": "query",
             "result": "get_result",
         },
-        "POST": {"instance": "update_instance"},
-        "DELETE": {"instance": "delete_instance"},
+        "POST": {
+            "instance": "update_instance",
+            "migrate": "migrate",
+        },
+        "DELETE": {
+            "instance": "delete_instance",
+        },
     }
 
     def get_configuration(self, device_name, property="configuration"):
@@ -45,6 +50,9 @@ class RestApi:
 
     def delete_instance(self, model, name):
         return db.delete(model, name=name)
+
+    def migrate(self, direction, **kwargs):
+        return getattr(app, f"migration_{direction}")(**kwargs)
 
     def update_instance(self, model, **data):
         result = defaultdict(list)

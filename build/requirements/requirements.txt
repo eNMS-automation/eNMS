@@ -2,7 +2,6 @@ apscheduler
 argon2-cffi
 dicttoxml
 flask
-flask_httpauth
 flask_login
 flask-restful
 flask-socketio

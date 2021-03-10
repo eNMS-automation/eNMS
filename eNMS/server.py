@@ -38,7 +38,6 @@ from eNMS.setup import properties, themes, visualization
 
 
 class Server(Flask):
-
     def __init__(self, mode=None):
         static_folder = str(app.path / "eNMS" / "static")
         super().__init__(__name__, static_folder=static_folder)
@@ -231,27 +230,24 @@ class Server(Flask):
             return render_template("error.html", error=404), 404
 
     def configure_authentication(self):
-        @self.auth.verify_password
-        def verify_password(username, password):
-            user = app.authenticate_user(name=username, password=password)
-            if user:
-                request_type = f"{request.method.lower()}_requests"
-                endpoint = "/".join(request.path.split("/")[:3])
-                if user.is_admin or endpoint in getattr(user, request_type, []):
-                    login_user(user)
-                    return True
-                g.status = 403
-            else:
-                g.status = 401
-
-        @self.auth.get_password
-        def get_password(username):
-            return getattr(db.get_user(username), "password", False)
-
-        @self.auth.error_handler
-        def unauthorized():
-            message = f"{'Wrong' if g.status == 401 else 'Insufficient'} credentials"
-            return make_response(jsonify({"message": message}), g.status)
+        @self.before_request
+        def rest_authentication():
+            if request.path.startswith("/rest/"):
+                user = app.authenticate_user(
+                    name=request.authorization["username"],
+                    password=request.authorization["password"],
+                )
+                if user:
+                    request_type = f"{request.method.lower()}_requests"
+                    endpoint = "/".join(request.path.split("/")[:3])
+                    if user.is_admin or endpoint in getattr(user, request_type, []):
+                        login_user(user)
+                        return
+                    status = 403
+                else:
+                    status = 401
+                message = f"{'Wrong' if status == 401 else 'Insufficient'} credentials"
+                return jsonify({"message": message}), status
 
     def configure_routes(self):
         blueprint = Blueprint("blueprint", __name__, template_folder="../templates")
@@ -481,7 +477,7 @@ class Server(Flask):
                     }
 
         class UpdateInstance(Resource):
-            decorators = [self.auth.login_required, self.monitor_rest_request]
+            decorators = [self.auth.login_required, self.monitor_requests]
 
             def post(self, model):
                 data, result = request.get_json(force=True), defaultdict(list)

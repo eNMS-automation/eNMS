@@ -33,6 +33,8 @@ class AdministrationController(BaseController):
         if method not in self.settings["authentication"]["methods"]:
             return False
         elif method == "database":
+            if not user:
+                return False
             hash = self.settings["security"]["hash_user_passwords"]
             verify = argon2.verify if hash else str.__eq__
             user_password = self.get_password(user.password)

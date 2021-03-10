@@ -373,7 +373,8 @@ class Server(Flask):
             else:
                 kwargs = request.args.to_dict()
             with db.session_scope():
-                return jsonify(self.rest_api.process(method, endpoint, args, kwargs))
+                endpoint = self.rest_api.rest_endpoints[method][endpoint]
+                return jsonify(getattr(self.rest_api, endpoint)(*args, **kwargs))
 
         @blueprint.route("/", methods=["POST"])
         @blueprint.route("/<path:page>", methods=["POST"])

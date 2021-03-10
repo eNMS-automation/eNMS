@@ -10,7 +10,7 @@ from eNMS.database import db
 
 class RestApi:
 
-    rest_routes = {
+    rest_endpoints = {
         "GET": {
             "configuration": "get_configuration",
             "instance": "get_instance",
@@ -38,14 +38,8 @@ class RestApi:
 
     def __init__(self):
         for endpoint in self.allowed_endpoints:
-            self.rest_routes["POST"][endpoint] = endpoint
+            self.rest_endpoints["POST"][endpoint] = endpoint
             setattr(self, endpoint, getattr(app, endpoint))
-
-    def process(self, method, endpoint, args, kwargs):
-        function = getattr(self, self.rest_routes[method][endpoint])
-        if not isinstance(kwargs, dict):
-            args, kwargs = args + [kwargs], {}
-        return function(*args, **kwargs)
 
     def get_configuration(self, device_name, property="configuration"):
         return getattr(db.fetch("device", name=device_name), property)

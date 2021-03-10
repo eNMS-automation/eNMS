@@ -26,7 +26,6 @@ from subprocess import run
 from threading import Thread
 from time import sleep
 from traceback import format_exc
-from uuid import getnode
 
 from eNMS import app
 from eNMS.database import db
@@ -367,7 +366,7 @@ class Server(Flask):
         def get_requests_sink(_):
             abort(404)
 
-        @blueprint.route("/rest/<path:page>", methods=["POST"])
+        @blueprint.route("/rest/<path:page>", methods=["GET", "POST"])
         @self.monitor_requests
         @self.csrf.exempt
         def rest_request(page):
@@ -422,13 +421,6 @@ class Server(Flask):
     def configure_rest_api(self):
 
         api = Api(self, decorators=[self.csrf.exempt])
-
-        class Heartbeat(Resource):
-            def get(self):
-                return {
-                    "name": getnode(),
-                    "cluster_id": app.settings["cluster"]["id"],
-                }
 
         class Query(Resource):
             decorators = [self.auth.login_required, self.monitor_rest_request]
@@ -608,7 +600,6 @@ class Server(Flask):
                 f"/rest/{endpoint}",
             )
 
-        api.add_resource(Heartbeat, "/rest/is_alive")
         api.add_resource(RunService, "/rest/run_service")
         api.add_resource(RunTask, "/rest/run_task")
         api.add_resource(Query, "/rest/query/<string:model>")

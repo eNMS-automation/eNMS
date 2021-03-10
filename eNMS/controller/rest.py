@@ -1,5 +1,6 @@
 from collections import defaultdict
 from traceback import format_exc
+from uuid import getnode
 
 from eNMS.controller.base import BaseController
 from eNMS.database import db
@@ -22,3 +23,9 @@ class RestController(BaseController):
             except Exception:
                 result["failure"].append((instance, format_exc()))
         return result
+
+    def is_alive(self):
+        return {
+            "name": getnode(),
+            "cluster_id": self.settings["cluster"]["id"],
+        }

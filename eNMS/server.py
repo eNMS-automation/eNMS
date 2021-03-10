@@ -14,7 +14,6 @@ from flask import (
     url_for,
     session,
 )
-from flask_httpauth import HTTPBasicAuth
 from flask_login import current_user, LoginManager, login_user, logout_user
 from flask_restful import abort as rest_abort, Api, Resource
 from flask_socketio import join_room, SocketIO

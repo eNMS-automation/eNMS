@@ -10,16 +10,27 @@ class RestController(BaseController):
 
     rest_routes = {
         "GET": {
+            "instance": "get_instance",
             "is_alive": "is_alive",
             "query": "query"
         },
         "POST": {
             "instance": "update_instance"
         },
-        "DELETE": {}
+        "DELETE": {
+            "instance": "delete_instance"
+        }
     }
 
-    def instance(self, model, **data):
+    def get_instance(self, model, name):
+        return db.fetch(model, name=name).to_dict(
+            relation_names_only=True, exclude=["positions"]
+        )
+
+    def delete_instance(self, model, name):
+        return db.delete(model, name=name)
+
+    def update_instance(self, model, **data):
         result = defaultdict(list)
         if not isinstance(data, list):
             data = [data]

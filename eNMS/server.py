@@ -426,18 +426,6 @@ class Server(Flask):
 
         api = Api(self, decorators=[self.csrf.exempt])
 
-        class GetInstance(Resource):
-            decorators = [self.monitor_rest_request]
-
-            def get(self, model, name):
-                return db.fetch(model, name=name).to_dict(
-                    relation_names_only=True, exclude=["positions"]
-                )
-
-            def delete(self, model, name):
-                result = db.delete(model, name=name)
-                return result
-
         class GetConfiguration(Resource):
             decorators = [self.monitor_rest_request]
 
@@ -595,7 +583,6 @@ class Server(Flask):
 
         api.add_resource(RunService, "/rest/run_service")
         api.add_resource(RunTask, "/rest/run_task")
-        api.add_resource(GetInstance, "/rest/instance/<string:model>/<string:name>")
         api.add_resource(GetConfiguration, "/rest/configuration/<string:name>")
         api.add_resource(Search, "/rest/search")
         api.add_resource(GetResult, "/rest/result/<string:name>/<string:runtime>")

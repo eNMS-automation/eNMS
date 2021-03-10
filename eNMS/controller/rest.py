@@ -6,20 +6,12 @@ from eNMS import app
 from eNMS.database import db
 
 
-class RestApi():
+class RestApi:
 
     rest_routes = {
-        "GET": {
-            "instance": "get_instance",
-            "is_alive": "is_alive",
-            "query": "query"
-        },
-        "POST": {
-            "instance": "update_instance"
-        },
-        "DELETE": {
-            "instance": "delete_instance"
-        }
+        "GET": {"instance": "get_instance", "is_alive": "is_alive", "query": "query"},
+        "POST": {"instance": "update_instance"},
+        "DELETE": {"instance": "delete_instance"},
     }
 
     def get_instance(self, model, name):
@@ -55,6 +47,4 @@ class RestApi():
 
     def query(self, model, **kwargs):
         results = db.fetch(model, all_matches=True, **kwargs)
-        return [
-            result.get_properties(exclude=["positions"]) for result in results
-        ]
+        return [result.get_properties(exclude=["positions"]) for result in results]

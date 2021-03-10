@@ -428,26 +428,6 @@ class Server(Flask):
 
         api = Api(self, decorators=[self.csrf.exempt])
 
-        class GetResult(Resource):
-            decorators = [self.monitor_rest_request]
-
-            def get(self, name, runtime):
-                run = db.fetch(
-                    "run", service_name=name, runtime=runtime, allow_none=True
-                )
-                if not run:
-                    error_message = (
-                        "There are no results or on-going services "
-                        "for the requested service and runtime."
-                    )
-                    return {"error": error_message}
-                else:
-                    result = run.result()
-                    return {
-                        "status": run.status,
-                        "result": result.result if result else "No results yet.",
-                    }
-
         class Migrate(Resource):
             decorators = [self.monitor_rest_request]
 
@@ -579,7 +559,6 @@ class Server(Flask):
         api.add_resource(RunService, "/rest/run_service")
         api.add_resource(RunTask, "/rest/run_task")
         api.add_resource(Search, "/rest/search")
-        api.add_resource(GetResult, "/rest/result/<string:name>/<string:runtime>")
         api.add_resource(Migrate, "/rest/migrate/<string:direction>")
         api.add_resource(Topology, "/rest/topology/<string:direction>")
 

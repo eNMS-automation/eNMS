@@ -13,14 +13,11 @@ class RestApi:
             "configuration": "get_configuration",
             "instance": "get_instance",
             "is_alive": "is_alive",
-            "query": "query"
+            "query": "query",
+            "result": "get_result",
         },
-        "POST": {
-            "instance": "update_instance"
-        },
-        "DELETE": {
-            "instance": "delete_instance"
-        }
+        "POST": {"instance": "update_instance"},
+        "DELETE": {"instance": "delete_instance"},
     }
 
     def get_configuration(self, device_name, property="configuration"):
@@ -30,6 +27,21 @@ class RestApi:
         return db.fetch(model, name=name).to_dict(
             relation_names_only=True, exclude=["positions"]
         )
+
+    def get_result(self, name, runtime, **kwargs):
+        run = db.fetch("run", service_name=name, runtime=runtime, allow_none=True)
+        if not run:
+            error_message = (
+                "There are no results or on-going services "
+                "for the requested service and runtime."
+            )
+            return {"error": error_message}
+        else:
+            result = run.result()
+            return {
+                "status": run.status,
+                "result": result.result if result else "No results yet.",
+            }
 
     def delete_instance(self, model, name):
         return db.delete(model, name=name)
@@ -59,6 +71,4 @@ class RestApi:
 
     def query(self, model, **kwargs):
         results = db.fetch(model, all_matches=True, **kwargs)
-        return [
-            result.get_properties(exclude=["positions"]) for result in results
-        ]
+        return [result.get_properties(exclude=["positions"]) for result in results]

@@ -395,7 +395,7 @@ class ServiceRun:
                 )
             if self.main_run.trigger == "REST":
                 results["devices"] = {}
-                for result in self.results:
+                for result in self.main_run.results:
                     results["devices"][result.device.name] = result.result
         create_failed_results = self.disable_result_creation and not self.success
         if not self.disable_result_creation or create_failed_results or run_result:

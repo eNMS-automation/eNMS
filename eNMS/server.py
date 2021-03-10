@@ -220,7 +220,7 @@ class Server(Flask):
                         status_code, traceback = 500, format_exc()
                 log = (
                     f"USER: {username} ({client_address}) - "
-                    f"{request.method} {endpoint} - ({status_code})"
+                    f"{request.method} {request.path} - ({status_code})"
                 )
                 if status_code == 500:
                     log += f"\n{traceback}"

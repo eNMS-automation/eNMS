@@ -52,63 +52,6 @@ class Server(Flask):
         self.configure_rest_api()
         self.configure_terminal_socket()
 
-    @staticmethod
-    def monitor_requests(function):
-        @wraps(function)
-        def decorated_function(*args, **kwargs):
-            remote_address = request.environ["REMOTE_ADDR"]
-            client_address = request.environ.get("HTTP_X_FORWARDED_FOR", remote_address)
-            if not current_user.is_authenticated:
-                app.log(
-                    "warning",
-                    (
-                        f"Unauthorized {request.method} request from "
-                        f"'{client_address}' calling the endpoint '{request.url}'"
-                    ),
-                )
-                return redirect(url_for("blueprint.route", page="login"))
-            else:
-                username = current_user.name
-                endpoint = f"/{request.path.split('/')[1]}"
-                request_property = f"{request.method.lower()}_requests"
-                endpoint_rbac = app.rbac[request_property].get(endpoint)
-                if not endpoint_rbac:
-                    status_code = 404
-                elif not current_user.is_admin and (
-                    endpoint_rbac == "admin"
-                    or endpoint_rbac == "access"
-                    and endpoint not in getattr(current_user, request_property)
-                ):
-                    status_code = 403
-                else:
-                    try:
-                        result = function(*args, **kwargs)
-                        status_code = 200
-                    except db.rbac_error:
-                        status_code = 403
-                    except Exception:
-                        status_code, traceback = 500, format_exc()
-                log = (
-                    f"USER: {username} ({client_address}) - "
-                    f"{request.method} {endpoint} - ({status_code})"
-                )
-                if status_code == 500:
-                    log += f"\n{traceback}"
-                app.log(app.status_log_level[status_code], log, change_log=False)
-                if status_code == 200:
-                    return result
-                elif request.method == "GET":
-                    return render_template("error.html", error=status_code), status_code
-                else:
-                    message = {
-                        403: "Operation not allowed.",
-                        404: "Invalid POST request.",
-                        500: "Internal Server Error.",
-                    }[status_code]
-                    return jsonify({"alert": f"Error {status_code} - {message}"})
-
-        return decorated_function
-
     def update_config(self, mode):
         mode = (mode or app.settings["app"]["config_mode"]).lower()
         self.config.update(
@@ -237,17 +180,70 @@ class Server(Flask):
                     name=request.authorization["username"],
                     password=request.authorization["password"],
                 )
-                if user:
-                    request_type = f"{request.method.lower()}_requests"
-                    endpoint = "/".join(request.path.split("/")[:3])
-                    if user.is_admin or endpoint in getattr(user, request_type, []):
-                        login_user(user)
-                        return
-                    status = 403
+                if not user:
+                    return jsonify({"message": "Wrong credentials"}), 401
                 else:
-                    status = 401
-                message = f"{'Wrong' if status == 401 else 'Insufficient'} credentials"
-                return jsonify({"message": message}), status
+                    login_user(user)
+
+    @staticmethod
+    def monitor_requests(function):
+        @wraps(function)
+        def decorated_function(*args, **kwargs):
+            remote_address = request.environ["REMOTE_ADDR"]
+            client_address = request.environ.get("HTTP_X_FORWARDED_FOR", remote_address)
+            if not current_user.is_authenticated:
+                app.log(
+                    "warning",
+                    (
+                        f"Unauthorized {request.method} request from "
+                        f"'{client_address}' calling the endpoint '{request.url}'"
+                    ),
+                )
+                return redirect(url_for("blueprint.route", page="login"))
+            else:
+                username = current_user.name
+                if request.path.startswith("/rest/"):
+                    endpoint = "/".join(request.path.split("/")[:3])
+                else:
+                    endpoint = f"/{request.path.split('/')[1]}"
+                request_property = f"{request.method.lower()}_requests"
+                endpoint_rbac = app.rbac[request_property].get(endpoint)
+                if not endpoint_rbac:
+                    status_code = 404
+                elif not current_user.is_admin and (
+                    endpoint_rbac == "admin"
+                    or endpoint_rbac == "access"
+                    and endpoint not in getattr(current_user, request_property)
+                ):
+                    status_code = 403
+                else:
+                    try:
+                        result = function(*args, **kwargs)
+                        status_code = 200
+                    except db.rbac_error:
+                        status_code = 403
+                    except Exception:
+                        status_code, traceback = 500, format_exc()
+                log = (
+                    f"USER: {username} ({client_address}) - "
+                    f"{request.method} {endpoint} - ({status_code})"
+                )
+                if status_code == 500:
+                    log += f"\n{traceback}"
+                app.log(app.status_log_level[status_code], log, change_log=False)
+                if status_code == 200:
+                    return result
+                elif request.method == "GET":
+                    return render_template("error.html", error=status_code), status_code
+                else:
+                    message = {
+                        403: "Operation not allowed.",
+                        404: "Invalid POST request.",
+                        500: "Internal Server Error.",
+                    }[status_code]
+                    return jsonify({"alert": f"Error {status_code} - {message}"})
+
+        return decorated_function
 
     def configure_routes(self):
         blueprint = Blueprint("blueprint", __name__, template_folder="../templates")
@@ -371,6 +367,14 @@ class Server(Flask):
         @self.monitor_requests
         def get_requests_sink(_):
             abort(404)
+
+        @blueprint.route("/rest/<path:page>", methods=["POST"])
+        @self.monitor_requests
+        @self.csrf.exempt
+        def rest_request(page):
+            (endpoint, *args), kwargs = page.split("/"), request.json(force=True)
+            with db.session_scope():
+                return jsonify(getattr(app, endpoint)(*args, **kwargs))
 
         @blueprint.route("/", methods=["POST"])
         @blueprint.route("/<path:page>", methods=["POST"])
@@ -629,14 +633,12 @@ class Server(Flask):
         api.add_resource(RunService, "/rest/run_service")
         api.add_resource(RunTask, "/rest/run_task")
         api.add_resource(Query, "/rest/query/<string:model>")
-        api.add_resource(UpdateInstance, "/rest/instance/<string:model>")
         api.add_resource(GetInstance, "/rest/instance/<string:model>/<string:name>")
         api.add_resource(GetConfiguration, "/rest/configuration/<string:name>")
         api.add_resource(Search, "/rest/search")
         api.add_resource(GetResult, "/rest/result/<string:name>/<string:runtime>")
         api.add_resource(Migrate, "/rest/migrate/<string:direction>")
         api.add_resource(Topology, "/rest/topology/<string:direction>")
-        api.add_resource(Sink, "/rest/<path:path>")
 
 
 server = Server()

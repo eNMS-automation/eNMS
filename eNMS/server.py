@@ -369,7 +369,11 @@ class Server(Flask):
         @self.monitor_requests
         @self.csrf.exempt
         def rest_request(page):
-            (endpoint, *args), kwargs = page.split("/"), request.get_json(force=True)
+            endpoint, *args = page.split("/")
+            if request.method == "POST":
+                kwargs = request.get_json(force=True)
+            else:
+                kwargs = request.args.to_dict()
             with db.session_scope():
                 return jsonify(getattr(app, endpoint)(*args, **kwargs))
 

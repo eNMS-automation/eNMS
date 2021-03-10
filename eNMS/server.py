@@ -32,6 +32,7 @@ from eNMS.database import db
 from eNMS.forms import form_classes, form_properties
 from eNMS.forms.administration import LoginForm
 from eNMS.models import models, property_types, relationships
+from eNMS.rest_api import RestApi
 from eNMS.setup import properties, themes, visualization
 
 
@@ -39,6 +40,7 @@ class Server(Flask):
     def __init__(self, mode=None):
         static_folder = str(app.path / "eNMS" / "static")
         super().__init__(__name__, static_folder=static_folder)
+        self.rest_api = RestApi()
         self.update_config(mode)
         self.register_extensions()
         self.register_plugins()
@@ -47,7 +49,6 @@ class Server(Flask):
         self.configure_errors()
         self.configure_authentication()
         self.configure_routes()
-        self.configure_rest_api()
         self.configure_terminal_socket()
 
     def update_config(self, mode):
@@ -230,7 +231,7 @@ class Server(Flask):
                 app.log(app.status_log_level[status_code], log, change_log=False)
                 if status_code == 200:
                     return result
-                elif request.method == "GET":
+                elif request.method == "GET" and not endpoint.startswith("/rest/"):
                     return render_template("error.html", error=status_code), status_code
                 else:
                     message = {
@@ -375,8 +376,8 @@ class Server(Flask):
             else:
                 kwargs = request.args.to_dict()
             with db.session_scope():
-                endpoint = app.rest_routes[request.method][endpoint]
-                return jsonify(getattr(app, endpoint)(*args, **kwargs))
+                endpoint = self.rest_api.rest_routes[request.method][endpoint]
+                return jsonify(getattr(self.rest_api, endpoint)(*args, **kwargs))
 
         @blueprint.route("/", methods=["POST"])
         @blueprint.route("/<path:page>", methods=["POST"])

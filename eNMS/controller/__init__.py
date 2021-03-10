@@ -4,7 +4,6 @@ from eNMS.controller.administration import AdministrationController
 from eNMS.controller.automation import AutomationController
 from eNMS.controller.custom import CustomController
 from eNMS.controller.inventory import InventoryController
-from eNMS.controller.rest import RestController
 
 
 class App(
@@ -12,7 +11,6 @@ class App(
     AutomationController,
     CustomController,
     InventoryController,
-    RestController,
 ):
     def register_endpoint(self, func):
         setattr(self, func.__name__, func)

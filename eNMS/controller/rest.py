@@ -29,3 +29,9 @@ class RestController(BaseController):
             "name": getnode(),
             "cluster_id": self.settings["cluster"]["id"],
         }
+
+    def query(self, model, **kwargs):
+        results = db.fetch(model, all_matches=True, **kwargs)
+        return [
+            result.get_properties(exclude=["positions"]) for result in results
+        ]

@@ -425,16 +425,6 @@ class Server(Flask):
 
         api = Api(self, decorators=[self.csrf.exempt])
 
-        class Query(Resource):
-            decorators = [self.monitor_rest_request]
-
-            def get(self, model):
-                properties = request.args.to_dict()
-                results = db.fetch(model, all_matches=True, **properties)
-                return [
-                    result.get_properties(exclude=["positions"]) for result in results
-                ]
-
         class GetInstance(Resource):
             decorators = [self.monitor_rest_request]
 
@@ -604,7 +594,6 @@ class Server(Flask):
 
         api.add_resource(RunService, "/rest/run_service")
         api.add_resource(RunTask, "/rest/run_task")
-        api.add_resource(Query, "/rest/query/<string:model>")
         api.add_resource(GetInstance, "/rest/instance/<string:model>/<string:name>")
         api.add_resource(GetConfiguration, "/rest/configuration/<string:name>")
         api.add_resource(Search, "/rest/search")

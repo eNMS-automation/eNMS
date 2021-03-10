@@ -139,6 +139,7 @@
     "/pool_table": "access",
     "/rest/configuration": "access",
     "/rest/instance": "access",
+    "/rest/is_alive": "all",
     "/rest/query": "access",
     "/rest/result": "access",
     "/rest/search": "access",

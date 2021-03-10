@@ -71,7 +71,6 @@ class Server(Flask):
             plugin["module"].Plugin(self, app, db, **plugin["settings"])
 
     def register_extensions(self):
-        self.auth = HTTPBasicAuth()
         self.csrf = CSRFProtect()
         self.csrf.init_app(self)
         self.socketio = SocketIO(self)
@@ -423,7 +422,7 @@ class Server(Flask):
         api = Api(self, decorators=[self.csrf.exempt])
 
         class Query(Resource):
-            decorators = [self.auth.login_required, self.monitor_rest_request]
+            decorators = [self.monitor_rest_request]
 
             def get(self, model):
                 properties = request.args.to_dict()
@@ -433,7 +432,7 @@ class Server(Flask):
                 ]
 
         class GetInstance(Resource):
-            decorators = [self.auth.login_required, self.monitor_rest_request]
+            decorators = [self.monitor_rest_request]
 
             def get(self, model, name):
                 return db.fetch(model, name=name).to_dict(
@@ -445,14 +444,14 @@ class Server(Flask):
                 return result
 
         class GetConfiguration(Resource):
-            decorators = [self.auth.login_required, self.monitor_rest_request]
+            decorators = [self.monitor_rest_request]
 
             def get(self, name):
                 property = request.args.to_dict().get("property", "configuration")
                 return getattr(db.fetch("device", name=name), property)
 
         class GetResult(Resource):
-            decorators = [self.auth.login_required, self.monitor_rest_request]
+            decorators = [self.monitor_rest_request]
 
             def get(self, name, runtime):
                 run = db.fetch(
@@ -472,14 +471,14 @@ class Server(Flask):
                     }
 
         class Migrate(Resource):
-            decorators = [self.auth.login_required, self.monitor_rest_request]
+            decorators = [self.monitor_rest_request]
 
             def post(self, direction):
                 kwargs = request.get_json(force=True)
                 return getattr(app, f"migration_{direction}")(**kwargs)
 
         class RunService(Resource):
-            decorators = [self.auth.login_required, self.monitor_rest_request]
+            decorators = [self.monitor_rest_request]
 
             def post(self):
                 data = {
@@ -520,7 +519,7 @@ class Server(Flask):
                     return {**app.run(service.id, **data), "errors": errors}
 
         class RunTask(Resource):
-            decorators = [self.auth.login_required, self.monitor_rest_request]
+            decorators = [self.monitor_rest_request]
 
             def post(self):
                 task = db.fetch("task", rbac="schedule", id=request.get_json())
@@ -538,7 +537,7 @@ class Server(Flask):
                 Thread(target=app.run, args=(task.service.id,), kwargs=data).start()
 
         class Topology(Resource):
-            decorators = [self.auth.login_required, self.monitor_rest_request]
+            decorators = [self.monitor_rest_request]
 
             def post(self, direction):
                 if direction == "import":
@@ -555,7 +554,7 @@ class Server(Flask):
                     return "Topology Export successfully executed."
 
         class Search(Resource):
-            decorators = [self.auth.login_required, self.monitor_rest_request]
+            decorators = [self.monitor_rest_request]
 
             def post(self):
                 rest_body = request.get_json(force=True)
@@ -591,7 +590,6 @@ class Server(Flask):
                     (Resource,),
                     {
                         "decorators": [
-                            self.auth.login_required,
                             self.monitor_rest_request,
                         ],
                         "post": post,

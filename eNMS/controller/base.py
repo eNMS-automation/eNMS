@@ -49,13 +49,6 @@ class BaseController:
 
     status_log_level = {200: "info", 403: "warning", 404: "info", 500: "error"}
 
-    rest_endpoints = [
-        "get_cluster_status",
-        "get_git_content",
-        "update_all_pools",
-        "update_database_configurations_from_git",
-    ]
-
     property_names = {}
 
     def __init__(self):

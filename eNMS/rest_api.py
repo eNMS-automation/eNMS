@@ -29,6 +29,18 @@ class RestApi:
         },
     }
 
+    allowed_endpoints = [
+        "get_cluster_status",
+        "get_git_content",
+        "update_all_pools",
+        "update_database_configurations_from_git",
+    ]
+
+    def __init__(self):
+        for endpoint in self.allowed_endpoints:
+            self.rest_routes["POST"][endpoint] = endpoint
+            setattr(self, endpoint, getattr(app, endpoint))
+
     def process(self, method, endpoint, args, kwargs):
         function = getattr(self, self.rest_routes[method][endpoint])
         if not isinstance(kwargs, dict):

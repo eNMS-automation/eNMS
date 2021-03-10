@@ -432,26 +432,6 @@ class Server(Flask):
                 }
                 return app.filtering(rest_body["type"], **kwargs)["data"]
 
-        for endpoint in app.rest_endpoints:
-
-            def post(_, ep=endpoint):
-                getattr(app, ep)()
-                return f"Endpoint {ep} successfully executed."
-
-            api.add_resource(
-                type(
-                    endpoint,
-                    (Resource,),
-                    {
-                        "decorators": [
-                            self.monitor_rest_request,
-                        ],
-                        "post": post,
-                    },
-                ),
-                f"/rest/{endpoint}",
-            )
-
         api.add_resource(Search, "/rest/search")
         api.add_resource(Topology, "/rest/topology/<string:direction>")
 

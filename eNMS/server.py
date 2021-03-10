@@ -428,13 +428,6 @@ class Server(Flask):
 
         api = Api(self, decorators=[self.csrf.exempt])
 
-        class GetConfiguration(Resource):
-            decorators = [self.monitor_rest_request]
-
-            def get(self, name):
-                property = request.args.to_dict().get("property", "configuration")
-                return getattr(db.fetch("device", name=name), property)
-
         class GetResult(Resource):
             decorators = [self.monitor_rest_request]
 
@@ -585,7 +578,6 @@ class Server(Flask):
 
         api.add_resource(RunService, "/rest/run_service")
         api.add_resource(RunTask, "/rest/run_task")
-        api.add_resource(GetConfiguration, "/rest/configuration/<string:name>")
         api.add_resource(Search, "/rest/search")
         api.add_resource(GetResult, "/rest/result/<string:name>/<string:runtime>")
         api.add_resource(Migrate, "/rest/migrate/<string:direction>")

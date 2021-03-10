@@ -6,10 +6,11 @@ from eNMS import app
 from eNMS.database import db
 
 
-class RestApi():
+class RestApi:
 
     rest_routes = {
         "GET": {
+            "configuration": "get_configuration",
             "instance": "get_instance",
             "is_alive": "is_alive",
             "query": "query"
@@ -21,6 +22,9 @@ class RestApi():
             "instance": "delete_instance"
         }
     }
+
+    def get_configuration(self, device_name, property="configuration"):
+        return getattr(db.fetch("device", name=device_name), property)
 
     def get_instance(self, model, name):
         return db.fetch(model, name=name).to_dict(

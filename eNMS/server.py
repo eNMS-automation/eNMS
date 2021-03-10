@@ -372,7 +372,7 @@ class Server(Flask):
         @self.monitor_requests
         @self.csrf.exempt
         def rest_request(page):
-            (endpoint, *args), kwargs = page.split("/"), request.json(force=True)
+            (endpoint, *args), kwargs = page.split("/"), request.get_json(force=True)
             with db.session_scope():
                 return jsonify(getattr(app, endpoint)(*args, **kwargs))
 
@@ -479,26 +479,6 @@ class Server(Flask):
                         "status": run.status,
                         "result": result.result if result else "No results yet.",
                     }
-
-        class UpdateInstance(Resource):
-            decorators = [self.auth.login_required, self.monitor_requests]
-
-            def post(self, model):
-                data, result = request.get_json(force=True), defaultdict(list)
-                if not isinstance(data, list):
-                    data = [data]
-                for instance in data:
-                    if "name" not in instance:
-                        result["failure"].append((instance, "Name is missing"))
-                        continue
-                    try:
-                        object_data = app.objectify(model, instance)
-                        object_data["update_pools"] = instance.get("update_pools", True)
-                        instance = db.factory(model, **object_data)
-                        result["success"].append(instance.name)
-                    except Exception:
-                        result["failure"].append((instance, format_exc()))
-                return result
 
         class Migrate(Resource):
             decorators = [self.auth.login_required, self.monitor_rest_request]

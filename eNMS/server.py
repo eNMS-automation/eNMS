@@ -371,14 +371,13 @@ class Server(Flask):
         @self.monitor_requests
         @self.csrf.exempt
         def rest_request(page):
-            endpoint, *args = page.split("/")
-            if request.method == "POST":
+            method, (endpoint, *args) = request.method, page.split("/")
+            if method == "POST":
                 kwargs = request.get_json(force=True)
             else:
                 kwargs = request.args.to_dict()
             with db.session_scope():
-                endpoint = self.rest_api.rest_routes[request.method][endpoint]
-                return jsonify(getattr(self.rest_api, endpoint)(*args, **kwargs))
+                return jsonify(self.rest_api.process(method, endpoint, args, kwargs))
 
         @blueprint.route("/", methods=["POST"])
         @blueprint.route("/<path:page>", methods=["POST"])

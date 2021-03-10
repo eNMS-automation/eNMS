@@ -29,6 +29,12 @@ class RestApi:
         },
     }
 
+    def process(self, method, endpoint, args, kwargs):
+        function = getattr(self, self.rest_routes[method][endpoint])
+        if not isinstance(kwargs, dict):
+            args, kwargs = args + [kwargs], {}
+        return function(*args, **kwargs)
+
     def get_configuration(self, device_name, property="configuration"):
         return getattr(db.fetch("device", name=device_name), property)
 
@@ -37,7 +43,7 @@ class RestApi:
             relation_names_only=True, exclude=["positions"]
         )
 
-    def get_result(self, name, runtime, **kwargs):
+    def get_result(self, name, runtime):
         run = db.fetch("run", service_name=name, runtime=runtime, allow_none=True)
         if not run:
             error_message = (
@@ -59,12 +65,7 @@ class RestApi:
         return getattr(app, f"migration_{direction}")(**kwargs)
 
     def run_service(self, **kwargs):
-        print(current_user)
-        data = {
-            "trigger": "REST",
-            "creator": current_user.name,
-            **kwargs,
-        }
+        data = {"trigger": "REST", "creator": current_user.name, **kwargs}
         errors, devices, pools = [], [], []
         service = db.fetch("service", name=data["name"], rbac="run")
         handle_asynchronously = data.get("async", False)
@@ -97,9 +98,8 @@ class RestApi:
         else:
             return {**app.run(service.id, **data), "errors": errors}
 
-    def run_task(self, **kwargs):
-        print(kwargs)
-        task = db.fetch("task", rbac="schedule", id=kwargs["task_id"])
+    def run_task(self, task_id):
+        task = db.fetch("task", rbac="schedule", id=task_id)
         data = {
             "trigger": "Scheduler",
             "creator": task.last_scheduled_by,

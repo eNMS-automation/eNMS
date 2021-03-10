@@ -239,7 +239,8 @@ class Server(Flask):
                         404: "Invalid POST request.",
                         500: "Internal Server Error.",
                     }[status_code]
-                    return jsonify({"alert": f"Error {status_code} - {message}"})
+                    alert = f"Error {status_code} - {message}"
+                    return jsonify({"alert": alert}), status_code
 
         return decorated_function
 

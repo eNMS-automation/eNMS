@@ -22,6 +22,7 @@ class RestApi:
             "instance": "update_instance",
             "migrate": "migrate",
             "run_service": "run_service",
+            "run_task": "run_task",
         },
         "DELETE": {
             "instance": "delete_instance",
@@ -95,6 +96,22 @@ class RestApi:
             return {"errors": errors, "runtime": runtime}
         else:
             return {**app.run(service.id, **data), "errors": errors}
+
+    def run_task(self, **kwargs):
+        print(kwargs)
+        task = db.fetch("task", rbac="schedule", id=kwargs["task_id"])
+        data = {
+            "trigger": "Scheduler",
+            "creator": task.last_scheduled_by,
+            "runtime": app.get_time(),
+            "task": task.id,
+            **task.initial_payload,
+        }
+        if task.devices:
+            data["target_devices"] = [device.id for device in task.devices]
+        if task.pools:
+            data["target_pools"] = [pool.id for pool in task.pools]
+        Thread(target=app.run, args=(task.service.id,), kwargs=data).start()
 
     def update_instance(self, model, **data):
         result = defaultdict(list)

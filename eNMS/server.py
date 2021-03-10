@@ -428,24 +428,6 @@ class Server(Flask):
 
         api = Api(self, decorators=[self.csrf.exempt])
 
-        class RunTask(Resource):
-            decorators = [self.monitor_rest_request]
-
-            def post(self):
-                task = db.fetch("task", rbac="schedule", id=request.get_json())
-                data = {
-                    "trigger": "Scheduler",
-                    "creator": task.last_scheduled_by,
-                    "runtime": app.get_time(),
-                    "task": task.id,
-                    **task.initial_payload,
-                }
-                if task.devices:
-                    data["target_devices"] = [device.id for device in task.devices]
-                if task.pools:
-                    data["target_pools"] = [pool.id for pool in task.pools]
-                Thread(target=app.run, args=(task.service.id,), kwargs=data).start()
-
         class Topology(Resource):
             decorators = [self.monitor_rest_request]
 
@@ -508,7 +490,6 @@ class Server(Flask):
                 f"/rest/{endpoint}",
             )
 
-        api.add_resource(RunTask, "/rest/run_task")
         api.add_resource(Search, "/rest/search")
         api.add_resource(Topology, "/rest/topology/<string:direction>")
 

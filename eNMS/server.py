@@ -37,7 +37,7 @@ class Server(Flask):
         static_folder = str(app.path / "eNMS" / "static")
         super().__init__(__name__, static_folder=static_folder)
         self.rest_api = RestApi()
-        self.update_config(mode)
+        self.update_config(mode or app.settings["app"]["config_mode"])
         self.register_extensions()
         self.register_plugins()
         self.configure_login_manager()
@@ -48,18 +48,16 @@ class Server(Flask):
         self.configure_terminal_socket()
 
     def update_config(self, mode):
-        mode = (mode or app.settings["app"]["config_mode"]).lower()
+        session_timeout = app.settings["app"]["session_timeout_minutes"]
         self.config.update(
             {
-                "DEBUG": mode != "production",
+                "DEBUG": mode.lower() != "production",
                 "SECRET_KEY": getenv("SECRET_KEY", "secret_key"),
                 "WTF_CSRF_TIME_LIMIT": None,
                 "ERROR_404_HELP": False,
                 "MAX_CONTENT_LENGTH": 20 * 1024 * 1024,
-                "WTF_CSRF_ENABLED": mode != "test",
-                "PERMANENT_SESSION_LIFETIME": timedelta(
-                    minutes=app.settings["app"]["session_timeout_minutes"]
-                ),
+                "WTF_CSRF_ENABLED": mode.lower() != "test",
+                "PERMANENT_SESSION_LIFETIME": timedelta(minutes=session_timeout),
             }
         )
 

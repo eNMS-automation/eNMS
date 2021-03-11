@@ -30,7 +30,7 @@ def user_client():
             client.post(
                 "/login",
                 data={
-                    "name": "admin",
+                    "username": "admin",
                     "password": "admin",
                     "authentication_method": "database",
                 },

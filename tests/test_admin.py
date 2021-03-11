@@ -18,6 +18,7 @@ ignored_endpoints = [
     "/result_form",
     "/session_log_form",
     "/table_form",
+    "/terminal",
     "/tree_form",
     "/workflow_tree_form",
     "/logout",

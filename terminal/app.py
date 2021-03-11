@@ -22,9 +22,12 @@ class Server(Flask):
 
     def send_data(self):
         while True:
-            self.socketio.sleep(0.1)
-            output = read(self.file_descriptor, 1024).decode()
-            self.socketio.emit("output", output, namespace="/terminal")
+            try:
+                self.socketio.sleep(0.1)
+                output = read(self.file_descriptor, 1024).decode()
+                self.socketio.emit("output", output, namespace="/terminal")
+            except OSError:
+                break
 
     def configure_routes(self):
         @self.route(f"/{getenv('ENDPOINT')}")

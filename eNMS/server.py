@@ -394,28 +394,5 @@ class Server(Flask):
 
         self.register_blueprint(blueprint)
 
-    def configure_rest_api(self):
-
-        api = Api(self, decorators=[self.csrf.exempt])
-
-        class Topology(Resource):
-            decorators = [self.monitor_rest_request]
-
-            def post(self, direction):
-                if direction == "import":
-                    result = app.import_topology(
-                        **{
-                            "replace": request.form["replace"] == "True",
-                            "file": request.files["file"],
-                        }
-                    )
-                    status = 206 if "Partial" in result else 200
-                    return result, status
-                else:
-                    app.export_topology(**request.get_json(force=True))
-                    return "Topology Export successfully executed."
-
-        api.add_resource(Topology, "/rest/topology/<string:direction>")
-
 
 server = Server()

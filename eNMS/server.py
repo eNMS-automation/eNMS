@@ -43,7 +43,6 @@ class Server(Flask):
         self.configure_login_manager()
         self.configure_context_processor()
         self.configure_errors()
-        self.configure_authentication()
         self.configure_routes()
         self.configure_terminal_socket()
 
@@ -164,9 +163,12 @@ class Server(Flask):
         def not_found_error(error):
             return render_template("error.html", error=404), 404
 
-    def configure_authentication(self):
-        @self.before_request
-        def rest_authentication():
+    @staticmethod
+    def monitor_requests(function):
+        @wraps(function)
+        def decorated_function(*args, **kwargs):
+            remote_address = request.environ["REMOTE_ADDR"]
+            client_address = request.environ.get("HTTP_X_FORWARDED_FOR", remote_address)
             if request.path.startswith("/rest/"):
                 user = app.authenticate_user(
                     name=request.authorization["username"],
@@ -176,13 +178,6 @@ class Server(Flask):
                     return jsonify({"message": "Wrong credentials"}), 401
                 else:
                     login_user(user)
-
-    @staticmethod
-    def monitor_requests(function):
-        @wraps(function)
-        def decorated_function(*args, **kwargs):
-            remote_address = request.environ["REMOTE_ADDR"]
-            client_address = request.environ.get("HTTP_X_FORWARDED_FOR", remote_address)
             if not current_user.is_authenticated:
                 app.log(
                     "warning",
@@ -223,6 +218,8 @@ class Server(Flask):
                 if status_code == 500:
                     log += f"\n{traceback}"
                 app.log(app.status_log_level[status_code], log, change_log=False)
+                if request.path.startswith("/rest/"):
+                    logout_user()
                 if status_code == 200:
                     return result
                 elif request.method == "GET" and not endpoint.startswith("/rest/"):

@@ -137,12 +137,11 @@ class RestApi:
         if direction == "import":
             result = app.import_topology(
                 **{
-                    "replace": kwargs["replace"] == "True",
-                    "file": kwargs["file"],
+                    "replace": kwargs["form"]["replace"] == "True",
+                    "file": kwargs["files"]["file"],
                 }
             )
-            status = 206 if "Partial" in result else 200
-            return result, status
+            return result, 206 if "Partial" in result else 200
         else:
             app.export_topology(**kwargs)
             return "Topology Export successfully executed."

@@ -367,7 +367,11 @@ class Server(Flask):
         def rest_request(page):
             method, (endpoint, *args) = request.method, page.split("/")
             if method == "POST":
-                kwargs = request.get_json(force=True)
+                kwargs = {
+                    "form": request.form.to_dict(),
+                    "files": request.files.to_dict(),
+                    **request.get_json(force=True),
+                }
             else:
                 kwargs = request.args.to_dict()
             with db.session_scope():

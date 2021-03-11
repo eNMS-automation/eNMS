@@ -12,7 +12,6 @@ from flask import (
     session,
 )
 from flask_login import current_user, LoginManager, login_user, logout_user
-from flask_restful import abort as rest_abort, Api, Resource
 from flask_socketio import join_room, SocketIO
 from flask_wtf.csrf import CSRFProtect
 from functools import partial, wraps

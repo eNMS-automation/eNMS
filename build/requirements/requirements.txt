@@ -3,7 +3,6 @@ argon2-cffi
 dicttoxml
 flask
 flask_login
-flask-restful
 flask-socketio
 flask_wtf
 gitpython

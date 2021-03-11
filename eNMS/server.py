@@ -166,7 +166,8 @@ class Server(Flask):
         def decorated_function(*args, **kwargs):
             remote_address = request.environ["REMOTE_ADDR"]
             client_address = request.environ.get("HTTP_X_FORWARDED_FOR", remote_address)
-            if request.path.startswith("/rest/"):
+            rest_request = request.path.startswith("/rest/")
+            if rest_request:
                 user = app.authenticate_user(**request.authorization)
                 if not user:
                     return jsonify({"message": "Wrong credentials"}), 401
@@ -183,10 +184,7 @@ class Server(Flask):
                 return redirect(url_for("blueprint.route", page="login"))
             else:
                 username = current_user.name
-                if request.path.startswith("/rest/"):
-                    endpoint = "/".join(request.path.split("/")[:3])
-                else:
-                    endpoint = f"/{request.path.split('/')[1]}"
+                endpoint = "/".join(request.path.split("/")[:2 + rest_request])
                 request_property = f"{request.method.lower()}_requests"
                 endpoint_rbac = app.rbac[request_property].get(endpoint)
                 if not endpoint_rbac:
@@ -212,7 +210,7 @@ class Server(Flask):
                 if status_code == 500:
                     log += f"\n{traceback}"
                 app.log(app.status_log_level[status_code], log, change_log=False)
-                if request.path.startswith("/rest/"):
+                if rest_request:
                     logout_user()
                 if status_code == 200:
                     return result

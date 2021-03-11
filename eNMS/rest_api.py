@@ -137,8 +137,8 @@ class RestApi:
         if direction == "import":
             result = app.import_topology(
                 **{
-                    "replace": kwargs["form"]["replace"] == "True",
-                    "file": kwargs["files"]["file"],
+                    "replace": kwargs["replace"] == "True",
+                    "file": kwargs["file"],
                 }
             )
             return result, 206 if "Partial" in result else 200

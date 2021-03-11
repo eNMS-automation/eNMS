@@ -43,6 +43,9 @@ class RestApi:
             self.rest_endpoints["POST"][endpoint] = endpoint
             setattr(self, endpoint, getattr(app, endpoint))
 
+    def delete_instance(self, model, name):
+        return db.delete(model, name=name)
+
     def get_configuration(self, device_name, property="configuration"):
         return getattr(db.fetch("device", name=device_name), property)
 
@@ -66,11 +69,18 @@ class RestApi:
                 "result": result.result if result else "No results yet.",
             }
 
-    def delete_instance(self, model, name):
-        return db.delete(model, name=name)
+    def is_alive(self):
+        return {
+            "name": getnode(),
+            "cluster_id": app.settings["cluster"]["id"],
+        }
 
     def migrate(self, direction, **kwargs):
         return getattr(app, f"migration_{direction}")(**kwargs)
+
+    def query(self, model, **kwargs):
+        results = db.fetch(model, all_matches=True, **kwargs)
+        return [result.get_properties(exclude=["positions"]) for result in results]
 
     def run_service(self, **kwargs):
         data = {"trigger": "REST", "creator": current_user.name, **kwargs}
@@ -162,13 +172,3 @@ class RestApi:
             except Exception:
                 result["failure"].append((instance, format_exc()))
         return result
-
-    def is_alive(self):
-        return {
-            "name": getnode(),
-            "cluster_id": app.settings["cluster"]["id"],
-        }
-
-    def query(self, model, **kwargs):
-        results = db.fetch(model, all_matches=True, **kwargs)
-        return [result.get_properties(exclude=["positions"]) for result in results]

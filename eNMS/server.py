@@ -130,10 +130,6 @@ class Server(Flask):
         def user_loader(name):
             return db.get_user(name)
 
-        @login_manager.request_loader
-        def request_loader(request):
-            return db.get_user(request.form.get("name"))
-
     def configure_context_processor(self):
         @self.context_processor
         def inject_properties():

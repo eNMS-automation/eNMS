@@ -19,7 +19,6 @@ from itertools import chain
 from os import getenv, read, write
 from pty import fork
 from subprocess import run
-from time import sleep
 from traceback import format_exc
 
 from eNMS import app

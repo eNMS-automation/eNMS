@@ -24,6 +24,7 @@ class RestApi:
             "run_service": "run_service",
             "run_task": "run_task",
             "search": "search",
+            "topology": "topology",
         },
         "DELETE": {
             "instance": "delete_instance",
@@ -131,6 +132,20 @@ class RestApi:
             "rest_api_request": True,
         }
         return app.filtering(kwargs["type"], **filtering_kwargs)["data"]
+
+    def topology(self, direction, **kwargs):
+        if direction == "import":
+            result = app.import_topology(
+                **{
+                    "replace": kwargs["replace"] == "True",
+                    "file": kwargs["file"],
+                }
+            )
+            status = 206 if "Partial" in result else 200
+            return result, status
+        else:
+            app.export_topology(**kwargs)
+            return "Topology Export successfully executed."
 
     def update_instance(self, model, **data):
         result = defaultdict(list)

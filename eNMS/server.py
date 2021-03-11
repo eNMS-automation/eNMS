@@ -76,20 +76,19 @@ class Server(Flask):
         def user_loader(name):
             return db.get_user(name)
 
-        @login_manager.request_loader
-        def request_loader(request):
-            return db.get_user(request.form.get("name"))
-
     def configure_terminal_socket(self):
         def send_data(session, file_descriptor):
             while True:
-                self.socketio.sleep(0.1)
-                self.socketio.emit(
-                    "output",
-                    read(file_descriptor, 1024).decode(),
-                    namespace="/terminal",
-                    room=session,
-                )
+                try:
+                    self.socketio.sleep(0.1)
+                    self.socketio.emit(
+                        "output",
+                        read(file_descriptor, 1024).decode(),
+                        namespace="/terminal",
+                        room=session,
+                    )
+                except OSError:
+                    break
 
         @self.socketio.on("input", namespace="/terminal")
         def input(data):

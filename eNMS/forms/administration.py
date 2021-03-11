@@ -99,7 +99,7 @@ class LoginForm(BaseForm):
     form_type = HiddenField(default="login")
     get_request_allowed = False
     authentication_method = SelectField("Authentication Method", choices=())
-    name = StringField("Name", [InputRequired()])
+    username = StringField("Name", [InputRequired()])
     password = PasswordField("Password", [InputRequired()])
 
 

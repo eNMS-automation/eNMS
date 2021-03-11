@@ -170,10 +170,7 @@ class Server(Flask):
             remote_address = request.environ["REMOTE_ADDR"]
             client_address = request.environ.get("HTTP_X_FORWARDED_FOR", remote_address)
             if request.path.startswith("/rest/"):
-                user = app.authenticate_user(
-                    name=request.authorization["username"],
-                    password=request.authorization["password"],
-                )
+                user = app.authenticate_user(**request.authorization)
                 if not user:
                     return jsonify({"message": "Wrong credentials"}), 401
                 else:
@@ -246,7 +243,7 @@ class Server(Flask):
         def login():
             if request.method == "POST":
                 kwargs, success = request.form.to_dict(), False
-                username = kwargs["name"]
+                username = kwargs["username"]
                 try:
                     user = app.authenticate_user(**kwargs)
                     if user:

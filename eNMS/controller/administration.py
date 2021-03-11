@@ -23,7 +23,7 @@ from eNMS.models import models, relationships
 
 class AdministrationController(BaseController):
     def authenticate_user(self, **kwargs):
-        name, password = kwargs["name"], kwargs["password"]
+        name, password = kwargs["username"], kwargs["password"]
         if not name or not password:
             return False
         user = db.get_user(name)

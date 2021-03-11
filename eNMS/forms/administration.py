@@ -75,7 +75,7 @@ class CredentialForm(BaseForm):
     form_type = HiddenField(default="credential")
     id = HiddenField()
     name = StringField("Name", [InputRequired()])
-    description = StringField(widget=TextArea(), render_kw={"rows": 13})
+    description = StringField(widget=TextArea(), render_kw={"rows": 6})
     role = SelectField(
         "Role",
         choices=(
@@ -90,9 +90,9 @@ class CredentialForm(BaseForm):
     user_pools = MultipleInstanceField("Users", model="pool")
     priority = IntegerField("Priority", default=1)
     username = StringField("Username")
-    enable_password = PasswordField("'Enable' Password")
     password = PasswordField("Password")
-    private_key = StringField(widget=TextArea(), render_kw={"rows": 10})
+    private_key = StringField(widget=TextArea(), render_kw={"rows": 1})
+    enable_password = PasswordField("'Enable' Password")
 
 
 class LoginForm(BaseForm):

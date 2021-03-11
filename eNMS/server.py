@@ -184,7 +184,7 @@ class Server(Flask):
                 return redirect(url_for("blueprint.route", page="login"))
             else:
                 username = current_user.name
-                endpoint = "/".join(request.path.split("/")[:2 + rest_request])
+                endpoint = "/".join(request.path.split("/")[: 2 + rest_request])
                 request_property = f"{request.method.lower()}_requests"
                 endpoint_rbac = app.rbac[request_property].get(endpoint)
                 if not endpoint_rbac:

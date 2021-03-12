@@ -326,6 +326,7 @@ export function processWorkflowData(instance) {
       workflow.services[serviceIndex] = instance;
     }
     drawIterationEdge(instance);
+    switchMode("motion");
   }
 }
 

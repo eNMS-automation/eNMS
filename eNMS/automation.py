@@ -334,7 +334,7 @@ class ServiceRun:
                 results["summary"] = summary
             for key in ("success", "failure"):
                 device_number = len(results["summary"][key])
-                self.write_state(f"progress/{self.progress_key}/{key}", device_number)
+                self.write_state(f"progress/{self.progress_key}/{key}", device_number, "increment")
             summary[self.skip_value].extend(skipped_targets)
             return results
         else:

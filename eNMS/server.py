@@ -170,7 +170,7 @@ class Server(Flask):
             endpoint = "/".join(request.path.split("/")[: 2 + rest_request])
             request_property = f"{request.method.lower()}_requests"
             endpoint_rbac = app.rbac[request_property].get(endpoint)
-            if rest_request:
+            if rest_request and endpoint_rbac != "none":
                 user = app.authenticate_user(**request.authorization)
                 if not user:
                     return jsonify({"message": "Wrong credentials"}), 401
@@ -189,10 +189,14 @@ class Server(Flask):
                 username = getattr(current_user, "name", "Unknown")
                 if not endpoint_rbac:
                     status_code = 404
-                elif endpoint_rbac != "none" and not current_user.is_admin and (
-                    endpoint_rbac == "admin"
-                    or endpoint_rbac == "access"
-                    and endpoint not in getattr(current_user, request_property)
+                elif (
+                    endpoint_rbac != "none"
+                    and not current_user.is_admin
+                    and (
+                        endpoint_rbac == "admin"
+                        or endpoint_rbac == "access"
+                        and endpoint not in getattr(current_user, request_property)
+                    )
                 ):
                     status_code = 403
                 else:

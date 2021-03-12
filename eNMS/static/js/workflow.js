@@ -881,10 +881,9 @@ function resetDisplay() {
   }
 }
 
-function getWorkflowState(periodic) {
+function getWorkflowState(periodic, first) {
   const runtime = $("#current-runtime").val();
-  const url = runtime ? `/${runtime}` : "";
-  if (userIsActive && workflow?.id) {
+  if (userIsActive && workflow?.id && !first) {
     call({
       url: `/get_service_state/${currentPath}${url}`,
       callback: function (result) {
@@ -898,7 +897,7 @@ function getWorkflowState(periodic) {
       },
     });
   }
-  if (periodic) setTimeout(() => getWorkflowState(true), 4000);
+  if (periodic) setTimeout(() => getWorkflowState(true, false), 4000);
 }
 
 function getWorkflowTree() {
@@ -1036,7 +1035,7 @@ export function initWorkflowBuilder() {
         liveSearch: true,
       });
       $("#edge-type").selectpicker();
-      getWorkflowState(true);
+      getWorkflowState(true, true);
     },
   });
   updateRightClickBindings();

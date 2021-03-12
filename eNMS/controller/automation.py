@@ -231,7 +231,7 @@ class AutomationController(BaseController):
         runs = db.query("run").filter(models["run"].services.any(id=service_id)).all()
         if runtime != "normal" and runs:
             if runtime == "latest":
-                run = sorted(runs, key=attrgetter("runtime"))[0]
+                run = sorted(runs, key=attrgetter("runtime"), reverse=True)[0]
             else:
                 run = db.fetch("run", parent_runtime=runtime)
             state = run.get_state()

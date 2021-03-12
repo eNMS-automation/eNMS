@@ -447,7 +447,10 @@ function getServiceLabel(service) {
 
 function serviceToNode(service) {
   const isPlaceholder = service.scoped_name == "Placeholder";
-  if (isPlaceholder) placeholder = service;
+  if (isPlaceholder) {
+    workflow.isSuperworkflow = true;
+    placeholder = service;
+  }
   const defaultService = ["Start", "End"].includes(service.scoped_name);
   if (defaultService) ends.add(service.id);
   return {
@@ -713,6 +716,9 @@ function createLabel() {
 }
 
 function runWorkflow(withUpdates) {
+  if (workflow.isSuperworkflow) {
+    return notify("A superworkflow cannot be run directly.", "error", 5);
+  }
   resetDisplay();
   if (withUpdates) {
     showInstancePanel("workflow", workflow.id, "run");

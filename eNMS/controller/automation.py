@@ -277,10 +277,7 @@ class AutomationController(BaseController):
                 children_results = []
                 for child in service.services:
                     if child.scoped_name == "Placeholder":
-                        for result in results:
-                            if result.placeholder:
-                                child = result.placeholder
-                                break
+                        child = run.placeholder
                     child_results = rec(child, f"{path}>{child.id}")
                     if not child_results:
                         continue

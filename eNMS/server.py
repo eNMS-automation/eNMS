@@ -167,13 +167,16 @@ class Server(Flask):
             remote_address = request.environ["REMOTE_ADDR"]
             client_address = request.environ.get("HTTP_X_FORWARDED_FOR", remote_address)
             rest_request = request.path.startswith("/rest/")
+            endpoint = "/".join(request.path.split("/")[: 2 + rest_request])
+            request_property = f"{request.method.lower()}_requests"
+            endpoint_rbac = app.rbac[request_property].get(endpoint)
             if rest_request:
                 user = app.authenticate_user(**request.authorization)
                 if not user:
                     return jsonify({"message": "Wrong credentials"}), 401
                 else:
                     login_user(user)
-            if not current_user.is_authenticated:
+            if not current_user.is_authenticated and endpoint_rbac != "none":
                 app.log(
                     "warning",
                     (
@@ -183,13 +186,10 @@ class Server(Flask):
                 )
                 return redirect(url_for("blueprint.route", page="login"))
             else:
-                username = current_user.name
-                endpoint = "/".join(request.path.split("/")[: 2 + rest_request])
-                request_property = f"{request.method.lower()}_requests"
-                endpoint_rbac = app.rbac[request_property].get(endpoint)
+                username = getattr(current_user, "name", "Unknown")
                 if not endpoint_rbac:
                     status_code = 404
-                elif not current_user.is_admin and (
+                elif endpoint_rbac != "none" and not current_user.is_admin and (
                     endpoint_rbac == "admin"
                     or endpoint_rbac == "access"
                     and endpoint not in getattr(current_user, request_property)
@@ -231,10 +231,12 @@ class Server(Flask):
         blueprint = Blueprint("blueprint", __name__, template_folder="../templates")
 
         @blueprint.route("/")
+        @self.monitor_requests
         def site_root():
             return redirect(url_for("blueprint.route", page="login"))
 
         @blueprint.route("/login", methods=["GET", "POST"])
+        @self.monitor_requests
         def login():
             if request.method == "POST":
                 kwargs, success = request.form.to_dict(), False

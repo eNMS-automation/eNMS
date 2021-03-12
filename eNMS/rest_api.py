@@ -46,15 +46,15 @@ class RestApi:
     def delete_instance(self, model, name):
         return db.delete(model, name=name)
 
-    def get_configuration(self, device_name, property="configuration"):
+    def get_configuration(self, device_name, property="configuration", **_):
         return getattr(db.fetch("device", name=device_name), property)
 
-    def get_instance(self, model, name):
+    def get_instance(self, model, name, **_):
         return db.fetch(model, name=name).to_dict(
             relation_names_only=True, exclude=["positions"]
         )
 
-    def get_result(self, name, runtime):
+    def get_result(self, name, runtime, **_):
         run = db.fetch("run", service_name=name, runtime=runtime, allow_none=True)
         if not run:
             error_message = (
@@ -69,7 +69,7 @@ class RestApi:
                 "result": result.result if result else "No results yet.",
             }
 
-    def is_alive(self):
+    def is_alive(self, **_):
         return {
             "name": getnode(),
             "cluster_id": app.settings["cluster"]["id"],

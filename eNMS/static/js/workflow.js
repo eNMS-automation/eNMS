@@ -885,7 +885,7 @@ function getWorkflowState(periodic, first) {
   const runtime = $("#current-runtime").val();
   if (userIsActive && workflow?.id && !first) {
     call({
-      url: `/get_service_state/${currentPath}${url}`,
+      url: `/get_service_state/${currentPath}/${runtime}`,
       callback: function (result) {
         if (!Object.keys(result).length || result.service.id != workflow.id) return;
         currentRuntime = result.runtime;

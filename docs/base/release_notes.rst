@@ -19,6 +19,10 @@ was previously moved outside the application because websockets requires sticky 
 incompatible with having multiple gunicorn workers. Moving to a deployment where eNMS is started
 multiple times with 1 gunicorn worker via the backend stream configuration, it is now possible for
 the terminal to be inside the main application.
+- Refactoring of the REST API
+* all requests are handled by the same "monitor requests" function
+* remove dependency to flask_restful and flask_httpauth
+
 - Fix submenu bug when the menu is minimized (gentelella bug)
 - Replace prerequisite edge with priority mechanism
 - Allow making non-shared service shared and vice-versa (if the shared service doesn't have more than one workflow).

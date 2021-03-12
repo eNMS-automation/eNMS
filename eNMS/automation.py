@@ -53,7 +53,7 @@ class ServiceRun:
             setattr(self, key, value)
         device_progress = "iteration_device" if self.iteration_run else "device"
         self.progress_key = f"progress/{device_progress}"
-        self.main_run = run if self.is_main_run else run.main_run
+        self.main_run = db.fetch("run", runtime=self.parent_runtime)
         if self.service not in self.main_run.services:
             self.main_run.services.append(self.service)
         if self.is_main_run:

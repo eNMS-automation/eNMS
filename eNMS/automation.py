@@ -51,7 +51,8 @@ class ServiceRun:
         app.run_instances[self.runtime] = self
         for key, value in kwargs.items():
             setattr(self, key, value)
-        self.progress_key = "iteration_device" if self.iteration_run else "device"
+        device_progress = "iteration_device" if self.iteration_run else "device"
+        self.progress_key = f"progress/{device_progress}"
         self.main_run = run if self.is_main_run else run.main_run
         if self.service not in self.main_run.services:
             self.main_run.services.append(self.service)
@@ -295,7 +296,7 @@ class ServiceRun:
                 "runtime": self.runtime,
             }
         self.write_state(
-            f"progress/{self.progress_key}/total", len(self.target_devices), "increment"
+            f"{self.progress_key}/total", len(self.target_devices), "increment"
         )
         non_skipped_targets, skipped_targets, results = [], [], []
         skip_service = self.skip.get(getattr(self.workflow, "name", None))
@@ -307,9 +308,7 @@ class ServiceRun:
                 skip_device = self.eval(self.skip_query, **locals())[0]
             if skip_device:
                 if device:
-                    self.write_state(
-                        f"progress/{self.progress_key}/skipped", 1, "increment"
-                    )
+                    self.write_state(f"{self.progress_key}/skipped", 1, "increment")
                 if self.skip_value == "discard":
                     continue
                 device_results = {
@@ -333,8 +332,11 @@ class ServiceRun:
                 summary[summary_key].extend(device_names)
                 results["summary"] = summary
             for key in ("success", "failure"):
-                device_number = len(results["summary"][key])
-                self.write_state(f"progress/{self.progress_key}/{key}", device_number, "increment")
+                self.write_state(
+                    f"{self.progress_key}/{key}",
+                    len(results["summary"][key]),
+                    "increment",
+                )
             summary[self.skip_value].extend(skipped_targets)
             return results
         else:
@@ -509,7 +511,7 @@ class ServiceRun:
             if getattr(self, "close_connection", False) or self.is_main_run:
                 self.close_device_connection(device.name)
             status = "success" if results["success"] else "failure"
-            self.write_state(f"progress/{self.progress_key}/{status}", 1, "increment")
+            self.write_state(f"{self.progress_key}/{status}", 1, "increment")
             self.create_result(
                 {"runtime": app.get_time(), **results}, device, commit=commit
             )

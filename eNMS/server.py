@@ -177,62 +177,54 @@ class Server(Flask):
                     return jsonify({"message": "Wrong credentials"}), 401
                 else:
                     login_user(user)
-            if not current_user.is_authenticated and endpoint_rbac != "none":
-                app.log(
-                    "warning",
-                    (
-                        f"Unauthorized {request.method} request from "
-                        f"'{client_address}' calling the endpoint '{request.url}'"
-                    ),
+            username = getattr(current_user, "name", "Unknown")
+            
+            if not endpoint_rbac:
+                status_code = 404
+            elif (
+                endpoint_rbac != "none"
+                and not getattr(current_user, "is_admin", False)
+                and (
+                    not current_user.is_authenticated
+                    or endpoint_rbac == "admin"
+                    or endpoint_rbac == "access"
+                    and endpoint not in getattr(current_user, request_property)
                 )
-                return redirect(url_for("blueprint.route", page="login"))
+            ):
+                status_code = 403
             else:
-                username = getattr(current_user, "name", "Unknown")
-                if not endpoint_rbac:
-                    status_code = 404
-                elif (
-                    endpoint_rbac != "none"
-                    and not current_user.is_admin
-                    and (
-                        endpoint_rbac == "admin"
-                        or endpoint_rbac == "access"
-                        and endpoint not in getattr(current_user, request_property)
-                    )
-                ):
+                try:
+                    result = function(*args, **kwargs)
+                    status_code = 200
+                except (db.rbac_error, Forbidden):
                     status_code = 403
-                else:
-                    try:
-                        result = function(*args, **kwargs)
-                        status_code = 200
-                    except (db.rbac_error, Forbidden):
-                        status_code = 403
-                    except Exception:
-                        status_code, traceback = 500, format_exc()
-                log = (
-                    f"USER: {username} ({client_address}) - "
-                    f"{request.method} {request.path} - ({status_code})"
-                )
-                if status_code == 500:
-                    log += f"\n{traceback}"
-                app.log(app.status_log_level[status_code], log, change_log=False)
-                if rest_request:
-                    logout_user()
-                if status_code == 200:
-                    return result
-                elif (
-                    endpoint == "/login"
-                    or request.method == "GET"
-                    and not endpoint.startswith("/rest/")
-                ):
-                    return render_template("error.html", error=status_code), status_code
-                else:
-                    message = {
-                        403: "Operation not allowed.",
-                        404: "Invalid POST request.",
-                        500: "Internal Server Error.",
-                    }[status_code]
-                    alert = f"Error {status_code} - {message}"
-                    return jsonify({"alert": alert}), status_code
+                except Exception:
+                    status_code, traceback = 500, format_exc()
+            log = (
+                f"USER: {username} ({client_address}) - "
+                f"{request.method} {request.path} - ({status_code})"
+            )
+            if status_code == 500:
+                log += f"\n{traceback}"
+            app.log(app.status_log_level[status_code], log, change_log=False)
+            if rest_request:
+                logout_user()
+            if status_code == 200:
+                return result
+            elif (
+                endpoint == "/login"
+                or request.method == "GET"
+                and not endpoint.startswith("/rest/")
+            ):
+                return render_template("error.html", error=status_code), status_code
+            else:
+                message = {
+                    403: "Operation not allowed.",
+                    404: "Invalid POST request.",
+                    500: "Internal Server Error.",
+                }[status_code]
+                alert = f"Error {status_code} - {message}"
+                return jsonify({"alert": alert}), status_code
 
         return decorated_function
 

@@ -112,6 +112,7 @@
     "/rest/instance": "access"
   },
   "get_requests": {
+    "/": "none",
     "/access_table": "admin",
     "/alerts_table_form": "all",
     "/calendar_form": "all",

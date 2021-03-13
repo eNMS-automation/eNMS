@@ -171,26 +171,20 @@ class Server(Flask):
             endpoint = "/".join(request.path.split("/")[: 2 + rest_request])
             request_property = f"{request.method.lower()}_requests"
             endpoint_rbac = app.rbac[request_property].get(endpoint)
-            if rest_request and endpoint_rbac != "none":
+            if rest_request:
                 user = app.authenticate_user(**request.authorization)
-                if not user:
-                    return jsonify({"message": "Wrong credentials"}), 401
-                else:
+                if user:
                     login_user(user)
             username = getattr(current_user, "name", "Unknown")
-            
             if not endpoint_rbac:
                 status_code = 404
-            elif (
-                endpoint_rbac != "none"
-                and not getattr(current_user, "is_admin", False)
-                and (
-                    not current_user.is_authenticated
-                    or endpoint_rbac == "admin"
-                    or endpoint_rbac == "access"
+            elif rest_request and endpoint_rbac != "none" and not user:
+                status_code = 401
+            elif (endpoint_rbac != "none" and not getattr(current_user, "is_admin", False)
+                    and (not current_user.is_authenticated or endpoint_rbac == "admin" or (
+                    endpoint_rbac == "access"
                     and endpoint not in getattr(current_user, request_property)
-                )
-            ):
+                ))):
                 status_code = 403
             else:
                 try:
@@ -219,6 +213,7 @@ class Server(Flask):
                 return render_template("error.html", error=status_code), status_code
             else:
                 message = {
+                    401: "Wrong Credentials",
                     403: "Operation not allowed.",
                     404: "Invalid POST request.",
                     500: "Internal Server Error.",
@@ -247,7 +242,7 @@ class Server(Flask):
                     if user:
                         login_user(user, remember=False)
                         session.permanent = True
-                        success, log = True, f"User '{username}' logged in"
+                        success, log = True, f"USER '{username}' logged in"
                     else:
                         log = f"Authentication failed for user '{username}'"
                 except Exception as exc:
@@ -280,7 +275,7 @@ class Server(Flask):
         @blueprint.route("/logout")
         @self.monitor_requests
         def logout():
-            logout_log = f"User '{current_user.name}' logging out"
+            logout_log = f"USER '{current_user.name}' logged out"
             app.log("info", logout_log, logger="security")
             logout_user()
             return redirect(url_for("blueprint.route", page="login"))

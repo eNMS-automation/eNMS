@@ -47,7 +47,7 @@ class BaseController:
 
     log_levels = ["debug", "info", "warning", "error", "critical"]
 
-    status_log_level = {200: "info", 403: "warning", 404: "info", 500: "error"}
+    status_log_level = {200: "info", 401: "warning", 403: "warning", 404: "info", 500: "error"}
 
     property_names = {}
 

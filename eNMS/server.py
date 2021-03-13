@@ -180,11 +180,18 @@ class Server(Flask):
                 status_code = 404
             elif rest_request and endpoint_rbac != "none" and not user:
                 status_code = 401
-            elif (endpoint_rbac != "none" and not getattr(current_user, "is_admin", False)
-                    and (not current_user.is_authenticated or endpoint_rbac == "admin" or (
-                    endpoint_rbac == "access"
-                    and endpoint not in getattr(current_user, request_property)
-                ))):
+            elif (
+                endpoint_rbac != "none"
+                and not getattr(current_user, "is_admin", False)
+                and (
+                    not current_user.is_authenticated
+                    or endpoint_rbac == "admin"
+                    or (
+                        endpoint_rbac == "access"
+                        and endpoint not in getattr(current_user, request_property)
+                    )
+                )
+            ):
                 status_code = 403
             else:
                 try:

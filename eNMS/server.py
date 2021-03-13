@@ -20,6 +20,7 @@ from os import getenv, read, write
 from pty import fork
 from subprocess import run
 from traceback import format_exc
+from werkzeug.exceptions import Forbidden
 
 from eNMS import app
 from eNMS.database import db
@@ -203,7 +204,7 @@ class Server(Flask):
                     try:
                         result = function(*args, **kwargs)
                         status_code = 200
-                    except db.rbac_error:
+                    except (db.rbac_error, Forbidden):
                         status_code = 403
                     except Exception:
                         status_code, traceback = 500, format_exc()
@@ -218,7 +219,11 @@ class Server(Flask):
                     logout_user()
                 if status_code == 200:
                     return result
-                elif request.method == "GET" and not endpoint.startswith("/rest/"):
+                elif (
+                    endpoint == "/login"
+                    or request.method == "GET"
+                    and not endpoint.startswith("/rest/")
+                ):
                     return render_template("error.html", error=status_code), status_code
                 else:
                     message = {

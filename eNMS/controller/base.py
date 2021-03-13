@@ -55,6 +55,13 @@ class BaseController:
         500: "error",
     }
 
+    status_error_message = {
+        401: "Wrong Credentials",
+        403: "Operation not allowed.",
+        404: "Invalid POST request.",
+        500: "Internal Server Error.",
+    }
+
     property_names = {}
 
     def __init__(self):

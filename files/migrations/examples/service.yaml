@@ -15514,7 +15514,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2021-03-16 06:21:39.894997'
+  last_modified: '2021-03-16 06:28:05.018064'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -15543,7 +15543,7 @@
   skip: {}
   skip_query: ''
   skip_value: success
-  source_code: "for i in range(10):\r\n  result[i] = \"DATA\" * 1000\r\n\r\nresult\
+  source_code: "for i in range(10):\r\n  results[i] = \"DATA\" * 1000\r\n\r\nresult\
     \ = {}\r\nresults[\"success\"] = True\r\nresults[\"result\"] = result"
   target_devices: []
   target_pools: []

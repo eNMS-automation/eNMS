@@ -38,4 +38,5 @@ for object_ in profile[:MAX_RESULTS]:
 
 for type in (str, dict):
     print(f"Last {MAX_RESULTS} {type} objects in memory", end="\n\n")
-    print("\n".join(muppy.filter(all_objects, Type=type)[-MAX_RESULTS:]))
+    latest_objects = muppy.filter(all_objects, Type=type)[-MAX_RESULTS:]
+    print("\n".join(map(str, latest_objects)))

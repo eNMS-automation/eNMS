@@ -33,7 +33,7 @@ class AdminForm(BaseForm):
 class DebugForm(BaseForm):
     template = "debug"
     form_type = HiddenField(default="debug")
-    snippets = SelectField(choices=(), validation=False)
+    snippets = SelectField(validate_choice=False)
     code = StringField(
         "Python Code",
         type="code",
@@ -84,7 +84,7 @@ class CredentialForm(BaseForm):
         ),
     )
     subtype = SelectField(
-        "Type", choices=(("password", "Username / Password"), ("key", "SSH Key"))
+        "Subtype", choices=(("password", "Username / Password"), ("key", "SSH Key"))
     )
     device_pools = MultipleInstanceField("Devices", model="pool")
     user_pools = MultipleInstanceField("Users", model="pool")

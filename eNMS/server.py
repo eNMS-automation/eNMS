@@ -130,10 +130,6 @@ class Server(Flask):
         def user_loader(name):
             return db.get_user(name)
 
-        @login_manager.request_loader
-        def request_loader(request):
-            return db.get_user(request.form.get("name"))
-
     def configure_context_processor(self):
         @self.context_processor
         def inject_properties():
@@ -391,7 +387,8 @@ class Server(Flask):
             decorators = [self.auth.login_required, self.monitor_rest_request]
 
             def get(self, name):
-                return db.fetch("device", name=name).configuration
+                property = request.args.to_dict().get("property", "configuration")
+                return getattr(db.fetch("device", name=name), property)
 
         class GetResult(Resource):
             decorators = [self.auth.login_required, self.monitor_rest_request]

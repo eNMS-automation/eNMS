@@ -296,7 +296,7 @@ export function openPanel({
   } else {
     kwargs.contentAjax = {
       url: url || `../${name}_form`,
-      done: function (panel) {
+      done: function (_, panel) {
         panel.content.innerHTML = this.responseText;
         preprocessForm(panel, id, type, duplicate);
         configureForm(name, id, panelId);

@@ -831,7 +831,7 @@ tables.service = class ServiceTable extends Table {
     let runtimeArg = "";
     if (row.type != "workflow") runtimeArg = ", null, 'result'";
     return `
-      <ul class="pagination pagination-lg" style="margin: 0px; width: 270px">
+      <ul class="pagination pagination-lg" style="margin: 0px; width: 300px">
         <li>
           <button type="button" class="btn btn-sm btn-info"
           onclick="eNMS.automation.showRuntimePanel('logs', ${row.instance})"
@@ -853,6 +853,12 @@ tables.service = class ServiceTable extends Table {
             onclick="eNMS.base.showInstancePanel('${row.type}', '${row.id}')"
             data-tooltip="Edit"
           ><span class="glyphicon glyphicon-edit"></span></button>
+        </li>
+        <li>
+          <button type="button" class="btn btn-sm btn-primary"
+          onclick="eNMS.base.showInstancePanel('${row.type}', '${row.id}',
+          'duplicate')" data-tooltip="Duplicate">
+          <span class="glyphicon glyphicon-duplicate"></span></button>
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-primary"

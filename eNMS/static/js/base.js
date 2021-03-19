@@ -620,8 +620,8 @@ export function showInstancePanel(type, id, mode, tableId) {
             panel.setHeaderTitle(`${action} ${type} - ${instance.name}`);
             processInstance(type, instance);
             if (mode == "duplicate" && isService) {
-              const val = page == "workflow_builder" ? [workflow.id] : [];
-              $(`#${type}-workflows-${id}`).val(val).trigger("change");
+              const value = page == "workflow_builder" ? [workflow.id] : [];
+              $(`#${type}-workflows-${id}`).val(value).trigger("change");
             }
           },
         });

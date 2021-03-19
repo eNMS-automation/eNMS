@@ -174,8 +174,8 @@ class ServiceForm(BaseForm):
         )
         if conversion_validation_mismatch:
             self.conversion_method.errors.append(
-                f"The conversion method is set to {self.conversion_method.label}"
-                f" and the validation method to {self.validation_method.label} :"
+                f"The conversion method is set to {self.conversion_method.data}"
+                f" and the validation method to {self.validation_method.data} :"
                 " these do not match."
             )
         empty_validation = self.validation_condition.data != "none" and (

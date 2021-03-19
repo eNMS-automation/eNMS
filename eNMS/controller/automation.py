@@ -55,7 +55,7 @@ class AutomationController(BaseController):
     connections_cache = {
         library: defaultdict(dict) for library in ("netmiko", "napalm", "scrapli")
     }
-    service_db = defaultdict(lambda: {"runs": 0})
+    service_run_count = defaultdict(int)
     run_db = defaultdict(dict)
     run_logs = defaultdict(lambda: defaultdict(list))
     run_stop = defaultdict(bool)

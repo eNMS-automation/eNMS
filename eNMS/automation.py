@@ -179,7 +179,7 @@ class ServiceRun:
         self.write_state("status", "Running")
         start = datetime.now().replace(microsecond=0)
         try:
-            app.service_db[self.service.id]["runs"] += 1
+            app.service_run_count[self.service.id] += 1
             results = {"runtime": self.runtime, **self.device_run()}
         except Exception:
             result = "\n".join(format_exc().splitlines())
@@ -195,8 +195,8 @@ class ServiceRun:
                     pool.compute_pool()
             if self.send_notification:
                 results = self.notify(results)
-            app.service_db[self.service.id]["runs"] -= 1
-            if not app.service_db[self.id]["runs"]:
+            app.service_run_count[self.service.id] -= 1
+            if not app.service_run_count[self.id]:
                 self.service.status = "Idle"
             now = datetime.now().replace(microsecond=0)
             results["duration"] = self.duration = str(now - start)

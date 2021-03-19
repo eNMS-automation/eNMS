@@ -283,7 +283,7 @@ class Run(AbstractBase):
         "Run", remote_side=[id], foreign_keys="Run.parent_id", back_populates="children"
     )
     children = relationship("Run", foreign_keys="Run.parent_id")
-    parent_runtime = db.Column(db.TinyString)
+    parent_runtime = db.Column(db.TinyString, index=True)
     path = db.Column(db.TinyString)
     parent_device_id = db.Column(Integer, ForeignKey("device.id"))
     parent_device = relationship("Device", foreign_keys="Run.parent_device_id")

@@ -31,6 +31,7 @@ the terminal to be inside the main application.
 Bug report mail: "No status for services in subworkflow with device iteration"
 - HTTP requests logging: all requests are now logged by eNMS and not by werkzeug like before.
 => fine grained controlled for what is logged for each request. The log now contains the username.
+- Add duplicate button in service table
 
 MIGRATION:
 

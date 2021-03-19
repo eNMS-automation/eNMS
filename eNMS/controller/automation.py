@@ -144,9 +144,9 @@ class AutomationController(BaseController):
         return {"id": label_id, **label}
 
     def delete_corrupted_edges(self):
-        edges, duplicated_edges = db.fetch_all("workflow_edge"), defaultdict(list)
-        number_of_corrupted_edges = 0
-        for edge in edges:
+        edges = set(db.fetch_all("workflow_edge"))
+        duplicated_edges, number_of_corrupted_edges = defaultdict(list), 0
+        for edge in list(edges):
             services = getattr(edge.workflow, "services", [])
             if (
                 not edge.source
@@ -155,6 +155,7 @@ class AutomationController(BaseController):
                 or edge.source not in services
                 or edge.destination not in services
             ):
+                edges.remove(edge)
                 db.session.delete(edge)
                 number_of_corrupted_edges += 1
         db.session.commit()

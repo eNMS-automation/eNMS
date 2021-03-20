@@ -32,6 +32,10 @@ Bug report mail: "No status for services in subworkflow with device iteration"
 - HTTP requests logging: all requests are now logged by eNMS and not by werkzeug like before.
 => fine grained controlled for what is logged for each request. The log now contains the username.
 - Add duplicate button in service table
+- Refactor the geographical and force-directed view to behave like the workflow builder:
+* List of all pools that contain at least one device or link, stored in user browser local storage
+* Remove default pool mechanism. By design, the default pool becomes the first pool in alphabetical order
+* Add backward / forward control like the workflow builder
 
 MIGRATION:
 

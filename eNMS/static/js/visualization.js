@@ -343,6 +343,7 @@ function updateRightClickBindings(controls) {
     "Create Label": () => openPanel({ name: "view_label", title: "Create New Label" }),
     "Create Plan": () => openPanel({ name: "view_plan", title: "Create New Plan" }),
     "Edit View": () => createNewView("edit"),
+    "Edit Pool": () => showInstancePanel("pool", currentPath),
     Delete: () => deleteSelection(),
     "Duplicate View": () => createNewView("duplicate"),
     "Switch Mode": switchMode,

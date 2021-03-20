@@ -343,7 +343,7 @@ export function createTooltip({
     } else {
       kwargs.contentAjax = {
         url: url,
-        done: function (panel) {
+        done: function (_, panel) {
           panel.content.innerHTML = this.responseText;
           preprocessForm(panel);
           configureForm(name);

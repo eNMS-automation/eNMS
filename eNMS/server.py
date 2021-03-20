@@ -213,7 +213,11 @@ class Server(Flask):
             if status_code == 200:
                 return result
             elif endpoint == "/login" or request.method == "GET" and not rest_request:
-                if not current_user.is_authenticated and not rest_request:
+                if (
+                    not current_user.is_authenticated
+                    and not rest_request
+                    and endpoint != "/login"
+                ):
                     return redirect(url_for("blueprint.route", page="login"))
                 return render_template("error.html", error=status_code), status_code
             else:

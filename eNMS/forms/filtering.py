@@ -2,7 +2,7 @@ from copy import deepcopy
 from wtforms.widgets import TextArea
 
 from eNMS import app
-from eNMS.forms import BaseForm
+from eNMS.forms import BaseForm, form_properties
 from eNMS.forms.fields import (
     HiddenField,
     MultipleInstanceField,
@@ -29,7 +29,9 @@ def filtering_form_generator():
             **relations,
         }
         type(f"{form_type}RelationshipFilteringForm", (BaseForm,), relation_form)
-        form = deepcopy(relation_form)
+        form, default = deepcopy(relation_form), f"{form_type}_filtering"
+        for property in properties:
+            form_properties[default][f"{property}_match"] = {"type": "list"}
         form.update(
             {
                 "form_type": HiddenField(default=f"{form_type}_filtering"),

@@ -336,6 +336,22 @@ function addObjectsToView() {
   });
 }
 
+function zoomIn() {
+  if (page == "logical_view") {
+    controls?.dollyOut()
+  } else {
+    el.dispatchEvent(new CustomEvent('scroll'));
+  }
+}
+
+function zoomOut() {
+  if (page == "logical_view") {
+    controls?.dollyIn();
+  } else {
+    el.dispatchEvent(new CustomEvent('scroll'));
+  }
+}
+
 function updateRightClickBindings(controls) {
   Object.assign(action, {
     "Add to View": addObjectPanel,
@@ -346,8 +362,8 @@ function updateRightClickBindings(controls) {
     Delete: () => deleteSelection(),
     "Duplicate View": () => createNewView("duplicate"),
     "Switch Mode": switchMode,
-    "Zoom In": () => controls?.dollyOut(),
-    "Zoom Out": () => controls?.dollyIn(),
+    "Zoom In": zoomIn,
+    "Zoom Out": zoomOut,
   });
 }
 

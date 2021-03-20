@@ -147,6 +147,30 @@
         ></a>
       </li>
       <li>
+        <a
+          onclick="eNMS.workflow.getWorkflowTree()"
+          data-tooltip="Workflow Tree"
+          style="cursor: pointer;"
+          ><span class="glyphicon glyphicon-tree-conifer"></span
+        ></a>
+      </li>
+      <li>
+        <a
+          onclick="eNMS.visualization.clearSearch()"
+          data-tooltip="Clear Search"
+          style="cursor: pointer;"
+          ><span class="glyphicon glyphicon-remove"></span
+        ></a>
+      </li>
+      <li>
+        <a
+          onclick="eNMS.automation.showRunServicePanel({type: 'device'})"
+          data-tooltip="Run service on all currently displayed devices"
+          style="cursor: pointer;"
+          ><span class="glyphicon glyphicon-play"></span
+        ></a>
+      </li>
+      <li>
         <a onclick="action['Zoom In']()" data-tooltip="Zoom In" style="cursor: pointer;"
           ><span class="glyphicon glyphicon-zoom-in"></span
         ></a>

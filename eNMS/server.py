@@ -291,10 +291,7 @@ class Server(Flask):
         @blueprint.route("/<view_type>_view")
         @self.monitor_requests
         def view(view_type):
-            return render_template(
-                "visualization.html",
-                endpoint=f"{view_type}_view",
-            )
+            return render_template("visualization.html", endpoint=f"{view_type}_view")
 
         @blueprint.route("/workflow_builder")
         @self.monitor_requests

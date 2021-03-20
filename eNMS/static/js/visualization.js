@@ -709,7 +709,7 @@ function displayNetwork({ noAlert, withCluster } = {}) {
   for (let type of ["device", "link"]) {
     let form = serializeForm(`#filtering-form-${type}`);
     if (!form.pools) form.pools = [];
-    if (currentPool) form.pools.push(currentPool)
+    if (currentPool) form.pools.push(currentPool);
     data[type] = { form: form };
   }
   clustered = withCluster;
@@ -995,17 +995,6 @@ function clearSearch() {
   notify("Search parameters cleared.", "success", 5);
 }
 
-function saveParameters() {
-  call({
-    url: "/save_visualization_parameters",
-    form: "visualization_parameters-form",
-    callback: () => {
-      notify("Default pools saved.", "success", 5);
-      $("#visualization_parameters").remove();
-    },
-  });
-}
-
 configureNamespace("visualization", [
   addObjectsToView,
   clearSearch,
@@ -1013,7 +1002,5 @@ configureNamespace("visualization", [
   createPlan,
   displayFilteringPanel,
   displayNetwork,
-  openVisualizationPanel,
-  saveParameters,
   switchMode,
 ]);

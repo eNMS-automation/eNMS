@@ -236,7 +236,6 @@
     "/save_session": "access",
     "/save_settings": "admin",
     "/save_view_positions": "access",
-    "/save_visualization_parameters": "access",
     "/scan_cluster": "access",
     "/scan_playbook_folder": "access",
     "/search_workflow_services": "access",

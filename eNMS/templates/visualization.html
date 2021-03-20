@@ -75,50 +75,7 @@
     <a tabindex="-1" href="#">Run Service</a>
   </li>
 </ul>
-{% if endpoint == "geographical_view" %}
-<nav class="navbar navbar-default controls nav-controls" role="navigation">
-  <button
-    style="margin-left: 5px;"
-    type="button"
-    onclick="eNMS.visualization.displayFilteringPanel('device')"
-    class="btn btn-info btn-search"
-  >
-    <span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp;Device
-  </button>
-  <button
-    type="button"
-    onclick="eNMS.visualization.displayFilteringPanel('link')"
-    class="btn btn-info btn-search"
-  >
-    <span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp;Link
-  </button>
-  <button
-    type="button"
-    class="btn btn-info"
-    data-tooltip="Refresh"
-    type="button"
-    onclick="eNMS.visualization.displayNetwork({})"
-  >
-    <span class="glyphicon glyphicon-refresh"></span>
-  </button>
-  <button
-    class="btn btn-info"
-    onclick="eNMS.visualization.clearSearch()"
-    data-tooltip="Clear Search"
-    type="button"
-  >
-    <span class="glyphicon glyphicon-remove"></span>
-  </button>
-  <button
-    type="button"
-    class="btn btn-success"
-    onclick="eNMS.automation.showRunServicePanel({type: 'device'})"
-    data-tooltip="Run service on all currently displayed devices"
-  >
-    <span class="glyphicon glyphicon-play"></span>
-  </button>
-</nav>
-{% elif endpoint == "force_directed_view" %}
+{% if endpoint != "logical_view" %}
 <div class="controls">
   <nav class="navbar navbar-default navbar-custom" role="navigation">
     <div style="width: 305px; margin: 0px;">

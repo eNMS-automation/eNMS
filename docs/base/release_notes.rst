@@ -37,12 +37,14 @@ Bug report mail: "No status for services in subworkflow with device iteration"
 * Remove default pool mechanism. Remove "visualization_default" property in pool model.
 By design, the default pool becomes the first pool in alphabetical order
 * Add backward / forward control like the workflow builder
+- Rename "monitor_requests" function to "process_requests": impact on plugins
 
 MIGRATION:
 
 - In all services,
 def job(self, run, payload, device): -> def job(self, run, device):
 - Check that all "operator" property in pool.yaml are set to "all"
+- In all plugins, "monitor_requests" should be renamed to "process_requests"
 
 To be tested:
 - Refactoring of the run mechanism:

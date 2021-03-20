@@ -212,11 +212,7 @@ class Server(Flask):
                 logout_user()
             if status_code == 200:
                 return result
-            elif (
-                endpoint == "/login"
-                or request.method == "GET"
-                and not endpoint.startswith("/rest/")
-            ):
+            elif endpoint == "/login" or request.method == "GET" and not rest_request:
                 return render_template("error.html", error=status_code), status_code
             else:
                 alert = f"Error {status_code} - {app.status_error_message[status_code]}"
@@ -276,8 +272,8 @@ class Server(Flask):
         @blueprint.route("/logout")
         @self.monitor_requests
         def logout():
-            logout_user()
             logout_log = f"USER '{current_user.name}' logged out"
+            logout_user()
             app.log("info", logout_log, logger="security")
             return redirect(url_for("blueprint.route", page="login"))
 

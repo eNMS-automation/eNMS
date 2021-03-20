@@ -1,4 +1,4 @@
-- access_pools: ['All instances (devices, links, services and users)']
+- access_pools: ['All devices, links, services and users']
   access_type: "['Read', 'Edit', 'Run', 'Schedule', 'Connect', 'Use as target']"
   delete_requests: [/rest/instance]
   description: Full Access to Everything
@@ -66,7 +66,7 @@
   type: access
   upper_menu: []
   user_pools: [User ny]
-- access_pools: ['All instances (devices, links, services and users)']
+- access_pools: ['All devices, links, services and users']
   access_type: "['Read']"
   delete_requests: []
   description: All menu entries and GET requests, all non-editing POST requests.

@@ -1,59 +1,59 @@
 - {color: green, destination: '[Regression Workflow: VRF Creation and Deletion with
     Netmiko] netmiko_create_vrf_test', label: success, name: '[Regression Workflow:
-    VRF Creation and Deletion with Netmiko] 2021-03-09 06:57:33.150965', source: '[Shared]
+    VRF Creation and Deletion with Netmiko] 2021-03-20 09:17:05.277165', source: '[Shared]
     Start', subtype: success, type: workflow_edge, workflow: 'Regression Workflow:
     VRF Creation and Deletion with Netmiko'}
 - {color: green, destination: '[Regression Workflow: VRF Creation and Deletion with
     Netmiko] netmiko_check_vrf_test', label: success, name: '[Regression Workflow:
-    VRF Creation and Deletion with Netmiko] 2021-03-09 06:57:33.150985', source: '[Regression
+    VRF Creation and Deletion with Netmiko] 2021-03-20 09:17:05.277200', source: '[Regression
     Workflow: VRF Creation and Deletion with Netmiko] netmiko_create_vrf_test', subtype: success,
   type: workflow_edge, workflow: 'Regression Workflow: VRF Creation and Deletion with
     Netmiko'}
 - {color: green, destination: '[Regression Workflow: VRF Creation and Deletion with
     Netmiko] netmiko_delete_vrf_test', label: success, name: '[Regression Workflow:
-    VRF Creation and Deletion with Netmiko] 2021-03-09 06:57:33.150996', source: '[Regression
+    VRF Creation and Deletion with Netmiko] 2021-03-20 09:17:05.277216', source: '[Regression
     Workflow: VRF Creation and Deletion with Netmiko] netmiko_check_vrf_test', subtype: success,
   type: workflow_edge, workflow: 'Regression Workflow: VRF Creation and Deletion with
     Netmiko'}
 - {color: green, destination: '[Shared] Netmiko: Check VRF (test) does not exist',
   label: success, name: '[Regression Workflow: VRF Creation and Deletion with Netmiko]
-    2021-03-09 06:57:33.151005', source: '[Regression Workflow: VRF Creation and Deletion
+    2021-03-20 09:17:05.277230', source: '[Regression Workflow: VRF Creation and Deletion
     with Netmiko] netmiko_delete_vrf_test', subtype: success, type: workflow_edge,
   workflow: 'Regression Workflow: VRF Creation and Deletion with Netmiko'}
 - {color: green, destination: '[Shared] End', label: success, name: '[Regression Workflow:
-    VRF Creation and Deletion with Netmiko] 2021-03-09 06:57:33.151014', source: '[Shared]
+    VRF Creation and Deletion with Netmiko] 2021-03-20 09:17:05.277243', source: '[Shared]
     Netmiko: Check VRF (test) does not exist', subtype: success, type: workflow_edge,
   workflow: 'Regression Workflow: VRF Creation and Deletion with Netmiko'}
 - {color: green, destination: '[[Regression Workflow: Workflow of Workflows] Regression
     Workflow: VRF Creation and Deletion with Napalm] Create a VRF with NAPALM', label: success,
   name: '[[Regression Workflow: Workflow of Workflows] Regression Workflow: VRF Creation
-    and Deletion with Napalm] 2021-03-09 06:57:33.151023', source: '[Shared] Start',
+    and Deletion with Napalm] 2021-03-20 09:17:05.277256', source: '[Shared] Start',
   subtype: success, type: workflow_edge, workflow: '[Regression Workflow: Workflow
     of Workflows] Regression Workflow: VRF Creation and Deletion with Napalm'}
 - {color: green, destination: '[Regression Workflow: Service Priorities, Napalm Getters,
     Postprocessing] get_interfaces_ip', label: success, name: '[Regression Workflow:
-    Service Priorities, Napalm Getters, Postprocessing] 2021-03-09 06:57:33.151032',
+    Service Priorities, Napalm Getters, Postprocessing] 2021-03-20 09:17:05.277270',
   source: '[Shared] NAPALM: Get Facts', subtype: success, type: workflow_edge, workflow: 'Regression
     Workflow: Service Priorities, Napalm Getters, Postprocessing'}
 - {color: green, destination: '[Regression Workflow: Service Priorities, Napalm Getters,
     Postprocessing] get_config', label: success, name: '[Regression Workflow: Service
-    Priorities, Napalm Getters, Postprocessing] 2021-03-09 06:57:33.151041', source: '[Regression
+    Priorities, Napalm Getters, Postprocessing] 2021-03-20 09:17:05.277282', source: '[Regression
     Workflow: Service Priorities, Napalm Getters, Postprocessing] get_interfaces_ip',
   subtype: success, type: workflow_edge, workflow: 'Regression Workflow: Service Priorities,
     Napalm Getters, Postprocessing'}
 - {color: green, destination: '[Regression Workflow: Service Priorities, Napalm Getters,
     Postprocessing] process_payload1', label: success, name: '[Regression Workflow:
-    Service Priorities, Napalm Getters, Postprocessing] 2021-03-09 06:57:33.151050',
+    Service Priorities, Napalm Getters, Postprocessing] 2021-03-20 09:17:05.277295',
   source: '[Regression Workflow: Service Priorities, Napalm Getters, Postprocessing]
     get_config', subtype: success, type: workflow_edge, workflow: 'Regression Workflow:
     Service Priorities, Napalm Getters, Postprocessing'}
 - {color: green, destination: '[Regression Workflow: Service Priorities, Napalm Getters,
     Postprocessing] process_payload1', label: success, name: '[Regression Workflow:
-    Service Priorities, Napalm Getters, Postprocessing] 2021-03-09 06:57:33.151058',
+    Service Priorities, Napalm Getters, Postprocessing] 2021-03-20 09:17:05.277307',
   source: '[Shared] NAPALM: Get interfaces', subtype: success, type: workflow_edge,
   workflow: 'Regression Workflow: Service Priorities, Napalm Getters, Postprocessing'}
 - {color: green, destination: '[Shared] End', label: success, name: '[Regression Workflow:
-    Service Priorities, Napalm Getters, Postprocessing] 2021-03-09 06:57:33.151067',
+    Service Priorities, Napalm Getters, Postprocessing] 2021-03-20 09:17:05.277320',
   source: '[Regression Workflow: Service Priorities, Napalm Getters, Postprocessing]
     process_payload1', subtype: success, type: workflow_edge, workflow: 'Regression
     Workflow: Service Priorities, Napalm Getters, Postprocessing'}
@@ -61,14 +61,14 @@
     Workflow: Subworkflow of Workflows] Regression Workflow: Payload Extraction &
     Validation] netmiko_show_ip_route', label: success, name: '[[[Regression Workflow:
     Workflow of Workflows] Regression Workflow: Subworkflow of Workflows] Regression
-    Workflow: Payload Extraction & Validation] 2021-03-09 06:57:33.151076', source: '[Shared]
+    Workflow: Payload Extraction & Validation] 2021-03-20 09:17:05.277333', source: '[Shared]
     Start', subtype: success, type: workflow_edge, workflow: '[[Regression Workflow:
     Workflow of Workflows] Regression Workflow: Subworkflow of Workflows] Regression
     Workflow: Payload Extraction & Validation'}
 - {color: green, destination: '[[Regression Workflow: Workflow of Workflows] Regression
     Workflow: VRF Creation and Deletion with Napalm] Check VRF exists with Netmiko',
   label: success, name: '[[Regression Workflow: Workflow of Workflows] Regression
-    Workflow: VRF Creation and Deletion with Napalm] 2021-03-09 06:57:33.151085',
+    Workflow: VRF Creation and Deletion with Napalm] 2021-03-20 09:17:05.277350',
   source: '[[Regression Workflow: Workflow of Workflows] Regression Workflow: VRF
     Creation and Deletion with Napalm] Create a VRF with NAPALM', subtype: success,
   type: workflow_edge, workflow: '[Regression Workflow: Workflow of Workflows] Regression
@@ -76,7 +76,7 @@
 - {color: green, destination: '[[Regression Workflow: Workflow of Workflows] Regression
     Workflow: VRF Creation and Deletion with Napalm] Rollback Configuration with NAPALM',
   label: success, name: '[[Regression Workflow: Workflow of Workflows] Regression
-    Workflow: VRF Creation and Deletion with Napalm] 2021-03-09 06:57:33.151093',
+    Workflow: VRF Creation and Deletion with Napalm] 2021-03-20 09:17:05.277363',
   source: '[[Regression Workflow: Workflow of Workflows] Regression Workflow: VRF
     Creation and Deletion with Napalm] Check VRF exists with Netmiko', subtype: success,
   type: workflow_edge, workflow: '[Regression Workflow: Workflow of Workflows] Regression
@@ -84,72 +84,72 @@
 - {color: green, destination: '[[Regression Workflow: Workflow of Workflows] Regression
     Workflow: VRF Creation and Deletion with Napalm] Check VRF is not configured with
     Netmiko', label: success, name: '[[Regression Workflow: Workflow of Workflows]
-    Regression Workflow: VRF Creation and Deletion with Napalm] 2021-03-09 06:57:33.151102',
+    Regression Workflow: VRF Creation and Deletion with Napalm] 2021-03-20 09:17:05.277376',
   source: '[[Regression Workflow: Workflow of Workflows] Regression Workflow: VRF
     Creation and Deletion with Napalm] Rollback Configuration with NAPALM', subtype: success,
   type: workflow_edge, workflow: '[Regression Workflow: Workflow of Workflows] Regression
     Workflow: VRF Creation and Deletion with Napalm'}
 - {color: green, destination: '[Shared] End', label: success, name: '[[Regression
     Workflow: Workflow of Workflows] Regression Workflow: VRF Creation and Deletion
-    with Napalm] 2021-03-09 06:57:33.151111', source: '[[Regression Workflow: Workflow
+    with Napalm] 2021-03-20 09:17:05.277388', source: '[[Regression Workflow: Workflow
     of Workflows] Regression Workflow: VRF Creation and Deletion with Napalm] Check
     VRF is not configured with Netmiko', subtype: success, type: workflow_edge, workflow: '[Regression
     Workflow: Workflow of Workflows] Regression Workflow: VRF Creation and Deletion
     with Napalm'}
 - {color: green, destination: '[Shared] NAPALM: Get Facts', label: success, name: '[Regression
-    Workflow: Service Priorities, Napalm Getters, Postprocessing] 2021-03-09 06:57:33.151119',
+    Workflow: Service Priorities, Napalm Getters, Postprocessing] 2021-03-20 09:17:05.277401',
   source: '[Shared] Start', subtype: success, type: workflow_edge, workflow: 'Regression
     Workflow: Service Priorities, Napalm Getters, Postprocessing'}
 - {color: green, destination: '[Shared] NAPALM: Get interfaces', label: success, name: '[Regression
-    Workflow: Service Priorities, Napalm Getters, Postprocessing] 2021-03-09 06:57:33.151128',
+    Workflow: Service Priorities, Napalm Getters, Postprocessing] 2021-03-20 09:17:05.277462',
   source: '[Shared] Start', subtype: success, type: workflow_edge, workflow: 'Regression
     Workflow: Service Priorities, Napalm Getters, Postprocessing'}
 - {color: red, destination: '[Shared] REST API: call *is_alive* endpoint', label: failure,
-  name: '[Regression Workflow: Separate Failure - Success Paths] 2021-03-09 06:57:33.151137',
+  name: '[Regression Workflow: Separate Failure - Success Paths] 2021-03-20 09:17:05.277479',
   source: '[Shared] Netmiko: Check VRF (test) does not exist', subtype: failure, type: workflow_edge,
   workflow: 'Regression Workflow: Separate Failure - Success Paths'}
 - {color: green, destination: '[Shared] Netmiko: Check VRF (test) does not exist',
-  label: success, name: '[Regression Workflow: Separate Failure - Success Paths] 2021-03-09
-    06:57:33.151146', source: '[Shared] Start', subtype: success, type: workflow_edge,
+  label: success, name: '[Regression Workflow: Separate Failure - Success Paths] 2021-03-20
+    09:17:05.277492', source: '[Shared] Start', subtype: success, type: workflow_edge,
   workflow: 'Regression Workflow: Separate Failure - Success Paths'}
 - {color: green, destination: '[Shared] NAPALM: Get Facts', label: success, name: '[Regression
-    Workflow: Separate Failure - Success Paths] 2021-03-09 06:57:33.151155', source: '[Shared]
+    Workflow: Separate Failure - Success Paths] 2021-03-20 09:17:05.277504', source: '[Shared]
     Netmiko: Check VRF (test) does not exist', subtype: success, type: workflow_edge,
   workflow: 'Regression Workflow: Separate Failure - Success Paths'}
 - {color: red, destination: '[Regression Workflow: Netmiko Prompts] Test netmiko prompts
-    pass', label: failure, name: '[Regression Workflow: Netmiko Prompts] 2021-03-09
-    06:57:33.151164', source: '[Regression Workflow: Netmiko Prompts] Test Netmiko
+    pass', label: failure, name: '[Regression Workflow: Netmiko Prompts] 2021-03-20
+    09:17:05.277517', source: '[Regression Workflow: Netmiko Prompts] Test Netmiko
     Prompt Service', subtype: failure, type: workflow_edge, workflow: 'Regression
     Workflow: Netmiko Prompts'}
 - {color: green, destination: '[Regression Workflow: Using get_var, set_var, get_result
     functions] Modify payload (no device)', label: success, name: '[Regression Workflow:
-    Using get_var, set_var, get_result functions] 2021-03-09 06:57:33.151173', source: '[Shared]
+    Using get_var, set_var, get_result functions] 2021-03-20 09:17:05.277531', source: '[Shared]
     Start', subtype: success, type: workflow_edge, workflow: 'Regression Workflow:
     Using get_var, set_var, get_result functions'}
 - {color: green, destination: '[Regression Workflow: Using get_var, set_var, get_result
     functions] Modify payload (per device)', label: success, name: '[Regression Workflow:
-    Using get_var, set_var, get_result functions] 2021-03-09 06:57:33.151182', source: '[Regression
+    Using get_var, set_var, get_result functions] 2021-03-20 09:17:05.277543', source: '[Regression
     Workflow: Using get_var, set_var, get_result functions] Modify payload (no device)',
   subtype: success, type: workflow_edge, workflow: 'Regression Workflow: Using get_var,
     set_var, get_result functions'}
 - {color: green, destination: '[Regression Workflow: Using get_var, set_var, get_result
     functions] Show vrf with payload helper', label: success, name: '[Regression Workflow:
-    Using get_var, set_var, get_result functions] 2021-03-09 06:57:33.151190', source: '[Regression
+    Using get_var, set_var, get_result functions] 2021-03-20 09:17:05.277556', source: '[Regression
     Workflow: Using get_var, set_var, get_result functions] Modify payload (per device)',
   subtype: success, type: workflow_edge, workflow: 'Regression Workflow: Using get_var,
     set_var, get_result functions'}
 - {color: green, destination: '[Shared] REST API: call *is_alive* endpoint', label: success,
-  name: '[Regression Workflow: Using get_var, set_var, get_result functions] 2021-03-09
-    06:57:33.151199', source: '[Regression Workflow: Using get_var, set_var, get_result
+  name: '[Regression Workflow: Using get_var, set_var, get_result functions] 2021-03-20
+    09:17:05.277569', source: '[Regression Workflow: Using get_var, set_var, get_result
     functions] Show vrf with python query', subtype: success, type: workflow_edge,
   workflow: 'Regression Workflow: Using get_var, set_var, get_result functions'}
 - {color: green, destination: '[Regression Workflow: Using get_var, set_var, get_result
     functions] show runtime with get_result helper', label: success, name: '[Regression
-    Workflow: Using get_var, set_var, get_result functions] 2021-03-09 06:57:33.151208',
+    Workflow: Using get_var, set_var, get_result functions] 2021-03-20 09:17:05.277581',
   source: '[Shared] REST API: call *is_alive* endpoint', subtype: success, type: workflow_edge,
   workflow: 'Regression Workflow: Using get_var, set_var, get_result functions'}
 - {color: green, destination: '[Shared] End', label: success, name: '[Regression Workflow:
-    Using get_var, set_var, get_result functions] 2021-03-09 06:57:33.151216', source: '[Regression
+    Using get_var, set_var, get_result functions] 2021-03-20 09:17:05.277593', source: '[Regression
     Workflow: Using get_var, set_var, get_result functions] show runtime with get_result
     helper', subtype: success, type: workflow_edge, workflow: 'Regression Workflow:
     Using get_var, set_var, get_result functions'}
@@ -157,7 +157,7 @@
     Workflow: Subworkflow of Workflows] Regression Workflow: Napalm Getters Validation]
     Getters Workflow: is alive', label: success, name: '[[[Regression Workflow: Workflow
     of Workflows] Regression Workflow: Subworkflow of Workflows] Regression Workflow:
-    Napalm Getters Validation] 2021-03-09 06:57:33.151225', source: '[Shared] Start',
+    Napalm Getters Validation] 2021-03-20 09:17:05.277607', source: '[Shared] Start',
   subtype: success, type: workflow_edge, workflow: '[[Regression Workflow: Workflow
     of Workflows] Regression Workflow: Subworkflow of Workflows] Regression Workflow:
     Napalm Getters Validation'}
@@ -165,7 +165,7 @@
     Workflow: Subworkflow of Workflows] Regression Workflow: Napalm Getters Validation]
     Getters Workflow: get facts', label: success, name: '[[[Regression Workflow: Workflow
     of Workflows] Regression Workflow: Subworkflow of Workflows] Regression Workflow:
-    Napalm Getters Validation] 2021-03-09 06:57:33.151234', source: '[[[Regression
+    Napalm Getters Validation] 2021-03-20 09:17:05.277619', source: '[[[Regression
     Workflow: Workflow of Workflows] Regression Workflow: Subworkflow of Workflows]
     Regression Workflow: Napalm Getters Validation] Getters Workflow: is alive', subtype: success,
   type: workflow_edge, workflow: '[[Regression Workflow: Workflow of Workflows] Regression
@@ -174,13 +174,13 @@
     Workflow: Subworkflow of Workflows] Regression Workflow: Napalm Getters Validation]
     Getters Workflow: MAC address', label: success, name: '[[[Regression Workflow:
     Workflow of Workflows] Regression Workflow: Subworkflow of Workflows] Regression
-    Workflow: Napalm Getters Validation] 2021-03-09 06:57:33.151242', source: '[Shared]
+    Workflow: Napalm Getters Validation] 2021-03-20 09:17:05.277631', source: '[Shared]
     Getters Workflow: Interface IP', subtype: success, type: workflow_edge, workflow: '[[Regression
     Workflow: Workflow of Workflows] Regression Workflow: Subworkflow of Workflows]
     Regression Workflow: Napalm Getters Validation'}
 - {color: green, destination: '[Shared] End', label: success, name: '[[[Regression
     Workflow: Workflow of Workflows] Regression Workflow: Subworkflow of Workflows]
-    Regression Workflow: Napalm Getters Validation] 2021-03-09 06:57:33.151251', source: '[[[Regression
+    Regression Workflow: Napalm Getters Validation] 2021-03-20 09:17:05.277644', source: '[[[Regression
     Workflow: Workflow of Workflows] Regression Workflow: Subworkflow of Workflows]
     Regression Workflow: Napalm Getters Validation] Getters Workflow: MAC address',
   subtype: success, type: workflow_edge, workflow: '[[Regression Workflow: Workflow
@@ -190,7 +190,7 @@
     Workflow: Subworkflow of Workflows] Regression Workflow: Napalm Getters Validation]
     Getters Workflow: get facts failed match', label: success, name: '[[[Regression
     Workflow: Workflow of Workflows] Regression Workflow: Subworkflow of Workflows]
-    Regression Workflow: Napalm Getters Validation] 2021-03-09 06:57:33.151260', source: '[[[Regression
+    Regression Workflow: Napalm Getters Validation] 2021-03-20 09:17:05.277672', source: '[[[Regression
     Workflow: Workflow of Workflows] Regression Workflow: Subworkflow of Workflows]
     Regression Workflow: Napalm Getters Validation] Getters Workflow: get facts',
   subtype: success, type: workflow_edge, workflow: '[[Regression Workflow: Workflow
@@ -198,7 +198,7 @@
     Napalm Getters Validation'}
 - {color: red, destination: '[Shared] Getters Workflow: Interface IP', label: failure,
   name: '[[[Regression Workflow: Workflow of Workflows] Regression Workflow: Subworkflow
-    of Workflows] Regression Workflow: Napalm Getters Validation] 2021-03-09 06:57:33.151268',
+    of Workflows] Regression Workflow: Napalm Getters Validation] 2021-03-20 09:17:05.277690',
   source: '[[[Regression Workflow: Workflow of Workflows] Regression Workflow: Subworkflow
     of Workflows] Regression Workflow: Napalm Getters Validation] Getters Workflow:
     get facts failed match', subtype: failure, type: workflow_edge, workflow: '[[Regression
@@ -206,80 +206,80 @@
     Regression Workflow: Napalm Getters Validation'}
 - {color: green, destination: '[Regression Workflow: Ansible with Validation] Ansible
     Workflow: Arista show configuration (regex match)', label: success, name: '[Regression
-    Workflow: Ansible with Validation] 2021-03-09 06:57:33.151277', source: '[Regression
+    Workflow: Ansible with Validation] 2021-03-20 09:17:05.277703', source: '[Regression
     Workflow: Ansible with Validation] Ansible Workflow: Arista show version', subtype: success,
   type: workflow_edge, workflow: 'Regression Workflow: Ansible with Validation'}
 - {color: green, destination: '[Regression Workflow: Ansible with Validation] Ansible
     Workflow: Arista show configuration (dict match)', label: success, name: '[Regression
-    Workflow: Ansible with Validation] 2021-03-09 06:57:33.151286', source: '[Regression
+    Workflow: Ansible with Validation] 2021-03-20 09:17:05.277716', source: '[Regression
     Workflow: Ansible with Validation] Ansible Workflow: Arista show configuration
     (regex match)', subtype: success, type: workflow_edge, workflow: 'Regression Workflow:
     Ansible with Validation'}
 - {color: green, destination: '[Shared] End', label: success, name: '[Regression Workflow:
-    Ansible with Validation] 2021-03-09 06:57:33.151295', source: '[Regression Workflow:
+    Ansible with Validation] 2021-03-20 09:17:05.277729', source: '[Regression Workflow:
     Ansible with Validation] Ansible Workflow: Arista show configuration (dict match)',
   subtype: success, type: workflow_edge, workflow: 'Regression Workflow: Ansible with
     Validation'}
 - {color: green, destination: '[Shared] NAPALM: Get interfaces', label: success, name: '[Regression
-    Workflow: Separate Failure - Success Paths] 2021-03-09 06:57:33.151303', source: '[Shared]
+    Workflow: Separate Failure - Success Paths] 2021-03-20 09:17:05.277741', source: '[Shared]
     REST API: call *is_alive* endpoint', subtype: success, type: workflow_edge, workflow: 'Regression
     Workflow: Separate Failure - Success Paths'}
 - {color: green, destination: '[Shared] Example Service (does nothing)', label: success,
-  name: '[Regression Workflow: Separate Failure - Success Paths] 2021-03-09 06:57:33.151312',
+  name: '[Regression Workflow: Separate Failure - Success Paths] 2021-03-20 09:17:05.277754',
   source: '[Shared] NAPALM: Get interfaces', subtype: success, type: workflow_edge,
   workflow: 'Regression Workflow: Separate Failure - Success Paths'}
 - {color: green, destination: '[Shared] NAPALM: Get interfaces', label: success, name: '[Regression
-    Workflow: Separate Failure - Success Paths] 2021-03-09 06:57:33.151320', source: '[Shared]
+    Workflow: Separate Failure - Success Paths] 2021-03-20 09:17:05.277767', source: '[Shared]
     NAPALM: Get Facts', subtype: success, type: workflow_edge, workflow: 'Regression
     Workflow: Separate Failure - Success Paths'}
 - {color: red, destination: '[Shared] Example Service (does nothing)', label: failure,
-  name: '[Regression Workflow: Separate Failure - Success Paths] 2021-03-09 06:57:33.151329',
+  name: '[Regression Workflow: Separate Failure - Success Paths] 2021-03-20 09:17:05.277779',
   source: '[Shared] NAPALM: Get interfaces', subtype: failure, type: workflow_edge,
   workflow: 'Regression Workflow: Separate Failure - Success Paths'}
 - {color: green, destination: '[Regression Workflow: Advanced Multiprocessing (admin)]
     Show version with multiprocessing', label: success, name: '[Regression Workflow:
-    Advanced Multiprocessing (admin)] 2021-03-09 06:57:33.151369', source: '[Shared]
+    Advanced Multiprocessing (admin)] 2021-03-20 09:17:05.277792', source: '[Shared]
     Start', subtype: success, type: workflow_edge, workflow: 'Regression Workflow:
     Advanced Multiprocessing (admin)'}
 - {color: green, destination: '[Regression Workflow: Advanced Multiprocessing (admin)]
     napalm_configure_bgp_1', label: success, name: '[Regression Workflow: Advanced
-    Multiprocessing (admin)] 2021-03-09 06:57:33.151381', source: '[Shared] Example
+    Multiprocessing (admin)] 2021-03-20 09:17:05.277805', source: '[Shared] Example
     Service (does nothing)', subtype: success, type: workflow_edge, workflow: 'Regression
     Workflow: Advanced Multiprocessing (admin)'}
 - {color: green, destination: '[Shared] REST API: call *is_alive* endpoint', label: success,
-  name: '[Regression Workflow: Advanced Multiprocessing (admin)] 2021-03-09 06:57:33.151389',
+  name: '[Regression Workflow: Advanced Multiprocessing (admin)] 2021-03-20 09:17:05.277818',
   source: '[Regression Workflow: Advanced Multiprocessing (admin)] napalm_configure_bgp_1',
   subtype: success, type: workflow_edge, workflow: 'Regression Workflow: Advanced
     Multiprocessing (admin)'}
 - {color: red, destination: '[Shared] REST API: call *is_alive* endpoint', label: failure,
-  name: '[Regression Workflow: Advanced Multiprocessing (admin)] 2021-03-09 06:57:33.151398',
+  name: '[Regression Workflow: Advanced Multiprocessing (admin)] 2021-03-20 09:17:05.277830',
   source: '[Regression Workflow: Advanced Multiprocessing (admin)] Show version with
     multiprocessing', subtype: failure, type: workflow_edge, workflow: 'Regression
     Workflow: Advanced Multiprocessing (admin)'}
 - {color: green, destination: '[Shared] End', label: success, name: '[Regression Workflow:
-    Advanced Multiprocessing (admin)] 2021-03-09 06:57:33.151407', source: '[Shared]
+    Advanced Multiprocessing (admin)] 2021-03-20 09:17:05.277843', source: '[Shared]
     REST API: call *is_alive* endpoint', subtype: success, type: workflow_edge, workflow: 'Regression
     Workflow: Advanced Multiprocessing (admin)'}
 - {color: green, destination: '[Shared] Modify Payload for Iteration', label: success,
-  name: '[Regression Workflow: Iteration Targets Mechanism] 2021-03-09 06:57:33.151416',
+  name: '[Regression Workflow: Iteration Targets Mechanism] 2021-03-20 09:17:05.277856',
   source: '[Shared] Start', subtype: success, type: workflow_edge, workflow: 'Regression
     Workflow: Iteration Targets Mechanism'}
 - {color: green, destination: '[Regression Workflow: Iteration Targets Mechanism]
     Iteration Target Workflow - Test 2', label: success, name: '[Regression Workflow:
-    Iteration Targets Mechanism] 2021-03-09 06:57:33.151425', source: '[Regression
+    Iteration Targets Mechanism] 2021-03-20 09:17:05.277869', source: '[Regression
     Workflow: Iteration Targets Mechanism] Iteration Targets Workflow - Test 1', subtype: success,
   type: workflow_edge, workflow: 'Regression Workflow: Iteration Targets Mechanism'}
 - {color: green, destination: '[Shared] Getters Workflow: Interface IP', label: success,
   name: '[[[Regression Workflow: Workflow of Workflows] Regression Workflow: Subworkflow
-    of Workflows] Regression Workflow: Payload Extraction with Operations] 2021-03-09
-    06:57:33.151434', source: '[Shared] Start', subtype: success, type: workflow_edge,
+    of Workflows] Regression Workflow: Payload Extraction with Operations] 2021-03-20
+    09:17:05.277882', source: '[Shared] Start', subtype: success, type: workflow_edge,
   workflow: '[[Regression Workflow: Workflow of Workflows] Regression Workflow: Subworkflow
     of Workflows] Regression Workflow: Payload Extraction with Operations'}
 - {color: green, destination: '[[[Regression Workflow: Workflow of Workflows] Regression
     Workflow: Subworkflow of Workflows] Regression Workflow: Payload Extraction with
     Operations] Payload Workflow: Add initial variables', label: success, name: '[[[Regression
     Workflow: Workflow of Workflows] Regression Workflow: Subworkflow of Workflows]
-    Regression Workflow: Payload Extraction with Operations] 2021-03-09 06:57:33.151443',
+    Regression Workflow: Payload Extraction with Operations] 2021-03-20 09:17:05.277895',
   source: '[Shared] Getters Workflow: Interface IP', subtype: success, type: workflow_edge,
   workflow: '[[Regression Workflow: Workflow of Workflows] Regression Workflow: Subworkflow
     of Workflows] Regression Workflow: Payload Extraction with Operations'}
@@ -287,7 +287,7 @@
     Workflow: Subworkflow of Workflows] Regression Workflow: Payload Extraction with
     Operations] Payload Workflow: Extraction 1', label: success, name: '[[[Regression
     Workflow: Workflow of Workflows] Regression Workflow: Subworkflow of Workflows]
-    Regression Workflow: Payload Extraction with Operations] 2021-03-09 06:57:33.151464',
+    Regression Workflow: Payload Extraction with Operations] 2021-03-20 09:17:05.277908',
   source: '[[[Regression Workflow: Workflow of Workflows] Regression Workflow: Subworkflow
     of Workflows] Regression Workflow: Payload Extraction with Operations] Payload
     Workflow: Add initial variables', subtype: success, type: workflow_edge, workflow: '[[Regression
@@ -297,39 +297,39 @@
     Workflow: Subworkflow of Workflows] Regression Workflow: Payload Extraction with
     Operations] Payload Workflow: Extraction 2', label: success, name: '[[[Regression
     Workflow: Workflow of Workflows] Regression Workflow: Subworkflow of Workflows]
-    Regression Workflow: Payload Extraction with Operations] 2021-03-09 06:57:33.151476',
+    Regression Workflow: Payload Extraction with Operations] 2021-03-20 09:17:05.277921',
   source: '[[[Regression Workflow: Workflow of Workflows] Regression Workflow: Subworkflow
     of Workflows] Regression Workflow: Payload Extraction with Operations] Payload
     Workflow: Extraction 1', subtype: success, type: workflow_edge, workflow: '[[Regression
     Workflow: Workflow of Workflows] Regression Workflow: Subworkflow of Workflows]
     Regression Workflow: Payload Extraction with Operations'}
 - {color: green, destination: '[Shared] End', label: success, name: '[Regression Workflow:
-    Iteration Targets Mechanism] 2021-03-09 06:57:33.151485', source: '[Regression
+    Iteration Targets Mechanism] 2021-03-20 09:17:05.277934', source: '[Regression
     Workflow: Iteration Targets Mechanism] Iteration Targets Workflow - Test 4', subtype: success,
   type: workflow_edge, workflow: 'Regression Workflow: Iteration Targets Mechanism'}
 - {color: green, destination: '[[Regression Workflow: Workflow of Workflows] Regression
     Workflow: Access Variables from Parent Workflow] Variable Access Subworkflow:
     Access variable from snippet', label: success, name: '[[Regression Workflow: Workflow
-    of Workflows] Regression Workflow: Access Variables from Parent Workflow] 2021-03-09
-    06:57:33.151495', source: '[Shared] Start', subtype: success, type: workflow_edge,
+    of Workflows] Regression Workflow: Access Variables from Parent Workflow] 2021-03-20
+    09:17:05.277947', source: '[Shared] Start', subtype: success, type: workflow_edge,
   workflow: '[Regression Workflow: Workflow of Workflows] Regression Workflow: Access
     Variables from Parent Workflow'}
 - {color: green, destination: '[Shared] Modify Payload for Iteration', label: success,
-  name: '[Regression Workflow: Workflow of Workflows] 2021-03-09 06:57:33.151504',
+  name: '[Regression Workflow: Workflow of Workflows] 2021-03-20 09:17:05.277960',
   source: '[Shared] Start', subtype: success, type: workflow_edge, workflow: 'Regression
     Workflow: Workflow of Workflows'}
 - {color: green, destination: '[[Regression Workflow: Workflow of Workflows] Regression
     Workflow: Access Variables from Parent Workflow] Variable Access Subworkflow:
     Access variables for iteration', label: success, name: '[[Regression Workflow:
     Workflow of Workflows] Regression Workflow: Access Variables from Parent Workflow]
-    2021-03-09 06:57:33.151513', source: '[[Regression Workflow: Workflow of Workflows]
+    2021-03-20 09:17:05.277972', source: '[[Regression Workflow: Workflow of Workflows]
     Regression Workflow: Access Variables from Parent Workflow] Variable Access Subworkflow:
     Access variable from snippet', subtype: success, type: workflow_edge, workflow: '[Regression
     Workflow: Workflow of Workflows] Regression Workflow: Access Variables from Parent
     Workflow'}
 - {color: green, destination: '[Shared] End', label: success, name: '[[Regression
     Workflow: Workflow of Workflows] Regression Workflow: Access Variables from Parent
-    Workflow] 2021-03-09 06:57:33.151522', source: '[[Regression Workflow: Workflow
+    Workflow] 2021-03-20 09:17:05.277984', source: '[[Regression Workflow: Workflow
     of Workflows] Regression Workflow: Access Variables from Parent Workflow] Variable
     Access Subworkflow: Access variables for iteration', subtype: success, type: workflow_edge,
   workflow: '[Regression Workflow: Workflow of Workflows] Regression Workflow: Access
@@ -337,255 +337,255 @@
 - {color: green, destination: '[[Regression Workflow: Workflow of Workflows] Regression
     Workflow: Subworkflow of Workflows] Regression Workflow: Payload Extraction with
     Operations', label: success, name: '[[Regression Workflow: Workflow of Workflows]
-    Regression Workflow: Subworkflow of Workflows] 2021-03-09 06:57:33.151531', source: '[[Regression
+    Regression Workflow: Subworkflow of Workflows] 2021-03-20 09:17:05.277997', source: '[[Regression
     Workflow: Workflow of Workflows] Regression Workflow: Subworkflow of Workflows]
     Regression Workflow: Napalm Getters Validation', subtype: success, type: workflow_edge,
   workflow: '[Regression Workflow: Workflow of Workflows] Regression Workflow: Subworkflow
     of Workflows'}
 - {color: green, destination: '[Shared] End', label: success, name: '[[Regression
     Workflow: Workflow of Workflows] Regression Workflow: Subworkflow of Workflows]
-    2021-03-09 06:57:33.151539', source: '[[Regression Workflow: Workflow of Workflows]
+    2021-03-20 09:17:05.278009', source: '[[Regression Workflow: Workflow of Workflows]
     Regression Workflow: Subworkflow of Workflows] Regression Workflow: Payload Extraction
     with Operations', subtype: success, type: workflow_edge, workflow: '[Regression
     Workflow: Workflow of Workflows] Regression Workflow: Subworkflow of Workflows'}
 - {color: green, destination: '[[Regression Workflow: Workflow of Workflows] Regression
     Workflow: Subworkflow of Workflows] Regression Workflow: Payload Extraction &
     Validation', label: success, name: '[[Regression Workflow: Workflow of Workflows]
-    Regression Workflow: Subworkflow of Workflows] 2021-03-09 06:57:33.151548', source: '[Shared]
+    Regression Workflow: Subworkflow of Workflows] 2021-03-20 09:17:05.278022', source: '[Shared]
     Start', subtype: success, type: workflow_edge, workflow: '[Regression Workflow:
     Workflow of Workflows] Regression Workflow: Subworkflow of Workflows'}
 - {color: green, destination: '[[Regression Workflow: Workflow of Workflows] Regression
     Workflow: Subworkflow of Workflows] Regression Workflow: Napalm Getters Validation',
   label: success, name: '[[Regression Workflow: Workflow of Workflows] Regression
-    Workflow: Subworkflow of Workflows] 2021-03-09 06:57:33.151557', source: '[[Regression
+    Workflow: Subworkflow of Workflows] 2021-03-20 09:17:05.278034', source: '[[Regression
     Workflow: Workflow of Workflows] Regression Workflow: Subworkflow of Workflows]
     Regression Workflow: Payload Extraction & Validation', subtype: success, type: workflow_edge,
   workflow: '[Regression Workflow: Workflow of Workflows] Regression Workflow: Subworkflow
     of Workflows'}
 - {color: green, destination: '[Regression Workflow: Iteration Targets Mechanism]
     Iteration Targets Workflow - Test 1', label: success, name: '[Regression Workflow:
-    Iteration Targets Mechanism] 2021-03-09 06:57:33.151565', source: '[Shared] Modify
+    Iteration Targets Mechanism] 2021-03-20 09:17:05.278046', source: '[Shared] Modify
     Payload for Iteration', subtype: success, type: workflow_edge, workflow: 'Regression
     Workflow: Iteration Targets Mechanism'}
 - {color: green, destination: '[Shared] End', label: success, name: '[Regression Workflow:
-    Netmiko Prompts] 2021-03-09 06:57:33.151574', source: '[Regression Workflow: Netmiko
+    Netmiko Prompts] 2021-03-20 09:17:05.278059', source: '[Regression Workflow: Netmiko
     Prompts] Test netmiko prompts pass', subtype: success, type: workflow_edge, workflow: 'Regression
     Workflow: Netmiko Prompts'}
 - {color: green, destination: '[Shared] REST API: call *is_alive* endpoint', label: success,
-  name: '[Regression Workflow: Netmiko Prompts] 2021-03-09 06:57:33.151583', source: '[Regression
+  name: '[Regression Workflow: Netmiko Prompts] 2021-03-20 09:17:05.278071', source: '[Regression
     Workflow: Netmiko Prompts] Test netmiko prompts pass', subtype: success, type: workflow_edge,
   workflow: 'Regression Workflow: Netmiko Prompts'}
 - {color: green, destination: '[Regression Workflow: Netmiko Prompts] Test Netmiko
     Prompt Service', label: success, name: '[Regression Workflow: Netmiko Prompts]
-    2021-03-09 06:57:33.151652', source: '[Shared] REST API: call *is_alive* endpoint',
+    2021-03-20 09:17:05.278084', source: '[Shared] REST API: call *is_alive* endpoint',
   subtype: success, type: workflow_edge, workflow: 'Regression Workflow: Netmiko Prompts'}
 - {color: green, destination: '[Shared] End', label: success, name: '[Regression Workflow:
-    Separate Failure - Success Paths] 2021-03-09 06:57:33.151664', source: '[Shared]
+    Separate Failure - Success Paths] 2021-03-20 09:17:05.278096', source: '[Shared]
     Example Service (does nothing)', subtype: success, type: workflow_edge, workflow: 'Regression
     Workflow: Separate Failure - Success Paths'}
 - {color: green, destination: '[Regression Workflow: Operational Data Backup (admin)]
     Configuration Backup (NAPALM)', label: success, name: '[Regression Workflow: Operational
-    Data Backup (admin)] 2021-03-09 06:57:33.151674', source: '[Shared] Start', subtype: success,
+    Data Backup (admin)] 2021-03-20 09:17:05.278121', source: '[Shared] Start', subtype: success,
   type: workflow_edge, workflow: 'Regression Workflow: Operational Data Backup (admin)'}
 - {color: green, destination: '[Regression Workflow: Workflow of Workflows] Regression
     Workflow: Subworkflow of Workflows', label: success, name: '[Regression Workflow:
-    Workflow of Workflows] 2021-03-09 06:57:33.151685', source: '[Regression Workflow:
+    Workflow of Workflows] 2021-03-20 09:17:05.278144', source: '[Regression Workflow:
     Workflow of Workflows] Regression Workflow: Access Variables from Parent Workflow',
   subtype: success, type: workflow_edge, workflow: 'Regression Workflow: Workflow
     of Workflows'}
 - {color: green, destination: '[Shared] End', label: success, name: '[Regression Workflow:
-    Workflow of Workflows] 2021-03-09 06:57:33.151708', source: '[Regression Workflow:
+    Workflow of Workflows] 2021-03-20 09:17:05.278157', source: '[Regression Workflow:
     Workflow of Workflows] Regression Workflow: Subworkflow of Workflows', subtype: success,
   type: workflow_edge, workflow: 'Regression Workflow: Workflow of Workflows'}
 - {color: green, destination: '[Regression Workflow: Workflow of Workflows] Show interfaces
     with Netmiko', label: success, name: '[Regression Workflow: Workflow of Workflows]
-    2021-03-09 06:57:33.151719', source: '[Shared] Modify Payload for Iteration',
+    2021-03-20 09:17:05.278169', source: '[Shared] Modify Payload for Iteration',
   subtype: success, type: workflow_edge, workflow: 'Regression Workflow: Workflow
     of Workflows'}
 - {color: green, destination: '[Regression Workflow: Workflow of Workflows] Regression
     Workflow: VRF Creation and Deletion with Napalm', label: success, name: '[Regression
-    Workflow: Workflow of Workflows] 2021-03-09 06:57:33.151729', source: '[Regression
+    Workflow: Workflow of Workflows] 2021-03-20 09:17:05.278181', source: '[Regression
     Workflow: Workflow of Workflows] Show interfaces with Netmiko', subtype: success,
   type: workflow_edge, workflow: 'Regression Workflow: Workflow of Workflows'}
 - {color: green, destination: '[[[Regression Workflow: Workflow of Workflows] Regression
     Workflow: Subworkflow of Workflows] Regression Workflow: Payload Extraction &
     Validation] Payload Extraction', label: success, name: '[[[Regression Workflow:
     Workflow of Workflows] Regression Workflow: Subworkflow of Workflows] Regression
-    Workflow: Payload Extraction & Validation] 2021-03-09 06:57:33.151739', source: '[[[Regression
+    Workflow: Payload Extraction & Validation] 2021-03-20 09:17:05.278194', source: '[[[Regression
     Workflow: Workflow of Workflows] Regression Workflow: Subworkflow of Workflows]
     Regression Workflow: Payload Extraction & Validation] netmiko_show_ip_route',
   subtype: success, type: workflow_edge, workflow: '[[Regression Workflow: Workflow
     of Workflows] Regression Workflow: Subworkflow of Workflows] Regression Workflow:
     Payload Extraction & Validation'}
 - {color: green, destination: '[Shared] NAPALM: Get interfaces', label: success, name: '[Regression
-    Workflow: Workflow of Workflows] 2021-03-09 06:57:33.151781', source: '[Regression
+    Workflow: Workflow of Workflows] 2021-03-20 09:17:05.278206', source: '[Regression
     Workflow: Workflow of Workflows] Regression Workflow: VRF Creation and Deletion
     with Napalm', subtype: success, type: workflow_edge, workflow: 'Regression Workflow:
     Workflow of Workflows'}
 - {color: green, destination: '[Regression Workflow: Workflow of Workflows] Regression
     Workflow: Access Variables from Parent Workflow', label: success, name: '[Regression
-    Workflow: Workflow of Workflows] 2021-03-09 06:57:33.151792', source: '[Shared]
+    Workflow: Workflow of Workflows] 2021-03-20 09:17:05.278219', source: '[Shared]
     NAPALM: Get interfaces', subtype: success, type: workflow_edge, workflow: 'Regression
     Workflow: Workflow of Workflows'}
 - {color: green, destination: '[Shared] Example Service (does nothing)', label: success,
-  name: '[Regression Workflow: Advanced Multiprocessing (admin)] 2021-03-09 06:57:33.151802',
+  name: '[Regression Workflow: Advanced Multiprocessing (admin)] 2021-03-20 09:17:05.278231',
   source: '[Shared] Start', subtype: success, type: workflow_edge, workflow: 'Regression
     Workflow: Advanced Multiprocessing (admin)'}
 - {color: red, destination: '[Regression Workflow: Workflow of Workflows] Regression
     Workflow: VRF Creation and Deletion with Napalm', label: failure, name: '[Regression
-    Workflow: Workflow of Workflows] 2021-03-09 06:57:33.151812', source: '[Regression
+    Workflow: Workflow of Workflows] 2021-03-20 09:17:05.278244', source: '[Regression
     Workflow: Workflow of Workflows] Show interfaces with Netmiko', subtype: failure,
   type: workflow_edge, workflow: 'Regression Workflow: Workflow of Workflows'}
 - {color: green, destination: '[Regression Workflow: DxD and SxS Run Methods] Workflow  in
     device by device mode', label: success, name: '[Regression Workflow: DxD and SxS
-    Run Methods] 2021-03-09 06:57:33.151823', source: '[Shared] Start', subtype: success,
+    Run Methods] 2021-03-20 09:17:05.278257', source: '[Shared] Start', subtype: success,
   type: workflow_edge, workflow: 'Regression Workflow: DxD and SxS Run Methods'}
 - {color: green, destination: '[Regression Workflow: DxD and SxS Run Methods] Service
     in run once mode', label: success, name: '[Regression Workflow: DxD and SxS Run
-    Methods] 2021-03-09 06:57:33.151864', source: '[Regression Workflow: DxD and SxS
+    Methods] 2021-03-20 09:17:05.278270', source: '[Regression Workflow: DxD and SxS
     Run Methods] Workflow  in device by device mode', subtype: success, type: workflow_edge,
   workflow: 'Regression Workflow: DxD and SxS Run Methods'}
 - {color: red, destination: '[Regression Workflow: DxD and SxS Run Methods] Service
     in run once mode', label: failure, name: '[Regression Workflow: DxD and SxS Run
-    Methods] 2021-03-09 06:57:33.151874', source: '[Regression Workflow: DxD and SxS
+    Methods] 2021-03-20 09:17:05.278282', source: '[Regression Workflow: DxD and SxS
     Run Methods] Workflow  in device by device mode', subtype: failure, type: workflow_edge,
   workflow: 'Regression Workflow: DxD and SxS Run Methods'}
 - {color: green, destination: '[Regression Workflow: DxD and SxS Run Methods] Workflow
     in service by service mode (workflow targets)', label: success, name: '[Regression
-    Workflow: DxD and SxS Run Methods] 2021-03-09 06:57:33.151884', source: '[Regression
+    Workflow: DxD and SxS Run Methods] 2021-03-20 09:17:05.278294', source: '[Regression
     Workflow: DxD and SxS Run Methods] Service in run once mode', subtype: success,
   type: workflow_edge, workflow: 'Regression Workflow: DxD and SxS Run Methods'}
 - {color: green, destination: '[Regression Workflow: DxD and SxS Run Methods] Service
     in Run once per device mode', label: success, name: '[Regression Workflow: DxD
-    and SxS Run Methods] 2021-03-09 06:57:33.151894', source: '[Regression Workflow:
+    and SxS Run Methods] 2021-03-20 09:17:05.278306', source: '[Regression Workflow:
     DxD and SxS Run Methods] Workflow in service by service mode (workflow targets)',
   subtype: success, type: workflow_edge, workflow: 'Regression Workflow: DxD and SxS
     Run Methods'}
 - {color: green, destination: '[Regression Workflow: DxD and SxS Run Methods] Workflow
     in service targets mode', label: success, name: '[Regression Workflow: DxD and
-    SxS Run Methods] 2021-03-09 06:57:33.151917', source: '[Regression Workflow: DxD
+    SxS Run Methods] 2021-03-20 09:17:05.278319', source: '[Regression Workflow: DxD
     and SxS Run Methods] Service in Run once per device mode', subtype: success, type: workflow_edge,
   workflow: 'Regression Workflow: DxD and SxS Run Methods'}
 - {color: green, destination: '[Shared] End', label: success, name: '[Regression Workflow:
-    DxD and SxS Run Methods] 2021-03-09 06:57:33.151927', source: '[Regression Workflow:
+    DxD and SxS Run Methods] 2021-03-20 09:17:05.278331', source: '[Regression Workflow:
     DxD and SxS Run Methods] Workflow in service targets mode', subtype: success,
   type: workflow_edge, workflow: 'Regression Workflow: DxD and SxS Run Methods'}
 - {color: green, destination: '[[Regression Workflow: DxD and SxS Run Methods] Workflow  in
     device by device mode] Validation show VRF', label: success, name: '[[Regression
-    Workflow: DxD and SxS Run Methods] Workflow  in device by device mode] 2021-03-09
-    06:57:33.151949', source: '[Shared] Start', subtype: success, type: workflow_edge,
+    Workflow: DxD and SxS Run Methods] Workflow  in device by device mode] 2021-03-20
+    09:17:05.278344', source: '[Shared] Start', subtype: success, type: workflow_edge,
   workflow: '[Regression Workflow: DxD and SxS Run Methods] Workflow  in device by
     device mode'}
 - {color: green, destination: '[Shared] End', label: success, name: '[[Regression
-    Workflow: DxD and SxS Run Methods] Workflow  in device by device mode] 2021-03-09
-    06:57:33.151958', source: '[[Regression Workflow: DxD and SxS Run Methods] Workflow  in
+    Workflow: DxD and SxS Run Methods] Workflow  in device by device mode] 2021-03-20
+    09:17:05.278356', source: '[[Regression Workflow: DxD and SxS Run Methods] Workflow  in
     device by device mode] Validation show VRF', subtype: success, type: workflow_edge,
   workflow: '[Regression Workflow: DxD and SxS Run Methods] Workflow  in device by
     device mode'}
 - {color: green, destination: '[[Regression Workflow: DxD and SxS Run Methods] Workflow
     in service by service mode (workflow targets)] Validation show VRF', label: success,
   name: '[[Regression Workflow: DxD and SxS Run Methods] Workflow in service by service
-    mode (workflow targets)] 2021-03-09 06:57:33.151968', source: '[Shared] Start',
+    mode (workflow targets)] 2021-03-20 09:17:05.278369', source: '[Shared] Start',
   subtype: success, type: workflow_edge, workflow: '[Regression Workflow: DxD and
     SxS Run Methods] Workflow in service by service mode (workflow targets)'}
 - {color: green, destination: '[Shared] End', label: success, name: '[[Regression
     Workflow: DxD and SxS Run Methods] Workflow in service by service mode (workflow
-    targets)] 2021-03-09 06:57:33.151977', source: '[[Regression Workflow: DxD and
+    targets)] 2021-03-20 09:17:05.278381', source: '[[Regression Workflow: DxD and
     SxS Run Methods] Workflow in service by service mode (workflow targets)] Validation
     show VRF', subtype: success, type: workflow_edge, workflow: '[Regression Workflow:
     DxD and SxS Run Methods] Workflow in service by service mode (workflow targets)'}
 - {color: green, destination: '[[Regression Workflow: DxD and SxS Run Methods] Workflow
     in service targets mode] Validation show VRF', label: success, name: '[[Regression
-    Workflow: DxD and SxS Run Methods] Workflow in service targets mode] 2021-03-09
-    06:57:33.151986', source: '[Shared] Start', subtype: success, type: workflow_edge,
+    Workflow: DxD and SxS Run Methods] Workflow in service targets mode] 2021-03-20
+    09:17:05.278394', source: '[Shared] Start', subtype: success, type: workflow_edge,
   workflow: '[Regression Workflow: DxD and SxS Run Methods] Workflow in service targets
     mode'}
 - {color: green, destination: '[Shared] End', label: success, name: '[[Regression
-    Workflow: DxD and SxS Run Methods] Workflow in service targets mode] 2021-03-09
-    06:57:33.151995', source: '[[Regression Workflow: DxD and SxS Run Methods] Workflow
+    Workflow: DxD and SxS Run Methods] Workflow in service targets mode] 2021-03-20
+    09:17:05.278407', source: '[[Regression Workflow: DxD and SxS Run Methods] Workflow
     in service targets mode] Validation show VRF', subtype: success, type: workflow_edge,
   workflow: '[Regression Workflow: DxD and SxS Run Methods] Workflow in service targets
     mode'}
 - {color: green, destination: '[Regression Workflow: Shared Service in Multiple Subworkflows]
     Subworkflow 1', label: success, name: '[Regression Workflow: Shared Service in
-    Multiple Subworkflows] 2021-03-09 06:57:33.152004', source: '[Shared] Start',
+    Multiple Subworkflows] 2021-03-20 09:17:05.278420', source: '[Shared] Start',
   subtype: success, type: workflow_edge, workflow: 'Regression Workflow: Shared Service
     in Multiple Subworkflows'}
 - {color: green, destination: '[Regression Workflow: Shared Service in Multiple Subworkflows]
     Subworkflow 2', label: success, name: '[Regression Workflow: Shared Service in
-    Multiple Subworkflows] 2021-03-09 06:57:33.152013', source: '[Regression Workflow:
+    Multiple Subworkflows] 2021-03-20 09:17:05.278432', source: '[Regression Workflow:
     Shared Service in Multiple Subworkflows] Subworkflow 1', subtype: success, type: workflow_edge,
   workflow: 'Regression Workflow: Shared Service in Multiple Subworkflows'}
 - {color: green, destination: '[Shared] End', label: success, name: '[Regression Workflow:
-    Shared Service in Multiple Subworkflows] 2021-03-09 06:57:33.152022', source: '[Regression
+    Shared Service in Multiple Subworkflows] 2021-03-20 09:17:05.278445', source: '[Regression
     Workflow: Shared Service in Multiple Subworkflows] Subworkflow 2', subtype: success,
   type: workflow_edge, workflow: 'Regression Workflow: Shared Service in Multiple
     Subworkflows'}
 - {color: green, destination: '[Shared] Shared Service for Regression Workflow H',
   label: success, name: '[[Regression Workflow: Shared Service in Multiple Subworkflows]
-    Subworkflow 1] 2021-03-09 06:57:33.152031', source: '[Shared] Start', subtype: success,
+    Subworkflow 1] 2021-03-20 09:17:05.278457', source: '[Shared] Start', subtype: success,
   type: workflow_edge, workflow: '[Regression Workflow: Shared Service in Multiple
     Subworkflows] Subworkflow 1'}
 - {color: green, destination: '[Shared] End', label: success, name: '[[Regression
-    Workflow: Shared Service in Multiple Subworkflows] Subworkflow 1] 2021-03-09 06:57:33.152040',
+    Workflow: Shared Service in Multiple Subworkflows] Subworkflow 1] 2021-03-20 09:17:05.278470',
   source: '[Shared] Shared Service for Regression Workflow H', subtype: success, type: workflow_edge,
   workflow: '[Regression Workflow: Shared Service in Multiple Subworkflows] Subworkflow
     1'}
 - {color: green, destination: '[Shared] Shared Service for Regression Workflow H',
   label: success, name: '[[Regression Workflow: Shared Service in Multiple Subworkflows]
-    Subworkflow 2] 2021-03-09 06:57:33.152049', source: '[Shared] Start', subtype: success,
+    Subworkflow 2] 2021-03-20 09:17:05.278483', source: '[Shared] Start', subtype: success,
   type: workflow_edge, workflow: '[Regression Workflow: Shared Service in Multiple
     Subworkflows] Subworkflow 2'}
 - {color: green, destination: '[Shared] End', label: success, name: '[[Regression
-    Workflow: Shared Service in Multiple Subworkflows] Subworkflow 2] 2021-03-09 06:57:33.152057',
+    Workflow: Shared Service in Multiple Subworkflows] Subworkflow 2] 2021-03-20 09:17:05.278495',
   source: '[Shared] Shared Service for Regression Workflow H', subtype: success, type: workflow_edge,
   workflow: '[Regression Workflow: Shared Service in Multiple Subworkflows] Subworkflow
     2'}
 - {color: red, destination: '[Shared] End', label: failure, name: '[[Regression Workflow:
-    Shared Service in Multiple Subworkflows] Subworkflow 1] 2021-03-09 06:57:33.152066',
+    Shared Service in Multiple Subworkflows] Subworkflow 1] 2021-03-20 09:17:05.278507',
   source: '[Shared] Shared Service for Regression Workflow H', subtype: failure, type: workflow_edge,
   workflow: '[Regression Workflow: Shared Service in Multiple Subworkflows] Subworkflow
     1'}
 - {color: red, destination: '[Shared] End', label: failure, name: '[Regression Workflow:
-    Shared Service in Multiple Subworkflows] 2021-03-09 06:57:33.152075', source: '[Regression
+    Shared Service in Multiple Subworkflows] 2021-03-20 09:17:05.278520', source: '[Regression
     Workflow: Shared Service in Multiple Subworkflows] Subworkflow 2', subtype: failure,
   type: workflow_edge, workflow: 'Regression Workflow: Shared Service in Multiple
     Subworkflows'}
 - {color: green, destination: '[Regression Workflow: Ansible with Validation] Simple
     Playbook', label: success, name: '[Regression Workflow: Ansible with Validation]
-    2021-03-09 06:57:33.152084', source: '[Shared] Start', subtype: success, type: workflow_edge,
+    2021-03-20 09:17:05.278533', source: '[Shared] Start', subtype: success, type: workflow_edge,
   workflow: 'Regression Workflow: Ansible with Validation'}
 - {color: green, destination: '[Regression Workflow: Advanced Iteration Targets] Set
     Variables for Iteration', label: success, name: '[Regression Workflow: Advanced
-    Iteration Targets] 2021-03-09 06:57:33.152092', source: '[Shared] Start', subtype: success,
+    Iteration Targets] 2021-03-20 09:17:05.278546', source: '[Shared] Start', subtype: success,
   type: workflow_edge, workflow: 'Regression Workflow: Advanced Iteration Targets'}
 - {color: green, destination: '[Regression Workflow: Advanced Iteration Targets] Show
     VRF with iteration', label: success, name: '[Regression Workflow: Advanced Iteration
-    Targets] 2021-03-09 06:57:33.152101', source: '[Regression Workflow: Advanced
+    Targets] 2021-03-20 09:17:05.278559', source: '[Regression Workflow: Advanced
     Iteration Targets] Set Variables for Iteration', subtype: success, type: workflow_edge,
   workflow: 'Regression Workflow: Advanced Iteration Targets'}
 - {color: green, destination: '[Shared] End', label: success, name: '[Regression Workflow:
-    Advanced Iteration Targets] 2021-03-09 06:57:33.152110', source: '[Regression
+    Advanced Iteration Targets] 2021-03-20 09:17:05.278571', source: '[Regression
     Workflow: Advanced Iteration Targets] Show VRF with iteration', subtype: success,
   type: workflow_edge, workflow: 'Regression Workflow: Advanced Iteration Targets'}
 - {color: green, destination: '[Regression Workflow: Workflow and Subworkflow Iteration]
     Test Iteration', label: success, name: '[Regression Workflow: Workflow and Subworkflow
-    Iteration] 2021-03-09 06:57:33.152119', source: '[Shared] Start', subtype: success,
+    Iteration] 2021-03-20 09:17:05.278584', source: '[Shared] Start', subtype: success,
   type: workflow_edge, workflow: 'Regression Workflow: Workflow and Subworkflow Iteration'}
 - {color: green, destination: '[Regression Workflow: Workflow and Subworkflow Iteration]
     Subworkflow Value Iteration', label: success, name: '[Regression Workflow: Workflow
-    and Subworkflow Iteration] 2021-03-09 06:57:33.152128', source: '[Regression Workflow:
+    and Subworkflow Iteration] 2021-03-20 09:17:05.278597', source: '[Regression Workflow:
     Workflow and Subworkflow Iteration] Test Iteration', subtype: success, type: workflow_edge,
   workflow: 'Regression Workflow: Workflow and Subworkflow Iteration'}
 - {color: green, destination: '[[Regression Workflow: Workflow and Subworkflow Iteration]
     Subworkflow Value Iteration] Test Iteration', label: success, name: '[[Regression
-    Workflow: Workflow and Subworkflow Iteration] Subworkflow Value Iteration] 2021-03-09
-    06:57:33.152137', source: '[Shared] Start', subtype: success, type: workflow_edge,
+    Workflow: Workflow and Subworkflow Iteration] Subworkflow Value Iteration] 2021-03-20
+    09:17:05.278610', source: '[Shared] Start', subtype: success, type: workflow_edge,
   workflow: '[Regression Workflow: Workflow and Subworkflow Iteration] Subworkflow
     Value Iteration'}
 - {color: green, destination: '[Shared] End', label: success, name: '[[Regression
-    Workflow: Workflow and Subworkflow Iteration] Subworkflow Value Iteration] 2021-03-09
-    06:57:33.152146', source: '[[Regression Workflow: Workflow and Subworkflow Iteration]
+    Workflow: Workflow and Subworkflow Iteration] Subworkflow Value Iteration] 2021-03-20
+    09:17:05.278622', source: '[[Regression Workflow: Workflow and Subworkflow Iteration]
     Subworkflow Value Iteration] Test Iteration', subtype: success, type: workflow_edge,
   workflow: '[Regression Workflow: Workflow and Subworkflow Iteration] Subworkflow
     Value Iteration'}
@@ -593,7 +593,7 @@
     Workflow: Subworkflow of Workflows] Regression Workflow: Payload Extraction &
     Validation] Validation dict via results', label: success, name: '[[[Regression
     Workflow: Workflow of Workflows] Regression Workflow: Subworkflow of Workflows]
-    Regression Workflow: Payload Extraction & Validation] 2021-03-09 06:57:33.152155',
+    Regression Workflow: Payload Extraction & Validation] 2021-03-20 09:17:05.278647',
   source: '[[[Regression Workflow: Workflow of Workflows] Regression Workflow: Subworkflow
     of Workflows] Regression Workflow: Payload Extraction & Validation] Payload Extraction',
   subtype: success, type: workflow_edge, workflow: '[[Regression Workflow: Workflow
@@ -603,7 +603,7 @@
     Workflow: Subworkflow of Workflows] Regression Workflow: Payload Extraction &
     Validation] Validate text via results', label: success, name: '[[[Regression Workflow:
     Workflow of Workflows] Regression Workflow: Subworkflow of Workflows] Regression
-    Workflow: Payload Extraction & Validation] 2021-03-09 06:57:33.152163', source: '[[[Regression
+    Workflow: Payload Extraction & Validation] 2021-03-20 09:17:05.278667', source: '[[[Regression
     Workflow: Workflow of Workflows] Regression Workflow: Subworkflow of Workflows]
     Regression Workflow: Payload Extraction & Validation] Validation dict via results',
   subtype: success, type: workflow_edge, workflow: '[[Regression Workflow: Workflow
@@ -611,7 +611,7 @@
     Payload Extraction & Validation'}
 - {color: green, destination: '[Shared] End', label: success, name: '[[[Regression
     Workflow: Workflow of Workflows] Regression Workflow: Subworkflow of Workflows]
-    Regression Workflow: Payload Extraction & Validation] 2021-03-09 06:57:33.152172',
+    Regression Workflow: Payload Extraction & Validation] 2021-03-20 09:17:05.278679',
   source: '[[[Regression Workflow: Workflow of Workflows] Regression Workflow: Subworkflow
     of Workflows] Regression Workflow: Payload Extraction & Validation] Validate text
     via results', subtype: success, type: workflow_edge, workflow: '[[Regression Workflow:
@@ -621,7 +621,7 @@
     Workflow: Subworkflow of Workflows] Regression Workflow: Payload Extraction &
     Validation] Validate dict via payload', label: success, name: '[[[Regression Workflow:
     Workflow of Workflows] Regression Workflow: Subworkflow of Workflows] Regression
-    Workflow: Payload Extraction & Validation] 2021-03-09 06:57:33.152180', source: '[[[Regression
+    Workflow: Payload Extraction & Validation] 2021-03-20 09:17:05.278691', source: '[[[Regression
     Workflow: Workflow of Workflows] Regression Workflow: Subworkflow of Workflows]
     Regression Workflow: Payload Extraction & Validation] Payload Extraction', subtype: success,
   type: workflow_edge, workflow: '[[Regression Workflow: Workflow of Workflows] Regression
@@ -631,7 +631,7 @@
     Workflow: Subworkflow of Workflows] Regression Workflow: Payload Extraction &
     Validation] Validate text via payload', label: success, name: '[[[Regression Workflow:
     Workflow of Workflows] Regression Workflow: Subworkflow of Workflows] Regression
-    Workflow: Payload Extraction & Validation] 2021-03-09 06:57:33.152189', source: '[[[Regression
+    Workflow: Payload Extraction & Validation] 2021-03-20 09:17:05.278704', source: '[[[Regression
     Workflow: Workflow of Workflows] Regression Workflow: Subworkflow of Workflows]
     Regression Workflow: Payload Extraction & Validation] Validate dict via payload',
   subtype: success, type: workflow_edge, workflow: '[[Regression Workflow: Workflow
@@ -639,7 +639,7 @@
     Payload Extraction & Validation'}
 - {color: green, destination: '[Shared] End', label: success, name: '[[[Regression
     Workflow: Workflow of Workflows] Regression Workflow: Subworkflow of Workflows]
-    Regression Workflow: Payload Extraction & Validation] 2021-03-09 06:57:33.152197',
+    Regression Workflow: Payload Extraction & Validation] 2021-03-20 09:17:05.278716',
   source: '[[[Regression Workflow: Workflow of Workflows] Regression Workflow: Subworkflow
     of Workflows] Regression Workflow: Payload Extraction & Validation] Validate text
     via payload', subtype: success, type: workflow_edge, workflow: '[[Regression Workflow:
@@ -649,7 +649,7 @@
     Workflow: Subworkflow of Workflows] Regression Workflow: Payload Extraction with
     Operations] Validation 1', label: success, name: '[[[Regression Workflow: Workflow
     of Workflows] Regression Workflow: Subworkflow of Workflows] Regression Workflow:
-    Payload Extraction with Operations] 2021-03-09 06:57:33.152206', source: '[[[Regression
+    Payload Extraction with Operations] 2021-03-20 09:17:05.278744', source: '[[[Regression
     Workflow: Workflow of Workflows] Regression Workflow: Subworkflow of Workflows]
     Regression Workflow: Payload Extraction with Operations] Payload Workflow: Extraction
     2', subtype: success, type: workflow_edge, workflow: '[[Regression Workflow: Workflow
@@ -659,7 +659,7 @@
     Workflow: Subworkflow of Workflows] Regression Workflow: Payload Extraction with
     Operations] Validation 2', label: success, name: '[[[Regression Workflow: Workflow
     of Workflows] Regression Workflow: Subworkflow of Workflows] Regression Workflow:
-    Payload Extraction with Operations] 2021-03-09 06:57:33.152214', source: '[[[Regression
+    Payload Extraction with Operations] 2021-03-20 09:17:05.278761', source: '[[[Regression
     Workflow: Workflow of Workflows] Regression Workflow: Subworkflow of Workflows]
     Regression Workflow: Payload Extraction with Operations] Validation 1', subtype: success,
   type: workflow_edge, workflow: '[[Regression Workflow: Workflow of Workflows] Regression
@@ -667,7 +667,7 @@
     Operations'}
 - {color: green, destination: '[Shared] End', label: success, name: '[[[Regression
     Workflow: Workflow of Workflows] Regression Workflow: Subworkflow of Workflows]
-    Regression Workflow: Payload Extraction with Operations] 2021-03-09 06:57:33.152223',
+    Regression Workflow: Payload Extraction with Operations] 2021-03-20 09:17:05.278774',
   source: '[[[Regression Workflow: Workflow of Workflows] Regression Workflow: Subworkflow
     of Workflows] Regression Workflow: Payload Extraction with Operations] Validation
     2', subtype: success, type: workflow_edge, workflow: '[[Regression Workflow: Workflow
@@ -675,663 +675,663 @@
     Payload Extraction with Operations'}
 - {color: green, destination: '[Regression Workflow: Preprocessing and Postprocessing]
     Preprocessing', label: success, name: '[Regression Workflow: Preprocessing and
-    Postprocessing] 2021-03-09 06:57:33.152232', source: '[Shared] Start', subtype: success,
+    Postprocessing] 2021-03-20 09:17:05.278787', source: '[Shared] Start', subtype: success,
   type: workflow_edge, workflow: 'Regression Workflow: Preprocessing and Postprocessing'}
 - {color: green, destination: '[Regression Workflow: Preprocessing and Postprocessing]
     Service preprocessing and postprocessing', label: success, name: '[Regression
-    Workflow: Preprocessing and Postprocessing] 2021-03-09 06:57:33.152241', source: '[Regression
+    Workflow: Preprocessing and Postprocessing] 2021-03-20 09:17:05.278800', source: '[Regression
     Workflow: Preprocessing and Postprocessing] Preprocessing', subtype: success,
   type: workflow_edge, workflow: 'Regression Workflow: Preprocessing and Postprocessing'}
 - {color: red, destination: '[Shared] End', label: failure, name: '[Regression Workflow:
-    Preprocessing and Postprocessing] 2021-03-09 06:57:33.152249', source: '[Regression
+    Preprocessing and Postprocessing] 2021-03-20 09:17:05.278812', source: '[Regression
     Workflow: Preprocessing and Postprocessing] Service preprocessing and postprocessing',
   subtype: failure, type: workflow_edge, workflow: 'Regression Workflow: Preprocessing
     and Postprocessing'}
 - {color: green, destination: '[Shared] REST API: call *is_alive* endpoint', label: success,
-  name: '[Regression Workflow: Superworkflow] 2021-03-09 06:57:33.152259', source: '[Shared]
+  name: '[Regression Workflow: Superworkflow] 2021-03-20 09:17:05.278825', source: '[Shared]
     Start', subtype: success, type: workflow_edge, workflow: 'Regression Workflow:
     Superworkflow'}
 - {color: green, destination: '[Regression Workflow: Unix Command & Chell, Ping Service,
     Jump on Connect mechanism] Unix command: ps -ef | grep test', label: success,
   name: '[Regression Workflow: Unix Command & Chell, Ping Service, Jump on Connect
-    mechanism] 2021-03-09 06:57:33.152268', source: '[Shared] Start', subtype: success,
+    mechanism] 2021-03-20 09:17:05.278838', source: '[Shared] Start', subtype: success,
   type: workflow_edge, workflow: 'Regression Workflow: Unix Command & Chell, Ping
     Service, Jump on Connect mechanism'}
 - {color: green, destination: '[Regression Workflow: Unix Command & Chell, Ping Service,
     Jump on Connect mechanism] Unix shell: ping eNMS server from remote server', label: success,
   name: '[Regression Workflow: Unix Command & Chell, Ping Service, Jump on Connect
-    mechanism] 2021-03-09 06:57:33.152291', source: '[Regression Workflow: Unix Command
+    mechanism] 2021-03-20 09:17:05.278851', source: '[Regression Workflow: Unix Command
     & Chell, Ping Service, Jump on Connect mechanism] Unix command: ps -ef | grep
     test', subtype: success, type: workflow_edge, workflow: 'Regression Workflow:
     Unix Command & Chell, Ping Service, Jump on Connect mechanism'}
 - {color: green, destination: '[Regression Workflow: Unix Command & Chell, Ping Service,
     Jump on Connect mechanism] Ping Washington', label: success, name: '[Regression
-    Workflow: Unix Command & Chell, Ping Service, Jump on Connect mechanism] 2021-03-09
-    06:57:33.152307', source: '[Regression Workflow: Unix Command & Chell, Ping Service,
+    Workflow: Unix Command & Chell, Ping Service, Jump on Connect mechanism] 2021-03-20
+    09:17:05.278863', source: '[Regression Workflow: Unix Command & Chell, Ping Service,
     Jump on Connect mechanism] Unix shell: ping eNMS server from remote server', subtype: success,
   type: workflow_edge, workflow: 'Regression Workflow: Unix Command & Chell, Ping
     Service, Jump on Connect mechanism'}
 - {color: green, destination: '[Regression Workflow: Topology Import (netbox, librenms,
     opennms)] OpenNMS Import', label: success, name: '[Regression Workflow: Topology
-    Import (netbox, librenms, opennms)] 2021-03-09 06:57:33.152316', source: '[Shared]
+    Import (netbox, librenms, opennms)] 2021-03-20 09:17:05.278876', source: '[Shared]
     Start', subtype: success, type: workflow_edge, workflow: 'Regression Workflow:
     Topology Import (netbox, librenms, opennms)'}
 - {color: green, destination: '[Shared] End', label: success, name: '[Regression Workflow:
-    Topology Import (netbox, librenms, opennms)] 2021-03-09 06:57:33.152326', source: '[Regression
+    Topology Import (netbox, librenms, opennms)] 2021-03-20 09:17:05.278889', source: '[Regression
     Workflow: Topology Import (netbox, librenms, opennms)] OpenNMS Import', subtype: success,
   type: workflow_edge, workflow: 'Regression Workflow: Topology Import (netbox, librenms,
     opennms)'}
 - {color: green, destination: '[Regression Workflow: Unix Command & Chell, Ping Service,
     Jump on Connect mechanism] Validation: jump on server 2 from Washington', label: success,
   name: '[Regression Workflow: Unix Command & Chell, Ping Service, Jump on Connect
-    mechanism] 2021-03-09 06:57:33.152334', source: '[Regression Workflow: Unix Command
+    mechanism] 2021-03-20 09:17:05.278901', source: '[Regression Workflow: Unix Command
     & Chell, Ping Service, Jump on Connect mechanism] Ping Washington', subtype: success,
   type: workflow_edge, workflow: 'Regression Workflow: Unix Command & Chell, Ping
     Service, Jump on Connect mechanism'}
 - {color: green, destination: '[Shared] End', label: success, name: '[Regression Workflow:
-    Unix Command & Chell, Ping Service, Jump on Connect mechanism] 2021-03-09 06:57:33.152343',
+    Unix Command & Chell, Ping Service, Jump on Connect mechanism] 2021-03-20 09:17:05.278914',
   source: '[Regression Workflow: Unix Command & Chell, Ping Service, Jump on Connect
     mechanism] Validation: jump on server 2 from Washington', subtype: success, type: workflow_edge,
   workflow: 'Regression Workflow: Unix Command & Chell, Ping Service, Jump on Connect
     mechanism'}
 - {color: green, destination: '[Regression Workflow: Ansible with Validation] Ansible
     Workflow: Arista show version', label: success, name: '[Regression Workflow: Ansible
-    with Validation] 2021-03-09 06:57:33.152352', source: '[Regression Workflow: Ansible
+    with Validation] 2021-03-20 09:17:05.278926', source: '[Regression Workflow: Ansible
     with Validation] Simple Playbook', subtype: success, type: workflow_edge, workflow: 'Regression
     Workflow: Ansible with Validation'}
 - {color: green, destination: '[Regression Workflow: Iteration Targets Mechanism]
     Iteration Target Workflow - Test 3', label: success, name: '[Regression Workflow:
-    Iteration Targets Mechanism] 2021-03-09 06:57:33.152361', source: '[Regression
+    Iteration Targets Mechanism] 2021-03-20 09:17:05.278939', source: '[Regression
     Workflow: Iteration Targets Mechanism] Iteration Target Workflow - Test 2', subtype: success,
   type: workflow_edge, workflow: 'Regression Workflow: Iteration Targets Mechanism'}
 - {color: green, destination: '[Regression Workflow: Iteration Targets Mechanism]
     Iteration Targets Workflow - Test 4', label: success, name: '[Regression Workflow:
-    Iteration Targets Mechanism] 2021-03-09 06:57:33.152369', source: '[Regression
+    Iteration Targets Mechanism] 2021-03-20 09:17:05.278952', source: '[Regression
     Workflow: Iteration Targets Mechanism] Iteration Target Workflow - Test 3', subtype: success,
   type: workflow_edge, workflow: 'Regression Workflow: Iteration Targets Mechanism'}
 - {color: green, destination: '[Regression Workflow: Superworkflow] REST API: call
     to placeholder property', label: success, name: '[Regression Workflow: Superworkflow]
-    2021-03-09 06:57:33.152378', source: '[Shared] REST API: call *is_alive* endpoint',
+    2021-03-20 09:17:05.278964', source: '[Shared] REST API: call *is_alive* endpoint',
   subtype: success, type: workflow_edge, workflow: 'Regression Workflow: Superworkflow'}
 - {color: green, destination: '[Shared] Placeholder', label: success, name: '[Regression
-    Workflow: Superworkflow] 2021-03-09 06:57:33.152387', source: '[Regression Workflow:
+    Workflow: Superworkflow] 2021-03-20 09:17:05.278976', source: '[Regression Workflow:
     Superworkflow] REST API: call to placeholder property', subtype: success, type: workflow_edge,
   workflow: 'Regression Workflow: Superworkflow'}
 - {color: green, destination: '[Regression Workflow: Using get_var, set_var, get_result
     functions] Show vrf with python query', label: success, name: '[Regression Workflow:
-    Using get_var, set_var, get_result functions] 2021-03-09 06:57:33.152395', source: '[Regression
+    Using get_var, set_var, get_result functions] 2021-03-20 09:17:05.278989', source: '[Regression
     Workflow: Using get_var, set_var, get_result functions] Show vrf with payload
     helper', subtype: success, type: workflow_edge, workflow: 'Regression Workflow:
     Using get_var, set_var, get_result functions'}
 - {color: green, destination: '[Regression Workflow: Operational Data Backup (admin)]
     Get Configuration', label: success, name: '[Regression Workflow: Operational Data
-    Backup (admin)] 2021-03-09 06:57:33.152405', source: '[Shared] Start', subtype: success,
+    Backup (admin)] 2021-03-20 09:17:05.279002', source: '[Shared] Start', subtype: success,
   type: workflow_edge, workflow: 'Regression Workflow: Operational Data Backup (admin)'}
 - {color: green, destination: '[Regression Workflow: Operational Data Backup (admin)]
     Retrieve Operational Data', label: success, name: '[Regression Workflow: Operational
-    Data Backup (admin)] 2021-03-09 06:57:33.152414', source: '[Regression Workflow:
+    Data Backup (admin)] 2021-03-20 09:17:05.279015', source: '[Regression Workflow:
     Operational Data Backup (admin)] Get Configuration', subtype: success, type: workflow_edge,
   workflow: 'Regression Workflow: Operational Data Backup (admin)'}
 - {color: green, destination: '[Regression Workflow: Operational Data Backup (admin)]
     Push Configurations to Git', label: success, name: '[Regression Workflow: Operational
-    Data Backup (admin)] 2021-03-09 06:57:33.152423', source: '[Regression Workflow:
+    Data Backup (admin)] 2021-03-20 09:17:05.279027', source: '[Regression Workflow:
     Operational Data Backup (admin)] Retrieve Operational Data', subtype: success,
   type: workflow_edge, workflow: 'Regression Workflow: Operational Data Backup (admin)'}
 - {color: green, destination: '[Regression Workflow: Operational Data Backup (admin)]
     Push Configurations to Git', label: success, name: '[Regression Workflow: Operational
-    Data Backup (admin)] 2021-03-09 06:57:33.152431', source: '[Regression Workflow:
+    Data Backup (admin)] 2021-03-20 09:17:05.279039', source: '[Regression Workflow:
     Operational Data Backup (admin)] Configuration Backup (NAPALM)', subtype: success,
   type: workflow_edge, workflow: 'Regression Workflow: Operational Data Backup (admin)'}
 - {color: green, destination: '[Shared] End', label: success, name: '[Regression Workflow:
-    Operational Data Backup (admin)] 2021-03-09 06:57:33.152440', source: '[Regression
+    Operational Data Backup (admin)] 2021-03-20 09:17:05.279052', source: '[Regression
     Workflow: Operational Data Backup (admin)] Push Configurations to Git', subtype: success,
   type: workflow_edge, workflow: 'Regression Workflow: Operational Data Backup (admin)'}
 - {color: green, destination: '[Regression Workflow: Superworkflow] Post Placeholder
-    Processing', label: success, name: '[Regression Workflow: Superworkflow] 2021-03-09
-    06:57:33.152448', source: '[Shared] Placeholder', subtype: success, type: workflow_edge,
+    Processing', label: success, name: '[Regression Workflow: Superworkflow] 2021-03-20
+    09:17:05.279065', source: '[Shared] Placeholder', subtype: success, type: workflow_edge,
   workflow: 'Regression Workflow: Superworkflow'}
 - {color: green, destination: '[Shared] End', label: success, name: '[Regression Workflow:
-    Superworkflow] 2021-03-09 06:57:33.152457', source: '[Regression Workflow: Superworkflow]
+    Superworkflow] 2021-03-20 09:17:05.279077', source: '[Regression Workflow: Superworkflow]
     Post Placeholder Processing', subtype: success, type: workflow_edge, workflow: 'Regression
     Workflow: Superworkflow'}
 - {color: green, destination: '[Regression Workflow: Scrapli] Check running configuration',
-  label: success, name: '[Regression Workflow: Scrapli] 2021-03-09 06:57:33.152467',
+  label: success, name: '[Regression Workflow: Scrapli] 2021-03-20 09:17:05.279090',
   source: '[Shared] Start', subtype: success, type: workflow_edge, workflow: 'Regression
     Workflow: Scrapli'}
 - {color: green, destination: '[Regression Workflow: Scrapli] Configure VRF TEST-VRF',
-  label: success, name: '[Regression Workflow: Scrapli] 2021-03-09 06:57:33.152476',
+  label: success, name: '[Regression Workflow: Scrapli] 2021-03-20 09:17:05.279102',
   source: '[Regression Workflow: Scrapli] Check running configuration', subtype: success,
   type: workflow_edge, workflow: 'Regression Workflow: Scrapli'}
 - {color: green, destination: '[Regression Workflow: Scrapli] Check that TEST-VRF
-    is configured', label: success, name: '[Regression Workflow: Scrapli] 2021-03-09
-    06:57:33.152485', source: '[Regression Workflow: Scrapli] Configure VRF TEST-VRF',
+    is configured', label: success, name: '[Regression Workflow: Scrapli] 2021-03-20
+    09:17:05.279114', source: '[Regression Workflow: Scrapli] Configure VRF TEST-VRF',
   subtype: success, type: workflow_edge, workflow: 'Regression Workflow: Scrapli'}
 - {color: green, destination: '[Regression Workflow: Scrapli] Decommission VRF TEST-VRF',
-  label: success, name: '[Regression Workflow: Scrapli] 2021-03-09 06:57:33.152494',
+  label: success, name: '[Regression Workflow: Scrapli] 2021-03-20 09:17:05.279127',
   source: '[Regression Workflow: Scrapli] Check that TEST-VRF is configured', subtype: success,
   type: workflow_edge, workflow: 'Regression Workflow: Scrapli'}
 - {color: green, destination: '[Shared] End', label: success, name: '[Regression Workflow:
-    Scrapli] 2021-03-09 06:57:33.152502', source: '[Regression Workflow: Scrapli]
+    Scrapli] 2021-03-20 09:17:05.279139', source: '[Regression Workflow: Scrapli]
     Decommission VRF TEST-VRF', subtype: success, type: workflow_edge, workflow: 'Regression
     Workflow: Scrapli'}
 - {color: green, destination: '[Shared] REST API: call *is_alive* endpoint', label: success,
-  name: '[Regression Workflow: Scalability Test (large workflow)] 2021-03-09 06:57:33.152511',
+  name: '[Regression Workflow: Scalability Test (large workflow)] 2021-03-20 09:17:05.279152',
   source: '[Shared] Start', subtype: success, type: workflow_edge, workflow: 'Regression
     Workflow: Scalability Test (large workflow)'}
 - {color: green, destination: '[Regression Workflow: Scalability Test (large workflow)]
     REST API: call *is_alive* endpoint', label: success, name: '[Regression Workflow:
-    Scalability Test (large workflow)] 2021-03-09 06:57:33.152520', source: '[Shared]
+    Scalability Test (large workflow)] 2021-03-20 09:17:05.279165', source: '[Shared]
     REST API: call *is_alive* endpoint', subtype: success, type: workflow_edge, workflow: 'Regression
     Workflow: Scalability Test (large workflow)'}
 - {color: green, destination: '[Regression Workflow: Scalability Test (large workflow)]
     REST API: call *is_alive* endpoint 2', label: success, name: '[Regression Workflow:
-    Scalability Test (large workflow)] 2021-03-09 06:57:33.152529', source: '[Regression
+    Scalability Test (large workflow)] 2021-03-20 09:17:05.279177', source: '[Regression
     Workflow: Scalability Test (large workflow)] REST API: call *is_alive* endpoint',
   subtype: success, type: workflow_edge, workflow: 'Regression Workflow: Scalability
     Test (large workflow)'}
 - {color: green, destination: '[Regression Workflow: Scalability Test (large workflow)]
     REST API: call *is_alive* endpoint 3', label: success, name: '[Regression Workflow:
-    Scalability Test (large workflow)] 2021-03-09 06:57:33.152538', source: '[Regression
+    Scalability Test (large workflow)] 2021-03-20 09:17:05.279190', source: '[Regression
     Workflow: Scalability Test (large workflow)] REST API: call *is_alive* endpoint
     2', subtype: success, type: workflow_edge, workflow: 'Regression Workflow: Scalability
     Test (large workflow)'}
 - {color: green, destination: '[Regression Workflow: Scalability Test (large workflow)]
     REST API: call *is_alive* endpoint 4', label: success, name: '[Regression Workflow:
-    Scalability Test (large workflow)] 2021-03-09 06:57:33.152547', source: '[Regression
+    Scalability Test (large workflow)] 2021-03-20 09:17:05.279203', source: '[Regression
     Workflow: Scalability Test (large workflow)] REST API: call *is_alive* endpoint
     3', subtype: success, type: workflow_edge, workflow: 'Regression Workflow: Scalability
     Test (large workflow)'}
 - {color: green, destination: '[Regression Workflow: Scalability Test (large workflow)]
     REST API: call *is_alive* endpoint 5', label: success, name: '[Regression Workflow:
-    Scalability Test (large workflow)] 2021-03-09 06:57:33.152555', source: '[Regression
+    Scalability Test (large workflow)] 2021-03-20 09:17:05.279215', source: '[Regression
     Workflow: Scalability Test (large workflow)] REST API: call *is_alive* endpoint
     4', subtype: success, type: workflow_edge, workflow: 'Regression Workflow: Scalability
     Test (large workflow)'}
 - {color: green, destination: '[Regression Workflow: Scalability Test (large workflow)]
     Show vrf with netmiko 1', label: success, name: '[Regression Workflow: Scalability
-    Test (large workflow)] 2021-03-09 06:57:33.152591', source: '[Regression Workflow:
+    Test (large workflow)] 2021-03-20 09:17:05.279227', source: '[Regression Workflow:
     Scalability Test (large workflow)] REST API: call *is_alive* endpoint 5', subtype: success,
   type: workflow_edge, workflow: 'Regression Workflow: Scalability Test (large workflow)'}
 - {color: green, destination: '[Regression Workflow: Scalability Test (large workflow)]
     Show vrf with netmiko 2', label: success, name: '[Regression Workflow: Scalability
-    Test (large workflow)] 2021-03-09 06:57:33.152604', source: '[Regression Workflow:
+    Test (large workflow)] 2021-03-20 09:17:05.279240', source: '[Regression Workflow:
     Scalability Test (large workflow)] Show vrf with netmiko 1', subtype: success,
   type: workflow_edge, workflow: 'Regression Workflow: Scalability Test (large workflow)'}
 - {color: green, destination: '[Regression Workflow: Scalability Test (large workflow)]
     Show vrf with netmiko 3', label: success, name: '[Regression Workflow: Scalability
-    Test (large workflow)] 2021-03-09 06:57:33.152613', source: '[Regression Workflow:
+    Test (large workflow)] 2021-03-20 09:17:05.279252', source: '[Regression Workflow:
     Scalability Test (large workflow)] Show vrf with netmiko 2', subtype: success,
   type: workflow_edge, workflow: 'Regression Workflow: Scalability Test (large workflow)'}
 - {color: green, destination: '[Regression Workflow: Scalability Test (large workflow)]
     Show vrf with netmiko 4', label: success, name: '[Regression Workflow: Scalability
-    Test (large workflow)] 2021-03-09 06:57:33.152623', source: '[Regression Workflow:
+    Test (large workflow)] 2021-03-20 09:17:05.279265', source: '[Regression Workflow:
     Scalability Test (large workflow)] Show vrf with netmiko 3', subtype: success,
   type: workflow_edge, workflow: 'Regression Workflow: Scalability Test (large workflow)'}
 - {color: green, destination: '[Regression Workflow: Scalability Test (large workflow)]
     Show vrf with netmiko 5', label: success, name: '[Regression Workflow: Scalability
-    Test (large workflow)] 2021-03-09 06:57:33.152633', source: '[Regression Workflow:
+    Test (large workflow)] 2021-03-20 09:17:05.279277', source: '[Regression Workflow:
     Scalability Test (large workflow)] Show vrf with netmiko 4', subtype: success,
   type: workflow_edge, workflow: 'Regression Workflow: Scalability Test (large workflow)'}
 - {color: green, destination: '[Regression Workflow: Scalability Test (large workflow)]
     Show vrf with netmiko 6', label: success, name: '[Regression Workflow: Scalability
-    Test (large workflow)] 2021-03-09 06:57:33.152642', source: '[Regression Workflow:
+    Test (large workflow)] 2021-03-20 09:17:05.279289', source: '[Regression Workflow:
     Scalability Test (large workflow)] Show vrf with netmiko 5', subtype: success,
   type: workflow_edge, workflow: 'Regression Workflow: Scalability Test (large workflow)'}
 - {color: green, destination: '[Regression Workflow: Scalability Test (large workflow)]
     Sleep with python', label: success, name: '[Regression Workflow: Scalability Test
-    (large workflow)] 2021-03-09 06:57:33.152652', source: '[Regression Workflow:
+    (large workflow)] 2021-03-20 09:17:05.279302', source: '[Regression Workflow:
     Scalability Test (large workflow)] Show vrf with netmiko 6', subtype: success,
   type: workflow_edge, workflow: 'Regression Workflow: Scalability Test (large workflow)'}
 - {color: green, destination: '[Regression Workflow: Scalability Test (large workflow)]
     Sleep with python 2', label: success, name: '[Regression Workflow: Scalability
-    Test (large workflow)] 2021-03-09 06:57:33.152661', source: '[Regression Workflow:
+    Test (large workflow)] 2021-03-20 09:17:05.279314', source: '[Regression Workflow:
     Scalability Test (large workflow)] Sleep with python', subtype: success, type: workflow_edge,
   workflow: 'Regression Workflow: Scalability Test (large workflow)'}
 - {color: green, destination: '[Regression Workflow: Scalability Test (large workflow)]
     Sleep with python 3', label: success, name: '[Regression Workflow: Scalability
-    Test (large workflow)] 2021-03-09 06:57:33.152671', source: '[Regression Workflow:
+    Test (large workflow)] 2021-03-20 09:17:05.279326', source: '[Regression Workflow:
     Scalability Test (large workflow)] Sleep with python 2', subtype: success, type: workflow_edge,
   workflow: 'Regression Workflow: Scalability Test (large workflow)'}
 - {color: green, destination: '[Regression Workflow: Scalability Test (large workflow)]
     Sleep with python 4', label: success, name: '[Regression Workflow: Scalability
-    Test (large workflow)] 2021-03-09 06:57:33.152681', source: '[Regression Workflow:
+    Test (large workflow)] 2021-03-20 09:17:05.279338', source: '[Regression Workflow:
     Scalability Test (large workflow)] Sleep with python 3', subtype: success, type: workflow_edge,
   workflow: 'Regression Workflow: Scalability Test (large workflow)'}
 - {color: green, destination: '[Regression Workflow: Scalability Test (large workflow)]
     Sleep with python 5', label: success, name: '[Regression Workflow: Scalability
-    Test (large workflow)] 2021-03-09 06:57:33.152690', source: '[Regression Workflow:
+    Test (large workflow)] 2021-03-20 09:17:05.279351', source: '[Regression Workflow:
     Scalability Test (large workflow)] Sleep with python 4', subtype: success, type: workflow_edge,
   workflow: 'Regression Workflow: Scalability Test (large workflow)'}
 - {color: green, destination: '[Regression Workflow: Scalability Test (large workflow)]
     Sleep with python 6', label: success, name: '[Regression Workflow: Scalability
-    Test (large workflow)] 2021-03-09 06:57:33.152700', source: '[Regression Workflow:
+    Test (large workflow)] 2021-03-20 09:17:05.279363', source: '[Regression Workflow:
     Scalability Test (large workflow)] Sleep with python 5', subtype: success, type: workflow_edge,
   workflow: 'Regression Workflow: Scalability Test (large workflow)'}
 - {color: green, destination: '[Regression Workflow: Scalability Test (large workflow)]
     Sleep with python 7', label: success, name: '[Regression Workflow: Scalability
-    Test (large workflow)] 2021-03-09 06:57:33.152709', source: '[Regression Workflow:
+    Test (large workflow)] 2021-03-20 09:17:05.279375', source: '[Regression Workflow:
     Scalability Test (large workflow)] Sleep with python 6', subtype: success, type: workflow_edge,
   workflow: 'Regression Workflow: Scalability Test (large workflow)'}
 - {color: green, destination: '[Regression Workflow: Scalability Test (large workflow)]
     Sleep with python 8', label: success, name: '[Regression Workflow: Scalability
-    Test (large workflow)] 2021-03-09 06:57:33.152732', source: '[Regression Workflow:
+    Test (large workflow)] 2021-03-20 09:17:05.279388', source: '[Regression Workflow:
     Scalability Test (large workflow)] Sleep with python 7', subtype: success, type: workflow_edge,
   workflow: 'Regression Workflow: Scalability Test (large workflow)'}
 - {color: green, destination: '[Shared] End', label: success, name: '[Regression Workflow:
-    Scalability Test (large workflow)] 2021-03-09 06:57:33.152759', source: '[Regression
+    Scalability Test (large workflow)] 2021-03-20 09:17:05.279400', source: '[Regression
     Workflow: Scalability Test (large workflow)] Sleep with python 8', subtype: success,
   type: workflow_edge, workflow: 'Regression Workflow: Scalability Test (large workflow)'}
 - {color: green, destination: '[Regression Workflow: File Transfer Mechanism] Transfer
     a.bin', label: success, name: '[Regression Workflow: File Transfer Mechanism]
-    2021-03-09 06:57:33.152769', source: '[Regression Workflow: File Transfer Mechanism]
+    2021-03-20 09:17:05.279413', source: '[Regression Workflow: File Transfer Mechanism]
     Check that test file does not exist', subtype: success, type: workflow_edge, workflow: 'Regression
     Workflow: File Transfer Mechanism'}
 - {color: green, destination: '[Regression Workflow: File Transfer Mechanism] Transfer
     bc.bin and bd.bin with glob option', label: success, name: '[Regression Workflow:
-    File Transfer Mechanism] 2021-03-09 06:57:33.152779', source: '[Regression Workflow:
+    File Transfer Mechanism] 2021-03-20 09:17:05.279441', source: '[Regression Workflow:
     File Transfer Mechanism] Transfer a.bin', subtype: success, type: workflow_edge,
   workflow: 'Regression Workflow: File Transfer Mechanism'}
 - {color: green, destination: '[Regression Workflow: File Transfer Mechanism] Check
     that test file does exist', label: success, name: '[Regression Workflow: File
-    Transfer Mechanism] 2021-03-09 06:57:33.152789', source: '[Regression Workflow:
+    Transfer Mechanism] 2021-03-20 09:17:05.279463', source: '[Regression Workflow:
     File Transfer Mechanism] Transfer bc.bin and bd.bin with glob option', subtype: success,
   type: workflow_edge, workflow: 'Regression Workflow: File Transfer Mechanism'}
 - {color: green, destination: '[Regression Workflow: File Transfer Mechanism] Delete
     all transferred files', label: success, name: '[Regression Workflow: File Transfer
-    Mechanism] 2021-03-09 06:57:33.152798', source: '[Regression Workflow: File Transfer
+    Mechanism] 2021-03-20 09:17:05.279476', source: '[Regression Workflow: File Transfer
     Mechanism] Check that test file does exist', subtype: success, type: workflow_edge,
   workflow: 'Regression Workflow: File Transfer Mechanism'}
 - {color: green, destination: '[Shared] End', label: success, name: '[Regression Workflow:
-    File Transfer Mechanism] 2021-03-09 06:57:33.152808', source: '[Regression Workflow:
+    File Transfer Mechanism] 2021-03-20 09:17:05.279489', source: '[Regression Workflow:
     File Transfer Mechanism] Delete all transferred files', subtype: success, type: workflow_edge,
   workflow: 'Regression Workflow: File Transfer Mechanism'}
 - {color: green, destination: '[Regression Workflow: File Transfer Mechanism] Transfer
     non-existing file', label: success, name: '[Regression Workflow: File Transfer
-    Mechanism] 2021-03-09 06:57:33.152817', source: '[Shared] Start', subtype: success,
+    Mechanism] 2021-03-20 09:17:05.279501', source: '[Shared] Start', subtype: success,
   type: workflow_edge, workflow: 'Regression Workflow: File Transfer Mechanism'}
 - {color: green, destination: '[Regression Workflow: File Transfer Mechanism] Check
     that test file does not exist', label: success, name: '[Regression Workflow: File
-    Transfer Mechanism] 2021-03-09 06:57:33.152827', source: '[Regression Workflow:
+    Transfer Mechanism] 2021-03-20 09:17:05.279513', source: '[Regression Workflow:
     File Transfer Mechanism] Transfer non-existing file', subtype: success, type: workflow_edge,
   workflow: 'Regression Workflow: File Transfer Mechanism'}
 - {color: green, destination: '[Regression Workflow: Skip Services in SxS mode] Partial
     failure', label: success, name: '[Regression Workflow: Skip Services in SxS mode]
-    2021-03-09 06:57:33.152837', source: '[Shared] Start', subtype: success, type: workflow_edge,
+    2021-03-20 09:17:05.279526', source: '[Shared] Start', subtype: success, type: workflow_edge,
   workflow: 'Regression Workflow: Skip Services in SxS mode'}
 - {color: green, destination: '[Regression Workflow: Skip Services in SxS mode] Skipped
     service', label: success, name: '[Regression Workflow: Skip Services in SxS mode]
-    2021-03-09 06:57:33.152846', source: '[Regression Workflow: Skip Services in SxS
+    2021-03-20 09:17:05.279539', source: '[Regression Workflow: Skip Services in SxS
     mode] Partial failure', subtype: success, type: workflow_edge, workflow: 'Regression
     Workflow: Skip Services in SxS mode'}
 - {color: green, destination: '[Regression Workflow: Skip Services in SxS mode] Last
     service', label: success, name: '[Regression Workflow: Skip Services in SxS mode]
-    2021-03-09 06:57:33.152856', source: '[Regression Workflow: Skip Services in SxS
+    2021-03-20 09:17:05.279551', source: '[Regression Workflow: Skip Services in SxS
     mode] Skipped service', subtype: success, type: workflow_edge, workflow: 'Regression
     Workflow: Skip Services in SxS mode'}
 - {color: green, destination: '[Shared] End', label: success, name: '[Regression Workflow:
-    Skip Services in SxS mode] 2021-03-09 06:57:33.152865', source: '[Regression Workflow:
+    Skip Services in SxS mode] 2021-03-20 09:17:05.279564', source: '[Regression Workflow:
     Skip Services in SxS mode] Last service', subtype: success, type: workflow_edge,
   workflow: 'Regression Workflow: Skip Services in SxS mode'}
 - {color: green, destination: '[Regression Workflow: Conditional Skip Query in Failed
     and Discard Modes] Post-success service', label: success, name: '[Regression Workflow:
-    Conditional Skip Query in Failed and Discard Modes] 2021-03-09 06:57:33.152875',
+    Conditional Skip Query in Failed and Discard Modes] 2021-03-20 09:17:05.279589',
   source: '[Regression Workflow: Conditional Skip Query in Failed and Discard Modes]
     Skip Washington with Skip value == False', subtype: success, type: workflow_edge,
   workflow: 'Regression Workflow: Conditional Skip Query in Failed and Discard Modes'}
 - {color: green, destination: '[Regression Workflow: Conditional Skip Query in Failed
     and Discard Modes] Final service', label: success, name: '[Regression Workflow:
-    Conditional Skip Query in Failed and Discard Modes] 2021-03-09 06:57:33.152884',
+    Conditional Skip Query in Failed and Discard Modes] 2021-03-20 09:17:05.279608',
   source: '[Regression Workflow: Conditional Skip Query in Failed and Discard Modes]
     Post-success service', subtype: success, type: workflow_edge, workflow: 'Regression
     Workflow: Conditional Skip Query in Failed and Discard Modes'}
 - {color: green, destination: '[Regression Workflow: Conditional Skip Query in Failed
     and Discard Modes] Final service', label: success, name: '[Regression Workflow:
-    Conditional Skip Query in Failed and Discard Modes] 2021-03-09 06:57:33.152907',
+    Conditional Skip Query in Failed and Discard Modes] 2021-03-20 09:17:05.279620',
   source: '[Regression Workflow: Conditional Skip Query in Failed and Discard Modes]
     Post-failure service', subtype: success, type: workflow_edge, workflow: 'Regression
     Workflow: Conditional Skip Query in Failed and Discard Modes'}
 - {color: green, destination: '[Shared] End', label: success, name: '[Regression Workflow:
-    Conditional Skip Query in Failed and Discard Modes] 2021-03-09 06:57:33.152916',
+    Conditional Skip Query in Failed and Discard Modes] 2021-03-20 09:17:05.279633',
   source: '[Regression Workflow: Conditional Skip Query in Failed and Discard Modes]
     Final service', subtype: success, type: workflow_edge, workflow: 'Regression Workflow:
     Conditional Skip Query in Failed and Discard Modes'}
 - {color: red, destination: '[Regression Workflow: Conditional Skip Query in Failed
     and Discard Modes] Post-failure service', label: failure, name: '[Regression Workflow:
-    Conditional Skip Query in Failed and Discard Modes] 2021-03-09 06:57:33.152924',
+    Conditional Skip Query in Failed and Discard Modes] 2021-03-20 09:17:05.279646',
   source: '[Regression Workflow: Conditional Skip Query in Failed and Discard Modes]
     Skip Washington with Skip value == False', subtype: failure, type: workflow_edge,
   workflow: 'Regression Workflow: Conditional Skip Query in Failed and Discard Modes'}
 - {color: green, destination: '[Regression Workflow: Link Neighbors Mechanism (public)]
     Test get_neighbors function', label: success, name: '[Regression Workflow: Link
-    Neighbors Mechanism (public)] 2021-03-09 06:57:33.152933', source: '[Shared] Start',
+    Neighbors Mechanism (public)] 2021-03-20 09:17:05.279659', source: '[Shared] Start',
   subtype: success, type: workflow_edge, workflow: 'Regression Workflow: Link Neighbors
     Mechanism (public)'}
 - {color: green, destination: '[Regression Workflow: Link Neighbors Mechanism (public)]
     Iterate over neighbors of workflow device', label: success, name: '[Regression
-    Workflow: Link Neighbors Mechanism (public)] 2021-03-09 06:57:33.152942', source: '[Regression
+    Workflow: Link Neighbors Mechanism (public)] 2021-03-20 09:17:05.279671', source: '[Regression
     Workflow: Link Neighbors Mechanism (public)] Test get_neighbors function', subtype: success,
   type: workflow_edge, workflow: 'Regression Workflow: Link Neighbors Mechanism (public)'}
 - {color: green, destination: '[Shared] End', label: success, name: '[Regression Workflow:
-    Link Neighbors Mechanism (public)] 2021-03-09 06:57:33.152950', source: '[Regression
+    Link Neighbors Mechanism (public)] 2021-03-20 09:17:05.279684', source: '[Regression
     Workflow: Link Neighbors Mechanism (public)] Iterate over neighbors of workflow
     device', subtype: success, type: workflow_edge, workflow: 'Regression Workflow:
     Link Neighbors Mechanism (public)'}
 - {color: green, destination: '[Regression Workflow: Netmiko Prompts] Check VRF (NOVRF)
-    exists', label: success, name: '[Regression Workflow: Netmiko Prompts] 2021-03-09
-    06:57:33.152959', source: '[Shared] Start', subtype: success, type: workflow_edge,
+    exists', label: success, name: '[Regression Workflow: Netmiko Prompts] 2021-03-20
+    09:17:05.279696', source: '[Shared] Start', subtype: success, type: workflow_edge,
   workflow: 'Regression Workflow: Netmiko Prompts'}
 - {color: green, destination: '[Regression Workflow: Netmiko Prompts] Test Netmiko
     Prompt Service', label: success, name: '[Regression Workflow: Netmiko Prompts]
-    2021-03-09 06:57:33.152968', source: '[Regression Workflow: Netmiko Prompts] Check
+    2021-03-20 09:17:05.279709', source: '[Regression Workflow: Netmiko Prompts] Check
     VRF (NOVRF) exists', subtype: success, type: workflow_edge, workflow: 'Regression
     Workflow: Netmiko Prompts'}
 - {color: green, destination: '[Regression Workflow: Global Variables and post-run
     Pool Update Mechanism] Functions fetch and fetch_all', label: success, name: '[Regression
-    Workflow: Global Variables and post-run Pool Update Mechanism] 2021-03-09 06:57:33.152977',
+    Workflow: Global Variables and post-run Pool Update Mechanism] 2021-03-20 09:17:05.279722',
   source: '[Shared] Start', subtype: success, type: workflow_edge, workflow: 'Regression
     Workflow: Global Variables and post-run Pool Update Mechanism'}
 - {color: green, destination: '[Regression Workflow: Global Variables and post-run
     Pool Update Mechanism] Credentials encryption', label: success, name: '[Regression
-    Workflow: Global Variables and post-run Pool Update Mechanism] 2021-03-09 06:57:33.152986',
+    Workflow: Global Variables and post-run Pool Update Mechanism] 2021-03-20 09:17:05.279735',
   source: '[Regression Workflow: Global Variables and post-run Pool Update Mechanism]
     Functions fetch and fetch_all', subtype: success, type: workflow_edge, workflow: 'Regression
     Workflow: Global Variables and post-run Pool Update Mechanism'}
 - {color: green, destination: '[Regression Workflow: Global Variables and post-run
     Pool Update Mechanism] Show vrf with custom encrypted credentials', label: success,
   name: '[Regression Workflow: Global Variables and post-run Pool Update Mechanism]
-    2021-03-09 06:57:33.152994', source: '[Regression Workflow: Global Variables and
+    2021-03-20 09:17:05.279747', source: '[Regression Workflow: Global Variables and
     post-run Pool Update Mechanism] Credentials encryption', subtype: success, type: workflow_edge,
   workflow: 'Regression Workflow: Global Variables and post-run Pool Update Mechanism'}
 - {color: green, destination: '[Shared] End', label: success, name: '[Regression Workflow:
-    Global Variables and post-run Pool Update Mechanism] 2021-03-09 06:57:33.153016',
+    Global Variables and post-run Pool Update Mechanism] 2021-03-20 09:17:05.279760',
   source: '[Regression Workflow: Global Variables and post-run Pool Update Mechanism]
     Show vrf with custom encrypted credentials', subtype: success, type: workflow_edge,
   workflow: 'Regression Workflow: Global Variables and post-run Pool Update Mechanism'}
 - {color: green, destination: '[Regression Workflow: Conditional Skip Query in Failed
     and Discard Modes] Skip router5-7 in discard mode', label: success, name: '[Regression
-    Workflow: Conditional Skip Query in Failed and Discard Modes] 2021-03-09 06:57:33.153027',
+    Workflow: Conditional Skip Query in Failed and Discard Modes] 2021-03-20 09:17:05.279772',
   source: '[Shared] Start', subtype: success, type: workflow_edge, workflow: 'Regression
     Workflow: Conditional Skip Query in Failed and Discard Modes'}
 - {color: green, destination: '[Regression Workflow: Conditional Skip Query in Failed
     and Discard Modes] Skip Washington with Skip value == False', label: success,
   name: '[Regression Workflow: Conditional Skip Query in Failed and Discard Modes]
-    2021-03-09 06:57:33.153036', source: '[Regression Workflow: Conditional Skip Query
+    2021-03-20 09:17:05.279784', source: '[Regression Workflow: Conditional Skip Query
     in Failed and Discard Modes] Skip router5-7 in discard mode', subtype: success,
   type: workflow_edge, workflow: 'Regression Workflow: Conditional Skip Query in Failed
     and Discard Modes'}
 - {color: red, destination: '[Regression Workflow: Conditional Skip Query in Failed
     and Discard Modes] Skip Washington with Skip value == False', label: failure,
   name: '[Regression Workflow: Conditional Skip Query in Failed and Discard Modes]
-    2021-03-09 06:57:33.153044', source: '[Regression Workflow: Conditional Skip Query
+    2021-03-20 09:17:05.279797', source: '[Regression Workflow: Conditional Skip Query
     in Failed and Discard Modes] Skip router5-7 in discard mode', subtype: failure,
   type: workflow_edge, workflow: 'Regression Workflow: Conditional Skip Query in Failed
     and Discard Modes'}
 - {color: green, destination: '[Regression Workflow: Fork based on value with Skip
     Discard Mechanism] REST API: call *is_alive* endpoint', label: success, name: '[Regression
-    Workflow: Fork based on value with Skip Discard Mechanism] 2021-03-09 06:57:33.153054',
+    Workflow: Fork based on value with Skip Discard Mechanism] 2021-03-20 09:17:05.279809',
   source: '[Shared] Start', subtype: success, type: workflow_edge, workflow: 'Regression
     Workflow: Fork based on value with Skip Discard Mechanism'}
 - {color: green, destination: '[Regression Workflow: Fork based on value with Skip
     Discard Mechanism] Juniper devices', label: success, name: '[Regression Workflow:
-    Fork based on value with Skip Discard Mechanism] 2021-03-09 06:57:33.153062',
+    Fork based on value with Skip Discard Mechanism] 2021-03-20 09:17:05.279822',
   source: '[Regression Workflow: Fork based on value with Skip Discard Mechanism]
     REST API: call *is_alive* endpoint', subtype: success, type: workflow_edge, workflow: 'Regression
     Workflow: Fork based on value with Skip Discard Mechanism'}
 - {color: green, destination: '[Regression Workflow: Fork based on value with Skip
     Discard Mechanism] Arista devices', label: success, name: '[Regression Workflow:
-    Fork based on value with Skip Discard Mechanism] 2021-03-09 06:57:33.153071',
+    Fork based on value with Skip Discard Mechanism] 2021-03-20 09:17:05.279835',
   source: '[Regression Workflow: Fork based on value with Skip Discard Mechanism]
     REST API: call *is_alive* endpoint', subtype: success, type: workflow_edge, workflow: 'Regression
     Workflow: Fork based on value with Skip Discard Mechanism'}
 - {color: green, destination: '[Regression Workflow: Fork based on value with Skip
     Discard Mechanism] Show VRF', label: success, name: '[Regression Workflow: Fork
-    based on value with Skip Discard Mechanism] 2021-03-09 06:57:33.153079', source: '[Regression
+    based on value with Skip Discard Mechanism] 2021-03-20 09:17:05.279847', source: '[Regression
     Workflow: Fork based on value with Skip Discard Mechanism] Arista devices', subtype: success,
   type: workflow_edge, workflow: 'Regression Workflow: Fork based on value with Skip
     Discard Mechanism'}
 - {color: red, destination: '[Regression Workflow: Fork based on value with Skip Discard
     Mechanism] is_alive endpoint', label: failure, name: '[Regression Workflow: Fork
-    based on value with Skip Discard Mechanism] 2021-03-09 06:57:33.153088', source: '[Regression
+    based on value with Skip Discard Mechanism] 2021-03-20 09:17:05.279860', source: '[Regression
     Workflow: Fork based on value with Skip Discard Mechanism] Arista devices', subtype: failure,
   type: workflow_edge, workflow: 'Regression Workflow: Fork based on value with Skip
     Discard Mechanism'}
 - {color: red, destination: '[Shared] End', label: failure, name: '[Regression Workflow:
-    Fork based on value with Skip Discard Mechanism] 2021-03-09 06:57:33.153097',
+    Fork based on value with Skip Discard Mechanism] 2021-03-20 09:17:05.279872',
   source: '[Regression Workflow: Fork based on value with Skip Discard Mechanism]
     is_alive endpoint', subtype: failure, type: workflow_edge, workflow: 'Regression
     Workflow: Fork based on value with Skip Discard Mechanism'}
 - {color: red, destination: '[Shared] End', label: failure, name: '[Regression Workflow:
-    Fork based on value with Skip Discard Mechanism] 2021-03-09 06:57:33.153105',
+    Fork based on value with Skip Discard Mechanism] 2021-03-20 09:17:05.279885',
   source: '[Regression Workflow: Fork based on value with Skip Discard Mechanism]
     Show VRF', subtype: failure, type: workflow_edge, workflow: 'Regression Workflow:
     Fork based on value with Skip Discard Mechanism'}
 - {color: green, destination: '[Shared] End', label: success, name: '[Regression Workflow:
-    Fork based on value with Skip Discard Mechanism] 2021-03-09 06:57:33.153114',
+    Fork based on value with Skip Discard Mechanism] 2021-03-20 09:17:05.279897',
   source: '[Regression Workflow: Fork based on value with Skip Discard Mechanism]
     Show VRF', subtype: success, type: workflow_edge, workflow: 'Regression Workflow:
     Fork based on value with Skip Discard Mechanism'}
 - {color: green, destination: '[Shared] End', label: success, name: '[Regression Workflow:
-    Fork based on value with Skip Discard Mechanism] 2021-03-09 06:57:33.153122',
+    Fork based on value with Skip Discard Mechanism] 2021-03-20 09:17:05.279909',
   source: '[Regression Workflow: Fork based on value with Skip Discard Mechanism]
     is_alive endpoint', subtype: success, type: workflow_edge, workflow: 'Regression
     Workflow: Fork based on value with Skip Discard Mechanism'}
 - {color: green, destination: '[Shared] End', label: success, name: '[Regression Workflow:
-    Fork based on value with Skip Discard Mechanism] 2021-03-09 06:57:33.153131',
+    Fork based on value with Skip Discard Mechanism] 2021-03-20 09:17:05.279922',
   source: '[Regression Workflow: Fork based on value with Skip Discard Mechanism]
     is_alive endpoint 2: Skipped', subtype: success, type: workflow_edge, workflow: 'Regression
     Workflow: Fork based on value with Skip Discard Mechanism'}
 - {color: red, destination: '[Shared] End', label: failure, name: '[Regression Workflow:
-    Fork based on value with Skip Discard Mechanism] 2021-03-09 06:57:33.153139',
+    Fork based on value with Skip Discard Mechanism] 2021-03-20 09:17:05.279934',
   source: '[Regression Workflow: Fork based on value with Skip Discard Mechanism]
     is_alive endpoint 2: Skipped', subtype: failure, type: workflow_edge, workflow: 'Regression
     Workflow: Fork based on value with Skip Discard Mechanism'}
 - {color: green, destination: '[Regression Workflow: Fork based on value with Skip
     Discard Mechanism] is_alive endpoint 2: Skipped', label: success, name: '[Regression
-    Workflow: Fork based on value with Skip Discard Mechanism] 2021-03-09 06:57:33.153148',
+    Workflow: Fork based on value with Skip Discard Mechanism] 2021-03-20 09:17:05.279947',
   source: '[Regression Workflow: Fork based on value with Skip Discard Mechanism]
     Juniper devices', subtype: success, type: workflow_edge, workflow: 'Regression
     Workflow: Fork based on value with Skip Discard Mechanism'}
 - {color: red, destination: '[Shared] End', label: failure, name: '[Regression Workflow:
-    Fork based on value with Skip Discard Mechanism] 2021-03-09 06:57:33.153156',
+    Fork based on value with Skip Discard Mechanism] 2021-03-20 09:17:05.279959',
   source: '[Regression Workflow: Fork based on value with Skip Discard Mechanism]
     Juniper devices', subtype: failure, type: workflow_edge, workflow: 'Regression
     Workflow: Fork based on value with Skip Discard Mechanism'}
 - {color: green, destination: '[Regression Workflow: Skip Query with device in Run
     Once Mode] Python service in run once mode', label: success, name: '[Regression
-    Workflow: Skip Query with device in Run Once Mode] 2021-03-09 06:57:33.153166',
+    Workflow: Skip Query with device in Run Once Mode] 2021-03-20 09:17:05.279972',
   source: '[Shared] Start', subtype: success, type: workflow_edge, workflow: 'Regression
     Workflow: Skip Query with device in Run Once Mode'}
 - {color: green, destination: '[Regression Workflow: Skip Query with device in Run
     Once Mode] Subworkflow in SxS mode - workflow targets', label: success, name: '[Regression
-    Workflow: Skip Query with device in Run Once Mode] 2021-03-09 06:57:33.153174',
+    Workflow: Skip Query with device in Run Once Mode] 2021-03-20 09:17:05.279984',
   source: '[Regression Workflow: Skip Query with device in Run Once Mode] Python service
     in run once mode', subtype: success, type: workflow_edge, workflow: 'Regression
     Workflow: Skip Query with device in Run Once Mode'}
 - {color: green, destination: '[Regression Workflow: Skip Query with device in Run
     Once Mode] Subworkflow in SxS mode - service targets', label: success, name: '[Regression
-    Workflow: Skip Query with device in Run Once Mode] 2021-03-09 06:57:33.153183',
+    Workflow: Skip Query with device in Run Once Mode] 2021-03-20 09:17:05.279997',
   source: '[Regression Workflow: Skip Query with device in Run Once Mode] Subworkflow
     in SxS mode - workflow targets', subtype: success, type: workflow_edge, workflow: 'Regression
     Workflow: Skip Query with device in Run Once Mode'}
 - {color: green, destination: '[Shared] End', label: success, name: '[Regression Workflow:
-    Skip Query with device in Run Once Mode] 2021-03-09 06:57:33.153192', source: '[Regression
+    Skip Query with device in Run Once Mode] 2021-03-20 09:17:05.280009', source: '[Regression
     Workflow: Skip Query with device in Run Once Mode] Subworkflow in SxS mode - service
     targets', subtype: success, type: workflow_edge, workflow: 'Regression Workflow:
     Skip Query with device in Run Once Mode'}
 - {color: red, destination: '[Regression Workflow: Skip Query with device in Run Once
     Mode] Subworkflow in SxS mode - workflow targets', label: failure, name: '[Regression
-    Workflow: Skip Query with device in Run Once Mode] 2021-03-09 06:57:33.153200',
+    Workflow: Skip Query with device in Run Once Mode] 2021-03-20 09:17:05.280022',
   source: '[Regression Workflow: Skip Query with device in Run Once Mode] Python service
     in run once mode', subtype: failure, type: workflow_edge, workflow: 'Regression
     Workflow: Skip Query with device in Run Once Mode'}
 - {color: red, destination: '[Regression Workflow: Skip Query with device in Run Once
     Mode] Subworkflow in SxS mode - service targets', label: failure, name: '[Regression
-    Workflow: Skip Query with device in Run Once Mode] 2021-03-09 06:57:33.153209',
+    Workflow: Skip Query with device in Run Once Mode] 2021-03-20 09:17:05.280034',
   source: '[Regression Workflow: Skip Query with device in Run Once Mode] Subworkflow
     in SxS mode - workflow targets', subtype: failure, type: workflow_edge, workflow: 'Regression
     Workflow: Skip Query with device in Run Once Mode'}
 - {color: green, destination: '[[Regression Workflow: Skip Query with device in Run
     Once Mode] Subworkflow in SxS mode - workflow targets] Fail Austin', label: success,
   name: '[[Regression Workflow: Skip Query with device in Run Once Mode] Subworkflow
-    in SxS mode - workflow targets] 2021-03-09 06:57:33.153218', source: '[Shared]
+    in SxS mode - workflow targets] 2021-03-20 09:17:05.280047', source: '[Shared]
     Start', subtype: success, type: workflow_edge, workflow: '[Regression Workflow:
     Skip Query with device in Run Once Mode] Subworkflow in SxS mode - workflow targets'}
 - {color: green, destination: '[Shared] End', label: success, name: '[[Regression
     Workflow: Skip Query with device in Run Once Mode] Subworkflow in SxS mode - workflow
-    targets] 2021-03-09 06:57:33.153227', source: '[[Regression Workflow: Skip Query
+    targets] 2021-03-20 09:17:05.280082', source: '[[Regression Workflow: Skip Query
     with device in Run Once Mode] Subworkflow in SxS mode - workflow targets] Fail
     Austin', subtype: success, type: workflow_edge, workflow: '[Regression Workflow:
     Skip Query with device in Run Once Mode] Subworkflow in SxS mode - workflow targets'}
 - {color: green, destination: '[Regression Workflow: Skip, Discard and Disable Result
     Creation Mechanism] Pre-service with result creation disabled', label: success,
   name: '[Regression Workflow: Skip, Discard and Disable Result Creation Mechanism]
-    2021-03-09 06:57:33.153237', source: '[Shared] Start', subtype: success, type: workflow_edge,
+    2021-03-20 09:17:05.280102', source: '[Shared] Start', subtype: success, type: workflow_edge,
   workflow: 'Regression Workflow: Skip, Discard and Disable Result Creation Mechanism'}
 - {color: green, destination: '[Regression Workflow: Skip, Discard and Disable Result
     Creation Mechanism] Workflow in DxD mode', label: success, name: '[Regression
-    Workflow: Skip, Discard and Disable Result Creation Mechanism] 2021-03-09 06:57:33.153245',
+    Workflow: Skip, Discard and Disable Result Creation Mechanism] 2021-03-20 09:17:05.280115',
   source: '[Regression Workflow: Skip, Discard and Disable Result Creation Mechanism]
     Pre-service with result creation disabled', subtype: success, type: workflow_edge,
   workflow: 'Regression Workflow: Skip, Discard and Disable Result Creation Mechanism'}
 - {color: green, destination: '[Regression Workflow: Skip, Discard and Disable Result
     Creation Mechanism] Service in run once mode', label: success, name: '[Regression
-    Workflow: Skip, Discard and Disable Result Creation Mechanism] 2021-03-09 06:57:33.153254',
+    Workflow: Skip, Discard and Disable Result Creation Mechanism] 2021-03-20 09:17:05.280127',
   source: '[Regression Workflow: Skip, Discard and Disable Result Creation Mechanism]
     Workflow in DxD mode', subtype: success, type: workflow_edge, workflow: 'Regression
     Workflow: Skip, Discard and Disable Result Creation Mechanism'}
 - {color: green, destination: '[Regression Workflow: Skip, Discard and Disable Result
     Creation Mechanism] Workflow in SxS mode', label: success, name: '[Regression
-    Workflow: Skip, Discard and Disable Result Creation Mechanism] 2021-03-09 06:57:33.153263',
+    Workflow: Skip, Discard and Disable Result Creation Mechanism] 2021-03-20 09:17:05.280139',
   source: '[Regression Workflow: Skip, Discard and Disable Result Creation Mechanism]
     Service in run once mode', subtype: success, type: workflow_edge, workflow: 'Regression
     Workflow: Skip, Discard and Disable Result Creation Mechanism'}
 - {color: green, destination: '[Shared] End', label: success, name: '[Regression Workflow:
-    Skip, Discard and Disable Result Creation Mechanism] 2021-03-09 06:57:33.153272',
+    Skip, Discard and Disable Result Creation Mechanism] 2021-03-20 09:17:05.280152',
   source: '[Regression Workflow: Skip, Discard and Disable Result Creation Mechanism]
     Workflow in SxS mode', subtype: success, type: workflow_edge, workflow: 'Regression
     Workflow: Skip, Discard and Disable Result Creation Mechanism'}
 - {color: green, destination: '[[Regression Workflow: Skip, Discard and Disable Result
     Creation Mechanism] Workflow in DxD mode] Fail Austin', label: success, name: '[[Regression
     Workflow: Skip, Discard and Disable Result Creation Mechanism] Workflow in DxD
-    mode] 2021-03-09 06:57:33.153281', source: '[Shared] Start', subtype: success,
+    mode] 2021-03-20 09:17:05.280165', source: '[Shared] Start', subtype: success,
   type: workflow_edge, workflow: '[Regression Workflow: Skip, Discard and Disable
     Result Creation Mechanism] Workflow in DxD mode'}
 - {color: green, destination: '[Shared] End', label: success, name: '[[Regression
     Workflow: Skip, Discard and Disable Result Creation Mechanism] Workflow in DxD
-    mode] 2021-03-09 06:57:33.153289', source: '[[Regression Workflow: Skip, Discard
+    mode] 2021-03-20 09:17:05.280177', source: '[[Regression Workflow: Skip, Discard
     and Disable Result Creation Mechanism] Workflow in DxD mode] Fail Austin', subtype: success,
   type: workflow_edge, workflow: '[Regression Workflow: Skip, Discard and Disable
     Result Creation Mechanism] Workflow in DxD mode'}
 - {color: red, destination: '[Regression Workflow: Skip, Discard and Disable Result
     Creation Mechanism] Service in run once mode', label: failure, name: '[Regression
-    Workflow: Skip, Discard and Disable Result Creation Mechanism] 2021-03-09 06:57:33.153298',
+    Workflow: Skip, Discard and Disable Result Creation Mechanism] 2021-03-20 09:17:05.280194',
   source: '[Regression Workflow: Skip, Discard and Disable Result Creation Mechanism]
     Workflow in DxD mode', subtype: failure, type: workflow_edge, workflow: 'Regression
     Workflow: Skip, Discard and Disable Result Creation Mechanism'}
 - {color: green, destination: '[[Regression Workflow: Skip, Discard and Disable Result
     Creation Mechanism] Workflow in SxS mode] Fail PaloAlto', label: success, name: '[[Regression
     Workflow: Skip, Discard and Disable Result Creation Mechanism] Workflow in SxS
-    mode] 2021-03-09 06:57:33.153307', source: '[Shared] Start', subtype: success,
+    mode] 2021-03-20 09:17:05.280214', source: '[Shared] Start', subtype: success,
   type: workflow_edge, workflow: '[Regression Workflow: Skip, Discard and Disable
     Result Creation Mechanism] Workflow in SxS mode'}
 - {color: green, destination: '[Shared] End', label: success, name: '[[Regression
     Workflow: Skip, Discard and Disable Result Creation Mechanism] Workflow in SxS
-    mode] 2021-03-09 06:57:33.153316', source: '[[Regression Workflow: Skip, Discard
+    mode] 2021-03-20 09:17:05.280235', source: '[[Regression Workflow: Skip, Discard
     and Disable Result Creation Mechanism] Workflow in SxS mode] Fail PaloAlto', subtype: success,
   type: workflow_edge, workflow: '[Regression Workflow: Skip, Discard and Disable
     Result Creation Mechanism] Workflow in SxS mode'}
 - {color: red, destination: '[Shared] End', label: failure, name: '[Regression Workflow:
-    Skip, Discard and Disable Result Creation Mechanism] 2021-03-09 06:57:33.153325',
+    Skip, Discard and Disable Result Creation Mechanism] 2021-03-20 09:17:05.280249',
   source: '[Regression Workflow: Skip, Discard and Disable Result Creation Mechanism]
     Workflow in SxS mode', subtype: failure, type: workflow_edge, workflow: 'Regression
     Workflow: Skip, Discard and Disable Result Creation Mechanism'}
 - {color: green, destination: '[Regression Workflow: Credentials (Password & Key,
     Priority Mechanism)] Show interfaces with netmiko', label: success, name: '[Regression
-    Workflow: Credentials (Password & Key, Priority Mechanism)] 2021-03-09 06:57:33.153333',
+    Workflow: Credentials (Password & Key, Priority Mechanism)] 2021-03-20 09:17:05.280262',
   source: '[Shared] Start', subtype: success, type: workflow_edge, workflow: 'Regression
     Workflow: Credentials (Password & Key, Priority Mechanism)'}
 - {color: green, destination: '[Shared] End', label: success, name: '[Regression Workflow:
-    Credentials (Password & Key, Priority Mechanism)] 2021-03-09 06:57:33.153342',
+    Credentials (Password & Key, Priority Mechanism)] 2021-03-20 09:17:05.280275',
   source: '[Regression Workflow: Credentials (Password & Key, Priority Mechanism)]
     Show interfaces with netmiko', subtype: success, type: workflow_edge, workflow: 'Regression
     Workflow: Credentials (Password & Key, Priority Mechanism)'}
 - {color: green, destination: '[Regression Workflow: Optional Prerequisite Services]
     Dispatch Devices', label: success, name: '[Regression Workflow: Optional Prerequisite
-    Services] 2021-03-09 06:57:33.153351', source: '[Shared] Start', subtype: success,
+    Services] 2021-03-20 09:17:05.280287', source: '[Shared] Start', subtype: success,
   type: workflow_edge, workflow: 'Regression Workflow: Optional Prerequisite Services'}
 - {color: red, destination: '[Regression Workflow: Optional Prerequisite Services]
     Failure case: device + value iteration', label: failure, name: '[Regression Workflow:
-    Optional Prerequisite Services] 2021-03-09 06:57:33.153360', source: '[Regression
+    Optional Prerequisite Services] 2021-03-20 09:17:05.280300', source: '[Regression
     Workflow: Optional Prerequisite Services] Dispatch Devices', subtype: failure,
   type: workflow_edge, workflow: 'Regression Workflow: Optional Prerequisite Services'}
 - {color: red, destination: '[Regression Workflow: Optional Prerequisite Services]
     Post-Iteration Service', label: failure, name: '[Regression Workflow: Optional
-    Prerequisite Services] 2021-03-09 06:57:33.153368', source: '[Regression Workflow:
+    Prerequisite Services] 2021-03-20 09:17:05.280312', source: '[Regression Workflow:
     Optional Prerequisite Services] Failure case: device + value iteration', subtype: failure,
   type: workflow_edge, workflow: 'Regression Workflow: Optional Prerequisite Services'}
 - {color: green, destination: '[Regression Workflow: Optional Prerequisite Services]
     Post-Iteration Service', label: success, name: '[Regression Workflow: Optional
-    Prerequisite Services] 2021-03-09 06:57:33.153377', source: '[Regression Workflow:
+    Prerequisite Services] 2021-03-20 09:17:05.280325', source: '[Regression Workflow:
     Optional Prerequisite Services] Failure case: device + value iteration', subtype: success,
   type: workflow_edge, workflow: 'Regression Workflow: Optional Prerequisite Services'}
 - {color: green, destination: '[Regression Workflow: Optional Prerequisite Services]
     Last Service', label: success, name: '[Regression Workflow: Optional Prerequisite
-    Services] 2021-03-09 06:57:33.153385', source: '[Regression Workflow: Optional
+    Services] 2021-03-20 09:17:05.280337', source: '[Regression Workflow: Optional
     Prerequisite Services] Post-Iteration Service', subtype: success, type: workflow_edge,
   workflow: 'Regression Workflow: Optional Prerequisite Services'}
 - {color: green, destination: '[Regression Workflow: Optional Prerequisite Services]
     Last Service', label: success, name: '[Regression Workflow: Optional Prerequisite
-    Services] 2021-03-09 06:57:33.153394', source: '[Regression Workflow: Optional
+    Services] 2021-03-20 09:17:05.280349', source: '[Regression Workflow: Optional
     Prerequisite Services] Dispatch Devices', subtype: success, type: workflow_edge,
   workflow: 'Regression Workflow: Optional Prerequisite Services'}
 - {color: green, destination: '[Shared] End', label: success, name: '[Regression Workflow:
-    Optional Prerequisite Services] 2021-03-09 06:57:33.153402', source: '[Regression
+    Optional Prerequisite Services] 2021-03-20 09:17:05.280362', source: '[Regression
     Workflow: Optional Prerequisite Services] Last Service', subtype: success, type: workflow_edge,
   workflow: 'Regression Workflow: Optional Prerequisite Services'}
 - {color: green, destination: '[Regression Workflow: Device Iteration] Hard-coded
     iteration devices', label: success, name: '[Regression Workflow: Device Iteration]
-    2021-03-09 06:57:33.153411', source: '[Shared] Start', subtype: success, type: workflow_edge,
+    2021-03-20 09:17:05.280374', source: '[Shared] Start', subtype: success, type: workflow_edge,
   workflow: 'Regression Workflow: Device Iteration'}
 - {color: green, destination: '[Shared] End', label: success, name: '[Regression Workflow:
-    Device Iteration] 2021-03-09 06:57:33.153420', source: '[Regression Workflow:
+    Device Iteration] 2021-03-20 09:17:05.280387', source: '[Regression Workflow:
     Device Iteration] Hard-coded iteration devices', subtype: success, type: workflow_edge,
   workflow: 'Regression Workflow: Device Iteration'}
 - {color: green, destination: '[Regression Workflow: Workflow and Subworkflow Iteration]
     Subworkflow Device Iteration', label: success, name: '[Regression Workflow: Workflow
-    and Subworkflow Iteration] 2021-03-09 06:57:33.153429', source: '[Regression Workflow:
+    and Subworkflow Iteration] 2021-03-20 09:17:05.280399', source: '[Regression Workflow:
     Workflow and Subworkflow Iteration] Subworkflow Value Iteration', subtype: success,
   type: workflow_edge, workflow: 'Regression Workflow: Workflow and Subworkflow Iteration'}
 - {color: green, destination: '[Regression Workflow: Workflow and Subworkflow Iteration]
     Subworkflow Device Iteration 2', label: success, name: '[Regression Workflow:
-    Workflow and Subworkflow Iteration] 2021-03-09 06:57:33.153438', source: '[Regression
+    Workflow and Subworkflow Iteration] 2021-03-20 09:17:05.280412', source: '[Regression
     Workflow: Workflow and Subworkflow Iteration] Subworkflow Device Iteration', subtype: success,
   type: workflow_edge, workflow: 'Regression Workflow: Workflow and Subworkflow Iteration'}
 - {color: green, destination: '[Shared] End', label: success, name: '[Regression Workflow:
-    Workflow and Subworkflow Iteration] 2021-03-09 06:57:33.153446', source: '[Regression
+    Workflow and Subworkflow Iteration] 2021-03-20 09:17:05.280424', source: '[Regression
     Workflow: Workflow and Subworkflow Iteration] Subworkflow Device Iteration 2',
   subtype: success, type: workflow_edge, workflow: 'Regression Workflow: Workflow
     and Subworkflow Iteration'}
 - {color: green, destination: '[[Regression Workflow: Workflow and Subworkflow Iteration]
     Subworkflow Device Iteration 2] Service that does nothing', label: success, name: '[[Regression
     Workflow: Workflow and Subworkflow Iteration] Subworkflow Device Iteration 2]
-    2021-03-09 06:57:33.153455', source: '[Shared] Start', subtype: success, type: workflow_edge,
+    2021-03-20 09:17:05.280437', source: '[Shared] Start', subtype: success, type: workflow_edge,
   workflow: '[Regression Workflow: Workflow and Subworkflow Iteration] Subworkflow
     Device Iteration 2'}
 - {color: green, destination: '[Shared] End', label: success, name: '[[Regression
     Workflow: Workflow and Subworkflow Iteration] Subworkflow Device Iteration 2]
-    2021-03-09 06:57:33.153464', source: '[[Regression Workflow: Workflow and Subworkflow
+    2021-03-20 09:17:05.280449', source: '[[Regression Workflow: Workflow and Subworkflow
     Iteration] Subworkflow Device Iteration 2] Service that does nothing', subtype: success,
   type: workflow_edge, workflow: '[Regression Workflow: Workflow and Subworkflow Iteration]
     Subworkflow Device Iteration 2'}
 - {color: green, destination: '[[Regression Workflow: Workflow and Subworkflow Iteration]
     Subworkflow Device Iteration] Service that does nothing', label: success, name: '[[Regression
-    Workflow: Workflow and Subworkflow Iteration] Subworkflow Device Iteration] 2021-03-09
-    06:57:33.153473', source: '[Shared] Start', subtype: success, type: workflow_edge,
+    Workflow: Workflow and Subworkflow Iteration] Subworkflow Device Iteration] 2021-03-20
+    09:17:05.280462', source: '[Shared] Start', subtype: success, type: workflow_edge,
   workflow: '[Regression Workflow: Workflow and Subworkflow Iteration] Subworkflow
     Device Iteration'}
 - {color: green, destination: '[Shared] End', label: success, name: '[[Regression
-    Workflow: Workflow and Subworkflow Iteration] Subworkflow Device Iteration] 2021-03-09
-    06:57:33.153481', source: '[[Regression Workflow: Workflow and Subworkflow Iteration]
+    Workflow: Workflow and Subworkflow Iteration] Subworkflow Device Iteration] 2021-03-20
+    09:17:05.280474', source: '[[Regression Workflow: Workflow and Subworkflow Iteration]
     Subworkflow Device Iteration] Service that does nothing', subtype: success, type: workflow_edge,
   workflow: '[Regression Workflow: Workflow and Subworkflow Iteration] Subworkflow
     Device Iteration'}

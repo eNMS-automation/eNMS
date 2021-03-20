@@ -549,7 +549,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: ['All instances (devices, links, services and users)']
+  pools: ['All devices, links, services and users']
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -4444,7 +4444,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: ['All instances (devices, links, services and users)']
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow F S1: Subworkflow of Workflow': [200, -205]
   postprocessing: ''
@@ -4552,7 +4552,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: eos
-  pools: ['All instances (devices, links, services and users)']
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow F: Workflow of Workflows': [-423, -31]
   postprocessing: ''
@@ -4721,7 +4721,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: eos
-  pools: ['All instances (devices, links, services and users)']
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow F: Workflow of Workflows': [464, 224]
   postprocessing: ''
@@ -4926,7 +4926,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: eos
-  pools: ['All instances (devices, links, services and users)']
+  pools: ['All devices, links, services and users']
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -5004,7 +5004,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: ['All instances (devices, links, services and users)']
+  pools: ['All devices, links, services and users']
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -5084,7 +5084,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: ['All instances (devices, links, services and users)']
+  pools: ['All devices, links, services and users']
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -5174,7 +5174,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: ['All instances (devices, links, services and users)']
+  pools: ['All devices, links, services and users']
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -5388,7 +5388,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: ['All instances (devices, links, services and users)']
+  pools: ['All devices, links, services and users']
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -5469,7 +5469,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: ['All instances (devices, links, services and users)']
+  pools: ['All devices, links, services and users']
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -5575,7 +5575,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: ['All instances (devices, links, services and users)']
+  pools: ['All devices, links, services and users']
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -6081,7 +6081,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: ['All instances (devices, links, services and users)']
+  pools: ['All devices, links, services and users']
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -6811,7 +6811,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: ['All instances (devices, links, services and users)']
+  pools: ['All devices, links, services and users']
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -7185,7 +7185,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: ['All instances (devices, links, services and users)']
+  pools: ['All devices, links, services and users']
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -7441,7 +7441,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: ['All instances (devices, links, services and users)']
+  pools: ['All devices, links, services and users']
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -8206,7 +8206,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: ['All instances (devices, links, services and users)']
+  pools: ['All devices, links, services and users']
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -8475,7 +8475,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: ['All instances (devices, links, services and users)']
+  pools: ['All devices, links, services and users']
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -8550,7 +8550,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: ['All instances (devices, links, services and users)']
+  pools: ['All devices, links, services and users']
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -8852,7 +8852,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: ['All instances (devices, links, services and users)']
+  pools: ['All devices, links, services and users']
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -9182,7 +9182,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: ['All instances (devices, links, services and users)']
+  pools: ['All devices, links, services and users']
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -9503,7 +9503,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: ['All instances (devices, links, services and users)']
+  pools: ['All devices, links, services and users']
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -9868,7 +9868,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: ['All instances (devices, links, services and users)']
+  pools: ['All devices, links, services and users']
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -9907,10 +9907,10 @@
   skip_query: ''
   skip_value: success
   target_devices: []
-  target_pools: ['All instances (devices, links, services and users)', All devices,
-    All links, Datacenter San Francisco, Datacenter New York, Datacenter Chicago,
-    Washington, Links 0 through 5 - Non-public pool - Access set up, Links 6 through
-      9 - Public pools]
+  target_pools: ['All devices, links, services and users', Devices only, Links only,
+    Datacenter San Francisco, Datacenter New York, Datacenter Chicago, Washington,
+    Links 0 through 5 - Non-public pool - Access set up, Links 6 through 9 - Public
+      pools]
   time_between_retries: 10
   type: workflow
   update_pools_after_running: false
@@ -11450,7 +11450,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: ['All instances (devices, links, services and users)']
+  pools: ['All devices, links, services and users']
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -12025,7 +12025,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: ['All instances (devices, links, services and users)']
+  pools: ['All devices, links, services and users']
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -12322,7 +12322,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: ['All instances (devices, links, services and users)']
+  pools: ['All devices, links, services and users']
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -12717,7 +12717,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: ['All instances (devices, links, services and users)']
+  pools: ['All devices, links, services and users']
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -13069,7 +13069,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: ['All instances (devices, links, services and users)']
+  pools: ['All devices, links, services and users']
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -13470,7 +13470,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: ['All instances (devices, links, services and users)']
+  pools: ['All devices, links, services and users']
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -14042,7 +14042,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: ['All instances (devices, links, services and users)']
+  pools: ['All devices, links, services and users']
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -14415,7 +14415,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: ['All instances (devices, links, services and users)']
+  pools: ['All devices, links, services and users']
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -14924,7 +14924,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: ['All instances (devices, links, services and users)']
+  pools: ['All devices, links, services and users']
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -15022,7 +15022,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: ['All instances (devices, links, services and users)']
+  pools: ['All devices, links, services and users']
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -15193,7 +15193,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: ['All instances (devices, links, services and users)']
+  pools: ['All devices, links, services and users']
   positions: {}
   postprocessing: ''
   postprocessing_mode: always
@@ -15531,7 +15531,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: ['All instances (devices, links, services and users)']
+  pools: ['All devices, links, services and users']
   positions: {}
   postprocessing: ''
   postprocessing_mode: always

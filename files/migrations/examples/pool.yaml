@@ -77,7 +77,7 @@
       (admin), router24, router25, router26, router27, router28, router29, router30,
     router31, router32, router33, router34, router35, router36, router37, Server 2,
     Aserver, Dallas-2, Dallas-3, Dallas-4, Austin-2, Austin-3, Jackson-2, Oakland-2]
-  last_modified: '2020-11-17 09:02:43.654967'
+  last_modified: '2021-03-20 09:20:36.892420'
   link_access_groups: ''
   link_access_groups_invert: false
   link_access_groups_match: inclusion
@@ -129,7 +129,7 @@
     atlantic-r26-boston-4-inverted, link25-2, link25-3, link25-dallas2, link25-reversed,
     link25-reversed-2, link13-2]
   manually_defined: false
-  name: All instances (devices, links, services and users)
+  name: All devices, links, services and users
   property1: CP
   service_access_groups: ''
   service_access_groups_invert: false
@@ -165,7 +165,6 @@
   user_name_invert: false
   user_name_match: regex
   users: [admin, readonly, chicago, sf, ny, nadmin, ui, demo]
-  visualization_default: false
 - access_groups: ''
   admin_only: false
   creator: ''
@@ -245,7 +244,7 @@
       (admin), router24, router25, router26, router27, router28, router29, router30,
     router31, router32, router33, router34, router35, router36, router37, Server 2,
     Aserver, Dallas-2, Dallas-3, Dallas-4, Austin-2, Austin-3, Jackson-2, Oakland-2]
-  last_modified: '2020-11-04 04:09:36.824587'
+  last_modified: '2021-03-20 09:20:55.721940'
   link_access_groups: ''
   link_access_groups_invert: false
   link_access_groups_match: inclusion
@@ -281,7 +280,7 @@
   link_vendor_match: inclusion
   links: []
   manually_defined: false
-  name: All devices
+  name: Devices only
   property1: CP
   service_access_groups: ''
   service_access_groups_invert: false
@@ -317,7 +316,6 @@
   user_name_invert: false
   user_name_match: inclusion
   users: []
-  visualization_default: false
 - access_groups: ''
   admin_only: false
   creator: ''
@@ -389,7 +387,7 @@
   device_vendor_invert: false
   device_vendor_match: inclusion
   devices: []
-  last_modified: '2020-11-04 04:09:46.618445'
+  last_modified: '2021-03-20 09:21:03.900882'
   link_access_groups: ''
   link_access_groups_invert: false
   link_access_groups_match: inclusion
@@ -441,7 +439,7 @@
     atlantic-r26-boston-4-inverted, link25-2, link25-3, link25-dallas2, link25-reversed,
     link25-reversed-2, link13-2]
   manually_defined: false
-  name: All links
+  name: Links only
   property1: CP
   service_access_groups: ''
   service_access_groups_invert: false
@@ -477,7 +475,6 @@
   user_name_invert: false
   user_name_match: inclusion
   users: []
-  visualization_default: false
 - access_groups: ''
   admin_only: false
   creator: ''
@@ -643,7 +640,6 @@
   user_name_invert: false
   user_name_match: inclusion
   users: []
-  visualization_default: false
 - access_groups: ''
   admin_only: false
   creator: ''
@@ -806,7 +802,6 @@
   user_name_invert: false
   user_name_match: inclusion
   users: []
-  visualization_default: false
 - access_groups: ''
   admin_only: false
   creator: ''
@@ -968,7 +963,6 @@
   user_name_invert: false
   user_name_match: inclusion
   users: []
-  visualization_default: false
 - access_groups: ''
   admin_only: false
   creator: ''
@@ -1113,7 +1107,6 @@
   user_name_invert: false
   user_name_match: inclusion
   users: []
-  visualization_default: false
 - access_groups: ''
   admin_only: false
   creator: ''
@@ -1257,7 +1250,6 @@
   user_name_invert: false
   user_name_match: inclusion
   users: []
-  visualization_default: false
 - access_groups: ''
   admin_only: false
   creator: ''
@@ -1401,7 +1393,6 @@
   user_name_invert: false
   user_name_match: inclusion
   users: []
-  visualization_default: false
 - access_groups: ''
   admin_only: false
   creator: ''
@@ -1545,7 +1536,6 @@
   user_name_invert: false
   user_name_match: inclusion
   users: [nadmin]
-  visualization_default: false
 - access_groups: ''
   admin_only: false
   creator: ''
@@ -1689,7 +1679,6 @@
   user_name_invert: false
   user_name_match: inclusion
   users: [ny]
-  visualization_default: false
 - access_groups: ''
   admin_only: false
   creator: ''
@@ -1833,7 +1822,6 @@
   user_name_invert: false
   user_name_match: inclusion
   users: [readonly, demo]
-  visualization_default: false
 - access_groups: ''
   admin_only: false
   creator: admin
@@ -1983,7 +1971,6 @@
   user_name_invert: false
   user_name_match: inclusion
   users: []
-  visualization_default: false
 - access_groups: ''
   admin_only: false
   creator: admin
@@ -2055,7 +2042,7 @@
   device_vendor_invert: false
   device_vendor_match: inclusion
   devices: []
-  last_modified: '2020-11-04 04:10:00.565904'
+  last_modified: '2021-03-20 09:21:09.721302'
   link_access_groups: ''
   link_access_groups_invert: false
   link_access_groups_match: inclusion
@@ -2091,7 +2078,7 @@
   link_vendor_match: inclusion
   links: []
   manually_defined: false
-  name: All users
+  name: Users only
   property1: CP
   service_access_groups: ''
   service_access_groups_invert: false
@@ -2127,7 +2114,6 @@
   user_name_invert: false
   user_name_match: regex
   users: [admin, readonly, chicago, sf, ny, nadmin, ui, demo]
-  visualization_default: false
 - access_groups: ''
   admin_only: false
   creator: admin
@@ -2271,7 +2257,6 @@
   user_name_invert: false
   user_name_match: regex
   users: [ui, sf, ny, chicago]
-  visualization_default: false
 - access_groups: ''
   admin_only: false
   creator: admin
@@ -2415,7 +2400,6 @@
   user_name_invert: false
   user_name_match: inclusion
   users: []
-  visualization_default: false
 - access_groups: admin
   admin_only: false
   creator: admin
@@ -2559,7 +2543,6 @@
   user_name_invert: false
   user_name_match: inclusion
   users: []
-  visualization_default: false
 - access_groups: admin
   admin_only: false
   creator: admin
@@ -2703,4 +2686,3 @@
   user_name_invert: false
   user_name_match: inclusion
   users: []
-  visualization_default: false

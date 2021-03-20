@@ -372,7 +372,4 @@
 {% else %}
 <script src="{{ url_for('static', filename='lib/cesium/Cesium.js') }}"></script>
 {% endif %} {% endif %} {% endif %}
-<script>
-  const defaultPools = {{ default_pools|tojson|safe }};
-</script>
 {% endblock javascripts %}

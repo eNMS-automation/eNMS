@@ -4,7 +4,6 @@ action: false
 Cesium: false
 CSS2DObject: false
 CSS2DRenderer: false
-defaultPools: false
 ForceGraph3D: false
 L: false
 page: false
@@ -1003,28 +1002,6 @@ function saveParameters() {
     callback: () => {
       notify("Default pools saved.", "success", 5);
       $("#visualization_parameters").remove();
-    },
-  });
-}
-
-function openVisualizationPanel() {
-  openPanel({
-    title: "Visualization Parameters",
-    name: "visualization_parameters",
-    size: "400 200",
-    callback: () => {
-      call({
-        url: "/get_visualization_parameters",
-        callback: (pools) => {
-          const fieldId = "#visualization_parameters-default_pools";
-          pools.forEach((pool) => {
-            $(fieldId).append(new Option(pool.name, pool.id, false, false));
-          });
-          $(fieldId)
-            .val(pools.map((pool) => pool.id))
-            .trigger("change");
-        },
-      });
     },
   });
 }

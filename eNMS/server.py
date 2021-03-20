@@ -294,7 +294,6 @@ class Server(Flask):
             return render_template(
                 "visualization.html",
                 endpoint=f"{view_type}_view",
-                default_pools=app.get_visualization_parameters(),
             )
 
         @blueprint.route("/workflow_builder")

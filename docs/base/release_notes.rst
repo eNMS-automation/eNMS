@@ -34,7 +34,8 @@ Bug report mail: "No status for services in subworkflow with device iteration"
 - Add duplicate button in service table
 - Refactor the geographical and force-directed view to behave like the workflow builder:
 * List of all pools that contain at least one device or link, stored in user browser local storage
-* Remove default pool mechanism. By design, the default pool becomes the first pool in alphabetical order
+* Remove default pool mechanism. Remove "visualization_default" property in pool model.
+By design, the default pool becomes the first pool in alphabetical order
 * Add backward / forward control like the workflow builder
 
 MIGRATION:

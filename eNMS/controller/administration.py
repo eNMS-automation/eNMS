@@ -112,13 +112,6 @@ class AdministrationController(BaseController):
             for file in Path(path).iterdir()
         ]
 
-    def get_visualization_parameters(self):
-        return [
-            pool.serialized
-            for pool in db.fetch_all("pool")
-            if pool.visualization_default
-        ]
-
     def load_debug_snippets(self):
         snippets = {}
         for path in Path(self.path / "files" / "snippets").glob("**/*.py"):
@@ -262,11 +255,6 @@ class AdministrationController(BaseController):
         if kwargs.get("file_content"):
             with open(Path(filepath.replace(">", "/")), "w") as file:
                 return file.write(kwargs["file_content"])
-
-    def save_visualization_parameters(self, **kwargs):
-        default_pools = db.objectify("pool", kwargs["default_pools"])
-        for pool in db.fetch_all("pool"):
-            pool.visualization_default = pool in default_pools
 
     def save_settings(self, **kwargs):
         self.settings = kwargs["settings"]

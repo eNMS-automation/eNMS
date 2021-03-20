@@ -204,7 +204,6 @@
     "/get_session_log": "access",
     "/get_top_level_workflows": "access",
     "/get_tree_files": "access",
-    "/get_visualization_parameters": "access",
     "/get_workflow_results": "access",
     "/get_workflow_services": "access",
     "/get_workflow_tree": "access",

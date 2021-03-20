@@ -914,16 +914,11 @@ export function initView() {
           `<option value="${pools[i].id}">${pools[i].name}</option>`
         );
       }
-      if (currentPath && pools.some((w) => w.id == currentPath.split(">")[0])) {
-        $("#current-pool").val(currentPath.split(">")[0]);
+      currentPath = $("#current-pool").val();
+      if (currentPath) {
         displayNetwork({ noAlert: true });
       } else {
-        currentPath = $("#current-pool").val();
-        if (currentPath) {
-          displayNetwork({ noAlert: true });
-        } else {
-          notify("No pool has been created yet.", "error", 5);
-        }
+        notify("No pool has been created yet.", "error", 5);
       }
       $("#current-pool")
         .on("change", function () {
@@ -955,7 +950,6 @@ export function initView() {
   } else {
     initLogicalFramework();
   }
-  displayNetwork({ noAlert: true });
 }
 
 function displayFilteringPanel(type) {

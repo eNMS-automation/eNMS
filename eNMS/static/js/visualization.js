@@ -702,13 +702,15 @@ function processNetwork(network) {
   network.links = network.links.filter((link) => !parallelLinks.has(link.id));
 }
 
-function displayNetwork({ noAlert, withCluster }) {
+function displayNetwork({ noAlert, withCluster } = {}) {
   if (page == "logical_view") return;
   const maximumSize = visualization.logical.maximum_size;
   let data = {};
+  const currentPool = $("#current-pool").val();
   for (let type of ["device", "link"]) {
     let form = serializeForm(`#filtering-form-${type}`);
-    if (!form.pools) form.pools = defaultPools.map((p) => p.id);
+    if (!form.pools) form.pools = [];
+    if (currentPool) form.pools.push(currentPool)
     data[type] = { form: form };
   }
   clustered = withCluster;
@@ -915,18 +917,18 @@ export function initView() {
       }
       if (currentPath && pools.some((w) => w.id == currentPath.split(">")[0])) {
         $("#current-pool").val(currentPath.split(">")[0]);
-        //displayNetwork(currentPath);
+        displayNetwork({ noAlert: true });
       } else {
-        currentPath = $("#current-view").val();
+        currentPath = $("#current-pool").val();
         if (currentPath) {
-          displayNetwork(currentPath);
+          displayNetwork({ noAlert: true });
         } else {
           notify("No pool has been created yet.", "error", 5);
         }
       }
-      $("#current-view")
+      $("#current-pool")
         .on("change", function () {
-          if (this.value != currentView.id) displayNetwork(this.value);
+          displayNetwork();
         })
         .selectpicker({
           liveSearch: true,

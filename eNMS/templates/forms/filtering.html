@@ -25,13 +25,10 @@
             {{ form[property](id=id, class="form-control search-relation",
             style="width:400px;") }}
           </td>
-          
           <td>
-            {% if property + '_filter' in form %}
-              {{ form[property + '_filter'](id=id + '_match',
-              class="form-control add-id") }}
-            {% else %}
-              <center>N/A</center>
+            {% if property + '_filter' in form %} {{ form[property + '_filter'](id=id +
+            '_match', class="form-control add-id") }} {% else %}
+            <center>N/A</center>
             {% endif %}
           </td>
         </tr>

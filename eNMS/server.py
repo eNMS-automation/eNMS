@@ -162,7 +162,7 @@ class Server(Flask):
             return render_template("error.html", error=404), 404
 
     @staticmethod
-    def monitor_requests(function):
+    def process_requests(function):
         @wraps(function)
         def decorated_function(*args, **kwargs):
             remote_address = request.environ["REMOTE_ADDR"]
@@ -230,12 +230,12 @@ class Server(Flask):
         blueprint = Blueprint("blueprint", __name__, template_folder="../templates")
 
         @blueprint.route("/")
-        @self.monitor_requests
+        @self.process_requests
         def site_root():
             return redirect(url_for("blueprint.route", page="login"))
 
         @blueprint.route("/login", methods=["GET", "POST"])
-        @self.monitor_requests
+        @self.process_requests
         def login():
             if request.method == "POST":
                 kwargs, success = request.form.to_dict(), False
@@ -268,7 +268,7 @@ class Server(Flask):
             return redirect(url_for("blueprint.route", page="dashboard"))
 
         @blueprint.route("/dashboard")
-        @self.monitor_requests
+        @self.process_requests
         def dashboard():
             return render_template(
                 "dashboard.html",
@@ -276,7 +276,7 @@ class Server(Flask):
             )
 
         @blueprint.route("/logout")
-        @self.monitor_requests
+        @self.process_requests
         def logout():
             logout_log = f"USER '{current_user.name}' logged out"
             logout_user()
@@ -284,24 +284,24 @@ class Server(Flask):
             return redirect(url_for("blueprint.route", page="login"))
 
         @blueprint.route("/<table_type>_table")
-        @self.monitor_requests
+        @self.process_requests
         def table(table_type):
             return render_template(
                 "table.html", **{"endpoint": f"{table_type}_table", "type": table_type}
             )
 
         @blueprint.route("/<view_type>_view")
-        @self.monitor_requests
+        @self.process_requests
         def view(view_type):
             return render_template("visualization.html", endpoint=f"{view_type}_view")
 
         @blueprint.route("/workflow_builder")
-        @self.monitor_requests
+        @self.process_requests
         def workflow_builder():
             return render_template("workflow.html", endpoint="workflow_builder")
 
         @blueprint.route("/<form_type>_form")
-        @self.monitor_requests
+        @self.process_requests
         def form(form_type):
             form = form_classes[form_type](request.form)
             return render_template(
@@ -317,38 +317,38 @@ class Server(Flask):
             )
 
         @blueprint.route("/help/<path:path>")
-        @self.monitor_requests
+        @self.process_requests
         def help(path):
             return render_template(f"help/{path}.html")
 
         @blueprint.route("/view_service_results/<int:id>")
-        @self.monitor_requests
+        @self.process_requests
         def view_service_results(id):
             result = db.fetch("run", id=id).result(main=True).result
             return f"<pre>{app.str_dict(result)}</pre>"
 
         @blueprint.route("/download_file/<path:path>")
-        @self.monitor_requests
+        @self.process_requests
         def download_file(path):
             return send_file(f"/{path}", as_attachment=True)
 
         @blueprint.route("/export_service/<int:id>")
-        @self.monitor_requests
+        @self.process_requests
         def export_service(id):
             return send_file(f"/{app.export_service(id)}.tgz", as_attachment=True)
 
         @blueprint.route("/terminal/<session>")
-        @self.monitor_requests
+        @self.process_requests
         def ssh_connection(session):
             return render_template("terminal.html", session=session)
 
         @blueprint.route("/<path:_>")
-        @self.monitor_requests
+        @self.process_requests
         def get_requests_sink(_):
             abort(404)
 
         @blueprint.route("/rest/<path:page>", methods=["GET", "POST"])
-        @self.monitor_requests
+        @self.process_requests
         @self.csrf.exempt
         def rest_request(page):
             method, (endpoint, *args) = request.method, page.split("/")
@@ -363,7 +363,7 @@ class Server(Flask):
 
         @blueprint.route("/", methods=["POST"])
         @blueprint.route("/<path:page>", methods=["POST"])
-        @self.monitor_requests
+        @self.process_requests
         def route(page):
             form_type = request.form.get("form_type")
             endpoint, *args = page.split("/")

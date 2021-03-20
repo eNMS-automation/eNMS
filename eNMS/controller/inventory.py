@@ -107,6 +107,14 @@ class InventoryController(BaseController):
     def get_session_log(self, session_id):
         return db.fetch("session", id=session_id).content
 
+    def get_visualization_pools(self, view):
+        return [
+            pool.base_properties
+            for pool in db.fetch_all("pool")
+            if (view == "force_directed_view" and pool.devices and pool.links)
+            or (view == "geographical_view" and (pool.devices or pool.links))
+        ]
+
     def count_models(self):
         return {
             "counters": {

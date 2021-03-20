@@ -906,7 +906,7 @@ export function initView() {
     "Run Service": (d) => showRunServicePanel({ instance: d }),
   });
   call({
-    url: "/get_all/pool",
+    url: `/get_visualization_pools/${page}`,
     callback: function (pools) {
       pools.sort((a, b) => a.name.localeCompare(b.name));
       for (let i = 0; i < pools.length; i++) {

@@ -904,6 +904,36 @@ export function initView() {
     Configuration: (d) => showDeviceData(d),
     "Run Service": (d) => showRunServicePanel({ instance: d }),
   });
+  call({
+    url: "/get_all/pool",
+    callback: function (pools) {
+      pools.sort((a, b) => a.name.localeCompare(b.name));
+      for (let i = 0; i < pools.length; i++) {
+        $("#current-pool").append(
+          `<option value="${pools[i].id}">${pools[i].name}</option>`
+        );
+      }
+      if (currentPath && pools.some((w) => w.id == currentPath.split(">")[0])) {
+        $("#current-pool").val(currentPath.split(">")[0]);
+        //displayNetwork(currentPath);
+      } else {
+        currentPath = $("#current-view").val();
+        if (currentPath) {
+          displayNetwork(currentPath);
+        } else {
+          notify("No pool has been created yet.", "error", 5);
+        }
+      }
+      $("#current-view")
+        .on("change", function () {
+          if (this.value != currentView.id) displayNetwork(this.value);
+        })
+        .selectpicker({
+          liveSearch: true,
+        });
+      updateRightClickBindings(controls);
+    },
+  });
   for (let type of ["device", "link"]) {
     openPanel({
       name: `${type}_filtering`,

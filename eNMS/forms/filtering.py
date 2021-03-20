@@ -13,28 +13,28 @@ from eNMS.models import relationships
 
 
 def filtering_form_generator():
-    for form_type in ("device", "link", "pool", "run", "service", "task", "user"):
-        properties, relations = app.properties["filtering"].get(form_type, []), {}
-        for model, relation in relationships[form_type].items():
-            if model in ("edges", "results"):
+    for model in ("device", "link", "pool", "run", "service", "task", "user"):
+        properties, relations = app.properties["filtering"].get(model, []), {}
+        for related_model, relation in relationships[model].items():
+            if related_model in ("edges", "results"):
                 continue
-            relations[model] = MultipleInstanceField(model)
-            relationships[f"{form_type}_filtering"][model] = relation
-            relationships[f"{form_type}_relation_filtering"][model] = relation
+            relations[related_model] = MultipleInstanceField(related_model)
+            relationships[f"{model}_filtering"][related_model] = relation
+            relationships[f"{model}_relation_filtering"][related_model] = relation
         relation_form = {
             "template": "filtering",
             "properties": sorted(relations),
-            "object_type": form_type,
-            "form_type": HiddenField(default=f"{form_type}_relation_filtering"),
+            "object_type": model,
+            "form_type": HiddenField(default=f"{model}_relation_filtering"),
             **relations,
         }
-        type(f"{form_type}RelationshipFilteringForm", (BaseForm,), relation_form)
-        form, default = deepcopy(relation_form), f"{form_type}_filtering"
+        type(f"{model}RelationshipFilteringForm", (BaseForm,), relation_form)
+        form, form_type = deepcopy(relation_form), f"{model}_filtering"
         for property in properties:
-            form_properties[default][f"{property}_match"] = {"type": "list"}
+            form_properties[form_type][f"{property}_match"] = {"type": "list"}
         form.update(
             {
-                "form_type": HiddenField(default=f"{form_type}_filtering"),
+                "form_type": HiddenField(default=form_type),
                 "properties": sorted(properties) + sorted(relations),
                 **{property: StringField() for property in properties},
                 **{
@@ -49,7 +49,7 @@ def filtering_form_generator():
                 },
             }
         )
-        type(f"{form_type}FilteringForm", (BaseForm,), form)
+        type(f"{model}FilteringForm", (BaseForm,), form)
 
 
 def add_instance_form_generator():

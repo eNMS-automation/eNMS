@@ -330,8 +330,10 @@ a {
 }
 
 .navbar-custom {
+  background-color: rgba(230, 230, 230, 0.4);
   float: left;
   padding: 7px 7px;
+  border-color: rgb(180, 180, 180);
 }
 
 .nav.top_menu > li > a {

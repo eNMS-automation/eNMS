@@ -635,6 +635,8 @@ Object.assign(action, {
   "Circle Marker": () => changeMarker("Circle Marker"),
   Normal: () => displayNetwork({}),
   Clustered: () => displayNetwork({ withCluster: true }),
+  Backward: () => displayNetwork({ direction: "left" }),
+  Forward: () => displayNetwork({ direction: "right" }),
 });
 
 function processNetwork(network) {
@@ -702,11 +704,33 @@ function processNetwork(network) {
   network.links = network.links.filter((link) => !parallelLinks.has(link.id));
 }
 
-function displayNetwork({ noAlert, withCluster } = {}) {
+function displayNetwork({ direction, noAlert, withCluster } = {}) {
   if (page == "logical_view") return;
   const maximumSize = visualization.logical.maximum_size;
   let data = {};
-  const currentPool = $("#current-pool").val();
+  const currentPool =
+    direction == "left"
+      ? arrowHistory[arrowPointer - 1]
+      : direction == "right"
+      ? arrowHistory[arrowPointer + 1]
+      : $("#current-pool").val();
+  localStorage.setItem("logicalPool", currentPool);
+  if (!arrow) {
+    arrowPointer++;
+    arrowHistory.splice(arrowPointer, 9e9, path);
+  } else {
+    arrowPointer += arrow == "right" ? 1 : -1;
+  }
+  if (arrowHistory.length >= 1 && arrowPointer !== 0) {
+    $("#left-arrow").removeClass("disabled");
+  } else {
+    $("#left-arrow").addClass("disabled");
+  }
+  if (arrowPointer < arrowHistory.length - 1) {
+    $("#right-arrow").removeClass("disabled");
+  } else {
+    $("#right-arrow").addClass("disabled");
+  }
   for (let type of ["device", "link"]) {
     let form = serializeForm(`#filtering-form-${type}`);
     if (!form.pools) form.pools = [];

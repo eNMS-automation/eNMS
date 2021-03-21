@@ -716,7 +716,7 @@ function displayNetwork({ direction, noAlert, withCluster } = {}) {
       : direction == "right"
       ? arrowHistory[arrowPointer + 1]
       : $("#current-pool").val();
-  localStorage.setItem("force_directed_view", currentPath);
+  localStorage.setItem(page, currentPath);
   if (!direction) {
     arrowPointer++;
     arrowHistory.splice(arrowPointer, 9e9, currentPath);

@@ -46,9 +46,8 @@ let polylines;
 let labels;
 
 let currentMode = "select";
-let currentPath = localStorage.getItem("view");
+let currentPath = localStorage.getItem(page);
 let currentView;
-let currentPool = localStorage.getItem("logicalPool");
 let arrowHistory = [""];
 let arrowPointer = -1;
 let selectedObjects = [];
@@ -711,16 +710,16 @@ function displayNetwork({ direction, noAlert, withCluster } = {}) {
   if (page == "logical_view") return;
   const maximumSize = visualization.logical.maximum_size;
   let data = {};
-  currentPool =
+  currentPath =
     direction == "left"
       ? arrowHistory[arrowPointer - 1]
       : direction == "right"
       ? arrowHistory[arrowPointer + 1]
       : $("#current-pool").val();
-  localStorage.setItem("logicalPool", currentPool);
+  localStorage.setItem("force_directed_view", currentPath);
   if (!direction) {
     arrowPointer++;
-    arrowHistory.splice(arrowPointer, 9e9, currentPool);
+    arrowHistory.splice(arrowPointer, 9e9, currentPath);
   } else {
     arrowPointer += direction == "right" ? 1 : -1;
   }
@@ -737,7 +736,7 @@ function displayNetwork({ direction, noAlert, withCluster } = {}) {
   for (let type of ["device", "link"]) {
     let form = serializeForm(`#filtering-form-${type}`);
     if (!form.pools) form.pools = [];
-    if (currentPool) form.pools.push(currentPool);
+    if (currentPath) form.pools.push(currentPath);
     data[type] = { form: form };
   }
   clustered = withCluster;
@@ -942,8 +941,8 @@ export function initView() {
           `<option value="${pools[i].id}">${pools[i].name}</option>`
         );
       }
-      if (currentPool && pools.some((w) => w.id == currentPool)) {
-        $("#current-pool").val(currentPool);
+      if (currentPath && pools.some((w) => w.id == currentPath)) {
+        $("#current-pool").val(currentPath);
         displayNetwork({ noAlert: true });
       } else {
         if ($("#current-pool").val()) {

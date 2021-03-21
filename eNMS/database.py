@@ -122,7 +122,7 @@ class Database:
             @event.listens_for(self.engine, "connect")
             def do_begin(connection, _):
                 def regexp(pattern, value):
-                    return search(pattern, value) is not None
+                    return search(pattern, str(value)) is not None
 
                 connection.create_function("regexp", 2, regexp)
 

@@ -78,12 +78,13 @@
 {% if endpoint != "logical_view" %}
 <div class="controls">
   <nav class="navbar navbar-default navbar-custom navbar-color" role="navigation">
-    <div style="width: 305px; margin: 0px;">
+    <div style="margin: 0px;">
       <select
         id="current-pool"
         class="form-control"
         data-dropdown-align-right="true"
         data-size="20"
+        data-width="305px"
       ></select>
     </div>
     <ul class="pagination" style="margin: 0px; padding-top: 5px;">
@@ -100,7 +101,7 @@
           onclick="eNMS.visualization.displayFilteringPanel('device')"
           data-tooltip="Device Filtering"
           style="cursor: pointer;"
-          ><span class="glyphicon glyphicon-th"></span
+          ><span class="glyphicon glyphicon-equalizer"></span
         ></a>
       </li>
       <li>

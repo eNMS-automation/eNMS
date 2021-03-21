@@ -48,6 +48,7 @@ let labels;
 let currentMode = "select";
 let currentPath = localStorage.getItem("view");
 let currentView;
+let currentPool = localStorage.getItem("logicalPool");
 let arrowHistory = [""];
 let arrowPointer = -1;
 let selectedObjects = [];
@@ -710,7 +711,7 @@ function displayNetwork({ direction, noAlert, withCluster } = {}) {
   if (page == "logical_view") return;
   const maximumSize = visualization.logical.maximum_size;
   let data = {};
-  const currentPool =
+  currentPool =
     direction == "left"
       ? arrowHistory[arrowPointer - 1]
       : direction == "right"
@@ -941,11 +942,15 @@ export function initView() {
           `<option value="${pools[i].id}">${pools[i].name}</option>`
         );
       }
-      currentPath = $("#current-pool").val();
-      if (currentPath) {
+      if (currentPool && pools.some((w) => w.id == currentPool)) {
+        $("#current-pool").val(currentPool);
         displayNetwork({ noAlert: true });
       } else {
-        notify("No pool has been created yet.", "error", 5);
+        if ($("#current-pool").val()) {
+          displayNetwork({ noAlert: true });
+        } else {
+          notify("No pool has been created yet.", "error", 5);
+        }
       }
       $("#current-pool")
         .on("change", function () {

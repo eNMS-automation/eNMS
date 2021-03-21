@@ -48,6 +48,8 @@ let labels;
 let currentMode = "select";
 let currentPath = localStorage.getItem("view");
 let currentView;
+let arrowHistory = [""];
+let arrowPointer = -1;
 let selectedObjects = [];
 let camera;
 let scene;
@@ -715,11 +717,11 @@ function displayNetwork({ direction, noAlert, withCluster } = {}) {
       ? arrowHistory[arrowPointer + 1]
       : $("#current-pool").val();
   localStorage.setItem("logicalPool", currentPool);
-  if (!arrow) {
+  if (!direction) {
     arrowPointer++;
-    arrowHistory.splice(arrowPointer, 9e9, path);
+    arrowHistory.splice(arrowPointer, 9e9, currentPool);
   } else {
-    arrowPointer += arrow == "right" ? 1 : -1;
+    arrowPointer += direction == "right" ? 1 : -1;
   }
   if (arrowHistory.length >= 1 && arrowPointer !== 0) {
     $("#left-arrow").removeClass("disabled");

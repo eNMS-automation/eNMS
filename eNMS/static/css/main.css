@@ -329,11 +329,14 @@ a {
   line-height: 32px;
 }
 
-.navbar-custom {
+.navbar-color {
   background-color: rgba(230, 230, 230, 0.4);
+  border-color: rgb(180, 180, 180);
+}
+
+.navbar-custom {
   float: left;
   padding: 7px 7px;
-  border-color: rgb(180, 180, 180);
 }
 
 .nav.top_menu > li > a {

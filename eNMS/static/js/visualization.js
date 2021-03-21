@@ -48,7 +48,7 @@ let labels;
 let currentMode = "select";
 let currentPath = localStorage.getItem(page);
 let currentView;
-let arrowHistory = [""];
+let arrowHistory = [];
 let arrowPointer = -1;
 let selectedObjects = [];
 let camera;
@@ -716,13 +716,20 @@ function displayNetwork({ direction, noAlert, withCluster } = {}) {
       : direction == "right"
       ? arrowHistory[arrowPointer + 1]
       : $("#current-pool").val();
+
   localStorage.setItem(page, currentPath);
+  if (
+    (direction == "left" && arrowPointer == 0) ||
+    (direction == "right" && arrowPointer + 1 == arrowHistory.length)
+  )
+    return;
   if (!direction) {
     arrowPointer++;
     arrowHistory.splice(arrowPointer, 9e9, currentPath);
   } else {
     arrowPointer += direction == "right" ? 1 : -1;
   }
+  console.log(arrowHistory, arrowPointer);
   if (arrowHistory.length >= 1 && arrowPointer !== 0) {
     $("#left-arrow").removeClass("disabled");
   } else {

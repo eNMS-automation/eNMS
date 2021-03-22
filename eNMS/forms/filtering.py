@@ -26,12 +26,20 @@ def filtering_form_generator():
             "properties": sorted(relations),
             "object_type": model,
             "form_type": HiddenField(default=f"{model}_relation_filtering"),
-            **relations,
+            **{
+                **relations,
+                **{
+                    f"{relation}_filter": SelectField(
+                        choices=(("any", "Any"), ("all", "All"))
+                    )
+                    for relation in relations
+                },
+            },
         }
         type(f"{model}RelationshipFilteringForm", (BaseForm,), relation_form)
         form, form_type = deepcopy(relation_form), f"{model}_filtering"
         for property in properties:
-            form_properties[form_type][f"{property}_match"] = {"type": "list"}
+            form_properties[form_type][f"{property}_filter"] = {"type": "list"}
         form.update(
             {
                 "form_type": HiddenField(default=form_type),

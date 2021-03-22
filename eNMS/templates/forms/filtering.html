@@ -26,10 +26,8 @@
             style="width:400px;") }}
           </td>
           <td>
-            {% if property + '_filter' in form %} {{ form[property + '_filter'](id=id +
-            '_match', class="form-control add-id no-search") }} {% else %}
-            <center>N/A</center>
-            {% endif %}
+            {{ form[property + '_filter'](id=id + '_filter', class="form-control add-id
+            no-search") }}
           </td>
         </tr>
         {% endfor %}

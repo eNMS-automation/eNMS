@@ -478,10 +478,14 @@ class BaseController:
             if not relation_ids:
                 continue
             related_table = aliased(models[relation_properties["model"]])
-            query = query.join(related_table, getattr(table, related_model)).filter(
-                related_table.id.in_(relation_ids)
-            )
-        return query
+            filter = constraint_dict.get(f"{related_model}_filter")
+            if filter == "any":
+                query = query.join(related_table, getattr(table, related_model)).filter(
+                    related_table.id.in_(relation_ids)
+                )
+            else:
+                pass
+        return query.group_by(table.id)
 
     def filtering(self, model, bulk=False, **kwargs):
         table, query = models[model], db.query(model)

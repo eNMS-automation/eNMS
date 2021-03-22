@@ -474,18 +474,18 @@ class BaseController:
         table = models[model]
         constraint_dict = {**kwargs["form"], **kwargs.get("constraints", {})}
         for related_model, relation_properties in relationships[model].items():
-            relation_ids = [int(id) for id in constraint_dict.get(related_model, [])]
-            if not relation_ids:
-                continue
             related_table = aliased(models[relation_properties["model"]])
-            filter = constraint_dict.get(f"{related_model}_filter")
-            if filter == "any":
+            match = constraint_dict.get(f"{related_model}_filter")
+            if match == "empty":
+                query = query.filter(~getattr(table, related_model).any())
+            else:
+                relation_ids = [int(id) for id in constraint_dict.get(related_model, [])]
+                if not relation_ids:
+                    continue
                 query = query.join(related_table, getattr(table, related_model)).filter(
                     related_table.id.in_(relation_ids)
-                )
-            else:
-                pass
-        return query.group_by(table.id)
+                ).group_by(table.id)
+        return query
 
     def filtering(self, model, bulk=False, **kwargs):
         table, query = models[model], db.query(model)

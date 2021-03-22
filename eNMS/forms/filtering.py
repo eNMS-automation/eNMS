@@ -30,7 +30,7 @@ def filtering_form_generator():
                 **relations,
                 **{
                     f"{relation}_filter": SelectField(
-                        choices=(("any", "Any"), ("all", "All"))
+                        choices=(("inclusion", "Inclusion"), ("empty", "Empty"))
                     )
                     for relation in relations
                 },

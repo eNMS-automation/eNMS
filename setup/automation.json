@@ -1,0 +1,5 @@
+{
+  "workflow": {
+    "allowed_fetch_models": ["device", "link", "pool", "service"]
+  }
+}

@@ -1,6 +1,10 @@
 {
   "workflow": {
-    "allowed_fetch_models": ["device", "link", "pool", "service"],
-    "allowed_factory_models": ["device", "link", "pool"]
+    "allowed_models" : {
+      "delete": ["device", "link", "pool"],
+      "fetch": ["device", "link", "pool", "service"],
+      "fetch_all": ["device", "link", "pool", "service"],
+      "factory": ["device", "link", "pool"]
+    }
   }
 }

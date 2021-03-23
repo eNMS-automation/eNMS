@@ -785,7 +785,7 @@ class ServiceRun:
         return importlib_import(module, *args, **kwargs)
 
     def database_function(self, model, func, **kwargs):
-        if model not in automation["workflow"][f"allowed_{func}_models"]:
+        if model not in automation["workflow"]["allowed_models"][func]:
             raise db.rbac_error(f"Use of '{func}' not allowed on {model}s.")
         return getattr(db, func)(model, rbac="edit", username=self.creator, **kwargs)
 

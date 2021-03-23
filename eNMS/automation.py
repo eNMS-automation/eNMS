@@ -801,7 +801,7 @@ class ServiceRun:
                 "delete": partial(_self.database_function, "delete"),
                 "fetch": partial(_self.database_function, "fetch"),
                 "fetch_all": partial(_self.database_function, "fetch_all"),
-                "factory": partial(_self.database_function, "fetch_all"),
+                "factory": partial(_self.database_function, "factory"),
                 "send_email": app.send_email,
                 "settings": app.settings,
                 "devices": _self.target_devices,

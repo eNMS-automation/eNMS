@@ -35,6 +35,7 @@ except ImportError as exc:
 from eNMS import app
 from eNMS.database import db
 from eNMS.models import models
+from eNMS.setup import automation
 
 
 class ServiceRun:
@@ -784,7 +785,7 @@ class ServiceRun:
         return importlib_import(module, *args, **kwargs)
 
     def fetch(self, model, func="fetch", **kwargs):
-        if model not in ("device", "link", "pool", "service"):
+        if model not in automation["workflow"]["allowed_fetch_models"]:
             raise db.rbac_error(f"Cannot fetch {model}s from workflow builder.")
         return getattr(db, func)(model, rbac="edit", username=self.creator, **kwargs)
 

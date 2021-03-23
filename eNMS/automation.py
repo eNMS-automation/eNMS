@@ -784,9 +784,9 @@ class ServiceRun:
             raise ImportError(f"Module '{module}' is restricted.")
         return importlib_import(module, *args, **kwargs)
 
-    def fetch(self, model, func="fetch", **kwargs):
-        if model not in automation["workflow"]["allowed_fetch_models"]:
-            raise db.rbac_error(f"Cannot fetch {model}s from workflow builder.")
+    def database_function(self, model, func, **kwargs):
+        if model not in automation["workflow"][f"allowed_{func}_models"]:
+            raise db.rbac_error(f"Use of '{func}' not allowed on {model}s.")
         return getattr(db, func)(model, rbac="edit", username=self.creator, **kwargs)
 
     def global_variables(_self, **locals):  # noqa: N805
@@ -798,8 +798,10 @@ class ServiceRun:
         variables.update(
             {
                 "__builtins__": {**builtins, "__import__": _self._import},
-                "fetch": _self.fetch,
-                "fetch_all": partial(_self.fetch, func="fetch_all"),
+                "delete": partial(_self.database_function, "delete"),
+                "fetch": partial(_self.database_function, "fetch"),
+                "fetch_all": partial(_self.database_function, "fetch_all"),
+                "factory": partial(_self.database_function, "fetch_all"),
                 "send_email": app.send_email,
                 "settings": app.settings,
                 "devices": _self.target_devices,

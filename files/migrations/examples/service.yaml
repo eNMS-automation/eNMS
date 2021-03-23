@@ -13149,7 +13149,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: ['All devices, links, services and users']
+  pools: []
   positions:
     'Regression Workflow T: global variables': [-180, 198]
     'Regression Workflow T: global variables and post-run pool update': [-153, 159]
@@ -15932,7 +15932,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2021-03-23 05:26:43.276916'
+  last_modified: '2021-03-23 05:46:10.189391'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -15945,7 +15945,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow: Global Variables and post-run Pool Update Mechanism': [
       -165, 199]
@@ -15964,7 +15964,7 @@
   skip_query: ''
   skip_value: success
   source_code: "new_device = factory(\"device\", name=\"New\")\r\nresults[\"success\"\
-    ] = True\r\nresults[\"result\"] = new_device.serialized"
+    ] = True\r\nresults[\"result\"] = new_device"
   target_devices: []
   target_pools: []
   time_between_retries: 10
@@ -16012,7 +16012,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: ['All devices, links, services and users']
+  pools: []
   positions:
     'Regression Workflow: Global Variables and post-run Pool Update Mechanism': [
       182, 132]

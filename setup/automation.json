@@ -1,5 +1,6 @@
 {
   "workflow": {
-    "allowed_fetch_models": ["device", "link", "pool", "service"]
+    "allowed_fetch_models": ["device", "link", "pool", "service"],
+    "allowed_factory_models": ["device", "link", "pool"]
   }
 }

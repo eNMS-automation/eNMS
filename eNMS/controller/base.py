@@ -479,12 +479,16 @@ class BaseController:
             if match == "empty":
                 query = query.filter(~getattr(table, related_model).any())
             else:
-                relation_ids = [int(id) for id in constraint_dict.get(related_model, [])]
+                relation_ids = [
+                    int(id) for id in constraint_dict.get(related_model, [])
+                ]
                 if not relation_ids:
                     continue
-                query = query.join(related_table, getattr(table, related_model)).filter(
-                    related_table.id.in_(relation_ids)
-                ).group_by(table.id)
+                query = (
+                    query.join(related_table, getattr(table, related_model))
+                    .filter(related_table.id.in_(relation_ids))
+                    .group_by(table.id)
+                )
         return query
 
     def filtering(self, model, bulk=False, **kwargs):

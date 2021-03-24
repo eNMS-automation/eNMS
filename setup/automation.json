@@ -1,6 +1,6 @@
 {
   "workflow": {
-    "allowed_models" : {
+    "allowed_models": {
       "delete": ["device", "link", "pool"],
       "fetch": ["device", "link", "pool", "service"],
       "fetch_all": ["device", "link", "pool", "service"],

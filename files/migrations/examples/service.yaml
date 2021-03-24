@@ -13136,7 +13136,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2021-03-24 13:06:11.052510'
+  last_modified: '2021-03-24 14:59:06.412621'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -13176,9 +13176,10 @@
     , name=\"Full Access to Everything\")\r\n    success = False\r\nexcept:\r\n  \
     \  pass\r\n\r\nnew_device = fetch(\"device\", name=f\"New-{device.name}\")\r\n\
     \r\nresults[\"operations\"] = {\r\n    \"device\": new_device.name,\r\n    \"\
-    pool\": fetch(\"pool\", name=\"All objects\").name,\r\n    \"services\": [service.name\
-    \ for service in fetch_all(\"service\")]\r\n}\r\n\r\nnew_device.name = f\"Renamed-{device.name}\"\
-    \r\n\r\nresults[\"success\"] = success"
+    pool\": fetch(\"pool\", name=\"All devices, links, services and users\").name,\r\
+    \n    \"services\": [service.name for service in fetch_all(\"service\")]\r\n}\r\
+    \n\r\nnew_device.name = f\"Renamed-{device.name}\"\r\n\r\nresults[\"success\"\
+    ] = success"
   target_devices: []
   target_pools: []
   time_between_retries: 10
@@ -15945,7 +15946,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: ['All devices, links, services and users']
+  pools: []
   positions:
     'Regression Workflow: Global Variables and post-run Pool Update Mechanism': [
       -165, 199]
@@ -16012,7 +16013,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: ['All devices, links, services and users']
+  pools: []
   positions:
     'Regression Workflow: Global Variables and post-run Pool Update Mechanism': [
       182, 132]

@@ -13136,7 +13136,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2021-03-23 05:41:31.662708'
+  last_modified: '2021-03-24 13:06:11.052510'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -13149,7 +13149,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow T: global variables': [-180, 198]
     'Regression Workflow T: global variables and post-run pool update': [-153, 159]
@@ -13174,11 +13174,11 @@
     \n    pass\r\n\r\ntry:\r\n    fetch(\"access\", name=\"Full Access to Everything\"\
     )\r\n    success = False\r\nexcept:\r\n    pass\r\n\r\ntry:\r\n    fetch(\"task\"\
     , name=\"Full Access to Everything\")\r\n    success = False\r\nexcept:\r\n  \
-    \  pass\r\n\r\nnew_device = fetch(\"device\", name=\"New\")\r\n\r\nresults[\"\
-    operations\"] = {\r\n    \"device\": new_device.name,\r\n    \"pool\": fetch(\"\
-    pool\", name=\"All objects\").name,\r\n    \"services\": [service.name for service\
-    \ in fetch_all(\"service\")]\r\n}\r\n\r\nnew_device.name = \"-\"\r\n\r\nresults[\"\
-    success\"] = success"
+    \  pass\r\n\r\nnew_device = fetch(\"device\", name=f\"New-{device.name}\")\r\n\
+    \r\nresults[\"operations\"] = {\r\n    \"device\": new_device.name,\r\n    \"\
+    pool\": fetch(\"pool\", name=\"All objects\").name,\r\n    \"services\": [service.name\
+    \ for service in fetch_all(\"service\")]\r\n}\r\n\r\nnew_device.name = f\"Renamed-{device.name}\"\
+    \r\n\r\nresults[\"success\"] = success"
   target_devices: []
   target_pools: []
   time_between_retries: 10
@@ -15932,7 +15932,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2021-03-23 05:46:10.189391'
+  last_modified: '2021-03-24 13:05:23.799165'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -15963,8 +15963,8 @@
   skip: {}
   skip_query: ''
   skip_value: success
-  source_code: "new_device = factory(\"device\", name=\"New\")\r\nresults[\"success\"\
-    ] = True\r\nresults[\"result\"] = new_device"
+  source_code: "new_device = factory(\"device\", name=f\"New-{device.name}\")\r\n\
+    results[\"success\"] = True\r\nresults[\"result\"] = new_device.serialized"
   target_devices: []
   target_pools: []
   time_between_retries: 10
@@ -15999,7 +15999,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2021-03-23 05:42:35.064503'
+  last_modified: '2021-03-24 13:06:17.203847'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -16012,7 +16012,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow: Global Variables and post-run Pool Update Mechanism': [
       182, 132]
@@ -16030,8 +16030,8 @@
   skip: {}
   skip_query: ''
   skip_value: success
-  source_code: "delete(\"device\", name=\"---\")\r\nresults[\"success\"] = True\r\n\
-    results[\"result\"] = {}"
+  source_code: "delete(\"device\", name=f\"Renamed-{device.name}\")\r\nresults[\"\
+    success\"] = True\r\nresults[\"result\"] = {}"
   target_devices: []
   target_pools: []
   time_between_retries: 10

@@ -179,15 +179,22 @@ class ServiceRun:
         self.init_state()
         self.write_state("status", "Running")
         start = datetime.now().replace(microsecond=0)
+        results = {"runtime": self.runtime, "success": True}
         try:
             app.service_run_count[self.service.id] += 1
-            results = {"runtime": self.runtime, **self.device_run()}
+            results.update(self.device_run())
         except Exception:
             result = "\n".join(format_exc().splitlines())
             self.log("error", result)
-            results = {"success": False, "runtime": self.runtime, "result": result}
+            results.update({"success": False, "result": result})
         finally:
-            db.session.commit()
+            try:
+                db.session.commit()
+            except Exception:
+                db.session.rollback()
+                error = "\n".join(format_exc().splitlines())
+                self.log("error", error)
+                results.update({"success": False, "error": error})
             state = self.main_run.get_state()
             self.status = state["status"] = "Aborted" if self.stop else "Completed"
             self.success = results["success"]

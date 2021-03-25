@@ -295,9 +295,7 @@ class Run(AbstractBase):
     )
     service_id = db.Column(Integer, ForeignKey("service.id"))
     service = relationship("Service", foreign_keys="Run.service_id")
-    service_name = association_proxy(
-        "service", "scoped_name", info={"name": "service_name"}
-    )
+    service_name = db.Column(db.SmallString)
     services = relationship(
         "Service", secondary=db.run_service_table, back_populates="runs"
     )
@@ -315,6 +313,7 @@ class Run(AbstractBase):
         self.runtime = kwargs.get("runtime") or app.get_time()
         self.parent_runtime = self.runtime
         super().__init__(**kwargs)
+        self.service_name = (self.placeholder or self.service).scoped_name
         if not self.start_services:
             self.start_services = [db.fetch("service", scoped_name="Start").id]
 

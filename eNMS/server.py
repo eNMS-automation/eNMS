@@ -347,7 +347,7 @@ class Server(Flask):
         def get_requests_sink(_):
             abort(404)
 
-        @blueprint.route("/rest/<path:page>", methods=["GET", "POST"])
+        @blueprint.route("/rest/<path:page>", methods=["DELETE", "GET", "POST"])
         @self.process_requests
         @self.csrf.exempt
         def rest_request(page):

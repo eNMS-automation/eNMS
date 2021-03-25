@@ -22,7 +22,6 @@ the terminal to be inside the main application.
 - Refactoring of the REST API
 * all requests are handled by the same "monitor requests" function
 * remove dependency to flask_restful and flask_httpauth
-
 - Fix submenu bug when the menu is minimized (gentelella bug)
 - Replace prerequisite edge with priority mechanism
 - Allow making non-shared service shared and vice-versa (if the shared service doesn't have more than one workflow).
@@ -38,6 +37,8 @@ Bug report mail: "No status for services in subworkflow with device iteration"
 By design, the default pool becomes the first pool in alphabetical order
 * Add backward / forward control like the workflow builder
 - Rename "monitor_requests" function to "process_requests": impact on plugins
+- Add global "factory" and "delete" functions in the workflow builder to create and delete new objects
+from a workflow.
 
 MIGRATION:
 
@@ -60,6 +61,7 @@ To be tested:
 * dynamic pool content, inclusion / equality / regex
 * pool individual and global refresh mechanism in pool table
 - Conversion shared - non shared for a service. Duplication of shared / non-shared service.
+- New global "factory" and "delete" functions
 
 Version 4.0.1
 -------------

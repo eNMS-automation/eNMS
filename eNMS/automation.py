@@ -85,10 +85,6 @@ class ServiceRun:
             return self.results[0]
 
     @property
-    def service_properties(self):
-        return {k: getattr(self.service, k) for k in ("id", "type", "name")}
-
-    @property
     def stop(self):
         if app.redis_queue:
             return bool(app.redis("get", f"stop/{self.parent_runtime}"))

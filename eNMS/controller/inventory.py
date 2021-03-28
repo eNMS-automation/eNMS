@@ -203,7 +203,7 @@ class InventoryController(BaseController):
         return self.get_time()
 
     def update_pool(self, pool_id):
-        db.fetch("pool", id=int(pool_id)).compute_pool()
+        db.fetch("pool", id=int(pool_id), rbac="edit").compute_pool()
 
     def update_all_pools(self):
         for pool in db.fetch_all("pool"):

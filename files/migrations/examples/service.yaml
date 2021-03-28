@@ -13149,7 +13149,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: ['All devices, links, services and users']
+  pools: []
   positions:
     'Regression Workflow T: global variables': [-180, 198]
     'Regression Workflow T: global variables and post-run pool update': [-153, 159]
@@ -15945,7 +15945,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: ['All devices, links, services and users']
+  pools: []
   positions:
     'Regression Workflow: Global Variables and post-run Pool Update Mechanism': [
       -165, 199]
@@ -16012,7 +16012,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: ['All devices, links, services and users']
+  pools: []
   positions:
     'Regression Workflow: Global Variables and post-run Pool Update Mechanism': [
       182, 132]

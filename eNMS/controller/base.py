@@ -491,8 +491,8 @@ class BaseController:
                 )
         return query
 
-    def filtering(self, model, bulk=False, **kwargs):
-        table, query = models[model], db.query(model)
+    def filtering(self, model, bulk=False, rbac="read", **kwargs):
+        table, query = models[model], db.query(model, rbac)
         total_records = query.with_entities(table.id).count()
         try:
             constraints = self.build_filtering_constraints(model, **kwargs)

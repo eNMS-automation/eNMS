@@ -382,7 +382,7 @@ class Pool(AbstractBase):
     def compute_pool(self):
         for model in self.models:
             if not self.manually_defined:
-                kwargs = {"bulk": "object", "form": {}}
+                kwargs = {"bulk": "object", "rbac": None, "form": {}}
                 for property in properties["filtering"][model]:
                     if not getattr(self, f"{model}_{property}"):
                         continue

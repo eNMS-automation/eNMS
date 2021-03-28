@@ -41,6 +41,8 @@ By design, the default pool becomes the first pool in alphabetical order
 from a workflow.
 - When refreshing a pool, rbac is now ignored so that the pool "refresh" action result does not depend on the
 user triggering it.
+- If a workflow is defined to run on a set of devices, and the user lacks access to one or more devices,
+execute for all accessible devices and fail for the inaccessible devices instead of failing the entire workflow.
 
 MIGRATION:
 

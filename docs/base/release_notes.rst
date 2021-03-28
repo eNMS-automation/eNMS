@@ -43,6 +43,8 @@ from a workflow.
 user triggering it.
 - If a workflow is defined to run on a set of devices, and the user lacks access to one or more devices,
 execute for all accessible devices and fail for the inaccessible devices instead of failing the entire workflow.
+- app.service_db was renamed to "service_run_count" and it no longer has an inner "runs" key: the gunicorn
+auto safe restart code that uses it must be updated accordingly.
 
 MIGRATION:
 

@@ -39,6 +39,8 @@ By design, the default pool becomes the first pool in alphabetical order
 - Rename "monitor_requests" function to "process_requests": impact on plugins
 - Add global "factory" and "delete" functions in the workflow builder to create and delete new objects
 from a workflow.
+- When refreshing a pool, rbac is now ignored so that the pool "refresh" action result does not depend on the
+user triggering it.
 
 MIGRATION:
 

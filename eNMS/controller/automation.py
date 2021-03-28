@@ -56,6 +56,7 @@ class AutomationController(BaseController):
         library: defaultdict(dict) for library in ("netmiko", "napalm", "scrapli")
     }
     service_run_count = defaultdict(int)
+    run_targets = {}
     run_db = defaultdict(dict)
     run_logs = defaultdict(lambda: defaultdict(list))
     run_stop = defaultdict(bool)

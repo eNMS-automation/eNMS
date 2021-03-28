@@ -314,6 +314,9 @@ class Run(AbstractBase):
         self.parent_runtime = self.runtime
         super().__init__(**kwargs)
         self.service_name = (self.placeholder or self.service).scoped_name
+        app.run_targets[self.runtime] = set(
+            app.filtering("device", bulk="id", rbac="target", username=self.creator)
+        )
         if not self.start_services:
             self.start_services = [db.fetch("service", scoped_name="Start").id]
 

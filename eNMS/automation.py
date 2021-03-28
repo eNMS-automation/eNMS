@@ -136,7 +136,18 @@ class ServiceRun:
                 if self.update_target_pools:
                     pool.compute_pool()
                 devices |= set(pool.devices)
-        return list(devices)
+        restricted_devices = set(
+            device
+            for device in devices
+            if device.id not in app.run_targets[self.parent_runtime]
+        )
+        if restricted_devices:
+            result = (
+                f"Error 403: User '{self.creator}' is not allowed to use these"
+                f" devices as targets: {', '.join(map(str, restricted_devices))}"
+            )
+            self.log("info", result, logger="security")
+        return list(devices - restricted_devices)
 
     def init_state(self):
         if not app.redis_queue:
@@ -272,16 +283,6 @@ class ServiceRun:
 
     def device_run(self):
         self.target_devices = self.compute_devices()
-        if self.is_main_run:
-            allowed_targets = db.query("device", rbac="target", username=self.creator)
-            unauthorized_targets = set(self.target_devices) - set(allowed_targets)
-            if unauthorized_targets:
-                result = (
-                    f"Error 403: User '{self.creator}' is not allowed to use these"
-                    f" devices as targets: {', '.join(map(str, unauthorized_targets))}"
-                )
-                self.log("info", result, logger="security")
-                return {"result": result, "success": False}
         summary = {"failure": [], "success": []}
         if self.iteration_devices and not self.iteration_run:
             if not self.workflow:

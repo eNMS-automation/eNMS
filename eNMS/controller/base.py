@@ -436,7 +436,7 @@ class BaseController:
 
     def build_filtering_constraints(self, model, **kwargs):
         table, constraints = models[model], []
-        constraint_dict = {**kwargs["form"], **kwargs.get("constraints", {})}
+        constraint_dict = {**kwargs.get("form", {}), **kwargs.get("constraints", {})}
         for property in model_properties[model]:
             value, row = constraint_dict.get(property), getattr(table, property)
             if not value:
@@ -472,7 +472,7 @@ class BaseController:
 
     def build_relationship_constraints(self, query, model, **kwargs):
         table = models[model]
-        constraint_dict = {**kwargs["form"], **kwargs.get("constraints", {})}
+        constraint_dict = {**kwargs.get("form", {}), **kwargs.get("constraints", {})}
         for related_model, relation_properties in relationships[model].items():
             related_table = aliased(models[relation_properties["model"]])
             match = constraint_dict.get(f"{related_model}_filter")
@@ -491,8 +491,8 @@ class BaseController:
                 )
         return query
 
-    def filtering(self, model, bulk=False, rbac="read", **kwargs):
-        table, query = models[model], db.query(model, rbac)
+    def filtering(self, model, bulk=False, rbac="read", username=None, **kwargs):
+        table, query = models[model], db.query(model, rbac, username)
         total_records = query.with_entities(table.id).count()
         try:
             constraints = self.build_filtering_constraints(model, **kwargs)

@@ -117,7 +117,7 @@
   upper_menu: [Admin, Settings, Files]
   user_pools: [Read-only users]
 - access_pools: [Datacenter New York]
-  access_type: "['Read', 'Connect']"
+  access_type: "['Read', 'Connect', 'Use as target']"
   delete_requests: []
   description: ''
   get_requests: []

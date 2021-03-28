@@ -116,6 +116,7 @@
     'Regression Workflow: Operational Data Backup (admin)': *id003
     'Regression Workflow: Optional Prerequisite Services': [-356, 121]
     'Regression Workflow: Preprocessing and Postprocessing': *id015
+    'Regression Workflow: RBAC Target Restriction': [-176, -144]
     'Regression Workflow: Result content in memory (scalability)': [0, 0]
     'Regression Workflow: Scalability Test (large workflow)': *id016
     'Regression Workflow: Scrapli': *id017
@@ -369,6 +370,7 @@
     'Regression Workflow: Operational Data Backup (admin)': *id044
     'Regression Workflow: Optional Prerequisite Services': [734, 171]
     'Regression Workflow: Preprocessing and Postprocessing': *id056
+    'Regression Workflow: RBAC Target Restriction': [654, -133]
     'Regression Workflow: Scalability Test (large workflow)': *id057
     'Regression Workflow: Scrapli': *id058
     'Regression Workflow: Separate Failure - Success Paths': *id059
@@ -16032,6 +16034,283 @@
   skip_value: success
   source_code: "delete(\"device\", name=f\"No-{device.id}\")\r\nresults[\"success\"\
     ] = True\r\nresults[\"result\"] = {}"
+  target_devices: []
+  target_pools: []
+  time_between_retries: 10
+  type: python_snippet_service
+  update_pools_after_running: false
+  update_target_pools: false
+  validation_condition: none
+  validation_method: text
+  vendor: ''
+  waiting_time: 0
+- access_groups: admin
+  close_connection: false
+  completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credential_type: any
+  default_access: creator
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  labels:
+    893cb12b-1918-4e50-8aa2-a71ae7bf3e8f:
+      alignment: left
+      content: "Iteration targets set to \"Boston\" and \"Washington\" too.\r\nIterating\
+        \ should fail for Boston as parent device, and for Washington,\r\nit should\
+        \ only iterate on Washington as iteration devices and not Boston."
+      positions: [583, 220]
+    a310fb32-d6ca-408d-87b1-83e5f95e36ff:
+      alignment: left
+      content: "This workflow must be run by user \"ny\" on two devices:\r\nBoston\
+        \ and Washington.\r\nny has access to Washington, but not Boston: Bostin should\r\
+        \nfail without prevent the workflow from running on Washington.\r\nThe restriction\
+        \ must apply to direct targets as well as\r\niteration and device targets.\r\
+        \nMust be run both in DxD and SxS w/ WF targets mode."
+      positions: [279, -88]
+  last_modified: '2021-03-28 03:50:07.886042'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: 'Regression Workflow: RBAC Target Restriction'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: ['All devices, links, services and users']
+  positions: {}
+  postprocessing: ''
+  postprocessing_mode: always
+  preprocessing: ''
+  priority: 1
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: 'Regression Workflow: RBAC Target Restriction'
+  send_notification: false
+  send_notification_method: mail
+  services: ['[Shared] Start', '[Shared] End', '[Regression Workflow: RBAC Target
+      Restriction] Direct Target', '[Regression Workflow: RBAC Target Restriction]
+      Device Targets', '[Regression Workflow: RBAC Target Restriction] Iteration Targets']
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: success
+  target_devices: []
+  target_pools: []
+  time_between_retries: 10
+  type: workflow
+  update_pools_after_running: false
+  update_target_pools: false
+  validation_condition: none
+  validation_method: text
+  vendor: ''
+  waiting_time: 0
+  workflow_category: Example workflow(s)
+- access_groups: admin
+  completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credential_type: any
+  default_access: creator
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2021-03-28 03:45:38.694741'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Regression Workflow: RBAC Target Restriction] Direct Target'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: ['All devices, links, services and users']
+  positions:
+    'Regression Workflow: RBAC Target Restriction': [-162, 99]
+  postprocessing: ''
+  postprocessing_mode: always
+  preprocessing: ''
+  priority: 1
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: Direct Target
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: success
+  source_code: "\r\n# Click on \"i\" to right of \"Source Code\" for examples.\r\n\
+    \r\nresult = {}\r\nresults[\"success\"] = True\r\nresults[\"result\"] = result"
+  target_devices: []
+  target_pools: []
+  time_between_retries: 10
+  type: python_snippet_service
+  update_pools_after_running: false
+  update_target_pools: false
+  validation_condition: none
+  validation_method: text
+  vendor: ''
+  waiting_time: 0
+- access_groups: admin
+  completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credential_type: any
+  default_access: creator
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: Washington,Boston
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2021-03-28 03:47:33.282207'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Regression Workflow: RBAC Target Restriction] Device Targets'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: ['All devices, links, services and users']
+  positions:
+    'Regression Workflow: RBAC Target Restriction': [181, 119]
+  postprocessing: ''
+  postprocessing_mode: always
+  preprocessing: ''
+  priority: 1
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: Device Targets
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: success
+  source_code: "\r\n# Click on \"i\" to right of \"Source Code\" for examples.\r\n\
+    \r\nresult = {}\r\nresults[\"success\"] = True\r\nresults[\"result\"] = result"
+  target_devices: []
+  target_pools: []
+  time_between_retries: 10
+  type: python_snippet_service
+  update_pools_after_running: false
+  update_target_pools: false
+  validation_condition: none
+  validation_method: text
+  vendor: ''
+  waiting_time: 0
+- access_groups: admin
+  completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credential_type: any
+  default_access: creator
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: '["Washington", "Boston"]'
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2021-03-28 03:48:14.565670'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Regression Workflow: RBAC Target Restriction] Iteration Targets'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: ['All devices, links, services and users']
+  positions:
+    'Regression Workflow: RBAC Target Restriction': [590, 138]
+  postprocessing: ''
+  postprocessing_mode: always
+  preprocessing: ''
+  priority: 1
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: Iteration Targets
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: success
+  source_code: "\r\n# Click on \"i\" to right of \"Source Code\" for examples.\r\n\
+    \r\nresult = {}\r\nresults[\"success\"] = True\r\nresults[\"result\"] = result"
   target_devices: []
   target_pools: []
   time_between_retries: 10

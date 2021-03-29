@@ -202,9 +202,6 @@ class ServiceRun:
                 error = "\n".join(format_exc().splitlines())
                 self.log("error", error)
                 results.update({"success": False, "error": error})
-            state = self.main_run.get_state()
-            self.status = state["status"] = "Aborted" if self.stop else "Completed"
-            self.success = results["success"]
             if self.update_pools_after_running:
                 for pool in db.fetch_all("pool"):
                     pool.compute_pool()
@@ -216,7 +213,11 @@ class ServiceRun:
             now = datetime.now().replace(microsecond=0)
             results["duration"] = self.duration = str(now - start)
             if self.is_main_run:
+                state = self.main_run.get_state()
+                status = "Aborted" if self.stop else "Completed"
                 self.main_run.state = state
+                self.main_run.status = state["status"] = status
+                self.success = results["success"]
                 self.close_remaining_connections()
             if self.main_run.task and not (
                 self.main_run.task.frequency or self.main_run.task.crontab_expression

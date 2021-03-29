@@ -939,54 +939,56 @@ export function initView() {
     Configuration: (d) => showDeviceData(d),
     "Run Service": (d) => showRunServicePanel({ instance: d }),
   });
-  call({
-    url: `/get_visualization_pools/${page}`,
-    callback: function (pools) {
-      pools.sort((a, b) => a.name.localeCompare(b.name));
-      for (let i = 0; i < pools.length; i++) {
-        $("#current-pool").append(
-          `<option value="${pools[i].id}">${pools[i].name}</option>`
-        );
-      }
-      if (currentPath && pools.some((w) => w.id == currentPath)) {
-        $("#current-pool").val(currentPath);
-        displayNetwork({ noAlert: true });
-      } else {
-        if ($("#current-pool").val()) {
+  if (page == "logical_view") {
+    initLogicalFramework();
+  } else {
+    call({
+      url: `/get_visualization_pools/${page}`,
+      callback: function (pools) {
+        pools.sort((a, b) => a.name.localeCompare(b.name));
+        for (let i = 0; i < pools.length; i++) {
+          $("#current-pool").append(
+            `<option value="${pools[i].id}">${pools[i].name}</option>`
+          );
+        }
+        if (currentPath && pools.some((w) => w.id == currentPath)) {
+          $("#current-pool").val(currentPath);
           displayNetwork({ noAlert: true });
         } else {
-          notify("No pool has been created yet.", "error", 5);
+          if ($("#current-pool").val()) {
+            displayNetwork({ noAlert: true });
+          } else {
+            notify("No pool has been created yet.", "error", 5);
+          }
         }
-      }
-      $("#current-pool")
-        .on("change", function () {
-          displayNetwork();
-        })
-        .selectpicker({
-          liveSearch: true,
-        });
-      updateRightClickBindings(controls);
-    },
-  });
-  for (let type of ["device", "link"]) {
-    openPanel({
-      name: `${type}_filtering`,
-      type: type,
-      title: `${type.charAt(0).toUpperCase() + type.slice(1)} Filtering`,
-      size: "700 600",
-      onbeforeclose: function () {
-        $(this).css("visibility", "hidden");
+        $("#current-pool")
+          .on("change", function () {
+            displayNetwork();
+          })
+          .selectpicker({
+            liveSearch: true,
+          });
+        updateRightClickBindings(controls);
       },
-      css: { visibility: "hidden" },
     });
-  }
-  if (page == "force_directed_view") {
-    create3dGraphNetwork("network");
-    notify("Loading network...", "success", 5);
-  } else if (page == "geographical_view") {
-    initGeographicalFramework();
-  } else {
-    initLogicalFramework();
+    for (let type of ["device", "link"]) {
+      openPanel({
+        name: `${type}_filtering`,
+        type: type,
+        title: `${type.charAt(0).toUpperCase() + type.slice(1)} Filtering`,
+        size: "700 600",
+        onbeforeclose: function () {
+          $(this).css("visibility", "hidden");
+        },
+        css: { visibility: "hidden" },
+      });
+    }
+    if (page == "force_directed_view") {
+      create3dGraphNetwork("network");
+      notify("Loading network...", "success", 5);
+    } else if (page == "geographical_view") {
+      initGeographicalFramework();
+    }
   }
 }
 

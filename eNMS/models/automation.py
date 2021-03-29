@@ -358,13 +358,6 @@ class Run(AbstractBase):
     def service_properties(self):
         return {k: getattr(self.service, k) for k in ("id", "type", "name")}
 
-    @property
-    def stop(self):
-        if app.redis_queue:
-            return bool(app.redis("get", f"stop/{self.parent_runtime}"))
-        else:
-            return app.run_stop[self.parent_runtime]
-
     def get_state(self):
         if self.state:
             return self.state

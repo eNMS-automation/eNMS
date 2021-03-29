@@ -16162,7 +16162,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: ['All devices, links, services and users']
+  pools: []
   positions:
     'Regression Workflow: RBAC Target Restriction': [-162, 99]
   postprocessing: ''
@@ -16227,7 +16227,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: ['All devices, links, services and users']
+  pools: []
   positions:
     'Regression Workflow: RBAC Target Restriction': [181, 119]
   postprocessing: ''
@@ -16292,7 +16292,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: ['All devices, links, services and users']
+  pools: []
   positions:
     'Regression Workflow: RBAC Target Restriction': [590, 138]
   postprocessing: ''

@@ -119,7 +119,8 @@
       "upper_menu",
       "pages"
     ],
-    "workflow_edge": ["id", "source_id", "destination_id", "workflow_id"]
+    "workflow_edge": ["id", "source_id", "destination_id", "workflow_id"],
+    "view_object": ["device_id", "device_name", "view_id"]
   },
   "relationships": {
     "associations": {

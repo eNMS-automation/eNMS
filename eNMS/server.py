@@ -1,4 +1,4 @@
-from datetime import timedelta
+from datetime import datetime, timedelta
 from flask import (
     abort,
     Blueprint,
@@ -79,15 +79,22 @@ class Server(Flask):
 
     def configure_terminal_socket(self):
         def send_data(session, file_descriptor):
+            session_object = db.factory(
+                "session",
+                commit=True,
+                name=session,
+                timestamp=str(datetime.now()),
+                **app.ssh_sessions[session],
+            )
             while True:
                 try:
                     self.socketio.sleep(0.1)
+                    output = read(file_descriptor, 1024).decode()
+                    session_object.content += output
                     self.socketio.emit(
-                        "output",
-                        read(file_descriptor, 1024).decode(),
-                        namespace="/terminal",
-                        room=session,
+                        "output", output, namespace="/terminal", room=session
                     )
+                    db.session.commit()
                 except OSError:
                     break
 

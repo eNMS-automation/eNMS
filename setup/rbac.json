@@ -234,7 +234,6 @@
     "/run_service_on_targets": "access",
     "/save_file": "access",
     "/save_positions": "access",
-    "/save_session": "access",
     "/save_settings": "admin",
     "/save_view_positions": "access",
     "/scan_cluster": "access",

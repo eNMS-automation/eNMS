@@ -1,5 +1,4 @@
 from collections import Counter
-from datetime import datetime
 from flask_login import current_user
 from git import Repo
 from io import BytesIO
@@ -56,7 +55,11 @@ class InventoryController(BaseController):
             return {"alert": "Unauthorized authentication method."}
         session = str(uuid4())
         device = db.fetch("device", id=device_id, rbac="connect")
-        self.ssh_sessions[session] = {"device": device.id, "form": kwargs}
+        self.ssh_sessions[session] = {
+            "device": device.id,
+            "form": kwargs,
+            "user": current_user.name,
+        }
         if "authentication" in kwargs:
             credentials = self.get_credentials(device, **kwargs)
             self.ssh_sessions[session]["credentials"] = credentials
@@ -184,18 +187,6 @@ class InventoryController(BaseController):
         result = self.topology_import(file)
         info("Inventory import: Done.")
         return result
-
-    def save_session(self, session_id, **kwargs):
-        session = self.ssh_sessions.pop(session_id, None)
-        if session:
-            db.factory(
-                "session",
-                content=kwargs["content"],
-                name=str(uuid4()),
-                device=session["device"],
-                timestamp=str(datetime.now()),
-                user=current_user.name,
-            )
 
     def save_view_positions(self, **kwargs):
         for node_id, position in kwargs.items():

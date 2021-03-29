@@ -45,6 +45,8 @@ user triggering it.
 execute for all accessible devices and fail for the inaccessible devices instead of failing the entire workflow.
 - app.service_db was renamed to "service_run_count" and it no longer has an inner "runs" key: the gunicorn
 auto safe restart code that uses it must be updated accordingly.
+- Store and commit web SSH session content in backend instead of relying on send beacon mechanism and
+onbeforeunload callback so that the saving of a session does not depend on user behavior
 
 MIGRATION:
 

@@ -460,7 +460,7 @@ class Node(ViewObject):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.name = f"[{self.view}] {self.device_name}"
+        self.name = app.get_time()
 
 
 class Line(ViewObject):
@@ -475,7 +475,7 @@ class Line(ViewObject):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.name = f"[{self.view}] {self.link_name}"
+        self.name = app.get_time()
 
 
 class Plan(ViewObject):

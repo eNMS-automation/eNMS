@@ -250,6 +250,14 @@ class BaseController:
     def get_cluster_status(self):
         return [server.status for server in db.fetch_all("server")]
 
+    def get_device_logs(self, device_id):
+        device_logs = [
+            log.name
+            for log in db.fetch_all("log")
+            if log.source == db.fetch("device", id=device_id).ip_address
+        ]
+        return "\n".join(device_logs)
+
     def get_device_network_data(self, device_id):
         device = db.fetch("device", id=device_id)
         return {
@@ -274,6 +282,18 @@ class BaseController:
         except Exception as exc:
             app.log("error", f"Git pull failed ({str(exc)})")
         self.update_database_configurations_from_git()
+
+    def get_git_history(self, device_id):
+        device = db.fetch("device", id=device_id)
+        repo = Repo(self.path / "network_data")
+        path = self.path / "network_data" / device.name
+        return {
+            data_type: [
+                {"hash": str(commit), "date": commit.committed_datetime}
+                for commit in list(repo.iter_commits(paths=path / data_type))
+            ]
+            for data_type in self.configuration_properties
+        }
 
     def get_git_network_data(self, device_name, hash):
         commit, result = Repo(self.path / "network_data").commit(hash), {}
@@ -658,3 +678,18 @@ class BaseController:
             f"{model}s": self.filtering(model, **kwargs[model], bulk="view_properties")
             for model, form in kwargs.items()
         }
+
+    def web_connection(self, device_id, **kwargs):
+        if not self.settings["ssh"]["credentials"][kwargs["credentials"]]:
+            return {"alert": "Unauthorized authentication method."}
+        session = str(uuid4())
+        device = db.fetch("device", id=device_id, rbac="connect")
+        self.ssh_sessions[session] = {
+            "device": device.id,
+            "form": kwargs,
+            "user": current_user.name,
+        }
+        if "authentication" in kwargs:
+            credentials = self.get_credentials(device, **kwargs)
+            self.ssh_sessions[session]["credentials"] = credentials
+        return {"device": device.name, "session": session}

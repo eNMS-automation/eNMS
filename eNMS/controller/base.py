@@ -358,31 +358,6 @@ class BaseController:
     def get_time(self):
         return str(datetime.now())
 
-    def bulk_removal(
-        self,
-        table,
-        target_type,
-        target_id,
-        target_property,
-        constraint_property,
-        **kwargs,
-    ):
-        kwargs[constraint_property] = [target_id]
-        target = db.fetch(target_type, id=target_id)
-        if target.type == "pool" and not target.manually_defined:
-            return {"alert": "Removing objects from a dynamic pool is an allowed."}
-        instances = self.filtering(table, bulk="object", form=kwargs)
-        for instance in instances:
-            getattr(target, target_property).remove(instance)
-        self.update_rbac(*instances)
-        return len(instances)
-
-    def update_rbac(self, *instances):
-        for instance in instances:
-            if instance.type != "user":
-                continue
-            instance.update_rbac()
-
     def send_email(
         self,
         subject,

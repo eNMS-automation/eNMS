@@ -85,6 +85,25 @@ class AdministrationController(BaseController):
             db.factory(table, id=instance_id, **kwargs)
         return len(instances)
 
+    def bulk_removal(
+        self,
+        table,
+        target_type,
+        target_id,
+        target_property,
+        constraint_property,
+        **kwargs,
+    ):
+        kwargs[constraint_property] = [target_id]
+        target = db.fetch(target_type, id=target_id)
+        if target.type == "pool" and not target.manually_defined:
+            return {"alert": "Removing objects from a dynamic pool is an allowed."}
+        instances = self.filtering(table, bulk="object", form=kwargs)
+        for instance in instances:
+            getattr(target, target_property).remove(instance)
+        self.update_rbac(*instances)
+        return len(instances)
+
     def compare(self, type, id, v1, v2, context_lines):
         if type in ("result", "device_result"):
             first = self.str_dict(getattr(db.fetch("result", id=v1), "result"))
@@ -502,6 +521,12 @@ class AdministrationController(BaseController):
                 return {"alert": alert}
             self.log("error", format_exc())
             return {"alert": str(exc)}
+
+    def update_rbac(self, *instances):
+        for instance in instances:
+            if instance.type != "user":
+                continue
+            instance.update_rbac()
 
     def upload_files(self, **kwargs):
         file = kwargs["file"]

@@ -112,10 +112,10 @@ class RestApi:
             data.update({"target_devices": devices, "target_pools": pools})
         data["runtime"] = runtime = app.get_time()
         if handle_asynchronously:
-            Thread(target=app.run, args=(service.id,), kwargs=data).start()
+            Thread(target=controller.run, args=(service.id,), kwargs=data).start()
             return {"errors": errors, "runtime": runtime}
         else:
-            return {**app.run(service.id, **data), "errors": errors}
+            return {**controller.run(service.id, **data), "errors": errors}
 
     def run_task(self, task_id):
         task = db.fetch("task", rbac="schedule", id=task_id)
@@ -130,7 +130,7 @@ class RestApi:
             data["target_devices"] = [device.id for device in task.devices]
         if task.pools:
             data["target_pools"] = [pool.id for pool in task.pools]
-        Thread(target=app.run, args=(task.service.id,), kwargs=data).start()
+        Thread(target=controller.run, args=(task.service.id,), kwargs=data).start()
 
     def search(self, **kwargs):
         filtering_kwargs = {
@@ -142,11 +142,11 @@ class RestApi:
             "form": kwargs.get("search_criteria", {}),
             "rest_api_request": True,
         }
-        return app.filtering(kwargs["type"], **filtering_kwargs)["data"]
+        return controller.filtering(kwargs["type"], **filtering_kwargs)["data"]
 
     def topology(self, direction, **kwargs):
         if direction == "import":
-            result = app.import_topology(
+            result = controller.import_topology(
                 **{
                     "replace": kwargs["replace"] == "True",
                     "file": kwargs["file"],
@@ -154,7 +154,7 @@ class RestApi:
             )
             return result, 206 if "Partial" in result else 200
         else:
-            app.export_topology(**kwargs)
+            controller.export_topology(**kwargs)
             return "Topology Export successfully executed."
 
     def update_instance(self, model, **data):
@@ -166,7 +166,7 @@ class RestApi:
                 result["failure"].append((instance, "Name is missing"))
                 continue
             try:
-                object_data = app.objectify(model, instance)
+                object_data = controller.objectify(model, instance)
                 object_data["update_pools"] = instance.get("update_pools", True)
                 instance = db.factory(model, **object_data)
                 result["success"].append(instance.name)

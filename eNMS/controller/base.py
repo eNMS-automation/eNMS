@@ -163,21 +163,6 @@ class BaseController:
         if not admin_user.password:
             admin_user.update(password="admin")
 
-    def get_git_content(self):
-        repo = self.settings["app"]["git_repository"]
-        if not repo:
-            return
-        local_path = self.path / "network_data"
-        try:
-            if exists(local_path):
-                Repo(local_path).remotes.origin.pull()
-            else:
-                local_path.mkdir(parents=True, exist_ok=True)
-                Repo.clone_from(repo, local_path)
-        except Exception as exc:
-            self.log("error", f"Git pull failed ({str(exc)})")
-        self.update_database_configurations_from_git()
-
     def load_custom_properties(self):
         for model, values in self.properties["custom"].items():
             for property, property_dict in values.items():
@@ -354,18 +339,6 @@ class BaseController:
                 full_log = getattr(self.run_logs[runtime], mode)(int(service), [])
                 log = full_log[start_line:]
         return log
-
-    def delete_instance(self, model, instance_id):
-        return db.delete(model, id=instance_id)
-
-    def get(self, model, id):
-        return db.fetch(model, id=id).serialized
-
-    def get_properties(self, model, id):
-        return db.fetch(model, id=id).get_properties()
-
-    def get_all(self, model):
-        return [instance.get_properties() for instance in db.fetch_all(model)]
 
     def update(self, type, **kwargs):
         try:

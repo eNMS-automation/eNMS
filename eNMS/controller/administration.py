@@ -55,6 +55,9 @@ class AdministrationController(BaseController):
     def delete_file(self, filepath):
         remove(Path(filepath.replace(">", "/")))
 
+    def delete_instance(self, model, instance_id):
+        return db.delete(model, id=instance_id)
+
     def edit_file(self, filepath):
         try:
             with open(Path(filepath.replace(">", "/"))) as file:
@@ -83,14 +86,38 @@ class AdministrationController(BaseController):
         rmtree(path, ignore_errors=True)
         return path
 
+    def get(self, model, id):
+        return db.fetch(model, id=id).serialized
+
+    def get_all(self, model):
+        return [instance.get_properties() for instance in db.fetch_all(model)]
+
     def get_cluster_status(self):
         return [server.status for server in db.fetch_all("server")]
 
     def get_exported_services(self):
         return [f for f in listdir(self.path / "files" / "services") if ".tgz" in f]
 
+    def get_git_content(self):
+        repo = self.settings["app"]["git_repository"]
+        if not repo:
+            return
+        local_path = self.path / "network_data"
+        try:
+            if exists(local_path):
+                Repo(local_path).remotes.origin.pull()
+            else:
+                local_path.mkdir(parents=True, exist_ok=True)
+                Repo.clone_from(repo, local_path)
+        except Exception as exc:
+            self.log("error", f"Git pull failed ({str(exc)})")
+        self.update_database_configurations_from_git()
+
     def get_migration_folders(self):
         return listdir(self.path / "files" / "migrations")
+
+    def get_properties(self, model, id):
+        return db.fetch(model, id=id).get_properties()
 
     def get_tree_files(self, path):
         if path == "root":

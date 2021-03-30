@@ -24,22 +24,3 @@ class InventoryController:
                 node = db.factory(model, device=model_id, view=view_id)
                 result[f"{model}s"].append(node.serialized)
         return result
-
-    def create_view_object(self, type, view_id, **kwargs):
-        node = db.factory(type, view=view_id, **kwargs)
-        db.session.flush()
-        return {"time": self.get_time(), "node": node.serialized}
-
-    def delete_view_selection(self, selection):
-        for instance_id in selection:
-            db.delete("view_object", id=instance_id)
-        return self.get_time()
-
-    def get_credentials(self, device, **kwargs):
-        if kwargs["credentials"] == "device":
-            credentials = device.get_credentials("any")
-            return credentials.username, self.get_password(credentials.password)
-        elif kwargs["credentials"] == "user":
-            return current_user.name, self.get_password(current_user.password)
-        else:
-            return kwargs["username"], kwargs["password"]

@@ -120,6 +120,11 @@ class BaseController:
     def counters(self, property, model):
         return Counter(v for v, in db.query(model, property=property, rbac=None))
 
+    def create_view_object(self, type, view_id, **kwargs):
+        node = db.factory(type, view=view_id, **kwargs)
+        db.session.flush()
+        return {"time": self.get_time(), "node": node.serialized}
+
     def database_deletion(self, **kwargs):
         db.delete_all(*kwargs["deletion_types"])
 
@@ -128,6 +133,11 @@ class BaseController:
 
     def delete_instance(self, model, instance_id):
         return db.delete(model, id=instance_id)
+
+    def delete_view_selection(self, selection):
+        for instance_id in selection:
+            db.delete("view_object", id=instance_id)
+        return self.get_time()
 
     def edit_file(self, filepath):
         try:
@@ -249,6 +259,15 @@ class BaseController:
 
     def get_cluster_status(self):
         return [server.status for server in db.fetch_all("server")]
+
+    def get_credentials(self, device, **kwargs):
+        if kwargs["credentials"] == "device":
+            credentials = device.get_credentials("any")
+            return credentials.username, self.get_password(credentials.password)
+        elif kwargs["credentials"] == "user":
+            return current_user.name, self.get_password(current_user.password)
+        else:
+            return kwargs["username"], kwargs["password"]
 
     def get_device_logs(self, device_id):
         device_logs = [

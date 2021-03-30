@@ -38,13 +38,12 @@ except ImportError as exc:
 
 try:
     from scrapli import Scrapli
-
     CORE_PLATFORM_MAP = {driver: driver for driver in Scrapli.CORE_PLATFORM_MAP}
 except ImportError as exc:
     CORE_PLATFORM_MAP = {"cisco_iosxe": "cisco_iosxe"}
     warn(f"Couldn't import scrapli module ({exc})")
 
-from eNMS.controller import controller
+from eNMS.custom import CustomApp
 from eNMS.database import db
 from eNMS.models import models, model_properties
 from eNMS.setup import database, logging, properties, rbac, settings
@@ -112,7 +111,8 @@ class App:
     configuration_timestamps = ("status", "update", "failure", "runtime", "duration")
 
     def __init__(self):
-        controller.pre_init()
+        self.custom_app = CustomApp(self)
+        self.custom_app.pre_init()
         self.settings = settings
         self.properties = properties
         self.database = database
@@ -133,7 +133,7 @@ class App:
         self.init_redis()
         self.init_scheduler()
         self.init_connection_pools()
-        controller.post_init()
+        self.custom_app.post_init()
 
     def configure_server_id(self):
         db.factory(

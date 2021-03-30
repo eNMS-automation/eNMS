@@ -23,11 +23,12 @@ from tarfile import open as open_tar
 from time import ctime
 from traceback import format_exc
 
+from eNMS import app
 from eNMS.database import db
 from eNMS.models import models, model_properties, relationships
 
 
-class AdministrationController:
+class BaseController:
     def add_instances_in_bulk(self, **kwargs):
         target = db.fetch(kwargs["relation_type"], id=kwargs["relation_id"])
         if target.type == "pool" and not target.manually_defined:
@@ -66,7 +67,7 @@ class AdministrationController:
             success = user and user_password and verify(password, user_password)
             return user if success else False
         else:
-            response = getattr(self, f"{method}_authentication")(user, name, password)
+            response = getattr(app.custom_app, f"{method}_authentication")(user, name, password)
             if not response:
                 return False
             elif not user:

@@ -49,6 +49,26 @@ class AdministrationController(BaseController):
                 db.session.commit()
             return user
 
+    def compare(self, type, id, v1, v2, context_lines):
+        if type in ("result", "device_result"):
+            first = self.str_dict(getattr(db.fetch("result", id=v1), "result"))
+            second = self.str_dict(getattr(db.fetch("result", id=v2), "result"))
+        else:
+            device = db.fetch("device", id=id)
+            result1, v1 = self.get_git_network_data(device.name, v1)
+            result2, v2 = self.get_git_network_data(device.name, v2)
+            first, second = result1[type], result2[type]
+        return "\n".join(
+            unified_diff(
+                first.splitlines(),
+                second.splitlines(),
+                fromfile=f"V1 ({v1})",
+                tofile=f"V2 ({v2})",
+                lineterm="",
+                n=int(context_lines),
+            )
+        )
+
     def database_deletion(self, **kwargs):
         db.delete_all(*kwargs["deletion_types"])
 
@@ -222,6 +242,19 @@ class AdministrationController(BaseController):
                 pool.compute_pool()
         self.log("info", status)
         return status
+
+    def multiselect_filtering(self, model, **params):
+        table = models[model]
+        results = db.query(model).filter(table.name.contains(params.get("term")))
+        return {
+            "items": [
+                {"text": result.ui_name, "id": str(result.id)}
+                for result in results.limit(10)
+                .offset((int(params["page"]) - 1) * 10)
+                .all()
+            ],
+            "total_count": results.count(),
+        }
 
     def import_service(self, archive):
         service_name = archive.split(".")[0]

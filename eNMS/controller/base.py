@@ -94,16 +94,6 @@ class BaseController:
             },
         )
 
-    def contains_set(self, input):
-        if isinstance(input, set):
-            return True
-        elif isinstance(input, list):
-            return any(self.contains_set(x) for x in input)
-        elif isinstance(input, dict):
-            return any(self.contains_set(x) for x in input.values())
-        else:
-            return False
-
     def create_admin_user(self):
         admin_user = models["user"](name="admin", is_admin=True)
         db.session.add(admin_user)

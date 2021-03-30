@@ -106,6 +106,16 @@ class DictField(StringField):
         self.json_only = kwargs.pop("json_only", False)
         super().__init__(*args, **kwargs)
 
+    def contains_set(self, input):
+        if isinstance(input, set):
+            return True
+        elif isinstance(input, list):
+            return any(self.contains_set(x) for x in input)
+        elif isinstance(input, dict):
+            return any(self.contains_set(x) for x in input.values())
+        else:
+            return False
+
     def pre_validate(self, form):
         invalid_dict, invalid_json = False, False
         try:
@@ -122,7 +132,7 @@ class DictField(StringField):
             raise ValidationError("Invalid dictionary syntax.")
         if not isinstance(result, dict) and not self.json_only:
             raise ValidationError("This field only accepts dictionaries.")
-        if app.contains_set(result):
+        if self.contains_set(result):
             raise ValidationError("Sets are not allowed.")
         return True
 

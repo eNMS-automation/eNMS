@@ -98,7 +98,7 @@ class InventoryController:
         device = db.fetch("device", id=device_id)
         return {
             property: app.custom.parse_configuration_property(device, property)
-            for property in self.configuration_properties
+            for property in app.configuration_properties
         }
 
     def get_session_log(self, session_id):
@@ -143,9 +143,9 @@ class InventoryController:
                 for obj_index, obj in enumerate(db.fetch_all(obj_type), 1):
                     value = getattr(obj, property)
                     if type(value) == bytes:
-                        value = str(self.decrypt(value), "utf-8")
+                        value = str(app.decrypt(value), "utf-8")
                     sheet.write(obj_index, index, str(value))
-        workbook.save(self.path / "files" / "spreadsheets" / filename)
+        workbook.save(app.path / "files" / "spreadsheets" / filename)
 
     def topology_import(self, file):
         book = open_workbook(file_contents=file.read())
@@ -171,7 +171,7 @@ class InventoryController:
             db.session.commit()
         for pool in db.fetch_all("pool"):
             pool.compute_pool()
-        self.log("info", status)
+        app.log("info", status)
         return status
 
     def import_topology(self, **kwargs):
@@ -185,7 +185,7 @@ class InventoryController:
     def save_view_positions(self, **kwargs):
         for node_id, position in kwargs.items():
             db.factory("view_object", id=node_id, **position)
-        return self.get_time()
+        return app.get_time()
 
     def update_pool(self, pool_id):
         db.fetch("pool", id=int(pool_id), rbac="edit").compute_pool()

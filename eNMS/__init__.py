@@ -16,6 +16,7 @@ from logging import getLogger, error, info
 from napalm._SUPPORTED_DRIVERS import SUPPORTED_DRIVERS
 from netmiko.ssh_dispatcher import CLASS_MAPPER, FILE_TRANSFER_MAP
 from os import getenv
+from passlib.hash import argon2
 from pathlib import Path
 from redis import Redis
 from redis.exceptions import ConnectionError, TimeoutError
@@ -135,6 +136,34 @@ class App:
         self.init_scheduler()
         self.init_connection_pools()
         self.custom.post_init()
+
+    def authenticate_user(self, **kwargs):
+        name, password = kwargs["username"], kwargs["password"]
+        if not name or not password:
+            return False
+        user = db.get_user(name)
+        default_method = self.settings["authentication"]["default"]
+        user_method = getattr(user, "authentication", default_method)
+        method = kwargs.get("authentication_method", user_method)
+        if method not in self.settings["authentication"]["methods"]:
+            return False
+        elif method == "database":
+            if not user:
+                return False
+            hash = self.settings["security"]["hash_user_passwords"]
+            verify = argon2.verify if hash else str.__eq__
+            user_password = self.get_password(user.password)
+            success = user and user_password and verify(password, user_password)
+            return user if success else False
+        else:
+            authentication_function = getattr(app.custom, f"{method}_authentication")
+            response = authentication_function(user, name, password)
+            if not response:
+                return False
+            elif not user:
+                user = db.factory("user", authentication=method, **response)
+                db.session.commit()
+            return user
 
     def configure_server_id(self):
         db.factory(

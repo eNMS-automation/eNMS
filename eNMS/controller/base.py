@@ -88,14 +88,6 @@ class BaseController:
         self.init_connection_pools()
         self.post_init()
 
-    def init_encryption(self):
-        self.fernet_encryption = getenv("FERNET_KEY")
-        if self.fernet_encryption:
-            fernet = Fernet(self.fernet_encryption)
-            self.encrypt, self.decrypt = fernet.encrypt, fernet.decrypt
-        else:
-            self.encrypt, self.decrypt = b64encode, b64decode
-
     def detect_cli(self):
         try:
             return get_current_context().info_name == "flask"
@@ -107,6 +99,10 @@ class BaseController:
             password = str.encode(password)
         return self.encrypt(password)
 
+    def fetch_version(self):
+        with open(self.path / "package.json") as package_file:
+            self.version = load(package_file)["version"]
+
     def get_password(self, password):
         if not password:
             return
@@ -114,7 +110,10 @@ class BaseController:
             password = str.encode(password)
         return str(self.decrypt(password), "utf-8")
 
-    def initialize_database(self):
+    def get_time(self):
+        return str(datetime.now())
+
+    def init_database(self):
         self.init_plugins()
         self.init_services()
         db.private_properties_set |= set(sum(db.private_properties.values(), []))
@@ -135,15 +134,19 @@ class BaseController:
         self.reset_run_status()
         db.session.commit()
 
+    def init_encryption(self):
+        self.fernet_encryption = getenv("FERNET_KEY")
+        if self.fernet_encryption:
+            fernet = Fernet(self.fernet_encryption)
+            self.encrypt, self.decrypt = fernet.encrypt, fernet.decrypt
+        else:
+            self.encrypt, self.decrypt = b64encode, b64decode
+
     def reset_run_status(self):
         for run in db.fetch("run", all_matches=True, allow_none=True, status="Running"):
             run.status = "Aborted (RELOAD)"
             run.service.status = "Idle"
         db.session.commit()
-
-    def fetch_version(self):
-        with open(self.path / "package.json") as package_file:
-            self.version = load(package_file)["version"]
 
     def configure_server_id(self):
         db.factory(
@@ -354,9 +357,6 @@ class BaseController:
                 },
             )
         return logger_settings
-
-    def get_time(self):
-        return str(datetime.now())
 
     def send_email(
         self,

@@ -415,30 +415,3 @@ class BaseController:
 
     def strip_all(self, input):
         return input.translate(str.maketrans("", "", f"{punctuation} "))
-
-    def update_database_configurations_from_git(self):
-        for dir in scandir(self.path / "network_data"):
-            device = db.fetch("device", allow_none=True, name=dir.name)
-            timestamp_path = Path(dir.path) / "timestamps.json"
-            if not device:
-                continue
-            try:
-                with open(timestamp_path) as file:
-                    timestamps = load(file)
-            except Exception:
-                timestamps = {}
-            for property in self.configuration_properties:
-                for timestamp, value in timestamps.get(property, {}).items():
-                    setattr(device, f"last_{property}_{timestamp}", value)
-                filepath = Path(dir.path) / property
-                if not filepath.exists():
-                    continue
-                with open(filepath) as file:
-                    setattr(device, property, file.read())
-        db.session.commit()
-        for pool in db.fetch_all("pool"):
-            if any(
-                getattr(pool, f"device_{property}")
-                for property in self.configuration_properties
-            ):
-                pool.compute_pool()

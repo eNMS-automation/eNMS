@@ -539,6 +539,41 @@ class BaseController:
             session_query.delete(synchronize_session=False)
             db.session.commit()
 
+    @staticmethod
+    def run(service, **kwargs):
+        run_kwargs = {
+            key: kwargs.pop(key)
+            for key in (
+                "trigger",
+                "creator",
+                "start_services",
+                "runtime",
+                "task",
+                "target_devices",
+                "target_pools",
+            )
+            if kwargs.get(key)
+        }
+        restart_run = db.fetch(
+            "run",
+            allow_none=True,
+            runtime=kwargs.get("restart_runtime"),
+        )
+        if restart_run:
+            run_kwargs["restart_run"] = restart_run
+        service = db.fetch("service", id=service)
+        service.status = "Running"
+        initial_payload = kwargs.get("initial_payload", service.initial_payload)
+        if service.type == "workflow" and service.superworkflow:
+            run_kwargs["placeholder"] = run_kwargs["start_service"] = service.id
+            service = service.superworkflow
+            initial_payload.update(service.initial_payload)
+        else:
+            run_kwargs["start_service"] = service.id
+        run = db.factory("run", service=service.id, commit=True, **run_kwargs)
+        run.properties = kwargs
+        return run.run({**initial_payload, **kwargs})
+
     def run_debug_code(self, **kwargs):
         result = StringIO()
         with redirect_stdout(result):
@@ -549,10 +584,53 @@ class BaseController:
                 return format_exc()
         return result.getvalue()
 
+    def run_service(self, path, **kwargs):
+        if isinstance(kwargs.get("start_services"), str):
+            kwargs["start_services"] = kwargs["start_services"].split("-")
+        service_id = str(path).split(">")[-1]
+        for property in ("user", "csrf_token", "form_type"):
+            kwargs.pop(property, None)
+        kwargs["creator"] = getattr(current_user, "name", "")
+        service = db.fetch("service", id=service_id, rbac="run")
+        kwargs["runtime"] = runtime = app.get_time()
+        if kwargs.get("asynchronous", True):
+            Thread(target=self.run, args=(service_id,), kwargs=kwargs).start()
+        else:
+            service.run(runtime=runtime)
+        return {
+            "service": service.serialized,
+            "runtime": runtime,
+            "user": current_user.name,
+        }
+
+    def run_service_on_targets(self, **kwargs):
+        return self.run_service(
+            kwargs["service"],
+            **{f"target_{kwargs['type']}s": kwargs["targets"].split("-")},
+        )
+
     def save_file(self, filepath, **kwargs):
         if kwargs.get("file_content"):
             with open(Path(filepath.replace(">", "/")), "w") as file:
                 return file.write(kwargs["file_content"])
+
+    def save_positions(self, workflow_id, **kwargs):
+        now, old_position = app.get_time(), None
+        workflow = db.fetch("workflow", allow_none=True, id=workflow_id, rbac="edit")
+        if not workflow:
+            return
+        for id, position in kwargs.items():
+            new_position = [position["x"], position["y"]]
+            if "-" not in id:
+                service = db.fetch("service", id=id, rbac=None)
+                old_position = service.positions.get(workflow.name)
+                service.positions[workflow.name] = new_position
+            elif id in workflow.labels:
+                old_position = workflow.labels[id].pop("positions")
+                workflow.labels[id] = {"positions": new_position, **workflow.labels[id]}
+            if new_position != old_position:
+                workflow.last_modified = now
+        return now
 
     def save_settings(self, **kwargs):
         app.settings = kwargs["settings"]

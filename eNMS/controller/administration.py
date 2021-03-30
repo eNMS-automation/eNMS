@@ -103,6 +103,23 @@ class BaseController:
             )
         )
 
+    def count_models(self):
+        return {
+            "counters": {
+                model: db.query(model, rbac=None)
+                .with_entities(models[model].id)
+                .count()
+                for model in properties["dashboard"]
+            },
+            "properties": {
+                model: self.counters(properties["dashboard"][model][0], model)
+                for model in properties["dashboard"]
+            },
+        }
+
+    def counters(self, property, model):
+        return Counter(v for v, in db.query(model, property=property, rbac=None))
+
     def database_deletion(self, **kwargs):
         db.delete_all(*kwargs["deletion_types"])
 
@@ -233,6 +250,13 @@ class BaseController:
     def get_cluster_status(self):
         return [server.status for server in db.fetch_all("server")]
 
+    def get_device_network_data(self, device_id):
+        device = db.fetch("device", id=device_id)
+        return {
+            property: app.custom.parse_configuration_property(device, property)
+            for property in app.configuration_properties
+        }
+
     def get_exported_services(self):
         return [f for f in listdir(app.path / "files" / "services") if ".tgz" in f]
 
@@ -251,11 +275,29 @@ class BaseController:
             app.log("error", f"Git pull failed ({str(exc)})")
         self.update_database_configurations_from_git()
 
+    def get_git_network_data(self, device_name, hash):
+        commit, result = Repo(self.path / "network_data").commit(hash), {}
+        device = db.fetch("device", name=device_name)
+        for property in self.configuration_properties:
+            try:
+                file = commit.tree / device_name / property
+                with BytesIO(file.data_stream.read()) as f:
+                    value = f.read().decode("utf-8")
+                result[property] = app.custom.parse_configuration_property(
+                    device, property, value
+                )
+            except KeyError:
+                result[property] = ""
+        return result, commit.committed_datetime
+
     def get_migration_folders(self):
         return listdir(app.path / "files" / "migrations")
 
     def get_properties(self, model, id):
         return db.fetch(model, id=id).get_properties()
+
+    def get_session_log(self, session_id):
+        return db.fetch("session", id=session_id).content
 
     def get_tree_files(self, path):
         if path == "root":
@@ -275,6 +317,14 @@ class BaseController:
                 "type": "folder" if file.is_dir() else "file",
             }
             for file in Path(path).iterdir()
+        ]
+
+    def get_visualization_pools(self, view):
+        return [
+            pool.base_properties
+            for pool in db.fetch_all("pool")
+            if (view == "force_directed_view" and pool.devices and pool.links)
+            or (view == "geographical_view" and (pool.devices or pool.links))
         ]
 
     def load_debug_snippets(self):

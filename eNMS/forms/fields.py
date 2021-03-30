@@ -16,8 +16,6 @@ from wtforms.validators import ValidationError
 from wtforms.widgets import html_params
 from wtforms.widgets.core import HTMLString
 
-from eNMS import app
-
 
 class FieldMixin:
     def __init__(self, *args, **kwargs):

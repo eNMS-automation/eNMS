@@ -5,6 +5,7 @@ from traceback import format_exc
 from uuid import getnode
 
 from eNMS import app
+from eNMS.controller import controller
 from eNMS.database import db
 
 
@@ -41,7 +42,7 @@ class RestApi:
     def __init__(self):
         for endpoint in self.allowed_endpoints:
             self.rest_endpoints["POST"][endpoint] = endpoint
-            setattr(self, endpoint, getattr(app, endpoint))
+            setattr(self, endpoint, getattr(controller, endpoint))
 
     def delete_instance(self, model, name):
         return db.delete(model, name=name)

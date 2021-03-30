@@ -1,7 +1,5 @@
 from collections import defaultdict
 from flask_login import current_user
-from napalm._SUPPORTED_DRIVERS import SUPPORTED_DRIVERS
-from netmiko.ssh_dispatcher import CLASS_MAPPER, FILE_TRANSFER_MAP
 from operator import attrgetter, itemgetter
 from pathlib import Path
 from re import search, sub
@@ -9,59 +7,11 @@ from threading import Thread
 from uuid import uuid4
 from warnings import warn
 
-try:
-    from scrapli import Scrapli
-
-    CORE_PLATFORM_MAP = {driver: driver for driver in Scrapli.CORE_PLATFORM_MAP}
-except ImportError as exc:
-    CORE_PLATFORM_MAP = {"cisco_iosxe": "cisco_iosxe"}
-    warn(f"Couldn't import scrapli module ({exc})")
-
-from eNMS.controller.base import BaseController
 from eNMS.database import db
 from eNMS.models import models
 
 
-class AutomationController(BaseController):
-
-    NETMIKO_DRIVERS = sorted((driver, driver) for driver in CLASS_MAPPER)
-    NETMIKO_SCP_DRIVERS = sorted((driver, driver) for driver in FILE_TRANSFER_MAP)
-    NAPALM_DRIVERS = sorted((driver, driver) for driver in SUPPORTED_DRIVERS[1:])
-    NAPALM_GETTERS = (
-        ("get_arp_table", "ARP table"),
-        ("get_interfaces_counters", "Interfaces counters"),
-        ("get_facts", "Facts"),
-        ("get_environment", "Environment"),
-        ("get_config", "Configuration"),
-        ("get_interfaces", "Interfaces"),
-        ("get_interfaces_ip", "Interface IP"),
-        ("get_lldp_neighbors", "LLDP neighbors"),
-        ("get_lldp_neighbors_detail", "LLDP neighbors detail"),
-        ("get_mac_address_table", "MAC address"),
-        ("get_ntp_servers", "NTP servers"),
-        ("get_ntp_stats", "NTP statistics"),
-        ("get_optics", "Transceivers"),
-        ("get_snmp_information", "SNMP"),
-        ("get_users", "Users"),
-        ("get_network_instances", "Network instances (VRF)"),
-        ("get_ntp_peers", "NTP peers"),
-        ("get_bgp_config", "BGP configuration"),
-        ("get_bgp_neighbors", "BGP neighbors"),
-        ("get_ipv6_neighbors_table", "IPv6"),
-        ("is_alive", "Is alive"),
-    )
-    SCRAPLI_DRIVERS = CORE_PLATFORM_MAP
-
-    connections_cache = {
-        library: defaultdict(dict) for library in ("netmiko", "napalm", "scrapli")
-    }
-    service_run_count = defaultdict(int)
-    run_targets = {}
-    run_db = defaultdict(dict)
-    run_logs = defaultdict(lambda: defaultdict(list))
-    run_stop = defaultdict(bool)
-    run_instances = {}
-
+class AutomationController:
     def add_edge(self, workflow_id, subtype, source, destination):
         now = self.get_time()
         workflow = db.fetch("workflow", id=workflow_id, rbac="edit")

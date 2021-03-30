@@ -6,7 +6,7 @@ from eNMS.controller.custom import CustomController
 from eNMS.controller.inventory import InventoryController
 
 
-class App(
+class Controller(
     AdministrationController,
     AutomationController,
     CustomController,
@@ -20,3 +20,6 @@ class App(
             return func(*args, **kwargs)
 
         return wrapper
+
+
+controller = Controller()

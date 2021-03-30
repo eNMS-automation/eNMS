@@ -23,12 +23,11 @@ from tarfile import open as open_tar
 from time import ctime
 from traceback import format_exc
 
-from eNMS.controller.base import BaseController
 from eNMS.database import db
 from eNMS.models import models, model_properties, relationships
 
 
-class AdministrationController(BaseController):
+class AdministrationController:
     def add_instances_in_bulk(self, **kwargs):
         target = db.fetch(kwargs["relation_type"], id=kwargs["relation_id"])
         if target.type == "pool" and not target.manually_defined:

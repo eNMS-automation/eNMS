@@ -23,6 +23,7 @@ from traceback import format_exc
 from werkzeug.exceptions import Forbidden
 
 from eNMS import app
+from eNMS.controller import controller
 from eNMS.database import db
 from eNMS.forms import form_classes, form_properties
 from eNMS.forms.administration import LoginForm
@@ -61,7 +62,7 @@ class Server(Flask):
 
     def register_plugins(self):
         for plugin in app.plugins.values():
-            plugin["module"].Plugin(self, app, db, **plugin["settings"])
+            plugin["module"].Plugin(self, controller, db, **plugin["settings"])
 
     def register_extensions(self):
         self.csrf = CSRFProtect()
@@ -384,7 +385,7 @@ class Server(Flask):
             else:
                 kwargs = request.form
             with db.session_scope():
-                return jsonify(getattr(app, endpoint)(*args, **kwargs))
+                return jsonify(getattr(controller, endpoint)(*args, **kwargs))
 
         self.register_blueprint(blueprint)
 

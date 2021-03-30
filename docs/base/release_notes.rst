@@ -48,6 +48,12 @@ auto safe restart code that uses it must be updated accordingly.
 - Store and commit web SSH session content in backend instead of relying on send beacon mechanism and
 onbeforeunload callback so that the saving of a session does not depend on user behavior
 
+- Separate controller (handling HTTP POST requests) from main application (gluing everything together)
+Impact:
+* In plugins, 
+* the "custom" file that contains pre_init, post_init, and the authentication custom code no longer inherits
+from the controller
+
 MIGRATION:
 
 - In all services,

@@ -8,19 +8,12 @@ from xlrd import open_workbook
 from xlrd.biffh import XLRDError
 from xlwt import Workbook
 
-
-from eNMS.controller.base import BaseController
 from eNMS.database import db
 from eNMS.models import models, model_properties, property_types
 from eNMS.setup import properties
 
 
-class InventoryController(BaseController):
-
-    ssh_sessions = {}
-    configuration_properties = {"configuration": "Configuration"}
-    configuration_timestamps = ("status", "update", "failure", "runtime", "duration")
-
+class InventoryController:
     def add_objects_to_view(self, view_id, **kwargs):
         result = {"update_time": self.get_time()}
         for model in ("node", "line"):

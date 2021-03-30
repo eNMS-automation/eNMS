@@ -99,6 +99,16 @@ class BaseController:
             },
         )
 
+    def contains_set(self, input):
+        if isinstance(input, set):
+            return True
+        elif isinstance(input, list):
+            return any(self.contains_set(x) for x in input)
+        elif isinstance(input, dict):
+            return any(self.contains_set(x) for x in input.values())
+        else:
+            return False
+
     def create_admin_user(self):
         admin_user = models["user"](name="admin", is_admin=True)
         db.session.add(admin_user)
@@ -298,32 +308,20 @@ class BaseController:
                     },
                 )
 
-    def reset_run_status(self):
-        for run in db.fetch("run", all_matches=True, allow_none=True, status="Running"):
-            run.status = "Aborted (RELOAD)"
-            run.service.status = "Idle"
-        db.session.commit()
-
-    def update_settings(self, old, new):
-        for key, value in new.items():
-            if key not in old:
-                old[key] = value
-            else:
-                old_value = old[key]
-                if isinstance(old_value, list):
-                    old_value.extend(value)
-                elif isinstance(old_value, dict):
-                    self.update_settings(old_value, value)
-                else:
-                    old[key] = value
-
-        return old
-
-    def redis(self, operation, *args, **kwargs):
-        try:
-            return getattr(self.redis_queue, operation)(*args, **kwargs)
-        except (ConnectionError, TimeoutError) as exc:
-            self.log("error", f"Redis Queue Unreachable ({exc})", change_log=False)
+    def log(self, severity, content, user=None, change_log=True, logger="root"):
+        logger_settings = self.logging["loggers"].get(logger, {})
+        if logger:
+            getattr(getLogger(logger), severity)(content)
+        if change_log or logger and logger_settings.get("change_log"):
+            db.factory(
+                "changelog",
+                **{
+                    "severity": severity,
+                    "content": content,
+                    "user": user or getattr(current_user, "name", ""),
+                },
+            )
+        return logger_settings
 
     def log_queue(self, runtime, service, log=None, mode="add", start_line=0):
         if self.redis_queue:
@@ -343,20 +341,17 @@ class BaseController:
                 log = full_log[start_line:]
         return log
 
-    def log(self, severity, content, user=None, change_log=True, logger="root"):
-        logger_settings = self.logging["loggers"].get(logger, {})
-        if logger:
-            getattr(getLogger(logger), severity)(content)
-        if change_log or logger and logger_settings.get("change_log"):
-            db.factory(
-                "changelog",
-                **{
-                    "severity": severity,
-                    "content": content,
-                    "user": user or getattr(current_user, "name", ""),
-                },
-            )
-        return logger_settings
+    def reset_run_status(self):
+        for run in db.fetch("run", all_matches=True, allow_none=True, status="Running"):
+            run.status = "Aborted (RELOAD)"
+            run.service.status = "Idle"
+        db.session.commit()
+
+    def redis(self, operation, *args, **kwargs):
+        try:
+            return getattr(self.redis_queue, operation)(*args, **kwargs)
+        except (ConnectionError, TimeoutError) as exc:
+            self.log("error", f"Redis Queue Unreachable ({exc})", change_log=False)
 
     def send_email(
         self,
@@ -388,16 +383,6 @@ class BaseController:
         server.sendmail(sender, recipients.split(","), message.as_string())
         server.close()
 
-    def contains_set(self, input):
-        if isinstance(input, set):
-            return True
-        elif isinstance(input, list):
-            return any(self.contains_set(x) for x in input)
-        elif isinstance(input, dict):
-            return any(self.contains_set(x) for x in input.values())
-        else:
-            return False
-
     def str_dict(self, input, depth=0):
         tab = "\t" * depth
         if isinstance(input, list):
@@ -415,3 +400,18 @@ class BaseController:
 
     def strip_all(self, input):
         return input.translate(str.maketrans("", "", f"{punctuation} "))
+
+    def update_settings(self, old, new):
+        for key, value in new.items():
+            if key not in old:
+                old[key] = value
+            else:
+                old_value = old[key]
+                if isinstance(old_value, list):
+                    old_value.extend(value)
+                elif isinstance(old_value, dict):
+                    self.update_settings(old_value, value)
+                else:
+                    old[key] = value
+
+        return old

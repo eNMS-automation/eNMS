@@ -88,6 +88,24 @@ class BaseController:
         self.init_connection_pools()
         self.post_init()
 
+    def configure_server_id(self):
+        db.factory(
+            "server",
+            **{
+                "name": str(getnode()),
+                "description": "Localhost",
+                "ip_address": "0.0.0.0",
+                "status": "Up",
+            },
+        )
+
+    def create_admin_user(self):
+        admin_user = models["user"](name="admin", is_admin=True)
+        db.session.add(admin_user)
+        db.session.commit()
+        if not admin_user.password:
+            admin_user.update(password="admin")
+
     def detect_cli(self):
         try:
             return get_current_context().info_name == "flask"
@@ -112,6 +130,15 @@ class BaseController:
 
     def get_time(self):
         return str(datetime.now())
+
+    def init_connection_pools(self):
+        self.request_session = RequestSession()
+        retry = Retry(**self.settings["requests"]["retries"])
+        for protocol in ("http", "https"):
+            self.request_session.mount(
+                f"{protocol}://",
+                HTTPAdapter(max_retries=retry, **self.settings["requests"]["pool"]),
+            )
 
     def init_database(self):
         self.init_plugins()
@@ -142,29 +169,21 @@ class BaseController:
         else:
             self.encrypt, self.decrypt = b64encode, b64decode
 
-    def reset_run_status(self):
-        for run in db.fetch("run", all_matches=True, allow_none=True, status="Running"):
-            run.status = "Aborted (RELOAD)"
-            run.service.status = "Idle"
-        db.session.commit()
+    def init_forms(self):
+        for file in (self.path / "eNMS" / "forms").glob("**/*.py"):
+            spec = spec_from_file_location(str(file).split("/")[-1][:-3], str(file))
+            spec.loader.exec_module(module_from_spec(spec))
 
-    def configure_server_id(self):
-        db.factory(
-            "server",
-            **{
-                "name": str(getnode()),
-                "description": "Localhost",
-                "ip_address": "0.0.0.0",
-                "status": "Up",
-            },
-        )
-
-    def create_admin_user(self):
-        admin_user = models["user"](name="admin", is_admin=True)
-        db.session.add(admin_user)
-        db.session.commit()
-        if not admin_user.password:
-            admin_user.update(password="admin")
+    def init_logs(self):
+        folder = self.path / "logs"
+        folder.mkdir(parents=True, exist_ok=True)
+        with open(self.path / "setup" / "logging.json", "r") as logging_config:
+            logging_config = load(logging_config)
+        dictConfig(logging_config)
+        for logger, log_level in logging_config["external_loggers"].items():
+            info(f"Changing {logger} log level to '{log_level}'")
+            log_level = getattr(import_module("logging"), log_level.upper())
+            getLogger(logger).setLevel(log_level)
 
     def load_custom_properties(self):
         for model, values in self.properties["custom"].items():
@@ -204,30 +223,11 @@ class BaseController:
                     },
                 )
 
-    def init_logs(self):
-        folder = self.path / "logs"
-        folder.mkdir(parents=True, exist_ok=True)
-        with open(self.path / "setup" / "logging.json", "r") as logging_config:
-            logging_config = load(logging_config)
-        dictConfig(logging_config)
-        for logger, log_level in logging_config["external_loggers"].items():
-            info(f"Changing {logger} log level to '{log_level}'")
-            log_level = getattr(import_module("logging"), log_level.upper())
-            getLogger(logger).setLevel(log_level)
-
-    def init_connection_pools(self):
-        self.request_session = RequestSession()
-        retry = Retry(**self.settings["requests"]["retries"])
-        for protocol in ("http", "https"):
-            self.request_session.mount(
-                f"{protocol}://",
-                HTTPAdapter(max_retries=retry, **self.settings["requests"]["pool"]),
-            )
-
-    def init_forms(self):
-        for file in (self.path / "eNMS" / "forms").glob("**/*.py"):
-            spec = spec_from_file_location(str(file).split("/")[-1][:-3], str(file))
-            spec.loader.exec_module(module_from_spec(spec))
+    def reset_run_status(self):
+        for run in db.fetch("run", all_matches=True, allow_none=True, status="Running"):
+            run.status = "Aborted (RELOAD)"
+            run.service.status = "Idle"
+        db.session.commit()
 
     def init_rbac(self):
         self.rbac = {"pages": [], **rbac}

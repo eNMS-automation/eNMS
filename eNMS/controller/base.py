@@ -340,38 +340,6 @@ class BaseController:
                 log = full_log[start_line:]
         return log
 
-    def update(self, type, **kwargs):
-        try:
-            kwargs.update(
-                {
-                    "last_modified": self.get_time(),
-                    "update_pools": True,
-                    "must_be_new": kwargs.get("id") == "",
-                }
-            )
-            for arg in ("name", "scoped_name"):
-                if arg in kwargs:
-                    kwargs[arg] = kwargs[arg].strip()
-            if kwargs["must_be_new"]:
-                kwargs["creator"] = kwargs["user"] = getattr(current_user, "name", "")
-            instance = db.factory(type, **kwargs)
-            if kwargs.get("copy"):
-                db.fetch(type, id=kwargs["copy"]).duplicate(clone=instance)
-            db.session.flush()
-            return instance.serialized
-        except db.rbac_error:
-            return {"alert": "Error 403 - Operation not allowed."}
-        except Exception as exc:
-            db.session.rollback()
-            if isinstance(exc, IntegrityError):
-                alert = (
-                    f"There is already a {instance.class_type} "
-                    "with the same parameters."
-                )
-                return {"alert": alert}
-            self.log("error", format_exc())
-            return {"alert": str(exc)}
-
     def log(self, severity, content, user=None, change_log=True, logger="root"):
         logger_settings = self.logging["loggers"].get(logger, {})
         if logger:

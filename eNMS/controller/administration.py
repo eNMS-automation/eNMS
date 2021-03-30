@@ -1,24 +1,31 @@
 from collections import defaultdict
 from contextlib import redirect_stdout
 from datetime import datetime
+from difflib import unified_diff
+from flask_login import current_user
+from git import Repo
 from io import StringIO
 from ipaddress import IPv4Network
-from json import dump
+from json import dump, load
 from logging import info
-from os import listdir, makedirs, remove
+from os import listdir, makedirs, remove, scandir
 from os.path import exists, getmtime
 from passlib.hash import argon2
 from pathlib import Path
+from re import compile, error as regex_error
 from requests import get as http_get
 from ruamel import yaml
 from shutil import rmtree
+from sqlalchemy import and_
+from sqlalchemy.exc import IntegrityError
+from sqlalchemy.orm import aliased
 from tarfile import open as open_tar
 from time import ctime
 from traceback import format_exc
 
 from eNMS.controller.base import BaseController
 from eNMS.database import db
-from eNMS.models import models, relationships
+from eNMS.models import models, model_properties, relationships
 
 
 class AdministrationController(BaseController):

@@ -467,38 +467,3 @@ class AutomationController:
     def scheduler_action(self, mode, **kwargs):
         for task_id in self.filtering("task", bulk="id", form=kwargs):
             self.task_action(mode, task_id)
-
-    def search_workflow_services(self, *args, **kwargs):
-        return [
-            "standalone",
-            "shared",
-            *[
-                workflow.name
-                for workflow in db.fetch_all("workflow")
-                if any(
-                    kwargs["str"].lower() in service.scoped_name.lower()
-                    for service in workflow.services
-                )
-            ],
-        ]
-
-    def skip_services(self, workflow_id, service_ids):
-        services = [db.fetch("service", id=id) for id in service_ids.split("-")]
-        workflow = db.fetch("workflow", id=workflow_id)
-        skip = not all(service.skip.get(workflow.name) for service in services)
-        for service in services:
-            service.skip[workflow.name] = skip
-        workflow.last_modified = app.get_time()
-        return {
-            "skip": "skip" if skip else "unskip",
-            "update_time": workflow.last_modified,
-        }
-
-    def stop_workflow(self, runtime):
-        run = db.fetch("run", allow_none=True, runtime=runtime)
-        if run and run.status == "Running":
-            if app.redis_queue:
-                app.redis("set", f"stop/{run.parent_runtime}", "true")
-            else:
-                app.run_stop[run.parent_runtime] = True
-            return True

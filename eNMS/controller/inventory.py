@@ -87,7 +87,7 @@ class InventoryController:
                 file = commit.tree / device_name / property
                 with BytesIO(file.data_stream.read()) as f:
                     value = f.read().decode("utf-8")
-                result[property] = app.custom_app.parse_configuration_property(
+                result[property] = app.custom.parse_configuration_property(
                     device, property, value
                 )
             except KeyError:
@@ -97,7 +97,7 @@ class InventoryController:
     def get_device_network_data(self, device_id):
         device = db.fetch("device", id=device_id)
         return {
-            property: app.custom_app.parse_configuration_property(device, property)
+            property: app.custom.parse_configuration_property(device, property)
             for property in self.configuration_properties
         }
 

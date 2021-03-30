@@ -14,7 +14,6 @@ except ImportError as exc:
 
 
 class CustomApp:
-
     def __init__(self, app):
         self.app = app
 

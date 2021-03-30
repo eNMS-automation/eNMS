@@ -67,7 +67,9 @@ class BaseController:
             success = user and user_password and verify(password, user_password)
             return user if success else False
         else:
-            response = getattr(app.custom_app, f"{method}_authentication")(user, name, password)
+            response = getattr(app.custom, f"{method}_authentication")(
+                user, name, password
+            )
             if not response:
                 return False
             elif not user:

@@ -38,6 +38,7 @@ except ImportError as exc:
 
 try:
     from scrapli import Scrapli
+
     CORE_PLATFORM_MAP = {driver: driver for driver in Scrapli.CORE_PLATFORM_MAP}
 except ImportError as exc:
     CORE_PLATFORM_MAP = {"cisco_iosxe": "cisco_iosxe"}
@@ -111,8 +112,8 @@ class App:
     configuration_timestamps = ("status", "update", "failure", "runtime", "duration")
 
     def __init__(self):
-        self.custom_app = CustomApp(self)
-        self.custom_app.pre_init()
+        self.custom = CustomApp(self)
+        self.custom.pre_init()
         self.settings = settings
         self.properties = properties
         self.database = database
@@ -133,7 +134,7 @@ class App:
         self.init_redis()
         self.init_scheduler()
         self.init_connection_pools()
-        self.custom_app.post_init()
+        self.custom.post_init()
 
     def configure_server_id(self):
         db.factory(

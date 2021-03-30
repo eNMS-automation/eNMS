@@ -173,29 +173,3 @@ class InventoryController:
             pool.compute_pool()
         app.log("info", status)
         return status
-
-    def import_topology(self, **kwargs):
-        file = kwargs["file"]
-        if kwargs["replace"]:
-            db.delete_all("device")
-        result = self.topology_import(file)
-        info("Inventory import: Done.")
-        return result
-
-    def save_view_positions(self, **kwargs):
-        for node_id, position in kwargs.items():
-            db.factory("view_object", id=node_id, **position)
-        return app.get_time()
-
-    def update_pool(self, pool_id):
-        db.fetch("pool", id=int(pool_id), rbac="edit").compute_pool()
-
-    def update_all_pools(self):
-        for pool in db.fetch_all("pool"):
-            pool.compute_pool()
-
-    def view_filtering(self, **kwargs):
-        return {
-            f"{model}s": self.filtering(model, **kwargs[model], bulk="view_properties")
-            for model, form in kwargs.items()
-        }

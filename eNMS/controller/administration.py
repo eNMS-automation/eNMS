@@ -390,6 +390,14 @@ class BaseController:
         rmtree(path / service_name, ignore_errors=True)
         return status
 
+    def import_topology(self, **kwargs):
+        file = kwargs["file"]
+        if kwargs["replace"]:
+            db.delete_all("device")
+        result = self.topology_import(file)
+        info("Inventory import: Done.")
+        return result
+
     def objectify(self, model, instance):
         for property, relation in relationships[model].items():
             if property not in instance:
@@ -448,6 +456,11 @@ class BaseController:
             with open(app.path / "setup" / "settings.json", "w") as file:
                 dump(kwargs["settings"], file, indent=2)
 
+    def save_view_positions(self, **kwargs):
+        for node_id, position in kwargs.items():
+            db.factory("view_object", id=node_id, **position)
+        return app.get_time()
+
     def scan_cluster(self, **kwargs):
         protocol = app.settings["cluster"]["scan_protocol"]
         for ip_address in IPv4Network(app.settings["cluster"]["scan_subnet"]):
@@ -501,6 +514,10 @@ class BaseController:
             app.log("error", format_exc())
             return {"alert": str(exc)}
 
+    def update_all_pools(self):
+        for pool in db.fetch_all("pool"):
+            pool.compute_pool()
+
     def update_database_configurations_from_git(self):
         for dir in scandir(app.path / "network_data"):
             device = db.fetch("device", allow_none=True, name=dir.name)
@@ -528,12 +545,21 @@ class BaseController:
             ):
                 pool.compute_pool()
 
+    def upload_files(self, **kwargs):
+        file = kwargs["file"]
+        file.save(f"{kwargs['folder']}/{file.filename}")
+
+    def update_pool(self, pool_id):
+        db.fetch("pool", id=int(pool_id), rbac="edit").compute_pool()
+
     def update_rbac(self, *instances):
         for instance in instances:
             if instance.type != "user":
                 continue
             instance.update_rbac()
 
-    def upload_files(self, **kwargs):
-        file = kwargs["file"]
-        file.save(f"{kwargs['folder']}/{file.filename}")
+    def view_filtering(self, **kwargs):
+        return {
+            f"{model}s": self.filtering(model, **kwargs[model], bulk="view_properties")
+            for model, form in kwargs.items()
+        }

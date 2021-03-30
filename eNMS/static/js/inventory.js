@@ -424,7 +424,7 @@ function showImportTopologyPanel() {
 function exportTopology() {
   notify("Topology export starting...", "success", 5, true);
   call({
-    url: "/export_topology",
+    url: "/topology_export",
     form: "excel_export-form",
     callback: function () {
       notify("Topology successfully exported.", "success", 5, true);

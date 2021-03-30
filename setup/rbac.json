@@ -181,7 +181,7 @@
     "/desktop_connection": "access",
     "/duplicate_workflow": "access",
     "/export_service": "access",
-    "/export_topology": "access",
+    "/topology_export": "access",
     "/delete_file": "access",
     "/edit_file": "access",
     "/filtering": "all",

@@ -129,7 +129,7 @@ class InventoryController:
     def counters(self, property, model):
         return Counter(v for v, in db.query(model, property=property, rbac=None))
 
-    def export_topology(self, **kwargs):
+    def topology_export(self, **kwargs):
         workbook = Workbook()
         filename = kwargs["export_filename"]
         if "." not in filename:

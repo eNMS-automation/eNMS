@@ -60,6 +60,7 @@ MIGRATION:
 def job(self, run, payload, device): -> def job(self, run, device):
 - Check that all "operator" property in pool.yaml are set to "all"
 - In all plugins, "monitor_requests" should be renamed to "process_requests"
+- "export_topology" endpoint should be renamed "topology_export" in migration files
 
 To be tested:
 - Refactoring of the run mechanism:

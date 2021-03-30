@@ -154,7 +154,7 @@ class RestApi:
             )
             return result, 206 if "Partial" in result else 200
         else:
-            controller.export_topology(**kwargs)
+            controller.topology_export(**kwargs)
             return "Topology Export successfully executed."
 
     def update_instance(self, model, **data):

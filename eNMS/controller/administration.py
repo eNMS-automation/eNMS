@@ -350,8 +350,57 @@ class BaseController:
     def get_properties(self, model, id):
         return db.fetch(model, id=id).get_properties()
 
+    def get_runtimes(self, type, id):
+        results = db.fetch("result", allow_none=True, all_matches=True, service_id=id)
+        return sorted(set((result.parent_runtime,) * 2 for result in results))
+
+    def get_service_logs(self, service, runtime, start_line):
+        log_instance = db.fetch(
+            "service_log", allow_none=True, runtime=runtime, service_id=service
+        )
+        number_of_lines = 0
+        if log_instance:
+            logs = log_instance.content
+        else:
+            lines = (
+                app.log_queue(runtime, service, start_line=int(start_line), mode="get")
+                or []
+            )
+            number_of_lines, logs = len(lines), "\n".join(lines)
+        return {
+            "logs": logs,
+            "refresh": not log_instance,
+            "line": int(start_line) + number_of_lines,
+        }
+
+    def get_service_state(self, path, runtime=None):
+        service_id, state = path.split(">")[-1], None
+        service = db.fetch("service", id=service_id, allow_none=True)
+        if not service:
+            raise db.rbac_error
+        runs = db.query("run").filter(models["run"].services.any(id=service_id)).all()
+        if runtime != "normal" and runs:
+            if runtime == "latest":
+                run = sorted(runs, key=attrgetter("runtime"), reverse=True)[0]
+            else:
+                run = db.fetch("run", parent_runtime=runtime)
+            state = run.get_state()
+        return {
+            "service": service.to_dict(include=["services", "edges", "superworkflow"]),
+            "runtimes": sorted(set((r.parent_runtime, r.creator) for r in runs)),
+            "state": state,
+            "runtime": runtime,
+        }
+
     def get_session_log(self, session_id):
         return db.fetch("session", id=session_id).content
+
+    def get_top_level_workflows(self):
+        return [
+            workflow.base_properties
+            for workflow in db.fetch_all("workflow")
+            if not workflow.workflows
+        ]
 
     def get_tree_files(self, path):
         if path == "root":

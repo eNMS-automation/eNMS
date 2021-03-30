@@ -3,6 +3,7 @@ from contextlib import redirect_stdout
 from datetime import datetime
 from difflib import unified_diff
 from flask_login import current_user
+from functools import wraps
 from git import Repo
 from io import BytesIO, StringIO
 from ipaddress import IPv4Network
@@ -33,7 +34,16 @@ from eNMS.models import models, model_properties, property_types, relationships
 from eNMS.setup import properties
 
 
-class BaseController:
+class Controller:
+    def _register_endpoint(self, func):
+        setattr(self, func.__name__, func)
+
+        @wraps(func)
+        def wrapper(*args, **kwargs):
+            return func(*args, **kwargs)
+
+        return wrapper
+
     def add_edge(self, workflow_id, subtype, source, destination):
         now = app.get_time()
         workflow = db.fetch("workflow", id=workflow_id, rbac="edit")
@@ -1219,3 +1229,6 @@ class BaseController:
             credentials = self.get_credentials(device, **kwargs)
             self.ssh_sessions[session]["credentials"] = credentials
         return {"device": device.name, "session": session}
+
+
+controller = Controller()

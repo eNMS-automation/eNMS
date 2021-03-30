@@ -47,6 +47,16 @@ class BaseController:
         self.update_rbac(*instances)
         return {"number": len(instances), "target": target.base_properties}
 
+    def add_objects_to_view(self, view_id, **kwargs):
+        result = {"update_time": self.get_time()}
+        for model in ("node", "line"):
+            base_model = "device" if model == "node" else "link"
+            result[f"{model}s"] = []
+            for model_id in kwargs[f"{base_model}s"]:
+                node = db.factory(model, device=model_id, view=view_id)
+                result[f"{model}s"].append(node.serialized)
+        return result
+
     def bulk_deletion(self, table, **kwargs):
         instances = self.filtering(table, bulk="id", form=kwargs)
         for instance_id in instances:

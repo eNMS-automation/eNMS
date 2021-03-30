@@ -3,11 +3,10 @@ from functools import wraps
 from eNMS import app
 from eNMS.controller.administration import BaseController
 from eNMS.controller.automation import AutomationController
-from eNMS.controller.inventory import InventoryController
 from eNMS.database import db
 
 
-class Controller(BaseController, AutomationController, InventoryController):
+class Controller(BaseController, AutomationController):
     def register_endpoint(self, func):
         setattr(self, func.__name__, func)
 

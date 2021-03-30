@@ -12,7 +12,7 @@ from eNMS.models import models
 
 class AutomationController:
     def add_edge(self, workflow_id, subtype, source, destination):
-        now = self.get_time()
+        now = app.get_time()
         workflow = db.fetch("workflow", id=workflow_id, rbac="edit")
         workflow_edge = self.update(
             "workflow_edge",
@@ -75,7 +75,7 @@ class AutomationController:
             else:
                 workflow.services.append(service)
             services.append(service)
-        workflow.last_modified = self.get_time()
+        workflow.last_modified = app.get_time()
         db.session.commit()
         return {
             "services": [service.serialized for service in services],
@@ -126,7 +126,7 @@ class AutomationController:
 
     def delete_workflow_selection(self, workflow_id, **selection):
         workflow = db.fetch("workflow", id=workflow_id)
-        workflow.last_modified = self.get_time()
+        workflow.last_modified = app.get_time()
         for edge_id in selection["edges"]:
             db.delete("workflow_edge", id=edge_id)
         for node_id in selection["nodes"]:
@@ -164,7 +164,7 @@ class AutomationController:
             logs = log_instance.content
         else:
             lines = (
-                self.log_queue(runtime, service, start_line=int(start_line), mode="get")
+                app.log_queue(runtime, service, start_line=int(start_line), mode="get")
                 or []
             )
             number_of_lines, logs = len(lines), "\n".join(lines)
@@ -418,7 +418,7 @@ class AutomationController:
             kwargs.pop(property, None)
         kwargs["creator"] = getattr(current_user, "name", "")
         service = db.fetch("service", id=service_id, rbac="run")
-        kwargs["runtime"] = runtime = self.get_time()
+        kwargs["runtime"] = runtime = app.get_time()
         if kwargs.get("asynchronous", True):
             Thread(target=self.run, args=(service_id,), kwargs=kwargs).start()
         else:
@@ -436,7 +436,7 @@ class AutomationController:
         )
 
     def save_positions(self, workflow_id, **kwargs):
-        now, old_position = self.get_time(), None
+        now, old_position = app.get_time(), None
         workflow = db.fetch("workflow", allow_none=True, id=workflow_id, rbac="edit")
         if not workflow:
             return
@@ -455,7 +455,7 @@ class AutomationController:
 
     def scan_playbook_folder(self):
         path = Path(
-            self.settings["paths"]["playbooks"] or self.path / "files" / "playbooks"
+            app.settings["paths"]["playbooks"] or app.path / "files" / "playbooks"
         )
         playbooks = [[str(f) for f in path.glob(e)] for e in ("*.yaml", "*.yml")]
         return sorted(sum(playbooks, []))
@@ -487,7 +487,7 @@ class AutomationController:
         skip = not all(service.skip.get(workflow.name) for service in services)
         for service in services:
             service.skip[workflow.name] = skip
-        workflow.last_modified = self.get_time()
+        workflow.last_modified = app.get_time()
         return {
             "skip": "skip" if skip else "unskip",
             "update_time": workflow.last_modified,
@@ -496,8 +496,8 @@ class AutomationController:
     def stop_workflow(self, runtime):
         run = db.fetch("run", allow_none=True, runtime=runtime)
         if run and run.status == "Running":
-            if self.redis_queue:
-                self.redis("set", f"stop/{run.parent_runtime}", "true")
+            if app.redis_queue:
+                app.redis("set", f"stop/{run.parent_runtime}", "true")
             else:
-                self.run_stop[run.parent_runtime] = True
+                app.run_stop[run.parent_runtime] = True
             return True

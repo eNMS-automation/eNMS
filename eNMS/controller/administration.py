@@ -43,7 +43,7 @@ class BaseController:
         instances = instances - set(getattr(target, property))
         for instance in instances:
             getattr(target, property).append(instance)
-        target.last_modified = self.get_time()
+        target.last_modified = app.get_time()
         self.update_rbac(*instances)
         return {"number": len(instances), "target": target.base_properties}
 
@@ -85,8 +85,8 @@ class BaseController:
 
     def compare(self, type, id, v1, v2, context_lines):
         if type in ("result", "device_result"):
-            first = self.str_dict(getattr(db.fetch("result", id=v1), "result"))
-            second = self.str_dict(getattr(db.fetch("result", id=v2), "result"))
+            first = app.str_dict(getattr(db.fetch("result", id=v1), "result"))
+            second = app.str_dict(getattr(db.fetch("result", id=v2), "result"))
         else:
             device = db.fetch("device", id=id)
             result1, v1 = self.get_git_network_data(device.name, v1)
@@ -121,7 +121,7 @@ class BaseController:
 
     def export_service(self, service_id):
         service = db.fetch("service", id=service_id)
-        path = Path(self.path / "files" / "services" / service.filename)
+        path = Path(app.path / "files" / "services" / service.filename)
         path.mkdir(parents=True, exist_ok=True)
         services = service.deep_services if service.type == "workflow" else [service]
         exclude = ("target_devices", "target_pools", "pools", "events")
@@ -234,13 +234,13 @@ class BaseController:
         return [server.status for server in db.fetch_all("server")]
 
     def get_exported_services(self):
-        return [f for f in listdir(self.path / "files" / "services") if ".tgz" in f]
+        return [f for f in listdir(app.path / "files" / "services") if ".tgz" in f]
 
     def get_git_content(self):
-        repo = self.settings["app"]["git_repository"]
+        repo = app.settings["app"]["git_repository"]
         if not repo:
             return
-        local_path = self.path / "network_data"
+        local_path = app.path / "network_data"
         try:
             if exists(local_path):
                 Repo(local_path).remotes.origin.pull()
@@ -248,18 +248,18 @@ class BaseController:
                 local_path.mkdir(parents=True, exist_ok=True)
                 Repo.clone_from(repo, local_path)
         except Exception as exc:
-            self.log("error", f"Git pull failed ({str(exc)})")
+            app.log("error", f"Git pull failed ({str(exc)})")
         self.update_database_configurations_from_git()
 
     def get_migration_folders(self):
-        return listdir(self.path / "files" / "migrations")
+        return listdir(app.path / "files" / "migrations")
 
     def get_properties(self, model, id):
         return db.fetch(model, id=id).get_properties()
 
     def get_tree_files(self, path):
         if path == "root":
-            path = self.settings["paths"]["files"] or self.path / "files"
+            path = app.settings["paths"]["files"] or app.path / "files"
         else:
             path = path.replace(">", "/")
         return [
@@ -279,14 +279,14 @@ class BaseController:
 
     def load_debug_snippets(self):
         snippets = {}
-        for path in Path(self.path / "files" / "snippets").glob("**/*.py"):
+        for path in Path(app.path / "files" / "snippets").glob("**/*.py"):
             with open(path, "r") as file:
                 snippets[path.name] = file.read()
         return snippets
 
     def migration_export(self, **kwargs):
         for cls_name in kwargs["import_export_types"]:
-            path = self.path / "files" / "migrations" / kwargs["name"]
+            path = app.path / "files" / "migrations" / kwargs["name"]
             if not exists(path):
                 makedirs(path)
             with open(path / f"{cls_name}.yaml", "w") as migration_file:
@@ -305,7 +305,7 @@ class BaseController:
             db.delete_all(*models)
         relations = defaultdict(lambda: defaultdict(dict))
         for model in models:
-            path = self.path / "files" / folder / kwargs["name"] / f"{model}.yaml"
+            path = app.path / "files" / folder / kwargs["name"] / f"{model}.yaml"
             if not path.exists():
                 continue
             with open(path, "r") as migration_file:
@@ -316,7 +316,7 @@ class BaseController:
                         relation_dict[related_model] = instance.pop(related_model, [])
                     for property, value in instance.items():
                         if property in db.private_properties_set:
-                            instance[property] = self.get_password(value)
+                            instance[property] = app.get_password(value)
                     try:
                         instance = db.factory(
                             instance_type,
@@ -358,7 +358,7 @@ class BaseController:
         if not kwargs.get("skip_pool_update"):
             for pool in db.fetch_all("pool"):
                 pool.compute_pool()
-        self.log("info", status)
+        app.log("info", status)
         return status
 
     def multiselect_filtering(self, model, **params):
@@ -376,7 +376,7 @@ class BaseController:
 
     def import_service(self, archive):
         service_name = archive.split(".")[0]
-        path = self.path / "files" / "services"
+        path = app.path / "files" / "services"
         with open_tar(path / archive) as tar_file:
             tar_file.extractall(path=path)
             status = self.migration_import(
@@ -443,20 +443,20 @@ class BaseController:
                 return file.write(kwargs["file_content"])
 
     def save_settings(self, **kwargs):
-        self.settings = kwargs["settings"]
+        app.settings = kwargs["settings"]
         if kwargs["save"]:
-            with open(self.path / "setup" / "settings.json", "w") as file:
+            with open(app.path / "setup" / "settings.json", "w") as file:
                 dump(kwargs["settings"], file, indent=2)
 
     def scan_cluster(self, **kwargs):
-        protocol = self.settings["cluster"]["scan_protocol"]
-        for ip_address in IPv4Network(self.settings["cluster"]["scan_subnet"]):
+        protocol = app.settings["cluster"]["scan_protocol"]
+        for ip_address in IPv4Network(app.settings["cluster"]["scan_subnet"]):
             try:
                 server = http_get(
                     f"{protocol}://{ip_address}/rest/is_alive",
-                    timeout=self.settings["cluster"]["scan_timeout"],
+                    timeout=app.settings["cluster"]["scan_timeout"],
                 ).json()
-                if self.settings["cluster"]["id"] != server.pop("cluster_id"):
+                if app.settings["cluster"]["id"] != server.pop("cluster_id"):
                     continue
                 db.factory("server", **{**server, **{"ip_address": str(ip_address)}})
             except ConnectionError:
@@ -473,7 +473,7 @@ class BaseController:
         try:
             kwargs.update(
                 {
-                    "last_modified": self.get_time(),
+                    "last_modified": app.get_time(),
                     "update_pools": True,
                     "must_be_new": kwargs.get("id") == "",
                 }
@@ -498,11 +498,11 @@ class BaseController:
                     "with the same parameters."
                 )
                 return {"alert": alert}
-            self.log("error", format_exc())
+            app.log("error", format_exc())
             return {"alert": str(exc)}
 
     def update_database_configurations_from_git(self):
-        for dir in scandir(self.path / "network_data"):
+        for dir in scandir(app.path / "network_data"):
             device = db.fetch("device", allow_none=True, name=dir.name)
             timestamp_path = Path(dir.path) / "timestamps.json"
             if not device:
@@ -512,7 +512,7 @@ class BaseController:
                     timestamps = load(file)
             except Exception:
                 timestamps = {}
-            for property in self.configuration_properties:
+            for property in app.configuration_properties:
                 for timestamp, value in timestamps.get(property, {}).items():
                     setattr(device, f"last_{property}_{timestamp}", value)
                 filepath = Path(dir.path) / property
@@ -524,7 +524,7 @@ class BaseController:
         for pool in db.fetch_all("pool"):
             if any(
                 getattr(pool, f"device_{property}")
-                for property in self.configuration_properties
+                for property in app.configuration_properties
             ):
                 pool.compute_pool()
 

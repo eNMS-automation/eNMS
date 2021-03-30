@@ -185,6 +185,81 @@ class BaseController:
             log_level = getattr(import_module("logging"), log_level.upper())
             getLogger(logger).setLevel(log_level)
 
+    def init_plugins(self):
+        self.plugins = {}
+        for plugin_path in Path(self.settings["app"]["plugin_path"]).iterdir():
+            if not Path(plugin_path / "settings.json").exists():
+                continue
+            try:
+                with open(plugin_path / "settings.json", "r") as file:
+                    settings = load(file)
+                if not settings["active"]:
+                    continue
+                self.plugins[plugin_path.stem] = {
+                    "settings": settings,
+                    "module": import_module(f"eNMS.plugins.{plugin_path.stem}"),
+                }
+                for setup_file in ("database", "properties", "rbac"):
+                    property = getattr(self, setup_file)
+                    self.update_settings(property, settings.get(setup_file, {}))
+            except Exception:
+                error(f"Could not load plugin '{plugin_path.stem}':\n{format_exc()}")
+                continue
+            info(f"Loading plugin: {settings['name']}")
+
+    def init_rbac(self):
+        self.rbac = {"pages": [], **rbac}
+        for _, category in rbac["menu"].items():
+            for page, page_values in category["pages"].items():
+                if page_values["rbac"] == "access":
+                    self.rbac["pages"].append(page)
+                for subpage, subpage_values in page_values.get("subpages", {}).items():
+                    if subpage_values["rbac"] == "access":
+                        self.rbac["pages"].append(subpage)
+
+    def init_redis(self):
+        host = getenv("REDIS_ADDR")
+        self.redis_queue = (
+            Redis(
+                host=host,
+                port=6379,
+                db=0,
+                charset="utf-8",
+                decode_responses=True,
+                socket_timeout=0.1,
+            )
+            if host
+            else None
+        )
+
+    def init_scheduler(self):
+        self.scheduler_address = getenv("SCHEDULER_ADDR")
+
+    def init_services(self):
+        path_services = [self.path / "eNMS" / "services"]
+        load_examples = self.settings["app"].get("startup_migration") == "examples"
+        if self.settings["paths"]["custom_services"]:
+            path_services.append(Path(self.settings["paths"]["custom_services"]))
+        for path in path_services:
+            for file in path.glob("**/*.py"):
+                if "init" in str(file):
+                    continue
+                if not load_examples and "examples" in str(file):
+                    continue
+                info(f"Loading service: {file}")
+                spec = spec_from_file_location(file.stem, str(file))
+                try:
+                    spec.loader.exec_module(module_from_spec(spec))
+                except InvalidRequestError as exc:
+                    error(f"Error loading custom service '{file}' ({str(exc)})")
+
+    def init_vault_client(self):
+        url = getenv("VAULT_ADDR", "http://127.0.0.1:8200")
+        self.vault_client = VaultClient(url=url, token=getenv("VAULT_TOKEN"))
+        if self.vault_client.sys.is_sealed() and self.settings["vault"]["unseal_vault"]:
+            keys = [getenv(f"UNSEAL_VAULT_KEY{i}") for i in range(1, 6)]
+            self.vault_client.sys.submit_unseal_keys(filter(None, keys))
+
     def load_custom_properties(self):
         for model, values in self.properties["custom"].items():
             for property, property_dict in values.items():
@@ -229,34 +304,6 @@ class BaseController:
             run.service.status = "Idle"
         db.session.commit()
 
-    def init_rbac(self):
-        self.rbac = {"pages": [], **rbac}
-        for _, category in rbac["menu"].items():
-            for page, page_values in category["pages"].items():
-                if page_values["rbac"] == "access":
-                    self.rbac["pages"].append(page)
-                for subpage, subpage_values in page_values.get("subpages", {}).items():
-                    if subpage_values["rbac"] == "access":
-                        self.rbac["pages"].append(subpage)
-
-    def init_redis(self):
-        host = getenv("REDIS_ADDR")
-        self.redis_queue = (
-            Redis(
-                host=host,
-                port=6379,
-                db=0,
-                charset="utf-8",
-                decode_responses=True,
-                socket_timeout=0.1,
-            )
-            if host
-            else None
-        )
-
-    def init_scheduler(self):
-        self.scheduler_address = getenv("SCHEDULER_ADDR")
-
     def update_settings(self, old, new):
         for key, value in new.items():
             if key not in old:
@@ -271,53 +318,6 @@ class BaseController:
                     old[key] = value
 
         return old
-
-    def init_plugins(self):
-        self.plugins = {}
-        for plugin_path in Path(self.settings["app"]["plugin_path"]).iterdir():
-            if not Path(plugin_path / "settings.json").exists():
-                continue
-            try:
-                with open(plugin_path / "settings.json", "r") as file:
-                    settings = load(file)
-                if not settings["active"]:
-                    continue
-                self.plugins[plugin_path.stem] = {
-                    "settings": settings,
-                    "module": import_module(f"eNMS.plugins.{plugin_path.stem}"),
-                }
-                for setup_file in ("database", "properties", "rbac"):
-                    property = getattr(self, setup_file)
-                    self.update_settings(property, settings.get(setup_file, {}))
-            except Exception:
-                error(f"Could not load plugin '{plugin_path.stem}':\n{format_exc()}")
-                continue
-            info(f"Loading plugin: {settings['name']}")
-
-    def init_services(self):
-        path_services = [self.path / "eNMS" / "services"]
-        load_examples = self.settings["app"].get("startup_migration") == "examples"
-        if self.settings["paths"]["custom_services"]:
-            path_services.append(Path(self.settings["paths"]["custom_services"]))
-        for path in path_services:
-            for file in path.glob("**/*.py"):
-                if "init" in str(file):
-                    continue
-                if not load_examples and "examples" in str(file):
-                    continue
-                info(f"Loading service: {file}")
-                spec = spec_from_file_location(file.stem, str(file))
-                try:
-                    spec.loader.exec_module(module_from_spec(spec))
-                except InvalidRequestError as exc:
-                    error(f"Error loading custom service '{file}' ({str(exc)})")
-
-    def init_vault_client(self):
-        url = getenv("VAULT_ADDR", "http://127.0.0.1:8200")
-        self.vault_client = VaultClient(url=url, token=getenv("VAULT_TOKEN"))
-        if self.vault_client.sys.is_sealed() and self.settings["vault"]["unseal_vault"]:
-            keys = [getenv(f"UNSEAL_VAULT_KEY{i}") for i in range(1, 6)]
-            self.vault_client.sys.submit_unseal_keys(filter(None, keys))
 
     def redis(self, operation, *args, **kwargs):
         try:

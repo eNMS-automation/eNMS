@@ -8,6 +8,7 @@ from sqlalchemy.schema import UniqueConstraint
 from sqlalchemy.sql.expression import false
 
 from eNMS import app
+from eNMS.controller import controller
 from eNMS.models import models
 from eNMS.models.base import AbstractBase
 from eNMS.database import db
@@ -397,7 +398,10 @@ class Pool(AbstractBase):
                             ),
                         }
                     )
-                instances = app.filtering(model, **kwargs) if kwargs["form"] else []
+                if kwargs["form"]:
+                    instances = controller.filtering(model, **kwargs)
+                else:
+                    instances = []
                 setattr(self, f"{model}s", instances)
             else:
                 instances = getattr(self, f"{model}s")

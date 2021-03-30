@@ -343,7 +343,8 @@ class Server(Flask):
         @blueprint.route("/export_service/<int:id>")
         @self.process_requests
         def export_service(id):
-            return send_file(f"/{app.export_service(id)}.tgz", as_attachment=True)
+            filename = f"/{controller.export_service(id)}.tgz"
+            return send_file(filename, as_attachment=True)
 
         @blueprint.route("/terminal/<session>")
         @self.process_requests

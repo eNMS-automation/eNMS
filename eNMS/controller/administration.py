@@ -381,6 +381,181 @@ class BaseController:
             or (view == "geographical_view" and (pool.devices or pool.links))
         ]
 
+    def get_workflow_results(self, workflow, runtime):
+        run = db.fetch("run", parent_runtime=runtime)
+        state = run.state
+
+        def rec(service, path=str(run.service_id)):
+            results = db.fetch(
+                "result",
+                parent_runtime=runtime,
+                allow_none=True,
+                all_matches=True,
+                service_id=service.id,
+            )
+            if service.scoped_name in ("Start", "End") or not results:
+                return
+            progress = state.get(path, {}).get("progress")
+            track_progress = progress and progress["device"]["total"]
+            data = {"progress": progress["device"]} if track_progress else {}
+            color = "32CD32" if all(result.success for result in results) else "FF6666"
+            result = {
+                "runtime": min(result.runtime for result in results),
+                "data": {"properties": service.base_properties, **data},
+                "text": service.scoped_name,
+                "a_attr": {"style": f"color: #{color};width: 100%"},
+            }
+            if service.type == "workflow":
+                children_results = []
+                for child in service.services:
+                    if child.scoped_name == "Placeholder":
+                        child = run.placeholder
+                    child_results = rec(child, f"{path}>{child.id}")
+                    if not child_results:
+                        continue
+                    children_results.append(child_results)
+                return {
+                    "children": sorted(children_results, key=itemgetter("runtime")),
+                    **result,
+                }
+            else:
+                return result
+
+        return rec(run.service)
+
+    def get_workflow_services(self, id, node):
+        parents = list(self.get_parent_workflows(db.fetch("workflow", id=id)))
+        if node == "all":
+            return (
+                [
+                    {
+                        "data": {"id": "standalone"},
+                        "id": "standalone",
+                        "text": "Standalone services",
+                        "children": True,
+                        "state": {"disabled": True},
+                        "a_attr": {
+                            "class": "no_checkbox",
+                            "style": "color: #000000; width: 100%",
+                        },
+                        "type": "category",
+                    }
+                ]
+                + [
+                    {
+                        "data": {"id": "shared"},
+                        "id": "shared",
+                        "text": "Shared services",
+                        "children": True,
+                        "state": {"disabled": True},
+                        "a_attr": {
+                            "class": "no_checkbox",
+                            "style": "color: #FF1694; width: 100%",
+                        },
+                        "type": "category",
+                    }
+                ]
+                + sorted(
+                    (
+                        {
+                            "id": workflow.name,
+                            "data": {"id": workflow.id},
+                            "text": workflow.name,
+                            "children": True,
+                            "type": "workflow",
+                            "state": {"disabled": workflow in parents},
+                            "a_attr": {
+                                "class": "no_checkbox" if workflow in parents else "",
+                                "style": "color: #6666FF; width: 100%",
+                            },
+                        }
+                        for workflow in db.fetch_all("workflow")
+                        if not workflow.workflows
+                    ),
+                    key=itemgetter("text"),
+                )
+            )
+        elif node == "standalone":
+            return sorted(
+                (
+                    {
+                        "data": {"id": service.id},
+                        "text": service.scoped_name,
+                        "a_attr": {"style": ("color: #6666FF;" "width: 100%")},
+                    }
+                    for service in db.fetch_all("service")
+                    if not service.workflows and service.type != "workflow"
+                ),
+                key=itemgetter("text"),
+            )
+        elif node == "shared":
+            return sorted(
+                (
+                    {
+                        "data": {"id": service.id},
+                        "text": service.scoped_name,
+                        "a_attr": {"style": ("color: #FF1694;" "width: 100%")},
+                    }
+                    for service in db.fetch_all("service")
+                    if service.shared and service.scoped_name not in ("Start", "End")
+                ),
+                key=itemgetter("text"),
+            )
+        else:
+            return sorted(
+                (
+                    {
+                        "data": {"id": service.id},
+                        "text": service.scoped_name,
+                        "children": service.type == "workflow",
+                        "type": "workflow" if service.type == "workflow" else "service",
+                        "state": {"disabled": service in parents},
+                        "a_attr": {
+                            "class": "no_checkbox" if service in parents else "",
+                            "style": (
+                                f"color: #{'FF1694' if service.shared else '6666FF'};"
+                                "width: 100%"
+                            ),
+                        },
+                    }
+                    for service in db.fetch("workflow", id=node).services
+                    if service.scoped_name not in ("Start", "End")
+                ),
+                key=itemgetter("text"),
+            )
+
+    def get_workflow_tree(self, full_path):
+        path_id = full_path.split(">")
+
+        def rec(service, path=""):
+            path += ">" * bool(path) + str(service.id)
+            if service.scoped_name in ("Start", "End"):
+                return
+            elif service.scoped_name == "Placeholder" and len(path_id) > 1:
+                service = db.fetch("workflow", id=path_id[1])
+            return {
+                "data": {"path": path, **service.base_properties},
+                "id": service.id,
+                "state": {"opened": full_path.startswith(path)},
+                "text": service.scoped_name,
+                "children": sorted(
+                    filter(None, [rec(child, path) for child in service.services]),
+                    key=lambda node: node["text"].lower(),
+                )
+                if service.type == "workflow"
+                else False,
+                "a_attr": {
+                    "class": "no_checkbox",
+                    "style": (
+                        f"color: #{'FF1694' if service.shared else '6666FF'};"
+                        "width: 100%"
+                    ),
+                },
+                "type": service.type,
+            }
+
+        return rec(db.fetch("workflow", id=path_id[0]))
+
     def load_debug_snippets(self):
         snippets = {}
         for path in Path(app.path / "files" / "snippets").glob("**/*.py"):

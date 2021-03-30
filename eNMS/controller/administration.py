@@ -579,6 +579,17 @@ class BaseController:
             except ConnectionError:
                 continue
 
+    def scan_playbook_folder(self):
+        path = Path(
+            app.settings["paths"]["playbooks"] or app.path / "files" / "playbooks"
+        )
+        playbooks = [[str(f) for f in path.glob(e)] for e in ("*.yaml", "*.yml")]
+        return sorted(sum(playbooks, []))
+
+    def scheduler_action(self, mode, **kwargs):
+        for task_id in self.filtering("task", bulk="id", form=kwargs):
+            self.task_action(mode, task_id)
+
     def search_workflow_services(self, *args, **kwargs):
         return [
             "standalone",
@@ -620,6 +631,9 @@ class BaseController:
 
     def switch_theme(self, user_id, theme):
         db.fetch("user", rbac=None, id=user_id).theme = theme
+
+    def task_action(self, mode, task_id):
+        return db.fetch("task", id=task_id, rbac="schedule").schedule(mode)
 
     def topology_export(self, **kwargs):
         workbook = Workbook()

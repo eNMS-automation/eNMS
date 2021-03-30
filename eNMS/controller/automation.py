@@ -453,17 +453,3 @@ class AutomationController:
             if new_position != old_position:
                 workflow.last_modified = now
         return now
-
-    def scan_playbook_folder(self):
-        path = Path(
-            app.settings["paths"]["playbooks"] or app.path / "files" / "playbooks"
-        )
-        playbooks = [[str(f) for f in path.glob(e)] for e in ("*.yaml", "*.yml")]
-        return sorted(sum(playbooks, []))
-
-    def task_action(self, mode, task_id):
-        return db.fetch("task", id=task_id, rbac="schedule").schedule(mode)
-
-    def scheduler_action(self, mode, **kwargs):
-        for task_id in self.filtering("task", bulk="id", form=kwargs):
-            self.task_action(mode, task_id)

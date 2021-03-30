@@ -1,10 +1,10 @@
-from collections import defaultdict
+from collections import Counter, defaultdict
 from contextlib import redirect_stdout
 from datetime import datetime
 from difflib import unified_diff
 from flask_login import current_user
 from git import Repo
-from io import StringIO
+from io import BytesIO, StringIO
 from ipaddress import IPv4Network
 from json import dump, load
 from logging import info
@@ -21,10 +21,15 @@ from sqlalchemy.orm import aliased
 from tarfile import open as open_tar
 from time import ctime
 from traceback import format_exc
+from uuid import uuid4
+from xlrd import open_workbook
+from xlrd.biffh import XLRDError
+from xlwt import Workbook
 
 from eNMS import app
 from eNMS.database import db
-from eNMS.models import models, model_properties, relationships
+from eNMS.models import models, model_properties, property_types, relationships
+from eNMS.setup import properties
 
 
 class BaseController:

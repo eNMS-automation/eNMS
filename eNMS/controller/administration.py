@@ -49,6 +49,23 @@ class AdministrationController(BaseController):
                 db.session.commit()
             return user
 
+    def bulk_deletion(self, table, **kwargs):
+        instances = self.filtering(table, bulk="id", form=kwargs)
+        for instance_id in instances:
+            db.delete(table, id=instance_id)
+        return len(instances)
+
+    def bulk_edit(self, table, **kwargs):
+        instances = kwargs.pop("id").split("-")
+        kwargs = {
+            property: value
+            for property, value in kwargs.items()
+            if kwargs.get(f"bulk-edit-{property}")
+        }
+        for instance_id in instances:
+            db.factory(table, id=instance_id, **kwargs)
+        return len(instances)
+
     def compare(self, type, id, v1, v2, context_lines):
         if type in ("result", "device_result"):
             first = self.str_dict(getattr(db.fetch("result", id=v1), "result"))

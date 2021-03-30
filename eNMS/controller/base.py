@@ -355,23 +355,6 @@ class BaseController:
             )
         return logger_settings
 
-    def bulk_deletion(self, table, **kwargs):
-        instances = self.filtering(table, bulk="id", form=kwargs)
-        for instance_id in instances:
-            db.delete(table, id=instance_id)
-        return len(instances)
-
-    def bulk_edit(self, table, **kwargs):
-        instances = kwargs.pop("id").split("-")
-        kwargs = {
-            property: value
-            for property, value in kwargs.items()
-            if kwargs.get(f"bulk-edit-{property}")
-        }
-        for instance_id in instances:
-            db.factory(table, id=instance_id, **kwargs)
-        return len(instances)
-
     def get_time(self):
         return str(datetime.now())
 

@@ -1,4 +1,5 @@
 from functools import wraps
+from uuid import getnode
 
 from eNMS import app
 from eNMS.controller.administration import BaseController

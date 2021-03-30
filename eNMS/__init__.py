@@ -2,5 +2,5 @@ from eNMS.app import app
 from eNMS.controller import controller
 
 
-app.init_database()
+app.initialize()
 controller.initialize()

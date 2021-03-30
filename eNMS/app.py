@@ -29,7 +29,6 @@ from sqlalchemy.exc import InvalidRequestError
 from sqlalchemy.orm import configure_mappers
 from sys import path as sys_path
 from traceback import format_exc
-from uuid import getnode
 from warnings import warn
 
 try:
@@ -47,7 +46,7 @@ except ImportError as exc:
 
 from eNMS.custom import CustomApp
 from eNMS.database import db
-from eNMS.models import models, model_properties
+from eNMS.models import model_properties
 from eNMS.setup import database, logging, properties, rbac, settings
 
 
@@ -199,7 +198,7 @@ class App:
                 HTTPAdapter(max_retries=retry, **self.settings["requests"]["pool"]),
             )
 
-    def init_database(self):
+    def initialize(self):
         self.init_plugins()
         self.init_services()
         db.private_properties_set |= set(sum(db.private_properties.values(), []))
@@ -448,5 +447,6 @@ class App:
                     old[key] = value
 
         return old
+
 
 app = App()

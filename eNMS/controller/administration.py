@@ -106,6 +106,90 @@ class AdministrationController(BaseController):
         rmtree(path, ignore_errors=True)
         return path
 
+    def filtering_base_constraints(self, model, **kwargs):
+        table, constraints = models[model], []
+        constraint_dict = {**kwargs.get("form", {}), **kwargs.get("constraints", {})}
+        for property in model_properties[model]:
+            value, row = constraint_dict.get(property), getattr(table, property)
+            if not value:
+                continue
+            filter_value = constraint_dict.get(f"{property}_filter")
+            if value in ("bool-true", "bool-false"):
+                constraint = row == (value == "bool-true")
+            elif filter_value == "equality":
+                constraint = row == value
+            elif not filter_value or filter_value == "inclusion":
+                constraint = row.contains(value, autoescape=isinstance(value, str))
+            else:
+                compile(value)
+                regex_operator = "~" if db.dialect == "postgresql" else "regexp"
+                constraint = row.op(regex_operator)(value)
+            if constraint_dict.get(f"{property}_invert"):
+                constraint = ~constraint
+            constraints.append(constraint)
+        return constraints
+
+    def filtering_relationship_constraints(self, query, model, **kwargs):
+        table = models[model]
+        constraint_dict = {**kwargs.get("form", {}), **kwargs.get("constraints", {})}
+        for related_model, relation_properties in relationships[model].items():
+            related_table = aliased(models[relation_properties["model"]])
+            match = constraint_dict.get(f"{related_model}_filter")
+            if match == "empty":
+                query = query.filter(~getattr(table, related_model).any())
+            else:
+                relation_ids = [
+                    int(id) for id in constraint_dict.get(related_model, [])
+                ]
+                if not relation_ids:
+                    continue
+                query = (
+                    query.join(related_table, getattr(table, related_model))
+                    .filter(related_table.id.in_(relation_ids))
+                    .group_by(table.id)
+                )
+        return query
+
+    def filtering(self, model, bulk=False, rbac="read", username=None, **kwargs):
+        table, query = models[model], db.query(model, rbac, username)
+        total_records = query.with_entities(table.id).count()
+        try:
+            constraints = self.filtering_base_constraints(model, **kwargs)
+        except regex_error:
+            return {"error": "Invalid regular expression as search parameter."}
+        constraints.extend(table.filtering_constraints(**kwargs))
+        query = self.filtering_relationship_constraints(query, model, **kwargs)
+        query = query.filter(and_(*constraints))
+        filtered_records = query.with_entities(table.id).count()
+        if bulk:
+            instances = query.all()
+            if bulk == "object":
+                return instances
+            else:
+                return [getattr(instance, bulk) for instance in instances]
+        data = kwargs["columns"][int(kwargs["order"][0]["column"])]["data"]
+        ordering = getattr(getattr(table, data, None), kwargs["order"][0]["dir"], None)
+        if ordering:
+            query = query.order_by(ordering())
+        table_result = {
+            "draw": int(kwargs["draw"]),
+            "recordsTotal": total_records,
+            "recordsFiltered": filtered_records,
+            "data": [
+                obj.table_properties(**kwargs)
+                for obj in query.limit(int(kwargs["length"]))
+                .offset(int(kwargs["start"]))
+                .all()
+            ],
+        }
+        if kwargs.get("export"):
+            table_result["full_result"] = [
+                obj.table_properties(**kwargs) for obj in query.all()
+            ]
+        if kwargs.get("clipboard"):
+            table_result["full_result"] = ",".join(obj.name for obj in query.all())
+        return table_result
+
     def get(self, model, id):
         return db.fetch(model, id=id).serialized
 

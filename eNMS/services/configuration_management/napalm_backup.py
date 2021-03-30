@@ -84,7 +84,7 @@ class NapalmBackupForm(NapalmForm):
         "Configuration Property to Update",
         choices=list(app.configuration_properties.items()),
     )
-    getters = SelectMultipleField(choices=app.NAPALM_GETTERS)
+    getters = SelectMultipleField(choices=app.napalm_getters)
     replacements = FieldList(FormField(ReplacementForm), min_entries=3)
     groups = {
         "Target Property and Getters": {

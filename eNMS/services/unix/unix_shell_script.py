@@ -97,7 +97,7 @@ class UnixShellScriptForm(NetmikoForm):
             "fi\n"
         ),
     )
-    driver = SelectField(choices=app.NETMIKO_DRIVERS, default="linux")
+    driver = SelectField(choices=app.netmiko_drivers, default="linux")
     use_device_driver = BooleanField(default=True)
     fast_cli = BooleanField()
     timeout = IntegerField(default=10)

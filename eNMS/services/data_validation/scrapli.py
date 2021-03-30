@@ -34,7 +34,7 @@ class ScrapliForm(ConnectionForm):
     form_type = HiddenField(default="scrapli_service")
     commands = StringField(substitution=True, widget=TextArea(), render_kw={"rows": 5})
     is_configuration = BooleanField()
-    driver = SelectField(choices=choices(app.SCRAPLI_DRIVERS))
+    driver = SelectField(choices=choices(app.scrapli_drivers))
     transport = SelectField(choices=choices(("system", "paramiko", "ssh2")))
     use_device_driver = BooleanField(default=True)
     groups = {

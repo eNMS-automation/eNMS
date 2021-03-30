@@ -14,7 +14,7 @@ from json import load
 from logging.config import dictConfig
 from logging import getLogger, error, info
 from napalm._SUPPORTED_DRIVERS import SUPPORTED_DRIVERS
-from netmiko.ssh_dispatcher import CLASS_MAPPER, FILE_TRANSFER_MAP
+from netmiko.ssh_dispatcher import CLASS_MAPPER
 from os import getenv
 from passlib.hash import argon2
 from pathlib import Path
@@ -38,7 +38,6 @@ except ImportError as exc:
 
 try:
     from scrapli import Scrapli
-
     CORE_PLATFORM_MAP = {driver: driver for driver in Scrapli.CORE_PLATFORM_MAP}
 except ImportError as exc:
     CORE_PLATFORM_MAP = {"cisco_iosxe": "cisco_iosxe"}
@@ -52,10 +51,9 @@ from eNMS.setup import database, logging, properties, rbac, settings
 
 class App:
 
-    NETMIKO_DRIVERS = sorted((driver, driver) for driver in CLASS_MAPPER)
-    NETMIKO_SCP_DRIVERS = sorted((driver, driver) for driver in FILE_TRANSFER_MAP)
-    NAPALM_DRIVERS = sorted((driver, driver) for driver in SUPPORTED_DRIVERS[1:])
-    NAPALM_GETTERS = (
+    netmiko_drivers = sorted((driver, driver) for driver in CLASS_MAPPER)
+    napalm_drivers = sorted((driver, driver) for driver in SUPPORTED_DRIVERS[1:])
+    napalm_getters = (
         ("get_arp_table", "ARP table"),
         ("get_interfaces_counters", "Interfaces counters"),
         ("get_facts", "Facts"),
@@ -78,7 +76,7 @@ class App:
         ("get_ipv6_neighbors_table", "IPv6"),
         ("is_alive", "Is alive"),
     )
-    SCRAPLI_DRIVERS = CORE_PLATFORM_MAP
+    scrapli_drivers = CORE_PLATFORM_MAP
 
     log_levels = ["debug", "info", "warning", "error", "critical"]
 

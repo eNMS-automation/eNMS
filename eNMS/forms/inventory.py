@@ -65,13 +65,13 @@ class DeviceForm(ObjectForm):
     longitude = StringField("Longitude", default=0.0)
     latitude = StringField("Latitude", default=0.0)
     napalm_driver = SelectField(
-        "NAPALM Driver", choices=app.NAPALM_DRIVERS, default="ios"
+        "NAPALM Driver", choices=app.napalm_drivers, default="ios"
     )
     netmiko_driver = SelectField(
-        "Netmiko Driver", choices=app.NETMIKO_DRIVERS, default="cisco_ios"
+        "Netmiko Driver", choices=app.netmiko_drivers, default="cisco_ios"
     )
     scrapli_driver = SelectField(
-        "Scrapli Driver", choices=choices(app.SCRAPLI_DRIVERS), default="cisco_iosxe"
+        "Scrapli Driver", choices=choices(app.scrapli_drivers), default="cisco_iosxe"
     )
 
 

@@ -39,7 +39,7 @@ class NapalmGettersService(ConnectionService):
 
 class NapalmGettersForm(NapalmForm):
     form_type = HiddenField(default="napalm_getters_service")
-    getters = SelectMultipleField(choices=app.NAPALM_GETTERS)
+    getters = SelectMultipleField(choices=app.napalm_getters)
     groups = {
         "Main Parameters": {"commands": ["getters"], "default": "expanded"},
         **NapalmForm.groups,

@@ -482,6 +482,51 @@ class BaseController:
     def switch_theme(self, user_id, theme):
         db.fetch("user", rbac=None, id=user_id).theme = theme
 
+    def topology_export(self, **kwargs):
+        workbook = Workbook()
+        filename = kwargs["export_filename"]
+        if "." not in filename:
+            filename += ".xls"
+        for obj_type in ("device", "link"):
+            sheet = workbook.add_sheet(obj_type)
+            for index, property in enumerate(model_properties[obj_type]):
+                if property in db.dont_migrate[obj_type]:
+                    continue
+                sheet.write(0, index, property)
+                for obj_index, obj in enumerate(db.fetch_all(obj_type), 1):
+                    value = getattr(obj, property)
+                    if type(value) == bytes:
+                        value = str(app.decrypt(value), "utf-8")
+                    sheet.write(obj_index, index, str(value))
+        workbook.save(app.path / "files" / "spreadsheets" / filename)
+
+    def topology_import(self, file):
+        book = open_workbook(file_contents=file.read())
+        status = "Topology successfully imported."
+        for obj_type in ("device", "link"):
+            try:
+                sheet = book.sheet_by_name(obj_type)
+            except XLRDError:
+                continue
+            properties = sheet.row_values(0)
+            for row_index in range(1, sheet.nrows):
+                values = {}
+                for index, property in enumerate(properties):
+                    if not property:
+                        continue
+                    func = db.field_conversion[property_types.get(property, "str")]
+                    values[property] = func(sheet.row_values(row_index)[index])
+                try:
+                    db.factory(obj_type, **values).serialized
+                except Exception as exc:
+                    info(f"{str(values)} could not be imported ({str(exc)})")
+                    status = "Partial import (see logs)."
+            db.session.commit()
+        for pool in db.fetch_all("pool"):
+            pool.compute_pool()
+        app.log("info", status)
+        return status
+
     def update(self, type, **kwargs):
         try:
             kwargs.update(

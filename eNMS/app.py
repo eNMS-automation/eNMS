@@ -165,24 +165,6 @@ class App:
                 db.session.commit()
             return user
 
-    def configure_server_id(self):
-        db.factory(
-            "server",
-            **{
-                "name": str(getnode()),
-                "description": "Localhost",
-                "ip_address": "0.0.0.0",
-                "status": "Up",
-            },
-        )
-
-    def create_admin_user(self):
-        admin_user = models["user"](name="admin", is_admin=True)
-        db.session.add(admin_user)
-        db.session.commit()
-        if not admin_user.password:
-            admin_user.update(password="admin")
-
     def detect_cli(self):
         try:
             return get_current_context().info_name == "flask"
@@ -217,7 +199,7 @@ class App:
                 HTTPAdapter(max_retries=retry, **self.settings["requests"]["pool"]),
             )
 
-    def init_database(self, controller):
+    def init_database(self):
         self.init_plugins()
         self.init_services()
         db.private_properties_set |= set(sum(db.private_properties.values(), []))
@@ -227,16 +209,6 @@ class App:
         if self.cli_command:
             return
         self.init_forms()
-        if not db.get_user("admin"):
-            self.create_admin_user()
-            controller.migration_import(
-                name=self.settings["app"].get("startup_migration", "default"),
-                import_export_types=db.import_export_models,
-            )
-            controller.get_git_content()
-        self.configure_server_id()
-        self.reset_run_status()
-        db.session.commit()
 
     def init_encryption(self):
         self.fernet_encryption = getenv("FERNET_KEY")
@@ -407,12 +379,6 @@ class App:
                 full_log = getattr(self.run_logs[runtime], mode)(int(service), [])
                 log = full_log[start_line:]
         return log
-
-    def reset_run_status(self):
-        for run in db.fetch("run", all_matches=True, allow_none=True, status="Running"):
-            run.status = "Aborted (RELOAD)"
-            run.service.status = "Idle"
-        db.session.commit()
 
     def redis(self, operation, *args, **kwargs):
         try:

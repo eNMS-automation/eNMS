@@ -112,9 +112,8 @@ class App:
     configuration_properties = {"configuration": "Configuration"}
     configuration_timestamps = ("status", "update", "failure", "runtime", "duration")
 
-    def __init__(self, controller):
+    def __init__(self):
         self.path = Path.cwd()
-        self.controller = controller
         self.custom = CustomApp(self)
         self.custom.pre_init()
         self.settings = settings
@@ -218,8 +217,7 @@ class App:
                 HTTPAdapter(max_retries=retry, **self.settings["requests"]["pool"]),
             )
 
-    def init_database(self):
-        print(self.path)
+    def init_database(self, controller):
         self.init_plugins()
         self.init_services()
         db.private_properties_set |= set(sum(db.private_properties.values(), []))
@@ -231,11 +229,11 @@ class App:
         self.init_forms()
         if not db.get_user("admin"):
             self.create_admin_user()
-            self.controller.migration_import(
+            controller.migration_import(
                 name=self.settings["app"].get("startup_migration", "default"),
                 import_export_types=db.import_export_models,
             )
-            self.controller.get_git_content()
+            controller.get_git_content()
         self.configure_server_id()
         self.reset_run_status()
         db.session.commit()
@@ -484,3 +482,5 @@ class App:
                     old[key] = value
 
         return old
+
+app = App()

@@ -1,5 +1,5 @@
-from eNMS.app import App
+from eNMS.app import app
 from eNMS.controller import controller
 
-app = App(controller)
-app.init_database()
+
+app.init_database(controller)

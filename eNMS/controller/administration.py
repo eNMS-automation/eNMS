@@ -11,7 +11,7 @@ from logging import info
 from os import listdir, makedirs, remove, scandir
 from os.path import exists, getmtime
 from pathlib import Path
-from re import compile, error as regex_error
+from re import compile, error as regex_error, search, sub
 from requests import get as http_get
 from ruamel import yaml
 from shutil import rmtree
@@ -19,6 +19,7 @@ from sqlalchemy import and_
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import aliased
 from tarfile import open as open_tar
+from threading import Thread
 from time import ctime
 from traceback import format_exc
 from uuid import uuid4

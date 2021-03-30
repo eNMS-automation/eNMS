@@ -5,7 +5,6 @@ from pathlib import Path
 from re import search, sub
 from threading import Thread
 from uuid import uuid4
-from warnings import warn
 
 from eNMS.database import db
 from eNMS.models import models

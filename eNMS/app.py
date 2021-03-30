@@ -38,6 +38,7 @@ except ImportError as exc:
 
 try:
     from scrapli import Scrapli
+
     CORE_PLATFORM_MAP = {driver: driver for driver in Scrapli.CORE_PLATFORM_MAP}
 except ImportError as exc:
     CORE_PLATFORM_MAP = {"cisco_iosxe": "cisco_iosxe"}

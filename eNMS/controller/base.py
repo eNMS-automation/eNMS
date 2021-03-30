@@ -358,33 +358,6 @@ class BaseController:
     def get_time(self):
         return str(datetime.now())
 
-    def remove_instance(self, **kwargs):
-        instance = db.fetch(kwargs["instance"]["type"], id=kwargs["instance"]["id"])
-        target = db.fetch(kwargs["relation"]["type"], id=kwargs["relation"]["id"])
-        if target.type == "pool" and not target.manually_defined:
-            return {"alert": "Removing an object from a dynamic pool is an allowed."}
-        getattr(target, kwargs["relation"]["relation"]["to"]).remove(instance)
-        self.update_rbac(instance)
-
-    def add_instances_in_bulk(self, **kwargs):
-        target = db.fetch(kwargs["relation_type"], id=kwargs["relation_id"])
-        if target.type == "pool" and not target.manually_defined:
-            return {"alert": "Adding objects to a dynamic pool is not allowed."}
-        model, property = kwargs["model"], kwargs["property"]
-        instances = set(db.objectify(model, kwargs["instances"]))
-        if kwargs["names"]:
-            for name in [instance.strip() for instance in kwargs["names"].split(",")]:
-                instance = db.fetch(model, allow_none=True, name=name)
-                if not instance:
-                    return {"alert": f"{model.capitalize()} '{name}' does not exist."}
-                instances.add(instance)
-        instances = instances - set(getattr(target, property))
-        for instance in instances:
-            getattr(target, property).append(instance)
-        target.last_modified = self.get_time()
-        self.update_rbac(*instances)
-        return {"number": len(instances), "target": target.base_properties}
-
     def bulk_removal(
         self,
         table,

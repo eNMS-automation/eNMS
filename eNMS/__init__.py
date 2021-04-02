@@ -3,12 +3,14 @@ from uuid import getnode
 from eNMS.app import app
 from eNMS.controller import controller
 from eNMS.database import db
+from eNMS.forms import form_factory
 from eNMS.models import models
 
 
 class Initialization:
     def __init__(self):
         app.initialize()
+        form_factory.initialize()
         self.configure_database()
         self.configure_server_id()
         self.reset_run_status()

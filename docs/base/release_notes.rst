@@ -65,6 +65,7 @@ def job(self, run, payload, device): -> def job(self, run, device):
 "register_endpoint" should be renamed "_register_endpoint"
 - "export_topology" endpoint should be renamed "topology_export" in migration files
 - Replace all "from eNMS.forms.automation" with "from eNMS.forms"
+- Rename "run_db" to "run_states"
 
 To be tested:
 - Refactoring of the run mechanism:

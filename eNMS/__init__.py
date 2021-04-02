@@ -11,6 +11,8 @@ class Initialization:
     def __init__(self):
         app.initialize()
         form_factory.initialize()
+        if app.cli_command:
+            return
         self.configure_database()
         self.configure_server_id()
         self.reset_run_status()

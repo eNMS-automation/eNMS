@@ -1,4 +1,5 @@
 from collections import defaultdict
+from copy import deepcopy
 from flask import request
 from flask_login import current_user
 from flask_wtf import FlaskForm
@@ -149,6 +150,80 @@ class BaseForm(FlaskForm, metaclass=MetaForm):
             elif field["type"] in db.field_conversion and property in data:
                 data[property] = db.field_conversion[field["type"]](form_data[property])
         return data
+
+
+def filtering_form_generator():
+    for model in ("device", "link", "pool", "run", "service", "task", "user"):
+        properties, relations = app.properties["filtering"].get(model, []), {}
+        for related_model, relation in relationships[model].items():
+            if related_model in ("edges", "results"):
+                continue
+            relations[related_model] = MultipleInstanceField(related_model)
+            relationships[f"{model}_filtering"][related_model] = relation
+            relationships[f"{model}_relation_filtering"][related_model] = relation
+        relation_form = {
+            "template": "filtering",
+            "properties": sorted(relations),
+            "object_type": model,
+            "form_type": HiddenField(default=f"{model}_relation_filtering"),
+            **{
+                **relations,
+                **{
+                    f"{relation}_filter": SelectField(
+                        choices=(("inclusion", "Inclusion"), ("empty", "Empty"))
+                    )
+                    for relation in relations
+                },
+            },
+        }
+        type(f"{model}RelationshipFilteringForm", (BaseForm,), relation_form)
+        form, form_type = deepcopy(relation_form), f"{model}_filtering"
+        for property in properties:
+            form_properties[form_type][f"{property}_filter"] = {"type": "list"}
+        form.update(
+            {
+                "form_type": HiddenField(default=form_type),
+                "properties": sorted(properties) + sorted(relations),
+                **{property: StringField() for property in properties},
+                **{
+                    f"{property}_filter": SelectField(
+                        choices=(
+                            ("inclusion", "Inclusion"),
+                            ("equality", "Equality"),
+                            ("regex", "Regular Expression"),
+                        )
+                    )
+                    for property in properties
+                },
+            }
+        )
+        type(f"{model}FilteringForm", (BaseForm,), form)
+
+
+def add_instance_form_generator():
+    for model in ("device", "link", "user", "service"):
+        relationships[f"add_{model}s"]["instances"] = {
+            "type": "object-list",
+            "model": model,
+        }
+        type(
+            f"{model}RelationshipFilteringForm",
+            (BaseForm,),
+            {
+                "form_type": HiddenField(default=f"add_{model}s"),
+                "action": "eNMS.base.addInstancesToRelation",
+                "model": HiddenField(default=model),
+                "relation_id": HiddenField(),
+                "relation_type": HiddenField(),
+                "property": HiddenField(),
+                "instances": MultipleInstanceField(f"{model}s", model=model),
+                "names": StringField(widget=TextArea(), render_kw={"rows": 8}),
+            },
+        )
+
+
+filtering_form_generator()
+add_instance_form_generator()
 
 
 def choices(iterable):
@@ -805,3 +880,150 @@ class WorkflowEdgeForm(BaseForm):
     id = HiddenField()
     label = StringField()
     color = StringField()
+
+
+class DeviceConnectionForm(BaseForm):
+    template = "device_connection"
+    form_type = HiddenField(default="device_connection")
+    address_choices = [("ip_address", "IP address"), ("name", "Name")] + [
+        (property, values["pretty_name"])
+        for property, values in app.properties["custom"]["device"].items()
+        if values.get("is_address", False)
+    ]
+    address = SelectField(choices=address_choices)
+    username = StringField("Username")
+    password = PasswordField("Password")
+
+
+class ObjectForm(BaseForm):
+    action = "eNMS.base.processData"
+    form_type = HiddenField(default="object")
+    get_request_allowed = False
+    id = HiddenField()
+    name = StringField("Name", [InputRequired()])
+    access_groups = StringField("Groups")
+    description = StringField("Description")
+    subtype = StringField("Subtype")
+    location = StringField("Location")
+    vendor = StringField("Vendor")
+    model = StringField("Model")
+
+
+class DeviceForm(ObjectForm):
+    form_type = HiddenField(default="device")
+    icon = SelectField(
+        "Icon",
+        choices=(
+            ("antenna", "Antenna"),
+            ("firewall", "Firewall"),
+            ("host", "Host"),
+            ("optical_switch", "Optical switch"),
+            ("regenerator", "Regenerator"),
+            ("router", "Router"),
+            ("server", "Server"),
+            ("switch", "Switch"),
+        ),
+    )
+    ip_address = StringField("IP address")
+    port = IntegerField("Port", default=22)
+    operating_system = StringField("Operating System")
+    os_version = StringField("OS Version")
+    longitude = StringField("Longitude", default=0.0)
+    latitude = StringField("Latitude", default=0.0)
+    napalm_driver = SelectField(
+        "NAPALM Driver", choices=app.napalm_drivers, default="ios"
+    )
+    netmiko_driver = SelectField(
+        "Netmiko Driver", choices=app.netmiko_drivers, default="cisco_ios"
+    )
+    scrapli_driver = SelectField(
+        "Scrapli Driver", choices=choices(app.scrapli_drivers), default="cisco_iosxe"
+    )
+
+
+class DeviceDataForm(BaseForm):
+    template = "device_data"
+    form_type = HiddenField(default="device_data")
+    data_type = SelectField("Display", choices=app.configuration_properties)
+
+
+class LinkForm(ObjectForm):
+    action = "eNMS.base.processData"
+    form_type = HiddenField(default="link")
+    source = InstanceField("Source", model="device")
+    destination = InstanceField("Destination", model="device")
+    color = StringField("Color")
+
+
+class PoolForm(BaseForm):
+    template = "pool"
+    form_type = HiddenField(default="pool")
+    id = HiddenField()
+    name = StringField("Name", [InputRequired()])
+    admin_only = BooleanField("Pool visible to admin users only")
+    access_groups = StringField("Groups")
+    description = StringField("Description")
+    manually_defined = BooleanField("Manually defined (won't be automatically updated)")
+
+    @classmethod
+    def form_init(cls):
+        cls.models = ("device", "link", "service", "user")
+        for model in cls.models:
+            setattr(cls, f"{model}_properties", app.properties["filtering"][model])
+            for property in app.properties["filtering"][model]:
+                setattr(cls, f"{model}_{property}", StringField(property))
+                setattr(cls, f"{model}_{property}_invert", BooleanField(property))
+                form_properties["pool"][f"{model}_{property}_match"] = {"type": "list"}
+                form_properties["pool"][f"{model}_{property}_invert"] = {"type": "bool"}
+                setattr(
+                    cls,
+                    f"{model}_{property}_match",
+                    SelectField(
+                        choices=(
+                            ("inclusion", "Inclusion"),
+                            ("equality", "Equality"),
+                            ("regex", "Regular Expression"),
+                        )
+                    ),
+                )
+
+
+class ExcelImportForm(BaseForm):
+    template = "topology_import"
+    form_type = HiddenField(default="excel_import")
+    replace = BooleanField("Replace Existing Topology")
+
+
+class ExportForm(BaseForm):
+    action = "eNMS.inventory.exportTopology"
+    form_type = HiddenField(default="excel_export")
+    export_filename = StringField("Filename")
+
+
+class LogicalViewForm(BaseForm):
+    action = "eNMS.base.processData"
+    form_type = HiddenField(default="view")
+    id = HiddenField()
+    name = StringField("Name", [InputRequired()])
+
+
+class ViewLabelForm(BaseForm):
+    form_type = HiddenField(default="view_label")
+    action = "eNMS.visualization.createLabel"
+    text = StringField(widget=TextArea(), render_kw={"rows": 15})
+
+
+class ViewPlanForm(BaseForm):
+    form_type = HiddenField(default="view_plan")
+    action = "eNMS.visualization.createPlan"
+    name = StringField("Name", [InputRequired()])
+    size = IntegerField("Size", default=2000)
+    rows = IntegerField("Number of Rows", default=100)
+    opacity = FloatField("Opacity", default=1.0)
+
+
+class AddObjectsForm(BaseForm):
+    form_type = HiddenField(default="add_objects_to_view")
+    action = "eNMS.visualization.addObjectsToView"
+    devices = MultipleInstanceField("Devices", model="device")
+    links = MultipleInstanceField("Links", model="link")

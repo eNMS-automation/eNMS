@@ -378,7 +378,7 @@ class Run(AbstractBase):
                 inner_store[last_key] = value
             return state
         else:
-            return app.run_db[self.parent_runtime]
+            return app.run_states[self.parent_runtime]
 
     @property
     def progress(self):

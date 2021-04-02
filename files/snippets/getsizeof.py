@@ -10,7 +10,7 @@ from sys import getsizeof
 VARIABLES = {
     "connections_cache": "Network Connections Cache",
     "service_run_count": "Service Run cache",
-    "run_db": "Run State Cache",
+    "run_states": "Run State Cache",
     "run_logs": "Run Logs Cache",
 }
 

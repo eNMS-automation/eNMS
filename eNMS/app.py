@@ -204,9 +204,6 @@ class App:
         db.base.metadata.create_all(bind=db.engine)
         configure_mappers()
         db.configure_model_events(self)
-        if self.cli_command:
-            return
-        self.init_forms()
 
     def init_encryption(self):
         self.fernet_encryption = getenv("FERNET_KEY")
@@ -215,11 +212,6 @@ class App:
             self.encrypt, self.decrypt = fernet.encrypt, fernet.decrypt
         else:
             self.encrypt, self.decrypt = b64encode, b64decode
-
-    def init_forms(self):
-        for file in (self.path / "eNMS" / "forms").glob("**/*.py"):
-            spec = spec_from_file_location(str(file).split("/")[-1][:-3], str(file))
-            spec.loader.exec_module(module_from_spec(spec))
 
     def init_logs(self):
         folder = self.path / "logs"

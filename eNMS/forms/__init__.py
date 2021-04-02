@@ -3,6 +3,7 @@ from copy import deepcopy
 from flask import request
 from flask_login import current_user
 from flask_wtf import FlaskForm
+from importlib.util import module_from_spec, spec_from_file_location
 from wtforms.fields.core import UnboundField
 from wtforms.form import FormMeta
 from wtforms.validators import InputRequired
@@ -157,6 +158,7 @@ class FormFactory:
         self.generate_administration_forms()
         self.generate_filtering_forms()
         self.generate_instance_insertion_forms()
+        self.generate_service_forms()
 
     def generate_filtering_forms(self):
         for model in ("device", "link", "pool", "run", "service", "task", "user"):
@@ -225,6 +227,11 @@ class FormFactory:
                     "names": StringField(widget=TextArea(), render_kw={"rows": 8}),
                 },
             )
+
+    def generate_service_forms(self):
+        for file in (app.path / "eNMS" / "forms").glob("**/*.py"):
+            spec = spec_from_file_location(str(file).split("/")[-1][:-3], str(file))
+            spec.loader.exec_module(module_from_spec(spec))
 
     def generate_administration_forms(self):
         class SettingsForm(BaseForm):

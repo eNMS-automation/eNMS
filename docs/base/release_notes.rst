@@ -47,6 +47,8 @@ execute for all accessible devices and fail for the inaccessible devices instead
 auto safe restart code that uses it must be updated accordingly.
 - Store and commit web SSH session content in backend instead of relying on send beacon mechanism and
 onbeforeunload callback so that the saving of a session does not depend on user behavior
+- Refactoring of the forms: all forms are now in eNMS.forms.py. Impact on form import:
+eNMS.forms.automation -> eNMS.forms
 
 - Separate controller (handling HTTP POST requests) from main application (gluing everything together)
 Impact:
@@ -62,6 +64,7 @@ def job(self, run, payload, device): -> def job(self, run, device):
 - In all plugins, "monitor_requests" should be renamed to "process_requests" and
 "register_endpoint" should be renamed "_register_endpoint"
 - "export_topology" endpoint should be renamed "topology_export" in migration files
+- Replace all "from eNMS.forms.automation" with "from eNMS.forms"
 
 To be tested:
 - Refactoring of the run mechanism:

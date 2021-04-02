@@ -5,7 +5,7 @@ from sqlalchemy.types import JSON
 from eNMS import app
 from eNMS.database import db
 from eNMS.forms import ServiceForm
-from eNMS.forms.fields import (
+from eNMS.fields import (
     BooleanField,
     DictField,
     HiddenField,

@@ -11,7 +11,7 @@ from wtforms.widgets import TextArea
 
 from eNMS import app
 from eNMS.database import db
-from eNMS.forms.fields import (
+from eNMS.fields import (
     BooleanField,
     HiddenField,
     DictField,

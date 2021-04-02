@@ -2,7 +2,7 @@ from sqlalchemy import Boolean, Float, ForeignKey, Integer
 from traceback import format_exc
 
 from eNMS.database import db
-from eNMS.forms.fields import BooleanField, HiddenField, StringField
+from eNMS.fields import BooleanField, HiddenField, StringField
 from eNMS.forms import NetmikoForm
 from eNMS.models.automation import ConnectionService
 

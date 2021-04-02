@@ -4,7 +4,7 @@ from wtforms.widgets import TextArea
 from eNMS import app
 from eNMS.database import db
 from eNMS.forms import choices
-from eNMS.forms.fields import BooleanField, HiddenField, SelectField, StringField
+from eNMS.fields import BooleanField, HiddenField, SelectField, StringField
 from eNMS.forms import ConnectionForm
 from eNMS.models.automation import ConnectionService
 

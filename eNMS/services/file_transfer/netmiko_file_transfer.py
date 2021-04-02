@@ -3,7 +3,7 @@ from sqlalchemy import Boolean, Float, ForeignKey, Integer
 from wtforms.validators import InputRequired
 
 from eNMS.database import db
-from eNMS.forms.fields import BooleanField, HiddenField, SelectField, StringField
+from eNMS.fields import BooleanField, HiddenField, SelectField, StringField
 from eNMS.forms import NetmikoForm
 from eNMS.models.automation import ConnectionService
 

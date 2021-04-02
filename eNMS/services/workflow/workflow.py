@@ -9,7 +9,7 @@ from eNMS.automation import ServiceRun
 from eNMS.database import db
 from eNMS.models.base import AbstractBase
 from eNMS.forms import ServiceForm
-from eNMS.forms.fields import BooleanField, HiddenField, InstanceField, SelectField
+from eNMS.fields import BooleanField, HiddenField, InstanceField, SelectField
 from eNMS.models.automation import Service
 
 

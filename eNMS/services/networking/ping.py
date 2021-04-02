@@ -4,7 +4,7 @@ from sqlalchemy import ForeignKey, Integer
 
 from eNMS.database import db
 from eNMS.forms import ServiceForm
-from eNMS.forms.fields import HiddenField, IntegerField, SelectField, StringField
+from eNMS.fields import HiddenField, IntegerField, SelectField, StringField
 from eNMS.models.automation import Service
 
 

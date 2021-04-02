@@ -25,8 +25,7 @@ from werkzeug.exceptions import Forbidden
 from eNMS import app
 from eNMS.controller import controller
 from eNMS.database import db
-from eNMS.forms import form_classes, form_properties
-from eNMS.forms.administration import LoginForm
+from eNMS.forms import form_classes, form_properties, LoginForm
 from eNMS.models import models, property_types, relationships
 from eNMS.rest_api import RestApi
 from eNMS.setup import properties, themes, visualization

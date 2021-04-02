@@ -153,7 +153,6 @@ class BaseForm(FlaskForm, metaclass=MetaForm):
 
 
 class FormFactory:
-
     def initialize(self):
         self.generate_administration_forms()
         self.generate_filtering_forms()
@@ -206,7 +205,6 @@ class FormFactory:
             )
             type(f"{model}FilteringForm", (BaseForm,), form)
 
-
     def generate_instance_insertion_forms(self):
         for model in ("device", "link", "user", "service"):
             relationships[f"add_{model}s"]["instances"] = {
@@ -235,11 +233,9 @@ class FormFactory:
             settings = JsonField("Settings")
             write_changes = BooleanField("Write changes back to 'settings.json' file")
 
-
         class AdminForm(BaseForm):
             template = "administration"
             form_type = HiddenField(default="administration")
-
 
         class DebugForm(BaseForm):
             template = "debug"
@@ -254,12 +250,10 @@ class FormFactory:
             )
             output = StringField("Output", widget=TextArea(), render_kw={"rows": 16})
 
-
         class UploadFilesForm(BaseForm):
             template = "upload_files"
             folder = HiddenField()
             form_type = HiddenField(default="upload_files")
-
 
         class ResultLogDeletionForm(BaseForm):
             action = "eNMS.administration.resultLogDeletion"
@@ -270,7 +264,6 @@ class FormFactory:
             )
             date_time = StringField(type="date", label="Delete Records before")
 
-
         class ServerForm(BaseForm):
             action = "eNMS.base.processData"
             form_type = HiddenField(default="server")
@@ -279,7 +272,6 @@ class FormFactory:
             description = StringField(widget=TextArea(), render_kw={"rows": 6})
             ip_address = StringField("IP address")
             weight = IntegerField("Weigth", default=1)
-
 
         class CredentialForm(BaseForm):
             action = "eNMS.base.processData"
@@ -295,7 +287,8 @@ class FormFactory:
                 ),
             )
             subtype = SelectField(
-                "Subtype", choices=(("password", "Username / Password"), ("key", "SSH Key"))
+                "Subtype",
+                choices=(("password", "Username / Password"), ("key", "SSH Key")),
             )
             device_pools = MultipleInstanceField("Devices", model="pool")
             user_pools = MultipleInstanceField("Users", model="pool")
@@ -305,7 +298,6 @@ class FormFactory:
             private_key = StringField(widget=TextArea(), render_kw={"rows": 1})
             enable_password = PasswordField("'Enable' Password")
 
-
         class LoginForm(BaseForm):
             form_type = HiddenField(default="login")
             get_request_allowed = False
@@ -313,12 +305,10 @@ class FormFactory:
             username = StringField("Name", [InputRequired()])
             password = PasswordField("Password", [InputRequired()])
 
-
         class ImportService(BaseForm):
             action = "eNMS.administration.importService"
             form_type = HiddenField(default="import_service")
             service = SelectField("Service", choices=())
-
 
         class ChangelogForm(BaseForm):
             action = "eNMS.base.processData"
@@ -336,7 +326,6 @@ class FormFactory:
             )
             content = StringField(widget=TextArea(), render_kw={"rows": 10})
 
-
         class RbacForm(BaseForm):
             action = "eNMS.base.processData"
             form_type = HiddenField(default="rbac")
@@ -346,13 +335,15 @@ class FormFactory:
             description = StringField(widget=TextArea(), render_kw={"rows": 6})
             email = StringField("Email")
 
-
         class UserForm(RbacForm):
             form_type = HiddenField(default="user")
             groups = StringField("Groups")
             theme = SelectField(
                 "Theme",
-                choices=[(theme, values["name"]) for theme, values in themes["themes"].items()],
+                choices=[
+                    (theme, values["name"])
+                    for theme, values in themes["themes"].items()
+                ],
             )
             authentication = SelectField(
                 "Authentication",
@@ -363,7 +354,6 @@ class FormFactory:
             )
             password = PasswordField("Password")
             is_admin = BooleanField(default=False)
-
 
         class AccessForm(RbacForm):
             template = "access"
@@ -381,7 +371,12 @@ class FormFactory:
             @classmethod
             def form_init(cls):
                 cls.configure_relationships("users")
-                keys = ("get_requests", "post_requests", "delete_requests", "upper_menu")
+                keys = (
+                    "get_requests",
+                    "post_requests",
+                    "delete_requests",
+                    "upper_menu",
+                )
                 for key in keys:
                     values = [(k, k) for k, v in app.rbac[key].items() if v == "access"]
                     field_name = " ".join(key.split("_")).capitalize()
@@ -403,9 +398,12 @@ class FormFactory:
                                 continue
                             if subpage_values["rbac"] == "access":
                                 pages.append(subpage)
-                setattr(cls, "menu", SelectMultipleField("Menu", choices=choices(menus)))
-                setattr(cls, "pages", SelectMultipleField("Pages", choices=choices(pages)))
-
+                setattr(
+                    cls, "menu", SelectMultipleField("Menu", choices=choices(menus))
+                )
+                setattr(
+                    cls, "pages", SelectMultipleField("Pages", choices=choices(pages))
+                )
 
         class DatabaseMigrationsForm(BaseForm):
             template = "database_migration"
@@ -422,7 +420,6 @@ class FormFactory:
                 "Instances to migrate", choices=export_choices
             )
 
-
         class DatabaseDeletionForm(BaseForm):
             action = "eNMS.administration.databaseDeletion"
             form_type = HiddenField(default="database_deletion")
@@ -431,14 +428,12 @@ class FormFactory:
                 "Instances to delete", choices=deletion_choices
             )
 
+
 form_factory = FormFactory()
 
 
 def choices(iterable):
     return [(choice, choice) for choice in iterable]
-
-
-
 
 
 class ServiceForm(BaseForm):

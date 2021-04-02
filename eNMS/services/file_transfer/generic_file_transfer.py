@@ -7,7 +7,7 @@ from wtforms.validators import InputRequired
 
 from eNMS import app
 from eNMS.database import db
-from eNMS.forms.automation import ServiceForm
+from eNMS.forms import ServiceForm
 from eNMS.forms.fields import (
     BooleanField,
     FloatField,

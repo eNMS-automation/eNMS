@@ -4,7 +4,7 @@ from wtforms.validators import InputRequired
 
 from eNMS.database import db
 from eNMS.forms.fields import BooleanField, HiddenField, SelectField, StringField
-from eNMS.forms.automation import NetmikoForm
+from eNMS.forms import NetmikoForm
 from eNMS.models.automation import ConnectionService
 
 

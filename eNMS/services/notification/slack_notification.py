@@ -10,7 +10,7 @@ except ImportError as exc:
 
 from eNMS import app
 from eNMS.database import db
-from eNMS.forms.automation import ServiceForm
+from eNMS.forms import ServiceForm
 from eNMS.forms.fields import HiddenField, StringField
 from eNMS.models.automation import Service
 

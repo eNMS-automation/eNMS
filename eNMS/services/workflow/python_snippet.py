@@ -3,7 +3,7 @@ from sqlalchemy import ForeignKey, Integer
 from wtforms.widgets import TextArea
 
 from eNMS.database import db
-from eNMS.forms.automation import ServiceForm
+from eNMS.forms import ServiceForm
 from eNMS.forms.fields import HiddenField, StringField
 from eNMS.models.automation import Service
 

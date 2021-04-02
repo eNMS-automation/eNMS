@@ -3,7 +3,7 @@ from subprocess import check_output
 from sqlalchemy import ForeignKey, Integer
 
 from eNMS.database import db
-from eNMS.forms.automation import ServiceForm
+from eNMS.forms import ServiceForm
 from eNMS.forms.fields import HiddenField, IntegerField, SelectField, StringField
 from eNMS.models.automation import Service
 

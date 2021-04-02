@@ -7,7 +7,7 @@ from wtforms import FormField
 
 from eNMS import app
 from eNMS.database import db
-from eNMS.forms.automation import NetmikoForm
+from eNMS.forms import NetmikoForm
 from eNMS.forms.fields import (
     BooleanField,
     FieldList,

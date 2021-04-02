@@ -22,7 +22,7 @@ from wtforms.validators import (
 )
 
 from eNMS.database import db
-from eNMS.forms.automation import ServiceForm
+from eNMS.forms import ServiceForm
 from eNMS.forms.fields import (
     BooleanField,
     DictField,

@@ -5,7 +5,7 @@ from eNMS import app
 from eNMS.database import db
 from eNMS.forms import choices
 from eNMS.forms.fields import BooleanField, HiddenField, SelectField, StringField
-from eNMS.forms.automation import ConnectionForm
+from eNMS.forms import ConnectionForm
 from eNMS.models.automation import ConnectionService
 
 

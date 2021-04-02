@@ -144,5 +144,4 @@ class Changelog(AbstractBase):
     user = db.Column(db.SmallString, default="admin")
 
     def update(self, **kwargs):
-        kwargs["time"] = str(datetime.now())
-        super().update(**kwargs)
+        super().update(**{"time": app.get_time(), **kwargs})

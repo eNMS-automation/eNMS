@@ -359,6 +359,18 @@ class DeviceDataForm(BaseForm):
     data_type = SelectField("Display", choices=app.configuration_properties)
 
 
+class ExcelImportForm(BaseForm):
+    template = "topology_import"
+    form_type = HiddenField(default="excel_import")
+    replace = BooleanField("Replace Existing Topology")
+
+
+class ExportForm(BaseForm):
+    action = "eNMS.inventory.exportTopology"
+    form_type = HiddenField(default="excel_export")
+    export_filename = StringField("Filename")
+
+
 class FileForm(BaseForm):
     template = "file"
     form_type = HiddenField(default="file")
@@ -385,6 +397,53 @@ class LoginForm(BaseForm):
     authentication_method = SelectField("Authentication Method", choices=())
     username = StringField("Name", [InputRequired()])
     password = PasswordField("Password", [InputRequired()])
+
+
+class ObjectForm(BaseForm):
+    action = "eNMS.base.processData"
+    form_type = HiddenField(default="object")
+    get_request_allowed = False
+    id = HiddenField()
+    name = StringField("Name", [InputRequired()])
+    access_groups = StringField("Groups")
+    description = StringField("Description")
+    subtype = StringField("Subtype")
+    location = StringField("Location")
+    vendor = StringField("Vendor")
+    model = StringField("Model")
+
+
+class PoolForm(BaseForm):
+    template = "pool"
+    form_type = HiddenField(default="pool")
+    id = HiddenField()
+    name = StringField("Name", [InputRequired()])
+    admin_only = BooleanField("Pool visible to admin users only")
+    access_groups = StringField("Groups")
+    description = StringField("Description")
+    manually_defined = BooleanField("Manually defined (won't be automatically updated)")
+
+    @classmethod
+    def form_init(cls):
+        cls.models = ("device", "link", "service", "user")
+        for model in cls.models:
+            setattr(cls, f"{model}_properties", app.properties["filtering"][model])
+            for property in app.properties["filtering"][model]:
+                setattr(cls, f"{model}_{property}", StringField(property))
+                setattr(cls, f"{model}_{property}_invert", BooleanField(property))
+                form_properties["pool"][f"{model}_{property}_match"] = {"type": "list"}
+                form_properties["pool"][f"{model}_{property}_invert"] = {"type": "bool"}
+                setattr(
+                    cls,
+                    f"{model}_{property}_match",
+                    SelectField(
+                        choices=(
+                            ("inclusion", "Inclusion"),
+                            ("equality", "Equality"),
+                            ("regex", "Regular Expression"),
+                        )
+                    ),
+                )
 
 
 class RbacForm(BaseForm):
@@ -813,6 +872,40 @@ class ConnectionForm(ServiceForm):
     }
 
 
+class DeviceForm(ObjectForm):
+    form_type = HiddenField(default="device")
+    icon = SelectField(
+        "Icon",
+        choices=(
+            ("antenna", "Antenna"),
+            ("firewall", "Firewall"),
+            ("host", "Host"),
+            ("optical_switch", "Optical switch"),
+            ("regenerator", "Regenerator"),
+            ("router", "Router"),
+            ("server", "Server"),
+            ("switch", "Switch"),
+        ),
+    )
+    ip_address = StringField("IP address")
+    port = IntegerField("Port", default=22)
+    operating_system = StringField("Operating System")
+    os_version = StringField("OS Version")
+    longitude = StringField("Longitude", default=0.0)
+    latitude = StringField("Latitude", default=0.0)
+    napalm_driver = SelectField(
+        "NAPALM Driver", choices=app.napalm_drivers, default="ios"
+    )
+    netmiko_driver = SelectField(
+        "Netmiko Driver", choices=app.netmiko_drivers, default="cisco_ios"
+    )
+    scrapli_driver = SelectField(
+        "Scrapli Driver",
+        choices=form_factory.choices(app.scrapli_drivers),
+        default="cisco_iosxe",
+    )
+
+
 class NapalmForm(ConnectionForm):
     form_type = HiddenField(default="napalm")
     get_request_allowed = False
@@ -925,99 +1018,6 @@ class NetmikoForm(ConnectionForm):
             "default": "hidden",
         },
     }
-
-
-class ObjectForm(BaseForm):
-    action = "eNMS.base.processData"
-    form_type = HiddenField(default="object")
-    get_request_allowed = False
-    id = HiddenField()
-    name = StringField("Name", [InputRequired()])
-    access_groups = StringField("Groups")
-    description = StringField("Description")
-    subtype = StringField("Subtype")
-    location = StringField("Location")
-    vendor = StringField("Vendor")
-    model = StringField("Model")
-
-
-class DeviceForm(ObjectForm):
-    form_type = HiddenField(default="device")
-    icon = SelectField(
-        "Icon",
-        choices=(
-            ("antenna", "Antenna"),
-            ("firewall", "Firewall"),
-            ("host", "Host"),
-            ("optical_switch", "Optical switch"),
-            ("regenerator", "Regenerator"),
-            ("router", "Router"),
-            ("server", "Server"),
-            ("switch", "Switch"),
-        ),
-    )
-    ip_address = StringField("IP address")
-    port = IntegerField("Port", default=22)
-    operating_system = StringField("Operating System")
-    os_version = StringField("OS Version")
-    longitude = StringField("Longitude", default=0.0)
-    latitude = StringField("Latitude", default=0.0)
-    napalm_driver = SelectField(
-        "NAPALM Driver", choices=app.napalm_drivers, default="ios"
-    )
-    netmiko_driver = SelectField(
-        "Netmiko Driver", choices=app.netmiko_drivers, default="cisco_ios"
-    )
-    scrapli_driver = SelectField(
-        "Scrapli Driver",
-        choices=form_factory.choices(app.scrapli_drivers),
-        default="cisco_iosxe",
-    )
-
-
-class PoolForm(BaseForm):
-    template = "pool"
-    form_type = HiddenField(default="pool")
-    id = HiddenField()
-    name = StringField("Name", [InputRequired()])
-    admin_only = BooleanField("Pool visible to admin users only")
-    access_groups = StringField("Groups")
-    description = StringField("Description")
-    manually_defined = BooleanField("Manually defined (won't be automatically updated)")
-
-    @classmethod
-    def form_init(cls):
-        cls.models = ("device", "link", "service", "user")
-        for model in cls.models:
-            setattr(cls, f"{model}_properties", app.properties["filtering"][model])
-            for property in app.properties["filtering"][model]:
-                setattr(cls, f"{model}_{property}", StringField(property))
-                setattr(cls, f"{model}_{property}_invert", BooleanField(property))
-                form_properties["pool"][f"{model}_{property}_match"] = {"type": "list"}
-                form_properties["pool"][f"{model}_{property}_invert"] = {"type": "bool"}
-                setattr(
-                    cls,
-                    f"{model}_{property}_match",
-                    SelectField(
-                        choices=(
-                            ("inclusion", "Inclusion"),
-                            ("equality", "Equality"),
-                            ("regex", "Regular Expression"),
-                        )
-                    ),
-                )
-
-
-class ExcelImportForm(BaseForm):
-    template = "topology_import"
-    form_type = HiddenField(default="excel_import")
-    replace = BooleanField("Replace Existing Topology")
-
-
-class ExportForm(BaseForm):
-    action = "eNMS.inventory.exportTopology"
-    form_type = HiddenField(default="excel_export")
-    export_filename = StringField("Filename")
 
 
 class LogicalViewForm(BaseForm):

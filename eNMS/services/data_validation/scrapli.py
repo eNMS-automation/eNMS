@@ -1,7 +1,6 @@
 from sqlalchemy import Boolean, ForeignKey, Integer
 from wtforms.widgets import TextArea
 
-from eNMS import app
 from eNMS.database import db
 from eNMS.fields import BooleanField, HiddenField, SelectField, StringField
 from eNMS.forms import ConnectionForm, form_factory

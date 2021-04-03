@@ -2,6 +2,7 @@ from json import load
 from napalm._SUPPORTED_DRIVERS import SUPPORTED_DRIVERS
 from netmiko.ssh_dispatcher import CLASS_MAPPER
 from pathlib import Path
+from warnings import warn
 
 try:
     from scrapli import Scrapli
@@ -12,22 +13,25 @@ except ImportError as exc:
     warn(f"Couldn't import scrapli module ({exc})")
 
 
-class Variables(dict):
+class VariableStore(dict):
     def __init__(self):
         self.load_setup_variables()
         self.load_automation_variables()
 
+    def __setattr__(self, key, value):
+        self[key] = value
+
     def load_setup_variables(self):
         for setup_file in (Path.cwd() / "setup").iterdir():
             with open(setup_file, "r") as file:
-                self[setup_file.stem] = load(file)
+                setattr(self, setup_file.stem, load(file))
 
     def load_automation_variables(self):
-        self["netmiko_drivers"] = sorted((driver, driver) for driver in CLASS_MAPPER)
-        self["napalm_drivers"] = sorted(
+        self.netmiko_drivers = sorted((driver, driver) for driver in CLASS_MAPPER)
+        self.napalm_drivers = sorted(
             (driver, driver) for driver in SUPPORTED_DRIVERS[1:]
         )
-        self["napalm_getters"] = (
+        self.napalm_getters = (
             ("get_arp_table", "ARP table"),
             ("get_bgp_config", "BGP configuration"),
             ("get_bgp_neighbors", "BGP neighbors"),
@@ -50,7 +54,7 @@ class Variables(dict):
             ("get_users", "Users"),
             ("is_alive", "Is alive"),
         )
-        self["scrapli_drivers"] = CORE_PLATFORM_MAP
+        self.scrapli_drivers = CORE_PLATFORM_MAP
 
 
-locals().update(Variables())
+locals().update(VariableStore())

@@ -27,7 +27,7 @@ from eNMS.fields import (
     StringField,
 )
 from eNMS.models import property_types, relationships
-from eNMS.setup import settings, themes
+from eNMS.variables import settings, themes
 
 form_classes = {}
 form_properties = defaultdict(dict)

@@ -34,14 +34,6 @@ try:
 except ImportError as exc:
     warn(f"Couldn't import hvac module ({exc})")
 
-try:
-    from scrapli import Scrapli
-
-    CORE_PLATFORM_MAP = {driver: driver for driver in Scrapli.CORE_PLATFORM_MAP}
-except ImportError as exc:
-    CORE_PLATFORM_MAP = {"cisco_iosxe": "cisco_iosxe"}
-    warn(f"Couldn't import scrapli module ({exc})")
-
 from eNMS.custom import CustomApp
 from eNMS.database import db
 from eNMS.models import model_properties
@@ -49,9 +41,6 @@ from eNMS.variables import database, logging, properties, rbac, settings
 
 
 class App:
-
-
-    scrapli_drivers = CORE_PLATFORM_MAP
 
     log_levels = ["debug", "info", "warning", "error", "critical"]
 

@@ -3,6 +3,14 @@ from napalm._SUPPORTED_DRIVERS import SUPPORTED_DRIVERS
 from netmiko.ssh_dispatcher import CLASS_MAPPER
 from pathlib import Path
 
+try:
+    from scrapli import Scrapli
+
+    CORE_PLATFORM_MAP = {driver: driver for driver in Scrapli.CORE_PLATFORM_MAP}
+except ImportError as exc:
+    CORE_PLATFORM_MAP = {"cisco_iosxe": "cisco_iosxe"}
+    warn(f"Couldn't import scrapli module ({exc})")
+
 
 class Variables(dict):
     def __init__(self):
@@ -16,7 +24,9 @@ class Variables(dict):
 
     def load_automation_variables(self):
         self["netmiko_drivers"] = sorted((driver, driver) for driver in CLASS_MAPPER)
-        self["napalm_drivers"] = sorted((driver, driver) for driver in SUPPORTED_DRIVERS[1:])
+        self["napalm_drivers"] = sorted(
+            (driver, driver) for driver in SUPPORTED_DRIVERS[1:]
+        )
         self["napalm_getters"] = (
             ("get_arp_table", "ARP table"),
             ("get_bgp_config", "BGP configuration"),
@@ -40,5 +50,7 @@ class Variables(dict):
             ("get_users", "Users"),
             ("is_alive", "Is alive"),
         )
+        self["scrapli_drivers"] = CORE_PLATFORM_MAP
+
 
 locals().update(Variables())

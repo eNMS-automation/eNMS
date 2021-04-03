@@ -154,6 +154,10 @@ class BaseForm(FlaskForm, metaclass=MetaForm):
 
 
 class FormFactory:
+    @staticmethod
+    def choices(iterable):
+        return [(choice, choice) for choice in iterable]
+
     def initialize(self):
         self.generate_filtering_forms()
         self.generate_instance_insertion_forms()
@@ -236,19 +240,17 @@ class FormFactory:
 form_factory = FormFactory()
 
 
-def choices(iterable):
-    return [(choice, choice) for choice in iterable]
-
-
 class SettingsForm(BaseForm):
     form_type = HiddenField(default="settings_panel")
     action = "eNMS.administration.saveSettings"
     settings = JsonField("Settings")
     write_changes = BooleanField("Write changes back to 'settings.json' file")
 
+
 class AdminForm(BaseForm):
     template = "administration"
     form_type = HiddenField(default="administration")
+
 
 class DebugForm(BaseForm):
     template = "debug"
@@ -263,10 +265,12 @@ class DebugForm(BaseForm):
     )
     output = StringField("Output", widget=TextArea(), render_kw={"rows": 16})
 
+
 class UploadFilesForm(BaseForm):
     template = "upload_files"
     folder = HiddenField()
     form_type = HiddenField(default="upload_files")
+
 
 class ResultLogDeletionForm(BaseForm):
     action = "eNMS.administration.resultLogDeletion"
@@ -277,6 +281,7 @@ class ResultLogDeletionForm(BaseForm):
     )
     date_time = StringField(type="date", label="Delete Records before")
 
+
 class ServerForm(BaseForm):
     action = "eNMS.base.processData"
     form_type = HiddenField(default="server")
@@ -285,6 +290,7 @@ class ServerForm(BaseForm):
     description = StringField(widget=TextArea(), render_kw={"rows": 6})
     ip_address = StringField("IP address")
     weight = IntegerField("Weigth", default=1)
+
 
 class CredentialForm(BaseForm):
     action = "eNMS.base.processData"
@@ -311,6 +317,7 @@ class CredentialForm(BaseForm):
     private_key = StringField(widget=TextArea(), render_kw={"rows": 1})
     enable_password = PasswordField("'Enable' Password")
 
+
 class LoginForm(BaseForm):
     form_type = HiddenField(default="login")
     get_request_allowed = False
@@ -318,10 +325,12 @@ class LoginForm(BaseForm):
     username = StringField("Name", [InputRequired()])
     password = PasswordField("Password", [InputRequired()])
 
+
 class ImportService(BaseForm):
     action = "eNMS.administration.importService"
     form_type = HiddenField(default="import_service")
     service = SelectField("Service", choices=())
+
 
 class ChangelogForm(BaseForm):
     action = "eNMS.base.processData"
@@ -339,6 +348,7 @@ class ChangelogForm(BaseForm):
     )
     content = StringField(widget=TextArea(), render_kw={"rows": 10})
 
+
 class RbacForm(BaseForm):
     action = "eNMS.base.processData"
     form_type = HiddenField(default="rbac")
@@ -348,15 +358,13 @@ class RbacForm(BaseForm):
     description = StringField(widget=TextArea(), render_kw={"rows": 6})
     email = StringField("Email")
 
+
 class UserForm(RbacForm):
     form_type = HiddenField(default="user")
     groups = StringField("Groups")
     theme = SelectField(
         "Theme",
-        choices=[
-            (theme, values["name"])
-            for theme, values in themes["themes"].items()
-        ],
+        choices=[(theme, values["name"]) for theme, values in themes["themes"].items()],
     )
     authentication = SelectField(
         "Authentication",
@@ -368,6 +376,7 @@ class UserForm(RbacForm):
     password = PasswordField("Password")
     is_admin = BooleanField(default=False)
 
+
 class AccessForm(RbacForm):
     template = "access"
     form_type = HiddenField(default="access")
@@ -375,7 +384,7 @@ class AccessForm(RbacForm):
     access_pools = MultipleInstanceField("pool")
     access_type = SelectMultipleStringField(
         "Access Type",
-        choices=choices(
+        choices=form_factory.choices(
             ["Read", "Edit", "Run", "Schedule", "Connect", "Use as target"]
         ),
     )
@@ -412,11 +421,16 @@ class AccessForm(RbacForm):
                     if subpage_values["rbac"] == "access":
                         pages.append(subpage)
         setattr(
-            cls, "menu", SelectMultipleField("Menu", choices=choices(menus))
+            cls,
+            "menu",
+            SelectMultipleField("Menu", choices=form_factory.choices(menus)),
         )
         setattr(
-            cls, "pages", SelectMultipleField("Pages", choices=choices(pages))
+            cls,
+            "pages",
+            SelectMultipleField("Pages", choices=form_factory.choices(pages)),
         )
+
 
 class DatabaseMigrationsForm(BaseForm):
     template = "database_migration"
@@ -432,6 +446,7 @@ class DatabaseMigrationsForm(BaseForm):
     import_export_types = SelectMultipleField(
         "Instances to migrate", choices=export_choices
     )
+
 
 class DatabaseDeletionForm(BaseForm):
     action = "eNMS.administration.databaseDeletion"
@@ -946,7 +961,9 @@ class DeviceForm(ObjectForm):
         "Netmiko Driver", choices=app.netmiko_drivers, default="cisco_ios"
     )
     scrapli_driver = SelectField(
-        "Scrapli Driver", choices=choices(app.scrapli_drivers), default="cisco_iosxe"
+        "Scrapli Driver",
+        choices=form_factory.choices(app.scrapli_drivers),
+        default="cisco_iosxe",
     )
 
 

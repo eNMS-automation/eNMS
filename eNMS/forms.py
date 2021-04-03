@@ -240,9 +240,75 @@ class FormFactory:
 form_factory = FormFactory()
 
 
+class AccessForm(RbacForm):
+    template = "access"
+    form_type = HiddenField(default="access")
+    user_pools = MultipleInstanceField("pool")
+    access_pools = MultipleInstanceField("pool")
+    access_type = SelectMultipleStringField(
+        "Access Type",
+        choices=form_factory.choices(
+            ["Read", "Edit", "Run", "Schedule", "Connect", "Use as target"]
+        ),
+    )
+    relations = ["pools", "services"]
+
+    @classmethod
+    def form_init(cls):
+        cls.configure_relationships("users")
+        keys = (
+            "get_requests",
+            "post_requests",
+            "delete_requests",
+            "upper_menu",
+        )
+        for key in keys:
+            values = [(k, k) for k, v in app.rbac[key].items() if v == "access"]
+            field_name = " ".join(key.split("_")).capitalize()
+            setattr(cls, key, SelectMultipleField(field_name, choices=values))
+        menus, pages = [], []
+        for category, values in app.rbac["menu"].items():
+            if values["rbac"] == "admin":
+                continue
+            if values["rbac"] == "access":
+                menus.append(category)
+            for page, page_values in values["pages"].items():
+                if page_values["rbac"] == "admin":
+                    continue
+                if page_values["rbac"] == "access":
+                    pages.append(page)
+                subpages = page_values.get("subpages", {})
+                for subpage, subpage_values in subpages.items():
+                    if subpage_values["rbac"] == "admin":
+                        continue
+                    if subpage_values["rbac"] == "access":
+                        pages.append(subpage)
+        menu_choices = form_factory.choices(menus)
+        setattr(cls, "menu", SelectMultipleField("Menu", choices=menu_choices))
+        page_choices = form_factory.choices(pages)
+        setattr(cls, "pages", SelectMultipleField("Pages", choices=page_choices))
+
+
 class AdminForm(BaseForm):
     template = "administration"
     form_type = HiddenField(default="administration")
+
+
+class ChangelogForm(BaseForm):
+    action = "eNMS.base.processData"
+    form_type = HiddenField(default="changelog")
+    id = HiddenField()
+    severity = SelectField(
+        "Severity",
+        choices=(
+            ("debug", "Debug"),
+            ("info", "Info"),
+            ("warning", "Warning"),
+            ("error", "Error"),
+            ("critical", "Critical"),
+        ),
+    )
+    content = StringField(widget=TextArea(), render_kw={"rows": 10})
 
 
 class CredentialForm(BaseForm):
@@ -299,6 +365,16 @@ class LoginForm(BaseForm):
     password = PasswordField("Password", [InputRequired()])
 
 
+class RbacForm(BaseForm):
+    action = "eNMS.base.processData"
+    form_type = HiddenField(default="rbac")
+    get_request_allowed = False
+    id = HiddenField()
+    name = StringField("Name", [InputRequired()])
+    description = StringField(widget=TextArea(), render_kw={"rows": 6})
+    email = StringField("Email")
+
+
 class ResultLogDeletionForm(BaseForm):
     action = "eNMS.administration.resultLogDeletion"
     form_type = HiddenField(default="result_log_deletion")
@@ -332,33 +408,6 @@ class UploadFilesForm(BaseForm):
     form_type = HiddenField(default="upload_files")
 
 
-class ChangelogForm(BaseForm):
-    action = "eNMS.base.processData"
-    form_type = HiddenField(default="changelog")
-    id = HiddenField()
-    severity = SelectField(
-        "Severity",
-        choices=(
-            ("debug", "Debug"),
-            ("info", "Info"),
-            ("warning", "Warning"),
-            ("error", "Error"),
-            ("critical", "Critical"),
-        ),
-    )
-    content = StringField(widget=TextArea(), render_kw={"rows": 10})
-
-
-class RbacForm(BaseForm):
-    action = "eNMS.base.processData"
-    form_type = HiddenField(default="rbac")
-    get_request_allowed = False
-    id = HiddenField()
-    name = StringField("Name", [InputRequired()])
-    description = StringField(widget=TextArea(), render_kw={"rows": 6})
-    email = StringField("Email")
-
-
 class UserForm(RbacForm):
     form_type = HiddenField(default="user")
     groups = StringField("Groups")
@@ -375,61 +424,6 @@ class UserForm(RbacForm):
     )
     password = PasswordField("Password")
     is_admin = BooleanField(default=False)
-
-
-class AccessForm(RbacForm):
-    template = "access"
-    form_type = HiddenField(default="access")
-    user_pools = MultipleInstanceField("pool")
-    access_pools = MultipleInstanceField("pool")
-    access_type = SelectMultipleStringField(
-        "Access Type",
-        choices=form_factory.choices(
-            ["Read", "Edit", "Run", "Schedule", "Connect", "Use as target"]
-        ),
-    )
-    relations = ["pools", "services"]
-
-    @classmethod
-    def form_init(cls):
-        cls.configure_relationships("users")
-        keys = (
-            "get_requests",
-            "post_requests",
-            "delete_requests",
-            "upper_menu",
-        )
-        for key in keys:
-            values = [(k, k) for k, v in app.rbac[key].items() if v == "access"]
-            field_name = " ".join(key.split("_")).capitalize()
-            setattr(cls, key, SelectMultipleField(field_name, choices=values))
-        menus, pages = [], []
-        for category, values in app.rbac["menu"].items():
-            if values["rbac"] == "admin":
-                continue
-            if values["rbac"] == "access":
-                menus.append(category)
-            for page, page_values in values["pages"].items():
-                if page_values["rbac"] == "admin":
-                    continue
-                if page_values["rbac"] == "access":
-                    pages.append(page)
-                subpages = page_values.get("subpages", {})
-                for subpage, subpage_values in subpages.items():
-                    if subpage_values["rbac"] == "admin":
-                        continue
-                    if subpage_values["rbac"] == "access":
-                        pages.append(subpage)
-        setattr(
-            cls,
-            "menu",
-            SelectMultipleField("Menu", choices=form_factory.choices(menus)),
-        )
-        setattr(
-            cls,
-            "pages",
-            SelectMultipleField("Pages", choices=form_factory.choices(pages)),
-        )
 
 
 class DatabaseMigrationsForm(BaseForm):

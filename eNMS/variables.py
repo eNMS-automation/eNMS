@@ -15,4 +15,5 @@ class Variables(dict):
     def load_automation_variables(self):
         pass
 
+
 locals().update(Variables())

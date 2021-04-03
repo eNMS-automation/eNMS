@@ -27,7 +27,7 @@ from eNMS.fields import (
     StringField,
 )
 from eNMS.models import property_types, relationships
-from eNMS.variables import settings, themes
+from eNMS.variables import napalm_drivers, netmiko_drivers, settings, themes
 
 form_classes = {}
 form_properties = defaultdict(dict)
@@ -897,10 +897,10 @@ class DeviceForm(ObjectForm):
     longitude = StringField("Longitude", default=0.0)
     latitude = StringField("Latitude", default=0.0)
     napalm_driver = SelectField(
-        "NAPALM Driver", choices=app.napalm_drivers, default="ios"
+        "NAPALM Driver", choices=napalm_drivers, default="ios"
     )
     netmiko_driver = SelectField(
-        "Netmiko Driver", choices=app.netmiko_drivers, default="cisco_ios"
+        "Netmiko Driver", choices=netmiko_drivers, default="cisco_ios"
     )
     scrapli_driver = SelectField(
         "Scrapli Driver",
@@ -921,7 +921,7 @@ class NapalmForm(ConnectionForm):
     form_type = HiddenField(default="napalm")
     get_request_allowed = False
     abstract_service = True
-    driver = SelectField(choices=app.napalm_drivers)
+    driver = SelectField(choices=napalm_drivers)
     use_device_driver = BooleanField(default=True)
     timeout = IntegerField(default=10)
     optional_args = DictField()
@@ -937,7 +937,7 @@ class NapalmForm(ConnectionForm):
 class NetmikoForm(ConnectionForm):
     form_type = HiddenField(default="netmiko")
     abstract_service = True
-    driver = SelectField(choices=app.netmiko_drivers)
+    driver = SelectField(choices=netmiko_drivers)
     use_device_driver = BooleanField(default=True)
     enable_mode = BooleanField(
         "Enable mode (run in enable mode or as root)", default=True

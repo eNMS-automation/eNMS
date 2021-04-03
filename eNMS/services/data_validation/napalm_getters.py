@@ -5,6 +5,7 @@ from eNMS.database import db
 from eNMS.forms import NapalmForm
 from eNMS.fields import HiddenField, SelectMultipleField
 from eNMS.models.automation import ConnectionService
+from eNMS.variables import napalm_getters
 
 
 class NapalmGettersService(ConnectionService):
@@ -39,7 +40,7 @@ class NapalmGettersService(ConnectionService):
 
 class NapalmGettersForm(NapalmForm):
     form_type = HiddenField(default="napalm_getters_service")
-    getters = SelectMultipleField(choices=app.napalm_getters)
+    getters = SelectMultipleField(choices=napalm_getters)
     groups = {
         "Main Parameters": {"commands": ["getters"], "default": "expanded"},
         **NapalmForm.groups,

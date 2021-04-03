@@ -13,6 +13,7 @@ from eNMS.fields import (
     StringField,
 )
 from eNMS.models.automation import ConnectionService
+from eNMS.variables import netmiko_drivers
 
 
 class UnixShellScriptService(ConnectionService):
@@ -97,7 +98,7 @@ class UnixShellScriptForm(NetmikoForm):
             "fi\n"
         ),
     )
-    driver = SelectField(choices=app.netmiko_drivers, default="linux")
+    driver = SelectField(choices=netmiko_drivers, default="linux")
     use_device_driver = BooleanField(default=True)
     fast_cli = BooleanField()
     timeout = IntegerField(default=10)

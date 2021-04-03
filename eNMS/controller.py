@@ -1221,14 +1221,14 @@ class Controller:
             return {"alert": "Unauthorized authentication method."}
         session = str(uuid4())
         device = db.fetch("device", id=device_id, rbac="connect")
-        self.ssh_sessions[session] = {
+        app.ssh_sessions[session] = {
             "device": device.id,
             "form": kwargs,
             "user": current_user.name,
         }
         if "authentication" in kwargs:
             credentials = self.get_credentials(device, **kwargs)
-            self.ssh_sessions[session]["credentials"] = credentials
+            app.ssh_sessions[session]["credentials"] = credentials
         return {"device": device.name, "session": session}
 
 

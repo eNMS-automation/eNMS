@@ -12,7 +12,7 @@ from eNMS.controller import controller
 from eNMS.models import models
 from eNMS.models.base import AbstractBase
 from eNMS.database import db
-from eNMS.setup import properties
+from eNMS.variables import properties
 
 
 class Object(AbstractBase):

@@ -28,7 +28,7 @@ from eNMS.database import db
 from eNMS.forms import form_classes, form_properties
 from eNMS.models import models, property_types, relationships
 from eNMS.rest_api import RestApi
-from eNMS.setup import properties, themes, visualization
+from eNMS.variables import properties, themes, visualization
 
 
 class Server(Flask):

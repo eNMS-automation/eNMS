@@ -31,7 +31,7 @@ from time import sleep
 from traceback import format_exc
 
 from eNMS.models import model_properties, models, property_types, relationships
-from eNMS.setup import database as database_settings, properties, rbac as rbac_settings
+from eNMS.variables import database as database_settings, properties, rbac as rbac_settings
 
 
 class Database:

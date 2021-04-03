@@ -47,7 +47,7 @@ except ImportError as exc:
 from eNMS.custom import CustomApp
 from eNMS.database import db
 from eNMS.models import model_properties
-from eNMS.setup import database, logging, properties, rbac, settings
+from eNMS.variables import database, logging, properties, rbac, settings
 
 
 class App:

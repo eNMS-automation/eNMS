@@ -2,7 +2,7 @@ from werkzeug.datastructures import ImmutableMultiDict
 
 from eNMS import app
 from eNMS.database import db
-from eNMS.setup import properties
+from eNMS.variables import properties
 
 from tests.conftest import check_pages
 

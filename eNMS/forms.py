@@ -1047,3 +1047,4 @@ class UserForm(RbacForm):
     )
     password = PasswordField("Password")
     is_admin = BooleanField(default=False)
+    

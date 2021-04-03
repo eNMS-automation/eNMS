@@ -32,7 +32,7 @@ from xlwt import Workbook
 from eNMS import app
 from eNMS.database import db
 from eNMS.models import models, model_properties, property_types, relationships
-from eNMS.setup import properties
+from eNMS.variables import properties
 
 
 class Controller:

@@ -49,6 +49,7 @@ auto safe restart code that uses it must be updated accordingly.
 onbeforeunload callback so that the saving of a session does not depend on user behavior
 - Refactoring of the forms: all forms are now in eNMS.forms.py. Impact on form import:
 eNMS.forms.automation -> eNMS.forms
+- Refactoring of the setup file: replace "from eNMS.setup" with "from eNMS.variables"
 
 - Separate controller (handling HTTP POST requests) from main application (gluing everything together)
 Impact:

@@ -35,7 +35,7 @@ except ImportError as exc:
 from eNMS import app
 from eNMS.database import db
 from eNMS.models import models
-from eNMS.setup import automation
+from eNMS.variables import automation
 
 
 class ServiceRun:

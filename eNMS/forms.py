@@ -240,56 +240,9 @@ class FormFactory:
 form_factory = FormFactory()
 
 
-class SettingsForm(BaseForm):
-    form_type = HiddenField(default="settings_panel")
-    action = "eNMS.administration.saveSettings"
-    settings = JsonField("Settings")
-    write_changes = BooleanField("Write changes back to 'settings.json' file")
-
-
 class AdminForm(BaseForm):
     template = "administration"
     form_type = HiddenField(default="administration")
-
-
-class DebugForm(BaseForm):
-    template = "debug"
-    form_type = HiddenField(default="debug")
-    snippets = SelectField(validate_choice=False)
-    code = StringField(
-        "Python Code",
-        type="code",
-        python=True,
-        widget=TextArea(),
-        render_kw={"rows": 15},
-    )
-    output = StringField("Output", widget=TextArea(), render_kw={"rows": 16})
-
-
-class UploadFilesForm(BaseForm):
-    template = "upload_files"
-    folder = HiddenField()
-    form_type = HiddenField(default="upload_files")
-
-
-class ResultLogDeletionForm(BaseForm):
-    action = "eNMS.administration.resultLogDeletion"
-    form_type = HiddenField(default="result_log_deletion")
-    deletion_types = SelectMultipleField(
-        "Instances do delete",
-        choices=[("run", "result"), ("changelog", "changelog")],
-    )
-    date_time = StringField(type="date", label="Delete Records before")
-
-
-class ServerForm(BaseForm):
-    action = "eNMS.base.processData"
-    form_type = HiddenField(default="server")
-    id = HiddenField()
-    name = StringField("Name", [InputRequired()])
-    description = StringField(widget=TextArea(), render_kw={"rows": 6})
-    ip_address = StringField("IP address")
-    weight = IntegerField("Weigth", default=1)
 
 
 class CredentialForm(BaseForm):
@@ -318,6 +271,26 @@ class CredentialForm(BaseForm):
     enable_password = PasswordField("'Enable' Password")
 
 
+class DebugForm(BaseForm):
+    template = "debug"
+    form_type = HiddenField(default="debug")
+    snippets = SelectField(validate_choice=False)
+    code = StringField(
+        "Python Code",
+        type="code",
+        python=True,
+        widget=TextArea(),
+        render_kw={"rows": 15},
+    )
+    output = StringField("Output", widget=TextArea(), render_kw={"rows": 16})
+
+
+class ImportService(BaseForm):
+    action = "eNMS.administration.importService"
+    form_type = HiddenField(default="import_service")
+    service = SelectField("Service", choices=())
+
+
 class LoginForm(BaseForm):
     form_type = HiddenField(default="login")
     get_request_allowed = False
@@ -326,10 +299,37 @@ class LoginForm(BaseForm):
     password = PasswordField("Password", [InputRequired()])
 
 
-class ImportService(BaseForm):
-    action = "eNMS.administration.importService"
-    form_type = HiddenField(default="import_service")
-    service = SelectField("Service", choices=())
+class ResultLogDeletionForm(BaseForm):
+    action = "eNMS.administration.resultLogDeletion"
+    form_type = HiddenField(default="result_log_deletion")
+    deletion_types = SelectMultipleField(
+        "Instances do delete",
+        choices=[("run", "result"), ("changelog", "changelog")],
+    )
+    date_time = StringField(type="date", label="Delete Records before")
+
+
+class ServerForm(BaseForm):
+    action = "eNMS.base.processData"
+    form_type = HiddenField(default="server")
+    id = HiddenField()
+    name = StringField("Name", [InputRequired()])
+    description = StringField(widget=TextArea(), render_kw={"rows": 6})
+    ip_address = StringField("IP address")
+    weight = IntegerField("Weigth", default=1)
+
+
+class SettingsForm(BaseForm):
+    form_type = HiddenField(default="settings_panel")
+    action = "eNMS.administration.saveSettings"
+    settings = JsonField("Settings")
+    write_changes = BooleanField("Write changes back to 'settings.json' file")
+
+
+class UploadFilesForm(BaseForm):
+    template = "upload_files"
+    folder = HiddenField()
+    form_type = HiddenField(default="upload_files")
 
 
 class ChangelogForm(BaseForm):

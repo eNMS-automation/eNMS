@@ -240,6 +240,13 @@ class FormFactory:
 form_factory = FormFactory()
 
 
+class AddObjectsForm(BaseForm):
+    form_type = HiddenField(default="add_objects_to_view")
+    action = "eNMS.visualization.addObjectsToView"
+    devices = MultipleInstanceField("Devices", model="device")
+    links = MultipleInstanceField("Links", model="link")
+
+
 class AddServiceForm(BaseForm):
     form_type = HiddenField(default="add_services_to_workflow")
     template = "add_services_to_workflow"
@@ -389,6 +396,13 @@ class LinkForm(ObjectForm):
     source = InstanceField("Source", model="device")
     destination = InstanceField("Destination", model="device")
     color = StringField("Color")
+
+
+class LogicalViewForm(BaseForm):
+    action = "eNMS.base.processData"
+    form_type = HiddenField(default="view")
+    id = HiddenField()
+    name = StringField("Name", [InputRequired()])
 
 
 class LoginForm(BaseForm):
@@ -757,6 +771,21 @@ class UploadFilesForm(BaseForm):
     form_type = HiddenField(default="upload_files")
 
 
+class ViewLabelForm(BaseForm):
+    form_type = HiddenField(default="view_label")
+    action = "eNMS.visualization.createLabel"
+    text = StringField(widget=TextArea(), render_kw={"rows": 15})
+
+
+class ViewPlanForm(BaseForm):
+    form_type = HiddenField(default="view_plan")
+    action = "eNMS.visualization.createPlan"
+    name = StringField("Name", [InputRequired()])
+    size = IntegerField("Size", default=2000)
+    rows = IntegerField("Number of Rows", default=100)
+    opacity = FloatField("Opacity", default=1.0)
+
+
 class WorkflowLabelForm(BaseForm):
     form_type = HiddenField(default="workflow_label")
     action = "eNMS.workflow.createLabel"
@@ -1018,32 +1047,3 @@ class NetmikoForm(ConnectionForm):
             "default": "hidden",
         },
     }
-
-
-class LogicalViewForm(BaseForm):
-    action = "eNMS.base.processData"
-    form_type = HiddenField(default="view")
-    id = HiddenField()
-    name = StringField("Name", [InputRequired()])
-
-
-class ViewLabelForm(BaseForm):
-    form_type = HiddenField(default="view_label")
-    action = "eNMS.visualization.createLabel"
-    text = StringField(widget=TextArea(), render_kw={"rows": 15})
-
-
-class ViewPlanForm(BaseForm):
-    form_type = HiddenField(default="view_plan")
-    action = "eNMS.visualization.createPlan"
-    name = StringField("Name", [InputRequired()])
-    size = IntegerField("Size", default=2000)
-    rows = IntegerField("Number of Rows", default=100)
-    opacity = FloatField("Opacity", default=1.0)
-
-
-class AddObjectsForm(BaseForm):
-    form_type = HiddenField(default="add_objects_to_view")
-    action = "eNMS.visualization.addObjectsToView"
-    devices = MultipleInstanceField("Devices", model="device")
-    links = MultipleInstanceField("Links", model="link")

@@ -340,6 +340,25 @@ class DebugForm(BaseForm):
     output = StringField("Output", widget=TextArea(), render_kw={"rows": 16})
 
 
+class DeviceConnectionForm(BaseForm):
+    template = "device_connection"
+    form_type = HiddenField(default="device_connection")
+    address_choices = [("ip_address", "IP address"), ("name", "Name")] + [
+        (property, values["pretty_name"])
+        for property, values in app.properties["custom"]["device"].items()
+        if values.get("is_address", False)
+    ]
+    address = SelectField(choices=address_choices)
+    username = StringField("Username")
+    password = PasswordField("Password")
+
+
+class DeviceDataForm(BaseForm):
+    template = "device_data"
+    form_type = HiddenField(default="device_data")
+    data_type = SelectField("Display", choices=app.configuration_properties)
+
+
 class FileForm(BaseForm):
     template = "file"
     form_type = HiddenField(default="file")
@@ -350,6 +369,14 @@ class ImportService(BaseForm):
     action = "eNMS.administration.importService"
     form_type = HiddenField(default="import_service")
     service = SelectField("Service", choices=())
+
+
+class LinkForm(ObjectForm):
+    action = "eNMS.base.processData"
+    form_type = HiddenField(default="link")
+    source = InstanceField("Source", model="device")
+    destination = InstanceField("Destination", model="device")
+    color = StringField("Color")
 
 
 class LoginForm(BaseForm):
@@ -385,6 +412,16 @@ class ResultLogDeletionForm(BaseForm):
         choices=[("run", "result"), ("changelog", "changelog")],
     )
     date_time = StringField(type="date", label="Delete Records before")
+
+
+class RunServiceForm(BaseForm):
+    action = "eNMS.automation.runServicesOnTargets"
+    button_label = "Run Service"
+    button_class = "primary"
+    form_type = HiddenField(default="run_service")
+    targets = HiddenField()
+    type = HiddenField()
+    service = InstanceField("Services", model="service")
 
 
 class ServerForm(BaseForm):
@@ -601,10 +638,82 @@ class SettingsForm(BaseForm):
     write_changes = BooleanField("Write changes back to 'settings.json' file")
 
 
+class TaskForm(BaseForm):
+    action = "eNMS.base.processData"
+    form_type = HiddenField(default="task")
+    id = HiddenField()
+    name = StringField("Name", [InputRequired()])
+    default_access = SelectField(
+        choices=(
+            ("creator", "Creator only"),
+            ("public", "Public (all users)"),
+            ("admin", "Admin Users only"),
+        )
+    )
+    scheduling_mode = SelectField(
+        "Scheduling Mode",
+        choices=(("cron", "Crontab Scheduling"), ("standard", "Standard Scheduling")),
+    )
+    description = StringField("Description")
+    start_date = StringField("Start Date", type="date")
+    end_date = StringField("End Date", type="date")
+    frequency = IntegerField("Frequency", default=0)
+    frequency_unit = SelectField(
+        "Frequency Unit",
+        choices=(
+            ("seconds", "Seconds"),
+            ("minutes", "Minutes"),
+            ("hours", "Hours"),
+            ("days", "Days"),
+        ),
+    )
+    crontab_expression = StringField("Crontab Expression")
+    initial_payload = DictField("Payload")
+
+    @classmethod
+    def form_init(cls):
+        cls.configure_relationships("devices", "pools", "service")
+
+    def validate(self):
+        valid_form = super().validate()
+        if self.name.data == "Bulk Edit":
+            return valid_form
+        no_date = self.scheduling_mode.data == "standard" and not self.start_date.data
+        if no_date:
+            self.start_date.errors.append("A start date must be set.")
+        no_cron_expression = (
+            self.scheduling_mode.data == "cron" and not self.crontab_expression.data
+        )
+        if no_cron_expression:
+            self.crontab_expression.errors.append("A crontab expression must be set.")
+        no_service = not self.service.data
+        if no_service:
+            self.service.errors.append("No service set.")
+        return valid_form and not any([no_date, no_cron_expression, no_service])
+
+
 class UploadFilesForm(BaseForm):
     template = "upload_files"
     folder = HiddenField()
     form_type = HiddenField(default="upload_files")
+
+
+class WorkflowLabelForm(BaseForm):
+    form_type = HiddenField(default="workflow_label")
+    action = "eNMS.workflow.createLabel"
+    text = StringField(widget=TextArea(), render_kw={"rows": 15})
+    alignment = SelectField(
+        "Text Alignment",
+        choices=(("left", "Left"), ("center", "Center"), ("right", "Right")),
+    )
+
+
+class WorkflowEdgeForm(BaseForm):
+    action = "eNMS.base.processData"
+    form_type = HiddenField(default="workflow_edge")
+    id = HiddenField()
+    label = StringField()
+    color = StringField()
 
 
 class UserForm(RbacForm):
@@ -818,101 +927,6 @@ class NetmikoForm(ConnectionForm):
     }
 
 
-class RunServiceForm(BaseForm):
-    action = "eNMS.automation.runServicesOnTargets"
-    button_label = "Run Service"
-    button_class = "primary"
-    form_type = HiddenField(default="run_service")
-    targets = HiddenField()
-    type = HiddenField()
-    service = InstanceField("Services", model="service")
-
-
-class TaskForm(BaseForm):
-    action = "eNMS.base.processData"
-    form_type = HiddenField(default="task")
-    id = HiddenField()
-    name = StringField("Name", [InputRequired()])
-    default_access = SelectField(
-        choices=(
-            ("creator", "Creator only"),
-            ("public", "Public (all users)"),
-            ("admin", "Admin Users only"),
-        )
-    )
-    scheduling_mode = SelectField(
-        "Scheduling Mode",
-        choices=(("cron", "Crontab Scheduling"), ("standard", "Standard Scheduling")),
-    )
-    description = StringField("Description")
-    start_date = StringField("Start Date", type="date")
-    end_date = StringField("End Date", type="date")
-    frequency = IntegerField("Frequency", default=0)
-    frequency_unit = SelectField(
-        "Frequency Unit",
-        choices=(
-            ("seconds", "Seconds"),
-            ("minutes", "Minutes"),
-            ("hours", "Hours"),
-            ("days", "Days"),
-        ),
-    )
-    crontab_expression = StringField("Crontab Expression")
-    initial_payload = DictField("Payload")
-
-    @classmethod
-    def form_init(cls):
-        cls.configure_relationships("devices", "pools", "service")
-
-    def validate(self):
-        valid_form = super().validate()
-        if self.name.data == "Bulk Edit":
-            return valid_form
-        no_date = self.scheduling_mode.data == "standard" and not self.start_date.data
-        if no_date:
-            self.start_date.errors.append("A start date must be set.")
-        no_cron_expression = (
-            self.scheduling_mode.data == "cron" and not self.crontab_expression.data
-        )
-        if no_cron_expression:
-            self.crontab_expression.errors.append("A crontab expression must be set.")
-        no_service = not self.service.data
-        if no_service:
-            self.service.errors.append("No service set.")
-        return valid_form and not any([no_date, no_cron_expression, no_service])
-
-
-class WorkflowLabelForm(BaseForm):
-    form_type = HiddenField(default="workflow_label")
-    action = "eNMS.workflow.createLabel"
-    text = StringField(widget=TextArea(), render_kw={"rows": 15})
-    alignment = SelectField(
-        "Text Alignment",
-        choices=(("left", "Left"), ("center", "Center"), ("right", "Right")),
-    )
-
-
-class WorkflowEdgeForm(BaseForm):
-    action = "eNMS.base.processData"
-    form_type = HiddenField(default="workflow_edge")
-    id = HiddenField()
-    label = StringField()
-    color = StringField()
-
-
-class DeviceConnectionForm(BaseForm):
-    template = "device_connection"
-    form_type = HiddenField(default="device_connection")
-    address_choices = [("ip_address", "IP address"), ("name", "Name")] + [
-        (property, values["pretty_name"])
-        for property, values in app.properties["custom"]["device"].items()
-        if values.get("is_address", False)
-    ]
-    address = SelectField(choices=address_choices)
-    username = StringField("Username")
-    password = PasswordField("Password")
-
-
 class ObjectForm(BaseForm):
     action = "eNMS.base.processData"
     form_type = HiddenField(default="object")
@@ -959,20 +973,6 @@ class DeviceForm(ObjectForm):
         choices=form_factory.choices(app.scrapli_drivers),
         default="cisco_iosxe",
     )
-
-
-class DeviceDataForm(BaseForm):
-    template = "device_data"
-    form_type = HiddenField(default="device_data")
-    data_type = SelectField("Display", choices=app.configuration_properties)
-
-
-class LinkForm(ObjectForm):
-    action = "eNMS.base.processData"
-    form_type = HiddenField(default="link")
-    source = InstanceField("Source", model="device")
-    destination = InstanceField("Destination", model="device")
-    color = StringField("Color")
 
 
 class PoolForm(BaseForm):

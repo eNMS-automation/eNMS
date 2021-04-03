@@ -366,16 +366,16 @@ class DeviceDataForm(BaseForm):
     data_type = SelectField("Display", choices=app.configuration_properties)
 
 
+class ExcelExportForm(BaseForm):
+    action = "eNMS.inventory.exportTopology"
+    form_type = HiddenField(default="excel_export")
+    export_filename = StringField("Filename")
+
+
 class ExcelImportForm(BaseForm):
     template = "topology_import"
     form_type = HiddenField(default="excel_import")
     replace = BooleanField("Replace Existing Topology")
-
-
-class ExportForm(BaseForm):
-    action = "eNMS.inventory.exportTopology"
-    form_type = HiddenField(default="excel_export")
-    export_filename = StringField("Filename")
 
 
 class FileForm(BaseForm):
@@ -388,14 +388,6 @@ class ImportService(BaseForm):
     action = "eNMS.administration.importService"
     form_type = HiddenField(default="import_service")
     service = SelectField("Service", choices=())
-
-
-class LinkForm(ObjectForm):
-    action = "eNMS.base.processData"
-    form_type = HiddenField(default="link")
-    source = InstanceField("Source", model="device")
-    destination = InstanceField("Destination", model="device")
-    color = StringField("Color")
 
 
 class LogicalViewForm(BaseForm):
@@ -804,24 +796,6 @@ class WorkflowEdgeForm(BaseForm):
     color = StringField()
 
 
-class UserForm(RbacForm):
-    form_type = HiddenField(default="user")
-    groups = StringField("Groups")
-    theme = SelectField(
-        "Theme",
-        choices=[(theme, values["name"]) for theme, values in themes["themes"].items()],
-    )
-    authentication = SelectField(
-        "Authentication",
-        choices=[
-            (method, values["display_name"])
-            for method, values in settings["authentication"]["methods"].items()
-        ],
-    )
-    password = PasswordField("Password")
-    is_admin = BooleanField(default=False)
-
-
 class AccessForm(RbacForm):
     template = "access"
     form_type = HiddenField(default="access")
@@ -933,6 +907,14 @@ class DeviceForm(ObjectForm):
         choices=form_factory.choices(app.scrapli_drivers),
         default="cisco_iosxe",
     )
+
+
+class LinkForm(ObjectForm):
+    action = "eNMS.base.processData"
+    form_type = HiddenField(default="link")
+    source = InstanceField("Source", model="device")
+    destination = InstanceField("Destination", model="device")
+    color = StringField("Color")
 
 
 class NapalmForm(ConnectionForm):
@@ -1047,3 +1029,21 @@ class NetmikoForm(ConnectionForm):
             "default": "hidden",
         },
     }
+
+
+class UserForm(RbacForm):
+    form_type = HiddenField(default="user")
+    groups = StringField("Groups")
+    theme = SelectField(
+        "Theme",
+        choices=[(theme, values["name"]) for theme, values in themes["themes"].items()],
+    )
+    authentication = SelectField(
+        "Authentication",
+        choices=[
+            (method, values["display_name"])
+            for method, values in settings["authentication"]["methods"].items()
+        ],
+    )
+    password = PasswordField("Password")
+    is_admin = BooleanField(default=False)

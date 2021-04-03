@@ -3,9 +3,8 @@ from wtforms.widgets import TextArea
 
 from eNMS import app
 from eNMS.database import db
-from eNMS.forms import choices
 from eNMS.fields import BooleanField, HiddenField, SelectField, StringField
-from eNMS.forms import ConnectionForm
+from eNMS.forms import ConnectionForm, form_factory
 from eNMS.models.automation import ConnectionService
 
 
@@ -34,8 +33,10 @@ class ScrapliForm(ConnectionForm):
     form_type = HiddenField(default="scrapli_service")
     commands = StringField(substitution=True, widget=TextArea(), render_kw={"rows": 5})
     is_configuration = BooleanField()
-    driver = SelectField(choices=choices(app.scrapli_drivers))
-    transport = SelectField(choices=choices(("system", "paramiko", "ssh2")))
+    driver = SelectField(choices=form_factory.choices(app.scrapli_drivers))
+    transport = SelectField(
+        choices=form_factory.choices(("system", "paramiko", "ssh2"))
+    )
     use_device_driver = BooleanField(default=True)
     groups = {
         "Main Parameters": {

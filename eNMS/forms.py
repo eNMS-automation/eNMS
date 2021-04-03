@@ -240,53 +240,17 @@ class FormFactory:
 form_factory = FormFactory()
 
 
-class AccessForm(RbacForm):
-    template = "access"
-    form_type = HiddenField(default="access")
-    user_pools = MultipleInstanceField("pool")
-    access_pools = MultipleInstanceField("pool")
-    access_type = SelectMultipleStringField(
-        "Access Type",
-        choices=form_factory.choices(
-            ["Read", "Edit", "Run", "Schedule", "Connect", "Use as target"]
+class AddServiceForm(BaseForm):
+    form_type = HiddenField(default="add_services_to_workflow")
+    template = "add_services_to_workflow"
+    mode = SelectField(
+        "Mode",
+        choices=(
+            ("deep", "Deep Copy (creates a duplicate from the service)"),
+            ("shallow", "Shallow Copy (creates a reference to the service)"),
         ),
     )
-    relations = ["pools", "services"]
-
-    @classmethod
-    def form_init(cls):
-        cls.configure_relationships("users")
-        keys = (
-            "get_requests",
-            "post_requests",
-            "delete_requests",
-            "upper_menu",
-        )
-        for key in keys:
-            values = [(k, k) for k, v in app.rbac[key].items() if v == "access"]
-            field_name = " ".join(key.split("_")).capitalize()
-            setattr(cls, key, SelectMultipleField(field_name, choices=values))
-        menus, pages = [], []
-        for category, values in app.rbac["menu"].items():
-            if values["rbac"] == "admin":
-                continue
-            if values["rbac"] == "access":
-                menus.append(category)
-            for page, page_values in values["pages"].items():
-                if page_values["rbac"] == "admin":
-                    continue
-                if page_values["rbac"] == "access":
-                    pages.append(page)
-                subpages = page_values.get("subpages", {})
-                for subpage, subpage_values in subpages.items():
-                    if subpage_values["rbac"] == "admin":
-                        continue
-                    if subpage_values["rbac"] == "access":
-                        pages.append(subpage)
-        menu_choices = form_factory.choices(menus)
-        setattr(cls, "menu", SelectMultipleField("Menu", choices=menu_choices))
-        page_choices = form_factory.choices(pages)
-        setattr(cls, "pages", SelectMultipleField("Pages", choices=page_choices))
+    search = StringField()
 
 
 class AdminForm(BaseForm):
@@ -337,6 +301,31 @@ class CredentialForm(BaseForm):
     enable_password = PasswordField("'Enable' Password")
 
 
+class DatabaseDeletionForm(BaseForm):
+    action = "eNMS.administration.databaseDeletion"
+    form_type = HiddenField(default="database_deletion")
+    deletion_choices = [(p, p) for p in app.database["import_export_models"]]
+    deletion_types = SelectMultipleField(
+        "Instances to delete", choices=deletion_choices
+    )
+
+
+class DatabaseMigrationsForm(BaseForm):
+    template = "database_migration"
+    form_type = HiddenField(default="database_migration")
+    empty_database_before_import = BooleanField("Empty Database before Import")
+    skip_pool_update = BooleanField(
+        "Skip the Pool update after Import", default="checked"
+    )
+    export_private_properties = BooleanField(
+        "Include private properties", default="checked"
+    )
+    export_choices = [(p, p) for p in app.database["import_export_models"]]
+    import_export_types = SelectMultipleField(
+        "Instances to migrate", choices=export_choices
+    )
+
+
 class DebugForm(BaseForm):
     template = "debug"
     form_type = HiddenField(default="debug")
@@ -349,6 +338,12 @@ class DebugForm(BaseForm):
         render_kw={"rows": 15},
     )
     output = StringField("Output", widget=TextArea(), render_kw={"rows": 16})
+
+
+class FileForm(BaseForm):
+    template = "file"
+    form_type = HiddenField(default="file")
+    file_content = StringField(widget=TextArea(), render_kw={"rows": 8})
 
 
 class ImportService(BaseForm):
@@ -375,6 +370,13 @@ class RbacForm(BaseForm):
     email = StringField("Email")
 
 
+class RestartWorkflowForm(BaseForm):
+    action = "eNMS.workflow.restartWorkflow"
+    form_type = HiddenField(default="restart_workflow")
+    start_services = HiddenField()
+    restart_runtime = SelectField("Restart Runtime", validate_choice=False)
+
+
 class ResultLogDeletionForm(BaseForm):
     action = "eNMS.administration.resultLogDeletion"
     form_type = HiddenField(default="result_log_deletion")
@@ -393,62 +395,6 @@ class ServerForm(BaseForm):
     description = StringField(widget=TextArea(), render_kw={"rows": 6})
     ip_address = StringField("IP address")
     weight = IntegerField("Weigth", default=1)
-
-
-class SettingsForm(BaseForm):
-    form_type = HiddenField(default="settings_panel")
-    action = "eNMS.administration.saveSettings"
-    settings = JsonField("Settings")
-    write_changes = BooleanField("Write changes back to 'settings.json' file")
-
-
-class UploadFilesForm(BaseForm):
-    template = "upload_files"
-    folder = HiddenField()
-    form_type = HiddenField(default="upload_files")
-
-
-class UserForm(RbacForm):
-    form_type = HiddenField(default="user")
-    groups = StringField("Groups")
-    theme = SelectField(
-        "Theme",
-        choices=[(theme, values["name"]) for theme, values in themes["themes"].items()],
-    )
-    authentication = SelectField(
-        "Authentication",
-        choices=[
-            (method, values["display_name"])
-            for method, values in settings["authentication"]["methods"].items()
-        ],
-    )
-    password = PasswordField("Password")
-    is_admin = BooleanField(default=False)
-
-
-class DatabaseMigrationsForm(BaseForm):
-    template = "database_migration"
-    form_type = HiddenField(default="database_migration")
-    empty_database_before_import = BooleanField("Empty Database before Import")
-    skip_pool_update = BooleanField(
-        "Skip the Pool update after Import", default="checked"
-    )
-    export_private_properties = BooleanField(
-        "Include private properties", default="checked"
-    )
-    export_choices = [(p, p) for p in app.database["import_export_models"]]
-    import_export_types = SelectMultipleField(
-        "Instances to migrate", choices=export_choices
-    )
-
-
-class DatabaseDeletionForm(BaseForm):
-    action = "eNMS.administration.databaseDeletion"
-    form_type = HiddenField(default="database_deletion")
-    deletion_choices = [(p, p) for p in app.database["import_export_models"]]
-    deletion_types = SelectMultipleField(
-        "Instances to delete", choices=deletion_choices
-    )
 
 
 class ServiceForm(BaseForm):
@@ -648,6 +594,86 @@ class ServiceForm(BaseForm):
         )
 
 
+class SettingsForm(BaseForm):
+    form_type = HiddenField(default="settings_panel")
+    action = "eNMS.administration.saveSettings"
+    settings = JsonField("Settings")
+    write_changes = BooleanField("Write changes back to 'settings.json' file")
+
+
+class UploadFilesForm(BaseForm):
+    template = "upload_files"
+    folder = HiddenField()
+    form_type = HiddenField(default="upload_files")
+
+
+class UserForm(RbacForm):
+    form_type = HiddenField(default="user")
+    groups = StringField("Groups")
+    theme = SelectField(
+        "Theme",
+        choices=[(theme, values["name"]) for theme, values in themes["themes"].items()],
+    )
+    authentication = SelectField(
+        "Authentication",
+        choices=[
+            (method, values["display_name"])
+            for method, values in settings["authentication"]["methods"].items()
+        ],
+    )
+    password = PasswordField("Password")
+    is_admin = BooleanField(default=False)
+
+
+class AccessForm(RbacForm):
+    template = "access"
+    form_type = HiddenField(default="access")
+    user_pools = MultipleInstanceField("pool")
+    access_pools = MultipleInstanceField("pool")
+    access_type = SelectMultipleStringField(
+        "Access Type",
+        choices=form_factory.choices(
+            ["Read", "Edit", "Run", "Schedule", "Connect", "Use as target"]
+        ),
+    )
+    relations = ["pools", "services"]
+
+    @classmethod
+    def form_init(cls):
+        cls.configure_relationships("users")
+        keys = (
+            "get_requests",
+            "post_requests",
+            "delete_requests",
+            "upper_menu",
+        )
+        for key in keys:
+            values = [(k, k) for k, v in app.rbac[key].items() if v == "access"]
+            field_name = " ".join(key.split("_")).capitalize()
+            setattr(cls, key, SelectMultipleField(field_name, choices=values))
+        menus, pages = [], []
+        for category, values in app.rbac["menu"].items():
+            if values["rbac"] == "admin":
+                continue
+            if values["rbac"] == "access":
+                menus.append(category)
+            for page, page_values in values["pages"].items():
+                if page_values["rbac"] == "admin":
+                    continue
+                if page_values["rbac"] == "access":
+                    pages.append(page)
+                subpages = page_values.get("subpages", {})
+                for subpage, subpage_values in subpages.items():
+                    if subpage_values["rbac"] == "admin":
+                        continue
+                    if subpage_values["rbac"] == "access":
+                        pages.append(subpage)
+        menu_choices = form_factory.choices(menus)
+        setattr(cls, "menu", SelectMultipleField("Menu", choices=menu_choices))
+        page_choices = form_factory.choices(pages)
+        setattr(cls, "pages", SelectMultipleField("Pages", choices=page_choices))
+
+
 class ConnectionForm(ServiceForm):
     form_type = HiddenField(default="connection")
     get_request_allowed = False
@@ -675,6 +701,23 @@ class ConnectionForm(ServiceForm):
             ],
             "default": "expanded",
         }
+    }
+
+
+class NapalmForm(ConnectionForm):
+    form_type = HiddenField(default="napalm")
+    get_request_allowed = False
+    abstract_service = True
+    driver = SelectField(choices=app.napalm_drivers)
+    use_device_driver = BooleanField(default=True)
+    timeout = IntegerField(default=10)
+    optional_args = DictField()
+    groups = {
+        "Napalm Parameters": {
+            "commands": ["driver", "use_device_driver", "timeout", "optional_args"],
+            "default": "expanded",
+        },
+        **ConnectionForm.groups,
     }
 
 
@@ -773,49 +816,6 @@ class NetmikoForm(ConnectionForm):
             "default": "hidden",
         },
     }
-
-
-class NapalmForm(ConnectionForm):
-    form_type = HiddenField(default="napalm")
-    get_request_allowed = False
-    abstract_service = True
-    driver = SelectField(choices=app.napalm_drivers)
-    use_device_driver = BooleanField(default=True)
-    timeout = IntegerField(default=10)
-    optional_args = DictField()
-    groups = {
-        "Napalm Parameters": {
-            "commands": ["driver", "use_device_driver", "timeout", "optional_args"],
-            "default": "expanded",
-        },
-        **ConnectionForm.groups,
-    }
-
-
-class RestartWorkflowForm(BaseForm):
-    action = "eNMS.workflow.restartWorkflow"
-    form_type = HiddenField(default="restart_workflow")
-    start_services = HiddenField()
-    restart_runtime = SelectField("Restart Runtime", validate_choice=False)
-
-
-class FileForm(BaseForm):
-    template = "file"
-    form_type = HiddenField(default="file")
-    file_content = StringField(widget=TextArea(), render_kw={"rows": 8})
-
-
-class AddServiceForm(BaseForm):
-    form_type = HiddenField(default="add_services_to_workflow")
-    template = "add_services_to_workflow"
-    mode = SelectField(
-        "Mode",
-        choices=(
-            ("deep", "Deep Copy (creates a duplicate from the service)"),
-            ("shallow", "Shallow Copy (creates a reference to the service)"),
-        ),
-    )
-    search = StringField()
 
 
 class RunServiceForm(BaseForm):

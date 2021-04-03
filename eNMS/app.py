@@ -85,7 +85,6 @@ class App:
     configuration_timestamps = ("status", "update", "failure", "runtime", "duration")
 
     def __init__(self):
-        print(globals())
         self.path = Path.cwd()
         self.custom = CustomApp(self)
         self.custom.pre_init()

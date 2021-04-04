@@ -151,9 +151,9 @@ class ServiceRun:
 
     def init_state(self):
         if not app.redis_queue:
-            if app.run_states[self.parent_runtime].get(self.path):
+            if vs.run_states[self.parent_runtime].get(self.path):
                 return
-            app.run_states[self.parent_runtime][self.path] = {}
+            vs.run_states[self.parent_runtime][self.path] = {}
         if getattr(self.run, "placeholder", None):
             for property in ("id", "scoped_name", "type"):
                 value = getattr(self.main_run.placeholder, property)
@@ -171,7 +171,7 @@ class ServiceRun:
             )
         else:
             *keys, last = f"{self.parent_runtime}/{self.path}/{path}".split("/")
-            store = app.run_states
+            store = vs.run_states
             for key in keys:
                 store = store.setdefault(key, {})
             if not method:

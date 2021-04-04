@@ -1,3 +1,4 @@
+from collections import defaultdict
 from json import load
 from napalm._SUPPORTED_DRIVERS import SUPPORTED_DRIVERS
 from netmiko.ssh_dispatcher import CLASS_MAPPER
@@ -38,6 +39,7 @@ class VariableStore:
 
     def set_run_variables(self):
         self.run_targets = {}
+        self.run_states = defaultdict(dict)
 
     def set_setup_variables(self):
         for setup_file in (Path.cwd() / "setup").iterdir():

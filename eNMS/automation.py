@@ -49,7 +49,7 @@ class ServiceRun:
         self.start_services = [1]
         self.parent_runtime = kwargs.get("parent_runtime")
         self.runtime = app.get_time()
-        app.run_instances[self.runtime] = self
+        vs.run_instances[self.runtime] = self
         for key, value in kwargs.items():
             setattr(self, key, value)
         device_progress = "iteration_device" if self.iteration_run else "device"
@@ -62,7 +62,7 @@ class ServiceRun:
         else:
             self.path = f"{run.path}>{self.service.id}"
         self.start_run()
-        app.run_instances.pop(self.runtime)
+        vs.run_instances.pop(self.runtime)
 
     def __repr__(self):
         return f"{self.runtime}: SERVICE '{self.service}'"
@@ -89,7 +89,7 @@ class ServiceRun:
         if app.redis_queue:
             return bool(app.redis("get", f"stop/{self.parent_runtime}"))
         else:
-            return app.run_stop[self.parent_runtime]
+            return vs.run_stop[self.parent_runtime]
 
     @property
     def progress(self):
@@ -260,7 +260,7 @@ class ServiceRun:
     def get_device_result(args):
         device_id, runtime, results = args
         device = db.fetch("device", id=device_id)
-        run = app.run_instances[runtime]
+        run = vs.run_instances[runtime]
         results.append(run.get_results(device))
 
     def device_iteration(self, device):

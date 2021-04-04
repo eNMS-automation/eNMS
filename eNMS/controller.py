@@ -1086,7 +1086,7 @@ class Controller:
             if app.redis_queue:
                 app.redis("set", f"stop/{run.parent_runtime}", "true")
             else:
-                app.run_stop[run.parent_runtime] = True
+                vs.run_stop[run.parent_runtime] = True
             return True
 
     def switch_menu(self, user_id):

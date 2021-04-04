@@ -45,6 +45,8 @@ class VariableStore:
         self.run_targets = {}
         self.run_states = defaultdict(dict)
         self.run_logs = defaultdict(lambda: defaultdict(list))
+        self.run_stop = defaultdict(bool)
+        self.run_instances = {}
         libraries = ("netmiko", "napalm", "scrapli")
         self.connections_cache = {library: defaultdict(dict) for library in libraries}
         self.service_run_count = defaultdict(int)

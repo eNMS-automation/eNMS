@@ -58,10 +58,6 @@ class App:
         404: "Invalid POST request.",
         500: "Internal Server Error.",
     }
-
-    
-    run_stop = defaultdict(bool)
-    run_instances = {}
     ssh_sessions = {}
     configuration_properties = {"configuration": "Configuration"}
 

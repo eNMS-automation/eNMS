@@ -17,6 +17,7 @@ class VariableStore:
     def __init__(self):
         self.set_automation_variables()
         self.set_configuration_variables()
+        self.set_run_variables()
         self.set_setup_variables()
 
     def set_automation_variables(self):
@@ -34,6 +35,9 @@ class VariableStore:
             "runtime",
             "duration",
         )
+
+    def set_run_variables(self):
+        self.run_targets = {}
 
     def set_setup_variables(self):
         for setup_file in (Path.cwd() / "setup").iterdir():

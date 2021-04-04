@@ -64,7 +64,7 @@ class App:
     }
     property_names = {}
     service_run_count = defaultdict(int)
-    run_targets = {}
+    
     run_states = defaultdict(dict)
     run_logs = defaultdict(lambda: defaultdict(list))
     run_stop = defaultdict(bool)

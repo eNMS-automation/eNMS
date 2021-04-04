@@ -7,7 +7,7 @@ from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy.orm import aliased, relationship
 
-from eNMS import app
+from eNMS import app, vs
 from eNMS.automation import ServiceRun
 from eNMS.controller import controller
 from eNMS.database import db
@@ -315,7 +315,7 @@ class Run(AbstractBase):
         self.parent_runtime = self.runtime
         super().__init__(**kwargs)
         self.service_name = (self.placeholder or self.service).scoped_name
-        app.run_targets[self.runtime] = set(
+        vs.run_targets[self.runtime] = set(
             controller.filtering(
                 "device", bulk="id", rbac="target", username=self.creator
             )
@@ -408,6 +408,7 @@ class Run(AbstractBase):
             task=self.task,
             trigger=self.trigger,
         )
+        vs.run_targets.pop(self.runtime)
         return self.service_run.results
 
 

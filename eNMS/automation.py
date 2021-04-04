@@ -32,10 +32,9 @@ try:
 except ImportError as exc:
     warn(f"Couldn't import slackclient module ({exc})")
 
-from eNMS import app
+from eNMS import app, vs
 from eNMS.database import db
 from eNMS.models import models
-from eNMS.variables import vs
 
 
 class ServiceRun:
@@ -139,7 +138,7 @@ class ServiceRun:
         restricted_devices = set(
             device
             for device in devices
-            if device.id not in app.run_targets[self.parent_runtime]
+            if device.id not in vs.run_targets[self.parent_runtime]
         )
         if restricted_devices:
             result = (

@@ -83,7 +83,7 @@ class MetaForm(FormMeta):
                 "model": field.kwargs.pop("model", None),
             }
             if field.args and isinstance(field.args[0], str):
-                app.property_names[field_name] = field.args[0]
+                vs.property_names[field_name] = field.args[0]
             if (
                 issubclass(field.field_class, PasswordField)
                 and field_name not in db.private_properties_set

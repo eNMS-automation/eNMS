@@ -18,6 +18,7 @@ class VariableStore:
     def __init__(self):
         self.set_automation_variables()
         self.set_configuration_variables()
+        self.set_property_variables()
         self.set_run_variables()
         self.set_setup_variables()
 
@@ -36,6 +37,9 @@ class VariableStore:
             "runtime",
             "duration",
         )
+
+    def set_property_variables(self):
+        self.property_names = {}
 
     def set_run_variables(self):
         self.run_targets = {}

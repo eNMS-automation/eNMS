@@ -59,7 +59,7 @@ class App:
         500: "Internal Server Error.",
     }
 
-    property_names = {}
+    
     run_stop = defaultdict(bool)
     run_instances = {}
     ssh_sessions = {}
@@ -253,7 +253,7 @@ class App:
         for model, values in vs.properties["custom"].items():
             for property, property_dict in values.items():
                 pretty_name = property_dict["pretty_name"]
-                self.property_names[property] = pretty_name
+                vs.property_names[property] = pretty_name
                 model_properties[model].append(property)
                 if property_dict.get("private"):
                     if model not in db.private_properties:

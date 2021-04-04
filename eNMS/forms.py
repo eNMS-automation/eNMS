@@ -29,7 +29,7 @@ from eNMS.fields import (
 from eNMS.models import property_types, relationships
 from eNMS.variables import vs
 
-form_classes = {}
+
 form_properties = defaultdict(dict)
 
 
@@ -70,7 +70,7 @@ class MetaForm(FormMeta):
             field = field(values["pretty_name"], **form_kw)
             setattr(form, property, field)
             attrs[property] = field
-        form_classes[form_type] = form
+        vs.form_class[form_type] = form
         properties = {}
         for field_name, field in attrs.items():
             if not isinstance(field, UnboundField):

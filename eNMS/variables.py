@@ -18,7 +18,7 @@ class VariableStore:
     def __init__(self):
         self._set_automation_variables()
         self._set_configuration_variables()
-        self._set_property_variables()
+        self._set_general_variables()
         self._set_run_variables()
         self._set_server_variables()
         self._set_setup_variables()
@@ -41,7 +41,8 @@ class VariableStore:
         )
         self.configuration_properties = {"configuration": "Configuration"}
 
-    def _set_property_variables(self):
+    def _set_general_variables(self):
+        self.form_class = {}
         self.property_names = {}
 
     def _set_run_variables(self):

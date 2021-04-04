@@ -25,7 +25,7 @@ from werkzeug.exceptions import Forbidden
 from eNMS import app
 from eNMS.controller import controller
 from eNMS.database import db
-from eNMS.forms import form_classes, form_properties
+from eNMS.forms import form_properties
 from eNMS.models import models, property_types, relationships
 from eNMS.rest_api import RestApi
 from eNMS.variables import vs
@@ -264,7 +264,7 @@ class Server(Flask):
                     else:
                         abort(403)
             if not current_user.is_authenticated:
-                login_form = form_classes["login"](request.form)
+                login_form = vs.form_class["login"](request.form)
                 methods = vs.settings["authentication"]["methods"].items()
                 login_form.authentication_method.choices = [
                     (method, properties["display_name"])
@@ -310,7 +310,7 @@ class Server(Flask):
         @blueprint.route("/<form_type>_form")
         @self.process_requests
         def form(form_type):
-            form = form_classes[form_type](request.form)
+            form = vs.form_class[form_type](request.form)
             return render_template(
                 f"forms/{getattr(form, 'template', 'base')}.html",
                 **{
@@ -378,7 +378,7 @@ class Server(Flask):
             if request.json:
                 kwargs = request.json
             elif form_type:
-                form = form_classes[form_type](request.form)
+                form = vs.form_class[form_type](request.form)
                 if not form.validate_on_submit():
                     return jsonify({"invalid_form": True, **{"errors": form.errors}})
                 kwargs = form.form_postprocessing(request.form)

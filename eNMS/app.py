@@ -71,7 +71,6 @@ class App:
     run_instances = {}
     ssh_sessions = {}
     configuration_properties = {"configuration": "Configuration"}
-    configuration_timestamps = ("status", "update", "failure", "runtime", "duration")
 
     def __init__(self):
         self.path = Path.cwd()
@@ -285,7 +284,7 @@ class App:
                     "orderable": False,
                 },
             )
-            for timestamp in self.configuration_timestamps:
+            for timestamp in vs.configuration_timestamps:
                 vs.properties["tables"]["configuration"].insert(
                     -1,
                     {

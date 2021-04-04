@@ -149,7 +149,7 @@ export function serializeForm(form) {
   const data = JSON.parse(JSON.stringify($(form).serializeArray()));
   let result = {};
   data.forEach((property) => {
-    if (propertyTypes[property.name].includes("object")) {
+    if ((propertyTypes?.[property.name] || "").includes("object")) {
       if (!(property.name in result)) result[property.name] = [];
       result[property.name].push(property.value);
     } else {

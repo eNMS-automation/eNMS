@@ -1,7 +1,6 @@
 from requests import get
 from sqlalchemy import ForeignKey, Integer
 
-from eNMS import app
 from eNMS.database import db
 from eNMS.forms import ServiceForm
 from eNMS.fields import HiddenField

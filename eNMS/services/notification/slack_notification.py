@@ -8,7 +8,6 @@ try:
 except ImportError as exc:
     warn(f"Couldn't import slackclient module ({exc})")
 
-from eNMS import app
 from eNMS.database import db
 from eNMS.forms import ServiceForm
 from eNMS.fields import HiddenField, StringField

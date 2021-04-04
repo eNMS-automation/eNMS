@@ -2,7 +2,6 @@ from requests import post
 from sqlalchemy import ForeignKey, Integer
 from wtforms.widgets import TextArea
 
-from eNMS import app
 from eNMS.database import db
 from eNMS.forms import ServiceForm
 from eNMS.fields import HiddenField, StringField

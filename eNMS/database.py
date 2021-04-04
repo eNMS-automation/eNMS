@@ -93,7 +93,6 @@ class Database:
             run.service.status = "Idle"
         return first_init
 
-
     def create_metabase(self):
         class SubDeclarativeMeta(DeclarativeMeta):
             def __init__(cls, *args):  # noqa: N805

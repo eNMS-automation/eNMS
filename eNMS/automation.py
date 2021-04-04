@@ -914,7 +914,7 @@ class ServiceRun:
             netmiko_connection.enable()
         if self.config_mode:
             netmiko_connection.config_mode()
-        app.connections_cache["netmiko"][self.parent_runtime][
+        vs.connections_cache["netmiko"][self.parent_runtime][
             device.name
         ] = netmiko_connection
         return netmiko_connection
@@ -942,7 +942,7 @@ class ServiceRun:
             auth_strict_key=False,
         )
         connection.open()
-        app.connections_cache["scrapli"][self.parent_runtime][device.name] = connection
+        vs.connections_cache["scrapli"][self.parent_runtime][device.name] = connection
         return connection
 
     def napalm_connection(self, device):
@@ -973,7 +973,7 @@ class ServiceRun:
             **credentials,
         )
         napalm_connection.open()
-        app.connections_cache["napalm"][self.parent_runtime][
+        vs.connections_cache["napalm"][self.parent_runtime][
             device.name
         ] = napalm_connection
         return napalm_connection
@@ -1000,7 +1000,7 @@ class ServiceRun:
                 self.disconnect(library, device, connection)
 
     def get_connection(self, library, device):
-        cache = app.connections_cache[library].get(self.parent_runtime, {})
+        cache = vs.connections_cache[library].get(self.parent_runtime, {})
         return cache.get(device)
 
     def close_device_connection(self, device):
@@ -1012,9 +1012,9 @@ class ServiceRun:
     def close_remaining_connections(self):
         threads = []
         for library in ("netmiko", "napalm", "scrapli"):
-            devices = list(app.connections_cache[library][self.runtime])
+            devices = list(vs.connections_cache[library][self.runtime])
             for device in devices:
-                connection = app.connections_cache[library][self.runtime][device]
+                connection = vs.connections_cache[library][self.runtime][device]
                 thread = Thread(
                     target=self.disconnect, args=(library, device, connection)
                 )
@@ -1026,7 +1026,7 @@ class ServiceRun:
     def disconnect(self, library, device, connection):
         try:
             connection.disconnect() if library == "netmiko" else connection.close()
-            app.connections_cache[library][self.parent_runtime].pop(device)
+            vs.connections_cache[library][self.parent_runtime].pop(device)
             self.log("info", f"Closed {library} connection", device)
         except Exception as exc:
             self.log(

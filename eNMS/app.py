@@ -59,9 +59,6 @@ class App:
         500: "Internal Server Error.",
     }
 
-    connections_cache = {
-        library: defaultdict(dict) for library in ("netmiko", "napalm", "scrapli")
-    }
     property_names = {}
     service_run_count = defaultdict(int)
     run_stop = defaultdict(bool)

@@ -41,6 +41,8 @@ class VariableStore:
         self.run_targets = {}
         self.run_states = defaultdict(dict)
         self.run_logs = defaultdict(lambda: defaultdict(list))
+        libraries = ("netmiko", "napalm", "scrapli")
+        self.connections_cache = {library: defaultdict(dict) for library in libraries}
 
     def set_setup_variables(self):
         for setup_file in (Path.cwd() / "setup").iterdir():

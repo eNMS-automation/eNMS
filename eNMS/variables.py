@@ -24,6 +24,7 @@ class VariableStore:
         self._set_setup_variables()
 
     def _set_automation_variables(self):
+        self.ssh_sessions = {}
         self.netmiko_drivers = sorted((driver, driver) for driver in CLASS_MAPPER)
         self.napalm_drivers = sorted(
             (driver, driver) for driver in SUPPORTED_DRIVERS[1:]

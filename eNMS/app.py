@@ -42,8 +42,6 @@ from eNMS.variables import vs
 
 class App:
 
-    
-    ssh_sessions = {}
     configuration_properties = {"configuration": "Configuration"}
 
     def __init__(self):

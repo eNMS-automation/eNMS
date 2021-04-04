@@ -84,7 +84,7 @@ class Server(Flask):
                 commit=True,
                 name=session,
                 timestamp=str(datetime.now()),
-                **app.ssh_sessions[session],
+                **vs.ssh_sessions[session],
             )
             while True:
                 try:
@@ -100,7 +100,7 @@ class Server(Flask):
 
         @self.socketio.on("input", namespace="/terminal")
         def input(data):
-            session = app.ssh_sessions[request.args["session"]]
+            session = vs.ssh_sessions[request.args["session"]]
             write(session["file_descriptor"], data.encode())
 
         @self.socketio.on("join", namespace="/terminal")
@@ -110,7 +110,7 @@ class Server(Flask):
         @self.socketio.on("connect", namespace="/terminal")
         def connect():
             session_id = request.args["session"]
-            session = app.ssh_sessions.get(session_id)
+            session = vs.ssh_sessions.get(session_id)
             if not session:
                 return
             device = db.fetch("device", id=session["device"])

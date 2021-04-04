@@ -36,7 +36,7 @@ class Server(Flask):
         static_folder = str(app.path / "eNMS" / "static")
         super().__init__(__name__, static_folder=static_folder)
         self.rest_api = RestApi()
-        self.update_config(mode or app.settings["app"]["config_mode"])
+        self.update_config(mode or vs.settings["app"]["config_mode"])
         self.register_extensions()
         self.register_plugins()
         self.configure_login_manager()
@@ -46,7 +46,7 @@ class Server(Flask):
         self.configure_terminal_socket()
 
     def update_config(self, mode):
-        session_timeout = app.settings["app"]["session_timeout_minutes"]
+        session_timeout = vs.settings["app"]["session_timeout_minutes"]
         self.config.update(
             {
                 "DEBUG": mode.lower() != "production",
@@ -116,7 +116,7 @@ class Server(Flask):
             device = db.fetch("device", id=session["device"])
             username, password = session["credentials"]
             address, options = getattr(device, session["form"]["address"]), ""
-            if app.settings["ssh"]["bypass_key_prompt"]:
+            if vs.settings["ssh"]["bypass_key_prompt"]:
                 options = "-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
             process_id, session["file_descriptor"] = fork()
             if process_id:
@@ -149,7 +149,7 @@ class Server(Flask):
                     for service, service_class in sorted(models.items())
                     if hasattr(service_class, "pretty_name")
                 },
-                "settings": app.settings,
+                "settings": vs.settings,
                 "themes": vs.themes,
                 "table_properties": app.properties["tables"],
                 "user": current_user.serialized
@@ -265,7 +265,7 @@ class Server(Flask):
                         abort(403)
             if not current_user.is_authenticated:
                 login_form = form_classes["login"](request.form)
-                methods = app.settings["authentication"]["methods"].items()
+                methods = vs.settings["authentication"]["methods"].items()
                 login_form.authentication_method.choices = [
                     (method, properties["display_name"])
                     for method, properties in methods

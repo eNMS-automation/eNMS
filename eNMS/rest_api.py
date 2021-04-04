@@ -7,6 +7,7 @@ from uuid import getnode
 from eNMS import app
 from eNMS.controller import controller
 from eNMS.database import db
+from eNMS.variables import vs
 
 
 class RestApi:
@@ -71,10 +72,7 @@ class RestApi:
             }
 
     def is_alive(self, **_):
-        return {
-            "name": getnode(),
-            "cluster_id": app.settings["cluster"]["id"],
-        }
+        return {"name": getnode(), "cluster_id": vs.settings["cluster"]["id"]}
 
     def migrate(self, direction, **kwargs):
         return getattr(app, f"migration_{direction}")(**kwargs)

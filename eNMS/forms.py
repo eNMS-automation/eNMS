@@ -672,12 +672,12 @@ class ServiceForm(BaseForm):
                 f" and the matching value is empty: these do no match."
             )
         too_many_threads_error = (
-            self.max_processes.data > app.settings["automation"]["max_process"]
+            self.max_processes.data > vs.settings["automation"]["max_process"]
         )
         if too_many_threads_error:
             self.max_processes.errors.append(
                 "The number of threads used for multiprocessing must be "
-                f"less than {app.settings['automation']['max_process']}."
+                f"less than {vs.settings['automation']['max_process']}."
             )
         shared_service_error = not self.shared.data and len(self.workflows.data) > 1
         if shared_service_error:
@@ -896,7 +896,9 @@ class DeviceForm(ObjectForm):
     os_version = StringField("OS Version")
     longitude = StringField("Longitude", default=0.0)
     latitude = StringField("Latitude", default=0.0)
-    napalm_driver = SelectField("NAPALM Driver", choices=vs.napalm_drivers, default="ios")
+    napalm_driver = SelectField(
+        "NAPALM Driver", choices=vs.napalm_drivers, default="ios"
+    )
     netmiko_driver = SelectField(
         "Netmiko Driver", choices=vs.netmiko_drivers, default="cisco_ios"
     )
@@ -1034,7 +1036,9 @@ class UserForm(RbacForm):
     groups = StringField("Groups")
     theme = SelectField(
         "Theme",
-        choices=[(theme, values["name"]) for theme, values in vs.themes["themes"].items()],
+        choices=[
+            (theme, values["name"]) for theme, values in vs.themes["themes"].items()
+        ],
     )
     authentication = SelectField(
         "Authentication",

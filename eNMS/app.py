@@ -1,6 +1,5 @@
 from base64 import b64decode, b64encode
 from click import get_current_context
-from collections import defaultdict
 from cryptography.fernet import Fernet
 from datetime import datetime
 from email.mime.application import MIMEApplication
@@ -41,9 +40,6 @@ from eNMS.variables import vs
 
 
 class App:
-
-    
-
     def __init__(self):
         self.path = Path.cwd()
         self.custom = CustomApp(self)

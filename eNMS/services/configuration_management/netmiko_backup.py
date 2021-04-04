@@ -5,7 +5,6 @@ from re import M, sub
 from sqlalchemy import Boolean, Float, ForeignKey, Integer
 from wtforms import FormField
 
-from eNMS import app
 from eNMS.database import db
 from eNMS.forms import NetmikoForm
 from eNMS.fields import (

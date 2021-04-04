@@ -1,5 +1,6 @@
 from collections import defaultdict
 from json import load
+from itertools import chain
 from napalm._SUPPORTED_DRIVERS import SUPPORTED_DRIVERS
 from netmiko.ssh_dispatcher import CLASS_MAPPER
 from pathlib import Path
@@ -22,6 +23,9 @@ class VariableStore:
         self._set_run_variables()
         self._set_server_variables()
         self._set_setup_variables()
+
+    def _initialize(self):
+        self._set_template_context()
 
     def _set_automation_variables(self):
         self.ssh_sessions = {}
@@ -80,6 +84,26 @@ class VariableStore:
         for setup_file in (Path.cwd() / "setup").iterdir():
             with open(setup_file, "r") as file:
                 setattr(self, setup_file.stem, load(file))
+
+    def _set_template_context(self):
+        self.template_context = {
+            "configuration_properties": self.configuration_properties,
+            "form_properties": self.form_properties,
+            "rbac": self.rbac,
+            "names": self.property_names,
+            "property_types": self.property_types,
+            "relations": list(set(chain.from_iterable(self.relationships.values()))),
+            "relationships": self.relationships,
+            "service_types": {
+                service: service_class.pretty_name
+                for service, service_class in sorted(self.models.items())
+                if hasattr(service_class, "pretty_name")
+            },
+            "settings": self.settings,
+            "themes": self.themes,
+            "table_properties": self.properties["tables"],
+            "visualization": self.visualization,
+        }
 
 
 vs = VariableStore()

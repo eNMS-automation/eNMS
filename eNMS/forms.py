@@ -167,7 +167,8 @@ class FormFactory:
                     continue
                 relations[related_model] = MultipleInstanceField(related_model)
                 vs.relationships[f"{model}_filtering"][related_model] = relation
-                vs.relationships[f"{model}_relation_filtering"][related_model] = relation
+                filtering_key = f"{model}_relation_filtering"
+                vs.relationships[filtering_key][related_model] = relation
             relation_form = {
                 "template": "filtering",
                 "properties": sorted(relations),

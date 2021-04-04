@@ -134,28 +134,8 @@ class Server(Flask):
     def configure_context_processor(self):
         @self.context_processor
         def inject_properties():
-            return {
-                "configuration_properties": vs.configuration_properties,
-                "form_properties": vs.form_properties,
-                "rbac": vs.rbac,
-                "names": vs.property_names,
-                "property_types": vs.property_types,
-                "relations": list(set(chain.from_iterable(vs.relationships.values()))),
-                "relationships": vs.relationships,
-                "service_types": {
-                    service: service_class.pretty_name
-                    for service, service_class in sorted(vs.models.items())
-                    if hasattr(service_class, "pretty_name")
-                },
-                "settings": vs.settings,
-                "themes": vs.themes,
-                "table_properties": vs.properties["tables"],
-                "user": current_user.serialized
-                if current_user.is_authenticated
-                else None,
-                "version": app.version,
-                "visualization": vs.visualization,
-            }
+            user = current_user.serialized if current_user.is_authenticated else None
+            return {"user": user, "version": app.version, **vs.template_context}
 
     def configure_errors(self):
         @self.errorhandler(403)

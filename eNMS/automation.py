@@ -32,9 +32,10 @@ try:
 except ImportError as exc:
     warn(f"Couldn't import slackclient module ({exc})")
 
-from eNMS import app, vs
+from eNMS import app
 from eNMS.database import db
 from eNMS.models import models
+from eNMS.variables import vs
 
 
 class ServiceRun:

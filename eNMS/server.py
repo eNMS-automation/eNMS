@@ -15,7 +15,6 @@ from flask_login import current_user, LoginManager, login_user, logout_user
 from flask_socketio import join_room, SocketIO
 from flask_wtf.csrf import CSRFProtect
 from functools import partial, wraps
-from itertools import chain
 from os import getenv, read, write
 from pty import fork
 from subprocess import run

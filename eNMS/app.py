@@ -94,6 +94,14 @@ class App:
         self.init_connection_pools()
         self.custom.post_init()
 
+    def _initialize(self):
+        self.init_plugins()
+        self.init_services()
+        db.private_properties_set |= set(sum(db.private_properties.values(), []))
+        db.base.metadata.create_all(bind=db.engine)
+        configure_mappers()
+        db.configure_model_events(self)
+
     def authenticate_user(self, **kwargs):
         name, password = kwargs["username"], kwargs["password"]
         if not name or not password:
@@ -155,14 +163,6 @@ class App:
                 f"{protocol}://",
                 HTTPAdapter(max_retries=retry, **vs.settings["requests"]["pool"]),
             )
-
-    def initialize(self):
-        self.init_plugins()
-        self.init_services()
-        db.private_properties_set |= set(sum(db.private_properties.values(), []))
-        db.base.metadata.create_all(bind=db.engine)
-        configure_mappers()
-        db.configure_model_events(self)
 
     def init_encryption(self):
         self.fernet_encryption = getenv("FERNET_KEY")

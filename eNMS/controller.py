@@ -36,15 +36,6 @@ from eNMS.variables import vs
 
 
 class Controller:
-    def _register_endpoint(self, func):
-        setattr(self, func.__name__, func)
-
-        @wraps(func)
-        def wrapper(*args, **kwargs):
-            return func(*args, **kwargs)
-
-        return wrapper
-
     def _initialize(self, first_init):
         if not first_init:
             return
@@ -54,6 +45,15 @@ class Controller:
         )
         self.get_git_content()
         db.session.commit()
+
+    def _register_endpoint(self, func):
+        setattr(self, func.__name__, func)
+
+        @wraps(func)
+        def wrapper(*args, **kwargs):
+            return func(*args, **kwargs)
+
+        return wrapper
 
     def add_edge(self, workflow_id, subtype, source, destination):
         now = app.get_time()

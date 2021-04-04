@@ -154,14 +154,14 @@ class BaseForm(FlaskForm, metaclass=MetaForm):
 
 
 class FormFactory:
-    @staticmethod
-    def choices(iterable):
-        return [(choice, choice) for choice in iterable]
-
-    def initialize(self):
+    def _initialize(self):
         self.generate_filtering_forms()
         self.generate_instance_insertion_forms()
         self.generate_service_forms()
+
+    @staticmethod
+    def choices(iterable):
+        return [(choice, choice) for choice in iterable]
 
     def generate_filtering_forms(self):
         for model in ("device", "link", "pool", "run", "service", "task", "user"):

@@ -69,7 +69,7 @@ class Database:
                 setattr(self, f"retry_{retry_type}_{parameter}", number)
         register(self.cleanup)
 
-    def initialize(self):
+    def _initialize(self):
         first_init = not self.get_user("admin")
         if first_init:
             admin_user = models["user"](name="admin", is_admin=True)

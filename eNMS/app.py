@@ -77,7 +77,6 @@ class App:
         self.path = Path.cwd()
         self.custom = CustomApp(self)
         self.custom.pre_init()
-        self.properties = vs.properties
         self.database = vs.database
         self.cli_command = self.detect_cli()
         self.load_custom_properties()
@@ -261,7 +260,7 @@ class App:
             self.vault_client.sys.submit_unseal_keys(filter(None, keys))
 
     def load_custom_properties(self):
-        for model, values in self.properties["custom"].items():
+        for model, values in vs.properties["custom"].items():
             for property, property_dict in values.items():
                 pretty_name = property_dict["pretty_name"]
                 self.property_names[property] = pretty_name
@@ -275,8 +274,8 @@ class App:
 
     def load_configuration_properties(self):
         for property, title in self.configuration_properties.items():
-            self.properties["filtering"]["device"].append(property)
-            self.properties["tables"]["configuration"].insert(
+            vs.properties["filtering"]["device"].append(property)
+            vs.properties["tables"]["configuration"].insert(
                 -1,
                 {
                     "data": property,
@@ -288,7 +287,7 @@ class App:
                 },
             )
             for timestamp in self.configuration_timestamps:
-                self.properties["tables"]["configuration"].insert(
+                vs.properties["tables"]["configuration"].insert(
                     -1,
                     {
                         "data": f"last_{property}_{timestamp}",

@@ -151,7 +151,7 @@ class Server(Flask):
                 },
                 "settings": vs.settings,
                 "themes": vs.themes,
-                "table_properties": app.properties["tables"],
+                "table_properties": vs.properties["tables"],
                 "user": current_user.serialized
                 if current_user.is_authenticated
                 else None,

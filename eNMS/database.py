@@ -29,6 +29,7 @@ from sqlalchemy.orm.collections import InstrumentedList
 from sqlalchemy.types import JSON
 from time import sleep
 from traceback import format_exc
+from uuid import getnode
 
 from eNMS.models import model_properties, models, property_types, relationships
 from eNMS.variables import vs
@@ -67,6 +68,31 @@ class Database:
             for parameter, number in values.items():
                 setattr(self, f"retry_{retry_type}_{parameter}", number)
         register(self.cleanup)
+
+    def initialize(self):
+        first_init = not self.get_user("admin")
+        if first_init:
+            admin_user = models["user"](name="admin", is_admin=True)
+            self.session.add(admin_user)
+            self.session.commit()
+            if not admin_user.password:
+                admin_user.update(password="admin")
+            self.factory(
+                "server",
+                **{
+                    "name": str(getnode()),
+                    "description": "Localhost",
+                    "ip_address": "0.0.0.0",
+                    "status": "Up",
+                },
+            )
+        for run in self.fetch(
+            "run", all_matches=True, allow_none=True, status="Running"
+        ):
+            run.status = "Aborted (RELOAD)"
+            run.service.status = "Idle"
+        return first_init
+
 
     def create_metabase(self):
         class SubDeclarativeMeta(DeclarativeMeta):

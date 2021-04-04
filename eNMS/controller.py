@@ -45,6 +45,14 @@ class Controller:
 
         return wrapper
 
+    def _initialize(self):
+        self.migration_import(
+            name=vs.settings["app"].get("startup_migration", "default"),
+            import_export_types=db.import_export_models,
+        )
+        self.get_git_content()
+        db.session.commit()
+
     def add_edge(self, workflow_id, subtype, source, destination):
         now = app.get_time()
         workflow = db.fetch("workflow", id=workflow_id, rbac="edit")

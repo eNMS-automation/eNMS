@@ -31,7 +31,7 @@ from time import sleep
 from traceback import format_exc
 from uuid import getnode
 
-from eNMS.models import model_properties, models, property_types, relationships
+from eNMS.models import model_properties, property_types, relationships
 from eNMS.variables import vs
 
 
@@ -72,7 +72,7 @@ class Database:
     def _initialize(self):
         first_init = not self.get_user("admin")
         if first_init:
-            admin_user = models["user"](name="admin", is_admin=True)
+            admin_user = vs.models["user"](name="admin", is_admin=True)
             self.session.add(admin_user)
             self.session.commit()
             if not admin_user.password:
@@ -181,7 +181,7 @@ class Database:
                 model_properties[name].extend(model_properties[model.parent_type])
             if "service" in name and name != "service":
                 model_properties[name].extend(model_properties["service"])
-            models.update({name: model, name.lower(): model})
+            vs.models.update({name: model, name.lower(): model})
             model_properties[name].extend(model.model_properties)
             model_properties[name] = list(set(model_properties[name]))
             for relation in mapper.relationships:
@@ -242,14 +242,14 @@ class Database:
                 )
                 app.log("info", f"UPDATE: {target.type} '{name}': ({changes})")
 
-        for model in models.values():
+        for model in vs.models.values():
             if "configure_events" in vars(model):
                 model.configure_events()
 
         if app.use_vault:
             for model in db.private_properties:
 
-                @event.listens_for(models[model].name, "set", propagate=True)
+                @event.listens_for(vs.models[model].name, "set", propagate=True)
                 def vault_update(target, new_name, old_name, *_):
                     if new_name == old_name:
                         return
@@ -291,17 +291,17 @@ class Database:
             )
 
     def get_user(self, name):
-        return db.session.query(models["user"]).filter_by(name=name).first()
+        return db.session.query(vs.models["user"]).filter_by(name=name).first()
 
     def query(self, model, rbac="read", username=None, property=None):
-        entity = getattr(models[model], property) if property else models[model]
+        entity = getattr(vs.models[model], property) if property else vs.models[model]
         query = self.session.query(entity)
         if rbac:
             user = current_user or self.get_user(username or "admin")
             if user.is_authenticated and not user.is_admin:
                 if model in vs.rbac["admin_models"]:
                     raise self.rbac_error
-                query = models[model].rbac_filter(query, rbac, user)
+                query = vs.models[model].rbac_filter(query, rbac, user)
         return query
 
     def fetch(
@@ -314,7 +314,7 @@ class Database:
         **kwargs,
     ):
         query = self.query(model, rbac, username=username).filter(
-            *(getattr(models[model], key) == value for key, value in kwargs.items())
+            *(getattr(vs.models[model], key) == value for key, value in kwargs.items())
         )
         for index in range(self.retry_fetch_number):
             try:
@@ -380,7 +380,7 @@ class Database:
             if instance and not kwargs.get("must_be_new"):
                 instance.update(**kwargs)
             else:
-                instance = models[_class](**kwargs)
+                instance = vs.models[_class](**kwargs)
                 self.session.add(instance)
             return instance
 

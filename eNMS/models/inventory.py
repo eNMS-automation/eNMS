@@ -9,7 +9,6 @@ from sqlalchemy.sql.expression import false
 
 from eNMS import app
 from eNMS.controller import controller
-from eNMS.models import models
 from eNMS.models.base import AbstractBase
 from eNMS.database import db
 from eNMS.variables import vs
@@ -38,14 +37,14 @@ class Object(AbstractBase):
 
     @classmethod
     def rbac_filter(cls, query, mode, user):
-        pool_alias = aliased(models["pool"])
+        pool_alias = aliased(vs.models["pool"])
         return (
             query.join(cls.pools)
-            .join(models["access"], models["pool"].access)
-            .join(pool_alias, models["access"].user_pools)
-            .join(models["user"], pool_alias.users)
-            .filter(models["access"].access_type.contains(mode))
-            .filter(models["user"].name == user.name)
+            .join(vs.models["access"], vs.models["pool"].access)
+            .join(pool_alias, vs.models["access"].user_pools)
+            .join(vs.models["user"], pool_alias.users)
+            .filter(vs.models["access"].access_type.contains(mode))
+            .filter(vs.models["user"].name == user.name)
             .group_by(cls.id)
         )
 
@@ -103,30 +102,33 @@ class Device(Object):
     def get_credentials(self, credential_type="any", username=None):
         if not username:
             username = current_user.name
-        pool_alias = aliased(models["pool"])
+        pool_alias = aliased(vs.models["pool"])
         query = (
-            db.session.query(models["credential"])
-            .join(models["pool"], models["credential"].user_pools)
-            .join(models["user"], models["pool"].users)
-            .join(pool_alias, models["credential"].device_pools)
-            .join(models["device"], pool_alias.devices)
-            .filter(models["user"].name == username)
-            .filter(models["device"].name == self.name)
+            db.session.query(vs.models["credential"])
+            .join(vs.models["pool"], vs.models["credential"].user_pools)
+            .join(vs.models["user"], vs.models["pool"].users)
+            .join(pool_alias, vs.models["credential"].device_pools)
+            .join(vs.models["device"], pool_alias.devices)
+            .filter(vs.models["user"].name == username)
+            .filter(vs.models["device"].name == self.name)
         )
         if credential_type != "any":
-            query = query.filter(models["credential"].role == credential_type)
+            query = query.filter(vs.models["credential"].role == credential_type)
         credentials = max(query.all(), key=attrgetter("priority"), default=None)
         if not credentials:
             raise Exception(f"No matching credentials found for DEVICE '{self.name}'")
         return credentials
 
     def get_neighbors(self, object_type, direction="both", **link_constraints):
-        filters = [models["link"].destination == self, models["link"].source == self]
+        filters = [
+            vs.models["link"].destination == self,
+            vs.models["link"].source == self,
+        ]
         edge_constraints = (
             filters if direction == "both" else [filters[direction == "source"]]
         )
         link_constraints = [
-            getattr(models["link"], key) == value
+            getattr(vs.models["link"], key) == value
             for key, value in link_constraints.items()
         ]
         neighboring_links = (

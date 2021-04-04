@@ -6,7 +6,6 @@ from sqlalchemy.orm import relationship
 
 from eNMS import app
 from eNMS.database import db
-from eNMS.models import models
 from eNMS.models.base import AbstractBase
 from eNMS.variables import vs
 
@@ -64,10 +63,10 @@ class User(AbstractBase, UserMixin):
             return
         db.session.commit()
         user_access = (
-            db.session.query(models["access"])
-            .join(models["pool"], models["access"].user_pools)
-            .join(models["user"], models["pool"].users)
-            .filter(models["user"].name == self.name)
+            db.session.query(vs.models["access"])
+            .join(vs.models["pool"], vs.models["access"].user_pools)
+            .join(vs.models["user"], vs.models["pool"].users)
+            .filter(vs.models["user"].name == self.name)
             .all()
         )
         for property in vs.rbac:

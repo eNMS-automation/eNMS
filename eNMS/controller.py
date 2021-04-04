@@ -31,7 +31,7 @@ from xlwt import Workbook
 
 from eNMS import app
 from eNMS.database import db
-from eNMS.models import models, model_properties, property_types, relationships
+from eNMS.models import model_properties, property_types, relationships
 from eNMS.variables import vs
 
 
@@ -215,7 +215,7 @@ class Controller:
         return {
             "counters": {
                 model: db.query(model, rbac=None)
-                .with_entities(models[model].id)
+                .with_entities(vs.models[model].id)
                 .count()
                 for model in vs.properties["dashboard"]
             },
@@ -337,7 +337,7 @@ class Controller:
         return path
 
     def filtering_base_constraints(self, model, **kwargs):
-        table, constraints = models[model], []
+        table, constraints = vs.models[model], []
         constraint_dict = {**kwargs.get("form", {}), **kwargs.get("constraints", {})}
         for property in model_properties[model]:
             value, row = constraint_dict.get(property), getattr(table, property)
@@ -360,10 +360,10 @@ class Controller:
         return constraints
 
     def filtering_relationship_constraints(self, query, model, **kwargs):
-        table = models[model]
+        table = vs.models[model]
         constraint_dict = {**kwargs.get("form", {}), **kwargs.get("constraints", {})}
         for related_model, relation_properties in relationships[model].items():
-            related_table = aliased(models[relation_properties["model"]])
+            related_table = aliased(vs.models[relation_properties["model"]])
             match = constraint_dict.get(f"{related_model}_filter")
             if match == "empty":
                 query = query.filter(~getattr(table, related_model).any())
@@ -381,7 +381,7 @@ class Controller:
         return query
 
     def filtering(self, model, bulk=False, rbac="read", username=None, **kwargs):
-        table, query = models[model], db.query(model, rbac, username)
+        table, query = vs.models[model], db.query(model, rbac, username)
         total_records = query.with_entities(table.id).count()
         try:
             constraints = self.filtering_base_constraints(model, **kwargs)
@@ -540,7 +540,9 @@ class Controller:
         service = db.fetch("service", id=service_id, allow_none=True)
         if not service:
             raise db.rbac_error
-        runs = db.query("run").filter(models["run"].services.any(id=service_id)).all()
+        runs = (
+            db.query("run").filter(vs.models["run"].services.any(id=service_id)).all()
+        )
         if runtime != "normal" and runs:
             if runtime == "latest":
                 run = sorted(runs, key=attrgetter("runtime"), reverse=True)[0]
@@ -852,7 +854,7 @@ class Controller:
         return status
 
     def multiselect_filtering(self, model, **params):
-        table = models[model]
+        table = vs.models[model]
         results = db.query(model).filter(table.name.contains(params.get("term")))
         return {
             "items": [
@@ -919,8 +921,8 @@ class Controller:
                 field_name = "runtime"
             elif model == "changelog":
                 field_name = "time"
-            session_query = db.session.query(models[model]).filter(
-                getattr(models[model], field_name) < date_time_string
+            session_query = db.session.query(vs.models[model]).filter(
+                getattr(vs.models[model], field_name) < date_time_string
             )
             session_query.delete(synchronize_session=False)
             db.session.commit()
@@ -964,7 +966,7 @@ class Controller:
         result = StringIO()
         with redirect_stdout(result):
             try:
-                environment = {"app": self, "db": db, "models": models}
+                environment = {"app": self, "db": db, "models": vs.models}
                 exec(kwargs["code"], environment)
             except Exception:
                 return format_exc()

@@ -44,6 +44,7 @@ class VariableStore:
     def _set_general_variables(self):
         self.form_class = {}
         self.form_properties = defaultdict(dict)
+        self.models = {}
         self.property_names = {}
 
     def _set_run_variables(self):

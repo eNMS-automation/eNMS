@@ -34,7 +34,6 @@ except ImportError as exc:
 
 from eNMS import app
 from eNMS.database import db
-from eNMS.models import models
 from eNMS.variables import vs
 
 
@@ -108,7 +107,7 @@ class ServiceRun:
         if isinstance(values, str):
             values = [values]
         for value in values:
-            if isinstance(value, models["device"]):
+            if isinstance(value, vs.models["device"]):
                 device = value
             else:
                 device = db.fetch("device", allow_none=True, **{property: value})
@@ -760,8 +759,8 @@ class ServiceRun:
     def get_result(self, service_name, device=None, workflow=None):
         def filter_run(query, property):
             query = query.filter(
-                models["result"].service.has(
-                    getattr(models["service"], property) == service_name
+                vs.models["result"].service.has(
+                    getattr(vs.models["service"], property) == service_name
                 )
             )
             return query.all()
@@ -769,17 +768,17 @@ class ServiceRun:
         def recursive_search(run):
             if not run:
                 return None
-            query = db.session.query(models["result"]).filter(
-                models["result"].parent_runtime == run.parent_runtime
+            query = db.session.query(vs.models["result"]).filter(
+                vs.models["result"].parent_runtime == run.parent_runtime
             )
             if workflow or self.workflow:
                 name = workflow or self.workflow.name
                 query.filter(
-                    models["result"].workflow.has(models["workflow"].name == name)
+                    vs.models["result"].workflow.has(vs.models["workflow"].name == name)
                 )
             if device:
                 query.filter(
-                    models["result"].device.has(models["device"].name == device)
+                    vs.models["result"].device.has(vs.models["device"].name == device)
                 )
             results = filter_run(query, "scoped_name") or filter_run(query, "name")
             if not results:

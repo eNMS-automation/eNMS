@@ -12,7 +12,6 @@ from eNMS.automation import ServiceRun
 from eNMS.controller import controller
 from eNMS.database import db
 from eNMS.models.base import AbstractBase
-from eNMS.models import models
 from eNMS.models.inventory import Device  # noqa: F401
 from eNMS.models.administration import User  # noqa: F401
 from eNMS.variables import vs
@@ -122,17 +121,17 @@ class Service(AbstractBase):
         if workflow_id:
             constraints.extend(
                 [
-                    models["service"].workflows.any(
-                        models["workflow"].id == int(workflow_id)
+                    vs.models["service"].workflows.any(
+                        vs.models["workflow"].id == int(workflow_id)
                     ),
                     ~or_(
-                        models["service"].scoped_name == name
+                        vs.models["service"].scoped_name == name
                         for name in ("Start", "End")
                     ),
                 ]
             )
         elif kwargs["form"].get("parent-filtering", "true") == "true":
-            constraints.append(~models["service"].workflows.any())
+            constraints.append(~vs.models["service"].workflows.any())
         return constraints
 
     def duplicate(self, workflow=None):
@@ -159,14 +158,14 @@ class Service(AbstractBase):
     @classmethod
     def rbac_filter(cls, query, mode, user):
         query = query.filter(cls.default_access != "admin")
-        pool_alias = aliased(models["pool"])
+        pool_alias = aliased(vs.models["pool"])
         return query.filter(cls.default_access == "public").union(
             query.join(cls.pools)
-            .join(models["access"], models["pool"].access)
-            .join(pool_alias, models["access"].user_pools)
-            .join(models["user"], pool_alias.users)
-            .filter(models["access"].access_type.contains(mode))
-            .filter(models["user"].name == user.name),
+            .join(vs.models["access"], vs.models["pool"].access)
+            .join(pool_alias, vs.models["access"].user_pools)
+            .join(vs.models["user"], pool_alias.users)
+            .filter(vs.models["access"].access_type.contains(mode))
+            .filter(vs.models["user"].name == user.name),
             query.filter(cls.creator == user.name),
         )
 
@@ -246,7 +245,7 @@ class Result(AbstractBase):
         if kwargs.get("rest_api_request", False):
             return []
         if kwargs.get("runtime"):
-            constraints.append(models["result"].parent_runtime == kwargs["runtime"])
+            constraints.append(vs.models["result"].parent_runtime == kwargs["runtime"])
         return constraints
 
 
@@ -327,20 +326,20 @@ class Run(AbstractBase):
     @classmethod
     def rbac_filter(cls, query, mode, user):
         query = query.join(cls.service).filter(
-            models["service"].default_access != "admin"
+            vs.models["service"].default_access != "admin"
         )
         public_services = query.join(cls.service).filter(
-            models["service"].default_access == "public"
+            vs.models["service"].default_access == "public"
         )
-        pool_alias = aliased(models["pool"])
+        pool_alias = aliased(vs.models["pool"])
         return public_services.union(
             query.join(cls.service)
-            .join(models["pool"], models["service"].pools)
-            .join(models["access"], models["pool"].access)
-            .join(pool_alias, models["access"].user_pools)
-            .join(models["user"], pool_alias.users)
-            .filter(models["access"].access_type.contains(mode))
-            .filter(models["user"].name == user.name),
+            .join(vs.models["pool"], vs.models["service"].pools)
+            .join(vs.models["access"], vs.models["pool"].access)
+            .join(pool_alias, vs.models["access"].user_pools)
+            .join(vs.models["user"], pool_alias.users)
+            .filter(vs.models["access"].access_type.contains(mode))
+            .filter(vs.models["user"].name == user.name),
             query.filter(cls.creator == user.name),
         )
 
@@ -460,17 +459,17 @@ class Task(AbstractBase):
     def rbac_filter(cls, query, mode, user):
         query = query.filter(cls.default_access != "admin")
         public_tasks = query.join(cls.service).filter(
-            models["service"].default_access == "public"
+            vs.models["service"].default_access == "public"
         )
-        pool_alias = aliased(models["pool"])
+        pool_alias = aliased(vs.models["pool"])
         return public_tasks.union(
             query.join(cls.service)
-            .join(models["pool"], models["service"].pools)
-            .join(models["access"], models["pool"].access)
-            .join(pool_alias, models["access"].user_pools)
-            .join(models["user"], pool_alias.users)
-            .filter(models["access"].access_type.contains(mode))
-            .filter(models["user"].name == user.name),
+            .join(vs.models["pool"], vs.models["service"].pools)
+            .join(vs.models["access"], vs.models["pool"].access)
+            .join(pool_alias, vs.models["access"].user_pools)
+            .join(vs.models["user"], pool_alias.users)
+            .filter(vs.models["access"].access_type.contains(mode))
+            .filter(vs.models["user"].name == user.name),
             query.filter(cls.creator == user.name),
         )
 

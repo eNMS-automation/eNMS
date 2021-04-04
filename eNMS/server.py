@@ -25,7 +25,7 @@ from werkzeug.exceptions import Forbidden
 from eNMS import app
 from eNMS.controller import controller
 from eNMS.database import db
-from eNMS.models import models, property_types, relationships
+from eNMS.models import property_types, relationships
 from eNMS.rest_api import RestApi
 from eNMS.variables import vs
 
@@ -145,7 +145,7 @@ class Server(Flask):
                 "relationships": relationships,
                 "service_types": {
                     service: service_class.pretty_name
-                    for service, service_class in sorted(models.items())
+                    for service, service_class in sorted(vs.models.items())
                     if hasattr(service_class, "pretty_name")
                 },
                 "settings": vs.settings,

@@ -434,8 +434,12 @@ class PoolForm(BaseForm):
             for property in vs.properties["filtering"][model]:
                 setattr(cls, f"{model}_{property}", StringField(property))
                 setattr(cls, f"{model}_{property}_invert", BooleanField(property))
-                vs.form_properties["pool"][f"{model}_{property}_match"] = {"type": "list"}
-                vs.form_properties["pool"][f"{model}_{property}_invert"] = {"type": "bool"}
+                vs.form_properties["pool"][f"{model}_{property}_match"] = {
+                    "type": "list"
+                }
+                vs.form_properties["pool"][f"{model}_{property}_invert"] = {
+                    "type": "bool"
+                }
                 setattr(
                     cls,
                     f"{model}_{property}_match",

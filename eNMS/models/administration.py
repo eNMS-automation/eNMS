@@ -8,6 +8,7 @@ from eNMS import app
 from eNMS.database import db
 from eNMS.models import models
 from eNMS.models.base import AbstractBase
+from eNMS.variables import vs
 
 
 class Server(AbstractBase):
@@ -49,7 +50,7 @@ class User(AbstractBase, UserMixin):
 
     def update(self, **kwargs):
         if (
-            app.settings["security"]["hash_user_passwords"]
+            vs.settings["security"]["hash_user_passwords"]
             and kwargs.get("password")
             and not kwargs["password"].startswith("$argon2i")
         ):

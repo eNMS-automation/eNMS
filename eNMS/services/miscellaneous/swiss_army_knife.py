@@ -6,6 +6,7 @@ from eNMS.database import db
 from eNMS.forms import ServiceForm
 from eNMS.fields import HiddenField
 from eNMS.models.automation import Service
+from eNMS.variables import vs
 
 
 class SwissArmyKnifeService(Service):
@@ -29,13 +30,13 @@ class SwissArmyKnifeService(Service):
         return {"success": True}
 
     def cluster_monitoring(self, run):
-        protocol = app.settings["cluster"]["scan_protocol"]
+        protocol = vs.settings["cluster"]["scan_protocol"]
         for instance in db.fetch_all("instance"):
             db.factory(
                 "instance",
                 **get(
                     f"{protocol}://{instance.ip_address}/rest/is_alive",
-                    timeout=app.settings["cluster"]["scan_timeout"],
+                    timeout=vs.settings["cluster"]["scan_timeout"],
                 ).json(),
             )
         return {"success": True}

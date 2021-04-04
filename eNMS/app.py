@@ -60,7 +60,6 @@ class App:
     }
 
     property_names = {}
-    service_run_count = defaultdict(int)
     run_stop = defaultdict(bool)
     run_instances = {}
     ssh_sessions = {}
@@ -70,7 +69,6 @@ class App:
         self.path = Path.cwd()
         self.custom = CustomApp(self)
         self.custom.pre_init()
-        self.cli_command = self.detect_cli()
         self.load_custom_properties()
         self.load_configuration_properties()
         self.init_rbac()

@@ -30,9 +30,6 @@ from eNMS.models import property_types, relationships
 from eNMS.variables import vs
 
 
-form_properties = defaultdict(dict)
-
-
 class MetaForm(FormMeta):
     def __new__(cls, name, bases, attrs):
         if name == "BaseForm":
@@ -89,7 +86,7 @@ class MetaForm(FormMeta):
                 and field_name not in db.private_properties_set
             ):
                 db.private_properties_set.add(field_name)
-        form_properties[form_type].update(properties)
+        vs.form_properties[form_type].update(properties)
         for property, value in properties.items():
             if property not in property_types and value["type"] != "field-list":
                 property_types[property] = value["type"]
@@ -105,14 +102,14 @@ class MetaForm(FormMeta):
                     if property not in form.custom_properties
                 ]
             if getattr(base, "abstract_service", False):
-                form.service_fields.extend(form_properties[base_form_type])
-            form_properties[form_type].update(form_properties[base_form_type])
+                form.service_fields.extend(vs.form_properties[base_form_type])
+            vs.form_properties[form_type].update(vs.form_properties[base_form_type])
         return form
 
     def __setattr__(self, field, value):
         if hasattr(value, "field_class") and "multiselect" in value.field_class.type:
             form_type = self.form_type.kwargs["default"]
-            form_properties[form_type][field] = {"type": value.field_class.type}
+            vs.form_properties[form_type][field] = {"type": value.field_class.type}
         return super().__setattr__(field, value)
 
 
@@ -125,14 +122,14 @@ class BaseForm(FlaskForm, metaclass=MetaForm):
                 continue
             field = MultipleInstanceField if relation["list"] else InstanceField
             field_type = "object-list" if relation["list"] else "object"
-            form_properties[form_type][related_model] = {"type": field_type}
+            vs.form_properties[form_type][related_model] = {"type": field_type}
             setattr(cls, related_model, field())
 
     def form_postprocessing(self, form_data):
         data = {**form_data.to_dict(), **{"user": current_user}}
         if request.files:
             data["file"] = request.files["file"]
-        for property, field in form_properties[form_data.get("form_type")].items():
+        for property, field in vs.form_properties[form_data.get("form_type")].items():
             if field["type"] in ("object-list", "multiselect", "multiselect-string"):
                 value = form_data.getlist(property)
                 if field["type"] == "multiselect-string":
@@ -190,7 +187,7 @@ class FormFactory:
             type(f"{model}RelationshipFilteringForm", (BaseForm,), relation_form)
             form, form_type = deepcopy(relation_form), f"{model}_filtering"
             for property in properties:
-                form_properties[form_type][f"{property}_filter"] = {"type": "list"}
+                vs.form_properties[form_type][f"{property}_filter"] = {"type": "list"}
             form.update(
                 {
                     "form_type": HiddenField(default=form_type),
@@ -437,8 +434,8 @@ class PoolForm(BaseForm):
             for property in vs.properties["filtering"][model]:
                 setattr(cls, f"{model}_{property}", StringField(property))
                 setattr(cls, f"{model}_{property}_invert", BooleanField(property))
-                form_properties["pool"][f"{model}_{property}_match"] = {"type": "list"}
-                form_properties["pool"][f"{model}_{property}_invert"] = {"type": "bool"}
+                vs.form_properties["pool"][f"{model}_{property}_match"] = {"type": "list"}
+                vs.form_properties["pool"][f"{model}_{property}_invert"] = {"type": "bool"}
                 setattr(
                     cls,
                     f"{model}_{property}_match",

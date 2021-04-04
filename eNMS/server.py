@@ -25,7 +25,6 @@ from werkzeug.exceptions import Forbidden
 from eNMS import app
 from eNMS.controller import controller
 from eNMS.database import db
-from eNMS.forms import form_properties
 from eNMS.models import models, property_types, relationships
 from eNMS.rest_api import RestApi
 from eNMS.variables import vs
@@ -138,7 +137,7 @@ class Server(Flask):
         def inject_properties():
             return {
                 "configuration_properties": vs.configuration_properties,
-                "form_properties": form_properties,
+                "form_properties": vs.form_properties,
                 "rbac": vs.rbac,
                 "names": vs.property_names,
                 "property_types": property_types,

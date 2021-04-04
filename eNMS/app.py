@@ -77,7 +77,6 @@ class App:
         self.path = Path.cwd()
         self.custom = CustomApp(self)
         self.custom.pre_init()
-        self.database = vs.database
         self.cli_command = self.detect_cli()
         self.load_custom_properties()
         self.load_configuration_properties()

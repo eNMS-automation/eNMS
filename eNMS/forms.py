@@ -47,7 +47,7 @@ class MetaForm(FormMeta):
             form.custom_properties = {}
         form.custom_properties = {
             **form.custom_properties,
-            **app.properties["custom"].get(form_type, {}),
+            **vs.properties["custom"].get(form_type, {}),
         }
         for property, values in form.custom_properties.items():
             if not values.get("form", True):
@@ -165,7 +165,7 @@ class FormFactory:
 
     def generate_filtering_forms(self):
         for model in ("device", "link", "pool", "run", "service", "task", "user"):
-            properties, relations = app.properties["filtering"].get(model, []), {}
+            properties, relations = vs.properties["filtering"].get(model, []), {}
             for related_model, relation in relationships[model].items():
                 if related_model in ("edges", "results"):
                     continue
@@ -311,7 +311,7 @@ class CredentialForm(BaseForm):
 class DatabaseDeletionForm(BaseForm):
     action = "eNMS.administration.databaseDeletion"
     form_type = HiddenField(default="database_deletion")
-    deletion_choices = [(p, p) for p in app.database["import_export_models"]]
+    deletion_choices = [(p, p) for p in vs.database["import_export_models"]]
     deletion_types = SelectMultipleField(
         "Instances to delete", choices=deletion_choices
     )
@@ -327,7 +327,7 @@ class DatabaseMigrationsForm(BaseForm):
     export_private_properties = BooleanField(
         "Include private properties", default="checked"
     )
-    export_choices = [(p, p) for p in app.database["import_export_models"]]
+    export_choices = [(p, p) for p in vs.database["import_export_models"]]
     import_export_types = SelectMultipleField(
         "Instances to migrate", choices=export_choices
     )
@@ -352,7 +352,7 @@ class DeviceConnectionForm(BaseForm):
     form_type = HiddenField(default="device_connection")
     address_choices = [("ip_address", "IP address"), ("name", "Name")] + [
         (property, values["pretty_name"])
-        for property, values in app.properties["custom"]["device"].items()
+        for property, values in vs.properties["custom"]["device"].items()
         if values.get("is_address", False)
     ]
     address = SelectField(choices=address_choices)
@@ -433,8 +433,8 @@ class PoolForm(BaseForm):
     def form_init(cls):
         cls.models = ("device", "link", "service", "user")
         for model in cls.models:
-            setattr(cls, f"{model}_properties", app.properties["filtering"][model])
-            for property in app.properties["filtering"][model]:
+            setattr(cls, f"{model}_properties", vs.properties["filtering"][model])
+            for property in vs.properties["filtering"][model]:
                 setattr(cls, f"{model}_{property}", StringField(property))
                 setattr(cls, f"{model}_{property}_invert", BooleanField(property))
                 form_properties["pool"][f"{model}_{property}_match"] = {"type": "list"}
@@ -1048,4 +1048,4 @@ class UserForm(RbacForm):
         ],
     )
     password = PasswordField("Password")
-    is_admin = BooleanField(default=Fa
+    is_admin = BooleanField(default=False)

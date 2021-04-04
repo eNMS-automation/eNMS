@@ -392,7 +392,7 @@ class ServiceRun:
         if device:
             result_kw["device"] = device.id
         if self.is_main_run and not device:
-            services = list(app.run_logs.get(self.parent_runtime, []))
+            services = list(vs.run_logs.get(self.parent_runtime, []))
             for service_id in services:
                 logs = app.log_queue(self.parent_runtime, service_id, mode="get")
                 db.factory(

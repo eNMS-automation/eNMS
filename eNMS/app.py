@@ -64,7 +64,6 @@ class App:
     }
     property_names = {}
     service_run_count = defaultdict(int)
-    run_logs = defaultdict(lambda: defaultdict(list))
     run_stop = defaultdict(bool)
     run_instances = {}
     ssh_sessions = {}
@@ -311,7 +310,7 @@ class App:
     def log_queue(self, runtime, service, log=None, mode="add", start_line=0):
         if self.redis_queue:
             key = f"{runtime}/{service}/logs"
-            self.run_logs[runtime][int(service)] = None
+            vs.run_logs[runtime][int(service)] = None
             if mode == "add":
                 log = self.redis("lpush", key, log)
             else:
@@ -320,9 +319,9 @@ class App:
                     log = log[::-1][start_line:]
         else:
             if mode == "add":
-                return self.run_logs[runtime][int(service)].append(log)
+                return vs.run_logs[runtime][int(service)].append(log)
             else:
-                full_log = getattr(self.run_logs[runtime], mode)(int(service), [])
+                full_log = getattr(vs.run_logs[runtime], mode)(int(service), [])
                 log = full_log[start_line:]
         return log
 

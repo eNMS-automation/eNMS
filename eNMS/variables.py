@@ -40,6 +40,7 @@ class VariableStore:
     def set_run_variables(self):
         self.run_targets = {}
         self.run_states = defaultdict(dict)
+        self.run_logs = defaultdict(lambda: defaultdict(list))
 
     def set_setup_variables(self):
         for setup_file in (Path.cwd() / "setup").iterdir():

@@ -568,7 +568,7 @@ class ServiceRun:
         if self.notification_header:
             notification["Header"] = self.notification_header
         if self.include_link_in_summary:
-            address = app.settings["app"]["address"]
+            address = vs.settings["app"]["address"]
             notification["Link"] = f"{address}/view_service_results/{self.id}"
         if "summary" in results:
             if results["summary"]["failure"]:
@@ -608,15 +608,15 @@ class ServiceRun:
             elif self.send_notification_method == "slack":
                 result = SlackClient(getenv("SLACK_TOKEN")).api_call(
                     "chat.postMessage",
-                    channel=app.settings["slack"]["channel"],
+                    channel=vs.settings["slack"]["channel"],
                     text=notification,
                 )
             else:
                 result = post(
-                    app.settings["mattermost"]["url"],
-                    verify=app.settings["mattermost"]["verify_certificate"],
+                    vs.settings["mattermost"]["url"],
+                    verify=vs.settings["mattermost"]["verify_certificate"],
                     json={
-                        "channel": app.settings["mattermost"]["channel"],
+                        "channel": vs.settings["mattermost"]["channel"],
                         "text": notification,
                     },
                 ).text
@@ -791,7 +791,7 @@ class ServiceRun:
 
     @staticmethod
     def _import(module, *args, **kwargs):
-        if module in app.settings["security"]["forbidden_python_libraries"]:
+        if module in vs.settings["security"]["forbidden_python_libraries"]:
             raise ImportError(f"Module '{module}' is restricted.")
         return importlib_import(module, *args, **kwargs)
 
@@ -816,7 +816,7 @@ class ServiceRun:
                 "fetch_all": partial(_self.database_function, "fetch_all"),
                 "factory": partial(_self.database_function, "factory"),
                 "send_email": app.send_email,
-                "settings": app.settings,
+                "settings": vs.settings,
                 "devices": _self.target_devices,
                 "encrypt": app.encrypt_password,
                 "get_var": _self.get_var,

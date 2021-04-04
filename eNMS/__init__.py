@@ -5,6 +5,7 @@ from eNMS.controller import controller
 from eNMS.database import db
 from eNMS.forms import form_factory
 from eNMS.models import models
+from eNMS.variables import vs
 
 
 class Initialization:
@@ -26,7 +27,7 @@ class Initialization:
         if not admin_user.password:
             admin_user.update(password="admin")
         controller.migration_import(
-            name=app.settings["app"].get("startup_migration", "default"),
+            name=vs.settings["app"].get("startup_migration", "default"),
             import_export_types=db.import_export_models,
         )
         controller.get_git_content()

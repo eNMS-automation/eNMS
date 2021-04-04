@@ -77,10 +77,8 @@ class App:
         self.path = Path.cwd()
         self.custom = CustomApp(self)
         self.custom.pre_init()
-        self.settings = vs.settings
         self.properties = vs.properties
         self.database = vs.database
-        self.logging = vs.logging
         self.cli_command = self.detect_cli()
         self.load_custom_properties()
         self.load_configuration_properties()
@@ -103,15 +101,15 @@ class App:
         if not name or not password:
             return False
         user = db.get_user(name)
-        default_method = self.settings["authentication"]["default"]
+        default_method = vs.settings["authentication"]["default"]
         user_method = getattr(user, "authentication", default_method)
         method = kwargs.get("authentication_method", user_method)
-        if method not in self.settings["authentication"]["methods"]:
+        if method not in vs.settings["authentication"]["methods"]:
             return False
         elif method == "database":
             if not user:
                 return False
-            hash = self.settings["security"]["hash_user_passwords"]
+            hash = vs.settings["security"]["hash_user_passwords"]
             verify = argon2.verify if hash else str.__eq__
             user_password = self.get_password(user.password)
             success = user and user_password and verify(password, user_password)
@@ -153,11 +151,11 @@ class App:
 
     def init_connection_pools(self):
         self.request_session = RequestSession()
-        retry = Retry(**self.settings["requests"]["retries"])
+        retry = Retry(**vs.settings["requests"]["retries"])
         for protocol in ("http", "https"):
             self.request_session.mount(
                 f"{protocol}://",
-                HTTPAdapter(max_retries=retry, **self.settings["requests"]["pool"]),
+                HTTPAdapter(max_retries=retry, **vs.settings["requests"]["pool"]),
             )
 
     def initialize(self):
@@ -189,7 +187,7 @@ class App:
 
     def init_plugins(self):
         self.plugins = {}
-        for plugin_path in Path(self.settings["app"]["plugin_path"]).iterdir():
+        for plugin_path in Path(vs.settings["app"]["plugin_path"]).iterdir():
             if not Path(plugin_path / "settings.json").exists():
                 continue
             try:
@@ -239,9 +237,9 @@ class App:
 
     def init_services(self):
         path_services = [self.path / "eNMS" / "services"]
-        load_examples = self.settings["app"].get("startup_migration") == "examples"
-        if self.settings["paths"]["custom_services"]:
-            path_services.append(Path(self.settings["paths"]["custom_services"]))
+        load_examples = vs.settings["app"].get("startup_migration") == "examples"
+        if vs.settings["paths"]["custom_services"]:
+            path_services.append(Path(vs.settings["paths"]["custom_services"]))
         for path in path_services:
             for file in path.glob("**/*.py"):
                 if "init" in str(file):
@@ -258,7 +256,7 @@ class App:
     def init_vault_client(self):
         url = getenv("VAULT_ADDR", "http://127.0.0.1:8200")
         self.vault_client = VaultClient(url=url, token=getenv("VAULT_TOKEN"))
-        if self.vault_client.sys.is_sealed() and self.settings["vault"]["unseal_vault"]:
+        if self.vault_client.sys.is_sealed() and vs.settings["vault"]["unseal_vault"]:
             keys = [getenv(f"UNSEAL_VAULT_KEY{i}") for i in range(1, 6)]
             self.vault_client.sys.submit_unseal_keys(filter(None, keys))
 
@@ -301,7 +299,7 @@ class App:
                 )
 
     def log(self, severity, content, user=None, change_log=True, logger="root"):
-        logger_settings = self.logging["loggers"].get(logger, {})
+        logger_settings = vs.logging["loggers"].get(logger, {})
         if logger:
             getattr(getLogger(logger), severity)(content)
         if change_log or logger and logger_settings.get("change_log"):
@@ -349,23 +347,23 @@ class App:
         filename=None,
         file_content=None,
     ):
-        sender = sender or self.settings["mail"]["sender"]
+        sender = sender or vs.settings["mail"]["sender"]
         message = MIMEMultipart()
         message["From"] = sender
         message["To"] = recipients
         message["Date"] = formatdate(localtime=True)
         message["Subject"] = subject
-        message.add_header("reply-to", reply_to or self.settings["mail"]["reply_to"])
+        message.add_header("reply-to", reply_to or vs.settings["mail"]["reply_to"])
         message.attach(MIMEText(content))
         if filename:
             attached_file = MIMEApplication(file_content, Name=filename)
             attached_file["Content-Disposition"] = f'attachment; filename="{filename}"'
             message.attach(attached_file)
-        server = SMTP(self.settings["mail"]["server"], self.settings["mail"]["port"])
-        if self.settings["mail"]["use_tls"]:
+        server = SMTP(vs.settings["mail"]["server"], vs.settings["mail"]["port"])
+        if vs.settings["mail"]["use_tls"]:
             server.starttls()
             password = getenv("MAIL_PASSWORD", "")
-            server.login(self.settings["mail"]["username"], password)
+            server.login(vs.settings["mail"]["username"], password)
         server.sendmail(sender, recipients.split(","), message.as_string())
         server.close()
 

@@ -447,7 +447,7 @@ class Controller:
         return [f for f in listdir(app.path / "files" / "services") if ".tgz" in f]
 
     def get_git_content(self):
-        repo = app.settings["app"]["git_repository"]
+        repo = vs.settings["app"]["git_repository"]
         if not repo:
             return
         local_path = app.path / "network_data"
@@ -556,7 +556,7 @@ class Controller:
 
     def get_tree_files(self, path):
         if path == "root":
-            path = app.settings["paths"]["files"] or app.path / "files"
+            path = vs.settings["paths"]["files"] or app.path / "files"
         else:
             path = path.replace(">", "/")
         return [
@@ -1009,7 +1009,7 @@ class Controller:
         return now
 
     def save_settings(self, **kwargs):
-        app.settings = kwargs["settings"]
+        vs.settings = kwargs["settings"]
         if kwargs["save"]:
             with open(app.path / "setup" / "settings.json", "w") as file:
                 dump(kwargs["settings"], file, indent=2)
@@ -1020,14 +1020,14 @@ class Controller:
         return app.get_time()
 
     def scan_cluster(self, **kwargs):
-        protocol = app.settings["cluster"]["scan_protocol"]
-        for ip_address in IPv4Network(app.settings["cluster"]["scan_subnet"]):
+        protocol = vs.settings["cluster"]["scan_protocol"]
+        for ip_address in IPv4Network(vs.settings["cluster"]["scan_subnet"]):
             try:
                 server = http_get(
                     f"{protocol}://{ip_address}/rest/is_alive",
-                    timeout=app.settings["cluster"]["scan_timeout"],
+                    timeout=vs.settings["cluster"]["scan_timeout"],
                 ).json()
-                if app.settings["cluster"]["id"] != server.pop("cluster_id"):
+                if vs.settings["cluster"]["id"] != server.pop("cluster_id"):
                     continue
                 db.factory("server", **{**server, **{"ip_address": str(ip_address)}})
             except ConnectionError:
@@ -1035,7 +1035,7 @@ class Controller:
 
     def scan_playbook_folder(self):
         path = Path(
-            app.settings["paths"]["playbooks"] or app.path / "files" / "playbooks"
+            vs.settings["paths"]["playbooks"] or app.path / "files" / "playbooks"
         )
         playbooks = [[str(f) for f in path.glob(e)] for e in ("*.yaml", "*.yml")]
         return sorted(sum(playbooks, []))

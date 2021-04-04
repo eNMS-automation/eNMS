@@ -137,7 +137,7 @@ class Server(Flask):
         @self.context_processor
         def inject_properties():
             return {
-                "configuration_properties": app.configuration_properties,
+                "configuration_properties": vs.configuration_properties,
                 "form_properties": form_properties,
                 "rbac": vs.rbac,
                 "names": vs.property_names,

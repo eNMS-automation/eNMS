@@ -450,7 +450,7 @@ class Controller:
         device = db.fetch("device", id=device_id)
         return {
             property: app.custom.parse_configuration_property(device, property)
-            for property in app.configuration_properties
+            for property in vs.configuration_properties
         }
 
     def get_exported_services(self):
@@ -480,13 +480,13 @@ class Controller:
                 {"hash": str(commit), "date": commit.committed_datetime}
                 for commit in list(repo.iter_commits(paths=path / data_type))
             ]
-            for data_type in self.configuration_properties
+            for data_type in vs.configuration_properties
         }
 
     def get_git_network_data(self, device_name, hash):
         commit, result = Repo(self.path / "network_data").commit(hash), {}
         device = db.fetch("device", name=device_name)
-        for property in self.configuration_properties:
+        for property in vs.configuration_properties:
             try:
                 file = commit.tree / device_name / property
                 with BytesIO(file.data_stream.read()) as f:
@@ -1191,7 +1191,7 @@ class Controller:
                     timestamps = load(file)
             except Exception:
                 timestamps = {}
-            for property in app.configuration_properties:
+            for property in vs.configuration_properties:
                 for timestamp, value in timestamps.get(property, {}).items():
                     setattr(device, f"last_{property}_{timestamp}", value)
                 filepath = Path(dir.path) / property
@@ -1203,7 +1203,7 @@ class Controller:
         for pool in db.fetch_all("pool"):
             if any(
                 getattr(pool, f"device_{property}")
-                for property in app.configuration_properties
+                for property in vs.configuration_properties
             ):
                 pool.compute_pool()
 

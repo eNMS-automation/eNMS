@@ -42,7 +42,7 @@ from eNMS.variables import vs
 
 class App:
 
-    configuration_properties = {"configuration": "Configuration"}
+    
 
     def __init__(self):
         self.path = Path.cwd()
@@ -239,10 +239,10 @@ class App:
                         db.private_properties[model] = []
                     db.private_properties[model].append(property)
                 if model == "device" and property_dict.get("configuration"):
-                    self.configuration_properties[property] = pretty_name
+                    vs.configuration_properties[property] = pretty_name
 
     def load_configuration_properties(self):
-        for property, title in self.configuration_properties.items():
+        for property, title in vs.configuration_properties.items():
             vs.properties["filtering"]["device"].append(property)
             vs.properties["tables"]["configuration"].insert(
                 -1,

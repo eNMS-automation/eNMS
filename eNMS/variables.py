@@ -39,6 +39,7 @@ class VariableStore:
             "runtime",
             "duration",
         )
+        self.configuration_properties = {"configuration": "Configuration"}
 
     def _set_property_variables(self):
         self.property_names = {}

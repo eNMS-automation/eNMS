@@ -16,6 +16,7 @@ from eNMS.fields import (
     StringField,
 )
 from eNMS.models.automation import ConnectionService
+from eNMS.variables import vs
 
 
 class NetmikoBackupService(ConnectionService):
@@ -103,7 +104,7 @@ class DataBackupForm(NetmikoForm):
     form_type = HiddenField(default="netmiko_backup_service")
     property = SelectField(
         "Configuration Property to Update",
-        choices=list(app.configuration_properties.items()),
+        choices=list(vs.configuration_properties.items()),
     )
     commands = FieldList(FormField(CommandsForm), min_entries=12)
     replacements = FieldList(FormField(ReplacementForm), min_entries=12)

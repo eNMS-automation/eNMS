@@ -363,7 +363,7 @@ class DeviceConnectionForm(BaseForm):
 class DeviceDataForm(BaseForm):
     template = "device_data"
     form_type = HiddenField(default="device_data")
-    data_type = SelectField("Display", choices=app.configuration_properties)
+    data_type = SelectField("Display", choices=vs.configuration_properties)
 
 
 class ExcelExportForm(BaseForm):

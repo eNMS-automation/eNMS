@@ -91,7 +91,7 @@ class Device(Object):
 
     @classmethod
     def database_init(cls):
-        for property in app.configuration_properties:
+        for property in vs.configuration_properties:
             for timestamp in vs.configuration_timestamps:
                 setattr(
                     cls,
@@ -150,7 +150,7 @@ class Device(Object):
         include_properties = columns if rest_api_request else None
         properties = super().get_properties(include=include_properties)
         context = int(kwargs["form"].get("context-lines", 0))
-        for property in app.configuration_properties:
+        for property in vs.configuration_properties:
             if rest_api_request:
                 if property in columns:
                     properties[property] = getattr(self, property)

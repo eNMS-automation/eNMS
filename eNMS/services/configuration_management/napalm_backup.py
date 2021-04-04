@@ -83,7 +83,7 @@ class NapalmBackupForm(NapalmForm):
     form_type = HiddenField(default="napalm_backup_service")
     property = SelectField(
         "Configuration Property to Update",
-        choices=list(app.configuration_properties.items()),
+        choices=list(vs.configuration_properties.items()),
     )
     getters = SelectMultipleField(choices=vs.automation["napalm"]["getters"])
     replacements = FieldList(FormField(ReplacementForm), min_entries=3)

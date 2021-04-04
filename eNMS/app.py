@@ -35,7 +35,6 @@ except ImportError as exc:
 
 from eNMS.custom import CustomApp
 from eNMS.database import db
-from eNMS.models import model_properties
 from eNMS.variables import vs
 
 
@@ -229,7 +228,7 @@ class App:
             for property, property_dict in values.items():
                 pretty_name = property_dict["pretty_name"]
                 vs.property_names[property] = pretty_name
-                model_properties[model].append(property)
+                vs.model_properties[model].append(property)
                 if property_dict.get("private"):
                     if model not in db.private_properties:
                         db.private_properties[model] = []

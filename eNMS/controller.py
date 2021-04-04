@@ -31,7 +31,7 @@ from xlwt import Workbook
 
 from eNMS import app
 from eNMS.database import db
-from eNMS.models import model_properties, property_types
+from eNMS.models import property_types
 from eNMS.variables import vs
 
 
@@ -339,7 +339,7 @@ class Controller:
     def filtering_base_constraints(self, model, **kwargs):
         table, constraints = vs.models[model], []
         constraint_dict = {**kwargs.get("form", {}), **kwargs.get("constraints", {})}
-        for property in model_properties[model]:
+        for property in vs.model_properties[model]:
             value, row = constraint_dict.get(property), getattr(table, property)
             if not value:
                 continue
@@ -1108,7 +1108,7 @@ class Controller:
             filename += ".xls"
         for obj_type in ("device", "link"):
             sheet = workbook.add_sheet(obj_type)
-            for index, property in enumerate(model_properties[obj_type]):
+            for index, property in enumerate(vs.model_properties[obj_type]):
                 if property in db.dont_migrate[obj_type]:
                     continue
                 sheet.write(0, index, property)

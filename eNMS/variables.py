@@ -45,6 +45,7 @@ class VariableStore:
         self.form_class = {}
         self.form_properties = defaultdict(dict)
         self.models = {}
+        self.model_properties = defaultdict(lambda: ["type"])
         self.property_names = {}
         self.relationships = defaultdict(dict)
 

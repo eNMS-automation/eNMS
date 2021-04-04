@@ -31,7 +31,7 @@ from time import sleep
 from traceback import format_exc
 from uuid import getnode
 
-from eNMS.models import model_properties, property_types
+from eNMS.models import property_types
 from eNMS.variables import vs
 
 
@@ -157,7 +157,7 @@ class Database:
             for col in inspect(model).columns:
                 if not col.info.get("model_properties", True):
                     continue
-                model_properties[name].append(col.key)
+                vs.model_properties[name].append(col.key)
                 if col.type == PickleType and isinstance(col.default.arg, list):
                     property_types[col.key] = "list"
                 else:
@@ -176,14 +176,14 @@ class Database:
                         descriptor.info.get("name")
                         or f"{descriptor.target_collection}_{descriptor.value_attr}"
                     )
-                    model_properties[name].append(property)
+                    vs.model_properties[name].append(property)
             if hasattr(model, "parent_type"):
-                model_properties[name].extend(model_properties[model.parent_type])
+                vs.model_properties[name].extend(vs.model_properties[model.parent_type])
             if "service" in name and name != "service":
-                model_properties[name].extend(model_properties["service"])
+                vs.model_properties[name].extend(vs.model_properties["service"])
             vs.models.update({name: model, name.lower(): model})
-            model_properties[name].extend(model.model_properties)
-            model_properties[name] = list(set(model_properties[name]))
+            vs.model_properties[name].extend(model.model_properties)
+            vs.model_properties[name] = list(set(vs.model_properties[name]))
             for relation in mapper.relationships:
                 if getattr(relation.mapper.class_, "private", False):
                     continue

@@ -2,7 +2,7 @@ from sqlalchemy.ext.mutable import MutableDict, MutableList
 
 from eNMS import app
 from eNMS.database import db
-from eNMS.models import model_properties, property_types
+from eNMS.models import property_types
 from eNMS.variables import vs
 
 
@@ -94,7 +94,7 @@ class AbstractBase(db.base):
     ):
         result = {}
         no_migrate = db.dont_migrate.get(self.type, db.dont_migrate["service"])
-        properties = list(model_properties[self.type])
+        properties = list(vs.model_properties[self.type])
         for property in properties:
             if not private_properties and property in db.private_properties_set:
                 continue

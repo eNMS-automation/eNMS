@@ -31,7 +31,6 @@ from xlwt import Workbook
 
 from eNMS import app
 from eNMS.database import db
-from eNMS.models import property_types
 from eNMS.variables import vs
 
 
@@ -1133,7 +1132,7 @@ class Controller:
                 for index, property in enumerate(properties):
                     if not property:
                         continue
-                    func = db.field_conversion[property_types.get(property, "str")]
+                    func = db.field_conversion[vs.property_types.get(property, "str")]
                     values[property] = func(sheet.row_values(row_index)[index])
                 try:
                     db.factory(obj_type, **values).serialized

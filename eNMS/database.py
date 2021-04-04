@@ -31,7 +31,6 @@ from time import sleep
 from traceback import format_exc
 from uuid import getnode
 
-from eNMS.models import property_types
 from eNMS.variables import vs
 
 
@@ -159,7 +158,7 @@ class Database:
                     continue
                 vs.model_properties[name].append(col.key)
                 if col.type == PickleType and isinstance(col.default.arg, list):
-                    property_types[col.key] = "list"
+                    vs.property_types[col.key] = "list"
                 else:
                     column_type = {
                         Boolean: "bool",
@@ -168,8 +167,8 @@ class Database:
                         JSON: "dict",
                         PickleType: "dict",
                     }.get(type(col.type), "str")
-                    if col.key not in property_types:
-                        property_types[col.key] = column_type
+                    if col.key not in vs.property_types:
+                        vs.property_types[col.key] = column_type
             for descriptor in inspect(model).all_orm_descriptors:
                 if descriptor.extension_type is ASSOCIATION_PROXY:
                     property = (

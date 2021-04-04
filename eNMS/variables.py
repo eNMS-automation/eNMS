@@ -47,6 +47,7 @@ class VariableStore:
         self.models = {}
         self.model_properties = defaultdict(lambda: ["type"])
         self.property_names = {}
+        self.property_types = {}
         self.relationships = defaultdict(dict)
 
     def _set_run_variables(self):

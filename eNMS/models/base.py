@@ -2,7 +2,6 @@ from sqlalchemy.ext.mutable import MutableDict, MutableList
 
 from eNMS import app
 from eNMS.database import db
-from eNMS.models import property_types
 from eNMS.variables import vs
 
 
@@ -66,7 +65,7 @@ class AbstractBase(db.base):
         for property, value in kwargs.items():
             if not hasattr(self, property):
                 continue
-            property_type = property_types.get(property, None)
+            property_type = vs.property_types.get(property, None)
             if property in relation:
                 if relation[property]["list"]:
                     value = db.objectify(relation[property]["model"], value)

@@ -1,4 +1,0 @@
-
-
-
-property_types = {}

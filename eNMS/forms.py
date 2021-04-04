@@ -26,7 +26,6 @@ from eNMS.fields import (
     SelectMultipleStringField,
     StringField,
 )
-from eNMS.models import property_types, relationships
 from eNMS.variables import vs
 
 
@@ -88,8 +87,8 @@ class MetaForm(FormMeta):
                 db.private_properties_set.add(field_name)
         vs.form_properties[form_type].update(properties)
         for property, value in properties.items():
-            if property not in property_types and value["type"] != "field-list":
-                property_types[property] = value["type"]
+            if property not in vs.property_types and value["type"] != "field-list":
+                vs.property_types[property] = value["type"]
         for base in form.__bases__:
             if not hasattr(base, "form_type"):
                 continue
@@ -117,7 +116,7 @@ class BaseForm(FlaskForm, metaclass=MetaForm):
     @classmethod
     def configure_relationships(cls, *models):
         form_type = cls.form_type.kwargs["default"]
-        for related_model, relation in relationships[form_type].items():
+        for related_model, relation in vs.relationships[form_type].items():
             if related_model not in models:
                 continue
             field = MultipleInstanceField if relation["list"] else InstanceField
@@ -163,12 +162,12 @@ class FormFactory:
     def generate_filtering_forms(self):
         for model in ("device", "link", "pool", "run", "service", "task", "user"):
             properties, relations = vs.properties["filtering"].get(model, []), {}
-            for related_model, relation in relationships[model].items():
+            for related_model, relation in vs.relationships[model].items():
                 if related_model in ("edges", "results"):
                     continue
                 relations[related_model] = MultipleInstanceField(related_model)
-                relationships[f"{model}_filtering"][related_model] = relation
-                relationships[f"{model}_relation_filtering"][related_model] = relation
+                vs.relationships[f"{model}_filtering"][related_model] = relation
+                vs.relationships[f"{model}_relation_filtering"][related_model] = relation
             relation_form = {
                 "template": "filtering",
                 "properties": sorted(relations),
@@ -209,7 +208,7 @@ class FormFactory:
 
     def generate_instance_insertion_forms(self):
         for model in ("device", "link", "user", "service"):
-            relationships[f"add_{model}s"]["instances"] = {
+            vs.relationships[f"add_{model}s"]["instances"] = {
                 "type": "object-list",
                 "model": model,
             }

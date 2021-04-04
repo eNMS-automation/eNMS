@@ -40,7 +40,7 @@ class MetaForm(FormMeta):
         form_type = attrs["form_type"].kwargs["default"]
         form = type.__new__(cls, name, bases, attrs)
         if form.__dict__.get("get_request_allowed", True):
-            app.rbac["get_requests"][f"/{form_type}_form"] = "access"
+            vs.rbac["get_requests"][f"/{form_type}_form"] = "access"
         if hasattr(form, "form_init"):
             form.form_init()
         if not hasattr(form, "custom_properties"):
@@ -819,11 +819,11 @@ class AccessForm(RbacForm):
             "upper_menu",
         )
         for key in keys:
-            values = [(k, k) for k, v in app.rbac[key].items() if v == "access"]
+            values = [(k, k) for k, v in vs.rbac[key].items() if v == "access"]
             field_name = " ".join(key.split("_")).capitalize()
             setattr(cls, key, SelectMultipleField(field_name, choices=values))
         menus, pages = [], []
-        for category, values in app.rbac["menu"].items():
+        for category, values in vs.rbac["menu"].items():
             if values["rbac"] == "admin":
                 continue
             if values["rbac"] == "access":

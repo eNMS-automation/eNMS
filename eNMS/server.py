@@ -139,7 +139,7 @@ class Server(Flask):
             return {
                 "configuration_properties": app.configuration_properties,
                 "form_properties": form_properties,
-                "rbac": app.rbac,
+                "rbac": vs.rbac,
                 "names": app.property_names,
                 "property_types": property_types,
                 "relations": list(set(chain.from_iterable(relationships.values()))),
@@ -177,7 +177,7 @@ class Server(Flask):
             rest_request = request.path.startswith("/rest/")
             endpoint = "/".join(request.path.split("/")[: 2 + rest_request])
             request_property = f"{request.method.lower()}_requests"
-            endpoint_rbac = app.rbac[request_property].get(endpoint)
+            endpoint_rbac = vs.rbac[request_property].get(endpoint)
             if rest_request:
                 user = app.authenticate_user(**request.authorization)
                 if user:

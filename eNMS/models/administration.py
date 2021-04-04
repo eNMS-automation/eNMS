@@ -70,7 +70,7 @@ class User(AbstractBase, UserMixin):
             .filter(models["user"].name == self.name)
             .all()
         )
-        for property in app.rbac:
+        for property in vs.rbac:
             if property == "admin_models":
                 continue
             access_value = (getattr(access, property) for access in user_access)

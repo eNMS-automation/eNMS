@@ -2,7 +2,8 @@ from sqlalchemy.ext.mutable import MutableDict, MutableList
 
 from eNMS import app
 from eNMS.database import db
-from eNMS.models import model_properties, property_types, relationships
+from eNMS.models import model_properties, property_types
+from eNMS.variables import vs
 
 
 class AbstractBase(db.base):
@@ -61,7 +62,7 @@ class AbstractBase(db.base):
         return {p: getattr(self, p) for p in ("id", "name", "type")}
 
     def update(self, **kwargs):
-        relation = relationships[self.__tablename__]
+        relation = vs.relationships[self.__tablename__]
         for property, value in kwargs.items():
             if not hasattr(self, property):
                 continue
@@ -149,7 +150,7 @@ class AbstractBase(db.base):
             export, exclude=exclude, private_properties=private_properties
         )
         no_migrate = db.dont_migrate.get(self.type, db.dont_migrate["service"])
-        for property, relation in relationships[self.type].items():
+        for property, relation in vs.relationships[self.type].items():
             if include and property not in include or exclude and property in exclude:
                 continue
             if export and property in no_migrate:

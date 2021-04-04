@@ -31,7 +31,7 @@ from time import sleep
 from traceback import format_exc
 from uuid import getnode
 
-from eNMS.models import model_properties, property_types, relationships
+from eNMS.models import model_properties, property_types
 from eNMS.variables import vs
 
 
@@ -188,7 +188,7 @@ class Database:
                 if getattr(relation.mapper.class_, "private", False):
                     continue
                 property = str(relation).split(".")[1]
-                relationships[name][property] = {
+                vs.relationships[name][property] = {
                     "model": relation.mapper.class_.__tablename__,
                     "list": relation.uselist,
                 }

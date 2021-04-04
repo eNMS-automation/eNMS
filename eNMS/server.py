@@ -25,7 +25,7 @@ from werkzeug.exceptions import Forbidden
 from eNMS import app
 from eNMS.controller import controller
 from eNMS.database import db
-from eNMS.models import property_types, relationships
+from eNMS.models import property_types
 from eNMS.rest_api import RestApi
 from eNMS.variables import vs
 
@@ -141,8 +141,8 @@ class Server(Flask):
                 "rbac": vs.rbac,
                 "names": vs.property_names,
                 "property_types": property_types,
-                "relations": list(set(chain.from_iterable(relationships.values()))),
-                "relationships": relationships,
+                "relations": list(set(chain.from_iterable(vs.relationships.values()))),
+                "relationships": vs.relationships,
                 "service_types": {
                     service: service_class.pretty_name
                     for service, service_class in sorted(vs.models.items())

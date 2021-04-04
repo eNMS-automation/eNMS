@@ -16,21 +16,21 @@ except ImportError as exc:
 
 class VariableStore:
     def __init__(self):
-        self.set_automation_variables()
-        self.set_configuration_variables()
-        self.set_property_variables()
-        self.set_run_variables()
-        self.set_server_variables()
-        self.set_setup_variables()
+        self._set_automation_variables()
+        self._set_configuration_variables()
+        self._set_property_variables()
+        self._set_run_variables()
+        self._set_server_variables()
+        self._set_setup_variables()
 
-    def set_automation_variables(self):
+    def _set_automation_variables(self):
         self.netmiko_drivers = sorted((driver, driver) for driver in CLASS_MAPPER)
         self.napalm_drivers = sorted(
             (driver, driver) for driver in SUPPORTED_DRIVERS[1:]
         )
         self.scrapli_drivers = CORE_PLATFORM_MAP
 
-    def set_configuration_variables(self):
+    def _set_configuration_variables(self):
         self.configuration_timestamps = (
             "status",
             "update",
@@ -39,10 +39,10 @@ class VariableStore:
             "duration",
         )
 
-    def set_property_variables(self):
+    def _set_property_variables(self):
         self.property_names = {}
 
-    def set_run_variables(self):
+    def _set_run_variables(self):
         self.run_targets = {}
         self.run_states = defaultdict(dict)
         self.run_logs = defaultdict(lambda: defaultdict(list))
@@ -52,7 +52,7 @@ class VariableStore:
         self.connections_cache = {library: defaultdict(dict) for library in libraries}
         self.service_run_count = defaultdict(int)
 
-    def set_server_variables(self):
+    def _set_server_variables(self):
         self.log_levels = ["debug", "info", "warning", "error", "critical"]
         self.status_log_level = {
             200: "info",
@@ -61,8 +61,14 @@ class VariableStore:
             404: "info",
             500: "error",
         }
+        self.status_error_message = {
+            401: "Wrong Credentials",
+            403: "Operation not allowed.",
+            404: "Invalid POST request.",
+            500: "Internal Server Error.",
+        }
 
-    def set_setup_variables(self):
+    def _set_setup_variables(self):
         for setup_file in (Path.cwd() / "setup").iterdir():
             with open(setup_file, "r") as file:
                 setattr(self, setup_file.stem, load(file))

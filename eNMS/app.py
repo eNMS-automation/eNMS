@@ -42,20 +42,7 @@ from eNMS.variables import vs
 
 class App:
 
-    status_log_level = {
-        200: "info",
-        401: "warning",
-        403: "warning",
-        404: "info",
-        500: "error",
-    }
-
-    status_error_message = {
-        401: "Wrong Credentials",
-        403: "Operation not allowed.",
-        404: "Invalid POST request.",
-        500: "Internal Server Error.",
-    }
+    
     ssh_sessions = {}
     configuration_properties = {"configuration": "Configuration"}
 

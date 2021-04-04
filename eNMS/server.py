@@ -214,7 +214,7 @@ class Server(Flask):
             )
             if status_code == 500:
                 log += f"\n{traceback}"
-            app.log(app.status_log_level[status_code], log, change_log=False)
+            app.log(vs.status_log_level[status_code], log, change_log=False)
             if rest_request:
                 logout_user()
             if status_code == 200:
@@ -228,7 +228,7 @@ class Server(Flask):
                     return redirect(url_for("blueprint.route", page="login"))
                 return render_template("error.html", error=status_code), status_code
             else:
-                alert = f"Error {status_code} - {app.status_error_message[status_code]}"
+                alert = f"Error {status_code} - {vs.status_error_message[status_code]}"
                 return jsonify({"alert": alert}), status_code
 
         return decorated_function

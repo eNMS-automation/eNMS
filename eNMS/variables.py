@@ -1,6 +1,5 @@
 from collections import defaultdict
 from json import load
-from itertools import chain
 from napalm._SUPPORTED_DRIVERS import SUPPORTED_DRIVERS
 from netmiko.ssh_dispatcher import CLASS_MAPPER
 from pathlib import Path
@@ -92,7 +91,6 @@ class VariableStore:
             "rbac": self.rbac,
             "names": self.property_names,
             "property_types": self.property_types,
-            "relations": list(set(chain.from_iterable(self.relationships.values()))),
             "relationships": self.relationships,
             "service_types": {
                 service: service_class.pretty_name

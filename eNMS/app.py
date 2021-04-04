@@ -198,7 +198,7 @@ class App:
                     "module": import_module(f"eNMS.plugins.{plugin_path.stem}"),
                 }
                 for setup_file in ("database", "properties", "rbac"):
-                    property = getattr(self, setup_file)
+                    property = getattr(vs, setup_file)
                     self.update_settings(property, settings.get(setup_file, {}))
             except Exception:
                 error(f"Could not load plugin '{plugin_path.stem}':\n{format_exc()}")

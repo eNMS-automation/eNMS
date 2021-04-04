@@ -16,7 +16,7 @@ from eNMS.fields import (
     FieldList,
 )
 from eNMS.models.automation import ConnectionService
-from eNMS.variables import automation
+from eNMS.variables import vs
 
 
 class NapalmBackupService(ConnectionService):
@@ -85,7 +85,7 @@ class NapalmBackupForm(NapalmForm):
         "Configuration Property to Update",
         choices=list(app.configuration_properties.items()),
     )
-    getters = SelectMultipleField(choices=automation["napalm"]["getters"])
+    getters = SelectMultipleField(choices=vs.automation["napalm"]["getters"])
     replacements = FieldList(FormField(ReplacementForm), min_entries=3)
     groups = {
         "Target Property and Getters": {

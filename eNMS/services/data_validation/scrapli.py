@@ -5,7 +5,7 @@ from eNMS.database import db
 from eNMS.fields import BooleanField, HiddenField, SelectField, StringField
 from eNMS.forms import ConnectionForm, form_factory
 from eNMS.models.automation import ConnectionService
-from eNMS.variables import scrapli_drivers
+from eNMS.variables import vs
 
 
 class ScrapliService(ConnectionService):
@@ -33,7 +33,7 @@ class ScrapliForm(ConnectionForm):
     form_type = HiddenField(default="scrapli_service")
     commands = StringField(substitution=True, widget=TextArea(), render_kw={"rows": 5})
     is_configuration = BooleanField()
-    driver = SelectField(choices=form_factory.choices(scrapli_drivers))
+    driver = SelectField(choices=form_factory.choices(vs.scrapli_drivers))
     transport = SelectField(
         choices=form_factory.choices(("system", "paramiko", "ssh2"))
     )

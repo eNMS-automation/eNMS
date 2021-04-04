@@ -28,7 +28,7 @@ from eNMS.database import db
 from eNMS.forms import form_classes, form_properties
 from eNMS.models import models, property_types, relationships
 from eNMS.rest_api import RestApi
-from eNMS.variables import properties, themes, visualization
+from eNMS.variables import vs
 
 
 class Server(Flask):
@@ -150,13 +150,13 @@ class Server(Flask):
                     if hasattr(service_class, "pretty_name")
                 },
                 "settings": app.settings,
-                "themes": themes,
+                "themes": vs.themes,
                 "table_properties": app.properties["tables"],
                 "user": current_user.serialized
                 if current_user.is_authenticated
                 else None,
                 "version": app.version,
-                "visualization": visualization,
+                "visualization": vs.visualization,
             }
 
     def configure_errors(self):
@@ -279,7 +279,7 @@ class Server(Flask):
         def dashboard():
             return render_template(
                 "dashboard.html",
-                **{"endpoint": "dashboard", "properties": properties["dashboard"]},
+                **{"endpoint": "dashboard", "properties": vs.properties["dashboard"]},
             )
 
         @blueprint.route("/logout")

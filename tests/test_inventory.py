@@ -2,7 +2,7 @@ from werkzeug.datastructures import ImmutableMultiDict
 
 from eNMS import app
 from eNMS.database import db
-from eNMS.variables import properties
+from eNMS.variables import vs
 
 from tests.conftest import check_pages
 
@@ -122,7 +122,7 @@ pool2 = {
 
 
 def create_pool(pool: dict) -> dict:
-    for model, model_properties in properties["filtering"].items():
+    for model, model_properties in vs.properties["filtering"].items():
         for property in model_properties:
             if f"{model}_{property}_match" not in pool:
                 pool[f"{model}_{property}_match"] = "inclusion"

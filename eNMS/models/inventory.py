@@ -12,7 +12,7 @@ from eNMS.controller import controller
 from eNMS.models import models
 from eNMS.models.base import AbstractBase
 from eNMS.database import db
-from eNMS.variables import properties
+from eNMS.variables import vs
 
 
 class Object(AbstractBase):
@@ -332,7 +332,7 @@ class Pool(AbstractBase):
     @classmethod
     def database_init(cls):
         for model in cls.models:
-            for property in properties["filtering"][model]:
+            for property in vs.properties["filtering"][model]:
                 setattr(cls, f"{model}_{property}", db.Column(db.LargeString))
                 setattr(
                     cls,
@@ -363,7 +363,7 @@ class Pool(AbstractBase):
 
     def match_instance(self, instance):
         match_list = []
-        for property in properties["filtering"][instance.class_type]:
+        for property in vs.properties["filtering"][instance.class_type]:
             pool_value = getattr(self, f"{instance.class_type}_{property}")
             if not pool_value:
                 continue
@@ -384,7 +384,7 @@ class Pool(AbstractBase):
         for model in self.models:
             if not self.manually_defined:
                 kwargs = {"bulk": "object", "rbac": None, "form": {}}
-                for property in properties["filtering"][model]:
+                for property in vs.properties["filtering"][model]:
                     if not getattr(self, f"{model}_{property}"):
                         continue
                     kwargs["form"].update(

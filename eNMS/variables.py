@@ -13,13 +13,10 @@ except ImportError as exc:
     warn(f"Couldn't import scrapli module ({exc})")
 
 
-class VariableStore(dict):
+class VariableStore:
     def __init__(self):
         self.set_setup_variables()
         self.set_automation_drivers()
-
-    def __setattr__(self, key, value):
-        self[key] = value
 
     def set_setup_variables(self):
         for setup_file in (Path.cwd() / "setup").iterdir():

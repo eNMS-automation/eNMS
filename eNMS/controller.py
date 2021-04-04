@@ -31,7 +31,7 @@ from xlwt import Workbook
 
 from eNMS import app
 from eNMS.database import db
-from eNMS.models import model_properties, property_types, relationships
+from eNMS.models import model_properties, property_types
 from eNMS.variables import vs
 
 
@@ -362,7 +362,7 @@ class Controller:
     def filtering_relationship_constraints(self, query, model, **kwargs):
         table = vs.models[model]
         constraint_dict = {**kwargs.get("form", {}), **kwargs.get("constraints", {})}
-        for related_model, relation_properties in relationships[model].items():
+        for related_model, relation_properties in vs.relationships[model].items():
             related_table = aliased(vs.models[relation_properties["model"]])
             match = constraint_dict.get(f"{related_model}_filter")
             if match == "empty":
@@ -803,22 +803,22 @@ class Controller:
             with open(path, "r") as migration_file:
                 instances = yaml.load(migration_file)
                 for instance in instances:
-                    instance_type, relation_dict = instance.pop("type", model), {}
-                    for related_model, relation in relationships[instance_type].items():
+                    type, relation_dict = instance.pop("type", model), {}
+                    for related_model, relation in vs.relationships[type].items():
                         relation_dict[related_model] = instance.pop(related_model, [])
                     for property, value in instance.items():
                         if property in db.private_properties_set:
                             instance[property] = app.get_password(value)
                     try:
                         instance = db.factory(
-                            instance_type,
+                            type,
                             migration_import=True,
                             no_fetch=empty_database,
                             update_pools=kwargs.get("update_pools", False),
                             import_mechanism=True,
                             **instance,
                         )
-                        relations[instance_type][instance.name] = relation_dict
+                        relations[type][instance.name] = relation_dict
                     except Exception:
                         info(f"{str(instance)} could not be imported:\n{format_exc()}")
                         status = "Partial import (see logs)."
@@ -828,7 +828,7 @@ class Controller:
                 for property, value in related_models.items():
                     if not value:
                         continue
-                    relation = relationships[model][property]
+                    relation = vs.relationships[model][property]
                     if relation["list"]:
                         related_instances = (
                             db.fetch(relation["model"], name=name, allow_none=True)
@@ -891,7 +891,7 @@ class Controller:
         return result
 
     def objectify(self, model, instance):
-        for property, relation in relationships[model].items():
+        for property, relation in vs.relationships[model].items():
             if property not in instance:
                 continue
             elif relation["list"]:

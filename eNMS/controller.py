@@ -45,7 +45,9 @@ class Controller:
 
         return wrapper
 
-    def _initialize(self):
+    def _initialize(self, first_init):
+        if not first_init:
+            return
         self.migration_import(
             name=vs.settings["app"].get("startup_migration", "default"),
             import_export_types=db.import_export_models,

@@ -1,4 +1,3 @@
-from collections import defaultdict
 from copy import deepcopy
 from flask import request
 from flask_login import current_user
@@ -1049,4 +1048,4 @@ class UserForm(RbacForm):
         ],
     )
     password = PasswordField("Password")
-    is_
+    is_admin = BooleanField(default=False)

@@ -15,18 +15,18 @@ except ImportError as exc:
 
 class VariableStore(dict):
     def __init__(self):
-        self.load_setup_variables()
-        self.load_automation_drivers()
+        self.set_setup_variables()
+        self.set_automation_drivers()
 
     def __setattr__(self, key, value):
         self[key] = value
 
-    def load_setup_variables(self):
+    def set_setup_variables(self):
         for setup_file in (Path.cwd() / "setup").iterdir():
             with open(setup_file, "r") as file:
                 setattr(self, setup_file.stem, load(file))
 
-    def load_automation_drivers(self):
+    def set_automation_drivers(self):
         self.netmiko_drivers = sorted((driver, driver) for driver in CLASS_MAPPER)
         self.napalm_drivers = sorted(
             (driver, driver) for driver in SUPPORTED_DRIVERS[1:]
@@ -34,4 +34,4 @@ class VariableStore(dict):
         self.scrapli_drivers = CORE_PLATFORM_MAP
 
 
-locals().update(VariableStore())
+vs = VariableStore()

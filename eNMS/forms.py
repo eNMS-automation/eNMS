@@ -27,13 +27,7 @@ from eNMS.fields import (
     StringField,
 )
 from eNMS.models import property_types, relationships
-from eNMS.variables import (
-    napalm_drivers,
-    netmiko_drivers,
-    scrapli_drivers,
-    settings,
-    themes,
-)
+from eNMS.variables import vs
 
 form_classes = {}
 form_properties = defaultdict(dict)
@@ -902,13 +896,13 @@ class DeviceForm(ObjectForm):
     os_version = StringField("OS Version")
     longitude = StringField("Longitude", default=0.0)
     latitude = StringField("Latitude", default=0.0)
-    napalm_driver = SelectField("NAPALM Driver", choices=napalm_drivers, default="ios")
+    napalm_driver = SelectField("NAPALM Driver", choices=vs.napalm_drivers, default="ios")
     netmiko_driver = SelectField(
-        "Netmiko Driver", choices=netmiko_drivers, default="cisco_ios"
+        "Netmiko Driver", choices=vs.netmiko_drivers, default="cisco_ios"
     )
     scrapli_driver = SelectField(
         "Scrapli Driver",
-        choices=form_factory.choices(scrapli_drivers),
+        choices=form_factory.choices(vs.scrapli_drivers),
         default="cisco_iosxe",
     )
 
@@ -925,7 +919,7 @@ class NapalmForm(ConnectionForm):
     form_type = HiddenField(default="napalm")
     get_request_allowed = False
     abstract_service = True
-    driver = SelectField(choices=napalm_drivers)
+    driver = SelectField(choices=vs.napalm_drivers)
     use_device_driver = BooleanField(default=True)
     timeout = IntegerField(default=10)
     optional_args = DictField()
@@ -941,7 +935,7 @@ class NapalmForm(ConnectionForm):
 class NetmikoForm(ConnectionForm):
     form_type = HiddenField(default="netmiko")
     abstract_service = True
-    driver = SelectField(choices=netmiko_drivers)
+    driver = SelectField(choices=vs.netmiko_drivers)
     use_device_driver = BooleanField(default=True)
     enable_mode = BooleanField(
         "Enable mode (run in enable mode or as root)", default=True
@@ -1040,13 +1034,13 @@ class UserForm(RbacForm):
     groups = StringField("Groups")
     theme = SelectField(
         "Theme",
-        choices=[(theme, values["name"]) for theme, values in themes["themes"].items()],
+        choices=[(theme, values["name"]) for theme, values in vs.themes["themes"].items()],
     )
     authentication = SelectField(
         "Authentication",
         choices=[
             (method, values["display_name"])
-            for method, values in settings["authentication"]["methods"].items()
+            for method, values in vs.settings["authentication"]["methods"].items()
         ],
     )
     password = PasswordField("Password")

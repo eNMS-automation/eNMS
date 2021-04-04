@@ -31,16 +31,12 @@ from time import sleep
 from traceback import format_exc
 
 from eNMS.models import model_properties, models, property_types, relationships
-from eNMS.variables import (
-    database as database_settings,
-    properties,
-    rbac as rbac_settings,
-)
+from eNMS.variables import vs
 
 
 class Database:
     def __init__(self):
-        for setting in database_settings.items():
+        for setting in vs.database.items():
             setattr(self, *setting)
         self.database_url = getenv("DATABASE_URL", "sqlite:///database.db")
         self.dialect = self.database_url.split(":")[0]
@@ -278,7 +274,7 @@ class Database:
         if rbac:
             user = current_user or self.get_user(username or "admin")
             if user.is_authenticated and not user.is_admin:
-                if model in rbac_settings["admin_models"]:
+                if model in vs.rbac["admin_models"]:
                     raise self.rbac_error
                 query = models[model].rbac_filter(query, rbac, user)
         return query
@@ -394,7 +390,7 @@ class Database:
         model = getattr(table, "__tablename__", None)
         if not model:
             return
-        for property, values in properties["custom"].get(model, {}).items():
+        for property, values in vs.properties["custom"].get(model, {}).items():
             if values.get("private", False):
                 kwargs = {}
             else:

@@ -37,7 +37,7 @@ except ImportError as exc:
 from eNMS.custom import CustomApp
 from eNMS.database import db
 from eNMS.models import model_properties
-from eNMS.variables import database, logging, properties, rbac, settings
+from eNMS.variables import vs
 
 
 class App:
@@ -77,20 +77,20 @@ class App:
         self.path = Path.cwd()
         self.custom = CustomApp(self)
         self.custom.pre_init()
-        self.settings = settings
-        self.properties = properties
-        self.database = database
-        self.logging = logging
+        self.settings = vs.settings
+        self.properties = vs.properties
+        self.database = vs.database
+        self.logging = vs.logging
         self.cli_command = self.detect_cli()
         self.load_custom_properties()
         self.load_configuration_properties()
         self.init_rbac()
         self.init_encryption()
-        self.use_vault = settings["vault"]["use_vault"]
+        self.use_vault = vs.settings["vault"]["use_vault"]
         if self.use_vault:
             self.init_vault_client()
-        if settings["paths"]["custom_code"]:
-            sys_path.append(settings["paths"]["custom_code"])
+        if vs.settings["paths"]["custom_code"]:
+            sys_path.append(vs.settings["paths"]["custom_code"])
         self.fetch_version()
         self.init_logs()
         self.init_redis()
@@ -210,8 +210,8 @@ class App:
             info(f"Loading plugin: {settings['name']}")
 
     def init_rbac(self):
-        self.rbac = {"pages": [], **rbac}
-        for _, category in rbac["menu"].items():
+        self.rbac = {"pages": [], **vs.rbac}
+        for _, category in vs.rbac["menu"].items():
             for page, page_values in category["pages"].items():
                 if page_values["rbac"] == "access":
                     self.rbac["pages"].append(page)

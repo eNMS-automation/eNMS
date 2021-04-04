@@ -35,7 +35,7 @@ except ImportError as exc:
 from eNMS import app
 from eNMS.database import db
 from eNMS.models import models
-from eNMS.variables import automation
+from eNMS.variables import vs
 
 
 class ServiceRun:
@@ -796,7 +796,7 @@ class ServiceRun:
         return importlib_import(module, *args, **kwargs)
 
     def database_function(self, func, model, **kwargs):
-        if model not in automation["workflow"]["allowed_models"][func]:
+        if model not in vs.automation["workflow"]["allowed_models"][func]:
             raise db.rbac_error(f"Use of '{func}' not allowed on {model}s.")
         if "fetch" in func:
             kwargs["rbac"] = "edit"

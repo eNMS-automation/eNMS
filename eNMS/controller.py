@@ -32,7 +32,7 @@ from xlwt import Workbook
 from eNMS import app
 from eNMS.database import db
 from eNMS.models import models, model_properties, property_types, relationships
-from eNMS.variables import properties
+from eNMS.variables import vs
 
 
 class Controller:
@@ -207,11 +207,11 @@ class Controller:
                 model: db.query(model, rbac=None)
                 .with_entities(models[model].id)
                 .count()
-                for model in properties["dashboard"]
+                for model in vs.properties["dashboard"]
             },
             "properties": {
-                model: self.counters(properties["dashboard"][model][0], model)
-                for model in properties["dashboard"]
+                model: self.counters(vs.properties["dashboard"][model][0], model)
+                for model in vs.properties["dashboard"]
             },
         }
 

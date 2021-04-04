@@ -42,8 +42,6 @@ from eNMS.variables import vs
 
 class App:
 
-    log_levels = ["debug", "info", "warning", "error", "critical"]
-
     status_log_level = {
         200: "info",
         401: "warning",

@@ -542,7 +542,7 @@ class ServiceRun:
             log_level = int(self.main_run.log_level)
         except Exception:
             log_level = 1
-        if not log_level or severity not in app.log_levels[log_level - 1 :]:
+        if not log_level or severity not in vs.log_levels[log_level - 1 :]:
             return
         if device:
             device_name = device if isinstance(device, str) else device.name

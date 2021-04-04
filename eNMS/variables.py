@@ -20,6 +20,7 @@ class VariableStore:
         self.set_configuration_variables()
         self.set_property_variables()
         self.set_run_variables()
+        self.set_server_variables()
         self.set_setup_variables()
 
     def set_automation_variables(self):
@@ -50,6 +51,16 @@ class VariableStore:
         libraries = ("netmiko", "napalm", "scrapli")
         self.connections_cache = {library: defaultdict(dict) for library in libraries}
         self.service_run_count = defaultdict(int)
+
+    def set_server_variables(self):
+        self.log_levels = ["debug", "info", "warning", "error", "critical"]
+        self.status_log_level = {
+            200: "info",
+            401: "warning",
+            403: "warning",
+            404: "info",
+            500: "error",
+        }
 
     def set_setup_variables(self):
         for setup_file in (Path.cwd() / "setup").iterdir():

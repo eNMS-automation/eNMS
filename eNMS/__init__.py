@@ -10,7 +10,7 @@ def initialize():
     form_factory._initialize()
     if app.detect_cli():
         return
-    first_init = db._initialize()
+    first_init = db._initialize(app)
     controller._initialize(first_init)
     vs._initialize()
 

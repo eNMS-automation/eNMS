@@ -23,7 +23,6 @@ from requests.packages.urllib3.util.retry import Retry
 from smtplib import SMTP
 from string import punctuation
 from sqlalchemy.exc import InvalidRequestError
-from sqlalchemy.orm import configure_mappers
 from sys import path as sys_path
 from traceback import format_exc
 from warnings import warn
@@ -61,10 +60,6 @@ class App:
     def _initialize(self):
         self.init_plugins()
         self.init_services()
-        db.private_properties_set |= set(sum(db.private_properties.values(), []))
-        db.base.metadata.create_all(bind=db.engine)
-        configure_mappers()
-        db.configure_model_events(self)
 
     def authenticate_user(self, **kwargs):
         name, password = kwargs["username"], kwargs["password"]

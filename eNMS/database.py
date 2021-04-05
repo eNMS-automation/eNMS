@@ -24,7 +24,7 @@ from sqlalchemy.dialects.mysql.base import MSMediumBlob
 from sqlalchemy.ext.associationproxy import ASSOCIATION_PROXY
 from sqlalchemy.ext.declarative import declarative_base, DeclarativeMeta
 from sqlalchemy.ext.mutable import MutableDict, MutableList
-from sqlalchemy.orm import scoped_session, sessionmaker
+from sqlalchemy.orm import configure_mappers, scoped_session, sessionmaker
 from sqlalchemy.orm.collections import InstrumentedList
 from sqlalchemy.types import JSON
 from time import sleep
@@ -68,7 +68,11 @@ class Database:
                 setattr(self, f"retry_{retry_type}_{parameter}", number)
         register(self.cleanup)
 
-    def _initialize(self):
+    def _initialize(self, app):
+        self.private_properties_set |= set(sum(self.private_properties.values(), []))
+        self.base.metadata.create_all(bind=self.engine)
+        configure_mappers()
+        self.configure_model_events(app)
         first_init = not self.get_user("admin")
         if first_init:
             admin_user = vs.models["user"](name="admin", is_admin=True)
@@ -246,13 +250,13 @@ class Database:
                 model.configure_events()
 
         if app.use_vault:
-            for model in db.private_properties:
+            for model in self.private_properties:
 
                 @event.listens_for(vs.models[model].name, "set", propagate=True)
                 def vault_update(target, new_name, old_name, *_):
                     if new_name == old_name:
                         return
-                    for property in db.private_properties[target.class_type]:
+                    for property in self.private_properties[target.class_type]:
                         path = f"secret/data/{target.type}"
                         data = app.vault_client.read(f"{path}/{old_name}/{property}")
                         if not data:
@@ -290,7 +294,7 @@ class Database:
             )
 
     def get_user(self, name):
-        return db.session.query(vs.models["user"]).filter_by(name=name).first()
+        return self.session.query(vs.models["user"]).filter_by(name=name).first()
 
     def query(self, model, rbac="read", username=None, property=None):
         entity = getattr(vs.models[model], property) if property else vs.models[model]
@@ -328,7 +332,7 @@ class Database:
         if result or allow_none:
             return result
         else:
-            raise db.rbac_error(
+            raise self.rbac_error(
                 f"There is no {model} in the database "
                 f"with the following characteristics: {kwargs}"
             )

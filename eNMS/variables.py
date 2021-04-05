@@ -90,7 +90,6 @@ class VariableStore:
             "configuration_properties": self.configuration_properties,
             "form_properties": self.form_properties,
             "names": self.property_names,
-            "property_types": self.property_types,
             "rbac": self.rbac,
             "relationships": self.relationships,
             "service_types": {

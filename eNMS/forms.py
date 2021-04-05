@@ -112,17 +112,6 @@ class MetaForm(FormMeta):
 
 
 class BaseForm(FlaskForm, metaclass=MetaForm):
-    @classmethod
-    def configure_relationships(cls, *models):
-        form_type = cls.form_type.kwargs["default"]
-        for related_model, relation in vs.relationships[form_type].items():
-            if related_model not in models:
-                continue
-            field = MultipleInstanceField if relation["list"] else InstanceField
-            field_type = "object-list" if relation["list"] else "object"
-            vs.form_properties[form_type][related_model] = {"type": field_type}
-            setattr(cls, related_model, field())
-
     def form_postprocessing(self, form_data):
         data = {**form_data.to_dict(), **{"user": current_user}}
         if request.files:
@@ -734,10 +723,9 @@ class TaskForm(BaseForm):
     )
     crontab_expression = StringField("Crontab Expression")
     initial_payload = DictField("Payload")
-
-    @classmethod
-    def form_init(cls):
-        cls.configure_relationships("devices", "pools", "service")
+    devices = MultipleInstanceField("Devices", model="device")
+    pools = MultipleInstanceField("Pools", model="pool")
+    service = InstanceField("Service", model="service")
 
     def validate(self):
         valid_form = super().validate()
@@ -811,7 +799,6 @@ class AccessForm(RbacForm):
 
     @classmethod
     def form_init(cls):
-        cls.configure_relationships("users")
         keys = (
             "get_requests",
             "post_requests",

@@ -126,12 +126,12 @@ export class Table {
         type: "POST",
         contentType: "application/json",
         data: (d) => {
-          let form = serializeForm(`#search-form-${this.id}`);
+          let form = serializeForm(`#search-form-${this.id}`, `${this.type}_filtering`);
           for (const [key, value] of Object.entries(form)) {
             if (key.includes("_invert")) form[key] = value == "y";
           }
           Object.assign(d, {
-            form: serializeForm(`#search-form-${this.id}`),
+            form: form,
             constraints: constraints,
             columns: this.columns,
             type: this.type,

@@ -7,10 +7,10 @@ from eNMS.variables import vs
 
 def initialize():
     app._initialize()
-    form_factory._initialize()
+    first_init = db._initialize(app)
     if app.detect_cli():
         return
-    first_init = db._initialize(app)
+    form_factory._initialize()
     controller._initialize(first_init)
     vs._initialize()
 

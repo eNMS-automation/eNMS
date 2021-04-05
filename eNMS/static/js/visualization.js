@@ -741,7 +741,7 @@ function displayNetwork({ direction, noAlert, withCluster } = {}) {
     $("#right-arrow").addClass("disabled");
   }
   for (let type of ["device", "link"]) {
-    let form = serializeForm(`#filtering-form-${type}`);
+    let form = serializeForm(`#filtering-form-${type}`, `${type}_filtering`);
     if (!form.pools) form.pools = [];
     if (currentPath) form.pools.push(currentPath);
     data[type] = { form: form };

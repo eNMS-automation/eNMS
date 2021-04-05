@@ -145,11 +145,13 @@ export const call = function ({ url, data, form, callback }) {
   $.ajax(params);
 };
 
-export function serializeForm(form) {
+export function serializeForm(form, formDefault) {
   const data = JSON.parse(JSON.stringify($(form).serializeArray()));
   let result = {};
   data.forEach((property) => {
-    if ((propertyTypes?.[property.name] || "").includes("object")) {
+    const propertyType = formProperties[formDefault]?.[property.name]?.type;
+    if (!propertyType) return;
+    if (propertyType.includes("object")) {
       if (!(property.name in result)) result[property.name] = [];
       result[property.name].push(property.value);
     } else {
@@ -628,7 +630,7 @@ export function showInstancePanel(type, id, mode, tableId) {
       } else if (mode == "bulk") {
         const model = isService ? "service" : type;
         const form = {
-          ...serializeForm(`#search-form-${tableId}`),
+          ...serializeForm(`#search-form-${tableId}`, `${model}_filtering`),
           ...tableInstances[tableId].constraints,
         };
         call({

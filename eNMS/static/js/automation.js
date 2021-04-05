@@ -635,7 +635,7 @@ export function showRunServicePanel({ instance, tableId, type }) {
     callback: function () {
       $(`#run_service-type-${panelId}`).val(targetType);
       if (type) {
-        let form = serializeForm(`#search-form-${panelId}`, `${targetType}_filtering`);
+        let form = serializeForm(`#search-form-${panelId}`, `${type}_filtering`);
         if (table) form = { ...form, ...table.constraints };
         call({
           url: `/filtering/${type}`,

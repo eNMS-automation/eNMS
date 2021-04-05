@@ -405,6 +405,8 @@ class Run(AbstractBase):
             placeholder=self.placeholder,
             properties=self.properties,
             start_services=self.start_services,
+            target_devices=self.target_devices,
+            target_pools=self.target_pools,
             task=self.task,
             trigger=self.trigger,
         )

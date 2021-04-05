@@ -22,6 +22,7 @@ class VariableStore:
         self._set_run_variables()
         self._set_server_variables()
         self._set_setup_variables()
+        self._set_version()
 
     def _initialize(self):
         self._set_template_context()
@@ -88,9 +89,9 @@ class VariableStore:
         self.template_context = {
             "configuration_properties": self.configuration_properties,
             "form_properties": self.form_properties,
-            "rbac": self.rbac,
             "names": self.property_names,
             "property_types": self.property_types,
+            "rbac": self.rbac,
             "relationships": self.relationships,
             "service_types": {
                 service: service_class.pretty_name
@@ -100,8 +101,13 @@ class VariableStore:
             "settings": self.settings,
             "themes": self.themes,
             "table_properties": self.properties["tables"],
+            "version": self.version,
             "visualization": self.visualization,
         }
+
+    def _set_version(self):
+        with open(Path.cwd() / "package.json") as package_file:
+            self.version = load(package_file)["version"]
 
 
 vs = VariableStore()

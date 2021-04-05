@@ -113,7 +113,7 @@ class MetaForm(FormMeta):
 
 class BaseForm(FlaskForm, metaclass=MetaForm):
     def form_postprocessing(self, form_data):
-        data = {**form_data.to_dict(), **{"user": current_user}}
+        data = {"user": current_user, **form_data.to_dict()}
         if request.files:
             data["file"] = request.files["file"]
         for property, field in vs.form_properties[form_data.get("form_type")].items():

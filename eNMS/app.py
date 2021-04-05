@@ -52,7 +52,6 @@ class App:
             self.init_vault_client()
         if vs.settings["paths"]["custom_code"]:
             sys_path.append(vs.settings["paths"]["custom_code"])
-        self.fetch_version()
         self.init_logs()
         self.init_redis()
         self.init_scheduler()
@@ -105,10 +104,6 @@ class App:
         if isinstance(password, str):
             password = str.encode(password)
         return self.encrypt(password)
-
-    def fetch_version(self):
-        with open(self.path / "package.json") as package_file:
-            self.version = load(package_file)["version"]
 
     def get_password(self, password):
         if not password:

@@ -729,7 +729,7 @@ function showRestartWorkflowPanel() {
         callback: function (runtimes) {
           const id = `#restart_workflow-restart_runtime-${workflow.id}`;
           runtimes.forEach((runtime) => {
-            $(id).append(new Option(runtime[0], runtime[1]));
+            $(id).append(new Option(runtime[1], runtime[0]));
           });
           $(id)
             .val(runtimes[runtimes.length - 1])

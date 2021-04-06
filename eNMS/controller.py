@@ -513,7 +513,15 @@ class Controller:
 
     def get_runtimes(self, type, id):
         results = db.fetch("result", allow_none=True, all_matches=True, service_id=id)
-        return sorted(set((result.parent_runtime,) * 2 for result in results))
+        return sorted(
+            set(
+                (
+                    result.parent_runtime,
+                    f"{result.parent_runtime} ({result.run.creator})",
+                )
+                for result in results
+            )
+        )
 
     def get_service_logs(self, service, runtime, start_line):
         log_instance = db.fetch(

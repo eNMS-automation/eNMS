@@ -201,7 +201,12 @@ class AutomationController(BaseController):
 
     def get_runtimes(self, type, id):
         runs = db.fetch("run", allow_none=True, all_matches=True, service_id=id)
-        return sorted(set((run.parent_runtime, run.parent_runtime) for run in runs))
+        return sorted(
+            set(
+                (run.parent_runtime, f"{run.parent_runtime} ({run.creator})")
+                for run in runs
+            )
+        )
 
     def get_service_logs(self, service, runtime, start_line):
         log_instance = db.fetch(

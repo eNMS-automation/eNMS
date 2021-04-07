@@ -1052,17 +1052,23 @@ class Run(AbstractBase):
         if self.validation_method == "dict_equal":
             return result == self.dict_match
         else:
-            match_copy = deepcopy(match) if first else match
+            copy = deepcopy(match) if first else match
             if isinstance(result, dict):
                 for k, v in result.items():
-                    if k in match_copy and match_copy[k] == v:
-                        match_copy.pop(k)
+                    if isinstance(copy.get(k), list) and isinstance(v, list):
+                        for item in v:
+                            try:
+                                copy[k].remove(item)
+                            except ValueError:
+                                pass
+                        pop_key = not copy[k]
                     else:
-                        self.match_dictionary(v, match_copy, False)
+                        pop_key = copy.get(k) == v
+                    copy.pop(k) if pop_key else self.match_dictionary(v, copy, False)
             elif isinstance(result, list):
                 for item in result:
-                    self.match_dictionary(item, match_copy, False)
-            return not match_copy
+                    self.match_dictionary(item, copy, False)
+            return not copy
 
     def transfer_file(self, ssh_client, files):
         if self.protocol == "sftp":

@@ -290,7 +290,7 @@ export const showRuntimePanel = function (type, service, runtime, table, newRunt
             );
           });
           if (!runtime || ["normal", "latest"].includes(runtime)) {
-            runtime = runtimes[runtimes.length - 1][0];
+            runtime = runtimes[0][0];
           }
           $(`#runtimes-${panelId}`).val(runtime).selectpicker("refresh");
           $(`#runtimes-${panelId}`).on("change", function () {

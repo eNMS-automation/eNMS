@@ -205,7 +205,8 @@ class AutomationController(BaseController):
             set(
                 (run.parent_runtime, f"{run.parent_runtime} ({run.creator})")
                 for run in runs
-            )
+            ),
+            reverse=True,
         )
 
     def get_service_logs(self, service, runtime, start_line):
@@ -247,7 +248,8 @@ class AutomationController(BaseController):
                 set(
                     (run.parent_runtime, f"{run.parent_runtime}  ({run.creator})")
                     for run in runs
-                )
+                ),
+                reverse=True,
             ),
             "state": state,
             "runtime": runtime,

@@ -323,6 +323,10 @@ class Run(AbstractBase):
         if not self.start_services:
             self.start_services = [db.fetch("service", scoped_name="Start").id]
 
+    @property
+    def ui_name(self):
+        return f"{self.runtime} ({self.creator})"
+
     @classmethod
     def rbac_filter(cls, query, mode, user):
         query = query.join(cls.service).filter(

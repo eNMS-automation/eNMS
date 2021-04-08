@@ -243,7 +243,12 @@ class AutomationController(BaseController):
                 state = latest_runs[0].get_state()
         return {
             "service": service.to_dict(include=["services", "edges", "superworkflow"]),
-            "runtimes": sorted(set((r.parent_runtime, r.creator) for r in runs)),
+            "runtimes": sorted(
+                set(
+                    (run.parent_runtime, f"{run.parent_runtime}  ({run.creator})")
+                    for run in runs
+                )
+            ),
             "state": state,
             "runtime": runtime,
         }

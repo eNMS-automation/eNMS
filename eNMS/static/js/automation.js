@@ -290,11 +290,9 @@ export const showRuntimePanel = function (type, service, runtime, table, newRunt
               $("<option></option>").attr("value", runtime[0]).text(runtime[1])
             );
           });
-          console.log(runtime)
           if (!runtime || ["normal", "latest"].includes(runtime)) {
             runtime = runtimes[0][0];
           }
-          console.log(runtime)
           $(`#runtimes-${panelId}`).val(runtime).selectpicker("refresh");
           $(`#runtimes-${panelId}`).on("change", function () {
             displayFunction(service, this.value, true, table, true);

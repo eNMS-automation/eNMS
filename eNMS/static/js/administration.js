@@ -21,7 +21,7 @@ function saveSettings() {
     url: "/save_settings",
     data: {
       settings: newSettings,
-      save: $("#write_changes").prop("checked"),
+      save: $("#settings_panel-write_changes").prop("checked"),
     },
     callback: function () {
       settings = newSettings;

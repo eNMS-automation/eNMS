@@ -203,6 +203,7 @@ function showResult(id) {
 }
 
 export const showRuntimePanel = function (type, service, runtime, table, newRuntime) {
+  if (!runtime) runtime = currentRuntime;
   const displayFunction =
     type == "logs"
       ? displayLogs

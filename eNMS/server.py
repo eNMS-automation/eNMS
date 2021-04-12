@@ -65,7 +65,7 @@ class Server(Flask):
             except Exception:
                 app.log("error", f"Could not import plugin '{plugin}':\n{format_exc()}")
                 continue
-            app.log("info", f"Loading plugin: {settings['name']}")      
+            app.log("info", f"Loading plugin: {settings['name']}")
 
     def register_extensions(self):
         self.csrf = CSRFProtect()

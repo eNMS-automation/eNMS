@@ -24,7 +24,6 @@ from smtplib import SMTP
 from string import punctuation
 from sqlalchemy.exc import InvalidRequestError
 from sys import path as sys_path
-from traceback import format_exc
 from warnings import warn
 
 try:

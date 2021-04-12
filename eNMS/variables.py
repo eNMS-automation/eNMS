@@ -123,7 +123,9 @@ class VariableStore:
                     continue
                 self.plugins_settings[path.stem] = settings
                 for setup_file in ("database", "properties", "rbac"):
-                    self.dictionary_recursive_merge(getattr(self, setup_file), settings.get(setup_file, {}))
+                    self.dictionary_recursive_merge(
+                        getattr(self, setup_file), settings.get(setup_file, {})
+                    )
             except Exception:
                 error(f"Could not load plugin settings '{path.stem}':\n{format_exc()}")
                 continue

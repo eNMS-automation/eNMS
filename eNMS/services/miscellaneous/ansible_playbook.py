@@ -15,6 +15,7 @@ from eNMS.fields import (
     StringField,
 )
 from eNMS.models.automation import Service
+from eNMS.variables import vs
 
 
 class AnsiblePlaybookService(Service):
@@ -67,7 +68,7 @@ class AnsiblePlaybookService(Service):
         )
         try:
             result = check_output(
-                command + arguments, cwd=app.path / "files" / "playbooks"
+                command + arguments, cwd=vs.path / "files" / "playbooks"
             )
         except Exception:
             result = "\n".join(format_exc().splitlines())

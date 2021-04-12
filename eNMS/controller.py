@@ -316,7 +316,7 @@ class Controller:
 
     def export_service(self, service_id):
         service = db.fetch("service", id=service_id)
-        path = Path(app.path / "files" / "services" / service.filename)
+        path = Path(vs.path / "files" / "services" / service.filename)
         path.mkdir(parents=True, exist_ok=True)
         services = service.deep_services if service.type == "workflow" else [service]
         exclude = ("target_devices", "target_pools", "pools", "events")
@@ -453,13 +453,13 @@ class Controller:
         }
 
     def get_exported_services(self):
-        return [f for f in listdir(app.path / "files" / "services") if ".tgz" in f]
+        return [f for f in listdir(vs.path / "files" / "services") if ".tgz" in f]
 
     def get_git_content(self):
         repo = vs.settings["app"]["git_repository"]
         if not repo:
             return
-        local_path = app.path / "network_data"
+        local_path = vs.path / "network_data"
         try:
             if exists(local_path):
                 Repo(local_path).remotes.origin.pull()
@@ -498,7 +498,7 @@ class Controller:
         return result, commit.committed_datetime
 
     def get_migration_folders(self):
-        return listdir(app.path / "files" / "migrations")
+        return listdir(vs.path / "files" / "migrations")
 
     def get_parent_workflows(self, workflow=None):
         yield workflow
@@ -572,7 +572,7 @@ class Controller:
 
     def get_tree_files(self, path):
         if path == "root":
-            path = vs.settings["paths"]["files"] or app.path / "files"
+            path = vs.settings["paths"]["files"] or vs.path / "files"
         else:
             path = path.replace(">", "/")
         return [
@@ -775,14 +775,14 @@ class Controller:
 
     def load_debug_snippets(self):
         snippets = {}
-        for path in Path(app.path / "files" / "snippets").glob("**/*.py"):
+        for path in Path(vs.path / "files" / "snippets").glob("**/*.py"):
             with open(path, "r") as file:
                 snippets[path.name] = file.read()
         return snippets
 
     def migration_export(self, **kwargs):
         for cls_name in kwargs["import_export_types"]:
-            path = app.path / "files" / "migrations" / kwargs["name"]
+            path = vs.path / "files" / "migrations" / kwargs["name"]
             if not exists(path):
                 makedirs(path)
             with open(path / f"{cls_name}.yaml", "w") as migration_file:
@@ -801,7 +801,7 @@ class Controller:
             db.delete_all(*models)
         relations = defaultdict(lambda: defaultdict(dict))
         for model in models:
-            path = app.path / "files" / folder / kwargs["name"] / f"{model}.yaml"
+            path = vs.path / "files" / folder / kwargs["name"] / f"{model}.yaml"
             if not path.exists():
                 continue
             with open(path, "r") as migration_file:
@@ -872,7 +872,7 @@ class Controller:
 
     def import_service(self, archive):
         service_name = archive.split(".")[0]
-        path = app.path / "files" / "services"
+        path = vs.path / "files" / "services"
         with open_tar(path / archive) as tar_file:
             tar_file.extractall(path=path)
             status = self.migration_import(
@@ -1027,7 +1027,7 @@ class Controller:
     def save_settings(self, **kwargs):
         vs.settings = kwargs["settings"]
         if kwargs["save"]:
-            with open(app.path / "setup" / "settings.json", "w") as file:
+            with open(vs.path / "setup" / "settings.json", "w") as file:
                 dump(kwargs["settings"], file, indent=2)
 
     def save_view_positions(self, **kwargs):
@@ -1051,7 +1051,7 @@ class Controller:
 
     def scan_playbook_folder(self):
         path = Path(
-            vs.settings["paths"]["playbooks"] or app.path / "files" / "playbooks"
+            vs.settings["paths"]["playbooks"] or vs.path / "files" / "playbooks"
         )
         playbooks = [[str(f) for f in path.glob(e)] for e in ("*.yaml", "*.yml")]
         return sorted(sum(playbooks, []))
@@ -1121,7 +1121,7 @@ class Controller:
                     if type(value) == bytes:
                         value = str(app.decrypt(value), "utf-8")
                     sheet.write(obj_index, index, str(value))
-        workbook.save(app.path / "files" / "spreadsheets" / filename)
+        workbook.save(vs.path / "files" / "spreadsheets" / filename)
 
     def topology_import(self, file):
         book = open_workbook(file_contents=file.read())
@@ -1187,7 +1187,7 @@ class Controller:
             pool.compute_pool()
 
     def update_database_configurations_from_git(self):
-        for dir in scandir(app.path / "network_data"):
+        for dir in scandir(vs.path / "network_data"):
             device = db.fetch("device", allow_none=True, name=dir.name)
             timestamp_path = Path(dir.path) / "timestamps.json"
             if not device:

@@ -53,6 +53,7 @@ class VariableStore:
         self.form_properties = defaultdict(dict)
         self.models = {}
         self.model_properties = defaultdict(lambda: ["type"])
+        self.path = Path.cwd()
         self.property_names = {}
         self.property_types = {}
         self.relationships = defaultdict(dict)
@@ -84,7 +85,7 @@ class VariableStore:
         }
 
     def _set_setup_variables(self):
-        for setup_file in (Path.cwd() / "setup").iterdir():
+        for setup_file in (self.path / "setup").iterdir():
             with open(setup_file, "r") as file:
                 setattr(self, setup_file.stem, load(file))
 
@@ -108,7 +109,7 @@ class VariableStore:
         }
 
     def _set_version(self):
-        with open(Path.cwd() / "package.json") as package_file:
+        with open(self.path / "package.json") as package_file:
             self.version = load(package_file)["version"]
 
     def _load_plugins(self):

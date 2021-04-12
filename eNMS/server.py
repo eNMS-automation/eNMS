@@ -31,7 +31,7 @@ from eNMS.variables import vs
 
 class Server(Flask):
     def __init__(self, mode=None):
-        static_folder = str(app.path / "eNMS" / "static")
+        static_folder = str(vs.path / "eNMS" / "static")
         super().__init__(__name__, static_folder=static_folder)
         self.rest_api = RestApi()
         self.update_config(mode or vs.settings["app"]["config_mode"])

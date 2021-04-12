@@ -213,7 +213,7 @@ class FormFactory:
             )
 
     def generate_service_forms(self):
-        for file in (app.path / "eNMS" / "forms").glob("**/*.py"):
+        for file in (vs.path / "eNMS" / "forms").glob("**/*.py"):
             spec = spec_from_file_location(str(file).split("/")[-1][:-3], str(file))
             spec.loader.exec_module(module_from_spec(spec))
 

@@ -11,7 +11,6 @@ jsPanel: false
 JSONEditor: false
 moment: false
 page: false
-propertyTypes: false
 rbac: false
 relationships: false
 user: false

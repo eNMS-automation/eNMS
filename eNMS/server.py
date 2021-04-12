@@ -208,8 +208,8 @@ class Server(Flask):
                         success, log = True, f"User '{username}' logged in"
                     else:
                         log = f"Authentication failed for user '{username}'"
-                except Exception as exc:
-                    log = f"Authentication error for user '{username}' ({exc})"
+                except Exception:
+                    log = f"Authentication error for user '{username}' ({format_exc()})"
                 finally:
                     app.log("info" if success else "warning", log, logger="security")
                     if success:

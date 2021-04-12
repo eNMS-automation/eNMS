@@ -1,9 +1,15 @@
 from collections import defaultdict
+from email.mime.application import MIMEApplication
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from email.utils import formatdate
 from json import load
 from logging import error
 from napalm._SUPPORTED_DRIVERS import SUPPORTED_DRIVERS
 from netmiko.ssh_dispatcher import CLASS_MAPPER
+from os import getenv
 from pathlib import Path
+from smtplib import SMTP
 from string import punctuation
 from traceback import format_exc
 from warnings import warn
@@ -164,6 +170,36 @@ class VariableStore:
                     old[key] = value
 
         return old
+
+    def send_email(
+        self,
+        subject,
+        content,
+        recipients="",
+        reply_to=None,
+        sender=None,
+        filename=None,
+        file_content=None,
+    ):
+        sender = sender or self.settings["mail"]["sender"]
+        message = MIMEMultipart()
+        message["From"] = sender
+        message["To"] = recipients
+        message["Date"] = formatdate(localtime=True)
+        message["Subject"] = subject
+        message.add_header("reply-to", reply_to or self.settings["mail"]["reply_to"])
+        message.attach(MIMEText(content))
+        if filename:
+            attached_file = MIMEApplication(file_content, Name=filename)
+            attached_file["Content-Disposition"] = f'attachment; filename="{filename}"'
+            message.attach(attached_file)
+        server = SMTP(self.settings["mail"]["server"], self.settings["mail"]["port"])
+        if self.settings["mail"]["use_tls"]:
+            server.starttls()
+            password = getenv("MAIL_PASSWORD", "")
+            server.login(self.settings["mail"]["username"], password)
+        server.sendmail(sender, recipients.split(","), message.as_string())
+        server.close()
 
     def strip_all(self, input):
         return input.translate(str.maketrans("", "", f"{punctuation} "))

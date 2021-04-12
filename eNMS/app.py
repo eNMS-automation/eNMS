@@ -2,10 +2,6 @@ from base64 import b64decode, b64encode
 from click import get_current_context
 from cryptography.fernet import Fernet
 from datetime import datetime
-from email.mime.application import MIMEApplication
-from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
-from email.utils import formatdate
 from flask_login import current_user
 from importlib import import_module
 from importlib.util import module_from_spec, spec_from_file_location
@@ -20,7 +16,6 @@ from redis.exceptions import ConnectionError, TimeoutError
 from requests import Session as RequestSession
 from requests.adapters import HTTPAdapter
 from requests.packages.urllib3.util.retry import Retry
-from smtplib import SMTP
 from sqlalchemy.exc import InvalidRequestError
 from sys import path as sys_path
 from warnings import warn
@@ -264,36 +259,6 @@ class App:
             return getattr(self.redis_queue, operation)(*args, **kwargs)
         except (ConnectionError, TimeoutError) as exc:
             self.log("error", f"Redis Queue Unreachable ({exc})", change_log=False)
-
-    def send_email(
-        self,
-        subject,
-        content,
-        recipients="",
-        reply_to=None,
-        sender=None,
-        filename=None,
-        file_content=None,
-    ):
-        sender = sender or vs.settings["mail"]["sender"]
-        message = MIMEMultipart()
-        message["From"] = sender
-        message["To"] = recipients
-        message["Date"] = formatdate(localtime=True)
-        message["Subject"] = subject
-        message.add_header("reply-to", reply_to or vs.settings["mail"]["reply_to"])
-        message.attach(MIMEText(content))
-        if filename:
-            attached_file = MIMEApplication(file_content, Name=filename)
-            attached_file["Content-Disposition"] = f'attachment; filename="{filename}"'
-            message.attach(attached_file)
-        server = SMTP(vs.settings["mail"]["server"], vs.settings["mail"]["port"])
-        if vs.settings["mail"]["use_tls"]:
-            server.starttls()
-            password = getenv("MAIL_PASSWORD", "")
-            server.login(vs.settings["mail"]["username"], password)
-        server.sendmail(sender, recipients.split(","), message.as_string())
-        server.close()
 
 
 app = App()

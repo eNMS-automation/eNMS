@@ -596,7 +596,7 @@ class ServiceRun:
             if self.send_notification_method == "mail":
                 filename = self.runtime.replace(".", "").replace(":", "")
                 status = "PASS" if results["success"] else "FAILED"
-                result = app.send_email(
+                result = vs.send_email(
                     f"{status}: {self.service.name}",
                     vs.dict_to_string(notification),
                     recipients=self.mail_recipient,
@@ -814,7 +814,7 @@ class ServiceRun:
                 "fetch": partial(_self.database_function, "fetch"),
                 "fetch_all": partial(_self.database_function, "fetch_all"),
                 "factory": partial(_self.database_function, "factory"),
-                "send_email": app.send_email,
+                "send_email": vs.send_email,
                 "settings": vs.settings,
                 "devices": _self.target_devices,
                 "encrypt": app.encrypt_password,

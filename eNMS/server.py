@@ -316,7 +316,7 @@ class Server(Flask):
         @self.process_requests
         def view_service_results(id):
             result = db.fetch("run", id=id).result(main=True).result
-            return f"<pre>{app.str_dict(result)}</pre>"
+            return f"<pre>{vs.dict_to_string(result)}</pre>"
 
         @blueprint.route("/download_file/<path:path>")
         @self.process_requests

@@ -46,7 +46,7 @@ class NapalmBackupService(ConnectionService):
             result = {}
             for getter in run.getters:
                 try:
-                    output = app.str_dict(getattr(napalm_connection, getter)())
+                    output = vs.dict_to_string(getattr(napalm_connection, getter)())
                     for r in self.replacements:
                         output = sub(
                             r["pattern"],
@@ -57,7 +57,7 @@ class NapalmBackupService(ConnectionService):
                     result[getter] = output
                 except Exception as exc:
                     result[getter] = f"{getter} failed because of {exc}"
-            result = app.str_dict(result)
+            result = vs.dict_to_string(result)
             setattr(device, self.property, result)
             with open(path / self.property, "w") as file:
                 file.write(result)

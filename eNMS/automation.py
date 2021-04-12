@@ -598,11 +598,11 @@ class ServiceRun:
                 status = "PASS" if results["success"] else "FAILED"
                 result = app.send_email(
                     f"{status}: {self.service.name}",
-                    app.str_dict(notification),
+                    vs.dict_to_string(notification),
                     recipients=self.mail_recipient,
                     reply_to=self.reply_to,
                     filename=f"results-{filename}.txt",
-                    file_content=app.str_dict(file_content),
+                    file_content=vs.dict_to_string(file_content),
                 )
             elif self.send_notification_method == "slack":
                 result = SlackClient(getenv("SLACK_TOKEN")).api_call(

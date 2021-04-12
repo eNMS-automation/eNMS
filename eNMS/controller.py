@@ -166,8 +166,8 @@ class Controller:
 
     def compare(self, type, id, v1, v2, context_lines):
         if type in ("result", "device_result"):
-            first = app.str_dict(getattr(db.fetch("result", id=v1), "result"))
-            second = app.str_dict(getattr(db.fetch("result", id=v2), "result"))
+            first = vs.dict_to_string(getattr(db.fetch("result", id=v1), "result"))
+            second = vs.dict_to_string(getattr(db.fetch("result", id=v2), "result"))
         else:
             device = db.fetch("device", id=id)
             result1, v1 = self.get_git_network_data(device.name, v1)

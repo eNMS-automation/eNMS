@@ -1,6 +1,5 @@
 from werkzeug.datastructures import ImmutableMultiDict
 
-from eNMS import app
 from eNMS.database import db
 from eNMS.variables import vs
 

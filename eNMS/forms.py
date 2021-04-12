@@ -8,7 +8,6 @@ from wtforms.form import FormMeta
 from wtforms.validators import InputRequired
 from wtforms.widgets import TextArea
 
-from eNMS import app
 from eNMS.database import db
 from eNMS.fields import (
     BooleanField,

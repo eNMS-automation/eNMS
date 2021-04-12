@@ -4,6 +4,7 @@ from logging import error
 from napalm._SUPPORTED_DRIVERS import SUPPORTED_DRIVERS
 from netmiko.ssh_dispatcher import CLASS_MAPPER
 from pathlib import Path
+from string import punctuation
 from traceback import format_exc
 from warnings import warn
 

@@ -21,7 +21,6 @@ from requests import Session as RequestSession
 from requests.adapters import HTTPAdapter
 from requests.packages.urllib3.util.retry import Retry
 from smtplib import SMTP
-from string import punctuation
 from sqlalchemy.exc import InvalidRequestError
 from sys import path as sys_path
 from warnings import warn

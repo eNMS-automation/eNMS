@@ -4,7 +4,6 @@ from sqlalchemy import Boolean, ForeignKey, Integer
 from subprocess import check_output
 from traceback import format_exc
 
-from eNMS import app
 from eNMS.database import db
 from eNMS.forms import ServiceForm
 from eNMS.fields import (

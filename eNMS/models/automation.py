@@ -153,7 +153,7 @@ class Service(AbstractBase):
 
     @property
     def filename(self):
-        return app.strip_all(self.name)
+        return vs.strip_all(self.name)
 
     @classmethod
     def rbac_filter(cls, query, mode, user):

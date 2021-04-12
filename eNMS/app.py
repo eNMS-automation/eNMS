@@ -296,8 +296,5 @@ class App:
         server.sendmail(sender, recipients.split(","), message.as_string())
         server.close()
 
-    def strip_all(self, input):
-        return input.translate(str.maketrans("", "", f"{punctuation} "))
-
 
 app = App()

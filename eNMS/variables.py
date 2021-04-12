@@ -1,8 +1,10 @@
 from collections import defaultdict
 from json import load
+from logging import error
 from napalm._SUPPORTED_DRIVERS import SUPPORTED_DRIVERS
 from netmiko.ssh_dispatcher import CLASS_MAPPER
 from pathlib import Path
+from traceback import format_exc
 from warnings import warn
 
 try:
@@ -23,6 +25,7 @@ class VariableStore:
         self._set_server_variables()
         self._set_setup_variables()
         self._set_version()
+        self._load_plugins()
 
     def _initialize(self):
         self._set_template_context()
@@ -108,8 +111,40 @@ class VariableStore:
         with open(Path.cwd() / "package.json") as package_file:
             self.version = load(package_file)["version"]
 
+    def _load_plugins(self):
+        self.plugins_settings = {}
+        for path in Path(self.settings["app"]["plugin_path"]).iterdir():
+            if not Path(path / "settings.json").exists():
+                continue
+            try:
+                with open(path / "settings.json", "r") as file:
+                    settings = load(file)
+                if not settings["active"]:
+                    continue
+                self.plugins_settings[path.stem] = settings
+                for setup_file in ("database", "properties", "rbac"):
+                    self.dictionary_recursive_merge(getattr(self, setup_file), settings.get(setup_file, {}))
+            except Exception:
+                error(f"Could not load plugin settings '{path.stem}':\n{format_exc()}")
+                continue
+
     def dualize(self, iterable):
         return [(element, element) for element in iterable]
+
+    def dictionary_recursive_merge(self, old, new):
+        for key, value in new.items():
+            if key not in old:
+                old[key] = value
+            else:
+                old_value = old[key]
+                if isinstance(old_value, list):
+                    old_value.extend(value)
+                elif isinstance(old_value, dict):
+                    self.dictionary_recursive_merge(old_value, value)
+                else:
+                    old[key] = value
+
+        return old
 
 
 vs = VariableStore()

@@ -58,7 +58,6 @@ class App:
         self.custom.post_init()
 
     def _initialize(self):
-        self.init_plugins()
         self.init_services()
 
     def authenticate_user(self, **kwargs):
@@ -137,28 +136,6 @@ class App:
             info(f"Changing {logger} log level to '{log_level}'")
             log_level = getattr(import_module("logging"), log_level.upper())
             getLogger(logger).setLevel(log_level)
-
-    def init_plugins(self):
-        self.plugins = {}
-        for plugin_path in Path(vs.settings["app"]["plugin_path"]).iterdir():
-            if not Path(plugin_path / "settings.json").exists():
-                continue
-            try:
-                with open(plugin_path / "settings.json", "r") as file:
-                    settings = load(file)
-                if not settings["active"]:
-                    continue
-                self.plugins[plugin_path.stem] = {
-                    "settings": settings,
-                    "module": import_module(f"eNMS.plugins.{plugin_path.stem}"),
-                }
-                for setup_file in ("database", "properties", "rbac"):
-                    property = getattr(vs, setup_file)
-                    self.update_settings(property, settings.get(setup_file, {}))
-            except Exception:
-                error(f"Could not load plugin '{plugin_path.stem}':\n{format_exc()}")
-                continue
-            info(f"Loading plugin: {settings['name']}")
 
     def init_rbac(self):
         self.rbac = {"pages": [], **vs.rbac}
@@ -337,21 +314,6 @@ class App:
 
     def strip_all(self, input):
         return input.translate(str.maketrans("", "", f"{punctuation} "))
-
-    def update_settings(self, old, new):
-        for key, value in new.items():
-            if key not in old:
-                old[key] = value
-            else:
-                old_value = old[key]
-                if isinstance(old_value, list):
-                    old_value.extend(value)
-                elif isinstance(old_value, dict):
-                    self.update_settings(old_value, value)
-                else:
-                    old[key] = value
-
-        return old
 
 
 app = App()

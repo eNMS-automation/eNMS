@@ -15,6 +15,7 @@ from flask_login import current_user, LoginManager, login_user, logout_user
 from flask_socketio import join_room, SocketIO
 from flask_wtf.csrf import CSRFProtect
 from functools import partial, wraps
+from importlib import import_module
 from os import getenv, read, write
 from pty import fork
 from subprocess import run
@@ -57,8 +58,14 @@ class Server(Flask):
         )
 
     def register_plugins(self):
-        for plugin in app.plugins.values():
-            plugin["module"].Plugin(self, controller, db, **plugin["settings"])
+        for plugin, settings in vs.plugins_settings.items():
+            try:
+                module = import_module(f"eNMS.plugins.{plugin}")
+                module.Plugin(self, controller, db, **settings)
+            except Exception:
+                app.log("error", f"Could not import plugin '{plugin}':\n{format_exc()}")
+                continue
+            app.log("info", f"Loading plugin: {settings['name']}")      
 
     def register_extensions(self):
         self.csrf = CSRFProtect()

@@ -4,13 +4,13 @@ from sqlalchemy import Boolean, ForeignKey, Integer
 from sqlalchemy.orm import backref, relationship
 from sqlalchemy.schema import UniqueConstraint
 
-from eNMS import app
 from eNMS.automation import ServiceRun
 from eNMS.database import db
 from eNMS.models.base import AbstractBase
 from eNMS.forms import ServiceForm
 from eNMS.fields import BooleanField, HiddenField, InstanceField, SelectField
 from eNMS.models.automation import Service
+from eNMS.variables import vs
 
 
 class Workflow(Service):
@@ -249,4 +249,4 @@ class WorkflowEdge(AbstractBase):
         self.set_name(kwargs.get("name"))
 
     def set_name(self, name=None):
-        self.name = name or f"[{self.workflow}] {app.get_time()}"
+        self.name = name or f"[{self.workflow}] {vs.get_time()}"

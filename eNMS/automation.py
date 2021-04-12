@@ -47,7 +47,7 @@ class ServiceRun:
         self.creator = self.run.creator
         self.start_services = [1]
         self.parent_runtime = kwargs.get("parent_runtime")
-        self.runtime = app.get_time()
+        self.runtime = vs.get_time()
         vs.run_instances[self.runtime] = self
         for key, value in kwargs.items():
             setattr(self, key, value)
@@ -318,7 +318,7 @@ class ServiceRun:
                     continue
                 device_results = {
                     "device_target": getattr(device, "name", None),
-                    "runtime": app.get_time(),
+                    "runtime": vs.get_time(),
                     "result": "skipped",
                     "duration": "0:00:00",
                     "success": self.skip_value == "success",
@@ -518,7 +518,7 @@ class ServiceRun:
             status = "success" if results["success"] else "failure"
             self.write_state(f"{self.progress_key}/{status}", 1, "increment")
             self.create_result(
-                {"runtime": app.get_time(), **results}, device, commit=commit
+                {"runtime": vs.get_time(), **results}, device, commit=commit
             )
         self.log("info", "FINISHED", device)
         if self.waiting_time:
@@ -551,7 +551,7 @@ class ServiceRun:
             severity, log, user=self.creator, change_log=change_log, logger=logger
         )
         if service_log or logger and settings.get("service_log"):
-            run_log = f"{app.get_time()} - {severity} - {log}"
+            run_log = f"{vs.get_time()} - {severity} - {log}"
             app.log_queue(self.parent_runtime, self.service.id, run_log)
             if not self.is_main_run:
                 app.log_queue(self.parent_runtime, self.main_run.service.id, run_log)

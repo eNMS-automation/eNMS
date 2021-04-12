@@ -7,7 +7,6 @@ from sqlalchemy.orm import aliased, backref, relationship
 from sqlalchemy.schema import UniqueConstraint
 from sqlalchemy.sql.expression import false
 
-from eNMS import app
 from eNMS.controller import controller
 from eNMS.models.base import AbstractBase
 from eNMS.database import db
@@ -451,7 +450,7 @@ class ViewObject(AbstractBase):
             prefix = f"[{self.view}] " if self.view else ""
             self.name = f"{prefix}{kwargs['name']}"
         else:
-            self.name = app.get_time()
+            self.name = vs.get_time()
 
 
 class Node(ViewObject):
@@ -466,7 +465,7 @@ class Node(ViewObject):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.name = app.get_time()
+        self.name = vs.get_time()
 
 
 class Line(ViewObject):
@@ -481,7 +480,7 @@ class Line(ViewObject):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.name = app.get_time()
+        self.name = vs.get_time()
 
 
 class Plan(ViewObject):

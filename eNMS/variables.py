@@ -1,4 +1,5 @@
 from collections import defaultdict
+from datetime import datetime
 from email.mime.application import MIMEApplication
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
@@ -170,6 +171,9 @@ class VariableStore:
                     old[key] = value
 
         return old
+
+    def get_time(self):
+        return str(datetime.now())
 
     def send_email(
         self,

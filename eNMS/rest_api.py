@@ -108,7 +108,7 @@ class RestApi:
             return {"errors": errors}
         if devices or pools:
             data.update({"target_devices": devices, "target_pools": pools})
-        data["runtime"] = runtime = app.get_time()
+        data["runtime"] = runtime = vs.get_time()
         if handle_asynchronously:
             Thread(target=controller.run, args=(service.id,), kwargs=data).start()
             return {"errors": errors, "runtime": runtime}
@@ -120,7 +120,7 @@ class RestApi:
         data = {
             "trigger": "Scheduler",
             "creator": task.last_scheduled_by,
-            "runtime": app.get_time(),
+            "runtime": vs.get_time(),
             "task": task.id,
             **task.initial_payload,
         }

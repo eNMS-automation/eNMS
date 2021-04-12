@@ -4,7 +4,6 @@ from passlib.hash import argon2
 from sqlalchemy import Boolean, Integer
 from sqlalchemy.orm import relationship
 
-from eNMS import app
 from eNMS.database import db
 from eNMS.models.base import AbstractBase
 from eNMS.variables import vs
@@ -143,4 +142,4 @@ class Changelog(AbstractBase):
     user = db.Column(db.SmallString, default="admin")
 
     def update(self, **kwargs):
-        super().update(**{"time": app.get_time(), **kwargs})
+        super().update(**{"time": vs.get_time(), **kwargs})

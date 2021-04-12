@@ -55,7 +55,7 @@ class Controller:
         return wrapper
 
     def add_edge(self, workflow_id, subtype, source, destination):
-        now = app.get_time()
+        now = vs.get_time()
         workflow = db.fetch("workflow", id=workflow_id, rbac="edit")
         workflow_edge = self.update(
             "workflow_edge",
@@ -87,7 +87,7 @@ class Controller:
         instances = instances - set(getattr(target, property))
         for instance in instances:
             getattr(target, property).append(instance)
-        target.last_modified = app.get_time()
+        target.last_modified = vs.get_time()
         self.update_rbac(*instances)
         return {"number": len(instances), "target": target.base_properties}
 
@@ -203,7 +203,7 @@ class Controller:
             else:
                 workflow.services.append(service)
             services.append(service)
-        workflow.last_modified = app.get_time()
+        workflow.last_modified = vs.get_time()
         db.session.commit()
         return {
             "services": [service.serialized for service in services],
@@ -290,7 +290,7 @@ class Controller:
 
     def delete_workflow_selection(self, workflow_id, **selection):
         workflow = db.fetch("workflow", id=workflow_id)
-        workflow.last_modified = app.get_time()
+        workflow.last_modified = vs.get_time()
         for edge_id in selection["edges"]:
             db.delete("workflow_edge", id=edge_id)
         for node_id in selection["nodes"]:
@@ -984,7 +984,7 @@ class Controller:
             kwargs.pop(property, None)
         kwargs["creator"] = getattr(current_user, "name", "")
         service = db.fetch("service", id=service_id, rbac="run")
-        kwargs["runtime"] = runtime = app.get_time()
+        kwargs["runtime"] = runtime = vs.get_time()
         if kwargs.get("asynchronous", True):
             Thread(target=self.run, args=(service_id,), kwargs=kwargs).start()
         else:
@@ -1007,7 +1007,7 @@ class Controller:
                 return file.write(kwargs["file_content"])
 
     def save_positions(self, workflow_id, **kwargs):
-        now, old_position = app.get_time(), None
+        now, old_position = vs.get_time(), None
         workflow = db.fetch("workflow", allow_none=True, id=workflow_id, rbac="edit")
         if not workflow:
             return
@@ -1033,7 +1033,7 @@ class Controller:
     def save_view_positions(self, **kwargs):
         for node_id, position in kwargs.items():
             db.factory("view_object", id=node_id, **position)
-        return app.get_time()
+        return vs.get_time()
 
     def scan_cluster(self, **kwargs):
         protocol = vs.settings["cluster"]["scan_protocol"]
@@ -1080,7 +1080,7 @@ class Controller:
         skip = not all(service.skip.get(workflow.name) for service in services)
         for service in services:
             service.skip[workflow.name] = skip
-        workflow.last_modified = app.get_time()
+        workflow.last_modified = vs.get_time()
         return {
             "skip": "skip" if skip else "unskip",
             "update_time": workflow.last_modified,
@@ -1154,7 +1154,7 @@ class Controller:
         try:
             kwargs.update(
                 {
-                    "last_modified": app.get_time(),
+                    "last_modified": vs.get_time(),
                     "update_pools": True,
                     "must_be_new": kwargs.get("id") == "",
                 }

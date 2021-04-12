@@ -311,7 +311,7 @@ class Run(AbstractBase):
     model_properties = ["progress", "service_properties"]
 
     def __init__(self, **kwargs):
-        self.runtime = kwargs.get("runtime") or app.get_time()
+        self.runtime = kwargs.get("runtime") or vs.get_time()
         self.parent_runtime = self.runtime
         super().__init__(**kwargs)
         self.service_name = (self.placeholder or self.service).scoped_name

@@ -143,10 +143,6 @@ class FormFactory:
         self.generate_instance_insertion_forms()
         self.generate_service_forms()
 
-    @staticmethod
-    def choices(iterable):
-        return [(choice, choice) for choice in iterable]
-
     def generate_filtering_forms(self):
         for model in ("device", "link", "pool", "run", "service", "task", "user"):
             properties, relations = vs.properties["filtering"].get(model, []), {}
@@ -791,7 +787,7 @@ class AccessForm(RbacForm):
     access_pools = MultipleInstanceField("pool")
     access_type = SelectMultipleStringField(
         "Access Type",
-        choices=form_factory.choices(
+        choices=vs.dualize(
             ["Read", "Edit", "Run", "Schedule", "Connect", "Use as target"]
         ),
     )
@@ -826,9 +822,9 @@ class AccessForm(RbacForm):
                         continue
                     if subpage_values["rbac"] == "access":
                         pages.append(subpage)
-        menu_choices = form_factory.choices(menus)
+        menu_choices = vs.dualize(menus)
         setattr(cls, "menu", SelectMultipleField("Menu", choices=menu_choices))
-        page_choices = form_factory.choices(pages)
+        page_choices = vs.dualize(pages)
         setattr(cls, "pages", SelectMultipleField("Pages", choices=page_choices))
 
 
@@ -891,7 +887,7 @@ class DeviceForm(ObjectForm):
     )
     scrapli_driver = SelectField(
         "Scrapli Driver",
-        choices=form_factory.choices(vs.scrapli_drivers),
+        choices=vs.dualize(vs.scrapli_drivers),
         default="cisco_iosxe",
     )
 

@@ -108,5 +108,8 @@ class VariableStore:
         with open(Path.cwd() / "package.json") as package_file:
             self.version = load(package_file)["version"]
 
+    def dualize(self, iterable):
+        return [(element, element) for element in iterable]
+
 
 vs = VariableStore()

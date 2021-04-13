@@ -28,7 +28,6 @@ try:
 except ImportError:
     warn(f"Couldn't import hvac module ({format_exc()})")
 
-from eNMS.custom import CustomApp
 from eNMS.database import db
 from eNMS.variables import vs
 
@@ -37,8 +36,6 @@ class Environment:
     def __init__(self):
         self.path = Path.cwd()
         self.scheduler_address = getenv("SCHEDULER_ADDR")
-        self.custom = CustomApp(self)
-        self.custom.pre_init()
         self.init_rbac()
         self.init_encryption()
         self.use_vault = vs.settings["vault"]["use_vault"]
@@ -49,7 +46,6 @@ class Environment:
         self.init_logs()
         self.init_redis()
         self.init_connection_pools()
-        self.custom.post_init()
 
     def authenticate_user(self, **kwargs):
         name, password = kwargs["username"], kwargs["password"]
@@ -70,7 +66,7 @@ class Environment:
             success = user and user_password and verify(password, user_password)
             return user if success else False
         else:
-            authentication_function = getattr(env.custom, f"{method}_authentication")
+            authentication_function = getattr(vs.custom, f"{method}_authentication")
             response = authentication_function(user, name, password)
             if not response:
                 return False

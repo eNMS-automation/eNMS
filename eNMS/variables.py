@@ -84,6 +84,7 @@ class VariableStore:
         self.models = {}
         self.model_properties = defaultdict(lambda: ["type"])
         self.private_properties = self.database["private_properties"]
+        self.private_properties_set = set(sum(self.private_properties.values(), []))
         self.property_names = {}
         self.property_types = {}
         self.relationships = defaultdict(dict)

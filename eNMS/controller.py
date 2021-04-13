@@ -812,7 +812,7 @@ class Controller:
                     for related_model, relation in vs.relationships[type].items():
                         relation_dict[related_model] = instance.pop(related_model, [])
                     for property, value in instance.items():
-                        if property in db.private_properties_set:
+                        if property in vs.private_properties_set:
                             instance[property] = env.get_password(value)
                     try:
                         instance = db.factory(

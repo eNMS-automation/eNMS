@@ -21,7 +21,7 @@ class AbstractBase(db.base):
         return getattr(self, "name", str(self.id))
 
     def __getattribute__(self, property):
-        if property in db.private_properties_set:
+        if property in vs.private_properties_set:
             if env.use_vault:
                 target = self.service if self.type == "run" else self
                 path = f"secret/data/{target.type}/{target.name}/{property}"
@@ -34,7 +34,7 @@ class AbstractBase(db.base):
             return super().__getattribute__(property)
 
     def __setattr__(self, property, value):
-        if property in db.private_properties_set:
+        if property in vs.private_properties_set:
             if not value:
                 return
             value = env.encrypt_password(value).decode("utf-8")
@@ -95,7 +95,7 @@ class AbstractBase(db.base):
         no_migrate = db.dont_migrate.get(self.type, db.dont_migrate["service"])
         properties = list(vs.model_properties[self.type])
         for property in properties:
-            if not private_properties and property in db.private_properties_set:
+            if not private_properties and property in vs.private_properties_set:
                 continue
             if property in db.dont_serialize.get(self.type, []):
                 continue

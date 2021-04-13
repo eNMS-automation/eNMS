@@ -13,29 +13,24 @@ except ImportError as exc:
     warn(f"Couldn't import tacacs_plus module ({exc})")
 
 
+from eNMS.environment import env
+from eNMS.variables import vs
+
+
 class CustomApp:
-    def __init__(self, env):
-        self.env = env
-
-    def pre_init(self):
-        pass
-
-    def post_init(self):
-        pass
-
     def ldap_authentication(self, user, name, password):
-        if not hasattr(self.env, "ldap_server"):
-            self.env.ldap_server = Server(getenv("LDAP_ADDR"))
+        if not hasattr(env, "ldap_server"):
+            env.ldap_server = Server(getenv("LDAP_ADDR"))
         user = f"uid={name},dc=example,dc=com"
-        success = Connection(self.env.ldap_server, user=user, password=password).bind()
+        success = Connection(env.ldap_server, user=user, password=password).bind()
         return {"name": name, "is_admin": True} if success else False
 
     def tacacs_authentication(self, user, name, password):
-        if not hasattr(self.env, "tacacs_client"):
-            self.env.tacacs_client = TACACSClient(
+        if not hasattr(env, "tacacs_client"):
+            env.tacacs_client = TACACSClient(
                 getenv("TACACS_ADDR"), 49, getenv("TACACS_PASSWORD")
             )
-        success = self.env.tacacs_client.authenticate(name, password).valid
+        success = env.tacacs_client.authenticate(name, password).valid
         return {"name": name, "is_admin": True} if success else False
 
     def parse_configuration_property(self, device, property, value=None):
@@ -44,3 +39,6 @@ class CustomApp:
         if device.operating_system == "eos" and property == "configuration":
             value = sub(r"(username.*secret) (.*)", "\g<1> ********", value)
         return value
+
+
+vs.custom = CustomApp()

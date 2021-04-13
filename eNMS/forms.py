@@ -46,7 +46,7 @@ class MetaForm(FormMeta):
         for property, values in form.custom_properties.items():
             if not values.get("form", True):
                 continue
-            if property in db.private_properties_set:
+            if property in vs.private_properties_set:
                 field = PasswordField
             else:
                 field = {
@@ -80,9 +80,9 @@ class MetaForm(FormMeta):
                 vs.property_names[field_name] = field.args[0]
             if (
                 issubclass(field.field_class, PasswordField)
-                and field_name not in db.private_properties_set
+                and field_name not in vs.private_properties_set
             ):
-                db.private_properties_set.add(field_name)
+                vs.private_properties_set.add(field_name)
         vs.form_properties[form_type].update(properties)
         for property, value in properties.items():
             if property not in vs.property_types and value["type"] != "field-list":

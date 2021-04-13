@@ -226,7 +226,7 @@ class ServiceRun:
                 "run": {
                     k: v
                     for k, v in self.main_run.properties.items()
-                    if k not in db.private_properties_set
+                    if k not in vs.private_properties_set
                 },
                 "service": self.service.get_properties(exclude=["positions"]),
             }

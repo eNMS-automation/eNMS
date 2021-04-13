@@ -1,6 +1,10 @@
 from base64 import b64decode, b64encode
 from click import get_current_context
 from cryptography.fernet import Fernet
+from email.mime.application import MIMEApplication
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from email.utils import formatdate
 from flask_login import current_user
 from importlib import import_module
 from importlib.util import module_from_spec, spec_from_file_location
@@ -15,6 +19,7 @@ from redis.exceptions import ConnectionError, TimeoutError
 from requests import Session as RequestSession
 from requests.adapters import HTTPAdapter
 from requests.packages.urllib3.util.retry import Retry
+from smtplib import SMTP
 from sqlalchemy.exc import InvalidRequestError
 from sys import path as sys_path
 from traceback import format_exc

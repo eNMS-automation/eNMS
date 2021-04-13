@@ -1,16 +1,10 @@
 from collections import defaultdict
 from datetime import datetime
-from email.mime.application import MIMEApplication
-from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
-from email.utils import formatdate
 from json import load
 from logging import error
 from napalm._SUPPORTED_DRIVERS import SUPPORTED_DRIVERS
 from netmiko.ssh_dispatcher import CLASS_MAPPER
-from os import getenv
 from pathlib import Path
-from smtplib import SMTP
 from string import punctuation
 from traceback import format_exc
 from warnings import warn
@@ -206,8 +200,6 @@ class VariableStore:
 
     def get_time(self):
         return str(datetime.now())
-
-
 
     def strip_all(self, input):
         return input.translate(str.maketrans("", "", f"{punctuation} "))

@@ -6,7 +6,6 @@ from eNMS.environment import env
 from eNMS.forms import ServiceForm
 from eNMS.fields import HiddenField, StringField
 from eNMS.models.automation import Service
-from eNMS.variables import vs
 
 
 class MailNotificationService(Service):

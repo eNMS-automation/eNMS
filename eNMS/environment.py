@@ -36,6 +36,7 @@ from eNMS.variables import vs
 class Environment:
     def __init__(self):
         self.path = Path.cwd()
+        self.scheduler_address = getenv("SCHEDULER_ADDR")
         self.custom = CustomApp(self)
         self.custom.pre_init()
         self.init_rbac()
@@ -47,7 +48,6 @@ class Environment:
             sys_path.append(vs.settings["paths"]["custom_code"])
         self.init_logs()
         self.init_redis()
-        self.init_scheduler()
         self.init_connection_pools()
         self.custom.post_init()
 
@@ -149,9 +149,6 @@ class Environment:
             if host
             else None
         )
-
-    def init_scheduler(self):
-        self.scheduler_address = getenv("SCHEDULER_ADDR")
 
     def init_vault_client(self):
         url = getenv("VAULT_ADDR", "http://127.0.0.1:8200")

@@ -2,9 +2,8 @@ from requests.auth import HTTPBasicAuth
 from sqlalchemy import Boolean, ForeignKey, Integer
 from sqlalchemy.types import JSON
 
-from eNMS.environment import env
 from eNMS.database import db
-from eNMS.forms import ServiceForm
+from eNMS.environment import env
 from eNMS.fields import (
     BooleanField,
     DictField,
@@ -14,6 +13,7 @@ from eNMS.fields import (
     SelectField,
     StringField,
 )
+from eNMS.forms import ServiceForm
 from eNMS.models.automation import Service
 
 

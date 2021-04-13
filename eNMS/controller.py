@@ -29,8 +29,8 @@ from xlrd import open_workbook
 from xlrd.biffh import XLRDError
 from xlwt import Workbook
 
-from eNMS.environment import env
 from eNMS.database import db
+from eNMS.environment import env
 from eNMS.variables import vs
 
 

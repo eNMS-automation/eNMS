@@ -5,8 +5,8 @@ from paramiko import SSHClient, AutoAddPolicy
 from sqlalchemy import Boolean, Float, ForeignKey, Integer
 from wtforms.validators import InputRequired
 
-from eNMS.environment import env
 from eNMS.database import db
+from eNMS.environment import env
 from eNMS.forms import ServiceForm
 from eNMS.fields import (
     BooleanField,

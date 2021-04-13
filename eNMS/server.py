@@ -22,9 +22,9 @@ from subprocess import run
 from traceback import format_exc
 from werkzeug.exceptions import Forbidden
 
-from eNMS.environment import env
 from eNMS.controller import controller
 from eNMS.database import db
+from eNMS.environment import env
 from eNMS.rest_api import RestApi
 from eNMS.variables import vs
 

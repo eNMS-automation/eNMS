@@ -7,10 +7,10 @@ try:
 except ImportError as exc:
     warn(f"Couldn't import pynetbox module ({exc})")
 
-from eNMS.environment import env
 from eNMS.database import db
-from eNMS.forms import ServiceForm
+from eNMS.environment import env
 from eNMS.fields import HiddenField, PasswordField, SelectField, StringField
+from eNMS.forms import ServiceForm
 from eNMS.models.automation import Service
 
 

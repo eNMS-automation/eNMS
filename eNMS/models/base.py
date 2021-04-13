@@ -1,7 +1,7 @@
 from sqlalchemy.ext.mutable import MutableDict, MutableList
 
-from eNMS.environment import env
 from eNMS.database import db
+from eNMS.environment import env
 from eNMS.variables import vs
 
 

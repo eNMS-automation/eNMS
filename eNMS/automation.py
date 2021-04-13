@@ -32,8 +32,8 @@ try:
 except ImportError as exc:
     warn(f"Couldn't import slackclient module ({exc})")
 
-from eNMS.environment import env
 from eNMS.database import db
+from eNMS.environment import env
 from eNMS.variables import vs
 
 

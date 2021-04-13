@@ -3,8 +3,8 @@ from wtforms.widgets import TextArea
 
 from eNMS.database import db
 from eNMS.environment import env
-from eNMS.forms import ServiceForm
 from eNMS.fields import HiddenField, StringField
+from eNMS.forms import ServiceForm
 from eNMS.models.automation import Service
 
 

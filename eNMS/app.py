@@ -35,7 +35,6 @@ class App:
         self.custom = CustomApp(self)
         self.custom.pre_init()
         self.load_custom_properties()
-        self.load_configuration_properties()
         self.init_rbac()
         self.init_encryption()
         self.use_vault = vs.settings["vault"]["use_vault"]
@@ -191,31 +190,6 @@ class App:
                     db.private_properties[model].append(property)
                 if model == "device" and property_dict.get("configuration"):
                     vs.configuration_properties[property] = pretty_name
-
-    def load_configuration_properties(self):
-        for property, title in vs.configuration_properties.items():
-            vs.properties["filtering"]["device"].append(property)
-            vs.properties["tables"]["configuration"].insert(
-                -1,
-                {
-                    "data": property,
-                    "title": title,
-                    "search": "text",
-                    "width": "70%",
-                    "visible": property == "configuration",
-                    "orderable": False,
-                },
-            )
-            for timestamp in vs.configuration_timestamps:
-                vs.properties["tables"]["configuration"].insert(
-                    -1,
-                    {
-                        "data": f"last_{property}_{timestamp}",
-                        "title": f"Last {title} {timestamp.capitalize()}",
-                        "search": "text",
-                        "visible": False,
-                    },
-                )
 
     def log(self, severity, content, user=None, change_log=True, logger="root"):
         logger_settings = vs.logging["loggers"].get(logger, {})

@@ -1091,7 +1091,7 @@ class ServiceRun:
             data = {}
         data[property] = {
             timestamp: getattr(device, f"last_{property}_{timestamp}")
-            for timestamp in vs.configuration_timestamps
+            for timestamp in vs.timestamps
         }
         with open(path / "timestamps.json", "w") as file:
             dump(data, file, indent=4)

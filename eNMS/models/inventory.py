@@ -90,7 +90,7 @@ class Device(Object):
     @classmethod
     def database_init(cls):
         for property in vs.configuration_properties:
-            for timestamp in vs.configuration_timestamps:
+            for timestamp in vs.timestamps:
                 setattr(
                     cls,
                     f"last_{property}_{timestamp}",

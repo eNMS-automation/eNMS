@@ -26,12 +26,12 @@ except ImportError as exc:
 
 class VariableStore:
     def __init__(self):
+        self._set_setup_variables()
         self._set_automation_variables()
         self._set_configuration_variables()
         self._set_general_variables()
         self._set_run_variables()
         self._set_server_variables()
-        self._set_setup_variables()
         self._set_version()
         self._load_plugins()
 
@@ -47,14 +47,31 @@ class VariableStore:
         self.scrapli_drivers = CORE_PLATFORM_MAP
 
     def _set_configuration_variables(self):
-        self.configuration_timestamps = (
-            "status",
-            "update",
-            "failure",
-            "runtime",
-            "duration",
-        )
+        self.timestamps = ("status", "update", "failure", "runtime", "duration")
         self.configuration_properties = {"configuration": "Configuration"}
+        for property, title in self.configuration_properties.items():
+            self.properties["filtering"]["device"].append(property)
+            self.properties["tables"]["configuration"].insert(
+                -1,
+                {
+                    "data": property,
+                    "title": title,
+                    "search": "text",
+                    "width": "70%",
+                    "visible": property == "configuration",
+                    "orderable": False,
+                },
+            )
+            for timestamp in self.timestamps:
+                self.properties["tables"]["configuration"].insert(
+                    -1,
+                    {
+                        "data": f"last_{property}_{timestamp}",
+                        "title": f"Last {title} {timestamp.capitalize()}",
+                        "search": "text",
+                        "visible": False,
+                    },
+                )
 
     def _set_general_variables(self):
         self.form_class = {}

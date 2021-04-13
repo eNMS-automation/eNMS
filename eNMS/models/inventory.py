@@ -91,11 +91,8 @@ class Device(Object):
     def database_init(cls):
         for property in vs.configuration_properties:
             for timestamp in vs.timestamps:
-                setattr(
-                    cls,
-                    f"last_{property}_{timestamp}",
-                    db.Column(db.SmallString, default="Never"),
-                )
+                column = db.Column(db.SmallString, default="Never")
+                setattr(cls, f"last_{property}_{timestamp}", column)
         return cls
 
     def get_credentials(self, credential_type="any", username=None):

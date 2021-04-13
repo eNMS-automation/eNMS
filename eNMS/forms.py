@@ -291,7 +291,7 @@ class CredentialForm(BaseForm):
 class DatabaseDeletionForm(BaseForm):
     action = "eNMS.administration.databaseDeletion"
     form_type = HiddenField(default="database_deletion")
-    deletion_choices = [(p, p) for p in vs.database["import_export_models"]]
+    deletion_choices = vs.dualize(vs.database["import_export_models"])
     deletion_types = SelectMultipleField(
         "Instances to delete", choices=deletion_choices
     )
@@ -307,7 +307,7 @@ class DatabaseMigrationsForm(BaseForm):
     export_private_properties = BooleanField(
         "Include private properties", default="checked"
     )
-    export_choices = [(p, p) for p in vs.database["import_export_models"]]
+    export_choices = vs.dualize(vs.database["import_export_models"])
     import_export_types = SelectMultipleField(
         "Instances to migrate", choices=export_choices
     )

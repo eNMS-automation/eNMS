@@ -17,12 +17,13 @@ from requests.adapters import HTTPAdapter
 from requests.packages.urllib3.util.retry import Retry
 from sqlalchemy.exc import InvalidRequestError
 from sys import path as sys_path
+from traceback import format_exc
 from warnings import warn
 
 try:
     from hvac import Client as VaultClient
-except ImportError as exc:
-    warn(f"Couldn't import hvac module ({exc})")
+except ImportError:
+    warn(f"Couldn't import hvac module ({format_exc()})")
 
 from eNMS.custom import CustomApp
 from eNMS.database import db
@@ -167,8 +168,8 @@ class Environment:
                 spec = spec_from_file_location(file.stem, str(file))
                 try:
                     spec.loader.exec_module(module_from_spec(spec))
-                except InvalidRequestError as exc:
-                    error(f"Error loading custom service '{file}' ({str(exc)})")
+                except InvalidRequestError:
+                    error(f"Error loading custom service '{file}' ({format_exc()})")
 
     def init_vault_client(self):
         url = getenv("VAULT_ADDR", "http://127.0.0.1:8200")
@@ -215,6 +216,36 @@ class Environment:
             return getattr(self.redis_queue, operation)(*args, **kwargs)
         except (ConnectionError, TimeoutError) as exc:
             self.log("error", f"Redis Queue Unreachable ({exc})", change_log=False)
+
+    def send_email(
+        self,
+        subject,
+        content,
+        recipients="",
+        reply_to=None,
+        sender=None,
+        filename=None,
+        file_content=None,
+    ):
+        sender = sender or self.settings["mail"]["sender"]
+        message = MIMEMultipart()
+        message["From"] = sender
+        message["To"] = recipients
+        message["Date"] = formatdate(localtime=True)
+        message["Subject"] = subject
+        message.add_header("reply-to", reply_to or self.settings["mail"]["reply_to"])
+        message.attach(MIMEText(content))
+        if filename:
+            attached_file = MIMEApplication(file_content, Name=filename)
+            attached_file["Content-Disposition"] = f'attachment; filename="{filename}"'
+            message.attach(attached_file)
+        server = SMTP(self.settings["mail"]["server"], self.settings["mail"]["port"])
+        if self.settings["mail"]["use_tls"]:
+            server.starttls()
+            password = getenv("MAIL_PASSWORD", "")
+            server.login(self.settings["mail"]["username"], password)
+        server.sendmail(sender, recipients.split(","), message.as_string())
+        server.close()
 
 
 env = Environment()

@@ -2,6 +2,7 @@ from sqlalchemy import ForeignKey, Integer
 from wtforms.widgets import TextArea
 
 from eNMS.database import db
+from eNMS.environment import env
 from eNMS.forms import ServiceForm
 from eNMS.fields import HiddenField, StringField
 from eNMS.models.automation import Service
@@ -22,7 +23,7 @@ class MailNotificationService(Service):
     __mapper_args__ = {"polymorphic_identity": "mail_notification_service"}
 
     def job(self, run, device=None):
-        vs.send_email(
+        env.send_email(
             run.sub(run.title, locals()),
             run.sub(run.body, locals()),
             sender=run.sender,

@@ -363,7 +363,7 @@ class Run(AbstractBase):
 
     @property
     def service_properties(self):
-        return {k: getattr(self.service, k) for k in ("id", "type", "name")}
+        return self.service.base_properties
 
     def get_state(self):
         if self.state:

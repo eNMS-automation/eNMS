@@ -58,7 +58,7 @@ class AbstractBase(db.base):
 
     @property
     def base_properties(self):
-        return {p: getattr(self, p) for p in ("id", "name", "type")}
+        return {prop: getattr(self, prop) for prop in ("id", "name", "type")}
 
     def update(self, **kwargs):
         relation = vs.relationships[self.__tablename__]

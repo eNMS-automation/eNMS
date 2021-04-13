@@ -108,9 +108,9 @@ class DictField(StringField):
         if isinstance(input, set):
             return True
         elif isinstance(input, list):
-            return any(self.contains_set(x) for x in input)
+            return any(self.contains_set(item) for item in input)
         elif isinstance(input, dict):
-            return any(self.contains_set(x) for x in input.values())
+            return any(self.contains_set(item) for item in input.values())
         else:
             return False
 

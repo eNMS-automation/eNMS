@@ -1051,10 +1051,11 @@ class Controller:
                 continue
 
     def scan_playbook_folder(self):
-        path = Path(
-            vs.settings["paths"]["playbooks"] or vs.path / "files" / "playbooks"
-        )
-        playbooks = [[str(file) for file in path.glob(e)] for e in ("*.yaml", "*.yml")]
+        path = vs.settings["paths"]["playbooks"] or vs.path / "files" / "playbooks"
+        playbooks = [
+            [str(file) for file in Path(path).glob(extension)]
+            for extension in ("*.yaml", "*.yml")
+        ]
         return sorted(sum(playbooks, []))
 
     def scheduler_action(self, mode, **kwargs):

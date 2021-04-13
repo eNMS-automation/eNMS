@@ -39,8 +39,8 @@ class RestCallService(Service):
         rest_url = run.sub(run.rest_url, local_variables)
         run.log("info", f"Sending REST Call to {rest_url}", device, logger="security")
         kwargs = {
-            p: run.sub(getattr(self, p), local_variables)
-            for p in ("headers", "params", "timeout")
+            parameter: run.sub(getattr(self, parameter), local_variables)
+            for parameter in ("headers", "params", "timeout")
         }
         kwargs["verify"] = run.verify_ssl_certificate
         if self.username:

@@ -35,11 +35,11 @@ class DataExtractionService(Service):
 
     def job(self, run, device=None):
         result, success = {}, True
-        for i in range(1, 4):
-            variable = getattr(run, f"variable{i}")
+        for index in range(1, 4):
+            variable = getattr(run, f"variable{index}")
             if not variable:
                 continue
-            query = getattr(run, f"query{i}")
+            query = getattr(run, f"query{index}")
             try:
                 variables = locals()
                 variables.pop("query")
@@ -48,9 +48,9 @@ class DataExtractionService(Service):
                 success = False
                 result[variable] = f"Wrong Python query for {variable} ({exc})"
                 continue
-            match_type = getattr(run, f"match_type{i}")
-            match = getattr(run, f"match{i}")
-            operation = getattr(run, f"operation{i}")
+            match_type = getattr(run, f"match_type{index}")
+            match = getattr(run, f"match{index}")
+            operation = getattr(run, f"operation{index}")
             value = (
                 value
                 if match_type == "none"

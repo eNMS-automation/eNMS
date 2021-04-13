@@ -34,7 +34,7 @@ class VariableStore:
         self._set_run_variables()
         self._set_server_variables()
         self._set_version()
-        self._load_plugins()
+        self._set_plugins_settings()
 
     def _initialize(self):
         self._set_template_context()
@@ -152,7 +152,7 @@ class VariableStore:
         with open(self.path / "package.json") as package_file:
             self.version = load(package_file)["version"]
 
-    def _load_plugins(self):
+    def _set_plugins_settings(self):
         self.plugins_settings = {}
         for path in Path(self.settings["app"]["plugin_path"]).iterdir():
             if not Path(path / "settings.json").exists():

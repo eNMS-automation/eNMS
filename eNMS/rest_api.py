@@ -75,7 +75,7 @@ class RestApi:
         return {"name": getnode(), "cluster_id": vs.settings["cluster"]["id"]}
 
     def migrate(self, direction, **kwargs):
-        return getattr(app, f"migration_{direction}")(**kwargs)
+        return getattr(controller, f"migration_{direction}")(**kwargs)
 
     def query(self, model, **kwargs):
         results = db.fetch(model, all_matches=True, **kwargs)

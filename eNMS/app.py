@@ -185,9 +185,9 @@ class App:
                 vs.property_names[property] = pretty_name
                 vs.model_properties[model].append(property)
                 if property_dict.get("private"):
-                    if model not in db.private_properties:
-                        db.private_properties[model] = []
-                    db.private_properties[model].append(property)
+                    if model not in vs.private_properties:
+                        vs.private_properties[model] = []
+                    vs.private_properties[model].append(property)
                 if model == "device" and property_dict.get("configuration"):
                     vs.configuration_properties[property] = pretty_name
 

@@ -26,9 +26,9 @@ except ImportError as exc:
 
 class VariableStore:
     def __init__(self):
+        self._set_setup_variables()
         self._set_automation_variables()
         self._set_general_variables()
-        self._set_setup_variables()
         self._set_configuration_variables()
         self._set_run_variables()
         self._set_server_variables()
@@ -78,7 +78,7 @@ class VariableStore:
         self.form_properties = defaultdict(dict)
         self.models = {}
         self.model_properties = defaultdict(lambda: ["type"])
-        self.path = Path.cwd()
+        self.private_properties = self.database["private_properties"]
         self.property_names = {}
         self.property_types = {}
         self.relationships = defaultdict(dict)
@@ -110,6 +110,7 @@ class VariableStore:
         }
 
     def _set_setup_variables(self):
+        self.path = Path.cwd()
         for setup_file in (self.path / "setup").iterdir():
             with open(setup_file, "r") as file:
                 setattr(self, setup_file.stem, load(file))

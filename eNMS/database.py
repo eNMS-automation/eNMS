@@ -69,7 +69,7 @@ class Database:
         register(self.cleanup)
 
     def _initialize(self, app):
-        self.private_properties_set |= set(sum(self.private_properties.values(), []))
+        self.private_properties_set |= set(sum(vs.private_properties.values(), []))
         self.base.metadata.create_all(bind=self.engine)
         configure_mappers()
         self.configure_model_events(app)
@@ -250,13 +250,13 @@ class Database:
                 model.configure_events()
 
         if app.use_vault:
-            for model in self.private_properties:
+            for model in vs.private_properties:
 
                 @event.listens_for(vs.models[model].name, "set", propagate=True)
                 def vault_update(target, new_name, old_name, *_):
                     if new_name == old_name:
                         return
-                    for property in self.private_properties[target.class_type]:
+                    for property in vs.private_properties[target.class_type]:
                         path = f"secret/data/{target.type}"
                         data = app.vault_client.read(f"{path}/{old_name}/{property}")
                         if not data:

@@ -4,7 +4,6 @@ from threading import Thread
 from traceback import format_exc
 from uuid import getnode
 
-from eNMS import app
 from eNMS.controller import controller
 from eNMS.database import db
 from eNMS.variables import vs

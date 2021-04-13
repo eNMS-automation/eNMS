@@ -29,7 +29,7 @@ from xlrd import open_workbook
 from xlrd.biffh import XLRDError
 from xlwt import Workbook
 
-from eNMS import app
+from eNMS.environment import env
 from eNMS.database import db
 from eNMS.variables import vs
 
@@ -448,7 +448,7 @@ class Controller:
     def get_device_network_data(self, device_id):
         device = db.fetch("device", id=device_id)
         return {
-            property: app.custom.parse_configuration_property(device, property)
+            property: env.custom.parse_configuration_property(device, property)
             for property in vs.configuration_properties
         }
 
@@ -468,7 +468,7 @@ class Controller:
                 local_path.mkdir(parents=True, exist_ok=True)
                 Repo.clone_from(repo, local_path)
         except Exception as exc:
-            app.log("error", f"Git pull failed ({str(exc)})")
+            env.log("error", f"Git pull failed ({str(exc)})")
         self.update_database_configurations_from_git()
 
     def get_git_history(self, device_id):
@@ -491,7 +491,7 @@ class Controller:
                 file = commit.tree / device_name / property
                 with BytesIO(file.data_stream.read()) as f:
                     value = f.read().decode("utf-8")
-                result[property] = app.custom.parse_configuration_property(
+                result[property] = env.custom.parse_configuration_property(
                     device, property, value
                 )
             except KeyError:
@@ -528,7 +528,7 @@ class Controller:
             logs = log_instance.content
         else:
             lines = (
-                app.log_queue(runtime, service, start_line=int(start_line), mode="get")
+                env.log_queue(runtime, service, start_line=int(start_line), mode="get")
                 or []
             )
             number_of_lines, logs = len(lines), "\n".join(lines)
@@ -813,7 +813,7 @@ class Controller:
                         relation_dict[related_model] = instance.pop(related_model, [])
                     for property, value in instance.items():
                         if property in db.private_properties_set:
-                            instance[property] = app.get_password(value)
+                            instance[property] = env.get_password(value)
                     try:
                         instance = db.factory(
                             type,
@@ -855,7 +855,7 @@ class Controller:
         if not kwargs.get("skip_pool_update"):
             for pool in db.fetch_all("pool"):
                 pool.compute_pool()
-        app.log("info", status)
+        env.log("info", status)
         return status
 
     def multiselect_filtering(self, model, **params):
@@ -971,7 +971,7 @@ class Controller:
         result = StringIO()
         with redirect_stdout(result):
             try:
-                environment = {"app": self, "db": db, "models": vs.models}
+                environment = {"env": self, "db": db, "models": vs.models}
                 exec(kwargs["code"], environment)
             except Exception:
                 return format_exc()
@@ -1091,8 +1091,8 @@ class Controller:
     def stop_workflow(self, runtime):
         run = db.fetch("run", allow_none=True, runtime=runtime)
         if run and run.status == "Running":
-            if app.redis_queue:
-                app.redis("set", f"stop/{run.parent_runtime}", "true")
+            if env.redis_queue:
+                env.redis("set", f"stop/{run.parent_runtime}", "true")
             else:
                 vs.run_stop[run.parent_runtime] = True
             return True
@@ -1121,7 +1121,7 @@ class Controller:
                 for obj_index, obj in enumerate(db.fetch_all(obj_type), 1):
                     value = getattr(obj, property)
                     if type(value) == bytes:
-                        value = str(app.decrypt(value), "utf-8")
+                        value = str(env.decrypt(value), "utf-8")
                     sheet.write(obj_index, index, str(value))
         workbook.save(vs.path / "files" / "spreadsheets" / filename)
 
@@ -1149,7 +1149,7 @@ class Controller:
             db.session.commit()
         for pool in db.fetch_all("pool"):
             pool.compute_pool()
-        app.log("info", status)
+        env.log("info", status)
         return status
 
     def update(self, type, **kwargs):
@@ -1181,7 +1181,7 @@ class Controller:
                     "with the same parameters."
                 )
                 return {"alert": alert}
-            app.log("error", format_exc())
+            env.log("error", format_exc())
             return {"alert": str(exc)}
 
     def update_all_pools(self):

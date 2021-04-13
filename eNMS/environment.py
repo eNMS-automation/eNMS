@@ -29,7 +29,7 @@ from eNMS.database import db
 from eNMS.variables import vs
 
 
-class App:
+class Environment:
     def __init__(self):
         self.path = Path.cwd()
         self.custom = CustomApp(self)
@@ -69,7 +69,7 @@ class App:
             success = user and user_password and verify(password, user_password)
             return user if success else False
         else:
-            authentication_function = getattr(app.custom, f"{method}_authentication")
+            authentication_function = getattr(env.custom, f"{method}_authentication")
             response = authentication_function(user, name, password)
             if not response:
                 return False
@@ -217,4 +217,4 @@ class App:
             self.log("error", f"Redis Queue Unreachable ({exc})", change_log=False)
 
 
-app = App()
+env = Environment()

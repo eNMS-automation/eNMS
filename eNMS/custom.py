@@ -14,8 +14,8 @@ except ImportError as exc:
 
 
 class CustomApp:
-    def __init__(self, app):
-        self.app = app
+    def __init__(self, env):
+        self.env = env
 
     def pre_init(self):
         pass
@@ -24,18 +24,18 @@ class CustomApp:
         pass
 
     def ldap_authentication(self, user, name, password):
-        if not hasattr(self.app, "ldap_server"):
-            self.app.ldap_server = Server(getenv("LDAP_ADDR"))
+        if not hasattr(self.env, "ldap_server"):
+            self.env.ldap_server = Server(getenv("LDAP_ADDR"))
         user = f"uid={name},dc=example,dc=com"
-        success = Connection(self.app.ldap_server, user=user, password=password).bind()
+        success = Connection(self.env.ldap_server, user=user, password=password).bind()
         return {"name": name, "is_admin": True} if success else False
 
     def tacacs_authentication(self, user, name, password):
-        if not hasattr(self.app, "tacacs_client"):
-            self.app.tacacs_client = TACACSClient(
+        if not hasattr(self.env, "tacacs_client"):
+            self.env.tacacs_client = TACACSClient(
                 getenv("TACACS_ADDR"), 49, getenv("TACACS_PASSWORD")
             )
-        success = self.app.tacacs_client.authenticate(name, password).valid
+        success = self.env.tacacs_client.authenticate(name, password).valid
         return {"name": name, "is_admin": True} if success else False
 
     def parse_configuration_property(self, device, property, value=None):

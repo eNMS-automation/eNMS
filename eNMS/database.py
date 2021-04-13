@@ -68,11 +68,11 @@ class Database:
                 setattr(self, f"retry_{retry_type}_{parameter}", number)
         register(self.cleanup)
 
-    def _initialize(self, app):
+    def _initialize(self, env):
         self.private_properties_set |= set(sum(vs.private_properties.values(), []))
         self.base.metadata.create_all(bind=self.engine)
         configure_mappers()
-        self.configure_model_events(app)
+        self.configure_model_events(env)
         first_init = not self.get_user("admin")
         if first_init:
             admin_user = vs.models["user"](name="admin", is_admin=True)
@@ -196,16 +196,16 @@ class Database:
                     "list": relation.uselist,
                 }
 
-    def configure_model_events(self, app):
+    def configure_model_events(self, env):
         @event.listens_for(self.base, "after_insert", propagate=True)
         def log_instance_creation(mapper, connection, target):
             if hasattr(target, "name") and target.type != "run":
-                app.log("info", f"CREATION: {target.type} '{target.name}'")
+                env.log("info", f"CREATION: {target.type} '{target.name}'")
 
         @event.listens_for(self.base, "before_delete", propagate=True)
         def log_instance_deletion(mapper, connection, target):
             name = getattr(target, "name", str(target))
-            app.log("info", f"DELETION: {target.type} '{name}'")
+            env.log("info", f"DELETION: {target.type} '{name}'")
 
         @event.listens_for(self.base, "before_update", propagate=True)
         def log_instance_update(mapper, connection, target):
@@ -243,13 +243,13 @@ class Database:
                     getattr(target, "name", target.id),
                     " | ".join(changelog),
                 )
-                app.log("info", f"UPDATE: {target.type} '{name}': ({changes})")
+                env.log("info", f"UPDATE: {target.type} '{name}': ({changes})")
 
         for model in vs.models.values():
             if "configure_events" in vars(model):
                 model.configure_events()
 
-        if app.use_vault:
+        if env.use_vault:
             for model in vs.private_properties:
 
                 @event.listens_for(vs.models[model].name, "set", propagate=True)
@@ -258,14 +258,14 @@ class Database:
                         return
                     for property in vs.private_properties[target.class_type]:
                         path = f"secret/data/{target.type}"
-                        data = app.vault_client.read(f"{path}/{old_name}/{property}")
+                        data = env.vault_client.read(f"{path}/{old_name}/{property}")
                         if not data:
                             return
-                        app.vault_client.write(
+                        env.vault_client.write(
                             f"{path}/{new_name}/{property}",
                             data={property: data["data"]["data"][property]},
                         )
-                        app.vault_client.delete(f"{path}/{old_name}")
+                        env.vault_client.delete(f"{path}/{old_name}")
 
     def configure_associations(self):
         for name, association in self.relationships["associations"].items():

@@ -1,6 +1,6 @@
 from sqlalchemy.ext.mutable import MutableDict, MutableList
 
-from eNMS import app
+from eNMS.environment import env
 from eNMS.database import db
 from eNMS.variables import vs
 
@@ -22,10 +22,10 @@ class AbstractBase(db.base):
 
     def __getattribute__(self, property):
         if property in db.private_properties_set:
-            if app.use_vault:
+            if env.use_vault:
                 target = self.service if self.type == "run" else self
                 path = f"secret/data/{target.type}/{target.name}/{property}"
-                data = app.vault_client.read(path)
+                data = env.vault_client.read(path)
                 value = data["data"]["data"][property] if data else ""
             else:
                 value = super().__getattribute__(property)
@@ -37,9 +37,9 @@ class AbstractBase(db.base):
         if property in db.private_properties_set:
             if not value:
                 return
-            value = app.encrypt_password(value).decode("utf-8")
-            if app.use_vault:
-                app.vault_client.write(
+            value = env.encrypt_password(value).decode("utf-8")
+            if env.use_vault:
+                env.vault_client.write(
                     f"secret/data/{self.type}/{self.name}/{property}",
                     data={property: value},
                 )

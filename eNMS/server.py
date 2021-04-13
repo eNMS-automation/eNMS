@@ -22,7 +22,7 @@ from subprocess import run
 from traceback import format_exc
 from werkzeug.exceptions import Forbidden
 
-from eNMS import app
+from eNMS.environment import env
 from eNMS.controller import controller
 from eNMS.database import db
 from eNMS.rest_api import RestApi
@@ -63,9 +63,9 @@ class Server(Flask):
                 module = import_module(f"eNMS.plugins.{plugin}")
                 module.Plugin(self, controller, db, **settings)
             except Exception:
-                app.log("error", f"Could not import plugin '{plugin}':\n{format_exc()}")
+                env.log("error", f"Could not import plugin '{plugin}':\n{format_exc()}")
                 continue
-            app.log("info", f"Loading plugin: {settings['name']}")
+            env.log("info", f"Loading plugin: {settings['name']}")
 
     def register_extensions(self):
         self.csrf = CSRFProtect()
@@ -163,7 +163,7 @@ class Server(Flask):
             request_property = f"{request.method.lower()}_requests"
             endpoint_rbac = vs.rbac[request_property].get(endpoint)
             if rest_request:
-                user = app.authenticate_user(**request.authorization)
+                user = env.authenticate_user(**request.authorization)
                 if user:
                     login_user(user)
             username = getattr(current_user, "name", "Unknown")
@@ -198,7 +198,7 @@ class Server(Flask):
             )
             if status_code == 500:
                 log += f"\n{traceback}"
-            app.log(vs.status_log_level[status_code], log, change_log=False)
+            env.log(vs.status_log_level[status_code], log, change_log=False)
             if rest_request:
                 logout_user()
             if status_code == 200:
@@ -232,7 +232,7 @@ class Server(Flask):
                 kwargs, success = request.form.to_dict(), False
                 username = kwargs["username"]
                 try:
-                    user = app.authenticate_user(**kwargs)
+                    user = env.authenticate_user(**kwargs)
                     if user:
                         login_user(user, remember=False)
                         session.permanent = True
@@ -242,7 +242,7 @@ class Server(Flask):
                 except Exception:
                     log = f"Authentication error for user '{username}' ({format_exc()})"
                 finally:
-                    app.log("info" if success else "warning", log, logger="security")
+                    env.log("info" if success else "warning", log, logger="security")
                     if success:
                         return redirect(url_for("blueprint.route", page="dashboard"))
                     else:
@@ -271,7 +271,7 @@ class Server(Flask):
         def logout():
             logout_log = f"USER '{current_user.name}' logged out"
             logout_user()
-            app.log("info", logout_log, logger="security")
+            env.log("info", logout_log, logger="security")
             return redirect(url_for("blueprint.route", page="login"))
 
         @blueprint.route("/<table_type>_table")

@@ -2,7 +2,7 @@ from requests.auth import HTTPBasicAuth
 from sqlalchemy import Boolean, ForeignKey, Integer
 from sqlalchemy.types import JSON
 
-from eNMS import app
+from eNMS.environment import env
 from eNMS.database import db
 from eNMS.forms import ServiceForm
 from eNMS.fields import (
@@ -45,11 +45,11 @@ class RestCallService(Service):
         kwargs["verify"] = run.verify_ssl_certificate
         if self.username:
             kwargs["auth"] = HTTPBasicAuth(
-                self.username, app.get_password(self.password)
+                self.username, env.get_password(self.password)
             )
         if run.call_type in ("POST", "PUT", "PATCH"):
             kwargs["json"] = run.sub(run.payload, local_variables)
-        call = getattr(app.request_session, run.call_type.lower())
+        call = getattr(env.request_session, run.call_type.lower())
         response = call(rest_url, **kwargs)
         result = {
             "url": rest_url,

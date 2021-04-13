@@ -32,7 +32,7 @@ try:
 except ImportError as exc:
     warn(f"Couldn't import slackclient module ({exc})")
 
-from eNMS import app
+from eNMS.environment import env
 from eNMS.database import db
 from eNMS.variables import vs
 
@@ -85,8 +85,8 @@ class ServiceRun:
 
     @property
     def stop(self):
-        if app.redis_queue:
-            return bool(app.redis("get", f"stop/{self.parent_runtime}"))
+        if env.redis_queue:
+            return bool(env.redis("get", f"stop/{self.parent_runtime}"))
         else:
             return vs.run_stop[self.parent_runtime]
 
@@ -149,7 +149,7 @@ class ServiceRun:
         return list(devices - restricted_devices)
 
     def init_state(self):
-        if not app.redis_queue:
+        if not env.redis_queue:
             if vs.run_states[self.parent_runtime].get(self.path):
                 return
             vs.run_states[self.parent_runtime][self.path] = {}
@@ -160,10 +160,10 @@ class ServiceRun:
         self.write_state("success", True)
 
     def write_state(self, path, value, method=None):
-        if app.redis_queue:
+        if env.redis_queue:
             if isinstance(value, bool):
                 value = str(value)
-            app.redis(
+            env.redis(
                 {None: "set", "append": "lpush", "increment": "incr"}[method],
                 f"{self.parent_runtime}/state/{self.path}/{path}",
                 value,
@@ -237,8 +237,8 @@ class ServiceRun:
                 or self.run_method == "once"
             ):
                 results = self.create_result(results, run_result=self.is_main_run)
-            if app.redis_queue and self.is_main_run:
-                app.redis("delete", *(app.redis("keys", f"{self.runtime}/*") or []))
+            if env.redis_queue and self.is_main_run:
+                env.redis("delete", *(env.redis("keys", f"{self.runtime}/*") or []))
         self.results = results
 
     def make_results_json_compliant(self, results):
@@ -393,7 +393,7 @@ class ServiceRun:
         if self.is_main_run and not device:
             services = list(vs.run_logs.get(self.parent_runtime, []))
             for service_id in services:
-                logs = app.log_queue(self.parent_runtime, service_id, mode="get")
+                logs = env.log_queue(self.parent_runtime, service_id, mode="get")
                 db.factory(
                     "service_log",
                     runtime=self.parent_runtime,
@@ -549,14 +549,14 @@ class ServiceRun:
             device_name = device if isinstance(device, str) else device.name
             log = f"DEVICE {device_name} - {log}"
         log = f"USER {self.creator} - SERVICE {self.service.scoped_name} - {log}"
-        settings = app.log(
+        settings = env.log(
             severity, log, user=self.creator, change_log=change_log, logger=logger
         )
         if service_log or logger and settings.get("service_log"):
             run_log = f"{vs.get_time()} - {severity} - {log}"
-            app.log_queue(self.parent_runtime, self.service.id, run_log)
+            env.log_queue(self.parent_runtime, self.service.id, run_log)
             if not self.is_main_run:
-                app.log_queue(self.parent_runtime, self.main_run.service.id, run_log)
+                env.log_queue(self.parent_runtime, self.main_run.service.id, run_log)
 
     def build_notification(self, results):
         notification = {
@@ -636,24 +636,24 @@ class ServiceRun:
         if self.credentials == "device":
             result["username"] = credentials.username
             if credentials.subtype == "password":
-                result["password"] = app.get_password(credentials.password)
+                result["password"] = env.get_password(credentials.password)
             else:
-                private_key = app.get_password(credentials.private_key)
+                private_key = env.get_password(credentials.private_key)
                 result["pkey"] = RSAKey.from_private_key(StringIO(private_key))
         elif self.credentials == "user":
             user = db.fetch("user", name=self.creator)
             result["username"] = user.name
-            result["password"] = app.get_password(user.password)
+            result["password"] = env.get_password(user.password)
         else:
             result["username"] = self.sub(self.custom_username, locals())
-            password = app.get_password(self.custom_password)
+            password = env.get_password(self.custom_password)
             substituted_password = self.sub(password, locals())
             if password != substituted_password:
                 if substituted_password.startswith("b'"):
                     substituted_password = substituted_password[2:-1]
-                password = app.get_password(substituted_password)
+                password = env.get_password(substituted_password)
             result["password"] = password
-        result["secret"] = app.get_password(credentials.enable_password)
+        result["secret"] = env.get_password(credentials.enable_password)
         return result
 
     def convert_result(self, result):
@@ -819,7 +819,7 @@ class ServiceRun:
                 "send_email": vs.send_email,
                 "settings": vs.settings,
                 "devices": _self.target_devices,
-                "encrypt": app.encrypt_password,
+                "encrypt": env.encrypt_password,
                 "get_var": _self.get_var,
                 "get_result": _self.get_result,
                 "log": _self.log,
@@ -1047,7 +1047,7 @@ class ServiceRun:
                     self.sub(self.expect_username_prompt, locals()),
                     self.sub(self.jump_username, locals()),
                     self.sub(self.expect_password_prompt, locals()),
-                    self.sub(app.get_password(self.jump_password), locals()),
+                    self.sub(env.get_password(self.jump_password), locals()),
                     self.sub(self.expect_prompt, locals()),
                 ],
             )

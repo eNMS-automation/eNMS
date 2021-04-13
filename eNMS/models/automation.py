@@ -7,7 +7,7 @@ from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy.orm import aliased, relationship
 
-from eNMS import app
+from eNMS.environment import env
 from eNMS.automation import ServiceRun
 from eNMS.controller import controller
 from eNMS.database import db
@@ -368,11 +368,11 @@ class Run(AbstractBase):
     def get_state(self):
         if self.state:
             return self.state
-        elif app.redis_queue:
-            keys = app.redis("keys", f"{self.parent_runtime}/state/*")
+        elif env.redis_queue:
+            keys = env.redis("keys", f"{self.parent_runtime}/state/*")
             if not keys:
                 return {}
-            data, state = list(zip(keys, app.redis("mget", *keys))), {}
+            data, state = list(zip(keys, env.redis("mget", *keys))), {}
             for log, value in data:
                 inner_store, (*path, last_key) = state, log.split("/")[2:]
                 for key in path:
@@ -451,7 +451,7 @@ class Task(AbstractBase):
             self.schedule(mode="schedule" if self.is_active else "pause")
 
     def delete(self):
-        post(f"{app.scheduler_address}/delete_job/{self.id}")
+        post(f"{env.scheduler_address}/delete_job/{self.id}")
 
     @hybrid_property
     def status(self):
@@ -495,19 +495,19 @@ class Task(AbstractBase):
     @_catch_request_exceptions
     def next_run_time(self):
         return get(
-            f"{app.scheduler_address}/next_runtime/{self.id}", timeout=0.01
+            f"{env.scheduler_address}/next_runtime/{self.id}", timeout=0.01
         ).json()
 
     @property
     @_catch_request_exceptions
     def time_before_next_run(self):
-        return get(f"{app.scheduler_address}/time_left/{self.id}", timeout=0.01).json()
+        return get(f"{env.scheduler_address}/time_left/{self.id}", timeout=0.01).json()
 
     @_catch_request_exceptions
     def schedule(self, mode="schedule"):
         try:
             payload = {"mode": mode, "task": self.get_properties()}
-            result = post(f"{app.scheduler_address}/schedule", json=payload).json()
+            result = post(f"{env.scheduler_address}/schedule", json=payload).json()
             self.last_scheduled_by = current_user.name
         except ConnectionError:
             return {"alert": "Scheduler Unreachable: the task cannot be scheduled."}

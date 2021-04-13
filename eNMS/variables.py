@@ -30,6 +30,7 @@ class VariableStore:
         self._set_automation_variables()
         self._set_general_variables()
         self._set_configuration_variables()
+        self._set_custom_variables()
         self._set_run_variables()
         self._set_server_variables()
         self._set_version()
@@ -72,6 +73,19 @@ class VariableStore:
                         "visible": False,
                     },
                 )
+
+    def _set_custom_variables(self):
+        for model, values in self.properties["custom"].items():
+            for property, property_dict in values.items():
+                pretty_name = property_dict["pretty_name"]
+                self.property_names[property] = pretty_name
+                self.model_properties[model].append(property)
+                if property_dict.get("private"):
+                    if model not in self.private_properties:
+                        self.private_properties[model] = []
+                    self.private_properties[model].append(property)
+                if model == "device" and property_dict.get("configuration"):
+                    self.configuration_properties[property] = pretty_name
 
     def _set_general_variables(self):
         self.form_class = {}

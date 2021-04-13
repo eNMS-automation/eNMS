@@ -69,6 +69,7 @@ class Database:
         register(self.cleanup)
 
     def _initialize(self, app):
+        print(vs.private_properties)
         self.private_properties_set |= set(sum(vs.private_properties.values(), []))
         self.base.metadata.create_all(bind=self.engine)
         configure_mappers()

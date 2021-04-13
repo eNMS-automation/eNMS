@@ -34,7 +34,6 @@ class App:
         self.path = Path.cwd()
         self.custom = CustomApp(self)
         self.custom.pre_init()
-        self.load_custom_properties()
         self.init_rbac()
         self.init_encryption()
         self.use_vault = vs.settings["vault"]["use_vault"]
@@ -177,19 +176,6 @@ class App:
         if self.vault_client.sys.is_sealed() and vs.settings["vault"]["unseal_vault"]:
             keys = [getenv(f"UNSEAL_VAULT_KEY{index}") for index in range(1, 6)]
             self.vault_client.sys.submit_unseal_keys(filter(None, keys))
-
-    def load_custom_properties(self):
-        for model, values in vs.properties["custom"].items():
-            for property, property_dict in values.items():
-                pretty_name = property_dict["pretty_name"]
-                vs.property_names[property] = pretty_name
-                vs.model_properties[model].append(property)
-                if property_dict.get("private"):
-                    if model not in vs.private_properties:
-                        vs.private_properties[model] = []
-                    vs.private_properties[model].append(property)
-                if model == "device" and property_dict.get("configuration"):
-                    vs.configuration_properties[property] = pretty_name
 
     def log(self, severity, content, user=None, change_log=True, logger="root"):
         logger_settings = vs.logging["loggers"].get(logger, {})

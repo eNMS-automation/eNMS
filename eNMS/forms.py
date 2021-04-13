@@ -217,9 +217,6 @@ class FormFactory:
             spec.loader.exec_module(module_from_spec(spec))
 
 
-form_factory = FormFactory()
-
-
 class AddObjectsForm(BaseForm):
     form_type = HiddenField(default="add_objects_to_view")
     action = "eNMS.visualization.addObjectsToView"
@@ -1031,3 +1028,6 @@ class UserForm(RbacForm):
     )
     password = PasswordField("Password")
     is_admin = BooleanField(default=False)
+
+
+form_factory = FormFactory()

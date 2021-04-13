@@ -2,9 +2,11 @@ from ast import literal_eval
 from atexit import register
 from contextlib import contextmanager
 from flask_login import current_user
+from importlib.util import module_from_spec, spec_from_file_location
 from json import loads
-from logging import error
+from logging import error, info
 from os import getenv
+from pathlib import Path
 from re import search
 from sqlalchemy import (
     Boolean,
@@ -21,6 +23,7 @@ from sqlalchemy import (
     Text,
 )
 from sqlalchemy.dialects.mysql.base import MSMediumBlob
+from sqlalchemy.exc import InvalidRequestError
 from sqlalchemy.ext.associationproxy import ASSOCIATION_PROXY
 from sqlalchemy.ext.declarative import declarative_base, DeclarativeMeta
 from sqlalchemy.ext.mutable import MutableDict, MutableList
@@ -69,6 +72,7 @@ class Database:
         register(self.cleanup)
 
     def _initialize(self, env):
+        self.register_services()
         self.private_properties_set |= set(sum(vs.private_properties.values(), []))
         self.base.metadata.create_all(bind=self.engine)
         configure_mappers()
@@ -402,6 +406,24 @@ class Database:
                         raise exc
                     sleep(self.retry_commit_time * (index + 1))
         return instance
+
+    def register_services(self):
+        path_services = [vs.path / "eNMS" / "services"]
+        load_examples = vs.settings["app"].get("startup_migration") == "examples"
+        if vs.settings["paths"]["custom_services"]:
+            path_services.append(Path(vs.settings["paths"]["custom_services"]))
+        for path in path_services:
+            for file in path.glob("**/*.py"):
+                if "init" in str(file):
+                    continue
+                if not load_examples and "examples" in str(file):
+                    continue
+                info(f"Loading service: {file}")
+                spec = spec_from_file_location(file.stem, str(file))
+                try:
+                    spec.loader.exec_module(module_from_spec(spec))
+                except InvalidRequestError:
+                    error(f"Error loading service '{file}'\n{format_exc()}")
 
     @contextmanager
     def session_scope(self):

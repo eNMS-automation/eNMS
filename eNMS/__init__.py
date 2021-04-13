@@ -6,7 +6,6 @@ from eNMS.variables import vs
 
 
 def initialize():
-    env.register_services()
     first_init = db._initialize(env)
     if env.detect_cli():
         return

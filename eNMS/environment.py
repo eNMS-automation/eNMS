@@ -7,10 +7,9 @@ from email.mime.text import MIMEText
 from email.utils import formatdate
 from flask_login import current_user
 from importlib import import_module
-from importlib.util import module_from_spec, spec_from_file_location
 from json import load
 from logging.config import dictConfig
-from logging import getLogger, error, info
+from logging import getLogger, info
 from os import getenv
 from passlib.hash import argon2
 from pathlib import Path
@@ -20,7 +19,6 @@ from requests import Session as RequestSession
 from requests.adapters import HTTPAdapter
 from requests.packages.urllib3.util.retry import Retry
 from smtplib import SMTP
-from sqlalchemy.exc import InvalidRequestError
 from sys import path as sys_path
 from traceback import format_exc
 from warnings import warn
@@ -154,24 +152,6 @@ class Environment:
 
     def init_scheduler(self):
         self.scheduler_address = getenv("SCHEDULER_ADDR")
-
-    def register_services(self):
-        path_services = [self.path / "eNMS" / "services"]
-        load_examples = vs.settings["app"].get("startup_migration") == "examples"
-        if vs.settings["paths"]["custom_services"]:
-            path_services.append(Path(vs.settings["paths"]["custom_services"]))
-        for path in path_services:
-            for file in path.glob("**/*.py"):
-                if "init" in str(file):
-                    continue
-                if not load_examples and "examples" in str(file):
-                    continue
-                info(f"Loading service: {file}")
-                spec = spec_from_file_location(file.stem, str(file))
-                try:
-                    spec.loader.exec_module(module_from_spec(spec))
-                except InvalidRequestError:
-                    error(f"Error loading custom service '{file}' ({format_exc()})")
 
     def init_vault_client(self):
         url = getenv("VAULT_ADDR", "http://127.0.0.1:8200")

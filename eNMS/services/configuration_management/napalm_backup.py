@@ -46,10 +46,10 @@ class NapalmBackupService(ConnectionService):
             for getter in run.getters:
                 try:
                     output = vs.dict_to_string(getattr(napalm_connection, getter)())
-                    for r in self.replacements:
+                    for replacement in self.replacements:
                         output = sub(
-                            r["pattern"],
-                            r["replace_with"],
+                            replacement["pattern"],
+                            replacement["replace_with"],
                             output,
                             flags=M,
                         )

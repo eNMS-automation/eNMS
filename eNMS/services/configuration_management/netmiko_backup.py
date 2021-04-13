@@ -72,8 +72,10 @@ class NetmikoBackupService(ConnectionService):
                     command_result.append(line)
                 result.append("\n".join(command_result))
             result = "\n\n".join(result)
-            for r in self.replacements:
-                result = sub(r["pattern"], r["replace_with"], result, flags=M)
+            for replacement in self.replacements:
+                result = sub(
+                    replacement["pattern"], replacement["replace_with"], result, flags=M
+                )
             setattr(device, self.property, result)
             with open(path / self.property, "w") as file:
                 file.write(result)

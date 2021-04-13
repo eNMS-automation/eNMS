@@ -453,7 +453,8 @@ class Controller:
         }
 
     def get_exported_services(self):
-        return [f for f in listdir(vs.path / "files" / "services") if ".tgz" in f]
+        files = listdir(vs.path / "files" / "services")
+        return [file for file in files if ".tgz" in file]
 
     def get_git_content(self):
         repo = vs.settings["app"]["git_repository"]
@@ -1053,7 +1054,7 @@ class Controller:
         path = Path(
             vs.settings["paths"]["playbooks"] or vs.path / "files" / "playbooks"
         )
-        playbooks = [[str(f) for f in path.glob(e)] for e in ("*.yaml", "*.yml")]
+        playbooks = [[str(file) for file in path.glob(e)] for e in ("*.yaml", "*.yml")]
         return sorted(sum(playbooks, []))
 
     def scheduler_action(self, mode, **kwargs):

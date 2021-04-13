@@ -244,7 +244,7 @@ class ServiceRun:
     def make_results_json_compliant(self, results):
         def rec(value):
             if isinstance(value, dict):
-                return {k: rec(value[k]) for k in list(value)}
+                return {key: rec(value[key]) for key in list(value)}
             elif isinstance(value, list):
                 return list(map(rec, value))
             elif not isinstance(value, (int, str, bool, float, None.__class__)):
@@ -502,7 +502,9 @@ class ServiceRun:
                 results.update(
                     {
                         "result": targets_results,
-                        "success": all(r["success"] for r in targets_results.values()),
+                        "success": all(
+                            result["success"] for result in targets_results.values()
+                        ),
                     }
                 )
             else:
@@ -845,9 +847,9 @@ class ServiceRun:
             if isinstance(input, str):
                 return r.sub(replace, input)
             elif isinstance(input, list):
-                return [rec(x) for x in input]
+                return [rec(item) for item in input]
             elif isinstance(input, dict):
-                return {rec(k): rec(v) for k, v in input.items()}
+                return {rec(key): rec(value) for key, value in input.items()}
             else:
                 return input
 

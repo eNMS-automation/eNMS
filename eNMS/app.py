@@ -176,7 +176,7 @@ class App:
         url = getenv("VAULT_ADDR", "http://127.0.0.1:8200")
         self.vault_client = VaultClient(url=url, token=getenv("VAULT_TOKEN"))
         if self.vault_client.sys.is_sealed() and vs.settings["vault"]["unseal_vault"]:
-            keys = [getenv(f"UNSEAL_VAULT_KEY{i}") for i in range(1, 6)]
+            keys = [getenv(f"UNSEAL_VAULT_KEY{index}") for index in range(1, 6)]
             self.vault_client.sys.submit_unseal_keys(filter(None, keys))
 
     def load_custom_properties(self):

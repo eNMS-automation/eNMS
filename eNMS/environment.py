@@ -53,9 +53,6 @@ class Environment:
         self.init_connection_pools()
         self.custom.post_init()
 
-    def _initialize(self):
-        self.init_services()
-
     def authenticate_user(self, **kwargs):
         name, password = kwargs["username"], kwargs["password"]
         if not name or not password:
@@ -158,7 +155,7 @@ class Environment:
     def init_scheduler(self):
         self.scheduler_address = getenv("SCHEDULER_ADDR")
 
-    def init_services(self):
+    def register_services(self):
         path_services = [self.path / "eNMS" / "services"]
         load_examples = vs.settings["app"].get("startup_migration") == "examples"
         if vs.settings["paths"]["custom_services"]:

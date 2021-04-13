@@ -6,13 +6,13 @@ from eNMS.variables import vs
 
 
 def initialize():
-    env._initialize()
+    env.register_services()
     first_init = db._initialize(env)
     if env.detect_cli():
         return
     form_factory._initialize()
     controller._initialize(first_init)
-    vs._initialize()
+    vs.set_template_context()
 
 
 initialize()

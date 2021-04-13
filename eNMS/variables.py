@@ -30,9 +30,6 @@ class VariableStore:
         self._set_version()
         self._set_plugins_settings()
 
-    def _initialize(self):
-        self._set_template_context()
-
     def _set_automation_variables(self):
         self.ssh_sessions = {}
         self.netmiko_drivers = sorted((driver, driver) for driver in CLASS_MAPPER)
@@ -123,7 +120,7 @@ class VariableStore:
             with open(setup_file, "r") as file:
                 setattr(self, setup_file.stem, load(file))
 
-    def _set_template_context(self):
+    def set_template_context(self):
         self.template_context = {
             "configuration_properties": self.configuration_properties,
             "form_properties": self.form_properties,

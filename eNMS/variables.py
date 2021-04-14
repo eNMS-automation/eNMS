@@ -171,12 +171,12 @@ class VariableStore:
         if isinstance(input, list):
             result = "\n"
             for element in input:
-                result += f"{tab}- {self.str_dict(element, depth + 1)}\n"
+                result += f"{tab}- {self.dict_to_string(element, depth + 1)}\n"
             return result
         elif isinstance(input, dict):
             result = ""
             for key, value in input.items():
-                result += f"\n{tab}{key}: {self.str_dict(value, depth + 1)}"
+                result += f"\n{tab}{key}: {self.dict_to_string(value, depth + 1)}"
             return result
         else:
             return str(input)

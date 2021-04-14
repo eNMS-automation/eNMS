@@ -61,7 +61,7 @@ class Server(Flask):
         for plugin, settings in vs.plugins_settings.items():
             try:
                 module = import_module(f"eNMS.plugins.{plugin}")
-                module.Plugin(self, controller, db, **settings)
+                module.Plugin(self, controller, db, vs, env, **settings)
             except Exception:
                 env.log("error", f"Could not import plugin '{plugin}':\n{format_exc()}")
                 continue

@@ -214,13 +214,13 @@ class Environment:
             attached_file = MIMEApplication(file_content, Name=filename)
             attached_file["Content-Disposition"] = f'attachment; filename="{filename}"'
             message.attach(attached_file)
-        server = SMTP(self.settings["mail"]["server"], self.settings["mail"]["port"])
-        if self.settings["mail"]["use_tls"]:
-            server.starttls()
-            password = getenv("MAIL_PASSWORD", "")
-            server.login(self.settings["mail"]["username"], password)
-        server.sendmail(sender, recipients.split(","), message.as_string())
-        server.close()
+        smtp_args = (self.settings["mail"]["server"], self.settings["mail"]["port"])
+        with SMTP(*smtp_args) as server:
+            if self.settings["mail"]["use_tls"]:
+                server.starttls()
+                password = getenv("MAIL_PASSWORD", "")
+                server.login(self.settings["mail"]["username"], password)
+            server.sendmail(sender, recipients.split(","), message.as_string())
 
 
 env = Environment()

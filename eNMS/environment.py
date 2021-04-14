@@ -202,24 +202,24 @@ class Environment:
         filename=None,
         file_content=None,
     ):
-        sender = sender or self.settings["mail"]["sender"]
+        sender = sender or vs.settings["mail"]["sender"]
         message = MIMEMultipart()
         message["From"] = sender
         message["To"] = recipients
         message["Date"] = formatdate(localtime=True)
         message["Subject"] = subject
-        message.add_header("reply-to", reply_to or self.settings["mail"]["reply_to"])
+        message.add_header("reply-to", reply_to or vs.settings["mail"]["reply_to"])
         message.attach(MIMEText(content))
         if filename:
             attached_file = MIMEApplication(file_content, Name=filename)
             attached_file["Content-Disposition"] = f'attachment; filename="{filename}"'
             message.attach(attached_file)
-        smtp_args = (self.settings["mail"]["server"], self.settings["mail"]["port"])
+        smtp_args = (vs.settings["mail"]["server"], vs.settings["mail"]["port"])
         with SMTP(*smtp_args) as server:
-            if self.settings["mail"]["use_tls"]:
+            if vs.settings["mail"]["use_tls"]:
                 server.starttls()
                 password = getenv("MAIL_PASSWORD", "")
-                server.login(self.settings["mail"]["username"], password)
+                server.login(vs.settings["mail"]["username"], password)
             server.sendmail(sender, recipients.split(","), message.as_string())
 
 

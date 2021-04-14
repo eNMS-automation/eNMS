@@ -23,13 +23,19 @@ class VariableStore:
         self._set_setup_variables()
         self._set_automation_variables()
         self._set_general_variables()
-        self._set_configuration_variables()
         self._set_custom_variables()
+        self._set_configuration_variables()
         self._set_run_variables()
         self._set_server_variables()
         self._set_version()
         self._set_plugins_settings()
         self._update_rbac_variables()
+
+    def _set_setup_variables(self):
+        self.path = Path.cwd()
+        for setup_file in (self.path / "setup").iterdir():
+            with open(setup_file, "r") as file:
+                setattr(self, setup_file.stem, load(file))
 
     def _set_automation_variables(self):
         self.ssh_sessions = {}
@@ -38,10 +44,35 @@ class VariableStore:
             (driver, driver) for driver in SUPPORTED_DRIVERS[1:]
         )
         self.scrapli_drivers = CORE_PLATFORM_MAP
-
-    def _set_configuration_variables(self):
         self.timestamps = ("status", "update", "failure", "runtime", "duration")
         self.configuration_properties = {"configuration": "Configuration"}
+
+    def _set_general_variables(self):
+        self.form_class = {}
+        self.form_properties = defaultdict(dict)
+        self.models = {}
+        self.model_properties = defaultdict(lambda: {"type": "str"})
+        self.private_properties = self.database["private_properties"]
+        self.private_properties_set = set(sum(self.private_properties.values(), []))
+        self.property_names = {}
+        self.relationships = defaultdict(dict)
+
+    def _set_custom_variables(self):
+        for model, values in self.properties["custom"].items():
+            for property, property_dict in values.items():
+                pretty_name = property_dict["pretty_name"]
+                self.property_names[property] = pretty_name
+                self.model_properties[model][property] = property_dict.get(
+                    "type", "str"
+                )
+                if property_dict.get("private"):
+                    if model not in self.private_properties:
+                        self.private_properties[model] = []
+                    self.private_properties[model].append(property)
+                if model == "device" and property_dict.get("configuration"):
+                    self.configuration_properties[property] = pretty_name
+
+    def _set_configuration_variables(self):
         for property, title in self.configuration_properties.items():
             self.properties["filtering"]["device"].append(property)
             self.properties["tables"]["configuration"].insert(
@@ -76,31 +107,6 @@ class VariableStore:
                     if subpage_values["rbac"] == "access":
                         self.rbac["pages"].append(subpage)
 
-    def _set_custom_variables(self):
-        for model, values in self.properties["custom"].items():
-            for property, property_dict in values.items():
-                pretty_name = property_dict["pretty_name"]
-                self.property_names[property] = pretty_name
-                self.model_properties[model][property] = property_dict.get(
-                    "type", "str"
-                )
-                if property_dict.get("private"):
-                    if model not in self.private_properties:
-                        self.private_properties[model] = []
-                    self.private_properties[model].append(property)
-                if model == "device" and property_dict.get("configuration"):
-                    self.configuration_properties[property] = pretty_name
-
-    def _set_general_variables(self):
-        self.form_class = {}
-        self.form_properties = defaultdict(dict)
-        self.models = {}
-        self.model_properties = defaultdict(lambda: {"type": "str"})
-        self.private_properties = self.database["private_properties"]
-        self.private_properties_set = set(sum(self.private_properties.values(), []))
-        self.property_names = {}
-        self.relationships = defaultdict(dict)
-
     def _set_run_variables(self):
         self.run_targets = {}
         self.run_states = defaultdict(dict)
@@ -126,12 +132,6 @@ class VariableStore:
             404: "Invalid POST request.",
             500: "Internal Server Error.",
         }
-
-    def _set_setup_variables(self):
-        self.path = Path.cwd()
-        for setup_file in (self.path / "setup").iterdir():
-            with open(setup_file, "r") as file:
-                setattr(self, setup_file.stem, load(file))
 
     def set_template_context(self):
         self.template_context = {

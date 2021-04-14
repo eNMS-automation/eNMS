@@ -3,29 +3,29 @@
     "device": {
       "property1": {
         "pretty_name": "Property 1",
-        "type": "string",
+        "type": "str",
         "default": "10.145.14.1",
         "is_address": true
       },
       "property2": {
         "pretty_name": "Property 2",
         "default": "CP",
-        "type": "string"
+        "type": "str"
       },
       "reachable": {
         "pretty_name": "Is Reachable",
         "default": true,
-        "type": "boolean"
+        "type": "bool"
       },
       "down": {
         "pretty_name": "Is Down",
         "default": false,
-        "type": "boolean"
+        "type": "bool"
       },
       "property3": {
         "pretty_name": "Private property",
         "default": "password",
-        "type": "string",
+        "type": "str",
         "private": true
       },
       "operational_data": {
@@ -74,14 +74,14 @@
     "link": {
       "custom_property": {
         "pretty_name": "Custom Property",
-        "type": "string",
+        "type": "str",
         "default": "CP"
       }
     },
     "pool": {
       "property1": {
         "pretty_name": "Custom Property",
-        "type": "string",
+        "type": "str",
         "default": "CP"
       }
     },
@@ -92,12 +92,12 @@
       },
       "reserved": {
         "pretty_name": "Reserved",
-        "type": "boolean",
+        "type": "bool",
         "default": false
       },
       "impacting": {
         "pretty_name": "Impacting",
-        "type": "boolean",
+        "type": "bool",
         "default": true,
         "help": "custom/impacting"
       },
@@ -110,7 +110,7 @@
     "workflow": {
       "workflow_category": {
         "pretty_name": "Workflow Category",
-        "type": "string",
+        "type": "str",
         "default": "Example workflow(s)"
       }
     }

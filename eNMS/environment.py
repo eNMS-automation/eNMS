@@ -36,7 +36,6 @@ class Environment:
     def __init__(self):
         self.path = Path.cwd()
         self.scheduler_address = getenv("SCHEDULER_ADDR")
-        self.init_rbac()
         self.init_encryption()
         self.use_vault = vs.settings["vault"]["use_vault"]
         if self.use_vault:
@@ -120,16 +119,6 @@ class Environment:
             info(f"Changing {logger} log level to '{log_level}'")
             log_level = getattr(import_module("logging"), log_level.upper())
             getLogger(logger).setLevel(log_level)
-
-    def init_rbac(self):
-        self.rbac = {"pages": [], **vs.rbac}
-        for _, category in vs.rbac["menu"].items():
-            for page, page_values in category["pages"].items():
-                if page_values["rbac"] == "access":
-                    self.rbac["pages"].append(page)
-                for subpage, subpage_values in page_values.get("subpages", {}).items():
-                    if subpage_values["rbac"] == "access":
-                        self.rbac["pages"].append(subpage)
 
     def init_redis(self):
         host = getenv("REDIS_ADDR")

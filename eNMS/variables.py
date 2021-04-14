@@ -29,6 +29,7 @@ class VariableStore:
         self._set_server_variables()
         self._set_version()
         self._set_plugins_settings()
+        self._update_rbac_variables()
 
     def _set_automation_variables(self):
         self.ssh_sessions = {}
@@ -64,6 +65,16 @@ class VariableStore:
                         "visible": False,
                     },
                 )
+
+    def _update_rbac_variables(self):
+        self.rbac = {"pages": [], **self.rbac}
+        for _, category in self.rbac["menu"].items():
+            for page, page_values in category["pages"].items():
+                if page_values["rbac"] == "access":
+                    self.rbac["pages"].append(page)
+                for subpage, subpage_values in page_values.get("subpages", {}).items():
+                    if subpage_values["rbac"] == "access":
+                        self.rbac["pages"].append(subpage)
 
     def _set_custom_variables(self):
         for model, values in self.properties["custom"].items():

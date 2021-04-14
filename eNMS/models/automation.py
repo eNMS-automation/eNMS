@@ -442,7 +442,11 @@ class Task(AbstractBase):
     service_id = db.Column(Integer, ForeignKey("service.id"))
     service = relationship("Service", back_populates="tasks")
     service_name = association_proxy("service", "name")
-    model_properties = {"next_run_time": "str", "time_before_next_run": "str", "status": "str",}
+    model_properties = {
+        "next_run_time": "str",
+        "time_before_next_run": "str",
+        "status": "str",
+    }
 
     def update(self, **kwargs):
         super().update(**kwargs)

@@ -81,7 +81,9 @@ class VariableStore:
             for property, property_dict in values.items():
                 pretty_name = property_dict["pretty_name"]
                 self.property_names[property] = pretty_name
-                self.model_properties[model][property] = property_dict.get("type", "str")
+                self.model_properties[model][property] = property_dict.get(
+                    "type", "str"
+                )
                 if property_dict.get("private"):
                     if model not in self.private_properties:
                         self.private_properties[model] = []

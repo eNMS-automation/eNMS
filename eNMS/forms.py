@@ -84,9 +84,6 @@ class MetaForm(FormMeta):
             ):
                 vs.private_properties_set.add(field_name)
         vs.form_properties[form_type].update(properties)
-        for property, value in properties.items():
-            if property not in vs.property_types and value["type"] != "field-list":
-                vs.property_types[property] = value["type"]
         for base in form.__bases__:
             if not hasattr(base, "form_type"):
                 continue

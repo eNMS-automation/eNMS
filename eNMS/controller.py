@@ -1139,7 +1139,8 @@ class Controller:
                 for index, property in enumerate(properties):
                     if not property:
                         continue
-                    func = db.field_conversion[vs.property_types.get(property, "str")]
+                    property_type = vs.model_properties[obj_type].get(property, "str")
+                    func = db.field_conversion[property_type]
                     values[property] = func(sheet.row_values(row_index)[index])
                 try:
                     db.factory(obj_type, **values).serialized

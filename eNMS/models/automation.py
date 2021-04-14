@@ -308,7 +308,7 @@ class Run(AbstractBase):
     task = relationship("Task", foreign_keys="Run.task_id")
     state = db.Column(db.Dict, info={"log_change": False})
     results = relationship("Result", back_populates="run", cascade="all, delete-orphan")
-    model_properties = ["progress", "service_properties"]
+    model_properties = {"progress": "str", "service_properties": "dict"}
 
     def __init__(self, **kwargs):
         self.runtime = kwargs.get("runtime") or vs.get_time()
@@ -442,7 +442,7 @@ class Task(AbstractBase):
     service_id = db.Column(Integer, ForeignKey("service.id"))
     service = relationship("Service", back_populates="tasks")
     service_name = association_proxy("service", "name")
-    model_properties = ["next_run_time", "time_before_next_run", "status"]
+    model_properties = {"next_run_time": "str", "time_before_next_run": "str", "status": "str",}
 
     def update(self, **kwargs):
         super().update(**kwargs)

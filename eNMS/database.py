@@ -162,33 +162,30 @@ class Database:
             for col in inspect(model).columns:
                 if not col.info.get("model_properties", True):
                     continue
-                vs.model_properties[name].append(col.key)
                 if col.type == PickleType and isinstance(col.default.arg, list):
-                    vs.property_types[col.key] = "list"
+                    property_type = "list"
                 else:
-                    column_type = {
+                    property_type = {
                         Boolean: "bool",
                         Integer: "int",
                         Float: "float",
                         JSON: "dict",
                         PickleType: "dict",
                     }.get(type(col.type), "str")
-                    if col.key not in vs.property_types:
-                        vs.property_types[col.key] = column_type
+                vs.model_properties[name][col.key] = property_type
             for descriptor in inspect(model).all_orm_descriptors:
                 if descriptor.extension_type is ASSOCIATION_PROXY:
                     property = (
                         descriptor.info.get("name")
                         or f"{descriptor.target_collection}_{descriptor.value_attr}"
                     )
-                    vs.model_properties[name].append(property)
+                    vs.model_properties[name][property] = "str"
             if hasattr(model, "parent_type"):
-                vs.model_properties[name].extend(vs.model_properties[model.parent_type])
+                vs.model_properties[name].update(vs.model_properties[model.parent_type])
             if "service" in name and name != "service":
-                vs.model_properties[name].extend(vs.model_properties["service"])
+                vs.model_properties[name].update(vs.model_properties["service"])
             vs.models.update({name: model, name.lower(): model})
-            vs.model_properties[name].extend(model.model_properties)
-            vs.model_properties[name] = list(set(vs.model_properties[name]))
+            vs.model_properties[name].update(model.model_properties)
             for relation in mapper.relationships:
                 if getattr(relation.mapper.class_, "private", False):
                     continue

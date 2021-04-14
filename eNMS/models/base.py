@@ -9,7 +9,7 @@ class AbstractBase(db.base):
 
     __abstract__ = True
     pool_model = False
-    model_properties = []
+    model_properties = {}
 
     def __init__(self, **kwargs):
         self.update(**kwargs)
@@ -65,7 +65,7 @@ class AbstractBase(db.base):
         for property, value in kwargs.items():
             if not hasattr(self, property):
                 continue
-            property_type = vs.property_types.get(property, None)
+            property_type = vs.model_properties[self.__tablename__].get(property, None)
             if property in relation:
                 if relation[property]["list"]:
                     value = db.objectify(relation[property]["model"], value)
@@ -99,7 +99,7 @@ class AbstractBase(db.base):
                 continue
             if property in db.dont_serialize.get(self.type, []):
                 continue
-            if export and property in getattr(self, "model_properties", []):
+            if export and property in getattr(self, "model_properties", {}):
                 continue
             if include and property not in include or exclude and property in exclude:
                 continue

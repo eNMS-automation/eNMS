@@ -70,7 +70,7 @@ class VariableStore:
             for property, property_dict in values.items():
                 pretty_name = property_dict["pretty_name"]
                 self.property_names[property] = pretty_name
-                self.model_properties[model].append(property)
+                self.model_properties[model][property] = property_dict.get("type", "str")
                 if property_dict.get("private"):
                     if model not in self.private_properties:
                         self.private_properties[model] = []
@@ -82,11 +82,10 @@ class VariableStore:
         self.form_class = {}
         self.form_properties = defaultdict(dict)
         self.models = {}
-        self.model_properties = defaultdict(lambda: ["type"])
+        self.model_properties = defaultdict(lambda: {"type": "str"})
         self.private_properties = self.database["private_properties"]
         self.private_properties_set = set(sum(self.private_properties.values(), []))
         self.property_names = {}
-        self.property_types = {}
         self.relationships = defaultdict(dict)
 
     def _set_run_variables(self):

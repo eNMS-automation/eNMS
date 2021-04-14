@@ -448,7 +448,7 @@ class Controller:
     def get_device_network_data(self, device_id):
         device = db.fetch("device", id=device_id)
         return {
-            property: env.custom.parse_configuration_property(device, property)
+            property: vs.custom.parse_configuration_property(device, property)
             for property in vs.configuration_properties
         }
 
@@ -491,7 +491,7 @@ class Controller:
                 file = commit.tree / device_name / property
                 with BytesIO(file.data_stream.read()) as f:
                     value = f.read().decode("utf-8")
-                result[property] = env.custom.parse_configuration_property(
+                result[property] = vs.custom.parse_configuration_property(
                     device, property, value
                 )
             except KeyError:

@@ -445,15 +445,15 @@ class Database:
                 }
             column = self.Column(
                 {
-                    "boolean": Boolean,
+                    "bool": Boolean,
                     "dict": self.Dict,
                     "float": Float,
                     "integer": Integer,
                     "json": JSON,
-                    "string": self.LargeString,
+                    "str": self.LargeString,
                     "select": self.SmallString,
                     "multiselect": self.List,
-                }[values.get("type", "string")],
+                }[values.get("type", "str")],
                 **kwargs,
             )
             if not values.get("serialize", True):

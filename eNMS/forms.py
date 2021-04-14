@@ -50,14 +50,14 @@ class MetaForm(FormMeta):
                 field = PasswordField
             else:
                 field = {
-                    "boolean": BooleanField,
+                    "bool": BooleanField,
                     "dict": DictField,
                     "integer": IntegerField,
                     "json": JsonField,
-                    "string": StringField,
+                    "str": StringField,
                     "select": SelectField,
                     "multiselect": SelectMultipleField,
-                }[values.get("type", "string")]
+                }[values.get("type", "str")]
             form_kw = {"default": values["default"]} if "default" in values else {}
             if field in (SelectField, SelectMultipleField):
                 form_kw["choices"] = values["choices"]

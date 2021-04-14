@@ -50,6 +50,9 @@ onbeforeunload callback so that the saving of a session does not depend on user 
 - Refactoring of the forms: all forms are now in eNMS.forms.py. Impact on form import:
 eNMS.forms.automation -> eNMS.forms
 - Refactoring of the setup file: replace "from eNMS.setup" with "from eNMS.variables"
+- Change model_properties in model from list of properties to dict of property with associated type
+- Custom properties defined in properties.json: change type from "boolean" to "bool" and "string" to "str"
+for consistency with rest of codebase
 
 - Separate controller (handling HTTP POST requests) from main application (gluing everything together)
 Impact:
@@ -67,6 +70,10 @@ def job(self, run, payload, device): -> def job(self, run, device):
 - "export_topology" endpoint should be renamed "topology_export" in migration files
 - Replace all "from eNMS.forms.automation" with "from eNMS.forms"
 - Rename "run_db" to "run_states"
+- Plugin: add env and vs argument
+- Change model_properties in model from list of properties to dict of property with associated type
+- Custom properties defined in properties.json: change type from "boolean" to "bool" and "string" to "str"
+for consistency with rest of codebase
 
 To be tested:
 - Refactoring of the run mechanism:

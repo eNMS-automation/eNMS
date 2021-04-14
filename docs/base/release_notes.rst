@@ -73,7 +73,9 @@ def job(self, run, payload, device): -> def job(self, run, device):
 - Plugin: add env and vs argument
 - Change model_properties in model from list of properties to dict of property with associated type
 - Custom properties defined in properties.json: change type from "boolean" to "bool" and "string" to "str"
-for consistency with rest of codebase
+for consistency with rest of codebase. In properties.json:
+* change "type": "boolean" to "type": "bool"
+* change "type": "string" to "type": "str"
 
 To be tested:
 - Refactoring of the run mechanism:

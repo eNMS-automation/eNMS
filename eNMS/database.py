@@ -162,15 +162,15 @@ class Database:
             for col in inspect(model).columns:
                 if not col.info.get("model_properties", True):
                     continue
-                if col.type == PickleType and isinstance(col.default.arg, list):
-                    property_type = "list"
+                if col.type == PickleType:
+                    is_list = isinstance(col.default.arg, list)
+                    property_type = "list" if is_list else "dict"
                 else:
                     property_type = {
                         Boolean: "bool",
                         Integer: "int",
                         Float: "float",
                         JSON: "dict",
-                        PickleType: "dict",
                     }.get(type(col.type), "str")
                 vs.model_properties[name][col.key] = property_type
             for descriptor in inspect(model).all_orm_descriptors:

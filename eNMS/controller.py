@@ -360,7 +360,6 @@ class Controller:
 
     def filtering_relationship_constraints(self, query, model, **kwargs):
         table = vs.models[model]
-        print(kwargs)
         constraint_dict = {**kwargs.get("form", {}), **kwargs.get("constraints", {})}
         for related_model, relation_properties in vs.relationships[model].items():
             related_table = aliased(vs.models[relation_properties["model"]])

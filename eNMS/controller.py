@@ -372,13 +372,20 @@ class Controller:
                 ]
                 if not relation_ids:
                     continue
-                query = (
-                    query.join(related_table, getattr(table, related_model))
-                    .filter(related_table.id.in_(relation_ids))
-                    .group_by(table.id)
-                )
+                if match == "union":
+                    query = (
+                        query.join(related_table, getattr(table, related_model))
+                        .filter(related_table.id.in_(relation_ids))
+                        .group_by(table.id)
+                    )
+                else:
+                    for id in relation_ids:
+                        new_table = aliased(vs.models[relation_properties["model"]])
+                        query = query.join(
+                            new_table, getattr(table, related_model)
+                        ).filter(new_table.id == id)
         if constraint_dict.get("intersect"):
-            intersect_model = (constraint_dict["intersect"]["type"],)
+            intersect_model = constraint_dict["intersect"]["type"]
             intersect_table = aliased(vs.models[intersect_model])
             query = query.join(
                 intersect_table, getattr(table, f"{intersect_model}s")

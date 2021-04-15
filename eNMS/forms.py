@@ -158,7 +158,11 @@ class FormFactory:
                     **relations,
                     **{
                         f"{relation}_filter": SelectField(
-                            choices=(("union", "Union"), ("empty", "Empty"))
+                            choices=(
+                                ("union", "Union"),
+                                ("intersection", "Intersection"),
+                                ("empty", "Empty"),
+                            )
                         )
                         for relation in relations
                     },

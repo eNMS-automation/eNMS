@@ -360,6 +360,7 @@ class Controller:
 
     def filtering_relationship_constraints(self, query, model, **kwargs):
         table = vs.models[model]
+        print(kwargs)
         constraint_dict = {**kwargs.get("form", {}), **kwargs.get("constraints", {})}
         for related_model, relation_properties in vs.relationships[model].items():
             related_table = aliased(vs.models[relation_properties["model"]])
@@ -377,6 +378,12 @@ class Controller:
                     .filter(related_table.id.in_(relation_ids))
                     .group_by(table.id)
                 )
+        if constraint_dict.get("intersect"):
+            intersect_model = (constraint_dict["intersect"]["type"],)
+            intersect_table = aliased(vs.models[intersect_model])
+            query = query.join(
+                intersect_table, getattr(table, f"{intersect_model}s")
+            ).filter(intersect_table.id == constraint_dict["intersect"]["id"])
         return query
 
     def filtering(self, model, bulk=False, rbac="read", username=None, **kwargs):

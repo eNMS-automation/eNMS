@@ -15,7 +15,8 @@ class ScrapliNetconfService(ConnectionService):
     parent_type = "connection_service"
     id = db.Column(Integer, ForeignKey("connection_service.id"), primary_key=True)
     command = db.Column(db.SmallString)
-    content = db.Column(db.LargeString)
+    filter_ = db.Column(db.LargeString)
+    commit = db.Column(Boolean, default=False)
 
     __mapper_args__ = {"polymorphic_identity": "scrapli_netconf_service"}
 
@@ -31,22 +32,28 @@ class ScrapliNetconfForm(ConnectionForm):
     command = SelectField(
         choices=(
             ("get", "Get"),
-            ("get_config", "Get Config"),
-            ("edit_config", "Edit Config"),
-            ("delete_config", "Delete Config"),
+            ("rpc", "RPC"),
+            ("get_config", "Get Configuration"),
+            ("edit_config", "Edit Configuration"),
+            ("delete_config", "Delete Configuration"),
+            ("commit", "Commit Configuration"),
+            ("discard", "Discard Configuration"),
+            ("lock", "Lock"),
+            ("unlock", "Unlock"),
         )
     )
-    source_configuration = SelectField(
+    target = SelectField(
         choices=(
             ("running", "Running Configuration"),
             ("startup", "Startup Configuration"),
             ("candidate", "Candidate Configuration"),
         )
     )
-    content = StringField(substitution=True, widget=TextArea(), render_kw={"rows": 5})
+    filter_ = StringField(substitution=True, widget=TextArea(), render_kw={"rows": 5})
+    commit = BooleanField("Commit Configuration")
     groups = {
         "Main Parameters": {
-            "commands": ["command", "content"],
+            "commands": ["command", "target", "filter"],
             "default": "expanded",
         },
         **ConnectionForm.groups,

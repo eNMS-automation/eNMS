@@ -934,7 +934,7 @@ class ServiceRun:
             logger="security",
         )
         credentials = self.get_credentials(device)
-        is_netconf = run.service.type == scrapli_netconf_service
+        is_netconf = run.service.type == "scrapli_netconf_service"
         Connection, kwargs = NetconfDriver if is_netconf else Scrapli, {}
         if is_netconf:
             kwargs["strip_namespaces"] = self.strip_namespaces

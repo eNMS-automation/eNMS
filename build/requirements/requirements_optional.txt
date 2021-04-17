@@ -1,7 +1,6 @@
 ansible
 hvac
 ldap3
-pyats
 pynetbox
 scrapli
 slackclient>=1.3,<2

@@ -18,6 +18,7 @@ class ScrapliNetconfService(ConnectionService):
     target = db.Column(db.SmallString)
     content = db.Column(db.LargeString)
     commit = db.Column(Boolean, default=False)
+    strip_namespaces = db.Column(Boolean, default=False)
 
     __mapper_args__ = {"polymorphic_identity": "scrapli_netconf_service"}
 
@@ -61,9 +62,10 @@ class ScrapliNetconfForm(ConnectionForm):
     )
     content = StringField(substitution=True, widget=TextArea(), render_kw={"rows": 5})
     commit = BooleanField("Commit After Editing Configuration")
+    strip_namespaces = BooleanField("Strip Namespaces from returned XML")
     groups = {
         "Main Parameters": {
-            "commands": ["command", "target", "filter_", "commit"],
+            "commands": ["command", "target", "filter_", "commit", "strip_namespaces"],
             "default": "expanded",
         },
         **ConnectionForm.groups,

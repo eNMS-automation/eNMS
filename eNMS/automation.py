@@ -24,6 +24,7 @@ from xml.parsers.expat import ExpatError
 
 try:
     from scrapli import Scrapli
+    from scrapli_netconf.driver import NetconfDriver
 except ImportError as exc:
     warn(f"Couldn't import scrapli module ({exc})")
 
@@ -933,14 +934,20 @@ class ServiceRun:
             logger="security",
         )
         credentials = self.get_credentials(device)
-        connection = Scrapli(
-            transport=self.transport,
-            platform=device.scrapli_driver if self.use_device_driver else self.driver,
+        is_netconf = run.service.type == scrapli_netconf_service
+        Connection, kwargs = NetconfDriver if is_netconf else Scrapli, {}
+        if is_netconf:
+            kwargs["strip_namespaces"] = self.strip_namespaces
+        else:
+            platform = device.scrapli_driver if self.use_device_driver else self.driver
+            kwargs.update({"transport": self.transport, "platform": platform})
+        connection = Connection(
             host=device.ip_address,
             auth_username=credentials["username"],
             auth_password=credentials["password"],
             auth_private_key=False,
             auth_strict_key=False,
+            **kwargs
         )
         connection.open()
         vs.connections_cache["scrapli"][self.parent_runtime][device.name] = connection

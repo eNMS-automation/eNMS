@@ -16,16 +16,24 @@ class ScrapliNetconfService(ConnectionService):
     id = db.Column(Integer, ForeignKey("connection_service.id"), primary_key=True)
     command = db.Column(db.SmallString)
     target = db.Column(db.SmallString)
-    filter_ = db.Column(db.LargeString)
+    content = db.Column(db.LargeString)
     commit = db.Column(Boolean, default=False)
 
     __mapper_args__ = {"polymorphic_identity": "scrapli_netconf_service"}
 
     def job(self, run, device):
-        filter_ = run.sub(run.filter_, locals()).splitlines()
+        content, kwargs = run.sub(run.content, locals()).splitlines(), {}
         if "lock" in run.command or "config" in run.command:
-            kwargs = {"target": run.target}
+            parameter = "source" if run.command == "get_config" else "target"
+            kwargs[parameter] = run.target
+        if run.command in ("edit_config", "get", "rpc"):
+            parameter = "config" if run.command == "edit_config" else "filter_"
+            kwargs[parameter] = run.content
+        if run.command == "get":
+            kwargs["filter_type"] = "subtree"
         response = getattr(run.scrapli_connection(device), run.command)(**kwargs)
+        if run.commit:
+            run.scrapli_connection.commit()
         return {"filter_": filter, "kwargs": kwargs, "result": response.result}
 
 
@@ -51,7 +59,7 @@ class ScrapliNetconfForm(ConnectionForm):
             ("candidate", "Candidate Configuration"),
         )
     )
-    filter_ = StringField(substitution=True, widget=TextArea(), render_kw={"rows": 5})
+    content = StringField(substitution=True, widget=TextArea(), render_kw={"rows": 5})
     commit = BooleanField("Commit After Editing Configuration")
     groups = {
         "Main Parameters": {

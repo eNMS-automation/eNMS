@@ -8,19 +8,16 @@ from eNMS.models.automation import ConnectionService
 from eNMS.variables import vs
 
 
-class ScrapliService(ConnectionService):
+class ScrapliNetconfService(ConnectionService):
 
-    __tablename__ = "scrapli_service"
-    pretty_name = "Scrapli Commands"
+    __tablename__ = "scrapli_netconf_service"
+    pretty_name = "Scrapli Netconf"
     parent_type = "connection_service"
     id = db.Column(Integer, ForeignKey("connection_service.id"), primary_key=True)
-    commands = db.Column(db.LargeString)
-    is_configuration = db.Column(Boolean, default=False)
-    driver = db.Column(db.SmallString)
-    transport = db.Column(db.SmallString, default="system")
-    use_device_driver = db.Column(Boolean, default=True)
+    command = db.Column(db.SmallString)
+    content = db.Column(db.LargeString)
 
-    __mapper_args__ = {"polymorphic_identity": "scrapli_service"}
+    __mapper_args__ = {"polymorphic_identity": "scrapli_netconf_service"}
 
     def job(self, run, device):
         commands = run.sub(run.commands, locals()).splitlines()
@@ -29,21 +26,15 @@ class ScrapliService(ConnectionService):
         return {"commands": commands, "result": result}
 
 
-class ScrapliForm(ConnectionForm):
-    form_type = HiddenField(default="scrapli_service")
-    commands = StringField(substitution=True, widget=TextArea(), render_kw={"rows": 5})
-    is_configuration = BooleanField()
-    driver = SelectField(choices=vs.dualize(vs.scrapli_drivers))
-    transport = SelectField(choices=vs.dualize(("system", "paramiko", "ssh2")))
-    use_device_driver = BooleanField(default=True)
+class ScrapliNetconfForm(ConnectionForm):
+    form_type = HiddenField(default="scrapli_netconf_service")
+    command = StringField(substitution=True)
+    content = StringField(substitution=True, widget=TextArea(), render_kw={"rows": 5})
     groups = {
         "Main Parameters": {
             "commands": [
-                "commands",
-                "is_configuration",
-                "driver",
-                "transport",
-                "use_device_driver",
+                "command",
+                "content"
             ],
             "default": "expanded",
         },

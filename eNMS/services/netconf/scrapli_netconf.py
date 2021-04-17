@@ -28,14 +28,25 @@ class ScrapliNetconfService(ConnectionService):
 
 class ScrapliNetconfForm(ConnectionForm):
     form_type = HiddenField(default="scrapli_netconf_service")
-    command = StringField(substitution=True)
+    command = SelectField(
+        choices=(
+            ("get", "Get"),
+            ("get_config", "Get Config"),
+            ("edit_config", "Edit Config"),
+            ("delete_config", "Delete Config"),
+        )
+    )
+    source_configuration = SelectField(
+        choices=(
+            ("running", "Running Configuration"),
+            ("startup", "Startup Configuration"),
+            ("candidate", "Candidate Configuration"),
+        )
+    )
     content = StringField(substitution=True, widget=TextArea(), render_kw={"rows": 5})
     groups = {
         "Main Parameters": {
-            "commands": [
-                "command",
-                "content"
-            ],
+            "commands": ["command", "content"],
             "default": "expanded",
         },
         **ConnectionForm.groups,

@@ -15,16 +15,18 @@ class ScrapliNetconfService(ConnectionService):
     parent_type = "connection_service"
     id = db.Column(Integer, ForeignKey("connection_service.id"), primary_key=True)
     command = db.Column(db.SmallString)
+    target = db.Column(db.SmallString)
     filter_ = db.Column(db.LargeString)
     commit = db.Column(Boolean, default=False)
 
     __mapper_args__ = {"polymorphic_identity": "scrapli_netconf_service"}
 
     def job(self, run, device):
-        commands = run.sub(run.commands, locals()).splitlines()
-        function = "send_configs" if run.is_configuration else "send_commands"
-        result = getattr(run.scrapli_connection(device), function)(commands).result
-        return {"commands": commands, "result": result}
+        filter_ = run.sub(run.filter_, locals()).splitlines()
+        if "lock" in run.command or "config" in run.command:
+            kwargs = {"target": run.target}
+        response = getattr(run.scrapli_connection(device), run.command)(**kwargs)
+        return {"filter_": filter, "kwargs": kwargs, "result": response.result}
 
 
 class ScrapliNetconfForm(ConnectionForm):
@@ -50,10 +52,10 @@ class ScrapliNetconfForm(ConnectionForm):
         )
     )
     filter_ = StringField(substitution=True, widget=TextArea(), render_kw={"rows": 5})
-    commit = BooleanField("Commit Configuration")
+    commit = BooleanField("Commit After Editing Configuration")
     groups = {
         "Main Parameters": {
-            "commands": ["command", "target", "filter"],
+            "commands": ["command", "target", "filter_", "commit"],
             "default": "expanded",
         },
         **ConnectionForm.groups,

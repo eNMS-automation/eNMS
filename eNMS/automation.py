@@ -383,6 +383,7 @@ class ServiceRun:
         result_kw = {
             "run_id": self.main_run.id,
             "service": self.service.id,
+            "parent_service": self.main_run.service.name,
             "parent_runtime": self.parent_runtime,
         }
         if self.workflow:

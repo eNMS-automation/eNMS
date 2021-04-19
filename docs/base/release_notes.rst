@@ -53,6 +53,15 @@ eNMS.forms.automation -> eNMS.forms
 - Change model_properties in model from list of properties to dict of property with associated type
 - Custom properties defined in properties.json: change type from "boolean" to "bool" and "string" to "str"
 for consistency with rest of codebase
+- Add "parent_service" property to retrieve all results from a workflow, including subworkflow service
+results (see "Re: [E] Re: Retrieving results via REST"). The parent service is the service corresponding
+to the "parent runtime property". Example of /search payload:
+{
+    "type": "result",
+    "columns": ["result", "parent_runtime", "service_name"],
+    "maximum_return_records": 1000,
+    "search_criteria": {"parent_runtime": "2021-04-19 04:09:05.424206", "parent_service": "A"}
+}
 
 - Separate controller (handling HTTP POST requests) from main application (gluing everything together)
 Impact:

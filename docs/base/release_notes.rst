@@ -62,6 +62,9 @@ to the "parent runtime property". Example of /search payload:
     "maximum_return_records": 1000,
     "search_criteria": {"parent_runtime": "2021-04-19 04:09:05.424206", "parent_service": "A"}
 }
+- Add new "Empty" option in table filters and pool definition to filter based on whether the property
+value is empty or not.
+- Add table display with property value constraint when clicking on the charts in the dashboard.
 
 - Separate controller (handling HTTP POST requests) from main application (gluing everything together)
 Impact:

@@ -225,9 +225,9 @@ class ServiceRun:
                 self.main_run.task.is_active = False
             results["properties"] = {
                 "run": {
-                    k: v
-                    for k, v in self.main_run.properties.items()
-                    if k not in vs.private_properties_set
+                    key: value
+                    for key, value in self.main_run.properties.items()
+                    if key not in vs.private_properties_set
                 },
                 "service": self.service.get_properties(exclude=["positions"]),
             }

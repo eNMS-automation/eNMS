@@ -25,7 +25,7 @@ class PingService(Service):
     def job(self, run, device):
         if run.protocol == "ICMP":
             command = ["ping"]
-            for x, property in (
+            for variable, property in (
                 ("c", "count"),
                 ("W", "timeout"),
                 ("t", "ttl"),
@@ -33,7 +33,7 @@ class PingService(Service):
             ):
                 value = getattr(self, property)
                 if value:
-                    command.extend(f"-{x} {value}".split())
+                    command.extend(f"-{variable} {value}".split())
             command.append(device.ip_address)
             run.log("info", f"Running PING ({command})", device)
             output = check_output(command).decode().strip().splitlines()

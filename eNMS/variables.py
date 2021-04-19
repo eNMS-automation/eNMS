@@ -99,7 +99,7 @@ class VariableStore:
 
     def _update_rbac_variables(self):
         self.rbac = {"pages": [], **self.rbac}
-        for _, category in self.rbac["menu"].items():
+        for category in self.rbac["menu"].values():
             for page, page_values in category["pages"].items():
                 if page_values["rbac"] == "access":
                     self.rbac["pages"].append(page)

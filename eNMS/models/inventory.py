@@ -372,6 +372,8 @@ class Pool(AbstractBase):
                 and pool_value in value
                 or match_type == "equality"
                 and pool_value == value
+                or match_type == "empty"
+                and not value
                 or bool(search(pool_value, value))
             )
             result = match != getattr(self, f"{instance.class_type}_{property}_invert")

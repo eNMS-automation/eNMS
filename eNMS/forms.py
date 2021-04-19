@@ -183,6 +183,7 @@ class FormFactory:
                                 ("inclusion", "Inclusion"),
                                 ("equality", "Equality"),
                                 ("regex", "Regular Expression"),
+                                ("empty", "Empty"),
                             )
                         )
                         for property in properties
@@ -429,6 +430,7 @@ class PoolForm(BaseForm):
                             ("inclusion", "Inclusion"),
                             ("equality", "Equality"),
                             ("regex", "Regular Expression"),
+                            ("empty", "Empty"),
                         )
                     ),
                 )

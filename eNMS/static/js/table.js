@@ -262,6 +262,7 @@ export class Table {
               <option value="inclusion">Inclusion</option>
               <option value="equality">Equality</option>
               <option value="regex">Regular Expression</option>
+              <option value="empty">Empty</option>
             </select>
           </div>
           <br /><br />

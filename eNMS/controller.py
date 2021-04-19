@@ -340,13 +340,15 @@ class Controller:
         constraint_dict = {**kwargs.get("form", {}), **kwargs.get("constraints", {})}
         for property in vs.model_properties[model]:
             value, row = constraint_dict.get(property), getattr(table, property)
-            if not value:
-                continue
             filter_value = constraint_dict.get(f"{property}_filter")
+            if not value and filter_value != "empty":
+                continue
             if value in ("bool-true", "bool-false"):
                 constraint = row == (value == "bool-true")
             elif filter_value == "equality":
                 constraint = row == value
+            elif filter_value == "empty":
+                constraint = row == ""
             elif not filter_value or filter_value == "inclusion":
                 constraint = row.contains(value, autoescape=isinstance(value, str))
             else:

@@ -127,7 +127,7 @@
       "property1",
       "property2"
     ],
-    "link": ["model", "vendor", "subtype", "icon", "location"],
+    "link": ["model", "vendor", "subtype", "location"],
     "service": [
       "vendor",
       "operating_system",

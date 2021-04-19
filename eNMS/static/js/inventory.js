@@ -33,10 +33,7 @@ function drawDiagrams(type, objects, property) {
   let legend = [];
   for (let [key, value] of Object.entries(objects)) {
     key = key || "Empty string";
-    data.push({
-      value: value,
-      name: key,
-    });
+    data.push({ value: value, name: key });
     legend.push(key);
   }
   const result = { data: data, legend: legend };
@@ -50,6 +47,7 @@ function drawDiagrams(type, objects, property) {
     show: result.legend.length < 10,
   });
   diagrams[type].setOption(options);
+  if (diagrams[type]._$handlers.click) return;
   diagrams[type].on("click", function (params) {
     const id = Date.now();
     const property = $(`#${type}-properties`).val();
@@ -82,7 +80,6 @@ function drawDiagrams(type, objects, property) {
           value == "Empty string" ? { model_filter: "empty" } : { [property]: value };
         if (type == "workflow")
           Object.assign(constraints, { type: "workflow", type_filter: "equality" });
-        
         new tables[tableType](id, constraints);
       },
     });

@@ -50,6 +50,38 @@ function drawDiagrams(type, objects, property) {
     show: result.legend.length < 10,
   });
   diagrams[type].setOption(options);
+  diagrams[type].on("click", function(params) {
+    const id = Date.now();
+    const property = $(`#${type}-properties`).val();
+    let value = params.data.name;
+    if (value == "Empty string") value = "";
+    openPanel({
+      name: "table",
+      size: "1000 500",
+      content: `
+        <div class="modal-body">
+          <div id="tooltip-overlay" class="overlay"></div>
+          <form
+            id="search-form-${type}-${id}"
+            class="form-horizontal form-label-left"
+            method="post"
+          >
+            <table
+              id="table-${type}-${id}"
+              class="table table-striped table-bordered table-hover"
+              cellspacing="0"
+              width="100%"
+            ></table>
+          </form>
+        </div>`,
+      id: id,
+      title: `All ${type}s with ${property} set to "${value}"`,
+      callback: function () {
+        // eslint-disable-next-line new-cap
+        new tables[type](id, {[property]: value});
+      },
+    });
+  });
 }
 
 export function showConnectionPanel(device) {

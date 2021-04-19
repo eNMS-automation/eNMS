@@ -947,7 +947,7 @@ class ServiceRun:
             auth_password=credentials["password"],
             auth_private_key=False,
             auth_strict_key=False,
-            **kwargs
+            **kwargs,
         )
         connection.open()
         vs.connections_cache["scrapli"][self.parent_runtime][device.name] = connection

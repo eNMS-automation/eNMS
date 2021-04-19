@@ -30,6 +30,22 @@ from eNMS.variables import vs
 
 
 class Server(Flask):
+
+    status_log_level = {
+        200: "info",
+        401: "warning",
+        403: "warning",
+        404: "info",
+        500: "error",
+    }
+
+    status_error_message = {
+        401: "Wrong Credentials",
+        403: "Operation not allowed.",
+        404: "Invalid POST request.",
+        500: "Internal Server Error.",
+    }
+
     def __init__(self, mode=None):
         static_folder = str(vs.path / "eNMS" / "static")
         super().__init__(__name__, static_folder=static_folder)
@@ -198,7 +214,7 @@ class Server(Flask):
             )
             if status_code == 500:
                 log += f"\n{traceback}"
-            env.log(vs.status_log_level[status_code], log, change_log=False)
+            env.log(Server.status_log_level[status_code], log, change_log=False)
             if rest_request:
                 logout_user()
             if status_code == 200:
@@ -212,7 +228,7 @@ class Server(Flask):
                     return redirect(url_for("blueprint.route", page="login"))
                 return render_template("error.html", error=status_code), status_code
             else:
-                alert = f"Error {status_code} - {vs.status_error_message[status_code]}"
+                alert = f"Error {status_code} - {Server.status_error_message[status_code]}"
                 return jsonify({"alert": alert}), status_code
 
         return decorated_function

@@ -26,7 +26,6 @@ class VariableStore:
         self._set_custom_variables()
         self._set_configuration_variables()
         self._set_run_variables()
-        self._set_server_variables()
         self._set_version()
         self._set_plugins_settings()
         self._update_rbac_variables()
@@ -50,6 +49,7 @@ class VariableStore:
     def _set_general_variables(self):
         self.form_class = {}
         self.form_properties = defaultdict(dict)
+        self.log_levels = ["debug", "info", "warning", "error", "critical"]
         self.models = {}
         self.model_properties = defaultdict(lambda: {"type": "str"})
         self.private_properties = self.database["private_properties"]
@@ -116,22 +116,6 @@ class VariableStore:
         libraries = ("netmiko", "napalm", "scrapli")
         self.connections_cache = {library: defaultdict(dict) for library in libraries}
         self.service_run_count = defaultdict(int)
-
-    def _set_server_variables(self):
-        self.log_levels = ["debug", "info", "warning", "error", "critical"]
-        self.status_log_level = {
-            200: "info",
-            401: "warning",
-            403: "warning",
-            404: "info",
-            500: "error",
-        }
-        self.status_error_message = {
-            401: "Wrong Credentials",
-            403: "Operation not allowed.",
-            404: "Invalid POST request.",
-            500: "Internal Server Error.",
-        }
 
     def set_template_context(self):
         self.template_context = {

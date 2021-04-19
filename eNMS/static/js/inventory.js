@@ -53,6 +53,7 @@ function drawDiagrams(type, objects, property) {
   diagrams[type].on("click", function (params) {
     const id = Date.now();
     const property = $(`#${type}-properties`).val();
+    const tableType = type == "workflow" ? "service" : type;
     let value = params.data.name;
     openPanel({
       name: "table",
@@ -61,12 +62,12 @@ function drawDiagrams(type, objects, property) {
         <div class="modal-body">
           <div id="tooltip-overlay" class="overlay"></div>
           <form
-            id="search-form-${type}-${id}"
+            id="search-form-${tableType}-${id}"
             class="form-horizontal form-label-left"
             method="post"
           >
             <table
-              id="table-${type}-${id}"
+              id="table-${tableType}-${id}"
               class="table table-striped table-bordered table-hover"
               cellspacing="0"
               width="100%"
@@ -74,13 +75,15 @@ function drawDiagrams(type, objects, property) {
           </form>
         </div>`,
       id: id,
-      title: `All ${type}s with ${property} set to "${value}"`,
+      title: `All ${tableType}s with ${property} set to "${value}"`,
       callback: function () {
         // eslint-disable-next-line new-cap
-        new tables[type](
-          id,
-          value == "Empty string" ? { model_filter: "empty" } : { [property]: value }
-        );
+        let constraints =
+          value == "Empty string" ? { model_filter: "empty" } : { [property]: value };
+        if (type == "workflow")
+          Object.assign(constraints, { type: "workflow", type_filter: "equality" });
+        
+        new tables[tableType](id, constraints);
       },
     });
   });

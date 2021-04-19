@@ -228,7 +228,8 @@ class Server(Flask):
                     return redirect(url_for("blueprint.route", page="login"))
                 return render_template("error.html", error=status_code), status_code
             else:
-                alert = f"Error {status_code} - {Server.status_error_message[status_code]}"
+                error_message = Server.status_error_message[status_code]
+                alert = f"Error {status_code} - {error_message}"
                 return jsonify({"alert": alert}), status_code
 
         return decorated_function

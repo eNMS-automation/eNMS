@@ -363,10 +363,10 @@ class Pool(AbstractBase):
         match_list = []
         for property in vs.properties["filtering"][instance.class_type]:
             pool_value = getattr(self, f"{instance.class_type}_{property}")
-            if not pool_value:
+            match_type = getattr(self, f"{instance.class_type}_{property}_match")
+            if not pool_value and match_type != "empty":
                 continue
             value = str(getattr(instance, property))
-            match_type = getattr(self, f"{instance.class_type}_{property}_match")
             match = (
                 match_type == "inclusion"
                 and pool_value in value
@@ -385,17 +385,16 @@ class Pool(AbstractBase):
             if not self.manually_defined:
                 kwargs = {"bulk": "object", "rbac": None, "form": {}}
                 for property in vs.properties["filtering"][model]:
-                    if not getattr(self, f"{model}_{property}"):
+                    value = getattr(self, f"{model}_{property}")
+                    match_type = getattr(self, f"{model}_{property}_match")
+                    invert_type = getattr(self, f"{model}_{property}_invert")
+                    if not value and match_type != "empty":
                         continue
                     kwargs["form"].update(
                         {
-                            property: getattr(self, f"{model}_{property}"),
-                            f"{property}_filter": getattr(
-                                self, f"{model}_{property}_match"
-                            ),
-                            f"{property}_invert": getattr(
-                                self, f"{model}_{property}_invert"
-                            ),
+                            property: value,
+                            f"{property}_filter": match_type,
+                            f"{property}_invert": invert_type,
                         }
                     )
                 if kwargs["form"]:

@@ -50,11 +50,10 @@ function drawDiagrams(type, objects, property) {
     show: result.legend.length < 10,
   });
   diagrams[type].setOption(options);
-  diagrams[type].on("click", function(params) {
+  diagrams[type].on("click", function (params) {
     const id = Date.now();
     const property = $(`#${type}-properties`).val();
     let value = params.data.name;
-    if (value == "Empty string") value = "";
     openPanel({
       name: "table",
       size: "1000 500",
@@ -78,7 +77,10 @@ function drawDiagrams(type, objects, property) {
       title: `All ${type}s with ${property} set to "${value}"`,
       callback: function () {
         // eslint-disable-next-line new-cap
-        new tables[type](id, {[property]: value});
+        new tables[type](
+          id,
+          value == "Empty string" ? { model_filter: "empty" } : { [property]: value }
+        );
       },
     });
   });

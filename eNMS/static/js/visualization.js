@@ -742,7 +742,7 @@ function displayNetwork({ direction, noAlert, withCluster } = {}) {
   }
   for (let type of ["device", "link"]) {
     let form = serializeForm(`#filtering-form-${type}`, `${type}_filtering`);
-    if (currentPath) form.intersect = {type: "pool", id: currentPath};
+    if (currentPath) form.intersect = { type: "pool", id: currentPath };
     data[type] = { form: form };
   }
   clustered = withCluster;

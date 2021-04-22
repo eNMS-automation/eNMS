@@ -923,7 +923,7 @@ class Run(AbstractBase):
         if "result" in results:
             notification["Results"] = results["result"]
         if self.notification_header:
-            notification["Header"] = self.notification_header
+            notification["Header"] = self.sub(self.notification_header, locals())
         if self.include_link_in_summary:
             address = app.settings["app"]["address"]
             notification["Link"] = f"{address}/view_service_results/{self.id}"

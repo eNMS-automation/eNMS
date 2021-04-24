@@ -935,14 +935,14 @@ class ServiceRun:
             logger="security",
         )
         credentials = self.get_credentials(device)
-        is_netconf = run.service.type == "scrapli_netconf_service"
-        Connection, kwargs = NetconfDriver if is_netconf else Scrapli, {}
+        is_netconf = self.service.type == "scrapli_netconf_service"
+        connection_class, kwargs = NetconfDriver if is_netconf else Scrapli, {}
         if is_netconf:
             kwargs["strip_namespaces"] = self.strip_namespaces
         else:
             platform = device.scrapli_driver if self.use_device_driver else self.driver
             kwargs.update({"transport": self.transport, "platform": platform})
-        connection = Connection(
+        connection = connection_class(
             host=device.ip_address,
             auth_username=credentials["username"],
             auth_password=credentials["password"],

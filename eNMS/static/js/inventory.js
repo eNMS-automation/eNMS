@@ -78,8 +78,9 @@ function drawDiagrams(type, objects, property) {
         // eslint-disable-next-line new-cap
         let constraints =
           value == "Empty string" ? { model_filter: "empty" } : { [property]: value };
-        if (type == "workflow")
+        if (type == "workflow") {
           Object.assign(constraints, { type: "workflow", type_filter: "equality" });
+        }
         new tables[tableType](id, constraints);
       },
     });

@@ -49,6 +49,7 @@
   ],
   "dont_migrate": {
     "access": ["id"],
+    "credential": ["id"],
     "device": [
       "access",
       "id",

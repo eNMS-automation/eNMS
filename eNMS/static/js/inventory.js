@@ -32,7 +32,7 @@ function drawDiagrams(type, objects, property) {
   let data = [];
   let legend = [];
   for (let [key, value] of Object.entries(objects)) {
-    key = key || "Empty string";
+    key = key || "Empty";
     data.push({ value: value, name: key });
     legend.push(key);
   }
@@ -77,7 +77,7 @@ function drawDiagrams(type, objects, property) {
       callback: function () {
         // eslint-disable-next-line new-cap
         let constraints =
-          value == "Empty string" ? { model_filter: "empty" } : { [property]: value };
+          value == "Empty" ? { model_filter: "empty" } : { [property]: value };
         if (type == "workflow") {
           Object.assign(constraints, { type: "workflow", type_filter: "equality" });
         }

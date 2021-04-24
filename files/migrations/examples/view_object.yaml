@@ -7,10 +7,10 @@
   y: 0.0
   z: 0.0
 - {name: '2021-03-29 09:40:15.682829', type: plan, view: 'Regression View : Basic
-    Example', view_id: 1, x: 0.0, y: 10.0, z: 0.0}
-- {device: Austin, device_id: 3, device_name: Austin, name: '2021-04-24 04:13:15.186405',
-  type: node, view: 'Regression View : Basic Example', view_id: 1, x: -3.5314743547792204,
+    Example', x: 0.0, y: 10.0, z: 0.0}
+- {device: Austin, device_name: Austin, name: '2021-04-24 04:13:15.186405',
+  type: node, view: 'Regression View : Basic Example', x: -3.5314743547792204,
   y: 10.0, z: 119.47871920651392}
-- {device: Washington, device_id: 4, device_name: Washington, name: '2021-04-24 04:13:15.188805',
-  type: node, view: 'Regression View : Basic Example', view_id: 1, x: 0.0, y: 10.0,
+- {device: Washington, device_name: Washington, name: '2021-04-24 04:13:15.188805',
+  type: node, view: 'Regression View : Basic Example', x: 0.0, y: 10.0,
   z: 0.0}

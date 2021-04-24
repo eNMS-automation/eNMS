@@ -864,12 +864,13 @@ class Controller:
                         status = "Partial import (see logs)."
         db.session.commit()
         if not kwargs.get("skip_model_update"):
-            for model in ("access", "service", "workflow_edge"):
+            for model in ("access", "service"):
                 for instance in db.fetch_all(model):
                     instance.update()
         if not kwargs.get("skip_pool_update"):
             for pool in db.fetch_all("pool"):
                 pool.compute_pool()
+        db.session.commit()
         env.log("info", status)
         return status
 

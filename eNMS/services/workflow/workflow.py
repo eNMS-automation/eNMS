@@ -60,7 +60,7 @@ class Workflow(Service):
             if old_name in service.positions:
                 service.positions[self.name] = service.positions[old_name]
         for edge in self.edges:
-            edge.set_name()
+            edge.name.replace(old_name, self.name)
 
     def duplicate(self, workflow=None, clone=None):
         if not clone:

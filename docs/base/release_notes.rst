@@ -65,6 +65,7 @@ to the "parent runtime property". Example of /search payload:
 - Add new "Empty" option in table filters and pool definition to filter based on whether the property
 value is empty or not.
 - Add table display with property value constraint when clicking on the charts in the dashboard.
+- Add scrapli netconf service
 
 - Separate controller (handling HTTP POST requests) from main application (gluing everything together)
 Impact:

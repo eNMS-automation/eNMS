@@ -92,7 +92,7 @@ class AbstractBase(db.base):
         self, export=False, exclude=None, include=None, private_properties=False
     ):
         result = {}
-        no_migrate = db.dont_migrate[getattr(self, "export_type", self.type)]
+        no_migrate = db.dont_migrate.get(getattr(self, "export_type", self.type), {})
         properties = list(vs.model_properties[self.type])
         for property in properties:
             if not private_properties and property in vs.private_properties_set:
@@ -150,7 +150,7 @@ class AbstractBase(db.base):
         properties = self.get_properties(
             export, exclude=exclude, private_properties=private_properties
         )
-        no_migrate = db.dont_migrate[getattr(self, "export_type", self.type)]
+        no_migrate = db.dont_migrate.get(getattr(self, "export_type", self.type), {})
         for property, relation in vs.relationships[self.type].items():
             if include and property not in include or exclude and property in exclude:
                 continue

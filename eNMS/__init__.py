@@ -8,10 +8,10 @@ from eNMS.variables import vs
 
 def initialize():
     first_init = db._initialize(env)
+    server.register_plugins()
     if env.detect_cli():
         return
     form_factory._initialize()
-    server.register_plugins()
     controller._initialize(first_init)
     vs.set_template_context()
 

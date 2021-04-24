@@ -429,7 +429,7 @@ class Session(AbstractBase):
 
 class ViewObject(AbstractBase):
 
-    __tablename__ = "view_object"
+    __tablename__ = export_type = "view_object"
     type = db.Column(db.SmallString)
     __mapper_args__ = {"polymorphic_identity": "view_object", "polymorphic_on": type}
     id = db.Column(Integer, primary_key=True)

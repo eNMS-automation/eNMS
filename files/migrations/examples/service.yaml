@@ -16358,7 +16358,7 @@
   workflow_category: Example workflow(s)
 - access_groups: admin
   close_connection: false
-  command: get
+  command: get_config
   commit: false
   completion_time: 1
   content: ''
@@ -16387,7 +16387,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2021-04-24 04:14:11.869239'
+  last_modified: '2021-04-24 09:09:16.495179'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -16399,7 +16399,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow: Scrapli Netconf Service': [44, -124]
   postprocessing: ''
@@ -16434,8 +16434,9 @@
   command: get
   commit: false
   completion_time: 1
-  content: "<components xmlns=\"http://openconfig.net/yang/platform\">\r\n    <component>\r\
-    \n        <state>\r\n        </state>\r\n    </component>\r\n</components>"
+  content: "<if:interfaces -state xmlns:if=\"urn:ietf:params:xml:ns:yang:ietf-interfaces\"\
+    >\r\n      <if:interface>\r\n        <if:name>et1</if:name>\r\n      </if:interface>\r\
+    \n</if:interfaces>"
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -16461,7 +16462,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2021-04-24 08:33:18.524573'
+  last_modified: '2021-04-24 09:09:54.581293'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100

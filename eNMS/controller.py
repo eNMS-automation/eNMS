@@ -43,7 +43,6 @@ class Controller:
             import_export_types=db.import_export_models,
         )
         self.get_git_content()
-        db.session.commit()
 
     def _register_endpoint(self, func):
         setattr(self, func.__name__, func)
@@ -1231,6 +1230,7 @@ class Controller:
                 for property in vs.configuration_properties
             ):
                 pool.compute_pool()
+        db.session.commit()
 
     def upload_files(self, **kwargs):
         file = kwargs["file"]

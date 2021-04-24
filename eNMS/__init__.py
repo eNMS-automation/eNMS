@@ -7,8 +7,8 @@ from eNMS.variables import vs
 
 
 def initialize():
-    first_init = db._initialize(env)
     server.register_plugins()
+    first_init = db._initialize(env)
     if env.detect_cli():
         return
     form_factory._initialize()

@@ -16,6 +16,7 @@ from flask_socketio import join_room, SocketIO
 from flask_wtf.csrf import CSRFProtect
 from functools import partial, wraps
 from importlib import import_module
+from logging import info
 from os import getenv, read, write
 from pty import fork
 from subprocess import run
@@ -80,7 +81,7 @@ class Server(Flask):
             except Exception:
                 env.log("error", f"Could not import plugin '{plugin}':\n{format_exc()}")
                 continue
-            env.log("info", f"Loading plugin: {settings['name']}")
+            info(f"Loading plugin: {settings['name']}")
 
     def register_extensions(self):
         self.csrf = CSRFProtect()

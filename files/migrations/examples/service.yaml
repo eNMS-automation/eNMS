@@ -120,6 +120,7 @@
     'Regression Workflow: Result content in memory (scalability)': [0, 0]
     'Regression Workflow: Scalability Test (large workflow)': *id016
     'Regression Workflow: Scrapli': *id017
+    'Regression Workflow: Scrapli Netconf Service': [0, 0]
     'Regression Workflow: Separate Failure - Success Paths': *id018
     'Regression Workflow: Service Priorities, Napalm Getters, Postprocessing': [-316,
       80]
@@ -373,6 +374,7 @@
     'Regression Workflow: RBAC Target Restriction': [654, -133]
     'Regression Workflow: Scalability Test (large workflow)': *id057
     'Regression Workflow: Scrapli': *id058
+    'Regression Workflow: Scrapli Netconf Service': [500, 0]
     'Regression Workflow: Separate Failure - Success Paths': *id059
     'Regression Workflow: Service Priorities, Napalm Getters, Postprocessing': [703,
       150]
@@ -996,7 +998,6 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
-  use_genie: false
   validation_condition: success
   validation_method: text
   vendor: Arista
@@ -1179,7 +1180,6 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
-  use_genie: false
   validation_condition: success
   validation_method: text
   vendor: Arista
@@ -1907,7 +1907,6 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
-  use_genie: false
   validation_condition: none
   validation_method: text
   vendor: Arista
@@ -2174,7 +2173,6 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
-  use_genie: false
   validation_condition: success
   validation_method: text
   vendor: ''
@@ -2269,7 +2267,6 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
-  use_genie: false
   validation_condition: success
   validation_method: text
   vendor: ''
@@ -2684,7 +2681,6 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
-  use_genie: false
   validation_condition: none
   validation_method: text
   vendor: ''
@@ -2776,7 +2772,6 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
-  use_genie: false
   validation_condition: none
   validation_method: text
   vendor: ''
@@ -2868,7 +2863,6 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
-  use_genie: false
   validation_condition: none
   validation_method: text
   vendor: ''
@@ -3615,7 +3609,6 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
-  use_genie: false
   validation_condition: none
   validation_method: text
   vendor: ''
@@ -3707,7 +3700,6 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
-  use_genie: false
   validation_condition: success
   validation_method: text
   vendor: Arista
@@ -3799,7 +3791,6 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
-  use_genie: false
   validation_condition: success
   validation_method: text
   vendor: Arista
@@ -3891,7 +3882,6 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
-  use_genie: false
   validation_condition: success
   validation_method: text
   vendor: Arista
@@ -4399,7 +4389,6 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
-  use_genie: false
   validation_condition: none
   validation_method: text
   vendor: ''
@@ -5926,7 +5915,6 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
-  use_genie: false
   validation_condition: none
   validation_method: text
   vendor: ''
@@ -6562,7 +6550,6 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
-  use_genie: false
   validation_condition: none
   validation_method: text
   vendor: ''
@@ -6655,7 +6642,6 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
-  use_genie: false
   validation_condition: none
   validation_method: text
   vendor: ''
@@ -6748,7 +6734,6 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
-  use_genie: false
   validation_condition: none
   validation_method: text
   vendor: ''
@@ -7075,7 +7060,6 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
-  use_genie: false
   validation_condition: success
   validation_method: text
   vendor: ''
@@ -7370,7 +7354,6 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
-  use_genie: false
   validation_condition: none
   validation_method: text
   vendor: ''
@@ -9047,7 +9030,6 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
-  use_genie: false
   validation_condition: success
   validation_method: text
   vendor: ''
@@ -9211,7 +9193,6 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
-  use_genie: false
   validation_condition: none
   validation_method: text
   vendor: ''
@@ -10401,7 +10382,6 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
-  use_genie: false
   validation_condition: none
   validation_method: text
   vendor: ''
@@ -10494,7 +10474,6 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
-  use_genie: false
   validation_condition: none
   validation_method: text
   vendor: ''
@@ -10587,7 +10566,6 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
-  use_genie: false
   validation_condition: none
   validation_method: text
   vendor: ''
@@ -10680,7 +10658,6 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
-  use_genie: false
   validation_condition: none
   validation_method: text
   vendor: ''
@@ -10773,7 +10750,6 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
-  use_genie: false
   validation_condition: none
   validation_method: text
   vendor: ''
@@ -10866,7 +10842,6 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
-  use_genie: false
   validation_condition: none
   validation_method: text
   vendor: ''
@@ -11573,7 +11548,6 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
-  use_genie: false
   validation_condition: none
   validation_method: text
   vendor: ''
@@ -11742,7 +11716,6 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
-  use_genie: false
   validation_condition: none
   validation_method: text
   vendor: ''
@@ -11909,7 +11882,6 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
-  use_genie: false
   validation_condition: none
   validation_method: text
   vendor: ''
@@ -13009,7 +12981,6 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
-  use_genie: false
   validation_condition: success
   validation_method: text
   vendor: ''
@@ -13351,7 +13322,6 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
-  use_genie: false
   validation_condition: none
   validation_method: text
   vendor: ''
@@ -13835,7 +13805,6 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
-  use_genie: false
   validation_condition: none
   validation_method: text
   vendor: ''
@@ -14964,7 +14933,6 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
-  use_genie: false
   validation_condition: none
   validation_method: text
   vendor: ''
@@ -15152,7 +15120,6 @@
   update_pools_after_running: false
   update_target_pools: false
   use_device_driver: true
-  use_genie: false
   validation_condition: none
   validation_method: text
   vendor: ''
@@ -16315,6 +16282,146 @@
   target_pools: []
   time_between_retries: 10
   type: python_snippet_service
+  update_pools_after_running: false
+  update_target_pools: false
+  validation_condition: none
+  validation_method: text
+  vendor: ''
+  waiting_time: 0
+- access_groups: admin
+  close_connection: false
+  completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credential_type: any
+  default_access: creator
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  impacting: false
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  labels: {}
+  last_modified: '2021-04-24 04:14:22.168371'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: 'Regression Workflow: Scrapli Netconf Service'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: ['All devices, links, services and users']
+  positions: {}
+  postprocessing: ''
+  postprocessing_mode: always
+  preprocessing: ''
+  priority: 1
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: 'Regression Workflow: Scrapli Netconf Service'
+  send_notification: false
+  send_notification_method: mail
+  services: ['[Shared] Start', '[Shared] End', '[Regression Workflow: Scrapli Netconf
+      Service] Get Running Configuration']
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: success
+  target_devices: [Washington]
+  target_pools: []
+  time_between_retries: 10
+  type: workflow
+  update_pools_after_running: false
+  update_target_pools: false
+  validation_condition: none
+  validation_method: text
+  vendor: ''
+  waiting_time: 0
+  workflow_category: Example workflow(s)
+- access_groups: admin
+  close_connection: false
+  command: get
+  commit: false
+  completion_time: 1
+  content: ''
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credential_type: any
+  credentials: device
+  custom_password: ''
+  custom_username: ''
+  default_access: creator
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  impacting: false
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2021-04-24 04:14:11.869239'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Regression Workflow: Scrapli Netconf Service] Get Running Configuration'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: ['All devices, links, services and users']
+  positions:
+    'Regression Workflow: Scrapli Netconf Service': [210, -45]
+  postprocessing: ''
+  postprocessing_mode: always
+  preprocessing: ''
+  priority: 1
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: Get Running Configuration
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: success
+  start_new_connection: false
+  strip_namespaces: false
+  target: running
+  target_devices: []
+  target_pools: []
+  time_between_retries: 10
+  type: scrapli_netconf_service
   update_pools_after_running: false
   update_target_pools: false
   validation_condition: none

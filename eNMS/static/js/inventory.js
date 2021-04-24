@@ -64,6 +64,11 @@ function drawDiagrams(type, objects, property) {
             class="form-horizontal form-label-left"
             method="post"
           >
+            <nav
+              id="controls-${tableType}-${id}"
+              class="navbar navbar-default nav-controls"
+              role="navigation"
+            ></nav>
             <table
               id="table-${tableType}-${id}"
               class="table table-striped table-bordered table-hover"

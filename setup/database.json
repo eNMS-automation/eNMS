@@ -48,6 +48,7 @@
     "pool"
   ],
   "dont_migrate": {
+    "access": ["id"],
     "device": [
       "access",
       "id",

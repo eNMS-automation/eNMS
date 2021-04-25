@@ -379,7 +379,14 @@ class LogicalViewForm(BaseForm):
 class LoginForm(BaseForm):
     form_type = HiddenField(default="login")
     get_request_allowed = False
-    authentication_method = SelectField("Authentication Method", choices=())
+    authentication_method = SelectField(
+        "Authentication Method",
+        choices=[
+            (method, properties["display_name"])
+            for method, properties in vs.settings["authentication"]["methods"].items()
+            if properties["enabled"]
+        ],
+    )
     username = StringField("Name", [InputRequired()])
     password = PasswordField("Password", [InputRequired()])
 

@@ -140,7 +140,7 @@ export class Table {
             export: self.csvExport,
             clipboard: self.copyClipboard,
           });
-          Object.assign(d, self.filteringData);
+          Object.assign(data, self.filteringData);
           return JSON.stringify(data);
         },
         dataSrc: function (result) {

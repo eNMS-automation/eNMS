@@ -127,12 +127,12 @@ export class Table {
         url: `/filtering/${this.modelFiltering || this.type}`,
         type: "POST",
         contentType: "application/json",
-        data: (d) => {
+        data: (data) => {
           let form = serializeForm(`#search-form-${this.id}`, `${this.type}_filtering`);
           for (const [key, value] of Object.entries(form)) {
             if (key.includes("_invert")) form[key] = value == "y";
           }
-          Object.assign(d, {
+          Object.assign(data, {
             form: form,
             constraints: constraints,
             columns: this.columns,
@@ -141,7 +141,7 @@ export class Table {
             clipboard: self.copyClipboard,
           });
           Object.assign(d, self.filteringData);
-          return JSON.stringify(d);
+          return JSON.stringify(data);
         },
         dataSrc: function (result) {
           if (result.error) {

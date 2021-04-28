@@ -548,6 +548,13 @@
         "width": "100px"
       },
       {
+        "data": "send_notification",
+        "title": "Notification",
+        "search": "bool",
+        "width": "100px",
+        "visible": false
+      },
+      {
         "data": "default_access",
         "title": "Default Access",
         "search": "text",

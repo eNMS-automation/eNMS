@@ -89,20 +89,22 @@ export class Table {
               </div>`;
             } else if (data.search == "bool") {
               element = `
-                <select
-                  id="${elementId}"
-                  name="${data.data}"
-                  class="form-control search-list-${self.id}"
-                  style="width: 100%; height: 30px; margin-top: 5px"
-                >
-                  <option value="">Any</option>
-                  <option value="bool-true">
-                    ${data?.search_labels?.true || "True"}
-                  </option>
-                  <option value="bool-false">
-                    ${data?.search_labels?.false || "False"}
-                  </option>
-                </select>`;
+                <div class="input-group table-search" style="width:100%">
+                  <select
+                    id="${elementId}"
+                    name="${data.data}"
+                    class="form-control search-list-${self.id}"
+                    style="width: 100%; height: 30px; margin-top: 5px; z-index: 100000"
+                  >
+                    <option value="">Any</option>
+                    <option value="bool-true">
+                      ${data?.search_labels?.true || "True"}
+                    </option>
+                    <option value="bool-false">
+                      ${data?.search_labels?.false || "False"}
+                    </option>
+                  </select>
+                </div>`;
             }
             $(element)
               .appendTo($(this.header()))

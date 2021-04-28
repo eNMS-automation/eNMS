@@ -556,7 +556,7 @@ class Run(AbstractBase):
                 for pool in db.fetch_all("pool"):
                     pool.compute_pool()
             if self.send_notification:
-                results = self.notify(results)
+                results = self.notify(results, payload)
             app.service_db[self.service.id]["runs"] -= 1
             if not app.service_db[self.id]["runs"]:
                 self.service.status = "Idle"
@@ -914,7 +914,7 @@ class Run(AbstractBase):
             if self.runtime != self.parent_runtime:
                 app.log_queue(self.parent_runtime, self.original.service.id, run_log)
 
-    def build_notification(self, results):
+    def build_notification(self, results, payload):
         notification = {
             "Service": f"{self.service.name} ({self.service.type})",
             "Runtime": self.runtime,
@@ -934,9 +934,9 @@ class Run(AbstractBase):
                 notification["PASSED"] = results["summary"]["success"]
         return notification
 
-    def notify(self, results):
+    def notify(self, results, payload):
         self.log("info", f"Sending {self.send_notification_method} notification...")
-        notification = self.build_notification(results)
+        notification = self.build_notification(results, payload)
         file_content = deepcopy(notification)
         if self.include_device_results:
             file_content["Device Results"] = {}

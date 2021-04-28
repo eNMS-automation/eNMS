@@ -340,6 +340,7 @@ class Controller:
         for property in vs.model_properties[model]:
             value, row = constraint_dict.get(property), getattr(table, property)
             filter_value = constraint_dict.get(f"{property}_filter")
+            print(property, value, filter_value)
             if not value and filter_value != "empty":
                 continue
             if value in ("bool-true", "bool-false"):
@@ -394,6 +395,7 @@ class Controller:
         return query
 
     def filtering(self, model, bulk=False, rbac="read", username=None, **kwargs):
+        print(kwargs)
         table, query = vs.models[model], db.query(model, rbac, username)
         total_records = query.with_entities(table.id).count()
         try:

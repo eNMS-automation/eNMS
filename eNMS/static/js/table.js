@@ -94,7 +94,7 @@ export class Table {
                     id="${elementId}"
                     name="${data.data}"
                     class="form-control search-list-${self.id}"
-                    style="width: 100%; height: 30px; margin-top: 5px; z-index: 100000"
+                    style="width: 100%; height: 30px; margin-top: 5px"
                   >
                     <option value="">Any</option>
                     <option value="bool-true">

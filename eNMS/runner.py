@@ -38,7 +38,7 @@ from eNMS.environment import env
 from eNMS.variables import vs
 
 
-class ServiceRun:
+class Runner:
     def __init__(self, run, **kwargs):
         self.is_main_run = False
         self.iteration_run = False
@@ -269,7 +269,7 @@ class ServiceRun:
             self.service.iteration_devices_property,
             **locals(),
         )
-        return ServiceRun(
+        return Runner(
             self.run,
             iteration_run=True,
             payload=self.payload,

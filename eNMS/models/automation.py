@@ -7,13 +7,13 @@ from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy.orm import aliased, relationship
 
-from eNMS.automation import ServiceRun
 from eNMS.controller import controller
 from eNMS.database import db
 from eNMS.environment import env
 from eNMS.models.base import AbstractBase
 from eNMS.models.inventory import Device  # noqa: F401
 from eNMS.models.administration import User  # noqa: F401
+from eNMS.runner import Runner
 from eNMS.variables import vs
 
 
@@ -399,7 +399,7 @@ class Run(AbstractBase):
             return "N/A"
 
     def run(self, payload):
-        self.service_run = ServiceRun(
+        self.service_run = Runner(
             self,
             payload=payload,
             service=self.service,

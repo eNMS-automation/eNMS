@@ -4,12 +4,12 @@ from sqlalchemy import Boolean, ForeignKey, Integer
 from sqlalchemy.orm import backref, relationship
 from sqlalchemy.schema import UniqueConstraint
 
-from eNMS.automation import ServiceRun
 from eNMS.database import db
 from eNMS.models.base import AbstractBase
 from eNMS.forms import ServiceForm
 from eNMS.fields import BooleanField, HiddenField, InstanceField, SelectField
 from eNMS.models.automation import Service
+from eNMS.runner import Runner
 from eNMS.variables import vs
 
 
@@ -151,7 +151,7 @@ class Workflow(Service):
                     ]
                 if run.parent_device:
                     kwargs["parent_device"] = run.parent_device
-                results = ServiceRun(run, payload=run.payload, **kwargs).results
+                results = Runner(run, payload=run.payload, **kwargs).results
                 if not results:
                     continue
             status = "success" if results["success"] else "failure"

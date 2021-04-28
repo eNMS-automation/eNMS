@@ -1027,11 +1027,13 @@
     ],
     "service": [
       "name",
+      "type",
       "description",
       "creator",
       "access_groups",
       "vendor",
-      "operating_system"
+      "operating_system",
+      "send_notification"
     ],
     "user": ["name", "description", "groups", "email"]
   }

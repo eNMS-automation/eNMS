@@ -1,7 +1,7 @@
 from pytest import fixture
 
 from eNMS.database import db
-from eNMS.server import Server
+from eNMS.server import server
 
 import warnings
 
@@ -10,23 +10,21 @@ import warnings
 def base_client():
     with warnings.catch_warnings():
         warnings.simplefilter("ignore")
-        app = Server("test")
-        app_context = app.app_context()
+        app_context = server.app_context()
         app_context.push()
         db.session.close()
-        yield app.test_client()
+        yield server.test_client()
 
 
 @fixture
 def user_client():
     with warnings.catch_warnings():
         warnings.simplefilter("ignore")
-        app = Server("test")
-        app_context = app.app_context()
+        app_context = server.app_context()
         app_context.push()
         db.session.close()
-        client = app.test_client()
-        with app.app_context():
+        client = server.test_client()
+        with server.app_context():
             client.post(
                 "/login",
                 data={

@@ -20,6 +20,7 @@ from logging import info
 from os import getenv, read, write
 from pty import fork
 from subprocess import run
+from sys import modules
 from traceback import format_exc
 from werkzeug.exceptions import Forbidden
 
@@ -47,11 +48,11 @@ class Server(Flask):
         500: "Internal Server Error.",
     }
 
-    def __init__(self, mode=None):
+    def __init__(self):
         static_folder = str(vs.path / "eNMS" / "static")
         super().__init__(__name__, static_folder=static_folder)
         self.rest_api = RestApi()
-        self.update_config(mode or vs.settings["app"]["config_mode"])
+        self.update_config()
         self.register_extensions()
         self.configure_login_manager()
         self.configure_context_processor()
@@ -59,16 +60,16 @@ class Server(Flask):
         self.configure_routes()
         self.configure_terminal_socket()
 
-    def update_config(self, mode):
+    def update_config(self):
         session_timeout = vs.settings["app"]["session_timeout_minutes"]
         self.config.update(
             {
-                "DEBUG": mode.lower() != "production",
+                "DEBUG": vs.settings["app"]["config_mode"].lower() != "production",
                 "SECRET_KEY": getenv("SECRET_KEY", "secret_key"),
                 "WTF_CSRF_TIME_LIMIT": None,
                 "ERROR_404_HELP": False,
                 "MAX_CONTENT_LENGTH": 20 * 1024 * 1024,
-                "WTF_CSRF_ENABLED": mode.lower() != "test",
+                "WTF_CSRF_ENABLED": "pytest" not in modules,
                 "PERMANENT_SESSION_LIFETIME": timedelta(minutes=session_timeout),
             }
         )

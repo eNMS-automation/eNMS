@@ -1,3 +1,4 @@
+import ast
 from builtins import __dict__ as builtins
 from copy import deepcopy
 from datetime import datetime
@@ -556,7 +557,10 @@ class Run(AbstractBase):
                 for pool in db.fetch_all("pool"):
                     pool.compute_pool()
             if self.send_notification:
-                results = self.notify(results, payload)
+                try:
+                    results = self.notify(results, payload)
+                except Exception:
+                    self.log("error", f"Notification error: {format_exc()}")
             app.service_db[self.service.id]["runs"] -= 1
             if not app.service_db[self.id]["runs"]:
                 self.service.status = "Idle"
@@ -924,6 +928,10 @@ class Run(AbstractBase):
             notification["Results"] = results["result"]
         if self.notification_header:
             notification["Header"] = self.sub(self.notification_header, locals())
+            try:
+                notification["Header"] = ast.literal_eval(notification["Header"])
+            except:
+                pass
         if self.include_link_in_summary:
             address = app.settings["app"]["address"]
             notification["Link"] = f"{address}/view_service_results/{self.id}"

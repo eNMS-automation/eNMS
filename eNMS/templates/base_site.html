@@ -190,7 +190,7 @@
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
                     {% for theme, values in themes["themes"].items() %}
                     <li>
-                      <a onclick="eNMS.main.switchTheme('{{ theme }}')"
+                      <a onclick="eNMS.base.switchTheme('{{ theme }}')"
                         >{{ values["name"] }}</a
                       >
                     </li>

@@ -1,4 +1,3 @@
-import ast
 from builtins import __dict__ as builtins
 from copy import deepcopy
 from datetime import datetime
@@ -557,10 +556,7 @@ class Run(AbstractBase):
                 for pool in db.fetch_all("pool"):
                     pool.compute_pool()
             if self.send_notification:
-                try:
-                    results = self.notify(results, payload)
-                except Exception:
-                    self.log("error", f"Notification error: {format_exc()}")
+                results = self.notify(results, payload)
             app.service_db[self.service.id]["runs"] -= 1
             if not app.service_db[self.id]["runs"]:
                 self.service.status = "Idle"
@@ -928,10 +924,6 @@ class Run(AbstractBase):
             notification["Results"] = results["result"]
         if self.notification_header:
             notification["Header"] = self.sub(self.notification_header, locals())
-            try:
-                notification["Header"] = ast.literal_eval(notification["Header"])
-            except Exception:
-                pass
         if self.include_link_in_summary:
             address = app.settings["app"]["address"]
             notification["Link"] = f"{address}/view_service_results/{self.id}"
@@ -944,21 +936,23 @@ class Run(AbstractBase):
 
     def notify(self, results, payload):
         self.log("info", f"Sending {self.send_notification_method} notification...")
-        notification = self.build_notification(results, payload)
-        file_content = deepcopy(notification)
-        if self.include_device_results:
-            file_content["Device Results"] = {}
-            for device in self.target_devices:
-                device_result = db.fetch(
-                    "result",
-                    service_id=self.service_id,
-                    parent_runtime=self.parent_runtime,
-                    device_id=device.id,
-                    allow_none=True,
-                )
-                if device_result:
-                    file_content["Device Results"][device.name] = device_result.result
         try:
+            notification = self.build_notification(results, payload)
+            file_content = deepcopy(notification)
+            if self.include_device_results:
+                file_content["Device Results"] = {}
+                for device in self.target_devices:
+                    device_result = db.fetch(
+                        "result",
+                        service_id=self.service_id,
+                        parent_runtime=self.parent_runtime,
+                        device_id=device.id,
+                        allow_none=True,
+                    )
+                    if device_result:
+                        file_content["Device Results"][
+                            device.name
+                        ] = device_result.result
             if self.send_notification_method == "mail":
                 filename = self.runtime.replace(".", "").replace(":", "")
                 status = "PASS" if results["success"] else "FAILED"
@@ -987,6 +981,7 @@ class Run(AbstractBase):
                 ).text
             results["notification"] = {"success": True, "result": result}
         except Exception:
+            self.log("error", f"Notification error: {format_exc()}")
             results["notification"] = {
                 "success": False,
                 "error": "\n".join(format_exc().splitlines()),
@@ -1185,6 +1180,7 @@ class Run(AbstractBase):
                 "set_var": partial(_self.payload_helper, payload),
                 "parent_device": _self.parent_device or device,
                 "placeholder": _self.original.placeholder,
+                "str_dict": app.str_dict,
             }
         )
         return variables

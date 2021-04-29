@@ -412,6 +412,29 @@ available.  Device specific variables override global variables of the same name
         file_content=file_content
     )
 
+- ``str_dict`` - convert a dictionary to a string form with indentation. It takes the following parameters:
+
+  - ``input`` (mandatory, type ``dict`` or ``any``)
+  - ``depth`` (optional, type ``int``) - how many tabs to indent. Defaults to 0.
+
+  .. code::
+
+    # Variable substitution example
+    {{str_dict(get_var("your_var_name"), depth=1)}}
+
+  .. code::
+
+   # General example
+   test = {'key': 'value', 'key2': [45, 1135, 544]}
+   print(str_dict(test, depth=0))
+   # output:
+   key: value
+   key2:
+           - 45
+           - 1135
+           - 544
+
+
 - ``target_devices``
 
   - **Meaning**: the full list of devices for the service.

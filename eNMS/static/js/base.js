@@ -10,6 +10,7 @@ job: false
 jsPanel: false
 JSONEditor: false
 moment: false
+NProgress: false
 page: false
 rbac: false
 relationships: false
@@ -20,7 +21,12 @@ import { openDebugPanel, showCredentialPanel } from "./administration.js";
 import { initDashboard } from "./inventory.js";
 import { refreshTable, tables, tableInstances } from "./table.js";
 import { initView } from "./visualization.js";
-import { creationMode, initWorkflowBuilder, processWorkflowData, workflow } from "./workflow.js";
+import {
+  creationMode,
+  initWorkflowBuilder,
+  processWorkflowData,
+  workflow,
+} from "./workflow.js";
 
 const currentUrl = window.location.href.split("#")[0].split("?")[0];
 export let editors = {};

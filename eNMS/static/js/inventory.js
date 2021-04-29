@@ -2,6 +2,7 @@
 global
 CodeMirror: false
 configurationProperties: false
+formProperties: false
 settings: true
 echarts: false
 theme: false

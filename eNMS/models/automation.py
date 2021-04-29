@@ -930,7 +930,7 @@ class Run(AbstractBase):
             notification["Header"] = self.sub(self.notification_header, locals())
             try:
                 notification["Header"] = ast.literal_eval(notification["Header"])
-            except:
+            except Exception:
                 pass
         if self.include_link_in_summary:
             address = app.settings["app"]["address"]

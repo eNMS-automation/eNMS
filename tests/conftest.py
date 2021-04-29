@@ -10,8 +10,7 @@ import warnings
 def base_client():
     with warnings.catch_warnings():
         warnings.simplefilter("ignore")
-        app_context = server.app_context()
-        app_context.push()
+        server.app_context().push()
         db.session.close()
         yield server.test_client()
 
@@ -20,8 +19,7 @@ def base_client():
 def user_client():
     with warnings.catch_warnings():
         warnings.simplefilter("ignore")
-        app_context = server.app_context()
-        app_context.push()
+        server.app_context().push()
         db.session.close()
         client = server.test_client()
         with server.app_context():

@@ -487,8 +487,8 @@ class Controller:
 
     def get_git_history(self, device_id):
         device = db.fetch("device", id=device_id)
-        repo = Repo(self.path / "network_data")
-        path = self.path / "network_data" / device.name
+        repo = Repo(vs.path / "network_data")
+        path = vs.path / "network_data" / device.name
         return {
             data_type: [
                 {"hash": str(commit), "date": commit.committed_datetime}
@@ -498,7 +498,7 @@ class Controller:
         }
 
     def get_git_network_data(self, device_name, hash):
-        commit, result = Repo(self.path / "network_data").commit(hash), {}
+        commit, result = Repo(vs.path / "network_data").commit(hash), {}
         device = db.fetch("device", name=device_name)
         for property in vs.configuration_properties:
             try:

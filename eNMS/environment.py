@@ -44,7 +44,6 @@ from eNMS.variables import vs
 
 class Environment:
     def __init__(self):
-        self.path = Path.cwd()
         self.scheduler_address = getenv("SCHEDULER_ADDR")
         self.init_authentication()
         self.init_encryption()
@@ -130,9 +129,9 @@ class Environment:
             self.encrypt, self.decrypt = b64encode, b64decode
 
     def init_logs(self):
-        folder = self.path / "logs"
+        folder = vs.path / "logs"
         folder.mkdir(parents=True, exist_ok=True)
-        with open(self.path / "setup" / "logging.json", "r") as logging_config:
+        with open(vs.path / "setup" / "logging.json", "r") as logging_config:
             logging_config = load(logging_config)
         dictConfig(logging_config)
         for logger, log_level in logging_config["external_loggers"].items():

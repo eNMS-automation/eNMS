@@ -453,7 +453,53 @@ class Task(AbstractBase):
         super().update(**kwargs)
         if not kwargs.get("import_mechanism", False):
             db.session.commit()
+<<<<<<< HEAD
             self.schedule(mode="schedule" if self.is_active else "pause")
+=======
+            state = self.get_state()
+            self.status = state["status"] = "Aborted" if self.stop else "Completed"
+            self.success = results["success"]
+            if self.update_pools_after_running:
+                for pool in db.fetch_all("pool"):
+                    pool.compute_pool()
+            if self.send_notification:
+                try:
+                    results = self.notify(results, payload)
+                except Exception:
+                    error = "\n".join(format_exc().splitlines())
+                    self.log("error", f"Notification error: {error}")
+                    results["notification"] = {"success": False, "error": error}
+            app.service_db[self.service.id]["runs"] -= 1
+            if not app.service_db[self.id]["runs"]:
+                self.service.status = "Idle"
+            now = datetime.now().replace(microsecond=0)
+            results["duration"] = self.duration = str(now - start)
+            if self.runtime == self.parent_runtime:
+                self.state = state
+                self.close_remaining_connections()
+            if self.task and not (self.task.frequency or self.task.crontab_expression):
+                self.task.is_active = False
+            results["properties"] = {
+                "run": {
+                    k: v
+                    for k, v in self.properties.items()
+                    if k not in db.private_properties_set
+                },
+                "service": self.service.get_properties(exclude=["positions"]),
+            }
+            results["trigger"] = self.trigger
+            if (
+                self.runtime == self.parent_runtime
+                or len(self.target_devices) > 1
+                or self.run_method == "once"
+            ):
+                results = self.create_result(
+                    results, run_result=self.runtime == self.parent_runtime
+                )
+            if app.redis_queue and self.runtime == self.parent_runtime:
+                app.redis("delete", *(app.redis("keys", f"{self.runtime}/*") or []))
+        return results
+>>>>>>> master
 
     def delete(self):
         post(f"{env.scheduler_address}/delete_job/{self.id}")

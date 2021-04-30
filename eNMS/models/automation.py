@@ -387,9 +387,9 @@ class Run(AbstractBase):
 
     @property
     def progress(self):
-        if not self.service_run:
+        progress = self.get_state().get(str(self.service_id), {}).get("progress")
+        if not progress:
             return
-        progress = self.get_state().get(self.path, {}).get("progress")
         try:
             progress = progress["device"]
             failure = int(progress.get("failure", 0))

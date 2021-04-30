@@ -206,7 +206,12 @@ class Runner:
                 for pool in db.fetch_all("pool"):
                     pool.compute_pool()
             if self.send_notification:
-                results = self.notify(results)
+                try:
+                    results = self.notify(results)
+                except Exception:
+                    error = "\n".join(format_exc().splitlines())
+                    self.log("error", f"Notification error: {error}")
+                    results["notification"] = {"success": False, "error": error}
             vs.service_run_count[self.service.id] -= 1
             if not vs.service_run_count[self.id]:
                 self.service.status = "Idle"
@@ -596,39 +601,33 @@ class Runner:
                 )
                 if device_result:
                     file_content["Device Results"][device.name] = device_result.result
-        try:
-            if self.send_notification_method == "mail":
-                filename = self.runtime.replace(".", "").replace(":", "")
-                status = "PASS" if results["success"] else "FAILED"
-                result = env.send_email(
-                    f"{status}: {self.service.name}",
-                    vs.dict_to_string(notification),
-                    recipients=self.mail_recipient,
-                    reply_to=self.reply_to,
-                    filename=f"results-{filename}.txt",
-                    file_content=vs.dict_to_string(file_content),
-                )
-            elif self.send_notification_method == "slack":
-                result = SlackClient(getenv("SLACK_TOKEN")).api_call(
-                    "chat.postMessage",
-                    channel=vs.settings["slack"]["channel"],
-                    text=notification,
-                )
-            else:
-                result = post(
-                    vs.settings["mattermost"]["url"],
-                    verify=vs.settings["mattermost"]["verify_certificate"],
-                    json={
-                        "channel": vs.settings["mattermost"]["channel"],
-                        "text": notification,
-                    },
-                ).text
-            results["notification"] = {"success": True, "result": result}
-        except Exception:
-            results["notification"] = {
-                "success": False,
-                "error": "\n".join(format_exc().splitlines()),
-            }
+        if self.send_notification_method == "mail":
+            filename = self.runtime.replace(".", "").replace(":", "")
+            status = "PASS" if results["success"] else "FAILED"
+            result = env.send_email(
+                f"{status}: {self.service.name}",
+                vs.dict_to_string(notification),
+                recipients=self.mail_recipient,
+                reply_to=self.reply_to,
+                filename=f"results-{filename}.txt",
+                file_content=vs.dict_to_string(file_content),
+            )
+        elif self.send_notification_method == "slack":
+            result = SlackClient(getenv("SLACK_TOKEN")).api_call(
+                "chat.postMessage",
+                channel=vs.settings["slack"]["channel"],
+                text=notification,
+            )
+        else:
+            result = post(
+                vs.settings["mattermost"]["url"],
+                verify=vs.settings["mattermost"]["verify_certificate"],
+                json={
+                    "channel": vs.settings["mattermost"]["channel"],
+                    "text": notification,
+                },
+            ).text
+        results["notification"] = {"success": True, "result": result}
         return results
 
     def get_credentials(self, device):
@@ -815,6 +814,7 @@ class Runner:
             {
                 "__builtins__": {**builtins, "__import__": _self._import},
                 "delete": partial(_self.database_function, "delete"),
+                "dict_to_string": vs.dict_to_string,
                 "fetch": partial(_self.database_function, "fetch"),
                 "fetch_all": partial(_self.database_function, "fetch_all"),
                 "factory": partial(_self.database_function, "factory"),

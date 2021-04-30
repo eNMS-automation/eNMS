@@ -1,4 +1,3 @@
-from os import getenv
 from re import sub
 from warnings import warn
 

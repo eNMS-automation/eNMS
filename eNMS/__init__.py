@@ -1,4 +1,5 @@
 from eNMS.controller import controller
+from eNMS.custom import CustomApp  # noqa: F401
 from eNMS.database import db
 from eNMS.environment import env
 from eNMS.forms import form_factory

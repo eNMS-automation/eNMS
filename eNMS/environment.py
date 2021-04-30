@@ -28,6 +28,16 @@ try:
 except ImportError:
     warn(f"Couldn't import hvac module ({format_exc()})")
 
+try:
+    from ldap3 import Server
+except ImportError as exc:
+    warn(f"Couldn't import ldap3 module ({exc})")
+
+try:
+    from tacacs_plus.client import TACACSClient
+except ImportError as exc:
+    warn(f"Couldn't import tacacs_plus module ({exc})")
+
 from eNMS.database import db
 from eNMS.variables import vs
 
@@ -36,6 +46,7 @@ class Environment:
     def __init__(self):
         self.path = Path.cwd()
         self.scheduler_address = getenv("SCHEDULER_ADDR")
+        self.init_authentication()
         self.init_encryption()
         self.use_vault = vs.settings["vault"]["use_vault"]
         if self.use_vault:
@@ -91,6 +102,15 @@ class Environment:
         if self.fernet_encryption and isinstance(password, str):
             password = str.encode(password)
         return str(self.decrypt(password), "utf-8")
+
+    def init_authentication(self):
+        ldap_address, tacacs_address = getenv("LDAP_ADDR"), getenv("TACACS_ADDR")
+        if ldap_address:
+            self.ldap_server = Server(getenv("LDAP_ADDR"))
+        if tacacs_address:
+            self.tacacs_client = TACACSClient(
+                getenv("TACACS_ADDR"), 49, getenv("TACACS_PASSWORD")
+            )
 
     def init_connection_pools(self):
         self.request_session = RequestSession()

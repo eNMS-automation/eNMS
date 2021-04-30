@@ -3,15 +3,9 @@ from re import sub
 from warnings import warn
 
 try:
-    from ldap3 import Connection, Server
+    from ldap3 import Connection
 except ImportError as exc:
-    warn(f"Couldn't import ldap3 module ({exc})")
-
-try:
-    from tacacs_plus.client import TACACSClient
-except ImportError as exc:
-    warn(f"Couldn't import tacacs_plus module ({exc})")
-
+    warn(f"Couldn't import ldap3 module({exc})")
 
 from eNMS.environment import env
 from eNMS.variables import vs
@@ -20,16 +14,16 @@ from eNMS.variables import vs
 class CustomApp:
     def ldap_authentication(self, user, name, password):
         if not hasattr(env, "ldap_server"):
-            env.ldap_server = Server(getenv("LDAP_ADDR"))
+            env.log("error", "LDAP authentication failed: no server configured")
+            return False
         user = f"uid={name},dc=example,dc=com"
         success = Connection(env.ldap_server, user=user, password=password).bind()
         return {"name": name, "is_admin": True} if success else False
 
     def tacacs_authentication(self, user, name, password):
         if not hasattr(env, "tacacs_client"):
-            env.tacacs_client = TACACSClient(
-                getenv("TACACS_ADDR"), 49, getenv("TACACS_PASSWORD")
-            )
+            env.log("error", "TACACS+ authentication failed: no server configured")
+            return False
         success = env.tacacs_client.authenticate(name, password).valid
         return {"name": name, "is_admin": True} if success else False
 

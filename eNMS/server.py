@@ -378,7 +378,7 @@ class Server(Flask):
             elif form_type:
                 form = vs.form_class[form_type](request.form)
                 if not form.validate_on_submit():
-                    return jsonify({"invalid_form": True, **{"errors": form.errors}})
+                    return jsonify({"invalid_form": True, "errors": form.errors})
                 kwargs = form.form_postprocessing(request.form)
             else:
                 kwargs = request.form

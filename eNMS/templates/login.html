@@ -7,6 +7,10 @@
       href="{{ url_for('static', filename='lib/bootstrap/css/bootstrap.min.css') }}"
       rel="stylesheet"
     />
+    <link
+      href="{{ url_for('static', filename='lib/bootstrap-select/bootstrap-select.min.css') }}"
+      rel="stylesheet"
+    />
     <link href="{{ url_for('static', filename='css/login.css') }}" rel="stylesheet" />
     <link
       href="{{ url_for('static', filename='css/themes/{}.css'.format(themes['default'])) }}"
@@ -40,5 +44,11 @@
         </form>
       </section>
     </div>
+    <script src="{{ url_for('static', filename='lib/jquery/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/bootstrap/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/bootstrap-select/bootstrap-select.min.js') }}"></script>
+    <script>
+      $("#authentication_method").selectpicker("refresh");
+    </script>
   </body>
 </html>

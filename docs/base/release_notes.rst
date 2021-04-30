@@ -66,6 +66,8 @@ to the "parent runtime property". Example of /search payload:
 value is empty or not.
 - Add table display with property value constraint when clicking on the charts in the dashboard.
 - Add scrapli netconf service
+- Move LDAP and TACACS+ server init to environment file instead of custom file. Impact on authentication
+ldap / tacacs functions.
 
 - Separate controller (handling HTTP POST requests) from main application (gluing everything together)
 Impact:
@@ -89,6 +91,7 @@ def job(self, run, payload, device): -> def job(self, run, device):
 for consistency with rest of codebase. In properties.json:
 * change "type": "boolean" to "type": "bool"
 * change "type": "string" to "type": "str"
+- Update authentication functions in custom.py
 
 To be tested:
 - Refactoring of the run mechanism:

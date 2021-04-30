@@ -842,3 +842,8 @@ textarea.form-control {
   margin-left: 35px;
   margin-right: 35px;
 }
+
+/* Don't display underline in service panel section header */
+.panel-heading {
+  text-decoration: none !important;
+}

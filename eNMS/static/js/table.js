@@ -38,6 +38,7 @@ export class Table {
       column.name = column.data;
     });
     this.id = `${this.type}${id ? `-${id}` : ""}`;
+    this.model = this.modelFiltering || this.type;
     tableInstances[this.id] = this;
     // eslint-disable-next-line new-cap
     this.table = $(`#table-${this.id}`).DataTable({
@@ -124,11 +125,11 @@ export class Table {
         self.postProcessing();
       },
       ajax: {
-        url: `/filtering/${this.modelFiltering || this.type}`,
+        url: `/filtering/${this.model}`,
         type: "POST",
         contentType: "application/json",
         data: (data) => {
-          let form = serializeForm(`#search-form-${this.id}`, `${this.type}_filtering`);
+          let form = serializeForm(`#search-form-${this.id}`, `${this.model}_filtering`);
           for (const [key, value] of Object.entries(form)) {
             if (key.includes("_invert")) form[key] = value == "y";
           }
@@ -386,11 +387,10 @@ export class Table {
   }
 
   bulkEditButton() {
-    const panelType = this.modelFiltering || this.type;
     const showPanelFunction =
-      panelType == "service"
+      this.model == "service"
         ? "automation.openServicePanel(true)"
-        : `base.showInstancePanel('${panelType}', null, 'bulk', '${this.id}')`;
+        : `base.showInstancePanel('${this.model}', null, 'bulk', '${this.id}')`;
     return `
       <button
         class="btn btn-primary"
@@ -403,10 +403,9 @@ export class Table {
   }
 
   bulkDeletionButton() {
-    const type = this.modelFiltering || this.type;
     const onClick = this.relation
-      ? `eNMS.table.bulkRemoval('${this.id}', '${type}', ${this.relationString})`
-      : `eNMS.table.showBulkDeletionPanel('${this.id}', '${type}')`;
+      ? `eNMS.table.bulkRemoval('${this.id}', '${this.model}', ${this.relationString})`
+      : `eNMS.table.showBulkDeletionPanel('${this.id}', '${this.model}')`;
     return `
       <button
         class="btn btn-danger"

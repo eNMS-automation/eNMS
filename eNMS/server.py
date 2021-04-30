@@ -22,7 +22,7 @@ from pty import fork
 from subprocess import run
 from sys import modules
 from traceback import format_exc
-from werkzeug.exceptions import Forbidden
+from werkzeug.exceptions import Forbidden, NotFound
 
 from eNMS.controller import controller
 from eNMS.database import db
@@ -207,6 +207,8 @@ class Server(Flask):
                     status_code = 200
                 except (db.rbac_error, Forbidden):
                     status_code = 403
+                except NotFound:
+                    status_code = 404
                 except Exception:
                     status_code, traceback = 500, format_exc()
             log = (

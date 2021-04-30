@@ -556,7 +556,12 @@ class Run(AbstractBase):
                 for pool in db.fetch_all("pool"):
                     pool.compute_pool()
             if self.send_notification:
-                results = self.notify(results, payload)
+                try:
+                    results = self.notify(results, payload)
+                except Exception:
+                    error = "\n".join(format_exc().splitlines())
+                    self.log("error", f"Notification error: {error}")
+                    results["notification"] = {"success": False, "error": error}
             app.service_db[self.service.id]["runs"] -= 1
             if not app.service_db[self.id]["runs"]:
                 self.service.status = "Idle"
@@ -936,56 +941,47 @@ class Run(AbstractBase):
 
     def notify(self, results, payload):
         self.log("info", f"Sending {self.send_notification_method} notification...")
-        try:
-            notification = self.build_notification(results, payload)
-            file_content = deepcopy(notification)
-            if self.include_device_results:
-                file_content["Device Results"] = {}
-                for device in self.target_devices:
-                    device_result = db.fetch(
-                        "result",
-                        service_id=self.service_id,
-                        parent_runtime=self.parent_runtime,
-                        device_id=device.id,
-                        allow_none=True,
-                    )
-                    if device_result:
-                        file_content["Device Results"][
-                            device.name
-                        ] = device_result.result
-            if self.send_notification_method == "mail":
-                filename = self.runtime.replace(".", "").replace(":", "")
-                status = "PASS" if results["success"] else "FAILED"
-                result = app.send_email(
-                    f"{status}: {self.service.name}",
-                    app.str_dict(notification),
-                    recipients=self.mail_recipient,
-                    reply_to=self.reply_to,
-                    filename=f"results-{filename}.txt",
-                    file_content=app.str_dict(file_content),
+        notification = self.build_notification(results, payload)
+        file_content = deepcopy(notification)
+        if self.include_device_results:
+            file_content["Device Results"] = {}
+            for device in self.target_devices:
+                device_result = db.fetch(
+                    "result",
+                    service_id=self.service_id,
+                    parent_runtime=self.parent_runtime,
+                    device_id=device.id,
+                    allow_none=True,
                 )
-            elif self.send_notification_method == "slack":
-                result = SlackClient(getenv("SLACK_TOKEN")).api_call(
-                    "chat.postMessage",
-                    channel=app.settings["slack"]["channel"],
-                    text=notification,
-                )
-            else:
-                result = post(
-                    app.settings["mattermost"]["url"],
-                    verify=app.settings["mattermost"]["verify_certificate"],
-                    json={
-                        "channel": app.settings["mattermost"]["channel"],
-                        "text": notification,
-                    },
-                ).text
-            results["notification"] = {"success": True, "result": result}
-        except Exception:
-            self.log("error", f"Notification error: {format_exc()}")
-            results["notification"] = {
-                "success": False,
-                "error": "\n".join(format_exc().splitlines()),
-            }
+                if device_result:
+                    file_content["Device Results"][device.name] = device_result.result
+        if self.send_notification_method == "mail":
+            filename = self.runtime.replace(".", "").replace(":", "")
+            status = "PASS" if results["success"] else "FAILED"
+            result = app.send_email(
+                f"{status}: {self.service.name}",
+                app.str_dict(notification),
+                recipients=self.mail_recipient,
+                reply_to=self.reply_to,
+                filename=f"results-{filename}.txt",
+                file_content=app.str_dict(file_content),
+            )
+        elif self.send_notification_method == "slack":
+            result = SlackClient(getenv("SLACK_TOKEN")).api_call(
+                "chat.postMessage",
+                channel=app.settings["slack"]["channel"],
+                text=notification,
+            )
+        else:
+            result = post(
+                app.settings["mattermost"]["url"],
+                verify=app.settings["mattermost"]["verify_certificate"],
+                json={
+                    "channel": app.settings["mattermost"]["channel"],
+                    "text": notification,
+                },
+            ).text
+        results["notification"] = {"success": True, "result": result}
         return results
 
     def get_credentials(self, device):
@@ -1180,7 +1176,7 @@ class Run(AbstractBase):
                 "set_var": partial(_self.payload_helper, payload),
                 "parent_device": _self.parent_device or device,
                 "placeholder": _self.original.placeholder,
-                "str_dict": app.str_dict,
+                "dict_to_string": app.str_dict,
             }
         )
         return variables

@@ -31,12 +31,12 @@
       </p>
       <p>
           The replaced text will show up in the notification after the "Header:" line.  Note that some formatting
-          may be necessary - and our example will use the <b>str_dict</b> function (see <a
+          may be necessary - and our example will use the <b>dict_to_string</b> function (see <a
                 href="/docs/automation/services.html#variables"
                 style="text-decoration: underline;"
-              >Variables</a> - scroll down to find str_dict).
+              >Variables</a> - scroll down to find dict_to_string).
       </p>
-    <textarea class="help-snippet" style="height: fit-content;">{% raw %}{{ str_dict(get_var("variable_name"), depth=1) }}{% endraw %}</textarea>
+    <textarea class="help-snippet" style="height: fit-content;">{% raw %}{{ dict_to_string(get_var("variable_name"), depth=1) }}{% endraw %}</textarea>
     <br>
     <p>Sample output:</p>
 <pre>

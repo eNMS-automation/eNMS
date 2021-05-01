@@ -16314,7 +16314,7 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels: {}
-  last_modified: '2021-04-24 08:33:23.084575'
+  last_modified: '2021-05-01 04:49:56.302045'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -16340,7 +16340,9 @@
   send_notification_method: mail
   services: ['[Shared] Start', '[Shared] End', '[Regression Workflow: Scrapli Netconf
       Service] Get Running Configuration', '[Regression Workflow: Scrapli Netconf
-      Service] Get State']
+      Service] Get State', '[Regression Workflow: Scrapli Netconf Service] Edit Interface
+      Ethernet1', '[Regression Workflow: Scrapli Netconf Service] Delete Ethernet
+      1 description']
   shared: false
   skip: {}
   skip_query: ''
@@ -16359,7 +16361,7 @@
 - access_groups: admin
   close_connection: false
   command: get_config
-  commit: false
+  commit_config: false
   completion_time: 1
   content: ''
   content_match: ''
@@ -16399,7 +16401,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: ['All devices, links, services and users']
+  pools: []
   positions:
     'Regression Workflow: Scrapli Netconf Service': [44, -124]
   postprocessing: ''
@@ -16432,7 +16434,7 @@
 - access_groups: admin
   close_connection: false
   command: get
-  commit: false
+  commit_config: false
   completion_time: 1
   content: "<if:interfaces -state xmlns:if=\"urn:ietf:params:xml:ns:yang:ietf-interfaces\"\
     >\r\n      <if:interface>\r\n        <if:name>et1</if:name>\r\n      </if:interface>\r\
@@ -16474,7 +16476,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: ['All devices, links, services and users']
+  pools: []
   positions:
     'Regression Workflow: Scrapli Netconf Service': [355, -127]
   postprocessing: ''
@@ -16485,6 +16487,158 @@
   reserved: false
   run_method: per_device
   scoped_name: Get State
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: success
+  start_new_connection: false
+  strip_namespaces: false
+  target: running
+  target_devices: []
+  target_pools: []
+  time_between_retries: 10
+  type: scrapli_netconf_service
+  update_pools_after_running: false
+  update_target_pools: false
+  validation_condition: none
+  validation_method: text
+  vendor: ''
+  waiting_time: 0
+- access_groups: admin
+  close_connection: false
+  command: rpc
+  commit_config: true
+  completion_time: 1
+  content: "<nc:edit-config xmlns:nc=\"urn:ietf:params:xml:ns:netconf:base:1.0\">\r\
+    \n   <target>\r\n   <running/>\r\n   </target>\r\n   <commands>\r\n   <command>interface\
+    \ ethernet 1</command>\r\n   <command>description YYYY</command>\r\n   </commands>\r\
+    \n   </nc:edit-config>"
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credential_type: any
+  credentials: device
+  custom_password: ''
+  custom_username: ''
+  default_access: creator
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  impacting: false
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2021-05-01 04:47:40.039243'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Regression Workflow: Scrapli Netconf Service] Edit Interface Ethernet1'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: ['All devices, links, services and users']
+  positions:
+    'Regression Workflow: Scrapli Netconf Service': [0, 0]
+  postprocessing: ''
+  postprocessing_mode: always
+  preprocessing: ''
+  priority: 1
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: Edit Interface Ethernet1
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: success
+  start_new_connection: false
+  strip_namespaces: false
+  target: running
+  target_devices: []
+  target_pools: []
+  time_between_retries: 10
+  type: scrapli_netconf_service
+  update_pools_after_running: false
+  update_target_pools: false
+  validation_condition: none
+  validation_method: text
+  vendor: ''
+  waiting_time: 0
+- access_groups: admin
+  close_connection: false
+  command: rpc
+  commit_config: false
+  completion_time: 1
+  content: "<nc:edit-config xmlns:nc=\"urn:ietf:params:xml:ns:netconf:base:1.0\">\r\
+    \n   <target>\r\n   <running/>\r\n   </target>\r\n   <commands>\r\n   <command>interface\
+    \ ethernet 1</command>\r\n   <command>no description YYYY</command>\r\n   </commands>\r\
+    \n   </nc:edit-config>"
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credential_type: any
+  credentials: device
+  custom_password: ''
+  custom_username: ''
+  default_access: creator
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  impacting: false
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2021-05-01 04:49:51.290916'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Regression Workflow: Scrapli Netconf Service] Delete Ethernet 1 description'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: ['All devices, links, services and users']
+  positions:
+    'Regression Workflow: Scrapli Netconf Service': [269, 23]
+  postprocessing: ''
+  postprocessing_mode: always
+  preprocessing: ''
+  priority: 1
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: Delete Ethernet 1 description
   send_notification: false
   send_notification_method: mail
   shared: false

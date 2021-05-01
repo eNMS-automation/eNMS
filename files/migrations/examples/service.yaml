@@ -120,7 +120,7 @@
     'Regression Workflow: Result content in memory (scalability)': [0, 0]
     'Regression Workflow: Scalability Test (large workflow)': *id016
     'Regression Workflow: Scrapli': *id017
-    'Regression Workflow: Scrapli Netconf Service': [-172, 55]
+    'Regression Workflow: Scrapli Netconf Service': [-284, -146]
     'Regression Workflow: Separate Failure - Success Paths': *id018
     'Regression Workflow: Service Priorities, Napalm Getters, Postprocessing': [-316,
       80]
@@ -374,7 +374,7 @@
     'Regression Workflow: RBAC Target Restriction': [654, -133]
     'Regression Workflow: Scalability Test (large workflow)': *id057
     'Regression Workflow: Scrapli': *id058
-    'Regression Workflow: Scrapli Netconf Service': [566, 119]
+    'Regression Workflow: Scrapli Netconf Service': [662, 179]
     'Regression Workflow: Separate Failure - Success Paths': *id059
     'Regression Workflow: Service Priorities, Napalm Getters, Postprocessing': [703,
       150]
@@ -16314,7 +16314,7 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels: {}
-  last_modified: '2021-05-01 04:49:56.302045'
+  last_modified: '2021-05-01 04:54:42.277071'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -16389,7 +16389,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2021-04-24 09:09:16.495179'
+  last_modified: '2021-05-01 04:57:39.694410'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -16401,11 +16401,13 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
-    'Regression Workflow: Scrapli Netconf Service': [44, -124]
-  postprocessing: ''
-  postprocessing_mode: always
+    'Regression Workflow: Scrapli Netconf Service': [30, -133]
+  postprocessing: "results[\"success\"] = \"<description>YYY</description>\" in results[\"\
+    result\"]\r\nlog(\"error\", \"Description 'YYYY' missing from Running Configuration\"\
+    )"
+  postprocessing_mode: success
   preprocessing: ''
   priority: 1
   reply_to: ''
@@ -16478,7 +16480,7 @@
   operating_system: ''
   pools: []
   positions:
-    'Regression Workflow: Scrapli Netconf Service': [355, -127]
+    'Regression Workflow: Scrapli Netconf Service': [565, -123]
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -16552,9 +16554,9 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: ['All devices, links, services and users']
+  pools: []
   positions:
-    'Regression Workflow: Scrapli Netconf Service': [0, 0]
+    'Regression Workflow: Scrapli Netconf Service': [-274, 162]
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -16628,9 +16630,9 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: ['All devices, links, services and users']
+  pools: []
   positions:
-    'Regression Workflow: Scrapli Netconf Service': [269, 23]
+    'Regression Workflow: Scrapli Netconf Service': [284, 163]
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''

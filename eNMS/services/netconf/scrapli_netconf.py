@@ -64,7 +64,13 @@ class ScrapliNetconfForm(ConnectionForm):
     strip_namespaces = BooleanField("Strip Namespaces from returned XML")
     groups = {
         "Main Parameters": {
-            "commands": ["command", "target", "content", "commit_config", "strip_namespaces"],
+            "commands": [
+                "command",
+                "target",
+                "content",
+                "commit_config",
+                "strip_namespaces",
+            ],
             "default": "expanded",
         },
         **ConnectionForm.groups,

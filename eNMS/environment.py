@@ -12,7 +12,6 @@ from logging.config import dictConfig
 from logging import getLogger, info
 from os import getenv
 from passlib.hash import argon2
-from pathlib import Path
 from redis import Redis
 from redis.exceptions import ConnectionError, TimeoutError
 from requests import Session as RequestSession

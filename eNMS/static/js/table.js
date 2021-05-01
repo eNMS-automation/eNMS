@@ -129,7 +129,10 @@ export class Table {
         type: "POST",
         contentType: "application/json",
         data: (data) => {
-          let form = serializeForm(`#search-form-${this.id}`, `${this.model}_filtering`);
+          let form = serializeForm(
+            `#search-form-${this.id}`,
+            `${this.model}_filtering`
+          );
           for (const [key, value] of Object.entries(form)) {
             if (key.includes("_invert")) form[key] = value == "y";
           }

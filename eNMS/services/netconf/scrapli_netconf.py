@@ -16,7 +16,7 @@ class ScrapliNetconfService(ConnectionService):
     command = db.Column(db.SmallString)
     target = db.Column(db.SmallString)
     content = db.Column(db.LargeString)
-    commit = db.Column(Boolean, default=False)
+    commit_config = db.Column(Boolean, default=False)
     strip_namespaces = db.Column(Boolean, default=False)
 
     __mapper_args__ = {"polymorphic_identity": "scrapli_netconf_service"}
@@ -32,8 +32,8 @@ class ScrapliNetconfService(ConnectionService):
         if run.command == "get":
             kwargs["filter_type"] = "subtree"
         response = getattr(run.scrapli_connection(device), run.command)(**kwargs)
-        if run.commit:
-            run.scrapli_connection.commit()
+        if run.commit_config:
+            run.scrapli_connection(device).commit()
         return {"filter_": filter, "kwargs": kwargs, "result": response.result}
 
 
@@ -60,11 +60,11 @@ class ScrapliNetconfForm(ConnectionForm):
         )
     )
     content = StringField(substitution=True, widget=TextArea(), render_kw={"rows": 5})
-    commit = BooleanField("Commit After Editing Configuration")
+    commit_config = BooleanField("Commit After Editing Configuration")
     strip_namespaces = BooleanField("Strip Namespaces from returned XML")
     groups = {
         "Main Parameters": {
-            "commands": ["command", "target", "content", "commit", "strip_namespaces"],
+            "commands": ["command", "target", "content", "commit_config", "strip_namespaces"],
             "default": "expanded",
         },
         **ConnectionForm.groups,

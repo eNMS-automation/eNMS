@@ -1,14 +1,14 @@
 - last_modified: '2021-01-04 09:21:18.073774'
   name: 'Regression View : Basic Example'
-  objects: ['2021-03-29 09:40:15.682829', '2021-05-01 04:51:17.520274', '2021-05-01
-      04:51:17.526454']
+  objects: ['2021-03-29 09:40:15.682829', '2021-05-02 03:31:48.773924', '2021-05-02
+      03:31:48.777489']
   type: view
   x: 0.0
   y: 0.0
   z: 0.0
 - {name: '2021-03-29 09:40:15.682829', type: plan, view: 'Regression View : Basic
     Example', x: 0.0, y: 10.0, z: 0.0}
-- {device: Austin, name: '2021-05-01 04:51:17.520274', type: node, view: 'Regression
+- {device: Austin, name: '2021-05-02 03:31:48.773924', type: node, view: 'Regression
     View : Basic Example', x: -3.5314743547792204, y: 10.0, z: 119.47871920651392}
-- {device: Washington, name: '2021-05-01 04:51:17.526454', type: node, view: 'Regression
+- {device: Washington, name: '2021-05-02 03:31:48.777489', type: node, view: 'Regression
     View : Basic Example', x: 0.0, y: 10.0, z: 0.0}

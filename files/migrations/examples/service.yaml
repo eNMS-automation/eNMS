@@ -120,7 +120,7 @@
     'Regression Workflow: Result content in memory (scalability)': [0, 0]
     'Regression Workflow: Scalability Test (large workflow)': *id016
     'Regression Workflow: Scrapli': *id017
-    'Regression Workflow: Scrapli Netconf Service': [-284, -146]
+    'Regression Workflow: Scrapli Netconf Service': [-298, -101]
     'Regression Workflow: Separate Failure - Success Paths': *id018
     'Regression Workflow: Service Priorities, Napalm Getters, Postprocessing': [-316,
       80]
@@ -374,7 +374,7 @@
     'Regression Workflow: RBAC Target Restriction': [654, -133]
     'Regression Workflow: Scalability Test (large workflow)': *id057
     'Regression Workflow: Scrapli': *id058
-    'Regression Workflow: Scrapli Netconf Service': [662, 179]
+    'Regression Workflow: Scrapli Netconf Service': [-293, 114]
     'Regression Workflow: Separate Failure - Success Paths': *id059
     'Regression Workflow: Service Priorities, Napalm Getters, Postprocessing': [703,
       150]
@@ -16313,8 +16313,30 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  labels: {}
-  last_modified: '2021-05-01 04:54:42.277071'
+  labels:
+    03095192-e0e3-4e4b-837a-d62da1e2745d:
+      alignment: left
+      content: "Uses Netconf RPC to delete the description\r\nof interface \"Ethernet\
+        \ 1\"."
+      positions: [538, 209]
+    ae5534ad-a205-4918-9410-060a9e37be0d:
+      alignment: left
+      content: "Uses Netconf RPC to edit the description of interface \"Ethernet 1\"\
+        .\r\nDescription is set to \"YYYY\""
+      positions: [54, -148]
+    b4231341-9041-4ff2-9d9e-4955d16aa247:
+      alignment: left
+      content: "Uses Scrapli Netconf \"get config\" function to retrieve\r\nthe running\
+        \ configuration.\r\nIn postprocessing, checking for \"YYYY\" to make sure\
+        \ the\r\ndescription was properly configured in the previous step."
+      positions: [483, -149]
+    d95f1a49-b583-4bf9-91a8-94a0ed98171f:
+      alignment: left
+      content: "Uses Scrapli Netconf \"Get\" function with XML payload to get data\r\
+        \nfrom all interfaces. The output is converted to a dictionary in step 4.\r\
+        \n"
+      positions: [33, 209]
+  last_modified: '2021-05-02 03:36:08.206609'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -16389,7 +16411,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2021-05-01 04:57:39.694410'
+  last_modified: '2021-05-02 03:34:31.845229'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -16403,8 +16425,8 @@
   operating_system: ''
   pools: ['All devices, links, services and users']
   positions:
-    'Regression Workflow: Scrapli Netconf Service': [30, -133]
-  postprocessing: "results[\"success\"] = \"<description>YYY</description>\" in results[\"\
+    'Regression Workflow: Scrapli Netconf Service': [479, -63]
+  postprocessing: "results[\"success\"] = \"<description>YYYY</description>\" in results[\"\
     result\"]\r\nlog(\"error\", \"Description 'YYYY' missing from Running Configuration\"\
     )"
   postprocessing_mode: success
@@ -16480,7 +16502,7 @@
   operating_system: ''
   pools: []
   positions:
-    'Regression Workflow: Scrapli Netconf Service': [565, -123]
+    'Regression Workflow: Scrapli Netconf Service': [26, 125]
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -16556,7 +16578,7 @@
   operating_system: ''
   pools: []
   positions:
-    'Regression Workflow: Scrapli Netconf Service': [-274, 162]
+    'Regression Workflow: Scrapli Netconf Service': [20, -72]
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -16632,7 +16654,7 @@
   operating_system: ''
   pools: []
   positions:
-    'Regression Workflow: Scrapli Netconf Service': [284, 163]
+    'Regression Workflow: Scrapli Netconf Service': [510, 143]
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''

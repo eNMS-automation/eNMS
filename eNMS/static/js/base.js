@@ -646,9 +646,10 @@ export function showInstancePanel(type, id, mode, tableId) {
           url: `/filtering/${model}`,
           data: { form: form, bulk: "id" },
           callback: function (instances) {
-            console.log(instances)
             $(`#${type}-id-${tableId}`).val(instances.join("-"));
-            $(`#${type}-scoped_name-${tableId},#${type}-name-${tableId}`).val("Bulk Edit");
+            $(`#${type}-scoped_name-${tableId},#${type}-name-${tableId}`).val(
+              "Bulk Edit"
+            );
             panel.setHeaderTitle(
               `Edit all ${instances.length} ${model}s in table in bulk`
             );

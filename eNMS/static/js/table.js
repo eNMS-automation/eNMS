@@ -1431,10 +1431,10 @@ function bulkRemoval(tableId, model, instance) {
 function bulkEdit(formId, model, table) {
   call({
     url: `/bulk_edit/${model}`,
-    form: `${formId}-form`,
+    form: `${formId}-form-${table}`,
     callback: function (number) {
       refreshTable(table);
-      $(`#${formId}`).remove();
+      $(`#${formId}-${table}`).remove();
       notify(`${number} items modified.`, "success", 5, true);
     },
   });

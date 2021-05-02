@@ -617,7 +617,7 @@ function addInstancesToRelation(type, id) {
 export function showInstancePanel(type, id, mode, tableId) {
   openPanel({
     name: type,
-    id: id,
+    id: id || tableId,
     callback: function (panel) {
       const isService = type.includes("service") || type == "workflow";
       if (isService) showServicePanel(type, id, mode);
@@ -646,25 +646,26 @@ export function showInstancePanel(type, id, mode, tableId) {
           url: `/filtering/${model}`,
           data: { form: form, bulk: "id" },
           callback: function (instances) {
-            $(`#${type}-id`).val(instances.join("-"));
-            $(`#${type}-scoped_name,#${type}-name`).val("Bulk Edit");
+            console.log(instances)
+            $(`#${type}-id-${tableId}`).val(instances.join("-"));
+            $(`#${type}-scoped_name-${tableId},#${type}-name-${tableId}`).val("Bulk Edit");
             panel.setHeaderTitle(
               `Edit all ${instances.length} ${model}s in table in bulk`
             );
-            for (const property of Object.keys(formProperties[panel.id])) {
-              $(`#${type}-action-btn`)
+            for (const property of Object.keys(formProperties[type])) {
+              $(`#${type}-action-btn-${tableId}`)
                 .attr(
                   "onclick",
                   `eNMS.table.bulkEdit('${type}', '${model}', '${tableId}')`
                 )
                 .text("Bulk Edit");
               if (["name", "scoped_name", "type"].includes(property)) {
-                $(`#${type}-${property}`).prop("readonly", true);
+                $(`#${type}-${property}-${tableId}`).prop("readonly", true);
               } else {
                 $(`label[for='${property}']`).after(`
                   <div class="item" style='float:right; margin-left: 15px'>
                     <input
-                      id="bulk-edit-${property}"
+                      id="bulk-edit-${property}-${tableId}"
                       name="bulk-edit-${property}"
                       type="checkbox"
                     />

@@ -463,7 +463,8 @@ class Node(ViewObject):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.name = vs.get_time()
+        if not self.name:
+            self.name = vs.get_time()
 
 
 class Line(ViewObject):
@@ -478,7 +479,8 @@ class Line(ViewObject):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.name = vs.get_time()
+        if not self.name:
+            self.name = vs.get_time()
 
 
 class Plan(ViewObject):

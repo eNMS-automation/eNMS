@@ -16334,9 +16334,9 @@
       alignment: left
       content: "Uses Scrapli Netconf \"Get\" function with XML payload to get data\r\
         \nfrom all interfaces. The output is converted to a dictionary in step 4.\r\
-        \n"
-      positions: [33, 209]
-  last_modified: '2021-05-02 03:36:08.206609'
+        \nCheck that the interface description is not set in post-processing.\r\n"
+      positions: [69, 216]
+  last_modified: '2021-05-02 03:58:48.368107'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -16423,7 +16423,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: ['All devices, links, services and users']
+  pools: []
   positions:
     'Regression Workflow: Scrapli Netconf Service': [479, -63]
   postprocessing: "results[\"success\"] = \"<description>YYYY</description>\" in results[\"\
@@ -16465,11 +16465,11 @@
     \n</if:interfaces>"
   content_match: ''
   content_match_regex: false
-  conversion_method: none
+  conversion_method: xml
   creator: admin
   credential_type: any
   credentials: device
-  custom_password: ''
+  custom_password: YWRtaW4=
   custom_username: ''
   default_access: creator
   definition: Definition
@@ -16488,7 +16488,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2021-04-24 09:09:54.581293'
+  last_modified: '2021-05-02 03:57:46.661617'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -16500,11 +16500,15 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow: Scrapli Netconf Service': [26, 125]
-  postprocessing: ''
-  postprocessing_mode: always
+  postprocessing: "interfaces = results[\"result\"][\"rpc-reply\"][0][\"data\"][0][\"\
+    interfaces\"][0][\"interface\"]\r\nfor interface in interfaces:\r\n    if interface[\"\
+    name\"][0] == \"Ethernet1\":\r\n        break\r\n\r\nresults[\"interface\"] =\
+    \ interface\r\nresults[\"description\"] = interface[\"state\"][0][\"description\"\
+    ][0]\r\nresults[\"success\"] = not results[\"description\"]\r\n"
+  postprocessing_mode: success
   preprocessing: ''
   priority: 1
   reply_to: ''

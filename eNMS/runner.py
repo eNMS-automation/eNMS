@@ -61,6 +61,7 @@ class Runner:
             self.path = str(self.service.id)
         else:
             self.path = f"{run.path}>{self.service.id}"
+        db.session.commit()
         self.start_run()
         vs.run_instances.pop(self.runtime)
 

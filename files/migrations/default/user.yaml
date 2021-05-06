@@ -18,7 +18,7 @@
     /dashboard, /form/file, /form/task, /pool_table, /form/generic_file_transfer_service,
     /form/netmiko_configuration_service, /form/mail_notification_service, /form/upload_files,
     /run_table, /workflow_builder, /form/link, /form/netmiko_file_transfer_service,
-    /logical_view, /form/import_service, /form/napalm_configuration_service, /form/ping_service,
+    /view_builder, /form/import_service, /form/napalm_configuration_service, /form/ping_service,
     /form/mattermost_notification_service, /form/ansible_playbook_service]
   menu: [Admin, Home, Scheduling, Automation, Inventory, Visualization, Plugins]
   name: admin

@@ -669,7 +669,7 @@ function processNetwork(network) {
   let links = {};
   let bundleCoordinates = {};
   for (const link of network.links) {
-    const key = (page == "force_directed_view"
+    const key = (page == "logical_view"
       ? [link.source_id, link.destination_id]
       : [
           `${link.source_latitude}/${link.source_longitude}`,
@@ -707,7 +707,7 @@ function processNetwork(network) {
 }
 
 function displayNetwork({ direction, noAlert, withCluster } = {}) {
-  if (page == "logical_view") return;
+  if (page == "view_builder") return;
   const maximumSize = visualization.logical.maximum_size;
   let data = {};
   currentPath =
@@ -752,7 +752,7 @@ function displayNetwork({ direction, noAlert, withCluster } = {}) {
     data: data,
     callback: function (network) {
       processNetwork(network);
-      if (page == "force_directed_view") {
+      if (page == "logical_view") {
         if (
           network.devices.length > maximumSize.node ||
           network.links.length > maximumSize.link
@@ -938,7 +938,7 @@ export function initView() {
     Configuration: (d) => showDeviceData(d),
     "Run Service": (d) => showRunServicePanel({ instance: d }),
   });
-  if (page == "logical_view") {
+  if (page == "view_builder") {
     initLogicalFramework();
   } else {
     call({
@@ -982,7 +982,7 @@ export function initView() {
         css: { visibility: "hidden" },
       });
     }
-    if (page == "force_directed_view") {
+    if (page == "logical_view") {
       create3dGraphNetwork("network");
       notify("Loading network...", "success", 5);
     } else if (page == "geographical_view") {

@@ -609,7 +609,7 @@ class Controller:
         return [
             pool.base_properties
             for pool in db.fetch_all("pool")
-            if (view == "force_directed_view" and pool.devices and pool.links)
+            if (view == "logical_view" and pool.devices and pool.links)
             or (view == "geographical_view" and (pool.devices or pool.links))
         ]
 

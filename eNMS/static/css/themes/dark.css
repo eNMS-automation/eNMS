@@ -137,7 +137,7 @@ table.dataTable tr:hover {
   background-color: #202123;
 }
 
-/* Label color in Force-directed View */
+/* Label color in Logical View */
 .scene-tooltip {
   color: #fff !important;
 }

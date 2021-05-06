@@ -22,7 +22,7 @@
 {% endblock stylesheets %} {% block content %}
 <form id="search-form-device" class="overlay"></form>
 <form id="search-form-link" class="overlay"></form>
-{% if endpoint == "force_directed_view" %}
+{% if endpoint == "logical_view" %}
 <div id="network"></div>
 {% else %}
 <div id="map"></div>
@@ -57,7 +57,7 @@
       <li><a tabindex="-1" href="#">Circle Marker</a></li>
     </ul>
   </li>
-  {% endif %} {% if endpoint == "logical_view" %}
+  {% endif %} {% if endpoint == "view_builder" %}
   <li class="menu global">
     <a tabindex="-1" href="#">Edit View</a>
   </li>
@@ -75,7 +75,7 @@
     <a tabindex="-1" href="#">Run Service</a>
   </li>
 </ul>
-{% if endpoint != "logical_view" %}
+{% if endpoint != "view_builder" %}
 <div class="controls">
   <nav class="navbar navbar-default navbar-custom navbar-color" role="navigation">
     <div style="margin: 0px;">
@@ -308,7 +308,7 @@
 <script src="{{ url_for('static', filename='lib/three/transformControls.min.js') }}"></script>
 <script src="{{ url_for('static', filename='lib/three/orbitControls.min.js') }}"></script>
 <script src="{{ url_for('static', filename='lib/three/CSS2DRenderer.min.js') }}"></script>
-{% endif %} {% if endpoint == "force_directed_view" %}
+{% endif %} {% if endpoint == "logical_view" %}
 <script src="{{ url_for('static', filename='lib/three/three-spritetext.min.js') }}"></script>
 <script src="{{ url_for('static', filename='lib/3d-force-graph/3d-force-graph.min.js') }}"></script>
 {% else %} {% if endpoint == "geographical_view" %} {% if dimension == "2D" %}

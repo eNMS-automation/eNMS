@@ -31,7 +31,7 @@ Bug report mail: "No status for services in subworkflow with device iteration"
 - HTTP requests logging: all requests are now logged by eNMS and not by werkzeug like before.
 => fine grained controlled for what is logged for each request. The log now contains the username.
 - Add duplicate button in service table
-- Refactor the geographical and force-directed view to behave like the workflow builder:
+- Refactor the geographical and Logical View to behave like the workflow builder:
 * List of all pools that contain at least one device or link, stored in user browser local storage
 * Remove default pool mechanism. Remove "visualization_default" property in pool model.
 By design, the default pool becomes the first pool in alphabetical order
@@ -160,7 +160,7 @@ Version 4.0.0
   * Bulk edit (edit all instances filtered in tables)
   * Bulk deletion (delete all instances filtered in tables)
 - Add "copy to clipboard" mechanism to get comma-separated list of names of all filtered instances.
-- Add 3D network view and 3D Force-directed View.
+- Add 3D network view and 3D Logical View.
   * Add right click menu for property, configuration, run service
   * Add default pools mechanism for large networks.
   * Add run service in bulk on all currently displayed devices mechanism
@@ -270,7 +270,7 @@ but we have to make sure it's not worse).
 
 Migration:
 - Update endpoint: view/network and view/site no longer exists, to be replaced with 
-geographical_view and logical_view
+geographical_view and view_builder
 - Configure the new visualization.json file, remove visualization settings from settings.json
 - In the service.yaml file, the "devices" and "pools" relationship with services have to be renamed
 "target_devices" and "target_pools". Besides, "update_pools" must be renamed to "update_target_pools".

@@ -98,7 +98,7 @@ body {
   color: #fff;
 }
 
-/* Label color in Force-directed View */
+/* Label color in Logical View */
 .scene-tooltip {
   color: #000 !important;
 }

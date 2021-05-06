@@ -74,8 +74,8 @@
           "endpoint": "/logical_view",
           "rbac": "access"
         },
-        "Force-directed View": {
-          "endpoint": "/force_directed_view",
+        "View Builder": {
+          "endpoint": "/view_builder",
           "rbac": "access"
         }
       }
@@ -127,13 +127,13 @@
     "/event_table": "access",
     "/export_service": "access",
     "/files_form": "access",
-    "/force_directed_view": "access",
+    "/logical_view": "access",
     "/geographical_view": "access",
     "/git_history_form": "access",
     "/help": "all",
     "/instance_deletion_form": "access",
     "/link_table": "access",
-    "/logical_view": "access",
+    "/view_builder": "access",
     "/login": "none",
     "/logout": "all",
     "/logs_form": "access",

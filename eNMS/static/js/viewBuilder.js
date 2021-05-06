@@ -383,13 +383,8 @@ export function initView() {
   initLogicalFramework();
 }
 
-function displayFilteringPanel(type) {
-  $(`#${type}_filtering`).css("visibility", "visible");
-}
-
-configureNamespace("visualization", [
+configureNamespace("viewBuilder", [
   addObjectsToView,
   createLabel,
   createPlan,
-  switchMode,
 ]);

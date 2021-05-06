@@ -221,7 +221,7 @@ class FormFactory:
 
 class AddObjectsForm(BaseForm):
     form_type = HiddenField(default="add_objects_to_view")
-    action = "eNMS.visualization.addObjectsToView"
+    action = "eNMS.viewBuilder.addObjectsToView"
     devices = MultipleInstanceField("Devices", model="device")
     links = MultipleInstanceField("Links", model="link")
 
@@ -757,13 +757,13 @@ class UploadFilesForm(BaseForm):
 
 class ViewLabelForm(BaseForm):
     form_type = HiddenField(default="view_label")
-    action = "eNMS.visualization.createLabel"
+    action = "eNMS.viewBuilder.createLabel"
     text = StringField(widget=TextArea(), render_kw={"rows": 15})
 
 
 class ViewPlanForm(BaseForm):
     form_type = HiddenField(default="view_plan")
-    action = "eNMS.visualization.createPlan"
+    action = "eNMS.viewBuilder.createPlan"
     name = StringField("Name", [InputRequired()])
     size = IntegerField("Size", default=2000)
     rows = IntegerField("Number of Rows", default=100)

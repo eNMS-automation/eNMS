@@ -1,17 +1,11 @@
 /*
 global
 action: false
-Cesium: false
 CSS2DObject: false
 CSS2DRenderer: false
-ForceGraph3D: false
-L: false
 page: false
-SpriteText: false
-theme: false
 THREE: false
 TransformControls: false
-visualization: false
 */
 
 import { showRunServicePanel } from "./automation.js";
@@ -362,8 +356,4 @@ export function initView() {
   initLogicalFramework();
 }
 
-configureNamespace("viewBuilder", [
-  addObjectsToView,
-  createLabel,
-  createPlan,
-]);
+configureNamespace("viewBuilder", [addObjectsToView, createLabel, createPlan]);

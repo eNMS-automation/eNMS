@@ -2,15 +2,12 @@
 global
 action: false
 Cesium: false
-CSS2DObject: false
-CSS2DRenderer: false
 ForceGraph3D: false
 L: false
 page: false
 SpriteText: false
 theme: false
 THREE: false
-TransformControls: false
 visualization: false
 */
 
@@ -21,7 +18,6 @@ import {
   notify,
   openPanel,
   serializeForm,
-  setTriggerMenu,
   showInstancePanel,
 } from "./base.js";
 import { showConnectionPanel, showDeviceData } from "./inventory.js";

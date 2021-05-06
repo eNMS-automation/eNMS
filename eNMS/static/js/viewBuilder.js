@@ -365,192 +365,6 @@ function onWindowResize() {
   labelRenderer.setSize($(".main_frame").width(), $(".main_frame").height());
 }
 
-
-function linkRightClickBinding(link) {
-  $(".menu").hide();
-  if (link.type != "bundle") {
-    $(".rc-link-menu").show();
-    selectedObject = link;
-  }
-}
-
-function deleteAllDevices() {
-  for (let i = 0; i < markersArray.length; i++) {
-    if (dimension == "3D") {
-      viewer.entities.remove(markersArray[i]);
-    } else if (clustered) {
-      markerGroup.removeLayer(markersArray[i]);
-    } else {
-      markersArray[i].removeFrom(map);
-    }
-  }
-  markersArray = [];
-}
-
-function deleteAllLinks() {
-  for (const polyline of Object.values(polylinesObjects)) {
-    if (dimension == "2D") {
-      polyline.removeFrom(map);
-    } else {
-      polylines.remove(polyline);
-    }
-  }
-  polylinesObjects = {};
-  linksProperties = {};
-}
-
-function deleteAll() {
-  deleteAllDevices();
-  deleteAllLinks();
-}
-
-Object.assign(action, {
-  "Open Street Map": () => switchLayer("osm"),
-  "Google Maps": () => switchLayer("gm"),
-  Image: () => changeMarker("Image"),
-  Circle: () => changeMarker("Circle"),
-  "Circle Marker": () => changeMarker("Circle Marker"),
-  Normal: () => displayNetwork({}),
-  Clustered: () => displayNetwork({ withCluster: true }),
-  Backward: () => displayNetwork({ direction: "left" }),
-  Forward: () => displayNetwork({ direction: "right" }),
-});
-
-function processNetwork(network) {
-  if (page == "geographical_view") {
-    let devices = {};
-    for (const device of network.devices) {
-      const key = `${device.longitude}/${device.latitude}`;
-      devices[key] = devices[key] ? [...devices[key], device.id] : [device.id];
-    }
-    let colocatedDevices = new Set();
-    for (const [coords, ids] of Object.entries(devices)) {
-      if (ids.length == 1) continue;
-      ids.forEach(colocatedDevices.add, colocatedDevices);
-      const [longitude, latitude] = coords.split("/");
-      network.devices.push({
-        type: "site",
-        name: `Site (${latitude},${longitude})`,
-        icon: "site",
-        id: ids.join("-"),
-        longitude: longitude,
-        latitude: latitude,
-      });
-    }
-    network.devices = network.devices.filter(
-      (device) => !colocatedDevices.has(device.id)
-    );
-  }
-  let links = {};
-  let bundleCoordinates = {};
-  for (const link of network.links) {
-    const key = (page == "logical_view"
-      ? [link.source_id, link.destination_id]
-      : [
-          `${link.source_latitude}/${link.source_longitude}`,
-          `${link.destination_latitude}/${link.destination_longitude}`,
-        ]
-    )
-      .sort()
-      .join("/");
-    links[key] = links[key] ? [...links[key], link.id] : [link.id];
-    if (!bundleCoordinates[key]) {
-      bundleCoordinates[key] = {
-        source_latitude: link.source_latitude,
-        source_longitude: link.source_longitude,
-        destination_latitude: link.destination_latitude,
-        destination_longitude: link.destination_longitude,
-      };
-    }
-  }
-  let parallelLinks = new Set();
-  for (const [endpoints, ids] of Object.entries(links)) {
-    if (ids.length == 1) continue;
-    ids.forEach(parallelLinks.add, parallelLinks);
-    const [sourceId, destinationId] = endpoints.split("/");
-    network.links.push({
-      type: "bundle",
-      name: "Colocated links",
-      id: ids.join("-"),
-      color: "#FF1493",
-      source_id: parseInt(sourceId),
-      destination_id: parseInt(destinationId),
-      ...bundleCoordinates[endpoints],
-    });
-  }
-  network.links = network.links.filter((link) => !parallelLinks.has(link.id));
-}
-
-function changeCursor(click) {
-  const instance = viewer.scene.pick(click.endPosition);
-  document.body.style.cursor = instance ? "pointer" : "default";
-}
-
-function onRightClick3d(click) {
-  const instance = viewer.scene.pick(click.position);
-  if (instance) {
-    const isLink = typeof instance.id == "number";
-    const id = isLink ? instance.id : instance.id._properties._id._value;
-    selectedObject = (isLink ? linksProperties : devicesProperties)[id];
-    const menu = isLink ? "link" : selectedObject.type == "pool" ? "site" : "device";
-    $(".menu").hide();
-    $(`.rc-${menu}-menu`).show();
-  } else {
-    selectedObject = null;
-    $(".menu").hide();
-  }
-}
-
-function leftClickBinding(type, id, bundle) {
-  if (bundle) {
-    const constraints = { id: `^(${id.split("-").join("|")})$`, id_filter: "regex" };
-    showFilteredTable(id, type, constraints);
-  } else {
-    showInstancePanel(type, id);
-  }
-}
-
-function onClick3d(click) {
-  const instance = viewer.scene.pick(click.position);
-  if (instance) {
-    const isLink = ["number", "string"].includes(typeof instance.id);
-    const id = isLink ? instance.id : instance.id._properties._id._value;
-    const type = isLink ? "link" : instance.id._properties._type._value;
-    const bundle = type == "site" || (typeof id === "string" && id.includes("-"));
-    leftClickBinding(isLink ? "link" : "device", id, bundle);
-  }
-}
-
-function showFilteredTable(id, type, constraints) {
-  openPanel({
-    name: "table",
-    size: "1000 500",
-    content: `
-      <div class="modal-body">
-        <div id="tooltip-overlay" class="overlay"></div>
-        <form
-          id="search-form-${type}-${id}"
-          class="form-horizontal form-label-left"
-          method="post"
-        >
-          <table
-            id="table-${type}-${id}"
-            class="table table-striped table-bordered table-hover"
-            cellspacing="0"
-            width="100%"
-          ></table>
-        </form>
-      </div>`,
-    id: id,
-    title: `Colocated ${type}s`,
-    callback: function () {
-      // eslint-disable-next-line new-cap
-      new tables[type](id, constraints);
-    },
-  });
-}
-
-
 export function initView() {
   $("body").contextMenu({
     menuSelector: "#contextMenu",
@@ -566,7 +380,6 @@ export function initView() {
     Configuration: (d) => showDeviceData(d),
     "Run Service": (d) => showRunServicePanel({ instance: d }),
   });
-
   initLogicalFramework();
 }
 
@@ -574,22 +387,9 @@ function displayFilteringPanel(type) {
   $(`#${type}_filtering`).css("visibility", "visible");
 }
 
-function clearSearch() {
-  for (const table of ["device", "link"]) {
-    $(`.search-input-${table},.search-list-${table}`).val("");
-    $(".search-relation-dd").val("any").selectpicker("refresh");
-    $(".search-relation").val([]).trigger("change");
-    $(`.search-select-${table}`).val("inclusion").selectpicker("refresh");
-  }
-  displayNetwork({ noAlert: true });
-  notify("Search parameters cleared.", "success", 5);
-}
-
 configureNamespace("visualization", [
   addObjectsToView,
-  clearSearch,
   createLabel,
   createPlan,
-  displayFilteringPanel,
   switchMode,
 ]);

@@ -21,6 +21,7 @@ import { openDebugPanel, showCredentialPanel } from "./administration.js";
 import { initDashboard } from "./inventory.js";
 import { refreshTable, tables, tableInstances } from "./table.js";
 import { initView } from "./visualization.js";
+import { initViewBuilder } from "./viewBuilder.js";
 import {
   creationMode,
   initWorkflowBuilder,
@@ -1118,6 +1119,8 @@ $(document).ready(function () {
     new tables[type]();
   } else if (page == "workflow_builder") {
     initWorkflowBuilder();
+  } else if (page == "view_builder") {
+    initViewBuilder();
   } else if (page.includes("view")) {
     initView();
   } else if (page == "dashboard") {

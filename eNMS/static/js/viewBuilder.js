@@ -338,7 +338,7 @@ function onWindowResize() {
   labelRenderer.setSize($(".main_frame").width(), $(".main_frame").height());
 }
 
-export function initView() {
+export function initViewBuilder() {
   $("body").contextMenu({
     menuSelector: "#contextMenu",
     menuSelected: function (selectedMenu) {

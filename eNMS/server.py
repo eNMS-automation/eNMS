@@ -295,10 +295,12 @@ class Server(Flask):
                 "table.html", **{"endpoint": f"{table_type}_table", "type": table_type}
             )
 
-        @blueprint.route("/<view_type>_view")
+        @blueprint.route("/view_builder")
+        @blueprint.route("/logical_view")
+        @blueprint.route("/geographical_view")
         @self.process_requests
-        def view(view_type):
-            return render_template("visualization.html", endpoint=f"{view_type}_view")
+        def view():
+            return render_template("visualization.html", endpoint=request.path[1:])
 
         @blueprint.route("/workflow_builder")
         @self.process_requests

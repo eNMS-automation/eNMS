@@ -949,7 +949,7 @@ function getWorkflowTree() {
                       type="button"
                       class="btn btn-xs btn-info"
                       data-tooltip="Find"
-                      onclick='eNMS.workflow.highlightService(${service})'
+                      onclick='eNMS.workflowBuilder.highlightService(${service})'
                     >
                       <span class="glyphicon glyphicon-screenshot"></span>
                     </button>
@@ -1048,7 +1048,7 @@ export function initWorkflowBuilder() {
   updateRightClickBindings();
 }
 
-configureNamespace("workflow", [
+configureNamespace("workflowBuilder", [
   addServicesToWorkflow,
   createLabel,
   highlightService,

@@ -454,7 +454,7 @@ class RbacForm(BaseForm):
 
 
 class RestartWorkflowForm(BaseForm):
-    action = "eNMS.workflow.restartWorkflow"
+    action = "eNMS.workflowBuilder.restartWorkflow"
     form_type = HiddenField(default="restart_workflow")
     start_services = HiddenField()
     restart_runtime = SelectField("Restart Runtime", validate_choice=False)
@@ -772,7 +772,7 @@ class ViewPlanForm(BaseForm):
 
 class WorkflowLabelForm(BaseForm):
     form_type = HiddenField(default="workflow_label")
-    action = "eNMS.workflow.createLabel"
+    action = "eNMS.workflowBuilder.createLabel"
     text = StringField(widget=TextArea(), render_kw={"rows": 15})
     alignment = SelectField(
         "Text Alignment",

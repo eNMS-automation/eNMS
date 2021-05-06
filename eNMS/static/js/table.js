@@ -747,7 +747,7 @@ tables.service = class ServiceTable extends Table {
     let row = super.addRow(kwargs);
     row.name =
       row.type === "workflow"
-        ? `<b><a href="#" onclick="eNMS.workflow.filterWorkflowTable(
+        ? `<b><a href="#" onclick="eNMS.workflowBuilder.filterWorkflowTable(
       '${this.id}', ${row.id})">${row.scoped_name}</a></b>`
         : $("#parent-filtering").val() == "true"
         ? row.scoped_name

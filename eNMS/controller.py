@@ -91,7 +91,7 @@ class Controller:
         return {"number": len(instances), "target": target.base_properties}
 
     def add_objects_to_view(self, view_id, **kwargs):
-        result = {"update_time": self.get_time()}
+        result = {"update_time": vs.get_time()}
         for model in ("node", "line"):
             base_model = "device" if model == "node" else "link"
             result[f"{model}s"] = []
@@ -240,7 +240,7 @@ class Controller:
     def create_view_object(self, type, view_id, **kwargs):
         node = db.factory(type, view=view_id, **kwargs)
         db.session.flush()
-        return {"time": self.get_time(), "node": node.serialized}
+        return {"time": vs.get_time(), "node": node.serialized}
 
     def database_deletion(self, **kwargs):
         db.delete_all(*kwargs["deletion_types"])
@@ -285,7 +285,7 @@ class Controller:
     def delete_view_selection(self, selection):
         for instance_id in selection:
             db.delete("view_object", id=instance_id)
-        return self.get_time()
+        return vs.get_time()
 
     def delete_workflow_selection(self, workflow_id, **selection):
         workflow = db.fetch("workflow", id=workflow_id)

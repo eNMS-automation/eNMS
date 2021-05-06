@@ -20,36 +20,15 @@ import {
   configureNamespace,
   notify,
   openPanel,
-  serializeForm,
   setTriggerMenu,
   showInstancePanel,
 } from "./base.js";
 import { showConnectionPanel, showDeviceData } from "./inventory.js";
-import { tables } from "./table.js";
 
-let graph;
-let dimension;
 let selectedObject;
-let markersArray = [];
-let polylinesObjects = {};
-let layer;
-let markerType;
-let map;
-let markerGroup;
-let clustered;
-let devicesProperties = {};
-let linksProperties = {};
-let routerIcon;
-let viewer;
-let handler;
-let polylines;
-let labels;
-
 let currentMode = "select";
 let currentPath = localStorage.getItem(page);
 let currentView;
-let arrowHistory = [];
-let arrowPointer = -1;
 let selectedObjects = [];
 let camera;
 let scene;

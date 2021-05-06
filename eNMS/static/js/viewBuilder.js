@@ -45,24 +45,324 @@ let handler;
 let polylines;
 let labels;
 
+let currentMode = "select";
 let currentPath = localStorage.getItem(page);
+let currentView;
 let arrowHistory = [];
 let arrowPointer = -1;
+let selectedObjects = [];
+let camera;
+let scene;
+let renderer;
 let controls;
+let transformControls;
+let labelRenderer;
+let nodes = {};
+let pointer;
+let activeControls = false;
+let raycaster;
+let texture;
+
+function displayView(currentPath) {
+  const [viewId] = currentPath.split(">").slice(-1);
+  call({
+    url: `/get/view/${viewId}`,
+    callback: function (view) {
+      nodes = {};
+      selectedObject = [];
+      currentView = view;
+      const aspect = $(".main_frame").width() / $(".main_frame").height();
+      camera = new THREE.PerspectiveCamera(45, aspect, 1, 10000);
+      raycaster = new THREE.Raycaster();
+      pointer = new THREE.Vector2();
+      camera.position.set(500, 800, 1300);
+      camera.lookAt(0, 0, 0);
+      scene = new THREE.Scene();
+      scene.background = new THREE.Color(0xffffff);
+      labelRenderer = new CSS2DRenderer();
+      labelRenderer.setSize($(".main_frame").width(), $(".main_frame").height());
+      labelRenderer.domElement.style.position = "absolute";
+      const container = document.getElementById("map");
+      $("#map").empty();
+      renderer = new THREE.WebGLRenderer({ antialias: true });
+      renderer.setPixelRatio(window.devicePixelRatio);
+      renderer.setSize($(".main_frame").width(), $(".main_frame").height());
+      container.appendChild(labelRenderer.domElement);
+      container.appendChild(renderer.domElement);
+      controls = new THREE.OrbitControls(camera, labelRenderer.domElement);
+      controls.addEventListener("change", render);
+      controls.maxPolarAngle = Math.PI / 2;
+      container.addEventListener("mousedown", onMouseDown, false);
+      container.addEventListener("mousemove", onMouseMove, false);
+      window.addEventListener("resize", onWindowResize, false);
+      transformControls = new TransformControls(camera, labelRenderer.domElement);
+      transformControls.addEventListener("change", render);
+      transformControls.addEventListener("dragging-changed", function (event) {
+        if (!event.value) savePositions();
+        controls.enabled = !event.value;
+      });
+      transformControls.addEventListener("mouseUp", function () {
+        activeControls = false;
+      });
+      transformControls.addEventListener("mouseDown", function () {
+        activeControls = true;
+      });
+      scene.add(transformControls);
+      updateRightClickBindings(controls);
+      view.objects.map(drawNode);
+      switchMode("select");
+      render();
+    },
+  });
+}
+
+function onMouseDown(event) {
+  const intersects = getIntersects(event);
+  if (intersects.length > 0) {
+    const object = intersects[0].object;
+    if (currentMode == "select") {
+      object.material.color.set(0xff0000);
+      selectedObjects.push(object);
+    } else if (!activeControls && object !== transformControls.object) {
+      transformControls.attach(object);
+    }
+  } else {
+    activeControls = false;
+    transformControls.detach(transformControls.object);
+    selectedObjects.map((object) => {
+      object.material.color.set(0xffffff);
+    });
+    selectedObjects = [];
+  }
+  setTriggerMenu(true);
+  if (!intersects.length) {
+    $(".rc-object-menu").hide();
+    $(".global").show();
+  }
+  render();
+}
+
+function createPlan() {
+  call({
+    url: `/create_view_object/plan/${currentView.id}`,
+    form: "view_plan-form",
+    callback: function (result) {
+      currentView.last_modified = result;
+      drawNode(result.node);
+      $("#view_plan").remove();
+    },
+  });
+}
+
+function deleteSelection() {
+  call({
+    url: "/delete_view_selection",
+    data: { selection: selectedObjects.map((mesh) => mesh.userData.id) },
+    callback: function (updateTime) {
+      selectedObjects.map(deleteMesh);
+      selectedObjects = [];
+      currentView.last_modified = updateTime;
+      render();
+      notify("Selection successfully deleted.", "success", 5);
+    },
+  });
+}
+
+function deleteMesh(mesh) {
+  delete nodes[mesh.userData.id];
+  scene.remove(mesh);
+}
+
+function savePositions() {
+  call({
+    url: "/save_view_positions",
+    data: Object.fromEntries(
+      Object.entries(nodes).map(([nodeId, node]) => [nodeId, node.position])
+    ),
+    callback: function (updateTime) {
+      if (updateTime) currentView.last_modified = updateTime;
+    },
+  });
+}
+
+function switchMode(mode) {
+  $(`#btn-${currentMode},#btn-${mode}`).toggleClass("active");
+  currentMode = mode;
+  transformControls.enabled = mode != "select";
+  if (mode == "select") {
+    scene.remove(transformControls);
+    transformControls.detach();
+  } else {
+    scene.add(transformControls);
+    transformControls.setMode(mode);
+  }
+}
+
+function drawNode(node) {
+  let geometry;
+  let material;
+  if (node.type == "plan") {
+    geometry = new THREE.BoxGeometry(1000, 1000, 8);
+    material = new THREE.MeshBasicMaterial({ map: texture });
+  } else if (node.type == "label") {
+    geometry = new THREE.SphereGeometry(5, 32, 32);
+    material = new THREE.MeshBasicMaterial({
+      transparent: true,
+      opacity: 0.3,
+    });
+  } else {
+    material = new THREE.MeshBasicMaterial({
+      color: 0x3c8c8c,
+      opacity: 0.8,
+      transparent: true,
+    });
+    geometry = new THREE.CylinderGeometry(30, 30, 20, 32);
+  }
+  const mesh = new THREE.Mesh(geometry, material);
+  mesh.position.set(node.x, Math.max(node.y, 10), node.z);
+  if (node.type == "plan") {
+    mesh.rotation.x = Math.PI / 2;
+  } else {
+    drawLabel(node, mesh);
+  }
+  nodes[node.id] = mesh;
+  mesh.userData = node;
+  scene.add(mesh);
+  render();
+}
+
+function getIntersects(event) {
+  const menuWidth = $(".left_column").is(":visible") ? $(".left_column").width() : 0;
+  const width = ((event.clientX - menuWidth - 15) / $(".main_frame").width()) * 2 - 1;
+  const height = -((event.clientY - 70) / $(".main_frame").height()) * 2 + 1;
+  pointer.set(width, height);
+  raycaster.setFromCamera(pointer, camera);
+  return raycaster.intersectObjects(scene.children);
+}
+
+function onMouseMove(event) {
+  setTriggerMenu(false);
+  const intersects = getIntersects(event);
+  document.body.style.cursor = intersects.length > 0 ? "pointer" : "default";
+}
+
+function drawLabel(node, mesh) {
+  const div = document.createElement("div");
+  div.className = "label";
+  const style = { marginTop: "-1em", color: "#FF0000" };
+  div.textContent = node.type == "label" ? node.text : node.name;
+  Object.assign(div.style, style);
+  const labelObject = new CSS2DObject(div);
+  labelObject.position.set(0, 0, 0);
+  mesh.add(labelObject);
+}
+
+function initLogicalFramework() {
+  texture = new THREE.TextureLoader().load("/static/img/textures/floor3.jpg");
+  call({
+    url: "/get_all/view",
+    callback: function (views) {
+      views.sort((a, b) => a.name.localeCompare(b.name));
+      for (let i = 0; i < views.length; i++) {
+        $("#current-view").append(
+          `<option value="${views[i].id}">${views[i].name}</option>`
+        );
+      }
+      if (currentPath && views.some((w) => w.id == currentPath.split(">")[0])) {
+        $("#current-view").val(currentPath.split(">")[0]);
+        displayView(currentPath);
+      } else {
+        currentPath = $("#current-view").val();
+        if (currentPath) {
+          displayView(currentPath);
+        } else {
+          notify("No view has been created yet.", "error", 5);
+        }
+      }
+      $("#current-view")
+        .on("change", function () {
+          if (this.value != currentView.id) displayView(this.value);
+        })
+        .selectpicker({
+          liveSearch: true,
+        });
+      updateRightClickBindings(controls);
+    },
+  });
+  $("#transform-mode").selectpicker();
+}
+
+function createNewView(mode) {
+  if (mode == "create") {
+    showInstancePanel("view");
+  } else if (!currentView) {
+    notify("No view has been created yet.", "error", 5);
+  } else if (mode == "duplicate") {
+    showInstancePanel("view", currentView.id, "duplicate");
+  } else {
+    showInstancePanel("view", currentView.id);
+  }
+}
+
+function createLabel() {
+  call({
+    url: `/create_view_object/label/${currentView.id}`,
+    form: "view_label-form",
+    callback: function (result) {
+      $("#view_label").remove();
+      drawNode(result.node);
+      notify("Label created.", "success", 5);
+    },
+  });
+}
+
+function addObjectPanel() {
+  openPanel({
+    name: "add_objects_to_view",
+    title: "Add Objects to View",
+    size: "800 350",
+    callback: function () {},
+  });
+}
+
+function addObjectsToView() {
+  call({
+    url: `/add_objects_to_view/${currentView.id}`,
+    form: "add_objects_to_view-form",
+    callback: function (result) {
+      currentView.last_modified = result.update_time;
+      $("#add_objects_to_view").remove();
+      result.nodes.map(drawNode);
+      notify("Objects successfully added to the view.", "success", 5);
+    },
+  });
+}
 
 function updateRightClickBindings(controls) {
   Object.assign(action, {
+    "Add to View": addObjectPanel,
+    "Create View": () => createNewView("create"),
+    "Create Label": () => openPanel({ name: "view_label", title: "Create New Label" }),
+    "Create Plan": () => openPanel({ name: "view_plan", title: "Create New Plan" }),
+    "Edit View": () => createNewView("edit"),
     "Edit Pool": () => showInstancePanel("pool", currentPath),
-    "Open Street Map": () => switchLayer("osm"),
-    "Google Maps": () => switchLayer("gm"),
-    Image: () => changeMarker("Image"),
-    Circle: () => changeMarker("Circle"),
-    "Circle Marker": () => changeMarker("Circle Marker"),
-    Normal: () => displayNetwork({}),
-    Clustered: () => displayNetwork({ withCluster: true }),
-    Backward: () => displayNetwork({ direction: "left" }),
-    Forward: () => displayNetwork({ direction: "right" }),
+    Delete: () => deleteSelection(),
+    "Duplicate View": () => createNewView("duplicate"),
+    "Switch Mode": switchMode,
+    "Zoom In": () => controls?.dollyOut(),
+    "Zoom Out": () => controls?.dollyIn(),
   });
+}
+
+function render() {
+  renderer.render(scene, camera);
+  labelRenderer.render(scene, camera);
+}
+
+function onWindowResize() {
+  camera.aspect = $(".main_frame").width() / $(".main_frame").height();
+  camera.updateProjectionMatrix();
+  labelRenderer.setSize($(".main_frame").width(), $(".main_frame").height());
 }
 
 function initGeographicalFramework() {
@@ -328,6 +628,18 @@ function deleteAll() {
   deleteAllDevices();
   deleteAllLinks();
 }
+
+Object.assign(action, {
+  "Open Street Map": () => switchLayer("osm"),
+  "Google Maps": () => switchLayer("gm"),
+  Image: () => changeMarker("Image"),
+  Circle: () => changeMarker("Circle"),
+  "Circle Marker": () => changeMarker("Circle Marker"),
+  Normal: () => displayNetwork({}),
+  Clustered: () => displayNetwork({ withCluster: true }),
+  Backward: () => displayNetwork({ direction: "left" }),
+  Forward: () => displayNetwork({ direction: "right" }),
+});
 
 function processNetwork(network) {
   if (page == "geographical_view") {
@@ -611,21 +923,6 @@ function create3dGraphNetwork(container) {
   return graph;
 }
 
-function initFiltering() {
-  for (let type of ["device", "link"]) {
-    openPanel({
-      name: `${type}_filtering`,
-      type: type,
-      title: `${type.charAt(0).toUpperCase() + type.slice(1)} Filtering`,
-      size: "700 600",
-      onbeforeclose: function () {
-        $(this).css("visibility", "hidden");
-      },
-      css: { visibility: "hidden" },
-    });
-  }
-}
-
 export function initView() {
   $("body").contextMenu({
     menuSelector: "#contextMenu",
@@ -641,41 +938,56 @@ export function initView() {
     Configuration: (d) => showDeviceData(d),
     "Run Service": (d) => showRunServicePanel({ instance: d }),
   });
-  call({
-    url: `/get_visualization_pools/${page}`,
-    callback: function (pools) {
-      pools.sort((a, b) => a.name.localeCompare(b.name));
-      for (let i = 0; i < pools.length; i++) {
-        $("#current-pool").append(
-          `<option value="${pools[i].id}">${pools[i].name}</option>`
-        );
-      }
-      if (currentPath && pools.some((w) => w.id == currentPath)) {
-        $("#current-pool").val(currentPath);
-        displayNetwork({ noAlert: true });
-      } else {
-        if ($("#current-pool").val()) {
+  if (page == "logical_view") {
+    initLogicalFramework();
+  } else {
+    call({
+      url: `/get_visualization_pools/${page}`,
+      callback: function (pools) {
+        pools.sort((a, b) => a.name.localeCompare(b.name));
+        for (let i = 0; i < pools.length; i++) {
+          $("#current-pool").append(
+            `<option value="${pools[i].id}">${pools[i].name}</option>`
+          );
+        }
+        if (currentPath && pools.some((w) => w.id == currentPath)) {
+          $("#current-pool").val(currentPath);
           displayNetwork({ noAlert: true });
         } else {
-          notify("No pool has been created yet.", "error", 5);
+          if ($("#current-pool").val()) {
+            displayNetwork({ noAlert: true });
+          } else {
+            notify("No pool has been created yet.", "error", 5);
+          }
         }
-      }
-      $("#current-pool")
-        .on("change", function () {
-          displayNetwork();
-        })
-        .selectpicker({
-          liveSearch: true,
-        });
-      updateRightClickBindings(controls);
-    },
-  });
-  initFiltering();
-  if (page == "force_directed_view") {
-    create3dGraphNetwork("network");
-    notify("Loading network...", "success", 5);
-  } else if (page == "geographical_view") {
-    initGeographicalFramework();
+        $("#current-pool")
+          .on("change", function () {
+            displayNetwork();
+          })
+          .selectpicker({
+            liveSearch: true,
+          });
+        updateRightClickBindings(controls);
+      },
+    });
+    for (let type of ["device", "link"]) {
+      openPanel({
+        name: `${type}_filtering`,
+        type: type,
+        title: `${type.charAt(0).toUpperCase() + type.slice(1)} Filtering`,
+        size: "700 600",
+        onbeforeclose: function () {
+          $(this).css("visibility", "hidden");
+        },
+        css: { visibility: "hidden" },
+      });
+    }
+    if (page == "force_directed_view") {
+      create3dGraphNetwork("network");
+      notify("Loading network...", "success", 5);
+    } else if (page == "geographical_view") {
+      initGeographicalFramework();
+    }
   }
 }
 
@@ -717,7 +1029,11 @@ function clearSearch() {
 }
 
 configureNamespace("visualization", [
+  addObjectsToView,
   clearSearch,
+  createLabel,
+  createPlan,
   displayFilteringPanel,
   displayNetwork,
+  switchMode,
 ]);

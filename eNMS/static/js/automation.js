@@ -27,7 +27,7 @@ import {
   getServiceState,
   switchToWorkflow,
   workflow,
-} from "./workflow.js";
+} from "./workflowBuilder.js";
 
 function openServicePanel(bulk) {
   showInstancePanel($("#service-type").val(), null, bulk ? "bulk" : null, "service");

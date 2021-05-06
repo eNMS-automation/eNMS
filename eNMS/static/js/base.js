@@ -26,7 +26,7 @@ import {
   initWorkflowBuilder,
   processWorkflowData,
   workflow,
-} from "./workflow.js";
+} from "./workflowBuilder.js";
 
 const currentUrl = window.location.href.split("#")[0].split("?")[0];
 export let editors = {};

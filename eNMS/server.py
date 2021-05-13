@@ -64,7 +64,11 @@ class Server(Flask):
                         f"'{client_address}' calling the endpoint '{request.url}'"
                     ),
                 )
-                return redirect(login_url(url_for("blueprint.route", page="login"), next_url=request.url))
+                return redirect(
+                    login_url(
+                        url_for("blueprint.route", page="login"), next_url=request.url
+                    )
+                )
             else:
                 method = request.method.lower()
                 endpoint = f"/{request.path.split('/')[1]}"
@@ -197,11 +201,14 @@ class Server(Flask):
             def is_safe_url(target):
                 endpoint = f"/{target.split('/')[1]}"
                 endpoint_rbac = app.rbac["get_requests"].get(endpoint)
-                return endpoint_rbac and current_user.is_admin or \
-                       endpoint_rbac == "access" and \
-                       endpoint in getattr(current_user, "get_requests")
+                return (
+                    endpoint_rbac
+                    and current_user.is_admin
+                    or endpoint_rbac == "access"
+                    and endpoint in getattr(current_user, "get_requests")
+                )
 
-            next_url = (request.args.get('next') or '').strip()
+            next_url = (request.args.get("next") or "").strip()
             return redirect(next_url if next_url and is_safe_url(next_url) else default)
 
         @blueprint.route("/")
@@ -226,7 +233,9 @@ class Server(Flask):
                 finally:
                     app.log("info" if success else "warning", log, logger="security")
                     if success:
-                        return redirect_after_login(default=url_for("blueprint.route", page="dashboard"))
+                        return redirect_after_login(
+                            default=url_for("blueprint.route", page="dashboard")
+                        )
                     else:
                         abort(403)
             if not current_user.is_authenticated:

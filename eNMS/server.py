@@ -16,6 +16,7 @@ from flask import (
 )
 from flask_httpauth import HTTPBasicAuth
 from flask_login import current_user, LoginManager, login_user, logout_user
+from flask_login.utils import login_url
 from flask_restful import abort as rest_abort, Api, Resource
 from flask_wtf.csrf import CSRFProtect
 from functools import wraps
@@ -63,7 +64,7 @@ class Server(Flask):
                         f"'{client_address}' calling the endpoint '{request.url}'"
                     ),
                 )
-                return redirect(url_for("blueprint.route", page="login"))
+                return redirect(login_url(url_for("blueprint.route", page="login"), next_url=request.url))
             else:
                 method = request.method.lower()
                 endpoint = f"/{request.path.split('/')[1]}"
@@ -123,6 +124,7 @@ class Server(Flask):
 
     def configure_login_manager(self):
         login_manager = LoginManager()
+        login_manager.login_view = "blueprint.login"
         login_manager.session_protection = "strong"
         login_manager.init_app(self)
 
@@ -191,6 +193,17 @@ class Server(Flask):
     def configure_routes(self):
         blueprint = Blueprint("blueprint", __name__, template_folder="../templates")
 
+        def redirect_after_login(default=None):
+            def is_safe_url(target):
+                endpoint = f"/{target.split('/')[1]}"
+                endpoint_rbac = app.rbac["get_requests"].get(endpoint)
+                return endpoint_rbac and current_user.is_admin or \
+                       endpoint_rbac == "access" and \
+                       endpoint in getattr(current_user, "get_requests")
+
+            next_url = (request.args.get('next') or '').strip()
+            return redirect(next_url if next_url and is_safe_url(next_url) else default)
+
         @blueprint.route("/")
         def site_root():
             return redirect(url_for("blueprint.route", page="login"))
@@ -213,7 +226,7 @@ class Server(Flask):
                 finally:
                     app.log("info" if success else "warning", log, logger="security")
                     if success:
-                        return redirect(url_for("blueprint.route", page="dashboard"))
+                        return redirect_after_login(default=url_for("blueprint.route", page="dashboard"))
                     else:
                         abort(403)
             if not current_user.is_authenticated:

@@ -12,8 +12,14 @@
     <div class="col-middle">
       <h1 class="error-number">{{ error }}</h1>
       {% if error == 403 %}
-      <h2>Access Denied</h2>
-      <p>Full authentication is required to access this resource.</p>
+        <h2>Access Denied</h2>
+        {% if not current_user.is_authenticated %}
+          <p>Full authentication is required to access this resource.</p>
+          <p><a href="{{ url_for('blueprint.route', page='login') }}"><button role="button" class="btn btn-primary">Return to Login</button></a></p>
+        {% else %}
+          <p>An error has occurred.  This can include RBAC-related errors.</p>
+          <p><a href="{{ url_for('blueprint.route', page='dashboard') }}"><button role="button" class="btn btn-primary">Return to Dashboard</button></a></p>
+        {% endif %}
       {% else %}
       <h2>Sorry but we couldn't find this page</h2>
       <p>This page you are looking for does not exist.</p>

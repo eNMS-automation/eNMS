@@ -5,7 +5,7 @@ from flask_login import current_user
 from importlib.util import module_from_spec, spec_from_file_location
 from json import loads
 from logging import error, info
-from os import getenv
+from os import getenv, getpid
 from pathlib import Path
 from re import search
 from sqlalchemy import (
@@ -23,7 +23,7 @@ from sqlalchemy import (
     Text,
 )
 from sqlalchemy.dialects.mysql.base import MSMediumBlob
-from sqlalchemy.exc import InvalidRequestError
+from sqlalchemy.exc import InvalidRequestError, OperationalError
 from sqlalchemy.ext.associationproxy import ASSOCIATION_PROXY
 from sqlalchemy.ext.declarative import declarative_base, DeclarativeMeta
 from sqlalchemy.ext.mutable import MutableDict, MutableList
@@ -72,7 +72,10 @@ class Database:
 
     def _initialize(self, env):
         self.register_services()
-        self.base.metadata.create_all(bind=self.engine)
+        try:
+            self.base.metadata.create_all(bind=self.engine)
+        except OperationalError:
+            info(f"Bypassing metadata creation for process {getpid()}")
         configure_mappers()
         self.configure_model_events(env)
         first_init = not self.get_user("admin")

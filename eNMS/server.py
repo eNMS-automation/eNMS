@@ -24,7 +24,7 @@ from sys import modules
 from traceback import format_exc
 from werkzeug.exceptions import Forbidden, NotFound
 
-from eNMS.controller import controller
+from eNMS import controller
 from eNMS.database import db
 from eNMS.environment import env
 from eNMS.rest_api import RestApi

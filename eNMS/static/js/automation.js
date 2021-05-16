@@ -410,6 +410,7 @@ function displayResultsTable(service, runtime, _, type, refresh) {
   } else {
     const constraints = {
       service_id: service.id,
+      service_id_filter: "equality",
       parent_runtime: runtime || currentRuntime,
     };
     new tables[type](service.id, constraints);

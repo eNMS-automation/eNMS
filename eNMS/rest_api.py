@@ -77,7 +77,7 @@ class RestApi:
         return (
             TimedJSONWebSignatureSerializer(
                 getenv("SECRET_KEY", "secret_key"),
-                expires_in=vs.settings["app"]["session_timeout_minutes"],
+                expires_in=vs.settings["app"]["session_timeout_minutes"] * 60,
             )
             .dumps({"id": current_user.id})
             .decode("ascii")

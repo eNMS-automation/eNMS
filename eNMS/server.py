@@ -16,6 +16,11 @@ from flask_socketio import join_room, SocketIO
 from flask_wtf.csrf import CSRFProtect
 from functools import partial, wraps
 from importlib import import_module
+from itsdangerous import (
+    TimedJSONWebSignatureSerializer as Serializer,
+    BadSignature,
+    SignatureExpired,
+)
 from logging import info
 from os import getenv, read, write
 from pty import fork
@@ -180,7 +185,19 @@ class Server(Flask):
             request_property = f"{request.method.lower()}_requests"
             endpoint_rbac = vs.rbac[request_property].get(endpoint)
             if rest_request:
-                user = env.authenticate_user(**request.authorization)
+                auth, token = request.headers.get("Authorization").split()
+                if auth == "Bearer":
+                    serializer = Serializer(getenv("SECRET_KEY", "secret_key"))
+                    try:
+                        user = db.fetch("user", id=serializer.loads(token)["id"])
+                    except (SignatureExpired, BadSignature) as exc:
+                        is_expired = isinstance(exc, SignatureExpired)
+                        status = "Expired" if is_expired else "Invalid"
+                        log = f"{request.method} {request.path} - {status} Token (403)"
+                        env.log("error", log, change_log=False)
+                        return jsonify({"alert": f"{status} Token"}), 403
+                else:
+                    user = env.authenticate_user(**request.authorization)
                 if user:
                     login_user(user)
             username = getattr(current_user, "name", "Unknown")
@@ -213,7 +230,7 @@ class Server(Flask):
                     status_code, traceback = 500, format_exc()
             log = (
                 f"USER: {username} ({client_address}) - "
-                f"{request.method} {request.path} - ({status_code})"
+                f"{request.method} {request.path} ({status_code})"
             )
             if status_code == 500:
                 log += f"\n{traceback}"

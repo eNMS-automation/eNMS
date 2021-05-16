@@ -1,45 +1,57 @@
 <div class="modal-body">
   <div>
     <p>
-      The <b>notification header</b> supplies any extra information to the notification content.
-      This appears in the notification body starting on the "Header:" line.
+      The <b>notification header</b> supplies any extra information to the notification
+      content. This appears in the notification body starting on the "Header:" line.
     </p>
   </div>
   <div>
     <h2>Example 1 - Regular text</h2>
-      <p>Any normal text put in this field will show up in the notification after the
-          "Header:" line.</p>
-    <textarea class="help-snippet" style="height: fit-content;">Report details will follow</textarea>
-    <br>
+    <p>
+      Any normal text put in this field will show up in the notification after the
+      "Header:" line.
+    </p>
+    <textarea class="help-snippet" style="height: fit-content;">
+Report details will follow</textarea
+    >
+    <br />
     <p>Sample output:</p>
-<pre>
+    <pre>
   Service: Your Service
   Runtime: 2021-04-29 21:03:19.745496
   Status: PASS
   Results: ...
   Header: Report details will follow
-</pre>
+</pre
+    >
   </div>
-<div>
+  <div>
     <h2>Example 2 - Variable substitution</h2>
-      <p>
-          Similar to example 1, but now you can use <a
+    <p>
+      Similar to example 1, but now you can use
+      <a
         href="/docs/automation/services.html#substitution-fields"
         style="text-decoration: underline;"
         >Variable substitution</a
       >.
-      </p>
-      <p>
-          The replaced text will show up in the notification after the "Header:" line.  Note that some formatting
-          may be necessary - and our example will use the <b>dict_to_string</b> function (see <a
-                href="/docs/automation/services.html#variables"
-                style="text-decoration: underline;"
-              >Variables</a> - scroll down to find dict_to_string).
-      </p>
-    <textarea class="help-snippet" style="height: fit-content;">{% raw %}{{ dict_to_string(get_var("variable_name"), depth=1) }}{% endraw %}</textarea>
-    <br>
+    </p>
+    <p>
+      The replaced text will show up in the notification after the "Header:" line. Note
+      that some formatting may be necessary - and our example will use the
+      <b>dict_to_string</b> function (see
+      <a
+        href="/docs/automation/services.html#variables"
+        style="text-decoration: underline;"
+        >Variables</a
+      >
+      - scroll down to find dict_to_string).
+    </p>
+    <textarea class="help-snippet" style="height: fit-content;">
+{% raw %}{{ dict_to_string(get_var("variable_name"), depth=1) }}{% endraw %}</textarea
+    >
+    <br />
     <p>Sample output:</p>
-<pre>
+    <pre>
   Service: Your Service
   Runtime: 2021-04-29 21:03:19.745496
   Status: PASS
@@ -53,6 +65,7 @@
 
        more_data:
                 key1: value2
-</pre>
+</pre
+    >
   </div>
 </div>

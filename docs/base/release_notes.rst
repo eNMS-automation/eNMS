@@ -68,6 +68,7 @@ value is empty or not.
 - Add scrapli netconf service
 - Move LDAP and TACACS+ server init to environment file instead of custom file. Impact on authentication
 ldap / tacacs functions.
+- Add Token-based authentication via REST API. New GET endpoint "/rest/token" to generate a token.
 
 - Separate controller (handling HTTP POST requests) from main application (gluing everything together)
 Impact:

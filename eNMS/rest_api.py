@@ -1,5 +1,7 @@
 from collections import defaultdict
 from flask_login import current_user
+from itsdangerous import TimedJSONWebSignatureSerializer
+from os import getenv
 from threading import Thread
 from traceback import format_exc
 from uuid import getnode
@@ -18,6 +20,7 @@ class RestApi:
             "is_alive": "is_alive",
             "query": "query",
             "result": "get_result",
+            "token": "get_token",
         },
         "POST": {
             "instance": "update_instance",
@@ -69,6 +72,16 @@ class RestApi:
                 "status": run.status,
                 "result": result.result if result else "No results yet.",
             }
+
+    def get_token(self):
+        return (
+            TimedJSONWebSignatureSerializer(
+                getenv("SECRET_KEY", "secret_key"),
+                expires_in=vs.settings["app"]["session_timeout_minutes"],
+            )
+            .dumps({"id": current_user.id})
+            .decode("ascii")
+        )
 
     def is_alive(self, **_):
         return {"name": getnode(), "cluster_id": vs.settings["cluster"]["id"]}

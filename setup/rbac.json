@@ -143,6 +143,7 @@
     "/rest/is_alive": "none",
     "/rest/query": "access",
     "/rest/result": "access",
+    "/rest/token": "access",
     "/result_form": "access",
     "/run_table": "access",
     "/server_table": "admin",

@@ -29,7 +29,7 @@ from sqlalchemy.types import JSON
 from time import sleep
 
 from eNMS.models import model_properties, models, property_types, relationships
-from eNMS.setup import database as database_settings, properties, rbac as rbac_settings
+from eNMS.setup import database as database_settings, properties
 
 
 class Database:
@@ -254,19 +254,15 @@ class Database:
                 ),
             )
 
-    def get_user(self, name):
-        return db.session.query(models["user"]).filter_by(name=name).first()
-
-    def query(self, model, rbac="read", username=None, property=None, prefilter=False):
+    def query(self, model, rbac="read", username=None, property=None):
         entity = getattr(models[model], property) if property else models[model]
         query = self.session.query(entity)
-        if prefilter:
-            query = models[model].prefilter(query)
-        if rbac:
-            user = current_user or self.get_user(username or "admin")
+        if rbac and model != "user":
+            if current_user:
+                user = current_user
+            else:
+                user = self.fetch("user", name=username or "admin")
             if user.is_authenticated and not user.is_admin:
-                if model in rbac_settings["admin_models"]:
-                    raise self.rbac_error
                 query = models[model].rbac_filter(query, rbac, user)
         return query
 

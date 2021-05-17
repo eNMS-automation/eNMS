@@ -66,6 +66,7 @@ class Device(Object):
     netmiko_driver = db.Column(db.TinyString, default="cisco_ios")
     napalm_driver = db.Column(db.TinyString, default="ios")
     scrapli_driver = db.Column(db.TinyString, default="cisco_iosxe")
+    netconf_driver = db.Column(db.TinyString, default="default")
     configuration = db.Column(db.LargeString, info={"log_change": False})
     target_services = relationship(
         "Service",
@@ -367,7 +368,9 @@ class Pool(AbstractBase):
         object_value = str(getattr(obj, property))
         match = getattr(self, f"{obj.class_type}_{property}_match")
         invert = getattr(self, f"{obj.class_type}_{property}_invert")
-        if match == "inclusion":
+        if not pool_value:
+            result = True
+        elif match == "inclusion":
             result = pool_value in object_value
         elif match == "equality":
             result = pool_value == object_value
@@ -380,7 +383,6 @@ class Pool(AbstractBase):
         return operator(
             self.property_match(obj, property)
             for property in properties["filtering"][obj.class_type]
-            if getattr(self, f"{obj.class_type}_{property}")
         )
 
     def compute(self, model):

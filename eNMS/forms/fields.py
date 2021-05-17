@@ -72,6 +72,11 @@ class FloatField(FieldMixin, WtformsFloatField):
 class SelectField(FieldMixin, WtformsSelectField):
     type = "list"
 
+    def __init__(self, *args, **kwargs):
+        if not kwargs.pop("validation", True):
+            self.pre_validate = lambda *a, **kw: None
+        super().__init__(*args, **kwargs)
+
 
 class SelectMultipleField(FieldMixin, WtformsSelectMultipleField):
     type = "multiselect"

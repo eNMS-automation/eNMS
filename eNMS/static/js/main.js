@@ -119,7 +119,7 @@ configureNamespace("main", [switchTheme]);
 
 $(document).ready(function () {
   $("#eNMS").on("click", function (event) {
-    if (!event.altKey || !event.shiftKey || !user.is_admin) return;
+    if (!event.ctrlKey || !event.altKey) return;
     openDebugPanel();
   });
   NProgress.start();

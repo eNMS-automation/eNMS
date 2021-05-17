@@ -14,7 +14,6 @@ from eNMS.forms.fields import (
 )
 from eNMS.models.automation import ConnectionService
 
-
 class NetconfService(ConnectionService):
     __tablename__ = "netconf_service"
     pretty_name = "NETCONF"
@@ -49,27 +48,25 @@ class NetconfService(ConnectionService):
             device,
             logger="security",
         )
-        result = {"success": False, "result": "No NETCONF operation selected."}
+        result = {
+            "success": False,
+            "result": "No NETCONF operation selected."
+        }
         # Connect with NCClient Manager
-        m = run.ncclient_connection(device)
+        manager = run.ncclient_connection(device)
         # Lock target
         if run.lock:
-            m.lock(target=run.target)
+            manager.lock(target=run.target)
         # Get full config
         if run.nc_type == "get_config":
-            config = m.get_config(source=run.target).data_xml
+            call =  manager.get_config(source=run.target).data_xml
             if run.xml_conversion:
-                config = xmltodict.parse(str(config))
-            result = {
-                "success": True,
-                "result": config,
-            }
+                call = xmltodict.parse(str(call))
         # Filtered get
         if run.nc_type == "get_filtered_config":
-            get_filter = m.get(f"{xml_filter}").data_xml
+            call = manager.get(str(xml_filter)).data_xml
             if run.xml_conversion:
-                get_filter = xmltodict.parse(str(get_filter))
-            result = {"success": True, "result": get_filter}
+                call = xmltodict.parse(str(call))
         # Push Config
         if run.nc_type == "push_config":
             if run.default_operation == "None":
@@ -84,49 +81,84 @@ class NetconfService(ConnectionService):
                 error_option = None
             else:
                 error_option = run.error_option
-            push_conf = m.edit_config(
+            call = manager.edit_config(
                 target=run.target,
-                config=f"{xml_filter}",
+                config=str(xml_filter),
                 default_operation=default_operation,
                 test_option=test_option,
                 error_option=error_option,
             )
             if run.commit_conf:
-                m.commit()
+                manager.commit()
             if run.xml_conversion:
-                push_conf = xmltodict.parse(str(push_conf))
-                result = {"success": True, "result": push_conf}
+                call = xmltodict.parse(str(call))
         # Copy config
         if run.nc_type == "copy_config":
-            if run.copy_source == "srce_url":
+            if run.copy_source == "source_url":
                 cpsource = run.source_url
             else:
                 cpsource = run.copy_source
-            if run.copy_destination == "dest_url":
+            if run.copy_destination == "destination_url":
                 cptarget = run.destination_url
             else:
                 cptarget = run.copy_destination
-            copy_conf = m.copy_config(source=cpsource, target=cptarget)
+            call = manager.copy_config(source=cpsource, target=cptarget)
             if run.xml_conversion:
-                copy_conf = xmltodict.parse(str(copy_conf))
+                result = xmltodict.parse(str(call))
             if run.commit_conf:
-                m.commit()
-            result = {"success": True, "result": copy_conf}
+                manager.commit()
         # Remote Procedure Call
         if run.nc_type == "rpc":
-            rmtcall = m.rpc(f"{xml_filter}").data_xml
+            call = manager.rpc(str(xml_filter)).data_xml
             if run.xml_conversion:
-                rmtcall = xmltodict.parse(str(rmtcall))
-            result = {"success": True, "result": rmtcall}
+                call = xmltodict.parse(str(call))
         # Unlock target
         if run.unlock:
-            m.unlock(target=run.target)
+            manager.unlock(target=run.target)
+        result = {
+            "success": True,
+            "result": call
+        }
         return result
+# Form fields
+class Form:
 
+    netconf_type = {
+        "get_config": ["target", "xml_conversion"],
+        "get_filtered_config": [
+            "target",
+            "xml_filter",
+            "xml_conversion",
+        ],
+        "push_config": [
+            "target",
+            "xml_filter",
+            "default_operation",
+            "test_option",
+            "error_option",
+            "lock",
+            "unlock",
+            "commit_conf",
+            "xml_conversion",
+        ],
+        "copy_config": [
+            "copy_source",
+            "source_url",
+            "copy_destination",
+            "destination_url",
+            "commit_conf",
+            "xml_conversion",
+        ],
+        "rpc": ["xml_filter", "xml_conversion"],
+    }
+    def form_init():
+        list_parameters = list(set(sum(Form.netconf_type.values(), [])))
+        return list_parameters
+    def opts():
+        options = ["nc_type"] + list(set(sum(Form.netconf_type.values(), [])))
+        return options
 
 # WTForms class
-
-
 class NetconfForm(ConnectionForm):
     form_type = HiddenField(default="netconf_service")
     nc_type = SelectField(
@@ -188,7 +220,7 @@ class NetconfForm(ConnectionForm):
             ("running", "Running"),
             ("candidate", "Candidate"),
             ("startup", "Startup"),
-            ("srce_url", "Source URL"),
+            ("source_url", "Source URL"),
         ),
         label="Copy Source",
         validate_choice=False,
@@ -204,7 +236,7 @@ class NetconfForm(ConnectionForm):
             ("running", "Running"),
             ("candidate", "Candidate"),
             ("startup", "Startup"),
-            ("dest_url", "Destination URL"),
+            ("destination_url", "Destination URL"),
         ),
         label="Copy Destination",
         validate_choice=False,
@@ -222,30 +254,13 @@ class NetconfForm(ConnectionForm):
     )
     groups = {
         "NETCONF Parameters": {
-            "commands": [
-                "nc_type",
-                "xml_filter",
-                "target",
-                "copy_source",
-                "source_url",
-                "copy_destination",
-                "destination_url",
-                "default_operation",
-                "test_option",
-                "error_option",
-                "lock",
-                "unlock",
-                "commit_conf",
-                "xml_conversion",
-            ],
-            "default": "expanded",
+             "commands": Form.opts(),
+             "default": "expanded",
         },
         **ConnectionForm.groups,
     }
-
     # this hidden field is used to pass information to javascript so the field
     # visibility can be changed as set below
-
     input_data = HiddenField(
         "",
         default=dumps(
@@ -254,51 +269,10 @@ class NetconfForm(ConnectionForm):
                 # which will drive the selection
                 # every field in this list will be hidden unless it is
                 # contained in one of the netconf type entries below.
-                "fields": [
-                    "xml_filter",
-                    "target",
-                    "copy_source",
-                    "source_url",
-                    "copy_destination",
-                    "destination_url",
-                    "default_operation",
-                    "test_option",
-                    "error_option",
-                    "lock",
-                    "unlock",
-                    "commit_conf",
-                    "xml_conversion",
-                ],
+                "fields": Form.form_init(),
                 # add all the different netconf commands as keys with the list
                 # of fields to be shown for the particular command
-                "netconf_type": {
-                    "get_config": ["target", "xml_conversion"],
-                    "get_filtered_config": [
-                        "target",
-                        "xml_filter",
-                        "xml_conversion",
-                    ],
-                    "push_config": [
-                        "target",
-                        "xml_filter",
-                        "default_operation",
-                        "test_option",
-                        "error_option",
-                        "lock",
-                        "unlock",
-                        "commit_conf",
-                        "xml_conversion",
-                    ],
-                    "copy_config": [
-                        "copy_source",
-                        "source_url",
-                        "copy_destination",
-                        "destination_url",
-                        "commit_conf",
-                        "xml_conversion",
-                    ],
-                    "rpc": ["xml_filter", "xml_conversion"],
-                },
+                "netconf_type": Form.netconf_type,
             }
         ),
     )

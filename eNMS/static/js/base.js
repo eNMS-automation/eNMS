@@ -11,7 +11,6 @@ jsPanel: false
 JSONEditor: false
 moment: false
 page: false
-rbac: false
 relations: false
 relationships: false
 user: false
@@ -189,7 +188,6 @@ function removeInstance(tableId, instance, relation) {
         .row($(`#${instance.id}`))
         .remove()
         .draw(false);
-      if (relation.type == "pool") refreshTable("pool");
       notify(
         `${instance.type.toUpperCase()} '${instance.name}' removed from
         ${relation.type.toUpperCase()} '${relation.name}'.`,
@@ -253,17 +251,9 @@ export function openPanel({
   content,
   size,
   url,
-  css,
-  checkRbac = true,
-  ...other
+  rbac = true,
 }) {
-  const endpoint = url || `/${name}_form`;
-  if (
-    checkRbac &&
-    !user.is_admin &&
-    !user.get_requests.includes(endpoint) &&
-    rbac.get_requests[endpoint] != "all"
-  ) {
+  if (rbac && !user.is_admin && !user.get_requests.includes(url || `/${name}_form`)) {
     return notify("Error 403 - Operation not allowed.", "error", 5);
   }
   const panelId = id ? `${name}-${id}` : name;
@@ -292,7 +282,6 @@ export function openPanel({
     resizeit: {
       containment: 0,
     },
-    ...other,
   };
   if (content) {
     kwargs.content = content;
@@ -309,8 +298,7 @@ export function openPanel({
   }
   const panel = jsPanel.create(kwargs);
   if (callback && content) callback(content);
-  const position = { top: `${50 + $(window).scrollTop()}px`, position: "absolute" };
-  $(panel).css({ ...position, ...css });
+  $(panel).css({ top: `${50 + $(window).scrollTop()}px`, position: "absolute" });
 }
 
 export function createTooltip({
@@ -325,7 +313,6 @@ export function createTooltip({
   content,
   callback,
   size,
-  ...other
 }) {
   if ($(target).length) {
     let kwargs = {
@@ -445,7 +432,7 @@ export function preprocessForm(panel, id, type, duplicate) {
             editor.setSize("100%", "fit-content");
           });
         },
-        checkRbac: false,
+        rbac: false,
       });
     });
     $(el).append(button);
@@ -577,6 +564,13 @@ function showServicePanel(type, id, mode) {
   }
 }
 
+function configureServicePanel(type, id, mode) {
+  if (mode == "duplicate") {
+    $(`#${type}-shared-${id}`).prop("checked", false);
+    $(`#${type}-workflows-${id}`).val([workflow.id]).trigger("change");
+  }
+}
+
 function showAddInstancePanel(tableId, model, relation) {
   openPanel({
     name: `add_${model}s`,
@@ -599,7 +593,6 @@ function addInstancesToRelation(type, id) {
     callback: (result) => {
       $(`#add_${type}s-${id}`).remove();
       refreshTable(id);
-      if (result.target.type == "pool") refreshTable("pool");
       notify(
         `${result.number} ${type}s added to
         ${result.target.type} '${result.target.name}'.`,
@@ -616,8 +609,9 @@ export function showInstancePanel(type, id, mode, tableId) {
     name: type,
     id: id,
     callback: function (panel) {
-      const isService = type.includes("service") || type == "workflow";
-      if (isService) showServicePanel(type, id, mode);
+      if (type == "workflow" || type.includes("service")) {
+        showServicePanel(type, id, mode);
+      }
       if (type == "credential") showCredentialPanel(id);
       if (id) {
         const properties = type === "pool" ? "_properties" : "";
@@ -627,21 +621,16 @@ export function showInstancePanel(type, id, mode, tableId) {
             const action = mode ? mode.toUpperCase() : "EDIT";
             panel.setHeaderTitle(`${action} ${type} - ${instance.name}`);
             processInstance(type, instance);
-            if (mode == "duplicate" && isService) {
-              $(`#${type}-shared-${id}`).prop("checked", false);
-              $(`#${type}-workflows-${id}`).val([workflow.id]).trigger("change");
+            if (type.includes("service") || type == "workflow") {
+              configureServicePanel(type, id, mode);
             }
           },
         });
       } else if (mode == "bulk") {
-        const model = isService ? "service" : type;
-        const form = {
-          ...serializeForm(`#search-form-${tableId}`),
-          ...tableInstances[tableId].constraints,
-        };
+        const model = type == "workflow" || type.includes("service") ? "service" : type;
         call({
           url: `/filtering/${model}`,
-          data: { form: form, bulk: "id" },
+          data: { form: serializeForm(`#search-form-${tableId}`), bulk: true },
           callback: function (instances) {
             $(`#${type}-id`).val(instances.join("-"));
             $(`#${type}-scoped_name,#${type}-name`).val("Bulk Edit");
@@ -679,7 +668,7 @@ export function showInstancePanel(type, id, mode, tableId) {
           $(`#${type}-workflows`).val(workflow.id).trigger("change");
         }
       }
-      if (isService) {
+      if (type.includes("service") || type == "workflow") {
         $(`#${type}-scoped_name`).focus();
         loadScript(`../static/js/services/${type}.js`, id);
       } else {
@@ -747,8 +736,7 @@ function processInstance(type, instance) {
 }
 
 function processData(type, id) {
-  const isService = type.includes("service") || type == "workflow";
-  if (isService) {
+  if (type.includes("service") || type == "workflow") {
     $(id ? `#${type}-workflows-${id}` : `#${type}-workflows`).prop("disabled", false);
     if (id) $(`#${type}-shared-${id}`).prop("disabled", false);
   }
@@ -756,13 +744,13 @@ function processData(type, id) {
     url: `/update/${type}`,
     form: id ? `${type}-form-${id}` : `${type}-form`,
     callback: (instance) => {
-      const tableType = isService ? "service" : type;
+      const tableType =
+        type.includes("service") || type == "workflow" ? "service" : type;
       if (page.includes("table")) {
-        refreshTable(tableType);
-      } else if (page == "workflow_builder") {
-        processWorkflowData(instance, id);
+        tableInstances[tableType].table.ajax.reload(null, false);
       }
       $(id ? `#${type}-${id}` : `#${type}`).remove();
+      if (page == "workflow_builder") processWorkflowData(instance, id);
       notify(
         `${type.toUpperCase()} ${instance.name ? `'${instance.name}' ` : ""}${
           id ? "updated" : "created"

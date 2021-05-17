@@ -126,7 +126,8 @@ function webConnection(id) {
       notify(
         `<a target='_blank' href='${link}/${result.endpoint}'>${message}</a>`,
         "success",
-        15
+        15,
+        true
       );
       const warning = `Don't forget to turn off the pop-up blocker !`;
       notify(warning, "error", 15);
@@ -147,7 +148,7 @@ function desktopConnection(id) {
       } else {
         const link = `${result.username}@${loc.hostname}:${result.port}`;
         const message = `Click here to connect to ${result.device_name}.`;
-        notify(`<a href='ssh://${link}'>${message}</a>`, "success", 15);
+        notify(`<a href='ssh://${link}'>${message}</a>`, "success", 15, true);
       }
     },
   });
@@ -429,10 +430,7 @@ function showDeviceResultsPanel(device) {
     title: `Results - ${device.name}`,
     callback: function () {
       // eslint-disable-next-line new-cap
-      new tables["device_result"](device.id, {
-        device_id: device.id,
-        device_id_filter: "equality",
-      });
+      new tables["device_result"](device.id, { device_id: device.id });
     },
   });
 }

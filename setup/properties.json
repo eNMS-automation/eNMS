@@ -150,8 +150,8 @@
       "number_of_retries",
       "time_between_retries"
     ],
-    "task": ["status", "frequency", "frequency_unit", "crontab_expression"],
-    "user": ["is_admin", "groups"]
+    "user": ["name"],
+    "task": ["status", "frequency", "frequency_unit", "crontab_expression"]
   },
   "tables": {
     "device": [

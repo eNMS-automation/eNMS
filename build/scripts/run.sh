@@ -55,7 +55,7 @@ function run() {
   if [ "$gunicorn" = true ]; then
     gunicorn --config gunicorn.py app:app
   else
-    python3 -m flask run -h 0.0.0.0
+    flask run -h 0.0.0.0
   fi
 }
 

@@ -247,6 +247,5 @@
     "/upload_files": "access",
     "/view_filtering": "access",
     "/web_connection": "access"
-  },
-  "admin_models": ["access", "credential", "server", "user"]
+  }
 }

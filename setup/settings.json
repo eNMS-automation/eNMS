@@ -9,7 +9,7 @@
     "session_timeout_minutes": 30
   },
   "authentication": {
-    "default": "database",
+    "default": "ldap",
     "methods": {
       "database": {
         "display_name": "Local User",

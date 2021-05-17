@@ -133,7 +133,6 @@ export class Table {
             type: this.type,
             export: self.csvExport,
             clipboard: self.copyClipboard,
-            prefilter: self.id == "run",
           });
           Object.assign(d, self.filteringData);
           return JSON.stringify(d);
@@ -450,9 +449,7 @@ tables.device = class DeviceTable extends Table {
       ` <button
         type="button"
         class="btn btn-success"
-        onclick="eNMS.automation.showRunServicePanel(
-          {tableId: '${this.id}', type: '${this.type}'}
-        )"
+        onclick="eNMS.automation.showRunServicePanel({type: 'device'})"
         data-tooltip="Run service on all devices in table"
       >
         <span class="glyphicon glyphicon-play"></span>
@@ -668,9 +665,7 @@ tables.pool = class PoolTable extends Table {
       ` <button
         type="button"
         class="btn btn-success"
-        onclick="eNMS.automation.showRunServicePanel(
-          {tableId: '${this.id}', type: '${this.type}'}
-        )"
+        onclick="eNMS.automation.showRunServicePanel({type: 'pool'})"
         data-tooltip="Run service on all pools in table"
       >
         <span class="glyphicon glyphicon-play"></span>
@@ -1028,7 +1023,7 @@ tables.task = class TaskTable extends Table {
         type="button"
         class="btn btn-success"
         onclick="eNMS.automation.schedulerAction('resume')"
-        data-tooltip="Bulk Resume"
+        data-tooltip="Resume all tasks"
       >
         <span class="glyphicon glyphicon-play"></span>
       </button>
@@ -1036,7 +1031,7 @@ tables.task = class TaskTable extends Table {
         type="button"
         class="btn btn-danger"
         onclick="eNMS.automation.schedulerAction('pause')"
-        data-tooltip="Bulk Pause"
+        data-tooltip="Pause all tasks"
       >
         <span class="glyphicon glyphicon-pause"></span>
       </button>`,
@@ -1328,9 +1323,7 @@ function exportTable(tableId) {
 }
 
 export const refreshTable = function (tableId, notification) {
-  if ($(`#table-${tableId}`).length) {
-    tableInstances[tableId].table.ajax.reload(null, false);
-  }
+  tableInstances[tableId].table.ajax.reload(null, false);
   if (notification) notify("Table refreshed.", "success", 5);
 };
 
@@ -1383,7 +1376,6 @@ function bulkRemoval(tableId, model, instance) {
     form: `search-form-${tableId}`,
     callback: function (number) {
       refreshTable(tableId);
-      if (instance.type == "pool") refreshTable("pool");
       notify(
         `${number} ${model}s removed from ${instance.type} '${instance.name}'.`,
         "success",

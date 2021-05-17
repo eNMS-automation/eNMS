@@ -5,6 +5,7 @@ from paramiko import SSHClient, AutoAddPolicy
 from sqlalchemy import Boolean, Float, ForeignKey, Integer
 from wtforms.validators import InputRequired
 
+from eNMS import app
 from eNMS.database import db
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import (
@@ -12,7 +13,6 @@ from eNMS.forms.fields import (
     FloatField,
     HiddenField,
     IntegerField,
-    PasswordField,
     SelectField,
     StringField,
 )
@@ -35,9 +35,6 @@ class GenericFileTransferService(Service):
     max_transfer_size = db.Column(Integer, default=2 ** 30)
     window_size = db.Column(Integer, default=2 ** 30)
     timeout = db.Column(Float, default=10.0)
-    credentials = db.Column(db.SmallString, default="device")
-    custom_username = db.Column(db.SmallString)
-    custom_password = db.Column(db.SmallString)
 
     __mapper_args__ = {"polymorphic_identity": "generic_file_transfer_service"}
 
@@ -49,12 +46,11 @@ class GenericFileTransferService(Service):
             ssh_client.load_system_host_keys()
         source = run.sub(run.source_file, locals())
         destination = run.sub(run.destination_file, locals())
-        credentials = run.get_credentials(device)
         ssh_client.connect(
             device.ip_address,
+            username=device.username,
+            password=app.get_password(device.password),
             look_for_keys=run.look_for_keys,
-            username=credentials["username"],
-            password=credentials["password"],
         )
         if run.source_file_includes_globbing:
             glob_source_file_list = glob(source, recursive=False)
@@ -95,16 +91,6 @@ class GenericFileTransferForm(ServiceForm):
     max_transfer_size = IntegerField(default=2 ** 30)
     window_size = IntegerField(default=2 ** 30)
     timeout = FloatField(default=10.0)
-    credentials = SelectField(
-        "Credentials",
-        choices=(
-            ("device", "Device Credentials"),
-            ("user", "User Credentials"),
-            ("custom", "Custom Credentials"),
-        ),
-    )
-    custom_username = StringField("Custom Username", substitution=True)
-    custom_password = PasswordField("Custom Password", substitution=True)
 
     def validate(self):
         valid_form = super().validate()

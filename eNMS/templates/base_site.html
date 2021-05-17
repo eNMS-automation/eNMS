@@ -109,8 +109,8 @@
       <div id="sidebar-menu" class="hidden-print main_menu">
         <div class="menu_section">
           <ul class="nav side-menu">
-            {% for label, category in rbac["menu"].items() %} {% if user.is_admin or
-            label in user.menu or category["rbac"] == "all" %}
+            {% for label, category in menu.items() %} {% if user.is_admin or label in
+            user.menu or category["rbac"] == "all" %}
             <li>
               <a
                 ><i class="fa fa-{{ category['icon'] }}"></i>{{ label }}
@@ -300,7 +300,6 @@
       const tableProperties = {{ table_properties|tojson|safe }};
       const theme = {{ themes|tojson|safe }}.themes?.[user.theme];
       const visualization = {{ visualization|tojson|safe }};
-      const rbac = {{ rbac|tojson|safe }};
       let action = {};
       let settings = {{ settings|tojson|safe }};
       let csrf_token = "{{ csrf_token() }}";

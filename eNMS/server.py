@@ -128,7 +128,11 @@ class Server(Flask):
 
         @login_manager.user_loader
         def user_loader(name):
-            return db.get_user(name)
+            return db.fetch("user", allow_none=True, name=name)
+
+        @login_manager.request_loader
+        def request_loader(request):
+            return db.fetch("user", allow_none=True, name=request.form.get("name"))
 
     def configure_context_processor(self):
         @self.context_processor
@@ -136,7 +140,7 @@ class Server(Flask):
             return {
                 "configuration_properties": app.configuration_properties,
                 "form_properties": form_properties,
-                "rbac": app.rbac,
+                "menu": app.rbac["menu"],
                 "names": app.property_names,
                 "property_types": property_types,
                 "relations": list(set(chain.from_iterable(relationships.values()))),
@@ -181,7 +185,8 @@ class Server(Flask):
 
         @self.auth.get_password
         def get_password(username):
-            return getattr(db.get_user(username), "password", False)
+            user = db.fetch("user", allow_none=True, name=username)
+            return getattr(user, "password", False)
 
         @self.auth.error_handler
         def unauthorized():
@@ -208,8 +213,8 @@ class Server(Flask):
                         success, log = True, f"User '{username}' logged in"
                     else:
                         log = f"Authentication failed for user '{username}'"
-                except Exception:
-                    log = f"Authentication error for user '{username}' ({format_exc()})"
+                except Exception as exc:
+                    log = f"Authentication error for user '{username}' ({exc})"
                 finally:
                     app.log("info" if success else "warning", log, logger="security")
                     if success:
@@ -288,7 +293,7 @@ class Server(Flask):
         @blueprint.route("/view_service_results/<int:id>")
         @self.monitor_requests
         def view_service_results(id):
-            result = db.fetch("run", id=id).result(main=True).result
+            result = db.fetch("run", id=id).result().result
             return f"<pre>{app.str_dict(result)}</pre>"
 
         @blueprint.route("/download_file/<path:path>")
@@ -387,8 +392,7 @@ class Server(Flask):
             decorators = [self.auth.login_required, self.monitor_rest_request]
 
             def get(self, name):
-                property = request.args.to_dict().get("property", "configuration")
-                return getattr(db.fetch("device", name=name), property)
+                return db.fetch("device", name=name).configuration
 
         class GetResult(Resource):
             decorators = [self.auth.login_required, self.monitor_rest_request]
@@ -470,7 +474,7 @@ class Server(Flask):
                 if errors:
                     return {"errors": errors}
                 if devices or pools:
-                    data.update({"target_devices": devices, "target_pools": pools})
+                    data.update({"devices": devices, "pools": pools})
                 data["runtime"] = runtime = app.get_time()
                 if handle_asynchronously:
                     Thread(target=app.run, args=(service.id,), kwargs=data).start()
@@ -491,9 +495,9 @@ class Server(Flask):
                     **task.initial_payload,
                 }
                 if task.devices:
-                    data["target_devices"] = [device.id for device in task.devices]
+                    data["devices"] = [device.id for device in task.devices]
                 if task.pools:
-                    data["target_pools"] = [pool.id for pool in task.pools]
+                    data["pools"] = [pool.id for pool in task.pools]
                 Thread(target=app.run, args=(task.service.id,), kwargs=data).start()
 
         class Topology(Resource):

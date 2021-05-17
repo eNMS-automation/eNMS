@@ -71,8 +71,6 @@ class User(AbstractBase, UserMixin):
             .all()
         )
         for property in app.rbac:
-            if property == "admin_models":
-                continue
             access_value = (getattr(access, property) for access in user_access)
             setattr(self, property, list(set(chain.from_iterable(access_value))))
 

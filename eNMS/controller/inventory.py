@@ -155,7 +155,9 @@ class InventoryController(BaseController):
     def count_models(self):
         return {
             "counters": {
-                model: db.query(model).with_entities(models[model].id).count()
+                model: db.query(model, rbac=None)
+                .with_entities(models[model].id)
+                .count()
                 for model in properties["dashboard"]
             },
             "properties": {
@@ -165,7 +167,7 @@ class InventoryController(BaseController):
         }
 
     def counters(self, property, model):
-        return Counter(v for v, in db.query(model, property=property))
+        return Counter(v for v, in db.query(model, property=property, rbac=None))
 
     def export_topology(self, **kwargs):
         workbook = Workbook()
@@ -230,11 +232,6 @@ class InventoryController(BaseController):
 
     def view_filtering(self, **kwargs):
         return {
-            f"{model}s": [
-                instance.view_properties
-                for instance in self.build_relationship_constraints(
-                    db.query(model), model, **form
-                ).all()
-            ]
+            f"{model}s": self.filtering(model, **kwargs[model], bulk="view_properties")
             for model, form in kwargs.items()
         }

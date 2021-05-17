@@ -367,9 +367,7 @@ class Pool(AbstractBase):
         object_value = str(getattr(obj, property))
         match = getattr(self, f"{obj.class_type}_{property}_match")
         invert = getattr(self, f"{obj.class_type}_{property}_invert")
-        if not pool_value:
-            result = True
-        elif match == "inclusion":
+        if match == "inclusion":
             result = pool_value in object_value
         elif match == "equality":
             result = pool_value == object_value
@@ -382,6 +380,7 @@ class Pool(AbstractBase):
         return operator(
             self.property_match(obj, property)
             for property in properties["filtering"][obj.class_type]
+            if getattr(self, f"{obj.class_type}_{property}")
         )
 
     def compute(self, model):

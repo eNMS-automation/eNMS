@@ -143,6 +143,8 @@ class Service(AbstractBase):
     def update(self, **kwargs):
         if "scoped_name" in kwargs and kwargs.get("scoped_name") != self.scoped_name:
             self.set_name(kwargs["scoped_name"])
+        if self.positions and "positions" in kwargs:
+            kwargs["positions"] = {**self.positions, **kwargs["positions"]}
         super().update(**kwargs)
 
     @classmethod
@@ -357,7 +359,7 @@ class Run(AbstractBase):
         self.runtime = kwargs.get("runtime") or app.get_time()
         super().__init__(**kwargs)
         if not self.creator:
-            self.creator = self.parent.creator
+            self.creator = getattr(self.parent, "creator", "")
         if not kwargs.get("parent_runtime"):
             self.parent_runtime = self.runtime
             self.path = str(self.service.id)
@@ -369,8 +371,8 @@ class Run(AbstractBase):
             self.start_services = [db.fetch("service", scoped_name="Start").id]
 
     @classmethod
-    def filtering_constraints(cls, **_):
-        return [cls.parent_runtime == cls.runtime]
+    def prefilter(cls, query):
+        return query.filter(cls.parent_runtime == cls.runtime)
 
     @classmethod
     def rbac_filter(cls, query, mode, user):
@@ -417,9 +419,12 @@ class Run(AbstractBase):
         else:
             raise AttributeError
 
-    def result(self, device=None):
-        result = [r for r in self.results if r.device_name == device]
-        return result.pop() if result else None
+    def result(self, device=None, main=False):
+        for result in self.results:
+            if result.device_name == device:
+                return result
+        if main and len(self.results) == 1:
+            return self.results[0]
 
     @property
     def service_properties(self):
@@ -552,7 +557,12 @@ class Run(AbstractBase):
                 for pool in db.fetch_all("pool"):
                     pool.compute_pool()
             if self.send_notification:
-                results = self.notify(results)
+                try:
+                    results = self.notify(results, payload)
+                except Exception:
+                    error = "\n".join(format_exc().splitlines())
+                    self.log("error", f"Notification error: {error}")
+                    results["notification"] = {"success": False, "error": error}
             app.service_db[self.service.id]["runs"] -= 1
             if not app.service_db[self.id]["runs"]:
                 self.service.status = "Idle"
@@ -577,7 +587,9 @@ class Run(AbstractBase):
                 or len(self.target_devices) > 1
                 or self.run_method == "once"
             ):
-                results = self.create_result(results)
+                results = self.create_result(
+                    results, run_result=self.runtime == self.parent_runtime
+                )
             if app.redis_queue and self.runtime == self.parent_runtime:
                 app.redis("delete", *(app.redis("keys", f"{self.runtime}/*") or []))
         return results
@@ -726,7 +738,7 @@ class Run(AbstractBase):
                 "runtime": self.runtime,
             }
 
-    def create_result(self, results, device=None, commit=True):
+    def create_result(self, results, device=None, commit=True, run_result=False):
         self.success = results["success"]
         results = self.make_results_json_compliant(results)
         result_kw = {
@@ -755,7 +767,7 @@ class Run(AbstractBase):
                 for result in self.results:
                     results["devices"][result.device.name] = result.result
         create_failed_results = self.disable_result_creation and not self.success
-        if not self.disable_result_creation or create_failed_results:
+        if not self.disable_result_creation or create_failed_results or run_result:
             db.factory("result", result=results, commit=commit, **result_kw)
         return results
 
@@ -908,7 +920,7 @@ class Run(AbstractBase):
             if self.runtime != self.parent_runtime:
                 app.log_queue(self.parent_runtime, self.original.service.id, run_log)
 
-    def build_notification(self, results):
+    def build_notification(self, results, payload):
         notification = {
             "Service": f"{self.service.name} ({self.service.type})",
             "Runtime": self.runtime,
@@ -917,7 +929,7 @@ class Run(AbstractBase):
         if "result" in results:
             notification["Results"] = results["result"]
         if self.notification_header:
-            notification["Header"] = self.notification_header
+            notification["Header"] = self.sub(self.notification_header, locals())
         if self.include_link_in_summary:
             address = app.settings["app"]["address"]
             notification["Link"] = f"{address}/view_service_results/{self.id}"
@@ -928,9 +940,9 @@ class Run(AbstractBase):
                 notification["PASSED"] = results["summary"]["success"]
         return notification
 
-    def notify(self, results):
+    def notify(self, results, payload):
         self.log("info", f"Sending {self.send_notification_method} notification...")
-        notification = self.build_notification(results)
+        notification = self.build_notification(results, payload)
         file_content = deepcopy(notification)
         if self.include_device_results:
             file_content["Device Results"] = {}
@@ -944,39 +956,33 @@ class Run(AbstractBase):
                 )
                 if device_result:
                     file_content["Device Results"][device.name] = device_result.result
-        try:
-            if self.send_notification_method == "mail":
-                filename = self.runtime.replace(".", "").replace(":", "")
-                status = "PASS" if results["success"] else "FAILED"
-                result = app.send_email(
-                    f"{status}: {self.service.name}",
-                    app.str_dict(notification),
-                    recipients=self.mail_recipient,
-                    reply_to=self.reply_to,
-                    filename=f"results-{filename}.txt",
-                    file_content=app.str_dict(file_content),
-                )
-            elif self.send_notification_method == "slack":
-                result = SlackClient(getenv("SLACK_TOKEN")).api_call(
-                    "chat.postMessage",
-                    channel=app.settings["slack"]["channel"],
-                    text=notification,
-                )
-            else:
-                result = post(
-                    app.settings["mattermost"]["url"],
-                    verify=app.settings["mattermost"]["verify_certificate"],
-                    json={
-                        "channel": app.settings["mattermost"]["channel"],
-                        "text": notification,
-                    },
-                ).text
-            results["notification"] = {"success": True, "result": result}
-        except Exception:
-            results["notification"] = {
-                "success": False,
-                "error": "\n".join(format_exc().splitlines()),
-            }
+        if self.send_notification_method == "mail":
+            filename = self.runtime.replace(".", "").replace(":", "")
+            status = "PASS" if results["success"] else "FAILED"
+            result = app.send_email(
+                f"{status}: {self.service.name}",
+                app.str_dict(notification),
+                recipients=self.mail_recipient,
+                reply_to=self.reply_to,
+                filename=f"results-{filename}.txt",
+                file_content=app.str_dict(file_content),
+            )
+        elif self.send_notification_method == "slack":
+            result = SlackClient(getenv("SLACK_TOKEN")).api_call(
+                "chat.postMessage",
+                channel=app.settings["slack"]["channel"],
+                text=notification,
+            )
+        else:
+            result = post(
+                app.settings["mattermost"]["url"],
+                verify=app.settings["mattermost"]["verify_certificate"],
+                json={
+                    "channel": app.settings["mattermost"]["channel"],
+                    "text": notification,
+                },
+            ).text
+        results["notification"] = {"success": True, "result": result}
         return results
 
     def get_credentials(self, device):
@@ -1046,17 +1052,23 @@ class Run(AbstractBase):
         if self.validation_method == "dict_equal":
             return result == self.dict_match
         else:
-            match_copy = deepcopy(match) if first else match
+            copy = deepcopy(match) if first else match
             if isinstance(result, dict):
                 for k, v in result.items():
-                    if k in match_copy and match_copy[k] == v:
-                        match_copy.pop(k)
+                    if isinstance(copy.get(k), list) and isinstance(v, list):
+                        for item in v:
+                            try:
+                                copy[k].remove(item)
+                            except ValueError:
+                                pass
+                        pop_key = not copy[k]
                     else:
-                        self.match_dictionary(v, match_copy, False)
+                        pop_key = copy.get(k) == v
+                    copy.pop(k) if pop_key else self.match_dictionary(v, copy, False)
             elif isinstance(result, list):
                 for item in result:
-                    self.match_dictionary(item, match_copy, False)
-            return not match_copy
+                    self.match_dictionary(item, copy, False)
+            return not copy
 
     def transfer_file(self, ssh_client, files):
         if self.protocol == "sftp":
@@ -1165,6 +1177,7 @@ class Run(AbstractBase):
                 "set_var": partial(_self.payload_helper, payload),
                 "parent_device": _self.parent_device or device,
                 "placeholder": _self.original.placeholder,
+                "dict_to_string": app.str_dict,
             }
         )
         return variables
@@ -1201,6 +1214,17 @@ class Run(AbstractBase):
             service_value = getattr(self.service, property)
             if service_value:
                 setattr(connection, property, service_value)
+        try:
+            if not hasattr(connection, "check_enable_mode"):
+                self.log("error", "Netmiko 'check_enable_mode' method is missing")
+                return connection
+            mode = connection.check_enable_mode()
+            if mode and not self.enable_mode:
+                connection.exit_enable_mode()
+            elif self.enable_mode and not mode:
+                connection.enable()
+        except Exception as exc:
+            self.log("error", f"Failed to honor the enable mode {exc}")
         try:
             if not hasattr(connection, "check_config_mode"):
                 self.log("error", "Netmiko 'check_config_mode' method is missing")

@@ -87,7 +87,7 @@ class AnsiblePlaybookService(Service):
 
 class AnsiblePlaybookForm(ServiceForm):
     form_type = HiddenField(default="ansible_playbook_service")
-    playbook_path = SelectField("Playbook Path", choices=(), validation=False)
+    playbook_path = SelectField("Playbook Path", validate_choice=False)
     arguments = StringField(
         "Arguments (Ansible command line options)",
         substitution=True,

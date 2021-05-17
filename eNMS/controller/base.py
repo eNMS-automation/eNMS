@@ -119,7 +119,7 @@ class BaseController:
         if self.cli_command:
             return
         self.init_forms()
-        if not db.fetch("user", allow_none=True, name="admin"):
+        if not db.get_user("admin"):
             self.create_admin_user()
             self.migration_import(
                 name=self.settings["app"].get("startup_migration", "default"),
@@ -153,9 +153,11 @@ class BaseController:
         )
 
     def create_admin_user(self):
-        admin = db.factory("user", name="admin", is_admin=True, commit=True)
-        if not admin.password:
-            admin.update(password="admin")
+        admin_user = models["user"](name="admin", is_admin=True)
+        db.session.add(admin_user)
+        db.session.commit()
+        if not admin_user.password:
+            admin_user.update(password="admin")
 
     def update_credentials(self):
         with open(self.path / "files" / "spreadsheets" / "usa.xls", "rb") as file:
@@ -487,8 +489,8 @@ class BaseController:
             )
         return query
 
-    def filtering(self, model, bulk=False, **kwargs):
-        table, query = models[model], db.query(model)
+    def filtering(self, model, bulk=False, prefilter=False, **kwargs):
+        table, query = models[model], db.query(model, prefilter=prefilter)
         total_records = query.with_entities(table.id).count()
         try:
             constraints = self.build_filtering_constraints(model, **kwargs)
@@ -500,7 +502,10 @@ class BaseController:
         filtered_records = query.with_entities(table.id).count()
         if bulk:
             instances = query.all()
-            return instances if bulk == "object" else [obj.id for obj in instances]
+            if bulk == "object":
+                return instances
+            else:
+                return [getattr(instance, bulk) for instance in instances]
         data = kwargs["columns"][int(kwargs["order"][0]["column"])]["data"]
         ordering = getattr(getattr(table, data, None), kwargs["order"][0]["dir"], None)
         if ordering:
@@ -530,7 +535,7 @@ class BaseController:
         return allowed_syntax and allowed_extension
 
     def bulk_deletion(self, table, **kwargs):
-        instances = self.filtering(table, bulk=True, form=kwargs)
+        instances = self.filtering(table, bulk="id", form=kwargs)
         for instance_id in instances:
             db.delete(table, id=instance_id)
         return len(instances)

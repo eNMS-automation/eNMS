@@ -631,7 +631,8 @@
   service_vendor: ''
   service_vendor_invert: false
   service_vendor_match: inclusion
-  target_services: ['Regression Workflow: Scalability Test (large workflow)']
+  target_services: ['Regression Workflow: Result content in memory (scalability)',
+    'Regression Workflow: Scalability Test (large workflow)']
   tasks: []
   type: pool
   user_description: ''

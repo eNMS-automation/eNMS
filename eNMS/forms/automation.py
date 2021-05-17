@@ -48,7 +48,9 @@ class ServiceForm(BaseForm):
         "Notification Method",
         choices=(("mail", "Mail"), ("slack", "Slack"), ("mattermost", "Mattermost")),
     )
-    notification_header = StringField(widget=TextArea(), render_kw={"rows": 5})
+    notification_header = StringField(
+        widget=TextArea(), render_kw={"rows": 5}, substitution=True
+    )
     include_device_results = BooleanField("Include Device Results")
     include_link_in_summary = BooleanField("Include Result Link in Summary")
     display_only_failed_nodes = BooleanField("Display only Failed Devices")
@@ -109,7 +111,6 @@ class ServiceForm(BaseForm):
         "Logging",
         choices=((0, "Disable logging"), *enumerate(app.log_levels, 1)),
         default=1,
-        validation=False,
     )
     multiprocessing = BooleanField("Multiprocessing")
     max_processes = IntegerField("Maximum number of processes", default=15)
@@ -174,8 +175,8 @@ class ServiceForm(BaseForm):
         )
         if conversion_validation_mismatch:
             self.conversion_method.errors.append(
-                f"The conversion method is set to {self.conversion_method.label}"
-                f" and the validation method to {self.validation_method.label} :"
+                f"The conversion method is set to {self.conversion_method.data}"
+                f" and the validation method to {self.validation_method.data} :"
                 " these do not match."
             )
         empty_validation = self.validation_condition.data != "none" and (
@@ -355,7 +356,7 @@ class RestartWorkflowForm(BaseForm):
     action = "eNMS.workflow.restartWorkflow"
     form_type = HiddenField(default="restart_workflow")
     start_services = HiddenField()
-    restart_runtime = SelectField("Restart Runtime", choices=(), validation=False)
+    restart_runtime = SelectField("Restart Runtime", validate_choice=False)
 
 
 class FileForm(BaseForm):

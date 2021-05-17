@@ -203,6 +203,7 @@ function showResult(id) {
 }
 
 export const showRuntimePanel = function (type, service, runtime, table, newRuntime) {
+  if (!runtime) runtime = currentRuntime;
   const displayFunction =
     type == "logs"
       ? displayLogs
@@ -290,7 +291,7 @@ export const showRuntimePanel = function (type, service, runtime, table, newRunt
             );
           });
           if (!runtime || ["normal", "latest"].includes(runtime)) {
-            runtime = runtimes[runtimes.length - 1][0];
+            runtime = runtimes[0][0];
           }
           $(`#runtimes-${panelId}`).val(runtime).selectpicker("refresh");
           $(`#runtimes-${panelId}`).on("change", function () {
@@ -409,6 +410,7 @@ function displayResultsTable(service, runtime, _, type, refresh) {
   } else {
     const constraints = {
       service_id: service.id,
+      service_id_filter: "equality",
       parent_runtime: runtime || currentRuntime,
     };
     new tables[type](service.id, constraints);
@@ -503,6 +505,7 @@ function pauseTask(id) {
       $(`#pause-resume-${id}`)
         .attr("onclick", `eNMS.automation.resumeTask('${id}')`)
         .text("Resume");
+      refreshTable("task");
       notify("Task paused.", "success", 5);
     },
   });
@@ -515,6 +518,7 @@ function resumeTask(id) {
       $(`#pause-resume-${id}`)
         .attr("onclick", `eNMS.automation.pauseTask('${id}')`)
         .text("Pause");
+      refreshTable("task");
       notify("Task resumed.", "success", 5);
     },
   });
@@ -578,8 +582,10 @@ function displayCalendar(calendarType) {
 function schedulerAction(action) {
   call({
     url: `/scheduler_action/${action}`,
+    form: "search-form-task",
     callback: function () {
-      notify(`Scheduler ${action}d.`, "success", 5, true);
+      refreshTable("task");
+      notify(`All tasks have been ${action}d.`, "success", 5, true);
     },
   });
 }
@@ -612,20 +618,28 @@ export function deleteCorruptedEdges() {
   });
 }
 
-export function showRunServicePanel({ instance, type }) {
-  const title = type ? `all ${type}s in table` : `${instance.type} '${instance.name}'`;
-  const panelId = type || instance.id;
+export function showRunServicePanel({ instance, tableId, type }) {
+  const table = tableInstances?.[tableId];
+  const targetType = type || instance.type;
+  const title = type
+    ? `all ${type}s`
+    : tableId
+    ? `all ${type}s in table`
+    : `${instance.type} '${instance.name}'`;
+  const panelId = tableId || instance?.id || type;
   openPanel({
     name: "run_service",
     title: `Run service on ${title}`,
     size: "900px 300px",
     id: panelId,
     callback: function () {
-      $(`#run_service-type-${panelId}`).val(type || instance.type);
+      $(`#run_service-type-${panelId}`).val(targetType);
       if (type) {
+        let form = serializeForm(`#search-form-${panelId}`);
+        if (table) form = { ...form, ...table.constraints };
         call({
           url: `/filtering/${type}`,
-          data: { form: serializeForm(`#search-form-${type}`), bulk: true },
+          data: { form: form, bulk: "id" },
           callback: function (instances) {
             $(`#run_service-targets-${panelId}`).val(instances.join("-"));
           },

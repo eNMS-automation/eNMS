@@ -38,7 +38,8 @@ class NapalmBackupService(ConnectionService):
         path = Path.cwd() / "network_data" / device.name
         path.mkdir(parents=True, exist_ok=True)
         try:
-            device.last_runtime = datetime.now()
+            runtime = datetime.now()
+            setattr(device, f"last_{self.property}_runtime", str(runtime))
             napalm_connection = run.napalm_connection(device)
             run.log("info", f"Fetching getters: {', '.join(run.getters)}", device)
             result = {}
@@ -59,16 +60,15 @@ class NapalmBackupService(ConnectionService):
             setattr(device, self.property, result)
             with open(path / self.property, "w") as file:
                 file.write(result)
-            device.last_status = "Success"
-            device.last_duration = (
-                f"{(datetime.now() - device.last_runtime).total_seconds()}s"
-            )
-            device.last_update = str(device.last_runtime)
-            run.update_configuration_properties(path, device)
+            setattr(device, f"last_{self.property}_status", "Success")
+            duration = f"{(datetime.now() - runtime).total_seconds()}s"
+            setattr(device, f"last_{self.property}_duration", duration)
+            setattr(device, f"last_{self.property}_update", str(runtime))
+            run.update_configuration_properties(path, self.property, device)
         except Exception as exc:
-            device.last_status = "Failure"
-            device.last_failure = str(device.last_runtime)
-            run.update_configuration_properties(path, device)
+            setattr(device, f"last_{self.property}_status", "Failure")
+            setattr(device, f"last_{self.property}_failure", str(runtime))
+            run.update_configuration_properties(path, self.property, device)
             return {"success": False, "result": str(exc)}
         return {"success": True}
 

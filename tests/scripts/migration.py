@@ -18,8 +18,8 @@ def update_property(project, value=None, types=None):
             if obj["validation_method"] == "none":
                 obj["validation_condition"] = "none"
                 obj["validation_method"] = "text"
-            obj["target_devices"] = obj.pop("devices")
-            obj["target_pools"] = obj.pop("pools")
+            obj["target_devices"] = obj.pop("devices", None)
+            obj["target_pools"] = obj.pop("pools", None)
             obj["skip_value"] = "success" if obj["skip_value"] == "True" else "failure"
             obj["update_target_pools"] = obj.pop("update_pools")
             obj.pop("skip")
@@ -27,4 +27,4 @@ def update_property(project, value=None, types=None):
             yaml.dump(objects, migration_file)
 
 
-update_property("original")
+update_property("folder_name")

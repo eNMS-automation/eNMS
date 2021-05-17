@@ -26,7 +26,7 @@ class AdministrationController(BaseController):
         name, password = kwargs["name"], kwargs["password"]
         if not name or not password:
             return False
-        user = db.fetch("user", allow_none=True, name=name)
+        user = db.get_user(name)
         default_method = self.settings["authentication"]["default"]
         user_method = getattr(user, "authentication", default_method)
         method = kwargs.get("authentication_method", user_method)
@@ -287,11 +287,11 @@ class AdministrationController(BaseController):
                 continue
 
     def switch_menu(self, user_id):
-        user = db.fetch("user", id=user_id)
+        user = db.fetch("user", rbac=None, id=user_id)
         user.small_menu = not user.small_menu
 
     def switch_theme(self, user_id, theme):
-        db.fetch("user", id=user_id).theme = theme
+        db.fetch("user", rbac=None, id=user_id).theme = theme
 
     def upload_files(self, **kwargs):
         file = kwargs["file"]

@@ -10,9 +10,11 @@ from uuid import uuid4
 from warnings import warn
 
 try:
-    from scrapli.factory import SYNC_CORE_PLATFORM_MAP
+    from scrapli import Scrapli
+
+    CORE_PLATFORM_MAP = {driver: driver for driver in Scrapli.CORE_PLATFORM_MAP}
 except ImportError as exc:
-    SYNC_CORE_PLATFORM_MAP = {"cisco_iosxe": "cisco_iosxe"}
+    CORE_PLATFORM_MAP = {"cisco_iosxe": "cisco_iosxe"}
     warn(f"Couldn't import scrapli module ({exc})")
 
 from eNMS.controller.base import BaseController
@@ -47,7 +49,7 @@ class AutomationController(BaseController):
         ("get_ipv6_neighbors_table", "IPv6"),
         ("is_alive", "Is alive"),
     )
-    SCRAPLI_DRIVERS = SYNC_CORE_PLATFORM_MAP
+    SCRAPLI_DRIVERS = CORE_PLATFORM_MAP
 
     connections_cache = {
         library: defaultdict(dict)
@@ -141,9 +143,9 @@ class AutomationController(BaseController):
         return {"id": label_id, **label}
 
     def delete_corrupted_edges(self):
-        edges, duplicated_edges = db.fetch_all("workflow_edge"), defaultdict(list)
-        number_of_corrupted_edges = 0
-        for edge in edges:
+        edges = set(db.fetch_all("workflow_edge"))
+        duplicated_edges, number_of_corrupted_edges = defaultdict(list), 0
+        for edge in list(edges):
             services = getattr(edge.workflow, "services", [])
             if (
                 not edge.source
@@ -152,6 +154,7 @@ class AutomationController(BaseController):
                 or edge.source not in services
                 or edge.destination not in services
             ):
+                edges.remove(edge)
                 db.session.delete(edge)
                 number_of_corrupted_edges += 1
         db.session.commit()
@@ -199,7 +202,13 @@ class AutomationController(BaseController):
 
     def get_runtimes(self, type, id):
         runs = db.fetch("run", allow_none=True, all_matches=True, service_id=id)
-        return sorted(set((run.parent_runtime, run.parent_runtime) for run in runs))
+        return sorted(
+            set(
+                (run.parent_runtime, f"{run.parent_runtime} ({run.creator})")
+                for run in runs
+            ),
+            reverse=True,
+        )
 
     def get_service_logs(self, service, runtime, start_line):
         log_instance = db.fetch(
@@ -236,7 +245,13 @@ class AutomationController(BaseController):
                 state = latest_runs[0].get_state()
         return {
             "service": service.to_dict(include=["services", "edges", "superworkflow"]),
-            "runtimes": sorted(set((r.parent_runtime, r.creator) for r in runs)),
+            "runtimes": sorted(
+                set(
+                    (run.parent_runtime, f"{run.parent_runtime}  ({run.creator})")
+                    for run in runs
+                ),
+                reverse=True,
+            ),
             "state": state,
             "runtime": runtime,
         }
@@ -511,8 +526,12 @@ class AutomationController(BaseController):
         playbooks = [[str(f) for f in path.glob(e)] for e in ("*.yaml", "*.yml")]
         return sorted(sum(playbooks, []))
 
-    def scheduler_action(self, action):
-        getattr(self.scheduler, action)()
+    def task_action(self, mode, task_id):
+        return db.fetch("task", id=task_id, rbac="schedule").schedule(mode)
+
+    def scheduler_action(self, mode, **kwargs):
+        for task_id in self.filtering("task", bulk="id", form=kwargs):
+            self.task_action(mode, task_id)
 
     def search_workflow_services(self, *args, **kwargs):
         return [
@@ -548,6 +567,3 @@ class AutomationController(BaseController):
             else:
                 self.run_stop[run.parent_runtime] = True
             return True
-
-    def task_action(self, mode, task_id):
-        return db.fetch("task", id=task_id, rbac="schedule").schedule(mode)

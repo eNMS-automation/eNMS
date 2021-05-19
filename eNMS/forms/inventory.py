@@ -71,6 +71,9 @@ class DeviceForm(ObjectForm):
     scrapli_driver = SelectField(
         "Scrapli Driver", choices=choices(app.SCRAPLI_DRIVERS), default="cisco_iosxe"
     )
+    netconf_driver = SelectField(
+        "NETCONF Driver", choices=app.NETCONF_DRIVERS, default="default"
+    )
 
 
 class DeviceDataForm(BaseForm):

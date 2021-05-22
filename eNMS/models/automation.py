@@ -490,10 +490,10 @@ class Run(AbstractBase):
         for pool in self.target_pools:
             devices |= set(pool.devices)
         if not devices:
-            if service.device_query:
+            if self.device_query:
                 devices |= self.compute_devices_from_query(
-                    service.device_query,
-                    service.device_query_property,
+                    self.device_query,
+                    self.device_query_property,
                     payload=payload,
                 )
             devices |= set(service.target_devices)

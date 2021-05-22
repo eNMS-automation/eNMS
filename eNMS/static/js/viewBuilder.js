@@ -35,6 +35,7 @@ let pointer;
 let activeControls = false;
 let raycaster;
 let texture;
+let daeModel;
 
 function displayView(currentPath) {
   const [viewId] = currentPath.split(">").slice(-1);
@@ -80,6 +81,22 @@ function displayView(currentPath) {
       transformControls.addEventListener("mouseDown", function () {
         activeControls = true;
       });
+
+      const loadingManager = new THREE.LoadingManager(function () {
+        scene.add(daeModel);
+      });
+      const loader = new THREE.ColladaLoader(loadingManager);
+      loader.load("/static/img/juniper_ex3300.dae", function (collada) {
+        daeModel = collada.scene;
+        daeModel.scale.set(10, 10, 10);
+        daeModel.position.set(100, 20, 100);
+      });
+      const ambientLight = new THREE.AmbientLight(0xcccccc, 0.4);
+      scene.add(ambientLight);
+      const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+      directionalLight.position.set(1, 1, 0).normalize();
+      scene.add(directionalLight);
+
       scene.add(transformControls);
       updateRightClickBindings(controls);
       view.objects.map(drawNode);
@@ -328,8 +345,10 @@ function updateRightClickBindings(controls) {
 }
 
 function render() {
-  renderer.render(scene, camera);
-  labelRenderer.render(scene, camera);
+  if (daeModel) {
+    renderer.render(scene, camera);
+    labelRenderer.render(scene, camera);
+  }
 }
 
 function onWindowResize() {
@@ -355,5 +374,12 @@ export function initViewBuilder() {
   });
   initLogicalFramework();
 }
+
+function animate() {
+  requestAnimationFrame(animate);
+  render();
+}
+
+animate();
 
 configureNamespace("viewBuilder", [addObjectsToView, createLabel, createPlan]);

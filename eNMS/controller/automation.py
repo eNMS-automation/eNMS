@@ -2,6 +2,7 @@ from collections import defaultdict
 from flask_login import current_user
 from napalm._SUPPORTED_DRIVERS import SUPPORTED_DRIVERS
 from netmiko.ssh_dispatcher import CLASS_MAPPER, FILE_TRANSFER_MAP
+from ncclient.devices import supported_devices_cfg
 from operator import itemgetter
 from pathlib import Path
 from re import search, sub
@@ -50,9 +51,11 @@ class AutomationController(BaseController):
         ("is_alive", "Is alive"),
     )
     SCRAPLI_DRIVERS = CORE_PLATFORM_MAP
+    NETCONF_DRIVERS = sorted((driver, driver) for driver in supported_devices_cfg)
 
     connections_cache = {
-        library: defaultdict(dict) for library in ("netmiko", "napalm", "scrapli")
+        library: defaultdict(dict)
+        for library in ("netmiko", "napalm", "scrapli", "ncclient")
     }
     service_db = defaultdict(lambda: {"runs": 0})
     run_db = defaultdict(dict)

@@ -1030,6 +1030,7 @@
       "netmiko_driver",
       "napalm_driver",
       "scrapli_driver",
+      "netconf_driver",
       "ip_address",
       "port",
       "longitude",

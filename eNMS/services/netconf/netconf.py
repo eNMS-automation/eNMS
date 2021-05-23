@@ -50,22 +50,17 @@ class NetconfService(ConnectionService):
             logger="security",
         )
         result = {"success": False, "result": "No NETCONF operation selected."}
-        # Connect with NCClient Manager
         manager = run.ncclient_connection(device)
-        # Lock target
         if run.lock:
             manager.lock(target=run.target)
-        # Get full config
         if run.nc_type == "get_config":
             call = manager.get_config(source=run.target).data_xml
             if run.xml_conversion:
                 call = xmltodict.parse(str(call))
-        # Filtered get
         if run.nc_type == "get_filtered_config":
             call = manager.get(str(xml_filter)).data_xml
             if run.xml_conversion:
                 call = xmltodict.parse(str(call))
-        # Push Config
         if run.nc_type == "push_config":
             if run.default_operation == "None":
                 default_operation = None
@@ -105,12 +100,10 @@ class NetconfService(ConnectionService):
                 result = xmltodict.parse(str(call))
             if run.commit_conf:
                 manager.commit()
-        # Remote Procedure Call
         if run.nc_type == "rpc":
             call = manager.rpc(str(xml_filter)).data_xml
             if run.xml_conversion:
                 call = xmltodict.parse(str(call))
-        # Unlock target
         if run.unlock:
             manager.unlock(target=run.target)
         result = {"success": True, "result": call}
@@ -259,20 +252,7 @@ class NetconfForm(ConnectionForm):
         },
         **ConnectionForm.groups,
     }
-    # this hidden field is used to pass information to javascript so the field
-    # visibility can be changed as set below
     input_data = HiddenField(
         "",
-        default=dumps(
-            {
-                # add all fields to the field list except for "nc_type"
-                # which will drive the selection
-                # every field in this list will be hidden unless it is
-                # contained in one of the netconf type entries below.
-                "fields": Form.form_init(),
-                # add all the different netconf commands as keys with the list
-                # of fields to be shown for the particular command
-                "netconf_type": Form.netconf_type,
-            }
-        ),
+        default=dumps({"fields": Form.form_init(), "netconf_type": Form.netconf_type}),
     )

@@ -1343,17 +1343,12 @@ class Run(AbstractBase):
             logger="security",
         )
         credentials = self.get_credentials(device)
-        if device.netconf_driver is not None:
-            driver_name = device.netconf_driver
-        else:
-            driver_name = "default"
-        device_params = {"name": driver_name}
         ncclient_connection = manager.connect(
             host=device.ip_address,
             port=830,
             hostkey_verify=False,
             look_for_keys=False,
-            device_params=device_params,
+            device_params={"name": device.netconf_driver or "default"},
             username=credentials["username"],
             password=credentials["password"],
         )

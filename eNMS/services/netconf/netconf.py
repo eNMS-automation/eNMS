@@ -17,12 +17,8 @@ from eNMS.models.automation import ConnectionService
 
 class NetconfService(ConnectionService):
     __tablename__ = "netconf_service"
-    pretty_name = "NETCONF"
-    id = db.Column(
-        Integer,
-        ForeignKey("connection_service.id"),
-        primary_key=True,
-    )
+    pretty_name = "NCClient Netconf"
+    id = db.Column(Integer, ForeignKey("connection_service.id"), primary_key=True)
     nc_type = db.Column(db.SmallString)
     target = db.Column(db.SmallString)
     default_operation = db.Column(db.SmallString)
@@ -43,12 +39,7 @@ class NetconfService(ConnectionService):
 
     def job(self, run, payload, device=None):
         xml_filter = run.sub(run.xml_filter, locals())
-        run.log(
-            "info",
-            "Sending NETCONF request",
-            device,
-            logger="security",
-        )
+        run.log("info", "Sending NETCONF request", device, logger="security")
         result = {"success": False, "result": "No NETCONF operation selected."}
         manager = run.ncclient_connection(device)
         if run.lock:

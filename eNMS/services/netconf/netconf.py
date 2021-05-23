@@ -55,12 +55,8 @@ class NetconfService(ConnectionService):
             manager.lock(target=run.target)
         if run.nc_type == "get_config":
             result = manager.get_config(source=run.target).data_xml
-            if run.xml_conversion:
-                result = xmltodict.parse(str(result))
         if run.nc_type == "get_filtered_config":
             result = manager.get(str(xml_filter)).data_xml
-            if run.xml_conversion:
-                result = xmltodict.parse(str(result))
         if run.nc_type == "push_config":
             result = manager.edit_config(
                 target=run.target,
@@ -73,8 +69,6 @@ class NetconfService(ConnectionService):
             )
             if run.commit_conf:
                 manager.commit()
-            if run.xml_conversion:
-                result = xmltodict.parse(str(result))
         if run.nc_type == "copy_config":
             result = manager.copy_config(
                 source=run.source_url
@@ -84,14 +78,12 @@ class NetconfService(ConnectionService):
                 if run.copy_destination == "destination_url"
                 else run.copy_destination,
             )
-            if run.xml_conversion:
-                result = xmltodict.parse(str(result))
             if run.commit_conf:
                 manager.commit()
         if run.nc_type == "rpc":
             result = manager.rpc(str(xml_filter)).data_xml
-            if run.xml_conversion:
-                result = xmltodict.parse(str(result))
+        if run.xml_conversion:
+            result = xmltodict.parse(str(result))
         if run.unlock:
             manager.unlock(target=run.target)
         result = {"success": True, "result": result}

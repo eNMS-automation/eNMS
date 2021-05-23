@@ -54,15 +54,15 @@ class NetconfService(ConnectionService):
         if run.lock:
             manager.lock(target=run.target)
         if run.nc_type == "get_config":
-            call = manager.get_config(source=run.target).data_xml
+            result = manager.get_config(source=run.target).data_xml
             if run.xml_conversion:
-                call = xmltodict.parse(str(call))
+                result = xmltodict.parse(str(result))
         if run.nc_type == "get_filtered_config":
-            call = manager.get(str(xml_filter)).data_xml
+            result = manager.get(str(xml_filter)).data_xml
             if run.xml_conversion:
-                call = xmltodict.parse(str(call))
+                result = xmltodict.parse(str(result))
         if run.nc_type == "push_config":
-            call = manager.edit_config(
+            result = manager.edit_config(
                 target=run.target,
                 config=str(xml_filter),
                 default_operation=None
@@ -74,9 +74,9 @@ class NetconfService(ConnectionService):
             if run.commit_conf:
                 manager.commit()
             if run.xml_conversion:
-                call = xmltodict.parse(str(call))
+                result = xmltodict.parse(str(result))
         if run.nc_type == "copy_config":
-            call = manager.copy_config(
+            result = manager.copy_config(
                 source=run.source_url
                 if run.copy_source == "source_url"
                 else run.copy_source,
@@ -85,16 +85,16 @@ class NetconfService(ConnectionService):
                 else run.copy_destination,
             )
             if run.xml_conversion:
-                result = xmltodict.parse(str(call))
+                result = xmltodict.parse(str(result))
             if run.commit_conf:
                 manager.commit()
         if run.nc_type == "rpc":
-            call = manager.rpc(str(xml_filter)).data_xml
+            result = manager.rpc(str(xml_filter)).data_xml
             if run.xml_conversion:
-                call = xmltodict.parse(str(call))
+                result = xmltodict.parse(str(result))
         if run.unlock:
             manager.unlock(target=run.target)
-        result = {"success": True, "result": call}
+        result = {"success": True, "result": result}
         return result
 
 

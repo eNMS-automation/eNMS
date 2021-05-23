@@ -1,26 +1,16 @@
 // eslint-disable-next-line
 function job(id) {
-  // timout of 50ms required to wait for form data to load
   setTimeout(() => {
-    // allocate the dropdown
-    const operationDropdownId = "netconf_service-nc_type";
-    const operationDropdown = getJQueryObject(operationDropdownId, id);
-
-    // maintain state
-    // this is the data passed in through the view
+    const dropdownBaseId = "netconf_service-nc_type";
+    const dropdownId = id ? `${dropdownBaseId}-${id}` : dropdownBaseId;
+    const dropdownObject = $(dropdownId) 
     let inputData = JSON.parse($("#input_data").val());
     const fields = inputData["fields"];
     const netconfType = inputData["netconf_type"];
-
-    // get the current dropdown value and update UI
-    let operation = operationDropdown.val();
+    let operation = dropdownObject.val();
     updateElements(fields, netconfType, operation);
-
-    // CHANGE HANDLER //
-    // have to be defined before they can be used later in the code
-    operationDropdown.change(() => {
-      // get the data from the selected element and update
-      operation = getSelectedValue(operationDropdownId, id);
+    dropdownObject.change(() => {
+      operation = $(`#${dropdownId} option:selected`).val();
       updateElements(fields, netconfType, operation);
     });
   }, 50);
@@ -77,20 +67,9 @@ function job(id) {
     if (id) {
       value = $(`#${dropdownId}-${id} option:selected`).val();
     } else {
-      value = $(`#${dropdownId} option:selected`).val();
+      value = 
     }
     return value;
   }
 
-  function getJQueryObject(objectId, id) {
-    // returns the JQuery object of an object
-    // if id is passed in we have an existing service
-    let e = null;
-    if (id) {
-      e = $(`#${objectId}-${id}`);
-    } else {
-      e = $(`#${objectId}`);
-    }
-    return e;
-  }
 }

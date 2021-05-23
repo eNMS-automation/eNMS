@@ -67,8 +67,6 @@ class NetconfService(ConnectionService):
                 test_option=None if run.test_option == "None" else run.test_option,
                 error_option=None if run.error_option == "None" else run.error_option,
             )
-            if run.commit_conf:
-                manager.commit()
         if run.nc_type == "copy_config":
             result = manager.copy_config(
                 source=run.source_url
@@ -78,16 +76,15 @@ class NetconfService(ConnectionService):
                 if run.copy_destination == "destination_url"
                 else run.copy_destination,
             )
-            if run.commit_conf:
-                manager.commit()
+        if run.commit_conf:
+            manager.commit()
         if run.nc_type == "rpc":
             result = manager.rpc(str(xml_filter)).data_xml
         if run.xml_conversion:
             result = xmltodict.parse(str(result))
         if run.unlock:
             manager.unlock(target=run.target)
-        result = {"success": True, "result": result}
-        return result
+        return {"success": True, "result": result}
 
 
 class NetconfForm(ConnectionForm):
@@ -103,10 +100,7 @@ class NetconfForm(ConnectionForm):
         label="NETCONF Operation",
     )
     xml_filter = StringField(
-        label="XML Filter",
-        widget=TextArea(),
-        render_kw={"rows": 5},
-        substitution=True,
+        label="XML Filter", widget=TextArea(), render_kw={"rows": 5}, substitution=True
     )
     target = SelectField(
         choices=(

@@ -110,48 +110,6 @@ class NetconfService(ConnectionService):
         return result
 
 
-# Form fields
-class Form:
-
-    netconf_type = {
-        "get_config": ["target", "xml_conversion"],
-        "get_filtered_config": [
-            "target",
-            "xml_filter",
-            "xml_conversion",
-        ],
-        "push_config": [
-            "target",
-            "xml_filter",
-            "default_operation",
-            "test_option",
-            "error_option",
-            "lock",
-            "unlock",
-            "commit_conf",
-            "xml_conversion",
-        ],
-        "copy_config": [
-            "copy_source",
-            "source_url",
-            "copy_destination",
-            "destination_url",
-            "commit_conf",
-            "xml_conversion",
-        ],
-        "rpc": ["xml_filter", "xml_conversion"],
-    }
-
-    def form_init():
-        list_parameters = list(set(sum(Form.netconf_type.values(), [])))
-        return list_parameters
-
-    def opts():
-        options = ["nc_type"] + list(set(sum(Form.netconf_type.values(), [])))
-        return options
-
-
-# WTForms class
 class NetconfForm(ConnectionForm):
     form_type = HiddenField(default="netconf_service")
     nc_type = SelectField(
@@ -245,14 +203,46 @@ class NetconfForm(ConnectionForm):
     xml_conversion = BooleanField(
         label="Convert XML result to dictionary", default=True
     )
-    groups = {
-        "NETCONF Parameters": {
-            "commands": Form.opts(),
-            "default": "expanded",
-        },
-        **ConnectionForm.groups,
-    }
-    input_data = HiddenField(
-        "",
-        default=dumps({"fields": Form.form_init(), "netconf_type": Form.netconf_type}),
-    )
+
+    @classmethod
+    def form_init(cls):
+        parameters = {
+            "get_config": ["target", "xml_conversion"],
+            "get_filtered_config": [
+                "target",
+                "xml_filter",
+                "xml_conversion",
+            ],
+            "push_config": [
+                "target",
+                "xml_filter",
+                "default_operation",
+                "test_option",
+                "error_option",
+                "lock",
+                "unlock",
+                "commit_conf",
+                "xml_conversion",
+            ],
+            "copy_config": [
+                "copy_source",
+                "source_url",
+                "copy_destination",
+                "destination_url",
+                "commit_conf",
+                "xml_conversion",
+            ],
+            "rpc": ["xml_filter", "xml_conversion"],
+        }
+        list_parameters = list(set(sum(parameters.values(), [])))
+        cls.groups = {
+            "NETCONF Parameters": {
+                "commands": ["nc_type"] + list_parameters,
+                "default": "expanded",
+            },
+            **ConnectionForm.groups,
+        }
+        cls.input_data = HiddenField(
+            "",
+            default=dumps({"fields": list_parameters, "netconf_type": parameters}),
+        )

@@ -62,40 +62,28 @@ class NetconfService(ConnectionService):
             if run.xml_conversion:
                 call = xmltodict.parse(str(call))
         if run.nc_type == "push_config":
-            if run.default_operation == "None":
-                default_operation = None
-            else:
-                default_operation = run.default_operation
-            if run.test_option == "None":
-                test_option = None
-            else:
-                test_option = run.test_option
-            if run.error_option == "None":
-                error_option = None
-            else:
-                error_option = run.error_option
             call = manager.edit_config(
                 target=run.target,
                 config=str(xml_filter),
-                default_operation=default_operation,
-                test_option=test_option,
-                error_option=error_option,
+                default_operation=None
+                if run.default_operation == "None"
+                else run.default_operation,
+                test_option=None if run.test_option == "None" else run.test_option,
+                error_option=None if run.error_option == "None" else run.error_option,
             )
             if run.commit_conf:
                 manager.commit()
             if run.xml_conversion:
                 call = xmltodict.parse(str(call))
-        # Copy config
         if run.nc_type == "copy_config":
-            if run.copy_source == "source_url":
-                cpsource = run.source_url
-            else:
-                cpsource = run.copy_source
-            if run.copy_destination == "destination_url":
-                cptarget = run.destination_url
-            else:
-                cptarget = run.copy_destination
-            call = manager.copy_config(source=cpsource, target=cptarget)
+            call = manager.copy_config(
+                source=run.source_url
+                if run.copy_source == "source_url"
+                else run.copy_source,
+                target=run.destination_url
+                if run.copy_destination == "destination_url"
+                else run.copy_destination,
+            )
             if run.xml_conversion:
                 result = xmltodict.parse(str(call))
             if run.commit_conf:

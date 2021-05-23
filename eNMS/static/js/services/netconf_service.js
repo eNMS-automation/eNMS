@@ -2,74 +2,28 @@
 function job(id) {
   setTimeout(() => {
     const dropdownBaseId = "netconf_service-nc_type";
-    const dropdownId = id ? `${dropdownBaseId}-${id}` : dropdownBaseId;
-    const dropdownObject = $(dropdownId) 
+    const dropdownId = id ? `#${dropdownBaseId}-${id}` : `#${dropdownBaseId}`;
+    const dropdownObject = $(dropdownId)
     let inputData = JSON.parse($("#input_data").val());
     const fields = inputData["fields"];
     const netconfType = inputData["netconf_type"];
     let operation = dropdownObject.val();
-    updateElements(fields, netconfType, operation);
-    dropdownObject.change(() => {
-      operation = $(`#${dropdownId} option:selected`).val();
+    dropdownObject.on("change", function() {
+      operation = $(`${dropdownId} option:selected`).val();
+      console.log(fields)
       updateElements(fields, netconfType, operation);
-    });
-  }, 50);
+    }).change();
+  }, 500);
 
   // HELPERS
   function updateElements(fieldList, netconfTypes, selectedType) {
     // make all fields invisible
-    for (let key in fieldList) {
-      if ({}.hasOwnProperty.call(fieldList, key)) {
-        hideElement(fieldList[key]);
-      }
-    }
-
-    // enable fields per selection
-    let fieldsToShow = netconfTypes[selectedType];
-    for (let key in fieldsToShow) {
-      if ({}.hasOwnProperty.call(fieldsToShow, key)) {
-        showElement(fieldsToShow[key]);
-      }
-    }
-  }
-
-  function hideElement(name) {
-    // disables visibility for a field
-    $(`label[for=${name}]`).hide();
-    if (id) {
-      $(`#netconf_service-${name}-${id}`)
-        .parent()
-        .hide();
-    } else {
-      $(`#netconf_service-${name}`)
-        .parent()
-        .hide();
-    }
-  }
-
-  function showElement(name) {
-    // enables visibility for a field
-    $(`label[for=${name}]`).show();
-    if (id) {
-      $(`#netconf_service-${name}-${id}`)
-        .parent()
-        .show();
-    } else {
-      $(`#netconf_service-${name}`)
-        .parent()
-        .show();
-    }
-  }
-
-  function getSelectedValue(dropdownId, id) {
-    // returns the currently selected value for a dropdown
-    let value = null;
-    if (id) {
-      value = $(`#${dropdownId}-${id} option:selected`).val();
-    } else {
-      value = 
-    }
-    return value;
+    fieldList.forEach((field) => {
+      const display = netconfTypes[selectedType].includes(field) ? "block" : "none";
+      const fieldBaseId = `#netconf_service-${field}`
+      $(`label[for=${field}]`).css("display", display);
+      $(id ? `${fieldBaseId}-${id}` : fieldBaseId).parent().css("display", display);
+    });
   }
 
 }

@@ -5,7 +5,7 @@ function job(id) {
   let inputData = JSON.parse($("#input_data").val());
   $(dropdownId)
     .on("change", function () {
-      operation = $(`${dropdownId} option:selected`).val();
+      const operation = $(`${dropdownId} option:selected`).val();
       inputData["fields"].forEach((field) => {
         const fieldBaseId = `#div-netconf_service-${field}`;
         const fieldId = id ? `${fieldBaseId}-${id}` : fieldBaseId;

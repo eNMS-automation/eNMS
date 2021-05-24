@@ -17,7 +17,7 @@ from eNMS.models.automation import ConnectionService
 
 class NetconfService(ConnectionService):
     __tablename__ = "netconf_service"
-    pretty_name = "NCClient Netconf"
+    pretty_name = "Netconf (ncclient)"
     id = db.Column(Integer, ForeignKey("connection_service.id"), primary_key=True)
     nc_type = db.Column(db.SmallString)
     target = db.Column(db.SmallString)

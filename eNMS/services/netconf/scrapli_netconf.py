@@ -28,7 +28,7 @@ class ScrapliNetconfService(ConnectionService):
             kwargs[parameter] = run.target
         if run.command in ("edit_config", "get", "rpc"):
             parameter = "config" if run.command == "edit_config" else "filter_"
-            kwargs[parameter] = run.content
+            kwargs[parameter] = content
         if run.command == "get":
             kwargs["filter_type"] = "subtree"
         response = getattr(run.scrapli_connection(device), run.command)(**kwargs)

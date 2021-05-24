@@ -898,6 +898,9 @@ class DeviceForm(ObjectForm):
         choices=vs.dualize(vs.scrapli_drivers),
         default="cisco_iosxe",
     )
+    netconf_driver = SelectField(
+        "Netconf Driver", choices=vs.netconf_drivers, default="default"
+    )
 
 
 class LinkForm(ObjectForm):

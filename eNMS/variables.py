@@ -3,6 +3,7 @@ from datetime import datetime
 from json import load
 from logging import error
 from napalm._SUPPORTED_DRIVERS import SUPPORTED_DRIVERS
+from ncclient.devices import supported_devices_cfg
 from netmiko.ssh_dispatcher import CLASS_MAPPER
 from pathlib import Path
 from string import punctuation
@@ -38,10 +39,9 @@ class VariableStore:
 
     def _set_automation_variables(self):
         self.ssh_sessions = {}
-        self.netmiko_drivers = sorted((driver, driver) for driver in CLASS_MAPPER)
-        self.napalm_drivers = sorted(
-            (driver, driver) for driver in SUPPORTED_DRIVERS[1:]
-        )
+        self.netmiko_drivers = sorted(self.dualize(CLASS_MAPPER))
+        self.napalm_drivers = sorted(self.dualize(SUPPORTED_DRIVERS[1:]))
+        self.netconf_drivers = sorted(self.dualize(supported_devices_cfg))
         self.scrapli_drivers = CORE_PLATFORM_MAP
         self.timestamps = ("status", "update", "failure", "runtime", "duration")
         self.configuration_properties = {"configuration": "Configuration"}
@@ -113,7 +113,7 @@ class VariableStore:
         self.run_logs = defaultdict(lambda: defaultdict(list))
         self.run_stop = defaultdict(bool)
         self.run_instances = {}
-        libraries = ("netmiko", "napalm", "scrapli")
+        libraries = ("netmiko", "napalm", "scrapli", "ncclient")
         self.connections_cache = {library: defaultdict(dict) for library in libraries}
         self.service_run_count = defaultdict(int)
 

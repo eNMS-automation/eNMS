@@ -65,6 +65,7 @@ class Device(Object):
     netmiko_driver = db.Column(db.TinyString, default="cisco_ios")
     napalm_driver = db.Column(db.TinyString, default="ios")
     scrapli_driver = db.Column(db.TinyString, default="cisco_iosxe")
+    netconf_driver = db.Column(db.TinyString, default="default")
     configuration = db.Column(db.LargeString, info={"log_change": False})
     target_services = relationship(
         "Service",

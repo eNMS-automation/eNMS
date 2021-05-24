@@ -369,7 +369,7 @@
             >
               <div class="panel-body" style="background-color: #fafafa;">
                 {% for field_name in group.commands %}
-                <div id="{{ form_type }}-{{ field_name}}-div">
+                <div id="{{ form_type }}-{{ field_name}}-div" class="add-id">
                   {% set label %} {% if form[field_name].render_kw and "help" in
                   form[field_name].render_kw %}
                   <label

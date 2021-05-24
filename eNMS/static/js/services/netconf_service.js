@@ -7,13 +7,10 @@ function job(id) {
     .on("change", function () {
       operation = $(`${dropdownId} option:selected`).val();
       inputData["fields"].forEach((field) => {
-        const displayField = inputData["netconf_type"][operation].includes(field);
-        const display = displayField ? "block" : "none";
-        const fieldBaseId = `#netconf_service-${field}`;
-        $(`label[for=${field}]`).css("display", display);
-        $(id ? `${fieldBaseId}-${id}` : fieldBaseId)
-          .parent()
-          .css("display", display);
+        const fieldBaseId = `#div-netconf_service-${field}`;
+        const fieldId = id ? `${fieldBaseId}-${id}` : fieldBaseId;
+        const display = inputData["netconf_type"][operation].includes(field);
+        $(fieldId).css("display", display ? "block" : "none");
       });
     })
     .change();

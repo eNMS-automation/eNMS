@@ -75,6 +75,7 @@ Impact:
 * the "custom" file that contains pre_init, post_init, and the authentication custom code no longer inherits
 from the controller
 - Add new "ip_address" field in settings.json > app section
+- Add paging for REST API search endpoint: new integer parameter "start" to request results from "start"
 
 MIGRATION:
 

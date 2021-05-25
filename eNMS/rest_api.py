@@ -147,7 +147,7 @@ class RestApi:
             "draw": 1,
             "columns": [{"data": column} for column in kwargs["columns"]],
             "order": [{"column": 0, "dir": "asc"}],
-            "start": 0,
+            "start": kwargs.get("start", 0),
             "length": kwargs.get("maximum_return_records", 10),
             "form": kwargs.get("search_criteria", {}),
             "rest_api_request": True,

@@ -69,12 +69,12 @@ value is empty or not.
 - Move LDAP and TACACS+ server init to environment file instead of custom file. Impact on authentication
 ldap / tacacs functions.
 - Add Token-based authentication via REST API. New GET endpoint "/rest/token" to generate a token.
-
 - Separate controller (handling HTTP POST requests) from main application (gluing everything together)
 Impact:
 * In plugins, 
 * the "custom" file that contains pre_init, post_init, and the authentication custom code no longer inherits
 from the controller
+- Add new "ip_address" field in settings.json > app section
 
 MIGRATION:
 

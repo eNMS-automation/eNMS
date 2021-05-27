@@ -217,6 +217,10 @@ class Controller:
                 .count()
                 for model in vs.properties["dashboard"]
             },
+            "active": {
+                "service": len(db.fetch_all("run", rbac=None, status="Running")),
+                "task": len(db.fetch_all("task", rbac=None, is_active=True)),
+            },
             "properties": {
                 model: self.counters(vs.properties["dashboard"][model][0], model)
                 for model in vs.properties["dashboard"]

@@ -126,7 +126,11 @@ export function initDashboard() {
     url: "/count_models",
     callback: function (result) {
       for (const type of Object.keys(defaultProperties)) {
-        $(`#count-${type}`).text(result.counters[type]);
+        let counterText = result.counters[type].toString();
+        if (["service", "task"].includes(type)) {
+          counterText += ` (${result.active[type]})`;
+        }
+        $(`#count-${type}`).text(counterText);
       }
       for (const [type, objects] of Object.entries(result.properties)) {
         const diagram = echarts.init(document.getElementById(type));

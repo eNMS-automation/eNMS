@@ -304,7 +304,7 @@ export const switchToWorkflow = function (path, arrow, runtime, selection) {
         $("#workflow-filtering").val(path ? workflow.name : "");
         tableInstances["service"].table.page(0).ajax.reload(null, false);
       }
-    }
+    },
   });
 };
 

@@ -138,7 +138,7 @@ export class Table {
           }
           Object.assign(data, {
             form: form,
-            constraints: {...constraints, ...this.filteringConstraints},
+            constraints: { ...constraints, ...this.filteringConstraints },
             columns: this.columns,
             type: this.type,
             export: self.csvExport,
@@ -765,9 +765,9 @@ tables.service = class ServiceTable extends Table {
     const parentFiltering = ($("#parent-filtering").val() || "true") == "true";
     const workflowFiltering = $("#workflow-filtering").val();
     if (workflowFiltering?.length) {
-      return {"workflows": [workflowFiltering]};
+      return { workflows: [workflowFiltering] };
     } else {
-      return {"workflows_filter": parentFiltering ? "empty" : "union"};
+      return { workflows_filter: parentFiltering ? "empty" : "union" };
     }
   }
 

@@ -469,7 +469,7 @@ function initSelect(el, model, parentId, single) {
     closeOnSelect: single ? true : false,
     dropdownParent: parentId ? $(`#${parentId}`) : $(document.body),
     tags: !single,
-    tokenSeparators: [',', ' '],
+    tokenSeparators: [",", " "],
     ajax: {
       url: `/multiselect_filtering/${model}`,
       type: "POST",

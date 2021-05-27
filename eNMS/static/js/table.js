@@ -824,7 +824,7 @@ tables.service = class ServiceTable extends Table {
         data-tooltip="Import Service"
         type="button"
       >
-        <span class="glyphicon glyphicon-circle-arrow-down"></span>
+        <span class="glyphicon glyphicon-import"></span>
       </button>`,
       this.bulkEditButton(),
       this.exportTableButton(),
@@ -868,7 +868,7 @@ tables.service = class ServiceTable extends Table {
         <li>
           <button type="button" class="btn btn-sm btn-primary"
           onclick="location.href='/export_service/${row.id}'" data-tooltip="Export"
-            ><span class="glyphicon glyphicon-upload"></span
+            ><span class="glyphicon glyphicon-export"></span
           ></button>
         </li>
         <li>

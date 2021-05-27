@@ -184,6 +184,14 @@ body {
   }
 }
 
+.server-time {
+  bottom: 7px;
+  left: 5px;
+  position: absolute;
+  color: #b9b9b9;
+  text-align: center;
+}
+
 /* Change background color upper menu item on hover */
 .top_nav .nav .open > a,
 .top_nav .nav > li > a:hover {

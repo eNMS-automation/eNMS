@@ -141,6 +141,16 @@
           </ul>
         </div>
       </div>
+      {% set font, left = (8, 5) if current_user.small_menu else (11, 10) %}
+      <div
+        id="server-time"
+        style="font-size: {{ font }}px; left: {{ left }}px"
+        class="server-time"
+      >
+        {% if not current_user.small_menu %} Server Time: {{ time }} {% else %} {% set
+        a, b = time.split(" ") %} {{ a }} <br />
+        {{ b }} {% endif %}
+      </div>
     </div>
     {% endblock sidebar %} {% block header %}
     <div class="right_column">

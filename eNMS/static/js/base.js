@@ -1095,6 +1095,7 @@ function initSidebar() {
   $("#menu_toggle").on("click", function () {
     call({ url: `/switch_menu/${user.id}` });
     $("body").toggleClass("nav-md nav-sm");
+    $("#server-time").hide();
     switchMenu();
   });
 }

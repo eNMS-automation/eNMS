@@ -500,6 +500,15 @@ function exportService(id) {
   });
 }
 
+function exportServices() {
+  call({
+    url: `/export_services`,
+    callback: () => {
+      notify("Services successfully exported.", "success", 5, true);
+    },
+  });
+}
+
 function pauseTask(id) {
   call({
     url: `/task_action/pause/${id}`,
@@ -692,6 +701,7 @@ configureNamespace("automation", [
   deleteCorruptedEdges,
   displayCalendar,
   exportService,
+  exportServices,
   field,
   normalRun,
   openServicePanel,

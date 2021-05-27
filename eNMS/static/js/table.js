@@ -826,6 +826,15 @@ tables.service = class ServiceTable extends Table {
       >
         <span class="glyphicon glyphicon-import"></span>
       </button>`,
+      `
+      <button
+        class="btn btn-primary"
+        onclick="eNMS.automation.exportServices()"
+        data-tooltip="Export Services as .tgz"
+        type="button"
+      >
+        <span class="glyphicon glyphicon-export"></span>
+      </button>`,
       this.bulkEditButton(),
       this.exportTableButton(),
       this.bulkDeletionButton(),
@@ -867,7 +876,8 @@ tables.service = class ServiceTable extends Table {
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-primary"
-          onclick="location.href='/export_service/${row.id}'" data-tooltip="Export"
+          onclick="location.href='/export_service/${row.id}'"*
+          data-tooltip="Export Service as .tgz"
             ><span class="glyphicon glyphicon-export"></span
           ></button>
         </li>

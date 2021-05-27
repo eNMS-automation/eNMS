@@ -127,7 +127,7 @@ export function initDashboard() {
     callback: function (result) {
       for (const type of Object.keys(defaultProperties)) {
         let counterText = result.counters[type].toString();
-        if (["service", "task"].includes(type)) {
+        if (["service", "task", "workflow"].includes(type)) {
           counterText += ` (${result.active[type]})`;
         }
         $(`#count-${type}`).text(counterText);

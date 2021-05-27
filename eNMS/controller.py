@@ -210,6 +210,10 @@ class Controller:
         }
 
     def count_models(self):
+        active_service, active_workflow = 0, 0
+        for run in db.fetch_all("run", rbac=None, status="Running"):
+            active_service += 1
+            active_workflow += run.service.type == "workflow"
         return {
             "counters": {
                 model: db.query(model, rbac=None)
@@ -218,8 +222,9 @@ class Controller:
                 for model in vs.properties["dashboard"]
             },
             "active": {
-                "service": len(db.fetch_all("run", rbac=None, status="Running")),
+                "service": active_service,
                 "task": len(db.fetch_all("task", rbac=None, is_active=True)),
+                "workflow": active_workflow,
             },
             "properties": {
                 model: self.counters(vs.properties["dashboard"][model][0], model)

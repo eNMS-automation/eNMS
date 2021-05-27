@@ -882,9 +882,10 @@ class Controller:
     def multiselect_filtering(self, model, **params):
         table = vs.models[model]
         results = db.query(model).filter(table.name.contains(params.get("term")))
+        property = "name" if params["multiple"] else "id"
         return {
             "items": [
-                {"text": result.ui_name, "id": result.name}
+                {"text": result.ui_name, "id": getattr(result, property)}
                 for result in results.limit(10)
                 .offset((int(params["page"]) - 1) * 10)
                 .all()

@@ -479,6 +479,7 @@ function initSelect(el, model, parentId, single) {
         return JSON.stringify({
           term: params.term || "",
           page: params.page || 1,
+          multiple: !single,
         });
       },
       processResults: function (data, params) {

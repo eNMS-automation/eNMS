@@ -77,6 +77,7 @@ from the controller
 - Add new "ip_address" field in settings.json > app section
 - Add paging for REST API search endpoint: new integer parameter "start" to request results from "start"
 - Add server time at the bottom of the menu (e.g for scheduling tasks / ease of use)
+- Add button in service table to export services in bulk (export all displayed services as .tgz)
 
 MIGRATION:
 

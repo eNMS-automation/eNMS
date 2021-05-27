@@ -138,7 +138,7 @@ export class Table {
           }
           Object.assign(data, {
             form: form,
-            constraints: constraints,
+            constraints: {...constraints, ...this.filteringConstraints},
             columns: this.columns,
             type: this.type,
             export: self.csvExport,
@@ -759,6 +759,12 @@ tables.service = class ServiceTable extends Table {
         </a></b>`;
     }
     return row;
+  }
+
+  get filteringConstraints() {
+    const parentFiltering = ($("#parent-filtering").val() || "true") == "true";
+    console.log($("#parent-filtering").val())
+    return {"workflows_filter": parentFiltering ? "empty" : "union"};
   }
 
   get controls() {

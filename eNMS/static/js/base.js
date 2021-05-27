@@ -468,6 +468,8 @@ function initSelect(el, model, parentId, single) {
     placeholder: `Select ${single ? `a ${model}` : `${model}s`}`,
     closeOnSelect: single ? true : false,
     dropdownParent: parentId ? $(`#${parentId}`) : $(document.body),
+    tags: !single,
+    tokenSeparators: [',', ' '],
     ajax: {
       url: `/multiselect_filtering/${model}`,
       type: "POST",
@@ -720,8 +722,8 @@ function updateProperty(instance, el, property, value, type) {
     el.selectpicker("val", value).trigger("change");
     el.selectpicker("render");
   } else if (propertyType == "object-list") {
-    value.forEach((o) => el.append(new Option(o.name, o.id)));
-    el.val(value.map((p) => p.id)).trigger("change");
+    value.forEach((o) => el.append(new Option(o.name, o.name)));
+    el.val(value.map((p) => p.name)).trigger("change");
   } else if (propertyType == "object") {
     el.append(new Option(value.name, value.id)).val(value.id).trigger("change");
   } else if (propertyType == "json") {

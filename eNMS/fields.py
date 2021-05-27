@@ -17,6 +17,9 @@ from wtforms.widgets import html_params
 from wtforms.widgets.core import HTMLString
 
 
+from eNMS.database import db
+
+
 class FieldMixin:
     def __init__(self, *args, **kwargs):
         if "help" in kwargs:
@@ -46,7 +49,7 @@ class StringField(FieldMixin, WtformsStringField):
             kwargs["style"] = f"background-color: #{self.color}"
         return super().__call__(*args, **kwargs)
 
-    def pre_validate(self, form):
+    def pre_validate(self, _):
         if self.python:
             try:
                 parse(self.data)
@@ -114,7 +117,7 @@ class DictField(StringField):
         else:
             return False
 
-    def pre_validate(self, form):
+    def pre_validate(self, _):
         invalid_dict, invalid_json = False, False
         try:
             result = loads(self.data)
@@ -153,10 +156,11 @@ class InstanceField(SelectField):
 
     def __init__(self, *args, **kwargs):
         kwargs["coerce"] = int
+        self.model = kwargs.pop("model", None)
         super().__init__(*args, **kwargs)
         self.choices = ()
 
-    def pre_validate(self, form):
+    def pre_validate(self, _):
         pass
 
 
@@ -164,8 +168,17 @@ class MultipleInstanceField(FieldMixin, WtformsSelectMultipleField):
     type = "object-list"
 
     def __init__(self, *args, **kwargs):
+        self.model = kwargs.pop("model")
         super().__init__(*args, **kwargs)
         self.choices = ()
 
-    def pre_validate(self, form):
-        pass
+    def pre_validate(self, _):
+        not_found = [
+            name
+            for name in self.data
+            if not db.fetch(self.model, name=name, allow_none=True)
+        ]
+        if not_found:
+            error = f"Couldn't find the following {self.model}s: {', '.join(not_found)}"
+            raise ValidationError(error)
+        return True

@@ -882,7 +882,7 @@ class Controller:
         results = db.query(model).filter(table.name.contains(params.get("term")))
         return {
             "items": [
-                {"text": result.ui_name, "id": str(result.id)}
+                {"text": result.ui_name, "id": result.name}
                 for result in results.limit(10)
                 .offset((int(params["page"]) - 1) * 10)
                 .all()

@@ -74,7 +74,7 @@ class MetaForm(FormMeta):
                 field_type = field.field_class.type
             properties[field_name] = {
                 "type": field_type,
-                "model": field.kwargs.pop("model", None),
+                "model": field.kwargs.get("model", None),
             }
             if field.args and isinstance(field.args[0], str):
                 vs.property_names[field_name] = field.args[0]
@@ -117,6 +117,8 @@ class BaseForm(FlaskForm, metaclass=MetaForm):
                 value = form_data.getlist(property)
                 if field["type"] == "multiselect-string":
                     value = str(value)
+                if field["type"] == "object-list":
+                    value = [db.fetch(field["model"], name=name).id for name in value]
                 data[property] = value
             elif field["type"] == "object":
                 data[property] = form_data.get(property)
@@ -145,7 +147,9 @@ class FormFactory:
             for related_model, relation in vs.relationships[model].items():
                 if related_model in ("edges", "results"):
                     continue
-                relations[related_model] = MultipleInstanceField(related_model)
+                relations[related_model] = MultipleInstanceField(
+                    related_model, model=related_model
+                )
                 vs.relationships[f"{model}_filtering"][related_model] = relation
                 filtering_key = f"{model}_relation_filtering"
                 vs.relationships[filtering_key][related_model] = relation
@@ -507,12 +511,12 @@ class ServiceForm(BaseForm):
     device_query_property = SelectField(
         "Query Property Type", choices=(("name", "Name"), ("ip_address", "IP address"))
     )
-    target_devices = MultipleInstanceField("Devices")
+    target_devices = MultipleInstanceField("Devices", model="device")
     disable_result_creation = BooleanField("Save only failed results")
-    target_pools = MultipleInstanceField("Pools")
+    target_pools = MultipleInstanceField("Pools", model="pool")
     update_target_pools = BooleanField("Update target pools before running")
     update_pools_after_running = BooleanField("Update pools after running")
-    workflows = MultipleInstanceField("Workflows")
+    workflows = MultipleInstanceField("Workflows", model="workflow")
     waiting_time = IntegerField(
         "Time to Wait before next service is started (in seconds)", default=0
     )
@@ -791,8 +795,8 @@ class WorkflowEdgeForm(BaseForm):
 class AccessForm(RbacForm):
     template = "access"
     form_type = HiddenField(default="access")
-    user_pools = MultipleInstanceField("pool")
-    access_pools = MultipleInstanceField("pool")
+    user_pools = MultipleInstanceField("pool", model="pool")
+    access_pools = MultipleInstanceField("pool", model="pool")
     access_type = SelectMultipleStringField(
         "Access Type",
         choices=vs.dualize(

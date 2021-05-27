@@ -130,8 +130,6 @@ class Service(AbstractBase):
                     ),
                 ]
             )
-        elif kwargs["form"].get("parent-filtering", "true") == "true":
-            constraints.append(~vs.models["service"].workflows.any())
         return constraints
 
     def duplicate(self, workflow=None):

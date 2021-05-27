@@ -79,6 +79,7 @@ from the controller
 - Add server time at the bottom of the menu (e.g for scheduling tasks / ease of use)
 - Add button in service table to export services in bulk (export all displayed services as .tgz)
 - Ability to paste device list (comma or space separated) into a multiple instance field (e.g service device and pool targets)
+- Re-add current Run counter to 'Service' and 'Workflow' on the dashboard banner + Active tasks
 
 MIGRATION:
 

@@ -334,6 +334,10 @@ class Controller:
         rmtree(path, ignore_errors=True)
         return path
 
+    def export_services(self, **kwargs):
+        for service_id in self.filtering("service", bulk="id", form=kwargs):
+            self.export_service(service_id)
+
     def filtering_base_constraints(self, model, **kwargs):
         table, constraints = vs.models[model], []
         constraint_dict = {**kwargs.get("form", {}), **kwargs.get("constraints", {})}

@@ -829,7 +829,7 @@ tables.service = class ServiceTable extends Table {
       `
       <button
         class="btn btn-primary"
-        onclick="eNMS.automation.exportServices()"
+        onclick="eNMS.automation.exportServices('${this.id}')"
         data-tooltip="Export Services as .tgz"
         type="button"
       >

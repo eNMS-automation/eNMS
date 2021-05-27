@@ -494,15 +494,17 @@ export function runLogic(result) {
 function exportService(id) {
   call({
     url: `/export_service/${id}`,
+    form: `search-form-${tableId}`,
     callback: () => {
       notify("Service Export successful.", "success", 5, true);
     },
   });
 }
 
-function exportServices() {
+function exportServices(tableId) {
   call({
     url: `/export_services`,
+    form: `search-form-${tableId}`,
     callback: () => {
       notify("Services successfully exported.", "success", 5, true);
     },

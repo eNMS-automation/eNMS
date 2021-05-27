@@ -278,11 +278,16 @@ export const switchToWorkflow = function (path, arrow, runtime, selection) {
   } else {
     $("#right-arrow").addClass("disabled");
   }
-  if (page == "workflow_builder") {
-    call({
-      url: `/get_service_state/${path}/${runtime || "latest"}`,
-      callback: function (result) {
-        workflow = result.service;
+  if (!path && page == "service_table") {
+    $("#workflow-filtering").val("");
+    tableInstances["service"].table.page(0).ajax.reload(null, false);
+    return;
+  }
+  call({
+    url: `/get_service_state/${path}/${runtime || "latest"}`,
+    callback: function (result) {
+      workflow = result.service;
+      if (page == "workflow_builder") {
         if (workflow?.superworkflow) {
           if (!currentPath.includes(workflow.superworkflow.id)) {
             currentPath = `${workflow.superworkflow.id}>${path}`;
@@ -295,12 +300,12 @@ export const switchToWorkflow = function (path, arrow, runtime, selection) {
         }
         displayWorkflow(result);
         if (selection) graph.setSelection(selection);
-      },
-    });
-  } else {
-    $("#workflow-filtering").val(path);
-    tableInstances["service"].table.page(0).ajax.reload(null, false);
-  }
+      } else {
+        $("#workflow-filtering").val(path ? workflow.name : "");
+        tableInstances["service"].table.page(0).ajax.reload(null, false);
+      }
+    }
+  });
 };
 
 export function processWorkflowData(instance) {

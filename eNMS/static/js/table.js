@@ -763,8 +763,12 @@ tables.service = class ServiceTable extends Table {
 
   get filteringConstraints() {
     const parentFiltering = ($("#parent-filtering").val() || "true") == "true";
-    console.log($("#parent-filtering").val())
-    return {"workflows_filter": parentFiltering ? "empty" : "union"};
+    const workflowFiltering = $("#workflow-filtering").val();
+    if (workflowFiltering?.length) {
+      return {"workflows": [workflowFiltering]};
+    } else {
+      return {"workflows_filter": parentFiltering ? "empty" : "union"};
+    }
   }
 
   get controls() {

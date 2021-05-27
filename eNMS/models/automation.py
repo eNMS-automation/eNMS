@@ -115,23 +115,6 @@ class Service(AbstractBase):
         if not kwargs.get("migration_import"):
             self.set_name()
 
-    @classmethod
-    def filtering_constraints(cls, **kwargs):
-        workflow_id, constraints = kwargs["form"].get("workflow-filtering"), []
-        if workflow_id:
-            constraints.extend(
-                [
-                    vs.models["service"].workflows.any(
-                        vs.models["workflow"].id == int(workflow_id)
-                    ),
-                    ~or_(
-                        vs.models["service"].scoped_name == name
-                        for name in ("Start", "End")
-                    ),
-                ]
-            )
-        return constraints
-
     def duplicate(self, workflow=None):
         index = 0
         while True:

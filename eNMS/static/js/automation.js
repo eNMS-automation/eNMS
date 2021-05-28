@@ -164,15 +164,23 @@ function showResult(id) {
           id="result-path-${id}"
           type="text"
           class="form-control"
-          style="height:5%"
+          style="height: 34px"
           value="results"
         >
-        <span class="input-group-btn" style="width: 25px">
+        <span class="input-group-btn">
+          <button class="btn btn-default pull-right"
+            onclick="eNMS.base.copyToClipboard({text: 'result-path-${id}', isId: true})"
+            type="button"
+          >
+            <span class="glyphicon glyphicon-copy"></span>
+          </button>
+        </span>
+        <span class="input-group-btn">
           <button
             id="download-result-${id}"
             class="btn btn-default pull-right"
             type="button"
-            style="height: 31px; width: 25px"
+            style="height: 34px; width: 40px"
           >
             <span
               class="glyphicon glyphicon-center glyphicon-download"

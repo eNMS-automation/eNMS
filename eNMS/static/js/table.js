@@ -203,7 +203,7 @@ export class Table {
       createTooltip({
         autoshow: true,
         persistent: true,
-        name: `${this.type}_relation_filtering`,
+        name: `${this.model}_relation_filtering`,
         target: `#advanced-search-${this.type}`,
         container: `#controls-${this.type}`,
         position: {
@@ -211,7 +211,7 @@ export class Table {
           at: "center-bottom",
           offsetY: 18,
         },
-        url: `../${this.type}_relation_filtering_form`,
+        url: `../${this.model}_relation_filtering_form`,
         title: "Relationship-based Filtering",
       });
     }
@@ -584,6 +584,7 @@ tables.configuration = class ConfigurationTable extends Table {
         style="width: 200px"
       >`,
       this.refreshTableButton(),
+      this.searchTableButton("device"),
       this.clearSearchButton(),
       this.copyTableButton(),
       this.bulkEditButton(),

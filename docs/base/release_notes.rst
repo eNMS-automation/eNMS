@@ -80,6 +80,7 @@ from the controller
 - Add button in service table to export services in bulk (export all displayed services as .tgz)
 - Ability to paste device list (comma or space separated) into a multiple instance field (e.g service device and pool targets)
 - Re-add current Run counter to 'Service' and 'Workflow' on the dashboard banner + Active tasks
+- Ability to download result as json file + new copy result path to clipboard button in result json editor panel
 
 MIGRATION:
 

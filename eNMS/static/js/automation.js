@@ -197,7 +197,7 @@ function showResult(id) {
         url: `/get_result/${id}`,
         callback: (result) => {
           const jsonResult = result;
-          $(`#download-result-${id}`).on("click", function() {
+          $(`#download-result-${id}`).on("click", function () {
             downloadFile(`result-${id}`, JSON.stringify(result), "json");
           });
           const options = {

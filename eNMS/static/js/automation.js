@@ -229,7 +229,14 @@ function showResult(id) {
   });
 }
 
-export const showRuntimePanel = function (type, service, runtime, table, newRuntime) {
+export const showRuntimePanel = function (
+  type,
+  service,
+  runtime,
+  table,
+  newRuntime,
+  fullResult
+) {
   if (!runtime) runtime = currentRuntime;
   const displayFunction =
     type == "logs"
@@ -322,9 +329,9 @@ export const showRuntimePanel = function (type, service, runtime, table, newRunt
           }
           $(`#runtimes-${panelId}`).val(runtime).selectpicker("refresh");
           $(`#runtimes-${panelId}`).on("change", function () {
-            displayFunction(service, this.value, true, table, true);
+            displayFunction(service, this.value, true, table, true, fullResult);
           });
-          displayFunction(service, runtime, null, table);
+          displayFunction(service, runtime, null, table, false, fullResult);
         },
       });
     },
@@ -428,18 +435,19 @@ function displayResultsTree(service, runtime) {
   });
 }
 
-function displayResultsTable(service, runtime, _, type, refresh) {
+function displayResultsTable(service, runtime, _, type, refresh, fullResult) {
   // eslint-disable-next-line new-cap
   type = type ?? "result";
   if (refresh) {
     tableInstances[`result-${service.id}`].constraints.parent_runtime = runtime;
     refreshTable(`result-${service.id}`);
   } else {
-    const constraints = {
-      service_id: service.id,
-      service_id_filter: "equality",
-      parent_runtime: runtime || currentRuntime,
-    };
+    let constraints = { parent_runtime: runtime || currentRuntime };
+    if (!fullResult)
+      Object.assign(constraints, {
+        service_id: service.id,
+        service_id_filter: "equality",
+      });
     new tables[type](service.id, constraints);
   }
 }

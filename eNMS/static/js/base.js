@@ -216,7 +216,7 @@ export function downloadFile(name, content, type) {
     "href",
     window.URL.createObjectURL(
       new Blob([content], {
-        type: type == "csv" ? "text/csv" : "text/plain",
+        type: type ? `text/${type}` : "text/plain",
       })
     )
   );

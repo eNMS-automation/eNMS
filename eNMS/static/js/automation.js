@@ -13,6 +13,7 @@ import {
   call,
   cantorPairing,
   configureNamespace,
+  downloadFile,
   notify,
   observeMutations,
   openPanel,
@@ -158,13 +159,28 @@ function showResult(id) {
   openPanel({
     name: "result",
     content: `
-      <input
-        id="result-path-${id}"
-        type="text"
-        class="form-control"
-        style="height:5%"
-        value="results"
-      >
+      <div class="input-group" style="width:100%">
+        <input
+          id="result-path-${id}"
+          type="text"
+          class="form-control"
+          style="height:5%"
+          value="results"
+        >
+        <span class="input-group-btn" style="width: 25px">
+          <button
+            id="download-result-${id}"
+            class="btn btn-default pull-right"
+            type="button"
+            style="height: 31px; width: 25px"
+          >
+            <span
+              class="glyphicon glyphicon-center glyphicon-download"
+              aria-hidden="true"
+            ></span>
+          </button>
+        </span>
+      </div>
       <div id="content-${id}" style="height:95%"></div>`,
     title: "Result",
     id: id,
@@ -173,6 +189,9 @@ function showResult(id) {
         url: `/get_result/${id}`,
         callback: (result) => {
           const jsonResult = result;
+          $(`#download-result-${id}`).on("click", function() {
+            downloadFile(`result-${id}`, JSON.stringify(result), "json");
+          });
           const options = {
             mode: "view",
             modes: ["code", "view"],

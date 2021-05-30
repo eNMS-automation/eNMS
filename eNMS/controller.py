@@ -849,7 +849,6 @@ class Controller:
                             **instance,
                         )
                         if kwargs.get("service_import") and instance.type == "workflow":
-                            instance.services = []
                             instance.edges = []
                         relations[type][instance.name] = relation_dict
                     except Exception:

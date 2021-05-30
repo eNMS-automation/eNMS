@@ -635,7 +635,7 @@ export function showInstancePanel(type, id, mode, tableId) {
             panel.setHeaderTitle(`${action} ${type} - ${instance.name}`);
             processInstance(type, instance);
             if (mode == "duplicate" && isService) {
-              const value = page == "workflow_builder" ? [workflow.id] : [];
+              const value = page == "workflow_builder" ? [workflow.name] : [];
               $(`#${type}-workflows-${id}`).val(value).trigger("change");
             }
           },
@@ -684,8 +684,8 @@ export function showInstancePanel(type, id, mode, tableId) {
         panel.setHeaderTitle(`Create a New ${type}`);
         $(`#${type}-access_groups`).val(user.groups);
         if (page == "workflow_builder" && creationMode == "create_service") {
-          $(`#${type}-workflows`).append(new Option(workflow.name, workflow.id));
-          $(`#${type}-workflows`).val(workflow.id).trigger("change");
+          $(`#${type}-workflows`).append(new Option(workflow.name, workflow.name));
+          $(`#${type}-workflows`).val(workflow.name).trigger("change");
         }
       }
       if (isService) {

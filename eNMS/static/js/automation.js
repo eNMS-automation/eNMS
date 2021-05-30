@@ -256,14 +256,36 @@ export const showRuntimePanel = function (
       if (panelType == "logs") {
         content = `
         <div class="modal-body">
-          <select
-            id="runtimes-${panelId}"
-            name="runtimes"
-            class="form-control"
-          ></select>
+          <nav
+            id="controls"
+            class="navbar navbar-default nav-controls"
+            role="navigation"
+          >
+            <div style="width: 85%; float: left;">
+              <select
+                id="runtimes-${panelId}"
+                name="runtimes"
+                class="form-control"
+              ></select>
+            </div>
+            <div style="width: 10%; float: left;  margin-left: 15px;">
+              <button
+                class="btn btn-default pull-right"
+                onclick="eNMS.automation.downloadLogs()"
+                data-tooltip="Update all pools"
+                type="button"
+              >
+                <span
+                  class="glyphicon glyphicon-download"
+                  aria-hidden="true"
+                ></span>
+              </button>
+            </div>
+          </nav>
           <hr>
           <div id="service-${panelId}"></div>
-        </div>`;
+        </div>
+        `;
       } else if (panelType == "tree") {
         content = `
         <div class="modal-body">

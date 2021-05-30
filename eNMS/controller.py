@@ -848,6 +848,9 @@ class Controller:
                             import_mechanism=True,
                             **instance,
                         )
+                        if kwargs.get("service_import") and instance.type == "workflow":
+                            instance.services = []
+                            instance.edges = []
                         relations[type][instance.name] = relation_dict
                     except Exception:
                         info(f"{str(instance)} could not be imported:\n{format_exc()}")
@@ -907,6 +910,7 @@ class Controller:
                 folder="services",
                 name=service_name,
                 import_export_types=["service", "workflow_edge"],
+                service_import=True,
                 skip_pool_update=True,
                 skip_model_update=True,
                 update_pools=True,

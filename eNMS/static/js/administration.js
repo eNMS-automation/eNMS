@@ -130,17 +130,6 @@ function migrationsImport() {
   });
 }
 
-function importService() {
-  call({
-    url: `/import_service/${$("#import_service-service").val()}`,
-    title: "Import Service",
-    callback: function (result) {
-      notify("Service Import successful.", "success", 5, true);
-      $("#import_service").remove();
-    },
-  });
-}
-
 function databaseDeletion() {
   notify("Starting Database Deletion", "success", 5, true);
   call({
@@ -380,7 +369,6 @@ configureNamespace("administration", [
   editFile,
   getClusterStatus,
   getGitContent,
-  importService,
   migrationsExport,
   migrationsImport,
   resultLogDeletion,

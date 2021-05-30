@@ -160,6 +160,17 @@ function downloadLogs(serviceId) {
   downloadFile(`logs-${serviceId}`, logs, "txt");
 }
 
+function importService() {
+  call({
+    url: `/import_service/${$("#import_service-service").val()}`,
+    title: "Import Service",
+    callback: function (result) {
+      notify("Service Import successful.", "success", 5, true);
+      $("#import_service").remove();
+    },
+  });
+}
+
 function showResult(id) {
   openPanel({
     name: "result",
@@ -768,6 +779,7 @@ configureNamespace("automation", [
   exportService,
   exportServices,
   field,
+  importService,
   normalRun,
   openServicePanel,
   parameterizedRun,

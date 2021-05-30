@@ -155,6 +155,11 @@ function copyClipboard(elementId, result) {
   target.click();
 }
 
+function downloadLogs(serviceId) {
+  const logs = $(`#service-logs-${serviceId}`).data("CodeMirrorInstance").getValue();
+  downloadFile(`logs-${serviceId}`, logs, "txt");
+}
+
 function showResult(id) {
   openPanel({
     name: "result",
@@ -271,7 +276,7 @@ export const showRuntimePanel = function (
             <div style="width: 10%; float: left;  margin-left: 15px;">
               <button
                 class="btn btn-default pull-right"
-                onclick="eNMS.automation.downloadLogs()"
+                onclick="eNMS.automation.downloadLogs(${service.id})"
                 data-tooltip="Update all pools"
                 type="button"
               >
@@ -759,6 +764,7 @@ configureNamespace("automation", [
   copyClipboard,
   deleteCorruptedEdges,
   displayCalendar,
+  downloadLogs,
   exportService,
   exportServices,
   field,

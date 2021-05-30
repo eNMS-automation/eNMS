@@ -81,6 +81,8 @@ from the controller
 - Ability to paste device list (comma or space separated) into a multiple instance field (e.g service device and pool targets)
 - Re-add current Run counter to 'Service' and 'Workflow' on the dashboard banner + Active tasks
 - Ability to download result as json file + new copy result path to clipboard button in result json editor panel
+- Ability to download logs as text file
+- When importing existing workflows via service import, remove all existing services and edges from the workflow
 
 MIGRATION:
 

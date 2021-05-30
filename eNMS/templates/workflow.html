@@ -49,7 +49,7 @@
     </table>
   </div>
   <nav class="navbar navbar-default navbar-custom navbar-color" role="navigation">
-    <div style="width: 690px; margin: 0px;">
+    <div style="width: 725px; margin: 0px;">
       <div style="width: 70%; float: left;">
         <select
           id="current-workflow"
@@ -124,9 +124,17 @@
       <li>
         <a
           onclick="action['Workflow Results Tree']()"
-          data-tooltip="Workflow Results"
+          data-tooltip="Workflow Result Tree"
           style="cursor: pointer;"
           ><span class="glyphicon glyphicon-list-alt"></span
+        ></a>
+      </li>
+      <li>
+        <a
+          onclick="action['Workflow Result Table']()"
+          data-tooltip="Workflow Result Table"
+          style="cursor: pointer;"
+          ><span class="fa fa-table"></span
         ></a>
       </li>
     </ul>
@@ -275,8 +283,8 @@
       <li><a tabindex="-1" href="#">Parameterized Workflow Run</a></li>
       <li><a tabindex="-1" href="#">Stop Workflow</a></li>
       <li class="divider"><a tabindex="-1" href="#">&nbsp</a></li>
-      <li><a tabindex="-1" href="#">Workflow Results Tree</a></li>
-      <li><a tabindex="-1" href="#">Workflow Results Table</a></li>
+      <li><a tabindex="-1" href="#">Workflow Result Tree</a></li>
+      <li><a tabindex="-1" href="#">Workflow Result Table</a></li>
       <li><a tabindex="-1" href="#">Workflow Logs</a></li>
     </ul>
   </li>

@@ -651,9 +651,9 @@ function updateRightClickBindings() {
     "Create New Service": () => createNew("create_service"),
     "Edit Workflow": () => showInstancePanel("workflow", workflow.id),
     "Restart Workflow from Here": showRestartWorkflowPanel,
-    "Workflow Results Tree": () => showRuntimePanel("results", workflow),
-    "Workflow Results Table": () =>
-      showRuntimePanel("results", workflow, null, "full_result"),
+    "Workflow Result Tree": () => showRuntimePanel("results", workflow),
+    "Workflow Result Table": () =>
+      showRuntimePanel("results", workflow, null, "full_result", null, true),
     "Workflow Logs": () => showRuntimePanel("logs", workflow),
     "Add to Workflow": addServicePanel,
     "Stop Workflow": () => stopWorkflow(),

@@ -370,7 +370,7 @@ class FileForm(BaseForm):
 class ImportService(BaseForm):
     action = "eNMS.automation.importService"
     form_type = HiddenField(default="import_service")
-    service = SelectField("Service", choices=())
+    service = SelectMultipleField("Services on Server", choices=())
 
 
 class LogicalViewForm(BaseForm):

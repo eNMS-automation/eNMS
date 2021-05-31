@@ -764,6 +764,15 @@ function showImportServicePanel() {
             list.appendChild(option);
           });
           $("#import_service-service").selectpicker("refresh");
+          $("#import_service-service-div").after(`
+            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+              Uploaded Services
+            </label>
+            <div class="col-md-9 col-sm-9 col-xs-12">
+              <div id="dropzone-div" class="dropzone"></div>
+            </div>
+          `);
+          $("#dropzone-div").dropzone({ url: "/import_services" });
         },
       });
     },

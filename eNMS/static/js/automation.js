@@ -160,17 +160,6 @@ function downloadLogs(serviceId) {
   downloadFile(`logs-${serviceId}`, logs, "txt");
 }
 
-function importService() {
-  call({
-    url: `/import_service/${$("#import_service-service").val()}`,
-    title: "Import Service",
-    callback: function (result) {
-      notify("Service Import successful.", "success", 5, true);
-      $("#import_service").remove();
-    },
-  });
-}
-
 function showResult(id) {
   openPanel({
     name: "result",
@@ -748,31 +737,25 @@ function runServicesOnTargets(id) {
   });
 }
 
-function showImportServicePanel() {
+function showImportServicesPanel() {
   openPanel({
-    name: "import_service",
-    title: "Import Service",
-    size: "600 300",
+    name: "import_services",
+    title: "Import Services",
+    size: "600 350",
     callback: () => {
       call({
         url: "/get_exported_services",
         callback: function (services) {
-          let list = document.getElementById("import_service-service");
-          services.forEach((item) => {
-            let option = document.createElement("option");
-            option.textContent = option.value = item;
-            list.appendChild(option);
+          const element = document.getElementById(`dropzone-services`);
+          let dropzone = new Dropzone(element, {
+            url: "/import_services",
+            accept: function(file, done) {
+              if (!file.name.includes(".tgz")) {
+                notify("The file must be a .tgz archive", "error", 5);
+              }
+              else { done(); }
+            }
           });
-          $("#import_service-service").selectpicker("refresh");
-          $("#import_service-service-div").after(`
-            <label class="control-label col-md-3 col-sm-3 col-xs-12">
-              Uploaded Services
-            </label>
-            <div class="col-md-9 col-sm-9 col-xs-12">
-              <div id="dropzone-div" class="dropzone"></div>
-            </div>
-          `);
-          $("#dropzone-div").dropzone({ url: "/import_services" });
         },
       });
     },
@@ -788,7 +771,6 @@ configureNamespace("automation", [
   exportService,
   exportServices,
   field,
-  importService,
   normalRun,
   openServicePanel,
   parameterizedRun,
@@ -796,7 +778,7 @@ configureNamespace("automation", [
   resumeTask,
   runServicesOnTargets,
   schedulerAction,
-  showImportServicePanel,
+  showImportServicesPanel,
   showResult,
   showRunServicePanel,
   showRuntimePanel,

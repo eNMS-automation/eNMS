@@ -211,7 +211,7 @@
     "/get_workflow_results": "access",
     "/get_workflow_services": "access",
     "/get_workflow_tree": "access",
-    "/import_service": "access",
+    "/import_services": "access",
     "/import_topology": "admin",
     "/load_debug_snippets": "admin",
     "/login": "none",

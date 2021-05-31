@@ -831,7 +831,7 @@ tables.service = class ServiceTable extends Table {
       </button>`,
       `<button
         class="btn btn-primary"
-        onclick="eNMS.automation.showImportServicePanel()"
+        onclick="eNMS.automation.showImportServicesPanel()"
         data-tooltip="Import Service"
         type="button"
       >

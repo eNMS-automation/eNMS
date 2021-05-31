@@ -900,21 +900,21 @@ class Controller:
             "total_count": results.count(),
         }
 
-    def import_service(self, archive):
-        service_name = archive.split(".")[0]
-        path = vs.path / "files" / "services"
-        with open_tar(path / archive) as tar_file:
-            tar_file.extractall(path=path)
+    def import_services(self, **kwargs):
+        file = kwargs["file"]
+        filepath = vs.path / "files" / "services" / file.filename
+        file.save(str(filepath))
+        with open_tar(filepath) as tar_file:
+            tar_file.extractall(path=vs.path / "files" / "services" / filepath.stem)
             status = self.migration_import(
                 folder="services",
-                name=service_name,
+                name=filepath.stem,
                 import_export_types=["service", "workflow_edge"],
                 service_import=True,
                 skip_pool_update=True,
                 skip_model_update=True,
                 update_pools=True,
             )
-        rmtree(path / service_name, ignore_errors=True)
         return status
 
     def import_topology(self, **kwargs):

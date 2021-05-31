@@ -367,10 +367,10 @@ class FileForm(BaseForm):
     file_content = StringField(widget=TextArea(), render_kw={"rows": 8})
 
 
-class ImportService(BaseForm):
-    action = "eNMS.automation.importService"
-    form_type = HiddenField(default="import_service")
-    service = SelectMultipleField("Services on Server", choices=())
+class ImportServices(BaseForm):
+    action = "eNMS.automation.importServices"
+    template = "upload_services"
+    form_type = HiddenField(default="import_services")
 
 
 class LogicalViewForm(BaseForm):

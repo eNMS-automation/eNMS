@@ -83,6 +83,7 @@ from the controller
 - Ability to download result as json file + new copy result path to clipboard button in result json editor panel
 - Ability to download logs as text file
 - When importing existing workflows via service import, remove all existing services and edges from the workflow
+- Upload service from laptop instead of checking for file on the VM
 
 MIGRATION:
 

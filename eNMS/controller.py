@@ -905,7 +905,7 @@ class Controller:
         filepath = vs.path / "files" / "services" / file.filename
         file.save(str(filepath))
         with open_tar(filepath) as tar_file:
-            tar_file.extractall(path=vs.path / "files" / "services" / filepath.stem)
+            tar_file.extractall(path=vs.path / "files" / "services")
             status = self.migration_import(
                 folder="services",
                 name=filepath.stem,

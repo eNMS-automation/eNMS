@@ -579,7 +579,7 @@ function showServicePanel(type, id, mode) {
     $(`#${type}-action-btn-${id}`)
       .removeClass("btn-success")
       .addClass("btn-primary")
-      .attr("onclick", `eNMS.automation.parameterizedRun('${type}', ${id})`)
+      .attr("onclick", `eNMS.automation.runService(${id}, '${type}')`)
       .text("Run");
     $(".readonly-when-run").prop("readonly", true);
   }

@@ -510,21 +510,12 @@ function refreshLogs(service, runtime, editor, first, wasRefreshed, line) {
   });
 }
 
-export const normalRun = function (id) {
+export const runService = function (id, type) {
   call({
     url: `/run_service/${id}`,
+    form: type ? `${type}-form-${id}` : null,
     callback: function (result) {
-      runLogic(result);
-    },
-  });
-};
-
-function parameterizedRun(type, id) {
-  call({
-    url: `/run_service/${id}`,
-    form: `${type}-form-${id}`,
-    callback: function (result) {
-      $(`#${type}-${id}`).remove();
+      if (type) $(`#${type}-${id}`).remove();
       runLogic(result);
     },
   });
@@ -668,7 +659,7 @@ function schedulerAction(action) {
 Object.assign(action, {
   Edit: (service) => showInstancePanel(service.type, service.id),
   Duplicate: (service) => showInstancePanel(service.type, service.id, "duplicate"),
-  Run: (service) => normalRun(service.id),
+  Run: (service) => runService(service.id),
   "Parameterized Run": (service) => showInstancePanel(service.type, service.id, "run"),
   Logs: (service) => showRuntimePanel("logs", service, currentRuntime),
   Results: (service) => showRuntimePanel("results", service, currentRuntime, "result"),
@@ -771,11 +762,10 @@ configureNamespace("automation", [
   exportService,
   exportServices,
   field,
-  normalRun,
   openServicePanel,
-  parameterizedRun,
   pauseTask,
   resumeTask,
+  runService,
   runServicesOnTargets,
   schedulerAction,
   showImportServicesPanel,

@@ -9,7 +9,7 @@ vis: false
 
 import {
   loadServiceTypes,
-  normalRun,
+  runService,
   runLogic,
   showRuntimePanel,
 } from "./automation.js";
@@ -728,7 +728,7 @@ function runWorkflow(withUpdates) {
   if (withUpdates) {
     showInstancePanel("workflow", workflow.id, "run");
   } else {
-    normalRun(workflow.id);
+    runService(workflow.id);
   }
 }
 

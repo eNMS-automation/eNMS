@@ -894,7 +894,7 @@ tables.service = class ServiceTable extends Table {
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-success"
-          onclick="eNMS.automation.normalRun('${row.id}')" data-tooltip="Run"
+          onclick="eNMS.automation.runService('${row.id}')" data-tooltip="Run"
             ><span class="glyphicon glyphicon-play"></span
           ></button>
         </li>

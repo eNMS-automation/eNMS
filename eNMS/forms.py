@@ -561,6 +561,7 @@ class ServiceForm(BaseForm):
     operating_system = StringField("Operating System")
     iteration_values = StringField("Iteration Values", python=True)
     initial_payload = DictField()
+    initial_form = StringField(type="code", python=True, widget=TextArea())
     iteration_variable_name = StringField(
         "Iteration Variable Name", default="iteration_value"
     )

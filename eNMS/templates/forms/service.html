@@ -156,6 +156,11 @@
                   {{ form.initial_payload(id=form_type + '-initial_payload',
                   class="form-control add-id") }}
                 </div>
+                {{ form.initial_form.label(help="common/initial_form") }}
+                <div class="form-group">
+                  {{ form.initial_form(id=form_type + '-initial_form',
+                  class="form-control add-id") }}
+                </div>
                 {{ form.priority.label() }}
                 <div class="form-group">
                   {{ form.priority(id=form_type + '-priority', class="form-control

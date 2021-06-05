@@ -70,6 +70,7 @@ class Service(AbstractBase):
     mail_recipient = db.Column(db.SmallString)
     reply_to = db.Column(db.SmallString)
     initial_payload = db.Column(db.Dict)
+    initial_form = db.Column(db.LargeString)
     skip = db.Column(db.Dict)
     skip_query = db.Column(db.LargeString)
     skip_value = db.Column(db.SmallString, default="True")

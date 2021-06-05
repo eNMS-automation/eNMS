@@ -553,7 +553,7 @@ export function configureForm(form, id, panelId) {
   }
 }
 
-function showServicePanel(type, id, mode) {
+function showServicePanel(type, id, mode, initForm) {
   const typeInput = $(id ? `#${type}-class-${id}` : `#${type}-class`);
   typeInput.val(type).prop("disabled", true);
   $(id ? `#${type}-name-${id}` : `#${type}-name`).prop("disabled", true);
@@ -576,10 +576,12 @@ function showServicePanel(type, id, mode) {
   $(".buttonFinish,.buttonNext,.buttonPrevious").hide();
   $(id ? `#${type}-wizard-${id}` : `#${type}-wizard`).smartWizard("fixHeight");
   if (mode == "run") {
+    editors[id].initial_form.setOption("readOnly", true);
+    const kwargs = `{id: ${id}, type: '${type}', form: '${initForm}'}`
     $(`#${type}-action-btn-${id}`)
       .removeClass("btn-success")
       .addClass("btn-primary")
-      .attr("onclick", `eNMS.automation.runService(${id}, '${type}')`)
+      .attr("onclick", `eNMS.automation.runService(${kwargs})`)
       .text("Run");
     $(".readonly-when-run").prop("readonly", true);
   }
@@ -618,13 +620,13 @@ function addInstancesToRelation(type, id) {
   });
 }
 
-export function showInstancePanel(type, id, mode, tableId) {
+export function showInstancePanel(type, id, mode, tableId, initForm) {
   openPanel({
     name: type,
     id: id || tableId,
     callback: function (panel) {
       const isService = type.includes("service") || type == "workflow";
-      if (isService) showServicePanel(type, id, mode);
+      if (isService) showServicePanel(type, id, mode, initForm);
       if (type == "credential") showCredentialPanel(id);
       if (id) {
         const properties = type === "pool" ? "_properties" : "";

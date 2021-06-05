@@ -510,7 +510,7 @@ function refreshLogs(service, runtime, editor, first, wasRefreshed, line) {
   });
 }
 
-export const runService = function (id, type) {
+export const runService = function ({ id, form, type }) {
   call({
     url: `/run_service/${id}`,
     form: type ? `${type}-form-${id}` : null,
@@ -519,7 +519,7 @@ export const runService = function (id, type) {
       runLogic(result);
     },
   });
-}
+};
 
 export function runLogic(result) {
   const service = result.service.superworkflow || result.service;
@@ -659,8 +659,9 @@ function schedulerAction(action) {
 Object.assign(action, {
   Edit: (service) => showInstancePanel(service.type, service.id),
   Duplicate: (service) => showInstancePanel(service.type, service.id, "duplicate"),
-  Run: (service) => runService(service.id),
-  "Parameterized Run": (service) => showInstancePanel(service.type, service.id, "run"),
+  Run: (service) => runService({ id: service.id, form: service.initial_form }),
+  "Parameterized Run": (service) =>
+    showInstancePanel(service.type, service.id, "run", null, service.initial_form),
   Logs: (service) => showRuntimePanel("logs", service, currentRuntime),
   Results: (service) => showRuntimePanel("results", service, currentRuntime, "result"),
   Backward: () => switchToWorkflow(arrowHistory[arrowPointer - 1], "left"),
@@ -740,12 +741,13 @@ function showImportServicesPanel() {
           const element = document.getElementById(`dropzone-services`);
           let dropzone = new Dropzone(element, {
             url: "/import_services",
-            accept: function(file, done) {
+            accept: function (file, done) {
               if (!file.name.includes(".tgz")) {
                 notify("The file must be a .tgz archive", "error", 5);
+              } else {
+                done();
               }
-              else { done(); }
-            }
+            },
           });
         },
       });

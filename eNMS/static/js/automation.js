@@ -516,10 +516,8 @@ export const runService = function ({ id, form, type }) {
       url: `initial_form/${id}`,
       title: "Initial Form",
       size: "700px 600px",
-      callback: function () {
-
-      },
-    })
+      callback: function () {},
+    });
   } else {
     call({
       url: `/run_service/${id}`,

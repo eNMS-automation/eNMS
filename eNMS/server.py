@@ -32,7 +32,6 @@ from werkzeug.exceptions import Forbidden, NotFound
 from eNMS import controller
 from eNMS.database import db
 from eNMS.environment import env
-from eNMS.fields import HiddenField, IntegerField
 from eNMS.forms import BaseForm
 from eNMS.rest_api import RestApi
 from eNMS.variables import vs
@@ -356,7 +355,7 @@ class Server(Flask):
             full_form = f"class Form(BaseForm):\n{indented_form}\nform = Form"
             exec(full_form, global_variables)
             return render_template(
-                f"forms/base.html",
+                "forms/base.html",
                 **{
                     "action": "eNMS.automation.submitInitialForm",
                     "button_label": "Confirm",

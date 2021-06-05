@@ -577,7 +577,7 @@ function showServicePanel(type, id, mode, initForm) {
   $(id ? `#${type}-wizard-${id}` : `#${type}-wizard`).smartWizard("fixHeight");
   if (mode == "run") {
     editors[id].initial_form.setOption("readOnly", true);
-    const kwargs = `{id: ${id}, type: '${type}', form: '${initForm}'}`
+    const kwargs = `{id: ${id}, type: '${type}', form: '${initForm}'}`;
     $(`#${type}-action-btn-${id}`)
       .removeClass("btn-success")
       .addClass("btn-primary")

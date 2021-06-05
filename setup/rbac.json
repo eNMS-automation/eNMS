@@ -131,6 +131,7 @@
     "/geographical_view": "access",
     "/git_history_form": "access",
     "/help": "all",
+    "/initial_form": "all",
     "/instance_deletion_form": "access",
     "/link_table": "access",
     "/view_builder": "access",

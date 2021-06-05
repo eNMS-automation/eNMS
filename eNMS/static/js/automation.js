@@ -511,14 +511,25 @@ function refreshLogs(service, runtime, editor, first, wasRefreshed, line) {
 }
 
 export const runService = function ({ id, form, type }) {
-  call({
-    url: `/run_service/${id}`,
-    form: type ? `${type}-form-${id}` : null,
-    callback: function (result) {
-      if (type) $(`#${type}-${id}`).remove();
-      runLogic(result);
-    },
-  });
+  if (form) {
+    openPanel({
+      url: `initial_form/${id}`,
+      title: "Initial Form",
+      size: "700px 600px",
+      callback: function () {
+
+      },
+    })
+  } else {
+    call({
+      url: `/run_service/${id}`,
+      form: type ? `${type}-form-${id}` : null,
+      callback: function (result) {
+        if (type) $(`#${type}-${id}`).remove();
+        runLogic(result);
+      },
+    });
+  }
 };
 
 export function runLogic(result) {

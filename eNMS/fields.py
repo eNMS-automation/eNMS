@@ -18,16 +18,24 @@ from wtforms.widgets.core import HTMLString
 
 
 from eNMS.database import db
+from eNMS.variables import vs
 
 
-class FieldMixin:
+class MetaField(type):
+    def __new__(cls, name, bases, attrs):
+        field_class = type.__new__(cls, name, bases, attrs)
+        vs.field_class[name] = field_class
+        return field_class
+
+
+class FieldMixin(metaclass=MetaField):
     def __init__(self, *args, **kwargs):
         if "help" in kwargs:
             kwargs.setdefault("render_kw", {})["help"] = kwargs.pop("help")
         super().__init__(*args, **kwargs)
 
 
-class HiddenField(WtformsHiddenField):
+class HiddenField(FieldMixin, WtformsHiddenField):
     type = "hidden"
 
 

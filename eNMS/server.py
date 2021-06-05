@@ -32,6 +32,8 @@ from werkzeug.exceptions import Forbidden, NotFound
 from eNMS import controller
 from eNMS.database import db
 from eNMS.environment import env
+from eNMS.fields import HiddenField, IntegerField
+from eNMS.forms import BaseForm
 from eNMS.rest_api import RestApi
 from eNMS.variables import vs
 
@@ -337,6 +339,29 @@ class Server(Flask):
                     "button_class": getattr(form, "button_class", "success"),
                     "form": form,
                     "form_type": form_type,
+                },
+            )
+
+        @blueprint.route("/initial_form/<service_id>")
+        @self.process_requests
+        def initial_form(service_id):
+            global_variables = {"form": None, "BaseForm": BaseForm, **vs.field_class}
+            indented_form = "\n".join(
+                " " * 4 + line
+                for line in (
+                    f"form_type = HiddenField(default='initial-{service_id}')",
+                    *db.fetch("service", id=service_id).initial_form.splitlines(),
+                )
+            )
+            full_form = f"class Form(BaseForm):\n{indented_form}\nform = Form"
+            exec(full_form, global_variables)
+            return render_template(
+                f"forms/base.html",
+                **{
+                    "action": "eNMS.automation.submitInitialForm",
+                    "button_label": "Confirm",
+                    "button_class": "success",
+                    "form": global_variables["form"](request.form),
                 },
             )
 

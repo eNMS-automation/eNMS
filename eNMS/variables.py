@@ -47,6 +47,7 @@ class VariableStore:
         self.configuration_properties = {"configuration": "Configuration"}
 
     def _set_general_variables(self):
+        self.field_class = {}
         self.form_class = {}
         self.form_properties = defaultdict(dict)
         self.log_levels = ["debug", "info", "warning", "error", "critical"]

@@ -7,8 +7,11 @@ from ncclient.devices import supported_devices_cfg
 from netmiko.ssh_dispatcher import CLASS_MAPPER
 from pathlib import Path
 from string import punctuation
+from sys import modules
 from traceback import format_exc
 from warnings import warn
+from wtforms.validators import __all__ as all_validators
+from wtforms.widgets.core import __all__ as all_widgets
 
 try:
     from scrapli import Scrapli
@@ -135,6 +138,17 @@ class VariableStore:
             "table_properties": self.properties["tables"],
             "version": self.version,
             "visualization": self.visualization,
+        }
+        self.form_context = {
+            **{
+                validator: getattr(modules["wtforms.validators"], validator)
+                for validator in all_validators
+            },
+            **{
+                widget: getattr(modules["wtforms.widgets.core"], widget)
+                for widget in all_widgets
+            },
+            **self.field_class,
         }
 
     def _set_version(self):

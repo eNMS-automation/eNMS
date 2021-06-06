@@ -344,7 +344,7 @@ class Server(Flask):
         @blueprint.route("/initial_form/<service_id>")
         @self.process_requests
         def initial_form(service_id):
-            global_variables = {"form": None, "BaseForm": BaseForm, **vs.field_class}
+            global_variables = {"form": None, "BaseForm": BaseForm, **vs.form_context}
             indented_form = "\n".join(
                 " " * 4 + line
                 for line in (

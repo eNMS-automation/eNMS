@@ -535,7 +535,7 @@ export const runService = function ({ id, form, type }) {
           callback: function (properties) {
             formProperties[`initial-${id}`] = properties;
             configureForm(`initial-${id}`, id);
-          }
+          },
         });
       },
     });
@@ -572,16 +572,6 @@ export function runLogic(result) {
     }
   }
   $(`#${result.service.type}-${result.service.id}`).remove();
-}
-
-function exportService(id) {
-  call({
-    url: `/export_service/${id}`,
-    form: `search-form-${tableId}`,
-    callback: () => {
-      notify("Service Export successful.", "success", 5, true);
-    },
-  });
 }
 
 function exportServices(tableId) {
@@ -791,7 +781,6 @@ configureNamespace("automation", [
   deleteCorruptedEdges,
   displayCalendar,
   downloadLogs,
-  exportService,
   exportServices,
   field,
   openServicePanel,

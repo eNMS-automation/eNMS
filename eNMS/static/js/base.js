@@ -150,7 +150,6 @@ export const call = function ({ url, data, form, callback }) {
       dataType: "json",
     });
   } else if (form) {
-    console.log($(`[id="${form}"]`).serialize())
     params.data = $(`[id="${form}"]`).serialize();
   }
   $.ajax(params);

@@ -3,6 +3,8 @@ global
 action: true
 CodeMirror: false
 Diff2HtmlUI: false
+Dropzone: false
+formProperties: true
 JSONEditor: false
 jsPanel: false
 page: false
@@ -471,11 +473,12 @@ function displayResultsTable(service, runtime, _, type, refresh, fullResult) {
     refreshTable(`result-${service.id}`);
   } else {
     let constraints = { parent_runtime: runtime || currentRuntime };
-    if (!fullResult)
+    if (!fullResult) {
       Object.assign(constraints, {
         service_id: service.id,
         service_id_filter: "equality",
       });
+    }
     new tables[type](service.id, constraints);
   }
 }
@@ -531,7 +534,7 @@ export const runService = function ({ id, form, type }) {
           url: `/get_form_properties/initial-${id}`,
           callback: function (properties) {
             formProperties[`initial-${id}`] = properties;
-            configureForm(`initial-${id}`, id)
+            configureForm(`initial-${id}`, id);
           }
         });
       },
@@ -766,7 +769,7 @@ function showImportServicesPanel() {
         url: "/get_exported_services",
         callback: function (services) {
           const element = document.getElementById(`dropzone-services`);
-          let dropzone = new Dropzone(element, {
+          new Dropzone(element, {
             url: "/import_services",
             accept: function (file, done) {
               if (!file.name.includes(".tgz")) {

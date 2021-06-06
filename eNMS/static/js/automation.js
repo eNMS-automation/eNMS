@@ -511,9 +511,18 @@ function refreshLogs(service, runtime, editor, first, wasRefreshed, line) {
   });
 }
 
+function submitInitialForm(serviceId) {
+  call({
+    url: `/run_service/${serviceId}`,
+    form: `initial-${serviceId}-form-${serviceId}`,
+    callback: runLogic,
+  });
+}
+
 export const runService = function ({ id, form, type }) {
   if (form) {
     openPanel({
+      id: id,
       url: `initial_form/${id}`,
       title: "Initial Form",
       size: "700px 600px",
@@ -522,7 +531,7 @@ export const runService = function ({ id, form, type }) {
           url: `/get_form_properties/initial-${id}`,
           callback: function (properties) {
             formProperties[`initial-${id}`] = properties;
-            configureForm(`initial-${id}`)
+            configureForm(`initial-${id}`, id)
           }
         });
       },
@@ -792,4 +801,5 @@ configureNamespace("automation", [
   showResult,
   showRunServicePanel,
   showRuntimePanel,
+  submitInitialForm,
 ]);

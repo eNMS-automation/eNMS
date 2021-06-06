@@ -1014,8 +1014,10 @@ class Controller:
         if isinstance(kwargs.get("start_services"), str):
             kwargs["start_services"] = kwargs["start_services"].split("-")
         service_id = str(path).split(">")[-1]
-        for property in ("user", "csrf_token", "form_type"):
+        for property in ("user", "csrf_token"):
             kwargs.pop(property, None)
+        if kwargs.get("form_type", "").startswith("initial-"):
+            kwargs = {"initial_form": kwargs}
         kwargs["creator"] = getattr(current_user, "name", "")
         service = db.fetch("service", id=service_id, rbac="run")
         kwargs["runtime"] = runtime = vs.get_time()

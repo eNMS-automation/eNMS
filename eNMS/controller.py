@@ -481,6 +481,9 @@ class Controller:
         files = listdir(vs.path / "files" / "services")
         return [file for file in files if ".tgz" in file]
 
+    def get_form_properties(self, form):
+        return vs.form_properties[form]
+
     def get_git_content(self):
         repo = vs.settings["app"]["git_repository"]
         if not repo:

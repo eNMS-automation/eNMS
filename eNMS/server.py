@@ -357,6 +357,7 @@ class Server(Flask):
             return render_template(
                 "forms/base.html",
                 **{
+                    "form_type": f"initial-{service_id}",
                     "action": "eNMS.automation.submitInitialForm",
                     "button_label": "Confirm",
                     "button_class": "success",

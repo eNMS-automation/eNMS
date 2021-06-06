@@ -12,6 +12,7 @@ serviceTypes: false
 import {
   call,
   cantorPairing,
+  configureForm,
   configureNamespace,
   downloadFile,
   notify,
@@ -516,7 +517,15 @@ export const runService = function ({ id, form, type }) {
       url: `initial_form/${id}`,
       title: "Initial Form",
       size: "700px 600px",
-      callback: function () {},
+      callback: function () {
+        call({
+          url: `/get_form_properties/initial-${id}`,
+          callback: function (properties) {
+            formProperties[`initial-${id}`] = properties;
+            configureForm(`initial-${id}`)
+          }
+        });
+      },
     });
   } else {
     call({

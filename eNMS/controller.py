@@ -456,9 +456,9 @@ class Controller:
     def get_credentials(self, device, **kwargs):
         if kwargs["credentials"] == "device":
             credentials = device.get_credentials("any")
-            return credentials.username, self.get_password(credentials.password)
+            return credentials.username, env.get_password(credentials.password)
         elif kwargs["credentials"] == "user":
-            return current_user.name, self.get_password(current_user.password)
+            return current_user.name, env.get_password(current_user.password)
         else:
             return kwargs["username"], kwargs["password"]
 
@@ -1272,7 +1272,7 @@ class Controller:
         }
 
     def web_connection(self, device_id, **kwargs):
-        if not self.settings["ssh"]["credentials"][kwargs["credentials"]]:
+        if not vs.settings["ssh"]["credentials"][kwargs["credentials"]]:
             return {"alert": "Unauthorized authentication method."}
         session = str(uuid4())
         device = db.fetch("device", id=device_id, rbac="connect")

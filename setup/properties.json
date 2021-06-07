@@ -1000,11 +1000,22 @@
     ]
   },
   "filtering": {
+    "access": [
+      "name",
+      "description"
+    ],
     "changelog": [
       "time",
       "user",
       "severity",
       "content"
+    ],
+    "credential": [
+      "name",
+      "subtype",
+      "description",
+      "username",
+      "priority"
     ],
     "device": [
       "name",

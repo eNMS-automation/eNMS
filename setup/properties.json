@@ -773,21 +773,18 @@
       {
         "data": "periodicity",
         "title": "Periodicity",
-        "search": "text",
         "width": "100px",
         "orderable": false
       },
       {
         "data": "next_run_time",
         "title": "Next run time",
-        "search": "text",
         "width": "150px",
         "orderable": false
       },
       {
         "data": "time_before_next_run",
         "title": "Time left",
-        "search": "text",
         "width": "150px",
         "orderable": false
       },
@@ -1056,6 +1053,16 @@
       "vendor",
       "operating_system",
       "send_notification"
+    ],
+    "task": [
+      "name",
+      "description",
+      "creator",
+      "scheduling_mode",
+      "default_access",
+      "last_scheduled_by",
+      "service_name",
+      "status"
     ],
     "user": ["name", "description", "groups", "email"]
   }

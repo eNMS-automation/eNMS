@@ -392,6 +392,7 @@ class Runner:
             "service": self.service.id,
             "parent_service": self.main_run.service.name,
             "parent_runtime": self.parent_runtime,
+            "tags": self.main_run.tags,
         }
         if self.workflow:
             result_kw["workflow"] = self.workflow.id

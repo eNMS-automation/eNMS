@@ -186,6 +186,7 @@ class Result(AbstractBase):
     log_change = False
     id = db.Column(Integer, primary_key=True)
     success = db.Column(Boolean, default=False)
+    tags = db.Column(db.LargeString)
     runtime = db.Column(db.TinyString)
     duration = db.Column(db.TinyString)
     result = db.Column(db.Dict)
@@ -258,6 +259,7 @@ class Run(AbstractBase):
     creator = db.Column(db.SmallString, default="")
     properties = db.Column(db.Dict)
     success = db.Column(Boolean, default=False)
+    tags = db.Column(db.LargeString)
     status = db.Column(db.TinyString, default="Running")
     runtime = db.Column(db.TinyString, index=True)
     duration = db.Column(db.TinyString)

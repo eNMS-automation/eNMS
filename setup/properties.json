@@ -869,7 +869,7 @@
     "server": [
       {
         "data": "name",
-        "title": "Username",
+        "title": "Name",
         "search": "text"
       },
       {
@@ -1056,6 +1056,13 @@
       "service_name",
       "creator",
       "trigger",
+      "status"
+    ],
+    "server": [
+      "name",
+      "description",
+      "ip_address",
+      "weight",
       "status"
     ],
     "service": [

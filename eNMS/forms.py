@@ -142,8 +142,8 @@ class FormFactory:
         self.generate_service_forms()
 
     def generate_filtering_forms(self):
-        for model in ("device", "link", "pool", "run", "service", "task", "user"):
-            properties, relations = vs.properties["filtering"].get(model, []), {}
+        for model, properties in vs.properties["filtering"].items():
+            relations = {}
             for related_model, relation in vs.relationships[model].items():
                 if related_model in ("edges", "results"):
                     continue

@@ -1054,6 +1054,13 @@
       "operating_system",
       "send_notification"
     ],
+    "result": [
+      "runtime",
+      "duration",
+      "device_name",
+      "parent_device_name",
+      "success"
+    ],
     "task": [
       "name",
       "description",

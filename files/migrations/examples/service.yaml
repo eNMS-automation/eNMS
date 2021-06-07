@@ -16923,18 +16923,18 @@
   impacting: false
   include_device_results: false
   include_link_in_summary: false
-  initial_form: "devices = MultipleInstanceField(\"Devices\", model=\"device\")\r\n\
-    pools = MultipleInstanceField(\"Pools\", model=\"pool\")\r\ntags = SelectMultipleStringField(\r\
-    \n  \"Tags\",\r\n  choices=((\"Pre-checks\", \"precheck\"), (\"Post-checks\",\
-    \ \"postcheck\"))\r\n)\r\ninterface = StringField(\"Interface\", default=\"Lo1\"\
-    )\r\n"
+  initial_form: "target_devices = MultipleInstanceField(\"Devices\", model=\"device\"\
+    )\r\ntarget_pools = MultipleInstanceField(\"Pools\", model=\"pool\")\r\ntags =\
+    \ SelectMultipleStringField(\r\n  \"Tags\",\r\n  choices=((\"Pre-checks\", \"\
+    precheck\"), (\"Post-checks\", \"postcheck\"))\r\n)\r\ninterface = StringField(\"\
+    Interface\", default=\"Lo1\")\r\n"
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels: {}
-  last_modified: '2021-06-07 01:39:09.435559'
+  last_modified: '2021-06-07 01:45:00.356537'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100

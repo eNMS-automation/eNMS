@@ -1000,6 +1000,12 @@
     ]
   },
   "filtering": {
+    "changelog": [
+      "time",
+      "user",
+      "severity",
+      "content"
+    ],
     "device": [
       "name",
       "description",

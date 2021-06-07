@@ -381,6 +381,8 @@ class Run(AbstractBase):
             return "N/A"
 
     def run(self, payload):
+        for key, value in payload.get("initial_form", {}).items():
+            setattr(self, key, value)
         self.service_run = Runner(
             self,
             payload=payload,

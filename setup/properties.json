@@ -587,6 +587,12 @@
         "width": "200px"
       },
       {
+        "data": "tags",
+        "title": "Tags",
+        "search": "text",
+        "visible": false
+      },
+      {
         "data": "duration",
         "title": "Duration",
         "search": "text",
@@ -634,6 +640,12 @@
         "data": "runtime",
         "title": "Runtime",
         "search": "text"
+      },
+      {
+        "data": "tags",
+        "title": "Tags",
+        "search": "text",
+        "visible": false
       },
       {
         "data": "duration",

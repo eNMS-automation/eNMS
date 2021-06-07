@@ -34,8 +34,8 @@
   menu: [Inventory, Visualization, Automation, Template]
   name: Full Access to Everything
   pages: [Changelog, Sessions, Devices, Configurations, Links, Pools, Geographical
-      View, View Builder, Logical View, Services, Workflow Builder, Scheduling,
-    Results, Page, Subpage, Devices]
+      View, View Builder, Logical View, Services, Workflow Builder, Scheduling, Results,
+    Page, Subpage, Devices]
   post_requests: [/add_edge, /add_instances_in_bulk, /add_objects_to_view, /bulk_deletion,
     /bulk_edit, /bulk_removal, /copy_service_in_workflow, /clear_results, /clear_configurations,
     /compare, /create_label, /create_view_object, /delete_corrupted_edges, /delete_instance,
@@ -104,8 +104,8 @@
   menu: [Home, Administration, Inventory, Visualization, Automation, Scheduling]
   name: Read-Only Profile
   pages: [Access, Credentials, Dashboard, Changelog, Sessions, Users, Servers, Devices,
-    Configurations, Links, Pools, Geographical View, Logical View, Services,
-    Workflow Builder, Results, Tasks, Events]
+    Configurations, Links, Pools, Geographical View, Logical View, Services, Workflow
+      Builder, Results, Tasks, Events]
   post_requests: [/calendar_init, /compare, /counters, /count_models, /edit_file,
     /get, /get_all, /get_cluster_status, /get_git_history, /get_device_network_data,
     /get_device_logs, /get_exported_services, /get_git_network_data, /get_migration_folders,
@@ -164,8 +164,8 @@
   menu: [Inventory, Visualization, Automation, Template]
   name: Full UI + HTTP access
   pages: [Changelog, Sessions, Devices, Configurations, Links, Pools, Geographical
-      View, View Builder, Logical View, Services, Workflow Builder, Scheduling,
-    Results, Page, Subpage, Devices]
+      View, View Builder, Logical View, Services, Workflow Builder, Scheduling, Results,
+    Page, Subpage, Devices]
   post_requests: [/add_edge, /add_instances_in_bulk, /add_objects_to_view, /bulk_deletion,
     /bulk_edit, /bulk_removal, /copy_service_in_workflow, /clear_results, /clear_configurations,
     /compare, /create_label, /create_view_object, /delete_corrupted_edges, /delete_instance,

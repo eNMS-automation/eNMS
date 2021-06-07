@@ -17,6 +17,7 @@
   impacting: true
   include_device_results: true
   include_link_in_summary: true
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: ip_address
@@ -34,7 +35,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     Iteration Services Test Workflow: ['-359', '-163']
     'Regression Workflow 1: Netmiko with validation and retries': [-385, 11]
@@ -109,6 +110,8 @@
     'Regression Workflow: Fork based on value with Skip Discard Mechanism': *id011
     'Regression Workflow: Global Variables and post-run Pool Update Mechanism': [
       -228, 7]
+    'Regression Workflow: Initial Form (override tags & targets, add payload)': [
+      -172, 80]
     'Regression Workflow: Iteration Targets Mechanism': *id012
     'Regression Workflow: Link Neighbors Mechanism (public)': *id001
     'Regression Workflow: Napalm Getters and Postprocessing': *id013
@@ -272,6 +275,7 @@
   impacting: true
   include_device_results: true
   include_link_in_summary: true
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: ip_address
@@ -289,7 +293,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     Iteration Services Test Workflow: ['-9', '294']
     'Regression Workflow 1: Netmiko with validation and retries': [115, 3]
@@ -364,6 +368,8 @@
     'Regression Workflow: Fork based on value with Skip Discard Mechanism': *id052
     'Regression Workflow: Global Variables and post-run Pool Update Mechanism': [
       749, 100]
+    'Regression Workflow: Initial Form (override tags & targets, add payload)': [
+      643, 61]
     'Regression Workflow: Iteration Targets Mechanism': *id053
     'Regression Workflow: Link Neighbors Mechanism (public)': *id042
     'Regression Workflow: Napalm Getters and Postprocessing': *id054
@@ -536,6 +542,7 @@
   impacting: true
   include_device_results: true
   include_link_in_summary: true
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: ip_address
@@ -606,6 +613,7 @@
   impacting: true
   include_device_results: true
   include_link_in_summary: true
+  initial_form: ''
   initial_payload: {}
   ip_address: 10.1.1.1
   iteration_devices: ''
@@ -627,7 +635,7 @@
   number_in_range: 7
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow 2: Separate Failure - Success paths': &id085 [741, 106]
     'Regression Workflow C: Advanced multiprocessing': &id084 [-266, -204]
@@ -685,6 +693,7 @@
   impacting: true
   include_device_results: true
   include_link_in_summary: true
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: ip_address
@@ -707,7 +716,7 @@
   number_of_retries: 0
   operating_system: ''
   optional_args: {}
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow C: Advanced multiprocessing': &id086 [299, -170]
     'Regression Workflow C: Advanced multiprocessing (admin)': *id086
@@ -764,6 +773,7 @@
   impacting: true
   include_device_results: true
   include_link_in_summary: true
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: ip_address
@@ -783,7 +793,7 @@
   number_of_retries: 0
   operating_system: ''
   optional_args: {}
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow 9: Operational Data Backup': &id087 [-259, 351]
     'Regression Workflow 9: Operational Data Backup (admin)': *id087
@@ -853,6 +863,7 @@
   impacting: true
   include_device_results: true
   include_link_in_summary: true
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: ip_address
@@ -870,7 +881,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: eos
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow 1: VRF creation and deletion with Netmiko': &id088 [-38,
       -86]
@@ -941,6 +952,7 @@
   impacting: true
   include_device_results: true
   include_link_in_summary: true
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: ip_address
@@ -962,7 +974,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: eos
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     Iteration Services Test Workflow: ['147', '-14']
     'Regression Workflow 1: VRF creation and deletion with Netmiko': &id089 [445,
@@ -1035,6 +1047,7 @@
   impacting: true
   include_device_results: true
   include_link_in_summary: true
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: ip_address
@@ -1052,7 +1065,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: eos
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow 1: VRF creation and deletion with Netmiko': &id090 [476,
       119]
@@ -1124,6 +1137,7 @@
   impacting: true
   include_device_results: true
   include_link_in_summary: true
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: ip_address
@@ -1145,7 +1159,7 @@
   notification_header: ''
   number_of_retries: 2
   operating_system: eos
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow 1: VRF creation and deletion with Netmiko': &id091 [-10,
       157]
@@ -1210,6 +1224,7 @@
   impacting: true
   include_device_results: true
   include_link_in_summary: true
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: ip_address
@@ -1229,7 +1244,7 @@
   number_of_retries: 0
   operating_system: eos
   optional_args: {}
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     '[Regression Workflow F: Workflow of Workflows] Regression Workflow 5: VRF creation and deletion with Napalm': &id093 [
       -374, -164]
@@ -1283,6 +1298,7 @@
   impacting: true
   include_device_results: true
   include_link_in_summary: true
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: ip_address
@@ -1305,7 +1321,7 @@
   payload:
     a: b
     c: ['1', '2', '3']
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow 2: Separate Failure - Success paths': &id097 [374, 278]
     'Regression Workflow 3: Napalm getters (postprocessing)': ['-50', '0']
@@ -1375,6 +1391,7 @@
   impacting: true
   include_device_results: true
   include_link_in_summary: true
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: ip_address
@@ -1393,7 +1410,7 @@
   number_of_retries: 0
   operating_system: ''
   optional_args: {}
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow 2: Separate Failure - Success paths': &id101 [-102, -130]
     'Regression Workflow 3: Napalm getters (postprocessing)': &id100 [-154, -70]
@@ -1455,6 +1472,7 @@
   impacting: true
   include_device_results: true
   include_link_in_summary: true
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: ip_address
@@ -1473,7 +1491,7 @@
   number_of_retries: 0
   operating_system: ''
   optional_args: {}
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow 2: Separate Failure - Success paths': &id103 [611, -72]
     'Regression Workflow 3: Napalm getters (postprocessing)': &id102 [-166, 303]
@@ -1535,6 +1553,7 @@
   impacting: true
   include_device_results: true
   include_link_in_summary: true
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: ip_address
@@ -1554,7 +1573,7 @@
   number_of_retries: 0
   operating_system: ''
   optional_args: {}
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow 3: Napalm getters (postprocessing)': &id105 [303, 43]
     'Regression Workflow F: Workflow of Workflows': [3, -51]
@@ -1615,6 +1634,7 @@
   impacting: true
   include_device_results: true
   include_link_in_summary: true
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: ip_address
@@ -1634,7 +1654,7 @@
   number_of_retries: 0
   operating_system: ''
   optional_args: {}
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow 3: Napalm getters (postprocessing)': &id106 [652, -22]
     'Regression Workflow F: Workflow of Workflows': [3, -51]
@@ -1687,6 +1707,7 @@
   impacting: true
   include_device_results: true
   include_link_in_summary: true
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: ip_address
@@ -1705,7 +1726,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow 3: Napalm getters (postprocessing)': &id107 [424, 229]
     'Regression Workflow F: Workflow of Workflows': [3, -51]
@@ -1755,6 +1776,7 @@
   impacting: true
   include_device_results: true
   include_link_in_summary: true
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: ip_address
@@ -1772,7 +1794,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     Iteration Services Test Workflow: ['3', '-144']
     'Regression Workflow E: Iteration Targets': &id108 [-195, -168]
@@ -1846,6 +1868,7 @@
   impacting: true
   include_device_results: true
   include_link_in_summary: true
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: ip_address
@@ -1868,7 +1891,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: eos
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow 7: Payload Extraction & Validation'
@@ -1930,6 +1953,7 @@
   impacting: true
   include_device_results: true
   include_link_in_summary: true
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: ip_address
@@ -1962,7 +1986,7 @@
   operation1: __setitem__
   operation2: __setitem__
   operation3: __setitem__
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow 7: Payload Extraction & Validation'
@@ -2030,6 +2054,7 @@
   impacting: true
   include_device_results: true
   include_link_in_summary: true
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -2049,7 +2074,7 @@
   number_of_retries: 0
   operating_system: ''
   optional_args: {}
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     '[Regression Workflow F: Workflow of Workflows] Regression Workflow 5: VRF creation and deletion with Napalm': &id112 [
       287, 136]
@@ -2118,6 +2143,7 @@
   impacting: true
   include_device_results: true
   include_link_in_summary: true
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -2140,7 +2166,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow A: get_var, set_var, get_result': ['266', '161']
     'Regression Workflow C: Advanced multiprocessing': [123, -187]
@@ -2213,6 +2239,7 @@
   impacting: true
   include_device_results: true
   include_link_in_summary: true
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -2235,7 +2262,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     '[Regression Workflow F: Workflow of Workflows] Regression Workflow 5: VRF creation and deletion with Napalm': &id114 [
       -348, 160]
@@ -2309,6 +2336,7 @@
   impacting: true
   include_device_results: true
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -2330,7 +2358,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow D: Prompts': &id115 [22, -74]
     'Regression Workflow: Netmiko Prompts': *id115
@@ -2402,6 +2430,7 @@
   impacting: true
   include_device_results: true
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -2423,7 +2452,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow D: Prompts': &id116 [350, 108]
     'Regression Workflow: Netmiko Prompts': *id116
@@ -2476,6 +2505,7 @@
   impacting: true
   include_device_results: true
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -2494,7 +2524,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow A: get_var, set_var, get_result': &id117 [-376, -138]
     'Regression Workflow: Using get_var, set_var, get_result functions': *id117
@@ -2543,6 +2573,7 @@
   impacting: true
   include_device_results: true
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -2561,7 +2592,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow A: get_var, set_var, get_result': &id118 [0, -144]
     'Regression Workflow: Using get_var, set_var, get_result functions': *id118
@@ -2630,6 +2661,7 @@
   impacting: true
   include_device_results: true
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: get_var("iteration_device", device=parent_device.name)
   iteration_devices_property: name
@@ -2652,7 +2684,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow A: get_var, set_var, get_result': &id119 [474, -11]
     'Regression Workflow: Using get_var, set_var, get_result functions': *id119
@@ -2721,6 +2753,7 @@
   impacting: true
   include_device_results: true
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: '[get_var("iteration_simple")]'
   iteration_devices_property: ip_address
@@ -2743,7 +2776,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow A: get_var, set_var, get_result': &id120 [425, 190]
     'Regression Workflow: Using get_var, set_var, get_result functions': *id120
@@ -2812,6 +2845,7 @@
   impacting: true
   include_device_results: true
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -2834,7 +2868,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow A: get_var, set_var, get_result': &id121 [-445, 128]
     'Regression Workflow: Using get_var, set_var, get_result functions': *id121
@@ -2893,6 +2927,7 @@
   impacting: true
   include_device_results: true
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -2913,7 +2948,7 @@
   number_of_retries: 0
   operating_system: ''
   optional_args: {}
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow B: Napalm getters validation'
@@ -2979,6 +3014,7 @@
   impacting: true
   include_device_results: true
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -2999,7 +3035,7 @@
   number_of_retries: 0
   operating_system: ''
   optional_args: {}
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow B: Napalm getters validation'
@@ -3066,6 +3102,7 @@
   impacting: true
   include_device_results: true
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -3084,7 +3121,7 @@
   number_of_retries: 0
   operating_system: ''
   optional_args: {}
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow 8: Payload Extraction with Operations'
@@ -3162,6 +3199,7 @@
   impacting: true
   include_device_results: true
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -3182,7 +3220,7 @@
   number_of_retries: 0
   operating_system: ''
   optional_args: {}
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow B: Napalm getters validation'
@@ -3248,6 +3286,7 @@
   impacting: true
   include_device_results: true
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -3268,7 +3307,7 @@
   number_of_retries: 0
   operating_system: ''
   optional_args: {}
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow B: Napalm getters validation'
@@ -3330,6 +3369,7 @@
   impacting: true
   include_device_results: true
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -3351,7 +3391,7 @@
   options: {}
   pass_device_properties: true
   playbook_path: /media/sf_shared/eNMS/files/playbooks/arista_show_version.yml
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow 6: Ansible with Validation': &id128 [-107, 153]
     'Regression Workflow B: Napalm getters validation': [-30, 126]
@@ -3401,6 +3441,7 @@
   impacting: true
   include_device_results: true
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -3422,7 +3463,7 @@
   options: {}
   pass_device_properties: true
   playbook_path: /media/sf_shared/eNMS/files/playbooks/arista_show_running_config.yml
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow 6: Ansible with Validation': &id129 [179, -62]
     'Regression Workflow: Ansible with Validation': *id129
@@ -3471,6 +3512,7 @@
   impacting: true
   include_device_results: true
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -3492,7 +3534,7 @@
   options: {}
   pass_device_properties: true
   playbook_path: /media/sf_shared/eNMS/files/playbooks/arista_show_running_config.yml
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow 6: Ansible with Validation': &id130 [486, 173]
     'Regression Workflow: Ansible with Validation': *id130
@@ -3556,6 +3598,7 @@
   impacting: true
   include_device_results: true
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -3578,7 +3621,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow C: Advanced multiprocessing': &id131 [-315, 157]
     'Regression Workflow C: Advanced multiprocessing (admin)': *id131
@@ -3649,6 +3692,7 @@
   impacting: true
   include_device_results: true
   include_link_in_summary: true
+  initial_form: ''
   initial_payload: {}
   iteration_devices: get_var("Derived Devices", device=device.name)
   iteration_devices_property: name
@@ -3671,7 +3715,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: eos
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow E: Iteration Targets': &id132 [240, -144]
     'Regression Workflow: Iteration Targets Mechanism': *id132
@@ -3740,6 +3784,7 @@
   impacting: true
   include_device_results: true
   include_link_in_summary: true
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: ip_address
@@ -3762,7 +3807,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: eos
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow E: Iteration Targets': &id133 [572, -4]
     'Regression Workflow: Iteration Targets Mechanism': *id133
@@ -3831,6 +3876,7 @@
   impacting: true
   include_device_results: true
   include_link_in_summary: true
+  initial_form: ''
   initial_payload: {}
   iteration_devices: get_var("Derived Devices", device=parent_device.name)
   iteration_devices_property: name
@@ -3853,7 +3899,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: eos
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow E: Iteration Targets': &id134 [556, 123]
     'Regression Workflow: Iteration Targets Mechanism': *id134
@@ -3905,6 +3951,7 @@
   impacting: true
   include_device_results: true
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -3924,7 +3971,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow 8: Payload Extraction with Operations'
@@ -3984,6 +4031,7 @@
   impacting: true
   include_device_results: true
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -4012,7 +4060,7 @@
   operation1: __setitem__
   operation2: append
   operation3: update
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow 8: Payload Extraction with Operations'
@@ -4075,6 +4123,7 @@
   impacting: true
   include_device_results: true
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -4103,7 +4152,7 @@
   operation1: append
   operation2: extend
   operation3: update
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow 8: Payload Extraction with Operations'
@@ -4168,6 +4217,7 @@
   impacting: true
   include_device_results: true
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -4189,7 +4239,7 @@
   params: {}
   password: ''
   payload: {}
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow E: Iteration Targets': &id138 [-135, 91]
     'Regression Workflow: Iteration Targets Mechanism': *id138
@@ -4240,6 +4290,7 @@
   impacting: true
   include_device_results: true
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -4259,7 +4310,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow F: Workflow of Workflows': [-179, 146]
     '[Regression Workflow F: Workflow of Workflows] Regression Workflow F S2: Access Variables from Parent Workflow': &id139 [
@@ -4335,6 +4386,7 @@
   impacting: true
   include_device_results: true
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: get_var("Derived Devices", device=device.name)[0]
   iteration_devices_property: name
@@ -4358,7 +4410,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     '[Regression Workflow F: Workflow of Workflows] Regression Workflow F S2: Access Variables from Parent Workflow': &id140 [
       244, 113]
@@ -4413,6 +4465,7 @@
   impacting: true
   include_device_results: true
   include_link_in_summary: true
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: ip_address
@@ -4488,6 +4541,7 @@
   impacting: true
   include_device_results: true
   include_link_in_summary: true
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -4597,6 +4651,7 @@
   impacting: true
   include_device_results: true
   include_link_in_summary: true
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: ip_address
@@ -4622,7 +4677,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: eos
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow F: Workflow of Workflows': &id141 [152, 75]
     'Regression Workflow: Workflow of Workflows': *id141
@@ -4679,6 +4734,7 @@
   impacting: true
   include_device_results: true
   include_link_in_summary: true
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: ip_address
@@ -4765,6 +4821,7 @@
   impacting: true
   include_device_results: true
   include_link_in_summary: true
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: ip_address
@@ -4824,7 +4881,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     '[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow of Workflow': &id142 [
       134, -147]
@@ -4889,6 +4946,7 @@
   impacting: true
   include_device_results: true
   include_link_in_summary: true
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: ip_address
@@ -4971,6 +5029,7 @@
   impacting: true
   include_device_results: true
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -5046,6 +5105,7 @@
   impacting: true
   include_device_results: true
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -5126,6 +5186,7 @@
   impacting: true
   include_device_results: true
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -5220,6 +5281,7 @@
   impacting: true
   include_device_results: true
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -5274,7 +5336,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     '[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow of Workflow': &id143 [
       678, 11]
@@ -5335,6 +5397,7 @@
   impacting: true
   include_device_results: true
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -5432,6 +5495,7 @@
   impacting: true
   include_device_results: true
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {mode: LAB}
   iteration_devices: ''
   iteration_devices_property: name
@@ -5513,6 +5577,7 @@
   impacting: true
   include_device_results: true
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -5619,6 +5684,7 @@
   impacting: true
   include_device_results: true
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -5638,7 +5704,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     '[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow of Workflow': &id144 [
       135, 187]
@@ -5702,6 +5768,7 @@
   impacting: true
   include_device_results: true
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -5721,7 +5788,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow F: Workflow of Workflows': &id145 [164, 375]
     'Regression Workflow: Workflow of Workflows': *id145
@@ -5775,6 +5842,7 @@
   impacting: true
   include_device_results: true
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -5794,7 +5862,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow F: Workflow of Workflows': &id146 [-655, 369]
     'Regression Workflow: Workflow of Workflows': *id146
@@ -5865,6 +5933,7 @@
   impacting: true
   include_device_results: true
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -5886,7 +5955,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow F: Workflow of Workflows': &id147 [-408, 34]
     'Regression Workflow: Workflow of Workflows': *id147
@@ -5965,6 +6034,7 @@
   impacting: true
   include_device_results: true
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -5987,7 +6057,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow 9: Operational Data Backup': &id148 [-125, 15]
     'Regression Workflow 9: Operational Data Backup (admin)': *id148
@@ -6053,6 +6123,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -6124,6 +6195,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -6143,7 +6215,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow G: run methods (BFS)': &id149 [-296, -98]
     'Regression Workflow: DxD and SxS Run Methods': *id149
@@ -6195,6 +6267,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -6215,7 +6288,7 @@
   params: {}
   password: ''
   payload: {}
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow G: run methods (BFS)': &id150 [-135, 189]
     'Regression Workflow: DxD and SxS Run Methods': *id150
@@ -6267,6 +6340,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -6286,7 +6360,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow G: run methods (BFS)': &id151 [123, -96]
     'Regression Workflow: DxD and SxS Run Methods': *id151
@@ -6339,6 +6413,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -6360,7 +6435,7 @@
   params: {}
   password: ''
   payload: {}
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow G: run methods (BFS)': &id152 [254, 163]
     'Regression Workflow: DxD and SxS Run Methods': *id152
@@ -6412,6 +6487,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -6431,7 +6507,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow G: run methods (BFS)': &id153 [622, -89]
     'Regression Workflow: DxD and SxS Run Methods': *id153
@@ -6498,6 +6574,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -6520,7 +6597,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     '[Regression Workflow G: run methods (BFS)] Workflow  in device by device mode': &id154 [
       248, -94]
@@ -6590,6 +6667,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -6612,7 +6690,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     '[Regression Workflow G: run methods (BFS)] Workflow in service by service mode (workflow targets)': &id155 [
       239, -108]
@@ -6682,6 +6760,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -6704,7 +6783,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     '[Regression Workflow G: run methods (BFS)] Workflow in service targets mode': &id156 [
       234, -86]
@@ -6758,6 +6837,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -6848,6 +6928,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: '["Washington", "Austin"]'
   iteration_devices_property: name
@@ -6867,7 +6948,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow H: shared service in multiple subworkflows': &id157 [-241,
       197]
@@ -6919,6 +7000,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: '["Washington", "Atlanta"]'
   iteration_devices_property: name
@@ -6938,7 +7020,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow H: shared service in multiple subworkflows': &id158 [548,
       48]
@@ -7006,6 +7088,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -7027,7 +7110,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     '[Regression Workflow H: shared service in multiple subworkflows] Subworkflow 1': &id159 [
       167, -185]
@@ -7085,6 +7168,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -7105,7 +7189,7 @@
   options: {}
   pass_device_properties: false
   playbook_path: /media/sf_shared/eNMS/files/playbooks/simple_playbook.yml
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow 6: Ansible with Validation': &id161 [-536, 192]
     'Regression Workflow: Ansible with Validation': *id161
@@ -7153,6 +7237,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -7220,6 +7305,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -7237,7 +7323,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow I: Iteration Targets Advanced': &id162 [132, -202]
     'Regression Workflow: Advanced Iteration Targets': *id162
@@ -7304,6 +7390,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -7325,7 +7412,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow I: Iteration Targets Advanced': &id163 [135, 100]
     'Regression Workflow: Advanced Iteration Targets': *id163
@@ -7378,6 +7465,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -7477,6 +7565,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -7494,7 +7583,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow J: Workflow and Subworkflow Iteration': [226, -76]
     'Regression Workflow: Workflow and Subworkflow Iteration': [-210, 233]
@@ -7544,6 +7633,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -7563,7 +7653,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow J: Workflow and Subworkflow Iteration': [218, 171]
     'Regression Workflow: Workflow and Subworkflow Iteration': [-182, 477]
@@ -7613,6 +7703,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -7631,7 +7722,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     '[Regression Workflow J: Workflow and Subworkflow Iteration] Subworkflow Iteration': &id164 [
       231, -87]
@@ -7683,6 +7774,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -7702,7 +7794,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow 7: Payload Extraction & Validation'
@@ -7762,6 +7854,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -7781,7 +7874,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow 7: Payload Extraction & Validation'
@@ -7842,6 +7935,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -7861,7 +7955,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow 7: Payload Extraction & Validation'
@@ -7920,6 +8014,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -7939,7 +8034,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow 7: Payload Extraction & Validation'
@@ -7998,6 +8093,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -8017,7 +8113,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow 8: Payload Extraction with Operations'
@@ -8076,6 +8172,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -8095,7 +8192,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow 8: Payload Extraction with Operations'
@@ -8155,6 +8252,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -8241,6 +8339,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -8258,7 +8357,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow K: preprocessing and postprocessing': &id171 [-26, 123]
     'Regression Workflow: Preprocessing and Postprocessing': *id171
@@ -8310,6 +8409,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -8328,7 +8428,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow K: preprocessing and postprocessing': &id172 [558, 152]
     'Regression Workflow: Preprocessing and Postprocessing': *id172
@@ -8377,6 +8477,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -8394,7 +8495,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow L: superworkflow': &id173 [511, -111]
     'Regression Workflow: Superworkflow': *id173
@@ -8442,6 +8543,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -8511,6 +8613,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -8590,6 +8693,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -8608,7 +8712,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow M: Unix command & shell, ping, - jump on connect - mechanism': &id174 [
       -177, -94]
@@ -8669,6 +8773,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -8687,7 +8792,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow M: Unix command & shell, ping, - jump on connect - mechanism': &id175 [
       -113, 220]
@@ -8746,6 +8851,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -8765,7 +8871,7 @@
   number_of_retries: 0
   operating_system: ''
   packet_size: 56
-  pools: []
+  pools: ['All devices, links, services and users']
   ports: '22'
   positions:
     'Regression Workflow M: Unix command & shell, ping, - jump on connect - mechanism': &id176 [
@@ -8819,6 +8925,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -8886,6 +8993,7 @@
   import_type: opennms
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -8912,7 +9020,7 @@
   opennms_login: demo
   opennms_password: ''
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow N: Topology Import (netbox, librenms, opennms)': &id177 [
       113, -104]
@@ -8977,6 +9085,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -8999,7 +9108,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow M: Unix command & shell, ping, - jump on connect - mechanism': &id178 [
       358, 190]
@@ -9055,6 +9164,7 @@
   impacting: true
   include_device_results: true
   include_link_in_summary: true
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: ip_address
@@ -9077,7 +9187,7 @@
   payload:
     a: b
     c: ['1', '2', '3']
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow L: superworkflow': &id179 [227, 151]
     'Regression Workflow: Superworkflow': *id179
@@ -9145,6 +9255,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -9243,6 +9354,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -9264,7 +9376,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow 9: Operational Data Backup': &id180 [-455, 15]
     'Regression Workflow 9: Operational Data Backup (admin)': *id180
@@ -9332,6 +9444,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -9350,7 +9463,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow 9: Operational Data Backup': &id181 [148, 191]
     'Regression Workflow 9: Operational Data Backup (admin)': *id181
@@ -9401,6 +9514,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -9418,7 +9532,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow L: superworkflow': &id182 [606, 47]
     'Regression Workflow: Superworkflow': *id182
@@ -9468,6 +9582,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -9542,6 +9657,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   is_configuration: false
   iteration_devices: ''
@@ -9560,7 +9676,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow O: Scrapli': &id183 [-33, -167]
     'Regression Workflow: Scrapli': *id183
@@ -9616,6 +9732,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   is_configuration: true
   iteration_devices: ''
@@ -9634,7 +9751,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow O: Scrapli': &id184 [402, -161]
     'Regression Workflow: Scrapli': *id184
@@ -9690,6 +9807,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   is_configuration: false
   iteration_devices: ''
@@ -9708,7 +9826,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow O: Scrapli': &id185 [6, 112]
     'Regression Workflow: Scrapli': *id185
@@ -9764,6 +9882,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   is_configuration: true
   iteration_devices: ''
@@ -9782,7 +9901,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow O: Scrapli': &id186 [373, 107]
     'Regression Workflow: Scrapli': *id186
@@ -9833,6 +9952,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -9924,6 +10044,7 @@
   impacting: true
   include_device_results: true
   include_link_in_summary: true
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: ip_address
@@ -9947,7 +10068,7 @@
   payload:
     a: b
     c: ['1', '2', '3']
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow 2: Separate Failure - Success paths': [374, 278]
     'Regression Workflow 3: Napalm getters (postprocessing)': ['-50', '0']
@@ -10007,6 +10128,7 @@
   impacting: true
   include_device_results: true
   include_link_in_summary: true
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: ip_address
@@ -10030,7 +10152,7 @@
   payload:
     a: b
     c: ['1', '2', '3']
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow P: large workflow (scalability)': &id188 [-406, 73]
     'Regression Workflow: Scalability Test (large workflow)': *id188
@@ -10084,6 +10206,7 @@
   impacting: true
   include_device_results: true
   include_link_in_summary: true
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: ip_address
@@ -10107,7 +10230,7 @@
   payload:
     a: b
     c: ['1', '2', '3']
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow P: large workflow (scalability)': &id189 [-402, 156]
     'Regression Workflow: Scalability Test (large workflow)': *id189
@@ -10161,6 +10284,7 @@
   impacting: true
   include_device_results: true
   include_link_in_summary: true
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: ip_address
@@ -10184,7 +10308,7 @@
   payload:
     a: b
     c: ['1', '2', '3']
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow P: large workflow (scalability)': &id190 [-94, 200]
     'Regression Workflow: Scalability Test (large workflow)': *id190
@@ -10238,6 +10362,7 @@
   impacting: true
   include_device_results: true
   include_link_in_summary: true
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: ip_address
@@ -10261,7 +10386,7 @@
   payload:
     a: b
     c: ['1', '2', '3']
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow P: large workflow (scalability)': &id191 [-94, 109]
     'Regression Workflow: Scalability Test (large workflow)': *id191
@@ -10330,6 +10455,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -10352,7 +10478,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow P: large workflow (scalability)': &id192 [-117, 5]
     'Regression Workflow: Scalability Test (large workflow)': *id192
@@ -10422,6 +10548,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -10444,7 +10571,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow P: large workflow (scalability)': &id193 [-81, -125]
     'Regression Workflow: Scalability Test (large workflow)': *id193
@@ -10514,6 +10641,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -10536,7 +10664,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow P: large workflow (scalability)': &id194 [-89, -196]
     'Regression Workflow: Scalability Test (large workflow)': *id194
@@ -10606,6 +10734,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -10628,7 +10757,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow P: large workflow (scalability)': &id195 [183, -222]
     'Regression Workflow: Scalability Test (large workflow)': *id195
@@ -10698,6 +10827,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -10720,7 +10850,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow P: large workflow (scalability)': &id196 [188, -130]
     'Regression Workflow: Scalability Test (large workflow)': *id196
@@ -10790,6 +10920,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -10812,7 +10943,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow P: large workflow (scalability)': &id197 [190, -36]
     'Regression Workflow: Scalability Test (large workflow)': *id197
@@ -10865,6 +10996,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -10882,7 +11014,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow P: large workflow (scalability)': &id198 [194, 47]
     'Regression Workflow: Scalability Test (large workflow)': *id198
@@ -10932,6 +11064,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -10950,7 +11083,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow P: large workflow (scalability)': &id199 [203, 127]
     'Regression Workflow: Scalability Test (large workflow)': *id199
@@ -11000,6 +11133,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -11018,7 +11152,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow P: large workflow (scalability)': &id200 [207, 230]
     'Regression Workflow: Scalability Test (large workflow)': *id200
@@ -11068,6 +11202,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -11086,7 +11221,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow P: large workflow (scalability)': &id201 [476, 232]
     'Regression Workflow: Scalability Test (large workflow)': *id201
@@ -11136,6 +11271,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -11154,7 +11290,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow P: large workflow (scalability)': &id202 [471, 142]
     'Regression Workflow: Scalability Test (large workflow)': *id202
@@ -11204,6 +11340,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -11222,7 +11359,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow P: large workflow (scalability)': &id203 [476, 44]
     'Regression Workflow: Scalability Test (large workflow)': *id203
@@ -11272,6 +11409,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -11290,7 +11428,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow P: large workflow (scalability)': &id204 [469, -50]
     'Regression Workflow: Scalability Test (large workflow)': *id204
@@ -11340,6 +11478,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -11358,7 +11497,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow P: large workflow (scalability)': &id205 [467, -163]
     'Regression Workflow: Scalability Test (large workflow)': *id205
@@ -11409,6 +11548,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -11497,6 +11637,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -11519,7 +11660,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow Q: File transfer': &id206 [-171, -148]
     'Regression Workflow: File Transfer Mechanism': *id206
@@ -11559,6 +11700,9 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  credentials: device
+  custom_password: ''
+  custom_username: ''
   default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
@@ -11573,6 +11717,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -11594,7 +11739,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow Q: File transfer': &id207 [-21, 255]
     'Regression Workflow: File Transfer Mechanism': *id207
@@ -11663,6 +11808,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -11685,7 +11831,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow Q: File transfer': &id208 [362, 239]
     'Regression Workflow: File Transfer Mechanism': *id208
@@ -11727,6 +11873,9 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  credentials: device
+  custom_password: ''
+  custom_username: ''
   default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
@@ -11741,6 +11890,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -11763,7 +11913,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow Q: File transfer': &id209 [187, -140]
     'Regression Workflow: File Transfer Mechanism': *id209
@@ -11832,6 +11982,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -11853,7 +12004,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow Q: File transfer': &id210 [517, -138]
     'Regression Workflow: File Transfer Mechanism': *id210
@@ -11893,6 +12044,9 @@
   conversion_method: none
   creator: admin
   credential_type: any
+  credentials: device
+  custom_password: ''
+  custom_username: ''
   default_access: creator
   definition: Definition
   delete_spaces_before_matching: false
@@ -11907,6 +12061,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -11928,7 +12083,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow Q: File transfer': &id211 [-332, 180]
     'Regression Workflow: File Transfer Mechanism': *id211
@@ -11981,6 +12136,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -12048,6 +12204,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -12065,7 +12222,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow R: Skip Services in SxS mode': &id212 [-124, -154]
     'Regression Workflow R: skip services in service by service mode': *id212
@@ -12120,6 +12277,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -12137,7 +12295,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow R: Skip Services in SxS mode': &id213 [304, -102]
     'Regression Workflow R: skip services in service by service mode': *id213
@@ -12192,6 +12350,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -12209,7 +12368,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow R: Skip Services in SxS mode': &id214 [12, 179]
     'Regression Workflow R: skip services in service by service mode': *id214
@@ -12265,6 +12424,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -12350,6 +12510,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -12368,7 +12529,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow S: conditional skip query in failed and discard mode': &id215 [
       -242, 237]
@@ -12425,6 +12586,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -12443,7 +12605,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow S: conditional skip query in failed and discard mode': &id216 [
       412, 108]
@@ -12500,6 +12662,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -12518,7 +12681,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow S: conditional skip query in failed and discard mode': &id217 [
       605, 248]
@@ -12575,6 +12738,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -12593,7 +12757,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow S: conditional skip query in failed and discard mode': &id218 [
       660, 13]
@@ -12651,6 +12815,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -12740,6 +12905,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -12758,7 +12924,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow 1: link neighbors mechanism': &id219 [-20, 30]
     'Regression Workflow 4: Link Neighbors Mechanism (public)': *id219
@@ -12837,6 +13003,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: device.get_neighbors("device")
   iteration_devices_property: name
@@ -12858,7 +13025,7 @@
   params: {}
   password: ''
   payload: {}
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow 1: link neighbors mechanism': &id220 [401, -181]
     'Regression Workflow 4: Link Neighbors Mechanism (public)': *id220
@@ -12930,6 +13097,7 @@
   impacting: true
   include_device_results: true
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -12951,7 +13119,7 @@
   notification_header: ''
   number_of_retries: 2
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow 1: Netmiko with validation and retries': [-142, -137]
     'Regression Workflow D: Prompts': &id221 [-291, -104]
@@ -13005,6 +13173,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -13104,6 +13273,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -13122,7 +13292,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow T: global variables': [-180, 198]
     'Regression Workflow T: global variables and post-run pool update': [-153, 159]
@@ -13181,6 +13351,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -13199,7 +13370,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow T: global variables': [42, -43]
     'Regression Workflow T: global variables and post-run pool update': [42, -43]
@@ -13269,6 +13440,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -13291,7 +13463,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow T: global variables': [487, 104]
     'Regression Workflow T: global variables and post-run pool update': [487, 104]
@@ -13345,6 +13517,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -13363,7 +13536,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow S: conditional skip query in failed and discard mode': &id222 [
       -215, 70]
@@ -13419,6 +13592,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -13509,6 +13683,7 @@
   impacting: true
   include_device_results: true
   include_link_in_summary: true
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: ip_address
@@ -13532,7 +13707,7 @@
   payload:
     a: b
     c: ['1', '2', '3']
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow 2: Separate Failure - Success paths': [374, 278]
     'Regression Workflow 3: Napalm getters (postprocessing)': ['-50', '0']
@@ -13592,6 +13767,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -13610,7 +13786,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow U: fork based on value with skip discard mode': &id225 [
       47, -29]
@@ -13664,6 +13840,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -13682,7 +13859,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow U: fork based on value with skip discard mode': &id226 [
       -430, 342]
@@ -13753,6 +13930,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -13775,7 +13953,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow U: fork based on value with skip discard mode': &id227 [
       574, 0]
@@ -13830,6 +14008,7 @@
   impacting: true
   include_device_results: true
   include_link_in_summary: true
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: ip_address
@@ -13853,7 +14032,7 @@
   payload:
     a: b
     c: ['1', '2', '3']
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow U: fork based on value with skip discard mode': &id228 [
       437, 78]
@@ -13907,6 +14086,7 @@
   impacting: true
   include_device_results: true
   include_link_in_summary: true
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: ip_address
@@ -13930,7 +14110,7 @@
   payload:
     a: b
     c: ['1', '2', '3']
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow U: fork based on value with skip discard mode': &id229 [
       32, 431]
@@ -13983,6 +14163,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -14076,6 +14257,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -14095,7 +14277,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow V: skip query with device in run once mode': &id230 [-221,
       154]
@@ -14147,6 +14329,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -14165,7 +14348,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow V: skip query with device in run once mode': &id231 [-31,
       3]
@@ -14217,6 +14400,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -14236,7 +14420,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow V: skip query with device in run once mode': &id232 [342,
       205]
@@ -14286,6 +14470,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -14304,7 +14489,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     '[Regression Workflow V: skip query with device in run once mode] Subworkflow in SxS mode - workflow targets': &id233 [
       230, -19]
@@ -14359,6 +14544,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -14449,6 +14635,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -14467,7 +14654,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow W: disable result creation mode': [-312, -10]
     'Regression Workflow W: skip, discard and disable result creation mechanism': &id234 [
@@ -14519,6 +14706,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -14538,7 +14726,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow W: disable result creation mode': [-174, 154]
     'Regression Workflow W: skip, discard and disable result creation mechanism': &id235 [
@@ -14591,6 +14779,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -14610,7 +14799,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow W: disable result creation mode': [442, 205]
     'Regression Workflow W: skip, discard and disable result creation mechanism': &id236 [
@@ -14662,6 +14851,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -14680,7 +14870,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow W: disable result creation mode': [101, -37]
     'Regression Workflow W: skip, discard and disable result creation mechanism': &id237 [
@@ -14731,6 +14921,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -14749,7 +14940,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     '[Regression Workflow W: disable result creation mode] Workflow in DxD mode': &id238 [
       224, -51]
@@ -14800,6 +14991,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -14818,7 +15010,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     '[Regression Workflow W: skip, discard and disable result creation mechanism] Workflow in SxS mode': &id239 [
       220, -28]
@@ -14885,6 +15077,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -14957,6 +15150,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -15068,6 +15262,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -15090,7 +15285,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow X: Credentials (password & key, priority)': [220, 52]
     'Regression Workflow: Credentials (Password & Key, Priority Mechanism)': [220,
@@ -15144,6 +15339,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -15224,6 +15420,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -15241,7 +15438,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow: Optional Prerequisite Services': [-342, 317]
   postprocessing: ''
@@ -15289,6 +15486,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -15306,7 +15504,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow: Optional Prerequisite Services': [644, 318]
   postprocessing: ''
@@ -15354,6 +15552,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: '["PaloAlto", "Atlanta"]'
   iteration_devices_property: name
@@ -15372,7 +15571,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow: Optional Prerequisite Services': [-214, -47]
   postprocessing: ''
@@ -15421,6 +15620,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -15438,7 +15638,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow: Optional Prerequisite Services': [601, -27]
   postprocessing: ''
@@ -15487,6 +15687,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -15559,6 +15760,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: '["Washington", "Austin"]'
   iteration_devices_property: name
@@ -15576,7 +15778,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow: Device Iteration': [-233, 160]
   postprocessing: ''
@@ -15625,6 +15827,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: '["PaloAlto", "Austin"]'
   iteration_devices_property: name
@@ -15644,7 +15847,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow: Workflow and Subworkflow Iteration': [233, 471]
   postprocessing: ''
@@ -15694,6 +15897,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: get_var("device_iteration", device=device.name)
   iteration_devices_property: name
@@ -15713,7 +15917,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow: Workflow and Subworkflow Iteration': [649, 409]
   postprocessing: ''
@@ -15762,6 +15966,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -15780,7 +15985,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     '[Regression Workflow: Workflow and Subworkflow Iteration] Subworkflow Device Iteration 2': [
       233, -24]
@@ -15829,6 +16034,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -15847,7 +16053,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     '[Regression Workflow: Workflow and Subworkflow Iteration] Subworkflow Device Iteration': [
       241, -26]
@@ -15896,6 +16102,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -15914,7 +16121,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow: Global Variables and post-run Pool Update Mechanism': [
       -165, 199]
@@ -15963,6 +16170,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -15981,7 +16189,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow: Global Variables and post-run Pool Update Mechanism': [
       182, 132]
@@ -16031,6 +16239,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -16112,6 +16321,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -16129,7 +16339,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow: RBAC Target Restriction': [-162, 99]
   postprocessing: ''
@@ -16177,6 +16387,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -16194,7 +16405,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow: RBAC Target Restriction': [181, 119]
   postprocessing: ''
@@ -16242,6 +16453,7 @@
   impacting: true
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: '["Washington", "Boston"]'
   iteration_devices_property: name
@@ -16259,7 +16471,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow: RBAC Target Restriction': [590, 138]
   postprocessing: ''
@@ -16308,6 +16520,7 @@
   impacting: false
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -16406,6 +16619,7 @@
   impacting: false
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -16423,7 +16637,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow: Scrapli Netconf Service': [479, -63]
   postprocessing: "results[\"success\"] = \"<description>YYYY</description>\" in results[\"\
@@ -16483,6 +16697,7 @@
   impacting: false
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -16563,6 +16778,7 @@
   impacting: false
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -16580,7 +16796,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow: Scrapli Netconf Service': [20, -72]
   postprocessing: ''
@@ -16639,6 +16855,7 @@
   impacting: false
   include_device_results: false
   include_link_in_summary: false
+  initial_form: ''
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: name
@@ -16656,7 +16873,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  pools: []
+  pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow: Scrapli Netconf Service': [510, 143]
   postprocessing: ''
@@ -16682,6 +16899,171 @@
   type: scrapli_netconf_service
   update_pools_after_running: false
   update_target_pools: false
+  validation_condition: none
+  validation_method: text
+  vendor: ''
+  waiting_time: 0
+- access_groups: admin
+  close_connection: false
+  completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credential_type: any
+  default_access: creator
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  impacting: false
+  include_device_results: false
+  include_link_in_summary: false
+  initial_form: "devices = MultipleInstanceField(\"Devices\", model=\"device\")\r\n\
+    pools = MultipleInstanceField(\"Pools\", model=\"pool\")\r\ntags = SelectMultipleStringField(\r\
+    \n  \"Tags\",\r\n  choices=((\"Pre-checks\", \"precheck\"), (\"Post-checks\",\
+    \ \"postcheck\"))\r\n)\r\ninterface = StringField(\"Interface\", default=\"Lo1\"\
+    )\r\n"
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  labels: {}
+  last_modified: '2021-06-07 01:39:09.435559'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: 'Regression Workflow: Initial Form (override tags & targets, add payload)'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: ['All devices, links, services and users']
+  positions: {}
+  postprocessing: ''
+  postprocessing_mode: always
+  preprocessing: ''
+  priority: 1
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: 'Regression Workflow: Initial Form (override tags & targets, add payload)'
+  send_notification: false
+  send_notification_method: mail
+  services: ['[Shared] Start', '[Shared] End', '[Regression Workflow: Initial Form
+      (override tags & targets, add payload)] Show interface from initial form (default:
+      Lo1)']
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: success
+  target_devices: []
+  target_pools: []
+  time_between_retries: 10
+  type: workflow
+  update_pools_after_running: false
+  update_target_pools: false
+  validation_condition: none
+  validation_method: text
+  vendor: ''
+  waiting_time: 0
+  workflow_category: Example workflow(s)
+- access_groups: admin
+  auto_find_prompt: true
+  close_connection: false
+  command: ''
+  completion_time: 1
+  config_mode: false
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credential_type: any
+  credentials: device
+  custom_password: ''
+  custom_username: ''
+  default_access: creator
+  definition: Definition
+  delay_factor: 1.0
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  driver: a10
+  enable_mode: true
+  exit_command: exit
+  expect_password_prompt: password
+  expect_prompt: admin.*$
+  expect_string: ''
+  expect_username_prompt: 'username:'
+  fast_cli: false
+  global_delay_factor: 1.0
+  impacting: false
+  include_device_results: false
+  include_link_in_summary: false
+  initial_form: ''
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  jump_command: ssh jump_server_IP
+  jump_on_connect: false
+  jump_password: ''
+  jump_username: ''
+  last_modified: '2021-06-07 01:38:55.194629'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Regression Workflow: Initial Form (override tags & targets, add payload)]
+    Show interface from initial form (default: Lo1)'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: ['All devices, links, services and users']
+  positions:
+    'Regression Workflow: Initial Form (override tags & targets, add payload)': [
+      224, -91]
+  postprocessing: ''
+  postprocessing_mode: always
+  preprocessing: ''
+  priority: 1
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: 'Show interface from initial form (default: Lo1)'
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: success
+  start_new_connection: false
+  strip_command: true
+  strip_prompt: true
+  target_devices: []
+  target_pools: []
+  time_between_retries: 10
+  timeout: 10.0
+  type: netmiko_validation_service
+  update_pools_after_running: false
+  update_target_pools: false
+  use_device_driver: true
   validation_condition: none
   validation_method: text
   vendor: ''

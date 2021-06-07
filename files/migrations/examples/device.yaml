@@ -31,6 +31,7 @@
   model: Cisco
   name: Jackson
   napalm_driver: eos
+  netconf_driver: default
   netmiko_driver: arista_eos
   operating_system: IOS
   os_version: 15.5(3)M
@@ -76,6 +77,7 @@
   model: Cisco
   name: PaloAlto
   napalm_driver: eos
+  netconf_driver: default
   netmiko_driver: arista_eos
   operating_system: IOS
   os_version: 15.5(3)M
@@ -121,6 +123,7 @@
   model: Arista
   name: Austin
   napalm_driver: eos
+  netconf_driver: default
   netmiko_driver: arista_eos
   operating_system: eos
   os_version: 15.5(3)M
@@ -166,6 +169,7 @@
   model: Arista
   name: Washington
   napalm_driver: eos
+  netconf_driver: default
   netmiko_driver: arista_eos
   operating_system: eos
   os_version: 15.5(3)M
@@ -211,6 +215,7 @@
   model: Cisco
   name: Chicago
   napalm_driver: eos
+  netconf_driver: default
   netmiko_driver: arista_eos
   operating_system: IOS
   os_version: 15.5(3)M
@@ -256,6 +261,7 @@
   model: Cisco
   name: SanJose
   napalm_driver: eos
+  netconf_driver: default
   netmiko_driver: arista_eos
   operating_system: IOS
   os_version: 15.5(3)M
@@ -301,6 +307,7 @@
   model: Cisco
   name: SanDiego
   napalm_driver: eos
+  netconf_driver: default
   netmiko_driver: arista_eos
   operating_system: IOS
   os_version: 15.5(3)M
@@ -346,6 +353,7 @@
   model: Cisco
   name: Dallas
   napalm_driver: eos
+  netconf_driver: default
   netmiko_driver: arista_eos
   operating_system: IOS-XR
   os_version: 5.1.X
@@ -391,6 +399,7 @@
   model: Cisco
   name: Philadelphia
   napalm_driver: eos
+  netconf_driver: default
   netmiko_driver: arista_eos
   operating_system: IOS-XR
   os_version: 5.1.X
@@ -436,6 +445,7 @@
   model: Cisco
   name: LosAngeles
   napalm_driver: eos
+  netconf_driver: default
   netmiko_driver: arista_eos
   operating_system: IOS-XR
   os_version: 5.1.X
@@ -481,6 +491,7 @@
   model: Cisco
   name: Detroit
   napalm_driver: eos
+  netconf_driver: default
   netmiko_driver: arista_eos
   operating_system: IOS-XR
   os_version: 5.1.X
@@ -526,6 +537,7 @@
   model: Cisco
   name: Richmond
   napalm_driver: eos
+  netconf_driver: default
   netmiko_driver: arista_eos
   operating_system: IOS-XR
   os_version: 5.1.X
@@ -571,6 +583,7 @@
   model: Cisco
   name: Atlanta
   napalm_driver: eos
+  netconf_driver: default
   netmiko_driver: arista_eos
   operating_system: IOS-XR
   os_version: 5.1.X
@@ -616,6 +629,7 @@
   model: Cisco
   name: Boston
   napalm_driver: eos
+  netconf_driver: default
   netmiko_driver: arista_eos
   operating_system: IOS-XR
   os_version: 5.1.X
@@ -661,6 +675,7 @@
   model: Cisco
   name: Houston
   napalm_driver: eos
+  netconf_driver: default
   netmiko_driver: arista_eos
   operating_system: IOS-XR
   os_version: 5.1.X
@@ -706,6 +721,7 @@
   model: Juniper
   name: Baltimore
   napalm_driver: eos
+  netconf_driver: default
   netmiko_driver: arista_eos
   operating_system: Junos
   os_version: 17.2R1.13
@@ -751,6 +767,7 @@
   model: Juniper
   name: Cleveland
   napalm_driver: eos
+  netconf_driver: default
   netmiko_driver: arista_eos
   operating_system: Junos
   os_version: 17.2R1.13
@@ -796,6 +813,7 @@
   model: Juniper
   name: Columbus
   napalm_driver: eos
+  netconf_driver: default
   netmiko_driver: arista_eos
   operating_system: Junos
   os_version: 17.2R1.13
@@ -841,6 +859,7 @@
   model: Juniper
   name: Cincinnati
   napalm_driver: eos
+  netconf_driver: default
   netmiko_driver: arista_eos
   operating_system: Junos
   os_version: 17.2R1.13
@@ -886,6 +905,7 @@
   model: Juniper
   name: Cambridge
   napalm_driver: eos
+  netconf_driver: default
   netmiko_driver: arista_eos
   operating_system: Junos
   os_version: 17.2R1.13
@@ -931,6 +951,7 @@
   model: Juniper
   name: Minneapolis
   napalm_driver: eos
+  netconf_driver: default
   netmiko_driver: arista_eos
   operating_system: Junos
   os_version: 17.2R1.13
@@ -976,6 +997,7 @@
   model: Juniper
   name: NewYork
   napalm_driver: eos
+  netconf_driver: default
   netmiko_driver: arista_eos
   operating_system: Junos
   os_version: 17.2R1.13
@@ -1021,6 +1043,7 @@
   model: Juniper
   name: Sacramento
   napalm_driver: eos
+  netconf_driver: default
   netmiko_driver: arista_eos
   operating_system: Junos
   os_version: 17.2R1.13
@@ -1066,6 +1089,7 @@
   model: Juniper
   name: SanFrancisco
   napalm_driver: eos
+  netconf_driver: default
   netmiko_driver: arista_eos
   operating_system: Junos
   os_version: 17.2R1.13
@@ -1111,6 +1135,7 @@
   model: Juniper
   name: Orange
   napalm_driver: eos
+  netconf_driver: default
   netmiko_driver: arista_eos
   operating_system: Junos
   os_version: 17.2R1.13
@@ -1156,6 +1181,7 @@
   model: Cisco
   name: Oakland
   napalm_driver: eos
+  netconf_driver: default
   netmiko_driver: arista_eos
   operating_system: IOS-XE
   os_version: '3.6.5E '
@@ -1201,6 +1227,7 @@
   model: Cisco
   name: Denver
   napalm_driver: eos
+  netconf_driver: default
   netmiko_driver: arista_eos
   operating_system: IOS-XE
   os_version: '3.6.5E '
@@ -1246,6 +1273,7 @@
   model: ''
   name: router5
   napalm_driver: ios
+  netconf_driver: default
   netmiko_driver: cisco_ios
   operating_system: IOS
   os_version: 15.5(3)M
@@ -1291,6 +1319,7 @@
   model: ''
   name: router6
   napalm_driver: ios
+  netconf_driver: default
   netmiko_driver: cisco_ios
   operating_system: IOS
   os_version: 15.5(3)M
@@ -1336,6 +1365,7 @@
   model: ''
   name: router7
   napalm_driver: ios
+  netconf_driver: default
   netmiko_driver: cisco_ios
   operating_system: IOS
   os_version: 15.5(3)M
@@ -1381,6 +1411,7 @@
   model: ''
   name: router8
   napalm_driver: ios
+  netconf_driver: default
   netmiko_driver: cisco_ios
   operating_system: IOS
   os_version: 15.5(3)M
@@ -1426,6 +1457,7 @@
   model: ''
   name: router9
   napalm_driver: ios
+  netconf_driver: default
   netmiko_driver: cisco_ios
   operating_system: IOS
   os_version: 15.5(3)M
@@ -1471,6 +1503,7 @@
   model: ''
   name: router10 (public)
   napalm_driver: ios
+  netconf_driver: default
   netmiko_driver: cisco_ios
   operating_system: IOS
   os_version: 15.5(3)M
@@ -1516,6 +1549,7 @@
   model: ''
   name: router11
   napalm_driver: ios
+  netconf_driver: default
   netmiko_driver: cisco_ios
   operating_system: IOS
   os_version: 15.5(3)M
@@ -1561,6 +1595,7 @@
   model: ''
   name: router12
   napalm_driver: ios
+  netconf_driver: default
   netmiko_driver: cisco_ios
   operating_system: IOS-XR
   os_version: 5.1.X
@@ -1606,6 +1641,7 @@
   model: ''
   name: router13
   napalm_driver: ios
+  netconf_driver: default
   netmiko_driver: cisco_ios
   operating_system: IOS-XR
   os_version: 5.1.X
@@ -1651,6 +1687,7 @@
   model: ''
   name: router14
   napalm_driver: ios
+  netconf_driver: default
   netmiko_driver: cisco_ios
   operating_system: IOS-XR
   os_version: 5.1.X
@@ -1696,6 +1733,7 @@
   model: ''
   name: router15
   napalm_driver: ios
+  netconf_driver: default
   netmiko_driver: cisco_ios
   operating_system: IOS-XR
   os_version: 5.1.X
@@ -1741,6 +1779,7 @@
   model: ''
   name: router16
   napalm_driver: ios
+  netconf_driver: default
   netmiko_driver: cisco_ios
   operating_system: IOS-XR
   os_version: 5.1.X
@@ -1786,6 +1825,7 @@
   model: ''
   name: router17
   napalm_driver: ios
+  netconf_driver: default
   netmiko_driver: cisco_ios
   operating_system: IOS-XR
   os_version: 5.1.X
@@ -1831,6 +1871,7 @@
   model: ''
   name: router18 (public)
   napalm_driver: ios
+  netconf_driver: default
   netmiko_driver: cisco_ios
   operating_system: IOS-XR
   os_version: 5.1.X
@@ -1876,6 +1917,7 @@
   model: ''
   name: router19
   napalm_driver: ios
+  netconf_driver: default
   netmiko_driver: cisco_ios
   operating_system: IOS-XR
   os_version: 5.1.X
@@ -1921,6 +1963,7 @@
   model: ''
   name: router20 (admin)
   napalm_driver: ios
+  netconf_driver: default
   netmiko_driver: cisco_ios
   operating_system: Junos
   os_version: 17.2R1.13
@@ -1966,6 +2009,7 @@
   model: ''
   name: router21
   napalm_driver: ios
+  netconf_driver: default
   netmiko_driver: cisco_ios
   operating_system: Junos
   os_version: 17.2R1.13
@@ -2011,6 +2055,7 @@
   model: ''
   name: router22
   napalm_driver: ios
+  netconf_driver: default
   netmiko_driver: cisco_ios
   operating_system: Junos
   os_version: 17.2R1.13
@@ -2056,6 +2101,7 @@
   model: ''
   name: router23 (admin)
   napalm_driver: ios
+  netconf_driver: default
   netmiko_driver: cisco_ios
   operating_system: Junos
   os_version: 17.2R1.13
@@ -2101,6 +2147,7 @@
   model: ''
   name: router24
   napalm_driver: ios
+  netconf_driver: default
   netmiko_driver: cisco_ios
   operating_system: Junos
   os_version: 17.2R1.13
@@ -2146,6 +2193,7 @@
   model: ''
   name: router25
   napalm_driver: ios
+  netconf_driver: default
   netmiko_driver: cisco_ios
   operating_system: Junos
   os_version: 17.2R1.13
@@ -2191,6 +2239,7 @@
   model: ''
   name: router26
   napalm_driver: ios
+  netconf_driver: default
   netmiko_driver: cisco_ios
   operating_system: Junos
   os_version: 17.2R1.13
@@ -2236,6 +2285,7 @@
   model: ''
   name: router27
   napalm_driver: ios
+  netconf_driver: default
   netmiko_driver: cisco_ios
   operating_system: Junos
   os_version: 17.2R1.13
@@ -2281,6 +2331,7 @@
   model: ''
   name: router28
   napalm_driver: ios
+  netconf_driver: default
   netmiko_driver: cisco_ios
   operating_system: Junos
   os_version: 17.2R1.13
@@ -2326,6 +2377,7 @@
   model: ''
   name: router29
   napalm_driver: ios
+  netconf_driver: default
   netmiko_driver: cisco_ios
   operating_system: Junos
   os_version: 17.2R1.13
@@ -2371,6 +2423,7 @@
   model: ''
   name: router30
   napalm_driver: ios
+  netconf_driver: default
   netmiko_driver: cisco_ios
   operating_system: IOS-XE
   os_version: '3.6.5E '
@@ -2416,6 +2469,7 @@
   model: ''
   name: router31
   napalm_driver: ios
+  netconf_driver: default
   netmiko_driver: cisco_ios
   operating_system: IOS-XE
   os_version: '3.6.5E '
@@ -2461,6 +2515,7 @@
   model: ''
   name: router32
   napalm_driver: ios
+  netconf_driver: default
   netmiko_driver: cisco_ios
   operating_system: IOS-XE
   os_version: '3.6.5E '
@@ -2506,6 +2561,7 @@
   model: ''
   name: router33
   napalm_driver: ios
+  netconf_driver: default
   netmiko_driver: cisco_ios
   operating_system: IOS-XE
   os_version: '3.6.5E '
@@ -2551,6 +2607,7 @@
   model: ''
   name: router34
   napalm_driver: ios
+  netconf_driver: default
   netmiko_driver: cisco_ios
   operating_system: IOS-XE
   os_version: '3.6.5E '
@@ -2596,6 +2653,7 @@
   model: ''
   name: router35
   napalm_driver: ios
+  netconf_driver: default
   netmiko_driver: cisco_ios
   operating_system: IOS-XE
   os_version: '3.6.5E '
@@ -2641,6 +2699,7 @@
   model: ''
   name: router36
   napalm_driver: ios
+  netconf_driver: default
   netmiko_driver: cisco_ios
   operating_system: IOS-XE
   os_version: '3.6.5E '
@@ -2686,6 +2745,7 @@
   model: ''
   name: router37
   napalm_driver: ios
+  netconf_driver: default
   netmiko_driver: cisco_ios
   operating_system: IOS-XE
   os_version: '3.6.5E '
@@ -2731,6 +2791,7 @@
   model: linux
   name: Server 2
   napalm_driver: eos
+  netconf_driver: default
   netmiko_driver: linux
   operating_system: linux
   os_version: 15.5(3)M
@@ -2776,6 +2837,7 @@
   model: Cisco
   name: Aserver
   napalm_driver: eos
+  netconf_driver: default
   netmiko_driver: arista_eos
   operating_system: IOS-XE
   os_version: '3.6.5E '
@@ -2821,6 +2883,7 @@
   model: Cisco
   name: Dallas-2
   napalm_driver: eos
+  netconf_driver: default
   netmiko_driver: arista_eos
   operating_system: IOS-XR
   os_version: 5.1.X
@@ -2866,6 +2929,7 @@
   model: Cisco
   name: Dallas-3
   napalm_driver: eos
+  netconf_driver: default
   netmiko_driver: arista_eos
   operating_system: IOS-XR
   os_version: 5.1.X
@@ -2911,6 +2975,7 @@
   model: Cisco
   name: Dallas-4
   napalm_driver: eos
+  netconf_driver: default
   netmiko_driver: arista_eos
   operating_system: IOS-XR
   os_version: 5.1.X
@@ -2956,6 +3021,7 @@
   model: Arista
   name: Austin-2
   napalm_driver: eos
+  netconf_driver: default
   netmiko_driver: arista_eos
   operating_system: eos
   os_version: 15.5(3)M
@@ -3001,6 +3067,7 @@
   model: Arista
   name: Austin-3
   napalm_driver: eos
+  netconf_driver: default
   netmiko_driver: arista_eos
   operating_system: eos
   os_version: 15.5(3)M
@@ -3046,6 +3113,7 @@
   model: Cisco
   name: Jackson-2
   napalm_driver: eos
+  netconf_driver: default
   netmiko_driver: arista_eos
   operating_system: IOS
   os_version: 15.5(3)M
@@ -3091,6 +3159,7 @@
   model: Cisco
   name: Oakland-2
   napalm_driver: eos
+  netconf_driver: default
   netmiko_driver: arista_eos
   operating_system: IOS-XE
   os_version: '3.6.5E '

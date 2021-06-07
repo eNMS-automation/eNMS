@@ -518,13 +518,17 @@ function submitInitialForm(serviceId) {
   call({
     url: `/run_service/${serviceId}`,
     form: `initial-${serviceId}-form-${serviceId}`,
-    callback: runLogic,
+    callback: (result) => {
+      runLogic(result);
+      $(`#initial_form-${serviceId}`).remove();
+    }
   });
 }
 
 export const runService = function ({ id, form, type }) {
   if (form) {
     openPanel({
+      name: "initial_form",
       id: id,
       url: `initial_form/${id}`,
       title: "Initial Form",
@@ -587,7 +591,7 @@ function exportServices(tableId) {
 function pauseTask(id) {
   call({
     url: `/task_action/pause/${id}`,
-    callback: function (result) {
+    callback: function () {
       $(`#pause-resume-${id}`)
         .attr("onclick", `eNMS.automation.resumeTask('${id}')`)
         .text("Resume");

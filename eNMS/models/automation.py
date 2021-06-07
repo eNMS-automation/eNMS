@@ -381,7 +381,7 @@ class Run(AbstractBase):
             return "N/A"
 
     def run(self, payload):
-        self.update(**payload.get("initial_form", {}))
+        self.update(**payload.get("form", {}))
         self.service_run = Runner(
             self,
             payload=payload,

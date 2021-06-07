@@ -1017,7 +1017,7 @@ class Controller:
         for property in ("user", "csrf_token"):
             kwargs.pop(property, None)
         if kwargs.get("form_type", "").startswith("initial-"):
-            kwargs = {"initial_form": kwargs}
+            kwargs = {"form": kwargs}
         kwargs["creator"] = getattr(current_user, "name", "")
         service = db.fetch("service", id=service_id, rbac="run")
         kwargs["runtime"] = runtime = vs.get_time()

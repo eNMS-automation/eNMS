@@ -1035,6 +1035,14 @@
       "source_name",
       "destination_name"
     ],
+    "pool": [
+      "name",
+      "last_modified",
+      "creator",
+      "description",
+      "manually_defined",
+      "admin_only"
+    ],
     "run": [
       "runtime",
       "tags",

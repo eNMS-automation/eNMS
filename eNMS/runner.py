@@ -842,14 +842,15 @@ class Runner:
 
     def sub(self, input, variables):
 
-        r = compile("{{(.*?)}}")
+        regex = compile("{{(.*?)}}")
+        variables["payload"] = self.payload
 
         def replace(match):
             return str(self.eval(match.group()[2:-2], **variables)[0])
 
         def rec(input):
             if isinstance(input, str):
-                return r.sub(replace, input)
+                return regex.sub(replace, input)
             elif isinstance(input, list):
                 return [rec(item) for item in input]
             elif isinstance(input, dict):

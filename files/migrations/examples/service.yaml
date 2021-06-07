@@ -16934,7 +16934,7 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels: {}
-  last_modified: '2021-06-07 01:45:00.356537'
+  last_modified: '2021-06-07 01:56:10.501249'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -16965,7 +16965,7 @@
   skip: {}
   skip_query: ''
   skip_value: success
-  target_devices: []
+  target_devices: [SanDiego, Dallas]
   target_pools: []
   time_between_retries: 10
   type: workflow
@@ -16979,7 +16979,7 @@
 - access_groups: admin
   auto_find_prompt: true
   close_connection: false
-  command: ''
+  command: show interface {{payload["form"]["interface"]}}
   completion_time: 1
   config_mode: false
   content_match: ''
@@ -17022,7 +17022,7 @@
   jump_on_connect: false
   jump_password: ''
   jump_username: ''
-  last_modified: '2021-06-07 01:38:55.194629'
+  last_modified: '2021-06-07 02:09:28.205784'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100

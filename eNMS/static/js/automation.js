@@ -269,14 +269,14 @@ export const showRuntimePanel = function (
             class="navbar navbar-default nav-controls"
             role="navigation"
           >
-            <div style="width: 85%; float: left;">
+            <div style="width: 280px; float: left;">
               <select
                 id="runtimes-${panelId}"
                 name="runtimes"
                 class="form-control"
               ></select>
             </div>
-            <div style="width: 10%; float: left;  margin-left: 15px;">
+            <div style="width: 30px; float: left; margin-left: 15px;">
               <button
                 class="btn btn-default pull-right"
                 onclick="eNMS.automation.downloadLogs(${service.id})"

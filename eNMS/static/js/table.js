@@ -951,7 +951,7 @@ tables.run = class RunTable extends Table {
 
   buttons(row) {
     return [
-      `<ul class="pagination pagination-lg" style="margin: 0px; width: 120px">
+      `<ul class="pagination pagination-lg" style="margin: 0px; width: 90px">
         <li>
           <button type="button" class="btn btn-sm btn-info"
           onclick="eNMS.automation.showRuntimePanel('logs', ${row.service},

@@ -85,6 +85,7 @@ from the controller
 - When importing existing workflows via service import, remove all existing services and edges from the workflow
 - Upload service from laptop instead of checking for file on the VM
 - Add Initial Form mechanism to update run properties and payload.
+- Add new "full results" button to results tree
 
 MIGRATION:
 

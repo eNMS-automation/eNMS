@@ -245,6 +245,7 @@ export const showRuntimePanel = function (
   newRuntime,
   fullResult
 ) {
+  if (runtime.startsWith("#runtimes")) runtime = $(runtime).val();
   if (!runtime) runtime = currentRuntime;
   const displayFunction =
     type == "logs"
@@ -309,7 +310,7 @@ export const showRuntimePanel = function (
               class="btn btn-info pull-right"
               onclick="eNMS.automation.showRuntimePanel(
                 'results', ${JSON.stringify(service).replace(/"/g, "'")},
-                '${runtime}', 'result', null, true)"
+                '#runtimes-${panelId}', 'result', null, true)"
               data-tooltip="All Results"
               type="button"
             >

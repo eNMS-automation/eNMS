@@ -245,7 +245,8 @@ export const showRuntimePanel = function (
   newRuntime,
   fullResult
 ) {
-  if (runtime.startsWith("#runtimes")) runtime = $(runtime).val();
+  console.log(runtime)
+  if (runtime?.startsWith("#runtimes")) runtime = $(runtime).val();
   if (!runtime) runtime = currentRuntime;
   const displayFunction =
     type == "logs"

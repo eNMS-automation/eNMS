@@ -964,12 +964,6 @@ tables.run = class RunTable extends Table {
           '${row.runtime}')" data-tooltip="Result Tree">
           <span class="glyphicon glyphicon-list-alt"></span></button>
         </li>
-        <li>
-          <button type="button" class="btn btn-sm btn-info"
-          onclick="eNMS.automation.showRuntimePanel('results', ${row.service},
-          '${row.runtime}', 'result', null, true)" data-tooltip="Result Table">
-          <span class="fa fa-table"></span></button>
-        </li>
       </ul>`,
     ];
   }

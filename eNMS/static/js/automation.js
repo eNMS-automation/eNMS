@@ -297,13 +297,30 @@ export const showRuntimePanel = function (
       } else if (panelType == "tree") {
         content = `
         <div class="modal-body">
-          <select
-            id="runtimes-${panelId}"
-            name="runtimes"
-            class="form-control"
-          ></select>
+          <div style="width: 670px; float: left;">
+            <select
+              id="runtimes-${panelId}"
+              name="runtimes"
+              class="form-control"
+            ></select>
+          </div>
+          <div style="width: 30px; float: left; margin-left: 15px;">
+            <button
+              class="btn btn-info pull-right"
+              onclick="eNMS.automation.showRuntimePanel(
+                'results', ${JSON.stringify(service).replace(/"/g, "'")},
+                '${runtime}', 'result', null, true)"
+              data-tooltip="All Results"
+              type="button"
+            >
+              <span
+                class="glyphicon glyphicon-list-alt"
+                aria-hidden="true"
+              ></span>
+            </button>
+          </div>
           <hr>
-          <div id="result-${panelId}" style="height: 500px"></div>
+          <div id="result-${panelId}" style="height: 500px; margin-top: 30px"></div>
         </div>`;
       } else {
         if (!table) table = "result";

@@ -1005,12 +1005,12 @@ function compareWorkflowResults(workflow) {
       <div class="modal-body">
         <div id="tooltip-overlay" class="overlay"></div>
         <form
-          id="search-form-result-${workflow.id}"
+          id="search-form-full_result-${workflow.id}"
           class="form-horizontal form-label-left"
           method="post"
         >
           <nav
-            id="controls-result-${workflow.id}"
+            id="controls-full_result-${workflow.id}"
             class="navbar navbar-default nav-controls"
             role="navigation"
           >
@@ -1020,19 +1020,20 @@ function compareWorkflowResults(workflow) {
             ></button>
           </nav>
           <table
-            id="table-result-${workflow.id}"
+            id="table-full_result-${workflow.id}"
             class="table table-striped table-bordered table-hover"
             cellspacing="0"
             width="100%"
           ></table>
         </form>
       </div>`,
-    type: "result",
+    size: "1000 600",
+    type: "full_result",
     title: "Result Comparison",
     id: workflow.id,
     callback: function () {
       let constraints = { top_workflow_id: workflow.id, top_workflow_id_filter: "equality" };
-      new tables["result"](workflow.id, constraints);
+      new tables["full_result"](workflow.id, constraints);
     },
   });
 }

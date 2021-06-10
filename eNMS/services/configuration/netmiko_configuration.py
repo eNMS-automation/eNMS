@@ -41,6 +41,7 @@ class NetmikoConfigurationService(ConnectionService):
         )
         netmiko_connection.send_config_set(
             config.splitlines(),
+            enter_config_mode=run.config_mode,
             delay_factor=run.delay_factor,
             exit_config_mode=run.exit_config_mode,
             strip_prompt=run.strip_prompt,

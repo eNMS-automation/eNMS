@@ -23,7 +23,7 @@ import {
   showInstancePanel,
   userIsActive,
 } from "./base.js";
-import { clearSearch, tableInstances } from "./table.js";
+import { clearSearch, tables, tableInstances } from "./table.js";
 
 export let arrowHistory = [""];
 export let arrowPointer = page == "workflow_builder" ? -1 : 0;
@@ -654,6 +654,7 @@ function updateRightClickBindings() {
     "Workflow Result Tree": () => showRuntimePanel("results", workflow),
     "Workflow Result Table": () =>
       showRuntimePanel("results", workflow, null, "full_result", null, true),
+    "Workflow Result Comparison": () => compareWorkflowResults(workflow),
     "Workflow Logs": () => showRuntimePanel("logs", workflow),
     "Add to Workflow": addServicePanel,
     "Stop Workflow": () => stopWorkflow(),
@@ -994,6 +995,36 @@ function getWorkflowTree() {
           });
         },
       });
+    },
+  });
+}
+
+function compareWorkflowResults(workflow) {
+  const content = `
+  <div class="modal-body">
+    <div id="tooltip-overlay" class="overlay"></div>
+    <form
+      id="search-form-result-${workflow.id}"
+      class="form-horizontal form-label-left"
+      method="post"
+    >
+      <table
+        id="table-result-${workflow.id}"
+        class="table table-striped table-bordered table-hover"
+        cellspacing="0"
+        width="100%"
+      ></table>
+    </form>
+  </div>`;
+  openPanel({
+    name: "result_comparison",
+    content: content,
+    type: "result",
+    title: "Result Comparison",
+    id: workflow.id,
+    callback: function () {
+      let constraints = { top_workflow_id: workflow.id, top_workflow_id_filter: "equality" };
+      new tables["result"](workflow.id, constraints);
     },
   });
 }

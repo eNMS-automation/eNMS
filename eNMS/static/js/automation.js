@@ -245,7 +245,6 @@ export const showRuntimePanel = function (
   newRuntime,
   fullResult
 ) {
-  console.log(runtime)
   if (runtime?.startsWith("#runtimes")) runtime = $(runtime).val();
   if (!runtime) runtime = currentRuntime;
   const displayFunction =

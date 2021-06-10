@@ -994,6 +994,7 @@ tables.result = class ResultTable extends Table {
   get controls() {
     const id = this.constraints.service_id || this.constraints.device_id;
     return [
+      this.columnDisplay(),
       `<button
         class="btn btn-info"
         onclick="eNMS.automation.displayDiff('${this.type}', ${id})"

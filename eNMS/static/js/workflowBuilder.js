@@ -1000,25 +1000,33 @@ function getWorkflowTree() {
 }
 
 function compareWorkflowResults(workflow) {
-  const content = `
-  <div class="modal-body">
-    <div id="tooltip-overlay" class="overlay"></div>
-    <form
-      id="search-form-result-${workflow.id}"
-      class="form-horizontal form-label-left"
-      method="post"
-    >
-      <table
-        id="table-result-${workflow.id}"
-        class="table table-striped table-bordered table-hover"
-        cellspacing="0"
-        width="100%"
-      ></table>
-    </form>
-  </div>`;
   openPanel({
-    name: "result_comparison",
-    content: content,
+    content: `
+      <div class="modal-body">
+        <div id="tooltip-overlay" class="overlay"></div>
+        <form
+          id="search-form-result-${workflow.id}"
+          class="form-horizontal form-label-left"
+          method="post"
+        >
+          <nav
+            id="controls-result-${workflow.id}"
+            class="navbar navbar-default nav-controls"
+            role="navigation"
+          >
+            <button
+              style="background:transparent; border:none; color:transparent;"
+              type="button"
+            ></button>
+          </nav>
+          <table
+            id="table-result-${workflow.id}"
+            class="table table-striped table-bordered table-hover"
+            cellspacing="0"
+            width="100%"
+          ></table>
+        </form>
+      </div>`,
     type: "result",
     title: "Result Comparison",
     id: workflow.id,

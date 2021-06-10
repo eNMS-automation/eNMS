@@ -1000,23 +1000,9 @@
     ]
   },
   "filtering": {
-    "access": [
-      "name",
-      "description"
-    ],
-    "changelog": [
-      "time",
-      "user",
-      "severity",
-      "content"
-    ],
-    "credential": [
-      "name",
-      "subtype",
-      "description",
-      "username",
-      "priority"
-    ],
+    "access": ["name", "description"],
+    "changelog": ["time", "user", "severity", "content"],
+    "credential": ["name", "subtype", "description", "username", "priority"],
     "device": [
       "name",
       "description",
@@ -1069,13 +1055,7 @@
       "trigger",
       "status"
     ],
-    "server": [
-      "name",
-      "description",
-      "ip_address",
-      "weight",
-      "status"
-    ],
+    "server": ["name", "description", "ip_address", "weight", "status"],
     "service": [
       "name",
       "type",
@@ -1086,19 +1066,8 @@
       "operating_system",
       "send_notification"
     ],
-    "session": [
-      "timestamp",
-      "device_name",
-      "user",
-      "name"
-    ],
-    "result": [
-      "runtime",
-      "duration",
-      "device_name",
-      "parent_device_name",
-      "success"
-    ],
+    "session": ["timestamp", "device_name", "user", "name"],
+    "result": ["runtime", "duration", "device_name", "parent_device_name", "success"],
     "task": [
       "name",
       "description",

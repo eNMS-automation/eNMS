@@ -1032,7 +1032,11 @@ function compareWorkflowResults(workflow) {
     title: "Result Comparison",
     id: workflow.id,
     callback: function () {
-      let constraints = { top_workflow_id: workflow.id, top_workflow_id_filter: "equality" };
+      let constraints = {
+        top_workflow_id: workflow.id,
+        top_workflow_id_filter: "equality",
+      };
+      // eslint-disable-next-line new-cap
       new tables["full_result"](workflow.id, constraints);
     },
   });

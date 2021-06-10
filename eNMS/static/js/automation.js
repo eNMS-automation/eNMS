@@ -539,7 +539,7 @@ function submitInitialForm(serviceId) {
     callback: (result) => {
       runLogic(result);
       $(`#initial_form-${serviceId}`).remove();
-    }
+    },
   });
 }
 

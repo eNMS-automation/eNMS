@@ -992,7 +992,10 @@ tables.result = class ResultTable extends Table {
   }
 
   get controls() {
-    const id = this.constraints.service_id || this.constraints.device_id;
+    const id =
+      this.constraints.parent_service_id ||
+      this.constraints.service_id ||
+      this.constraints.device_id;
     return [
       this.columnDisplay(),
       `<button

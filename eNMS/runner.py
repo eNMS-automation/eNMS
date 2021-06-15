@@ -390,7 +390,7 @@ class Runner:
         result_kw = {
             "run_id": self.main_run.id,
             "service": self.service.id,
-            "parent_service": self.main_run.service.name,
+            "parent_service_id": self.main_run.service.id,
             "parent_runtime": self.parent_runtime,
             "tags": self.main_run.tags,
         }

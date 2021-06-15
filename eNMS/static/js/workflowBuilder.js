@@ -1033,8 +1033,8 @@ function compareWorkflowResults(workflow) {
     id: workflow.id,
     callback: function () {
       let constraints = {
-        top_workflow_id: workflow.id,
-        top_workflow_id_filter: "equality",
+        parent_service_id: workflow.id,
+        parent_service_id_filter: "equality",
       };
       // eslint-disable-next-line new-cap
       new tables["full_result"](workflow.id, constraints);

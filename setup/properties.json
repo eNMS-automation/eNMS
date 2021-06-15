@@ -322,9 +322,22 @@
         "search": "text"
       },
       {
+        "data": "tags",
+        "title": "Tags",
+        "search": "text",
+        "visible": false
+      },
+      {
         "data": "duration",
         "title": "Duration",
         "search": "text"
+      },
+      {
+        "data": "parent_device_name",
+        "title": "Parent Device",
+        "search": "text",
+        "orderable": false,
+        "visible": false
       },
       {
         "data": "device_name",
@@ -695,9 +708,22 @@
         "search": "text"
       },
       {
+        "data": "tags",
+        "title": "Tags",
+        "search": "text",
+        "visible": false
+      },
+      {
         "data": "duration",
         "title": "Duration",
         "search": "text"
+      },
+      {
+        "data": "parent_device_name",
+        "title": "Parent Device",
+        "search": "text",
+        "orderable": false,
+        "visible": false
       },
       {
         "data": "service_name",

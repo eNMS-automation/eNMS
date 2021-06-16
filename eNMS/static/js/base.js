@@ -234,20 +234,22 @@ export function createTooltips() {
     const id = `tooltip-${$(this).attr("data-tooltip").replace(/\s/g, "")}`;
     jsPanel.tooltip.create({
       id: id,
+      borderRadius: '10px',
       callback: () => setTimeout(() => $(`#${id}`).fadeOut(1000), 2500),
-      content: `<p style="margin-right: 10px; margin-left: 10px; color: black">
-        <b>${$(this).attr("data-tooltip")}</b></p>`,
+      content: `<p style="margin-right: 10px; margin-left: 10px;
+        margin-bottom: 3px; color: white"><b>${$(this).attr("data-tooltip")}</b></p>`,
       contentSize: "auto",
       connector: true,
       delay: 800,
       header: false,
+      opacity: 0.8,
       position: {
         my: "center-bottom",
         at: "center-top",
         of: this,
       },
       target: this,
-      theme: "primary filledlight",
+      theme: "dark filleddark",
     });
   });
 }

@@ -87,6 +87,7 @@ from the controller
 - Add Initial Form mechanism to update run properties and payload.
 - Add new "full results" button to results tree
 - Fix bug in WB where multiple services stay selected
+- Add confirmation prompt in workflow builder before deletion
 
 MIGRATION:
 

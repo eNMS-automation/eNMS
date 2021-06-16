@@ -361,6 +361,31 @@ function addServicesToWorkflow() {
   });
 }
 
+function openDeletionPanel() {
+  openPanel({
+    name: "workflow_deletion",
+    content: `
+      <div class="modal-body">
+        Are you sure you want to permanently remove 
+        the current selection (${graph.getSelectedNodes().length} nodes 
+        - ${graph.getSelectedEdges().length} links) ?
+      </div>
+      <div class="modal-footer">
+        <center>
+          <button
+            type="button"
+            class="btn btn-danger"
+            onclick="eNMS.workflowBuilder.deleteSelection()"
+          >
+            Delete
+          </button>
+        </center>
+      </div><br>`,
+    title: "Deletion from workflow",
+    size: "auto",
+  });
+}
+
 function deleteSelection() {
   const selection = {
     nodes: graph.getSelectedNodes().filter((node) => !ends.has(node)),
@@ -662,7 +687,7 @@ function updateRightClickBindings() {
     "Workflow Logs": () => showRuntimePanel("logs", workflow),
     "Add to Workflow": addServicePanel,
     "Stop Workflow": () => stopWorkflow(),
-    Delete: deleteSelection,
+    Delete: openDeletionPanel,
     "Service Name": (service) => copyToClipboard({ text: service.name }),
     "Top-level Result": getResultLink,
     "Per-device Result": (node) => getResultLink(node, true),
@@ -1110,6 +1135,7 @@ export function initWorkflowBuilder() {
 configureNamespace("workflowBuilder", [
   addServicesToWorkflow,
   createLabel,
+  deleteSelection,
   highlightService,
   filterWorkflowTable,
   getWorkflowState,

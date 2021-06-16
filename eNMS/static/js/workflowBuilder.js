@@ -59,6 +59,7 @@ const options = {
   ...theme.workflow,
 };
 
+let ctrlKeyPressed;
 let nodes;
 let edges;
 let graph;
@@ -110,6 +111,9 @@ export function displayWorkflow(workflowData) {
       properties.event.stopPropagation();
       properties.event.preventDefault();
     }
+  });
+  graph.on("click", () => {
+    if (!ctrlKeyPressed) graph.selectNodes([]);
   });
   graph.on("doubleClick", function (event) {
     mousePosition = event.pointer.canvas;
@@ -1055,6 +1059,12 @@ function highlightService(service) {
 }
 
 export function initWorkflowBuilder() {
+  window.onkeydown = () => {
+    ctrlKeyPressed = true;
+  };
+  window.onkeyup = () => {
+    ctrlKeyPressed = false;
+  };
   vis.Network.prototype.zoom = function (scale) {
     const animationOptions = {
       scale: this.getScale() + scale,

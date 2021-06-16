@@ -362,28 +362,34 @@ function addServicesToWorkflow() {
 }
 
 function openDeletionPanel() {
-  openPanel({
-    name: "workflow_deletion",
-    content: `
-      <div class="modal-body">
-        Are you sure you want to permanently remove 
-        the current selection (${graph.getSelectedNodes().length} nodes 
-        - ${graph.getSelectedEdges().length} links) ?
-      </div>
-      <div class="modal-footer">
-        <center>
-          <button
-            type="button"
-            class="btn btn-danger"
-            onclick="eNMS.workflowBuilder.deleteSelection()"
-          >
-            Delete
-          </button>
-        </center>
-      </div><br>`,
-    title: "Deletion from workflow",
-    size: "auto",
-  });
+  const nodeSelection = graph.getSelectedNodes().length;
+  const edgeSelection = graph.getSelectedEdges().length;
+  if (!nodeSelection && !edgeSelection) {
+    notify("Nothing has been selected for deletion.", "error", 5);
+  } else {
+    openPanel({
+      name: "workflow_deletion",
+      content: `
+        <div class="modal-body">
+          Are you sure you want to permanently remove the current selection
+          (<b>${nodeSelection} node${nodeSelection > 1 ? "s" : ""}
+          and ${edgeSelection} link${edgeSelection > 1 ? "s" : ""}</b>) ?
+        </div>
+        <div class="modal-footer">
+          <center>
+            <button
+              type="button"
+              class="btn btn-danger"
+              onclick="eNMS.workflowBuilder.deleteSelection()"
+            >
+              Delete
+            </button>
+          </center>
+        </div><br>`,
+      title: "Deletion from workflow",
+      size: "auto",
+    });
+  }
 }
 
 function deleteSelection() {
@@ -410,6 +416,7 @@ function deleteSelection() {
       workflow.last_modified = updateTime;
       notify("Selection removed.", "success", 5);
       switchMode(currentMode, true);
+      $("#workflow_deletion").remove();
     },
   });
 }

@@ -9,6 +9,6 @@
 - {name: '2021-03-29 09:40:15.682829', type: plan, view: 'Regression View : Basic
     Example', x: 0.0, y: 10.0, z: 0.0}
 - {device: Austin, name: '2021-05-02 03:49:17.745962', type: node, view: 'Regression
-    View : Basic Example', x: -3.5314743547792204, y: 10.0, z: 119.47871920651392}
+    View : Basic Example', x: -150.5314743547792204, y: 10.0, z: 119.47871920651392}
 - {device: Washington, name: '2021-05-02 03:49:17.747779', type: node, view: 'Regression
-    View : Basic Example', x: 0.0, y: 10.0, z: 0.0}
+    View : Basic Example', x: 0.0, y: 10.0, z: 0.0, model: "juniper_ex3300"}

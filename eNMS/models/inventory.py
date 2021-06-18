@@ -458,6 +458,7 @@ class Node(ViewObject):
     __mapper_args__ = {"polymorphic_identity": "node"}
     parent_type = "view_object"
     id = db.Column(Integer, ForeignKey(ViewObject.id), primary_key=True)
+    model = db.Column(db.SmallString)
     device_id = db.Column(Integer, ForeignKey("device.id"))
     device = relationship("Device", foreign_keys="Node.device_id")
     device_name = association_proxy("device", "name")

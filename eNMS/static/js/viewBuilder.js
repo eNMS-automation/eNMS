@@ -179,7 +179,6 @@ function switchMode(mode) {
 }
 
 function drawNode(node) {
-  console.log(node)
   let geometry;
   let material;
   if (node.type == "plan") {
@@ -192,7 +191,7 @@ function drawNode(node) {
       opacity: 0.3,
     });
   } else {
-    if (true) {
+    if (node.model) {
       const loadingManager = new THREE.LoadingManager(function () {
         scene.add(daeModels[node.id]);
       });

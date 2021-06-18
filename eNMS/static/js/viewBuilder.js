@@ -35,7 +35,7 @@ let pointer;
 let activeControls = false;
 let raycaster;
 let texture;
-let daeModel;
+let daeModels = {};
 
 function displayView(currentPath) {
   const [viewId] = currentPath.split(">").slice(-1);
@@ -82,21 +82,11 @@ function displayView(currentPath) {
         activeControls = true;
       });
 
-      const loadingManager = new THREE.LoadingManager(function () {
-        scene.add(daeModel);
-      });
-      const loader = new THREE.ColladaLoader(loadingManager);
-      loader.load("/static/img/juniper_ex3300.dae", function (collada) {
-        daeModel = collada.scene;
-        daeModel.scale.set(10, 10, 10);
-        daeModel.position.set(100, 20, 100);
-      });
       const ambientLight = new THREE.AmbientLight(0xcccccc, 0.4);
       scene.add(ambientLight);
       const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
       directionalLight.position.set(1, 1, 0).normalize();
       scene.add(directionalLight);
-
       scene.add(transformControls);
       updateRightClickBindings(controls);
       view.objects.map(drawNode);
@@ -189,6 +179,7 @@ function switchMode(mode) {
 }
 
 function drawNode(node) {
+  console.log(node)
   let geometry;
   let material;
   if (node.type == "plan") {
@@ -201,12 +192,25 @@ function drawNode(node) {
       opacity: 0.3,
     });
   } else {
-    material = new THREE.MeshBasicMaterial({
-      color: 0x3c8c8c,
-      opacity: 0.8,
-      transparent: true,
-    });
-    geometry = new THREE.CylinderGeometry(30, 30, 20, 32);
+    if (true) {
+      const loadingManager = new THREE.LoadingManager(function () {
+        scene.add(daeModels[node.id]);
+      });
+      const loader = new THREE.ColladaLoader(loadingManager);
+      loader.load("/static/img/juniper_ex3300.dae", function (collada) {
+        daeModels[node.id] = collada.scene;
+        daeModels[node.id].scale.set(10, 10, 10);
+        daeModels[node.id].position.set(node.x, node.y, node.z);
+      });
+      return
+    } else {
+      material = new THREE.MeshBasicMaterial({
+        color: 0x3c8c8c,
+        opacity: 0.8,
+        transparent: true,
+      });
+      geometry = new THREE.CylinderGeometry(30, 30, 20, 32);
+    }
   }
   const mesh = new THREE.Mesh(geometry, material);
   mesh.position.set(node.x, Math.max(node.y, 10), node.z);
@@ -218,7 +222,6 @@ function drawNode(node) {
   nodes[node.id] = mesh;
   mesh.userData = node;
   scene.add(mesh);
-  render();
 }
 
 function getIntersects(event) {
@@ -345,7 +348,7 @@ function updateRightClickBindings(controls) {
 }
 
 function render() {
-  if (daeModel) {
+  if (Object.keys(daeModels).length) {
     renderer.render(scene, camera);
     labelRenderer.render(scene, camera);
   }

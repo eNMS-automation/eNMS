@@ -198,7 +198,7 @@ function drawNode(node) {
   } else {
     if (node.model) {
       const loader = new THREE.ColladaLoader().load(
-        "/static/img/view/models/cisco_catalyst_me4924.dae",
+        `/static/img/view/models/${node.model}.dae`,
         function (collada) {
           daeModels[node.id] = collada.scene;
           daeModels[node.id].scale.set(10, 10, 10);

@@ -199,8 +199,11 @@ function drawNode(node) {
         daeModels[node.id] = collada.scene;
         daeModels[node.id].scale.set(10, 10, 10);
         daeModels[node.id].position.set(node.x, node.y, node.z);
+        daeModels[node.id].traverse(function (child) {
+          child.userData = { type: "collada", id: node.id };
+        });
       });
-      return
+      return;
     } else {
       material = new THREE.MeshBasicMaterial({
         color: 0x3c8c8c,

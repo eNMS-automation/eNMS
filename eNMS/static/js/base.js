@@ -234,7 +234,7 @@ export function createTooltips() {
     const id = `tooltip-${$(this).attr("data-tooltip").replace(/\s/g, "")}`;
     jsPanel.tooltip.create({
       id: id,
-      borderRadius: '10px',
+      borderRadius: "10px",
       callback: () => setTimeout(() => $(`#${id}`).fadeOut(1000), 2500),
       content: `<p style="margin-right: 10px; margin-left: 10px;
         margin-bottom: 3px; color: white"><b>${$(this).attr("data-tooltip")}</b></p>`,

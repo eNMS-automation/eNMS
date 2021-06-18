@@ -123,7 +123,10 @@ function onMouseDown(event) {
   if (!intersects.length) {
     $(".rc-object-menu").hide();
     $(".global").show();
-  }
+  } else {
+    $(".global").hide();
+    $(".rc-object-menu").show();
+  }   
   render();
 }
 

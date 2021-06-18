@@ -102,7 +102,7 @@ function onMouseDown(event) {
     if (object.userData.type == "collada") {
       object = daeModels[object.userData.id];
       selectedObjects.push(object);
-      transformControls.attach(...object.children)
+      transformControls.attach(...object.children);
     } else {
       if (currentMode == "select") {
         object.material.color.set(0xff0000);
@@ -197,16 +197,18 @@ function drawNode(node) {
     });
   } else {
     if (node.model) {
-      const loader = new THREE.ColladaLoader();
-      loader.load("/static/img/view/models/cisco_catalyst_me4924.dae", function (collada) {
-        daeModels[node.id] = collada.scene;
-        daeModels[node.id].scale.set(10, 10, 10);
-        daeModels[node.id].position.set(node.x, node.y, node.z);
-        daeModels[node.id].traverse(function (child) {
-          child.userData = { type: "collada", id: node.id };
-        });
-        scene.add(daeModels[node.id])
-      });
+      const loader = new THREE.ColladaLoader().load(
+        "/static/img/view/models/cisco_catalyst_me4924.dae",
+        function (collada) {
+          daeModels[node.id] = collada.scene;
+          daeModels[node.id].scale.set(10, 10, 10);
+          daeModels[node.id].position.set(node.x, node.y, node.z);
+          daeModels[node.id].traverse(function (child) {
+            child.userData = { type: "collada", id: node.id };
+          });
+          scene.add(daeModels[node.id]);
+        }
+      );
       return;
     } else {
       material = new THREE.MeshBasicMaterial({

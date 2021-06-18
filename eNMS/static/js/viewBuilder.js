@@ -98,12 +98,18 @@ function displayView(currentPath) {
 function onMouseDown(event) {
   const intersects = getIntersects(event);
   if (intersects.length > 0) {
-    const object = intersects[0].object;
-    if (currentMode == "select") {
-      object.material.color.set(0xff0000);
+    let object = intersects[0].object;
+    if (object.userData.type == "collada") {
+      object = daeModels[object.userData.id];
       selectedObjects.push(object);
-    } else if (!activeControls && object !== transformControls.object) {
-      transformControls.attach(object);
+      transformControls.attach(...object.children)
+    } else {
+      if (currentMode == "select") {
+        object.material.color.set(0xff0000);
+        selectedObjects.push(object);
+      } else if (!activeControls && object !== transformControls.object) {
+        transformControls.attach(object);
+      }
     }
   } else {
     activeControls = false;
@@ -191,10 +197,7 @@ function drawNode(node) {
     });
   } else {
     if (node.model) {
-      const loadingManager = new THREE.LoadingManager(function () {
-        scene.add(daeModels[node.id]);
-      });
-      const loader = new THREE.ColladaLoader(loadingManager);
+      const loader = new THREE.ColladaLoader();
       loader.load("/static/img/view/models/juniper_ex3300.dae", function (collada) {
         daeModels[node.id] = collada.scene;
         daeModels[node.id].scale.set(10, 10, 10);
@@ -202,6 +205,7 @@ function drawNode(node) {
         daeModels[node.id].traverse(function (child) {
           child.userData = { type: "collada", id: node.id };
         });
+        scene.add(daeModels[node.id])
       });
       return;
     } else {

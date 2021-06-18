@@ -12064,19 +12064,19 @@
     </library_effects>
     <library_images>
         <image id="ID10">
-            <init_from>1/Metal_Aluminum_Anodized.jpg</init_from>
+            <init_from>juniper_ex3300/Metal_Aluminum_Anodized.jpg</init_from>
         </image>
         <image id="ID130">
-            <init_from>1/sfp-front-unlocked.png</init_from>
+            <init_from>juniper_ex3300/sfp-front-unlocked.png</init_from>
         </image>
         <image id="ID1822">
-            <init_from>1/EX3300-Front.png</init_from>
+            <init_from>juniper_ex3300/EX3300-Front.png</init_from>
         </image>
         <image id="ID2004">
-            <init_from>1/Metal_Corrogated_Shiny.jpg</init_from>
+            <init_from>juniper_ex3300/Metal_Corrogated_Shiny.jpg</init_from>
         </image>
         <image id="ID2097">
-            <init_from>1/EX3300-Rear.png</init_from>
+            <init_from>juniper_ex3300/EX3300-Rear.png</init_from>
         </image>
     </library_images>
     <library_nodes>

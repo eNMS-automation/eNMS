@@ -89,6 +89,7 @@ from the controller
 - Fix bug in WB where multiple services stay selected
 - Add confirmation prompt in workflow builder before deletion
 - Change default postprocessing mode to "Run on success only"
+- Add log in case postprocessing is skipped
 
 MIGRATION:
 

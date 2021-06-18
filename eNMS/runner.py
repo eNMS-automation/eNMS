@@ -448,21 +448,29 @@ class Runner:
                 results = self.convert_result(results)
                 if "success" not in results:
                     results["success"] = True
-                if self.service.postprocessing and (
-                    self.postprocessing_mode == "always"
-                    or self.postprocessing_mode == "failure"
-                    and not results["success"]
-                    or self.postprocessing_mode == "success"
-                    and results["success"]
-                ):
-                    try:
-                        _, exec_variables = self.eval(
-                            self.service.postprocessing, function="exec", **locals()
+                if self.service.postprocessing:
+                    if (
+                        self.postprocessing_mode == "always"
+                        or self.postprocessing_mode == "failure"
+                        and not results["success"]
+                        or self.postprocessing_mode == "success"
+                        and results["success"]
+                    ):
+                        try:
+                            _, exec_variables = self.eval(
+                                self.service.postprocessing, function="exec", **locals()
+                            )
+                            if isinstance(exec_variables.get("retries"), int):
+                                retries = exec_variables["retries"]
+                        except SystemExit:
+                            pass
+                    else:
+                        log = (
+                            "Postprocessing was skipped as it is set to "
+                            f"{self.postprocessing_mode} only, but the service "
+                            f"{'passed' if results['success'] else 'failed'})"
                         )
-                        if isinstance(exec_variables.get("retries"), int):
-                            retries = exec_variables["retries"]
-                    except SystemExit:
-                        pass
+                        self.log("warning", log, device)
                 run_validation = (
                     self.validation_condition == "always"
                     or self.validation_condition == "failure"

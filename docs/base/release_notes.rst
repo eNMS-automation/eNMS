@@ -88,6 +88,7 @@ from the controller
 - Add new "full results" button to results tree
 - Fix bug in WB where multiple services stay selected
 - Add confirmation prompt in workflow builder before deletion
+- Change default postprocessing mode to "Run on success only"
 
 MIGRATION:
 

@@ -80,7 +80,7 @@ class Service(AbstractBase):
     iteration_devices_property = db.Column(db.TinyString, default="ip_address")
     preprocessing = db.Column(db.LargeString)
     postprocessing = db.Column(db.LargeString)
-    postprocessing_mode = db.Column(db.TinyString, default="always")
+    postprocessing_mode = db.Column(db.TinyString, default="success")
     log_level = db.Column(Integer, default=1)
     logs = relationship(
         "ServiceLog",

@@ -574,9 +574,9 @@ class ServiceForm(BaseForm):
     postprocessing = StringField(type="code", python=True, widget=TextArea())
     postprocessing_mode = SelectField(
         choices=(
-            ("always", "Always run"),
             ("success", "Run on success only"),
             ("failure", "Run on failure only"),
+            ("always", "Always run"),
         )
     )
     default_access = SelectField(

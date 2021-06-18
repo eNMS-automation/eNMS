@@ -81,7 +81,6 @@ function displayView(currentPath) {
       transformControls.addEventListener("mouseDown", function () {
         activeControls = true;
       });
-
       const ambientLight = new THREE.AmbientLight(0xcccccc, 0.4);
       scene.add(ambientLight);
       const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
@@ -229,7 +228,7 @@ function getIntersects(event) {
   const height = -((event.clientY - 70) / $(".main_frame").height()) * 2 + 1;
   pointer.set(width, height);
   raycaster.setFromCamera(pointer, camera);
-  return raycaster.intersectObjects(scene.children);
+  return raycaster.intersectObjects(scene.children, true);
 }
 
 function onMouseMove(event) {

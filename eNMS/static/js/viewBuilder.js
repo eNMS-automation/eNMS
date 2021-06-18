@@ -198,7 +198,7 @@ function drawNode(node) {
   } else {
     if (node.model) {
       const loader = new THREE.ColladaLoader();
-      loader.load("/static/img/view/models/juniper_ex3300.dae", function (collada) {
+      loader.load("/static/img/view/models/cisco_catalyst_me4924.dae", function (collada) {
         daeModels[node.id] = collada.scene;
         daeModels[node.id].scale.set(10, 10, 10);
         daeModels[node.id].position.set(node.x, node.y, node.z);

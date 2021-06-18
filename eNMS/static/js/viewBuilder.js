@@ -195,7 +195,7 @@ function drawNode(node) {
         scene.add(daeModels[node.id]);
       });
       const loader = new THREE.ColladaLoader(loadingManager);
-      loader.load("/static/img/juniper_ex3300.dae", function (collada) {
+      loader.load("/static/img/view/models/juniper_ex3300.dae", function (collada) {
         daeModels[node.id] = collada.scene;
         daeModels[node.id].scale.set(10, 10, 10);
         daeModels[node.id].position.set(node.x, node.y, node.z);

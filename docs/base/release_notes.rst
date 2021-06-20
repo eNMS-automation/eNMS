@@ -90,6 +90,7 @@ from the controller
 - Add confirmation prompt in workflow builder before deletion
 - Change default postprocessing mode to "Run on success only"
 - Add log in case postprocessing is skipped
+- Add SSH key support in generic file transfer service
 
 MIGRATION:
 

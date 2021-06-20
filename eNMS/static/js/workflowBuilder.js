@@ -366,6 +366,8 @@ function openDeletionPanel() {
   const edgeSelection = graph.getSelectedEdges().length;
   if (!nodeSelection && !edgeSelection) {
     notify("Nothing has been selected for deletion.", "error", 5);
+  } else if (nodeSelection == 1 || edgeSelection == 1) {
+    deleteSelection();
   } else {
     openPanel({
       name: "workflow_deletion",

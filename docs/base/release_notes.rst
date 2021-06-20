@@ -91,6 +91,7 @@ from the controller
 - Change default postprocessing mode to "Run on success only"
 - Add log in case postprocessing is skipped
 - Add SSH key support in generic file transfer service
+- Always set "look_for_keys" to False in generic file transfer service - no longer an option
 
 MIGRATION:
 

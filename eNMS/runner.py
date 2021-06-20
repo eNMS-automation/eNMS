@@ -128,10 +128,10 @@ class Runner:
         for pool in self.target_pools:
             devices |= set(pool.devices)
         if not devices:
-            if self.device_query:
+            if service.device_query:
                 devices |= self.compute_devices_from_query(
-                    self.device_query,
-                    self.device_query_property,
+                    service.device_query,
+                    service.device_query_property,
                 )
             devices |= set(service.target_devices)
             for pool in service.target_pools:

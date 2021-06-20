@@ -50,11 +50,9 @@ class GenericFileTransferService(Service):
         source = run.sub(run.source_file, locals())
         destination = run.sub(run.destination_file, locals())
         credentials = run.get_credentials(device)
+        credentials.pop("secret", None)
         ssh_client.connect(
-            device.ip_address,
-            look_for_keys=run.look_for_keys,
-            username=credentials["username"],
-            password=credentials["password"],
+            device.ip_address, look_for_keys=run.look_for_keys, **credentials
         )
         if run.source_file_includes_globbing:
             glob_source_file_list = glob(source, recursive=False)

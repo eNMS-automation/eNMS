@@ -98,6 +98,7 @@ class Service(AbstractBase):
     validation_condition = db.Column(db.TinyString, default="none")
     conversion_method = db.Column(db.TinyString, default="none")
     validation_method = db.Column(db.TinyString, default="text")
+    validation_section = db.Column(db.LargeString, default="results['result']")
     content_match = db.Column(db.LargeString)
     content_match_regex = db.Column(Boolean, default=False)
     dict_match = db.Column(db.Dict)

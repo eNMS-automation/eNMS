@@ -677,6 +677,11 @@
                   {{ form.validation_method(id=form_type + '-validation_method',
                   class="form-control add-id") }}
                 </div>
+                {{ form.validation_section.label() }}
+                <div class="form-group">
+                  {{ form.validation_section(id=form_type + '-validation_section',
+                  class="form-control add-id") }}
+                </div>
                 {{ form.content_match.label() }}
                 <div class="form-group">
                   {{ form.content_match(id=form_type + '-content_match',

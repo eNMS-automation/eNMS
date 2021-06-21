@@ -617,6 +617,7 @@ class ServiceForm(BaseForm):
             ("dict_equal", "Validation by dictionary equality"),
         ),
     )
+    validation_section = StringField("Section to Validate", default="results['result']")
     content_match = StringField(
         "Content Match", widget=TextArea(), render_kw={"rows": 8}, substitution=True
     )

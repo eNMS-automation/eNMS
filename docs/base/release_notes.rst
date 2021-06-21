@@ -92,6 +92,7 @@ from the controller
 - Add log in case postprocessing is skipped
 - Add SSH key support in generic file transfer service
 - Always set "look_for_keys" to False in generic file transfer service - no longer an option
+- Add validation_section mechanism: set path to section of the result to validate (default: results["result"])
 
 MIGRATION:
 

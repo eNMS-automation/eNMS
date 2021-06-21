@@ -479,7 +479,8 @@ class Runner:
                     and results["success"]
                 )
                 if run_validation:
-                    self.validate_result(results, device)
+                    section = self.eval(self.validation_section, results=results)[0]
+                    results.update(self.validate_result(section, device))
                     if self.negative_logic:
                         results["success"] = not results["success"]
                 if results["success"]:
@@ -687,22 +688,23 @@ class Runner:
             }
         return result
 
-    def validate_result(self, results, device):
+    def validate_result(self, section, device):
         if self.validation_method == "text":
             match = self.sub(self.content_match, locals())
-            str_result = str(results["result"])
+            str_section = str(section)
             if self.delete_spaces_before_matching:
-                match, str_result = map(self.space_deleter, (match, str_result))
+                match, str_section = map(self.space_deleter, (match, str_section))
             success = (
                 self.content_match_regex
-                and bool(search(match, str_result))
-                or match in str_result
+                and bool(search(match, str_section))
+                or match in str_section
                 and not self.content_match_regex
             )
         else:
             match = self.sub(self.dict_match, locals())
-            success = self.match_dictionary(results["result"], match)
-        results.update({"match": match, "success": success})
+            success = self.match_dictionary(section, match)
+        validation = {"path": self.validation_section, "value": section, "match": match}
+        return {"success": success, "validation": validation}
 
     def match_dictionary(self, result, match, first=True):
         if self.validation_method == "dict_equal":

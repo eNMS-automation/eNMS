@@ -395,7 +395,7 @@
     'Regression Workflow: Unix Command & Chell, Ping Service, Jump on Connect mechanism': *id065
     'Regression Workflow: Using get_var, set_var, get_result functions': *id066
     'Regression Workflow: VRF Creation and Deletion with Netmiko': *id043
-    'Regression Workflow: Validation Section Mechanism': [356, 43]
+    'Regression Workflow: Validation Section Mechanism': [392, 138]
     'Regression Workflow: Workflow and Subworkflow Iteration': [644, 233]
     'Regression Workflow: Workflow of Workflows': *id067
     'Regression workflow P: large workflow (scalability)': *id057
@@ -17301,6 +17301,11 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels:
+    388cd977-3b5c-4159-a105-22c931b01eb8:
+      alignment: left
+      content: "Test that \"OL\" is included in [\"result\": {\"a\": {\"b\": \"LOL\"\
+        }}}\r\nvia string inclusion validation."
+      positions: ['8.78662109375', '123.17236328125']
     47a0ea22-8a52-4ca6-87ae-70e0da8baea5:
       alignment: left
       content: "results[\"result\"] (default validation section)\r\nshould be equal\
@@ -17311,8 +17316,8 @@
       content: "results[\"new_key\"] set to \"{\"a\":\"LLLoLLL\",\"c\":[\"3\"]}\"\r\
         \nshould be included in \"{\"a\": \"LLLoLLL\",\"b\": {\"c\": \"JJJkJJJ\"},\"\
         c\": [1, \"3\"]}"
-      positions: ['29.78662109375', '-267.2469482421875']
-  last_modified: '2021-06-22 03:07:33.502961'
+      positions: [29, -267]
+  last_modified: '2021-06-22 08:16:53.417258'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -17338,7 +17343,8 @@
   send_notification_method: mail
   services: ['[Shared] Start', '[Shared] End', '[Regression Workflow: Validation Section
       Mechanism] Dict Equality Validation of default path', '[Regression Workflow:
-      Validation Section Mechanism] Dict Inclusion Validation of new key']
+      Validation Section Mechanism] Dict Inclusion Validation of new key', '[Regression
+      Workflow: Validation Section Mechanism] Nested Result String Validation']
   shared: false
   skip: {}
   skip_query: ''
@@ -17494,5 +17500,74 @@
   validation_condition: success
   validation_method: dict_included
   validation_section: results['new_key']
+  vendor: ''
+  waiting_time: 0
+- access_groups: admin
+  completion_time: 1
+  content_match: OL
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credential_type: any
+  default_access: creator
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  impacting: false
+  include_device_results: false
+  include_link_in_summary: false
+  initial_form: ''
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2021-06-22 08:17:12.564512'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Regression Workflow: Validation Section Mechanism] Nested Result String
+    Validation'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: ['All devices, links, services and users']
+  positions:
+    'Regression Workflow: Validation Section Mechanism': [77, 51]
+  postprocessing: ''
+  postprocessing_mode: success
+  preprocessing: ''
+  priority: 1
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: Nested Result String Validation
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: success
+  source_code: "\r\n# Click on \"i\" to right of \"Source Code\" for examples.\r\n\
+    \r\nresult = {\"a\": {\"b\": \"LOL\"}}\r\nresults[\"success\"] = True\r\nresults[\"\
+    result\"] = result"
+  target_devices: []
+  target_pools: []
+  time_between_retries: 10
+  type: python_snippet_service
+  update_pools_after_running: false
+  update_target_pools: false
+  validation_condition: success
+  validation_method: text
+  validation_section: results['result']["a"]["b"]
   vendor: ''
   waiting_time: 0

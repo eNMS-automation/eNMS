@@ -1402,7 +1402,12 @@
   source: '[Regression Workflow: Validation Section Mechanism] Dict Equality Validation
     of default path', subtype: success, type: workflow_edge, workflow: 'Regression
     Workflow: Validation Section Mechanism'}
-- {color: green, destination: '[Shared] End', label: success, name: '2021-06-22 02:57:04.934931',
+- {color: green, destination: '[Regression Workflow: Validation Section Mechanism]
+    Nested Result String Validation', label: success, name: '2021-06-22 08:15:57.434165',
   source: '[Regression Workflow: Validation Section Mechanism] Dict Inclusion Validation
     of new key', subtype: success, type: workflow_edge, workflow: 'Regression Workflow:
+    Validation Section Mechanism'}
+- {color: green, destination: '[Shared] End', label: success, name: '2021-06-22 08:15:59.744208',
+  source: '[Regression Workflow: Validation Section Mechanism] Nested Result String
+    Validation', subtype: success, type: workflow_edge, workflow: 'Regression Workflow:
     Validation Section Mechanism'}

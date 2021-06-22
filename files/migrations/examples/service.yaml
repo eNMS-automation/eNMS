@@ -136,6 +136,7 @@
     'Regression Workflow: Unix Command & Chell, Ping Service, Jump on Connect mechanism': *id024
     'Regression Workflow: Using get_var, set_var, get_result functions': *id025
     'Regression Workflow: VRF Creation and Deletion with Netmiko': *id002
+    'Regression Workflow: Validation Section Mechanism': [-413, -265]
     'Regression Workflow: Workflow and Subworkflow Iteration': [-313, 364]
     'Regression Workflow: Workflow of Workflows': *id026
     'Regression workflow P: large workflow (scalability)': *id016
@@ -254,6 +255,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -393,6 +395,7 @@
     'Regression Workflow: Unix Command & Chell, Ping Service, Jump on Connect mechanism': *id065
     'Regression Workflow: Using get_var, set_var, get_result functions': *id066
     'Regression Workflow: VRF Creation and Deletion with Netmiko': *id043
+    'Regression Workflow: Validation Section Mechanism': [356, 43]
     'Regression Workflow: Workflow and Subworkflow Iteration': [644, 233]
     'Regression Workflow: Workflow of Workflows': *id067
     'Regression workflow P: large workflow (scalability)': *id057
@@ -521,6 +524,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -584,6 +588,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - a_dict: {}
@@ -668,6 +673,7 @@
   url: https://www.google.fr/
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -745,6 +751,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   vrf_name: configure_BGP_test
   waiting_time: 0
@@ -828,6 +835,7 @@
   use_device_driver: true
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -914,6 +922,7 @@
   use_device_driver: true
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: Arista
   waiting_time: 0
 - access_groups: ''
@@ -1012,6 +1021,7 @@
   use_device_driver: true
   validation_condition: success
   validation_method: text
+  validation_section: results['result']
   vendor: Arista
   waiting_time: 0
 - access_groups: ''
@@ -1099,6 +1109,7 @@
   use_device_driver: true
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: Arista
   waiting_time: 1
 - access_groups: ''
@@ -1196,6 +1207,7 @@
   use_device_driver: true
   validation_condition: success
   validation_method: text
+  validation_section: results['result']
   vendor: Arista
   waiting_time: 0
 - access_groups: ''
@@ -1275,6 +1287,7 @@
   use_device_driver: true
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: Arista
   waiting_time: 0
 - access_groups: ''
@@ -1363,6 +1376,7 @@
   username: admin
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   verify_ssl_certificate: true
   waiting_time: 0
@@ -1445,6 +1459,7 @@
   use_device_driver: true
   validation_condition: none
   validation_method: dict_included
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -1526,6 +1541,7 @@
   use_device_driver: true
   validation_condition: none
   validation_method: dict_included
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -1607,6 +1623,7 @@
   use_device_driver: true
   validation_condition: none
   validation_method: dict_included
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -1686,6 +1703,7 @@
   use_device_driver: true
   validation_condition: none
   validation_method: dict_included
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -1755,6 +1773,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -1830,6 +1849,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -1932,6 +1952,7 @@
   use_device_driver: true
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: Arista
   waiting_time: 0
 - access_groups: ''
@@ -2025,6 +2046,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   variable1: simple_variable
   variable2: regex_variable
   variable3: textfsm_variable
@@ -2105,6 +2127,7 @@
   use_device_driver: true
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -2201,6 +2224,7 @@
   use_device_driver: true
   validation_condition: success
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -2296,6 +2320,7 @@
   use_device_driver: true
   validation_condition: success
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -2390,6 +2415,7 @@
   use_device_driver: true
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -2484,6 +2510,7 @@
   use_device_driver: true
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -2552,6 +2579,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -2623,6 +2651,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -2715,6 +2744,7 @@
   use_device_driver: true
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -2807,6 +2837,7 @@
   use_device_driver: true
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -2899,6 +2930,7 @@
   use_device_driver: true
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -2987,6 +3019,7 @@
   use_device_driver: true
   validation_condition: success
   validation_method: dict_equal
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -3074,6 +3107,7 @@
   use_device_driver: true
   validation_condition: success
   validation_method: dict_included
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -3172,6 +3206,7 @@
   use_device_driver: true
   validation_condition: success
   validation_method: dict_included
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -3259,6 +3294,7 @@
   use_device_driver: true
   validation_condition: success
   validation_method: dict_equal
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -3346,6 +3382,7 @@
   use_device_driver: true
   validation_condition: success
   validation_method: dict_included
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -3418,6 +3455,7 @@
   update_target_pools: false
   validation_condition: success
   validation_method: dict_included
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -3489,6 +3527,7 @@
   update_target_pools: false
   validation_condition: success
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -3560,6 +3599,7 @@
   update_target_pools: false
   validation_condition: success
   validation_method: dict_included
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -3654,6 +3694,7 @@
   use_device_driver: true
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -3746,6 +3787,7 @@
   use_device_driver: true
   validation_condition: success
   validation_method: text
+  validation_section: results['result']
   vendor: Arista
   waiting_time: 0
 - access_groups: ''
@@ -3838,6 +3880,7 @@
   use_device_driver: true
   validation_condition: success
   validation_method: text
+  validation_section: results['result']
   vendor: Arista
   waiting_time: 0
 - access_groups: ''
@@ -3930,6 +3973,7 @@
   use_device_driver: true
   validation_condition: success
   validation_method: text
+  validation_section: results['result']
   vendor: Arista
   waiting_time: 0
 - access_groups: ''
@@ -4010,6 +4054,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -4099,6 +4144,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   variable1: boolean
   variable2: list
   variable3: dict
@@ -4191,6 +4237,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   variable1: list
   variable2: list
   variable3: dict
@@ -4268,6 +4315,7 @@
   username: admin
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   verify_ssl_certificate: false
   waiting_time: 0
@@ -4348,6 +4396,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -4443,6 +4492,7 @@
   use_device_driver: true
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -4518,6 +4568,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -4628,6 +4679,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -4711,6 +4763,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -4798,6 +4851,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -4923,6 +4977,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -5006,6 +5061,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -5082,6 +5138,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -5163,6 +5220,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -5258,6 +5316,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -5374,6 +5433,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -5472,6 +5532,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -5554,6 +5615,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -5661,6 +5723,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -5745,6 +5808,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -5819,6 +5883,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -5894,6 +5959,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -5986,6 +6052,7 @@
   use_device_driver: true
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -6101,6 +6168,7 @@
   use_device_driver: true
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -6172,6 +6240,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -6243,6 +6312,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -6317,6 +6387,7 @@
   username: ''
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   verify_ssl_certificate: false
   waiting_time: 0
@@ -6389,6 +6460,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -6464,6 +6536,7 @@
   username: ''
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   verify_ssl_certificate: false
   waiting_time: 0
@@ -6535,6 +6608,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -6629,6 +6703,7 @@
   use_device_driver: true
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -6722,6 +6797,7 @@
   use_device_driver: true
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -6815,6 +6891,7 @@
   use_device_driver: true
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -6905,6 +6982,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -6977,6 +7055,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -7049,6 +7128,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -7145,6 +7225,7 @@
   use_device_driver: true
   validation_condition: success
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -7215,6 +7296,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -7283,6 +7365,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -7352,6 +7435,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -7443,6 +7527,7 @@
   use_device_driver: true
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -7543,6 +7628,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -7611,6 +7697,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -7681,6 +7768,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -7752,6 +7840,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -7833,6 +7922,7 @@
   update_target_pools: false
   validation_condition: success
   validation_method: dict_included
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -7913,6 +8003,7 @@
   update_target_pools: false
   validation_condition: success
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -7993,6 +8084,7 @@
   update_target_pools: false
   validation_condition: success
   validation_method: dict_included
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -8072,6 +8164,7 @@
   update_target_pools: false
   validation_condition: success
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -8151,6 +8244,7 @@
   update_target_pools: false
   validation_condition: success
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -8230,6 +8324,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: dict_included
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -8317,6 +8412,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -8388,6 +8484,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -8456,6 +8553,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -8521,6 +8619,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -8590,6 +8689,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -8670,6 +8770,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -8740,6 +8841,7 @@
   update_target_pools: false
   validation_condition: success
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -8829,6 +8931,7 @@
   use_device_driver: false
   validation_condition: success
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -8903,6 +9006,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -8970,6 +9074,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -9047,6 +9152,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -9141,6 +9247,7 @@
   use_device_driver: true
   validation_condition: success
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -9216,6 +9323,7 @@
   username: admin
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   verify_ssl_certificate: true
   waiting_time: 0
@@ -9306,6 +9414,7 @@
   use_device_driver: true
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -9420,6 +9529,7 @@
   use_device_driver: true
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -9493,6 +9603,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -9560,6 +9671,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -9629,6 +9741,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -9705,6 +9818,7 @@
   use_device_driver: true
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -9780,6 +9894,7 @@
   use_device_driver: true
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -9855,6 +9970,7 @@
   use_device_driver: true
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -9930,6 +10046,7 @@
   use_device_driver: true
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -10020,6 +10137,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -10104,6 +10222,7 @@
   username: admin
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   verify_ssl_certificate: true
   waiting_time: 0
@@ -10182,6 +10301,7 @@
   username: admin
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   verify_ssl_certificate: true
   waiting_time: 0
@@ -10260,6 +10380,7 @@
   username: admin
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   verify_ssl_certificate: true
   waiting_time: 0
@@ -10338,6 +10459,7 @@
   username: admin
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   verify_ssl_certificate: true
   waiting_time: 0
@@ -10416,6 +10538,7 @@
   username: admin
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   verify_ssl_certificate: true
   waiting_time: 0
@@ -10510,6 +10633,7 @@
   use_device_driver: true
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -10603,6 +10727,7 @@
   use_device_driver: true
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -10696,6 +10821,7 @@
   use_device_driver: true
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -10789,6 +10915,7 @@
   use_device_driver: true
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -10882,6 +11009,7 @@
   use_device_driver: true
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -10975,6 +11103,7 @@
   use_device_driver: true
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -11043,6 +11172,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -11112,6 +11242,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -11181,6 +11312,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -11250,6 +11382,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -11319,6 +11452,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -11388,6 +11522,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -11457,6 +11592,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -11526,6 +11662,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -11598,6 +11735,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -11691,6 +11829,7 @@
   use_device_driver: true
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -11726,7 +11865,6 @@
   last_modified: '2020-07-24 04:08:50.675082'
   load_known_host_keys: false
   log_level: 1
-  look_for_keys: false
   mail_recipient: ''
   max_number_of_retries: 100
   max_processes: 15
@@ -11769,6 +11907,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
   window_size: 1073741824
@@ -11864,6 +12003,7 @@
   use_device_driver: true
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -11899,7 +12039,6 @@
   last_modified: '2020-07-24 04:12:14.915986'
   load_known_host_keys: false
   log_level: 1
-  look_for_keys: false
   mail_recipient: ''
   max_number_of_retries: 100
   max_processes: 15
@@ -11943,6 +12082,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
   window_size: 1073741824
@@ -12035,6 +12175,7 @@
   use_device_driver: true
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -12070,7 +12211,6 @@
   last_modified: '2020-07-24 10:13:57.495865'
   load_known_host_keys: false
   log_level: 1
-  look_for_keys: false
   mail_recipient: ''
   max_number_of_retries: 100
   max_processes: 15
@@ -12113,6 +12253,7 @@
   update_target_pools: false
   validation_condition: failure
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
   window_size: 1073741824
@@ -12182,6 +12323,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -12256,6 +12398,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -12329,6 +12472,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -12402,6 +12546,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -12488,6 +12633,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -12565,6 +12711,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -12641,6 +12788,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -12717,6 +12865,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -12793,6 +12942,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -12883,6 +13033,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -12980,6 +13131,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -13058,6 +13210,7 @@
   username: admin
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   verify_ssl_certificate: false
   waiting_time: 0
@@ -13151,6 +13304,7 @@
   use_device_driver: true
   validation_condition: success
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -13251,6 +13405,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -13330,6 +13485,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -13401,6 +13557,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -13496,6 +13653,7 @@
   use_device_driver: true
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -13570,6 +13728,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -13659,6 +13818,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -13745,6 +13905,7 @@
   username: admin
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   verify_ssl_certificate: true
   waiting_time: 0
@@ -13819,6 +13980,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -13892,6 +14054,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -13985,6 +14148,7 @@
   use_device_driver: true
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -14062,6 +14226,7 @@
   username: admin
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   verify_ssl_certificate: true
   waiting_time: 0
@@ -14140,6 +14305,7 @@
   username: admin
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   verify_ssl_certificate: true
   waiting_time: 0
@@ -14234,6 +14400,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -14307,6 +14474,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -14378,6 +14546,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -14448,6 +14617,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -14522,6 +14692,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -14613,6 +14784,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -14684,6 +14856,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -14756,6 +14929,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -14829,6 +15003,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -14900,6 +15075,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -14970,6 +15146,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -15039,6 +15216,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: ''
@@ -15128,6 +15306,7 @@
   use_device_driver: true
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: admin
@@ -15223,6 +15402,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -15317,6 +15497,7 @@
   use_device_driver: true
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: admin
@@ -15398,6 +15579,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -15465,6 +15647,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: admin
@@ -15531,6 +15714,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: admin
@@ -15599,6 +15783,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: admin
@@ -15665,6 +15850,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: admin
@@ -15738,6 +15924,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -15805,6 +15992,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: admin
@@ -15874,6 +16062,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -15944,6 +16133,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -16013,6 +16203,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: admin
@@ -16081,6 +16272,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: admin
@@ -16149,6 +16341,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: admin
@@ -16217,6 +16410,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: admin
@@ -16299,6 +16493,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -16366,6 +16561,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: admin
@@ -16432,6 +16628,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: admin
@@ -16498,6 +16695,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: admin
@@ -16590,6 +16788,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -16667,6 +16866,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: admin
@@ -16747,6 +16947,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: admin
@@ -16824,6 +17025,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: admin
@@ -16901,6 +17103,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
 - access_groups: admin
@@ -16974,6 +17177,7 @@
   update_target_pools: false
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
   vendor: ''
   waiting_time: 0
   workflow_category: Example workflow(s)
@@ -17067,5 +17271,228 @@
   use_device_driver: true
   validation_condition: none
   validation_method: text
+  validation_section: results['result']
+  vendor: ''
+  waiting_time: 0
+- access_groups: admin
+  close_connection: false
+  completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credential_type: any
+  default_access: creator
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  impacting: false
+  include_device_results: false
+  include_link_in_summary: false
+  initial_form: ''
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  labels:
+    47a0ea22-8a52-4ca6-87ae-70e0da8baea5:
+      alignment: left
+      content: "results[\"result\"] (default validation section)\r\nshould be equal\
+        \ to \"{\"key1\":\"value1\"}\""
+      positions: [-363, 97]
+    508374df-69c4-40ed-87be-083eb30dd249:
+      alignment: left
+      content: "results[\"new_key\"] set to \"{\"a\":\"LLLoLLL\",\"c\":[\"3\"]}\"\r\
+        \nshould be included in \"{\"a\": \"LLLoLLL\",\"b\": {\"c\": \"JJJkJJJ\"},\"\
+        c\": [1, \"3\"]}"
+      positions: ['29.78662109375', '-267.2469482421875']
+  last_modified: '2021-06-22 03:07:33.502961'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: 'Regression Workflow: Validation Section Mechanism'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: ['All devices, links, services and users']
+  positions: {}
+  postprocessing: ''
+  postprocessing_mode: success
+  preprocessing: ''
+  priority: 1
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: 'Regression Workflow: Validation Section Mechanism'
+  send_notification: false
+  send_notification_method: mail
+  services: ['[Shared] Start', '[Shared] End', '[Regression Workflow: Validation Section
+      Mechanism] Dict Equality Validation of default path', '[Regression Workflow:
+      Validation Section Mechanism] Dict Inclusion Validation of new key']
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: success
+  target_devices: [Chicago]
+  target_pools: []
+  time_between_retries: 10
+  type: workflow
+  update_pools_after_running: false
+  update_target_pools: false
+  validation_condition: none
+  validation_method: text
+  validation_section: results['result']
+  vendor: ''
+  waiting_time: 0
+  workflow_category: Example workflow(s)
+- access_groups: admin
+  completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credential_type: any
+  default_access: creator
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {key1: value1}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  impacting: false
+  include_device_results: false
+  include_link_in_summary: false
+  initial_form: ''
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2021-06-22 02:58:21.081808'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Regression Workflow: Validation Section Mechanism] Dict Equality Validation
+    of default path'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: ['All devices, links, services and users']
+  positions:
+    'Regression Workflow: Validation Section Mechanism': [-384, 34]
+  postprocessing: ''
+  postprocessing_mode: success
+  preprocessing: ''
+  priority: 1
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: Dict Equality Validation of default path
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: success
+  source_code: "\r\n# Click on \"i\" to right of \"Source Code\" for examples.\r\n\
+    \r\nresult = {\"key1\": \"value1\"}\r\nresults[\"success\"] = True\r\nresults[\"\
+    result\"] = result"
+  target_devices: []
+  target_pools: []
+  time_between_retries: 10
+  type: python_snippet_service
+  update_pools_after_running: false
+  update_target_pools: false
+  validation_condition: none
+  validation_method: text
+  validation_section: results['result']
+  vendor: ''
+  waiting_time: 0
+- access_groups: admin
+  completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credential_type: any
+  default_access: creator
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match:
+    a: LLLoLLL
+    c: ['3']
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  impacting: false
+  include_device_results: false
+  include_link_in_summary: false
+  initial_form: ''
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2021-06-22 03:07:50.513458'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Regression Workflow: Validation Section Mechanism] Dict Inclusion Validation
+    of new key'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: ['All devices, links, services and users']
+  positions:
+    'Regression Workflow: Validation Section Mechanism': [-39, -193]
+  postprocessing: ''
+  postprocessing_mode: success
+  preprocessing: ''
+  priority: 1
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: Dict Inclusion Validation of new key
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: success
+  source_code: "\r\n# Click on \"i\" to right of \"Source Code\" for examples.\r\n\
+    \r\nresult = {}\r\nresults[\"new_key\"] = {\r\n  \"a\": \"LLLoLLL\",\r\n  \"b\"\
+    : {\"c\": \"JJJkJJJ\"},\r\n  \"c\": [1, \"3\"]\r\n}\r\nresults[\"success\"] =\
+    \ True\r\nresults[\"result\"] = result"
+  target_devices: []
+  target_pools: []
+  time_between_retries: 10
+  type: python_snippet_service
+  update_pools_after_running: false
+  update_target_pools: false
+  validation_condition: success
+  validation_method: dict_included
+  validation_section: results['new_key']
   vendor: ''
   waiting_time: 0

@@ -1,16 +1,16 @@
 - last_modified: '2021-01-04 09:21:18.073774'
   name: 'Regression View : Basic Example'
   objects: ['2021-03-29 09:40:15.682829', '2021-05-02 03:49:17.745962', '2021-05-02
-      03:49:17.747779']
+      03:49:17.747779', '2021-05-02 03:49:17.747771']
   type: view
   x: 0.0
   y: 0.0
   z: 0.0
 - {name: '2021-03-29 09:40:15.682829', type: plan, view: 'Regression View : Basic
     Example', x: 0.0, y: 10.0, z: 0.0}
-- {device: Austin, name: '2021-05-02 03:49:17.745962', type: node, view: 'Regression
-    View : Basic Example', x: -150.5314743547792204, y: 10.0, z: 119.47871920651392}
-- {device: Washington, name: '2021-05-02 03:49:17.747779', type: node, view: 'Regression
-    View : Basic Example', x: 0.0, y: 10.0, z: 0.0, model: "juniper_ex3300"}
-- {device: Washington, name: '2021-05-02 03:49:17.747771', type: node, view: 'Regression
-    View : Basic Example', x: 0.0, y: 10.0, z: -1000.0, model: "cisco_catalyst_me4924"}
+- {device: Austin, model: '', name: '2021-05-02 03:49:17.745962', type: node, view: 'Regression
+    View : Basic Example', x: -150.53147435477922, y: 10.0, z: 119.47871920651392}
+- {device: Washington, model: juniper_ex3300, name: '2021-05-02 03:49:17.747779',
+  type: node, view: 'Regression View : Basic Example', x: 0.0, y: 10.0, z: 0.0}
+- {device: Washington, model: cisco_catalyst_me4924, name: '2021-05-02 03:49:17.747771',
+  type: node, view: 'Regression View : Basic Example', x: 0.0, y: 10.0, z: -1000.0}

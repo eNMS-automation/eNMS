@@ -22,7 +22,7 @@ class ScrapliNetconfService(ConnectionService):
     __mapper_args__ = {"polymorphic_identity": "scrapli_netconf_service"}
 
     def job(self, run, device):
-        content, kwargs = run.sub(run.content, locals()).splitlines(), {}
+        content, kwargs = run.sub(run.content, locals()), {}
         if "lock" in run.command or "config" in run.command:
             parameter = "source" if run.command == "get_config" else "target"
             kwargs[parameter] = run.target

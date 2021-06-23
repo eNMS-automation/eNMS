@@ -1411,3 +1411,14 @@
   source: '[Regression Workflow: Validation Section Mechanism] Nested Result String
     Validation', subtype: success, type: workflow_edge, workflow: 'Regression Workflow:
     Validation Section Mechanism'}
+- {color: green, destination: '[Regression Workflow: NCClient Netconf Service] Get
+    Full Config', label: success, name: '2021-06-23 01:42:24.361554', source: '[Shared]
+    Start', subtype: success, type: workflow_edge, workflow: 'Regression Workflow:
+    NCClient Netconf Service'}
+- {color: green, destination: '[Regression Workflow: NCClient Netconf Service] Edit
+    interface', label: success, name: '2021-06-23 01:44:36.780081', source: '[Regression
+    Workflow: NCClient Netconf Service] Get Full Config', subtype: success, type: workflow_edge,
+  workflow: 'Regression Workflow: NCClient Netconf Service'}
+- {color: green, destination: '[Shared] End', label: success, name: '2021-06-23 01:44:38.924908',
+  source: '[Regression Workflow: NCClient Netconf Service] Edit interface', subtype: success,
+  type: workflow_edge, workflow: 'Regression Workflow: NCClient Netconf Service'}

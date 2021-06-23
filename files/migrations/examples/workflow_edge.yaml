@@ -1366,23 +1366,23 @@
     RBAC Target Restriction] Iteration Targets', subtype: success, type: workflow_edge,
   workflow: 'Regression Workflow: RBAC Target Restriction'}
 - {color: green, destination: '[Regression Workflow: Scrapli Netconf Service] Edit
-    Interface Ethernet1', label: success, name: '2021-05-01 04:35:20.029861', source: '[Shared]
+    Interface Loopback 5', label: success, name: '2021-05-01 04:35:20.029861', source: '[Shared]
     Start', subtype: success, type: workflow_edge, workflow: 'Regression Workflow:
     Scrapli Netconf Service'}
 - {color: green, destination: '[Regression Workflow: Scrapli Netconf Service] Get
     Running Configuration', label: success, name: '2021-05-01 04:54:21.358634', source: '[Regression
-    Workflow: Scrapli Netconf Service] Edit Interface Ethernet1', subtype: success,
+    Workflow: Scrapli Netconf Service] Edit Interface Loopback 5', subtype: success,
   type: workflow_edge, workflow: 'Regression Workflow: Scrapli Netconf Service'}
 - {color: green, destination: '[Shared] End', label: success, name: '2021-05-01 04:54:26.508627',
   source: '[Regression Workflow: Scrapli Netconf Service] Get State', subtype: success,
   type: workflow_edge, workflow: 'Regression Workflow: Scrapli Netconf Service'}
 - {color: green, destination: '[Regression Workflow: Scrapli Netconf Service] Delete
-    Ethernet 1 description', label: success, name: '2021-05-02 03:58:06.389762', source: '[Regression
+    Loopback 5 description', label: success, name: '2021-05-02 03:58:06.389762', source: '[Regression
     Workflow: Scrapli Netconf Service] Get Running Configuration', subtype: success,
   type: workflow_edge, workflow: 'Regression Workflow: Scrapli Netconf Service'}
 - {color: green, destination: '[Regression Workflow: Scrapli Netconf Service] Get
     State', label: success, name: '2021-05-02 03:58:07.428143', source: '[Regression
-    Workflow: Scrapli Netconf Service] Delete Ethernet 1 description', subtype: success,
+    Workflow: Scrapli Netconf Service] Delete Loopback 5 description', subtype: success,
   type: workflow_edge, workflow: 'Regression Workflow: Scrapli Netconf Service'}
 - {color: green, destination: '[Regression Workflow: Initial Form (override tags &
     targets, add payload)] Show interface from initial form (default: Lo1)', label: success,

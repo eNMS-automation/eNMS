@@ -16729,14 +16729,14 @@
   labels:
     03095192-e0e3-4e4b-837a-d62da1e2745d:
       alignment: left
-      content: "Uses Netconf RPC to delete the description\r\nof interface \"Ethernet\
-        \ 1\"."
-      positions: [538, 209]
+      content: "Uses Netconf RPC to delete the description\r\nof interface \"Loopback\
+        \ 5\"."
+      positions: ['452.142835828993', '205.61111111111111']
     ae5534ad-a205-4918-9410-060a9e37be0d:
       alignment: left
-      content: "Uses Netconf RPC to edit the description of interface \"Ethernet 1\"\
+      content: "Uses Netconf RPC to edit the description of interface \"Loopback 5\"\
         .\r\nDescription is set to \"YYYY\""
-      positions: [54, -148]
+      positions: ['29.5872802734375', '-150.5']
     b4231341-9041-4ff2-9d9e-4955d16aa247:
       alignment: left
       content: "Uses Scrapli Netconf \"get config\" function to retrieve\r\nthe running\
@@ -16776,8 +16776,8 @@
   services: ['[Shared] Start', '[Shared] End', '[Regression Workflow: Scrapli Netconf
       Service] Get Running Configuration', '[Regression Workflow: Scrapli Netconf
       Service] Get State', '[Regression Workflow: Scrapli Netconf Service] Edit Interface
-      Ethernet1', '[Regression Workflow: Scrapli Netconf Service] Delete Ethernet
-      1 description']
+      Loopback 5', '[Regression Workflow: Scrapli Netconf Service] Delete Loopback
+      5 description']
   shared: false
   skip: {}
   skip_query: ''
@@ -16905,7 +16905,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2021-05-02 03:57:46.661617'
+  last_modified: '2021-06-23 06:12:54.857788'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -16922,7 +16922,7 @@
     'Regression Workflow: Scrapli Netconf Service': [26, 125]
   postprocessing: "interfaces = results[\"result\"][\"rpc-reply\"][0][\"data\"][0][\"\
     interfaces\"][0][\"interface\"]\r\nfor interface in interfaces:\r\n    if interface[\"\
-    name\"][0] == \"Ethernet1\":\r\n        break\r\n\r\nresults[\"interface\"] =\
+    name\"][0] == \"Loopback5\":\r\n        break\r\n\r\nresults[\"interface\"] =\
     \ interface\r\nresults[\"description\"] = interface[\"state\"][0][\"description\"\
     ][0]\r\nresults[\"success\"] = not results[\"description\"]\r\n"
   postprocessing_mode: success
@@ -16959,7 +16959,7 @@
   completion_time: 1
   content: "<nc:edit-config xmlns:nc=\"urn:ietf:params:xml:ns:netconf:base:1.0\">\r\
     \n   <target>\r\n   <running/>\r\n   </target>\r\n   <commands>\r\n   <command>interface\
-    \ ethernet 1</command>\r\n   <command>description YYYY</command>\r\n   </commands>\r\
+    \ Loopback 5</command>\r\n   <command>description YYYY</command>\r\n   </commands>\r\
     \n   </nc:edit-config>"
   content_match: ''
   content_match_regex: false
@@ -16987,14 +16987,14 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2021-05-01 04:47:40.039243'
+  last_modified: '2021-06-23 06:12:19.278855'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression Workflow: Scrapli Netconf Service] Edit Interface Ethernet1'
+  name: '[Regression Workflow: Scrapli Netconf Service] Edit Interface Loopback 5'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -17009,7 +17009,7 @@
   reply_to: ''
   reserved: false
   run_method: per_device
-  scoped_name: Edit Interface Ethernet1
+  scoped_name: Edit Interface Loopback 5
   send_notification: false
   send_notification_method: mail
   shared: false
@@ -17037,7 +17037,7 @@
   completion_time: 1
   content: "<nc:edit-config xmlns:nc=\"urn:ietf:params:xml:ns:netconf:base:1.0\">\r\
     \n   <target>\r\n   <running/>\r\n   </target>\r\n   <commands>\r\n   <command>interface\
-    \ ethernet 1</command>\r\n   <command>no description YYYY</command>\r\n   </commands>\r\
+    \ Loopback 5</command>\r\n   <command>no description YYYY</command>\r\n   </commands>\r\
     \n   </nc:edit-config>"
   content_match: ''
   content_match_regex: false
@@ -17065,14 +17065,14 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2021-05-01 04:49:51.290916'
+  last_modified: '2021-06-23 06:12:42.356680'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression Workflow: Scrapli Netconf Service] Delete Ethernet 1 description'
+  name: '[Regression Workflow: Scrapli Netconf Service] Delete Loopback 5 description'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -17087,7 +17087,7 @@
   reply_to: ''
   reserved: false
   run_method: per_device
-  scoped_name: Delete Ethernet 1 description
+  scoped_name: Delete Loopback 5 description
   send_notification: false
   send_notification_method: mail
   shared: false

@@ -1415,10 +1415,11 @@
     Full Config', label: success, name: '2021-06-23 01:42:24.361554', source: '[Shared]
     Start', subtype: success, type: workflow_edge, workflow: 'Regression Workflow:
     NCClient Netconf Service'}
-- {color: green, destination: '[Regression Workflow: NCClient Netconf Service] Edit
-    interface', label: success, name: '2021-06-23 01:44:36.780081', source: '[Regression
-    Workflow: NCClient Netconf Service] Get Full Config', subtype: success, type: workflow_edge,
-  workflow: 'Regression Workflow: NCClient Netconf Service'}
-- {color: green, destination: '[Shared] End', label: success, name: '2021-06-23 01:44:38.924908',
-  source: '[Regression Workflow: NCClient Netconf Service] Edit interface', subtype: success,
+- {color: green, destination: '[Regression Workflow: NCClient Netconf Service] Set
+    Description of Lo4 to ZZZZ', label: success, name: '2021-06-23 01:44:36.780081',
+  source: '[Regression Workflow: NCClient Netconf Service] Get Full Config', subtype: success,
+  type: workflow_edge, workflow: 'Regression Workflow: NCClient Netconf Service'}
+- {color: green, destination: '[Regression Workflow: NCClient Netconf Service] Check
+    for ZZZZ in Config', label: success, name: '2021-06-23 06:23:42.801005', source: '[Regression
+    Workflow: NCClient Netconf Service] Set Description of Lo4 to ZZZZ', subtype: success,
   type: workflow_edge, workflow: 'Regression Workflow: NCClient Netconf Service'}

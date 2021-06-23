@@ -16959,7 +16959,7 @@
   completion_time: 1
   content: "<nc:edit-config xmlns:nc=\"urn:ietf:params:xml:ns:netconf:base:1.0\">\r\
     \n   <target>\r\n   <running/>\r\n   </target>\r\n   <commands>\r\n   <command>interface\
-    \ Loopback 5</command>\r\n   <command>description YYYY</command>\r\n   </commands>\r\
+    \ Loopback5</command>\r\n   <command>description YYYY</command>\r\n   </commands>\r\
     \n   </nc:edit-config>"
   content_match: ''
   content_match_regex: false
@@ -16987,7 +16987,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2021-06-23 06:12:19.278855'
+  last_modified: '2021-06-23 06:17:31.604783'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -17599,8 +17599,19 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  labels: {}
-  last_modified: '2021-06-23 01:46:18.914616'
+  labels:
+    25779404-589e-4a8f-8b83-7b71c7262010:
+      alignment: left
+      content: "Get Full Config via NCClient. Convert the Configuration to a string.\r\
+        \nCheck that \"ZZZZ\" isn't in the configuration via text match validation\r\
+        \nwith negative logic enabled."
+      positions: [-305, 159]
+    45456377-3939-4c06-8a03-1701ebb7206b:
+      alignment: left
+      content: "Use NCClient \"Edit Config\" Operation to set\r\nthe description of\
+        \ Loopback4 to \"ZZZZ\"."
+      positions: [-8, -214]
+  last_modified: '2021-06-23 06:21:28.070422'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -17647,9 +17658,9 @@
   close_connection: false
   commit_conf: false
   completion_time: 1
-  content_match: ''
+  content_match: ZZZZ
   content_match_regex: false
-  conversion_method: none
+  conversion_method: text
   copy_destination: running
   copy_source: running
   creator: admin
@@ -17678,7 +17689,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2021-06-23 01:42:06.666125'
+  last_modified: '2021-06-23 06:19:11.282891'
   lock: false
   log_level: 1
   mail_recipient: ''
@@ -17688,13 +17699,13 @@
   multiprocessing: false
   name: '[Regression Workflow: NCClient Netconf Service] Get Full Config'
   nc_type: get_config
-  negative_logic: false
+  negative_logic: true
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
   pools: ['All devices, links, services and users']
   positions:
-    'Regression Workflow: NCClient Netconf Service': [-296, 52]
+    'Regression Workflow: NCClient Netconf Service': [-330, 73]
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''
@@ -17721,7 +17732,7 @@
   unlock: false
   update_pools_after_running: false
   update_target_pools: false
-  validation_condition: none
+  validation_condition: success
   validation_method: text
   validation_section: results['result']
   vendor: ''
@@ -17779,7 +17790,7 @@
   operating_system: ''
   pools: ['All devices, links, services and users']
   positions:
-    'Regression Workflow: NCClient Netconf Service': [-12, -216]
+    'Regression Workflow: NCClient Netconf Service': [-20, -135]
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''

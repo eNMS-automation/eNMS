@@ -17600,7 +17600,7 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels: {}
-  last_modified: '2021-06-23 01:44:52.304860'
+  last_modified: '2021-06-23 01:46:18.914616'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -17631,7 +17631,7 @@
   skip: {}
   skip_query: ''
   skip_value: success
-  target_devices: []
+  target_devices: [Washington]
   target_pools: []
   time_between_retries: 10
   type: workflow
@@ -17763,7 +17763,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2021-06-23 01:43:50.571448'
+  last_modified: '2021-06-23 02:08:50.831728'
   lock: false
   log_level: 1
   mail_recipient: ''
@@ -17799,7 +17799,7 @@
   target: running
   target_devices: []
   target_pools: []
-  test_option: test-then-set
+  test_option: None
   time_between_retries: 10
   timeout: 15
   type: netconf_service
@@ -17812,7 +17812,9 @@
   vendor: ''
   waiting_time: 0
   xml_conversion: true
-  xml_filter: "<nc:edit-config xmlns:nc=\"urn:ietf:params:xml:ns:netconf:base:1.0\"\
-    >\r\n   <target>\r\n   <running/>\r\n   </target>\r\n   <commands>\r\n   <command>interface\
-    \ ethernet 1</command>\r\n   <command>description YYYY</command>\r\n   </commands>\r\
-    \n   </nc:edit-config>"
+  xml_filter: "    <nc:config xmlns:nc=\"urn:ietf:params:xml:ns:netconf:base:1.0\"\
+    >\r\n    <if:interfaces xmlns:if=\"urn:ietf:params:xml:ns:yang:ietf-interfaces\"\
+    \ xmlns:mmif=\"urn:metamako:params:xml:ns:yang:metamako-if\">\r\n      <if:interface>\r\
+    \n        <if:name>Loopback4</if:name>\r\n        <if:config>\r\n        <if:description>ZZZZ</if:description>\r\
+    \n        </if:config>\r\n      </if:interface>\r\n    </if:interfaces>\r\n  \
+    \  </nc:config>"

@@ -1411,10 +1411,6 @@
   source: '[Regression Workflow: Validation Section Mechanism] Nested Result String
     Validation', subtype: success, type: workflow_edge, workflow: 'Regression Workflow:
     Validation Section Mechanism'}
-- {color: green, destination: '[Regression Workflow: NCClient Netconf Service] Get
-    Full Config', label: success, name: '2021-06-23 01:42:24.361554', source: '[Shared]
-    Start', subtype: success, type: workflow_edge, workflow: 'Regression Workflow:
-    NCClient Netconf Service'}
 - {color: green, destination: '[Regression Workflow: NCClient Netconf Service] Set
     Description of Lo4 to ZZZZ', label: success, name: '2021-06-23 01:44:36.780081',
   source: '[Regression Workflow: NCClient Netconf Service] Get Full Config', subtype: success,
@@ -1423,3 +1419,19 @@
     for ZZZZ in Config', label: success, name: '2021-06-23 06:23:42.801005', source: '[Regression
     Workflow: NCClient Netconf Service] Set Description of Lo4 to ZZZZ', subtype: success,
   type: workflow_edge, workflow: 'Regression Workflow: NCClient Netconf Service'}
+- {color: green, destination: '[Regression Workflow: NCClient Netconf Service] Erase
+    Lo4 Description', label: success, name: '2021-06-23 06:27:11.527112', source: '[Regression
+    Workflow: NCClient Netconf Service] Check for ZZZZ in Config', subtype: success,
+  type: workflow_edge, workflow: 'Regression Workflow: NCClient Netconf Service'}
+- {color: green, destination: '[Regression Workflow: NCClient Netconf Service] Get
+    Full Config', label: success, name: '2021-06-23 06:28:32.023444', source: '[Shared]
+    Start', subtype: success, type: workflow_edge, workflow: 'Regression Workflow:
+    NCClient Netconf Service'}
+- {color: green, destination: '[Regression Workflow: NCClient Netconf Service] Check
+    ZZZZ is not in Config', label: success, name: '2021-06-23 06:28:56.442642', source: '[Regression
+    Workflow: NCClient Netconf Service] Erase Lo4 Description', subtype: success,
+  type: workflow_edge, workflow: 'Regression Workflow: NCClient Netconf Service'}
+- {color: green, destination: '[Shared] End', label: success, name: '2021-06-23 06:28:57.297497',
+  source: '[Regression Workflow: NCClient Netconf Service] Check ZZZZ is not in Config',
+  subtype: success, type: workflow_edge, workflow: 'Regression Workflow: NCClient
+    Netconf Service'}

@@ -16731,12 +16731,12 @@
       alignment: left
       content: "Uses Netconf RPC to delete the description\r\nof interface \"Loopback\
         \ 5\"."
-      positions: ['452.142835828993', '205.61111111111111']
+      positions: [509, 220]
     ae5534ad-a205-4918-9410-060a9e37be0d:
       alignment: left
       content: "Uses Netconf RPC to edit the description of interface \"Loopback 5\"\
         .\r\nDescription is set to \"YYYY\""
-      positions: ['29.5872802734375', '-150.5']
+      positions: [29, -150]
     b4231341-9041-4ff2-9d9e-4955d16aa247:
       alignment: left
       content: "Uses Scrapli Netconf \"get config\" function to retrieve\r\nthe running\
@@ -16749,7 +16749,7 @@
         \nfrom all interfaces. The output is converted to a dictionary in step 4.\r\
         \nCheck that the interface description is not set in post-processing.\r\n"
       positions: [69, 216]
-  last_modified: '2021-05-02 03:58:48.368107'
+  last_modified: '2021-06-23 07:30:43.625804'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -16877,7 +16877,7 @@
   commit_config: false
   completion_time: 1
   content: "<if:interfaces -state xmlns:if=\"urn:ietf:params:xml:ns:yang:ietf-interfaces\"\
-    >\r\n      <if:interface>\r\n        <if:name>et1</if:name>\r\n      </if:interface>\r\
+    >\r\n      <if:interface>\r\n        <if:name>Loopback5</if:name>\r\n      </if:interface>\r\
     \n</if:interfaces>"
   content_match: ''
   content_match_regex: false
@@ -16905,7 +16905,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2021-06-23 06:12:54.857788'
+  last_modified: '2021-06-23 07:36:06.901673'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -16923,8 +16923,8 @@
   postprocessing: "interfaces = results[\"result\"][\"rpc-reply\"][0][\"data\"][0][\"\
     interfaces\"][0][\"interface\"]\r\nfor interface in interfaces:\r\n    if interface[\"\
     name\"][0] == \"Loopback5\":\r\n        break\r\n\r\nresults[\"interface\"] =\
-    \ interface\r\nresults[\"description\"] = interface[\"state\"][0][\"description\"\
-    ][0]\r\nresults[\"success\"] = not results[\"description\"]\r\n"
+    \ interface\r\nresults[\"success\"] = interface[\"config\"][0][\"description\"\
+    ] == [None]\r\n"
   postprocessing_mode: success
   preprocessing: ''
   priority: 1

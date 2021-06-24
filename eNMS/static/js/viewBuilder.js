@@ -49,6 +49,22 @@ function displayView({path, direction}) {
       : $("#current-view").val();
   const [viewId] = currentPath.split(">").slice(-1);
   localStorage.setItem(page, currentPath);
+  if (!direction) {
+    arrowPointer++;
+    arrowHistory.splice(arrowPointer, 9e9, currentPath);
+  } else {
+    arrowPointer += direction == "right" ? 1 : -1;
+  }
+  if (arrowHistory.length >= 1 && arrowPointer !== 0) {
+    $("#left-arrow").removeClass("disabled");
+  } else {
+    $("#left-arrow").addClass("disabled");
+  }
+  if (arrowPointer < arrowHistory.length - 1) {
+    $("#right-arrow").removeClass("disabled");
+  } else {
+    $("#right-arrow").addClass("disabled");
+  }
   call({
     url: `/get/view/${viewId}`,
     callback: function (view) {

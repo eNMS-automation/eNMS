@@ -230,7 +230,7 @@ function drawNode(node) {
     });
   } else {
     if (node.model) {
-      const loader = new THREE.ColladaLoader().load(
+      new THREE.ColladaLoader().load(
         `/static/img/view/models/${node.model}.dae`,
         function (collada) {
           daeModels[node.id] = collada.scene;
@@ -390,7 +390,7 @@ function updateRightClickBindings(controls) {
 }
 
 function render() {
-  if (Object.keys(daeModels).length) {
+  if (renderer && labelRenderer) {
     renderer.render(scene, camera);
     labelRenderer.render(scene, camera);
   }

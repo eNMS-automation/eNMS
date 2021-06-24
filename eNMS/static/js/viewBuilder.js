@@ -100,6 +100,9 @@ function onMouseDown(event) {
   if (intersects.length > 0) {
     let object = intersects[0].object;
     selectedObject = object.userData;
+    if (selectedObject.type == "node") {
+      selectedObject = {id: selectedObject.device_id, type: "device"};
+    }
     if (object.userData.type == "collada") {
       object = daeModels[object.userData.id];
       selectedObjects.push(object);

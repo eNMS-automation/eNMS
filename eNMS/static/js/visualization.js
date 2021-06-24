@@ -400,7 +400,6 @@ function displayNetwork({ direction, noAlert, withCluster } = {}) {
       : direction == "right"
       ? arrowHistory[arrowPointer + 1]
       : $("#current-pool").val();
-
   localStorage.setItem(page, currentPath);
   if (
     (direction == "left" && arrowPointer == 0) ||

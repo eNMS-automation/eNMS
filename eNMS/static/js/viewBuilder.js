@@ -21,7 +21,6 @@ import { showConnectionPanel, showDeviceData } from "./inventory.js";
 
 let selectedObject;
 let currentMode = "select";
-let currentPath = localStorage.getItem(page);
 let currentView;
 let selectedObjects = [];
 let camera;
@@ -37,8 +36,19 @@ let raycaster;
 let texture;
 let daeModels = {};
 
-function displayView(currentPath) {
+let currentPath = localStorage.getItem(page);
+let arrowHistory = [];
+let arrowPointer = -1;
+
+function displayView({path, direction}) {
+  currentPath =
+    direction == "left"
+      ? arrowHistory[arrowPointer - 1]
+      : direction == "right"
+      ? arrowHistory[arrowPointer + 1]
+      : $("#current-view").val();
   const [viewId] = currentPath.split(">").slice(-1);
+  localStorage.setItem(page, currentPath);
   call({
     url: `/get/view/${viewId}`,
     callback: function (view) {
@@ -277,18 +287,18 @@ function initLogicalFramework() {
       }
       if (currentPath && views.some((w) => w.id == currentPath.split(">")[0])) {
         $("#current-view").val(currentPath.split(">")[0]);
-        displayView(currentPath);
+        displayView({path: currentPath});
       } else {
         currentPath = $("#current-view").val();
         if (currentPath) {
-          displayView(currentPath);
+          displayView({path: currentPath});
         } else {
           notify("No view has been created yet.", "error", 5);
         }
       }
       $("#current-view")
         .on("change", function () {
-          if (this.value != currentView.id) displayView(this.value);
+          if (this.value != currentView.id) displayView({path: this.value});
         })
         .selectpicker({
           liveSearch: true,
@@ -358,6 +368,8 @@ function updateRightClickBindings(controls) {
     "Switch Mode": switchMode,
     "Zoom In": () => controls?.dollyOut(),
     "Zoom Out": () => controls?.dollyIn(),
+    "Backward": () => displayView({ direction: "left" }),
+    "Forward": () => displayView({ direction: "right" }),
   });
 }
 

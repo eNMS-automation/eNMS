@@ -29,7 +29,7 @@
     /task_relation_filtering_form, /task_filtering_form, /user_relation_filtering_form,
     /user_filtering_form, /add_devices_form, /add_links_form, /add_users_form, /add_services_form,
     /device_connection_form, /device_form, /link_form, /pool_form, /excel_import_form,
-    /excel_export_form, /view_form, /view_label_form, /view_plan_form, /add_objects_to_view_form,
+    /excel_export_form, /view_form, /view_label_form, /plan_form, /add_objects_to_view_form,
     /task_form]
   menu: [Inventory, Visualization, Automation, Template]
   name: Full Access to Everything
@@ -159,7 +159,7 @@
     /task_relation_filtering_form, /task_filtering_form, /user_relation_filtering_form,
     /user_filtering_form, /add_devices_form, /add_links_form, /add_users_form, /add_services_form,
     /device_connection_form, /device_form, /link_form, /pool_form, /excel_import_form,
-    /excel_export_form, /view_form, /view_label_form, /view_plan_form, /add_objects_to_view_form,
+    /excel_export_form, /view_form, /view_label_form, /plan_form, /add_objects_to_view_form,
     /task_form]
   menu: [Inventory, Visualization, Automation, Template]
   name: Full UI + HTTP access

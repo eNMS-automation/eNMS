@@ -99,6 +99,7 @@ function onMouseDown(event) {
   const intersects = getIntersects(event);
   if (intersects.length > 0) {
     let object = intersects[0].object;
+    selectedObject = object.userData;
     if (object.userData.type == "collada") {
       object = daeModels[object.userData.id];
       selectedObjects.push(object);
@@ -133,11 +134,11 @@ function onMouseDown(event) {
 function createPlan() {
   call({
     url: `/create_view_object/plan/${currentView.id}`,
-    form: "view_plan-form",
+    form: "plan-form",
     callback: function (result) {
       currentView.last_modified = result;
       drawNode(result.node);
-      $("#view_plan").remove();
+      $("#plan").remove();
     },
   });
 }
@@ -346,7 +347,7 @@ function updateRightClickBindings(controls) {
     "Add to View": addObjectPanel,
     "Create View": () => createNewView("create"),
     "Create Label": () => openPanel({ name: "view_label", title: "Create New Label" }),
-    "Create Plan": () => openPanel({ name: "view_plan", title: "Create New Plan" }),
+    "Create Plan": () => openPanel({ name: "plan", title: "Create New Plan" }),
     "Edit View": () => createNewView("edit"),
     "Edit Pool": () => showInstancePanel("pool", currentPath),
     Delete: () => deleteSelection(),

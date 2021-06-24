@@ -768,7 +768,7 @@ class ViewLabelForm(BaseForm):
 
 
 class ViewPlanForm(BaseForm):
-    form_type = HiddenField(default="view_plan")
+    form_type = HiddenField(default="plan")
     action = "eNMS.viewBuilder.createPlan"
     name = StringField("Name", [InputRequired()])
     size = IntegerField("Size", default=2000)

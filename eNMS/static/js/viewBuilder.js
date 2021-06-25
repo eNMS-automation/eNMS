@@ -47,6 +47,7 @@ function displayView({direction} = {}) {
       : direction == "right"
       ? arrowHistory[arrowPointer + 1]
       : $("#current-view").val();
+  if (typeof currentPath === "undefined") return;
   const [viewId] = currentPath.split(">").slice(-1);
   localStorage.setItem(page, currentPath);
   if (!direction) {

@@ -337,6 +337,18 @@ function createNewView(mode) {
   }
 }
 
+export function viewCreation(view) {
+  if (view.id == currentView.id) {
+    $("#current-view option:selected").text(view.name).trigger("change");
+  } else {
+    $("#current-view").append(
+      `<option value="${view.id}">${view.name}</option>`
+    );
+    $("#current-view").val(view.id).trigger("change");
+    displayView({});
+  }
+}
+
 function createLabel() {
   call({
     url: `/create_view_object/label/${currentView.id}`,

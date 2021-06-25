@@ -21,7 +21,7 @@ import { openDebugPanel, showCredentialPanel } from "./administration.js";
 import { initDashboard } from "./inventory.js";
 import { refreshTable, tables, tableInstances } from "./table.js";
 import { initView } from "./visualization.js";
-import { initViewBuilder } from "./viewBuilder.js";
+import { initViewBuilder, viewCreation } from "./viewBuilder.js";
 import {
   creationMode,
   initWorkflowBuilder,
@@ -773,6 +773,8 @@ function processData(type, id) {
         refreshTable(tableType);
       } else if (page == "workflow_builder") {
         processWorkflowData(instance, id);
+      } else if (page == "view_builder") {
+        viewCreation(instance);
       }
       $(id ? `#${type}-${id}` : `#${type}`).remove();
       notify(

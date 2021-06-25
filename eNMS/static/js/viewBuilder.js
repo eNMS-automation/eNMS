@@ -40,7 +40,7 @@ let currentPath = localStorage.getItem(page);
 let arrowHistory = [];
 let arrowPointer = -1;
 
-function displayView({direction}) {
+function displayView({direction} = {}) {
   currentPath =
     direction == "left"
       ? arrowHistory[arrowPointer - 1]
@@ -303,18 +303,18 @@ function initLogicalFramework() {
       }
       if (currentPath && views.some((w) => w.id == currentPath.split(">")[0])) {
         $("#current-view").val(currentPath.split(">")[0]);
-        displayView({});
+        displayView();
       } else {
         currentPath = $("#current-view").val();
         if (currentPath) {
-          displayView({});
+          displayView();
         } else {
           notify("No view has been created yet.", "error", 5);
         }
       }
       $("#current-view")
         .on("change", function () {
-          if (this.value != currentView.id) displayView({});
+          if (this.value != currentView.id) displayView();
         })
         .selectpicker({
           liveSearch: true,
@@ -345,7 +345,7 @@ export function viewCreation(view) {
       `<option value="${view.id}">${view.name}</option>`
     );
     $("#current-view").val(view.id).trigger("change");
-    displayView({});
+    displayView();
   }
 }
 

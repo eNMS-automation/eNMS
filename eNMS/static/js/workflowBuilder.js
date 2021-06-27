@@ -258,7 +258,7 @@ function filterWorkflowTable(tableId, path) {
   switchToWorkflow(path);
 }
 
-export const switchToWorkflow = function (path, arrow, runtime, selection) {
+export const switchToWorkflow = function (path, direction, runtime, selection) {
   if (typeof path === "undefined") return;
   if (path.toString().includes(">")) {
     $("#up-arrow").removeClass("disabled");
@@ -266,11 +266,11 @@ export const switchToWorkflow = function (path, arrow, runtime, selection) {
     $("#up-arrow").addClass("disabled");
   }
   currentPath = path;
-  if (!arrow) {
+  if (!direction) {
     arrowPointer++;
     arrowHistory.splice(arrowPointer, 9e9, path);
   } else {
-    arrowPointer += arrow == "right" ? 1 : -1;
+    arrowPointer += direction == "right" ? 1 : -1;
   }
   if (arrowHistory.length >= 1 && arrowPointer !== 0) {
     $("#left-arrow").removeClass("disabled");

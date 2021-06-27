@@ -409,6 +409,7 @@ function displayNetwork({ direction, noAlert, withCluster } = {}) {
     return;
   }
   moveHistory(currentPath, direction);
+  $("#current-pool").val(currentPath).selectpicker("refresh");
   for (let type of ["device", "link"]) {
     let form = serializeForm(`#filtering-form-${type}`, `${type}_filtering`);
     if (currentPath) form.intersect = { type: "pool", id: currentPath };

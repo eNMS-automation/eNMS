@@ -52,6 +52,7 @@ function displayView({direction} = {}) {
   const [viewId] = currentPath.split(">").slice(-1);
   localStorage.setItem(page, currentPath);
   moveHistory(currentPath, direction);
+  $("#current-view").val(currentPath).selectpicker("refresh");
   call({
     url: `/get/view/${viewId}`,
     callback: function (view) {

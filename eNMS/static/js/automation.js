@@ -17,6 +17,8 @@ import {
   configureForm,
   configureNamespace,
   downloadFile,
+  history,
+  historyPosition,
   notify,
   observeMutations,
   openPanel,
@@ -25,8 +27,6 @@ import {
 } from "./base.js";
 import { refreshTable, tableInstances, tables } from "./table.js";
 import {
-  history,
-  historyPosition,
   currentRuntime,
   getServiceState,
   switchToWorkflow,

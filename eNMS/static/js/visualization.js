@@ -15,6 +15,8 @@ import { showRunServicePanel } from "./automation.js";
 import {
   call,
   configureNamespace,
+  history,
+  historyPosition,
   moveHistory,
   notify,
   openPanel,
@@ -43,8 +45,6 @@ let polylines;
 let labels;
 
 let currentPath = localStorage.getItem(page);
-let history = [];
-let historyPosition = -1;
 let controls;
 
 function updateRightClickBindings(controls) {
@@ -408,7 +408,7 @@ function displayNetwork({ direction, noAlert, withCluster } = {}) {
   ) {
     return;
   }
-  history, historyPosition = moveHistory(history, historyPosition, currentPath, direction);
+  moveHistory(currentPath, direction);
   for (let type of ["device", "link"]) {
     let form = serializeForm(`#filtering-form-${type}`, `${type}_filtering`);
     if (currentPath) form.intersect = { type: "pool", id: currentPath };

@@ -12,6 +12,8 @@ import { showRunServicePanel } from "./automation.js";
 import {
   call,
   configureNamespace,
+  history,
+  historyPosition,
   moveHistory,
   notify,
   openPanel,
@@ -38,8 +40,6 @@ let texture;
 let daeModels = {};
 
 let currentPath = localStorage.getItem(page);
-let history = [];
-let historyPosition = -1;
 
 function displayView({direction} = {}) {
   currentPath =
@@ -51,7 +51,7 @@ function displayView({direction} = {}) {
   if (typeof currentPath === "undefined") return;
   const [viewId] = currentPath.split(">").slice(-1);
   localStorage.setItem(page, currentPath);
-  history, historyPosition = moveHistory(history, historyPosition, currentPath, direction);
+  moveHistory(currentPath, direction);
   call({
     url: `/get/view/${viewId}`,
     callback: function (view) {

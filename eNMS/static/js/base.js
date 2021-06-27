@@ -31,8 +31,11 @@ import {
 
 const currentUrl = window.location.href.split("#")[0].split("?")[0];
 export let editors = {};
+export let history = ["workflow_builder", "service_table"].includes(page) ? [""] : [];
+export let historyPosition = page == "service_table" ? 0 : -1;
 export let jsonEditors = {};
 export let userIsActive = true;
+
 let currentTheme = user.theme;
 let topZ = 1000;
 let triggerMenu = true;
@@ -816,24 +819,23 @@ export function copyToClipboard({ text, isId, includeText = true }) {
   notify(`Copied to Clipboard${includeText ? `: ${text}` : "."}`, "success", 5);
 }
 
-export function moveHistory(history, pointer, path, direction) {
+export function moveHistory(path, direction) {
   if (!direction) {
-    pointer++;
-    history.splice(pointer, 9e9, path);
+    historyPosition++;
+    history.splice(historyPosition, 9e9, path);
   } else {
-    pointer += direction == "right" ? 1 : -1;
+    historyPosition += direction == "right" ? 1 : -1;
   }
-  if (history.length >= 1 && pointer !== 0) {
+  if (history.length >= 1 && historyPosition !== 0) {
     $("#left-arrow").removeClass("disabled");
   } else {
     $("#left-arrow").addClass("disabled");
   }
-  if (pointer < history.length - 1) {
+  if (historyPosition < history.length - 1) {
     $("#right-arrow").removeClass("disabled");
   } else {
     $("#right-arrow").addClass("disabled");
   }
-  return history, pointer
 }
 
 export function setTriggerMenu(value) {

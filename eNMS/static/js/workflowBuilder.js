@@ -18,6 +18,8 @@ import {
   configureNamespace,
   copyToClipboard,
   createTooltips,
+  history,
+  historyPosition,
   moveHistory,
   notify,
   openPanel,
@@ -26,8 +28,6 @@ import {
 } from "./base.js";
 import { clearSearch, tables, tableInstances } from "./table.js";
 
-export let history = [""];
-export let historyPosition = page == "workflow_builder" ? -1 : 0;
 export let currentPath = localStorage.getItem("path");
 export let workflow = JSON.parse(localStorage.getItem("workflow"));
 export let currentRuntime;
@@ -267,7 +267,7 @@ export const switchToWorkflow = function (path, direction, runtime, selection) {
     $("#up-arrow").addClass("disabled");
   }
   currentPath = path;
-  history, historyPosition = moveHistory(history, historyPosition, path, direction);
+  moveHistory(path, direction);
   if (!path && page == "service_table") {
     $("#workflow-filtering").val("");
     tableInstances["service"].table.page(0).ajax.reload(null, false);

@@ -816,6 +816,26 @@ export function copyToClipboard({ text, isId, includeText = true }) {
   notify(`Copied to Clipboard${includeText ? `: ${text}` : "."}`, "success", 5);
 }
 
+export function moveHistory(history, pointer, path, direction) {
+  if (!direction) {
+    pointer++;
+    history.splice(pointer, 9e9, path);
+  } else {
+    pointer += direction == "right" ? 1 : -1;
+  }
+  if (history.length >= 1 && pointer !== 0) {
+    $("#left-arrow").removeClass("disabled");
+  } else {
+    $("#left-arrow").addClass("disabled");
+  }
+  if (pointer < history.length - 1) {
+    $("#right-arrow").removeClass("disabled");
+  } else {
+    $("#right-arrow").addClass("disabled");
+  }
+  return history, pointer
+}
+
 export function setTriggerMenu(value) {
   triggerMenu = value;
 }

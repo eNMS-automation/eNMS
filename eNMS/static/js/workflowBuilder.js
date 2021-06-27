@@ -18,6 +18,7 @@ import {
   configureNamespace,
   copyToClipboard,
   createTooltips,
+  moveHistory,
   notify,
   openPanel,
   showInstancePanel,
@@ -266,22 +267,7 @@ export const switchToWorkflow = function (path, direction, runtime, selection) {
     $("#up-arrow").addClass("disabled");
   }
   currentPath = path;
-  if (!direction) {
-    arrowPointer++;
-    arrowHistory.splice(arrowPointer, 9e9, path);
-  } else {
-    arrowPointer += direction == "right" ? 1 : -1;
-  }
-  if (arrowHistory.length >= 1 && arrowPointer !== 0) {
-    $("#left-arrow").removeClass("disabled");
-  } else {
-    $("#left-arrow").addClass("disabled");
-  }
-  if (arrowPointer < arrowHistory.length - 1) {
-    $("#right-arrow").removeClass("disabled");
-  } else {
-    $("#right-arrow").addClass("disabled");
-  }
+  arrowHistory, arrowPointer = moveHistory(arrowHistory, arrowPointer, path, direction);
   if (!path && page == "service_table") {
     $("#workflow-filtering").val("");
     tableInstances["service"].table.page(0).ajax.reload(null, false);

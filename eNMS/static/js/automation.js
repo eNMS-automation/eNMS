@@ -25,8 +25,8 @@ import {
 } from "./base.js";
 import { refreshTable, tableInstances, tables } from "./table.js";
 import {
-  arrowHistory,
-  arrowPointer,
+  history,
+  historyPosition,
   currentRuntime,
   getServiceState,
   switchToWorkflow,
@@ -706,8 +706,8 @@ Object.assign(action, {
     showInstancePanel(service.type, service.id, "run", null, service.initial_form),
   Logs: (service) => showRuntimePanel("logs", service, currentRuntime),
   Results: (service) => showRuntimePanel("results", service, currentRuntime, "result"),
-  Backward: () => switchToWorkflow(arrowHistory[arrowPointer - 1], "left"),
-  Forward: () => switchToWorkflow(arrowHistory[arrowPointer + 1], "right"),
+  Backward: () => switchToWorkflow(history[historyPosition - 1], "left"),
+  Forward: () => switchToWorkflow(history[historyPosition + 1], "right"),
 });
 
 export function loadServiceTypes() {

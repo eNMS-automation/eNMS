@@ -26,8 +26,8 @@ import {
 } from "./base.js";
 import { clearSearch, tables, tableInstances } from "./table.js";
 
-export let arrowHistory = [""];
-export let arrowPointer = page == "workflow_builder" ? -1 : 0;
+export let history = [""];
+export let historyPosition = page == "workflow_builder" ? -1 : 0;
 export let currentPath = localStorage.getItem("path");
 export let workflow = JSON.parse(localStorage.getItem("workflow"));
 export let currentRuntime;
@@ -267,7 +267,7 @@ export const switchToWorkflow = function (path, direction, runtime, selection) {
     $("#up-arrow").addClass("disabled");
   }
   currentPath = path;
-  arrowHistory, arrowPointer = moveHistory(arrowHistory, arrowPointer, path, direction);
+  history, historyPosition = moveHistory(history, historyPosition, path, direction);
   if (!path && page == "service_table") {
     $("#workflow-filtering").val("");
     tableInstances["service"].table.page(0).ajax.reload(null, false);
@@ -699,8 +699,8 @@ function updateRightClickBindings() {
     "Zoom In": () => graph.zoom(0.2),
     "Zoom Out": () => graph.zoom(-0.2),
     "Enter Workflow": (node) => switchToWorkflow(`${currentPath}>${node.id}`),
-    Backward: () => switchToWorkflow(arrowHistory[arrowPointer - 1], "left"),
-    Forward: () => switchToWorkflow(arrowHistory[arrowPointer + 1], "right"),
+    Backward: () => switchToWorkflow(history[historyPosition - 1], "left"),
+    Forward: () => switchToWorkflow(history[historyPosition + 1], "right"),
     Upward: () => {
       const parentPath = currentPath.split(">").slice(0, -1).join(">");
       if (parentPath) switchToWorkflow(parentPath);

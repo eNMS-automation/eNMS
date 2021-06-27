@@ -12,6 +12,7 @@ import { showRunServicePanel } from "./automation.js";
 import {
   call,
   configureNamespace,
+  moveHistory,
   notify,
   openPanel,
   setTriggerMenu,
@@ -37,35 +38,20 @@ let texture;
 let daeModels = {};
 
 let currentPath = localStorage.getItem(page);
-let arrowHistory = [];
-let arrowPointer = -1;
+let history = [];
+let historyPosition = -1;
 
 function displayView({direction} = {}) {
   currentPath =
     direction == "left"
-      ? arrowHistory[arrowPointer - 1]
+      ? history[historyPosition - 1]
       : direction == "right"
-      ? arrowHistory[arrowPointer + 1]
+      ? history[historyPosition + 1]
       : $("#current-view").val();
   if (typeof currentPath === "undefined") return;
   const [viewId] = currentPath.split(">").slice(-1);
   localStorage.setItem(page, currentPath);
-  if (!direction) {
-    arrowPointer++;
-    arrowHistory.splice(arrowPointer, 9e9, currentPath);
-  } else {
-    arrowPointer += direction == "right" ? 1 : -1;
-  }
-  if (arrowHistory.length >= 1 && arrowPointer !== 0) {
-    $("#left-arrow").removeClass("disabled");
-  } else {
-    $("#left-arrow").addClass("disabled");
-  }
-  if (arrowPointer < arrowHistory.length - 1) {
-    $("#right-arrow").removeClass("disabled");
-  } else {
-    $("#right-arrow").addClass("disabled");
-  }
+  history, historyPosition = moveHistory(history, historyPosition, currentPath, direction);
   call({
     url: `/get/view/${viewId}`,
     callback: function (view) {

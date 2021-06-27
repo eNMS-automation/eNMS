@@ -15,6 +15,7 @@ import { showRunServicePanel } from "./automation.js";
 import {
   call,
   configureNamespace,
+  moveHistory,
   notify,
   openPanel,
   serializeForm,
@@ -42,8 +43,8 @@ let polylines;
 let labels;
 
 let currentPath = localStorage.getItem(page);
-let arrowHistory = [];
-let arrowPointer = -1;
+let history = [];
+let historyPosition = -1;
 let controls;
 
 function updateRightClickBindings(controls) {
@@ -396,33 +397,18 @@ function displayNetwork({ direction, noAlert, withCluster } = {}) {
   let data = {};
   currentPath =
     direction == "left"
-      ? arrowHistory[arrowPointer - 1]
+      ? history[historyPosition - 1]
       : direction == "right"
-      ? arrowHistory[arrowPointer + 1]
+      ? history[historyPosition + 1]
       : $("#current-pool").val();
   localStorage.setItem(page, currentPath);
   if (
-    (direction == "left" && arrowPointer == 0) ||
-    (direction == "right" && arrowPointer + 1 == arrowHistory.length)
+    (direction == "left" && historyPosition == 0) ||
+    (direction == "right" && historyPosition + 1 == history.length)
   ) {
     return;
   }
-  if (!direction) {
-    arrowPointer++;
-    arrowHistory.splice(arrowPointer, 9e9, currentPath);
-  } else {
-    arrowPointer += direction == "right" ? 1 : -1;
-  }
-  if (arrowHistory.length >= 1 && arrowPointer !== 0) {
-    $("#left-arrow").removeClass("disabled");
-  } else {
-    $("#left-arrow").addClass("disabled");
-  }
-  if (arrowPointer < arrowHistory.length - 1) {
-    $("#right-arrow").removeClass("disabled");
-  } else {
-    $("#right-arrow").addClass("disabled");
-  }
+  history, historyPosition = moveHistory(history, historyPosition, currentPath, direction);
   for (let type of ["device", "link"]) {
     let form = serializeForm(`#filtering-form-${type}`, `${type}_filtering`);
     if (currentPath) form.intersect = { type: "pool", id: currentPath };

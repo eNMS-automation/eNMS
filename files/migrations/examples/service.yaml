@@ -117,7 +117,7 @@
     'Regression Workflow: NCClient Netconf Service': [-448, -185]
     'Regression Workflow: Napalm Getters and Postprocessing': *id013
     'Regression Workflow: Netmiko Prompts': *id014
-    'Regression Workflow: Notifications': [-229, -77]
+    'Regression Workflow: Notifications': [-391, -77]
     'Regression Workflow: Operational Data Backup (admin)': *id003
     'Regression Workflow: Optional Prerequisite Services': [-356, 121]
     'Regression Workflow: Preprocessing and Postprocessing': *id015
@@ -18571,8 +18571,14 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  labels: {}
-  last_modified: '2021-06-27 21:54:29.101608'
+  labels:
+    201f02ff-4201-4e48-ac16-a25fb877787c:
+      alignment: left
+      content: "For this workflow, the \"MAIL_PASSWORD\" env variable must be set\
+        \ for\r\neNMS to be able to send notifications.\r\nAll services are configured\
+        \ to send mail notification, as well as the workflow\r\nitself."
+      positions: [100, -112]
+  last_modified: '2021-06-27 21:57:35.859385'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -18654,7 +18660,7 @@
   operating_system: ''
   pools: ['All devices, links, services and users']
   positions:
-    'Regression Workflow: Notifications': [-18, -78]
+    'Regression Workflow: Notifications': [-374, 195]
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''
@@ -18722,7 +18728,7 @@
   operating_system: ''
   pools: ['All devices, links, services and users']
   positions:
-    'Regression Workflow: Notifications': [-22, 153]
+    'Regression Workflow: Notifications': [136, 203]
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''

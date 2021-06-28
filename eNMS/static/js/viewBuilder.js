@@ -41,7 +41,7 @@ let daeModels = {};
 
 let currentPath = localStorage.getItem(page);
 
-function displayView({direction} = {}) {
+function displayView({ direction } = {}) {
   currentPath =
     direction == "left"
       ? history[historyPosition - 1]
@@ -115,7 +115,7 @@ function onMouseDown(event) {
     let object = intersects[0].object;
     selectedObject = object.userData;
     if (selectedObject.type == "node") {
-      selectedObject = {id: selectedObject.device_id, type: "device"};
+      selectedObject = { id: selectedObject.device_id, type: "device" };
     }
     if (object.userData.type == "collada") {
       object = daeModels[object.userData.id];
@@ -144,7 +144,7 @@ function onMouseDown(event) {
   } else {
     $(".global").hide();
     $(".rc-object-menu").show();
-  }   
+  }
   render();
 }
 
@@ -183,7 +183,10 @@ function savePositions() {
   call({
     url: "/save_view_positions",
     data: Object.fromEntries(
-      Object.entries(nodes).map(([nodeId, node]) => [nodeId, node.position])
+      Object.entries(nodes).map(([nodeId, node]) => [
+        nodeId,
+        { position: node.position, scale: node.scale },
+      ])
     ),
     callback: function (updateTime) {
       if (updateTime) currentView.last_modified = updateTime;
@@ -223,7 +226,11 @@ function drawNode(node) {
         function (collada) {
           daeModels[node.id] = collada.scene;
           daeModels[node.id].scale.set(10, 10, 10);
-          daeModels[node.id].position.set(node.x, node.y, node.z);
+          daeModels[node.id].position.set(
+            node.position_x,
+            node.position_y,
+            node.position_z
+          );
           daeModels[node.id].traverse(function (child) {
             child.userData = { type: "collada", id: node.id };
           });
@@ -241,7 +248,7 @@ function drawNode(node) {
     }
   }
   const mesh = new THREE.Mesh(geometry, material);
-  mesh.position.set(node.x, Math.max(node.y, 10), node.z);
+  mesh.position.set(node.position_x, Math.max(node.position_y, 10), node.position_z);
   if (node.type == "plan") {
     mesh.rotation.x = Math.PI / 2;
   } else {
@@ -329,9 +336,7 @@ export function viewCreation(view) {
   if (view.id == currentView.id) {
     $("#current-view option:selected").text(view.name).trigger("change");
   } else {
-    $("#current-view").append(
-      `<option value="${view.id}">${view.name}</option>`
-    );
+    $("#current-view").append(`<option value="${view.id}">${view.name}</option>`);
     $("#current-view").val(view.id).trigger("change");
     displayView();
   }
@@ -384,8 +389,8 @@ function updateRightClickBindings(controls) {
     "Switch Mode": switchMode,
     "Zoom In": () => controls?.dollyOut(),
     "Zoom Out": () => controls?.dollyIn(),
-    "Backward": () => displayView({ direction: "left" }),
-    "Forward": () => displayView({ direction: "right" }),
+    Backward: () => displayView({ direction: "left" }),
+    Forward: () => displayView({ direction: "right" }),
   });
 }
 

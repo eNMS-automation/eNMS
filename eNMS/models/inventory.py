@@ -439,9 +439,12 @@ class ViewObject(AbstractBase):
     view = relationship(
         "View", remote_side=[id], foreign_keys=view_id, back_populates="objects"
     )
-    x = db.Column(Float, default=0.0)
-    y = db.Column(Float, default=0.0)
-    z = db.Column(Float, default=0.0)
+    position_x = db.Column(Float, default=0.0)
+    position_y = db.Column(Float, default=0.0)
+    position_z = db.Column(Float, default=0.0)
+    scale_x = db.Column(Float, default=0.0)
+    scale_y = db.Column(Float, default=0.0)
+    scale_z = db.Column(Float, default=0.0)
 
     def update(self, **kwargs):
         super().update(**kwargs)

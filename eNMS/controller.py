@@ -1067,8 +1067,12 @@ class Controller:
                 dump(kwargs["settings"], file, indent=2)
 
     def save_view_positions(self, **kwargs):
-        for node_id, position in kwargs.items():
-            db.factory("view_object", id=node_id, **position)
+        print(kwargs)
+        for node_id, properties in kwargs.items():
+            view_object = db.factory("view_object", id=node_id)
+            for property, values in properties.items():
+                for direction in ("x", "y", "z"):
+                    setattr(view_object, f"{property}_{direction}", values[direction])
         return vs.get_time()
 
     def scan_cluster(self, **kwargs):

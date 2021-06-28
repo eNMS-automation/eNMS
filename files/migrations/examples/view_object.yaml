@@ -3,23 +3,23 @@
   objects: ['2021-03-29 09:40:15.682829', '2021-05-02 03:49:17.745962', '2021-05-02
       03:49:17.747779', '2021-05-02 03:49:17.747771']
   type: view
-  x: 0.0
-  y: 0.0
-  z: 0.0
+  position_x: 0.0
+  position_y: 0.0
+  position_z: 0.0
 - {name: '2021-03-29 09:40:15.682829', type: plan, view: 'Regression View : Basic
-    Example', x: 0.0, y: 10.0, z: 0.0}
+    Example', position_x: 0.0, position_y: 10.0, position_z: 0.0}
 - {device: Austin, model: '', name: '2021-05-02 03:49:17.745962', type: node, view: 'Regression
-    View : Basic Example', x: -150.53147435477922, y: 10.0, z: 119.47871920651392}
+    View : Basic Example', position_x: -150.53147435477922, position_y: 10.0, position_z: 119.47871920651392}
 - {device: Washington, model: juniper_ex3300, name: '2021-05-02 03:49:17.747779',
-  type: node, view: 'Regression View : Basic Example', x: 0.0, y: 10.0, z: 0.0}
+  type: node, view: 'Regression View : Basic Example', position_x: 0.0, position_y: 10.0, position_z: 0.0}
 - {device: Washington, model: cisco_catalyst_me4924, name: '2021-05-02 03:49:17.747771',
-  type: node, view: 'Regression View : Basic Example', x: 0.0, y: 10.0, z: -1000.0}
+  type: node, view: 'Regression View : Basic Example', position_x: 0.0, position_y: 10.0, position_z: -1000.0}
 - last_modified: '2021-06-28 06:06:36.956532'
   name: 'Regression View: Plans'
   objects: ['2021-06-28 06:10:10.426808']
   type: view
-  x: 0.0
-  y: 0.0
-  z: 0.0
+  position_x: 0.0
+  position_y: 0.0
+  position_z: 0.0
 - {name: '2021-06-28 06:10:10.426808', type: plan, view: 'Regression View: Plans',
-  x: 0.0, y: 10.0, z: 0.0}
+  position_x: 0.0, position_y: 10.0, position_z: 0.0}

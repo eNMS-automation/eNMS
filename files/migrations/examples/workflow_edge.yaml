@@ -1435,3 +1435,21 @@
   source: '[Regression Workflow: NCClient Netconf Service] Check ZZZZ is not in Config',
   subtype: success, type: workflow_edge, workflow: 'Regression Workflow: NCClient
     Netconf Service'}
+- {color: green, destination: '[Regression Workflow: multiple parallel connections
+    to same device] Show VRF with default connection', label: success, name: '2021-06-27
+    21:08:53.125999', source: '[Shared] Start', subtype: success, type: workflow_edge,
+  workflow: 'Regression Workflow: multiple parallel connections to same device'}
+- {color: green, destination: '[Regression Workflow: multiple parallel connections
+    to same device] Show VRF with connection connection2', label: success, name: '2021-06-27
+    21:09:08.187397', source: '[Regression Workflow: multiple parallel connections
+    to same device] Show VRF with default connection', subtype: success, type: workflow_edge,
+  workflow: 'Regression Workflow: multiple parallel connections to same device'}
+- {color: green, destination: '[Regression Workflow: multiple parallel connections
+    to same device] Show users with connection2 and close', label: success, name: '2021-06-27
+    21:09:09.135010', source: '[Regression Workflow: multiple parallel connections
+    to same device] Show VRF with connection connection2', subtype: success, type: workflow_edge,
+  workflow: 'Regression Workflow: multiple parallel connections to same device'}
+- {color: green, destination: '[Shared] End', label: success, name: '2021-06-27 21:09:10.321702',
+  source: '[Regression Workflow: multiple parallel connections to same device] Show
+    users with connection2 and close', subtype: success, type: workflow_edge, workflow: 'Regression
+    Workflow: multiple parallel connections to same device'}

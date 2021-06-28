@@ -140,6 +140,7 @@
     'Regression Workflow: Validation Section Mechanism': [-413, -265]
     'Regression Workflow: Workflow and Subworkflow Iteration': [-313, 364]
     'Regression Workflow: Workflow of Workflows': *id026
+    'Regression Workflow: multiple parallel connections to same device': [-267, 9]
     'Regression workflow P: large workflow (scalability)': *id016
     Subworkflow 1: !!python/tuple [0, 0]
     Subworkflow 2: !!python/tuple [0, 0]
@@ -400,6 +401,7 @@
     'Regression Workflow: Validation Section Mechanism': [392, 138]
     'Regression Workflow: Workflow and Subworkflow Iteration': [644, 233]
     'Regression Workflow: Workflow of Workflows': *id067
+    'Regression Workflow: multiple parallel connections to same device': [629, 18]
     'Regression workflow P: large workflow (scalability)': *id057
     Subworkflow 1: !!python/tuple [0, 0]
     Subworkflow 2: !!python/tuple [0, 0]
@@ -681,6 +683,7 @@
 - access_groups: ''
   close_connection: false
   completion_time: 1
+  connection_name: default
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -760,6 +763,7 @@
 - access_groups: ''
   close_connection: false
   completion_time: 1
+  connection_name: default
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -846,6 +850,7 @@
   completion_time: 1
   config_mode: false
   config_mode_command: ''
+  connection_name: default
   content: vrf instance test
   content_match: ''
   content_match_regex: false
@@ -933,6 +938,7 @@
   command: show vrf
   completion_time: 1
   config_mode: false
+  connection_name: default
   content_match: test
   content_match_regex: false
   conversion_method: text
@@ -1032,6 +1038,7 @@
   completion_time: 1
   config_mode: false
   config_mode_command: ''
+  connection_name: default
   content: no vrf instance test
   content_match: ''
   content_match_regex: false
@@ -1120,6 +1127,7 @@
   command: show vrf
   completion_time: 1
   config_mode: false
+  connection_name: default
   content_match: test
   content_match_regex: true
   conversion_method: text
@@ -1216,6 +1224,7 @@
   action: load_merge_candidate
   close_connection: false
   completion_time: 1
+  connection_name: default
   content: "vrf instance napalm\r\n"
   content_match: ''
   content_match_regex: false
@@ -1385,6 +1394,7 @@
 - access_groups: ''
   close_connection: false
   completion_time: 1
+  connection_name: default
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -1467,6 +1477,7 @@
 - access_groups: ''
   close_connection: false
   completion_time: 1
+  connection_name: default
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -1549,6 +1560,7 @@
 - access_groups: ''
   close_connection: false
   completion_time: 1
+  connection_name: default
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -1631,6 +1643,7 @@
 - access_groups: ''
   close_connection: false
   completion_time: 1
+  connection_name: default
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -1860,6 +1873,7 @@
   command: show ip route
   completion_time: 1
   config_mode: false
+  connection_name: default
   content_match: ''
   content_match_regex: false
   conversion_method: text
@@ -2057,6 +2071,7 @@
 - access_groups: ''
   close_connection: false
   completion_time: 1
+  connection_name: default
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -2138,6 +2153,7 @@
   command: show vrf
   completion_time: 1
   config_mode: false
+  connection_name: default
   content_match: napalm
   content_match_regex: false
   conversion_method: text
@@ -2235,6 +2251,7 @@
   command: show vrf
   completion_time: 1
   config_mode: false
+  connection_name: default
   content_match: napalm
   content_match_regex: false
   conversion_method: text
@@ -2333,6 +2350,7 @@
   confirmation1: Protocols
   confirmation2: Interfaces
   confirmation3: bipbipbop
+  connection_name: default
   content_match: ''
   content_match_regex: false
   conversion_method: text
@@ -2428,6 +2446,7 @@
   confirmation1: Protocols
   confirmation2: Interfaces
   confirmation3: ''
+  connection_name: default
   content_match: ''
   content_match_regex: false
   conversion_method: text
@@ -2662,6 +2681,7 @@
   command: show vrf {{iteration_simple}}
   completion_time: 1
   config_mode: false
+  connection_name: default
   content_match: ''
   content_match_regex: false
   conversion_method: text
@@ -2755,6 +2775,7 @@
   command: show vrf test
   completion_time: 1
   config_mode: false
+  connection_name: default
   content_match: ''
   content_match_regex: false
   conversion_method: text
@@ -2848,6 +2869,7 @@
   command: show vrf {{get_result("Modify payload (per device)", device=device.name)["duration"]}}
   completion_time: 1
   config_mode: false
+  connection_name: default
   content_match: ''
   content_match_regex: false
   conversion_method: text
@@ -2938,6 +2960,7 @@
 - access_groups: ''
   close_connection: false
   completion_time: 1
+  connection_name: default
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -3027,6 +3050,7 @@
 - access_groups: ''
   close_connection: false
   completion_time: 1
+  connection_name: default
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -3115,6 +3139,7 @@
 - access_groups: ''
   close_connection: false
   completion_time: 1
+  connection_name: default
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -3214,6 +3239,7 @@
 - access_groups: ''
   close_connection: false
   completion_time: 1
+  connection_name: default
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -3302,6 +3328,7 @@
 - access_groups: ''
   close_connection: false
   completion_time: 1
+  connection_name: default
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -3610,6 +3637,7 @@
   command: show version
   completion_time: 1
   config_mode: false
+  connection_name: default
   content_match: ''
   content_match_regex: false
   conversion_method: text
@@ -3705,6 +3733,7 @@
   command: show interface {{non_default_iteration_value_name}}
   completion_time: 1
   config_mode: false
+  connection_name: default
   content_match: does not exist
   content_match_regex: false
   conversion_method: text
@@ -3798,6 +3827,7 @@
   command: show interface {{iteration_value}}
   completion_time: 1
   config_mode: false
+  connection_name: default
   content_match: does not exist
   content_match_regex: false
   conversion_method: text
@@ -3891,6 +3921,7 @@
   command: show interface {{iteration_value}}
   completion_time: 1
   config_mode: false
+  connection_name: default
   content_match: does not exist
   content_match_regex: false
   conversion_method: text
@@ -4407,6 +4438,7 @@
   command: show interface {{get_var('iteration_value')}}
   completion_time: 1
   config_mode: false
+  connection_name: default
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -5971,6 +6003,7 @@
   command: show interfaces
   completion_time: 1
   config_mode: false
+  connection_name: default
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -6075,6 +6108,7 @@
   - {prefix: '', value: ''}
   completion_time: 1
   config_mode: false
+  connection_name: default
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -6620,6 +6654,7 @@
   command: ''
   completion_time: 1
   config_mode: false
+  connection_name: default
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -6714,6 +6749,7 @@
   command: ''
   completion_time: 1
   config_mode: false
+  connection_name: default
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -6808,6 +6844,7 @@
   command: ''
   completion_time: 1
   config_mode: false
+  connection_name: default
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -7140,6 +7177,7 @@
   command: show vrf
   completion_time: 1
   config_mode: false
+  connection_name: default
   content_match: NOMATCH
   content_match_regex: false
   conversion_method: none
@@ -7446,6 +7484,7 @@
   command: show vrf {{command_dict["command"]}}
   completion_time: 1
   config_mode: false
+  connection_name: default
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -8851,6 +8890,7 @@
   close_connection: false
   completion_time: 1
   config_mode: false
+  connection_name: default
   content_match: 5 received
   content_match_regex: false
   conversion_method: none
@@ -9163,6 +9203,7 @@
   command: ps -ef
   completion_time: 1
   config_mode: false
+  connection_name: default
   content_match: python\d
   content_match_regex: true
   conversion_method: none
@@ -9335,6 +9376,7 @@
   command: show version
   completion_time: 1
   config_mode: false
+  connection_name: default
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -9437,6 +9479,7 @@
   - {prefix: '', value: ''}
   completion_time: 1
   config_mode: false
+  connection_name: default
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -9751,6 +9794,7 @@
   close_connection: false
   commands: "show run\r\nshow vrf"
   completion_time: 1
+  connection_name: default
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -9827,6 +9871,7 @@
   close_connection: false
   commands: vrf instance TEST-VRF
   completion_time: 1
+  connection_name: default
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -9903,6 +9948,7 @@
   close_connection: false
   commands: "show run\r\nshow vrf"
   completion_time: 1
+  connection_name: default
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -9979,6 +10025,7 @@
   close_connection: false
   commands: no vrf instance TEST-VRF
   completion_time: 1
+  connection_name: default
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -10550,6 +10597,7 @@
   command: show vrf
   completion_time: 1
   config_mode: false
+  connection_name: default
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -10644,6 +10692,7 @@
   command: show vrf
   completion_time: 1
   config_mode: false
+  connection_name: default
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -10738,6 +10787,7 @@
   command: show vrf
   completion_time: 1
   config_mode: false
+  connection_name: default
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -10832,6 +10882,7 @@
   command: show vrf
   completion_time: 1
   config_mode: false
+  connection_name: default
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -10926,6 +10977,7 @@
   command: show vrf
   completion_time: 1
   config_mode: false
+  connection_name: default
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -11020,6 +11072,7 @@
   command: show vrf
   completion_time: 1
   config_mode: false
+  connection_name: default
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -11747,6 +11800,7 @@
   command: dir enms_files
   completion_time: 1
   config_mode: false
+  connection_name: default
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -11919,6 +11973,7 @@
   command: dir enms_files
   completion_time: 1
   config_mode: false
+  connection_name: default
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -12094,6 +12149,7 @@
   command: delete flash:/enms_files/*.bin
   completion_time: 1
   config_mode: false
+  connection_name: default
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -13222,6 +13278,7 @@
   command: show vrf
   completion_time: 1
   config_mode: false
+  connection_name: default
   content_match: NOVRF
   content_match_regex: false
   conversion_method: none
@@ -13568,6 +13625,7 @@
   command: show vrf
   completion_time: 1
   config_mode: false
+  connection_name: default
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -14065,6 +14123,7 @@
   command: show vrf
   completion_time: 1
   config_mode: false
+  connection_name: default
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -15227,6 +15286,7 @@
   command: show run
   completion_time: 1
   config_mode: false
+  connection_name: default
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -15414,6 +15474,7 @@
   command: show interfaces
   completion_time: 1
   config_mode: false
+  connection_name: default
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -16799,6 +16860,7 @@
   command: get_config
   commit_config: false
   completion_time: 1
+  connection_name: default
   content: ''
   content_match: ''
   content_match_regex: false
@@ -16876,6 +16938,7 @@
   command: get
   commit_config: false
   completion_time: 1
+  connection_name: default
   content: "<if:interfaces -state xmlns:if=\"urn:ietf:params:xml:ns:yang:ietf-interfaces\"\
     >\r\n      <if:interface>\r\n        <if:name>Loopback5</if:name>\r\n      </if:interface>\r\
     \n</if:interfaces>"
@@ -16957,6 +17020,7 @@
   command: rpc
   commit_config: true
   completion_time: 1
+  connection_name: default
   content: "<nc:edit-config xmlns:nc=\"urn:ietf:params:xml:ns:netconf:base:1.0\">\r\
     \n   <target>\r\n   <running/>\r\n   </target>\r\n   <commands>\r\n   <command>interface\
     \ Loopback5</command>\r\n   <command>description YYYY</command>\r\n   </commands>\r\
@@ -17035,6 +17099,7 @@
   command: rpc
   commit_config: false
   completion_time: 1
+  connection_name: default
   content: "<nc:edit-config xmlns:nc=\"urn:ietf:params:xml:ns:netconf:base:1.0\">\r\
     \n   <target>\r\n   <running/>\r\n   </target>\r\n   <commands>\r\n   <command>interface\
     \ Loopback 5</command>\r\n   <command>no description YYYY</command>\r\n   </commands>\r\
@@ -17189,6 +17254,7 @@
   command: show interface {{payload["form"]["interface"]}}
   completion_time: 1
   config_mode: false
+  connection_name: default
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -17665,6 +17731,7 @@
   close_connection: false
   commit_conf: false
   completion_time: 1
+  connection_name: default
   content_match: ZZZZ
   content_match_regex: false
   conversion_method: text
@@ -17750,6 +17817,7 @@
   close_connection: false
   commit_conf: false
   completion_time: 1
+  connection_name: default
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -17841,6 +17909,7 @@
   close_connection: false
   commit_conf: false
   completion_time: 1
+  connection_name: default
   content_match: ZZZZ
   content_match_regex: false
   conversion_method: text
@@ -17926,6 +17995,7 @@
   close_connection: false
   commit_conf: false
   completion_time: 1
+  connection_name: default
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -18016,6 +18086,7 @@
   close_connection: false
   commit_conf: false
   completion_time: 1
+  connection_name: default
   content_match: ZZZZ
   content_match_regex: false
   conversion_method: text
@@ -18097,3 +18168,354 @@
   waiting_time: 0
   xml_conversion: true
   xml_filter: ''
+- access_groups: admin
+  close_connection: false
+  completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credential_type: any
+  default_access: creator
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  impacting: false
+  include_device_results: false
+  include_link_in_summary: false
+  initial_form: ''
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  labels: {}
+  last_modified: '2021-06-27 21:09:10.321702'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: 'Regression Workflow: multiple parallel connections to same device'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: ['All devices, links, services and users']
+  positions: {}
+  postprocessing: ''
+  postprocessing_mode: success
+  preprocessing: ''
+  priority: 1
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: 'Regression Workflow: multiple parallel connections to same device'
+  send_notification: false
+  send_notification_method: mail
+  services: ['[Shared] Start', '[Shared] End', '[Regression Workflow: multiple parallel
+      connections to same device] Show VRF with default connection', '[Regression
+      Workflow: multiple parallel connections to same device] Show VRF with connection
+      connection2', '[Regression Workflow: multiple parallel connections to same device]
+      Show users with connection2 and close']
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: success
+  target_devices: [Washington]
+  target_pools: []
+  time_between_retries: 10
+  type: workflow
+  update_pools_after_running: false
+  update_target_pools: false
+  validation_condition: none
+  validation_method: text
+  validation_section: results['result']
+  vendor: ''
+  waiting_time: 0
+  workflow_category: Example workflow(s)
+- access_groups: admin
+  auto_find_prompt: true
+  close_connection: false
+  command: show vrf
+  completion_time: 1
+  config_mode: false
+  connection_name: default
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credential_type: any
+  credentials: device
+  custom_password: ''
+  custom_username: ''
+  default_access: creator
+  definition: Definition
+  delay_factor: 1.0
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  driver: a10
+  enable_mode: true
+  exit_command: exit
+  expect_password_prompt: password
+  expect_prompt: admin.*$
+  expect_string: ''
+  expect_username_prompt: 'username:'
+  fast_cli: false
+  global_delay_factor: 1.0
+  impacting: false
+  include_device_results: false
+  include_link_in_summary: false
+  initial_form: ''
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  jump_command: ssh jump_server_IP
+  jump_on_connect: false
+  jump_password: ''
+  jump_username: ''
+  last_modified: '2021-06-27 21:07:09.596633'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Regression Workflow: multiple parallel connections to same device] Show
+    VRF with default connection'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: ['All devices, links, services and users']
+  positions:
+    'Regression Workflow: multiple parallel connections to same device': [-87, -138]
+  postprocessing: ''
+  postprocessing_mode: success
+  preprocessing: ''
+  priority: 1
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: Show VRF with default connection
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: success
+  start_new_connection: false
+  strip_command: true
+  strip_prompt: true
+  target_devices: []
+  target_pools: []
+  time_between_retries: 10
+  timeout: 10.0
+  type: netmiko_validation_service
+  update_pools_after_running: false
+  update_target_pools: false
+  use_device_driver: true
+  validation_condition: none
+  validation_method: text
+  validation_section: results['result']
+  vendor: ''
+  waiting_time: 0
+- access_groups: admin
+  auto_find_prompt: true
+  close_connection: false
+  command: show vrf
+  completion_time: 1
+  config_mode: false
+  connection_name: connection2
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credential_type: any
+  credentials: device
+  custom_password: ''
+  custom_username: ''
+  default_access: creator
+  definition: Definition
+  delay_factor: 1.0
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  driver: a10
+  enable_mode: true
+  exit_command: exit
+  expect_password_prompt: password
+  expect_prompt: admin.*$
+  expect_string: ''
+  expect_username_prompt: 'username:'
+  fast_cli: false
+  global_delay_factor: 1.0
+  impacting: false
+  include_device_results: false
+  include_link_in_summary: false
+  initial_form: ''
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  jump_command: ssh jump_server_IP
+  jump_on_connect: false
+  jump_password: ''
+  jump_username: ''
+  last_modified: '2021-06-27 21:08:18.891441'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Regression Workflow: multiple parallel connections to same device] Show
+    VRF with connection connection2'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: ['All devices, links, services and users']
+  positions:
+    'Regression Workflow: multiple parallel connections to same device': [176, 98]
+  postprocessing: ''
+  postprocessing_mode: success
+  preprocessing: ''
+  priority: 1
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: Show VRF with connection connection2
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: success
+  start_new_connection: false
+  strip_command: true
+  strip_prompt: true
+  target_devices: []
+  target_pools: []
+  time_between_retries: 10
+  timeout: 10.0
+  type: netmiko_validation_service
+  update_pools_after_running: false
+  update_target_pools: false
+  use_device_driver: true
+  validation_condition: none
+  validation_method: text
+  validation_section: results['result']
+  vendor: ''
+  waiting_time: 0
+- access_groups: admin
+  auto_find_prompt: true
+  close_connection: true
+  command: show vrf
+  completion_time: 1
+  config_mode: false
+  connection_name: connection2
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credential_type: any
+  credentials: device
+  custom_password: ''
+  custom_username: ''
+  default_access: creator
+  definition: Definition
+  delay_factor: 1.0
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  driver: a10
+  enable_mode: true
+  exit_command: exit
+  expect_password_prompt: password
+  expect_prompt: admin.*$
+  expect_string: ''
+  expect_username_prompt: 'username:'
+  fast_cli: false
+  global_delay_factor: 1.0
+  impacting: false
+  include_device_results: false
+  include_link_in_summary: false
+  initial_form: ''
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  jump_command: ssh jump_server_IP
+  jump_on_connect: false
+  jump_password: ''
+  jump_username: ''
+  last_modified: '2021-06-27 21:08:37.480645'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Regression Workflow: multiple parallel connections to same device] Show
+    users with connection2 and close'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: ['All devices, links, services and users']
+  positions:
+    'Regression Workflow: multiple parallel connections to same device': [326, -105]
+  postprocessing: ''
+  postprocessing_mode: success
+  preprocessing: ''
+  priority: 1
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: Show users with connection2 and close
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: success
+  start_new_connection: false
+  strip_command: true
+  strip_prompt: true
+  target_devices: []
+  target_pools: []
+  time_between_retries: 10
+  timeout: 10.0
+  type: netmiko_validation_service
+  update_pools_after_running: false
+  update_target_pools: false
+  use_device_driver: true
+  validation_condition: none
+  validation_method: text
+  validation_section: results['result']
+  vendor: ''
+  waiting_time: 0

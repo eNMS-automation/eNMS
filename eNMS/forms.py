@@ -857,6 +857,7 @@ class ConnectionForm(ServiceForm):
     custom_username = StringField("Custom Username", substitution=True)
     custom_password = PasswordField("Custom Password", substitution=True)
     start_new_connection = BooleanField("Start New Connection")
+    connection_name = StringField("Connection Name", default="default")
     close_connection = BooleanField("Close Connection")
     groups = {
         "Connection Parameters": {

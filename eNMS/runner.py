@@ -931,8 +931,8 @@ class Runner:
             netmiko_connection.enable()
         if self.config_mode:
             netmiko_connection.config_mode()
-        vs.connections_cache["netmiko"][self.parent_runtime][
-            device.name
+        vs.connections_cache["netmiko"][self.parent_runtime].setdefault(device.name, {})[
+            self.connection_name
         ] = netmiko_connection
         return netmiko_connection
 
@@ -965,7 +965,9 @@ class Runner:
             **kwargs,
         )
         connection.open()
-        vs.connections_cache["scrapli"][self.parent_runtime][device.name] = connection
+        vs.connections_cache["scrapli"][self.parent_runtime][device.name][
+            self.connection_name
+        ] = connection
         return connection
 
     def napalm_connection(self, device):
@@ -996,8 +998,8 @@ class Runner:
             **credentials,
         )
         napalm_connection.open()
-        vs.connections_cache["napalm"][self.parent_runtime][
-            device.name
+        vs.connections_cache["napalm"][self.parent_runtime][device.name][
+            self.connection_name
         ] = napalm_connection
         return napalm_connection
 
@@ -1023,8 +1025,8 @@ class Runner:
             username=credentials["username"],
             password=credentials["password"],
         )
-        vs.connections_cache["ncclient"][self.parent_runtime][
-            device.name
+        vs.connections_cache["ncclient"][self.parent_runtime][device.name][
+            self.connection_name
         ] = ncclient_connection
         return ncclient_connection
 
@@ -1056,7 +1058,7 @@ class Runner:
 
     def get_connection(self, library, device):
         cache = vs.connections_cache[library].get(self.parent_runtime, {})
-        return cache.get(device)
+        return cache.get(device, {}).get(getattr(self, "connection_name", "default"))
 
     def close_device_connection(self, device):
         for library in ("netmiko", "napalm", "scrapli", "ncclient"):
@@ -1067,18 +1069,19 @@ class Runner:
     def close_remaining_connections(self):
         threads = []
         for library in ("netmiko", "napalm", "scrapli", "ncclient"):
-            devices = list(vs.connections_cache[library][self.runtime])
-            for device in devices:
-                connection = vs.connections_cache[library][self.runtime][device]
-                thread = Thread(
-                    target=self.disconnect, args=(library, device, connection)
-                )
-                thread.start()
-                threads.append(thread)
+            device_connections = vs.connections_cache[library][self.runtime]
+            for device, connections in device_connections.items():
+                for connection in connections.values():
+                    args = (library, device, connection)
+                    thread = Thread(target=self.disconnect, args=args)
+                    thread.start()
+                    threads.append(thread)
         for thread in threads:
             thread.join()
 
     def disconnect(self, library, device, connection):
+        connection_name = getattr(self, "connection_name", "default")
+        connection_log = f"{library} connection '{connection_name}'"
         try:
             if library == "netmiko":
                 connection.disconnect()
@@ -1086,12 +1089,12 @@ class Runner:
                 connection.close_session()
             else:
                 connection.close()
-            vs.connections_cache[library][self.parent_runtime].pop(device)
-            self.log("info", f"Closed {library} connection", device)
-        except Exception as exc:
-            self.log(
-                "error", f"Error while closing {library} connection ({exc})", device
+            vs.connections_cache[library][self.parent_runtime][device].pop(
+                connection_name
             )
+            self.log("info", f"Closed {connection_log}", device)
+        except Exception as exc:
+            self.log("error", f"Error while closing {connection_log} ({exc})", device)
 
     def enter_remote_device(self, connection, device):
         if not getattr(self, "jump_on_connect", False):

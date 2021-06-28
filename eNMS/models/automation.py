@@ -176,6 +176,7 @@ class ConnectionService(Service):
     custom_username = db.Column(db.SmallString)
     custom_password = db.Column(db.SmallString)
     start_new_connection = db.Column(Boolean, default=False)
+    connection_name = db.Column(db.SmallString, default="default")
     close_connection = db.Column(Boolean, default=False)
     __mapper_args__ = {"polymorphic_identity": "connection_service"}
 

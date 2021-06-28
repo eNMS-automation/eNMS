@@ -16,8 +16,10 @@
   type: node, view: 'Regression View : Basic Example', x: 0.0, y: 10.0, z: -1000.0}
 - last_modified: '2021-06-28 06:06:36.956532'
   name: 'Regression View: Plans'
-  objects: []
+  objects: ['2021-06-28 06:10:10.426808']
   type: view
   x: 0.0
   y: 0.0
   z: 0.0
+- {name: '2021-06-28 06:10:10.426808', type: plan, view: 'Regression View: Plans',
+  x: 0.0, y: 10.0, z: 0.0}

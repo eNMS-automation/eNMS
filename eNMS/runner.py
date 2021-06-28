@@ -905,12 +905,14 @@ class Runner:
 
     def netmiko_connection(self, device):
         connection = self.get_or_close_connection("netmiko", device.name)
+        connection_name = f"Netmiko Connection '{self.connection_name}'"
         if connection:
-            self.log("info", "Using cached Netmiko connection", device)
+            connection_name = g
+            self.log("info", f"Using cached {connection_name}", device)
             return self.update_netmiko_connection(connection)
         self.log(
             "info",
-            "OPENING Netmiko connection",
+            f"OPENING {connection_name}",
             device,
             change_log=False,
             logger="security",
@@ -931,19 +933,20 @@ class Runner:
             netmiko_connection.enable()
         if self.config_mode:
             netmiko_connection.config_mode()
-        vs.connections_cache["netmiko"][self.parent_runtime].setdefault(device.name, {})[
-            self.connection_name
-        ] = netmiko_connection
+        vs.connections_cache["netmiko"][self.parent_runtime].setdefault(
+            device.name, {}
+        )[self.connection_name] = netmiko_connection
         return netmiko_connection
 
     def scrapli_connection(self, device):
         connection = self.get_or_close_connection("scrapli", device.name)
+        connection_name = f"Scrapli Connection '{self.connection_name}'"
         if connection:
-            self.log("info", "Using cached Scrapli connection", device)
+            self.log("info", f"Using cached {connection_name}", device)
             return connection
         self.log(
             "info",
-            "OPENING Scrapli connection",
+            f"OPENING {connection_name}",
             device,
             change_log=False,
             logger="security",
@@ -972,12 +975,13 @@ class Runner:
 
     def napalm_connection(self, device):
         connection = self.get_or_close_connection("napalm", device.name)
+        connection_name = f"NAPALM Connection '{self.connection_name}'"
         if connection:
-            self.log("info", "Using cached NAPALM connection", device)
+            self.log("info", f"Using cached {connection_name}", device)
             return connection
         self.log(
             "info",
-            "OPENING Napalm connection",
+            f"OPENING {connection_name}",
             device,
             change_log=False,
             logger="security",
@@ -1005,12 +1009,13 @@ class Runner:
 
     def ncclient_connection(self, device):
         connection = self.get_or_close_connection("ncclient", device.name)
+        connection_name = f"NCClient Connection '{self.connection_name}'"
         if connection:
-            self.log("info", "Using cached ncclient connection", device)
+            self.log("info", f"Using cached {connection_name}", device)
             return connection
         self.log(
             "info",
-            "OPENING ncclient connection",
+            f"OPENING {connection_name}",
             device,
             change_log=False,
             logger="security",

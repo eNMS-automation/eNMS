@@ -14,3 +14,10 @@
   type: node, view: 'Regression View : Basic Example', x: 0.0, y: 10.0, z: 0.0}
 - {device: Washington, model: cisco_catalyst_me4924, name: '2021-05-02 03:49:17.747771',
   type: node, view: 'Regression View : Basic Example', x: 0.0, y: 10.0, z: -1000.0}
+- last_modified: '2021-06-28 06:06:36.956532'
+  name: 'Regression View: Plans'
+  objects: []
+  type: view
+  x: 0.0
+  y: 0.0
+  z: 0.0

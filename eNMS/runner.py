@@ -907,7 +907,6 @@ class Runner:
         connection = self.get_or_close_connection("netmiko", device.name)
         connection_name = f"Netmiko Connection '{self.connection_name}'"
         if connection:
-            connection_name = g
             self.log("info", f"Using cached {connection_name}", device)
             return self.update_netmiko_connection(connection)
         self.log(

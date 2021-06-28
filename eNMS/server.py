@@ -370,11 +370,12 @@ class Server(Flask):
         def help(path):
             return render_template(f"help/{path}.html")
 
-        @blueprint.route("/view_service_results/<int:id>")
+        @blueprint.route("/view_service_results/<int:run_id>/<int:service>")
         @self.process_requests
-        def view_service_results(id):
-            result = db.fetch("run", id=id).result(main=True).result
-            return f"<pre>{vs.dict_to_string(result)}</pre>"
+        def view_service_results(run_id, service):
+            results = db.fetch_all("result", run_id=run_id, service_id=service)
+            results_dict = [result.result for result in results]
+            return f"<pre>{vs.dict_to_string(results_dict)}</pre>"
 
         @blueprint.route("/download_file/<path:path>")
         @self.process_requests

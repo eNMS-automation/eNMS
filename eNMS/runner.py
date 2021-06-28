@@ -589,7 +589,8 @@ class Runner:
             notification["Header"] = self.sub(self.notification_header, locals())
         if self.include_link_in_summary:
             address = vs.settings["app"]["address"]
-            notification["Link"] = f"{address}/view_service_results/{self.id}"
+            run = f"{self.main_run.id}/{self.service.id}"
+            notification["Link"] = f"{address}/view_service_results/{run}"
         if "summary" in results:
             if results["summary"]["failure"]:
                 notification["FAILED"] = results["summary"]["failure"]
@@ -1001,9 +1002,9 @@ class Runner:
             **credentials,
         )
         napalm_connection.open()
-        vs.connections_cache["napalm"][self.parent_runtime].setdefault(
-            device.name, {}
-        )[self.connection_name] = napalm_connection
+        vs.connections_cache["napalm"][self.parent_runtime].setdefault(device.name, {})[
+            self.connection_name
+        ] = napalm_connection
         return napalm_connection
 
     def ncclient_connection(self, device):

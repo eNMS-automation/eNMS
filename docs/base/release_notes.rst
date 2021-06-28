@@ -93,6 +93,8 @@ from the controller
 - Add SSH key support in generic file transfer service
 - Always set "look_for_keys" to False in generic file transfer service - no longer an option
 - Add validation_section mechanism: set path to section of the result to validate (default: results["result"])
+- Add new "connection_name" mechanism to open multiple parallel connections to the same device in the
+same workflow
 
 MIGRATION:
 

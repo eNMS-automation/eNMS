@@ -967,9 +967,9 @@ class Runner:
             **kwargs,
         )
         connection.open()
-        vs.connections_cache["scrapli"][self.parent_runtime][device.name][
-            self.connection_name
-        ] = connection
+        vs.connections_cache["scrapli"][self.parent_runtime].setdefault(
+            device.name, {}
+        )[self.connection_name] = connection
         return connection
 
     def napalm_connection(self, device):
@@ -1001,9 +1001,9 @@ class Runner:
             **credentials,
         )
         napalm_connection.open()
-        vs.connections_cache["napalm"][self.parent_runtime][device.name][
-            self.connection_name
-        ] = napalm_connection
+        vs.connections_cache["napalm"][self.parent_runtime].setdefault(
+            device.name, {}
+        )[self.connection_name] = napalm_connection
         return napalm_connection
 
     def ncclient_connection(self, device):
@@ -1029,9 +1029,9 @@ class Runner:
             username=credentials["username"],
             password=credentials["password"],
         )
-        vs.connections_cache["ncclient"][self.parent_runtime][device.name][
-            self.connection_name
-        ] = ncclient_connection
+        vs.connections_cache["ncclient"][self.parent_runtime].setdefault(
+            device.name, {}
+        )[self.connection_name] = ncclient_connection
         return ncclient_connection
 
     def get_or_close_connection(self, library, device):

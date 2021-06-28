@@ -140,7 +140,7 @@
     'Regression Workflow: Validation Section Mechanism': [-413, -265]
     'Regression Workflow: Workflow and Subworkflow Iteration': [-313, 364]
     'Regression Workflow: Workflow of Workflows': *id026
-    'Regression Workflow: multiple parallel connections to same device': [-267, 9]
+    'Regression Workflow: multiple parallel connections to same device': [-339, -168]
     'Regression workflow P: large workflow (scalability)': *id016
     Subworkflow 1: !!python/tuple [0, 0]
     Subworkflow 2: !!python/tuple [0, 0]
@@ -401,7 +401,7 @@
     'Regression Workflow: Validation Section Mechanism': [392, 138]
     'Regression Workflow: Workflow and Subworkflow Iteration': [644, 233]
     'Regression Workflow: Workflow of Workflows': *id067
-    'Regression Workflow: multiple parallel connections to same device': [629, 18]
+    'Regression Workflow: multiple parallel connections to same device': [689, 58]
     'Regression workflow P: large workflow (scalability)': *id057
     Subworkflow 1: !!python/tuple [0, 0]
     Subworkflow 2: !!python/tuple [0, 0]
@@ -18194,8 +18194,32 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  labels: {}
-  last_modified: '2021-06-27 21:09:10.321702'
+  labels:
+    51d764cf-2275-4da7-b125-5d05fa7230ef:
+      alignment: left
+      content: "This service opens the default netmiko connection:\r\n\"OPENING Netmiko\
+        \ Connection 'default'\""
+      positions: [-18, -197]
+    7135acf5-728a-4b50-8bd7-8f9dfda7032b:
+      alignment: left
+      content: "This service uses \"connection2\" and \"Close Connection\"\r\nis set\
+        \ to True. Expected in the service logs:\r\n\"Closed netmiko connection 'connection2'\"\
+        \r\n"
+      positions: [462, -167]
+    aaca4c8e-23fa-49d5-98ad-9be3ca696dc7:
+      alignment: left
+      content: "This service opens a new connection named \"connection2\".\r\nThe\
+        \ logs should contain: \"OPENING Netmiko Connection 'connection2'\"\r\ndespite\
+        \ the fact that \"Open New Connection\" is not set."
+      positions: [-173, 190]
+    d1054aca-df42-4e18-9418-f2233be28528:
+      alignment: left
+      content: "During the workflow, there should be two VTY open on the\r\ndevice.\r\
+        \nAt the end of the workflow, the remaining \"default\" connection\r\nshould\
+        \ be closed. Expected in workflow logs:\r\n\"Closed netmiko connection 'default'\"\
+        ."
+      positions: [374, 129]
+  last_modified: '2021-06-27 21:22:08.009172'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -18302,7 +18326,7 @@
   operating_system: ''
   pools: ['All devices, links, services and users']
   positions:
-    'Regression Workflow: multiple parallel connections to same device': [-87, -138]
+    'Regression Workflow: multiple parallel connections to same device': [-72, -122]
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''
@@ -18395,7 +18419,7 @@
   operating_system: ''
   pools: ['All devices, links, services and users']
   positions:
-    'Regression Workflow: multiple parallel connections to same device': [176, 98]
+    'Regression Workflow: multiple parallel connections to same device': [-231, 101]
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''
@@ -18488,7 +18512,7 @@
   operating_system: ''
   pools: ['All devices, links, services and users']
   positions:
-    'Regression Workflow: multiple parallel connections to same device': [326, -105]
+    'Regression Workflow: multiple parallel connections to same device': [454, -84]
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''

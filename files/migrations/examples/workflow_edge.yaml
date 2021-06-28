@@ -1453,3 +1453,14 @@
   source: '[Regression Workflow: multiple parallel connections to same device] Show
     users with connection2 and close', subtype: success, type: workflow_edge, workflow: 'Regression
     Workflow: multiple parallel connections to same device'}
+- {color: green, destination: '[Regression Workflow: Notifications] Run Once Notification',
+  label: success, name: '2021-06-27 21:54:27.276769', source: '[Shared] Start', subtype: success,
+  type: workflow_edge, workflow: 'Regression Workflow: Notifications'}
+- {color: green, destination: '[Regression Workflow: Notifications] Once per device
+    - include device results notification', label: success, name: '2021-06-27 21:54:27.967252',
+  source: '[Regression Workflow: Notifications] Run Once Notification', subtype: success,
+  type: workflow_edge, workflow: 'Regression Workflow: Notifications'}
+- {color: green, destination: '[Shared] End', label: success, name: '2021-06-27 21:54:29.101608',
+  source: '[Regression Workflow: Notifications] Once per device - include device results
+    notification', subtype: success, type: workflow_edge, workflow: 'Regression Workflow:
+    Notifications'}

@@ -866,6 +866,7 @@ class ConnectionForm(ServiceForm):
                 "custom_username",
                 "custom_password",
                 "start_new_connection",
+                "connection_name",
                 "close_connection",
             ],
             "default": "expanded",

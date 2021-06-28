@@ -185,7 +185,7 @@ function savePositions() {
     data: Object.fromEntries(
       Object.entries(nodes).map(([nodeId, node]) => [
         nodeId,
-        { position: node.position, scale: node.scale },
+        { position: node.position, scale: node.scale, rotation: node.rotation },
       ])
     ),
     callback: function (updateTime) {
@@ -226,6 +226,7 @@ function drawNode(node) {
         function (collada) {
           daeModels[node.id] = collada.scene;
           daeModels[node.id].scale.set(node.scale_x, node.scale_y, node.scale_z);
+          daeModels[node.id].rotation.set(node.rotation_x, node.rotation_y, node.rotation_z);
           daeModels[node.id].position.set(
             node.position_x,
             node.position_y,
@@ -250,6 +251,7 @@ function drawNode(node) {
   const mesh = new THREE.Mesh(geometry, material);
   mesh.position.set(node.position_x, Math.max(node.position_y, 10), node.position_z);
   mesh.scale.set(node.scale_x, node.scale_y, node.scale_z);
+  mesh.rotation.set(node.rotation_x, node.rotation_y, node.rotation_z);
   if (node.type == "plan") {
     mesh.rotation.x = Math.PI / 2;
   } else {

@@ -225,7 +225,7 @@ function drawNode(node) {
         `/static/img/view/models/${node.model}.dae`,
         function (collada) {
           daeModels[node.id] = collada.scene;
-          daeModels[node.id].scale.set(10, 10, 10);
+          daeModels[node.id].scale.set(node.scale_x, node.scale_y, node.scale_z);
           daeModels[node.id].position.set(
             node.position_x,
             node.position_y,
@@ -249,6 +249,7 @@ function drawNode(node) {
   }
   const mesh = new THREE.Mesh(geometry, material);
   mesh.position.set(node.position_x, Math.max(node.position_y, 10), node.position_z);
+  mesh.scale.set(node.scale_x, node.scale_y, node.scale_z);
   if (node.type == "plan") {
     mesh.rotation.x = Math.PI / 2;
   } else {

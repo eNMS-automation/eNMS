@@ -1067,7 +1067,6 @@ class Controller:
                 dump(kwargs["settings"], file, indent=2)
 
     def save_view_positions(self, **kwargs):
-        print(kwargs)
         for node_id, properties in kwargs.items():
             view_object = db.factory("view_object", id=node_id)
             for property, values in properties.items():

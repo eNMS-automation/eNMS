@@ -442,9 +442,9 @@ class ViewObject(AbstractBase):
     position_x = db.Column(Float, default=0.0)
     position_y = db.Column(Float, default=0.0)
     position_z = db.Column(Float, default=0.0)
-    scale_x = db.Column(Float, default=0.0)
-    scale_y = db.Column(Float, default=0.0)
-    scale_z = db.Column(Float, default=0.0)
+    scale_x = db.Column(Float, default=1.0)
+    scale_y = db.Column(Float, default=1.0)
+    scale_z = db.Column(Float, default=1.0)
 
     def update(self, **kwargs):
         super().update(**kwargs)

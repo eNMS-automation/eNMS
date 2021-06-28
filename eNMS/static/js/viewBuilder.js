@@ -226,7 +226,11 @@ function drawNode(node) {
         function (collada) {
           daeModels[node.id] = collada.scene;
           daeModels[node.id].scale.set(node.scale_x, node.scale_y, node.scale_z);
-          daeModels[node.id].rotation.set(node.rotation_x, node.rotation_y, node.rotation_z);
+          daeModels[node.id].rotation.set(
+            node.rotation_x,
+            node.rotation_y,
+            node.rotation_z
+          );
           daeModels[node.id].position.set(
             node.position_x,
             node.position_y,

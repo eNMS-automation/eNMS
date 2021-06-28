@@ -1071,7 +1071,12 @@ class Controller:
             view_object = db.factory("view_object", id=node_id)
             for property, values in properties.items():
                 for direction in ("x", "y", "z"):
-                    setattr(view_object, f"{property}_{direction}", values[direction])
+                    prefix = "_" if property == "rotation" else ""
+                    setattr(
+                        view_object,
+                        f"{property}_{direction}",
+                        values[prefix + direction],
+                    )
         return vs.get_time()
 
     def scan_cluster(self, **kwargs):

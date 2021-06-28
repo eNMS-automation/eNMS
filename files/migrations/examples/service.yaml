@@ -380,7 +380,7 @@
     'Regression Workflow: NCClient Netconf Service': [556, 119]
     'Regression Workflow: Napalm Getters and Postprocessing': *id054
     'Regression Workflow: Netmiko Prompts': *id055
-    'Regression Workflow: Notifications': [500, 0]
+    'Regression Workflow: Notifications': [530, 32]
     'Regression Workflow: Operational Data Backup (admin)': *id044
     'Regression Workflow: Optional Prerequisite Services': [734, 171]
     'Regression Workflow: Preprocessing and Postprocessing': *id056
@@ -18563,8 +18563,8 @@
   disable_result_creation: false
   display_only_failed_nodes: false
   impacting: false
-  include_device_results: false
-  include_link_in_summary: false
+  include_device_results: true
+  include_link_in_summary: true
   initial_form: ''
   initial_payload: {}
   iteration_devices: ''
@@ -18577,17 +18577,34 @@
       content: "For this workflow, the \"MAIL_PASSWORD\" env variable must be set\
         \ for\r\neNMS to be able to send notifications.\r\nAll services are configured\
         \ to send mail notification, as well as the workflow\r\nitself."
-      positions: [100, -112]
-  last_modified: '2021-06-27 21:57:35.859385'
+      positions: [49, -29]
+    91b037b9-22e5-42ba-8e3e-fb7a1e24dd57:
+      alignment: left
+      content: "* Once per device service\r\n* Include Device Results in mail\r\n\
+        * All devices including success devices\r\n* No link in summary\r\n* No reply\
+        \ to address"
+      positions: [14, 175]
+    a5cb931b-c6f2-4729-91a6-bf6c89484240:
+      alignment: left
+      content: "* Run Once service\r\n* Simple mail notification\r\n* All options\
+        \ left empty"
+      positions: [-410, 275]
+    a7b41871-93ac-4e12-8c88-c9ac2e87871f:
+      alignment: left
+      content: "Notification 3:\r\n* Include device results + result link in summary\r\
+        \n* Reply to address set\r\n* Display only Display Failed Devices - washigton\
+        \ pass so it is\r\nexcluded from the results. The others two are passing"
+      positions: [410, 285]
+  last_modified: '2021-06-28 02:44:28.670110'
   log_level: 1
-  mail_recipient: ''
+  mail_recipient: antoine.fourmy@gmail.com
   max_number_of_retries: 100
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
   name: 'Regression Workflow: Notifications'
   negative_logic: false
-  notification_header: ''
+  notification_header: Include device results + result link in summary
   number_of_retries: 0
   operating_system: ''
   pools: ['All devices, links, services and users']
@@ -18600,11 +18617,11 @@
   reserved: false
   run_method: per_service_with_workflow_targets
   scoped_name: 'Regression Workflow: Notifications'
-  send_notification: false
+  send_notification: true
   send_notification_method: mail
   services: ['[Shared] Start', '[Shared] End', '[Regression Workflow: Notifications]
-      Run Once Notification', '[Regression Workflow: Notifications] Once per device
-      - include device results notification']
+      Notification 1', '[Regression Workflow: Notifications] Notification 2', '[Regression
+      Workflow: Notifications] Notification 3']
   shared: false
   skip: {}
   skip_query: ''
@@ -18646,21 +18663,22 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2021-06-27 21:53:26.545121'
+  last_modified: '2021-06-28 02:39:15.044828'
   log_level: 1
   mail_recipient: antoine.fourmy@gmail.com
   max_number_of_retries: 100
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression Workflow: Notifications] Run Once Notification'
+  name: '[Regression Workflow: Notifications] Notification 1'
   negative_logic: false
-  notification_header: Run Once Notification
+  notification_header: "* Run Once service\r\n* Simple mail notification\r\n* All\
+    \ options left empty"
   number_of_retries: 0
   operating_system: ''
   pools: ['All devices, links, services and users']
   positions:
-    'Regression Workflow: Notifications': [-374, 195]
+    'Regression Workflow: Notifications': [-422, 198]
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''
@@ -18668,7 +18686,7 @@
   reply_to: ''
   reserved: false
   run_method: once
-  scoped_name: Run Once Notification
+  scoped_name: Notification 1
   send_notification: true
   send_notification_method: mail
   shared: false
@@ -18703,7 +18721,7 @@
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
-  display_only_failed_nodes: false
+  display_only_failed_nodes: true
   impacting: false
   include_device_results: true
   include_link_in_summary: false
@@ -18713,30 +18731,100 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2021-06-27 21:54:22.508914'
+  last_modified: '2021-06-28 02:39:04.907474'
   log_level: 1
   mail_recipient: antoine.fourmy@gmail.com
   max_number_of_retries: 100
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression Workflow: Notifications] Once per device - include device results
-    notification'
+  name: '[Regression Workflow: Notifications] Notification 2'
   negative_logic: false
-  notification_header: Notification 2 - once per device, include device results
+  notification_header: "* Once per device service\r\n* Include Device Results in mail\r\
+    \n* All devices including success devices\r\n* No link in summary\r\n* No reply\
+    \ to address"
   number_of_retries: 0
   operating_system: ''
   pools: ['All devices, links, services and users']
   positions:
-    'Regression Workflow: Notifications': [136, 203]
-  postprocessing: ''
+    'Regression Workflow: Notifications': [-26, 64]
+  postprocessing: results["success"] = device.name == "Washington"
   postprocessing_mode: success
   preprocessing: ''
   priority: 1
   reply_to: ''
   reserved: false
   run_method: per_device
-  scoped_name: Once per device - include device results notification
+  scoped_name: Notification 2
+  send_notification: true
+  send_notification_method: mail
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: success
+  source_code: "\r\n# Click on \"i\" to right of \"Source Code\" for examples.\r\n\
+    \r\nresult = {}\r\nresults[\"success\"] = True\r\nresults[\"result\"] = result"
+  target_devices: []
+  target_pools: []
+  time_between_retries: 10
+  type: python_snippet_service
+  update_pools_after_running: false
+  update_target_pools: false
+  validation_condition: none
+  validation_method: text
+  validation_section: results['result']
+  vendor: ''
+  waiting_time: 0
+- access_groups: admin
+  completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credential_type: any
+  default_access: creator
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: true
+  impacting: false
+  include_device_results: true
+  include_link_in_summary: true
+  initial_form: ''
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2021-06-28 02:45:17.379373'
+  log_level: 1
+  mail_recipient: antoine.fourmy@gmail.com
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Regression Workflow: Notifications] Notification 3'
+  negative_logic: false
+  notification_header: "Notification 3:\r\n* Include device results + result link\
+    \ in summary\r\n* Reply to address set\r\n* Display only Display Failed Devices\
+    \ - washigton pass so it is\r\nexcluded from the results. The others two are passing"
+  number_of_retries: 0
+  operating_system: ''
+  pools: ['All devices, links, services and users']
+  positions:
+    'Regression Workflow: Notifications': [384, 192]
+  postprocessing: results["success"] = device.name == "Washington"
+  postprocessing_mode: success
+  preprocessing: ''
+  priority: 1
+  reply_to: afourmy@enms.io
+  reserved: false
+  run_method: per_device
+  scoped_name: Notification 3
   send_notification: true
   send_notification_method: mail
   shared: false

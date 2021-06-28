@@ -606,7 +606,7 @@ class Runner:
             for device in self.target_devices:
                 device_result = db.fetch(
                     "result",
-                    service_id=self.service_id,
+                    service_id=self.service.id,
                     parent_runtime=self.parent_runtime,
                     device_id=device.id,
                     allow_none=True,

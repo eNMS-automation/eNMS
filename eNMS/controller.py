@@ -578,8 +578,8 @@ class Controller:
             if runtime == "latest":
                 run = sorted(runs, key=attrgetter("runtime"), reverse=True)[0]
             else:
-                run = db.fetch("run", parent_runtime=runtime)
-            state = run.get_state()
+                run = db.fetch("run", allow_none=True, parent_runtime=runtime)
+            state = run.get_state() if run else None
         return {
             "service": service.to_dict(include=["services", "edges", "superworkflow"]),
             "runtimes": sorted(

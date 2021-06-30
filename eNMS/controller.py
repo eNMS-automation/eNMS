@@ -619,6 +619,17 @@ class Controller:
             for file in Path(path).iterdir()
         ]
 
+    def get_view_links(self, view_id):
+        view, links = db.fetch("view", id=view_id), {}
+        nodes = [obj for obj in view.objects if obj.type == "node"]
+        for nodeA in nodes:
+            for nodeB in nodes:
+                link_id = "-".join(map(str, sorted([nodeA.id, nodeB.id])))
+                if nodeA == nodeB or link_id in links:
+                    continue
+                links[link_id] = db.fetch("link", all_matches=True, allow_none=True, source=nodeA.device, destination=nodeB.device)
+        return links
+
     def get_visualization_pools(self, view):
         return [
             pool.base_properties

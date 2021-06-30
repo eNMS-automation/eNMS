@@ -103,8 +103,19 @@ function displayView({ direction } = {}) {
       scene.add(transformControls);
       updateRightClickBindings(controls);
       view.objects.map(drawNode);
+      linkDisplay();
       switchMode("select");
       render();
+    },
+  });
+}
+
+function linkDisplay() {
+  call({
+    url: `/get_view_links/${currentView.id}`,
+    callback: function (links) {
+      result.links.map(drawLink);
+      notify("Links successfully displayed.", "success", 5);
     },
   });
 }

@@ -627,7 +627,20 @@ class Controller:
                 link_id = "-".join(map(str, sorted([nodeA.id, nodeB.id])))
                 if nodeA == nodeB or link_id in links:
                     continue
-                links[link_id] = db.fetch("link", all_matches=True, allow_none=True, source=nodeA.device, destination=nodeB.device)
+                links_objects = db.fetch(
+                    "link",
+                    all_matches=True,
+                    allow_none=True,
+                    source=nodeA.device,
+                    destination=nodeB.device,
+                ) + db.fetch(
+                    "link",
+                    all_matches=True,
+                    allow_none=True,
+                    destination=nodeA.device,
+                    source=nodeB.device,
+                )
+                links[link_id] = [link.serialized for link in links_objects]
         return links
 
     def get_visualization_pools(self, view):

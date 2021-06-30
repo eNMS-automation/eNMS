@@ -120,7 +120,7 @@ function onMouseDown(event) {
     if (object.userData.type == "collada") {
       object = daeModels[object.userData.id];
       selectedObjects.push(object);
-      transformControls.attach(...object.children);
+      transformControls.attach(object, ...object.children);
     } else {
       if (currentMode == "select") {
         object.material.color.set(0xff0000);
@@ -239,6 +239,7 @@ function drawNode(node) {
           daeModels[node.id].traverse(function (child) {
             child.userData = { type: "collada", id: node.id };
           });
+          nodes[node.id] = daeModels[node.id];
           scene.add(daeModels[node.id]);
         }
       );

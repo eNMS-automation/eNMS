@@ -23,7 +23,7 @@ import {
 import { showConnectionPanel, showDeviceData } from "./inventory.js";
 
 let selectedObject;
-let currentMode = "select";
+let currentMode = "none";
 let currentView;
 let selectedObjects = [];
 let camera;
@@ -90,9 +90,6 @@ function displayView({ direction } = {}) {
         if (!event.value) savePositions();
         controls.enabled = !event.value;
       });
-      transformControls.addEventListener("mouseUp", function () {
-        activeControls = false;
-      });
       transformControls.addEventListener("mouseDown", function () {
         activeControls = true;
       });
@@ -120,7 +117,6 @@ function displayLinks() {
         const target = nodes[destinationId];
         let geometry = new THREE.Geometry();
         geometry.dynamic = true;
-        console.log(source.position)
         geometry.vertices.push(source.position);
         geometry.vertices.push(target.position);
         geometry.verticesNeedUpdate = true;
@@ -220,6 +216,7 @@ function savePositions() {
 }
 
 function switchMode(mode) {
+  if (mode == currentMode) return;
   $(`#btn-${currentMode},#btn-${mode}`).toggleClass("active");
   currentMode = mode;
   transformControls.enabled = mode != "select";

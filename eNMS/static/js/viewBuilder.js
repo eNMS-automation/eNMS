@@ -103,18 +103,29 @@ function displayView({ direction } = {}) {
       scene.add(transformControls);
       updateRightClickBindings(controls);
       view.objects.map(drawNode);
-      linkDisplay();
       switchMode("select");
       render();
     },
   });
 }
 
-function linkDisplay() {
+function displayLinks() {
   call({
     url: `/get_view_links/${currentView.id}`,
-    callback: function (links) {
-      result.links.map(drawLink);
+    callback: function (linksObject) {
+      for (const [link_id, links] of Object.entries(linksObject)) {
+        const [sourceId, destinationId] = link_id.split("-");
+        const source = nodes[sourceId];
+        const target = nodes[destinationId];
+        let geometry = new THREE.Geometry();
+        geometry.dynamic = true;
+        geometry.vertices.push(source.position);
+        geometry.vertices.push(target.position);
+        geometry.verticesNeedUpdate = true;
+        let material = new THREE.LineBasicMaterial({ color: 0x000000 });
+        let line = new THREE.Line( geometry, material );
+        scene.add(line);
+      }
       notify("Links successfully displayed.", "success", 5);
     },
   });
@@ -402,6 +413,7 @@ function updateRightClickBindings(controls) {
     "Create Label": () => openPanel({ name: "view_label", title: "Create New Label" }),
     "Create Plan": () => openPanel({ name: "plan", title: "Create New Plan" }),
     "Edit View": () => createNewView("edit"),
+    "Display Links": () => displayLinks(),
     "Edit Pool": () => showInstancePanel("pool", currentPath),
     Delete: () => deleteSelection(),
     "Duplicate View": () => createNewView("duplicate"),

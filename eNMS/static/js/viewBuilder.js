@@ -38,6 +38,7 @@ let activeControls = false;
 let raycaster;
 let texture;
 let daeModels = {};
+let lineGeometries = [];
 
 let currentPath = localStorage.getItem(page);
 
@@ -119,9 +120,11 @@ function displayLinks() {
         const target = nodes[destinationId];
         let geometry = new THREE.Geometry();
         geometry.dynamic = true;
+        console.log(source.position)
         geometry.vertices.push(source.position);
         geometry.vertices.push(target.position);
         geometry.verticesNeedUpdate = true;
+        lineGeometries.push(geometry)
         let material = new THREE.LineBasicMaterial({ color: 0x000000 });
         let line = new THREE.Line( geometry, material );
         scene.add(line);
@@ -426,6 +429,9 @@ function updateRightClickBindings(controls) {
 }
 
 function render() {
+  for (const geometry of lineGeometries) {
+    geometry.verticesNeedUpdate = true;
+  }
   if (renderer && labelRenderer) {
     renderer.render(scene, camera);
     labelRenderer.render(scene, camera);

@@ -138,7 +138,7 @@ function onMouseDown(event) {
     if (selectedObject.type == "node") {
       selectedObject = { id: selectedObject.device_id, type: "device" };
     }
-    if (object.userData.type == "collada") {
+    if (object.userData.isCollada) {
       object = daeModels[object.userData.id];
       selectedObjects.push(object);
       transformControls.attach(object, ...object.children);
@@ -259,7 +259,7 @@ function drawNode(node) {
             node.position_z
           );
           daeModels[node.id].traverse(function (child) {
-            child.userData = { type: "collada", id: node.id };
+            child.userData = { isCollada: true, ...node };
           });
           nodes[node.id] = daeModels[node.id];
           scene.add(daeModels[node.id]);

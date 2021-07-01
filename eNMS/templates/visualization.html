@@ -66,6 +66,11 @@
   <li class="menu rc-object-menu rc-device-menu rc-link-menu rc-site-menu">
     <a tabindex="-1" href="#">Properties</a>
   </li>
+  {% if endpoint == "view_builder" %}
+  <li class="menu rc-object-menu rc-device-menu rc-link-menu">
+    <a tabindex="-1" href="#">View Properties</a>
+  </li>
+  {% endif %}
   <li class="menu rc-object-menu rc-device-menu">
     <a tabindex="-1" href="#">Connect</a>
   </li>

@@ -136,7 +136,7 @@ function onMouseDown(event) {
     let object = intersects[0].object;
     selectedObject = object.userData;
     if (selectedObject.type == "node") {
-      selectedObject = { id: selectedObject.device_id, type: "device" };
+      selectedObject.device = { id: selectedObject.device_id, type: "device" };
     }
     if (object.userData.isCollada) {
       object = daeModels[object.userData.id];
@@ -451,10 +451,11 @@ export function initViewBuilder() {
     },
   });
   Object.assign(action, {
-    Properties: (o) => showInstancePanel(o.type, o.id),
-    Connect: (d) => showConnectionPanel(d),
-    Configuration: (d) => showDeviceData(d),
-    "Run Service": (d) => showRunServicePanel({ instance: d }),
+    "Properties": (viewObject) => showInstancePanel(viewObject.device.type, viewObject.device.id),
+    "View Properties": (viewObject) => showInstancePanel(viewObject.device.type, viewObject.device.id),
+    Connect: (viewObject) => showConnectionPanel(viewObject.device),
+    Configuration: (viewObject) => showDeviceData(viewObject.device),
+    "Run Service": (viewObject) => showRunServicePanel({ instance: viewObject.device }),
   });
   initLogicalFramework();
 }

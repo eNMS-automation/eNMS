@@ -400,6 +400,7 @@ class NodeForm(BaseForm):
     form_type = HiddenField(default="node")
     id = HiddenField()
     name = StringField("Name", [InputRequired()])
+    device = InstanceField("Device", model="device")
     position_x = FloatField("Position (X)", default=0.0)
     position_y = FloatField("Position (Y)", default=0.0)
     position_z = FloatField("Position (Z)", default=0.0)

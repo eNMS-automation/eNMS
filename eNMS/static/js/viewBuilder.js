@@ -384,31 +384,9 @@ function createLabel() {
   });
 }
 
-function addObjectPanel() {
-  openPanel({
-    name: "add_objects_to_view",
-    title: "Add Objects to View",
-    size: "800 350",
-    callback: function () {},
-  });
-}
-
-function addObjectsToView() {
-  call({
-    url: `/add_objects_to_view/${currentView.id}`,
-    form: "add_objects_to_view-form",
-    callback: function (result) {
-      currentView.last_modified = result.update_time;
-      $("#add_objects_to_view").remove();
-      result.nodes.map(drawNode);
-      notify("Objects successfully added to the view.", "success", 5);
-    },
-  });
-}
-
 function updateRightClickBindings(controls) {
   Object.assign(action, {
-    "Add to View": addObjectPanel,
+    "Add to View": () => showInstancePanel("node"),
     "Create View": () => createNewView("create"),
     "Create Label": () => openPanel({ name: "view_label", title: "Create New Label" }),
     "Create Plan": () => openPanel({ name: "plan", title: "Create New Plan" }),
@@ -467,4 +445,4 @@ function animate() {
 
 animate();
 
-configureNamespace("viewBuilder", [addObjectsToView, createLabel, createPlan]);
+configureNamespace("viewBuilder", [createLabel, createPlan]);

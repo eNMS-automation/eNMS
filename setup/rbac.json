@@ -163,7 +163,6 @@
   "post_requests": {
     "/add_edge": "access",
     "/add_instances_in_bulk": "access",
-    "/add_objects_to_view": "access",
     "/bulk_deletion": "access",
     "/bulk_edit": "access",
     "/bulk_removal": "access",

@@ -223,13 +223,6 @@ class FormFactory:
             spec.loader.exec_module(module_from_spec(spec))
 
 
-class AddObjectsForm(BaseForm):
-    form_type = HiddenField(default="add_objects_to_view")
-    action = "eNMS.viewBuilder.addObjectsToView"
-    devices = MultipleInstanceField("Devices", model="device")
-    links = MultipleInstanceField("Links", model="link")
-
-
 class AddServiceForm(BaseForm):
     form_type = HiddenField(default="add_services_to_workflow")
     template = "add_services_to_workflow"

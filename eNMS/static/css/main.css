@@ -855,3 +855,80 @@ textarea.form-control {
 .panel-heading {
   text-decoration: none !important;
 }
+
+td span {
+  line-height: 18px;
+}
+
+/* Set the table pages in the middle */
+.dataTables_length {
+  width: 40%;
+  float: left;
+}
+
+/* Align center for "No data available in table" when empty table */
+.dataTables_empty,
+table.display td.center {
+  text-align: center;
+}
+
+/* Align "Show 1 to 10 of X entries to the right */
+.dataTables_info {
+  font-size: 14px;
+  margin-right: 8px;
+  margin-top: -10px;
+  float: right;
+}
+
+.dataTables_scrollBody {
+  margin-bottom: 10px;
+}
+
+.dataTables_paginate .pagination {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+table.dataTable thead span.sort-icon {
+  display: inline-block;
+  padding-left: 5px;
+  width: 16px;
+  height: 16px;
+}
+
+th.dt-center,
+td.dt-center {
+  text-align: center;
+}
+
+/* Set default cursor for the header instead of pointer */
+table.dataTable thead .sorting,
+table.dataTable thead .sorting_asc,
+table.dataTable thead .sorting_asc_disabled,
+table.dataTable thead .sorting_desc,
+table.dataTable thead .sorting_desc_disabled {
+  cursor: default;
+  pointer-events: none;
+}
+
+/* Position the sorting icon in the upper right corner */
+/* Set pointer cursor on the sorting icon */
+table.dataTable thead .sorting:after,
+table.dataTable thead .sorting_asc:after,
+table.dataTable thead .sorting_desc:after {
+  top: 5px;
+  right: 8px;
+  cursor: pointer;
+  pointer-events: all;
+}
+
+table.dataTable thead > tr > th.sorting,
+table.dataTable thead > tr > th.sorting_asc,
+table.dataTable thead > tr > th.sorting_desc {
+  padding-right: 5px;
+}
+
+.table-search {
+  pointer-events: all;
+}

@@ -120,9 +120,9 @@ function displayLinks() {
         geometry.vertices.push(source.position);
         geometry.vertices.push(target.position);
         geometry.verticesNeedUpdate = true;
-        lineGeometries.push(geometry)
+        lineGeometries.push(geometry);
         let material = new THREE.LineBasicMaterial({ color: 0x000000 });
-        let line = new THREE.Line( geometry, material );
+        let line = new THREE.Line(geometry, material);
         scene.add(line);
       }
       notify("Links successfully displayed.", "success", 5);

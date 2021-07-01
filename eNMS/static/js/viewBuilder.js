@@ -280,9 +280,7 @@ function drawNode(node) {
     }
   }
   const mesh = new THREE.Mesh(geometry, material);
-  mesh.position.set(node.position_x, Math.max(node.position_y, 10), node.position_z);
-  mesh.scale.set(node.scale_x, node.scale_y, node.scale_z);
-  mesh.rotation.set(node.rotation_x, node.rotation_y, node.rotation_z);
+  setNodePosition(mesh, node);
   if (node.type == "plan") {
     mesh.rotation.x = Math.PI / 2;
   } else {
@@ -375,7 +373,8 @@ export function viewCreation(instance) {
       $("#current-view").val(instance.id).trigger("change");
       displayView();
     }
-  } else {
+  } else if (instance.type == "node") {
+    setNodePosition(nodes[instance.id], instance);
   }
 }
 

@@ -395,6 +395,22 @@ class LoginForm(BaseForm):
     password = PasswordField("Password", [InputRequired()])
 
 
+class NodeForm(BaseForm):
+    action = "eNMS.base.processData"
+    form_type = HiddenField(default="node")
+    id = HiddenField()
+    name = StringField("Name", [InputRequired()])
+    position_x = FloatField("Position (X)", default=0.0)
+    position_y = FloatField("Position (Y)", default=0.0)
+    position_z = FloatField("Position (Z)", default=0.0)
+    scale_x = FloatField("Scale (X)", default=1.0)
+    scale_y = FloatField("Scale (Y)", default=1.0)
+    scale_z = FloatField("Scale (Z)", default=1.0)
+    rotation_x = FloatField("Rotation (X)", default=0.0)
+    rotation_y = FloatField("Rotation (Y)", default=0.0)
+    rotation_z = FloatField("Rotation (Z)", default=0.0)
+
+
 class ObjectForm(BaseForm):
     action = "eNMS.base.processData"
     form_type = HiddenField(default="object")

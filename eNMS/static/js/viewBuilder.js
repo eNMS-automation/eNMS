@@ -452,7 +452,7 @@ export function initViewBuilder() {
   });
   Object.assign(action, {
     "Properties": (viewObject) => showInstancePanel(viewObject.device.type, viewObject.device.id),
-    "View Properties": (viewObject) => showInstancePanel(viewObject.device.type, viewObject.device.id),
+    "View Properties": (viewObject) => showInstancePanel("node", viewObject.id),
     Connect: (viewObject) => showConnectionPanel(viewObject.device),
     Configuration: (viewObject) => showDeviceData(viewObject.device),
     "Run Service": (viewObject) => showRunServicePanel({ instance: viewObject.device }),

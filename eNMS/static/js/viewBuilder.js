@@ -169,6 +169,20 @@ function onMouseDown(event) {
   render();
 }
 
+function setNodePosition(node, properties) {
+  node.scale.set(properties.scale_x, properties.scale_y, properties.scale_z);
+  node.rotation.set(
+    properties.rotation_x,
+    properties.rotation_y,
+    properties.rotation_z
+  );
+  node.position.set(
+    properties.position_x,
+    properties.position_y,
+    properties.position_z
+  );
+}
+
 function createPlan() {
   call({
     url: `/create_view_object/plan/${currentView.id}`,
@@ -247,17 +261,7 @@ function drawNode(node) {
         `/static/img/view/models/${node.model}.dae`,
         function (collada) {
           daeModels[node.id] = collada.scene;
-          daeModels[node.id].scale.set(node.scale_x, node.scale_y, node.scale_z);
-          daeModels[node.id].rotation.set(
-            node.rotation_x,
-            node.rotation_y,
-            node.rotation_z
-          );
-          daeModels[node.id].position.set(
-            node.position_x,
-            node.position_y,
-            node.position_z
-          );
+          setNodePosition(daeModels[node.id], node)
           daeModels[node.id].traverse(function (child) {
             child.userData = { isCollada: true, ...node };
           });
@@ -362,13 +366,16 @@ function createNewView(mode) {
   }
 }
 
-export function viewCreation(view) {
-  if (view.id == currentView.id) {
-    $("#current-view option:selected").text(view.name).trigger("change");
+export function viewCreation(instance) {
+  if (instance.type == "view") {
+    if (instance.id == currentView.id) {
+      $("#current-view option:selected").text(instance.name).trigger("change");
+    } else {
+      $("#current-view").append(`<option value="${instance.id}">${instance.name}</option>`);
+      $("#current-view").val(instance.id).trigger("change");
+      displayView();
+    }
   } else {
-    $("#current-view").append(`<option value="${view.id}">${view.name}</option>`);
-    $("#current-view").val(view.id).trigger("change");
-    displayView();
   }
 }
 

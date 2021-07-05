@@ -405,6 +405,26 @@ class Database:
                     sleep(self.retry_commit_time * (index + 1))
         return instance
 
+    def get_device_credentials(self, device, credential_type="any", username=None):
+        if not username:
+            username = current_user.name
+        pool_alias = aliased(vs.models["pool"])
+        query = (
+            self.session.query(vs.models["credential"])
+            .join(vs.models["pool"], vs.models["credential"].user_pools)
+            .join(vs.models["user"], vs.models["pool"].users)
+            .join(pool_alias, vs.models["credential"].device_pools)
+            .join(vs.models["device"], pool_alias.devices)
+            .filter(vs.models["user"].name == username)
+            .filter(vs.models["device"].name == device.name)
+        )
+        if credential_type != "any":
+            query = query.filter(vs.models["credential"].role == credential_type)
+        credentials = max(query.all(), key=attrgetter("priority"), default=None)
+        if not credentials:
+            raise Exception(f"No matching credentials found for DEVICE '{device.name}'")
+        return credentials
+
     def register_services(self):
         path_services = [vs.path / "eNMS" / "services"]
         load_examples = vs.settings["app"].get("startup_migration") == "examples"

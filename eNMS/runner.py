@@ -645,7 +645,7 @@ class Runner:
 
     def get_credentials(self, device):
         result, credential_type = {}, self.main_run.service.credential_type
-        credentials = device.get_credentials(credential_type, self.creator)
+        credentials = db.get_device_credentials(device, credential_type, self.creator)
         self.log("info", f"Using '{credentials.name}' credentials for '{device.name}'")
         if self.credentials == "device":
             result["username"] = credentials.username

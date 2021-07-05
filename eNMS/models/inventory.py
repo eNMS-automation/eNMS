@@ -96,26 +96,6 @@ class Device(Object):
                 setattr(cls, f"last_{property}_{timestamp}", column)
         return cls
 
-    def get_credentials(self, credential_type="any", username=None):
-        if not username:
-            username = current_user.name
-        pool_alias = aliased(vs.models["pool"])
-        query = (
-            db.session.query(vs.models["credential"])
-            .join(vs.models["pool"], vs.models["credential"].user_pools)
-            .join(vs.models["user"], vs.models["pool"].users)
-            .join(pool_alias, vs.models["credential"].device_pools)
-            .join(vs.models["device"], pool_alias.devices)
-            .filter(vs.models["user"].name == username)
-            .filter(vs.models["device"].name == self.name)
-        )
-        if credential_type != "any":
-            query = query.filter(vs.models["credential"].role == credential_type)
-        credentials = max(query.all(), key=attrgetter("priority"), default=None)
-        if not credentials:
-            raise Exception(f"No matching credentials found for DEVICE '{self.name}'")
-        return credentials
-
     def get_neighbors(self, object_type, direction="both", **link_constraints):
         filters = [
             vs.models["link"].destination == self,

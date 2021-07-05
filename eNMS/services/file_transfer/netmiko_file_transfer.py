@@ -40,7 +40,7 @@ class NetmikoFileTransferService(ConnectionService):
             netmiko_connection,
             source_file=source,
             dest_file=destination,
-            file_system=run.file_system,
+            file_system=run.file_system or None,
             direction=run.direction,
             overwrite_file=run.overwrite_file,
             disable_md5=run.disable_md5,

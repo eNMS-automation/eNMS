@@ -1478,7 +1478,15 @@
     no file in enms_files directory', label: success, name: '2021-07-05 04:40:26.340471',
   source: '[Shared] Start', subtype: success, type: workflow_edge, workflow: 'Regression
     Workflow: Netmiko File Transfer'}
-- {color: green, destination: '[Shared] End', label: success, name: '2021-07-05 04:40:27.240899',
-  source: '[Regression Workflow: Netmiko File Transfer] Check no file in enms_files
-    directory', subtype: success, type: workflow_edge, workflow: 'Regression Workflow:
-    Netmiko File Transfer'}
+- {color: green, destination: '[Regression Workflow: Netmiko File Transfer] Transfer
+    netmiko_file', label: success, name: '2021-07-05 04:44:41.263847', source: '[Regression
+    Workflow: Netmiko File Transfer] Check no file in enms_files directory', subtype: success,
+  type: workflow_edge, workflow: 'Regression Workflow: Netmiko File Transfer'}
+- {color: green, destination: '[Regression Workflow: Netmiko File Transfer] Check
+    file in directory', label: success, name: '2021-07-05 04:44:42.003551', source: '[Regression
+    Workflow: Netmiko File Transfer] Transfer netmiko_file', subtype: success, type: workflow_edge,
+  workflow: 'Regression Workflow: Netmiko File Transfer'}
+- {color: green, destination: '[Shared] End', label: success, name: '2021-07-05 04:44:59.313119',
+  source: '[Regression Workflow: Netmiko File Transfer] Check file in directory',
+  subtype: success, type: workflow_edge, workflow: 'Regression Workflow: Netmiko File
+    Transfer'}

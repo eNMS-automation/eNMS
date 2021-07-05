@@ -1474,3 +1474,11 @@
 - {color: red, destination: '[Shared] End', label: failure, name: '2021-06-28 02:44:28.670110',
   source: '[Regression Workflow: Notifications] Notification 3', subtype: failure,
   type: workflow_edge, workflow: 'Regression Workflow: Notifications'}
+- {color: green, destination: '[Regression Workflow: Netmiko File Transfer] Check
+    no file in enms_files directory', label: success, name: '2021-07-05 04:40:26.340471',
+  source: '[Shared] Start', subtype: success, type: workflow_edge, workflow: 'Regression
+    Workflow: Netmiko File Transfer'}
+- {color: green, destination: '[Shared] End', label: success, name: '2021-07-05 04:40:27.240899',
+  source: '[Regression Workflow: Netmiko File Transfer] Check no file in enms_files
+    directory', subtype: success, type: workflow_edge, workflow: 'Regression Workflow:
+    Netmiko File Transfer'}

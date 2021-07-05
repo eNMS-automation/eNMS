@@ -382,7 +382,7 @@
     'Regression Workflow: Link Neighbors Mechanism (public)': *id042
     'Regression Workflow: NCClient Netconf Service': [556, 119]
     'Regression Workflow: Napalm Getters and Postprocessing': *id054
-    'Regression Workflow: Netmiko File Transfer': [500, 0]
+    'Regression Workflow: Netmiko File Transfer': [499, -103]
     'Regression Workflow: Netmiko Prompts': *id055
     'Regression Workflow: Notifications': [530, 32]
     'Regression Workflow: Operational Data Backup (admin)': *id044
@@ -18890,13 +18890,21 @@
     078175a7-4b51-4ccf-b896-3f176212f3ed:
       alignment: left
       content: "Same as first service, but with\r\nnegative logic disabled."
-      positions: [54, 126]
+      positions: [24, 143]
+    1d4c6192-870d-4a22-bd34-a61abed491bb:
+      alignment: left
+      content: Command "delete enms_files/netmiko_file"
+      positions: [197, -169]
+    2392b78f-eb3a-41e3-b824-f1d446b9a4b6:
+      alignment: left
+      content: Duplicate of the first service
+      positions: [366, 126]
     b6e20ed0-9419-4755-942d-77ba613c4370:
       alignment: left
       content: "Run command \"dir enms_files\", use negative logic to\r\nmake sure\
         \ that \"netmiko_file\" is not in the output."
-      positions: [-304, 113]
-  last_modified: '2021-07-05 04:44:59.313119'
+      positions: [-329, 141]
+  last_modified: '2021-07-05 05:28:57.130373'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -18923,7 +18931,9 @@
   services: ['[Shared] Start', '[Shared] End', '[Regression Workflow: Netmiko File
       Transfer] Check no file in enms_files directory', '[Regression Workflow: Netmiko
       File Transfer] Transfer netmiko_file', '[Regression Workflow: Netmiko File Transfer]
-      Check file in directory']
+      Check file in directory', '[Regression Workflow: Netmiko File Transfer] Delete
+      netmiko_file', '[Regression Workflow: Netmiko File Transfer] Check netmiko_file
+      is deleted']
   shared: false
   skip: {}
   skip_query: ''
@@ -19002,7 +19012,7 @@
   operating_system: ''
   pools: ['All devices, links, services and users']
   positions:
-    'Regression Workflow: Netmiko File Transfer': [-319, 37]
+    'Regression Workflow: Netmiko File Transfer': [-346, 74]
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''
@@ -19179,7 +19189,7 @@
   operating_system: ''
   pools: ['All devices, links, services and users']
   positions:
-    'Regression Workflow: Netmiko File Transfer': [48, 49]
+    'Regression Workflow: Netmiko File Transfer': [13, 69]
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''
@@ -19188,6 +19198,190 @@
   reserved: false
   run_method: per_device
   scoped_name: Check file in directory
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: success
+  start_new_connection: false
+  strip_command: true
+  strip_prompt: true
+  target_devices: []
+  target_pools: []
+  time_between_retries: 10
+  timeout: 10.0
+  type: netmiko_validation_service
+  update_pools_after_running: false
+  update_target_pools: false
+  use_device_driver: true
+  validation_condition: success
+  validation_method: text
+  validation_section: results['result']
+  vendor: ''
+  waiting_time: 0
+- access_groups: admin
+  auto_find_prompt: true
+  close_connection: false
+  command: delete enms_files/netmiko_file
+  completion_time: 1
+  config_mode: false
+  connection_name: default
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credential_type: any
+  credentials: device
+  custom_password: ''
+  custom_username: ''
+  default_access: creator
+  definition: Definition
+  delay_factor: 1.0
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  driver: a10
+  enable_mode: true
+  exit_command: exit
+  expect_password_prompt: password
+  expect_prompt: admin.*$
+  expect_string: ''
+  expect_username_prompt: 'username:'
+  fast_cli: false
+  global_delay_factor: 1.0
+  impacting: false
+  include_device_results: false
+  include_link_in_summary: false
+  initial_form: ''
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  jump_command: ssh jump_server_IP
+  jump_on_connect: false
+  jump_password: ''
+  jump_username: ''
+  last_modified: '2021-07-05 05:27:08.100508'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Regression Workflow: Netmiko File Transfer] Delete netmiko_file'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: ['All devices, links, services and users']
+  positions:
+    'Regression Workflow: Netmiko File Transfer': [196, -120]
+  postprocessing: ''
+  postprocessing_mode: success
+  preprocessing: ''
+  priority: 1
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: Delete netmiko_file
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: success
+  start_new_connection: false
+  strip_command: true
+  strip_prompt: true
+  target_devices: []
+  target_pools: []
+  time_between_retries: 10
+  timeout: 10.0
+  type: netmiko_validation_service
+  update_pools_after_running: false
+  update_target_pools: false
+  use_device_driver: true
+  validation_condition: none
+  validation_method: text
+  validation_section: results['result']
+  vendor: ''
+  waiting_time: 0
+- access_groups: admin
+  auto_find_prompt: true
+  close_connection: false
+  command: dir enms_files
+  completion_time: 1
+  config_mode: false
+  connection_name: default
+  content_match: netmiko_file
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credential_type: any
+  credentials: device
+  custom_password: ''
+  custom_username: ''
+  default_access: creator
+  definition: Definition
+  delay_factor: 1.0
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  driver: a10
+  enable_mode: true
+  exit_command: exit
+  expect_password_prompt: password
+  expect_prompt: admin.*$
+  expect_string: ''
+  expect_username_prompt: 'username:'
+  fast_cli: false
+  global_delay_factor: 1.0
+  impacting: false
+  include_device_results: false
+  include_link_in_summary: false
+  initial_form: ''
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  jump_command: ssh jump_server_IP
+  jump_on_connect: false
+  jump_password: ''
+  jump_username: ''
+  last_modified: '2021-07-05 05:27:56.885680'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Regression Workflow: Netmiko File Transfer] Check netmiko_file is deleted'
+  negative_logic: true
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: ['All devices, links, services and users']
+  positions:
+    'Regression Workflow: Netmiko File Transfer': [358, 66]
+  postprocessing: ''
+  postprocessing_mode: success
+  preprocessing: ''
+  priority: 1
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: Check netmiko_file is deleted
   send_notification: false
   send_notification_method: mail
   shared: false

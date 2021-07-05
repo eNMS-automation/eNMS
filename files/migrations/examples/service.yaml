@@ -108,6 +108,7 @@
     'Regression Workflow: DxD and SxS Run Methods': *id009
     'Regression Workflow: File Transfer Mechanism': *id010
     'Regression Workflow: Fork based on value with Skip Discard Mechanism': *id011
+    'Regression Workflow: Generic File Transfer': [-479, -89]
     'Regression Workflow: Global Variables and post-run Pool Update Mechanism': [
       -228, 7]
     'Regression Workflow: Initial Form (override tags & targets, add payload)': [
@@ -371,6 +372,7 @@
     'Regression Workflow: DxD and SxS Run Methods': *id050
     'Regression Workflow: File Transfer Mechanism': *id051
     'Regression Workflow: Fork based on value with Skip Discard Mechanism': *id052
+    'Regression Workflow: Generic File Transfer': [476, 156]
     'Regression Workflow: Global Variables and post-run Pool Update Mechanism': [
       749, 100]
     'Regression Workflow: Initial Form (override tags & targets, add payload)': [
@@ -11748,15 +11750,22 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  labels: {}
-  last_modified: '2020-11-17 09:53:31.266448'
+  labels:
+    3a9a1a53-0a95-44f3-89a6-63431f9ece91:
+      alignment: left
+      content: "This workflow should be run on both Washington and Austin,\r\nas Austin\
+        \ will use the SSH key authentication. Key-based auth must be\r\ntested for\
+        \ the generic file transfer as it does not use the netmiko\r\nauthentication\
+        \ mechanism."
+      positions: [38, -174]
+  last_modified: '2021-07-05 04:37:59.602812'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: 'Regression Workflow: File Transfer Mechanism'
+  name: 'Regression Workflow: Generic File Transfer'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -11770,16 +11779,16 @@
   reply_to: ''
   reserved: false
   run_method: per_device
-  scoped_name: 'Regression Workflow: File Transfer Mechanism'
+  scoped_name: 'Regression Workflow: Generic File Transfer'
   send_notification: false
   send_notification_method: mail
-  services: ['[Shared] Start', '[Shared] End', '[Regression Workflow: File Transfer
-      Mechanism] Check that test file does not exist', '[Regression Workflow: File
-      Transfer Mechanism] Transfer a.bin', '[Regression Workflow: File Transfer Mechanism]
-      Check that test file does exist', '[Regression Workflow: File Transfer Mechanism]
-      Transfer bc.bin and bd.bin with glob option', '[Regression Workflow: File Transfer
-      Mechanism] Delete all transferred files', '[Regression Workflow: File Transfer
-      Mechanism] Transfer non-existing file']
+  services: ['[Shared] Start', '[Shared] End', '[Regression Workflow: Generic File
+      Transfer] Check that test file does not exist', '[Regression Workflow: Generic
+      File Transfer] Transfer a.bin', '[Regression Workflow: Generic File Transfer]
+      Check that test file does exist', '[Regression Workflow: Generic File Transfer]
+      Transfer bc.bin and bd.bin with glob option', '[Regression Workflow: Generic
+      File Transfer] Delete all transferred files', '[Regression Workflow: Generic
+      File Transfer] Transfer non-existing file']
   shared: false
   skip: {}
   skip_query: ''
@@ -11850,8 +11859,8 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression Workflow: File Transfer Mechanism] Check that test file does
-    not exist'
+  name: '[Regression Workflow: Generic File Transfer] Check that test file does not
+    exist'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -11860,6 +11869,7 @@
   positions:
     'Regression Workflow Q: File transfer': &id206 [-171, -148]
     'Regression Workflow: File Transfer Mechanism': *id206
+    'Regression Workflow: Generic File Transfer': [-243, -73]
   postprocessing: results["success"] = "a.bin" not in results["result"]
   postprocessing_mode: always
   preprocessing: ''
@@ -11930,7 +11940,7 @@
   maximum_runs: 1
   missing_host_key_policy: true
   multiprocessing: false
-  name: '[Regression Workflow: File Transfer Mechanism] Transfer a.bin'
+  name: '[Regression Workflow: Generic File Transfer] Transfer a.bin'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -11939,6 +11949,7 @@
   positions:
     'Regression Workflow Q: File transfer': &id207 [-21, 255]
     'Regression Workflow: File Transfer Mechanism': *id207
+    'Regression Workflow: Generic File Transfer': [-120, 143]
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -12023,8 +12034,7 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression Workflow: File Transfer Mechanism] Check that test file does
-    exist'
+  name: '[Regression Workflow: Generic File Transfer] Check that test file does exist'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -12033,6 +12043,7 @@
   positions:
     'Regression Workflow Q: File transfer': &id208 [362, 239]
     'Regression Workflow: File Transfer Mechanism': *id208
+    'Regression Workflow: Generic File Transfer': [209, 155]
   postprocessing: "simple_file = \"a.bin\" in results[\"result\"]\r\nglob_files =\
     \ \"bc.bin\" in results[\"result\"] and \"bd.bin\" in results[\"result\"]\r\n\
     results[\"success\"] = simple_file and glob_files"
@@ -12105,8 +12116,8 @@
   maximum_runs: 1
   missing_host_key_policy: true
   multiprocessing: false
-  name: '[Regression Workflow: File Transfer Mechanism] Transfer bc.bin and bd.bin
-    with glob option'
+  name: '[Regression Workflow: Generic File Transfer] Transfer bc.bin and bd.bin with
+    glob option'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -12115,6 +12126,7 @@
   positions:
     'Regression Workflow Q: File transfer': &id209 [187, -140]
     'Regression Workflow: File Transfer Mechanism': *id209
+    'Regression Workflow: Generic File Transfer': [126, -84]
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -12199,7 +12211,7 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression Workflow: File Transfer Mechanism] Delete all transferred files'
+  name: '[Regression Workflow: Generic File Transfer] Delete all transferred files'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -12208,6 +12220,7 @@
   positions:
     'Regression Workflow Q: File transfer': &id210 [517, -138]
     'Regression Workflow: File Transfer Mechanism': *id210
+    'Regression Workflow: Generic File Transfer': [460, -83]
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -12278,7 +12291,7 @@
   maximum_runs: 1
   missing_host_key_policy: true
   multiprocessing: false
-  name: '[Regression Workflow: File Transfer Mechanism] Transfer non-existing file'
+  name: '[Regression Workflow: Generic File Transfer] Transfer non-existing file'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -12287,6 +12300,7 @@
   positions:
     'Regression Workflow Q: File transfer': &id211 [-332, 180]
     'Regression Workflow: File Transfer Mechanism': *id211
+    'Regression Workflow: Generic File Transfer': [-385, 147]
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''

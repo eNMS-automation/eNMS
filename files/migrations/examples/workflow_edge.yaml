@@ -921,39 +921,39 @@
     Scalability Test (large workflow)] 2021-04-24 08:58:40.198538', source: '[Regression
     Workflow: Scalability Test (large workflow)] Sleep with python 8', subtype: success,
   type: workflow_edge, workflow: 'Regression Workflow: Scalability Test (large workflow)'}
-- {color: green, destination: '[Regression Workflow: File Transfer Mechanism] Transfer
+- {color: green, destination: '[Regression Workflow: Generic File Transfer] Transfer
     a.bin', label: success, name: '[Regression Workflow: File Transfer Mechanism]
-    2021-04-24 08:58:40.198554', source: '[Regression Workflow: File Transfer Mechanism]
+    2021-04-24 08:58:40.198554', source: '[Regression Workflow: Generic File Transfer]
     Check that test file does not exist', subtype: success, type: workflow_edge, workflow: 'Regression
-    Workflow: File Transfer Mechanism'}
-- {color: green, destination: '[Regression Workflow: File Transfer Mechanism] Transfer
+    Workflow: Generic File Transfer'}
+- {color: green, destination: '[Regression Workflow: Generic File Transfer] Transfer
     bc.bin and bd.bin with glob option', label: success, name: '[Regression Workflow:
     File Transfer Mechanism] 2021-04-24 08:58:40.198571', source: '[Regression Workflow:
-    File Transfer Mechanism] Transfer a.bin', subtype: success, type: workflow_edge,
-  workflow: 'Regression Workflow: File Transfer Mechanism'}
-- {color: green, destination: '[Regression Workflow: File Transfer Mechanism] Check
+    Generic File Transfer] Transfer a.bin', subtype: success, type: workflow_edge,
+  workflow: 'Regression Workflow: Generic File Transfer'}
+- {color: green, destination: '[Regression Workflow: Generic File Transfer] Check
     that test file does exist', label: success, name: '[Regression Workflow: File
     Transfer Mechanism] 2021-04-24 08:58:40.198586', source: '[Regression Workflow:
-    File Transfer Mechanism] Transfer bc.bin and bd.bin with glob option', subtype: success,
-  type: workflow_edge, workflow: 'Regression Workflow: File Transfer Mechanism'}
-- {color: green, destination: '[Regression Workflow: File Transfer Mechanism] Delete
+    Generic File Transfer] Transfer bc.bin and bd.bin with glob option', subtype: success,
+  type: workflow_edge, workflow: 'Regression Workflow: Generic File Transfer'}
+- {color: green, destination: '[Regression Workflow: Generic File Transfer] Delete
     all transferred files', label: success, name: '[Regression Workflow: File Transfer
-    Mechanism] 2021-04-24 08:58:40.198601', source: '[Regression Workflow: File Transfer
-    Mechanism] Check that test file does exist', subtype: success, type: workflow_edge,
-  workflow: 'Regression Workflow: File Transfer Mechanism'}
+    Mechanism] 2021-04-24 08:58:40.198601', source: '[Regression Workflow: Generic
+    File Transfer] Check that test file does exist', subtype: success, type: workflow_edge,
+  workflow: 'Regression Workflow: Generic File Transfer'}
 - {color: green, destination: '[Shared] End', label: success, name: '[Regression Workflow:
     File Transfer Mechanism] 2021-04-24 08:58:40.198616', source: '[Regression Workflow:
-    File Transfer Mechanism] Delete all transferred files', subtype: success, type: workflow_edge,
-  workflow: 'Regression Workflow: File Transfer Mechanism'}
-- {color: green, destination: '[Regression Workflow: File Transfer Mechanism] Transfer
+    Generic File Transfer] Delete all transferred files', subtype: success, type: workflow_edge,
+  workflow: 'Regression Workflow: Generic File Transfer'}
+- {color: green, destination: '[Regression Workflow: Generic File Transfer] Transfer
     non-existing file', label: success, name: '[Regression Workflow: File Transfer
     Mechanism] 2021-04-24 08:58:40.198632', source: '[Shared] Start', subtype: success,
-  type: workflow_edge, workflow: 'Regression Workflow: File Transfer Mechanism'}
-- {color: green, destination: '[Regression Workflow: File Transfer Mechanism] Check
+  type: workflow_edge, workflow: 'Regression Workflow: Generic File Transfer'}
+- {color: green, destination: '[Regression Workflow: Generic File Transfer] Check
     that test file does not exist', label: success, name: '[Regression Workflow: File
     Transfer Mechanism] 2021-04-24 08:58:40.198648', source: '[Regression Workflow:
-    File Transfer Mechanism] Transfer non-existing file', subtype: success, type: workflow_edge,
-  workflow: 'Regression Workflow: File Transfer Mechanism'}
+    Generic File Transfer] Transfer non-existing file', subtype: success, type: workflow_edge,
+  workflow: 'Regression Workflow: Generic File Transfer'}
 - {color: green, destination: '[Regression Workflow: Skip Services in SxS mode] Partial
     failure', label: success, name: '[Regression Workflow: Skip Services in SxS mode]
     2021-04-24 08:58:40.198664', source: '[Shared] Start', subtype: success, type: workflow_edge,

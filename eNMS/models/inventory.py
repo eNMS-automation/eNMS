@@ -1,5 +1,3 @@
-from flask_login import current_user
-from operator import attrgetter
 from re import search, sub
 from sqlalchemy import and_, Boolean, event, Float, ForeignKey, Integer, or_
 from sqlalchemy.ext.associationproxy import association_proxy

@@ -4,6 +4,7 @@
   method="post"
   autocomplete="off"
 >
+  {% set panel_id = range(10000) | random %}
   {{ form.id(id=form_type + '-id', class="add-id") }} {{ form.hidden_tag() }}
   <input type="hidden" id="copy" name="copy" class="add-id" />
   <div style="padding: 20px;">
@@ -82,8 +83,6 @@
               id="heading-step1"
               data-toggle="collapse"
               href="#collapse-step1"
-              aria-expanded="false"
-              aria-controls="collapse-step1"
             >
               <h4 class="panel-title" style="color: #000;">Main Parameters</h4>
             </a>
@@ -233,8 +232,6 @@
               id="heading-step1-2"
               data-toggle="collapse"
               href="#collapse-step1-2"
-              aria-expanded="false"
-              aria-controls="collapse-step1-2"
             >
               <h4 class="panel-title" style="color: #000;">
                 Workflow Parameters
@@ -292,8 +289,6 @@
               id="heading-step1-3"
               data-toggle="collapse"
               href="#collapse-step1-3"
-              aria-expanded="false"
-              aria-controls="collapse-step1-3"
             >
               <h4 class="panel-title" style="color: #000;">
                 Custom Properties
@@ -450,8 +445,6 @@
               id="heading-step3"
               data-toggle="collapse"
               href="#collapse-step3"
-              aria-expanded="false"
-              aria-controls="collapse-step3"
             >
               <h4 class="panel-title" style="color: #000;">Devices</h4>
             </a>
@@ -536,8 +529,6 @@
               id="heading-step3-2"
               data-toggle="collapse"
               href="#collapse-step3-2"
-              aria-expanded="false"
-              aria-controls="collapse-step3-2"
             >
               <h4 class="panel-title" style="color: #000;">
                 Iteration
@@ -598,8 +589,6 @@
               id="heading-step4"
               data-toggle="collapse"
               href="#collapse-step4"
-              aria-expanded="false"
-              aria-controls="collapse-step4"
             >
               <h4 class="panel-title" style="color: #000;">
                 Conversion and Postprocessing
@@ -646,8 +635,6 @@
               id="heading-step4-2"
               data-toggle="collapse"
               href="#collapse-step4-2"
-              aria-expanded="false"
-              aria-controls="collapse-step4-2"
             >
               <h4 class="panel-title" style="color: #000;">
                 Validation
@@ -740,8 +727,6 @@
               id="heading-step4-3"
               data-toggle="collapse"
               href="#collapse-step4-3"
-              aria-expanded="false"
-              aria-controls="collapse-step4-3"
             >
               <h4 class="panel-title" style="color: #000;">
                 Notifications

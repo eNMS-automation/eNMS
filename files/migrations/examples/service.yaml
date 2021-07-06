@@ -111,6 +111,8 @@
     'Regression Workflow: Generic File Transfer': [-479, -89]
     'Regression Workflow: Global Variables and post-run Pool Update Mechanism': [
       -228, 7]
+    'Regression Workflow: Global get_credential Function and Log Obfuscation': [-147,
+      62]
     'Regression Workflow: Initial Form (override tags & targets, add payload)': [
       -172, 80]
     'Regression Workflow: Iteration Targets Mechanism': *id012
@@ -376,6 +378,8 @@
     'Regression Workflow: Generic File Transfer': [476, 156]
     'Regression Workflow: Global Variables and post-run Pool Update Mechanism': [
       749, 100]
+    'Regression Workflow: Global get_credential Function and Log Obfuscation': [623,
+      61]
     'Regression Workflow: Initial Form (override tags & targets, add payload)': [
       643, 61]
     'Regression Workflow: Iteration Targets Mechanism': *id053
@@ -19404,3 +19408,79 @@
   validation_section: results['result']
   vendor: ''
   waiting_time: 0
+- access_groups: admin
+  close_connection: false
+  completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credential_type: any
+  default_access: creator
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  impacting: false
+  include_device_results: false
+  include_link_in_summary: false
+  initial_form: ''
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  labels:
+    8347b493-1682-4d0b-b223-8353f0f8c799:
+      alignment: left
+      content: "This workflow checks that device and non-device credentials can be\r\
+        \nretrieved with the get_credential global function.\r\nIt should be run both\
+        \ with admin and non-admin users to make sure that\r\nit fails when users\
+        \ don't have access to credentials.\r\nWhenever get_credential is used, the\
+        \ subsequent log should be obfuscated\r\nin netmiko validation and rest services."
+      positions: [252, -118]
+  last_modified: '2021-07-05 22:50:19.086388'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: 'Regression Workflow: Global get_credential Function and Log Obfuscation'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: ['All devices, links, services and users']
+  positions: {}
+  postprocessing: ''
+  postprocessing_mode: success
+  preprocessing: ''
+  priority: 1
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: 'Regression Workflow: Global get_credential Function and Log Obfuscation'
+  send_notification: false
+  send_notification_method: mail
+  services: ['[Shared] Start', '[Shared] End']
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: success
+  target_devices: []
+  target_pools: []
+  time_between_retries: 10
+  type: workflow
+  update_pools_after_running: false
+  update_target_pools: false
+  validation_condition: none
+  validation_method: text
+  validation_section: results['result']
+  vendor: ''
+  waiting_time: 0
+  workflow_category: Example workflow(s)

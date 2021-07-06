@@ -1507,7 +1507,12 @@
     23:51:18.198534', source: '[Regression Workflow: Global get_credential Function
     and Log Obfuscation] Get device credential', subtype: success, type: workflow_edge,
   workflow: 'Regression Workflow: Global get_credential Function and Log Obfuscation'}
-- {color: green, destination: '[Shared] End', label: success, name: '2021-07-05 23:51:21.062406',
+- {color: green, destination: '[Regression Workflow: Global get_credential Function
+    and Log Obfuscation] Rest Call with get_credential', label: success, name: '2021-07-06
+    00:44:16.816912', source: '[Regression Workflow: Global get_credential Function
+    and Log Obfuscation] Show interface via get_credential', subtype: success, type: workflow_edge,
+  workflow: 'Regression Workflow: Global get_credential Function and Log Obfuscation'}
+- {color: green, destination: '[Shared] End', label: success, name: '2021-07-06 00:44:17.647413',
   source: '[Regression Workflow: Global get_credential Function and Log Obfuscation]
-    Show interface via get_credential', subtype: success, type: workflow_edge, workflow: 'Regression
+    Rest Call with get_credential', subtype: success, type: workflow_edge, workflow: 'Regression
     Workflow: Global get_credential Function and Log Obfuscation'}

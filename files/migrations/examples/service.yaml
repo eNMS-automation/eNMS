@@ -111,8 +111,8 @@
     'Regression Workflow: Generic File Transfer': [-479, -89]
     'Regression Workflow: Global Variables and post-run Pool Update Mechanism': [
       -228, 7]
-    'Regression Workflow: Global get_credential Function and Log Obfuscation': [-169,
-      -140]
+    'Regression Workflow: Global get_credential Function and Log Obfuscation': [-477,
+      -78]
     'Regression Workflow: Initial Form (override tags & targets, add payload)': [
       -172, 80]
     'Regression Workflow: Iteration Targets Mechanism': *id012
@@ -378,8 +378,8 @@
     'Regression Workflow: Generic File Transfer': [476, 156]
     'Regression Workflow: Global Variables and post-run Pool Update Mechanism': [
       749, 100]
-    'Regression Workflow: Global get_credential Function and Log Obfuscation': [623,
-      61]
+    'Regression Workflow: Global get_credential Function and Log Obfuscation': [591,
+      -45]
     'Regression Workflow: Initial Form (override tags & targets, add payload)': [
       643, 61]
     'Regression Workflow: Iteration Targets Mechanism': *id053
@@ -19442,7 +19442,7 @@
         \ brief\". Uses password\r\nwith substitution for netmiko command.\r\nService\
         \ should pass for two devices (Washington, Austin)\r\nand fail for PaloAlto\
         \ (unreachable, wrong IP)."
-      positions: [240, 144]
+      positions: [21, 244]
     8347b493-1682-4d0b-b223-8353f0f8c799:
       alignment: left
       content: "This workflow checks that device and non-device credentials can be\r\
@@ -19450,14 +19450,19 @@
         \ with admin and non-admin users to make sure that\r\nit fails when users\
         \ don't have access to credentials.\r\nWhenever get_credential is used, the\
         \ subsequent log should be obfuscated\r\nin netmiko validation and rest services."
-      positions: [252, -118]
+      positions: [154, 10]
     cf8ec96a-b1db-4627-bda8-75d6feecd29d:
       alignment: left
       content: "Uses \"get_credential\" in python snippet to get\r\ndevice credential.\r\
         \nAdd credentials to result dict for all devices.\r\nAll 3 devices should\
         \ pass."
-      positions: [-172, 146]
-  last_modified: '2021-07-06 00:18:30.636664'
+      positions: [-341, 117]
+    e977a4d0-ee1b-4daf-aea6-6ebab0695021:
+      alignment: left
+      content: "Uses get_credential as part of Rest Call URL.\r\nResulting should\
+        \ be obfuscated in both logs and results."
+      positions: [462, 176]
+  last_modified: '2021-07-06 00:56:36.264460'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -19483,7 +19488,9 @@
   send_notification_method: mail
   services: ['[Shared] Start', '[Shared] End', '[Regression Workflow: Global get_credential
       Function and Log Obfuscation] Get device credential', '[Regression Workflow:
-      Global get_credential Function and Log Obfuscation] Show interface via get_credential']
+      Global get_credential Function and Log Obfuscation] Show interface via get_credential',
+    '[Regression Workflow: Global get_credential Function and Log Obfuscation] Rest
+      Call with get_credential']
   shared: false
   skip: {}
   skip_query: ''
@@ -19540,8 +19547,8 @@
   operating_system: ''
   pools: ['All devices, links, services and users']
   positions:
-    'Regression Workflow: Global get_credential Function and Log Obfuscation': [-172,
-      48]
+    'Regression Workflow: Global get_credential Function and Log Obfuscation': [-315,
+      9]
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''
@@ -19632,8 +19639,8 @@
   operating_system: ''
   pools: ['All devices, links, services and users']
   positions:
-    'Regression Workflow: Global get_credential Function and Log Obfuscation': [259,
-      41]
+    'Regression Workflow: Global get_credential Function and Log Obfuscation': [14,
+      146]
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''
@@ -19663,4 +19670,81 @@
   validation_method: text
   validation_section: results['result']
   vendor: ''
+  waiting_time: 0
+- access_groups: admin
+  call_type: GET
+  completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credential_type: any
+  default_access: creator
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  headers: {}
+  impacting: false
+  include_device_results: false
+  include_link_in_summary: false
+  initial_form: ''
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2021-07-06 00:57:46.879013'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Regression Workflow: Global get_credential Function and Log Obfuscation]
+    Rest Call with get_credential'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  params: {}
+  password: ''
+  payload: {}
+  pools: ['All devices, links, services and users']
+  positions:
+    'Regression Workflow: Global get_credential Function and Log Obfuscation': [447,
+      101]
+  postprocessing: ''
+  postprocessing_mode: success
+  preprocessing: ''
+  priority: 1
+  reply_to: ''
+  reserved: false
+  rest_url: http://127.0.0.1:5000/rest/{{get_credential(name="Non Device Credential
+    - 2")["password"].replace(" ", "")}}
+  run_method: per_device
+  scoped_name: Rest Call with get_credential
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: success
+  target_devices: []
+  target_pools: []
+  time_between_retries: 10
+  timeout: 15
+  type: rest_call_service
+  update_pools_after_running: false
+  update_target_pools: false
+  username: ''
+  validation_condition: none
+  validation_method: text
+  validation_section: results['result']
+  vendor: ''
+  verify_ssl_certificate: false
   waiting_time: 0

@@ -39,13 +39,14 @@ class NetmikoValidationService(ConnectionService):
 
     def job(self, run, device):
         command = run.sub(run.command, locals())
+        log_command = run.command if "get_credential" in run.command else command
         netmiko_connection = run.netmiko_connection(device)
         try:
             prompt = run.enter_remote_device(netmiko_connection, device)
             netmiko_connection.session_log.truncate(0)
             run.log(
                 "info",
-                f"sending COMMAND '{command}' with Netmiko",
+                f"sending COMMAND '{log_command}' with Netmiko",
                 device,
                 logger="security",
             )
@@ -61,12 +62,12 @@ class NetmikoValidationService(ConnectionService):
         except Exception:
             result = netmiko_connection.session_log.getvalue().decode().lstrip("\u0000")
             return {
-                "command": command,
+                "command": log_command,
                 "error": format_exc(),
                 "result": result,
                 "success": False,
             }
-        return {"command": command, "result": result}
+        return {"command": log_command, "result": result}
 
 
 class NetmikoValidationForm(NetmikoForm):

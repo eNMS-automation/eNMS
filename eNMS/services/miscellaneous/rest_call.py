@@ -37,7 +37,8 @@ class RestCallService(Service):
     def job(self, run, device=None):
         local_variables = locals()
         rest_url = run.sub(run.rest_url, local_variables)
-        run.log("info", f"Sending REST Call to {rest_url}", device, logger="security")
+        log_url = run.rest_url if "get_credential" in run.rest_url else rest_url
+        run.log("info", f"Sending REST Call to {log_url}", device, logger="security")
         kwargs = {
             parameter: run.sub(getattr(self, parameter), local_variables)
             for parameter in ("headers", "params", "timeout")
@@ -52,7 +53,7 @@ class RestCallService(Service):
         call = getattr(env.request_session, run.call_type.lower())
         response = call(rest_url, **kwargs)
         result = {
-            "url": rest_url,
+            "url": log_url,
             "status_code": response.status_code,
             "headers": dict(response.headers),
             "result": response.text,

@@ -395,7 +395,6 @@ class Controller:
         return query
 
     def filtering(self, model, bulk=False, rbac="read", username=None, **kwargs):
-        print(model, kwargs)
         table, query = vs.models[model], db.query(model, rbac, username)
         total_records = query.with_entities(table.id).count()
         try:

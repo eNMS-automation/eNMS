@@ -19435,6 +19435,12 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels:
+    618b2b51-3ce9-444a-b2e4-8c7e58b980bd:
+      alignment: left
+      content: "Service in \"run once\" mode. Uses \"get_credential\" to\r\nretrieve\
+        \ a non-device credential which passwords\r\nshould evaluate to \"ip interfaces\
+        \ brief\". Uses password\r\nwith substitution for netmiko command."
+      positions: [271, 133]
     8347b493-1682-4d0b-b223-8353f0f8c799:
       alignment: left
       content: "This workflow checks that device and non-device credentials can be\r\
@@ -19443,7 +19449,7 @@
         \ don't have access to credentials.\r\nWhenever get_credential is used, the\
         \ subsequent log should be obfuscated\r\nin netmiko validation and rest services."
       positions: [252, -118]
-  last_modified: '2021-07-05 23:15:15.568569'
+  last_modified: '2021-07-05 23:52:50.875321'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -19468,7 +19474,8 @@
   send_notification: false
   send_notification_method: mail
   services: ['[Shared] Start', '[Shared] End', '[Regression Workflow: Global get_credential
-      Function and Log Obfuscation] Get device credential']
+      Function and Log Obfuscation] Get device credential', '[Regression Workflow:
+      Global get_credential Function and Log Obfuscation] Show interface via get_credential']
   shared: false
   skip: {}
   skip_query: ''
@@ -19550,6 +19557,100 @@
   type: python_snippet_service
   update_pools_after_running: false
   update_target_pools: false
+  validation_condition: none
+  validation_method: text
+  validation_section: results['result']
+  vendor: ''
+  waiting_time: 0
+- access_groups: admin
+  auto_find_prompt: true
+  close_connection: false
+  command: show {{get_credential("Non Device Credential")["password"]}}
+  completion_time: 1
+  config_mode: false
+  connection_name: default
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credential_type: any
+  credentials: device
+  custom_password: ''
+  custom_username: ''
+  default_access: creator
+  definition: Definition
+  delay_factor: 1.0
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  driver: a10
+  enable_mode: true
+  exit_command: exit
+  expect_password_prompt: password
+  expect_prompt: admin.*$
+  expect_string: ''
+  expect_username_prompt: 'username:'
+  fast_cli: false
+  global_delay_factor: 1.0
+  impacting: false
+  include_device_results: false
+  include_link_in_summary: false
+  initial_form: ''
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  jump_command: ssh jump_server_IP
+  jump_on_connect: false
+  jump_password: ''
+  jump_username: ''
+  last_modified: '2021-07-05 23:52:00.822878'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Regression Workflow: Global get_credential Function and Log Obfuscation]
+    Show interface via get_credential'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: ['All devices, links, services and users']
+  positions:
+    'Regression Workflow: Global get_credential Function and Log Obfuscation': [259,
+      41]
+  postprocessing: ''
+  postprocessing_mode: success
+  preprocessing: ''
+  priority: 1
+  reply_to: ''
+  reserved: false
+  run_method: once
+  scoped_name: Show interface via get_credential
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: success
+  start_new_connection: false
+  strip_command: true
+  strip_prompt: true
+  target_devices: []
+  target_pools: []
+  time_between_retries: 10
+  timeout: 10.0
+  type: netmiko_validation_service
+  update_pools_after_running: false
+  update_target_pools: false
+  use_device_driver: true
   validation_condition: none
   validation_method: text
   validation_section: results['result']

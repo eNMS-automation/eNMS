@@ -645,14 +645,14 @@ class Runner:
 
     def get_credentials(self, device):
         result, credential_type = {}, self.main_run.service.credential_type
-        credentials = db.get_credential(self.creator, device, credential_type)
-        self.log("info", f"Using '{credentials.name}' credentials for '{device.name}'")
+        credential = db.get_credential(self.creator, device, credential_type)
+        self.log("info", f"Using '{credential.name}' credential for '{device.name}'")
         if self.credentials == "device":
-            result["username"] = credentials.username
-            if credentials.subtype == "password":
-                result["password"] = env.get_password(credentials.password)
+            result["username"] = credential.username
+            if credential.subtype == "password":
+                result["password"] = env.get_password(credential.password)
             else:
-                private_key = env.get_password(credentials.private_key)
+                private_key = env.get_password(credential.private_key)
                 result["pkey"] = RSAKey.from_private_key(StringIO(private_key))
         elif self.credentials == "user":
             user = db.fetch("user", name=self.creator)
@@ -667,7 +667,7 @@ class Runner:
                     substituted_password = substituted_password[2:-1]
                 password = env.get_password(substituted_password)
             result["password"] = password
-        result["secret"] = env.get_password(credentials.enable_password)
+        result["secret"] = env.get_password(credential.enable_password)
         return result
 
     def convert_result(self, result):
@@ -820,10 +820,13 @@ class Runner:
 
     def get_credential(self, **kwargs):
         credential = db.get_credential(self.creator, **kwargs)
-        return {
-            "username": credential.username,
-            "password": env.get_password(credential.password),
-        }
+        credential_dict = {"username": credential.username}
+        if credential.subtype == "password":
+            credential_dict["password"] = env.get_password(credential.password)
+        else:
+            private_key = env.get_password(credential.private_key)
+            credential_dict["pkey"] = RSAKey.from_private_key(StringIO(private_key))
+        return credential_dict
 
     def global_variables(_self, **locals):  # noqa: N805
         payload, device = _self.payload, locals.get("device")

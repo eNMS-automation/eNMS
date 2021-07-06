@@ -19438,9 +19438,9 @@
     618b2b51-3ce9-444a-b2e4-8c7e58b980bd:
       alignment: left
       content: "Service in \"run once\" mode. Uses \"get_credential\" to\r\nretrieve\
-        \ a non-device credential which passwords\r\nshould evaluate to \"ip interfaces\
+        \ a non-device credential which passwords\r\nshould evaluate to \"ip interface\
         \ brief\". Uses password\r\nwith substitution for netmiko command."
-      positions: [271, 133]
+      positions: ['255.5302734375', '138.5']
     8347b493-1682-4d0b-b223-8353f0f8c799:
       alignment: left
       content: "This workflow checks that device and non-device credentials can be\r\
@@ -19565,7 +19565,7 @@
 - access_groups: admin
   auto_find_prompt: true
   close_connection: false
-  command: show {{get_credential("Non Device Credential")["password"]}}
+  command: show {{get_credential(name="Non Device Credential")["password"]}}
   completion_time: 1
   config_mode: false
   connection_name: default
@@ -19609,7 +19609,7 @@
   jump_on_connect: false
   jump_password: ''
   jump_username: ''
-  last_modified: '2021-07-05 23:52:00.822878'
+  last_modified: '2021-07-06 00:00:22.948685'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -19632,7 +19632,7 @@
   priority: 1
   reply_to: ''
   reserved: false
-  run_method: once
+  run_method: per_device
   scoped_name: Show interface via get_credential
   send_notification: false
   send_notification_method: mail

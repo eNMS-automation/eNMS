@@ -645,7 +645,7 @@ class Runner:
 
     def get_credentials(self, device):
         result, credential_type = {}, self.main_run.service.credential_type
-        credentials = db.get_credentials(self.creator, device, credential_type)
+        credentials = db.get_credential(self.creator, device, credential_type)
         self.log("info", f"Using '{credentials.name}' credentials for '{device.name}'")
         if self.credentials == "device":
             result["username"] = credentials.username
@@ -832,6 +832,7 @@ class Runner:
                 "fetch": partial(_self.database_function, "fetch"),
                 "fetch_all": partial(_self.database_function, "fetch_all"),
                 "factory": partial(_self.database_function, "factory"),
+                "get_credential": partial(db.get_credential, self.creator),
                 "send_email": env.send_email,
                 "settings": vs.settings,
                 "devices": _self.target_devices,

@@ -412,11 +412,14 @@ class Database:
             self.session.query(vs.models["credential"])
             .join(vs.models["pool"], vs.models["credential"].user_pools)
             .join(vs.models["user"], vs.models["pool"].users)
-            .join(pool_alias, vs.models["credential"].device_pools)
-            .join(vs.models["device"], pool_alias.devices)
-            .filter(vs.models["user"].name == username)
-            .filter(vs.models["device"].name == device.name)
         )
+        if device:
+            query = query.join(pool_alias, vs.models["credential"].device_pools).join(
+                vs.models["device"], pool_alias.devices
+            )
+        query = query.filter(vs.models["user"].name == username)
+        if device:
+            query = query.filter(vs.models["device"].name == device.name)
         if credential_type != "any":
             query = query.filter(vs.models["credential"].role == credential_type)
         credentials = max(query.all(), key=attrgetter("priority"), default=None)

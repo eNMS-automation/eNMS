@@ -1495,7 +1495,7 @@ function displayRelationTable(type, instance, relation) {
     size: "1200 600",
     title: `${instance.name} - ${type}s`,
     callback: function () {
-      const constraints = { [`${relation.from}`]: [instance.id] };
+      const constraints = { [`${relation.from}`]: [instance.name] };
       // eslint-disable-next-line new-cap
       new tables[type](instance.id, constraints, { relation, ...instance });
     },

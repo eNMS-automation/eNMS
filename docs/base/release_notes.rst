@@ -95,6 +95,9 @@ from the controller
 - Add validation_section mechanism: set path to section of the result to validate (default: results["result"])
 - Add new "connection_name" mechanism to open multiple parallel connections to the same device in the
 same workflow
+- Add new "get_credential" global variable in workflow builder. Used to get a password or a passphrase
+for a netmiko validaiton command or rest call service. For obfuscation purposes.
+mail: Obfuscate Credentials passed into Netmiko Command Line
 
 MIGRATION:
 

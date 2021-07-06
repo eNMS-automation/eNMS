@@ -199,13 +199,13 @@ export class Table {
 
   postProcessing() {
     let self = this;
-    if ($(`#advanced-search-${this.type}`).length) {
+    if ($(`#advanced-search-${this.id}`).length) {
       createTooltip({
         autoshow: true,
         persistent: true,
         name: `${this.model}_relation_filtering`,
-        target: `#advanced-search-${this.type}`,
-        container: `#controls-${this.type}`,
+        target: `#advanced-search-${this.id}`,
+        container: `#controls-${this.id}`,
         position: {
           my: "center-top",
           at: "center-bottom",
@@ -344,7 +344,7 @@ export class Table {
   searchTableButton() {
     return `
       <button
-        id="advanced-search-${this.type}"
+        id="advanced-search-${this.id}"
         class="btn btn-info"
         data-tooltip="Advanced Search"
         type="button"

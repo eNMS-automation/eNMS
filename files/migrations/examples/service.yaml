@@ -19460,9 +19460,11 @@
     e977a4d0-ee1b-4daf-aea6-6ebab0695021:
       alignment: left
       content: "Uses get_credential as part of Rest Call URL.\r\nResulting should\
-        \ be obfuscated in both logs and results."
-      positions: [462, 176]
-  last_modified: '2021-07-06 00:56:36.264460'
+        \ be obfuscated in both logs and results.\r\nThe credential password should\
+        \ evaluate to \"is_alive\"\r\nmaking the resulting URL valid.\r\n2 devices,\
+        \ both PASS."
+      positions: [457, 201]
+  last_modified: '2021-07-06 00:59:45.957019'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -19698,7 +19700,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2021-07-06 00:57:46.879013'
+  last_modified: '2021-07-06 00:59:56.039545'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -19725,7 +19727,7 @@
   reply_to: ''
   reserved: false
   rest_url: http://127.0.0.1:5000/rest/{{get_credential(name="Non Device Credential
-    - 2")["password"].replace(" ", "")}}
+    - 2")["password"]}}
   run_method: per_device
   scoped_name: Rest Call with get_credential
   send_notification: false

@@ -779,7 +779,7 @@ tables.service = class ServiceTable extends Table {
       <input type="hidden" id="workflow-filtering" name="workflow-filtering">
       <button
         style="background:transparent; border:none; 
-        color:transparent; width: 300px;"
+        color:transparent; width: 240px;"
         type="button"
       >
         <select

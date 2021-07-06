@@ -826,6 +826,7 @@ class Runner:
         else:
             private_key = env.get_password(credential.private_key)
             credential_dict["pkey"] = RSAKey.from_private_key(StringIO(private_key))
+        credential_dict["secret"] = env.get_password(credential.enable_password)
         return credential_dict
 
     def global_variables(_self, **locals):  # noqa: N805

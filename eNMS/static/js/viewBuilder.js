@@ -425,6 +425,14 @@ function onWindowResize() {
   labelRenderer.setSize($(".main_frame").width(), $(".main_frame").height());
 }
 
+function displayProperties(instance) {
+  if (instance.type == "node") {
+    showInstancePanel(instance.device.type, instance.device.id);
+  } else {
+    showInstancePanel(instance.type, instance.id);
+  }
+}
+
 export function initViewBuilder() {
   $("body").contextMenu({
     menuSelector: "#contextMenu",
@@ -435,7 +443,7 @@ export function initViewBuilder() {
     },
   });
   Object.assign(action, {
-    "Properties": (viewObject) => showInstancePanel(viewObject.device.type, viewObject.device.id),
+    "Properties": displayProperties,
     "View Properties": (viewObject) => showInstancePanel("node", viewObject.id),
     Connect: (viewObject) => showConnectionPanel(viewObject.device),
     Configuration: (viewObject) => showDeviceData(viewObject.device),

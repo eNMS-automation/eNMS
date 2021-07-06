@@ -818,6 +818,13 @@ class Runner:
             kwargs["rbac"] = "edit"
         return getattr(db, func)(model, username=self.creator, **kwargs)
 
+    def get_credential(self, **kwargs):
+        credential = db.get_credential(self.creator, **kwargs)
+        return {
+            "username": credential.username,
+            "password": env.get_password(credential.password),
+        }
+
     def global_variables(_self, **locals):  # noqa: N805
         payload, device = _self.payload, locals.get("device")
         variables = locals
@@ -832,7 +839,7 @@ class Runner:
                 "fetch": partial(_self.database_function, "fetch"),
                 "fetch_all": partial(_self.database_function, "fetch_all"),
                 "factory": partial(_self.database_function, "factory"),
-                "get_credential": partial(db.get_credential, self.creator),
+                "get_credential": _self.get_credential,
                 "send_email": env.send_email,
                 "settings": vs.settings,
                 "devices": _self.target_devices,

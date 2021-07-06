@@ -19439,8 +19439,10 @@
       alignment: left
       content: "Service in \"run once\" mode. Uses \"get_credential\" to\r\nretrieve\
         \ a non-device credential which passwords\r\nshould evaluate to \"ip interface\
-        \ brief\". Uses password\r\nwith substitution for netmiko command."
-      positions: ['255.5302734375', '138.5']
+        \ brief\". Uses password\r\nwith substitution for netmiko command.\r\nService\
+        \ should pass for two devices (Washington, Austin)\r\nand fail for PaloAlto\
+        \ (unreachable, wrong IP)."
+      positions: [240, 144]
     8347b493-1682-4d0b-b223-8353f0f8c799:
       alignment: left
       content: "This workflow checks that device and non-device credentials can be\r\
@@ -19449,7 +19451,13 @@
         \ don't have access to credentials.\r\nWhenever get_credential is used, the\
         \ subsequent log should be obfuscated\r\nin netmiko validation and rest services."
       positions: [252, -118]
-  last_modified: '2021-07-05 23:52:50.875321'
+    cf8ec96a-b1db-4627-bda8-75d6feecd29d:
+      alignment: left
+      content: "Uses \"get_credential\" in python snippet to get\r\ndevice credential.\r\
+        \nAdd credentials to result dict for all devices.\r\nAll 3 devices should\
+        \ pass."
+      positions: [-172, 146]
+  last_modified: '2021-07-06 00:18:30.636664'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100

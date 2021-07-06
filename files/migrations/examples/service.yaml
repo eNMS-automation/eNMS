@@ -19464,7 +19464,7 @@
         \ evaluate to \"is_alive\"\r\nmaking the resulting URL valid.\r\n2 devices,\
         \ both PASS."
       positions: [457, 201]
-  last_modified: '2021-07-06 00:59:45.957019'
+  last_modified: '2021-07-06 01:05:21.203122'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -19700,7 +19700,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2021-07-06 00:59:56.039545'
+  last_modified: '2021-07-06 01:05:00.094390'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -19714,7 +19714,7 @@
   number_of_retries: 0
   operating_system: ''
   params: {}
-  password: ''
+  password: YWRtaW4=
   payload: {}
   pools: ['All devices, links, services and users']
   positions:
@@ -19743,7 +19743,7 @@
   type: rest_call_service
   update_pools_after_running: false
   update_target_pools: false
-  username: ''
+  username: admin
   validation_condition: none
   validation_method: text
   validation_section: results['result']

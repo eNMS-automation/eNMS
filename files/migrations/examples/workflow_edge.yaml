@@ -1499,10 +1499,6 @@
   subtype: success, type: workflow_edge, workflow: 'Regression Workflow: Netmiko File
     Transfer'}
 - {color: green, destination: '[Regression Workflow: Global get_credential Function
-    and Log Obfuscation] Get device credential', label: success, name: '2021-07-05
-    22:59:45.967359', source: '[Shared] Start', subtype: success, type: workflow_edge,
-  workflow: 'Regression Workflow: Global get_credential Function and Log Obfuscation'}
-- {color: green, destination: '[Regression Workflow: Global get_credential Function
     and Log Obfuscation] Show interface via get_credential', label: success, name: '2021-07-05
     23:51:18.198534', source: '[Regression Workflow: Global get_credential Function
     and Log Obfuscation] Get device credential', subtype: success, type: workflow_edge,
@@ -1516,3 +1512,7 @@
   source: '[Regression Workflow: Global get_credential Function and Log Obfuscation]
     Rest Call with get_credential', subtype: success, type: workflow_edge, workflow: 'Regression
     Workflow: Global get_credential Function and Log Obfuscation'}
+- {color: green, destination: '[Regression Workflow: Global get_credential Function
+    and Log Obfuscation] Get device credential', label: success, name: '2021-07-06
+    01:05:21.203122', source: '[Shared] Start', subtype: success, type: workflow_edge,
+  workflow: 'Regression Workflow: Global get_credential Function and Log Obfuscation'}

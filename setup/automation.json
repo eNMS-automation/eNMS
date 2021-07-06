@@ -22,14 +22,14 @@
       ["get_snmp_information", "SNMP"],
       ["get_users", "Users"],
       ["is_alive", "Is alive"]
-    ],
-    "workflow": {
-      "allowed_models": {
-        "delete": ["device", "link", "pool"],
-        "fetch": ["device", "link", "pool", "service"],
-        "fetch_all": ["device", "link", "pool", "service"],
-        "factory": ["device", "link", "pool"]
-      }
+    ]
+  },
+  "workflow": {
+    "allowed_models": {
+      "delete": ["device", "link", "pool"],
+      "fetch": ["device", "link", "pool", "service"],
+      "fetch_all": ["device", "link", "pool", "service"],
+      "factory": ["device", "link", "pool"]
     }
   }
 }

@@ -111,8 +111,8 @@
     'Regression Workflow: Generic File Transfer': [-479, -89]
     'Regression Workflow: Global Variables and post-run Pool Update Mechanism': [
       -228, 7]
-    'Regression Workflow: Global get_credential Function and Log Obfuscation': [-147,
-      62]
+    'Regression Workflow: Global get_credential Function and Log Obfuscation': [-169,
+      -140]
     'Regression Workflow: Initial Form (override tags & targets, add payload)': [
       -172, 80]
     'Regression Workflow: Iteration Targets Mechanism': *id012
@@ -19443,7 +19443,7 @@
         \ don't have access to credentials.\r\nWhenever get_credential is used, the\
         \ subsequent log should be obfuscated\r\nin netmiko validation and rest services."
       positions: [252, -118]
-  last_modified: '2021-07-05 22:59:52.722003'
+  last_modified: '2021-07-05 23:15:15.568569'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -19525,8 +19525,8 @@
   operating_system: ''
   pools: ['All devices, links, services and users']
   positions:
-    'Regression Workflow: Global get_credential Function and Log Obfuscation': [28,
-      51]
+    'Regression Workflow: Global get_credential Function and Log Obfuscation': [-172,
+      48]
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''

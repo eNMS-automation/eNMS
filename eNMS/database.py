@@ -406,7 +406,7 @@ class Database:
                     sleep(self.retry_commit_time * (index + 1))
         return instance
 
-    def get_device_credentials(self, username, device=None, credential_type="any"):
+    def get_credentials(self, username, device=None, credential_type="any"):
         pool_alias = aliased(vs.models["pool"])
         query = (
             self.session.query(vs.models["credential"])

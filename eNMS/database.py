@@ -406,7 +406,7 @@ class Database:
                     sleep(self.retry_commit_time * (index + 1))
         return instance
 
-    def get_credential(self, username, device=None, credential_type="any"):
+    def get_credential(self, username, name=None, device=None, credential_type="any"):
         pool_alias = aliased(vs.models["pool"])
         query = (
             self.session.query(vs.models["credential"])
@@ -418,6 +418,8 @@ class Database:
                 vs.models["device"], pool_alias.devices
             )
         query = query.filter(vs.models["user"].name == username)
+        if name:
+            query = query.filter(vs.models["credential"].name == name)
         if device:
             query = query.filter(vs.models["device"].name == device.name)
         if credential_type != "any":

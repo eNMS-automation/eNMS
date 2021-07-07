@@ -315,6 +315,17 @@ class Runner:
         skip_service = self.skip.get(getattr(self.workflow, "name", None))
         if skip_service:
             self.write_state("status", "Skipped")
+        if (
+            self.run_method == "once"
+            and not self.target_devices
+            and self.eval(self.skip_query, **locals())[0]
+        ):
+            self.write_state("status", "Skipped")
+            return {
+                "success": self.skip_value == "success",
+                "result": "skipped",
+                "runtime": self.runtime,
+            }
         for device in self.target_devices:
             skip_device = skip_service
             if not skip_service and self.skip_query:

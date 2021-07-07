@@ -187,7 +187,7 @@ body {
 .server-time {
   bottom: 7px;
   left: 5px;
-  position: absolute;
+  position: fixed;
   color: #b9b9b9;
   text-align: center;
 }

@@ -765,7 +765,7 @@ class Runner:
         value=None,
         device=None,
         section=None,
-        operation="__setitem__",
+        operation="set",
         allow_none=False,
         default=None,
     ):
@@ -777,7 +777,14 @@ class Runner:
             payload = payload.setdefault(section, {})
         if value is None:
             value = default
-        value = getattr(payload, operation)(name, value)
+        if operation == "set":
+            payload[name] = value
+        elif operation == "update":
+            payload.setdefault(name, {}).update(value)
+        elif operation in ("append", "extend"):
+            getattr(payload.setdefault(name, []), operation)(value)
+        elif operation == "get":
+            value = payload.get(name)
         if operation == "get" and not allow_none and value is None:
             raise Exception(f"Payload Editor: {name} not found in {payload}.")
         else:

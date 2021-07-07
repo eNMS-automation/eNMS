@@ -116,6 +116,7 @@ for consistency with rest of codebase. In properties.json:
 * change "type": "boolean" to "type": "bool"
 * change "type": "string" to "type": "str"
 - Update authentication functions in custom.py
+- in service.yaml, change all __setitem__ for data extraction service to "set"
 
 To be tested:
 - Refactoring of the run mechanism:

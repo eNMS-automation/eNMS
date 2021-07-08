@@ -415,6 +415,7 @@ function displayResultsTree(service, runtime) {
   call({
     url: `/get_workflow_results/${service.id}/${runtime}`,
     callback: function (data) {
+      console.log(data)
       $(`#result-tree-${service.id}`).jstree("destroy").empty();
       let tree = $(`#result-tree-${service.id}`).jstree({
         core: {
@@ -441,6 +442,10 @@ function displayResultsTree(service, runtime) {
                 <div style="position: absolute; top: 0px; right: 160px">
                   <span style="color: #32cd32">
                     ${node.data.progress.success || 0} passed
+                  </span>
+                  <span style="color: #000000">-</span>
+                  <span style="color: #7D7D7D">
+                    ${node.data.progress.skipped || 0} skipped
                   </span>
                   <span style="color: #000000">-</span>
                   <span style="color: #FF6666">

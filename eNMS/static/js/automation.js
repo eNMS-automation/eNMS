@@ -442,10 +442,15 @@ function displayResultsTree(service, runtime) {
                   <span style="color: #32cd32">
                     ${node.data.progress.success || 0} passed
                   </span>
-                  <span style="color: #000000">-</span>
-                  <span style="color: #7D7D7D">
+                  ${
+                    node.data.progress.skipped > 0
+                      ? `<span style="color: #000000">-</span>
+                    <span style="color: #7D7D7D">
                     ${node.data.progress.skipped || 0} skipped
-                  </span>
+                    </span>
+                  `
+                      : ""
+                  }
                   <span style="color: #000000">-</span>
                   <span style="color: #FF6666">
                     ${node.data.progress.failure || 0} failed

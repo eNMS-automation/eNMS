@@ -138,7 +138,7 @@
     'Regression Workflow: Skip Services in SxS mode': *id005
     'Regression Workflow: Skip, Discard and Disable Result Creation Mechanism': *id021
     'Regression Workflow: Superworkflow': *id022
-    'Regression Workflow: SxS Service Targets with Run Once + Skip': [-200, -113]
+    'Regression Workflow: SxS Service Targets with Run Once + Skip': [-436, 94]
     'Regression Workflow: Topology Import (netbox, librenms, opennms)': *id023
     'Regression Workflow: Unix Command & Chell, Ping Service, Jump on Connect mechanism': *id024
     'Regression Workflow: Using get_var, set_var, get_result functions': *id025
@@ -19787,25 +19787,25 @@
         It tests that the following mechanism work properly :\r\n- run once / once\
         \ per device\r\n- skip, both global and per device with skip query\r\n- edge\
         \ type (success / failure) doesn't matter in that mode"
-      positions: [175, -107]
+      positions: [49, 157]
     907fa070-7150-4303-aa0b-848bacc48a68:
       alignment: left
       content: "Run on 4 devices. Austin fails (expected: 3 PASS, 1 FAIL)\r\nShould\
         \ follow both success and failure edges, because\r\nthese edges don't matter\
         \ in that mode."
-      positions: [-255, 190]
+      positions: [-295, 380]
     91c62455-9d20-4c77-8596-348d4f6a9f02:
       alignment: left
       content: "Run on 4 devices. Two devices are skipped based on name\r\nvia device\
         \ query: Washington, NewYork.\r\nExpected in display: 2 PASS, 2 SKIP."
-      positions: [228, 304]
+      positions: [296, 382]
     c8c22a6e-8497-4293-a333-3df8e67d59cb:
       alignment: left
       content: "Set to run on pool \"All devices\" in run once mode.\r\nIncludes a\
         \ log set to \"should appear only once\".\r\nCheck in log that it does appear\
         \ only once."
-      positions: [437, -3]
-  last_modified: '2021-07-08 00:57:41.980108'
+      positions: [506, 36]
+  last_modified: '2021-07-08 01:00:31.312030'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -19890,7 +19890,7 @@
   operating_system: ''
   pools: ['All devices, links, services and users']
   positions:
-    'Regression Workflow: SxS Service Targets with Run Once + Skip': [-292, 73]
+    'Regression Workflow: SxS Service Targets with Run Once + Skip': [-377, 272]
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''
@@ -19958,7 +19958,7 @@
   operating_system: ''
   pools: ['All devices, links, services and users']
   positions:
-    'Regression Workflow: SxS Service Targets with Run Once + Skip': [174, 228]
+    'Regression Workflow: SxS Service Targets with Run Once + Skip': [222, 293]
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''
@@ -20025,7 +20025,7 @@
   operating_system: ''
   pools: ['All devices, links, services and users']
   positions:
-    'Regression Workflow: SxS Service Targets with Run Once + Skip': [22, 7]
+    'Regression Workflow: SxS Service Targets with Run Once + Skip': [-169, 29]
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''
@@ -20093,7 +20093,7 @@
   operating_system: ''
   pools: ['All devices, links, services and users']
   positions:
-    'Regression Workflow: SxS Service Targets with Run Once + Skip': [414, 72]
+    'Regression Workflow: SxS Service Targets with Run Once + Skip': [432, 109]
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''

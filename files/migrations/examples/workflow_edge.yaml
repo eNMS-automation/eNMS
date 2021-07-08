@@ -1525,11 +1525,6 @@
     Workflow: SxS Service Targets with Run Once + Skip] Once per device', subtype: failure,
   type: workflow_edge, workflow: 'Regression Workflow: SxS Service Targets with Run
     Once + Skip'}
-- {color: green, destination: '[Regression Workflow: SxS Service Targets with Run
-    Once + Skip] Global Skip', label: success, name: '2021-07-08 00:54:40.530794',
-  source: '[Regression Workflow: SxS Service Targets with Run Once + Skip] Once per
-    device', subtype: success, type: workflow_edge, workflow: 'Regression Workflow:
-    SxS Service Targets with Run Once + Skip'}
 - {color: green, destination: '[Shared] End', label: success, name: '2021-07-08 00:55:15.280840',
   source: '[Regression Workflow: SxS Service Targets with Run Once + Skip] Skip Query',
   subtype: success, type: workflow_edge, workflow: 'Regression Workflow: SxS Service
@@ -1543,3 +1538,8 @@
   source: '[Regression Workflow: SxS Service Targets with Run Once + Skip] Run Once
     with Pool', subtype: success, type: workflow_edge, workflow: 'Regression Workflow:
     SxS Service Targets with Run Once + Skip'}
+- {color: red, destination: '[Regression Workflow: SxS Service Targets with Run Once
+    + Skip] Global Skip', label: failure, name: '2021-07-08 01:09:51.687364', source: '[Regression
+    Workflow: SxS Service Targets with Run Once + Skip] Once per device', subtype: failure,
+  type: workflow_edge, workflow: 'Regression Workflow: SxS Service Targets with Run
+    Once + Skip'}

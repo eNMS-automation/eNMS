@@ -19785,9 +19785,8 @@
       alignment: left
       content: "This workflows has run method set to SxS with service targets.\r\n\
         It tests that the following mechanism work properly :\r\n- run once / once\
-        \ per device\r\n- skip, both global and per device with skip query\r\n- edge\
-        \ type (success / failure) doesn't matter in that mode"
-      positions: [49, 157]
+        \ per device\r\n- skip, both global and per device with skip query"
+      positions: [26, 149]
     907fa070-7150-4303-aa0b-848bacc48a68:
       alignment: left
       content: "Run on 4 devices. Austin fails (expected: 3 PASS, 1 FAIL)\r\nShould\
@@ -19805,7 +19804,7 @@
         \ log set to \"should appear only once\".\r\nCheck in log that it does appear\
         \ only once."
       positions: [506, 36]
-  last_modified: '2021-07-08 01:00:31.312030'
+  last_modified: '2021-07-08 01:09:51.687364'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100

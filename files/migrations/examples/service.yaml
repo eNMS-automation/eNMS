@@ -138,6 +138,7 @@
     'Regression Workflow: Skip Services in SxS mode': *id005
     'Regression Workflow: Skip, Discard and Disable Result Creation Mechanism': *id021
     'Regression Workflow: Superworkflow': *id022
+    'Regression Workflow: SxS Service Targets with Run Once + Skip': [-200, -113]
     'Regression Workflow: Topology Import (netbox, librenms, opennms)': *id023
     'Regression Workflow: Unix Command & Chell, Ping Service, Jump on Connect mechanism': *id024
     'Regression Workflow: Using get_var, set_var, get_result functions': *id025
@@ -404,6 +405,9 @@
     'Regression Workflow: Skip Services in SxS mode': *id046
     'Regression Workflow: Skip, Discard and Disable Result Creation Mechanism': *id062
     'Regression Workflow: Superworkflow': *id063
+    'Regression Workflow: SxS Service Targets with Run Once + Skip': [627, 8]
+    'Regression Workflow: SxS Service Targets with Skip Global + Query': !!python/tuple [
+      500, 0]
     'Regression Workflow: Topology Import (netbox, librenms, opennms)': *id064
     'Regression Workflow: Unix Command & Chell, Ping Service, Jump on Connect mechanism': *id065
     'Regression Workflow: Using get_var, set_var, get_result functions': *id066
@@ -7376,7 +7380,7 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels: {}
-  last_modified: '2020-11-17 09:50:03.220582'
+  last_modified: '2021-07-08 00:42:20.769831'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -7471,7 +7475,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: {}
+  skip: {'Regression Workflow: Advanced Iteration Targets': false}
   skip_query: ''
   skip_value: success
   source_code: "results[\"success\"] = True\r\nresults[\"result\"] = {\r\n  \"dict_iteration\"\
@@ -7562,7 +7566,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: {}
+  skip: {'Regression Workflow: Advanced Iteration Targets': false}
   skip_query: ''
   skip_value: success
   start_new_connection: false
@@ -19749,4 +19753,155 @@
   validation_section: results['result']
   vendor: ''
   verify_ssl_certificate: false
+  waiting_time: 0
+- access_groups: admin
+  close_connection: false
+  completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credential_type: any
+  default_access: creator
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  impacting: false
+  include_device_results: false
+  include_link_in_summary: false
+  initial_form: ''
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  labels:
+    79e47a4f-96d6-42bd-8b4c-139812b9bfef:
+      alignment: left
+      content: "This workflows has run method set to SxS with service targets.\r\n\
+        It tests that the following mechanism work properly :\r\n- run once / once\
+        \ per device\r\n- skip, both global and per device with skip query\r\n- edge\
+        \ type (success / failure) doesn't matter in that mode"
+      positions: [175, -107]
+    907fa070-7150-4303-aa0b-848bacc48a68:
+      alignment: left
+      content: "Run on 4 devices. Austin fails (expected: 3 PASS, 1 FAIL)\r\nShould\
+        \ follow both success and failure edges, because\r\nthese edges don't matter\
+        \ in that mode."
+      positions: [-130, 252]
+  last_modified: '2021-07-08 00:48:49.407758'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: 'Regression Workflow: SxS Service Targets with Run Once + Skip'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: ['All devices, links, services and users']
+  positions: {}
+  postprocessing: ''
+  postprocessing_mode: success
+  preprocessing: ''
+  priority: 1
+  reply_to: ''
+  reserved: false
+  run_method: per_service_with_service_targets
+  scoped_name: 'Regression Workflow: SxS Service Targets with Run Once + Skip'
+  send_notification: false
+  send_notification_method: mail
+  services: ['[Shared] Start', '[Shared] End', '[Regression Workflow: SxS Service
+      Targets with Run Once + Skip] Once per device']
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: success
+  target_devices: []
+  target_pools: []
+  time_between_retries: 10
+  type: workflow
+  update_pools_after_running: false
+  update_target_pools: false
+  validation_condition: none
+  validation_method: text
+  validation_section: results['result']
+  vendor: ''
+  waiting_time: 0
+  workflow_category: Example workflow(s)
+- access_groups: admin
+  completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credential_type: any
+  default_access: creator
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  impacting: false
+  include_device_results: false
+  include_link_in_summary: false
+  initial_form: ''
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2021-07-08 00:49:08.620371'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Regression Workflow: SxS Service Targets with Run Once + Skip] Once per
+    device'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: ['All devices, links, services and users']
+  positions:
+    'Regression Workflow: SxS Service Targets with Run Once + Skip': [-174, 174]
+  postprocessing: ''
+  postprocessing_mode: success
+  preprocessing: ''
+  priority: 1
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: Once per device
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: success
+  source_code: "\r\n# Click on \"i\" to right of \"Source Code\" for examples.\r\n\
+    \r\nresult = {}\r\nresults[\"success\"] = device.name != \"Austin\"\r\nresults[\"\
+    result\"] = result"
+  target_devices: [Washington, Austin, PaloAlto, Chicago]
+  target_pools: []
+  time_between_retries: 10
+  type: python_snippet_service
+  update_pools_after_running: false
+  update_target_pools: false
+  validation_condition: none
+  validation_method: text
+  validation_section: results['result']
+  vendor: ''
   waiting_time: 0

@@ -1516,3 +1516,7 @@
     and Log Obfuscation] Get device credential', label: success, name: '2021-07-06
     01:05:21.203122', source: '[Shared] Start', subtype: success, type: workflow_edge,
   workflow: 'Regression Workflow: Global get_credential Function and Log Obfuscation'}
+- {color: green, destination: '[Regression Workflow: SxS Service Targets with Run
+    Once + Skip] Once per device', label: success, name: '2021-07-08 00:48:49.407758',
+  source: '[Shared] Start', subtype: success, type: workflow_edge, workflow: 'Regression
+    Workflow: SxS Service Targets with Run Once + Skip'}

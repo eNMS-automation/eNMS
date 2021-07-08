@@ -19786,25 +19786,25 @@
       content: "This workflows has run method set to SxS with service targets.\r\n\
         It tests that the following mechanism work properly :\r\n- run once / once\
         \ per device\r\n- skip, both global and per device with skip query"
-      positions: [26, 149]
+      positions: [83, 219]
     907fa070-7150-4303-aa0b-848bacc48a68:
       alignment: left
       content: "Run on 4 devices. Austin fails (expected: 3 PASS, 1 FAIL)\r\nShould\
         \ follow both success and failure edges, because\r\nthese edges don't matter\
         \ in that mode."
-      positions: [-295, 380]
+      positions: [-290, 440]
     91c62455-9d20-4c77-8596-348d4f6a9f02:
       alignment: left
       content: "Run on 4 devices. Two devices are skipped based on name\r\nvia device\
         \ query: Washington, NewYork.\r\nExpected in display: 2 PASS, 2 SKIP."
-      positions: [296, 382]
+      positions: [353, 439]
     c8c22a6e-8497-4293-a333-3df8e67d59cb:
       alignment: left
       content: "Set to run on pool \"All devices\" in run once mode.\r\nIncludes a\
         \ log set to \"should appear only once\".\r\nCheck in log that it does appear\
         \ only once."
-      positions: [506, 36]
-  last_modified: '2021-07-08 01:09:51.687364'
+      positions: [459, 100]
+  last_modified: '2021-07-08 01:11:08.102953'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -19889,7 +19889,7 @@
   operating_system: ''
   pools: ['All devices, links, services and users']
   positions:
-    'Regression Workflow: SxS Service Targets with Run Once + Skip': [-377, 272]
+    'Regression Workflow: SxS Service Targets with Run Once + Skip': [-361, 360]
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''
@@ -19957,7 +19957,7 @@
   operating_system: ''
   pools: ['All devices, links, services and users']
   positions:
-    'Regression Workflow: SxS Service Targets with Run Once + Skip': [222, 293]
+    'Regression Workflow: SxS Service Targets with Run Once + Skip': [267, 355]
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''
@@ -20024,7 +20024,7 @@
   operating_system: ''
   pools: ['All devices, links, services and users']
   positions:
-    'Regression Workflow: SxS Service Targets with Run Once + Skip': [-169, 29]
+    'Regression Workflow: SxS Service Targets with Run Once + Skip': [-201, 121]
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''
@@ -20092,7 +20092,7 @@
   operating_system: ''
   pools: ['All devices, links, services and users']
   positions:
-    'Regression Workflow: SxS Service Targets with Run Once + Skip': [432, 109]
+    'Regression Workflow: SxS Service Targets with Run Once + Skip': [429, 170]
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''

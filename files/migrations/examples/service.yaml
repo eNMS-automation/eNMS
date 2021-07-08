@@ -19793,8 +19793,13 @@
       content: "Run on 4 devices. Austin fails (expected: 3 PASS, 1 FAIL)\r\nShould\
         \ follow both success and failure edges, because\r\nthese edges don't matter\
         \ in that mode."
-      positions: [-130, 252]
-  last_modified: '2021-07-08 00:48:49.407758'
+      positions: [-174, 252]
+    91c62455-9d20-4c77-8596-348d4f6a9f02:
+      alignment: left
+      content: "Run on 4 devices. Two devices are skipped based on name\r\nvia device\
+        \ query: Washington, NewYork.\r\nExpected in display: 2 PASS, 2 SKIP."
+      positions: [274, 268]
+  last_modified: '2021-07-08 00:52:37.136691'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -19819,7 +19824,8 @@
   send_notification: false
   send_notification_method: mail
   services: ['[Shared] Start', '[Shared] End', '[Regression Workflow: SxS Service
-      Targets with Run Once + Skip] Once per device']
+      Targets with Run Once + Skip] Once per device', '[Regression Workflow: SxS Service
+      Targets with Run Once + Skip] Skip Query']
   shared: false
   skip: {}
   skip_query: ''
@@ -19895,6 +19901,73 @@
     \r\nresult = {}\r\nresults[\"success\"] = device.name != \"Austin\"\r\nresults[\"\
     result\"] = result"
   target_devices: [Washington, Austin, PaloAlto, Chicago]
+  target_pools: []
+  time_between_retries: 10
+  type: python_snippet_service
+  update_pools_after_running: false
+  update_target_pools: false
+  validation_condition: none
+  validation_method: text
+  validation_section: results['result']
+  vendor: ''
+  waiting_time: 0
+- access_groups: admin
+  completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credential_type: any
+  default_access: creator
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  impacting: false
+  include_device_results: false
+  include_link_in_summary: false
+  initial_form: ''
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2021-07-08 00:52:11.438159'
+  log_level: 1
+  mail_recipient: ''
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Regression Workflow: SxS Service Targets with Run Once + Skip] Skip Query'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: ['All devices, links, services and users']
+  positions:
+    'Regression Workflow: SxS Service Targets with Run Once + Skip': [241, 186]
+  postprocessing: ''
+  postprocessing_mode: success
+  preprocessing: ''
+  priority: 1
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: Skip Query
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: {}
+  skip_query: device.name in ("Washington", "NewYork")
+  skip_value: success
+  source_code: "\r\n# Click on \"i\" to right of \"Source Code\" for examples.\r\n\
+    \r\nresult = {}\r\nresults[\"success\"] = True\r\nresults[\"result\"] = result"
+  target_devices: [Dallas, SanDiego, Washington, NewYork]
   target_pools: []
   time_between_retries: 10
   type: python_snippet_service

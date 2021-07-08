@@ -1520,3 +1520,8 @@
     Once + Skip] Once per device', label: success, name: '2021-07-08 00:48:49.407758',
   source: '[Shared] Start', subtype: success, type: workflow_edge, workflow: 'Regression
     Workflow: SxS Service Targets with Run Once + Skip'}
+- {color: red, destination: '[Regression Workflow: SxS Service Targets with Run Once
+    + Skip] Skip Query', label: failure, name: '2021-07-08 00:51:07.680506', source: '[Regression
+    Workflow: SxS Service Targets with Run Once + Skip] Once per device', subtype: failure,
+  type: workflow_edge, workflow: 'Regression Workflow: SxS Service Targets with Run
+    Once + Skip'}

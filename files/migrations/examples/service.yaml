@@ -405,7 +405,7 @@
     'Regression Workflow: Skip Services in SxS mode': *id046
     'Regression Workflow: Skip, Discard and Disable Result Creation Mechanism': *id062
     'Regression Workflow: Superworkflow': *id063
-    'Regression Workflow: SxS Service Targets with Run Once + Skip': [647, 256]
+    'Regression Workflow: SxS Service Targets with Run Once + Skip': [605, 380]
     'Regression Workflow: SxS Service Targets with Skip Global + Query': !!python/tuple [
       500, 0]
     'Regression Workflow: Topology Import (netbox, librenms, opennms)': *id064
@@ -19804,7 +19804,7 @@
         \ log set to \"should appear only once\".\r\nCheck in log that it does appear\
         \ only once."
       positions: [459, 100]
-  last_modified: '2021-07-08 01:11:08.102953'
+  last_modified: '2021-07-08 01:15:58.440428'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100

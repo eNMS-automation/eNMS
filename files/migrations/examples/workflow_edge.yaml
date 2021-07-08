@@ -1543,3 +1543,14 @@
     Workflow: SxS Service Targets with Run Once + Skip] Once per device', subtype: failure,
   type: workflow_edge, workflow: 'Regression Workflow: SxS Service Targets with Run
     Once + Skip'}
+- {color: green, destination: '[Regression Workflow: Data Extraction Service] Initialize
+    Variables', label: success, name: '2021-07-08 09:29:53.886815', source: '[Shared]
+    Start', subtype: success, type: workflow_edge, workflow: 'Regression Workflow:
+    Data Extraction Service'}
+- {color: green, destination: '[Regression Workflow: Data Extraction Service] Set
+    Var and Validate', label: success, name: '2021-07-08 09:31:34.003611', source: '[Regression
+    Workflow: Data Extraction Service] Initialize Variables', subtype: success, type: workflow_edge,
+  workflow: 'Regression Workflow: Data Extraction Service'}
+- {color: green, destination: '[Shared] End', label: success, name: '2021-07-08 09:31:35.148025',
+  source: '[Regression Workflow: Data Extraction Service] Set Var and Validate', subtype: success,
+  type: workflow_edge, workflow: 'Regression Workflow: Data Extraction Service'}

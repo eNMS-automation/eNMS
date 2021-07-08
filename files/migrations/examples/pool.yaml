@@ -318,7 +318,8 @@
   service_vendor: ''
   service_vendor_invert: false
   service_vendor_match: inclusion
-  target_services: ['Regression Workflow: Scalability Test (large workflow)']
+  target_services: ['Regression Workflow: Scalability Test (large workflow)', '[Regression
+      Workflow: SxS Service Targets with Run Once + Skip] Run Once with Pool']
   tasks: []
   type: pool
   user_description: ''

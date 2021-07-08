@@ -1534,3 +1534,12 @@
   source: '[Regression Workflow: SxS Service Targets with Run Once + Skip] Skip Query',
   subtype: success, type: workflow_edge, workflow: 'Regression Workflow: SxS Service
     Targets with Run Once + Skip'}
+- {color: green, destination: '[Regression Workflow: SxS Service Targets with Run
+    Once + Skip] Run Once with Pool', label: success, name: '2021-07-08 00:57:40.808398',
+  source: '[Regression Workflow: SxS Service Targets with Run Once + Skip] Global
+    Skip', subtype: success, type: workflow_edge, workflow: 'Regression Workflow:
+    SxS Service Targets with Run Once + Skip'}
+- {color: green, destination: '[Shared] End', label: success, name: '2021-07-08 00:57:41.980108',
+  source: '[Regression Workflow: SxS Service Targets with Run Once + Skip] Run Once
+    with Pool', subtype: success, type: workflow_edge, workflow: 'Regression Workflow:
+    SxS Service Targets with Run Once + Skip'}

@@ -1548,15 +1548,17 @@
     Start', subtype: success, type: workflow_edge, workflow: 'Regression Workflow:
     Data Extraction Service'}
 - {color: green, destination: '[Regression Workflow: Data Extraction Service] String
-    Extraction and Validation', label: success, name: '2021-07-08 09:31:34.003611',
-  source: '[Regression Workflow: Data Extraction Service] Initialize Variables', subtype: success,
-  type: workflow_edge, workflow: 'Regression Workflow: Data Extraction Service'}
+    Extraction', label: success, name: '2021-07-08 09:31:34.003611', source: '[Regression
+    Workflow: Data Extraction Service] Initialize Variables', subtype: success, type: workflow_edge,
+  workflow: 'Regression Workflow: Data Extraction Service'}
 - {color: green, destination: '[Regression Workflow: Data Extraction Service] Dict
-    Definition and Validation', label: success, name: '2021-07-08 09:37:05.528621',
-  source: '[Regression Workflow: Data Extraction Service] String Extraction and Validation',
-  subtype: success, type: workflow_edge, workflow: 'Regression Workflow: Data Extraction
-    Service'}
-- {color: green, destination: '[Shared] End', label: success, name: '2021-07-08 09:37:08.113958',
-  source: '[Regression Workflow: Data Extraction Service] Dict Definition and Validation',
-  subtype: success, type: workflow_edge, workflow: 'Regression Workflow: Data Extraction
-    Service'}
+    Definition', label: success, name: '2021-07-08 09:37:05.528621', source: '[Regression
+    Workflow: Data Extraction Service] String Extraction', subtype: success, type: workflow_edge,
+  workflow: 'Regression Workflow: Data Extraction Service'}
+- {color: green, destination: '[Regression Workflow: Data Extraction Service] Dict
+    Update', label: success, name: '2021-07-08 09:40:06.446598', source: '[Regression
+    Workflow: Data Extraction Service] Dict Definition', subtype: success, type: workflow_edge,
+  workflow: 'Regression Workflow: Data Extraction Service'}
+- {color: green, destination: '[Shared] End', label: success, name: '2021-07-08 09:40:07.112873',
+  source: '[Regression Workflow: Data Extraction Service] Dict Update', subtype: success,
+  type: workflow_edge, workflow: 'Regression Workflow: Data Extraction Service'}

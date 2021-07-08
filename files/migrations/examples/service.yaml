@@ -20150,7 +20150,7 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels: {}
-  last_modified: '2021-07-08 09:37:08.113958'
+  last_modified: '2021-07-08 09:40:07.112873'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -20176,8 +20176,8 @@
   send_notification_method: mail
   services: ['[Shared] Start', '[Shared] End', '[Regression Workflow: Data Extraction
       Service] Initialize Variables', '[Regression Workflow: Data Extraction Service]
-      String Extraction and Validation', '[Regression Workflow: Data Extraction Service]
-      Dict Definition and Validation']
+      String Extraction', '[Regression Workflow: Data Extraction Service] Dict Definition',
+    '[Regression Workflow: Data Extraction Service] Dict Update']
   shared: false
   skip: {}
   skip_query: ''
@@ -20219,7 +20219,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2021-07-08 09:34:32.335618'
+  last_modified: '2021-07-08 09:38:41.015966'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -20249,8 +20249,9 @@
   skip_query: ''
   skip_value: success
   source_code: "\r\n# Click on \"i\" to right of \"Source Code\" for examples.\r\n\
-    \r\nset_var(\"var1\", \"test\")\r\nset_var(\"dict\", {\"a\": \"b\"})\r\nresult\
-    \ = {}\r\nresults[\"success\"] = True\r\nresults[\"result\"] = result"
+    \r\nset_var(\"var1\", \"test\")\r\nset_var(\"dict\", {\"a\": \"b\"})\r\nset_var(\"\
+    dict_update\", {1: [2, 3]})\r\nresult = {}\r\nresults[\"success\"] = True\r\n\
+    results[\"result\"] = result"
   target_devices: []
   target_pools: []
   time_between_retries: 10
@@ -20287,7 +20288,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2021-07-08 09:34:48.668939'
+  last_modified: '2021-07-08 09:38:55.376995'
   log_level: 1
   mail_recipient: ''
   match1: ''
@@ -20300,7 +20301,7 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression Workflow: Data Extraction Service] String Extraction and Validation'
+  name: '[Regression Workflow: Data Extraction Service] String Extraction'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -20321,7 +20322,7 @@
   reply_to: ''
   reserved: false
   run_method: per_device
-  scoped_name: String Extraction and Validation
+  scoped_name: String Extraction
   send_notification: false
   send_notification_method: mail
   shared: false
@@ -20367,7 +20368,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2021-07-08 09:37:01.195905'
+  last_modified: '2021-07-08 09:38:46.936075'
   log_level: 1
   mail_recipient: ''
   match1: ''
@@ -20380,7 +20381,7 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression Workflow: Data Extraction Service] Dict Definition and Validation'
+  name: '[Regression Workflow: Data Extraction Service] Dict Definition'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -20389,7 +20390,8 @@
   operation2: set
   operation3: set
   pools: ['All devices, links, services and users']
-  positions: {}
+  positions:
+    'Regression Workflow: Data Extraction Service': [0, 0]
   postprocessing: 'results["success"] = v2 == {"a": "b"}'
   postprocessing_mode: success
   preprocessing: ''
@@ -20400,7 +20402,87 @@
   reply_to: ''
   reserved: false
   run_method: per_device
-  scoped_name: Dict Definition and Validation
+  scoped_name: Dict Definition
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: success
+  target_devices: []
+  target_pools: []
+  time_between_retries: 10
+  type: data_extraction_service
+  update_pools_after_running: false
+  update_target_pools: false
+  validation_condition: none
+  validation_method: text
+  validation_section: results['result']
+  variable1: v2
+  variable2: ''
+  variable3: ''
+  vendor: ''
+  waiting_time: 0
+- access_groups: admin
+  completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credential_type: any
+  default_access: creator
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  impacting: false
+  include_device_results: false
+  include_link_in_summary: false
+  initial_form: ''
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2021-07-08 09:40:01.662977'
+  log_level: 1
+  mail_recipient: ''
+  match1: ''
+  match2: ''
+  match3: ''
+  match_type1: none
+  match_type2: none
+  match_type3: none
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Regression Workflow: Data Extraction Service] Dict Update'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  operation1: update
+  operation2: set
+  operation3: set
+  pools: ['All devices, links, services and users']
+  positions:
+    'Regression Workflow: Data Extraction Service': [442, 97]
+  postprocessing: 'results["success"] = v2 == {"a": "b", 1: [2, 3]}'
+  postprocessing_mode: success
+  preprocessing: ''
+  priority: 1
+  query1: get_var("dict_update")
+  query2: ''
+  query3: ''
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: Dict Update
   send_notification: false
   send_notification_method: mail
   shared: false

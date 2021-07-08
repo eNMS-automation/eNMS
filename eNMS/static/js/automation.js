@@ -415,7 +415,6 @@ function displayResultsTree(service, runtime) {
   call({
     url: `/get_workflow_results/${service.id}/${runtime}`,
     callback: function (data) {
-      console.log(data)
       $(`#result-tree-${service.id}`).jstree("destroy").empty();
       let tree = $(`#result-tree-${service.id}`).jstree({
         core: {

@@ -261,7 +261,7 @@ function drawNode(node) {
         `/static/img/view/models/${node.model}.dae`,
         function (collada) {
           daeModels[node.id] = collada.scene;
-          setNodePosition(daeModels[node.id], node)
+          setNodePosition(daeModels[node.id], node);
           daeModels[node.id].traverse(function (child) {
             child.userData = { isCollada: true, ...node };
           });
@@ -369,7 +369,9 @@ export function viewCreation(instance) {
     if (instance.id == currentView.id) {
       $("#current-view option:selected").text(instance.name).trigger("change");
     } else {
-      $("#current-view").append(`<option value="${instance.id}">${instance.name}</option>`);
+      $("#current-view").append(
+        `<option value="${instance.id}">${instance.name}</option>`
+      );
       $("#current-view").val(instance.id).trigger("change");
       displayView();
     }
@@ -443,7 +445,7 @@ export function initViewBuilder() {
     },
   });
   Object.assign(action, {
-    "Properties": displayProperties,
+    Properties: displayProperties,
     "View Properties": (viewObject) => showInstancePanel("node", viewObject.id),
     Connect: (viewObject) => showConnectionPanel(viewObject.device),
     Configuration: (viewObject) => showDeviceData(viewObject.device),

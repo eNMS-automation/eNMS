@@ -4,8 +4,8 @@
   method="post"
   autocomplete="off"
 >
-  {% set panel_id = range(10000) | random %}
-  {{ form.id(id=form_type + '-id', class="add-id") }} {{ form.hidden_tag() }}
+  {% set panel_id = range(10000) | random %} {{ form.id(id=form_type + '-id',
+  class="add-id") }} {{ form.hidden_tag() }}
   <input type="hidden" id="copy" name="copy" class="add-id" />
   <div style="padding: 20px;">
     <center>

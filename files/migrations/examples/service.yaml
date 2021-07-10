@@ -20289,7 +20289,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2021-07-10 05:07:56.643444'
+  last_modified: '2021-07-10 05:10:39.268087'
   log_level: 1
   mail_recipient: ''
   match1: ''
@@ -20307,9 +20307,9 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  operation1: set
-  operation2: set
-  operation3: set
+  operation1: __setitem__
+  operation2: __setitem__
+  operation3: __setitem__
   pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow: Data Extraction Service': [-172, 268]
@@ -20369,7 +20369,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2021-07-10 05:07:04.334612'
+  last_modified: '2021-07-10 05:11:13.766271'
   log_level: 1
   mail_recipient: ''
   match1: ''
@@ -20387,9 +20387,9 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  operation1: set
-  operation2: set
-  operation3: set
+  operation1: __setitem__
+  operation2: __setitem__
+  operation3: __setitem__
   pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow: Data Extraction Service': [74, -16]
@@ -20449,7 +20449,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2021-07-10 05:07:18.155079'
+  last_modified: '2021-07-10 05:11:32.486632'
   log_level: 1
   mail_recipient: ''
   match1: ''
@@ -20468,8 +20468,8 @@
   number_of_retries: 0
   operating_system: ''
   operation1: update
-  operation2: set
-  operation3: set
+  operation2: __setitem__
+  operation3: __setitem__
   pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow: Data Extraction Service': [74, 268]

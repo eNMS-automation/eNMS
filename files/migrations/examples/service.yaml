@@ -2036,7 +2036,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  operation1: set
+  operation1: __setitem__
   operation2: set
   operation3: set
   pools: ['All devices, links, services and users']
@@ -4151,7 +4151,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  operation1: set
+  operation1: __setitem__
   operation2: append
   operation3: update
   pools: ['All devices, links, services and users']
@@ -20306,7 +20306,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  operation1: set
+  operation1: __setitem__
   operation2: set
   operation3: set
   pools: ['All devices, links, services and users']
@@ -20386,7 +20386,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  operation1: set
+  operation1: __setitem__
   operation2: set
   operation3: set
   pools: ['All devices, links, services and users']

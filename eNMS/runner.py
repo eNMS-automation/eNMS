@@ -765,7 +765,7 @@ class Runner:
         value=None,
         device=None,
         section=None,
-        operation="set",
+        operation="__setitem__",
         allow_none=False,
         default=None,
     ):
@@ -775,14 +775,7 @@ class Runner:
             payload = payload.setdefault(device, {})
         if section:
             payload = payload.setdefault(section, {})
-        if value is None:
-            value = default
-        if operation == "set":
-            payload[name] = value
-        elif operation == "update":
-            payload.setdefault(name, {}).update(value)
-        elif operation in ("append", "extend"):
-            getattr(payload.setdefault(name, []), operation)(value)
+        value = getattr(payload, operation)(name, value)
         elif operation == "get":
             value = payload.get(name)
         if operation == "get" and not allow_none and value is None:

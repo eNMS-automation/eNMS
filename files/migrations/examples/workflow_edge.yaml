@@ -1575,6 +1575,11 @@
     Extend', label: success, name: '2021-07-10 10:17:32.047747', source: '[Regression
     Workflow: Data Extraction Service] List Append', subtype: success, type: workflow_edge,
   workflow: 'Regression Workflow: Data Extraction Service'}
-- {color: green, destination: '[Shared] End', label: success, name: '2021-07-10 10:17:32.992174',
-  source: '[Regression Workflow: Data Extraction Service] List Extend', subtype: success,
-  type: workflow_edge, workflow: 'Regression Workflow: Data Extraction Service'}
+- {color: green, destination: '[Regression Workflow: Data Extraction Service] Operation
+    via set_var', label: success, name: '2021-07-10 10:22:44.117760', source: '[Regression
+    Workflow: Data Extraction Service] List Extend', subtype: success, type: workflow_edge,
+  workflow: 'Regression Workflow: Data Extraction Service'}
+- {color: green, destination: '[Shared] End', label: success, name: '2021-07-10 10:22:45.194232',
+  source: '[Regression Workflow: Data Extraction Service] Operation via set_var',
+  subtype: success, type: workflow_edge, workflow: 'Regression Workflow: Data Extraction
+    Service'}

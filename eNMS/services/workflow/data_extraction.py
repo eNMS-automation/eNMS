@@ -75,7 +75,7 @@ match_choices = (
 )
 
 operation_choices = (
-    ("set", "Set / Replace"),
+    ("__setitem__", "Set / Replace"),
     ("append", "Append to a list"),
     ("extend", "Extend list"),
     ("update", "Update dictionary"),

@@ -20854,7 +20854,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2021-07-10 10:24:49.582671'
+  last_modified: '2021-07-10 10:27:45.384542'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -20870,8 +20870,9 @@
   positions:
     'Regression Workflow: Data Extraction Service': [274, 366]
   postprocessing: "string_validation = var1 == \"test4\"\r\ndict_validation = var2\
-    \ == {\"a\": \"b\", 1: [2, 3], \"4\": 8}\r\n\r\nresults[\"success\"] = string_validation\
-    \ and dict_validation\r\n"
+    \ == {\"a\": \"b\", 1: [2, 3], \"4\": 8}\r\nlist_validation = var3 == [1, \"4\"\
+    , [2, (\"trois\",)], \"5\", {\"6\"}, (\"b\",), 5, \"huit\"]\r\n\r\nresults[\"\
+    success\"] = string_validation and dict_validation and list_validation\r\n"
   postprocessing_mode: success
   preprocessing: ''
   priority: 1
@@ -20887,8 +20888,10 @@
   skip_value: success
   source_code: "\r\n# Click on \"i\" to right of \"Source Code\" for examples.\r\n\
     set_var(\"var1\", \"test4\", device=device.name)\r\nset_var(\"var2\", {\"4\":\
-    \ 8}, operation=\"update\", device=device.name)\r\n\r\nresult = {}\r\nresults[\"\
-    success\"] = True\r\nresults[\"result\"] = result"
+    \ 8}, operation=\"update\", device=device.name)\r\nset_var(\"var3\", [(\"b\",),\
+    \ 5], operation=\"extend\", device=device.name)\r\nset_var(\"var3\", \"huit\"\
+    , operation=\"append\", device=device.name)\r\n\r\nresult = {}\r\nresults[\"success\"\
+    ] = True\r\nresults[\"result\"] = result"
   target_devices: []
   target_pools: []
   time_between_retries: 10

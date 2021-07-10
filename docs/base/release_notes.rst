@@ -98,6 +98,7 @@ same workflow
 - Add new "get_credential" global variable in workflow builder. Used to get a password or a passphrase
 for a netmiko validaiton command or rest call service. For obfuscation purposes.
 mail: Obfuscate Credentials passed into Netmiko Command Line
+- Fix data extraction service and operation keyword in set_var
 
 MIGRATION:
 

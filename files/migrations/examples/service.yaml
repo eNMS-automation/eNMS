@@ -20150,7 +20150,7 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels: {}
-  last_modified: '2021-07-10 04:56:32.234187'
+  last_modified: '2021-07-10 10:11:03.750733'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -20177,7 +20177,8 @@
   services: ['[Shared] Start', '[Shared] End', '[Regression Workflow: Data Extraction
       Service] Initialize Variables', '[Regression Workflow: Data Extraction Service]
       String Extraction', '[Regression Workflow: Data Extraction Service] Dict Definition',
-    '[Regression Workflow: Data Extraction Service] Dict Update']
+    '[Regression Workflow: Data Extraction Service] Dict Update', '[Regression Workflow:
+      Data Extraction Service] String Replacement']
   shared: false
   skip: {}
   skip_query: ''
@@ -20233,7 +20234,7 @@
   operating_system: ''
   pools: ['All devices, links, services and users']
   positions:
-    'Regression Workflow: Data Extraction Service': [-369, 79]
+    'Regression Workflow: Data Extraction Service': [-477, 84]
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''
@@ -20312,7 +20313,7 @@
   operation3: __setitem__
   pools: ['All devices, links, services and users']
   positions:
-    'Regression Workflow: Data Extraction Service': [-172, 268]
+    'Regression Workflow: Data Extraction Service': [-251, 271]
   postprocessing: results["success"] = var1 == "test"
   postprocessing_mode: success
   preprocessing: ''
@@ -20392,7 +20393,7 @@
   operation3: __setitem__
   pools: ['All devices, links, services and users']
   positions:
-    'Regression Workflow: Data Extraction Service': [74, -16]
+    'Regression Workflow: Data Extraction Service': [-11, -26]
   postprocessing: 'results["success"] = var2 == {"a": "b"}'
   postprocessing_mode: success
   preprocessing: ''
@@ -20472,7 +20473,7 @@
   operation3: __setitem__
   pools: ['All devices, links, services and users']
   positions:
-    'Regression Workflow: Data Extraction Service': [74, 268]
+    'Regression Workflow: Data Extraction Service': [-4, 272]
   postprocessing: 'results["success"] = var2 == {"a": "b", 1: [2, 3]}'
   postprocessing_mode: success
   preprocessing: ''
@@ -20500,6 +20501,86 @@
   validation_method: text
   validation_section: results['result']
   variable1: var2
+  variable2: ''
+  variable3: ''
+  vendor: ''
+  waiting_time: 0
+- access_groups: admin
+  completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credential_type: any
+  default_access: creator
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  impacting: false
+  include_device_results: false
+  include_link_in_summary: false
+  initial_form: ''
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2021-07-10 10:10:33.736633'
+  log_level: 1
+  mail_recipient: ''
+  match1: ''
+  match2: ''
+  match3: ''
+  match_type1: none
+  match_type2: none
+  match_type3: none
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Regression Workflow: Data Extraction Service] String Replacement'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  operation1: __setitem__
+  operation2: __setitem__
+  operation3: __setitem__
+  pools: ['All devices, links, services and users']
+  positions:
+    'Regression Workflow: Data Extraction Service': [-249, -29]
+  postprocessing: results["success"] = var1 == "test2"
+  postprocessing_mode: success
+  preprocessing: ''
+  priority: 1
+  query1: get_var("string2")
+  query2: ''
+  query3: ''
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: String Replacement
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: success
+  target_devices: []
+  target_pools: []
+  time_between_retries: 10
+  type: data_extraction_service
+  update_pools_after_running: false
+  update_target_pools: false
+  validation_condition: none
+  validation_method: text
+  validation_section: results['result']
+  variable1: var1
   variable2: ''
   variable3: ''
   vendor: ''

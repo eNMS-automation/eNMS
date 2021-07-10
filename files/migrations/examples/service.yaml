@@ -20150,7 +20150,7 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels: {}
-  last_modified: '2021-07-10 10:11:03.750733'
+  last_modified: '2021-07-10 10:14:35.949910'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -20178,7 +20178,8 @@
       Service] Initialize Variables', '[Regression Workflow: Data Extraction Service]
       String Extraction', '[Regression Workflow: Data Extraction Service] Dict Definition',
     '[Regression Workflow: Data Extraction Service] Dict Update', '[Regression Workflow:
-      Data Extraction Service] String Replacement']
+      Data Extraction Service] String Replacement', '[Regression Workflow: Data Extraction
+      Service] List Definition']
   shared: false
   skip: {}
   skip_query: ''
@@ -20220,7 +20221,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2021-07-10 05:06:08.270025'
+  last_modified: '2021-07-10 10:13:25.555454'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -20252,8 +20253,9 @@
   source_code: "\r\n# Click on \"i\" to right of \"Source Code\" for examples.\r\n\
     \r\nset_var(\"string\", \"test\")\r\nset_var(\"string2\", \"test2\")\r\nset_var(\"\
     string3\", \"test3\")\r\nset_var(\"dict\", {\"a\": \"b\"})\r\nset_var(\"dict2\"\
-    , {1: [2, 3]})\r\nresult = {}\r\nresults[\"success\"] = True\r\nresults[\"result\"\
-    ] = result"
+    , {1: [2, 3]})\r\nset_var(\"list\", [1, \"4\"])\r\nset_var(\"list2\", [2, (\"\
+    trois\",)])\r\nset_var(\"list3\", [\"5\", {\"6\"}])\r\nresult = {}\r\nresults[\"\
+    success\"] = True\r\nresults[\"result\"] = result"
   target_devices: []
   target_pools: []
   time_between_retries: 10
@@ -20581,6 +20583,86 @@
   validation_method: text
   validation_section: results['result']
   variable1: var1
+  variable2: ''
+  variable3: ''
+  vendor: ''
+  waiting_time: 0
+- access_groups: admin
+  completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credential_type: any
+  default_access: creator
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  impacting: false
+  include_device_results: false
+  include_link_in_summary: false
+  initial_form: ''
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2021-07-10 10:14:26.174039'
+  log_level: 1
+  mail_recipient: ''
+  match1: ''
+  match2: ''
+  match3: ''
+  match_type1: none
+  match_type2: none
+  match_type3: none
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Regression Workflow: Data Extraction Service] List Definition'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  operation1: __setitem__
+  operation2: __setitem__
+  operation3: __setitem__
+  pools: ['All devices, links, services and users']
+  positions:
+    'Regression Workflow: Data Extraction Service': [213, 271]
+  postprocessing: results["success"] = var3 == [1, "4"]
+  postprocessing_mode: success
+  preprocessing: ''
+  priority: 1
+  query1: get_var("list")
+  query2: ''
+  query3: ''
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: List Definition
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: success
+  target_devices: []
+  target_pools: []
+  time_between_retries: 10
+  type: data_extraction_service
+  update_pools_after_running: false
+  update_target_pools: false
+  validation_condition: none
+  validation_method: text
+  validation_section: results['result']
+  variable1: var3
   variable2: ''
   variable3: ''
   vendor: ''

@@ -45,6 +45,8 @@ class Runner:
         self.iteration_run = False
         self.workflow = None
         self.parent_device = None
+        self.target_devices = []
+        self.target_pools = []
         self.run = run
         self.creator = self.run.creator
         self.start_services = [1]

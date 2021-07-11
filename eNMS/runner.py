@@ -41,12 +41,14 @@ from eNMS.variables import vs
 
 class Runner:
     def __init__(self, run, **kwargs):
+        self.parameterized_run = False
         self.is_main_run = False
         self.iteration_run = False
         self.workflow = None
         self.parent_device = None
         self.target_devices = []
         self.target_pools = []
+        self.device_query = ""
         self.run = run
         self.creator = self.run.creator
         self.start_services = [1]
@@ -125,21 +127,21 @@ class Runner:
         return devices
 
     def compute_devices(self):
-        service = self.main_run.placeholder or self.service
-        devices = set(self.target_devices)
-        for pool in self.target_pools:
+        instance = (
+            self
+            if self.parameterized_run or not self.is_main_run
+            else self.main_run.placeholder or self.service
+        )
+        devices = set(instance.target_devices)
+        for pool in instance.target_pools:
+            if instance.update_target_pools:
+                pool.compute_pool()
             devices |= set(pool.devices)
-        if not devices:
-            if service.device_query:
-                devices |= self.compute_devices_from_query(
-                    service.device_query,
-                    service.device_query_property,
-                )
-            devices |= set(service.target_devices)
-            for pool in service.target_pools:
-                if self.update_target_pools:
-                    pool.compute_pool()
-                devices |= set(pool.devices)
+        if instance.device_query:
+            devices |= self.compute_devices_from_query(
+                instance.device_query,
+                instance.device_query_property,
+            )
         restricted_devices = set(
             device
             for device in devices

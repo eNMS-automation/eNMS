@@ -279,12 +279,14 @@ class Run(AbstractBase):
     path = db.Column(db.TinyString)
     parent_device_id = db.Column(Integer, ForeignKey("device.id"))
     parent_device = relationship("Device", foreign_keys="Run.parent_device_id")
+    parameterized_run = db.Column(Boolean, default=False)
     target_devices = relationship(
         "Device", secondary=db.run_device_table, back_populates="runs"
     )
     target_pools = relationship(
         "Pool", secondary=db.run_pool_table, back_populates="runs"
     )
+    device_query = db.Column(db.LargeString)
     service_id = db.Column(Integer, ForeignKey("service.id"))
     service = relationship("Service", foreign_keys="Run.service_id")
     service_name = db.Column(db.SmallString)
@@ -396,6 +398,7 @@ class Run(AbstractBase):
             service=self.service,
             is_main_run=True,
             restart_run=self.restart_run,
+            parameterized_run=self.parameterized_run,
             parent_runtime=self.runtime,
             path=str(self.service.id),
             placeholder=self.placeholder,
@@ -403,6 +406,7 @@ class Run(AbstractBase):
             start_services=self.start_services,
             target_devices=self.target_devices,
             target_pools=self.target_pools,
+            device_query=self.device_query,
             task=self.task,
             trigger=self.trigger,
         )

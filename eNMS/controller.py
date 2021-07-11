@@ -991,6 +991,8 @@ class Controller:
                 "task",
                 "target_devices",
                 "target_pools",
+                "device_query",
+                "parameterized_run",
             )
             if kwargs.get(key)
         }
@@ -1035,6 +1037,7 @@ class Controller:
         kwargs["creator"] = getattr(current_user, "name", "")
         service = db.fetch("service", id=service_id, rbac="run")
         kwargs["runtime"] = runtime = vs.get_time()
+        kwargs["parameterized_run"] = "id" in kwargs
         if kwargs.get("asynchronous", True):
             Thread(target=self.run, args=(service_id,), kwargs=kwargs).start()
         else:

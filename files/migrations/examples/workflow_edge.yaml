@@ -1592,14 +1592,14 @@
   source: '[Regression Workflow: Parameterized Superworkflow Run] Service', subtype: success,
   type: workflow_edge, workflow: 'Regression Workflow: Parameterized Superworkflow
     Run'}
-- {color: green, destination: '[Superworkflow in SxS w WT with Run Once service] Call
-    to is_alive, Run Once', label: success, name: '2021-07-11 01:06:38.027786', source: '[Shared]
-    Start', subtype: success, type: workflow_edge, workflow: Superworkflow in SxS
-    w WT with Run Once service}
+- {color: green, destination: '[Regression Workflow: Superworkflow in SxS w WT with
+    Run Once service] Call to is_alive, Run Once', label: success, name: '2021-07-11
+    01:06:38.027786', source: '[Shared] Start', subtype: success, type: workflow_edge,
+  workflow: 'Regression Workflow: Superworkflow in SxS w WT with Run Once service'}
 - {color: green, destination: '[Shared] Placeholder', label: success, name: '2021-07-11
-    01:06:38.896879', source: '[Superworkflow in SxS w WT with Run Once service] Call
-    to is_alive, Run Once', subtype: success, type: workflow_edge, workflow: Superworkflow
-    in SxS w WT with Run Once service}
+    01:06:38.896879', source: '[Regression Workflow: Superworkflow in SxS w WT with
+    Run Once service] Call to is_alive, Run Once', subtype: success, type: workflow_edge,
+  workflow: 'Regression Workflow: Superworkflow in SxS w WT with Run Once service'}
 - {color: green, destination: '[Shared] End', label: success, name: '2021-07-11 01:06:39.816659',
-  source: '[Shared] Placeholder', subtype: success, type: workflow_edge, workflow: Superworkflow
-    in SxS w WT with Run Once service}
+  source: '[Shared] Placeholder', subtype: success, type: workflow_edge, workflow: 'Regression
+    Workflow: Superworkflow in SxS w WT with Run Once service'}

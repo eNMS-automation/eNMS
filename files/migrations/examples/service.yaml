@@ -125,7 +125,7 @@
     'Regression Workflow: Notifications': [-391, -77]
     'Regression Workflow: Operational Data Backup (admin)': *id003
     'Regression Workflow: Optional Prerequisite Services': [-356, 121]
-    'Regression Workflow: Parameterized Superworkflow Run': [-208, -37]
+    'Regression Workflow: Parameterized Superworkflow Run': [-272, -28]
     'Regression Workflow: Preprocessing and Postprocessing': *id015
     'Regression Workflow: RBAC Target Restriction': [-176, -144]
     'Regression Workflow: Result content in memory (scalability)': [0, 0]
@@ -141,6 +141,8 @@
     'Regression Workflow: Skip, Discard and Disable Result Creation Mechanism': *id021
     'Regression Workflow: Specific Superworkflow': *id022
     'Regression Workflow: Superworkflow': *id022
+    'Regression Workflow: Superworkflow in SxS w WT with Run Once service': [-197,
+      -103]
     'Regression Workflow: SxS Service Targets with Run Once + Skip': [-436, 94]
     'Regression Workflow: Topology Import (netbox, librenms, opennms)': *id023
     'Regression Workflow: Unix Command & Chell, Ping Service, Jump on Connect mechanism': *id024
@@ -153,7 +155,7 @@
     'Regression workflow P: large workflow (scalability)': *id016
     Subworkflow 1: !!python/tuple [0, 0]
     Subworkflow 2: !!python/tuple [0, 0]
-    Superworkflow in SxS w WT with Run Once service: [-148, 16]
+    Superworkflow in SxS w WT with Run Once service: [-197, -103]
     Workflow  in device by device mode: !!python/tuple [0, 0]
     'Workflow Regression R: skip services in service by service mode': *id005
     'Workflow Regression S: conditional skip query with skip value set to False': [
@@ -397,7 +399,7 @@
     'Regression Workflow: Notifications': [530, 32]
     'Regression Workflow: Operational Data Backup (admin)': *id044
     'Regression Workflow: Optional Prerequisite Services': [734, 171]
-    'Regression Workflow: Parameterized Superworkflow Run': [621, -37]
+    'Regression Workflow: Parameterized Superworkflow Run': [518, -43]
     'Regression Workflow: Preprocessing and Postprocessing': *id056
     'Regression Workflow: RBAC Target Restriction': [654, -133]
     'Regression Workflow: Scalability Test (large workflow)': *id057
@@ -412,6 +414,8 @@
     'Regression Workflow: Skip, Discard and Disable Result Creation Mechanism': *id062
     'Regression Workflow: Specific Superworkflow': *id063
     'Regression Workflow: Superworkflow': *id063
+    'Regression Workflow: Superworkflow in SxS w WT with Run Once service': [514,
+      -109]
     'Regression Workflow: SxS Service Targets with Run Once + Skip': [605, 380]
     'Regression Workflow: SxS Service Targets with Skip Global + Query': !!python/tuple [
       500, 0]
@@ -426,7 +430,7 @@
     'Regression workflow P: large workflow (scalability)': *id057
     Subworkflow 1: !!python/tuple [0, 0]
     Subworkflow 2: !!python/tuple [0, 0]
-    Superworkflow in SxS w WT with Run Once service: [559, 4]
+    Superworkflow in SxS w WT with Run Once service: [514, -109]
     T: !!python/tuple [500, 0]
     TEST: !!python/tuple [500, 0]
     TEST2: !!python/tuple [500, 0]
@@ -8662,7 +8666,9 @@
     'Regression Workflow L: superworkflow': &id173 [511, -111]
     'Regression Workflow: Specific Superworkflow': *id173
     'Regression Workflow: Superworkflow': *id173
-    Superworkflow in SxS w WT with Run Once service: [307, 3]
+    'Regression Workflow: Superworkflow in SxS w WT with Run Once service': [408,
+      135]
+    Superworkflow in SxS w WT with Run Once service: [408, 135]
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -20955,7 +20961,7 @@
         \ field\r\n- Washington Pool\r\n- [\"NewYork\", \"Atlanta\"] for device query\
         \ field\r\n=> Should run on 5 devices without parameterized run"
       positions: [466, -207]
-  last_modified: '2021-07-11 01:06:53.982699'
+  last_modified: '2021-07-11 01:08:19.801830'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -20985,7 +20991,7 @@
   skip: {}
   skip_query: ''
   skip_value: success
-  superworkflow: Superworkflow in SxS w WT with Run Once service
+  superworkflow: 'Regression Workflow: Superworkflow in SxS w WT with Run Once service'
   target_devices: [PaloAlto, Austin]
   target_pools: [Washington]
   time_between_retries: 10
@@ -21037,7 +21043,7 @@
   operating_system: ''
   pools: ['All devices, links, services and users']
   positions:
-    'Regression Workflow: Parameterized Superworkflow Run': [213, -68]
+    'Regression Workflow: Parameterized Superworkflow Run': [130, -95]
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''
@@ -21091,15 +21097,21 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  labels: {}
-  last_modified: '2021-07-11 01:06:39.816659'
+  labels:
+    3f6ef0e9-5294-4f04-afc1-187779271fe1:
+      alignment: left
+      content: "Called by \"Regression Workflow: Parameterized Superworkflow Run\"\
+        .\r\nTests that devices configured from a parameterized run works \r\nas expected\
+        \ when a workflow has a superworkflow."
+      positions: [165, -41]
+  last_modified: '2021-07-11 01:20:56.221569'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: Superworkflow in SxS w WT with Run Once service
+  name: 'Regression Workflow: Superworkflow in SxS w WT with Run Once service'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -21113,11 +21125,11 @@
   reply_to: ''
   reserved: false
   run_method: per_service_with_workflow_targets
-  scoped_name: Superworkflow in SxS w WT with Run Once service
+  scoped_name: 'Regression Workflow: Superworkflow in SxS w WT with Run Once service'
   send_notification: false
   send_notification_method: mail
-  services: ['[Shared] Start', '[Shared] End', '[Superworkflow in SxS w WT with Run
-      Once service] Call to is_alive, Run Once', '[Shared] Placeholder']
+  services: ['[Shared] Start', '[Shared] End', '[Regression Workflow: Superworkflow
+      in SxS w WT with Run Once service] Call to is_alive, Run Once', '[Shared] Placeholder']
   shared: false
   skip: {}
   skip_query: ''
@@ -21161,31 +21173,34 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2021-07-11 01:06:21.813731'
+  last_modified: '2021-07-11 01:20:39.544111'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Superworkflow in SxS w WT with Run Once service] Call to is_alive, Run Once'
+  name: '[Regression Workflow: Superworkflow in SxS w WT with Run Once service] Call
+    to is_alive, Run Once'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  params: {}
-  password: ''
+  params: {verify: 'false'}
+  password: YWRtaW4=
   payload: {}
   pools: ['All devices, links, services and users']
   positions:
-    Superworkflow in SxS w WT with Run Once service: [66, 1]
+    'Regression Workflow: Superworkflow in SxS w WT with Run Once service': [-101,
+      129]
+    Superworkflow in SxS w WT with Run Once service: [-101, 129]
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''
   priority: 1
   reply_to: ''
   reserved: false
-  rest_url: ''
+  rest_url: http://127.0.0.1:5000/rest/is_alive
   run_method: once
   scoped_name: Call to is_alive, Run Once
   send_notification: false
@@ -21201,7 +21216,7 @@
   type: rest_call_service
   update_pools_after_running: false
   update_target_pools: false
-  username: ''
+  username: admin
   validation_condition: none
   validation_method: text
   validation_section: results['result']

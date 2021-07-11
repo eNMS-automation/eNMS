@@ -690,7 +690,7 @@
 - {color: green, destination: '[Shared] REST API: call *is_alive* endpoint', label: success,
   name: '[Regression Workflow: Superworkflow] 2021-04-24 08:58:40.197708', source: '[Shared]
     Start', subtype: success, type: workflow_edge, workflow: 'Regression Workflow:
-    Superworkflow'}
+    Specific Superworkflow'}
 - {color: green, destination: '[Regression Workflow: Unix Command & Chell, Ping Service,
     Jump on Connect mechanism] Unix command: ps -ef | grep test', label: success,
   name: '[Regression Workflow: Unix Command & Chell, Ping Service, Jump on Connect
@@ -749,14 +749,15 @@
     Iteration Targets Mechanism] 2021-04-24 08:58:40.197863', source: '[Regression
     Workflow: Iteration Targets Mechanism] Iteration Target Workflow - Test 3', subtype: success,
   type: workflow_edge, workflow: 'Regression Workflow: Iteration Targets Mechanism'}
-- {color: green, destination: '[Regression Workflow: Superworkflow] REST API: call
-    to placeholder property', label: success, name: '[Regression Workflow: Superworkflow]
-    2021-04-24 08:58:40.197878', source: '[Shared] REST API: call *is_alive* endpoint',
-  subtype: success, type: workflow_edge, workflow: 'Regression Workflow: Superworkflow'}
+- {color: green, destination: '[Regression Workflow: Specific Superworkflow] REST
+    API: call to placeholder property', label: success, name: '[Regression Workflow:
+    Superworkflow] 2021-04-24 08:58:40.197878', source: '[Shared] REST API: call *is_alive*
+    endpoint', subtype: success, type: workflow_edge, workflow: 'Regression Workflow:
+    Specific Superworkflow'}
 - {color: green, destination: '[Shared] Placeholder', label: success, name: '[Regression
     Workflow: Superworkflow] 2021-04-24 08:58:40.197893', source: '[Regression Workflow:
-    Superworkflow] REST API: call to placeholder property', subtype: success, type: workflow_edge,
-  workflow: 'Regression Workflow: Superworkflow'}
+    Specific Superworkflow] REST API: call to placeholder property', subtype: success,
+  type: workflow_edge, workflow: 'Regression Workflow: Specific Superworkflow'}
 - {color: green, destination: '[Regression Workflow: Using get_var, set_var, get_result
     functions] Show vrf with python query', label: success, name: '[Regression Workflow:
     Using get_var, set_var, get_result functions] 2021-04-24 08:58:40.197909', source: '[Regression
@@ -786,14 +787,14 @@
     Operational Data Backup (admin)] 2021-04-24 08:58:40.197993', source: '[Regression
     Workflow: Operational Data Backup (admin)] Push Configurations to Git', subtype: success,
   type: workflow_edge, workflow: 'Regression Workflow: Operational Data Backup (admin)'}
-- {color: green, destination: '[Regression Workflow: Superworkflow] Post Placeholder
-    Processing', label: success, name: '[Regression Workflow: Superworkflow] 2021-04-24
-    08:58:40.198008', source: '[Shared] Placeholder', subtype: success, type: workflow_edge,
-  workflow: 'Regression Workflow: Superworkflow'}
+- {color: green, destination: '[Regression Workflow: Specific Superworkflow] Post
+    Placeholder Processing', label: success, name: '[Regression Workflow: Superworkflow]
+    2021-04-24 08:58:40.198008', source: '[Shared] Placeholder', subtype: success,
+  type: workflow_edge, workflow: 'Regression Workflow: Specific Superworkflow'}
 - {color: green, destination: '[Shared] End', label: success, name: '[Regression Workflow:
-    Superworkflow] 2021-04-24 08:58:40.198022', source: '[Regression Workflow: Superworkflow]
-    Post Placeholder Processing', subtype: success, type: workflow_edge, workflow: 'Regression
-    Workflow: Superworkflow'}
+    Superworkflow] 2021-04-24 08:58:40.198022', source: '[Regression Workflow: Specific
+    Superworkflow] Post Placeholder Processing', subtype: success, type: workflow_edge,
+  workflow: 'Regression Workflow: Specific Superworkflow'}
 - {color: green, destination: '[Regression Workflow: Scrapli] Check running configuration',
   label: success, name: '[Regression Workflow: Scrapli] 2021-04-24 08:58:40.198038',
   source: '[Shared] Start', subtype: success, type: workflow_edge, workflow: 'Regression
@@ -1591,3 +1592,14 @@
   source: '[Regression Workflow: Parameterized Superworkflow Run] Service', subtype: success,
   type: workflow_edge, workflow: 'Regression Workflow: Parameterized Superworkflow
     Run'}
+- {color: green, destination: '[Superworkflow in SxS w WT with Run Once service] Call
+    to is_alive, Run Once', label: success, name: '2021-07-11 01:06:38.027786', source: '[Shared]
+    Start', subtype: success, type: workflow_edge, workflow: Superworkflow in SxS
+    w WT with Run Once service}
+- {color: green, destination: '[Shared] Placeholder', label: success, name: '2021-07-11
+    01:06:38.896879', source: '[Superworkflow in SxS w WT with Run Once service] Call
+    to is_alive, Run Once', subtype: success, type: workflow_edge, workflow: Superworkflow
+    in SxS w WT with Run Once service}
+- {color: green, destination: '[Shared] End', label: success, name: '2021-07-11 01:06:39.816659',
+  source: '[Shared] Placeholder', subtype: success, type: workflow_edge, workflow: Superworkflow
+    in SxS w WT with Run Once service}

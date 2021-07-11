@@ -1583,3 +1583,11 @@
   source: '[Regression Workflow: Data Extraction Service] Operation via set_var',
   subtype: success, type: workflow_edge, workflow: 'Regression Workflow: Data Extraction
     Service'}
+- {color: green, destination: '[Regression Workflow: Parameterized Superworkflow Run]
+    Service', label: success, name: '2021-07-11 01:00:21.571232', source: '[Shared]
+    Start', subtype: success, type: workflow_edge, workflow: 'Regression Workflow:
+    Parameterized Superworkflow Run'}
+- {color: green, destination: '[Shared] End', label: success, name: '2021-07-11 01:00:22.562122',
+  source: '[Regression Workflow: Parameterized Superworkflow Run] Service', subtype: success,
+  type: workflow_edge, workflow: 'Regression Workflow: Parameterized Superworkflow
+    Run'}

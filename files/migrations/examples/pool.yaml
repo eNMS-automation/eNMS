@@ -1154,8 +1154,9 @@
   service_vendor: ''
   service_vendor_invert: false
   service_vendor_match: inclusion
-  target_services: ['[Regression Workflow: Operational Data Backup (admin)] Retrieve
-      Operational Data', 'Regression Workflow: Scalability Test (large workflow)']
+  target_services: ['Regression Workflow: Scalability Test (large workflow)', '[Regression
+      Workflow: Operational Data Backup (admin)] Retrieve Operational Data', 'Regression
+      Workflow: Parameterized Superworkflow Run']
   tasks: []
   type: pool
   user_description: ''

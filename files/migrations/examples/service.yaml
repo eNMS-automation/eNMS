@@ -125,7 +125,7 @@
     'Regression Workflow: Notifications': [-391, -77]
     'Regression Workflow: Operational Data Backup (admin)': *id003
     'Regression Workflow: Optional Prerequisite Services': [-356, 121]
-    'Regression Workflow: Parameterized Superworkflow Run': [0, 0]
+    'Regression Workflow: Parameterized Superworkflow Run': [-208, -37]
     'Regression Workflow: Preprocessing and Postprocessing': *id015
     'Regression Workflow: RBAC Target Restriction': [-176, -144]
     'Regression Workflow: Result content in memory (scalability)': [0, 0]
@@ -395,7 +395,7 @@
     'Regression Workflow: Notifications': [530, 32]
     'Regression Workflow: Operational Data Backup (admin)': *id044
     'Regression Workflow: Optional Prerequisite Services': [734, 171]
-    'Regression Workflow: Parameterized Superworkflow Run': [500, 0]
+    'Regression Workflow: Parameterized Superworkflow Run': [621, -37]
     'Regression Workflow: Preprocessing and Postprocessing': *id056
     'Regression Workflow: RBAC Target Restriction': [654, -133]
     'Regression Workflow: Scalability Test (large workflow)': *id057
@@ -20917,7 +20917,7 @@
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
-  device_query: ''
+  device_query: '["NewYork", "Atlanta"]'
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
@@ -20938,8 +20938,14 @@
         \ workflow itself and not the from the superworkflow.\r\nWith a parameterized\
         \ run, the targets should come from the run.\r\nThe same principles should\
         \ apply when defining targets\r\nfrom the device query field."
-      positions: [276, -150]
-  last_modified: '2021-07-11 01:00:32.772190'
+      positions: [-65, -206]
+    9b543e1d-204c-45a2-bcb2-9619959a4924:
+      alignment: left
+      content: "The service targets are set to:\r\n- PaloAlto, Austin for devices\
+        \ field\r\n- Washington Pool\r\n- [\"NewYork\", \"Atlanta\"] for device query\
+        \ field\r\n=> Should run on 5 devices without parameterized run"
+      positions: [466, -207]
+  last_modified: '2021-07-11 01:03:21.193632'
   log_level: 1
   mail_recipient: ''
   max_number_of_retries: 100
@@ -20970,8 +20976,8 @@
   skip_query: ''
   skip_value: success
   superworkflow: 'Regression Workflow: Superworkflow'
-  target_devices: []
-  target_pools: []
+  target_devices: [PaloAlto, Austin]
+  target_pools: [Washington]
   time_between_retries: 10
   type: workflow
   update_pools_after_running: false
@@ -21021,7 +21027,7 @@
   operating_system: ''
   pools: ['All devices, links, services and users']
   positions:
-    'Regression Workflow: Parameterized Superworkflow Run': [245, -19]
+    'Regression Workflow: Parameterized Superworkflow Run': [213, -68]
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''

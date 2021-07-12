@@ -531,6 +531,8 @@ function drawIterationEdge(service) {
       title += `<b>Iteration Values</b>: ${service.iteration_values}<br>`;
     }
     title += `<b>Iteration Variable Name</b>: ${service.iteration_variable_name}`;
+    const hoverDiv = document.createElement("div");
+    hoverDiv.innerHTML = title;
     {
       edges.add({
         id: -service.id,
@@ -539,7 +541,7 @@ function drawIterationEdge(service) {
         to: service.id,
         color: "black",
         arrows: { to: { enabled: true } },
-        title: title,
+        title: hoverDiv,
         font: { vadjust: -15 },
       });
     }

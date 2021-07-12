@@ -133,12 +133,14 @@ function displayLinks() {
 function onMouseDown(event) {
   const intersects = getIntersects(event);
   if (intersects.length > 0) {
-    $(".global").hide();
-    $(".rc-object-menu").show();
+    $(".global,.rc-object-menu").hide(); 
     let object = intersects[0].object;
     selectedObject = object.userData;
     if (selectedObject.type == "node") {
+      $(".rc-device-menu").show();
       selectedObject.device = { id: selectedObject.device_id, type: "device" };
+    } else if (selectedObject.type == "plan") {
+      $(".rc-plan-menu").show();
     }
     if (object.userData.isCollada) {
       object = daeModels[object.userData.id];

@@ -138,7 +138,7 @@ function onMouseDown(event) {
   if (objectIntersect.length > 0) {
     $(".global,.rc-object-menu").hide();
     let object = objectIntersect[0].object;
-    if (selectedObject != object.userData) {
+    if (!activeControls || selectedObject.id !== object.userData.id) {
       transformControls.detach(transformControls.object);
       selectedObjects.push(object);
       if (object.userData.isCollada) {
@@ -241,6 +241,7 @@ function switchMode(mode) {
   if (mode == "select") {
     scene.remove(transformControls);
     transformControls.detach();
+    activeControls = false;
   } else {
     scene.add(transformControls);
     transformControls.setMode(mode);

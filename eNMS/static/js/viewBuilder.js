@@ -131,9 +131,11 @@ function displayLinks() {
 }
 
 function onMouseDown(event) {
-  const intersects = getIntersects(event);
+  const intersects = getIntersects(event).filter(
+    (object) => Object.keys(object.object.userData).length > 0
+  );
   if (intersects.length > 0) {
-    $(".global,.rc-object-menu").hide(); 
+    $(".global,.rc-object-menu").hide();
     let object = intersects[0].object;
     selectedObject = object.userData;
     if (selectedObject.type == "node") {

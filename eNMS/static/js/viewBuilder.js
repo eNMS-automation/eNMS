@@ -133,6 +133,8 @@ function displayLinks() {
 function onMouseDown(event) {
   const intersects = getIntersects(event);
   if (intersects.length > 0) {
+    $(".global").hide();
+    $(".rc-object-menu").show();
     let object = intersects[0].object;
     selectedObject = object.userData;
     if (selectedObject.type == "node") {
@@ -151,6 +153,8 @@ function onMouseDown(event) {
       }
     }
   } else {
+    $(".rc-object-menu").hide();
+    $(".global").show();
     activeControls = false;
     transformControls.detach(transformControls.object);
     selectedObjects.map((object) => {
@@ -159,13 +163,6 @@ function onMouseDown(event) {
     selectedObjects = [];
   }
   setTriggerMenu(true);
-  if (!intersects.length) {
-    $(".rc-object-menu").hide();
-    $(".global").show();
-  } else {
-    $(".global").hide();
-    $(".rc-object-menu").show();
-  }
   render();
 }
 

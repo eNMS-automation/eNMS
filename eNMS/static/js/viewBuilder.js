@@ -135,12 +135,24 @@ function onMouseDown(event) {
   const objectIntersect = intersects.filter(
     (object) => Object.keys(object.object.userData).length > 0
   );
-  const transformControlIntersect = intersects.filter(
-    (object) => object.object.type == "TransformControlsPlane"
-  );
   if (objectIntersect.length > 0) {
     $(".global,.rc-object-menu").hide();
-    let object = intersects[0].object;
+    let object = objectIntersect[0].object;
+    if (selectedObject != object.userData) {
+      transformControls.detach(transformControls.object);
+      if (object.userData.isCollada) {
+        object = daeModels[object.userData.id];
+        selectedObjects.push(object);
+        transformControls.attach(object, ...object.children);
+      } else {
+        if (currentMode == "select") {
+          object.material.color.set(0xff0000);
+          selectedObjects.push(object);
+        } else {
+          transformControls.attach(object);
+        }
+      }
+    }
     selectedObject = object.userData;
     if (selectedObject.type == "node") {
       $(".rc-device-menu").show();
@@ -148,19 +160,7 @@ function onMouseDown(event) {
     } else if (selectedObject.type == "plan") {
       $(".rc-plan-menu").show();
     }
-    if (object.userData.isCollada) {
-      object = daeModels[object.userData.id];
-      selectedObjects.push(object);
-      transformControls.attach(object, ...object.children);
-    } else {
-      if (currentMode == "select") {
-        object.material.color.set(0xff0000);
-        selectedObjects.push(object);
-      } else if (!activeControls && object !== transformControls.object) {
-        transformControls.attach(object);
-      }
-    }
-  } else if (!transformControlIntersect.length) {
+  } else if (currentMode == "select") {
     $(".rc-object-menu").hide();
     $(".global").show();
     activeControls = false;

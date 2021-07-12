@@ -140,14 +140,13 @@ function onMouseDown(event) {
     let object = objectIntersect[0].object;
     if (selectedObject != object.userData) {
       transformControls.detach(transformControls.object);
+      selectedObjects.push(object);
       if (object.userData.isCollada) {
         object = daeModels[object.userData.id];
-        selectedObjects.push(object);
         transformControls.attach(object, ...object.children);
       } else {
         if (currentMode == "select") {
           object.material.color.set(0xff0000);
-          selectedObjects.push(object);
         } else {
           transformControls.attach(object);
         }

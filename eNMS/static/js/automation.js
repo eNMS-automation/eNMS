@@ -547,7 +547,7 @@ function submitInitialForm(serviceId) {
     form: `initial-${serviceId}-form-${serviceId}`,
     callback: (result) => {
       runLogic(result);
-      $(`#initial_form-${serviceId}`).remove();
+      $(`#parameterized_form-${serviceId}`).remove();
     },
   });
 }
@@ -555,9 +555,9 @@ function submitInitialForm(serviceId) {
 export const runService = function ({ id, form, type }) {
   if (form) {
     openPanel({
-      name: "initial_form",
+      name: "parameterized_form",
       id: id,
-      url: `initial_form/${id}`,
+      url: `parameterized_form/${id}`,
       title: "Initial Form",
       size: "700px 600px",
       callback: function () {
@@ -710,8 +710,8 @@ function schedulerAction(action) {
 Object.assign(action, {
   Edit: (service) => showInstancePanel(service.type, service.id),
   Duplicate: (service) => showInstancePanel(service.type, service.id, "duplicate"),
-  Run: (service) => runService({ id: service.id, form: service.initial_form }),
-  "Parameterized Run": (service) => runService({ id: service.id, form: service.initial_form }),
+  Run: (service) => runService({ id: service.id, form: service.parameterized_form }),
+  "Parameterized Run": (service) => runService({ id: service.id, form: service.parameterized_form }),
   Logs: (service) => showRuntimePanel("logs", service, currentRuntime),
   Results: (service) => showRuntimePanel("results", service, currentRuntime, "result"),
   Backward: () => switchToWorkflow(history[historyPosition - 1], "left"),

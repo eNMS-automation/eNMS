@@ -753,9 +753,9 @@ function runWorkflow(withUpdates) {
   }
   resetDisplay();
   if (withUpdates) {
-    showInstancePanel("workflow", workflow.id, "run", null, workflow.initial_form);
+    showInstancePanel("workflow", workflow.id, "run", null, workflow.parameterized_form);
   } else {
-    runService({ id: workflow.id, form: workflow.initial_form });
+    runService({ id: workflow.id, form: workflow.parameterized_form });
   }
 }
 

@@ -341,15 +341,15 @@ class Server(Flask):
                 },
             )
 
-        @blueprint.route("/initial_form/<service_id>")
+        @blueprint.route("/parameterized_form/<service_id>")
         @self.process_requests
-        def initial_form(service_id):
+        def parameterized_form(service_id):
             global_variables = {"form": None, "BaseForm": BaseForm, **vs.form_context}
             indented_form = "\n".join(
                 " " * 4 + line
                 for line in (
                     f"form_type = HiddenField(default='initial-{service_id}')",
-                    *db.fetch("service", id=service_id).initial_form.splitlines(),
+                    *db.fetch("service", id=service_id).parameterized_form.splitlines(),
                 )
             )
             full_form = f"class Form(BaseForm):\n{indented_form}\nform = Form"

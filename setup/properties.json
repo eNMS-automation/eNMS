@@ -594,6 +594,12 @@
     ],
     "run": [
       {
+        "data": "name",
+        "title": "Name",
+        "search": "text",
+        "width": "200px"
+      },
+      {
         "data": "runtime",
         "title": "Runtime",
         "search": "text",
@@ -627,6 +633,7 @@
         "data": "trigger",
         "title": "Trigger",
         "search": "text",
+        "visible": false,
         "width": "100px"
       },
       {

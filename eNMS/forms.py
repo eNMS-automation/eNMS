@@ -572,7 +572,12 @@ class ServiceForm(BaseForm):
     iteration_values = StringField("Iteration Values", python=True)
     initial_payload = DictField()
     mandatory_parametrization = BooleanField("Parameterized Form is Mandatory")
-    parameterized_form = StringField(type="code", python=True, widget=TextArea())
+    parameterized_form = StringField(
+        type="code",
+        python=True,
+        widget=TextArea(),
+        default="\n".join(vs.automation["default_parameterized_form"]),
+    )
     iteration_variable_name = StringField(
         "Iteration Variable Name", default="iteration_value"
     )

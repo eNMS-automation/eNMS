@@ -572,9 +572,7 @@ class Controller:
             state = run.get_state() if run else None
         return {
             "service": service.to_dict(include=["services", "edges", "superworkflow"]),
-            "runtimes": sorted(
-                set((run.name, run.name) for run in runs), reverse=True
-            ),
+            "runtimes": sorted(set((run.name, run.name) for run in runs), reverse=True),
             "state": state,
             "runtime": runtime,
         }

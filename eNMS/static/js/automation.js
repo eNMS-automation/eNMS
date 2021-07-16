@@ -552,8 +552,8 @@ function submitInitialForm(serviceId) {
   });
 }
 
-export const runService = function ({ id, form, type }) {
-  if (form) {
+export const runService = function ({ id, type, parametrization }) {
+  if (parametrization) {
     openPanel({
       name: "parameterized_form",
       id: id,

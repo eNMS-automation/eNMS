@@ -894,17 +894,16 @@ tables.service = class ServiceTable extends Table {
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-success"
-          onclick="eNMS.automation.runService({id: '${row.id}', form: '${
-      row.parameterized_form
-    }'})"
+          onclick="eNMS.automation.runService({id: '${row.id}',
+          parametrization: ${row.mandatory_parametrization}})"
           data-tooltip="Run"><span class="glyphicon glyphicon-play"></span
           ></button>
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-success"
-          onclick="eNMS.base.showInstancePanel('${row.type}', '${row.id}', 'run')"
-          data-tooltip="Parameterized Run"
-            ><span class="glyphicon glyphicon-play-circle"></span
+          onclick="eNMS.automation.runService({id: '${row.id}',
+          parametrization: true})" data-tooltip="Parameterized Run">
+            <span class="glyphicon glyphicon-play-circle"></span
           ></button>
         </li>
         ${this.deleteInstanceButton(row)}

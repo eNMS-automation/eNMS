@@ -1385,15 +1385,15 @@
     State', label: success, name: '2021-05-02 03:58:07.428143', source: '[Regression
     Workflow: Scrapli Netconf Service] Delete Loopback 5 description', subtype: success,
   type: workflow_edge, workflow: 'Regression Workflow: Scrapli Netconf Service'}
-- {color: green, destination: '[Regression Workflow: Initial Form (override tags &
+- {color: green, destination: '[Regression Workflow: Parameterized Form (override tags &
     targets, add payload)] Show interface from initial form (default: Lo1)', label: success,
   name: '2021-06-07 01:39:02.877827', source: '[Shared] Start', subtype: success,
-  type: workflow_edge, workflow: 'Regression Workflow: Initial Form (override tags
+  type: workflow_edge, workflow: 'Regression Workflow: Parameterized Form (override tags
     & targets, add payload)'}
 - {color: green, destination: '[Shared] End', label: success, name: '2021-06-07 01:39:04.348481',
-  source: '[Regression Workflow: Initial Form (override tags & targets, add payload)]
+  source: '[Regression Workflow: Parameterized Form (override tags & targets, add payload)]
     Show interface from initial form (default: Lo1)', subtype: success, type: workflow_edge,
-  workflow: 'Regression Workflow: Initial Form (override tags & targets, add payload)'}
+  workflow: 'Regression Workflow: Parameterized Form (override tags & targets, add payload)'}
 - {color: green, destination: '[Regression Workflow: Validation Section Mechanism]
     Dict Equality Validation of default path', label: success, name: '2021-06-22 02:53:59.369448',
   source: '[Shared] Start', subtype: success, type: workflow_edge, workflow: 'Regression

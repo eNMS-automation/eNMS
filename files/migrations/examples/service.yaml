@@ -114,7 +114,7 @@
       -228, 7]
     'Regression Workflow: Global get_credential Function and Log Obfuscation': [-477,
       -78]
-    'Regression Workflow: Initial Form (override tags & targets, add payload)': [
+    'Regression Workflow: Parameterized Form (override tags & targets, add payload)': [
       -172, 80]
     'Regression Workflow: Iteration Targets Mechanism': *id012
     'Regression Workflow: Link Neighbors Mechanism (public)': *id001
@@ -388,7 +388,7 @@
       749, 100]
     'Regression Workflow: Global get_credential Function and Log Obfuscation': [591,
       -45]
-    'Regression Workflow: Initial Form (override tags & targets, add payload)': [
+    'Regression Workflow: Parameterized Form (override tags & targets, add payload)': [
       643, 61]
     'Regression Workflow: Iteration Targets Mechanism': *id053
     'Regression Workflow: Link Neighbors Mechanism (public)': *id042
@@ -17258,7 +17258,7 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: 'Regression Workflow: Initial Form (override tags & targets, add payload)'
+  name: 'Regression Workflow: Parameterized Form (override tags & targets, add payload)'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -17272,10 +17272,10 @@
   reply_to: ''
   reserved: false
   run_method: per_device
-  scoped_name: 'Regression Workflow: Initial Form (override tags & targets, add payload)'
+  scoped_name: 'Regression Workflow: Parameterized Form (override tags & targets, add payload)'
   send_notification: false
   send_notification_method: mail
-  services: ['[Shared] Start', '[Shared] End', '[Regression Workflow: Initial Form
+  services: ['[Shared] Start', '[Shared] End', '[Regression Workflow: Parameterized Form
       (override tags & targets, add payload)] Show interface from initial form (default:
       Lo1)']
   shared: false
@@ -17348,7 +17348,7 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression Workflow: Initial Form (override tags & targets, add payload)]
+  name: '[Regression Workflow: Parameterized Form (override tags & targets, add payload)]
     Show interface from initial form (default: Lo1)'
   negative_logic: false
   notification_header: ''
@@ -17356,7 +17356,7 @@
   operating_system: ''
   pools: ['All devices, links, services and users']
   positions:
-    'Regression Workflow: Initial Form (override tags & targets, add payload)': [
+    'Regression Workflow: Parameterized Form (override tags & targets, add payload)': [
       224, -91]
   postprocessing: ''
   postprocessing_mode: always

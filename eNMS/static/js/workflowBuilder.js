@@ -752,7 +752,10 @@ function runWorkflow(parametrization) {
     return notify("A superworkflow cannot be run directly.", "error", 5);
   }
   resetDisplay();
-  runService({ id: workflow.id, parametrization: parametrization || workflow.mandatory_parametrization });
+  runService({
+    id: workflow.id,
+    parametrization: parametrization || workflow.mandatory_parametrization,
+  });
 }
 
 function showRestartWorkflowPanel() {

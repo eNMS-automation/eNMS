@@ -747,16 +747,12 @@ function createLabel() {
   });
 }
 
-function runWorkflow(withUpdates) {
+function runWorkflow(parametrization) {
   if (workflow.isSuperworkflow) {
     return notify("A superworkflow cannot be run directly.", "error", 5);
   }
   resetDisplay();
-  if (withUpdates) {
-    showInstancePanel("workflow", workflow.id, "run", null, workflow.parameterized_form);
-  } else {
-    runService({ id: workflow.id, form: workflow.parameterized_form });
-  }
+  runService({ id: workflow.id, parametrization: parametrization || workflow.mandatory_parametrization });
 }
 
 function showRestartWorkflowPanel() {

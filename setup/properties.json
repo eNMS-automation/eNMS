@@ -603,7 +603,8 @@
         "data": "runtime",
         "title": "Runtime",
         "search": "text",
-        "width": "200px"
+        "width": "200px",
+        "visible": false
       },
       {
         "data": "tags",

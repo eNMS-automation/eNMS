@@ -580,16 +580,6 @@ function showServicePanel(type, id, mode, initForm) {
   });
   $(".buttonFinish,.buttonNext,.buttonPrevious").hide();
   $(id ? `#${type}-wizard-${id}` : `#${type}-wizard`).smartWizard("fixHeight");
-  if (mode == "run") {
-    editors[id].initial_form.setOption("readOnly", true);
-    const kwargs = `{id: ${id}, type: '${type}', form: '${initForm}'}`;
-    $(`#${type}-action-btn-${id}`)
-      .removeClass("btn-success")
-      .addClass("btn-primary")
-      .attr("onclick", `eNMS.automation.runService(${kwargs})`)
-      .text("Run");
-    $(".readonly-when-run").prop("readonly", true);
-  }
 }
 
 function showAddInstancePanel(tableId, model, relation) {

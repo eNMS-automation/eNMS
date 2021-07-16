@@ -559,7 +559,7 @@ export const runService = function ({ id, type, parametrization }) {
       id: id,
       url: `parameterized_form/${id}`,
       title: "Parameterized Form",
-      size: "700px 600px",
+      size: "700px auto",
       callback: function () {
         call({
           url: `/get_form_properties/initial-${id}`,

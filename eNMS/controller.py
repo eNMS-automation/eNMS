@@ -572,7 +572,9 @@ class Controller:
             state = run.get_state() if run else None
         return {
             "service": service.to_dict(include=["services", "edges", "superworkflow"]),
-            "runtimes": sorted(set((run.parent_runtime, run.name) for run in runs), reverse=True),
+            "runtimes": sorted(
+                set((run.parent_runtime, run.name) for run in runs), reverse=True
+            ),
             "state": state,
             "runtime": runtime,
         }
@@ -979,21 +981,8 @@ class Controller:
 
     @staticmethod
     def run(service, **kwargs):
-        run_kwargs = {
-            key: kwargs.pop(key)
-            for key in (
-                "trigger",
-                "creator",
-                "start_services",
-                "runtime",
-                "task",
-                "target_devices",
-                "target_pools",
-                "device_query",
-                "parameterized_run",
-            )
-            if kwargs.get(key)
-        }
+        keys = list(vs.model_properties["run"]) + list(vs.relationships["run"])
+        run_kwargs = {key: kwargs.pop(key) for key in keys if kwargs.get(key)}
         restart_run = db.fetch(
             "run",
             allow_none=True,

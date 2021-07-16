@@ -259,6 +259,7 @@ class Run(AbstractBase):
     __tablename__ = type = "run"
     private = True
     id = db.Column(Integer, primary_key=True)
+    name = db.Column(db.SmallString, unique=True)
     restart_run_id = db.Column(Integer, ForeignKey("run.id"))
     restart_run = relationship("Run", uselist=False, foreign_keys=restart_run_id)
     start_services = db.Column(db.List)
@@ -307,6 +308,7 @@ class Run(AbstractBase):
         self.runtime = kwargs.get("runtime") or vs.get_time()
         self.parent_runtime = self.runtime
         super().__init__(**kwargs)
+        self.name = f"{self.runtime} ({self.creator})"
         self.service_name = (self.placeholder or self.service).scoped_name
         vs.run_targets[self.runtime] = set(
             controller.filtering(
@@ -315,10 +317,6 @@ class Run(AbstractBase):
         )
         if not self.start_services:
             self.start_services = [db.fetch("service", scoped_name="Start").id]
-
-    @property
-    def ui_name(self):
-        return f"{self.runtime} ({self.creator})"
 
     @classmethod
     def rbac_filter(cls, query, mode, user):
@@ -339,10 +337,6 @@ class Run(AbstractBase):
             .filter(vs.models["user"].name == user.name),
             query.filter(cls.creator == user.name),
         )
-
-    @property
-    def name(self):
-        return repr(self)
 
     def __repr__(self):
         return f"{self.runtime}: SERVICE '{self.service}'"

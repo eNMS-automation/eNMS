@@ -772,7 +772,7 @@ function showRestartWorkflowPanel() {
           .join("-")
       );
       call({
-        url: `/get_runtimes/service/${workflow.id}`,
+        url: `/get_runtimes/${workflow.id}`,
         callback: function (runtimes) {
           const id = `#restart_workflow-restart_runtime-${workflow.id}`;
           runtimes.forEach((runtime) => {

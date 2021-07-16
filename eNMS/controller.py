@@ -530,10 +530,10 @@ class Controller:
     def get_result(self, id):
         return db.fetch("result", id=id).result
 
-    def get_runtimes(self, type, id):
+    def get_runtimes(self, id):
         results = db.fetch("result", allow_none=True, all_matches=True, service_id=id)
         return sorted(
-            set((result.parent_runtime, result.run.ui_name) for result in results),
+            set((result.parent_runtime, result.run.name) for result in results),
             reverse=True,
         )
 
@@ -573,7 +573,7 @@ class Controller:
         return {
             "service": service.to_dict(include=["services", "edges", "superworkflow"]),
             "runtimes": sorted(
-                set((run.parent_runtime, run.ui_name) for run in runs), reverse=True
+                set((run.name, run.name) for run in runs), reverse=True
             ),
             "state": state,
             "runtime": runtime,

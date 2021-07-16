@@ -159,6 +159,18 @@
                   {{ form.parameterized_form(id=form_type + '-parameterized_form',
                   class="form-control add-id") }}
                 </div>
+                <fieldset>
+                  <div class="item">
+                    <input
+                      id="{{ form_type }}-mandatory_parametrization"
+                      name="mandatory_parametrization"
+                      type="checkbox"
+                      class="add-id"
+                      value="y"
+                    />
+                    {{ form.mandatory_parametrization.label() }}
+                  </div>
+                </fieldset>
                 {{ form.priority.label() }}
                 <div class="form-group">
                   {{ form.priority(id=form_type + '-priority', class="form-control

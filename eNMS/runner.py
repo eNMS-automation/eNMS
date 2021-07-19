@@ -222,11 +222,12 @@ class Runner:
             if not vs.service_run_count[self.id]:
                 self.service.status = "Idle"
             now = datetime.now().replace(microsecond=0)
-            results["duration"] = self.duration = str(now - start)
+            results["duration"] = str(now - start)
             if self.is_main_run:
                 state = self.main_run.get_state()
                 status = "Aborted" if self.stop else "Completed"
                 self.main_run.state = state
+                self.main_run.duration = results["duration"]
                 self.main_run.status = state["status"] = status
                 self.success = results["success"]
                 self.close_remaining_connections()

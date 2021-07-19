@@ -323,7 +323,7 @@
                 </label>
                 {% else %}
                 <label for="{{ property }}">{{ values["pretty_name"] }}</label>
-                {% endif %} {% endset %} {% if values["type"] == "boolean" %}
+                {% endif %} {% endset %} {% if values["type"] == "bool" %}
                 <fieldset>
                   <div class="item">
                     {{ form[property](id="{}-{}".format(form_type, property),

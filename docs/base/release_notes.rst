@@ -99,6 +99,7 @@ same workflow
 for a netmiko validaiton command or rest call service. For obfuscation purposes.
 mail: Obfuscate Credentials passed into Netmiko Command Line
 - Fix data extraction service and operation keyword in set_var
+- Don't set status of currently running services to "Aborted" when using a flask CLI command
 
 MIGRATION:
 

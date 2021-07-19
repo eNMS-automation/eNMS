@@ -79,6 +79,8 @@ class Database:
             info(f"Bypassing metadata creation for process {getpid()}")
         configure_mappers()
         self.configure_model_events(env)
+        if env.detect_cli():
+            return
         first_init = not self.get_user("admin")
         if first_init:
             admin_user = vs.models["user"](name="admin", is_admin=True)

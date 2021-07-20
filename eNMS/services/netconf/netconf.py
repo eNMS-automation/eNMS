@@ -83,10 +83,10 @@ class NetconfForm(ConnectionForm):
     nc_type = SelectField(
         choices=(
             ("get_config", "Get Full Config"),
-            ("get_filtered_config", "Get Filtered Config"),
+            ("get_filtered_config", "Get"),
             ("push_config", "Edit Config"),
             ("copy_config", "Copy Config"),
-            ("rpc", "Remote Procedure Call"),
+            ("rpc", "Dispatch"),
         ),
         label="NETCONF Operation",
     )

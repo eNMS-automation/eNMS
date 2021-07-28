@@ -95,29 +95,29 @@
                 {{ form.scoped_name.label() }}
                 <div class="form-group">
                   {{ form.scoped_name(id=form_type + '-scoped_name', class="form-control
-                  readonly-when-run add-id required") }}
+                  add-id required") }}
                 </div>
                 {{ form.name.label() }}
                 <div class="form-group">
                   {{ form.name(id=form_type + '-name', class="form-control
-                  readonly-when-run add-id required") }}
+                  add-id required") }}
                 </div>
                 {{ form.default_access.label() }}
                 <div class="form-group">
                   {{ form.default_access(id=form_type + '-default_access',
-                  class="form-control readonly-when-run add-id required") }}
+                  class="form-control add-id required") }}
                 </div>
                 {{ form.access_groups.label() }}
                 <div class="form-group">
                   {{ form.access_groups(id=form_type + '-access_groups',
-                  class="form-control readonly-when-run add-id required") }}
+                  class="form-control add-id required") }}
                 </div>
                 {{ form.type.label() }}
                 <div class="form-group">
                   {{ form.type(id=form_type + '-class', class="form-control
-                  readonly-when-run add-id") }}
+                  add-id") }}
                 </div>
-                <fieldset class="readonly-when-run">
+                <fieldset>
                   <div class="item">
                     <input
                       id="{{ form_type }}-shared"
@@ -137,17 +137,17 @@
                 {{ form.description.label() }}
                 <div class="form-group">
                   {{ form.description(id=form_type + '-description', class="form-control
-                  readonly-when-run add-id") }}
+                  add-id") }}
                 </div>
                 {{ form.vendor.label() }}
                 <div class="form-group">
                   {{ form.vendor(id=form_type + '-vendor', class="form-control
-                  readonly-when-run add-id") }}
+                  add-id") }}
                 </div>
                 {{ form.operating_system.label() }}
                 <div class="form-group">
                   {{ form.operating_system(id=form_type + '-operating_system',
-                  class="form-control readonly-when-run add-id") }}
+                  class="form-control add-id") }}
                 </div>
                 {{ form.initial_payload.label(help="common/initial_payload") }}
                 <div class="form-group">
@@ -263,22 +263,22 @@
                 {{ form.skip_query.label(help="common/skip_query") }}
                 <div class="form-group">
                   {{ form.skip_query(id=form_type + '-skip_query', class="form-control
-                  readonly-when-run add-id") }}
+                  add-id") }}
                 </div>
                 {{ form.skip_value.label() }}
                 <div class="form-group">
                   {{ form.skip_value(id=form_type + '-skip_value', class="form-control
-                  readonly-when-run add-id") }}
+                  add-id") }}
                 </div>
                 {{ form.maximum_runs.label() }}
                 <div class="form-group">
                   {{ form.maximum_runs(id=form_type + '-maximum_runs',
-                  class="form-control readonly-when-run add-id") }}
+                  class="form-control add-id") }}
                 </div>
                 {{ form.waiting_time.label() }}
                 <div class="form-group">
                   {{ form.waiting_time(id=form_type + '-waiting_time',
-                  class="form-control readonly-when-run add-id") }}
+                  class="form-control add-id") }}
                 </div>
               </div>
             </div>

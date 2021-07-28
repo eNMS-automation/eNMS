@@ -386,11 +386,11 @@ class Run(AbstractBase):
             return "N/A"
 
     def run(self, payload):
-        parameterized_form = payload.get("form", {})
-        for property in vs.automation["parametrization"]["properties"]:
-            if property not in parameterized_form:
-                continue
-            setattr(self, property, parameterized_form[property])
+        self.update(**{
+            property: value
+            for property, value in payload.get("form", {}).items()
+            if property in vs.automation["parametrization"]["properties"]
+        })
         self.service_run = Runner(
             self,
             payload=payload,

@@ -34,6 +34,15 @@
     "multiprocessing = BooleanField('Multiprocessing', default=False)",
     "max_processes = IntegerField('Maximum number of processes', default=15)"
   ],
+  "allowed_parameterized_properties": [
+    "initial_payload",
+    "target_devices",
+    "target_pools",
+    "device_query",
+    "device_query_property",
+    "multiprocessing",
+    "max_processes"
+  ],
   "workflow": {
     "allowed_models": {
       "delete": ["device", "link", "pool"],

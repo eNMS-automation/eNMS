@@ -76,8 +76,12 @@ class Runner:
     def __getattr__(self, key):
         if key in self.__dict__:
             return self.__dict__[key]
-        elif key in self.__dict__.get("properties", {}):
-            return self.__dict__["properties"][key]
+        elif (
+            self.parameterized_run
+            and key in vs.automation["parameterized_properties"]
+            and key in self.payload["form"]
+        ):
+            return self.payload["form"][key]
         elif set(self.__dict__) & {"service_id", "service"}:
             return getattr(self.service, key)
         else:

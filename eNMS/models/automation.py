@@ -282,13 +282,6 @@ class Run(AbstractBase):
     parent_device_id = db.Column(Integer, ForeignKey("device.id"))
     parent_device = relationship("Device", foreign_keys="Run.parent_device_id")
     parameterized_run = db.Column(Boolean, default=False)
-    target_devices = relationship(
-        "Device", secondary=db.run_device_table, back_populates="runs"
-    )
-    target_pools = relationship(
-        "Pool", secondary=db.run_pool_table, back_populates="runs"
-    )
-    device_query = db.Column(db.LargeString)
     service_id = db.Column(Integer, ForeignKey("service.id"))
     service = relationship("Service", foreign_keys="Run.service_id")
     service_name = db.Column(db.SmallString)
@@ -386,11 +379,11 @@ class Run(AbstractBase):
             return "N/A"
 
     def run(self, payload):
-        self.update(**{
-            property: value
-            for property, value in payload.get("form", {}).items()
-            if property in vs.automation["parametrization"]["properties"]
-        })
+        parameterized_form = payload.get("form", {})
+        for key, model in {"target_devices": "device", "target_pools": "pool"}.items():
+            if key not in parameterized_form:
+                continue
+            parameterized_form[key] = db.objectify(model, parameterized_form[key])
         self.service_run = Runner(
             self,
             payload=payload,
@@ -403,9 +396,6 @@ class Run(AbstractBase):
             placeholder=self.placeholder,
             properties=self.properties,
             start_services=self.start_services,
-            target_devices=self.target_devices,
-            target_pools=self.target_pools,
-            device_query=self.device_query,
             task=self.task,
             trigger=self.trigger,
         )

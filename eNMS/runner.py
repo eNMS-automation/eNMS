@@ -46,9 +46,6 @@ class Runner:
         self.iteration_run = False
         self.workflow = None
         self.parent_device = None
-        self.target_devices = []
-        self.target_pools = []
-        self.device_query = ""
         self.run = run
         self.creator = self.run.creator
         self.start_services = [1]
@@ -57,6 +54,11 @@ class Runner:
         vs.run_instances[self.runtime] = self
         for key, value in kwargs.items():
             setattr(self, key, value)
+        if self.parameterized_run:
+            for key, value in self.payload["form"].items():
+                if key not in vs.automation["parametrization"]["properties"]:
+                    continue
+                setattr(self, key, value)
         device_progress = "iteration_device" if self.iteration_run else "device"
         self.progress_key = f"progress/{device_progress}"
         self.main_run = db.fetch("run", runtime=self.parent_runtime)
@@ -76,12 +78,6 @@ class Runner:
     def __getattr__(self, key):
         if key in self.__dict__:
             return self.__dict__[key]
-        elif (
-            self.parameterized_run
-            and key in vs.automation["parametrization"]["properties"]
-            and key in self.payload["form"]
-        ):
-            return self.payload["form"][key]
         elif set(self.__dict__) & {"service_id", "service"}:
             return getattr(self.service, key)
         else:

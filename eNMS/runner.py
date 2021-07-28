@@ -54,11 +54,6 @@ class Runner:
         vs.run_instances[self.runtime] = self
         for key, value in kwargs.items():
             setattr(self, key, value)
-        if self.parameterized_run:
-            for key, value in self.payload["form"].items():
-                if key not in vs.automation["parametrization"]["properties"]:
-                    continue
-                setattr(self, key, value)
         device_progress = "iteration_device" if self.iteration_run else "device"
         self.progress_key = f"progress/{device_progress}"
         self.main_run = db.fetch("run", runtime=self.parent_runtime)
@@ -82,6 +77,14 @@ class Runner:
             return getattr(self.service, key)
         else:
             raise AttributeError
+
+    def run_parameter(self, property):
+        if self.parameterized_run and property in self.payload["form"] and property	in vs.automation["parametrization"]["properties"]:
+            return self.payload["form"][property]
+        elif not self.is_main_run:
+            return self.__dict__[property] if property in self.__dict__ else []
+        elif self.is_main_run:
+            return getattr(self.main_run.placeholder or self.service, property)
 
     def result(self, device=None, main=False):
         for result in self.results:
@@ -127,20 +130,15 @@ class Runner:
         return devices
 
     def compute_devices(self):
-        instance = (
-            self
-            if self.parameterized_run or not self.is_main_run
-            else self.main_run.placeholder or self.service
-        )
-        devices = set(instance.target_devices)
-        for pool in instance.target_pools:
-            if instance.update_target_pools:
+        devices = set(self.run_parameter("target_devices"))
+        for pool in self.run_parameter("target_pools"):
+            if self.update_target_pools:
                 pool.compute_pool()
             devices |= set(pool.devices)
-        if instance.device_query:
+        if self.run_parameter("device_query"):
             devices |= self.compute_devices_from_query(
-                instance.device_query,
-                instance.device_query_property,
+                self.run_parameter("device_query"),
+                self.run_parameter("device_query_property"),
             )
         restricted_devices = set(
             device

@@ -1020,11 +1020,10 @@ class Controller:
         for property in ("user", "csrf_token"):
             kwargs.pop(property, None)
         if kwargs.get("form_type", "").startswith("initial-"):
-            kwargs = {"form": kwargs}
+            kwargs = {"form": kwargs, "parameterized_run": True}
         kwargs["creator"] = getattr(current_user, "name", "")
         service = db.fetch("service", id=service_id, rbac="run")
         kwargs["runtime"] = runtime = vs.get_time()
-        kwargs["parameterized_run"] = "id" in kwargs
         if kwargs.get("asynchronous", True):
             Thread(target=self.run, args=(service_id,), kwargs=kwargs).start()
         else:

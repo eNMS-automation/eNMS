@@ -79,7 +79,11 @@ class Runner:
             raise AttributeError
 
     def run_parameter(self, property):
-        if self.parameterized_run and property in self.payload["form"] and property	in vs.automation["parametrization"]["properties"]:
+        if (
+            self.parameterized_run
+            and property in self.payload["form"]
+            and property in vs.automation["parametrization"]["properties"]
+        ):
             return self.payload["form"][property]
         elif not self.is_main_run:
             return self.__dict__[property] if property in self.__dict__ else []

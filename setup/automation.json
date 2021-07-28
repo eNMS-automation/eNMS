@@ -24,25 +24,27 @@
       ["is_alive", "Is alive"]
     ]
   },
-  "default_parameterized_form": [
-    "name = StringField('Name', [InputRequired()])",
-    "initial_payload = DictField()",
-    "target_devices = MultipleInstanceField('Devices', model='device')",
-    "target_pools = MultipleInstanceField('Pools', model='pool')",
-    "device_query = StringField('Device Query', python=True, widget=TextArea(), render_kw={'rows': 2})",
-    "device_query_property = SelectField('Query Property Type', choices=(('name', 'Name'), ('ip_address', 'IP address')))",
-    "multiprocessing = BooleanField('Multiprocessing', default=False)",
-    "max_processes = IntegerField('Maximum number of processes', default=15)"
-  ],
-  "allowed_parameterized_properties": [
-    "initial_payload",
-    "target_devices",
-    "target_pools",
-    "device_query",
-    "device_query_property",
-    "multiprocessing",
-    "max_processes"
-  ],
+  "parametrization": {
+    "form": [
+      "name = StringField('Name', [InputRequired()])",
+      "initial_payload = DictField()",
+      "target_devices = MultipleInstanceField('Devices', model='device')",
+      "target_pools = MultipleInstanceField('Pools', model='pool')",
+      "device_query = StringField('Device Query', python=True, widget=TextArea(), render_kw={'rows': 2})",
+      "device_query_property = SelectField('Query Property Type', choices=(('name', 'Name'), ('ip_address', 'IP address')))",
+      "multiprocessing = BooleanField('Multiprocessing', default=False)",
+      "max_processes = IntegerField('Maximum number of processes', default=15)"
+    ],
+    "properties": [
+      "initial_payload",
+      "target_devices",
+      "target_pools",
+      "device_query",
+      "device_query_property",
+      "multiprocessing",
+      "max_processes"
+    ]
+  },
   "workflow": {
     "allowed_models": {
       "delete": ["device", "link", "pool"],

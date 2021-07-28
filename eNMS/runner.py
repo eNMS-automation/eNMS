@@ -78,7 +78,7 @@ class Runner:
             return self.__dict__[key]
         elif (
             self.parameterized_run
-            and key in vs.automation["parameterized_properties"]
+            and key in vs.automation["parametrization"]["properties"]
             and key in self.payload["form"]
         ):
             return self.payload["form"][key]

@@ -387,7 +387,7 @@ class Run(AbstractBase):
 
     def run(self, payload):
         parameterized_form = payload.get("form", {})
-        for property in vs.automation["parameterized_properties"]:
+        for property in vs.automation["parametrization"]["properties"]:
             if property not in parameterized_form:
                 continue
             setattr(self, property, parameterized_form[property])

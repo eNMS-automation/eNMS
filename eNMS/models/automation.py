@@ -304,6 +304,14 @@ class Run(AbstractBase):
     state = db.Column(db.Dict, info={"log_change": False})
     results = relationship("Result", back_populates="run", cascade="all, delete-orphan")
     model_properties = {"progress": "str", "service_properties": "dict"}
+    parameterized_properties = [
+        "target_devices",
+        "target_pools",
+        "device_query",
+        "device_query_property",
+        "multiprocessing",
+        "max_processes",
+    ]
 
     def __init__(self, **kwargs):
         self.runtime = kwargs.get("runtime") or vs.get_time()
@@ -386,7 +394,11 @@ class Run(AbstractBase):
             return "N/A"
 
     def run(self, payload):
-        self.update(**payload.get("form", {}))
+        parameterized_form = payload.get("form", {})
+        for property in self.parameterized_properties:
+            if property not in parameterized_form:
+                continue
+            setattr(self, property, parameterized_form[property])
         self.service_run = Runner(
             self,
             payload=payload,

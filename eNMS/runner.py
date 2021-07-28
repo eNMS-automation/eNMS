@@ -235,14 +235,7 @@ class Runner:
                 self.main_run.task.frequency or self.main_run.task.crontab_expression
             ):
                 self.main_run.task.is_active = False
-            results["properties"] = {
-                "run": {
-                    key: value
-                    for key, value in self.main_run.properties.items()
-                    if key not in vs.private_properties_set
-                },
-                "service": self.service.get_properties(exclude=["positions"]),
-            }
+            results["properties"] = self.service.get_properties(exclude=["positions"])
             results["trigger"] = self.main_run.trigger
             if (
                 self.is_main_run

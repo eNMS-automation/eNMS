@@ -844,7 +844,7 @@ class Runner:
 
     def global_variables(_self, **locals):  # noqa: N805
         payload, device = _self.payload, locals.get("device")
-        variables = locals
+        variables = {**locals, **payload.get("form", {})}
         variables.update(payload.get("variables", {}))
         if device and "devices" in payload.get("variables", {}):
             variables.update(payload["variables"]["devices"].get(device.name, {}))

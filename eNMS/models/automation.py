@@ -379,11 +379,6 @@ class Run(AbstractBase):
             return "N/A"
 
     def run(self, payload):
-        parameterized_form = payload.get("form", {})
-        for key, model in {"target_devices": "device", "target_pools": "pool"}.items():
-            if key not in parameterized_form:
-                continue
-            parameterized_form[key] = db.objectify(model, parameterized_form[key])
         self.service_run = Runner(
             self,
             payload=payload,

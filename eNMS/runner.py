@@ -81,7 +81,11 @@ class Runner:
 
     def run_parameter(self, property):
         if self.parameterized_run and property in self.payload["form"]:
-            return self.payload["form"][property]
+            value = self.payload["form"][property]
+            if property in ("target_devices", "target_pools"):
+                model = "pool" if property == "target_pools" else "device"
+                value = db.objectify(model, value)
+            return value
         elif self.workflow_run_method == "per_service_with_service_targets":
             return getattr(self.service, property)
         elif not self.is_main_run:

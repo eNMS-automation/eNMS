@@ -80,11 +80,7 @@ class Runner:
             raise AttributeError
 
     def run_parameter(self, property):
-        if (
-            self.parameterized_run
-            and property in self.payload["form"]
-            and property in vs.automation["parametrization"]["properties"]
-        ):
+        if self.parameterized_run and property in self.payload["form"]:
             return self.payload["form"][property]
         elif self.workflow_run_method == "per_service_with_service_targets":
             return getattr(self.service, property)

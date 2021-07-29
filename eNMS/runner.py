@@ -89,7 +89,7 @@ class Runner:
         elif self.workflow_run_method == "per_service_with_service_targets":
             return getattr(self.service, property)
         elif not self.is_main_run:
-            return self.__dict__[property] if property in self.__dict__ else []
+            return self.__dict__.get(property, [])
         else:
             return getattr(self.main_run.placeholder or self.service, property)
 

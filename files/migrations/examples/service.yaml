@@ -132,7 +132,7 @@
     'Regression Workflow: Operational Data Backup (admin)': *id003
     'Regression Workflow: Optional Prerequisite Services': [-356, 121]
     'Regression Workflow: Parameterized Form (override tags & targets, add payload)': [
-      -172, 80]
+      -262, -163]
     'Regression Workflow: Parameterized Superworkflow Run': [-272, -28]
     'Regression Workflow: Preprocessing and Postprocessing': *id015
     'Regression Workflow: RBAC Target Restriction': [-176, -144]
@@ -414,7 +414,7 @@
     'Regression Workflow: Operational Data Backup (admin)': *id044
     'Regression Workflow: Optional Prerequisite Services': [734, 171]
     'Regression Workflow: Parameterized Form (override tags & targets, add payload)': [
-      643, 61]
+      692, -112]
     'Regression Workflow: Parameterized Superworkflow Run': [518, -43]
     'Regression Workflow: Preprocessing and Postprocessing': *id056
     'Regression Workflow: RBAC Target Restriction': [654, -133]
@@ -18863,7 +18863,7 @@
   definition: Definition
   delete_spaces_before_matching: false
   description: ''
-  device_query: ''
+  device_query: '["Atlanta"]'
   device_query_property: name
   dict_match: {}
   disable_result_creation: false
@@ -18876,8 +18876,26 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  labels: {}
-  last_modified: '2021-07-29 10:42:50.580741'
+  labels:
+    19c40c2f-b0c6-4c33-b1b7-22085dcb07e3:
+      alignment: left
+      content: "Uses a parameterized form to define the value of an interface.\r\n\
+        Services use netmiko to show the description of the interface.\r\nThe parameterized\
+        \ run uses the \"tags\" property to add tags\r\nto the run object.\r\nThe\
+        \ workflow has \"device query\" set to \"Atlanta\". Since the\r\ndevice query\
+        \ is not part of the paramterized form, it should be\r\nconsidered when running\
+        \ the workflow and Atlanta should be\r\na target."
+      positions: [234, -86]
+    46e3d026-f4f9-4d74-9ba9-2807c97ffe18:
+      alignment: left
+      content: 'Access the interface as a global variable: "interface"'
+      positions: [438, 187]
+    fded87ef-2b4a-4cdb-9f21-5c81981bde15:
+      alignment: left
+      content: "Access the interface property directly from the payload :\r\n\"payload[\"\
+        form\"][\"interface\"]\"\r\n"
+      positions: [-82, 204]
+  last_modified: '2021-07-29 10:50:53.024240'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -19000,7 +19018,7 @@
   pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow: Parameterized Form (override tags & targets, add payload)': [
-      68, -99]
+      -78, 122]
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -23313,7 +23331,7 @@
   pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow: Parameterized Form (override tags & targets, add payload)': [
-      421, -94]
+      435, 118]
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''

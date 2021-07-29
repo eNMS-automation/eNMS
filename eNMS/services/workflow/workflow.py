@@ -144,6 +144,7 @@ class Workflow(Service):
                     "restart_run": restart_run,
                     "parent": run,
                     "parent_runtime": run.parent_runtime,
+                    "workflow_run_method": run.run_method,
                 }
                 if tracking_bfs or device:
                     kwargs["target_devices"] = [

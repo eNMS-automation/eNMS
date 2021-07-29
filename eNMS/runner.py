@@ -45,6 +45,7 @@ class Runner:
         self.is_main_run = False
         self.iteration_run = False
         self.workflow = None
+        self.workflow_run_method = None
         self.parent_device = None
         self.run = run
         self.creator = self.run.creator
@@ -85,9 +86,11 @@ class Runner:
             and property in vs.automation["parametrization"]["properties"]
         ):
             return self.payload["form"][property]
+        elif self.workflow_run_method == "per_service_with_service_targets":
+            return getattr(self.service, property)
         elif not self.is_main_run:
             return self.__dict__[property] if property in self.__dict__ else []
-        elif self.is_main_run:
+        else:
             return getattr(self.main_run.placeholder or self.service, property)
 
     def result(self, device=None, main=False):

@@ -133,7 +133,7 @@
     'Regression Workflow: Optional Prerequisite Services': [-356, 121]
     'Regression Workflow: Parameterized Form (override tags & targets, add payload)': [
       -262, -163]
-    'Regression Workflow: Parameterized Superworkflow Run': [-272, -28]
+    'Regression Workflow: Parameterized Superworkflow Run': [-293, -76]
     'Regression Workflow: Preprocessing and Postprocessing': *id015
     'Regression Workflow: RBAC Target Restriction': [-176, -144]
     'Regression Workflow: Result content in memory (scalability)': [0, 0]
@@ -415,7 +415,7 @@
     'Regression Workflow: Optional Prerequisite Services': [734, 171]
     'Regression Workflow: Parameterized Form (override tags & targets, add payload)': [
       692, -112]
-    'Regression Workflow: Parameterized Superworkflow Run': [518, -43]
+    'Regression Workflow: Parameterized Superworkflow Run': [565, -70]
     'Regression Workflow: Preprocessing and Postprocessing': *id056
     'Regression Workflow: RBAC Target Restriction': [654, -133]
     'Regression Workflow: Scalability Test (large workflow)': *id057
@@ -22958,14 +22958,21 @@
         \ workflow itself and not the from the superworkflow.\r\nWith a parameterized\
         \ run, the targets should come from the run.\r\nThe same principles should\
         \ apply when defining targets\r\nfrom the device query field."
-      positions: [-65, -206]
+      positions: [-122, -177]
     9b543e1d-204c-45a2-bcb2-9619959a4924:
       alignment: left
       content: "The service targets are set to:\r\n- PaloAlto, Austin for devices\
         \ field\r\n- Washington Pool\r\n- [\"NewYork\", \"Atlanta\"] for device query\
         \ field\r\n=> Should run on 5 devices without parameterized run"
-      positions: [466, -207]
-  last_modified: '2021-07-11 01:08:19.801830'
+      positions: [183, 77]
+    cd8dd28f-bb19-4951-b208-b39a3c0f0571:
+      alignment: left
+      content: "The parameterized also contains a variable \"endpoint\" that\r\nis\
+        \ used in the REST call service of the superworkflow, to make\r\nsure that\
+        \ parameterized form variables can be accessed as\r\nglobal variable in a\
+        \ superworkflow."
+      positions: [374, -186]
+  last_modified: '2021-07-30 02:04:36.342863'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -22978,14 +22985,14 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
-    \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
-    \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
-    \ = StringField('Device Query', python=True, widget=TextArea(), render_kw={'rows':\
-    \ 2})\r\ndevice_query_property = SelectField('Query Property Type', choices=(('name',\
-    \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
-    \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
-    \ default=15)"
+  parameterized_form: "name = StringField('Name', [InputRequired()])\r\nendpoint =\
+    \ StringField('Endpoint', [InputRequired()], default=\"is_alive\")\r\ntarget_devices\
+    \ = MultipleInstanceField('Devices', model='device')\r\ntarget_pools = MultipleInstanceField('Pools',\
+    \ model='pool')\r\ndevice_query = StringField('Device Query', python=True, widget=TextArea(),\
+    \ render_kw={'rows': 2})\r\ndevice_query_property = SelectField('Query Property\
+    \ Type', choices=(('name', 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing\
+    \ = BooleanField('Multiprocessing', default=False)\r\nmax_processes = IntegerField('Maximum\
+    \ number of processes', default=15)"
   pools: ['All devices, links, services and users']
   positions: {}
   postprocessing: ''
@@ -23064,7 +23071,7 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    'Regression Workflow: Parameterized Superworkflow Run': [130, -95]
+    'Regression Workflow: Parameterized Superworkflow Run': [142, -32]
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''
@@ -23201,7 +23208,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2021-07-11 01:20:39.544111'
+  last_modified: '2021-07-30 02:04:57.739986'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -23237,7 +23244,7 @@
   priority: 1
   reply_to: ''
   reserved: false
-  rest_url: http://127.0.0.1:5000/rest/is_alive
+  rest_url: http://127.0.0.1:5000/rest/{{ endpoint }}
   run_method: once
   scoped_name: Call to is_alive, Run Once
   send_notification: false

@@ -963,7 +963,6 @@ class NetmikoForm(ConnectionForm):
         default=True,
         help="common/use_device_driver",
     )
-    use_textfsm = BooleanField("Use TextFSM", default=True)
     enable_mode = BooleanField(
         "Enable mode (run in enable mode or as root)", default=True
     )
@@ -1030,7 +1029,6 @@ class NetmikoForm(ConnectionForm):
             "commands": [
                 "driver",
                 "use_device_driver",
-                "use_textfsm",
                 "enable_mode",
                 "config_mode",
                 "fast_cli",

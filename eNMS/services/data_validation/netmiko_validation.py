@@ -74,6 +74,7 @@ class NetmikoValidationService(ConnectionService):
 class NetmikoValidationForm(NetmikoForm):
     form_type = HiddenField(default="netmiko_validation_service")
     command = StringField(substitution=True)
+    use_textfsm = BooleanField("Use TextFSM", default=False)
     expect_string = StringField(substitution=True, help="netmiko/expect_string")
     auto_find_prompt = BooleanField(default=True, help="netmiko/auto_find_prompt")
     strip_prompt = BooleanField(default=True, help="netmiko/strip_prompt")
@@ -83,6 +84,7 @@ class NetmikoValidationForm(NetmikoForm):
         **NetmikoForm.groups,
         "Advanced Netmiko Parameters": {
             "commands": [
+                "use_textfsm",
                 "expect_string",
                 "auto_find_prompt",
                 "strip_prompt",

@@ -1614,6 +1614,18 @@
     ip int brief', label: success, name: '2021-07-30 10:12:12.090534', source: '[Shared]
     Start', subtype: success, type: workflow_edge, workflow: 'Regression Workflow:
     Netmiko TextFSM Option'}
-- {color: green, destination: '[Shared] End', label: success, name: '2021-07-30 10:12:12.891846',
-  source: '[Regression Workflow: Netmiko TextFSM Option] show ip int brief', subtype: success,
+- {color: green, destination: '[Regression Workflow: Netmiko TextFSM Option] show
+    version', label: success, name: '2021-07-30 10:17:09.539642', source: '[Regression
+    Workflow: Netmiko TextFSM Option] show ip int brief', subtype: success, type: workflow_edge,
+  workflow: 'Regression Workflow: Netmiko TextFSM Option'}
+- {color: green, destination: '[Regression Workflow: Netmiko TextFSM Option] show
+    lldp neighbor', label: success, name: '2021-07-30 10:17:12.299913', source: '[Regression
+    Workflow: Netmiko TextFSM Option] show version', subtype: success, type: workflow_edge,
+  workflow: 'Regression Workflow: Netmiko TextFSM Option'}
+- {color: green, destination: '[Regression Workflow: Netmiko TextFSM Option] show
+    arp', label: success, name: '2021-07-30 10:17:13.043640', source: '[Regression
+    Workflow: Netmiko TextFSM Option] show lldp neighbor', subtype: success, type: workflow_edge,
+  workflow: 'Regression Workflow: Netmiko TextFSM Option'}
+- {color: green, destination: '[Shared] End', label: success, name: '2021-07-30 10:17:13.851356',
+  source: '[Regression Workflow: Netmiko TextFSM Option] show arp', subtype: success,
   type: workflow_edge, workflow: 'Regression Workflow: Netmiko TextFSM Option'}

@@ -128,7 +128,7 @@
     'Regression Workflow: Napalm Getters and Postprocessing': *id013
     'Regression Workflow: Netmiko File Transfer': [-380, -131]
     'Regression Workflow: Netmiko Prompts': *id014
-    'Regression Workflow: Netmiko TextFSM Option': [-244, -21]
+    'Regression Workflow: Netmiko TextFSM Option': [-366, 74]
     'Regression Workflow: Notifications': [-391, -77]
     'Regression Workflow: Operational Data Backup (admin)': *id003
     'Regression Workflow: Optional Prerequisite Services': [-356, 121]
@@ -411,7 +411,7 @@
     'Regression Workflow: Napalm Getters and Postprocessing': *id054
     'Regression Workflow: Netmiko File Transfer': [499, -103]
     'Regression Workflow: Netmiko Prompts': *id055
-    'Regression Workflow: Netmiko TextFSM Option': [526, 68]
+    'Regression Workflow: Netmiko TextFSM Option': [522, 4]
     'Regression Workflow: Notifications': [530, 32]
     'Regression Workflow: Operational Data Backup (admin)': *id044
     'Regression Workflow: Optional Prerequisite Services': [734, 171]
@@ -23442,14 +23442,20 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels:
+    5b4eb4ba-e756-4834-ac39-05d174521efe:
+      alignment: left
+      content: "This last command isn't supported by the use_textfsm option (there\
+        \ is\r\nno associated textFSM template) so with the option enabled, netmiko\r\
+        \nshould default to displaying the output as a string."
+      positions: [362, 221]
     7a0fb787-f5a8-4fb7-be2b-addc0e139522:
       alignment: left
       content: "This workflow uses netmiko \"use_textfsm\" option to automatically\r\
         \nconvert the output from a string to a dictionary (structured data).\r\n\
         This only works for specific commands, when there is an associated\r\nTextFSM\
         \ template available."
-      positions: [184, -132]
-  last_modified: '2021-07-30 10:18:29.420441'
+      positions: [168, -111]
+  last_modified: '2021-07-30 10:24:16.897401'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -23571,7 +23577,7 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    'Regression Workflow: Netmiko TextFSM Option': [-127, 158]
+    'Regression Workflow: Netmiko TextFSM Option': [-132, -29]
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''
@@ -23672,7 +23678,7 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    'Regression Workflow: Netmiko TextFSM Option': [4, -29]
+    'Regression Workflow: Netmiko TextFSM Option': [-28, 186]
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''
@@ -23773,7 +23779,7 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    'Regression Workflow: Netmiko TextFSM Option': [351, -38]
+    'Regression Workflow: Netmiko TextFSM Option': [316, 137]
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''
@@ -23874,7 +23880,7 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    'Regression Workflow: Netmiko TextFSM Option': [217, 154]
+    'Regression Workflow: Netmiko TextFSM Option': [269, -27]
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''

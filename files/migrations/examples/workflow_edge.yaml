@@ -1610,3 +1610,10 @@
     payload)] Show inteface as global variable', subtype: success, type: workflow_edge,
   workflow: 'Regression Workflow: Parameterized Form (override tags & targets, add
     payload)'}
+- {color: green, destination: '[Regression Workflow: Netmiko TextFSM Option] show
+    ip int brief', label: success, name: '2021-07-30 10:12:12.090534', source: '[Shared]
+    Start', subtype: success, type: workflow_edge, workflow: 'Regression Workflow:
+    Netmiko TextFSM Option'}
+- {color: green, destination: '[Shared] End', label: success, name: '2021-07-30 10:12:12.891846',
+  source: '[Regression Workflow: Netmiko TextFSM Option] show ip int brief', subtype: success,
+  type: workflow_edge, workflow: 'Regression Workflow: Netmiko TextFSM Option'}

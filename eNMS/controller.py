@@ -69,7 +69,7 @@ class Controller:
         )
         db.session.commit()
         workflow.last_modified = now
-        return {"edge": workflow_edge, "update_time": now}
+        return {"update_time": now, **workflow_edge}
 
     def add_instances_in_bulk(self, **kwargs):
         target = db.fetch(kwargs["relation_type"], id=kwargs["relation_id"])
@@ -1225,6 +1225,7 @@ class Controller:
             return {"alert": "Error 403 - Operation not allowed."}
         except Exception as exc:
             db.session.rollback()
+            print("TTT"*100)
             if isinstance(exc, IntegrityError):
                 alert = (
                     f"There is already a {instance.class_type} "

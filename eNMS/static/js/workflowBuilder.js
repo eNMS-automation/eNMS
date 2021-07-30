@@ -416,7 +416,7 @@ function saveEdge(edge) {
     url: `/add_edge/${param}`,
     callback: function (result) {
       workflow.last_modified = result.update_time;
-      const newEdge = edgeToEdge(result.edge);
+      const newEdge = edgeToEdge(result);
       edges.add(newEdge);
       workflow.edges.push(newEdge);
       graph.addEdgeMode();

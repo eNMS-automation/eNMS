@@ -212,7 +212,7 @@ class WorkflowForm(ServiceForm):
 
 class WorkflowEdge(AbstractBase):
 
-    __tablename__ = type = "workflow_edge"
+    __tablename__ = type = class_type = "workflow_edge"
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.SmallString, unique=True)
     label = db.Column(db.SmallString)

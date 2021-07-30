@@ -373,22 +373,22 @@ class Database:
             for instance in self.fetch_all(model)
         ]
 
-    def factory(self, _class, commit=False, no_fetch=False, **kwargs):
+    def factory(self, _class, commit=False, no_fetch=False, rbac="edit", **kwargs):
         def transaction(_class, **kwargs):
             characters = set(kwargs.get("name", "") + kwargs.get("scoped_name", ""))
             if set("/\\'" + '"') & characters:
                 raise Exception("Names cannot contain a slash or a quote.")
             instance, instance_id = None, kwargs.pop("id", 0)
             if instance_id:
-                instance = self.fetch(_class, id=instance_id, rbac="edit")
+                instance = self.fetch(_class, id=instance_id, rbac=rbac)
             elif "name" in kwargs and not no_fetch:
                 instance = self.fetch(
-                    _class, allow_none=True, name=kwargs["name"], rbac="edit"
+                    _class, allow_none=True, name=kwargs["name"], rbac=rbac
                 )
             if instance and not kwargs.get("must_be_new"):
                 instance.update(**kwargs)
             else:
-                instance = vs.models[_class](**kwargs)
+                instance = vs.models[_class](rbac=rbac, **kwargs)
                 self.session.add(instance)
             return instance
 

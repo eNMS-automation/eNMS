@@ -302,7 +302,8 @@ class Run(AbstractBase):
         self.runtime = kwargs.get("runtime") or vs.get_time()
         self.parent_runtime = self.runtime
         super().__init__(**kwargs)
-        self.name = f"{self.runtime} ({self.creator})"
+        if not self.name:
+            self.name = f"{self.runtime} ({self.creator})"
         self.service_name = (self.placeholder or self.service).scoped_name
         vs.run_targets[self.runtime] = set(
             controller.filtering(

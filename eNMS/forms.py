@@ -967,6 +967,7 @@ class NetmikoForm(ConnectionForm):
         "Enable mode (run in enable mode or as root)", default=True
     )
     config_mode = BooleanField("Config mode", default=False)
+    use_textfsm = BooleanField("Use TextFSM", default=True)
     fast_cli = BooleanField()
     timeout = FloatField(default=10.0)
     delay_factor = FloatField(
@@ -1031,6 +1032,7 @@ class NetmikoForm(ConnectionForm):
                 "use_device_driver",
                 "enable_mode",
                 "config_mode",
+                "use_textfsm",
                 "fast_cli",
                 "timeout",
                 "delay_factor",

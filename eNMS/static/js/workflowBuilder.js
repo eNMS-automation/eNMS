@@ -400,15 +400,32 @@ function saveEdge(edge) {
 }
 
 function stopWorkflow() {
+  const processResponse = function (result) {
+    if (!result) {
+      notify("The workflow is not currently running.", "error", 5);
+    } else if (typeof result === "string") {
+      return result
+    } else {
+      notify("Workflow will stop after current service...", "success", 5);
+    }
+  }
   call({
     url: `/stop_workflow/${currentRuntime}`,
     callback: (result) => {
-      if (!result) {
-        notify("The workflow is not currently running.", "error", 5);
-      } else {
-        notify("Workflow will stop after current service...", "success", 5);
+      let otherUser = processResponse(result);
+      if (otherUser) {
+        showConfirmationPanel({
+          title: "Please Confirm Workflow Stop",
+          message: `The current runtime of this workflow was started by '${otherUser}'.\nPlease confirm you would still like to stop it.`,
+          onConfirm: () => {
+            call({
+              url: `/stop_workflow/${currentRuntime}/true`,
+              callback: (result) => {processResponse(result)}
+            });
+          }
+        });
       }
-    },
+    }
   });
 }
 

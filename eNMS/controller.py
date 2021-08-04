@@ -1123,13 +1123,16 @@ class Controller:
             "update_time": workflow.last_modified,
         }
 
-    def stop_workflow(self, runtime):
+    def stop_workflow(self, runtime, confirm_stop=False):
         run = db.fetch("run", allow_none=True, runtime=runtime)
+        user_name = getattr(current_user, "name", "")
         if run and run.status == "Running":
-            if env.redis_queue:
-                env.redis("set", f"stop/{run.parent_runtime}", "true")
+            if user_name != run.creator and not confirm_stop:
+                return run.creator
+            if self.redis_queue:
+                self.redis("set", f"stop/{run.parent_runtime}", "true")
             else:
-                vs.run_stop[run.parent_runtime] = True
+                self.run_stop[run.parent_runtime] = True
             return True
 
     def switch_menu(self, user_id):

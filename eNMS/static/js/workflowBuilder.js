@@ -22,6 +22,7 @@ import {
   openPanel,
   showInstancePanel,
   userIsActive,
+  showConfirmationPanel,
 } from "./base.js";
 import { clearSearch, tables, tableInstances } from "./table.js";
 

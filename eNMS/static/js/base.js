@@ -322,6 +322,42 @@ export function openPanel({
   $(panel).css({ ...position, ...css });
 }
 
+export function showConfirmationPanel({ 
+  title, 
+  message, 
+  confirmText="OK", 
+  cancelText="Cancel", 
+  onConfirm, 
+  onCancel 
+}) {
+  var content = `
+  <div class="modal-body" style="max-width:400px">
+    ${message}
+  </div>
+  <div class="modal-footer">
+    <center>
+      <button type="button" class="btn cancelAction">${cancelText}</button>
+      <button type="button" class="btn btn-danger confirmAction">${confirmText}</button>
+    </center>
+  </div><br>`;
+  var idNum = Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+  var panelName =  `confirmation_modal-${idNum}`;
+  openPanel({
+    name: panelName,
+    title: title,
+    content: content,
+    size: "auto",
+  });
+  $(".confirmAction").click(function () {
+    if (typeof onConfirm === "function") onConfirm();
+    $(`#${panelName}`).remove();
+  });
+  $(".cancelAction, .jsPanel-btn-close").click(function () {
+    if (typeof onCancel === "function") onCancel();
+    $(`#${panelName}`).remove();
+  });
+}
+
 export function createTooltip({
   name,
   target,

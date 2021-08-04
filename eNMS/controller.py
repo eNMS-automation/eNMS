@@ -1129,10 +1129,10 @@ class Controller:
         if run and run.status == "Running":
             if user_name != run.creator and not confirm_stop:
                 return run.creator
-            if self.redis_queue:
-                self.redis("set", f"stop/{run.parent_runtime}", "true")
+            if env.redis_queue:
+                env.redis("set", f"stop/{run.parent_runtime}", "true")
             else:
-                self.run_stop[run.parent_runtime] = True
+                vs.run_stop[run.parent_runtime] = True
             return True
 
     def switch_menu(self, user_id):

@@ -61,6 +61,7 @@ const options = {
 };
 
 let ctrlKeyPressed;
+let currentRun;
 let nodes;
 let edges;
 let graph;
@@ -927,6 +928,7 @@ function getWorkflowState(periodic, first) {
       url: `/get_service_state/${currentPath}/${runtime}`,
       callback: function (result) {
         if (!Object.keys(result).length || result.service.id != workflow.id) return;
+        currentRun = result.run;
         currentRuntime = result.runtime;
         if (result.service.last_modified !== workflow.last_modified) {
           displayWorkflow(result);

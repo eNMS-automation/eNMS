@@ -778,10 +778,12 @@ class Runner:
             payload = payload.setdefault(device, {})
         if section:
             payload = payload.setdefault(section, {})
+        if value is None:
+            value = default
         if operation in ("get", "__setitem__"):
-            value = getattr(payload, operation)(name, value or default)
+            value = getattr(payload, operation)(name, value)
         else:
-            getattr(payload[name], operation)(value or default)
+            getattr(payload[name], operation)(value)
         if operation == "get" and not allow_none and value is None:
             raise Exception(f"Payload Editor: {name} not found in {payload}.")
         else:

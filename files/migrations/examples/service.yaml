@@ -2179,7 +2179,7 @@
   iteration_devices_property: ip_address
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2019-08-14 19:12:55.870709'
+  last_modified: '2021-08-06 01:33:43.013667'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -2205,8 +2205,8 @@
   number_of_retries: 0
   operating_system: ''
   operation1: __setitem__
-  operation2: set
-  operation3: set
+  operation2: __setitem__
+  operation3: __setitem__
   parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
     \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
     \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\

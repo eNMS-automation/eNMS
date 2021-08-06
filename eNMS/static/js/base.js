@@ -323,10 +323,10 @@ export function openPanel({
 }
 
 export function showConfirmationPanel({ 
+  id,
   title, 
   message, 
   confirmText="OK", 
-  cancelText="Cancel", 
   onConfirm, 
   onCancel 
 }) {
@@ -336,12 +336,10 @@ export function showConfirmationPanel({
   </div>
   <div class="modal-footer">
     <center>
-      <button type="button" class="btn cancelAction">${cancelText}</button>
       <button type="button" class="btn btn-danger confirmAction">${confirmText}</button>
     </center>
   </div><br>`;
-  var idNum = Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
-  var panelName =  `confirmation_modal-${idNum}`;
+  var panelName = `confirmation_modal-${id}`;
   openPanel({
     name: panelName,
     title: title,

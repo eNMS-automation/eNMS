@@ -567,7 +567,7 @@ class Controller:
         }
 
     def get_service_state(self, path, runtime=None):
-        service_id, state = path.split(">")[-1], None
+        service_id, state, run = path.split(">")[-1], None, None
         service = db.fetch("service", id=service_id, allow_none=True)
         if not service:
             raise db.rbac_error
@@ -586,6 +586,7 @@ class Controller:
                 set((run.parent_runtime, run.ui_name) for run in runs), reverse=True
             ),
             "state": state,
+            "run": getattr(run, "serialized", None),
             "runtime": runtime,
         }
 
@@ -1123,12 +1124,9 @@ class Controller:
             "update_time": workflow.last_modified,
         }
 
-    def stop_workflow(self, runtime, confirm_stop=False):
+    def stop_workflow(self, runtime):
         run = db.fetch("run", allow_none=True, runtime=runtime)
-        user_name = getattr(current_user, "name", "")
         if run and run.status == "Running":
-            if user_name != run.creator and not confirm_stop:
-                return run.creator
             if env.redis_queue:
                 env.redis("set", f"stop/{run.parent_runtime}", "true")
             else:

@@ -414,7 +414,7 @@ function stopWorkflow() {
       }
     });
   }
-  if (currentRun && user.name !== currentRun?.creator) {
+  if (currentRun?.status === "Running" && user.name !== currentRun?.creator) {
     showConfirmationPanel({
       id: currentRun.id,
       title: "Please Confirm Workflow Stop",

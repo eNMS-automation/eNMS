@@ -158,7 +158,7 @@
   service_vendor: ''
   service_vendor_invert: false
   service_vendor_match: inclusion
-  target_services: ['Regression Workflow: Scalability Test (large workflow)']
+  target_services: [Scalability Test (large workflow)]
   tasks: []
   type: pool
   user_description: ''
@@ -319,7 +319,7 @@
   service_vendor_invert: false
   service_vendor_match: inclusion
   target_services: ['[Regression Workflow: SxS Service Targets with Run Once + Skip]
-      Run Once with Pool', 'Regression Workflow: Scalability Test (large workflow)']
+      Run Once with Pool', Scalability Test (large workflow)]
   tasks: []
   type: pool
   user_description: ''
@@ -487,7 +487,7 @@
   service_vendor: ''
   service_vendor_invert: false
   service_vendor_match: inclusion
-  target_services: ['Regression Workflow: Scalability Test (large workflow)']
+  target_services: [Scalability Test (large workflow)]
   tasks: []
   type: pool
   user_description: ''
@@ -661,7 +661,7 @@
   service_vendor: ''
   service_vendor_invert: false
   service_vendor_match: inclusion
-  target_services: ['Regression Workflow: Scalability Test (large workflow)']
+  target_services: [Scalability Test (large workflow)]
   tasks: []
   type: pool
   user_description: ''
@@ -832,7 +832,7 @@
   service_vendor: ''
   service_vendor_invert: false
   service_vendor_match: inclusion
-  target_services: ['Regression Workflow: Scalability Test (large workflow)']
+  target_services: [Scalability Test (large workflow)]
   tasks: []
   type: pool
   user_description: ''
@@ -1002,7 +1002,7 @@
   service_vendor: ''
   service_vendor_invert: false
   service_vendor_match: inclusion
-  target_services: ['Regression Workflow: Scalability Test (large workflow)']
+  target_services: [Scalability Test (large workflow)]
   tasks: []
   type: pool
   user_description: ''
@@ -1154,9 +1154,8 @@
   service_vendor: ''
   service_vendor_invert: false
   service_vendor_match: inclusion
-  target_services: ['[Regression Workflow: Operational Data Backup (admin)] Retrieve
-      Operational Data', 'Regression Workflow: Scalability Test (large workflow)',
-    'Regression Workflow: Parameterized Superworkflow Run']
+  target_services: ['[Operational Data Backup (admin)] Retrieve Operational Data',
+    Scalability Test (large workflow), Parameterized Superworkflow Run]
   tasks: []
   type: pool
   user_description: ''
@@ -1308,7 +1307,7 @@
   service_vendor: ''
   service_vendor_invert: false
   service_vendor_match: inclusion
-  target_services: ['Regression Workflow: Scalability Test (large workflow)']
+  target_services: [Scalability Test (large workflow)]
   tasks: []
   type: pool
   user_description: ''
@@ -1460,7 +1459,7 @@
   service_vendor: ''
   service_vendor_invert: false
   service_vendor_match: inclusion
-  target_services: ['Regression Workflow: Scalability Test (large workflow)']
+  target_services: [Scalability Test (large workflow)]
   tasks: []
   type: pool
   user_description: ''
@@ -2682,7 +2681,7 @@
   service_vendor: ''
   service_vendor_invert: false
   service_vendor_match: inclusion
-  target_services: ['Regression Workflow: Credentials (Password & Key, Priority Mechanism)']
+  target_services: ['Credentials (Password & Key, Priority Mechanism)']
   tasks: []
   type: pool
   user_description: ''

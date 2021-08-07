@@ -331,7 +331,7 @@ export function showConfirmationPanel({
   id,
   title, 
   message, 
-  confirmText="Confirm", 
+  confirmButton="Confirm", 
   onConfirm, 
   onCancel 
 }) {
@@ -339,7 +339,7 @@ export function showConfirmationPanel({
   <div class="modal-body" style="max-width:600px">${message}</div>
   <div class="modal-footer">
     <center>
-      <button type="button" class="btn btn-danger confirmAction">${confirmText}</button>
+      <button type="button" class="btn btn-danger confirmAction">${confirmButton}</button>
     </center>
   </div><br>`;
   openPanel({
@@ -347,12 +347,12 @@ export function showConfirmationPanel({
     id: id,
     title: title,
     content: content,
-    size: "auto 170px",
+    size: "auto",
     onclosed: onCancel,
   });
   $(".confirmAction").click(function () {
     onConfirm();
-    $(`#${panelName}`).remove();
+    $(`#confirmation-${id}`).remove();
   });
 }
 
@@ -417,26 +417,12 @@ export function createTooltip({
 }
 
 function showDeletionPanel(instance) {
-  openPanel({
-    name: "instance_deletion",
-    content: `
-      <div class="modal-body">
-        Are you sure you want to permanently remove this item ?
-      </div>
-      <div class="modal-footer">
-        <center>
-          <button
-            type="button"
-            class="btn btn-danger"
-            onclick="eNMS.base.deleteInstance('${instance.type}', ${instance.id})"
-          >
-            Delete
-          </button>
-        </center>
-      </div><br>`,
-    title: `Delete ${instance.name}`,
-    size: "auto",
-    id: instance.id,
+  showConfirmationPanel({
+    id: `${instance.type}-${instance.id}`,
+    title: `Delete ${instance.type} '${instance.name}'`,
+    message: "Are you sure you want to permanently remove this item ?",
+    confirmButton: "Delete",
+    onConfirm: () => deleteInstance(instance.type, instance.id)
   });
 }
 

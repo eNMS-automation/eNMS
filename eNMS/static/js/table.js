@@ -13,6 +13,7 @@ import {
   notify,
   openPanel,
   serializeForm,
+  showConfirmationPanel,
   userIsActive,
 } from "./base.js";
 import { loadServiceTypes } from "./automation.js";
@@ -1401,27 +1402,13 @@ function refreshTablePeriodically(tableId, interval, first) {
 }
 
 function showBulkDeletionPanel(tableId, model) {
-  openPanel({
-    name: "bulk_deletion",
-    id: tableId,
-    content: `
-      <div class="modal-body">
-        Are you sure you want to permanently remove all items
-        currently displayed in the table ?
-      </div>
-      <div class="modal-footer">
-        <center>
-          <button
-            type="button"
-            class="btn btn-danger"
-            onclick="eNMS.table.bulkDeletion('${tableId}', '${model}')"
-          >
-            Delete
-          </button>
-        </center>
-      </div><br>`,
+  showConfirmationPanel({
+    id: `bulk-${model}-${tableId}`,
     title: "Bulk Deletion (delete all items in table)",
-    size: "auto",
+    message: `Are you sure you want to permanently remove all items
+      currently displayed in the table ?`,
+    confirmButton: "Delete",
+    onConfirm: () => bulkDeletion(tableId, model)
   });
 }
 
@@ -1431,7 +1418,6 @@ function bulkDeletion(tableId, model) {
     form: `search-form-${tableId}`,
     callback: function (number) {
       refreshTable(tableId, false, true);
-      $(`#bulk_deletion-${tableId}`).remove();
       notify(`${number} items deleted.`, "success", 5, true);
     },
   });

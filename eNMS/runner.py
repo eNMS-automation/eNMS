@@ -512,12 +512,6 @@ class Runner:
         start = datetime.now().replace(microsecond=0)
         results = {"device_target": getattr(device, "name", None)}
         try:
-            if self.restart_run and self.service.type == "workflow":
-                old_result = self.restart_run.result(
-                    device=device.name if device else None
-                )
-                if old_result and "payload" in old_result.result:
-                    self.payload.update(old_result["payload"])
             if self.service.iteration_values:
                 targets_results = {}
                 targets = self.eval(self.service.iteration_values, **locals())[0]

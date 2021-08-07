@@ -987,6 +987,9 @@ class Controller:
         for property in ("name", "tags"):
             if property in kwargs.get("form", {}):
                 run_kwargs[property] = kwargs["form"][property]
+        service = db.fetch("service", id=service)
+        service.status = "Running"
+        initial_payload = kwargs.get("initial_payload", service.initial_payload)
         restart_run = db.fetch(
             "run",
             allow_none=True,
@@ -994,9 +997,7 @@ class Controller:
         )
         if restart_run:
             run_kwargs["restart_run"] = restart_run
-        service = db.fetch("service", id=service)
-        service.status = "Running"
-        initial_payload = kwargs.get("initial_payload", service.initial_payload)
+            initial_payload = restart_run.payload
         if service.type == "workflow" and service.superworkflow:
             run_kwargs["placeholder"] = run_kwargs["start_service"] = service.id
             service = service.superworkflow
@@ -1004,8 +1005,8 @@ class Controller:
         else:
             run_kwargs["start_service"] = service.id
         run = db.factory("run", service=service.id, commit=True, **run_kwargs)
-        run.properties = kwargs
-        return run.run({**initial_payload, **kwargs})
+        run.properties, run.payload = kwargs, {**initial_payload, **kwargs}
+        return run.run()
 
     def run_debug_code(self, **kwargs):
         result = StringIO()

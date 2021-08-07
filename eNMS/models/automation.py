@@ -266,6 +266,7 @@ class Run(AbstractBase):
     start_services = db.Column(db.List)
     creator = db.Column(db.SmallString, default="")
     properties = db.Column(db.Dict)
+    payload = db.Column(db.Dict)
     success = db.Column(Boolean, default=False)
     tags = db.Column(db.LargeString)
     status = db.Column(db.TinyString, default="Running")
@@ -379,10 +380,10 @@ class Run(AbstractBase):
         except (KeyError, TypeError):
             return "N/A"
 
-    def run(self, payload):
+    def run(self):
         self.service_run = Runner(
             self,
-            payload=payload,
+            payload=self.payload,
             service=self.service,
             is_main_run=True,
             restart_run=self.restart_run,
@@ -395,6 +396,8 @@ class Run(AbstractBase):
             task=self.task,
             trigger=self.trigger,
         )
+        self.payload = self.service_run.payload
+        db.session.commit()
         vs.run_targets.pop(self.runtime)
         return self.service_run.results
 

@@ -359,27 +359,14 @@ function openDeletionPanel() {
   } else if (nodeSelection == 1 || edgeSelection == 1) {
     deleteSelection();
   } else {
-    openPanel({
-      name: "workflow_deletion",
-      content: `
-        <div class="modal-body">
-          Are you sure you want to permanently remove the current selection
-          (<b>${nodeSelection} node${nodeSelection > 1 ? "s" : ""}
-          and ${edgeSelection} link${edgeSelection > 1 ? "s" : ""}</b>) ?
-        </div>
-        <div class="modal-footer">
-          <center>
-            <button
-              type="button"
-              class="btn btn-danger"
-              onclick="eNMS.workflowBuilder.deleteSelection()"
-            >
-              Delete
-            </button>
-          </center>
-        </div><br>`,
+    showConfirmationPanel({
+      id: `workflow_builder_deletion`,
       title: "Deletion from workflow",
-      size: "auto",
+      message: `Are you sure you want to permanently remove the current selection
+      (<b>${nodeSelection} node${nodeSelection > 1 ? "s" : ""}
+      and ${edgeSelection} link${edgeSelection > 1 ? "s" : ""}</b>) ?`,
+      confirmButton: "Delete",
+      onConfirm: deleteSelection
     });
   }
 }

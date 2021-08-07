@@ -262,7 +262,7 @@ class Run(AbstractBase):
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.SmallString, unique=True)
     restart_run_id = db.Column(Integer, ForeignKey("run.id"))
-    restart_run = relationship("Run", uselist=False, foreign_keys=restart_run_id)
+    restart_run = relationship("Run",  remote_side=[id], foreign_keys="Run.restart_run_id")
     start_services = db.Column(db.List)
     creator = db.Column(db.SmallString, default="")
     properties = db.Column(db.Dict)

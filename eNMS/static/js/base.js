@@ -331,8 +331,7 @@ export function showConfirmationPanel({
   title, 
   message, 
   confirmButton="Confirm", 
-  onConfirm, 
-  onCancel 
+  onConfirm
 }) {
   var content = `
   <div class="modal-body" style="max-width:600px">${message}</div>
@@ -347,7 +346,6 @@ export function showConfirmationPanel({
     title: title,
     content: content,
     size: "auto",
-    onclosed: onCancel,
   });
   $(".confirmAction").click(function () {
     onConfirm();

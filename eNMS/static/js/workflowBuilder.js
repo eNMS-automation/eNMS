@@ -445,7 +445,7 @@ function stopWorkflow() {
       id: currentRun.id,
       title: "Workflow Stop Confirmation",
       message: `The workflow run you are attempting to stop was started
-      by '${currentRun.creator}'.<br>Stop it anyway ?`,
+      by '${currentRun.creator}'.<br>Are you sure you want to stop it ?`,
       onConfirm: stop
     });
   } else {

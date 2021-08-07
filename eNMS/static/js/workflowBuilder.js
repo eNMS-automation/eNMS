@@ -443,8 +443,9 @@ function stopWorkflow() {
   if (currentRun?.status === "Running" && user.name !== currentRun?.creator) {
     showConfirmationPanel({
       id: currentRun.id,
-      title: "Please Confirm Workflow Stop",
-      message: `The runtime you are attempting to stop was started by '${currentRun.creator}'.\nPlease confirm you would still like to stop it.`,
+      title: "Workflow Stop Confirmation",
+      message: `The workflow run you are attempting to stop was started
+      by '${currentRun.creator}'.<br>Stop it anyway ?`,
       onConfirm: stop
     });
   } else {

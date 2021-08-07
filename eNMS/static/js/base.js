@@ -331,14 +331,12 @@ export function showConfirmationPanel({
   id,
   title, 
   message, 
-  confirmText="OK", 
+  confirmText="Confirm", 
   onConfirm, 
   onCancel 
 }) {
   var content = `
-  <div class="modal-body" style="max-width:400px">
-    ${message}
-  </div>
+  <div class="modal-body" style="max-width:600px">${message}</div>
   <div class="modal-footer">
     <center>
       <button type="button" class="btn btn-danger confirmAction">${confirmText}</button>
@@ -349,7 +347,7 @@ export function showConfirmationPanel({
     id: id,
     title: title,
     content: content,
-    size: "auto",
+    size: "auto 170px",
     onclosed: onCancel,
   });
   $(".confirmAction").click(function () {

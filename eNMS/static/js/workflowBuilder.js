@@ -25,6 +25,7 @@ import {
   openPanel,
   showInstancePanel,
   userIsActive,
+  showConfirmationPanel,
 } from "./base.js";
 import { clearSearch, tables, tableInstances } from "./table.js";
 
@@ -426,16 +427,28 @@ function saveEdge(edge) {
 }
 
 function stopWorkflow() {
-  call({
-    url: `/stop_workflow/${currentRuntime}`,
-    callback: (result) => {
-      if (!result) {
-        notify("The workflow is not currently running.", "error", 5);
-      } else {
-        notify("Workflow will stop after current service...", "success", 5);
+  const stop = function () {
+    call({
+      url: `/stop_workflow/${currentRuntime}`,
+      callback: (result) => {
+        if (!result) {
+          notify("The workflow is not currently running.", "error", 5);
+        } else {
+          notify("Workflow will stop after current service...", "success", 5);
+        }
       }
-    },
-  });
+    });
+  }
+  if (currentRun?.status === "Running" && user.name !== currentRun?.creator) {
+    showConfirmationPanel({
+      id: currentRun.id,
+      title: "Please Confirm Workflow Stop",
+      message: `The runtime you are attempting to stop was started by '${currentRun.creator}'.\nPlease confirm you would still like to stop it.`,
+      onConfirm: stop
+    });
+  } else {
+    stop();
+  }
 }
 
 function skipServices() {

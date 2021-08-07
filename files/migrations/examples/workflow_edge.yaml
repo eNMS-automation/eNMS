@@ -1302,3 +1302,20 @@
     Payload Extraction with Operations] 2021-08-07 08:40:56.266388', source: '[Payload
     Extraction with Operations] Validation 2', subtype: success, type: workflow_edge,
   workflow: Payload Extraction with Operations}
+- {color: green, destination: '[Restart Mechanism, payload + results recursive conservation]
+    Set Payload and Result', label: success, name: '2021-08-07 09:52:01.571590', source: '[Shared]
+    Start', subtype: success, type: workflow_edge, workflow: 'Restart Mechanism, payload
+    + results recursive conservation'}
+- {color: green, destination: '[Restart Mechanism, payload + results recursive conservation]
+    Get Payload 1', label: success, name: '2021-08-07 09:53:59.294791', source: '[Restart
+    Mechanism, payload + results recursive conservation] Set Payload and Result',
+  subtype: success, type: workflow_edge, workflow: 'Restart Mechanism, payload + results
+    recursive conservation'}
+- {color: green, destination: '[Restart Mechanism, payload + results recursive conservation]
+    Get Payload 2', label: success, name: '2021-08-07 09:54:00.027411', source: '[Restart
+    Mechanism, payload + results recursive conservation] Get Payload 1', subtype: success,
+  type: workflow_edge, workflow: 'Restart Mechanism, payload + results recursive conservation'}
+- {color: green, destination: '[Shared] End', label: success, name: '2021-08-07 09:54:01.065958',
+  source: '[Restart Mechanism, payload + results recursive conservation] Get Payload
+    2', subtype: success, type: workflow_edge, workflow: 'Restart Mechanism, payload
+    + results recursive conservation'}

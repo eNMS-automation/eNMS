@@ -178,7 +178,6 @@ const deleteInstance = function (type, id) {
   call({
     url: `/delete_instance/${type}/${id}`,
     callback: function (result) {
-      $(`#instance_deletion-${id}`).remove();
       if (type.includes("service") || type == "workflow") {
         type = "service";
         const path = localStorage.getItem("path");

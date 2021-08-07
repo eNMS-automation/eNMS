@@ -1408,7 +1408,7 @@ function showBulkDeletionPanel(tableId, model) {
     message: `Are you sure you want to permanently remove all items
       currently displayed in the table ?`,
     confirmButton: "Delete",
-    onConfirm: () => bulkDeletion(tableId, model)
+    onConfirm: () => bulkDeletion(tableId, model),
   });
 }
 

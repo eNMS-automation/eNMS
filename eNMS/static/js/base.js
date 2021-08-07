@@ -326,12 +326,12 @@ export function openPanel({
   $(panel).css({ ...position, ...css });
 }
 
-export function showConfirmationPanel({ 
+export function showConfirmationPanel({
   id,
-  title, 
-  message, 
-  confirmButton="Confirm", 
-  onConfirm
+  title,
+  message,
+  confirmButton = "Confirm",
+  onConfirm,
 }) {
   var content = `
   <div class="modal-body" style="max-width:600px">${message}</div>
@@ -419,7 +419,7 @@ function showDeletionPanel(instance) {
     title: `Delete ${instance.type} '${instance.name}'`,
     message: "Are you sure you want to permanently remove this item ?",
     confirmButton: "Delete",
-    onConfirm: () => deleteInstance(instance.type, instance.id)
+    onConfirm: () => deleteInstance(instance.type, instance.id),
   });
 }
 

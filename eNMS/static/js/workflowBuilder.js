@@ -366,7 +366,7 @@ function openDeletionPanel() {
       (<b>${nodeSelection} node${nodeSelection > 1 ? "s" : ""}
       and ${edgeSelection} link${edgeSelection > 1 ? "s" : ""}</b>) ?`,
       confirmButton: "Delete",
-      onConfirm: deleteSelection
+      onConfirm: deleteSelection,
     });
   }
 }
@@ -424,16 +424,16 @@ function stopWorkflow() {
         } else {
           notify("Workflow will stop after current service...", "success", 5);
         }
-      }
+      },
     });
-  }
+  };
   if (currentRun?.status === "Running" && user.name !== currentRun?.creator) {
     showConfirmationPanel({
       id: currentRun.id,
       title: "Workflow Stop Confirmation",
       message: `The workflow run you are attempting to stop was started
       by '${currentRun.creator}'.<br>Are you sure you want to stop it ?`,
-      onConfirm: stop
+      onConfirm: stop,
     });
   } else {
     stop();

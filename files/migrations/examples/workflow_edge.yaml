@@ -1319,3 +1319,16 @@
   source: '[Restart Mechanism, payload + results recursive conservation] Get Payload
     2', subtype: success, type: workflow_edge, workflow: 'Restart Mechanism, payload
     + results recursive conservation'}
+- {color: green, destination: '[Restart Mechanism, payload + results recursive conservation]
+    Get Result 1', label: success, name: '2021-08-07 09:56:13.245261', source: '[Restart
+    Mechanism, payload + results recursive conservation] Set Payload and Result',
+  subtype: success, type: workflow_edge, workflow: 'Restart Mechanism, payload + results
+    recursive conservation'}
+- {color: green, destination: '[Restart Mechanism, payload + results recursive conservation]
+    Get Result 2', label: success, name: '2021-08-07 09:56:41.835404', source: '[Restart
+    Mechanism, payload + results recursive conservation] Get Result 1', subtype: success,
+  type: workflow_edge, workflow: 'Restart Mechanism, payload + results recursive conservation'}
+- {color: green, destination: '[Shared] End', label: success, name: '2021-08-07 09:56:43.189384',
+  source: '[Restart Mechanism, payload + results recursive conservation] Get Result
+    2', subtype: success, type: workflow_edge, workflow: 'Restart Mechanism, payload
+    + results recursive conservation'}

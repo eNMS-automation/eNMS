@@ -190,7 +190,7 @@
     'Regression Workflow: Workflow of Workflows': *id043
     'Regression Workflow: multiple parallel connections to same device': *id044
     'Regression workflow P: large workflow (scalability)': *id033
-    Restart Mechanism, payload + results recursive conservation: [-222, -11]
+    Restart Mechanism, payload + results recursive conservation: [-238, -178]
     Scalability Test (large workflow): *id033
     Scrapli Netconf Service: *id045
     Scrapli Service: *id034
@@ -23501,7 +23501,7 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels: {}
-  last_modified: '2021-08-07 09:54:26.703042'
+  last_modified: '2021-08-07 09:56:51.878754'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -23537,12 +23537,14 @@
   services: ['[Shared] Start', '[Shared] End', '[Restart Mechanism, payload + results
       recursive conservation] Set Payload and Result', '[Restart Mechanism, payload
       + results recursive conservation] Get Payload 1', '[Restart Mechanism, payload
-      + results recursive conservation] Get Payload 2']
+      + results recursive conservation] Get Payload 2', '[Restart Mechanism, payload
+      + results recursive conservation] Get Result 1', '[Restart Mechanism, payload
+      + results recursive conservation] Get Result 2']
   shared: false
   skip: {}
   skip_query: ''
   skip_value: success
-  target_devices: [Jackson]
+  target_devices: [Jackson, Chicago]
   target_pools: []
   time_between_retries: 10
   type: workflow
@@ -23602,7 +23604,7 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    Restart Mechanism, payload + results recursive conservation: [-64, -14]
+    Restart Mechanism, payload + results recursive conservation: [-255, 25]
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''
@@ -23679,7 +23681,7 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    Restart Mechanism, payload + results recursive conservation: [119, -121]
+    Restart Mechanism, payload + results recursive conservation: [36, -178]
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''
@@ -23755,7 +23757,7 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    Restart Mechanism, payload + results recursive conservation: [371, -121]
+    Restart Mechanism, payload + results recursive conservation: [394, -170]
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''
@@ -23772,6 +23774,158 @@
   skip_value: success
   source_code: "\r\n\r\nresult = {}\r\nresults[\"success\"] = var2\r\nresults[\"result\"\
     ] = result"
+  target_devices: []
+  target_pools: []
+  time_between_retries: 10
+  type: python_snippet_service
+  update_pools_after_running: false
+  update_target_pools: false
+  validation_condition: none
+  validation_method: text
+  validation_section: results['result']
+  vendor: ''
+  waiting_time: 0
+- access_groups: admin
+  completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credential_type: any
+  default_access: creator
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2021-08-07 09:56:09.506269'
+  log_level: 1
+  mail_recipient: ''
+  mandatory_parametrization: false
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Restart Mechanism, payload + results recursive conservation] Get Result
+    1'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
+    \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
+    \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
+    \ = StringField('Device Query', python=True, widget=TextArea(), render_kw={'rows':\
+    \ 2})\r\ndevice_query_property = SelectField('Query Property Type', choices=(('name',\
+    \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
+    \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
+    \ default=15)"
+  pools: ['All devices, links, services and users']
+  positions:
+    Restart Mechanism, payload + results recursive conservation: [77, 130]
+  postprocessing: ''
+  postprocessing_mode: success
+  preprocessing: ''
+  priority: 1
+  reply_to: ''
+  reserved: false
+  run_method: once
+  scoped_name: Get Result 1
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: success
+  source_code: "\r\n\r\nresult = {}\r\nresults[\"success\"] = get_result(\"Set Payload\
+    \ and Result\")[\"result\"][\"result1\"]\r\nresults[\"result\"] = result"
+  target_devices: []
+  target_pools: []
+  time_between_retries: 10
+  type: python_snippet_service
+  update_pools_after_running: false
+  update_target_pools: false
+  validation_condition: none
+  validation_method: text
+  validation_section: results['result']
+  vendor: ''
+  waiting_time: 0
+- access_groups: admin
+  completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credential_type: any
+  default_access: creator
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2021-08-07 09:56:29.243853'
+  log_level: 1
+  mail_recipient: ''
+  mandatory_parametrization: false
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Restart Mechanism, payload + results recursive conservation] Get Result
+    2'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
+    \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
+    \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
+    \ = StringField('Device Query', python=True, widget=TextArea(), render_kw={'rows':\
+    \ 2})\r\ndevice_query_property = SelectField('Query Property Type', choices=(('name',\
+    \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
+    \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
+    \ default=15)"
+  pools: ['All devices, links, services and users']
+  positions:
+    Restart Mechanism, payload + results recursive conservation: [410, 129]
+  postprocessing: ''
+  postprocessing_mode: success
+  preprocessing: ''
+  priority: 1
+  reply_to: ''
+  reserved: false
+  run_method: once
+  scoped_name: Get Result 2
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: success
+  source_code: "\r\n\r\nresult = {}\r\nresults[\"success\"] = get_result(\"Set Payload\
+    \ and Result\")[\"result\"][\"result2\"]\r\nresults[\"result\"] = result"
   target_devices: []
   target_pools: []
   time_between_retries: 10

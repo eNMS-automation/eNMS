@@ -350,13 +350,10 @@ export function showConfirmationPanel({
     title: title,
     content: content,
     size: "auto",
+    onclosed: onCancel,
   });
   $(".confirmAction").click(function () {
-    if (typeof onConfirm === "function") onConfirm();
-    $(`#${panelName}`).remove();
-  });
-  $(".cancelAction, .jsPanel-btn-close").click(function () {
-    if (typeof onCancel === "function") onCancel();
+    onConfirm();
     $(`#${panelName}`).remove();
   });
 }

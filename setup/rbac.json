@@ -119,6 +119,7 @@
     "/changelog_table": "access",
     "/compare_form": "access",
     "/configuration_table": "access",
+    "/confirmation_form": "access",
     "/credential_table": "admin",
     "/dashboard": "all",
     "/device_data_form": "access",

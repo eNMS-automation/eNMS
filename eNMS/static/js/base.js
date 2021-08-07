@@ -344,9 +344,9 @@ export function showConfirmationPanel({
       <button type="button" class="btn btn-danger confirmAction">${confirmText}</button>
     </center>
   </div><br>`;
-  var panelName = `confirmation_modal-${id}`;
   openPanel({
-    name: panelName,
+    name: "confirmation",
+    id: id,
     title: title,
     content: content,
     size: "auto",

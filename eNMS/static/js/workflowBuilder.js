@@ -279,6 +279,7 @@ export const switchToWorkflow = function (path, direction, runtime, selection) {
     url: `/get_service_state/${path}/${runtime || "latest"}`,
     callback: function (result) {
       workflow = result.service;
+      currentRun = result.run;
       if (page == "workflow_builder") {
         if (workflow?.superworkflow) {
           if (!currentPath.includes(workflow.superworkflow.id)) {

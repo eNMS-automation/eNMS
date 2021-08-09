@@ -567,7 +567,7 @@ class Controller:
         }
 
     def get_service_state(self, path, runtime=None):
-        service_id, state = path.split(">")[-1], None
+        service_id, state, run = path.split(">")[-1], None, None
         service = db.fetch("service", id=service_id, allow_none=True)
         if not service:
             raise db.rbac_error
@@ -586,6 +586,7 @@ class Controller:
                 set((run.parent_runtime, run.ui_name) for run in runs), reverse=True
             ),
             "state": state,
+            "run": getattr(run, "serialized", None),
             "runtime": runtime,
         }
 

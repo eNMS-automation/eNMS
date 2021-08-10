@@ -54,12 +54,12 @@
     role="navigation"
   >
     <div style="width: 100%; margin: 0px;">
-        <select
-          id="current-workflow"
-          class="form-control"
-          data-dropdown-align-right="true"
-          data-size="20"
-        ></select>
+      <select
+        id="current-workflow"
+        class="form-control"
+        data-dropdown-align-right="true"
+        data-size="20"
+      ></select>
     </div>
     <ul class="pagination" style="margin: 0px; padding-top: 10px;">
       <li>
@@ -110,14 +110,6 @@
       <li>
         <a onclick="action['Delete']()" data-tooltip="Delete" style="cursor: pointer;"
           ><span class="glyphicon glyphicon-trash"></span
-        ></a>
-      </li>
-      <li>
-        <a
-          onclick="action['Workflow Result Comparison']()"
-          data-tooltip="Result Comparison"
-          style="cursor: pointer;"
-          ><span class="fa fa-adjust"></span
         ></a>
       </li>
       <li>
@@ -192,6 +184,14 @@
           data-tooltip="Result Tree"
           style="cursor: pointer;"
           ><span class="glyphicon glyphicon-list-alt"></span
+        ></a>
+      </li>
+      <li>
+        <a
+          onclick="action['Workflow Result Comparison']()"
+          data-tooltip="Result Comparison"
+          style="cursor: pointer;"
+          ><span class="fa fa-adjust"></span
         ></a>
       </li>
       <li>

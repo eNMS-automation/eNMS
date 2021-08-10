@@ -28,11 +28,11 @@ class GitService(Service):
             if self.relative_path
             else self.git_repository
         )
-        if self.pull:
-            repo.remotes.origin.pull()
         if self.add_commit:
             repo.git.add(A=True)
             repo.git.commit(m=self.commit_message)
+        if self.pull:
+            repo.remotes.origin.pull()
         if self.push:
             repo.remotes.origin.push()
         return {"success": True}

@@ -164,10 +164,18 @@
     style="padding-bottom: 2px; margin-left: 10px"
     role="navigation"
   >
-    <div style="width: 244px;">
+    <div style="width: 100%;">
       <select id="current-runtime" class="form-control" data-size="20"></select>
     </div>
     <ul class="pagination" style="margin: 0px; padding-top: 10px;">
+      <li>
+        <a
+          onclick="action['Runtimes Display']()"
+          data-tooltip="Displayed Runtimes: only my own"
+          style="cursor: pointer;"
+          ><span class="fa fa-user"></span
+        ></a>
+      </li>
       <li>
         <a
           onclick="action['Workflow Logs']()"

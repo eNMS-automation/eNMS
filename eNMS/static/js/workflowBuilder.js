@@ -69,7 +69,7 @@ let graph;
 let selectedObject;
 let ends = new Set();
 let currentMode = "motion";
-let runtimeDisplay = localStorage.getItem("runtimeDisplay") || "user";
+let runtimeDisplay;
 export let creationMode;
 let mousePosition;
 let currentLabel;
@@ -175,9 +175,10 @@ function updateRuntimes(result) {
   $("#current-runtime").selectpicker("refresh");
 }
 
-function flipRuntimeDisplay() {
-  runtimeDisplay = runtimeDisplay == "all" ? "user" : "all";
+function flipRuntimeDisplay(display) {
+  runtimeDisplay = display || (runtimeDisplay == "users" ? "user" : "users");
   localStorage.setItem("runtimeDisplay", runtimeDisplay);
+  $("#runtime-display-icon").attr("class", `fa fa-${runtimeDisplay}`);
 }
 
 const rectangleSelection = (container, network, nodes) => {
@@ -1109,6 +1110,7 @@ export function initWorkflowBuilder() {
     this.view.moveTo(animationOptions);
   };
   loadServiceTypes();
+  flipRuntimeDisplay(localStorage.getItem("runtimeDisplay") || "user");
   $("#left-arrow,#right-arrow").addClass("disabled");
   $("#edge-type").on("change", function () {
     switchMode(this.value);

@@ -69,6 +69,7 @@ let graph;
 let selectedObject;
 let ends = new Set();
 let currentMode = "motion";
+let runtimeDisplay = localStorage.getItem("runtimeDisplay") || "user";
 export let creationMode;
 let mousePosition;
 let currentLabel;
@@ -174,6 +175,11 @@ function updateRuntimes(result) {
   $("#current-runtime").selectpicker("refresh");
 }
 
+function flipRuntimeDisplay() {
+  runtimeDisplay = runtimeDisplay == "all" ? "user" : "all";
+  localStorage.setItem("runtimeDisplay", runtimeDisplay);
+}
+
 const rectangleSelection = (container, network, nodes) => {
   const offsetLeft = container.position().left - container.offset().left;
   const offsetTop = container.position().top - container.offset().top;
@@ -276,7 +282,8 @@ export const switchToWorkflow = function (path, direction, runtime, selection) {
     return;
   }
   call({
-    url: `/get_service_state/${path}/${runtime || "latest"}`,
+    url: `/get_service_state/${path}`,
+    data: {display: runtimeDisplay, runtime: runtime || "latest"},
     callback: function (result) {
       workflow = result.service;
       currentRun = result.run;
@@ -689,6 +696,7 @@ function updateRightClickBindings() {
     "Add to Workflow": addServicePanel,
     "Stop Workflow": () => stopWorkflow(),
     Delete: openDeletionPanel,
+    "Runtimes Display": flipRuntimeDisplay,
     "Service Name": (service) => copyToClipboard({ text: service.name }),
     "Top-level Result": getResultLink,
     "Per-device Result": (node) => getResultLink(node, true),
@@ -810,6 +818,7 @@ function colorService(id, color) {
 export function getServiceState(id, first) {
   call({
     url: `/get_service_state/${id}`,
+    data: {display: runtimeDisplay},
     callback: function (result) {
       if (first || result.state.status == "Running") {
         colorService(id, "#89CFF0");
@@ -927,7 +936,8 @@ function getWorkflowState(periodic, first) {
   const runtime = $("#current-runtime").val();
   if (userIsActive && workflow?.id && !first) {
     call({
-      url: `/get_service_state/${currentPath}/${runtime}`,
+      url: `/get_service_state/${currentPath}`,
+      data: {display: runtimeDisplay, runtime: runtime},
       callback: function (result) {
         if (!Object.keys(result).length || result.service.id != workflow.id) return;
         currentRun = result.run;

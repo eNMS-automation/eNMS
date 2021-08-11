@@ -556,14 +556,14 @@ class Controller:
             "line": int(start_line) + number_of_lines,
         }
 
-    def get_service_state(self, path, runtime=None):
+    def get_service_state(self, path, **kwargs):
         service_id, state, run = path.split(">")[-1], None, None
+        runtime, display = kwargs.get("runtime"), kwargs["display"]
         service = db.fetch("service", id=service_id, allow_none=True)
         if not service:
             raise db.rbac_error
-        runs = (
-            db.query("run").filter(vs.models["run"].services.any(id=service_id)).all()
-        )
+        runs = db.query("run").filter(vs.models["run"].services.any(id=service_id))
+        runs = runs.all()
         if runtime != "normal" and runs:
             if runtime == "latest":
                 run = sorted(runs, key=attrgetter("runtime"), reverse=True)[0]

@@ -158,12 +158,15 @@ export function displayWorkflow(workflowData) {
 
 function updateRuntimes(result) {
   currentPlaceholder = result.state?.[currentPath]?.placeholder;
-  const currentRuntime = $("#current-runtime").val();
+  let currentRuntime = $("#current-runtime").val();
+  const displayedRuntimes = result.runtimes.map((runtime) => runtime[0]);
+  if (!displayedRuntimes.includes(currentRuntime)) currentRuntime = "latest";
   $("#current-runtime").empty();
   $("#current-runtime").append("<option value='normal'>Normal Display</option>");
   $("#current-runtime").append("<option value='latest'>Latest Runtime</option>");
-  result.runtimes.forEach((r) => {
-    $("#current-runtime").append(`<option value='${r[0]}'>${r[1]}</option>`);
+  result.runtimes.forEach((runtime) => {
+    const option = `<option value='${runtime[0]}'>${runtime[1]}</option>`
+    $("#current-runtime").append(option);
   });
   if (placeholder && currentPlaceholder) {
     nodes.update({

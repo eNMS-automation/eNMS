@@ -563,6 +563,8 @@ class Controller:
         if not service:
             raise db.rbac_error
         runs = db.query("run").filter(vs.models["run"].services.any(id=service_id))
+        if display == "user":
+            runs = runs.filter(vs.models["run"].creator == current_user.name)
         runs = runs.all()
         if runtime != "normal" and runs:
             if runtime == "latest":

@@ -179,6 +179,7 @@ function flipRuntimeDisplay(display) {
   runtimeDisplay = display || (runtimeDisplay == "users" ? "user" : "users");
   localStorage.setItem("runtimeDisplay", runtimeDisplay);
   $("#runtime-display-icon").attr("class", `fa fa-${runtimeDisplay}`);
+  switchToWorkflow(currentPath);
 }
 
 const rectangleSelection = (container, network, nodes) => {

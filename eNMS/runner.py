@@ -801,7 +801,7 @@ class Runner:
             if not run:
                 return None
             query = db.session.query(vs.models["result"]).filter(
-                vs.models["result"].parent_runtime == run.parent_runtime
+                vs.models["result"].parent_runtime == run.runtime
             )
             if workflow or self.workflow:
                 name = workflow or self.workflow.name

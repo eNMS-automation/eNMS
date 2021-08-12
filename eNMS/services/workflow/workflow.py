@@ -78,6 +78,7 @@ class Workflow(Service):
             service_clone.positions[clone.name] = service.positions.get(
                 self.name, (0, 0)
             )
+            service_clone.skip[clone.name] = service.skip.get(self.name, False)
             clone_services[service.id] = service_clone
         db.session.commit()
         for edge in self.edges:

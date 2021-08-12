@@ -413,7 +413,7 @@ function displayLogs(service, runtime, change) {
 
 function displayResultsTree(service, runtime) {
   call({
-    url: `/get_workflow_results/${service.id}/${runtime}`,
+    url: `/get_workflow_results/${runtime}`,
     callback: function (data) {
       $(`#result-tree-${service.id}`).jstree("destroy").empty();
       let tree = $(`#result-tree-${service.id}`).jstree({

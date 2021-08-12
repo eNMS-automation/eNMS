@@ -644,7 +644,7 @@ class Controller:
             or (view == "geographical_view" and (pool.devices or pool.links))
         ]
 
-    def get_workflow_results(self, workflow, runtime):
+    def get_workflow_results(self, runtime):
         run = db.fetch("run", runtime=runtime)
         state = run.state
 

@@ -1,5 +1,5 @@
-import traceback
 from sqlalchemy import ForeignKey, Integer
+from traceback import extract_tb, format_exc
 from wtforms.widgets import TextArea
 
 from eNMS.database import db
@@ -43,11 +43,11 @@ class PythonSnippetService(Service):
         except SystemExit:
             pass
         except Exception as exc:
-            line_number = traceback.extract_tb(exc.__traceback__)[-1][1]
+            line_number = extract_tb(exc.__traceback__)[-1][1]
             run.log("info", f"Execution error(line {line_number}): {str(exc)}")
             return {
                 "success": False,
-                "result": {"step": "execute", "error": str(exc), "result": results},
+                "result": {"step": "execute", "error": str(exc), "result": results, "traceback": format_exc()},
             }
 
         if not results:

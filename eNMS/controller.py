@@ -570,12 +570,12 @@ class Controller:
             if runtime == "latest":
                 run = sorted(runs, key=attrgetter("runtime"), reverse=True)[0]
             else:
-                run = db.fetch("run", allow_none=True, parent_runtime=runtime)
+                run = db.fetch("run", allow_none=True, runtime=runtime)
             state = run.get_state() if run else None
         return {
             "service": service.to_dict(include=["services", "edges", "superworkflow"]),
             "runtimes": sorted(
-                set((run.parent_runtime, run.name) for run in runs), reverse=True
+                set((run.runtime, run.name) for run in runs), reverse=True
             ),
             "state": state,
             "run": getattr(run, "serialized", None),
@@ -645,7 +645,7 @@ class Controller:
         ]
 
     def get_workflow_results(self, workflow, runtime):
-        run = db.fetch("run", parent_runtime=runtime)
+        run = db.fetch("run", runtime=runtime)
         state = run.state
 
         def rec(service, path=str(run.service_id)):
@@ -1145,9 +1145,9 @@ class Controller:
         run = db.fetch("run", allow_none=True, runtime=runtime)
         if run and run.status == "Running":
             if env.redis_queue:
-                env.redis("set", f"stop/{run.parent_runtime}", "true")
+                env.redis("set", f"stop/{runtime}", "true")
             else:
-                vs.run_stop[run.parent_runtime] = True
+                vs.run_stop[runtime] = True
             return True
 
     def switch_menu(self, user_id):

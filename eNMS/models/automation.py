@@ -280,7 +280,6 @@ class Run(AbstractBase):
         "Run", remote_side=[id], foreign_keys="Run.parent_id", back_populates="children"
     )
     children = relationship("Run", foreign_keys="Run.parent_id")
-    parent_runtime = db.Column(db.TinyString, index=True)
     path = db.Column(db.TinyString)
     parent_device_id = db.Column(Integer, ForeignKey("device.id"))
     parent_device = relationship("Device", foreign_keys="Run.parent_device_id")
@@ -303,7 +302,6 @@ class Run(AbstractBase):
 
     def __init__(self, **kwargs):
         self.runtime = kwargs.get("runtime") or vs.get_time()
-        self.parent_runtime = self.runtime
         super().__init__(**kwargs)
         if not self.name:
             self.name = f"{self.runtime} ({self.creator})"
@@ -354,7 +352,7 @@ class Run(AbstractBase):
         if self.state:
             return self.state
         elif env.redis_queue:
-            keys = env.redis("keys", f"{self.parent_runtime}/state/*")
+            keys = env.redis("keys", f"{self.runtime}/state/*")
             if not keys:
                 return {}
             data, state = list(zip(keys, env.redis("mget", *keys))), {}
@@ -367,7 +365,7 @@ class Run(AbstractBase):
                 inner_store[last_key] = value
             return state
         else:
-            return vs.run_states[self.parent_runtime]
+            return vs.run_states[self.runtime]
 
     @property
     def progress(self):

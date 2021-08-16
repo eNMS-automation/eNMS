@@ -46,7 +46,7 @@
   pools: ['All devices, links, services and users']
   positions:
     Advanced Iteration Targets: &id009 [-131, -24]
-    Advanced Multiprocessing (admin): &id005 [-492, -39]
+    Advanced Multiprocessing (admin): [-492, -39]
     Ansible with Validation: &id003 [-557, -5]
     Basic Iteration Targets with Netmiko: [-308, -231]
     Conditional Skip Query in Failed and Discard Modes: &id012 [-205, -81]
@@ -97,7 +97,7 @@
     'Regression Workflow 9: Operational Data Backup (admin)': *id004
     'Regression Workflow A: get_var, set_var, get_result': &id042 [-506, -55]
     'Regression Workflow B: Napalm getters validation': !!python/tuple [0, 0]
-    'Regression Workflow C: Advanced multiprocessing': *id005
+    'Regression Workflow C: Advanced multiprocessing': &id005 [-492, -39]
     'Regression Workflow C: Advanced multiprocessing (admin)': *id005
     'Regression Workflow D: Prompts': *id006
     'Regression Workflow E: Iteration Targets': *id007
@@ -386,7 +386,7 @@
   pools: ['All devices, links, services and users']
   positions:
     Advanced Iteration Targets: &id073 [350, -6]
-    Advanced Multiprocessing (admin): &id069 [505, -10]
+    Advanced Multiprocessing (admin): [505, -10]
     Ansible with Validation: &id067 [567, -24]
     Basic Iteration Targets with Netmiko: [596, -221]
     Conditional Skip Query in Failed and Discard Modes: &id076 [640, -155]
@@ -437,7 +437,7 @@
     'Regression Workflow 9: Operational Data Backup (admin)': *id068
     'Regression Workflow A: get_var, set_var, get_result': &id106 [-528, 25]
     'Regression Workflow B: Napalm getters validation': !!python/tuple [0, 0]
-    'Regression Workflow C: Advanced multiprocessing': *id069
+    'Regression Workflow C: Advanced multiprocessing': &id069 [505, -10]
     'Regression Workflow C: Advanced multiprocessing (admin)': *id069
     'Regression Workflow D: Prompts': *id070
     'Regression Workflow E: Iteration Targets': *id071
@@ -821,9 +821,9 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    Advanced Multiprocessing (admin): &id130 [-266, -204]
+    Advanced Multiprocessing (admin): [-266, -204]
     'Regression Workflow 2: Separate Failure - Success paths': &id131 [741, 106]
-    'Regression Workflow C: Advanced multiprocessing': *id130
+    'Regression Workflow C: Advanced multiprocessing': &id130 [-266, -204]
     'Regression Workflow C: Advanced multiprocessing (admin)': *id130
     'Regression Workflow: Advanced Multiprocessing (admin)': *id130
     'Regression Workflow: Separate Failure - Success Paths': *id131
@@ -914,8 +914,8 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    Advanced Multiprocessing (admin): &id132 [299, -170]
-    'Regression Workflow C: Advanced multiprocessing': *id132
+    Advanced Multiprocessing (admin): [299, -170]
+    'Regression Workflow C: Advanced multiprocessing': &id132 [299, -170]
     'Regression Workflow C: Advanced multiprocessing (admin)': *id132
     'Regression Workflow: Advanced Multiprocessing (admin)': *id132
   postprocessing: ''
@@ -930,7 +930,7 @@
   send_notification: false
   send_notification_method: mail
   shared: false
-  skip: {'Regression Workflow C: Advanced multiprocessing': true}
+  skip: {Advanced Multiprocessing (admin): true, 'Regression Workflow C: Advanced multiprocessing': true}
   skip_query: ''
   skip_value: success
   start_new_connection: false
@@ -1507,12 +1507,12 @@
     c: ['1', '2', '3']
   pools: ['All devices, links, services and users']
   positions:
-    Advanced Multiprocessing (admin): &id139 [386, 124]
+    Advanced Multiprocessing (admin): [386, 124]
     Netmiko Prompts: &id140 [405, -103]
     'Regression Workflow 2: Separate Failure - Success paths': &id142 [374, 278]
     'Regression Workflow 3: Napalm getters (postprocessing)': ['-50', '0']
     'Regression Workflow A: get_var, set_var, get_result': &id144 [-10, 157]
-    'Regression Workflow C: Advanced multiprocessing': *id139
+    'Regression Workflow C: Advanced multiprocessing': &id139 [386, 124]
     'Regression Workflow C: Advanced multiprocessing (admin)': *id139
     'Regression Workflow D: Prompts': *id140
     'Regression Workflow L: superworkflow': &id143 [162, -126]
@@ -3189,8 +3189,8 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    Advanced Multiprocessing (admin): &id172 [-315, 157]
-    'Regression Workflow C: Advanced multiprocessing': *id172
+    Advanced Multiprocessing (admin): [-315, 157]
+    'Regression Workflow C: Advanced multiprocessing': &id172 [-315, 157]
     'Regression Workflow C: Advanced multiprocessing (admin)': *id172
     'Regression Workflow F: Workflow of Workflows': [678, 52]
     'Regression Workflow: Advanced Multiprocessing (admin)': *id172
@@ -4326,15 +4326,21 @@
   labels:
     0ff12571-5530-428f-9f4e-d09f6cb963d6:
       alignment: left
-      content: "This workflow runs on 17 devices with multiprocessing activated (10\
-        \ processes).\r\nWashington is expected to pass the \"show version\" service,\
-        \ but will\r\nstill reach the end through the upward path, so all 17 devices\
-        \ must\r\nreach the \"End\" service."
-      positions: [-98, -39]
+      content: "It runs on 17 devices in DxD mode with 10 processes.\r\nThe devices\
+        \ that are up are expected to pass the \"show version\" service,\r\nbut they\
+        \ will still reach the end through the upward path, so all\r\n17 devices must\
+        \ reach the \"End\" service and pass the workflow."
+      positions: [-5, -5]
+    682828ea-f876-4028-8bf9-eb67ac8e520b:
+      alignment: left
+      content: "This workflow is testing :\r\n- that multiprocessing is working correctly\r\
+        \n- that a skipped service do not prevent the devices from moving\r\nforward\
+        \ throughout the workflow."
+      positions: [-33, -78]
     d36009d8-ce3a-4ce6-8766-5dc3241d777b:
       content: The service "Napalm configure BGP" is configured to be skipped.
       positions: [329, -230]
-  last_modified: '2021-08-07 08:46:43.886780'
+  last_modified: '2021-08-16 08:52:15.659950'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false

@@ -5906,18 +5906,26 @@
   labels:
     13d32f97-9185-4863-adf0-0a741471f8fc:
       alignment: left
-      content: "The iteration value field is set the \"dict_iteration\" variable via\
-        \ get_result,\r\nwith the iteration variable name set to \"command_dict\"\
+      content: "The iteration value field is set to the \"dict_iteration\" variable\
+        \ via get_result,\r\nwith the iteration variable name set to \"command_dict\"\
         .\r\nThe service uses netmiko to show the vrf \"test\" and \"test2\", via\r\
         \nthe command \"show vrf {{command_dict[\"command\"]}}\"."
-      positions: [488, 88]
+      positions: [454, 90]
+    9a8d7756-d57d-48bd-97fe-1f3df896110c:
+      alignment: left
+      content: "This workflow is testing a specific case of the iteration target mechanism,\r\
+        \nwhere the iteration variable is a dictionary: eNMS iterates over the values\r\
+        \nof the dictionary.\r\nThe workflow proceeds to using the dictionary values\
+        \ with netmiko to\r\nshow the associated VRFs via the \"show vrf {{...}}\"\
+        \ command."
+      positions: [150, -174]
     f93c7a5d-e43f-43a6-b392-fe75c02ab798:
       alignment: left
-      content: "Set the \"result\" value to the following dictionnary:\r\n\"dict_iteration\"\
+      content: "Set the \"result\" value to the following dictionary:\r\n\"dict_iteration\"\
         : {\r\n    \"variable1\": {\"command\": \"test\"},\r\n    \"variable2\": {\"\
         command\": \"test2\"}\r\n}"
-      positions: [-171, 97]
-  last_modified: '2021-08-16 08:37:36.059452'
+      positions: [-111, 83]
+  last_modified: '2021-08-16 08:42:29.667529'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false

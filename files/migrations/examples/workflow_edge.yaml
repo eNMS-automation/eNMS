@@ -296,18 +296,19 @@
   name: '[Regression Workflow: Ansible with Validation] 2021-04-24 08:58:40.197355',
   source: '[Shared] Start', subtype: success, type: workflow_edge, workflow: Ansible
     with Validation}
-- {color: green, destination: '[Advanced Iteration Targets] Set Variables for Iteration',
-  label: success, name: '[Regression Workflow: Advanced Iteration Targets] 2021-04-24
-    08:58:40.197373', source: '[Shared] Start', subtype: success, type: workflow_edge,
-  workflow: Advanced Iteration Targets}
-- {color: green, destination: '[Advanced Iteration Targets] Show VRF with iteration',
-  label: success, name: '[Regression Workflow: Advanced Iteration Targets] 2021-04-24
-    08:58:40.197390', source: '[Advanced Iteration Targets] Set Variables for Iteration',
-  subtype: success, type: workflow_edge, workflow: Advanced Iteration Targets}
+- {color: green, destination: '[Iteration Targets with a Dictionary] Set Variables
+    for Iteration', label: success, name: '[Regression Workflow: Advanced Iteration
+    Targets] 2021-04-24 08:58:40.197373', source: '[Shared] Start', subtype: success,
+  type: workflow_edge, workflow: Iteration Targets with a Dictionary}
+- {color: green, destination: '[Iteration Targets with a Dictionary] Show VRF with
+    iteration', label: success, name: '[Regression Workflow: Advanced Iteration Targets]
+    2021-04-24 08:58:40.197390', source: '[Iteration Targets with a Dictionary] Set
+    Variables for Iteration', subtype: success, type: workflow_edge, workflow: Iteration
+    Targets with a Dictionary}
 - {color: green, destination: '[Shared] End', label: success, name: '[Regression Workflow:
-    Advanced Iteration Targets] 2021-04-24 08:58:40.197405', source: '[Advanced Iteration
-    Targets] Show VRF with iteration', subtype: success, type: workflow_edge, workflow: Advanced
-    Iteration Targets}
+    Advanced Iteration Targets] 2021-04-24 08:58:40.197405', source: '[Iteration Targets
+    with a Dictionary] Show VRF with iteration', subtype: success, type: workflow_edge,
+  workflow: Iteration Targets with a Dictionary}
 - {color: green, destination: '[Workflow and Subworkflow Iteration] Test Iteration',
   label: success, name: '[Regression Workflow: Workflow and Subworkflow Iteration]
     2021-04-24 08:58:40.197446', source: '[Shared] Start', subtype: success, type: workflow_edge,

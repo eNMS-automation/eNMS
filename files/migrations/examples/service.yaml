@@ -48,6 +48,7 @@
     Advanced Iteration Targets: &id009 [-131, -24]
     Advanced Multiprocessing (admin): &id005 [-492, -39]
     Ansible with Validation: &id003 [-557, -5]
+    Basic Iteration Targets with Netmiko: [-308, -231]
     Conditional Skip Query in Failed and Discard Modes: &id012 [-205, -81]
     Credentials (Password & Key, Priority Mechanism): &id014 [-157, 96]
     Data Extraction Service: &id015 [-421, 129]
@@ -59,6 +60,7 @@
     Global get_credential Function and Log Obfuscation: &id020 [-477, -78]
     Iteration Services Test Workflow: ['-359', '-163']
     Iteration Targets Mechanism: &id007 [-342, -252]
+    Iteration Targets with a Dictionary: [-308, -231]
     Link Neighbors Mechanism (public): &id001 [-273, -126]
     Multiple parallel connections to same device: &id044 [-339, -168]
     NCClient Netconf Service: &id021 [-448, -185]
@@ -386,6 +388,7 @@
     Advanced Iteration Targets: &id073 [350, -6]
     Advanced Multiprocessing (admin): &id069 [505, -10]
     Ansible with Validation: &id067 [567, -24]
+    Basic Iteration Targets with Netmiko: [596, -221]
     Conditional Skip Query in Failed and Discard Modes: &id076 [640, -155]
     Credentials (Password & Key, Priority Mechanism): &id078 [590, 124]
     Data Extraction Service: &id079 [365, 216]
@@ -397,6 +400,7 @@
     Global get_credential Function and Log Obfuscation: &id084 [591, -45]
     Iteration Services Test Workflow: ['-9', '294']
     Iteration Targets Mechanism: &id071 [-334, 29]
+    Iteration Targets with a Dictionary: [596, -221]
     Link Neighbors Mechanism (public): &id065 [713, 86]
     Multiple parallel connections to same device: &id108 [689, 58]
     NCClient Netconf Service: &id085 [556, 119]
@@ -5899,8 +5903,21 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  labels: {}
-  last_modified: '2021-08-07 08:46:36.721245'
+  labels:
+    13d32f97-9185-4863-adf0-0a741471f8fc:
+      alignment: left
+      content: "The iteration value field is set the \"dict_iteration\" variable via\
+        \ get_result,\r\nwith the iteration variable name set to \"command_dict\"\
+        .\r\nThe service uses netmiko to show the vrf \"test\" and \"test2\", via\r\
+        \nthe command \"show vrf {{command_dict[\"command\"]}}\"."
+      positions: [488, 88]
+    f93c7a5d-e43f-43a6-b392-fe75c02ab798:
+      alignment: left
+      content: "Set the \"result\" value to the following dictionnary:\r\n\"dict_iteration\"\
+        : {\r\n    \"variable1\": {\"command\": \"test\"},\r\n    \"variable2\": {\"\
+        command\": \"test2\"}\r\n}"
+      positions: [-171, 97]
+  last_modified: '2021-08-16 08:37:36.059452'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -5908,7 +5925,7 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: Advanced Iteration Targets
+  name: Iteration Targets with a Dictionary
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -5930,11 +5947,12 @@
   reply_to: ''
   reserved: false
   run_method: per_device
-  scoped_name: Advanced Iteration Targets
+  scoped_name: Iteration Targets with a Dictionary
   send_notification: false
   send_notification_method: mail
-  services: ['[Shared] Start', '[Shared] End', '[Advanced Iteration Targets] Set Variables
-      for Iteration', '[Advanced Iteration Targets] Show VRF with iteration']
+  services: ['[Shared] Start', '[Shared] End', '[Iteration Targets with a Dictionary]
+      Set Variables for Iteration', '[Iteration Targets with a Dictionary] Show VRF
+      with iteration']
   shared: false
   skip: {}
   skip_query: ''
@@ -5983,7 +6001,7 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Advanced Iteration Targets] Set Variables for Iteration'
+  name: '[Iteration Targets with a Dictionary] Set Variables for Iteration'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -5999,6 +6017,8 @@
   pools: ['All devices, links, services and users']
   positions:
     Advanced Iteration Targets: &id191 [132, -202]
+    Basic Iteration Targets with Netmiko: [-209, -7]
+    Iteration Targets with a Dictionary: [-209, -7]
     'Regression Workflow I: Iteration Targets Advanced': *id191
     'Regression Workflow: Advanced Iteration Targets': *id191
   postprocessing: ''
@@ -6083,7 +6103,7 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Advanced Iteration Targets] Show VRF with iteration'
+  name: '[Iteration Targets with a Dictionary] Show VRF with iteration'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -6099,6 +6119,8 @@
   pools: ['All devices, links, services and users']
   positions:
     Advanced Iteration Targets: &id192 [135, 100]
+    Basic Iteration Targets with Netmiko: [436, -6]
+    Iteration Targets with a Dictionary: [436, -6]
     'Regression Workflow I: Iteration Targets Advanced': *id192
     'Regression Workflow: Advanced Iteration Targets': *id192
   postprocessing: ''

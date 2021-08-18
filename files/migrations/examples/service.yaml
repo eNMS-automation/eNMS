@@ -202,6 +202,7 @@
     Separate Failure - Success Paths: *id037
     Service Priorities, Napalm Getters, Postprocessing: *id048
     Shared Service in Multiple Subworkflows: *id038
+    'Skip Mechanism: Conditional Skip Query in Failed and Discard Modes': [-287, 2]
     Skip Query with device in Run Once Mode: *id039
     Skip Services in SxS mode: *id013
     Skip, Discard and Disable Result Creation Mechanism: *id040
@@ -545,6 +546,7 @@
     Separate Failure - Success Paths: *id103
     Service Priorities, Napalm Getters, Postprocessing: *id114
     Shared Service in Multiple Subworkflows: *id104
+    'Skip Mechanism: Conditional Skip Query in Failed and Discard Modes': [684, 285]
     Skip Query with device in Run Once Mode: *id105
     Skip Services in SxS mode: *id079
     Skip, Discard and Disable Result Creation Mechanism: *id106
@@ -11264,13 +11266,24 @@
         \ Washington in failed skip mode.\r\nWashington must follow the failure edges\
         \ while the other\r\ntwo devices follow the success edge.\r\nIn the end, these\
         \ 3 devices should all run the last service."
-      positions: [170, -57]
+      positions: [34, 30]
     065de869-c69f-4489-8c9a-8dbb520d1031:
       alignment: left
       content: "Must be tested both in:\r\n- device by device mode\r\n- service by\
         \ service with workflow targets mode"
-      positions: [273, 201]
-  last_modified: '2021-08-07 08:47:06.657566'
+      positions: [-6, 120]
+    296bb5de-e6fa-42a1-a3de-f6ba257ee28b:
+      alignment: left
+      content: "The skip query is set to\r\n\"device.name.startswith(\"router\")\"\
+        \r\nShould match router5, router6 and router7.\r\nSkip value is set to \"\
+        Discard\"."
+      positions: [-252, 289]
+    e74316f1-b154-4c62-af4e-e3ce8ebe1ee4:
+      alignment: left
+      content: "Skip query set to 'device.name == \"Washington\"'\r\nSkip value set\
+        \ to \"Failure\". Washington should fail."
+      positions: [115, 311]
+  last_modified: '2021-08-18 00:08:26.629435'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -11278,7 +11291,7 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: Conditional Skip Query in Failed and Discard Modes
+  name: 'Skip Mechanism: Conditional Skip Query in Failed and Discard Modes'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -11300,15 +11313,16 @@
   reply_to: ''
   reserved: false
   run_method: per_service_with_workflow_targets
-  scoped_name: Conditional Skip Query in Failed and Discard Modes
+  scoped_name: 'Skip Mechanism: Conditional Skip Query in Failed and Discard Modes'
   send_notification: false
   send_notification_method: mail
-  services: ['[Shared] Start', '[Shared] End', '[Conditional Skip Query in Failed
-      and Discard Modes] Skip Washington with Skip value == False', '[Conditional
-      Skip Query in Failed and Discard Modes] Post-success service', '[Conditional
-      Skip Query in Failed and Discard Modes] Post-failure service', '[Conditional
-      Skip Query in Failed and Discard Modes] Final service', '[Conditional Skip Query
-      in Failed and Discard Modes] Skip router5-7 in discard mode']
+  services: ['[Shared] Start', '[Shared] End', '[Skip Mechanism: Conditional Skip
+      Query in Failed and Discard Modes] Skip Washington with Skip value == False',
+    '[Skip Mechanism: Conditional Skip Query in Failed and Discard Modes] Post-success
+      service', '[Skip Mechanism: Conditional Skip Query in Failed and Discard Modes]
+      Post-failure service', '[Skip Mechanism: Conditional Skip Query in Failed and
+      Discard Modes] Final service', '[Skip Mechanism: Conditional Skip Query in Failed
+      and Discard Modes] Skip router5-7 in discard mode']
   shared: false
   skip: {}
   skip_query: ''
@@ -11357,8 +11371,8 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Conditional Skip Query in Failed and Discard Modes] Skip Washington with
-    Skip value == False'
+  name: '[Skip Mechanism: Conditional Skip Query in Failed and Discard Modes] Skip
+    Washington with Skip value == False'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -11377,6 +11391,7 @@
     'Regression Workflow S: conditional skip query in failed and discard mode': *id257
     'Regression Workflow S: conditional skip query with skip value set to False': *id257
     'Regression Workflow: Conditional Skip Query in Failed and Discard Modes': *id257
+    'Skip Mechanism: Conditional Skip Query in Failed and Discard Modes': [110, 245]
     'Workflow Regression S: conditional skip query with skip value set to False': [
       -149, -30]
   postprocessing: ''
@@ -11442,7 +11457,8 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Conditional Skip Query in Failed and Discard Modes] Post-success service'
+  name: '[Skip Mechanism: Conditional Skip Query in Failed and Discard Modes] Post-success
+    service'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -11461,6 +11477,7 @@
     'Regression Workflow S: conditional skip query in failed and discard mode': *id258
     'Regression Workflow S: conditional skip query with skip value set to False': *id258
     'Regression Workflow: Conditional Skip Query in Failed and Discard Modes': *id258
+    'Skip Mechanism: Conditional Skip Query in Failed and Discard Modes': [456, -1]
     'Workflow Regression S: conditional skip query with skip value set to False': [
       264, -16]
   postprocessing: ''
@@ -11526,7 +11543,8 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Conditional Skip Query in Failed and Discard Modes] Post-failure service'
+  name: '[Skip Mechanism: Conditional Skip Query in Failed and Discard Modes] Post-failure
+    service'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -11545,6 +11563,7 @@
     'Regression Workflow S: conditional skip query in failed and discard mode': *id259
     'Regression Workflow S: conditional skip query with skip value set to False': *id259
     'Regression Workflow: Conditional Skip Query in Failed and Discard Modes': *id259
+    'Skip Mechanism: Conditional Skip Query in Failed and Discard Modes': [486, 255]
     'Workflow Regression S: conditional skip query with skip value set to False': [
       208, 194]
   postprocessing: ''
@@ -11610,7 +11629,8 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Conditional Skip Query in Failed and Discard Modes] Final service'
+  name: '[Skip Mechanism: Conditional Skip Query in Failed and Discard Modes] Final
+    service'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -11629,6 +11649,7 @@
     'Regression Workflow S: conditional skip query in failed and discard mode': *id260
     'Regression Workflow S: conditional skip query with skip value set to False': *id260
     'Regression Workflow: Conditional Skip Query in Failed and Discard Modes': *id260
+    'Skip Mechanism: Conditional Skip Query in Failed and Discard Modes': [666, 141]
     'Workflow Regression S: conditional skip query with skip value set to False': [
       636, 63]
   postprocessing: ''
@@ -12464,7 +12485,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2020-09-24 05:33:07.299889'
+  last_modified: '2021-08-18 00:06:35.440142'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -12472,8 +12493,8 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Conditional Skip Query in Failed and Discard Modes] Skip router5-7 in discard
-    mode'
+  name: '[Skip Mechanism: Conditional Skip Query in Failed and Discard Modes] Skip
+    router5-7 in discard mode'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -12492,6 +12513,7 @@
     'Regression Workflow S: conditional skip query in failed and discard mode': *id267
     'Regression Workflow S: conditional skip query with skip value set to False': *id267
     'Regression Workflow: Conditional Skip Query in Failed and Discard Modes': *id267
+    'Skip Mechanism: Conditional Skip Query in Failed and Discard Modes': [-277, 206]
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -12505,7 +12527,7 @@
   shared: false
   skip: {}
   skip_query: device.name.startswith("router")
-  skip_value: Discard
+  skip_value: discard
   source_code: "# Availble variables: device, results, run\r\n# Returning state:\r\
     \n#    results[\"success\"] = True\r\n#    results[\"result\"] = <return data>\r\
     \n# Logging: log(level, text)\r\n#    log(\"info\", \"My log message\")\r\n# Exit\

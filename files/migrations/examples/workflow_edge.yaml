@@ -611,32 +611,35 @@
     Skip Services in SxS mode] 2021-04-24 08:58:40.198713', source: '[Skip Services
     in SxS mode] Last service', subtype: success, type: workflow_edge, workflow: Skip
     Services in SxS mode}
-- {color: green, destination: '[Conditional Skip Query in Failed and Discard Modes]
-    Post-success service', label: success, name: '[Regression Workflow: Conditional
-    Skip Query in Failed and Discard Modes] 2021-04-24 08:58:40.198731', source: '[Conditional
-    Skip Query in Failed and Discard Modes] Skip Washington with Skip value == False',
-  subtype: success, type: workflow_edge, workflow: Conditional Skip Query in Failed
-    and Discard Modes}
-- {color: green, destination: '[Conditional Skip Query in Failed and Discard Modes]
-    Final service', label: success, name: '[Regression Workflow: Conditional Skip
-    Query in Failed and Discard Modes] 2021-04-24 08:58:40.198748', source: '[Conditional
-    Skip Query in Failed and Discard Modes] Post-success service', subtype: success,
-  type: workflow_edge, workflow: Conditional Skip Query in Failed and Discard Modes}
-- {color: green, destination: '[Conditional Skip Query in Failed and Discard Modes]
-    Final service', label: success, name: '[Regression Workflow: Conditional Skip
-    Query in Failed and Discard Modes] 2021-04-24 08:58:40.198764', source: '[Conditional
-    Skip Query in Failed and Discard Modes] Post-failure service', subtype: success,
-  type: workflow_edge, workflow: Conditional Skip Query in Failed and Discard Modes}
+- {color: green, destination: '[Skip Mechanism: Conditional Skip Query in Failed and
+    Discard Modes] Post-success service', label: success, name: '[Regression Workflow:
+    Conditional Skip Query in Failed and Discard Modes] 2021-04-24 08:58:40.198731',
+  source: '[Skip Mechanism: Conditional Skip Query in Failed and Discard Modes] Skip
+    Washington with Skip value == False', subtype: success, type: workflow_edge, workflow: 'Skip
+    Mechanism: Conditional Skip Query in Failed and Discard Modes'}
+- {color: green, destination: '[Skip Mechanism: Conditional Skip Query in Failed and
+    Discard Modes] Final service', label: success, name: '[Regression Workflow: Conditional
+    Skip Query in Failed and Discard Modes] 2021-04-24 08:58:40.198748', source: '[Skip
+    Mechanism: Conditional Skip Query in Failed and Discard Modes] Post-success service',
+  subtype: success, type: workflow_edge, workflow: 'Skip Mechanism: Conditional Skip
+    Query in Failed and Discard Modes'}
+- {color: green, destination: '[Skip Mechanism: Conditional Skip Query in Failed and
+    Discard Modes] Final service', label: success, name: '[Regression Workflow: Conditional
+    Skip Query in Failed and Discard Modes] 2021-04-24 08:58:40.198764', source: '[Skip
+    Mechanism: Conditional Skip Query in Failed and Discard Modes] Post-failure service',
+  subtype: success, type: workflow_edge, workflow: 'Skip Mechanism: Conditional Skip
+    Query in Failed and Discard Modes'}
 - {color: green, destination: '[Shared] End', label: success, name: '[Regression Workflow:
     Conditional Skip Query in Failed and Discard Modes] 2021-04-24 08:58:40.198779',
-  source: '[Conditional Skip Query in Failed and Discard Modes] Final service', subtype: success,
-  type: workflow_edge, workflow: Conditional Skip Query in Failed and Discard Modes}
-- {color: red, destination: '[Conditional Skip Query in Failed and Discard Modes]
-    Post-failure service', label: failure, name: '[Regression Workflow: Conditional
-    Skip Query in Failed and Discard Modes] 2021-04-24 08:58:40.198796', source: '[Conditional
-    Skip Query in Failed and Discard Modes] Skip Washington with Skip value == False',
-  subtype: failure, type: workflow_edge, workflow: Conditional Skip Query in Failed
-    and Discard Modes}
+  source: '[Skip Mechanism: Conditional Skip Query in Failed and Discard Modes] Final
+    service', subtype: success, type: workflow_edge, workflow: 'Skip Mechanism: Conditional
+    Skip Query in Failed and Discard Modes'}
+- {color: red, destination: '[Skip Mechanism: Conditional Skip Query in Failed and
+    Discard Modes] Post-failure service', label: failure, name: '[Regression Workflow:
+    Conditional Skip Query in Failed and Discard Modes] 2021-04-24 08:58:40.198796',
+  source: '[Skip Mechanism: Conditional Skip Query in Failed and Discard Modes] Skip
+    Washington with Skip value == False', subtype: failure, type: workflow_edge, workflow: 'Skip
+    Mechanism: Conditional Skip Query in Failed and Discard Modes'}
 - {color: green, destination: '[Link Neighbors Mechanism (public)] Test get_neighbors
     function', label: success, name: '[Regression Workflow: Link Neighbors Mechanism
     (public)] 2021-04-24 08:58:40.198819', source: '[Shared] Start', subtype: success,
@@ -668,23 +671,23 @@
   source: '[Global Variables and post-run Pool Update Mechanism] Show vrf with custom
     encrypted credentials', subtype: success, type: workflow_edge, workflow: Global
     Variables and post-run Pool Update Mechanism}
-- {color: green, destination: '[Conditional Skip Query in Failed and Discard Modes]
-    Skip router5-7 in discard mode', label: success, name: '[Regression Workflow:
-    Conditional Skip Query in Failed and Discard Modes] 2021-04-24 08:58:40.198979',
-  source: '[Shared] Start', subtype: success, type: workflow_edge, workflow: Conditional
-    Skip Query in Failed and Discard Modes}
-- {color: green, destination: '[Conditional Skip Query in Failed and Discard Modes]
-    Skip Washington with Skip value == False', label: success, name: '[Regression
+- {color: green, destination: '[Skip Mechanism: Conditional Skip Query in Failed and
+    Discard Modes] Skip router5-7 in discard mode', label: success, name: '[Regression
+    Workflow: Conditional Skip Query in Failed and Discard Modes] 2021-04-24 08:58:40.198979',
+  source: '[Shared] Start', subtype: success, type: workflow_edge, workflow: 'Skip
+    Mechanism: Conditional Skip Query in Failed and Discard Modes'}
+- {color: green, destination: '[Skip Mechanism: Conditional Skip Query in Failed and
+    Discard Modes] Skip Washington with Skip value == False', label: success, name: '[Regression
     Workflow: Conditional Skip Query in Failed and Discard Modes] 2021-04-24 08:58:40.198994',
-  source: '[Conditional Skip Query in Failed and Discard Modes] Skip router5-7 in
-    discard mode', subtype: success, type: workflow_edge, workflow: Conditional Skip
-    Query in Failed and Discard Modes}
-- {color: red, destination: '[Conditional Skip Query in Failed and Discard Modes]
-    Skip Washington with Skip value == False', label: failure, name: '[Regression
+  source: '[Skip Mechanism: Conditional Skip Query in Failed and Discard Modes] Skip
+    router5-7 in discard mode', subtype: success, type: workflow_edge, workflow: 'Skip
+    Mechanism: Conditional Skip Query in Failed and Discard Modes'}
+- {color: red, destination: '[Skip Mechanism: Conditional Skip Query in Failed and
+    Discard Modes] Skip Washington with Skip value == False', label: failure, name: '[Regression
     Workflow: Conditional Skip Query in Failed and Discard Modes] 2021-04-24 08:58:40.199009',
-  source: '[Conditional Skip Query in Failed and Discard Modes] Skip router5-7 in
-    discard mode', subtype: failure, type: workflow_edge, workflow: Conditional Skip
-    Query in Failed and Discard Modes}
+  source: '[Skip Mechanism: Conditional Skip Query in Failed and Discard Modes] Skip
+    router5-7 in discard mode', subtype: failure, type: workflow_edge, workflow: 'Skip
+    Mechanism: Conditional Skip Query in Failed and Discard Modes'}
 - {color: green, destination: '[Fork based on value with Skip Discard Mechanism] REST
     API: call *is_alive* endpoint', label: success, name: '[Regression Workflow: Fork
     based on value with Skip Discard Mechanism] 2021-04-24 08:58:40.199025', source: '[Shared]

@@ -640,19 +640,22 @@
   source: '[Skip Mechanism: Conditional Skip Query in Failed and Discard Modes] Skip
     Washington with Skip value == False', subtype: failure, type: workflow_edge, workflow: 'Skip
     Mechanism: Conditional Skip Query in Failed and Discard Modes'}
-- {color: green, destination: '[Link Neighbors Mechanism (public)] Test get_neighbors
-    function', label: success, name: '[Regression Workflow: Link Neighbors Mechanism
-    (public)] 2021-04-24 08:58:40.198819', source: '[Shared] Start', subtype: success,
-  type: workflow_edge, workflow: Link Neighbors Mechanism (public)}
-- {color: green, destination: '[Link Neighbors Mechanism (public)] Iterate over neighbors
-    of workflow device', label: success, name: '[Regression Workflow: Link Neighbors
-    Mechanism (public)] 2021-04-24 08:58:40.198845', source: '[Link Neighbors Mechanism
-    (public)] Test get_neighbors function', subtype: success, type: workflow_edge,
-  workflow: Link Neighbors Mechanism (public)}
+- {color: green, destination: '[Miscellaneous: Link Neighbors Mechanism and RBAC default
+    access (public)] Test get_neighbors function', label: success, name: '[Regression
+    Workflow: Link Neighbors Mechanism (public)] 2021-04-24 08:58:40.198819', source: '[Shared]
+    Start', subtype: success, type: workflow_edge, workflow: 'Miscellaneous: Link
+    Neighbors Mechanism and RBAC default access (public)'}
+- {color: green, destination: '[Miscellaneous: Link Neighbors Mechanism and RBAC default
+    access (public)] Iterate over neighbors of workflow device', label: success, name: '[Regression
+    Workflow: Link Neighbors Mechanism (public)] 2021-04-24 08:58:40.198845', source: '[Miscellaneous:
+    Link Neighbors Mechanism and RBAC default access (public)] Test get_neighbors
+    function', subtype: success, type: workflow_edge, workflow: 'Miscellaneous: Link
+    Neighbors Mechanism and RBAC default access (public)'}
 - {color: green, destination: '[Shared] End', label: success, name: '[Regression Workflow:
-    Link Neighbors Mechanism (public)] 2021-04-24 08:58:40.198869', source: '[Link
-    Neighbors Mechanism (public)] Iterate over neighbors of workflow device', subtype: success,
-  type: workflow_edge, workflow: Link Neighbors Mechanism (public)}
+    Link Neighbors Mechanism (public)] 2021-04-24 08:58:40.198869', source: '[Miscellaneous:
+    Link Neighbors Mechanism and RBAC default access (public)] Iterate over neighbors
+    of workflow device', subtype: success, type: workflow_edge, workflow: 'Miscellaneous:
+    Link Neighbors Mechanism and RBAC default access (public)'}
 - {color: green, destination: '[Netmiko Prompts] Check VRF (NOVRF) exists', label: success,
   name: '[Regression Workflow: Netmiko Prompts] 2021-04-24 08:58:40.198893', source: '[Shared]
     Start', subtype: success, type: workflow_edge, workflow: Netmiko Prompts}

@@ -202,7 +202,7 @@
     Separate Failure - Success Paths: *id037
     Service Priorities, Napalm Getters, Postprocessing: *id048
     Shared Service in Multiple Subworkflows: *id038
-    'Skip Mechanism: Conditional Skip Query in Failed and Discard Modes': [-322, 36]
+    'Skip Mechanism: Conditional Skip Query in Failed and Discard Modes': [-322, 98]
     Skip Query with device in Run Once Mode: *id039
     Skip Services in SxS mode: *id013
     Skip, Discard and Disable Result Creation Mechanism: *id040
@@ -546,7 +546,7 @@
     Separate Failure - Success Paths: *id103
     Service Priorities, Napalm Getters, Postprocessing: *id114
     Shared Service in Multiple Subworkflows: *id104
-    'Skip Mechanism: Conditional Skip Query in Failed and Discard Modes': [687, 231]
+    'Skip Mechanism: Conditional Skip Query in Failed and Discard Modes': [599, 331]
     Skip Query with device in Run Once Mode: *id105
     Skip Services in SxS mode: *id079
     Skip, Discard and Disable Result Creation Mechanism: *id106
@@ -11268,31 +11268,31 @@
         \ service, PaloAlto should be skip in failure mode,\r\nbut with no failure\
         \ edge it is equivalent to discard.\r\nIn the end, 2 devices should all run\
         \ the last service:\r\nAustin and Washington."
-      positions: [52, 61]
+      positions: [-6, 145]
     065de869-c69f-4489-8c9a-8dbb520d1031:
       alignment: left
       content: "Must be tested both in:\r\n- device by device mode\r\n- service by\
         \ service with workflow targets mode"
-      positions: [-4, 156]
+      positions: [-65, 267]
     296bb5de-e6fa-42a1-a3de-f6ba257ee28b:
       alignment: left
       content: "The skip query is set to\r\n\"device.name.startswith(\"router\")\"\
         \r\nShould match router5, router6 and router7.\r\nSkip value is set to \"\
         Discard\"."
-      positions: [-317, 309]
+      positions: [-314, 453]
     9458426f-623e-46be-85e9-6b673e3e9575:
       alignment: left
       content: "In this service, the skip query is set to 'device.name == \"PaloAlto\"\
         ',\r\nand the skip value is set to \"Failure\". However, unlike the last service,\r\
         \nthere is no failure edge exiting the service, so PaloAlto should be\r\n\
         discarded here."
-      positions: [496, 32]
+      positions: [480, 95]
     e74316f1-b154-4c62-af4e-e3ce8ebe1ee4:
       alignment: left
       content: "Skip query set to 'device.name == \"Washington\"'\r\nSkip value set\
         \ to \"Failure\". Washington should fail."
-      positions: [34, 357]
-  last_modified: '2021-08-18 00:16:27.227439'
+      positions: [55, 451]
+  last_modified: '2021-08-18 00:17:48.324218'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -11400,7 +11400,7 @@
     'Regression Workflow S: conditional skip query in failed and discard mode': *id257
     'Regression Workflow S: conditional skip query with skip value set to False': *id257
     'Regression Workflow: Conditional Skip Query in Failed and Discard Modes': *id257
-    'Skip Mechanism: Conditional Skip Query in Failed and Discard Modes': [47, 277]
+    'Skip Mechanism: Conditional Skip Query in Failed and Discard Modes': [38, 378]
     'Workflow Regression S: conditional skip query with skip value set to False': [
       -149, -30]
   postprocessing: ''
@@ -11486,7 +11486,7 @@
     'Regression Workflow S: conditional skip query in failed and discard mode': *id258
     'Regression Workflow S: conditional skip query with skip value set to False': *id258
     'Regression Workflow: Conditional Skip Query in Failed and Discard Modes': *id258
-    'Skip Mechanism: Conditional Skip Query in Failed and Discard Modes': [456, 121]
+    'Skip Mechanism: Conditional Skip Query in Failed and Discard Modes': [450, 173]
     'Workflow Regression S: conditional skip query with skip value set to False': [
       264, -16]
   postprocessing: ''
@@ -11572,7 +11572,7 @@
     'Regression Workflow S: conditional skip query in failed and discard mode': *id259
     'Regression Workflow S: conditional skip query with skip value set to False': *id259
     'Regression Workflow: Conditional Skip Query in Failed and Discard Modes': *id259
-    'Skip Mechanism: Conditional Skip Query in Failed and Discard Modes': [476, 384]
+    'Skip Mechanism: Conditional Skip Query in Failed and Discard Modes': [519, 439]
     'Workflow Regression S: conditional skip query with skip value set to False': [
       208, 194]
   postprocessing: ''
@@ -11658,7 +11658,7 @@
     'Regression Workflow S: conditional skip query in failed and discard mode': *id260
     'Regression Workflow S: conditional skip query with skip value set to False': *id260
     'Regression Workflow: Conditional Skip Query in Failed and Discard Modes': *id260
-    'Skip Mechanism: Conditional Skip Query in Failed and Discard Modes': [365, 249]
+    'Skip Mechanism: Conditional Skip Query in Failed and Discard Modes': [324, 323]
     'Workflow Regression S: conditional skip query with skip value set to False': [
       636, 63]
   postprocessing: ''
@@ -12522,7 +12522,7 @@
     'Regression Workflow S: conditional skip query in failed and discard mode': *id267
     'Regression Workflow S: conditional skip query with skip value set to False': *id267
     'Regression Workflow: Conditional Skip Query in Failed and Discard Modes': *id267
-    'Skip Mechanism: Conditional Skip Query in Failed and Discard Modes': [-314, 178]
+    'Skip Mechanism: Conditional Skip Query in Failed and Discard Modes': [-335, 369]
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''

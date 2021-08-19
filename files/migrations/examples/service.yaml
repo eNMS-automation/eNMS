@@ -205,7 +205,7 @@
     Service Priorities, Napalm Getters, Postprocessing: *id047
     Shared Service in Multiple Subworkflows: *id037
     'Skip Mechanism: Conditional Skip Query in Failed and Discard Modes': [-322, 98]
-    'Skip Mechanism: Fork based on value with Skip Discard Mechanism': [-501, 164]
+    'Skip Mechanism: Fork based on value with Skip Discard Mechanism': [-563, 184]
     Skip Query with device in Run Once Mode: *id038
     Skip Services in SxS mode: *id013
     Skip, Discard and Disable Result Creation Mechanism: *id039
@@ -552,7 +552,7 @@
     Service Priorities, Napalm Getters, Postprocessing: *id112
     Shared Service in Multiple Subworkflows: *id102
     'Skip Mechanism: Conditional Skip Query in Failed and Discard Modes': [599, 331]
-    'Skip Mechanism: Fork based on value with Skip Discard Mechanism': [442, 328]
+    'Skip Mechanism: Fork based on value with Skip Discard Mechanism': [388, 363]
     Skip Query with device in Run Once Mode: *id103
     Skip Services in SxS mode: *id078
     Skip, Discard and Disable Result Creation Mechanism: *id104
@@ -12608,11 +12608,11 @@
       alignment: left
       content: "This service is configured to discard all devices,\r\nto test that\
         \ it works when all devices are discarded."
-      positions: [-12, 388]
+      positions: [13, 407]
     e463d7db-3148-4df3-acf9-62e42f52b73e:
       alignment: left
       content: "Discards all devices whose\r\nmodel is not Arista."
-      positions: [-109, -39]
+      positions: [335, 22]
     f8de3ca5-718c-4d76-860e-ddceeb7e3f83:
       alignment: left
       content: "This workflow runs on 5 devices:\r\n* 2 with model \"Arista\": Washington,\
@@ -12620,10 +12620,12 @@
         \nThe devices will take different success based on their model,\r\nusing the\
         \ \"Discard\" option of the skip mechanism.\r\nTo be tested both in DxD and\
         \ SxS WF targets mode.\r\nExpected results:\r\n- 3 devices discarded in the\
-        \ upper path. (0 device in the failure edge after skip service)\r\n- 2 devices\
-        \ discarded in the lower path (0 device in the failure edge after skip service)"
-      positions: [-74, 166]
-  last_modified: '2021-08-19 07:45:22.736294'
+        \ upper path,\r\n0 device exiting via failure edge, 2 via sucess edge.\r\n\
+        After \"Show VRF\", 2 via success or failure depending on\r\nwhether the router\
+        \ is UP.\r\n- 2 devices discarded in the lower path, 0 device exiting\r\n\
+        via failure edge, then all devices discarded in next service."
+      positions: [-129, 146]
+  last_modified: '2021-08-19 07:56:31.846248'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -12661,9 +12663,7 @@
       Fork based on value with Skip Discard Mechanism] Arista devices', '[Skip Mechanism:
       Fork based on value with Skip Discard Mechanism] Juniper devices', '[Skip Mechanism:
       Fork based on value with Skip Discard Mechanism] Show VRF', '[Skip Mechanism:
-      Fork based on value with Skip Discard Mechanism] is_alive endpoint', '[Skip
-      Mechanism: Fork based on value with Skip Discard Mechanism] is_alive endpoint
-      2: Skipped']
+      Fork based on value with Skip Discard Mechanism] is_alive endpoint 2: Skipped']
   shared: false
   skip: {}
   skip_query: ''
@@ -12746,7 +12746,7 @@
     'Regression Workflow U: fork based on value with skip discard mode': *id266
     'Regression Workflow: Fork based on value with Skip Discard Mechanism': *id266
     'Regression workflow P: large workflow (scalability)': *id267
-    'Skip Mechanism: Fork based on value with Skip Discard Mechanism': [-466, 22]
+    'Skip Mechanism: Fork based on value with Skip Discard Mechanism': [-480, 30]
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -12827,7 +12827,7 @@
     Fork based on value with Skip Discard Mechanism: &id268 [47, -29]
     'Regression Workflow U: fork based on value with skip discard mode': *id268
     'Regression Workflow: Fork based on value with Skip Discard Mechanism': *id268
-    'Skip Mechanism: Fork based on value with Skip Discard Mechanism': [-120, 30]
+    'Skip Mechanism: Fork based on value with Skip Discard Mechanism': [336, 89]
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -13014,7 +13014,7 @@
     Fork based on value with Skip Discard Mechanism: &id270 [574, 0]
     'Regression Workflow U: fork based on value with skip discard mode': *id270
     'Regression Workflow: Fork based on value with Skip Discard Mechanism': *id270
-    'Skip Mechanism: Fork based on value with Skip Discard Mechanism': [440, 20]
+    'Skip Mechanism: Fork based on value with Skip Discard Mechanism': [548, 232]
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -13072,94 +13072,6 @@
   iteration_devices_property: ip_address
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2020-09-25 04:28:32.441780'
-  log_level: 1
-  mail_recipient: ''
-  mandatory_parametrization: false
-  max_number_of_retries: 100
-  max_processes: 5
-  maximum_runs: 1
-  multiprocessing: true
-  name: '[Skip Mechanism: Fork based on value with Skip Discard Mechanism] is_alive
-    endpoint'
-  negative_logic: false
-  notification_header: ''
-  number_of_retries: 0
-  operating_system: ''
-  parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
-    \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
-    \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
-    \ = StringField('Device Query', python=True, widget=TextArea(), render_kw={'rows':\
-    \ 2})\r\ndevice_query_property = SelectField('Query Property Type', choices=(('name',\
-    \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
-    \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
-    \ default=15)"
-  params: {verify: 'false'}
-  password: ''
-  payload:
-    a: b
-    c: ['1', '2', '3']
-  pools: ['All devices, links, services and users']
-  positions:
-    Fork based on value with Skip Discard Mechanism: &id271 [437, 78]
-    'Regression Workflow U: fork based on value with skip discard mode': *id271
-    'Regression Workflow: Fork based on value with Skip Discard Mechanism': *id271
-    'Skip Mechanism: Fork based on value with Skip Discard Mechanism': [246, 64]
-  postprocessing: ''
-  postprocessing_mode: always
-  preprocessing: ''
-  priority: 1
-  reply_to: ''
-  reserved: false
-  rest_url: http://127.0.0.1:5000/rest/is_alive
-  run_method: per_device
-  scoped_name: is_alive endpoint
-  send_notification: false
-  send_notification_method: mail
-  shared: false
-  skip: {}
-  skip_query: ''
-  skip_value: success
-  target_devices: []
-  target_pools: []
-  time_between_retries: 10
-  timeout: 15
-  type: rest_call_service
-  update_pools_after_running: false
-  update_target_pools: false
-  username: admin
-  validation_condition: none
-  validation_method: text
-  validation_section: results['result']
-  vendor: ''
-  verify_ssl_certificate: true
-  waiting_time: 0
-- access_groups: ''
-  call_type: GET
-  completion_time: 1
-  content_match: ''
-  content_match_regex: false
-  conversion_method: text
-  creator: admin
-  credential_type: any
-  default_access: creator
-  definition: Definition
-  delete_spaces_before_matching: false
-  description: Use REST call is_alive
-  device_query: ''
-  device_query_property: ip_address
-  dict_match: {}
-  disable_result_creation: false
-  display_only_failed_nodes: true
-  headers: {}
-  impacting: true
-  include_device_results: true
-  include_link_in_summary: true
-  initial_payload: {}
-  iteration_devices: ''
-  iteration_devices_property: ip_address
-  iteration_values: ''
-  iteration_variable_name: iteration_value
   last_modified: '2021-08-19 07:46:35.027296'
   log_level: 1
   mail_recipient: ''
@@ -13189,10 +13101,10 @@
     c: ['1', '2', '3']
   pools: ['All devices, links, services and users']
   positions:
-    Fork based on value with Skip Discard Mechanism: &id272 [32, 431]
-    'Regression Workflow U: fork based on value with skip discard mode': *id272
-    'Regression Workflow: Fork based on value with Skip Discard Mechanism': *id272
-    'Skip Mechanism: Fork based on value with Skip Discard Mechanism': [-43, 287]
+    Fork based on value with Skip Discard Mechanism: &id271 [32, 431]
+    'Regression Workflow U: fork based on value with skip discard mode': *id271
+    'Regression Workflow: Fork based on value with Skip Discard Mechanism': *id271
+    'Skip Mechanism: Fork based on value with Skip Discard Mechanism': [-5, 318]
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -13374,10 +13286,10 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    'Regression Workflow V: skip query with device in run once mode': &id273 [-221,
+    'Regression Workflow V: skip query with device in run once mode': &id272 [-221,
       154]
-    'Regression Workflow: Skip Query with device in Run Once Mode': *id273
-    Skip Query with device in Run Once Mode: *id273
+    'Regression Workflow: Skip Query with device in Run Once Mode': *id272
+    Skip Query with device in Run Once Mode: *id272
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -13453,10 +13365,10 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    'Regression Workflow V: skip query with device in run once mode': &id274 [-31,
+    'Regression Workflow V: skip query with device in run once mode': &id273 [-31,
       3]
-    'Regression Workflow: Skip Query with device in Run Once Mode': *id274
-    Skip Query with device in Run Once Mode: *id274
+    'Regression Workflow: Skip Query with device in Run Once Mode': *id273
+    Skip Query with device in Run Once Mode: *id273
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -13535,10 +13447,10 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    'Regression Workflow V: skip query with device in run once mode': &id275 [342,
+    'Regression Workflow V: skip query with device in run once mode': &id274 [342,
       205]
-    'Regression Workflow: Skip Query with device in Run Once Mode': *id275
-    Skip Query with device in Run Once Mode: *id275
+    'Regression Workflow: Skip Query with device in Run Once Mode': *id274
+    Skip Query with device in Run Once Mode: *id274
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -13614,10 +13526,10 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    '[Regression Workflow V: skip query with device in run once mode] Subworkflow in SxS mode - workflow targets': &id276 [
+    '[Regression Workflow V: skip query with device in run once mode] Subworkflow in SxS mode - workflow targets': &id275 [
       230, -19]
-    '[Regression Workflow: Skip Query with device in Run Once Mode] Subworkflow in SxS mode - workflow targets': *id276
-    '[Skip Query with device in Run Once Mode] Subworkflow in SxS mode - workflow targets': *id276
+    '[Regression Workflow: Skip Query with device in Run Once Mode] Subworkflow in SxS mode - workflow targets': *id275
+    '[Skip Query with device in Run Once Mode] Subworkflow in SxS mode - workflow targets': *id275
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -13798,10 +13710,10 @@
   pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow W: disable result creation mode': [-312, -10]
-    'Regression Workflow W: skip, discard and disable result creation mechanism': &id277 [
+    'Regression Workflow W: skip, discard and disable result creation mechanism': &id276 [
       -254, -15]
-    'Regression Workflow: Skip, Discard and Disable Result Creation Mechanism': *id277
-    Skip, Discard and Disable Result Creation Mechanism: *id277
+    'Regression Workflow: Skip, Discard and Disable Result Creation Mechanism': *id276
+    Skip, Discard and Disable Result Creation Mechanism: *id276
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -13879,10 +13791,10 @@
   pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow W: disable result creation mode': [-174, 154]
-    'Regression Workflow W: skip, discard and disable result creation mechanism': &id278 [
+    'Regression Workflow W: skip, discard and disable result creation mechanism': &id277 [
       -231, 149]
-    'Regression Workflow: Skip, Discard and Disable Result Creation Mechanism': *id278
-    Skip, Discard and Disable Result Creation Mechanism: *id278
+    'Regression Workflow: Skip, Discard and Disable Result Creation Mechanism': *id277
+    Skip, Discard and Disable Result Creation Mechanism: *id277
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -13961,10 +13873,10 @@
   pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow W: disable result creation mode': [442, 205]
-    'Regression Workflow W: skip, discard and disable result creation mechanism': &id279 [
+    'Regression Workflow W: skip, discard and disable result creation mechanism': &id278 [
       379, 130]
-    'Regression Workflow: Skip, Discard and Disable Result Creation Mechanism': *id279
-    Skip, Discard and Disable Result Creation Mechanism: *id279
+    'Regression Workflow: Skip, Discard and Disable Result Creation Mechanism': *id278
+    Skip, Discard and Disable Result Creation Mechanism: *id278
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -14042,10 +13954,10 @@
   pools: ['All devices, links, services and users']
   positions:
     'Regression Workflow W: disable result creation mode': [101, -37]
-    'Regression Workflow W: skip, discard and disable result creation mechanism': &id280 [
+    'Regression Workflow W: skip, discard and disable result creation mechanism': &id279 [
       103, -43]
-    'Regression Workflow: Skip, Discard and Disable Result Creation Mechanism': *id280
-    Skip, Discard and Disable Result Creation Mechanism: *id280
+    'Regression Workflow: Skip, Discard and Disable Result Creation Mechanism': *id279
+    Skip, Discard and Disable Result Creation Mechanism: *id279
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -14121,11 +14033,11 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    '[Regression Workflow W: disable result creation mode] Workflow in DxD mode': &id281 [
+    '[Regression Workflow W: disable result creation mode] Workflow in DxD mode': &id280 [
       224, -51]
-    '[Regression Workflow W: skip, discard and disable result creation mechanism] Workflow in DxD mode': *id281
-    '[Regression Workflow: Skip, Discard and Disable Result Creation Mechanism] Workflow in DxD mode': *id281
-    '[Skip, Discard and Disable Result Creation Mechanism] Workflow in DxD mode': *id281
+    '[Regression Workflow W: skip, discard and disable result creation mechanism] Workflow in DxD mode': *id280
+    '[Regression Workflow: Skip, Discard and Disable Result Creation Mechanism] Workflow in DxD mode': *id280
+    '[Skip, Discard and Disable Result Creation Mechanism] Workflow in DxD mode': *id280
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -14201,10 +14113,10 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    '[Regression Workflow W: skip, discard and disable result creation mechanism] Workflow in SxS mode': &id282 [
+    '[Regression Workflow W: skip, discard and disable result creation mechanism] Workflow in SxS mode': &id281 [
       220, -28]
-    '[Regression Workflow: Skip, Discard and Disable Result Creation Mechanism] Workflow in SxS mode': *id282
-    '[Skip, Discard and Disable Result Creation Mechanism] Workflow in SxS mode': *id282
+    '[Regression Workflow: Skip, Discard and Disable Result Creation Mechanism] Workflow in SxS mode': *id281
+    '[Skip, Discard and Disable Result Creation Mechanism] Workflow in SxS mode': *id281
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -14506,9 +14418,9 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    Credentials (Password & Key, Priority Mechanism): &id283 [220, 52]
+    Credentials (Password & Key, Priority Mechanism): &id282 [220, 52]
     'Regression Workflow X: Credentials (password & key, priority)': [220, 52]
-    'Regression Workflow: Credentials (Password & Key, Priority Mechanism)': *id283
+    'Regression Workflow: Credentials (Password & Key, Priority Mechanism)': *id282
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -14677,8 +14589,8 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    Optional Prerequisite Services: &id284 [-342, 317]
-    'Regression Workflow: Optional Prerequisite Services': *id284
+    Optional Prerequisite Services: &id283 [-342, 317]
+    'Regression Workflow: Optional Prerequisite Services': *id283
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -14753,8 +14665,8 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    Optional Prerequisite Services: &id285 [644, 318]
-    'Regression Workflow: Optional Prerequisite Services': *id285
+    Optional Prerequisite Services: &id284 [644, 318]
+    'Regression Workflow: Optional Prerequisite Services': *id284
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -14829,8 +14741,8 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    Optional Prerequisite Services: &id286 [-214, -47]
-    'Regression Workflow: Optional Prerequisite Services': *id286
+    Optional Prerequisite Services: &id285 [-214, -47]
+    'Regression Workflow: Optional Prerequisite Services': *id285
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -14906,8 +14818,8 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    Optional Prerequisite Services: &id287 [601, -27]
-    'Regression Workflow: Optional Prerequisite Services': *id287
+    Optional Prerequisite Services: &id286 [601, -27]
+    'Regression Workflow: Optional Prerequisite Services': *id286
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -15143,8 +15055,8 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    'Regression Workflow: Workflow and Subworkflow Iteration': &id288 [233, 471]
-    Workflow and Subworkflow Iteration: *id288
+    'Regression Workflow: Workflow and Subworkflow Iteration': &id287 [233, 471]
+    Workflow and Subworkflow Iteration: *id287
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -15222,8 +15134,8 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    'Regression Workflow: Workflow and Subworkflow Iteration': &id289 [649, 409]
-    Workflow and Subworkflow Iteration: *id289
+    'Regression Workflow: Workflow and Subworkflow Iteration': &id288 [649, 409]
+    Workflow and Subworkflow Iteration: *id288
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -15300,9 +15212,9 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    '[Regression Workflow: Workflow and Subworkflow Iteration] Subworkflow Device Iteration 2': &id290 [
+    '[Regression Workflow: Workflow and Subworkflow Iteration] Subworkflow Device Iteration 2': &id289 [
       233, -24]
-    '[Workflow and Subworkflow Iteration] Subworkflow Device Iteration 2': *id290
+    '[Workflow and Subworkflow Iteration] Subworkflow Device Iteration 2': *id289
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -15378,9 +15290,9 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    '[Regression Workflow: Workflow and Subworkflow Iteration] Subworkflow Device Iteration': &id291 [
+    '[Regression Workflow: Workflow and Subworkflow Iteration] Subworkflow Device Iteration': &id290 [
       241, -26]
-    '[Workflow and Subworkflow Iteration] Subworkflow Device Iteration': *id291
+    '[Workflow and Subworkflow Iteration] Subworkflow Device Iteration': *id290
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -15456,8 +15368,8 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    Global Variables and post-run Pool Update Mechanism: &id292 [-165, 199]
-    'Regression Workflow: Global Variables and post-run Pool Update Mechanism': *id292
+    Global Variables and post-run Pool Update Mechanism: &id291 [-165, 199]
+    'Regression Workflow: Global Variables and post-run Pool Update Mechanism': *id291
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -15533,8 +15445,8 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    Global Variables and post-run Pool Update Mechanism: &id293 [182, 132]
-    'Regression Workflow: Global Variables and post-run Pool Update Mechanism': *id293
+    Global Variables and post-run Pool Update Mechanism: &id292 [182, 132]
+    'Regression Workflow: Global Variables and post-run Pool Update Mechanism': *id292
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -15701,8 +15613,8 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    RBAC Target Restriction: &id294 [-162, 99]
-    'Regression Workflow: RBAC Target Restriction': *id294
+    RBAC Target Restriction: &id293 [-162, 99]
+    'Regression Workflow: RBAC Target Restriction': *id293
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -15777,8 +15689,8 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    RBAC Target Restriction: &id295 [181, 119]
-    'Regression Workflow: RBAC Target Restriction': *id295
+    RBAC Target Restriction: &id294 [181, 119]
+    'Regression Workflow: RBAC Target Restriction': *id294
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -15853,8 +15765,8 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    RBAC Target Restriction: &id296 [590, 138]
-    'Regression Workflow: RBAC Target Restriction': *id296
+    RBAC Target Restriction: &id295 [590, 138]
+    'Regression Workflow: RBAC Target Restriction': *id295
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -16037,8 +15949,8 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    'Regression Workflow: Scrapli Netconf Service': &id297 [479, -63]
-    Scrapli Netconf Service: *id297
+    'Regression Workflow: Scrapli Netconf Service': &id296 [479, -63]
+    Scrapli Netconf Service: *id296
   postprocessing: "results[\"success\"] = \"<description>YYYY</description>\" in results[\"\
     result\"]\r\nlog(\"error\", \"Description 'YYYY' missing from Running Configuration\"\
     )"
@@ -16126,8 +16038,8 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    'Regression Workflow: Scrapli Netconf Service': &id298 [26, 125]
-    Scrapli Netconf Service: *id298
+    'Regression Workflow: Scrapli Netconf Service': &id297 [26, 125]
+    Scrapli Netconf Service: *id297
   postprocessing: "interfaces = results[\"result\"][\"rpc-reply\"][0][\"data\"][0][\"\
     interfaces\"][0][\"interface\"]\r\nfor interface in interfaces:\r\n    if interface[\"\
     name\"][0] == \"Loopback5\":\r\n        break\r\n\r\nresults[\"interface\"] =\
@@ -16218,8 +16130,8 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    'Regression Workflow: Scrapli Netconf Service': &id299 [20, -72]
-    Scrapli Netconf Service: *id299
+    'Regression Workflow: Scrapli Netconf Service': &id298 [20, -72]
+    Scrapli Netconf Service: *id298
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -16306,8 +16218,8 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    'Regression Workflow: Scrapli Netconf Service': &id300 [510, 143]
-    Scrapli Netconf Service: *id300
+    'Regression Workflow: Scrapli Netconf Service': &id299 [510, 143]
+    Scrapli Netconf Service: *id299
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -16500,8 +16412,8 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    Parameterized Form (override tags & targets, add payload): &id301 [-78, 122]
-    'Regression Workflow: Parameterized Form (override tags & targets, add payload)': *id301
+    Parameterized Form (override tags & targets, add payload): &id300 [-78, 122]
+    'Regression Workflow: Parameterized Form (override tags & targets, add payload)': *id300
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -16675,8 +16587,8 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    'Regression Workflow: Validation Section Mechanism': &id302 [-384, 34]
-    Validation Section Mechanism: *id302
+    'Regression Workflow: Validation Section Mechanism': &id301 [-384, 34]
+    Validation Section Mechanism: *id301
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''
@@ -16754,8 +16666,8 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    'Regression Workflow: Validation Section Mechanism': &id303 [-39, -193]
-    Validation Section Mechanism: *id303
+    'Regression Workflow: Validation Section Mechanism': &id302 [-39, -193]
+    Validation Section Mechanism: *id302
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''
@@ -16832,8 +16744,8 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    'Regression Workflow: Validation Section Mechanism': &id304 [77, 51]
-    Validation Section Mechanism: *id304
+    'Regression Workflow: Validation Section Mechanism': &id303 [77, 51]
+    Validation Section Mechanism: *id303
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''
@@ -17016,8 +16928,8 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    NCClient Netconf Service: &id305 [-414, 116]
-    'Regression Workflow: NCClient Netconf Service': *id305
+    NCClient Netconf Service: &id304 [-414, 116]
+    'Regression Workflow: NCClient Netconf Service': *id304
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''
@@ -17111,8 +17023,8 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    NCClient Netconf Service: &id306 [-132, -139]
-    'Regression Workflow: NCClient Netconf Service': *id306
+    NCClient Netconf Service: &id305 [-132, -139]
+    'Regression Workflow: NCClient Netconf Service': *id305
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''
@@ -17211,8 +17123,8 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    NCClient Netconf Service: &id307 [30, 126]
-    'Regression Workflow: NCClient Netconf Service': *id307
+    NCClient Netconf Service: &id306 [30, 126]
+    'Regression Workflow: NCClient Netconf Service': *id306
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''
@@ -17306,8 +17218,8 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    NCClient Netconf Service: &id308 [249, -136]
-    'Regression Workflow: NCClient Netconf Service': *id308
+    NCClient Netconf Service: &id307 [249, -136]
+    'Regression Workflow: NCClient Netconf Service': *id307
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''
@@ -17406,8 +17318,8 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    NCClient Netconf Service: &id309 [388, 123]
-    'Regression Workflow: NCClient Netconf Service': *id309
+    NCClient Netconf Service: &id308 [388, 123]
+    'Regression Workflow: NCClient Netconf Service': *id308
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''
@@ -17613,8 +17525,8 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    Multiple parallel connections to same device: &id310 [-72, -122]
-    'Regression Workflow: multiple parallel connections to same device': *id310
+    Multiple parallel connections to same device: &id309 [-72, -122]
+    'Regression Workflow: multiple parallel connections to same device': *id309
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''
@@ -17715,8 +17627,8 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    Multiple parallel connections to same device: &id311 [-231, 101]
-    'Regression Workflow: multiple parallel connections to same device': *id311
+    Multiple parallel connections to same device: &id310 [-231, 101]
+    'Regression Workflow: multiple parallel connections to same device': *id310
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''
@@ -17818,8 +17730,8 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    Multiple parallel connections to same device: &id312 [454, -84]
-    'Regression Workflow: multiple parallel connections to same device': *id312
+    Multiple parallel connections to same device: &id311 [454, -84]
+    'Regression Workflow: multiple parallel connections to same device': *id311
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''
@@ -17999,8 +17911,8 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    Notifications: &id313 [-422, 198]
-    'Regression Workflow: Notifications': *id313
+    Notifications: &id312 [-422, 198]
+    'Regression Workflow: Notifications': *id312
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''
@@ -18077,8 +17989,8 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    Notifications: &id314 [-26, 64]
-    'Regression Workflow: Notifications': *id314
+    Notifications: &id313 [-26, 64]
+    'Regression Workflow: Notifications': *id313
   postprocessing: results["success"] = device.name == "Washington"
   postprocessing_mode: success
   preprocessing: ''
@@ -18155,8 +18067,8 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    Notifications: &id315 [384, 192]
-    'Regression Workflow: Notifications': *id315
+    Notifications: &id314 [384, 192]
+    'Regression Workflow: Notifications': *id314
   postprocessing: results["success"] = device.name == "Washington"
   postprocessing_mode: success
   preprocessing: ''
@@ -18349,8 +18261,8 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    Netmiko File Transfer: &id316 [-346, 74]
-    'Regression Workflow: Netmiko File Transfer': *id316
+    Netmiko File Transfer: &id315 [-346, 74]
+    'Regression Workflow: Netmiko File Transfer': *id315
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''
@@ -18445,8 +18357,8 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    Netmiko File Transfer: &id317 [-138, -122]
-    'Regression Workflow: Netmiko File Transfer': *id317
+    Netmiko File Transfer: &id316 [-138, -122]
+    'Regression Workflow: Netmiko File Transfer': *id316
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''
@@ -18545,8 +18457,8 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    Netmiko File Transfer: &id318 [13, 69]
-    'Regression Workflow: Netmiko File Transfer': *id318
+    Netmiko File Transfer: &id317 [13, 69]
+    'Regression Workflow: Netmiko File Transfer': *id317
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''
@@ -18647,8 +18559,8 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    Netmiko File Transfer: &id319 [196, -120]
-    'Regression Workflow: Netmiko File Transfer': *id319
+    Netmiko File Transfer: &id318 [196, -120]
+    'Regression Workflow: Netmiko File Transfer': *id318
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''
@@ -18749,8 +18661,8 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    Netmiko File Transfer: &id320 [358, 66]
-    'Regression Workflow: Netmiko File Transfer': *id320
+    Netmiko File Transfer: &id319 [358, 66]
+    'Regression Workflow: Netmiko File Transfer': *id319
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''
@@ -18937,8 +18849,8 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    Global get_credential Function and Log Obfuscation: &id321 [-315, 9]
-    'Regression Workflow: Global get_credential Function and Log Obfuscation': *id321
+    Global get_credential Function and Log Obfuscation: &id320 [-315, 9]
+    'Regression Workflow: Global get_credential Function and Log Obfuscation': *id320
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''
@@ -19036,8 +18948,8 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    Global get_credential Function and Log Obfuscation: &id322 [14, 146]
-    'Regression Workflow: Global get_credential Function and Log Obfuscation': *id322
+    Global get_credential Function and Log Obfuscation: &id321 [14, 146]
+    'Regression Workflow: Global get_credential Function and Log Obfuscation': *id321
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''
@@ -19121,8 +19033,8 @@
   payload: {}
   pools: ['All devices, links, services and users']
   positions:
-    Global get_credential Function and Log Obfuscation: &id323 [447, 101]
-    'Regression Workflow: Global get_credential Function and Log Obfuscation': *id323
+    Global get_credential Function and Log Obfuscation: &id322 [447, 101]
+    'Regression Workflow: Global get_credential Function and Log Obfuscation': *id322
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''
@@ -19302,9 +19214,9 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    'Regression Workflow: SxS Service Targets with Run Once + Skip': &id324 [-361,
+    'Regression Workflow: SxS Service Targets with Run Once + Skip': &id323 [-361,
       360]
-    SxS Service Targets with Run Once + Skip: *id324
+    SxS Service Targets with Run Once + Skip: *id323
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''
@@ -19380,9 +19292,9 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    'Regression Workflow: SxS Service Targets with Run Once + Skip': &id325 [267,
+    'Regression Workflow: SxS Service Targets with Run Once + Skip': &id324 [267,
       355]
-    SxS Service Targets with Run Once + Skip: *id325
+    SxS Service Targets with Run Once + Skip: *id324
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''
@@ -19457,9 +19369,9 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    'Regression Workflow: SxS Service Targets with Run Once + Skip': &id326 [-201,
+    'Regression Workflow: SxS Service Targets with Run Once + Skip': &id325 [-201,
       121]
-    SxS Service Targets with Run Once + Skip: *id326
+    SxS Service Targets with Run Once + Skip: *id325
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''
@@ -19534,9 +19446,9 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    'Regression Workflow: SxS Service Targets with Run Once + Skip': &id327 [429,
+    'Regression Workflow: SxS Service Targets with Run Once + Skip': &id326 [429,
       170]
-    SxS Service Targets with Run Once + Skip: *id327
+    SxS Service Targets with Run Once + Skip: *id326
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''
@@ -19693,8 +19605,8 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    Data Extraction Service: &id328 [-521, 287]
-    'Regression Workflow: Data Extraction Service': *id328
+    Data Extraction Service: &id327 [-521, 287]
+    'Regression Workflow: Data Extraction Service': *id327
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''
@@ -19782,8 +19694,8 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    Data Extraction Service: &id329 [-410, 425]
-    'Regression Workflow: Data Extraction Service': *id329
+    Data Extraction Service: &id328 [-410, 425]
+    'Regression Workflow: Data Extraction Service': *id328
   postprocessing: results["success"] = var1 == "test"
   postprocessing_mode: success
   preprocessing: ''
@@ -19871,8 +19783,8 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    Data Extraction Service: &id330 [-102, 128]
-    'Regression Workflow: Data Extraction Service': *id330
+    Data Extraction Service: &id329 [-102, 128]
+    'Regression Workflow: Data Extraction Service': *id329
   postprocessing: 'results["success"] = var2 == {"a": "b"}'
   postprocessing_mode: success
   preprocessing: ''
@@ -19960,8 +19872,8 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    Data Extraction Service: &id331 [-201, 416]
-    'Regression Workflow: Data Extraction Service': *id331
+    Data Extraction Service: &id330 [-201, 416]
+    'Regression Workflow: Data Extraction Service': *id330
   postprocessing: 'results["success"] = var2 == {"a": "b", 1: [2, 3]}'
   postprocessing_mode: success
   preprocessing: ''
@@ -20049,8 +19961,8 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    Data Extraction Service: &id332 [-307, 222]
-    'Regression Workflow: Data Extraction Service': *id332
+    Data Extraction Service: &id331 [-307, 222]
+    'Regression Workflow: Data Extraction Service': *id331
   postprocessing: results["success"] = var1 == "test2"
   postprocessing_mode: success
   preprocessing: ''
@@ -20138,8 +20050,8 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    Data Extraction Service: &id333 [-1, 512]
-    'Regression Workflow: Data Extraction Service': *id333
+    Data Extraction Service: &id332 [-1, 512]
+    'Regression Workflow: Data Extraction Service': *id332
   postprocessing: results["success"] = var3 == [1, "4"]
   postprocessing_mode: success
   preprocessing: ''
@@ -20227,8 +20139,8 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    Data Extraction Service: &id334 [31, 308]
-    'Regression Workflow: Data Extraction Service': *id334
+    Data Extraction Service: &id333 [31, 308]
+    'Regression Workflow: Data Extraction Service': *id333
   postprocessing: results["success"] = var3 == [1, "4", [2, ("trois",)]]
   postprocessing_mode: success
   preprocessing: ''
@@ -20316,8 +20228,8 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    Data Extraction Service: &id335 [159, 138]
-    'Regression Workflow: Data Extraction Service': *id335
+    Data Extraction Service: &id334 [159, 138]
+    'Regression Workflow: Data Extraction Service': *id334
   postprocessing: results["success"] = var3 == [1, "4", [2, ("trois",)], "5", {"6"}]
   postprocessing_mode: success
   preprocessing: ''
@@ -20396,8 +20308,8 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    Data Extraction Service: &id336 [274, 366]
-    'Regression Workflow: Data Extraction Service': *id336
+    Data Extraction Service: &id335 [274, 366]
+    'Regression Workflow: Data Extraction Service': *id335
   postprocessing: "string_validation = var1 == \"test4\"\r\ndict_validation = var2\
     \ == {\"a\": \"b\", 1: [2, 3], \"4\": 8}\r\nlist_validation = var3 == [1, \"4\"\
     , [2, (\"trois\",)], \"5\", {\"6\"}, (\"b\",), 5, \"huit\"]\r\n\r\nresults[\"\
@@ -20577,8 +20489,8 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    Parameterized Superworkflow Run: &id337 [142, -32]
-    'Regression Workflow: Parameterized Superworkflow Run': *id337
+    Parameterized Superworkflow Run: &id336 [142, -32]
+    'Regression Workflow: Parameterized Superworkflow Run': *id336
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''
@@ -20741,9 +20653,9 @@
   payload: {}
   pools: ['All devices, links, services and users']
   positions:
-    'Regression Workflow: Superworkflow in SxS w WT with Run Once service': &id338 [
+    'Regression Workflow: Superworkflow in SxS w WT with Run Once service': &id337 [
       -101, 129]
-    Superworkflow in SxS w WT with Run Once service: *id338
+    Superworkflow in SxS w WT with Run Once service: *id337
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''
@@ -20843,8 +20755,8 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    Parameterized Form (override tags & targets, add payload): &id339 [435, 118]
-    'Regression Workflow: Parameterized Form (override tags & targets, add payload)': *id339
+    Parameterized Form (override tags & targets, add payload): &id338 [435, 118]
+    'Regression Workflow: Parameterized Form (override tags & targets, add payload)': *id338
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -21036,8 +20948,8 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    Netmiko TextFSM Option: &id340 [-132, -29]
-    'Regression Workflow: Netmiko TextFSM Option': *id340
+    Netmiko TextFSM Option: &id339 [-132, -29]
+    'Regression Workflow: Netmiko TextFSM Option': *id339
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''
@@ -21138,8 +21050,8 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    Netmiko TextFSM Option: &id341 [-28, 186]
-    'Regression Workflow: Netmiko TextFSM Option': *id341
+    Netmiko TextFSM Option: &id340 [-28, 186]
+    'Regression Workflow: Netmiko TextFSM Option': *id340
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''
@@ -21240,8 +21152,8 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    Netmiko TextFSM Option: &id342 [316, 137]
-    'Regression Workflow: Netmiko TextFSM Option': *id342
+    Netmiko TextFSM Option: &id341 [316, 137]
+    'Regression Workflow: Netmiko TextFSM Option': *id341
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''
@@ -21342,8 +21254,8 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    Netmiko TextFSM Option: &id343 [269, -27]
-    'Regression Workflow: Netmiko TextFSM Option': *id343
+    Netmiko TextFSM Option: &id342 [269, -27]
+    'Regression Workflow: Netmiko TextFSM Option': *id342
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''
@@ -21517,11 +21429,11 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    'Regression Workflow: VRF Creation and Deletion with Napalm': &id344 [-374, -164]
-    VRF Creation and Deletion with Napalm: *id344
-    '[Regression Workflow F: Workflow of Workflows] Regression Workflow 5: VRF creation and deletion with Napalm': *id344
-    '[Regression Workflow F: Workflow of Workflows] Regression Workflow: VRF Creation and Deletion with Napalm': *id344
-    '[Regression Workflow: Workflow of Workflows] Regression Workflow: VRF Creation and Deletion with Napalm': *id344
+    'Regression Workflow: VRF Creation and Deletion with Napalm': &id343 [-374, -164]
+    VRF Creation and Deletion with Napalm: *id343
+    '[Regression Workflow F: Workflow of Workflows] Regression Workflow 5: VRF creation and deletion with Napalm': *id343
+    '[Regression Workflow F: Workflow of Workflows] Regression Workflow: VRF Creation and Deletion with Napalm': *id343
+    '[Regression Workflow: Workflow of Workflows] Regression Workflow: VRF Creation and Deletion with Napalm': *id343
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -21604,11 +21516,11 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    'Regression Workflow: VRF Creation and Deletion with Napalm': &id345 [287, 136]
-    VRF Creation and Deletion with Napalm: *id345
-    '[Regression Workflow F: Workflow of Workflows] Regression Workflow 5: VRF creation and deletion with Napalm': *id345
-    '[Regression Workflow F: Workflow of Workflows] Regression Workflow: VRF Creation and Deletion with Napalm': *id345
-    '[Regression Workflow: Workflow of Workflows] Regression Workflow: VRF Creation and Deletion with Napalm': *id345
+    'Regression Workflow: VRF Creation and Deletion with Napalm': &id344 [287, 136]
+    VRF Creation and Deletion with Napalm: *id344
+    '[Regression Workflow F: Workflow of Workflows] Regression Workflow 5: VRF creation and deletion with Napalm': *id344
+    '[Regression Workflow F: Workflow of Workflows] Regression Workflow: VRF Creation and Deletion with Napalm': *id344
+    '[Regression Workflow: Workflow of Workflows] Regression Workflow: VRF Creation and Deletion with Napalm': *id344
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -21708,11 +21620,11 @@
   positions:
     'Regression Workflow A: get_var, set_var, get_result': ['266', '161']
     'Regression Workflow C: Advanced multiprocessing': [123, -187]
-    'Regression Workflow: VRF Creation and Deletion with Napalm': &id346 [267, -146]
-    VRF Creation and Deletion with Napalm: *id346
-    '[Regression Workflow F: Workflow of Workflows] Regression Workflow 5: VRF creation and deletion with Napalm': *id346
-    '[Regression Workflow F: Workflow of Workflows] Regression Workflow: VRF Creation and Deletion with Napalm': *id346
-    '[Regression Workflow: Workflow of Workflows] Regression Workflow: VRF Creation and Deletion with Napalm': *id346
+    'Regression Workflow: VRF Creation and Deletion with Napalm': &id345 [267, -146]
+    VRF Creation and Deletion with Napalm: *id345
+    '[Regression Workflow F: Workflow of Workflows] Regression Workflow 5: VRF creation and deletion with Napalm': *id345
+    '[Regression Workflow F: Workflow of Workflows] Regression Workflow: VRF Creation and Deletion with Napalm': *id345
+    '[Regression Workflow: Workflow of Workflows] Regression Workflow: VRF Creation and Deletion with Napalm': *id345
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -21814,11 +21726,11 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    'Regression Workflow: VRF Creation and Deletion with Napalm': &id347 [-348, 160]
-    VRF Creation and Deletion with Napalm: *id347
-    '[Regression Workflow F: Workflow of Workflows] Regression Workflow 5: VRF creation and deletion with Napalm': *id347
-    '[Regression Workflow F: Workflow of Workflows] Regression Workflow: VRF Creation and Deletion with Napalm': *id347
-    '[Regression Workflow: Workflow of Workflows] Regression Workflow: VRF Creation and Deletion with Napalm': *id347
+    'Regression Workflow: VRF Creation and Deletion with Napalm': &id346 [-348, 160]
+    VRF Creation and Deletion with Napalm: *id346
+    '[Regression Workflow F: Workflow of Workflows] Regression Workflow 5: VRF creation and deletion with Napalm': *id346
+    '[Regression Workflow F: Workflow of Workflows] Regression Workflow: VRF Creation and Deletion with Napalm': *id346
+    '[Regression Workflow: Workflow of Workflows] Regression Workflow: VRF Creation and Deletion with Napalm': *id346
     iteration_devices_workflow: ['245', '32']
   postprocessing: ''
   postprocessing_mode: always
@@ -22022,20 +21934,20 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    Napalm Getters Validation: &id348 [-405, -99]
-    'Regression Workflow: Napalm Getters Validation': *id348
+    Napalm Getters Validation: &id347 [-405, -99]
+    'Regression Workflow: Napalm Getters Validation': *id347
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow B: Napalm getters validation'
-    : *id348
+    : *id347
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow B: Napalm getters validation'
-    : *id348
+    : *id347
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow: Napalm Getters Validation'
-    : *id348
+    : *id347
     ? '[[Regression Workflow: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow: Napalm Getters Validation'
-    : *id348
+    : *id347
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -22119,20 +22031,20 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    Napalm Getters Validation: &id349 [18, -122]
-    'Regression Workflow: Napalm Getters Validation': *id349
+    Napalm Getters Validation: &id348 [18, -122]
+    'Regression Workflow: Napalm Getters Validation': *id348
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow B: Napalm getters validation'
-    : *id349
+    : *id348
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow B: Napalm getters validation'
-    : *id349
+    : *id348
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow: Napalm Getters Validation'
-    : *id349
+    : *id348
     ? '[[Regression Workflow: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow: Napalm Getters Validation'
-    : *id349
+    : *id348
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -22216,20 +22128,20 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    Napalm Getters Validation: &id350 [-45, 144]
-    'Regression Workflow: Napalm Getters Validation': *id350
+    Napalm Getters Validation: &id349 [-45, 144]
+    'Regression Workflow: Napalm Getters Validation': *id349
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow B: Napalm getters validation'
-    : *id350
+    : *id349
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow B: Napalm getters validation'
-    : *id350
+    : *id349
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow: Napalm Getters Validation'
-    : *id350
+    : *id349
     ? '[[Regression Workflow: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow: Napalm Getters Validation'
-    : *id350
+    : *id349
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -22313,20 +22225,20 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    Napalm Getters Validation: &id351 [535, -147]
-    'Regression Workflow: Napalm Getters Validation': *id351
+    Napalm Getters Validation: &id350 [535, -147]
+    'Regression Workflow: Napalm Getters Validation': *id350
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow B: Napalm getters validation'
-    : *id351
+    : *id350
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow B: Napalm getters validation'
-    : *id351
+    : *id350
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow: Napalm Getters Validation'
-    : *id351
+    : *id350
     ? '[[Regression Workflow: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow: Napalm Getters Validation'
-    : *id351
+    : *id350
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -22544,20 +22456,20 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    Payload Extraction & Validation: &id352 [49, -207]
-    'Regression Workflow: Payload Extraction & Validation': *id352
+    Payload Extraction & Validation: &id351 [49, -207]
+    'Regression Workflow: Payload Extraction & Validation': *id351
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow 7: Payload Extraction & Validation'
-    : *id352
+    : *id351
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow 7: Payload Extraction & Validation'
-    : *id352
+    : *id351
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow: Payload Extraction & Validation'
-    : *id352
+    : *id351
     ? '[[Regression Workflow: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow: Payload Extraction & Validation'
-    : *id352
+    : *id351
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -22650,20 +22562,20 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    Payload Extraction & Validation: &id353 [130, -95]
-    'Regression Workflow: Payload Extraction & Validation': *id353
+    Payload Extraction & Validation: &id352 [130, -95]
+    'Regression Workflow: Payload Extraction & Validation': *id352
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow 7: Payload Extraction & Validation'
-    : *id353
+    : *id352
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow 7: Payload Extraction & Validation'
-    : *id353
+    : *id352
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow: Payload Extraction & Validation'
-    : *id353
+    : *id352
     ? '[[Regression Workflow: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow: Payload Extraction & Validation'
-    : *id353
+    : *id352
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -22743,20 +22655,20 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    Payload Extraction & Validation: &id354 [-338, -9]
-    'Regression Workflow: Payload Extraction & Validation': *id354
+    Payload Extraction & Validation: &id353 [-338, -9]
+    'Regression Workflow: Payload Extraction & Validation': *id353
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow 7: Payload Extraction & Validation'
-    : *id354
+    : *id353
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow 7: Payload Extraction & Validation'
-    : *id354
+    : *id353
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow: Payload Extraction & Validation'
-    : *id354
+    : *id353
     ? '[[Regression Workflow: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow: Payload Extraction & Validation'
-    : *id354
+    : *id353
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -22832,20 +22744,20 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    Payload Extraction & Validation: &id355 [-236, 214]
-    'Regression Workflow: Payload Extraction & Validation': *id355
+    Payload Extraction & Validation: &id354 [-236, 214]
+    'Regression Workflow: Payload Extraction & Validation': *id354
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow 7: Payload Extraction & Validation'
-    : *id355
+    : *id354
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow 7: Payload Extraction & Validation'
-    : *id355
+    : *id354
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow: Payload Extraction & Validation'
-    : *id355
+    : *id354
     ? '[[Regression Workflow: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow: Payload Extraction & Validation'
-    : *id355
+    : *id354
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -22922,20 +22834,20 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    Payload Extraction & Validation: &id356 [679, -114]
-    'Regression Workflow: Payload Extraction & Validation': *id356
+    Payload Extraction & Validation: &id355 [679, -114]
+    'Regression Workflow: Payload Extraction & Validation': *id355
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow 7: Payload Extraction & Validation'
-    : *id356
+    : *id355
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow 7: Payload Extraction & Validation'
-    : *id356
+    : *id355
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow: Payload Extraction & Validation'
-    : *id356
+    : *id355
     ? '[[Regression Workflow: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow: Payload Extraction & Validation'
-    : *id356
+    : *id355
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -23010,20 +22922,20 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    Payload Extraction & Validation: &id357 [808, 157]
-    'Regression Workflow: Payload Extraction & Validation': *id357
+    Payload Extraction & Validation: &id356 [808, 157]
+    'Regression Workflow: Payload Extraction & Validation': *id356
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow 7: Payload Extraction & Validation'
-    : *id357
+    : *id356
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow 7: Payload Extraction & Validation'
-    : *id357
+    : *id356
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow: Payload Extraction & Validation'
-    : *id357
+    : *id356
     ? '[[Regression Workflow: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow: Payload Extraction & Validation'
-    : *id357
+    : *id356
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -23179,20 +23091,20 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    Payload Extraction with Operations: &id358 [118, -243]
-    'Regression Workflow: Payload Extraction with Operations': *id358
+    Payload Extraction with Operations: &id357 [118, -243]
+    'Regression Workflow: Payload Extraction with Operations': *id357
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow 8: Payload Extraction with Operations'
-    : *id358
+    : *id357
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow 8: Payload Extraction with Operations'
-    : *id358
+    : *id357
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow: Payload Extraction with Operations'
-    : *id358
+    : *id357
     ? '[[Regression Workflow: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow: Payload Extraction with Operations'
-    : *id358
+    : *id357
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -23277,20 +23189,20 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    Payload Extraction with Operations: &id359 [619, -236]
-    'Regression Workflow: Payload Extraction with Operations': *id359
+    Payload Extraction with Operations: &id358 [619, -236]
+    'Regression Workflow: Payload Extraction with Operations': *id358
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow 8: Payload Extraction with Operations'
-    : *id359
+    : *id358
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow 8: Payload Extraction with Operations'
-    : *id359
+    : *id358
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow: Payload Extraction with Operations'
-    : *id359
+    : *id358
     ? '[[Regression Workflow: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow: Payload Extraction with Operations'
-    : *id359
+    : *id358
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -23378,20 +23290,20 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    Payload Extraction with Operations: &id360 [600, 70]
-    'Regression Workflow: Payload Extraction with Operations': *id360
+    Payload Extraction with Operations: &id359 [600, 70]
+    'Regression Workflow: Payload Extraction with Operations': *id359
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow 8: Payload Extraction with Operations'
-    : *id360
+    : *id359
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow 8: Payload Extraction with Operations'
-    : *id360
+    : *id359
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow: Payload Extraction with Operations'
-    : *id360
+    : *id359
     ? '[[Regression Workflow: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow: Payload Extraction with Operations'
-    : *id360
+    : *id359
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -23470,20 +23382,20 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    Payload Extraction with Operations: &id361 [5, 75]
-    'Regression Workflow: Payload Extraction with Operations': *id361
+    Payload Extraction with Operations: &id360 [5, 75]
+    'Regression Workflow: Payload Extraction with Operations': *id360
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow 8: Payload Extraction with Operations'
-    : *id361
+    : *id360
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow 8: Payload Extraction with Operations'
-    : *id361
+    : *id360
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow: Payload Extraction with Operations'
-    : *id361
+    : *id360
     ? '[[Regression Workflow: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow: Payload Extraction with Operations'
-    : *id361
+    : *id360
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -23558,20 +23470,20 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    Payload Extraction with Operations: &id362 [-461, 60]
-    'Regression Workflow: Payload Extraction with Operations': *id362
+    Payload Extraction with Operations: &id361 [-461, 60]
+    'Regression Workflow: Payload Extraction with Operations': *id361
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow 8: Payload Extraction with Operations'
-    : *id362
+    : *id361
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow 8: Payload Extraction with Operations'
-    : *id362
+    : *id361
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow: Payload Extraction with Operations'
-    : *id362
+    : *id361
     ? '[[Regression Workflow: Workflow of Workflows] Regression Workflow: Subworkflow
       of Workflows] Regression Workflow: Payload Extraction with Operations'
-    : *id362
+    : *id361
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''

@@ -552,7 +552,7 @@
     Service Priorities, Napalm Getters, Postprocessing: *id112
     Shared Service in Multiple Subworkflows: *id102
     'Skip Mechanism: Conditional Skip Query in Failed and Discard Modes': [599, 331]
-    'Skip Mechanism: Fork based on value with Skip Discard Mechanism': [433, 263]
+    'Skip Mechanism: Fork based on value with Skip Discard Mechanism': [442, 328]
     Skip Query with device in Run Once Mode: *id103
     Skip Services in SxS mode: *id078
     Skip, Discard and Disable Result Creation Mechanism: *id104
@@ -12603,28 +12603,27 @@
     263966e8-80d5-4cf2-a63f-5ca7fd56c6ec:
       alignment: left
       content: "Discards all devices whose\r\nmodel is not Juniper."
-      positions: [-375, 352]
+      positions: [-425, 385]
     7ac4a816-41e6-4737-aa39-4df30198b799:
       alignment: left
       content: "This service is configured to discard all devices,\r\nto test that\
         \ it works when all devices are discarded."
-      positions: [10, 338]
+      positions: [-12, 388]
     e463d7db-3148-4df3-acf9-62e42f52b73e:
       alignment: left
       content: "Discards all devices whose\r\nmodel is not Arista."
-      positions: [-87, -69]
+      positions: [-109, -39]
     f8de3ca5-718c-4d76-860e-ddceeb7e3f83:
       alignment: left
       content: "This workflow runs on 5 devices:\r\n* 2 with model \"Arista\": Washington,\
         \ Austin\r\n* 3 with model \"Juniper\": Baltimore, Cambridge, Cincinnati\r\
         \nThe devices will take different success based on their model,\r\nusing the\
-        \ \"Discard\" option of the skip mechanism.\r\nTo be tested both in\r\n- device\
-        \ by device mode\r\n- service by service with workflow targets mode\r\nExpected\
-        \ results:\r\n- 3 devices discarded in the upper path. (0 device in the failure\
-        \ edge after skip service)\r\n- 2 devices discarded in the lower path (0 device\
-        \ in the failure edge after skip service)"
-      positions: [3, 135]
-  last_modified: '2021-08-19 07:39:54.557300'
+        \ \"Discard\" option of the skip mechanism.\r\nTo be tested both in DxD and\
+        \ SxS WF targets mode.\r\nExpected results:\r\n- 3 devices discarded in the\
+        \ upper path. (0 device in the failure edge after skip service)\r\n- 2 devices\
+        \ discarded in the lower path (0 device in the failure edge after skip service)"
+      positions: [-74, 166]
+  last_modified: '2021-08-19 07:45:22.736294'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -12747,7 +12746,7 @@
     'Regression Workflow U: fork based on value with skip discard mode': *id266
     'Regression Workflow: Fork based on value with Skip Discard Mechanism': *id266
     'Regression workflow P: large workflow (scalability)': *id267
-    'Skip Mechanism: Fork based on value with Skip Discard Mechanism': [-412, 14]
+    'Skip Mechanism: Fork based on value with Skip Discard Mechanism': [-466, 22]
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -12801,7 +12800,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2020-09-24 07:49:05.923991'
+  last_modified: '2021-08-19 07:44:43.988142'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -12828,7 +12827,7 @@
     Fork based on value with Skip Discard Mechanism: &id268 [47, -29]
     'Regression Workflow U: fork based on value with skip discard mode': *id268
     'Regression Workflow: Fork based on value with Skip Discard Mechanism': *id268
-    'Skip Mechanism: Fork based on value with Skip Discard Mechanism': [-90, -11]
+    'Skip Mechanism: Fork based on value with Skip Discard Mechanism': [-120, 30]
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -12842,7 +12841,7 @@
   shared: false
   skip: {}
   skip_query: device.model != "Arista"
-  skip_value: Discard
+  skip_value: discard
   source_code: "# Availble variables: device, results, run\r\n# Returning state:\r\
     \n#    results[\"success\"] = True\r\n#    results[\"result\"] = <return data>\r\
     \n# Logging: log(level, text)\r\n#    log(\"info\", \"My log message\")\r\n# Exit\
@@ -12884,7 +12883,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2020-09-24 07:49:34.202425'
+  last_modified: '2021-08-19 07:44:52.104274'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -12911,7 +12910,7 @@
     Fork based on value with Skip Discard Mechanism: &id269 [-430, 342]
     'Regression Workflow U: fork based on value with skip discard mode': *id269
     'Regression Workflow: Fork based on value with Skip Discard Mechanism': *id269
-    'Skip Mechanism: Fork based on value with Skip Discard Mechanism': [-381, 286]
+    'Skip Mechanism: Fork based on value with Skip Discard Mechanism': [-434, 308]
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -12925,7 +12924,7 @@
   shared: false
   skip: {}
   skip_query: device.model != "Juniper"
-  skip_value: Discard
+  skip_value: discard
   source_code: "# Availble variables: device, results, run\r\n# Returning state:\r\
     \n#    results[\"success\"] = True\r\n#    results[\"result\"] = <return data>\r\
     \n# Logging: log(level, text)\r\n#    log(\"info\", \"My log message\")\r\n# Exit\
@@ -13015,7 +13014,7 @@
     Fork based on value with Skip Discard Mechanism: &id270 [574, 0]
     'Regression Workflow U: fork based on value with skip discard mode': *id270
     'Regression Workflow: Fork based on value with Skip Discard Mechanism': *id270
-    'Skip Mechanism: Fork based on value with Skip Discard Mechanism': [523, -48]
+    'Skip Mechanism: Fork based on value with Skip Discard Mechanism': [440, 20]
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -13105,7 +13104,7 @@
     Fork based on value with Skip Discard Mechanism: &id271 [437, 78]
     'Regression Workflow U: fork based on value with skip discard mode': *id271
     'Regression Workflow: Fork based on value with Skip Discard Mechanism': *id271
-    'Skip Mechanism: Fork based on value with Skip Discard Mechanism': [362, 2]
+    'Skip Mechanism: Fork based on value with Skip Discard Mechanism': [246, 64]
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -13161,7 +13160,7 @@
   iteration_devices_property: ip_address
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2020-09-29 00:55:48.720517'
+  last_modified: '2021-08-19 07:46:35.027296'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -13193,7 +13192,7 @@
     Fork based on value with Skip Discard Mechanism: &id272 [32, 431]
     'Regression Workflow U: fork based on value with skip discard mode': *id272
     'Regression Workflow: Fork based on value with Skip Discard Mechanism': *id272
-    'Skip Mechanism: Fork based on value with Skip Discard Mechanism': [-18, 258]
+    'Skip Mechanism: Fork based on value with Skip Discard Mechanism': [-43, 287]
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -13208,7 +13207,7 @@
   shared: false
   skip: {}
   skip_query: 'True'
-  skip_value: Discard
+  skip_value: discard
   target_devices: []
   target_pools: []
   time_between_retries: 10

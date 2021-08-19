@@ -67,6 +67,9 @@
     'Miscellaneous: DxD Multiprocessing, RBAC Admin Only, Skip Mechanism': *id002
     'Miscellaneous: Link Neighbors Mechanism and RBAC default access (public)': [
       -339, -122]
+    'Miscellaneous: Netmiko Services, Connection Cache Management': [-383, -95]
+    'Miscellaneous: Netmiko Services, Connection Cache, Targets Definition': [-435,
+      -39]
     Multiple parallel connections to same device: &id045 [-339, -168]
     NCClient Netconf Service: &id022 [-448, -185]
     Napalm Getters Validation: &id023 [-604, 9]
@@ -413,6 +416,9 @@
     'Miscellaneous: DxD Multiprocessing, RBAC Admin Only, Skip Mechanism': *id067
     'Miscellaneous: Link Neighbors Mechanism and RBAC default access (public)': [
       387, -149]
+    'Miscellaneous: Netmiko Services, Connection Cache Management': [-383, 167]
+    'Miscellaneous: Netmiko Services, Connection Cache, Targets Definition': [-418,
+      177]
     Multiple parallel connections to same device: &id110 [689, 58]
     NCClient Netconf Service: &id087 [556, 119]
     Napalm Getters Validation: &id088 [-600, 63]
@@ -1100,7 +1106,7 @@
   max_processes: 5
   maximum_runs: 1
   multiprocessing: false
-  name: '[VRF Creation and Deletion with Netmiko] netmiko_create_vrf_test'
+  name: '[Miscellaneous: Netmiko Services, Connection Cache, Targets Definition] netmiko_create_vrf_test'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -1115,6 +1121,9 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
+    'Miscellaneous: Netmiko Services, Connection Cache Management': [-38, -86]
+    'Miscellaneous: Netmiko Services, Connection Cache, Targets Definition': [-115,
+      -70]
     'Regression Workflow 1: VRF creation and deletion with Netmiko': &id138 [-38,
       -86]
     'Regression Workflow 4: VRF creation and deletion with Netmiko': *id138
@@ -1204,7 +1213,7 @@
   max_processes: 5
   maximum_runs: 1
   multiprocessing: false
-  name: '[VRF Creation and Deletion with Netmiko] netmiko_check_vrf_test'
+  name: '[Miscellaneous: Netmiko Services, Connection Cache, Targets Definition] netmiko_check_vrf_test'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -1220,6 +1229,9 @@
   pools: ['All devices, links, services and users']
   positions:
     Iteration Services Test Workflow: ['147', '-14']
+    'Miscellaneous: Netmiko Services, Connection Cache Management': [445, -37]
+    'Miscellaneous: Netmiko Services, Connection Cache, Targets Definition': [352,
+      7]
     'Regression Workflow 1: VRF creation and deletion with Netmiko': &id139 [445,
       -37]
     'Regression Workflow 2: Separate Failure - Success paths': ['84', '-3']
@@ -1307,7 +1319,7 @@
   max_processes: 5
   maximum_runs: 1
   multiprocessing: false
-  name: '[VRF Creation and Deletion with Netmiko] netmiko_delete_vrf_test'
+  name: '[Miscellaneous: Netmiko Services, Connection Cache, Targets Definition] netmiko_delete_vrf_test'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -1322,6 +1334,9 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
+    'Miscellaneous: Netmiko Services, Connection Cache Management': [476, 119]
+    'Miscellaneous: Netmiko Services, Connection Cache, Targets Definition': [347,
+      119]
     'Regression Workflow 1: VRF creation and deletion with Netmiko': &id140 [476,
       119]
     'Regression Workflow 4: VRF creation and deletion with Netmiko': *id140
@@ -1427,6 +1442,9 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
+    'Miscellaneous: Netmiko Services, Connection Cache Management': [-10, 157]
+    'Miscellaneous: Netmiko Services, Connection Cache, Targets Definition': [-84,
+      184]
     'Regression Workflow 1: VRF creation and deletion with Netmiko': &id141 [-10,
       157]
     'Regression Workflow 2: Separate Failure - Success paths': &id142 [-194, 225]
@@ -3753,16 +3771,18 @@
         \ logs:\r\n- netmiko_check_vrf_test - DEVICE Washington : Using cached Netmiko\
         \ connection\r\n- netmiko_check_vrf_test - DEVICE Washington : Closed netmiko\
         \ connection\r\n"
-      positions: [603, -136]
+      positions: [525, -84]
     735baaec-e1f2-4b17-b402-11d8ae7a0d75:
       alignment: left
-      content: "This workflow runs on two devices :\r\n- The pool \"Washington\" that\
-        \ contains Washington.\r\n- The device \"Austin\".\r\nWashington should reach\
-        \ the end and Austin fail at the first step.\r\nAt the end of the workflow,\
-        \ the cache connection should be closed.\r\nExpected log:\r\n- Regression\
-        \ Workflow 4: VRF creation and deletion with Netmiko - DEVICE Washington :\
-        \ Closed netmiko connection"
-      positions: [-61, 38]
+      content: "This workflow tests:\r\n- the targets defined as a combination of\
+        \ devices and pools.\r\nIt runs on two devices, the pool \"Washington\" and\
+        \ the device \"Austin\".\r\n- The netmiko Validation and Configuration services.\
+        \ It creates and\r\ndeletes a VRF on the router with Netmiko.\r\n- The connection\
+        \ cache management: closing cached connection,\r\nopening new connection,\
+        \ reusing cached connection.\r\nAt the end of the workflow, the cache connection\
+        \ should be closed.\r\nExpected log:\r\n- Regression Workflow 4: VRF creation\
+        \ and deletion with Netmiko -\r\nDEVICE Washington : Closed netmiko connection"
+      positions: [-96, 61]
     a7458a18-4812-498e-857d-b885237a6525:
       alignment: left
       content: "This service is configured with \"Start New Connection\".\r\nIt should\
@@ -3770,20 +3790,14 @@
         \ one.\r\nExpected Log:\r\n- Netmiko: Check VRF (test) does not exist - DEVICE\
         \ Washington : Closed netmiko connection\r\n- Netmiko: Check VRF (test) does\
         \ not exist - DEVICE Washington : Opening new Netmiko connection\r\n"
-      positions: [-100, 266]
+      positions: [-82, 299]
     b5dc9b96-d0bf-4092-8e60-b82ca6db2ad6:
       alignment: left
       content: "This service should automatically detect that there is no\r\nlonger\
         \ a cached connection, and recreate a new one.\r\nExpected log:\r\nnetmiko_delete_vrf_test\
         \ - DEVICE Washington : Opening new Netmiko connection\r\n"
-      positions: [611, 213]
-    e6b81854-aece-42bf-9375-bee035a29425:
-      alignment: left
-      content: "Test:\r\n- with and without multiprocessing\r\n- devices defned as\
-        \ a combination of devices and pools.\r\nThe workflow is running on \"Austin\"\
-        \ as a device and \"Washington\", as a pool."
-      positions: [39, -176]
-  last_modified: '2021-08-07 08:52:04.924295'
+      positions: [529, 207]
+  last_modified: '2021-08-19 08:05:57.865208'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -3791,7 +3805,7 @@
   max_processes: 5
   maximum_runs: 1
   multiprocessing: true
-  name: VRF Creation and Deletion with Netmiko
+  name: 'Miscellaneous: Netmiko Services, Connection Cache, Targets Definition'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -3814,13 +3828,14 @@
   reply_to: ''
   reserved: false
   run_method: per_device
-  scoped_name: VRF Creation and Deletion with Netmiko
+  scoped_name: 'Miscellaneous: Netmiko Services, Connection Cache, Targets Definition'
   send_notification: false
   send_notification_method: mail
-  services: ['[Shared] Start', '[Shared] End', '[VRF Creation and Deletion with Netmiko]
-      netmiko_create_vrf_test', '[VRF Creation and Deletion with Netmiko] netmiko_check_vrf_test',
-    '[VRF Creation and Deletion with Netmiko] netmiko_delete_vrf_test', '[Shared]
-      Netmiko: Check VRF (test) does not exist']
+  services: ['[Shared] Start', '[Shared] End', '[Miscellaneous: Netmiko Services,
+      Connection Cache, Targets Definition] netmiko_create_vrf_test', '[Miscellaneous:
+      Netmiko Services, Connection Cache, Targets Definition] netmiko_check_vrf_test',
+    '[Miscellaneous: Netmiko Services, Connection Cache, Targets Definition] netmiko_delete_vrf_test',
+    '[Shared] Netmiko: Check VRF (test) does not exist']
   shared: false
   skip: {}
   skip_query: ''

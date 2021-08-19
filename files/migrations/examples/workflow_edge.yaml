@@ -1,26 +1,29 @@
-- {color: green, destination: '[VRF Creation and Deletion with Netmiko] netmiko_create_vrf_test',
-  label: success, name: '[Regression Workflow: VRF Creation and Deletion with Netmiko]
-    2021-04-24 08:58:40.195298', source: '[Shared] Start', subtype: success, type: workflow_edge,
-  workflow: VRF Creation and Deletion with Netmiko}
-- {color: green, destination: '[VRF Creation and Deletion with Netmiko] netmiko_check_vrf_test',
-  label: success, name: '[Regression Workflow: VRF Creation and Deletion with Netmiko]
-    2021-04-24 08:58:40.195356', source: '[VRF Creation and Deletion with Netmiko]
-    netmiko_create_vrf_test', subtype: success, type: workflow_edge, workflow: VRF
-    Creation and Deletion with Netmiko}
-- {color: green, destination: '[VRF Creation and Deletion with Netmiko] netmiko_delete_vrf_test',
-  label: success, name: '[Regression Workflow: VRF Creation and Deletion with Netmiko]
-    2021-04-24 08:58:40.195378', source: '[VRF Creation and Deletion with Netmiko]
-    netmiko_check_vrf_test', subtype: success, type: workflow_edge, workflow: VRF
-    Creation and Deletion with Netmiko}
+- {color: green, destination: '[Miscellaneous: Netmiko Services, Connection Cache,
+    Targets Definition] netmiko_create_vrf_test', label: success, name: '[Regression
+    Workflow: VRF Creation and Deletion with Netmiko] 2021-04-24 08:58:40.195298',
+  source: '[Shared] Start', subtype: success, type: workflow_edge, workflow: 'Miscellaneous:
+    Netmiko Services, Connection Cache, Targets Definition'}
+- {color: green, destination: '[Miscellaneous: Netmiko Services, Connection Cache,
+    Targets Definition] netmiko_check_vrf_test', label: success, name: '[Regression
+    Workflow: VRF Creation and Deletion with Netmiko] 2021-04-24 08:58:40.195356',
+  source: '[Miscellaneous: Netmiko Services, Connection Cache, Targets Definition]
+    netmiko_create_vrf_test', subtype: success, type: workflow_edge, workflow: 'Miscellaneous:
+    Netmiko Services, Connection Cache, Targets Definition'}
+- {color: green, destination: '[Miscellaneous: Netmiko Services, Connection Cache,
+    Targets Definition] netmiko_delete_vrf_test', label: success, name: '[Regression
+    Workflow: VRF Creation and Deletion with Netmiko] 2021-04-24 08:58:40.195378',
+  source: '[Miscellaneous: Netmiko Services, Connection Cache, Targets Definition]
+    netmiko_check_vrf_test', subtype: success, type: workflow_edge, workflow: 'Miscellaneous:
+    Netmiko Services, Connection Cache, Targets Definition'}
 - {color: green, destination: '[Shared] Netmiko: Check VRF (test) does not exist',
   label: success, name: '[Regression Workflow: VRF Creation and Deletion with Netmiko]
-    2021-04-24 08:58:40.195400', source: '[VRF Creation and Deletion with Netmiko]
-    netmiko_delete_vrf_test', subtype: success, type: workflow_edge, workflow: VRF
-    Creation and Deletion with Netmiko}
+    2021-04-24 08:58:40.195400', source: '[Miscellaneous: Netmiko Services, Connection
+    Cache, Targets Definition] netmiko_delete_vrf_test', subtype: success, type: workflow_edge,
+  workflow: 'Miscellaneous: Netmiko Services, Connection Cache, Targets Definition'}
 - {color: green, destination: '[Shared] End', label: success, name: '[Regression Workflow:
     VRF Creation and Deletion with Netmiko] 2021-04-24 08:58:40.195424', source: '[Shared]
     Netmiko: Check VRF (test) does not exist', subtype: success, type: workflow_edge,
-  workflow: VRF Creation and Deletion with Netmiko}
+  workflow: 'Miscellaneous: Netmiko Services, Connection Cache, Targets Definition'}
 - {color: green, destination: '[Service Priorities, Napalm Getters, Postprocessing]
     get_interfaces_ip', label: success, name: '[Regression Workflow: Service Priorities,
     Napalm Getters, Postprocessing] 2021-04-24 08:58:40.195466', source: '[Shared]

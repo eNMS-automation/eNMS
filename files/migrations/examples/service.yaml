@@ -205,6 +205,7 @@
     Service Priorities, Napalm Getters, Postprocessing: *id047
     Shared Service in Multiple Subworkflows: *id037
     'Skip Mechanism: Conditional Skip Query in Failed and Discard Modes': [-322, 98]
+    'Skip Mechanism: Fork based on value with Skip Discard Mechanism': [-501, 164]
     Skip Query with device in Run Once Mode: *id038
     Skip Services in SxS mode: *id013
     Skip, Discard and Disable Result Creation Mechanism: *id039
@@ -551,6 +552,7 @@
     Service Priorities, Napalm Getters, Postprocessing: *id112
     Shared Service in Multiple Subworkflows: *id102
     'Skip Mechanism: Conditional Skip Query in Failed and Discard Modes': [599, 331]
+    'Skip Mechanism: Fork based on value with Skip Discard Mechanism': [433, 263]
     Skip Query with device in Run Once Mode: *id103
     Skip Services in SxS mode: *id078
     Skip, Discard and Disable Result Creation Mechanism: *id104
@@ -12598,11 +12600,19 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels:
+    263966e8-80d5-4cf2-a63f-5ca7fd56c6ec:
+      alignment: left
+      content: "Discards all devices whose\r\nmodel is not Juniper."
+      positions: [-375, 352]
     7ac4a816-41e6-4737-aa39-4df30198b799:
       alignment: left
-      content: "This service is configured to discard all devices,\r\nso as to test\
-        \ that it works when all devices are discarded."
-      positions: [39, 502]
+      content: "This service is configured to discard all devices,\r\nto test that\
+        \ it works when all devices are discarded."
+      positions: [10, 338]
+    e463d7db-3148-4df3-acf9-62e42f52b73e:
+      alignment: left
+      content: "Discards all devices whose\r\nmodel is not Arista."
+      positions: [-87, -69]
     f8de3ca5-718c-4d76-860e-ddceeb7e3f83:
       alignment: left
       content: "This workflow runs on 5 devices:\r\n* 2 with model \"Arista\": Washington,\
@@ -12613,8 +12623,8 @@
         \ results:\r\n- 3 devices discarded in the upper path. (0 device in the failure\
         \ edge after skip service)\r\n- 2 devices discarded in the lower path (0 device\
         \ in the failure edge after skip service)"
-      positions: [-12, 193]
-  last_modified: '2021-08-07 08:47:28.399282'
+      positions: [3, 135]
+  last_modified: '2021-08-19 07:39:54.557300'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -12622,7 +12632,7 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: Fork based on value with Skip Discard Mechanism
+  name: 'Skip Mechanism: Fork based on value with Skip Discard Mechanism'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -12644,15 +12654,17 @@
   reply_to: ''
   reserved: false
   run_method: per_device
-  scoped_name: Fork based on value with Skip Discard Mechanism
+  scoped_name: 'Skip Mechanism: Fork based on value with Skip Discard Mechanism'
   send_notification: false
   send_notification_method: mail
-  services: ['[Shared] Start', '[Shared] End', '[Fork based on value with Skip Discard
-      Mechanism] REST API: call *is_alive* endpoint', '[Fork based on value with Skip
-      Discard Mechanism] Arista devices', '[Fork based on value with Skip Discard
-      Mechanism] Juniper devices', '[Fork based on value with Skip Discard Mechanism]
-      Show VRF', '[Fork based on value with Skip Discard Mechanism] is_alive endpoint',
-    '[Fork based on value with Skip Discard Mechanism] is_alive endpoint 2: Skipped']
+  services: ['[Shared] Start', '[Shared] End', '[Skip Mechanism: Fork based on value
+      with Skip Discard Mechanism] REST API: call *is_alive* endpoint', '[Skip Mechanism:
+      Fork based on value with Skip Discard Mechanism] Arista devices', '[Skip Mechanism:
+      Fork based on value with Skip Discard Mechanism] Juniper devices', '[Skip Mechanism:
+      Fork based on value with Skip Discard Mechanism] Show VRF', '[Skip Mechanism:
+      Fork based on value with Skip Discard Mechanism] is_alive endpoint', '[Skip
+      Mechanism: Fork based on value with Skip Discard Mechanism] is_alive endpoint
+      2: Skipped']
   shared: false
   skip: {}
   skip_query: ''
@@ -12703,8 +12715,8 @@
   max_processes: 5
   maximum_runs: 1
   multiprocessing: true
-  name: '[Fork based on value with Skip Discard Mechanism] REST API: call *is_alive*
-    endpoint'
+  name: '[Skip Mechanism: Fork based on value with Skip Discard Mechanism] REST API:
+    call *is_alive* endpoint'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -12735,6 +12747,7 @@
     'Regression Workflow U: fork based on value with skip discard mode': *id266
     'Regression Workflow: Fork based on value with Skip Discard Mechanism': *id266
     'Regression workflow P: large workflow (scalability)': *id267
+    'Skip Mechanism: Fork based on value with Skip Discard Mechanism': [-412, 14]
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -12796,7 +12809,8 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Fork based on value with Skip Discard Mechanism] Arista devices'
+  name: '[Skip Mechanism: Fork based on value with Skip Discard Mechanism] Arista
+    devices'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -12814,6 +12828,7 @@
     Fork based on value with Skip Discard Mechanism: &id268 [47, -29]
     'Regression Workflow U: fork based on value with skip discard mode': *id268
     'Regression Workflow: Fork based on value with Skip Discard Mechanism': *id268
+    'Skip Mechanism: Fork based on value with Skip Discard Mechanism': [-90, -11]
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -12877,7 +12892,8 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Fork based on value with Skip Discard Mechanism] Juniper devices'
+  name: '[Skip Mechanism: Fork based on value with Skip Discard Mechanism] Juniper
+    devices'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -12895,6 +12911,7 @@
     Fork based on value with Skip Discard Mechanism: &id269 [-430, 342]
     'Regression Workflow U: fork based on value with skip discard mode': *id269
     'Regression Workflow: Fork based on value with Skip Discard Mechanism': *id269
+    'Skip Mechanism: Fork based on value with Skip Discard Mechanism': [-381, 286]
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -12980,7 +12997,7 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Fork based on value with Skip Discard Mechanism] Show VRF'
+  name: '[Skip Mechanism: Fork based on value with Skip Discard Mechanism] Show VRF'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -12998,6 +13015,7 @@
     Fork based on value with Skip Discard Mechanism: &id270 [574, 0]
     'Regression Workflow U: fork based on value with skip discard mode': *id270
     'Regression Workflow: Fork based on value with Skip Discard Mechanism': *id270
+    'Skip Mechanism: Fork based on value with Skip Discard Mechanism': [523, -48]
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -13063,7 +13081,8 @@
   max_processes: 5
   maximum_runs: 1
   multiprocessing: true
-  name: '[Fork based on value with Skip Discard Mechanism] is_alive endpoint'
+  name: '[Skip Mechanism: Fork based on value with Skip Discard Mechanism] is_alive
+    endpoint'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -13086,6 +13105,7 @@
     Fork based on value with Skip Discard Mechanism: &id271 [437, 78]
     'Regression Workflow U: fork based on value with skip discard mode': *id271
     'Regression Workflow: Fork based on value with Skip Discard Mechanism': *id271
+    'Skip Mechanism: Fork based on value with Skip Discard Mechanism': [362, 2]
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -13149,7 +13169,8 @@
   max_processes: 5
   maximum_runs: 1
   multiprocessing: true
-  name: '[Fork based on value with Skip Discard Mechanism] is_alive endpoint 2: Skipped'
+  name: '[Skip Mechanism: Fork based on value with Skip Discard Mechanism] is_alive
+    endpoint 2: Skipped'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -13172,6 +13193,7 @@
     Fork based on value with Skip Discard Mechanism: &id272 [32, 431]
     'Regression Workflow U: fork based on value with skip discard mode': *id272
     'Regression Workflow: Fork based on value with Skip Discard Mechanism': *id272
+    'Skip Mechanism: Fork based on value with Skip Discard Mechanism': [-18, 258]
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''

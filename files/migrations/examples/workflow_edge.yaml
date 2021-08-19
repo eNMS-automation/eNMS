@@ -691,66 +691,76 @@
   source: '[Skip Mechanism: Conditional Skip Query in Failed and Discard Modes] Skip
     router5-7 in discard mode', subtype: failure, type: workflow_edge, workflow: 'Skip
     Mechanism: Conditional Skip Query in Failed and Discard Modes'}
-- {color: green, destination: '[Fork based on value with Skip Discard Mechanism] REST
-    API: call *is_alive* endpoint', label: success, name: '[Regression Workflow: Fork
-    based on value with Skip Discard Mechanism] 2021-04-24 08:58:40.199025', source: '[Shared]
-    Start', subtype: success, type: workflow_edge, workflow: Fork based on value with
-    Skip Discard Mechanism}
-- {color: green, destination: '[Fork based on value with Skip Discard Mechanism] Juniper
-    devices', label: success, name: '[Regression Workflow: Fork based on value with
-    Skip Discard Mechanism] 2021-04-24 08:58:40.199039', source: '[Fork based on value
-    with Skip Discard Mechanism] REST API: call *is_alive* endpoint', subtype: success,
-  type: workflow_edge, workflow: Fork based on value with Skip Discard Mechanism}
-- {color: green, destination: '[Fork based on value with Skip Discard Mechanism] Arista
-    devices', label: success, name: '[Regression Workflow: Fork based on value with
-    Skip Discard Mechanism] 2021-04-24 08:58:40.199054', source: '[Fork based on value
-    with Skip Discard Mechanism] REST API: call *is_alive* endpoint', subtype: success,
-  type: workflow_edge, workflow: Fork based on value with Skip Discard Mechanism}
-- {color: green, destination: '[Fork based on value with Skip Discard Mechanism] Show
-    VRF', label: success, name: '[Regression Workflow: Fork based on value with Skip
-    Discard Mechanism] 2021-04-24 08:58:40.199069', source: '[Fork based on value
-    with Skip Discard Mechanism] Arista devices', subtype: success, type: workflow_edge,
-  workflow: Fork based on value with Skip Discard Mechanism}
-- {color: red, destination: '[Fork based on value with Skip Discard Mechanism] is_alive
-    endpoint', label: failure, name: '[Regression Workflow: Fork based on value with
-    Skip Discard Mechanism] 2021-04-24 08:58:40.199083', source: '[Fork based on value
-    with Skip Discard Mechanism] Arista devices', subtype: failure, type: workflow_edge,
-  workflow: Fork based on value with Skip Discard Mechanism}
+- {color: green, destination: '[Skip Mechanism: Fork based on value with Skip Discard
+    Mechanism] REST API: call *is_alive* endpoint', label: success, name: '[Regression
+    Workflow: Fork based on value with Skip Discard Mechanism] 2021-04-24 08:58:40.199025',
+  source: '[Shared] Start', subtype: success, type: workflow_edge, workflow: 'Skip
+    Mechanism: Fork based on value with Skip Discard Mechanism'}
+- {color: green, destination: '[Skip Mechanism: Fork based on value with Skip Discard
+    Mechanism] Juniper devices', label: success, name: '[Regression Workflow: Fork
+    based on value with Skip Discard Mechanism] 2021-04-24 08:58:40.199039', source: '[Skip
+    Mechanism: Fork based on value with Skip Discard Mechanism] REST API: call *is_alive*
+    endpoint', subtype: success, type: workflow_edge, workflow: 'Skip Mechanism: Fork
+    based on value with Skip Discard Mechanism'}
+- {color: green, destination: '[Skip Mechanism: Fork based on value with Skip Discard
+    Mechanism] Arista devices', label: success, name: '[Regression Workflow: Fork
+    based on value with Skip Discard Mechanism] 2021-04-24 08:58:40.199054', source: '[Skip
+    Mechanism: Fork based on value with Skip Discard Mechanism] REST API: call *is_alive*
+    endpoint', subtype: success, type: workflow_edge, workflow: 'Skip Mechanism: Fork
+    based on value with Skip Discard Mechanism'}
+- {color: green, destination: '[Skip Mechanism: Fork based on value with Skip Discard
+    Mechanism] Show VRF', label: success, name: '[Regression Workflow: Fork based
+    on value with Skip Discard Mechanism] 2021-04-24 08:58:40.199069', source: '[Skip
+    Mechanism: Fork based on value with Skip Discard Mechanism] Arista devices', subtype: success,
+  type: workflow_edge, workflow: 'Skip Mechanism: Fork based on value with Skip Discard
+    Mechanism'}
+- {color: red, destination: '[Skip Mechanism: Fork based on value with Skip Discard
+    Mechanism] is_alive endpoint', label: failure, name: '[Regression Workflow: Fork
+    based on value with Skip Discard Mechanism] 2021-04-24 08:58:40.199083', source: '[Skip
+    Mechanism: Fork based on value with Skip Discard Mechanism] Arista devices', subtype: failure,
+  type: workflow_edge, workflow: 'Skip Mechanism: Fork based on value with Skip Discard
+    Mechanism'}
 - {color: red, destination: '[Shared] End', label: failure, name: '[Regression Workflow:
     Fork based on value with Skip Discard Mechanism] 2021-04-24 08:58:40.199098',
-  source: '[Fork based on value with Skip Discard Mechanism] is_alive endpoint', subtype: failure,
-  type: workflow_edge, workflow: Fork based on value with Skip Discard Mechanism}
+  source: '[Skip Mechanism: Fork based on value with Skip Discard Mechanism] is_alive
+    endpoint', subtype: failure, type: workflow_edge, workflow: 'Skip Mechanism: Fork
+    based on value with Skip Discard Mechanism'}
 - {color: red, destination: '[Shared] End', label: failure, name: '[Regression Workflow:
     Fork based on value with Skip Discard Mechanism] 2021-04-24 08:58:40.199112',
-  source: '[Fork based on value with Skip Discard Mechanism] Show VRF', subtype: failure,
-  type: workflow_edge, workflow: Fork based on value with Skip Discard Mechanism}
+  source: '[Skip Mechanism: Fork based on value with Skip Discard Mechanism] Show
+    VRF', subtype: failure, type: workflow_edge, workflow: 'Skip Mechanism: Fork based
+    on value with Skip Discard Mechanism'}
 - {color: green, destination: '[Shared] End', label: success, name: '[Regression Workflow:
     Fork based on value with Skip Discard Mechanism] 2021-04-24 08:58:40.199165',
-  source: '[Fork based on value with Skip Discard Mechanism] Show VRF', subtype: success,
-  type: workflow_edge, workflow: Fork based on value with Skip Discard Mechanism}
+  source: '[Skip Mechanism: Fork based on value with Skip Discard Mechanism] Show
+    VRF', subtype: success, type: workflow_edge, workflow: 'Skip Mechanism: Fork based
+    on value with Skip Discard Mechanism'}
 - {color: green, destination: '[Shared] End', label: success, name: '[Regression Workflow:
     Fork based on value with Skip Discard Mechanism] 2021-04-24 08:58:40.199192',
-  source: '[Fork based on value with Skip Discard Mechanism] is_alive endpoint', subtype: success,
-  type: workflow_edge, workflow: Fork based on value with Skip Discard Mechanism}
+  source: '[Skip Mechanism: Fork based on value with Skip Discard Mechanism] is_alive
+    endpoint', subtype: success, type: workflow_edge, workflow: 'Skip Mechanism: Fork
+    based on value with Skip Discard Mechanism'}
 - {color: green, destination: '[Shared] End', label: success, name: '[Regression Workflow:
     Fork based on value with Skip Discard Mechanism] 2021-04-24 08:58:40.199206',
-  source: '[Fork based on value with Skip Discard Mechanism] is_alive endpoint 2:
-    Skipped', subtype: success, type: workflow_edge, workflow: Fork based on value
-    with Skip Discard Mechanism}
+  source: '[Skip Mechanism: Fork based on value with Skip Discard Mechanism] is_alive
+    endpoint 2: Skipped', subtype: success, type: workflow_edge, workflow: 'Skip Mechanism:
+    Fork based on value with Skip Discard Mechanism'}
 - {color: red, destination: '[Shared] End', label: failure, name: '[Regression Workflow:
     Fork based on value with Skip Discard Mechanism] 2021-04-24 08:58:40.199241',
-  source: '[Fork based on value with Skip Discard Mechanism] is_alive endpoint 2:
-    Skipped', subtype: failure, type: workflow_edge, workflow: Fork based on value
-    with Skip Discard Mechanism}
-- {color: green, destination: '[Fork based on value with Skip Discard Mechanism] is_alive
-    endpoint 2: Skipped', label: success, name: '[Regression Workflow: Fork based
-    on value with Skip Discard Mechanism] 2021-04-24 08:58:40.199263', source: '[Fork
-    based on value with Skip Discard Mechanism] Juniper devices', subtype: success,
-  type: workflow_edge, workflow: Fork based on value with Skip Discard Mechanism}
+  source: '[Skip Mechanism: Fork based on value with Skip Discard Mechanism] is_alive
+    endpoint 2: Skipped', subtype: failure, type: workflow_edge, workflow: 'Skip Mechanism:
+    Fork based on value with Skip Discard Mechanism'}
+- {color: green, destination: '[Skip Mechanism: Fork based on value with Skip Discard
+    Mechanism] is_alive endpoint 2: Skipped', label: success, name: '[Regression Workflow:
+    Fork based on value with Skip Discard Mechanism] 2021-04-24 08:58:40.199263',
+  source: '[Skip Mechanism: Fork based on value with Skip Discard Mechanism] Juniper
+    devices', subtype: success, type: workflow_edge, workflow: 'Skip Mechanism: Fork
+    based on value with Skip Discard Mechanism'}
 - {color: red, destination: '[Shared] End', label: failure, name: '[Regression Workflow:
     Fork based on value with Skip Discard Mechanism] 2021-04-24 08:58:40.199278',
-  source: '[Fork based on value with Skip Discard Mechanism] Juniper devices', subtype: failure,
-  type: workflow_edge, workflow: Fork based on value with Skip Discard Mechanism}
+  source: '[Skip Mechanism: Fork based on value with Skip Discard Mechanism] Juniper
+    devices', subtype: failure, type: workflow_edge, workflow: 'Skip Mechanism: Fork
+    based on value with Skip Discard Mechanism'}
 - {color: green, destination: '[Skip Query with device in Run Once Mode] Python service
     in run once mode', label: success, name: '[Regression Workflow: Skip Query with
     device in Run Once Mode] 2021-04-24 08:58:40.199294', source: '[Shared] Start',

@@ -60,15 +60,15 @@
 - {color: red, destination: '[Shared] REST API: call *is_alive* endpoint', label: failure,
   name: '[Regression Workflow: Separate Failure - Success Paths] 2021-04-24 08:58:40.195644',
   source: '[Shared] Netmiko: Check VRF (test) does not exist', subtype: failure, type: workflow_edge,
-  workflow: Separate Failure - Success Paths}
+  workflow: 'Miscellaneous: Fork based on Result with Success & Failure Edges'}
 - {color: green, destination: '[Shared] Netmiko: Check VRF (test) does not exist',
   label: success, name: '[Regression Workflow: Separate Failure - Success Paths] 2021-04-24
     08:58:40.195658', source: '[Shared] Start', subtype: success, type: workflow_edge,
-  workflow: Separate Failure - Success Paths}
+  workflow: 'Miscellaneous: Fork based on Result with Success & Failure Edges'}
 - {color: green, destination: '[Shared] NAPALM: Get Facts', label: success, name: '[Regression
     Workflow: Separate Failure - Success Paths] 2021-04-24 08:58:40.195673', source: '[Shared]
     Netmiko: Check VRF (test) does not exist', subtype: success, type: workflow_edge,
-  workflow: Separate Failure - Success Paths}
+  workflow: 'Miscellaneous: Fork based on Result with Success & Failure Edges'}
 - {color: red, destination: '[Netmiko Prompts] Test netmiko prompts pass', label: failure,
   name: '[Regression Workflow: Netmiko Prompts] 2021-04-24 08:58:40.195689', source: '[Netmiko
     Prompts] Test Netmiko Prompt Service', subtype: failure, type: workflow_edge,
@@ -119,20 +119,20 @@
   workflow: Ansible with Validation}
 - {color: green, destination: '[Shared] NAPALM: Get interfaces', label: success, name: '[Regression
     Workflow: Separate Failure - Success Paths] 2021-04-24 08:58:40.195925', source: '[Shared]
-    REST API: call *is_alive* endpoint', subtype: success, type: workflow_edge, workflow: Separate
-    Failure - Success Paths}
+    REST API: call *is_alive* endpoint', subtype: success, type: workflow_edge, workflow: 'Miscellaneous:
+    Fork based on Result with Success & Failure Edges'}
 - {color: green, destination: '[Shared] Example Service (does nothing)', label: success,
   name: '[Regression Workflow: Separate Failure - Success Paths] 2021-04-24 08:58:40.195940',
   source: '[Shared] NAPALM: Get interfaces', subtype: success, type: workflow_edge,
-  workflow: Separate Failure - Success Paths}
+  workflow: 'Miscellaneous: Fork based on Result with Success & Failure Edges'}
 - {color: green, destination: '[Shared] NAPALM: Get interfaces', label: success, name: '[Regression
     Workflow: Separate Failure - Success Paths] 2021-04-24 08:58:40.195955', source: '[Shared]
-    NAPALM: Get Facts', subtype: success, type: workflow_edge, workflow: Separate
-    Failure - Success Paths}
+    NAPALM: Get Facts', subtype: success, type: workflow_edge, workflow: 'Miscellaneous:
+    Fork based on Result with Success & Failure Edges'}
 - {color: red, destination: '[Shared] Example Service (does nothing)', label: failure,
   name: '[Regression Workflow: Separate Failure - Success Paths] 2021-04-24 08:58:40.195970',
   source: '[Shared] NAPALM: Get interfaces', subtype: failure, type: workflow_edge,
-  workflow: Separate Failure - Success Paths}
+  workflow: 'Miscellaneous: Fork based on Result with Success & Failure Edges'}
 - {color: green, destination: '[Miscellaneous: DxD Multiprocessing, RBAC Admin Only,
     Skip Mechanism] Show version with multiprocessing', label: success, name: '[Regression
     Workflow: Advanced Multiprocessing (admin)] 2021-04-24 08:58:40.195986', source: '[Shared]
@@ -188,8 +188,8 @@
     Prompts}
 - {color: green, destination: '[Shared] End', label: success, name: '[Regression Workflow:
     Separate Failure - Success Paths] 2021-04-24 08:58:40.196401', source: '[Shared]
-    Example Service (does nothing)', subtype: success, type: workflow_edge, workflow: Separate
-    Failure - Success Paths}
+    Example Service (does nothing)', subtype: success, type: workflow_edge, workflow: 'Miscellaneous:
+    Fork based on Result with Success & Failure Edges'}
 - {color: green, destination: '[Operational Data Backup (admin)] Configuration Backup
     (NAPALM)', label: success, name: '[Regression Workflow: Operational Data Backup
     (admin)] 2021-04-24 08:58:40.196417', source: '[Shared] Start', subtype: success,

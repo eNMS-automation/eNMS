@@ -65,6 +65,7 @@
     Iteration Targets with a Dictionary: *id001
     Link Neighbors Mechanism (public): [-339, -122]
     'Miscellaneous: DxD Multiprocessing, RBAC Admin Only, Skip Mechanism': *id002
+    'Miscellaneous: Fork based on Result with Success & Failure Edges': [-327, -20]
     'Miscellaneous: Link Neighbors Mechanism and RBAC default access (public)': [
       -339, -122]
     'Miscellaneous: Netmiko Services, Connection Cache Management': [-383, -95]
@@ -204,7 +205,7 @@
     Scalability Test (large workflow): *id034
     Scrapli Netconf Service: *id046
     Scrapli Service: *id035
-    Separate Failure - Success Paths: *id036
+    Separate Failure - Success Paths: [-327, -20]
     Service Priorities, Napalm Getters, Postprocessing: *id047
     Shared Service in Multiple Subworkflows: *id037
     'Skip Mechanism: Conditional Skip Query in Failed and Discard Modes': [-322, 98]
@@ -415,6 +416,7 @@
     Iteration Targets with a Dictionary: *id065
     Link Neighbors Mechanism (public): [387, -149]
     'Miscellaneous: DxD Multiprocessing, RBAC Admin Only, Skip Mechanism': *id066
+    'Miscellaneous: Fork based on Result with Success & Failure Edges': [553, 357]
     'Miscellaneous: Link Neighbors Mechanism and RBAC default access (public)': [
       387, -149]
     'Miscellaneous: Netmiko Services, Connection Cache Management': [-383, 167]
@@ -555,7 +557,7 @@
     Scalability Test (large workflow): *id098
     Scrapli Netconf Service: *id110
     Scrapli Service: *id099
-    Separate Failure - Success Paths: *id100
+    Separate Failure - Success Paths: [737, 276]
     Service Priorities, Napalm Getters, Postprocessing: *id111
     Shared Service in Multiple Subworkflows: *id101
     'Skip Mechanism: Conditional Skip Query in Failed and Discard Modes': [599, 331]
@@ -844,12 +846,13 @@
   positions:
     Advanced Multiprocessing (admin): &id130 [-266, -204]
     'Miscellaneous: DxD Multiprocessing, RBAC Admin Only, Skip Mechanism': *id130
+    'Miscellaneous: Fork based on Result with Success & Failure Edges': [696, 185]
     'Regression Workflow 2: Separate Failure - Success paths': &id132 [741, 106]
     'Regression Workflow C: Advanced multiprocessing': &id131 [-266, -204]
     'Regression Workflow C: Advanced multiprocessing (admin)': *id131
     'Regression Workflow: Advanced Multiprocessing (admin)': *id131
     'Regression Workflow: Separate Failure - Success Paths': *id132
-    Separate Failure - Success Paths: *id132
+    Separate Failure - Success Paths: [741, 106]
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -1444,6 +1447,7 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
+    'Miscellaneous: Fork based on Result with Success & Failure Edges': [-179, 259]
     'Miscellaneous: Netmiko Services, Connection Cache Management': [-10, 157]
     'Miscellaneous: Netmiko Services, Connection Cache, Targets Definition': [-84,
       184]
@@ -1454,7 +1458,7 @@
     'Regression Workflow 5: VRF creation and deletion with Napalm': ['0', '150']
     'Regression Workflow: Separate Failure - Success Paths': *id140
     'Regression Workflow: VRF Creation and Deletion with Netmiko': *id139
-    Separate Failure - Success Paths: *id140
+    Separate Failure - Success Paths: [-179, 259]
     VRF Creation and Deletion with Netmiko: *id139
     iteration_devices_workflow: ['337', '-145']
   postprocessing: ''
@@ -1544,6 +1548,7 @@
   positions:
     Advanced Multiprocessing (admin): &id141 [386, 124]
     'Miscellaneous: DxD Multiprocessing, RBAC Admin Only, Skip Mechanism': *id141
+    'Miscellaneous: Fork based on Result with Success & Failure Edges': [339, 297]
     Netmiko Prompts: &id143 [405, -103]
     'Regression Workflow 2: Separate Failure - Success paths': &id145 [374, 278]
     'Regression Workflow 3: Napalm getters (postprocessing)': ['-50', '0']
@@ -1562,7 +1567,7 @@
     'Regression Workflow: Using get_var, set_var, get_result functions': *id147
     'Regression workflow P: large workflow (scalability)': *id144
     Scalability Test (large workflow): *id144
-    Separate Failure - Success Paths: *id145
+    Separate Failure - Success Paths: [374, 278]
     Specific Superworkflow: *id146
     Using get_var, set_var, and get_result Functions: *id147
   postprocessing: ''
@@ -1649,6 +1654,7 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
+    'Miscellaneous: Fork based on Result with Success & Failure Edges': [-31, -43]
     'Regression Workflow 2: Separate Failure - Success paths': &id149 [-102, -130]
     'Regression Workflow 3: Napalm getters (postprocessing)': &id148 [-154, -70]
     'Regression Workflow A: get_var, set_var, get_result': ['39', '-32']
@@ -1657,7 +1663,7 @@
     'Regression Workflow: Separate Failure - Success Paths': *id149
     'Regression Workflow: Service Priorities, Napalm Getters, Postprocessing': &id150 [
       -154, -70]
-    Separate Failure - Success Paths: *id149
+    Separate Failure - Success Paths: [-37, -67]
     Service Priorities, Napalm Getters, Postprocessing: *id150
   postprocessing: ''
   postprocessing_mode: always
@@ -1742,6 +1748,7 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
+    'Miscellaneous: Fork based on Result with Success & Failure Edges': [608, 46]
     'Regression Workflow 2: Separate Failure - Success paths': &id152 [611, -72]
     'Regression Workflow 3: Napalm getters (postprocessing)': &id151 [-166, 303]
     'Regression Workflow F: Workflow of Workflows': &id153 [-336, 217]
@@ -1750,7 +1757,7 @@
     'Regression Workflow: Service Priorities, Napalm Getters, Postprocessing': &id154 [
       -183, 311]
     'Regression Workflow: Workflow of Workflows': *id153
-    Separate Failure - Success Paths: *id152
+    Separate Failure - Success Paths: [611, -72]
     Service Priorities, Napalm Getters, Postprocessing: *id154
   postprocessing: ''
   postprocessing_mode: always
@@ -3976,13 +3983,38 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels:
+    1d6eb567-a377-4442-a3e6-fad7e792c516:
+      alignment: left
+      content: Run "show vrf" with Netmiko
+      positions: [-187, 318]
     63bebf9d-b5d5-47fd-9849-4177f2517be4:
       alignment: left
-      content: "This workflow runs on 3 target_devices: one router and 2 dummy devices.\r\
-        \nThe router will take the upward path, the dummy devices the downward path.\r\
+      content: "This workflow must be run with the router up and running.\r\nIt runs\
+        \ on 3 devices: Washington (active router) and 2 dummy devices.\r\nThe first\
+        \ service is a netmiko validation service running \"show vrf\": it\r\nshould\
+        \ pass for Washington and fail for the others.\r\nAs a result, Washington\
+        \ will take the upward path, and the others\r\nwill take the downward path.\r\
         \nBoth path rejoin at the end.\r\nTo be tested both with and without multiprocessing."
-      positions: [185, 37]
-  last_modified: '2021-08-07 08:51:04.065183'
+      positions: [194, 131]
+    abc34c52-1c3e-4f1b-964b-8a1ee0b3a35a:
+      alignment: left
+      content: 'Expected: 3 devices'
+      positions: [696, 308]
+    b8cb58d2-b2ee-4816-8b34-23191c4604d8:
+      alignment: left
+      content: 'Expected: 1 device'
+      positions: [-169, 49]
+    c42ee848-1630-4a36-9b3c-0ff3e88e449c:
+      alignment: left
+      content: "Retrieving interfaces data with Napalm.\r\nShould pass for Washington,\
+        \ fail for the others.\r\nExpected: Washington exiting via the success edge,\r\
+        \n2 others via the failure edge.\r\n"
+      positions: [676, -34]
+    ef63ac32-ca44-4045-a511-d1271a8646a6:
+      alignment: left
+      content: 'Expected: 2 devices'
+      positions: [113, 266]
+  last_modified: '2021-08-20 05:41:56.834251'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -3990,7 +4022,7 @@
   max_processes: 5
   maximum_runs: 1
   multiprocessing: true
-  name: Separate Failure - Success Paths
+  name: 'Miscellaneous: Fork based on Result with Success & Failure Edges'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -4012,7 +4044,7 @@
   reply_to: ''
   reserved: false
   run_method: per_device
-  scoped_name: Separate Failure - Success Paths
+  scoped_name: 'Miscellaneous: Fork based on Result with Success & Failure Edges'
   send_notification: false
   send_notification_method: mail
   services: ['[Shared] Start', '[Shared] End', '[Shared] NAPALM: Get Facts', '[Shared]
@@ -16516,8 +16548,8 @@
         \ The second service uses dictionary inclusion validation against\r\na new\
         \ top level key of the result dictionary.\r\n* The third service uses string\
         \ inclusion validation against\r\nan inner key of results['result'].\r\n"
-      positions: [-94, -29]
-  last_modified: '2021-08-20 05:32:49.877085'
+      positions: [-86, -14]
+  last_modified: '2021-08-20 05:34:12.821980'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false

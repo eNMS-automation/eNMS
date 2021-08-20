@@ -994,20 +994,24 @@
     Show interface from initial form (default: Lo1)', label: success, name: '2021-06-07
     01:39:02.877827', source: '[Shared] Start', subtype: success, type: workflow_edge,
   workflow: 'Parameterized Form (override tags & targets, add payload)'}
-- {color: green, destination: '[Validation Section Mechanism] Dict Equality Validation
-    of default path', label: success, name: '2021-06-22 02:53:59.369448', source: '[Shared]
-    Start', subtype: success, type: workflow_edge, workflow: Validation Section Mechanism}
-- {color: green, destination: '[Validation Section Mechanism] Dict Inclusion Validation
-    of new key', label: success, name: '2021-06-22 02:57:03.974262', source: '[Validation
-    Section Mechanism] Dict Equality Validation of default path', subtype: success,
-  type: workflow_edge, workflow: Validation Section Mechanism}
-- {color: green, destination: '[Validation Section Mechanism] Nested Result String
-    Validation', label: success, name: '2021-06-22 08:15:57.434165', source: '[Validation
-    Section Mechanism] Dict Inclusion Validation of new key', subtype: success, type: workflow_edge,
-  workflow: Validation Section Mechanism}
+- {color: green, destination: '[Validation Mechanism: Section to Validate Property]
+    Dict Equality Validation of default path', label: success, name: '2021-06-22 02:53:59.369448',
+  source: '[Shared] Start', subtype: success, type: workflow_edge, workflow: 'Validation
+    Mechanism: Section to Validate Property'}
+- {color: green, destination: '[Validation Mechanism: Section to Validate Property]
+    Dict Inclusion Validation of new key', label: success, name: '2021-06-22 02:57:03.974262',
+  source: '[Validation Mechanism: Section to Validate Property] Dict Equality Validation
+    of default path', subtype: success, type: workflow_edge, workflow: 'Validation
+    Mechanism: Section to Validate Property'}
+- {color: green, destination: '[Validation Mechanism: Section to Validate Property]
+    Nested Result String Validation', label: success, name: '2021-06-22 08:15:57.434165',
+  source: '[Validation Mechanism: Section to Validate Property] Dict Inclusion Validation
+    of new key', subtype: success, type: workflow_edge, workflow: 'Validation Mechanism:
+    Section to Validate Property'}
 - {color: green, destination: '[Shared] End', label: success, name: '2021-06-22 08:15:59.744208',
-  source: '[Validation Section Mechanism] Nested Result String Validation', subtype: success,
-  type: workflow_edge, workflow: Validation Section Mechanism}
+  source: '[Validation Mechanism: Section to Validate Property] Nested Result String
+    Validation', subtype: success, type: workflow_edge, workflow: 'Validation Mechanism:
+    Section to Validate Property'}
 - {color: green, destination: '[NCClient Netconf Service] Set Description of Lo4 to
     ZZZZ', label: success, name: '2021-06-23 01:44:36.780081', source: '[NCClient
     Netconf Service] Get Full Config', subtype: success, type: workflow_edge, workflow: NCClient

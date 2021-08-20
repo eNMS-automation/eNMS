@@ -1,0 +1,30 @@
+<div class="modal-body">
+  <div>
+    <h2>Command to Enter Config Mode</h2>
+    <p>
+      Advanced users might want to specify options on the command for entering config mode.
+      This is useful on some devices to ensure that no other users are making concurrent configuration
+      changes or to isolate their changes from other users.
+    </p>
+    <p>
+      When no command is specified, the default command from the Netmiko driver is used.
+    </p>
+  </div>
+  <div>
+    <h2>Example 1</h2>
+    <h2>Juniper and Arista</h2>
+    <div>
+      <p>
+        Juniper and Arista both support <code class="help-snippet" style="…">config exclusive</code> to enter config mode only if
+        no other users are already in config, and to prevent other users from entering config mode until
+        the current configuration session completes.  They also support <code class="help-snippet" style="…">config private</code> to
+        ensure that changes committed in the current session include only commands entered in the session.
+      </p>
+      <p>
+        The default <code class="help-snippet" style="…">config</code> entry command, allows other concurrent changes and a
+        <code class="help-snippet" style="…">commit</code> in any session, commits config changes from all sessions.
+      </p>
+
+    </div>
+  </div>
+</div>

@@ -103,20 +103,20 @@
     get_var, set_var, and get_result Functions] show runtime with get_result helper',
   subtype: success, type: workflow_edge, workflow: 'Using get_var, set_var, and get_result
     Functions'}
-- {color: green, destination: '[Ansible with Validation] Ansible Workflow: Arista
-    show configuration (regex match)', label: success, name: '[Regression Workflow:
-    Ansible with Validation] 2021-04-24 08:58:40.195881', source: '[Ansible with Validation]
-    Ansible Workflow: Arista show version', subtype: success, type: workflow_edge,
-  workflow: Ansible with Validation}
-- {color: green, destination: '[Ansible with Validation] Ansible Workflow: Arista
-    show configuration (dict match)', label: success, name: '[Regression Workflow:
-    Ansible with Validation] 2021-04-24 08:58:40.195896', source: '[Ansible with Validation]
-    Ansible Workflow: Arista show configuration (regex match)', subtype: success,
-  type: workflow_edge, workflow: Ansible with Validation}
+- {color: green, destination: '[Services: Ansible Playbook Service] Ansible Workflow:
+    Arista show configuration (regex match)', label: success, name: '[Regression Workflow:
+    Ansible with Validation] 2021-04-24 08:58:40.195881', source: '[Services: Ansible
+    Playbook Service] Ansible Workflow: Arista show version', subtype: success, type: workflow_edge,
+  workflow: 'Services: Ansible Playbook Service'}
+- {color: green, destination: '[Services: Ansible Playbook Service] Ansible Workflow:
+    Arista show configuration (dict match)', label: success, name: '[Regression Workflow:
+    Ansible with Validation] 2021-04-24 08:58:40.195896', source: '[Services: Ansible
+    Playbook Service] Ansible Workflow: Arista show configuration (regex match)',
+  subtype: success, type: workflow_edge, workflow: 'Services: Ansible Playbook Service'}
 - {color: green, destination: '[Shared] End', label: success, name: '[Regression Workflow:
-    Ansible with Validation] 2021-04-24 08:58:40.195911', source: '[Ansible with Validation]
-    Ansible Workflow: Arista show configuration (dict match)', subtype: success, type: workflow_edge,
-  workflow: Ansible with Validation}
+    Ansible with Validation] 2021-04-24 08:58:40.195911', source: '[Services: Ansible
+    Playbook Service] Ansible Workflow: Arista show configuration (dict match)', subtype: success,
+  type: workflow_edge, workflow: 'Services: Ansible Playbook Service'}
 - {color: green, destination: '[Shared] NAPALM: Get interfaces', label: success, name: '[Regression
     Workflow: Separate Failure - Success Paths] 2021-04-24 08:58:40.195925', source: '[Shared]
     REST API: call *is_alive* endpoint', subtype: success, type: workflow_edge, workflow: 'Miscellaneous:
@@ -299,10 +299,10 @@
     Shared Service in Multiple Subworkflows] 2021-04-24 08:58:40.197334', source: '[Shared
     Service in Multiple Subworkflows] Subworkflow 2', subtype: failure, type: workflow_edge,
   workflow: Shared Service in Multiple Subworkflows}
-- {color: green, destination: '[Ansible with Validation] Simple Playbook', label: success,
-  name: '[Regression Workflow: Ansible with Validation] 2021-04-24 08:58:40.197355',
-  source: '[Shared] Start', subtype: success, type: workflow_edge, workflow: Ansible
-    with Validation}
+- {color: green, destination: '[Services: Ansible Playbook Service] Simple Playbook',
+  label: success, name: '[Regression Workflow: Ansible with Validation] 2021-04-24
+    08:58:40.197355', source: '[Shared] Start', subtype: success, type: workflow_edge,
+  workflow: 'Services: Ansible Playbook Service'}
 - {color: green, destination: '[Iteration Mechanism: Dictionary as Iteration Target
     Variable] Set Variables for Iteration', label: success, name: '[Regression Workflow:
     Advanced Iteration Targets] 2021-04-24 08:58:40.197373', source: '[Shared] Start',
@@ -391,10 +391,11 @@
   source: '[Unix Command & Chell, Ping Service, Jump on Connect mechanism] Validation:
     jump on server 2 from Washington', subtype: success, type: workflow_edge, workflow: 'Unix
     Command & Chell, Ping Service, Jump on Connect mechanism'}
-- {color: green, destination: '[Ansible with Validation] Ansible Workflow: Arista
-    show version', label: success, name: '[Regression Workflow: Ansible with Validation]
-    2021-04-24 08:58:40.197830', source: '[Ansible with Validation] Simple Playbook',
-  subtype: success, type: workflow_edge, workflow: Ansible with Validation}
+- {color: green, destination: '[Services: Ansible Playbook Service] Ansible Workflow:
+    Arista show version', label: success, name: '[Regression Workflow: Ansible with
+    Validation] 2021-04-24 08:58:40.197830', source: '[Services: Ansible Playbook
+    Service] Simple Playbook', subtype: success, type: workflow_edge, workflow: 'Services:
+    Ansible Playbook Service'}
 - {color: green, destination: '[Iteration Targets Mechanism] Iteration Target Workflow
     - Test 3', label: success, name: '[Regression Workflow: Iteration Targets Mechanism]
     2021-04-24 08:58:40.197847', source: '[Iteration Targets Mechanism] Iteration

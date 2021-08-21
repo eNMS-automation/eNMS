@@ -14961,7 +14961,7 @@
         \nFour results are expected with San Diego / Dallas as parent\r\ndevices,\
         \ and Washington / Austin as iterated device for\r\neach parent device."
       positions: [-152, 117]
-  last_modified: '2021-08-21 05:58:41.646587'
+  last_modified: '2021-08-21 06:00:33.301697'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -14987,7 +14987,7 @@
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: "devices = [\"Austin\", \"PaloAlto\"] if device.name == \"Dallas\"\
-    \ else [\"NewYork\"]\r\nset_var(\"iterated_devices\", devices, device=device.name)"
+    \ else [\"NewYork\"]\r\nset_var(\"iteration_devices\", devices, device=device.name)"
   priority: 1
   reply_to: ''
   reserved: false

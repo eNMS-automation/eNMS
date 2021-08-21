@@ -14945,9 +14945,9 @@
         \ field is used to define the iteration devices\r\nfor the second service,\
         \ via the following snippet:\r\ndevices = [\"Austin\", \"PaloAlto\"] if device.name\
         \ == \"Dallas\" else [\"NewYork\"]\r\nset_var(\"iteration_devices\", devices,\
-        \ device=device.name)\r\nThe workflow must be run both in DxD and SxS WF targets\
-        \ mode."
-      positions: [110, -112]
+        \ device=device.name)\r\nThe workflow can only run in DxD mode, as \"device\"\
+        \ is not defined\r\nin the preprocessing section of the workflow in SxS mode."
+      positions: [99, -120]
     9ab175e4-2b58-48da-bae1-89ea98ee75ed:
       alignment: left
       content: "Has \"iteration_devices\" hardcoded iteration devices: this variable\r\
@@ -14961,7 +14961,7 @@
         \nFour results are expected with San Diego / Dallas as parent\r\ndevices,\
         \ and Washington / Austin as iterated device for\r\neach parent device."
       positions: [-152, 117]
-  last_modified: '2021-08-21 06:00:33.301697'
+  last_modified: '2021-08-21 06:03:51.041483'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -14991,7 +14991,7 @@
   priority: 1
   reply_to: ''
   reserved: false
-  run_method: per_device
+  run_method: per_service_with_workflow_targets
   scoped_name: 'Iteration Mechanism: Device Iteration'
   send_notification: false
   send_notification_method: mail

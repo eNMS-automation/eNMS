@@ -1350,3 +1350,11 @@
   source: '[Skip Mechanism: Fork based on value with Skip Discard Mechanism] Arista
     devices', subtype: failure, type: workflow_edge, workflow: 'Skip Mechanism: Fork
     based on value with Skip Discard Mechanism'}
+- {color: green, destination: '[Iteration Mechanism: Device Iteration] Iteration Devices
+    from Predefined Variable', label: success, name: '2021-08-21 05:57:42.092762',
+  source: '[Iteration Mechanism: Device Iteration] Hard-coded iteration devices',
+  subtype: success, type: workflow_edge, workflow: 'Iteration Mechanism: Device Iteration'}
+- {color: green, destination: '[Shared] End', label: success, name: '2021-08-21 05:57:42.896445',
+  source: '[Iteration Mechanism: Device Iteration] Iteration Devices from Predefined
+    Variable', subtype: success, type: workflow_edge, workflow: 'Iteration Mechanism:
+    Device Iteration'}

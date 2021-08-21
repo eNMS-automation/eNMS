@@ -412,7 +412,7 @@
     Generic File Transfer: &id083 [476, 156]
     Global Variables and post-run Pool Update Mechanism: &id084 [749, 100]
     Global get_credential Function and Log Obfuscation: &id085 [591, -45]
-    'Iteration Mechanism: Device Iteration': [522, -44]
+    'Iteration Mechanism: Device Iteration': [538, -133]
     'Iteration Mechanism: Dictionary as Iteration Target Variable': &id065 [596, -221]
     Iteration Services Test Workflow: ['-9', '294']
     Iteration Targets Mechanism: &id072 [-334, 29]
@@ -14945,15 +14945,23 @@
         \ field is used to define the iteration devices\r\nfor the second service,\
         \ via the following snippet:\r\ndevices = [\"Austin\", \"PaloAlto\"] if device.name\
         \ == \"Dallas\" else [\"NewYork\"]\r\nset_var(\"iteration_devices\", devices,\
-        \ device=device.name)"
-      positions: [66, -164]
+        \ device=device.name)\r\nThe workflow must be run both in DxD and SxS WF targets\
+        \ mode."
+      positions: [110, -112]
+    9ab175e4-2b58-48da-bae1-89ea98ee75ed:
+      alignment: left
+      content: "Has \"iteration_devices\" hardcoded iteration devices: this variable\r\
+        \nhas been set in the workflow preprocessing field.\r\nThree results are expected\
+        \ (Parent Device / Iterated Device):\r\n1) San Diego / New York\r\n2) Dallas\
+        \ / Austin\r\n3) Dallas / PaloAlto"
+      positions: [284, 130]
     ca71af98-62bf-4aae-8aa5-ac4d8f804700:
       alignment: left
       content: "Has [\"Washington\", \"Austin\"] as hardcoded iteration devices.\r\
         \nFour results are expected with San Diego / Dallas as parent\r\ndevices,\
         \ and Washington / Austin as iterated device for\r\neach parent device."
       positions: [-152, 117]
-  last_modified: '2021-08-21 05:53:03.846284'
+  last_modified: '2021-08-21 05:58:41.646587'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false

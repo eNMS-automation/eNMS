@@ -58,7 +58,7 @@
     Generic File Transfer: &id018 [-479, -89]
     Global Variables and post-run Pool Update Mechanism: &id019 [-228, 7]
     Global get_credential Function and Log Obfuscation: &id020 [-477, -78]
-    'Iteration Mechanism: Combined Device & Target Iteration': [-400, -61]
+    'Iteration Mechanism: Combined Device & Target Iteration': [-443, -57]
     'Iteration Mechanism: Device Iteration': [-354, -121]
     'Iteration Mechanism: Dictionary as Iteration Target Variable': &id001 [-308,
       -231]
@@ -2098,7 +2098,7 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    'Iteration Mechanism: Combined Device & Target Iteration': [-171, -53]
+    'Iteration Mechanism: Combined Device & Target Iteration': [-201, -15]
     Iteration Services Test Workflow: ['3', '-144']
     Iteration Targets Mechanism: [-171, -53]
     'Regression Workflow E: Iteration Targets': &id161 [-195, -168]
@@ -3350,7 +3350,7 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    'Iteration Mechanism: Combined Device & Target Iteration': [198, -59]
+    'Iteration Mechanism: Combined Device & Target Iteration': [194, -18]
     Iteration Targets Mechanism: [198, -59]
     'Regression Workflow E: Iteration Targets': &id177 [240, -144]
     'Regression Workflow: Iteration Targets Mechanism': *id177
@@ -3621,7 +3621,7 @@
   iteration_devices_property: name
   iteration_values: '["Washington", "Atlanta"]'
   iteration_variable_name: iteration_value
-  last_modified: '2020-05-07 04:12:30.478077'
+  last_modified: '2021-08-21 12:59:02.930936'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -3644,7 +3644,7 @@
     \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
     \ default=15)"
   params: {}
-  password: ''
+  password: YWRtaW4=
   payload: {}
   pools: ['All devices, links, services and users']
   positions:
@@ -4532,7 +4532,7 @@
         ,\"Loopback15\"] (static), and the name\r\nof the iteration variable is set\
         \ to a non-default value.\r\nThe service does a \"show interface\" over the\
         \ loopback interfaces."
-      positions: [247, -156]
+      positions: [277, -130]
     76ece5f4-54f7-4f6b-8ea0-7d2918524e92:
       alignment: left
       content: "This service iterates over a set of values defined\r\nat the first\
@@ -4540,7 +4540,7 @@
         \ Washington, the \"get_var\" function will evaluate to\r\n['Loopback101',\
         \ 'Loopback15'] and Loopback101 does not exist,\r\nso the service will fail.\r\
         \n"
-      positions: [746, -93]
+      positions: [800, -105]
     93d396cb-cc7e-47ac-ac12-8f75207dcb14:
       alignment: left
       content: "This service will compute derived targets for Washington: [\"Washington\"\
@@ -4555,14 +4555,14 @@
         \ 'Loopback15'] for \"Washington\"\r\notherwise ['Loopback9', 'Loopback1000']\r\
         \n- Derived Devices : [\"Atlanta\", \"Austin\"] for \"Austin\" else [\"Washington\"\
         ]\r\n- Interfaces 2 : ['Loopback333', 'Loopback334'] for any device"
-      positions: [-246, -140]
+      positions: [-261, -130]
     fbd0224f-eae2-461b-bfc5-9de385e078f0:
       alignment: left
       content: "This service doesn't have targets: it makes a REST call to\r\nhttp://127.0.0.1:5000/rest/instance/device/{{get_var('iteration_value')}}\r\
         \nwith the iteration set to [\"Washington\", \"Atlanta\"].\r\nCredentials\
         \ must be updated after a database drop."
       positions: [-106, 320]
-  last_modified: '2021-08-21 12:51:10.588888'
+  last_modified: '2021-08-21 12:58:44.097572'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false

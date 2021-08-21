@@ -318,8 +318,8 @@
   service_vendor: ''
   service_vendor_invert: false
   service_vendor_match: inclusion
-  target_services: ['[SxS Service Targets with Run Once + Skip] Run Once with Pool',
-    Scalability Test (large workflow)]
+  target_services: [Scalability Test (large workflow), '[SxS Service Targets with
+      Run Once + Skip] Run Once with Pool']
   tasks: []
   type: pool
   user_description: ''
@@ -1154,8 +1154,8 @@
   service_vendor: ''
   service_vendor_invert: false
   service_vendor_match: inclusion
-  target_services: [Scalability Test (large workflow), '[Operational Data Backup (admin)]
-      Retrieve Operational Data', Parameterized Superworkflow Run]
+  target_services: ['[Operational Data Backup (admin)] Retrieve Operational Data',
+    Scalability Test (large workflow), Parameterized Superworkflow Run]
   tasks: []
   type: pool
   user_description: ''

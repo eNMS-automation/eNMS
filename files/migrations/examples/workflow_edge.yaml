@@ -894,12 +894,10 @@
     Optional Prerequisite Services] 2021-04-24 08:58:40.199695', source: '[Optional
     Prerequisite Services] Last Service', subtype: success, type: workflow_edge, workflow: Optional
     Prerequisite Services}
-- {color: green, destination: '[Device Iteration] Hard-coded iteration devices', label: success,
-  name: '[Regression Workflow: Device Iteration] 2021-04-24 08:58:40.199710', source: '[Shared]
-    Start', subtype: success, type: workflow_edge, workflow: Device Iteration}
-- {color: green, destination: '[Shared] End', label: success, name: '[Regression Workflow:
-    Device Iteration] 2021-04-24 08:58:40.199725', source: '[Device Iteration] Hard-coded
-    iteration devices', subtype: success, type: workflow_edge, workflow: Device Iteration}
+- {color: green, destination: '[Iteration Mechanism: Device Iteration] Hard-coded
+    iteration devices', label: success, name: '[Regression Workflow: Device Iteration]
+    2021-04-24 08:58:40.199710', source: '[Shared] Start', subtype: success, type: workflow_edge,
+  workflow: 'Iteration Mechanism: Device Iteration'}
 - {color: green, destination: '[Workflow and Subworkflow Iteration] Subworkflow Device
     Iteration', label: success, name: '[Regression Workflow: Workflow and Subworkflow
     Iteration] 2021-04-24 08:58:40.199741', source: '[Workflow and Subworkflow Iteration]

@@ -159,21 +159,24 @@
     DxD Multiprocessing, RBAC Admin Only, Skip Mechanism'}
 - {color: green, destination: '[Shared] Modify Payload for Iteration', label: success,
   name: '[Regression Workflow: Iteration Targets Mechanism] 2021-04-24 08:58:40.196062',
-  source: '[Shared] Start', subtype: success, type: workflow_edge, workflow: Iteration
-    Targets Mechanism}
-- {color: green, destination: '[Iteration Targets Mechanism] Iteration Target Workflow
-    - Test 2', label: success, name: '[Regression Workflow: Iteration Targets Mechanism]
-    2021-04-24 08:58:40.196078', source: '[Iteration Targets Mechanism] Iteration
-    Targets Workflow - Test 1', subtype: success, type: workflow_edge, workflow: Iteration
-    Targets Mechanism}
+  source: '[Shared] Start', subtype: success, type: workflow_edge, workflow: 'Iteration
+    Mechanism: Combined Device & Target Iteration'}
+- {color: green, destination: '[Iteration Mechanism: Combined Device & Target Iteration]
+    Iteration Target Workflow - Test 2', label: success, name: '[Regression Workflow:
+    Iteration Targets Mechanism] 2021-04-24 08:58:40.196078', source: '[Iteration
+    Mechanism: Combined Device & Target Iteration] Iteration Targets Workflow - Test
+    1', subtype: success, type: workflow_edge, workflow: 'Iteration Mechanism: Combined
+    Device & Target Iteration'}
 - {color: green, destination: '[Shared] End', label: success, name: '[Regression Workflow:
     Iteration Targets Mechanism] 2021-04-24 08:58:40.196164', source: '[Iteration
-    Targets Mechanism] Iteration Targets Workflow - Test 4', subtype: success, type: workflow_edge,
-  workflow: Iteration Targets Mechanism}
-- {color: green, destination: '[Iteration Targets Mechanism] Iteration Targets Workflow
-    - Test 1', label: success, name: '[Regression Workflow: Iteration Targets Mechanism]
-    2021-04-24 08:58:40.196341', source: '[Shared] Modify Payload for Iteration',
-  subtype: success, type: workflow_edge, workflow: Iteration Targets Mechanism}
+    Mechanism: Combined Device & Target Iteration] Iteration Targets Workflow - Test
+    4', subtype: success, type: workflow_edge, workflow: 'Iteration Mechanism: Combined
+    Device & Target Iteration'}
+- {color: green, destination: '[Iteration Mechanism: Combined Device & Target Iteration]
+    Iteration Targets Workflow - Test 1', label: success, name: '[Regression Workflow:
+    Iteration Targets Mechanism] 2021-04-24 08:58:40.196341', source: '[Shared] Modify
+    Payload for Iteration', subtype: success, type: workflow_edge, workflow: 'Iteration
+    Mechanism: Combined Device & Target Iteration'}
 - {color: green, destination: '[Shared] End', label: success, name: '[Regression Workflow:
     Netmiko Prompts] 2021-04-24 08:58:40.196356', source: '[Netmiko Prompts] Test
     netmiko prompts pass', subtype: success, type: workflow_edge, workflow: Netmiko
@@ -396,16 +399,18 @@
     Validation] 2021-04-24 08:58:40.197830', source: '[Services: Ansible Playbook
     Service] Simple Playbook', subtype: success, type: workflow_edge, workflow: 'Services:
     Ansible Playbook Service'}
-- {color: green, destination: '[Iteration Targets Mechanism] Iteration Target Workflow
-    - Test 3', label: success, name: '[Regression Workflow: Iteration Targets Mechanism]
-    2021-04-24 08:58:40.197847', source: '[Iteration Targets Mechanism] Iteration
-    Target Workflow - Test 2', subtype: success, type: workflow_edge, workflow: Iteration
-    Targets Mechanism}
-- {color: green, destination: '[Iteration Targets Mechanism] Iteration Targets Workflow
-    - Test 4', label: success, name: '[Regression Workflow: Iteration Targets Mechanism]
-    2021-04-24 08:58:40.197863', source: '[Iteration Targets Mechanism] Iteration
-    Target Workflow - Test 3', subtype: success, type: workflow_edge, workflow: Iteration
-    Targets Mechanism}
+- {color: green, destination: '[Iteration Mechanism: Combined Device & Target Iteration]
+    Iteration Target Workflow - Test 3', label: success, name: '[Regression Workflow:
+    Iteration Targets Mechanism] 2021-04-24 08:58:40.197847', source: '[Iteration
+    Mechanism: Combined Device & Target Iteration] Iteration Target Workflow - Test
+    2', subtype: success, type: workflow_edge, workflow: 'Iteration Mechanism: Combined
+    Device & Target Iteration'}
+- {color: green, destination: '[Iteration Mechanism: Combined Device & Target Iteration]
+    Iteration Targets Workflow - Test 4', label: success, name: '[Regression Workflow:
+    Iteration Targets Mechanism] 2021-04-24 08:58:40.197863', source: '[Iteration
+    Mechanism: Combined Device & Target Iteration] Iteration Target Workflow - Test
+    3', subtype: success, type: workflow_edge, workflow: 'Iteration Mechanism: Combined
+    Device & Target Iteration'}
 - {color: green, destination: '[Specific Superworkflow] REST API: call to placeholder
     property', label: success, name: '[Regression Workflow: Superworkflow] 2021-04-24
     08:58:40.197878', source: '[Shared] REST API: call *is_alive* endpoint', subtype: success,

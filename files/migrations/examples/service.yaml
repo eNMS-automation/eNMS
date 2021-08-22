@@ -420,7 +420,7 @@
     'Iteration Mechanism: Combined Device & Target Iteration': [-437, 191]
     'Iteration Mechanism: Device Iteration': [549, -155]
     'Iteration Mechanism: Dictionary as Iteration Target Variable': &id064 [596, -221]
-    'Iteration Mechanism: Workflow and Subworkflow Iteration': [644, 233]
+    'Iteration Mechanism: Workflow and Subworkflow Iteration': [627, 254]
     Iteration Services Test Workflow: ['-9', '294']
     Iteration Targets Mechanism: [-370, 210]
     Iteration Targets with a Dictionary: *id064
@@ -6328,39 +6328,38 @@
         ] (variable: \"top_level_iteration\"),\r\non one device: Washington.\r\nThe\
         \ first service will simply use the iteration value in the result (expected:\
         \ 3 results)\r\nThe first subworkflow tests iteration value with a subworkflow\
-        \ on 3 values:\r\n[1, 2, 3] (variable: \"subworkflow_iteration\").\r\nThere\
-        \ should be 3 * 3 = 9 results, each result containing a combination of \"\
-        top-level_iteration\"\r\nand \"subworkflow_iteration\".\r\nThe second subworkflow\
-        \ tests subworkflow device iteration in DxD mode,\r\nset to [\"PaloAlto\"\
-        , \"Austin\"]. Expected: 3 * 2 + 3 = 9 results\r\n(3 top-level for Washington,\
-        \ then 3 per iteration device).\r\nThe third subworkflow tests subworkflow\
-        \ device iteration in SxS w/ WF targets mode.\r\nExpected 3 results for the\
-        \ subworkflow, and 9 results for the service within it.\r\nThis workflow must\
-        \ be tested both in DxD and SxS w/ WF targets run mode."
-      positions: [222, 282]
+        \ on 3 values:\r\n[1, 2, 3] (variable: \"subworkflow_iteration\").\r\nThe\
+        \ second subworkflow tests subworkflow combined device and value iteration\
+        \ in DxD mode.\r\nThe third subworkflow tests subworkflow device iteration\
+        \ in SxS w/ WF targets mode.\r\nExpected 3 results for the subworkflow, and\
+        \ 9 results for the service within it.\r\nThis workflow must be tested both\
+        \ in DxD and SxS w/ WF targets run mode."
+      positions: [229, 303]
     1aaeee9b-2ae3-428f-86c4-a0ddba662139:
       alignment: left
       content: "Iteration value retrieved from payload:\r\n\"get_var(\"device_iteration\"\
         , device=device.name)\"\r\nShould evaluate to \"[\"Atlanta\", \"SanFrancisco\"\
         ]\".\r\nWorkflow in SxS w/ WF targets mode."
-      positions: [697, 571]
+      positions: [699, 577]
     4a67748b-2d06-47fc-b648-39e02d6cf123:
       alignment: left
-      content: "Hardcoded iteration values: [\"PaloAlto\", \"Austin\"]\r\nWorkflow\
-        \ in DxD mode"
-      positions: [244, 573]
+      content: "Tests subworkflow combined iteration in DxD mode,\r\nwith iteration\
+        \ devices set to [\"PaloAlto\", \"Austin\"],\r\nand value iteration set to\
+        \ [\"D\", \"E\"].\r\nExpected number of iteration:\r\n|top-level iteration|\
+        \ * |device iteration| * |value iteration|\r\n= 3 * 2 * 2 = 12."
+      positions: ['255.35369723338', '601.2747609264446']
     7c717702-3a49-4a67-b1d0-c8471f149114:
       alignment: left
       content: "Hardcoded iteration values: [1, 2, 3]\r\nExpected results:\r\n- 3\
         \ results for the workflow, one per top-level iteration value\r\n- 9 results\
         \ for the service inside the workflow, one per couple\r\n(top-level iteration\
         \ value, workflow iteration value) = [1, 2, 3] X [A, B, C]"
-      positions: [-147, 603]
+      positions: [-193, 601]
     a58455e0-c6d5-4eb5-9d1d-7cf72ffe706e:
       alignment: left
       content: 3 expected results.
       positions: [-192, 218]
-  last_modified: '2021-08-22 06:34:49.830223'
+  last_modified: '2021-08-22 06:41:33.758914'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -15165,10 +15164,10 @@
   initial_payload: {}
   iteration_devices: '["PaloAlto", "Austin"]'
   iteration_devices_property: name
-  iteration_values: ''
+  iteration_values: '["D", "E"]'
   iteration_variable_name: iteration_value
   labels: {}
-  last_modified: '2021-03-09 03:31:55.423493'
+  last_modified: '2021-08-22 06:41:53.445129'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -15273,7 +15272,7 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    'Iteration Mechanism: Workflow and Subworkflow Iteration': [666, 443]
+    'Iteration Mechanism: Workflow and Subworkflow Iteration': [628, 455]
     'Regression Workflow: Workflow and Subworkflow Iteration': [649, 409]
     Workflow and Subworkflow Iteration: [649, 409]
   postprocessing: ''

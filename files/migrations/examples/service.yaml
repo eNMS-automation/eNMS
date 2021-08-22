@@ -58,7 +58,7 @@
     Generic File Transfer: &id018 [-479, -89]
     Global Variables and post-run Pool Update Mechanism: &id019 [-228, 7]
     Global get_credential Function and Log Obfuscation: &id020 [-477, -78]
-    'Iteration Mechanism: Combined Device & Target Iteration': [-443, -57]
+    'Iteration Mechanism: Combined Device & Target Iteration': [-458, -30]
     'Iteration Mechanism: Device Iteration': [-354, -121]
     'Iteration Mechanism: Dictionary as Iteration Target Variable': &id001 [-308,
       -231]
@@ -3350,7 +3350,7 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    'Iteration Mechanism: Combined Device & Target Iteration': [194, -18]
+    'Iteration Mechanism: Combined Device & Target Iteration': [214, 72]
     Iteration Targets Mechanism: [198, -59]
     'Regression Workflow E: Iteration Targets': &id177 [240, -144]
     'Regression Workflow: Iteration Targets Mechanism': *id177
@@ -3560,7 +3560,7 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    'Iteration Mechanism: Combined Device & Target Iteration': [642, 220]
+    'Iteration Mechanism: Combined Device & Target Iteration': [468, 196]
     Iteration Targets Mechanism: [647, 164]
     'Regression Workflow E: Iteration Targets': &id179 [556, 123]
     'Regression Workflow: Iteration Targets Mechanism': *id179
@@ -3648,7 +3648,7 @@
   payload: {}
   pools: ['All devices, links, services and users']
   positions:
-    'Iteration Mechanism: Combined Device & Target Iteration': [-117, 231]
+    'Iteration Mechanism: Combined Device & Target Iteration': [-120, 211]
     Iteration Targets Mechanism: [36, 183]
     'Regression Workflow E: Iteration Targets': &id180 [-135, 91]
     'Regression Workflow: Iteration Targets Mechanism': *id180
@@ -4524,45 +4524,51 @@
         \ variables, and the next 3 services uses\r\nthe iteration value with netmiko\
         \ to run a \"show interface {{ value }}\" command.\r\nThe last service uses\
         \ the iteration value to make a REST call to the following URL:\r\nhttp://127.0.0.1:5000/rest/instance/device/{{iteration_value}}"
-      positions: [47, 92]
+      positions: [-244, 92]
     5043ff9c-79b0-4712-a706-502724ac4e31:
       alignment: left
       content: "The iteration devices field is set to \"get_var(\"Derived Devices\"\
         , device=device.name)\"\r\nThe iteration values are set to [\"Loopback11\"\
         ,\"Loopback15\"] (static), and the name\r\nof the iteration variable is set\
         \ to a non-default value.\r\nThe service does a \"show interface\" over the\
-        \ loopback interfaces."
-      positions: [277, -130]
+        \ loopback interfaces.\r\nFor \"Austin\", one of the iterated device is Atlanta\
+        \ which does not exist,\r\nso netmiko should fail to connect and the service\
+        \ will fail for Atlanta.\r\nAustin should stop here as a result, while Washington\
+        \ moves forward."
+      positions: [275, -72]
     76ece5f4-54f7-4f6b-8ea0-7d2918524e92:
       alignment: left
-      content: "This service iterates over a set of values defined\r\nat the first\
-        \ step (\"Modify Payload\").\r\nIt uses per-device iteration values.\r\nFor\
-        \ Washington, the \"get_var\" function will evaluate to\r\n['Loopback101',\
-        \ 'Loopback15'] and Loopback101 does not exist,\r\nso the service will fail.\r\
-        \n"
-      positions: [800, -105]
+      content: "Only Washington should reach this service.\r\nThis service iterates\
+        \ over a set of values \"Interfaces 1\"\r\ndefined at the first step (\"Modify\
+        \ Payload\"):\r\nget_var('Interfaces 1', device=device.name)\r\nThe \"get_var\"\
+        \ function will evaluate to\r\n['Loopback101', 'Loopback15']. None of these\
+        \ interfaces\r\nexist, and the validation checks for \"does not exist\" in\
+        \ the\r\noutput, so the service should pass."
+      positions: [784, -98]
     93d396cb-cc7e-47ac-ac12-8f75207dcb14:
       alignment: left
-      content: "This service will compute derived targets for Washington: [\"Washington\"\
-        , \"Austin\"].\r\nFor each derived device, it will iterate over the \"Interface\
-        \ 2\" variable which will\r\nevaluate to ['Loopback333', 'Loopback334'] (set\
-        \ in the Modify Payload service).\r\nIn the results, check that it ran for\
-        \ both devices and for both interface for each device.\r\n"
-      positions: [654, 321]
+      content: "This service combines iteration devices and iteration values once\
+        \ again.\r\nThe iteration devices query is the same as  in \"Test 1\", except\
+        \ that it uses\r\nthe \"parent_device\" global variable in the get_var function.\r\
+        \nWhen iteration devices are computed, \"parent_device\" and \"device\"\r\n\
+        should evaluate to the same device.\r\nFor each derived device, it will iterate\
+        \ over the \"Interface 2\" variable which will\r\nevaluate to ['Loopback333',\
+        \ 'Loopback334'] (set in the Modify Payload service).\r\nThe validation checks\
+        \ that \"does not exist\" is in the result.\r\n\r\n"
+      positions: [534, 324]
     b61a926f-87e4-48a6-86bd-74500e9568ab:
       alignment: left
       content: "Set the following variables in the payload :\r\n- Interfaces 1 : ['Loopback101',\
         \ 'Loopback15'] for \"Washington\"\r\notherwise ['Loopback9', 'Loopback1000']\r\
         \n- Derived Devices : [\"Atlanta\", \"Austin\"] for \"Austin\" else [\"Washington\"\
         ]\r\n- Interfaces 2 : ['Loopback333', 'Loopback334'] for any device"
-      positions: [-261, -130]
+      positions: [-261, -105]
     fbd0224f-eae2-461b-bfc5-9de385e078f0:
       alignment: left
-      content: "This service doesn't have targets: it makes a REST call to\r\nhttp://127.0.0.1:5000/rest/instance/device/{{get_var('iteration_value')}}\r\
-        \nwith the iteration set to [\"Washington\", \"Atlanta\"].\r\nCredentials\
-        \ must be updated after a database drop."
-      positions: [-106, 320]
-  last_modified: '2021-08-21 12:58:44.097572'
+      content: "The iteration values field is hardcoded to '[\"Washington\", \"Atlanta\"\
+        ]'.\r\nThe service makes a REST call to\r\nhttp://127.0.0.1:5000/rest/instance/device/{{get_var('iteration_value')}}."
+      positions: [-113, 314]
+  last_modified: '2021-08-22 05:16:02.023387'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false

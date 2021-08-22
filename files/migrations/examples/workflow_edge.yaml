@@ -322,25 +322,27 @@
     Dictionary as Iteration Target Variable] Show VRF with iteration', subtype: success,
   type: workflow_edge, workflow: 'Iteration Mechanism: Dictionary as Iteration Target
     Variable'}
-- {color: green, destination: '[Workflow and Subworkflow Iteration] Test Iteration',
-  label: success, name: '[Regression Workflow: Workflow and Subworkflow Iteration]
-    2021-04-24 08:58:40.197446', source: '[Shared] Start', subtype: success, type: workflow_edge,
-  workflow: Workflow and Subworkflow Iteration}
-- {color: green, destination: '[Workflow and Subworkflow Iteration] Subworkflow Value
-    Iteration', label: success, name: '[Regression Workflow: Workflow and Subworkflow
-    Iteration] 2021-04-24 08:58:40.197465', source: '[Workflow and Subworkflow Iteration]
-    Test Iteration', subtype: success, type: workflow_edge, workflow: Workflow and
-    Subworkflow Iteration}
-- {color: green, destination: '[[Workflow and Subworkflow Iteration] Subworkflow Value
-    Iteration] Test Iteration', label: success, name: '[[Regression Workflow: Workflow
-    and Subworkflow Iteration] Subworkflow Value Iteration] 2021-04-24 08:58:40.197481',
-  source: '[Shared] Start', subtype: success, type: workflow_edge, workflow: '[Workflow
-    and Subworkflow Iteration] Subworkflow Value Iteration'}
+- {color: green, destination: '[Iteration Mechanism: Workflow and Subworkflow Iteration]
+    Test Iteration', label: success, name: '[Regression Workflow: Workflow and Subworkflow
+    Iteration] 2021-04-24 08:58:40.197446', source: '[Shared] Start', subtype: success,
+  type: workflow_edge, workflow: 'Iteration Mechanism: Workflow and Subworkflow Iteration'}
+- {color: green, destination: '[Iteration Mechanism: Workflow and Subworkflow Iteration]
+    Subworkflow Value Iteration', label: success, name: '[Regression Workflow: Workflow
+    and Subworkflow Iteration] 2021-04-24 08:58:40.197465', source: '[Iteration Mechanism:
+    Workflow and Subworkflow Iteration] Test Iteration', subtype: success, type: workflow_edge,
+  workflow: 'Iteration Mechanism: Workflow and Subworkflow Iteration'}
+- {color: green, destination: '[[Iteration Mechanism: Workflow and Subworkflow Iteration]
+    Subworkflow Value Iteration] Test Iteration', label: success, name: '[[Regression
+    Workflow: Workflow and Subworkflow Iteration] Subworkflow Value Iteration] 2021-04-24
+    08:58:40.197481', source: '[Shared] Start', subtype: success, type: workflow_edge,
+  workflow: '[Iteration Mechanism: Workflow and Subworkflow Iteration] Subworkflow
+    Value Iteration'}
 - {color: green, destination: '[Shared] End', label: success, name: '[[Regression
     Workflow: Workflow and Subworkflow Iteration] Subworkflow Value Iteration] 2021-04-24
-    08:58:40.197497', source: '[[Workflow and Subworkflow Iteration] Subworkflow Value
-    Iteration] Test Iteration', subtype: success, type: workflow_edge, workflow: '[Workflow
-    and Subworkflow Iteration] Subworkflow Value Iteration'}
+    08:58:40.197497', source: '[[Iteration Mechanism: Workflow and Subworkflow Iteration]
+    Subworkflow Value Iteration] Test Iteration', subtype: success, type: workflow_edge,
+  workflow: '[Iteration Mechanism: Workflow and Subworkflow Iteration] Subworkflow
+    Value Iteration'}
 - {color: green, destination: '[Preprocessing and Postprocessing Mechanism] Preprocessing',
   label: success, name: '[Regression Workflow: Preprocessing and Postprocessing] 2021-04-24
     08:58:40.197661', source: '[Shared] Start', subtype: success, type: workflow_edge,
@@ -903,40 +905,46 @@
     iteration devices', label: success, name: '[Regression Workflow: Device Iteration]
     2021-04-24 08:58:40.199710', source: '[Shared] Start', subtype: success, type: workflow_edge,
   workflow: 'Iteration Mechanism: Device Iteration'}
-- {color: green, destination: '[Workflow and Subworkflow Iteration] Subworkflow Device
-    Iteration', label: success, name: '[Regression Workflow: Workflow and Subworkflow
-    Iteration] 2021-04-24 08:58:40.199741', source: '[Workflow and Subworkflow Iteration]
-    Subworkflow Value Iteration', subtype: success, type: workflow_edge, workflow: Workflow
-    and Subworkflow Iteration}
-- {color: green, destination: '[Workflow and Subworkflow Iteration] Subworkflow Device
-    Iteration 2', label: success, name: '[Regression Workflow: Workflow and Subworkflow
-    Iteration] 2021-04-24 08:58:40.199756', source: '[Workflow and Subworkflow Iteration]
-    Subworkflow Device Iteration', subtype: success, type: workflow_edge, workflow: Workflow
-    and Subworkflow Iteration}
+- {color: green, destination: '[Iteration Mechanism: Workflow and Subworkflow Iteration]
+    Subworkflow Device Iteration', label: success, name: '[Regression Workflow: Workflow
+    and Subworkflow Iteration] 2021-04-24 08:58:40.199741', source: '[Iteration Mechanism:
+    Workflow and Subworkflow Iteration] Subworkflow Value Iteration', subtype: success,
+  type: workflow_edge, workflow: 'Iteration Mechanism: Workflow and Subworkflow Iteration'}
+- {color: green, destination: '[Iteration Mechanism: Workflow and Subworkflow Iteration]
+    Subworkflow Device Iteration 2', label: success, name: '[Regression Workflow:
+    Workflow and Subworkflow Iteration] 2021-04-24 08:58:40.199756', source: '[Iteration
+    Mechanism: Workflow and Subworkflow Iteration] Subworkflow Device Iteration',
+  subtype: success, type: workflow_edge, workflow: 'Iteration Mechanism: Workflow
+    and Subworkflow Iteration'}
 - {color: green, destination: '[Shared] End', label: success, name: '[Regression Workflow:
-    Workflow and Subworkflow Iteration] 2021-04-24 08:58:40.199770', source: '[Workflow
-    and Subworkflow Iteration] Subworkflow Device Iteration 2', subtype: success,
-  type: workflow_edge, workflow: Workflow and Subworkflow Iteration}
-- {color: green, destination: '[[Workflow and Subworkflow Iteration] Subworkflow Device
-    Iteration 2] Service that does nothing', label: success, name: '[[Regression Workflow:
-    Workflow and Subworkflow Iteration] Subworkflow Device Iteration 2] 2021-04-24
-    08:58:40.199787', source: '[Shared] Start', subtype: success, type: workflow_edge,
-  workflow: '[Workflow and Subworkflow Iteration] Subworkflow Device Iteration 2'}
+    Workflow and Subworkflow Iteration] 2021-04-24 08:58:40.199770', source: '[Iteration
+    Mechanism: Workflow and Subworkflow Iteration] Subworkflow Device Iteration 2',
+  subtype: success, type: workflow_edge, workflow: 'Iteration Mechanism: Workflow
+    and Subworkflow Iteration'}
+- {color: green, destination: '[[Iteration Mechanism: Workflow and Subworkflow Iteration]
+    Subworkflow Device Iteration 2] Service that does nothing', label: success, name: '[[Regression
+    Workflow: Workflow and Subworkflow Iteration] Subworkflow Device Iteration 2]
+    2021-04-24 08:58:40.199787', source: '[Shared] Start', subtype: success, type: workflow_edge,
+  workflow: '[Iteration Mechanism: Workflow and Subworkflow Iteration] Subworkflow
+    Device Iteration 2'}
 - {color: green, destination: '[Shared] End', label: success, name: '[[Regression
     Workflow: Workflow and Subworkflow Iteration] Subworkflow Device Iteration 2]
-    2021-04-24 08:58:40.199802', source: '[[Workflow and Subworkflow Iteration] Subworkflow
-    Device Iteration 2] Service that does nothing', subtype: success, type: workflow_edge,
-  workflow: '[Workflow and Subworkflow Iteration] Subworkflow Device Iteration 2'}
-- {color: green, destination: '[[Workflow and Subworkflow Iteration] Subworkflow Device
-    Iteration] Service that does nothing', label: success, name: '[[Regression Workflow:
-    Workflow and Subworkflow Iteration] Subworkflow Device Iteration] 2021-04-24 08:58:40.199817',
-  source: '[Shared] Start', subtype: success, type: workflow_edge, workflow: '[Workflow
-    and Subworkflow Iteration] Subworkflow Device Iteration'}
+    2021-04-24 08:58:40.199802', source: '[[Iteration Mechanism: Workflow and Subworkflow
+    Iteration] Subworkflow Device Iteration 2] Service that does nothing', subtype: success,
+  type: workflow_edge, workflow: '[Iteration Mechanism: Workflow and Subworkflow Iteration]
+    Subworkflow Device Iteration 2'}
+- {color: green, destination: '[[Iteration Mechanism: Workflow and Subworkflow Iteration]
+    Subworkflow Device Iteration] Service that does nothing', label: success, name: '[[Regression
+    Workflow: Workflow and Subworkflow Iteration] Subworkflow Device Iteration] 2021-04-24
+    08:58:40.199817', source: '[Shared] Start', subtype: success, type: workflow_edge,
+  workflow: '[Iteration Mechanism: Workflow and Subworkflow Iteration] Subworkflow
+    Device Iteration'}
 - {color: green, destination: '[Shared] End', label: success, name: '[[Regression
     Workflow: Workflow and Subworkflow Iteration] Subworkflow Device Iteration] 2021-04-24
-    08:58:40.199831', source: '[[Workflow and Subworkflow Iteration] Subworkflow Device
-    Iteration] Service that does nothing', subtype: success, type: workflow_edge,
-  workflow: '[Workflow and Subworkflow Iteration] Subworkflow Device Iteration'}
+    08:58:40.199831', source: '[[Iteration Mechanism: Workflow and Subworkflow Iteration]
+    Subworkflow Device Iteration] Service that does nothing', subtype: success, type: workflow_edge,
+  workflow: '[Iteration Mechanism: Workflow and Subworkflow Iteration] Subworkflow
+    Device Iteration'}
 - {color: green, destination: '[Global Variables and post-run Pool Update Mechanism]
     Factory function: Create new device', label: success, name: '[Regression Workflow:
     Global Variables and post-run Pool Update Mechanism] 2021-04-24 08:58:40.199846',

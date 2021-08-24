@@ -3,7 +3,7 @@ REST API
 ========
 
 In this section, the word ``instance`` refers to any object type supported by eNMS. In a request,
-``<instance_type>`` can be any of the following: ``device``, ``link``, ``user``, ``service``, ``task``, ``pool``.
+``<instance_type>`` can be any of the following: ``device``, ``link``, ``user``, ``service``, ``task``, ``pool``, ``result``.
 
 eNMS has a REST API that can:
 
@@ -15,32 +15,32 @@ eNMS has a REST API that can:
 
 |
 
+|
+
 Run a service
 #############
 
 Services can be run using a standard end point with a payload used to define service specifics.
 
-.. code-block:: python
-  :caption: **POST** Request
+    Method: Post
 
-  /rest/run_service
+    Address: <server>/rest/run_service
 
-|
+    Parameters: None
 
-Service Payload Criteria
-************************
+    Payload:
 
-- ``name`` (**mandatory**) Name of the service.
-- ``devices`` (default: ``[]``) List of target devices. By default, the service will run on the devices configured from the web UI
-- ``pools`` (default: ``[]``) Same as devices for pools.
-- ``ip_addresses`` (default: ``[]``) Same as devices for pools.
-- ``payload`` (default: ``{}``) Payload of the service.
-- ``async`` (default: ``false``) JSON boolean.
+    - ``name`` Name of the service.
+    - ``devices`` (default: ``[]``) List of target devices. By default, the service will run on the devices configured from the web UI
+    - ``pools`` (default: ``[]``) Same as devices for pools.
+    - ``ip_addresses`` (default: ``[]``) Same as devices for pools.
+    - ``payload`` (default: ``{}``) Payload of the service.
+    - ``async`` (default: ``false``) JSON boolean.
 
-  - ``false`` eNMS runs the service and responds to your request when the service is done running.
-    The response will contain the result of the service, but the connection might time out
-    if the service takes too much time to run.
-  - ``true`` eNMS runs the service in a different thread and immediately responds with the service ID.
+      - ``false`` eNMS runs the service and responds to your request when the service is done running.
+        The response will contain the result of the service, but the connection might time out
+        if the service takes too much time to run.
+      - ``true`` eNMS runs the service in a different thread and immediately responds with the service ID.
 
 .. code-block:: python
   :caption: Service Payload Example
@@ -54,22 +54,21 @@ Service Payload Criteria
     "payload": {"aid": "1-2-3", "user_identified_key": "user_identified_value"}
   }
 
-Note:
+|
 
-- If you do not provide a value for ``devices`` you will get the default devices built into the web UI, even if you
-  provide a value in ``pools`` or ``ip_address``.
-- For Postman use the type "raw" for entering key/value pairs into the body. Body must also be formatted as application/JSON.
-- Extra form data parameters passed in the body of the POST are available to that service or workflow in
-  payload["rest_data"][your_key_name1] and payload["rest_data"][your_key_name2], and they can be accessed within a Service
-  Instance UI form as {{payload["rest_data"][your_key_name].
+    - If you do not provide a value for ``devices`` you will get the default devices built into the web UI, even if you
+      provide a value in ``pools`` or ``ip_address``.
+    - For Postman use the type "raw" for entering key/value pairs into the body. Body must also be formatted as application/JSON.
+    - Extra form data parameters passed in the body of the POST are available to that service or workflow in
+      payload["rest_data"][your_key_name1] and payload["rest_data"][your_key_name2], and they can be accessed within a Service
+      Instance UI form as {{payload["rest_data"][your_key_name].
 
-Run Service Response - Synchronous
-**********************************
+`Run Service Response - Synchronous`
 
-If the "async" argument is either **false** or omitted, then the request will block
-until the service has been run to completion or manually stopped.
+    If the "async" argument is either false or omitted, then the request will block
+    until the service has been run to completion or manually stopped.
 
-This is subset of the JSON response returned for a device-by-device workflow.
+    This is subset of the JSON response returned for a device-by-device workflow.
 
 .. code-block:: python
   :caption: Run Service Response Example - Synchronous
@@ -92,10 +91,10 @@ This is subset of the JSON response returned for a device-by-device workflow.
     "errors": []
   }
 
-Run Service Response - Asynchronous
-***********************************
-If the "async" argument is true, then you will get JSON response with the **runtime**
-name needed to retrieve the results.
+`Run Service Response - Asynchronous`
+
+    If the "async" argument is true, then you will get JSON response with the runtime
+    name needed to retrieve the results.
 
 .. code-block:: python
   :caption: Run Service Response Example - async
@@ -105,20 +104,23 @@ name needed to retrieve the results.
       "runtime": "2020-04-28 12:16:45.201077"
    }
 
-
-Retrieve the status / results of a top-level service
-####################################################
-
-.. code-block:: python
-  :caption: GET Request
-
-  /rest/result/<service_name>/<runtime>
-  /rest/result/My%20Service/2020-04-29%2000:39:22.540921
+|
 
 |
 
-- You will need to replace blank spaces ' ' in the service_name and runtime with '%20'
-- The **status** property in the result will show either "Running" or "Completed"
+Get the status or results of a service
+######################################
+
+    Method: Get
+
+    Address: <server>/rest/result/<service_name>/<runtime>
+
+    Parameters: None
+
+    Payload: None
+
+    - You will need to replace blank spaces ' ' in the service_name and runtime with '%20' for URL encoding.
+    - The status property in the result will show either "Running" or "Completed"
 
 .. code-block:: python
   :caption: Get run service result - result not ready yet (200)
@@ -130,7 +132,7 @@ Retrieve the status / results of a top-level service
 
 |
 
-The response when the result is ready will look very close to the synchronous result, above - but nested one level deeper inside the "result" property, below.
+    The response when the result is ready will look very close to the synchronous result, above - but nested one level deeper inside the "result" property, below.
 
 .. code-block:: python
   :caption: Get run service result - result is ready (200)
@@ -150,72 +152,102 @@ The response when the result is ready will look very close to the synchronous re
           "duration": "0:00:02",
   }
 
+|
+
+|
+
 Retrieve or delete an instance
 ##############################
 
 Retrieve all attributes for a given instance.
 
-.. code-block:: python
-  :caption: **GET** or **DELETE** Request
+    Method: Get or Delete
 
+    Address: <server>/rest/instance/<instance_type>/<instance_name>
 
-  /rest/instance/<instance_type>/<instance_name>
+    Parameters: None
 
-
+    Payload: None
 
 |
+
+|
+
 
 Retrieve a list of instances with a simple query
 ################################################
 
-Retrieve all instances that mach a simple query.
+Retrieve all devices or results that mach a simple query.
+
+    Method: Get
+
+    Address: <server>/rest/query/<instance_type>?<parameter1>=<value1>&<parameter2>=<value2>...
+
+    Parameters: None
+
+    Payload: None
 
 ::
 
- # via a GET method to the following URL
- https://<IP_address>/rest/query/<instance_type>?parameter1=value1&parameter2=value2...
+     Example: <server>/rest/query/device
+     Returns all devices
 
- Example: http://enms_url/rest/query/device
- Returns all devices
-
- Example: http://enms_url/rest/query/device?port=22&operating_system=eos
- Returns all devices whose port is 22 and operating system EOS
-
+     Example: <server>/rest/query/device?port=22&operating_system=eos
+     Returns all devices whose port is 22 and operating system EOS
 
 |
 
-Retreive a list of instances with customized query
-##################################################
+|
 
-Custom table search that allows users to define desired columns to be returned. This search also allows user to define
-RegEx search to be used to find matching instances.
+Retrieve a list of instances with a customized search
+#####################################################
 
+This custom table serach varies from the simple query by providing control over which columns to return,
+the types of matching, the sort order of returned items, and the max number of returned items. This
+search operates with the same filtering available within the user interface & should provide the same options.
 
-Custom Query Request
-********************
+    Method: Post
+
+    Address: <server>/rest/search
+
+    Parameters: None
+
+    Payload:
+
+    -  ``type`` - Instance type of object to search
+
+        *  'device', 'link', 'user', 'service', 'task', 'pool', 'result'
+    -  ``columns`` - List of attributes desired or used for filtering
+
+        *  Possible values can be found in 'setup/properties.json', but generally correspond to user interface table headers
+    -  ``search_criteria`` - <Optional> Dictionary referencing a value listed in ``columns`` using two key/value pairs as search criteria
+
+        *  1st key/value: choose a value from ``columns`` as the key, and the desired filter text as the value
+        *  2nd key/value: append '_filter' to the key used in the 1st key/value along with one of the following as a value indicating the type of filter 'regex', 'inclusion', 'equality'.
+        *  additional pairs of key/values can be added to further refine the search
+    -  ``order`` - <Optional> Allows sorting based on one of the values provided column
+
+        *  the expected format is ``[{"column": 0, "dir": "asc"}]``
+        *  the value of ``column`` is an integer from the place in the list provided to ``columns`` above
+        *  the values for ``dir`` can be either "desc" for descending or the default "asc" for ascending.
+    -  ``maximum_return_records`` - <Optional> Integer indicating the maximum number of records to return
+
+|
 
 .. code-block:: python
-  :caption: **POST** Request
-
-  /rest/search
-
-Custom Query Payload
-********************
-
-- ``type`` - Type of object to search (device, link, ...)
-- ``columns`` - List of attributes that will become keys in dictionary response
-- ``maximum_return_records`` - Integer indicating the maximum number of records to return
-- ``search_criteria`` - Dictionary requiring two key/value pairs to define a single search parameter
-
-.. code-block:: python
-  :caption: Example
+  :caption: Device Example
 
   {
     "type": "device",
       "columns": ["name", "ip_address", "configuration", "configuration_matches"],
       "maximum_return_records": 3,
-      "search_criteria": {"configuration_filter": "inclusion", "configuration": "i"}
+      "search_criteria": {"configuration_filter": "inclusion",
+                          "configuration": "loopback"}
   }
+
+Special ``columns``  "matches" is derived from a RegEX match "configuration", which returns the line where a regex was found
+
+|
 
 .. code-block:: python
   :caption: Example
@@ -224,90 +256,100 @@ Custom Query Payload
     "type": "link",
       "columns": ["name", "source_name"],
       "maximum_return_records": 3,
-      "search_criteria": {"name_filter": "inclusion", "name": "i"}
+      "search_criteria": {"name_filter": "inclusion",
+                          "name": "name_of_link"}
   }
 
+|
+
 .. code-block:: python
-  :caption: Retrieve all results for a service
+  :caption: Retrieve the latest result of a workflow
 
   {
     "type": "result",
-    "columns": ["result", "service_name", "device_name", "workflow_name"],
-    "search_criteria": {
-      "service_name": "Regression Workflow L: superworkflow",
-      "parent_runtime": "2020-05-25 11:45:25.721338"
-    }
+    "columns": ["parent_runtime", "result"],
+    "maximum_return_records": 1,
+    "search_criteria": {"workflow_name_filter": "inclusion",
+                               "workflow_name": "the_name_of_workflow"
+                               },
+    "order": [{"column": 0,
+               "dir": "desc"}]
   }
 
-In order to retrieve a result for a specific device, it is possible to add the ``device_name`` key in the search criteria.
-
-Note:
-
-- Possible ``columns`` (or properties) can be found in ``setup/properties.json``.
-- Special ``columns``  "matches" is derived from a RegEX match "configuration", which returns the line where a regex was found
-- The example above will search for configurations using the regex of "link-".
-- Note the use of configuration attribute is used twice to define a single parameter in ``search_criteria``. Additional
-  pairs can be added to ``search_criteria`` to further refine the search.
-- Note in the above example that the attribute used to search on is not required in ``search_criteria``.
-- (attribute)_filter: options include "regex", "inclusion", "exclusion".
-
+|
 
 |
+
 
 Retrieve the configuration of a device
 ######################################
 
 Returns the configuration for a device that has been previously retrieved from the network and stored in the application.
 
-.. code-block:: python
-  :caption: GET Request
+    Method: Get
 
-  /rest/configuration/<device_name>
+    Address: <server>/rest/configuration/<device_name>
+
+    Parameters: None
+
+    Payload: None
 
 |
+
+|
+
 
 Create or update an instance
 ############################
 Used to build or modify and instance in the application.
 
-::
+    Method: Post or Put
 
- # via a POST or PUT method to the following URL
- https://<IP_address>/rest/instance/<instance_type>
+    Address: <server>/rest/instance/<instance_type>
 
-Example of payload to schedule a task from the REST API: this payload will create (or update if it already exists) the task ``test``.
+    Parameters: None
 
-::
+    Payload: <Needs to be written>
 
- {
+.. code-block:: python
+  :caption: schedule a task from the REST API: this payload will create (or update if it already exists) the task ``test``.
+
+  {
     "name": "test",
     "service": "netmiko_check_vrf_test",
     "is_active": true,
     "devices": ["Baltimore"],
     "start_date": "13/08/2019 10:16:50"
- }
+  }
+
+|
 
 This task schedules the service ``netmiko_check_vrf_test`` to run at ``20/06/2019 23:15:15`` on the device whose name is ``Baltimore``.
 
 |
 
+|
+
+
 Migrate between eNMS applications
 ###################################
 
-The migration system can be triggered from the REST API:
+The migration system can be triggered from the REST API.
 
-::
+    Method: Post
 
- # Export: via a POST method to the following URL
- https://<IP_address>/rest/migrate/export
+    Address: <server>/rest/migrate/export or <server>/rest/migrate/import
 
- # Import: via a POST method to the following URL
- https://<IP_address>/rest/migrate/import
+    Parameters: None
+
+    Payload: <Needs to be written>
+
+|
 
 The body must contain the name of the project, the types of instance to import/export, and an boolean parameter called
-``empty_database_before_import`` that tells eNMS whether or not to empty the database before importing.
+``empty_database_before_import`` that tells eNMS rather or not to empty the database before importing.
 
-Example of body:
+Example of Payload:
 
 ::
 
@@ -335,8 +377,8 @@ You can also trigger the import/export programmatically. Here's an example with 
      auth=HTTPBasicAuth('admin', 'admin')
  )
 
-Topology Import / Export
-************************
+-  Topology Import / Export
+
 
 The import and export of topology can be triggered from the REST API, with a POST request to the following URL:
 
@@ -380,15 +422,21 @@ For the export, you must set the name of the exported file in the JSON payload:
 
 |
 
+|
+
+
 Ping eNMS
 ###########
 
 Test that eNMS is alive.
 
-.. code-block:: python
-  :caption: GET Request
+    Method: Get
 
-  /rest/is_alive
+    Address: <server>/rest/is_alive
+
+    Parameters: None
+
+    Payload: None
 
 .. code-block:: python
   :caption: Response
@@ -400,6 +448,9 @@ Test that eNMS is alive.
 
 
 |
+
+|
+
 
 Administration functionality
 ############################

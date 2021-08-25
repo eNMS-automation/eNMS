@@ -146,7 +146,7 @@ class RestApi:
         filtering_kwargs = {
             "draw": 1,
             "columns": [{"data": column} for column in kwargs["columns"]],
-            "order": [{"column": 0, "dir": "asc"}],
+            "order": rest_body.get("order", [{"column": 0, "dir": "asc"}]),
             "start": kwargs.get("start", 0),
             "length": kwargs.get("maximum_return_records", 10),
             "form": kwargs.get("search_criteria", {}),

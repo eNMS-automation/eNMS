@@ -2,9 +2,13 @@ from ast import literal_eval
 from atexit import register
 from contextlib import contextmanager
 from flask_login import current_user
+from importlib.util import module_from_spec, spec_from_file_location
 from json import loads
-from logging import error
-from os import getenv
+from logging import error, info
+from operator import attrgetter
+from os import getenv, getpid
+from pathlib import Path
+from re import search
 from sqlalchemy import (
     Boolean,
     Column,
@@ -20,26 +24,27 @@ from sqlalchemy import (
     Text,
 )
 from sqlalchemy.dialects.mysql.base import MSMediumBlob
+from sqlalchemy.exc import InvalidRequestError, OperationalError
 from sqlalchemy.ext.associationproxy import ASSOCIATION_PROXY
 from sqlalchemy.ext.declarative import declarative_base, DeclarativeMeta
 from sqlalchemy.ext.mutable import MutableDict, MutableList
-from sqlalchemy.orm import scoped_session, sessionmaker
+from sqlalchemy.orm import aliased, configure_mappers, scoped_session, sessionmaker
 from sqlalchemy.orm.collections import InstrumentedList
 from sqlalchemy.types import JSON
 from time import sleep
+from traceback import format_exc
+from uuid import getnode
 
-from eNMS.models import model_properties, models, property_types, relationships
-from eNMS.setup import database as database_settings, properties, rbac as rbac_settings
+from eNMS.variables import vs
 
 
 class Database:
     def __init__(self):
-        for setting in database_settings.items():
+        for setting in vs.database.items():
             setattr(self, *setting)
         self.database_url = getenv("DATABASE_URL", "sqlite:///database.db")
         self.dialect = self.database_url.split(":")[0]
         self.rbac_error = type("RbacError", (Exception,), {})
-        self.private_properties_set = set()
         self.configure_columns()
         self.engine = create_engine(
             self.database_url,
@@ -65,6 +70,39 @@ class Database:
             for parameter, number in values.items():
                 setattr(self, f"retry_{retry_type}_{parameter}", number)
         register(self.cleanup)
+
+    def _initialize(self, env):
+        self.register_services()
+        try:
+            self.base.metadata.create_all(bind=self.engine)
+        except OperationalError:
+            info(f"Bypassing metadata creation for process {getpid()}")
+        configure_mappers()
+        self.configure_model_events(env)
+        if env.detect_cli():
+            return
+        first_init = not self.get_user("admin")
+        if first_init:
+            admin_user = vs.models["user"](name="admin", is_admin=True)
+            self.session.add(admin_user)
+            self.session.commit()
+            if not admin_user.password:
+                admin_user.update(password="admin")
+            self.factory(
+                "server",
+                **{
+                    "name": str(getnode()),
+                    "description": "Localhost",
+                    "ip_address": "0.0.0.0",
+                    "status": "Up",
+                },
+            )
+        for run in self.fetch(
+            "run", all_matches=True, allow_none=True, status="Running"
+        ):
+            run.status = "Aborted (RELOAD)"
+            run.service.status = "Idle"
+        return first_init
 
     def create_metabase(self):
         class SubDeclarativeMeta(DeclarativeMeta):
@@ -115,58 +153,64 @@ class Database:
         self.Column = CustomColumn
 
     def configure_events(self):
+        if self.dialect == "sqlite":
+
+            @event.listens_for(self.engine, "connect")
+            def do_begin(connection, _):
+                def regexp(pattern, value):
+                    return search(pattern, str(value)) is not None
+
+                connection.create_function("regexp", 2, regexp)
+
         @event.listens_for(self.base, "mapper_configured", propagate=True)
         def model_inspection(mapper, model):
             name = model.__tablename__
             for col in inspect(model).columns:
                 if not col.info.get("model_properties", True):
                     continue
-                model_properties[name].append(col.key)
-                if col.type == PickleType and isinstance(col.default.arg, list):
-                    property_types[col.key] = "list"
+                if col.type == PickleType:
+                    is_list = isinstance(col.default.arg, list)
+                    property_type = "list" if is_list else "dict"
                 else:
-                    column_type = {
+                    property_type = {
                         Boolean: "bool",
                         Integer: "int",
                         Float: "float",
                         JSON: "dict",
-                        PickleType: "dict",
                     }.get(type(col.type), "str")
-                    if col.key not in property_types:
-                        property_types[col.key] = column_type
+                vs.model_properties[name][col.key] = property_type
             for descriptor in inspect(model).all_orm_descriptors:
                 if descriptor.extension_type is ASSOCIATION_PROXY:
                     property = (
                         descriptor.info.get("name")
                         or f"{descriptor.target_collection}_{descriptor.value_attr}"
                     )
-                    model_properties[name].append(property)
+                    vs.model_properties[name][property] = "str"
             if hasattr(model, "parent_type"):
-                model_properties[name].extend(model_properties[model.parent_type])
+                vs.model_properties[name].update(vs.model_properties[model.parent_type])
             if "service" in name and name != "service":
-                model_properties[name].extend(model_properties["service"])
-            models.update({name: model, name.lower(): model})
-            model_properties[name].extend(model.model_properties)
-            model_properties[name] = list(set(model_properties[name]))
+                vs.model_properties[name].update(vs.model_properties["service"])
+            vs.models.update({name: model, name.lower(): model})
+            vs.model_properties[name].update(model.model_properties)
             for relation in mapper.relationships:
                 if getattr(relation.mapper.class_, "private", False):
                     continue
                 property = str(relation).split(".")[1]
-                relationships[name][property] = {
+                vs.relationships[name][property] = {
                     "model": relation.mapper.class_.__tablename__,
                     "list": relation.uselist,
                 }
 
-    def configure_model_events(self, app):
+    def configure_model_events(self, env):
         @event.listens_for(self.base, "after_insert", propagate=True)
         def log_instance_creation(mapper, connection, target):
             if hasattr(target, "name") and target.type != "run":
-                app.log("info", f"CREATION: {target.type} '{target.name}'")
+                env.log("info", f"CREATION: {target.type} '{target.name}'")
 
         @event.listens_for(self.base, "before_delete", propagate=True)
         def log_instance_deletion(mapper, connection, target):
             name = getattr(target, "name", str(target))
-            app.log("info", f"DELETION: {target.type} '{name}'")
+            env.log("info", f"DELETION: {target.type} '{name}'")
 
         @event.listens_for(self.base, "before_update", propagate=True)
         def log_instance_update(mapper, connection, target):
@@ -177,7 +221,7 @@ class Database:
                     getattr(target, "private", False)
                     or not getattr(target, "log_changes", True)
                     or not getattr(state.class_, attr.key).info.get("log_change", True)
-                    or attr.key in self.private_properties_set
+                    or attr.key in vs.private_properties_set
                     or not hist.has_changes()
                 ):
                     continue
@@ -204,29 +248,29 @@ class Database:
                     getattr(target, "name", target.id),
                     " | ".join(changelog),
                 )
-                app.log("info", f"UPDATE: {target.type} '{name}': ({changes})")
+                env.log("info", f"UPDATE: {target.type} '{name}': ({changes})")
 
-        for model in models.values():
+        for model in vs.models.values():
             if "configure_events" in vars(model):
                 model.configure_events()
 
-        if app.use_vault:
-            for model in db.private_properties:
+        if env.use_vault:
+            for model in vs.private_properties:
 
-                @event.listens_for(models[model].name, "set", propagate=True)
+                @event.listens_for(vs.models[model].name, "set", propagate=True)
                 def vault_update(target, new_name, old_name, *_):
                     if new_name == old_name:
                         return
-                    for property in db.private_properties[target.class_type]:
+                    for property in vs.private_properties[target.class_type]:
                         path = f"secret/data/{target.type}"
-                        data = app.vault_client.read(f"{path}/{old_name}/{property}")
+                        data = env.vault_client.read(f"{path}/{old_name}/{property}")
                         if not data:
                             return
-                        app.vault_client.write(
+                        env.vault_client.write(
                             f"{path}/{new_name}/{property}",
                             data={property: data["data"]["data"][property]},
                         )
-                        app.vault_client.delete(f"{path}/{old_name}")
+                        env.vault_client.delete(f"{path}/{old_name}")
 
     def configure_associations(self):
         for name, association in self.relationships["associations"].items():
@@ -255,19 +299,17 @@ class Database:
             )
 
     def get_user(self, name):
-        return db.session.query(models["user"]).filter_by(name=name).first()
+        return self.session.query(vs.models["user"]).filter_by(name=name).first()
 
-    def query(self, model, rbac="read", username=None, property=None, prefilter=False):
-        entity = getattr(models[model], property) if property else models[model]
+    def query(self, model, rbac="read", username=None, property=None):
+        entity = getattr(vs.models[model], property) if property else vs.models[model]
         query = self.session.query(entity)
-        if prefilter:
-            query = models[model].prefilter(query)
         if rbac:
             user = current_user or self.get_user(username or "admin")
             if user.is_authenticated and not user.is_admin:
-                if model in rbac_settings["admin_models"]:
+                if model in vs.rbac["admin_models"]:
                     raise self.rbac_error
-                query = models[model].rbac_filter(query, rbac, user)
+                query = vs.models[model].rbac_filter(query, rbac, user)
         return query
 
     def fetch(
@@ -280,7 +322,7 @@ class Database:
         **kwargs,
     ):
         query = self.query(model, rbac, username=username).filter(
-            *(getattr(models[model], key) == value for key, value in kwargs.items())
+            *(getattr(vs.models[model], key) == value for key, value in kwargs.items())
         )
         for index in range(self.retry_fetch_number):
             try:
@@ -295,7 +337,7 @@ class Database:
         if result or allow_none:
             return result
         else:
-            raise db.rbac_error(
+            raise self.rbac_error(
                 f"There is no {model} in the database "
                 f"with the following characteristics: {kwargs}"
             )
@@ -331,22 +373,22 @@ class Database:
             for instance in self.fetch_all(model)
         ]
 
-    def factory(self, _class, commit=False, no_fetch=False, **kwargs):
+    def factory(self, _class, commit=False, no_fetch=False, rbac="edit", **kwargs):
         def transaction(_class, **kwargs):
             characters = set(kwargs.get("name", "") + kwargs.get("scoped_name", ""))
             if set("/\\'" + '"') & characters:
                 raise Exception("Names cannot contain a slash or a quote.")
             instance, instance_id = None, kwargs.pop("id", 0)
             if instance_id:
-                instance = self.fetch(_class, id=instance_id, rbac="edit")
+                instance = self.fetch(_class, id=instance_id, rbac=rbac)
             elif "name" in kwargs and not no_fetch:
                 instance = self.fetch(
-                    _class, allow_none=True, name=kwargs["name"], rbac="edit"
+                    _class, allow_none=True, name=kwargs["name"], rbac=rbac
                 )
             if instance and not kwargs.get("must_be_new"):
                 instance.update(**kwargs)
             else:
-                instance = models[_class](**kwargs)
+                instance = vs.models[_class](rbac=rbac, **kwargs)
                 self.session.add(instance)
             return instance
 
@@ -359,12 +401,53 @@ class Database:
                     self.session.commit()
                     break
                 except Exception as exc:
-                    error(f"Commit n°{index} failed ({exc})")
+                    error(f"Commit n°{index} failed ({format_exc()})")
                     self.session.rollback()
                     if index == self.retry_commit_number - 1:
                         raise exc
                     sleep(self.retry_commit_time * (index + 1))
         return instance
+
+    def get_credential(self, username, name=None, device=None, credential_type="any"):
+        pool_alias = aliased(vs.models["pool"])
+        query = (
+            self.session.query(vs.models["credential"])
+            .join(vs.models["pool"], vs.models["credential"].user_pools)
+            .join(vs.models["user"], vs.models["pool"].users)
+        )
+        if device:
+            query = query.join(pool_alias, vs.models["credential"].device_pools).join(
+                vs.models["device"], pool_alias.devices
+            )
+        query = query.filter(vs.models["user"].name == username)
+        if name:
+            query = query.filter(vs.models["credential"].name == name)
+        if device:
+            query = query.filter(vs.models["device"].name == device.name)
+        if credential_type != "any":
+            query = query.filter(vs.models["credential"].role == credential_type)
+        credentials = max(query.all(), key=attrgetter("priority"), default=None)
+        if not credentials:
+            raise Exception(f"No matching credentials found for DEVICE '{device.name}'")
+        return credentials
+
+    def register_services(self):
+        path_services = [vs.path / "eNMS" / "services"]
+        load_examples = vs.settings["app"].get("startup_migration") == "examples"
+        if vs.settings["paths"]["custom_services"]:
+            path_services.append(Path(vs.settings["paths"]["custom_services"]))
+        for path in path_services:
+            for file in path.glob("**/*.py"):
+                if "init" in str(file):
+                    continue
+                if not load_examples and "examples" in str(file):
+                    continue
+                info(f"Loading service: {file}")
+                spec = spec_from_file_location(file.stem, str(file))
+                try:
+                    spec.loader.exec_module(module_from_spec(spec))
+                except InvalidRequestError:
+                    error(f"Error loading service '{file}'\n{format_exc()}")
 
     @contextmanager
     def session_scope(self):
@@ -381,7 +464,7 @@ class Database:
         model = getattr(table, "__tablename__", None)
         if not model:
             return
-        for property, values in properties["custom"].get(model, {}).items():
+        for property, values in vs.properties["custom"].get(model, {}).items():
             if values.get("private", False):
                 kwargs = {}
             else:
@@ -391,15 +474,15 @@ class Database:
                 }
             column = self.Column(
                 {
-                    "boolean": Boolean,
+                    "bool": Boolean,
                     "dict": self.Dict,
                     "float": Float,
                     "integer": Integer,
                     "json": JSON,
-                    "string": self.LargeString,
+                    "str": self.LargeString,
                     "select": self.SmallString,
                     "multiselect": self.List,
-                }[values.get("type", "string")],
+                }[values.get("type", "str")],
                 **kwargs,
             )
             if not values.get("serialize", True):

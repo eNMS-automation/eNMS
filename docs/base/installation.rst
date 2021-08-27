@@ -261,18 +261,6 @@ Settings ``ssh`` section
 - ``port`` (default: ``-1``)
 - ``start_port`` (default: ``9000``)
 - ``end_port`` (default: ``91000``)
-- ``enabled``
-
-    - ``web`` (default: ``true``)   Enables device terminal connections in a browser tab
-    - ``desktop`` (default: ``true``)  Enables device terminal connections from your desktop software that tunnels
-      through eNMS to the device
-
-Settings ``syslog`` section
-*****************************
-
-- ``active`` (default: ``false``)
-- ``address`` (default: ``"0.0.0.0"``)
-- ``port`` (default: ``514``)
 
 Settings ``tacacs`` section
 *****************************

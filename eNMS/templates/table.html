@@ -1,10 +1,5 @@
-{% extends "base_site.html" %} {% block stylesheets %} {{ super() }}
-<link
-  href="{{ url_for('static', filename='lib/datatables/dataTables.bootstrap.min.css') }}"
-  rel="stylesheet"
-/>
-<link href="{{ url_for('static', filename='css/table.css') }}" rel="stylesheet" />
-{% endblock stylesheets %} {% block content %}
+{% extends "base_site.html" %} {% block stylesheets %} {{ super() }} {% endblock
+stylesheets %} {% block content %}
 <form id="search-form-{{ type }}">
   <div id="tooltip-overlay" class="overlay"></div>
   <nav
@@ -20,8 +15,4 @@
     width="100%"
   ></table>
 </form>
-{% endblock content %} {% block javascripts %} {{ super() }} {% if type == "pool" %}
-<script src="{{ url_for('static', filename='lib/3d-force-graph/three.min.js') }}"></script>
-<script src="{{ url_for('static', filename='lib/3d-force-graph/three-spritetext.min.js') }}"></script>
-<script src="{{ url_for('static', filename='lib/3d-force-graph/3d-force-graph.min.js') }}"></script>
-{% endif %} {% endblock javascripts %}
+{% endblock content %} {% block javascripts %} {{ super() }} {% endblock javascripts %}

@@ -3,6 +3,8 @@ global
 action: true
 CodeMirror: false
 Diff2HtmlUI: false
+Dropzone: false
+formProperties: true
 JSONEditor: false
 jsPanel: false
 page: false
@@ -12,7 +14,11 @@ serviceTypes: false
 import {
   call,
   cantorPairing,
+  configureForm,
   configureNamespace,
+  downloadFile,
+  history,
+  historyPosition,
   notify,
   observeMutations,
   openPanel,
@@ -21,13 +27,11 @@ import {
 } from "./base.js";
 import { refreshTable, tableInstances, tables } from "./table.js";
 import {
-  arrowHistory,
-  arrowPointer,
   currentRuntime,
   getServiceState,
   switchToWorkflow,
   workflow,
-} from "./workflow.js";
+} from "./workflowBuilder.js";
 
 function openServicePanel(bulk) {
   showInstancePanel($("#service-type").val(), null, bulk ? "bulk" : null, "service");
@@ -154,17 +158,45 @@ function copyClipboard(elementId, result) {
   target.click();
 }
 
+function downloadLogs(serviceId) {
+  const logs = $(`#service-logs-${serviceId}`).data("CodeMirrorInstance").getValue();
+  downloadFile(`logs-${serviceId}`, logs, "txt");
+}
+
 function showResult(id) {
   openPanel({
     name: "result",
     content: `
-      <input
-        id="result-path-${id}"
-        type="text"
-        class="form-control"
-        style="height:5%"
-        value="results"
-      >
+      <div class="input-group" style="width:100%">
+        <input
+          id="result-path-${id}"
+          type="text"
+          class="form-control"
+          style="height: 34px"
+          value="results"
+        >
+        <span class="input-group-btn">
+          <button class="btn btn-default pull-right"
+            onclick="eNMS.base.copyToClipboard({text: 'result-path-${id}', isId: true})"
+            type="button"
+          >
+            <span class="glyphicon glyphicon-copy"></span>
+          </button>
+        </span>
+        <span class="input-group-btn">
+          <button
+            id="download-result-${id}"
+            class="btn btn-default pull-right"
+            type="button"
+            style="height: 34px; width: 40px"
+          >
+            <span
+              class="glyphicon glyphicon-center glyphicon-download"
+              aria-hidden="true"
+            ></span>
+          </button>
+        </span>
+      </div>
       <div id="content-${id}" style="height:95%"></div>`,
     title: "Result",
     id: id,
@@ -173,6 +205,9 @@ function showResult(id) {
         url: `/get_result/${id}`,
         callback: (result) => {
           const jsonResult = result;
+          $(`#download-result-${id}`).on("click", function () {
+            downloadFile(`result-${id}`, JSON.stringify(result), "json");
+          });
           const options = {
             mode: "view",
             modes: ["code", "view"],
@@ -202,7 +237,15 @@ function showResult(id) {
   });
 }
 
-export const showRuntimePanel = function (type, service, runtime, table, newRuntime) {
+export const showRuntimePanel = function (
+  type,
+  service,
+  runtime,
+  table,
+  newRuntime,
+  fullResult
+) {
+  if (runtime?.startsWith("#runtimes")) runtime = $(runtime).val();
   if (!runtime) runtime = currentRuntime;
   const displayFunction =
     type == "logs"
@@ -214,7 +257,7 @@ export const showRuntimePanel = function (type, service, runtime, table, newRunt
     type == "logs" ? "logs" : service.type == "workflow" && !table ? "tree" : "table";
   const panelId = `${panelType}-${service.id}`;
   call({
-    url: `/get_runtimes/${type}/${service.id}`,
+    url: `/get_runtimes/${service.id}`,
     callback: (runtimes) => {
       if (newRuntime) runtimes.push([runtime, runtime]);
       if (!runtimes.length) return notify(`No ${type} yet.`, "error", 5);
@@ -222,24 +265,63 @@ export const showRuntimePanel = function (type, service, runtime, table, newRunt
       if (panelType == "logs") {
         content = `
         <div class="modal-body">
-          <select
-            id="runtimes-${panelId}"
-            name="runtimes"
-            class="form-control"
-          ></select>
+          <nav
+            id="controls"
+            class="navbar navbar-default nav-controls"
+            role="navigation"
+          >
+            <div style="width: 280px; float: left;">
+              <select
+                id="runtimes-${panelId}"
+                name="runtimes"
+                class="form-control"
+              ></select>
+            </div>
+            <div style="width: 30px; float: left; margin-left: 15px;">
+              <button
+                class="btn btn-default pull-right"
+                onclick="eNMS.automation.downloadLogs(${service.id})"
+                data-tooltip="Update all pools"
+                type="button"
+              >
+                <span
+                  class="glyphicon glyphicon-download"
+                  aria-hidden="true"
+                ></span>
+              </button>
+            </div>
+          </nav>
           <hr>
           <div id="service-${panelId}"></div>
-        </div>`;
+        </div>
+        `;
       } else if (panelType == "tree") {
         content = `
         <div class="modal-body">
-          <select
-            id="runtimes-${panelId}"
-            name="runtimes"
-            class="form-control"
-          ></select>
+          <div style="width: 670px; float: left;">
+            <select
+              id="runtimes-${panelId}"
+              name="runtimes"
+              class="form-control"
+            ></select>
+          </div>
+          <div style="width: 30px; float: left; margin-left: 15px;">
+            <button
+              class="btn btn-info pull-right"
+              onclick="eNMS.automation.showRuntimePanel(
+                'results', ${JSON.stringify(service).replace(/"/g, "'")},
+                '#runtimes-${panelId}', 'result', null, true)"
+              data-tooltip="All Results"
+              type="button"
+            >
+              <span
+                class="glyphicon glyphicon-list-alt"
+                aria-hidden="true"
+              ></span>
+            </button>
+          </div>
           <hr>
-          <div id="result-${panelId}" style="height: 500px"></div>
+          <div id="result-${panelId}" style="height: 500px; margin-top: 30px"></div>
         </div>`;
       } else {
         if (!table) table = "result";
@@ -295,9 +377,9 @@ export const showRuntimePanel = function (type, service, runtime, table, newRunt
           }
           $(`#runtimes-${panelId}`).val(runtime).selectpicker("refresh");
           $(`#runtimes-${panelId}`).on("change", function () {
-            displayFunction(service, this.value, true, table, true);
+            displayFunction(service, this.value, true, table, true, fullResult);
           });
-          displayFunction(service, runtime, null, table);
+          displayFunction(service, runtime, null, table, false, fullResult);
         },
       });
     },
@@ -331,7 +413,7 @@ function displayLogs(service, runtime, change) {
 
 function displayResultsTree(service, runtime) {
   call({
-    url: `/get_workflow_results/${service.id}/${runtime}`,
+    url: `/get_workflow_results/${runtime}`,
     callback: function (data) {
       $(`#result-tree-${service.id}`).jstree("destroy").empty();
       let tree = $(`#result-tree-${service.id}`).jstree({
@@ -360,6 +442,15 @@ function displayResultsTree(service, runtime) {
                   <span style="color: #32cd32">
                     ${node.data.progress.success || 0} passed
                   </span>
+                  ${
+                    node.data.progress.skipped > 0
+                      ? `<span style="color: #000000">-</span>
+                    <span style="color: #7D7D7D">
+                    ${node.data.progress.skipped || 0} skipped
+                    </span>
+                  `
+                      : ""
+                  }
                   <span style="color: #000000">-</span>
                   <span style="color: #FF6666">
                     ${node.data.progress.failure || 0} failed
@@ -401,18 +492,20 @@ function displayResultsTree(service, runtime) {
   });
 }
 
-function displayResultsTable(service, runtime, _, type, refresh) {
+function displayResultsTable(service, runtime, _, type, refresh, fullResult) {
   // eslint-disable-next-line new-cap
   type = type ?? "result";
   if (refresh) {
     tableInstances[`result-${service.id}`].constraints.parent_runtime = runtime;
     refreshTable(`result-${service.id}`);
   } else {
-    const constraints = {
-      service_id: service.id,
-      service_id_filter: "equality",
-      parent_runtime: runtime || currentRuntime,
-    };
+    let constraints = { parent_runtime: runtime || currentRuntime };
+    if (!fullResult) {
+      Object.assign(constraints, {
+        service_id: service.id,
+        service_id_filter: "equality",
+      });
+    }
     new tables[type](service.id, constraints);
   }
 }
@@ -438,33 +531,56 @@ function refreshLogs(service, runtime, editor, first, wasRefreshed, line) {
           1000
         );
       } else if (wasRefreshed) {
-        $(`#logs-${service.id}`).remove();
-        const table = service.type == "workflow" ? null : "result";
-        showRuntimePanel("results", service, runtime, table);
+        setTimeout(() => {
+          $(`#logs-${service.id}`).remove();
+          const table = service.type == "workflow" ? null : "result";
+          showRuntimePanel("results", service, runtime, table);
+        }, 1000);
       }
     },
   });
 }
 
-export const normalRun = function (id) {
+function submitInitialForm(serviceId) {
   call({
-    url: `/run_service/${id}`,
-    callback: function (result) {
+    url: `/run_service/${serviceId}`,
+    form: `initial-${serviceId}-form-${serviceId}`,
+    callback: (result) => {
       runLogic(result);
-    },
-  });
-};
-
-function parameterizedRun(type, id) {
-  call({
-    url: `/run_service/${id}`,
-    form: `${type}-form-${id}`,
-    callback: function (result) {
-      $(`#${type}-${id}`).remove();
-      runLogic(result);
+      $(`#parameterized_form-${serviceId}`).remove();
     },
   });
 }
+
+export const runService = function ({ id, type, parametrization }) {
+  if (parametrization) {
+    openPanel({
+      name: "parameterized_form",
+      id: id,
+      url: `parameterized_form/${id}`,
+      title: "Parameterized Form",
+      size: "700px auto",
+      callback: function () {
+        call({
+          url: `/get_form_properties/initial-${id}`,
+          callback: function (properties) {
+            formProperties[`initial-${id}`] = properties;
+            configureForm(`initial-${id}`, id);
+          },
+        });
+      },
+    });
+  } else {
+    call({
+      url: `/run_service/${id}`,
+      form: type ? `${type}-form-${id}` : null,
+      callback: function (result) {
+        if (type) $(`#${type}-${id}`).remove();
+        runLogic(result);
+      },
+    });
+  }
+};
 
 export function runLogic(result) {
   const service = result.service.superworkflow || result.service;
@@ -489,11 +605,12 @@ export function runLogic(result) {
   $(`#${result.service.type}-${result.service.id}`).remove();
 }
 
-function exportService(id) {
+function exportServices(tableId) {
   call({
-    url: `/export_service/${id}`,
+    url: `/export_services`,
+    form: `search-form-${tableId}`,
     callback: () => {
-      notify("Service Export successful.", "success", 5, true);
+      notify("Services successfully exported.", "success", 5, true);
     },
   });
 }
@@ -501,7 +618,7 @@ function exportService(id) {
 function pauseTask(id) {
   call({
     url: `/task_action/pause/${id}`,
-    callback: function (result) {
+    callback: function () {
       $(`#pause-resume-${id}`)
         .attr("onclick", `eNMS.automation.resumeTask('${id}')`)
         .text("Resume");
@@ -593,12 +710,13 @@ function schedulerAction(action) {
 Object.assign(action, {
   Edit: (service) => showInstancePanel(service.type, service.id),
   Duplicate: (service) => showInstancePanel(service.type, service.id, "duplicate"),
-  Run: (service) => normalRun(service.id),
-  "Parameterized Run": (service) => showInstancePanel(service.type, service.id, "run"),
+  Run: (service) => runService({ id: service.id, form: service.parameterized_form }),
+  "Parameterized Run": (service) =>
+    runService({ id: service.id, form: service.parameterized_form }),
   Logs: (service) => showRuntimePanel("logs", service, currentRuntime),
   Results: (service) => showRuntimePanel("results", service, currentRuntime, "result"),
-  Backward: () => switchToWorkflow(arrowHistory[arrowPointer - 1], "left"),
-  Forward: () => switchToWorkflow(arrowHistory[arrowPointer + 1], "right"),
+  Backward: () => switchToWorkflow(history[historyPosition - 1], "left"),
+  Forward: () => switchToWorkflow(history[historyPosition + 1], "right"),
 });
 
 export function loadServiceTypes() {
@@ -635,7 +753,7 @@ export function showRunServicePanel({ instance, tableId, type }) {
     callback: function () {
       $(`#run_service-type-${panelId}`).val(targetType);
       if (type) {
-        let form = serializeForm(`#search-form-${panelId}`);
+        let form = serializeForm(`#search-form-${panelId}`, `${type}_filtering`);
         if (table) form = { ...form, ...table.constraints };
         call({
           url: `/filtering/${type}`,
@@ -662,22 +780,26 @@ function runServicesOnTargets(id) {
   });
 }
 
-function showImportServicePanel() {
+function showImportServicesPanel() {
   openPanel({
-    name: "import_service",
-    title: "Import Service",
-    size: "600 300",
+    name: "import_services",
+    title: "Import Services",
+    size: "600 350",
     callback: () => {
       call({
         url: "/get_exported_services",
         callback: function (services) {
-          let list = document.getElementById("import_service-service");
-          services.forEach((item) => {
-            let option = document.createElement("option");
-            option.textContent = option.value = item;
-            list.appendChild(option);
+          const element = document.getElementById(`dropzone-services`);
+          new Dropzone(element, {
+            url: "/import_services",
+            accept: function (file, done) {
+              if (!file.name.includes(".tgz")) {
+                notify("The file must be a .tgz archive", "error", 5);
+              } else {
+                done();
+              }
+            },
           });
-          $("#import_service-service").selectpicker("refresh");
         },
       });
     },
@@ -689,17 +811,18 @@ configureNamespace("automation", [
   copyClipboard,
   deleteCorruptedEdges,
   displayCalendar,
-  exportService,
+  downloadLogs,
+  exportServices,
   field,
-  normalRun,
   openServicePanel,
-  parameterizedRun,
   pauseTask,
   resumeTask,
+  runService,
   runServicesOnTargets,
   schedulerAction,
-  showImportServicePanel,
+  showImportServicesPanel,
   showResult,
   showRunServicePanel,
   showRuntimePanel,
+  submitInitialForm,
 ]);

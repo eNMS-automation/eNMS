@@ -1,0 +1,45 @@
+- last_modified: '2021-01-04 09:21:18.073774'
+  name: 'Regression View : Basic Example'
+  objects: ['2021-03-29 09:40:15.682829', '2021-05-02 03:49:17.745962', '2021-05-02
+      03:49:17.747779', '2021-05-02 03:49:17.747771']
+  position_x: 0.0
+  position_y: 0.0
+  position_z: 0.0
+  rotation_x: 0.0
+  rotation_y: 0.0
+  rotation_z: 0.0
+  scale_x: 1.0
+  scale_y: 1.0
+  scale_z: 1.0
+  type: view
+- {name: '2021-03-29 09:40:15.682829', position_x: 0.0, position_y: 10.0, position_z: 0.0,
+  rotation_x: 0.0, rotation_y: 0.0, rotation_z: 0.0, scale_x: 1.0, scale_y: 1.0, scale_z: 1.0,
+  type: plan, view: 'Regression View : Basic Example'}
+- {device: Austin, model: '', name: '2021-05-02 03:49:17.745962', position_x: -150.53147435477922,
+  position_y: 10.0, position_z: 119.47871920651392, rotation_x: 0.0, rotation_y: 0.0,
+  rotation_z: 0.0, scale_x: 1.0, scale_y: 1.0, scale_z: 1.0, type: node, view: 'Regression
+    View : Basic Example'}
+- {device: Washington, model: juniper_ex3300, name: '2021-05-02 03:49:17.747779',
+  position_x: 0.0, position_y: 10.0, position_z: 0.0, rotation_x: 0.0, rotation_y: 0.0,
+  rotation_z: 0.0, scale_x: 10.0, scale_y: 10.0, scale_z: 10.0, type: node, view: 'Regression
+    View : Basic Example'}
+- {device: Washington, model: cisco_catalyst_me4924, name: '2021-05-02 03:49:17.747771',
+  position_x: 0.0, position_y: 10.0, position_z: -1000.0, rotation_x: 0.0, rotation_y: 0.0,
+  rotation_z: 0.0, scale_x: 10.0, scale_y: 10.0, scale_z: 10.0, type: node, view: 'Regression
+    View : Basic Example'}
+- last_modified: '2021-06-28 06:06:36.956532'
+  name: 'Regression View: Plans'
+  objects: ['2021-06-28 06:10:10.426808']
+  position_x: 0.0
+  position_y: 0.0
+  position_z: 0.0
+  rotation_x: 0.0
+  rotation_y: 0.0
+  rotation_z: 0.0
+  scale_x: 1.0
+  scale_y: 1.0
+  scale_z: 1.0
+  type: view
+- {name: '2021-06-28 06:10:10.426808', position_x: 0.0, position_y: 10.0, position_z: 0.0,
+  rotation_x: 0.0, rotation_y: 0.0, rotation_z: 0.0, scale_x: 1.0, scale_y: 1.0, scale_z: 1.0,
+  type: plan, view: 'Regression View: Plans'}

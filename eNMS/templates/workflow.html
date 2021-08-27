@@ -4,7 +4,7 @@
 <link href="{{ url_for('static', filename='css/workflow.css') }}" rel="stylesheet" />
 {% endblock stylesheets %} {% block content %}
 <div class="controls">
-  <div class="controls_mode navbar navbar-default">
+  <div class="controls_mode navbar navbar-default navbar-color">
     <table class="table" cellspacing="0" style="margin: 0px;" width="100%">
       <tbody>
         <tr>
@@ -32,7 +32,7 @@
             <button
               type="button"
               class="btn btn-primary"
-              onclick="eNMS.workflow.switchMode()"
+              onclick="eNMS.workflowBuilder.switchMode()"
               data-tooltip="Change Mode"
             >
               <span id="mode-icon" class="glyphicon glyphicon-move"></span>
@@ -42,28 +42,26 @@
             <select id="edge-type" class="form-control">
               <option value="success">Success</option>
               <option value="failure">Failure</option>
-              <option value="prerequisite">Prerequisite</option>
             </select>
           </td>
         </tr>
       </tbody>
     </table>
   </div>
-  <nav class="navbar navbar-default navbar-custom" role="navigation">
-    <div style="width: 690px; margin: 0px;">
-      <div style="width: 70%; float: left;">
-        <select
-          id="current-workflow"
-          class="form-control"
-          data-dropdown-align-right="true"
-          data-size="20"
-        ></select>
-      </div>
-      <div style="width: 30%; float: left; padding-left: 5px;">
-        <select id="current-runtime" class="form-control" data-size="20"></select>
-      </div>
+  <nav
+    class="navbar navbar-default navbar-custom navbar-color"
+    style="padding-bottom: 2px;"
+    role="navigation"
+  >
+    <div style="width: 100%; margin: 0px;">
+      <select
+        id="current-workflow"
+        class="form-control"
+        data-dropdown-align-right="true"
+        data-size="20"
+      ></select>
     </div>
-    <ul class="pagination" style="margin: 0px; padding-top: 5px;">
+    <ul class="pagination" style="margin: 0px; padding-top: 10px;">
       <li>
         <a
           onclick="action['Edit Workflow']()"
@@ -116,25 +114,7 @@
       </li>
       <li>
         <a
-          onclick="action['Workflow Logs']()"
-          data-tooltip="Workflow Logs"
-          style="cursor: pointer;"
-          ><span class="glyphicon glyphicon-list"></span
-        ></a>
-      </li>
-      <li>
-        <a
-          onclick="action['Workflow Results Tree']()"
-          data-tooltip="Workflow Results"
-          style="cursor: pointer;"
-          ><span class="glyphicon glyphicon-list-alt"></span
-        ></a>
-      </li>
-    </ul>
-    <ul class="pagination" style="margin: 0px;">
-      <li>
-        <a
-          onclick="eNMS.workflow.getWorkflowTree()"
+          onclick="eNMS.workflowBuilder.getWorkflowTree()"
           data-tooltip="Workflow Tree"
           style="cursor: pointer;"
           ><span class="glyphicon glyphicon-tree-conifer"></span
@@ -151,30 +131,6 @@
           data-tooltip="Zoom Out"
           style="cursor: pointer;"
           ><span class="glyphicon glyphicon-zoom-out"></span
-        ></a>
-      </li>
-      <li>
-        <a
-          onclick="action['Run Workflow']()"
-          data-tooltip="Run Workflow"
-          style="cursor: pointer;"
-          ><span class="glyphicon glyphicon-play"></span
-        ></a>
-      </li>
-      <li>
-        <a
-          onclick="action['Parameterized Workflow Run']()"
-          data-tooltip="Parameterized Run"
-          style="cursor: pointer;"
-          ><span class="glyphicon glyphicon-play-circle"></span
-        ></a>
-      </li>
-      <li>
-        <a
-          onclick="action['Stop Workflow']()"
-          data-tooltip="Stop Workflow"
-          style="cursor: pointer;"
-          ><span class="glyphicon glyphicon-stop"></span
         ></a>
       </li>
       <li id="left-arrow">
@@ -199,6 +155,73 @@
           data-tooltip="Next Workflow"
           style="cursor: pointer;"
           ><span class="glyphicon glyphicon-chevron-right"></span
+        ></a>
+      </li>
+    </ul>
+  </nav>
+  <nav
+    class="navbar navbar-default navbar-custom navbar-color"
+    style="padding-bottom: 2px; margin-left: 10px"
+    role="navigation"
+  >
+    <div style="width: 100%;">
+      <select id="current-runtime" class="form-control" data-size="20"></select>
+    </div>
+    <ul class="pagination" style="margin: 0px; padding-top: 10px;">
+      <li>
+        <a
+          onclick="action['Runtimes Display']()"
+          data-tooltip="Displayed Runtimes"
+          style="cursor: pointer;"
+          ><span id="runtime-display-icon" class="fa fa-user"></span
+        ></a>
+      </li>
+      <li>
+        <a
+          onclick="action['Workflow Logs']()"
+          data-tooltip="Logs"
+          style="cursor: pointer;"
+          ><span class="glyphicon glyphicon-list"></span
+        ></a>
+      </li>
+      <li>
+        <a
+          onclick="action['Workflow Result Tree']()"
+          data-tooltip="Result Tree"
+          style="cursor: pointer;"
+          ><span class="glyphicon glyphicon-list-alt"></span
+        ></a>
+      </li>
+      <li>
+        <a
+          onclick="action['Workflow Result Comparison']()"
+          data-tooltip="Result Comparison"
+          style="cursor: pointer;"
+          ><span class="fa fa-adjust"></span
+        ></a>
+      </li>
+      <li>
+        <a
+          onclick="action['Run Workflow']()"
+          data-tooltip="Run Workflow"
+          style="cursor: pointer;"
+          ><span class="glyphicon glyphicon-play"></span
+        ></a>
+      </li>
+      <li>
+        <a
+          onclick="action['Parameterized Workflow Run']()"
+          data-tooltip="Parameterized Run"
+          style="cursor: pointer;"
+          ><span class="glyphicon glyphicon-play-circle"></span
+        ></a>
+      </li>
+      <li>
+        <a
+          onclick="action['Stop Workflow']()"
+          data-tooltip="Stop Workflow"
+          style="cursor: pointer;"
+          ><span class="glyphicon glyphicon-stop"></span
         ></a>
       </li>
     </ul>
@@ -240,6 +263,9 @@
     <a tabindex="-1" href="#">Restart Workflow from Here</a>
   </li>
   <li class="menu-entry divider node-selection">&nbsp</li>
+  <li class="menu-entry node-selection">
+    <a tabindex="-1" href="#">Skip</a>
+  </li>
   <li class="menu-entry node-selection edge-selection">
     <a tabindex="-1" href="#">Delete</a>
   </li>
@@ -261,7 +287,6 @@
       <li class="divider"><a tabindex="-1" href="#">&nbsp</a></li>
       <li><a tabindex="-1" href="#">Create 'Success' edge</a></li>
       <li><a tabindex="-1" href="#">Create 'Failure' edge</a></li>
-      <li><a tabindex="-1" href="#">Create 'Prerequisite' edge</a></li>
     </ul>
   </li>
   <li class="dropdown-submenu menu-entry global">
@@ -277,8 +302,8 @@
       <li><a tabindex="-1" href="#">Parameterized Workflow Run</a></li>
       <li><a tabindex="-1" href="#">Stop Workflow</a></li>
       <li class="divider"><a tabindex="-1" href="#">&nbsp</a></li>
-      <li><a tabindex="-1" href="#">Workflow Results Tree</a></li>
-      <li><a tabindex="-1" href="#">Workflow Results Table</a></li>
+      <li><a tabindex="-1" href="#">Workflow Result Tree</a></li>
+      <li><a tabindex="-1" href="#">Workflow Result Table</a></li>
       <li><a tabindex="-1" href="#">Workflow Logs</a></li>
     </ul>
   </li>
@@ -288,5 +313,8 @@
 </ul>
 {% endblock content %} {% block javascripts %} {{ super()}}
 <script src="{{ url_for('static', filename='lib/vis/vis.min.js') }}"></script>
-<script type="module" src="{{ url_for('static', filename='js/workflow.js') }}"></script>
+<script
+  type="module"
+  src="{{ url_for('static', filename='js/workflowBuilder.js') }}"
+></script>
 {% endblock javascripts %}

@@ -1,15 +1,15 @@
 from sqlalchemy.ext.mutable import MutableDict, MutableList
 
-from eNMS import app
 from eNMS.database import db
-from eNMS.models import model_properties, property_types, relationships
+from eNMS.environment import env
+from eNMS.variables import vs
 
 
 class AbstractBase(db.base):
 
     __abstract__ = True
     pool_model = False
-    model_properties = []
+    model_properties = {}
 
     def __init__(self, **kwargs):
         self.update(**kwargs)
@@ -21,11 +21,11 @@ class AbstractBase(db.base):
         return getattr(self, "name", str(self.id))
 
     def __getattribute__(self, property):
-        if property in db.private_properties_set:
-            if app.use_vault:
+        if property in vs.private_properties_set:
+            if env.use_vault:
                 target = self.service if self.type == "run" else self
                 path = f"secret/data/{target.type}/{target.name}/{property}"
-                data = app.vault_client.read(path)
+                data = env.vault_client.read(path)
                 value = data["data"]["data"][property] if data else ""
             else:
                 value = super().__getattribute__(property)
@@ -34,12 +34,12 @@ class AbstractBase(db.base):
             return super().__getattribute__(property)
 
     def __setattr__(self, property, value):
-        if property in db.private_properties_set:
+        if property in vs.private_properties_set:
             if not value:
                 return
-            value = app.encrypt_password(value).decode("utf-8")
-            if app.use_vault:
-                app.vault_client.write(
+            value = env.encrypt_password(value).decode("utf-8")
+            if env.use_vault:
+                env.vault_client.write(
                     f"secret/data/{self.type}/{self.name}/{property}",
                     data={property: value},
                 )
@@ -47,10 +47,6 @@ class AbstractBase(db.base):
                 super().__setattr__(property, value)
         else:
             super().__setattr__(property, value)
-
-    @classmethod
-    def prefilter(cls, query):
-        return query
 
     @classmethod
     def filtering_constraints(cls, **_):
@@ -62,28 +58,28 @@ class AbstractBase(db.base):
 
     @property
     def base_properties(self):
-        return {p: getattr(self, p) for p in ("id", "name", "type")}
+        return {prop: getattr(self, prop) for prop in ("id", "name", "type")}
 
-    def update(self, **kwargs):
-        relation = relationships[self.__tablename__]
+    def update(self, rbac="read", **kwargs):
+        relation = vs.relationships[self.__tablename__]
         for property, value in kwargs.items():
             if not hasattr(self, property):
                 continue
-            property_type = property_types.get(property, None)
+            property_type = vs.model_properties[self.__tablename__].get(property, None)
             if property in relation:
                 if relation[property]["list"]:
                     value = db.objectify(relation[property]["model"], value)
                 elif value:
-                    value = db.fetch(relation[property]["model"], id=value)
+                    value = db.fetch(relation[property]["model"], id=value, rbac=rbac)
             if property_type == "bool":
                 value = value not in (False, "false")
             setattr(self, property, value)
         if not kwargs.get("update_pools") or not self.pool_model:
             return
         for pool in db.fetch_all("pool", rbac=None):
-            if pool.manually_defined or not pool.compute(self.class_type):
+            if pool.manually_defined:
                 continue
-            match = pool.object_match(self)
+            match = pool.match_instance(self)
             if match and self not in getattr(pool, f"{self.class_type}s"):
                 getattr(pool, f"{self.class_type}s").append(self)
             if self in getattr(pool, f"{self.class_type}s") and not match:
@@ -96,14 +92,14 @@ class AbstractBase(db.base):
         self, export=False, exclude=None, include=None, private_properties=False
     ):
         result = {}
-        no_migrate = db.dont_migrate.get(self.type, db.dont_migrate["service"])
-        properties = list(model_properties[self.type])
+        no_migrate = db.dont_migrate.get(getattr(self, "export_type", self.type), {})
+        properties = list(vs.model_properties[self.type])
         for property in properties:
-            if not private_properties and property in db.private_properties_set:
+            if not private_properties and property in vs.private_properties_set:
                 continue
             if property in db.dont_serialize.get(self.type, []):
                 continue
-            if export and property in getattr(self, "model_properties", []):
+            if export and property in getattr(self, "model_properties", {}):
                 continue
             if include and property not in include or exclude and property in exclude:
                 continue
@@ -128,13 +124,17 @@ class AbstractBase(db.base):
         return query
 
     def table_properties(self, **kwargs):
-        rest_api = kwargs.get("rest_api_request")
-        columns = [c["data"] for c in kwargs["columns"]] if rest_api else None
-        return self.get_properties(include=columns)
+        return self.get_properties(
+            include=[column["data"] for column in kwargs["columns"]]
+            if kwargs.get("rest_api_request")
+            else None
+        )
 
     def duplicate(self, **kwargs):
         properties = {
-            k: v for (k, v) in self.get_properties().items() if k not in ("id", "name")
+            property: value
+            for property, value in self.get_properties().items()
+            if property not in ("id", "name")
         }
         instance = db.factory(self.type, **{**properties, **kwargs})
         return instance
@@ -150,8 +150,8 @@ class AbstractBase(db.base):
         properties = self.get_properties(
             export, exclude=exclude, private_properties=private_properties
         )
-        no_migrate = db.dont_migrate.get(self.type, db.dont_migrate["service"])
-        for property, relation in relationships[self.type].items():
+        no_migrate = db.dont_migrate.get(getattr(self, "export_type", self.type), {})
+        for property, relation in vs.relationships[self.type].items():
             if include and property not in include or exclude and property in exclude:
                 continue
             if export and property in no_migrate:

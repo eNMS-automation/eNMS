@@ -97,7 +97,6 @@
 </div>
 <div class="modal-footer">
   <center>
-    {% if settings["ssh"]["enabled"]["web"] %}
     <button
       type="button"
       class="btn btn-primary btn-id add-id"
@@ -105,14 +104,5 @@
     >
       Web Session
     </button>
-    {% endif %} {% if settings["ssh"]["enabled"]["desktop"] %}
-    <button
-      type="button"
-      class="btn btn-primary btn-id add-id"
-      value="eNMS.inventory.desktopConnection"
-    >
-      Desktop Session
-    </button>
-    {% endif %}
   </center>
 </div>

@@ -1,5 +1,5 @@
-from eNMS import app
 from eNMS.database import db
+from eNMS.variables import vs
 
 from tests.conftest import check_pages
 
@@ -18,6 +18,7 @@ ignored_endpoints = [
     "/result_form",
     "/session_log_form",
     "/table_form",
+    "/terminal",
     "/tree_form",
     "/workflow_tree_form",
     "/logout",
@@ -27,7 +28,7 @@ ignored_endpoints = [
 
 
 def test_authentication(base_client):
-    for page in app.rbac["get_requests"]:
+    for page in vs.rbac["get_requests"]:
         if any(endpoint in page for endpoint in ignored_endpoints):
             continue
         r = base_client.get(page)
@@ -35,7 +36,7 @@ def test_authentication(base_client):
 
 
 def test_urls(user_client):
-    for page in app.rbac["get_requests"]:
+    for page in vs.rbac["get_requests"]:
         if any(endpoint in page for endpoint in ignored_endpoints):
             continue
         r = user_client.get(page, follow_redirects=True)

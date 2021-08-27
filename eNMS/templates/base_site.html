@@ -48,6 +48,10 @@
       rel="stylesheet"
     />
     <link
+      href="{{ url_for('static', filename='lib/datatables/dataTables.bootstrap.min.css') }}"
+      rel="stylesheet"
+    />
+    <link
       href="{{ url_for('static', filename='lib/jspanel/jspanel.min.css') }}"
       rel="stylesheet"
     />
@@ -141,6 +145,16 @@
           </ul>
         </div>
       </div>
+      {% set font, left = (8, 5) if current_user.small_menu else (11, 10) %}
+      <div
+        id="server-time"
+        style="font-size: {{ font }}px; left: {{ left }}px"
+        class="server-time"
+      >
+        {% if not current_user.small_menu %} Server Time: {{ time }} {% else %} {% set
+        a, b = time.split(" ") %} {{ a }} <br />
+        {{ b }} {% endif %}
+      </div>
     </div>
     {% endblock sidebar %} {% block header %}
     <div class="right_column">
@@ -190,7 +204,7 @@
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
                     {% for theme, values in themes["themes"].items() %}
                     <li>
-                      <a onclick="eNMS.main.switchTheme('{{ theme }}')"
+                      <a onclick="eNMS.base.switchTheme('{{ theme }}')"
                         >{{ values["name"] }}</a
                       >
                     </li>
@@ -291,10 +305,8 @@
       const page = "{{ endpoint }}";
       const user = {{ user|tojson|safe }};
       const configurationProperties = {{ configuration_properties|tojson|safe }};
-      const propertyTypes = {{ property_types|tojson|safe }};
       const formProperties = {{ form_properties|tojson|safe }};
       const names = {{ names|tojson|safe }};
-      const relations = {{ relations|tojson|safe }};
       const relationships = {{ relationships|tojson|safe }};
       const serviceTypes = {{ service_types|tojson|safe }};
       const tableProperties = {{ table_properties|tojson|safe }};
@@ -340,7 +352,6 @@
       type="module"
       src="{{ url_for('static', filename='js/automation.js') }}"
     ></script>
-    <script type="module" src="{{ url_for('static', filename='js/main.js') }}"></script>
     {% endblock %}
   </body>
 </html>

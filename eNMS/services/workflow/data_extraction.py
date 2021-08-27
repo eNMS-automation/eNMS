@@ -5,8 +5,8 @@ from textfsm import TextFSM
 from wtforms.widgets import TextArea
 
 from eNMS.database import db
-from eNMS.forms.automation import ServiceForm
-from eNMS.forms.fields import HiddenField, SelectField, StringField
+from eNMS.forms import ServiceForm
+from eNMS.fields import HiddenField, SelectField, StringField
 from eNMS.models.automation import Service
 
 
@@ -33,13 +33,13 @@ class DataExtractionService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "data_extraction_service"}
 
-    def job(self, run, payload, device=None):
+    def job(self, run, device=None):
         result, success = {}, True
-        for i in range(1, 4):
-            variable = getattr(run, f"variable{i}")
+        for index in range(1, 4):
+            variable = getattr(run, f"variable{index}")
             if not variable:
                 continue
-            query = getattr(run, f"query{i}")
+            query = getattr(run, f"query{index}")
             try:
                 variables = locals()
                 variables.pop("query")
@@ -48,9 +48,9 @@ class DataExtractionService(Service):
                 success = False
                 result[variable] = f"Wrong Python query for {variable} ({exc})"
                 continue
-            match_type = getattr(run, f"match_type{i}")
-            match = getattr(run, f"match{i}")
-            operation = getattr(run, f"operation{i}")
+            match_type = getattr(run, f"match_type{index}")
+            match = getattr(run, f"match{index}")
+            operation = getattr(run, f"operation{index}")
             value = (
                 value
                 if match_type == "none"
@@ -58,9 +58,7 @@ class DataExtractionService(Service):
                 if match_type == "regex"
                 else TextFSM(StringIO(match)).ParseText(value)
             )
-            run.payload_helper(
-                payload, variable, value, device=device.name, operation=operation
-            )
+            run.payload_helper(variable, value, device=device.name, operation=operation)
             result[variable] = {
                 "query": query,
                 "match_type": match_type,
@@ -77,7 +75,7 @@ match_choices = (
 )
 
 operation_choices = (
-    ("set", "Set / Replace"),
+    ("__setitem__", "Set / Replace"),
     ("append", "Append to a list"),
     ("extend", "Extend list"),
     ("update", "Update dictionary"),

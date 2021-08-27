@@ -1,10 +1,10 @@
 from sqlalchemy import Boolean, ForeignKey, Integer
 
-from eNMS import app
 from eNMS.database import db
-from eNMS.forms.automation import NapalmForm
-from eNMS.forms.fields import HiddenField, SelectMultipleField
+from eNMS.forms import NapalmForm
+from eNMS.fields import HiddenField, SelectMultipleField
 from eNMS.models.automation import ConnectionService
+from eNMS.variables import vs
 
 
 class NapalmGettersService(ConnectionService):
@@ -21,7 +21,7 @@ class NapalmGettersService(ConnectionService):
 
     __mapper_args__ = {"polymorphic_identity": "napalm_getters_service"}
 
-    def job(self, run, payload, device):
+    def job(self, run, device):
         napalm_connection, result = run.napalm_connection(device), {}
         run.log(
             "info",
@@ -39,7 +39,7 @@ class NapalmGettersService(ConnectionService):
 
 class NapalmGettersForm(NapalmForm):
     form_type = HiddenField(default="napalm_getters_service")
-    getters = SelectMultipleField(choices=app.NAPALM_GETTERS)
+    getters = SelectMultipleField(choices=vs.automation["napalm"]["getters"])
     groups = {
         "Main Parameters": {"commands": ["getters"], "default": "expanded"},
         **NapalmForm.groups,

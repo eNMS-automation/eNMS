@@ -1,6 +1,6 @@
 from werkzeug.datastructures import ImmutableMultiDict
 
-from eNMS import app
+from eNMS.environment import env
 from eNMS.database import db
 
 from tests.conftest import check_pages
@@ -47,6 +47,6 @@ def test_netmiko_napalm_config(user_client):
 def test_create_logs(user_client):
     number_of_logs = len(db.fetch_all("changelog"))
     for i in range(10):
-        app.log("warning", str(i))
+        env.log("warning", str(i))
     db.session.commit()
     assert len(db.fetch_all("changelog")) == number_of_logs + 11

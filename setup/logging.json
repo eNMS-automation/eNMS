@@ -43,7 +43,10 @@
     }
   },
   "external_loggers": {
+    "engineio": "error",
     "requests": "info",
-    "urllib3": "info"
+    "socketio": "error",
+    "urllib3": "info",
+    "werkzeug": "error"
   }
 }

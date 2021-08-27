@@ -1,10 +1,9 @@
 from sqlalchemy import Boolean, Float, ForeignKey, Integer
 from wtforms.widgets import TextArea
 
-from eNMS import app
 from eNMS.database import db
-from eNMS.forms.automation import NetmikoForm
-from eNMS.forms.fields import (
+from eNMS.forms import NetmikoForm
+from eNMS.fields import (
     BooleanField,
     FloatField,
     HiddenField,
@@ -13,6 +12,7 @@ from eNMS.forms.fields import (
     StringField,
 )
 from eNMS.models.automation import ConnectionService
+from eNMS.variables import vs
 
 
 class UnixShellScriptService(ConnectionService):
@@ -37,10 +37,10 @@ class UnixShellScriptService(ConnectionService):
 
     __mapper_args__ = {"polymorphic_identity": "unix_shell_script_service"}
 
-    def job(self, run, payload, device):
+    def job(self, run, device):
         netmiko_connection = run.netmiko_connection(device)
         source_code = run.sub(run.source_code, locals())
-        script_file_name = f"{run.space_deleter(app.get_time())}.sh"
+        script_file_name = f"{run.space_deleter(vs.get_time())}.sh"
         run.log("info", f"Sending shell script '{script_file_name}'", device)
         expect_string = run.sub(run.expect_string, locals())
         command_list = (
@@ -97,7 +97,7 @@ class UnixShellScriptForm(NetmikoForm):
             "fi\n"
         ),
     )
-    driver = SelectField(choices=app.NETMIKO_DRIVERS, default="linux")
+    driver = SelectField(choices=vs.netmiko_drivers, default="linux")
     use_device_driver = BooleanField(default=True)
     fast_cli = BooleanField()
     timeout = IntegerField(default=10)

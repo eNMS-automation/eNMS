@@ -3,8 +3,8 @@ from pathlib import Path
 from sqlalchemy import Boolean, ForeignKey, Integer
 
 from eNMS.database import db
-from eNMS.forms.automation import ServiceForm
-from eNMS.forms.fields import BooleanField, HiddenField, StringField
+from eNMS.forms import ServiceForm
+from eNMS.fields import BooleanField, HiddenField, StringField
 from eNMS.models.automation import Service
 
 
@@ -22,7 +22,7 @@ class GitService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "git_service"}
 
-    def job(self, run, payload, device=None):
+    def job(self, run, device=None):
         repo = Repo(
             Path.cwd() / self.git_repository
             if self.relative_path

@@ -1,8 +1,7 @@
 from werkzeug.datastructures import ImmutableMultiDict
 
-from eNMS import app
 from eNMS.database import db
-from eNMS.setup import properties
+from eNMS.variables import vs
 
 from tests.conftest import check_pages
 
@@ -46,17 +45,10 @@ def test_manual_object_creation(user_client):
         for description in ("desc1", "desc2"):
             obj_dict = define_device(number, description)
             user_client.post("/update/device", data=obj_dict)
-    # devices = db.fetch_all("device")
-    # for source in devices[:3]:
-    #     for destination in devices[:3]:
-    #         obj_dict = define_link(source.id, destination.id)
-    #         user_client.post("/update/link", data=obj_dict)
-    # assert len(db.fetch_all("device")) == 10
-    # assert len(db.fetch_all("link")) == 9
 
 
 def create_from_file(client, file: str):
-    with open(app.path / "files" / "spreadsheets" / file, "rb") as f:
+    with open(vs.path / "files" / "spreadsheets" / file, "rb") as f:
         data = {"form_type": "excel_import", "file": f, "replace": False}
         client.post("/import_topology", data=data)
 
@@ -122,7 +114,7 @@ pool2 = {
 
 
 def create_pool(pool: dict) -> dict:
-    for model, model_properties in properties["filtering"].items():
+    for model, model_properties in vs.properties["filtering"].items():
         for property in model_properties:
             if f"{model}_{property}_match" not in pool:
                 pool[f"{model}_{property}_match"] = "inclusion"

@@ -8,11 +8,11 @@ try:
 except ImportError as exc:
     warn(f"Couldn't import slackclient module ({exc})")
 
-from eNMS import app
 from eNMS.database import db
-from eNMS.forms.automation import ServiceForm
-from eNMS.forms.fields import HiddenField, StringField
+from eNMS.forms import ServiceForm
+from eNMS.fields import HiddenField, StringField
 from eNMS.models.automation import Service
+from eNMS.variables import vs
 
 
 class SlackNotificationService(Service):
@@ -26,9 +26,9 @@ class SlackNotificationService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "slack_notification_service"}
 
-    def job(self, run, payload, device=None):
+    def job(self, run, device=None):
         slack_client = SlackClient(run.token or getenv("SLACK_TOKEN"))
-        channel = run.sub(run.channel, locals()) or app.settings["slack"]["channel"]
+        channel = run.sub(run.channel, locals()) or vs.settings["slack"]["channel"]
         run.log("info", f"Sending SLACK notification on {channel}", device)
         result = slack_client.api_call(
             "chat.postMessage", channel=channel, text=run.sub(run.body, locals())

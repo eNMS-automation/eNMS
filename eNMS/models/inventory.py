@@ -1,17 +1,14 @@
-from flask_login import current_user
-from operator import attrgetter
 from re import search, sub
-from sqlalchemy import and_, Boolean, event, ForeignKey, Integer, or_
+from sqlalchemy import and_, Boolean, event, Float, ForeignKey, Integer, or_
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.orm import aliased, backref, relationship
 from sqlalchemy.schema import UniqueConstraint
 from sqlalchemy.sql.expression import false
 
-from eNMS import app
-from eNMS.models import models
+from eNMS.controller import controller
 from eNMS.models.base import AbstractBase
 from eNMS.database import db
-from eNMS.setup import properties
+from eNMS.variables import vs
 
 
 class Object(AbstractBase):
@@ -37,14 +34,14 @@ class Object(AbstractBase):
 
     @classmethod
     def rbac_filter(cls, query, mode, user):
-        pool_alias = aliased(models["pool"])
+        pool_alias = aliased(vs.models["pool"])
         return (
             query.join(cls.pools)
-            .join(models["access"], models["pool"].access)
-            .join(pool_alias, models["access"].user_pools)
-            .join(models["user"], pool_alias.users)
-            .filter(models["access"].access_type.contains(mode))
-            .filter(models["user"].name == user.name)
+            .join(vs.models["access"], vs.models["pool"].access)
+            .join(pool_alias, vs.models["access"].user_pools)
+            .join(vs.models["user"], pool_alias.users)
+            .filter(vs.models["access"].access_type.contains(mode))
+            .filter(vs.models["user"].name == user.name)
             .group_by(cls.id)
         )
 
@@ -73,12 +70,6 @@ class Device(Object):
         secondary=db.service_target_device_table,
         back_populates="target_devices",
     )
-    runs = relationship(
-        "Run",
-        secondary=db.run_device_table,
-        back_populates="target_devices",
-        cascade="all,delete",
-    )
     tasks = relationship(
         "Task", secondary=db.task_device_table, back_populates="devices"
     )
@@ -91,42 +82,22 @@ class Device(Object):
 
     @classmethod
     def database_init(cls):
-        for property in app.configuration_properties:
-            for timestamp in app.configuration_timestamps:
-                setattr(
-                    cls,
-                    f"last_{property}_{timestamp}",
-                    db.Column(db.SmallString, default="Never"),
-                )
+        for property in vs.configuration_properties:
+            for timestamp in vs.timestamps:
+                column = db.Column(db.SmallString, default="Never")
+                setattr(cls, f"last_{property}_{timestamp}", column)
         return cls
 
-    def get_credentials(self, credential_type="any", username=None):
-        if not username:
-            username = current_user.name
-        pool_alias = aliased(models["pool"])
-        query = (
-            db.session.query(models["credential"])
-            .join(models["pool"], models["credential"].user_pools)
-            .join(models["user"], models["pool"].users)
-            .join(pool_alias, models["credential"].device_pools)
-            .join(models["device"], pool_alias.devices)
-            .filter(models["user"].name == username)
-            .filter(models["device"].name == self.name)
-        )
-        if credential_type != "any":
-            query = query.filter(models["credential"].role == credential_type)
-        credentials = max(query.all(), key=attrgetter("priority"), default=None)
-        if not credentials:
-            raise Exception(f"No matching credentials found for DEVICE '{self.name}'")
-        return credentials
-
     def get_neighbors(self, object_type, direction="both", **link_constraints):
-        filters = [models["link"].destination == self, models["link"].source == self]
+        filters = [
+            vs.models["link"].destination == self,
+            vs.models["link"].source == self,
+        ]
         edge_constraints = (
             filters if direction == "both" else [filters[direction == "source"]]
         )
         link_constraints = [
-            getattr(models["link"], key) == value
+            getattr(vs.models["link"], key) == value
             for key, value in link_constraints.items()
         ]
         neighboring_links = (
@@ -145,12 +116,12 @@ class Device(Object):
             )
 
     def table_properties(self, **kwargs):
-        columns = [c["data"] for c in kwargs["columns"]]
+        columns = [column["data"] for column in kwargs["columns"]]
         rest_api_request = kwargs.get("rest_api_request")
         include_properties = columns if rest_api_request else None
         properties = super().get_properties(include=include_properties)
         context = int(kwargs["form"].get("context-lines", 0))
-        for property in app.configuration_properties:
+        for property in vs.configuration_properties:
             if rest_api_request:
                 if property in columns:
                     properties[property] = getattr(self, property)
@@ -291,13 +262,8 @@ class Pool(AbstractBase):
     admin_only = db.Column(Boolean, default=False)
     last_modified = db.Column(db.TinyString, info={"log_change": False})
     description = db.Column(db.LargeString)
-    operator = db.Column(db.TinyString, default="all")
     target_services = relationship(
         "Service", secondary=db.service_target_pool_table, back_populates="target_pools"
-    )
-    visualization_default = db.Column(Boolean, default=False)
-    runs = relationship(
-        "Run", secondary=db.run_pool_table, back_populates="target_pools"
     )
     tasks = relationship("Task", secondary=db.task_pool_table, back_populates="pools")
     access_users = relationship(
@@ -334,7 +300,7 @@ class Pool(AbstractBase):
     @classmethod
     def database_init(cls):
         for model in cls.models:
-            for property in properties["filtering"][model]:
+            for property in vs.properties["filtering"][model]:
                 setattr(cls, f"{model}_{property}", db.Column(db.LargeString))
                 setattr(
                     cls,
@@ -363,41 +329,48 @@ class Pool(AbstractBase):
             for user in set(self.users) | old_users:
                 user.update_rbac()
 
-    def property_match(self, obj, property):
-        pool_value = getattr(self, f"{obj.class_type}_{property}")
-        object_value = str(getattr(obj, property))
-        match = getattr(self, f"{obj.class_type}_{property}_match")
-        invert = getattr(self, f"{obj.class_type}_{property}_invert")
-        if match == "inclusion":
-            result = pool_value in object_value
-        elif match == "equality":
-            result = pool_value == object_value
-        else:
-            result = bool(search(pool_value, object_value))
-        return not result if invert else result
-
-    def object_match(self, obj):
-        operator = all if self.operator == "all" else any
-        return operator(
-            self.property_match(obj, property)
-            for property in properties["filtering"][obj.class_type]
-            if getattr(self, f"{obj.class_type}_{property}")
-        )
-
-    def compute(self, model):
-        return any(
-            getattr(self, f"{model}_{property}")
-            for property in properties["filtering"][model]
-        )
+    def match_instance(self, instance):
+        match_list = []
+        for property in vs.properties["filtering"][instance.class_type]:
+            pool_value = getattr(self, f"{instance.class_type}_{property}")
+            match_type = getattr(self, f"{instance.class_type}_{property}_match")
+            if not pool_value and match_type != "empty":
+                continue
+            value = str(getattr(instance, property))
+            match = (
+                match_type == "inclusion"
+                and pool_value in value
+                or match_type == "equality"
+                and pool_value == value
+                or match_type == "empty"
+                and not value
+                or bool(search(pool_value, value))
+            )
+            result = match != getattr(self, f"{instance.class_type}_{property}_invert")
+            match_list.append(result)
+        return match_list and all(match_list)
 
     def compute_pool(self):
         for model in self.models:
             if not self.manually_defined:
-                instances = (
-                    list(filter(self.object_match, db.fetch_all(model)))
-                    if self.compute(model)
-                    else []
-                )
+                kwargs = {"bulk": "object", "rbac": None, "form": {}}
+                for property in vs.properties["filtering"][model]:
+                    value = getattr(self, f"{model}_{property}")
+                    match_type = getattr(self, f"{model}_{property}_match")
+                    invert_type = getattr(self, f"{model}_{property}_invert")
+                    if not value and match_type != "empty":
+                        continue
+                    kwargs["form"].update(
+                        {
+                            property: value,
+                            f"{property}_filter": match_type,
+                            f"{property}_invert": invert_type,
+                        }
+                    )
+                if kwargs["form"]:
+                    instances = controller.filtering(model, **kwargs)
+                else:
+                    instances = []
                 setattr(self, f"{model}s", instances)
             else:
                 instances = getattr(self, f"{model}s")
@@ -422,3 +395,93 @@ class Session(AbstractBase):
         "Device", back_populates="sessions", foreign_keys="Session.device_id"
     )
     device_name = association_proxy("device", "name")
+
+
+class ViewObject(AbstractBase):
+
+    __tablename__ = export_type = "view_object"
+    type = db.Column(db.SmallString)
+    __mapper_args__ = {"polymorphic_identity": "view_object", "polymorphic_on": type}
+    id = db.Column(Integer, primary_key=True)
+    name = db.Column(db.SmallString, unique=True)
+    view_id = db.Column(Integer, ForeignKey("view_object.id", ondelete="cascade"))
+    view = relationship(
+        "View", remote_side=[id], foreign_keys=view_id, back_populates="objects"
+    )
+    position_x = db.Column(Float, default=0.0)
+    position_y = db.Column(Float, default=0.0)
+    position_z = db.Column(Float, default=0.0)
+    scale_x = db.Column(Float, default=1.0)
+    scale_y = db.Column(Float, default=1.0)
+    scale_z = db.Column(Float, default=1.0)
+    rotation_x = db.Column(Float, default=0.0)
+    rotation_y = db.Column(Float, default=0.0)
+    rotation_z = db.Column(Float, default=0.0)
+
+    def update(self, **kwargs):
+        super().update(**kwargs)
+        if "name" in kwargs:
+            prefix = f"[{self.view}] " if self.view else ""
+            self.name = f"{prefix}{kwargs['name']}"
+        else:
+            self.name = vs.get_time()
+
+
+class Node(ViewObject):
+
+    __tablename__ = class_type = "node"
+    __mapper_args__ = {"polymorphic_identity": "node"}
+    parent_type = "view_object"
+    id = db.Column(Integer, ForeignKey(ViewObject.id), primary_key=True)
+    model = db.Column(db.SmallString)
+    device_id = db.Column(Integer, ForeignKey("device.id"))
+    device = relationship("Device", foreign_keys="Node.device_id")
+    device_name = association_proxy("device", "name")
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        if not self.name:
+            self.name = vs.get_time()
+
+
+class Line(ViewObject):
+
+    __tablename__ = class_type = "line"
+    __mapper_args__ = {"polymorphic_identity": "line"}
+    parent_type = "view_object"
+    id = db.Column(Integer, ForeignKey(ViewObject.id), primary_key=True)
+    link_id = db.Column(Integer, ForeignKey("link.id"))
+    link = relationship("Link", foreign_keys="Line.link_id")
+    link_name = association_proxy("link", "name")
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        if not self.name:
+            self.name = vs.get_time()
+
+
+class Plan(ViewObject):
+
+    __tablename__ = class_type = "plan"
+    __mapper_args__ = {"polymorphic_identity": "plan"}
+    parent_type = "view_object"
+    id = db.Column(Integer, ForeignKey(ViewObject.id), primary_key=True)
+
+
+class Label(ViewObject):
+
+    __tablename__ = class_type = "label"
+    __mapper_args__ = {"polymorphic_identity": "label"}
+    parent_type = "view_object"
+    id = db.Column(Integer, ForeignKey(ViewObject.id), primary_key=True)
+    text = db.Column(db.SmallString)
+
+
+class View(ViewObject):
+
+    __tablename__ = class_type = "view"
+    __mapper_args__ = {"polymorphic_identity": "view"}
+    parent_type = "view_object"
+    id = db.Column(Integer, ForeignKey(ViewObject.id), primary_key=True)
+    last_modified = db.Column(db.TinyString, info={"log_change": False})
+    objects = relationship("ViewObject", foreign_keys="ViewObject.view_id")

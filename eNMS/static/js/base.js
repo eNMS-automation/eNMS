@@ -10,21 +10,35 @@ job: false
 jsPanel: false
 JSONEditor: false
 moment: false
+NProgress: false
 page: false
 rbac: false
-relations: false
 relationships: false
 user: false
 */
 
-import { showCredentialPanel } from "./administration.js";
-import { refreshTable, tableInstances } from "./table.js";
-import { creationMode, processWorkflowData, workflow } from "./workflow.js";
+import { openDebugPanel, showCredentialPanel } from "./administration.js";
+import { initDashboard } from "./inventory.js";
+import { refreshTable, tables, tableInstances } from "./table.js";
+import { initView } from "./visualization.js";
+import { initViewBuilder, viewCreation } from "./viewBuilder.js";
+import {
+  creationMode,
+  initWorkflowBuilder,
+  processWorkflowData,
+  workflow,
+} from "./workflowBuilder.js";
 
+const currentUrl = window.location.href.split("#")[0].split("?")[0];
 export let editors = {};
+export let history = ["workflow_builder", "service_table"].includes(page) ? [""] : [];
+export let historyPosition = page == "service_table" ? 0 : -1;
 export let jsonEditors = {};
 export let userIsActive = true;
+
+let currentTheme = user.theme;
 let topZ = 1000;
+let triggerMenu = true;
 
 export function detectUserInactivity() {
   let timer;
@@ -144,11 +158,13 @@ export const call = function ({ url, data, form, callback }) {
   $.ajax(params);
 };
 
-export function serializeForm(form) {
+export function serializeForm(form, formDefault) {
   const data = JSON.parse(JSON.stringify($(form).serializeArray()));
   let result = {};
   data.forEach((property) => {
-    if (relations.includes(property.name)) {
+    const propertyType = formProperties[formDefault]?.[property.name]?.type;
+    if (!propertyType) return;
+    if (propertyType.includes("object")) {
       if (!(property.name in result)) result[property.name] = [];
       result[property.name].push(property.value);
     } else {
@@ -162,7 +178,6 @@ const deleteInstance = function (type, id) {
   call({
     url: `/delete_instance/${type}/${id}`,
     callback: function (result) {
-      $(`#instance_deletion-${id}`).remove();
       if (type.includes("service") || type == "workflow") {
         type = "service";
         const path = localStorage.getItem("path");
@@ -185,11 +200,7 @@ function removeInstance(tableId, instance, relation) {
     url: "/remove_instance",
     data: { instance, relation },
     callback: function () {
-      tableInstances[tableId].table
-        .row($(`#${instance.id}`))
-        .remove()
-        .draw(false);
-      if (relation.type == "pool") refreshTable("pool");
+      refreshTable(tableId, false, true);
       notify(
         `${instance.type.toUpperCase()} '${instance.name}' removed from
         ${relation.type.toUpperCase()} '${relation.name}'.`,
@@ -207,7 +218,7 @@ export function downloadFile(name, content, type) {
     "href",
     window.URL.createObjectURL(
       new Blob([content], {
-        type: type == "csv" ? "text/csv" : "text/plain",
+        type: type ? `text/${type}` : "text/plain",
       })
     )
   );
@@ -225,20 +236,22 @@ export function createTooltips() {
     const id = `tooltip-${$(this).attr("data-tooltip").replace(/\s/g, "")}`;
     jsPanel.tooltip.create({
       id: id,
+      borderRadius: "10px",
       callback: () => setTimeout(() => $(`#${id}`).fadeOut(1000), 2500),
-      content: `<p style="margin-right: 10px; margin-left: 10px; color: black">
-        <b>${$(this).attr("data-tooltip")}</b></p>`,
+      content: `<p style="margin-right: 10px; margin-left: 10px;
+        margin-bottom: 3px; color: white"><b>${$(this).attr("data-tooltip")}</b></p>`,
       contentSize: "auto",
       connector: true,
       delay: 800,
       header: false,
+      opacity: 0.8,
       position: {
         my: "center-bottom",
         at: "center-top",
         of: this,
       },
       target: this,
-      theme: "primary filledlight",
+      theme: "dark filleddark",
     });
   });
 }
@@ -299,7 +312,7 @@ export function openPanel({
   } else {
     kwargs.contentAjax = {
       url: url || `../${name}_form`,
-      done: function (panel) {
+      done: function (_, panel) {
         panel.content.innerHTML = this.responseText;
         preprocessForm(panel, id, type, duplicate);
         configureForm(name, id, panelId);
@@ -311,6 +324,34 @@ export function openPanel({
   if (callback && content) callback(content);
   const position = { top: `${50 + $(window).scrollTop()}px`, position: "absolute" };
   $(panel).css({ ...position, ...css });
+}
+
+export function showConfirmationPanel({
+  id,
+  title,
+  message,
+  confirmButton = "Confirm",
+  onConfirm,
+}) {
+  var content = `
+  <div class="modal-body" style="max-width:600px">${message}</div>
+  <div class="modal-footer">
+    <center>
+      <button type="button" class="btn btn-danger confirmAction">${confirmButton}</button>
+    </center>
+  </div><br>`;
+  openPanel({
+    name: "confirmation",
+    id: id,
+    title: title,
+    content: content,
+    size: "auto",
+    checkRbac: false
+  });
+  $(".confirmAction").click(function () {
+    onConfirm();
+    $(`#confirmation-${id}`).remove();
+  });
 }
 
 export function createTooltip({
@@ -346,7 +387,7 @@ export function createTooltip({
     } else {
       kwargs.contentAjax = {
         url: url,
-        done: function (panel) {
+        done: function (_, panel) {
           panel.content.innerHTML = this.responseText;
           preprocessForm(panel);
           configureForm(name);
@@ -374,26 +415,12 @@ export function createTooltip({
 }
 
 function showDeletionPanel(instance) {
-  openPanel({
-    name: "instance_deletion",
-    content: `
-      <div class="modal-body">
-        Are you sure you want to permanently remove this item ?
-      </div>
-      <div class="modal-footer">
-        <center>
-          <button
-            type="button"
-            class="btn btn-danger"
-            onclick="eNMS.base.deleteInstance('${instance.type}', ${instance.id})"
-          >
-            Delete
-          </button>
-        </center>
-      </div><br>`,
-    title: `Delete ${instance.name}`,
-    size: "auto",
-    id: instance.id,
+  showConfirmationPanel({
+    id: `${instance.type}-${instance.id}`,
+    title: `Delete ${instance.type} '${instance.name}'`,
+    message: "Are you sure you want to permanently remove this item ?",
+    confirmButton: "Delete",
+    onConfirm: () => deleteInstance(instance.type, instance.id),
   });
 }
 
@@ -459,6 +486,8 @@ function initSelect(el, model, parentId, single) {
     placeholder: `Select ${single ? `a ${model}` : `${model}s`}`,
     closeOnSelect: single ? true : false,
     dropdownParent: parentId ? $(`#${parentId}`) : $(document.body),
+    tags: !single,
+    tokenSeparators: [",", " "],
     ajax: {
       url: `/multiselect_filtering/${model}`,
       type: "POST",
@@ -468,6 +497,7 @@ function initSelect(el, model, parentId, single) {
         return JSON.stringify({
           term: params.term || "",
           page: params.page || 1,
+          multiple: !single,
         });
       },
       processResults: function (data, params) {
@@ -541,15 +571,11 @@ export function configureForm(form, id, panelId) {
   }
 }
 
-function showServicePanel(type, id, mode) {
+function showServicePanel(type, id, mode, initForm) {
   const typeInput = $(id ? `#${type}-class-${id}` : `#${type}-class`);
   typeInput.val(type).prop("disabled", true);
   $(id ? `#${type}-name-${id}` : `#${type}-name`).prop("disabled", true);
   if (id) {
-    if (mode == "duplicate") {
-      $(`#${type}-shared-${id}`).prop("checked", false);
-    }
-    $(`#${type}-shared-${id}`).prop("disabled", true);
     if (mode == "duplicate" && type == "workflow") {
       $(`#copy-${id}`).val(id);
     }
@@ -567,14 +593,6 @@ function showServicePanel(type, id, mode) {
   });
   $(".buttonFinish,.buttonNext,.buttonPrevious").hide();
   $(id ? `#${type}-wizard-${id}` : `#${type}-wizard`).smartWizard("fixHeight");
-  if (mode == "run") {
-    $(`#${type}-action-btn-${id}`)
-      .removeClass("btn-success")
-      .addClass("btn-primary")
-      .attr("onclick", `eNMS.automation.parameterizedRun('${type}', ${id})`)
-      .text("Run");
-    $(".readonly-when-run").prop("readonly", true);
-  }
 }
 
 function showAddInstancePanel(tableId, model, relation) {
@@ -598,8 +616,7 @@ function addInstancesToRelation(type, id) {
     form: `add_${type}s-form-${id}`,
     callback: (result) => {
       $(`#add_${type}s-${id}`).remove();
-      refreshTable(id);
-      if (result.target.type == "pool") refreshTable("pool");
+      refreshTable(id, false, true);
       notify(
         `${result.number} ${type}s added to
         ${result.target.type} '${result.target.name}'.`,
@@ -611,13 +628,13 @@ function addInstancesToRelation(type, id) {
   });
 }
 
-export function showInstancePanel(type, id, mode, tableId) {
+export function showInstancePanel(type, id, mode, tableId, initForm) {
   openPanel({
     name: type,
-    id: id,
+    id: id || tableId,
     callback: function (panel) {
       const isService = type.includes("service") || type == "workflow";
-      if (isService) showServicePanel(type, id, mode);
+      if (isService) showServicePanel(type, id, mode, initForm);
       if (type == "credential") showCredentialPanel(id);
       if (id) {
         const properties = type === "pool" ? "_properties" : "";
@@ -628,40 +645,42 @@ export function showInstancePanel(type, id, mode, tableId) {
             panel.setHeaderTitle(`${action} ${type} - ${instance.name}`);
             processInstance(type, instance);
             if (mode == "duplicate" && isService) {
-              $(`#${type}-shared-${id}`).prop("checked", false);
-              $(`#${type}-workflows-${id}`).val([workflow.id]).trigger("change");
+              const value = page == "workflow_builder" ? [workflow.name] : [];
+              $(`#${type}-workflows-${id}`).val(value).trigger("change");
             }
           },
         });
       } else if (mode == "bulk") {
         const model = isService ? "service" : type;
         const form = {
-          ...serializeForm(`#search-form-${tableId}`),
+          ...serializeForm(`#search-form-${tableId}`, `${model}_filtering`),
           ...tableInstances[tableId].constraints,
         };
         call({
           url: `/filtering/${model}`,
           data: { form: form, bulk: "id" },
           callback: function (instances) {
-            $(`#${type}-id`).val(instances.join("-"));
-            $(`#${type}-scoped_name,#${type}-name`).val("Bulk Edit");
+            $(`#${type}-id-${tableId}`).val(instances.join("-"));
+            $(`#${type}-scoped_name-${tableId},#${type}-name-${tableId}`).val(
+              "Bulk Edit"
+            );
             panel.setHeaderTitle(
               `Edit all ${instances.length} ${model}s in table in bulk`
             );
-            for (const property of Object.keys(formProperties[panel.id])) {
-              $(`#${type}-action-btn`)
+            for (const property of Object.keys(formProperties[type])) {
+              $(`#${type}-action-btn-${tableId}`)
                 .attr(
                   "onclick",
                   `eNMS.table.bulkEdit('${type}', '${model}', '${tableId}')`
                 )
                 .text("Bulk Edit");
               if (["name", "scoped_name", "type"].includes(property)) {
-                $(`#${type}-${property}`).prop("readonly", true);
+                $(`#${type}-${property}-${tableId}`).prop("readonly", true);
               } else {
                 $(`label[for='${property}']`).after(`
                   <div class="item" style='float:right; margin-left: 15px'>
                     <input
-                      id="bulk-edit-${property}"
+                      id="bulk-edit-${property}-${tableId}"
                       name="bulk-edit-${property}"
                       type="checkbox"
                     />
@@ -675,8 +694,8 @@ export function showInstancePanel(type, id, mode, tableId) {
         panel.setHeaderTitle(`Create a New ${type}`);
         $(`#${type}-access_groups`).val(user.groups);
         if (page == "workflow_builder" && creationMode == "create_service") {
-          $(`#${type}-workflows`).append(new Option(workflow.name, workflow.id));
-          $(`#${type}-workflows`).val(workflow.id).trigger("change");
+          $(`#${type}-workflows`).append(new Option(workflow.name, workflow.name));
+          $(`#${type}-workflows`).val(workflow.name).trigger("change");
         }
       }
       if (isService) {
@@ -714,8 +733,8 @@ function updateProperty(instance, el, property, value, type) {
     el.selectpicker("val", value).trigger("change");
     el.selectpicker("render");
   } else if (propertyType == "object-list") {
-    value.forEach((o) => el.append(new Option(o.name, o.id)));
-    el.val(value.map((p) => p.id)).trigger("change");
+    value.forEach((o) => el.append(new Option(o.name, o.name)));
+    el.val(value.map((p) => p.name)).trigger("change");
   } else if (propertyType == "object") {
     el.append(new Option(value.name, value.id)).val(value.id).trigger("change");
   } else if (propertyType == "json") {
@@ -750,7 +769,6 @@ function processData(type, id) {
   const isService = type.includes("service") || type == "workflow";
   if (isService) {
     $(id ? `#${type}-workflows-${id}` : `#${type}-workflows`).prop("disabled", false);
-    if (id) $(`#${type}-shared-${id}`).prop("disabled", false);
   }
   call({
     url: `/update/${type}`,
@@ -761,6 +779,8 @@ function processData(type, id) {
         refreshTable(tableType);
       } else if (page == "workflow_builder") {
         processWorkflowData(instance, id);
+      } else if (page == "view_builder") {
+        viewCreation(instance);
       }
       $(id ? `#${type}-${id}` : `#${type}`).remove();
       notify(
@@ -802,19 +822,40 @@ export function copyToClipboard({ text, isId, includeText = true }) {
   notify(`Copied to Clipboard${includeText ? `: ${text}` : "."}`, "success", 5);
 }
 
+export function moveHistory(path, direction) {
+  if (!direction) {
+    historyPosition++;
+    history.splice(historyPosition, 9e9, path);
+  } else {
+    historyPosition += direction == "right" ? 1 : -1;
+  }
+  if (history.length >= 1 && historyPosition !== 0) {
+    $("#left-arrow").removeClass("disabled");
+  } else {
+    $("#left-arrow").addClass("disabled");
+  }
+  if (historyPosition < history.length - 1) {
+    $("#right-arrow").removeClass("disabled");
+  } else {
+    $("#right-arrow").addClass("disabled");
+  }
+}
+
+export function setTriggerMenu(value) {
+  triggerMenu = value;
+}
+
 (function ($, window) {
   $.fn.contextMenu = function (settings) {
     return this.each(function () {
       $(this).on("contextmenu", function (e) {
-        if (e.ctrlKey) {
-          return;
-        }
+        if (e.ctrlKey || !triggerMenu) return;
         const $menu = $(settings.menuSelector)
           .show()
           .css({
             position: "absolute",
             left: getMenuPosition(e.clientX, "width", "scrollLeft"),
-            top: getMenuPosition(e.clientY, "height", "scrollTop"),
+            top: getMenuPosition(e.clientY, "height", "scrollTop") + 60,
           })
           .off("click")
           .on("click", "a", function (e) {
@@ -996,6 +1037,139 @@ function fullScreen() {
   }
 }
 
+function doc(page) {
+  let endpoint = {
+    administration: "base/installation.html",
+    dashboard: "base/features.html",
+    configuration_table: "advanced/configuration_management.html",
+    device_table: "inventory/network_creation.html",
+    event_table: "automation/scheduling.html",
+    link_table: "inventory/network_creation.html",
+    changelog_table: "advanced/administration.html",
+    pool_table: "inventory/pools.html",
+    run_table: "automation/services.html",
+    service_table: "automation/services.html",
+    task_table: "automation/scheduling.html",
+    user_table: "advanced/administration.html",
+    view_table: "inventory/network_visualization.html",
+    workflow_builder_table: "automation/workflows.html",
+  }[page];
+  $("#doc-link").attr("href", `${settings.app.documentation_url}${endpoint || ""}`);
+}
+
+function switchTheme(theme) {
+  $(`link[href="/static/css/themes/${currentTheme}.css"]`).remove();
+  currentTheme = theme;
+  let cssLink = document.createElement("link");
+  cssLink.rel = "stylesheet";
+  cssLink.type = "text/css";
+  cssLink.href = `/static/css/themes/${theme}.css`;
+  document.getElementsByTagName("head")[0].appendChild(cssLink);
+  call({ url: `/switch_theme/${user.id}/${theme}` });
+}
+
+function initSidebar() {
+  $("#sidebar-menu")
+    .find("a")
+    .on("click", function () {
+      let $li = $(this).parent();
+      if ($li.is(".active")) {
+        $li.removeClass("active active-sm");
+        $("ul:first", $li).slideUp();
+      } else {
+        if (!$li.parent().is(".child_menu")) {
+          $("#sidebar-menu").find("li").removeClass("active active-sm");
+          $("#sidebar-menu").find("li ul").slideUp();
+        } else {
+          if ($("body").is(".nav-sm")) {
+            if (!$li.parent().is(".child_menu")) {
+              $("#sidebar-menu").find("li").removeClass("active active-sm");
+              $("#sidebar-menu").find("li ul").slideUp();
+            }
+          }
+        }
+        $li.addClass("active");
+        $("ul:first", $li).slideDown();
+      }
+    });
+
+  let switchMenu = function () {
+    if ($("body").hasClass("nav-sm")) {
+      $("#eNMS").css({ "font-size": "17px" });
+      $("#eNMS-version").css({ "font-size": "15px" });
+      $("#sidebar-menu").find("li.active ul").hide();
+      $("#sidebar-menu").find("li.active").addClass("active-sm");
+      $("#sidebar-menu").find("li.active").removeClass("active");
+    } else {
+      $("#eNMS").css({ "font-size": "30px" });
+      $("#eNMS-version").css({ "font-size": "20px" });
+      $("#sidebar-menu").find("li.active-sm ul").show();
+      $("#sidebar-menu").find("li.active-sm").addClass("active");
+      $("#sidebar-menu").find("li.active-sm").removeClass("active-sm");
+      const url = "a[href='" + currentUrl + "']";
+      $("#sidebar-menu").find(url).parent("li").addClass("current-page");
+      $("#sidebar-menu")
+        .find("a")
+        .filter(function () {
+          return this.href == currentUrl;
+        })
+        .parent("li")
+        .addClass("current-page")
+        .parents("ul")
+        .slideDown()
+        .parent()
+        .addClass("active");
+    }
+    $(".dataTable").each(function () {
+      $(this).dataTable().fnDraw();
+    });
+  };
+
+  switchMenu();
+  $("#menu_toggle").on("click", function () {
+    call({ url: `/switch_menu/${user.id}` });
+    $("body").toggleClass("nav-md nav-sm");
+    $("#server-time").hide();
+    switchMenu();
+  });
+}
+
+$(document).ready(function () {
+  $("#eNMS").on("click", function (event) {
+    if (!event.altKey || !event.shiftKey || !user.is_admin) return;
+    openDebugPanel();
+  });
+  NProgress.start();
+  const alerts = localStorage.getItem("alerts");
+  if (!alerts) {
+    localStorage.setItem("alerts", "[]");
+  } else {
+    const alertNumber = JSON.parse(alerts).length;
+    $("#alert-number").text(alertNumber > 99 ? "99+" : alertNumber || "");
+  }
+  $("#theme").selectpicker();
+  initSidebar();
+  if (page.includes("table")) {
+    const type = page.split("_")[0];
+    new tables[type]();
+  } else if (page == "workflow_builder") {
+    initWorkflowBuilder();
+  } else if (page == "view_builder") {
+    initViewBuilder();
+  } else if (page.includes("view")) {
+    initView();
+  } else if (page == "dashboard") {
+    initDashboard();
+  }
+  doc(page);
+  detectUserInactivity();
+  createTooltips();
+});
+
+$(window).load(function () {
+  NProgress.done();
+});
+
 configureNamespace("base", [
   addInstancesToRelation,
   call,
@@ -1013,4 +1187,5 @@ configureNamespace("base", [
   showAllAlerts,
   showDeletionPanel,
   showInstancePanel,
+  switchTheme,
 ]);

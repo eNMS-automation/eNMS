@@ -3,29 +3,29 @@
     "device": {
       "property1": {
         "pretty_name": "Property 1",
-        "type": "string",
+        "type": "str",
         "default": "10.145.14.1",
         "is_address": true
       },
       "property2": {
         "pretty_name": "Property 2",
         "default": "CP",
-        "type": "string"
+        "type": "str"
       },
       "reachable": {
         "pretty_name": "Is Reachable",
         "default": true,
-        "type": "boolean"
+        "type": "bool"
       },
       "down": {
         "pretty_name": "Is Down",
         "default": false,
-        "type": "boolean"
+        "type": "bool"
       },
       "property3": {
         "pretty_name": "Private property",
         "default": "password",
-        "type": "string",
+        "type": "str",
         "private": true
       },
       "operational_data": {
@@ -74,14 +74,14 @@
     "link": {
       "custom_property": {
         "pretty_name": "Custom Property",
-        "type": "string",
+        "type": "str",
         "default": "CP"
       }
     },
     "pool": {
       "property1": {
         "pretty_name": "Custom Property",
-        "type": "string",
+        "type": "str",
         "default": "CP"
       }
     },
@@ -92,12 +92,12 @@
       },
       "reserved": {
         "pretty_name": "Reserved",
-        "type": "boolean",
+        "type": "bool",
         "default": false
       },
       "impacting": {
         "pretty_name": "Impacting",
-        "type": "boolean",
+        "type": "bool",
         "default": true,
         "help": "custom/impacting"
       },
@@ -110,7 +110,7 @@
     "workflow": {
       "workflow_category": {
         "pretty_name": "Workflow Category",
-        "type": "string",
+        "type": "str",
         "default": "Example workflow(s)"
       }
     }
@@ -127,7 +127,7 @@
       "property1",
       "property2"
     ],
-    "link": ["model", "vendor", "subtype", "icon", "location"],
+    "link": ["model", "vendor", "subtype", "location"],
     "service": [
       "vendor",
       "operating_system",
@@ -322,9 +322,22 @@
         "search": "text"
       },
       {
+        "data": "tags",
+        "title": "Tags",
+        "search": "text",
+        "visible": false
+      },
+      {
         "data": "duration",
         "title": "Duration",
         "search": "text"
+      },
+      {
+        "data": "parent_device_name",
+        "title": "Parent Device",
+        "search": "text",
+        "orderable": false,
+        "visible": false
       },
       {
         "data": "device_name",
@@ -548,6 +561,13 @@
         "width": "100px"
       },
       {
+        "data": "send_notification",
+        "title": "Notification",
+        "search": "bool",
+        "width": "100px",
+        "visible": false
+      },
+      {
         "data": "default_access",
         "title": "Default Access",
         "search": "text",
@@ -567,17 +587,30 @@
       },
       {
         "data": "buttons",
-        "width": "260px",
+        "width": "290px",
         "orderable": false,
         "export": false
       }
     ],
     "run": [
       {
+        "data": "name",
+        "title": "Name",
+        "search": "text",
+        "width": "200px"
+      },
+      {
         "data": "runtime",
         "title": "Runtime",
         "search": "text",
-        "width": "200px"
+        "width": "200px",
+        "visible": false
+      },
+      {
+        "data": "tags",
+        "title": "Tags",
+        "search": "text",
+        "visible": false
       },
       {
         "data": "duration",
@@ -586,7 +619,7 @@
         "width": "100px"
       },
       {
-        "data": "start_service_name",
+        "data": "service_name",
         "title": "Service",
         "search": "text",
         "orderable": false
@@ -601,6 +634,7 @@
         "data": "trigger",
         "title": "Trigger",
         "search": "text",
+        "visible": false,
         "width": "100px"
       },
       {
@@ -627,6 +661,12 @@
         "data": "runtime",
         "title": "Runtime",
         "search": "text"
+      },
+      {
+        "data": "tags",
+        "title": "Tags",
+        "search": "text",
+        "visible": false
       },
       {
         "data": "duration",
@@ -676,9 +716,22 @@
         "search": "text"
       },
       {
+        "data": "tags",
+        "title": "Tags",
+        "search": "text",
+        "visible": false
+      },
+      {
         "data": "duration",
         "title": "Duration",
         "search": "text"
+      },
+      {
+        "data": "parent_device_name",
+        "title": "Parent Device",
+        "search": "text",
+        "orderable": false,
+        "visible": false
       },
       {
         "data": "service_name",
@@ -754,21 +807,18 @@
       {
         "data": "periodicity",
         "title": "Periodicity",
-        "search": "text",
         "width": "100px",
         "orderable": false
       },
       {
         "data": "next_run_time",
         "title": "Next run time",
-        "search": "text",
         "width": "150px",
         "orderable": false
       },
       {
         "data": "time_before_next_run",
         "title": "Time left",
-        "search": "text",
         "width": "150px",
         "orderable": false
       },
@@ -853,7 +903,7 @@
     "server": [
       {
         "data": "name",
-        "title": "Username",
+        "title": "Name",
         "search": "text"
       },
       {
@@ -981,40 +1031,12 @@
         "orderable": false,
         "export": false
       }
-    ],
-    "event": [
-      {
-        "data": "name",
-        "title": "Name",
-        "search": "text"
-      },
-      {
-        "data": "service_name",
-        "title": "Service",
-        "search": "text",
-        "orderable": false
-      },
-      {
-        "data": "log_source",
-        "title": "Log",
-        "search": "text",
-        "orderable": false
-      },
-      {
-        "data": "log_content",
-        "title": "Content",
-        "search": "text",
-        "orderable": false
-      },
-      {
-        "data": "buttons",
-        "width": "120px",
-        "orderable": false,
-        "export": false
-      }
     ]
   },
   "filtering": {
+    "access": ["name", "description"],
+    "changelog": ["time", "user", "severity", "content"],
+    "credential": ["name", "subtype", "description", "username", "priority"],
     "device": [
       "name",
       "description",
@@ -1050,13 +1072,45 @@
       "source_name",
       "destination_name"
     ],
+    "pool": [
+      "name",
+      "last_modified",
+      "creator",
+      "description",
+      "manually_defined",
+      "admin_only"
+    ],
+    "run": [
+      "runtime",
+      "tags",
+      "duration",
+      "service_name",
+      "creator",
+      "trigger",
+      "status"
+    ],
+    "server": ["name", "description", "ip_address", "weight", "status"],
     "service": [
       "name",
+      "type",
       "description",
       "creator",
       "access_groups",
       "vendor",
-      "operating_system"
+      "operating_system",
+      "send_notification"
+    ],
+    "session": ["timestamp", "device_name", "user", "name"],
+    "result": ["runtime", "duration", "device_name", "parent_device_name", "success"],
+    "task": [
+      "name",
+      "description",
+      "creator",
+      "scheduling_mode",
+      "default_access",
+      "last_scheduled_by",
+      "service_name",
+      "status"
     ],
     "user": ["name", "description", "groups", "email"]
   }

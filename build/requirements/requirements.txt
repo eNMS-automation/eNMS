@@ -1,10 +1,8 @@
 apscheduler
 argon2-cffi
 dicttoxml
-flask==1.1.4
-flask_httpauth
+flask
 flask_login
-flask-restful
 flask-socketio
 flask_wtf
 gitpython

@@ -2,7 +2,6 @@
 global
 action: false
 Cesium: false
-defaultPools: false
 ForceGraph3D: false
 L: false
 page: false
@@ -16,10 +15,13 @@ import { showRunServicePanel } from "./automation.js";
 import {
   call,
   configureNamespace,
+  history,
+  historyPosition,
+  moveHistory,
   notify,
+  openPanel,
   serializeForm,
   showInstancePanel,
-  openPanel,
 } from "./base.js";
 import { showConnectionPanel, showDeviceData } from "./inventory.js";
 import { tables } from "./table.js";
@@ -41,6 +43,24 @@ let viewer;
 let handler;
 let polylines;
 let labels;
+
+let currentPath = localStorage.getItem(page);
+let controls;
+
+function updateRightClickBindings(controls) {
+  Object.assign(action, {
+    "Edit Pool": () => showInstancePanel("pool", currentPath),
+    "Open Street Map": () => switchLayer("osm"),
+    "Google Maps": () => switchLayer("gm"),
+    Image: () => changeMarker("Image"),
+    Circle: () => changeMarker("Circle"),
+    "Circle Marker": () => changeMarker("Circle Marker"),
+    Normal: () => displayNetwork({}),
+    Clustered: () => displayNetwork({ withCluster: true }),
+    Backward: () => displayNetwork({ direction: "left" }),
+    Forward: () => displayNetwork({ direction: "right" }),
+  });
+}
 
 function initGeographicalFramework() {
   dimension = visualization.geographical.default;
@@ -306,16 +326,6 @@ function deleteAll() {
   deleteAllLinks();
 }
 
-Object.assign(action, {
-  "Open Street Map": () => switchLayer("osm"),
-  "Google Maps": () => switchLayer("gm"),
-  Image: () => changeMarker("Image"),
-  Circle: () => changeMarker("Circle"),
-  "Circle Marker": () => changeMarker("Circle Marker"),
-  Normal: () => displayNetwork({}),
-  Clustered: () => displayNetwork({ withCluster: true }),
-});
-
 function processNetwork(network) {
   if (page == "geographical_view") {
     let devices = {};
@@ -381,12 +391,28 @@ function processNetwork(network) {
   network.links = network.links.filter((link) => !parallelLinks.has(link.id));
 }
 
-function displayNetwork({ noAlert, withCluster }) {
+function displayNetwork({ direction, noAlert, withCluster } = {}) {
+  if (page == "view_builder") return;
   const maximumSize = visualization.logical.maximum_size;
   let data = {};
+  currentPath =
+    direction == "left"
+      ? history[historyPosition - 1]
+      : direction == "right"
+      ? history[historyPosition + 1]
+      : $("#current-pool").val();
+  localStorage.setItem(page, currentPath);
+  if (
+    (direction == "left" && historyPosition == 0) ||
+    (direction == "right" && historyPosition + 1 == history.length)
+  ) {
+    return;
+  }
+  moveHistory(currentPath, direction);
+  $("#current-pool").val(currentPath).selectpicker("refresh");
   for (let type of ["device", "link"]) {
-    let form = serializeForm(`#filtering-form-${type}`);
-    if (!form.pools) form.pools = defaultPools.map((p) => p.id);
+    let form = serializeForm(`#filtering-form-${type}`, `${type}_filtering`);
+    if (currentPath) form.intersect = { type: "pool", id: currentPath };
     data[type] = { form: form };
   }
   clustered = withCluster;
@@ -567,6 +593,21 @@ function create3dGraphNetwork(container) {
   return graph;
 }
 
+function initFiltering() {
+  for (let type of ["device", "link"]) {
+    openPanel({
+      name: `${type}_filtering`,
+      type: type,
+      title: `${type.charAt(0).toUpperCase() + type.slice(1)} Filtering`,
+      size: "700 600",
+      onbeforeclose: function () {
+        $(this).css("visibility", "hidden");
+      },
+      css: { visibility: "hidden" },
+    });
+  }
+}
+
 export function initView() {
   $("body").contextMenu({
     menuSelector: "#contextMenu",
@@ -582,25 +623,42 @@ export function initView() {
     Configuration: (d) => showDeviceData(d),
     "Run Service": (d) => showRunServicePanel({ instance: d }),
   });
-  for (let type of ["device", "link"]) {
-    openPanel({
-      name: `${type}_filtering`,
-      type: type,
-      title: `${type.charAt(0).toUpperCase() + type.slice(1)} Filtering`,
-      size: "700 600",
-      onbeforeclose: function () {
-        $(this).css("visibility", "hidden");
-      },
-      css: { visibility: "hidden" },
-    });
-  }
+  call({
+    url: `/get_visualization_pools/${page}`,
+    callback: function (pools) {
+      pools.sort((a, b) => a.name.localeCompare(b.name));
+      for (let i = 0; i < pools.length; i++) {
+        $("#current-pool").append(
+          `<option value="${pools[i].id}">${pools[i].name}</option>`
+        );
+      }
+      if (currentPath && pools.some((w) => w.id == currentPath)) {
+        $("#current-pool").val(currentPath);
+        displayNetwork({ noAlert: true });
+      } else {
+        if ($("#current-pool").val()) {
+          displayNetwork({ noAlert: true });
+        } else {
+          notify("No pool has been created yet.", "error", 5);
+        }
+      }
+      $("#current-pool")
+        .on("change", function () {
+          displayNetwork();
+        })
+        .selectpicker({
+          liveSearch: true,
+        });
+      updateRightClickBindings(controls);
+    },
+  });
+  initFiltering();
   if (page == "logical_view") {
     create3dGraphNetwork("network");
     notify("Loading network...", "success", 5);
-  } else {
+  } else if (page == "geographical_view") {
     initGeographicalFramework();
   }
-  displayNetwork({ noAlert: true });
 }
 
 function displayFilteringPanel(type) {
@@ -640,43 +698,8 @@ function clearSearch() {
   notify("Search parameters cleared.", "success", 5);
 }
 
-function saveParameters() {
-  call({
-    url: "/save_visualization_parameters",
-    form: "visualization_parameters-form",
-    callback: () => {
-      notify("Default pools saved.", "success", 5);
-      $("#visualization_parameters").remove();
-    },
-  });
-}
-
-function openVisualizationPanel() {
-  openPanel({
-    title: "Visualization Parameters",
-    name: "visualization_parameters",
-    size: "400 200",
-    callback: () => {
-      call({
-        url: "/get_visualization_parameters",
-        callback: (pools) => {
-          const fieldId = "#visualization_parameters-default_pools";
-          pools.forEach((pool) => {
-            $(fieldId).append(new Option(pool.name, pool.id, false, false));
-          });
-          $(fieldId)
-            .val(pools.map((pool) => pool.id))
-            .trigger("change");
-        },
-      });
-    },
-  });
-}
-
 configureNamespace("visualization", [
   clearSearch,
   displayFilteringPanel,
   displayNetwork,
-  openVisualizationPanel,
-  saveParameters,
 ]);

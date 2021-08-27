@@ -6,8 +6,8 @@ from sqlalchemy import Boolean, Float, ForeignKey, Integer
 from wtforms.validators import InputRequired
 
 from eNMS.database import db
-from eNMS.forms.automation import ServiceForm
-from eNMS.forms.fields import (
+from eNMS.forms import ServiceForm
+from eNMS.fields import (
     BooleanField,
     FloatField,
     HiddenField,
@@ -30,7 +30,6 @@ class GenericFileTransferService(Service):
     destination_file = db.Column(db.SmallString)
     missing_host_key_policy = db.Column(Boolean, default=False)
     load_known_host_keys = db.Column(Boolean, default=False)
-    look_for_keys = db.Column(Boolean, default=False)
     source_file_includes_globbing = db.Column(Boolean, default=False)
     max_transfer_size = db.Column(Integer, default=2 ** 30)
     window_size = db.Column(Integer, default=2 ** 30)
@@ -41,7 +40,7 @@ class GenericFileTransferService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "generic_file_transfer_service"}
 
-    def job(self, run, payload, device):
+    def job(self, run, device):
         ssh_client = SSHClient()
         if run.missing_host_key_policy:
             ssh_client.set_missing_host_key_policy(AutoAddPolicy())
@@ -50,10 +49,8 @@ class GenericFileTransferService(Service):
         source = run.sub(run.source_file, locals())
         destination = run.sub(run.destination_file, locals())
         credentials = run.get_credentials(device)
-        credentials.pop("secret")
-        ssh_client.connect(
-            device.ip_address, look_for_keys=run.look_for_keys, **credentials
-        )
+        credentials.pop("secret", None)
+        ssh_client.connect(device.ip_address, look_for_keys=False, **credentials)
         if run.source_file_includes_globbing:
             glob_source_file_list = glob(source, recursive=False)
             if not glob_source_file_list:
@@ -88,7 +85,6 @@ class GenericFileTransferForm(ServiceForm):
     destination_file = StringField(validators=[InputRequired()], substitution=True)
     missing_host_key_policy = BooleanField()
     load_known_host_keys = BooleanField()
-    look_for_keys = BooleanField()
     source_file_includes_globbing = BooleanField("Source file includes glob pattern")
     max_transfer_size = IntegerField(default=2 ** 30)
     window_size = IntegerField(default=2 ** 30)

@@ -3,8 +3,8 @@ from sqlalchemy import Boolean, Float, ForeignKey, Integer
 from wtforms.validators import InputRequired
 
 from eNMS.database import db
-from eNMS.forms.fields import BooleanField, HiddenField, SelectField, StringField
-from eNMS.forms.automation import NetmikoForm
+from eNMS.fields import BooleanField, HiddenField, SelectField, StringField
+from eNMS.forms import NetmikoForm
 from eNMS.models.automation import ConnectionService
 
 
@@ -31,7 +31,7 @@ class NetmikoFileTransferService(ConnectionService):
 
     __mapper_args__ = {"polymorphic_identity": "netmiko_file_transfer_service"}
 
-    def job(self, run, payload, device):
+    def job(self, run, device):
         netmiko_connection = run.netmiko_connection(device)
         source = run.sub(run.source_file, locals())
         destination = run.sub(run.destination_file, locals())

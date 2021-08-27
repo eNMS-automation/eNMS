@@ -7,8 +7,9 @@
     >
       <thead>
         <tr>
-          <th style="width: 20%;">Property</th>
+          <th>Property</th>
           <th>Value</th>
+          <th>Match</th>
         </tr>
       </thead>
       <tbody>
@@ -16,13 +17,17 @@
         property) %}
         <tr>
           <td>
-            {{ names.get(property, property.replace("_", " ")).capitalize() }}
+            {{ names.get(property, property).replace("_", " ").capitalize() }}
           </td>
           {% set class = "search-select-{}".format(form.object_type) if
           form[property].type == "StringField" else "search-relation-dd" %}
           <td>
             {{ form[property](id=id, class="form-control search-relation",
             style="width:400px;") }}
+          </td>
+          <td>
+            {{ form[property + '_filter'](id=id + '_filter', class="form-control add-id
+            no-search") }}
           </td>
         </tr>
         {% endfor %}

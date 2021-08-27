@@ -13,6 +13,7 @@ import {
   notify,
   openPanel,
   serializeForm,
+  showConfirmationPanel,
   userIsActive,
 } from "./base.js";
 import { loadServiceTypes } from "./automation.js";
@@ -38,6 +39,7 @@ export class Table {
       column.name = column.data;
     });
     this.id = `${this.type}${id ? `-${id}` : ""}`;
+    this.model = this.modelFiltering || this.type;
     tableInstances[this.id] = this;
     // eslint-disable-next-line new-cap
     this.table = $(`#table-${this.id}`).DataTable({
@@ -89,20 +91,22 @@ export class Table {
               </div>`;
             } else if (data.search == "bool") {
               element = `
-                <select
-                  id="${elementId}"
-                  name="${data.data}"
-                  class="form-control search-list-${self.id}"
-                  style="width: 100%; height: 30px; margin-top: 5px"
-                >
-                  <option value="">Any</option>
-                  <option value="bool-true">
-                    ${data?.search_labels?.true || "True"}
-                  </option>
-                  <option value="bool-false">
-                    ${data?.search_labels?.false || "False"}
-                  </option>
-                </select>`;
+                <div class="input-group table-search" style="width:100%">
+                  <select
+                    id="${elementId}"
+                    name="${data.data}"
+                    class="form-control search-list-${self.id}"
+                    style="width: 100%; height: 30px; margin-top: 5px"
+                  >
+                    <option value="">Any</option>
+                    <option value="bool-true">
+                      ${data?.search_labels?.true || "True"}
+                    </option>
+                    <option value="bool-false">
+                      ${data?.search_labels?.false || "False"}
+                    </option>
+                  </select>
+                </div>`;
             }
             $(element)
               .appendTo($(this.header()))
@@ -122,21 +126,27 @@ export class Table {
         self.postProcessing();
       },
       ajax: {
-        url: `/filtering/${this.modelFiltering || this.type}`,
+        url: `/filtering/${this.model}`,
         type: "POST",
         contentType: "application/json",
-        data: (d) => {
-          Object.assign(d, {
-            form: serializeForm(`#search-form-${this.id}`),
-            constraints: constraints,
+        data: (data) => {
+          let form = serializeForm(
+            `#search-form-${this.id}`,
+            `${this.model}_filtering`
+          );
+          for (const [key, value] of Object.entries(form)) {
+            if (key.includes("_invert")) form[key] = value == "y";
+          }
+          Object.assign(data, {
+            form: form,
+            constraints: { ...constraints, ...this.filteringConstraints },
             columns: this.columns,
             type: this.type,
             export: self.csvExport,
             clipboard: self.copyClipboard,
-            prefilter: self.id == "run",
           });
-          Object.assign(d, self.filteringData);
-          return JSON.stringify(d);
+          Object.assign(data, self.filteringData);
+          return JSON.stringify(data);
         },
         dataSrc: function (result) {
           if (result.error) {
@@ -190,19 +200,19 @@ export class Table {
 
   postProcessing() {
     let self = this;
-    if ($(`#advanced-search-${this.type}`).length) {
+    if ($(`#advanced-search-${this.id}`).length) {
       createTooltip({
         autoshow: true,
         persistent: true,
-        name: `${this.type}_relation_filtering`,
-        target: `#advanced-search-${this.type}`,
-        container: `#controls-${this.type}`,
+        name: `${this.model}_relation_filtering`,
+        target: `#advanced-search-${this.id}`,
+        container: `#controls-${this.id}`,
         position: {
           my: "center-top",
           at: "center-bottom",
           offsetY: 18,
         },
-        url: `../${this.type}_relation_filtering_form`,
+        url: `../${this.model}_relation_filtering_form`,
         title: "Relationship-based Filtering",
       });
     }
@@ -246,16 +256,38 @@ export class Table {
         },
         content: `
         <div class="modal-body">
-          <select
-            id="${column.data}_filter"
-            name="${column.data}_filter"
-            class="form-control search-select-${this.id}"
-            style="width: 100%; height: 30px; margin-top: 15px"
-          >
-            <option value="inclusion">Inclusion</option>
-            <option value="equality">Equality</option>
-            <option value="regex">Regular Expression</option>
-          </select>
+          <label class="control-label col-md-3 col-sm-3 col-xs-12">
+            Filter
+          </label>
+          <div class="col-md-9 col-sm-9 col-xs-12">
+            <select
+              id="${column.data}_filter"
+              name="${column.data}_filter"
+              class="form-control search-select-${this.id}"
+              style="width: 100%; height: 30px"
+            >
+              <option value="inclusion">Inclusion</option>
+              <option value="equality">Equality</option>
+              <option value="regex">Regular Expression</option>
+              <option value="empty">Empty</option>
+            </select>
+          </div>
+          <br /><br />
+          <label class="control-label col-md-3 col-sm-3 col-xs-12">
+            Invert
+          </label>
+          <div class="col-md-9 col-sm-9 col-xs-12">
+            <center>
+              <input
+                class="collapsed form-control-bool add-id"
+                id="${column.data}_invert"
+                name="${column.data}_invert"
+                type="checkbox" 
+                value="y"
+              >
+            </center>
+          </div>
+          <br />
         </div>`,
       });
     });
@@ -313,7 +345,7 @@ export class Table {
   searchTableButton() {
     return `
       <button
-        id="advanced-search-${this.type}"
+        id="advanced-search-${this.id}"
         class="btn btn-info"
         data-tooltip="Advanced Search"
         type="button"
@@ -359,11 +391,10 @@ export class Table {
   }
 
   bulkEditButton() {
-    const panelType = this.modelFiltering || this.type;
     const showPanelFunction =
-      panelType == "service"
+      this.model == "service"
         ? "automation.openServicePanel(true)"
-        : `base.showInstancePanel('${panelType}', null, 'bulk', '${this.id}')`;
+        : `base.showInstancePanel('${this.model}', null, 'bulk', '${this.id}')`;
     return `
       <button
         class="btn btn-primary"
@@ -376,10 +407,9 @@ export class Table {
   }
 
   bulkDeletionButton() {
-    const type = this.modelFiltering || this.type;
     const onClick = this.relation
-      ? `eNMS.table.bulkRemoval('${this.id}', '${type}', ${this.relationString})`
-      : `eNMS.table.showBulkDeletionPanel('${this.id}', '${type}')`;
+      ? `eNMS.table.bulkRemoval('${this.id}', '${this.model}', ${this.relationString})`
+      : `eNMS.table.showBulkDeletionPanel('${this.id}', '${this.model}')`;
     return `
       <button
         class="btn btn-danger"
@@ -431,8 +461,8 @@ tables.device = class DeviceTable extends Table {
     });
     for (const model of ["service", "task", "pool"]) {
       row[`${model}s`] = `<b><a href="#" onclick="eNMS.table.displayRelationTable(
-        '${model}', ${row.instance}, {from: 'devices', to: '${model}s'})">
-        ${model.charAt(0).toUpperCase() + model.slice(1)}s</a></b>`;
+        '${model}', ${row.instance}, {parent: '${this.id}', from: 'devices',
+        to: '${model}s'})">${model.charAt(0).toUpperCase() + model.slice(1)}s</a></b>`;
     }
     return row;
   }
@@ -555,6 +585,7 @@ tables.configuration = class ConfigurationTable extends Table {
         style="width: 200px"
       >`,
       this.refreshTableButton(),
+      this.searchTableButton("device"),
       this.clearSearchButton(),
       this.copyTableButton(),
       this.bulkEditButton(),
@@ -594,7 +625,7 @@ tables.link = class LinkTable extends Table {
   addRow(properties) {
     let row = super.addRow(properties);
     row.pools = `<b><a href="#" onclick="eNMS.table.displayRelationTable(
-      'pool', ${row.instance}, {from: 'links', to: 'pools'})">
+      'pool', ${row.instance}, {parent: '${this.id}', from: 'links', to: 'pools'})">
       Pools</a></b>`;
     return row;
   }
@@ -642,8 +673,8 @@ tables.pool = class PoolTable extends Table {
       row.objectNumber += `${row[`${model}_number`]} ${model}s`;
       if (model !== "user") row.objectNumber += " - ";
       row[`${model}s`] = `<b><a href="#" onclick="eNMS.table.displayRelationTable(
-        '${model}', ${row.instance}, {from: 'pools', to: '${model}s'})">
-        ${model.charAt(0).toUpperCase() + model.slice(1)}s</a></b>`;
+        '${model}', ${row.instance}, {parent: '${this.id}', from: 'pools',
+        to: '${model}s'})">${model.charAt(0).toUpperCase() + model.slice(1)}s</a></b>`;
     }
     return row;
   }
@@ -718,19 +749,28 @@ tables.service = class ServiceTable extends Table {
     let row = super.addRow(kwargs);
     row.name =
       row.type === "workflow"
-        ? `<b><a href="#" onclick="eNMS.workflow.filterWorkflowTable(
+        ? `<b><a href="#" onclick="eNMS.workflowBuilder.filterWorkflowTable(
       '${this.id}', ${row.id})">${row.scoped_name}</a></b>`
         : $("#parent-filtering").val() == "true"
         ? row.scoped_name
         : row.name;
     for (const model of ["device", "pool"]) {
       row[`${model}s`] = `<b><a href="#" onclick="eNMS.table.displayRelationTable(
-        '${model}', ${
-        row.instance
-      }, {from: 'target_services', to: 'target_${model}s'})">
-        ${model.charAt(0).toUpperCase() + model.slice(1)}s</a></b>`;
+        '${model}', ${row.instance}, {parent: '${this.id}', from: 'target_services',
+        to: 'target_${model}s'})">${model.charAt(0).toUpperCase() + model.slice(1)}s
+        </a></b>`;
     }
     return row;
+  }
+
+  get filteringConstraints() {
+    const parentFiltering = ($("#parent-filtering").val() || "true") == "true";
+    const workflowFiltering = $("#workflow-filtering").val();
+    if (workflowFiltering?.length) {
+      return { workflows: [workflowFiltering] };
+    } else {
+      return { workflows_filter: parentFiltering ? "empty" : "union" };
+    }
   }
 
   get controls() {
@@ -740,7 +780,7 @@ tables.service = class ServiceTable extends Table {
       <input type="hidden" id="workflow-filtering" name="workflow-filtering">
       <button
         style="background:transparent; border:none; 
-        color:transparent; width: 300px;"
+        color:transparent; width: 240px;"
         type="button"
       >
         <select
@@ -792,11 +832,20 @@ tables.service = class ServiceTable extends Table {
       </button>`,
       `<button
         class="btn btn-primary"
-        onclick="eNMS.automation.showImportServicePanel()"
+        onclick="eNMS.automation.showImportServicesPanel()"
         data-tooltip="Import Service"
         type="button"
       >
-        <span class="glyphicon glyphicon-circle-arrow-down"></span>
+        <span class="glyphicon glyphicon-import"></span>
+      </button>`,
+      `
+      <button
+        class="btn btn-primary"
+        onclick="eNMS.automation.exportServices('${this.id}')"
+        data-tooltip="Export Services as .tgz"
+        type="button"
+      >
+        <span class="glyphicon glyphicon-export"></span>
       </button>`,
       this.bulkEditButton(),
       this.exportTableButton(),
@@ -808,7 +857,7 @@ tables.service = class ServiceTable extends Table {
     let runtimeArg = "";
     if (row.type != "workflow") runtimeArg = ", null, 'result'";
     return `
-      <ul class="pagination pagination-lg" style="margin: 0px; width: 270px">
+      <ul class="pagination pagination-lg" style="margin: 0px; width: 300px">
         <li>
           <button type="button" class="btn btn-sm btn-info"
           onclick="eNMS.automation.showRuntimePanel('logs', ${row.instance})"
@@ -833,21 +882,29 @@ tables.service = class ServiceTable extends Table {
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-primary"
-          onclick="location.href='/export_service/${row.id}'" data-tooltip="Export"
-            ><span class="glyphicon glyphicon-upload"></span
+          onclick="eNMS.base.showInstancePanel('${row.type}', '${row.id}',
+          'duplicate')" data-tooltip="Duplicate">
+          <span class="glyphicon glyphicon-duplicate"></span></button>
+        </li>
+        <li>
+          <button type="button" class="btn btn-sm btn-primary"
+          onclick="location.href='/export_service/${row.id}'"*
+          data-tooltip="Export Service as .tgz"
+            ><span class="glyphicon glyphicon-export"></span
           ></button>
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-success"
-          onclick="eNMS.automation.normalRun('${row.id}')" data-tooltip="Run"
-            ><span class="glyphicon glyphicon-play"></span
+          onclick="eNMS.automation.runService({id: '${row.id}',
+          parametrization: ${row.mandatory_parametrization}})"
+          data-tooltip="Run"><span class="glyphicon glyphicon-play"></span
           ></button>
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-success"
-          onclick="eNMS.base.showInstancePanel('${row.type}', '${row.id}', 'run')"
-          data-tooltip="Parameterized Run"
-            ><span class="glyphicon glyphicon-play-circle"></span
+          onclick="eNMS.automation.runService({id: '${row.id}',
+          parametrization: true})" data-tooltip="Parameterized Run">
+            <span class="glyphicon glyphicon-play-circle"></span
           ></button>
         </li>
         ${this.deleteInstanceButton(row)}
@@ -894,7 +951,7 @@ tables.run = class RunTable extends Table {
 
   buttons(row) {
     return [
-      `<ul class="pagination pagination-lg" style="margin: 0px; width: 100px">
+      `<ul class="pagination pagination-lg" style="margin: 0px; width: 90px">
         <li>
           <button type="button" class="btn btn-sm btn-info"
           onclick="eNMS.automation.showRuntimePanel('logs', ${row.service},
@@ -904,7 +961,7 @@ tables.run = class RunTable extends Table {
         <li>
           <button type="button" class="btn btn-sm btn-info"
           onclick="eNMS.automation.showRuntimePanel('results', ${row.service},
-          '${row.runtime}')" data-tooltip="Results">
+          '${row.runtime}')" data-tooltip="Result Tree">
           <span class="glyphicon glyphicon-list-alt"></span></button>
         </li>
       </ul>`,
@@ -935,8 +992,12 @@ tables.result = class ResultTable extends Table {
   }
 
   get controls() {
-    const id = this.constraints.service_id || this.constraints.device_id;
+    const id =
+      this.constraints.parent_service_id ||
+      this.constraints.service_id ||
+      this.constraints.device_id;
     return [
+      this.columnDisplay(),
       `<button
         class="btn btn-info"
         onclick="eNMS.automation.displayDiff('${this.type}', ${id})"
@@ -1002,8 +1063,8 @@ tables.task = class TaskTable extends Table {
     }
     for (const model of ["device", "pool"]) {
       row[`${model}s`] = `<b><a href="#" onclick="eNMS.table.displayRelationTable(
-        '${model}', ${row.instance}, {from: 'tasks', to: '${model}s'})">
-        ${model.charAt(0).toUpperCase() + model.slice(1)}s</a></b>`;
+        '${model}', ${row.instance}, {parent: '${this.id}', from: 'tasks',
+        to: '${model}s'})">${model.charAt(0).toUpperCase() + model.slice(1)}s</a></b>`;
     }
     return row;
   }
@@ -1082,7 +1143,7 @@ tables.user = class UserTable extends Table {
   addRow(kwargs) {
     let row = super.addRow(kwargs);
     row.pools = `<b><a href="#" onclick="eNMS.table.displayRelationTable(
-      'pool', ${row.instance}, {from: 'users', to: 'pools'})">
+      'pool', ${row.instance}, {parent: '${this.id}', from: 'users', to: 'pools'})">
       Pools</a></b>`;
     return row;
   }
@@ -1327,10 +1388,11 @@ function exportTable(tableId) {
   refreshTable(tableId);
 }
 
-export const refreshTable = function (tableId, notification) {
-  if ($(`#table-${tableId}`).length) {
-    tableInstances[tableId].table.ajax.reload(null, false);
-  }
+export const refreshTable = function (tableId, notification, updateParent) {
+  if (!$(`#table-${tableId}`).length) return;
+  tableInstances[tableId].table.ajax.reload(null, false);
+  const parentTable = tableInstances[tableId].relation?.relation?.parent;
+  if (updateParent && parentTable) refreshTable(parentTable);
   if (notification) notify("Table refreshed.", "success", 5);
 };
 
@@ -1340,27 +1402,13 @@ function refreshTablePeriodically(tableId, interval, first) {
 }
 
 function showBulkDeletionPanel(tableId, model) {
-  openPanel({
-    name: "bulk_deletion",
-    id: tableId,
-    content: `
-      <div class="modal-body">
-        Are you sure you want to permanently remove all items
-        currently displayed in the table ?
-      </div>
-      <div class="modal-footer">
-        <center>
-          <button
-            type="button"
-            class="btn btn-danger"
-            onclick="eNMS.table.bulkDeletion('${tableId}', '${model}')"
-          >
-            Delete
-          </button>
-        </center>
-      </div><br>`,
+  showConfirmationPanel({
+    id: `bulk-${model}-${tableId}`,
     title: "Bulk Deletion (delete all items in table)",
-    size: "auto",
+    message: `Are you sure you want to permanently remove all items
+      currently displayed in the table ?`,
+    confirmButton: "Delete",
+    onConfirm: () => bulkDeletion(tableId, model),
   });
 }
 
@@ -1369,8 +1417,7 @@ function bulkDeletion(tableId, model) {
     url: `/bulk_deletion/${model}`,
     form: `search-form-${tableId}`,
     callback: function (number) {
-      refreshTable(tableId);
-      $(`#bulk_deletion-${tableId}`).remove();
+      refreshTable(tableId, false, true);
       notify(`${number} items deleted.`, "success", 5, true);
     },
   });
@@ -1382,8 +1429,7 @@ function bulkRemoval(tableId, model, instance) {
     url: `/bulk_removal/${model}/${instance.type}/${instance.id}/${relation}`,
     form: `search-form-${tableId}`,
     callback: function (number) {
-      refreshTable(tableId);
-      if (instance.type == "pool") refreshTable("pool");
+      refreshTable(tableId, false, true);
       notify(
         `${number} ${model}s removed from ${instance.type} '${instance.name}'.`,
         "success",
@@ -1397,10 +1443,10 @@ function bulkRemoval(tableId, model, instance) {
 function bulkEdit(formId, model, table) {
   call({
     url: `/bulk_edit/${model}`,
-    form: `${formId}-form`,
+    form: `${formId}-form-${table}`,
     callback: function (number) {
       refreshTable(table);
-      $(`#${formId}`).remove();
+      $(`#${formId}-${table}`).remove();
       notify(`${number} items modified.`, "success", 5, true);
     },
   });
@@ -1434,7 +1480,7 @@ function displayRelationTable(type, instance, relation) {
     size: "1200 600",
     title: `${instance.name} - ${type}s`,
     callback: function () {
-      const constraints = { [`${relation.from}`]: [instance.id] };
+      const constraints = { [`${relation.from}`]: [instance.name] };
       // eslint-disable-next-line new-cap
       new tables[type](instance.id, constraints, { relation, ...instance });
     },

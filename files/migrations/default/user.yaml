@@ -18,7 +18,7 @@
     /dashboard, /form/file, /form/task, /pool_table, /form/generic_file_transfer_service,
     /form/netmiko_configuration_service, /form/mail_notification_service, /form/upload_files,
     /run_table, /workflow_builder, /form/link, /form/netmiko_file_transfer_service,
-    /logical_view, /form/import_service, /form/napalm_configuration_service, /form/ping_service,
+    /view_builder, /form/import_service, /form/napalm_configuration_service, /form/ping_service,
     /form/mattermost_notification_service, /form/ansible_playbook_service]
   menu: [Admin, Home, Scheduling, Automation, Inventory, Visualization, Plugins]
   name: admin
@@ -32,7 +32,7 @@
     /counters, /create_label, /skip_services, /export_service, /import_topology, /save_visualization_parameters,
     /switch_menu, /update_all_pools, /result_log_deletion, /reset_status, /scan_playbook_folder,
     /get_git_history, /get_view_topology, /upload_files, /clear_results, /database_deletion,
-    /delete_label, /get_migration_folders, /export_topology, /get_device_logs, /save_pool_instances,
+    /delete_label, /get_migration_folders, /topology_export, /get_device_logs, /save_pool_instances,
     /get_service_logs, /add_edge, /duplicate_workflow, /delete_file, /save_file, /view_filtering,
     /stop_workflow, /get_git_content, /save_positions, /delete_edge, /get_result,
     /get_workflow_results, /add_service_to_workflow, /clear_configurations, /migration_export,

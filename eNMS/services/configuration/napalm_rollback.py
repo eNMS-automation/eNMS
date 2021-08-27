@@ -1,8 +1,8 @@
 from sqlalchemy import Boolean, ForeignKey, Integer
 
 from eNMS.database import db
-from eNMS.forms.automation import NapalmForm
-from eNMS.forms.fields import HiddenField
+from eNMS.forms import NapalmForm
+from eNMS.fields import HiddenField
 from eNMS.models.automation import ConnectionService
 
 
@@ -19,7 +19,7 @@ class NapalmRollbackService(ConnectionService):
 
     __mapper_args__ = {"polymorphic_identity": "napalm_rollback_service"}
 
-    def job(self, run, payload, device):
+    def job(self, run, device):
         napalm_connection = run.napalm_connection(device)
         run.log("info", "Configuration Rollback with NAPALM", device)
         napalm_connection.rollback()

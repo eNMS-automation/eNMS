@@ -7,10 +7,10 @@ try:
 except ImportError as exc:
     warn(f"Couldn't import pynetbox module ({exc})")
 
-from eNMS import app
 from eNMS.database import db
-from eNMS.forms.automation import ServiceForm
-from eNMS.forms.fields import HiddenField, PasswordField, SelectField, StringField
+from eNMS.environment import env
+from eNMS.fields import HiddenField, PasswordField, SelectField, StringField
+from eNMS.forms import ServiceForm
 from eNMS.models.automation import Service
 
 
@@ -32,12 +32,12 @@ class TopologyImportService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "topology_import_service"}
 
-    def job(self, run, payload):
+    def job(self, run):
         getattr(self, f"query_{self.import_type}")()
         return {"success": True}
 
     def query_netbox(self):
-        nb = netbox_api(self.netbox_address, app.get_password(self.netbox_token))
+        nb = netbox_api(self.netbox_address, env.get_password(self.netbox_token))
         for device in nb.dcim.devices.all():
             device_ip = device.primary_ip4 or device.primary_ip6
             db.factory(
@@ -59,7 +59,7 @@ class TopologyImportService(Service):
         json_devices = http_get(
             self.opennms_devices,
             headers={"Accept": "application/json"},
-            auth=(self.opennms_login, app.get_password(self.opennms_password)),
+            auth=(self.opennms_login, env.get_password(self.opennms_password)),
         ).json()["node"]
         devices = {
             device["id"]: {
@@ -79,7 +79,7 @@ class TopologyImportService(Service):
             link = http_get(
                 f"{self.opennms_address}/nodes/{device}/ipinterfaces",
                 headers={"Accept": "application/json"},
-                auth=(self.opennms_login, app.get_password(self.opennms_password)),
+                auth=(self.opennms_login, env.get_password(self.opennms_password)),
             ).json()
             for interface in link["ipInterface"]:
                 if interface["snmpPrimary"] == "P":
@@ -89,7 +89,7 @@ class TopologyImportService(Service):
     def query_librenms(self):
         devices = http_get(
             f"{self.librenms_address}/api/v0/devices",
-            headers={"X-Auth-Token": app.get_password(self.librenms_token)},
+            headers={"X-Auth-Token": env.get_password(self.librenms_token)},
         ).json()["devices"]
         for device in devices:
             db.factory(

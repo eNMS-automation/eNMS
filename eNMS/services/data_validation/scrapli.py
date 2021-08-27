@@ -1,12 +1,11 @@
 from sqlalchemy import Boolean, ForeignKey, Integer
 from wtforms.widgets import TextArea
 
-from eNMS import app
 from eNMS.database import db
-from eNMS.forms import choices
-from eNMS.forms.fields import BooleanField, HiddenField, SelectField, StringField
-from eNMS.forms.automation import ConnectionForm
+from eNMS.fields import BooleanField, HiddenField, SelectField, StringField
+from eNMS.forms import ConnectionForm
 from eNMS.models.automation import ConnectionService
+from eNMS.variables import vs
 
 
 class ScrapliService(ConnectionService):
@@ -23,7 +22,7 @@ class ScrapliService(ConnectionService):
 
     __mapper_args__ = {"polymorphic_identity": "scrapli_service"}
 
-    def job(self, run, payload, device):
+    def job(self, run, device):
         commands = run.sub(run.commands, locals()).splitlines()
         function = "send_configs" if run.is_configuration else "send_commands"
         result = getattr(run.scrapli_connection(device), function)(commands).result
@@ -34,8 +33,8 @@ class ScrapliForm(ConnectionForm):
     form_type = HiddenField(default="scrapli_service")
     commands = StringField(substitution=True, widget=TextArea(), render_kw={"rows": 5})
     is_configuration = BooleanField()
-    driver = SelectField(choices=choices(app.SCRAPLI_DRIVERS))
-    transport = SelectField(choices=choices(("system", "paramiko", "ssh2")))
+    driver = SelectField(choices=vs.dualize(vs.scrapli_drivers))
+    transport = SelectField(choices=vs.dualize(("system", "paramiko", "ssh2")))
     use_device_driver = BooleanField(default=True)
     groups = {
         "Main Parameters": {

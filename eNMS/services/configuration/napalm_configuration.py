@@ -2,8 +2,8 @@ from sqlalchemy import Boolean, ForeignKey, Integer
 from wtforms.widgets import TextArea
 
 from eNMS.database import db
-from eNMS.forms.fields import HiddenField, SelectField, StringField
-from eNMS.forms.automation import NapalmForm
+from eNMS.fields import HiddenField, SelectField, StringField
+from eNMS.forms import NapalmForm
 from eNMS.models.automation import ConnectionService
 
 
@@ -22,7 +22,7 @@ class NapalmConfigurationService(ConnectionService):
 
     __mapper_args__ = {"polymorphic_identity": "napalm_configuration_service"}
 
-    def job(self, run, payload, device):
+    def job(self, run, device):
         napalm_connection = run.napalm_connection(device)
         run.log(
             "info",

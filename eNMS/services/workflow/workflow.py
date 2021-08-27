@@ -1,14 +1,16 @@
 from collections import defaultdict
+from heapq import heappop, heappush
 from sqlalchemy import Boolean, ForeignKey, Integer
 from sqlalchemy.orm import backref, relationship
 from sqlalchemy.schema import UniqueConstraint
 
-from eNMS import app
 from eNMS.database import db
 from eNMS.models.base import AbstractBase
-from eNMS.forms.automation import ServiceForm
-from eNMS.forms.fields import BooleanField, HiddenField, InstanceField, SelectField
+from eNMS.forms import ServiceForm
+from eNMS.fields import BooleanField, HiddenField, InstanceField, SelectField
 from eNMS.models.automation import Service
+from eNMS.runner import Runner
+from eNMS.variables import vs
 
 
 class Workflow(Service):
@@ -35,7 +37,7 @@ class Workflow(Service):
     __mapper_args__ = {"polymorphic_identity": "workflow"}
 
     def __init__(self, **kwargs):
-        migration_import = kwargs.pop("migration_import", False)
+        migration_import = kwargs.get("migration_import", False)
         if not migration_import:
             start = db.fetch("service", scoped_name="Start", rbac=None)
             end = db.fetch("service", scoped_name="End", rbac=None)
@@ -47,7 +49,7 @@ class Workflow(Service):
     def delete(self):
         for service in self.services:
             if not service.shared:
-                db.delete("service", id=service.id)
+                db.delete_instance(service)
 
     def set_name(self, name=None):
         old_name = self.name
@@ -58,11 +60,12 @@ class Workflow(Service):
             if old_name in service.positions:
                 service.positions[self.name] = service.positions[old_name]
         for edge in self.edges:
-            edge.set_name()
+            edge.name.replace(old_name, self.name)
 
     def duplicate(self, workflow=None, clone=None):
         if not clone:
             clone = super().duplicate(workflow)
+        clone.labels = self.labels
         clone_services = {}
         db.session.commit()
         for service in self.services:
@@ -75,6 +78,7 @@ class Workflow(Service):
             service_clone.positions[clone.name] = service.positions.get(
                 self.name, (0, 0)
             )
+            service_clone.skip[clone.name] = service.skip.get(self.name, False)
             clone_services[service.id] = service_clone
         db.session.commit()
         for edge in self.edges:
@@ -104,24 +108,23 @@ class Workflow(Service):
     def deep_edges(self):
         return sum([w.edges for w in self.deep_services if w.type == "workflow"], [])
 
-    def job(self, run, payload, device=None):
+    def job(self, run, device=None):
         number_of_runs = defaultdict(int)
         start = db.fetch("service", scoped_name="Start")
         end = db.fetch("service", scoped_name="End")
-        services = [db.fetch("service", id=id) for id in run.start_services]
-        visited, targets, restart_run = set(), defaultdict(set), run.restart_run
-        tracking_bfs = run.run_method == "per_service_with_workflow_targets"
+        services, targets = [], defaultdict(set)
         start_targets = [device] if device else run.target_devices
-        for service in services:
+        for service_id in run.start_services:
+            service = db.fetch("service", id=service_id)
             targets[service.name] |= {device.name for device in start_targets}
+            heappush(services, (1 / service.priority, service))
+        visited, restart_run = set(), run.restart_run
+        tracking_bfs = run.run_method == "per_service_with_workflow_targets"
         while services:
             if run.stop:
-                return {"payload": payload, "success": False, "result": "Stopped"}
-            service = services.pop()
-            if number_of_runs[service.name] >= service.maximum_runs or any(
-                node not in visited
-                for node, _ in service.neighbors(self, "source", "prerequisite")
-            ):
+                return {"payload": run.payload, "success": False, "result": "Stopped"}
+            _, service = heappop(services)
+            if number_of_runs[service.name] >= service.maximum_runs:
                 continue
             number_of_runs[service.name] += 1
             visited.add(service)
@@ -135,23 +138,22 @@ class Workflow(Service):
                     }
             else:
                 kwargs = {
-                    "service": run.placeholder.id
+                    "service": run.placeholder
                     if service.scoped_name == "Placeholder"
-                    else service.id,
-                    "workflow": self.id,
+                    else service,
+                    "workflow": self,
                     "restart_run": restart_run,
                     "parent": run,
                     "parent_runtime": run.parent_runtime,
+                    "workflow_run_method": run.run_method,
                 }
                 if tracking_bfs or device:
                     kwargs["target_devices"] = [
-                        db.fetch("device", name=name).id
-                        for name in targets[service.name]
+                        db.fetch("device", name=name) for name in targets[service.name]
                     ]
-                if run.parent_device_id:
-                    kwargs["parent_device"] = run.parent_device_id
-                service_run = db.factory("run", commit=True, **kwargs)
-                results = service_run.run(payload)
+                if run.parent_device:
+                    kwargs["parent_device"] = run.parent_device
+                results = Runner(run, payload=run.payload, **kwargs).results
                 if not results:
                     continue
             status = "success" if results["success"] else "failure"
@@ -168,7 +170,7 @@ class Workflow(Service):
                 ):
                     if tracking_bfs or device:
                         targets[successor.name] |= set(summary[edge_type])
-                    services.append(successor)
+                    heappush(services, ((1 / successor.priority, successor)))
                     if tracking_bfs or device:
                         run.write_state(
                             f"edges/{edge.id}", len(summary[edge_type]), "increment"
@@ -178,10 +180,13 @@ class Workflow(Service):
         if tracking_bfs or device:
             failed = list(targets[start.name] - targets[end.name])
             summary = {"success": list(targets[end.name]), "failure": failed}
-            results = {"payload": payload, "success": not failed, "summary": summary}
+            results = {
+                "payload": run.payload,
+                "success": not failed,
+                "summary": summary,
+            }
         else:
-            results = {"payload": payload, "success": end in visited}
-        db.session.refresh(run)
+            results = {"payload": run.payload, "success": end in visited}
         run.restart_run = restart_run
         return results
 
@@ -208,7 +213,7 @@ class WorkflowForm(ServiceForm):
 
 class WorkflowEdge(AbstractBase):
 
-    __tablename__ = type = "workflow_edge"
+    __tablename__ = type = class_type = "workflow_edge"
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.SmallString, unique=True)
     label = db.Column(db.SmallString)
@@ -235,11 +240,10 @@ class WorkflowEdge(AbstractBase):
     __table_args__ = (
         UniqueConstraint(subtype, source_id, destination_id, workflow_id),
     )
-    color_mapping = {"success": "green", "failure": "red", "prerequisite": "blue"}
 
     def __init__(self, **kwargs):
         self.label = kwargs["subtype"]
-        self.color = self.color_mapping[kwargs["subtype"]]
+        self.color = "green" if kwargs["subtype"] == "success" else "red"
         super().__init__(**kwargs)
 
     def update(self, **kwargs):
@@ -247,4 +251,4 @@ class WorkflowEdge(AbstractBase):
         self.set_name(kwargs.get("name"))
 
     def set_name(self, name=None):
-        self.name = name or f"[{self.workflow}] {app.get_time()}"
+        self.name = name or f"[{self.workflow}] {vs.get_time()}"

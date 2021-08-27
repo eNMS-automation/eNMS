@@ -2,6 +2,7 @@
 <html lang="en">
   <head>
     <title>{{ error }}</title>
+    <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon" />
     <link href="{{ url_for('static', filename='css/error.css') }}" rel="stylesheet" />
     <link
       href="{{ url_for('static', filename='css/themes/{}.css'.format(current_user.theme or 'default')) }}"
@@ -14,6 +15,12 @@
       {% if error == 403 %}
       <h2>Access Denied</h2>
       <p>Full authentication is required to access this resource.</p>
+      {% elif error == 500 %}
+      <h2>Internal Server Error</h2>
+      <p>
+        The server encountered an unexpected condition that prevented it from fulfilling
+        the request.
+      </p>
       {% else %}
       <h2>Sorry but we couldn't find this page</h2>
       <p>This page you are looking for does not exist.</p>

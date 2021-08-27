@@ -2,6 +2,140 @@
 Release Notes
 =============
 
+Version 4.1.0
+-------------
+
+- 3D Logical visualization
+- Remove Event Model and Syslog server
+- Refactor of the run mechanism. When running a service, a single run is created and saved to the
+database.
+- Remove "operation" (any / all) property from pool
+- Change the way pool objects are computed: via SQL query instead of pure python:
+better performances expected for large pools.
+- Add regex support for SQLite
+- Add new "Invert" option for table filtering
+- Move terminal application for web SSH feature inside the application: the terminal application
+was previously moved outside the application because websockets requires sticky sessions which is
+incompatible with having multiple gunicorn workers. Moving to a deployment where eNMS is started
+multiple times with 1 gunicorn worker via the backend stream configuration, it is now possible for
+the terminal to be inside the main application.
+- Refactoring of the REST API
+* all requests are handled by the same "monitor requests" function
+* remove dependency to flask_restful and flask_httpauth
+- Fix submenu bug when the menu is minimized (gentelella bug)
+- Replace prerequisite edge with priority mechanism
+- Allow making non-shared service shared and vice-versa (if the shared service doesn't have more than one workflow).
+- Separate progress for main devices & iteration devices in workflow builder
+- Fix bug where subworkflow device counters not displayed in results when device iteration is used
+Bug report mail: "No status for services in subworkflow with device iteration"
+- HTTP requests logging: all requests are now logged by eNMS and not by werkzeug like before.
+=> fine grained controlled for what is logged for each request. The log now contains the username.
+- Add duplicate button in service table
+- Refactor the geographical and Logical View to behave like the workflow builder:
+* List of all pools that contain at least one device or link, stored in user browser local storage
+* Remove default pool mechanism. Remove "visualization_default" property in pool model.
+By design, the default pool becomes the first pool in alphabetical order
+* Add backward / forward control like the workflow builder
+- Rename "monitor_requests" function to "process_requests": impact on plugins
+- Add global "factory" and "delete" functions in the workflow builder to create and delete new objects
+from a workflow.
+- When refreshing a pool, rbac is now ignored so that the pool "refresh" action result does not depend on the
+user triggering it.
+- If a workflow is defined to run on a set of devices, and the user lacks access to one or more devices,
+execute for all accessible devices and fail for the inaccessible devices instead of failing the entire workflow.
+- app.service_db was renamed to "service_run_count" and it no longer has an inner "runs" key: the gunicorn
+auto safe restart code that uses it must be updated accordingly.
+- Store and commit web SSH session content in backend instead of relying on send beacon mechanism and
+onbeforeunload callback so that the saving of a session does not depend on user behavior
+- Refactoring of the forms: all forms are now in eNMS.forms.py. Impact on form import:
+eNMS.forms.automation -> eNMS.forms
+- Refactoring of the setup file: replace "from eNMS.setup" with "from eNMS.variables"
+- Change model_properties in model from list of properties to dict of property with associated type
+- Custom properties defined in properties.json: change type from "boolean" to "bool" and "string" to "str"
+for consistency with rest of codebase
+- Add "parent_service_name" property to retrieve all results from a workflow, including subworkflow service
+results (see "Re: [E] Re: Retrieving results via REST"). The parent service is the service corresponding
+to the "parent runtime property". Example of /search payload:
+{
+    "type": "result",
+    "columns": ["result", "parent_runtime", "service_name"],
+    "maximum_return_records": 1000,
+    "search_criteria": {"parent_runtime": "2021-04-19 04:09:05.424206", "parent_service_name": "A"}
+}
+- Add new "Empty" option in table filters and pool definition to filter based on whether the property
+value is empty or not.
+- Add table display with property value constraint when clicking on the charts in the dashboard.
+- Add scrapli netconf service
+- Move LDAP and TACACS+ server init to environment file instead of custom file. Impact on authentication
+ldap / tacacs functions.
+- Add Token-based authentication via REST API. New GET endpoint "/rest/token" to generate a token.
+- Separate controller (handling HTTP POST requests) from main application (gluing everything together)
+Impact:
+* In plugins, 
+* the "custom" file that contains pre_init, post_init, and the authentication custom code no longer inherits
+from the controller
+- Add new "ip_address" field in settings.json > app section
+- Add paging for REST API search endpoint: new integer parameter "start" to request results from "start"
+- Add server time at the bottom of the menu (e.g for scheduling tasks / ease of use)
+- Add button in service table to export services in bulk (export all displayed services as .tgz)
+- Ability to paste device list (comma or space separated) into a multiple instance field (e.g service device and pool targets)
+- Re-add current Run counter to 'Service' and 'Workflow' on the dashboard banner + Active tasks
+- Ability to download result as json file + new copy result path to clipboard button in result json editor panel
+- Ability to download logs as text file
+- When importing existing workflows via service import, remove all existing services and edges from the workflow
+- Upload service from laptop instead of checking for file on the VM
+- Add Parameterized Form mechanism to update run properties and payload.
+- Add new "full results" button to results tree
+- Fix bug in WB where multiple services stay selected
+- Add confirmation prompt in workflow builder before deletion
+- Change default postprocessing mode to "Run on success only"
+- Add log in case postprocessing is skipped
+- Add SSH key support in generic file transfer service
+- Always set "look_for_keys" to False in generic file transfer service - no longer an option
+- Add validation_section mechanism: set path to section of the result to validate (default: results["result"])
+- Add new "connection_name" mechanism to open multiple parallel connections to the same device in the
+same workflow
+- Add new "get_credential" global variable in workflow builder. Used to get a password or a passphrase
+for a netmiko validaiton command or rest call service. For obfuscation purposes.
+mail: Obfuscate Credentials passed into Netmiko Command Line
+- Fix data extraction service and operation keyword in set_var
+- Don't set status of currently running services to "Aborted" when using a flask CLI command
+- Add TextFSM support for the netmiko validation service (+ regression workflow)
+
+MIGRATION:
+
+- In all services,
+def job(self, run, payload, device): -> def job(self, run, device):
+- Check that all "operator" property in pool.yaml are set to "all"
+- In all plugins, "monitor_requests" should be renamed to "process_requests" and
+"register_endpoint" should be renamed "_register_endpoint"
+- "export_topology" endpoint should be renamed "topology_export" in migration files
+- Replace all "from eNMS.forms.automation" with "from eNMS.forms"
+- Rename "run_db" to "run_states"
+- Plugin: add env and vs argument
+- Change model_properties in model from list of properties to dict of property with associated type
+- Custom properties defined in properties.json: change type from "boolean" to "bool" and "string" to "str"
+for consistency with rest of codebase. In properties.json:
+* change "type": "boolean" to "type": "bool"
+* change "type": "string" to "type": "str"
+- Update authentication functions in custom.py
+
+To be tested:
+- Refactoring of the run mechanism:
+* log level mechanism
+* workflow run, progress display in workflow builder
+* parameterized run
+* service value and device iteration
+* service / workflow performances with large number of devices
+* workflow: all run modes / SxS & DxD
+* results display: automation / results page, workflow tree, result table, device result table
+* get_var / set_var and get_result mechanism, including get_result along with restart mechanism
+- Pool refactoring
+* dynamic pool content, inclusion / equality / regex
+* pool individual and global refresh mechanism in pool table
+- Conversion shared - non shared for a service. Duplication of shared / non-shared service.
+- New global "factory" and "delete" functions
+
 Version 4.0.1
 -------------
 
@@ -53,7 +187,7 @@ Version 4.0.0
   * Bulk edit (edit all instances filtered in tables)
   * Bulk deletion (delete all instances filtered in tables)
 - Add "copy to clipboard" mechanism to get comma-separated list of names of all filtered instances.
-- Add 3D network view and 3D logical view.
+- Add 3D network view and 3D Logical View.
   * Add right click menu for property, configuration, run service
   * Add default pools mechanism for large networks.
   * Add run service in bulk on all currently displayed devices mechanism
@@ -163,7 +297,7 @@ but we have to make sure it's not worse).
 
 Migration:
 - Update endpoint: view/network and view/site no longer exists, to be replaced with 
-geographical_view and logical_view
+geographical_view and view_builder
 - Configure the new visualization.json file, remove visualization settings from settings.json
 - In the service.yaml file, the "devices" and "pools" relationship with services have to be renamed
 "target_devices" and "target_pools". Besides, "update_pools" must be renamed to "update_target_pools".

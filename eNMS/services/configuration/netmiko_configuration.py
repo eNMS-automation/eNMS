@@ -2,8 +2,8 @@ from sqlalchemy import Boolean, Float, ForeignKey, Integer
 from wtforms.widgets import TextArea
 
 from eNMS.database import db
-from eNMS.forms.fields import BooleanField, HiddenField, StringField
-from eNMS.forms.automation import NetmikoForm
+from eNMS.fields import BooleanField, HiddenField, StringField
+from eNMS.forms import NetmikoForm
 from eNMS.models.automation import ConnectionService
 
 
@@ -30,7 +30,7 @@ class NetmikoConfigurationService(ConnectionService):
 
     __mapper_args__ = {"polymorphic_identity": "netmiko_configuration_service"}
 
-    def job(self, run, payload, device):
+    def job(self, run, device):
         netmiko_connection = run.netmiko_connection(device)
         config = run.sub(run.content, locals())
         run.log(

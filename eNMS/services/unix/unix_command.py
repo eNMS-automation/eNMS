@@ -2,8 +2,8 @@ from subprocess import check_output
 from sqlalchemy import ForeignKey, Integer
 
 from eNMS.database import db
-from eNMS.forms.automation import ServiceForm
-from eNMS.forms.fields import HiddenField, StringField
+from eNMS.forms import ServiceForm
+from eNMS.fields import HiddenField, StringField
 from eNMS.models.automation import Service
 
 
@@ -16,7 +16,7 @@ class UnixCommandService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "unix_command_service"}
 
-    def job(self, run, payload, device=None):
+    def job(self, run, device=None):
         command = run.sub(run.command, locals())
         run.log("info", f"Running UNIX command: {command}", device)
         return {"command": command, "result": check_output(command.split()).decode()}

@@ -3,8 +3,8 @@ from subprocess import check_output
 from sqlalchemy import ForeignKey, Integer
 
 from eNMS.database import db
-from eNMS.forms.automation import ServiceForm
-from eNMS.forms.fields import HiddenField, IntegerField, SelectField, StringField
+from eNMS.forms import ServiceForm
+from eNMS.fields import HiddenField, IntegerField, SelectField, StringField
 from eNMS.models.automation import Service
 
 
@@ -22,10 +22,10 @@ class PingService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "ping_service"}
 
-    def job(self, run, payload, device):
+    def job(self, run, device):
         if run.protocol == "ICMP":
             command = ["ping"]
-            for x, property in (
+            for variable, property in (
                 ("c", "count"),
                 ("W", "timeout"),
                 ("t", "ttl"),
@@ -33,7 +33,7 @@ class PingService(Service):
             ):
                 value = getattr(self, property)
                 if value:
-                    command.extend(f"-{x} {value}".split())
+                    command.extend(f"-{variable} {value}".split())
             command.append(device.ip_address)
             run.log("info", f"Running PING ({command})", device)
             output = check_output(command).decode().strip().splitlines()

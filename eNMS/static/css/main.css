@@ -153,6 +153,11 @@ body {
   color: #c4cfda;
 }
 
+/* Display icon in minimized submenu */
+.nav.child_menu span.fa {
+  display: block;
+}
+
 .active a span.fa {
   text-align: right !important;
   margin-right: 4px;
@@ -177,6 +182,14 @@ body {
   .nav_menu {
     position: static;
   }
+}
+
+.server-time {
+  bottom: 7px;
+  left: 5px;
+  position: fixed;
+  color: #b9b9b9;
+  text-align: center;
 }
 
 /* Change background color upper menu item on hover */
@@ -322,6 +335,16 @@ a {
 .navbar-nav > li > a {
   font-weight: 500;
   line-height: 32px;
+}
+
+.navbar-color {
+  background-color: rgba(230, 230, 230, 0.4);
+  border-color: rgb(180, 180, 180);
+}
+
+.navbar-custom {
+  float: left;
+  padding: 7px 7px;
 }
 
 .nav.top_menu > li > a {
@@ -755,6 +778,24 @@ We cannot use 100% because main_frame is not set to 100%
   width: -webkit-max-content;
 }
 
+/* Cross-browser compatibility for width: fit-content needed 
+intrinsic (Safari) - moz (Firefox) - webkit (Chrome) */
+.controls {
+  z-index: 3;
+  top: 75px;
+  position: absolute;
+  width: intrinsic;
+  width: -moz-max-content;
+  width: -webkit-max-content;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+
+.controls_mode {
+  float: left;
+  margin-right: 10px;
+}
+
 .glyphicon-center {
   position: absolute;
   top: 50%;
@@ -808,4 +849,86 @@ textarea.form-control {
 .slider {
   margin-left: 35px;
   margin-right: 35px;
+}
+
+/* Don't display underline in service panel section header */
+.panel-heading {
+  text-decoration: none !important;
+}
+
+td span {
+  line-height: 18px;
+}
+
+/* Set the table pages in the middle */
+.dataTables_length {
+  width: 40%;
+  float: left;
+}
+
+/* Align center for "No data available in table" when empty table */
+.dataTables_empty,
+table.display td.center {
+  text-align: center;
+}
+
+/* Align "Show 1 to 10 of X entries to the right */
+.dataTables_info {
+  font-size: 14px;
+  margin-right: 8px;
+  margin-top: -10px;
+  float: right;
+}
+
+.dataTables_scrollBody {
+  margin-bottom: 10px;
+}
+
+.dataTables_paginate .pagination {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+table.dataTable thead span.sort-icon {
+  display: inline-block;
+  padding-left: 5px;
+  width: 16px;
+  height: 16px;
+}
+
+th.dt-center,
+td.dt-center {
+  text-align: center;
+}
+
+/* Set default cursor for the header instead of pointer */
+table.dataTable thead .sorting,
+table.dataTable thead .sorting_asc,
+table.dataTable thead .sorting_asc_disabled,
+table.dataTable thead .sorting_desc,
+table.dataTable thead .sorting_desc_disabled {
+  cursor: default;
+  pointer-events: none;
+}
+
+/* Position the sorting icon in the upper right corner */
+/* Set pointer cursor on the sorting icon */
+table.dataTable thead .sorting:after,
+table.dataTable thead .sorting_asc:after,
+table.dataTable thead .sorting_desc:after {
+  top: 5px;
+  right: 8px;
+  cursor: pointer;
+  pointer-events: all;
+}
+
+table.dataTable thead > tr > th.sorting,
+table.dataTable thead > tr > th.sorting_asc,
+table.dataTable thead > tr > th.sorting_desc {
+  padding-right: 5px;
+}
+
+.table-search {
+  pointer-events: all;
 }

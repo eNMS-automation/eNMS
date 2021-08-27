@@ -2,11 +2,11 @@ from requests import post
 from sqlalchemy import ForeignKey, Integer
 from wtforms.widgets import TextArea
 
-from eNMS import app
 from eNMS.database import db
-from eNMS.forms.automation import ServiceForm
-from eNMS.forms.fields import HiddenField, StringField
+from eNMS.forms import ServiceForm
+from eNMS.fields import HiddenField, StringField
 from eNMS.models.automation import Service
+from eNMS.variables import vs
 
 
 class MattermostNotificationService(Service):
@@ -19,14 +19,12 @@ class MattermostNotificationService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "mattermost_notification_service"}
 
-    def job(self, run, payload, device=None):
-        channel = (
-            run.sub(run.channel, locals()) or app.settings["mattermost"]["channel"]
-        )
+    def job(self, run, device=None):
+        channel = run.sub(run.channel, locals()) or vs.settings["mattermost"]["channel"]
         run.log("info", f"Sending MATTERMOST notification on {channel}", device)
         result = post(
-            app.settings["mattermost"]["url"],
-            verify=app.settings["mattermost"]["verify_certificate"],
+            vs.settings["mattermost"]["url"],
+            verify=vs.settings["mattermost"]["verify_certificate"],
             json={"channel": channel, "text": run.sub(run.body, locals())},
         )
         return {"success": True, "result": str(result)}

@@ -5,10 +5,9 @@ from re import M, sub
 from sqlalchemy import Boolean, Float, ForeignKey, Integer
 from wtforms import FormField
 
-from eNMS import app
 from eNMS.database import db
-from eNMS.forms.automation import NetmikoForm
-from eNMS.forms.fields import (
+from eNMS.forms import NetmikoForm
+from eNMS.fields import (
     BooleanField,
     FieldList,
     HiddenField,
@@ -16,6 +15,7 @@ from eNMS.forms.fields import (
     StringField,
 )
 from eNMS.models.automation import ConnectionService
+from eNMS.variables import vs
 
 
 class NetmikoBackupService(ConnectionService):
@@ -46,7 +46,7 @@ class NetmikoBackupService(ConnectionService):
 
     __mapper_args__ = {"polymorphic_identity": "netmiko_backup_service"}
 
-    def job(self, run, payload, device):
+    def job(self, run, device):
         path = Path.cwd() / "network_data" / device.name
         path.mkdir(parents=True, exist_ok=True)
         try:
@@ -72,8 +72,10 @@ class NetmikoBackupService(ConnectionService):
                     command_result.append(line)
                 result.append("\n".join(command_result))
             result = "\n\n".join(result)
-            for r in self.replacements:
-                result = sub(r["pattern"], r["replace_with"], result, flags=M)
+            for replacement in self.replacements:
+                result = sub(
+                    replacement["pattern"], replacement["replace_with"], result, flags=M
+                )
             setattr(device, self.property, result)
             with open(path / self.property, "w") as file:
                 file.write(result)
@@ -103,7 +105,7 @@ class DataBackupForm(NetmikoForm):
     form_type = HiddenField(default="netmiko_backup_service")
     property = SelectField(
         "Configuration Property to Update",
-        choices=list(app.configuration_properties.items()),
+        choices=list(vs.configuration_properties.items()),
     )
     commands = FieldList(FormField(CommandsForm), min_entries=12)
     replacements = FieldList(FormField(ReplacementForm), min_entries=12)

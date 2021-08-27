@@ -1,14 +1,12 @@
-from datetime import datetime
 from flask_login import UserMixin
 from itertools import chain
 from passlib.hash import argon2
 from sqlalchemy import Boolean, Integer
 from sqlalchemy.orm import relationship
 
-from eNMS import app
 from eNMS.database import db
-from eNMS.models import models
 from eNMS.models.base import AbstractBase
+from eNMS.variables import vs
 
 
 class Server(AbstractBase):
@@ -50,7 +48,7 @@ class User(AbstractBase, UserMixin):
 
     def update(self, **kwargs):
         if (
-            app.settings["security"]["hash_user_passwords"]
+            vs.settings["security"]["hash_user_passwords"]
             and kwargs.get("password")
             and not kwargs["password"].startswith("$argon2i")
         ):
@@ -64,13 +62,13 @@ class User(AbstractBase, UserMixin):
             return
         db.session.commit()
         user_access = (
-            db.session.query(models["access"])
-            .join(models["pool"], models["access"].user_pools)
-            .join(models["user"], models["pool"].users)
-            .filter(models["user"].name == self.name)
+            db.session.query(vs.models["access"])
+            .join(vs.models["pool"], vs.models["access"].user_pools)
+            .join(vs.models["user"], vs.models["pool"].users)
+            .filter(vs.models["user"].name == self.name)
             .all()
         )
-        for property in app.rbac:
+        for property in vs.rbac:
             if property == "admin_models":
                 continue
             access_value = (getattr(access, property) for access in user_access)
@@ -144,5 +142,4 @@ class Changelog(AbstractBase):
     user = db.Column(db.SmallString, default="admin")
 
     def update(self, **kwargs):
-        kwargs["time"] = str(datetime.now())
-        super().update(**kwargs)
+        super().update(**{"time": vs.get_time(), **kwargs})

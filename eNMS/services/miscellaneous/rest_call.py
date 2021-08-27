@@ -2,10 +2,9 @@ from requests.auth import HTTPBasicAuth
 from sqlalchemy import Boolean, ForeignKey, Integer
 from sqlalchemy.types import JSON
 
-from eNMS import app
 from eNMS.database import db
-from eNMS.forms.automation import ServiceForm
-from eNMS.forms.fields import (
+from eNMS.environment import env
+from eNMS.fields import (
     BooleanField,
     DictField,
     HiddenField,
@@ -14,6 +13,7 @@ from eNMS.forms.fields import (
     SelectField,
     StringField,
 )
+from eNMS.forms import ServiceForm
 from eNMS.models.automation import Service
 
 
@@ -34,25 +34,26 @@ class RestCallService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "rest_call_service"}
 
-    def job(self, run, payload, device=None):
+    def job(self, run, device=None):
         local_variables = locals()
         rest_url = run.sub(run.rest_url, local_variables)
-        run.log("info", f"Sending REST Call to {rest_url}", device, logger="security")
+        log_url = run.rest_url if "get_credential" in run.rest_url else rest_url
+        run.log("info", f"Sending REST Call to {log_url}", device, logger="security")
         kwargs = {
-            p: run.sub(getattr(self, p), local_variables)
-            for p in ("headers", "params", "timeout")
+            parameter: run.sub(getattr(self, parameter), local_variables)
+            for parameter in ("headers", "params", "timeout")
         }
         kwargs["verify"] = run.verify_ssl_certificate
         if self.username:
             kwargs["auth"] = HTTPBasicAuth(
-                self.username, app.get_password(self.password)
+                self.username, env.get_password(self.password)
             )
         if run.call_type in ("POST", "PUT", "PATCH"):
             kwargs["json"] = run.sub(run.payload, local_variables)
-        call = getattr(app.request_session, run.call_type.lower())
+        call = getattr(env.request_session, run.call_type.lower())
         response = call(rest_url, **kwargs)
         result = {
-            "url": rest_url,
+            "url": log_url,
             "status_code": response.status_code,
             "headers": dict(response.headers),
             "result": response.text,

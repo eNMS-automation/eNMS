@@ -5,10 +5,9 @@ from re import M, sub
 from sqlalchemy import Boolean, ForeignKey, Integer
 from wtforms import FormField
 
-from eNMS import app
 from eNMS.database import db
-from eNMS.forms.automation import NapalmForm
-from eNMS.forms.fields import (
+from eNMS.forms import NapalmForm
+from eNMS.fields import (
     HiddenField,
     SelectField,
     StringField,
@@ -16,6 +15,7 @@ from eNMS.forms.fields import (
     FieldList,
 )
 from eNMS.models.automation import ConnectionService
+from eNMS.variables import vs
 
 
 class NapalmBackupService(ConnectionService):
@@ -34,7 +34,7 @@ class NapalmBackupService(ConnectionService):
 
     __mapper_args__ = {"polymorphic_identity": "napalm_backup_service"}
 
-    def job(self, run, payload, device):
+    def job(self, run, device):
         path = Path.cwd() / "network_data" / device.name
         path.mkdir(parents=True, exist_ok=True)
         try:
@@ -45,18 +45,18 @@ class NapalmBackupService(ConnectionService):
             result = {}
             for getter in run.getters:
                 try:
-                    output = app.str_dict(getattr(napalm_connection, getter)())
-                    for r in self.replacements:
+                    output = vs.dict_to_string(getattr(napalm_connection, getter)())
+                    for replacement in self.replacements:
                         output = sub(
-                            r["pattern"],
-                            r["replace_with"],
+                            replacement["pattern"],
+                            replacement["replace_with"],
                             output,
                             flags=M,
                         )
                     result[getter] = output
                 except Exception as exc:
                     result[getter] = f"{getter} failed because of {exc}"
-            result = app.str_dict(result)
+            result = vs.dict_to_string(result)
             setattr(device, self.property, result)
             with open(path / self.property, "w") as file:
                 file.write(result)
@@ -82,9 +82,9 @@ class NapalmBackupForm(NapalmForm):
     form_type = HiddenField(default="napalm_backup_service")
     property = SelectField(
         "Configuration Property to Update",
-        choices=list(app.configuration_properties.items()),
+        choices=list(vs.configuration_properties.items()),
     )
-    getters = SelectMultipleField(choices=app.NAPALM_GETTERS)
+    getters = SelectMultipleField(choices=vs.automation["napalm"]["getters"])
     replacements = FieldList(FormField(ReplacementForm), min_entries=3)
     groups = {
         "Target Property and Getters": {

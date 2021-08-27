@@ -19,7 +19,7 @@
     /rest/search, /access_table, /changelog_table, /configuration_table, /credential_table,
     /device_table, /event_table, /pool_table, /link_table, /run_table, /server_table,
     /service_table, /session_table, /task_table, /user_table, /view_service_results,
-    /geographical_view, /logical_view, /workflow_builder,
+    /geographical_view, /view_builder, /workflow_builder,
     /form/napalm_configuration_service, /form/napalm_rollback_service, /form/netmiko_configuration_service,
     /form/napalm_backup_service, /form/netmiko_backup_service, /form/napalm_getters_service,
     /form/netmiko_prompts_service, /form/netmiko_validation_service, /form/scrapli_service,
@@ -33,13 +33,13 @@
   menu: [Home, Administration, Inventory, Visualization, Automation, Scheduling, Template]
   name: Full UI Access
   pages: [Access, Credentials, Dashboard, Changelog, Sessions, Users, Servers, Devices,
-    Configurations, Links, Pools, Geographical View, Logical View, Services, Workflow
+    Configurations, Links, Pools, Geographical View, View Builder, Services, Workflow
       Builder, Results, Tasks, Events, Page, Subpage]
   post_requests: [/add_edge, /add_instances_in_bulk, /bulk_deletion, /bulk_edit, /bulk_removal,
     /copy_service_in_workflow, /calendar_init, /clear_results, /clear_configurations,
     /compare, /counters, /count_models, /create_label, /database_deletion, /delete_corrupted_edges,
     /delete_instance, /delete_workflow_selection, /desktop_connection, /duplicate_workflow,
-    /export_service, /export_topology, /delete_file, /edit_file, /get, /get_all, /get_cluster_status,
+    /export_service, /topology_export, /delete_file, /edit_file, /get, /get_all, /get_cluster_status,
     /get_git_history, /get_device_network_data, /get_device_logs, /get_exported_services,
     /get_git_network_data, /get_git_content, /get_migration_folders, /get_service_logs,
     /get_properties, /get_result, /get_runtimes, /get_view_topology, /get_service_state,

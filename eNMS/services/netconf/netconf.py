@@ -4,14 +4,14 @@ import xmltodict
 from wtforms.widgets import TextArea
 
 from eNMS.database import db
-from eNMS.forms.automation import ConnectionForm
-from eNMS.forms.fields import (
+from eNMS.fields import (
     BooleanField,
     HiddenField,
     IntegerField,
     SelectField,
     StringField,
 )
+from eNMS.forms import ConnectionForm
 from eNMS.models.automation import ConnectionService
 
 
@@ -37,7 +37,7 @@ class NetconfService(ConnectionService):
 
     __mapper_args__ = {"polymorphic_identity": "netconf_service"}
 
-    def job(self, run, payload, device=None):
+    def job(self, run, device=None):
         xml_filter = run.sub(run.xml_filter, locals())
         run.log("info", "Sending NETCONF request", device, logger="security")
         result = {"success": False, "result": "No NETCONF operation selected."}

@@ -1,11 +1,11 @@
 from requests import get
 from sqlalchemy import ForeignKey, Integer
 
-from eNMS import app
 from eNMS.database import db
-from eNMS.forms.automation import ServiceForm
-from eNMS.forms.fields import HiddenField
+from eNMS.forms import ServiceForm
+from eNMS.fields import HiddenField
 from eNMS.models.automation import Service
+from eNMS.variables import vs
 
 
 class SwissArmyKnifeService(Service):
@@ -28,19 +28,19 @@ class SwissArmyKnifeService(Service):
     def Placeholder(self, *args, **kwargs):  # noqa: N802
         return {"success": True}
 
-    def cluster_monitoring(self, run, payload):
-        protocol = app.settings["cluster"]["scan_protocol"]
+    def cluster_monitoring(self, run):
+        protocol = vs.settings["cluster"]["scan_protocol"]
         for instance in db.fetch_all("instance"):
             db.factory(
                 "instance",
                 **get(
                     f"{protocol}://{instance.ip_address}/rest/is_alive",
-                    timeout=app.settings["cluster"]["scan_timeout"],
+                    timeout=vs.settings["cluster"]["scan_timeout"],
                 ).json(),
             )
         return {"success": True}
 
-    def process_payload1(self, run, payload, device):
+    def process_payload1(self, run, device):
         get_facts = run.get_result("NAPALM: Get Facts", device.name)
         get_interfaces = run.get_result("NAPALM: Get interfaces", device.name)
         uptime_less_than_50000 = get_facts["result"]["get_facts"]["uptime"] < 50000

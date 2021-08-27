@@ -4,10 +4,9 @@ from sqlalchemy import Boolean, ForeignKey, Integer
 from subprocess import check_output
 from traceback import format_exc
 
-from eNMS import app
 from eNMS.database import db
-from eNMS.forms.automation import ServiceForm
-from eNMS.forms.fields import (
+from eNMS.forms import ServiceForm
+from eNMS.fields import (
     BooleanField,
     DictField,
     HiddenField,
@@ -15,6 +14,7 @@ from eNMS.forms.fields import (
     StringField,
 )
 from eNMS.models.automation import Service
+from eNMS.variables import vs
 
 
 class AnsiblePlaybookService(Service):
@@ -41,7 +41,7 @@ class AnsiblePlaybookService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "ansible_playbook_service"}
 
-    def job(self, run, payload, device=None):
+    def job(self, run, device=None):
         arguments = run.sub(run.arguments, locals()).split()
         command, extra_args = ["ansible-playbook"], {}
         if run.pass_device_properties:
@@ -67,7 +67,7 @@ class AnsiblePlaybookService(Service):
         )
         try:
             result = check_output(
-                command + arguments, cwd=app.path / "files" / "playbooks"
+                command + arguments, cwd=vs.path / "files" / "playbooks"
             )
         except Exception:
             result = "\n".join(format_exc().splitlines())

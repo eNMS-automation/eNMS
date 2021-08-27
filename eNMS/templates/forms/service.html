@@ -4,7 +4,8 @@
   method="post"
   autocomplete="off"
 >
-  {{ form.id(id=form_type + '-id', class="add-id") }} {{ form.hidden_tag() }}
+  {% set panel_id = range(10000) | random %} {{ form.id(id=form_type + '-id',
+  class="add-id") }} {{ form.hidden_tag() }}
   <input type="hidden" id="copy" name="copy" class="add-id" />
   <div style="padding: 20px;">
     <center>
@@ -81,45 +82,41 @@
               role="tab"
               id="heading-step1"
               data-toggle="collapse"
-              href="#collapse-step1"
-              aria-expanded="false"
-              aria-controls="collapse-step1"
+              href="#collapse-step1-{{ panel_id }}"
             >
               <h4 class="panel-title" style="color: #000;">Main Parameters</h4>
             </a>
             <div
-              id="collapse-step1"
+              id="collapse-step1-{{ panel_id }}"
               class="panel-collapse collapse in"
               role="tabpanel"
-              aria-labelledby="heading-step1"
             >
               <div class="panel-body" style="background-color: #fafafa;">
                 {{ form.scoped_name.label() }}
                 <div class="form-group">
                   {{ form.scoped_name(id=form_type + '-scoped_name', class="form-control
-                  readonly-when-run add-id required") }}
+                  add-id required") }}
                 </div>
                 {{ form.name.label() }}
                 <div class="form-group">
-                  {{ form.name(id=form_type + '-name', class="form-control
-                  readonly-when-run add-id required") }}
+                  {{ form.name(id=form_type + '-name', class="form-control add-id
+                  required") }}
                 </div>
                 {{ form.default_access.label() }}
                 <div class="form-group">
                   {{ form.default_access(id=form_type + '-default_access',
-                  class="form-control readonly-when-run add-id required") }}
+                  class="form-control add-id required") }}
                 </div>
                 {{ form.access_groups.label() }}
                 <div class="form-group">
                   {{ form.access_groups(id=form_type + '-access_groups',
-                  class="form-control readonly-when-run add-id required") }}
+                  class="form-control add-id required") }}
                 </div>
                 {{ form.type.label() }}
                 <div class="form-group">
-                  {{ form.type(id=form_type + '-class', class="form-control
-                  readonly-when-run add-id") }}
+                  {{ form.type(id=form_type + '-class', class="form-control add-id") }}
                 </div>
-                <fieldset class="readonly-when-run">
+                <fieldset>
                   <div class="item">
                     <input
                       id="{{ form_type }}-shared"
@@ -139,22 +136,44 @@
                 {{ form.description.label() }}
                 <div class="form-group">
                   {{ form.description(id=form_type + '-description', class="form-control
-                  readonly-when-run add-id") }}
+                  add-id") }}
                 </div>
                 {{ form.vendor.label() }}
                 <div class="form-group">
-                  {{ form.vendor(id=form_type + '-vendor', class="form-control
-                  readonly-when-run add-id") }}
+                  {{ form.vendor(id=form_type + '-vendor', class="form-control add-id")
+                  }}
                 </div>
                 {{ form.operating_system.label() }}
                 <div class="form-group">
                   {{ form.operating_system(id=form_type + '-operating_system',
-                  class="form-control readonly-when-run add-id") }}
+                  class="form-control add-id") }}
                 </div>
                 {{ form.initial_payload.label(help="common/initial_payload") }}
                 <div class="form-group">
                   {{ form.initial_payload(id=form_type + '-initial_payload',
                   class="form-control add-id") }}
+                </div>
+                {{ form.parameterized_form.label(help="common/parameterized_form") }}
+                <div class="form-group">
+                  {{ form.parameterized_form(id=form_type + '-parameterized_form',
+                  class="form-control add-id") }}
+                </div>
+                <fieldset>
+                  <div class="item">
+                    <input
+                      id="{{ form_type }}-mandatory_parametrization"
+                      name="mandatory_parametrization"
+                      type="checkbox"
+                      class="add-id"
+                      value="y"
+                    />
+                    {{ form.mandatory_parametrization.label() }}
+                  </div>
+                </fieldset>
+                {{ form.priority.label() }}
+                <div class="form-group">
+                  {{ form.priority(id=form_type + '-priority', class="form-control
+                  add-id") }}
                 </div>
                 {{ form.number_of_retries.label() }}
                 <div class="form-group">
@@ -223,19 +242,16 @@
               role="tab"
               id="heading-step1-2"
               data-toggle="collapse"
-              href="#collapse-step1-2"
-              aria-expanded="false"
-              aria-controls="collapse-step1-2"
+              href="#collapse-step1-2-{{ panel_id }}"
             >
               <h4 class="panel-title" style="color: #000;">
                 Workflow Parameters
               </h4>
             </a>
             <div
-              id="collapse-step1-2"
+              id="collapse-step1-2-{{ panel_id }}"
               class="panel-collapse collapse in"
               role="tabpanel"
-              aria-labelledby="heading-step1-2"
             >
               <div class="panel-body" style="background-color: #fafafa;">
                 {{ form.preprocessing.label(help="common/preprocessing") }}
@@ -246,22 +262,22 @@
                 {{ form.skip_query.label(help="common/skip_query") }}
                 <div class="form-group">
                   {{ form.skip_query(id=form_type + '-skip_query', class="form-control
-                  readonly-when-run add-id") }}
+                  add-id") }}
                 </div>
                 {{ form.skip_value.label() }}
                 <div class="form-group">
                   {{ form.skip_value(id=form_type + '-skip_value', class="form-control
-                  readonly-when-run add-id") }}
+                  add-id") }}
                 </div>
                 {{ form.maximum_runs.label() }}
                 <div class="form-group">
                   {{ form.maximum_runs(id=form_type + '-maximum_runs',
-                  class="form-control readonly-when-run add-id") }}
+                  class="form-control add-id") }}
                 </div>
                 {{ form.waiting_time.label() }}
                 <div class="form-group">
                   {{ form.waiting_time(id=form_type + '-waiting_time',
-                  class="form-control readonly-when-run add-id") }}
+                  class="form-control add-id") }}
                 </div>
               </div>
             </div>
@@ -283,19 +299,16 @@
               role="tab"
               id="heading-step1-3"
               data-toggle="collapse"
-              href="#collapse-step1-3"
-              aria-expanded="false"
-              aria-controls="collapse-step1-3"
+              href="#collapse-step1-3-{{ panel_id }}"
             >
               <h4 class="panel-title" style="color: #000;">
                 Custom Properties
               </h4>
             </a>
             <div
-              id="collapse-step1-3"
+              id="collapse-step1-3-{{ panel_id }}"
               class="panel-collapse collapse in"
               role="tabpanel"
-              aria-labelledby="heading-step1-3"
             >
               <div class="panel-body" style="background-color: #fafafa;">
                 {% for property, values in form.custom_properties.items() %} {% set
@@ -309,7 +322,7 @@
                 </label>
                 {% else %}
                 <label for="{{ property }}">{{ values["pretty_name"] }}</label>
-                {% endif %} {% endset %} {% if values["type"] == "boolean" %}
+                {% endif %} {% endset %} {% if values["type"] == "bool" %}
                 <fieldset>
                   <div class="item">
                     {{ form[property](id="{}-{}".format(form_type, property),
@@ -365,11 +378,10 @@
               id="collapse-{{ group_id }}"
               class="panel-collapse collapse {{ position }}"
               role="tabpanel"
-              aria-labelledby="heading-{{ group_id }}"
             >
               <div class="panel-body" style="background-color: #fafafa;">
                 {% for field_name in group.commands %}
-                <div id="div-{{ form_type }}-{{ field_name}}" class="add-id">
+                <div id="{{ form_type }}-{{ field_name }}-div" class="add-id">
                   {% set label %} {% if form[field_name].render_kw and "help" in
                   form[field_name].render_kw %}
                   <label
@@ -443,17 +455,14 @@
               role="tab"
               id="heading-step3"
               data-toggle="collapse"
-              href="#collapse-step3"
-              aria-expanded="false"
-              aria-controls="collapse-step3"
+              href="#collapse-step3-{{ panel_id }}"
             >
               <h4 class="panel-title" style="color: #000;">Devices</h4>
             </a>
             <div
-              id="collapse-step3"
+              id="collapse-step3-{{ panel_id }}"
               class="panel-collapse collapse in"
               role="tabpanel"
-              aria-labelledby="heading-step3"
             >
               <div class="panel-body" style="background-color: #fafafa;">
                 {{ form.run_method.label() }}
@@ -530,19 +539,16 @@
               role="tab"
               id="heading-step3-2"
               data-toggle="collapse"
-              href="#collapse-step3-2"
-              aria-expanded="false"
-              aria-controls="collapse-step3-2"
+              href="#collapse-step3-2-{{ panel_id }}"
             >
               <h4 class="panel-title" style="color: #000;">
                 Iteration
               </h4>
             </a>
             <div
-              id="collapse-step3-2"
+              id="collapse-step3-2-{{ panel_id }}"
               class="panel-collapse collapse in"
               role="tabpanel"
-              aria-labelledby="heading-step3-2"
             >
               <div class="panel-body" style="background-color: #fafafa;">
                 {{ form.iteration_devices.label(help="common/iteration_devices") }}
@@ -593,19 +599,16 @@
               role="tab"
               id="heading-step4"
               data-toggle="collapse"
-              href="#collapse-step4"
-              aria-expanded="false"
-              aria-controls="collapse-step4"
+              href="#collapse-step4-{{ panel_id }}"
             >
               <h4 class="panel-title" style="color: #000;">
                 Conversion and Postprocessing
               </h4>
             </a>
             <div
-              id="collapse-step4"
+              id="collapse-step4-{{ panel_id }}"
               class="panel-collapse collapse in"
               role="tabpanel"
-              aria-labelledby="heading-step4"
             >
               <div class="panel-body" style="background-color: #fafafa;">
                 {{ form.conversion_method.label() }}
@@ -642,19 +645,16 @@
               role="tab"
               id="heading-step4-2"
               data-toggle="collapse"
-              href="#collapse-step4-2"
-              aria-expanded="false"
-              aria-controls="collapse-step4-2"
+              href="#collapse-step4-2-{{ panel_id }}"
             >
               <h4 class="panel-title" style="color: #000;">
                 Validation
               </h4>
             </a>
             <div
-              id="collapse-step4-2"
+              id="collapse-step4-2-{{ panel_id }}"
               class="panel-collapse collapse in"
               role="tabpanel"
-              aria-labelledby="heading-step4-2"
             >
               <div class="panel-body" style="background-color: #fafafa;">
                 {{ form.validation_condition.label() }}
@@ -665,6 +665,11 @@
                 {{ form.validation_method.label() }}
                 <div class="form-group">
                   {{ form.validation_method(id=form_type + '-validation_method',
+                  class="form-control add-id") }}
+                </div>
+                {{ form.validation_section.label() }}
+                <div class="form-group">
+                  {{ form.validation_section(id=form_type + '-validation_section',
                   class="form-control add-id") }}
                 </div>
                 {{ form.content_match.label() }}
@@ -732,19 +737,16 @@
               role="tab"
               id="heading-step4-3"
               data-toggle="collapse"
-              href="#collapse-step4-3"
-              aria-expanded="false"
-              aria-controls="collapse-step4-3"
+              href="#collapse-step4-3-{{ panel_id }}"
             >
               <h4 class="panel-title" style="color: #000;">
                 Notifications
               </h4>
             </a>
             <div
-              id="collapse-step4-3"
+              id="collapse-step4-3-{{ panel_id }}"
               class="panel-collapse collapse in"
               role="tabpanel"
-              aria-labelledby="heading-step4-3"
             >
               <div class="panel-body" style="background-color: #fafafa;">
                 <fieldset>

@@ -2,11 +2,12 @@
   "app": {
     "address": "http://192.168.56.102",
     "config_mode": "debug",
-    "startup_migration": "examples",
     "documentation_url": "https://enms.readthedocs.io/en/latest/",
     "git_repository": "git@github.com:afourmy/gitpython-test.git",
+    "ip_address": "192.168.56.102",
     "plugin_path": "eNMS/plugins",
-    "session_timeout_minutes": 30
+    "session_timeout_minutes": 30,
+    "startup_migration": "examples"
   },
   "authentication": {
     "default": "database",
@@ -96,10 +97,6 @@
       "VERIFY_CERTIFICATE": false
     },
     "bypass_key_prompt": true,
-    "enabled": {
-      "desktop": true,
-      "web": true
-    },
     "credentials": {
       "device": true,
       "user": true,
@@ -109,11 +106,6 @@
     "port": -1,
     "port_redirection": false,
     "start_port": 9000
-  },
-  "syslog": {
-    "active": false,
-    "address": "0.0.0.0",
-    "port": 514
   },
   "vault": {
     "unseal_vault": false,

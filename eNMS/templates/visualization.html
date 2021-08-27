@@ -57,70 +57,262 @@
       <li><a tabindex="-1" href="#">Circle Marker</a></li>
     </ul>
   </li>
+  {% endif %} {% if endpoint == "view_builder" %}
+  <li class="menu global">
+    <a tabindex="-1" href="#">Edit View</a>
+    <a tabindex="-1" href="#">Display Links</a>
+  </li>
   {% endif %}
-  <li class="menu rc-device-menu rc-link-menu rc-site-menu">
+  <li class="menu rc-object-menu rc-plan-menu rc-device-menu rc-link-menu rc-site-menu">
     <a tabindex="-1" href="#">Properties</a>
   </li>
-  <li class="menu rc-device-menu"><a tabindex="-1" href="#">Connect</a></li>
-  <li class="menu rc-device-menu">
+  {% if endpoint == "view_builder" %}
+  <li class="menu rc-object-menu rc-device-menu rc-link-menu">
+    <a tabindex="-1" href="#">View Properties</a>
+  </li>
+  {% endif %}
+  <li class="menu rc-object-menu rc-device-menu">
+    <a tabindex="-1" href="#">Connect</a>
+  </li>
+  <li class="menu rc-object-menu rc-device-menu">
     <a tabindex="-1" href="#">Configuration</a>
   </li>
-  <li class="menu rc-device-menu"><a tabindex="-1" href="#">Run Service</a></li>
+  <li class="menu rc-object-menu rc-device-menu">
+    <a tabindex="-1" href="#">Run Service</a>
+  </li>
 </ul>
-<nav class="navbar navbar-default controls nav-controls" role="navigation">
-  <button
-    style="margin-left: 5px;"
-    type="button"
-    onclick="eNMS.visualization.displayFilteringPanel('device')"
-    class="btn btn-info btn-search"
-  >
-    <span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp;Device
-  </button>
-  <button
-    type="button"
-    onclick="eNMS.visualization.displayFilteringPanel('link')"
-    class="btn btn-info btn-search"
-  >
-    <span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp;Link
-  </button>
-  <button
-    type="button"
-    class="btn btn-info"
-    data-tooltip="Refresh"
-    type="button"
-    onclick="eNMS.visualization.displayNetwork({})"
-  >
-    <span class="glyphicon glyphicon-refresh"></span>
-  </button>
-  <button
-    class="btn btn-info"
-    onclick="eNMS.visualization.clearSearch()"
-    data-tooltip="Clear Search"
-    type="button"
-  >
-    <span class="glyphicon glyphicon-remove"></span>
-  </button>
-  <button
-    type="button"
-    class="btn btn-success"
-    onclick="eNMS.automation.showRunServicePanel({type: 'device'})"
-    data-tooltip="Run service on all currently displayed devices"
-  >
-    <span class="glyphicon glyphicon-play"></span>
-  </button>
-</nav>
-{% endblock content %} {% block javascripts %} {{ super()}} {% if endpoint ==
-"logical_view" %}
-<script src="{{ url_for('static', filename='lib/3d-force-graph/three.min.js') }}"></script>
-<script src="{{ url_for('static', filename='lib/3d-force-graph/three-spritetext.min.js') }}"></script>
+{% if endpoint != "view_builder" %}
+<div class="controls">
+  <nav class="navbar navbar-default navbar-custom navbar-color" role="navigation">
+    <div style="margin: 0px;">
+      <select
+        id="current-pool"
+        class="form-control"
+        data-dropdown-align-right="true"
+        data-size="20"
+        data-width="305px"
+      ></select>
+    </div>
+    <ul class="pagination" style="margin: 0px; padding-top: 5px;">
+      <li>
+        <a
+          onclick="action['Edit Pool']()"
+          data-tooltip="Edit Pool"
+          style="cursor: pointer;"
+          ><span class="glyphicon glyphicon-edit cursor"></span
+        ></a>
+      </li>
+      <li>
+        <a
+          onclick="eNMS.visualization.displayFilteringPanel('device')"
+          data-tooltip="Device Filtering"
+          style="cursor: pointer;"
+          ><span class="glyphicon glyphicon-equalizer"></span
+        ></a>
+      </li>
+      <li>
+        <a
+          onclick="eNMS.visualization.displayFilteringPanel('link')"
+          data-tooltip="Link Filtering"
+          style="cursor: pointer;"
+          ><span class="glyphicon glyphicon-random"></span
+        ></a>
+      </li>
+      <li>
+        <a
+          onclick="eNMS.visualization.displayNetwork({})"
+          data-tooltip="Refresh"
+          style="cursor: pointer;"
+          ><span class="glyphicon glyphicon-refresh"></span
+        ></a>
+      </li>
+      <li>
+        <a
+          onclick="eNMS.visualization.clearSearch()"
+          data-tooltip="Clear Search"
+          style="cursor: pointer;"
+          ><span class="glyphicon glyphicon-remove"></span
+        ></a>
+      </li>
+      <li>
+        <a
+          onclick="eNMS.automation.showRunServicePanel({type: 'device'})"
+          data-tooltip="Run service on all currently displayed devices"
+          style="cursor: pointer;"
+          ><span class="glyphicon glyphicon-play"></span
+        ></a>
+      </li>
+      <li id="left-arrow">
+        <a
+          onclick="action['Backward']()"
+          data-tooltip="Previous View"
+          style="cursor: pointer;"
+          ><span class="glyphicon glyphicon-chevron-left"></span
+        ></a>
+      </li>
+      <li id="right-arrow">
+        <a
+          onclick="action['Forward']()"
+          data-tooltip="Next View"
+          style="cursor: pointer;"
+          ><span class="glyphicon glyphicon-chevron-right"></span
+        ></a>
+      </li>
+    </ul>
+  </nav>
+</div>
+{% else %}
+<div class="controls">
+  <nav class="navbar navbar-default navbar-custom navbar-color" role="navigation">
+    <div style="width: 613px; margin: 0px;">
+      <select
+        id="current-view"
+        class="form-control"
+        data-dropdown-align-right="true"
+        data-size="20"
+      ></select>
+    </div>
+    <ul class="pagination" style="margin: 0px;">
+      <li id="btn-select">
+        <a
+          onclick="action['Switch Mode']('select')"
+          data-tooltip="Select"
+          style="cursor: pointer;"
+          ><span class="glyphicon glyphicon-screenshot"></span
+        ></a>
+      </li>
+      <li id="btn-translate">
+        <a
+          onclick="action['Switch Mode']('translate')"
+          data-tooltip="Translate"
+          style="cursor: pointer;"
+          ><span class="glyphicon glyphicon-random"></span
+        ></a>
+      </li>
+      <li id="btn-scale">
+        <a
+          onclick="action['Switch Mode']('scale')"
+          data-tooltip="Rescale"
+          style="cursor: pointer;"
+          ><span class="glyphicon glyphicon-resize-full"></span
+        ></a>
+      </li>
+      <li id="btn-rotate">
+        <a
+          onclick="action['Switch Mode']('rotate')"
+          data-tooltip="Rotate"
+          style="cursor: pointer;"
+          ><span class="glyphicon glyphicon-repeat"></span
+        ></a>
+      </li>
+    </ul>
+    <ul class="pagination" style="margin: 0px; padding-top: 5px;">
+      <li>
+        <a
+          onclick="action['Edit View']()"
+          data-tooltip="Edit View"
+          style="cursor: pointer;"
+          ><span class="glyphicon glyphicon-edit cursor"></span
+        ></a>
+      </li>
+      <li>
+        <a
+          onclick="action['Duplicate View']()"
+          data-tooltip="Duplicate View"
+          style="cursor: pointer;"
+          ><span class="glyphicon glyphicon-duplicate"></span
+        ></a>
+      </li>
+      <li>
+        <a
+          onclick="action['Create View']()"
+          data-tooltip="Create View"
+          style="cursor: pointer;"
+          ><span class="glyphicon glyphicon-plus"></span
+        ></a>
+      </li>
+      <li>
+        <a
+          onclick="action['Add to View']()"
+          data-tooltip="Add to View"
+          style="cursor: pointer;"
+          ><span class="glyphicon glyphicon-book"></span
+        ></a>
+      </li>
+      <li>
+        <a
+          onclick="action['Create Label']()"
+          data-tooltip="Create Label"
+          style="cursor: pointer;"
+          ><span class="glyphicon glyphicon-font"></span
+        ></a>
+      </li>
+      <li>
+        <a
+          onclick="action['Create Plan']()"
+          data-tooltip="Create Plan"
+          style="cursor: pointer;"
+          ><span class="glyphicon glyphicon-unchecked"></span
+        ></a>
+      </li>
+      <li>
+        <a onclick="action['Delete']()" data-tooltip="Delete" style="cursor: pointer;"
+          ><span class="glyphicon glyphicon-trash"></span
+        ></a>
+      </li>
+      <li>
+        <a
+          onclick="eNMS.workflowBuilder.getWorkflowTree()"
+          data-tooltip="Workflow Tree"
+          style="cursor: pointer;"
+          ><span class="glyphicon glyphicon-tree-conifer"></span
+        ></a>
+      </li>
+      <li>
+        <a onclick="action['Zoom In']()" data-tooltip="Zoom In" style="cursor: pointer;"
+          ><span class="glyphicon glyphicon-zoom-in"></span
+        ></a>
+      </li>
+      <li>
+        <a
+          onclick="action['Zoom Out']()"
+          data-tooltip="Zoom Out"
+          style="cursor: pointer;"
+          ><span class="glyphicon glyphicon-zoom-out"></span
+        ></a>
+      </li>
+      <li id="left-arrow">
+        <a
+          onclick="action['Backward']()"
+          data-tooltip="Previous View"
+          style="cursor: pointer;"
+          ><span class="glyphicon glyphicon-chevron-left"></span
+        ></a>
+      </li>
+      <li id="right-arrow">
+        <a
+          onclick="action['Forward']()"
+          data-tooltip="Next View"
+          style="cursor: pointer;"
+          ><span class="glyphicon glyphicon-chevron-right"></span
+        ></a>
+      </li>
+    </ul>
+  </nav>
+</div>
+{% endif %} {% endblock content %} {% block javascripts %} {{ super()}} {% if endpoint
+!= "geographical_view" %}
+<script src="{{ url_for('static', filename='lib/three/three.min.js') }}"></script>
+<script src="{{ url_for('static', filename='lib/three/transformControls.min.js') }}"></script>
+<script src="{{ url_for('static', filename='lib/three/orbitControls.min.js') }}"></script>
+<script src="{{ url_for('static', filename='lib/three/CSS2DRenderer.min.js') }}"></script>
+<script src="{{ url_for('static', filename='lib/three/ColladaLoader.min.js') }}"></script>
+{% endif %} {% if endpoint == "logical_view" %}
+<script src="{{ url_for('static', filename='lib/three/three-spritetext.min.js') }}"></script>
 <script src="{{ url_for('static', filename='lib/3d-force-graph/3d-force-graph.min.js') }}"></script>
 {% else %} {% if endpoint == "geographical_view" %} {% if dimension == "2D" %}
 <script src="{{ url_for('static', filename='lib/leaflet/leaflet.min.js') }}"></script>
 <script src="{{ url_for('static', filename='lib/leaflet-markercluster/leaflet.markercluster.min.js') }}"></script>
 {% else %}
 <script src="{{ url_for('static', filename='lib/cesium/Cesium.js') }}"></script>
-{% endif %} {% endif %} {% endif %}
-<script>
-  const defaultPools = {{ default_pools|tojson|safe }};
-</script>
-{% endblock javascripts %}
+{% endif %} {% endif %} {% endif %} {% endblock javascripts %}

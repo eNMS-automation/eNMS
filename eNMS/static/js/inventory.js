@@ -2,6 +2,7 @@
 global
 CodeMirror: false
 configurationProperties: false
+formProperties: false
 settings: true
 echarts: false
 theme: false
@@ -32,11 +33,8 @@ function drawDiagrams(type, objects, property) {
   let data = [];
   let legend = [];
   for (let [key, value] of Object.entries(objects)) {
-    key = key || "Empty string";
-    data.push({
-      value: value,
-      name: key,
-    });
+    key = key || "Empty";
+    data.push({ value: value, name: key });
     legend.push(key);
   }
   const result = { data: data, legend: legend };
@@ -50,6 +48,49 @@ function drawDiagrams(type, objects, property) {
     show: result.legend.length < 10,
   });
   diagrams[type].setOption(options);
+  if (diagrams[type]._$handlers.click) return;
+  diagrams[type].on("click", function (params) {
+    const id = Date.now();
+    const property = $(`#${type}-properties`).val();
+    const tableType = type == "workflow" ? "service" : type;
+    let value = params.data.name;
+    openPanel({
+      name: "table",
+      size: "1000 500",
+      content: `
+        <div class="modal-body">
+          <div id="tooltip-overlay" class="overlay"></div>
+          <form
+            id="search-form-${tableType}-${id}"
+            class="form-horizontal form-label-left"
+            method="post"
+          >
+            <nav
+              id="controls-${tableType}-${id}"
+              class="navbar navbar-default nav-controls"
+              role="navigation"
+            ></nav>
+            <table
+              id="table-${tableType}-${id}"
+              class="table table-striped table-bordered table-hover"
+              cellspacing="0"
+              width="100%"
+            ></table>
+          </form>
+        </div>`,
+      id: id,
+      title: `All ${tableType}s with ${property} set to "${value}"`,
+      callback: function () {
+        if (formProperties[tableType][property].type == "bool") value = `bool-${value}`;
+        let constraints =
+          value == "Empty" ? { model_filter: "empty" } : { [property]: value };
+        if (type == "workflow") {
+          Object.assign(constraints, { type: "workflow", type_filter: "equality" });
+        }
+        new tables[tableType](id, constraints);
+      },
+    });
+  });
 }
 
 export function showConnectionPanel(device) {
@@ -85,7 +126,11 @@ export function initDashboard() {
     url: "/count_models",
     callback: function (result) {
       for (const type of Object.keys(defaultProperties)) {
-        $(`#count-${type}`).text(result.counters[type]);
+        let counterText = result.counters[type].toString();
+        if (["service", "task", "workflow"].includes(type)) {
+          counterText += ` (${result.active[type]})`;
+        }
+        $(`#count-${type}`).text(counterText);
       }
       for (const [type, objects] of Object.entries(result.properties)) {
         const diagram = echarts.init(document.getElementById(type));
@@ -115,40 +160,15 @@ function webConnection(id) {
     url: `/web_connection/${id}`,
     form: `connection-parameters-form-${id}`,
     callback: function (result) {
-      const url =
-        settings.app.address ||
-        `${window.location.protocol}//${window.location.hostname}`;
-      const link = result.redirection
-        ? `${url}/terminal${result.port}`
-        : `${url}:${result.port}`;
-      setTimeout(() => openUrl(`${link}/${result.endpoint}`), 2000);
+      const defaultUrl = `${window.location.protocol}//${window.location.hostname}`;
+      const baseUrl = settings.app.address || defaultUrl;
+      const link = `${baseUrl}/terminal/${result.session}`;
+      setTimeout(() => openUrl(link), 2000);
       const message = `Click here to connect to ${result.device}.`;
-      notify(
-        `<a target='_blank' href='${link}/${result.endpoint}'>${message}</a>`,
-        "success",
-        15
-      );
+      notify(`<a target='_blank' href='${link}'>${message}</a>`, "success", 15);
       const warning = `Don't forget to turn off the pop-up blocker !`;
       notify(warning, "error", 15);
       $(`#connection-${id}`).remove();
-    },
-  });
-}
-
-function desktopConnection(id) {
-  notify("Starting SSH connection to the device...", "success", 3, true);
-  call({
-    url: `/desktop_connection/${id}`,
-    form: `connection-parameters-form-${id}`,
-    callback: function (result) {
-      let loc = window.location;
-      if (result.error) {
-        notify(`Error: ${result.error}`, "error", 10, true);
-      } else {
-        const link = `${result.username}@${loc.hostname}:${result.port}`;
-        const message = `Click here to connect to ${result.device_name}.`;
-        notify(`<a href='ssh://${link}'>${message}</a>`, "success", 15);
-      }
     },
   });
 }
@@ -452,7 +472,7 @@ function showImportTopologyPanel() {
 function exportTopology() {
   notify("Topology export starting...", "success", 5, true);
   call({
-    url: "/export_topology",
+    url: "/topology_export",
     form: "excel_export-form",
     callback: function () {
       notify("Topology successfully exported.", "success", 5, true);
@@ -480,7 +500,6 @@ function importTopology() {
 configureNamespace("inventory", [
   downloadNetworkData,
   exportTopology,
-  desktopConnection,
   showConnectionPanel,
   webConnection,
   updatePools,

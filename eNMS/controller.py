@@ -1229,7 +1229,6 @@ class Controller:
             return {"alert": "Error 403 - Operation not allowed."}
         except Exception as exc:
             db.session.rollback()
-            print("TTT" * 100)
             if isinstance(exc, IntegrityError):
                 alert = (
                     f"There is already a {instance.class_type} "

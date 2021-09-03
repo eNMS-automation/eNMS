@@ -1,6 +1,6 @@
 from collections import defaultdict
 from heapq import heappop, heappush
-from sqlalchemy import Boolean, ForeignKey, Integer
+from sqlalchemy import Boolean, event, ForeignKey, Integer
 from sqlalchemy.orm import backref, relationship
 from sqlalchemy.schema import UniqueConstraint
 
@@ -45,6 +45,13 @@ class Workflow(Service):
         super().__init__(**kwargs)
         if not migration_import and self.name not in end.positions:
             end.positions[self.name] = (500, 0)
+
+    @classmethod
+    def configure_events(cls):
+
+        @event.listens_for(cls.services, "append")
+        def append(target, *_):
+            target.last_modified = vs.get_time()
 
     def delete(self):
         for service in self.services:

@@ -4,6 +4,7 @@ action: false
 page: false
 serviceTypes: false
 theme: false
+user: false
 vis: false
 */
 

@@ -333,11 +333,13 @@ export function showConfirmationPanel({
   confirmButton = "Confirm",
   onConfirm,
 }) {
-  var content = `
+  const content = `
   <div class="modal-body" style="max-width:600px">${message}</div>
   <div class="modal-footer">
     <center>
-      <button type="button" class="btn btn-danger confirmAction">${confirmButton}</button>
+      <button type="button" class="btn btn-danger confirmAction">
+        ${confirmButton}
+      </button>
     </center>
   </div><br>`;
   openPanel({

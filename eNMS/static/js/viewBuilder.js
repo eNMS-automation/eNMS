@@ -111,8 +111,8 @@ function displayLinks() {
   call({
     url: `/get_view_links/${currentView.id}`,
     callback: function (linksObject) {
-      for (const [link_id, links] of Object.entries(linksObject)) {
-        const [sourceId, destinationId] = link_id.split("-");
+      for (const lindId of Object.keys(linksObject)) {
+        const [sourceId, destinationId] = lindId.split("-");
         const source = nodes[sourceId];
         const target = nodes[destinationId];
         let geometry = new THREE.Geometry();

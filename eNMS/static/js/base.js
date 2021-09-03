@@ -346,7 +346,7 @@ export function showConfirmationPanel({
     title: title,
     content: content,
     size: "auto",
-    checkRbac: false
+    checkRbac: false,
   });
   $(".confirmAction").click(function () {
     onConfirm();

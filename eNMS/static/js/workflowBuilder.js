@@ -165,7 +165,7 @@ function updateRuntimes(result) {
   $("#current-runtime").append("<option value='normal'>Normal Display</option>");
   $("#current-runtime").append("<option value='latest'>Latest Runtime</option>");
   result.runtimes.forEach((runtime) => {
-    const option = `<option value='${runtime[0]}'>${runtime[1]}</option>`
+    const option = `<option value='${runtime[0]}'>${runtime[1]}</option>`;
     $("#current-runtime").append(option);
   });
   if (placeholder && currentPlaceholder) {
@@ -288,7 +288,7 @@ export const switchToWorkflow = function (path, direction, runtime, selection) {
   }
   call({
     url: `/get_service_state/${path}`,
-    data: {display: runtimeDisplay, runtime: runtime || "latest"},
+    data: { display: runtimeDisplay, runtime: runtime || "latest" },
     callback: function (result) {
       workflow = result.service;
       currentRun = result.run;
@@ -823,7 +823,7 @@ function colorService(id, color) {
 export function getServiceState(id, first) {
   call({
     url: `/get_service_state/${id}`,
-    data: {display: runtimeDisplay},
+    data: { display: runtimeDisplay },
     callback: function (result) {
       if (first || result.state.status == "Running") {
         colorService(id, "#89CFF0");
@@ -942,7 +942,7 @@ function getWorkflowState(periodic, first) {
   if (userIsActive && workflow?.id && !first) {
     call({
       url: `/get_service_state/${currentPath}`,
-      data: {display: runtimeDisplay, runtime: runtime},
+      data: { display: runtimeDisplay, runtime: runtime },
       callback: function (result) {
         if (!Object.keys(result).length || result.service.id != workflow.id) return;
         currentRun = result.run;

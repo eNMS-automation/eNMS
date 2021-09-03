@@ -48,7 +48,6 @@ class Workflow(Service):
 
     @classmethod
     def configure_events(cls):
-
         @event.listens_for(cls.services, "append")
         def append(target, *_):
             target.last_modified = vs.get_time()

@@ -888,7 +888,11 @@ class Runner:
             if mode and not self.config_mode:
                 connection.exit_config_mode()
             elif self.config_mode and not mode:
-                connection.config_mode()
+                connection.config_mode(
+                    config_command=self.config_mode_command
+                    if self.config_mode_command
+                    else None
+                )
         except Exception as exc:
             self.log("error", f"Failed to honor the config mode {exc}")
         return connection
@@ -920,7 +924,11 @@ class Runner:
         if self.enable_mode:
             netmiko_connection.enable()
         if self.config_mode:
-            netmiko_connection.config_mode()
+            netmiko_connection.config_mode(
+                config_command=self.config_mode_command
+                if self.config_mode_command
+                else None
+            )
         vs.connections_cache["netmiko"][self.parent_runtime][
             device.name
         ] = netmiko_connection

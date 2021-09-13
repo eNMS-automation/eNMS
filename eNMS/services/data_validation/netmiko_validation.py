@@ -24,6 +24,7 @@ class NetmikoValidationService(ConnectionService):
     delay_factor = db.Column(Float, default=1.0)
     global_delay_factor = db.Column(Float, default=1.0)
     expect_string = db.Column(db.SmallString)
+    config_mode_command = db.Column(db.SmallString)
     auto_find_prompt = db.Column(Boolean, default=True)
     strip_prompt = db.Column(Boolean, default=True)
     strip_command = db.Column(Boolean, default=True)
@@ -77,6 +78,9 @@ class NetmikoValidationForm(NetmikoForm):
     command = StringField(substitution=True)
     use_textfsm = BooleanField("Use TextFSM", default=False)
     expect_string = StringField(substitution=True, help="netmiko/expect_string")
+    config_mode_command = StringField(
+        "Command to Enter Config Mode", default="", help="netmiko/config_mode_command"
+    )
     auto_find_prompt = BooleanField(default=True, help="netmiko/auto_find_prompt")
     strip_prompt = BooleanField(default=True, help="netmiko/strip_prompt")
     strip_command = BooleanField(default=True, help="netmiko/strip_command")
@@ -87,6 +91,7 @@ class NetmikoValidationForm(NetmikoForm):
             "commands": [
                 "use_textfsm",
                 "expect_string",
+                "config_mode_command",
                 "auto_find_prompt",
                 "strip_prompt",
                 "strip_command",

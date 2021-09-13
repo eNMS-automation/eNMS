@@ -230,7 +230,7 @@ function downloadNetworkData(id) {
   );
 }
 
-function displayNetworkData({type, name, id, result, datetime}) {
+function displayNetworkData({ type, name, id, result, datetime }) {
   openPanel({
     name: "device_data",
     content: `
@@ -289,7 +289,13 @@ export const showDeviceData = function (device) {
     url: `/get_device_network_data/${device.id}`,
     callback: (result) => {
       if (Object.keys(configurationProperties).some((p) => result[p])) {
-        displayNetworkData({type: "configuration", id: device.id, name: device.name, result: result, datetime: device.last_runtime});
+        displayNetworkData({
+          type: "configuration",
+          id: device.id,
+          name: device.name,
+          result: result,
+          datetime: device.last_runtime,
+        });
       } else {
         notify("No data stored.", "error", 5);
       }
@@ -302,7 +308,7 @@ function showGitConfiguration(device, commit) {
     url: `/get_git_network_data/${device.name}/${commit.hash}`,
     callback: (result) => {
       const type = $(`#data-type-${device.id}`).val();
-      displayNetworkData({type: type, id: commit.hash, name: device.name, ...result});
+      displayNetworkData({ type: type, id: commit.hash, name: device.name, ...result });
     },
   });
 }

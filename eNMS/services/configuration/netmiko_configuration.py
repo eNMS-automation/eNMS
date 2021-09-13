@@ -61,7 +61,7 @@ class NetmikoConfigurationForm(NetmikoForm):
     exit_config_mode = BooleanField(default=True)
     strip_prompt = BooleanField()
     strip_command = BooleanField()
-    config_mode_command = StringField()
+    config_mode_command = StringField(help="netmiko/config_mode_command")
     groups = {
         "Main Parameters": {
             "commands": [

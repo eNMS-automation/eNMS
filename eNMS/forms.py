@@ -966,7 +966,10 @@ class NetmikoForm(ConnectionForm):
     enable_mode = BooleanField(
         "Enable mode (run in enable mode or as root)", default=True
     )
-    config_mode = BooleanField("Config mode", default=False)
+    config_mode = BooleanField(
+        "Config mode (See Advanced Parameters to override the config mode command)",
+        default=False,
+    )
     fast_cli = BooleanField()
     timeout = FloatField(default=10.0)
     delay_factor = FloatField(

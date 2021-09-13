@@ -166,6 +166,9 @@ Also included in Netmiko Advanced Parameters:
 .. note:: ``Expect String`` and ``Auto Find Prompt`` are mutually exclusive; both cannot be enabled at the same time.
    If the user does not expect Netmiko to find the prompt automatically, the user should provide the expected prompt instead.
 
+- ``Command to Enter Config Mode`` The default command used to enter config mode is determined by the Netmiko driver.
+  An alternate configuration mode entry command can be specified here to overrride the default.  Examples are the Juniper
+  ``config private`` and ``config exclusive`` commands that isolate configuration changes from other users.
 - ``Strip command`` Remove the echo of the command from the output (default: True).
 - ``Strip prompt`` Remove the trailing router prompt from the output (default: True).
 - ``Use Genie`` Use Cisco's Genie implementation to create structured data from cli commands. (Currently does not work

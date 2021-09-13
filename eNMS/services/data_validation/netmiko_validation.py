@@ -78,9 +78,7 @@ class NetmikoValidationForm(NetmikoForm):
     command = StringField(substitution=True)
     use_textfsm = BooleanField("Use TextFSM", default=False)
     expect_string = StringField(substitution=True, help="netmiko/expect_string")
-    config_mode_command = StringField(
-        "Command to Enter Config Mode", default="", help="netmiko/config_mode_command"
-    )
+    config_mode_command = StringField(help="netmiko/config_mode_command")
     auto_find_prompt = BooleanField(default=True, help="netmiko/auto_find_prompt")
     strip_prompt = BooleanField(default=True, help="netmiko/strip_prompt")
     strip_command = BooleanField(default=True, help="netmiko/strip_command")

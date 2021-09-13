@@ -514,7 +514,7 @@ class Controller:
                 )
             except KeyError:
                 result[property] = ""
-        return result, commit.committed_datetime
+        return {"result": result, "datetime": commit.committed_datetime}
 
     def get_migration_folders(self):
         return listdir(vs.path / "files" / "migrations")

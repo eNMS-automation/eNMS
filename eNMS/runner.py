@@ -417,6 +417,7 @@ class Runner:
         if device:
             result_kw["device"] = device.id
         if self.is_main_run and not device:
+            results["payload"] = self.payload
             services = list(vs.run_logs.get(self.parent_runtime, []))
             for service_id in services:
                 logs = env.log_queue(self.parent_runtime, service_id, mode="get")
@@ -430,6 +431,8 @@ class Runner:
                 results["devices"] = {}
                 for result in self.main_run.results:
                     results["devices"][result.device.name] = result.result
+        else:
+            results.pop("payload", None)
         create_failed_results = self.disable_result_creation and not self.success
         if not self.disable_result_creation or create_failed_results or run_result:
             db.factory("result", result=results, commit=commit, **result_kw)

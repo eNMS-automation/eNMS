@@ -862,7 +862,7 @@ td span {
 
 /* Set the table pages in the middle */
 .dataTables_length {
-  width: 40%;
+  width: 30%;
   float: left;
 }
 

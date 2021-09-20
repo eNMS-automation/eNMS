@@ -81,7 +81,9 @@ function drawDiagrams(type, objects, property) {
       id: id,
       title: `All ${tableType}s with ${property} set to "${value}"`,
       callback: function () {
-        if (formProperties[tableType][property].type == "bool") value = `bool-${value}`;
+        if (formProperties[tableType][property]?.type == "bool") {
+          value = `bool-${value}`;
+        }
         let constraints =
           value == "Empty" ? { model_filter: "empty" } : { [property]: value };
         if (type == "workflow") {

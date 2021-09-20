@@ -446,7 +446,7 @@ class Controller:
 
     def get_credentials(self, device, **kwargs):
         if kwargs["credentials"] == "device":
-            credentials = db.get_credential(current_user.name, device, "any")
+            credentials = db.get_credential(current_user.name, device=device)
             return credentials.username, env.get_password(credentials.password)
         elif kwargs["credentials"] == "user":
             return current_user.name, env.get_password(current_user.password)

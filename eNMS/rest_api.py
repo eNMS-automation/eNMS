@@ -167,10 +167,8 @@ class RestApi:
             controller.topology_export(**kwargs)
             return "Topology Export successfully executed."
 
-    def update_instance(self, model, **data):
-        result = defaultdict(list)
-        if not isinstance(data, list):
-            data = [data]
+    def update_instance(self, model, list_data=None, **data):
+        result, data = defaultdict(list), list_data or [data]
         for instance in data:
             if "name" not in instance:
                 result["failure"].append((instance, "Name is missing"))

@@ -161,7 +161,9 @@ function updateRuntimes(result) {
   currentPlaceholder = result.state?.[currentPath]?.placeholder;
   let currentRuntime = $("#current-runtime").val();
   const displayedRuntimes = result.runtimes.map((runtime) => runtime[0]);
-  if (!displayedRuntimes.includes(currentRuntime)) currentRuntime = "latest";
+  if (currentRuntime != "normal" && !displayedRuntimes.includes(currentRuntime)) {
+    currentRuntime = "latest";
+  }
   $("#current-runtime").empty();
   $("#current-runtime").append("<option value='normal'>Normal Display</option>");
   $("#current-runtime").append("<option value='latest'>Latest Runtime</option>");

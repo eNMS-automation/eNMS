@@ -49,7 +49,7 @@ class Runner:
         self.parent_device = None
         self.run = run
         self.creator = self.run.creator
-        self.start_services = [1]
+        self.start_services = []
         self.parent_runtime = kwargs.get("parent_runtime")
         self.runtime = vs.get_time()
         vs.run_instances[self.runtime] = self

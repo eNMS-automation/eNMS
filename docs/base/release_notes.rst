@@ -5,7 +5,6 @@ Release Notes
 Version 4.1.0
 -------------
 
-- 3D Logical visualization
 - Remove Event Model and Syslog server
 - Refactor of the run mechanism. When running a service, a single run is created and saved to the
 database.

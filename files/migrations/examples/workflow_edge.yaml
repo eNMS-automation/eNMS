@@ -607,22 +607,22 @@
     2021-04-24 08:58:40.198648', source: '[Generic File Transfer] Transfer non-existing
     file', subtype: success, type: workflow_edge, workflow: Generic File Transfer}
 - {color: green, destination: '[Skip Mechanism: Skip in SxS with WF targets mode]
-    Partial failure', label: success, name: '[Regression Workflow: Skip Services in
-    SxS mode] 2021-04-24 08:58:40.198664', source: '[Shared] Start', subtype: success,
+    Partial failure (Washington)', label: success, name: '[Regression Workflow: Skip
+    Services in SxS mode] 2021-04-24 08:58:40.198664', source: '[Shared] Start', subtype: success,
   type: workflow_edge, workflow: 'Skip Mechanism: Skip in SxS with WF targets mode'}
 - {color: green, destination: '[Skip Mechanism: Skip in SxS with WF targets mode]
-    Skipped service', label: success, name: '[Regression Workflow: Skip Services in
-    SxS mode] 2021-04-24 08:58:40.198681', source: '[Skip Mechanism: Skip in SxS with
-    WF targets mode] Partial failure', subtype: success, type: workflow_edge, workflow: 'Skip
-    Mechanism: Skip in SxS with WF targets mode'}
+    Globally Skipped Service', label: success, name: '[Regression Workflow: Skip Services
+    in SxS mode] 2021-04-24 08:58:40.198681', source: '[Skip Mechanism: Skip in SxS
+    with WF targets mode] Partial failure (Washington)', subtype: success, type: workflow_edge,
+  workflow: 'Skip Mechanism: Skip in SxS with WF targets mode'}
 - {color: green, destination: '[Skip Mechanism: Skip in SxS with WF targets mode]
-    Last service', label: success, name: '[Regression Workflow: Skip Services in SxS
-    mode] 2021-04-24 08:58:40.198697', source: '[Skip Mechanism: Skip in SxS with
-    WF targets mode] Skipped service', subtype: success, type: workflow_edge, workflow: 'Skip
-    Mechanism: Skip in SxS with WF targets mode'}
+    Query Skipped Service', label: success, name: '[Regression Workflow: Skip Services
+    in SxS mode] 2021-04-24 08:58:40.198697', source: '[Skip Mechanism: Skip in SxS
+    with WF targets mode] Globally Skipped Service', subtype: success, type: workflow_edge,
+  workflow: 'Skip Mechanism: Skip in SxS with WF targets mode'}
 - {color: green, destination: '[Shared] End', label: success, name: '[Regression Workflow:
     Skip Services in SxS mode] 2021-04-24 08:58:40.198713', source: '[Skip Mechanism:
-    Skip in SxS with WF targets mode] Last service', subtype: success, type: workflow_edge,
+    Skip in SxS with WF targets mode] Query Skipped Service', subtype: success, type: workflow_edge,
   workflow: 'Skip Mechanism: Skip in SxS with WF targets mode'}
 - {color: green, destination: '[Skip Mechanism: Conditional Skip Query in Failed and
     Discard Modes] Post-success service', label: success, name: '[Regression Workflow:
@@ -1374,5 +1374,6 @@
     Variable', subtype: success, type: workflow_edge, workflow: 'Iteration Mechanism:
     Device Iteration'}
 - {color: red, destination: '[Shared] End', label: failure, name: '2021-09-21 06:31:50.623195',
-  source: '[Skip Mechanism: Skip in SxS with WF targets mode] Last service', subtype: failure,
-  type: workflow_edge, workflow: 'Skip Mechanism: Skip in SxS with WF targets mode'}
+  source: '[Skip Mechanism: Skip in SxS with WF targets mode] Query Skipped Service',
+  subtype: failure, type: workflow_edge, workflow: 'Skip Mechanism: Skip in SxS with
+    WF targets mode'}

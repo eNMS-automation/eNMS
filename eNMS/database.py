@@ -415,7 +415,6 @@ class Database:
             .join(vs.models["pool"], vs.models["credential"].user_pools)
             .join(vs.models["user"], vs.models["pool"].users)
         )
-        print(username, name, device)
         if device:
             query = query.join(pool_alias, vs.models["credential"].device_pools).join(
                 vs.models["device"], pool_alias.devices

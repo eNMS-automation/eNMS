@@ -215,7 +215,7 @@
     'Skip Mechanism: Conditional Skip Query in Failed and Discard Modes': [-322, 98]
     'Skip Mechanism: Fork based on value with Skip Discard Mechanism': [-563, 184]
     'Skip Mechanism: Skip in SxS mode': [-426, -49]
-    'Skip Mechanism: Skip in SxS with WF targets mode': [-492, -49]
+    'Skip Mechanism: Skip in SxS with WF targets mode': [-605, -49]
     Skip Query with device in Run Once Mode: *id037
     Skip Services in SxS mode: [-347, -44]
     Skip, Discard and Disable Result Creation Mechanism: *id038
@@ -576,7 +576,7 @@
     'Skip Mechanism: Conditional Skip Query in Failed and Discard Modes': [599, 331]
     'Skip Mechanism: Fork based on value with Skip Discard Mechanism': [388, 363]
     'Skip Mechanism: Skip in SxS mode': [407, -39]
-    'Skip Mechanism: Skip in SxS with WF targets mode': [288, -45]
+    'Skip Mechanism: Skip in SxS with WF targets mode': [210, -67]
     Skip Query with device in Run Once Mode: *id100
     Skip Services in SxS mode: [387, -76]
     Skip, Discard and Disable Result Creation Mechanism: *id101
@@ -3732,7 +3732,7 @@
       content: "This workflow calls netmiko and napalm backup services.\r\nThe devices\
         \ must be defined in the service, not in the workflow."
       positions: [-280, 128]
-  last_modified: '2021-09-20 22:40:29.368770'
+  last_modified: '2021-09-21 06:27:45.393326'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -3845,7 +3845,7 @@
         \ a cached connection, and recreate a new one.\r\nExpected log:\r\nnetmiko_delete_vrf_test\
         \ - DEVICE Washington : Opening new Netmiko connection\r\n"
       positions: [529, 207]
-  last_modified: '2021-09-20 22:40:29.406915'
+  last_modified: '2021-09-21 06:27:45.496656'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -3942,7 +3942,7 @@
         \ run first,\r\nbecause the process_payload service will use their results\
         \ via \"get_result\"."
       positions: [421, 330]
-  last_modified: '2021-09-20 22:40:29.460423'
+  last_modified: '2021-09-21 06:27:45.637688'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -4053,7 +4053,7 @@
       alignment: left
       content: 'Expected: 2 devices'
       positions: [113, 266]
-  last_modified: '2021-09-20 22:40:29.504308'
+  last_modified: '2021-09-21 06:27:45.758266'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -4143,7 +4143,7 @@
         For Test Netmiko Prompt Service, it is set to 2: it should run\r\nonce more\
         \ after the REST service.\r\n"
       positions: [288, -203]
-  last_modified: '2021-09-20 22:40:29.547571'
+  last_modified: '2021-09-21 06:27:45.868493'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -4242,7 +4242,7 @@
         retrieve a variable.\r\nIt also uses \"get_result\" to retrieve the result\
         \ of a previously run job."
       positions: [-92, -34]
-  last_modified: '2021-09-20 22:40:29.590760'
+  last_modified: '2021-09-21 06:27:46.000287'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -4359,7 +4359,7 @@
         \ conversion)\r\n- uses the \"Text with regular expression\" and \"dictionary\
         \ inclusion\" mechanisms to validate the result."
       positions: [-240, 69]
-  last_modified: '2021-09-20 22:40:29.631164'
+  last_modified: '2021-09-21 06:27:46.130165'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -4457,7 +4457,7 @@
     d36009d8-ce3a-4ce6-8766-5dc3241d777b:
       content: The service "Napalm configure BGP" is configured to be skipped.
       positions: [329, -230]
-  last_modified: '2021-09-20 22:40:29.674396'
+  last_modified: '2021-09-21 06:27:46.238160'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -4589,7 +4589,7 @@
       content: "The iteration values field is hardcoded to '[\"Washington\", \"Atlanta\"\
         ]'.\r\nThe service makes a REST call to\r\nhttp://127.0.0.1:5000/rest/instance/device/{{get_var('iteration_value')}}."
       positions: [-113, 314]
-  last_modified: '2021-09-20 22:40:29.758229'
+  last_modified: '2021-09-21 06:27:46.470659'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -4795,7 +4795,7 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels: {}
-  last_modified: '2021-09-20 22:40:29.801239'
+  last_modified: '2021-09-21 06:27:46.587290'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -4875,7 +4875,7 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels: {}
-  last_modified: '2021-09-20 22:40:29.832792'
+  last_modified: '2021-09-21 06:27:46.670966'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -5039,7 +5039,7 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels: {}
-  last_modified: '2021-09-20 22:40:29.854845'
+  last_modified: '2021-09-21 06:27:46.729045'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -5203,7 +5203,7 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels: {}
-  last_modified: '2021-09-20 22:40:29.875922'
+  last_modified: '2021-09-21 06:27:46.785973'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -5621,7 +5621,7 @@
         \ still reach end through the failure edge,\r\nso the top-level workflow should\
         \ be a success."
       positions: [580, 192]
-  last_modified: '2021-09-20 22:40:29.903919'
+  last_modified: '2021-09-21 06:27:46.853990'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -5698,7 +5698,7 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels: {}
-  last_modified: '2021-09-20 22:40:29.932934'
+  last_modified: '2021-09-21 06:27:46.929613'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -5779,7 +5779,7 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels: {}
-  last_modified: '2021-09-20 22:40:29.956075'
+  last_modified: '2021-09-21 06:27:46.988494'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -6071,7 +6071,7 @@
         : {\r\n    \"variable1\": {\"command\": \"test\"},\r\n    \"variable2\": {\"\
         command\": \"test2\"}\r\n}"
       positions: [-111, 83]
-  last_modified: '2021-09-20 22:40:29.995489'
+  last_modified: '2021-09-21 06:27:47.062527'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -6377,7 +6377,7 @@
       alignment: left
       content: 3 expected results.
       positions: [-192, 218]
-  last_modified: '2021-09-20 22:40:30.033446'
+  last_modified: '2021-09-21 06:27:47.189474'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -6536,7 +6536,7 @@
   iteration_values: '[1, 2, 3]'
   iteration_variable_name: subworkflow_iteration
   labels: {}
-  last_modified: '2021-09-20 22:40:30.061939'
+  last_modified: '2021-09-21 06:27:47.264812'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -6717,7 +6717,7 @@
         \ in the payload with set_var :\r\n\r\ndef test():\r\n    return device.operating_system\r\
         \n\r\nclass Test():\r\n    device = device.name"
       positions: [-16, 269]
-  last_modified: '2021-09-20 22:40:30.087545'
+  last_modified: '2021-09-21 06:27:47.329907'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -7032,7 +7032,7 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels: {}
-  last_modified: '2021-09-20 22:40:30.134259'
+  last_modified: '2021-09-21 06:27:47.461405'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -7115,7 +7115,7 @@
       content: "This service uses the password admin in the \"Jump on Connect\" section\
         \ :\r\nthis password must be set to \"admin\" after database reload."
       positions: [392, 270]
-  last_modified: '2021-09-20 22:40:30.176988'
+  last_modified: '2021-09-21 06:27:47.573458'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -7458,7 +7458,7 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels: {}
-  last_modified: '2021-09-20 22:40:30.199398'
+  last_modified: '2021-09-21 06:27:47.633012'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -8200,7 +8200,7 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels: {}
-  last_modified: '2021-09-20 22:40:30.231616'
+  last_modified: '2021-09-21 06:27:47.717413'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -8622,7 +8622,7 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels: {}
-  last_modified: '2021-09-20 22:40:30.319571'
+  last_modified: '2021-09-21 06:27:47.954013'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -10419,7 +10419,7 @@
         \ the generic file transfer as it does not use the netmiko\r\nauthentication\
         \ mechanism."
       positions: [38, -174]
-  last_modified: '2021-09-20 22:40:30.409285'
+  last_modified: '2021-09-21 06:27:48.209688'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -11086,16 +11086,22 @@
     047e351c-3263-4df8-b3b3-cbf7273d0a2e:
       alignment: left
       content: "This workflow tests the skip mechanism in SxS with WF targets mode.\r\
-        \nA service that is skipped globally should not prevent devices from\r\nmoving\
-        \ forward throughout the workflow.\r\nSimilarly, a per-device skipped service\
-        \ should also enable the skipped\r\ndevices to move forward."
-      positions: [-85, 39]
+        \nIt runs on three devices: Austin, PaloAlto, Washington. Washington will\r\
+        \nfail at the first service and stop.\r\nThe second service aims at making\
+        \ sure that a service that is skipped globally\r\nshould not prevent devices\
+        \ from moving forward throughout the workflow.\r\nSimilarly, a per-device\
+        \ skipped service should also enable the skipped\r\ndevices to move forward:\
+        \ the third service will skip PaloAlto with the skip\r\nquery, set to a skip\
+        \ value of False. PaloAlto should go to the end via the\r\nfailure edge, and\
+        \ Austin via the success edge."
+      positions: [-166, 2]
     9da73478-f2b2-4d97-ba73-5d43d3e3abcd:
       alignment: left
       content: "In this service, postprocessing is set to\r\nresults[\"success\"]\
-        \ = device.name == \"Washington\".\r\nWashington should pass, and others fail."
-      positions: [-432, 258]
-  last_modified: '2021-09-21 06:25:49.532488'
+        \ = device.name == \"Washington\".\r\nWashington should fail, others should\
+        \ pass."
+      positions: [-569, 215]
+  last_modified: '2021-09-21 06:34:10.634938'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -11172,7 +11178,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2020-07-30 03:00:38.018008'
+  last_modified: '2021-09-21 06:29:48.957874'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -11199,10 +11205,10 @@
     'Regression Workflow R: skip services in service by service mode': *id246
     'Regression Workflow: Skip Services in SxS mode': *id246
     'Skip Mechanism: Skip in SxS mode': [-392, 138]
-    'Skip Mechanism: Skip in SxS with WF targets mode': [-471, 183]
+    'Skip Mechanism: Skip in SxS with WF targets mode': [-588, 128]
     Skip Services in SxS mode: [-249, 110]
     'Workflow Regression R: skip services in service by service mode': *id246
-  postprocessing: results["success"] = device.name == "Washington"
+  postprocessing: results["success"] = device.name != "Washington"
   postprocessing_mode: always
   preprocessing: ''
   priority: 1
@@ -11257,7 +11263,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2021-09-20 22:39:35.720517'
+  last_modified: '2021-09-21 06:32:20.357707'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -11284,7 +11290,7 @@
     'Regression Workflow R: skip services in service by service mode': *id247
     'Regression Workflow: Skip Services in SxS mode': *id247
     'Skip Mechanism: Skip in SxS mode': [298, 193]
-    'Skip Mechanism: Skip in SxS with WF targets mode': [174, 182]
+    'Skip Mechanism: Skip in SxS with WF targets mode': [211, 168]
     Skip Services in SxS mode: [338, 103]
     'Workflow Regression R: skip services in service by service mode': *id247
   postprocessing: ''
@@ -11299,8 +11305,8 @@
   send_notification_method: mail
   shared: false
   skip: {}
-  skip_query: device.name == "Washington"
-  skip_value: success
+  skip_query: device.name == "PaloAlto"
+  skip_value: failure
   source_code: "# Availble variables: device, results, run\r\n# Returning state:\r\
     \n#    results[\"success\"] = True\r\n#    results[\"result\"] = <return data>\r\
     \n# Logging: log(level, text)\r\n#    log(\"info\", \"My log message\")\r\n# Exit\
@@ -11369,7 +11375,7 @@
     'Regression Workflow R: skip services in service by service mode': *id248
     'Regression Workflow: Skip Services in SxS mode': *id248
     'Skip Mechanism: Skip in SxS mode': [-49, 185]
-    'Skip Mechanism: Skip in SxS with WF targets mode': [-140, 180]
+    'Skip Mechanism: Skip in SxS with WF targets mode': [-226, 165]
     Skip Services in SxS mode: [31, -26]
     'Workflow Regression R: skip services in service by service mode': *id248
   postprocessing: ''
@@ -11463,7 +11469,7 @@
       content: "Skip query set to 'device.name == \"Washington\"'\r\nSkip value set\
         \ to \"Failure\". Washington should fail."
       positions: [55, 451]
-  last_modified: '2021-09-20 22:40:30.490275'
+  last_modified: '2021-09-21 06:27:48.430124'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -11918,7 +11924,7 @@
         \ of how RBAC is configured.\r\nWhen logging in with \"ny\" user, it should\
         \ be visible in the workflow\r\nbuilder."
       positions: [28, -27]
-  last_modified: '2021-09-20 22:40:30.534789'
+  last_modified: '2021-09-21 06:27:48.554037'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -12328,7 +12334,7 @@
       content: "We encrypt credentials with the \"encrypt\" function.\r\nTo be decrypted\
         \ in the next service via\r\ncustom credentials variable substitution."
       positions: [576, -71]
-  last_modified: '2021-09-20 22:40:30.575861'
+  last_modified: '2021-09-21 06:27:48.661835'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -12792,7 +12798,7 @@
         \ is UP.\r\n- 2 devices discarded in the lower path, 0 device exiting\r\n\
         via failure edge, then all devices discarded in next service."
       positions: [-129, 146]
-  last_modified: '2021-09-20 22:40:30.620450'
+  last_modified: '2021-09-21 06:27:48.781280'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -13351,7 +13357,7 @@
         \ considered a failure for the workflow.\r\nAustin should move along the failure\
         \ edge, and\r\nWashington should move along the success edge."
       positions: [-201, 295]
-  last_modified: '2021-09-20 22:40:30.668097'
+  last_modified: '2021-09-21 06:27:48.901868'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -13430,7 +13436,7 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels: {}
-  last_modified: '2021-09-20 22:40:30.701715'
+  last_modified: '2021-09-21 06:27:48.992987'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -13591,7 +13597,7 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels: {}
-  last_modified: '2021-09-20 22:40:30.720446'
+  last_modified: '2021-09-21 06:27:49.044559'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -13775,7 +13781,7 @@
         \ in DxD and SxS with workflow targets mode.\r\nRuns on: PaloAlto, Washington,\
         \ Austin"
       positions: [104, -127]
-  last_modified: '2021-09-20 22:40:30.752090'
+  last_modified: '2021-09-21 06:27:49.126366'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -13935,7 +13941,7 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels: {}
-  last_modified: '2021-09-20 22:40:30.785979'
+  last_modified: '2021-09-21 06:27:49.248861'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -14017,7 +14023,7 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels: {}
-  last_modified: '2021-09-20 22:40:30.807895'
+  last_modified: '2021-09-21 06:27:49.305440'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -14467,7 +14473,7 @@
         \ \"authentication (keyboard-interactive)\".\r\nThe logs also indicate which\
         \ credentials were used."
       positions: ['-71', '-110']
-  last_modified: '2021-09-20 22:40:30.830163'
+  last_modified: '2021-09-21 06:27:49.367001'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -14659,7 +14665,7 @@
         \ \"Post-iteration\" service is only a prerequisite if there are any\r\ndevices\
         \ on the failure path."
       positions: [169, 120]
-  last_modified: '2021-09-20 22:40:30.876808'
+  last_modified: '2021-09-21 06:27:49.494378'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -15065,7 +15071,7 @@
         \nFour results are expected with San Diego / Dallas as parent\r\ndevices,\
         \ and Washington / Austin as iterated device for\r\neach parent device."
       positions: [-152, 117]
-  last_modified: '2021-09-20 22:40:30.918915'
+  last_modified: '2021-09-21 06:27:49.600894'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -15221,7 +15227,7 @@
   iteration_values: '["D", "E"]'
   iteration_variable_name: iteration_value
   labels: {}
-  last_modified: '2021-09-20 22:40:30.950337'
+  last_modified: '2021-09-21 06:27:49.683195'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -15302,7 +15308,7 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels: {}
-  last_modified: '2021-09-20 22:40:30.972440'
+  last_modified: '2021-09-21 06:27:49.740888'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -15709,7 +15715,7 @@
         \ must apply to direct targets as well as\r\niteration and device targets.\r\
         \nMust be run both in DxD and SxS w/ WF targets mode."
       positions: [279, -88]
-  last_modified: '2021-09-20 22:40:31.013347'
+  last_modified: '2021-09-21 06:27:49.817403'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -16037,7 +16043,7 @@
         \nfrom all interfaces. The output is converted to a dictionary in step 4.\r\
         \nCheck that the interface description is not set in post-processing.\r\n"
       positions: [69, 216]
-  last_modified: '2021-09-20 22:40:31.056747'
+  last_modified: '2021-09-21 06:27:49.959915'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -16487,7 +16493,7 @@
       content: "Access the interface property directly from the payload :\r\n\"payload[\"\
         form\"][\"interface\"]\"\r\n"
       positions: [-82, 204]
-  last_modified: '2021-09-20 22:40:31.088466'
+  last_modified: '2021-09-21 06:27:50.065133'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -16696,7 +16702,7 @@
         \ top level key of the result dictionary.\r\n* The third service uses string\
         \ inclusion validation against\r\nan inner key of results['result'].\r\n"
       positions: [-86, -14]
-  last_modified: '2021-09-20 22:40:31.125429'
+  last_modified: '2021-09-21 06:27:50.165434'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -17030,7 +17036,7 @@
       alignment: left
       content: "Same as the first service, but\r\nwith negative logic disabled."
       positions: [33, 187]
-  last_modified: '2021-09-20 22:40:31.170135'
+  last_modified: '2021-09-21 06:27:50.308338'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -17618,7 +17624,7 @@
         \ be closed. Expected in workflow logs:\r\n\"Closed netmiko connection 'default'\"\
         ."
       positions: [374, 129]
-  last_modified: '2021-09-20 22:40:31.205095'
+  last_modified: '2021-09-21 06:27:50.407720'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -18030,7 +18036,7 @@
         \n* Reply to address set\r\n* Display only Display Failed Devices - washigton\
         \ pass so it is\r\nexcluded from the results. The others two are passing"
       positions: [410, 285]
-  last_modified: '2021-09-20 22:40:31.240398'
+  last_modified: '2021-09-21 06:27:50.497868'
   log_level: 1
   mail_recipient: antoine.fourmy@gmail.com
   mandatory_parametrization: false
@@ -18357,7 +18363,7 @@
       content: "Run command \"dir enms_files\", use negative logic to\r\nmake sure\
         \ that \"netmiko_file\" is not in the output."
       positions: [-329, 141]
-  last_modified: '2021-09-20 22:40:31.293150'
+  last_modified: '2021-09-21 06:27:50.623710'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -18971,7 +18977,7 @@
         \ evaluate to \"is_alive\"\r\nmaking the resulting URL valid.\r\n2 devices,\
         \ both PASS."
       positions: [457, 201]
-  last_modified: '2021-09-20 22:40:31.344382'
+  last_modified: '2021-09-21 06:27:50.713360'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -19337,7 +19343,7 @@
         \ log set to \"should appear only once\".\r\nCheck in log that it does appear\
         \ only once."
       positions: [459, 100]
-  last_modified: '2021-09-20 22:40:31.388448'
+  last_modified: '2021-09-21 06:27:50.828316'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -19726,7 +19732,7 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels: {}
-  last_modified: '2021-09-20 22:40:31.439806'
+  last_modified: '2021-09-21 06:27:50.957203'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -20613,7 +20619,7 @@
         \ parameterized form variables can be accessed as\r\nglobal variable in a\
         \ superworkflow."
       positions: [374, -186]
-  last_modified: '2021-09-20 22:40:31.468458'
+  last_modified: '2021-09-21 06:27:51.033455'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: true
@@ -20773,7 +20779,7 @@
         .\r\nTests that devices configured from a parameterized run works \r\nas expected\
         \ when a workflow has a superworkflow."
       positions: [165, -41]
-  last_modified: '2021-09-20 22:40:31.517564'
+  last_modified: '2021-09-21 06:27:51.173169'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -21051,7 +21057,7 @@
         This only works for specific commands, when there is an associated\r\nTextFSM\
         \ template available."
       positions: [168, -111]
-  last_modified: '2021-09-20 22:40:31.549552'
+  last_modified: '2021-09-21 06:27:51.258218'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -21547,7 +21553,7 @@
         \ with Napalm\r\n- The connection cache mechanism. Both netmiko and napalm\
         \ connections\r\nmust be closed at the end of the workflow"
       positions: [-121, -29]
-  last_modified: '2021-09-20 22:40:31.588056'
+  last_modified: '2021-09-21 06:27:51.397601'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -22054,7 +22060,7 @@
         \ match, but the negative logic\r\nis set to True, so the resulting value\
         \ is a success."
       positions: [-79, 230]
-  last_modified: '2021-09-20 22:40:31.629651'
+  last_modified: '2021-09-21 06:27:51.506459'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -22563,7 +22569,7 @@
         \ side (validate via payload) to check that\r\nan older payload / result can\
         \ be retrieved from the database."
       positions: [306, 116]
-  last_modified: '2021-09-20 22:40:31.679459'
+  last_modified: '2021-09-21 06:27:51.630857'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -23220,7 +23226,7 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels: {}
-  last_modified: '2021-09-20 22:40:31.724896'
+  last_modified: '2021-09-21 06:27:51.749855'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -23768,7 +23774,7 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels: {}
-  last_modified: '2021-09-20 22:40:31.833710'
+  last_modified: '2021-09-21 06:27:51.962005'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false

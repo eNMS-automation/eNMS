@@ -1373,3 +1373,6 @@
   source: '[Iteration Mechanism: Device Iteration] Iteration Devices from Predefined
     Variable', subtype: success, type: workflow_edge, workflow: 'Iteration Mechanism:
     Device Iteration'}
+- {color: red, destination: '[Shared] End', label: failure, name: '2021-09-21 06:31:50.623195',
+  source: '[Skip Mechanism: Skip in SxS with WF targets mode] Last service', subtype: failure,
+  type: workflow_edge, workflow: 'Skip Mechanism: Skip in SxS with WF targets mode'}

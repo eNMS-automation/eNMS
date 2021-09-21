@@ -77,11 +77,13 @@ let currentLabel;
 let triggerMenu;
 let currentPlaceholder;
 let placeholder;
+let isSuperworkflow;
 
 export function displayWorkflow(workflowData) {
   workflow = workflowData.service;
   placeholder = null;
   currentPlaceholder = workflowData.state?.[currentPath]?.placeholder;
+  isSuperworkflow = false;
   nodes = new vis.DataSet(workflow.services.map(serviceToNode));
   edges = new vis.DataSet(workflow.edges.map(edgeToEdge));
   workflow.services.map(drawIterationEdge);
@@ -496,7 +498,7 @@ function getServiceLabel(service) {
 function serviceToNode(service) {
   const isPlaceholder = service.scoped_name == "Placeholder";
   if (isPlaceholder) {
-    workflow.isSuperworkflow = true;
+    isSuperworkflow = true;
     placeholder = service;
   }
   const defaultService = ["Start", "End"].includes(service.scoped_name);
@@ -768,7 +770,7 @@ function createLabel() {
 }
 
 function runWorkflow(parametrization) {
-  if (workflow.isSuperworkflow) {
+  if (isSuperworkflow) {
     return notify("A superworkflow cannot be run directly.", "error", 5);
   }
   resetDisplay();

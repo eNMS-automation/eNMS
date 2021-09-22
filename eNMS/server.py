@@ -33,7 +33,6 @@ from eNMS import controller
 from eNMS.database import db
 from eNMS.environment import env
 from eNMS.forms import BaseForm
-from eNMS.rest_api import RestApi
 from eNMS.variables import vs
 
 
@@ -57,7 +56,6 @@ class Server(Flask):
     def __init__(self):
         static_folder = str(vs.path / "eNMS" / "static")
         super().__init__(__name__, static_folder=static_folder)
-        self.rest_api = RestApi()
         self.update_config()
         self.register_extensions()
         self.configure_login_manager()
@@ -344,23 +342,6 @@ class Server(Flask):
         @self.process_requests
         def get_requests_sink(_):
             abort(404)
-
-        @blueprint.route("/rest/<path:page>", methods=["DELETE", "GET", "POST"])
-        @self.process_requests
-        @self.csrf.exempt
-        def rest_request(page):
-            method, (endpoint, *args) = request.method, page.split("/")
-            if method == "POST":
-                kwargs = {**request.form.to_dict(), **request.files.to_dict()}
-                if isinstance(request.json, list):
-                    kwargs["list_data"] = request.json
-                else:
-                    kwargs.update(request.json or {})
-            else:
-                kwargs = request.args.to_dict()
-            with db.session_scope():
-                endpoint = self.rest_api.rest_endpoints[method][endpoint]
-                return jsonify(getattr(self.rest_api, endpoint)(*args, **kwargs))
 
         @blueprint.route("/", methods=["POST"])
         @blueprint.route("/<path:page>", methods=["POST"])

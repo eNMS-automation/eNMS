@@ -311,8 +311,6 @@ class Run(AbstractBase):
                 "device", bulk="id", rbac="target", username=self.creator
             )
         )
-        if not self.start_services:
-            self.start_services = [db.fetch("service", scoped_name="Start").id]
 
     @classmethod
     def rbac_filter(cls, query, mode, user):

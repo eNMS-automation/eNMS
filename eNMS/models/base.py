@@ -22,13 +22,7 @@ class AbstractBase(db.base):
 
     def __getattribute__(self, property):
         if property in vs.private_properties_set:
-            if env.use_vault:
-                target = self.service if self.type == "run" else self
-                path = f"secret/data/{target.type}/{target.name}/{property}"
-                data = env.vault_client.read(path)
-                value = data["data"]["data"][property] if data else ""
-            else:
-                value = super().__getattribute__(property)
+            value = super().__getattribute__(property)
             return value
         else:
             return super().__getattribute__(property)
@@ -38,13 +32,7 @@ class AbstractBase(db.base):
             if not value:
                 return
             value = env.encrypt_password(value).decode("utf-8")
-            if env.use_vault:
-                env.vault_client.write(
-                    f"secret/data/{self.type}/{self.name}/{property}",
-                    data={property: value},
-                )
-            else:
-                super().__setattr__(property, value)
+            super().__setattr__(property, value)
         else:
             super().__setattr__(property, value)
 

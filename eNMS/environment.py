@@ -47,8 +47,6 @@ class Environment:
         self.init_authentication()
         self.init_encryption()
         self.use_vault = vs.settings["vault"]["use_vault"]
-        if self.use_vault:
-            self.init_vault_client()
         if vs.settings["paths"]["custom_code"]:
             sys_path.append(vs.settings["paths"]["custom_code"])
         self.init_logs()
@@ -124,13 +122,6 @@ class Environment:
             if host
             else None
         )
-
-    def init_vault_client(self):
-        url = getenv("VAULT_ADDR", "http://127.0.0.1:8200")
-        self.vault_client = VaultClient(url=url, token=getenv("VAULT_TOKEN"))
-        if self.vault_client.sys.is_sealed() and vs.settings["vault"]["unseal_vault"]:
-            keys = [getenv(f"UNSEAL_VAULT_KEY{index}") for index in range(1, 6)]
-            self.vault_client.sys.submit_unseal_keys(filter(None, keys))
 
     def log(self, severity, content, user=None, change_log=True, logger="root"):
         logger_settings = vs.logging["loggers"].get(logger, {})

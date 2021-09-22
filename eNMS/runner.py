@@ -1104,7 +1104,7 @@ class Runner:
     def close_remaining_connections(self):
         threads = []
         for library in ("netmiko", "napalm", "scrapli", "ncclient"):
-            device_connections = vs.connections_cache[library][self.runtime]
+            device_connections = vs.connections_cache[library][self.parent_runtime]
             for device, connections in device_connections.items():
                 for connection in connections.values():
                     args = (library, device, connection)
@@ -1113,6 +1113,8 @@ class Runner:
                     threads.append(thread)
         for thread in threads:
             thread.join()
+        for library in ("netmiko", "napalm", "scrapli", "ncclient"):
+            vs.connections_cache[library].pop(self.parent_runtime)
 
     def disconnect(self, library, device, connection):
         connection_name = getattr(self, "connection_name", "default")

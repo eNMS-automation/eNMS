@@ -1015,7 +1015,7 @@ class Controller:
         result = StringIO()
         with redirect_stdout(result):
             try:
-                environment = {"env": self, "db": db, "models": vs.models}
+                environment = {"env": self, "db": db, "models": vs.models, "vs": vs}
                 exec(kwargs["code"], environment)
             except Exception:
                 return format_exc()

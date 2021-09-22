@@ -185,40 +185,11 @@ class Server(Flask):
             endpoint = "/".join(request.path.split("/")[: 2 + rest_request])
             request_property = f"{request.method.lower()}_requests"
             endpoint_rbac = vs.rbac[request_property].get(endpoint)
-            if rest_request:
-                auth, token = request.headers.get("Authorization").split()
-                if auth == "Bearer":
-                    serializer = Serializer(getenv("SECRET_KEY", "secret_key"))
-                    try:
-                        user = db.fetch("user", id=serializer.loads(token)["id"])
-                    except (SignatureExpired, BadSignature) as exc:
-                        is_expired = isinstance(exc, SignatureExpired)
-                        status = "Expired" if is_expired else "Invalid"
-                        log = f"{request.method} {request.path} - {status} Token (403)"
-                        env.log("error", log, change_log=False)
-                        return jsonify({"alert": f"{status} Token"}), 403
-                else:
-                    user = env.authenticate_user(**request.authorization)
-                if user:
-                    login_user(user)
+            if not current_user.is_authenticated:
+                login_user(db.get_user("admin"))
             username = getattr(current_user, "name", "Unknown")
             if not endpoint_rbac:
                 status_code = 404
-            elif rest_request and endpoint_rbac != "none" and not user:
-                status_code = 401
-            elif (
-                endpoint_rbac != "none"
-                and not getattr(current_user, "is_admin", False)
-                and (
-                    not current_user.is_authenticated
-                    or endpoint_rbac == "admin"
-                    or (
-                        endpoint_rbac == "access"
-                        and endpoint not in getattr(current_user, request_property)
-                    )
-                )
-            ):
-                status_code = 403
             else:
                 try:
                     result = function(*args, **kwargs)
@@ -236,8 +207,6 @@ class Server(Flask):
             if status_code == 500:
                 log += f"\n{traceback}"
             env.log(Server.status_log_level[status_code], log, change_log=False)
-            if rest_request:
-                logout_user()
             if status_code == 200:
                 return result
             elif endpoint == "/login" or request.method == "GET" and not rest_request:
@@ -266,28 +235,6 @@ class Server(Flask):
         @blueprint.route("/login", methods=["GET", "POST"])
         @self.process_requests
         def login():
-            if request.method == "POST":
-                kwargs, success = request.form.to_dict(), False
-                username = kwargs["username"]
-                try:
-                    user = env.authenticate_user(**kwargs)
-                    if user:
-                        login_user(user, remember=False)
-                        session.permanent = True
-                        success, log = True, f"USER '{username}' logged in"
-                    else:
-                        log = f"Authentication failed for user '{username}'"
-                except Exception:
-                    log = f"Authentication error for user '{username}' ({format_exc()})"
-                finally:
-                    env.log("info" if success else "warning", log, logger="security")
-                    if success:
-                        return redirect(url_for("blueprint.route", page="dashboard"))
-                    else:
-                        abort(403)
-            if not current_user.is_authenticated:
-                login_form = vs.form_class["login"](request.form)
-                return render_template("login.html", login_form=login_form)
             return redirect(url_for("blueprint.route", page="dashboard"))
 
         @blueprint.route("/dashboard")

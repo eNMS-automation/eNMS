@@ -410,16 +410,11 @@ class Database:
 
     def get_credential(self, username, name=None, device=None, credential_type="any"):
         pool_alias = aliased(vs.models["pool"])
-        query = (
-            self.session.query(vs.models["credential"])
-            .join(vs.models["pool"], vs.models["credential"].user_pools)
-            .join(vs.models["user"], vs.models["pool"].users)
-        )
+        query = self.session.query(vs.models["credential"])
         if device:
             query = query.join(pool_alias, vs.models["credential"].device_pools).join(
                 vs.models["device"], pool_alias.devices
             )
-        query = query.filter(vs.models["user"].name == username)
         if name:
             query = query.filter(vs.models["credential"].name == name)
         if device:

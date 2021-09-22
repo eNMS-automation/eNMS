@@ -57,23 +57,6 @@ class User(AbstractBase, UserMixin):
         if not kwargs.get("import_mechanism", False):
             self.update_rbac()
 
-    def update_rbac(self):
-        if self.is_admin:
-            return
-        db.session.commit()
-        user_access = (
-            db.session.query(vs.models["access"])
-            .join(vs.models["pool"], vs.models["access"].user_pools)
-            .join(vs.models["user"], vs.models["pool"].users)
-            .filter(vs.models["user"].name == self.name)
-            .all()
-        )
-        for property in vs.rbac:
-            if property == "admin_models":
-                continue
-            access_value = (getattr(access, property) for access in user_access)
-            setattr(self, property, list(set(chain.from_iterable(access_value))))
-
 
 class Access(AbstractBase):
 

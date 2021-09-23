@@ -2,7 +2,7 @@ from flask_login import current_user
 from functools import wraps
 from requests import get, post
 from requests.exceptions import ConnectionError, MissingSchema, ReadTimeout
-from sqlalchemy import Boolean, case, ForeignKey, Integer
+from sqlalchemy import Boolean, case, ForeignKey, Integer, or_
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy.orm import aliased, relationship
@@ -317,20 +317,27 @@ class Run(AbstractBase):
         query = query.join(cls.service).filter(
             vs.models["service"].default_access != "admin"
         )
-        public_services = query.join(cls.service).filter(
-            vs.models["service"].default_access == "public"
-        )
+        service_alias = aliased(vs.models["service"])
         pool_alias = aliased(vs.models["pool"])
-        return public_services.union(
-            query.join(cls.service)
-            .join(vs.models["pool"], vs.models["service"].pools)
-            .join(vs.models["access"], vs.models["pool"].access)
-            .join(pool_alias, vs.models["access"].user_pools)
-            .join(vs.models["user"], pool_alias.users)
+        subquery = (
+            db.session.query(vs.models["user"])
+            .join(pool_alias, vs.models["user"].pools)
+            .join(vs.models["access"], pool_alias.access_users)
+            .join(vs.models["pool"], vs.models["access"].access_pools)
+            .join(service_alias, vs.models["pool"].services)
+            .filter(vs.models["user"].name == user.name)
             .filter(vs.models["access"].access_type.contains(mode))
-            .filter(vs.models["user"].name == user.name),
-            query.filter(cls.creator == user.name),
+            .with_entities(service_alias.id)
+            .subquery()
         )
+        query = query.filter(
+            or_(
+                vs.models["service"].default_access == "public",
+                cls.creator == user.name,
+                vs.models["run"].service_id.in_(subquery),
+            )
+        )
+        return query
 
     def __repr__(self):
         return f"{self.runtime}: SERVICE '{self.service}'"

@@ -264,8 +264,9 @@ class FormFactory:
                 menu_choices = vs.dualize(menus)
                 setattr(cls, "menu", SelectMultipleField("Menu", choices=menu_choices))
                 page_choices = vs.dualize(pages)
-                setattr(cls, "pages", SelectMultipleField("Pages", choices=page_choices))
-
+                setattr(
+                    cls, "pages", SelectMultipleField("Pages", choices=page_choices)
+                )
 
     def generate_service_forms(self):
         for file in (vs.path / "eNMS" / "forms").glob("**/*.py"):

@@ -245,7 +245,7 @@ class Runner:
             if (
                 self.is_main_run
                 or len(self.target_devices) > 1
-                or self.run_method == "once"
+                or self.run_method in ("once", "per_service_with_service_targets")
             ):
                 results = self.create_result(results, run_result=self.is_main_run)
             if env.redis_queue and self.is_main_run:

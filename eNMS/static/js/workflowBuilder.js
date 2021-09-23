@@ -78,6 +78,7 @@ let triggerMenu;
 let currentPlaceholder;
 let placeholder;
 let isSuperworkflow;
+let runtimeDisplayFlip;
 
 export function displayWorkflow(workflowData) {
   workflow = workflowData.service;
@@ -163,8 +164,13 @@ function updateRuntimes(result) {
   currentPlaceholder = result.state?.[currentPath]?.placeholder;
   let currentRuntime = $("#current-runtime").val();
   const displayedRuntimes = result.runtimes.map((runtime) => runtime[0]);
-  if (currentRuntime != "normal" && !displayedRuntimes.includes(currentRuntime)) {
+  if (
+    runtimeDisplayFlip &&
+    !["normal", "latest"].includes(currentRuntime) &&
+    !displayedRuntimes.includes(currentRuntime)
+  ) {
     currentRuntime = "latest";
+    runtimeDisplayFlip = false;
   }
   $("#current-runtime").empty();
   $("#current-runtime").append("<option value='normal'>Normal Display</option>");
@@ -185,6 +191,7 @@ function updateRuntimes(result) {
 
 function flipRuntimeDisplay(display) {
   runtimeDisplay = display || (runtimeDisplay == "users" ? "user" : "users");
+  runtimeDisplayFlip = true;
   localStorage.setItem("runtimeDisplay", runtimeDisplay);
   $("#runtime-display-icon").attr("class", `fa fa-${runtimeDisplay}`);
   if (!display) switchToWorkflow(currentPath);

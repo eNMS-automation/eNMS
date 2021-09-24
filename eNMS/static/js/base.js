@@ -163,12 +163,11 @@ export function serializeForm(form, formDefault) {
   let result = {};
   data.forEach((property) => {
     const propertyType = formProperties[formDefault]?.[property.name]?.type;
-    if (!propertyType) return;
-    if (propertyType.includes("object")) {
+    if (propertyType && propertyType.includes("object")) {
       if (!(property.name in result)) result[property.name] = [];
       result[property.name].push(property.value);
-    } else {
-      if (property.value) result[property.name] = property.value;
+    } else if (property.value) {
+      result[property.name] = property.value;
     }
   });
   return result;

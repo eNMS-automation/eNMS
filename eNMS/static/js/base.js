@@ -574,27 +574,29 @@ export function configureForm(form, id, panelId) {
 }
 
 function showServicePanel(type, id, mode, initForm) {
-  const typeInput = $(id ? `#${type}-class-${id}` : `#${type}-class`);
+  const typeInput = $(id ? `#${type}-class-${id}` : `#${type}-class-service`);
   typeInput.val(type).prop("disabled", true);
-  $(id ? `#${type}-name-${id}` : `#${type}-name`).prop("disabled", true);
+  $(id ? `#${type}-name-${id}` : `#${type}-name-service`).prop("disabled", true);
   if (id) {
     if (mode == "duplicate" && type == "workflow") {
       $(`#copy-${id}`).val(id);
     }
   }
   $(id ? `#${type}-workflows-${id}` : `#${type}-workflows`).prop("disabled", true);
-  $(id ? `#${type}-wizard-${id}` : `#${type}-wizard`).smartWizard({
+  const wizardId = id ? `#${type}-wizard-${id}` : `#${type}-wizard-service`;
+  $(wizardId).smartWizard({
     enableAllSteps: true,
     keyNavigation: false,
     transitionEffect: "none",
     onShowStep: function () {
+      if (!editors[id]) return;
       Object.keys(editors[id]).forEach(function (field) {
         editors[id][field].refresh();
       });
     },
   });
   $(".buttonFinish,.buttonNext,.buttonPrevious").hide();
-  $(id ? `#${type}-wizard-${id}` : `#${type}-wizard`).smartWizard("fixHeight");
+  $(wizardId).smartWizard("fixHeight");
 }
 
 function showAddInstancePanel(tableId, model, relation) {

@@ -992,7 +992,10 @@ class Controller:
                 run_kwargs[property] = kwargs["form"][property]
         service = db.fetch("service", id=service)
         service.status = "Running"
-        initial_payload = kwargs.get("initial_payload", service.initial_payload)
+        initial_payload = {
+            **service.initial_payload,
+            **kwargs.get("form", {}).get("initial_payload", {}),
+        }
         restart_run = db.fetch(
             "run",
             allow_none=True,

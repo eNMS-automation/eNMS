@@ -572,17 +572,17 @@ export function configureForm(form, id, panelId) {
   }
 }
 
-function showServicePanel(type, id, mode, initForm) {
-  const typeInput = $(id ? `#${type}-class-${id}` : `#${type}-class-service`);
+function showServicePanel(type, id, mode) {
+  const typeInput = $(id ? `#${type}-class-${id}` : `#${type}-class`);
   typeInput.val(type).prop("disabled", true);
-  $(id ? `#${type}-name-${id}` : `#${type}-name-service`).prop("disabled", true);
+  $(id ? `#${type}-name-${id}` : `#${type}-name`).prop("disabled", true);
   if (id) {
     if (mode == "duplicate" && type == "workflow") {
       $(`#copy-${id}`).val(id);
     }
   }
   $(id ? `#${type}-workflows-${id}` : `#${type}-workflows`).prop("disabled", true);
-  const wizardId = id ? `#${type}-wizard-${id}` : `#${type}-wizard-service`;
+  const wizardId = id ? `#${type}-wizard-${id}` : `#${type}-wizard`;
   $(wizardId).smartWizard({
     enableAllSteps: true,
     keyNavigation: false,
@@ -631,13 +631,13 @@ function addInstancesToRelation(type, id) {
   });
 }
 
-export function showInstancePanel(type, id, mode, tableId, initForm) {
+export function showInstancePanel(type, id, mode, tableId) {
   openPanel({
     name: type,
     id: id || tableId,
     callback: function (panel) {
       const isService = type.includes("service") || type == "workflow";
-      if (isService) showServicePanel(type, id, mode, initForm);
+      if (isService) showServicePanel(type, id, mode);
       if (type == "credential") showCredentialPanel(id);
       if (id) {
         const properties = type === "pool" ? "_properties" : "";

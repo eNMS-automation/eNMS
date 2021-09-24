@@ -34,7 +34,7 @@ import {
 } from "./workflowBuilder.js";
 
 function openServicePanel(bulk) {
-  showInstancePanel($("#service-type").val(), null, bulk ? "bulk" : null, "service");
+  showInstancePanel($("#service-type").val(), null, bulk ? "bulk" : null);
 }
 
 export function displayDiff(type, instanceId) {

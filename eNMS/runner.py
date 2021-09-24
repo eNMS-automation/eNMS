@@ -868,6 +868,7 @@ class Runner:
                 "get_var": _self.get_var,
                 "log": _self.log,
                 "parent_device": _self.parent_device or device,
+                "payload": _self.payload,
                 "placeholder": _self.main_run.placeholder,
                 "send_email": env.send_email,
                 "set_var": _self.payload_helper,

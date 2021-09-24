@@ -559,7 +559,7 @@ class Controller:
 
     def get_service_state(self, path, **kwargs):
         service_id, state, run = path.split(">")[-1], None, None
-        runtime, display = kwargs.get("runtime"), kwargs["display"]
+        runtime, display = kwargs.get("runtime"), kwargs.get("display")
         service = db.fetch("service", id=service_id, allow_none=True)
         if not service:
             raise db.rbac_error

@@ -89,6 +89,9 @@ class Service(AbstractBase):
         back_populates="service",
         cascade="all, delete-orphan",
     )
+    results = relationship(
+        "Result", foreign_keys="[Result.service_id]", cascade="all, delete-orphan"
+    )
     runs = relationship(
         "Run", secondary=db.run_service_table, back_populates="services"
     )

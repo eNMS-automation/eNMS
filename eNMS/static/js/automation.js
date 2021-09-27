@@ -560,6 +560,7 @@ export const runService = function ({ id, type, parametrization }) {
       url: `parameterized_form/${id}`,
       title: "Parameterized Form",
       size: "700px auto",
+      checkRbac: false,
       callback: function () {
         call({
           url: `/get_form_properties/initial-${id}`,

@@ -281,7 +281,7 @@ export const showRuntimePanel = function (
               <button
                 class="btn btn-default pull-right"
                 onclick="eNMS.automation.downloadLogs(${service.id})"
-                data-tooltip="Update all pools"
+                data-tooltip="Download Logs"
                 type="button"
               >
                 <span

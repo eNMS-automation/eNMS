@@ -293,6 +293,12 @@ class Run(AbstractBase):
     services = relationship(
         "Service", secondary=db.run_service_table, back_populates="runs"
     )
+    target_devices = relationship(
+        "Device", secondary=db.run_device_table, back_populates="runs"
+    )
+    target_pools = relationship(
+        "Pool", secondary=db.run_pool_table, back_populates="runs"
+    )
     placeholder_id = db.Column(Integer, ForeignKey("service.id", ondelete="SET NULL"))
     placeholder = relationship("Service", foreign_keys="Run.placeholder_id")
     start_service_id = db.Column(Integer, ForeignKey("service.id", ondelete="SET NULL"))

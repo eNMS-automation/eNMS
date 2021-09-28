@@ -80,6 +80,10 @@ class Runner:
             raise AttributeError
 
     def run_parameter(self, property):
+        if self.is_main_run and (
+            self.main_run.target_devices or self.main_run.target_pools
+        ):
+            return getattr(self.main_run, property, [])
         if self.parameterized_run and property in self.payload["form"]:
             value = self.payload["form"][property]
             if property in ("target_devices", "target_pools"):

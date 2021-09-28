@@ -638,6 +638,14 @@ class Controller:
         return links
 
     def get_visualization_pools(self, view):
+        if view == "logical_view":
+            return [
+                pool.base_properties
+                for pool in db.query("pool")
+                .filter(vs.models["pool"].devices.any())
+                .filter(vs.models["pool"].links.any())
+                .all()
+            ]
         return [
             pool.base_properties
             for pool in db.fetch_all("pool")

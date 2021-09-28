@@ -30,6 +30,7 @@ class User(AbstractBase, UserMixin):
     groups = db.Column(db.LargeString)
     is_admin = db.Column(Boolean, default=False)
     email = db.Column(db.SmallString)
+    login = db.Column(db.SmallString, unique=True)
     password = db.Column(db.SmallString)
     authentication = db.Column(db.TinyString)
     menu = db.Column(db.List)
@@ -44,7 +45,7 @@ class User(AbstractBase, UserMixin):
     is_admin = db.Column(Boolean, default=False)
 
     def get_id(self):
-        return self.name
+        return self.login
 
     def update(self, **kwargs):
         if (

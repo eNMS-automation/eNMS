@@ -21,6 +21,7 @@
     /view_builder, /form/import_service, /form/napalm_configuration_service, /form/ping_service,
     /form/mattermost_notification_service, /form/ansible_playbook_service]
   menu: [Admin, Home, Scheduling, Automation, Inventory, Visualization, Plugins]
+  login: admin
   name: admin
   pages: [Network, Events, Configurations, Tasks, Servers, Services, Plugin 1, Links,
     Devices, Groups, Dashboard, Workflow Builder, Plugin 2, Pools, Sessions, Changelog,

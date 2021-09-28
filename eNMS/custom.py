@@ -17,14 +17,14 @@ class CustomApp:
             return False
         user = f"uid={name},dc=example,dc=com"
         success = Connection(env.ldap_server, user=user, password=password).bind()
-        return {"name": name, "is_admin": True} if success else False
+        return {"login": name, "is_admin": True} if success else False
 
     def tacacs_authentication(self, user, name, password):
         if not hasattr(env, "tacacs_client"):
             env.log("error", "TACACS+ authentication failed: no server configured")
             return False
         success = env.tacacs_client.authenticate(name, password).valid
-        return {"name": name, "is_admin": True} if success else False
+        return {"login": name, "is_admin": True} if success else False
 
     def parse_configuration_property(self, device, property, value=None):
         if not value:

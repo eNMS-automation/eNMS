@@ -101,8 +101,8 @@ class Server(Flask):
         login_manager.init_app(self)
 
         @login_manager.user_loader
-        def user_loader(name):
-            return db.get_user(name)
+        def user_loader(login):
+            return db.get_user(login)
 
     def configure_terminal_socket(self):
         def send_data(session, file_descriptor):

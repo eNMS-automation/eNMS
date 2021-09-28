@@ -638,16 +638,11 @@ class Controller:
         return links
 
     def get_visualization_pools(self, view):
-        query = db.query("pool")
-        if view == "logical_view":
-            query = query.filter(vs.models["pool"].devices.any()).filter(
-                vs.models["pool"].links.any()
-            )
-        else:
-            query = query.filter(
-                or_(vs.models["pool"].devices.any(), vs.models["pool"].links.any())
-            )
-        return [pool.base_properties for pool in query.all()]
+        operator = and_ if view == "logical_view" else or_
+        has_device = vs.models["pool"].devices.any()
+        has_link = vs.models["pool"].links.any()
+        pools = db.query("pool").filter(operator(has_device, has_link)).all()
+        return [pool.base_properties for pool in pools]
 
     def get_workflow_results(self, runtime):
         run = db.fetch("run", runtime=runtime)

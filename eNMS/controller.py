@@ -17,7 +17,7 @@ from re import compile, error as regex_error, search, sub
 from requests import get as http_get
 from ruamel import yaml
 from shutil import rmtree
-from sqlalchemy import and_
+from sqlalchemy import and_, or_
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import aliased
 from tarfile import open as open_tar
@@ -638,20 +638,16 @@ class Controller:
         return links
 
     def get_visualization_pools(self, view):
+        query = db.query("pool")
         if view == "logical_view":
-            return [
-                pool.base_properties
-                for pool in db.query("pool")
-                .filter(vs.models["pool"].devices.any())
-                .filter(vs.models["pool"].links.any())
-                .all()
-            ]
-        return [
-            pool.base_properties
-            for pool in db.fetch_all("pool")
-            if (view == "logical_view" and pool.devices and pool.links)
-            or (view == "geographical_view" and (pool.devices or pool.links))
-        ]
+            query = query.filter(vs.models["pool"].devices.any()).filter(
+                vs.models["pool"].links.any()
+            )
+        else:
+            query = query.filter(
+                or_(vs.models["pool"].devices.any(), vs.models["pool"].links.any())
+            )
+        return [pool.base_properties for pool in query.all()]
 
     def get_workflow_results(self, runtime):
         run = db.fetch("run", runtime=runtime)

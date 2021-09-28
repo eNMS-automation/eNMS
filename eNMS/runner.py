@@ -435,6 +435,8 @@ class Runner:
             if self.main_run.trigger == "REST":
                 results["devices"] = {}
                 for result in self.main_run.results:
+                    if not result.device:
+                        continue
                     results["devices"][result.device.name] = result.result
         else:
             results.pop("payload", None)

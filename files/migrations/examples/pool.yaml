@@ -2357,7 +2357,7 @@
   device_vendor_invert: false
   device_vendor_match: inclusion
   devices: []
-  last_modified: '2021-09-28 14:32:39.998689'
+  last_modified: '2021-09-28 14:37:33.489874'
   link_access_groups: ''
   link_access_groups_invert: false
   link_access_groups_match: inclusion
@@ -2392,7 +2392,7 @@
   link_vendor_invert: false
   link_vendor_match: inclusion
   links: []
-  manually_defined: true
+  manually_defined: false
   name: Users with UI access
   property1: CP
   service_access_groups: ''
@@ -2431,13 +2431,13 @@
   user_groups: ''
   user_groups_invert: false
   user_groups_match: inclusion
-  user_login: ^ui$
+  user_login: ^ui|ny$
   user_login_invert: false
-  user_login_match: inclusion
+  user_login_match: regex
   user_name: ''
   user_name_invert: false
-  user_name_match: regex
-  users: []
+  user_name_match: inclusion
+  users: [UI, New York]
 - access_groups: ''
   admin_only: false
   creator: admin

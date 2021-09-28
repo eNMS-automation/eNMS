@@ -315,11 +315,6 @@ class Run(AbstractBase):
         if not self.name:
             self.name = f"{self.runtime} ({self.creator})"
         self.service_name = (self.placeholder or self.service).scoped_name
-        vs.run_targets[self.runtime] = set(
-            controller.filtering(
-                "device", bulk="id", rbac="target", username=self.creator
-            )
-        )
 
     @classmethod
     def rbac_filter(cls, query, mode, user):
@@ -388,6 +383,11 @@ class Run(AbstractBase):
             return "N/A"
 
     def run(self):
+        vs.run_targets[self.runtime] = set(
+            controller.filtering(
+                "device", bulk="id", rbac="target", username=self.creator
+            )
+        )
         self.service_run = Runner(
             self,
             payload=self.payload,

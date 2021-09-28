@@ -249,7 +249,8 @@ class Runner:
             ):
                 results = self.create_result(results, run_result=self.is_main_run)
             if env.redis_queue and self.is_main_run:
-                env.redis("delete", *(env.redis("keys", f"{self.runtime}/*") or []))
+                runtime_keys = env.redis("keys", f"{self.parent_runtime}/*") or []
+                env.redis("delete", *runtime_keys)
         self.results = results
 
     def make_results_json_compliant(self, results):

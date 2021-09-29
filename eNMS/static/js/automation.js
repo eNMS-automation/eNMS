@@ -164,7 +164,16 @@ function downloadLogs(serviceId) {
 }
 
 function stopRun(runtime) {
-  console.log(runtime)
+  call({
+    url: `/stop_run/${runtime}`,
+    callback: (result) => {
+      if (!result) {
+        notify("The service is not currently running.", "error", 5);
+      } else {
+        notify("Stopping service...", "success", 5);
+      }
+    },
+  });
 }
 
 function showResult(id) {

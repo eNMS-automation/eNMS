@@ -441,7 +441,7 @@ function saveEdge(edge) {
 function stopWorkflow() {
   const stop = function () {
     call({
-      url: `/stop_service/${currentRuntime}`,
+      url: `/stop_run/${currentRuntime}`,
       callback: (result) => {
         if (!result) {
           notify("The workflow is not currently running.", "error", 5);

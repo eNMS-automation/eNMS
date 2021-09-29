@@ -1144,7 +1144,7 @@ class Controller:
             "update_time": workflow.last_modified,
         }
 
-    def stop_service(self, runtime):
+    def stop_run(self, runtime):
         run = db.fetch("run", allow_none=True, runtime=runtime)
         if run and run.status == "Running":
             if env.redis_queue:

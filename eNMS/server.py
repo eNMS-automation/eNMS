@@ -101,8 +101,8 @@ class Server(Flask):
         login_manager.init_app(self)
 
         @login_manager.user_loader
-        def user_loader(name):
-            return db.get_user(name)
+        def user_loader(login):
+            return db.get_user(login)
 
     def configure_terminal_socket(self):
         def send_data(session, file_descriptor):
@@ -375,6 +375,8 @@ class Server(Flask):
         def view_service_results(run_id, service):
             results = db.fetch_all("result", run_id=run_id, service_id=service)
             results_dict = [result.result for result in results]
+            if not results_dict:
+                return "No Results Found"
             return f"<pre>{vs.dict_to_string(results_dict)}</pre>"
 
         @blueprint.route("/download_file/<path:path>")

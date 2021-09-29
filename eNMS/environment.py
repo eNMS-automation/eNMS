@@ -56,10 +56,10 @@ class Environment:
         self.init_connection_pools()
 
     def authenticate_user(self, **kwargs):
-        name, password = kwargs["username"], kwargs["password"]
-        if not name or not password:
+        login, password = kwargs["username"], kwargs["password"]
+        if not login or not password:
             return False
-        user = db.get_user(name)
+        user = db.get_user(login)
         default_method = vs.settings["authentication"]["default"]
         user_method = getattr(user, "authentication", default_method)
         method = kwargs.get("authentication_method", user_method)
@@ -75,7 +75,7 @@ class Environment:
             return user if success else False
         else:
             authentication_function = getattr(vs.custom, f"{method}_authentication")
-            response = authentication_function(user, name, password)
+            response = authentication_function(user, login, password)
             if not response:
                 return False
             elif not user:

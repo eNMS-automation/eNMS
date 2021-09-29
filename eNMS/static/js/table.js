@@ -857,7 +857,7 @@ tables.service = class ServiceTable extends Table {
     let runtimeArg = "";
     if (row.type != "workflow") runtimeArg = ", null, 'result'";
     return `
-      <ul class="pagination pagination-lg" style="margin: 0px; width: 300px">
+      <ul class="pagination pagination-lg" style="margin: 0px; width: 310px">
         <li>
           <button type="button" class="btn btn-sm btn-info"
           onclick="eNMS.automation.showRuntimePanel('logs', ${row.instance})"
@@ -951,7 +951,7 @@ tables.run = class RunTable extends Table {
 
   buttons(row) {
     return [
-      `<ul class="pagination pagination-lg" style="margin: 0px; width: 90px">
+      `<ul class="pagination pagination-lg" style="margin: 0px; width: 120px">
         <li>
           <button type="button" class="btn btn-sm btn-info"
           onclick="eNMS.automation.showRuntimePanel('logs', ${row.service},
@@ -963,6 +963,13 @@ tables.run = class RunTable extends Table {
           onclick="eNMS.automation.showRuntimePanel('results', ${row.service},
           '${row.runtime}')" data-tooltip="Result Tree">
           <span class="glyphicon glyphicon-list-alt"></span></button>
+        </li>
+        <li>
+          <button type="button" class="btn btn-sm btn-danger"
+          onclick="eNMS.automation.stopRun('${row.runtime}')"
+          data-tooltip="Stop Run">
+            <span class="glyphicon glyphicon-stop"></span>
+          </button>
         </li>
       </ul>`,
     ];

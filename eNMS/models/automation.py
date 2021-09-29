@@ -89,6 +89,9 @@ class Service(AbstractBase):
         back_populates="service",
         cascade="all, delete-orphan",
     )
+    results = relationship(
+        "Result", foreign_keys="[Result.service_id]", cascade="all, delete-orphan"
+    )
     runs = relationship(
         "Run", secondary=db.run_service_table, back_populates="services"
     )
@@ -290,6 +293,12 @@ class Run(AbstractBase):
     services = relationship(
         "Service", secondary=db.run_service_table, back_populates="runs"
     )
+    target_devices = relationship(
+        "Device", secondary=db.run_device_table, back_populates="runs"
+    )
+    target_pools = relationship(
+        "Pool", secondary=db.run_pool_table, back_populates="runs"
+    )
     placeholder_id = db.Column(Integer, ForeignKey("service.id", ondelete="SET NULL"))
     placeholder = relationship("Service", foreign_keys="Run.placeholder_id")
     start_service_id = db.Column(Integer, ForeignKey("service.id", ondelete="SET NULL"))
@@ -306,11 +315,6 @@ class Run(AbstractBase):
         if not self.name:
             self.name = f"{self.runtime} ({self.creator})"
         self.service_name = (self.placeholder or self.service).scoped_name
-        vs.run_targets[self.runtime] = set(
-            controller.filtering(
-                "device", bulk="id", rbac="target", username=self.creator
-            )
-        )
 
     @classmethod
     def rbac_filter(cls, query, mode, user):
@@ -386,6 +390,11 @@ class Run(AbstractBase):
             return "N/A"
 
     def run(self):
+        vs.run_targets[self.runtime] = set(
+            controller.filtering(
+                "device", bulk="id", rbac="target", username=self.creator
+            )
+        )
         self.service_run = Runner(
             self,
             payload=self.payload,

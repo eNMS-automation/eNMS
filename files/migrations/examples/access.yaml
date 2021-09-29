@@ -55,7 +55,7 @@
     /rest/topology, /rest/update_all_pools, /rest/update_database_configurations_from_git,
     /result_log_deletion, /run_service, /run_service_on_targets, /save_file, /save_positions,
     /save_view_positions, /scan_cluster, /scan_playbook_folder, /search_workflow_services,
-    /skip_services, /stop_workflow, /scheduler_action, /task_action, /topology_import,
+    /skip_services, /stop_run, /scheduler_action, /task_action, /topology_import,
     /update, /update_pool, /update_all_pools, /upload_files, /view_filtering, /web_connection,
     /process_form_data]
   type: access
@@ -189,7 +189,7 @@
     /rest/topology, /rest/update_all_pools, /rest/update_database_configurations_from_git,
     /result_log_deletion, /run_service, /run_service_on_targets, /save_file, /save_positions,
     /save_view_positions, /scan_cluster, /scan_playbook_folder, /search_workflow_services,
-    /skip_services, /stop_workflow, /scheduler_action, /task_action, /topology_import,
+    /skip_services, /stop_run, /scheduler_action, /task_action, /topology_import,
     /update, /update_pool, /update_all_pools, /upload_files, /view_filtering, /web_connection,
     /process_form_data]
   type: access

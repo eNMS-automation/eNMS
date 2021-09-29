@@ -407,7 +407,6 @@ class Runner:
 
     def create_result(self, results, device=None, commit=True, run_result=False):
         self.success = results["success"]
-        results = self.make_results_json_compliant(results)
         result_kw = {
             "run_id": self.main_run.id,
             "service": self.service.id,
@@ -441,6 +440,7 @@ class Runner:
         else:
             results.pop("payload", None)
         create_failed_results = self.disable_result_creation and not self.success
+        results = self.make_results_json_compliant(results)
         if not self.disable_result_creation or create_failed_results or run_result:
             db.factory("result", result=results, commit=commit, **result_kw)
         return results

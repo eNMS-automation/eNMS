@@ -163,6 +163,10 @@ function downloadLogs(serviceId) {
   downloadFile(`logs-${serviceId}`, logs, "txt");
 }
 
+function stopRun(runtime) {
+  console.log(runtime)
+}
+
 function showResult(id) {
   openPanel({
     name: "result",
@@ -825,5 +829,6 @@ configureNamespace("automation", [
   showResult,
   showRunServicePanel,
   showRuntimePanel,
+  stopRun,
   submitInitialForm,
 ]);

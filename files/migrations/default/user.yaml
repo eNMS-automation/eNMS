@@ -35,7 +35,7 @@
     /get_git_history, /get_view_topology, /upload_files, /clear_results, /database_deletion,
     /delete_label, /get_migration_folders, /topology_export, /get_device_logs, /save_pool_instances,
     /get_service_logs, /add_edge, /duplicate_workflow, /delete_file, /save_file, /view_filtering,
-    /stop_workflow, /get_git_content, /save_positions, /delete_edge, /get_result,
+    /stop_service, /get_git_content, /save_positions, /delete_edge, /get_result,
     /get_workflow_results, /add_service_to_workflow, /clear_configurations, /migration_export,
     /get, /get_properties, /search_workflow_services, /count_models, /save_settings,
     /filtering, /edit_file, /migration_import, /get_session_log, /process_form_data,

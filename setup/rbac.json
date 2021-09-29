@@ -242,7 +242,7 @@
     "/scan_playbook_folder": "access",
     "/search_workflow_services": "access",
     "/skip_services": "access",
-    "/stop_workflow": "access",
+    "/stop_service": "access",
     "/switch_menu": "all",
     "/switch_theme": "all",
     "/scheduler_action": "access",

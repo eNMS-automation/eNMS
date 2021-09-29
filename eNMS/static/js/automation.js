@@ -34,7 +34,7 @@ import {
 } from "./workflowBuilder.js";
 
 function openServicePanel(bulk) {
-  showInstancePanel($("#service-type").val(), null, bulk ? "bulk" : null, "service");
+  showInstancePanel($("#service-type").val(), null, bulk ? "bulk" : null);
 }
 
 export function displayDiff(type, instanceId) {
@@ -163,6 +163,19 @@ function downloadLogs(serviceId) {
   downloadFile(`logs-${serviceId}`, logs, "txt");
 }
 
+function stopRun(runtime) {
+  call({
+    url: `/stop_run/${runtime}`,
+    callback: (result) => {
+      if (!result) {
+        notify("The service is not currently running.", "error", 5);
+      } else {
+        notify("Stopping service...", "success", 5);
+      }
+    },
+  });
+}
+
 function showResult(id) {
   openPanel({
     name: "result",
@@ -281,7 +294,7 @@ export const showRuntimePanel = function (
               <button
                 class="btn btn-default pull-right"
                 onclick="eNMS.automation.downloadLogs(${service.id})"
-                data-tooltip="Update all pools"
+                data-tooltip="Download Logs"
                 type="button"
               >
                 <span
@@ -560,6 +573,7 @@ export const runService = function ({ id, type, parametrization }) {
       url: `parameterized_form/${id}`,
       title: "Parameterized Form",
       size: "700px auto",
+      checkRbac: false,
       callback: function () {
         call({
           url: `/get_form_properties/initial-${id}`,
@@ -824,5 +838,6 @@ configureNamespace("automation", [
   showResult,
   showRunServicePanel,
   showRuntimePanel,
+  stopRun,
   submitInitialForm,
 ]);

@@ -50,7 +50,7 @@
     /rest/migrate, /rest/run_service, /rest/run_task, /rest/topology, /result_log_deletion,
     /run_debug_code, /run_service, /run_service_on_targets, /save_file, /save_visualization_parameters,
     /save_positions, /save_settings, /scan_cluster, /scan_playbook_folder, /search_workflow_services,
-    /skip_services, /stop_workflow, /switch_menu, /switch_theme, /scheduler_action,
+    /skip_services, /stop_run, /switch_menu, /switch_theme, /scheduler_action,
     /filtering, /task_action, /topology_import, /update, /update_pool, /update_all_pools,
     /upload_files, /view_filtering, /web_connection, /process_form_data]
   type: access

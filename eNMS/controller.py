@@ -17,7 +17,7 @@ from re import compile, error as regex_error, search, sub
 from requests import get as http_get
 from ruamel import yaml
 from shutil import rmtree
-from sqlalchemy import and_
+from sqlalchemy import and_, or_
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import aliased
 from tarfile import open as open_tar
@@ -559,7 +559,7 @@ class Controller:
 
     def get_service_state(self, path, **kwargs):
         service_id, state, run = path.split(">")[-1], None, None
-        runtime, display = kwargs.get("runtime"), kwargs["display"]
+        runtime, display = kwargs.get("runtime"), kwargs.get("display")
         service = db.fetch("service", id=service_id, allow_none=True)
         if not service:
             raise db.rbac_error
@@ -638,12 +638,11 @@ class Controller:
         return links
 
     def get_visualization_pools(self, view):
-        return [
-            pool.base_properties
-            for pool in db.fetch_all("pool")
-            if (view == "logical_view" and pool.devices and pool.links)
-            or (view == "geographical_view" and (pool.devices or pool.links))
-        ]
+        operator = and_ if view == "logical_view" else or_
+        has_device = vs.models["pool"].devices.any()
+        has_link = vs.models["pool"].links.any()
+        pools = db.query("pool").filter(operator(has_device, has_link)).all()
+        return [pool.base_properties for pool in pools]
 
     def get_workflow_results(self, runtime):
         run = db.fetch("run", runtime=runtime)
@@ -992,7 +991,10 @@ class Controller:
                 run_kwargs[property] = kwargs["form"][property]
         service = db.fetch("service", id=service)
         service.status = "Running"
-        initial_payload = kwargs.get("initial_payload", service.initial_payload)
+        initial_payload = {
+            **service.initial_payload,
+            **kwargs.get("form", {}).get("initial_payload", {}),
+        }
         restart_run = db.fetch(
             "run",
             allow_none=True,
@@ -1142,7 +1144,7 @@ class Controller:
             "update_time": workflow.last_modified,
         }
 
-    def stop_workflow(self, runtime):
+    def stop_run(self, runtime):
         run = db.fetch("run", allow_none=True, runtime=runtime)
         if run and run.status == "Running":
             if env.redis_queue:

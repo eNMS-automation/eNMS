@@ -587,7 +587,7 @@
       },
       {
         "data": "buttons",
-        "width": "290px",
+        "width": "310px",
         "orderable": false,
         "export": false
       }
@@ -848,6 +848,12 @@
       }
     ],
     "user": [
+      {
+        "data": "login",
+        "title": "Login",
+        "search": "text",
+        "width": "150px"
+      },
       {
         "data": "name",
         "title": "Username",
@@ -1112,6 +1118,6 @@
       "service_name",
       "status"
     ],
-    "user": ["name", "description", "groups", "email"]
+    "user": ["login", "name", "description", "groups", "email"]
   }
 }

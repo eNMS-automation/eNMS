@@ -170,10 +170,13 @@
   user_groups: ''
   user_groups_invert: false
   user_groups_match: inclusion
+  user_login: ''
+  user_login_invert: false
+  user_login_match: inclusion
   user_name: .*
   user_name_invert: false
   user_name_match: regex
-  users: [admin, readonly, chicago, sf, ny, nadmin, ui, demo]
+  users: [admin, Read Only, Chicago, San Francisco, New York, Not an Admin, UI, Demo]
 - access_groups: ''
   admin_only: false
   creator: ''
@@ -331,6 +334,9 @@
   user_groups: ''
   user_groups_invert: false
   user_groups_match: inclusion
+  user_login: ''
+  user_login_invert: false
+  user_login_match: inclusion
   user_name: ''
   user_name_invert: false
   user_name_match: inclusion
@@ -499,6 +505,9 @@
   user_groups: ''
   user_groups_invert: false
   user_groups_match: inclusion
+  user_login: ''
+  user_login_invert: false
+  user_login_match: inclusion
   user_name: ''
   user_name_invert: false
   user_name_match: inclusion
@@ -673,6 +682,9 @@
   user_groups: ''
   user_groups_invert: false
   user_groups_match: inclusion
+  user_login: ''
+  user_login_invert: false
+  user_login_match: inclusion
   user_name: ''
   user_name_invert: false
   user_name_match: inclusion
@@ -844,6 +856,9 @@
   user_groups: ''
   user_groups_invert: false
   user_groups_match: inclusion
+  user_login: ''
+  user_login_invert: false
+  user_login_match: inclusion
   user_name: ''
   user_name_invert: false
   user_name_match: inclusion
@@ -1014,6 +1029,9 @@
   user_groups: ''
   user_groups_invert: false
   user_groups_match: inclusion
+  user_login: ''
+  user_login_invert: false
+  user_login_match: inclusion
   user_name: ''
   user_name_invert: false
   user_name_match: inclusion
@@ -1154,8 +1172,8 @@
   service_vendor: ''
   service_vendor_invert: false
   service_vendor_match: inclusion
-  target_services: ['[Operational Data Backup (admin)] Retrieve Operational Data',
-    Scalability Test (large workflow), Parameterized Superworkflow Run]
+  target_services: [Scalability Test (large workflow), '[Operational Data Backup (admin)]
+      Retrieve Operational Data', Parameterized Superworkflow Run]
   tasks: []
   type: pool
   user_description: ''
@@ -1167,6 +1185,9 @@
   user_groups: ''
   user_groups_invert: false
   user_groups_match: inclusion
+  user_login: ''
+  user_login_invert: false
+  user_login_match: inclusion
   user_name: ''
   user_name_invert: false
   user_name_match: inclusion
@@ -1319,6 +1340,9 @@
   user_groups: ''
   user_groups_invert: false
   user_groups_match: inclusion
+  user_login: ''
+  user_login_invert: false
+  user_login_match: inclusion
   user_name: ''
   user_name_invert: false
   user_name_match: inclusion
@@ -1471,6 +1495,9 @@
   user_groups: ''
   user_groups_invert: false
   user_groups_match: inclusion
+  user_login: ''
+  user_login_invert: false
+  user_login_match: inclusion
   user_name: ''
   user_name_invert: false
   user_name_match: inclusion
@@ -1549,7 +1576,7 @@
   device_vendor_invert: false
   device_vendor_match: inclusion
   devices: []
-  last_modified: '2020-11-16 06:02:20.440720'
+  last_modified: '2021-09-28 14:32:15.959895'
   link_access_groups: ''
   link_access_groups_invert: false
   link_access_groups_match: inclusion
@@ -1623,10 +1650,13 @@
   user_groups: ''
   user_groups_invert: false
   user_groups_match: inclusion
-  user_name: nadmin
+  user_login: nadmin
+  user_login_invert: false
+  user_login_match: inclusion
+  user_name: ''
   user_name_invert: false
   user_name_match: inclusion
-  users: [nadmin]
+  users: [Not an Admin]
 - access_groups: ''
   admin_only: false
   creator: ''
@@ -1701,7 +1731,7 @@
   device_vendor_invert: false
   device_vendor_match: inclusion
   devices: []
-  last_modified: '2020-09-21 06:31:33.876612'
+  last_modified: '2021-09-28 14:32:31.713729'
   link_access_groups: ''
   link_access_groups_invert: false
   link_access_groups_match: inclusion
@@ -1775,10 +1805,13 @@
   user_groups: ''
   user_groups_invert: false
   user_groups_match: inclusion
-  user_name: ny
+  user_login: ny
+  user_login_invert: false
+  user_login_match: inclusion
+  user_name: ''
   user_name_invert: false
   user_name_match: inclusion
-  users: [ny]
+  users: [New York]
 - access_groups: ''
   admin_only: false
   creator: ''
@@ -1927,10 +1960,13 @@
   user_groups: ''
   user_groups_invert: false
   user_groups_match: inclusion
+  user_login: ''
+  user_login_invert: false
+  user_login_match: inclusion
   user_name: ''
   user_name_invert: false
   user_name_match: inclusion
-  users: [readonly, demo]
+  users: [Read Only, Demo]
 - access_groups: ''
   admin_only: false
   creator: admin
@@ -2085,6 +2121,9 @@
   user_groups: ''
   user_groups_invert: false
   user_groups_match: inclusion
+  user_login: ''
+  user_login_invert: false
+  user_login_match: inclusion
   user_name: ''
   user_name_invert: false
   user_name_match: inclusion
@@ -2237,10 +2276,13 @@
   user_groups: ''
   user_groups_invert: false
   user_groups_match: inclusion
+  user_login: ''
+  user_login_invert: false
+  user_login_match: inclusion
   user_name: .*
   user_name_invert: false
   user_name_match: regex
-  users: [admin, readonly, chicago, sf, ny, nadmin, ui, demo]
+  users: [admin, Read Only, Chicago, San Francisco, New York, Not an Admin, UI, Demo]
 - access_groups: ''
   admin_only: false
   creator: admin
@@ -2315,7 +2357,7 @@
   device_vendor_invert: false
   device_vendor_match: inclusion
   devices: []
-  last_modified: '2020-11-16 14:01:21.422896'
+  last_modified: '2021-09-28 14:37:33.489874'
   link_access_groups: ''
   link_access_groups_invert: false
   link_access_groups_match: inclusion
@@ -2350,7 +2392,7 @@
   link_vendor_invert: false
   link_vendor_match: inclusion
   links: []
-  manually_defined: true
+  manually_defined: false
   name: Users with UI access
   property1: CP
   service_access_groups: ''
@@ -2389,10 +2431,13 @@
   user_groups: ''
   user_groups_invert: false
   user_groups_match: inclusion
-  user_name: ^ui$
+  user_login: ^ui|ny$
+  user_login_invert: false
+  user_login_match: regex
+  user_name: ''
   user_name_invert: false
-  user_name_match: regex
-  users: [ui, sf, ny, chicago]
+  user_name_match: inclusion
+  users: [UI, New York]
 - access_groups: ''
   admin_only: false
   creator: admin
@@ -2541,6 +2586,9 @@
   user_groups: ''
   user_groups_invert: false
   user_groups_match: regex
+  user_login: ''
+  user_login_invert: false
+  user_login_match: inclusion
   user_name: ''
   user_name_invert: false
   user_name_match: inclusion
@@ -2693,6 +2741,9 @@
   user_groups: ''
   user_groups_invert: false
   user_groups_match: inclusion
+  user_login: ''
+  user_login_invert: false
+  user_login_match: inclusion
   user_name: ''
   user_name_invert: false
   user_name_match: inclusion
@@ -2845,6 +2896,9 @@
   user_groups: ''
   user_groups_invert: false
   user_groups_match: inclusion
+  user_login: ''
+  user_login_invert: false
+  user_login_match: inclusion
   user_name: ''
   user_name_invert: false
   user_name_match: inclusion
@@ -2997,6 +3051,9 @@
   user_groups: ''
   user_groups_invert: false
   user_groups_match: inclusion
+  user_login: ''
+  user_login_invert: false
+  user_login_match: inclusion
   user_name: admin
   user_name_invert: false
   user_name_match: equality

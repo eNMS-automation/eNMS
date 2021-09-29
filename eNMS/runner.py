@@ -80,6 +80,10 @@ class Runner:
             raise AttributeError
 
     def run_parameter(self, property):
+        if self.is_main_run and (
+            self.main_run.target_devices or self.main_run.target_pools
+        ):
+            return getattr(self.main_run, property, [])
         if self.parameterized_run and property in self.payload["form"]:
             value = self.payload["form"][property]
             if property in ("target_devices", "target_pools"):
@@ -249,7 +253,8 @@ class Runner:
             ):
                 results = self.create_result(results, run_result=self.is_main_run)
             if env.redis_queue and self.is_main_run:
-                env.redis("delete", *(env.redis("keys", f"{self.runtime}/*") or []))
+                runtime_keys = env.redis("keys", f"{self.parent_runtime}/*") or []
+                env.redis("delete", *runtime_keys)
         self.results = results
 
     def make_results_json_compliant(self, results):
@@ -402,7 +407,6 @@ class Runner:
 
     def create_result(self, results, device=None, commit=True, run_result=False):
         self.success = results["success"]
-        results = self.make_results_json_compliant(results)
         result_kw = {
             "run_id": self.main_run.id,
             "service": self.service.id,
@@ -430,10 +434,13 @@ class Runner:
             if self.main_run.trigger == "REST":
                 results["devices"] = {}
                 for result in self.main_run.results:
+                    if not result.device:
+                        continue
                     results["devices"][result.device.name] = result.result
         else:
             results.pop("payload", None)
         create_failed_results = self.disable_result_creation and not self.success
+        results = self.make_results_json_compliant(results)
         if not self.disable_result_creation or create_failed_results or run_result:
             db.factory("result", result=results, commit=commit, **result_kw)
         return results
@@ -857,22 +864,23 @@ class Runner:
             {
                 "__builtins__": {**builtins, "__import__": _self._import},
                 "delete": partial(_self.database_function, "delete"),
+                "devices": _self.target_devices,
                 "dict_to_string": vs.dict_to_string,
+                "encrypt": env.encrypt_password,
+                "factory": partial(_self.database_function, "factory"),
                 "fetch": partial(_self.database_function, "fetch"),
                 "fetch_all": partial(_self.database_function, "fetch_all"),
-                "factory": partial(_self.database_function, "factory"),
                 "get_credential": _self.get_credential,
-                "send_email": env.send_email,
-                "settings": vs.settings,
-                "devices": _self.target_devices,
-                "encrypt": env.encrypt_password,
-                "get_var": _self.get_var,
                 "get_result": _self.get_result,
+                "get_var": _self.get_var,
                 "log": _self.log,
-                "workflow": _self.workflow,
-                "set_var": _self.payload_helper,
                 "parent_device": _self.parent_device or device,
+                "payload": _self.payload,
                 "placeholder": _self.main_run.placeholder,
+                "send_email": env.send_email,
+                "set_var": _self.payload_helper,
+                "settings": vs.settings,
+                "workflow": _self.workflow,
             }
         )
         return variables
@@ -929,7 +937,10 @@ class Runner:
             if mode and not self.config_mode:
                 connection.exit_config_mode()
             elif self.config_mode and not mode:
-                connection.config_mode(config_command=self.config_mode_command)
+                kwargs = {}
+                if self.config_mode_command:
+                    kwargs["config_command"] = self.config_mode_command
+                connection.config_mode(**kwargs)
         except Exception as exc:
             self.log("error", f"Failed to honor the config mode {exc}")
         return connection
@@ -962,7 +973,10 @@ class Runner:
         if self.enable_mode:
             netmiko_connection.enable()
         if self.config_mode:
-            netmiko_connection.config_mode(config_command=self.config_mode_command)
+            kwargs = {}
+            if self.config_mode_command:
+                kwargs["config_command"] = self.config_mode_command
+            netmiko_connection.config_mode(**kwargs)
         vs.connections_cache["netmiko"][self.parent_runtime].setdefault(
             device.name, {}
         )[self.connection_name] = netmiko_connection

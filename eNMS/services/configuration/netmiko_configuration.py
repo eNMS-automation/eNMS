@@ -47,6 +47,7 @@ class NetmikoConfigurationService(ConnectionService):
             strip_prompt=run.strip_prompt,
             strip_command=run.strip_command,
             config_mode_command=run.config_mode_command,
+            cmd_verify=False,
         )
         if run.commit_configuration:
             netmiko_connection.commit()

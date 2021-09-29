@@ -230,8 +230,8 @@ export function downloadFile(name, content, type) {
   document.body.removeChild(link);
 }
 
-export function createTooltips() {
-  $("[data-tooltip]").each(function () {
+export function createTooltips(panel) {
+  $(panel || "html").find("[data-tooltip]").each(function () {
     const id = `tooltip-${$(this).attr("data-tooltip").replace(/\s/g, "")}`;
     jsPanel.tooltip.create({
       id: id,
@@ -321,6 +321,7 @@ export function openPanel({
   }
   const panel = jsPanel.create(kwargs);
   if (callback && content) callback(content);
+  createTooltips(panel);
   const position = { top: `${50 + $(window).scrollTop()}px`, position: "absolute" };
   $(panel).css({ ...position, ...css });
 }

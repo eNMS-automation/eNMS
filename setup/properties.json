@@ -849,12 +849,6 @@
     ],
     "user": [
       {
-        "data": "login",
-        "title": "Login",
-        "search": "text",
-        "width": "150px"
-      },
-      {
         "data": "name",
         "title": "Username",
         "search": "text",
@@ -1118,6 +1112,6 @@
       "service_name",
       "status"
     ],
-    "user": ["login", "name", "description", "groups", "email"]
+    "user": ["name", "description", "groups", "email"]
   }
 }

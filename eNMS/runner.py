@@ -938,7 +938,7 @@ class Runner:
                 connection.exit_config_mode()
             elif self.config_mode and not mode:
                 kwargs = {}
-                if self.config_mode_command:
+                if getattr(self, "config_mode_command", None):
                     kwargs["config_command"] = self.config_mode_command
                 connection.config_mode(**kwargs)
         except Exception as exc:
@@ -974,7 +974,7 @@ class Runner:
             netmiko_connection.enable()
         if self.config_mode:
             kwargs = {}
-            if self.config_mode_command:
+            if getattr(self, "config_mode_command", None):
                 kwargs["config_command"] = self.config_mode_command
             netmiko_connection.config_mode(**kwargs)
         vs.connections_cache["netmiko"][self.parent_runtime].setdefault(

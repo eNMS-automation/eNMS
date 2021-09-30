@@ -298,15 +298,14 @@ class Database:
                 ),
             )
 
-    def get_user(self, value, property="login"):
-        constraint = {property: value}
-        return self.session.query(vs.models["user"]).filter_by(**constraint).first()
+    def get_user(self, name):
+        return self.session.query(vs.models["user"]).filter_by(name=name).first()
 
     def query(self, model, rbac="read", username=None, property=None):
         entity = getattr(vs.models[model], property) if property else vs.models[model]
         query = self.session.query(entity)
         if rbac:
-            user = current_user or self.get_user(username or "admin", property="name")
+            user = current_user or self.get_user(username or "admin")
             if user.is_authenticated and not user.is_admin:
                 if model in vs.rbac["admin_models"]:
                     raise self.rbac_error

@@ -841,7 +841,7 @@ tables.service = class ServiceTable extends Table {
       `
       <button
         class="btn btn-primary"
-        onclick="eNMS.automation.exportServices('${this.id}')"
+        onclick="eNMS.table.showBulkServiceExportPanel('${this.id}')"
         data-tooltip="Export Services as .tgz"
         type="button"
       >
@@ -1419,6 +1419,17 @@ function showBulkDeletionPanel(tableId, model) {
   });
 }
 
+function showBulkServiceExportPanel(tableId) {
+  showConfirmationPanel({
+    id: "bulk-tgz-export",
+    title: "Bulk .tgz Export (all services in table)",
+    message: `Are you sure you want to export all services
+      in the table as .tgz (this process might take a long time ?)`,
+    confirmButton: "Export",
+    onConfirm: () => eNMS.automation.exportServices(tableId),
+  });
+}
+
 function bulkDeletion(tableId, model) {
   call({
     url: `/bulk_deletion/${model}`,
@@ -1508,4 +1519,5 @@ configureNamespace("table", [
   exportTable,
   refreshTable,
   showBulkDeletionPanel,
+  showBulkServiceExportPanel,
 ]);

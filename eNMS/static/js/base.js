@@ -658,7 +658,6 @@ export function showInstancePanel(type, id, mode, tableId) {
         });
       } else if (mode == "bulk") {
         const model = isService ? "service" : type;
-        console.log(tableId)
         const form = {
           ...serializeForm(`#search-form-${tableId}`, `${model}_filtering`),
           ...tableInstances[tableId].constraints,
@@ -672,14 +671,14 @@ export function showInstancePanel(type, id, mode, tableId) {
             $(`#${type}-scoped_name-${tableId},#${type}-name-${tableId}`).val(
               "Bulk Edit"
             );
-            panel.setHeaderTitle(
-              `Edit all ${instances.length} ${model}s in table in bulk`
-            );
+            const number = instances.length;
+            panel.setHeaderTitle(`Edit all ${number} ${model}s in table in bulk`);
             for (const property of Object.keys(formProperties[type])) {
               $(`#${type}-action-btn-${tableId}`)
                 .attr(
                   "onclick",
-                  `eNMS.table.bulkEdit('${type}', '${model}', '${tableId}')`
+                  `eNMS.table.showBulkEditPanel(
+                  '${type}', '${model}', '${tableId}', ${number})`
                 )
                 .text("Bulk Edit");
               if (["name", "scoped_name", "type"].includes(property)) {

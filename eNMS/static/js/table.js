@@ -1430,6 +1430,17 @@ function showBulkServiceExportPanel(tableId) {
   });
 }
 
+function showBulkEditPanel(formId, model, tableId, number) {
+  showConfirmationPanel({
+    id: `bulk-edit-${tableId}`,
+    title: `Bulk edit all ${number} ${model}s `,
+    message: `Are you sure to edit the ${number} ${model}s
+      in the table ?`,
+    confirmButton: "Edit",
+    onConfirm: () => bulkEdit(formId, model, tableId),
+  });
+}
+
 function bulkDeletion(tableId, model) {
   call({
     url: `/bulk_deletion/${model}`,
@@ -1458,13 +1469,13 @@ function bulkRemoval(tableId, model, instance) {
   });
 }
 
-function bulkEdit(formId, model, table) {
+function bulkEdit(formId, model, tableId) {
   call({
     url: `/bulk_edit/${model}`,
-    form: `${formId}-form-${table}`,
+    form: `${formId}-form-${tableId}`,
     callback: function (number) {
-      refreshTable(table);
-      $(`#${formId}-${table}`).remove();
+      refreshTable(tableId);
+      $(`#${formId}-${tableId}`).remove();
       notify(`${number} items modified.`, "success", 5, true);
     },
   });
@@ -1519,5 +1530,6 @@ configureNamespace("table", [
   exportTable,
   refreshTable,
   showBulkDeletionPanel,
+  showBulkEditPanel,
   showBulkServiceExportPanel,
 ]);

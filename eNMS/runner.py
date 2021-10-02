@@ -520,6 +520,8 @@ class Runner:
         return results
 
     def get_results(self, device=None, commit=True):
+        if self.stop:
+            return
         self.log("info", "STARTING", device)
         start = datetime.now().replace(microsecond=0)
         results = {"device_target": getattr(device, "name", None)}

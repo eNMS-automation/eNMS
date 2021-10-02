@@ -581,7 +581,10 @@ function showServicePanel(type, id, mode, tableId) {
   typeInput.val(type).prop("disabled", true);
   $(id ? `#${type}-name-${id}` : `#${type}-name`).prop("disabled", true);
   if (id && mode == "duplicate" && type == "workflow") $(`#copy-${id}`).val(id);
-  $(id ? `#${type}-workflows-${id}` : `#${type}-workflows${bulkPostfix}`).prop("disabled", true);
+  $(id ? `#${type}-workflows-${id}` : `#${type}-workflows${bulkPostfix}`).prop(
+    "disabled",
+    true
+  );
   const wizardId = id ? `#${type}-wizard-${id}` : `#${type}-wizard${bulkPostfix}`;
   $(wizardId).smartWizard({
     enableAllSteps: true,

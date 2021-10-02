@@ -16,7 +16,7 @@ import {
   showConfirmationPanel,
   userIsActive,
 } from "./base.js";
-import { loadServiceTypes } from "./automation.js";
+import { exportServices, loadServiceTypes } from "./automation.js";
 
 export let tables = {};
 export let tableInstances = {};
@@ -1426,7 +1426,7 @@ function showBulkServiceExportPanel(tableId) {
     message: `Are you sure you want to export all services
       in the table as .tgz (this process might take a long time ?)`,
     confirmButton: "Export",
-    onConfirm: () => eNMS.automation.exportServices(tableId),
+    onConfirm: () => exportServices(tableId),
   });
 }
 

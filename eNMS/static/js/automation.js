@@ -34,7 +34,6 @@ import {
 } from "./workflowBuilder.js";
 
 function openServicePanel(bulk, tableId) {
-  console.log(tableId)
   showInstancePanel($("#service-type").val(), null, bulk ? "bulk" : null, tableId);
 }
 
@@ -620,7 +619,7 @@ export function runLogic(result) {
   $(`#${result.service.type}-${result.service.id}`).remove();
 }
 
-function exportServices(tableId) {
+export function exportServices(tableId) {
   call({
     url: `/export_services`,
     form: `search-form-${tableId}`,
@@ -827,7 +826,6 @@ configureNamespace("automation", [
   deleteCorruptedEdges,
   displayCalendar,
   downloadLogs,
-  exportServices,
   field,
   openServicePanel,
   pauseTask,

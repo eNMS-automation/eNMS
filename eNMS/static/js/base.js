@@ -576,16 +576,16 @@ export function configureForm(form, id, panelId) {
 }
 
 function showServicePanel(type, id, mode, tableId) {
-  const bulkPostfix = mode == "bulk" ? `-${tableId}` : "";
+  const postfix = tableId ? `-${tableId}` : "";
   const typeInput = $(id ? `#${type}-class-${id}` : `#${type}-class`);
   typeInput.val(type).prop("disabled", true);
   $(id ? `#${type}-name-${id}` : `#${type}-name`).prop("disabled", true);
   if (id && mode == "duplicate" && type == "workflow") $(`#copy-${id}`).val(id);
-  $(id ? `#${type}-workflows-${id}` : `#${type}-workflows${bulkPostfix}`).prop(
+  $(id ? `#${type}-workflows-${id}` : `#${type}-workflows${postfix}`).prop(
     "disabled",
     true
   );
-  const wizardId = id ? `#${type}-wizard-${id}` : `#${type}-wizard${bulkPostfix}`;
+  const wizardId = id ? `#${type}-wizard-${id}` : `#${type}-wizard${postfix}`;
   $(wizardId).smartWizard({
     enableAllSteps: true,
     keyNavigation: false,
@@ -658,6 +658,7 @@ export function showInstancePanel(type, id, mode, tableId) {
         });
       } else if (mode == "bulk") {
         const model = isService ? "service" : type;
+        console.log(tableId)
         const form = {
           ...serializeForm(`#search-form-${tableId}`, `${model}_filtering`),
           ...tableInstances[tableId].constraints,

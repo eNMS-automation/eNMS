@@ -661,6 +661,7 @@ export function showInstancePanel(type, id, mode, tableId) {
         const form = {
           ...serializeForm(`#search-form-${tableId}`, `${model}_filtering`),
           ...tableInstances[tableId].constraints,
+          ...tableInstances[tableId].filteringConstraints,
         };
         call({
           url: `/filtering/${model}`,

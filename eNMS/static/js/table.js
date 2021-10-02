@@ -317,7 +317,7 @@ export class Table {
           '${this.id}', '${this.type}', ${this.relationString}
         )`
       : this.type == "service"
-      ? `eNMS.automation.openServicePanel()`
+      ? `eNMS.automation.openServicePanel('${this.id}')`
       : `eNMS.base.showInstancePanel('${this.type}')`;
     return `
       <button
@@ -393,7 +393,7 @@ export class Table {
   bulkEditButton() {
     const showPanelFunction =
       this.model == "service"
-        ? "automation.openServicePanel(true)"
+        ? `automation.openServicePanel(true, '${this.id}')`
         : `base.showInstancePanel('${this.model}', null, 'bulk', '${this.id}')`;
     return `
       <button

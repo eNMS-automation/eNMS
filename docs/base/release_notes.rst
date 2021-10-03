@@ -102,7 +102,7 @@ mail: Obfuscate Credentials passed into Netmiko Command Line
 - Add TextFSM support for the netmiko validation service (+ regression workflow)
 - Add stop mechanism for services in the Result table
 - Add server name parameter in Run table to specify which server a service was run from.
-Server to be configured from env variable SERVER_NAME and SERVER_IP.
+Server to be configured from env variable SERVER_NAME and SERVER_ADDR.
 
 MIGRATION:
 

@@ -5,6 +5,7 @@ from logging import error
 from napalm._SUPPORTED_DRIVERS import SUPPORTED_DRIVERS
 from ncclient.devices import supported_devices_cfg
 from netmiko.ssh_dispatcher import CLASS_MAPPER
+from os import getenv
 from pathlib import Path
 from string import punctuation
 from sys import modules
@@ -36,6 +37,8 @@ class VariableStore:
 
     def _set_setup_variables(self):
         self.path = Path.cwd()
+        self.server = getenv("SERVER_NAME", "Localhost")
+        self.server_ip = getenv("SERVER_ADDR", "0.0.0.0")
         for setup_file in (self.path / "setup").iterdir():
             with open(setup_file, "r") as file:
                 setattr(self, setup_file.stem, load(file))

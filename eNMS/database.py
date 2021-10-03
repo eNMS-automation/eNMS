@@ -92,8 +92,8 @@ class Database:
                 "server",
                 **{
                     "name": str(getnode()),
-                    "description": "Localhost",
-                    "ip_address": "0.0.0.0",
+                    "description": vs.server,
+                    "ip_address": vs.server_ip,
                     "status": "Up",
                 },
             )

@@ -91,8 +91,9 @@ class Database:
             self.factory(
                 "server",
                 **{
-                    "name": str(getnode()),
+                    "name": vs.server,
                     "description": vs.server,
+                    "mac_address": str(getnode()),
                     "ip_address": vs.server_ip,
                     "status": "Up",
                 },

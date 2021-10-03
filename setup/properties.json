@@ -916,8 +916,12 @@
       {
         "data": "description",
         "title": "Description",
-        "search": "text",
-        "orderable": false
+        "search": "text"
+      },
+      {
+        "data": "mac_address",
+        "title": "MAC address",
+        "search": "text"
       },
       {
         "data": "ip_address",

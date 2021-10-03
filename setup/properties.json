@@ -625,6 +625,13 @@
         "orderable": false
       },
       {
+        "data": "server",
+        "title": "Server",
+        "search": "text",
+        "visible": false,
+        "width": "120px"
+      },
+      {
         "data": "creator",
         "title": "User",
         "search": "text",
@@ -1085,6 +1092,7 @@
       "tags",
       "duration",
       "service_name",
+      "server",
       "creator",
       "trigger",
       "status"

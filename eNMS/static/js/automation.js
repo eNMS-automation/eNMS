@@ -310,7 +310,7 @@ export const showRuntimePanel = function (
         </div>
         `;
       } else if (panelType == "tree") {
-        const serviceProperties = {id: service.id, name: service.name}
+        const serviceProperties = { id: service.id, name: service.name };
         content = `
         <div class="modal-body">
           <div style="width: 750px; float: left;">

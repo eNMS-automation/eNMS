@@ -353,7 +353,14 @@ class Server(Flask):
                 )
             )
             full_form = f"class Form(BaseForm):\n{indented_form}\nform = Form"
-            exec(full_form, global_variables)
+            try:
+                exec(full_form, global_variables)
+            except Exception:
+                return (
+                    "<div style='margin: 8px'>The parameterized form could not be  "
+                    "loaded because of the following error:"
+                    f"<br><pre>{format_exc()}</pre></div>"
+                )
             return render_template(
                 "forms/base.html",
                 **{

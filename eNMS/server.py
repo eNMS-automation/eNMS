@@ -366,8 +366,8 @@ class Server(Flask):
                 **{
                     "form_type": f"initial-{service_id}",
                     "action": "eNMS.automation.submitInitialForm",
-                    "button_label": "Confirm",
-                    "button_class": "success",
+                    "button_label": "Run Service",
+                    "button_class": "primary",
                     "form": global_variables["form"](request.form),
                 },
             )

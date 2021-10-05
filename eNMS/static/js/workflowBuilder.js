@@ -1085,6 +1085,7 @@ function compareWorkflowResults(workflow) {
         </form>
       </div>`,
     size: "1000 600",
+    name: "result_comparison",
     type: "full_result",
     title: "Result Comparison",
     id: workflow.id,

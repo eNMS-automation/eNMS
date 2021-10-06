@@ -408,11 +408,12 @@ class Runner:
     def create_result(self, results, device=None, commit=True, run_result=False):
         self.success = results["success"]
         result_kw = {
+            "parent_runtime": self.parent_runtime,
+            "parent_service_id": self.main_run.service.id,
             "run_id": self.main_run.id,
             "service": self.service.id,
-            "parent_service_id": self.main_run.service.id,
-            "parent_runtime": self.parent_runtime,
             "tags": self.main_run.tags,
+            "user": self.main_run.creator,
         }
         if self.workflow:
             result_kw["workflow"] = self.workflow.id

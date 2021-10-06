@@ -333,6 +333,12 @@
         "search": "text"
       },
       {
+        "data": "user",
+        "title": "User",
+        "search": "text",
+        "visible": false
+      },
+      {
         "data": "parent_device_name",
         "title": "Parent Device",
         "search": "text",
@@ -681,6 +687,12 @@
         "search": "text"
       },
       {
+        "data": "user",
+        "title": "User",
+        "search": "text",
+        "visible": false
+      },
+      {
         "data": "device_name",
         "title": "Device",
         "search": "text",
@@ -732,6 +744,12 @@
         "data": "duration",
         "title": "Duration",
         "search": "text"
+      },
+      {
+        "data": "user",
+        "title": "User",
+        "search": "text",
+        "visible": false
       },
       {
         "data": "parent_device_name",

@@ -414,10 +414,11 @@ class Server(Flask):
             method, (endpoint, *args) = request.method, page.split("/")
             if method == "POST":
                 kwargs = {**request.form.to_dict(), **request.files.to_dict()}
-                if isinstance(request.json, list):
-                    kwargs["list_data"] = request.json
+                payload = request.json if request.data else {}
+                if isinstance(payload, list):
+                    kwargs["list_data"] = payload
                 else:
-                    kwargs.update(request.json or {})
+                    kwargs.update(payload or {})
             else:
                 kwargs = request.args.to_dict()
             with db.session_scope():

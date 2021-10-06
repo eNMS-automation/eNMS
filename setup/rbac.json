@@ -142,6 +142,7 @@
     "/rest/query": "access",
     "/rest/result": "access",
     "/rest/token": "access",
+    "/result_comparison_form": "access",
     "/result_form": "access",
     "/run_table": "access",
     "/server_table": "admin",

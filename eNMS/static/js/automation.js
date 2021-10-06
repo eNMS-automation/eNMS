@@ -33,8 +33,9 @@ import {
   workflow,
 } from "./workflowBuilder.js";
 
-function openServicePanel(bulk) {
-  showInstancePanel($("#service-type").val(), null, bulk ? "bulk" : null);
+function openServicePanel(tableId) {
+  const args = tableId ? [null, "bulk", tableId] : [];
+  showInstancePanel($("#service-type").val(), ...args);
 }
 
 export function displayDiff(type, instanceId) {
@@ -309,9 +310,10 @@ export const showRuntimePanel = function (
         </div>
         `;
       } else if (panelType == "tree") {
+        const serviceProperties = { id: service.id, name: service.name };
         content = `
         <div class="modal-body">
-          <div style="width: 670px; float: left;">
+          <div style="width: 750px; float: left;">
             <select
               id="runtimes-${panelId}"
               name="runtimes"
@@ -322,7 +324,7 @@ export const showRuntimePanel = function (
             <button
               class="btn btn-info pull-right"
               onclick="eNMS.automation.showRuntimePanel(
-                'results', ${JSON.stringify(service).replace(/"/g, "'")},
+                'results', ${JSON.stringify(serviceProperties).replace(/"/g, "'")},
                 '#runtimes-${panelId}', 'result', null, true)"
               data-tooltip="All Results"
               type="button"
@@ -619,7 +621,7 @@ export function runLogic(result) {
   $(`#${result.service.type}-${result.service.id}`).remove();
 }
 
-function exportServices(tableId) {
+export function exportServices(tableId) {
   call({
     url: `/export_services`,
     form: `search-form-${tableId}`,
@@ -826,7 +828,6 @@ configureNamespace("automation", [
   deleteCorruptedEdges,
   displayCalendar,
   downloadLogs,
-  exportServices,
   field,
   openServicePanel,
   pauseTask,

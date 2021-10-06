@@ -625,6 +625,13 @@
         "orderable": false
       },
       {
+        "data": "server",
+        "title": "Server",
+        "search": "text",
+        "visible": false,
+        "width": "120px"
+      },
+      {
         "data": "creator",
         "title": "User",
         "search": "text",
@@ -909,8 +916,12 @@
       {
         "data": "description",
         "title": "Description",
-        "search": "text",
-        "orderable": false
+        "search": "text"
+      },
+      {
+        "data": "mac_address",
+        "title": "MAC address",
+        "search": "text"
       },
       {
         "data": "ip_address",
@@ -1085,6 +1096,7 @@
       "tags",
       "duration",
       "service_name",
+      "server",
       "creator",
       "trigger",
       "status"

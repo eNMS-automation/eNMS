@@ -270,6 +270,7 @@ class Run(AbstractBase):
     )
     start_services = db.Column(db.List)
     creator = db.Column(db.SmallString, default="")
+    server = db.Column(db.SmallString)
     properties = db.Column(db.Dict)
     payload = db.Column(db.Dict)
     success = db.Column(Boolean, default=False)
@@ -311,6 +312,7 @@ class Run(AbstractBase):
 
     def __init__(self, **kwargs):
         self.runtime = kwargs.get("runtime") or vs.get_time()
+        self.server = vs.server
         super().__init__(**kwargs)
         if not self.name:
             self.name = f"{self.runtime} ({self.creator})"

@@ -25,6 +25,7 @@ ignored_endpoints = [
     "/workflow_tree_form",
     "/logout",
     "/rest/",
+    "/result_comparison_form",
     "/view_service_results",
 ]
 

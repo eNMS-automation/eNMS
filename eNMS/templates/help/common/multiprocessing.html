@@ -4,25 +4,23 @@
         Multiprocessing allows work for multiple devices to run concurrently.
       </p>
       <p>
-        Use the Multiprocessing checkbox to enable/disable multiprocessing for a service or workflow.
+        Use the checkbox to enable/disable multiprocessing for a service or workflow.
         The Maximum Number of Processes field controls the limit of how many devices can run concurrently.
-        Higher concurrency makes sense for operations that spend a lot of time waiting for data from devices.
-        Configure lower concurrency for compute focussed activities.  To fine tune your workflow, start with max processes at 15 and test with both higher and lower numbers.
-        Keep in mind that actual performance varies based on other activities running on the same system.
-        For a more detailed view of operational standards regarding multiprocessing and workflows, see <strong><a href="docs/advanced/developer_notes.html#run-method-relationships" target="_blank">our documentation here</a></strong>.
+        Higher concurrency makes sense for operations that spend a lot of time waiting for data from devices,
+        lower concurrency for compute focused activities.
+        Actual performance varies based on other activities running on the same system.
       </p>
       <p>
           <strong>Contexts where multiprocessing adds value</strong>
           <ul>
-            <li>Enable multiprocessing on services in a service by service workflow or subworkflow</li>
-            <li>Enable multiproessing on device by device workflows and sub-workflows</li>
+            <li>Services in a service by service workflow or subworkflow</li>
+            <li>Device by device workflows and sub-workflows</li>
           </ul>
         <strong>Contexts where multiprocessing does not add value</strong>
           <ul>
-            <li>Disable multiprocessing on service by service workflows</li>
-            <li>Disable multiprocessing on services or sub-workflows within a device by device workflow</li>
+            <li>Service by service workflows</li>
+            <li>Services or sub-workflows within a device by device workflow</li>
           </ul>
       </p>
     </div>
 </div>
-

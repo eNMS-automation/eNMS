@@ -308,7 +308,7 @@ class Database:
         if rbac:
             user = current_user or self.get_user(username or "admin")
             if user.is_authenticated and not user.is_admin:
-                if model in vs.rbac["admin_models"][rbac]:
+                if model in vs.rbac["admin_models"].get(rbac, []):
                     raise self.rbac_error
                 query = vs.models[model].rbac_filter(query, rbac, user)
         return query

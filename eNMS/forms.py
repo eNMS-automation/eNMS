@@ -763,7 +763,9 @@ class ServiceForm(BaseForm):
         )
 
     def validate_owners(self, field):
-        service = db.fetch("service", id=self.id.data)
+        if not self.id.data:
+            return
+        service = db.fetch("service", rbac=None, id=self.id.data)
         change = set(user.name for user in service.owners) != set(field.data)
         edit_allowed = current_user.is_admin or current_user in service.owners
         if change and not edit_allowed:

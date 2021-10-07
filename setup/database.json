@@ -211,6 +211,16 @@
           "foreign_key": "device"
         }
       },
+      "service_owner": {
+        "model1": {
+          "column": "service_id",
+          "foreign_key": "service"
+        },
+        "model2": {
+          "column": "user_id",
+          "foreign_key": "user"
+        }
+      },
       "service_pool": {
         "model1": {
           "column": "service_id",

@@ -112,6 +112,11 @@
                   {{ form.access_groups(id=form_type + '-access_groups',
                   class="form-control add-id required") }}
                 </div>
+                <label for="owners">Owners</label>
+                <div class="form-group">
+                  {{ form.owners(id=form_type + '-owners', class="form-control
+                  add-id") }}
+                </div>
                 {{ form.type.label() }}
                 <div class="form-group">
                   {{ form.type(id=form_type + '-class', class="form-control add-id") }}

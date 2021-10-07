@@ -59,6 +59,9 @@ class Service(AbstractBase):
     pools = relationship(
         "Pool", secondary=db.pool_service_table, back_populates="services"
     )
+    owners = relationship(
+        "User", secondary=db.service_owner_table, back_populates="services"
+    )
     update_target_pools = db.Column(Boolean, default=False)
     update_pools_after_running = db.Column(Boolean, default=False)
     send_notification = db.Column(Boolean, default=False)

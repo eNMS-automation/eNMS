@@ -28,6 +28,7 @@ class Service(AbstractBase):
     creator = db.Column(db.SmallString)
     access_groups = db.Column(db.LargeString)
     default_access = db.Column(db.SmallString)
+    lock_mode = db.Column(db.SmallString)
     shared = db.Column(Boolean, default=False)
     scoped_name = db.Column(db.SmallString, index=True)
     last_modified = db.Column(db.TinyString, info={"log_change": False})
@@ -117,7 +118,7 @@ class Service(AbstractBase):
         kwargs.pop("status", None)
         super().__init__(**kwargs)
         if not self.owners:
-            self.owners = [current_user]
+            self.owners = [current_user] if current_user else []
 
     def update(self, **kwargs):
         if self.positions and "positions" in kwargs:

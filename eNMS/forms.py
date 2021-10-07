@@ -5,7 +5,7 @@ from flask_wtf import FlaskForm
 from importlib.util import module_from_spec, spec_from_file_location
 from wtforms.fields.core import UnboundField
 from wtforms.form import FormMeta
-from wtforms.validators import InputRequired
+from wtforms.validators import InputRequired, ValidationError
 from wtforms.widgets import TextArea
 
 from eNMS.database import db
@@ -761,6 +761,13 @@ class ServiceForm(BaseForm):
             and not shared_service_error
             and not too_many_threads_error
         )
+
+    def validate_owners(self, field):
+        service = db.fetch("service", id=self.id.data)
+        change = set(user.name for user in service.owners) != set(field.data)
+        edit_allowed = current_user.is_admin or current_user in service.owners
+        if change and not edit_allowed:
+            raise ValidationError("You are not allowed to edit the owners field.")
 
 
 class SettingsForm(BaseForm):

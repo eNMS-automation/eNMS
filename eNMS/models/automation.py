@@ -2,7 +2,7 @@ from flask_login import current_user
 from functools import wraps
 from requests import get, post
 from requests.exceptions import ConnectionError, MissingSchema, ReadTimeout
-from sqlalchemy import Boolean, case, ForeignKey, Integer
+from sqlalchemy import Boolean, case, event, ForeignKey, Integer
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy.orm import aliased, relationship
@@ -99,6 +99,13 @@ class Service(AbstractBase):
     runs = relationship(
         "Run", secondary=db.run_service_table, back_populates="services"
     )
+    originals = relationship(
+        "Service",
+        secondary=db.originals_association_table,
+        primaryjoin=id == db.originals_association_table.c.original_id,
+        secondaryjoin=id == db.originals_association_table.c.child_id,
+        backref="children",
+    )
     maximum_runs = db.Column(Integer, default=1)
     multiprocessing = db.Column(Boolean, default=False)
     max_processes = db.Column(Integer, default=5)
@@ -124,8 +131,16 @@ class Service(AbstractBase):
         if self.positions and "positions" in kwargs:
             kwargs["positions"] = {**self.positions, **kwargs["positions"]}
         super().update(**kwargs)
+        self.update_originals()
         if not kwargs.get("migration_import"):
             self.set_name()
+
+    def update_originals(self):
+
+        def rec(service):
+            return {service} | set().union(*(rec(w) for w in service.workflows))
+        
+        self.originals = list(rec(self))
 
     def duplicate(self, workflow=None):
         index = 0

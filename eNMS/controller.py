@@ -193,6 +193,7 @@ class Controller:
             else:
                 workflow.services.append(service)
             services.append(service)
+            service.update_originals()
         workflow.last_modified = vs.get_time()
         db.session.commit()
         return {
@@ -300,6 +301,8 @@ class Controller:
                 workflow.services.remove(service)
                 if not service.shared:
                     db.delete("service", id=service.id)
+                else:
+                    service.update_originals()
         return workflow.last_modified
 
     def duplicate_workflow(self, workflow_id):

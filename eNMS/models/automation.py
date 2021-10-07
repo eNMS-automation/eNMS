@@ -2,7 +2,7 @@ from flask_login import current_user
 from functools import wraps
 from requests import get, post
 from requests.exceptions import ConnectionError, MissingSchema, ReadTimeout
-from sqlalchemy import Boolean, case, event, ForeignKey, Integer
+from sqlalchemy import Boolean, case, event, ForeignKey, Integer, or_
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy.orm import aliased, relationship
@@ -136,10 +136,9 @@ class Service(AbstractBase):
             self.set_name()
 
     def update_originals(self):
-
         def rec(service):
             return {service} | set().union(*(rec(w) for w in service.workflows))
-        
+
         self.originals = list(rec(self))
 
     def duplicate(self, workflow=None):
@@ -166,9 +165,9 @@ class Service(AbstractBase):
     @classmethod
     def rbac_filter(cls, query, mode, user):
         query = query.filter(cls.default_access != "admin")
-        print(mode)
+        user_alias = aliased(vs.models["user"])
         pool_alias = aliased(vs.models["pool"])
-        return query.filter(cls.default_access == "public").union(
+        query = query.filter(cls.default_access == "public").union(
             query.join(cls.pools)
             .join(vs.models["access"], vs.models["pool"].access)
             .join(pool_alias, vs.models["access"].user_pools)
@@ -177,6 +176,14 @@ class Service(AbstractBase):
             .filter(vs.models["user"].name == user.name),
             query.filter(cls.creator == user.name),
         )
+        if mode in ("edit", "run"):
+            query = query.join(user_alias, cls.owners).filter(
+                or_(
+                    ~cls.originals.any(vs.models["service"].lock_mode.contains(mode)),
+                    user_alias.name == user.name,
+                )
+            )
+        return query
 
     def set_name(self, name=None):
         if self.shared:

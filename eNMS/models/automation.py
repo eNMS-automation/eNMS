@@ -289,7 +289,7 @@ class Run(AbstractBase):
     parent_device_id = db.Column(Integer, ForeignKey("device.id"))
     parent_device = relationship("Device", foreign_keys="Run.parent_device_id")
     parameterized_run = db.Column(Boolean, default=False)
-    service_id = db.Column(Integer, ForeignKey("service.id"))
+    service_id = db.Column(Integer, ForeignKey("service.id", ondelete="cascade"))
     service = relationship("Service", foreign_keys="Run.service_id")
     service_name = db.Column(db.SmallString)
     services = relationship(

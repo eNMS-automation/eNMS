@@ -93,9 +93,6 @@ class Service(AbstractBase):
         back_populates="service",
         cascade="all, delete-orphan",
     )
-    results = relationship(
-        "Result", foreign_keys="[Result.service_id]", cascade="all, delete-orphan"
-    )
     runs = relationship(
         "Run", secondary=db.run_service_table, back_populates="services"
     )
@@ -240,7 +237,7 @@ class Result(AbstractBase):
     device_id = db.Column(Integer, ForeignKey("device.id"))
     device = relationship("Device", uselist=False, foreign_keys=device_id)
     device_name = association_proxy("device", "name")
-    service_id = db.Column(Integer, ForeignKey("service.id"))
+    service_id = db.Column(Integer, ForeignKey("service.id", ondelete="cascade"))
     service = relationship("Service", foreign_keys="Result.service_id")
     service_name = association_proxy(
         "service", "scoped_name", info={"name": "service_name"}

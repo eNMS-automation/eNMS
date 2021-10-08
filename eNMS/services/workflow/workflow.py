@@ -128,7 +128,7 @@ class Workflow(Service):
         tracking_bfs = run.run_method == "per_service_with_workflow_targets"
         while services:
             if run.stop:
-                return {"payload": run.payload, "success": False, "result": "Stopped"}
+                return {"payload": run.payload, "success": False, "result": "Aborted"}
             _, service = heappop(services)
             if number_of_runs[service.name] >= service.maximum_runs:
                 continue

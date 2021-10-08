@@ -452,7 +452,7 @@ class Runner:
         while retries and total_retries < self.max_number_of_retries:
             if self.stop:
                 self.log("error", f"ABORTING {device.name} (STOP)")
-                return {"success": False, "result": "Stopped"}
+                return {"success": False, "result": "Aborted"}
             retries -= 1
             total_retries += 1
             try:
@@ -521,11 +521,11 @@ class Runner:
         return results
 
     def get_results(self, device=None, commit=True):
-        if self.stop:
-            return
         self.log("info", "STARTING", device)
         start = datetime.now().replace(microsecond=0)
         results = {"device_target": getattr(device, "name", None)}
+        if self.stop:
+            return {"success": False, **results}
         try:
             if self.service.iteration_values:
                 targets_results = {}

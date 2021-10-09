@@ -13758,7 +13758,7 @@
   shared: false
   skip: {}
   skip_query: device.name == "PaloAlto"
-  skip_value: Discard
+  skip_value: discard
   target_devices: []
   target_pools: []
   time_between_retries: 10
@@ -14359,7 +14359,7 @@
   shared: false
   skip: {}
   skip_query: device.name == "Austin"
-  skip_value: Discard
+  skip_value: discard
   target_devices: []
   target_pools: []
   time_between_retries: 10

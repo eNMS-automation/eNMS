@@ -297,7 +297,7 @@ class Runner:
 
     def device_run(self):
         self.target_devices = self.compute_devices()
-        summary = {"failure": [], "success": []}
+        summary = {"failure": [], "success": [], "discard": []}
         if self.iteration_devices and not self.iteration_run:
             if not self.workflow:
                 result = "Device iteration not allowed outside of a workflow"

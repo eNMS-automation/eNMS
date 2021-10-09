@@ -576,14 +576,14 @@ class Controller:
             else:
                 run = db.fetch("run", allow_none=True, runtime=runtime)
             state = run.get_state() if run else None
-        run = run.get_properties(include=["id", "creator", "status"]) if run else None
+        run_properties = ["id", "creator", "runtime", "status"]
         return {
             "service": service.to_dict(include=["services", "edges", "superworkflow"]),
             "runtimes": sorted(
                 set((run.runtime, run.name) for run in runs), reverse=True
             ),
             "state": state,
-            "run": run,
+            "run": run.get_properties(include=run_properties) if run else None,
             "runtime": runtime,
         }
 

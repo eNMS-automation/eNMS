@@ -52,6 +52,7 @@ class Runner:
         self.start_services = []
         self.parent_runtime = kwargs.get("parent_runtime")
         self.runtime = vs.get_time()
+        self.has_result = False
         vs.run_instances[self.runtime] = self
         for key, value in kwargs.items():
             setattr(self, key, value)
@@ -246,11 +247,8 @@ class Runner:
                 self.main_run.task.is_active = False
             results["properties"] = self.service.get_properties(exclude=["positions"])
             results["trigger"] = self.main_run.trigger
-            if (
-                self.is_main_run
-                or len(self.target_devices) > 1
-                or self.run_method in ("once", "per_service_with_service_targets")
-            ):
+            must_have_results = not self.has_result and not self.iteration_devices
+            if self.is_main_run or len(self.target_devices) > 1 or must_have_results:
                 results = self.create_result(results, run_result=self.is_main_run)
             if env.redis_queue and self.is_main_run:
                 runtime_keys = env.redis("keys", f"{self.parent_runtime}/*") or []
@@ -443,6 +441,7 @@ class Runner:
         create_failed_results = self.disable_result_creation and not self.success
         results = self.make_results_json_compliant(results)
         if not self.disable_result_creation or create_failed_results or run_result:
+            self.has_result = True
             db.factory("result", result=results, commit=commit, **result_kw)
         return results
 

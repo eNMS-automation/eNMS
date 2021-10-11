@@ -259,7 +259,7 @@ class WorkflowEdge(AbstractBase):
     @classmethod
     def rbac_filter(cls, query, mode, user):
         originals_alias = aliased(vs.models["service"])
-        if mode in ("edit", "run"):
+        if mode == "edit":
             query = (
                 query.join(cls.workflow)
                 .join(originals_alias, vs.models["service"].originals)

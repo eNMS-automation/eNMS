@@ -1,5 +1,6 @@
 from copy import deepcopy
 from flask import request
+from sqlalchemy.sql.functions import user
 from flask_login import current_user
 from flask_wtf import FlaskForm
 from importlib.util import module_from_spec, spec_from_file_location
@@ -756,6 +757,21 @@ class ServiceForm(BaseForm):
                 "The 'shared' property is unticked, but the service belongs"
                 " to more than one workflow: this is incompatible."
             )
+        owners_error, lock_mode_error = False, False
+        if self.id.data and not current_user.is_admin:
+            service = db.fetch("service", rbac=None, id=self.id.data)
+            current_owners = set(user.name for user in service.owners)
+            print(current_user, service.owners)
+            if current_user not in service.owners:
+                owners_error = current_owners != set(self.owners.data)
+                print(service.lock_mode, self.lock_mode.data)
+                lock_mode_error = service.lock_mode != str(self.lock_mode.data)
+                print(lock_mode_error, type(service.lock_mode), type(self.lock_mode.data))
+                if owners_error:
+                    self.owners.errors.append("Change to owners field restricted.")
+                if lock_mode_error:
+                    self.lock_mode.errors.append("Change to lock field restricted.")
+        lock_mechanism_error = owners_error or lock_mode_error
         return (
             valid_form
             and not conversion_validation_mismatch
@@ -764,16 +780,8 @@ class ServiceForm(BaseForm):
             and not no_recipient_error
             and not shared_service_error
             and not too_many_threads_error
+            and not lock_mechanism_error
         )
-
-    def validate_owners(self, field):
-        if not self.id.data:
-            return
-        service = db.fetch("service", rbac=None, id=self.id.data)
-        change = set(user.name for user in service.owners) != set(field.data)
-        edit_allowed = current_user.is_admin or current_user in service.owners
-        if change and not edit_allowed:
-            raise ValidationError("You are not allowed to edit the owners field.")
 
 
 class SettingsForm(BaseForm):

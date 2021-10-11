@@ -394,7 +394,7 @@ export function createTooltip({
         done: function (_, panel) {
           panel.content.innerHTML = this.responseText;
           preprocessForm(panel);
-          configureForm(name);
+          configureForm(name, undefined, `tooltip-${name}`);
           if (callback) callback(panel);
         },
       };

@@ -162,7 +162,6 @@ class Service(AbstractBase):
     @classmethod
     def rbac_filter(cls, query, mode, user):
         query = query.filter(cls.default_access != "admin")
-        user_alias = aliased(vs.models["user"])
         pool_alias = aliased(vs.models["pool"])
         query = query.filter(cls.default_access == "public").union(
             query.join(cls.pools)
@@ -173,11 +172,17 @@ class Service(AbstractBase):
             .filter(vs.models["user"].name == user.name),
             query.filter(cls.creator == user.name),
         )
+        originals_alias = aliased(vs.models["service"])
+        owners_alias = aliased(vs.models["user"])
         if mode in ("edit", "run"):
-            query = query.join(user_alias, cls.owners).filter(
-                or_(
-                    ~cls.originals.any(vs.models["service"].lock_mode.contains(mode)),
-                    user_alias.name == user.name,
+            query = (
+                query.join(originals_alias, cls.originals)
+                .join(owners_alias, originals_alias.owners)
+                .filter(
+                    or_(
+                        owners_alias.name == user.name,
+                        ~originals_alias.lock_mode.contains(mode),
+                    )
                 )
             )
         return query

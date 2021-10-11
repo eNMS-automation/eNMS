@@ -143,15 +143,19 @@ class Runner:
 
     def compute_devices(self):
         devices = set(self.run_parameter("target_devices"))
-        for pool in self.run_parameter("target_pools"):
-            if self.update_target_pools:
-                pool.compute_pool()
-            devices |= set(pool.devices)
+        pools = self.run_parameter("target_pools")
         if self.run_parameter("device_query"):
             devices |= self.compute_devices_from_query(
                 self.run_parameter("device_query"),
                 self.run_parameter("device_query_property"),
             )
+        if self.is_main_run:
+            self.main_run.target_devices = list(devices)
+            self.main_run.target_pools = list(pools)
+        for pool in pools:
+            if self.update_target_pools:
+                pool.compute_pool()
+            devices |= set(pool.devices)
         restricted_devices = set(
             device
             for device in devices

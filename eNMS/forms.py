@@ -1,12 +1,11 @@
 from copy import deepcopy
 from flask import request
-from sqlalchemy.sql.functions import user
 from flask_login import current_user
 from flask_wtf import FlaskForm
 from importlib.util import module_from_spec, spec_from_file_location
 from wtforms.fields.core import UnboundField
 from wtforms.form import FormMeta
-from wtforms.validators import InputRequired, ValidationError
+from wtforms.validators import InputRequired
 from wtforms.widgets import TextArea
 
 from eNMS.database import db
@@ -761,12 +760,9 @@ class ServiceForm(BaseForm):
         if self.id.data and not current_user.is_admin:
             service = db.fetch("service", rbac=None, id=self.id.data)
             current_owners = set(user.name for user in service.owners)
-            print(current_user, service.owners)
             if current_user not in service.owners:
                 owners_error = current_owners != set(self.owners.data)
-                print(service.lock_mode, self.lock_mode.data)
                 lock_mode_error = service.lock_mode != str(self.lock_mode.data)
-                print(lock_mode_error, type(service.lock_mode), type(self.lock_mode.data))
                 if owners_error:
                     self.owners.errors.append("Change to owners field restricted.")
                 if lock_mode_error:

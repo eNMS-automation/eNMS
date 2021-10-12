@@ -11,7 +11,7 @@ from flask import (
     url_for,
     session,
 )
-from flask_login import current_user, LoginManager, login_user, logout_user
+from flask_login import current_user, LoginManager, login_user, logout_user, login_url
 from flask_socketio import join_room, SocketIO
 from flask_wtf.csrf import CSRFProtect
 from functools import partial, wraps
@@ -169,7 +169,14 @@ class Server(Flask):
     def configure_errors(self):
         @self.errorhandler(403)
         def authorization_required(error):
-            return render_template("error.html", error=403), 403
+            return (
+                render_template(
+                    "error.html",
+                    error=403,
+                    login_url=url_for("blueprint.route", page="login"),
+                ),
+                403,
+            )
 
         @self.errorhandler(404)
         def not_found_error(error):
@@ -246,8 +253,26 @@ class Server(Flask):
                     and not rest_request
                     and endpoint != "/login"
                 ):
-                    return redirect(url_for("blueprint.route", page="login"))
-                return render_template("error.html", error=status_code), status_code
+                    return redirect(
+                        login_url(
+                            url_for(
+                                "blueprint.route", page="login", next_url=request.url
+                            )
+                        )
+                    )
+                login_link = login_url(
+                    url_for(
+                        "blueprint.route",
+                        page="login",
+                        next_url=request.args.get("next_url")
+                    )
+                )
+                return (
+                    render_template(
+                        "error.html", error=status_code, login_url=login_link
+                    ),
+                    status_code,
+                )
             else:
                 error_message = Server.status_error_message[status_code]
                 alert = f"Error {status_code} - {error_message}"
@@ -282,7 +307,11 @@ class Server(Flask):
                 finally:
                     env.log("info" if success else "warning", log, logger="security")
                     if success:
-                        return redirect(url_for("blueprint.route", page="dashboard"))
+                        return redirect(
+                            request.args.get(
+                                "next_url", url_for("blueprint.route", page="dashboard")
+                            )
+                        )
                     else:
                         abort(403)
             if not current_user.is_authenticated:

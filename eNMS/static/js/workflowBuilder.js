@@ -446,7 +446,8 @@ function stopWorkflow() {
         if (!result) {
           notify("The workflow is not currently running.", "error", 5);
         } else {
-          notify("Workflow will stop after current service...", "success", 5);
+          const log = `Workflow ${workflow.name} will stop after current service.`;
+          notify(log, "success", 5, true);
         }
       },
     });

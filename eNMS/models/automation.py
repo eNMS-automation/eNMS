@@ -176,14 +176,11 @@ class Service(AbstractBase):
         owners_alias = aliased(vs.models["user"])
         if mode in ("edit", "run"):
             query = (
+                query.filter(~cls.originals.any(cls.lock_mode.contains(mode)))
+            ).union(
                 query.join(originals_alias, cls.originals)
                 .join(owners_alias, originals_alias.owners)
-                .filter(
-                    or_(
-                        owners_alias.name == user.name,
-                        ~originals_alias.lock_mode.contains(mode),
-                    )
-                )
+                .filter(owners_alias.name == user.name)
             )
         return query
 

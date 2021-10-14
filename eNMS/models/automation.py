@@ -231,7 +231,7 @@ class Result(AbstractBase):
     run_id = db.Column(Integer, ForeignKey("run.id", ondelete="cascade"))
     run = relationship("Run", back_populates="results", foreign_keys="Result.run_id")
     parent_runtime = db.Column(db.TinyString)
-    parent_service_id = db.Column(Integer, ForeignKey("service.id"))
+    parent_service_id = db.Column(Integer, ForeignKey("service.id", ondelete="cascade"))
     parent_service = relationship("Service", foreign_keys="Result.parent_service_id")
     parent_service_name = association_proxy(
         "service", "scoped_name", info={"name": "parent_service_name"}

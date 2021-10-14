@@ -578,7 +578,7 @@ class ServiceForm(BaseForm):
     update_target_pools = BooleanField("Update target pools before running")
     update_pools_after_running = BooleanField("Update pools after running")
     workflows = MultipleInstanceField("Workflows", model="workflow")
-    owners = MultipleInstanceField("Owners", model="user")
+    owners = MultipleInstanceField("Owners", model="user", validators=[InputRequired()])
     lock_mode = SelectMultipleStringField(
         "Lock Modes",
         choices=[("run", "Run"), ("edit", "Edit")],

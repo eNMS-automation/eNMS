@@ -672,9 +672,15 @@ class Runner:
     def get_credentials(self, device):
         result, credential_type = {}, self.main_run.service.credential_type
         credential = db.get_credential(
-            self.creator, device=device, credential_type=credential_type
+            self.creator,
+            device=device,
+            credential_type=credential_type,
+            optional=self.credentials != "device",
         )
-        self.log("info", f"Using '{credential.name}' credential for '{device.name}'")
+        if credential:
+            log = f"Using '{credential.name}' credential for '{device.name}'"
+            self.log("info", log)
+            result["secret"] = env.get_password(credential.enable_password)
         if self.credentials == "device":
             result["username"] = credential.username
             if credential.subtype == "password":
@@ -695,7 +701,6 @@ class Runner:
                     substituted_password = substituted_password[2:-1]
                 password = env.get_password(substituted_password)
             result["password"] = password
-        result["secret"] = env.get_password(credential.enable_password)
         return result
 
     def convert_result(self, result):
@@ -1041,7 +1046,7 @@ class Runner:
         if not optional_args:
             optional_args = {}
         if "secret" not in optional_args:
-            optional_args["secret"] = credentials.pop("secret")
+            optional_args["secret"] = credentials.pop("secret", None)
         driver = get_network_driver(
             device.napalm_driver if self.use_device_driver else self.driver
         )

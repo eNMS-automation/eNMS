@@ -409,7 +409,9 @@ class Database:
                     sleep(self.retry_commit_time * (index + 1))
         return instance
 
-    def get_credential(self, username, name=None, device=None, credential_type="any"):
+    def get_credential(
+        self, username, name=None, device=None, credential_type="any", optional=False
+    ):
         pool_alias = aliased(vs.models["pool"])
         query = (
             self.session.query(vs.models["credential"])
@@ -428,7 +430,7 @@ class Database:
         if credential_type != "any":
             query = query.filter(vs.models["credential"].role == credential_type)
         credentials = max(query.all(), key=attrgetter("priority"), default=None)
-        if not credentials:
+        if not credentials and not optional:
             raise Exception(f"No matching credentials found for DEVICE '{device.name}'")
         return credentials
 

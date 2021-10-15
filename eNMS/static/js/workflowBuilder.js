@@ -441,12 +441,13 @@ function saveEdge(edge) {
 function stopWorkflow() {
   const stop = function () {
     call({
-      url: `/stop_run/${currentRuntime}`,
+      url: `/stop_run/${currentRun.runtime}`,
       callback: (result) => {
         if (!result) {
           notify("The workflow is not currently running.", "error", 5);
         } else {
-          notify("Workflow will stop after current service...", "success", 5);
+          const log = `Workflow ${workflow.name} will stop after current service.`;
+          notify(log, "success", 5, true);
         }
       },
     });
@@ -1085,6 +1086,7 @@ function compareWorkflowResults(workflow) {
         </form>
       </div>`,
     size: "1000 600",
+    name: "result_comparison",
     type: "full_result",
     title: "Result Comparison",
     id: workflow.id,

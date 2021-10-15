@@ -52,6 +52,7 @@ class Runner:
         self.start_services = []
         self.parent_runtime = kwargs.get("parent_runtime")
         self.runtime = vs.get_time()
+        self.has_result = False
         vs.run_instances[self.runtime] = self
         for key, value in kwargs.items():
             setattr(self, key, value)
@@ -142,15 +143,19 @@ class Runner:
 
     def compute_devices(self):
         devices = set(self.run_parameter("target_devices"))
-        for pool in self.run_parameter("target_pools"):
-            if self.update_target_pools:
-                pool.compute_pool()
-            devices |= set(pool.devices)
+        pools = self.run_parameter("target_pools")
         if self.run_parameter("device_query"):
             devices |= self.compute_devices_from_query(
                 self.run_parameter("device_query"),
                 self.run_parameter("device_query_property"),
             )
+        if self.is_main_run:
+            self.main_run.target_devices = list(devices)
+            self.main_run.target_pools = list(pools)
+        for pool in pools:
+            if self.update_target_pools:
+                pool.compute_pool()
+            devices |= set(pool.devices)
         restricted_devices = set(
             device
             for device in devices
@@ -246,11 +251,8 @@ class Runner:
                 self.main_run.task.is_active = False
             results["properties"] = self.service.get_properties(exclude=["positions"])
             results["trigger"] = self.main_run.trigger
-            if (
-                self.is_main_run
-                or len(self.target_devices) > 1
-                or self.run_method in ("once", "per_service_with_service_targets")
-            ):
+            must_have_results = not self.has_result and not self.iteration_devices
+            if self.is_main_run or len(self.target_devices) > 1 or must_have_results:
                 results = self.create_result(results, run_result=self.is_main_run)
             if env.redis_queue and self.is_main_run:
                 runtime_keys = env.redis("keys", f"{self.parent_runtime}/*") or []
@@ -299,7 +301,7 @@ class Runner:
 
     def device_run(self):
         self.target_devices = self.compute_devices()
-        summary = {"failure": [], "success": []}
+        summary = {"failure": [], "success": [], "discard": []}
         if self.iteration_devices and not self.iteration_run:
             if not self.workflow:
                 result = "Device iteration not allowed outside of a workflow"
@@ -408,11 +410,12 @@ class Runner:
     def create_result(self, results, device=None, commit=True, run_result=False):
         self.success = results["success"]
         result_kw = {
+            "parent_runtime": self.parent_runtime,
+            "parent_service_id": self.main_run.service.id,
             "run_id": self.main_run.id,
             "service": self.service.id,
-            "parent_service_id": self.main_run.service.id,
-            "parent_runtime": self.parent_runtime,
             "tags": self.main_run.tags,
+            "user": self.main_run.creator,
         }
         if self.workflow:
             result_kw["workflow"] = self.workflow.id
@@ -442,6 +445,7 @@ class Runner:
         create_failed_results = self.disable_result_creation and not self.success
         results = self.make_results_json_compliant(results)
         if not self.disable_result_creation or create_failed_results or run_result:
+            self.has_result = True
             db.factory("result", result=results, commit=commit, **result_kw)
         return results
 
@@ -451,7 +455,7 @@ class Runner:
         while retries and total_retries < self.max_number_of_retries:
             if self.stop:
                 self.log("error", f"ABORTING {device.name} (STOP)")
-                return {"success": False, "result": "Stopped"}
+                return {"success": False, "result": "Aborted"}
             retries -= 1
             total_retries += 1
             try:
@@ -523,6 +527,8 @@ class Runner:
         self.log("info", "STARTING", device)
         start = datetime.now().replace(microsecond=0)
         results = {"device_target": getattr(device, "name", None)}
+        if self.stop:
+            return {"success": False, **results}
         try:
             if self.service.iteration_values:
                 targets_results = {}
@@ -666,9 +672,15 @@ class Runner:
     def get_credentials(self, device):
         result, credential_type = {}, self.main_run.service.credential_type
         credential = db.get_credential(
-            self.creator, device=device, credential_type=credential_type
+            self.creator,
+            device=device,
+            credential_type=credential_type,
+            optional=self.credentials != "device",
         )
-        self.log("info", f"Using '{credential.name}' credential for '{device.name}'")
+        if credential:
+            log = f"Using '{credential.name}' credential for '{device.name}'"
+            self.log("info", log)
+            result["secret"] = env.get_password(credential.enable_password)
         if self.credentials == "device":
             result["username"] = credential.username
             if credential.subtype == "password":
@@ -689,7 +701,6 @@ class Runner:
                     substituted_password = substituted_password[2:-1]
                 password = env.get_password(substituted_password)
             result["password"] = password
-        result["secret"] = env.get_password(credential.enable_password)
         return result
 
     def convert_result(self, result):
@@ -938,7 +949,7 @@ class Runner:
                 connection.exit_config_mode()
             elif self.config_mode and not mode:
                 kwargs = {}
-                if self.config_mode_command:
+                if getattr(self, "config_mode_command", None):
                     kwargs["config_command"] = self.config_mode_command
                 connection.config_mode(**kwargs)
         except Exception as exc:
@@ -974,7 +985,7 @@ class Runner:
             netmiko_connection.enable()
         if self.config_mode:
             kwargs = {}
-            if self.config_mode_command:
+            if getattr(self, "config_mode_command", None):
                 kwargs["config_command"] = self.config_mode_command
             netmiko_connection.config_mode(**kwargs)
         vs.connections_cache["netmiko"][self.parent_runtime].setdefault(
@@ -1035,7 +1046,7 @@ class Runner:
         if not optional_args:
             optional_args = {}
         if "secret" not in optional_args:
-            optional_args["secret"] = credentials.pop("secret")
+            optional_args["secret"] = credentials.pop("secret", None)
         driver = get_network_driver(
             device.napalm_driver if self.use_device_driver else self.driver
         )

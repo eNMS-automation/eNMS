@@ -383,7 +383,7 @@ class Pool(AbstractBase):
             setattr(self, f"{model}_number", len(instances))
 
     @classmethod
-    def rbac_filter(cls, query, mode, user):
+    def rbac_filter(cls, query, *_):
         return query.filter(cls.admin_only == false())
 
 

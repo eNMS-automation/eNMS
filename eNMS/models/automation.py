@@ -28,6 +28,7 @@ class Service(AbstractBase):
     creator = db.Column(db.SmallString)
     access_groups = db.Column(db.LargeString)
     default_access = db.Column(db.SmallString)
+    lock_mode = db.Column(db.SmallString)
     shared = db.Column(Boolean, default=False)
     scoped_name = db.Column(db.SmallString, index=True)
     last_modified = db.Column(db.TinyString, info={"log_change": False})
@@ -59,6 +60,9 @@ class Service(AbstractBase):
     pools = relationship(
         "Pool", secondary=db.pool_service_table, back_populates="services"
     )
+    owners = relationship(
+        "User", secondary=db.service_owner_table, back_populates="services"
+    )
     update_target_pools = db.Column(Boolean, default=False)
     update_pools_after_running = db.Column(Boolean, default=False)
     send_notification = db.Column(Boolean, default=False)
@@ -89,11 +93,15 @@ class Service(AbstractBase):
         back_populates="service",
         cascade="all, delete-orphan",
     )
-    results = relationship(
-        "Result", foreign_keys="[Result.service_id]", cascade="all, delete-orphan"
-    )
     runs = relationship(
         "Run", secondary=db.run_service_table, back_populates="services"
+    )
+    originals = relationship(
+        "Service",
+        secondary=db.originals_association_table,
+        primaryjoin=id == db.originals_association_table.c.original_id,
+        secondaryjoin=id == db.originals_association_table.c.child_id,
+        backref="children",
     )
     maximum_runs = db.Column(Integer, default=1)
     multiprocessing = db.Column(Boolean, default=False)
@@ -113,13 +121,22 @@ class Service(AbstractBase):
     def __init__(self, **kwargs):
         kwargs.pop("status", None)
         super().__init__(**kwargs)
+        if not self.owners:
+            self.owners = [current_user] if current_user else []
 
     def update(self, **kwargs):
         if self.positions and "positions" in kwargs:
             kwargs["positions"] = {**self.positions, **kwargs["positions"]}
         super().update(**kwargs)
+        self.update_originals()
         if not kwargs.get("migration_import"):
             self.set_name()
+
+    def update_originals(self):
+        def rec(service):
+            return {service} | set().union(*(rec(w) for w in service.workflows))
+
+        self.originals = list(rec(self))
 
     def duplicate(self, workflow=None):
         index = 0
@@ -146,7 +163,7 @@ class Service(AbstractBase):
     def rbac_filter(cls, query, mode, user):
         query = query.filter(cls.default_access != "admin")
         pool_alias = aliased(vs.models["pool"])
-        return query.filter(cls.default_access == "public").union(
+        query = query.filter(cls.default_access == "public").union(
             query.join(cls.pools)
             .join(vs.models["access"], vs.models["pool"].access)
             .join(pool_alias, vs.models["access"].user_pools)
@@ -155,6 +172,17 @@ class Service(AbstractBase):
             .filter(vs.models["user"].name == user.name),
             query.filter(cls.creator == user.name),
         )
+        originals_alias = aliased(vs.models["service"])
+        owners_alias = aliased(vs.models["user"])
+        if mode in ("edit", "run"):
+            query = (
+                query.filter(~cls.originals.any(cls.lock_mode.contains(mode)))
+            ).union(
+                query.join(originals_alias, cls.originals)
+                .join(owners_alias, originals_alias.owners)
+                .filter(owners_alias.name == user.name)
+            )
+        return query
 
     def set_name(self, name=None):
         if self.shared:
@@ -196,10 +224,11 @@ class Result(AbstractBase):
     runtime = db.Column(db.TinyString)
     duration = db.Column(db.TinyString)
     result = db.Column(db.Dict)
+    user = db.Column(db.SmallString)
     run_id = db.Column(Integer, ForeignKey("run.id", ondelete="cascade"))
     run = relationship("Run", back_populates="results", foreign_keys="Result.run_id")
     parent_runtime = db.Column(db.TinyString)
-    parent_service_id = db.Column(Integer, ForeignKey("service.id"))
+    parent_service_id = db.Column(Integer, ForeignKey("service.id", ondelete="cascade"))
     parent_service = relationship("Service", foreign_keys="Result.parent_service_id")
     parent_service_name = association_proxy(
         "service", "scoped_name", info={"name": "parent_service_name"}
@@ -210,7 +239,7 @@ class Result(AbstractBase):
     device_id = db.Column(Integer, ForeignKey("device.id"))
     device = relationship("Device", uselist=False, foreign_keys=device_id)
     device_name = association_proxy("device", "name")
-    service_id = db.Column(Integer, ForeignKey("service.id"))
+    service_id = db.Column(Integer, ForeignKey("service.id", ondelete="cascade"))
     service = relationship("Service", foreign_keys="Result.service_id")
     service_name = association_proxy(
         "service", "scoped_name", info={"name": "service_name"}
@@ -270,6 +299,7 @@ class Run(AbstractBase):
     )
     start_services = db.Column(db.List)
     creator = db.Column(db.SmallString, default="")
+    server = db.Column(db.SmallString)
     properties = db.Column(db.Dict)
     payload = db.Column(db.Dict)
     success = db.Column(Boolean, default=False)
@@ -287,7 +317,7 @@ class Run(AbstractBase):
     parent_device_id = db.Column(Integer, ForeignKey("device.id"))
     parent_device = relationship("Device", foreign_keys="Run.parent_device_id")
     parameterized_run = db.Column(Boolean, default=False)
-    service_id = db.Column(Integer, ForeignKey("service.id"))
+    service_id = db.Column(Integer, ForeignKey("service.id", ondelete="cascade"))
     service = relationship("Service", foreign_keys="Run.service_id")
     service_name = db.Column(db.SmallString)
     services = relationship(
@@ -311,9 +341,13 @@ class Run(AbstractBase):
 
     def __init__(self, **kwargs):
         self.runtime = kwargs.get("runtime") or vs.get_time()
+        self.server = vs.server
         super().__init__(**kwargs)
         if not self.name:
             self.name = f"{self.runtime} ({self.creator})"
+        if self.restart_run:
+            self.target_devices = self.restart_run.target_devices
+            self.target_pools = self.restart_run.target_pools
         self.service_name = (self.placeholder or self.service).scoped_name
 
     @classmethod

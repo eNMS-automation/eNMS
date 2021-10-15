@@ -15,6 +15,7 @@ class Server(AbstractBase):
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.SmallString, unique=True)
     description = db.Column(db.LargeString)
+    mac_address = db.Column(db.TinyString)
     ip_address = db.Column(db.TinyString)
     weight = db.Column(Integer, default=1)
     status = db.Column(db.TinyString, default="down")
@@ -30,7 +31,6 @@ class User(AbstractBase, UserMixin):
     groups = db.Column(db.LargeString)
     is_admin = db.Column(Boolean, default=False)
     email = db.Column(db.SmallString)
-    login = db.Column(db.SmallString, unique=True)
     password = db.Column(db.SmallString)
     authentication = db.Column(db.TinyString)
     menu = db.Column(db.List)
@@ -42,10 +42,13 @@ class User(AbstractBase, UserMixin):
     small_menu = db.Column(Boolean, default=False, info={"log_change": False})
     theme = db.Column(db.TinyString, default="default", info={"log_change": False})
     pools = relationship("Pool", secondary=db.pool_user_table, back_populates="users")
+    services = relationship(
+        "Service", secondary=db.service_owner_table, back_populates="owners"
+    )
     is_admin = db.Column(Boolean, default=False)
 
     def get_id(self):
-        return self.login
+        return self.name
 
     def update(self, **kwargs):
         if (

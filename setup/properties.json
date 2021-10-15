@@ -333,6 +333,12 @@
         "search": "text"
       },
       {
+        "data": "user",
+        "title": "User",
+        "search": "text",
+        "visible": false
+      },
+      {
         "data": "parent_device_name",
         "title": "Parent Device",
         "search": "text",
@@ -625,6 +631,13 @@
         "orderable": false
       },
       {
+        "data": "server",
+        "title": "Server",
+        "search": "text",
+        "visible": false,
+        "width": "120px"
+      },
+      {
         "data": "creator",
         "title": "User",
         "search": "text",
@@ -672,6 +685,12 @@
         "data": "duration",
         "title": "Duration",
         "search": "text"
+      },
+      {
+        "data": "user",
+        "title": "User",
+        "search": "text",
+        "visible": false
       },
       {
         "data": "device_name",
@@ -725,6 +744,12 @@
         "data": "duration",
         "title": "Duration",
         "search": "text"
+      },
+      {
+        "data": "user",
+        "title": "User",
+        "search": "text",
+        "visible": false
       },
       {
         "data": "parent_device_name",
@@ -849,12 +874,6 @@
     ],
     "user": [
       {
-        "data": "login",
-        "title": "Login",
-        "search": "text",
-        "width": "150px"
-      },
-      {
         "data": "name",
         "title": "Username",
         "search": "text",
@@ -915,8 +934,12 @@
       {
         "data": "description",
         "title": "Description",
-        "search": "text",
-        "orderable": false
+        "search": "text"
+      },
+      {
+        "data": "mac_address",
+        "title": "MAC address",
+        "search": "text"
       },
       {
         "data": "ip_address",
@@ -1091,6 +1114,7 @@
       "tags",
       "duration",
       "service_name",
+      "server",
       "creator",
       "trigger",
       "status"
@@ -1118,6 +1142,6 @@
       "service_name",
       "status"
     ],
-    "user": ["login", "name", "description", "groups", "email"]
+    "user": ["name", "description", "groups", "email"]
   }
 }

@@ -186,6 +186,8 @@ class MultipleInstanceField(FieldMixin, WtformsSelectMultipleField):
             for name in self.data
             if not db.fetch(self.model, name=name, allow_none=True)
         ]
+        if len(set(self.data)) != len(self.data):
+            raise ValidationError(f"Duplicated {self.model}s selected.")
         if not_found:
             error = f"Couldn't find the following {self.model}s: {', '.join(not_found)}"
             raise ValidationError(error)

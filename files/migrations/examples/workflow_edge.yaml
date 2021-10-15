@@ -15,14 +15,14 @@
   source: '[Miscellaneous: Netmiko Services, Connection Cache, Targets Definition]
     netmiko_check_vrf_test', subtype: success, type: workflow_edge, workflow: 'Miscellaneous:
     Netmiko Services, Connection Cache, Targets Definition'}
-- {color: green, destination: '[Shared] Netmiko: Check VRF (test) does not exist',
+- {color: green, destination: '[Shared] Netmiko: Check VRF (Telecom1) does not exist',
   label: success, name: '[Regression Workflow: VRF Creation and Deletion with Netmiko]
     2021-04-24 08:58:40.195400', source: '[Miscellaneous: Netmiko Services, Connection
     Cache, Targets Definition] netmiko_delete_vrf_test', subtype: success, type: workflow_edge,
   workflow: 'Miscellaneous: Netmiko Services, Connection Cache, Targets Definition'}
 - {color: green, destination: '[Shared] End', label: success, name: '[Regression Workflow:
     VRF Creation and Deletion with Netmiko] 2021-04-24 08:58:40.195424', source: '[Shared]
-    Netmiko: Check VRF (test) does not exist', subtype: success, type: workflow_edge,
+    Netmiko: Check VRF (Telecom1) does not exist', subtype: success, type: workflow_edge,
   workflow: 'Miscellaneous: Netmiko Services, Connection Cache, Targets Definition'}
 - {color: green, destination: '[Service Priorities, Napalm Getters, Postprocessing]
     get_interfaces_ip', label: success, name: '[Regression Workflow: Service Priorities,
@@ -59,15 +59,16 @@
     Priorities, Napalm Getters, Postprocessing'}
 - {color: red, destination: '[Shared] REST API: call *is_alive* endpoint', label: failure,
   name: '[Regression Workflow: Separate Failure - Success Paths] 2021-04-24 08:58:40.195644',
-  source: '[Shared] Netmiko: Check VRF (test) does not exist', subtype: failure, type: workflow_edge,
-  workflow: 'Miscellaneous: Fork based on Result with Success & Failure Edges'}
-- {color: green, destination: '[Shared] Netmiko: Check VRF (test) does not exist',
+  source: '[Shared] Netmiko: Check VRF (Telecom1) does not exist', subtype: failure,
+  type: workflow_edge, workflow: 'Miscellaneous: Fork based on Result with Success
+    & Failure Edges'}
+- {color: green, destination: '[Shared] Netmiko: Check VRF (Telecom1) does not exist',
   label: success, name: '[Regression Workflow: Separate Failure - Success Paths] 2021-04-24
     08:58:40.195658', source: '[Shared] Start', subtype: success, type: workflow_edge,
   workflow: 'Miscellaneous: Fork based on Result with Success & Failure Edges'}
 - {color: green, destination: '[Shared] NAPALM: Get Facts', label: success, name: '[Regression
     Workflow: Separate Failure - Success Paths] 2021-04-24 08:58:40.195673', source: '[Shared]
-    Netmiko: Check VRF (test) does not exist', subtype: success, type: workflow_edge,
+    Netmiko: Check VRF (Telecom1) does not exist', subtype: success, type: workflow_edge,
   workflow: 'Miscellaneous: Fork based on Result with Success & Failure Edges'}
 - {color: red, destination: '[Netmiko Prompts] Test netmiko prompts pass', label: failure,
   name: '[Regression Workflow: Netmiko Prompts] 2021-04-24 08:58:40.195689', source: '[Netmiko

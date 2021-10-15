@@ -193,6 +193,7 @@ class Controller:
             else:
                 workflow.services.append(service)
             services.append(service)
+            service.update_originals()
         workflow.last_modified = vs.get_time()
         db.session.commit()
         return {
@@ -300,6 +301,8 @@ class Controller:
                 workflow.services.remove(service)
                 if not service.shared:
                     db.delete("service", id=service.id)
+                else:
+                    service.update_originals()
         return workflow.last_modified
 
     def duplicate_workflow(self, workflow_id):
@@ -573,13 +576,14 @@ class Controller:
             else:
                 run = db.fetch("run", allow_none=True, runtime=runtime)
             state = run.get_state() if run else None
+        run_properties = ["id", "creator", "runtime", "status"]
         return {
             "service": service.to_dict(include=["services", "edges", "superworkflow"]),
             "runtimes": sorted(
                 set((run.runtime, run.name) for run in runs), reverse=True
             ),
             "state": state,
-            "run": getattr(run, "serialized", None),
+            "run": run.get_properties(include=run_properties) if run else None,
             "runtime": runtime,
         }
 
@@ -661,7 +665,12 @@ class Controller:
             progress = state.get(path, {}).get("progress")
             track_progress = progress and progress["device"]["total"]
             data = {"progress": progress["device"]} if track_progress else {}
-            color = "32CD32" if all(result.success for result in results) else "FF6666"
+            success_or_skipped_only = all(
+                result.success
+                for result in results
+                if result.result.get("result") != "skipped"
+            )
+            color = "32CD32" if success_or_skipped_only else "FF6666"
             result = {
                 "runtime": min(result.runtime for result in results),
                 "data": {"properties": service.base_properties, **data},

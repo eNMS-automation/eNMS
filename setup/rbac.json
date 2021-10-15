@@ -142,6 +142,7 @@
     "/rest/query": "access",
     "/rest/result": "access",
     "/rest/token": "access",
+    "/result_comparison_form": "access",
     "/result_form": "access",
     "/run_table": "access",
     "/server_table": "admin",
@@ -255,5 +256,8 @@
     "/view_filtering": "access",
     "/web_connection": "access"
   },
-  "admin_models": ["access", "credential", "server", "user"]
+  "admin_models": {
+    "read": ["access", "credential", "server"],
+    "edit": ["access", "credential", "server", "user"]
+  }
 }

@@ -1062,6 +1062,9 @@
       }
     ]
   },
+  "tables_additional": {
+    "pool": ["device_number", "link_number", "service_number", "user_number"]
+  },
   "filtering": {
     "access": ["name", "description"],
     "changelog": ["time", "user", "severity", "content"],

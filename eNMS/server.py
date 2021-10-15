@@ -174,14 +174,8 @@ class Server(Flask):
     def configure_errors(self):
         @self.errorhandler(403)
         def authorization_required(error):
-            return (
-                render_template(
-                    "error.html",
-                    error=403,
-                    login_url=url_for("blueprint.route", page="login"),
-                ),
-                403,
-            )
+            login_url = url_for("blueprint.route", page="login")
+            return render_template("error.html", error=403, login_url=login_url), 403
 
         @self.errorhandler(404)
         def not_found_error(error):
@@ -258,25 +252,11 @@ class Server(Flask):
                     and not rest_request
                     and endpoint != "/login"
                 ):
-                    return redirect(
-                        login_url(
-                            url_for(
-                                "blueprint.route", page="login", next_url=request.url
-                            )
-                        )
-                    )
+                    url = url_for("blueprint.route", page="login", next_url=request.url)
+                    return redirect(login_url(url))
+                next_url = request.args.get("next_url")
                 login_link = login_url(
-                    url_for(
-                        "blueprint.route",
-                        page="login",
-<<<<<<< HEAD
-                        next_url=request.args.get("next_url", None)
-                        if "/login" in request.url
-                        else request.url,
-=======
-                        next_url=request.args.get("next_url")
->>>>>>> 80e80b36ed944c74d2d4ef9c2a7f3337ee38e94b
-                    )
+                    url_for("blueprint.route", page="login", next_url=next_url)
                 )
                 return (
                     render_template(
@@ -318,11 +298,8 @@ class Server(Flask):
                 finally:
                     env.log("info" if success else "warning", log, logger="security")
                     if success:
-                        return redirect(
-                            request.args.get(
-                                "next_url", url_for("blueprint.route", page="dashboard")
-                            )
-                        )
+                        url = url_for("blueprint.route", page="dashboard")
+                        return redirect(request.args.get("next_url", url))
                     else:
                         abort(403)
             if not current_user.is_authenticated:

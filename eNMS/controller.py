@@ -127,7 +127,7 @@ class Controller:
         return len(instances)
 
     def calendar_init(self, type):
-        results = {}
+        results, properties = {}, ["id", "name", "runtime", "service_properties"]
         for instance in db.fetch_all(type):
             if getattr(instance, "workflow", None):
                 continue
@@ -144,7 +144,8 @@ class Controller:
                     date,
                 ).split(",")
             ]
-            results[instance.name] = {"start": start, **instance.serialized}
+            instance_properties = instance.get_properties(include=properties)
+            results[instance.name] = {"start": start, **instance_properties}
         return results
 
     def clear_results(self, service_id):

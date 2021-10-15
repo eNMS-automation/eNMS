@@ -678,14 +678,13 @@ function displayCalendar(calendarType) {
         callback: function (tasks) {
           let events = [];
           for (const [name, properties] of Object.entries(tasks)) {
-            if (properties.service === undefined) continue;
             events.push({
               title: name,
               id: properties.id,
               description: properties.description,
               start: new Date(...properties.start),
               runtime: properties.runtime,
-              service: properties.service,
+              service: properties.service_properties,
             });
           }
           $("#calendar").fullCalendar({

@@ -269,9 +269,13 @@ class Server(Flask):
                     url_for(
                         "blueprint.route",
                         page="login",
+<<<<<<< HEAD
                         next_url=request.args.get("next_url", None)
                         if "/login" in request.url
                         else request.url,
+=======
+                        next_url=request.args.get("next_url")
+>>>>>>> 80e80b36ed944c74d2d4ef9c2a7f3337ee38e94b
                     )
                 )
                 return (

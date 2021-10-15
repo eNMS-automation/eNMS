@@ -126,7 +126,7 @@ class AbstractBase(db.base):
     def table_properties(self, **kwargs):
         displayed = [column["data"] for column in kwargs["columns"]]
         table_type = getattr(self, "class_type", self.type)
-        base = ["id", "type"]
+        base = ["type"] if kwargs.get("rest_api_request") else ["id", "type"]
         additional = vs.properties["tables_additional"].get(table_type, [])
         return self.get_properties(include=base + displayed + additional)
 

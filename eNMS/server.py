@@ -106,8 +106,8 @@ class Server(Flask):
         login_manager.init_app(self)
 
         @login_manager.user_loader
-        def user_loader(login):
-            return db.get_user(login)
+        def user_loader(name):
+            return db.get_user(name)
 
     def configure_terminal_socket(self):
         def send_data(session, file_descriptor):
@@ -389,14 +389,21 @@ class Server(Flask):
                 )
             )
             full_form = f"class Form(BaseForm):\n{indented_form}\nform = Form"
-            exec(full_form, global_variables)
+            try:
+                exec(full_form, global_variables)
+            except Exception:
+                return (
+                    "<div style='margin: 8px'>The parameterized form could not be  "
+                    "loaded because of the following error:"
+                    f"<br><pre>{format_exc()}</pre></div>"
+                )
             return render_template(
                 "forms/base.html",
                 **{
                     "form_type": f"initial-{service_id}",
                     "action": "eNMS.automation.submitInitialForm",
-                    "button_label": "Confirm",
-                    "button_class": "success",
+                    "button_label": "Run Service",
+                    "button_class": "primary",
                     "form": global_variables["form"](request.form),
                 },
             )
@@ -443,10 +450,11 @@ class Server(Flask):
             method, (endpoint, *args) = request.method, page.split("/")
             if method == "POST":
                 kwargs = {**request.form.to_dict(), **request.files.to_dict()}
-                if isinstance(request.json, list):
-                    kwargs["list_data"] = request.json
+                payload = request.json if request.data else {}
+                if isinstance(payload, list):
+                    kwargs["list_data"] = payload
                 else:
-                    kwargs.update(request.json or {})
+                    kwargs.update(payload or {})
             else:
                 kwargs = request.args.to_dict()
             with db.session_scope():

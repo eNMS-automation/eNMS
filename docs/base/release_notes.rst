@@ -101,8 +101,9 @@ mail: Obfuscate Credentials passed into Netmiko Command Line
 - Don't set status of currently running services to "Aborted" when using a flask CLI command
 - Add TextFSM support for the netmiko validation service (+ regression workflow)
 - Add stop mechanism for services in the Result table
-- Add new "login" parameter for user so have a login distinct from the name displayed in the UI => IMPACT on migration
-files.
+- Add server name parameter in Run table to specify which server a service was run from.
+Server to be configured from env variable SERVER_NAME and SERVER_ADDR.
+- Lock editing / run of Workflow to group of owners
 
 MIGRATION:
 

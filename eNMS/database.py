@@ -91,9 +91,10 @@ class Database:
             self.factory(
                 "server",
                 **{
-                    "name": str(getnode()),
-                    "description": "Localhost",
-                    "ip_address": "0.0.0.0",
+                    "name": vs.server,
+                    "description": vs.server,
+                    "mac_address": str(getnode()),
+                    "ip_address": vs.server_ip,
                     "status": "Up",
                 },
             )
@@ -298,17 +299,16 @@ class Database:
                 ),
             )
 
-    def get_user(self, value, property="login"):
-        constraint = {property: value}
-        return self.session.query(vs.models["user"]).filter_by(**constraint).first()
+    def get_user(self, name):
+        return self.session.query(vs.models["user"]).filter_by(name=name).first()
 
     def query(self, model, rbac="read", username=None, property=None):
         entity = getattr(vs.models[model], property) if property else vs.models[model]
         query = self.session.query(entity)
         if rbac:
-            user = current_user or self.get_user(username or "admin", property="name")
+            user = current_user or self.get_user(username or "admin")
             if user.is_authenticated and not user.is_admin:
-                if model in vs.rbac["admin_models"]:
+                if model in vs.rbac["admin_models"].get(rbac, []):
                     raise self.rbac_error
                 query = vs.models[model].rbac_filter(query, rbac, user)
         return query
@@ -409,7 +409,9 @@ class Database:
                     sleep(self.retry_commit_time * (index + 1))
         return instance
 
-    def get_credential(self, username, name=None, device=None, credential_type="any"):
+    def get_credential(
+        self, username, name=None, device=None, credential_type="any", optional=False
+    ):
         pool_alias = aliased(vs.models["pool"])
         query = (
             self.session.query(vs.models["credential"])
@@ -428,7 +430,7 @@ class Database:
         if credential_type != "any":
             query = query.filter(vs.models["credential"].role == credential_type)
         credentials = max(query.all(), key=attrgetter("priority"), default=None)
-        if not credentials:
+        if not credentials and not optional:
             raise Exception(f"No matching credentials found for DEVICE '{device.name}'")
         return credentials
 

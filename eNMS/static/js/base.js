@@ -394,7 +394,7 @@ export function createTooltip({
         done: function (_, panel) {
           panel.content.innerHTML = this.responseText;
           preprocessForm(panel);
-          configureForm(name);
+          configureForm(name, undefined, `tooltip-${name}`);
           if (callback) callback(panel);
         },
       };
@@ -575,17 +575,17 @@ export function configureForm(form, id, panelId) {
   }
 }
 
-function showServicePanel(type, id, mode) {
+function showServicePanel(type, id, mode, tableId) {
+  const postfix = tableId ? `-${tableId}` : "";
   const typeInput = $(id ? `#${type}-class-${id}` : `#${type}-class`);
   typeInput.val(type).prop("disabled", true);
   $(id ? `#${type}-name-${id}` : `#${type}-name`).prop("disabled", true);
-  if (id) {
-    if (mode == "duplicate" && type == "workflow") {
-      $(`#copy-${id}`).val(id);
-    }
-  }
-  $(id ? `#${type}-workflows-${id}` : `#${type}-workflows`).prop("disabled", true);
-  const wizardId = id ? `#${type}-wizard-${id}` : `#${type}-wizard`;
+  if (id && mode == "duplicate" && type == "workflow") $(`#copy-${id}`).val(id);
+  $(id ? `#${type}-workflows-${id}` : `#${type}-workflows${postfix}`).prop(
+    "disabled",
+    true
+  );
+  const wizardId = id ? `#${type}-wizard-${id}` : `#${type}-wizard${postfix}`;
   $(wizardId).smartWizard({
     enableAllSteps: true,
     keyNavigation: false,
@@ -640,7 +640,7 @@ export function showInstancePanel(type, id, mode, tableId) {
     id: id || tableId,
     callback: function (panel) {
       const isService = type.includes("service") || type == "workflow";
-      if (isService) showServicePanel(type, id, mode);
+      if (isService) showServicePanel(type, id, mode, tableId);
       if (type == "credential") showCredentialPanel(id);
       if (id) {
         const properties = type === "pool" ? "_properties" : "";
@@ -661,6 +661,7 @@ export function showInstancePanel(type, id, mode, tableId) {
         const form = {
           ...serializeForm(`#search-form-${tableId}`, `${model}_filtering`),
           ...tableInstances[tableId].constraints,
+          ...tableInstances[tableId].filteringConstraints,
         };
         call({
           url: `/filtering/${model}`,
@@ -670,14 +671,14 @@ export function showInstancePanel(type, id, mode, tableId) {
             $(`#${type}-scoped_name-${tableId},#${type}-name-${tableId}`).val(
               "Bulk Edit"
             );
-            panel.setHeaderTitle(
-              `Edit all ${instances.length} ${model}s in table in bulk`
-            );
+            const number = instances.length;
+            panel.setHeaderTitle(`Edit all ${number} ${model}s in table in bulk`);
             for (const property of Object.keys(formProperties[type])) {
               $(`#${type}-action-btn-${tableId}`)
                 .attr(
                   "onclick",
-                  `eNMS.table.bulkEdit('${type}', '${model}', '${tableId}')`
+                  `eNMS.table.showBulkEditPanel(
+                  '${type}', '${model}', '${tableId}', ${number})`
                 )
                 .text("Bulk Edit");
               if (["name", "scoped_name", "type"].includes(property)) {

@@ -16,7 +16,7 @@ import {
   showConfirmationPanel,
   userIsActive,
 } from "./base.js";
-import { loadServiceTypes } from "./automation.js";
+import { exportServices, loadServiceTypes } from "./automation.js";
 
 export let tables = {};
 export let tableInstances = {};
@@ -393,7 +393,7 @@ export class Table {
   bulkEditButton() {
     const showPanelFunction =
       this.model == "service"
-        ? "automation.openServicePanel(true)"
+        ? `automation.openServicePanel('${this.id}')`
         : `base.showInstancePanel('${this.model}', null, 'bulk', '${this.id}')`;
     return `
       <button
@@ -841,7 +841,7 @@ tables.service = class ServiceTable extends Table {
       `
       <button
         class="btn btn-primary"
-        onclick="eNMS.automation.exportServices('${this.id}')"
+        onclick="eNMS.table.showBulkServiceExportPanel('${this.id}')"
         data-tooltip="Export Services as .tgz"
         type="button"
       >
@@ -1419,6 +1419,28 @@ function showBulkDeletionPanel(tableId, model) {
   });
 }
 
+function showBulkServiceExportPanel(tableId) {
+  showConfirmationPanel({
+    id: "bulk-tgz-export",
+    title: "Bulk .tgz Export (all services in table)",
+    message: `Are you sure you want to export all services
+      in the table as .tgz (this process might take a long time ?)`,
+    confirmButton: "Export",
+    onConfirm: () => exportServices(tableId),
+  });
+}
+
+function showBulkEditPanel(formId, model, tableId, number) {
+  showConfirmationPanel({
+    id: `bulk-edit-${tableId}`,
+    title: `Bulk edit all ${number} ${model}s `,
+    message: `Are you sure to edit the ${number} ${model}s
+      in the table ?`,
+    confirmButton: "Edit",
+    onConfirm: () => bulkEdit(formId, model, tableId),
+  });
+}
+
 function bulkDeletion(tableId, model) {
   call({
     url: `/bulk_deletion/${model}`,
@@ -1447,13 +1469,13 @@ function bulkRemoval(tableId, model, instance) {
   });
 }
 
-function bulkEdit(formId, model, table) {
+function bulkEdit(formId, model, tableId) {
   call({
     url: `/bulk_edit/${model}`,
-    form: `${formId}-form-${table}`,
+    form: `${formId}-form-${tableId}`,
     callback: function (number) {
-      refreshTable(table);
-      $(`#${formId}-${table}`).remove();
+      refreshTable(tableId);
+      $(`#${formId}-${tableId}`).remove();
       notify(`${number} items modified.`, "success", 5, true);
     },
   });
@@ -1508,4 +1530,6 @@ configureNamespace("table", [
   exportTable,
   refreshTable,
   showBulkDeletionPanel,
+  showBulkEditPanel,
+  showBulkServiceExportPanel,
 ]);

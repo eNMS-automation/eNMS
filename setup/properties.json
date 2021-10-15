@@ -1063,7 +1063,10 @@
     ]
   },
   "tables_additional": {
-    "pool": ["device_number", "link_number", "service_number", "user_number"]
+    "pool": ["device_number", "link_number", "service_number", "user_number"],
+    "run": ["service_properties"],
+    "service": ["scoped_name"],
+    "task": ["frequency", "frequency_unit", "crontab_expression"]
   },
   "filtering": {
     "access": ["name", "description"],

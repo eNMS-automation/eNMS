@@ -225,8 +225,9 @@ export class Table {
         : "visible" in column
         ? column.visible
         : true;
+      const columnTitle = column.data == "buttons" ? "Buttons" : column.title;
       $(`#column-display-${this.id}`).append(
-        new Option(column.title || column.data, column.data, visible, visible)
+        new Option(columnTitle || column.data, column.data, visible, visible)
       );
     });
     $(`#column-display-${this.id}`).selectpicker("refresh");

@@ -1233,6 +1233,8 @@ class Controller:
                     kwargs[arg] = kwargs[arg].strip()
             if kwargs["must_be_new"]:
                 kwargs["creator"] = kwargs["user"] = getattr(current_user, "name", "")
+                if kwargs.get("workflows"):
+                    db.fetch("workflow", id=kwargs["workflows"][0], rbac="edit")
             instance = db.factory(type, **kwargs)
             if kwargs.get("copy"):
                 db.fetch(type, id=kwargs["copy"]).duplicate(clone=instance)

@@ -1,6 +1,6 @@
 from collections import defaultdict
 from heapq import heappop, heappush
-from sqlalchemy import Boolean, event, ForeignKey, Integer, or_
+from sqlalchemy import Boolean, ForeignKey, Integer, or_
 from sqlalchemy.orm import aliased, backref, relationship
 from sqlalchemy.schema import UniqueConstraint
 

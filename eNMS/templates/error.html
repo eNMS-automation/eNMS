@@ -17,15 +17,18 @@
     <div class="col-middle">
       <h1 class="error-number">{{ error }}</h1>
       {% if error in [401,403] %}
-        <h2>Access Denied</h2>
-        {% if not current_user.is_authenticated %}
-          <p>Full authentication is required to access this resource.</p>
-          <a href="{{ login_url }}"><button role="button" class="btn btn-secondary">Return to Login</button></a></p>
-        {% else %}
-          <p>Access to the specified page or resource is restricted.</p>
-          <a href="{{ url_for('blueprint.route', page='dashboard') }}"><button role="button" class="btn btn-secondary">Return to Dashboard</button></a></p>
-        {% endif %}
-      {% elif error == 500 %}
+      <h2>Access Denied</h2>
+      {% if not current_user.is_authenticated %}
+      <p>Full authentication is required to access this resource.</p>
+      <a href="{{ login_url }}"
+        ><button role="button" class="btn btn-secondary">Return to Login</button></a
+      >
+      {% else %}
+      <p>Access to the specified page or resource is restricted.</p>
+      <a href="{{ url_for('blueprint.route', page='dashboard') }}"
+        ><button role="button" class="btn btn-secondary">Return to Dashboard</button></a
+      >
+      {% endif %} {% elif error == 500 %}
       <h2>Internal Server Error</h2>
       <p>
         The server encountered an unexpected condition that prevented it from fulfilling

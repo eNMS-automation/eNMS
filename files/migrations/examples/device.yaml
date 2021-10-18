@@ -154,9 +154,9 @@
   last_configuration_update: '2021-03-17 08:46:08.180643'
   last_modified: ''
   last_operational_data_duration: 0.129928s
-  last_operational_data_failure: Never
-  last_operational_data_runtime: '2021-03-17 09:33:55.715730'
-  last_operational_data_status: Success
+  last_operational_data_failure: '2021-10-15 08:17:14.025988'
+  last_operational_data_runtime: '2021-10-15 08:17:14.025988'
+  last_operational_data_status: Failure
   last_operational_data_update: '2021-03-17 09:33:55.715730'
   last_specialized_data_duration: Never
   last_specialized_data_failure: Never

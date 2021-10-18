@@ -46,12 +46,6 @@ class Workflow(Service):
         if not migration_import and self.name not in end.positions:
             end.positions[self.name] = (500, 0)
 
-    @classmethod
-    def configure_events(cls):
-        @event.listens_for(cls.services, "append")
-        def append(target, *_):
-            target.last_modified = vs.get_time()
-
     def delete(self):
         for service in self.services:
             if not service.shared:

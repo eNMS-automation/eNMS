@@ -1044,6 +1044,9 @@ class Controller:
         kwargs["creator"] = getattr(current_user, "name", "")
         service = db.fetch("service", id=service_id, rbac="run")
         kwargs["runtime"] = runtime = vs.get_time()
+        run_name = kwargs.get("form", {}).get("name")
+        if run_name and db.fetch("run", name=run_name, allow_none=True):
+            return {"error": "There is already a run with the same name."}
         if kwargs.get("asynchronous", True):
             Thread(target=self.run, args=(service_id,), kwargs=kwargs).start()
         else:

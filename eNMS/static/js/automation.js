@@ -562,8 +562,12 @@ function submitInitialForm(serviceId) {
     url: `/run_service/${serviceId}`,
     form: `initial-${serviceId}-form-${serviceId}`,
     callback: (result) => {
-      runLogic(result);
-      $(`#parameterized_form-${serviceId}`).remove();
+      if (result.error) {
+        notify(result.error, "error", 5);
+      } else {
+        runLogic(result);
+        $(`#parameterized_form-${serviceId}`).remove();
+      }
     },
   });
 }

@@ -70,6 +70,9 @@ class Device(Object):
         secondary=db.service_target_device_table,
         back_populates="target_devices",
     )
+    runs = relationship(
+        "Run", secondary=db.run_device_table, back_populates="target_devices"
+    )
     tasks = relationship(
         "Task", secondary=db.task_device_table, back_populates="devices"
     )
@@ -265,6 +268,9 @@ class Pool(AbstractBase):
     target_services = relationship(
         "Service", secondary=db.service_target_pool_table, back_populates="target_pools"
     )
+    runs = relationship(
+        "Run", secondary=db.run_pool_table, back_populates="target_pools"
+    )
     tasks = relationship("Task", secondary=db.task_pool_table, back_populates="pools")
     access_users = relationship(
         "Access", secondary=db.access_user_pools_table, back_populates="user_pools"
@@ -377,7 +383,7 @@ class Pool(AbstractBase):
             setattr(self, f"{model}_number", len(instances))
 
     @classmethod
-    def rbac_filter(cls, query, mode, user):
+    def rbac_filter(cls, query, *_):
         return query.filter(cls.admin_only == false())
 
 

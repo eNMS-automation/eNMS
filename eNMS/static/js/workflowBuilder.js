@@ -78,6 +78,7 @@ let triggerMenu;
 let currentPlaceholder;
 let placeholder;
 let isSuperworkflow;
+let runtimeDisplayFlip;
 
 export function displayWorkflow(workflowData) {
   workflow = workflowData.service;
@@ -163,8 +164,13 @@ function updateRuntimes(result) {
   currentPlaceholder = result.state?.[currentPath]?.placeholder;
   let currentRuntime = $("#current-runtime").val();
   const displayedRuntimes = result.runtimes.map((runtime) => runtime[0]);
-  if (currentRuntime != "normal" && !displayedRuntimes.includes(currentRuntime)) {
+  if (
+    runtimeDisplayFlip &&
+    !["normal", "latest"].includes(currentRuntime) &&
+    !displayedRuntimes.includes(currentRuntime)
+  ) {
     currentRuntime = "latest";
+    runtimeDisplayFlip = false;
   }
   $("#current-runtime").empty();
   $("#current-runtime").append("<option value='normal'>Normal Display</option>");
@@ -185,6 +191,7 @@ function updateRuntimes(result) {
 
 function flipRuntimeDisplay(display) {
   runtimeDisplay = display || (runtimeDisplay == "users" ? "user" : "users");
+  runtimeDisplayFlip = true;
   localStorage.setItem("runtimeDisplay", runtimeDisplay);
   $("#runtime-display-icon").attr("class", `fa fa-${runtimeDisplay}`);
   if (!display) switchToWorkflow(currentPath);
@@ -434,12 +441,13 @@ function saveEdge(edge) {
 function stopWorkflow() {
   const stop = function () {
     call({
-      url: `/stop_workflow/${currentRuntime}`,
+      url: `/stop_run/${currentRun.runtime}`,
       callback: (result) => {
         if (!result) {
           notify("The workflow is not currently running.", "error", 5);
         } else {
-          notify("Workflow will stop after current service...", "success", 5);
+          const log = `Workflow ${workflow.name} will stop after current service.`;
+          notify(log, "success", 5, true);
         }
       },
     });
@@ -1078,6 +1086,7 @@ function compareWorkflowResults(workflow) {
         </form>
       </div>`,
     size: "1000 600",
+    name: "result_comparison",
     type: "full_result",
     title: "Result Comparison",
     id: workflow.id,

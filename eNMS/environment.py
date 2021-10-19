@@ -73,12 +73,15 @@ class Environment:
 
     def init_authentication(self):
         ldap_address, tacacs_address = getenv("LDAP_ADDR"), getenv("TACACS_ADDR")
-        if ldap_address:
-            self.ldap_server = Server(getenv("LDAP_ADDR"))
-        if tacacs_address:
-            self.tacacs_client = TACACSClient(
-                getenv("TACACS_ADDR"), 49, getenv("TACACS_PASSWORD")
-            )
+        try:
+            if ldap_address:
+                self.ldap_server = Server(getenv("LDAP_ADDR"))
+            if tacacs_address:
+                self.tacacs_client = TACACSClient(
+                    getenv("TACACS_ADDR"), 49, getenv("TACACS_PASSWORD")
+                )
+        except NameError as exc:
+            warn(f"Module missing ({exc})")
 
     def init_connection_pools(self):
         self.request_session = RequestSession()

@@ -134,6 +134,7 @@
     "/rest/query": "access",
     "/rest/result": "access",
     "/rest/token": "access",
+    "/result_comparison_form": "access",
     "/result_form": "access",
     "/run_table": "access",
     "/server_table": "admin",
@@ -234,7 +235,7 @@
     "/scan_playbook_folder": "access",
     "/search_workflow_services": "access",
     "/skip_services": "access",
-    "/stop_workflow": "access",
+    "/stop_run": "access",
     "/switch_menu": "all",
     "/switch_theme": "all",
     "/scheduler_action": "access",
@@ -247,5 +248,8 @@
     "/view_filtering": "access",
     "/web_connection": "access"
   },
-  "admin_models": ["access", "credential", "server", "user"]
+  "admin_models": {
+    "read": ["access", "credential", "server"],
+    "edit": ["access", "credential", "server", "user"]
+  }
 }

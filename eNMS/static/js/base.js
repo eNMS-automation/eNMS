@@ -163,12 +163,11 @@ export function serializeForm(form, formDefault) {
   let result = {};
   data.forEach((property) => {
     const propertyType = formProperties[formDefault]?.[property.name]?.type;
-    if (!propertyType) return;
-    if (propertyType.includes("object")) {
+    if (propertyType && propertyType.includes("object")) {
       if (!(property.name in result)) result[property.name] = [];
       result[property.name].push(property.value);
-    } else {
-      if (property.value) result[property.name] = property.value;
+    } else if (property.value) {
+      result[property.name] = property.value;
     }
   });
   return result;
@@ -231,29 +230,31 @@ export function downloadFile(name, content, type) {
   document.body.removeChild(link);
 }
 
-export function createTooltips() {
-  $("[data-tooltip]").each(function () {
-    const id = `tooltip-${$(this).attr("data-tooltip").replace(/\s/g, "")}`;
-    jsPanel.tooltip.create({
-      id: id,
-      borderRadius: "10px",
-      callback: () => setTimeout(() => $(`#${id}`).fadeOut(1000), 2500),
-      content: `<p style="margin-right: 10px; margin-left: 10px;
+export function createTooltips(panel) {
+  $(panel || "html")
+    .find("[data-tooltip]")
+    .each(function () {
+      const id = `tooltip-${$(this).attr("data-tooltip").replace(/\s/g, "")}`;
+      jsPanel.tooltip.create({
+        id: id,
+        borderRadius: "10px",
+        callback: () => setTimeout(() => $(`#${id}`).fadeOut(1000), 2500),
+        content: `<p style="margin-right: 10px; margin-left: 10px;
         margin-bottom: 3px; color: white"><b>${$(this).attr("data-tooltip")}</b></p>`,
-      contentSize: "auto",
-      connector: true,
-      delay: 800,
-      header: false,
-      opacity: 0.8,
-      position: {
-        my: "center-bottom",
-        at: "center-top",
-        of: this,
-      },
-      target: this,
-      theme: "dark filleddark",
+        contentSize: "auto",
+        connector: true,
+        delay: 800,
+        header: false,
+        opacity: 0.8,
+        position: {
+          my: "center-bottom",
+          at: "center-top",
+          of: this,
+        },
+        target: this,
+        theme: "dark filleddark",
+      });
     });
-  });
 }
 
 export function openPanel({
@@ -322,6 +323,7 @@ export function openPanel({
   }
   const panel = jsPanel.create(kwargs);
   if (callback && content) callback(content);
+  createTooltips(panel);
   const position = { top: `${50 + $(window).scrollTop()}px`, position: "absolute" };
   $(panel).css({ ...position, ...css });
 }
@@ -392,7 +394,7 @@ export function createTooltip({
         done: function (_, panel) {
           panel.content.innerHTML = this.responseText;
           preprocessForm(panel);
-          configureForm(name);
+          configureForm(name, undefined, `tooltip-${name}`);
           if (callback) callback(panel);
         },
       };
@@ -573,28 +575,30 @@ export function configureForm(form, id, panelId) {
   }
 }
 
-function showServicePanel(type, id, mode, initForm) {
+function showServicePanel(type, id, mode, tableId) {
+  const postfix = tableId ? `-${tableId}` : "";
   const typeInput = $(id ? `#${type}-class-${id}` : `#${type}-class`);
   typeInput.val(type).prop("disabled", true);
   $(id ? `#${type}-name-${id}` : `#${type}-name`).prop("disabled", true);
-  if (id) {
-    if (mode == "duplicate" && type == "workflow") {
-      $(`#copy-${id}`).val(id);
-    }
-  }
-  $(id ? `#${type}-workflows-${id}` : `#${type}-workflows`).prop("disabled", true);
-  $(id ? `#${type}-wizard-${id}` : `#${type}-wizard`).smartWizard({
+  if (id && mode == "duplicate" && type == "workflow") $(`#copy-${id}`).val(id);
+  $(id ? `#${type}-workflows-${id}` : `#${type}-workflows${postfix}`).prop(
+    "disabled",
+    true
+  );
+  const wizardId = id ? `#${type}-wizard-${id}` : `#${type}-wizard${postfix}`;
+  $(wizardId).smartWizard({
     enableAllSteps: true,
     keyNavigation: false,
     transitionEffect: "none",
     onShowStep: function () {
+      if (!editors[id]) return;
       Object.keys(editors[id]).forEach(function (field) {
         editors[id][field].refresh();
       });
     },
   });
   $(".buttonFinish,.buttonNext,.buttonPrevious").hide();
-  $(id ? `#${type}-wizard-${id}` : `#${type}-wizard`).smartWizard("fixHeight");
+  $(wizardId).smartWizard("fixHeight");
 }
 
 function showAddInstancePanel(tableId, model, relation) {
@@ -630,13 +634,13 @@ function addInstancesToRelation(type, id) {
   });
 }
 
-export function showInstancePanel(type, id, mode, tableId, initForm) {
+export function showInstancePanel(type, id, mode, tableId) {
   openPanel({
     name: type,
     id: id || tableId,
     callback: function (panel) {
       const isService = type.includes("service") || type == "workflow";
-      if (isService) showServicePanel(type, id, mode, initForm);
+      if (isService) showServicePanel(type, id, mode, tableId);
       if (type == "credential") showCredentialPanel(id);
       if (id) {
         const properties = type === "pool" ? "_properties" : "";
@@ -657,6 +661,7 @@ export function showInstancePanel(type, id, mode, tableId, initForm) {
         const form = {
           ...serializeForm(`#search-form-${tableId}`, `${model}_filtering`),
           ...tableInstances[tableId].constraints,
+          ...tableInstances[tableId].filteringConstraints,
         };
         call({
           url: `/filtering/${model}`,
@@ -666,14 +671,14 @@ export function showInstancePanel(type, id, mode, tableId, initForm) {
             $(`#${type}-scoped_name-${tableId},#${type}-name-${tableId}`).val(
               "Bulk Edit"
             );
-            panel.setHeaderTitle(
-              `Edit all ${instances.length} ${model}s in table in bulk`
-            );
+            const number = instances.length;
+            panel.setHeaderTitle(`Edit all ${number} ${model}s in table in bulk`);
             for (const property of Object.keys(formProperties[type])) {
               $(`#${type}-action-btn-${tableId}`)
                 .attr(
                   "onclick",
-                  `eNMS.table.bulkEdit('${type}', '${model}', '${tableId}')`
+                  `eNMS.table.showBulkEditPanel(
+                  '${type}', '${model}', '${tableId}', ${number})`
                 )
                 .text("Bulk Edit");
               if (["name", "scoped_name", "type"].includes(property)) {

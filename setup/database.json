@@ -88,9 +88,11 @@
     ],
     "service": [
       "access",
+      "children",
       "id",
       "sources",
       "destinations",
+      "originals",
       "status",
       "superworkflow_id",
       "tasks",
@@ -209,6 +211,16 @@
         "model2": {
           "column": "device_id",
           "foreign_key": "device"
+        }
+      },
+      "service_owner": {
+        "model1": {
+          "column": "service_id",
+          "foreign_key": "service"
+        },
+        "model2": {
+          "column": "user_id",
+          "foreign_key": "user"
         }
       },
       "service_pool": {

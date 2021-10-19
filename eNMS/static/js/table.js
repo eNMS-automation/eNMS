@@ -16,7 +16,7 @@ import {
   showConfirmationPanel,
   userIsActive,
 } from "./base.js";
-import { loadServiceTypes } from "./automation.js";
+import { exportServices, loadServiceTypes } from "./automation.js";
 
 export let tables = {};
 export let tableInstances = {};
@@ -225,8 +225,9 @@ export class Table {
         : "visible" in column
         ? column.visible
         : true;
+      const columnTitle = column.data == "buttons" ? "Buttons" : column.title;
       $(`#column-display-${this.id}`).append(
-        new Option(column.title || column.data, column.data, visible, visible)
+        new Option(columnTitle || column.data, column.data, visible, visible)
       );
     });
     $(`#column-display-${this.id}`).selectpicker("refresh");
@@ -393,7 +394,7 @@ export class Table {
   bulkEditButton() {
     const showPanelFunction =
       this.model == "service"
-        ? "automation.openServicePanel(true)"
+        ? `automation.openServicePanel('${this.id}')`
         : `base.showInstancePanel('${this.model}', null, 'bulk', '${this.id}')`;
     return `
       <button
@@ -841,7 +842,7 @@ tables.service = class ServiceTable extends Table {
       `
       <button
         class="btn btn-primary"
-        onclick="eNMS.automation.exportServices('${this.id}')"
+        onclick="eNMS.table.showBulkServiceExportPanel('${this.id}')"
         data-tooltip="Export Services as .tgz"
         type="button"
       >
@@ -857,7 +858,7 @@ tables.service = class ServiceTable extends Table {
     let runtimeArg = "";
     if (row.type != "workflow") runtimeArg = ", null, 'result'";
     return `
-      <ul class="pagination pagination-lg" style="margin: 0px; width: 300px">
+      <ul class="pagination pagination-lg" style="margin: 0px; width: 310px">
         <li>
           <button type="button" class="btn btn-sm btn-info"
           onclick="eNMS.automation.showRuntimePanel('logs', ${row.instance})"
@@ -951,7 +952,7 @@ tables.run = class RunTable extends Table {
 
   buttons(row) {
     return [
-      `<ul class="pagination pagination-lg" style="margin: 0px; width: 90px">
+      `<ul class="pagination pagination-lg" style="margin: 0px; width: 120px">
         <li>
           <button type="button" class="btn btn-sm btn-info"
           onclick="eNMS.automation.showRuntimePanel('logs', ${row.service},
@@ -963,6 +964,13 @@ tables.run = class RunTable extends Table {
           onclick="eNMS.automation.showRuntimePanel('results', ${row.service},
           '${row.runtime}')" data-tooltip="Result Tree">
           <span class="glyphicon glyphicon-list-alt"></span></button>
+        </li>
+        <li>
+          <button type="button" class="btn btn-sm btn-danger"
+          onclick="eNMS.automation.stopRun('${row.runtime}')"
+          data-tooltip="Stop Run">
+            <span class="glyphicon glyphicon-stop"></span>
+          </button>
         </li>
       </ul>`,
     ];
@@ -1108,7 +1116,7 @@ tables.task = class TaskTable extends Table {
   buttons(row) {
     const state = row.is_active ? ["disabled", "active"] : ["active", "disabled"];
     return [
-      `<ul class="pagination pagination-lg" style="margin: 0px;">
+      `<ul class="pagination pagination-lg" style="margin: 0px; width: 200px">
         <li>
           <button type="button" class="btn btn-sm btn-primary"
           onclick="eNMS.base.showInstancePanel('task', '${row.id}')" data-tooltip="Edit"
@@ -1412,6 +1420,28 @@ function showBulkDeletionPanel(tableId, model) {
   });
 }
 
+function showBulkServiceExportPanel(tableId) {
+  showConfirmationPanel({
+    id: "bulk-tgz-export",
+    title: "Bulk .tgz Export (all services in table)",
+    message: `Are you sure you want to export all services
+      in the table as .tgz (this process might take a long time ?)`,
+    confirmButton: "Export",
+    onConfirm: () => exportServices(tableId),
+  });
+}
+
+function showBulkEditPanel(formId, model, tableId, number) {
+  showConfirmationPanel({
+    id: `bulk-edit-${tableId}`,
+    title: `Bulk edit all ${number} ${model}s `,
+    message: `Are you sure to edit the ${number} ${model}s
+      in the table ?`,
+    confirmButton: "Edit",
+    onConfirm: () => bulkEdit(formId, model, tableId),
+  });
+}
+
 function bulkDeletion(tableId, model) {
   call({
     url: `/bulk_deletion/${model}`,
@@ -1440,13 +1470,13 @@ function bulkRemoval(tableId, model, instance) {
   });
 }
 
-function bulkEdit(formId, model, table) {
+function bulkEdit(formId, model, tableId) {
   call({
     url: `/bulk_edit/${model}`,
-    form: `${formId}-form-${table}`,
+    form: `${formId}-form-${tableId}`,
     callback: function (number) {
-      refreshTable(table);
-      $(`#${formId}-${table}`).remove();
+      refreshTable(tableId);
+      $(`#${formId}-${tableId}`).remove();
       notify(`${number} items modified.`, "success", 5, true);
     },
   });
@@ -1501,4 +1531,6 @@ configureNamespace("table", [
   exportTable,
   refreshTable,
   showBulkDeletionPanel,
+  showBulkEditPanel,
+  showBulkServiceExportPanel,
 ]);

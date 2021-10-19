@@ -33,8 +33,9 @@ import {
   workflow,
 } from "./workflowBuilder.js";
 
-function openServicePanel(bulk) {
-  showInstancePanel($("#service-type").val(), null, bulk ? "bulk" : null, "service");
+function openServicePanel(tableId) {
+  const args = tableId ? [null, "bulk", tableId] : [];
+  showInstancePanel($("#service-type").val(), ...args);
 }
 
 export function displayDiff(type, instanceId) {
@@ -163,6 +164,19 @@ function downloadLogs(serviceId) {
   downloadFile(`logs-${serviceId}`, logs, "txt");
 }
 
+function stopRun(runtime) {
+  call({
+    url: `/stop_run/${runtime}`,
+    callback: (result) => {
+      if (!result) {
+        notify("The service is not currently running.", "error", 5);
+      } else {
+        notify("Stopping service...", "success", 5);
+      }
+    },
+  });
+}
+
 function showResult(id) {
   openPanel({
     name: "result",
@@ -281,7 +295,7 @@ export const showRuntimePanel = function (
               <button
                 class="btn btn-default pull-right"
                 onclick="eNMS.automation.downloadLogs(${service.id})"
-                data-tooltip="Update all pools"
+                data-tooltip="Download Logs"
                 type="button"
               >
                 <span
@@ -296,9 +310,10 @@ export const showRuntimePanel = function (
         </div>
         `;
       } else if (panelType == "tree") {
+        const serviceProperties = { id: service.id, name: service.name };
         content = `
         <div class="modal-body">
-          <div style="width: 670px; float: left;">
+          <div style="width: 900px; float: left;">
             <select
               id="runtimes-${panelId}"
               name="runtimes"
@@ -309,7 +324,7 @@ export const showRuntimePanel = function (
             <button
               class="btn btn-info pull-right"
               onclick="eNMS.automation.showRuntimePanel(
-                'results', ${JSON.stringify(service).replace(/"/g, "'")},
+                'results', ${JSON.stringify(serviceProperties).replace(/"/g, "'")},
                 '#runtimes-${panelId}', 'result', null, true)"
               data-tooltip="All Results"
               type="button"
@@ -362,6 +377,7 @@ export const showRuntimePanel = function (
       openPanel({
         name: panelType,
         content: content,
+        size: "1000 650",
         type: "result",
         title: `${type} - ${service.name}`,
         id: service.id,
@@ -546,8 +562,12 @@ function submitInitialForm(serviceId) {
     url: `/run_service/${serviceId}`,
     form: `initial-${serviceId}-form-${serviceId}`,
     callback: (result) => {
-      runLogic(result);
-      $(`#parameterized_form-${serviceId}`).remove();
+      if (result.error) {
+        notify(result.error, "error", 5);
+      } else {
+        runLogic(result);
+        $(`#parameterized_form-${serviceId}`).remove();
+      }
     },
   });
 }
@@ -559,7 +579,8 @@ export const runService = function ({ id, type, parametrization }) {
       id: id,
       url: `parameterized_form/${id}`,
       title: "Parameterized Form",
-      size: "700px auto",
+      size: "900px auto",
+      checkRbac: false,
       callback: function () {
         call({
           url: `/get_form_properties/initial-${id}`,
@@ -605,7 +626,7 @@ export function runLogic(result) {
   $(`#${result.service.type}-${result.service.id}`).remove();
 }
 
-function exportServices(tableId) {
+export function exportServices(tableId) {
   call({
     url: `/export_services`,
     form: `search-form-${tableId}`,
@@ -661,14 +682,13 @@ function displayCalendar(calendarType) {
         callback: function (tasks) {
           let events = [];
           for (const [name, properties] of Object.entries(tasks)) {
-            if (properties.service === undefined) continue;
             events.push({
               title: name,
               id: properties.id,
               description: properties.description,
               start: new Date(...properties.start),
               runtime: properties.runtime,
-              service: properties.service,
+              service: properties.service_properties,
             });
           }
           $("#calendar").fullCalendar({
@@ -812,7 +832,6 @@ configureNamespace("automation", [
   deleteCorruptedEdges,
   displayCalendar,
   downloadLogs,
-  exportServices,
   field,
   openServicePanel,
   pauseTask,
@@ -824,5 +843,6 @@ configureNamespace("automation", [
   showResult,
   showRunServicePanel,
   showRuntimePanel,
+  stopRun,
   submitInitialForm,
 ]);

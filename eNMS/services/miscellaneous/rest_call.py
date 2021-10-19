@@ -49,7 +49,7 @@ class RestCallService(Service):
                 self.username, env.get_password(self.password)
             )
         if run.call_type in ("POST", "PUT", "PATCH"):
-            kwargs["json"] = run.sub(run.payload, local_variables)
+            kwargs["json"] = run.sub(self.payload, local_variables)
         call = getattr(env.request_session, run.call_type.lower())
         response = call(rest_url, **kwargs)
         result = {

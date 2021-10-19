@@ -17,7 +17,7 @@ from re import compile, error as regex_error, search, sub
 from requests import get as http_get
 from ruamel import yaml
 from shutil import rmtree
-from sqlalchemy import and_
+from sqlalchemy import and_, or_
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import aliased
 from tarfile import open as open_tar
@@ -127,7 +127,7 @@ class Controller:
         return len(instances)
 
     def calendar_init(self, type):
-        results = {}
+        results, properties = {}, ["id", "name", "runtime", "service_properties"]
         for instance in db.fetch_all(type):
             if getattr(instance, "workflow", None):
                 continue
@@ -144,7 +144,8 @@ class Controller:
                     date,
                 ).split(",")
             ]
-            results[instance.name] = {"start": start, **instance.serialized}
+            instance_properties = instance.get_properties(include=properties)
+            results[instance.name] = {"start": start, **instance_properties}
         return results
 
     def clear_results(self, service_id):
@@ -177,7 +178,7 @@ class Controller:
     def copy_service_in_workflow(self, workflow_id, **kwargs):
         service_sets = list(set(kwargs["services"].split(",")))
         service_instances = db.objectify("service", service_sets)
-        workflow = db.fetch("workflow", id=workflow_id)
+        workflow = db.fetch("workflow", id=workflow_id, rbac="edit")
         services, errors = [], []
         if kwargs["mode"] == "shallow":
             for service in service_instances:
@@ -193,6 +194,7 @@ class Controller:
             else:
                 workflow.services.append(service)
             services.append(service)
+            service.update_originals()
         workflow.last_modified = vs.get_time()
         db.session.commit()
         return {
@@ -300,6 +302,8 @@ class Controller:
                 workflow.services.remove(service)
                 if not service.shared:
                     db.delete("service", id=service.id)
+                else:
+                    service.update_originals()
         return workflow.last_modified
 
     def duplicate_workflow(self, workflow_id):
@@ -559,7 +563,7 @@ class Controller:
 
     def get_service_state(self, path, **kwargs):
         service_id, state, run = path.split(">")[-1], None, None
-        runtime, display = kwargs.get("runtime"), kwargs["display"]
+        runtime, display = kwargs.get("runtime"), kwargs.get("display")
         service = db.fetch("service", id=service_id, allow_none=True)
         if not service:
             raise db.rbac_error
@@ -573,13 +577,14 @@ class Controller:
             else:
                 run = db.fetch("run", allow_none=True, runtime=runtime)
             state = run.get_state() if run else None
+        run_properties = ["id", "creator", "runtime", "status"]
         return {
             "service": service.to_dict(include=["services", "edges", "superworkflow"]),
             "runtimes": sorted(
                 set((run.runtime, run.name) for run in runs), reverse=True
             ),
             "state": state,
-            "run": getattr(run, "serialized", None),
+            "run": run.get_properties(include=run_properties) if run else None,
             "runtime": runtime,
         }
 
@@ -638,12 +643,11 @@ class Controller:
         return links
 
     def get_visualization_pools(self, view):
-        return [
-            pool.base_properties
-            for pool in db.fetch_all("pool")
-            if (view == "logical_view" and pool.devices and pool.links)
-            or (view == "geographical_view" and (pool.devices or pool.links))
-        ]
+        operator = and_ if view == "logical_view" else or_
+        has_device = vs.models["pool"].devices.any()
+        has_link = vs.models["pool"].links.any()
+        pools = db.query("pool").filter(operator(has_device, has_link)).all()
+        return [pool.base_properties for pool in pools]
 
     def get_workflow_results(self, runtime):
         run = db.fetch("run", runtime=runtime)
@@ -662,7 +666,12 @@ class Controller:
             progress = state.get(path, {}).get("progress")
             track_progress = progress and progress["device"]["total"]
             data = {"progress": progress["device"]} if track_progress else {}
-            color = "32CD32" if all(result.success for result in results) else "FF6666"
+            success_or_skipped_only = all(
+                result.success
+                for result in results
+                if result.result.get("result") != "skipped"
+            )
+            color = "32CD32" if success_or_skipped_only else "FF6666"
             result = {
                 "runtime": min(result.runtime for result in results),
                 "data": {"properties": service.base_properties, **data},
@@ -992,7 +1001,10 @@ class Controller:
                 run_kwargs[property] = kwargs["form"][property]
         service = db.fetch("service", id=service)
         service.status = "Running"
-        initial_payload = kwargs.get("initial_payload", service.initial_payload)
+        initial_payload = {
+            **service.initial_payload,
+            **kwargs.get("form", {}).get("initial_payload", {}),
+        }
         restart_run = db.fetch(
             "run",
             allow_none=True,
@@ -1032,6 +1044,9 @@ class Controller:
         kwargs["creator"] = getattr(current_user, "name", "")
         service = db.fetch("service", id=service_id, rbac="run")
         kwargs["runtime"] = runtime = vs.get_time()
+        run_name = kwargs.get("form", {}).get("name")
+        if run_name and db.fetch("run", name=run_name, allow_none=True):
+            return {"error": "There is already a run with the same name."}
         if kwargs.get("asynchronous", True):
             Thread(target=self.run, args=(service_id,), kwargs=kwargs).start()
         else:
@@ -1142,7 +1157,7 @@ class Controller:
             "update_time": workflow.last_modified,
         }
 
-    def stop_workflow(self, runtime):
+    def stop_run(self, runtime):
         run = db.fetch("run", allow_none=True, runtime=runtime)
         if run and run.status == "Running":
             if env.redis_queue:
@@ -1221,6 +1236,10 @@ class Controller:
                     kwargs[arg] = kwargs[arg].strip()
             if kwargs["must_be_new"]:
                 kwargs["creator"] = kwargs["user"] = getattr(current_user, "name", "")
+                if kwargs.get("workflows"):
+                    workflow_id = kwargs["workflows"][0]
+                    workflow = db.fetch("workflow", id=workflow_id, rbac="edit")
+                    workflow.last_modified = vs.get_time()
             instance = db.factory(type, **kwargs)
             if kwargs.get("copy"):
                 db.fetch(type, id=kwargs["copy"]).duplicate(clone=instance)

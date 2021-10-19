@@ -140,6 +140,7 @@ class FormFactory:
         self.generate_filtering_forms()
         self.generate_instance_insertion_forms()
         self.generate_service_forms()
+        self.generate_access_form()
 
     def generate_filtering_forms(self):
         for model, properties in vs.properties["filtering"].items():
@@ -216,6 +217,56 @@ class FormFactory:
                     "names": StringField(widget=TextArea(), render_kw={"rows": 8}),
                 },
             )
+
+    def generate_access_form(self):
+        class AccessForm(RbacForm):
+            template = "access"
+            form_type = HiddenField(default="access")
+            user_pools = MultipleInstanceField("pool", model="pool")
+            access_pools = MultipleInstanceField("pool", model="pool")
+            access_type = SelectMultipleStringField(
+                "Access Type",
+                choices=vs.dualize(
+                    ["Read", "Edit", "Run", "Schedule", "Connect", "Use as target"]
+                ),
+            )
+            relations = ["pools", "services"]
+
+            @classmethod
+            def form_init(cls):
+                keys = (
+                    "get_requests",
+                    "post_requests",
+                    "delete_requests",
+                    "upper_menu",
+                )
+                for key in keys:
+                    values = [(k, k) for k, v in vs.rbac[key].items() if v == "access"]
+                    field_name = " ".join(key.split("_")).capitalize()
+                    setattr(cls, key, SelectMultipleField(field_name, choices=values))
+                menus, pages = [], []
+                for category, values in vs.rbac["menu"].items():
+                    if values["rbac"] == "admin":
+                        continue
+                    if values["rbac"] == "access":
+                        menus.append(category)
+                    for page, page_values in values["pages"].items():
+                        if page_values["rbac"] == "admin":
+                            continue
+                        if page_values["rbac"] == "access":
+                            pages.append(page)
+                        subpages = page_values.get("subpages", {})
+                        for subpage, subpage_values in subpages.items():
+                            if subpage_values["rbac"] == "admin":
+                                continue
+                            if subpage_values["rbac"] == "access":
+                                pages.append(subpage)
+                menu_choices = vs.dualize(menus)
+                setattr(cls, "menu", SelectMultipleField("Menu", choices=menu_choices))
+                page_choices = vs.dualize(pages)
+                setattr(
+                    cls, "pages", SelectMultipleField("Pages", choices=page_choices)
+                )
 
     def generate_service_forms(self):
         for file in (vs.path / "eNMS" / "forms").glob("**/*.py"):
@@ -527,6 +578,11 @@ class ServiceForm(BaseForm):
     update_target_pools = BooleanField("Update target pools before running")
     update_pools_after_running = BooleanField("Update pools after running")
     workflows = MultipleInstanceField("Workflows", model="workflow")
+    owners = MultipleInstanceField("Owners", model="user")
+    lock_mode = SelectMultipleStringField(
+        "Lock Modes",
+        choices=[("run", "Run"), ("edit", "Edit")],
+    )
     waiting_time = IntegerField(
         "Time to Wait before next service is started (in seconds)", default=0
     )
@@ -808,54 +864,6 @@ class WorkflowEdgeForm(BaseForm):
     id = HiddenField()
     label = StringField()
     color = StringField()
-
-
-class AccessForm(RbacForm):
-    template = "access"
-    form_type = HiddenField(default="access")
-    user_pools = MultipleInstanceField("pool", model="pool")
-    access_pools = MultipleInstanceField("pool", model="pool")
-    access_type = SelectMultipleStringField(
-        "Access Type",
-        choices=vs.dualize(
-            ["Read", "Edit", "Run", "Schedule", "Connect", "Use as target"]
-        ),
-    )
-    relations = ["pools", "services"]
-
-    @classmethod
-    def form_init(cls):
-        keys = (
-            "get_requests",
-            "post_requests",
-            "delete_requests",
-            "upper_menu",
-        )
-        for key in keys:
-            values = [(k, k) for k, v in vs.rbac[key].items() if v == "access"]
-            field_name = " ".join(key.split("_")).capitalize()
-            setattr(cls, key, SelectMultipleField(field_name, choices=values))
-        menus, pages = [], []
-        for category, values in vs.rbac["menu"].items():
-            if values["rbac"] == "admin":
-                continue
-            if values["rbac"] == "access":
-                menus.append(category)
-            for page, page_values in values["pages"].items():
-                if page_values["rbac"] == "admin":
-                    continue
-                if page_values["rbac"] == "access":
-                    pages.append(page)
-                subpages = page_values.get("subpages", {})
-                for subpage, subpage_values in subpages.items():
-                    if subpage_values["rbac"] == "admin":
-                        continue
-                    if subpage_values["rbac"] == "access":
-                        pages.append(subpage)
-        menu_choices = vs.dualize(menus)
-        setattr(cls, "menu", SelectMultipleField("Menu", choices=menu_choices))
-        page_choices = vs.dualize(pages)
-        setattr(cls, "pages", SelectMultipleField("Pages", choices=page_choices))
 
 
 class ConnectionForm(ServiceForm):

@@ -108,15 +108,15 @@ class AbstractBase(db.base):
         return result
 
     @classmethod
-    def rbac_filter(cls, query, mode, user):
+    def rbac_filter(cls, query, *_):
         return query
 
     def table_properties(self, **kwargs):
-        return self.get_properties(
-            include=[column["data"] for column in kwargs["columns"]]
-            if kwargs.get("rest_api_request")
-            else None
-        )
+        displayed = [column["data"] for column in kwargs["columns"]]
+        table_type = getattr(self, "class_type", self.type)
+        base = ["type"] if kwargs.get("rest_api_request") else ["id", "type"]
+        additional = vs.properties["tables_additional"].get(table_type, [])
+        return self.get_properties(include=base + displayed + additional)
 
     def duplicate(self, **kwargs):
         properties = {

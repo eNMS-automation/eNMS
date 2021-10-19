@@ -318,8 +318,8 @@
   service_vendor: ''
   service_vendor_invert: false
   service_vendor_match: inclusion
-  target_services: ['[SxS Service Targets with Run Once + Skip] Run Once with Pool',
-    Scalability Test (large workflow)]
+  target_services: [Scalability Test (large workflow), '[SxS Service Targets with
+      Run Once + Skip] Run Once with Pool']
   tasks: []
   type: pool
   user_description: ''
@@ -1549,7 +1549,7 @@
   device_vendor_invert: false
   device_vendor_match: inclusion
   devices: []
-  last_modified: '2020-11-16 06:02:20.440720'
+  last_modified: '2021-09-30 03:33:23.102338'
   link_access_groups: ''
   link_access_groups_invert: false
   link_access_groups_match: inclusion
@@ -1701,7 +1701,7 @@
   device_vendor_invert: false
   device_vendor_match: inclusion
   devices: []
-  last_modified: '2020-09-21 06:31:33.876612'
+  last_modified: '2021-09-30 03:32:54.570325'
   link_access_groups: ''
   link_access_groups_invert: false
   link_access_groups_match: inclusion
@@ -2315,7 +2315,7 @@
   device_vendor_invert: false
   device_vendor_match: inclusion
   devices: []
-  last_modified: '2020-11-16 14:01:21.422896'
+  last_modified: '2021-09-30 03:35:15.021221'
   link_access_groups: ''
   link_access_groups_invert: false
   link_access_groups_match: inclusion
@@ -2350,7 +2350,7 @@
   link_vendor_invert: false
   link_vendor_match: inclusion
   links: []
-  manually_defined: true
+  manually_defined: false
   name: Users with UI access
   property1: CP
   service_access_groups: ''
@@ -2389,10 +2389,10 @@
   user_groups: ''
   user_groups_invert: false
   user_groups_match: inclusion
-  user_name: ^ui$
+  user_name: ^ui|ny$
   user_name_invert: false
   user_name_match: regex
-  users: [ui, sf, ny, chicago]
+  users: [ny, ui]
 - access_groups: ''
   admin_only: false
   creator: admin

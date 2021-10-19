@@ -45,7 +45,7 @@ class NetmikoPromptsService(ConnectionService):
         netmiko_connection.session_log.truncate(0)
         send_strings = (run.command, run.response1, run.response2, run.response3)
         expect_strings = (run.confirmation1, run.confirmation2, run.confirmation3, None)
-        commands, confirmation = [], None
+        commands, confirmation, result = [], None, "No command sent"
         results = {"commands": commands}
         try:
             prompt = run.enter_remote_device(netmiko_connection, device)

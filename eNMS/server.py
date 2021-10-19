@@ -11,7 +11,7 @@ from flask import (
     url_for,
     session,
 )
-from flask_login import current_user, LoginManager, login_user, logout_user
+from flask_login import current_user, LoginManager, login_user, logout_user, login_url
 from flask_socketio import join_room, SocketIO
 from flask_wtf.csrf import CSRFProtect
 from functools import partial, wraps
@@ -21,9 +21,14 @@ from itsdangerous import (
     BadSignature,
     SignatureExpired,
 )
-from logging import info
+from logging import info, warning
 from os import getenv, read, write
-from pty import fork
+
+try:
+    from pty import fork
+except Exception as exc:
+    warning(f"Couldn't import pty module ({exc})")
+
 from subprocess import run
 from sys import modules
 from traceback import format_exc
@@ -167,7 +172,8 @@ class Server(Flask):
     def configure_errors(self):
         @self.errorhandler(403)
         def authorization_required(error):
-            return render_template("error.html", error=403), 403
+            login_url = url_for("blueprint.route", page="login")
+            return render_template("error.html", error=403, login_url=login_url), 403
 
         @self.errorhandler(404)
         def not_found_error(error):
@@ -213,8 +219,18 @@ class Server(Flask):
                     and not rest_request
                     and endpoint != "/login"
                 ):
-                    return redirect(url_for("blueprint.route", page="login"))
-                return render_template("error.html", error=status_code), status_code
+                    url = url_for("blueprint.route", page="login", next_url=request.url)
+                    return redirect(login_url(url))
+                next_url = request.args.get("next_url")
+                login_link = login_url(
+                    url_for("blueprint.route", page="login", next_url=next_url)
+                )
+                return (
+                    render_template(
+                        "error.html", error=status_code, login_url=login_link
+                    ),
+                    status_code,
+                )
             else:
                 error_message = Server.status_error_message[status_code]
                 alert = f"Error {status_code} - {error_message}"
@@ -298,14 +314,21 @@ class Server(Flask):
                 )
             )
             full_form = f"class Form(BaseForm):\n{indented_form}\nform = Form"
-            exec(full_form, global_variables)
+            try:
+                exec(full_form, global_variables)
+            except Exception:
+                return (
+                    "<div style='margin: 8px'>The parameterized form could not be  "
+                    "loaded because of the following error:"
+                    f"<br><pre>{format_exc()}</pre></div>"
+                )
             return render_template(
                 "forms/base.html",
                 **{
                     "form_type": f"initial-{service_id}",
                     "action": "eNMS.automation.submitInitialForm",
-                    "button_label": "Confirm",
-                    "button_class": "success",
+                    "button_label": "Run Service",
+                    "button_class": "primary",
                     "form": global_variables["form"](request.form),
                 },
             )
@@ -320,6 +343,8 @@ class Server(Flask):
         def view_service_results(run_id, service):
             results = db.fetch_all("result", run_id=run_id, service_id=service)
             results_dict = [result.result for result in results]
+            if not results_dict:
+                return "No Results Found"
             return f"<pre>{vs.dict_to_string(results_dict)}</pre>"
 
         @blueprint.route("/download_file/<path:path>")

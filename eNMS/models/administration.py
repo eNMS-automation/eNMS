@@ -58,8 +58,6 @@ class User(AbstractBase, UserMixin):
         ):
             kwargs["password"] = argon2.hash(kwargs["password"])
         super().update(**kwargs)
-        if not kwargs.get("import_mechanism", False):
-            self.update_rbac()
 
 
 class Access(AbstractBase):

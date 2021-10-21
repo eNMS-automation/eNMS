@@ -613,14 +613,8 @@ export function runLogic(result) {
     } else if (result.service.id != workflow.id) {
       getServiceState(result.service.id, true);
     } else {
-      $("#current-runtime")
-        .append(
-          `<option value='${result.runtime}'>
-          ${result.runtime}
-        </option>`
-        )
-        .val(result.runtime)
-        .selectpicker("refresh");
+      const option = `<option value='${result.runtime}'>${result.runtime}</option>`;
+      $("#current-runtime").append(option).val(result.runtime).selectpicker("refresh");
     }
   }
   $(`#${result.service.type}-${result.service.id}`).remove();

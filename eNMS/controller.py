@@ -1326,7 +1326,7 @@ class Controller:
         if "authentication" in kwargs:
             credentials = self.get_credentials(device, optional=True, **kwargs)
             if not credentials:
-                return {"alert": f"No credentials found for device '{device.name}'."}
+                return {"alert": f"No credentials found for '{device.name}'."}
             vs.ssh_sessions[session]["credentials"] = credentials
         return {"device": device.name, "session": session}
 

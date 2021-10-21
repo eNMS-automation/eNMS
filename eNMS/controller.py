@@ -448,9 +448,11 @@ class Controller:
     def get_cluster_status(self):
         return [server.status for server in db.fetch_all("server")]
 
-    def get_credentials(self, device, **kwargs):
+    def get_credentials(self, device, optional=False, **kwargs):
         if kwargs["credentials"] == "device":
-            credentials = db.get_credential(current_user.name, device=device)
+            credentials = db.get_credential(current_user.name, device=device, optional=optional)
+            if not credentials:
+                return
             return credentials.username, env.get_password(credentials.password)
         elif kwargs["credentials"] == "user":
             return current_user.name, env.get_password(current_user.password)
@@ -1320,7 +1322,9 @@ class Controller:
             "user": current_user.name,
         }
         if "authentication" in kwargs:
-            credentials = self.get_credentials(device, **kwargs)
+            credentials = self.get_credentials(device, optional=True, **kwargs)
+            if not credentials:
+                return {"alert": f"No credentials found for device '{device.name}'."}
             vs.ssh_sessions[session]["credentials"] = credentials
         return {"device": device.name, "session": session}
 

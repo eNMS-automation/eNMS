@@ -261,7 +261,7 @@ class WorkflowEdge(AbstractBase):
                 .filter(
                     or_(
                         vs.models["user"].name == user.name,
-                        ~originals_alias.lock_mode.contains(mode),
+                        ~originals_alias.owners_access.contains(mode),
                     )
                 )
             )

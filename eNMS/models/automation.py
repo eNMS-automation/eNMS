@@ -28,7 +28,7 @@ class Service(AbstractBase):
     creator = db.Column(db.SmallString)
     access_groups = db.Column(db.LargeString)
     default_access = db.Column(db.SmallString)
-    lock_mode = db.Column(db.SmallString)
+    owners_access = db.Column(db.SmallString)
     shared = db.Column(Boolean, default=False)
     scoped_name = db.Column(db.SmallString, index=True)
     last_modified = db.Column(db.TinyString, info={"log_change": False})
@@ -176,7 +176,7 @@ class Service(AbstractBase):
         owners_alias = aliased(vs.models["user"])
         if mode in ("edit", "run"):
             query = (
-                query.filter(~cls.originals.any(cls.lock_mode.contains(mode)))
+                query.filter(~cls.originals.any(cls.owners_access.contains(mode)))
             ).union(
                 query.join(originals_alias, cls.originals)
                 .join(owners_alias, originals_alias.owners)

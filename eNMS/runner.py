@@ -414,7 +414,7 @@ class Runner:
             "parent_service_id": self.main_run.service.id,
             "run_id": self.main_run.id,
             "service": self.service.id,
-            "tags": self.main_run.tags,
+            "labels": self.main_run.labels,
             "user": self.main_run.creator,
         }
         if self.workflow:

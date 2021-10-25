@@ -85,7 +85,7 @@
     Notifications: &id027 [-391, -77]
     Operational Data Backup (admin): &id005 [-648, 121]
     Optional Prerequisite Services: &id028 [-356, 121]
-    Parameterized Form (override tags & targets, add payload): &id029 [-262, -163]
+    Parameterized Form (override labels & targets, add payload): &id029 [-262, -163]
     Parameterized Superworkflow Run: &id030 [-293, -76]
     Payload Extraction & Validation: [-308, -170]
     Payload Extraction with Operations: &id031 [-661, -226]
@@ -173,7 +173,7 @@
     'Regression Workflow: Notifications': *id027
     'Regression Workflow: Operational Data Backup (admin)': *id005
     'Regression Workflow: Optional Prerequisite Services': *id028
-    'Regression Workflow: Parameterized Form (override tags & targets, add payload)': *id029
+    'Regression Workflow: Parameterized Form (override labels & targets, add payload)': *id029
     'Regression Workflow: Parameterized Superworkflow Run': *id030
     'Regression Workflow: Payload Extraction & Validation': &id063 [-115, -305]
     'Regression Workflow: Payload Extraction with Operations': *id031
@@ -447,7 +447,7 @@
     Notifications: &id090 [530, 32]
     Operational Data Backup (admin): &id068 [290, 314]
     Optional Prerequisite Services: &id091 [734, 171]
-    Parameterized Form (override tags & targets, add payload): &id092 [692, -112]
+    Parameterized Form (override labels & targets, add payload): &id092 [692, -112]
     Parameterized Superworkflow Run: &id093 [565, -70]
     Payload Extraction & Validation: [279, 262]
     Payload Extraction with Operations: &id094 [-688, -153]
@@ -535,7 +535,7 @@
     'Regression Workflow: Notifications': *id090
     'Regression Workflow: Operational Data Backup (admin)': *id068
     'Regression Workflow: Optional Prerequisite Services': *id091
-    'Regression Workflow: Parameterized Form (override tags & targets, add payload)': *id092
+    'Regression Workflow: Parameterized Form (override labels & targets, add payload)': *id092
     'Regression Workflow: Parameterized Superworkflow Run': *id093
     'Regression Workflow: Payload Extraction & Validation': &id127 [279, 262]
     'Regression Workflow: Payload Extraction with Operations': *id094
@@ -16828,7 +16828,7 @@
       alignment: left
       content: "Uses a parameterized form to define the value of an interface.\r\n\
         Services use netmiko to show the description of the interface.\r\nThe parameterized\
-        \ run uses the \"tags\" property to add tags\r\nto the run object.\r\nThe\
+        \ run uses the \"labels\" property to add labels\r\nto the run object.\r\nThe\
         \ workflow has \"device query\" set to \"Atlanta\". Since the\r\ndevice query\
         \ is not part of the paramterized form, it should be\r\nconsidered when running\
         \ the workflow and Atlanta should be\r\na target."
@@ -16851,7 +16851,7 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: Parameterized Form (override tags & targets, add payload)
+  name: Parameterized Form (override labels & targets, add payload)
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -16859,7 +16859,7 @@
   owners: []
   parameterized_form: "target_devices = MultipleInstanceField(\"Devices\", model=\"\
     device\")\r\ntarget_pools = MultipleInstanceField(\"Pools\", model=\"pool\")\r\
-    \ntags = SelectMultipleStringField(\r\n  \"Tags\",\r\n  choices=(\r\n    (\"tag1\"\
+    \nlabels = SelectMultipleStringField(\r\n  \"Labels\",\r\n  choices=(\r\n    (\"tag1\"\
     , \"Tag 1\"),\r\n    (\"tag2\", \"Tag 2\"),\r\n    (\"precheck\", \"Pre-checks\"\
     ),\r\n    (\"postcheck\", \"Post-checks\"))\r\n)\r\ninterface = StringField(\"\
     Interface\", default=\"Lo1\")\r\n"
@@ -16872,12 +16872,12 @@
   reply_to: ''
   reserved: false
   run_method: per_device
-  scoped_name: Parameterized Form (override tags & targets, add payload)
+  scoped_name: Parameterized Form (override labels & targets, add payload)
   send_notification: false
   send_notification_method: mail
-  services: ['[Shared] Start', '[Shared] End', '[Parameterized Form (override tags
+  services: ['[Shared] Start', '[Shared] End', '[Parameterized Form (override labels
       & targets, add payload)] Show interface from initial form (default: Lo1)', '[Parameterized
-      Form (override tags & targets, add payload)] Show inteface as global variable']
+      Form (override labels & targets, add payload)] Show inteface as global variable']
   shared: false
   skip: {}
   skip_query: ''
@@ -16950,7 +16950,7 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Parameterized Form (override tags & targets, add payload)] Show interface
+  name: '[Parameterized Form (override labels & targets, add payload)] Show interface
     from initial form (default: Lo1)'
   negative_logic: false
   notification_header: ''
@@ -16967,8 +16967,8 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    Parameterized Form (override tags & targets, add payload): &id292 [-78, 122]
-    'Regression Workflow: Parameterized Form (override tags & targets, add payload)': *id292
+    Parameterized Form (override labels & targets, add payload): &id292 [-78, 122]
+    'Regression Workflow: Parameterized Form (override labels & targets, add payload)': *id292
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''
@@ -21417,7 +21417,7 @@
   max_processes: 15
   maximum_runs: 1
   multiprocessing: false
-  name: '[Parameterized Form (override tags & targets, add payload)] Show inteface
+  name: '[Parameterized Form (override labels & targets, add payload)] Show inteface
     as global variable'
   negative_logic: false
   notification_header: ''
@@ -21434,8 +21434,8 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    Parameterized Form (override tags & targets, add payload): &id327 [435, 118]
-    'Regression Workflow: Parameterized Form (override tags & targets, add payload)': *id327
+    Parameterized Form (override labels & targets, add payload): &id327 [435, 118]
+    'Regression Workflow: Parameterized Form (override labels & targets, add payload)': *id327
   postprocessing: ''
   postprocessing_mode: always
   preprocessing: ''

@@ -322,8 +322,8 @@
         "search": "text"
       },
       {
-        "data": "tags",
-        "title": "Tags",
+        "data": "labels",
+        "title": "Labels",
         "search": "text",
         "visible": false
       },
@@ -613,8 +613,8 @@
         "visible": false
       },
       {
-        "data": "tags",
-        "title": "Tags",
+        "data": "labels",
+        "title": "Labels",
         "search": "text",
         "visible": false
       },
@@ -676,8 +676,8 @@
         "search": "text"
       },
       {
-        "data": "tags",
-        "title": "Tags",
+        "data": "labels",
+        "title": "Labels",
         "search": "text",
         "visible": false
       },
@@ -735,8 +735,8 @@
         "search": "text"
       },
       {
-        "data": "tags",
-        "title": "Tags",
+        "data": "labels",
+        "title": "Labels",
         "search": "text",
         "visible": false
       },
@@ -1117,7 +1117,7 @@
     ],
     "run": [
       "runtime",
-      "tags",
+      "labels",
       "duration",
       "service_name",
       "server",

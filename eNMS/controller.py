@@ -1000,7 +1000,7 @@ class Controller:
     def run(service, **kwargs):
         keys = list(vs.model_properties["run"]) + list(vs.relationships["run"])
         run_kwargs = {key: kwargs.pop(key) for key in keys if kwargs.get(key)}
-        for property in ("name", "tags"):
+        for property in ("name", "labels"):
             if property in kwargs.get("form", {}):
                 run_kwargs[property] = kwargs["form"][property]
         service = db.fetch("service", id=service)

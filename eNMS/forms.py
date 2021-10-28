@@ -653,7 +653,7 @@ class ServiceForm(BaseForm):
     )
     default_access = SelectField(
         choices=(
-            ("creator", "Creator only"),
+            ("creator", "Role Based (Creator)"),
             ("public", "Public (all users)"),
             ("admin", "Admin Users only"),
         )

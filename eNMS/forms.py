@@ -654,8 +654,8 @@ class ServiceForm(BaseForm):
     default_access = SelectField(
         choices=(
             ("creator", "Role Based (Creator)"),
-            ("public", "Public (all users)"),
-            ("admin", "Admin Users only"),
+            ("public", "Public (All users)"),
+            ("admin", "Admin (Admins only"),
         )
     )
     log_level = SelectField(

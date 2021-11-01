@@ -113,13 +113,11 @@
                   {{ form.access_groups(id=form_type + '-access_groups',
                   class="form-control add-id required") }}
                 </div>
-                <label for="owners">Owners</label>
                 {{ form.owners.label(help="common/owners") }}
                 <div class="form-group">
                   {{ form.owners(id=form_type + '-owners', class="form-control add-id")
                   }}
                 </div>
-                <label for="owners_access">Owners Access</label>
                 {{ form.owners_access.label(help="common/owners_access") }}
                 <div class="form-group">
                   {{ form.owners_access(id=form_type + '-owners_access',

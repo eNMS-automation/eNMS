@@ -92,32 +92,35 @@
               role="tabpanel"
             >
               <div class="panel-body" style="background-color: #fafafa;">
-                {{ form.scoped_name.label() }}
+                <label for="scoped_name">Name</label>
                 <div class="form-group">
                   {{ form.scoped_name(id=form_type + '-scoped_name', class="form-control
                   add-id required") }}
                 </div>
-                {{ form.name.label() }}
+                <label for="name">Full Name</label>
+                {{ form.name.label(help="common/full_name") }}
                 <div class="form-group">
                   {{ form.name(id=form_type + '-name', class="form-control add-id
                   required") }}
                 </div>
-                {{ form.default_access.label() }}
+                {{ form.default_access.label(help="common/default_access") }}
                 <div class="form-group">
                   {{ form.default_access(id=form_type + '-default_access',
                   class="form-control add-id required") }}
                 </div>
-                {{ form.access_groups.label() }}
+                {{ form.access_groups.label(help="common/access_groups") }}
                 <div class="form-group">
                   {{ form.access_groups(id=form_type + '-access_groups',
                   class="form-control add-id required") }}
                 </div>
                 <label for="owners">Owners</label>
+                {{ form.owners.label(help="common/owners") }}
                 <div class="form-group">
                   {{ form.owners(id=form_type + '-owners', class="form-control add-id")
                   }}
                 </div>
                 <label for="owners_access">Owners Access</label>
+                {{ form.owners_access.label(help="common/owners_access") }}
                 <div class="form-group">
                   {{ form.owners_access(id=form_type + '-owners_access',
                   class="form-control add-id") }}
@@ -135,7 +138,7 @@
                       type="checkbox"
                       value="y"
                     />
-                    {{ form.shared.label() }}
+                    {{ form.shared.label(help="common/shared") }}
                   </div>
                 </fieldset>
                 <label for="workflows">Workflows</label>
@@ -180,12 +183,12 @@
                     {{ form.mandatory_parametrization.label() }}
                   </div>
                 </fieldset>
-                {{ form.priority.label() }}
+                {{ form.priority.label(help="common/priority") }}
                 <div class="form-group">
                   {{ form.priority(id=form_type + '-priority', class="form-control
                   add-id") }}
                 </div>
-                {{ form.number_of_retries.label() }}
+                {{ form.number_of_retries.label(help="common/number_of_retries") }}
                 <div class="form-group">
                   {{ form.number_of_retries(id=form_type + '-number_of_retries',
                   class="form-control add-id") }}
@@ -200,12 +203,12 @@
                   {{ form.max_number_of_retries(id=form_type + '-max_number_of_retries',
                   class="form-control add-id") }}
                 </div>
-                {{ form.credential_type.label() }}
+                {{ form.credential_type.label(help="common/type_of_credentials") }}
                 <div class="form-group">
                   {{ form.credential_type(id=form_type + '-credential_type',
                   class="form-control add-id") }}
                 </div>
-                {{ form.log_level.label() }}
+                {{ form.log_level.label(help="common/logging") }}
                 <div class="form-group">
                   {{ form.log_level(id=form_type + '-log_level', class="form-control
                   add-id") }}
@@ -274,7 +277,7 @@
                   {{ form.skip_query(id=form_type + '-skip_query', class="form-control
                   add-id") }}
                 </div>
-                {{ form.skip_value.label() }}
+                {{ form.skip_value.label(help="common/skip_value") }}
                 <div class="form-group">
                   {{ form.skip_value(id=form_type + '-skip_value', class="form-control
                   add-id") }}

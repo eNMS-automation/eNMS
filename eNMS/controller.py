@@ -1023,7 +1023,9 @@ class Controller:
             initial_payload.update(service.initial_payload)
         else:
             run_kwargs["start_service"] = service.id
-        run = db.factory("run", service=service.id, commit=True, **run_kwargs)
+        run = db.factory(
+            "run", service=service.id, services=[service.id], commit=True, **run_kwargs
+        )
         run.properties, run.payload = kwargs, {**initial_payload, **kwargs}
         return run.run()
 

@@ -1092,7 +1092,7 @@ function compareWorkflowResults(workflow) {
     id: workflow.id,
     callback: function () {
       let constraints = {
-        parent_service_id: workflow.id,
+        parent_service_id: currentPath.split(">")[0],
         parent_service_id_filter: "equality",
       };
       // eslint-disable-next-line new-cap

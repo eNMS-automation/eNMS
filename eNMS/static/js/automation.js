@@ -377,7 +377,7 @@ export const showRuntimePanel = function (
       openPanel({
         name: panelType,
         content: content,
-        size: "1000 650",
+        size: "1000 600",
         type: "result",
         title: `${type} - ${service.name}`,
         id: service.id,

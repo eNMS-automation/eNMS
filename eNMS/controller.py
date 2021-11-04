@@ -1023,6 +1023,7 @@ class Controller:
             initial_payload.update(service.initial_payload)
         else:
             run_kwargs["start_service"] = service.id
+        run_kwargs["services"] = [service.id]
         run = db.factory("run", service=service.id, commit=True, **run_kwargs)
         run.properties, run.payload = kwargs, {**initial_payload, **kwargs}
         return run.run()
@@ -1151,7 +1152,7 @@ class Controller:
 
     def skip_services(self, workflow_id, service_ids):
         services = [db.fetch("service", id=id) for id in service_ids.split("-")]
-        workflow = db.fetch("workflow", id=workflow_id)
+        workflow = db.fetch("workflow", id=workflow_id, rbac="edit")
         skip = not all(service.skip.get(workflow.name) for service in services)
         for service in services:
             service.skip[workflow.name] = skip

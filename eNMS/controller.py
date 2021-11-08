@@ -1017,7 +1017,7 @@ class Controller:
         if restart_run:
             run_kwargs["restart_run"] = restart_run
             initial_payload = restart_run.payload
-        if service.type == "workflow" and service.superworkflow:
+        if service.type == "workflow" and service.superworkflow and not restart_run:
             run_kwargs["placeholder"] = run_kwargs["start_service"] = service.id
             service = service.superworkflow
             initial_payload.update(service.initial_payload)
@@ -1059,6 +1059,7 @@ class Controller:
         return {
             "service": service.serialized,
             "runtime": runtime,
+            "restart": "restart_runtime" in kwargs,
             "user": current_user.name,
         }
 

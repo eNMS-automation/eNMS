@@ -604,7 +604,9 @@ export const runService = function ({ id, type, parametrization }) {
 };
 
 export function runLogic(result) {
-  const service = result.service.superworkflow || result.service;
+  const service = result.restart
+    ? result.service
+    : result.service.superworkflow || result.service;
   showRuntimePanel("logs", service, result.runtime, undefined, true);
   notify(`Service '${service.name}' started.`, "success", 5, true);
   if (page == "workflow_builder" && workflow) {

@@ -120,6 +120,7 @@
       "delete_requests",
       "get_requests",
       "post_requests",
+      "services",
       "upper_menu",
       "pages"
     ],

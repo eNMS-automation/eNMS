@@ -1066,7 +1066,7 @@
     "pool": ["device_number", "link_number", "service_number", "user_number"],
     "run": ["service_properties"],
     "service": ["scoped_name"],
-    "task": ["frequency", "frequency_unit", "crontab_expression"]
+    "task": ["frequency", "frequency_unit", "crontab_expression", "is_active"]
   },
   "filtering": {
     "access": ["name", "description"],

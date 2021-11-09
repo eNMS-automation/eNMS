@@ -728,7 +728,7 @@ Object.assign(action, {
   Duplicate: (service) => showInstancePanel(service.type, service.id, "duplicate"),
   Run: (service) => runService({ id: service.id, form: service.parameterized_form }),
   "Parameterized Run": (service) =>
-    runService({ id: service.id, form: service.parameterized_form }),
+    runService({ id: service.id, parametrization: true }),
   Logs: (service) => showRuntimePanel("logs", service, currentRuntime),
   Results: (service) => showRuntimePanel("results", service, currentRuntime, "result"),
   Backward: () => switchToWorkflow(history[historyPosition - 1], "left"),

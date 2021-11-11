@@ -381,9 +381,9 @@ class Runner:
                 )
                 self.log("error", error)
                 return {"success": False, "runtime": self.runtime, "result": error}
-            if self.run_parameter("multiprocessing") and len(non_skipped_targets) > 1:
+            if self.multiprocessing and len(non_skipped_targets) > 1:
                 processes = min(
-                    len(non_skipped_targets), self.run_parameter("max_processes")
+                    len(non_skipped_targets), self.max_processes
                 )
                 process_args = [
                     (device.id, self.runtime, results) for device in non_skipped_targets

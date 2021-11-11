@@ -192,7 +192,8 @@ class Server(Flask):
             request_property = f"{request.method.lower()}_requests"
             endpoint_rbac = vs.rbac[request_property].get(endpoint)
             if rest_request:
-                auth, token = request.headers.get("Authorization").split()
+                user = None
+                auth, token = request.headers.get("Authorization", ". .").split()
                 if auth == "Bearer":
                     serializer = Serializer(getenv("SECRET_KEY", "secret_key"))
                     try:
@@ -203,7 +204,7 @@ class Server(Flask):
                         log = f"{request.method} {request.path} - {status} Token (403)"
                         env.log("error", log, change_log=False)
                         return jsonify({"alert": f"{status} Token"}), 403
-                else:
+                elif request.authorization:
                     user = env.authenticate_user(**request.authorization)
                 if user:
                     login_user(user)

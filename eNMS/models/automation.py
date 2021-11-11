@@ -121,8 +121,6 @@ class Service(AbstractBase):
     def __init__(self, **kwargs):
         kwargs.pop("status", None)
         super().__init__(**kwargs)
-        if not self.owners:
-            self.owners = [current_user] if current_user else []
 
     def update(self, **kwargs):
         if self.positions and "positions" in kwargs:

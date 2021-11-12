@@ -15,7 +15,7 @@ pathlib
 redis
 ruamel.yaml
 sqlalchemy
-wtforms==2.3.3
+wtforms
 xlrd
 xlwt
 xmltodict

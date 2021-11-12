@@ -1308,7 +1308,7 @@ class Controller:
 
     def view_filtering(self, **kwargs):
         return {
-            f"{model}s": self.filtering(model, **kwargs[model], bulk="view_properties")
+            f"{model}s": self.filtering(model, **form, bulk="view_properties")
             for model, form in kwargs.items()
         }
 

@@ -1,5 +1,6 @@
 from ast import literal_eval, parse
 from json import loads
+from markupsafe import Markup
 from wtforms import (
     BooleanField as WtformsBooleanField,
     Field as WtformsField,
@@ -14,7 +15,6 @@ from wtforms import (
 )
 from wtforms.validators import ValidationError
 from wtforms.widgets import html_params
-from wtforms.widgets.core import HTMLString
 
 
 from eNMS.database import db
@@ -156,7 +156,7 @@ class JsonField(FieldMixin, WtformsField):
     def __call__(self, **kwargs):
         class_ = "add-id collapsed" if "collapsed" in kwargs["class"] else "add-id"
         html_kwargs = {"id": kwargs["id"], "class_": class_, "name": self.name}
-        return HTMLString(f"<input {html_params(**html_kwargs)} hidden><div></div>")
+        return Markup(f"<input {html_params(**html_kwargs)} hidden><div></div>")
 
 
 class InstanceField(SelectField):

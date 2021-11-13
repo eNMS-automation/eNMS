@@ -336,7 +336,7 @@ export function processWorkflowData(instance) {
     );
     $("#current-workflow").val(instance.id).trigger("change");
     creationMode = null;
-    switchToWorkflow(instance.id);
+    switchToWorkflow(`${instance.id}`);
   } else if (!instance.type) {
     edges.update(edgeToEdge(instance));
   } else if (instance.type.includes("service") || instance.type == "workflow") {

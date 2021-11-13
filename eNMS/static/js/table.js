@@ -108,9 +108,10 @@ export class Table {
                   </select>
                 </div>`;
             }
+            const eventType = data.search == "text" ? "keyup" : "change";
             $(element)
               .appendTo($(this.header()))
-              .on("keyup change", function () {
+              .on(eventType, function () {
                 if (waitForSearch) return;
                 waitForSearch = true;
                 setTimeout(function () {

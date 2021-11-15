@@ -20,6 +20,7 @@ from shutil import rmtree
 from sqlalchemy import and_, or_
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import aliased
+from subprocess import Popen
 from tarfile import open as open_tar
 from threading import Thread
 from time import ctime
@@ -1313,21 +1314,42 @@ class Controller:
         }
 
     def web_connection(self, device_id, **kwargs):
-        if not vs.settings["ssh"]["credentials"][kwargs["credentials"]]:
+        if not self.settings["ssh"]["credentials"][kwargs["credentials"]]:
             return {"alert": "Unauthorized authentication method."}
-        session = str(uuid4())
         device = db.fetch("device", id=device_id, rbac="connect")
-        vs.ssh_sessions[session] = {
-            "device": device.id,
-            "form": kwargs,
-            "user": current_user.name,
+        port, endpoint = self.get_ssh_port(), str(uuid4())
+        command = f"python3 -m flask run -h 0.0.0.0 -p {port}"
+        if self.settings["ssh"]["bypass_key_prompt"]:
+            options = "-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
+        else:
+            options = ""
+        environment = {
+            **{key: str(value) for key, value in self.settings["ssh"]["web"].items()},
+            "APP_ADDRESS": self.settings["app"]["address"],
+            "DEVICE": str(device.id),
+            "ENDPOINT": endpoint,
+            "ENMS_USER": getenv("ENMS_USER", "admin"),
+            "ENMS_PASSWORD": getenv("ENMS_PASSWORD", "admin"),
+            "FLASK_APP": "app.py",
+            "IP_ADDRESS": getattr(device, kwargs["address"]),
+            "OPTIONS": options,
+            "PORT": str(device.port),
+            "PROTOCOL": kwargs["protocol"],
+            "REDIRECTION": str(self.settings["ssh"]["port_redirection"]),
+            "USER": current_user.name,
         }
         if "authentication" in kwargs:
             credentials = self.get_credentials(device, optional=True, **kwargs)
             if not credentials:
                 return {"alert": f"No credentials found for '{device.name}'."}
-            vs.ssh_sessions[session]["credentials"] = credentials
-        return {"device": device.name, "session": session}
+            environment.update(zip(("USERNAME", "PASSWORD"), credentials))
+        Popen(command, shell=True, cwd=self.path / "terminal", env=environment)
+        return {
+            "device": device.name,
+            "port": port,
+            "endpoint": endpoint,
+            "redirection": self.settings["ssh"]["port_redirection"],
+        }
 
 
 controller = Controller()

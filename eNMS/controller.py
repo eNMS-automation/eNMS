@@ -10,7 +10,7 @@ from ipaddress import IPv4Network
 from json import dump, load
 from logging import info
 from operator import attrgetter, itemgetter
-from os import listdir, makedirs, remove, scandir
+from os import getenv, listdir, makedirs, remove, scandir
 from os.path import exists, getmtime
 from pathlib import Path
 from re import compile, error as regex_error, search, sub
@@ -1314,10 +1314,10 @@ class Controller:
         }
 
     def web_connection(self, device_id, **kwargs):
-        if not self.settings["ssh"]["credentials"][kwargs["credentials"]]:
+        if not vs.settings["ssh"]["credentials"][kwargs["credentials"]]:
             return {"alert": "Unauthorized authentication method."}
         device = db.fetch("device", id=device_id, rbac="connect")
-        port, endpoint = self.get_ssh_port(), str(uuid4())
+        port, endpoint = env.get_ssh_port(), str(uuid4())
         command = f"python3 -m flask run -h 0.0.0.0 -p {port}"
         if vs.settings["ssh"]["bypass_key_prompt"]:
             options = "-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
@@ -1325,7 +1325,7 @@ class Controller:
             options = ""
         environment = {
             **{key: str(value) for key, value in vs.settings["ssh"]["web"].items()},
-            "APP_ADDRESS": self.settings["app"]["address"],
+            "APP_ADDRESS": vs.settings["app"]["address"],
             "DEVICE": str(device.id),
             "ENDPOINT": endpoint,
             "ENMS_USER": getenv("ENMS_USER", "admin"),
@@ -1335,11 +1335,12 @@ class Controller:
             "OPTIONS": options,
             "PORT": str(device.port),
             "PROTOCOL": kwargs["protocol"],
-            "REDIRECTION": str(self.settings["ssh"]["port_redirection"]),
+            "REDIRECTION": str(vs.settings["ssh"]["port_redirection"]),
             "USER": current_user.name,
         }
         if "authentication" in kwargs:
-            credentials = db.get_credential(device, optional=True, **kwargs)
+            print(kwargs)
+            credentials = self.get_credentials(device, optional=True, **kwargs)
             if not credentials:
                 return {"alert": f"No credentials found for '{device.name}'."}
             environment.update(zip(("USERNAME", "PASSWORD"), credentials))

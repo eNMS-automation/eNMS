@@ -12,7 +12,6 @@ from flask import (
     session,
 )
 from flask_login import current_user, LoginManager, login_user, logout_user, login_url
-from flask_socketio import join_room, SocketIO
 from flask_wtf.csrf import CSRFProtect
 from functools import partial, wraps
 from importlib import import_module
@@ -98,7 +97,6 @@ class Server(Flask):
     def register_extensions(self):
         self.csrf = CSRFProtect()
         self.csrf.init_app(self)
-        self.socketio = SocketIO(self)
 
     def configure_login_manager(self):
         login_manager = LoginManager()
@@ -108,62 +106,6 @@ class Server(Flask):
         @login_manager.user_loader
         def user_loader(name):
             return db.get_user(name)
-
-    def configure_terminal_socket(self):
-        def send_data(session, file_descriptor):
-            session_object = db.factory(
-                "session",
-                commit=True,
-                name=session,
-                timestamp=str(datetime.now()),
-                **vs.ssh_sessions[session],
-            )
-            while True:
-                try:
-                    self.socketio.sleep(0.1)
-                    output = read(file_descriptor, 1024).decode()
-                    session_object.content += output
-                    self.socketio.emit(
-                        "output", output, namespace="/terminal", room=session
-                    )
-                    db.session.commit()
-                except OSError:
-                    break
-
-        @self.socketio.on("input", namespace="/terminal")
-        def input(data):
-            session = vs.ssh_sessions[request.args["session"]]
-            write(session["file_descriptor"], data.encode())
-
-        @self.socketio.on("join", namespace="/terminal")
-        def on_join(session):
-            join_room(session)
-
-        @self.socketio.on("connect", namespace="/terminal")
-        def connect():
-            session_id = request.args["session"]
-            session = vs.ssh_sessions.get(session_id)
-            if not session:
-                return
-            device = db.fetch("device", id=session["device"])
-            username, password = session["credentials"]
-            address, options = getattr(device, session["form"]["address"]), ""
-            if vs.settings["ssh"]["bypass_key_prompt"]:
-                options = "-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
-            process_id, session["file_descriptor"] = fork()
-            if process_id:
-                task = partial(send_data, session_id, session["file_descriptor"])
-                self.socketio.start_background_task(target=task)
-            else:
-                port = f"-p {device.port}"
-                if session["form"]["protocol"] == "telnet":
-                    command = f"telnet {address}"
-                elif password:
-                    ssh_command = f"sshpass -p {password} ssh {options}"
-                    command = f"{ssh_command} {username}@{address} {port}"
-                else:
-                    command = f"ssh {options} {address} {port}"
-                run(command.split())
 
     def configure_context_processor(self):
         @self.context_processor

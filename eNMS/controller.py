@@ -1339,7 +1339,6 @@ class Controller:
             "USER": current_user.name,
         }
         if "authentication" in kwargs:
-            print(kwargs)
             credentials = self.get_credentials(device, optional=True, **kwargs)
             if not credentials:
                 return {"alert": f"No credentials found for '{device.name}'."}

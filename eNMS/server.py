@@ -68,7 +68,6 @@ class Server(Flask):
         self.configure_context_processor()
         self.configure_errors()
         self.configure_routes()
-        self.configure_terminal_socket()
 
     def update_config(self):
         session_timeout = vs.settings["app"]["session_timeout_minutes"]

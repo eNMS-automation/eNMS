@@ -1319,12 +1319,12 @@ class Controller:
         device = db.fetch("device", id=device_id, rbac="connect")
         port, endpoint = self.get_ssh_port(), str(uuid4())
         command = f"python3 -m flask run -h 0.0.0.0 -p {port}"
-        if self.settings["ssh"]["bypass_key_prompt"]:
+        if vs.settings["ssh"]["bypass_key_prompt"]:
             options = "-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
         else:
             options = ""
         environment = {
-            **{key: str(value) for key, value in self.settings["ssh"]["web"].items()},
+            **{key: str(value) for key, value in vs.settings["ssh"]["web"].items()},
             "APP_ADDRESS": self.settings["app"]["address"],
             "DEVICE": str(device.id),
             "ENDPOINT": endpoint,
@@ -1339,16 +1339,16 @@ class Controller:
             "USER": current_user.name,
         }
         if "authentication" in kwargs:
-            credentials = self.get_credentials(device, optional=True, **kwargs)
+            credentials = db.get_credential(device, optional=True, **kwargs)
             if not credentials:
                 return {"alert": f"No credentials found for '{device.name}'."}
             environment.update(zip(("USERNAME", "PASSWORD"), credentials))
-        Popen(command, shell=True, cwd=self.path / "terminal", env=environment)
+        Popen(command, shell=True, cwd=vs.path / "terminal", env=environment)
         return {
             "device": device.name,
             "port": port,
             "endpoint": endpoint,
-            "redirection": self.settings["ssh"]["port_redirection"],
+            "redirection": vs.settings["ssh"]["port_redirection"],
         }
 
 

@@ -54,6 +54,7 @@ class Environment:
         self.init_logs()
         self.init_redis()
         self.init_connection_pools()
+        self.ssh_port = -1
 
     def authenticate_user(self, **kwargs):
         name, password = kwargs["username"], kwargs["password"]
@@ -100,6 +101,15 @@ class Environment:
         if self.fernet_encryption and isinstance(password, str):
             password = str.encode(password)
         return str(self.decrypt(password), "utf-8")
+
+    def get_ssh_port(self):
+        if self.redis_queue:
+            self.ssh_port = self.redis("incr", "ssh_port", 1)
+        else:
+            self.ssh_port += 1
+        start = vs.settings["ssh"]["start_port"]
+        end = vs.settings["ssh"]["end_port"]
+        return start + int(self.ssh_port) % (end - start)
 
     def init_authentication(self):
         ldap_address, tacacs_address = getenv("LDAP_ADDR"), getenv("TACACS_ADDR")

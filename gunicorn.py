@@ -4,3 +4,4 @@ limit_request_line = 0
 loglevel = "debug"
 raw_env = ["TERM=screen"]
 timeout = 3000
+workers = 3

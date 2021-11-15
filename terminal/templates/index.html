@@ -1,0 +1,15 @@
+<html lang="en">
+  <head>
+    <link href="static/xterm/xterm.min.css" rel="stylesheet" />
+  </head>
+  <body style="background-color: black;">
+    <div style="width: 100%; height: 100%;" id="terminal"></div>
+    <script>
+      const redirection = {{ redirection|tojson|safe }};
+    </script>
+    <script src="static/xterm/xterm.min.js"></script>
+    <script src="static/xterm/xterm-addon-fit.min.js"></script>
+    <script src="static/socketio/socket.io.min.js"></script>
+    <script src="static/terminal.js"></script>
+  </body>
+</html>

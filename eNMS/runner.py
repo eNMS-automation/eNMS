@@ -825,11 +825,11 @@ class Runner:
             )
             if workflow or self.workflow:
                 name = workflow or self.workflow.name
-                query.filter(
+                query = query.filter(
                     vs.models["result"].workflow.has(vs.models["workflow"].name == name)
                 )
             if device:
-                query.filter(
+                query = query.filter(
                     vs.models["result"].device.has(vs.models["device"].name == device)
                 )
             results = filter_run(query, "scoped_name") or filter_run(query, "name")

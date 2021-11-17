@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta
+from datetime import timedelta
 from flask import (
     abort,
     Blueprint,
@@ -13,22 +13,15 @@ from flask import (
 )
 from flask_login import current_user, LoginManager, login_user, logout_user, login_url
 from flask_wtf.csrf import CSRFProtect
-from functools import partial, wraps
+from functools import wraps
 from importlib import import_module
 from itsdangerous import (
     TimedJSONWebSignatureSerializer as Serializer,
     BadSignature,
     SignatureExpired,
 )
-from logging import info, warning
-from os import getenv, read, write
-
-try:
-    from pty import fork
-except Exception as exc:
-    warning(f"Couldn't import pty module ({exc})")
-
-from subprocess import run
+from logging import info
+from os import getenv
 from sys import modules
 from traceback import format_exc
 from werkzeug.exceptions import Forbidden, NotFound

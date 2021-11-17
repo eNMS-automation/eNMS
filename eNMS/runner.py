@@ -823,10 +823,11 @@ class Runner:
             query = db.session.query(vs.models["result"]).filter(
                 vs.models["result"].parent_runtime == run.runtime
             )
-            if workflow or self.workflow:
-                name = workflow or self.workflow.name
+            if workflow:
                 query = query.filter(
-                    vs.models["result"].workflow.has(vs.models["workflow"].name == name)
+                    vs.models["result"].workflow.has(
+                        vs.models["workflow"].name == workflow
+                    )
                 )
             if device:
                 query = query.filter(

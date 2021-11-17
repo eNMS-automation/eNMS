@@ -462,9 +462,11 @@ tables.device = class DeviceTable extends Table {
       ...kwargs,
     });
     for (const model of ["service", "task", "pool"]) {
+      const from = model == "service" ? "target_devices" : "devices";
+      const to = model == "service" ? `target_${model}s` : `${model}s`;
       row[`${model}s`] = `<b><a href="#" onclick="eNMS.table.displayRelationTable(
-        '${model}', ${row.instance}, {parent: '${this.id}', from: 'devices',
-        to: '${model}s'})">${model.charAt(0).toUpperCase() + model.slice(1)}s</a></b>`;
+        '${model}', ${row.instance}, {parent: '${this.id}', from: '${from}',
+        to: '${to}'})">${model.charAt(0).toUpperCase() + model.slice(1)}s</a></b>`;
     }
     return row;
   }

@@ -343,9 +343,6 @@ class Run(AbstractBase):
         super().__init__(**kwargs)
         if not self.name:
             self.name = f"{self.runtime} ({self.creator})"
-        if self.restart_run:
-            self.target_devices = self.restart_run.target_devices
-            self.target_pools = self.restart_run.target_pools
         self.service_name = (self.placeholder or self.service).scoped_name
 
     @classmethod

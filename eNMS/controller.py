@@ -977,7 +977,11 @@ class Controller:
         target = db.fetch(kwargs["relation"]["type"], id=kwargs["relation"]["id"])
         if target.type == "pool" and not target.manually_defined:
             return {"alert": "Removing an object from a dynamic pool is an allowed."}
-        getattr(target, kwargs["relation"]["relation"]["to"]).remove(instance)
+        relationship_property = getattr(target, kwargs["relation"]["relation"]["to"])
+        if instance in relationship_property:
+            relationship_property.remove(instance)
+        else:
+            return {"alert": f"{instance.name} is not associated with {target.name}."}
         self.update_rbac(instance)
 
     def result_log_deletion(self, **kwargs):

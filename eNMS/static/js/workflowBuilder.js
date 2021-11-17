@@ -804,12 +804,12 @@ function showRestartWorkflowPanel() {
         url: `/get_runtimes/${workflow.id}`,
         callback: function (runtimes) {
           const id = `#restart_workflow-restart_runtime-${workflow.id}`;
-          runtimes.forEach((runtime) => {
+          let currentIndex = runtimes.length - 1;
+          runtimes.forEach((runtime, index) => {
+            if (runtime[0] == currentRuntime) currentIndex = index;
             $(id).append(new Option(runtime[1], runtime[0]));
           });
-          $(id)
-            .val(runtimes[runtimes.length - 1])
-            .selectpicker("refresh");
+          $(id).val(runtimes[currentIndex]).selectpicker("refresh");
         },
       });
     },

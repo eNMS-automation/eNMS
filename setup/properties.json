@@ -224,7 +224,7 @@
       },
       {
         "data": "services",
-        "title": "Services",
+        "title": "Target Services",
         "width": "80px",
         "visible": false
       },

@@ -1015,14 +1015,15 @@ class Controller:
             **service.initial_payload,
             **kwargs.get("form", {}).get("initial_payload", {}),
         }
+        restart_runtime = kwargs.get("restart_runtime")
+        restart_run = db.fetch("run", allow_none=True, runtime=restart_runtime)
         if service.type == "workflow" and service.superworkflow and not restart_run:
             run_kwargs["placeholder"] = run_kwargs["start_service"] = service.id
             service = service.superworkflow
             initial_payload.update(service.initial_payload)
         else:
             run_kwargs["start_service"] = service.id
-        if "restart_runtime" in kwargs:
-            restart_run = db.fetch("run", runtime=kwargs["restart_runtime"])
+        if restart_run:
             run_kwargs["restart_run"] = restart_run
             initial_payload = restart_run.payload
         run_kwargs["services"] = [service.id]
@@ -1041,7 +1042,6 @@ class Controller:
         return result.getvalue()
 
     def run_service(self, path, **kwargs):
-        print(kwargs)
         if isinstance(kwargs.get("start_services"), str):
             kwargs["start_services"] = kwargs["start_services"].split("-")
         service_id = str(path).split(">")[-1]

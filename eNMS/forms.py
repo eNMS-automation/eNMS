@@ -523,6 +523,16 @@ class RestartWorkflowForm(BaseForm):
     form_type = HiddenField(default="restart_workflow")
     start_services = HiddenField()
     restart_runtime = SelectField("Restart Runtime", validate_choice=False)
+    targets = SelectField(
+        "Targets",
+        choices=(
+            ("Manually defined", "Use the devices manually defined below."),
+            ("Restart Run", "Use the targets from the restart run."),
+            ("Workflow", "Use the targets defined at workflow level."),
+        ),
+    )
+    restart_devices = MultipleInstanceField("Devices", model="device")
+    restart_pools = MultipleInstanceField("Pools", model="pool")
 
 
 class ResultLogDeletionForm(BaseForm):

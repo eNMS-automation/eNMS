@@ -82,11 +82,19 @@ class Runner:
             raise AttributeError
 
     def run_parameter(self, property):
-        if self.is_main_run and (
+        if self.restart_run and self.payload["targets"] != "Workflow":
+            if property not in ("target_devices", "target_pools"):
+                return None
+            if self.payload["targets"] == "Manually defined":
+                model = "pool" if property == "target_pools" else "device"
+                return db.objectify(model, self.payload[f"restart_{model}s"])
+            elif self.payload["targets"] == "Restart run":
+                return getattr(self.restart_run, property)
+        elif self.is_main_run and (
             self.main_run.target_devices or self.main_run.target_pools
         ):
             return getattr(self.main_run, property, [])
-        if self.parameterized_run and property in self.payload["form"]:
+        elif self.parameterized_run and property in self.payload["form"]:
             value = self.payload["form"][property]
             if property in ("target_devices", "target_pools"):
                 model = "pool" if property == "target_pools" else "device"

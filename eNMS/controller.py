@@ -540,7 +540,14 @@ class Controller:
     def get_result(self, id):
         return db.fetch("result", id=id).result
 
-    def get_runtimes(self, id):
+    def get_result_runtimes(self, id):
+        results = db.fetch("result", allow_none=True, all_matches=True, service_id=id)
+        return sorted(
+            set((result.parent_runtime, result.run.name) for result in results),
+            reverse=True,
+        )
+
+    def get_run_runtimes(self, id):
         runtimes = db.fetch("run", allow_none=True, all_matches=True, service_id=id)
         return sorted(((run.runtime, run.name) for run in runtimes), reverse=True)
 

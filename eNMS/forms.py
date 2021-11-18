@@ -527,7 +527,7 @@ class RestartWorkflowForm(BaseForm):
         "Targets",
         choices=(
             ("Manually defined", "Use the devices manually defined below."),
-            ("Restart Run", "Use the targets from the restart run."),
+            ("Restart run", "Use the targets from the restart run."),
             ("Workflow", "Use the targets defined at workflow level."),
         ),
     )

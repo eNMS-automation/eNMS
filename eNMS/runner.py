@@ -82,7 +82,11 @@ class Runner:
             raise AttributeError
 
     def run_parameter(self, property):
-        if self.restart_run and self.payload["targets"] != "Workflow":
+        if (
+            self.is_main_run
+            and self.restart_run
+            and self.payload["targets"] != "Workflow"
+        ):
             if property not in ("target_devices", "target_pools"):
                 return None
             if self.payload["targets"] == "Manually defined":

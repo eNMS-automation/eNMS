@@ -1130,8 +1130,8 @@ class Runner:
         threads = []
         for library in ("netmiko", "napalm", "scrapli", "ncclient"):
             device_connections = vs.connections_cache[library][self.parent_runtime]
-            for device, connections in device_connections.items():
-                for connection in connections.values():
+            for device, connections in list(device_connections.items()):
+                for connection in list(connections.values()):
                     args = (library, device, connection)
                     thread = Thread(target=self.disconnect, args=args)
                     thread.start()

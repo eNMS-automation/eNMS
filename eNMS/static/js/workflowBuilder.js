@@ -804,7 +804,7 @@ function showRestartWorkflowPanel() {
         url: `/get_runtimes/${workflow.id}`,
         callback: function (runtimes) {
           const id = `#restart_workflow-restart_runtime-${workflow.id}`;
-          let currentIndex = runtimes.length - 1;
+          let currentIndex = 0;
           runtimes.forEach((runtime, index) => {
             if (runtime[0] == currentRuntime) currentIndex = index;
             $(id).append(new Option(runtime[1], runtime[0]));

@@ -422,7 +422,7 @@ function displayLogs(service, runtime, change) {
     editor.setSize("100%", "100%");
   }
   $(`#runtimes-logs-${service.id}`).on("change", function () {
-    refreshLogs(service, this.value, editor);
+    refreshLogs(service, this.value, editor, true);
   });
   refreshLogs(service, runtime, editor, true);
 }

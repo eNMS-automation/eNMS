@@ -271,7 +271,7 @@ export const showRuntimePanel = function (
     type == "logs" ? "logs" : service.type == "workflow" && !table ? "tree" : "table";
   const panelId = `${panelType}-${service.id}`;
   call({
-    url: `/get_result_runtimes/${service.id}`,
+    url: `/get_runtimes/${service.id}`,
     callback: (runtimes) => {
       if (newRuntime) runtimes.push([runtime, runtime]);
       if (!runtimes.length) return notify(`No ${type} yet.`, "error", 5);

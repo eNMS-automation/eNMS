@@ -318,8 +318,8 @@
   service_vendor: ''
   service_vendor_invert: false
   service_vendor_match: inclusion
-  target_services: ['[SxS Service Targets with Run Once + Skip] Run Once with Pool',
-    Scalability Test (large workflow)]
+  target_services: [Scalability Test (large workflow), '[SxS Service Targets with
+      Run Once + Skip] Run Once with Pool']
   tasks: []
   type: pool
   user_description: ''

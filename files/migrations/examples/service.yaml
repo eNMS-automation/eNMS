@@ -61,7 +61,7 @@
     Generic File Transfer: &id018 [-479, -89]
     Global Variables and post-run Pool Update Mechanism: &id019 [-228, 7]
     Global get_credential Function and Log Obfuscation: &id020 [-477, -78]
-    'Global variables: get_result and get_var': [-258, -26]
+    'Global variables: get_result and get_var': [-335, -16]
     'Iteration Mechanism: Combined Device & Target Iteration': [-458, -30]
     'Iteration Mechanism: Device Iteration': [-354, -121]
     'Iteration Mechanism: Dictionary as Iteration Target Variable': &id001 [-308,
@@ -428,7 +428,7 @@
     Generic File Transfer: &id081 [476, 156]
     Global Variables and post-run Pool Update Mechanism: &id082 [749, 100]
     Global get_credential Function and Log Obfuscation: &id083 [591, -45]
-    'Global variables: get_result and get_var': [628, 11]
+    'Global variables: get_result and get_var': [697, -62]
     'Iteration Mechanism: Combined Device & Target Iteration': [-437, 191]
     'Iteration Mechanism: Device Iteration': [549, -155]
     'Iteration Mechanism: Dictionary as Iteration Target Variable': &id064 [596, -221]
@@ -25393,8 +25393,8 @@
         \ from its parent workflow.\r\nRuns on two devices: Austin and Washington.\r\
         \nMust be tested in DxD and SxS per S/W targets, with the\r\nsubworkflow in\
         \ DxD and SxS per S/W targets, and with\r\nmultiprocessing."
-      positions: [198, -206]
-  last_modified: '2021-11-21 01:00:15.138658'
+      positions: [175, -198]
+  last_modified: '2021-11-21 01:06:17.859994'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -25499,7 +25499,7 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    'Global variables: get_result and get_var': [-101, -118]
+    'Global variables: get_result and get_var': [-187, -139]
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''
@@ -25576,7 +25576,7 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    'Global variables: get_result and get_var': [-96, 44]
+    'Global variables: get_result and get_var': [-172, 94]
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''
@@ -25709,7 +25709,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2021-11-21 00:50:36.522462'
+  last_modified: '2021-11-21 01:12:01.108991'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -25734,14 +25734,14 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    'Global variables: get_result and get_var': [445, -117]
+    'Global variables: get_result and get_var': [582, -169]
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''
   priority: 1
   reply_to: ''
   reserved: false
-  run_method: per_device
+  run_method: once
   scoped_name: After Run Once
   send_notification: false
   send_notification_method: mail
@@ -25749,8 +25749,11 @@
   skip: {}
   skip_query: ''
   skip_value: success
-  source_code: "\r\n# Click on \"i\" to right of \"Source Code\" for examples.\r\n\
-    \r\nresult = {}\r\nresults[\"success\"] = True\r\nresults[\"result\"] = result"
+  source_code: "subworkflow_var = get_var(\"Subworkflow\", device=\"Washington\")\r\
+    \nsubworkflow_result = get_result(\"Subservice\", device=\"Washington\")[\"result\"\
+    ]\r\n\r\nsuccess = [subworkflow_var] + subworkflow_result == [\r\n  \"Subworkflow\"\
+    ,\r\n  1,\r\n  \"Washington\",\r\n  \"Before Run Once\",\r\n  \"Before Run Per\
+    \ Device: Washington\",\r\n]\r\nresults[\"success\"] = results[\"result\"] = success"
   target_devices: [Washington, Austin]
   target_pools: []
   time_between_retries: 10
@@ -25786,7 +25789,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2021-11-21 00:50:41.714475'
+  last_modified: '2021-11-21 01:10:51.370260'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -25811,7 +25814,7 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    'Global variables: get_result and get_var': [437, 30]
+    'Global variables: get_result and get_var': [579, 82]
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''
@@ -25826,8 +25829,11 @@
   skip: {}
   skip_query: ''
   skip_value: success
-  source_code: "\r\n# Click on \"i\" to right of \"Source Code\" for examples.\r\n\
-    \r\nresult = {}\r\nresults[\"success\"] = True\r\nresults[\"result\"] = result"
+  source_code: "subworkflow_var = get_var(\"Subworkflow\", device=device.name)\r\n\
+    subworkflow_result = get_result(\"Subservice\", device=device.name)[\"result\"\
+    ]\r\n\r\nsuccess = [subworkflow_var] + subworkflow_result == [\r\n  \"Subworkflow\"\
+    ,\r\n  1,\r\n  device.name,\r\n  \"Before Run Once\",\r\n  f\"Before Run Per Device:\
+    \ {device.name}\",\r\n]\r\nresults[\"success\"] = results[\"result\"] = success"
   target_devices: [Washington, Austin]
   target_pools: []
   time_between_retries: 10
@@ -25863,7 +25869,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2021-11-21 01:02:34.292922'
+  last_modified: '2021-11-21 01:09:08.519718'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -25906,9 +25912,10 @@
   source_code: "result = [\r\n  get_var(\"Before Run Once\"),\r\n  get_var(\"Before\
     \ Run Per Device\", device=device.name),\r\n  get_result(\"Before Run Once\")[\"\
     result\"],\r\n  get_result(\"Before Run Per Device\", device=device.name)[\"result\"\
-    ],\r\n]\r\n\r\nsuccess = result == [\r\n  1,\r\n  device.name,\r\n  \"Before Run\
-    \ Once\",\r\n  f\"Before Run Per Device: {device.name}\",\r\n]\r\n\r\nresults[\"\
-    success\"] = success\r\nresults[\"result\"] = result"
+    ],\r\n]\r\n\r\nset_var(\"Subworkflow\", \"Subworkflow\", device=device.name)\r\
+    \n\r\nsuccess = result == [\r\n  1,\r\n  device.name,\r\n  \"Before Run Once\"\
+    ,\r\n  f\"Before Run Per Device: {device.name}\",\r\n]\r\n\r\nresults[\"success\"\
+    ] = success\r\nresults[\"result\"] = result"
   target_devices: [Washington, Austin]
   target_pools: []
   time_between_retries: 10

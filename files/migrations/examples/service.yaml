@@ -25474,7 +25474,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2021-11-21 00:49:54.182138'
+  last_modified: '2021-11-21 00:54:13.502709'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -25514,8 +25514,8 @@
   skip: {}
   skip_query: ''
   skip_value: success
-  source_code: "\r\n# Click on \"i\" to right of \"Source Code\" for examples.\r\n\
-    \r\nresult = {}\r\nresults[\"success\"] = True\r\nresults[\"result\"] = result"
+  source_code: "set_var(\"Before Run Once\", 1)\r\nresults[\"success\"] = True\r\n\
+    results[\"result\"] = \"Before Run Once\""
   target_devices: [Austin, Washington]
   target_pools: []
   time_between_retries: 10
@@ -25551,7 +25551,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2021-11-21 00:50:00.575152'
+  last_modified: '2021-11-21 00:54:00.560321'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -25591,8 +25591,8 @@
   skip: {}
   skip_query: ''
   skip_value: success
-  source_code: "\r\n# Click on \"i\" to right of \"Source Code\" for examples.\r\n\
-    \r\nresult = {}\r\nresults[\"success\"] = True\r\nresults[\"result\"] = result"
+  source_code: "set_var(\"Before Run Per Device\", 2)\r\nresults[\"success\"] = True\r\
+    \nresults[\"result\"] = \"Before Run Per Device\""
   target_devices: [Washington, Austin]
   target_pools: []
   time_between_retries: 10
@@ -25862,7 +25862,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2021-11-21 00:51:23.441412'
+  last_modified: '2021-11-21 00:58:16.904099'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -25902,8 +25902,12 @@
   skip: {}
   skip_query: ''
   skip_value: success
-  source_code: "\r\n# Click on \"i\" to right of \"Source Code\" for examples.\r\n\
-    \r\nresult = {}\r\nresults[\"success\"] = True\r\nresults[\"result\"] = result"
+  source_code: "result = [\r\n  get_var(\"Before Run Once\"),\r\n  get_var(\"Before\
+    \ Run Per Device\", device=device.name),\r\n  get_result(\"Before Run Once\")[\"\
+    result\"],\r\n  get_result(\"Before Run Per Device\")[\"result\"],\r\n]\r\n\r\n\
+    success = result == [\r\n  1,\r\n  device.name,\r\n  \"Before Run Once\",\r\n\
+    \  f\"result: {device.name}\",\r\n]\r\n\r\nresults[\"success\"] = success\r\n\
+    results[\"result\"] = result"
   target_devices: [Washington, Austin]
   target_pools: []
   time_between_retries: 10

@@ -1406,3 +1406,26 @@
 - {color: green, destination: '[Shared] End', label: success, name: '2021-11-08 07:41:19.985381',
   source: '[Restart From Feature and Superworkflow Interaction] Service 3', subtype: success,
   type: workflow_edge, workflow: Restart From Feature and Superworkflow Interaction}
+- {color: green, destination: '[Global variables: get_result and get_var] Before Run
+    Once', label: success, name: '2021-11-21 00:47:09.508151', source: '[Shared] Start',
+  subtype: success, type: workflow_edge, workflow: 'Global variables: get_result and
+    get_var'}
+- {color: green, destination: '[Global variables: get_result and get_var] Before Run
+    Per Device', label: success, name: '2021-11-21 00:47:10.642145', source: '[Global
+    variables: get_result and get_var] Before Run Once', subtype: success, type: workflow_edge,
+  workflow: 'Global variables: get_result and get_var'}
+- {color: green, destination: '[Global variables: get_result and get_var] Subworkflow',
+  label: success, name: '2021-11-21 00:47:11.944800', source: '[Global variables:
+    get_result and get_var] Before Run Per Device', subtype: success, type: workflow_edge,
+  workflow: 'Global variables: get_result and get_var'}
+- {color: green, destination: '[Global variables: get_result and get_var] After Run
+    Once', label: success, name: '2021-11-21 00:47:13.104818', source: '[Global variables:
+    get_result and get_var] Subworkflow', subtype: success, type: workflow_edge, workflow: 'Global
+    variables: get_result and get_var'}
+- {color: green, destination: '[Global variables: get_result and get_var] After Run
+    Per Device', label: success, name: '2021-11-21 00:47:14.102116', source: '[Global
+    variables: get_result and get_var] After Run Once', subtype: success, type: workflow_edge,
+  workflow: 'Global variables: get_result and get_var'}
+- {color: green, destination: '[Shared] End', label: success, name: '2021-11-21 00:47:14.987004',
+  source: '[Global variables: get_result and get_var] After Run Per Device', subtype: success,
+  type: workflow_edge, workflow: 'Global variables: get_result and get_var'}

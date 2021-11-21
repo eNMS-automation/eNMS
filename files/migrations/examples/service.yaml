@@ -61,6 +61,7 @@
     Generic File Transfer: &id018 [-479, -89]
     Global Variables and post-run Pool Update Mechanism: &id019 [-228, 7]
     Global get_credential Function and Log Obfuscation: &id020 [-477, -78]
+    'Global variables: get_result and get_var': [-258, -26]
     'Iteration Mechanism: Combined Device & Target Iteration': [-458, -30]
     'Iteration Mechanism: Device Iteration': [-354, -121]
     'Iteration Mechanism: Dictionary as Iteration Target Variable': &id001 [-308,
@@ -426,6 +427,7 @@
     Generic File Transfer: &id081 [476, 156]
     Global Variables and post-run Pool Update Mechanism: &id082 [749, 100]
     Global get_credential Function and Log Obfuscation: &id083 [591, -45]
+    'Global variables: get_result and get_var': [628, 11]
     'Iteration Mechanism: Combined Device & Target Iteration': [-437, 191]
     'Iteration Mechanism: Device Iteration': [549, -155]
     'Iteration Mechanism: Dictionary as Iteration Target Variable': &id064 [596, -221]
@@ -617,6 +619,8 @@
     '[DxD and SxS Run Methods] Workflow in service by service mode (workflow targets)': &id116 [
       500, 0]
     '[DxD and SxS Run Methods] Workflow in service targets mode': &id117 [500, 0]
+    '[Global variables: get_result and get_var] Subworkflow': !!python/tuple [500,
+      0]
     '[Iteration Mechanism: Workflow and Subworkflow Iteration] Subworkflow Device Iteration': &id125 [
       500, 0]
     '[Iteration Mechanism: Workflow and Subworkflow Iteration] Subworkflow Device Iteration 2': &id126 [
@@ -25336,6 +25340,482 @@
   reserved: false
   run_method: per_device
   scoped_name: Service 3
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: success
+  source_code: "\r\n# Click on \"i\" to right of \"Source Code\" for examples.\r\n\
+    \r\nresult = {}\r\nresults[\"success\"] = True\r\nresults[\"result\"] = result"
+  target_devices: []
+  target_pools: []
+  time_between_retries: 10
+  type: python_snippet_service
+  update_pools_after_running: false
+  update_target_pools: false
+  validation_condition: none
+  validation_method: text
+  validation_section: results['result']
+  vendor: ''
+  waiting_time: 0
+- access_groups: admin
+  close_connection: false
+  completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credential_type: any
+  default_access: creator
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  labels:
+    d300f746-8293-420f-b288-167d3b6ae552:
+      alignment: left
+      content: "This workflow tests the get_result and get_var global variable.\r\n\
+        Both must be able to access the variables / results created in\r\na workflow\
+        \ from within its subworkflows, and reciprocally\r\ncreated in a subworkflow\
+        \ from its parent workflow."
+      positions: [239, -209]
+  last_modified: '2021-11-21 00:47:14.987004'
+  log_level: 1
+  mail_recipient: ''
+  mandatory_parametrization: false
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: 'Global variables: get_result and get_var'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  owners: []
+  owners_access: '[]'
+  parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
+    \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
+    \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
+    \ = StringField('Device Query', python=True, widget=TextArea(), render_kw={'rows':\
+    \ 2})\r\ndevice_query_property = SelectField('Query Property Type', choices=(('name',\
+    \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
+    \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
+    \ default=15)"
+  pools: ['All devices, links, services and users']
+  positions: {}
+  postprocessing: ''
+  postprocessing_mode: success
+  preprocessing: ''
+  priority: 1
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: 'Global variables: get_result and get_var'
+  send_notification: false
+  send_notification_method: mail
+  services: ['[Shared] Start', '[Shared] End', '[Global variables: get_result and
+      get_var] Before Run Once', '[Global variables: get_result and get_var] Before
+      Run Per Device', '[Global variables: get_result and get_var] Subworkflow', '[Global
+      variables: get_result and get_var] After Run Once', '[Global variables: get_result
+      and get_var] After Run Per Device']
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: success
+  target_devices: []
+  target_pools: []
+  time_between_retries: 10
+  type: workflow
+  update_pools_after_running: false
+  update_target_pools: false
+  validation_condition: none
+  validation_method: text
+  validation_section: results['result']
+  vendor: ''
+  waiting_time: 0
+  workflow_category: Example workflow(s)
+- access_groups: admin
+  completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credential_type: any
+  default_access: creator
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2021-11-21 00:46:18.511598'
+  log_level: 1
+  mail_recipient: ''
+  mandatory_parametrization: false
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Global variables: get_result and get_var] Before Run Once'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  owners: []
+  owners_access: '[]'
+  parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
+    \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
+    \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
+    \ = StringField('Device Query', python=True, widget=TextArea(), render_kw={'rows':\
+    \ 2})\r\ndevice_query_property = SelectField('Query Property Type', choices=(('name',\
+    \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
+    \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
+    \ default=15)"
+  pools: ['All devices, links, services and users']
+  positions:
+    'Global variables: get_result and get_var': [-101, -118]
+  postprocessing: ''
+  postprocessing_mode: success
+  preprocessing: ''
+  priority: 1
+  reply_to: ''
+  reserved: false
+  run_method: once
+  scoped_name: Before Run Once
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: success
+  source_code: "\r\n# Click on \"i\" to right of \"Source Code\" for examples.\r\n\
+    \r\nresult = {}\r\nresults[\"success\"] = True\r\nresults[\"result\"] = result"
+  target_devices: []
+  target_pools: []
+  time_between_retries: 10
+  type: python_snippet_service
+  update_pools_after_running: false
+  update_target_pools: false
+  validation_condition: none
+  validation_method: text
+  validation_section: results['result']
+  vendor: ''
+  waiting_time: 0
+- access_groups: admin
+  completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credential_type: any
+  default_access: creator
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2021-11-21 00:46:31.628775'
+  log_level: 1
+  mail_recipient: ''
+  mandatory_parametrization: false
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Global variables: get_result and get_var] Before Run Per Device'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  owners: []
+  owners_access: '[]'
+  parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
+    \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
+    \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
+    \ = StringField('Device Query', python=True, widget=TextArea(), render_kw={'rows':\
+    \ 2})\r\ndevice_query_property = SelectField('Query Property Type', choices=(('name',\
+    \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
+    \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
+    \ default=15)"
+  pools: ['All devices, links, services and users']
+  positions:
+    'Global variables: get_result and get_var': [-96, 44]
+  postprocessing: ''
+  postprocessing_mode: success
+  preprocessing: ''
+  priority: 1
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: Before Run Per Device
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: success
+  source_code: "\r\n# Click on \"i\" to right of \"Source Code\" for examples.\r\n\
+    \r\nresult = {}\r\nresults[\"success\"] = True\r\nresults[\"result\"] = result"
+  target_devices: []
+  target_pools: []
+  time_between_retries: 10
+  type: python_snippet_service
+  update_pools_after_running: false
+  update_target_pools: false
+  validation_condition: none
+  validation_method: text
+  validation_section: results['result']
+  vendor: ''
+  waiting_time: 0
+- access_groups: admin
+  close_connection: false
+  completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credential_type: any
+  default_access: creator
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  labels: {}
+  last_modified: '2021-11-21 00:46:41.221512'
+  log_level: 1
+  mail_recipient: ''
+  mandatory_parametrization: false
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Global variables: get_result and get_var] Subworkflow'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  owners: []
+  owners_access: '[]'
+  parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
+    \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
+    \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
+    \ = StringField('Device Query', python=True, widget=TextArea(), render_kw={'rows':\
+    \ 2})\r\ndevice_query_property = SelectField('Query Property Type', choices=(('name',\
+    \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
+    \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
+    \ default=15)"
+  pools: ['All devices, links, services and users']
+  positions:
+    'Global variables: get_result and get_var': [194, -49]
+  postprocessing: ''
+  postprocessing_mode: success
+  preprocessing: ''
+  priority: 1
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: Subworkflow
+  send_notification: false
+  send_notification_method: mail
+  services: ['[Shared] Start', '[Shared] End']
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: success
+  target_devices: []
+  target_pools: []
+  time_between_retries: 10
+  type: workflow
+  update_pools_after_running: false
+  update_target_pools: false
+  validation_condition: none
+  validation_method: text
+  validation_section: results['result']
+  vendor: ''
+  waiting_time: 0
+  workflow_category: Example workflow(s)
+- access_groups: admin
+  completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credential_type: any
+  default_access: creator
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2021-11-21 00:46:53.022188'
+  log_level: 1
+  mail_recipient: ''
+  mandatory_parametrization: false
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Global variables: get_result and get_var] After Run Once'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  owners: []
+  owners_access: '[]'
+  parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
+    \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
+    \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
+    \ = StringField('Device Query', python=True, widget=TextArea(), render_kw={'rows':\
+    \ 2})\r\ndevice_query_property = SelectField('Query Property Type', choices=(('name',\
+    \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
+    \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
+    \ default=15)"
+  pools: ['All devices, links, services and users']
+  positions:
+    'Global variables: get_result and get_var': [421, -105]
+  postprocessing: ''
+  postprocessing_mode: success
+  preprocessing: ''
+  priority: 1
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: After Run Once
+  send_notification: false
+  send_notification_method: mail
+  shared: false
+  skip: {}
+  skip_query: ''
+  skip_value: success
+  source_code: "\r\n# Click on \"i\" to right of \"Source Code\" for examples.\r\n\
+    \r\nresult = {}\r\nresults[\"success\"] = True\r\nresults[\"result\"] = result"
+  target_devices: []
+  target_pools: []
+  time_between_retries: 10
+  type: python_snippet_service
+  update_pools_after_running: false
+  update_target_pools: false
+  validation_condition: none
+  validation_method: text
+  validation_section: results['result']
+  vendor: ''
+  waiting_time: 0
+- access_groups: admin
+  completion_time: 1
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credential_type: any
+  default_access: creator
+  definition: Definition
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  dict_match: {}
+  disable_result_creation: false
+  display_only_failed_nodes: false
+  impacting: true
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2021-11-21 00:47:03.634803'
+  log_level: 1
+  mail_recipient: ''
+  mandatory_parametrization: false
+  max_number_of_retries: 100
+  max_processes: 15
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Global variables: get_result and get_var] After Run Per Device'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  owners: []
+  owners_access: '[]'
+  parameterized_form: "name = StringField('Name', [InputRequired()])\r\ninitial_payload\
+    \ = DictField()\r\ntarget_devices = MultipleInstanceField('Devices', model='device')\r\
+    \ntarget_pools = MultipleInstanceField('Pools', model='pool')\r\ndevice_query\
+    \ = StringField('Device Query', python=True, widget=TextArea(), render_kw={'rows':\
+    \ 2})\r\ndevice_query_property = SelectField('Query Property Type', choices=(('name',\
+    \ 'Name'), ('ip_address', 'IP address')))\r\nmultiprocessing = BooleanField('Multiprocessing',\
+    \ default=False)\r\nmax_processes = IntegerField('Maximum number of processes',\
+    \ default=15)"
+  pools: ['All devices, links, services and users']
+  positions:
+    'Global variables: get_result and get_var': [437, 30]
+  postprocessing: ''
+  postprocessing_mode: success
+  preprocessing: ''
+  priority: 1
+  reply_to: ''
+  reserved: false
+  run_method: per_device
+  scoped_name: After Run Per Device
   send_notification: false
   send_notification_method: mail
   shared: false

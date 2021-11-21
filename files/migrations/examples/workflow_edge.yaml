@@ -1429,3 +1429,10 @@
 - {color: green, destination: '[Shared] End', label: success, name: '2021-11-21 00:47:14.987004',
   source: '[Global variables: get_result and get_var] After Run Per Device', subtype: success,
   type: workflow_edge, workflow: 'Global variables: get_result and get_var'}
+- {color: green, destination: '[[Global variables: get_result and get_var] Subworkflow]
+    Subservice', label: success, name: '2021-11-21 00:50:27.247399', source: '[Shared]
+    Start', subtype: success, type: workflow_edge, workflow: '[Global variables: get_result
+    and get_var] Subworkflow'}
+- {color: green, destination: '[Shared] End', label: success, name: '2021-11-21 00:50:28.581310',
+  source: '[[Global variables: get_result and get_var] Subworkflow] Subservice', subtype: success,
+  type: workflow_edge, workflow: '[Global variables: get_result and get_var] Subworkflow'}

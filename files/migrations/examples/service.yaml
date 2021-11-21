@@ -25394,7 +25394,7 @@
         \nMust be tested in DxD and SxS per S/W targets, with the\r\nsubworkflow in\
         \ DxD and SxS per S/W targets, and with\r\nmultiprocessing."
       positions: [198, -206]
-  last_modified: '2021-11-21 00:51:14.396352'
+  last_modified: '2021-11-21 01:00:15.138658'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -25551,7 +25551,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2021-11-21 00:54:00.560321'
+  last_modified: '2021-11-21 01:01:25.969004'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -25591,8 +25591,9 @@
   skip: {}
   skip_query: ''
   skip_value: success
-  source_code: "set_var(\"Before Run Per Device\", 2)\r\nresults[\"success\"] = True\r\
-    \nresults[\"result\"] = \"Before Run Per Device\""
+  source_code: "set_var(\"Before Run Per Device\", device.name, device=device.name)\r\
+    \nresults[\"success\"] = True\r\nresults[\"result\"] = f\"Before Run Per Device:\
+    \ {device.name}\""
   target_devices: [Washington, Austin]
   target_pools: []
   time_between_retries: 10
@@ -25733,7 +25734,7 @@
     \ default=15)"
   pools: ['All devices, links, services and users']
   positions:
-    'Global variables: get_result and get_var': [421, -105]
+    'Global variables: get_result and get_var': [445, -117]
   postprocessing: ''
   postprocessing_mode: success
   preprocessing: ''
@@ -25862,7 +25863,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2021-11-21 00:58:16.904099'
+  last_modified: '2021-11-21 01:02:34.292922'
   log_level: 1
   mail_recipient: ''
   mandatory_parametrization: false
@@ -25904,10 +25905,10 @@
   skip_value: success
   source_code: "result = [\r\n  get_var(\"Before Run Once\"),\r\n  get_var(\"Before\
     \ Run Per Device\", device=device.name),\r\n  get_result(\"Before Run Once\")[\"\
-    result\"],\r\n  get_result(\"Before Run Per Device\")[\"result\"],\r\n]\r\n\r\n\
-    success = result == [\r\n  1,\r\n  device.name,\r\n  \"Before Run Once\",\r\n\
-    \  f\"result: {device.name}\",\r\n]\r\n\r\nresults[\"success\"] = success\r\n\
-    results[\"result\"] = result"
+    result\"],\r\n  get_result(\"Before Run Per Device\", device=device.name)[\"result\"\
+    ],\r\n]\r\n\r\nsuccess = result == [\r\n  1,\r\n  device.name,\r\n  \"Before Run\
+    \ Once\",\r\n  f\"Before Run Per Device: {device.name}\",\r\n]\r\n\r\nresults[\"\
+    success\"] = success\r\nresults[\"result\"] = result"
   target_devices: [Washington, Austin]
   target_pools: []
   time_between_retries: 10

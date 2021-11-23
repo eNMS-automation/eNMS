@@ -85,6 +85,7 @@ class Workflow(Service):
             clone.edges.append(
                 db.factory(
                     "workflow_edge",
+                    rbac=None,
                     **{
                         "workflow": clone.id,
                         "subtype": edge.subtype,

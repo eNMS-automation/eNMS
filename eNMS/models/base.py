@@ -136,7 +136,7 @@ class AbstractBase(db.base):
             for property, value in self.get_properties().items()
             if property not in ("id", "name")
         }
-        instance = db.factory(self.type, **{**properties, **kwargs})
+        instance = db.factory(self.type, rbac=None, **{**properties, **kwargs})
         return instance
 
     def to_dict(

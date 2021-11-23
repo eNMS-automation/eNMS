@@ -1,4 +1,4 @@
-from datetime import timedelta
+from datetime import datetime, timedelta
 from flask import (
     abort,
     Blueprint,
@@ -119,6 +119,7 @@ class Server(Flask):
     def process_requests(function):
         @wraps(function)
         def decorated_function(*args, **kwargs):
+            time_before = datetime.now()
             remote_address = request.environ["REMOTE_ADDR"]
             client_address = request.environ.get("HTTP_X_FORWARDED_FOR", remote_address)
             rest_request = request.path.startswith("/rest/")
@@ -170,8 +171,9 @@ class Server(Flask):
                     status_code = 404
                 except Exception:
                     status_code, traceback = 500, format_exc()
+            time_difference = (datetime.now() - time_before).total_seconds()
             log = (
-                f"USER: {username} ({client_address}) - "
+                f"USER: {username} ({client_address}) - {time_difference:.3f}s - "
                 f"{request.method} {request.path} ({status_code})"
             )
             if status_code == 500:

@@ -188,10 +188,10 @@ class Device(Object):
 
     @property
     def ui_name(self):
-        return f"{self.name} ({self.model})" if self.model else self.name
+        return f"{self.name} ({self.model})" if self.model else str(self.name)
 
     def __repr__(self):
-        return f"{self.name} ({self.model})" if self.model else self.name
+        return f"{self.name} ({self.model})" if self.model else str(self.name)
 
 
 class Link(Object):

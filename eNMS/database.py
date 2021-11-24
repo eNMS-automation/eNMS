@@ -238,6 +238,7 @@ class Database:
                         change += f"DELETED: {deleted}"
                     if added:
                         change += f"{' / ' if deleted else ''}ADDED: {added}"
+                    print("TTT"*100, added, deleted, change)
                 else:
                     change += (
                         f"'{hist.deleted[0] if hist.deleted else None}' => "

@@ -58,6 +58,7 @@ class Runner:
             setattr(self, key, value)
         device_progress = "iteration_device" if self.iteration_run else "device"
         self.progress_key = f"progress/{device_progress}"
+        self.is_admin_run = db.fetch("user", name=self.creator).is_admin
         self.main_run = db.fetch("run", runtime=self.parent_runtime)
         if self.service not in self.main_run.services:
             self.main_run.services.append(self.service)
@@ -893,7 +894,6 @@ class Runner:
                 "factory": partial(_self.database_function, "factory"),
                 "fetch": partial(_self.database_function, "fetch"),
                 "fetch_all": partial(_self.database_function, "fetch_all"),
-                "get_credential": _self.get_credential,
                 "get_result": _self.get_result,
                 "get_var": _self.get_var,
                 "log": _self.log,
@@ -906,6 +906,8 @@ class Runner:
                 "workflow": _self.workflow,
             }
         )
+        if _self.is_admin_run:
+            variables["get_credential"] = _self.get_credential
         return variables
 
     def eval(_self, query, function="eval", **locals):  # noqa: N805

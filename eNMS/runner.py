@@ -597,7 +597,7 @@ class Runner:
         service_log=True,
     ):
         try:
-            log_level = int(self.main_run.log_level)
+            log_level = int(self.main_run.service.log_level)
         except Exception:
             log_level = 1
         if not log_level or severity not in vs.log_levels[log_level - 1 :]:

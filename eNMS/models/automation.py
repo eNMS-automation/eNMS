@@ -178,7 +178,8 @@ class Service(AbstractBase):
             ).union(
                 query.join(originals_alias, cls.originals)
                 .join(owners_alias, originals_alias.owners)
-                .filter(owners_alias.name == user.name)
+                .filter(owners_alias.name == user.name),
+                query.filter(cls.shared == True),
             )
         return query
 

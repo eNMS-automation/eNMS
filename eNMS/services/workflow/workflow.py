@@ -258,11 +258,10 @@ class WorkflowEdge(AbstractBase):
             query = (
                 query.join(cls.workflow)
                 .join(originals_alias, vs.models["service"].originals)
-                .join(vs.models["user"], originals_alias.owners)
-                .filter(
-                    or_(
-                        vs.models["user"].name == user.name,
-                        ~originals_alias.owners_access.contains(mode),
+                .filter(~originals_alias.owners_access.contains(mode))
+                .union(
+                    query.join(vs.models["user"], originals_alias.owners).filter(
+                        vs.models["user"].name == user.name
                     )
                 )
             )

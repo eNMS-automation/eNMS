@@ -56,6 +56,7 @@ class Runner:
         vs.run_instances[self.runtime] = self
         for key, value in kwargs.items():
             setattr(self, key, value)
+        self.in_process = False if self.is_main_run else run.in_process
         device_progress = "iteration_device" if self.iteration_run else "device"
         self.progress_key = f"progress/{device_progress}"
         self.is_admin_run = db.fetch("user", name=self.creator).is_admin
@@ -395,14 +396,20 @@ class Runner:
                 )
                 self.log("error", error)
                 return {"success": False, "runtime": self.runtime, "result": error}
-            if self.multiprocessing and len(non_skipped_targets) > 1:
+            if (
+                self.multiprocessing
+                and len(non_skipped_targets) > 1
+                and not self.in_process
+            ):
                 processes = min(len(non_skipped_targets), self.max_processes)
                 process_args = [
                     (device.id, self.runtime, results) for device in non_skipped_targets
                 ]
                 self.log("info", f"Starting a pool of {processes} threads")
+                self.in_process = True
                 with ThreadPool(processes=processes) as pool:
                     pool.map(self.get_device_result, process_args)
+                self.in_process = False
             else:
                 results.extend(
                     [

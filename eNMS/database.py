@@ -124,6 +124,7 @@ class Database:
 
     def configure_columns(self):
         class CustomPickleType(PickleType):
+            cache_ok = True
             if self.dialect == "mysql":
                 impl = MSMediumBlob
 
@@ -146,6 +147,8 @@ class Database:
         }
 
         class CustomColumn(Column):
+            inherit_cache = True
+
             def __init__(self, ctype, *args, **kwargs):
                 if "default" not in kwargs and ctype in default_ctypes:
                     kwargs["default"] = default_ctypes[ctype]

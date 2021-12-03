@@ -125,7 +125,7 @@ class Database:
     def configure_columns(self):
         class CustomPickleType(PickleType):
             cache_ok = True
-            if self.dialect == "mysql":
+            if self.dialect.startswith(("mariadb", "mysql")):
                 impl = MSMediumBlob
 
         self.Dict = MutableDict.as_mutable(CustomPickleType)

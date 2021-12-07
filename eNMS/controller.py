@@ -1068,19 +1068,6 @@ class Controller:
             with open(vs.path / "setup" / "settings.json", "w") as file:
                 dump(kwargs["settings"], file, indent=2)
 
-    def save_view_positions(self, **kwargs):
-        for node_id, properties in kwargs.items():
-            view_object = db.factory("view_object", id=node_id)
-            for property, values in properties.items():
-                for direction in ("x", "y", "z"):
-                    prefix = "_" if property == "rotation" else ""
-                    setattr(
-                        view_object,
-                        f"{property}_{direction}",
-                        values[prefix + direction],
-                    )
-        return vs.get_time()
-
     def scan_cluster(self, **kwargs):
         protocol = vs.settings["cluster"]["scan_protocol"]
         for ip_address in IPv4Network(vs.settings["cluster"]["scan_subnet"]):

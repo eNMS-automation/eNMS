@@ -843,21 +843,6 @@ class UploadFilesForm(BaseForm):
     form_type = HiddenField(default="upload_files")
 
 
-class ViewLabelForm(BaseForm):
-    form_type = HiddenField(default="view_label")
-    action = "eNMS.viewBuilder.createLabel"
-    text = StringField(widget=TextArea(), render_kw={"rows": 15})
-
-
-class ViewPlanForm(BaseForm):
-    form_type = HiddenField(default="plan")
-    action = "eNMS.viewBuilder.createPlan"
-    name = StringField("Name", [InputRequired()])
-    size = IntegerField("Size", default=2000)
-    rows = IntegerField("Number of Rows", default=100)
-    opacity = FloatField("Opacity", default=1.0)
-
-
 class WorkflowLabelForm(BaseForm):
     form_type = HiddenField(default="workflow_label")
     action = "eNMS.workflowBuilder.createLabel"

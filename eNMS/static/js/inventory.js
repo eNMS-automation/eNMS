@@ -121,15 +121,8 @@ function showDeviceModel(device) {
     title: `3D Visualization of '${device.name}'`,
     size: "700 500",
     id: device.id,
-    content: `<div id="map" style="height:100%;width:100%"></div>`,
+    content: `<div id="map" style="height:100%; width:100%"></div>`,
     callback: () => {
-      function setNodePosition(node) {
-        node.scale.set(20, 20, 20);
-        node.rotation.set(
-          -Math.PI, 0, 0
-        );
-        node.position.set(0, 0, 100);
-      }
       function animate() {
         requestAnimationFrame(animate);
         renderer.render(scene, camera);
@@ -153,7 +146,9 @@ function showDeviceModel(device) {
       new THREE.ColladaLoader().load(
         `/static/img/view/models/juniper_ex3300.dae`,
         function (collada) {
-          setNodePosition(collada.scene);
+          collada.scene.scale.set(20, 20, 20);
+          collada.scene.rotation.set(-Math.PI, 0, 0);
+          collada.scene.position.set(0, 0, 100);
           scene.add(collada.scene);
         }
       );

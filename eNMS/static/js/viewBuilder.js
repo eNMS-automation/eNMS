@@ -31,7 +31,6 @@ let scene;
 let renderer;
 let controls;
 let transformControls;
-let labelRenderer;
 let nodes = {};
 let pointer;
 let activeControls = false;
@@ -131,40 +130,6 @@ function onMouseDown(event) {
   const objectIntersect = intersects.filter(
     (object) => Object.keys(object.object.userData).length > 0
   );
-  if (objectIntersect.length > 0) {
-    $(".global,.rc-object-menu").hide();
-    let object = objectIntersect[0].object;
-    if (!activeControls || selectedObject.id !== object.userData.id) {
-      transformControls.detach(transformControls.object);
-      selectedObjects.push(object);
-      if (object.userData.isCollada) {
-        object = daeModels[object.userData.id];
-        transformControls.attach(object, ...object.children);
-      } else {
-        if (currentMode == "select") {
-          object.material.color.set(0xff0000);
-        } else {
-          transformControls.attach(object);
-        }
-      }
-    }
-    selectedObject = object.userData;
-    if (selectedObject.type == "node") {
-      $(".rc-device-menu").show();
-      selectedObject.device = { id: selectedObject.device_id, type: "device" };
-    } else if (selectedObject.type == "plan") {
-      $(".rc-plan-menu").show();
-    }
-  } else if (currentMode == "select") {
-    $(".rc-object-menu").hide();
-    $(".global").show();
-    activeControls = false;
-    transformControls.detach(transformControls.object);
-    selectedObjects.map((object) => {
-      object.material.color.set(0xffffff);
-    });
-    selectedObjects = [];
-  }
   setTriggerMenu(true);
   render();
 }

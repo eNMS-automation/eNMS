@@ -129,8 +129,8 @@ function showDeviceModel(device) {
       }
       const aspect = $(".main_frame").width() / $(".main_frame").height();
       let camera = new THREE.PerspectiveCamera(45, aspect, 1, 100000);
-      camera.position.set(600, -800, -800);
-      camera.lookAt(0, 0, 100);
+      camera.position.set(650, 6, 120);
+      camera.lookAt(100, 100, 300);
       let scene = new THREE.Scene();
       scene.background = new THREE.Color(0xffffff);
       const container = document.getElementById("map");
@@ -147,7 +147,7 @@ function showDeviceModel(device) {
         `/static/img/view/models/juniper_ex3300.dae`,
         function (collada) {
           collada.scene.scale.set(20, 20, 20);
-          collada.scene.rotation.set(-Math.PI, 0, 0);
+          collada.scene.rotation.set(- Math.PI / 2, 0, Math.PI / 2);
           collada.scene.position.set(0, 0, 100);
           scene.add(collada.scene);
         }

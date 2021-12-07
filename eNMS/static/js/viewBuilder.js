@@ -72,7 +72,6 @@ function displayView({ direction } = {}) {
       controls = new THREE.OrbitControls(camera, renderer.domElement);
       controls.addEventListener("change", render);
       controls.maxPolarAngle = Math.PI / 2;
-      container.addEventListener("mousemove", onMouseMove, false);
       window.addEventListener("resize", onWindowResize, false);
       const ambientLight = new THREE.AmbientLight(0xcccccc, 0.4);
       scene.add(ambientLight);
@@ -209,8 +208,6 @@ function drawNode(node) {
   setNodePosition(mesh, node);
   if (node.type == "plan") {
     mesh.rotation.x = Math.PI / 2;
-  } else {
-    drawLabel(node, mesh);
   }
   nodes[node.id] = mesh;
   mesh.userData = node;
@@ -224,23 +221,6 @@ function getIntersects(event) {
   pointer.set(width, height);
   raycaster.setFromCamera(pointer, camera);
   return raycaster.intersectObjects(scene.children, true);
-}
-
-function onMouseMove(event) {
-  setTriggerMenu(false);
-  const intersects = getIntersects(event);
-  document.body.style.cursor = intersects.length > 0 ? "pointer" : "default";
-}
-
-function drawLabel(node, mesh) {
-  const div = document.createElement("div");
-  div.className = "label";
-  const style = { marginTop: "-1em", color: "#FF0000" };
-  div.textContent = node.type == "label" ? node.text : node.name;
-  Object.assign(div.style, style);
-  const labelObject = new CSS2DObject(div);
-  labelObject.position.set(0, 0, 0);
-  mesh.add(labelObject);
 }
 
 function initLogicalFramework() {

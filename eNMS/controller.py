@@ -240,11 +240,6 @@ class Controller:
         workflow.labels[label_id] = label
         return {"id": label_id, **label}
 
-    def create_view_object(self, type, view_id, **kwargs):
-        node = db.factory(type, view=view_id, **kwargs)
-        db.session.flush()
-        return {"time": vs.get_time(), "node": node.serialized}
-
     def database_deletion(self, **kwargs):
         db.delete_all(*kwargs["deletion_types"])
 

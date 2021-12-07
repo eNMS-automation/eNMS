@@ -135,7 +135,6 @@ function drawNode(node) {
 }
 
 function initLogicalFramework() {
-  texture = new THREE.TextureLoader().load("/static/img/textures/floor3.jpg");
   call({
     url: "/get_all/view",
     callback: function (views) {

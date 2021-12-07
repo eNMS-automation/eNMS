@@ -10,13 +10,11 @@ THREE: false
 import { showRunServicePanel } from "./automation.js";
 import {
   call,
-  configureNamespace,
   history,
   historyPosition,
   moveHistory,
   notify,
   openPanel,
-  setTriggerMenu,
   showInstancePanel,
 } from "./base.js";
 import { showConnectionPanel, showDeviceData } from "./inventory.js";
@@ -29,8 +27,6 @@ let scene;
 let renderer;
 let controls;
 let nodes = {};
-let pointer;
-let raycaster;
 let texture;
 let daeModels = {};
 let lineGeometries = [];
@@ -57,8 +53,6 @@ function displayView({ direction } = {}) {
       currentView = view;
       const aspect = $(".main_frame").width() / $(".main_frame").height();
       camera = new THREE.PerspectiveCamera(45, aspect, 1, 10000);
-      raycaster = new THREE.Raycaster();
-      pointer = new THREE.Vector2();
       camera.position.set(500, 800, 1300);
       camera.lookAt(0, 0, 0);
       scene = new THREE.Scene();
@@ -177,15 +171,6 @@ function drawNode(node) {
   nodes[node.id] = mesh;
   mesh.userData = node;
   scene.add(mesh);
-}
-
-function getIntersects(event) {
-  const menuWidth = $(".left_column").is(":visible") ? $(".left_column").width() : 0;
-  const width = ((event.clientX - menuWidth - 15) / $(".main_frame").width()) * 2 - 1;
-  const height = -((event.clientY - 70) / $(".main_frame").height()) * 2 + 1;
-  pointer.set(width, height);
-  raycaster.setFromCamera(pointer, camera);
-  return raycaster.intersectObjects(scene.children, true);
 }
 
 function initLogicalFramework() {

@@ -89,26 +89,6 @@ function setNodePosition(node, properties) {
   );
 }
 
-function deleteMesh(mesh) {
-  delete nodes[mesh.userData.id];
-  scene.remove(mesh);
-}
-
-function savePositions() {
-  call({
-    url: "/save_view_positions",
-    data: Object.fromEntries(
-      Object.entries(nodes).map(([nodeId, node]) => [
-        nodeId,
-        { position: node.position, scale: node.scale, rotation: node.rotation },
-      ])
-    ),
-    callback: function (updateTime) {
-      if (updateTime) currentView.last_modified = updateTime;
-    },
-  });
-}
-
 function drawNode(node) {
   let geometry;
   let material;

@@ -5,7 +5,6 @@ CSS2DObject: false
 CSS2DRenderer: false
 page: false
 THREE: false
-TransformControls: false
 */
 
 import { showRunServicePanel } from "./automation.js";
@@ -23,17 +22,14 @@ import {
 import { showConnectionPanel, showDeviceData } from "./inventory.js";
 
 let selectedObject;
-let currentMode = "none";
 let currentView;
 let selectedObjects = [];
 let camera;
 let scene;
 let renderer;
 let controls;
-let transformControls;
 let nodes = {};
 let pointer;
-let activeControls = false;
 let raycaster;
 let texture;
 let daeModels = {};
@@ -76,27 +72,15 @@ function displayView({ direction } = {}) {
       controls = new THREE.OrbitControls(camera, renderer.domElement);
       controls.addEventListener("change", render);
       controls.maxPolarAngle = Math.PI / 2;
-      container.addEventListener("mousedown", onMouseDown, false);
       container.addEventListener("mousemove", onMouseMove, false);
       window.addEventListener("resize", onWindowResize, false);
-      transformControls = new TransformControls(camera, renderer.domElement);
-      transformControls.addEventListener("change", render);
-      transformControls.addEventListener("dragging-changed", function (event) {
-        if (!event.value) savePositions();
-        controls.enabled = !event.value;
-      });
-      transformControls.addEventListener("mouseDown", function () {
-        activeControls = true;
-      });
       const ambientLight = new THREE.AmbientLight(0xcccccc, 0.4);
       scene.add(ambientLight);
       const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
       directionalLight.position.set(1, 1, 0).normalize();
       scene.add(directionalLight);
-      scene.add(transformControls);
       updateRightClickBindings(controls);
       view.objects.map(drawNode);
-      switchMode("select");
       render();
     },
   });
@@ -123,15 +107,6 @@ function displayLinks() {
       notify("Links successfully displayed.", "success", 5);
     },
   });
-}
-
-function onMouseDown(event) {
-  const intersects = getIntersects(event);
-  const objectIntersect = intersects.filter(
-    (object) => Object.keys(object.object.userData).length > 0
-  );
-  setTriggerMenu(true);
-  render();
 }
 
 function setNodePosition(node, properties) {
@@ -192,21 +167,6 @@ function savePositions() {
       if (updateTime) currentView.last_modified = updateTime;
     },
   });
-}
-
-function switchMode(mode) {
-  if (mode == currentMode) return;
-  $(`#btn-${currentMode},#btn-${mode}`).toggleClass("active");
-  currentMode = mode;
-  transformControls.enabled = mode != "select";
-  if (mode == "select") {
-    scene.remove(transformControls);
-    transformControls.detach();
-    activeControls = false;
-  } else {
-    scene.add(transformControls);
-    transformControls.setMode(mode);
-  }
 }
 
 function drawNode(node) {
@@ -369,7 +329,6 @@ function updateRightClickBindings(controls) {
     "Edit Pool": () => showInstancePanel("pool", currentPath),
     Delete: () => deleteSelection(),
     "Duplicate View": () => createNewView("duplicate"),
-    "Switch Mode": switchMode,
     "Zoom In": () => controls?.dollyOut(),
     "Zoom Out": () => controls?.dollyIn(),
     Backward: () => displayView({ direction: "left" }),

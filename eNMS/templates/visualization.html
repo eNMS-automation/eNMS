@@ -302,9 +302,7 @@
 </div>
 {% endif %} {% endblock content %} {% block javascripts %} {{ super()}} {% if endpoint
 != "geographical_view" %}
-<script src="{{ url_for('static', filename='lib/three/three.min.js') }}"></script>
-<script src="{{ url_for('static', filename='lib/three/orbitControls.min.js') }}"></script>
-<script src="{{ url_for('static', filename='lib/three/ColladaLoader.min.js') }}"></script>
+
 {% endif %} {% if endpoint == "logical_view" %}
 <script src="{{ url_for('static', filename='lib/three/three-spritetext.min.js') }}"></script>
 <script src="{{ url_for('static', filename='lib/3d-force-graph/3d-force-graph.min.js') }}"></script>

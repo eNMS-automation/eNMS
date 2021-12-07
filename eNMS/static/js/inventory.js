@@ -116,7 +116,62 @@ export function showConnectionPanel(device) {
 }
 
 function showDeviceModel(device) {
-  console.log(device);
+  openPanel({
+    name: "device_view",
+    title: `3D Visualization of '${device.name}'`,
+    size: "800 600",
+    id: device.id,
+    content: `<div id="map"></div>`,
+    callback: () => {
+      function render() {
+        if (renderer) renderer.render(scene, camera);
+      }
+      function onWindowResize() {
+        camera.aspect = $(".main_frame").width() / $(".main_frame").height();
+        camera.updateProjectionMatrix();
+      }
+      function setNodePosition(node) {
+        node.scale.set(20, 20, 20);
+        node.rotation.set(
+          -Math.PI, 0, 0
+        );
+        node.position.set(0, 0, 100);
+      }
+      function animate() {
+        requestAnimationFrame(animate);
+        render();
+      }
+      let controls;
+      const aspect = $(".main_frame").width() / $(".main_frame").height();
+      let camera = new THREE.PerspectiveCamera(45, aspect, 1, 100000);
+      camera.position.set(600, -800, -800);
+      camera.lookAt(0, 0, 100);
+      let scene = new THREE.Scene();
+      scene.background = new THREE.Color(0xffffff);
+      const container = document.getElementById("map");
+      $("#map").empty();
+      const renderer = new THREE.WebGLRenderer({ antialias: true });
+      renderer.setPixelRatio(window.devicePixelRatio);
+      renderer.setSize($(".main_frame").width(), $(".main_frame").height());
+      container.appendChild(renderer.domElement);
+      controls = new THREE.OrbitControls(camera, renderer.domElement);
+      controls.addEventListener("change", render);
+      window.addEventListener("resize", onWindowResize, false);
+      const ambientLight = new THREE.AmbientLight(0xcccccc, 0.4);
+      scene.add(ambientLight);
+      const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+      directionalLight.position.set(1, 1, 0).normalize();
+      scene.add(directionalLight);
+      new THREE.ColladaLoader().load(
+        `/static/img/view/models/juniper_ex3300.dae`,
+        function (collada) {
+          setNodePosition(collada.scene);
+          scene.add(collada.scene);
+        }
+      );
+      animate();
+    },
+  });
 }
 
 export function initDashboard() {

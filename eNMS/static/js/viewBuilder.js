@@ -17,9 +17,7 @@ import {
 } from "./base.js";
 import { showConnectionPanel, showDeviceData } from "./inventory.js";
 
-let selectedObject;
 let currentView;
-let selectedObjects = [];
 let camera;
 let scene;
 let renderer;
@@ -45,7 +43,6 @@ function displayView({ direction } = {}) {
     url: `/get/view/${viewId}`,
     callback: function (view) {
       nodes = {};
-      selectedObject = [];
       currentView = view;
       const aspect = $(".main_frame").width() / $(".main_frame").height();
       camera = new THREE.PerspectiveCamera(45, aspect, 1, 10000);
@@ -61,14 +58,12 @@ function displayView({ direction } = {}) {
       container.appendChild(renderer.domElement);
       controls = new THREE.OrbitControls(camera, renderer.domElement);
       controls.addEventListener("change", render);
-      controls.maxPolarAngle = Math.PI / 2;
       window.addEventListener("resize", onWindowResize, false);
       const ambientLight = new THREE.AmbientLight(0xcccccc, 0.4);
       scene.add(ambientLight);
       const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
       directionalLight.position.set(1, 1, 0).normalize();
       scene.add(directionalLight);
-      updateRightClickBindings(controls);
       view.objects.map(drawNode);
       render();
     },
@@ -78,9 +73,7 @@ function displayView({ direction } = {}) {
 function setNodePosition(node, properties) {
   node.scale.set(1, 1, 1);
   node.rotation.set(
-    properties.rotation_x,
-    properties.rotation_y,
-    properties.rotation_z
+    - Math.PI / 2, 0, 0
   );
   node.position.set(0, 0, 0);
 }
@@ -89,13 +82,8 @@ function drawNode(node) {
   new THREE.ColladaLoader().load(
     `/static/img/view/models/${node.model}.dae`,
     function (collada) {
-      daeModels[node.id] = collada.scene;
-      setNodePosition(daeModels[node.id], node);
-      daeModels[node.id].traverse(function (child) {
-        child.userData = { isCollada: true, ...node };
-      });
-      nodes[node.id] = daeModels[node.id];
-      scene.add(daeModels[node.id]);
+      setNodePosition(collada.scene, node);
+      scene.add(collada.scene);
     }
   );
 }
@@ -128,7 +116,6 @@ function initLogicalFramework() {
         .selectpicker({
           liveSearch: true,
         });
-      updateRightClickBindings(controls);
     },
   });
   $("#transform-mode").selectpicker();
@@ -162,22 +149,6 @@ export function viewCreation(instance) {
   }
 }
 
-function updateRightClickBindings(controls) {
-  Object.assign(action, {
-    "Add to View": () => showInstancePanel("node"),
-    "Create View": () => createNewView("create"),
-    "Create Label": () => openPanel({ name: "view_label", title: "Create New Label" }),
-    "Edit View": () => createNewView("edit"),
-    "Edit Pool": () => showInstancePanel("pool", currentPath),
-    Delete: () => deleteSelection(),
-    "Duplicate View": () => createNewView("duplicate"),
-    "Zoom In": () => controls?.dollyOut(),
-    "Zoom Out": () => controls?.dollyIn(),
-    Backward: () => displayView({ direction: "left" }),
-    Forward: () => displayView({ direction: "right" }),
-  });
-}
-
 function render() {
   if (renderer) renderer.render(scene, camera);
 }
@@ -188,14 +159,6 @@ function onWindowResize() {
 }
 
 export function initViewBuilder() {
-  $("body").contextMenu({
-    menuSelector: "#contextMenu",
-    menuSelected: function (selectedMenu) {
-      const row = selectedMenu.text();
-      action[row](selectedObject);
-      selectedObject = null;
-    },
-  });
   Object.assign(action, {
     "View Properties": (viewObject) => showInstancePanel("node", viewObject.id),
     Connect: (viewObject) => showConnectionPanel(viewObject.device),
@@ -204,10 +167,3 @@ export function initViewBuilder() {
   });
   initLogicalFramework();
 }
-
-function animate() {
-  requestAnimationFrame(animate);
-  render();
-}
-
-animate();

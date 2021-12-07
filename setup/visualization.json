@@ -153,5 +153,9 @@
       "node": 2000,
       "link": 1000
     }
+  },
+  "3D_models": {
+    "juniper_ex3300": "Juniper EX3300",
+    "cisco_catalyst_me4924": "Cisco Catalyst ME"
   }
 }

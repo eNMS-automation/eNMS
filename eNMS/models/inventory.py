@@ -54,6 +54,7 @@ class Device(Object):
     id = db.Column(Integer, ForeignKey(Object.id), primary_key=True)
     name = db.Column(db.SmallString, unique=True)
     icon = db.Column(db.TinyString, default="router")
+    icon_3d = db.Column(db.TinyString, default="juniper_ex3300")
     operating_system = db.Column(db.SmallString)
     os_version = db.Column(db.SmallString)
     ip_address = db.Column(db.TinyString)

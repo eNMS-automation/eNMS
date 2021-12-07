@@ -497,13 +497,19 @@ tables.device = class DeviceTable extends Table {
 
   buttons(row) {
     return `
-      <ul class="pagination pagination-lg" style="margin: 0px; width: 270px">
+      <ul class="pagination pagination-lg" style="margin: 0px; width: 300px">
         <li>
           <button type="button" class="btn btn-sm btn-info"
           onclick="eNMS.inventory.showDeviceData(${row.instance})"
           data-tooltip="Network Data"
             ><span class="glyphicon glyphicon-cog"></span
           ></button>
+        </li>
+        <li>
+          <button type="button" class="btn btn-sm btn-info"
+          onclick="eNMS.inventory.showDeviceModel(${row.instance})"
+          data-tooltip="Device 3D Model">
+            <span class="glyphicon glyphicon-eye-open"></span></button>
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-info"

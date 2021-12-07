@@ -115,6 +115,10 @@ export function showConnectionPanel(device) {
   });
 }
 
+function showDeviceModel(device) {
+  console.log(device);
+}
+
 export function initDashboard() {
   const defaultProperties = {
     device: "model",
@@ -520,6 +524,7 @@ configureNamespace("inventory", [
   updatePools,
   showGitHistory,
   showDeviceData,
+  showDeviceModel,
   showDeviceResultsPanel,
   showGitConfiguration,
   showImportTopologyPanel,

@@ -68,23 +68,19 @@ function displayView({ direction } = {}) {
       camera.lookAt(0, 0, 0);
       scene = new THREE.Scene();
       scene.background = new THREE.Color(0xffffff);
-      labelRenderer = new CSS2DRenderer();
-      labelRenderer.setSize($(".main_frame").width(), $(".main_frame").height());
-      labelRenderer.domElement.style.position = "absolute";
       const container = document.getElementById("map");
       $("#map").empty();
       renderer = new THREE.WebGLRenderer({ antialias: true });
       renderer.setPixelRatio(window.devicePixelRatio);
       renderer.setSize($(".main_frame").width(), $(".main_frame").height());
-      container.appendChild(labelRenderer.domElement);
       container.appendChild(renderer.domElement);
-      controls = new THREE.OrbitControls(camera, labelRenderer.domElement);
+      controls = new THREE.OrbitControls(camera, renderer.domElement);
       controls.addEventListener("change", render);
       controls.maxPolarAngle = Math.PI / 2;
       container.addEventListener("mousedown", onMouseDown, false);
       container.addEventListener("mousemove", onMouseMove, false);
       window.addEventListener("resize", onWindowResize, false);
-      transformControls = new TransformControls(camera, labelRenderer.domElement);
+      transformControls = new TransformControls(camera, renderer.domElement);
       transformControls.addEventListener("change", render);
       transformControls.addEventListener("dragging-changed", function (event) {
         if (!event.value) savePositions();
@@ -420,16 +416,12 @@ function render() {
   for (const geometry of lineGeometries) {
     geometry.verticesNeedUpdate = true;
   }
-  if (renderer && labelRenderer) {
-    renderer.render(scene, camera);
-    labelRenderer.render(scene, camera);
-  }
+  if (renderer) renderer.render(scene, camera);
 }
 
 function onWindowResize() {
   camera.aspect = $(".main_frame").width() / $(".main_frame").height();
   camera.updateProjectionMatrix();
-  labelRenderer.setSize($(".main_frame").width(), $(".main_frame").height());
 }
 
 function displayProperties(instance) {

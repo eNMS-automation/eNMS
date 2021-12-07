@@ -85,29 +85,6 @@ function displayView({ direction } = {}) {
   });
 }
 
-function displayLinks() {
-  call({
-    url: `/get_view_links/${currentView.id}`,
-    callback: function (linksObject) {
-      for (const lindId of Object.keys(linksObject)) {
-        const [sourceId, destinationId] = lindId.split("-");
-        const source = nodes[sourceId];
-        const target = nodes[destinationId];
-        let geometry = new THREE.Geometry();
-        geometry.dynamic = true;
-        geometry.vertices.push(source.position);
-        geometry.vertices.push(target.position);
-        geometry.verticesNeedUpdate = true;
-        lineGeometries.push(geometry);
-        let material = new THREE.LineBasicMaterial({ color: 0x000000 });
-        let line = new THREE.Line(geometry, material);
-        scene.add(line);
-      }
-      notify("Links successfully displayed.", "success", 5);
-    },
-  });
-}
-
 function setNodePosition(node, properties) {
   node.scale.set(properties.scale_x, properties.scale_y, properties.scale_z);
   node.rotation.set(
@@ -120,18 +97,6 @@ function setNodePosition(node, properties) {
     properties.position_y,
     properties.position_z
   );
-}
-
-function createPlan() {
-  call({
-    url: `/create_view_object/plan/${currentView.id}`,
-    form: "plan-form",
-    callback: function (result) {
-      currentView.last_modified = result;
-      drawNode(result.node);
-      $("#plan").remove();
-    },
-  });
 }
 
 function deleteSelection() {
@@ -303,9 +268,7 @@ function updateRightClickBindings(controls) {
     "Add to View": () => showInstancePanel("node"),
     "Create View": () => createNewView("create"),
     "Create Label": () => openPanel({ name: "view_label", title: "Create New Label" }),
-    "Create Plan": () => openPanel({ name: "plan", title: "Create New Plan" }),
     "Edit View": () => createNewView("edit"),
-    "Display Links": () => displayLinks(),
     "Edit Pool": () => showInstancePanel("pool", currentPath),
     Delete: () => deleteSelection(),
     "Duplicate View": () => createNewView("duplicate"),
@@ -361,5 +324,3 @@ function animate() {
 }
 
 animate();
-
-configureNamespace("viewBuilder", [createLabel, createPlan]);

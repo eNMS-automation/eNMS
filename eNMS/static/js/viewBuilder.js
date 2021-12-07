@@ -130,44 +130,31 @@ function savePositions() {
 function drawNode(node) {
   let geometry;
   let material;
-  if (node.type == "plan") {
-    geometry = new THREE.BoxGeometry(1000, 1000, 8);
-    material = new THREE.MeshBasicMaterial({ map: texture });
-  } else if (node.type == "label") {
-    geometry = new THREE.SphereGeometry(5, 32, 32);
-    material = new THREE.MeshBasicMaterial({
-      transparent: true,
-      opacity: 0.3,
-    });
+
+  if (node.model) {
+    new THREE.ColladaLoader().load(
+      `/static/img/view/models/${node.model}.dae`,
+      function (collada) {
+        daeModels[node.id] = collada.scene;
+        setNodePosition(daeModels[node.id], node);
+        daeModels[node.id].traverse(function (child) {
+          child.userData = { isCollada: true, ...node };
+        });
+        nodes[node.id] = daeModels[node.id];
+        scene.add(daeModels[node.id]);
+      }
+    );
+    return;
   } else {
-    if (node.model) {
-      new THREE.ColladaLoader().load(
-        `/static/img/view/models/${node.model}.dae`,
-        function (collada) {
-          daeModels[node.id] = collada.scene;
-          setNodePosition(daeModels[node.id], node);
-          daeModels[node.id].traverse(function (child) {
-            child.userData = { isCollada: true, ...node };
-          });
-          nodes[node.id] = daeModels[node.id];
-          scene.add(daeModels[node.id]);
-        }
-      );
-      return;
-    } else {
-      material = new THREE.MeshBasicMaterial({
-        color: 0x3c8c8c,
-        opacity: 0.8,
-        transparent: true,
-      });
-      geometry = new THREE.CylinderGeometry(30, 30, 20, 32);
-    }
+    material = new THREE.MeshBasicMaterial({
+      color: 0x3c8c8c,
+      opacity: 0.8,
+      transparent: true,
+    });
+    geometry = new THREE.CylinderGeometry(30, 30, 20, 32);
   }
   const mesh = new THREE.Mesh(geometry, material);
   setNodePosition(mesh, node);
-  if (node.type == "plan") {
-    mesh.rotation.x = Math.PI / 2;
-  }
   nodes[node.id] = mesh;
   mesh.userData = node;
   scene.add(mesh);
@@ -234,18 +221,6 @@ export function viewCreation(instance) {
   } else if (instance.type == "node") {
     setNodePosition(nodes[instance.id], instance);
   }
-}
-
-function createLabel() {
-  call({
-    url: `/create_view_object/label/${currentView.id}`,
-    form: "view_label-form",
-    callback: function (result) {
-      $("#view_label").remove();
-      drawNode(result.node);
-      notify("Label created.", "success", 5);
-    },
-  });
 }
 
 function updateRightClickBindings(controls) {

@@ -98,16 +98,8 @@ class Workflow(Service):
         return clone
 
     @property
-    def deep_services(self):
-        services = [
-            service.deep_services if service.type == "workflow" else [service]
-            for service in self.services
-        ]
-        return [self] + sum(services, [])
-
-    @property
     def deep_edges(self):
-        return sum([w.edges for w in self.deep_services if w.type == "workflow"], [])
+        return sum([w.edges for w in self.children if w.type == "workflow"], [])
 
     def job(self, run, device=None):
         number_of_runs = defaultdict(int)

@@ -2,6 +2,13 @@
 Release Notes
 =============
 
+Version 4.2.0
+-------------
+- Remove deep_services function used for export, use service.children relationship instead.
+
+To be tested:
+- Export and re-import of workflows and top-level services
+
 Version 4.1.0
 -------------
 

@@ -322,11 +322,10 @@ class Controller:
         service = db.fetch("service", id=service_id)
         path = Path(vs.path / "files" / "services" / service.filename)
         path.mkdir(parents=True, exist_ok=True)
-        services = service.deep_services if service.type == "workflow" else [service]
         exclude = ("target_devices", "target_pools", "pools", "events")
         services = [
-            service.to_dict(export=True, private_properties=True, exclude=exclude)
-            for service in services
+            s.to_dict(export=True, private_properties=True, exclude=exclude)
+            for s in service.children
         ]
         with open(path / "service.yaml", "w") as file:
             yaml.dump(services, file)

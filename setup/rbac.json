@@ -180,7 +180,6 @@
     "/database_deletion": "admin",
     "/delete_corrupted_edges": "access",
     "/delete_instance": "access",
-    "/delete_view_selection": "access",
     "/delete_workflow_selection": "access",
     "/desktop_connection": "access",
     "/duplicate_workflow": "access",

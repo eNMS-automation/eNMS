@@ -89,20 +89,6 @@ function setNodePosition(node, properties) {
   );
 }
 
-function deleteSelection() {
-  call({
-    url: "/delete_view_selection",
-    data: { selection: selectedObjects.map((mesh) => mesh.userData.id) },
-    callback: function (updateTime) {
-      selectedObjects.map(deleteMesh);
-      selectedObjects = [];
-      currentView.last_modified = updateTime;
-      render();
-      notify("Selection successfully deleted.", "success", 5);
-    },
-  });
-}
-
 function deleteMesh(mesh) {
   delete nodes[mesh.userData.id];
   scene.remove(mesh);

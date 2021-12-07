@@ -285,11 +285,6 @@ class Controller:
     def delete_instance(self, model, instance_id):
         return db.delete(model, id=instance_id)
 
-    def delete_view_selection(self, selection):
-        for instance_id in selection:
-            db.delete("view_object", id=instance_id)
-        return vs.get_time()
-
     def delete_workflow_selection(self, workflow_id, **selection):
         workflow = db.fetch("workflow", id=workflow_id)
         workflow.last_modified = vs.get_time()

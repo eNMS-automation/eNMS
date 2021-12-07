@@ -12,7 +12,6 @@ import {
   historyPosition,
   moveHistory,
   notify,
-  openPanel,
   showInstancePanel,
 } from "./base.js";
 import { showConnectionPanel, showDeviceData } from "./inventory.js";
@@ -21,9 +20,7 @@ let currentView;
 let camera;
 let scene;
 let renderer;
-let controls;
 let nodes = {};
-let daeModels = {};
 
 let currentPath = localStorage.getItem(page);
 
@@ -39,46 +36,7 @@ function displayView({ direction } = {}) {
   localStorage.setItem(page, currentPath);
   moveHistory(currentPath, direction);
   $("#current-view").val(currentPath).selectpicker("refresh");
-  call({
-    url: `/get/view/${viewId}`,
-    callback: function (view) {
-      nodes = {};
-      currentView = view;
-      const aspect = $(".main_frame").width() / $(".main_frame").height();
-      camera = new THREE.PerspectiveCamera(45, aspect, 1, 10000);
-      camera.position.set(50, 80, 130);
-      camera.lookAt(0, 0, 0);
-      scene = new THREE.Scene();
-      scene.background = new THREE.Color(0xffffff);
-      const container = document.getElementById("map");
-      $("#map").empty();
-      renderer = new THREE.WebGLRenderer({ antialias: true });
-      renderer.setPixelRatio(window.devicePixelRatio);
-      renderer.setSize($(".main_frame").width(), $(".main_frame").height());
-      container.appendChild(renderer.domElement);
-      controls = new THREE.OrbitControls(camera, renderer.domElement);
-      controls.addEventListener("change", render);
-      window.addEventListener("resize", onWindowResize, false);
-      const ambientLight = new THREE.AmbientLight(0xcccccc, 0.4);
-      scene.add(ambientLight);
-      const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
-      directionalLight.position.set(1, 1, 0).normalize();
-      scene.add(directionalLight);
-      view.objects.map(drawNode);
-      render();
-    },
-  });
 }
-
-function setNodePosition(node, properties) {
-  node.scale.set(1, 1, 1);
-  node.rotation.set(
-    - Math.PI / 2, 0, 0
-  );
-  node.position.set(0, 0, 0);
-}
-
-
 
 function initLogicalFramework() {
   call({

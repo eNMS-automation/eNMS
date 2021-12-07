@@ -119,9 +119,9 @@ function showDeviceModel(device) {
   openPanel({
     name: "device_view",
     title: `3D Visualization of '${device.name}'`,
-    size: "800 600",
+    size: "700 500",
     id: device.id,
-    content: `<div id="map"></div>`,
+    content: `<div id="map" style="height:100%;width:100%"></div>`,
     callback: () => {
       function setNodePosition(node) {
         node.scale.set(20, 20, 20);
@@ -141,12 +141,9 @@ function showDeviceModel(device) {
       let scene = new THREE.Scene();
       scene.background = new THREE.Color(0xffffff);
       const container = document.getElementById("map");
-      $("#map").empty();
       const renderer = new THREE.WebGLRenderer({ antialias: true });
-      renderer.setPixelRatio(window.devicePixelRatio);
-      renderer.setSize($(".main_frame").width(), $(".main_frame").height());
+      renderer.setSize(700, 485);
       container.appendChild(renderer.domElement);
-      
       const ambientLight = new THREE.AmbientLight(0xcccccc, 0.4);
       scene.add(ambientLight);
       const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);

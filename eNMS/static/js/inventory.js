@@ -142,13 +142,14 @@ function showDeviceModel(device) {
       const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
       directionalLight.position.set(1, 1, 0).normalize();
       scene.add(directionalLight);
+      // RESIZE REINSTATE.
       new THREE.OrbitControls(camera, renderer.domElement);
       new THREE.ColladaLoader().load(
-        `/static/img/view/models/juniper_ex3300.dae`,
+        `/static/img/view/models/cisco_catalyst_me4924.dae`,
         function (collada) {
           collada.scene.scale.set(20, 20, 20);
           collada.scene.rotation.set(- Math.PI / 2, 0, Math.PI / 2);
-          collada.scene.position.set(0, 0, 100);
+          collada.scene.position.set(2300, 0, 800);
           scene.add(collada.scene);
         }
       );

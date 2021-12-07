@@ -78,15 +78,7 @@ function setNodePosition(node, properties) {
   node.position.set(0, 0, 0);
 }
 
-function drawNode(node) {
-  new THREE.ColladaLoader().load(
-    `/static/img/view/models/${node.model}.dae`,
-    function (collada) {
-      setNodePosition(collada.scene, node);
-      scene.add(collada.scene);
-    }
-  );
-}
+
 
 function initLogicalFramework() {
   call({

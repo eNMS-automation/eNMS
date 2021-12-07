@@ -123,13 +123,6 @@ function showDeviceModel(device) {
     id: device.id,
     content: `<div id="map"></div>`,
     callback: () => {
-      function render() {
-        if (renderer) renderer.render(scene, camera);
-      }
-      function onWindowResize() {
-        camera.aspect = $(".main_frame").width() / $(".main_frame").height();
-        camera.updateProjectionMatrix();
-      }
       function setNodePosition(node) {
         node.scale.set(20, 20, 20);
         node.rotation.set(
@@ -139,9 +132,8 @@ function showDeviceModel(device) {
       }
       function animate() {
         requestAnimationFrame(animate);
-        render();
+        renderer.render(scene, camera);
       }
-      let controls;
       const aspect = $(".main_frame").width() / $(".main_frame").height();
       let camera = new THREE.PerspectiveCamera(45, aspect, 1, 100000);
       camera.position.set(600, -800, -800);
@@ -154,14 +146,13 @@ function showDeviceModel(device) {
       renderer.setPixelRatio(window.devicePixelRatio);
       renderer.setSize($(".main_frame").width(), $(".main_frame").height());
       container.appendChild(renderer.domElement);
-      controls = new THREE.OrbitControls(camera, renderer.domElement);
-      controls.addEventListener("change", render);
-      window.addEventListener("resize", onWindowResize, false);
+      
       const ambientLight = new THREE.AmbientLight(0xcccccc, 0.4);
       scene.add(ambientLight);
       const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
       directionalLight.position.set(1, 1, 0).normalize();
       scene.add(directionalLight);
+      new THREE.OrbitControls(camera, renderer.domElement);
       new THREE.ColladaLoader().load(
         `/static/img/view/models/juniper_ex3300.dae`,
         function (collada) {

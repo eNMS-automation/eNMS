@@ -145,16 +145,8 @@ function drawNode(node) {
       }
     );
     return;
-  } else {
-    material = new THREE.MeshBasicMaterial({
-      color: 0x3c8c8c,
-      opacity: 0.8,
-      transparent: true,
-    });
-    geometry = new THREE.CylinderGeometry(30, 30, 20, 32);
   }
   const mesh = new THREE.Mesh(geometry, material);
-  setNodePosition(mesh, node);
   nodes[node.id] = mesh;
   mesh.userData = node;
   scene.add(mesh);
@@ -251,14 +243,6 @@ function onWindowResize() {
   camera.updateProjectionMatrix();
 }
 
-function displayProperties(instance) {
-  if (instance.type == "node") {
-    showInstancePanel(instance.device.type, instance.device.id);
-  } else {
-    showInstancePanel(instance.type, instance.id);
-  }
-}
-
 export function initViewBuilder() {
   $("body").contextMenu({
     menuSelector: "#contextMenu",
@@ -269,7 +253,6 @@ export function initViewBuilder() {
     },
   });
   Object.assign(action, {
-    Properties: displayProperties,
     "View Properties": (viewObject) => showInstancePanel("node", viewObject.id),
     Connect: (viewObject) => showConnectionPanel(viewObject.device),
     Configuration: (viewObject) => showDeviceData(viewObject.device),

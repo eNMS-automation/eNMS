@@ -49,7 +49,7 @@ function displayView({ direction } = {}) {
       currentView = view;
       const aspect = $(".main_frame").width() / $(".main_frame").height();
       camera = new THREE.PerspectiveCamera(45, aspect, 1, 10000);
-      camera.position.set(500, 800, 1300);
+      camera.position.set(50, 80, 130);
       camera.lookAt(0, 0, 0);
       scene = new THREE.Scene();
       scene.background = new THREE.Color(0xffffff);
@@ -76,42 +76,28 @@ function displayView({ direction } = {}) {
 }
 
 function setNodePosition(node, properties) {
-  node.scale.set(properties.scale_x, properties.scale_y, properties.scale_z);
+  node.scale.set(1, 1, 1);
   node.rotation.set(
     properties.rotation_x,
     properties.rotation_y,
     properties.rotation_z
   );
-  node.position.set(
-    properties.position_x,
-    properties.position_y,
-    properties.position_z
-  );
+  node.position.set(0, 0, 0);
 }
 
 function drawNode(node) {
-  let geometry;
-  let material;
-
-  if (node.model) {
-    new THREE.ColladaLoader().load(
-      `/static/img/view/models/${node.model}.dae`,
-      function (collada) {
-        daeModels[node.id] = collada.scene;
-        setNodePosition(daeModels[node.id], node);
-        daeModels[node.id].traverse(function (child) {
-          child.userData = { isCollada: true, ...node };
-        });
-        nodes[node.id] = daeModels[node.id];
-        scene.add(daeModels[node.id]);
-      }
-    );
-    return;
-  }
-  const mesh = new THREE.Mesh(geometry, material);
-  nodes[node.id] = mesh;
-  mesh.userData = node;
-  scene.add(mesh);
+  new THREE.ColladaLoader().load(
+    `/static/img/view/models/${node.model}.dae`,
+    function (collada) {
+      daeModels[node.id] = collada.scene;
+      setNodePosition(daeModels[node.id], node);
+      daeModels[node.id].traverse(function (child) {
+        child.userData = { isCollada: true, ...node };
+      });
+      nodes[node.id] = daeModels[node.id];
+      scene.add(daeModels[node.id]);
+    }
+  );
 }
 
 function initLogicalFramework() {

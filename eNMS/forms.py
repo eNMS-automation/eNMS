@@ -910,19 +910,8 @@ class ConnectionForm(ServiceForm):
 
 class DeviceForm(ObjectForm):
     form_type = HiddenField(default="device")
-    icon = SelectField(
-        "Icon",
-        choices=(
-            ("antenna", "Antenna"),
-            ("firewall", "Firewall"),
-            ("host", "Host"),
-            ("optical_switch", "Optical switch"),
-            ("regenerator", "Regenerator"),
-            ("router", "Router"),
-            ("server", "Server"),
-            ("switch", "Switch"),
-        ),
-    )
+    icon = SelectField("Icon", choices=list(vs.visualization["icons"]["2D"].items()))
+    icon_3d = SelectField("Icon", choices=list(vs.visualization["icons"]["3D"].items()))
     ip_address = StringField("IP address")
     port = IntegerField("Port", default=22)
     operating_system = StringField("Operating System")

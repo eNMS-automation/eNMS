@@ -614,30 +614,6 @@ class Controller:
             for file in Path(path).iterdir()
         ]
 
-    def get_view_links(self, view_id):
-        view, links = db.fetch("view", id=view_id), {}
-        nodes = [obj for obj in view.objects if obj.type == "node"]
-        for node1 in nodes:
-            for node2 in nodes:
-                link_id = "-".join(map(str, sorted([node1.id, node2.id])))
-                if node1 == node2 or link_id in links:
-                    continue
-                links_objects = db.fetch(
-                    "link",
-                    all_matches=True,
-                    allow_none=True,
-                    source=node1.device,
-                    destination=node2.device,
-                ) + db.fetch(
-                    "link",
-                    all_matches=True,
-                    allow_none=True,
-                    destination=node1.device,
-                    source=node2.device,
-                )
-                links[link_id] = [link.serialized for link in links_objects]
-        return links
-
     def get_visualization_pools(self, view):
         operator = and_ if view == "logical_view" else or_
         has_device = vs.models["pool"].devices.any()

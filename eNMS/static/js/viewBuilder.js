@@ -1,8 +1,6 @@
 /*
 global
 action: false
-CSS2DObject: false
-CSS2DRenderer: false
 page: false
 THREE: false
 */
@@ -27,9 +25,7 @@ let scene;
 let renderer;
 let controls;
 let nodes = {};
-let texture;
 let daeModels = {};
-let lineGeometries = [];
 
 let currentPath = localStorage.getItem(page);
 
@@ -232,9 +228,6 @@ function updateRightClickBindings(controls) {
 }
 
 function render() {
-  for (const geometry of lineGeometries) {
-    geometry.verticesNeedUpdate = true;
-  }
   if (renderer) renderer.render(scene, camera);
 }
 

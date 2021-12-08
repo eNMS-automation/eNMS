@@ -18,13 +18,14 @@ let currentView;
 export let currentPath = localStorage.getItem("path");
 export let view = JSON.parse(localStorage.getItem("view"));
 
-function switchToView({ path, direction } = {}) {
+function switchToView(path, direction) {
   if (typeof path === "undefined") return;
   if (path.toString().includes(">")) {
     $("#up-arrow").removeClass("disabled");
   } else {
     $("#up-arrow").addClass("disabled");
   }
+  console.log(path)
   currentPath = path;
   localStorage.setItem(page, currentPath);
   moveHistory(path, direction);
@@ -48,6 +49,10 @@ function switchToView({ path, direction } = {}) {
     },
   });
 };
+
+function displayView() {
+
+}
 
 function createNewView(mode) {
   if (mode == "create_view") {
@@ -132,6 +137,9 @@ export function initViewBuilder() {
       }
       $("#current-view").selectpicker({ liveSearch: true });
     },
+  });
+  $("#current-view").on("change", function () {
+    if (!view || this.value != view.id) switchToView(this.value);
   });
   updateRightClickBindings();
 }

@@ -30,6 +30,53 @@ function displayView({ direction } = {}) {
   $("#current-view").val(currentPath).selectpicker("refresh");
 }
 
+function createNewView(mode) {
+  if (mode == "create") {
+    showInstancePanel("view");
+  } else if (!currentView) {
+    notify("No view has been created yet.", "error", 5);
+  } else if (mode == "duplicate") {
+    showInstancePanel("view", currentView.id, "duplicate");
+  } else {
+    showInstancePanel("view", currentView.id);
+  }
+}
+
+function openDeletionPanel() {
+}
+
+function updateRightClickBindings() {
+  Object.assign(action, {
+    "Create View": () => createNewView("create_workflow"),
+    "Duplicate View": () => createNewView("duplicate_workflow"),
+    "Edit View": () => showInstancePanel("workflow", workflow.id),
+    Delete: openDeletionPanel,
+    "Create Label": () => showLabelPanel({ usePosition: true }),
+    "Create Label Button": () => showLabelPanel({ usePosition: false }),
+    "Edit Label": (label) => showLabelPanel({ label: label, usePosition: true }),
+    "Edit Edge": (edge) => {
+      showInstancePanel("workflow_edge", edge.id);
+    },
+    Skip: () => skipServices(),
+    "Zoom In": () => graph.zoom(0.2),
+    "Zoom Out": () => graph.zoom(-0.2),
+    "Enter View": (node) => switchToView(`${currentPath}>${node.id}`),
+    Backward: () => switchToView(history[historyPosition - 1], "left"),
+    Forward: () => switchToView(history[historyPosition + 1], "right"),
+    Upward: () => {
+      const parentPath = currentPath.split(">").slice(0, -1).join(">");
+      if (parentPath) switchToView(parentPath);
+    },
+  });
+  $("#network").contextMenu({
+    menuSelector: "#contextMenu",
+    menuSelected: function (selectedMenu) {
+      const row = selectedMenu.text();
+      action[row](selectedObject);
+    },
+  });
+}
+
 export function initViewBuilder() {
   call({
     url: "/get_all/view",
@@ -60,33 +107,17 @@ export function initViewBuilder() {
         });
     },
   });
-  $("#transform-mode").selectpicker();
-}
-
-function createNewView(mode) {
-  if (mode == "create") {
-    showInstancePanel("view");
-  } else if (!currentView) {
-    notify("No view has been created yet.", "error", 5);
-  } else if (mode == "duplicate") {
-    showInstancePanel("view", currentView.id, "duplicate");
-  } else {
-    showInstancePanel("view", currentView.id);
-  }
+  updateRightClickBindings();
 }
 
 export function viewCreation(instance) {
-  if (instance.type == "view") {
-    if (instance.id == currentView.id) {
-      $("#current-view option:selected").text(instance.name).trigger("change");
-    } else {
-      $("#current-view").append(
-        `<option value="${instance.id}">${instance.name}</option>`
-      );
-      $("#current-view").val(instance.id).trigger("change");
-      displayView();
-    }
-  } else if (instance.type == "node") {
-    setNodePosition(nodes[instance.id], instance);
+  if (instance.id == currentView.id) {
+    $("#current-view option:selected").text(instance.name).trigger("change");
+  } else {
+    $("#current-view").append(
+      `<option value="${instance.id}">${instance.name}</option>`
+    );
+    $("#current-view").val(instance.id).trigger("change");
+    displayView();
   }
 }

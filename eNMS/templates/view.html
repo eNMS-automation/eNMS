@@ -11,7 +11,7 @@
   >
     <div style="width: 100%; margin: 0px;">
       <select
-        id="current-workflow"
+        id="current-view"
         class="form-control"
         data-dropdown-align-right="true"
         data-size="20"
@@ -65,7 +65,7 @@
       </li>
       <li>
         <a
-          onclick="eNMS.workflowBuilder.getViewTree()"
+          onclick="eNMS.viewBuilder.getViewTree()"
           data-tooltip="View Tree"
           style="cursor: pointer;"
           ><span class="glyphicon glyphicon-tree-conifer"></span
@@ -119,7 +119,7 @@
   <li class="menu-entry node-selection">
     <a tabindex="-1" href="#">Duplicate</a>
   </li>
-  <li class="menu-entry node-selection workflow-selection">
+  <li class="menu-entry node-selection view-selection">
     <a tabindex="-1" href="#">Enter View</a>
   </li>
   <li class="menu-entry divider node-selection">&nbsp</li>

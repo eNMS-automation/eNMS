@@ -124,6 +124,9 @@
       "upper_menu",
       "pages"
     ],
+    "view": [
+      "id"
+    ],
     "workflow_edge": ["id", "source_id", "destination_id", "workflow_id"]
   },
   "relationships": {

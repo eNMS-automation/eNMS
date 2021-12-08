@@ -616,10 +616,6 @@ function showDeviceModel(device) {
     id: device.id,
     content: `<div id="3D-${device.id}" style="height:100%; width:100%"></div>`,
     callback: () => {
-      function animate() {
-        requestAnimationFrame(animate);
-        renderer.render(scene, camera);
-      }
       const aspect = $(".main_frame").width() / $(".main_frame").height();
       let camera = new THREE.PerspectiveCamera(45, aspect, 1, 100000);
       camera.position.set(650, 6, 120);
@@ -635,7 +631,6 @@ function showDeviceModel(device) {
       const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
       directionalLight.position.set(1, 1, 0).normalize();
       scene.add(directionalLight);
-      // RESIZE REINSTATE.
       new THREE.OrbitControls(camera, renderer.domElement);
       new THREE.ColladaLoader().load(
         `/static/img/view/models/cisco_catalyst_me4924.dae`,
@@ -646,7 +641,10 @@ function showDeviceModel(device) {
           scene.add(collada.scene);
         }
       );
-      animate();
+      (function render() {
+        requestAnimationFrame(render);
+        renderer.render(scene, camera);
+      })();
     },
   });
 }

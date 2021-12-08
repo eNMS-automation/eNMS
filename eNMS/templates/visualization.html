@@ -57,20 +57,10 @@
       <li><a tabindex="-1" href="#">Circle Marker</a></li>
     </ul>
   </li>
-  {% endif %} {% if endpoint == "view_builder" %}
-  <li class="menu global">
-    <a tabindex="-1" href="#">Edit View</a>
-    <a tabindex="-1" href="#">Display Links</a>
-  </li>
   {% endif %}
   <li class="menu rc-object-menu rc-plan-menu rc-device-menu rc-link-menu rc-site-menu">
     <a tabindex="-1" href="#">Properties</a>
   </li>
-  {% if endpoint == "view_builder" %}
-  <li class="menu rc-object-menu rc-device-menu rc-link-menu">
-    <a tabindex="-1" href="#">View Properties</a>
-  </li>
-  {% endif %}
   <li class="menu rc-object-menu rc-device-menu">
     <a tabindex="-1" href="#">Connect</a>
   </li>
@@ -84,7 +74,6 @@
     <a tabindex="-1" href="#">Run Service</a>
   </li>
 </ul>
-{% if endpoint != "view_builder" %}
 <div class="controls">
   <nav class="navbar navbar-default navbar-custom navbar-color" role="navigation">
     <div style="margin: 0px;">

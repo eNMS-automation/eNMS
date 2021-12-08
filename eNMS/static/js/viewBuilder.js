@@ -15,8 +15,28 @@ import {
 
 let ctrlKeyPressed;
 let currentView;
+let graph;
+let edges;
+let nodes;
 export let currentPath = localStorage.getItem("path");
 export let view = JSON.parse(localStorage.getItem("view"));
+
+const container = document.getElementById("network");
+const options = {
+  interaction: {
+    hover: true,
+    hoverConnectedEdges: false,
+    multiselect: true,
+  },
+  manipulation: {
+    enabled: false,
+    addNode: function (data, callback) {},
+    addEdge: function (data, callback) {},
+    deleteNode: function (data, callback) {
+      callback(data);
+    },
+  },
+};
 
 function switchToView(path, direction) {
   if (typeof path === "undefined") return;
@@ -49,8 +69,76 @@ function switchToView(path, direction) {
   });
 };
 
-function displayView() {
-
+export function displayView(view) {
+  nodes = new vis.DataSet([]);
+  edges = new vis.DataSet([]);
+  for (const [id, label] of Object.entries(view.labels)) {
+    drawLabel(id, label);
+  }
+  graph = new vis.Network(container, { nodes: nodes, edges: edges }, options);
+  graph.setOptions({ physics: false });
+  graph.on("oncontext", function (properties) {
+    if (triggerMenu) {
+      // eslint-disable-next-line new-cap
+      mousePosition = properties.pointer.canvas;
+      properties.event.preventDefault();
+      const node = this.getNodeAt(properties.pointer.DOM);
+      const edge = this.getEdgeAt(properties.pointer.DOM);
+      if (typeof node !== "undefined" && !ends.has(node)) {
+        graph.selectNodes([node, ...graph.getSelectedNodes()]);
+        $(".menu-entry ").hide();
+        $(`.${node.length == 36 ? "label" : "node"}-selection`).show();
+        selectedObject = nodes.get(node);
+        $(".view-selection").toggle(selectedObject.type == "view");
+      } else if (typeof edge !== "undefined" && !ends.has(node)) {
+        graph.selectEdges([edge, ...graph.getSelectedEdges()]);
+        $(".menu-entry ").hide();
+        $(".edge-selection").show();
+        selectedObject = edges.get(edge);
+      } else {
+        $(".menu-entry").hide();
+        $(".global").show();
+      }
+    } else {
+      properties.event.stopPropagation();
+      properties.event.preventDefault();
+    }
+  });
+  graph.on("click", () => {
+    if (!ctrlKeyPressed) graph.selectNodes([]);
+  });
+  graph.on("doubleClick", function (event) {
+    mousePosition = event.pointer.canvas;
+    event.event.preventDefault();
+    let node = nodes.get(this.getNodeAt(event.pointer.DOM));
+    if (!node || !node.id) {
+      return;
+    } else if (node.type == "label") {
+      showLabelPanel({ label: node, usePosition: true });
+    } else if (node.type == "view") {
+      switchToView(`${currentPath}>${node.id}`);
+    } else {
+      showInstancePanel(node.type, node.id);
+    }
+  });
+  for (const objectType of ["Node", "Edge"]) {
+    graph.on(`hover${objectType}`, function () {
+      graph.canvas.body.container.style.cursor = "pointer";
+    });
+    graph.on(`blur${objectType}`, function () {
+      graph.canvas.body.container.style.cursor = "default";
+    });
+  }
+  if (!$(`#current-view option[value='${view.id}']`).length) {
+    $("#current-view").append(
+      `<option value="${view.id}">${view.scoped_name}</option>`
+    );
+  }
+  $("#current-view").val(view.id).selectpicker("refresh");
+  graph.on("dragEnd", (event) => {
+    if (graph.getNodeAt(event.pointer.DOM)) savePositions();
+  });
+  // rectangleSelection($("#network"), graph, nodes);
 }
 
 function createNewView(mode) {

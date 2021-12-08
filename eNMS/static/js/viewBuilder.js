@@ -42,8 +42,7 @@ function createNewView(mode) {
   }
 }
 
-function openDeletionPanel() {
-}
+function openDeletionPanel() {}
 
 function updateRightClickBindings() {
   Object.assign(action, {

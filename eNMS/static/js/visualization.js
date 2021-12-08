@@ -649,7 +649,7 @@ function showDeviceModel(device) {
   });
 }
 
-export function initView() {
+export function initVisualization() {
   $("body").contextMenu({
     menuSelector: "#contextMenu",
     menuSelected: function (selectedMenu) {

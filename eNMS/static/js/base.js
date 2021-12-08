@@ -20,7 +20,7 @@ user: false
 import { openDebugPanel, showCredentialPanel } from "./administration.js";
 import { initDashboard } from "./inventory.js";
 import { refreshTable, tables, tableInstances } from "./table.js";
-import { initView } from "./visualization.js";
+import { initVisualization } from "./visualization.js";
 import { initViewBuilder, viewCreation } from "./viewBuilder.js";
 import {
   creationMode,
@@ -1164,7 +1164,7 @@ $(document).ready(function () {
   } else if (page == "view_builder") {
     initViewBuilder();
   } else if (page.includes("view")) {
-    initView();
+    initVisualization();
   } else if (page == "dashboard") {
     initDashboard();
   }

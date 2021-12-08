@@ -7,60 +7,54 @@ Version 4.1.0
 
 - Remove Event Model and Syslog server
 - Refactor of the run mechanism. When running a service, a single run is created and saved to the
-database.
+  database.
 - Remove "operation" (any / all) property from pool
 - Change the way pool objects are computed: via SQL query instead of pure python:
-better performances expected for large pools.
+  better performances expected for large pools.
 - Add regex support for SQLite
 - Add new "Invert" option for table filtering
-- Move terminal application for web SSH feature inside the application: the terminal application
-was previously moved outside the application because websockets requires sticky sessions which is
-incompatible with having multiple gunicorn workers. Moving to a deployment where eNMS is started
-multiple times with 1 gunicorn worker via the backend stream configuration, it is now possible for
-the terminal to be inside the main application.
 - Refactoring of the REST API
-* all requests are handled by the same "monitor requests" function
-* remove dependency to flask_restful and flask_httpauth
+  * all requests are handled by the same "monitor requests" function
+  * remove dependency to flask_restful and flask_httpauth
 - Fix submenu bug when the menu is minimized (gentelella bug)
 - Replace prerequisite edge with priority mechanism
 - Allow making non-shared service shared and vice-versa (if the shared service doesn't have more than one workflow).
 - Separate progress for main devices & iteration devices in workflow builder
 - Fix bug where subworkflow device counters not displayed in results when device iteration is used
-Bug report mail: "No status for services in subworkflow with device iteration"
+  Bug report mail: "No status for services in subworkflow with device iteration"
 - HTTP requests logging: all requests are now logged by eNMS and not by werkzeug like before.
-=> fine grained controlled for what is logged for each request. The log now contains the username.
 - Add duplicate button in service table
 - Refactor the geographical and Logical View to behave like the workflow builder:
-* List of all pools that contain at least one device or link, stored in user browser local storage
-* Remove default pool mechanism. Remove "visualization_default" property in pool model.
-By design, the default pool becomes the first pool in alphabetical order
-* Add backward / forward control like the workflow builder
+  * List of all pools that contain at least one device or link, stored in user browser local storage
+  * Remove default pool mechanism. Remove "visualization_default" property in pool model.
+    By design, the default pool becomes the first pool in alphabetical order
+  * Add backward / forward control like the workflow builder
 - Rename "monitor_requests" function to "process_requests": impact on plugins
 - Add global "factory" and "delete" functions in the workflow builder to create and delete new objects
-from a workflow.
+  from a workflow.
 - When refreshing a pool, rbac is now ignored so that the pool "refresh" action result does not depend on the
-user triggering it.
+  user triggering it.
 - If a workflow is defined to run on a set of devices, and the user lacks access to one or more devices,
-execute for all accessible devices and fail for the inaccessible devices instead of failing the entire workflow.
+  execute for all accessible devices and fail for the inaccessible devices instead of failing the entire workflow.
 - app.service_db was renamed to "service_run_count" and it no longer has an inner "runs" key: the gunicorn
-auto safe restart code that uses it must be updated accordingly.
+  auto safe restart code that uses it must be updated accordingly.
 - Store and commit web SSH session content in backend instead of relying on send beacon mechanism and
-onbeforeunload callback so that the saving of a session does not depend on user behavior
+  onbeforeunload callback so that the saving of a session does not depend on user behavior
 - Refactoring of the forms: all forms are now in eNMS.forms.py. Impact on form import:
-eNMS.forms.automation -> eNMS.forms
+  eNMS.forms.automation -> eNMS.forms
 - Refactoring of the setup file: replace "from eNMS.setup" with "from eNMS.variables"
 - Change model_properties in model from list of properties to dict of property with associated type
 - Custom properties defined in properties.json: change type from "boolean" to "bool" and "string" to "str"
-for consistency with rest of codebase
+  for consistency with rest of codebase
 - Add "parent_service_name" property to retrieve all results from a workflow, including subworkflow service
-results (see "Re: [E] Re: Retrieving results via REST"). The parent service is the service corresponding
-to the "parent runtime property".
+  results (see "Re: [E] Re: Retrieving results via REST"). The parent service is the service corresponding
+  to the "parent runtime property".
 - Add new "Empty" option in table filters and pool definition to filter based on whether the property
-value is empty or not.
+  value is empty or not.
 - Add table display with property value constraint when clicking on the charts in the dashboard.
 - Add scrapli netconf service
 - Move LDAP and TACACS+ server init to environment file instead of custom file. Impact on authentication
-ldap / tacacs functions.
+  ldap / tacacs functions.
 - Add Token-based authentication via REST API. New GET endpoint "/rest/token" to generate a token.
 - Separate controller (handling HTTP POST requests) from main application (gluing everything together)
 - Add new "ip_address" field in settings.json > app section

@@ -1135,7 +1135,7 @@ export function initWorkflowBuilder() {
     switchMode(this.value);
   });
   call({
-    url: "/get_top_level_workflows",
+    url: "/get_top_level_instances/workflow",
     callback: function (workflows) {
       workflows.sort((a, b) => a.name.localeCompare(b.name));
       for (let i = 0; i < workflows.length; i++) {

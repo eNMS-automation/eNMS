@@ -13,22 +13,41 @@ import {
   showInstancePanel,
 } from "./base.js";
 
+let ctrlKeyPressed;
 let currentView;
-let currentPath = localStorage.getItem(page);
+export let currentPath = localStorage.getItem("path");
+export let view = JSON.parse(localStorage.getItem("view"));
 
-function displayView({ direction } = {}) {
-  currentPath =
-    direction == "left"
-      ? history[historyPosition - 1]
-      : direction == "right"
-      ? history[historyPosition + 1]
-      : $("#current-view").val();
-  if (typeof currentPath === "undefined") return;
-  const [viewId] = currentPath.split(">").slice(-1);
+function switchToView({ path, direction } = {}) {
+  if (typeof path === "undefined") return;
+  if (path.toString().includes(">")) {
+    $("#up-arrow").removeClass("disabled");
+  } else {
+    $("#up-arrow").addClass("disabled");
+  }
+  currentPath = path;
   localStorage.setItem(page, currentPath);
-  moveHistory(currentPath, direction);
-  $("#current-view").val(currentPath).selectpicker("refresh");
-}
+  moveHistory(path, direction);
+  const [viewId] = currentPath.split(">").slice(-1);
+  if (!path && page == "object_table") {
+    $("#view-filtering").val("");
+    tableInstances["object"].table.page(0).ajax.reload(null, false);
+    return;
+  }
+  call({
+    url: `/get/view/${viewId}`,
+    callback: function (view) {
+      currentView = view;
+      if (page == "view_builder") {
+        if (view) localStorage.setItem("view", JSON.stringify(view));
+        displayView(view);
+      } else {
+        $("#view-filtering").val(path ? view.name : "");
+        tableInstances["object"].table.page(0).ajax.reload(null, false);
+      }
+    },
+  });
+};
 
 function createNewView(mode) {
   if (mode == "create_view") {
@@ -77,8 +96,22 @@ function updateRightClickBindings() {
 }
 
 export function initViewBuilder() {
+  window.onkeydown = () => {
+    ctrlKeyPressed = true;
+  };
+  window.onkeyup = () => {
+    ctrlKeyPressed = false;
+  };
+  vis.Network.prototype.zoom = function (scale) {
+    const animationOptions = {
+      scale: this.getScale() + scale,
+      animation: { duration: 300 },
+    };
+    this.view.moveTo(animationOptions);
+  };
+  $("#left-arrow,#right-arrow").addClass("disabled");
   call({
-    url: "/get_all/view",
+    url: "/get_top_level_instances/view",
     callback: function (views) {
       views.sort((a, b) => a.name.localeCompare(b.name));
       for (let i = 0; i < views.length; i++) {
@@ -88,22 +121,16 @@ export function initViewBuilder() {
       }
       if (currentPath && views.some((w) => w.id == currentPath.split(">")[0])) {
         $("#current-view").val(currentPath.split(">")[0]);
-        displayView();
+        switchToView(currentPath);
       } else {
-        currentPath = $("#current-view").val();
-        if (currentPath) {
-          displayView();
+        view = $("#current-view").val();
+        if (view) {
+          switchToView(view);
         } else {
           notify("No view has been created yet.", "error", 5);
         }
       }
-      $("#current-view")
-        .on("change", function () {
-          if (this.value != currentView?.id) displayView();
-        })
-        .selectpicker({
-          liveSearch: true,
-        });
+      $("#current-view").selectpicker({ liveSearch: true });
     },
   });
   updateRightClickBindings();

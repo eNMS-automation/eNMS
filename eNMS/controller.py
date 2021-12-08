@@ -585,9 +585,9 @@ class Controller:
     def get_session_log(self, session_id):
         return db.fetch("session", id=session_id).content
 
-    def get_top_level_workflows(self):
-        constraint = {"constraints": {"workflows_filter": "empty"}}
-        return self.filtering("workflow", bulk="base_properties", **constraint)
+    def get_top_level_instances(self, type):
+        constraint = {"constraints": {f"{type}s_filter": "empty"}}
+        return self.filtering(type, bulk="base_properties", **constraint)
 
     def get_tree_files(self, path):
         if path == "root":

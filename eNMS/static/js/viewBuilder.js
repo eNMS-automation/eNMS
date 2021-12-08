@@ -30,7 +30,7 @@ function displayView({ direction } = {}) {
   $("#current-view").val(currentPath).selectpicker("refresh");
 }
 
-function initLogicalFramework() {
+export function initViewBuilder() {
   call({
     url: "/get_all/view",
     callback: function (views) {

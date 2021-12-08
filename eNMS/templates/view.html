@@ -4,50 +4,6 @@
 <link href="{{ url_for('static', filename='css/workflow.css') }}" rel="stylesheet" />
 {% endblock stylesheets %} {% block content %}
 <div class="controls">
-  <div class="controls_mode navbar navbar-default navbar-color">
-    <table class="table" cellspacing="0" style="margin: 0px;" width="100%">
-      <tbody>
-        <tr>
-          <td style="text-align: center; vertical-align: middle;">
-            <button
-              type="button"
-              class="btn btn-primary"
-              onclick="action['Create New Service']()"
-              data-tooltip="Create New Service"
-            >
-              <span class="glyphicon glyphicon-plus"></span>
-            </button>
-          </td>
-          <td style="min-width: 200px;">
-            <select
-              id="service-type"
-              class="form-control"
-              data-width="200px"
-              data-size="20"
-            ></select>
-          </td>
-        </tr>
-        <tr>
-          <td style="text-align: center;">
-            <button
-              type="button"
-              class="btn btn-primary"
-              onclick="eNMS.workflowBuilder.switchMode()"
-              data-tooltip="Change Mode"
-            >
-              <span id="mode-icon" class="glyphicon glyphicon-move"></span>
-            </button>
-          </td>
-          <td style="min-width: 200px;">
-            <select id="edge-type" class="form-control">
-              <option value="success">Success</option>
-              <option value="failure">Failure</option>
-            </select>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
   <nav
     class="navbar navbar-default navbar-custom navbar-color"
     style="padding-bottom: 2px;"
@@ -155,73 +111,6 @@
           data-tooltip="Next Workflow"
           style="cursor: pointer;"
           ><span class="glyphicon glyphicon-chevron-right"></span
-        ></a>
-      </li>
-    </ul>
-  </nav>
-  <nav
-    class="navbar navbar-default navbar-custom navbar-color"
-    style="padding-bottom: 2px; margin-left: 10px;"
-    role="navigation"
-  >
-    <div style="width: 100%;">
-      <select id="current-runtime" class="form-control" data-size="20"></select>
-    </div>
-    <ul class="pagination" style="margin: 0px; padding-top: 10px;">
-      <li>
-        <a
-          onclick="action['Runtimes Display']()"
-          data-tooltip="Personal or All Runtimes"
-          style="cursor: pointer;"
-          ><span id="runtime-display-icon" class="fa fa-user"></span
-        ></a>
-      </li>
-      <li>
-        <a
-          onclick="action['Workflow Logs']()"
-          data-tooltip="Logs"
-          style="cursor: pointer;"
-          ><span class="glyphicon glyphicon-list"></span
-        ></a>
-      </li>
-      <li>
-        <a
-          onclick="action['Workflow Result Tree']()"
-          data-tooltip="Result Tree"
-          style="cursor: pointer;"
-          ><span class="glyphicon glyphicon-list-alt"></span
-        ></a>
-      </li>
-      <li>
-        <a
-          onclick="action['Workflow Result Comparison']()"
-          data-tooltip="Result Comparison"
-          style="cursor: pointer;"
-          ><span class="fa fa-adjust"></span
-        ></a>
-      </li>
-      <li>
-        <a
-          onclick="action['Run Workflow']()"
-          data-tooltip="Run Workflow"
-          style="cursor: pointer;"
-          ><span class="glyphicon glyphicon-play"></span
-        ></a>
-      </li>
-      <li>
-        <a
-          onclick="action['Parameterized Workflow Run']()"
-          data-tooltip="Parameterized Run"
-          style="cursor: pointer;"
-          ><span class="glyphicon glyphicon-play-circle"></span
-        ></a>
-      </li>
-      <li>
-        <a
-          onclick="action['Stop Workflow']()"
-          data-tooltip="Stop Workflow"
-          style="cursor: pointer;"
-          ><span class="glyphicon glyphicon-stop"></span
         ></a>
       </li>
     </ul>

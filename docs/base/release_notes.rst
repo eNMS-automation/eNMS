@@ -14,8 +14,10 @@ Version 4.1.0
 - Add regex support for SQLite
 - Add new "Invert" option for table filtering
 - Refactoring of the REST API
-  * all requests are handled by the same "monitor requests" function
-  * remove dependency to flask_restful and flask_httpauth
+
+  - all requests are handled by the same "monitor requests" function
+  - remove dependency to flask_restful and flask_httpauth
+
 - Fix submenu bug when the menu is minimized (gentelella bug)
 - Replace prerequisite edge with priority mechanism
 - Allow making non-shared service shared and vice-versa (if the shared service doesn't have more than one workflow).
@@ -25,9 +27,11 @@ Version 4.1.0
 - HTTP requests logging: all requests are now logged by eNMS and not by werkzeug like before.
 - Add duplicate button in service table
 - Refactor the geographical and Logical View to behave like the workflow builder:
-  * List of all pools that contain at least one device or link, stored in user browser local storage
-  * Remove default pool mechanism. Remove "visualization_default" property in pool model. By design, the default pool becomes the first pool in alphabetical order
-  * Add backward / forward control like the workflow builder
+
+  - List of all pools that contain at least one device or link, stored in user browser local storage
+  - Remove default pool mechanism. Remove "visualization_default" property in pool model. By design, the default pool becomes the first pool in alphabetical order
+  - Add backward / forward control like the workflow builder
+
 - Rename "monitor_requests" function to "process_requests": impact on plugins
 - Add global "factory" and "delete" functions in the workflow builder to create and delete new objects
   from a workflow.
@@ -100,12 +104,16 @@ Version 4.0.1
 - Fix workflow tree mechanism from workflow with superworkflow bug
 
 - Change of all GET endpoints to no longer contain backslash:
-  * renaming /table/{type} to {type}_table
-  * renaming of /form/{form_type} to "{form_type}_form
+
+  - renaming /table/{type} to {type}_table
+  - renaming of /form/{form_type} to "{form_type}_form
+
 - Change of rbac.json structure: list becomes dict, each line can have one of three values:
-  * "admin" (not part of RBAC, only admin have access, e.g admin panel, migration etc)
-  * "all" (not part of RBAC, everyone has access, e.g dashboard, login, logout etc)
-  * "access" (access restricted by RBAC, used to populate access form)
+
+  - "admin" (not part of RBAC, only admin have access, e.g admin panel, migration etc)
+  - "all" (not part of RBAC, everyone has access, e.g dashboard, login, logout etc)
+  - "access" (access restricted by RBAC, used to populate access form)
+
 - Add RBAC support for nested submenus
 
 
@@ -114,21 +122,29 @@ Version 4.0.0
 
 - Extend pool for users and services.
 - Add relation mechanism in table for scalability
-  * For each table, add link to relation table
-  * Replaces the old "Pool Objects" window in the pool table.
-  * New mechanism to add instances to a "relation table", both by individual selection and in bulk by copy pasting a list of names.
-  * New mechanism to remove selection from a relation table.
+
+  - For each table, add link to relation table
+  - Replaces the old "Pool Objects" window in the pool table.
+  - New mechanism to add instances to a "relation table", both by individual selection and in bulk by copy pasting a list of names.
+  - New mechanism to remove selection from a relation table.
+
 - Add "run service on targets mechanism"
-  * run service on a single device and in bulk from service page
-  * run service on a single device and in bulk from visualization pages
+
+  - run service on a single device and in bulk from service page
+  - run service on a single device and in bulk from visualization pages
+
 - Add bulk deletion and bulk edit mechanism for tables
-  * Bulk edit (edit all instances filtered in tables)
-  * Bulk deletion (delete all instances filtered in tables)
+
+  - Bulk edit (edit all instances filtered in tables)
+  - Bulk deletion (delete all instances filtered in tables)
+
 - Add "copy to clipboard" mechanism to get comma-separated list of names of all filtered instances.
 - Add 3D network view and 3D Logical View.
-  * Add right click menu for property, configuration, run service
-  * Add default pools mechanism for large networks.
-  * Add run service in bulk on all currently displayed devices mechanism
+
+  - Add right click menu for property, configuration, run service
+  - Add default pools mechanism for large networks.
+  - Add run service in bulk on all currently displayed devices mechanism
+
 - Move all visualization settings from settings.json > "visualization" to dedicated visualization.json
 - Make the error page colors confiurable per theme (move css colors to theme specific CSS file)
 - Use the log level of the parameterized run instead of always using the service log level
@@ -176,22 +192,26 @@ Version 4.0.0
 - Add python snippet mechanism to troubleshooting (ctrl + alt + click on upper left logo)
 - Refactor REST service in case status code is not in (200, 300) to fix validation bug
 - Refactoring of the rbac system:
-  * Use pools extension to user and services to define user access.
-  * Add new "default access" property to choose between creator, admin, and public
-  * Remove "group" table (a group is a pool of users)
-  * Add "groups" property to user and add "creator" property for pools, devices and links.
+
+  - Use pools extension to user and services to define user access.
+  - Add new "default access" property to choose between creator, admin, and public
+  - Remove "group" table (a group is a pool of users)
+  - Add "groups" property to user and add "creator" property for pools, devices and links.
+
 - New Credentials mechanism:
-  * Credentials can be either username / password or SSH key. Both passwords and SSH key are stored in the Vault (no key file stored on the unix server).
-  * Credentials also have an "Enable Password" field to go to enable mode after logging in.
-  * Credentials have a priority field; credential object with higher priority is used if multiple available credentials.
-  * Credentials have two pools: user pool to define which users can use the credentials, and device pools to define which
+
+  - Credentials can be either username / password or SSH key. Both passwords and SSH key are stored in the Vault (no key file stored on the unix server).
+  - Credentials also have an "Enable Password" field to go to enable mode after logging in.
+  - Credentials have a priority field; credential object with higher priority is used if multiple available credentials.
+  - Credentials have two pools: user pool to define which users can use the credentials, and device pools to define which
     devices the credential can be used for.
-  * User "groups" property is now a field. This field can be used to define user pools. Services have the same "groups" property.
+  - User "groups" property is now a field. This field can be used to define user pools. Services have the same "groups" property.
     When creating a new service, the groups field will be automatically set to the user groups. This allows services to be automatically
     added to the appriopriate pool of services, if the pool of services is defined based on that group property.
-  * Credentials can be either "Read - Write" (default) or "Read only". In a top-level service, new "credential type" field
+  - Credentials can be either "Read - Write" (default) or "Read only". In a top-level service, new "credential type" field
     to choose between "Any", "Read-only" and "Read-write" in order to define which credentials should be used when running
     the service.
+
 - The skip values were renamed from "True" / "False" to "Success" / "Failure".
 
 Version 3.22.4

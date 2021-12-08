@@ -507,12 +507,6 @@ tables.device = class DeviceTable extends Table {
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-info"
-          onclick="eNMS.inventory.showDeviceModel(${row.instance})"
-          data-tooltip="Device 3D Model">
-            <span class="glyphicon glyphicon-eye-open"></span></button>
-        </li>
-        <li>
-          <button type="button" class="btn btn-sm btn-info"
           onclick="eNMS.inventory.showDeviceResultsPanel(${row.instance})"
           data-tooltip="Results"
             ><span class="glyphicon glyphicon-list-alt"></span

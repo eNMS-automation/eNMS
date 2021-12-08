@@ -25,7 +25,6 @@ function switchToView(path, direction) {
   } else {
     $("#up-arrow").addClass("disabled");
   }
-  console.log(path)
   currentPath = path;
   localStorage.setItem(page, currentPath);
   moveHistory(path, direction);

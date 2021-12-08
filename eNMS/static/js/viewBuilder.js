@@ -12,6 +12,7 @@ import {
   notify,
   showInstancePanel,
 } from "./base.js";
+import { rectangleSelection, triggerMenu } from "./builder.js";
 
 let ctrlKeyPressed;
 let currentView;
@@ -138,7 +139,7 @@ export function displayView(view) {
   graph.on("dragEnd", (event) => {
     if (graph.getNodeAt(event.pointer.DOM)) savePositions();
   });
-  // rectangleSelection($("#network"), graph, nodes);
+  rectangleSelection($("#network"), graph, nodes);
 }
 
 function createNewView(mode) {

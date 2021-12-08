@@ -159,7 +159,7 @@ function updateRightClickBindings() {
   Object.assign(action, {
     "Create View": () => createNewView("create_view"),
     "Duplicate View": () => createNewView("duplicate_view"),
-    "Edit View": () => showInstancePanel("view", view.id),
+    "Edit View": () => showInstancePanel("view", currentView.id),
     Delete: openDeletionPanel,
     "Create Label": () => showLabelPanel({ usePosition: true }),
     "Create Label Button": () => showLabelPanel({ usePosition: false }),

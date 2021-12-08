@@ -54,13 +54,7 @@ eNMS.forms.automation -> eNMS.forms
 for consistency with rest of codebase
 - Add "parent_service_name" property to retrieve all results from a workflow, including subworkflow service
 results (see "Re: [E] Re: Retrieving results via REST"). The parent service is the service corresponding
-to the "parent runtime property". Example of /search payload:
-{
-    "type": "result",
-    "columns": ["result", "parent_runtime", "service_name"],
-    "maximum_return_records": 1000,
-    "search_criteria": {"parent_runtime": "2021-04-19 04:09:05.424206", "parent_service_name": "A"}
-}
+to the "parent runtime property".
 - Add new "Empty" option in table filters and pool definition to filter based on whether the property
 value is empty or not.
 - Add table display with property value constraint when clicking on the charts in the dashboard.
@@ -69,10 +63,6 @@ value is empty or not.
 ldap / tacacs functions.
 - Add Token-based authentication via REST API. New GET endpoint "/rest/token" to generate a token.
 - Separate controller (handling HTTP POST requests) from main application (gluing everything together)
-Impact:
-* In plugins, 
-* the "custom" file that contains pre_init, post_init, and the authentication custom code no longer inherits
-from the controller
 - Add new "ip_address" field in settings.json > app section
 - Add paging for REST API search endpoint: new integer parameter "start" to request results from "start"
 - Add server time at the bottom of the menu (e.g for scheduling tasks / ease of use)
@@ -93,51 +83,17 @@ from the controller
 - Always set "look_for_keys" to False in generic file transfer service - no longer an option
 - Add validation_section mechanism: set path to section of the result to validate (default: results["result"])
 - Add new "connection_name" mechanism to open multiple parallel connections to the same device in the
-same workflow
+  same workflow
 - Add new "get_credential" global variable in workflow builder. Used to get a password or a passphrase
-for a netmiko validaiton command or rest call service. For obfuscation purposes.
-mail: Obfuscate Credentials passed into Netmiko Command Line
+  for a netmiko validaiton command or rest call service. For obfuscation purposes.
+  mail: Obfuscate Credentials passed into Netmiko Command Line
 - Fix data extraction service and operation keyword in set_var
 - Don't set status of currently running services to "Aborted" when using a flask CLI command
 - Add TextFSM support for the netmiko validation service (+ regression workflow)
 - Add stop mechanism for services in the Result table
 - Add server name parameter in Run table to specify which server a service was run from.
-Server to be configured from env variable SERVER_NAME and SERVER_ADDR.
+  Server to be configured from env variable SERVER_NAME and SERVER_ADDR.
 - Lock editing / run of Workflow to group of owners
-
-MIGRATION:
-
-- In all services,
-def job(self, run, payload, device): -> def job(self, run, device):
-- Check that all "operator" property in pool.yaml are set to "all"
-- In all plugins, "monitor_requests" should be renamed to "process_requests" and
-"register_endpoint" should be renamed "_register_endpoint"
-- "export_topology" endpoint should be renamed "topology_export" in migration files
-- Replace all "from eNMS.forms.automation" with "from eNMS.forms"
-- Rename "run_db" to "run_states"
-- Plugin: add env and vs argument
-- Change model_properties in model from list of properties to dict of property with associated type
-- Custom properties defined in properties.json: change type from "boolean" to "bool" and "string" to "str"
-for consistency with rest of codebase. In properties.json:
-* change "type": "boolean" to "type": "bool"
-* change "type": "string" to "type": "str"
-- Update authentication functions in custom.py
-
-To be tested:
-- Refactoring of the run mechanism:
-* log level mechanism
-* workflow run, progress display in workflow builder
-* parameterized run
-* service value and device iteration
-* service / workflow performances with large number of devices
-* workflow: all run modes / SxS & DxD
-* results display: automation / results page, workflow tree, result table, device result table
-* get_var / set_var and get_result mechanism, including get_result along with restart mechanism
-- Pool refactoring
-* dynamic pool content, inclusion / equality / regex
-* pool individual and global refresh mechanism in pool table
-- Conversion shared - non shared for a service. Duplication of shared / non-shared service.
-- New global "factory" and "delete" functions
 
 Version 4.0.1
 -------------
@@ -151,27 +107,13 @@ Version 4.0.1
 - Fix workflow tree mechanism from workflow with superworkflow bug
 
 - Change of all GET endpoints to no longer contain backslash:
-* renaming /table/{type} to {type}_table
-* renaming of /form/{form_type} to "{form_type}_form
-Everything that comes after backslash is considered to be an argument (*args)
+  * renaming /table/{type} to {type}_table
+  * renaming of /form/{form_type} to "{form_type}_form
 - Change of rbac.json structure: list becomes dict, each line can have one of three values:
-* "admin" (not part of RBAC, only admin have access, e.g admin panel, migration etc)
-* "all" (not part of RBAC, everyone has access, e.g dashboard, login, logout etc)
-* "access" (access restricted by RBAC, used to populate access form)
-Impact on plugins: the settings.json "rbac" section has to be updated accordingly.
+  * "admin" (not part of RBAC, only admin have access, e.g admin panel, migration etc)
+  * "all" (not part of RBAC, everyone has access, e.g dashboard, login, logout etc)
+  * "access" (access restricted by RBAC, used to populate access form)
 - Add RBAC support for nested submenus
-
-Impact of RBAC on plugins:
-- plugins must be mounted at "/", custom "url_prefix" are no longer working... changes:
-    -        server.register_blueprint(blueprint, url_prefix=kwargs["url_prefix"])
-    +        server.register_blueprint(blueprint)
-- need for new argument in settings.json "blueprint" section: "static_url_path". changes:
-      "blueprint": {
-        "template_folder": "templates",
-        "static_folder": "static"
-    +   "static_url_path": "/template-static"
-      },
-- plugins endpoints cannot contain a slash.
 
 
 Version 4.0.0
@@ -202,14 +144,13 @@ Version 4.0.0
 - Add new function "get_neighbors" to retrieve neighboring devices or links of a device
 - Refactor the migration import mechanism to better handle class relationships
 - Web / Desktop connection to a device is now restrictable to make the users provide their own credentials
-=> e.g to prevent inventory device credentials from being used to connect to devices
+  => e.g to prevent inventory device credentials from being used to connect to devices
 - Configuration git diff: indicate which is V1 and which is V2. Option to display more context lines, including all of it.
 - Improve display of Json property in form (make them collapsed by default)
 - Update to new version of Vis.Js (potential workflow builder impact)
 - Add mechanism to save only failed results (e.g for config collection workflow)
 - New database.json to define engine parameters, import / export properties, many to many relationship, etc.
-- Fork based on string value instead of just True / False: new discard mode for the skip mechanism. When using discard,
-  devices do not follow any edge after the skipped service.
+- Fork based on string value instead of just True / False: new discard mode for the skip mechanism. When using discard, devices do not follow any edge after the skipped service.
 - Refactor skip property so that it is no longer a property of the service to avoid side effect of skipping shared services.
 - Add new option in pool to invert logic for each property.
 - New Option "Update pools after running" for workflow like the configuration management workflow.
@@ -246,82 +187,22 @@ Version 4.0.0
   * Add new "default access" property to choose between creator, admin, and public
   * Remove "group" table (a group is a pool of users)
   * Add "groups" property to user and add "creator" property for pools, devices and links. By defining pools of services
-  based on the group property, and autofilling the groups property of an object when it is created with the user "groups",
-  objects can be automatically added to the pool of services of the appropriate groups.
+    based on the group property, and autofilling the groups property of an object when it is created with the user "groups",
+    objects can be automatically added to the pool of services of the appropriate groups.
 - New Credentials mechanism:
   * Credentials can be either username / password or SSH key. Both passwords and SSH key are stored in the Vault (no key file
-  stored on the unix server).
+    stored on the unix server).
   * Credentials also have an "Enable Password" field to go to enable mode after logging in.
   * Credentials have a priority field; credential object with higher priority is used if multiple available credentials.
   * Credentials have two pools: user pool to define which users can use the credentials, and device pools to define which
-  devices the credential can be used for.
+    devices the credential can be used for.
   * User "groups" property is now a field. This field can be used to define user pools. Services have the same "groups" property.
-  When creating a new service, the groups field will be automatically set to the user groups. This allows services to be automatically
-  added to the appriopriate pool of services, if the pool of services is defined based on that group property.
+    When creating a new service, the groups field will be automatically set to the user groups. This allows services to be automatically
+    added to the appriopriate pool of services, if the pool of services is defined based on that group property.
   * Credentials can be either "Read - Write" (default) or "Read only". In a top-level service, new "credential type" field
-  to choose between "Any", "Read-only" and "Read-write" in order to define which credentials should be used when running
-  the service.
+    to choose between "Any", "Read-only" and "Read-write" in order to define which credentials should be used when running
+    the service.
 - The skip values were renamed from "True" / "False" to "Success" / "Failure".
-
-Test:
-- test new bulk edit, bulk delete, copy clipboard mechanism
-- test new relation table mechanism with add to relation (individual and bulk selection) and remove from relation.
-- test new logical and geographical views (right-click menu, scalability with 10K+ devices, default pools mechanism,
-  network filtering mechanism, run service mechanism, etc)
-- test new get_neighbors function, including using get_neighbors output for service iteration
-- test that notification mechanism still works
-- test that the new web SSH mechanism works, make sure that the session saving mechanism works as intended.
-- test that the workflow mechanism in both DxD and SxS still works: the workflow algorithm was refactored and
-  DxD / SxS now uses the same function.
-- test the skip mechanism:
-  * test skip of shared service only affects workflow from which service is skipped
-  * test new discard option
-  * test that skip works fine with services in "run once" mode.
-- test the iteration mechanism (both iteration on value and iteration on devices). Tests that the connection
-  is cached and reused for iteration values.
-- test the device query mechanism.
-- user rbac (access to UI + access to models) is properly updated when one of its associated pool OR access
-  is modified.
-- test new credentials mechanism
-- test new option in pool to invert logic
-- test new "update pools after running mechanism"
-- test that service logs works properly (was refactored from scratch)
-- test new "per configuration property timestamp" mechanism for configuration management mechanism.
-- test new mechanism to mask passwords when displaying configuration via custom controller function
-- test export table to csv mechanism
-- when a service is renamed, the custom password still works.
-- test that connections are cached when using iteration values on standalone service.
-- test that when scheduling task, run creator is set to user who scheduled task.
-- test new "maximum number of thread" mechanism
-- test new troubleshooting snippet mechanism
-- test performances and scalability compared to last version (no improvements to be expected as no work as made on performances,
-  but we have to make sure it's not worse).
-- test rest call services as the rest service was refactored.
-
-Migration:
-- Update endpoint: view/network and view/site no longer exists, to be replaced with 
-  geographical_view and view_builder
-- Configure the new visualization.json file, remove visualization settings from settings.json
-- In the service.yaml file, the "devices" and "pools" relationship with services have to be renamed
-  "target_devices" and "target_pools". Besides, "update_pools" must be renamed to "update_target_pools".
-- In service.yaml, remove the skip property: it will not be migrated (refactoring of skip mechanism so that skip
-  is per workflow and not a property of the service itself)
-- In service.yaml, "No Validation" is now part of the "Validation Condition" section. This means that all services
-  where "validation_method" is set to "none", it must be replaced with "text" and "validation_condition"
-  must be set to "none" instead.
-- Add ENMS_USER and ENMS_PASSWORD (admin credentials) to environment variables.
-- The create_pool endpoint has been removed, make sure the /instance/pool endpoint is used instead.
-- The Rest service has been refactored in case the response is not in range 200 - 300: the "response_code" key
-  is now "status_code", and "response" key becomes "result" (consistent with the case where the
-  rest call is successful). Need to check these keys in the migration files, i.e for services that use
-  these keys as part of the post-processing or as part of the workflow later one.
-- Whenever the "Use host keys" option is used, need to create a credential object instead with the key.
-  The "Use host key" option in all connection services no longer exists.
-- In service.yaml, the "skip_value" property is "success" / "failure" instead of "True" / "False"
-  (skip_value: 'True' -> skip_value: 'success' / skip_value: 'False' -> skip_value: 'failure')
-- In service.yaml, all references to devices via "self.devices" must use "self.target_devices" instead as the row
-  was renamed in the Service table.
-
 
 Version 3.22.4
 --------------
@@ -383,9 +264,9 @@ Version 3.22
 - Add replier option in send mail mechanism
 - Rename "app_log" option to "changelog" in log function for services
 - Add new entry in workflow RC menu "Workflow Results Table": contains all results for a given runtime,
-allowing for comparison of results same device / different service, same service / different device, etc.
+  allowing for comparison of results same device / different service, same service / different device, etc.
 - Refactor logging mechanism. In settings.json, add new logging sections to configure whether the log
-for a given logger should also be logged as changelog or service log by default.
+  for a given logger should also be logged as changelog or service log by default.
 - RBAC
 - Fix authentication bug flask_login and add session timeout mechanism
 - Make plugins separate from eNMS in their own folder, add bash script to install/update/uninstall them
@@ -393,22 +274,14 @@ for a given logger should also be logged as changelog or service log by default.
 - Remove summary from service state to improve workflow refresh performances
 - Add Dark mode and theme mechanism
 - Make search endpoint work with result to retrieve device results
-- Allow dictionary and json as custom properties. For json properties, use jsoneditor to let the user
-edit them.
+- Allow dictionary and json as custom properties. For json properties, use jsoneditor to let the user edit them.
 - Add placeholder as a global variable in a workflow (e.g to be used in the superworkflow)
 - Add mechanism for creating custom configuration property
 - Refactor data backup services with custom configuration properties. Implement "Operational Data" as
-an example custom property.
+  an example custom property.
 - Add new Git service. Replace "git_push_configurations" swiss army knife service with instance of git service.
 - Add database fetch/commit retry mechanism to handle deadlocks & other SQL operational errors
 - Add validation condition for validation section.
-
-MIGRATION:
-- Remove RBAC in rbac.json
-- Update migration files (user.yaml): group: Admin -> groups: [Admin Users]
-- app_log -> changelog in the service migration files (python snippet services)
-- set_var: add export keyword set to True in service.yaml for backward compatibility
-- rename DataBackupService / NetmikoBackupService, data_backup_service -> netmiko_backup_service
 
 Version 3.21.3
 --------------
@@ -425,7 +298,7 @@ Version 3.21.3
 - Fix wrong jump password when using a Vault
 - Fix workflow results recursive display no path in results bug
 - Improve "Get Result" REST endpoint: returns 404 error if no run found, run status if a run is found but there are
-no results (e.g job still running), and the results if the job is done.
+  no results (e.g job still running), and the results if the job is done.
 - Remove wtforms email validator in example service following wtforms 2.3 release
 
 Version 3.21.2
@@ -524,26 +397,6 @@ Version 3.21
 - Improve workflow stop mechanism: now hitting stop will try to stop ASAP, not just after the on-going
   service but also after the on-going device, or after the on-going retry (e.g many retries...).
   Besides stop should now work from subworkflow too.
-
-MIGRATION:
-In services, "result_postprocessing" -> "postprocessing"
-In pools, "never_update" -> "manually_defined"
-use_jumpserver -> jump_on_connect
-In settings.json, the log level is no longer in the "section" but in a dedicated "logging" section.
-In settings.json, configure Syslog Handler (Security logs).
-
-CUSTOM SERVICES FILE MIGRATION:
-Fields are no longer imported from wtforms. All of them are now imported from eNMS.forms.fields
-Some of them have been removed:
-- substitution and python query are now a keyword
-- no validation is a keyword too
-
-Imported via db:
-MutableList -> db.List
-MutableDict -> db.Dict
-Column -> db.Column
-SmallString -> db.SmallString
-LargeString -> db.LargeString
 
 Version 3.20.1
 --------------

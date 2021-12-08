@@ -1148,7 +1148,6 @@
       "service_name",
       "status"
     ],
-    "user": ["name", "description", "groups", "email"],
-    "view": ["name"]
+    "user": ["name", "description", "groups", "email"]
   }
 }

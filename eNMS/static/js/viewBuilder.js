@@ -99,7 +99,7 @@ export function initViewBuilder() {
       }
       $("#current-view")
         .on("change", function () {
-          if (this.value != currentView.id) displayView();
+          if (this.value != currentView?.id) displayView();
         })
         .selectpicker({
           liveSearch: true,
@@ -110,7 +110,7 @@ export function initViewBuilder() {
 }
 
 export function viewCreation(instance) {
-  if (instance.id == currentView.id) {
+  if (instance.id == currentView?.id) {
     $("#current-view option:selected").text(instance.name).trigger("change");
   } else {
     $("#current-view").append(

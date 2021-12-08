@@ -14,7 +14,6 @@ from eNMS.variables import vs
 class Object(AbstractBase):
 
     __tablename__ = "object"
-    pool_model = True
     type = db.Column(db.SmallString)
     __mapper_args__ = {"polymorphic_identity": "object", "polymorphic_on": type}
     id = db.Column(Integer, primary_key=True)
@@ -31,6 +30,8 @@ class Object(AbstractBase):
     )
 
     def delete(self):
+        if self.class_type == "view":
+            return
         number = f"{self.class_type}_number"
         for pool in self.pools:
             setattr(pool, number, getattr(pool, number) - 1)
@@ -53,6 +54,7 @@ class View(Object):
 
     __tablename__ = class_type = "view"
     __mapper_args__ = {"polymorphic_identity": "view"}
+    pool_model = False
     parent_type = "object"
     id = db.Column(Integer, ForeignKey(Object.id), primary_key=True)
     name = db.Column(db.SmallString, unique=True)
@@ -66,6 +68,7 @@ class Device(Object):
 
     __tablename__ = class_type = "device"
     __mapper_args__ = {"polymorphic_identity": "device"}
+    pool_model = True
     parent_type = "object"
     id = db.Column(Integer, ForeignKey(Object.id), primary_key=True)
     name = db.Column(db.SmallString, unique=True)
@@ -215,6 +218,7 @@ class Link(Object):
 
     __tablename__ = class_type = "link"
     __mapper_args__ = {"polymorphic_identity": "link"}
+    pool_model = True
     parent_type = "object"
     id = db.Column(Integer, ForeignKey("object.id"), primary_key=True)
     name = db.Column(db.SmallString)

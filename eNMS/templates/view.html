@@ -1,4 +1,4 @@
-{% extends "base_site.html" %} {% block title %} Workflow Builder {% endblock title %}
+{% extends "base_site.html" %} {% block title %} View Builder {% endblock title %}
 {% block stylesheets %} {{ super() }}
 <link href="{{ url_for('static', filename='lib/vis/vis.min.css') }}" rel="stylesheet" />
 <link href="{{ url_for('static', filename='css/workflow.css') }}" rel="stylesheet" />
@@ -20,32 +20,32 @@
     <ul class="pagination" style="margin: 0px; padding-top: 10px;">
       <li>
         <a
-          onclick="action['Edit Workflow']()"
-          data-tooltip="Edit Workflow"
+          onclick="action['Edit View']()"
+          data-tooltip="Edit View"
           style="cursor: pointer;"
           ><span class="glyphicon glyphicon-edit cursor"></span
         ></a>
       </li>
       <li>
         <a
-          onclick="action['Duplicate Workflow']()"
-          data-tooltip="Duplicate Workflow"
+          onclick="action['Duplicate View']()"
+          data-tooltip="Duplicate View"
           style="cursor: pointer;"
           ><span class="glyphicon glyphicon-duplicate"></span
         ></a>
       </li>
       <li>
         <a
-          onclick="action['Create Workflow']()"
-          data-tooltip="Create Top Level Workflow"
+          onclick="action['Create View']()"
+          data-tooltip="Create Top Level View"
           style="cursor: pointer;"
           ><span class="glyphicon glyphicon-plus"></span
         ></a>
       </li>
       <li>
         <a
-          onclick="action['Add to Workflow']()"
-          data-tooltip="Add to Workflow"
+          onclick="action['Add to View']()"
+          data-tooltip="Add to View"
           style="cursor: pointer;"
           ><span class="glyphicon glyphicon-book"></span
         ></a>
@@ -70,8 +70,8 @@
       </li>
       <li>
         <a
-          onclick="eNMS.workflowBuilder.getWorkflowTree()"
-          data-tooltip="Workflow Tree"
+          onclick="eNMS.workflowBuilder.getViewTree()"
+          data-tooltip="View Tree"
           style="cursor: pointer;"
           ><span class="glyphicon glyphicon-tree-conifer"></span
         ></a>
@@ -92,7 +92,7 @@
       <li id="left-arrow">
         <a
           onclick="action['Backward']()"
-          data-tooltip="Previous Workflow"
+          data-tooltip="Previous View"
           style="cursor: pointer;"
           ><span class="glyphicon glyphicon-chevron-left"></span
         ></a>
@@ -100,7 +100,7 @@
       <li id="up-arrow">
         <a
           onclick="action['Upward']()"
-          data-tooltip="Switch to Parent Workflow"
+          data-tooltip="Switch to Parent View"
           style="cursor: pointer;"
           ><span class="glyphicon glyphicon-chevron-up"></span
         ></a>
@@ -108,7 +108,7 @@
       <li id="right-arrow">
         <a
           onclick="action['Forward']()"
-          data-tooltip="Next Workflow"
+          data-tooltip="Next View"
           style="cursor: pointer;"
           ><span class="glyphicon glyphicon-chevron-right"></span
         ></a>
